@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="TestProject.MaterialSegmentedControlPage"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:TestProject;assembly=TestProject"
+	BackgroundColor = "Gray"
+	Padding = "40"
+>
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="MaterialSegmentedControl Example" TextColor="Black"/>
+			<f9p:MaterialSegmentedControl BackgroundColor="White" FontSize="16" FontColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5">
+				<f9p:Segment Text="Pause 5"/>
+				<f9p:Segment Text="Pause 10"/>
+				<f9p:Segment Text="Pause 15"/>
+				<f9p:Segment Text="Cancel" FontColor="Red"/>
+				<f9p:Segment Text="Launch" FontAttributes="Bold"/>
+			</f9p:MaterialSegmentedControl>
+			<f9p:MaterialSegmentedControl BackgroundColor="White" Padding="5,6,5,0"	FontSize="16" FontColor="#0076FF" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" >
+				<f9p:Segment Text="A" ImageSource="{local:ImageMultiResource TestProject.Resources.ArrowR}" Orientation="Vertical"/>
+				<f9p:Segment Text="B" ImageSource="{local:ImageMultiResource TestProject.Resources.Info}"  Orientation="Vertical"/>
+				<f9p:Segment Text="PIZZA"/>
+			</f9p:MaterialSegmentedControl>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

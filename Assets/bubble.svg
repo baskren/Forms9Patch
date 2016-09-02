@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="bubble.svg">
+  <defs
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4145"
+       x="-0.019122807"
+       width="1.0382456"
+       y="-0.03221675"
+       height="1.0644335">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.2520886"
+         id="feGaussianBlur4147" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.1638786"
+     inkscape:cx="203.04066"
+     inkscape:cy="790.94944"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1680"
+     inkscape:window-height="1001"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4149"
+       inkscape:export-xdpi="110.33"
+       inkscape:export-ydpi="110.33"
+       inkscape:export-filename="/Users/ben/Development/web/Forms9Patch/Images/bubble.png">
+      <path
+         sodipodi:nodetypes="ssssscccssss"
+         inkscape:connector-curvature="0"
+         id="rect4136"
+         d="m 120.91061,209.50507 138.17878,0 c 5.25305,0 9.48204,4.22898 9.48204,9.48203 l 0,61.03593 c 0,5.25305 -4.22899,9.48204 -9.48204,9.48204 l -57.75423,0 -10.43024,13.27485 -10.7463,-13.27485 -59.24801,0 c -5.25305,0 -9.48204,-4.22899 -9.48204,-9.48204 l 0,-61.03593 c 0,-5.25305 4.22899,-9.48203 9.48204,-9.48203 z"
+         style="opacity:1;fill:#000000;fill-opacity:0.3836478;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99435024;filter:url(#filter4145)" />
+      <path
+         style="opacity:1;fill:#efefef;fill-opacity:1;stroke:#727272;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99435024"
+         d="m 119.33027,207.92473 138.17878,0 c 5.25305,0 9.48204,4.22898 9.48204,9.48203 l 0,61.03593 c 0,5.25305 -4.22899,9.48204 -9.48204,9.48204 l -57.75423,0 -10.43024,13.27485 -10.7463,-13.27485 -59.24801,0 c -5.25305,0 -9.48204,-4.22899 -9.48204,-9.48204 l 0,-61.03593 c 0,-5.25305 4.22899,-9.48203 9.48204,-9.48203 z"
+         id="path4139"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ssssscccssss" />
+    </g>
+  </g>
+</svg>

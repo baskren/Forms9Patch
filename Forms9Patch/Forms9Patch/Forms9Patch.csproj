@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{A45DEA17-78A3-464A-9E00-0342D0503B00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Forms9Patch</RootNamespace>
+    <AssemblyName>Forms9Patch</AssemblyName>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.9.13.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG; DONT_USE_MEASURE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\Forms9Patch.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants></DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\Forms9Patch.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\ThicknessExtension.cs" />
+    <Compile Include="Interfaces\INativeSettings.cs" />
+    <Compile Include="Elements\Image.cs" />
+    <Compile Include="Layouts\Frame.cs" />
+    <Compile Include="Layouts\ContentView.cs" />
+    <Compile Include="Layouts\StackLayout.cs" />
+    <Compile Include="Interfaces\IBackgroundImage.cs" />
+    <Compile Include="Interfaces\IRoundedBox.cs" />
+    <Compile Include="Layouts\RelativeLayout.cs" />
+    <Compile Include="Layouts\Grid.cs" />
+    <Compile Include="Layouts\AbsoluteLayout.cs" />
+    <Compile Include="Models\Display.cs" />
+    <Compile Include="Extensions\TextAlignmentExtension.cs" />
+    <Compile Include="Elements\ImageButton.cs" />
+    <Compile Include="Models\ImageButtonState.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Elements\MaterialButton.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Extensions\GridExtension.cs" />
+    <Compile Include="Extensions\AspectExtension.cs" />
+    <Compile Include="Enums\Fill.cs" />
+    <Compile Include="Enums\SegmentType.cs" />
+    <Compile Include="Elements\MaterialSegmentedControl.cs" />
+    <Compile Include="Enums\SegmentControlStickyBehavior.cs" />
+    <Compile Include="Elements\Label.cs" />
+    <Compile Include="Elements\Segment.cs" />
+    <Compile Include="Events\SegmentedControlEventArgs.cs" />
+    <Compile Include="Events\SegmentedControlEventHandler.cs" />
+    <Compile Include="Layouts\RoundedBoxBase.cs" />
+    <Compile Include="Enums\PointerDirection.cs" />
+    <Compile Include="Extensions\PointerDirectionExtensions.cs" />
+    <Compile Include="ElementModels\ImageSource.cs" />
+    <Compile Include="Elements\ModalPopup.cs" />
+    <Compile Include="Elements\PopupBase.cs" />
+    <Compile Include="Elements\BubblePopup.cs" />
+    <Compile Include="Layouts\BubbleLayout.cs" />
+    <Compile Include="Interfaces\IDescendentBounds.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Interfaces\IFontElement.cs" />
+    <Compile Include="Spans\BackgroundColorSpan.cs" />
+    <Compile Include="Spans\BoldSpan.cs" />
+    <Compile Include="Spans\FontColorSpan.cs" />
+    <Compile Include="Spans\FontFamilySpan.cs" />
+    <Compile Include="Spans\FontSizeSpan.cs" />
+    <Compile Include="Spans\ItalicsSpan.cs" />
+    <Compile Include="Spans\Span.cs" />
+    <Compile Include="Spans\StrikethroughSpan.cs" />
+    <Compile Include="Spans\SubscriptSpan.cs" />
+    <Compile Include="Spans\SuperscriptSpan.cs" />
+    <Compile Include="Spans\UnderlineSpan.cs" />
+    <Compile Include="Models\BaseFormattedString.cs" />
+    <Compile Include="Models\HTMLMarkupString.cs" />
+    <Compile Include="Models\SpanFormattedString.cs" />
+    <Compile Include="Enums\LabelFit.cs" />
+    <Compile Include="Interfaces\IFontFamilies.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.0.6490\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\bc3\Bc3.Core\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\bc3\Bc3.Core\packages\Xamarin.Forms.2.2.0.45\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\bc3\Bc3.Core\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\bc3\Bc3.Core\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\TestProject\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\TestProject\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Models\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Elements\" />
+    <Folder Include="ElementModels\" />
+    <Folder Include="Layouts\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Events\" />
+    <Folder Include="Spans\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NumericalMethods\NumericalMethods.csproj">
+      <Project>{A3E44406-A6A6-47F6-8FEE-841E9E8B52DC}</Project>
+      <Name>NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Name>PCL.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

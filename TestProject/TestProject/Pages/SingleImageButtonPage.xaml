@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:TestProject;assembly=TestProject"
+	x:Class="TestProject.SingleImageButtonPage"
+	Padding="5, 20, 5, 5">
+	<StackLayout>
+
+
+		<f9p:ImageButton StickyBehavior="true" HeightRequest="80" Alignment="Start">
+
+			<f9p:ImageButton.DefaultState>
+				<f9p:ImageButtonState Text="Sticky Default State" FontColor="White">
+					<f9p:ImageButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+					</f9p:ImageButtonState.BackgroundImage> 
+					<f9p:ImageButtonState.Image>
+						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+					</f9p:ImageButtonState.Image>
+				</f9p:ImageButtonState>
+			</f9p:ImageButton.DefaultState>
+
+			<f9p:ImageButton.SelectedState>
+				<f9p:ImageButtonState FontColor="Red" Text="Selected" >
+					<f9p:ImageButtonState.BackgroundImage>
+						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.image}"/>
+					</f9p:ImageButtonState.BackgroundImage> 
+				</f9p:ImageButtonState>
+			</f9p:ImageButton.SelectedState>
+
+		</f9p:ImageButton>
+
+
+
+
+		
+	</StackLayout>
+</ContentPage>

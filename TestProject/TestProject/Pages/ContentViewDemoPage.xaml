@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:TestProject;assembly=TestProject"
+	x:Class="TestProject.ContentViewDemoPage"
+	Padding="5, 20, 5, 5">
+	<StackLayout>
+		<f9p:ContentView Padding="30,30,110,20" HeightRequest="80">
+			<f9p:ContentView.BackgroundImage>
+				<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.redribbon}" CapInsets="23,-1,111,-1"/>
+			</f9p:ContentView.BackgroundImage>
+			<Label Text = "Forms9Patch.Image w/ CapInsets" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" FontSize="14" />
+		</f9p:ContentView>
+	</StackLayout>
+</ContentPage>

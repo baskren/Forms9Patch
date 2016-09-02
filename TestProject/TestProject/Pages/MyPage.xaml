@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="TestProject.MyPage"
+	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+	xmlns:local="clr-namespace:TestProject;assembly=TestProject"
+	Padding="5, 20, 5, 5">
+	<ScrollView>
+		<ScrollView.Content>
+				<StackLayout>
+					<Label Text="Xamarin.Image"/>
+					<Image Source="{local:ImageResource TestProject.Resources.redribbon.png}"/>
+					<Image Source="{local:ImageMultiResource TestProject.Resources.redribbon}"/>
+					<Label Text="Form9Patch NinePatch Image"/>
+					<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+					<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.bubble}"/>
+					<Label Text = "Forms9Patch Image w/ CapInsets"/>
+					<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.redribbon}" CapInsets="23,-1,111,-1"/>
+				</StackLayout>
+		</ScrollView.Content>
+	</ScrollView>
+</ContentPage>
