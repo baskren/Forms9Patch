@@ -73,6 +73,10 @@ namespace Forms9Patch
 		/// Cancel the Popup when the PageOverlay is touched
 		/// </summary>
 		public static readonly BindableProperty CancelOnPageOverlayTouchProperty = BindableProperty.Create("CancelOnPageOverlayTouch", typeof(bool), typeof(PopupBase), true);
+		/// <summary>
+		/// Gets or sets a value indicating whether Popup <see cref="T:Forms9Patch.PopupBase"/> will cancel on page overlay touch.
+		/// </summary>
+		/// <value><c>true</c> if cancel on page overlay touch; otherwise, <c>false</c>.</value>
 		public bool CancelOnPageOverlayTouch
 		{
 			get { return (bool)GetValue(CancelOnPageOverlayTouchProperty); }

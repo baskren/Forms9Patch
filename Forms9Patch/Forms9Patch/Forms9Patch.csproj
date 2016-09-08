@@ -10,7 +10,6 @@
     <AssemblyName>Forms9Patch</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.9.13.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +90,23 @@
     <Compile Include="Models\SpanFormattedString.cs" />
     <Compile Include="Enums\LabelFit.cs" />
     <Compile Include="Interfaces\IFontFamilies.cs" />
+    <Compile Include="ListView\ListView.cs" />
+    <Compile Include="ListView\DataTemplateSelector.cs" />
+    <Compile Include="ListView\CellViews\BaseCellView.cs" />
+    <Compile Include="ListView\CellViews\BlankCellView.cs" />
+    <Compile Include="ListView\Items\Item.cs" />
+    <Compile Include="ListView\Items\Item&lt;TItem&gt;.cs" />
+    <Compile Include="ListView\Items\NullItem.cs" />
+    <Compile Include="ListView\Items\Group.cs" />
+    <Compile Include="ListView\CellViews\GroupHeaderView.cs" />
+    <Compile Include="ListView\Items\BlankItem.cs" />
+    <Compile Include="ListView\EventArgs\DragEventArgs.cs" />
+    <Compile Include="ListView\CellViews\NullCellView.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Elements\ColorGradientBox.cs" />
+    <Compile Include="ListView\Enums\HoverOverAlignment.cs" />
+    <Compile Include="ListView\Interfaces\IHoverOver.cs" />
+    <Compile Include="ListView\Interfaces\IListItemLocation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -105,6 +121,12 @@
     <Folder Include="Events\" />
     <Folder Include="Spans\" />
     <Folder Include="Resources\" />
+    <Folder Include="ListView\" />
+    <Folder Include="ListView\CellViews\" />
+    <Folder Include="ListView\Items\" />
+    <Folder Include="ListView\EventArgs\" />
+    <Folder Include="ListView\Enums\" />
+    <Folder Include="ListView\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />

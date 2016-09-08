@@ -1,0 +1,158 @@
+﻿using Xamarin.Forms;
+using System;
+
+namespace Forms9Patch
+{
+	/// <summary>
+	/// FormsDragNDropListView Item.
+	/// </summary>
+	abstract class Item : BindableObject {
+
+
+		#region Fields
+		protected static bool debugProperties = false;
+		#endregion
+
+
+		#region Properties
+		public readonly int ID;
+
+		/*
+		string _key;
+		public string Key {
+			get { return _key; }
+			set { 
+				if (debugProperties) 
+					System.Diagnostics.Debug.WriteLine ("Key: update from ["+_key+"] to [" + value + "]");
+				_key = value;
+			}
+		}
+
+		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Item), default(string));
+		public string Title {
+			get { return (string)GetValue(TitleProperty); }
+			set { 
+				if (debugProperties) 
+					System.Diagnostics.Debug.WriteLine ("Title: update from ["+(string)GetValue(TitleProperty)+"] to [" + value + "]");
+				if (Title != value)
+					SetValue (TitleProperty, value); 
+			}
+		}
+
+		public static readonly BindableProperty HelpProperty  = BindableProperty.Create("Help",  typeof(string), typeof(Item), default(string));
+		public string Help {
+			get { return (string)GetValue(HelpProperty); }
+			set { 
+				if (debugProperties) System.Diagnostics.Debug.WriteLine ("Help: update from ["+(string)GetValue(HelpProperty)+"] to [" + value + "]");
+				if (Help != value)
+					SetValue (HelpProperty, value);
+			}
+		}
+		*/
+
+		/*
+		public static readonly BindableProperty IsVisibleProperty  = BindableProperty.Create("IsVisible",  typeof(bool), typeof(Item), true);
+		public bool IsVisible {
+			get { return (bool)GetValue(IsVisibleProperty); }
+			internal set { SetValue (IsVisibleProperty, value); }
+		}
+		*/
+
+		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(Item), false);
+		public bool SeparatorIsVisible {
+			get { 
+				return (bool)GetValue(SeparatorIsVisibleProperty); 
+			}
+			internal set { SetValue (SeparatorIsVisibleProperty, value); }
+		}		
+
+		public static readonly BindableProperty SeparatorColorProperty  = BindableProperty.Create("SeparatorColor",  typeof(Color), typeof(Item), Color.FromRgba(0,0,0,0.12));
+		public Color SeparatorColor {
+			get { return (Color)GetValue(SeparatorColorProperty); }
+			internal set { SetValue (SeparatorColorProperty, value); }
+		}	
+
+		public static readonly BindableProperty BackgroundColorProperty  = BindableProperty.Create("BackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
+		public Color BackgroundColor {
+			get { return (Color)GetValue(BackgroundColorProperty); }
+			internal set { SetValue (BackgroundColorProperty, value); }
+		}	
+
+		public static readonly BindableProperty SourceProperty = BindableProperty.Create("Value", typeof(object),  typeof(Item), null);
+		public object Source {
+			get { return GetValue(SourceProperty); }
+			set { SetValue(SourceProperty, value); }
+		}
+		#endregion
+
+
+		#region Constructors
+		static int instantiations;
+
+		protected Item() {
+			ID = instantiations++;
+		}
+		#endregion
+
+
+		#region Convenience
+		internal void ShallowCopy(Item other) {
+			SeparatorColor = other.SeparatorColor;
+			SeparatorIsVisible = other.SeparatorIsVisible;
+			BackgroundColor = other.BackgroundColor;
+			Source = other.Source;
+		}
+
+		public string Description ()
+		{
+			//return string.Format ("{0} ({1})", ID ,Title);
+			return string.Format("{0}[{1}]",GetType().Name,ID);
+			//return string.Format ("[BcElementVMGroup: Item={0}, Count={1}, IsReadOnly={2}, IsFixedSize={3}, IsSynchronized={4}, SyncRoot={5}, VisibilityTargetGroup={6}]", Item, Count, IsReadOnly, IsFixedSize, IsSynchronized, SyncRoot, VisibilityTargetGroup);
+		}
+		#endregion
+
+
+		/*
+		#region Operations
+		public override int GetHashCode() {
+			return ID;
+		}
+			
+		/// <summary>
+		/// Value equality test
+		/// </summary>
+		/// <param name="other">The <see cref="FormsDragNDropListView.Item"/> to compare with the current <see cref="FormsDragNDropListView.Item"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="FormsDragNDropListView.Item"/> is equal to the current
+		/// <see cref="FormsDragNDropListView.Item"/>; otherwise, <c>false</c>.</returns>
+		public bool Equals(Item other) {
+			// value equality
+			if (other == null)
+				return false;
+			if (Value == null)
+				return other.Value == null;
+			return Value.Equals (other.Value);
+		}
+
+
+		public override bool Equals(object obj) {
+			return Equals( obj as Item );
+		}
+
+		#endregion
+		
+		#region Editing
+		//internal bool IsDragging = false;
+		#endregion
+		*/
+
+		#region Reference to CellView bound to Item
+		internal WeakReference _weakBaseCellView;
+		internal BaseCellView BaseCellView {
+			get { return (BaseCellView)(_weakBaseCellView != null && _weakBaseCellView.IsAlive ? _weakBaseCellView.Target : null); }
+			set { _weakBaseCellView = (value==null ? null : new WeakReference (value)); }
+		}
+		#endregion
+
+	}
+}
+

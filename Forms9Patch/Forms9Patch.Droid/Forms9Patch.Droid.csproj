@@ -137,6 +137,11 @@
     <Compile Include="Effects\PopupEffect.cs" />
     <Compile Include="Effects\BackgroundImageEffect.cs" />
     <Compile Include="Effects\CustomFontEffect.cs" />
+    <Compile Include="ListView\Drawables\BaseCellViewDrawable.cs" />
+    <Compile Include="ListView\Renderers\BaseCellViewRenderer.cs" />
+    <Compile Include="ListView\Renderers\ListViewRenderer.cs" />
+    <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
+    <Compile Include="ListView\Services\ListItemLocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -144,6 +149,10 @@
   <ItemGroup>
     <Folder Include="Effects\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="ListView\" />
+    <Folder Include="ListView\Drawables\" />
+    <Folder Include="ListView\Renderers\" />
+    <Folder Include="ListView\Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
