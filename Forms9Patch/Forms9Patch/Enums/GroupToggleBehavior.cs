@@ -5,10 +5,10 @@ namespace Forms9Patch
 	/// <summary>
 	/// What happens when a segment is selected
 	/// </summary>
-	public enum SegmentControlStickyBehavior
+	public enum GroupToggleBehavior
 	{
 		/// <summary>
-		/// No buttons are sticky
+		/// No buttons are Toggle
 		/// </summary>
 		None,
 		/// <summary>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using FormsGestures;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Forms9Patch
 {
@@ -73,6 +74,49 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// The most recently selected item property.
+		/// </summary>
+		public static new readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(ListView), null);
+		/// <summary>
+		/// Gets or sets the most recently selected item.
+		/// </summary>
+		/// <value>The selected item.</value>
+		public new object SelectedItem
+		{
+			get { return GetValue(SelectedItemProperty); }
+			set { SetValue(SelectedItemProperty, value); }
+		}
+
+		/// <summary>
+		/// The selected items property.
+		/// </summary>
+		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(ListView), null);
+		/// <summary>
+		/// Gets the selected items.
+		/// </summary>
+		/// <value>The selected items.</value>
+		public ObservableCollection<object> SelectedItems
+		{
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
+			private set { SetValue(SelectedItemsProperty, value); }
+		}
+
+		/// <summary>
+		/// The backing store for the ListViews's GroupToggleBehavior property.
+		/// </summary>
+		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialSegmentedControl), GroupToggleBehavior.Radio);
+		/// <summary>
+		/// Gets or sets the ListViews's GroupToggle behavior.
+		/// </summary>
+		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
+		public GroupToggleBehavior GroupToggleBehavior
+		{
+			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
+			set { SetValue(GroupToggleBehaviorProperty, value); }
+		}
+
+
+		/// <summary>
 		/// Occurs when item is selected.
 		/// </summary>
 		public new event EventHandler<SelectedItemChangedEventArgs> ItemSelected;
@@ -112,40 +156,21 @@ namespace Forms9Patch
 			base.SeparatorColor = Color.Transparent;
 			base.SeparatorVisibility = SeparatorVisibility.None;
 
-			base.ItemSelected += (sender, e) => {
-				System.Diagnostics.Debug.WriteLine("base.ItemSelected");
-				//OnItemSelected(sender, e);
-				var source = ((Item)e?.SelectedItem)?.Source;
-				if (source !=null) 
-					ItemSelected?.Invoke(this,new SelectedItemChangedEventArgs(source));
-			};
+			base.ItemSelected += OnItemSelected;
 
-			base.ItemTapped += (sender, e) => {
-				System.Diagnostics.Debug.WriteLine("base.ItemTapped");
-				var source = ((Item)e?.Item)?.Source;
-				var group = (Group)((BindableObject)e.Group).GetValue(Xamarin.Forms.ListView.ItemsSourceProperty);
-				if (source !=null) 
-					ItemTapped?.Invoke(this,new ItemTappedEventArgs(group,source));
-			};
+			base.ItemTapped += OnItemTapped;
 
-			base.ItemAppearing += (sender, e) => {
-				var item = ((Item)e?.Item);
-				var source = item?.Source;
-				if (source != null)
-					ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(source));
-			};
+			base.ItemAppearing += OnItemAppearing;
 
-			base.ItemDisappearing += (sender, e) => {
-				var source = ((Item)e?.Item)?.Source;
-				if (source != null)
-					ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(source));
-			};
+			base.ItemDisappearing += OnItemDisappearing;
 
 			IsEnabled = true;
 			_listener = new Listener (this);
 			_listener.LongPressed += OnLongPressed;
 			_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
+
+			SelectedItems = new ObservableCollection<object>();
 		}
 
 		/// <summary>
@@ -168,6 +193,67 @@ namespace Forms9Patch
 		/// </summary>
 		public string Description() {
 			return "ListView[" + id + "]";
+		}
+		#endregion
+
+
+		#region ListView Event Proxies
+		bool _settingSelectedItem;
+		void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			if (!_settingSelectedItem)
+			{
+				_settingSelectedItem = true;
+				System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemSelected");
+				var selectedItem = ((Item)e?.SelectedItem)?.Source;
+				switch (GroupToggleBehavior)
+				{
+					case GroupToggleBehavior.Radio:
+						SelectedItems.Clear();
+						goto case GroupToggleBehavior.Multiselect;
+					case GroupToggleBehavior.Multiselect:
+						SelectedItems.Add(selectedItem);
+						this.SelectedItem = selectedItem;
+						base.SelectedItem = null;
+						if (this.SelectedItem != null)
+							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(selectedItem));
+						break;
+					case GroupToggleBehavior.None:
+						SelectedItems.Clear();
+						this.SelectedItem = null;
+						base.SelectedItem = null;
+						if (this.SelectedItem != null)
+							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(selectedItem));
+						break;
+				}
+				_settingSelectedItem = false;
+			}
+		}
+
+		void OnItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
+			var tappedItem = ((Item)e?.Item)?.Source;
+			var group = (Group)((BindableObject)e.Group).GetValue(Xamarin.Forms.ListView.ItemsSourceProperty);
+			if (tappedItem != null)
+				ItemTapped?.Invoke(this, new ItemTappedEventArgs(group, tappedItem));
+			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && SelectedItems.Contains(tappedItem))
+				SelectedItems.Remove(tappedItem);
+		}
+
+		void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
+		{
+			var item = ((Item)e?.Item);
+			var source = item?.Source;
+			if (source != null)
+				ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(source));
+		}
+
+		void OnItemDisappearing(object sender, ItemVisibilityEventArgs e)
+		{
+			var source = ((Item)e?.Item)?.Source;
+			if (source != null)
+				ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(source));
 		}
 		#endregion
 
@@ -282,15 +368,6 @@ namespace Forms9Patch
 		}
 
 
-		Item _currentlySelectedItem;
-		void OnItemSelected(object sender, SelectedItemChangedEventArgs e) {
-			System.Diagnostics.Debug.WriteLine("OnItemSelected");
-			if (_currentlySelectedItem != null)
-				_currentlySelectedItem.BackgroundColor = Color.Transparent;
-			_currentlySelectedItem = SelectedItem as Item;
-			_currentlySelectedItem.BackgroundColor = SelectedCellBackgroundColor;
-		}
-
 		/// <summary>
 		/// Triggered when a property is about to change
 		/// </summary>
@@ -298,10 +375,6 @@ namespace Forms9Patch
 		protected override void OnPropertyChanging (string propertyName = null)
 		{
 			base.OnPropertyChanging (propertyName);
-			base.OnPropertyChanged (propertyName);
-			if (propertyName == SelectedItemProperty.PropertyName && SelectedItem!=null) {
-				((Item)SelectedItem).BackgroundColor = CellBackgroundColor;
-			}
 		}
 
 		/// <summary>
@@ -310,12 +383,7 @@ namespace Forms9Patch
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
-			//System.Diagnostics.Debug.WriteLine ("\t\tListView.OnPropertyChanged enter");
 			base.OnPropertyChanged (propertyName);
-			if (propertyName == SelectedItemProperty.PropertyName && SelectedItem!=null) {
-				((Item)SelectedItem).BackgroundColor = SelectedCellBackgroundColor;
-			}
-			//System.Diagnostics.Debug.WriteLine ("\t\tListView.OnPropertyChanged exit");
 		}
 
 		#endregion

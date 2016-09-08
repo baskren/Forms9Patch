@@ -210,7 +210,7 @@ namespace Forms9Patch
 		}
 
 		
-		internal SegmentControlStickyBehavior StickyBehavior;
+		internal GroupToggleBehavior ToggleBehavior;
 
 		#endregion
 

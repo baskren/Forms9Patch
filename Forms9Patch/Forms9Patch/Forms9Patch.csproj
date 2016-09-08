@@ -57,7 +57,7 @@
     <Compile Include="Enums\Fill.cs" />
     <Compile Include="Enums\SegmentType.cs" />
     <Compile Include="Elements\MaterialSegmentedControl.cs" />
-    <Compile Include="Enums\SegmentControlStickyBehavior.cs" />
+    <Compile Include="Enums\GroupToggleBehavior.cs" />
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Elements\Segment.cs" />
     <Compile Include="Events\SegmentedControlEventArgs.cs" />

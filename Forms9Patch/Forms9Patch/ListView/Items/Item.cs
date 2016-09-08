@@ -83,6 +83,21 @@ namespace Forms9Patch
 			get { return GetValue(SourceProperty); }
 			set { SetValue(SourceProperty, value); }
 		}
+
+		public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("SelectedBackgroundColor", typeof(Color), typeof(Item), Color.Gray);
+		public Color SelectedBackgroundColor
+		{
+			get { return (Color)GetValue(SelectedBackgroundColorProperty); }
+			set { SetValue(SelectedBackgroundColorProperty, value); }
+		}
+
+		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(Item), false);
+		public bool IsSelected
+		{
+			get { return (bool)GetValue(IsSelectedProperty); }
+			set { SetValue(IsSelectedProperty, value); }
+		}
+
 		#endregion
 
 
@@ -100,6 +115,7 @@ namespace Forms9Patch
 			SeparatorColor = other.SeparatorColor;
 			SeparatorIsVisible = other.SeparatorIsVisible;
 			BackgroundColor = other.BackgroundColor;
+			SelectedBackgroundColor = other.SelectedBackgroundColor;
 			Source = other.Source;
 		}
 

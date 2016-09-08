@@ -127,16 +127,16 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// Backing store for the StickyBehavior bindable property.
+		/// Backing store for the ToggleBehavior bindable property.
 		/// </summary>
-		public static BindableProperty StickyBehaviorProperty = BindableProperty.Create ("StickyBehavior", typeof(bool), typeof(ImageButton), false);
+		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("ToggleBehavior", typeof(bool), typeof(ImageButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
 		/// </summary>
-		/// <value><c>true</c> if sticky; otherwise, <c>false</c>.</value>
-		public bool StickyBehavior {
-			get { return (bool)GetValue (StickyBehaviorProperty); }
-			set { SetValue (StickyBehaviorProperty, value); }
+		/// <value><c>true</c> if Toggle; otherwise, <c>false</c>.</value>
+		public bool ToggleBehavior {
+			get { return (bool)GetValue (ToggleBehaviorProperty); }
+			set { SetValue (ToggleBehaviorProperty, value); }
 		}
 
 		/// <summary>
@@ -337,7 +337,7 @@ namespace Forms9Patch
 			if (IsEnabled)
 			{
 				Debug.WriteLine("tapped");
-				if (StickyBehavior)
+				if (ToggleBehavior)
 				{
 					IsSelected = !IsSelected;
 					UpdateState();

@@ -245,17 +245,17 @@ namespace Forms9Patch
 
 
 		/// <summary>
-		/// Backing store for the MaterialButton.StickyBehavior bindable property.
+		/// Backing store for the MaterialButton.ToggleBehavior bindable property.
 		/// </summary>
-		public static BindableProperty StickyBehaviorProperty = BindableProperty.Create ("StickyBehavior", typeof(bool), typeof(MaterialButton), false);
+		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("ToggleBehavior", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
 		/// </summary>
-		/// <value><c>true</c> if sticky; otherwise, <c>false</c>.</value>
-		public bool StickyBehavior {
-			get { return (bool)GetValue (StickyBehaviorProperty); }
+		/// <value><c>true</c> if togglable; otherwise, <c>false</c>.</value>
+		public bool ToggleBehavior {
+			get { return (bool)GetValue (ToggleBehaviorProperty); }
 			set { 
-				SetValue (StickyBehaviorProperty, value); 
+				SetValue (ToggleBehaviorProperty, value); 
 			}
 		}
 
@@ -322,11 +322,11 @@ namespace Forms9Patch
 			set { SetValue (SeparatorWidthProperty, value); }
 		}
 
-		internal static BindableProperty SegmentStickyBehaviorProperty = BindableProperty.Create("SegmentStickyBehavior", typeof(SegmentControlStickyBehavior), typeof(MaterialButton), SegmentControlStickyBehavior.None);
-		internal SegmentControlStickyBehavior SegmentStickyBehavior {
-			get { return (SegmentControlStickyBehavior)GetValue (SegmentStickyBehaviorProperty); }
+		internal static BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialButton), GroupToggleBehavior.None);
+		internal GroupToggleBehavior GroupToggleBehavior {
+			get { return (GroupToggleBehavior)GetValue (GroupToggleBehaviorProperty); }
 			set { 
-				SetValue (SegmentStickyBehaviorProperty, value); 
+				SetValue (GroupToggleBehaviorProperty, value); 
 			}
 		}
 		#endregion
@@ -359,7 +359,7 @@ namespace Forms9Patch
 				HeightRequest = 22,
 				MinimizeHeight = true,
 				Lines = 1,
-				Fit = LabelFit.None,
+				Fit = LabelFit.None
 			};
 			_stackLayout = new Xamarin.Forms.StackLayout {
 				Orientation = StackOrientation.Horizontal,
@@ -384,7 +384,7 @@ namespace Forms9Patch
 
 
 		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
+		private bool disposedValue; // To detect redundant calls
 
 		/// <summary>
 		/// Dispose the specified disposing.
@@ -445,9 +445,9 @@ namespace Forms9Patch
 			if (IsEnabled)
 			{
 				//Debug.WriteLine("tapped");
-				if (StickyBehavior && SegmentStickyBehavior == SegmentControlStickyBehavior.None
-					|| SegmentStickyBehavior == SegmentControlStickyBehavior.Multiselect
-					|| SegmentStickyBehavior == SegmentControlStickyBehavior.Radio && !IsSelected)
+				if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
+					|| GroupToggleBehavior == GroupToggleBehavior.Multiselect
+					|| GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
 					IsSelected = !IsSelected;
 				else {
 					Opacity = 0.5;
@@ -736,7 +736,7 @@ namespace Forms9Patch
 			if (propertyName == IsSelectedProperty.PropertyName) {
 				if (IsSelected) {
 					ICommand command = Command;
-					if (command != null && SegmentStickyBehavior!=SegmentControlStickyBehavior.None)
+					if (command != null && GroupToggleBehavior!=GroupToggleBehavior.None)
 						command.Execute(CommandParameter);
 					
 					EventHandler eventHandler = _selected;
@@ -768,7 +768,7 @@ namespace Forms9Patch
 		void SendTapped()
 		{
 			ICommand command = Command;
-			if (command != null && SegmentStickyBehavior==SegmentControlStickyBehavior.None)
+			if (command != null && GroupToggleBehavior==GroupToggleBehavior.None)
 				command.Execute(CommandParameter);
 			EventHandler eventHandler = _tapped;
 			if (eventHandler != null)
@@ -780,4 +780,5 @@ namespace Forms9Patch
 
 	}
 }
+
 

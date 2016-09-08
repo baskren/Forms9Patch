@@ -85,7 +85,7 @@ namespace Forms9Patch
 			//BackgroundColor = Color.Transparent;
 
 			this.SetBinding (SeparatorIsVisibleProperty, "SeparatorIsVisible");
-			this.SetBinding (BackgroundColorProperty, "BackgroundColor");
+			//this.SetBinding (BackgroundColorProperty, "BackgroundColor");
 		}
 
 		/// <summary>
@@ -102,6 +102,17 @@ namespace Forms9Patch
 			else
 				Content.BindingContext = item?.Source;
 			base.OnBindingContextChanged ();
+		}
+
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == Item.IsSelectedProperty.PropertyName)
+			{
+				var item = BindingContext as Item;
+				if (item != null)
+					BackgroundColor = item.IsSelected ? item.SelectedBackgroundColor : item.BackgroundColor;
+			}
 		}
 
 	}

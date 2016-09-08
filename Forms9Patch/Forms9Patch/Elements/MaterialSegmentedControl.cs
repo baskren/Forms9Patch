@@ -215,19 +215,16 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// The backing store for the MaterialSegmentControl's StickyBehavior property.
+		/// The backing store for the MaterialSegmentControl's ToggleBehavior property.
 		/// </summary>
-		public static readonly BindableProperty StickyBehaviorProperty = BindableProperty.Create("StickyBehavior", typeof(SegmentControlStickyBehavior), typeof(MaterialSegmentedControl), SegmentControlStickyBehavior.Radio);
+		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialSegmentedControl), GroupToggleBehavior.Radio);
 		/// <summary>
-		/// Gets or sets the MaterialSegmentControl's sticky behavior.
+		/// Gets or sets the MaterialSegmentControl's Toggle behavior.
 		/// </summary>
-		/// <value>The sticky behavior (None, Radio, Multiselect).</value>
-		public SegmentControlStickyBehavior StickyBehavior {
-			get { return (SegmentControlStickyBehavior)GetValue (StickyBehaviorProperty);}
-			set { 
-				SetValue (StickyBehaviorProperty, value);
-			}
-		}
+		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
+		public GroupToggleBehavior GroupToggleBehavior {
+			get { return (GroupToggleBehavior)GetValue (GroupToggleBehaviorProperty);}
+			set { SetValue (GroupToggleBehaviorProperty, value); } }
 
 		/// <summary>
 		/// The backing store for the MaterialSegmentControl's SeparatorWidth property.
@@ -355,8 +352,8 @@ namespace Forms9Patch
 			button.HasShadow = HasShadow;
 			button.SegmentOrientation = Orientation;
 			button.SeparatorWidth = SeparatorWidth;
-			button.StickyBehavior = (StickyBehavior != SegmentControlStickyBehavior.None);
-			button.SegmentStickyBehavior = StickyBehavior;
+			button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
+			button.GroupToggleBehavior = GroupToggleBehavior;
 			button.HorizontalOptions = LayoutOptions.FillAndExpand;
 			button.VerticalOptions = LayoutOptions.FillAndExpand;
 			if (segment.FontColor == Color.Default)
@@ -389,7 +386,7 @@ namespace Forms9Patch
 					button.LongPressing += OnSegmentLongPressing;
 					button.LongPressed += OnSegmentLongPressed;
 					Children.Insert (index++, button);
-					if (button.IsSelected && StickyBehavior == SegmentControlStickyBehavior.Radio) {
+					if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio) {
 						foreach (var segment in _segments)
 							if (segment != newItem)
 								segment.IsSelected = false;
@@ -451,11 +448,11 @@ namespace Forms9Patch
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
 			base.OnPropertyChanged (propertyName);
-			if (propertyName == StickyBehaviorProperty.PropertyName)
+			if (propertyName == GroupToggleBehaviorProperty.PropertyName)
 				foreach (MaterialButton button in Children)
 				{
-					button.StickyBehavior = (StickyBehavior != SegmentControlStickyBehavior.None);
-					button.SegmentStickyBehavior = StickyBehavior;
+					button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
+					button.GroupToggleBehavior = GroupToggleBehavior;
 				}
 			else if (propertyName == PaddingProperty.PropertyName)
 				UpdateChildrenPadding();
@@ -514,7 +511,7 @@ namespace Forms9Patch
 		internal void OnButtonPropertyChanged  (object sender, System.ComponentModel.PropertyChangedEventArgs e) {
 			var button = sender as MaterialButton;
 			if (e.PropertyName == MaterialButton.IsSelectedProperty.PropertyName) {
-				if (StickyBehavior == SegmentControlStickyBehavior.Radio) {
+				if (GroupToggleBehavior == GroupToggleBehavior.Radio) {
 					if (button.IsSelected)
 					{
 						foreach (var seg in _segments)
