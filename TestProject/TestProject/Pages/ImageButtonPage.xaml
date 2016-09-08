@@ -8,12 +8,13 @@
 	Padding="5, 20, 5, 5">
 	<StackLayout>
 
-		
+		<Entry x:Name="textEntry" Text="Button Label Text">
+		</Entry>
 
 		<f9p:ImageButton StickyBehavior="true" HeightRequest="80" Alignment="Start">
 
 			<f9p:ImageButton.DefaultState>
-				<f9p:ImageButtonState Text="Sticky Default State" FontColor="White">
+				<f9p:ImageButtonState Text="{Binding Path=Text}" FontColor="White" BindingContext="{x:Reference Name=textEntry}">
 					<f9p:ImageButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 

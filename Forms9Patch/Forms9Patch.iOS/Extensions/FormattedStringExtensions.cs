@@ -292,7 +292,7 @@ namespace Forms9Patch.iOS
 							result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, -size/6f, UIStringAttributeKey.Font, font), range);
 						else
 							result.AddAttribute (UIStringAttributeKey.Font, font, range);
-						System.Diagnostics.Debug.WriteLine("\tRANGE["+range.Location+","+range.Length+"]");
+						//System.Diagnostics.Debug.WriteLine("\tRANGE["+range.Location+","+range.Length+"]");
 					}
 					lastMetaFont = metaFont;
 					startIndex = i;
@@ -309,7 +309,7 @@ namespace Forms9Patch.iOS
 					result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
 				else
 					result.AddAttribute (UIStringAttributeKey.Font, font, range);
-				System.Diagnostics.Debug.WriteLine("\tRANGE[" + range.Location + "," + range.Length + "]");
+				//System.Diagnostics.Debug.WriteLine("\tRANGE[" + range.Location + "," + range.Length + "]");
 			}
 			#endregion
 

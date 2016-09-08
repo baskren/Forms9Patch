@@ -13,7 +13,7 @@ using TestProject;
 
 namespace TestProject.Droid
 {
-	[Activity (Label = "BC.FormsExt DemoApp", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "TestProject", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsApplicationActivity
 	{
 		protected override void OnCreate (Bundle bundle)
@@ -22,7 +22,7 @@ namespace TestProject.Droid
 
 			// Xamarin.Forms.Forms.Init has to be here (for Android) otherwise Xamarin.Forms.Image() { Source = "local source file" } doesnt work!
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			Forms9Patch.Droid.Settings.LicenseKey = "SG6T-B2W5-9ELF-GRGH-Z8NK-VURP-5TRG-F2L7-Q88H-W8SH-HXE3-VT5X-9WZ9";
+			Forms9Patch.Droid.Settings.LicenseKey = "NJHS-HGTK-EWPL-789K-H4A3-9LHZ-67FA-P8AQ-ZJ8R-X83P-UNWE-QNYT-LGYA";
 			//FormsGestures.Droid.Settings.Init ();
 			//FormsPopups.Droid.Framework.Init();
 

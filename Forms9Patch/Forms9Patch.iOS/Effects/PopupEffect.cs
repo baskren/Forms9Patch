@@ -19,7 +19,7 @@ namespace Forms9Patch.iOS
 		/// <remarks>To be added.</remarks>
 		protected override void OnAttached () 
 		{
-			System.Diagnostics.Debug.WriteLine ("ATTACHED!!!!");
+			//System.Diagnostics.Debug.WriteLine ("ATTACHED!!!!");
 			//throw new NotImplementedException ();
 		}
 

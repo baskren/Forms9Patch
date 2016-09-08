@@ -377,8 +377,6 @@ namespace Forms9Patch
 			_gestureListener.LongPressing += OnLongPressing;
 
 			UpdateState ();
-			//Down += OnDown;
-			//Up += OnUp;
 
 			_label.PropertyChanged +=  OnLabelPropertyChanged;
 		}

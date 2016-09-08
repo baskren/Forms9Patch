@@ -14,7 +14,7 @@ namespace TestProject.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			Forms9Patch.iOS.Settings.LicenseKey ="SG6T-B2W5-9ELF-GRGH-Z8NK-VURP-5TRG-F2L7-Q88H-W8SH-HXE3-VT5X-9WZ9";
+			Forms9Patch.iOS.Settings.LicenseKey ="NJHS-HGTK-EWPL-789K-H4A3-9LHZ-67FA-P8AQ-ZJ8R-X83P-UNWE-QNYT-LGYA";
 			//FormsGestures.iOS.Settings.Init ();
 
 			// Code for starting up the Xamarin Test Cloud Agent
