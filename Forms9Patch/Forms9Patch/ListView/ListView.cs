@@ -381,7 +381,8 @@ namespace Forms9Patch
 			if (f9pItem == null || sourceItem == null)
 				throw new InvalidOperationException("Cannot select null item");
 			f9pItem.IsSelected = true;
-			_selectedF9PItems.Add(f9pItem);
+			if (!_selectedF9PItems.Contains(f9pItem))
+				_selectedF9PItems.Add(f9pItem);
 			_selectedF9PItem = f9pItem;
 			if (sourceItem != SelectedItem)
 				SelectedItem = sourceItem;
@@ -510,6 +511,10 @@ namespace Forms9Patch
 
 
 		#region ListView property change management
+		/// <summary>
+		/// Ons the property changing.
+		/// </summary>
+		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
 			base.OnPropertyChanging(propertyName);

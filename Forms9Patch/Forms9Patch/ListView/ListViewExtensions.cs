@@ -2,6 +2,9 @@
 using Xamarin.Forms;
 namespace Forms9Patch
 {
+	/// <summary>
+	/// Forms9Patch List view extensions.
+	/// </summary>
 	public static class ListViewExtensions
 	{
 		static IListViewExtensionService _service;
