@@ -216,8 +216,9 @@ namespace Forms9Patch.Droid
 			// change font for Mathamatic Alphanumeric Unicode characters
 			int mathStart = -1;
 			int index = 0;
-			foreach (var c in formattedString.Text.GetUnicodeCodePoints()) {
-				if (c.InMathAlphanumericBlock ()) {
+			//foreach (var c in formattedString.Text.GetUnicodeCodePoints()) {
+			foreach (var c in result.ToString().GetUnicodeCodePoints()) {
+			if (c.InMathAlphanumericBlock ()) {
 					if (mathStart < 0)
 						mathStart = index;
 				} else {
