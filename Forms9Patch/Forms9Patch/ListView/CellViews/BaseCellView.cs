@@ -161,7 +161,7 @@ namespace Forms9Patch
 			if (item != null)
 			{
 				BackgroundColor = item.IsSelected ? item.SelectedBackgroundColor : item.BackgroundColor;
-				SeparatorIsVisible = item.Index > 0;
+				SeparatorIsVisible = item.Index > 0 && item.SeparatorIsVisible;
 			}
 			else
 			{
