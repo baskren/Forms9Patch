@@ -283,19 +283,16 @@ namespace Forms9Patch
 		};
 
 		void init() {
-			System.Diagnostics.Debug.WriteLine("Init start");
 			id = Count++;
 			HasUnevenRows = false;
 			BackgroundColor = Color.Transparent;
+
 			base.SeparatorColor = Color.Transparent;
 			base.SeparatorVisibility = SeparatorVisibility.None;
 
 			base.ItemSelected += OnItemSelected;
-
 			base.ItemTapped += OnItemTapped;
-
 			base.ItemAppearing += OnItemAppearing;
-
 			base.ItemDisappearing += OnItemDisappearing;
 
 			IsEnabled = true;
@@ -305,7 +302,6 @@ namespace Forms9Patch
 			_listener.Panning += OnPanning;
 
 			SelectedItems = new ObservableCollection<object>();
-			System.Diagnostics.Debug.WriteLine("INit end");
 		}
 
 		/// <summary>
