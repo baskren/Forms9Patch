@@ -46,10 +46,14 @@ namespace Forms9Patch.iOS
 
 			if (!Element.SeparatorIsVisible || (separatorColor.A < 0.01 || separatorHeight < 0.01 )) {
 				base.Draw (rect);
+				System.Diagnostics.Debug.WriteLine("\t["+Element.ID+"] Not drawing separator");
 				return;
 			}
-				
+
+			base.Draw(rect);
+			BackgroundColor = Element.BackgroundColor.ToUIColor();
 			using (var g = UIGraphics.GetCurrentContext ()) {
+				System.Diagnostics.Debug.WriteLine("\t["+Element.ID+"] Drawing separator ["+separatorColor+"] height=["+separatorHeight+"] width=["+Element.Width+"] left=["+Element.SeparatorLeftIndent+"] right=["+Element.SeparatorRightIndent+"]");
 				g.SaveState ();
 									
 				// separator
@@ -60,8 +64,6 @@ namespace Forms9Patch.iOS
 				g.StrokePath ();
 				g.RestoreState ();
 			}
-			base.Draw (rect);
-			BackgroundColor = Element.BackgroundColor.ToUIColor();
 		}
 
 	}

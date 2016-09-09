@@ -211,7 +211,6 @@ namespace Forms9Patch
 				group.VisiblityTest = group.VisiblityTest ?? VisiblityTest;
 				//group.ValidMateTriggerProperty = group.ValidMateTriggerProperty ?? ValidMateTriggerProperty;
 			}
-			ResetSeparators ();
 		}
 
 		void CommonInsert(Item item) {
@@ -227,7 +226,6 @@ namespace Forms9Patch
 				group.VisiblityTest = group.VisiblityTest ?? VisiblityTest;
 				//group.ValidMateTriggerProperty = group.ValidMateTriggerProperty ?? ValidMateTriggerProperty;
 			}
-			ResetSeparators ();
 		}
 
 		void CommonRemove(Item item) {
@@ -238,19 +236,22 @@ namespace Forms9Patch
 			item.PropertyChanging -= OnItemPropertyChanging;
 			//item.LongPressed -= OnLongPressed;
 			//item.LongPressing -= OnLongPressing;
-			ResetSeparators ();
 		}
 
-		void ResetSeparators() {
-			for (int i = 0; i < _items.Count; i++)
-				_items[i].SeparatorIsVisible = (i != 0);
-		}
 		#endregion
 
 
+		void Reindex(int index=0)
+		{
+			for (int i = index; i < _items.Count; i++)
+				_items[i].Index = i;
+		}
+
+
 		#region IList<T> implementation
-		public int IndexOf (Item item) { 
-			return _items.IndexOf (item); 
+		public int IndexOf (Item item) {
+			// need to return -1 if the item is not in this group so DeepIndex can be found by searching subgroups
+			return _items.IndexOf(item);
 		}
 
 		public void Insert (int index, Item item) { 
@@ -258,26 +259,34 @@ namespace Forms9Patch
 				return;
 			if (Contains (item))
 				throw new NotSupportedException ();
-			_items.Insert (index, item); 
+			_items.Insert (index, item);
+			Reindex(index);
 			CommonInsert (item);
 		}
 
-		public void RemoveAt (int index) { 
-			CommonRemove (_items [index]);
-			_items.RemoveAt (index); 
+		public void RemoveAt (int index) {
+			var item = _items[index];
+			CommonRemove (_items[index]);
+			item.Index = -1;
+			_items.RemoveAt (index);
+			Reindex(index);
 		}
 
 		public Item this [int index] {
-			get { return _items [index]; }
+			get { return _items[index]; }
 			set { 
 				if (_items.Contains (value) || index < 0 || index > _items.Count)
 					// will this create problems for move/swap operations?  I think so!  
 					throw new NotSupportedException ();
-				if (index < _items.Count) 
-					CommonRemove (_items [index]);
-				System.Diagnostics.Debug.WriteLine ("\t\tsetting _item start");
-				_items [index] = value; 
-				System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
+				if (index < _items.Count)
+				{
+					_items[index].Index = -1;
+					CommonRemove(_items[index]);
+				}
+				//System.Diagnostics.Debug.WriteLine ("\t\tsetting _item start");
+				_items[index] = value;
+				_items[index].Index = index;
+				//System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
 				CommonAdd (value);
 			}
 		}
@@ -407,14 +416,15 @@ namespace Forms9Patch
 				return;
 			if (Contains (item))
 				throw new NotSupportedException ();
+			item.Index = _items.Count;
 			_items.Add (item); 
 			CommonAdd (item);
 		}
 
 		public void Clear () { 
 			for (int i = _items.Count - 1; i >= 0; i--) {
-				var subGroup = _items [i] as Group;
-				if (subGroup == null)
+				var subGroup = _items[i] as Group;
+				if (subGroup == null) 
 					RemoveAt (i);
 				else
 					subGroup.Clear ();
@@ -433,10 +443,13 @@ namespace Forms9Patch
 				Insert (arrayIndex + offset++, item);
 		}
 
-		public bool Remove (Item item) { 
+		public bool Remove (Item item) {
 			// if item is a group, will garbage collection clean up its items? - It better not because we may want to use it elsewhere
+			var index = item.Index;
 			CommonRemove(item);
-			return _items.Remove (item); 
+			var result = _items.Remove (item); 
+			Reindex(index);
+			return result;
 		}
 
 		public int Count { 
@@ -497,9 +510,7 @@ namespace Forms9Patch
 		}
 
 		public bool IsFixedSize {
-			get {
-				return false;
-			}
+			get { return false; }
 		}
 
 		public void CopyTo (Array array, int index)
@@ -517,16 +528,20 @@ namespace Forms9Patch
 
 		object IList.this [int index] {
 			get {
-				return _items [index];
+				return _items[index];
 			}
 			set {
 				var item = value as Item;
-				if (item != null) {
+				if (item != null && index <= _items.Count && index > -1) {
 					if (Contains (item))
 						throw new NotSupportedException ();
-					if (index <= _items.Count)
-						CommonRemove (_items [index]);
-					_items [index] = item;
+					if (index < _items.Count)
+					{
+						_items[index].Index = -1;
+						CommonRemove(_items[index]);
+					}
+					_items[index] = item;
+					_items[index].Index = index;
 					CommonAdd (item);
 				}
 				else
@@ -555,7 +570,7 @@ namespace Forms9Patch
 				return new [] { pos };
 			} else {
 				for (pos = 0; pos < _items.Count; pos++) {
-					var subGroup = _items [pos] as Group;
+					var subGroup = _items[pos] as Group;
 					if (subGroup != null) {
 						int[] subGroupDeepIndex = subGroup.DeepSourceIndexOf (item);
 						if (subGroupDeepIndex != null) {
@@ -576,7 +591,7 @@ namespace Forms9Patch
 				return new [] { pos };
 			} else {
 				for (pos = 0; pos < _items.Count; pos++) {
-					var subGroup = _items [pos] as Group;
+					var subGroup = _items[pos] as Group;
 					if (subGroup != null) {
 						int[] subGroupDeepIndex = subGroup.DeepIndexOf (item);
 						if (subGroupDeepIndex != null) {
@@ -601,7 +616,7 @@ namespace Forms9Patch
 				Insert (deepIndex [0], item);
 				return;
 			}
-			var subGroup = _items [deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as Group;
 			if (subGroup == null)
 				throw new NotSupportedException ("DeepInsert: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -623,7 +638,7 @@ namespace Forms9Patch
 				RemoveAt (deepIndex [0]);
 				return;
 			}
-			var subGroup = _items [deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as Group;
 			if (subGroup == null)
 				throw new NotSupportedException ("DeepRemove: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -635,9 +650,9 @@ namespace Forms9Patch
 			if (deepIndex==null || deepIndex.Length == 0)
 				throw new NotSupportedException ("DeepRemove: deepIndex=null || deepIndex.Length=0");
 			if (deepIndex.Length == 1) {
-				return _items [deepIndex [0]];
+				return _items[deepIndex [0]];
 			}
-			var subGroup = _items [deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as Group;
 			if (subGroup == null)
 				throw new NotSupportedException ("DeepRemove: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -664,7 +679,7 @@ namespace Forms9Patch
 				//items [index] = item;
 				this[index] = item;
 			} else {
-				var subGroup = _items [index] as Group;
+				var subGroup = _items[index] as Group;
 				if (subGroup == null)
 					throw new NotSupportedException ("DeepSet: deepIndex.Length > 1 but item at index is not Group");
 				// create a new index (subGroupDeepIndex) that contains everything except the [0] index of deepIndex.
@@ -803,30 +818,20 @@ namespace Forms9Patch
 		#region Property Change Management
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
-			if (propertyName == "SeparatorIsVisible") {
-				for (int i = 0; i < _items.Count; i++) {
-					var item = _items [i];
-					var group = item as Group;
-					if (group != null) {
-						group.SeparatorIsVisible = SeparatorIsVisible;
-					} else if (item != null) {
-						item.SeparatorIsVisible = SeparatorIsVisible && i > 0;
-					}
-				}
-			} else if (propertyName == "SeparatorColor") {
-				foreach (var item in _items) {
-					var listViewitem = item;
-					if (listViewitem != null) {
-						listViewitem.SeparatorColor = SeparatorColor;
-					}
-				}
-			} else if (propertyName == "BackgroundColor") {
-				foreach (var item in _items) {
-					var listViewitem = item;
-					if (listViewitem != null) {
-						listViewitem.BackgroundColor = BackgroundColor;
-					}
-				}
+			if (propertyName == SeparatorIsVisibleProperty.PropertyName) {
+				foreach (var item in _items)
+					item.SeparatorIsVisible = SeparatorIsVisible;
+			} else if (propertyName == SeparatorColorProperty.PropertyName) {
+				foreach (var item in _items) 
+					item.SeparatorColor = SeparatorColor;
+			} else if (propertyName == BackgroundColorProperty.PropertyName) {
+				foreach (var item in _items) 
+					item.BackgroundColor = BackgroundColor;
+			}
+			else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
+			{
+				foreach (var item in _items)
+					item.SelectedBackgroundColor = SelectedBackgroundColor;
 			} else {
 				base.OnPropertyChanged (propertyName);
 			}

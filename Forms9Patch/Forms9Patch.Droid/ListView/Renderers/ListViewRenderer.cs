@@ -197,7 +197,7 @@ namespace Forms9Patch.Droid
 			return null;
 			*/
 
-			Group group = ((ListView)Element).DisplayedItems;
+			Group group = ((ListView)Element).BaseItemsSource;
 			if (group != null) {
 				var item = obj as Item;
 				var sourceDeepIndex = group.DeepSourceIndexOf (item);

@@ -11,11 +11,11 @@ namespace Forms9Patch
 
 		#region Fields
 		protected static bool debugProperties = false;
+		public readonly int ID;
 		#endregion
 
 
 		#region Properties
-		public readonly int ID;
 
 		/*
 		string _key;
@@ -69,7 +69,9 @@ namespace Forms9Patch
 		public static readonly BindableProperty SeparatorColorProperty  = BindableProperty.Create("SeparatorColor",  typeof(Color), typeof(Item), Color.FromRgba(0,0,0,0.12));
 		public Color SeparatorColor {
 			get { return (Color)GetValue(SeparatorColorProperty); }
-			internal set { SetValue (SeparatorColorProperty, value); }
+			internal set { 
+				SetValue (SeparatorColorProperty, value); 
+			}
 		}	
 
 		public static readonly BindableProperty BackgroundColorProperty  = BindableProperty.Create("BackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
@@ -96,6 +98,13 @@ namespace Forms9Patch
 		{
 			get { return (bool)GetValue(IsSelectedProperty); }
 			set { SetValue(IsSelectedProperty, value); }
+		}
+
+		internal static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(Item), -1);
+		internal int Index
+		{
+			get { return (int)GetValue(IndexProperty); }
+			set { SetValue(IndexProperty, value); }
 		}
 
 		#endregion
@@ -169,6 +178,15 @@ namespace Forms9Patch
 		}
 		#endregion
 
+
+		#region Property change management
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			//if (propertyName==SeparatorColorProperty.PropertyName || propertyName==SeparatorIsVisibleProperty.PropertyName)
+			//	System.Diagnostics.Debug.WriteLine("["+ID+"] SeparatorColor=["+SeparatorColor+"] SeparatorVisibility=["+SeparatorIsVisible+"]");
+		}
+		#endregion
 	}
 }
 

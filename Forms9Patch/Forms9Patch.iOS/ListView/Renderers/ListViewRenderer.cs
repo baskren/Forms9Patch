@@ -144,7 +144,7 @@ namespace Forms9Patch.iOS
 			return null;
 			*/
 
-			Group group = ((ListView)Element).DisplayedItems;
+			Group group = ((ListView)Element).BaseItemsSource;
 			if (group != null) {
 				var displayDeepIndex = new [] { indexPath.Section, indexPath.Row };
 				var item = group.ItemAtDeepIndex (displayDeepIndex);

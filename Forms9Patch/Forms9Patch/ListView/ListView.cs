@@ -14,11 +14,55 @@ namespace Forms9Patch
 	public class ListView : Xamarin.Forms.ListView
 	{
 
-		#region ListView proxy
+		#region Properties
+
+		#region Item Source / CellTemplates
+		/// <summary>
+		/// Gets or sets the item template.
+		/// </summary>
+		/// <value>The item template.</value>
+		public new DataTemplateSelector ItemTemplate
+		{
+			get { return (DataTemplateSelector)GetValue(ItemTemplateProperty); }
+			set { SetValue(ItemTemplateProperty, value); }
+		}
+
+		/// <summary>
+		/// The source property map property.
+		/// </summary>
+		public static readonly BindableProperty SourcePropertyMapProperty = BindableProperty.Create("SourcePropertyMap", typeof(List<string>), typeof(ListView), default(List<string>));
+		/// <summary>
+		/// Gets or sets the source property map.  Used to map the properties in a heirachial ItemsSource used to make the heirachy and bind (as items) to the CellViews
+		/// </summary>
+		/// <value>The source property map.</value>
+		public List<string> SourcePropertyMap
+		{
+			get { return (List<string>)GetValue(SourcePropertyMapProperty); }
+			set { SetValue(SourcePropertyMapProperty, value); }
+		}
+
+		/// <summary>
+		/// The items source property.
+		/// </summary>
+		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("Forms9Patch.ListView.ItemsSource", typeof(object), typeof(ListView), null);
+		/// <summary>
+		/// Gets or sets the items source.
+		/// </summary>
+		/// <value>The items source.</value>
+		public new object ItemsSource
+		{
+			get { return GetValue(ItemsSourceProperty); }
+			set { SetValue(ItemsSourceProperty, value);  }
+		}
+
+
+		#endregion
+
+		#region Cell decoration
 		/// <summary>
 		/// The separator visibility property.
 		/// </summary>
-		public static new readonly BindableProperty SeparatorVisibilityProperty = BindableProperty.Create ("SeparatorVisibility", typeof(SeparatorVisibility), typeof(ListView), default(SeparatorVisibility));
+		public static new readonly BindableProperty SeparatorVisibilityProperty = BindableProperty.Create ("Forms9Patch.ListView.SeparatorVisibility", typeof(SeparatorVisibility), typeof(ListView), default(SeparatorVisibility));
 		/// <summary>
 		/// Gets or sets the separator visibility.
 		/// </summary>
@@ -26,6 +70,20 @@ namespace Forms9Patch
 		public new SeparatorVisibility SeparatorVisibility {
 			get { return (SeparatorVisibility)GetValue (SeparatorVisibilityProperty); }
 			set { SetValue (SeparatorVisibilityProperty, value); }
+		}
+
+		/// <summary>
+		/// The separator color property.
+		/// </summary>
+		public static new readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("Forms9Patch.ListView.SeparatorColor", typeof(Color), typeof(ListView), Color.Gray);
+		/// <summary>
+		/// Gets or sets the color of the separator.
+		/// </summary>
+		/// <value>The color of the separator.</value>
+		public new Color SeparatorColor
+		{
+			get { return (Color)GetValue(SeparatorColorProperty); }
+			set { SetValue(SeparatorColorProperty, value); }
 		}
 
 		/// <summary>
@@ -38,45 +96,44 @@ namespace Forms9Patch
 		/// <value>The color of the cell background.</value>
 		public Color CellBackgroundColor {
 			get { return (Color)GetValue (CellBackgroundColorProperty); }
-			set { 
-				if (DisplayedItems != null)
-					DisplayedItems.BackgroundColor = value;
-				SetValue (CellBackgroundColorProperty, value); 
-			}
+			set { SetValue (CellBackgroundColorProperty, value); }
 		}
 
 		/// <summary>
-		/// The separator color property.
+		/// The selected cell background color property.
 		/// </summary>
-		public static new readonly BindableProperty SeparatorColorProperty = Xamarin.Forms.ListView.SeparatorColorProperty;
+		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ListView), Color.FromRgba(200, 200, 200, 255));
 		/// <summary>
-		/// Gets or sets the color of the separator.
+		/// Gets or sets the color of the selected cell background.
 		/// </summary>
-		/// <value>The color of the separator.</value>
-		public new Color SeparatorColor {
-			get { return (Color)GetValue(Xamarin.Forms.ListView.SeparatorColorProperty); }
-			set { 
-				if (DisplayedItems != null)
-					DisplayedItems.SeparatorColor = value;
-				SetValue(Xamarin.Forms.ListView.SeparatorColorProperty, value); 
+		/// <value>The color of the selected cell background.</value>
+		public Color SelectedCellBackgroundColor
+		{
+			get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
+			set { SetValue(SelectedCellBackgroundColorProperty, value);
 			}
 		}
+		#endregion
 
+		#region Item Selection
 		/// <summary>
-		/// Gets or sets the item template.
+		/// The backing store for the ListViews's GroupToggleBehavior property.
 		/// </summary>
-		/// <value>The item template.</value>
-		public new DataTemplateSelector ItemTemplate {
-			get { return (DataTemplateSelector)GetValue (ItemTemplateProperty); }
-			set { 
-				SetValue (ItemTemplateProperty, value); 
-			}
+		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialSegmentedControl), GroupToggleBehavior.Radio);
+		/// <summary>
+		/// Gets or sets the ListViews's GroupToggle behavior.
+		/// </summary>
+		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
+		public GroupToggleBehavior GroupToggleBehavior
+		{
+			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
+			set { SetValue(GroupToggleBehaviorProperty, value); }
 		}
 
 		/// <summary>
 		/// The most recently selected item property.
 		/// </summary>
-		public static new readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(ListView), null);
+		public static new readonly BindableProperty SelectedItemProperty = BindableProperty.Create("Forms9Patch.ListView.SelectedItem", typeof(object), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the most recently selected item.
 		/// </summary>
@@ -100,22 +157,34 @@ namespace Forms9Patch
 			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
 			private set { SetValue(SelectedItemsProperty, value); }
 		}
+		#endregion
 
 		/// <summary>
-		/// The backing store for the ListViews's GroupToggleBehavior property.
+		/// The editable property.
 		/// </summary>
-		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialSegmentedControl), GroupToggleBehavior.Radio);
+		public static readonly BindableProperty EditableProperty = BindableProperty.Create("Editable", typeof(bool), typeof(ListView), false);
 		/// <summary>
-		/// Gets or sets the ListViews's GroupToggle behavior.
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is editable - cells may be moved or deleted based upon the response from the CanDrag CanDrop CanDelete delegate methods.
 		/// </summary>
-		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
-		public GroupToggleBehavior GroupToggleBehavior
+		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
+		public bool Editable
 		{
-			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
-			set { SetValue(GroupToggleBehaviorProperty, value); }
+			get { return (bool)GetValue(EditableProperty); }
+			set { SetValue(EditableProperty, value); }
 		}
 
+		Group _baseItemsSource;
+		/// <summary>
+		/// Group backing store for the ItemsSource 
+		/// </summary>
+		/// <value>The base items source.</value>
+		internal Group BaseItemsSource { get { return _baseItemsSource; } }
+		#endregion
 
+
+		#region Events
+
+		#region Selection Events
 		/// <summary>
 		/// Occurs when item is selected.
 		/// </summary>
@@ -126,78 +195,6 @@ namespace Forms9Patch
 		/// </summary>
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
 
-		/// <summary>
-		/// Occurs when item is appearing.
-		/// </summary>
-		public new event EventHandler<ItemVisibilityEventArgs> ItemAppearing;
-
-		/// <summary>
-		/// Occurs when item is disappearing.
-		/// </summary>
-		public new event EventHandler<ItemVisibilityEventArgs> ItemDisappearing;
-		#endregion
-
-
-		#region Constructor
-		static int Count;
-		int id;
-		Listener _listener;
-
-		readonly ModalPopup _popup = new ModalPopup {
-			Padding = 3,
-			HasShadow = true,
-			OutlineRadius = 4
-		};
-
-		void init() {
-			id = Count++;
-			HasUnevenRows = false;
-			BackgroundColor = Color.Transparent;
-			base.SeparatorColor = Color.Transparent;
-			base.SeparatorVisibility = SeparatorVisibility.None;
-
-			base.ItemSelected += OnItemSelected;
-
-			base.ItemTapped += OnItemTapped;
-
-			base.ItemAppearing += OnItemAppearing;
-
-			base.ItemDisappearing += OnItemDisappearing;
-
-			IsEnabled = true;
-			_listener = new Listener (this);
-			_listener.LongPressed += OnLongPressed;
-			_listener.LongPressing += OnLongPressing;
-			_listener.Panning += OnPanning;
-
-			SelectedItems = new ObservableCollection<object>();
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
-		/// </summary>
-		/// <param name="strategy">Strategy.</param>
-		public ListView(ListViewCachingStrategy strategy) : base (strategy){
-			init ();
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
-		/// </summary>
-		public ListView() {
-			init ();
-		}
-
-		/// <summary>
-		/// Description this instance.
-		/// </summary>
-		public string Description() {
-			return "ListView[" + id + "]";
-		}
-		#endregion
-
-
-		#region ListView Event Proxies
 		bool _settingSelectedItem;
 		void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
@@ -240,9 +237,22 @@ namespace Forms9Patch
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && SelectedItems.Contains(tappedItem))
 				SelectedItems.Remove(tappedItem);
 		}
+		#endregion
+
+		#region VisibilityEvents
+		/// <summary>
+		/// Occurs when item is appearing.
+		/// </summary>
+		public new event EventHandler<ItemVisibilityEventArgs> ItemAppearing;
+
+		/// <summary>
+		/// Occurs when item is disappearing.
+		/// </summary>
+		public new event EventHandler<ItemVisibilityEventArgs> ItemDisappearing;
 
 		void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
+			System.Diagnostics.Debug.WriteLine("OnItemAppearing");
 			var item = ((Item)e?.Item);
 			var source = item?.Source;
 			if (source != null)
@@ -251,61 +261,100 @@ namespace Forms9Patch
 
 		void OnItemDisappearing(object sender, ItemVisibilityEventArgs e)
 		{
+			System.Diagnostics.Debug.WriteLine("OnItemDisappearing");
 			var source = ((Item)e?.Item)?.Source;
 			if (source != null)
 				ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(source));
 		}
 		#endregion
 
+		#endregion
 
-		#region proxy's enhanced functionality
-		/// <summary>
-		/// The editable property.
-		/// </summary>
-		public static readonly BindableProperty EditableProperty = BindableProperty.Create ("Editable", typeof(bool), typeof(ListView), false);
-		/// <summary>
-		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is editable.
-		/// </summary>
-		/// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
-		public bool Editable {
-			get { return (bool)GetValue (EditableProperty); }
-			set { SetValue (EditableProperty, value); }
+
+		#region Constructor
+		static int Count;
+		int id;
+		Listener _listener;
+
+		readonly ModalPopup _popup = new ModalPopup {
+			Padding = 3,
+			HasShadow = true,
+			OutlineRadius = 4
+		};
+
+		void init() {
+			System.Diagnostics.Debug.WriteLine("Init start");
+			id = Count++;
+			HasUnevenRows = false;
+			BackgroundColor = Color.Transparent;
+			base.SeparatorColor = Color.Transparent;
+			base.SeparatorVisibility = SeparatorVisibility.None;
+
+			base.ItemSelected += OnItemSelected;
+
+			base.ItemTapped += OnItemTapped;
+
+			base.ItemAppearing += OnItemAppearing;
+
+			base.ItemDisappearing += OnItemDisappearing;
+
+			IsEnabled = true;
+			_listener = new Listener (this);
+			_listener.LongPressed += OnLongPressed;
+			_listener.LongPressing += OnLongPressing;
+			_listener.Panning += OnPanning;
+
+			SelectedItems = new ObservableCollection<object>();
+			System.Diagnostics.Debug.WriteLine("INit end");
 		}
 
 		/// <summary>
-		/// The source property map property.
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
-		public static readonly BindableProperty SourcePropertyMapProperty = BindableProperty.Create ("SourcePropertyMap", typeof(List<string>), typeof(ListView), default(List<string>));
-		/// <summary>
-		/// Gets or sets the source property map.  Used to map the properties in a heirachial ItemsSource used to make the heirachy and bind (as items) to the CellViews
-		/// </summary>
-		/// <value>The source property map.</value>
-		public List<string> SourcePropertyMap {
-			get { return (List<string>)GetValue (SourcePropertyMapProperty); }
-			set { 
-				SetValue (SourcePropertyMapProperty, value); 
-				UpdateItemsSource ();
-			}
+		/// <param name="strategy">Strategy.</param>
+		public ListView(ListViewCachingStrategy strategy) : base (strategy){
+			init ();
 		}
 
-		Group _displayedItemsSource;
 		/// <summary>
-		/// The items source property.
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
-		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create( "ItemsSource", typeof(object), typeof(ListView), null);
-		/// <summary>
-		/// Gets or sets the items source.
-		/// </summary>
-		/// <value>The items source.</value>
-		public new object ItemsSource {
-			get { return GetValue(ItemsSourceProperty); }
-			set { 
-				SetValue (ItemsSourceProperty, value);
-				UpdateItemsSource ();
-			}
+		public ListView() {
+			init ();
 		}
 
-		void UpdateItemsSource() {
+		/// <summary>
+		/// Description this instance.
+		/// </summary>
+		public string Description() {
+			return "ListView[" + id + "]";
+		}
+		#endregion
+
+
+		#region ListView property change management
+		/// <summary>
+		/// Trigged with a property has changed
+		/// </summary>
+		/// <param name="propertyName">Property name.</param>
+		protected override void OnPropertyChanged (string propertyName = null)
+		{
+			System.Diagnostics.Debug.WriteLine("OnPropertyChanged("+propertyName+")");
+			base.OnPropertyChanged (propertyName);
+			if (propertyName == SeparatorColorProperty.PropertyName
+				|| propertyName == SeparatorVisibilityProperty.PropertyName
+				|| propertyName == CellBackgroundColorProperty.PropertyName
+				|| propertyName == SelectedCellBackgroundColorProperty.PropertyName
+			   )
+				UpdateCellProperties();
+			else if (propertyName == ItemsSourceProperty.PropertyName
+					 || propertyName == SourcePropertyMapProperty.PropertyName
+					)
+				UpdateItemsSource();
+		}
+
+		void UpdateItemsSource()
+		{
 			// be ready to set / reset IsGroupingEnabled as items are added or removed
 			/* need to use Group to determine if grouping is enabled.
 			var observableCollection = value as INotifyCollectionChanged;
@@ -336,79 +385,36 @@ namespace Forms9Patch
 			// This listView.ItemsSource is a target, so validity testing is to facility drag/drop of items
 			if (ItemsSource == null)
 				return;
-			_displayedItemsSource = new Group(ItemsSource, SourcePropertyMap);
-			base.ItemsSource = _displayedItemsSource;
-			IsGroupingEnabled = _displayedItemsSource.ContentType == Group.GroupContentType.Lists;
+			System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
+			_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
+			base.ItemsSource = _baseItemsSource;
+			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
+			UpdateCellProperties();
+		}
 
-			if (_displayedItemsSource != null) {
-				_displayedItemsSource.SeparatorIsVisible = SeparatorVisibility!=SeparatorVisibility.None;
-				_displayedItemsSource.BackgroundColor = CellBackgroundColor;
-				_displayedItemsSource.SeparatorColor = SeparatorColor;
+		void UpdateCellProperties()
+		{
+			if (_baseItemsSource != null)
+			{
+				//System.Diagnostics.Debug.WriteLine("UpdateCellProperties");
+				_baseItemsSource.SeparatorIsVisible = SeparatorVisibility != SeparatorVisibility.None;
+				_baseItemsSource.BackgroundColor = CellBackgroundColor;
+				_baseItemsSource.SeparatorColor = SeparatorColor;
+				_baseItemsSource.SelectedBackgroundColor = SelectedCellBackgroundColor;
+				//  System.Diagnostics.Debug.WriteLine("SeparatorColor=["+_baseItemsSource.SeparatorColor+"] SeparatorVisibility=["+_baseItemsSource.SeparatorIsVisible+"]");
 			}
 		}
-
-		internal Group DisplayedItems {
-			get { return _displayedItemsSource; }
-		}
-
-
-		/// <summary>
-		/// The selected cell background color property.
-		/// </summary>
-		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create( "SelectedCellBackgroundColor", typeof(Color), typeof(ListView), Color.FromRgba(200,200,200,255));
-		/// <summary>
-		/// Gets or sets the color of the selected cell background.
-		/// </summary>
-		/// <value>The color of the selected cell background.</value>
-		public Color SelectedCellBackgroundColor {
-			get { return (Color) GetValue (SelectedCellBackgroundColorProperty); }
-			set { 
-				SetValue (SelectedCellBackgroundColorProperty, value); 
-			}
-		}
-
-
-		/// <summary>
-		/// Triggered when a property is about to change
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanging (string propertyName = null)
-		{
-			base.OnPropertyChanging (propertyName);
-		}
-
-		/// <summary>
-		/// Trigged with a property has changed
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged (string propertyName = null)
-		{
-			base.OnPropertyChanged (propertyName);
-		}
-
 		#endregion
 
 
-		#region Delgation support
-		/*
-		void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			//System.Diagnostics.Debug.WriteLine ("CollectionChanged:(" + sender + ", " + e + ")");
-			//System.Diagnostics.Debug.WriteLine ("  causedBy: " + e.Action);
-		}
-		*/
-
+		#region Item change management
 		/// <summary>
 		/// Occurs when a property of a ListViewItem is about to change.
 		/// </summary>
 		public event PropertyChangingEventHandler ItemPropertyChanging;
 		void OnItemPropertyChanging(object sender, PropertyChangingEventArgs e) {
-			//var element = sender as ListViewItem;
-			//System.Diagnostics.Debug.WriteLine ("PropertyChanging(" + sender + ", " + e + ")");
-			//System.Diagnostics.Debug.WriteLine ("  property: " + e.PropertyName);
-			//System.Diagnostics.Debug.WriteLine ("  Title:["+element.Title+"] Help["+element.Help+"] ");
-			PropertyChangingEventHandler propertyChangingEventHandler = ItemPropertyChanging;
-			if (propertyChangingEventHandler != null)
-				propertyChangingEventHandler (sender, e);
+			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanging");
+			ItemPropertyChanging?.Invoke(sender, e);
 		}
 
 		/// <summary>
@@ -416,13 +422,8 @@ namespace Forms9Patch
 		/// </summary>
 		public event PropertyChangedEventHandler ItemPropertyChanged;
 		void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e) {
-			//var element = sender as ListViewItem;
-			//System.Diagnostics.Debug.WriteLine ("PropertyChanged(" + sender + ", " + e + ")");
-			//System.Diagnostics.Debug.WriteLine ("  property: " + e.PropertyName);
-			//System.Diagnostics.Debug.WriteLine ("  Title:["+element.Title+"] Help["+element.Help+"] ");
-			PropertyChangedEventHandler propertyChangedEventHandler = ItemPropertyChanged;
-			if (propertyChangedEventHandler != null)
-				propertyChangedEventHandler (sender, e);
+			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
+			ItemPropertyChanged?.Invoke(sender, e);
 		}
 		#endregion
 
@@ -511,8 +512,8 @@ namespace Forms9Patch
 				_nullItem.RequestedHeight = _nativeFrame.Height;
 				_nullItem.BackgroundColor = BackgroundColor;
 
-				_displayedItemsSource.NotifySourceOfChanges = false;
-				_displayedItemsSource.DeepSwapItems (_longPress.Item, _nullItem);
+				_baseItemsSource.NotifySourceOfChanges = false;
+				_baseItemsSource.DeepSwapItems (_longPress.Item, _nullItem);
 
 				_longPress.Item.SeparatorIsVisible = false;
 				var contentView = ItemTemplate.MakeContentView (_longPress.Item);
@@ -551,12 +552,12 @@ namespace Forms9Patch
 						canDrop = CanDrop(this, currentDragOver.Item.Source, currentDragOver.DeepIndex);
 					if (canDrop) {
 						// yes: put the NullItem here
-						_displayedItemsSource.DeepRemove(_nullItem);
-						_displayedItemsSource.DeepInsert (currentDragOver.DeepIndex, _nullItem);
-					} else if (_displayedItemsSource.DeepContains(_nullItem) && !_displayedItemsSource.DeepIndexOf (_nullItem).SequenceEqual (_longPress.DeepIndex)) {
+						_baseItemsSource.DeepRemove(_nullItem);
+						_baseItemsSource.DeepInsert (currentDragOver.DeepIndex, _nullItem);
+					} else if (_baseItemsSource.DeepContains(_nullItem) && !_baseItemsSource.DeepIndexOf (_nullItem).SequenceEqual (_longPress.DeepIndex)) {
 						// no: put the NullItem at the location where we started 
-						_displayedItemsSource.DeepRemove(_nullItem);
-						_displayedItemsSource.DeepInsert (_longPress.DeepIndex, _nullItem);
+						_baseItemsSource.DeepRemove(_nullItem);
+						_baseItemsSource.DeepInsert (_longPress.DeepIndex, _nullItem);
 					}
 				}
 
@@ -584,14 +585,14 @@ namespace Forms9Patch
 				_popup.IsVisible = false;
 
 				// return to our pre-drag state
-				var nullIndex = _displayedItemsSource.DeepIndexOf (_nullItem);
-				_displayedItemsSource.DeepRemove (_nullItem);
-				_displayedItemsSource.DeepInsert (_longPress.DeepIndex, _longPress.Item);
-				_displayedItemsSource.NotifySourceOfChanges = true;
+				var nullIndex = _baseItemsSource.DeepIndexOf (_nullItem);
+				_baseItemsSource.DeepRemove (_nullItem);
+				_baseItemsSource.DeepInsert (_longPress.DeepIndex, _longPress.Item);
+				_baseItemsSource.NotifySourceOfChanges = true;
 				if (!nullIndex.SequenceEqual (_longPress.DeepIndex)) {
 					// we made a allowed move, so make that move
-					_displayedItemsSource.DeepRemove(_longPress.Item);
-					_displayedItemsSource.DeepInsert (nullIndex, _longPress.Item);
+					_baseItemsSource.DeepRemove(_longPress.Item);
+					_baseItemsSource.DeepInsert (nullIndex, _longPress.Item);
 				}
 				_longPress = null;
 				_popup.Content = null;

@@ -7,6 +7,7 @@ namespace Forms9Patch
 	/// </summary>
 	class BaseCellView : Xamarin.Forms.ContentView
 	{
+		#region Properties
 		/// <summary>
 		/// The separator is visible property.
 		/// </summary>
@@ -73,48 +74,103 @@ namespace Forms9Patch
 			get { return (double)GetValue (SeparatorRightIndentProperty); }
 			set { SetValue (SeparatorRightIndentProperty, value); }
 		}
+		#endregion
 
+
+		#region Fields
+		static int _instances = 0;
+		internal int ID;
+		#endregion
+
+
+		#region Constructor
 		/// <summary>
 		/// DO NOT USE: Initializes a new instance of the <see cref="T:Forms9Patch.BaseCellView"/> class.
 		/// </summary>
 		public BaseCellView () {
-	 		//Padding = new Thickness(5,5,5,5);
+			ID = _instances++;
+			Padding = new Thickness(0,1,0,1);
 			//_listener = new FormsGestures.Listener(this);
 			//_listener.LongPressing += OnLongPressing;
 			//_listener.LongPressed += OnLongPressed;
 			//BackgroundColor = Color.Transparent;
 
-			this.SetBinding (SeparatorIsVisibleProperty, "SeparatorIsVisible");
+			//SeparatorColor = Color.Red;
+			this.SetBinding(SeparatorColorProperty, "SeparatorColor");
+			this.SetBinding(SeparatorIsVisibleProperty, "SeparatorIsVisible");
+			this.SetBinding(SeparatorHeightProperty, "SeparatorHeight");
+			this.SetBinding(SeparatorLeftIndentProperty, "SeparatorLeftIndent");
+			this.SetBinding(SeparatorRightIndentProperty, "SeparatorRightIndent");
 			//this.SetBinding (BackgroundColorProperty, "BackgroundColor");
+
 		}
+		#endregion
+
+
+		#region change management
 
 		/// <summary>
 		/// Triggered by a change in the binding context
 		/// </summary>
 		protected override void OnBindingContextChanged () {
 			var item = BindingContext as Item;
-			if (item != null) {
+			if (item != null)
+			{
 				item.BaseCellView = this;
+				item.PropertyChanged += OnItemPropertyChanged;
+				UpdateUnBoundProperties();
 			}
 			var type = BindingContext?.GetType ();
 			if (type == typeof(NullItem) || type == typeof(BlankItem))
 				Content.BindingContext = item;
 			else
 				Content.BindingContext = item?.Source;
-			base.OnBindingContextChanged ();
+			base.OnBindingContextChanged();
+		}
+
+		protected override void OnPropertyChanging(string propertyName = null)
+		{
+			base.OnPropertyChanging(propertyName);
+			if (propertyName == BindingContextProperty.PropertyName)
+			{
+				var item = BindingContext as Item;
+				if (item != null)
+					item.PropertyChanged -= OnItemPropertyChanged;
+			}
 		}
 
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
-			if (propertyName == Item.IsSelectedProperty.PropertyName)
-			{
-				var item = BindingContext as Item;
-				if (item != null)
-					BackgroundColor = item.IsSelected ? item.SelectedBackgroundColor : item.BackgroundColor;
-			}
+
 		}
 
+		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == Item.IsSelectedProperty.PropertyName 
+			    || e.PropertyName == Item.BackgroundColorProperty.PropertyName 
+			    || e.PropertyName == Item.SelectedBackgroundColorProperty.PropertyName
+			    || e.PropertyName == Item.IndexProperty.PropertyName
+			   )
+				UpdateUnBoundProperties();
+		}
+
+		void UpdateUnBoundProperties()
+		{
+			var item = BindingContext as Item;
+			if (item != null)
+			{
+				BackgroundColor = item.IsSelected ? item.SelectedBackgroundColor : item.BackgroundColor;
+				SeparatorIsVisible = item.Index > 0;
+			}
+			else
+			{
+				BackgroundColor = Color.Transparent;
+				SeparatorIsVisible = false;
+			}
+			//System.Diagnostics.Debug.WriteLine("[" + ID + "] SeparatorColor=[" + SeparatorColor + "] SeparatorVisibility=[" + SeparatorIsVisible + "]");
+		}
+		#endregion
 	}
 }
 
