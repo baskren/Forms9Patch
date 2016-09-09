@@ -25,8 +25,8 @@ namespace Forms9Patch.Droid
 			}
 			Control.Divider = null;
 			Control.DividerHeight = -1;
+			Control.SetSelector(Android.Resource.Color.Transparent);
 		}
-
 
 		bool Extended(double delta) {
 			return MinScroll (delta) || MaxScroll (delta);
@@ -75,7 +75,7 @@ namespace Forms9Patch.Droid
 		internal Forms9Patch.DragEventArgs ItemAtPoint(Point p) {
 			var scale = Forms.Context.Resources.DisplayMetrics.Density;
 			var pos = Control.PointToPosition ((int)(p.X * scale), (int)(p.Y * scale));
-			//System.Diagnostics.Debug.WriteLine ("p=["+p+"] pos=["+pos+"]" );
+			System.Diagnostics.Debug.WriteLine ("p=["+p+"] pos=["+pos+"]" );
 			return HoverOverForPosition (pos);
 		}
 

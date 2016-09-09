@@ -21,6 +21,7 @@ namespace Forms9Patch.iOS
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
 			}
+			Control.AllowsSelection = false;
 		}
 
 		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -114,7 +115,6 @@ namespace Forms9Patch.iOS
 			return null;
 		}
 
-
 		DragEventArgs ItemAt(NSIndexPath indexPath) {
 			/*
 			int section = 0;
@@ -157,5 +157,7 @@ namespace Forms9Patch.iOS
 		Point ConvertToWindow(Point p) {
 			return NativeView.ConvertPointToView (new CoreGraphics.CGPoint (p.X, p.Y), null).ToPoint();
 		}
+
+
 	}
 }

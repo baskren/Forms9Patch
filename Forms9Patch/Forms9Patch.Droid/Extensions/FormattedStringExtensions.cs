@@ -224,7 +224,7 @@ namespace Forms9Patch.Droid
 				} else {
 					if (mathStart > -1) {
 						result.SetSpan (new CustomTypefaceSpan (mathFont), mathStart, index, 0);
-						System.Console.WriteLine ("MathAlphanum:[{0}]", formattedString.Text.Substring (mathStart, index - mathStart));
+						//System.Console.WriteLine ("MathAlphanum:[{0}]", formattedString.Text.Substring (mathStart, index - mathStart));
 						mathStart = -1;
 					}
 				}

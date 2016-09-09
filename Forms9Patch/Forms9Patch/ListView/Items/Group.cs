@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using PCL.Utils;
+using Xamarin.Forms;
 
 namespace Forms9Patch
 {
@@ -703,7 +704,6 @@ namespace Forms9Patch
 		#endregion
 
 
-
 		#region Constructors
 		public Group(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
 			VisiblityTest = visibleItemTest;
@@ -873,6 +873,21 @@ namespace Forms9Patch
 		#endregion
 
 
+		#region Source finding
+		public Item ItemWithSource(object source)
+		{
+			foreach (var item in _items)
+			{
+				if (item.Source == source)
+					return item;
+				var group = item as Group;
+				var subItem = group?.ItemWithSource(source);
+				if (subItem != null)
+					return subItem;
+			}
+			return null;
+		}
+		#endregion
 	}
 }
 

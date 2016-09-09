@@ -72,7 +72,50 @@ namespace Forms9Patch
 			internal set { 
 				SetValue (SeparatorColorProperty, value); 
 			}
-		}	
+		}
+
+		/// <summary>
+		/// The separator height property.
+		/// </summary>
+		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(Item), -1.0);
+		/// <summary>
+		/// Gets or sets the height of the separator.
+		/// </summary>
+		/// <value>The height of the separator.</value>
+		public double SeparatorHeight
+		{
+			get { return (double)GetValue(SeparatorHeightProperty); }
+			set { SetValue(SeparatorHeightProperty, value); }
+		}
+
+		/// <summary>
+		/// The separator left indent property.
+		/// </summary>
+		public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create("SeparatorLeftIndent", typeof(double), typeof(Item), 20.0);
+		/// <summary>
+		/// Gets or sets the separator left indent.
+		/// </summary>
+		/// <value>The separator left indent.</value>
+		public double SeparatorLeftIndent
+		{
+			get { return (double)GetValue(SeparatorLeftIndentProperty); }
+			set { SetValue(SeparatorLeftIndentProperty, value); }
+		}
+
+		/// <summary>
+		/// The separator right indent property.
+		/// </summary>
+		public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create("SeparatorRightIndent", typeof(double), typeof(Item), 0.0);
+		/// <summary>
+		/// Gets or sets the separator right indent.
+		/// </summary>
+		/// <value>The separator right indent.</value>
+		public double SeparatorRightIndent
+		{
+			get { return (double)GetValue(SeparatorRightIndentProperty); }
+			set { SetValue(SeparatorRightIndentProperty, value); }
+		}
+
 
 		public static readonly BindableProperty BackgroundColorProperty  = BindableProperty.Create("BackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
 		public Color BackgroundColor {
@@ -97,7 +140,9 @@ namespace Forms9Patch
 		public bool IsSelected
 		{
 			get { return (bool)GetValue(IsSelectedProperty); }
-			set { SetValue(IsSelectedProperty, value); }
+			set { 
+				SetValue(IsSelectedProperty, value); 
+			}
 		}
 
 		internal static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(Item), -1);

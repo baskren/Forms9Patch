@@ -22,6 +22,7 @@ namespace Forms9Patch.Droid
 				|| e.PropertyName == BaseCellView.SeparatorHeightProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorLeftIndentProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorRightIndentProperty.PropertyName
+			    || e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName
 			) {
 				Background = new BaseCellViewDrawable (Element);
 			}

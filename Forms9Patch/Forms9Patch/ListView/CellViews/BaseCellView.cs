@@ -113,6 +113,8 @@ namespace Forms9Patch
 		/// Triggered by a change in the binding context
 		/// </summary>
 		protected override void OnBindingContextChanged () {
+			if (BindingContext == null)
+				return;
 			var item = BindingContext as Item;
 			if (item != null)
 			{
@@ -161,6 +163,7 @@ namespace Forms9Patch
 			if (item != null)
 			{
 				BackgroundColor = item.IsSelected ? item.SelectedBackgroundColor : item.BackgroundColor;
+				//System.Diagnostics.Debug.WriteLine("BaseCellView["+ID+"].BackgroundColor=["+BackgroundColor+"]");
 				SeparatorIsVisible = item.Index > 0 && item.SeparatorIsVisible;
 			}
 			else

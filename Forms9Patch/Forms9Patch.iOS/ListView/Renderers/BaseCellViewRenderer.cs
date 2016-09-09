@@ -14,15 +14,16 @@ namespace Forms9Patch.iOS
 		{
 			base.OnElementPropertyChanged (sender, e);
 			//System.Diagnostics.Debug.WriteLine ("\t\tOEPC "+(Element!=null?((Item)Element.BindingContext).Title:"")+" "+e.PropertyName);
-			if (e.PropertyName == BaseCellView.SeparatorIsVisibleProperty.PropertyName 
+			if (e.PropertyName == BaseCellView.SeparatorIsVisibleProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorColorProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorHeightProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorLeftIndentProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorRightIndentProperty.PropertyName
 				|| e.PropertyName == "Renderer"
-			) {
+			)
+			{
 				//Device.StartTimer(TimeSpan.FromMilliseconds(20), () => {
-					SetNeedsDisplay ();
+				SetNeedsDisplay();
 				//	return false;
 				//});
 			}
@@ -44,26 +45,22 @@ namespace Forms9Patch.iOS
 			}
 			var separatorHeight = Element.SeparatorHeight<0 ? 1.0f : (nfloat)(Math.Max (0, Element.SeparatorHeight) );
 
-			if (!Element.SeparatorIsVisible || (separatorColor.A < 0.01 || separatorHeight < 0.01 )) {
-				base.Draw (rect);
-				System.Diagnostics.Debug.WriteLine("\t["+Element.ID+"] Not drawing separator");
-				return;
-			}
 
 			base.Draw(rect);
-			BackgroundColor = Element.BackgroundColor.ToUIColor();
-			using (var g = UIGraphics.GetCurrentContext ()) {
-				System.Diagnostics.Debug.WriteLine("\t["+Element.ID+"] Drawing separator ["+separatorColor+"] height=["+separatorHeight+"] width=["+Element.Width+"] left=["+Element.SeparatorLeftIndent+"] right=["+Element.SeparatorRightIndent+"]");
-				g.SaveState ();
-									
-				// separator
-				g.SetLineWidth (separatorHeight);
-				g.SetStrokeColor (separatorColor.ToCGColor ());
-				g.MoveTo ((nfloat)Element.SeparatorLeftIndent, 0);
-				g.AddLineToPoint ((nfloat)(Element.Width - Element.SeparatorRightIndent), 0);
-				g.StrokePath ();
-				g.RestoreState ();
+			if (Element.SeparatorIsVisible && (separatorColor.A > 0.01 && separatorHeight > 0.01 )) {
+				using (var g = UIGraphics.GetCurrentContext())
+				{
+					g.SaveState();
+					g.SetLineWidth(separatorHeight);
+					g.SetStrokeColor(separatorColor.ToCGColor());
+					g.MoveTo((nfloat)Element.SeparatorLeftIndent, 0);
+					g.AddLineToPoint((nfloat)(Element.Width - Element.SeparatorRightIndent), 0);
+					g.StrokePath();
+					g.RestoreState();
+				}
 			}
+			BackgroundColor = Element.BackgroundColor.ToUIColor();
+			//System.Diagnostics.Debug.WriteLine("BaseCellViewRenderer["+Element.ID+"].BackgroundColor=[" + BackgroundColor + "] Element.BackgroundColor=[" + Element.BackgroundColor + "]");
 		}
 
 	}

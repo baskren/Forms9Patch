@@ -195,47 +195,61 @@ namespace Forms9Patch
 		/// </summary>
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
 
-		bool _settingSelectedItem;
-		void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+		void OnItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
 		{
-			if (!_settingSelectedItem)
-			{
-				_settingSelectedItem = true;
-				System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemSelected");
-				var selectedItem = ((Item)e?.SelectedItem)?.Source;
-				switch (GroupToggleBehavior)
-				{
-					case GroupToggleBehavior.Radio:
-						SelectedItems.Clear();
-						goto case GroupToggleBehavior.Multiselect;
-					case GroupToggleBehavior.Multiselect:
-						SelectedItems.Add(selectedItem);
-						this.SelectedItem = selectedItem;
-						base.SelectedItem = null;
-						if (this.SelectedItem != null)
-							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(selectedItem));
-						break;
-					case GroupToggleBehavior.None:
-						SelectedItems.Clear();
-						this.SelectedItem = null;
-						base.SelectedItem = null;
-						if (this.SelectedItem != null)
-							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(selectedItem));
-						break;
-				}
-				_settingSelectedItem = false;
-			}
+			//if (GroupToggleBehavior == GroupToggleBehavior.None)
+			//	base.SelectedItem = null;
 		}
 
+		Item _selectedF9PItem;
+		List<Item> _selectedF9PItems = new List<Item>();
 		void OnItemTapped(object sender, ItemTappedEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
-			var tappedItem = ((Item)e?.Item)?.Source;
-			var group = (Group)((BindableObject)e.Group).GetValue(Xamarin.Forms.ListView.ItemsSourceProperty);
-			if (tappedItem != null)
-				ItemTapped?.Invoke(this, new ItemTappedEventArgs(group, tappedItem));
-			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && SelectedItems.Contains(tappedItem))
-				SelectedItems.Remove(tappedItem);
+			//System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
+			var tappedItem = ((Item)e?.Item);
+			var group = (Group)((BindableObject)e.Group)?.GetValue(Xamarin.Forms.ListView.ItemsSourceProperty);
+			if (tappedItem?.Source != null)
+			{
+				// null source items are not tappable or selectable
+				ItemTapped?.Invoke(this, new ItemTappedEventArgs(group, tappedItem.Source));
+				switch (GroupToggleBehavior)
+				{
+					case GroupToggleBehavior.None:
+						SelectedItems.Clear();
+						SelectedItem = null;
+						if (_selectedF9PItem != null)
+							_selectedF9PItem.IsSelected = false;
+						_selectedF9PItem = null;
+						if (_selectedF9PItems.Count > 0)
+						{
+							foreach (var item in _selectedF9PItems)
+								item.IsSelected = false;
+							_selectedF9PItems.Clear();
+						}
+						break;
+					case GroupToggleBehavior.Radio:
+						if (tappedItem != _selectedF9PItem)
+						{
+							RemoveSelectedItem(_selectedF9PItem);
+							AddSelectedItem(tappedItem);
+							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group, tappedItem.Source));
+						}
+						break;
+					case GroupToggleBehavior.Multiselect:
+						if (_selectedF9PItems.Contains(tappedItem))
+						{
+							if (base.SelectedItem == tappedItem)
+								base.SelectedItem = null;
+							RemoveSelectedItem(tappedItem);
+						}
+						else
+						{
+							AddSelectedItem(tappedItem);
+							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group, tappedItem.Source));
+						}
+					break;
+				}
+			}
 		}
 		#endregion
 
@@ -252,7 +266,7 @@ namespace Forms9Patch
 
 		void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("OnItemAppearing");
+			//System.Diagnostics.Debug.WriteLine("OnItemAppearing");
 			var item = ((Item)e?.Item);
 			var source = item?.Source;
 			if (source != null)
@@ -261,10 +275,12 @@ namespace Forms9Patch
 
 		void OnItemDisappearing(object sender, ItemVisibilityEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("OnItemDisappearing");
+			//System.Diagnostics.Debug.WriteLine("OnItemDisappearing");
 			var source = ((Item)e?.Item)?.Source;
 			if (source != null)
 				ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(source));
+			if (source == SelectedItem)
+				base.SelectedItem = null;
 		}
 		#endregion
 
@@ -283,6 +299,8 @@ namespace Forms9Patch
 		};
 
 		void init() {
+			//this.DisableSelection();
+
 			id = Count++;
 			HasUnevenRows = false;
 			BackgroundColor = Color.Transparent;
@@ -290,8 +308,8 @@ namespace Forms9Patch
 			base.SeparatorColor = Color.Transparent;
 			base.SeparatorVisibility = SeparatorVisibility.None;
 
-			base.ItemSelected += OnItemSelected;
-			base.ItemTapped += OnItemTapped;
+			//base.ItemSelected += OnItemSelected;
+			//base.ItemTapped += OnItemTapped;
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
 
@@ -301,7 +319,34 @@ namespace Forms9Patch
 			_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
 
+			_listener.Tapped += (object sender, TapEventArgs e) =>
+			{
+				base.SelectedItem = null;
+
+				System.Diagnostics.Debug.WriteLine("Tapped location=["+e.Touches[0]+"]");
+				if (e.Touches.Count() == 1)
+				{
+					var indexPath = this.IndexPathAtPoint(e.Touches[0]);
+					if (indexPath.Item2 < 0)
+						return;
+					System.Diagnostics.Debug.WriteLine("indexPath=["+indexPath+"]");
+					Item item=null;
+					Group group = null;
+					if (IsGroupingEnabled)
+					{
+						group = _baseItemsSource[indexPath.Item1] as Group;
+						item = group[indexPath.Item2];
+					}
+					else
+						item = _baseItemsSource[indexPath.Item2];
+					var args = new ItemTappedEventArgs(group, item);
+					OnItemTapped(this,args);
+				}
+			};
+
+
 			SelectedItems = new ObservableCollection<object>();
+			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 		}
 
 		/// <summary>
@@ -328,14 +373,164 @@ namespace Forms9Patch
 		#endregion
 
 
+		#region SelectItems management
+		// Assumption: SelectedItem(s) must be set AFTER ItemsSource and ItemsSourceMap has been set.  Otherwise, selected items will be culled
+
+		void AddSelection(Item f9pItem, object sourceItem)
+		{
+			if (f9pItem == null || sourceItem == null)
+				throw new InvalidOperationException("Cannot select null item");
+			f9pItem.IsSelected = true;
+			_selectedF9PItems.Add(f9pItem);
+			_selectedF9PItem = f9pItem;
+			if (sourceItem != SelectedItem)
+				SelectedItem = sourceItem;
+			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && !SelectedItems.Contains(sourceItem))
+				SelectedItems.Add(sourceItem);
+		}
+
+		void AddSelectedItem(Item f9pItem)
+		{
+			if (f9pItem == null)
+				return;
+			var sourceItem = f9pItem.Source;
+			AddSelection(f9pItem, sourceItem);
+		}
+
+		void AddSelectedSourceItem(object sourceItem)
+		{
+			if (sourceItem == null)
+				return;
+			var f9pItem = _baseItemsSource.ItemWithSource(sourceItem);
+			AddSelection(f9pItem, sourceItem);
+		}
+
+		void RemoveSelection(Item f9pItem, object sourceItem)
+		{
+			if (f9pItem != null)
+			{
+				f9pItem.IsSelected = false;
+				if (_selectedF9PItems.Contains(f9pItem))
+					_selectedF9PItems.Remove(f9pItem);
+			}
+			if (SelectedItem == sourceItem)
+			{
+				SelectedItem = null;
+				_selectedF9PItem = null;
+			}
+			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && sourceItem != null && SelectedItems.Contains(sourceItem) )
+				SelectedItems.Remove(sourceItem);
+		}
+
+		void RemoveSelectedItem(Item f9pItem)
+		{
+			if (f9pItem == null)
+				return;
+			var sourceItem = f9pItem.Source;
+			RemoveSelection(f9pItem,sourceItem);
+		}
+
+		void RemoveSelectedSourceItem(object sourceItem)
+		{
+			if (sourceItem == null)
+				return;
+			var f9pItem = _baseItemsSource.ItemWithSource(sourceItem);
+			RemoveSelection(f9pItem, sourceItem);
+		}
+
+		void AddSelectedSourceItems(System.Collections.IList sourceItems)
+		{
+			if (sourceItems == null)
+				return;
+			foreach (var sourceItem in sourceItems)
+				AddSelectedSourceItem(sourceItem);
+		}
+
+		void RemoveSelectedSourceItems(System.Collections.IList sourceItems)
+		{
+			if (sourceItems == null)
+				return;
+			for (int i = sourceItems.Count-1; i >=0 ;i--)
+			{
+				var sourceItem = sourceItems[i];
+				RemoveSelectedSourceItem(sourceItem);
+			}
+		}
+
+		void SelectedItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+				case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+					AddSelectedSourceItems(e.NewItems);
+					break;
+				case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+					break;
+				case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+					RemoveSelectedSourceItems(e.OldItems);
+					break;
+				case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+					RemoveSelectedSourceItems(e.OldItems);
+					AddSelectedSourceItems(e.NewItems);
+					break;
+				case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+					RemoveSelectedSourceItems(SelectedItems);
+					break;
+			}
+		}
+
+		void ReevaluateSelectedItems()
+		{
+			// remove any SelectedItems that are not a Item.Source in the _baseItemsSource
+			_selectedF9PItem = null;
+			_selectedF9PItems.Clear();
+			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect)
+			{
+				for (int i = SelectedItems.Count - 1; i >= 0; i++)
+				{
+					var sourceItem = SelectedItems[i];
+					var item = _baseItemsSource.ItemWithSource(sourceItem);
+					if (item == null)
+						RemoveSelectedSourceItem(sourceItem);
+					else
+						AddSelectedSourceItem(sourceItem);
+				}
+			}
+			else if (GroupToggleBehavior == GroupToggleBehavior.Radio)
+			{
+				var item = _baseItemsSource.ItemWithSource(SelectedItem);
+				if (item == null)
+					RemoveSelectedSourceItem(SelectedItem);
+				else
+					AddSelectedSourceItem(SelectedItem);
+			}
+		}
+
+		#endregion
+
+
 		#region ListView property change management
+		protected override void OnPropertyChanging(string propertyName = null)
+		{
+			base.OnPropertyChanging(propertyName);
+			if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio) {
+				RemoveSelectedSourceItem(SelectedItem);
+			}
+			else if (propertyName == SelectedItemsProperty.PropertyName)
+			{
+				if (SelectedItems != null)
+					SelectedItems.CollectionChanged -=  SelectedItemsCollectionChanged;
+				RemoveSelectedSourceItems(SelectedItems);
+			}
+		}
+
+
 		/// <summary>
 		/// Trigged with a property has changed
 		/// </summary>
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
-			System.Diagnostics.Debug.WriteLine("OnPropertyChanged("+propertyName+")");
 			base.OnPropertyChanged (propertyName);
 			if (propertyName == SeparatorColorProperty.PropertyName
 				|| propertyName == SeparatorVisibilityProperty.PropertyName
@@ -343,10 +538,17 @@ namespace Forms9Patch
 				|| propertyName == SelectedCellBackgroundColorProperty.PropertyName
 			   )
 				UpdateCellProperties();
-			else if (propertyName == ItemsSourceProperty.PropertyName
-					 || propertyName == SourcePropertyMapProperty.PropertyName
-					)
+			else if (propertyName == ItemsSourceProperty.PropertyName)
 				UpdateItemsSource();
+			else if (propertyName == SourcePropertyMapProperty.PropertyName)
+				UpdateItemsSource();
+			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
+				AddSelectedSourceItem(SelectedItem);
+			else if (propertyName == SelectedItemsProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
+			{
+				AddSelectedSourceItems(SelectedItems);
+				SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
+			}
 		}
 
 		void UpdateItemsSource()
@@ -379,12 +581,16 @@ namespace Forms9Patch
 			}
 			*/
 			// This listView.ItemsSource is a target, so validity testing is to facility drag/drop of items
+
+			// unselected everything when Source is changed
+
 			if (ItemsSource == null)
 				return;
-			System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
+			//System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
 			_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
+			ReevaluateSelectedItems();
 			UpdateCellProperties();
 		}
 
