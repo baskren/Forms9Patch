@@ -7,7 +7,7 @@ namespace Forms9Patch
 		public TextCellViewContent()
 		{
 			//HeightRequest = 30;
-			BackgroundColor = Color.Pink;
+			//BackgroundColor = Color.Pink;
 			TextColor = Color.Default;
 			VerticalOptions = LayoutOptions.Center;
 			HorizontalOptions = LayoutOptions.Start;

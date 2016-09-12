@@ -316,6 +316,7 @@ namespace Forms9Patch
 
 		void init() {
 			//this.DisableSelection();
+			Margin = new Thickness(5, 0, 5, 0);
 
 			id = Count++;
 			HasUnevenRows = false;

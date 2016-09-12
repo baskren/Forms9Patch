@@ -10,9 +10,18 @@ namespace Forms9Patch.iOS
 {
 	class ColorGradientBoxRenderer : VisualElementRenderer<ColorGradientBox> {
 	
+		protected override void OnElementChanged(ElementChangedEventArgs<ColorGradientBox> e)
+		{
+			base.OnElementChanged(e);
+			NativeView.UserInteractionEnabled = false;
+		}
+
+		CAGradientLayer _oldSublayer;
+
 		public override void Draw (CGRect rect)
 		{
 			ContentMode = UIViewContentMode.Redraw;
+			//ContentMode = UIViewContentMode.
 
 			var gradient = new CAGradientLayer ();
 			if (Element.Orientation == StackOrientation.Horizontal) {
@@ -21,7 +30,11 @@ namespace Forms9Patch.iOS
 			}
 			gradient.Frame = rect;
 			gradient.Colors = new [] { Element.StartColor.ToCGColor (), Element.EndColor.ToCGColor () };
-			NativeView.Layer.InsertSublayer (gradient, 0);
+			if (_oldSublayer!= null)
+				NativeView.Layer.ReplaceSublayer(_oldSublayer,gradient);
+			else
+				NativeView.Layer.InsertSublayer (gradient, 0);
+			_oldSublayer = gradient;
 			base.Draw (rect);
 			//BackgroundColor = Color.Transparent.ToUIColor();
 		}

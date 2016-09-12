@@ -663,17 +663,32 @@ namespace Forms9Patch
 
 		public Item ItemAtDeepIndex(int[] deepIndex) {
 			if (deepIndex==null || deepIndex.Length == 0)
-				throw new NotSupportedException ("DeepRemove: deepIndex=null || deepIndex.Length=0");
+				throw new NotSupportedException ("ItemAtDeepIndex: deepIndex=null || deepIndex.Length=0");
 			if (deepIndex.Length == 1) {
 				return _items[deepIndex [0]];
 			}
 			var subGroup = _items[deepIndex [0]] as Group;
 			if (subGroup == null)
-				throw new NotSupportedException ("DeepRemove: deepIndex.Length > 1 but item at index is not Group");
+				throw new NotSupportedException ("ItemAtDeepIndex: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
 			Array.Copy (deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
 			return subGroup.ItemAtDeepIndex (subGroupDeepIndex);
 		}
+
+		public Item ItemAtIndexPath(Tuple<int, int> indexPath)
+		{
+			if (indexPath == null)
+				return null;
+			var subGroup = _items[indexPath.Item1] as Group;
+			if (subGroup == null)
+			{
+				if (indexPath.Item1 > 0)
+					throw new NotSupportedException("ItemAtIndexPath: indexPath.Item1 > 0 but item at Item1 is not a Group");
+				return _items[indexPath.Item1];
+			}
+			return subGroup[indexPath.Item2];
+		}
+
 
 		public void DeepSwapItems(Item item1, Item item2) {
 			var deepIndex1 = DeepIndexOf (item1);
