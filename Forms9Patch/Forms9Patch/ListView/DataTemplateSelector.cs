@@ -11,6 +11,20 @@ namespace Forms9Patch
 	/// </summary>
 	public class DataTemplateSelector : Xamarin.Forms.DataTemplateSelector
 	{
+
+		Type _baseCellViewType = typeof(BaseCellView);
+		internal Type BaseCellViewType
+		{
+			get { return _baseCellViewType; }
+			set
+			{
+				var baseCellView = (BaseCellView)Activator.CreateInstance(value);
+				if (baseCellView == null)
+					throw new InvalidCastException("BaseCellViewType must be derived from Forms9Patch.BaseCellView");
+				_baseCellViewType = value;
+			}
+		}
+
 		readonly Dictionary <Type, DataTemplate> _cellTemplates = new Dictionary<Type, DataTemplate>();
 		readonly Dictionary <Type, Type> _contentTypes = new Dictionary<Type, Type> ();
 		readonly DataTemplate _unknownTemplate;
@@ -110,7 +124,8 @@ namespace Forms9Patch
 				//cellView.BindingContext = item;
 				//return cellView;
 				//System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) enter",item);
-				var baseCellView = new BaseCellView();
+				//var baseCellView = new BaseCellView();
+				var baseCellView = (BaseCellView)Activator.CreateInstance(BaseCellViewType);
 				baseCellView.Content = (View)Activator.CreateInstance (contentType);
 				baseCellView.BindingContext = item;
 				//System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) exit",item);
