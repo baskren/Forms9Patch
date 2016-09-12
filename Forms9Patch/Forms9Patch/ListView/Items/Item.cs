@@ -230,6 +230,12 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			//if (propertyName==SeparatorColorProperty.PropertyName || propertyName==SeparatorIsVisibleProperty.PropertyName)
 			//	System.Diagnostics.Debug.WriteLine("["+ID+"] SeparatorColor=["+SeparatorColor+"] SeparatorVisibility=["+SeparatorIsVisible+"]");
+			if (propertyName == IsSelectedProperty.PropertyName)
+			{
+				var isSelectedSource = Source as IIsSelectedAble;
+				if (isSelectedSource != null)
+					isSelectedSource.IsSelected = IsSelected;
+			}
 		}
 		#endregion
 	}
