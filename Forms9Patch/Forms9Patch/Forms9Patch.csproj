@@ -92,9 +92,6 @@
     <Compile Include="Interfaces\IFontFamilies.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Elements\ColorGradientBox.cs" />
-    <Compile Include="Pickers\BasePicker.cs" />
-    <Compile Include="Pickers\MultiComponentPicker.cs" />
-    <Compile Include="Pickers\SinglePicker.cs" />
     <Compile Include="Elements\ListView\CellViews\BaseCellView.cs" />
     <Compile Include="Elements\ListView\CellViews\BlankCellView.cs" />
     <Compile Include="Elements\ListView\CellViews\GroupHeaderView.cs" />
@@ -115,6 +112,9 @@
     <Compile Include="Elements\ListView\Items\NullItem.cs" />
     <Compile Include="Elements\ListView\ListView.cs" />
     <Compile Include="Elements\ListView\ListViewExtensions.cs" />
+    <Compile Include="Elements\Pickers\BasePicker.cs" />
+    <Compile Include="Elements\Pickers\MultiComponentPicker.cs" />
+    <Compile Include="Elements\Pickers\SinglePicker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -129,8 +129,8 @@
     <Folder Include="Events\" />
     <Folder Include="Spans\" />
     <Folder Include="Resources\" />
-    <Folder Include="Pickers\" />
     <Folder Include="Elements\ListView\" />
+    <Folder Include="Elements\Pickers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
