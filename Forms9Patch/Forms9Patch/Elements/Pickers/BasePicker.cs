@@ -54,7 +54,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The index property.
 		/// </summary>
-		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(BasePicker), 0, BindingMode.TwoWay);
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(BasePicker), -1, BindingMode.TwoWay);
 		/// <summary>
 		/// Gets or sets the index.
 		/// </summary>
@@ -76,7 +76,9 @@ namespace Forms9Patch
 		public object SelectedItem
 		{
 			get { return GetValue(SelectedItemProperty); }
-			set { SetValue(SelectedItemProperty, value); }
+			set { 
+				SetValue(SelectedItemProperty, value); 
+			}
 		}
 
 		#endregion
@@ -102,6 +104,7 @@ namespace Forms9Patch
 			BackgroundColor = Color.Transparent
 		};
 
+		internal bool PositionToSelect = false;
 		#endregion
 
 
@@ -139,7 +142,6 @@ namespace Forms9Patch
 					Index = indexPath.Item2;
 					//System.Diagnostics.Debug.WriteLine("Tapped point=["+e.Touches[0]+"] indexPath=[" + indexPath + "] width=["+_listView.Width+"] height=["+_listView.Height+"]");
 					ScrollToIndex(Index);
-					SelectedItem = _listView.BaseItemsSource.ItemAtIndexPath(indexPath);
 				}
 			};
 
@@ -181,6 +183,7 @@ namespace Forms9Patch
 					notifiableCollection.CollectionChanged += SourceCollectionChanged;
 				_col = new ObservableCollection<object>((System.Collections.Generic.IEnumerable<object>)ItemsSource);
 				_listView.ItemsSource = _col;
+				ScrollToIndex(Index);
 			}
 			/*
 			if (propertyName == ItemTemplateProperty.PropertyName)
@@ -193,16 +196,36 @@ namespace Forms9Patch
 				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + Device.OnPlatform(0,8,0);
 				_lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
 			}
+
+			if (propertyName == IndexProperty.PropertyName)
+			{
+				ScrollToIndex(Index);
+			}
 		}
 
 		/// <summary>
 		/// Scrolls the index of the to.
 		/// </summary>
 		/// <param name="index">Index.</param>
-		public void ScrollToIndex(int index)
+		public virtual void ScrollToIndex(int index)
 		{
-			var item = _col[index];
-			_listView.ScrollTo(item, ScrollToPosition.Center, true);
+			if (_col.Count > 0)
+			{
+				if (index < 0)
+					index = 0;
+				if (index > _col.Count - 1)
+					index = _col.Count - 1;
+				var item = _col[index];
+				_listView.ScrollTo(item, ScrollToPosition.Center, true);
+				if (PositionToSelect)
+				{
+					//var selectedF9PItem = _listView.BaseItemsSource.ItemAtIndexPath(new Tuple<int, int>(0, index));
+					Index = index;
+					var selectedF9PItem = _listView.BaseItemsSource[index] as Item;
+					if (selectedF9PItem != null)
+						SelectedItem = selectedF9PItem.Source;
+				}
+			}
 		}
 
 
@@ -280,6 +303,19 @@ namespace Forms9Patch
 								throw new InvalidDataContractException("SinglePicker should not be grouped");
 							Index = indexPath.Item2;
 							ScrollToIndex(Index);
+						}
+						else 
+						{
+							if (_listView.HitTest(_listView.Bounds.Center, _lowerPadding))
+								Index = _col.Count - 1;
+							else if (_listView.HitTest(_listView.Bounds.Center, _upperPadding))
+								Index = 0;
+							if (PositionToSelect)
+							{
+								var selectedF9PItem = _listView.BaseItemsSource[Index] as Item;
+								if (selectedF9PItem != null)
+									SelectedItem = selectedF9PItem.Source;
+							}
 						}
 						_waitingForScrollToComplete = false;
 						return false;

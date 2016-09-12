@@ -1,12 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Single picker.
-	/// </summary>
-	public class SinglePicker : Frame
+	public class MultiPicker : SinglePicker
 	{
 		#region Properties
 		/// <summary>
@@ -26,7 +24,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(SinglePicker), null);
+		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BasePicker), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
@@ -34,15 +32,16 @@ namespace Forms9Patch
 		public IEnumerable ItemsSource
 		{
 			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-			set { 
-				SetValue(ItemsSourceProperty, value); 
+			set
+			{
+				SetValue(ItemsSourceProperty, value);
 			}
 		}
 
 		/// <summary>
 		/// The row height property.
 		/// </summary>
-		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(SinglePicker), 30);
+		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(BasePicker), 30);
 		/// <summary>
 		/// Gets or sets the height of the row.
 		/// </summary>
@@ -56,7 +55,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The index property.
 		/// </summary>
-		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(SinglePicker), 0, BindingMode.TwoWay);
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(BasePicker), 0, BindingMode.TwoWay);
 		/// <summary>
 		/// Gets or sets the index.
 		/// </summary>
@@ -65,20 +64,6 @@ namespace Forms9Patch
 		{
 			get { return (int)GetValue(IndexProperty); }
 			set { SetValue(IndexProperty, value); }
-		}
-
-		/// <summary>
-		/// The selected item property.
-		/// </summary>
-		public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(SinglePicker), null, BindingMode.TwoWay);
-		/// <summary>
-		/// Gets or sets the selected item.
-		/// </summary>
-		/// <value>The selected item.</value>
-		public object SelectedItem
-		{
-			get { return GetValue(SelectedItemProperty); }
-			set { SetValue(SelectedItemProperty, value); }
 		}
 
 		#endregion
@@ -115,7 +100,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.SinglePicker"/> class.
 		/// </summary>
-		public SinglePicker()
+		public MultiPicker()
 		{
 			Padding = new Thickness(0, 0, 0, 0);
 
@@ -133,8 +118,8 @@ namespace Forms9Patch
 
 			//Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_selectionPadView, new Rectangle(0,0.5,1.0,RowHeight));
 			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_basePicker, new Rectangle(0.5, 0.5, 1.0, 1.0));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperGradient, new Rectangle(0.5,0.0,1.0, 0.4));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerGradient, new Rectangle(0.5,1.0,1.0, 0.4));
+			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperGradient, new Rectangle(0.5, 0.0, 1.0, 0.4));
+			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerGradient, new Rectangle(0.5, 1.0, 1.0, 0.4));
 			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperEdge, new Rectangle(0.5, 0.4, 1.0, 1.0));
 			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerEdge, new Rectangle(0.5, 0.6, 1.0, 1.0));
 
@@ -145,11 +130,9 @@ namespace Forms9Patch
 			_absLayout.Children.Add(_upperGradient);
 			_absLayout.Children.Add(_lowerGradient);
 
-			_basePicker.PositionToSelect = true;
-			_basePicker.SetBinding(BasePicker.ItemsSourceProperty,"ItemsSource");
-			_basePicker.SetBinding(BasePicker.RowHeightProperty,"RowHeight");
-			_basePicker.SetBinding(BasePicker.IndexProperty,"Index");
-			_basePicker.SetBinding(BasePicker.SelectedItemProperty, "SelectedItem");
+			_basePicker.SetBinding(BasePicker.ItemsSourceProperty, "ItemsSource");
+			_basePicker.SetBinding(BasePicker.RowHeightProperty, "RowHeight");
+			_basePicker.SetBinding(BasePicker.IndexProperty, "Index");
 			_basePicker.BindingContext = this;
 
 			//_selectionPadView.SetBinding(ContentProperty, "SelectionPadView");
@@ -174,14 +157,11 @@ namespace Forms9Patch
 				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperGradient, new Rectangle(0.5, 0.0, 1.0, overlayPortion));
 				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerGradient, new Rectangle(0.5, 1.0, 1.0, overlayPortion));
 				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperEdge, new Rectangle(0.5, overlayPortion, 1.0, 1.0));
-				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerEdge, new Rectangle(0.5, 1-overlayPortion, 1.0, 1.0));
+				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerEdge, new Rectangle(0.5, 1 - overlayPortion, 1.0, 1.0));
 
 			}
 		}
-
-
 		#endregion
-
 	}
 }
 
