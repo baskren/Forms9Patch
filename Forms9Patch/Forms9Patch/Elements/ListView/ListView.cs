@@ -23,6 +23,9 @@ namespace Forms9Patch
 		/// </summary>
 		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
 		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
+		/// <summary>
+		/// The item template property.
+		/// </summary>
 		public new Xamarin.Forms.DataTemplateSelector ItemTemplate
 		{
 			get { throw new NotImplementedException(); }
@@ -35,7 +38,7 @@ namespace Forms9Patch
 		/// Gets or sets the item template.
 		/// </summary>
 		/// <value>The item template.</value>
-		public new Forms9Patch.DataTemplateSelector ItemTemplates
+		public Forms9Patch.DataTemplateSelector ItemTemplates
 		{
 			get { return (Forms9Patch.DataTemplateSelector)GetValue(Xamarin.Forms.ListView.ItemTemplateProperty); }
 			private set { 
@@ -694,6 +697,13 @@ namespace Forms9Patch
 			return RendererScrollBy (delta);
 		}
 
+		/// <summary>
+		/// Scrolls to.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		/// <param name="group">Group.</param>
+		/// <param name="position">Position.</param>
+		/// <param name="animated">If set to <c>true</c> animated.</param>
 		public new void ScrollTo(object item, object group, ScrollToPosition position, bool animated)
 		{
 			var itemGroup = _baseItemsSource.ItemWithSource(group) as Group;
@@ -704,6 +714,12 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// Scrolls to.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		/// <param name="position">Position.</param>
+		/// <param name="animated">If set to <c>true</c> animated.</param>
 		public new void ScrollTo(object item, ScrollToPosition position, bool animated)
 		{
 			var itemItem = _baseItemsSource.ItemWithSource(item);

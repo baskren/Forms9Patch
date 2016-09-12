@@ -34,9 +34,7 @@ namespace Forms9Patch
 		public IEnumerable ItemsSource
 		{
 			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-			set { 
-				SetValue(ItemsSourceProperty, value); 
-			}
+			set { SetValue(ItemsSourceProperty, value); }
 		}
 
 		/// <summary>
