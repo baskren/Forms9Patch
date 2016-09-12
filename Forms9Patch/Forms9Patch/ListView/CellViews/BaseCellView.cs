@@ -122,11 +122,16 @@ namespace Forms9Patch
 				item.PropertyChanged += OnItemPropertyChanged;
 				UpdateUnBoundProperties();
 			}
+			else
+				System.Diagnostics.Debug.WriteLine("");
 			var type = BindingContext?.GetType ();
 			if (type == typeof(NullItem) || type == typeof(BlankItem))
 				Content.BindingContext = item;
 			else
+			{
 				Content.BindingContext = item?.Source;
+				System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
+			}
 			base.OnBindingContextChanged();
 		}
 

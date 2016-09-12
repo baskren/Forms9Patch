@@ -14,7 +14,8 @@ namespace Bc3.Forms.iOS
 		public Tuple<int, int> IndexPathAtCenter(Xamarin.Forms.ListView listView)
 		{
 			var renderer = Renderer(listView);
-			var center = renderer.Control.Bounds.ToRectangle().Center;
+			//var center = renderer.Control.Bounds.ToRectangle().Center;
+			var center = new Point(renderer.Control.Bounds.Width/2.0, renderer.Control.Bounds.Height/2.0);
 			//var indexPath = renderer.Control.IndexPathForRowAtPoint(new CoreGraphics.CGPoint(center.X, center.Y));
 			//return new Tuple<int, int>(indexPath.Section, indexPath.Row);
 			return IndexPathAtPoint(listView, center);
@@ -57,9 +58,10 @@ namespace Bc3.Forms.iOS
 					return new Tuple<int, int>(ip.Section, ip.Row);
 				}
 			}
+			return null;
 			//System.Diagnostics.Debug.WriteLine("");
-			var indexPath = renderer.Control.IndexPathForRowAtPoint(point);
-			return new Tuple<int, int>(indexPath.Section, indexPath.Row);
+			//var indexPath = renderer.Control.IndexPathForRowAtPoint(point);
+			//return new Tuple<int, int>(indexPath.Section, indexPath.Row);
 		}
 
 		public List<Tuple<int, int>> IndexPathsOfVisibleCells(Xamarin.Forms.ListView listView)

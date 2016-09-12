@@ -321,18 +321,32 @@ namespace Forms9Patch
 			}
 
 			var children = string.IsNullOrWhiteSpace (propertyName) ? sourceObject : sourceObject.GetPropertyValue (propertyName);
-			var iEnumerable = children as IEnumerable;
-			if (iEnumerable != null) {
-				// groups
-				VerifyContentType (GroupContentType.Lists);
-				return new Group (sourceObject, _subPropertyMap, VisiblityTest);
+			if (!(children is string))
+			{
+				var iEnumerable = children as IEnumerable;
+				if (iEnumerable != null)
+				{
+					// groups
+					VerifyContentType(GroupContentType.Lists);
+					return new Group(sourceObject, _subPropertyMap, VisiblityTest);
+				}
 			}
 			// items
 			VerifyContentType(GroupContentType.Objects);
-			var objType = sourceObject.GetType ();
-			var itemType = typeof(Item<>).MakeGenericType (new[] { objType });
-			var item = (Item)Activator.CreateInstance (itemType);
-			item.Source = sourceObject;
+			Item item;
+			if (sourceObject == null)
+				item = new Item<object>();
+			else
+			{
+				var objType = sourceObject.GetType();
+				var itemType = typeof(Item<>).MakeGenericType(new[] { objType });
+				item = (Item)Activator.CreateInstance(itemType);
+				item.Source = sourceObject;
+			}
+			item.SeparatorIsVisible = SeparatorIsVisible;
+			item.SeparatorColor = SeparatorColor;
+			item.BackgroundColor = BackgroundColor;
+			item.SelectedBackgroundColor = SelectedBackgroundColor;
 			return item;
 		}
 

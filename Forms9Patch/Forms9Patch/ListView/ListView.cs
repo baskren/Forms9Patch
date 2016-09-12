@@ -347,6 +347,8 @@ namespace Forms9Patch
 
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
+
+			ItemTemplate = new Forms9Patch.DataTemplateSelector();
 		}
 
 		/// <summary>
@@ -620,7 +622,7 @@ namespace Forms9Patch
 		/// </summary>
 		public event PropertyChangingEventHandler ItemPropertyChanging;
 		void OnItemPropertyChanging(object sender, PropertyChangingEventArgs e) {
-			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanging");
+			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanging");
 			ItemPropertyChanging?.Invoke(sender, e);
 		}
 
@@ -629,7 +631,7 @@ namespace Forms9Patch
 		/// </summary>
 		public event PropertyChangedEventHandler ItemPropertyChanged;
 		void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e) {
-			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
+			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
 			ItemPropertyChanged?.Invoke(sender, e);
 		}
 		#endregion

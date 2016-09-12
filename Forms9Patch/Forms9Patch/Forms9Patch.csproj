@@ -101,7 +101,7 @@
     <Compile Include="ListView\CellViews\GroupHeaderView.cs" />
     <Compile Include="ListView\Items\BlankItem.cs" />
     <Compile Include="ListView\EventArgs\DragEventArgs.cs" />
-    <Compile Include="ListView\CellViews\NullCellView.cs" />
+    <Compile Include="ListView\CellViews\NullItemCellView.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Elements\ColorGradientBox.cs" />
     <Compile Include="ListView\Enums\HoverOverAlignment.cs" />
@@ -110,6 +110,7 @@
     <Compile Include="ListView\EventArgs\SelectedItemChangedEventArgs.cs" />
     <Compile Include="ListView\IListViewExtensionService.cs" />
     <Compile Include="ListView\ListViewExtensions.cs" />
+    <Compile Include="ListView\CellViews\TextCellViewContent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

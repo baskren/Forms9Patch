@@ -13,25 +13,34 @@ namespace Forms9Patch
 	{
 		readonly Dictionary <Type, DataTemplate> _cellTemplates = new Dictionary<Type, DataTemplate>();
 		readonly Dictionary <Type, Type> _contentTypes = new Dictionary<Type, Type> ();
+		readonly DataTemplate _unknownTemplate;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector"/> class.
 		/// </summary>
 		public DataTemplateSelector() {
 			//Add (typeof(NullItem), typeof (NullCellView));
-			var viewType = typeof(NullCellView);
-			var itemType = typeof(NullItem);
+			var viewType = typeof(NullItemCellView);
 			Type cellType = typeof(Cell<>).MakeGenericType (new[] { viewType });
 			var template = new DataTemplate (cellType);
+			var itemType = typeof(NullItem);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
 
 			viewType = typeof(BlankCellView);
-			itemType = typeof(BlankItem);
 			cellType = typeof(Cell<>).MakeGenericType (new[] { viewType });
 			template = new DataTemplate (cellType);
+			itemType = typeof(BlankItem);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
+
+			viewType = typeof(TextCellViewContent);
+			cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
+			template = new DataTemplate(cellType);
+			itemType = typeof(Item<string>);
+			_cellTemplates[itemType] = template;
+			_contentTypes[itemType] = viewType;
+			_unknownTemplate = template;
 		}
 
 		/// <summary>
@@ -58,24 +67,38 @@ namespace Forms9Patch
 		/// Triggered when a Forms9Patch.ListView needs to create a view template for an item.
 		/// </summary>
 		/// <returns>The select template.</returns>
-		/// <param name="item">Item.</param>
+		/// <param name="obj">Item.</param>
 		/// <param name="container">Container.</param>
-		protected override DataTemplate OnSelectTemplate (object item, BindableObject container)
+		protected override DataTemplate OnSelectTemplate (object obj, BindableObject container)
 		{
 			//var group = item as Group;
 			//Type itemType = group?.Source.GetType () ?? item.GetType ();
-			Type itemType = ((item as Item)?.Source ?? item).GetType();
-			//var result = _cellTemplates.ContainsKey (itemType) ? _cellTemplates [itemType] : _cellTemplates[typeof(NullItem)];
-			return TemplateForType (itemType);
+			//Type itemType = ((item as Item)?.Source ?? item).GetType();
+			var item = obj as Item;
+			if (item != null)
+			{
+				Type itemType = item.GetType();
+				if (_cellTemplates.ContainsKey(itemType))
+					return _cellTemplates[itemType];
+				var source = item.Source;
+				if (source != null)
+					return TemplateForType(source.GetType());
+				return _cellTemplates[typeof(BlankItem)];
+			}
+			throw new KeyNotFoundException("No data template found.  item=["+item+"]  item.source=["+(item?.Source)+"]");
 		}
 
 		DataTemplate TemplateForType(Type type) {
 			if (_cellTemplates.ContainsKey (type))
 				return _cellTemplates [type];
 			var baseType = type.GetTypeInfo ().BaseType;
-			if (baseType == null || baseType == typeof(System.Object))
-				return _cellTemplates[typeof(NullItem)];
-			return TemplateForType (baseType);
+			//if (baseType == null || baseType == typeof(System.Object))
+			//return _cellTemplates[typeof(NullItem)];
+			if (baseType == null)
+				return _cellTemplates[typeof(BlankItem)];
+			else
+				return _unknownTemplate;
+			//return TemplateForType (baseType);
 		}
 
 		internal BaseCellView MakeContentView(Item item) {

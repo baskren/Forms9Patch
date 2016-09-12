@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Null cell view: DO NOT USE.  Used internally by Forms9Patch.ListView to display null items in a ListView
 	/// </summary>
-	class NullCellView : BaseCellView
+	class NullItemCellView : BaseCellView
 	{
 
 		readonly ColorGradientBox _upperEdge = new ColorGradientBox {
@@ -32,7 +32,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// DO NOT USE: Initializes a new instance of the <see cref="T:Forms9Patch.NullCellView"/> class.
 		/// </summary>
-		public NullCellView () {
+		public NullItemCellView () {
 			//var filler = new BoxView ();
 			//filler.BindingContext = this;
 			//filler.SetBinding (VisualElement.HeightRequestProperty,"HeightRequest",BindingMode.OneWay,new RequestedHeightConverter());
