@@ -17,14 +17,30 @@ namespace Forms9Patch
 		#region Properties
 
 		#region Item Source / CellTemplates
+		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
+		/// <summary>
+		/// The item template property.
+		/// </summary>
+		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
+		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
+		public new Xamarin.Forms.DataTemplateSelector ItemTemplate
+		{
+			get { throw new NotImplementedException(); }
+			set { throw new NotImplementedException(); }
+		}
+
+
+
 		/// <summary>
 		/// Gets or sets the item template.
 		/// </summary>
 		/// <value>The item template.</value>
-		public new DataTemplateSelector ItemTemplate
+		public new Forms9Patch.DataTemplateSelector ItemTemplates
 		{
-			get { return (DataTemplateSelector)GetValue(ItemTemplateProperty); }
-			set { SetValue(ItemTemplateProperty, value); }
+			get { return (Forms9Patch.DataTemplateSelector)GetValue(Xamarin.Forms.ListView.ItemTemplateProperty); }
+			private set { 
+				SetValue(Xamarin.Forms.ListView.ItemTemplateProperty, value); 
+			}
 		}
 
 		/// <summary>
@@ -323,13 +339,15 @@ namespace Forms9Patch
 			{
 				base.SelectedItem = null;
 
-				System.Diagnostics.Debug.WriteLine("Tapped location=["+e.Touches[0]+"]");
+				//System.Diagnostics.Debug.WriteLine("Tapped location=["+e.Touches[0]+"]");
 				if (e.Touches.Count() == 1)
 				{
 					var indexPath = this.IndexPathAtPoint(e.Touches[0]);
+					if (indexPath == null)
+						return;
 					if (indexPath.Item2 < 0)
 						return;
-					System.Diagnostics.Debug.WriteLine("indexPath=["+indexPath+"]");
+					//System.Diagnostics.Debug.WriteLine("indexPath=["+indexPath+"]");
 					Item item=null;
 					Group group = null;
 					if (IsGroupingEnabled)
@@ -348,7 +366,7 @@ namespace Forms9Patch
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 
-			ItemTemplate = new Forms9Patch.DataTemplateSelector();
+			ItemTemplates = new Forms9Patch.DataTemplateSelector();
 		}
 
 		/// <summary>
@@ -674,6 +692,23 @@ namespace Forms9Patch
 		public bool ScrollBy(double delta) {
 			return RendererScrollBy (delta);
 		}
+
+		public new void ScrollTo(object item, object group, ScrollToPosition position, bool animated)
+		{
+			var itemGroup = _baseItemsSource.ItemWithSource(group) as Group;
+			if (itemGroup != null)
+			{
+				var itemItem = itemGroup.ItemWithSource(item);
+				base.ScrollTo(itemItem,itemGroup,position,animated);
+			}
+		}
+
+		public new void ScrollTo(object item, ScrollToPosition position, bool animated)
+		{
+			var itemItem = _baseItemsSource.ItemWithSource(item);
+			if (itemItem != null)
+				base.ScrollTo(itemItem, position, animated);
+		}
 		#endregion
 
 
@@ -725,7 +760,7 @@ namespace Forms9Patch
 				_baseItemsSource.DeepSwapItems (_longPress.Item, _nullItem);
 
 				_longPress.Item.SeparatorIsVisible = false;
-				var contentView = ItemTemplate.MakeContentView (_longPress.Item);
+				var contentView = ItemTemplates.MakeContentView (_longPress.Item);
 				contentView.WidthRequest = _nativeFrame.Width;
 				contentView.HeightRequest = _nativeFrame.Height;
 				contentView.BackgroundColor = Color.Transparent;
@@ -788,7 +823,7 @@ namespace Forms9Patch
 				ScrollEnabled = true;
 
 				// next two lines are for Android - without them, if you try to drag the same cell twice, the ModalPopup content is blank.
-				var blankView = ItemTemplate.MakeContentView (_blankItem);
+				var blankView = ItemTemplates.MakeContentView (_blankItem);
 				_popup.Content = blankView;
 
 				_popup.IsVisible = false;

@@ -130,7 +130,7 @@ namespace Forms9Patch
 			else
 			{
 				Content.BindingContext = item?.Source;
-				System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
+				//System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
 			}
 			base.OnBindingContextChanged();
 		}
