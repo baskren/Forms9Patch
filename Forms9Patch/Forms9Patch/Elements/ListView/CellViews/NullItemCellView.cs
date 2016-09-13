@@ -42,6 +42,7 @@ namespace Forms9Patch
 			_layout.Children.Add (_lowerEdge);
 			SeparatorHeight = 0;
 			Content = _layout;
+			BackgroundColor = Color.Transparent;
 		}
 
 		/// <summary>

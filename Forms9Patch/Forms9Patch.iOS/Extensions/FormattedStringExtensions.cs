@@ -9,7 +9,7 @@ namespace Forms9Patch.iOS
 	static class FormattedStringExtensions
 	{
 		internal static NSAttributedString ToNSAttributedString (this Label label, UILabel control, double fontSize=-1, EllipsePlacement ellipsePlacement = EllipsePlacement.None, int secondToLastEnd = -1, int lastLineStart = 0, int lastLineEnd = -1, int startLastVisible = -1, int midLastVisible = -1, bool twice=false) {
-			BaseFormattedString formattedString = label.FormattedText;
+			F9PFormattedString formattedString = label.F9PFormattedString;
 
 			if (formattedString == null|| formattedString == null || formattedString.Text.Length < 1)
 				return null;

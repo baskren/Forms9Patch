@@ -10,14 +10,14 @@ namespace Forms9Patch
 	/// MarkdownLabel Formatted string.
 	/// </summary>
 	[Xamarin.Forms.ContentProperty ("Text")]
-	abstract class BaseFormattedString : INotifyPropertyChanged
+	abstract class F9PFormattedString : INotifyPropertyChanged
 	{
 		internal ObservableCollection<Span> _spans; 
 
 		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the current <see cref="Forms9Patch.BaseFormattedString"/>.
+		/// Returns a <see cref="System.String"/> that represents the current <see cref="Forms9Patch.F9PFormattedString"/>.
 		/// </summary>
-		/// <returns>A <see cref="System.String"/> that represents the current <see cref="Forms9Patch.BaseFormattedString"/>.</returns>
+		/// <returns>A <see cref="System.String"/> that represents the current <see cref="Forms9Patch.F9PFormattedString"/>.</returns>
 		public override string ToString() {
 			return Text;
 		}
@@ -36,9 +36,9 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.BaseFormattedString"/> class.
+		/// Initializes a new instance of the <see cref="Forms9Patch.F9PFormattedString"/> class.
 		/// </summary>
-		protected BaseFormattedString() {
+		protected F9PFormattedString() {
 			Text = "";
 			_spans = new ObservableCollection<Span> ();
 			_spans.CollectionChanged += OnCollectionChanged;
@@ -46,14 +46,14 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.BaseFormattedString"/> class.
+		/// Initializes a new instance of the <see cref="Forms9Patch.F9PFormattedString"/> class.
 		/// </summary>
 		/// <param name="s">S.</param>
-		protected BaseFormattedString(string s) : this() {
+		protected F9PFormattedString(string s) : this() {
 			Text = s;
 		}
 
-		internal BaseFormattedString(BaseFormattedString fs) {
+		internal F9PFormattedString(F9PFormattedString fs) {
 			_string = fs._string;
 			foreach (var span in _spans) {
 				var type = span.GetType ();
@@ -62,7 +62,7 @@ namespace Forms9Patch
 			}
 		}
 
-		internal  BaseFormattedString(Xamarin.Forms.FormattedString formsFormattedString) {
+		internal  F9PFormattedString(Xamarin.Forms.FormattedString formsFormattedString) {
 			const int index = 0;
 			foreach (var span in formsFormattedString.Spans) {
 				Text += span.Text;
@@ -76,7 +76,7 @@ namespace Forms9Patch
 
 		#region Operators
 		/// <param name="formatted">Formatted.</param>
-		public static explicit operator string (BaseFormattedString formatted) {
+		public static explicit operator string (F9PFormattedString formatted) {
 			return formatted?.Text;
 		}
 

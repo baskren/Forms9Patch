@@ -8,7 +8,7 @@ namespace Forms9Patch.Droid
 {
 	static class FormattedStringExtensions
 	{
-		public static SpannableStringBuilder ToSpannableString(this BaseFormattedString formattedString, EllipsePlacement ellipsePlacement=EllipsePlacement.None, int secondToLastEnd=-1, int lastLineStart=0, int lastLineEnd=-1, int startLastVisible=-1, int midLastVisible=-1) {
+		public static SpannableStringBuilder ToSpannableString(this F9PFormattedString formattedString, EllipsePlacement ellipsePlacement=EllipsePlacement.None, int secondToLastEnd=-1, int lastLineStart=0, int lastLineEnd=-1, int startLastVisible=-1, int midLastVisible=-1) {
 			//BaseFormattedString formattedString = label.FormattedText;
 			if (formattedString == null|| formattedString.Text == null || formattedString.Text.Length < 1)
 				return null;

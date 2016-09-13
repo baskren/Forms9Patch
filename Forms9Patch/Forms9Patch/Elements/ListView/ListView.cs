@@ -17,15 +17,15 @@ namespace Forms9Patch
 		#region Properties
 
 		#region Item Source / CellTemplates
-		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
 		/// <summary>
 		/// The item template property.
 		/// </summary>
+		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
 		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
-		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
 		/// <summary>
 		/// The item template property.
 		/// </summary>
+		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
 		public new Xamarin.Forms.DataTemplateSelector ItemTemplate
 		{
 			get { throw new NotImplementedException(); }
@@ -78,23 +78,42 @@ namespace Forms9Patch
 		#endregion
 
 		#region Cell decoration
+
+		#region Separator appearance
 		/// <summary>
 		/// The separator visibility property.
 		/// </summary>
-		public static new readonly BindableProperty SeparatorVisibilityProperty = BindableProperty.Create ("Forms9Patch.ListView.SeparatorVisibility", typeof(SeparatorVisibility), typeof(ListView), default(SeparatorVisibility));
+		[Obsolete("Use SeparatorIsVisibleProperty")]
+		public static new readonly BindableProperty SeparatorVisibilityProperty = BindableProperty.Create("SeparatorVisibility", typeof(SeparatorVisibility), typeof(ListView), SeparatorVisibility.Default);
+		/// <summary>
+		/// Gets the separator visibility.
+		/// </summary>
+		/// <value>The separator visibility.</value>
+		[Obsolete("Use SeparatorIsVisible")]
+		public new SeparatorVisibility SeparatorVisibility
+		{
+			get { return (SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
+			private set { SetValue(SeparatorVisibilityProperty, value); }
+		}
+
+
+		/// <summary>
+		/// The separator visibility property.
+		/// </summary>
+		public static readonly BindableProperty SeparatorIsVisibleProperty = Item.SeparatorIsVisibleProperty;
 		/// <summary>
 		/// Gets or sets the separator visibility.
 		/// </summary>
 		/// <value>The separator visibility.</value>
-		public new SeparatorVisibility SeparatorVisibility {
-			get { return (SeparatorVisibility)GetValue (SeparatorVisibilityProperty); }
-			set { SetValue (SeparatorVisibilityProperty, value); }
+		public bool SeparatorIsVisible {
+			get { return (bool)GetValue (SeparatorIsVisibleProperty); }
+			set { SetValue (SeparatorIsVisibleProperty, value); }
 		}
 
 		/// <summary>
 		/// The separator color property.
 		/// </summary>
-		public static new readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("Forms9Patch.ListView.SeparatorColor", typeof(Color), typeof(ListView), Color.Gray);
+		public static new readonly BindableProperty SeparatorColorProperty = Item.SeparatorColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the separator.
 		/// </summary>
@@ -102,13 +121,18 @@ namespace Forms9Patch
 		public new Color SeparatorColor
 		{
 			get { return (Color)GetValue(SeparatorColorProperty); }
-			set { SetValue(SeparatorColorProperty, value); }
+			set { 
+				SetValue(SeparatorColorProperty, value); 
+				System.Diagnostics.Debug.WriteLine("ListView.SeparatorColor["+value+"]");
+			}
 		}
+		#endregion
 
+		#region Background appearance
 		/// <summary>
 		/// The cell background color property.
 		/// </summary>
-		public static readonly BindableProperty CellBackgroundColorProperty = BindableProperty.Create ("CellBackgroundColor", typeof(Color), typeof(ListView), Color.Transparent);
+		public static readonly BindableProperty CellBackgroundColorProperty = Item.CellBackgroundColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the cell background.
 		/// </summary>
@@ -121,7 +145,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The selected cell background color property.
 		/// </summary>
-		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ListView), Color.FromRgba(200, 200, 200, 255));
+		public static readonly BindableProperty SelectedCellBackgroundColorProperty = Item.SelectedCellBackgroundColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the selected cell background.
 		/// </summary>
@@ -134,11 +158,85 @@ namespace Forms9Patch
 		}
 		#endregion
 
+		#region Accessory appearance
+		/// <summary>
+		/// The accessory position property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryPositionProperty = Item.AccessoryPositionProperty;
+		/// <summary>
+		/// Gets or sets the accessory position.
+		/// </summary>
+		/// <value>The accessory position.</value>
+		public AccessoryPosition AccessoryPosition
+		{
+			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
+			set { SetValue(AccessoryPositionProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory text property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryTextProperty = Item.AccessoryTextProperty;
+		/// <summary>
+		/// Gets or sets the accessory text.
+		/// </summary>
+		/// <value>The accessory text.</value>
+		public Func<IItem, string> AccessoryText
+		{
+			get { return (Func<IItem, string>)GetValue(AccessoryTextProperty); }
+			set { SetValue(AccessoryTextProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory width property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryWidthProperty = Item.AccessoryWidthProperty;
+		/// <summary>
+		/// Gets or sets the width of the accessory.
+		/// </summary>
+		/// <value>The width of the accessory.</value>
+		public double AccessoryWidth
+		{
+			get { return (double)GetValue(AccessoryWidthProperty); }
+			set { SetValue(AccessoryWidthProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory horizonatal alignment property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = Item.AccessoryHorizonatalAlignmentProperty;
+		/// <summary>
+		/// Gets or sets the accessory horizontal alignment.
+		/// </summary>
+		/// <value>The accessory horizontal alignment.</value>
+		public TextAlignment AccessoryHorizontalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
+			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory vertical alignment property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = Item.AccessoryVerticalAlignmentProperty;
+		/// <summary>
+		/// Gets or sets the accessory vertical alignment.
+		/// </summary>
+		/// <value>The accessory vertical alignment.</value>
+		public TextAlignment AccessoryVerticalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
+			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+		}
+		#endregion
+
+		#endregion
+
 		#region Item Selection
 		/// <summary>
 		/// The backing store for the ListViews's GroupToggleBehavior property.
 		/// </summary>
-		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialSegmentedControl), GroupToggleBehavior.Radio);
+		public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(ListView), GroupToggleBehavior.Radio);
 		/// <summary>
 		/// Gets or sets the ListViews's GroupToggle behavior.
 		/// </summary>
@@ -234,7 +332,9 @@ namespace Forms9Patch
 				switch (GroupToggleBehavior)
 				{
 					case GroupToggleBehavior.None:
+						_internalAddRemove = true;
 						SelectedItems.Clear();
+						_internalAddRemove = false;
 						SelectedItem = null;
 						if (_selectedF9PItem != null)
 							_selectedF9PItem.IsSelected = false;
@@ -319,7 +419,7 @@ namespace Forms9Patch
 
 		void init() {
 			//this.DisableSelection();
-			Margin = new Thickness(5, 0, 5, 0);
+			//Margin = new Thickness(5, 0, 5, 0);
 
 			id = Count++;
 			HasUnevenRows = false;
@@ -370,7 +470,16 @@ namespace Forms9Patch
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 
-			ItemTemplates = new Forms9Patch.DataTemplateSelector();
+			ItemTemplates = new DataTemplateSelector();
+			/*
+			Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+			{
+				System.Diagnostics.Debug.WriteLine("\tbefore BaseItemsSource.AccessoryPosition=[" + BaseItemsSource.AccessoryPosition + "]");
+				BaseItemsSource.AccessoryPosition = AccessoryPosition.Start;
+				System.Diagnostics.Debug.WriteLine("\tafter BaseItemsSource.AccessoryPosition=[" + BaseItemsSource.AccessoryPosition + "]");
+				return false;
+			});
+			*/
 		}
 
 		/// <summary>
@@ -400,8 +509,11 @@ namespace Forms9Patch
 		#region SelectItems management
 		// Assumption: SelectedItem(s) must be set AFTER ItemsSource and ItemsSourceMap has been set.  Otherwise, selected items will be culled
 
+		bool _internalAddRemove = false;
+
 		void AddSelection(Item f9pItem, object sourceItem)
 		{
+			_internalAddRemove = true;
 			if (f9pItem == null || sourceItem == null)
 				throw new InvalidOperationException("Cannot select null item");
 			f9pItem.IsSelected = true;
@@ -412,6 +524,7 @@ namespace Forms9Patch
 				SelectedItem = sourceItem;
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && !SelectedItems.Contains(sourceItem))
 				SelectedItems.Add(sourceItem);
+			_internalAddRemove = false;
 		}
 
 		void AddSelectedItem(Item f9pItem)
@@ -432,6 +545,7 @@ namespace Forms9Patch
 
 		void RemoveSelection(Item f9pItem, object sourceItem)
 		{
+			_internalAddRemove = true;
 			if (f9pItem != null)
 			{
 				f9pItem.IsSelected = false;
@@ -445,6 +559,7 @@ namespace Forms9Patch
 			}
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && sourceItem != null && SelectedItems.Contains(sourceItem) )
 				SelectedItems.Remove(sourceItem);
+			_internalAddRemove = false;
 		}
 
 		void RemoveSelectedItem(Item f9pItem)
@@ -484,6 +599,8 @@ namespace Forms9Patch
 
 		void SelectedItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
+			if (_internalAddRemove)
+				return;
 			switch (e.Action)
 			{
 				case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
@@ -561,13 +678,16 @@ namespace Forms9Patch
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
 			base.OnPropertyChanged (propertyName);
+			/*
 			if (propertyName == SeparatorColorProperty.PropertyName
 				|| propertyName == SeparatorVisibilityProperty.PropertyName
 				|| propertyName == CellBackgroundColorProperty.PropertyName
 				|| propertyName == SelectedCellBackgroundColorProperty.PropertyName
 			   )
 				UpdateCellProperties();
-			else if (propertyName == ItemsSourceProperty.PropertyName)
+
+			else*/
+			if (propertyName == ItemsSourceProperty.PropertyName)
 				UpdateItemsSource();
 			else if (propertyName == SourcePropertyMapProperty.PropertyName)
 				UpdateItemsSource();
@@ -578,62 +698,26 @@ namespace Forms9Patch
 				AddSelectedSourceItems(SelectedItems);
 				SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 			}
+			else if (propertyName == AccessoryPositionProperty.PropertyName)
+				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanged(" + propertyName + ")" + "\tValue=[" + AccessoryPosition + "]");
+			else if (propertyName == AccessoryTextProperty.PropertyName)
+				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanged(" + propertyName + ")" + "\tValue=[" + AccessoryText+ "]");
+
 		}
 
 		void UpdateItemsSource()
 		{
-			// be ready to set / reset IsGroupingEnabled as items are added or removed
-			/* need to use Group to determine if grouping is enabled.
-			var observableCollection = value as INotifyCollectionChanged;
-			if (observableCollection != null) {
-				observableCollection.CollectionChanged += (sender, e) => {
-					switch (e.Action) {
-					case NotifyCollectionChangedAction.Add:
-						if (e.NewItems.Count==ItemsSource.Count) 
-							IsGroupingEnabled = value [0] is IList;
-						break;
-					case NotifyCollectionChangedAction.Move:
-						break;
-					case NotifyCollectionChangedAction.Remove:
-						IsGroupingEnabled &= ItemsSource.Count > 0;
-						break;
-					case NotifyCollectionChangedAction.Replace:
-						if (ItemsSource.Count==1)
-							IsGroupingEnabled = value [0] is IList;
-						break;
-					case NotifyCollectionChangedAction.Reset:
-						if (ItemsSource.Count > 0)
-							IsGroupingEnabled = value [0] is IList;
-						break;
-					}
-				};
-			}
-			*/
-			// This listView.ItemsSource is a target, so validity testing is to facility drag/drop of items
-
-			// unselected everything when Source is changed
-
 			if (ItemsSource == null)
 				return;
 			//System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
-			_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
+			//_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
+			_baseItemsSource = new Group();
+			_baseItemsSource.BindingContext = this;
+			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
+			_baseItemsSource.Source = ItemsSource;
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
 			ReevaluateSelectedItems();
-			UpdateCellProperties();
-		}
-
-		void UpdateCellProperties()
-		{
-			if (_baseItemsSource != null)
-			{
-				//System.Diagnostics.Debug.WriteLine("UpdateCellProperties");
-				_baseItemsSource.SeparatorIsVisible = SeparatorVisibility != SeparatorVisibility.None;
-				_baseItemsSource.BackgroundColor = CellBackgroundColor;
-				_baseItemsSource.SeparatorColor = SeparatorColor;
-				_baseItemsSource.SelectedBackgroundColor = SelectedCellBackgroundColor;
-				//  System.Diagnostics.Debug.WriteLine("SeparatorColor=["+_baseItemsSource.SeparatorColor+"] SeparatorVisibility=["+_baseItemsSource.SeparatorIsVisible+"]");
-			}
 		}
 		#endregion
 
@@ -771,7 +855,7 @@ namespace Forms9Patch
 
 				// need a null item to fill the void 
 				_nullItem.RequestedHeight = _nativeFrame.Height;
-				_nullItem.BackgroundColor = BackgroundColor;
+				_nullItem.CellBackgroundColor = BackgroundColor;
 
 				_baseItemsSource.NotifySourceOfChanges = false;
 				_baseItemsSource.DeepSwapItems (_longPress.Item, _nullItem);

@@ -35,7 +35,7 @@ namespace Forms9Patch.iOS
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
-			string text = Element.Text ?? Element.FormattedText?.Text;
+			string text = Element.Text ?? Element.F9PFormattedString?.Text;
 			if (string.IsNullOrEmpty(text))
 				return new SizeRequest(Size.Zero);
 
@@ -270,7 +270,7 @@ namespace Forms9Patch.iOS
 		nfloat DescendingWidthFit(UIFont font, NSString text, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
 		{
 			nfloat result;
-			var unmarkedText = ((HTMLMarkupString)Element.FormattedText)?.UnmarkedText ?? Element.HtmlText ?? text;
+			var unmarkedText = ((HTMLMarkupString)Element.F9PFormattedString)?.UnmarkedText ?? Element.HtmlText ?? text;
 			bool twice = (unmarkedText.Length == 1);
 			for (result = start; result > min; result -= step)
 			{
@@ -320,7 +320,7 @@ namespace Forms9Patch.iOS
 		nfloat DescendingZeroLinesFit(UIFont font, NSString text, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
 		{
 			nfloat result;
-			var unmarkedText = ((HTMLMarkupString)Element.FormattedText)?.UnmarkedText ?? Element.HtmlText ?? text;
+			var unmarkedText = ((HTMLMarkupString)Element.F9PFormattedString)?.UnmarkedText ?? Element.HtmlText ?? text;
 			bool twice = (unmarkedText.Length == 1);
 			for (result = start; result > min; result -= step)
 			{
@@ -481,7 +481,7 @@ namespace Forms9Patch.iOS
 				UpdateText();
 			else if (e.PropertyName == Label.TextProperty.PropertyName)
 				UpdateText();
-			else if (e.PropertyName == Xamarin.Forms.Label.FormattedTextProperty.PropertyName)
+			else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
 				UpdateText();
 		}
 
@@ -509,7 +509,7 @@ namespace Forms9Patch.iOS
 			Control.Font = Element.ToUIFont();
 			var color = (Color)Element.GetValue(Label.TextColorProperty);
 			Control.TextColor = color.ToUIColor(UIColor.Black);
-			if (Element.FormattedText != null)
+			if (Element.F9PFormattedString != null)
 			{
 				if (Settings.IsLicenseValid || Element._id < 4)
 					Control.AttributedText = Element.ToNSAttributedString(Control);

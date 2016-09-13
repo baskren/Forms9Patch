@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// FormsDragNDropListView Item.
 	/// </summary>
-	abstract class Item : BindableObject {
+	abstract class Item : BindableObject, IItem {
 
 
 		#region Fields
@@ -17,53 +17,16 @@ namespace Forms9Patch
 
 		#region Properties
 
-		/*
-		string _key;
-		public string Key {
-			get { return _key; }
-			set { 
-				if (debugProperties) 
-					System.Diagnostics.Debug.WriteLine ("Key: update from ["+_key+"] to [" + value + "]");
-				_key = value;
-			}
-		}
-
-		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Item), default(string));
-		public string Title {
-			get { return (string)GetValue(TitleProperty); }
-			set { 
-				if (debugProperties) 
-					System.Diagnostics.Debug.WriteLine ("Title: update from ["+(string)GetValue(TitleProperty)+"] to [" + value + "]");
-				if (Title != value)
-					SetValue (TitleProperty, value); 
-			}
-		}
-
-		public static readonly BindableProperty HelpProperty  = BindableProperty.Create("Help",  typeof(string), typeof(Item), default(string));
-		public string Help {
-			get { return (string)GetValue(HelpProperty); }
-			set { 
-				if (debugProperties) System.Diagnostics.Debug.WriteLine ("Help: update from ["+(string)GetValue(HelpProperty)+"] to [" + value + "]");
-				if (Help != value)
-					SetValue (HelpProperty, value);
-			}
-		}
-		*/
-
-		/*
-		public static readonly BindableProperty IsVisibleProperty  = BindableProperty.Create("IsVisible",  typeof(bool), typeof(Item), true);
-		public bool IsVisible {
-			get { return (bool)GetValue(IsVisibleProperty); }
-			internal set { SetValue (IsVisibleProperty, value); }
-		}
-		*/
-
-		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(Item), false);
+		#region Separator
+		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(Item), true);
 		public bool SeparatorIsVisible {
 			get { 
 				return (bool)GetValue(SeparatorIsVisibleProperty); 
 			}
-			internal set { SetValue (SeparatorIsVisibleProperty, value); }
+			internal set { 
+				SetValue (SeparatorIsVisibleProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SeparatorIsVisible=["+value+"]");
+			}
 		}		
 
 		public static readonly BindableProperty SeparatorColorProperty  = BindableProperty.Create("SeparatorColor",  typeof(Color), typeof(Item), Color.FromRgba(0,0,0,0.12));
@@ -71,13 +34,14 @@ namespace Forms9Patch
 			get { return (Color)GetValue(SeparatorColorProperty); }
 			internal set { 
 				SetValue (SeparatorColorProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SeparatorColor=["+value+"]");
 			}
 		}
 
 		/// <summary>
 		/// The separator height property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(Item), -1.0);
+		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(Item), 1.0);
 		/// <summary>
 		/// Gets or sets the height of the separator.
 		/// </summary>
@@ -85,7 +49,10 @@ namespace Forms9Patch
 		public double SeparatorHeight
 		{
 			get { return (double)GetValue(SeparatorHeightProperty); }
-			set { SetValue(SeparatorHeightProperty, value); }
+			set { 
+				SetValue(SeparatorHeightProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SeparatorHeight=["+value+"]");
+			}
 		}
 
 		/// <summary>
@@ -99,7 +66,10 @@ namespace Forms9Patch
 		public double SeparatorLeftIndent
 		{
 			get { return (double)GetValue(SeparatorLeftIndentProperty); }
-			set { SetValue(SeparatorLeftIndentProperty, value); }
+			set { 
+				SetValue(SeparatorLeftIndentProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SeparatorLeftIndent=["+value+"]");
+			}
 		}
 
 		/// <summary>
@@ -113,45 +83,95 @@ namespace Forms9Patch
 		public double SeparatorRightIndent
 		{
 			get { return (double)GetValue(SeparatorRightIndentProperty); }
-			set { SetValue(SeparatorRightIndentProperty, value); }
+			set { 
+				SetValue(SeparatorRightIndentProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SeparatorRightIndent=["+value+"]");
+			}
 		}
+		#endregion
 
-
-		public static readonly BindableProperty BackgroundColorProperty  = BindableProperty.Create("BackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
-		public Color BackgroundColor {
-			get { return (Color)GetValue(BackgroundColorProperty); }
-			internal set { SetValue (BackgroundColorProperty, value); }
+		#region Background
+		public static readonly BindableProperty CellBackgroundColorProperty  = BindableProperty.Create("CellBackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
+		public Color CellBackgroundColor {
+			get { return (Color)GetValue(CellBackgroundColorProperty); }
+			internal set { 
+				SetValue (CellBackgroundColorProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.CellBackgroundColor=["+value+"]");
+			}
 		}	
 
-		public static readonly BindableProperty SourceProperty = BindableProperty.Create("Value", typeof(object),  typeof(Item), null);
-		public object Source {
-			get { return GetValue(SourceProperty); }
-			set { SetValue(SourceProperty, value); }
+		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(Item), Color.Gray);
+		public Color SelectedCellBackgroundColor
+		{
+			get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
+			set { 
+				SetValue(SelectedCellBackgroundColorProperty, value); 
+				//System.Diagnostics.Debug.WriteLine("Item.SelectedCellBackgroundColor=["+value+"]");
+			}
+		}
+		#endregion
+
+		#region Accessory
+		public static readonly BindableProperty AccessoryPositionProperty = BindableProperty.Create("AccessoryPosition", typeof(AccessoryPosition), typeof(Item), AccessoryPosition.None);
+		public AccessoryPosition AccessoryPosition
+		{
+			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
+			set { SetValue(AccessoryPositionProperty, value); }
 		}
 
-		public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("SelectedBackgroundColor", typeof(Color), typeof(Item), Color.Gray);
-		public Color SelectedBackgroundColor
+		public static readonly BindableProperty AccessoryTextProperty = BindableProperty.Create("AccessoryText", typeof(Func<Item, string>), typeof(Item), null);
+		public Func<IItem, string> AccessoryText
 		{
-			get { return (Color)GetValue(SelectedBackgroundColorProperty); }
-			set { SetValue(SelectedBackgroundColorProperty, value); }
+			get { return (Func<IItem, string>)GetValue(AccessoryTextProperty); }
+			set { SetValue(AccessoryTextProperty, value); }
 		}
+
+		public static readonly BindableProperty AccessoryWidthProperty = BindableProperty.Create("AccessoryWidth", typeof(double), typeof(Item), 20.0);
+		public double AccessoryWidth
+		{
+			get { return (double)GetValue(AccessoryWidthProperty); }
+			set { SetValue(AccessoryWidthProperty, value); }
+		}
+
+		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = BindableProperty.Create("AccessoryHorizontalAlignment", typeof(TextAlignment), typeof(Item), TextAlignment.Center);
+		public TextAlignment AccessoryHorizontalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
+			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
+		}
+
+		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = BindableProperty.Create("AccessoryVerticalAlignment", typeof(TextAlignment), typeof(Item), TextAlignment.Center);
+		public TextAlignment AccessoryVerticalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
+			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+		}
+		#endregion
+
 
 		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(Item), false);
 		public bool IsSelected
 		{
 			get { return (bool)GetValue(IsSelectedProperty); }
-			set { 
-				SetValue(IsSelectedProperty, value); 
+			set
+			{
+				SetValue(IsSelectedProperty, value);
 			}
 		}
 
-		internal static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(Item), -1);
-		internal int Index
+		public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(Item), null);
+		public object Source
+		{
+			get { return GetValue(SourceProperty); }
+			set { SetValue(SourceProperty, value); }
+		}
+
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(Item), -1);
+		public int Index
 		{
 			get { return (int)GetValue(IndexProperty); }
 			set { SetValue(IndexProperty, value); }
 		}
-
 		#endregion
 
 
@@ -160,60 +180,50 @@ namespace Forms9Patch
 
 		protected Item() {
 			ID = instantiations++;
+
+			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
+			this.SetBinding(SeparatorColorProperty, SeparatorColorProperty.PropertyName);
+			this.SetBinding(SeparatorHeightProperty, SeparatorHeightProperty.PropertyName);
+			this.SetBinding(SeparatorLeftIndentProperty, SeparatorLeftIndentProperty.PropertyName);
+			this.SetBinding(SeparatorRightIndentProperty, SeparatorRightIndentProperty.PropertyName);
+
+			this.SetBinding(CellBackgroundColorProperty, CellBackgroundColorProperty.PropertyName);
+			this.SetBinding(SelectedCellBackgroundColorProperty, SelectedCellBackgroundColorProperty.PropertyName);
+
+			this.SetBinding(AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
+			this.SetBinding(AccessoryTextProperty, AccessoryTextProperty.PropertyName);
+			this.SetBinding(AccessoryWidthProperty, AccessoryWidthProperty.PropertyName);
+			this.SetBinding(AccessoryHorizonatalAlignmentProperty, AccessoryHorizonatalAlignmentProperty.PropertyName);
+			this.SetBinding(AccessoryVerticalAlignmentProperty, AccessoryVerticalAlignmentProperty.PropertyName);
 		}
+
 		#endregion
 
 
 		#region Convenience
-		internal void ShallowCopy(Item other) {
-			SeparatorColor = other.SeparatorColor;
+		internal void ShallowCopy(Item other)
+		{
 			SeparatorIsVisible = other.SeparatorIsVisible;
-			BackgroundColor = other.BackgroundColor;
-			SelectedBackgroundColor = other.SelectedBackgroundColor;
+			SeparatorColor = other.SeparatorColor;
+			SeparatorHeight = other.SeparatorHeight;
+			SeparatorLeftIndent = other.SeparatorLeftIndent;
+			SeparatorRightIndent = other.SeparatorRightIndent;
+
+			CellBackgroundColor = other.CellBackgroundColor;
+			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
+
+			AccessoryPosition = other.AccessoryPosition;
+			AccessoryText = other.AccessoryText;
+
 			Source = other.Source;
 		}
 
 		public string Description ()
 		{
-			//return string.Format ("{0} ({1})", ID ,Title);
 			return string.Format("{0}[{1}]",GetType().Name,ID);
-			//return string.Format ("[BcElementVMGroup: Item={0}, Count={1}, IsReadOnly={2}, IsFixedSize={3}, IsSynchronized={4}, SyncRoot={5}, VisibilityTargetGroup={6}]", Item, Count, IsReadOnly, IsFixedSize, IsSynchronized, SyncRoot, VisibilityTargetGroup);
 		}
 		#endregion
 
-
-		/*
-		#region Operations
-		public override int GetHashCode() {
-			return ID;
-		}
-			
-		/// <summary>
-		/// Value equality test
-		/// </summary>
-		/// <param name="other">The <see cref="FormsDragNDropListView.Item"/> to compare with the current <see cref="FormsDragNDropListView.Item"/>.</param>
-		/// <returns><c>true</c> if the specified <see cref="FormsDragNDropListView.Item"/> is equal to the current
-		/// <see cref="FormsDragNDropListView.Item"/>; otherwise, <c>false</c>.</returns>
-		public bool Equals(Item other) {
-			// value equality
-			if (other == null)
-				return false;
-			if (Value == null)
-				return other.Value == null;
-			return Value.Equals (other.Value);
-		}
-
-
-		public override bool Equals(object obj) {
-			return Equals( obj as Item );
-		}
-
-		#endregion
-		
-		#region Editing
-		//internal bool IsDragging = false;
-		#endregion
-		*/
 
 		#region Reference to CellView bound to Item
 		internal WeakReference _weakBaseCellView;
@@ -228,8 +238,6 @@ namespace Forms9Patch
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
-			//if (propertyName==SeparatorColorProperty.PropertyName || propertyName==SeparatorIsVisibleProperty.PropertyName)
-			//	System.Diagnostics.Debug.WriteLine("["+ID+"] SeparatorColor=["+SeparatorColor+"] SeparatorVisibility=["+SeparatorIsVisible+"]");
 			if (propertyName == IsSelectedProperty.PropertyName)
 			{
 				var isSelectedSource = Source as IIsSelectedAble;

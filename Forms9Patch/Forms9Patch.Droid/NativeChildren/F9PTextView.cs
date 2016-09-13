@@ -202,7 +202,7 @@ namespace Forms9Patch.Droid
 		#region Truncation
 
 		//bool _truncating;
-		internal static StaticLayout Truncate(string text, BaseFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, LabelFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
+		internal static StaticLayout Truncate(string text, F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, LabelFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
 		{
 			StaticLayout layout=null;
 			var fontMetrics = paint.GetFontMetrics();
@@ -277,12 +277,12 @@ namespace Forms9Patch.Droid
 			return new StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 		}
 
-		static ICharSequence StartTruncatedFormatted(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
+		static ICharSequence StartTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
 		{
 			return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, end, end, availWidth);
 		}
 
-		static ICharSequence StartTruncatedFormattedIter(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLow, int startHigh, int end, float availWidth)
+		static ICharSequence StartTruncatedFormattedIter(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLow, int startHigh, int end, float availWidth)
 		{
 			if (startHigh-startLow<=1)
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Start, secondToLastEnd, startHigh, end);
@@ -294,12 +294,12 @@ namespace Forms9Patch.Droid
 			return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLow, mid, end, availWidth);
 		}
 
-		static ICharSequence MidTruncatedFormatted(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int start, int end, float availWidth)
+		static ICharSequence MidTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int start, int end, float availWidth)
 		{
 			return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, start, end, end, availWidth);
 		}
 
-		static ICharSequence MidTruncatedFormattedIter(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int startLow, int startHigh, int end, float availWidth)
+		static ICharSequence MidTruncatedFormattedIter(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int startLastVisible, int midLastVisible, int startLow, int startHigh, int end, float availWidth)
 		{
 			if (startHigh - startLow <= 1)
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Mid, secondToLastEnd, startHigh, end, startLastVisible, midLastVisible);
@@ -311,12 +311,12 @@ namespace Forms9Patch.Droid
 			return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
 		}
 
-		static ICharSequence EndTruncatedFormatted(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
+		static ICharSequence EndTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
 		{
 			return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, start, end, availWidth);
 		}
 
-		static ICharSequence EndTruncatedFormattedIter(BaseFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int endLow, int endHigh, float availWidth)
+		static ICharSequence EndTruncatedFormattedIter(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int endLow, int endHigh, float availWidth)
 		{
 			if (endHigh - endLow <= 1)
 			{

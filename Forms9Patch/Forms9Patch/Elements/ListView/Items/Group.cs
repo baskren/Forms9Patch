@@ -49,14 +49,14 @@ namespace Forms9Patch
 
 		*/
 		Func<object,bool> _visibleItemTest;
-		public Func<object,bool> VisiblityTest {
+		public Func<object,bool> VisibilityTest {
 			get { return _visibleItemTest; }
 			set {
 				_visibleItemTest = value;
 				foreach (var item in _items) {
 					var group = item as Group;
 					if (group!=null) 
-						group.VisiblityTest = group.VisiblityTest ?? VisiblityTest;
+						group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
 				}
 			}
 		}
@@ -199,34 +199,26 @@ namespace Forms9Patch
 
 
 		#region add/remove common actions
-		void CommonAdd(Item item) {
+		void CommonNewItem(Item item)
+		{
 			if (item == null)
 				return;
 			item.PropertyChanged += OnItemPropertyChanged;
 			item.PropertyChanging += OnItemPropertyChanging;
-			//item.LongPressed += OnLongPressed;
-			//item.LongPressing += OnLongPressing;
-			if (NotifySourceOfChanges) SourceAdd (item);
+			item.BindingContext = this;
 			var group = item as Group;
-			if (group!=null) {
-				group.VisiblityTest = group.VisiblityTest ?? VisiblityTest;
-				//group.ValidMateTriggerProperty = group.ValidMateTriggerProperty ?? ValidMateTriggerProperty;
-			}
+			if (group != null)
+				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
+		}
+
+		void CommonAdd(Item item) {
+			CommonNewItem(item);
+			if (NotifySourceOfChanges) SourceAdd (item);
 		}
 
 		void CommonInsert(Item item) {
-			if (item == null)
-				return;
-			item.PropertyChanged += OnItemPropertyChanged;
-			item.PropertyChanging += OnItemPropertyChanging;
-			//item.LongPressed += OnLongPressed;
-			//item.LongPressing += OnLongPressing;
+			CommonNewItem(item);
 			if (NotifySourceOfChanges) SourceInsert (item);
-			var group = item as Group;
-			if (group!=null) {
-				group.VisiblityTest = group.VisiblityTest ?? VisiblityTest;
-				//group.ValidMateTriggerProperty = group.ValidMateTriggerProperty ?? ValidMateTriggerProperty;
-			}
 		}
 
 		void CommonRemove(Item item) {
@@ -235,9 +227,9 @@ namespace Forms9Patch
 			if (NotifySourceOfChanges) SourceRemove (item);
 			item.PropertyChanged -= OnItemPropertyChanged;
 			item.PropertyChanging -= OnItemPropertyChanging;
-			//item.LongPressed -= OnLongPressed;
-			//item.LongPressing -= OnLongPressing;
+
 		}
+
 
 		#endregion
 
@@ -328,7 +320,8 @@ namespace Forms9Patch
 				{
 					// groups
 					VerifyContentType(GroupContentType.Lists);
-					return new Group(sourceObject, _subPropertyMap, VisiblityTest);
+					var group = new Group(sourceObject, _subPropertyMap, VisibilityTest);
+					return group;
 				}
 			}
 			// items
@@ -343,15 +336,11 @@ namespace Forms9Patch
 				item = (Item)Activator.CreateInstance(itemType);
 				item.Source = sourceObject;
 			}
-			item.SeparatorIsVisible = SeparatorIsVisible;
-			item.SeparatorColor = SeparatorColor;
-			item.BackgroundColor = BackgroundColor;
-			item.SelectedBackgroundColor = SelectedBackgroundColor;
 			return item;
 		}
 
 		void AddSourceObject(object sourceObject) {
-			if (VisiblityTest == null || VisiblityTest (sourceObject)) {
+			if (VisibilityTest == null || VisibilityTest (sourceObject)) {
 				NotifySourceOfChanges = false;
 				var item = CreateItem (sourceObject);
 				Add (item);
@@ -374,7 +363,7 @@ namespace Forms9Patch
 			}*/
 			int sourceIndex = 0;
 			foreach (var sourceItem in SourceChildren) {
-				if (VisiblityTest == null || VisiblityTest (sourceItem)) {
+				if (VisibilityTest == null || VisibilityTest (sourceItem)) {
 					localIndex++;
 					if (sourceIndex == requestedSourceIndex)
 						return localIndex;
@@ -385,7 +374,7 @@ namespace Forms9Patch
 		}
 
 		void InsertSourceObject(int sourceIndex, object sourceObject) {
-			if (VisiblityTest == null || VisiblityTest (sourceObject)) {
+			if (VisibilityTest == null || VisibilityTest (sourceObject)) {
 				NotifySourceOfChanges = false;
 				var index = LocalIndexFromSourceIndex (sourceIndex);
 				var item = CreateItem (sourceObject);
@@ -408,16 +397,16 @@ namespace Forms9Patch
 
 		void ReplaceItemAtSourceIndex(int sourceIndex, object oldSourceObject, object newSourceObject) {
 			var index = LocalIndexFromSourceIndex (sourceIndex);
-			if (VisiblityTest == null || VisiblityTest (newSourceObject) && VisiblityTest (oldSourceObject)) {
+			if (VisibilityTest == null || VisibilityTest (newSourceObject) && VisibilityTest (oldSourceObject)) {
 				// replace object
 				NotifySourceOfChanges = false;
 				var item = CreateItem (newSourceObject);
 				this [index] = item;
 				NotifySourceOfChanges = true;
-			} else if (VisiblityTest (oldSourceObject)) {
+			} else if (VisibilityTest (oldSourceObject)) {
 				// remove object
 				RemoveItemWithSourceIndex (sourceIndex);
-			} else if (VisiblityTest (newSourceObject)) {
+			} else if (VisibilityTest (newSourceObject)) {
 				// insert object
 				InsertSourceObject(sourceIndex, newSourceObject);
 			}
@@ -721,9 +710,18 @@ namespace Forms9Patch
 		#endregion
 
 
-		#region Fields
+		#region Properties
+		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(Group), null);
+		public List<string> SourceSubPropertyMap
+		{
+			get { return (List<string>)GetValue(SourceSubPropertyMapProperty); }
+			set { SetValue(SourceSubPropertyMapProperty, value); }
+		}
 
-		ObservableCollection<Item> _items = new ObservableCollection<Item> ();
+		#endregion
+
+		#region Fields
+		readonly ObservableCollection<Item> _items = new ObservableCollection<Item> ();
 
 		List<string> _subPropertyMap;
 
@@ -735,26 +733,11 @@ namespace Forms9Patch
 
 		#region Constructors
 		public Group(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
-			VisiblityTest = visibleItemTest;
+			VisibilityTest = visibleItemTest;
 			ContentType = GroupContentType.Unknown;
 
-			if (sourcePropertyMap != null && sourcePropertyMap.Count > 0) {
-				_subPropertyMap = sourcePropertyMap.GetRange (1, sourcePropertyMap.Count - 1);
-				childrenPropertyName = sourcePropertyMap [0];
-			}
-
+			SourceSubPropertyMap = sourcePropertyMap;
 			Source = source;
-			SourceChildren = string.IsNullOrWhiteSpace (childrenPropertyName) ? source as IEnumerable : source.GetPropertyValue (childrenPropertyName) as IEnumerable;
-			if (SourceChildren == null || Source==null) {
-				throw new ArgumentException ("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
-			}
-			foreach (var obj in SourceChildren)
-				AddSourceObject (obj);
-
-			var observableCollection = SourceChildren as INotifyCollectionChanged;
-			if (observableCollection != null) {
-				observableCollection.CollectionChanged += OnSourceCollectionChanged;
-			}
 		}
 
 		public Group()  {
@@ -847,22 +830,61 @@ namespace Forms9Patch
 		#region Property Change Management
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
-			if (propertyName == SeparatorIsVisibleProperty.PropertyName) {
+			/*
+			if (propertyName == SeparatorIsVisibleProperty.PropertyName)
+			{
 				foreach (var item in _items)
 					item.SeparatorIsVisible = SeparatorIsVisible;
-			} else if (propertyName == SeparatorColorProperty.PropertyName) {
-				foreach (var item in _items) 
+			}
+			else if (propertyName == SeparatorColorProperty.PropertyName)
+			{
+				foreach (var item in _items)
 					item.SeparatorColor = SeparatorColor;
-			} else if (propertyName == BackgroundColorProperty.PropertyName) {
-				foreach (var item in _items) 
+			}
+			else if (propertyName == BackgroundColorProperty.PropertyName)
+			{
+				foreach (var item in _items)
 					item.BackgroundColor = BackgroundColor;
 			}
 			else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
 			{
 				foreach (var item in _items)
 					item.SelectedBackgroundColor = SelectedBackgroundColor;
-			} else {
-				base.OnPropertyChanged (propertyName);
+			}
+			else if (propertyName == AccessoryTextProperty.PropertyName)
+			{
+				foreach (var item in _items)
+					item.AccessoryText = AccessoryText;
+			}
+			else if (propertyName == AccessoryPositionProperty.PropertyName)
+			{
+				foreach (var item in _items)
+					item.AccessoryPosition = AccessoryPosition;
+			}
+			else 
+			*/
+
+			base.OnPropertyChanged (propertyName);
+
+			if (propertyName == SourceProperty.PropertyName)
+			{
+				_items.Clear();
+				SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? Source as IEnumerable : Source.GetPropertyValue(childrenPropertyName) as IEnumerable;
+				if (SourceChildren == null || Source == null)
+					throw new ArgumentException("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
+				foreach (var obj in SourceChildren)
+					AddSourceObject(obj);
+				var observableCollection = SourceChildren as INotifyCollectionChanged;
+				if (observableCollection != null)
+					observableCollection.CollectionChanged += OnSourceCollectionChanged;
+			}
+			else if (propertyName == SourceSubPropertyMapProperty.PropertyName)
+			{
+				if (SourceSubPropertyMap != null && SourceSubPropertyMap.Count > 0)
+				{
+					_subPropertyMap = SourceSubPropertyMap.GetRange(1, SourceSubPropertyMap.Count - 1);
+					childrenPropertyName = SourceSubPropertyMap[0];
+				}
 			}
 		}
 		#endregion

@@ -59,7 +59,7 @@ namespace Forms9Patch.Droid
 		{
 			//string text = Element.Text ?? Element.FormattedText?.Text;
 			//Element.Sized = true;
-			if (string.IsNullOrEmpty(Element.Text ?? Element.FormattedText?.Text) || Control == null)
+			if (string.IsNullOrEmpty(Element.Text ?? Element.F9PFormattedString?.Text) || Control == null)
 			{
 				_lastSizeRequest = null;
 				return new SizeRequest(Xamarin.Forms.Size.Zero);
@@ -71,7 +71,7 @@ namespace Forms9Patch.Droid
 			else
 			{
 				if (Settings.IsLicenseValid || Element._id < 4)
-					text = Element.FormattedText.ToSpannableString();
+					text = Element.F9PFormattedString.ToSpannableString();
 				else
 					text = new String("UNLICENSED COPY");
 			}
@@ -191,7 +191,7 @@ namespace Forms9Patch.Droid
 					Control.Ellipsize = Element.LineBreakMode.ToEllipsize();
 				}
 				else
-				layout = F9PTextView.Truncate(Element.Text, Element.FormattedText, new TextPaint(Control.Paint), (int)(availWidth), availHeight, Element.Fit, Element.LineBreakMode, ref lines, ref text);
+				layout = F9PTextView.Truncate(Element.Text, Element.F9PFormattedString, new TextPaint(Control.Paint), (int)(availWidth), availHeight, Element.Fit, Element.LineBreakMode, ref lines, ref text);
 				//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\tlayout.LineCount=[" + layout.LineCount + "]");
 				//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\tpost-truncate layout.size=[" + layout.Width + ", " + layout.Height + "]");
 			}
@@ -468,10 +468,10 @@ namespace Forms9Patch.Droid
 			}
 			*/
 
-			if (Element.FormattedText != null)
+			if (Element.F9PFormattedString != null)
 			{
 				if (Settings.IsLicenseValid || Element._id < 4)
-					Control.TextFormatted = Element.FormattedText.ToSpannableString();
+					Control.TextFormatted = Element.F9PFormattedString.ToSpannableString();
 				else
 					Control.Text = "UNLICENSED COPY";
 			}

@@ -8,7 +8,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch HTML markup string.
 	/// </summary>
-	class HTMLMarkupString : BaseFormattedString
+	class HTMLMarkupString : F9PFormattedString
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Forms9Patch.HTMLMarkupString"/> class.

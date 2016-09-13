@@ -119,7 +119,14 @@ namespace Forms9Patch
 			}
 		}
 
-		internal BaseFormattedString FormattedText { get; set; }
+		// not public, so not bindable!
+		internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create("F9PFormattedString", typeof(F9PFormattedString), typeof(Label), null);
+		internal F9PFormattedString F9PFormattedString
+		{
+			get { return (F9PFormattedString)GetValue(F9PFormattedStringProperty); }
+			set { SetValue(F9PFormattedStringProperty, value); }
+		}
+
 
 		/// <summary>
 		/// Backing store for the horizontal text alignment property.
@@ -331,15 +338,15 @@ namespace Forms9Patch
 			{
 				if (HtmlText != null)
 				{
-					FormattedText = new HTMLMarkupString(HtmlText);
+					F9PFormattedString = new HTMLMarkupString(HtmlText);
 					Text = null;
 				}
 				else
-					FormattedText = null;
+					F9PFormattedString = null;
 			}
 			else if (propertyName == TextProperty.PropertyName && Text!=null)
 			{
-				FormattedText = null;
+				F9PFormattedString = null;
 				HtmlText = null;
 			}
 			base.OnPropertyChanged(propertyName);

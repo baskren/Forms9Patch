@@ -84,29 +84,29 @@ namespace Forms9Patch
 		#endregion
 
 		#region Fields
-		readonly BasePicker _basePicker = new BasePicker
+		readonly internal BasePicker _basePicker = new BasePicker
 		{
 			BackgroundColor = Color.Transparent
 		};
-		readonly Xamarin.Forms.AbsoluteLayout _absLayout = new Xamarin.Forms.AbsoluteLayout();
+		readonly internal Xamarin.Forms.AbsoluteLayout _absLayout = new Xamarin.Forms.AbsoluteLayout();
 
-		readonly Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);
+		readonly internal Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);
 
-		readonly ColorGradientBox _upperGradient = new ColorGradientBox
+		readonly internal ColorGradientBox _upperGradient = new ColorGradientBox
 		{
 			Orientation = StackOrientation.Vertical
 		};
 
-		readonly ColorGradientBox _lowerGradient = new ColorGradientBox
+		readonly internal ColorGradientBox _lowerGradient = new ColorGradientBox
 		{
 			Orientation = StackOrientation.Vertical
 		};
 
-		readonly BoxView _upperEdge = new BoxView
+		readonly internal BoxView _upperEdge = new BoxView
 		{
 			BackgroundColor = Color.Gray
 		};
-		readonly BoxView _lowerEdge = new BoxView
+		readonly internal BoxView _lowerEdge = new BoxView
 		{
 			BackgroundColor = Color.Gray
 		};
@@ -145,17 +145,12 @@ namespace Forms9Patch
 			_absLayout.Children.Add(_upperGradient);
 			_absLayout.Children.Add(_lowerGradient);
 
-			_basePicker.PositionToSelect = true;
+			_basePicker.SelectBy = SelectBy.Position;
 			_basePicker.SetBinding(BasePicker.ItemsSourceProperty,"ItemsSource");
 			_basePicker.SetBinding(BasePicker.RowHeightProperty,"RowHeight");
 			_basePicker.SetBinding(BasePicker.IndexProperty,"Index");
 			_basePicker.SetBinding(BasePicker.SelectedItemProperty, "SelectedItem");
 			_basePicker.BindingContext = this;
-
-			//_selectionPadView.SetBinding(ContentProperty, "SelectionPadView");
-			//_selectionPadView.BindingContext = this;
-
-			//SelectionPadView = _boxView;
 
 			Content = _absLayout;
 		}

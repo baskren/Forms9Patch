@@ -10,9 +10,11 @@ namespace Forms9Patch
 	/// <summary>
 	/// Base picker.
 	/// </summary>
-	public class BasePicker : ContentView
+	internal class BasePicker : ContentView
 	{
 		#region Properties
+
+		#region Item Source & Templates
 		/// <summary>
 		/// Gets the item templates.
 		/// </summary>
@@ -36,21 +38,9 @@ namespace Forms9Patch
 			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
 			set { SetValue(ItemsSourceProperty, value); }
 		}
+		#endregion
 
-		/// <summary>
-		/// The row height property.
-		/// </summary>
-		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(BasePicker), 30);
-		/// <summary>
-		/// Gets or sets the height of the row.
-		/// </summary>
-		/// <value>The height of the row.</value>
-		public int RowHeight
-		{
-			get { return (int)GetValue(RowHeightProperty); }
-			set { SetValue(RowHeightProperty, value); }
-		}
-
+		#region Position and Selection
 		/// <summary>
 		/// The index property.
 		/// </summary>
@@ -81,6 +71,107 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// The backing store for the ListViews's GroupToggleBehavior property.
+		/// </summary>
+		public static readonly BindableProperty GroupToggleBehaviorProperty = ListView.GroupToggleBehaviorProperty;
+		/// <summary>
+		/// Gets or sets the ListViews's GroupToggle behavior.
+		/// </summary>
+		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
+		public GroupToggleBehavior GroupToggleBehavior
+		{
+			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
+			set { SetValue(GroupToggleBehaviorProperty, value); }
+		}
+		#endregion
+
+		#region Appearance
+		/// <summary>
+		/// The row height property.
+		/// </summary>
+		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(BasePicker), 30);
+		/// <summary>
+		/// Gets or sets the height of the row.
+		/// </summary>
+		/// <value>The height of the row.</value>
+		public int RowHeight
+		{
+			get { return (int)GetValue(RowHeightProperty); }
+			set { SetValue(RowHeightProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory position property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryPositionProperty = Item.AccessoryPositionProperty;
+		/// <summary>
+		/// Gets or sets the accessory position.
+		/// </summary>
+		/// <value>The accessory position.</value>
+		public AccessoryPosition AccessoryPosition
+		{
+			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
+			set { SetValue(AccessoryPositionProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory text property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryTextProperty = Item.AccessoryTextProperty;
+		/// <summary>
+		/// Gets or sets the accessory text.
+		/// </summary>
+		/// <value>The accessory text.</value>
+		public Func<IItem, string> AccessoryText
+		{
+			get { return (Func<IItem, string>)GetValue(AccessoryTextProperty); }
+			set { SetValue(AccessoryTextProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory width property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryWidthProperty = Item.AccessoryWidthProperty;
+		/// <summary>
+		/// Gets or sets the width of the accessory.
+		/// </summary>
+		/// <value>The width of the accessory.</value>
+		public double AccessoryWidth
+		{
+			get { return (double)GetValue(AccessoryWidthProperty); }
+			set { SetValue(AccessoryWidthProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory horizonatal alignment property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = Item.AccessoryHorizonatalAlignmentProperty;
+		/// <summary>
+		/// Gets or sets the accessory horizontal alignment.
+		/// </summary>
+		/// <value>The accessory horizontal alignment.</value>
+		public TextAlignment AccessoryHorizontalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
+			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
+		}
+
+		/// <summary>
+		/// The accessory vertical alignment property.
+		/// </summary>
+		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = Item.AccessoryVerticalAlignmentProperty;
+		/// <summary>
+		/// Gets or sets the accessory vertical alignment.
+		/// </summary>
+		/// <value>The accessory vertical alignment.</value>
+		public TextAlignment AccessoryVerticalAlignment
+		{
+			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
+			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+		}
+		#endregion
+
 		#endregion
 
 
@@ -90,7 +181,7 @@ namespace Forms9Patch
 		readonly ListView _listView = new ListView
 		{
 			IsGroupingEnabled = false,
-			SeparatorVisibility = SeparatorVisibility.None,
+			SeparatorIsVisible = false,
 			BackgroundColor = Color.Transparent
 		};
 
@@ -104,7 +195,9 @@ namespace Forms9Patch
 			BackgroundColor = Color.Transparent
 		};
 
-		internal bool PositionToSelect = false;
+		//internal bool PositionToSelect;
+		internal SelectBy SelectBy;
+
 		#endregion
 
 
@@ -116,8 +209,12 @@ namespace Forms9Patch
 		{
 			BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
 
+			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
+			_listView.SetBinding(ListView.AccessoryTextProperty, AccessoryTextProperty.PropertyName);
+			_listView.SetBinding(ListView.AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
+			_listView.SetBinding(ListView.GroupToggleBehaviorProperty, GroupToggleBehaviorProperty.PropertyName);
 			_listView.BindingContext = this;
-			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, "RowHeight");
+			//UpdateUnboundListViewProperties();
 			_listView.BackgroundColor = Color.Transparent;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
@@ -138,16 +235,14 @@ namespace Forms9Patch
 				var point = e.Touches[0];
 				var indexPath = ListViewExtensions.IndexPathAtPoint(_listView,point);
 				if (indexPath != null)
-				{
 					Index = indexPath.Item2;
-					//System.Diagnostics.Debug.WriteLine("Tapped point=["+e.Touches[0]+"] indexPath=[" + indexPath + "] width=["+_listView.Width+"] height=["+_listView.Height+"]");
-					ScrollToIndex(Index);
-				}
 			};
 
 			_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
 			_listView.Footer = _lowerPadding;
+
+
 		}
 		#endregion
 
@@ -185,22 +280,13 @@ namespace Forms9Patch
 				_listView.ItemsSource = _col;
 				ScrollToIndex(Index);
 			}
-			/*
-			if (propertyName == ItemTemplateProperty.PropertyName)
+			else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
 			{
-				_listView.ItemTemplate = ItemTemplate;
-			}
-			*/
-			if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
-			{
-				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + Device.OnPlatform(0,8,0);
+				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + Device.OnPlatform(0, 8, 0);
 				_lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
 			}
-
-			if (propertyName == IndexProperty.PropertyName)
-			{
+			else if (propertyName == IndexProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.Multiselect)
 				ScrollToIndex(Index);
-			}
 		}
 
 		/// <summary>
@@ -217,7 +303,7 @@ namespace Forms9Patch
 					index = _col.Count - 1;
 				var item = _col[index];
 				_listView.ScrollTo(item, ScrollToPosition.Center, true);
-				if (PositionToSelect)
+				if (SelectBy==SelectBy.Position)
 				{
 					//var selectedF9PItem = _listView.BaseItemsSource.ItemAtIndexPath(new Tuple<int, int>(0, index));
 					Index = index;
@@ -310,7 +396,7 @@ namespace Forms9Patch
 								Index = _col.Count - 1;
 							else if (_listView.HitTest(_listView.Bounds.Center, _upperPadding))
 								Index = 0;
-							if (PositionToSelect)
+							if (SelectBy==SelectBy.Position)
 							{
 								var selectedF9PItem = _listView.BaseItemsSource[Index] as Item;
 								if (selectedF9PItem != null)

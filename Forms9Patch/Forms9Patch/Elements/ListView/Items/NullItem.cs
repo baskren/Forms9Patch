@@ -12,6 +12,10 @@ namespace Forms9Patch
 		}
 		#endregion
 
+		public NullItem()
+		{
+			RemoveBinding(CellBackgroundColorProperty);
+		}
 	}
 }
 

@@ -22,27 +22,16 @@ namespace Forms9Patch
 		#region Convenience
 		internal void ShallowCopy(Item<TItem> other) {
 			SeparatorColor = other.SeparatorColor;
+			SeparatorLeftIndent = other.SeparatorLeftIndent;
+			SeparatorRightIndent = other.SeparatorRightIndent;
 			SeparatorIsVisible = other.SeparatorIsVisible;
-			BackgroundColor = other.BackgroundColor;
+			CellBackgroundColor = other.CellBackgroundColor;
+			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
+			AccessoryText = other.AccessoryText;
+			AccessoryPosition = other.AccessoryPosition;
 			Source = other.Source;
 		}
 		#endregion
 
-
-		/*
-		#region Operations
-		public override int GetHashCode() {
-			return ID;
-		}
-
-		public bool Equals(Item<TItem> other) {
-			return other != null && Value.Equals (other.Value);
-		}
-
-		public override bool Equals(object obj) {
-			return Equals( obj as Item<TItem> );
-		}
-		#endregion
-		*/
 	}
 }

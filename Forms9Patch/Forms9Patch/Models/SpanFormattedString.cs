@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch Span formatted string.
 	/// </summary>
-	class SpanFormattedString : BaseFormattedString
+	class SpanFormattedString : F9PFormattedString
 	{
 		/// <summary>
 		/// Gets the collection of spans.
