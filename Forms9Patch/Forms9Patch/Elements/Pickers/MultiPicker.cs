@@ -13,10 +13,6 @@ namespace Forms9Patch
 		#endregion
 
 
-		#region Fields
-		#endregion
-
-
 		#region Constructor
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.MultiPicker"/> class.
@@ -34,9 +30,6 @@ namespace Forms9Patch
 		}
 		#endregion
 
-
-		#region change management
-		#endregion
 	}
 }
 
