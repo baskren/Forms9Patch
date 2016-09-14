@@ -199,6 +199,8 @@ namespace Forms9Patch
 				Content.BindingContext = item?.Source;
 				//System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
 			}
+			_freshContent = true;
+			System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
 			base.OnBindingContextChanged();
 		}
 
@@ -216,41 +218,16 @@ namespace Forms9Patch
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
-			if (propertyName == ContentProperty.PropertyName || propertyName == AccessoryPositionProperty.PropertyName)
-				UpdateCellLocations();
-			else if (propertyName == AccessoryWidthProperty.PropertyName)
+			if (propertyName == AccessoryWidthProperty.PropertyName)
 			{
 				double width = AccessoryWidth < 1 ? Width * AccessoryWidth : AccessoryWidth;
 				ColumnDefinitions[0] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
 				ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
 			}
-			UpdateAccessoryText();
+			System.Diagnostics.Debug.WriteLine("OnPropertyChanged");
+			UpdateLayout();
 		}
 
-		void UpdateCellLocations()
-		{
-			if (Content!= null && Children.Contains(Content))
-				Children.Remove(Content);
-			if (_accessory != null && Children.Contains(_accessory))
-				Children.Remove(_accessory);
-			if (AccessoryPosition == AccessoryPosition.None)
-			{
-				if (Content != null)
-					Children.Add(Content, 0, 3, 0, 1);
-			}
-			else if (AccessoryPosition == AccessoryPosition.Start)
-			{
-				if (Content != null)
-					Children.Add(Content, 1, 3, 0, 1);
-				Children.Add(_accessory, 0, 0);
-			}
-			else
-			{
-				if (Content != null)
-					Children.Add(Content, 0, 2, 0, 1);
-				Children.Add(_accessory, 2, 0);
-			}
-		}
 
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
@@ -260,15 +237,55 @@ namespace Forms9Patch
 			    || e.PropertyName == Item.IndexProperty.PropertyName
 			   )
 				UpdateUnBoundProperties();
-			UpdateAccessoryText();
+			_freshContent = (_freshContent || e.PropertyName == "Renderer" || e.PropertyName == ContentProperty.PropertyName);
+			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
+			UpdateLayout();
 		}
 
-		void UpdateAccessoryText()
+		AccessoryPosition _lastAccPos = AccessoryPosition.None;
+		bool _lastAccActive = false;
+		bool _freshContent = false;
+		void UpdateLayout()
 		{
+			var _accActive = false;
 			if (AccessoryPosition != AccessoryPosition.None)
 			{
-				string result = ((Item)BindingContext)?.AccessoryText?.Invoke((Item)BindingContext);
-               _accessory.HtmlText = result;
+				string accText = ((Item)BindingContext)?.AccessoryText?.Invoke((Item)BindingContext);
+				if (accText != _accessory.HtmlText)
+				{
+					_accessory.HtmlText = accText;
+					_accActive = _accessory.HtmlText != null;
+				}
+			}
+			if (_accActive != _lastAccActive || AccessoryPosition != _lastAccPos || _freshContent)
+			{
+				//if ( _freshContent)
+				//{
+					if (Content != null && Children.Contains(Content))
+						Children.Remove(Content);
+					if (_accessory != null && Children.Contains(_accessory))
+						Children.Remove(_accessory);
+					if (AccessoryPosition == AccessoryPosition.None || !_accActive)
+					{
+						if (Content != null)
+							Children.Add(Content, 0, 3, 0, 1);
+					}
+					else if (AccessoryPosition == AccessoryPosition.Start)
+					{
+						if (Content != null)
+							Children.Add(Content, 1, 3, 0, 1);
+						Children.Add(_accessory, 0, 0);
+					}
+					else
+					{
+						if (Content != null)
+							Children.Add(Content, 0, 2, 0, 1);
+						Children.Add(_accessory, 2, 0);
+					}
+					_lastAccPos = AccessoryPosition;
+				//}
+				_freshContent = false;
+				_lastAccActive = _accActive;
 			}
 		}
 
