@@ -200,7 +200,8 @@ namespace Forms9Patch
 				//System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
 			}
 			_freshContent = true;
-			System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
+			UpdateLayout();
+			//System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
 			base.OnBindingContextChanged();
 		}
 
@@ -224,7 +225,8 @@ namespace Forms9Patch
 				ColumnDefinitions[0] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
 				ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
 			}
-			System.Diagnostics.Debug.WriteLine("OnPropertyChanged");
+			_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);// || propertyName == "Renderer");
+			//System.Diagnostics.Debug.WriteLine("OnPropertyChanged ["+propertyName+"] Item.Source=["+((Item)BindingContext)?.Source+"]");
 			UpdateLayout();
 		}
 
@@ -237,8 +239,8 @@ namespace Forms9Patch
 			    || e.PropertyName == Item.IndexProperty.PropertyName
 			   )
 				UpdateUnBoundProperties();
-			_freshContent = (_freshContent || e.PropertyName == "Renderer" || e.PropertyName == ContentProperty.PropertyName);
-			System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
+			_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
+			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
 			UpdateLayout();
 		}
 
@@ -269,6 +271,7 @@ namespace Forms9Patch
 					{
 						if (Content != null)
 							Children.Add(Content, 0, 3, 0, 1);
+					_accessory.HtmlText = null;
 					}
 					else if (AccessoryPosition == AccessoryPosition.Start)
 					{

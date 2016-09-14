@@ -197,7 +197,7 @@ namespace Forms9Patch
 
 		//internal bool PositionToSelect;
 		internal SelectBy SelectBy;
-
+		bool _tapping = false;
 		#endregion
 
 
@@ -231,11 +231,13 @@ namespace Forms9Patch
 			};
 			listener.Tapped += (object sender, TapEventArgs e) => 
 			{
+				_tapping = true;
 				//System.Diagnostics.Debug.WriteLine("Listener(_listView).Tapped");
 				var point = e.Touches[0];
 				var indexPath = ListViewExtensions.IndexPathAtPoint(_listView,point);
 				if (indexPath != null)
 					Index = indexPath.Item2;
+				_tapping = false;
 			};
 
 			_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
@@ -285,7 +287,7 @@ namespace Forms9Patch
 				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + Device.OnPlatform(0, 8, 0);
 				_lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
 			}
-			else if (propertyName == IndexProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.Multiselect)
+			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
 				ScrollToIndex(Index);
 		}
 

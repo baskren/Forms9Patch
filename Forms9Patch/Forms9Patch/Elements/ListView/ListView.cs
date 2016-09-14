@@ -698,10 +698,6 @@ namespace Forms9Patch
 				AddSelectedSourceItems(SelectedItems);
 				SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 			}
-			else if (propertyName == AccessoryPositionProperty.PropertyName)
-				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanged(" + propertyName + ")" + "\tValue=[" + AccessoryPosition + "]");
-			else if (propertyName == AccessoryTextProperty.PropertyName)
-				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanged(" + propertyName + ")" + "\tValue=[" + AccessoryText+ "]");
 
 		}
 

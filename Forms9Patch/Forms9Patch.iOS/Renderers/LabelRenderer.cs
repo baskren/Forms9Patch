@@ -238,7 +238,8 @@ namespace Forms9Patch.iOS
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
-			GetDesiredSize(Element.Width, Element.Height);
+			if (Element != null)
+				GetDesiredSize(Element.Width, Element.Height);
 		}
 		#endregion
 
