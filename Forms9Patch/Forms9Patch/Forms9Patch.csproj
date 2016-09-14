@@ -47,19 +47,15 @@
     <Compile Include="Layouts\AbsoluteLayout.cs" />
     <Compile Include="Models\Display.cs" />
     <Compile Include="Extensions\TextAlignmentExtension.cs" />
-    <Compile Include="Elements\ImageButton.cs" />
     <Compile Include="Models\ImageButtonState.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Elements\MaterialButton.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\GridExtension.cs" />
     <Compile Include="Extensions\AspectExtension.cs" />
     <Compile Include="Enums\Fill.cs" />
     <Compile Include="Enums\SegmentType.cs" />
-    <Compile Include="Elements\MaterialSegmentedControl.cs" />
     <Compile Include="Enums\GroupToggleBehavior.cs" />
     <Compile Include="Elements\Label.cs" />
-    <Compile Include="Elements\Segment.cs" />
     <Compile Include="Events\SegmentedControlEventArgs.cs" />
     <Compile Include="Events\SegmentedControlEventHandler.cs" />
     <Compile Include="Layouts\RoundedBoxBase.cs" />
@@ -121,6 +117,10 @@
     <Compile Include="Elements\Popups\ModalPopup.cs" />
     <Compile Include="Elements\Popups\PopupBase.cs" />
     <Compile Include="Elements\Popups\BubblePopup.cs" />
+    <Compile Include="Elements\Buttons\ImageButton.cs" />
+    <Compile Include="Elements\Buttons\MaterialButton.cs" />
+    <Compile Include="Elements\Buttons\MaterialSegmentedControl.cs" />
+    <Compile Include="Elements\Buttons\Segment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -139,6 +139,7 @@
     <Folder Include="Elements\ListView\" />
     <Folder Include="Elements\Pickers\" />
     <Folder Include="Elements\Popups\" />
+    <Folder Include="Elements\Buttons\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
