@@ -1,4 +1,4 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * Zenmek.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
@@ -33,7 +33,7 @@ namespace TestProject
 						Source = Forms9Patch.ImageSource.FromResource(BaseResource + ".Resources.button_01_pressing.png"),
 					},
 				},
-				StickyBehavior = true,
+				ToggleBehavior = true,
 				HeightRequest = 50,
 				Alignment = TextAlignment.Center,
 			};

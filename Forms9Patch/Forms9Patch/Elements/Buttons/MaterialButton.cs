@@ -243,6 +243,22 @@ namespace Forms9Patch
 			set { SetValue (IsSelectedProperty, value); }
 		}
 
+		[Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead")]
+		/// <summary>
+		/// Backing store for the ToggleBehavior bindable property.
+		/// </summary>
+		public static BindableProperty StickyBehaviorProperty = null;
+
+		[Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead")]
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
+		/// </summary>
+		/// <value><c>true</c> if Toggle; otherwise, <c>false</c>.</value>
+		public bool StickyBehavior
+		{
+			get { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
+			set { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
+		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.ToggleBehavior bindable property.

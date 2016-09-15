@@ -21,7 +21,7 @@ namespace Forms9Patch.Droid
 			_element = element;
 			p = new Paint { 
 				AntiAlias = true, 
-				FilterBitmap = true,
+				FilterBitmap = true
 			};
 		}
 
@@ -44,7 +44,8 @@ namespace Forms9Patch.Droid
 
 			var backgroundColor = (Xamarin.Forms.Color) Element.GetValue (VisualElement.BackgroundColorProperty);
 			var outlineColor = (Xamarin.Forms.Color) Element.GetValue (RoundedBoxBase.OutlineColorProperty);
-			var outlineWidth = (float)Math.Max(0,(float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
+			var outlineWidth = Math.Max(0,(float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
+			var isElliptical = (bool)Element.GetValue(RoundedBoxBase.IsEllipticalProperty);
 
 			var materialButton = Element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
@@ -53,7 +54,7 @@ namespace Forms9Patch.Droid
 			float separatorWidth = materialButton == null || type==SegmentType.Not ? 
 				0 : 
 				materialButton.SeparatorWidth < 0 ? 
-				outlineWidth : (float)Math.Max (0, materialButton.SeparatorWidth * Display.Scale );
+				outlineWidth : Math.Max (0, materialButton.SeparatorWidth * Display.Scale );
 
 			if (backgroundColor.A < 0.01 && (outlineColor.A < 0.01 || (outlineWidth < 0.01 && separatorWidth < 0.01))) {
 				//base.Draw (canvas);
@@ -69,15 +70,16 @@ namespace Forms9Patch.Droid
 
 			var shadowInverted = ((bool)Element.GetValue (RoundedBoxBase.ShadowInvertedProperty));
 
-			int shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
-			int shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * Display.Scale);
-			int shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * Display.Scale);
+			var shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
+			var shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * Display.Scale);
+			var shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * Display.Scale);
 
-			RectF perimeter = new RectF(Bounds);
+			var perimeter = new RectF(Bounds);
 
+			// exterior shadow
 			if (makeRoomForShadow) {
 				// what additional padding was allocated to cast the button's shadow?
-				var shadowPad = Forms9Patch.RoundedBoxBase.ShadowPadding (Element as Layout);
+				var shadowPad = RoundedBoxBase.ShadowPadding (Element as Layout);
 				// shrink the button's perimeter by that extra padding (so it is the size it was originally intended to be)
 				perimeter = new RectF ((float)(shadowPad.Left * Display.Scale + Bounds.Left), (float)(shadowPad.Top * Display.Scale + Bounds.Top), (float)(Bounds.Right - shadowPad.Right * Display.Scale), (float)(Bounds.Bottom - shadowPad.Bottom * Display.Scale));
 
@@ -89,12 +91,17 @@ namespace Forms9Patch.Droid
 					boxShadow.Offset (shadowX, shadowY);
 					boxShadow.Inset (-shadowR, -shadowR);
 					p.Color = Android.Graphics.Color.Black;
-					p.StrokeWidth = (float)shadowR;
+					p.StrokeWidth = shadowR;
 					p.Alpha = 255 / (shadowR * 4);
 					p.SetStyle (Paint.Style.Fill);
-					int r = (int)(outlineRadius + shadowR);
+					var r = (int)(outlineRadius + shadowR);
 					for (int i = 0; i <= 2* shadowR; i++) {
-						var path = PerimeterPath (_element, boxShadow, r);
+
+						CGPath path;
+						if (isElliptical)
+							path = EllipticalPath(boxShadow);
+						else
+							path = PerimeterPath (_element, boxShadow, r);
 						c.DrawPath(path, p);
 						boxShadow.Inset (1, 1);
 						//p.StrokeWidth -= 1;
@@ -149,7 +156,11 @@ namespace Forms9Patch.Droid
 						break;
 					}
 				}
-				CGPath perimeterPath = PerimeterPath (_element, insetPerimeter, outlineRadius + (outlineColor.A > 0 ? outlineWidth/2.0f : 0) );
+				CGPath perimeterPath;
+				if (isElliptical)
+					perimeterPath = EllipticalPath(insetPerimeter);
+				else
+					perimeterPath = PerimeterPath (_element, insetPerimeter, outlineRadius + (outlineColor.A > 0 ? outlineWidth/2.0f : 0) );
 				canvas.DrawPath(perimeterPath, p);
 				clipPath = perimeterPath;
 			}
@@ -163,12 +174,16 @@ namespace Forms9Patch.Droid
 				p.StrokeWidth = (outlineWidth);
 				p.Color = outlineColor.ToAndroid ();
 				p.SetStyle (Paint.Style.Stroke);
-				var outlinePath = OutlinePath (_element, perimeter, outlineRadius, outlineWidth);
+				CGPath outlinePath;
+				if (isElliptical)
+					outlinePath = EllipticalPath(perimeter);
+				else
+					outlinePath = OutlinePath (_element, perimeter, outlineRadius, outlineWidth);
 				canvas.DrawPath(outlinePath, p);
 			}
 
 			// separator
-			if (separatorWidth > 0) {
+			if (separatorWidth > 0 && !isElliptical) {
 				var inset = outlineColor.A > 0 ? outlineWidth / 2.0f : 0;
 				p.StrokeWidth = separatorWidth / 1.5f;
 				p.Color = outlineColor.ToAndroid ();
@@ -217,24 +232,27 @@ namespace Forms9Patch.Droid
 				insetShadowBounds.Offset (shadowX, shadowY);//+1);
 				insetShadowBounds.Inset (shadowR/2, shadowR/2);//(shadowR-1)/2);
 				shadowPaint.Color = Android.Graphics.Color.Black;
-				shadowPaint.StrokeWidth = (float)shadowR;
+				shadowPaint.StrokeWidth = shadowR;
 				shadowPaint.Alpha = (int)(255 * 0.05 / shadowR);
 				shadowPaint.SetStyle (Paint.Style.Stroke);
 				for (int i = 0; i <= 2*shadowR+2*Display.Scale; i++) {
 					var r = Math.Max (0, outlineRadius);// - shadowR);
-					shadowCanvas.DrawPath(PerimeterPath(_element, insetShadowBounds, r), shadowPaint);
+					if (isElliptical)
+						shadowCanvas.DrawPath(EllipticalPath(insetShadowBounds), shadowPaint);
+					else
+						shadowCanvas.DrawPath(PerimeterPath(_element, insetShadowBounds, r), shadowPaint);
 					insetShadowBounds.Inset (-1, -1);
 					//p.StrokeWidth -= 1;
 					//if (p.StrokeWidth < 0)
 					//	p.StrokeWidth = 0;
-					shadowPaint.Alpha += (int)(255 * (0.25 * (i+1) / shadowR));
+					shadowPaint.Alpha += (int)(255 * (0.125 * (i+1) / shadowR));
 				}
 				shadowPaint.Alpha = 255;
 
 				//p.SetXfermode(
-				Bitmap result = Bitmap.CreateBitmap(Bounds.Width(), Bounds.Height(), Bitmap.Config.Argb8888);
-				Canvas resultCanvas = new Canvas (result);
-				Paint resultPaint = new Paint (PaintFlags.AntiAlias);
+				var result = Bitmap.CreateBitmap(Bounds.Width(), Bounds.Height(), Bitmap.Config.Argb8888);
+				var resultCanvas = new Canvas (result);
+				var resultPaint = new Paint (PaintFlags.AntiAlias);
 				resultPaint.SetXfermode (new PorterDuffXfermode (PorterDuff.Mode.DstIn));
 				resultCanvas.DrawBitmap (shadowBitmap, 0, 0, null);
 				resultCanvas.DrawBitmap (maskBitmap, 0, 0, resultPaint);
@@ -433,7 +451,12 @@ namespace Forms9Patch.Droid
 			return result;
 		}
 
-
+		static CGPath EllipticalPath(RectF rect, bool counterClockWise = true)
+		{
+			var path = new CGPath();
+			path.AddOval(rect, counterClockWise ? Path.Direction.Ccw : Path.Direction.Cw);
+			return path;
+		}
 		public override void SetAlpha (int alpha) { }
 
 		public override void SetColorFilter (ColorFilter colorFilter) { }	}

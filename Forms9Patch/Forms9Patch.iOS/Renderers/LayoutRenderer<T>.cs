@@ -121,6 +121,7 @@ namespace Forms9Patch.iOS
 			var backgroundColor = (Color) Element.GetValue (VisualElement.BackgroundColorProperty);
 			var outlineColor = (Color) Element.GetValue (RoundedBoxBase.OutlineColorProperty);
 			var outlineWidth = (nfloat)(Math.Max (0, (float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) ) );
+			var isElliptical = (bool)Element.GetValue(RoundedBoxBase.IsEllipticalProperty);
 
 			var materialButton = Element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
@@ -148,7 +149,6 @@ namespace Forms9Patch.iOS
 			var shadowX = (nfloat)Forms9Patch.Settings.ShadowOffset.X;//* Display.Scale);
 			var shadowY = (nfloat)Forms9Patch.Settings.ShadowOffset.Y;// * Display.Scale);
 			var shadowR = (nfloat)Forms9Patch.Settings.ShadowRadius;// * Display.Scale);
-
 			using (var g = UIGraphics.GetCurrentContext ()) {
 				g.SaveState ();
 				var shadowColor = Color.FromRgba (0.0, 0.0, 0.0, 0.55).ToCGColor ();
@@ -187,17 +187,21 @@ namespace Forms9Patch.iOS
 				if (backgroundColor.A > 0) {
 					g.SetFillColor (backgroundColor.ToCGColor ());
 					if (type == SegmentType.Not) {
-						perimeterPath = PerimeterPath (iRoundedBox, perimeter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0) ));
+						if (isElliptical)
+							perimeterPath = CGPath.EllipseFromRect(perimeter);
+						else
+							perimeterPath = RectangularPerimeterPath (iRoundedBox, perimeter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0) ));
 						//Console.WriteLine ("periPath: [" + perimeter.Left + ", " + perimeter.Top + ", " + perimeter.Width + ", " + perimeter.Height + "]");
 					} else {
 						// make the button bigger on the overlap sides so the mask can trim off excess, including shadow
 						CGRect newPerimenter = SegmentAllowanceRect (perimeter, 20, orientation, type);
-						perimeterPath = PerimeterPath (iRoundedBox, newPerimenter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0) ));
+						perimeterPath = RectangularPerimeterPath (iRoundedBox, newPerimenter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0) ));
 						//Console.WriteLine ("periPath: ["+newPerimenter.Left+", "+newPerimenter.Top+", "+newPerimenter.Width+", "+newPerimenter.Height+"]");
 					}
 					g.AddPath (perimeterPath);
 					g.FillPath ();
 				}
+
 
 				// shrink the perimeter by the outlinewidth so it's not clipped by the view's bounds
 				if (outlineWidth > 0) {
@@ -205,18 +209,23 @@ namespace Forms9Patch.iOS
 					//Console.WriteLine ("perimeter:["+perimeter.Left+", "+perimeter.Top+", "+perimeter.Width+", "+perimeter.Height+"]");
 				}
 
+
 				// outline
 				if (outlineWidth > 0 && outlineColor.A > 0) {
-						g.SetShadow (new CGSize (0, 0), 0, Color.Transparent.ToCGColor ());
-						g.SetLineWidth (outlineWidth);
-						g.SetStrokeColor (outlineColor.ToCGColor ());
-						var outlinePath = OutlinePath (iRoundedBox, perimeter, outlineRadius, outlineWidth);
-						g.AddPath (outlinePath);
-						g.StrokePath ();
+					g.SetShadow (new CGSize (0, 0), 0, Color.Transparent.ToCGColor ());
+					g.SetLineWidth (outlineWidth);
+					g.SetStrokeColor (outlineColor.ToCGColor ());
+					CGPath outlinePath;
+					if (isElliptical)
+						outlinePath = CGPath.EllipseFromRect(perimeter);
+					else
+						outlinePath = OutlinePath (iRoundedBox, perimeter, outlineRadius, outlineWidth);
+					g.AddPath (outlinePath);
+					g.StrokePath ();
 				}
 
 				// separators
-				if (separatorWidth > 0) {
+				if (separatorWidth > 0 && !isElliptical) {
 					g.SetShadow (new CGSize (0, 0), 0, Color.Transparent.ToCGColor ());
 					nfloat inset = outlineColor.A > 0 ? outlineWidth / 2.0f : 0;
 					g.SetStrokeColor (outlineColor.ToCGColor());
@@ -249,7 +258,10 @@ namespace Forms9Patch.iOS
 				if (hasShadow && backgroundColor.A > 0 && shadowInverted) {
 					var insetShadowPath = CGPath.FromRect (rect.Inset (-40, -40));
 					CGRect newPerimenter = SegmentAllowanceRect (perimeter, 20, orientation, type);
-					perimeterPath = PerimeterPath(iRoundedBox, newPerimenter, outlineRadius);
+					if (isElliptical)
+						perimeterPath = CGPath.EllipseFromRect(newPerimenter);
+					else
+						perimeterPath = RectangularPerimeterPath(iRoundedBox, newPerimenter, outlineRadius);
 					insetShadowPath.AddPath (perimeterPath);
 					insetShadowPath.CloseSubpath ();
 					g.AddPath (perimeterPath);
@@ -291,7 +303,7 @@ namespace Forms9Patch.iOS
 			return new CGRect (rect.X + left, rect.Y + top, rect.Width - left - right, rect.Height - top - bottom);
 		}
 
-		internal static CGPath PerimeterPath(IRoundedBox element, CGRect rect, float radius, bool counterClockWise = true) {
+		internal static CGPath RectangularPerimeterPath(IRoundedBox element, CGRect rect, float radius, bool counterClockWise = true) {
 			var materialButton = element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
 			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
@@ -403,7 +415,7 @@ namespace Forms9Patch.iOS
 			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
 
 			if (type == SegmentType.Not)
-				return PerimeterPath (element, rect, radius);
+				return RectangularPerimeterPath (element, rect, radius);
 
 			//var diameter = radius * 2;
 			//var topLeft = new RectF (rect.Left, rect.Top, rect.Left + diameter, rect.Top + diameter);

@@ -49,6 +49,12 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The padding.</value>
 		Thickness Padding { get; set; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IRoundedBox"/> is elliptical  (rather than rectangular with rounded corners).
+		/// </summary>
+		/// <value><c>true</c> if elliptical; otherwise, <c>false</c>.</value>
+		bool IsElliptical { get; set; }
 	}
 }
 

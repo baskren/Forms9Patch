@@ -150,7 +150,7 @@ namespace Forms9Patch.iOS
 		static CGPath PerimeterPath(BubbleLayout element, CGRect rect, float radius) {
 
 			if (element.PointerDirection == PointerDirection.None)
-				return LayoutRenderer<Frame>.PerimeterPath (element, rect, radius);
+				return LayoutRenderer<Frame>.RectangularPerimeterPath (element, rect, radius);
 			
 			var length = element.PointerLength;
 

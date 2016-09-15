@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
@@ -18,7 +18,7 @@ namespace TestProject
 				BackgroundColor = Color.FromRgb(200,200,200),
 				FontColor = Color.Blue,
 				HasShadow = true,
-				StickyBehavior = true,
+				ToggleBehavior = true,
 			};
 			mb1.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine ("Tapped");
 			mb1.Selected += (sender, e) => System.Diagnostics.Debug.WriteLine ("Selected");
@@ -75,7 +75,7 @@ namespace TestProject
 					HtmlText = "<b><i>Selected</i></b>",
 
 				},
-				StickyBehavior = true,
+				ToggleBehavior = true,
 				HeightRequest = 50,
 				Alignment = TextAlignment.Start,
 			};

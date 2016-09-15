@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace TestProject
 {
-	public class MaterialButtonsPage : ContentPage
+	public class EllipticalMaterialButtonsPage : ContentPage
 	{
 		readonly ICommand _trueCommand = new Command (parameter => System.Diagnostics.Debug.WriteLine ("_simpleCommand Parameter[" + parameter + "]"), parameter=>true );
 
@@ -45,7 +45,7 @@ namespace TestProject
 		}
 
 
-		public MaterialButtonsPage ()
+		public EllipticalMaterialButtonsPage ()
 		{
 			var infoIcon =  Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.Info");
 			var arrowIcon = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.ArrowR");
@@ -53,13 +53,12 @@ namespace TestProject
 			#region Material Buttons
 			var grid = new Grid {
 				RowDefinitions = {
-					new RowDefinition { Height = GridLength.Auto },
+					new RowDefinition { Height = GridLength.Auto }
 				},
 				ColumnDefinitions = {
 					new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-					new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-				},
-
+					new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+				}
 			};
 
 
@@ -67,6 +66,7 @@ namespace TestProject
 			var mb1 = new Forms9Patch.MaterialButton {
 				Text = "",
 				ImageSource = arrowIcon,
+				IsElliptical = true
 			};
 			mb1.Tapped += OnMaterialButtonTapped;
 			mb1.Selected += OnMaterialButtonSelected;
@@ -76,6 +76,7 @@ namespace TestProject
 				//Text = "toggle",
 				ToggleBehavior = true,
 				ImageSource = infoIcon,
+				IsElliptical = true
 			};
 			mb2.Tapped += OnMaterialButtonTapped;
 			mb2.Selected += OnMaterialButtonSelected;
@@ -86,6 +87,7 @@ namespace TestProject
 				ToggleBehavior = true,
 				IsEnabled = false,
 				ImageSource = arrowIcon,
+				IsElliptical = true
 			};
 			mb3.Tapped += OnMaterialButtonTapped;
 			mb3.Selected += OnMaterialButtonSelected;
@@ -96,6 +98,7 @@ namespace TestProject
 				IsEnabled = false,
 				IsSelected = true,
 				ImageSource = infoIcon,
+				IsElliptical = true
 			};
 			mb4.Tapped += OnMaterialButtonTapped;
 			mb4.Selected += OnMaterialButtonSelected;
@@ -106,7 +109,7 @@ namespace TestProject
 			var label1 = new Label {
 				Text = "Gesture Label",
 				BackgroundColor = Color.Blue,
-				HeightRequest = 50,
+				HeightRequest = 50
 			};
 
 			var label1Listener = new FormsGestures.Listener (label1);
@@ -127,24 +130,26 @@ namespace TestProject
 
 					new Label {
 						Text = "Default, Light",
-						TextColor = Color.Black,
+						TextColor = Color.Black
 					},
 					mb1,mb2, mb3, mb4,
 
 					new Label {
 						Text = "Outline, Light",
-						TextColor = Color.Black,
+						TextColor = Color.Black
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "",
 						ImageSource = arrowIcon,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "toggle",
 						ToggleBehavior = true,
 						ImageSource = infoIcon,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "disabled",
@@ -152,6 +157,7 @@ namespace TestProject
 						IsEnabled = false,
 						ImageSource = arrowIcon,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "selected disabled",
@@ -159,23 +165,26 @@ namespace TestProject
 						IsSelected = true,
 						ImageSource = infoIcon,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 
 					new Label {
 						Text = "Background Color, Light Theme",
-						TextColor = Color.Black,
+						TextColor = Color.Black
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						ImageSource = arrowIcon,
 						Orientation = StackOrientation.Vertical,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -183,6 +192,7 @@ namespace TestProject
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						ImageSource = arrowIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -190,22 +200,25 @@ namespace TestProject
 						IsSelected = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},	
 
 					new Label {
 						Text = "Shadow, Light Theme",
-						TextColor = Color.Black,
+						TextColor = Color.Black
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						HasShadow = true,
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						HasShadow = true,
 						ImageSource = arrowIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -213,6 +226,7 @@ namespace TestProject
 						IsEnabled = false,
 						HasShadow = true,
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -220,17 +234,19 @@ namespace TestProject
 						IsSelected = true,
 						HasShadow = true,
 						ImageSource = arrowIcon,
+						IsElliptical = true
 					},
 
 					new Label {
 						Text = "Shadow Background Color, Light Theme",
-						TextColor = Color.Black,
+						TextColor = Color.Black
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
@@ -238,6 +254,7 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
 						ImageSource = arrowIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -246,6 +263,7 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
 						ImageSource = infoIcon,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -254,6 +272,7 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
 						ImageSource = arrowIcon,
+						IsElliptical = true
 					},	
 
 				},
@@ -266,44 +285,50 @@ namespace TestProject
 				Children = {
 					new Label {
 						Text = "Default, Dark Theme",
-						TextColor = Color.White,
+						TextColor = Color.White
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						DarkTheme = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
 						DarkTheme = true,
+						IsElliptical = true
 					},
 
 					new Label {
 						Text = "Outline, Dark Theme",
-						TextColor = Color.White,
+						TextColor = Color.White
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						DarkTheme = true,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -311,6 +336,7 @@ namespace TestProject
 						IsEnabled = false,
 						DarkTheme = true,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -318,11 +344,12 @@ namespace TestProject
 						IsSelected = true,
 						DarkTheme = true,
 						OutlineWidth = 0,
+						IsElliptical = true
 					},
 
 					new Label {
 						Text = "Background Color, Dark Theme",
-						TextColor = Color.White,
+						TextColor = Color.White
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
@@ -330,12 +357,14 @@ namespace TestProject
 						DarkTheme = true,
 						ImageSource = arrowIcon,
 						Orientation = StackOrientation.Vertical,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
+						IsElliptical = true
 					},
 
 					new Forms9Patch.MaterialButton {
@@ -344,6 +373,7 @@ namespace TestProject
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
+						IsElliptical = true
 					},
 
 					new Forms9Patch.MaterialButton {
@@ -352,21 +382,24 @@ namespace TestProject
 						IsSelected = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
+						IsElliptical = true
 					},
 					new Label {
 						Text = "Shadow, Dark Theme",
-						TextColor = Color.White,
+						TextColor = Color.White
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -374,6 +407,7 @@ namespace TestProject
 						IsEnabled = false,
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -381,16 +415,18 @@ namespace TestProject
 						IsSelected = true,
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 					new Label {
 						Text = "Shadow Background Color, Dark Theme",
-						TextColor = Color.White,
+						TextColor = Color.White
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
@@ -398,6 +434,7 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 
 					new Forms9Patch.MaterialButton {
@@ -407,6 +444,7 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 
 					new Forms9Patch.MaterialButton {
@@ -416,229 +454,10 @@ namespace TestProject
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
+						IsElliptical = true
 					},
 				},
 			},1,0);
-			#endregion
-
-
-			#region Light SegmentedControl
-
-			var sc1 = new Forms9Patch.MaterialSegmentedControl {
-				Padding = 3,
-				Segments = {
-
-					new Forms9Patch.Segment {
-						Text = "A",
-						ImageSource = arrowIcon,
-						Command = _trueCommand,
-						CommandParameter = "sc1 A",
-					},
-					new Forms9Patch.Segment {
-						//Text = "B",
-						IsSelected = true,
-						ImageSource = arrowIcon,
-						Command = _trueCommand,
-						CommandParameter = "sc1 B",
-					},
-					new Forms9Patch.Segment {
-						Text = "C",
-						Command = _trueCommand,
-						CommandParameter = "sc1 C",
-					},
-
-					new Forms9Patch.Segment {
-						Text = "D",
-						//IsEnabled = false,
-						Command = _falseCommand,
-						CommandParameter = "sc1 D",
-					},
-				},
-			};
-			sc1.SegmentSelected += OnSegmentSelected;
-			sc1.SegmentTapped += OnSegmentTapped;
-			sc1.SegmentLongPressing += OnSegmentLongPressing;
-			sc1.SegmentLongPressed += OnSegmentLongPressed;
-
-			var seg1 = new Forms9Patch.Segment {
-				//Text = "A",
-				ImageSource = arrowIcon,
-			};
-			seg1.Tapped += OnMaterialButtonTapped;
-			seg1.Selected += OnMaterialButtonTapped;
-			seg1.LongPressing += OnMaterialButtonLongPressing;
-			seg1.LongPressed += OnMaterialButtonLongPressed;
-			var seg2 = new Forms9Patch.Segment {
-				Text = "B",
-				IsSelected = true,
-			};
-			seg2.Tapped += OnMaterialButtonTapped;
-			seg2.Selected += OnMaterialButtonTapped;
-			seg2.LongPressing += OnMaterialButtonLongPressing;
-			seg2.LongPressed += OnMaterialButtonLongPressed;
-			var seg3 = new Forms9Patch.Segment {
-				Text = "C",
-			};
-			seg3.Tapped += OnMaterialButtonTapped;
-			seg3.Selected += OnMaterialButtonTapped;
-			seg3.LongPressing += OnMaterialButtonLongPressing;
-			seg3.LongPressed += OnMaterialButtonLongPressed;
-			var seg4 = new Forms9Patch.Segment {
-				Text = "D",
-				IsEnabled = false,
-			};
-			seg4.Tapped += OnMaterialButtonTapped;
-			seg4.Selected += OnMaterialButtonTapped;
-			seg4.LongPressing += OnMaterialButtonLongPressing;
-			seg4.LongPressed += OnMaterialButtonLongPressed;
-
-
-			var sc2 = new Forms9Patch.MaterialSegmentedControl {
-				OutlineWidth = 0,
-				Padding = 3,
-				Segments = {
-					seg1, seg2, seg3, seg4,
-				},
-			};
-			sc2.SegmentSelected += OnSegmentSelected;
-			sc2.SegmentTapped += OnSegmentTapped;
-			sc2.SegmentLongPressing += OnSegmentLongPressing;
-			sc2.SegmentLongPressed += OnSegmentLongPressed;
-
-			var sc3 = new Forms9Patch.MaterialSegmentedControl {
-				//OutlineColor = Color.Transparent,
-				BackgroundColor = Color.FromHex("#E0E0E0"),
-				Padding = 3,
-				Segments = {
-					new Forms9Patch.Segment {
-						Text = "A",
-					},
-					new Forms9Patch.Segment {
-						Text = "B",
-						IsSelected = true,
-					},
-					new Forms9Patch.Segment {
-						Text = "C",
-					},
-					new Forms9Patch.Segment {
-						//Text = "D",
-						IsEnabled = false,
-						ImageSource = arrowIcon,
-					},
-				},
-			};
-			sc3.SegmentSelected += OnSegmentSelected;
-			sc3.SegmentTapped += OnSegmentTapped;
-			sc3.SegmentLongPressing += OnSegmentLongPressing;
-			sc3.SegmentLongPressed += OnSegmentLongPressed;
-
-			var sc4 = new Forms9Patch.MaterialSegmentedControl {
-				BackgroundColor = Color.FromHex("#E0E0E0"),
-				OutlineWidth = 0,
-				SeparatorWidth = 1,
-				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.None,
-				Padding = 3,
-				Segments = {
-					new Forms9Patch.Segment {
-						Text = "A",
-						ImageSource = arrowIcon,
-						Orientation = StackOrientation.Vertical,
-					},
-					new Forms9Patch.Segment {
-						Text = "B",
-						IsSelected = true,
-						ImageSource = infoIcon,
-						Orientation = StackOrientation.Vertical,
-					},
-
-					new Forms9Patch.Segment {
-						Text = "C",
-						ImageSource = arrowIcon,
-					},
-					new Forms9Patch.Segment {
-						Text = "D",
-						IsEnabled = false,
-						ImageSource = infoIcon,
-						Orientation = StackOrientation.Vertical,
-					},
-
-				},
-			};
-			sc4.SegmentSelected += OnSegmentSelected;
-			sc4.SegmentTapped += OnSegmentTapped;
-			sc4.SegmentLongPressing += OnSegmentLongPressing;
-			sc4.SegmentLongPressed += OnSegmentLongPressed;
-
-			var sc5 = new Forms9Patch.MaterialSegmentedControl {
-				BackgroundColor = Color.FromHex("#E0E0E0"),
-				HasShadow = true,
-				//OutlineRadius = 0,
-				//OutlineWidth = 0,
-				Orientation = StackOrientation.Vertical,
-				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-				Padding = 3,
-				Segments = {
-
-					new Forms9Patch.Segment {
-						Text = "A",
-						ImageSource = arrowIcon,
-					},
-
-					new Forms9Patch.Segment {
-						Text = "B",
-						IsSelected = true,
-					},
-					new Forms9Patch.Segment {
-						Text = "C",
-					},
-					new Forms9Patch.Segment {
-						Text = "D",
-						IsEnabled = false,
-					},
-
-				},
-			};
-			sc5.SegmentSelected += OnSegmentSelected;
-			sc5.SegmentTapped += OnSegmentTapped;
-			sc5.SegmentLongPressing += OnSegmentLongPressing;
-			sc5.SegmentLongPressed += OnSegmentLongPressed;
-
-			var sc6 = new Forms9Patch.MaterialSegmentedControl {
-				BackgroundColor = Color.FromHex("#E0E0E0"),
-				HasShadow = true,
-				//OutlineRadius = 0,
-				OutlineWidth = 0,
-				SeparatorWidth = 1,
-				Orientation = StackOrientation.Vertical,
-				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-				Padding = 3,
-				Segments = {
-
-					new Forms9Patch.Segment {
-						Text = "A",
-					},
-
-					new Forms9Patch.Segment {
-						Text = "B",
-						IsSelected = true,
-						ImageSource = arrowIcon,
-						//Orientation = StackOrientation.Vertical,
-					},
-					new Forms9Patch.Segment {
-						Text = "C",
-					},
-					new Forms9Patch.Segment {
-						Text = "D",
-						IsEnabled = false,
-					},
-
-				},
-			};
-			sc6.SegmentSelected += OnSegmentSelected;
-			sc6.SegmentTapped += OnSegmentTapped;
-			sc6.SegmentLongPressing += OnSegmentLongPressing;
-			sc6.SegmentLongPressed += OnSegmentLongPressed;
-
 			#endregion
 
 
@@ -647,211 +466,6 @@ namespace TestProject
 				Content = new StackLayout{
 					Children = {
 						grid,
-
-						#region MaterialSegmentControl
-
-
-						#region Light
-						new StackLayout {
-							BackgroundColor = Color.Lime,
-							HorizontalOptions = LayoutOptions.FillAndExpand,
-							Padding = new Thickness(10),
-							Children = {
-								new Label {
-									Text = "Default, Light",
-									TextColor = Color.Black,
-								},
-
-								sc1, sc2, sc3, sc4, sc5, sc6,
-
-							},
-						},
-						#endregion
-
-								#region Dark
-								new StackLayout {
-									BackgroundColor = Color.FromHex("#003"),
-									HorizontalOptions = LayoutOptions.FillAndExpand,
-									Padding = new Thickness(10),
-									Children = {
-										new Label {
-											Text = "Default, Dark",
-											TextColor = Color.White,
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											//OutlineColor = Color.Transparent,
-											DarkTheme = true,
-											Padding = 3,
-											Segments = {
-
-												new Forms9Patch.Segment {
-													Text = "A",
-												},
-												new Forms9Patch.Segment {
-													//Text = "B",
-													IsSelected = true,
-													ImageSource = arrowIcon,
-												},
-												new Forms9Patch.Segment {
-													Text = "C",
-												},
-
-												new Forms9Patch.Segment {
-													Text = "D",
-													IsEnabled = false,
-												},
-											},
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											DarkTheme = true,
-											OutlineWidth = 0,
-											Padding = 3,
-											Segments = {
-
-												new Forms9Patch.Segment {
-													//Text = "A",
-													ImageSource = arrowIcon,
-												},
-												new Forms9Patch.Segment {
-													Text = "B",
-													IsSelected = true,
-												},
-												new Forms9Patch.Segment {
-													Text = "C",
-												},
-
-												new Forms9Patch.Segment {
-													Text = "D",
-													IsEnabled = false,
-												},
-											},
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											DarkTheme = true,
-											BackgroundColor = Color.FromHex("#1194F6"),
-											Padding = 3,
-											Segments = {
-												new Forms9Patch.Segment {
-													Text = "A",
-												},
-												new Forms9Patch.Segment {
-													Text = "B",
-													IsSelected = true,
-												},
-												new Forms9Patch.Segment {
-													Text = "C",
-												},
-												new Forms9Patch.Segment {
-													//Text = "D",
-													IsEnabled = false,
-													ImageSource = arrowIcon,
-												},
-											},
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											DarkTheme = true,
-											BackgroundColor = Color.FromHex("#1194F6"),
-											OutlineWidth = 0,
-											Padding = 3,
-											Segments = {
-												new Forms9Patch.Segment {
-													Text = "A",
-													ImageSource = arrowIcon,
-													Orientation = StackOrientation.Vertical,
-												},
-												new Forms9Patch.Segment {
-													Text = "B",
-													IsSelected = true,
-													ImageSource = infoIcon,
-													Orientation = StackOrientation.Vertical,
-												},
-
-												new Forms9Patch.Segment {
-													Text = "C",
-													ImageSource = arrowIcon,
-												},
-												new Forms9Patch.Segment {
-													Text = "D",
-													IsEnabled = false,
-													ImageSource = infoIcon,
-													Orientation = StackOrientation.Vertical,
-												},
-
-											},
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											DarkTheme = true,
-											BackgroundColor = Color.FromHex("#1194F6"),
-											HasShadow = true,
-											//OutlineRadius = 0,
-											//OutlineWidth = 0,
-											Orientation = StackOrientation.Vertical,
-											GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-											Padding = 3,
-											Segments = {
-
-												new Forms9Patch.Segment {
-													Text = "A",
-													ImageSource = arrowIcon,
-												},
-
-												new Forms9Patch.Segment {
-													Text = "B",
-													IsSelected = true,
-												},
-												new Forms9Patch.Segment {
-													Text = "C",
-												},
-												new Forms9Patch.Segment {
-													Text = "D",
-													IsEnabled = false,
-												},
-
-											},
-										},
-
-										new Forms9Patch.MaterialSegmentedControl {
-											DarkTheme = true,
-											BackgroundColor = Color.FromHex("#1194F6"),
-											HasShadow = true,
-											//OutlineRadius = 0,
-											OutlineWidth = 0,
-											SeparatorWidth = 1,
-											Orientation = StackOrientation.Vertical,
-											GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-											Padding = 3,
-											Segments = {
-
-												new Forms9Patch.Segment {
-													Text = "A",
-												},
-
-												new Forms9Patch.Segment {
-													Text = "B",
-													IsSelected = true,
-													ImageSource = arrowIcon,
-												},
-												new Forms9Patch.Segment {
-													Text = "C",
-												},
-												new Forms9Patch.Segment {
-													Text = "D",
-													IsEnabled = false,
-												},
-
-											},
-										},
-									},
-								},
-								#endregion
-
-						#endregion
-
 					},
 				},
 			};

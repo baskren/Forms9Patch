@@ -71,6 +71,7 @@ namespace Forms9Patch
 			}
 		}
 
+
 		/// <summary>
 		/// The backing store for the ListViews's GroupToggleBehavior property.
 		/// </summary>

@@ -214,6 +214,24 @@ namespace Forms9Patch
 			}
 		}
 
+		[Obsolete("StickyBehavior property is obsolete, use GroupToggleBehavior instead")]
+		/// <summary>
+		/// Backing store for the ToggleBehavior bindable property.
+		/// </summary>
+		public static BindableProperty StickyBehaviorProperty = null;
+
+		[Obsolete("StickyBehavior property is obsolete, use GroupToggleBehavior instead")]
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
+		/// </summary>
+		/// <value><c>true</c> if Toggle; otherwise, <c>false</c>.</value>
+		public bool StickyBehavior
+		{
+			get { throw new NotSupportedException("StickyBehavior property is obsolete, use GroupToggleBehavior instead"); }
+			set { throw new NotSupportedException("StickyBehavior property is obsolete, use GroupToggleBehavior instead"); }
+		}
+
+
 		/// <summary>
 		/// The backing store for the MaterialSegmentControl's ToggleBehavior property.
 		/// </summary>

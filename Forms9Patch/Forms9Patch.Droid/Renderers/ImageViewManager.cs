@@ -20,6 +20,7 @@ namespace Forms9Patch.Droid
 		Xamarin.Forms.ImageSource _source;
 		Android.Widget.ImageView _imageView;
 		bool _firstLoad = true;
+		Forms9Patch.Image _image;
 
 		string text {
 			get {
@@ -82,6 +83,16 @@ namespace Forms9Patch.Droid
 			await LayoutImage (image);
 		}
 
+		void ImagePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
+				LayoutImage(_image);
+			else if (e.PropertyName == VisualElement.OpacityProperty.PropertyName)
+			{
+				if (_imageView != null)
+					_imageView.Alpha = (float)_image.Opacity;
+			}
+		}
 
 		bool working;
 		bool waiting;
@@ -99,6 +110,15 @@ namespace Forms9Patch.Droid
 			}
 			working = true;
 
+
+			if (image != _image)
+			{
+				if (_image != null)
+					_image.PropertyChanged -= ImagePropertyChanged;
+				_image = image;
+				if (_image != null)
+					_image.PropertyChanged += ImagePropertyChanged;
+			}
 			Xamarin.Forms.ImageSource newSource = image?.Source;
 			Drawable drawable = null;
 
@@ -299,6 +319,9 @@ namespace Forms9Patch.Droid
 								_imageView = new Android.Widget.ImageView (global::Android.App.Application.Context);
 							else if (droidImageView != null)
 								_imageView = droidImageView;
+
+							_imageView.Alpha = (float)image.Opacity;
+
 							if (image.Fill != Fill.Tile) {
 								if (_imageView != null) {
 									if (drawable != null) {

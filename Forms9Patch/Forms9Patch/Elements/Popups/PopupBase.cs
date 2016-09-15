@@ -184,6 +184,13 @@ namespace Forms9Patch
 			}
 		}
 
+		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(PopupBase), default(bool));
+		public bool IsElliptical
+		{
+			get { return (bool)GetValue(IsEllipticalProperty); }
+			set { SetValue(IsEllipticalProperty, value); }
+		}
+
 		#endregion
 
 

@@ -24,7 +24,7 @@ namespace Forms9Patch.iOS
 		NinePatch _ninePatch;
 		bool _firstLoad = true;
 		UIImage _sourceImage;
-
+		Forms9Patch.Image _image;
 
 		public VisualElement Element {
 			get;
@@ -129,6 +129,19 @@ namespace Forms9Patch.iOS
 			await LayoutImage (image);
 		}
 
+		void ImagePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName)
+				LayoutImage(_image);
+			else if (e.PropertyName == Forms9Patch.Image.OpacityProperty.PropertyName)
+			{
+				if (_ninePatch != null)
+					_ninePatch.Alpha = (nfloat)_image.Opacity;
+				if (_imageView != null)
+					_imageView.Alpha = (nfloat)_image.Opacity;
+			}
+		}
+
 		static int _iteration;
 		async internal Task LayoutImage(Image image) {
 			int _i = _iteration++;
@@ -139,6 +152,14 @@ namespace Forms9Patch.iOS
 			//TimeSpan delta;
 
 			//var start1 = DateTime.Now;
+			if (image != _image)
+			{
+				if (_image != null)
+					_image.PropertyChanged -= ImagePropertyChanged;
+				_image = image;
+				if (_image != null)
+					_image.PropertyChanged += ImagePropertyChanged;
+			}
 			Xamarin.Forms.ImageSource newSource = image?.Source;
 
 			//UIImage uiImage = null;
@@ -341,6 +362,7 @@ namespace Forms9Patch.iOS
 					_imageView.Frame = new CGRect (0.0, 0.0, _control.Frame.Width, _control.Frame.Height);
 					_imageView.ClipsToBounds = true;
 					_imageView.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+					_imageView.Alpha = (System.nfloat)image.Opacity;
 					_control.Add (_imageView);
 					_control.SendSubviewToBack (_imageView);
 				} else if (image.ContentPadding.Left < 0 )  {
@@ -364,6 +386,7 @@ namespace Forms9Patch.iOS
 					//_ninePatch.Frame = new CGRect(
 					//_control.Frame = _ninePatch.Frame;
 					_ninePatch.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+					_ninePatch.Alpha = (nfloat)image.Opacity;
 					_control.Add (_ninePatch);
 					_control.SendSubviewToBack (_ninePatch);
 				}

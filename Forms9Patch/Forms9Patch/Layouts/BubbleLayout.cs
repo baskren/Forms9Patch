@@ -186,6 +186,19 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// The is elliptical property backing store.
+		/// </summary>
+		public static readonly BindableProperty IsEllipticalProperty = RoundedBoxBase.IsEllipticalProperty;
+		/// <summary>
+		/// Gets or sets a value indicating whether this Element is elliptical (rather than rectangular).
+		/// </summary>
+		/// <value><c>true</c> if is elliptical; otherwise, <c>false</c>.</value>
+		public bool IsElliptical
+		{
+			get { return (bool)GetValue(IsEllipticalProperty); }
+			set { SetValue(IsEllipticalProperty, value); }
+		}
 		#endregion
 
 		/// <summary>

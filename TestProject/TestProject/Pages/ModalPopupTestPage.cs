@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
@@ -100,7 +100,7 @@ namespace TestProject
 			var cancelOnBackgroundTouchButton = new Forms9Patch.MaterialButton
 			{
 				Text = "Cancel on Background touch",
-				StickyBehavior = true,
+				ToggleBehavior = true,
 				IsSelected = true
 			};
 			cancelOnBackgroundTouchButton.SetBinding(Forms9Patch.MaterialButton.IsSelectedProperty,"CancelOnBackgroundTouch");

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
@@ -146,7 +146,7 @@ namespace TestProject
 			PointerDirection = Forms9Patch.PointerDirection.Left;
 			var directionSegmentControl = new Forms9Patch.MaterialSegmentedControl {
 				Segments = { leftSeg, upSeg, rightSeg, downSeg, },
-				StickyBehavior = Forms9Patch.SegmentControlStickyBehavior.Multiselect,
+				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
 			};
 			directionSegmentControl.SegmentTapped += (sender,e) => {
 				var dir = Forms9Patch.PointerDirection.None;

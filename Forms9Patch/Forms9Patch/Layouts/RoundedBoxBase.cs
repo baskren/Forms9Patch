@@ -41,6 +41,11 @@ namespace Forms9Patch
 		/// <remarks></remarks>
 		public static readonly BindableProperty PaddingProperty = BindableProperty.Create ("Padding", typeof(Thickness), typeof(RoundedBoxBase), new Thickness (0), BindingMode.OneWay, UpdateBasePadding);
 
+		/// <summary>
+		/// The elliptical property backing store.
+		/// </summary>
+		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(RoundedBoxBase), false);
+
 		internal static bool UpdateBasePadding(BindableObject bindable, object newValue) {
 			var layout = bindable as Layout;
 			Thickness layoutPadding;
@@ -72,6 +77,7 @@ namespace Forms9Patch
 			//var contentView = bindable as ContentView;
 			return true;
 		}
+
 
 		internal static Thickness ShadowPadding(Layout layout) {
 			if (layout == null)

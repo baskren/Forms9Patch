@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
@@ -143,7 +143,7 @@ namespace TestProject
 			};
 
 			var mb2 = new Button {
-				Text = "sticky",
+				Text = "toggle",
 				Image = (FileImageSource)infoIcon,
 			};
 			var mb3 = new Button {
@@ -178,7 +178,7 @@ namespace TestProject
 						Image = (FileImageSource)arrowIcon,
 					},
 					new Button {
-						Text = "sticky",
+						Text = "toggle",
 					},
 					new Button {
 						Text = "disabled",
@@ -199,7 +199,7 @@ namespace TestProject
 						Image = (FileImageSource)arrowIcon,
 					},
 					new Button {
-						Text = "sticky",
+						Text = "toggle",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						Image = (FileImageSource)infoIcon,
 					},
@@ -225,7 +225,7 @@ namespace TestProject
 						Image = (FileImageSource)infoIcon,
 					},
 					new Button {
-						Text = "sticky",
+						Text = "toggle",
 						Image = (FileImageSource)arrowIcon,
 					},
 					new Button {
@@ -249,7 +249,7 @@ namespace TestProject
 						Image = (FileImageSource)infoIcon,
 					},
 					new Button {
-						Text = "sticky",
+						Text = "toggle",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						Image = (FileImageSource)arrowIcon,
 					},
@@ -283,13 +283,13 @@ namespace TestProject
 						DarkTheme = true,
 					},
 					new Forms9Patch.MaterialButton {
-						Text = "sticky",
-						StickyBehavior = true,
+						Text = "toggle",
+						ToggleBehavior = true,
 						DarkTheme = true,
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
-						StickyBehavior = true,
+						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 					},
@@ -310,14 +310,14 @@ namespace TestProject
 						OutlineWidth = 0,
 					},
 					new Forms9Patch.MaterialButton {
-						Text = "sticky",
-						StickyBehavior = true,
+						Text = "toggle",
+						ToggleBehavior = true,
 						DarkTheme = true,
 						OutlineWidth = 0,
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
-						StickyBehavior = true,
+						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 						OutlineWidth = 0,
@@ -342,15 +342,15 @@ namespace TestProject
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.MaterialButton {
-						Text = "sticky",
-						StickyBehavior = true,
+						Text = "toggle",
+						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 					},
 
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
-						StickyBehavior = true,
+						ToggleBehavior = true,
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
@@ -373,14 +373,14 @@ namespace TestProject
 						HasShadow = true,
 					},
 					new Forms9Patch.MaterialButton {
-						Text = "sticky",
-						StickyBehavior = true,
+						Text = "toggle",
+						ToggleBehavior = true,
 						DarkTheme = true,
 						HasShadow = true,
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
-						StickyBehavior = true,
+						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 						HasShadow = true,
@@ -403,8 +403,8 @@ namespace TestProject
 						HasShadow = true,
 					},
 					new Forms9Patch.MaterialButton {
-						Text = "sticky",
-						StickyBehavior = true,
+						Text = "toggle",
+						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
@@ -412,7 +412,7 @@ namespace TestProject
 
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
-						StickyBehavior = true,
+						ToggleBehavior = true,
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
@@ -728,7 +728,7 @@ namespace TestProject
 											//OutlineRadius = 0,
 											//OutlineWidth = 0,
 											Orientation = StackOrientation.Vertical,
-											StickyBehavior = Forms9Patch.SegmentControlStickyBehavior.Multiselect,
+											GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
 											Segments = {
 
 												new Forms9Patch.Segment {
@@ -759,7 +759,7 @@ namespace TestProject
 											OutlineWidth = 0,
 											SeparatorWidth = 1,
 											Orientation = StackOrientation.Vertical,
-											StickyBehavior = Forms9Patch.SegmentControlStickyBehavior.Multiselect,
+											GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
 											Segments = {
 
 												new Forms9Patch.Segment {
