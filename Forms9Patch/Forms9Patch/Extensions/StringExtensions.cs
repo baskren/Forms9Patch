@@ -10,7 +10,7 @@ namespace Forms9Patch
 	/// </summary>
 	static class StringExtensions
 	{
-		public static IEnumerable<int> GetUnicodeCodePoints(this string s) {
+		internal static IEnumerable<int> GetUnicodeCodePoints(this string s) {
 			for (int i = 0; i < s.Length; i++) {
 				int unicodeCodePoint = char.ConvertToUtf32(s, i);
 				if (unicodeCodePoint > 0xffff)
@@ -19,24 +19,47 @@ namespace Forms9Patch
 			}
 		}
 
-		public static double ToFontSize(this string sizeString) {
+		internal static double ToFontSize(this string sizeString) {
 			var s = sizeString;
 			double size;
+			int intSize;
 			var element = new Xamarin.Forms.Label ();
 			if (s.EndsWith ("px")) {
-				if (double.TryParse (s.Substring(0,s.Length-2), out size)) 
+				var subString = s.Substring(0, s.Length - 2);
+				if (double.TryParse (subString, out size)) 
 					return size;
-				throw new FormatException ("Cannot parse ["+s+"] font size");
+				if (subString.Contains("."))
+				{
+					var index = subString.IndexOf('.');
+					if (int.TryParse(subString.Substring(0,index), out intSize))
+						return intSize;
+				}
+				throw new FormatException ("Cannot parse ["+s+"]["+subString+"] ["+size+"] px font size");
 			}
 			if (s.EndsWith ("em")) {
-				if (double.TryParse (s.Substring(0,s.Length-2), out size)) 
+				var subString = s.Substring(0, s.Length - 2);
+				if (double.TryParse(subString, out size))
 					return -size;
-				throw new FormatException ("Cannot parse ["+s+"] font size");
+				if (subString.Contains("."))
+				{
+					var index = subString.IndexOf('.');
+					if (int.TryParse(subString.Substring(0, index), out intSize))
+						return intSize;
+				}
+				throw new FormatException("Cannot parse [" + s + "][" + subString + "] [" + size + "] em font size");
 			}
-			if (s.EndsWith ("%")) {
-				if (double.TryParse (s.Substring(0,s.Length-1), out size)) 
-					return -size/100.0;
-				throw new FormatException ("Cannot parse ["+s+"] font size");
+			if (s.EndsWith("%"))
+			{
+				var subString = s.Substring(0, s.Length - 1);
+				if (double.TryParse(subString, out size))
+					return -size / 100.0;
+				if (subString.Contains("."))
+				{
+					var index = subString.IndexOf('.');
+					if (int.TryParse(subString.Substring(0, index), out intSize))
+						return intSize;
+				}
+				throw new FormatException("Cannot parse [" + s + "][" + subString + "] [" + size + "] % font size");
 			}
 			switch (s.ToLower ()) {
 			case "xx-small":
@@ -76,7 +99,7 @@ namespace Forms9Patch
 			return 0;
 		}
 
-		public static Color ToColor(this string s) {
+		internal static Color ToColor(this string s) {
 			if (s.ToLower ().StartsWith ("rgb(")) {
 				var values = s.Substring (4, s.Length - 5).Split (',').Select (int.Parse).ToArray ();
 				if (values.Length != 3)

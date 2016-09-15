@@ -7,10 +7,21 @@ using System.Collections.Generic;
 [assembly: Xamarin.Forms.Dependency(typeof(Bc3.Forms.iOS.ListViewExtensionService_iOS))]
 namespace Bc3.Forms.iOS
 {
+	/// <summary>
+	/// List view extension service  i os.
+	/// </summary>
 	public class ListViewExtensionService_iOS : IListViewExtensionService
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Bc3.Forms.iOS.ListViewExtensionService_iOS"/> class.
+		/// </summary>
 		public ListViewExtensionService_iOS() { }
 
+		/// <summary>
+		/// Indexs the path at center.
+		/// </summary>
+		/// <returns>The path at center.</returns>
+		/// <param name="listView">List view.</param>
 		public Tuple<int, int> IndexPathAtCenter(Xamarin.Forms.ListView listView)
 		{
 			var renderer = Renderer(listView);
@@ -21,6 +32,11 @@ namespace Bc3.Forms.iOS
 			return IndexPathAtPoint(listView, center);
 		}
 
+		/// <summary>
+		/// Selecteds the index path.
+		/// </summary>
+		/// <returns>The index path.</returns>
+		/// <param name="listView">List view.</param>
 		public Tuple<int, int> SelectedIndexPath(Xamarin.Forms.ListView listView)
 		{
 			var indexPath = Renderer(listView).Control.IndexPathForSelectedRow;
@@ -36,6 +52,12 @@ namespace Bc3.Forms.iOS
 			return listViewRenderer;
 		}
 
+		/// <summary>
+		/// Indexs the path at point.
+		/// </summary>
+		/// <returns>The path at point.</returns>
+		/// <param name="listView">List view.</param>
+		/// <param name="p">P.</param>
 		public Tuple<int, int> IndexPathAtPoint(Xamarin.Forms.ListView listView, Xamarin.Forms.Point p)
 		{
 			var renderer = Renderer(listView);
@@ -64,6 +86,11 @@ namespace Bc3.Forms.iOS
 			//return new Tuple<int, int>(indexPath.Section, indexPath.Row);
 		}
 
+		/// <summary>
+		/// Indexs the paths of visible cells.
+		/// </summary>
+		/// <returns>The paths of visible cells.</returns>
+		/// <param name="listView">List view.</param>
 		public List<Tuple<int, int>> IndexPathsOfVisibleCells(Xamarin.Forms.ListView listView)
 		{
 			var renderer = Renderer(listView);

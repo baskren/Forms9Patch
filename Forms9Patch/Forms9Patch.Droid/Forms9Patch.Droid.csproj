@@ -144,7 +144,6 @@
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Services\ListViewExtensionService.cs" />
-    <Compile Include="Services\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

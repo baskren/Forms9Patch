@@ -184,7 +184,14 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// The is elliptical property.
+		/// </summary>
 		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(PopupBase), default(bool));
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is elliptical rathen than rectangular.
+		/// </summary>
+		/// <value><c>true</c> if is elliptical; otherwise, <c>false</c>.</value>
 		public bool IsElliptical
 		{
 			get { return (bool)GetValue(IsEllipticalProperty); }

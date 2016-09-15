@@ -113,8 +113,6 @@
     <Compile Include="Elements\ListView\Enums\AccessoryPosition.cs" />
     <Compile Include="Elements\Pickers\SelectBy.cs" />
     <Compile Include="Elements\ListView\Interfaces\IItem.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Interfaces\ITypeExtensions.cs" />
     <Compile Include="Elements\Popups\ModalPopup.cs" />
     <Compile Include="Elements\Popups\PopupBase.cs" />
     <Compile Include="Elements\Popups\BubblePopup.cs" />

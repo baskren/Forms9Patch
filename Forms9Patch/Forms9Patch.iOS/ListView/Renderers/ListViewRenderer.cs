@@ -6,8 +6,15 @@ using Foundation;
 [assembly: ExportRenderer(typeof(Forms9Patch.ListView), typeof(Forms9Patch.iOS.ListViewRenderer))]
 namespace Forms9Patch.iOS
 {
+	/// <summary>
+	/// List view renderer.
+	/// </summary>
 	public class ListViewRenderer : Xamarin.Forms.Platform.iOS.ListViewRenderer
 	{
+		/// <summary>
+		/// Ons the element changed.
+		/// </summary>
+		/// <param name="e">E.</param>
 		protected override void OnElementChanged (ElementChangedEventArgs<Xamarin.Forms.ListView> e)
 		{
 			base.OnElementChanged(e);
@@ -24,6 +31,11 @@ namespace Forms9Patch.iOS
 			Control.AllowsSelection = false;
 		}
 
+		/// <summary>
+		/// Ons the element property changed.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			base.OnElementPropertyChanged (sender, e);

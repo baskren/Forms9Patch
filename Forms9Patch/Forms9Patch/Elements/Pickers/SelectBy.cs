@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Forms9Patch
 {
-	public enum SelectBy
+	internal enum SelectBy
 	{
 		Position,
 		Default,
