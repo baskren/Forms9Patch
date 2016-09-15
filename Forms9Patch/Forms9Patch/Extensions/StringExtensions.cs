@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -24,41 +25,23 @@ namespace Forms9Patch
 			double size;
 			int intSize;
 			var element = new Xamarin.Forms.Label ();
-			if (s.EndsWith ("px")) {
+			if (s.EndsWith ("px",StringComparison.Ordinal)) {
 				var subString = s.Substring(0, s.Length - 2);
-				if (double.TryParse (subString, out size)) 
+				if (double.TryParse (subString, NumberStyles.Float, CultureInfo.InvariantCulture, out size)) 
 					return size;
-				if (subString.Contains("."))
-				{
-					var index = subString.IndexOf('.');
-					if (int.TryParse(subString.Substring(0,index), out intSize))
-						return intSize;
-				}
 				throw new FormatException ("Cannot parse ["+s+"]["+subString+"] ["+size+"] px font size");
 			}
-			if (s.EndsWith ("em")) {
+			if (s.EndsWith ("em",StringComparison.Ordinal)) {
 				var subString = s.Substring(0, s.Length - 2);
-				if (double.TryParse(subString, out size))
+				if (double.TryParse(subString, NumberStyles.Float, CultureInfo.InvariantCulture, out size))
 					return -size;
-				if (subString.Contains("."))
-				{
-					var index = subString.IndexOf('.');
-					if (int.TryParse(subString.Substring(0, index), out intSize))
-						return intSize;
-				}
 				throw new FormatException("Cannot parse [" + s + "][" + subString + "] [" + size + "] em font size");
 			}
-			if (s.EndsWith("%"))
+			if (s.EndsWith("%", StringComparison.Ordinal))
 			{
 				var subString = s.Substring(0, s.Length - 1);
-				if (double.TryParse(subString, out size))
+				if (double.TryParse(subString, NumberStyles.Float, CultureInfo.InvariantCulture, out size))
 					return -size / 100.0;
-				if (subString.Contains("."))
-				{
-					var index = subString.IndexOf('.');
-					if (int.TryParse(subString.Substring(0, index), out intSize))
-						return intSize;
-				}
 				throw new FormatException("Cannot parse [" + s + "][" + subString + "] [" + size + "] % font size");
 			}
 			switch (s.ToLower ()) {
@@ -90,7 +73,7 @@ namespace Forms9Patch
 			case "initial":
 				return -1;
 			}
-			if (double.TryParse (s, out size)) {
+			if (double.TryParse (s, NumberStyles.Float, CultureInfo.InvariantCulture, out size)) {
 				if (size < 1)
 					return Device.GetNamedSize (NamedSize.Micro, element);
 				if (size > 7)
@@ -100,17 +83,17 @@ namespace Forms9Patch
 		}
 
 		internal static Color ToColor(this string s) {
-			if (s.ToLower ().StartsWith ("rgb(")) {
+			if (s.ToLower ().StartsWith ("rgb(", StringComparison.Ordinal)) {
 				var values = s.Substring (4, s.Length - 5).Split (',').Select (int.Parse).ToArray ();
 				if (values.Length != 3)
 					throw new FormatException ("Could not parse ["+s+"] into RGB integer components");
 				return Color.FromRgb (values [0], values [1], values [2]);
-			} else if (s.ToLower().StartsWith("rgba(")) {
+			} else if (s.ToLower().StartsWith("rgba(", StringComparison.Ordinal)) {
 				var values = s.Substring (5, s.Length - 6).Split (',').Select (int.Parse).ToArray ();
 				if (values.Length != 4)
 					throw new FormatException ("Could not parse ["+s+"] into RGBA integer components");
 				return Color.FromRgba (values [0], values [1], values [2], values[3]);
-			} else if (s.StartsWith ("#")) {
+			} else if (s.StartsWith ("#", StringComparison.Ordinal)) {
 				return Color.FromHex (s.Substring (1));
 			} else {
 				var colorName = s.ToLower ();
