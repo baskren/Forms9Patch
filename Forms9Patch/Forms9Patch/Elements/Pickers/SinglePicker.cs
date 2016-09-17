@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Xamarin.Forms;
+using System;
 
 namespace Forms9Patch
 {
@@ -88,7 +89,9 @@ namespace Forms9Patch
 		{
 			BackgroundColor = Color.Transparent
 		};
-		readonly internal Xamarin.Forms.AbsoluteLayout _absLayout = new Xamarin.Forms.AbsoluteLayout();
+		//readonly internal Xamarin.Forms.AbsoluteLayout _absLayout = new Xamarin.Forms.AbsoluteLayout();
+		//readonly internal Xamarin.Forms.RelativeLayout _relLayout = new Xamarin.Forms.RelativeLayout();
+		readonly internal ManualLayout _manLayout = new ManualLayout();
 
 		readonly internal Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);
 
@@ -110,6 +113,11 @@ namespace Forms9Patch
 		{
 			BackgroundColor = Color.Gray
 		};
+
+		BoxView _redBox = new BoxView
+		{
+			BackgroundColor = Color.Red
+		};
 		#endregion
 
 		/// <summary>
@@ -124,26 +132,12 @@ namespace Forms9Patch
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0.5);
 			_lowerGradient.EndColor = _overlayColor;
 
-			//Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_selectionPadView, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.YProportional);
-			Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_basePicker, AbsoluteLayoutFlags.All);
-			Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_upperGradient, AbsoluteLayoutFlags.All);
-			Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_lowerGradient, AbsoluteLayoutFlags.All);
-			Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_upperEdge, AbsoluteLayoutFlags.YProportional | AbsoluteLayoutFlags.WidthProportional);
-			Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(_lowerEdge, AbsoluteLayoutFlags.YProportional | AbsoluteLayoutFlags.WidthProportional);
-
-			//Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_selectionPadView, new Rectangle(0,0.5,1.0,RowHeight));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_basePicker, new Rectangle(0.5, 0.5, 1.0, 1.0));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperGradient, new Rectangle(0.5,0.0,1.0, 0.4));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerGradient, new Rectangle(0.5,1.0,1.0, 0.4));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperEdge, new Rectangle(0.5, 0.4, 1.0, 1.0));
-			Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerEdge, new Rectangle(0.5, 0.6, 1.0, 1.0));
-
-			//_absLayout.Children.Add(_selectionPadView);
-			_absLayout.Children.Add(_upperEdge);
-			_absLayout.Children.Add(_lowerEdge);
-			_absLayout.Children.Add(_basePicker);
-			_absLayout.Children.Add(_upperGradient);
-			_absLayout.Children.Add(_lowerGradient);
+			_manLayout.Children.Add(_upperEdge);
+			_manLayout.Children.Add(_lowerEdge);
+			_manLayout.Children.Add(_basePicker);
+			_manLayout.Children.Add(_upperGradient);
+			_manLayout.Children.Add(_lowerGradient);
+			_manLayout.LayoutChildrenEvent += OnManualLayoutChildren;
 
 			_basePicker.SelectBy = SelectBy.Position;
 			_basePicker.SetBinding(BasePicker.ItemsSourceProperty,"ItemsSource");
@@ -152,29 +146,33 @@ namespace Forms9Patch
 			_basePicker.SetBinding(BasePicker.SelectedItemProperty, "SelectedItem");
 			_basePicker.BindingContext = this;
 
-			Content = _absLayout;
+			VerticalOptions = LayoutOptions.FillAndExpand;
+
+			Content = _manLayout;
 		}
 
 		#region change management
-		/// <summary>
-		/// Ons the property changed.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
-			if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
-			{
-				var overlayPortion = ((Height - RowHeight) / 2.0) / Height;
-				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperGradient, new Rectangle(0.5, 0.0, 1.0, overlayPortion));
-				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerGradient, new Rectangle(0.5, 1.0, 1.0, overlayPortion));
-				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_upperEdge, new Rectangle(0.5, overlayPortion, 1.0, 1.0));
-				Xamarin.Forms.AbsoluteLayout.SetLayoutBounds(_lowerEdge, new Rectangle(0.5, 1-overlayPortion, 1.0, 1.0));
-
-			}
+			if (propertyName == RowHeightProperty.PropertyName)
+				OnManualLayoutChildren(this, new ManualLayoutEventArgs(X,Y,Width,Height));
 		}
 
-
+		void OnManualLayoutChildren(object sender, ManualLayoutEventArgs e)
+		{
+			if (Height > 0 && Width > 0)
+			{
+				double overlayHeight = (Height - RowHeight) / 2.0;
+				_manLayout.LayoutChild(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
+				_manLayout.LayoutChild(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
+				_manLayout.LayoutChild(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));
+				if (_manLayout.Children.Contains(_lowerEdge))
+					_manLayout.LayoutChild(_lowerEdge, new Rectangle(e.X, overlayHeight, e.Width, 1.0));
+				if (_manLayout.Children.Contains(_upperEdge))
+					_manLayout.LayoutChild(_upperEdge, new Rectangle(e.X, e.Height - overlayHeight, e.Width, 1.0));
+			}
+		}
 		#endregion
 
 	}

@@ -172,6 +172,11 @@ namespace Forms9Patch
 			get { return (int)GetValue(IndexProperty); }
 			set { SetValue(IndexProperty, value); }
 		}
+
+		public View CellView
+		{
+			get { return BaseCellView.Content; }
+		}
 		#endregion
 
 

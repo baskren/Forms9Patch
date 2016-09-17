@@ -303,14 +303,17 @@ namespace Forms9Patch
 
 		#region Selection Events
 		/// <summary>
-		/// Occurs when item is selected.
+		/// Occurs when cell is selected.
 		/// </summary>
 		public new event EventHandler<SelectedItemChangedEventArgs> ItemSelected;
 
 		/// <summary>
-		/// Occurs when item is tapped.
+		/// Occurs when cell is tapped.
 		/// </summary>
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
+
+
+
 
 		void OnItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
 		{
@@ -320,53 +323,71 @@ namespace Forms9Patch
 
 		Item _selectedF9PItem;
 		List<Item> _selectedF9PItems = new List<Item>();
-		void OnItemTapped(object sender, ItemTappedEventArgs e)
+		void OnTapped(object sender, TapEventArgs e)
 		{
-			//System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
-			var tappedItem = ((Item)e?.Item);
-			var group = (Group)((BindableObject)e.Group)?.GetValue(Xamarin.Forms.ListView.ItemsSourceProperty);
-			if (tappedItem?.Source != null)
+			base.SelectedItem = null;
+			if (e.Touches.Count() == 1)
 			{
-				// null source items are not tappable or selectable
-				ItemTapped?.Invoke(this, new ItemTappedEventArgs(group, tappedItem.Source));
-				switch (GroupToggleBehavior)
+				var indexPath = this.IndexPathAtPoint(e.Touches[0]);
+				if (indexPath == null)
+					return;
+				if (indexPath.Item2 < 0)
+					return;
+
+				Item tappedItem = null;
+				Group group = _baseItemsSource;
+				if (IsGroupingEnabled)
 				{
-					case GroupToggleBehavior.None:
-						_internalAddRemove = true;
-						SelectedItems.Clear();
-						_internalAddRemove = false;
-						SelectedItem = null;
-						if (_selectedF9PItem != null)
-							_selectedF9PItem.IsSelected = false;
-						_selectedF9PItem = null;
-						if (_selectedF9PItems.Count > 0)
-						{
-							foreach (var item in _selectedF9PItems)
-								item.IsSelected = false;
-							_selectedF9PItems.Clear();
-						}
-						break;
-					case GroupToggleBehavior.Radio:
-						if (tappedItem != _selectedF9PItem)
-						{
-							RemoveSelectedItem(_selectedF9PItem);
-							AddSelectedItem(tappedItem);
-							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group, tappedItem.Source));
-						}
-						break;
-					case GroupToggleBehavior.Multiselect:
-						if (_selectedF9PItems.Contains(tappedItem))
-						{
-							if (base.SelectedItem == tappedItem)
-								base.SelectedItem = null;
-							RemoveSelectedItem(tappedItem);
-						}
-						else
-						{
-							AddSelectedItem(tappedItem);
-							ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group, tappedItem.Source));
+					group = _baseItemsSource[indexPath.Item1] as Group;
+					tappedItem = group[indexPath.Item2];
+				}
+				else
+					tappedItem = _baseItemsSource[indexPath.Item2];
+
+				//System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
+				if (tappedItem?.Source != null)
+				{
+					// null source items are not tappable or selectable
+					ItemTapped?.Invoke(this, new ItemTappedEventArgs(group.Source, tappedItem.Source, tappedItem.CellView));
+					switch (GroupToggleBehavior)
+					{
+						case GroupToggleBehavior.None:
+							_internalAddRemove = true;
+							SelectedItems.Clear();
+							_internalAddRemove = false;
+							SelectedItem = null;
+							if (_selectedF9PItem != null)
+								_selectedF9PItem.IsSelected = false;
+							_selectedF9PItem = null;
+							if (_selectedF9PItems.Count > 0)
+							{
+								foreach (var item in _selectedF9PItems)
+									item.IsSelected = false;
+								_selectedF9PItems.Clear();
+							}
+							break;
+						case GroupToggleBehavior.Radio:
+							if (tappedItem != _selectedF9PItem)
+							{
+								RemoveSelectedItem(_selectedF9PItem);
+								AddSelectedItem(tappedItem);
+								ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group.Source, tappedItem.Source, tappedItem.CellView));
+							}
+							break;
+						case GroupToggleBehavior.Multiselect:
+							if (_selectedF9PItems.Contains(tappedItem))
+							{
+								if (base.SelectedItem == tappedItem)
+									base.SelectedItem = null;
+								RemoveSelectedItem(tappedItem);
+							}
+							else
+							{
+								AddSelectedItem(tappedItem);
+								ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group.Source, tappedItem.Source, tappedItem.CellView));
 						}
 					break;
+					}
 				}
 			}
 		}
@@ -428,8 +449,6 @@ namespace Forms9Patch
 			base.SeparatorColor = Color.Transparent;
 			base.SeparatorVisibility = SeparatorVisibility.None;
 
-			//base.ItemSelected += OnItemSelected;
-			//base.ItemTapped += OnItemTapped;
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
 
@@ -438,34 +457,7 @@ namespace Forms9Patch
 			_listener.LongPressed += OnLongPressed;
 			_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
-
-			_listener.Tapped += (object sender, TapEventArgs e) =>
-			{
-				base.SelectedItem = null;
-
-				//System.Diagnostics.Debug.WriteLine("Tapped location=["+e.Touches[0]+"]");
-				if (e.Touches.Count() == 1)
-				{
-					var indexPath = this.IndexPathAtPoint(e.Touches[0]);
-					if (indexPath == null)
-						return;
-					if (indexPath.Item2 < 0)
-						return;
-					//System.Diagnostics.Debug.WriteLine("indexPath=["+indexPath+"]");
-					Item item=null;
-					Group group = null;
-					if (IsGroupingEnabled)
-					{
-						group = _baseItemsSource[indexPath.Item1] as Group;
-						item = group[indexPath.Item2];
-					}
-					else
-						item = _baseItemsSource[indexPath.Item2];
-					var args = new ItemTappedEventArgs(group, item);
-					OnItemTapped(this,args);
-				}
-			};
-
+			_listener.Tapped += OnTapped;
 
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;

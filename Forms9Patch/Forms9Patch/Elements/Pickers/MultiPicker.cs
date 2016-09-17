@@ -22,8 +22,8 @@ namespace Forms9Patch
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0);
 			_upperGradient.EndColor = _overlayColor.WithAlpha(0);
 			_basePicker.SelectBy = SelectBy.Default;
-			_absLayout.Children.Remove(_lowerEdge);
-			_absLayout.Children.Remove(_upperEdge);
+			_manLayout.Children.Remove(_lowerEdge);
+			_manLayout.Children.Remove(_upperEdge);
 			_basePicker.AccessoryPosition = AccessoryPosition.Start;
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 			_basePicker.AccessoryText = (IItem arg) => arg.IsSelected ? "✓" : null;

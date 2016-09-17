@@ -79,6 +79,12 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The index.</value>
 		int Index { get; }
+
+		/// <summary>
+		/// Gets the cell view that is bound to the item.
+		/// </summary>
+		/// <value>The cell view.</value>
+		View CellView { get; }
 	}
 }
 
