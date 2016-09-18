@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using FormsGestures;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 namespace Forms9Patch
 {
 	/// <summary>
@@ -70,6 +71,27 @@ namespace Forms9Patch
 				SetValue(SelectedItemProperty, value); 
 			}
 		}
+
+
+		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(BasePicker), null);
+		public ObservableCollection<object> SelectedItems
+		{
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
+			set { SetValue(SelectedItemsProperty, value); }
+		}
+
+		/*
+		public ObservableCollection<object> SelectedItems
+		{
+			get { return _listView.SelectedItems; }
+			set
+			{
+				_listView.SelectedItems.Clear();
+				foreach (var item in value)
+					_listView.SelectedItems.Add(item);
+			}
+		}
+		*/
 
 
 		/// <summary>
@@ -248,7 +270,7 @@ namespace Forms9Patch
 			_listView.Header = _upperPadding;
 			_listView.Footer = _lowerPadding;
 
-
+			SelectedItems = _listView.SelectedItems;
 		}
 		#endregion
 
@@ -270,7 +292,38 @@ namespace Forms9Patch
 			}
 			_tapping = false;
 		}
+
+		void OnSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					foreach (var item in e.NewItems)
+						if (!_listView.SelectedItems.Contains(item))
+							_listView.SelectedItems.Add(item);
+					break;
+				case NotifyCollectionChangedAction.Move:
+					break;
+				case NotifyCollectionChangedAction.Reset:
+					_listView.SelectedItems.Clear();
+					break;
+				case NotifyCollectionChangedAction.Remove:
+					foreach (var item in e.OldItems)
+						if (_listView.SelectedItems.Contains(item))
+							_listView.SelectedItems.Remove(item);
+					break;
+				case NotifyCollectionChangedAction.Replace:
+					foreach (var item in e.OldItems)
+						if (_listView.SelectedItems.Contains(item))
+							_listView.SelectedItems.Remove(item);
+					foreach (var item in e.NewItems)
+						if (!_listView.SelectedItems.Contains(item))
+							_listView.SelectedItems.Add(item);
+					break;
+			}
+		}
 		#endregion
+
 
 		#region Property Change management
 		/// <summary>
@@ -286,6 +339,12 @@ namespace Forms9Patch
 				if (notifiableCollection != null)
 					notifiableCollection.CollectionChanged -= SourceCollectionChanged;
 				_col.Clear();
+			}
+			else if (propertyName == SelectedItemsProperty.PropertyName)
+			{
+				if (SelectedItems != null && SelectedItems != _listView.SelectedItems)
+					SelectedItems.CollectionChanged -= OnSelectedItemsCollectionChanged;
+				_listView.SelectedItems.Clear();
 			}
 		}
 
@@ -312,6 +371,12 @@ namespace Forms9Patch
 			}
 			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
 				ScrollToIndex(Index);
+			else if (propertyName == SelectedItemsProperty.PropertyName && SelectedItems != null && SelectedItems != _listView.SelectedItems)
+			{
+				foreach (var item in SelectedItems)
+					_listView.SelectedItems.Add(item);
+				SelectedItems.CollectionChanged += OnSelectedItemsCollectionChanged;
+			}
 		}
 
 		/// <summary>

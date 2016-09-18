@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using Xamarin.Forms;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Forms9Patch
 {
@@ -10,6 +12,13 @@ namespace Forms9Patch
 	public class MultiPicker : SinglePicker
 	{
 		#region Properties
+		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(MultiPicker), null);
+		public ObservableCollection<object> SelectedItems
+		{
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
+			set { SetValue(SelectedItemsProperty, value); }
+		}
+
 		#endregion
 
 
@@ -27,6 +36,7 @@ namespace Forms9Patch
 			_basePicker.AccessoryPosition = AccessoryPosition.Start;
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 			_basePicker.AccessoryText = (IItem arg) => arg.IsSelected ? "✓" : null;
+			_basePicker.SetBinding(BasePicker.SelectedItemsProperty,"SelectedItems");
 		}
 		#endregion
 
