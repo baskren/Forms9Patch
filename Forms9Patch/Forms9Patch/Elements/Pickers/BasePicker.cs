@@ -220,6 +220,7 @@ namespace Forms9Patch
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
 			_listView.ItemAppearing += OnCellAppearing;
+			_listView.ItemTapped += OnItemTapped;
 
 			Content = _listView;
 
@@ -230,6 +231,7 @@ namespace Forms9Patch
 				//System.Diagnostics.Debug.WriteLine("Listener(_listView).Panning");
 				_lastAppearance = DateTime.Now;
 			};
+			/*
 			listener.Tapped += (object sender, TapEventArgs e) => 
 			{
 				_tapping = true;
@@ -240,6 +242,7 @@ namespace Forms9Patch
 					Index = indexPath.Item2;
 				_tapping = false;
 			};
+			*/
 
 			_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
@@ -249,6 +252,25 @@ namespace Forms9Patch
 		}
 		#endregion
 
+
+		#region Selection management
+		protected virtual void OnItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			_tapping = true;
+			//_listView.ScrollTo(e.Item, ScrollToPosition.Center, true);
+			int index=0;
+			foreach (var item in ItemsSource)
+			{
+				if (item == e.Item)
+				{
+					Index = index;
+					break;
+				}
+				index++;
+			}
+			_tapping = false;
+		}
+		#endregion
 
 		#region Property Change management
 		/// <summary>

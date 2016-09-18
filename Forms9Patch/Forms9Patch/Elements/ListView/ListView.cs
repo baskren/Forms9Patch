@@ -433,6 +433,7 @@ namespace Forms9Patch
 
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
+			base.ItemTapped += OnItemTapped;
 
 			IsEnabled = true;
 			_listener = new Listener (this);
@@ -440,7 +441,6 @@ namespace Forms9Patch
 			_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
 
-			base.ItemTapped += OnItemTapped;
 
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
@@ -767,7 +767,10 @@ namespace Forms9Patch
 				var itemItem = itemGroup.ItemWithSource(item);
 				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
 				 {
-					base.ScrollTo(itemItem,itemGroup,position,animated);
+					 if (IsGroupingEnabled)
+						 base.ScrollTo(itemItem, itemGroup, position, animated);
+					 else
+						 base.ScrollTo(itemItem, position, animated);
 					 return false;
 				 });
 			}

@@ -927,6 +927,8 @@ namespace Forms9Patch
 		#region Source finding
 		public Item ItemWithSource(object source)
 		{
+			if (this.Source == source)
+				return this;
 			foreach (var item in _items)
 			{
 				if (item.Source == source)
