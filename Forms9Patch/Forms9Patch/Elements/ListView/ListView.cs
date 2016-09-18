@@ -313,38 +313,19 @@ namespace Forms9Patch
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
 
 
-
-
-		void OnItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
-		{
-			//if (GroupToggleBehavior == GroupToggleBehavior.None)
-			//	base.SelectedItem = null;
-		}
-
 		Item _selectedF9PItem;
 		List<Item> _selectedF9PItems = new List<Item>();
-		void OnTapped(object sender, TapEventArgs e)
+		bool _processingItemTapped;
+		void OnItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
 		{
-			base.SelectedItem = null;
-			if (e.Touches.Count() == 1)
+			if (!_processingItemTapped)
 			{
-				var indexPath = this.IndexPathAtPoint(e.Touches[0]);
-				if (indexPath == null)
-					return;
-				if (indexPath.Item2 < 0)
-					return;
+				_processingItemTapped = true;
+				base.SelectedItem = null;
 
-				Item tappedItem = null;
-				Group group = _baseItemsSource;
-				if (IsGroupingEnabled)
-				{
-					group = _baseItemsSource[indexPath.Item1] as Group;
-					tappedItem = group[indexPath.Item2];
-				}
-				else
-					tappedItem = _baseItemsSource[indexPath.Item2];
+				var tappedItem = e.Item as Item;
+				var group = e.Group as Group ?? _baseItemsSource;
 
-				//System.Diagnostics.Debug.WriteLine("Forms9Patch.ListView.OnItemTapped");
 				if (tappedItem?.Source != null)
 				{
 					// null source items are not tappable or selectable
@@ -385,10 +366,11 @@ namespace Forms9Patch
 							{
 								AddSelectedItem(tappedItem);
 								ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group.Source, tappedItem.Source, tappedItem.CellView));
-						}
-					break;
+							}
+							break;
 					}
 				}
+				_processingItemTapped = false;
 			}
 		}
 		#endregion
@@ -457,7 +439,8 @@ namespace Forms9Patch
 			_listener.LongPressed += OnLongPressed;
 			_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
-			_listener.Tapped += OnTapped;
+
+			base.ItemTapped += OnItemTapped;
 
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
@@ -782,7 +765,11 @@ namespace Forms9Patch
 			if (itemGroup != null)
 			{
 				var itemItem = itemGroup.ItemWithSource(item);
-				base.ScrollTo(itemItem,itemGroup,position,animated);
+				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+				 {
+					base.ScrollTo(itemItem,itemGroup,position,animated);
+					 return false;
+				 });
 			}
 		}
 
@@ -796,7 +783,12 @@ namespace Forms9Patch
 		{
 			var itemItem = _baseItemsSource.ItemWithSource(item);
 			if (itemItem != null)
-				base.ScrollTo(itemItem, position, animated);
+				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
+				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+				 {
+					 base.ScrollTo(itemItem, position, animated);
+					return false;
+				 });
 		}
 		#endregion
 

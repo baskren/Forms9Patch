@@ -28,7 +28,6 @@ namespace Forms9Patch.iOS
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
 			}
-			Control.AllowsSelection = false;
 		}
 
 		/// <summary>
