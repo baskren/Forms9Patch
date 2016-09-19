@@ -8,13 +8,8 @@ namespace Forms9Patch
 
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			System.Diagnostics.Debug.WriteLine("ManualLayout.LayoutChildren("+x+", "+y+", "+width+", "+height+")");
+			//System.Diagnostics.Debug.WriteLine("ManualLayout.LayoutChildren("+x+", "+y+", "+width+", "+height+")");
 			LayoutChildrenEvent?.Invoke(this, new ManualLayoutEventArgs(x, y, width, height));
-		}
-
-		protected override void OnSizeAllocated(double width, double height)
-		{
-			base.OnSizeAllocated(width, height);
 		}
 	}
 
