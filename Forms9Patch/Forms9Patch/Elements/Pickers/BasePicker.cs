@@ -37,7 +37,9 @@ namespace Forms9Patch
 		public IEnumerable ItemsSource
 		{
 			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-			set { SetValue(ItemsSourceProperty, value); }
+			set { 
+				SetValue(ItemsSourceProperty, value); 
+			}
 		}
 		#endregion
 
@@ -199,8 +201,6 @@ namespace Forms9Patch
 
 
 		#region Fields
-		ObservableCollection<object> _col = new ObservableCollection<object>();
-
 		readonly ListView _listView = new ListView
 		{
 			IsGroupingEnabled = false,
@@ -236,8 +236,9 @@ namespace Forms9Patch
 			_listView.SetBinding(ListView.AccessoryTextProperty, AccessoryTextProperty.PropertyName);
 			_listView.SetBinding(ListView.AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
 			_listView.SetBinding(ListView.GroupToggleBehaviorProperty, GroupToggleBehaviorProperty.PropertyName);
+			// TODO: Why doesn't the below binding work?
+			//_listView.SetBinding(ListView.ItemsSourceProperty, ItemsSourceProperty.PropertyName);
 			_listView.BindingContext = this;
-			//UpdateUnboundListViewProperties();
 			_listView.BackgroundColor = Color.Transparent;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
@@ -248,23 +249,7 @@ namespace Forms9Patch
 
 			var listener = new Listener(_listView);
 			listener.Panned += OnPanned;
-			listener.Panning += (sender, e) =>
-			{
-				//System.Diagnostics.Debug.WriteLine("Listener(_listView).Panning");
-				_lastAppearance = DateTime.Now;
-			};
-			/*
-			listener.Tapped += (object sender, TapEventArgs e) => 
-			{
-				_tapping = true;
-				//System.Diagnostics.Debug.WriteLine("Listener(_listView).Tapped");
-				var point = e.Touches[0];
-				var indexPath = ListViewExtensions.IndexPathAtPoint(_listView,point);
-				if (indexPath != null)
-					Index = indexPath.Item2;
-				_tapping = false;
-			};
-			*/
+			listener.Panning += (sender, e) => _lastAppearance = DateTime.Now;
 
 			_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
@@ -333,14 +318,7 @@ namespace Forms9Patch
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
 			base.OnPropertyChanging(propertyName);
-			if (propertyName == ItemsSourceProperty.PropertyName)
-			{
-				var notifiableCollection = ItemsSource as INotifyCollectionChanged;
-				if (notifiableCollection != null)
-					notifiableCollection.CollectionChanged -= SourceCollectionChanged;
-				_col.Clear();
-			}
-			else if (propertyName == SelectedItemsProperty.PropertyName)
+		if (propertyName == SelectedItemsProperty.PropertyName)
 			{
 				if (SelectedItems != null && SelectedItems != _listView.SelectedItems)
 					SelectedItems.CollectionChanged -= OnSelectedItemsCollectionChanged;
@@ -354,15 +332,15 @@ namespace Forms9Patch
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
+			if (propertyName == ItemsSourceProperty.PropertyName)
+				System.Diagnostics.Debug.WriteLine("");
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ItemsSourceProperty.PropertyName)
 			{
-				var notifiableCollection = ItemsSource as INotifyCollectionChanged;
-				if (notifiableCollection != null)
-					notifiableCollection.CollectionChanged += SourceCollectionChanged;
-				_col = new ObservableCollection<object>((System.Collections.Generic.IEnumerable<object>)ItemsSource);
-				_listView.ItemsSource = _col;
-				ScrollToIndex(Index);
+				//System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(ItemsSource) value=["+ItemsSource+"]");
+				_listView.ItemsSource = ItemsSource;
+				if (ItemsSource != null)
+					ScrollToIndex(Index);
 			}
 			else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
 			{
@@ -385,73 +363,42 @@ namespace Forms9Patch
 		/// <param name="index">Index.</param>
 		public virtual void ScrollToIndex(int index)
 		{
-			if (_col.Count > 0)
+			if (ItemsSource == null)
+				return;
+
+			int count = 0;
+			object firstItem=null;
+			object indexItem=null;
+			object lastItem=null;
+			foreach (var item in ItemsSource)
+			{
+				if (count == 0)
+					firstItem = item;
+				if (count == index)
+					indexItem = item;
+				lastItem = item;
+				count++;
+			}
+			if (count > 0)
 			{
 				if (index < 0)
-					index = 0;
-				if (index > _col.Count - 1)
-					index = _col.Count - 1;
-				var item = _col[index];
-				_listView.ScrollTo(item, ScrollToPosition.Center, true);
-				if (SelectBy==SelectBy.Position)
+					indexItem = firstItem;
+				if (index > count - 1)
+					indexItem = lastItem;
+				if (indexItem != null)
 				{
-					//var selectedF9PItem = _listView.BaseItemsSource.ItemAtIndexPath(new Tuple<int, int>(0, index));
-					Index = index;
-					var selectedF9PItem = _listView.BaseItemsSource[index] as Item;
-					if (selectedF9PItem != null)
-						SelectedItem = selectedF9PItem.Source;
+					_listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
+					if (SelectBy == SelectBy.Position)
+					{
+						Index = index;
+						var selectedF9PItem = _listView.BaseItemsSource[index] as Item;
+						if (selectedF9PItem != null)
+							SelectedItem = selectedF9PItem.Source;
+					}
 				}
 			}
 		}
 
-
-		void SourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			switch (e.Action)
-			{
-				case NotifyCollectionChangedAction.Add:
-					for (int i = 0; i < e.NewItems.Count; i++)
-						_col.Insert(i + e.NewStartingIndex,e.NewItems[i]);
-					if (e.NewStartingIndex <= Index)
-						Index += e.NewItems.Count;
-					break;
-				case NotifyCollectionChangedAction.Move:
-					for (int i = 0; i < e.OldItems.Count; i++)
-						_col.RemoveAt(e.OldStartingIndex);
-					for (int i = 0; i < e.OldItems.Count; i++)
-						_col.Insert(i + e.NewStartingIndex, e.OldItems[i]);
-					if (Index >= e.OldStartingIndex && Index < e.OldStartingIndex + e.OldItems.Count)
-					{
-						var offset = Index - e.OldStartingIndex;
-						Index = e.NewStartingIndex + offset;
-					}
-					else if (Index < e.OldStartingIndex && Index > e.NewStartingIndex)
-						Index += e.NewItems.Count;
-					else if (Index < e.NewStartingIndex && Index < e.OldStartingIndex)
-						Index -= e.NewItems.Count;
-					break;
-				case NotifyCollectionChangedAction.Reset:
-					_col.Clear();
-					Index = -1;
-					break;
-				case NotifyCollectionChangedAction.Remove:
-					for (int i = 0; i < e.OldItems.Count; i++)
-						_col.RemoveAt(e.OldStartingIndex);
-					if (Index >= e.OldStartingIndex + e.OldItems.Count)
-						Index -= e.OldItems.Count;
-					else if (Index >= e.OldStartingIndex)
-						Index = e.OldStartingIndex - 1;
-					break;
-				case NotifyCollectionChangedAction.Replace:
-					for (int i = 0; i < e.OldItems.Count; i++)
-						_col.RemoveAt(e.OldStartingIndex);
-					for (int i = 0; i < e.NewItems.Count; i++)
-						_col.Insert(i + e.NewStartingIndex, e.NewItems[i]);
-					if (Index >= e.OldStartingIndex + e.OldItems.Count)
-						Index += (e.NewItems.Count - e.OldItems.Count);
-					break;
-			}
-		}
 		#endregion
 
 
@@ -483,7 +430,15 @@ namespace Forms9Patch
 						else 
 						{
 							if (_listView.HitTest(_listView.Bounds.Center, _lowerPadding))
-								Index = _col.Count - 1;
+							{
+								//Index = _col.Count - 1;
+								if (ItemsSource == null)
+									return false;
+								int index = 0;
+								foreach (var item in ItemsSource)
+									index++;
+								Index = index;
+							}
 							else if (_listView.HitTest(_listView.Bounds.Center, _upperPadding))
 								Index = 0;
 							if (SelectBy==SelectBy.Position)

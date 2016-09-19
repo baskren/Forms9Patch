@@ -5,6 +5,7 @@ using FormsGestures;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace Forms9Patch
 {
@@ -63,15 +64,17 @@ namespace Forms9Patch
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("Forms9Patch.ListView.ItemsSource", typeof(object), typeof(ListView), null);
+		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("F9PItemsSource", typeof(IEnumerable), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
 		/// <value>The items source.</value>
-		public new object ItemsSource
+		public new IEnumerable ItemsSource
 		{
-			get { return GetValue(ItemsSourceProperty); }
-			set { SetValue(ItemsSourceProperty, value);  }
+			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+			set { 
+				SetValue(ItemsSourceProperty, value);  
+			}
 		}
 
 
@@ -663,7 +666,10 @@ namespace Forms9Patch
 
 			else*/
 			if (propertyName == ItemsSourceProperty.PropertyName)
+			{
+				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
 				UpdateItemsSource();
+			}
 			else if (propertyName == SourcePropertyMapProperty.PropertyName)
 				UpdateItemsSource();
 			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
