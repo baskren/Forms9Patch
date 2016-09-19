@@ -2,23 +2,19 @@
 using Xamarin.Forms;
 namespace Forms9Patch
 {
-	internal class ManualLayout : Xamarin.Forms.Layout<View>
+	public class ManualLayout : Xamarin.Forms.Layout<View>
 	{
 		public event EventHandler<ManualLayoutEventArgs> LayoutChildrenEvent;
 
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
+			System.Diagnostics.Debug.WriteLine("ManualLayout.LayoutChildren("+x+", "+y+", "+width+", "+height+")");
 			LayoutChildrenEvent?.Invoke(this, new ManualLayoutEventArgs(x, y, width, height));
 		}
 
 		protected override void OnSizeAllocated(double width, double height)
 		{
 			base.OnSizeAllocated(width, height);
-		}
-
-		public void LayoutChild(View child, Rectangle bounds)
-		{
-			LayoutChildIntoBoundingRegion(child, bounds);
 		}
 	}
 

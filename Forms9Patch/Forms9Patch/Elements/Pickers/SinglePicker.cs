@@ -165,6 +165,7 @@ namespace Forms9Patch
 			if (Height > 0 && Width > 0)
 			{
 				double overlayHeight = (Height - RowHeight) / 2.0;
+				/*
 				_manLayout.LayoutChild(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
 				_manLayout.LayoutChild(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
 				_manLayout.LayoutChild(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));
@@ -172,6 +173,14 @@ namespace Forms9Patch
 					_manLayout.LayoutChild(_lowerEdge, new Rectangle(e.X, overlayHeight, e.Width, 1.0));
 				if (_manLayout.Children.Contains(_upperEdge))
 					_manLayout.LayoutChild(_upperEdge, new Rectangle(e.X, e.Height - overlayHeight, e.Width, 1.0));
+					*/
+				LayoutChildIntoBoundingRegion(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
+				LayoutChildIntoBoundingRegion(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
+				LayoutChildIntoBoundingRegion(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));
+				if (_manLayout.Children.Contains(_lowerEdge))
+					LayoutChildIntoBoundingRegion(_lowerEdge, new Rectangle(e.X, overlayHeight, e.Width, 1.0));
+				if (_manLayout.Children.Contains(_upperEdge))
+					LayoutChildIntoBoundingRegion(_upperEdge, new Rectangle(e.X, e.Height - overlayHeight, e.Width, 1.0));
 			}
 		}
 		#endregion
