@@ -157,8 +157,6 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == RowHeightProperty.PropertyName)
 				OnManualLayoutChildren(this, new ManualLayoutEventArgs(X,Y,Width,Height));
-			else if (propertyName == ItemsSourceProperty.PropertyName)
-				System.Diagnostics.Debug.WriteLine("SinglePicker.OnPropertyChanged(ItemsSource)");
 
 		}
 
