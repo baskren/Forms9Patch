@@ -23,7 +23,6 @@ namespace Forms9Patch
 		internal static double ToFontSize(this string sizeString) {
 			var s = sizeString;
 			double size;
-			int intSize;
 			var element = new Xamarin.Forms.Label ();
 			if (s.EndsWith ("px",StringComparison.Ordinal)) {
 				var subString = s.Substring(0, s.Length - 2);

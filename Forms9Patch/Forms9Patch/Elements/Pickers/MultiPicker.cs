@@ -12,7 +12,14 @@ namespace Forms9Patch
 	public class MultiPicker : SinglePicker
 	{
 		#region Properties
+		/// <summary>
+		/// The selected items property.
+		/// </summary>
 		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(MultiPicker), null);
+		/// <summary>
+		/// Gets or sets the selected items.
+		/// </summary>
+		/// <value>The selected items.</value>
 		public ObservableCollection<object> SelectedItems
 		{
 			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }

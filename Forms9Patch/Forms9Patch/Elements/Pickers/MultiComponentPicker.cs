@@ -90,8 +90,8 @@ namespace Forms9Patch
 
 		#region Fields
 		//List<Xamarin.Forms.ListView> _listViews = new List<ListView>();
-		ObservableCollection<ObservableCollection<string>> _components = new ObservableCollection<ObservableCollection<string>>();
-		Grid _grid = new Grid();
+		//ObservableCollection<ObservableCollection<string>> _components = new ObservableCollection<ObservableCollection<string>>();
+		//Grid _grid = new Grid();
 		#endregion
 
 		/// <summary>
