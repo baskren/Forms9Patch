@@ -237,7 +237,8 @@ namespace Forms9Patch.Droid
 								textFormatted = EndTruncatedFormatted(baseFormattedString, paint, secondToLastEnd, layout.GetLineStart(lines - 1), layout.GetLineEnd(layout.LineCount - 1), availWidth);
 								break;
 							default:
-								textFormatted = baseFormattedString.ToSpannableString(EllipsePlacement.None, 0, 0, layout.GetLineEnd(lines - 1));
+								//textFormatted = baseFormattedString.ToSpannableString(EllipsePlacement.None, 0, 0, layout.GetLineEnd(lines - 1));
+								textFormatted = TruncatedFormatted(baseFormattedString, paint, secondToLastEnd, layout.GetLineStart(lines - 1), layout.GetLineEnd(layout.LineCount - 1), availWidth);
 								break;
 						}
 					}
@@ -276,6 +277,25 @@ namespace Forms9Patch.Droid
 			}
 			return new StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 		}
+
+		static ICharSequence TruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
+		{
+			return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, start, end, availWidth);
+		}
+		static ICharSequence TruncatedFormattedIter(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int endLow, int endHigh, float availWidth)
+		{
+			if (endHigh - endLow <= 1)
+			{
+				return baseFormattedString.ToSpannableString(EllipsePlacement.Char, secondToLastEnd, start, endLow);
+			}
+			int mid = (endLow + endHigh) / 2;
+			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
+			var layout = new StaticLayout(formattedText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			if (layout.GetLineWidth(0) > availWidth)
+				return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
+			return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
+		}
+
 
 		static ICharSequence StartTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
 		{

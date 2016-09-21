@@ -47,11 +47,11 @@ namespace Forms9Patch.Droid
 				}
 				else if (lastLineEnd > lastLineStart) {
 					if (Char.IsWhiteSpace(text[lastLineEnd - 1])) {
-						ellipsesText += text.Substring(lastLineStart, lastLineEnd - lastLineStart - 1) + "…";
+						ellipsesText += text.Substring(lastLineStart, lastLineEnd - lastLineStart - 1) + (ellipsePlacement == EllipsePlacement.Char?"":"…");
 						ellipsesLocation = lastLineEnd;
 					}
 					else {
-						ellipsesText += text.Substring(lastLineStart, lastLineEnd - lastLineStart) + "…";
+						ellipsesText += text.Substring(lastLineStart, lastLineEnd - lastLineStart) + (ellipsePlacement == EllipsePlacement.Char ? "" : "…");
 						ellipsesLocation = lastLineEnd + 1;
 					}
 				}
@@ -133,7 +133,7 @@ namespace Forms9Patch.Droid
 					if (spanEnd >= lastLineStart)
 						spanEnd = (spanEnd - lastLineStart) + secondToLastEnd;
 				}
-				else if (ellipsePlacement == EllipsePlacement.End)
+				else if (ellipsePlacement != EllipsePlacement.None)//(ellipsePlacement == EllipsePlacement.End)
 				{
 					// remove if start is beyond end
 					if (spanStart > lastLineEnd)
@@ -242,6 +242,7 @@ namespace Forms9Patch.Droid
 	internal enum EllipsePlacement
 	{
 		None,
+		Char,
 		Start,
 		Mid,
 		End,

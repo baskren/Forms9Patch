@@ -153,6 +153,15 @@ namespace TestProject
 				}
 				lastFontSize = fontSizeSlider.Value;
 			};
+			var actualFontSizeLabel = new Label
+			{
+				Text = "Actual Font Size: 15"
+			};
+			f9pLabel.PropertyChanged += (sender, e) =>
+			{
+				if (e.PropertyName == Forms9Patch.Label.ActualFontSizeProperty.PropertyName)
+					actualFontSizeLabel.Text = "ActualFontSize: " + f9pLabel.ActualFontSize;
+			};
 			#endregion
 
 
@@ -415,7 +424,7 @@ namespace TestProject
 				fontPicker.Items.Add(fontFamily);
 			fontPicker.SelectedIndexChanged += (sender, e) =>
 			{
-				string family = null;
+				//string family = null;
 				if (fontPicker.SelectedIndex > -1 && fontPicker.SelectedIndex < fontFamilies.Count)
 				{
 					f9pLabel.FontFamily = fontFamilies[fontPicker.SelectedIndex];
@@ -462,6 +471,7 @@ namespace TestProject
 
 						fontSizeLabel,
 						fontSizeSlider,
+						actualFontSizeLabel,
 						new Label { Text = "Fit:" },
 						fitSelector,
 						linesLabel,

@@ -7,6 +7,7 @@ using Xamarin.Forms.Platform.Android;
 using Java.Lang;
 using Android.Views;
 using Android.Util;
+using System;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.Droid.LabelRenderer))]
 namespace Forms9Patch.Droid
@@ -67,13 +68,13 @@ namespace Forms9Patch.Droid
 
 			ICharSequence text;
 			if (Element.Text != null)
-				text = new String(Element.Text);
+				text = new Java.Lang.String(Element.Text);
 			else
 			{
 				if (Settings.IsLicenseValid || Element._id < 4)
 					text = Element.F9PFormattedString.ToSpannableString();
 				else
-					text = new String("UNLICENSED COPY");
+					text = new Java.Lang.String("UNLICENSED COPY");
 			}
 
 
@@ -176,11 +177,17 @@ namespace Forms9Patch.Droid
 				for (int i = 0; i < layout.LineCount; i++)
 				{
 					if (layout.GetLineBottom(i) <= availHeight - layout.TopPadding - layout.BottomPadding)
+					{
+						//System.Diagnostics.Debug.WriteLine("layout.GetLineBottom("+i+")=["+layout.GetLineBottom(i)+"]");
 						lines++;
+					}
 					else
 						break;
 				}
 			}
+			//System.Diagnostics.Debug.WriteLine("availHeight=["+(availHeight - layout.TopPadding - layout.BottomPadding)+"]");
+			//System.Diagnostics.Debug.WriteLine("lines=["+lines+"]");
+			//System.Diagnostics.Debug.WriteLine("layout Height=["+layout.Height+"] lineCount=["+layout.LineCount+"]");
 
 			if (layout.Height > availHeight || (lines > 0 && layout.LineCount > lines))
 			{
@@ -234,9 +241,20 @@ namespace Forms9Patch.Droid
 			_lastLines = Element.Lines;
 			_lastFit = Element.Fit;
 			_lastSizeRequest = new SizeRequest(new Xamarin.Forms.Size(tmpWd, tmpHt), new Xamarin.Forms.Size(10, tmpHt));
+			if (!_delayingActualFontSizeUpdate)
+			{
+				_delayingActualFontSizeUpdate = true;
+				Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+				{
+					_delayingActualFontSizeUpdate = false;
+					Element.ActualFontSize = Control.TextSize;
+					return false;
+				});
+			}
 			return _lastSizeRequest.Value;
-
 		}
+
+		bool _delayingActualFontSizeUpdate;
 
 		/// <summary>
 		/// Raises the element changed event.

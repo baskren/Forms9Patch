@@ -228,6 +228,21 @@ namespace Forms9Patch
 			}
 		}
 
+		internal static readonly BindablePropertyKey ActualFontSizePropertyKey = BindableProperty.CreateReadOnly("ActualFontSize", typeof(double), typeof(Label), -1.0);
+		/// <summary>
+		/// Backing store for the actual font size property after fitting.
+		/// </summary>
+		public static readonly BindableProperty ActualFontSizeProperty = ActualFontSizePropertyKey.BindableProperty;
+		/// <summary>
+		/// Gets the actual size of the font (after fitting).
+		/// </summary>
+		/// <value>The actual size of the font.</value>
+		public double ActualFontSize
+		{
+			get { return (double)GetValue(ActualFontSizeProperty); }
+			internal set { SetValue(ActualFontSizePropertyKey, value); }
+		}
+
 		#endregion
 
 
@@ -360,6 +375,7 @@ namespace Forms9Patch
 			{
 				InvalidateMeasure();
 			}
+
 			//System.Diagnostics.Debug.WriteLine("");
 			//System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged(" + propertyName + ")");
 		}

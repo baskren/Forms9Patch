@@ -222,10 +222,23 @@ namespace Forms9Patch.iOS
 							break;
 					}
 					Control.Frame = new CGRect(0, y, (nfloat)(widthConstraint), tmpHt);
-			 */ 
+			 */
 			//System.Diagnostics.Debug.WriteLine("\tresult=["+tmpWd+","+tmpHt+"] [10,"+Control.Font.LineHeight+"]");
+			//Element.ActualFontSize = Control.Font.PointSize;
+			if (!_delayingActualFontSizeUpdate)
+			{
+				_delayingActualFontSizeUpdate = true;
+				Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+				{
+					_delayingActualFontSizeUpdate = false;
+					Element.ActualFontSize = Control.Font.PointSize;
+					return false;
+				});
+			}
 			return new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, Control.Font.LineHeight));
 		}
+		bool _delayingActualFontSizeUpdate;
+
 		#endregion
 
 
