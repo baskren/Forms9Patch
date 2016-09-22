@@ -228,7 +228,7 @@ namespace Forms9Patch.iOS
 			if (!_delayingActualFontSizeUpdate)
 			{
 				_delayingActualFontSizeUpdate = true;
-				Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+				Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
 				{
 					_delayingActualFontSizeUpdate = false;
 					Element.ActualFontSize = Control.Font.PointSize;

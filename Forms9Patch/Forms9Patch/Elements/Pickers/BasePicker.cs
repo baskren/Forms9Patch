@@ -434,10 +434,10 @@ namespace Forms9Patch
 								//Index = _col.Count - 1;
 								if (ItemsSource == null)
 									return false;
-								int index = 0;
+								int count = 0;
 								foreach (var item in ItemsSource)
-									index++;
-								Index = index;
+									count++;
+								Index = count-1;
 							}
 							else if (_listView.HitTest(_listView.Bounds.Center, _upperPadding))
 								Index = 0;

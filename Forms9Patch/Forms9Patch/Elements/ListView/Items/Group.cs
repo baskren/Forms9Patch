@@ -266,7 +266,11 @@ namespace Forms9Patch
 		}
 
 		public Item this [int index] {
-			get { return _items[index]; }
+			get {
+				if (index < 0 || index > _items.Count-1)
+					return null;
+				return _items[index]; 
+			}
 			set { 
 				if (_items.Contains (value) || index < 0 || index > _items.Count)
 					// will this create problems for move/swap operations?  I think so!  
