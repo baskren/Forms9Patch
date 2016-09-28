@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using FormsGestures;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
+
 namespace Forms9Patch
 {
 	/// <summary>
@@ -220,7 +220,7 @@ namespace Forms9Patch
 
 		//internal bool PositionToSelect;
 		internal SelectBy SelectBy;
-		bool _tapping = false;
+		bool _tapping;
 		#endregion
 
 

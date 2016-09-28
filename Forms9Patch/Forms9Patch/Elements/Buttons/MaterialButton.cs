@@ -107,7 +107,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.FontSize bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "FontSize", typeof(double), typeof(MaterialButton), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
 		/// <summary>
 		/// Gets or sets the size of the font.
 		/// </summary>
@@ -314,6 +314,57 @@ namespace Forms9Patch
 			set { SetValue(TrailingImageProperty, value); }
 		}
 
+		/// <summary>
+		/// The lines property.
+		/// </summary>
+		public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialButton), 1);
+		public int Lines
+		{
+			get { return (int)GetValue(LinesProperty); }
+			set { SetValue(LinesProperty, value); }
+		}
+
+		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.None);
+		public LabelFit Fit
+		{
+			get { return (LabelFit)GetValue(FitProperty); }
+			set { SetValue(FitProperty, value); }
+		}
+
+		public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.TailTruncation);
+		public LineBreakMode LineBreakMode
+		{
+			get { return (LineBreakMode)GetValue(LineBreakModeProperty); }
+			set { SetValue(LineBreakModeProperty, value); }
+		}
+
+		/// <summary>
+		/// The backing store for the minimum font size property.
+		/// </summary>
+		public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(Label), -1.0);
+		/// <summary>
+		/// Gets or sets the minimum size of the font allowed during an autofit. 
+		/// </summary>
+		/// <value>The minimum size of the font.  Default=4</value>
+		public double MinFontSize
+		{
+			get { return (double)GetValue(MinFontSizeProperty); }
+			set { SetValue(MinFontSizeProperty, value); }
+		}
+
+		/// <summary>
+		/// The backing store for the max font size property.
+		/// </summary>
+		public static readonly BindableProperty MaxFontSizeProperty = BindableProperty.Create("MaxFontSize", typeof(double), typeof(Label), -1.0);
+		/// <summary>
+		/// Gets or sets the maximum size of the font allowed during an autofit.
+		/// </summary>
+		/// <value>The size of the max font.</value>
+		public double MaxFontSize
+		{
+			get { return (double)GetValue(MaxFontSizeProperty); }
+			set { SetValue(MaxFontSizeProperty, value); }
+		}
 
 		#endregion
 
@@ -368,14 +419,24 @@ namespace Forms9Patch
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				VerticalTextAlignment = TextAlignment.Center,
 				HorizontalOptions = LayoutOptions.Center,
-				LineBreakMode = LineBreakMode.TailTruncation,
 				HorizontalTextAlignment = TextAlignment.Center,
-				FontSize = 12,
+				//FontSize = 12,
 				HeightRequest = 22,
 				MinimizeHeight = true,
-				Lines = 1,
-				Fit = LabelFit.None
+				//Lines = 1,
+				//Fit = LabelFit.None
+				//LineBreakMode = LineBreakMode.TailTruncation,
 			};
+			_label.BindingContext = this;
+			_label.SetBinding(Label.LinesProperty, LinesProperty.PropertyName);
+			_label.SetBinding(Label.FitProperty, FitProperty.PropertyName);
+			_label.SetBinding(Label.LineBreakModeProperty, LineBreakModeProperty.PropertyName);
+			_label.SetBinding(Label.MinFontSizeProperty, MinFontSizeProperty.PropertyName);
+			_label.SetBinding(Label.MaxFontSizeProperty, MaxFontSizeProperty.PropertyName);
+			_label.SetBinding(Label.FontSizeProperty, FontSizeProperty.PropertyName);
+			_label.SetBinding(Label.FontAttributesProperty, FontAttributesProperty.PropertyName);
+			_label.SetBinding(Label.FontFamilyProperty, FontFamilyProperty.PropertyName);
+
 			_stackLayout = new Xamarin.Forms.StackLayout {
 				Orientation = StackOrientation.Horizontal,
 				Spacing = 4,
@@ -735,12 +796,14 @@ namespace Forms9Patch
 				UpdateState ();
 			} else if (propertyName == OrientationProperty.PropertyName) {
 				SetOrienations ();
+				/*
 			} else if (propertyName == FontFamilyProperty.PropertyName) {
 				_label.FontFamily = FontFamily;
 			} else if (propertyName == FontSizeProperty.PropertyName) {
 				_label.FontSize = FontSize;
 			} else if (propertyName == FontAttributesProperty.PropertyName) {
 				_label.FontAttributes = FontAttributes;
+				*/
 			} else if (propertyName == FontColorProperty.PropertyName) {
 				_label.TextColor = FontColor;
 			} else if (propertyName == TextProperty.PropertyName) {

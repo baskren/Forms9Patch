@@ -23,7 +23,7 @@ namespace TestProject
 			};
 			button.Clicked += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON CLICKED!!!!");
 
-			/*
+
 			var buttonListener = new FormsGestures.Listener(button);
 			buttonListener.Down += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON DOWN ["+e.Touches[0]+"]"); // does not work with UIControl derived elements
 
@@ -52,7 +52,7 @@ namespace TestProject
 
 			buttonListener.Pinched += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON PINCHED TotalScale=["+e.TotalScale +"]");
 			buttonListener.Rotated += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON ROTATED TotalAngle=["+e.TotalAngle+"]");
-*/
+
 
 			var box = new BoxView {
 				BackgroundColor = Color.Green,
