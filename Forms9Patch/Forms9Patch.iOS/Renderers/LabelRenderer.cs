@@ -242,8 +242,6 @@ namespace Forms9Patch.iOS
 		#endregion
 
 
-
-
 		#region Native layout cycle
 		/// <summary>
 		/// Layouts the subviews.
@@ -459,7 +457,6 @@ namespace Forms9Patch.iOS
 		#endregion
 
 
-
 		#region Change management
 		/// <summary>
 		/// Raises the element changed event.
@@ -467,6 +464,9 @@ namespace Forms9Patch.iOS
 		/// <param name="e">E.</param>
 		protected override void OnElementChanged (ElementChangedEventArgs<Label> e)
 		{
+			if (e.OldElement != null)
+				e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
+
 			if (e.NewElement != null) {
 				if (Control == null) {
 					SetNativeControl (new UILabel (CGRect.Empty) {
@@ -475,8 +475,10 @@ namespace Forms9Patch.iOS
 				}
 				UpdateText ();
 				UpdateAlignment ();
+				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 			}
 			base.OnElementChanged (e);
+
 		}
 
 		/// <summary>
@@ -497,6 +499,8 @@ namespace Forms9Patch.iOS
 				UpdateText();
 			else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
 				UpdateText();
+			else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
+				LayoutSubviews();
 		}
 
 		/// <summary>
@@ -536,6 +540,58 @@ namespace Forms9Patch.iOS
 		#endregion
 
 
+		#region Index of touch point
+		int IndexAtPoint(Point point)
+		{
+			var cgPoint = new CGPoint(point.X , point.Y - Control.Frame.Y);
+			System.Diagnostics.Debug.WriteLine("cgPoint=["+cgPoint+"] Frame=["+Control.Frame+"]");
+
+			// init text storage
+			var textStorage = new NSTextStorage();
+			//if (Control.AttributedText != null)
+			var attrText = new NSAttributedString(Control.AttributedText);
+			textStorage.SetString(attrText);
+
+			/*
+			else
+			{
+				var attrString = new NSMutableAttributedString(Control.Text);
+				attrString.AddAttribute(UIStringAttributeKey.Font, Control.Font, new NSRange(0, Control.Text.Length));
+				textStorage.SetString(attrString);
+			}
+			*/
+
+			// init layout manager
+			var layoutManager = new NSLayoutManager();
+			textStorage.AddLayoutManager(layoutManager);
+
+			// init text container
+			var textContainer = new NSTextContainer(new CGSize(Control.Frame.Width, Control.Frame.Height*2));
+			textContainer.LineFragmentPadding = 0;
+			textContainer.MaximumNumberOfLines = (nuint)Control.Lines;
+			textContainer.LineBreakMode = UILineBreakMode.WordWrap;//Control.LineBreakMode;
+
+			//if (Control.LineBreakMode == UILineBreakMode.TailTruncation || Control.LineBreakMode == UILineBreakMode.HeadTruncation || Control.LineBreakMode == UILineBreakMode.MiddleTruncation)
+			//	textContainer.LineBreakMode = UILineBreakMode.WordWrap;
+
+			textContainer.Size = new CGSize(Control.Frame.Width, Control.Frame.Height * 2);
+			layoutManager.AddTextContainer(textContainer);
+			layoutManager.AllowsNonContiguousLayout = true;
+
+			//layoutManager.SetTextContainer(textContainer,new NSRange(0,Control.AttributedText.Length));
+
+			//layoutManager.UsesFontLeading = true;
+			//layoutManager.EnsureLayoutForCharacterRange(new NSRange(0,Control.AttributedText.Length));
+			//layoutManager.EnsureLayoutForTextContainer(textContainer);
+			nfloat partialFraction=0;
+			var characterIndex = layoutManager.CharacterIndexForPoint(cgPoint, textContainer, ref partialFraction);
+
+			 //[self.layoutManager drawGlyphsForGlyphRange:NSMakeRange(0, self.textStorage.length) atPoint:CGPointMake(0, 0)];
+			//layoutManager.DrawGlyphs(new NSRange(0,Control.AttributedText.Length),Control.Frame.Location);
+
+			return (int)characterIndex;
+		}
+		#endregion
 	}
 }
 

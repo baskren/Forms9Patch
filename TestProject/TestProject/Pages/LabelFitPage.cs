@@ -70,6 +70,12 @@ namespace TestProject
 				BackgroundColor = Color.Black,
 				Text = editor.Text
 			};
+
+			var listener = new FormsGestures.Listener(f9pLabel);
+			listener.Tapped += (object sender, FormsGestures.TapEventArgs e) =>
+			{
+				System.Diagnostics.Debug.WriteLine("Point=["+e.Touches[0]+"] Index=["+f9pLabel.IndexAtPoint(e.Touches[0])+"]");
+			};
 			#endregion
 
 

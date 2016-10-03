@@ -42,7 +42,7 @@ namespace Forms9Patch
 			_manLayout.Children.Remove(_upperEdge);
 			_basePicker.AccessoryPosition = AccessoryPosition.Start;
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
-			_basePicker.AccessoryText = (IItem arg) => arg.IsSelected ? "✓" : null;
+			_basePicker.AccessoryText = (IItem arg) => arg.IsSelected ? "✓" : " ";
 			_basePicker.SetBinding(BasePicker.SelectedItemsProperty,"SelectedItems");
 		}
 		#endregion

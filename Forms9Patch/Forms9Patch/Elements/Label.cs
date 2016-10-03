@@ -243,6 +243,7 @@ namespace Forms9Patch
 			internal set { SetValue(ActualFontSizePropertyKey, value); }
 		}
 
+
 		#endregion
 
 
@@ -336,6 +337,8 @@ namespace Forms9Patch
 		/// </summary>
 		public Label() {
 			_id=instances++;
+
+
 		}
 		#endregion
 
@@ -494,6 +497,15 @@ namespace Forms9Patch
 			return result;
 		}
 
+		#endregion
+
+
+		#region HTML link support
+		internal Func<Point, int> RendererIndexAtPoint;
+		public int IndexAtPoint(Point point)
+		{
+			return RendererIndexAtPoint != null ? RendererIndexAtPoint(point) : -1;
+		}
 		#endregion
 
 	}

@@ -198,6 +198,13 @@ namespace Forms9Patch.Droid
 		}
 
 
+		internal int IndexForPoint(Android.Graphics.Point p)
+		{
+			int line = Layout.GetLineForVertical(p.Y);
+			int offset = Layout.GetOffsetForHorizontal(line, p.X);
+			return offset;
+		}
+
 
 		#region Truncation
 

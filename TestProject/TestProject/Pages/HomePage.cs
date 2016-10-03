@@ -182,43 +182,49 @@ namespace TestProject
 						new TextCell {
 							Text = "Modal Popup",
 							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupTestPage),
+							CommandParameter = typeof(ModalPopupTestPage)
 						},
 
 						new TextCell {
 							Text = "Bubble Popup",
 							Command = navigateCommand,
-							CommandParameter = typeof(BubblePopupTestPage),
+							CommandParameter = typeof(BubblePopupTestPage)
 						},
 
 						new TextCell {
 							Text = "Popup + PushModalAsync++",
 							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupWithNavigationPages),
+							CommandParameter = typeof(ModalPopupWithNavigationPages)
 						},
 
 						new TextCell {
 							Text = "Nested Bubble Popup",
 							Command = navigateCommand,
-							CommandParameter = typeof(NestedBubblePopupPage),
+							CommandParameter = typeof(NestedBubblePopupPage)
 						},
 
 						new TextCell {
 							Text = "Pan Gesture test",
 							Command = navigateCommand,
-							CommandParameter = typeof(PanGesturePage),
+							CommandParameter = typeof(PanGesturePage)
 						},
 
 						new TextCell {
 							Text = "ImageButton in ContentView test",
 							Command = navigateCommand,
-							CommandParameter = typeof(ZenmekPage),
+							CommandParameter = typeof(ZenmekPage)
 						},
 
 						new TextCell {
 							Text = "BackgroundImage opacity",
 							Command = navigateCommand,
-							CommandParameter = typeof(BackgroundImageOpacityPage),
+							CommandParameter = typeof(BackgroundImageOpacityPage)
+						},
+
+						new TextCell {
+							Text = "Segmented Control Navigation",
+							Command = navigateCommand,
+							CommandParameter = typeof(SegmentNavPage1)
 						},
 					}
 				}

@@ -8,6 +8,7 @@ using Java.Lang;
 using Android.Views;
 using Android.Util;
 using System;
+using FormsGestures.Droid;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.Droid.LabelRenderer))]
 namespace Forms9Patch.Droid
@@ -275,6 +276,7 @@ namespace Forms9Patch.Droid
 			if (e.OldElement != e.NewElement && e.NewElement != null)
 			{
 				Initialize();
+				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 			}
 
 
@@ -286,6 +288,7 @@ namespace Forms9Patch.Droid
 			{
 				Control.SkipNextInvalidate();
 				UpdateText();
+				e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
 			}
 		}
 
@@ -502,6 +505,11 @@ namespace Forms9Patch.Droid
 			_lastSizeRequest = null;
 			//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.UpdateText() exit");
 			////System.Diagnostics.Debug.WriteLine ("\tFrame=["+_view.Width+", "+_view.Height+"]");
+		}
+
+		int IndexAtPoint(Xamarin.Forms.Point p)
+		{
+			return this.Control.IndexForPoint(p.ToNativePoint());
 		}
 	}
 }
