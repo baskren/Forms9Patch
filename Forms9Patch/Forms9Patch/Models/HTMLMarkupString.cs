@@ -46,13 +46,13 @@ namespace Forms9Patch
 
 		bool inPreSpan=false;
 		void ProcessHTML() {
+			UnmarkedText = "";
 			if (String.IsNullOrWhiteSpace (_string))
 				return;
 			// remove previously Translated spans
 			_spans.Clear();
 
 			var tags = new List<Tag> ();
-			UnmarkedText = "";
 			int index = 0;
 			for (int i=0;i < _string.Length; i++) {
 				if (_string [i] == '<') {
