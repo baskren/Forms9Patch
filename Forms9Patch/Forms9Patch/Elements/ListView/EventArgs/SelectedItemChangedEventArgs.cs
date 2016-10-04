@@ -27,12 +27,12 @@ namespace Forms9Patch
 			private set;
 		}
 
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.SelectedItemChangedEventArgs"/> class.
 		/// </summary>
 		/// <param name="group">Group.</param>
 		/// <param name="selectedItem">Selected item.</param>
+		/// <param name="cellView">Cell view.</param>
 		public SelectedItemChangedEventArgs(object group, object selectedItem, View cellView) : base (selectedItem)
 		{
 			Group = group;

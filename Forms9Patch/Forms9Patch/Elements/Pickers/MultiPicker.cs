@@ -15,15 +15,15 @@ namespace Forms9Patch
 		/// <summary>
 		/// The selected items property.
 		/// </summary>
-		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(MultiPicker), null);
+		public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(MultiPicker), null);
 		/// <summary>
 		/// Gets or sets the selected items.
 		/// </summary>
 		/// <value>The selected items.</value>
 		public ObservableCollection<object> SelectedItems
 		{
-			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
-			set { SetValue(SelectedItemsProperty, value); }
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
+			private set { SetValue(SelectedItemsPropertyKey, value); }
 		}
 
 		#endregion
@@ -35,6 +35,7 @@ namespace Forms9Patch
 		/// </summary>
 		public MultiPicker()
 		{
+			//SelectedItems = new ObservableCollection<object>();
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0);
 			_upperGradient.EndColor = _overlayColor.WithAlpha(0);
 			_basePicker.SelectBy = SelectBy.Default;
@@ -44,9 +45,11 @@ namespace Forms9Patch
 			_basePicker.StartAccessory = new CellAccessory();
 			_basePicker.StartAccessory.HorizontalAlignment = TextAlignment.End;
 			_basePicker.StartAccessory.TextFunction = (IItem arg) => arg.IsSelected ? "✓" : "";
-			_basePicker.SetBinding(BasePicker.SelectedItemsProperty,"SelectedItems");
+
+			SelectedItems = _basePicker.SelectedItems;
 		}
 		#endregion
+
 
 	}
 }

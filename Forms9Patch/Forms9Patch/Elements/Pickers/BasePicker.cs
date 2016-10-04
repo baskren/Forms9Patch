@@ -75,11 +75,11 @@ namespace Forms9Patch
 		}
 
 
-		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(BasePicker), null);
+		public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(BasePicker), null);
 		public ObservableCollection<object> SelectedItems
 		{
-			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
-			set { SetValue(SelectedItemsProperty, value); }
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
+			private set { SetValue(SelectedItemsPropertyKey, value); }
 		}
 
 		/*
@@ -214,6 +214,7 @@ namespace Forms9Patch
 			_listView.Footer = _lowerPadding;
 
 			SelectedItems = _listView.SelectedItems;
+			//SelectedItems.CollectionChanged += OnSelectedItemsCollectionChanged;
 		}
 		#endregion
 
@@ -236,35 +237,37 @@ namespace Forms9Patch
 			_tapping = false;
 		}
 
-		void OnSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		/*  no need for this since the SelectedItemsCollection is read-only
+	void OnSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+	{
+		switch (e.Action)
 		{
-			switch (e.Action)
-			{
-				case NotifyCollectionChangedAction.Add:
-					foreach (var item in e.NewItems)
-						if (!_listView.SelectedItems.Contains(item))
-							_listView.SelectedItems.Add(item);
-					break;
-				case NotifyCollectionChangedAction.Move:
-					break;
-				case NotifyCollectionChangedAction.Reset:
-					_listView.SelectedItems.Clear();
-					break;
-				case NotifyCollectionChangedAction.Remove:
-					foreach (var item in e.OldItems)
-						if (_listView.SelectedItems.Contains(item))
-							_listView.SelectedItems.Remove(item);
-					break;
-				case NotifyCollectionChangedAction.Replace:
-					foreach (var item in e.OldItems)
-						if (_listView.SelectedItems.Contains(item))
-							_listView.SelectedItems.Remove(item);
-					foreach (var item in e.NewItems)
-						if (!_listView.SelectedItems.Contains(item))
-							_listView.SelectedItems.Add(item);
-					break;
-			}
+			case NotifyCollectionChangedAction.Add:
+				foreach (var item in e.NewItems)
+					if (!_listView.SelectedItems.Contains(item))
+						_listView.SelectedItems.Add(item);
+				break;
+			case NotifyCollectionChangedAction.Move:
+				break;
+			case NotifyCollectionChangedAction.Reset:
+				_listView.SelectedItems.Clear();
+				break;
+			case NotifyCollectionChangedAction.Remove:
+				foreach (var item in e.OldItems)
+					if (_listView.SelectedItems.Contains(item))
+						_listView.SelectedItems.Remove(item);
+				break;
+			case NotifyCollectionChangedAction.Replace:
+				foreach (var item in e.OldItems)
+					if (_listView.SelectedItems.Contains(item))
+						_listView.SelectedItems.Remove(item);
+				foreach (var item in e.NewItems)
+					if (!_listView.SelectedItems.Contains(item))
+						_listView.SelectedItems.Add(item);
+				break;
 		}
+	}
+		*/
 		#endregion
 
 
@@ -276,12 +279,14 @@ namespace Forms9Patch
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
 			base.OnPropertyChanging(propertyName);
-		if (propertyName == SelectedItemsProperty.PropertyName)
+			/*
+			if (propertyName == SelectedItemsProperty.PropertyName)
 			{
 				if (SelectedItems != null && SelectedItems != _listView.SelectedItems)
 					SelectedItems.CollectionChanged -= OnSelectedItemsCollectionChanged;
 				_listView.SelectedItems.Clear();
 			}
+			*/
 		}
 
 		/// <summary>
@@ -307,12 +312,14 @@ namespace Forms9Patch
 			}
 			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
 				ScrollToIndex(Index);
+			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName && SelectedItems != null && SelectedItems != _listView.SelectedItems)
 			{
 				foreach (var item in SelectedItems)
 					_listView.SelectedItems.Add(item);
 				SelectedItems.CollectionChanged += OnSelectedItemsCollectionChanged;
 			}
+			*/
 		}
 
 		/// <summary>

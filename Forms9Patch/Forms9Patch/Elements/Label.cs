@@ -502,6 +502,11 @@ namespace Forms9Patch
 
 		#region HTML link support
 		internal Func<Point, int> RendererIndexAtPoint;
+		/// <summary>
+		/// Gets unmarked string index at touch point.
+		/// </summary>
+		/// <returns>The at point.</returns>
+		/// <param name="point">Point.</param>
 		public int IndexAtPoint(Point point)
 		{
 			return RendererIndexAtPoint != null ? RendererIndexAtPoint(point) : -1;

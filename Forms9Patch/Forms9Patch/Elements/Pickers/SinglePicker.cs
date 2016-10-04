@@ -140,7 +140,7 @@ namespace Forms9Patch
 			_manLayout.LayoutChildrenEvent += OnManualLayoutChildren;
 
 			_basePicker.SelectBy = SelectBy.Position;
-			_basePicker.SetBinding(BasePicker.ItemsSourceProperty,ItemsSourceProperty.PropertyName);
+			//_basePicker.SetBinding(BasePicker.ItemsSourceProperty,ItemsSourceProperty.PropertyName);
 			_basePicker.SetBinding(BasePicker.RowHeightProperty,RowHeightProperty.PropertyName);
 			_basePicker.SetBinding(BasePicker.IndexProperty,IndexProperty.PropertyName);
 			_basePicker.SetBinding(BasePicker.SelectedItemProperty, SelectedItemProperty.PropertyName);
@@ -160,8 +160,9 @@ namespace Forms9Patch
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == RowHeightProperty.PropertyName)
-				OnManualLayoutChildren(this, new ManualLayoutEventArgs(X,Y,Width,Height));
-
+				OnManualLayoutChildren(this, new ManualLayoutEventArgs(X, Y, Width, Height));
+			else if (propertyName == ItemsSourceProperty.PropertyName)
+				_basePicker.ItemsSource = ItemsSource;
 		}
 
 		void OnManualLayoutChildren(object sender, ManualLayoutEventArgs e)

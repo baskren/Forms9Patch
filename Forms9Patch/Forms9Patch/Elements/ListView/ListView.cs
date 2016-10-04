@@ -225,15 +225,15 @@ namespace Forms9Patch
 		/// <summary>
 		/// The selected items property.
 		/// </summary>
-		public static readonly BindableProperty SelectedItemsProperty = BindableProperty.Create("SelectedItems", typeof(ObservableCollection<object>), typeof(ListView), null);
+		public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(ListView), null);
 		/// <summary>
 		/// Gets the selected items.
 		/// </summary>
 		/// <value>The selected items.</value>
 		public ObservableCollection<object> SelectedItems
 		{
-			get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
-			private set { SetValue(SelectedItemsProperty, value); }
+			get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
+			private set { SetValue(SelectedItemsPropertyKey, value); }
 		}
 		#endregion
 
@@ -564,7 +564,7 @@ namespace Forms9Patch
 			_selectedF9PItems.Clear();
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect)
 			{
-				for (int i = SelectedItems.Count - 1; i >= 0; i++)
+				for (int i = SelectedItems.Count - 1; i >= 0; i--)
 				{
 					var sourceItem = SelectedItems[i];
 					var item = _baseItemsSource.ItemWithSource(sourceItem);
@@ -598,12 +598,14 @@ namespace Forms9Patch
 			if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio) {
 				RemoveSelectedSourceItem(SelectedItem);
 			}
+			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName)
 			{
 				if (SelectedItems != null)
 					SelectedItems.CollectionChanged -=  SelectedItemsCollectionChanged;
 				RemoveSelectedSourceItems(SelectedItems);
 			}
+			*/
 		}
 
 
@@ -632,12 +634,13 @@ namespace Forms9Patch
 				UpdateItemsSource();
 			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 				AddSelectedSourceItem(SelectedItem);
+			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 			{
 				AddSelectedSourceItems(SelectedItems);
 				SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
 			}
-
+			*/
 		}
 
 		void UpdateItemsSource()

@@ -318,20 +318,38 @@ namespace Forms9Patch
 		/// The lines property.
 		/// </summary>
 		public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialButton), 1);
+		/// <summary>
+		/// Gets or sets the lines.
+		/// </summary>
+		/// <value>The lines.</value>
 		public int Lines
 		{
 			get { return (int)GetValue(LinesProperty); }
 			set { SetValue(LinesProperty, value); }
 		}
 
+		/// <summary>
+		/// The fit property.
+		/// </summary>
 		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.None);
+		/// <summary>
+		/// Gets or sets the fit.
+		/// </summary>
+		/// <value>The fit.</value>
 		public LabelFit Fit
 		{
 			get { return (LabelFit)GetValue(FitProperty); }
 			set { SetValue(FitProperty, value); }
 		}
 
+		/// <summary>
+		/// The line break mode property.
+		/// </summary>
 		public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.TailTruncation);
+		/// <summary>
+		/// Gets or sets the line break mode.
+		/// </summary>
+		/// <value>The line break mode.</value>
 		public LineBreakMode LineBreakMode
 		{
 			get { return (LineBreakMode)GetValue(LineBreakModeProperty); }

@@ -80,11 +80,27 @@ namespace Forms9Patch
 
 
 	#region CellAccessoryTappedArgs
+	/// <summary>
+	/// Cell accessory event arguments.
+	/// </summary>
 	public class CellAccessoryEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Gets the Forms9Patch.IItem.
+		/// </summary>
+		/// <value>The item.</value>
 		public IItem Item { get; private set; }
+		/// <summary>
+		/// Gets the current accessory text.
+		/// </summary>
+		/// <value>The text.</value>
 		public string Text { get; private set; }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.CellAccessoryEventArgs"/> class.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		/// <param name="text">Text.</param>
 		public CellAccessoryEventArgs(IItem item, string text)
 		{
 			Item = item;
