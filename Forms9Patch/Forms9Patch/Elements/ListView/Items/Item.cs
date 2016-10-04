@@ -112,39 +112,18 @@ namespace Forms9Patch
 		#endregion
 
 		#region Accessory
-		public static readonly BindableProperty AccessoryPositionProperty = BindableProperty.Create("AccessoryPosition", typeof(AccessoryPosition), typeof(Item), AccessoryPosition.None);
-		public AccessoryPosition AccessoryPosition
+		public static readonly BindableProperty StartAccessoryProperty = BindableProperty.Create("StartAccessory", typeof(CellAccessory), typeof(Item), null);
+		public CellAccessory StartAccessory
 		{
-			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
-			set { SetValue(AccessoryPositionProperty, value); }
+			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
+			set { SetValue(StartAccessoryProperty, value); }
 		}
 
-		public static readonly BindableProperty AccessoryTextProperty = BindableProperty.Create("AccessoryText", typeof(Func<Item, string>), typeof(Item), null);
-		public Func<IItem, string> AccessoryText
+		public static readonly BindableProperty EndAccessoryProperty = BindableProperty.Create("EndAccessory", typeof(CellAccessory), typeof(Item), null);
+		public CellAccessory EndAccessory
 		{
-			get { return (Func<IItem, string>)GetValue(AccessoryTextProperty); }
-			set { SetValue(AccessoryTextProperty, value); }
-		}
-
-		public static readonly BindableProperty AccessoryWidthProperty = BindableProperty.Create("AccessoryWidth", typeof(double), typeof(Item), 20.0);
-		public double AccessoryWidth
-		{
-			get { return (double)GetValue(AccessoryWidthProperty); }
-			set { SetValue(AccessoryWidthProperty, value); }
-		}
-
-		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = BindableProperty.Create("AccessoryHorizontalAlignment", typeof(TextAlignment), typeof(Item), TextAlignment.Center);
-		public TextAlignment AccessoryHorizontalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
-			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
-		}
-
-		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = BindableProperty.Create("AccessoryVerticalAlignment", typeof(TextAlignment), typeof(Item), TextAlignment.Center);
-		public TextAlignment AccessoryVerticalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
-			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
+			set { SetValue(EndAccessoryProperty, value); }
 		}
 		#endregion
 
@@ -195,11 +174,8 @@ namespace Forms9Patch
 			this.SetBinding(CellBackgroundColorProperty, CellBackgroundColorProperty.PropertyName);
 			this.SetBinding(SelectedCellBackgroundColorProperty, SelectedCellBackgroundColorProperty.PropertyName);
 
-			this.SetBinding(AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
-			this.SetBinding(AccessoryTextProperty, AccessoryTextProperty.PropertyName);
-			this.SetBinding(AccessoryWidthProperty, AccessoryWidthProperty.PropertyName);
-			this.SetBinding(AccessoryHorizonatalAlignmentProperty, AccessoryHorizonatalAlignmentProperty.PropertyName);
-			this.SetBinding(AccessoryVerticalAlignmentProperty, AccessoryVerticalAlignmentProperty.PropertyName);
+			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
+			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
 		}
 
 		#endregion
@@ -217,8 +193,8 @@ namespace Forms9Patch
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 
-			AccessoryPosition = other.AccessoryPosition;
-			AccessoryText = other.AccessoryText;
+			StartAccessory = other.StartAccessory;
+			EndAccessory = other.EndAccessory;
 
 			Source = other.Source;
 		}

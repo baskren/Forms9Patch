@@ -127,73 +127,31 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// The accessory position property.
+		/// The start accessory property.
 		/// </summary>
-		public static readonly BindableProperty AccessoryPositionProperty = Item.AccessoryPositionProperty;
+		public static readonly BindableProperty StartAccessoryProperty = Item.StartAccessoryProperty;
 		/// <summary>
-		/// Gets or sets the accessory position.
+		/// Gets or sets the start accessory.
 		/// </summary>
-		/// <value>The accessory position.</value>
-		public AccessoryPosition AccessoryPosition
+		/// <value>The start accessory.</value>
+		public CellAccessory StartAccessory
 		{
-			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
-			set { SetValue(AccessoryPositionProperty, value); }
+			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
+			set { SetValue(StartAccessoryProperty, value); }
 		}
 
 		/// <summary>
-		/// The accessory text property.
+		/// The end accessory property.
 		/// </summary>
-		public static readonly BindableProperty AccessoryTextProperty = Item.AccessoryTextProperty;
+		public static readonly BindableProperty EndAccessoryProperty = Item.EndAccessoryProperty;
 		/// <summary>
-		/// Gets or sets the accessory text.
+		/// Gets or sets the end accessory.
 		/// </summary>
-		/// <value>The accessory text.</value>
-		public Func<IItem, string> AccessoryText
+		/// <value>The end accessory.</value>
+		public CellAccessory EndAccessory
 		{
-			get { return (Func<IItem, string>)GetValue(AccessoryTextProperty); }
-			set { SetValue(AccessoryTextProperty, value); }
-		}
-
-		/// <summary>
-		/// The accessory width property.
-		/// </summary>
-		public static readonly BindableProperty AccessoryWidthProperty = Item.AccessoryWidthProperty;
-		/// <summary>
-		/// Gets or sets the width of the accessory.
-		/// </summary>
-		/// <value>The width of the accessory.</value>
-		public double AccessoryWidth
-		{
-			get { return (double)GetValue(AccessoryWidthProperty); }
-			set { SetValue(AccessoryWidthProperty, value); }
-		}
-
-		/// <summary>
-		/// The accessory horizonatal alignment property.
-		/// </summary>
-		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = Item.AccessoryHorizonatalAlignmentProperty;
-		/// <summary>
-		/// Gets or sets the accessory horizontal alignment.
-		/// </summary>
-		/// <value>The accessory horizontal alignment.</value>
-		public TextAlignment AccessoryHorizontalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
-			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
-		}
-
-		/// <summary>
-		/// The accessory vertical alignment property.
-		/// </summary>
-		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = Item.AccessoryVerticalAlignmentProperty;
-		/// <summary>
-		/// Gets or sets the accessory vertical alignment.
-		/// </summary>
-		/// <value>The accessory vertical alignment.</value>
-		public TextAlignment AccessoryVerticalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
-			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
+			set { SetValue(EndAccessoryProperty, value); }
 		}
 		#endregion
 
@@ -233,8 +191,8 @@ namespace Forms9Patch
 			BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
 
 			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
-			_listView.SetBinding(ListView.AccessoryTextProperty, AccessoryTextProperty.PropertyName);
-			_listView.SetBinding(ListView.AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
+			_listView.SetBinding(ListView.StartAccessoryProperty, StartAccessoryProperty.PropertyName);
+			_listView.SetBinding(ListView.EndAccessoryProperty, EndAccessoryProperty.PropertyName);
 			_listView.SetBinding(ListView.GroupToggleBehaviorProperty, GroupToggleBehaviorProperty.PropertyName);
 			// TODO: Why doesn't the below binding work?
 			//_listView.SetBinding(ListView.ItemsSourceProperty, ItemsSourceProperty.PropertyName);

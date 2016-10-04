@@ -51,16 +51,16 @@ namespace Forms9Patch
 		Color SelectedCellBackgroundColor { get; }
 
 		/// <summary>
-		/// Gets the accessory position for this cell (very likely to be obsoleted!
+		/// Gets the accessory for the start (left) side of the cell
 		/// </summary>
 		/// <value>The accessory position.</value>
-		AccessoryPosition AccessoryPosition { get; }
+		CellAccessory StartAccessory { get; }
 
 		/// <summary>
-		/// Gets the function that generates the accessory text for this cell.  Very likely to be obsoleted
+		/// Gets the accessory for the end (right) side of the cell
 		/// </summary>
-		/// <value>The accessory text.</value>
-		Func<IItem, string> AccessoryText { get; }
+		/// <value>The end accessory.</value>
+		CellAccessory EndAccessory { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether this cell is selected.

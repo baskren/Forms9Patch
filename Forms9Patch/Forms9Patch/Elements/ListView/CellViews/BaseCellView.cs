@@ -92,32 +92,32 @@ namespace Forms9Patch
 		#endregion
 
 		#region Accessory appearance
-		public static readonly BindableProperty AccessoryPositionProperty = Item.AccessoryPositionProperty;
-		public AccessoryPosition AccessoryPosition
+		/// <summary>
+		/// The start accessory property.
+		/// </summary>
+		public static readonly BindableProperty StartAccessoryProperty = Item.StartAccessoryProperty;
+		/// <summary>
+		/// Gets or sets the start accessory.
+		/// </summary>
+		/// <value>The start accessory.</value>
+		public CellAccessory StartAccessory
 		{
-			get { return (AccessoryPosition)GetValue(AccessoryPositionProperty); }
-			set { SetValue(AccessoryPositionProperty, value); }
+			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
+			set { SetValue(StartAccessoryProperty, value); }
 		}
 
-		public static readonly BindableProperty AccessoryWidthProperty = Item.AccessoryWidthProperty;
-		public double AccessoryWidth
+		/// <summary>
+		/// The end accessory property.
+		/// </summary>
+		public static readonly BindableProperty EndAccessoryProperty = Item.EndAccessoryProperty;
+		/// <summary>
+		/// Gets or sets the end accessory.
+		/// </summary>
+		/// <value>The end accessory.</value>
+		public CellAccessory EndAccessory
 		{
-			get { return (double)GetValue(AccessoryWidthProperty); }
-			set { SetValue(AccessoryWidthProperty, value); }
-		}
-
-		public static readonly BindableProperty AccessoryHorizonatalAlignmentProperty = Item.AccessoryHorizonatalAlignmentProperty;
-		public TextAlignment AccessoryHorizontalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryHorizonatalAlignmentProperty); }
-			set { SetValue(AccessoryHorizonatalAlignmentProperty, value); }
-		}
-
-		public static readonly BindableProperty AccessoryVerticalAlignmentProperty = Item.AccessoryVerticalAlignmentProperty;
-		public TextAlignment AccessoryVerticalAlignment
-		{
-			get { return (TextAlignment)GetValue(AccessoryVerticalAlignmentProperty); }
-			set { SetValue(AccessoryVerticalAlignmentProperty, value); }
+			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
+			set { SetValue(EndAccessoryProperty, value); }
 		}
 		#endregion
 
@@ -127,10 +127,15 @@ namespace Forms9Patch
 		#region Fields
 		static int _instances = 0;
 		internal int ID;
-		Label _accessory = new Label
+		Label _startAccessory = new Label
 		{
-			HorizontalOptions = LayoutOptions.CenterAndExpand,
-			VerticalOptions = LayoutOptions.CenterAndExpand
+			HorizontalOptions = LayoutOptions.Fill,
+			VerticalOptions = LayoutOptions.Fill
+		};
+		Label _endAccessory = new Label
+		{
+			HorizontalOptions = LayoutOptions.Fill,
+			VerticalOptions = LayoutOptions.Fill
 		};
 		#endregion
 
@@ -142,6 +147,7 @@ namespace Forms9Patch
 		public BaseCellView () {
 			ID = _instances++;
 			Padding = new Thickness(0,1,0,1);
+			ColumnSpacing = 0;
 
 			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
 			this.SetBinding(SeparatorColorProperty, SeparatorColorProperty.PropertyName);
@@ -149,14 +155,14 @@ namespace Forms9Patch
 			this.SetBinding(SeparatorLeftIndentProperty, SeparatorLeftIndentProperty.PropertyName);
 			this.SetBinding(SeparatorRightIndentProperty, SeparatorRightIndentProperty.PropertyName);
 
-			this.SetBinding(AccessoryPositionProperty, AccessoryPositionProperty.PropertyName);
-			this.SetBinding(AccessoryWidthProperty,AccessoryWidthProperty.PropertyName);
-			this.SetBinding(AccessoryHorizonatalAlignmentProperty, AccessoryHorizonatalAlignmentProperty.PropertyName);
-			this.SetBinding(AccessoryVerticalAlignmentProperty, AccessoryVerticalAlignmentProperty.PropertyName);
+			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
+			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
 
-			_accessory.SetBinding(Label.HorizontalTextAlignmentProperty,AccessoryHorizonatalAlignmentProperty.PropertyName);
-			_accessory.SetBinding(Label.VerticalTextAlignmentProperty,AccessoryVerticalAlignmentProperty.PropertyName);
+			_startAccessory.SetBinding(Label.HorizontalTextAlignmentProperty,CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			_startAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
 
+			_endAccessory.SetBinding(Label.HorizontalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			_endAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
 
 
 			ColumnDefinitions = new ColumnDefinitionCollection
@@ -214,18 +220,38 @@ namespace Forms9Patch
 				if (item != null)
 					item.PropertyChanged -= OnItemPropertyChanged;
 			}
+			else if (propertyName == StartAccessoryProperty.PropertyName && StartAccessory != null)
+				StartAccessory.PropertyChanged -= OnStartAccessoryPropertyChanged;
+			else if (propertyName == EndAccessoryProperty.PropertyName && EndAccessory != null)
+				EndAccessory.PropertyChanged -= OnEndAccessoryPropertyChanged;
 		}
 
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
-			if (propertyName == AccessoryWidthProperty.PropertyName)
+
+			if (propertyName == StartAccessoryProperty.PropertyName)
 			{
-				double width = AccessoryWidth < 1 ? Width * AccessoryWidth : AccessoryWidth;
-				ColumnDefinitions[0] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
-				ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
+				_startAccessory.BindingContext = StartAccessory;
+				if (StartAccessory != null)
+				{
+					StartAccessory.PropertyChanged += OnStartAccessoryPropertyChanged;
+					UpdateStartAccessoryWidth();
+				}
 			}
-			_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);// || propertyName == "Renderer");
+			else if (propertyName == EndAccessoryProperty.PropertyName)
+			{
+				_endAccessory.BindingContext = EndAccessory;
+				if (EndAccessory != null)
+				{
+					EndAccessory.PropertyChanged += OnEndAccessoryPropertyChanged;
+					UpdateEndAccessoryWidth();
+				}
+			}
+
+
+
+			_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);
 			//System.Diagnostics.Debug.WriteLine("OnPropertyChanged ["+propertyName+"] Item.Source=["+((Item)BindingContext)?.Source+"]");
 			UpdateLayout();
 		}
@@ -239,56 +265,94 @@ namespace Forms9Patch
 			    || e.PropertyName == Item.IndexProperty.PropertyName
 			   )
 				UpdateUnBoundProperties();
-			_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
+			
 			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
+			_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
 			UpdateLayout();
 		}
 
-		AccessoryPosition _lastAccPos = AccessoryPosition.None;
-		bool _lastAccActive = false;
+		void OnStartAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
+				UpdateStartAccessoryWidth();
+			else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
+				UpdateLayout();
+		}
+
+		void OnEndAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
+				UpdateEndAccessoryWidth();
+			else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
+				UpdateLayout();
+		}
+
+		void UpdateStartAccessoryWidth()
+		{
+			double width = StartAccessory.Width < 1 ? Width * StartAccessory.Width : StartAccessory.Width;
+			ColumnDefinitions[0] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
+		}
+
+		void UpdateEndAccessoryWidth()
+		{
+			double width = EndAccessory.Width < 1 ? Width * EndAccessory.Width : EndAccessory.Width;
+			ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
+		}
+
+		bool _lastStartAccessoryActive;
+		bool _lastEndAccesoryActive;
 		bool _freshContent = false;
 		void UpdateLayout()
 		{
-			var _accActive = false;
-			if (AccessoryPosition != AccessoryPosition.None)
+			string startAccessoryText = ((Item)BindingContext)?.StartAccessory?.TextFunction?.Invoke((Item)BindingContext);
+			if (startAccessoryText != _startAccessory.HtmlText)
+				_startAccessory.HtmlText = startAccessoryText;
+			string endAccessoryText = ((Item)BindingContext)?.EndAccessory?.TextFunction?.Invoke((Item)BindingContext);
+			if (endAccessoryText != _endAccessory.HtmlText)
+				_endAccessory.HtmlText = endAccessoryText;
+
+			var startAccessoryActive = (_startAccessory.HtmlText != null);
+			var endAccessoryActive = (_endAccessory.HtmlText != null);
+
+			if (startAccessoryActive != _lastStartAccessoryActive || endAccessoryActive != _lastEndAccesoryActive || _freshContent) 
 			{
-				string accText = ((Item)BindingContext)?.AccessoryText?.Invoke((Item)BindingContext);
-				if (accText != _accessory.HtmlText)
+				if (_startAccessory != null && Children.Contains(_startAccessory))
+					Children.Remove(_startAccessory);
+				if (Content != null && Children.Contains(Content))
+					Children.Remove(Content);
+				if (_endAccessory != null && Children.Contains(_endAccessory))
+					Children.Remove(_endAccessory);
+				if (startAccessoryActive)
 				{
-					_accessory.HtmlText = accText;
-					_accActive = _accessory.HtmlText != null;
-				}
-			}
-			if (_accActive != _lastAccActive || AccessoryPosition != _lastAccPos || _freshContent)
-			{
-				//if ( _freshContent)
-				//{
-					if (Content != null && Children.Contains(Content))
-						Children.Remove(Content);
-					if (_accessory != null && Children.Contains(_accessory))
-						Children.Remove(_accessory);
-					if (AccessoryPosition == AccessoryPosition.None || !_accActive)
+					Children.Add(_startAccessory, 0, 0);
+					if (endAccessoryActive)
 					{
-						if (Content != null)
-							Children.Add(Content, 0, 3, 0, 1);
-					_accessory.HtmlText = null;
-					}
-					else if (AccessoryPosition == AccessoryPosition.Start)
-					{
-						if (Content != null)
-							Children.Add(Content, 1, 3, 0, 1);
-						Children.Add(_accessory, 0, 0);
+						Children.Add(Content, 1, 0);
+						Children.Add(_endAccessory, 2, 0);
 					}
 					else
 					{
-						if (Content != null)
-							Children.Add(Content, 0, 2, 0, 1);
-						Children.Add(_accessory, 2, 0);
+						Children.Add(Content, 1, 3, 0, 1);
+						_endAccessory.HtmlText = null;
 					}
-					_lastAccPos = AccessoryPosition;
-				//}
+				}
+				else 
+				{
+					_startAccessory.HtmlText = null;
+					if (endAccessoryActive)
+					{
+						Children.Add(Content, 0, 2, 0, 1);
+						Children.Add(_endAccessory, 2, 0);
+					}
+					else
+					{
+						Children.Add(Content, 0, 3, 0, 1);
+						_endAccessory.HtmlText = null;
+					}
+				}
+				_lastStartAccessoryActive = startAccessoryActive;
+				_lastEndAccesoryActive = endAccessoryActive;
 				_freshContent = false;
-				_lastAccActive = _accActive;
 			}
 		}
 

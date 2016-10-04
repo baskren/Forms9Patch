@@ -27,8 +27,8 @@ namespace Forms9Patch
 			SeparatorIsVisible = other.SeparatorIsVisible;
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
-			AccessoryText = other.AccessoryText;
-			AccessoryPosition = other.AccessoryPosition;
+			StartAccessory = other.StartAccessory;
+			EndAccessory = other.EndAccessory;
 			Source = other.Source;
 		}
 		#endregion

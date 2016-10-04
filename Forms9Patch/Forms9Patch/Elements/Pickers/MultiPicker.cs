@@ -40,9 +40,10 @@ namespace Forms9Patch
 			_basePicker.SelectBy = SelectBy.Default;
 			_manLayout.Children.Remove(_lowerEdge);
 			_manLayout.Children.Remove(_upperEdge);
-			_basePicker.AccessoryPosition = AccessoryPosition.Start;
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
-			_basePicker.AccessoryText = (IItem arg) => arg.IsSelected ? "✓" : " ";
+			_basePicker.StartAccessory = new CellAccessory();
+			_basePicker.StartAccessory.HorizontalAlignment = TextAlignment.End;
+			_basePicker.StartAccessory.TextFunction = (IItem arg) => arg.IsSelected ? "✓" : "";
 			_basePicker.SetBinding(BasePicker.SelectedItemsProperty,"SelectedItems");
 		}
 		#endregion
