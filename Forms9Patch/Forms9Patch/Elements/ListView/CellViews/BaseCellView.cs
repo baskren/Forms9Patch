@@ -219,6 +219,8 @@ namespace Forms9Patch
 				var item = BindingContext as Item;
 				if (item != null)
 					item.PropertyChanged -= OnItemPropertyChanged;
+				_startAccessory.HtmlText = null;
+				_endAccessory.HtmlText = null;
 			}
 			else if (propertyName == StartAccessoryProperty.PropertyName && StartAccessory != null)
 				StartAccessory.PropertyChanged -= OnStartAccessoryPropertyChanged;
