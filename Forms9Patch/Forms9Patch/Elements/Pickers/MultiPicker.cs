@@ -47,6 +47,8 @@ namespace Forms9Patch
 			_basePicker.StartAccessory.TextFunction = (IItem arg) => arg.IsSelected ? "✓" : "";
 
 			SelectedItems = _basePicker.SelectedItems;
+
+			SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
 		}
 		#endregion
 
