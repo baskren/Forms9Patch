@@ -181,7 +181,7 @@ namespace Forms9Patch.Droid
 		}
 			
 		void OnBackgroundImageLayoutComplete(bool hasImage) {
-			System.Diagnostics.Debug.WriteLine("OnBackgroundImageLayoutComplete Element=["+Element.GetType()+"] hasImage=["+hasImage+"]");
+			//System.Diagnostics.Debug.WriteLine("OnBackgroundImageLayoutComplete Element=["+Element.GetType()+"] hasImage=["+hasImage+"]");
 
 			if (!hasImage) {
 				var roundedBoxElement = Element as IRoundedBox;

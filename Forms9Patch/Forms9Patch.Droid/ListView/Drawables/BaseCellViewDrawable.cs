@@ -24,7 +24,7 @@ namespace Forms9Patch.Droid
 		}
 
 		public override void Draw (Canvas canvas) {
-			System.Diagnostics.Debug.WriteLine("\tDrawing");
+			//System.Diagnostics.Debug.WriteLine("\tDrawing");
 			if (Bounds.Width() <= 0 || Bounds.Height() <= 0)
 				return;
 

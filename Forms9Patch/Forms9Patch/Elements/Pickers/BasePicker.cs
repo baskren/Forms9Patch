@@ -189,6 +189,7 @@ namespace Forms9Patch
 		public BasePicker()
 		{
 			BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
+			//BackgroundColor = Color.White;
 
 			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
 			_listView.SetBinding(ListView.StartAccessoryProperty, StartAccessoryProperty.PropertyName);
@@ -197,7 +198,7 @@ namespace Forms9Patch
 			// TODO: Why doesn't the below binding work?
 			//_listView.SetBinding(ListView.ItemsSourceProperty, ItemsSourceProperty.PropertyName);
 			_listView.BindingContext = this;
-			_listView.BackgroundColor = Color.Transparent;
+			_listView.BackgroundColor = Color.White;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
 			_listView.ItemAppearing += OnCellAppearing;

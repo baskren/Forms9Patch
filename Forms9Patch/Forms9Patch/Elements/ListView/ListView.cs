@@ -627,7 +627,7 @@ namespace Forms9Patch
 			else*/
 			if (propertyName == ItemsSourceProperty.PropertyName)
 			{
-				System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
+				//System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
 				UpdateItemsSource();
 			}
 			else if (propertyName == SourcePropertyMapProperty.PropertyName)
@@ -696,6 +696,9 @@ namespace Forms9Patch
 
 
 		internal Func<double,bool> RendererScrollBy;
+		internal Action<int, ScrollToPosition, bool> RendererScrollToPos;
+
+
 		double _scrollSpeed;
 		bool _scrolling;
 		void ScrollSpeed(double speed) {
@@ -710,6 +713,7 @@ namespace Forms9Patch
 			_scrollSpeed = speed;
 		}
 
+
 		/// <summary>
 		/// Scroll the ListView by so many DIPs
 		/// </summary>
@@ -718,6 +722,8 @@ namespace Forms9Patch
 		public bool ScrollBy(double delta) {
 			return RendererScrollBy (delta);
 		}
+
+
 
 		/// <summary>
 		/// Scrolls to.
@@ -732,14 +738,24 @@ namespace Forms9Patch
 			if (itemGroup != null)
 			{
 				var itemItem = itemGroup.ItemWithSource(item);
-				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
-				 {
-					 if (IsGroupingEnabled)
-						 base.ScrollTo(itemItem, itemGroup, position, animated);
-					 else
-						 base.ScrollTo(itemItem, position, animated);
-					 return false;
-				 });
+				if (Device.OS == TargetPlatform.Android)
+				{
+					var pos = BaseItemsSource.FlatPositionOfItemInGroup(item, group);
+					if (pos != -1)
+						RendererScrollToPos(pos, position, animated);
+					//RendererScrollToItemInGroup(item, group, position, animated);
+				}
+				else
+				{
+					Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+					 {
+						 if (IsGroupingEnabled)
+							 base.ScrollTo(itemItem, itemGroup, position, animated);
+						 else
+							 base.ScrollTo(itemItem, position, animated);
+						 return false;
+					 });
+				}
 			}
 		}
 
@@ -753,12 +769,22 @@ namespace Forms9Patch
 		{
 			var itemItem = _baseItemsSource.ItemWithSource(item);
 			if (itemItem != null)
-				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
-				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
-				 {
-					 base.ScrollTo(itemItem, position, animated);
-					return false;
-				 });
+					// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
+					Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+					{
+						if (Device.OS == TargetPlatform.Android)
+						{
+							var pos = BaseItemsSource.FlatPositionOfItem(item);
+							if (pos != -1)
+								RendererScrollToPos?.Invoke(pos, position, animated);
+							//RendererScrollToItemInGroup(item, group, position, animated);
+						}
+						else
+						{
+							base.ScrollTo(itemItem, position, animated);
+						}
+						 return false;
+					 });
 		}
 		#endregion
 

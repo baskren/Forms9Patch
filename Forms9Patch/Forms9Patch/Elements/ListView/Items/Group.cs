@@ -714,6 +714,60 @@ namespace Forms9Patch
 		#endregion
 
 
+		#region Flat Position enhancements
+		public int FlatPositionOfItem(object item)
+		{
+			if (item == null)
+				return -1;
+			int pos = 0;
+			foreach (var topItem in _items)
+			{
+				// count this header/cell
+				pos++;
+				if (topItem.Source == item)
+					return pos;
+				var gr = topItem as Group;
+				if (gr != null)
+				{
+					foreach (var subItem in gr)
+					{
+						// count this cell
+						pos++;
+						if (subItem.Source == item)
+							return pos;
+					}
+				}
+			}
+			return -1;
+		}
+
+		public int FlatPositionOfItemInGroup(object item, object group)
+		{
+			if (item == null || group == null)
+				return -1;
+			int pos = 0;
+			foreach (var topItem in _items)
+			{
+				// count this header/cell
+				pos++;
+				if (topItem.Source == item)
+					return pos - 1;
+				var gr = topItem as Group;
+				if (gr != null)
+				{
+					foreach (var subItem in gr)
+					{
+						// count this cell
+						pos++;
+						if (subItem.Source == item && topItem.Source == group)
+							return pos - 1;
+					}
+				}
+			}
+			return -1;
+		}
+		#endregion
+
 		#region Properties
 		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(Group), null);
 		public List<string> SourceSubPropertyMap
@@ -723,6 +777,7 @@ namespace Forms9Patch
 		}
 
 		#endregion
+
 
 		#region Fields
 		readonly ObservableCollection<Item> _items = new ObservableCollection<Item> ();
@@ -814,7 +869,6 @@ namespace Forms9Patch
 			NotifySourceOfChanges = true;
 		}
 		#endregion
-
 
 
 		#region INotifyCollectionChanged implementation

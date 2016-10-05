@@ -130,12 +130,14 @@ namespace Forms9Patch
 		Label _startAccessory = new Label
 		{
 			HorizontalOptions = LayoutOptions.Fill,
-			VerticalOptions = LayoutOptions.Fill
+			VerticalOptions = LayoutOptions.Fill,
+			TextColor = Color.Black
 		};
 		Label _endAccessory = new Label
 		{
 			HorizontalOptions = LayoutOptions.Fill,
-			VerticalOptions = LayoutOptions.Fill
+			VerticalOptions = LayoutOptions.Fill,
+			TextColor = Color.Black
 		};
 		#endregion
 

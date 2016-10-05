@@ -17,11 +17,13 @@ namespace Forms9Patch.Droid
 			if (oldElement != null) {
 				oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
 				oldElement.RendererScrollBy -= ScrollBy;
+				oldElement.RendererScrollToPos -= ScrollToPosition;
 			}
 			var newElement = e.NewElement as ListView;
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
+				newElement.RendererScrollToPos += ScrollToPosition;
 			}
 			Control.Divider = null;
 			Control.DividerHeight = -1;
@@ -69,6 +71,69 @@ namespace Forms9Patch.Droid
 			offset += (int)(delta * Forms.Context.Resources.DisplayMetrics.Density);
 			Control.SetSelectionFromTop (index, -offset);
 			return true;
+		}
+
+		void ScrollToPosition(int pos, ScrollToPosition position, bool animated)
+		{
+			var cellView = Control.GetChildAt(pos);
+			/*
+			double cellHeight=50 * Forms9Patch.Display.Density;
+			System.Diagnostics.Debug.WriteLine("cellHeight[" + cellHeight + "]");
+			if (cellView == null)
+			{
+				for (int i = 0; i < Control.ChildCount; i++)
+				{
+					var child = Control.GetChildAt(i);
+					if (child != null)
+					{
+						cellHeight = child.Height;
+						System.Diagnostics.Debug.WriteLine("cellHeight from item [" + i + "]");
+						break;
+					}
+				}
+			}
+			else
+			{
+				cellHeight = cellView.Height;
+				System.Diagnostics.Debug.WriteLine("cellHeight from actual cell");
+			}
+			//double cellHeight = (cellView != null) ? cellView.Height : 40;
+			System.Diagnostics.Debug.WriteLine("cellHeight["+cellHeight+"]");
+			*/
+			double cellHeight = 0;
+			double offset = 0;
+
+			if (position == Xamarin.Forms.ScrollToPosition.MakeVisible)
+			{
+				if (pos < Control.FirstVisiblePosition)
+					position = Xamarin.Forms.ScrollToPosition.Start;
+				else if (pos > Control.LastVisiblePosition)
+					position = Xamarin.Forms.ScrollToPosition.End;
+				else
+					return;
+			}
+			if (position == Xamarin.Forms.ScrollToPosition.Center)
+				offset = (Control.Height - cellHeight) / 2.0;
+			else if (position == Xamarin.Forms.ScrollToPosition.End)
+				offset = (Control.Height - cellHeight);
+
+			offset += Control.Top - Control.ListPaddingTop;
+			System.Diagnostics.Debug.WriteLine("pos=["+pos+"] offset=["+offset+"]");
+			
+			if (animated)
+				Control.SmoothScrollToPositionFromTop(pos+1, (int)offset);
+			else
+				Control.SmoothScrollToPositionFromTop(pos+1, (int)offset,0);
+			/*
+			if (cellView == null)
+			{
+				Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+				{
+					ScrollToPosition(pos, position, animated);
+					return false;
+				});
+			}
+			*/
 		}
 
 
