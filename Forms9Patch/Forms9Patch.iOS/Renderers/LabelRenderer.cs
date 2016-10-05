@@ -42,7 +42,7 @@ namespace Forms9Patch.iOS
 			if (Control.LineBreakMode != UILineBreakMode.WordWrap)
 				 Control.LineBreakMode = UILineBreakMode.WordWrap;
 
-
+			/*
 			if (!perfectSizeValid)
 			{
 				perfectSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
@@ -51,9 +51,10 @@ namespace Forms9Patch.iOS
 			}
 			if (widthConstraint >= perfectSize.Request.Width && heightConstraint >= perfectSize.Request.Height && Element.Fit != LabelFit.Lines)
 			{
-				//System.Diagnostics.Debug.WriteLine("\tperfectSize=[" + perfectSize.Request.Width + "," + perfectSize.Request.Height + "]");
+				System.Diagnostics.Debug.WriteLine("\tperfectSize=[" + perfectSize.Request.Width + "," + perfectSize.Request.Height + "]");
 				return perfectSize;
 			}
+			*/
 
 
 			var tmpFontSize = Element.FontSize;
