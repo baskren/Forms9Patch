@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Android.Widget;
+using Android.Runtime;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.ListView), typeof(Forms9Patch.Droid.ListViewRenderer))]
 namespace Forms9Patch.Droid
@@ -17,13 +19,13 @@ namespace Forms9Patch.Droid
 			if (oldElement != null) {
 				oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
 				oldElement.RendererScrollBy -= ScrollBy;
-				oldElement.RendererScrollToPos -= ScrollToPosition;
+				oldElement.RendererScrollToPos -= ScrollToItem;
 			}
 			var newElement = e.NewElement as ListView;
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
-				newElement.RendererScrollToPos += ScrollToPosition;
+				newElement.RendererScrollToPos += ScrollToItem;
 			}
 			Control.Divider = null;
 			Control.DividerHeight = -1;
@@ -73,10 +75,82 @@ namespace Forms9Patch.Droid
 			return true;
 		}
 
-		void ScrollToPosition(int pos, ScrollToPosition position, bool animated)
+		void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
 		{
-			var cellView = Control.GetChildAt(pos);
+			ITemplatedItemsView<Cell> templatedItemsView = Element;
+			ITemplatedItemsList<Cell> templatedItems = templatedItemsView.TemplatedItems;
+			Cell cell;
+			int position;
+
+			if (Element.IsGroupingEnabled)
+			{
+				var results = templatedItems.GetGroupAndIndexOfItem(reqGroup, reqItem);
+				if (results.Item1 == -1 || results.Item2 == -1)
+					return;
+
+				var group = templatedItems.GetGroup(results.Item1);
+				cell = group[results.Item2];
+
+				position = templatedItems.GetGlobalIndexForGroup(group) + results.Item2 + 1;
+			}
+			else
+			{
+				position = templatedItems.GetGlobalIndexOfItem(reqItem);
+				cell = templatedItems[position];
+			}
+
+			//Android offsets position of cells when using header
+			int realPositionWithHeader = position + 1;
+
+			if (scrollToPosition == ScrollToPosition.MakeVisible)
+			{
+				if (animated)
+					Control.SmoothScrollToPosition(realPositionWithHeader);
+				else
+					Control.SetSelection(realPositionWithHeader);
+				return;
+			}
+
+			//int height = Control.Height;
+			var cellHeight = (int)cell.RenderHeight;
+			if (cellHeight == -1)
+			{
+				int first = Control.FirstVisiblePosition;
+				if (first <= position && position <= Control.LastVisiblePosition)
+					cellHeight = Control.GetChildAt(position - first).Height;
+				else
+				{
+					CellAdapter adapter = Control.Adapter as CellAdapter;
+					/*
+					Android.Views.View view = _adapter.GetView(position, null, null);
+					view.Measure(MeasureSpecFactory.MakeMeasureSpec(Control.Width, MeasureSpecMode.AtMost), MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
+					cellHeight = view.MeasuredHeight;
+					*/
+				}
+			}
+			var scale = Forms.Context.Resources.DisplayMetrics.Density;
+			cellHeight = (int)(cellHeight * scale);
+			                 
+			var y = 0;
+
+			if (scrollToPosition == ScrollToPosition.Center)
+				y = (int)(Control.Height / 2 - 0.75 * cellHeight / 2);
+			else if (scrollToPosition == ScrollToPosition.End)
+				y = (int)(Control.Height - cellHeight);
+
+			//System.Diagnostics.Debug.WriteLine("==================================");
+			//System.Diagnostics.Debug.WriteLine("y=["+y+"] ht=["+Control.Height+"] cellHt=["+cellHeight+"]");
+			//System.Diagnostics.Debug.WriteLine(new System.Diagnostics.StackTrace());
+			//System.Diagnostics.Debug.WriteLine("");
+
+			if (animated)
+				Control.SmoothScrollToPositionFromTop(realPositionWithHeader, y);
+			else
+				Control.SetSelectionFromTop(realPositionWithHeader, y);
+
 			/*
+			var cellView = Control.GetChildAt(pos);
+
 			double cellHeight=50 * Forms9Patch.Display.Density;
 			System.Diagnostics.Debug.WriteLine("cellHeight[" + cellHeight + "]");
 			if (cellView == null)
@@ -99,9 +173,8 @@ namespace Forms9Patch.Droid
 			}
 			//double cellHeight = (cellView != null) ? cellView.Height : 40;
 			System.Diagnostics.Debug.WriteLine("cellHeight["+cellHeight+"]");
-			*/
-			double cellHeight = 0;
-			double offset = 0;
+
+			double offsetFromTop = 0;
 
 			if (position == Xamarin.Forms.ScrollToPosition.MakeVisible)
 			{
@@ -113,17 +186,20 @@ namespace Forms9Patch.Droid
 					return;
 			}
 			if (position == Xamarin.Forms.ScrollToPosition.Center)
-				offset = (Control.Height - cellHeight) / 2.0;
+				offsetFromTop = (Control.Height - cellHeight*0.75) / 2.0;
 			else if (position == Xamarin.Forms.ScrollToPosition.End)
-				offset = (Control.Height - cellHeight);
+				offsetFromTop = (Control.Height);
 
-			offset += Control.Top - Control.ListPaddingTop;
-			System.Diagnostics.Debug.WriteLine("pos=["+pos+"] offset=["+offset+"]");
-			
+			offsetFromTop += Control.Top - Control.ListPaddingTop;
+			System.Diagnostics.Debug.WriteLine("pos=["+pos+"] offset=["+offsetFromTop+"]");
+
+
+
 			if (animated)
-				Control.SmoothScrollToPositionFromTop(pos+1, (int)offset);
+				Control.SmoothScrollToPositionFromTop(pos, (int)offsetFromTop);
 			else
-				Control.SmoothScrollToPositionFromTop(pos+1, (int)offset,0);
+				Control.SmoothScrollToPositionFromTop(pos, (int)offsetFromTop,0);
+				*/
 			/*
 			if (cellView == null)
 			{
@@ -276,6 +352,32 @@ namespace Forms9Patch.Droid
 			var point = new [] { (int)p.X, (int)p.Y };
 			Control.GetLocationInWindow(point);
 			return new Point (point [0], point [1]);
+		}
+	}
+
+	class F9PScrollListener : AbsListView.IOnScrollListener
+	{
+		public IntPtr Handle
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public void Dispose()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

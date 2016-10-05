@@ -210,7 +210,7 @@ namespace Forms9Patch
 			listener.Panned += OnPanned;
 			listener.Panning += (sender, e) => _lastAppearance = DateTime.Now;
 
-			_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
+			//_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
 			_listView.Footer = _lowerPadding;
 

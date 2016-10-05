@@ -696,7 +696,7 @@ namespace Forms9Patch
 
 
 		internal Func<double,bool> RendererScrollBy;
-		internal Action<int, ScrollToPosition, bool> RendererScrollToPos;
+		internal Action<object, object, ScrollToPosition, bool> RendererScrollToPos;
 
 
 		double _scrollSpeed;
@@ -738,24 +738,23 @@ namespace Forms9Patch
 			if (itemGroup != null)
 			{
 				var itemItem = itemGroup.ItemWithSource(item);
-				if (Device.OS == TargetPlatform.Android)
-				{
-					var pos = BaseItemsSource.FlatPositionOfItemInGroup(item, group);
-					if (pos != -1)
-						RendererScrollToPos(pos, position, animated);
-					//RendererScrollToItemInGroup(item, group, position, animated);
-				}
-				else
-				{
-					Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
-					 {
-						 if (IsGroupingEnabled)
-							 base.ScrollTo(itemItem, itemGroup, position, animated);
-						 else
-							 base.ScrollTo(itemItem, position, animated);
-						 return false;
-					 });
-				}
+				Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
+					if (Device.OS == TargetPlatform.Android)
+					{
+						if (IsGroupingEnabled)
+							RendererScrollToPos?.Invoke(itemItem, group, position, animated);
+						else
+							RendererScrollToPos?.Invoke(itemItem, null, position, animated);
+					}
+					else 
+					{ 
+						if (IsGroupingEnabled) 
+							base.ScrollTo(itemItem, itemGroup, position, animated); 
+						else 
+							base.ScrollTo(itemItem, position, animated); 
+					}
+					return false;
+				});
 			}
 		}
 
@@ -769,22 +768,23 @@ namespace Forms9Patch
 		{
 			var itemItem = _baseItemsSource.ItemWithSource(item);
 			if (itemItem != null)
-					// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
-					Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
+				Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+				{
+					if (Device.OS == TargetPlatform.Android)
 					{
-						if (Device.OS == TargetPlatform.Android)
-						{
-							var pos = BaseItemsSource.FlatPositionOfItem(item);
-							if (pos != -1)
-								RendererScrollToPos?.Invoke(pos, position, animated);
-							//RendererScrollToItemInGroup(item, group, position, animated);
-						}
-						else
-						{
-							base.ScrollTo(itemItem, position, animated);
-						}
-						 return false;
-					 });
+						if (IsGroupingEnabled)
+							RendererScrollToPos?.Invoke(itemItem, BaseItemsSource, position, animated);
+	                    else
+							RendererScrollToPos?.Invoke(itemItem, null, position, animated);
+					}
+						//RendererScrollToItemInGroup(item, group, position, animated);
+					else
+					{
+						base.ScrollTo(itemItem, position, animated);
+					}
+					 return false;
+				 });
 		}
 		#endregion
 

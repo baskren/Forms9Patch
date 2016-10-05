@@ -12,6 +12,7 @@ namespace Forms9Patch
 			VerticalOptions = LayoutOptions.Center;
 			HorizontalOptions = LayoutOptions.Start;
 			Margin = new Thickness(5, 1, 5, 1);
+			//BackgroundColor = Color.Pink;
 		}
 
 		#region change management
