@@ -150,6 +150,8 @@ namespace Forms9Patch
 			ID = _instances++;
 			Padding = new Thickness(0,1,0,1);
 			ColumnSpacing = 0;
+			RowSpacing = 0;
+			Margin = 0;
 
 			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
 			this.SetBinding(SeparatorColorProperty, SeparatorColorProperty.PropertyName);

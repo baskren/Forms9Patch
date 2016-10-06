@@ -30,7 +30,8 @@ namespace Forms9Patch.iOS
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
-			//System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
+			if (Element.HtmlText == "degrees, °")
+				System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
@@ -42,19 +43,8 @@ namespace Forms9Patch.iOS
 			if (Control.LineBreakMode != UILineBreakMode.WordWrap)
 				 Control.LineBreakMode = UILineBreakMode.WordWrap;
 
-			/*
-			if (!perfectSizeValid)
-			{
-				perfectSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
-				perfectSize.Minimum = new Size(Math.Min(10, perfectSize.Request.Width), perfectSize.Request.Height);
-				perfectSizeValid = true;
-			}
-			if (widthConstraint >= perfectSize.Request.Width && heightConstraint >= perfectSize.Request.Height && Element.Fit != LabelFit.Lines)
-			{
-				System.Diagnostics.Debug.WriteLine("\tperfectSize=[" + perfectSize.Request.Width + "," + perfectSize.Request.Height + "]");
-				return perfectSize;
-			}
-			*/
+			//var baseSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
+
 
 
 			var tmpFontSize = Element.FontSize;
@@ -76,6 +66,20 @@ namespace Forms9Patch.iOS
 			Control.AdjustsFontSizeToFitWidth = false;
 			Control.Font = Control.Font.WithSize((nfloat)tmpFontSize);
 			Control.Lines = int.MaxValue;
+
+
+			if (!perfectSizeValid)
+			{
+				perfectSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
+				perfectSize.Minimum = new Size(Math.Min(10, perfectSize.Request.Width), perfectSize.Request.Height);
+				perfectSizeValid = true;
+			}
+			if (widthConstraint >= perfectSize.Request.Width && heightConstraint >= perfectSize.Request.Height && Element.Fit != LabelFit.Lines)
+			{
+				System.Diagnostics.Debug.WriteLine("\tperfectSize=[" + perfectSize.Request.Width + "," + perfectSize.Request.Height + "]");
+				return perfectSize;
+			}
+
 
 			double tmpHt=-1;
 			double tmpWd = widthConstraint;
@@ -143,7 +147,8 @@ namespace Forms9Patch.iOS
 				{
 					tmpHt = Control.Font.LineHeight * lines + Control.Font.Leading * (lines - 1);
 					Control.Lines = (System.nint)Math.Ceiling(lines);
-					//System.Diagnostics.Debug.WriteLine("\tRE-calculated tmpHt=[" + tmpHt + "] lines=[" + lines + "]");
+					if (Element.HtmlText == "degrees, °")
+						System.Diagnostics.Debug.WriteLine("\tRE-calculated tmpHt=[" + tmpHt + "] lines=[" + lines + "]");
 				}
 				else {
 					Control.Lines = Element.Lines;
@@ -224,7 +229,8 @@ namespace Forms9Patch.iOS
 					}
 					Control.Frame = new CGRect(0, y, (nfloat)(widthConstraint), tmpHt);
 			 */
-			//System.Diagnostics.Debug.WriteLine("\tresult=["+tmpWd+","+tmpHt+"] [10,"+Control.Font.LineHeight+"]");
+			if (Element.HtmlText == "degrees, °")
+				System.Diagnostics.Debug.WriteLine("\tresult=["+tmpWd+","+tmpHt+"] cgSize=["+cgSize.Width+","+cgSize.Height+"] [10,"+Control.Font.LineHeight+"]");
 			//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
 
