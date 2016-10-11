@@ -6,13 +6,12 @@ namespace Forms9Patch
 
 		public TextCellViewContent()
 		{
-			//HeightRequest = 30;
-			//BackgroundColor = Color.Pink;
 			TextColor = Color.Black;
-			VerticalOptions = LayoutOptions.Center;
-			HorizontalOptions = LayoutOptions.Start;
+			VerticalOptions = LayoutOptions.FillAndExpand;
+			HorizontalOptions = LayoutOptions.FillAndExpand;
 			Margin = new Thickness(5, 1, 5, 1);
-			//BackgroundColor = Color.Pink;
+			VerticalTextAlignment = TextAlignment.Center;
+			HorizontalTextAlignment = TextAlignment.Start;
 		}
 
 		#region change management

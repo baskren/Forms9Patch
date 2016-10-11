@@ -37,7 +37,7 @@ namespace Forms9Patch
 		{
 			//SelectedItems = new ObservableCollection<object>();
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0);
-			_upperGradient.EndColor = _overlayColor.WithAlpha(0);
+			//_upperGradient.EndColor = _overlayColor.WithAlpha(0);
 			_basePicker.SelectBy = SelectBy.Default;
 			_manLayout.Children.Remove(_lowerEdge);
 			_manLayout.Children.Remove(_upperEdge);

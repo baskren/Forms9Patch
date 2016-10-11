@@ -129,14 +129,14 @@ namespace Forms9Patch
 		internal int ID;
 		Label _startAccessory = new Label
 		{
-			HorizontalOptions = LayoutOptions.Fill,
-			VerticalOptions = LayoutOptions.Fill,
+			HorizontalOptions = LayoutOptions.CenterAndExpand,
+			VerticalOptions = LayoutOptions.CenterAndExpand,
 			TextColor = Color.Black
 		};
 		Label _endAccessory = new Label
 		{
-			HorizontalOptions = LayoutOptions.Fill,
-			VerticalOptions = LayoutOptions.Fill,
+			HorizontalOptions = LayoutOptions.CenterAndExpand,
+			VerticalOptions = LayoutOptions.CenterAndExpand,
 			TextColor = Color.Black
 		};
 		#endregion
@@ -197,6 +197,16 @@ namespace Forms9Patch
 			{
 				item.BaseCellView = this;
 				item.PropertyChanged += OnItemPropertyChanged;
+				if (!item.HasUnevenRows && item.RowHeight > 0)
+				{
+					HeightRequest = item.RowHeight;
+					Content.HeightRequest = item.RowHeight;
+				}
+				else
+				{
+					HeightRequest = -1;
+					Content.HeightRequest = -1;
+				}
 				UpdateUnBoundProperties();
 			}
 			else

@@ -16,6 +16,25 @@ namespace Forms9Patch.iOS
 			NativeView.UserInteractionEnabled = false;
 		}
 
+		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
+			if (e.PropertyName == ColorGradientBox.StartColorProperty.PropertyName ||
+			    e.PropertyName == ColorGradientBox.EndColorProperty.PropertyName ||
+			    e.PropertyName == ColorGradientBox.OrientationProperty.PropertyName ||
+			    e.PropertyName == VisualElement.IsVisibleProperty.PropertyName && base.Element.IsVisible
+			   )
+				this.SetNeedsDisplay();
+		}
+
+		private CGSize _previousSize;
+		public override void LayoutSubviews()
+		{
+			if (this._previousSize != this.Bounds.Size)
+				this.SetNeedsDisplay();
+		}
+
+
 		CAGradientLayer _oldSublayer;
 
 		public override void Draw (CGRect rect)
@@ -36,8 +55,20 @@ namespace Forms9Patch.iOS
 				NativeView.Layer.InsertSublayer (gradient, 0);
 			_oldSublayer = gradient;
 			base.Draw (rect);
+			this._previousSize = this.Bounds.Size;
 			//BackgroundColor = Color.Transparent.ToUIColor();
 		}
 
+		/*
+		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			base.OnElementPropertyChanged(sender, e);
+			System.Diagnostics.Debug.WriteLine("e.PropertyName="+e.PropertyName);
+			if (e.PropertyName == VisualElement.WidthProperty.PropertyName)
+				System.Diagnostics.Debug.WriteLine("\tWidth=["+Element.Width+"] ["+NativeView.Bounds.Width+"]" );
+			if (e.PropertyName == VisualElement.HeightProperty.PropertyName)
+				System.Diagnostics.Debug.WriteLine("\tHeight=["+Element.Height+"] ["+NativeView.Bounds.Height+"]");
+		}
+		*/
 	}
 }

@@ -118,6 +118,7 @@ namespace Forms9Patch
 		{
 			BackgroundColor = Color.Red
 		};
+
 		#endregion
 
 		/// <summary>
@@ -169,16 +170,8 @@ namespace Forms9Patch
 		{
 			if (Height > 0 && Width > 0)
 			{
+				System.Diagnostics.Debug.WriteLine("SinglePicker.OnManualLayoutChildren");
 				double overlayHeight = (Height - RowHeight) / 2.0;
-				/*
-				_manLayout.LayoutChild(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
-				_manLayout.LayoutChild(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
-				_manLayout.LayoutChild(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));
-				if (_manLayout.Children.Contains(_lowerEdge))
-					_manLayout.LayoutChild(_lowerEdge, new Rectangle(e.X, overlayHeight, e.Width, 1.0));
-				if (_manLayout.Children.Contains(_upperEdge))
-					_manLayout.LayoutChild(_upperEdge, new Rectangle(e.X, e.Height - overlayHeight, e.Width, 1.0));
-					*/
 				LayoutChildIntoBoundingRegion(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
 				LayoutChildIntoBoundingRegion(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
 				LayoutChildIntoBoundingRegion(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));

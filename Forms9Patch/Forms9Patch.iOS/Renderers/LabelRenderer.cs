@@ -30,7 +30,7 @@ namespace Forms9Patch.iOS
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
-			if (Element.HtmlText == "degrees, °")
+			//if (Element.HtmlText == "Fractional Mode")
 				System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 
 			if (Control == null)
@@ -67,7 +67,7 @@ namespace Forms9Patch.iOS
 			Control.Font = Control.Font.WithSize((nfloat)tmpFontSize);
 			Control.Lines = int.MaxValue;
 
-
+			/*
 			if (!perfectSizeValid)
 			{
 				perfectSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
@@ -79,7 +79,7 @@ namespace Forms9Patch.iOS
 				System.Diagnostics.Debug.WriteLine("\tperfectSize=[" + perfectSize.Request.Width + "," + perfectSize.Request.Height + "]");
 				return perfectSize;
 			}
-
+*/
 
 			double tmpHt=-1;
 			double tmpWd = widthConstraint;
@@ -147,8 +147,8 @@ namespace Forms9Patch.iOS
 				{
 					tmpHt = Control.Font.LineHeight * lines + Control.Font.Leading * (lines - 1);
 					Control.Lines = (System.nint)Math.Ceiling(lines);
-					if (Element.HtmlText == "degrees, °")
-						System.Diagnostics.Debug.WriteLine("\tRE-calculated tmpHt=[" + tmpHt + "] lines=[" + lines + "]");
+					//if (Element.HtmlText == "degrees, °")
+					//	System.Diagnostics.Debug.WriteLine("\tRE-calculated tmpHt=[" + tmpHt + "] lines=[" + lines + "]");
 				}
 				else {
 					Control.Lines = Element.Lines;
@@ -229,8 +229,8 @@ namespace Forms9Patch.iOS
 					}
 					Control.Frame = new CGRect(0, y, (nfloat)(widthConstraint), tmpHt);
 			 */
-			if (Element.HtmlText == "degrees, °")
-				System.Diagnostics.Debug.WriteLine("\tresult=["+tmpWd+","+tmpHt+"] cgSize=["+cgSize.Width+","+cgSize.Height+"] [10,"+Control.Font.LineHeight+"]");
+			//if (Element.HtmlText == "degrees, °")
+			//	System.Diagnostics.Debug.WriteLine("\tresult=["+tmpWd+","+tmpHt+"] cgSize=["+cgSize.Width+","+cgSize.Height+"] [10,"+Control.Font.LineHeight+"]");
 			//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
 
@@ -245,7 +245,8 @@ namespace Forms9Patch.iOS
 					return false;
 				});
 			}
-
+			//if (Element.HtmlText=="Fractional Mode")
+				System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
 			return new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, Control.Font.LineHeight));
 		}
 		bool _delayingActualFontSizeUpdate;

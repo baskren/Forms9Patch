@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Box view with a color gradient fill.  Don't count on this element sticking around for too long.
 	/// </summary>
-	internal class ColorGradientBox : Xamarin.Forms.BoxView {
+	internal class ColorGradientBox : Xamarin.Forms.View {
 
 		/// <summary>
 		/// The start color property.
@@ -50,7 +50,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ColorGradientBox"/> class.
 		/// </summary>
 		public ColorGradientBox() {
-			BackgroundColor = Color.Transparent;
+			//BackgroundColor = Color.Transparent;
 		}
 
 	}

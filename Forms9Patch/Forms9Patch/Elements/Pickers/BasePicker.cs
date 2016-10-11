@@ -163,7 +163,8 @@ namespace Forms9Patch
 		{
 			IsGroupingEnabled = false,
 			SeparatorIsVisible = false,
-			BackgroundColor = Color.Transparent
+			BackgroundColor = Color.Transparent,
+			HasUnevenRows = false
 		};
 
 		readonly BoxView _upperPadding = new BoxView
@@ -188,7 +189,8 @@ namespace Forms9Patch
 		/// </summary>
 		public BasePicker()
 		{
-			BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
+			//BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
+			BackgroundColor = Color.Transparent;
 			//BackgroundColor = Color.White;
 
 			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
@@ -198,7 +200,7 @@ namespace Forms9Patch
 			// TODO: Why doesn't the below binding work?
 			//_listView.SetBinding(ListView.ItemsSourceProperty, ItemsSourceProperty.PropertyName);
 			_listView.BindingContext = this;
-			_listView.BackgroundColor = Color.White;
+			_listView.BackgroundColor = Color.Transparent;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
 			_listView.ItemAppearing += OnCellAppearing;

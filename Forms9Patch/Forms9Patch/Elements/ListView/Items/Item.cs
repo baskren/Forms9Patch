@@ -156,6 +156,21 @@ namespace Forms9Patch
 		{
 			get { return BaseCellView.Content; }
 		}
+
+		public static readonly BindableProperty RowHeightProperty = Xamarin.Forms.ListView.RowHeightProperty;
+		public int RowHeight
+		{
+			get { return (int)GetValue(RowHeightProperty); }
+			set { SetValue(RowHeightProperty, value); }
+		}
+
+		public static readonly BindableProperty HasUnevenRowsProperty = Xamarin.Forms.ListView.HasUnevenRowsProperty;
+		public bool HasUnevenRows
+		{
+			get { return (bool)GetValue(HasUnevenRowsProperty); }
+			set { SetValue(HasUnevenRowsProperty, value); }
+		}
+
 		#endregion
 
 
@@ -176,6 +191,9 @@ namespace Forms9Patch
 
 			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
 			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
+
+			this.SetBinding(RowHeightProperty, RowHeightProperty.PropertyName);
+			this.SetBinding(HasUnevenRowsProperty, HasUnevenRowsProperty.PropertyName);
 		}
 
 		#endregion

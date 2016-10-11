@@ -147,7 +147,8 @@ namespace Forms9Patch
 			{
 				//System.Diagnostics.Debug.WriteLine("\t\t\t{0} start", this.GetType());
 				View = BaseCellView;
-				BaseCellView.Content = new TContent();	
+				BaseCellView.Content = new TContent();
+				//BaseCellView.BackgroundColor = Color.Pink;
 				//System.Diagnostics.Debug.WriteLine("\t\t\t{0} exit", this.GetType());
 			}
 
@@ -170,6 +171,10 @@ namespace Forms9Patch
 				base.OnBindingContextChanged ();
 				if (View != null)
 					View.BindingContext = BindingContext;
+				var item = BindingContext as Item;
+				if (item != null && !item.HasUnevenRows && item.RowHeight > 0)
+					View.HeightRequest = item.RowHeight;
+				//View.BackgroundColor = Color.Pink;
 			}
 		}
 
