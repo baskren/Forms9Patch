@@ -200,53 +200,67 @@ namespace Forms9Patch.iOS
 				NSDictionary attr;
 				switch (span.Key) {
 				#region Spans that change UIFont attributes
-				case FontFamilySpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						metaFont.Family = ((FontFamilySpan)span).FontFamilyName;
-					}
-					break;
-				case FontSizeSpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						float size =  ((FontSizeSpan)span).Size;
-						metaFont.Size = (size < 0 ?  metaFont.Size * (-size) : size * fontScale);
-					}
-					break;
-				case BoldSpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						metaFont.Bold = true;
-					}
-					break;
-				case ItalicsSpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						metaFont.Italic = true;
-					}
-					break;
-				case SuperscriptSpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						metaFont.Baseline = FontBaseline.Superscript;
-					}
-					break;
-				case SubscriptSpan.SpanKey:
-					for (int i = spanStart; i < spanEnd; i++) {
-						var metaFont = metaFonts [i];
-						metaFont.Baseline = FontBaseline.Subscript;
-					}
-					break;
-				#endregion
-				#region Font Color
-				case FontColorSpan.SpanKey:
-					var fontColorSpan = span as FontColorSpan;
-					attr = new NSMutableDictionary ();
-						attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
-						attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
-						attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
-						result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart + (twice?1:0)));
-					break;
+					case FontFamilySpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							metaFont.Family = ((FontFamilySpan)span).FontFamilyName;
+						}
+						break;
+					case FontSizeSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							float size =  ((FontSizeSpan)span).Size;
+							metaFont.Size = (size < 0 ?  metaFont.Size * (-size) : size * fontScale);
+						}
+						break;
+					case BoldSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							metaFont.Bold = true;
+						}
+						break;
+					case ItalicsSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							metaFont.Italic = true;
+						}
+						break;
+					case SuperscriptSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							metaFont.Baseline = FontBaseline.Superscript;
+						}
+						break;
+					case SubscriptSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++) {
+							var metaFont = metaFonts [i];
+							metaFont.Baseline = FontBaseline.Subscript;
+						}
+						break;
+					case NumeratorSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++)
+						{
+							var metaFont = metaFonts[i];
+							metaFont.Baseline = FontBaseline.Numerator;
+						}
+						break;
+					case DenominatorSpan.SpanKey:
+						for (int i = spanStart; i < spanEnd; i++)
+						{
+							var metaFont = metaFonts[i];
+							metaFont.Baseline = FontBaseline.Denominator;
+						}
+						break;
+					#endregion
+					#region Font Color
+					case FontColorSpan.SpanKey:
+						var fontColorSpan = span as FontColorSpan;
+						attr = new NSMutableDictionary ();
+							attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
+							attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
+							attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
+							result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart + (twice?1:0)));
+						break;
 				#endregion
 				#region Background Color
 				case BackgroundColorSpan.SpanKey:
@@ -286,12 +300,24 @@ namespace Forms9Patch.iOS
 						var font = FontExtensions.BestFont(lastMetaFont,baseFont);
 						var size = lastMetaFont.Size;
 						var range = new NSRange (startIndex, i - startIndex + (twice ? 1 : 0));
-						if (lastMetaFont.Baseline == FontBaseline.Superscript)
-							result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, size/2.22f, UIStringAttributeKey.Font, font), range);
-						else if (lastMetaFont.Baseline == FontBaseline.Subscript)
-							result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, -size/6f, UIStringAttributeKey.Font, font), range);
-						else
-							result.AddAttribute (UIStringAttributeKey.Font, font, range);
+						switch (lastMetaFont.Baseline)
+						{
+							case FontBaseline.Superscript:
+								result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, size / 2.22f, UIStringAttributeKey.Font, font), range);
+								break;
+							case FontBaseline.Subscript:
+								result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
+								break;
+							case FontBaseline.Numerator:
+								result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, size / 4f, UIStringAttributeKey.Font, font), range);
+								break;
+							//case FontBaseline.Denominator:
+							//	result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
+							//	break;
+							default:
+								result.AddAttribute(UIStringAttributeKey.Font, font, range);
+								break;
+						}
 						//System.Diagnostics.Debug.WriteLine("\tRANGE["+range.Location+","+range.Length+"]");
 					}
 					lastMetaFont = metaFont;
@@ -303,12 +329,24 @@ namespace Forms9Patch.iOS
 				var font = FontExtensions.BestFont(lastMetaFont,baseFont);
 				var size = lastMetaFont.Size;
 				var range = new NSRange (startIndex, metaFonts.Count - startIndex + (twice ? 1 : 0));
-				if (lastMetaFont.Baseline == FontBaseline.Superscript)
-					result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, size / 2.22f, UIStringAttributeKey.Font, font), range);
-				else if (lastMetaFont.Baseline == FontBaseline.Subscript)
-					result.AddAttributes (new NSDictionary (UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
-				else
-					result.AddAttribute (UIStringAttributeKey.Font, font, range);
+				switch (lastMetaFont.Baseline)
+				{
+					case FontBaseline.Superscript:
+						result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, size / 2.22f, UIStringAttributeKey.Font, font), range);
+						break;
+					case FontBaseline.Subscript:
+						result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
+						break;
+					case FontBaseline.Numerator:
+						result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, size / 4f, UIStringAttributeKey.Font, font), range);
+						break;
+					//case FontBaseline.Denominator:
+					//	result.AddAttributes(new NSDictionary(UIStringAttributeKey.BaselineOffset, -size / 6f, UIStringAttributeKey.Font, font), range);
+					//	break;
+					default:
+						result.AddAttribute(UIStringAttributeKey.Font, font, range);
+						break;
+				}
 				//System.Diagnostics.Debug.WriteLine("\tRANGE[" + range.Location + "," + range.Length + "]");
 			}
 			#endregion

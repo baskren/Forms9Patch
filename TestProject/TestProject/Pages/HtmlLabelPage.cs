@@ -39,6 +39,7 @@ namespace TestProject
 						new Forms9Patch.Label { HtmlText =  "&lt;b&gt;&lt;i&gt;: <b><i>Bold+Italic</i></b> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;sub&gt;: H<sub>2</sub>0 H₂0 plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;sup&gt;: 42<sup>2</sup> 42² plain"},
+						new Forms9Patch.Label { HtmlText =  "1- <num>1234567890</num>/<den>1234567890</den>"},
 						new Forms9Patch.Label { HtmlText =  "&lt;u&gt;: <u>underlined</u> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;ins&gt;: <ins>inserted</ins> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;font color=&quot;blue&quot;&gt;: <font color=\"blue\">Blue</font> plain"},

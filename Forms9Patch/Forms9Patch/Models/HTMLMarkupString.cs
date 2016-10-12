@@ -429,6 +429,14 @@ namespace Forms9Patch
 					span = new SuperscriptSpan(tag.Start, index - 1);
 					_spans.Add(span);
 					break;
+				case "num":
+					span = new NumeratorSpan(tag.Start, index - 1);
+					_spans.Add(span);
+					break;
+				case "den":
+					span = new DenominatorSpan(tag.Start, index - 1);
+					_spans.Add(span);
+					break;
 				case "u":
 				case "ins":
 					span = new UnderlineSpan(tag.Start, index - 1);

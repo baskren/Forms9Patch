@@ -162,52 +162,59 @@ namespace Forms9Patch.Droid
 				if (spanEnd > result.Length())
 					spanEnd = result.Length();
 				switch (span.Key) {
-				case FontFamilySpan.SpanKey:
-					Typeface spanTypeface = FontManagment.TypefaceForFontFamily (((FontFamilySpan)span).FontFamilyName);
-					if (spanTypeface == null) {
-						Console.WriteLine ("Failed to find Typeface with FontFamilyName (" + ((FontFamilySpan)span).FontFamilyName + ") for FontFamilySpan.");
-						Console.WriteLine ("Ignoring FontFamilySpan");
-						continue;
-					}
-					result.SetSpan (new CustomTypefaceSpan (spanTypeface), spanStart, spanEnd, 0);
-					break;
-				case FontSizeSpan.SpanKey:
-					var size = ((FontSizeSpan)span).Size;
-					if (size < 0)
-						result.SetSpan (new RelativeSizeSpan(-size), spanStart, spanEnd, 0);
-					else
-						result.SetSpan (new AbsoluteSizeSpan ((int)size), spanStart, spanEnd, 0);
-					break;
-				case FontColorSpan.SpanKey:
-					result.SetSpan (new ForegroundColorSpan (((FontColorSpan)span).Color.ToAndroid ()), spanStart, spanEnd, 0);
-					break;
-				case BoldSpan.SpanKey:
-					result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
-					break;
-				case ItalicsSpan.SpanKey:
-					result.SetSpan (new StyleSpan (TypefaceStyle.Italic), spanStart, spanEnd, 0);
-					break;
-				case SuperscriptSpan.SpanKey:
-					result.SetSpan (new RelativeSizeSpan (0.575f), spanStart, spanEnd, 0);
-					//result.SetSpan (new Android.Text.Style.SuperscriptSpan (), span.Start, end, 0);
-					result.SetSpan (new BaselineSpan(1f/1.5f), spanStart, spanEnd, 0);
-					result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
-					break;
-				case SubscriptSpan.SpanKey:
-					result.SetSpan (new RelativeSizeSpan (0.6f), spanStart, spanEnd, 0);
-					result.SetSpan (new BaselineSpan(-1f/2.5f), spanStart, spanEnd, 0);
-					//result.SetSpan (new Android.Text.Style.SubscriptSpan (), span.Start, end, 0);
-					result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
-					break;
-				case BackgroundColorSpan.SpanKey:
-					result.SetSpan (new Android.Text.Style.BackgroundColorSpan (((BackgroundColorSpan)span).Color.ToAndroid ()), spanStart, spanEnd, 0);
-					break;
-				case UnderlineSpan.SpanKey:
-					result.SetSpan (new Android.Text.Style.UnderlineSpan (), spanStart, spanEnd, 0);
-					break;
-				case StrikethroughSpan.SpanKey:
-					result.SetSpan (new Android.Text.Style.StrikethroughSpan (), spanStart, spanEnd, 0);
-					break;
+					case FontFamilySpan.SpanKey:
+						Typeface spanTypeface = FontManagment.TypefaceForFontFamily (((FontFamilySpan)span).FontFamilyName);
+						if (spanTypeface == null) {
+							Console.WriteLine ("Failed to find Typeface with FontFamilyName (" + ((FontFamilySpan)span).FontFamilyName + ") for FontFamilySpan.");
+							Console.WriteLine ("Ignoring FontFamilySpan");
+							continue;
+						}
+						result.SetSpan (new CustomTypefaceSpan (spanTypeface), spanStart, spanEnd, 0);
+						break;
+					case FontSizeSpan.SpanKey:
+						var size = ((FontSizeSpan)span).Size;
+						if (size < 0)
+							result.SetSpan (new RelativeSizeSpan(-size), spanStart, spanEnd, 0);
+						else
+							result.SetSpan (new AbsoluteSizeSpan ((int)size), spanStart, spanEnd, 0);
+						break;
+					case FontColorSpan.SpanKey:
+						result.SetSpan (new ForegroundColorSpan (((FontColorSpan)span).Color.ToAndroid ()), spanStart, spanEnd, 0);
+						break;
+					case BoldSpan.SpanKey:
+						result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
+						break;
+					case ItalicsSpan.SpanKey:
+						result.SetSpan (new StyleSpan (TypefaceStyle.Italic), spanStart, spanEnd, 0);
+						break;
+					case SuperscriptSpan.SpanKey:
+						result.SetSpan (new RelativeSizeSpan (0.575f), spanStart, spanEnd, 0);
+						result.SetSpan (new BaselineSpan(1f/1.5f), spanStart, spanEnd, 0);
+						result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
+						break;
+					case SubscriptSpan.SpanKey:
+						result.SetSpan (new RelativeSizeSpan (0.6f), spanStart, spanEnd, 0);
+						result.SetSpan (new BaselineSpan(-1f/2.5f), spanStart, spanEnd, 0);
+						result.SetSpan (new StyleSpan (TypefaceStyle.Bold), spanStart, spanEnd, 0);
+						break;
+					case NumeratorSpan.SpanKey:
+						result.SetSpan(new RelativeSizeSpan(0.6f), spanStart, spanEnd, 0);
+						result.SetSpan(new BaselineSpan(1f/1.6f), spanStart, spanEnd, 0);
+						result.SetSpan(new StyleSpan(TypefaceStyle.Bold), spanStart, spanEnd, 0);
+						break;
+					case DenominatorSpan.SpanKey:
+						result.SetSpan(new RelativeSizeSpan(0.6f), spanStart, spanEnd, 0);
+						result.SetSpan(new StyleSpan(TypefaceStyle.Bold), spanStart, spanEnd, 0);
+						break;
+					case BackgroundColorSpan.SpanKey:
+						result.SetSpan (new Android.Text.Style.BackgroundColorSpan (((BackgroundColorSpan)span).Color.ToAndroid ()), spanStart, spanEnd, 0);
+						break;
+					case UnderlineSpan.SpanKey:
+						result.SetSpan (new Android.Text.Style.UnderlineSpan (), spanStart, spanEnd, 0);
+						break;
+					case StrikethroughSpan.SpanKey:
+						result.SetSpan (new Android.Text.Style.StrikethroughSpan (), spanStart, spanEnd, 0);
+						break;
 				}
 			}
 
