@@ -355,29 +355,4 @@ namespace Forms9Patch.Droid
 		}
 	}
 
-	class F9PScrollListener : AbsListView.IOnScrollListener
-	{
-		public IntPtr Handle
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public void Dispose()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
-		{
-			throw new NotImplementedException();
-		}
-	}
 }

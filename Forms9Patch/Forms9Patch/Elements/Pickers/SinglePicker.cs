@@ -114,11 +114,6 @@ namespace Forms9Patch
 			BackgroundColor = Color.Gray
 		};
 
-		BoxView _redBox = new BoxView
-		{
-			BackgroundColor = Color.Red
-		};
-
 		#endregion
 
 		/// <summary>

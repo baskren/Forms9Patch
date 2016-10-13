@@ -17,9 +17,9 @@ namespace Forms9Patch.iOS
 		//
 		// Fields
 		//
-		bool perfectSizeValid;
+		//bool perfectSizeValid;
 
-		SizeRequest perfectSize;
+		//SizeRequest perfectSize;
 
 		#region Xamarin layout cycle
 		/// <summary>
@@ -31,7 +31,7 @@ namespace Forms9Patch.iOS
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
 			//if (Element.HtmlText == "Fractional Mode")
-				System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
+				//System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
@@ -246,7 +246,7 @@ namespace Forms9Patch.iOS
 				});
 			}
 			//if (Element.HtmlText=="Fractional Mode")
-				System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
+				//System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
 			return new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, Control.Font.LineHeight));
 		}
 		bool _delayingActualFontSizeUpdate;
@@ -535,7 +535,7 @@ namespace Forms9Patch.iOS
 
 		void UpdateText()
 		{
-			perfectSizeValid = false;
+			//perfectSizeValid = false;
 			Control.Font = Element.ToUIFont();
 			var color = (Color)Element.GetValue(Label.TextColorProperty);
 			Control.TextColor = color.ToUIColor(UIColor.Black);
