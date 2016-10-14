@@ -53,11 +53,16 @@ namespace Forms9Patch
 			get { return _visibleItemTest; }
 			set {
 				_visibleItemTest = value;
+				var source = Source;
+				Source = null;
+				Source = source;
+				/*
 				foreach (var item in _items) {
 					var group = item as Group;
 					if (group!=null) 
 						group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
 				}
+				*/
 			}
 		}
 			
@@ -794,7 +799,6 @@ namespace Forms9Patch
 		public Group(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
 			VisibilityTest = visibleItemTest;
 			ContentType = GroupContentType.Unknown;
-
 			SourceSubPropertyMap = sourcePropertyMap;
 			Source = source;
 		}
@@ -886,6 +890,20 @@ namespace Forms9Patch
 
 
 		#region Property Change Management
+
+		protected override void OnPropertyChanging(string propertyName = null)
+		{
+			base.OnPropertyChanging(propertyName);
+			if (propertyName == SourceProperty.PropertyName && Source != null)
+			{
+				SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? Source as IEnumerable : Source.GetPropertyValue(childrenPropertyName) as IEnumerable;
+				var observableCollection = SourceChildren as INotifyCollectionChanged;
+				if (observableCollection != null)
+					observableCollection.CollectionChanged -= OnSourceCollectionChanged;
+			}
+		}
+
+
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
 			/*
@@ -929,7 +947,8 @@ namespace Forms9Patch
 				_items.Clear();
 				SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? Source as IEnumerable : Source.GetPropertyValue(childrenPropertyName) as IEnumerable;
 				if (SourceChildren == null || Source == null)
-					throw new ArgumentException("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
+					//throw new ArgumentException("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
+					return;
 				foreach (var obj in SourceChildren)
 					AddSourceObject(obj);
 				var observableCollection = SourceChildren as INotifyCollectionChanged;

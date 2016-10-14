@@ -6,13 +6,11 @@ namespace Forms9Patch
 	class Item<TItem> : Item {
 
 		#region Properties
-		//public static readonly BindableProperty ValueProperty = BindableProperty.Create("Value", typeof(TItem),  typeof(Item<TItem>), default(TItem));
 		public new TItem Source {
 			get { return (TItem)GetValue(SourceProperty); }
 			set { 
 				if (debugProperties) System.Diagnostics.Debug.WriteLine ("Value: update from ["+(TItem)GetValue(SourceProperty)+"] to [" + value + "]");
-				//if (!this.Value.Equals(value))
-				if (!value.Equals(Source))
+				if (!Equals(value,Source))
 					SetValue(SourceProperty, value);
 			}
 		}

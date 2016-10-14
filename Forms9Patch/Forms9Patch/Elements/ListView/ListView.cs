@@ -257,6 +257,14 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The base items source.</value>
 		internal Group BaseItemsSource { get { return _baseItemsSource; } }
+
+		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(ListView), null);
+		public Func<object,bool> VisibilityTest
+		{
+			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
+			set { SetValue(VisibilityTestProperty, value); }
+		}
+
 		#endregion
 
 
@@ -634,6 +642,8 @@ namespace Forms9Patch
 				UpdateItemsSource();
 			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 				AddSelectedSourceItem(SelectedItem);
+			else if (propertyName == VisibilityTestProperty.PropertyName && BaseItemsSource != null)
+				BaseItemsSource.VisibilityTest = VisibilityTest;
 			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 			{
@@ -653,6 +663,7 @@ namespace Forms9Patch
 			_baseItemsSource.BindingContext = this;
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.Source = ItemsSource;
+			_baseItemsSource.VisibilityTest = VisibilityTest;
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
 			ReevaluateSelectedItems();

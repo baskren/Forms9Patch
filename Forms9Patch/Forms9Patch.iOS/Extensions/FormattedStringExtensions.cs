@@ -75,7 +75,7 @@ namespace Forms9Patch.iOS
 
 			UIColor controlColor = control.TextColor;
 			UIColor baseColor = label.TextColor.ToUIColor (UIColor.Black);
-			if (!controlColor.Equals(baseColor))
+			if (baseColor!=null && !baseColor.Equals(controlColor))
 				result.AddAttribute (UIStringAttributeKey.ForegroundColor, baseColor, new NSRange (0, text.Length));
 
 			#region Layout font-spans (MetaFonts)

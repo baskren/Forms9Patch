@@ -122,7 +122,7 @@ namespace Forms9Patch.Droid
 			Xamarin.Forms.ImageSource newSource = image?.Source;
 			Drawable drawable = null;
 
-			if (newSource == null || !object.Equals (_source, newSource)) {
+			if (newSource == null || !Equals(_source, newSource)) {
 				var droidViewGroup = _control as global::Android.Views.ViewGroup;
 				var droidImageView = _control as global::Android.Widget.ImageView;
 
