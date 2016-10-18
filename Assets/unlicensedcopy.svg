@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,7 +54,10 @@
      id="layer1">
     <g
        id="g3426"
-       transform="translate(2.8571429,417.14286)">
+       transform="translate(2.8571429,417.14286)"
+       inkscape:export-filename="/Users/ben/Development/Xamarin/Forms9Patch/Forms9Patch/Forms9Patch/Resources/unlicensedcopy.png"
+       inkscape:export-xdpi="87.889999"
+       inkscape:export-ydpi="87.889999">
       <g
          transform="translate(892.04724,0)"
          id="g3416">

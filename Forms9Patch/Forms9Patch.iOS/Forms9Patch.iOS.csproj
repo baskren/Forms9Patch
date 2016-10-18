@@ -9,6 +9,7 @@
     <RootNamespace>Forms9Patch.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Forms9Patch.iOS</AssemblyName>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,7 +61,6 @@
     <Folder Include="ListView\" />
     <Folder Include="ListView\Renderers\" />
     <Folder Include="ListView\Services\" />
-    <Folder Include="Inherited Native\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,7 +110,6 @@
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="Services\ListViewExtensionService_iOS.cs" />
-    <Compile Include="Inherited Native \NSExtendedAttributedString.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

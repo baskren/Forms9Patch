@@ -66,7 +66,7 @@ namespace Forms9Patch.iOS
 			UIFont baseFont = label.ToUIFont ();
 
 			nfloat baseFontSize = baseFont.PointSize;
-			nfloat fontScale = ((System.nfloat)(fontSize < 0 ? 1 : fontSize / baseFontSize));
+			nfloat fontScale = ((nfloat)(fontSize < 0 ? 1 : fontSize / baseFontSize));
 			//if (controlFont != baseFont)
 			// always set baseFont so we can modify it when trying to fit the font
 			result.AddAttribute (UIStringAttributeKey.Font, baseFont.WithSize(baseFontSize * fontScale), new NSRange(0, text.Length));
@@ -252,22 +252,35 @@ namespace Forms9Patch.iOS
 						}
 						break;
 					#endregion
-					#region Font Color
-					case FontColorSpan.SpanKey:
-						var fontColorSpan = span as FontColorSpan;
-						attr = new NSMutableDictionary ();
-							attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
-							attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
-							attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
-							result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart + (twice?1:0)));
-						break;
+				#region Font Color
+				case FontColorSpan.SpanKey:
+					var fontColorSpan = span as FontColorSpan;
+					attr = new NSMutableDictionary ();
+						attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
+						attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
+						attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
+						result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart + (twice?1:0)));
+					break;
 				#endregion
+						/*
+				#region Blink
+				case BlinkSpan.SpanKey:
+						var blinkSpan = span as BlinkSpan;
+						attr = new NSMutableDictionary();
+						attr[UIStringAttributeKey.ForegroundColor] = blinkSpan.Color.ToUIColor();
+						attr[UIStringAttributeKey.UnderlineColor] = blinkSpan.Color.ToUIColor();
+						attr[UIStringAttributeKey.StrikethroughColor] = blinkSpan.Color.ToUIColor();
+						result.AddAttributes(attr, new NSRange(spanStart, spanEnd - spanStart + (twice ? 1 : 0)));
+
+						break;
+					#endregion
+					*/
 				#region Background Color
 				case BackgroundColorSpan.SpanKey:
-					var backgroundColorSpan = span as BackgroundColorSpan;
-					attr = new NSDictionary (UIStringAttributeKey.BackgroundColor, backgroundColorSpan.Color.ToUIColor());
-					result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart + (twice ? 1 : 0)));
-					break;
+				var backgroundColorSpan = span as BackgroundColorSpan;
+				attr = new NSDictionary (UIStringAttributeKey.BackgroundColor, backgroundColorSpan.Color.ToUIColor());
+				result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart + (twice ? 1 : 0)));
+				break;
 				#endregion
 				#region Underline
 				case UnderlineSpan.SpanKey:
@@ -353,7 +366,6 @@ namespace Forms9Patch.iOS
 
 			return result;
 		}
-
 
 	}
 
