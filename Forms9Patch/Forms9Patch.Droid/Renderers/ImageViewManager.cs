@@ -14,6 +14,10 @@ namespace Forms9Patch.Droid
 {
 	class ImageViewManager : IDisposable
 	{
+		static int instances = 0;
+
+		int _instance;
+		bool _fail;
 		//bool _loading;
 		readonly Android.Views.View _control;
 		readonly VisualElement _element;
@@ -36,6 +40,7 @@ namespace Forms9Patch.Droid
 
 		internal ImageViewManager (Android.Views.View control, VisualElement element)
 		{
+			_instance = instances++;
 			_control = control;
 			_element = element;
 		}
@@ -97,8 +102,9 @@ namespace Forms9Patch.Droid
 		bool working;
 		bool waiting;
 		int call=0;
-		async internal Task LayoutImage(Image image) {	
-
+		async internal Task LayoutImage(Image image) {
+			if (_fail)
+				return;
 			if (working) {
 				waiting=true;
 				int instance = ++call;
@@ -119,7 +125,17 @@ namespace Forms9Patch.Droid
 				if (_image != null)
 					_image.PropertyChanged += ImagePropertyChanged;
 			}
-			Xamarin.Forms.ImageSource newSource = image?.Source;
+
+			Xamarin.Forms.ImageSource newSource;
+			if (Settings.IsLicenseValid || _instance < 4)
+				newSource = image?.Source;
+			else
+			{
+				newSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
+				image.Fill = Forms9Patch.Fill.AspectFit;
+				_fail = true;
+			}
+			
 			Drawable drawable = null;
 
 			if (newSource == null || !Equals(_source, newSource)) {

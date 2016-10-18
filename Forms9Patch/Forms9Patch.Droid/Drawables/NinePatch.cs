@@ -118,8 +118,8 @@ namespace Forms9Patch.Droid
 
 		internal static Drawable CreateDrawableWithCapInsets( Bitmap bitmap, List<Range> rangeListX, List<Range> rangeListY)
 		{
-			if (!Settings.IsLicenseValid && _instances++ > 0)
-				return new BitmapDrawable (bitmap);
+			//if (!Settings.IsLicenseValid && _instances++ > 0)
+			//	return new BitmapDrawable (bitmap);
 			ByteBuffer buffer = CreateByteBuffer(rangeListX,rangeListY, bitmap);
 			return new NinePatchDrawable (bitmap, buffer.Array, new Rect (), null);
 		}

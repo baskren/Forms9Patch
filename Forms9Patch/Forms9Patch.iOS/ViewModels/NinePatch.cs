@@ -221,10 +221,12 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 				//return;
 				Frame = rect;
 			}
+			/*
 			if (!Settings.IsLicenseValid  && id > 0) {
 				base.Draw (rect);
 				return;
 			}
+			*/
 				
 			double scaleX = 0;
 			double failScaleX = 1;

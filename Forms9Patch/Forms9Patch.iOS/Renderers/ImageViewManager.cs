@@ -13,9 +13,10 @@ namespace Forms9Patch.iOS
 {
 	class ImageViewManager : IDisposable
 	{
-		
 
+		static int instances = 0;
 
+		int _instance;
 		bool _loading;
 		readonly UIView _control;
 		//readonly VisualElement _element;
@@ -35,6 +36,7 @@ namespace Forms9Patch.iOS
 
 		internal ImageViewManager (UIView control, VisualElement element)
 		{
+			_instance = instances++;
 			_control = control;
 			Element = element;
 		}
@@ -160,7 +162,11 @@ namespace Forms9Patch.iOS
 				if (_image != null)
 					_image.PropertyChanged += ImagePropertyChanged;
 			}
-			Xamarin.Forms.ImageSource newSource = image?.Source;
+			Xamarin.Forms.ImageSource newSource;
+			if (Settings.IsLicenseValid || _instance < 4)
+				newSource = image?.Source;
+			else
+				newSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
 
 			//UIImage uiImage = null;
 
@@ -390,6 +396,10 @@ namespace Forms9Patch.iOS
 					_control.Add (_ninePatch);
 					_control.SendSubviewToBack (_ninePatch);
 				}
+
+				if (!Settings.IsLicenseValid || _instance >= 4)
+					_control.ContentMode = UIViewContentMode.ScaleAspectFit;
+
 				//delta = DateTime.Now-start6;
 				//System.Diagnostics.Debug.WriteLine("\t{1}\tD6:\t{0}",delta.TotalSeconds,_i);
 

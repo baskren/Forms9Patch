@@ -60,6 +60,7 @@
     <Folder Include="ListView\" />
     <Folder Include="ListView\Renderers\" />
     <Folder Include="ListView\Services\" />
+    <Folder Include="Inherited Native\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="Services\ListViewExtensionService_iOS.cs" />
+    <Compile Include="Inherited Native \NSExtendedAttributedString.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
