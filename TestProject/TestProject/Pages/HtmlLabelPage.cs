@@ -27,7 +27,7 @@ namespace TestProject
 						new Forms9Patch.Label { HtmlText =  "&lt;b&gt;: <b>Bold</b> plain"},
 
 						new Forms9Patch.Label { 
-							HtmlText =  "&lt;Bold&gt;: <b>Bold</b> w/ serif italic serif base font",
+							HtmlText =  "&lt;Bold&gt;: <b>Bold</b> w/ serif italic <div style=\"color:grey\">s</div><div style=\"color:grey\">e</div>rif base font",
 							FontFamily = "Serif",
 							FontAttributes = FontAttributes.Italic,
 							TextColor = Color.Blue,

@@ -48,24 +48,43 @@ namespace Forms9Patch
 		}
 
 		*/
+		/*
 		Func<object,bool> _visibleItemTest;
 		public Func<object,bool> VisibilityTest {
 			get { return _visibleItemTest; }
 			set {
-				_visibleItemTest = value;
-				var source = Source;
-				Source = null;
-				Source = source;
-				/*
-				foreach (var item in _items) {
-					var group = item as Group;
-					if (group!=null) 
-						group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
+				if (_visibleItemTest != value)
+				{
+					_visibleItemTest = value;
+					var source = Source;
+					Source = null;
+					Source = source;
 				}
-				*/
+
+				//foreach (var item in _items) {
+				//	var group = item as Group;
+				//	if (group!=null) 
+				//		group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
+				//}
+
 			}
 		}
-			
+		*/
+		/// <summary>
+		/// The visibility test property backing store.
+		/// </summary>
+		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(Group), default(Func<object,bool>));
+		/// <summary>
+		/// Gets or sets the test used to determine if an item or group will be visible.
+		/// </summary>
+		/// <value>The visibility test.</value>
+		public Func<object,bool> VisibilityTest
+		{
+			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
+			set { SetValue(VisibilityTestProperty, value); }
+		}
+
+
 
 		/*
 		// note: ValidMateTriggerProperty is an optimization!  If it is null, ValidMateTest will still be used to decide validity, just more often.
@@ -773,6 +792,7 @@ namespace Forms9Patch
 		}
 		#endregion
 
+
 		#region Properties
 		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(Group), null);
 		public List<string> SourceSubPropertyMap
@@ -906,48 +926,18 @@ namespace Forms9Patch
 
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
-			/*
-			if (propertyName == SeparatorIsVisibleProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.SeparatorIsVisible = SeparatorIsVisible;
-			}
-			else if (propertyName == SeparatorColorProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.SeparatorColor = SeparatorColor;
-			}
-			else if (propertyName == BackgroundColorProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.BackgroundColor = BackgroundColor;
-			}
-			else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.SelectedBackgroundColor = SelectedBackgroundColor;
-			}
-			else if (propertyName == AccessoryTextProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.AccessoryText = AccessoryText;
-			}
-			else if (propertyName == AccessoryPositionProperty.PropertyName)
-			{
-				foreach (var item in _items)
-					item.AccessoryPosition = AccessoryPosition;
-			}
-			else 
-			*/
-
 			base.OnPropertyChanged (propertyName);
 
 			if (propertyName == SourceProperty.PropertyName)
 			{
 				_items.Clear();
+				if (Source == null)
+				{
+					SourceChildren = null;
+					return;
+				}
 				SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? Source as IEnumerable : Source.GetPropertyValue(childrenPropertyName) as IEnumerable;
-				if (SourceChildren == null || Source == null)
-					//throw new ArgumentException("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
+				if (SourceChildren == null)
 					return;
 				foreach (var obj in SourceChildren)
 					AddSourceObject(obj);
@@ -962,6 +952,13 @@ namespace Forms9Patch
 					_subPropertyMap = SourceSubPropertyMap.GetRange(1, SourceSubPropertyMap.Count - 1);
 					childrenPropertyName = SourceSubPropertyMap[0];
 				}
+			}
+			else if (propertyName == VisibilityTestProperty.PropertyName)
+			{
+				// delete and reset Source so the VisibilityTest can be applied as the new Source is converted to items
+				var source = Source;
+				Source = null;
+				Source = source;
 			}
 		}
 		#endregion

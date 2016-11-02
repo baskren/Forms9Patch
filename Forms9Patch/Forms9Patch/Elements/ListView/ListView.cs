@@ -33,8 +33,6 @@ namespace Forms9Patch
 			set { throw new NotImplementedException(); }
 		}
 
-
-
 		/// <summary>
 		/// Gets or sets the item template.
 		/// </summary>

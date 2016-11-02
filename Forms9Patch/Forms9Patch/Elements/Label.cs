@@ -62,7 +62,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the text color property.
 		/// </summary>
-		public static readonly BindableProperty TextColorProperty = BindableProperty.Create ("TextColor", typeof(Color), typeof(Label), Color.Default, BindingMode.OneWay, null, null, null, null, null);
+		public static readonly BindableProperty TextColorProperty = Xamarin.Forms.Label.TextColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the text.
 		/// </summary>
