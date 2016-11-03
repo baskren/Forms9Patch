@@ -234,6 +234,7 @@ namespace Forms9Patch
 
 
 		#region Property change management
+
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
@@ -244,6 +245,7 @@ namespace Forms9Patch
 					isSelectedSource.IsSelected = IsSelected;
 			}
 		}
+
 		#endregion
 	}
 }

@@ -44,8 +44,8 @@ namespace Forms9Patch
 				Host?.Effects.Remove (effect);
 				SetValue (HostProperty, value); 
 				Host?.Effects.Add (effect);
-				if (!effect.IsAttached) {
-					System.Diagnostics.Debug.WriteLine("Not Attached");	
+				if (Host != null && !effect.IsAttached) {
+					System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");	
 				}
 			}
 		}
