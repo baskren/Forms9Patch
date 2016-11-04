@@ -186,10 +186,13 @@ namespace Forms9Patch
 			void SetHeight()
 			{
 				var iItem = BindingContext as IItem;
-				if (_iCellContent != null && _iCellContent.CellHeight >=0 && iItem != null && iItem.HasUnevenRows)
-					Height = _iCellContent.CellHeight;
-				else
-					Height = iItem.RowHeight;
+				if (iItem != null)
+				{
+					if (_iCellContent != null && _iCellContent.CellHeight >= 0 && iItem.HasUnevenRows)
+						Height = _iCellContent.CellHeight;
+					else
+						Height = iItem.RowHeight;
+				}
 				View.HeightRequest = Height;
 			}
 		}
