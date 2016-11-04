@@ -188,7 +188,7 @@ namespace Forms9Patch
 				var iItem = BindingContext as IItem;
 				if (iItem != null)
 				{
-					if (_iCellContent != null && _iCellContent.CellHeight >= 0 && iItem.HasUnevenRows)
+					if (_iCellContent != null && _iCellContent.CellHeight >= 0)
 						Height = _iCellContent.CellHeight;
 					else
 						Height = iItem.RowHeight;

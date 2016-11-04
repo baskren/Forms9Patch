@@ -164,13 +164,14 @@ namespace Forms9Patch
 			set { SetValue(RowHeightProperty, value); }
 		}
 
+		/*
 		public static readonly BindableProperty HasUnevenRowsProperty = Xamarin.Forms.ListView.HasUnevenRowsProperty;
 		public bool HasUnevenRows
 		{
 			get { return (bool)GetValue(HasUnevenRowsProperty); }
 			set { SetValue(HasUnevenRowsProperty, value); }
 		}
-
+*/
 		#endregion
 
 

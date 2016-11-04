@@ -256,7 +256,14 @@ namespace Forms9Patch
 		/// <value>The base items source.</value>
 		internal Group BaseItemsSource { get { return _baseItemsSource; } }
 
+		/// <summary>
+		/// The cell visibility test property.
+		/// </summary>
 		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(ListView), null);
+		/// <summary>
+		/// Gets or sets the cell visibility test.
+		/// </summary>
+		/// <value>The visibility test.</value>
 		public Func<object,bool> VisibilityTest
 		{
 			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
@@ -644,8 +651,8 @@ namespace Forms9Patch
 			{
 				if (propertyName == VisibilityTestProperty.PropertyName)
 					BaseItemsSource.VisibilityTest = VisibilityTest;
-				else if (propertyName == HasUnevenRowsProperty.PropertyName)
-					BaseItemsSource.HasUnevenRows = HasUnevenRows;
+				//else if (propertyName == HasUnevenRowsProperty.PropertyName)
+				//	BaseItemsSource.HasUnevenRows = HasUnevenRows;
 				else if (propertyName == RowHeightProperty.PropertyName)
 					BaseItemsSource.RowHeight = RowHeight;
 			}
@@ -669,7 +676,7 @@ namespace Forms9Patch
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.Source = ItemsSource;
 			_baseItemsSource.VisibilityTest = VisibilityTest;
-			_baseItemsSource.HasUnevenRows = HasUnevenRows;
+			//_baseItemsSource.HasUnevenRows = HasUnevenRows;
 			_baseItemsSource.RowHeight = RowHeight;
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;

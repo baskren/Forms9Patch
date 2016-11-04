@@ -86,8 +86,12 @@ namespace Forms9Patch
 		/// <value>The cell view.</value>
 		View CellView { get; }
 
-		bool HasUnevenRows { get; }
+		//bool HasUnevenRows { get; }
 
+		/// <summary>
+		/// Gets the global height of the row.
+		/// </summary>
+		/// <value>The height of the row.</value>
 		int RowHeight { get; }
 	}
 }

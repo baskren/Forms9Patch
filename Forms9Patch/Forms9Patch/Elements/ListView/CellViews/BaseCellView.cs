@@ -197,7 +197,7 @@ namespace Forms9Patch
 			{
 				item.BaseCellView = this;
 				item.PropertyChanged += OnItemPropertyChanged;
-				if (!item.HasUnevenRows && item.RowHeight > 0)
+				if (/*!item.HasUnevenRows && */item.RowHeight > 0)
 				{
 					HeightRequest = item.RowHeight;
 					Content.HeightRequest = item.RowHeight;

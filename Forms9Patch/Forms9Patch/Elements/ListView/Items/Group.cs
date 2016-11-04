@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using PCL.Utils;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -233,6 +234,8 @@ namespace Forms9Patch
 			var group = item as Group;
 			if (group != null)
 				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
+			item.RowHeight = RowHeight;
+			//item.HasUnevenRows = HasUnevenRows;
 		}
 
 		void CommonAdd(Item item) {
@@ -735,6 +738,22 @@ namespace Forms9Patch
 				subGroup.DeepSet (subGroupDeepIndex, item);
 			}
 		}
+
+		public void DeepRemoveItemsWithSource(object source)
+		{
+			System.Diagnostics.Debug.WriteLine("");
+			var items = this.Where(x => x.Source == source).ToList();
+			if (items.Count > 0)
+			{
+				foreach (var item in items)
+					Remove(item);
+			}
+			foreach (var item in this)
+			{
+				var group = item as Group;
+				group?.DeepRemoveItemsWithSource(source);
+			}
+		}
 		#endregion
 
 
@@ -860,11 +879,18 @@ namespace Forms9Patch
 				break;
 
 			case NotifyCollectionChangedAction.Remove:
-				if (e.OldStartingIndex < 0) 
-					// we don't have an index but we can figure it out IF the objects are unique!
-					throw new NotSupportedException ("Cannot remove Source object with unknown index");
-				for (int i = e.OldItems.Count - 1; i >= 0; i--)
-					RemoveItemWithSourceIndex (i + e.OldStartingIndex);
+					if (e.OldStartingIndex < 0)
+					{
+						// we don't have an index but we can figure it out IF the objects are unique!
+						//throw new NotSupportedException("Cannot remove Source object with unknown index");
+						foreach (var sourceItem in e.OldItems)
+							DeepRemoveItemsWithSource(sourceItem);
+					}
+					else
+					{
+						for (int i = e.OldItems.Count - 1; i >= 0; i--)
+							RemoveItemWithSourceIndex(i + e.OldStartingIndex);
+					}
 				break;
 
 			case NotifyCollectionChangedAction.Replace:
@@ -960,12 +986,13 @@ namespace Forms9Patch
 				Source = null;
 				Source = source;
 			}
-
+			/*
 			else if (propertyName == HasUnevenRowsProperty.PropertyName)
 			{
 				foreach (var child in this)
 					child.HasUnevenRows = HasUnevenRows;
 			}
+			*/
 			else if (propertyName == RowHeightProperty.PropertyName)
 			{
 				foreach (var child in this)
