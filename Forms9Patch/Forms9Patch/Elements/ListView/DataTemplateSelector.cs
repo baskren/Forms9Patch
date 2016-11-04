@@ -139,7 +139,7 @@ namespace Forms9Patch
 		class Cell<TContent> : ViewCell where TContent : Xamarin.Forms.View, new() {
 			
 			internal BaseCellView BaseCellView = new BaseCellView ();
-			ICellContent _iCellContent;
+			ICellContentView _iCellContent;
 
 			/// <summary>
 			/// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector.Cell`1"/> class.
@@ -149,9 +149,9 @@ namespace Forms9Patch
 				//System.Diagnostics.Debug.WriteLine("\t\t\t{0} start", this.GetType());
 				View = BaseCellView;
 				BaseCellView.Content = new TContent();
-				_iCellContent = BaseCellView.Content as ICellContent;
-				if (_iCellContent != null)
-					Height = _iCellContent.RowHeight;
+				_iCellContent = BaseCellView.Content as ICellContentView;
+				if (_iCellContent != null && _iCellContent.CellHeight >= 0)
+					Height = _iCellContent.CellHeight;
 				BaseCellView.Content.PropertyChanged += (sender, e) =>
 				{
 					if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
@@ -186,8 +186,8 @@ namespace Forms9Patch
 			void SetHeight()
 			{
 				var iItem = BindingContext as IItem;
-				if (_iCellContent != null && iItem != null && iItem.HasUnevenRows)
-					Height = _iCellContent.RowHeight;
+				if (_iCellContent != null && _iCellContent.CellHeight >=0 && iItem != null && iItem.HasUnevenRows)
+					Height = _iCellContent.CellHeight;
 				else
 					Height = iItem.RowHeight;
 				View.HeightRequest = Height;
