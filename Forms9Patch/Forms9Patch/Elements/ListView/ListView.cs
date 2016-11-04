@@ -640,8 +640,15 @@ namespace Forms9Patch
 				UpdateItemsSource();
 			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 				AddSelectedSourceItem(SelectedItem);
-			else if (propertyName == VisibilityTestProperty.PropertyName && BaseItemsSource != null)
-				BaseItemsSource.VisibilityTest = VisibilityTest;
+			else if (BaseItemsSource != null)
+			{
+				if (propertyName == VisibilityTestProperty.PropertyName)
+					BaseItemsSource.VisibilityTest = VisibilityTest;
+				else if (propertyName == HasUnevenRowsProperty.PropertyName)
+					BaseItemsSource.HasUnevenRows = HasUnevenRows;
+				else if (propertyName == RowHeightProperty.PropertyName)
+					BaseItemsSource.RowHeight = RowHeight;
+			}
 			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 			{
@@ -662,6 +669,8 @@ namespace Forms9Patch
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.Source = ItemsSource;
 			_baseItemsSource.VisibilityTest = VisibilityTest;
+			_baseItemsSource.HasUnevenRows = HasUnevenRows;
+			_baseItemsSource.RowHeight = RowHeight;
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
 			ReevaluateSelectedItems();

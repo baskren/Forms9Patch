@@ -192,8 +192,8 @@ namespace Forms9Patch
 			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
 			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
 
-			this.SetBinding(RowHeightProperty, RowHeightProperty.PropertyName);
-			this.SetBinding(HasUnevenRowsProperty, HasUnevenRowsProperty.PropertyName);
+			//this.SetBinding(RowHeightProperty, RowHeightProperty.PropertyName);
+			//this.SetBinding(HasUnevenRowsProperty, HasUnevenRowsProperty.PropertyName);
 		}
 
 		#endregion

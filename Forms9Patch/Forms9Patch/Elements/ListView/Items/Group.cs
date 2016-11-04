@@ -960,6 +960,18 @@ namespace Forms9Patch
 				Source = null;
 				Source = source;
 			}
+
+			else if (propertyName == HasUnevenRowsProperty.PropertyName)
+			{
+				foreach (var child in this)
+					child.HasUnevenRows = HasUnevenRows;
+			}
+			else if (propertyName == RowHeightProperty.PropertyName)
+			{
+				foreach (var child in this)
+					child.RowHeight = RowHeight;
+			}
+
 		}
 		#endregion
 
