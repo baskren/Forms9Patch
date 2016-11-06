@@ -287,6 +287,13 @@ namespace Forms9Patch
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
 
 
+		public void TapItem(object item)
+		{
+			var f9pGroupAndItem = BaseItemsSource.GroupAndItemForSource(item);
+			var args = new Xamarin.Forms.ItemTappedEventArgs(f9pGroupAndItem.Item1, f9pGroupAndItem.Item2);
+			OnItemTapped(this,args);
+		}
+
 		Item _selectedF9PItem;
 		List<Item> _selectedF9PItems = new List<Item>();
 		bool _processingItemTapped;

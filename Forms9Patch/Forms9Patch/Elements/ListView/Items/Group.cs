@@ -1040,7 +1040,7 @@ namespace Forms9Patch
 		#region Source finding
 		public Item ItemWithSource(object source)
 		{
-			if (this.Source == source)
+			if (Source == source)
 				return this;
 			foreach (var item in _items)
 			{
@@ -1048,6 +1048,38 @@ namespace Forms9Patch
 					return item;
 				var group = item as Group;
 				var subItem = group?.ItemWithSource(source);
+				if (subItem != null)
+					return subItem;
+			}
+			return null;
+		}
+
+		public Group GroupForItem(Item item)
+		{
+			if (item == null)
+				return null;
+			if (Contains(item))
+				return this;
+		    foreach (var member in _items)
+			{
+				var group = member as Group;
+				var result = group?.GroupForItem(item);
+				if (result != null)
+					return result;
+			}
+			return null;
+		}
+
+		public Tuple<Group, Item> GroupAndItemForSource(object source)
+		{
+			if (Source == source)
+				return new Tuple<Group,Item>(null,this);
+			foreach (var item in _items)
+			{
+				if (item.Source == source)
+					return new Tuple<Group, Item>(this, item);
+				var group = item as Group;
+				var subItem = group?.GroupAndItemForSource(source);
 				if (subItem != null)
 					return subItem;
 			}
