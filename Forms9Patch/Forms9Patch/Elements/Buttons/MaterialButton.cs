@@ -40,13 +40,28 @@ namespace Forms9Patch
 		/// </summary>
 		public static BindableProperty ImageSourceProperty = BindableProperty.Create ("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
 		/// <summary>
-		/// Gets or sets the companion image.
+		/// Gets or sets the companion image - alternatively, use ImageText.
 		/// </summary>
 		/// <value>The image.</value>
 		public Xamarin.Forms.ImageSource ImageSource {
 			get { return (Xamarin.Forms.ImageSource)GetValue (ImageSourceProperty);}
 			set { SetValue (ImageSourceProperty, value); }
 		}
+
+		/// <summary>
+		/// The image text property backing store
+		/// </summary>
+		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(MaterialButton), default(string));
+		/// <summary>
+		/// Gets or sets the image text - use this to specify the image as an HTML markup string.
+		/// </summary>
+		/// <value>The image text.</value>
+		public string IconText
+		{
+			get { return (string)GetValue(IconTextProperty); }
+			set { SetValue(IconTextProperty, value); }
+		}
+
 
 
 		/// <summary>
@@ -247,7 +262,7 @@ namespace Forms9Patch
 		/// OBSOLETE: Use ToggleBehaviorProperty instead.
 		/// </summary>
 		[Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead")]
-		public static BindableProperty StickyBehaviorProperty = null;
+		public static BindableProperty StickyBehaviorProperty;
 
 		/// <summary>
 		/// OBSOLETE: Use ToggleBehavior instead.
@@ -421,6 +436,7 @@ namespace Forms9Patch
 		Xamarin.Forms.StackLayout _stackLayout;
 		Image _image;
 		Label _label;
+		Label _iconLabel;
 		FormsGestures.Listener _gestureListener;
 		#endregion
 
@@ -440,7 +456,7 @@ namespace Forms9Patch
 				HorizontalTextAlignment = TextAlignment.Center,
 				//FontSize = 12,
 				HeightRequest = 22,
-				MinimizeHeight = true,
+				MinimizeHeight = true
 				//Lines = 1,
 				//Fit = LabelFit.None
 				//LineBreakMode = LineBreakMode.TailTruncation,
@@ -640,6 +656,8 @@ namespace Forms9Patch
 			}
 			if (_image != null)
 				_image.TintColor = _label.TextColor;
+			if (_iconLabel != null)
+				_iconLabel.TextColor = _label.TextColor;
 			_noUpdate = false;
 		}
 		#endregion
@@ -746,6 +764,12 @@ namespace Forms9Patch
 					_image.VerticalOptions = LayoutOptions.Center;
 					_image.HorizontalOptions = LayoutOptions.Center;
 				}
+				if (_iconLabel != null)
+				{
+					_iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
+					_iconLabel.HorizontalOptions = LayoutOptions.Center;
+					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
+				}
 				if (_label != null) {
 					_label.VerticalOptions = LayoutOptions.CenterAndExpand;
 					_label.HorizontalOptions = LayoutOptions.Center;
@@ -757,6 +781,12 @@ namespace Forms9Patch
 				if (_image != null) {
 					_image.VerticalOptions = LayoutOptions.Center;
 					_image.HorizontalOptions = LayoutOptions.CenterAndExpand;
+				}
+				if (_iconLabel != null)
+				{
+					_iconLabel.VerticalOptions = LayoutOptions.Center;
+					_iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
 				}
 				if (_label != null) {
 					_label.VerticalOptions = LayoutOptions.Center;
@@ -786,33 +816,71 @@ namespace Forms9Patch
 			if (_noUpdate)
 				return;
 
-			if (propertyName == AlignmentProperty.PropertyName) {
-				_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions ();
-			} else if (propertyName == ImageSourceProperty.PropertyName) {
+			if (propertyName == AlignmentProperty.PropertyName)
+			{
+				_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
+			}
+			else if (propertyName == ImageSourceProperty.PropertyName)
+			{
 				if (_image != null)
-					_stackLayout.Children.Remove (_image);
-				if (ImageSource != null) {
+					_stackLayout.Children.Remove(_image);
+				if (ImageSource != null)
+				{
+					if (_iconLabel != null)
+						_stackLayout.Children.Remove(_iconLabel);
 					_image = new Image { Source = ImageSource };
 					_image.Fill = Fill.AspectFit;
 					_image.TintColor = _label.TextColor;
-					if (_image != null) {
+					if (_image != null)
+					{
 						if (TrailingImage)
 							_stackLayout.Children.Add(_image);
 						else
-							_stackLayout.Children.Insert (0, _image);
-						SetOrienations ();
+							_stackLayout.Children.Insert(0, _image);
+						SetOrienations();
 					}
 				}
-			} else if (propertyName == BackgroundColorProperty.PropertyName
+			}
+			else if (propertyName == IconTextProperty.PropertyName)
+			{
+				if (_iconLabel != null)
+					_stackLayout.Children.Remove(_iconLabel);
+				if (IconText != null)
+				{
+					if (_image != null)
+						_stackLayout.Children.Remove(_image);
+					_iconLabel = new Forms9Patch.Label { 
+						HtmlText = IconText, 
+						TextColor = _label.TextColor, 
+						HorizontalTextAlignment = TextAlignment.Center, 
+						VerticalTextAlignment = TextAlignment.Center, 
+						HorizontalOptions = LayoutOptions.Center, 
+						VerticalOptions = LayoutOptions.Center,
+						Lines=0,
+					};
+					if (_iconLabel != null)
+					{
+						if (TrailingImage)
+							_stackLayout.Children.Add(_iconLabel);
+						else
+							_stackLayout.Children.Insert(0, _iconLabel);
+						SetOrienations();
+					}
+				}
+			}
+			else if (propertyName == BackgroundColorProperty.PropertyName
 			           || propertyName == OutlineColorProperty.PropertyName
 			           || propertyName == OutlineWidthProperty.PropertyName
 			           || propertyName == IsSelectedProperty.PropertyName
 			           || propertyName == IsEnabledProperty.PropertyName
 			           || propertyName == DarkThemeProperty.PropertyName
 			           || propertyName == HasShadowProperty.PropertyName
-			           || propertyName == SegmentTypeProperty.PropertyName) {
+			           || propertyName == SegmentTypeProperty.PropertyName) 
+			{
 				UpdateState ();
-			} else if (propertyName == OrientationProperty.PropertyName) {
+			} 
+			else if (propertyName == OrientationProperty.PropertyName) 
+			{
 				SetOrienations ();
 				/*
 			} else if (propertyName == FontFamilyProperty.PropertyName) {
@@ -822,9 +890,13 @@ namespace Forms9Patch
 			} else if (propertyName == FontAttributesProperty.PropertyName) {
 				_label.FontAttributes = FontAttributes;
 				*/
-			} else if (propertyName == FontColorProperty.PropertyName) {
+			} 
+			else if (propertyName == FontColorProperty.PropertyName) 
+			{
 				_label.TextColor = FontColor;
-			} else if (propertyName == TextProperty.PropertyName) {
+			} 
+			else if (propertyName == TextProperty.PropertyName) 
+			{
 				_label.Text = Text;
 			} else if (propertyName == HtmlTextProperty.PropertyName) {
 				_label.HtmlText = HtmlText;

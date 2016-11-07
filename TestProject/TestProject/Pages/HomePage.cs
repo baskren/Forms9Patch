@@ -174,6 +174,12 @@ namespace TestProject
 						},
 
 						new TextCell {
+							Text = "Material Buttons w/ IconText",
+							Command = navigateCommand,
+							CommandParameter = typeof(MaterialButtons_IconTextPage)
+						},
+
+						new TextCell {
 							Text = "Elliptical Material Buttons",
 							Command = navigateCommand,
 							CommandParameter = typeof(EllipticalMaterialButtonsPage)

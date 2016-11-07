@@ -17,13 +17,28 @@ namespace Forms9Patch
 		/// </summary>
 		public static BindableProperty ImageSourceProperty = BindableProperty.Create("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(Segment), null);
 		/// <summary>
-		/// Gets or sets the companion image for this this <see cref="Segment"/>.
+		/// Gets or sets the companion image for this this <see cref="Segment"/> - alternative to IconText.
 		/// </summary>
 		/// <value>The image.</value>
 		public Xamarin.Forms.ImageSource ImageSource {
 			get { return (Xamarin.Forms.ImageSource)GetValue(ImageSourceProperty); }
 			set { SetValue(ImageSourceProperty, value); }
 		}
+
+		/// <summary>
+		/// The icon text property backing store.
+		/// </summary>
+		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(Segment), default(string));
+		/// <summary>
+		/// Gets or sets the icon text - alternative to ImageSource.
+		/// </summary>
+		/// <value>The icon text.</value>
+		public string IconText
+		{
+			get { return (string)GetValue(IconTextProperty); }
+			set { SetValue(IconTextProperty, value); }
+		}
+
 
 		/// <summary>
 		/// Backing store for the Text bindable property.
@@ -242,6 +257,9 @@ namespace Forms9Patch
 					case "ImageSource":
 						ImageSource = MaterialButton.ImageSource;
 						break;
+					case "IconText":
+						IconText = MaterialButton.IconText;
+						break;
 					case "Text":
 						Text = MaterialButton.Text;
 						break;
@@ -279,6 +297,9 @@ namespace Forms9Patch
 					break;
 				case "ImageSource":
 					MaterialButton.ImageSource = ImageSource;
+					break;
+				case "IconText":
+					MaterialButton.IconText = IconText;
 					break;
 				case "Text":
 					MaterialButton.Text = Text;
