@@ -163,7 +163,6 @@ namespace Forms9Patch
 			Margin = 0,
 			OutlineWidth = 0,
 		};
-
 		readonly Frame _action1Frame = new Frame
 		{
 			VerticalOptions = LayoutOptions.FillAndExpand,
@@ -179,7 +178,7 @@ namespace Forms9Patch
 			VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
-		static readonly Frame _touchBlocker = new Frame
+		readonly Frame _touchBlocker = new Frame
 		{
 			BackgroundColor = Color.FromRgba(0, 0, 0, 1),
 		};
@@ -252,7 +251,7 @@ namespace Forms9Patch
 		#endregion
 
 
-		#region Pan Manager
+		#region Action Button Pan Manager
 		bool _settingup;
 
 		double ChildrenX
@@ -306,13 +305,13 @@ namespace Forms9Patch
 				else
 				{
 					// display 3 buttons
-					TranslateChildrenTo(-180, 0, 300, Easing.Linear);
+					TranslateChildrenTo(-(60*_endButtons), 0, 300, Easing.Linear);
 					_action1Frame.TranslateTo(Width - 60, 0, 300, Easing.Linear);
 					if (_endButtons > 1)
 						_action2Frame.TranslateTo(Width - 120, 0, 300, Easing.Linear);
 					if (_endButtons > 2)
 						_action3Frame.TranslateTo(Width - 180, 0, 300, Easing.Linear);
-					_insetFrame.TranslateTo(Width - 180, 0, 300, Easing.Linear);
+					_insetFrame.TranslateTo(Width - (60*_endButtons), 0, 300, Easing.Linear);
 					translateOnUp = -180;
 					return;
 				}
@@ -334,11 +333,11 @@ namespace Forms9Patch
 				return;
 			if (_endButtons > 0)
 			{
-				if (distance <= -180)
+				if (distance <= -60 * _endButtons)
 				{
 					// we're beyond the limit of presentation of the buttons
 					ChildrenX = -180;
-					if (distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
+					if (distance <= - (60 + 60 * _endButtons) && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
 						_action1Frame.TranslateTo(0,0,200,Easing.Linear);
 					else
 						_action1Frame.TranslateTo(Width-60,0,200,Easing.Linear);
@@ -346,7 +345,7 @@ namespace Forms9Patch
 						_action2Frame.TranslationX = Width -120;
 					if (_endButtons > 2)
 						_action3Frame.TranslationX = Width -180;
-					_insetFrame.TranslationX = Width - 180;
+					_insetFrame.TranslationX = Width + distance;
 					return;
 				}
 				if (distance > 1)
@@ -356,8 +355,8 @@ namespace Forms9Patch
 					return;
 				}
 				ChildrenX = distance;
-				_action1Frame.TranslationX = Width + distance / 3.0;
-				_action2Frame.TranslationX = Width + 2 * distance / 3.0;
+				_action1Frame.TranslationX = Width + distance / _endButtons;
+				_action2Frame.TranslationX = Width + 2 * distance / _endButtons;
 				_action3Frame.TranslationX = Width + distance;
 				_insetFrame.TranslationX = Width + distance;
 			}
