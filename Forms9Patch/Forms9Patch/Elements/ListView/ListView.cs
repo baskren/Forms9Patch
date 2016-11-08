@@ -420,7 +420,7 @@ namespace Forms9Patch
 
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
-			base.ItemTapped += (sender, e) => System.Diagnostics.Debug.WriteLine("ListView base.ItemTapped");
+			//base.ItemTapped += (sender, e) => System.Diagnostics.Debug.WriteLine("ListView base.ItemTapped");
 
 			IsEnabled = true;
 			_listener = new Listener (this);
@@ -685,13 +685,18 @@ namespace Forms9Patch
 			if (_baseItemsSource != null)
 			{
 				_baseItemsSource.Tapped -= OnItemTapped;
+				_baseItemsSource.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
 			}
 			//System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
 			//_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
 			_baseItemsSource = new GroupWrapper();
+
 			_baseItemsSource.Tapped += OnItemTapped;
 			_baseItemsSource.LongPressed += OnLongPressed;
 			_baseItemsSource.LongPressing += OnLongPressing;
+
+			_baseItemsSource.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
+
 			_baseItemsSource.BindingContext = this;
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.Source = ItemsSource;
@@ -701,6 +706,15 @@ namespace Forms9Patch
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
 			ReevaluateSelectedItems();
+		}
+		#endregion
+
+
+		#region Swipe Menu events
+		public event EventHandler<SwipeMenuItemTappedArgs> SwipeMenuItemTapped;
+		public void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
+		{
+			SwipeMenuItemTapped?.Invoke(sender, e);
 		}
 		#endregion
 

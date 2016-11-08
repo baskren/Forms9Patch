@@ -6,18 +6,34 @@ namespace Forms9Patch
 	/// <summary>
 	/// Describes a Swipe action button that appears when a cell is swiped 
 	/// </summary>
-	public class SwipeAction : BindableObject
+	public class SwipeMenuItem : BindableObject
 	{
 		#region Properties
 		/// <summary>
+		/// The key property backing store.
+		/// </summary>
+		public static readonly BindableProperty KeyProperty = BindableProperty.Create("Key", typeof(string), typeof(SwipeMenuItem), default(string));
+		/// <summary>
+		/// Gets or sets the key - used to identify a SwipeMenuEvent.  Will return Text if set to null.
+		/// </summary>
+		/// <value>The key.</value>
+		public string Key
+		{
+			get { return (string)GetValue(KeyProperty) ?? (string)GetValue(TextProperty); }
+			set { SetValue(KeyProperty, value); }
+		}
+
+
+
+		/// <summary>
 		/// The icon image source property backing store;
 		/// </summary>
-		public static readonly BindableProperty IconImageSourceProperty = BindableProperty.Create("IconImageSource", typeof(Forms9Patch.ImageSource), typeof(SwipeAction), default(Forms9Patch.ImageSource));
+		public static readonly BindableProperty IconImageSourceProperty = BindableProperty.Create("IconImageSource", typeof(Forms9Patch.ImageSource), typeof(SwipeMenuItem), default(Forms9Patch.ImageSource));
 		/// <summary>
 		/// Gets or sets the icon image source - an alternative to IconText.
 		/// </summary>
 		/// <value>The icon image source.</value>
-		public Forms9Patch.ImageSource IconImageSource
+		public Forms9Patch.ImageSource ImageSource
 		{
 			get { return (Forms9Patch.ImageSource)GetValue(IconImageSourceProperty); }
 			set { SetValue(IconImageSourceProperty, value); }
@@ -26,7 +42,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The icon text property backing store.
 		/// </summary>
-		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(SwipeAction), default(string));
+		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(SwipeMenuItem), default(string));
 		/// <summary>
 		/// Gets or sets the icon text - an alternative to IconImageSource.
 		/// </summary>
@@ -40,7 +56,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The text property backing store.
 		/// </summary>
-		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(SwipeAction), default(string));
+		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(SwipeMenuItem), default(string));
 		/// <summary>
 		/// Gets or sets the text (can be in HTML format.
 		/// </summary>
@@ -54,7 +70,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The text color property.
 		/// </summary>
-		public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SwipeAction), Color.White);
+		public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SwipeMenuItem), Color.White);
 		/// <summary>
 		/// Gets or sets the color of the text and icon (image).
 		/// </summary>
@@ -68,13 +84,13 @@ namespace Forms9Patch
 		/// <summary>
 		/// The swipe executable property backing store.
 		/// </summary>
-		public static readonly BindableProperty SwipeExecutableProperty = BindableProperty.Create("SwipeExecutable", typeof(bool), typeof(SwipeAction), default(bool));
+		public static readonly BindableProperty SwipeExecutableProperty = BindableProperty.Create("SwipeExecutable", typeof(bool), typeof(SwipeMenuItem), default(bool));
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SwipeAction"/> swipe executable.
 		/// Only used if this SwipeAction is at the top of the stack of SwipeActions.
 		/// </summary>
 		/// <value><c>true</c> if swipe executable; otherwise, <c>false</c>.</value>
-		public bool SwipeExecutable
+		public bool SwipeActivated
 		{
 			get { return (bool)GetValue(SwipeExecutableProperty); }
 			set { SetValue(SwipeExecutableProperty, value); }
@@ -83,7 +99,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The background color property backing store.
 		/// </summary>
-		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(SwipeAction), default(Color));
+		public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(SwipeMenuItem), default(Color));
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
@@ -94,10 +110,11 @@ namespace Forms9Patch
 			set { SetValue(BackgroundColorProperty, value); }
 		}
 
+		/*
 		/// <summary>
 		/// The action property backing store.
 		/// </summary>
-		public static readonly BindableProperty ActionProperty = BindableProperty.Create("Action", typeof(Action<object,object>), typeof(SwipeAction), default(Action<object,object>));
+		public static readonly BindableProperty ActionProperty = BindableProperty.Create("Action", typeof(Action<object,object>), typeof(SwipeMenuItem), default(Action<object,object>));
 		/// <summary>
 		/// Gets or sets the action to be performed if activated.
 		/// </summary>
@@ -107,12 +124,9 @@ namespace Forms9Patch
 			get { return (Action<object,object>)GetValue(ActionProperty); }
 			set { SetValue(ActionProperty, value); }
 		}
+		*/
 
 		#endregion
-
-		public SwipeAction()
-		{
-		}
 
 
 		#region Change management
@@ -120,8 +134,8 @@ namespace Forms9Patch
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == IconTextProperty.PropertyName && IconTextProperty != null)
-				IconImageSource = null;
-			else if (propertyName == IconImageSourceProperty.PropertyName && IconImageSource != null)
+				ImageSource = null;
+			else if (propertyName == IconImageSourceProperty.PropertyName && ImageSource != null)
 				IconText = null;
 		}
 		#endregion

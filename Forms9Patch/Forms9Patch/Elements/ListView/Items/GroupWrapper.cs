@@ -233,6 +233,7 @@ namespace Forms9Patch
 			item.Tapped += OnTapped;
 			item.LongPressed += OnLongPressed;
 			item.LongPressing += OnLongPressing;
+			item.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
 			item.BindingContext = this;
 			item.Parent = this;
 			var group = item as GroupWrapper;
@@ -261,6 +262,7 @@ namespace Forms9Patch
 			item.Tapped -= OnTapped;
 			item.LongPressed -= OnLongPressed;
 			item.LongPressing -= OnLongPressing;
+			item.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
 			item.BindingContext = null;
 			item.Parent = null;
 		}

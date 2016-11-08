@@ -184,28 +184,31 @@ namespace Forms9Patch
 		#endregion
 
 
-		#region Touch Events
+		#region Events
 		// used by BaseCellView to communicate touch events to ListView via Group.
 		public event EventHandler<ItemWrapperTapEventArgs> Tapped;
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressing;
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressed;
+		public event EventHandler<SwipeMenuItemTappedArgs> SwipeMenuItemTapped;
 
 		internal void OnTapped(object sender, ItemWrapperTapEventArgs e)
 		{
-			//if (Parent!=null)
 			Tapped?.Invoke(sender, e);
 		}
 
 		internal void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e)
 		{
-			//if (Parent != null)
-				LongPressing?.Invoke(sender, e);
+			LongPressing?.Invoke(sender, e);
 		}
 
 		internal void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e)
 		{
-			//if (Parent != null)
-				LongPressed?.Invoke(sender, e);
+			LongPressed?.Invoke(sender, e);
+		}
+
+		internal void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
+		{
+			SwipeMenuItemTapped?.Invoke(sender, e);
 		}
 
 		#endregion

@@ -14,8 +14,8 @@ namespace Forms9Patch
 		/// <value>The height of the cell.</value>
 		double CellHeight { get; }
 
-		List<SwipeAction> StartSwipeActions { get; }
+		List<SwipeMenuItem> StartSwipeMenu { get; }
 
-		List<SwipeAction> EndSwipeActions { get; }
+		List<SwipeMenuItem> EndSwipeMenu { get; }
 	}
 }
