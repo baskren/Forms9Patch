@@ -279,7 +279,7 @@ namespace Forms9Patch
 		{
 			if (_endButtons > 0)
 			{
-				System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
+				//System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
 				if (e.TotalDistance.X > 20 || ChildrenX > -60)
 				{
 					// put it away
@@ -291,16 +291,18 @@ namespace Forms9Patch
 						_action3Frame.TranslateTo(Width, 0, 400, Easing.Linear);
 					_insetFrame.TranslateTo(Width, 0, 400, Easing.Linear);
 				}
-				else if (ChildrenX < -210 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
+				else if (_action1Frame.TranslationX < Width - 210 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
 				{
 					// execute full swipe
-					TranslateChildrenTo(0, 0, 300, Easing.Linear);
-					_action1Frame.TranslateTo(0, 0, 300, Easing.Linear);
+					//TranslateChildrenTo(0, 0, 300, Easing.Linear);
+					_action1Frame.TranslateTo(0, 0, 250, Easing.Linear);
 					if (_endButtons > 1)
 						_action2Frame.TranslationX = Width;
 					if (_endButtons > 2)
 						_action3Frame.TranslationX = Width;
 					_insetFrame.TranslationX = Width;
+					//System.Diagnostics.Debug.WriteLine("FULL SWIPE");
+					OnActionButtonTapped(_action1Button,EventArgs.Empty);
 				}
 				else
 				{
@@ -317,18 +319,20 @@ namespace Forms9Patch
 				}
 				translateOnUp = 0;
 				_endButtons = 0;
-				Device.StartTimer(TimeSpan.FromMilliseconds(300), () =>
-				 {
-					 _touchBlocker.IsVisible = false;
-					 return false;
-				 });
+				Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
+				{
+					ChildrenX = 0;
+					_touchBlocker.IsVisible = false;
+					_action1Frame.TranslationX = Width;
+					return false;
+				});
 			}
 		}
 
 		void OnPanning(object sender, PanEventArgs e)
 		{
 			double distance = e.TotalDistance.X + translateOnUp;
-			System.Diagnostics.Debug.WriteLine("eb=["+_endButtons+"] sb=["+startButtons+"] Distance=["+distance+"] translateOnUp=["+translateOnUp+"]");
+			//System.Diagnostics.Debug.WriteLine("eb=["+_endButtons+"] sb=["+startButtons+"] Distance=["+distance+"] translateOnUp=["+translateOnUp+"]");
 			if (_settingup)
 				return;
 			if (_endButtons > 0)
@@ -337,7 +341,7 @@ namespace Forms9Patch
 				{
 					// we're beyond the limit of presentation of the buttons
 					ChildrenX = -180;
-					if (distance <= - (60 + 60 * _endButtons) && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
+					if (distance <= - 210 && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
 						_action1Frame.TranslateTo(0,0,200,Easing.Linear);
 					else
 						_action1Frame.TranslateTo(Width-60,0,200,Easing.Linear);
