@@ -895,6 +895,10 @@ namespace Forms9Patch
 			else if (propertyName == FontColorProperty.PropertyName) 
 			{
 				_label.TextColor = FontColor;
+				if (_iconLabel != null)
+					_iconLabel.TextColor = FontColor;
+				if (_image != null)
+					_image.TintColor = FontColor;
 			} 
 			else if (propertyName == TextProperty.PropertyName) 
 			{
@@ -913,6 +917,7 @@ namespace Forms9Patch
 						eventHandler (this, EventArgs.Empty);
 				}
 			}
+
 		}
 
 		void OnCommandChanged()
@@ -939,9 +944,7 @@ namespace Forms9Patch
 			ICommand command = Command;
 			if (command != null && GroupToggleBehavior==GroupToggleBehavior.None)
 				command.Execute(CommandParameter);
-			EventHandler eventHandler = _tapped;
-			if (eventHandler != null)
-				eventHandler(this, EventArgs.Empty);
+			_tapped?.Invoke(this, EventArgs.Empty);
 		}
 
 		#endregion

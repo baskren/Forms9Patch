@@ -52,6 +52,20 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// The text color property.
+		/// </summary>
+		public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SwipeAction), Color.White);
+		/// <summary>
+		/// Gets or sets the color of the text and icon (image).
+		/// </summary>
+		/// <value>The color of the text.</value>
+		public Color TextColor
+		{
+			get { return (Color)GetValue(TextColorProperty); }
+			set { SetValue(TextColorProperty, value); }
+		}
+
+		/// <summary>
 		/// The swipe executable property backing store.
 		/// </summary>
 		public static readonly BindableProperty SwipeExecutableProperty = BindableProperty.Create("SwipeExecutable", typeof(bool), typeof(SwipeAction), default(bool));

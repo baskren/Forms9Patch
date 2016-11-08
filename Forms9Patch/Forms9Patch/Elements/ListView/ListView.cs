@@ -298,9 +298,9 @@ namespace Forms9Patch
 		List<ItemWrapper> _selectedF9PItems = new List<ItemWrapper>();
 		bool _processingItemTapped;
 		//void OnItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
-		void OnItemTapped(object sender, Forms9Patch.ItemWrapperTapEventArgs e)
+		void OnItemTapped(object sender, ItemWrapperTapEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("ITEM TAPPED");
+			//System.Diagnostics.Debug.WriteLine("ITEM TAPPED");
 			if (!_processingItemTapped)
 			{
 				_processingItemTapped = true;
@@ -420,7 +420,7 @@ namespace Forms9Patch
 
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
-			//base.ItemTapped += OnItemTapped;
+			base.ItemTapped += (sender, e) => System.Diagnostics.Debug.WriteLine("ListView base.ItemTapped");
 
 			IsEnabled = true;
 			_listener = new Listener (this);
@@ -471,7 +471,7 @@ namespace Forms9Patch
 		#region SelectItems management
 		// Assumption: SelectedItem(s) must be set AFTER ItemsSource and ItemsSourceMap has been set.  Otherwise, selected items will be culled
 
-		bool _internalAddRemove = false;
+		bool _internalAddRemove;
 
 		void AddSelection(ItemWrapper f9pItem, object sourceItem)
 		{
@@ -482,7 +482,7 @@ namespace Forms9Patch
 			if (!_selectedF9PItems.Contains(f9pItem))
 				_selectedF9PItems.Add(f9pItem);
 			_selectedF9PItem = f9pItem;
-			if (sourceItem != SelectedItem)
+			//if (sourceItem != SelectedItem)
 				SelectedItem = sourceItem;
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && !SelectedItems.Contains(sourceItem))
 				SelectedItems.Add(sourceItem);
@@ -540,7 +540,7 @@ namespace Forms9Patch
 			RemoveSelection(f9pItem, sourceItem);
 		}
 
-		void AddSelectedSourceItems(System.Collections.IList sourceItems)
+		void AddSelectedSourceItems(IList sourceItems)
 		{
 			if (sourceItems == null)
 				return;
@@ -548,7 +548,7 @@ namespace Forms9Patch
 				AddSelectedSourceItem(sourceItem);
 		}
 
-		void RemoveSelectedSourceItems(System.Collections.IList sourceItems)
+		void RemoveSelectedSourceItems(IList sourceItems)
 		{
 			if (sourceItems == null)
 				return;
@@ -855,7 +855,7 @@ namespace Forms9Patch
 		//void OnLongPressing(object sender, LongPressEventArgs e) {
 		void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine("ListView.OnLongPressing");
+			//System.Diagnostics.Debug.WriteLine("ListView.OnLongPressing");
 			if (!Editable)
 				return;
 			// will be called when the _listener (attached to this) detects a long press
@@ -945,7 +945,7 @@ namespace Forms9Patch
 		//void OnLongPressed(object sender, LongPressEventArgs e) {
 		void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e) {
 			//System.Diagnostics.Debug.WriteLine ("ListView.LONGPRESSED ["+e.Listener.Element+"]");
-			System.Diagnostics.Debug.WriteLine("ListView.LONGPRESSED [" + e.ItemWrapper.Source + "]");
+			//System.Diagnostics.Debug.WriteLine("ListView.LONGPRESSED [" + e.ItemWrapper.Source + "]");
 
 			if (_longPress != null) {
 				ScrollSpeed(0);

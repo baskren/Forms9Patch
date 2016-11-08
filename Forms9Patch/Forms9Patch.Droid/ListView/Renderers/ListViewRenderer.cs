@@ -29,7 +29,13 @@ namespace Forms9Patch.Droid
 			}
 			Control.Divider = null;
 			Control.DividerHeight = -1;
+			/* none of the following seem to do anything!
 			Control.SetSelector(Android.Resource.Color.Transparent);
+			Control.ChoiceMode = ChoiceMode.MultipleModal;
+			Control.SetMultiChoiceModeListener(new ChoiceListener());
+			*/
+			//Control.Enabled = false;  // disables selection AND scrolling!
+			Control.Clickable = false;  // appears to do nothing?
 		}
 
 		bool Extended(double delta) {
@@ -355,4 +361,66 @@ namespace Forms9Patch.Droid
 		}
 	}
 
+	class ChoiceListener : Java.Lang.Object, Android.Widget.AbsListView.IMultiChoiceModeListener
+	{
+		public bool OnActionItemClicked(ActionMode mode, IMenuItem item)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool OnCreateActionMode(ActionMode mode, IMenu menu)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnDestroyActionMode(ActionMode mode)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnItemCheckedStateChanged(ActionMode mode, int position, long id, bool @checked)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool OnPrepareActionMode(ActionMode mode, IMenu menu)
+		{
+			throw new NotImplementedException();
+		}
+
+		#region IDisposable Support
+		private bool disposedValue = false; // To detect redundant calls
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					throw new NotImplementedException();
+				}
+
+				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+				// TODO: set large fields to null.
+
+				disposedValue = true;
+			}
+		}
+
+		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+		// ~ChoiceListener() {
+		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+		//   Dispose(false);
+		// }
+
+		// This code added to correctly implement the disposable pattern.
+		public void Dispose()
+		{
+			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+			Dispose(true);
+			// TODO: uncomment the following line if the finalizer is overridden above.
+			// GC.SuppressFinalize(this);
+		}
+		#endregion
+	}
 }

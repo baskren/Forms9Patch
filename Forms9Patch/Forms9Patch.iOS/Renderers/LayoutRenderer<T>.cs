@@ -144,7 +144,7 @@ namespace Forms9Patch.iOS
 
 			var hz = orientation == StackOrientation.Horizontal;
 			var vt = !hz;
-			var makeRoomForShadow = materialButton == null ? hasShadow : (bool)Element.GetValue (MaterialButton.HasShadowProperty);
+			var makeRoomForShadow = (materialButton == null ? hasShadow : (bool)Element.GetValue (MaterialButton.HasShadowProperty)) && !shadowInverted;
 
 			var shadowX = (nfloat)Forms9Patch.Settings.ShadowOffset.X;//* Display.Scale);
 			var shadowY = (nfloat)Forms9Patch.Settings.ShadowOffset.Y;// * Display.Scale);
