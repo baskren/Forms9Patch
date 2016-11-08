@@ -143,6 +143,7 @@
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Services\ListViewExtensionService.cs" />
+    <Compile Include="MainActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -179,6 +180,10 @@
     <ProjectReference Include="..\..\..\PCL.Utils\PCL.Utils.Droid\PCL.Utils.Droid.csproj">
       <Project>{B56178FB-CF76-4A84-A945-1596E34ADE28}</Project>
       <Name>PCL.Utils.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\AWC\HeightsAndAreas\HeightsAndAreas.csproj">
+      <Project>{77B52235-286B-49B7-9C82-15F4E9BBC0FD}</Project>
+      <Name>HeightsAndAreas</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

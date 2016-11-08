@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Forms9Patch
 {
-	class Group : Item<object>, IList<Item>, ICollection<Item>, IEnumerable<Item>, IEnumerable, IList, ICollection, IReadOnlyList<Item>, IReadOnlyCollection<Item>, INotifyCollectionChanged  {
+	class GroupWrapper : ItemWrapper<object>, IList<ItemWrapper>, ICollection<ItemWrapper>, IEnumerable<ItemWrapper>, IEnumerable, IList, ICollection, IReadOnlyList<ItemWrapper>, IReadOnlyCollection<ItemWrapper>, INotifyCollectionChanged  {
 
 
 		#region Source / Target (Visibles) coupling
@@ -21,7 +21,7 @@ namespace Forms9Patch
 			}
 			set {
 				foreach (var item in this) {
-					var group = item as Group;
+					var group = item as GroupWrapper;
 					if (group != null)
 						group.NotifySourceOfChanges = value;
 				}
@@ -74,7 +74,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The visibility test property backing store.
 		/// </summary>
-		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(Group), default(Func<object,bool>));
+		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(GroupWrapper), default(Func<object,bool>));
 		/// <summary>
 		/// Gets or sets the test used to determine if an item or group will be visible.
 		/// </summary>
@@ -123,7 +123,7 @@ namespace Forms9Patch
 			return sourceCount;
 		}
 
-		int SourceIndexOf(Item item) {
+		int SourceIndexOf(ItemWrapper item) {
 			if (SourceChildren == null)
 				throw new MissingMemberException ("Cannot get an index of an item in a null Source");
 			if (!_items.Contains (item))
@@ -160,7 +160,7 @@ namespace Forms9Patch
 		}
 
 
-		void SourceInsert(Item item) {
+		void SourceInsert(ItemWrapper item) {
 			if (SourceChildren == null)
 				throw new MissingMemberException ("Cannot insert an item into a null Source");
 			var iListIEnumerable = SourceChildren as IList<IEnumerable>;
@@ -184,7 +184,7 @@ namespace Forms9Patch
 			}
 		}
 
-		void SourceAdd(Item item) {
+		void SourceAdd(ItemWrapper item) {
 			//System.Diagnostics.Debug.WriteLine ("[" + this + "].MateAdd(" + item + ")");
 			if (SourceChildren == null)
 				throw new MissingMemberException ("Cannot insert an item into a null Source");
@@ -203,7 +203,7 @@ namespace Forms9Patch
 			}
 		}
 
-		void SourceRemove(Item item) {
+		void SourceRemove(ItemWrapper item) {
 			//System.Diagnostics.Debug.WriteLine ("[" + this + "].MateRemove(" + item + ")");
 			if (SourceChildren == null)
 				throw new MissingMemberException ("Cannot insert an item into a null Source");
@@ -224,37 +224,45 @@ namespace Forms9Patch
 
 
 		#region add/remove common actions
-		void CommonNewItem(Item item)
+		void CommonNewItem(ItemWrapper item)
 		{
 			if (item == null)
 				return;
 			item.PropertyChanged += OnItemPropertyChanged;
 			item.PropertyChanging += OnItemPropertyChanging;
+			item.Tapped += OnTapped;
+			item.LongPressed += OnLongPressed;
+			item.LongPressing += OnLongPressing;
 			item.BindingContext = this;
-			var group = item as Group;
+			item.Parent = this;
+			var group = item as GroupWrapper;
 			if (group != null)
 				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
 			item.RowHeight = RowHeight;
 			//item.HasUnevenRows = HasUnevenRows;
 		}
 
-		void CommonAdd(Item item) {
+		void CommonAdd(ItemWrapper item) {
 			CommonNewItem(item);
 			if (NotifySourceOfChanges) SourceAdd (item);
 		}
 
-		void CommonInsert(Item item) {
+		void CommonInsert(ItemWrapper item) {
 			CommonNewItem(item);
 			if (NotifySourceOfChanges) SourceInsert (item);
 		}
 
-		void CommonRemove(Item item) {
+		void CommonRemove(ItemWrapper item) {
 			if (item == null)
 				return;
 			if (NotifySourceOfChanges) SourceRemove (item);
 			item.PropertyChanged -= OnItemPropertyChanged;
 			item.PropertyChanging -= OnItemPropertyChanging;
-
+			item.Tapped -= OnTapped;
+			item.LongPressed -= OnLongPressed;
+			item.LongPressing -= OnLongPressing;
+			item.BindingContext = null;
+			item.Parent = null;
 		}
 
 
@@ -269,12 +277,12 @@ namespace Forms9Patch
 
 
 		#region IList<T> implementation
-		public int IndexOf (Item item) {
+		public int IndexOf (ItemWrapper item) {
 			// need to return -1 if the item is not in this group so DeepIndex can be found by searching subgroups
 			return _items.IndexOf(item);
 		}
 
-		public void Insert (int index, Item item) { 
+		public void Insert (int index, ItemWrapper item) { 
 			if (item == null)
 				return;
 			if (Contains (item))
@@ -292,7 +300,7 @@ namespace Forms9Patch
 			Reindex(index);
 		}
 
-		public Item this [int index] {
+		public ItemWrapper this [int index] {
 			get {
 				if (index < 0 || index > _items.Count-1)
 					return null;
@@ -333,7 +341,7 @@ namespace Forms9Patch
 				throw new InvalidCastException ("Cannot group IEnumerable with non-IEnumerable objects");
 		}
 
-		Item CreateItem(object sourceObject) {
+		ItemWrapper CreateItem(object sourceObject) {
 
 			string propertyName=null;
 			List<string> subgroupPropertyMap;
@@ -351,20 +359,20 @@ namespace Forms9Patch
 				{
 					// groups
 					VerifyContentType(GroupContentType.Lists);
-					var group = new Group(sourceObject, _subPropertyMap, VisibilityTest);
+					var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest);
 					return group;
 				}
 			}
 			// items
 			VerifyContentType(GroupContentType.Objects);
-			Item item;
+			ItemWrapper item;
 			if (sourceObject == null)
-				item = new Item<object>();
+				item = new ItemWrapper<object>();
 			else
 			{
 				var objType = sourceObject.GetType();
-				var itemType = typeof(Item<>).MakeGenericType(new[] { objType });
-				item = (Item)Activator.CreateInstance(itemType);
+				var itemType = typeof(ItemWrapper<>).MakeGenericType(new[] { objType });
+				item = (ItemWrapper)Activator.CreateInstance(itemType);
 				item.Source = sourceObject;
 			}
 			return item;
@@ -446,7 +454,7 @@ namespace Forms9Patch
 
 
 		#region ICollection<T> implementation
-		public void Add (Item item) { 
+		public void Add (ItemWrapper item) { 
 			if (item == null)
 				return;
 			if (Contains (item))
@@ -458,7 +466,7 @@ namespace Forms9Patch
 
 		public void Clear () { 
 			for (int i = _items.Count - 1; i >= 0; i--) {
-				var subGroup = _items[i] as Group;
+				var subGroup = _items[i] as GroupWrapper;
 				if (subGroup == null) 
 					RemoveAt (i);
 				else
@@ -466,11 +474,11 @@ namespace Forms9Patch
 			}
 		}
 
-		public bool Contains (Item item) { 
+		public bool Contains (ItemWrapper item) { 
 			return item != null && DeepContains (item);
 		}
 
-		public void CopyTo (Item[] array, int arrayIndex) { 
+		public void CopyTo (ItemWrapper[] array, int arrayIndex) { 
 			if (array == null)
 				return;
 			int offset = 0;
@@ -478,7 +486,7 @@ namespace Forms9Patch
 				Insert (arrayIndex + offset++, item);
 		}
 
-		public bool Remove (Item item) {
+		public bool Remove (ItemWrapper item) {
 			// if item is a group, will garbage collection clean up its items? - It better not because we may want to use it elsewhere
 			var index = item.Index;
 			CommonRemove(item);
@@ -498,7 +506,7 @@ namespace Forms9Patch
 
 
 		#region IEnumerable<T> implementation
-		public IEnumerator<Item> GetEnumerator () {
+		public IEnumerator<ItemWrapper> GetEnumerator () {
 			return _items.GetEnumerator ();
 		}
 		#endregion
@@ -514,23 +522,23 @@ namespace Forms9Patch
 		#region IList implementation
 		public int Add (object value)
 		{
-			Add (value as Item);
+			Add (value as ItemWrapper);
 			return _items.Count - 1;
 		}
 
 		public bool Contains (object value)
 		{
-			return Contains (value as Item);
+			return Contains (value as ItemWrapper);
 		}
 
 		public int IndexOf (object value)
 		{
-			return IndexOf (value as Item);
+			return IndexOf (value as ItemWrapper);
 		}
 
 		public void Insert (int index, object value)
 		{
-			var item = value as Item;
+			var item = value as ItemWrapper;
 			if (item != null) {
 				Insert (index, item);
 			} else
@@ -539,7 +547,7 @@ namespace Forms9Patch
 
 		public void Remove (object value)
 		{
-			var item = value as Item;
+			var item = value as ItemWrapper;
 			if (item != null) 
 				Remove (item);
 		}
@@ -550,7 +558,7 @@ namespace Forms9Patch
 
 		public void CopyTo (Array array, int index)
 		{
-			CopyTo ( array as Item[], index);
+			CopyTo ( array as ItemWrapper[], index);
 		}
 
 		public bool IsSynchronized {
@@ -566,7 +574,7 @@ namespace Forms9Patch
 				return _items[index];
 			}
 			set {
-				var item = value as Item;
+				var item = value as ItemWrapper;
 				if (item != null && index <= _items.Count && index > -1) {
 					if (Contains (item))
 						throw new NotSupportedException ();
@@ -588,24 +596,24 @@ namespace Forms9Patch
 
 		#region Deep List enhancements
 
-		public bool DeepContains(Item item) {
+		public bool DeepContains(ItemWrapper item) {
 			if (_items.Contains (item))
 				return true;
 			foreach (var member in _items) {
-				var group = member as Group;
+				var group = member as GroupWrapper;
 				if (group != null && group.DeepContains (item))
 					return true;
 			}
 			return false;
 		}
 
-		public int[] DeepSourceIndexOf(Item item) {
+		public int[] DeepSourceIndexOf(ItemWrapper item) {
 			int pos = SourceIndexOf (item);
 			if (pos > -1) {
 				return new [] { pos };
 			} else {
 				for (pos = 0; pos < _items.Count; pos++) {
-					var subGroup = _items[pos] as Group;
+					var subGroup = _items[pos] as GroupWrapper;
 					if (subGroup != null) {
 						int[] subGroupDeepIndex = subGroup.DeepSourceIndexOf (item);
 						if (subGroupDeepIndex != null) {
@@ -620,13 +628,13 @@ namespace Forms9Patch
 			return null;
 		}
 
-		public int[] DeepIndexOf(Item item) {
+		public int[] DeepIndexOf(ItemWrapper item) {
 			int pos = IndexOf (item);
 			if (pos > -1) {
 				return new [] { pos };
 			} else {
 				for (pos = 0; pos < _items.Count; pos++) {
-					var subGroup = _items[pos] as Group;
+					var subGroup = _items[pos] as GroupWrapper;
 					if (subGroup != null) {
 						int[] subGroupDeepIndex = subGroup.DeepIndexOf (item);
 						if (subGroupDeepIndex != null) {
@@ -641,7 +649,7 @@ namespace Forms9Patch
 			return null;
 		}
 
-		public void DeepInsert (int[] deepIndex, Item item) { 
+		public void DeepInsert (int[] deepIndex, ItemWrapper item) { 
 			if (DeepContains (item))
 				throw new NotSupportedException ("DeepInsert: Group already contain item");
 				//return;
@@ -651,7 +659,7 @@ namespace Forms9Patch
 				Insert (deepIndex [0], item);
 				return;
 			}
-			var subGroup = _items[deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as GroupWrapper;
 			if (subGroup == null)
 				throw new NotSupportedException ("DeepInsert: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -659,7 +667,7 @@ namespace Forms9Patch
 			subGroup.DeepInsert (subGroupDeepIndex, item);
 		}
 
-		public void DeepRemove(Item item) {
+		public void DeepRemove(ItemWrapper item) {
 			if (!DeepContains (item))
 				return;
 			var deepIndex = DeepIndexOf (item);
@@ -673,7 +681,7 @@ namespace Forms9Patch
 				RemoveAt (deepIndex [0]);
 				return;
 			}
-			var subGroup = _items[deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as GroupWrapper;
 			if (subGroup == null)
 				throw new NotSupportedException ("DeepRemove: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -681,13 +689,13 @@ namespace Forms9Patch
 			subGroup.DeepRemoveAt (subGroupDeepIndex);
 		}
 
-		public Item ItemAtDeepIndex(int[] deepIndex) {
+		public ItemWrapper ItemAtDeepIndex(int[] deepIndex) {
 			if (deepIndex==null || deepIndex.Length == 0)
 				throw new NotSupportedException ("ItemAtDeepIndex: deepIndex=null || deepIndex.Length=0");
 			if (deepIndex.Length == 1) {
 				return _items[deepIndex [0]];
 			}
-			var subGroup = _items[deepIndex [0]] as Group;
+			var subGroup = _items[deepIndex [0]] as GroupWrapper;
 			if (subGroup == null)
 				throw new NotSupportedException ("ItemAtDeepIndex: deepIndex.Length > 1 but item at index is not Group");
 			var subGroupDeepIndex = new int[deepIndex.Length - 1];
@@ -695,11 +703,11 @@ namespace Forms9Patch
 			return subGroup.ItemAtDeepIndex (subGroupDeepIndex);
 		}
 
-		public Item ItemAtIndexPath(Tuple<int, int> indexPath)
+		public ItemWrapper ItemAtIndexPath(Tuple<int, int> indexPath)
 		{
 			if (indexPath == null)
 				return null;
-			var subGroup = _items[indexPath.Item1] as Group;
+			var subGroup = _items[indexPath.Item1] as GroupWrapper;
 			if (subGroup == null)
 			{
 				if (indexPath.Item1 > 0)
@@ -710,7 +718,7 @@ namespace Forms9Patch
 		}
 
 
-		public void DeepSwapItems(Item item1, Item item2) {
+		public void DeepSwapItems(ItemWrapper item1, ItemWrapper item2) {
 			var deepIndex1 = DeepIndexOf (item1);
 			var deepIndex2 = DeepIndexOf (item2);
 			if (deepIndex1 == deepIndex2)
@@ -719,7 +727,7 @@ namespace Forms9Patch
 			DeepSet (deepIndex2, item1);
 		}
 
-		public void DeepSet(int[] deepIndex, Item item) {
+		public void DeepSet(int[] deepIndex, ItemWrapper item) {
 			if (deepIndex == null || deepIndex.Length == 0)
 				return;
 			int index = deepIndex [0];
@@ -729,7 +737,7 @@ namespace Forms9Patch
 				//items [index] = item;
 				this[index] = item;
 			} else {
-				var subGroup = _items[index] as Group;
+				var subGroup = _items[index] as GroupWrapper;
 				if (subGroup == null)
 					throw new NotSupportedException ("DeepSet: deepIndex.Length > 1 but item at index is not Group");
 				// create a new index (subGroupDeepIndex) that contains everything except the [0] index of deepIndex.
@@ -750,7 +758,7 @@ namespace Forms9Patch
 			}
 			foreach (var item in this)
 			{
-				var group = item as Group;
+				var group = item as GroupWrapper;
 				group?.DeepRemoveItemsWithSource(source);
 			}
 		}
@@ -769,7 +777,7 @@ namespace Forms9Patch
 				pos++;
 				if (topItem.Source == item)
 					return pos;
-				var gr = topItem as Group;
+				var gr = topItem as GroupWrapper;
 				if (gr != null)
 				{
 					foreach (var subItem in gr)
@@ -795,7 +803,7 @@ namespace Forms9Patch
 				pos++;
 				if (topItem.Source == item)
 					return pos - 1;
-				var gr = topItem as Group;
+				var gr = topItem as GroupWrapper;
 				if (gr != null)
 				{
 					foreach (var subItem in gr)
@@ -813,7 +821,7 @@ namespace Forms9Patch
 
 
 		#region Properties
-		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(Group), null);
+		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), null);
 		public List<string> SourceSubPropertyMap
 		{
 			get { return (List<string>)GetValue(SourceSubPropertyMapProperty); }
@@ -824,7 +832,7 @@ namespace Forms9Patch
 
 
 		#region Fields
-		readonly ObservableCollection<Item> _items = new ObservableCollection<Item> ();
+		readonly ObservableCollection<ItemWrapper> _items = new ObservableCollection<ItemWrapper> ();
 
 		List<string> _subPropertyMap;
 
@@ -835,14 +843,14 @@ namespace Forms9Patch
 
 
 		#region Constructors
-		public Group(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
+		public GroupWrapper(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
 			VisibilityTest = visibleItemTest;
 			ContentType = GroupContentType.Unknown;
 			SourceSubPropertyMap = sourcePropertyMap;
 			Source = source;
 		}
 
-		public Group()  {
+		public GroupWrapper()  {
 			NotifySourceOfChanges = true;
 			_items.CollectionChanged += OnCollectionChanged; 
 		}
@@ -1038,7 +1046,7 @@ namespace Forms9Patch
 
 
 		#region Source finding
-		public Item ItemWithSource(object source)
+		public ItemWrapper WrapperForSource(object source)
 		{
 			if (Source == source)
 				return this;
@@ -1046,15 +1054,15 @@ namespace Forms9Patch
 			{
 				if (item.Source == source)
 					return item;
-				var group = item as Group;
-				var subItem = group?.ItemWithSource(source);
+				var group = item as GroupWrapper;
+				var subItem = group?.WrapperForSource(source);
 				if (subItem != null)
 					return subItem;
 			}
 			return null;
 		}
 
-		public Group GroupForItem(Item item)
+		public GroupWrapper GroupWrapperForItemWrapper(ItemWrapper item)
 		{
 			if (item == null)
 				return null;
@@ -1062,24 +1070,24 @@ namespace Forms9Patch
 				return this;
 		    foreach (var member in _items)
 			{
-				var group = member as Group;
-				var result = group?.GroupForItem(item);
+				var group = member as GroupWrapper;
+				var result = group?.GroupWrapperForItemWrapper(item);
 				if (result != null)
 					return result;
 			}
 			return null;
 		}
 
-		public Tuple<Group, Item> GroupAndItemForSource(object source)
+		public Tuple<GroupWrapper, ItemWrapper> GroupAndItemWrappersForSource(object source)
 		{
 			if (Source == source)
-				return new Tuple<Group,Item>(null,this);
+				return new Tuple<GroupWrapper,ItemWrapper>(null,this);
 			foreach (var item in _items)
 			{
 				if (item.Source == source)
-					return new Tuple<Group, Item>(this, item);
-				var group = item as Group;
-				var subItem = group?.GroupAndItemForSource(source);
+					return new Tuple<GroupWrapper, ItemWrapper>(this, item);
+				var group = item as GroupWrapper;
+				var subItem = group?.GroupAndItemWrappersForSource(source);
 				if (subItem != null)
 					return subItem;
 			}

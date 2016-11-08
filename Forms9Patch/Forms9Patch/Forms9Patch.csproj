@@ -97,11 +97,11 @@
     <Compile Include="Elements\ListView\Interfaces\IHoverOver.cs" />
     <Compile Include="Elements\ListView\Interfaces\IIsSelectedAble.cs" />
     <Compile Include="Elements\ListView\Interfaces\IListItemLocation.cs" />
-    <Compile Include="Elements\ListView\Items\BlankItem.cs" />
-    <Compile Include="Elements\ListView\Items\Group.cs" />
-    <Compile Include="Elements\ListView\Items\Item.cs" />
-    <Compile Include="Elements\ListView\Items\Item&lt;TItem&gt;.cs" />
-    <Compile Include="Elements\ListView\Items\NullItem.cs" />
+    <Compile Include="Elements\ListView\Items\BlankItemWrapper.cs" />
+    <Compile Include="Elements\ListView\Items\GroupWrapper.cs" />
+    <Compile Include="Elements\ListView\Items\ItemWrapper.cs" />
+    <Compile Include="Elements\ListView\Items\ItemWrapper&lt;TItem&gt;.cs" />
+    <Compile Include="Elements\ListView\Items\NullItemWrapper.cs" />
     <Compile Include="Elements\ListView\ListView.cs" />
     <Compile Include="Elements\ListView\ListViewExtensions.cs" />
     <Compile Include="Elements\Pickers\BasePicker.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Elements\Pickers\MultiPicker.cs" />
     <Compile Include="Elements\ListView\Enums\AccessoryPosition.cs" />
     <Compile Include="Elements\Pickers\SelectBy.cs" />
-    <Compile Include="Elements\ListView\Interfaces\IItem.cs" />
+    <Compile Include="Elements\ListView\Interfaces\IItemWrapper.cs" />
     <Compile Include="Elements\Popups\ModalPopup.cs" />
     <Compile Include="Elements\Popups\PopupBase.cs" />
     <Compile Include="Elements\Popups\BubblePopup.cs" />
@@ -126,6 +126,8 @@
     <Compile Include="Elements\ListView\Interfaces\ICellContentView.cs" />
     <Compile Include="Elements\ListView\Interfaces\IListViewExtensionService.cs" />
     <Compile Include="Elements\ListView\SwipeAction.cs" />
+    <Compile Include="Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs" />
+    <Compile Include="Elements\ListView\Items\ItemWrapperLongPressEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

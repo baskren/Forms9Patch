@@ -338,9 +338,9 @@ namespace Forms9Patch.Droid
 			return null;
 			*/
 
-			Group group = ((ListView)Element).BaseItemsSource;
+			GroupWrapper group = ((ListView)Element).BaseItemsSource;
 			if (group != null) {
-				var item = obj as Item;
+				var item = obj as ItemWrapper;
 				var sourceDeepIndex = group.DeepSourceIndexOf (item);
 				if (((ListView)Element).IsGroupingEnabled && sourceDeepIndex.Length>1)
 				return new Forms9Patch.DragEventArgs { DeepIndex = sourceDeepIndex, Item = item };

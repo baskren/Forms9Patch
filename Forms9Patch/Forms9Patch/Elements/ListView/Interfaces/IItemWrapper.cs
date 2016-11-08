@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Interface used to queary current state of Forms9Patch.ListView cells and the ItemSource object bound to the cells view.
 	/// </summary>
-	public interface IItem
+	public interface IItemWrapper
 	{
 		/// <summary>
 		/// Gets a value indicating whether this cell's separator is visible.

@@ -23,7 +23,7 @@ namespace Forms9Patch
 			}
 		}
 
-		internal Item Item;
+		internal ItemWrapper Item;
 
 		/// <summary>
 		/// The alignment.

@@ -2,17 +2,17 @@
 
 namespace Forms9Patch
 {
-	class NullItem : Item
+	class NullItemWrapper : ItemWrapper
 	{
 		#region Properties
-		public static readonly BindableProperty RequestedHeightProperty = BindableProperty.Create("RequestedHeight", typeof(double), typeof(NullItem), 0.0);
+		public static readonly BindableProperty RequestedHeightProperty = BindableProperty.Create("RequestedHeight", typeof(double), typeof(NullItemWrapper), 0.0);
 		public double RequestedHeight {
 			get { return (double)GetValue (RequestedHeightProperty); }
 			set { SetValue (RequestedHeightProperty, value); }
 		}
 		#endregion
 
-		public NullItem()
+		public NullItemWrapper()
 		{
 			RemoveBinding(CellBackgroundColorProperty);
 		}

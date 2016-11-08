@@ -568,6 +568,7 @@ namespace Forms9Patch
 					});
 				}
 				SendTapped();
+				e.Handled = true;
 			}
 		}
 

@@ -44,7 +44,7 @@ namespace Forms9Patch
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 			_basePicker.StartAccessory = new CellAccessory();
 			_basePicker.StartAccessory.HorizontalAlignment = TextAlignment.End;
-			_basePicker.StartAccessory.TextFunction = (IItem arg) => arg.IsSelected ? "✓" : "";
+			_basePicker.StartAccessory.TextFunction = (IItemWrapper arg) => arg.IsSelected ? "✓" : "";
 
 			SelectedItems = _basePicker.SelectedItems;
 

@@ -132,7 +132,7 @@ namespace Forms9Patch.Droid
 			else
 			{
 				newSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
-				image.Fill = Forms9Patch.Fill.AspectFit;
+				//image.Fill = Forms9Patch.Fill.AspectFit;
 				_fail = true;
 			}
 			

@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// FormsDragNDropListView Item.
 	/// </summary>
-	abstract class Item : BindableObject, IItem {
+	abstract class ItemWrapper : BindableObject, IItemWrapper {
 
 
 		#region Fields
@@ -18,7 +18,7 @@ namespace Forms9Patch
 		#region Properties
 
 		#region Separator
-		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(Item), true);
+		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(ItemWrapper), true);
 		public bool SeparatorIsVisible {
 			get { 
 				return (bool)GetValue(SeparatorIsVisibleProperty); 
@@ -29,7 +29,7 @@ namespace Forms9Patch
 			}
 		}		
 
-		public static readonly BindableProperty SeparatorColorProperty  = BindableProperty.Create("SeparatorColor",  typeof(Color), typeof(Item), Color.FromRgba(0,0,0,0.12));
+		public static readonly BindableProperty SeparatorColorProperty  = BindableProperty.Create("SeparatorColor",  typeof(Color), typeof(ItemWrapper), Color.FromRgba(0,0,0,0.12));
 		public Color SeparatorColor {
 			get { return (Color)GetValue(SeparatorColorProperty); }
 			internal set { 
@@ -41,7 +41,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator height property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(Item), 1.0);
+		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(ItemWrapper), 1.0);
 		/// <summary>
 		/// Gets or sets the height of the separator.
 		/// </summary>
@@ -58,7 +58,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator left indent property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create("SeparatorLeftIndent", typeof(double), typeof(Item), 20.0);
+		public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create("SeparatorLeftIndent", typeof(double), typeof(ItemWrapper), 20.0);
 		/// <summary>
 		/// Gets or sets the separator left indent.
 		/// </summary>
@@ -75,7 +75,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator right indent property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create("SeparatorRightIndent", typeof(double), typeof(Item), 0.0);
+		public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create("SeparatorRightIndent", typeof(double), typeof(ItemWrapper), 0.0);
 		/// <summary>
 		/// Gets or sets the separator right indent.
 		/// </summary>
@@ -91,7 +91,7 @@ namespace Forms9Patch
 		#endregion
 
 		#region Background
-		public static readonly BindableProperty CellBackgroundColorProperty  = BindableProperty.Create("CellBackgroundColor",  typeof(Color), typeof(Item), Color.Transparent);
+		public static readonly BindableProperty CellBackgroundColorProperty  = BindableProperty.Create("CellBackgroundColor",  typeof(Color), typeof(ItemWrapper), Color.Transparent);
 		public Color CellBackgroundColor {
 			get { return (Color)GetValue(CellBackgroundColorProperty); }
 			internal set { 
@@ -100,7 +100,7 @@ namespace Forms9Patch
 			}
 		}	
 
-		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(Item), Color.Gray);
+		public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Gray);
 		public Color SelectedCellBackgroundColor
 		{
 			get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
@@ -112,14 +112,14 @@ namespace Forms9Patch
 		#endregion
 
 		#region Accessory
-		public static readonly BindableProperty StartAccessoryProperty = BindableProperty.Create("StartAccessory", typeof(CellAccessory), typeof(Item), null);
+		public static readonly BindableProperty StartAccessoryProperty = BindableProperty.Create("StartAccessory", typeof(CellAccessory), typeof(ItemWrapper), null);
 		public CellAccessory StartAccessory
 		{
 			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
 			set { SetValue(StartAccessoryProperty, value); }
 		}
 
-		public static readonly BindableProperty EndAccessoryProperty = BindableProperty.Create("EndAccessory", typeof(CellAccessory), typeof(Item), null);
+		public static readonly BindableProperty EndAccessoryProperty = BindableProperty.Create("EndAccessory", typeof(CellAccessory), typeof(ItemWrapper), null);
 		public CellAccessory EndAccessory
 		{
 			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
@@ -128,28 +128,28 @@ namespace Forms9Patch
 		#endregion
 
 
-		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(Item), false);
+		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ItemWrapper), false);
 		public bool IsSelected
 		{
 			get { return (bool)GetValue(IsSelectedProperty); }
-			set
+			internal set
 			{
 				SetValue(IsSelectedProperty, value);
 			}
 		}
 
-		public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(Item), null);
+		public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(ItemWrapper), null);
 		public object Source
 		{
 			get { return GetValue(SourceProperty); }
-			set { SetValue(SourceProperty, value); }
+			internal set { SetValue(SourceProperty, value); }
 		}
 
-		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(Item), -1);
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(ItemWrapper), -1);
 		public int Index
 		{
 			get { return (int)GetValue(IndexProperty); }
-			set { SetValue(IndexProperty, value); }
+			internal set { SetValue(IndexProperty, value); }
 		}
 
 		public View CellView
@@ -164,6 +164,15 @@ namespace Forms9Patch
 			set { SetValue(RowHeightProperty, value); }
 		}
 
+		public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
+		public GroupWrapper Parent
+		{
+			get { return (GroupWrapper)GetValue(ParentProperty); }
+			set { SetValue(ParentProperty, value); }
+		}
+
+
+
 		/*
 		public static readonly BindableProperty HasUnevenRowsProperty = Xamarin.Forms.ListView.HasUnevenRowsProperty;
 		public bool HasUnevenRows
@@ -175,10 +184,37 @@ namespace Forms9Patch
 		#endregion
 
 
+		#region Touch Events
+		// used by BaseCellView to communicate touch events to ListView via Group.
+		public event EventHandler<ItemWrapperTapEventArgs> Tapped;
+		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressing;
+		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressed;
+
+		internal void OnTapped(object sender, ItemWrapperTapEventArgs e)
+		{
+			//if (Parent!=null)
+			Tapped?.Invoke(sender, e);
+		}
+
+		internal void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e)
+		{
+			//if (Parent != null)
+				LongPressing?.Invoke(sender, e);
+		}
+
+		internal void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e)
+		{
+			//if (Parent != null)
+				LongPressed?.Invoke(sender, e);
+		}
+
+		#endregion
+
+
 		#region Constructors
 		static int instantiations;
 
-		protected Item() {
+		protected ItemWrapper() {
 			ID = instantiations++;
 
 			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
@@ -201,7 +237,7 @@ namespace Forms9Patch
 
 
 		#region Convenience
-		internal void ShallowCopy(Item other)
+		internal void ShallowCopy(ItemWrapper other)
 		{
 			SeparatorIsVisible = other.SeparatorIsVisible;
 			SeparatorColor = other.SeparatorColor;
@@ -249,5 +285,8 @@ namespace Forms9Patch
 
 		#endregion
 	}
+
+
 }
+
 

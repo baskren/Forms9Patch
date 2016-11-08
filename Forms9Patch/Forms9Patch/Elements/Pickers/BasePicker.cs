@@ -129,7 +129,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The start accessory property.
 		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = Item.StartAccessoryProperty;
+		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the start accessory.
 		/// </summary>
@@ -143,7 +143,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The end accessory property.
 		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = Item.EndAccessoryProperty;
+		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the end accessory.
 		/// </summary>
@@ -359,7 +359,7 @@ namespace Forms9Patch
 					if (SelectBy == SelectBy.Position)
 					{
 						Index = index;
-						var selectedF9PItem = _listView.BaseItemsSource[index] as Item;
+						var selectedF9PItem = _listView.BaseItemsSource[index] as ItemWrapper;
 						if (selectedF9PItem != null)
 							SelectedItem = selectedF9PItem.Source;
 					}
@@ -411,7 +411,7 @@ namespace Forms9Patch
 								Index = 0;
 							if (SelectBy==SelectBy.Position)
 							{
-								var selectedF9PItem = _listView.BaseItemsSource[Index] as Item;
+								var selectedF9PItem = _listView.BaseItemsSource[Index] as ItemWrapper;
 								if (selectedF9PItem != null)
 									SelectedItem = selectedF9PItem.Source;
 							}

@@ -13,14 +13,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The text function property.
 		/// </summary>
-		public static readonly BindableProperty TextFunctionProperty = BindableProperty.Create("TextFunction", typeof(Func<Item, string>), typeof(CellAccessory), null);
+		public static readonly BindableProperty TextFunctionProperty = BindableProperty.Create("TextFunction", typeof(Func<ItemWrapper, string>), typeof(CellAccessory), null);
 		/// <summary>
 		/// Gets or sets the text function.
 		/// </summary>
 		/// <value>The text function.</value>
-		public Func<IItem, string> TextFunction
+		public Func<IItemWrapper, string> TextFunction
 		{
-			get { return (Func<IItem, string>)GetValue(TextFunctionProperty); }
+			get { return (Func<IItemWrapper, string>)GetValue(TextFunctionProperty); }
 			set { SetValue(TextFunctionProperty, value); }
 		}
 
@@ -89,7 +89,7 @@ namespace Forms9Patch
 		/// Gets the Forms9Patch.IItem.
 		/// </summary>
 		/// <value>The item.</value>
-		public IItem Item { get; private set; }
+		public IItemWrapper Item { get; private set; }
 		/// <summary>
 		/// Gets the current accessory text.
 		/// </summary>
@@ -101,7 +101,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="item">Item.</param>
 		/// <param name="text">Text.</param>
-		public CellAccessoryEventArgs(IItem item, string text)
+		public CellAccessoryEventArgs(IItemWrapper item, string text)
 		{
 			Item = item;
 			Text = text;

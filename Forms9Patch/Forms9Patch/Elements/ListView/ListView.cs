@@ -101,7 +101,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator visibility property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorIsVisibleProperty = Item.SeparatorIsVisibleProperty;
+		public static readonly BindableProperty SeparatorIsVisibleProperty = ItemWrapper.SeparatorIsVisibleProperty;
 		/// <summary>
 		/// Gets or sets the separator visibility.
 		/// </summary>
@@ -114,7 +114,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator color property.
 		/// </summary>
-		public static new readonly BindableProperty SeparatorColorProperty = Item.SeparatorColorProperty;
+		public static new readonly BindableProperty SeparatorColorProperty = ItemWrapper.SeparatorColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the separator.
 		/// </summary>
@@ -133,7 +133,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The cell background color property.
 		/// </summary>
-		public static readonly BindableProperty CellBackgroundColorProperty = Item.CellBackgroundColorProperty;
+		public static readonly BindableProperty CellBackgroundColorProperty = ItemWrapper.CellBackgroundColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the cell background.
 		/// </summary>
@@ -146,7 +146,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The selected cell background color property.
 		/// </summary>
-		public static readonly BindableProperty SelectedCellBackgroundColorProperty = Item.SelectedCellBackgroundColorProperty;
+		public static readonly BindableProperty SelectedCellBackgroundColorProperty = ItemWrapper.SelectedCellBackgroundColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the selected cell background.
 		/// </summary>
@@ -163,7 +163,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The start accessory property.
 		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = Item.StartAccessoryProperty;
+		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the start accessory.
 		/// </summary>
@@ -177,7 +177,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The end accessory property.
 		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = Item.EndAccessoryProperty;
+		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the end accessory.
 		/// </summary>
@@ -249,12 +249,12 @@ namespace Forms9Patch
 			set { SetValue(EditableProperty, value); }
 		}
 
-		Group _baseItemsSource;
+		GroupWrapper _baseItemsSource;
 		/// <summary>
 		/// Group backing store for the ItemsSource 
 		/// </summary>
 		/// <value>The base items source.</value>
-		internal Group BaseItemsSource { get { return _baseItemsSource; } }
+		internal GroupWrapper BaseItemsSource { get { return _baseItemsSource; } }
 
 		/// <summary>
 		/// The cell visibility test property.
@@ -289,23 +289,27 @@ namespace Forms9Patch
 
 		public void TapItem(object item)
 		{
-			var f9pGroupAndItem = BaseItemsSource.GroupAndItemForSource(item);
-			var args = new Xamarin.Forms.ItemTappedEventArgs(f9pGroupAndItem.Item1, f9pGroupAndItem.Item2);
+			var itemWrapper = BaseItemsSource.WrapperForSource(item);
+			var args = new ItemWrapperTapEventArgs(itemWrapper);
 			OnItemTapped(this,args);
 		}
 
-		Item _selectedF9PItem;
-		List<Item> _selectedF9PItems = new List<Item>();
+		ItemWrapper _selectedF9PItem;
+		List<ItemWrapper> _selectedF9PItems = new List<ItemWrapper>();
 		bool _processingItemTapped;
-		void OnItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		//void OnItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		void OnItemTapped(object sender, Forms9Patch.ItemWrapperTapEventArgs e)
 		{
+			System.Diagnostics.Debug.WriteLine("ITEM TAPPED");
 			if (!_processingItemTapped)
 			{
 				_processingItemTapped = true;
 				base.SelectedItem = null;
 
-				var tappedItem = e.Item as Item;
-				var group = e.Group as Group ?? _baseItemsSource;
+				//var tappedItem = e.Item as ItemWrapper;
+				var tappedItem = e.ItemWrapper;
+				//var group = e.Group as GroupWrapper ?? _baseItemsSource;
+				var group = tappedItem.Parent ?? _baseItemsSource;
 
 				if (tappedItem?.Source != null)
 				{
@@ -370,7 +374,7 @@ namespace Forms9Patch
 		void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
 			//System.Diagnostics.Debug.WriteLine("OnItemAppearing");
-			var item = ((Item)e?.Item);
+			var item = ((ItemWrapper)e?.Item);
 			var source = item?.Source;
 			if (source != null)
 				ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(source));
@@ -379,12 +383,14 @@ namespace Forms9Patch
 		void OnItemDisappearing(object sender, ItemVisibilityEventArgs e)
 		{
 			//System.Diagnostics.Debug.WriteLine("OnItemDisappearing");
-			var source = ((Item)e?.Item)?.Source;
+			var source = ((ItemWrapper)e?.Item)?.Source;
 			if (source != null)
 				ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(source));
 			if (source == SelectedItem)
 				base.SelectedItem = null;
 		}
+
+
 		#endregion
 
 		#endregion
@@ -414,12 +420,12 @@ namespace Forms9Patch
 
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
-			base.ItemTapped += OnItemTapped;
+			//base.ItemTapped += OnItemTapped;
 
 			IsEnabled = true;
 			_listener = new Listener (this);
-			_listener.LongPressed += OnLongPressed;
-			_listener.LongPressing += OnLongPressing;
+			//_listener.LongPressed += OnLongPressed;
+			//_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
 
 
@@ -467,7 +473,7 @@ namespace Forms9Patch
 
 		bool _internalAddRemove = false;
 
-		void AddSelection(Item f9pItem, object sourceItem)
+		void AddSelection(ItemWrapper f9pItem, object sourceItem)
 		{
 			_internalAddRemove = true;
 			if (f9pItem == null || sourceItem == null)
@@ -483,7 +489,7 @@ namespace Forms9Patch
 			_internalAddRemove = false;
 		}
 
-		void AddSelectedItem(Item f9pItem)
+		void AddSelectedItem(ItemWrapper f9pItem)
 		{
 			if (f9pItem == null)
 				return;
@@ -495,11 +501,11 @@ namespace Forms9Patch
 		{
 			if (sourceItem == null)
 				return;
-			var f9pItem = _baseItemsSource.ItemWithSource(sourceItem);
+			var f9pItem = _baseItemsSource.WrapperForSource(sourceItem);
 			AddSelection(f9pItem, sourceItem);
 		}
 
-		void RemoveSelection(Item f9pItem, object sourceItem)
+		void RemoveSelection(ItemWrapper f9pItem, object sourceItem)
 		{
 			_internalAddRemove = true;
 			if (f9pItem != null)
@@ -518,7 +524,7 @@ namespace Forms9Patch
 			_internalAddRemove = false;
 		}
 
-		void RemoveSelectedItem(Item f9pItem)
+		void RemoveSelectedItem(ItemWrapper f9pItem)
 		{
 			if (f9pItem == null)
 				return;
@@ -530,7 +536,7 @@ namespace Forms9Patch
 		{
 			if (sourceItem == null)
 				return;
-			var f9pItem = _baseItemsSource.ItemWithSource(sourceItem);
+			var f9pItem = _baseItemsSource.WrapperForSource(sourceItem);
 			RemoveSelection(f9pItem, sourceItem);
 		}
 
@@ -587,7 +593,7 @@ namespace Forms9Patch
 				for (int i = SelectedItems.Count - 1; i >= 0; i--)
 				{
 					var sourceItem = SelectedItems[i];
-					var item = _baseItemsSource.ItemWithSource(sourceItem);
+					var item = _baseItemsSource.WrapperForSource(sourceItem);
 					if (item == null)
 						RemoveSelectedSourceItem(sourceItem);
 					else
@@ -596,7 +602,7 @@ namespace Forms9Patch
 			}
 			else if (GroupToggleBehavior == GroupToggleBehavior.Radio)
 			{
-				var item = _baseItemsSource.ItemWithSource(SelectedItem);
+				var item = _baseItemsSource.WrapperForSource(SelectedItem);
 				if (item == null)
 					RemoveSelectedSourceItem(SelectedItem);
 				else
@@ -676,9 +682,16 @@ namespace Forms9Patch
 		{
 			if (ItemsSource == null)
 				return;
+			if (_baseItemsSource != null)
+			{
+				_baseItemsSource.Tapped -= OnItemTapped;
+			}
 			//System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
 			//_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
-			_baseItemsSource = new Group();
+			_baseItemsSource = new GroupWrapper();
+			_baseItemsSource.Tapped += OnItemTapped;
+			_baseItemsSource.LongPressed += OnLongPressed;
+			_baseItemsSource.LongPressing += OnLongPressing;
 			_baseItemsSource.BindingContext = this;
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.Source = ItemsSource;
@@ -686,7 +699,7 @@ namespace Forms9Patch
 			//_baseItemsSource.HasUnevenRows = HasUnevenRows;
 			_baseItemsSource.RowHeight = RowHeight;
 			base.ItemsSource = _baseItemsSource;
-			IsGroupingEnabled = _baseItemsSource.ContentType == Group.GroupContentType.Lists;
+			IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
 			ReevaluateSelectedItems();
 		}
 		#endregion
@@ -766,10 +779,10 @@ namespace Forms9Patch
 		/// <param name="animated">If set to <c>true</c> animated.</param>
 		public new void ScrollTo(object item, object group, ScrollToPosition position, bool animated)
 		{
-			var itemGroup = _baseItemsSource.ItemWithSource(group) as Group;
+			var itemGroup = _baseItemsSource.WrapperForSource(group) as GroupWrapper;
 			if (itemGroup != null)
 			{
-				var itemItem = itemGroup.ItemWithSource(item);
+				var itemItem = itemGroup.WrapperForSource(item);
 				Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
 					if (Device.OS == TargetPlatform.Android)
 					{
@@ -798,7 +811,7 @@ namespace Forms9Patch
 		/// <param name="animated">If set to <c>true</c> animated.</param>
 		public new void ScrollTo(object item, ScrollToPosition position, bool animated)
 		{
-			var itemItem = _baseItemsSource.ItemWithSource(item);
+			var itemItem = _baseItemsSource.WrapperForSource(item);
 			if (itemItem != null)
 				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
 				Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
@@ -832,13 +845,17 @@ namespace Forms9Patch
 		public Func<ListView, object, int[],bool> CanDrop;
 
 		DragEventArgs _longPress;
+		// TODO:  MAJOR TODO !!! NEED TO REFACTOR _longPress TO WORK WITH BETTER INFORMATION PROVIDED BY ItemWrapperLongPressEventArgs
 
-		readonly NullItem _nullItem = new NullItem ();
-		readonly BlankItem _blankItem = new BlankItem();
+		readonly NullItemWrapper _nullItem = new NullItemWrapper ();
+		readonly BlankItemWrapper _blankItem = new BlankItemWrapper();
 
 		Rectangle _nativeFrame;
 
-		void OnLongPressing(object sender, LongPressEventArgs e) {
+		//void OnLongPressing(object sender, LongPressEventArgs e) {
+		void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("ListView.OnLongPressing");
 			if (!Editable)
 				return;
 			// will be called when the _listener (attached to this) detects a long press
@@ -887,6 +904,7 @@ namespace Forms9Patch
 
 
 		void OnPanning(object sender, PanEventArgs e) {
+			System.Diagnostics.Debug.WriteLine("ListView.OnPanning");
 			if (_longPress != null) {
 				//_longPressPan = true;
 				//System.Diagnostics.Debug.WriteLine("PAN ["+e.Listener.Element+"]");
@@ -924,8 +942,10 @@ namespace Forms9Patch
 		}
 
 
-		void OnLongPressed(object sender, LongPressEventArgs e) {
-			//System.Diagnostics.Debug.WriteLine ("LONGPRESSED ["+e.Listener.Element+"]");
+		//void OnLongPressed(object sender, LongPressEventArgs e) {
+		void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e) {
+			//System.Diagnostics.Debug.WriteLine ("ListView.LONGPRESSED ["+e.Listener.Element+"]");
+			System.Diagnostics.Debug.WriteLine("ListView.LONGPRESSED [" + e.ItemWrapper.Source + "]");
 
 			if (_longPress != null) {
 				ScrollSpeed(0);

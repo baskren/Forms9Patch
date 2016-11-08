@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	class Item<TItem> : Item {
+	class ItemWrapper<TItem> : ItemWrapper {
 
 		#region Properties
 		public new TItem Source {
@@ -18,7 +18,7 @@ namespace Forms9Patch
 
 
 		#region Convenience
-		internal void ShallowCopy(Item<TItem> other) {
+		internal void ShallowCopy(ItemWrapper<TItem> other) {
 			SeparatorColor = other.SeparatorColor;
 			SeparatorLeftIndent = other.SeparatorLeftIndent;
 			SeparatorRightIndent = other.SeparatorRightIndent;

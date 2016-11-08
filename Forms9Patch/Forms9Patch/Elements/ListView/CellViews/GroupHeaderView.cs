@@ -62,7 +62,7 @@ namespace Forms9Patch
 		/// </summary>
 		protected override void OnBindingContextChanged ()
 		{
-			var group = BindingContext as Group;
+			var group = BindingContext as GroupWrapper;
 			View.BindingContext = group?.Source;
 			base.OnBindingContextChanged ();
 		}

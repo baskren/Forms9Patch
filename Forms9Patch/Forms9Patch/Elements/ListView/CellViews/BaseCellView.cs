@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using System;
 
 namespace Forms9Patch
 {
@@ -26,7 +27,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator is visible property.
 		/// </summary>
-		internal static readonly BindableProperty SeparatorIsVisibleProperty = Item.SeparatorIsVisibleProperty;
+		internal static readonly BindableProperty SeparatorIsVisibleProperty = ItemWrapper.SeparatorIsVisibleProperty;
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.BaseCellView"/> separator is visible.
 		/// </summary>
@@ -41,7 +42,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator color property.
 		/// </summary>
-		internal static readonly BindableProperty SeparatorColorProperty = Item.SeparatorColorProperty;
+		internal static readonly BindableProperty SeparatorColorProperty = ItemWrapper.SeparatorColorProperty;
 		/// <summary>
 		/// Gets or sets the color of the separator.
 		/// </summary>
@@ -54,7 +55,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator height property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorHeightProperty = Item.SeparatorHeightProperty;
+		public static readonly BindableProperty SeparatorHeightProperty = ItemWrapper.SeparatorHeightProperty;
 		/// <summary>
 		/// Gets or sets the height of the separator.
 		/// </summary>
@@ -67,7 +68,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator left indent property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorLeftIndentProperty = Item.SeparatorLeftIndentProperty;
+		public static readonly BindableProperty SeparatorLeftIndentProperty = ItemWrapper.SeparatorLeftIndentProperty;
 		/// <summary>
 		/// Gets or sets the separator left indent.
 		/// </summary>
@@ -80,7 +81,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator right indent property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorRightIndentProperty = Item.SeparatorRightIndentProperty;
+		public static readonly BindableProperty SeparatorRightIndentProperty = ItemWrapper.SeparatorRightIndentProperty;
 		/// <summary>
 		/// Gets or sets the separator right indent.
 		/// </summary>
@@ -95,7 +96,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The start accessory property.
 		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = Item.StartAccessoryProperty;
+		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the start accessory.
 		/// </summary>
@@ -109,7 +110,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The end accessory property.
 		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = Item.EndAccessoryProperty;
+		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
 		/// <summary>
 		/// Gets or sets the end accessory.
 		/// </summary>
@@ -125,8 +126,10 @@ namespace Forms9Patch
 
 
 		#region Fields
-		static int _instances = 0;
+		static int _instances;
 		internal int ID;
+
+		#region Accessories
 		Label _startAccessory = new Label
 		{
 			HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -139,6 +142,43 @@ namespace Forms9Patch
 			VerticalOptions = LayoutOptions.CenterAndExpand,
 			TextColor = Color.Black
 		};
+		#endregion
+
+
+		#region Swipe Actions
+		static readonly Frame _insetFrame = new Frame
+		{
+			VerticalOptions = LayoutOptions.FillAndExpand,
+			WidthRequest = 90,
+			HasShadow = true,
+			ShadowInverted = true,
+			BackgroundColor = Color.Gray
+		};
+
+		static readonly Frame _action1Frame = new Frame
+		{
+			VerticalOptions = LayoutOptions.FillAndExpand,
+			WidthRequest = 1000,
+			Padding = new Thickness(1)
+		};
+		static readonly Frame _action2Frame = new Frame
+		{
+			VerticalOptions = LayoutOptions.FillAndExpand,
+			WidthRequest = 1000,
+			Padding = new Thickness(1)
+		};
+		static readonly Frame _action3Frame = new Frame
+		{
+			VerticalOptions = LayoutOptions.FillAndExpand,
+			WidthRequest = 1000,
+			Padding = new Thickness(1)
+		};
+
+		static readonly MaterialButton _action1Button = new MaterialButton { WidthRequest = 50, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+		static readonly MaterialButton _action2Button = new MaterialButton { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+		static readonly MaterialButton _action3Button = new MaterialButton { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+		#endregion
+
 		#endregion
 
 
@@ -180,8 +220,175 @@ namespace Forms9Patch
 				new RowDefinition { Height = GridLength.Auto }
 			};
 
+			var listener = new FormsGestures.Listener(this);
+			listener.Tapped += OnTapped;
+			listener.LongPressed += OnLongPressed;
+			listener.LongPressing += OnLongPressing;
+
+			listener.Panned += (sender, e) =>
+			{
+				if (endButtons > 0)
+				{
+					if (e.TotalDistance.X > 10)
+					{
+						// put it away
+						this.TranslateTo(0, 0, 300, Easing.Linear);
+						_action1Frame.TranslateTo(Width, 0, 600, Easing.Linear);
+						_action2Frame.TranslateTo(Width, 0, 450, Easing.Linear);
+					}
+					else if (TranslationX < -210 && ((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
+					{
+						this.TranslateTo(0, 0, 500, Easing.Linear);
+						_action1Frame.TranslateTo(0, 0, 300, Easing.Linear);
+					}
+					else if (TranslationX < -60)
+					{
+						this.TranslateTo(-180, 0, 300, Easing.Linear);
+						_action2Frame.TranslateTo(Width + 60, 0, 300, Easing.Linear);
+						_action1Frame.TranslateTo(Width + 120, 0, 300, Easing.Linear);
+						translateOnUp = -180;
+						return;
+					}
+					else
+					{
+						this.TranslateTo(0, 0, 300, Easing.Linear);
+						_action1Frame.TranslateTo(Width, 0, 600, Easing.Linear);
+						_action2Frame.TranslateTo(Width, 0, 450, Easing.Linear);
+					}
+					translateOnUp = 0;
+					endButtons = 0;
+				}
+			};
+
+			bool settingup = false;
+			listener.Panning += (sender, e) =>
+			{
+				double distance = e.TotalDistance.X + translateOnUp;
+				//System.Diagnostics.Debug.WriteLine("eb=["+endButtons+"] sb=["+startButtons+"] Distance=["+distance+"] translateOnUp=["+translateOnUp+"]");
+				if (settingup)
+					return;
+				if (endButtons > 0)
+				{
+					TranslationX = distance;
+					if (distance < -180)
+					{
+						if (((ICellContentView)Content).EndSwipeActions[0].SwipeExecutable)
+						{
+							if (Math.Abs(_action1Frame.TranslationX - Width) > 1)
+								_action1Frame.TranslateTo(Width, 0, 200, Easing.Linear);
+							else
+							_action1Frame.TranslationX = Width - 2.0 * distance / 3.0;
+						}
+						else
+							_action1Frame.TranslationX = Width + 120;
+						if (endButtons > 1)
+							_action2Frame.TranslationX = Width + 60;
+					}
+					else
+					{
+						var a1fx = Width - 2.0 * distance / 3.0;
+						if (Math.Abs(_action1Frame.TranslationX - Width) < 1)
+							_action1Frame.TranslateTo(a1fx, 0, 200, Easing.Linear);
+						else
+							_action1Frame.TranslationX = a1fx;
+						if (endButtons > 1)
+							_action2Frame.TranslationX = a1fx + distance / 3.0;
+					}
+				}
+				else if (startButtons > 0)
+				{
+				}
+				else if (distance < 0)
+				{
+					var rightActions = ((ICellContentView)Content)?.EndSwipeActions;
+					if (rightActions != null && rightActions.Count>0)
+					{
+						settingup = true;
+						// setup buttons
+						endButtons = 1;
+						_action1Button.HorizontalOptions = LayoutOptions.Start;
+						_action1Frame.BackgroundColor = rightActions[0].BackgroundColor;
+						_action1Button.HtmlText = rightActions[0].Text;
+						_action1Button.IconText = rightActions[0].IconText;
+						if (rightActions.Count > 1)
+						{
+							endButtons = 2;
+							_action2Button.HorizontalOptions = LayoutOptions.Start;
+							_action2Frame.BackgroundColor = rightActions[1].BackgroundColor;
+							_action2Button.HtmlText = rightActions[1].Text;
+							_action2Button.IconText = rightActions[1].IconText;
+							if (rightActions.Count > 2)
+							{
+								endButtons = 3;
+								_action3Button.HorizontalOptions = LayoutOptions.Start;
+								if (rightActions.Count > 3)
+								{
+									_action3Frame.BackgroundColor = Color.Gray;
+									_action3Button.HtmlText = "More";
+									_action3Button.IconText = "•••";
+								}
+								else
+								{
+									_action3Frame.BackgroundColor = rightActions[2].BackgroundColor;
+									_action3Button.HtmlText = rightActions[2].Text;
+									_action3Button.IconText = rightActions[2].IconText;
+								}
+								Children.Add(_action3Frame, 0, 0);
+								SetColumnSpan(_action3Frame, 3);
+								_action3Frame.Layout(new Rectangle(0, 0, 60, Height));
+								_action3Frame.TranslationX = Width; 
+							} 
+							Children.Add(_action2Frame, 0,0);
+							SetColumnSpan(_action2Frame, 3);
+							_action2Frame.Layout(new Rectangle(0, 0, 60, Height));
+							_action2Frame.TranslationX = Width - distance / 3.0;
+						}
+						Children.Add(_action1Frame, 0,0);
+						SetColumnSpan(_action1Frame, 3);
+						_action1Frame.Layout(new Rectangle(0, 0, 1000, Height));
+						_action1Frame.TranslationX = Width - 2*distance/3.0; 
+						settingup = false;
+					}
+				}
+			};
+			_action1Frame.Content = _action1Button;
+			_action2Frame.Content = _action2Button;
+			_action3Frame.Content = _action3Button;
+		
 		}
 		#endregion
+
+
+		#region ActionButton 
+		int endButtons;
+		int startButtons;
+		double translateOnUp = 0;
+		public bool SwipeActionsVisible { get { return endButtons > 0 || startButtons > 0; } }
+		#endregion
+
+
+		#region Gestures
+		void OnTapped(object sender, FormsGestures.TapEventArgs e)
+		{
+			//System.Diagnostics.Debug.WriteLine("Tap Intercepted");
+			if (endButtons==0 && startButtons ==0)
+				((ItemWrapper)BindingContext)?.OnTapped(this, new ItemWrapperTapEventArgs((ItemWrapper)BindingContext));
+		}
+
+		void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
+		{
+			if (endButtons == 0 && startButtons == 0)
+				((ItemWrapper)BindingContext)?.OnLongPressed(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
+		}
+
+		void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
+		{
+			if (endButtons == 0 && startButtons == 0)
+				((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
+		}
+		#endregion
+
+
 
 
 		#region change management
@@ -190,9 +397,10 @@ namespace Forms9Patch
 		/// Triggered by a change in the binding context
 		/// </summary>
 		protected override void OnBindingContextChanged () {
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnBindingContextChanged");
 			if (BindingContext == null)
 				return;
-			var item = BindingContext as Item;
+			var item = BindingContext as ItemWrapper;
 			if (item != null)
 			{
 				item.BaseCellView = this;
@@ -212,7 +420,7 @@ namespace Forms9Patch
 			else
 				System.Diagnostics.Debug.WriteLine("");
 			var type = BindingContext?.GetType ();
-			if (type == typeof(NullItem) || type == typeof(BlankItem))
+			if (type == typeof(NullItemWrapper) || type == typeof(BlankItemWrapper))
 				Content.BindingContext = item;
 			else
 			{
@@ -227,10 +435,11 @@ namespace Forms9Patch
 
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanging("+propertyName+")");
 			base.OnPropertyChanging(propertyName);
 			if (propertyName == BindingContextProperty.PropertyName)
 			{
-				var item = BindingContext as Item;
+				var item = BindingContext as ItemWrapper;
 				if (item != null)
 					item.PropertyChanged -= OnItemPropertyChanged;
 				_startAccessory.HtmlText = null;
@@ -244,6 +453,7 @@ namespace Forms9Patch
 
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
 			base.OnPropertyChanged(propertyName);
 
 			if (propertyName == StartAccessoryProperty.PropertyName)
@@ -272,13 +482,13 @@ namespace Forms9Patch
 			UpdateLayout();
 		}
 
-
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == Item.IsSelectedProperty.PropertyName 
-			    || e.PropertyName == Item.CellBackgroundColorProperty.PropertyName 
-			    || e.PropertyName == Item.SelectedCellBackgroundColorProperty.PropertyName
-			    || e.PropertyName == Item.IndexProperty.PropertyName
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnItemPropertyChanging(" + e.PropertyName + ")");
+			if (e.PropertyName == ItemWrapper.IsSelectedProperty.PropertyName 
+			    || e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName 
+			    || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName
+			    || e.PropertyName == ItemWrapper.IndexProperty.PropertyName
 			   )
 				UpdateUnBoundProperties();
 			
@@ -317,14 +527,15 @@ namespace Forms9Patch
 
 		bool _lastStartAccessoryActive;
 		bool _lastEndAccesoryActive;
-		bool _freshContent = false;
+		bool _freshContent;
 		void UpdateLayout()
 		{
-			string startAccessoryText = ((Item)BindingContext)?.StartAccessory?.TextFunction?.Invoke((Item)BindingContext);
-			if (startAccessoryText != _startAccessory.HtmlText)
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateLayout");
+			string startAccessoryText = ((ItemWrapper)BindingContext)?.StartAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
+			//if (startAccessoryText != _startAccessory.HtmlText)
 				_startAccessory.HtmlText = startAccessoryText;
-			string endAccessoryText = ((Item)BindingContext)?.EndAccessory?.TextFunction?.Invoke((Item)BindingContext);
-			if (endAccessoryText != _endAccessory.HtmlText)
+			string endAccessoryText = ((ItemWrapper)BindingContext)?.EndAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
+			//if (endAccessoryText != _endAccessory.HtmlText)
 				_endAccessory.HtmlText = endAccessoryText;
 
 			var startAccessoryActive = (_startAccessory.HtmlText != null);
@@ -374,7 +585,8 @@ namespace Forms9Patch
 
 		void UpdateUnBoundProperties()
 		{
-			var item = BindingContext as Item;
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateUnBoundProperties");
+			var item = BindingContext as ItemWrapper;
 			if (item != null)
 			{
 				BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
@@ -387,6 +599,12 @@ namespace Forms9Patch
 				SeparatorIsVisible = false;
 			}
 			//System.Diagnostics.Debug.WriteLine("[" + ID + "] SeparatorColor=[" + SeparatorColor + "] SeparatorVisibility=[" + SeparatorIsVisible + "]");
+		}
+
+		protected override void LayoutChildren(double x, double y, double width, double height)
+		{
+			//System.Diagnostics.Debug.WriteLine("BaseCellView.LayoutChildren");
+			base.LayoutChildren(x, y, width, height);
 		}
 		#endregion
 	}

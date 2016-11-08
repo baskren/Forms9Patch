@@ -37,21 +37,21 @@ namespace Forms9Patch
 			var viewType = typeof(NullItemCellView);
 			Type cellType = typeof(Cell<>).MakeGenericType (new[] { viewType });
 			var template = new DataTemplate (cellType);
-			var itemType = typeof(NullItem);
+			var itemType = typeof(NullItemWrapper);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
 
 			viewType = typeof(BlankCellView);
 			cellType = typeof(Cell<>).MakeGenericType (new[] { viewType });
 			template = new DataTemplate (cellType);
-			itemType = typeof(BlankItem);
+			itemType = typeof(BlankItemWrapper);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
 
 			viewType = typeof(TextCellViewContent);
 			cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
 			template = new DataTemplate(cellType);
-			itemType = typeof(Item<string>);
+			itemType = typeof(ItemWrapper<string>);
 			_cellTemplates[itemType] = template;
 			_contentTypes[itemType] = viewType;
 			_unknownTemplate = template;
@@ -88,7 +88,7 @@ namespace Forms9Patch
 			//var group = item as Group;
 			//Type itemType = group?.Source.GetType () ?? item.GetType ();
 			//Type itemType = ((item as Item)?.Source ?? item).GetType();
-			var item = obj as Item;
+			var item = obj as ItemWrapper;
 			if (item != null)
 			{
 				Type itemType = item.GetType();
@@ -97,7 +97,7 @@ namespace Forms9Patch
 				var source = item.Source;
 				if (source != null)
 					return TemplateForType(source.GetType());
-				return _cellTemplates[typeof(BlankItem)];
+				return _cellTemplates[typeof(BlankItemWrapper)];
 			}
 			throw new KeyNotFoundException("No data template found.  item=["+item+"]  item.source=["+(item?.Source)+"]");
 		}
@@ -109,13 +109,13 @@ namespace Forms9Patch
 			//if (baseType == null || baseType == typeof(System.Object))
 			//return _cellTemplates[typeof(NullItem)];
 			if (baseType == null)
-				return _cellTemplates[typeof(BlankItem)];
+				return _cellTemplates[typeof(BlankItemWrapper)];
 			else
 				return _unknownTemplate;
 			//return TemplateForType (baseType);
 		}
 
-		internal BaseCellView MakeContentView(Item item) {
+		internal BaseCellView MakeContentView(ItemWrapper item) {
 			Type itemType = item.GetType ();
 			if (_contentTypes.ContainsKey(itemType)) {
 				Type contentType = _contentTypes [itemType];
@@ -185,7 +185,7 @@ namespace Forms9Patch
 
 			void SetHeight()
 			{
-				var iItem = BindingContext as IItem;
+				var iItem = BindingContext as IItemWrapper;
 				if (iItem != null)
 				{
 					if (_iCellContent != null && _iCellContent.CellHeight >= 0)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using FormsGestures;
 namespace Forms9Patch
 {
 	/// <summary>
@@ -11,5 +13,9 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The height of the cell.</value>
 		double CellHeight { get; }
+
+		List<SwipeAction> StartSwipeActions { get; }
+
+		List<SwipeAction> EndSwipeActions { get; }
 	}
 }
