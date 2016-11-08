@@ -71,11 +71,11 @@ namespace TestProject
 			};
 
 			boxListener.Pinching += (sender, e) =>  {
-				System.Diagnostics.Debug.WriteLine("\tBOX PINCHING ["+e.Touches[0]+"]");
+				System.Diagnostics.Debug.WriteLine("\tBOX PINCHING ["+e.Touches[0]+"]["+e.DeltaScale+"]");
 				box.Scale *= e.DeltaScale;
 			};
 			boxListener.Rotating += (sender, e) => {
-				System.Diagnostics.Debug.WriteLine("\tBOX ROTATING ["+e.Touches[0]+"]");
+				System.Diagnostics.Debug.WriteLine("\tBOX ROTATING ["+e.Touches[0]+"]["+e.DeltaAngle+"]");
 				box.Rotation += e.DeltaAngle;
 			};
 
