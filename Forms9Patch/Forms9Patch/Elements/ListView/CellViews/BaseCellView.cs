@@ -252,6 +252,11 @@ namespace Forms9Patch
 
 
 		#region Swipe Menu
+		enum Side
+		{
+			Start = -1,
+			End = 1
+		} 
 		bool _settingup;
 		int _endButtons;
 		int _startButtons;
@@ -280,18 +285,19 @@ namespace Forms9Patch
 
 		void OnPanned(object sender, PanEventArgs e)
 		{
-			if (_endButtons > 0)
+			double distance = e.TotalDistance.X + _translateOnUp;
+			Side side = distance < 0 ? Side.End : Side.Start;
+			if (_endButtons + _startButtons > 0)
 			{
 				//System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
-				if (e.TotalDistance.X > 20 || ChildrenX > -60)
+				if ((side==Side.End && (e.TotalDistance.X > 20 || ChildrenX > -60)) || (side == Side.Start && (e.TotalDistance.X < -20 || ChildrenX < 60)) )
 				{
 					PutAwayActionButtons(true);
 					return;
 				}
-				if (_action1Frame.TranslationX < Width - 210 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated)
+				if ((side==Side.End && _action1Frame.TranslationX < Width - 210 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated) || (side == Side.Start && _action1Frame.TranslationX > 210 - Width  && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated) )
 				{
 					// execute full swipe
-					//TranslateChildrenTo(0, 0, 300, Easing.Linear);
 					_action1Frame.TranslateTo(0, 0, 250, Easing.Linear);
 					OnActionButtonTapped(_action1Button,EventArgs.Empty);
 					Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
@@ -303,14 +309,14 @@ namespace Forms9Patch
 				else
 				{
 					// display 3 buttons
-					TranslateChildrenTo(-(60*_endButtons), 0, 300, Easing.Linear);
-					_action1Frame.TranslateTo(Width - 60, 0, 300, Easing.Linear);
-					if (_endButtons > 1)
-						_action2Frame.TranslateTo(Width - 120, 0, 300, Easing.Linear);
-					if (_endButtons > 2)
-						_action3Frame.TranslateTo(Width - 180, 0, 300, Easing.Linear);
-					_insetFrame.TranslateTo(Width - (60*_endButtons), 0, 300, Easing.Linear);
-					_translateOnUp = -180;
+					TranslateChildrenTo(-(int)side*(60*(_endButtons+_startButtons)), 0, 300, Easing.Linear);
+					_action1Frame.TranslateTo((int)side*(Width - 60), 0, 300, Easing.Linear);
+					if (_endButtons + _startButtons > 1)
+						_action2Frame.TranslateTo((int)side * (Width -  120), 0, 300, Easing.Linear);
+					if (_endButtons + _startButtons> 2)
+						_action3Frame.TranslateTo((int)side * (Width -  180), 0, 300, Easing.Linear);
+					_insetFrame.TranslateTo((int)side * (Width -  (60*(_endButtons+_startButtons))), 0, 300, Easing.Linear);
+					_translateOnUp = (int)side*-180;
 					return;
 				}
 			}
@@ -319,45 +325,46 @@ namespace Forms9Patch
 		void OnPanning(object sender, PanEventArgs e)
 		{
 			double distance = e.TotalDistance.X + _translateOnUp;
+			Side side = distance < 0 ? Side.End : Side.Start;
 			//System.Diagnostics.Debug.WriteLine("eb=["+_endButtons+"] sb=["+startButtons+"] Distance=["+distance+"] translateOnUp=["+translateOnUp+"]");
 			if (_settingup)
 				return;
-			if (_endButtons > 0)
+			if (_endButtons + _startButtons > 0)
 			{
-				if (distance <= -60 * _endButtons)
+				if ((side==Side.End && distance <= -60 * _endButtons) || (side==Side.Start && distance >= 60 * _startButtons))
 				{
 					// we're beyond the limit of presentation of the buttons
-					ChildrenX = -180;
-					if (distance <= - 210 && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated)
-						_action1Frame.TranslateTo(0,0,200,Easing.Linear);
+					ChildrenX = (int)side*-180;
+					if (side==Side.End && distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated)
+						_action1Frame.TranslateTo(0, 0, 200, Easing.Linear);
+					else if (side == Side.Start && distance >= 210 && e.DeltaDistance.X >= 0 && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated)
+						_action1Frame.TranslateTo(0, 0, 200, Easing.Linear);					
 					else
-						_action1Frame.TranslateTo(Width-60,0,200,Easing.Linear);
-					if (_endButtons > 1)
-						_action2Frame.TranslationX = Width -120;
-					if (_endButtons > 2)
-						_action3Frame.TranslationX = Width -180;
-					_insetFrame.TranslationX = Width + distance;
+						_action1Frame.TranslateTo((int)side*(Width - (int)side * 60), 0, 200, Easing.Linear);
+					if (_endButtons + _startButtons> 1)
+						_action2Frame.TranslationX = (int)side*(Width - (int)side * 120);
+					if (_endButtons + _startButtons> 2)
+						_action3Frame.TranslationX = (int)side*(Width - (int)side * 180);
+					_insetFrame.TranslationX = (int)side* (Width + (int)side * distance);
 					return;
 				}
-				if (distance > 1)
+				if ((side==Side.End && distance > 1) || (side==Side.Start && distance < 1))
 				{
 					// we keep the endButtons going so as to not allow for the startButtons to appear
 					ChildrenX = 0;
 					return;
 				}
 				ChildrenX = distance;
-				_action1Frame.TranslationX = Width + distance / _endButtons;
-				_action2Frame.TranslationX = Width + 2 * distance / _endButtons;
-				_action3Frame.TranslationX = Width + distance;
-				_insetFrame.TranslationX = Width + distance;
+				_action1Frame.TranslationX = (int)side * (Width + (int)side * distance / (_endButtons+_startButtons));
+				_action2Frame.TranslationX = (int)side * (Width + (int)side * 2 * distance / (_endButtons+_startButtons));
+				_action3Frame.TranslationX = (int)side * (Width + (int)side * distance);
+				_insetFrame.TranslationX =   (int)side * (Width + (int)side * distance);
 			}
-			else if (_startButtons > 0)
+			else if (Math.Abs(distance) > 0.1)
 			{
-			}
-			else if (distance < 0)
-			{
-				var rightActions = ((ICellContentView)Content)?.EndSwipeMenu;
-				if (rightActions != null && rightActions.Count > 0)
+				// setup end SwipeMenu
+				var actions = side == Side.End ? ((ICellContentView)Content)?.EndSwipeMenu : ((ICellContentView)Content)?.StartSwipeMenu;
+				if (actions != null && actions.Count > 0)
 				{
 					_settingup = true;
 
@@ -367,29 +374,53 @@ namespace Forms9Patch
 
 					Children.Add(_insetFrame, 0, 0);
 					SetColumnSpan(_insetFrame, 3);
-					_insetFrame.TranslationX = Width;
+					_insetFrame.TranslationX = (int)side * Width;
 
 					// setup buttons
-					_endButtons = 1;
-					_translateOnUp = 0;
-					_action1Button.HorizontalOptions = LayoutOptions.Start;
-					_action1Frame.BackgroundColor = rightActions[0].BackgroundColor;
-					_action1Button.HtmlText = rightActions[0].Text;
-					_action1Button.IconText = rightActions[0].IconText;
-					_action1Button.FontColor = rightActions[0].TextColor;
-					if (rightActions.Count > 1)
+					if (side == Side.End)
 					{
-						_endButtons = 2;
-						_action2Button.HorizontalOptions = LayoutOptions.Start;
-						_action2Frame.BackgroundColor = rightActions[1].BackgroundColor;
-						_action2Button.HtmlText = rightActions[1].Text;
-						_action2Button.IconText = rightActions[1].IconText;
-						_action2Button.FontColor = rightActions[1].TextColor;
-						if (rightActions.Count > 2)
+						_endButtons = 1;
+						_action1Button.HorizontalOptions = LayoutOptions.Start;
+					}
+					else
+					{
+						_startButtons = 1;
+						_action1Button.HorizontalOptions = LayoutOptions.End;
+					}
+					_translateOnUp = 0;
+					_action1Frame.BackgroundColor = actions[0].BackgroundColor;
+					_action1Button.HtmlText = actions[0].Text;
+					_action1Button.IconText = actions[0].IconText;
+					_action1Button.FontColor = actions[0].TextColor;
+					if (actions.Count > 1)
+					{
+						if (side == Side.End)
 						{
-							_endButtons = 3;
-							_action3Button.HorizontalOptions = LayoutOptions.Start;
-							if (rightActions.Count > 3)
+							_endButtons = 2;
+							_action2Button.HorizontalOptions = LayoutOptions.Start;
+						}
+						else
+						{
+							_startButtons = 2;
+							_action2Button.HorizontalOptions = LayoutOptions.End;
+						}
+						_action2Frame.BackgroundColor = actions[1].BackgroundColor;
+						_action2Button.HtmlText = actions[1].Text;
+						_action2Button.IconText = actions[1].IconText;
+						_action2Button.FontColor = actions[1].TextColor;
+						if (actions.Count > 2)
+						{
+							if (side == Side.End)
+							{
+								_endButtons = 3;
+								_action3Button.HorizontalOptions = LayoutOptions.Start;
+							}
+							else
+							{
+								_startButtons = 3;
+								_action3Button.HorizontalOptions = LayoutOptions.End;
+							}
+							if (actions.Count > 3)
 							{
 								_action3Frame.BackgroundColor = Color.Gray;
 								_action3Button.HtmlText = "More";
@@ -398,22 +429,22 @@ namespace Forms9Patch
 							}
 							else
 							{
-								_action3Frame.BackgroundColor = rightActions[2].BackgroundColor;
-								_action3Button.HtmlText = rightActions[2].Text;
-								_action3Button.IconText = rightActions[2].IconText;
-								_action3Button.FontColor = rightActions[2].TextColor;
+								_action3Frame.BackgroundColor = actions[2].BackgroundColor;
+								_action3Button.HtmlText = actions[2].Text;
+								_action3Button.IconText = actions[2].IconText;
+								_action3Button.FontColor = actions[2].TextColor;
 							}
 							Children.Add(_action3Frame, 0, 0);
 							SetColumnSpan(_action3Frame, 3);
-							_action3Frame.TranslationX = Width;
+							_action3Frame.TranslationX = (int)side*Width;
 						}
 						Children.Add(_action2Frame, 0, 0);
 						SetColumnSpan(_action2Frame, 3);
-						_action2Frame.TranslationX = Width - distance / 3.0;
+						_action2Frame.TranslationX = (int)side*(Width - distance / 3.0);
 					}
 					Children.Add(_action1Frame, 0, 0);
 					SetColumnSpan(_action1Frame, 3);
-					_action1Frame.TranslationX = Width - 2 * distance / 3.0;
+					_action1Frame.TranslationX = (int)side*(Width - 2 * distance / 3.0);
 					_settingup = false;
 				}
 			}
@@ -540,19 +571,19 @@ namespace Forms9Patch
 		#region Cell Gestures
 		void OnTapped(object sender, TapEventArgs e)
 		{
-			if (_endButtons==0 && _startButtons ==0)
+			if (_endButtons + _startButtons ==0)
 				((ItemWrapper)BindingContext)?.OnTapped(this, new ItemWrapperTapEventArgs((ItemWrapper)BindingContext));
 		}
 
 		void OnLongPressed(object sender, LongPressEventArgs e)
 		{
-			if (_endButtons == 0 && _startButtons == 0)
+			if (_endButtons + _startButtons == 0)
 				((ItemWrapper)BindingContext)?.OnLongPressed(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
 		}
 
 		void OnLongPressing(object sender, LongPressEventArgs e)
 		{
-			if (_endButtons == 0 && _startButtons == 0)
+			if (_endButtons + _startButtons == 0)
 				((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
 		}
 		#endregion
