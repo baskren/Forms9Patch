@@ -14,7 +14,7 @@
 		{
 			CellContentView = cellContentView;
 			Item = itemWrapper.Source;
-			Group = itemWrapper.BindingContext;
+			Group = ((GroupWrapper)itemWrapper.BindingContext).Source;
 			SwipeMenuItem = swipeMenuItem;
 		}
 
