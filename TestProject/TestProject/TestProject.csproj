@@ -94,6 +94,10 @@
     <Compile Include="Pages\SegmentNavPage2.cs" />
     <Compile Include="Pages\SegmentNavPage3.cs" />
     <Compile Include="Pages\MaterialButtonsPage-IconText.cs" />
+    <Compile Include="Pages\Burkhart.xaml.cs">
+      <DependentUpon>Burkhart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModalPopupOnMasterDetailPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -188,6 +192,9 @@
     <EmbeddedResource Include="Resources\button_01_pressing.png" />
     <EmbeddedResource Include="Resources\button_01_default.png" />
     <EmbeddedResource Include="Resources\Fonts\Pacifico.ttf" />
+    <EmbeddedResource Include="Pages\Burkhart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

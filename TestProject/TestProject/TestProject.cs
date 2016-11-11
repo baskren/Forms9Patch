@@ -66,7 +66,8 @@ namespace TestProject
 		const bool debugProperties = true;
 		//static bool debugCollections = true;
 
-		NavigationPage navPage = new NavigationPage(new HomePage());
+		//NavigationPage navPage = new NavigationPage(new HomePage());
+		//NavigationPage navPage = new NavigationPage(new ModalPopupOnMasterDetailPage());
 		//NavigationPage navPage = new NavigationPage(new ImageButtonPage());
 
 
@@ -79,7 +80,7 @@ namespace TestProject
 		public App ()
 		{
 
-			navPage.Popped += OnPagePopped;
+			//navPage.Popped += OnPagePopped;
 
 			if (true) {
 				//MainPage = new MaterialSegmentedControlPage();
@@ -95,8 +96,8 @@ namespace TestProject
 				//MainPage = new ImageCodePage();
 
 				//MainPage = new ZenmekPage();
-				MainPage = navPage;
-
+				//MainPage = navPage;
+				MainPage = new ModalPopupOnMasterDetailPage();
 			} else {
 				// The root page of your application
 				/*
