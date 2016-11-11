@@ -127,6 +127,49 @@ namespace Forms9Patch
 				System.Diagnostics.Debug.WriteLine("ListView.SeparatorColor["+value+"]");
 			}
 		}
+
+		/// <summary>
+		/// The separator height property backing store.
+		/// </summary>
+		public static readonly BindableProperty SeparatorHeightProperty = ItemWrapper.SeparatorHeightProperty;
+		/// <summary>
+		/// Gets or sets the height of the cell separator.
+		/// </summary>
+		/// <value>The height of the separator.</value>
+		public double SeparatorHeight
+		{
+			get { return (double)GetValue(SeparatorHeightProperty); }
+			set { SetValue(SeparatorHeightProperty, value); }
+		}
+
+		/// <summary>
+		/// The separator left indent property backing store.
+		/// </summary>
+		public static readonly BindableProperty SeparatorLeftIndentProperty = ItemWrapper.SeparatorLeftIndentProperty;
+		/// <summary>
+		/// Gets or sets the cell separator left indent.
+		/// </summary>
+		/// <value>The separator left indent.</value>
+		public double SeparatorLeftIndent
+		{
+			get { return (double)GetValue(SeparatorLeftIndentProperty); }
+			set { SetValue(SeparatorLeftIndentProperty, value); }
+		}
+
+		/// <summary>
+		/// The separator right indent property backing store.
+		/// </summary>
+		public static readonly BindableProperty SeparatorRightIndentProperty = ItemWrapper.SeparatorRightIndentProperty;
+		/// <summary>
+		/// Gets or sets the cell separator right indent.
+		/// </summary>
+		/// <value>The separator right indent.</value>
+		public double SeparatorRightIndent
+		{
+			get { return (double)GetValue(SeparatorRightIndentProperty); }
+			set { SetValue(SeparatorRightIndentProperty, value); }
+		}
+
 		#endregion
 
 		#region Background appearance
