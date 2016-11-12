@@ -130,6 +130,10 @@ namespace Forms9Patch
 
 
 		#region Change management
+		/// <summary>
+		/// BindableProperty has changed.
+		/// </summary>
+		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);

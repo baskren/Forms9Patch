@@ -14,8 +14,16 @@ namespace Forms9Patch
 		/// <value>The height of the cell.</value>
 		double CellHeight { get; }
 
+		/// <summary>
+		/// Gets the start swipe menu items.
+		/// </summary>
+		/// <value>The start swipe menu.</value>
 		List<SwipeMenuItem> StartSwipeMenu { get; }
 
+		/// <summary>
+		/// Gets the end swipe menu items.
+		/// </summary>
+		/// <value>The end swipe menu.</value>
 		List<SwipeMenuItem> EndSwipeMenu { get; }
 	}
 }

@@ -124,7 +124,7 @@ namespace Forms9Patch
 			get { return (Color)GetValue(SeparatorColorProperty); }
 			set { 
 				SetValue(SeparatorColorProperty, value); 
-				System.Diagnostics.Debug.WriteLine("ListView.SeparatorColor["+value+"]");
+				//System.Diagnostics.Debug.WriteLine("ListView.SeparatorColor["+value+"]");
 			}
 		}
 
@@ -330,6 +330,10 @@ namespace Forms9Patch
 		public new event EventHandler<ItemTappedEventArgs> ItemTapped;
 
 
+		/// <summary>
+		/// Taps the item.
+		/// </summary>
+		/// <param name="item">Item.</param>
 		public void TapItem(object item)
 		{
 			var itemWrapper = BaseItemsSource.WrapperForSource(item);
@@ -754,7 +758,15 @@ namespace Forms9Patch
 
 
 		#region Swipe Menu events
+		/// <summary>
+		/// Occurs when a swipe menu item has been tapped.
+		/// </summary>
 		public event EventHandler<SwipeMenuItemTappedArgs> SwipeMenuItemTapped;
+		/// <summary>
+		/// Called when a swipe menu items has been tapped
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		public void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
 		{
 			SwipeMenuItemTapped?.Invoke(sender, e);
@@ -961,7 +973,7 @@ namespace Forms9Patch
 
 
 		void OnPanning(object sender, PanEventArgs e) {
-			System.Diagnostics.Debug.WriteLine("ListView.OnPanning");
+			//System.Diagnostics.Debug.WriteLine("ListView.OnPanning");
 			if (_longPress != null) {
 				//_longPressPan = true;
 				//System.Diagnostics.Debug.WriteLine("PAN ["+e.Listener.Element+"]");

@@ -31,11 +31,11 @@ namespace Forms9Patch.iOS
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
 			//if (Element.HtmlText == "Fractional Mode")
-				//System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
-
+			//System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
+			Control.ClearsContextBeforeDrawing = true;
 			string text = Element.Text ?? Element.F9PFormattedString?.Text;
 			if (string.IsNullOrEmpty(text))
 				return new SizeRequest(Size.Zero);

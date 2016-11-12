@@ -220,7 +220,7 @@ namespace Forms9Patch
 
 		#region Constructor
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.BubblePopup"/> class.
+		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
 		/// </summary>
 		/// <param name="host">Host.</param>
 		internal PopupBase (Page host=null) {
@@ -228,7 +228,7 @@ namespace Forms9Patch
 			_pageOverlay = new BoxView {
 				BackgroundColor = PageOverlayColor,
 				HorizontalOptions = LayoutOptions.Fill,
-				VerticalOptions = LayoutOptions.Fill,
+				VerticalOptions = LayoutOptions.Fill
 			};
 			_listener = new Listener(_pageOverlay);
 			_listener.Tapped += OnTapped;
@@ -241,13 +241,13 @@ namespace Forms9Patch
 
 		#region Gesture event responders
 
-		void OnTapped(object sender, FormsGestures.TapEventArgs e)
+		void OnTapped(object sender, TapEventArgs e)
 		{
 			if (CancelOnPageOverlayTouch)
 				Cancel();
 		}
 
-		void OnPanning(object sender, FormsGestures.PanEventArgs e)
+		void OnPanning(object sender, PanEventArgs e)
 		{
 			if (CancelOnPageOverlayTouch)
 				Cancel();
@@ -257,7 +257,7 @@ namespace Forms9Patch
 
 
 		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
+		bool disposedValue; // To detect redundant calls
 
 		/// <summary>
 		/// Dispose the specified disposing.
@@ -274,33 +274,19 @@ namespace Forms9Patch
 					_listener.Dispose();
 					disposedValue = true;
 				}
-
-				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-				// TODO: set large fields to null.
-
 			}
 		}
 
-		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-		// ~PopupBase() {
-		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-		//   Dispose(false);
-		// }
-
-		// This code added to correctly implement the disposable pattern.
 		/// <summary>
 		/// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
 		/// </summary>
-		/// <remarks>Call <see cref="O:Forms9Patch.PopupBase.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.PopupBase"/>. The
-		/// <see cref="O:Forms9Patch.PopupBase.Dispose"/> method leaves the <see cref="T:Forms9Patch.PopupBase"/> in an unusable state. After calling
-		/// <see cref="O:Forms9Patch.PopupBase.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.PopupBase"/> so the garbage
+		/// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="T:Forms9Patch.PopupBase"/>. The
+		/// <see cref="Dispose"/> method leaves the <see cref="T:Forms9Patch.PopupBase"/> in an unusable state. After calling
+		/// <see cref="Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.PopupBase"/> so the garbage
 		/// collector can reclaim the memory that the <see cref="T:Forms9Patch.PopupBase"/> was occupying.</remarks>
 		public void Dispose()
 		{
-			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
 			Dispose(true);
-			// TODO: uncomment the following line if the finalizer is overridden above.
-			// GC.SuppressFinalize(this);
 		}
 		#endregion
 
