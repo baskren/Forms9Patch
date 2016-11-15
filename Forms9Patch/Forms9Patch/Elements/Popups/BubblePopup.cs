@@ -1,7 +1,5 @@
 ﻿using System;
-
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -106,14 +104,14 @@ namespace Forms9Patch
 
 		#region Constructor / Destructor
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.BubblePopup"/> class.
+		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
 		/// </summary>
 		/// <param name="target">Target.</param>
 		/// <param name="host">Host.</param>
 		public BubblePopup (VisualElement target=null, Page host=null) : base (host: host) {
 			_bubbleLayout = new BubbleLayout {
 				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.Center
 			};
 			SetRoundedBoxBindings (_bubbleLayout);
 			_bubbleLayout.SetBinding (BubbleLayout.PointerLengthProperty, "PointerLength");
@@ -263,7 +261,7 @@ namespace Forms9Patch
 				PointerDirection pointerDir = PointerDirection.None;
 
 				Rectangle bounds;
-				Rectangle targetBounds;
+				Rectangle targetBounds=Rectangle.Zero;
 				if (Target != null) {
 					targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (Host, Target);
 					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
@@ -314,7 +312,7 @@ namespace Forms9Patch
 				_bubbleLayout.PointerDirection = pointerDir;
 				_bubbleLayout.IsVisible = true;
 				if (pointerDir == PointerDirection.None) {
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (ContentView, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
+					LayoutChildIntoBoundingRegion (ContentView, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
 				} else {
 					Tuple<double,float> tuple;
 					if (pointerDir.IsVertical ()) {
@@ -337,7 +335,7 @@ namespace Forms9Patch
 					//System.Diagnostics.Debug.WriteLine ("\tBubblePopup.LayoutChildren bounds=" + bounds);
 					_bubbleLayout.PointerAxialPosition = tuple.Item2;	
 					//_bubbleLayout.PointerDirection = pointerDir;
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (_bubbleLayout, bounds);
+					LayoutChildIntoBoundingRegion (_bubbleLayout, bounds);
 				}
 			} else
 				_bubbleLayout.IsVisible = false;

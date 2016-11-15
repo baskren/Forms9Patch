@@ -63,7 +63,7 @@ namespace Forms9Patch
 		/// <param name="itemBaseType">Item base type.</param>
 		/// <param name="viewType">View type.</param>
 		public void Add(Type itemBaseType, Type viewType) {
-			if (_cellTemplates.Count > 19)
+			if (_cellTemplates.Count > 20)
 				throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
 			Type itemType;
 			//var iList = itemBaseType as IList;
