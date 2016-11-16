@@ -366,7 +366,7 @@ namespace Forms9Patch
 					{
 						// groups
 						VerifyContentType(GroupContentType.Lists);
-						var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest);
+						var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest, SubGroupType);
 						return group;
 					}
 				}
@@ -858,10 +858,11 @@ namespace Forms9Patch
 
 
 		#region Constructors
-		public GroupWrapper(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null) : this() {
+		public GroupWrapper(object source, List<string> sourcePropertyMap, Func<object,bool>visibleItemTest=null, Type subgroupType=null) : this() {
 			VisibilityTest = visibleItemTest;
 			ContentType = GroupContentType.Unknown;
 			SourceSubPropertyMap = sourcePropertyMap;
+			SubGroupType = subgroupType;
 			Source = source;
 		}
 
