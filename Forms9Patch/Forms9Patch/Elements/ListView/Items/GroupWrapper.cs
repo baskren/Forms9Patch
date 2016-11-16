@@ -238,7 +238,10 @@ namespace Forms9Patch
 			item.Parent = this;
 			var group = item as GroupWrapper;
 			if (group != null)
+			{
 				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
+				group.SubGroupType = group.SubGroupType ?? SubGroupType;
+			}
 			item.RowHeight = RowHeight;
 			//item.HasUnevenRows = HasUnevenRows;
 		}
@@ -359,10 +362,13 @@ namespace Forms9Patch
 				var iEnumerable = children as IEnumerable;
 				if (iEnumerable != null)
 				{
-					// groups
-					VerifyContentType(GroupContentType.Lists);
-					var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest);
-					return group;
+					if (SubGroupType == null || children.GetType() == SubGroupType)
+					{
+						// groups
+						VerifyContentType(GroupContentType.Lists);
+						var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest);
+						return group;
+					}
 				}
 			}
 			// items
@@ -830,6 +836,13 @@ namespace Forms9Patch
 			set { SetValue(SourceSubPropertyMapProperty, value); }
 		}
 
+		public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create("SubGroupType", typeof(Type), typeof(GroupWrapper), null);
+		public Type SubGroupType
+		{
+			get { return (Type)GetValue(SubGroupTypeProperty); }
+			set { SetValue(SubGroupTypeProperty, value); }
+		}
+
 		#endregion
 
 
@@ -853,6 +866,7 @@ namespace Forms9Patch
 		}
 
 		public GroupWrapper()  {
+			ContentType = GroupContentType.Unknown;
 			NotifySourceOfChanges = true;
 			_items.CollectionChanged += OnCollectionChanged; 
 		}
@@ -988,8 +1002,11 @@ namespace Forms9Patch
 					_subPropertyMap = SourceSubPropertyMap.GetRange(1, SourceSubPropertyMap.Count - 1);
 					childrenPropertyName = SourceSubPropertyMap[0];
 				}
+				var source = Source;
+				Source = null;
+				Source = source;
 			}
-			else if (propertyName == VisibilityTestProperty.PropertyName)
+			else if (propertyName == VisibilityTestProperty.PropertyName || propertyName == SubGroupTypeProperty.PropertyName)
 			{
 				// delete and reset Source so the VisibilityTest can be applied as the new Source is converted to items
 				var source = Source;

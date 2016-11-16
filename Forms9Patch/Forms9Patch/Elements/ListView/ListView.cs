@@ -313,6 +313,20 @@ namespace Forms9Patch
 			set { SetValue(VisibilityTestProperty, value); }
 		}
 
+		/// <summary>
+		/// The sub group type property backing store.
+		/// </summary>
+		public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create("SubGroupType", typeof(Type), typeof(ListView), null);
+		/// <summary>
+		/// Gets or sets the type for list subgroups.  If set, allows non-SubGroupType IEnumerables to be items rather than SubGroups.
+		/// </summary>
+		/// <value>The type of the sub group.</value>
+		public Type SubGroupType
+		{
+			get { return (Type)GetValue(SubGroupTypeProperty); }
+			set { SetValue(SubGroupTypeProperty, value); }
+		}
+
 		#endregion
 
 
@@ -746,6 +760,7 @@ namespace Forms9Patch
 
 			_baseItemsSource.BindingContext = this;
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
+			_baseItemsSource.SubGroupType = SubGroupType;
 			_baseItemsSource.Source = ItemsSource;
 			_baseItemsSource.VisibilityTest = VisibilityTest;
 			//_baseItemsSource.HasUnevenRows = HasUnevenRows;
