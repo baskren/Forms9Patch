@@ -208,9 +208,13 @@ namespace Forms9Patch
 
 			Content = _listView;
 
-			var listener = new Listener(_listView);
-			listener.Panned += OnPanned;
-			listener.Panning += (sender, e) => _lastAppearance = DateTime.Now;
+			_listView.Panned += OnPanned;
+			_listView.Panning += (sender, e) =>
+			{
+				_lastAppearance = DateTime.Now;
+			};
+
+
 
 			//_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
@@ -378,7 +382,8 @@ namespace Forms9Patch
 		}
 
 		bool _waitingForScrollToComplete;
-		void OnPanned(object sender, PanEventArgs e)
+		//void OnPanned(object sender, PanEventArgs e)
+		void OnPanned(object sender, EventArgs e)
 		{
 			if (!_waitingForScrollToComplete)
 			{

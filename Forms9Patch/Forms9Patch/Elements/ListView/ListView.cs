@@ -454,6 +454,11 @@ namespace Forms9Patch
 
 		#endregion
 
+		#region Gestures
+		public event EventHandler Panning;
+		public event EventHandler Panned;
+		#endregion
+
 		#endregion
 
 
@@ -488,7 +493,7 @@ namespace Forms9Patch
 			//_listener.LongPressed += OnLongPressed;
 			//_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
-
+			_listener.Panned += OnPanned;
 
 			SelectedItems = new ObservableCollection<object>();
 			SelectedItems.CollectionChanged += SelectedItemsCollectionChanged;
@@ -989,6 +994,7 @@ namespace Forms9Patch
 
 		void OnPanning(object sender, PanEventArgs e) {
 			//System.Diagnostics.Debug.WriteLine("ListView.OnPanning");
+			Panning?.Invoke(this, EventArgs.Empty);
 			if (_longPress != null) {
 				//_longPressPan = true;
 				//System.Diagnostics.Debug.WriteLine("PAN ["+e.Listener.Element+"]");
@@ -1025,6 +1031,10 @@ namespace Forms9Patch
 			}
 		}
 
+		void OnPanned(object sender, PanEventArgs e)
+		{
+			Panned?.Invoke(this, EventArgs.Empty);
+		}
 
 		//void OnLongPressed(object sender, LongPressEventArgs e) {
 		void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e) {
