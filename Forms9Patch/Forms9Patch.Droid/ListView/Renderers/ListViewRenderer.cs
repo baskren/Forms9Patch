@@ -26,6 +26,7 @@ namespace Forms9Patch.Droid
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
 				newElement.RendererScrollToPos += ScrollToItem;
+				Control.SetOnScrollListener(new ScrollListener(newElement));
 			}
 			Control.Divider = null;
 			Control.DividerHeight = -1;
@@ -358,6 +359,36 @@ namespace Forms9Patch.Droid
 			var point = new [] { (int)p.X, (int)p.Y };
 			Control.GetLocationInWindow(point);
 			return new Point (point [0], point [1]);
+		}
+	}
+
+	class ScrollListener : Java.Lang.Object, Android.Widget.ListView.IOnScrollListener
+	{
+		Forms9Patch.ListView Element;
+
+		public ScrollListener(Forms9Patch.ListView element)
+		{
+			Element = element;
+		}
+
+		//bool _scrolling;
+		public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+		{
+			System.Diagnostics.Debug.WriteLine("SCROLLING");
+			IVisualElementRenderer renderer = Platform.GetRenderer(Element);
+			if (renderer != null)
+				Element.OnScrolling(this, EventArgs.Empty);
+		}
+
+		public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
+		{
+			System.Diagnostics.Debug.WriteLine("SCROLL STATE=["+scrollState+"]");
+			IVisualElementRenderer renderer = Platform.GetRenderer(Element);
+			if (renderer != null)
+			{
+				if (scrollState == ScrollState.Idle)
+					Element.OnScrolled(this, EventArgs.Empty);
+			}
 		}
 	}
 

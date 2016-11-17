@@ -26,10 +26,15 @@ namespace Bc3.Forms.iOS
 		{
 			var renderer = Renderer(listView);
 			//var center = renderer.Control.Bounds.ToRectangle().Center;
-			var center = new Point(renderer.Control.Bounds.Width/2.0, renderer.Control.Bounds.Height/2.0);
-			//var indexPath = renderer.Control.IndexPathForRowAtPoint(new CoreGraphics.CGPoint(center.X, center.Y));
-			//return new Tuple<int, int>(indexPath.Section, indexPath.Row);
-			return IndexPathAtPoint(listView, center);
+			//var center = new Point(renderer.Control.Bounds.Width/2.0, renderer.Control.Bounds.Height/2.0);
+			var center = renderer.Control.Bounds.ToRectangle().Center;
+			//System.Diagnostics.Debug.WriteLine("Bounds=["+renderer.Control.Bounds+"] center=["+center+"]");
+			var indexPath = renderer.Control.IndexPathForRowAtPoint(new CoreGraphics.CGPoint(center.X, center.Y));
+			if (indexPath != null)
+				return new Tuple<int, int>(indexPath.Section, indexPath.Row);
+			else
+				return null;
+			//return IndexPathAtPoint(listView, center);
 		}
 
 		/// <summary>

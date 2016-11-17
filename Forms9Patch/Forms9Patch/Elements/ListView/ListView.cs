@@ -459,6 +459,12 @@ namespace Forms9Patch
 		public event EventHandler Panned;
 		#endregion
 
+
+		#region Scroll
+		public event EventHandler Scrolling;
+		public event EventHandler Scrolled;
+		#endregion
+
 		#endregion
 
 
@@ -1034,6 +1040,16 @@ namespace Forms9Patch
 		void OnPanned(object sender, PanEventArgs e)
 		{
 			Panned?.Invoke(this, EventArgs.Empty);
+		}
+
+		internal void OnScrolling(object sender, EventArgs e)
+		{
+			Scrolling?.Invoke(this, EventArgs.Empty);
+		}
+
+		internal void OnScrolled(object sender, EventArgs e)
+		{
+			Scrolled?.Invoke(this, EventArgs.Empty);
 		}
 
 		//void OnLongPressed(object sender, LongPressEventArgs e) {

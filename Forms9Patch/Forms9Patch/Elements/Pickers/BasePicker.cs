@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections;
-using Xamarin.Forms;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using FormsGestures;
 using System.Runtime.Serialization;
+using Xamarin.Forms;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Base picker.
 	/// </summary>
-	internal class BasePicker : ContentView
+	class BasePicker : ContentView
 	{
 		#region Properties
 
@@ -74,26 +72,19 @@ namespace Forms9Patch
 			}
 		}
 
-
+		/// <summary>
+		/// The selected items property key.
+		/// </summary>
 		public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(BasePicker), null);
+		/// <summary>
+		/// Gets the selected items.
+		/// </summary>
+		/// <value>The selected items.</value>
 		public ObservableCollection<object> SelectedItems
 		{
 			get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
 			private set { SetValue(SelectedItemsPropertyKey, value); }
 		}
-
-		/*
-		public ObservableCollection<object> SelectedItems
-		{
-			get { return _listView.SelectedItems; }
-			set
-			{
-				_listView.SelectedItems.Clear();
-				foreach (var item in value)
-					_listView.SelectedItems.Add(item);
-			}
-		}
-		*/
 
 
 		/// <summary>
@@ -180,6 +171,7 @@ namespace Forms9Patch
 		//internal bool PositionToSelect;
 		internal SelectBy SelectBy;
 		bool _tapping;
+		bool _scrolling;
 		#endregion
 
 
@@ -189,9 +181,7 @@ namespace Forms9Patch
 		/// </summary>
 		public BasePicker()
 		{
-			//BackgroundColor = Color.FromRgba(0.5,0.5,0.5,0.125);
 			BackgroundColor = Color.Transparent;
-			//BackgroundColor = Color.White;
 
 			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
 			_listView.SetBinding(ListView.StartAccessoryProperty, StartAccessoryProperty.PropertyName);
@@ -203,25 +193,18 @@ namespace Forms9Patch
 			_listView.BackgroundColor = Color.Transparent;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
-			_listView.ItemAppearing += OnCellAppearing;
 			_listView.ItemTapped += OnItemTapped;
 
 			Content = _listView;
 
-			_listView.Panned += OnPanned;
-			_listView.Panning += (sender, e) =>
-			{
-				_lastAppearance = DateTime.Now;
-			};
+			_listView.Scrolled += (sender, e) => _scrolling = false;
+			_listView.Scrolling += OnScrolling;
 
 
-
-			//_listView.TranslationY = Device.OnPlatform<double>(0, -7, 0);
 			_listView.Header = _upperPadding;
 			_listView.Footer = _lowerPadding;
 
 			SelectedItems = _listView.SelectedItems;
-			//SelectedItems.CollectionChanged += OnSelectedItemsCollectionChanged;
 		}
 		#endregion
 
@@ -229,8 +212,9 @@ namespace Forms9Patch
 		#region Selection management
 		protected virtual void OnItemTapped(object sender, ItemTappedEventArgs e)
 		{
+			if (_scrolling)
+				return;
 			_tapping = true;
-			//_listView.ScrollTo(e.Item, ScrollToPosition.Center, true);
 			int index=0;
 			foreach (var item in ItemsSource)
 			{
@@ -244,58 +228,10 @@ namespace Forms9Patch
 			_tapping = false;
 		}
 
-		/*  no need for this since the SelectedItemsCollection is read-only
-	void OnSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-	{
-		switch (e.Action)
-		{
-			case NotifyCollectionChangedAction.Add:
-				foreach (var item in e.NewItems)
-					if (!_listView.SelectedItems.Contains(item))
-						_listView.SelectedItems.Add(item);
-				break;
-			case NotifyCollectionChangedAction.Move:
-				break;
-			case NotifyCollectionChangedAction.Reset:
-				_listView.SelectedItems.Clear();
-				break;
-			case NotifyCollectionChangedAction.Remove:
-				foreach (var item in e.OldItems)
-					if (_listView.SelectedItems.Contains(item))
-						_listView.SelectedItems.Remove(item);
-				break;
-			case NotifyCollectionChangedAction.Replace:
-				foreach (var item in e.OldItems)
-					if (_listView.SelectedItems.Contains(item))
-						_listView.SelectedItems.Remove(item);
-				foreach (var item in e.NewItems)
-					if (!_listView.SelectedItems.Contains(item))
-						_listView.SelectedItems.Add(item);
-				break;
-		}
-	}
-		*/
 		#endregion
 
 
 		#region Property Change management
-		/// <summary>
-		/// Ons the property changing.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanging(string propertyName = null)
-		{
-			base.OnPropertyChanging(propertyName);
-			/*
-			if (propertyName == SelectedItemsProperty.PropertyName)
-			{
-				if (SelectedItems != null && SelectedItems != _listView.SelectedItems)
-					SelectedItems.CollectionChanged -= OnSelectedItemsCollectionChanged;
-				_listView.SelectedItems.Clear();
-			}
-			*/
-		}
-
 		/// <summary>
 		/// Ons the property changed.
 		/// </summary>
@@ -307,7 +243,6 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ItemsSourceProperty.PropertyName)
 			{
-				//System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(ItemsSource) value=["+ItemsSource+"]");
 				_listView.ItemsSource = ItemsSource;
 				if (ItemsSource != null)
 					ScrollToIndex(Index);
@@ -319,14 +254,6 @@ namespace Forms9Patch
 			}
 			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
 				ScrollToIndex(Index);
-			/*
-			else if (propertyName == SelectedItemsProperty.PropertyName && SelectedItems != null && SelectedItems != _listView.SelectedItems)
-			{
-				foreach (var item in SelectedItems)
-					_listView.SelectedItems.Add(item);
-				SelectedItems.CollectionChanged += OnSelectedItemsCollectionChanged;
-			}
-			*/
 		}
 
 		/// <summary>
@@ -359,7 +286,8 @@ namespace Forms9Patch
 					indexItem = lastItem;
 				if (indexItem != null)
 				{
-					_listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
+					if (!_scrolling)
+						_listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
 					if (SelectBy == SelectBy.Position)
 					{
 						Index = index;
@@ -375,57 +303,15 @@ namespace Forms9Patch
 
 
 		#region Snap to cell
-		DateTime _lastAppearance = DateTime.Now;
-		void OnCellAppearing(object sender, ItemVisibilityEventArgs e)
+		void OnScrolling(object sender, EventArgs e)
 		{
-			_lastAppearance = DateTime.Now;
-		}
-
-		bool _waitingForScrollToComplete;
-		//void OnPanned(object sender, PanEventArgs e)
-		void OnPanned(object sender, EventArgs e)
-		{
-			if (!_waitingForScrollToComplete)
+			_scrolling = true;
+			var indexPath = ListViewExtensions.IndexPathAtCenter(_listView);
+			if (indexPath != null)
 			{
-				_waitingForScrollToComplete = true;
-				Device.StartTimer(TimeSpan.FromMilliseconds(50), () => 
-				{
-					if (DateTime.Now - _lastAppearance > TimeSpan.FromMilliseconds(350))
-					{
-						var indexPath = ListViewExtensions.IndexPathAtCenter(_listView);
-						if (indexPath != null)
-						{
-							if (indexPath.Item1 != 0)
-								throw new InvalidDataContractException("SinglePicker should not be grouped");
-							Index = indexPath.Item2;
-							ScrollToIndex(Index);
-						}
-						else 
-						{
-							if (_listView.HitTest(_listView.Bounds.Center, _lowerPadding))
-							{
-								//Index = _col.Count - 1;
-								if (ItemsSource == null)
-									return false;
-								int count = 0;
-								foreach (var item in ItemsSource)
-									count++;
-								Index = count-1;
-							}
-							else if (_listView.HitTest(_listView.Bounds.Center, _upperPadding))
-								Index = 0;
-							if (SelectBy==SelectBy.Position)
-							{
-								var selectedF9PItem = _listView.BaseItemsSource[Index] as ItemWrapper;
-								if (selectedF9PItem != null)
-									SelectedItem = selectedF9PItem.Source;
-							}
-						}
-						_waitingForScrollToComplete = false;
-						return false;
-					}
-					return true;
-				});
+				if (indexPath.Item1 != 0)
+					throw new InvalidDataContractException("SinglePicker should not be grouped");
+				Index = indexPath.Item2;
 			}
 		}
 

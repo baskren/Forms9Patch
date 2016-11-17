@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Foundation;
+using UIKit;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.ListView), typeof(Forms9Patch.iOS.ListViewRenderer))]
 namespace Forms9Patch.iOS
@@ -27,6 +28,7 @@ namespace Forms9Patch.iOS
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
+				Control.Delegate = new ScrollDelegate(newElement);
 			}
 		}
 
@@ -167,6 +169,57 @@ namespace Forms9Patch.iOS
 
 		Point ConvertToWindow(Point p) {
 			return NativeView.ConvertPointToView (new CoreGraphics.CGPoint (p.X, p.Y), null).ToPoint();
+		}
+
+
+	}
+
+	class ScrollDelegate : UITableViewDelegate
+	{
+		public Forms9Patch.ListView Element;
+
+		public ScrollDelegate(Forms9Patch.ListView element) : base()
+		{
+			Element = element;
+		}
+
+		bool _scrolling;
+
+		public override void DraggingStarted(UIScrollView scrollView)
+		{
+			//System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingStarted");
+			Element?.OnScrolling(this, EventArgs.Empty);
+			_scrolling = true;
+		}
+
+		public override void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
+		{
+			//System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingEnded");
+			if (!willDecelerate)
+			{
+				_scrolling = false;
+				Element?.OnScrolled(this, EventArgs.Empty);
+			}
+		}
+
+		public override void DecelerationEnded(UIScrollView scrollView)
+		{
+			//System.Diagnostics.Debug.WriteLine("ScrollDelegate DecelerationEnded");
+			//base.DecelerationEnded(scrollView);
+			Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+			{
+				_scrolling = false;
+				Element?.OnScrolled(this, EventArgs.Empty);
+				return false;
+			});
+		}
+
+		public override void Scrolled(UIScrollView scrollView)
+		{
+			//System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
+			//base.Scrolled(scrollView);
+			if (_scrolling)
+				Element?.OnScrolling(this, EventArgs.Empty);
 		}
 
 

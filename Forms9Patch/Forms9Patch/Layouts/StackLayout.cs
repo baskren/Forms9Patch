@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using System.Diagnostics;
+﻿using Xamarin.Forms;
 
 namespace Forms9Patch
 {
@@ -11,11 +9,11 @@ namespace Forms9Patch
 	{
 
 		#region debug support
-		static int _count = 0;
+		static int _count;
 		int _id;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.StackLayout"/> class.
+		/// Initializes a new instance of the <see cref="StackLayout"/> class.
 		/// </summary>
 		public StackLayout ()
 		{
@@ -23,9 +21,9 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the current <see cref="Forms9Patch.StackLayout"/>.
+		/// Returns a <see cref="System.String"/> that represents the current <see cref="StackLayout"/>.
 		/// </summary>
-		/// <returns>A <see cref="System.String"/> that represents the current <see cref="Forms9Patch.StackLayout"/>.</returns>
+		/// <returns>A <see cref="System.String"/> that represents the current <see cref="StackLayout"/>.</returns>
 		public string Description () { return string.Format ("[{0}.{1}]",GetType(),_id); }
 		#endregion
 
@@ -157,7 +155,7 @@ namespace Forms9Patch
 		/// </summary>
 		protected override void OnChildMeasureInvalidated()
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.OnChildMeasureInvalidated()");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.OnChildMeasureInvalidated()");
 			base.OnChildMeasureInvalidated();
 		}
 		/// <summary>
@@ -168,7 +166,7 @@ namespace Forms9Patch
 		/// <param name="heightConstraint">Height constraint.</param>
 		protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.OnSizeRequest("+widthConstraint+", "+heightConstraint+")");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.OnSizeRequest("+widthConstraint+", "+heightConstraint+")");
 			return base.OnSizeRequest(widthConstraint, heightConstraint);
 		}
 		/// <summary>
@@ -176,7 +174,7 @@ namespace Forms9Patch
 		/// </summary>
 		protected override void InvalidateLayout()
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateLayout()");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateLayout()");
 			base.InvalidateLayout();
 		}
 		/// <summary>
@@ -184,7 +182,7 @@ namespace Forms9Patch
 		/// </summary>
 		protected override void InvalidateMeasure()
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateMeasure()");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateMeasure()");
 			base.InvalidateMeasure();
 		}
 		/// <summary>
@@ -196,7 +194,7 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.LayoutChildren("+x+","+y+","+width+","+height+")");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.LayoutChildren("+x+","+y+","+width+","+height+")");
 			base.LayoutChildren(x, y, width, height);
 		}
 
@@ -219,7 +217,7 @@ namespace Forms9Patch
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.OnPropertyChanging(" + propertyName + ")");
+			//System.Diagnostics.Debug.WriteLine("StackLayout.OnPropertyChanging(" + propertyName + ")");
 			base.OnPropertyChanging(propertyName);
 		}
 	}
