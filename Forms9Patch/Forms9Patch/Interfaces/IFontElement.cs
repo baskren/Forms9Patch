@@ -1,7 +1,7 @@
 ﻿
 namespace Forms9Patch
 {
-	interface IFontElement
+	public interface IFontElement
 	{
 		//
 		// Properties
