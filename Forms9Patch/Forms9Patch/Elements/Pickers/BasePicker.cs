@@ -197,7 +197,7 @@ namespace Forms9Patch
 
 			Content = _listView;
 
-			_listView.Scrolled += (sender, e) => _scrolling = false;
+			_listView.Scrolled += OnScrolled;
 			_listView.Scrolling += OnScrolling;
 
 
@@ -313,6 +313,13 @@ namespace Forms9Patch
 					throw new InvalidDataContractException("SinglePicker should not be grouped");
 				Index = indexPath.Item2;
 			}
+		}
+
+		void OnScrolled(object sender, EventArgs e)
+		{
+			_scrolling = false;
+			if (SelectBy == SelectBy.Position)
+				ScrollToIndex(Index);
 		}
 
 		#endregion
