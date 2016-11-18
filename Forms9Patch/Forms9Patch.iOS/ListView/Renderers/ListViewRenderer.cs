@@ -28,7 +28,8 @@ namespace Forms9Patch.iOS
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
-				Control.Delegate = new ScrollDelegate(newElement);
+				//Control.Delegate = new ScrollDelegate(newElement);  // why does this cause headers to not appear?
+				//Control.Delegate = null;
 			}
 		}
 
@@ -43,6 +44,8 @@ namespace Forms9Patch.iOS
 			if (e.PropertyName == ListView.ScrollEnabledProperty.PropertyName) {
 				Control.ScrollEnabled = (bool) Element.GetValue (ListView.ScrollEnabledProperty);
 			}
+			else if (e.PropertyName == Xamarin.Forms.ListView.IsGroupingEnabledProperty.PropertyName && !Element.IsGroupingEnabled)
+				Control.Delegate = new ScrollDelegate(Element as Forms9Patch.ListView);  // why does this cause headers to not appear?
 		}
 
 		bool Extended(double delta) {
