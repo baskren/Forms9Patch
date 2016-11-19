@@ -327,6 +327,13 @@ namespace Forms9Patch
 			set { SetValue(SubGroupTypeProperty, value); }
 		}
 
+		internal static readonly BindableProperty IsScrollListeningProperty = BindableProperty.Create("IsScrollListening", typeof(bool), typeof(ListView), default(bool));
+		internal bool IsScrollListening
+		{
+			get { return (bool)GetValue(IsScrollListeningProperty); }
+			set { SetValue(IsScrollListeningProperty, value); }
+		}
+
 		#endregion
 
 
@@ -470,11 +477,11 @@ namespace Forms9Patch
 		/// <summary>
 		/// Occurs when scroll is started and (depending on the platform) may continue until the scroll is completed.
 		/// </summary>
-		public event EventHandler Scrolling;
+		internal event EventHandler Scrolling;
 		/// <summary>
 		/// Occurs when scroll is completed.
 		/// </summary>
-		public event EventHandler Scrolled;
+		internal event EventHandler Scrolled;
 		#endregion
 
 		#endregion

@@ -28,7 +28,8 @@ namespace Forms9Patch.iOS
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
-				//Control.Delegate = new ScrollDelegate(newElement);  // why does this cause headers to not appear?
+				if (newElement.IsScrollListening)
+				  Control.Delegate = new ScrollDelegate(newElement);  // why does this cause headers to not appear?
 				//Control.Delegate = null;
 			}
 		}
@@ -44,7 +45,7 @@ namespace Forms9Patch.iOS
 			if (e.PropertyName == ListView.ScrollEnabledProperty.PropertyName) {
 				Control.ScrollEnabled = (bool) Element.GetValue (ListView.ScrollEnabledProperty);
 			}
-			else if (e.PropertyName == Xamarin.Forms.ListView.IsGroupingEnabledProperty.PropertyName && !Element.IsGroupingEnabled)
+			else if (e.PropertyName == ListView.IsScrollListeningProperty.PropertyName && !Element.IsGroupingEnabled && Control!=null)
 				Control.Delegate = new ScrollDelegate(Element as Forms9Patch.ListView);  // why does this cause headers to not appear?
 		}
 
@@ -208,7 +209,6 @@ namespace Forms9Patch.iOS
 		public override void DecelerationEnded(UIScrollView scrollView)
 		{
 			//System.Diagnostics.Debug.WriteLine("ScrollDelegate DecelerationEnded");
-			//base.DecelerationEnded(scrollView);
 			Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
 			{
 				_scrolling = false;
@@ -220,7 +220,6 @@ namespace Forms9Patch.iOS
 		public override void Scrolled(UIScrollView scrollView)
 		{
 			//System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
-			//base.Scrolled(scrollView);
 			if (_scrolling)
 				Element?.OnScrolling(this, EventArgs.Empty);
 		}

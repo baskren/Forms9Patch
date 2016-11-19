@@ -155,7 +155,8 @@ namespace Forms9Patch
 			IsGroupingEnabled = false,
 			SeparatorIsVisible = false,
 			BackgroundColor = Color.Transparent,
-			HasUnevenRows = false
+			HasUnevenRows = false,
+			IsScrollListening = true,
 		};
 
 		readonly BoxView _upperPadding = new BoxView

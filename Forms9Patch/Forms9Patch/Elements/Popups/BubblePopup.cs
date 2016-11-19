@@ -39,7 +39,9 @@ namespace Forms9Patch
 		public double TargetBias
 		{
 			get { return (double)GetValue(TargetBiasProperty); }
-			set { SetValue(TargetBiasProperty, value); }
+			set { 
+				SetValue(TargetBiasProperty, value); 
+			}
 		}
 
 		#endregion
