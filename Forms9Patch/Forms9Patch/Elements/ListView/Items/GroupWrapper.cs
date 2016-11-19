@@ -236,9 +236,11 @@ namespace Forms9Patch
 			item.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
 			item.BindingContext = this;
 			item.Parent = this;
-			var group = item as GroupWrapper;
-			if (group != null)
+			//var group = item as GroupWrapper;
+			//if (group != null)
+			if (item.GetType()==typeof(GroupWrapper))
 			{
+				var group = item as GroupWrapper;
 				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
 				group.SubGroupType = group.SubGroupType ?? SubGroupType;
 			}

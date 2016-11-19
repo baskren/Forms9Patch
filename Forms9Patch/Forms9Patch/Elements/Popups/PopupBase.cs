@@ -280,9 +280,9 @@ namespace Forms9Patch
 		/// <summary>
 		/// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
 		/// </summary>
-		/// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="T:Forms9Patch.PopupBase"/>. The
-		/// <see cref="Dispose"/> method leaves the <see cref="T:Forms9Patch.PopupBase"/> in an unusable state. After calling
-		/// <see cref="Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.PopupBase"/> so the garbage
+		/// <remarks>Call <see cref="PopupBase.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.PopupBase"/>. The
+		/// <see cref="PopupBase.Dispose"/> method leaves the <see cref="T:Forms9Patch.PopupBase"/> in an unusable state. After calling
+		/// <see cref="PopupBase.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.PopupBase"/> so the garbage
 		/// collector can reclaim the memory that the <see cref="T:Forms9Patch.PopupBase"/> was occupying.</remarks>
 		public void Dispose()
 		{

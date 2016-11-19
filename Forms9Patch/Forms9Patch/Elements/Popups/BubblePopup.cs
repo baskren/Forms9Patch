@@ -20,13 +20,30 @@ namespace Forms9Patch
 		}
 		#endregion
 
+
 		#region Bubble Properties
 		/// <summary>
 		/// Gets or sets the target visual element.
 		/// </summary>
 		/// <value>The target.</value>
 		public VisualElement Target { get; set; }
+
+		/// <summary>
+		/// The target bias property backing Store.
+		/// </summary>
+		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("TargetBias", typeof(double), typeof(BubblePopup), 0.5);
+		/// <summary>
+		/// Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.
+		/// </summary>
+		/// <value>The target bias.</value>
+		public double TargetBias
+		{
+			get { return (double)GetValue(TargetBiasProperty); }
+			set { SetValue(TargetBiasProperty, value); }
+		}
+
 		#endregion
+
 
 		#region Pointer Properties
 		/// <summary>
@@ -96,6 +113,7 @@ namespace Forms9Patch
 			set { SetValue (PointerCornerRadiusProperty, value); }
 		}
 		#endregion
+
 
 		#region Fields
 		readonly BubbleLayout _bubbleLayout;
@@ -185,8 +203,16 @@ namespace Forms9Patch
 
 		double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;
 		double positionWeightingFunction(double start) {
-			// how far apart are the centers?
-			double err=Math.Abs((start + _pwfWidth/2.0) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
+			// how far apart is the popup center from the target?
+			double err=0;
+			if (TargetBias < 0)
+				err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
+			else if (TargetBias > 1)
+				err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + TargetBias));
+			else
+				err = Math.Abs((start + _pwfWidth/2.0) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
+			//double err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
+
 			// does the popup and the target overlap?
 			err += (start + _pwfWidth >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - start - _pwfWidth);
 			err += (start <= _pwfTargetStart + _pwfTargetWidth ? 0 : 100 * start - (_pwfTargetStart + _pwfTargetWidth));
@@ -204,7 +230,14 @@ namespace Forms9Patch
 
 		double pointerWeightingFunction(double offset) {
 			// how far is the offset from the center of the target?
-			double err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
+			double err = 0;
+			if (TargetBias < 0)
+				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
+			else if (TargetBias > 1)
+				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + TargetBias));
+			else
+				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
+			//double err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
 
 			// does the pointer overlap the target?
 			err += (_pwfStart + offset >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - _pwfStart - offset);

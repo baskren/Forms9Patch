@@ -455,13 +455,25 @@ namespace Forms9Patch
 		#endregion
 
 		#region Gestures
+		/// <summary>
+		/// Occurs when the panning has completed.
+		/// </summary>
 		public event EventHandler Panning;
+		/// <summary>
+		/// Occurs when the listview is panned.
+		/// </summary>
 		public event EventHandler Panned;
 		#endregion
 
 
 		#region Scroll
+		/// <summary>
+		/// Occurs when scroll is started and (depending on the platform) may continue until the scroll is completed.
+		/// </summary>
 		public event EventHandler Scrolling;
+		/// <summary>
+		/// Occurs when scroll is completed.
+		/// </summary>
 		public event EventHandler Scrolled;
 		#endregion
 
@@ -772,10 +784,10 @@ namespace Forms9Patch
 			_baseItemsSource.BindingContext = this;
 			_baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
 			_baseItemsSource.SubGroupType = SubGroupType;
-			_baseItemsSource.Source = ItemsSource;
 			_baseItemsSource.VisibilityTest = VisibilityTest;
 			//_baseItemsSource.HasUnevenRows = HasUnevenRows;
 			_baseItemsSource.RowHeight = RowHeight;
+			_baseItemsSource.Source = ItemsSource;
 			base.ItemsSource = _baseItemsSource;
 			IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
 			ReevaluateSelectedItems();

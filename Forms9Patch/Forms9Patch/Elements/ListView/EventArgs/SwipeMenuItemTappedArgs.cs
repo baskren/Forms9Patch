@@ -1,5 +1,8 @@
 ﻿namespace Forms9Patch
 {
+	/// <summary>
+	/// Cell swipe menu item tapped arguments.
+	/// </summary>
 	public class SwipeMenuItemTappedArgs
 	{
 		/// <summary>
