@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using PCL.Utils;
 using Xamarin.Forms;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Forms9Patch
 {
@@ -34,43 +35,6 @@ namespace Forms9Patch
 			set;
 		}
 
-
-		/*
-		IList Source {
-			get { return Value; }
-		}
-		*/
-
-		/*
-	 	WeakReference weakSource;
-		Group Source {
-			get { return weakSource?.Target as Group; }
-			set { weakSource = new WeakReference (value); }
-		}
-
-		*/
-		/*
-		Func<object,bool> _visibleItemTest;
-		public Func<object,bool> VisibilityTest {
-			get { return _visibleItemTest; }
-			set {
-				if (_visibleItemTest != value)
-				{
-					_visibleItemTest = value;
-					var source = Source;
-					Source = null;
-					Source = source;
-				}
-
-				//foreach (var item in _items) {
-				//	var group = item as Group;
-				//	if (group!=null) 
-				//		group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
-				//}
-
-			}
-		}
-		*/
 		/// <summary>
 		/// The visibility test property backing store.
 		/// </summary>
@@ -84,7 +48,6 @@ namespace Forms9Patch
 			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
 			set { SetValue(VisibilityTestProperty, value); }
 		}
-
 
 
 		/*
@@ -103,7 +66,7 @@ namespace Forms9Patch
 		}
 		*/
 
-		// note: Even though Source's items are not unique (ex: Source= { a, a, "pizza", null, null }) Group's items are because they are each created from a new instance of type Item.
+		// note: Even though Source's items are not unique (ex: Source= { a, a, "pizza", null, null }) ItemWrappers are because they are each created from a new instance of type Item.
 
 		int SourceCount() {
 			int sourceCount = -1;
@@ -158,7 +121,6 @@ namespace Forms9Patch
 			return candidateSourceIndex;
 			*/
 		}
-
 
 		void SourceInsert(ItemWrapper item) {
 			if (SourceChildren == null)
@@ -228,8 +190,9 @@ namespace Forms9Patch
 		{
 			if (item == null)
 				return;
-			item.PropertyChanged += OnItemPropertyChanged;
-			item.PropertyChanging += OnItemPropertyChanging;
+			SubscribeToItemSourcePropertyChanged(item);
+			item.PropertyChanged += OnItemWrapperPropertyChanged;
+			item.PropertyChanging += OnItemWrapperPropertyChanging;
 			item.Tapped += OnTapped;
 			item.LongPressed += OnLongPressed;
 			item.LongPressing += OnLongPressing;
@@ -250,20 +213,24 @@ namespace Forms9Patch
 
 		void CommonAdd(ItemWrapper item) {
 			CommonNewItem(item);
-			if (NotifySourceOfChanges) SourceAdd (item);
+			if (NotifySourceOfChanges) 
+				SourceAdd (item);
 		}
 
 		void CommonInsert(ItemWrapper item) {
 			CommonNewItem(item);
-			if (NotifySourceOfChanges) SourceInsert (item);
+			if (NotifySourceOfChanges) 
+				SourceInsert (item);
 		}
 
 		void CommonRemove(ItemWrapper item) {
 			if (item == null)
 				return;
-			if (NotifySourceOfChanges) SourceRemove (item);
-			item.PropertyChanged -= OnItemPropertyChanged;
-			item.PropertyChanging -= OnItemPropertyChanging;
+			UnsubscribeToItemSourcePropertyChanged(item);
+			if (NotifySourceOfChanges) 
+				SourceRemove (item);
+			item.PropertyChanged -= OnItemWrapperPropertyChanged;
+			item.PropertyChanging -= OnItemWrapperPropertyChanging;
 			item.Tapped -= OnTapped;
 			item.LongPressed -= OnLongPressed;
 			item.LongPressing -= OnLongPressing;
@@ -281,6 +248,8 @@ namespace Forms9Patch
 			for (int i = index; i < _items.Count; i++)
 				_items[i].Index = i;
 		}
+
+
 
 
 		#region IList<T> implementation
@@ -389,12 +358,15 @@ namespace Forms9Patch
 		}
 
 		void AddSourceObject(object sourceObject) {
-			if (VisibilityTest == null || VisibilityTest (sourceObject)) {
+			if (VisibilityTest == null || VisibilityTest(sourceObject))
+			{
 				NotifySourceOfChanges = false;
-				var item = CreateItem (sourceObject);
-				Add (item);
+				var item = CreateItem(sourceObject);
+				Add(item);
 				NotifySourceOfChanges = true;
 			}
+			else
+				SubscribeToHiddenSourcePropertyChanged(sourceObject);
 		}
 
 		int LocalIndexFromSourceIndex(int requestedSourceIndex) {
@@ -433,6 +405,8 @@ namespace Forms9Patch
 					Add (item);
 				NotifySourceOfChanges = true;
 			}
+			else
+				SubscribeToHiddenSourcePropertyChanged(sourceObject);
 		}
 
 		void RemoveItemWithSourceIndex(int sourceIndex) {
@@ -455,11 +429,91 @@ namespace Forms9Patch
 			} else if (VisibilityTest (oldSourceObject)) {
 				// remove object
 				RemoveItemWithSourceIndex (sourceIndex);
+				SubscribeToHiddenSourcePropertyChanged(newSourceObject);
 			} else if (VisibilityTest (newSourceObject)) {
 				// insert object
 				InsertSourceObject(sourceIndex, newSourceObject);
 			}
 		}
+
+		// used for subscrbing to hidden source objects
+		void SubscribeToHiddenSourcePropertyChanged(object source)
+		{
+			var iNotifiableSource = source as INotifyPropertyChanged;
+			if (iNotifiableSource != null)
+				iNotifiableSource.PropertyChanged += OnHiddenSourcePropertyChanged;
+		}
+
+
+		void UnsubscribeToHiddenSourcePropertyChanged(object source)
+		{
+			var iNotifiableSource = source as INotifyPropertyChanged;
+			if (iNotifiableSource != null)
+				iNotifiableSource.PropertyChanged -= OnHiddenSourcePropertyChanged;
+		}
+
+
+		// used for subscribing to unhidden source objects
+		void SubscribeToItemSourcePropertyChanged(ItemWrapper item)
+		{
+			var iNotifiableSource = item.Source as INotifyPropertyChanged;
+			if (iNotifiableSource != null)
+				iNotifiableSource.PropertyChanged += OnItemSourcePropertyChanged;
+		}
+
+
+		// used for unsubscribing to unhidden source objects
+		void UnsubscribeToItemSourcePropertyChanged(ItemWrapper item)
+		{
+			var iNotifiableSource = item.Source as INotifyPropertyChanged;
+			if (iNotifiableSource != null)
+				iNotifiableSource.PropertyChanged -= OnItemSourcePropertyChanged;
+		}
+
+		void OnItemSourcePropertyChanged(object source, PropertyChangedEventArgs e)
+		{
+			// if the change impacts visibiltiy then remove itemwrapper from groupwrapper
+			if (!VisibilityTest(source))
+				RefreshVisibility();
+		}
+
+		void OnHiddenSourcePropertyChanged(object source, PropertyChangedEventArgs e)
+		{
+			if (VisibilityTest(source))
+				RefreshVisibility();
+		}
+
+		void RefreshVisibility()
+		{
+			NotifySourceOfChanges = false;
+			int index = 0;
+			int sourceIndex = 0;
+			foreach (var sourceItem in SourceChildren)
+			{
+				if (VisibilityTest(sourceItem))
+				{
+					if (index >= _items.Count || _items[index].Source != sourceItem)
+					{
+						UnsubscribeToHiddenSourcePropertyChanged(sourceItem);
+						InsertSourceObject(sourceIndex, sourceItem);
+					}
+					index++;
+				}
+				else
+				{
+					if (index < _items.Count && _items[index].Source == sourceItem)
+					{
+						RemoveAt(index);
+						SubscribeToHiddenSourcePropertyChanged(sourceItem);
+					}
+				}
+				sourceIndex++;
+			}
+			NotifySourceOfChanges = true;
+			if (index != _items.Count)
+				throw new InvalidDataContractException("should have iterated through all visible sourceItems and itemWrappers");
+		}
+
 		#endregion
 
 
@@ -878,8 +932,6 @@ namespace Forms9Patch
 
 
 		#region Source INotifyCollectionChanged implementation
-
-
 		void OnSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
 			if (IgnoreSourceChanges)
 				return;
@@ -1034,16 +1086,14 @@ namespace Forms9Patch
 
 
 		#region Member Item Property Change Notificaiton
-		public event Xamarin.Forms.PropertyChangingEventHandler ItemPropertyChanging;
-		void OnItemPropertyChanging (object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+		public event Xamarin.Forms.PropertyChangingEventHandler ItemWrapperPropertyChanging;
+		void OnItemWrapperPropertyChanging (object sender, PropertyChangingEventArgs e)
 		{
-			Xamarin.Forms.PropertyChangingEventHandler handler = ItemPropertyChanging;
-			if (sender != null && handler!=null) 
-				handler (sender, e);
+			ItemWrapperPropertyChanging?.Invoke(sender, e);
 		}
 
-		public event PropertyChangedEventHandler ItemPropertyChanged;
-		void OnItemPropertyChanged (object sender, PropertyChangedEventArgs e)
+		public event PropertyChangedEventHandler ItemWrapperPropertyChanged;
+		void OnItemWrapperPropertyChanged (object sender, PropertyChangedEventArgs e)
 		{
 			//if (BcGlobal.timerTrippedCount>1)
 			//	System.Diagnostics.Debug.WriteLine (GetType ().Name + ".OnItemPropertyChanged( " + sender + ", " + e);
@@ -1060,10 +1110,9 @@ namespace Forms9Patch
 				}
 			}
 			*/
-			PropertyChangedEventHandler handler = ItemPropertyChanged;
-			if (sender != null && handler != null)
-				handler (sender, e);
+			ItemWrapperPropertyChanged?.Invoke(sender, e);
 		}
+
 		#endregion
 
 
