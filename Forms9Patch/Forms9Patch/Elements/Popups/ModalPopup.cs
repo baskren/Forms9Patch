@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Forms9Patch;
 
 namespace Forms9Patch {
 	/// <summary>
@@ -65,15 +64,16 @@ namespace Forms9Patch {
 		#endregion
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.ModalPopup"/> class.
+		/// Initializes a new instance of the <see cref="ModalPopup"/> class.
 		/// </summary>
 		/// <param name="host">Host.</param>
-		public ModalPopup (Page host=null) : base (host: host) {
-			
+		public ModalPopup (Page host=null) : base (host: host) 
+		{
+			Margin = 50;
 			Padding = 10;
 			_frame = new Frame {
 				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center,
+				HorizontalOptions = LayoutOptions.Center
 			};
 			SetRoundedBoxBindings (_frame);
 			_frame.SetBinding (Frame.HasShadowProperty, "HasShadow");
@@ -91,11 +91,11 @@ namespace Forms9Patch {
 		protected override void OnPropertyChanged (string propertyName = null) {
 			//System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
 			//if (propertyName == IsPresentedProperty.PropertyName) {
-			if (propertyName == VisualElement.TranslationXProperty.PropertyName) {
+			if (propertyName == TranslationXProperty.PropertyName) {
 				_frame.TranslationX = TranslationX;
 				return;
 			}
-			if (propertyName == VisualElement.TranslationYProperty.PropertyName) {
+			if (propertyName == TranslationYProperty.PropertyName) {
 				_frame.TranslationY = TranslationY;
 				return;
 			}
@@ -112,13 +112,13 @@ namespace Forms9Patch {
 						Host.SizeChanged += OnHostSizeChanged;
 						Parent = Host;
 						Host.SetValue (PopupProperty, this);
-						Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
+						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
 						// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 						ForceNativeLayout?.Invoke ();
 					} else {
 						Host.SizeChanged -= OnHostSizeChanged;
 						Host.SetValue (PopupProperty, null);
-						Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
+						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
 					}
 				}
 			}	
@@ -127,7 +127,7 @@ namespace Forms9Patch {
 		void OnHostSizeChanged(object sender, EventArgs e) {
 			//Host = Host ?? Application.Current.MainPage;			
 			if (Host != null) {
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
+				LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
 				// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 				ForceNativeLayout?.Invoke ();
 			}
@@ -148,16 +148,25 @@ namespace Forms9Patch {
 			if (width > 0 && height > 0) {
 				_frame.IsVisible = true;
 
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
+				LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
 
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
 				var shadow = BubbleLayout.ShadowPadding (_frame);
-				var request = _frame.Content.GetSizeRequest (Host.Bounds.Width, Host.Bounds.Height);
-				//var request = _frame.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
-				var rboxSize = new Size (request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
-				var contentX = double.IsNegativeInfinity(Location.X) ? width  / 2.0 - rboxSize.Width  / 2.0 : Location.X;
-				var contentY = double.IsNegativeInfinity(Location.Y) ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (ContentView, new Rectangle (contentX, contentY, rboxSize.Width, rboxSize.Height));
+
+				_frame.HorizontalOptions = HorizontalOptions;
+				_frame.VerticalOptions = VerticalOptions;
+				_frame.Padding = Padding;
+				_frame.Margin = Margin;
+				var request = _frame.Content.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);  //
+
+
+				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? width : request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
+				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? height : request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+				//var rboxSize = new Size (request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+				var rboxSize = new Size(rBoxWidth, rBoxHeight);
+				var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width  / 2.0 - rboxSize.Width  / 2.0 : Location.X;
+				var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
+				LayoutChildIntoBoundingRegion (ContentView, new Rectangle (contentX, contentY, rboxSize.Width, rboxSize.Height));
 				//_frame.ForceLayout ();
 			} else
 				_frame.IsVisible = false;
