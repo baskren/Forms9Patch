@@ -159,14 +159,16 @@ namespace Forms9Patch {
 				var shadow = BubbleLayout.ShadowPadding (_frame);
 
 				// new approach
-				var request = _frame.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);
-				var rboxSize = new Size(request.Request.Width, request.Request.Height);
+				//var request = _frame.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);
+				//var rboxSize = new Size(request.Request.Width, request.Request.Height);
 
 				// old approach
-				//var request = _frame.Content.Measure(Host.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness, Host.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness, MeasureFlags.None);  //
-				//var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? width : request.Request.Width + Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
-				//var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? height : request.Request.Height + Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
-				//var rboxSize = new Size(rBoxWidth, rBoxHeight);
+				var availWidth = Host.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness;
+				var availHeight = Host.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness;
+				var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
+				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width,availWidth) + Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
+				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height,availHeight) + Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+				var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
 				var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width  / 2.0 - rboxSize.Width  / 2.0 : Location.X;
 				var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
