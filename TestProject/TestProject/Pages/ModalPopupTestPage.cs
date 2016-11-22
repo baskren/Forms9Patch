@@ -58,6 +58,7 @@ namespace TestProject
 			BackgroundColor = Color.White;
 			Padding = new Thickness(20,Device.OnPlatform(20,0,0),20,20);
 
+
 			var shadowToggle = new Switch ();
 			shadowToggle.SetBinding (Switch.IsToggledProperty, "HasShadow");
 			shadowToggle.BindingContext = this;
@@ -120,7 +121,8 @@ namespace TestProject
 					greenSegment,
 					blueSegment,
 				},
-				BackgroundColor = Color.White
+				BackgroundColor = Color.White,
+				FontSize = 10,
 			};
 
 			var modal = new Forms9Patch.ModalPopup {
@@ -147,6 +149,7 @@ namespace TestProject
 				HasShadow = true,
 				HeightRequest = 200,
 				WidthRequest = 200,
+				Margin = 0,
 			};
 			modal.SetBinding (Forms9Patch.ModalPopup.OutlineRadiusProperty, "CornerRadius");
 			modal.SetBinding (Forms9Patch.ModalPopup.OutlineWidthProperty, "OutlineWidth");

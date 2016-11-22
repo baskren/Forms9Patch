@@ -42,6 +42,21 @@ namespace Forms9Patch
 			get { return (Thickness)GetValue(MarginProperty); }
 			set { SetValue(MarginProperty, value); }
 		}
+
+		public static readonly new BindableProperty HorizontalOptionsProperty = BindableProperty.Create("HorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+		public new LayoutOptions HorizontalOptions
+		{
+			get { return (LayoutOptions)GetValue(HorizontalOptionsProperty); }
+			set { SetValue(HorizontalOptionsProperty, value); }
+		}
+
+		public static readonly new BindableProperty VerticalOptionsProperty = BindableProperty.Create("VerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+		public new LayoutOptions VerticalOptions
+		{
+			get { return (LayoutOptions)GetValue(VerticalOptionsProperty); }
+			set { SetValue(VerticalOptionsProperty, value); }
+		}
+
 		#endregion
 
 

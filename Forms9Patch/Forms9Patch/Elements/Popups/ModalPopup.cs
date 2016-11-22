@@ -69,7 +69,7 @@ namespace Forms9Patch {
 		/// <param name="host">Host.</param>
 		public ModalPopup (Page host=null) : base (host: host) 
 		{
-			Margin = 50;
+			Margin = 0;
 			Padding = 10;
 			_frame = new Frame {
 				VerticalOptions = LayoutOptions.Center,
@@ -79,6 +79,10 @@ namespace Forms9Patch {
 			_frame.SetBinding (Frame.HasShadowProperty, "HasShadow");
 			_frame.SetBinding (Frame.BackgroundImageProperty, "BackgroundImage");
 			_frame.SetBinding (Frame.PaddingProperty, "Padding");
+			_frame.SetBinding(View.MarginProperty, MarginProperty.PropertyName);
+			_frame.SetBinding(View.HorizontalOptionsProperty, HorizontalOptionsProperty.PropertyName);
+			_frame.SetBinding(View.VerticalOptionsProperty, VerticalOptionsProperty.PropertyName);
+
 			_frame.BindingContext = this;
 			ContentView = _frame;
 		}
@@ -148,17 +152,13 @@ namespace Forms9Patch {
 			if (width > 0 && height > 0) {
 				_frame.IsVisible = true;
 
-				LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
+				//LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
+				LayoutChildIntoBoundingRegion(PageOverlay, Host.Bounds);
 
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
 				var shadow = BubbleLayout.ShadowPadding (_frame);
 
-				_frame.HorizontalOptions = HorizontalOptions;
-				_frame.VerticalOptions = VerticalOptions;
-				_frame.Padding = Padding;
-				_frame.Margin = Margin;
 				var request = _frame.Content.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);  //
-
 
 				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? width : request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
 				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? height : request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
