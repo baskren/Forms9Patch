@@ -158,12 +158,16 @@ namespace Forms9Patch {
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
 				var shadow = BubbleLayout.ShadowPadding (_frame);
 
-				var request = _frame.Content.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);  //
+				// new approach
+				var request = _frame.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);
+				var rboxSize = new Size(request.Request.Width, request.Request.Height);
 
-				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? width : request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
-				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? height : request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
-				//var rboxSize = new Size (request.Request.Width + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
-				var rboxSize = new Size(rBoxWidth, rBoxHeight);
+				// old approach
+				//var request = _frame.Content.Measure(Host.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness, Host.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness, MeasureFlags.None);  //
+				//var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? width : request.Request.Width + Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
+				//var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? height : request.Request.Height + Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+				//var rboxSize = new Size(rBoxWidth, rBoxHeight);
+
 				var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width  / 2.0 - rboxSize.Width  / 2.0 : Location.X;
 				var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
 				LayoutChildIntoBoundingRegion (ContentView, new Rectangle (contentX, contentY, rboxSize.Width, rboxSize.Height));

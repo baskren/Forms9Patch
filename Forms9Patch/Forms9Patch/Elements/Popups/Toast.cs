@@ -8,6 +8,12 @@ namespace Forms9Patch
 	/// </summary>
 	public class Toast : ModalPopup
 	{
+		public static void Create(string title, string text)
+		{
+			var toast = new Toast { Title = title, Text = text };
+			toast.IsVisible = true;
+		}
+
 		#region Properties
 		/// <summary>
 		/// The title property backing store.
@@ -50,8 +56,8 @@ namespace Forms9Patch
 		{
 			FontSize = 16,
 			TextColor = Color.Black,
-			Lines = 0,
-			VerticalOptions = LayoutOptions.Fill,
+			//Lines = 0,
+			//VerticalOptions = LayoutOptions.Fill,
 		};
 		#endregion
 
@@ -60,9 +66,7 @@ namespace Forms9Patch
 		/// </summary>
 		public Toast()
 		{
-			//Margin = 40;
-			HorizontalOptions = LayoutOptions.Center;
-			VerticalOptions = LayoutOptions.Center;
+			Margin = 30;
 
 			#region bindings
 			_titleLabel.SetBinding(Label.HtmlTextProperty, TitleProperty.PropertyName);
@@ -70,23 +74,24 @@ namespace Forms9Patch
 			_textLabel.SetBinding(Label.HtmlTextProperty, TextProperty.PropertyName);
 			_textLabel.BindingContext = this;
 			#endregion
+
 			var okButton = new MaterialButton { Text = "OK" };
-			/*
+			okButton.Tapped += (s, args) => Cancel();
+
 			Content = new StackLayout
 			{
 				Children = 
 				{
 					_titleLabel,
-					_textLabel,
+					new ScrollView
+					{
+						Content = _textLabel
+					},
 					okButton
 				}
 			};
-			*/
-			Content = _textLabel;
-			//BackgroundColor = Color.FromRgb(1.0, 1.0, 1.0);
 			HasShadow = true;
 			OutlineRadius = 4;
-			okButton.Tapped += (s, args) => Cancel();
 		}
 	}
 }
