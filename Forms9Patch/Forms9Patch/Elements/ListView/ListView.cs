@@ -812,7 +812,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="sender">Sender.</param>
 		/// <param name="e">E.</param>
-		public void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
+		void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
 		{
 			SwipeMenuItemTapped?.Invoke(sender, e);
 		}
