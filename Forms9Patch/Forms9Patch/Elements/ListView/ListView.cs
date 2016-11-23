@@ -6,6 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace Forms9Patch
 {
@@ -896,21 +898,26 @@ namespace Forms9Patch
 			var itemGroup = _baseItemsSource.WrapperForSource(group) as GroupWrapper;
 			if (itemGroup != null)
 			{
-				var itemItem = itemGroup.WrapperForSource(item);
+				var itemWrapper = itemGroup.WrapperForSource(item);
+				if (itemWrapper == null)
+				{
+					// this will happen when item is inside of a group that is not of SubGroupType type 
+					ItemWrapperForSourceItem(item, group as IEnumerable, out itemWrapper);
+				}
 				Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
 					if (Device.OS == TargetPlatform.Android)
 					{
 						if (IsGroupingEnabled)
-							RendererScrollToPos?.Invoke(itemItem, group, position, animated);
+							RendererScrollToPos?.Invoke(itemWrapper, group, position, animated);
 						else
-							RendererScrollToPos?.Invoke(itemItem, null, position, animated);
+							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
 					}
 					else 
 					{ 
 						if (IsGroupingEnabled) 
-							base.ScrollTo(itemItem, itemGroup, position, animated); 
+							base.ScrollTo(itemWrapper, itemGroup, position, animated); 
 						else 
-							base.ScrollTo(itemItem, position, animated); 
+							base.ScrollTo(itemWrapper, position, animated); 
 					}
 					return false;
 				});
@@ -925,27 +932,61 @@ namespace Forms9Patch
 		/// <param name="animated">If set to <c>true</c> animated.</param>
 		public new void ScrollTo(object item, ScrollToPosition position, bool animated)
 		{
-			var itemItem = _baseItemsSource.WrapperForSource(item);
-			if (itemItem != null)
+			var itemWrapper = _baseItemsSource.WrapperForSource(item);
+			if (itemWrapper == null)
+			{
+				// this will happen when item is inside of a group that is not of SubGroupType type 
+				ItemWrapperForSourceItem(item, ItemsSource, out itemWrapper);
+			}
+			if (itemWrapper != null)
 				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
 				Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
 				{
 					if (Device.OS == TargetPlatform.Android)
 					{
 						if (IsGroupingEnabled)
-							RendererScrollToPos?.Invoke(itemItem, BaseItemsSource, position, animated);
-	                    else
-							RendererScrollToPos?.Invoke(itemItem, null, position, animated);
+							RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
+						else
+							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
 					}
-						//RendererScrollToItemInGroup(item, group, position, animated);
+					//RendererScrollToItemInGroup(item, group, position, animated);
 					else
 					{
-						base.ScrollTo(itemItem, position, animated);
+						base.ScrollTo(itemWrapper, position, animated);
 					}
-					 return false;
-				 });
+					return false;
+				});
+			else
+				throw new InvalidDataContractException("Should not have any cell that doesn't have an items source!");
 		}
+
+
+		bool ItemWrapperForSourceItem(object sourceItem, IEnumerable sourceGroup, out ItemWrapper itemWrapper)
+		{
+			itemWrapper = null;
+			foreach (var item in sourceGroup)
+			{
+				if (item == sourceItem)
+				{
+					itemWrapper = BaseItemsSource.WrapperForSource(item);
+					// we are in this function because item isn't in BaseItemsSource so we will now return so the recursion can find the item's parent that is in BaseItemsSource
+					return true;
+				}
+				var enumerable = item as IEnumerable;
+				if (enumerable!=null && ItemWrapperForSourceItem(sourceItem, enumerable, out itemWrapper))
+				{
+					// source is a child of this object!
+					itemWrapper = itemWrapper ?? BaseItemsSource.WrapperForSource(enumerable);
+					return true;
+				}
+			}
+			return false;
+		}
+
+
 		#endregion
+
+
 
 
 		#region Drag/Drop
