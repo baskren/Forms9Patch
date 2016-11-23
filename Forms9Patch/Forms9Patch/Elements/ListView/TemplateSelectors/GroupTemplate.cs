@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Collections.Generic;
-using System.Collections;
 using System.Reflection;
 
 namespace Forms9Patch
@@ -9,7 +8,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Data template selector: Used to match types of objects with the types of views that will be used to display them in a ListView.
 	/// </summary>
-	public class DataTemplateSelector : Xamarin.Forms.DataTemplateSelector
+	public class GroupTemplate : Xamarin.Forms.DataTemplateSelector
 	{
 
 		Type _baseCellViewType = typeof(BaseCellView);
@@ -25,14 +24,14 @@ namespace Forms9Patch
 			}
 		}
 
-		readonly Dictionary <Type, DataTemplate> _cellTemplates = new Dictionary<Type, DataTemplate>();
+		protected readonly Dictionary <Type, DataTemplate> _cellTemplates = new Dictionary<Type, DataTemplate>();
 		readonly Dictionary <Type, Type> _contentTypes = new Dictionary<Type, Type> ();
 		readonly DataTemplate _unknownTemplate;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector"/> class.
 		/// </summary>
-		public DataTemplateSelector() {
+		protected GroupTemplate() {
 			//Add (typeof(NullItem), typeof (NullCellView));
 			var viewType = typeof(NullItemCellView);
 			Type cellType = typeof(Cell<>).MakeGenericType (new[] { viewType });
@@ -58,48 +57,63 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.GroupTemplate"/> class.
+		/// </summary>
+		/// <param name="groupContentViewType">Group content view type.</param>
+		public GroupTemplate(Type groupContentViewType) : this()
+		{
+			var itemType = typeof(GroupWrapper);
+			Type cellType = typeof(Cell<>).MakeGenericType(new[] { groupContentViewType });
+			var template = new DataTemplate(cellType);
+			_cellTemplates[itemType] = template;
+			_contentTypes[itemType] = groupContentViewType;
+		}
+
+		/// <summary>
 		/// Add to the DetaTemplateSelector a viewType that will be used to display any objects of itemBaseType.
 		/// </summary>
 		/// <param name="itemBaseType">Item base type.</param>
 		/// <param name="viewType">View type.</param>
-		public void Add(Type itemBaseType, Type viewType) {
+
+		protected void Add(Type itemBaseType, Type viewType) {
 			if (_cellTemplates.Count > 20)
 				throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
 			Type itemType;
-			//var iList = itemBaseType as IList;
-			//if (typeof(IList).GetTypeInfo().IsAssignableFrom(itemBaseType.GetTypeInfo()))
-				itemType = itemBaseType;
-			//else
-			//	itemType = typeof(Item<>).MakeGenericType (new [] { itemBaseType });
+			//itemType = itemBaseType;
+			itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
 			Type cellType = typeof(Cell<>).MakeGenericType (new [] { viewType });
 			var template = new DataTemplate (cellType);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
 		}
 
+
 		/// <summary>
 		/// Triggered when a Forms9Patch.ListView needs to create a view template for an item.
 		/// </summary>
 		/// <returns>The select template.</returns>
-		/// <param name="obj">Item.</param>
+		/// <param name="item">Item.</param>
 		/// <param name="container">Container.</param>
-		protected override DataTemplate OnSelectTemplate (object obj, BindableObject container)
+		protected override DataTemplate OnSelectTemplate (object item, BindableObject container)
 		{
 			//var group = item as Group;
 			//Type itemType = group?.Source.GetType () ?? item.GetType ();
 			//Type itemType = ((item as Item)?.Source ?? item).GetType();
-			var item = obj as ItemWrapper;
-			if (item != null)
+			var itemWrapper = item as ItemWrapper;
+			if (itemWrapper != null)
 			{
-				Type itemType = item.GetType();
+				Type itemType = itemWrapper.GetType();
 				if (_cellTemplates.ContainsKey(itemType))
 					return _cellTemplates[itemType];
-				var source = item.Source;
+				var source = itemWrapper.Source;
 				if (source != null)
-					return TemplateForType(source.GetType());
+				{
+					var template = TemplateForType(source.GetType());
+					return template;
+				}
 				return _cellTemplates[typeof(BlankItemWrapper)];
 			}
-			throw new KeyNotFoundException("No data template found.  item=["+item+"]  item.source=["+(item?.Source)+"]");
+			throw new KeyNotFoundException("No data template found.  item=["+itemWrapper+"]  item.source=["+(itemWrapper?.Source)+"]");
 		}
 
 		DataTemplate TemplateForType(Type type) {
@@ -136,7 +150,7 @@ namespace Forms9Patch
 
 
 		//class Cell<TContent> : ViewCell where TContent : ContentView, new() {
-		class Cell<TContent> : ViewCell where TContent : Xamarin.Forms.View, new() {
+		class Cell<TContent> : ViewCell where TContent : View, new() {
 			
 			internal BaseCellView BaseCellView = new BaseCellView ();
 			ICellContentView _iCellContent;
