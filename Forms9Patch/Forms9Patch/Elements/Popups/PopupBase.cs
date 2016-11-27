@@ -43,14 +43,28 @@ namespace Forms9Patch
 			set { SetValue(MarginProperty, value); }
 		}
 
+		/// <summary>
+		/// The horizontal options property backing store.
+		/// </summary>
 		public static readonly new BindableProperty HorizontalOptionsProperty = BindableProperty.Create("HorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+		/// <summary>
+		/// Gets or sets the horizontal options.
+		/// </summary>
+		/// <value>The horizontal options.</value>
 		public new LayoutOptions HorizontalOptions
 		{
 			get { return (LayoutOptions)GetValue(HorizontalOptionsProperty); }
 			set { SetValue(HorizontalOptionsProperty, value); }
 		}
 
+		/// <summary>
+		/// The vertical options property.
+		/// </summary>
 		public static readonly new BindableProperty VerticalOptionsProperty = BindableProperty.Create("VerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+		/// <summary>
+		/// Gets or sets the vertical options.
+		/// </summary>
+		/// <value>The vertical options.</value>
 		public new LayoutOptions VerticalOptions
 		{
 			get { return (LayoutOptions)GetValue(VerticalOptionsProperty); }

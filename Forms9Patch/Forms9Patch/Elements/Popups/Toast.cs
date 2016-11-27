@@ -8,6 +8,11 @@ namespace Forms9Patch
 	/// </summary>
 	public class Toast : ModalPopup
 	{
+		/// <summary>
+		/// Creates and displays a Toast with specified title and text.
+		/// </summary>
+		/// <param name="title">Title.</param>
+		/// <param name="text">Text.</param>
 		public static void Create(string title, string text)
 		{
 			var toast = new Toast { Title = title, Text = text };

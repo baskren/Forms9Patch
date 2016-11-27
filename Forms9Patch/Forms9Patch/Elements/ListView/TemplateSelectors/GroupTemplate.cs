@@ -24,6 +24,9 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// The cell templates.
+		/// </summary>
 		protected readonly Dictionary <Type, DataTemplate> _cellTemplates = new Dictionary<Type, DataTemplate>();
 		readonly Dictionary <Type, Type> _contentTypes = new Dictionary<Type, Type> ();
 		readonly DataTemplate _unknownTemplate;
