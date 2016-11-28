@@ -60,6 +60,19 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// Removes the factory defaults, to make more space for Andriod implementation.
+		/// </summary>
+		public void RemoveFactoryDefaults()
+		{
+			_cellTemplates.Remove(typeof(NullItemWrapper));
+			_contentTypes.Remove(typeof(NullItemWrapper));
+			_cellTemplates.Remove(typeof(BlankItemWrapper));
+			_contentTypes.Remove(typeof(BlankItemWrapper));
+			_cellTemplates.Remove(typeof(ItemWrapper<string>));
+			_contentTypes.Remove(typeof(ItemWrapper<string>));
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.GroupTemplate"/> class.
 		/// </summary>
 		/// <param name="groupContentViewType">Group content view type.</param>
@@ -79,16 +92,17 @@ namespace Forms9Patch
 		/// <param name="viewType">View type.</param>
 
 		protected void Add(Type itemBaseType, Type viewType) {
-			if (_cellTemplates.Count > 20)
-				throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
 			Type itemType;
 			//itemType = itemBaseType;
 			itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
+			if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(itemType))
+				throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
 			Type cellType = typeof(Cell<>).MakeGenericType (new [] { viewType });
 			var template = new DataTemplate (cellType);
 			_cellTemplates [itemType] = template;
 			_contentTypes [itemType] = viewType;
 		}
+
 
 
 		/// <summary>

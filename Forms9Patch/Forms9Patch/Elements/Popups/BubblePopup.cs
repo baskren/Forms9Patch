@@ -23,12 +23,6 @@ namespace Forms9Patch
 
 		#region Bubble Properties
 		/// <summary>
-		/// Gets or sets the target visual element.
-		/// </summary>
-		/// <value>The target.</value>
-		public VisualElement Target { get; set; }
-
-		/// <summary>
 		/// The target bias property backing Store.
 		/// </summary>
 		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("TargetBias", typeof(double), typeof(BubblePopup), 0.5);
@@ -127,8 +121,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
 		/// </summary>
 		/// <param name="target">Target.</param>
-		/// <param name="host">Host.</param>
-		public BubblePopup (VisualElement target=null, Page host=null) : base (host: host) {
+		public BubblePopup (VisualElement target) : base (target) {
 			_bubbleLayout = new BubbleLayout {
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center
@@ -144,8 +137,6 @@ namespace Forms9Patch
 			_bubbleLayout.SetBinding (BubbleLayout.HasShadowProperty, "HasShadow");
 			_bubbleLayout.BindingContext = this;
 			ContentView = _bubbleLayout;
-
-			Target = target;
 		}
 
 
@@ -166,36 +157,36 @@ namespace Forms9Patch
 			if (_bubbleLayout == null)
 				return;
 			if (propertyName == IsVisibleProperty.PropertyName) {
-				if (Host == null)
-					Host = Application.Current.MainPage;			
+				if (HostPage == null)
+					HostPage = Application.Current.MainPage;			
 				if (IsVisible) {
 					Content.TranslationX = 0;
 					Content.TranslationY = 0;
 					//System.Diagnostics.Debug.WriteLine ("======================================================================");
 					if (Target != null)
 						Target.SizeChanged += OnTargetSizeChanged;
-					Parent = Host;
-					Host.SetValue (PopupProperty, this);
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
+					Parent = HostPage;
+					HostPage.SetValue (PopupProperty, this);
+					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
 					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 					ForceNativeLayout?.Invoke ();
 				} else {
 					if (Target != null)
 						Target.SizeChanged -= OnTargetSizeChanged;
-					Host.SetValue (PopupProperty, null);
+					HostPage.SetValue (PopupProperty, null);
 					_bubbleLayout.PointerDirection = PointerDirection.None;
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
+					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
 				}
 			}
 		}
 
 		void OnTargetSizeChanged(object sender, EventArgs e) {
 			//Host = Host ?? Application.Current.MainPage;			
-			if (Host != null) {
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle(-1,-1,Host.Bounds.Width+1,Host.Bounds.Height+1));
+			if (HostPage != null) {
+				LayoutChildIntoBoundingRegion (this, new Rectangle(-1,-1,HostPage.Bounds.Width+1,HostPage.Bounds.Height+1));
 				ForceNativeLayout?.Invoke ();
 				Device.StartTimer (TimeSpan.FromMilliseconds(10), () => {
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (this, new Rectangle(0,0,Host.Bounds.Width,Host.Bounds.Height));
+					LayoutChildIntoBoundingRegion (this, new Rectangle(0,0,HostPage.Bounds.Width,HostPage.Bounds.Height));
 					ForceNativeLayout?.Invoke ();
 					return false;
 				});
@@ -285,10 +276,10 @@ namespace Forms9Patch
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
 			if (width > 0 && height > 0) {
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion (PageOverlay, Host.Bounds);
+				LayoutChildIntoBoundingRegion (PageOverlay, HostPage.Bounds);
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
-				var request = _bubbleLayout.Content.GetSizeRequest (Host.Bounds.Width, Host.Bounds.Height);
+				var request = _bubbleLayout.Content.GetSizeRequest (HostPage.Bounds.Width, HostPage.Bounds.Height);
 				//var request = _bubbleLayout.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
 				var rboxSize = new Size (request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
 
@@ -298,48 +289,48 @@ namespace Forms9Patch
 				Rectangle bounds;
 				Rectangle targetBounds=Rectangle.Zero;
 				if (Target != null) {
-					targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (Host, Target);
+					targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
 					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
-					var reqSpaceToRight = Host.Bounds.Width - targetBounds.Right - rboxSize.Width - PointerLength;
+					var reqSpaceToRight = HostPage.Bounds.Width - targetBounds.Right - rboxSize.Width - PointerLength;
 					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength;
-					var reqSpaceBelow = Host.Bounds.Height - targetBounds.Bottom - rboxSize.Height - PointerLength;
-					var reqHzSpace = Host.Bounds.Width - rboxSize.Width;
-					var reqVtSpace = Host.Bounds.Height - rboxSize.Height;
+					var reqSpaceBelow = HostPage.Bounds.Height - targetBounds.Bottom - rboxSize.Height - PointerLength;
+					var reqHzSpace = HostPage.Bounds.Width - rboxSize.Width;
+					var reqVtSpace = HostPage.Bounds.Height - rboxSize.Height;
 
 
 					double space = 0;
-					if (this.PointerDirection.UpAllowed () && Math.Min (reqSpaceBelow, reqHzSpace) > space) {
+					if (PointerDirection.UpAllowed () && Math.Min (reqSpaceBelow, reqHzSpace) > space) {
 						pointerDir = PointerDirection.Up;
 						space = Math.Min (reqSpaceBelow, reqHzSpace);
 					}
-					if (this.PointerDirection.DownAllowed () && Math.Min (reqSpaceAbove, reqHzSpace) > space) {
+					if (PointerDirection.DownAllowed () && Math.Min (reqSpaceAbove, reqHzSpace) > space) {
 						pointerDir = PointerDirection.Down;
 						space = Math.Min (reqSpaceAbove, reqHzSpace);
 					}
-					if (this.PointerDirection.LeftAllowed () && Math.Min (reqSpaceToRight, reqVtSpace) > space) {
+					if (PointerDirection.LeftAllowed () && Math.Min (reqSpaceToRight, reqVtSpace) > space) {
 						pointerDir = PointerDirection.Left;
 						space = Math.Min (reqSpaceToRight, reqVtSpace);
 					}
-					if (this.PointerDirection.RightAllowed () && Math.Min (reqSpaceToLeft, reqVtSpace) > space) {
+					if (PointerDirection.RightAllowed () && Math.Min (reqSpaceToLeft, reqVtSpace) > space) {
 						pointerDir = PointerDirection.Right;
 						space = Math.Min (reqSpaceToLeft, reqVtSpace);
 					}
 					if (space < 0.01) {
 						// it doesn't fit ... what's the closest fit?
-						space = Int32.MaxValue;
-						if (this.PointerDirection.UpAllowed () && Math.Abs (Math.Min (reqSpaceBelow, reqHzSpace)) < space) {
+						space = int.MaxValue;
+						if (PointerDirection.UpAllowed () && Math.Abs (Math.Min (reqSpaceBelow, reqHzSpace)) < space) {
 							pointerDir = PointerDirection.Up;
 							space = Math.Abs (Math.Min (reqSpaceBelow, reqHzSpace));
 						}
-						if (this.PointerDirection.DownAllowed () && Math.Abs (Math.Min (reqSpaceAbove, reqHzSpace)) < space) {
+						if (PointerDirection.DownAllowed () && Math.Abs (Math.Min (reqSpaceAbove, reqHzSpace)) < space) {
 							pointerDir = PointerDirection.Down;
 							space = Math.Abs (Math.Min (reqSpaceAbove, reqHzSpace));
 						}
-						if (this.PointerDirection.LeftAllowed () && Math.Abs (Math.Min (reqSpaceToRight, reqVtSpace)) < space) {
+						if (PointerDirection.LeftAllowed () && Math.Abs (Math.Min (reqSpaceToRight, reqVtSpace)) < space) {
 							pointerDir = PointerDirection.Left;
 							space = Math.Abs (Math.Min (reqSpaceToRight, reqVtSpace));
 						}
-						if (this.PointerDirection.RightAllowed () && Math.Abs (Math.Min (reqSpaceToLeft, reqVtSpace)) < space) {
+						if (PointerDirection.RightAllowed () && Math.Abs (Math.Min (reqSpaceToLeft, reqVtSpace)) < space) {
 							pointerDir = PointerDirection.Right;
 						}
 					}
@@ -351,7 +342,7 @@ namespace Forms9Patch
 				} else {
 					Tuple<double,float> tuple;
 					if (pointerDir.IsVertical ()) {
-						tuple = StartAndPointerLocation (rboxSize.Width, targetBounds.Left, targetBounds.Width, Host.Bounds.Width);
+						tuple = StartAndPointerLocation (rboxSize.Width, targetBounds.Left, targetBounds.Width, HostPage.Bounds.Width);
 						bounds = new Rectangle (
 							new Point (
 								tuple.Item1,
@@ -359,7 +350,7 @@ namespace Forms9Patch
 							new Size (rboxSize.Width, rboxSize.Height + PointerLength)
 						);
 					} else {
-						tuple = StartAndPointerLocation (rboxSize.Height, targetBounds.Top, targetBounds.Height, Host.Bounds.Height);
+						tuple = StartAndPointerLocation (rboxSize.Height, targetBounds.Top, targetBounds.Height, HostPage.Bounds.Height);
 						bounds = new Rectangle (
 							new Point (
 								(pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength), 
@@ -375,9 +366,9 @@ namespace Forms9Patch
 			} else
 				_bubbleLayout.IsVisible = false;
 		}
-
-
 		#endregion
+
+
 	}
 }
 

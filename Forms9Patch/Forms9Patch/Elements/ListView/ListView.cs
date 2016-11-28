@@ -494,11 +494,7 @@ namespace Forms9Patch
 		int id;
 		Listener _listener;
 
-		readonly ModalPopup _popup = new ModalPopup {
-			Padding = 3,
-			HasShadow = true,
-			OutlineRadius = 4
-		};
+		readonly ModalPopup _popup;
 
 		void init() {
 			//this.DisableSelection();
@@ -542,6 +538,13 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="strategy">Strategy.</param>
 		public ListView(ListViewCachingStrategy strategy) : base (strategy){
+			_popup = new ModalPopup(this)
+			{
+				Padding = 3,
+				HasShadow = true,
+				OutlineRadius = 4
+			};
+
 			init ();
 		}
 
@@ -549,6 +552,13 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
 		public ListView() {
+			_popup = new ModalPopup(this)
+			{
+				Padding = 3,
+				HasShadow = true,
+				OutlineRadius = 4
+			};
+
 			init ();
 		}
 

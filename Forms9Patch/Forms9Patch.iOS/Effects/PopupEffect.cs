@@ -49,11 +49,20 @@ namespace Forms9Patch.iOS
 					IVisualElementRenderer puRenderer = Platform.GetRenderer (puElement);
 					_nativeView = puRenderer.NativeView;
 
-					Container.Window.AddSubview(_nativeView);
+					if (Container.Window == null)
+					{
+						var pageRenderer = Platform.GetRenderer(Application.Current.MainPage as VisualElement) as Xamarin.Forms.Platform.iOS.PageRenderer;
+						pageRenderer.NativeView.AddSubview(_nativeView);
+						pageRenderer.NativeView.AddSubview(_nativeView);
+					}
+					else
+					{
+						Container.Window.AddSubview(_nativeView);
+						Container.Window.BringSubviewToFront(_nativeView);
+					}
 					puRenderer.NativeView.Hidden = false;
-					Container.Window.BringSubviewToFront(_nativeView);
 				} else {
-					_nativeView.RemoveFromSuperview();
+					_nativeView?.RemoveFromSuperview();
 					_nativeView = null;
 				}
 			}

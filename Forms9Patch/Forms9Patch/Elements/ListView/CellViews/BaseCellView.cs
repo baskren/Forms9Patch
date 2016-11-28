@@ -293,12 +293,12 @@ namespace Forms9Patch
 				if (_endButtons + _startButtons > 0)
 				{
 					//System.Diagnostics.Debug.WriteLine("ChildrenX=[" + ChildrenX + "]");
-					if ((side == Side.End && (e.TotalDistance.X > 20 || ChildrenX > -60)) || (side == Side.Start && (e.TotalDistance.X < -20 || ChildrenX < 60)))
+					if ((_endButtons>0 && side == Side.End && (e.TotalDistance.X > 20 || ChildrenX > -60)) || (_startButtons>0 && side == Side.Start && (e.TotalDistance.X < -20 || ChildrenX < 60)))
 					{
 						PutAwaySwipeButtons(true);
 						return;
 					}
-					if ((side == Side.End && _swipeFrame1.TranslationX < Width - 210 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated) || (side == Side.Start && _swipeFrame1.TranslationX > 210 - Width && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated))
+					if ((_endButtons >0 && side == Side.End && _swipeFrame1.TranslationX < Width - 210 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated) || (_startButtons > 0 && side == Side.Start && _swipeFrame1.TranslationX > 210 - Width && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated))
 					{
 						// execute full swipe
 						_swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
@@ -539,7 +539,7 @@ namespace Forms9Patch
 					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
 					Children = { segmentedController, cancelButton }
 				};
-				var modal = new Forms9Patch.ModalPopup
+				var modal = new Forms9Patch.ModalPopup(this)
 				{
 					BackgroundColor = Color.Transparent,
 					OutlineWidth = 0,

@@ -13,9 +13,9 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
-		public static void Create(string title, string text)
+		public static void Create(VisualElement target, string title, string text)
 		{
-			var toast = new Toast { Title = title, Text = text };
+			var toast = new Toast(target) { Title = title, Text = text };
 			toast.IsVisible = true;
 		}
 
@@ -69,7 +69,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
 		/// </summary>
-		public Toast()
+		public Toast(VisualElement target) : base (target)
 		{
 			Margin = 30;
 

@@ -19,6 +19,7 @@ namespace Forms9Patch {
 		}
 		#endregion
 
+
 		#region IBackgroundImage
 		/// <summary>
 		/// The background image property backing store.
@@ -66,8 +67,8 @@ namespace Forms9Patch {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ModalPopup"/> class.
 		/// </summary>
-		/// <param name="host">Host.</param>
-		public ModalPopup (Page host=null) : base (host: host) 
+		/// <param name="target">Element or Page pointed to by Popup.</param>
+		public ModalPopup (VisualElement target) : base (target) 
 		{
 			Margin = 0;
 			Padding = 10;
@@ -107,21 +108,21 @@ namespace Forms9Patch {
 			if (_frame == null)
 				return;
 			if (propertyName == IsVisibleProperty.PropertyName) {
-				if (Host == null)
-					Host = Application.Current.MainPage;			
-				if (Host != null) {
+				if (HostPage == null)
+					HostPage = Application.Current.MainPage;			
+				if (HostPage != null) {
 					if (IsVisible) {
 						TranslationX = 0;
 						TranslationY = 0;
-						Host.SizeChanged += OnHostSizeChanged;
-						Parent = Host;
-						Host.SetValue (PopupProperty, this);
-						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
+						HostPage.SizeChanged += OnHostSizeChanged;
+						Parent = HostPage;
+						HostPage.SetValue (PopupProperty, this);
+						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
 						// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 						ForceNativeLayout?.Invoke ();
 					} else {
-						Host.SizeChanged -= OnHostSizeChanged;
-						Host.SetValue (PopupProperty, null);
+						HostPage.SizeChanged -= OnHostSizeChanged;
+						HostPage.SetValue (PopupProperty, null);
 						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
 					}
 				}
@@ -130,8 +131,8 @@ namespace Forms9Patch {
 
 		void OnHostSizeChanged(object sender, EventArgs e) {
 			//Host = Host ?? Application.Current.MainPage;			
-			if (Host != null) {
-				LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, Host.Bounds.Width, Host.Bounds.Height));
+			if (HostPage != null) {
+				LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
 				// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 				ForceNativeLayout?.Invoke ();
 			}
@@ -153,7 +154,7 @@ namespace Forms9Patch {
 				_frame.IsVisible = true;
 
 				//LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
-				LayoutChildIntoBoundingRegion(PageOverlay, Host.Bounds);
+				LayoutChildIntoBoundingRegion(PageOverlay, HostPage.Bounds);
 
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
 				var shadow = BubbleLayout.ShadowPadding (_frame);
@@ -163,8 +164,8 @@ namespace Forms9Patch {
 				//var rboxSize = new Size(request.Request.Width, request.Request.Height);
 
 				// old approach
-				var availWidth = Host.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness;
-				var availHeight = Host.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness;
+				var availWidth = HostPage.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness;
+				var availHeight = HostPage.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness;
 				var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width,availWidth) + Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
 				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height,availHeight) + Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);

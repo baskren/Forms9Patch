@@ -80,26 +80,41 @@ namespace Forms9Patch
 		/// <summary>
 		/// The host page property.
 		/// </summary>
-		public static readonly BindableProperty HostProperty = BindableProperty.Create("Host", typeof(Page), typeof(PopupBase), default(Page));
+		internal static readonly BindableProperty HostProperty = BindableProperty.Create("Host", typeof(Page), typeof(PopupBase), default(Page));
 		/// <summary>
 		/// Gets or sets the popup's host page.
 		/// </summary>
 		/// <value>The host page (null defaults to MainPage).</value>
-		public Page Host
+		internal Page HostPage
 		{
 			get { return (Page)GetValue(HostProperty); }
 			set
 			{
 				var effect = Effect.Resolve("Forms9Patch.PopupEffect");
-				Host?.Effects.Remove(effect);
+				HostPage?.Effects.Remove(effect);
 				SetValue(HostProperty, value);
-				Host?.Effects.Add(effect);
-				if (Host != null && !effect.IsAttached)
+				HostPage?.Effects.Add(effect);
+				if (HostPage != null && !effect.IsAttached)
 				{
 					System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");
 				}
 			}
 		}
+
+		/// <summary>
+		/// The target property.
+		/// </summary>
+		public static readonly BindableProperty TargetProperty = BindableProperty.Create("Target", typeof(VisualElement), typeof(PopupBase), default(Element));
+		/// <summary>
+		/// Gets or sets the popup target (could be a Page or a VisualElement on a Page).
+		/// </summary>
+		/// <value>The target.</value>
+		public VisualElement Target
+		{
+			get { return (VisualElement)GetValue(TargetProperty); }
+			set { SetValue(TargetProperty, value); }
+		}
+
 
 		internal Listener Listener
 		{
@@ -283,8 +298,8 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
 		/// </summary>
-		/// <param name="host">Host.</param>
-		internal PopupBase(Page host = null)
+		/// <param name="target">Page or Element on Page in which Popup will be presented.</param>
+		internal PopupBase(VisualElement target)
 		{
 			IsVisible = false;
 			_pageOverlay = new BoxView
@@ -296,7 +311,8 @@ namespace Forms9Patch
 			_listener = new Listener(_pageOverlay);
 			_listener.Tapped += OnTapped;
 			_listener.Panning += OnPanning;
-			Host = host ?? Application.Current.MainPage;
+			//HostPage = host ?? Application.Current.MainPage;
+			Target = target ?? Application.Current.MainPage;
 			base.Children.Add(_pageOverlay);
 		}
 		#endregion
@@ -399,6 +415,8 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == PageOverlayColorProperty.PropertyName)
 				_pageOverlay.BackgroundColor = PageOverlayColor;
+			if (propertyName == TargetProperty.PropertyName)
+				HostPage = Target.HostingPage();
 		}
 
 		internal Action ForceNativeLayout { get; set; }
