@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using System.Linq;
 
 [assembly: ResolutionGroupName("Forms9Patch")]
 [assembly: ExportEffect(typeof(Forms9Patch.iOS.PopupEffect), "PopupEffect")]
@@ -52,7 +53,7 @@ namespace Forms9Patch.iOS
 					if (Container.Window == null)
 					{
 						var pageRenderer = Platform.GetRenderer(Application.Current.MainPage as VisualElement) as Xamarin.Forms.Platform.iOS.PageRenderer;
-						pageRenderer.NativeView.AddSubview(_nativeView);
+						//pageRenderer.NativeView.AddSubview(_nativeView);
 						pageRenderer.NativeView.AddSubview(_nativeView);
 					}
 					else
