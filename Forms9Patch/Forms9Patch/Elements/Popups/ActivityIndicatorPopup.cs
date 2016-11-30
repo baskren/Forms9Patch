@@ -27,6 +27,7 @@ namespace Forms9Patch
 			Content = indicator;
 			CancelOnPageOverlayTouch = false;
 			indicator.BackgroundColor = Color.Transparent;
+			indicator.Color = Color.Blue;
 			BackgroundColor = Color.Transparent;
 		}
 	}

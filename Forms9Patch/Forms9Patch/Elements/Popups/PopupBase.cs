@@ -417,6 +417,8 @@ namespace Forms9Patch
 				_pageOverlay.BackgroundColor = PageOverlayColor;
 			if (propertyName == TargetProperty.PropertyName)
 				HostPage = Target.HostingPage();
+			if (propertyName == "Parent")
+				HostPage = Target.HostingPage();
 		}
 
 		internal Action ForceNativeLayout { get; set; }

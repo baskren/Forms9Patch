@@ -172,7 +172,7 @@ namespace TestProject
 			//bubbleLabel.SetBinding (Label.TextProperty, "CornerRadius");
 			bubbleLabel.BindingContext = this;
 
-			var bubble = new Forms9Patch.BubblePopup {
+			var bubble = new Forms9Patch.BubblePopup(this) {
 				//BackgroundColor = Color.Green,
 				//OutlineColor = Color.Black,
 				//OutlineWidth = 1,

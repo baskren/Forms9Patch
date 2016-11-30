@@ -531,10 +531,8 @@ namespace Forms9Patch
 		public void Clear () { 
 			for (int i = _items.Count - 1; i >= 0; i--) {
 				var subGroup = _items[i] as GroupWrapper;
-				if (subGroup == null) 
-					RemoveAt (i);
-				else
-					subGroup.Clear ();
+				subGroup?.Clear();
+				RemoveAt(i);
 			}
 		}
 

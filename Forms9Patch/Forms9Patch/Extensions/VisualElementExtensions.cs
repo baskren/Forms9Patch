@@ -15,12 +15,23 @@ namespace Forms9Patch
 		public static Page HostingPage(this Element element)
 		{
 			var page = element as Page;
-			while (page == null && element.Parent != null && !(element.Parent is MultiPage<Page>))
+			while (page == null && element.Parent != null)
 			{
 				element = element.Parent;
 				page = element as Page;
 			}
-			return page;
+			Page lastSoloPage = page;
+			if (page != null)
+			{
+				// ok we have a page ... is it the right kind?
+				while (page != null && page.Parent != null)
+				{
+					if (!(page is MasterDetailPage /* && Device.OS == TargetPlatform.Android*/))
+						lastSoloPage = page;
+					page = page.Parent as Page;
+				}
+			}
+			return lastSoloPage;
 		}
 
 		/// <summary>

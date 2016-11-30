@@ -30,7 +30,7 @@ namespace TestProject
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			var modal = new Forms9Patch.ModalPopup
+			var modal = new Forms9Patch.ModalPopup(this)
 			{
 				Content = new Forms9Patch.StackLayout
 				{

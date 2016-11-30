@@ -53,7 +53,7 @@ namespace TestProject
 				}
 			};
 
-			bubble = new BubblePopup
+			bubble = new BubblePopup(this)
 			{
 				Padding =25,
 				BackgroundColor = Color.Blue,

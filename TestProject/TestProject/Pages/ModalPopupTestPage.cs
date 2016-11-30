@@ -125,7 +125,7 @@ namespace TestProject
 				FontSize = 10,
 			};
 
-			var modal = new Forms9Patch.ModalPopup {
+			var modal = new Forms9Patch.ModalPopup(this) {
 				Content = new StackLayout {
 					Children = {
 						new Label { 
