@@ -255,6 +255,17 @@ namespace Forms9Patch
 			}
 			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
 				ScrollToIndex(Index);
+			else if (propertyName == SelectedItemProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
+			{
+				var index = 0;
+				foreach (var item in ItemsSource)
+				{
+					if (item == SelectedItem)
+						ScrollToIndex(index);
+					index++;
+				}
+
+			}
 		}
 
 		/// <summary>

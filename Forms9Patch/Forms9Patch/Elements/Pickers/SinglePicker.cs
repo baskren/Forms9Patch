@@ -178,6 +178,10 @@ namespace Forms9Patch
 		}
 		#endregion
 
+		public void Reset()
+		{
+			SelectedItem = null;
+		}
 	}
 }
 
