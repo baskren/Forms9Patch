@@ -96,11 +96,11 @@
     <Compile Include="Elements\ListView\Interfaces\IHoverOver.cs" />
     <Compile Include="Elements\ListView\Interfaces\IIsSelectedAble.cs" />
     <Compile Include="Elements\ListView\Interfaces\IListItemLocation.cs" />
-    <Compile Include="Elements\ListView\Items\BlankItemWrapper.cs" />
-    <Compile Include="Elements\ListView\Items\GroupWrapper.cs" />
-    <Compile Include="Elements\ListView\Items\ItemWrapper.cs" />
-    <Compile Include="Elements\ListView\Items\ItemWrapper&lt;TItem&gt;.cs" />
-    <Compile Include="Elements\ListView\Items\NullItemWrapper.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\BlankItemWrapper.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\GroupWrapper.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\ItemWrapper.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\ItemWrapper&lt;TItem&gt;.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\NullItemWrapper.cs" />
     <Compile Include="Elements\ListView\ListView.cs" />
     <Compile Include="Elements\ListView\ListViewExtensions.cs" />
     <Compile Include="Elements\Pickers\BasePicker.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Elements\ListView\Interfaces\IListViewExtensionService.cs" />
     <Compile Include="Elements\ListView\SwipeMenuItem.cs" />
     <Compile Include="Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs" />
-    <Compile Include="Elements\ListView\Items\ItemWrapperLongPressEventArgs.cs" />
+    <Compile Include="Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs" />
     <Compile Include="Elements\ListView\EventArgs\SwipeMenuItemTappedArgs.cs" />
     <Compile Include="Elements\Popups\Toast.cs" />
     <Compile Include="Elements\ListView\TemplateSelectors\GroupTemplate.cs" />

@@ -13,10 +13,11 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
-		public static void Create(VisualElement target, string title, string text)
+		public static Toast Create(VisualElement target, string title, string text)
 		{
 			var toast = new Toast(target) { Title = title, Text = text };
 			toast.IsVisible = true;
+			return toast;
 		}
 
 		#region Properties
@@ -122,6 +123,9 @@ namespace Forms9Patch
 			HasShadow = true;
 			OutlineRadius = 4;
 
+			WidthRequest = 200;
+			HeightRequest = 200;
+
 			#region bindings
 			_titleLabel.SetBinding(Label.HtmlTextProperty, TitleProperty.PropertyName);
 			_titleLabel.BindingContext = this;
@@ -134,7 +138,6 @@ namespace Forms9Patch
 			#endregion
 
 			_okButton.Tapped += (s, args) => Cancel();
-
 			Content = new StackLayout
 			{
 				Children = 

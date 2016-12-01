@@ -181,15 +181,13 @@ namespace Forms9Patch
 				View = BaseCellView;
 				BaseCellView.Content = new TContent();
 				_iCellContent = BaseCellView.Content as ICellContentView;
-				if (_iCellContent != null && _iCellContent.CellHeight >= 0)
-					Height = _iCellContent.CellHeight;
+				if (_iCellContent != null && _iCellContent.RowHeight >= 0)
+					Height = _iCellContent.RowHeight;
 				BaseCellView.Content.PropertyChanged += (sender, e) =>
 				{
 					if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
 						SetHeight();
 				};
-				//BaseCellView.BackgroundColor = Color.Pink;
-				//System.Diagnostics.Debug.WriteLine("\t\t\t{0} exit", this.GetType());
 			}
 
 			/// <summary>
@@ -219,12 +217,13 @@ namespace Forms9Patch
 				var iItem = BindingContext as IItemWrapper;
 				if (iItem != null)
 				{
-					if (_iCellContent != null && _iCellContent.CellHeight >= 0)
-						Height = _iCellContent.CellHeight;
+					if (_iCellContent != null && _iCellContent.RowHeight >= 0)
+						Height = _iCellContent.RowHeight + 1;
 					else
-						Height = iItem.RowHeight;
+						Height = iItem.RowHeight + 1;
 				}
 				View.HeightRequest = Height;
+				//System.Diagnostics.Debug.WriteLine("GroupTemplate.SetHeight View.HeightRequest = ["+Height+"]");
 			}
 		}
 
