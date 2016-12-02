@@ -3,8 +3,23 @@ using System;
 
 namespace Forms9Patch
 {
+	/// <summary>
+	/// Permission popup.
+	/// </summary>
 	public class PermissionPopup : ModalPopup
 	{
+		/// <summary>
+		/// Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		/// <param name="title">Title.</param>
+		/// <param name="text">Text.</param>
+		/// <param name="okText">Ok text.</param>
+		/// <param name="cancelText">Cancel text.</param>
+		/// <param name="okButtonColor">Ok button color.</param>
+		/// <param name="cancelButtonColor">Cancel button color.</param>
+		/// <param name="okTextColor">Ok text color.</param>
+		/// <param name="cancelTextColor">Cancel text color.</param>
 		public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
 		{
 			var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText};
@@ -138,6 +153,9 @@ namespace Forms9Patch
 		#endregion
 
 		#region Events
+		/// <summary>
+		/// Occurs when ok button is tapped.
+		/// </summary>
 		public event EventHandler OkTapped;
 		#endregion
 
@@ -165,6 +183,10 @@ namespace Forms9Patch
 		};
 		#endregion
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
+		/// </summary>
+		/// <param name="target">Target.</param>
 		public PermissionPopup(VisualElement target) : base (target)
 		{
 			Margin = 30;

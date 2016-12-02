@@ -288,8 +288,8 @@ namespace Forms9Patch
 		{
 			_panVt = false;
 			_panHz = false;
-			var iCellContentView = Content as ICellContentView;
-			if (iCellContentView != null )
+			var iCellSwipeMenus = Content as ICellSwipeMenus;
+			if (iCellSwipeMenus != null )
 			{
 				double distance = e.TotalDistance.X + _translateOnUp;
 				if (_endButtons + _startButtons > 0)
@@ -302,8 +302,8 @@ namespace Forms9Patch
 						PutAwaySwipeButtons(true);
 						return;
 					}
-					if ((  _endButtons > 0 && side == Side.End   && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellContentView)Content).EndSwipeMenu!=null   && ((ICellContentView)Content).EndSwipeMenu.Count > 0   && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated) || 
-					    (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >=  210 && ((ICellContentView)Content).StartSwipeMenu!=null && ((ICellContentView)Content).StartSwipeMenu.Count > 0 && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated))
+					if ((  _endButtons > 0 && side == Side.End   && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)Content)?.EndSwipeMenu!=null   && ((ICellSwipeMenus)Content).EndSwipeMenu.Count > 0   && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated) || 
+					    (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >=  210 && ((ICellSwipeMenus)Content)?.StartSwipeMenu!=null && ((ICellSwipeMenus)Content).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated))
 					{
 						// execute full swipe
 						_swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
@@ -355,12 +355,12 @@ namespace Forms9Patch
 				{
 					// we're beyond the limit of presentation of the buttons
 					ContentX = (int)side * -180;
-					if (     side == Side.End   && distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellContentView)Content).EndSwipeMenu!=null   && ((ICellContentView)Content).EndSwipeMenu.Count> 0 && ((ICellContentView)Content).EndSwipeMenu[0].SwipeActivated)
+					if (     side == Side.End   && distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellSwipeMenus)Content)?.EndSwipeMenu!=null   && ((ICellSwipeMenus)Content).EndSwipeMenu.Count> 0 && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated)
 						_swipeFrame1.TranslateTo(0, 0, 200, Easing.Linear);
-					else if (side == Side.Start && distance >=  210 && e.DeltaDistance.X >= 0 && ((ICellContentView)Content).StartSwipeMenu!=null && ((ICellContentView)Content).StartSwipeMenu.Count>0 && ((ICellContentView)Content).StartSwipeMenu[0].SwipeActivated)
+					else if (side == Side.Start && distance >=  210 && e.DeltaDistance.X >= 0 && ((ICellSwipeMenus)Content)?.StartSwipeMenu!=null && ((ICellSwipeMenus)Content).StartSwipeMenu.Count>0 && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated)
 						_swipeFrame1.TranslateTo(0, 0, 200, Easing.Linear);
 					else
-						_swipeFrame1.TranslateTo((int)side * (Width - (int)side * 60), 0, 200, Easing.Linear);
+						_swipeFrame1.TranslateTo((int)side * (Width -  60), 0, 200, Easing.Linear);
 					if (_endButtons + _startButtons > 1)
 						_swipeFrame2.TranslationX = (int)side * (Width - (int)side * 120);
 					if (_endButtons + _startButtons > 2)
@@ -384,10 +384,10 @@ namespace Forms9Patch
 			{
 				// setup end SwipeMenu
 				var side = distance < 0 ? Side.End : Side.Start;
-				var iCellContenveView = Content as ICellContentView;
-				if (iCellContenveView != null)
+				var iCellSwipeMenus = Content as ICellSwipeMenus;
+				if (iCellSwipeMenus != null)
 				{
-					var swipeMenu = side == Side.End ? iCellContenveView.EndSwipeMenu : iCellContenveView.StartSwipeMenu;
+					var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
 					if (swipeMenu != null && swipeMenu.Count > 0)
 					{
 						_settingup = true;
@@ -416,6 +416,10 @@ namespace Forms9Patch
 						_swipeButton1.HtmlText = swipeMenu[0].Text;
 						_swipeButton1.IconText = swipeMenu[0].IconText;
 						_swipeButton1.FontColor = swipeMenu[0].TextColor;
+
+						_swipeFrame2.IsVisible = false;
+						_swipeFrame3.IsVisible = false;
+
 						if (swipeMenu.Count > 1)
 						{
 							if (side == Side.End)
@@ -461,10 +465,12 @@ namespace Forms9Patch
 								Children.Add(_swipeFrame3, 0, 1);
 								SetColumnSpan(_swipeFrame3, 3);
 								_swipeFrame3.TranslationX = (int)side * Width;
+								_swipeFrame3.IsVisible = true;
 							}
 							Children.Add(_swipeFrame2, 0, 1);
 							SetColumnSpan(_swipeFrame2, 3);
 							_swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
+							_swipeFrame2.IsVisible = true;
 						}
 						Children.Add(_swipeFrame1, 0, 1);
 						SetColumnSpan(_swipeFrame1, 3);
@@ -517,7 +523,7 @@ namespace Forms9Patch
 				index = 1;
 			else if (sender == _swipeButton3)
 				index = 2;
-			var swipeMenu = _endButtons > 0 ? ((ICellContentView)Content).EndSwipeMenu : ((ICellContentView)Content).StartSwipeMenu;
+			var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)Content)?.EndSwipeMenu : ((ICellSwipeMenus)Content)?.StartSwipeMenu;
 			if (index == 2 && _endButtons + _startButtons > 2)
 			{
 				// show remaining menu items in a modal list
@@ -575,7 +581,7 @@ namespace Forms9Patch
 					segment.Tapped += (s, arg) =>
 					{
 						modal.Cancel();
-						((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellContentView)Content, (ItemWrapper)BindingContext, menuItem));
+						((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, menuItem));
 						//System.Diagnostics.Debug.WriteLine("SwipeMenu[" + menuItem.Key + "]");
 					};
 					segmentedController.Segments.Add(segment);
@@ -586,7 +592,7 @@ namespace Forms9Patch
 			else
 			{
 				PutAwaySwipeButtons(false);
-				((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellContentView)Content,(ItemWrapper)BindingContext,swipeMenu[index]));
+				((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content,(ItemWrapper)BindingContext,swipeMenu[index]));
 				//System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
 			}
 		}
@@ -819,12 +825,12 @@ namespace Forms9Patch
 
 		void SetHeights()
 		{
-			var content = Content as ICellContentView;
+			var content = Content as ICellHeight;
 			if (content != null)
 			{
-				if (/*!item.HasUnevenRows && */content.RowHeight > 0)
+				if (/*!item.HasUnevenRows && */content.CellHeight > 0)
 				{
-					HeightRequest = content.RowHeight + 1;
+					HeightRequest = content.CellHeight + 1;
 
 					//Content.HeightRequest = itemWrapper.RowHeight;
 					//_insetFrame.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
@@ -832,7 +838,7 @@ namespace Forms9Patch
 					//_swipeFrame2.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
 					//_swipeFrame3.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
 					//_touchBlocker.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
-					RowDefinitions[1] = new RowDefinition { Height = new GridLength(content.RowHeight, GridUnitType.Absolute) };
+					RowDefinitions[1] = new RowDefinition { Height = new GridLength(content.CellHeight, GridUnitType.Absolute) };
 				}
 				else
 				{
@@ -850,7 +856,7 @@ namespace Forms9Patch
 					}
 				}
 			}
-			System.Diagnostics.Debug.WriteLine("HeightRequest = [" + HeightRequest + "]");
+			//System.Diagnostics.Debug.WriteLine("HeightRequest = [" + HeightRequest + "]");
 		}
 
 		protected override void LayoutChildren(double x, double y, double width, double height)

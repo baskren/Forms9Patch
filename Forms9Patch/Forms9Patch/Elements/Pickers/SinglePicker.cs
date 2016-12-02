@@ -178,6 +178,9 @@ namespace Forms9Patch
 		}
 		#endregion
 
+		/// <summary>
+		/// Reset this instance.
+		/// </summary>
 		public void Reset()
 		{
 			SelectedItem = null;

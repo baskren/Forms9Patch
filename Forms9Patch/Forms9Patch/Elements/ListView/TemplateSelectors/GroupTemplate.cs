@@ -170,7 +170,7 @@ namespace Forms9Patch
 		class Cell<TContent> : ViewCell where TContent : View, new() {
 			
 			internal BaseCellView BaseCellView = new BaseCellView ();
-			ICellContentView _iCellContent;
+			readonly ICellHeight _iCellContent;
 
 			/// <summary>
 			/// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector.Cell`1"/> class.
@@ -180,9 +180,9 @@ namespace Forms9Patch
 				//System.Diagnostics.Debug.WriteLine("\t\t\t{0} start", this.GetType());
 				View = BaseCellView;
 				BaseCellView.Content = new TContent();
-				_iCellContent = BaseCellView.Content as ICellContentView;
-				if (_iCellContent != null && _iCellContent.RowHeight >= 0)
-					Height = _iCellContent.RowHeight;
+				_iCellContent = BaseCellView.Content as ICellHeight;
+				if (_iCellContent != null && _iCellContent.CellHeight >= 0)
+					Height = _iCellContent.CellHeight;
 				BaseCellView.Content.PropertyChanged += (sender, e) =>
 				{
 					if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
@@ -217,8 +217,8 @@ namespace Forms9Patch
 				var iItem = BindingContext as IItemWrapper;
 				if (iItem != null)
 				{
-					if (_iCellContent != null && _iCellContent.RowHeight >= 0)
-						Height = _iCellContent.RowHeight + 1;
+					if (_iCellContent != null && _iCellContent.CellHeight >= 0)
+						Height = _iCellContent.CellHeight + 1;
 					else
 						Height = iItem.RowHeight + 1;
 				}

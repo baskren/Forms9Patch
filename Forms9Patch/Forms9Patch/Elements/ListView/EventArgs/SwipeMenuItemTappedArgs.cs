@@ -9,7 +9,7 @@
 		/// Gets the cell content view where the swipe happened.
 		/// </summary>
 		/// <value>The cell content view.</value>
-		public ICellContentView CellContentView { get; private set;}
+		public ICellSwipeMenus CellContentView { get; private set;}
 
 		/// <summary>
 		/// Gets the item.
@@ -35,7 +35,7 @@
 		/// <param name="cellContentView">Cell content view.</param>
 		/// <param name="itemWrapper">Item wrapper.</param>
 		/// <param name="swipeMenuItem">Swipe menu item.</param>
-		internal SwipeMenuItemTappedArgs(ICellContentView cellContentView, ItemWrapper itemWrapper, SwipeMenuItem swipeMenuItem)
+		internal SwipeMenuItemTappedArgs(ICellSwipeMenus cellContentView, ItemWrapper itemWrapper, SwipeMenuItem swipeMenuItem)
 		{
 			CellContentView = cellContentView;
 			Item = itemWrapper.Source;

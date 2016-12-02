@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using FormsGestures;
+
 namespace Forms9Patch
 {
 	/// <summary>
-	/// Interface Cell content view.
+	/// Interface to implement Swipe Menus in content views for Forms9Patch ListView cells
 	/// </summary>
-	public interface ICellContentView
+	public interface ICellSwipeMenus
 	{
-		/// <summary>
-		/// Gets the height of the cell if the list HasUnevenRows=true.
-		/// </summary>
-		/// <value>The height of the cell.</value>
-		double RowHeight { get; }
-
 		/// <summary>
 		/// Gets the start swipe menu items.
 		/// </summary>
