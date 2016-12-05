@@ -130,7 +130,8 @@ namespace Forms9Patch
 				}
 				return _cellTemplates[typeof(BlankItemWrapper)];
 			}
-			throw new KeyNotFoundException("No data template found.  item=["+itemWrapper+"]  item.source=["+(itemWrapper?.Source)+"]");
+			//throw new KeyNotFoundException("No data template found.  item=["+itemWrapper+"]  item.source=["+(itemWrapper?.Source)+"]");
+			return _cellTemplates[typeof(ItemWrapper<string>)];
 		}
 
 		DataTemplate TemplateForType(Type type) {

@@ -744,6 +744,17 @@ namespace Forms9Patch
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged (string propertyName = null)
 		{
+			if (propertyName == ItemsSourceProperty.PropertyName)
+			{
+				//System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
+				UpdateItemsSource();
+				return;
+			}
+			else if (propertyName == SourcePropertyMapProperty.PropertyName)
+			{
+				UpdateItemsSource();
+				return;
+			}
 			base.OnPropertyChanged (propertyName);
 			/*
 			if (propertyName == SeparatorColorProperty.PropertyName
@@ -754,14 +765,7 @@ namespace Forms9Patch
 				UpdateCellProperties();
 
 			else*/
-			if (propertyName == ItemsSourceProperty.PropertyName)
-			{
-				//System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
-				UpdateItemsSource();
-			}
-			else if (propertyName == SourcePropertyMapProperty.PropertyName)
-				UpdateItemsSource();
-			else if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
+			if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
 				AddSelectedSourceItem(SelectedItem);
 			else if (BaseItemsSource != null)
 			{

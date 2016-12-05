@@ -286,7 +286,11 @@ namespace Forms9Patch
 
 		void OnPanned(object sender, PanEventArgs e)
 		{
-			_panVt = false;
+			if (_panVt)
+			{
+				_panVt = false;
+				return;
+			}
 			_panHz = false;
 			var iCellSwipeMenus = Content as ICellSwipeMenus;
 			if (iCellSwipeMenus != null )
@@ -335,6 +339,8 @@ namespace Forms9Patch
 		bool _panHz, _panVt;
 		void OnPanning(object sender, PanEventArgs e)
 		{
+			if (_panVt)
+				return;
 			if (!_panVt && !_panVt)
 			{
 				if (Math.Abs(e.TotalDistance.X) > 10)
@@ -344,6 +350,7 @@ namespace Forms9Patch
 				else
 					return;
 			}
+
 			double distance = e.TotalDistance.X + _translateOnUp;
 			//System.Diagnostics.Debug.WriteLine("eb=["+_endButtons+"] sb=["+startButtons+"] Distance=["+distance+"] translateOnUp=["+translateOnUp+"]");
 			if (_settingup)
@@ -755,55 +762,60 @@ namespace Forms9Patch
 		void UpdateLayout()
 		{
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateLayout");
-			string startAccessoryText = ((ItemWrapper)BindingContext)?.StartAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
-			//if (startAccessoryText != _startAccessory.HtmlText)
+			var itemWrapper = BindingContext as ItemWrapper;
+			if (itemWrapper != null)
+			{
+				string startAccessoryText = itemWrapper.StartAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
+				//if (startAccessoryText != _startAccessory.HtmlText)
 				_startAccessory.HtmlText = startAccessoryText;
-			string endAccessoryText = ((ItemWrapper)BindingContext)?.EndAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
-			//if (endAccessoryText != _endAccessory.HtmlText)
+				string endAccessoryText = itemWrapper.EndAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
+				//if (endAccessoryText != _endAccessory.HtmlText)
 				_endAccessory.HtmlText = endAccessoryText;
 
-			var startAccessoryActive = (_startAccessory.HtmlText != null);
-			var endAccessoryActive = (_endAccessory.HtmlText != null);
+				var startAccessoryActive = (_startAccessory.HtmlText != null);
+				var endAccessoryActive = (_endAccessory.HtmlText != null);
 
-			if (startAccessoryActive != _lastStartAccessoryActive || endAccessoryActive != _lastEndAccesoryActive || _freshContent) 
-			{
-				if (_startAccessory != null && Children.Contains(_startAccessory))
-					Children.Remove(_startAccessory);
-				if (Content != null && Children.Contains(Content))
-					Children.Remove(Content);
-				if (_endAccessory != null && Children.Contains(_endAccessory))
-					Children.Remove(_endAccessory);
-				if (startAccessoryActive)
+				if (startAccessoryActive != _lastStartAccessoryActive || endAccessoryActive != _lastEndAccesoryActive || _freshContent)
 				{
-					Children.Add(_startAccessory, 0, 1);
-					if (endAccessoryActive)
+					if (_startAccessory != null && Children.Contains(_startAccessory))
+						Children.Remove(_startAccessory);
+					if (Content != null && Children.Contains(Content))
+						Children.Remove(Content);
+					if (_endAccessory != null && Children.Contains(_endAccessory))
+						Children.Remove(_endAccessory);
+					if (startAccessoryActive)
 					{
-						Children.Add(Content, 1, 1);
-						Children.Add(_endAccessory, 2, 1);
+						Children.Add(_startAccessory, 0, 1);
+						if (endAccessoryActive)
+						{
+							Children.Add(Content, 1, 1);
+							Children.Add(_endAccessory, 2, 1);
+						}
+						else
+						{
+							Children.Add(Content, 1, 3, 1, 2);
+							_endAccessory.HtmlText = null;
+						}
 					}
 					else
 					{
-						Children.Add(Content, 1, 3, 1, 2);
-						_endAccessory.HtmlText = null;
+						_startAccessory.HtmlText = null;
+						if (endAccessoryActive)
+						{
+							Children.Add(Content, 0, 2, 1, 2);
+							Children.Add(_endAccessory, 2, 1);
+						}
+						else
+						{
+							Children.Add(Content, 0, 3, 1, 2);
+							_endAccessory.HtmlText = null;
+						}
 					}
+					_lastStartAccessoryActive = startAccessoryActive;
+					_lastEndAccesoryActive = endAccessoryActive;
+					_freshContent = false;
 				}
-				else 
-				{
-					_startAccessory.HtmlText = null;
-					if (endAccessoryActive)
-					{
-						Children.Add(Content, 0, 2, 1, 2);
-						Children.Add(_endAccessory, 2, 1);
-					}
-					else
-					{
-						Children.Add(Content, 0, 3, 1, 2);
-						_endAccessory.HtmlText = null;
-					}
-				}
-				_lastStartAccessoryActive = startAccessoryActive;
-				_lastEndAccesoryActive = endAccessoryActive;
-				_freshContent = false;
+
 			}
 		}
 
