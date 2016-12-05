@@ -8,6 +8,8 @@ namespace Forms9Patch.iOS
 {
 	static class FormattedStringExtensions
 	{
+		static FontExtensions.MetaFont MathMetaFont;
+
 		internal static NSAttributedString ToNSAttributedString (this Label label, UILabel control, double fontSize=-1, EllipsePlacement ellipsePlacement = EllipsePlacement.None, int secondToLastEnd = -1, int lastLineStart = 0, int lastLineEnd = -1, int startLastVisible = -1, int midLastVisible = -1, bool twice=false) {
 			F9PFormattedString formattedString = label.F9PFormattedString;
 
@@ -88,7 +90,8 @@ namespace Forms9Patch.iOS
 				currentSize, 
 				(baseFont.FontDescriptor.Traits.SymbolicTrait & UIFontDescriptorSymbolicTraits.Bold) > 0,
 				(baseFont.FontDescriptor.Traits.SymbolicTrait & UIFontDescriptorSymbolicTraits.Italic) > 0);
-			var mathMetaFont = new FontExtensions.MetaFont ("STIXGeneral", currentSize);
+			
+			MathMetaFont = MathMetaFont ?? new FontExtensions.MetaFont ("STIXGeneral", currentSize);
 
 
 			for (int i = 0; i < text.Length; i++)
@@ -98,8 +101,8 @@ namespace Forms9Patch.iOS
 					//			for (int i = 0; i < ((string)formattedString).Length; i++) {
 					//				if (i + 1 < formattedString.Text.Length && formattedString.Text [i] == '\ud835' && formattedString.Text [i + 1] >= '\udc00' && formattedString.Text [i + 1] <= '\udeff') {
 					// switch to Mathematical Alphanumeric Symbols
-					metaFonts.Add (new FontExtensions.MetaFont (mathMetaFont));
-					metaFonts.Add (new FontExtensions.MetaFont (mathMetaFont));
+					metaFonts.Add (new FontExtensions.MetaFont (MathMetaFont));
+					metaFonts.Add (new FontExtensions.MetaFont (MathMetaFont));  // there are two because we're using a double byte unicode character
 					i++;
 				} else 
 					metaFonts.Add (new FontExtensions.MetaFont (baseMetaFont));
