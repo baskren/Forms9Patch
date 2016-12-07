@@ -109,6 +109,7 @@
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="Services\ListViewExtensionService_iOS.cs" />
+    <Compile Include="Services\PrintService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
