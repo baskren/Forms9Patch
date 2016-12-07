@@ -14,6 +14,8 @@ namespace Forms9Patch
 		/// <param name="element">Element.</param>
 		public static Page HostingPage(this Element element)
 		{
+			if (element == null)
+				return null;
 			var page = element as Page;
 			while (page == null && element.Parent != null)
 			{
