@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Visual element extensions.
 	/// </summary>
-	public static class VisualElementExtensions
+	public static class ElementExtensions
 	{
 		/// <summary>
 		/// the element's hosting page.
@@ -46,6 +46,19 @@ namespace Forms9Patch
 			while (element.Parent != null)
 				element = element.Parent;
 			return HostingPage(element);
+		}
+
+		public static T Parent<T>(this Element element) where T : Element
+		{
+			if (element == null)
+				return null;
+			while (element.Parent != null)
+			{
+				element = element.Parent;
+				if (element.GetType() == typeof(T))
+					return (T)element;
+			}
+			return null;
 		}
 	}
 }

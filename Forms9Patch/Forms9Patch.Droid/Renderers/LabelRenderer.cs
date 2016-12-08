@@ -247,9 +247,9 @@ namespace Forms9Patch.Droid
 				_delayingActualFontSizeUpdate = true;
 				Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
 				{
-					_delayingActualFontSizeUpdate = false;
 					if (Element != null && Control != null)
 						Element.ActualFontSize = Control.TextSize;
+					_delayingActualFontSizeUpdate = false;
 					return false;
 				});
 			}

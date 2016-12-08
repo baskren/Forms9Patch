@@ -132,7 +132,7 @@
     <Compile Include="Elements\ListView\TemplateSelectors\GroupTemplate.cs" />
     <Compile Include="Elements\ListView\TemplateSelectors\DataTemplateSelector.cs" />
     <Compile Include="Elements\Popups\ActivityIndicatorPopup.cs" />
-    <Compile Include="Extensions\VisualElementExtensions.cs" />
+    <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Elements\Popups\PermissionPopup.cs" />
     <Compile Include="Elements\ListView\Interfaces\ICellSwipeMenus.cs" />
     <Compile Include="Extensions\WebViewExtensions.cs" />
