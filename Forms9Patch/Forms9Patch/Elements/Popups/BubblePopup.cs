@@ -137,6 +137,8 @@ namespace Forms9Patch
 			_bubbleLayout.SetBinding (BubbleLayout.HasShadowProperty, "HasShadow");
 			_bubbleLayout.BindingContext = this;
 			ContentView = _bubbleLayout;
+
+
 		}
 
 
@@ -167,6 +169,7 @@ namespace Forms9Patch
 						Target.SizeChanged += OnTargetSizeChanged;
 					Parent = HostPage;
 					HostPage.SetValue (PopupProperty, this);
+					HostPage.SizeChanged += OnTargetSizeChanged;
 					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
 					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 					ForceNativeLayout?.Invoke ();
@@ -174,11 +177,13 @@ namespace Forms9Patch
 					if (Target != null)
 						Target.SizeChanged -= OnTargetSizeChanged;
 					HostPage.SetValue (PopupProperty, null);
+					HostPage.SizeChanged -= OnTargetSizeChanged;
 					_bubbleLayout.PointerDirection = PointerDirection.None;
 					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
 				}
 			}
 		}
+
 
 		void OnTargetSizeChanged(object sender, EventArgs e) {
 			//Host = Host ?? Application.Current.MainPage;			
