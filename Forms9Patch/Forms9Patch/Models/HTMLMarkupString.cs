@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Text;
 
 namespace Forms9Patch
 {
@@ -32,7 +33,7 @@ namespace Forms9Patch
 		class Tag {
 			public string Name;
 			public int Start;
-			public List<Attribute> Attributes = new List<Attribute>();
+			public List<Attribute> Attributes = new List<Attribute> { Capacity = 10 };
 		}
 
 		/// <summary>
@@ -112,6 +113,7 @@ namespace Forms9Patch
 				} else if (_string[i]=='&') {
 					// escape character
 					var escapeCode = "";
+					var stringBuilder = new StringBuilder();
 					int j = i+1;
 					while (j < _string.Length && _string [j] != ';') {
 						escapeCode += _string [j++];
