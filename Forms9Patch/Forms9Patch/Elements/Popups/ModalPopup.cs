@@ -72,6 +72,7 @@ namespace Forms9Patch {
 		{
 			Margin = 0;
 			Padding = 10;
+
 			_frame = new Frame {
 				VerticalOptions = LayoutOptions.Center,
 				HorizontalOptions = LayoutOptions.Center
@@ -80,9 +81,9 @@ namespace Forms9Patch {
 			_frame.SetBinding (Frame.HasShadowProperty, "HasShadow");
 			_frame.SetBinding (Frame.BackgroundImageProperty, "BackgroundImage");
 			_frame.SetBinding (Frame.PaddingProperty, "Padding");
-			_frame.SetBinding(View.MarginProperty, MarginProperty.PropertyName);
-			_frame.SetBinding(View.HorizontalOptionsProperty, HorizontalOptionsProperty.PropertyName);
-			_frame.SetBinding(View.VerticalOptionsProperty, VerticalOptionsProperty.PropertyName);
+			//_frame.SetBinding(View.MarginProperty, MarginProperty.PropertyName);
+			//_frame.SetBinding(View.HorizontalOptionsProperty, HorizontalOptionsProperty.PropertyName);
+			//_frame.SetBinding(View.VerticalOptionsProperty, VerticalOptionsProperty.PropertyName);
 
 			_frame.BindingContext = this;
 			ContentView = _frame;
@@ -97,11 +98,11 @@ namespace Forms9Patch {
 			//System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
 			//if (propertyName == IsPresentedProperty.PropertyName) {
 			if (propertyName == TranslationXProperty.PropertyName) {
-				_frame.TranslationX = TranslationX;
+				Content.TranslationX = TranslationX;
 				return;
 			}
 			if (propertyName == TranslationYProperty.PropertyName) {
-				_frame.TranslationY = TranslationY;
+				Content.TranslationY = TranslationY;
 				return;
 			}
 			base.OnPropertyChanged (propertyName);
@@ -112,8 +113,8 @@ namespace Forms9Patch {
 					HostPage = Application.Current.MainPage;			
 				if (HostPage != null) {
 					if (IsVisible) {
-						TranslationX = 0;
-						TranslationY = 0;
+						Content.TranslationX = 0;
+						Content.TranslationY = 0;
 						HostPage.SizeChanged += OnHostSizeChanged;
 						Parent = HostPage;
 						HostPage.SetValue (PopupProperty, this);
@@ -132,9 +133,17 @@ namespace Forms9Patch {
 		void OnHostSizeChanged(object sender, EventArgs e) {
 			//Host = Host ?? Application.Current.MainPage;			
 			if (HostPage != null) {
-				LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
+				//LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
+				LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
 				// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
 				ForceNativeLayout?.Invoke ();
+				Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+				{
+					//LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
+					LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
+					ForceNativeLayout?.Invoke();
+					return false;
+				});
 			}
 		}
 
@@ -151,29 +160,35 @@ namespace Forms9Patch {
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
 			if (width > 0 && height > 0) {
-				_frame.IsVisible = true;
+				//_frame.IsVisible = true;
 
 				//LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
 				LayoutChildIntoBoundingRegion(PageOverlay, HostPage.Bounds);
 
+				_frame.IsVisible = true;
+				_frame.Content.IsVisible = true;
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
-				var shadow = BubbleLayout.ShadowPadding (_frame);
+				var frameShadow = BubbleLayout.ShadowPadding (_frame);
 
 				// new approach
 				//var request = _frame.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);
 				//var rboxSize = new Size(request.Request.Width, request.Request.Height);
 
 				// old approach
-				var availWidth = HostPage.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - shadow.HorizontalThickness;
-				var availHeight = HostPage.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - shadow.VerticalThickness;
-				var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
-				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width,availWidth) + Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
-				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height,availHeight) + Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+				var availContentWidth = HostPage.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - frameShadow.HorizontalThickness;
+				var availContentHeight = HostPage.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - frameShadow.VerticalThickness;
+				var request = _frame.Content.Measure(availContentWidth, availContentHeight, MeasureFlags.None);  //
+				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availContentWidth : Math.Min(request.Request.Width,availContentWidth) + _frame.Padding.HorizontalThickness + frameShadow.HorizontalThickness);
+				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availContentHeight : Math.Min(request.Request.Height,availContentHeight) +  _frame.Padding.VerticalThickness + frameShadow.VerticalThickness);
 				var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
 				var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width  / 2.0 - rboxSize.Width  / 2.0 : Location.X;
 				var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
-				LayoutChildIntoBoundingRegion (ContentView, new Rectangle (contentX, contentY, rboxSize.Width, rboxSize.Height));
+
+				var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
+				System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
+
+				LayoutChildIntoBoundingRegion (_frame, bounds);
 				//_frame.ForceLayout ();
 			} else
 				_frame.IsVisible = false;

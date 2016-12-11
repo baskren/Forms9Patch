@@ -381,7 +381,7 @@ namespace Forms9Patch.Droid
 		//bool _scrolling;
 		public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
 		{
-			System.Diagnostics.Debug.WriteLine("SCROLLING");
+			//System.Diagnostics.Debug.WriteLine("SCROLLING");
 			IVisualElementRenderer renderer = Platform.GetRenderer(Element);
 			if (renderer != null)
 				Element.OnScrolling(this, EventArgs.Empty);
@@ -389,7 +389,7 @@ namespace Forms9Patch.Droid
 
 		public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
 		{
-			System.Diagnostics.Debug.WriteLine("SCROLL STATE=["+scrollState+"]");
+			//System.Diagnostics.Debug.WriteLine("SCROLL STATE=["+scrollState+"]");
 			IVisualElementRenderer renderer = Platform.GetRenderer(Element);
 			if (renderer != null)
 			{

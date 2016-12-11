@@ -384,7 +384,6 @@ namespace Forms9Patch.Droid
 				_lastTypeface = newTypeface;
 			}
 
-
 			/*
 			//float newTextSize = f.ToScaledPixel();
 			//var density = Forms.Context.Resources.DisplayMetrics.Density;
@@ -499,11 +498,11 @@ namespace Forms9Patch.Droid
 			}
 			else
 				Control.Text = Element.Text;
+			_lastSizeRequest = null;
 
 			UpdateColor();
 			UpdateFont ();
 			//_wasFormatted = true;
-			_lastSizeRequest = null;
 			//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.UpdateText() exit");
 			////System.Diagnostics.Debug.WriteLine ("\tFrame=["+_view.Width+", "+_view.Height+"]");
 		}

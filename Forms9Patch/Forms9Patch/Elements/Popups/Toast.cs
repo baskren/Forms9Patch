@@ -99,14 +99,14 @@ namespace Forms9Patch
 		{
 			FontSize = 24,
 			FontAttributes = FontAttributes.Bold,
-			TextColor = Color.Black
+			TextColor = Color.Black,
+			HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly Label _textLabel = new Label
 		{
 			FontSize = 16,
-			TextColor = Color.Black
-			//Lines = 0,
-			//VerticalOptions = LayoutOptions.Fill,
+			TextColor = Color.Black,
+			HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly MaterialButton _okButton = new MaterialButton
 		{
@@ -126,11 +126,14 @@ namespace Forms9Patch
 			WidthRequest = 200;
 			HeightRequest = 200;
 
+			HorizontalOptions = LayoutOptions.Center;
+
 			#region bindings
 			_titleLabel.SetBinding(Label.HtmlTextProperty, TitleProperty.PropertyName);
 			_titleLabel.BindingContext = this;
 			_textLabel.SetBinding(Label.HtmlTextProperty, TextProperty.PropertyName);
 			_textLabel.BindingContext = this;
+
 			_okButton.SetBinding(MaterialButton.HtmlTextProperty, OkTextProperty.PropertyName);
 			_okButton.SetBinding(MaterialButton.BackgroundColorProperty, OkButtonColorProperty.PropertyName);
 			_okButton.SetBinding(MaterialButton.FontColorProperty, OkTextColorProperty.PropertyName);
@@ -151,6 +154,17 @@ namespace Forms9Patch
 				}
 			};
 		}
+
+
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == TitleProperty.PropertyName)
+				_titleLabel.HtmlText = Title;
+			else if (propertyName == TextProperty.PropertyName)
+				_textLabel.HtmlText = Text;
+		}
+
 	}
 }
 

@@ -366,6 +366,9 @@ namespace Forms9Patch
 					//System.Diagnostics.Debug.WriteLine ("\tBubblePopup.LayoutChildren bounds=" + bounds);
 					_bubbleLayout.PointerAxialPosition = tuple.Item2;	
 					//_bubbleLayout.PointerDirection = pointerDir;
+
+					System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+bounds+")");
+
 					LayoutChildIntoBoundingRegion (_bubbleLayout, bounds);
 				}
 			} else
