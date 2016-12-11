@@ -89,6 +89,7 @@ namespace Forms9Patch.Droid
 			Cell cell;
 			int position;
 
+			/*
 			if (Element.IsGroupingEnabled)
 			{
 				var results = templatedItems.GetGroupAndIndexOfItem(reqGroup, reqItem);
@@ -102,9 +103,16 @@ namespace Forms9Patch.Droid
 			}
 			else
 			{
-				position = templatedItems.GetGlobalIndexOfItem(reqItem);
-				cell = templatedItems[position];
-			}
+			*/
+			position = templatedItems.GetGlobalIndexOfItem(reqItem);
+			int subIndex = 0;
+			var groupIndex = templatedItems.GetGroupIndexFromGlobal(position, out subIndex);
+			var group = templatedItems.GetGroup(groupIndex);
+			cell = group[subIndex];
+
+
+				//cell = templatedItems[position];
+			//}
 
 			//Android offsets position of cells when using header
 			int realPositionWithHeader = position + 1;
@@ -128,11 +136,10 @@ namespace Forms9Patch.Droid
 				else
 				{
 					CellAdapter adapter = Control.Adapter as CellAdapter;
-					/*
-					Android.Views.View view = _adapter.GetView(position, null, null);
-					view.Measure(MeasureSpecFactory.MakeMeasureSpec(Control.Width, MeasureSpecMode.AtMost), MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
-					cellHeight = view.MeasuredHeight;
-					*/
+
+					//Android.Views.View view = _adapter.GetView(position, null, null);
+					//view.Measure(MeasureSpecFactory.MakeMeasureSpec(Control.Width, MeasureSpecMode.AtMost), MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
+					//cellHeight = view.MeasuredHeight;
 				}
 			}
 			var scale = Forms.Context.Resources.DisplayMetrics.Density;
