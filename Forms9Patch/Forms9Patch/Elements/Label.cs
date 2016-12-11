@@ -395,14 +395,14 @@ namespace Forms9Patch
 			//Sized = false;
 			base.InvalidateMeasure();
 
-			/*
+
 			if (!IsDynamicallySized && Width > 0 && Height > 0)// || !Sized )
 			{
 				if (HtmlText != null || Text != null)
 				//System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure.OnMeasure()");
 					OnMeasure(Width, Height);
 			}
-			*/
+
 			//System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure>>");
 
 		}

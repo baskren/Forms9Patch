@@ -65,7 +65,7 @@ namespace Forms9Patch.Droid
 			var hasShadow = (bool)Element.GetValue (RoundedBoxBase.HasShadowProperty);
 
 			var hz = orientation == StackOrientation.Horizontal;
-			var makeRoomForShadow = (materialButton == null ? hasShadow : (bool)Element.GetValue (MaterialButton.HasShadowProperty)) && !hasShadow;
+			var makeRoomForShadow = (materialButton == null ? hasShadow : (bool)Element.GetValue (MaterialButton.HasShadowProperty)) && hasShadow;
 
 
 			var shadowInverted = ((bool)Element.GetValue (RoundedBoxBase.ShadowInvertedProperty));
