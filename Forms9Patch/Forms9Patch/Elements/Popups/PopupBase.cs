@@ -15,10 +15,14 @@ namespace Forms9Patch
 		#region Static Properties
 		static readonly Stack<PopupBase> Popups = new Stack<PopupBase>();
 
-		public static void CancelTopPopup()
+		public static bool CancelTopPopup()
 		{
 			if (Popups.Count > 0)
+			{
 				Popups.Pop().Cancel();
+				return true;
+			}
+			return false;
 		}
 		#endregion
 
