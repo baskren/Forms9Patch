@@ -349,6 +349,11 @@ namespace Forms9Patch
 
 
 		#region Gesture Event Responders
+		public void Tap()
+		{
+			OnUp(this,new FormsGestures.DownUpEventArgs(null,null));
+		}
+
 		void OnUp(object sender, FormsGestures.DownUpEventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("Up");

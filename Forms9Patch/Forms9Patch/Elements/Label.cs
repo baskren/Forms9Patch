@@ -436,12 +436,9 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]OnSizeAllocated("+width+","+height+")");
+			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeAllocated("+width+","+height+") enter");
 			base.OnSizeAllocated(width, height);
-			//InvalidateMeasure();
-			//System.Diagnostics.Debug.WriteLine("OnSizeAllocated");
-			//System.Diagnostics.Debug.WriteLine("{0}[{1}] SizeAndAlign?.Invoke()", ReflectionExtensions.CallerMemberName(), ReflectionExtensions.CallerLineNumber());
-			//SizeAndAlign?.Invoke();
+			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeAllocated(" + width + "," + height + ") exit");
 		}
 
 
@@ -454,9 +451,9 @@ namespace Forms9Patch
 		[Obsolete("Use OnMeasure")]
 		public override SizeRequest GetSizeRequest (double widthConstraint, double heightConstraint)
 		{
+			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.GetSizeRequest("+widthConstraint+","+heightConstraint+") enter");
 			IsDynamicallySized = true;
 			// this is not called if the parent sets this element's size (ex: putting it into a frame)
-			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]GetSizeRequest("+widthConstraint+","+heightConstraint+") enter");
 			var result = base.GetSizeRequest (widthConstraint, heightConstraint);
 			//IsDynamicallySized = double.IsPositiveInfinity(widthConstraint) || heightConstraint > result.Request.Height;
 			//_widthImposedByParent = !double.IsPositiveInfinity(widthConstraint);
@@ -475,7 +472,7 @@ namespace Forms9Patch
 			}
 #endif
 			////System.Diagnostics.Debug.WriteLine("\t\tVtC=["+VerticallyConstrained+"] HzC=["+HorizontallyConstrained+"]");
-			//System.Diagnostics.Debug.WriteLine("GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
+			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
 			return result;
 		}
 
@@ -487,7 +484,7 @@ namespace Forms9Patch
 		[Obsolete("Use OnMeasure")]
 		protected override SizeRequest OnSizeRequest (double widthConstraint, double heightConstraint)
 		{
-			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") enter");
+			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") enter");
 			// result is from Platform.GetNativeSize(Element, widthConstraint, heightConstraint)
 			var result = base.OnSizeRequest (widthConstraint, heightConstraint);
 #if __IOS__
@@ -496,8 +493,8 @@ namespace Forms9Patch
 			result = new SizeRequest (size, size);
 			}
 #endif
-			//System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]OnSizeRequest req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
-			//System.Diagnostics.Debug.WriteLine("\tOnSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
+			//System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"] Label.OnSizeRequest req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
+			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
 			return result;
 		}
 

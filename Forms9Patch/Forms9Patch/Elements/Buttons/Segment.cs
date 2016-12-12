@@ -320,8 +320,12 @@ namespace Forms9Patch
 					MaterialButton.Orientation = Orientation;
 					break;
 			}
-				
-			
+		}
+
+
+		public void Tap()
+		{
+			MaterialButton.Tap();
 		}
 
 		/// <summary>

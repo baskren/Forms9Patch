@@ -549,6 +549,10 @@ namespace Forms9Patch
 
 
 		#region Gesture event responders
+		public void Tap()
+		{
+			OnTapped(this, new FormsGestures.TapEventArgs(null, null));
+		}
 
 		void OnTapped(object sender, FormsGestures.TapEventArgs e)
 		{

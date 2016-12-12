@@ -12,6 +12,17 @@ namespace Forms9Patch
 	public abstract class PopupBase : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IDisposable //Xamarin.Forms.Layout<View>, IRoundedBox
 
 	{
+		#region Static Properties
+		static readonly Stack<PopupBase> Popups = new Stack<PopupBase>();
+
+		public static void CancelTopPopup()
+		{
+			if (Popups.Count > 0)
+				Popups.Pop().Cancel();
+		}
+		#endregion
+
+
 		#region Invalid Parent Properties
 		/// <summary>
 		/// Invalid Property, do not use
@@ -419,6 +430,21 @@ namespace Forms9Patch
 				HostPage = Target.HostingPage();
 			if (propertyName == "Parent")
 				HostPage = Target.HostingPage();
+			if (propertyName == IsVisibleProperty.PropertyName)
+			{
+				if (IsVisible)
+					Popups.Push(this);
+				else if (Popups.Contains(this))
+				{
+					var popup = Popups.Pop();
+					while (popup != this)
+					{
+						popup.IsVisible = false;
+						popup = Popups.Pop();
+					}
+				}
+				
+			}
 		}
 
 		internal Action ForceNativeLayout { get; set; }

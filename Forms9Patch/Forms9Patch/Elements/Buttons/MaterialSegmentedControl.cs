@@ -448,6 +448,13 @@ namespace Forms9Patch
 
 
 		#region Change management
+		public void TapIndex(int index)
+		{
+			if (index >= 0 && index < _segments.Count)
+				_segments[index].Tap();
+		}
+
+
 		/// <summary>
 		/// Selects the segment at index.
 		/// </summary>

@@ -37,7 +37,8 @@ namespace Forms9Patch.Droid
 
 
 
-
+			if (Bounds.Width() <= 0 || Bounds.Height() <= 0)
+				return;
 
 
 			if (backgroundColor.A < 0.01 && (outlineColor.A < 0.01 || outlineWidth < 0.01)) {

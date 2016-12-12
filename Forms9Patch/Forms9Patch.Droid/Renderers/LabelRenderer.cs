@@ -59,7 +59,7 @@ namespace Forms9Patch.Droid
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
 		{
-			//string text = Element.Text ?? Element.FormattedText?.Text;
+			string labelText = Element.Text ?? Element.F9PFormattedString?.Text;
 			//Element.Sized = true;
 			if (string.IsNullOrEmpty(Element.Text ?? Element.F9PFormattedString?.Text) || Control == null)
 			{
@@ -85,6 +85,7 @@ namespace Forms9Patch.Droid
 			int availHeight = MeasureSpec.GetSize(heightConstraint);
 			if (MeasureSpec.GetMode(heightConstraint) == Android.Views.MeasureSpecMode.Unspecified)
 				availHeight = int.MaxValue;
+			//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize("+(availWidth==int.MaxValue?"infinity":availWidth.ToString())+","+(availHeight==int.MaxValue?"infinity":availHeight.ToString())+") enter");
 
 			//System.Diagnostics.Debug.WriteLine("[" + (Element.HtmlText ?? Element.Text) + "]LabelRenderer.GetDesiredSize(" + availWidth + "," + availHeight + ")");
 			_lastDesiredSizeWidthConstraint = availWidth;
@@ -94,6 +95,7 @@ namespace Forms9Patch.Droid
 			if (availWidth <= 0 || availHeight <= 0)
 			{
 				_lastSizeRequest = null;
+				//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize exit: !availWidth||!availHeight");
 				return new SizeRequest(Xamarin.Forms.Size.Zero);
 			}
 
@@ -106,6 +108,7 @@ namespace Forms9Patch.Droid
 				if (canRecycleLast)
 				{
 					//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\trecycled["+_lastSizeRequest.Value+"]");
+					//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize exit:_lastSizeRequest.HasValue("+ (availWidth == int.MaxValue ? "infinity" : availWidth.ToString()) + "," + (availHeight == int.MaxValue ? "infinity" : availHeight.ToString()) + ") ("+_lastSizeRequest.Value+")");
 					return _lastSizeRequest.Value;
 				}
 			}
@@ -253,6 +256,7 @@ namespace Forms9Patch.Droid
 					return false;
 				});
 			}
+			//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize("+ (availWidth == int.MaxValue ? "infinity" : availWidth.ToString()) + "," + (availHeight == int.MaxValue ? "infinity" : availHeight.ToString()) + ") exit ("+_lastSizeRequest.Value+")");
 			return _lastSizeRequest.Value;
 		}
 
