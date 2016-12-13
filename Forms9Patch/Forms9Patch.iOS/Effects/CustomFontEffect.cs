@@ -88,7 +88,7 @@ namespace Forms9Patch.iOS
 						else
 							fontSize = UIFont.LabelFontSize * Math.Abs(fontSize);
 					}
-					if (Math.Abs(fontSize) < double.Epsilon * 10)
+					if (Math.Abs(fontSize) <= double.Epsilon * 10)
 						fontSize = UIFont.LabelFontSize;
 					var newFont = FontExtensions.BestFont(fontFamily, (float)fontSize, (fontAttributes & FontAttributes.Bold) != 0, (fontAttributes & FontAttributes.Italic) != 0);
 					fontProperty.SetValue(Control, newFont, null);

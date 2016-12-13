@@ -50,7 +50,7 @@ namespace Forms9Patch.iOS
 			var tmpFontSize = Element.FontSize;
 			if (tmpFontSize < 0)
 				tmpFontSize = UIFont.LabelFontSize * Math.Abs(tmpFontSize);
-			if (Math.Abs(tmpFontSize) < double.Epsilon*10)
+			if (Math.Abs(tmpFontSize) <= double.Epsilon*10)
 				tmpFontSize = UIFont.LabelFontSize;
 			var maxFontSize = (nfloat)Element.MaxFontSize;
 			if (maxFontSize < 0)
