@@ -143,5 +143,14 @@ namespace Forms9Patch
 				}
 			};
 		}
+
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == TitleProperty.PropertyName)
+				_titleLabel.HtmlText = Title;
+			else if (propertyName == TextProperty.PropertyName)
+				_textLabel.HtmlText = Text;
+		}
 	}
 }

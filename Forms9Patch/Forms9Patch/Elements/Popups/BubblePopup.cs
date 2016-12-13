@@ -232,8 +232,10 @@ namespace Forms9Patch
 		double pointerWeightingFunction(double offset) {
 			// how far is the offset from the center of the target?
 			double err = 0;
-			if (TargetBias < 0)
+			if (TargetBias < -1)
 				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
+			else if (TargetBias < 0)	
+				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * (1+TargetBias)));
 			else if (TargetBias > 1)
 				err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + TargetBias));
 			else

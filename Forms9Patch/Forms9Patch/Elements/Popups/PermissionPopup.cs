@@ -235,5 +235,17 @@ namespace Forms9Patch
 			};
 		}
 
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == TitleProperty.PropertyName)
+				_titleLabel.HtmlText = Title;
+			else if (propertyName == TextProperty.PropertyName)
+				_textLabel.HtmlText = Text;
+			else if (propertyName == OkTextProperty.PropertyName)
+				_okButton.HtmlText = OkText;
+			else if (propertyName == CancelTextProperty.PropertyName)
+				_cancelButton.HtmlText = CancelText;
+		}
 	}
 }
