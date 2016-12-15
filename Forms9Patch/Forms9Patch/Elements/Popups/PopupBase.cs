@@ -15,6 +15,10 @@ namespace Forms9Patch
 		#region Static Properties
 		static readonly Stack<PopupBase> Popups = new Stack<PopupBase>();
 
+		/// <summary>
+		/// Cancels the top popup.
+		/// </summary>
+		/// <returns><c>true</c>, if top popup was canceled, <c>false</c> otherwise.</returns>
 		public static bool CancelTopPopup()
 		{
 			if (Popups.Count > 0)

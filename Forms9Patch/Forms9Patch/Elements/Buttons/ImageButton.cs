@@ -349,6 +349,9 @@ namespace Forms9Patch
 
 
 		#region Gesture Event Responders
+		/// <summary>
+		/// Tap this instance.
+		/// </summary>
 		public void Tap()
 		{
 			OnUp(this,new FormsGestures.DownUpEventArgs(null,null));

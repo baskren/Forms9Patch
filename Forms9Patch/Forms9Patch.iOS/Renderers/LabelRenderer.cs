@@ -30,8 +30,8 @@ namespace Forms9Patch.iOS
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
-			if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
-			 System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
+			//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+			// System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
@@ -245,9 +245,9 @@ namespace Forms9Patch.iOS
 					return false;
 				});
 			}
-			if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+			//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
 			//if (Element.HtmlText=="Fractional Mode")
-				System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
+			//	System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
 			return new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, Control.Font.LineHeight));
 		}
 		bool _delayingActualFontSizeUpdate;

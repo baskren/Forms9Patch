@@ -3,10 +3,18 @@ using System;
 
 namespace Forms9Patch
 {
+	/// <summary>
+	/// Extensions to XF WebView
+	/// </summary>
 	public static class WebViewExtensions
 	{
 		static IPrintService _service;
 
+		/// <summary>
+		/// Print the specified webview and jobName.
+		/// </summary>
+		/// <param name="webview">Webview.</param>
+		/// <param name="jobName">Job name.</param>
 		public static void Print(this WebView webview, string jobName)
 		{
 			_service = _service ?? DependencyService.Get<IPrintService>();
@@ -15,6 +23,10 @@ namespace Forms9Patch
 			_service.Print(webview, jobName);
 		}
 
+		/// <summary>
+		/// Gets a value indicating whether this <see cref="T:Forms9Patch.WebViewExtensions"/> can print.
+		/// </summary>
+		/// <value><c>true</c> if can print; otherwise, <c>false</c>.</value>
 		public static bool CanPrint
 		{
 			get

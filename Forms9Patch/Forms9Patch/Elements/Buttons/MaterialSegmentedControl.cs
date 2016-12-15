@@ -448,6 +448,10 @@ namespace Forms9Patch
 
 
 		#region Change management
+		/// <summary>
+		/// Taps the index.
+		/// </summary>
+		/// <param name="index">Index.</param>
 		public void TapIndex(int index)
 		{
 			if (index >= 0 && index < _segments.Count)

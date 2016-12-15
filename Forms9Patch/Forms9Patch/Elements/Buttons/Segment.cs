@@ -322,7 +322,9 @@ namespace Forms9Patch
 			}
 		}
 
-
+		/// <summary>
+		/// Tap this instance.
+		/// </summary>
 		public void Tap()
 		{
 			MaterialButton.Tap();

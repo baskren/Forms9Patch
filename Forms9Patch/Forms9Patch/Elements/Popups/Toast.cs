@@ -9,8 +9,9 @@ namespace Forms9Patch
 	public class Toast : ModalPopup
 	{
 		/// <summary>
-		/// Creates and displays a Toast with specified title and text.
+		/// Create the specified target, title and text.
 		/// </summary>
+		/// <param name="target">Target.</param>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
 		public static Toast Create(VisualElement target, string title, string text)
@@ -155,7 +156,10 @@ namespace Forms9Patch
 			};
 		}
 
-
+		/// <summary>
+		/// Ons the property changed.
+		/// </summary>
+		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);

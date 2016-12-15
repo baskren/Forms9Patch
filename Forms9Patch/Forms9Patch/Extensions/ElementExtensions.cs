@@ -48,6 +48,11 @@ namespace Forms9Patch
 			return HostingPage(element);
 		}
 
+		/// <summary>
+		/// Fine a ancestor of a specific type for the specified element.
+		/// </summary>
+		/// <param name="element">Element.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public static T Parent<T>(this Element element) where T : Element
 		{
 			if (element == null)

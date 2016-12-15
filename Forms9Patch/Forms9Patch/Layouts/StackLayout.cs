@@ -150,76 +150,7 @@ namespace Forms9Patch
 				InvalidateLayout ();
 		}
 
-		/// <summary>
-		/// Ons the child measure invalidated.
-		/// </summary>
-		protected override void OnChildMeasureInvalidated()
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.OnChildMeasureInvalidated()");
-			base.OnChildMeasureInvalidated();
-		}
-		/// <summary>
-		/// Ons the size request.
-		/// </summary>
-		/// <returns>The size request.</returns>
-		/// <param name="widthConstraint">Width constraint.</param>
-		/// <param name="heightConstraint">Height constraint.</param>
-		protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.OnSizeRequest("+widthConstraint+", "+heightConstraint+")");
-			return base.OnSizeRequest(widthConstraint, heightConstraint);
-		}
-		/// <summary>
-		/// Invalidates the layout.
-		/// </summary>
-		protected override void InvalidateLayout()
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateLayout()");
-			base.InvalidateLayout();
-		}
-		/// <summary>
-		/// Invalidates the measure.
-		/// </summary>
-		protected override void InvalidateMeasure()
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.InvalidateMeasure()");
-			base.InvalidateMeasure();
-		}
-		/// <summary>
-		/// Layouts the children.
-		/// </summary>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <param name="width">Width.</param>
-		/// <param name="height">Height.</param>
-		protected override void LayoutChildren(double x, double y, double width, double height)
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.LayoutChildren("+x+","+y+","+width+","+height+")");
-			base.LayoutChildren(x, y, width, height);
-		}
 
-		/*
-		/// <summary>
-		/// Ons the measure.
-		/// </summary>
-		/// <returns>The measure.</returns>
-		/// <param name="widthConstraint">Width constraint.</param>
-		/// <param name="heightConstraint">Height constraint.</param>
-		protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-		{
-			System.Diagnostics.Debug.WriteLine("StackLayout.OnMeasure(" + widthConstraint + ", " + heightConstraint + ")");
-			return base.OnMeasure(widthConstraint, heightConstraint);
-		}
-		*/
-		/// <summary>
-		/// Ons the property changing.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanging(string propertyName = null)
-		{
-			//System.Diagnostics.Debug.WriteLine("StackLayout.OnPropertyChanging(" + propertyName + ")");
-			base.OnPropertyChanging(propertyName);
-		}
 	}
 }
 

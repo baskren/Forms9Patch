@@ -7,6 +7,12 @@ namespace Forms9Patch
 	/// </summary>
 	public class TargetedToast : BubblePopup
 	{
+		/// <summary>
+		/// Create the specified target, title and text.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		/// <param name="title">Title.</param>
+		/// <param name="text">Text.</param>
 		public static TargetedToast Create(VisualElement target, string title, string text)
 		{
 			var toast = new TargetedToast(target) { Title = title, Text = text };
@@ -108,6 +114,10 @@ namespace Forms9Patch
 		#endregion
 
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.TargetedToast"/> class.
+		/// </summary>
+		/// <param name="target">Target.</param>
 		public TargetedToast(VisualElement target) : base (target)
 		{
 			//Margin = 30;

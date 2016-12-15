@@ -436,11 +436,11 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void OnSizeAllocated(double width, double height)
 		{
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-				System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeAllocated("+width+","+height+") enter");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//	System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeAllocated("+width+","+height+") enter");
 			base.OnSizeAllocated(width, height);
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-			System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeAllocated(" + width + "," + height + ") exit");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeAllocated(" + width + "," + height + ") exit");
 		}
 
 
@@ -453,8 +453,8 @@ namespace Forms9Patch
 		[Obsolete("Use OnMeasure")]
 		public override SizeRequest GetSizeRequest (double widthConstraint, double heightConstraint)
 		{
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-			System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.GetSizeRequest("+widthConstraint+","+heightConstraint+") enter");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.GetSizeRequest("+widthConstraint+","+heightConstraint+") enter");
 			IsDynamicallySized = true;
 			// this is not called if the parent sets this element's size (ex: putting it into a frame)
 			var result = base.GetSizeRequest (widthConstraint, heightConstraint);
@@ -476,8 +476,8 @@ namespace Forms9Patch
 #endif
 			////System.Diagnostics.Debug.WriteLine("\t\tVtC=["+VerticallyConstrained+"] HzC=["+HorizontallyConstrained+"]");
 			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-			System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
 			return result;
 		}
 
@@ -489,8 +489,8 @@ namespace Forms9Patch
 		[Obsolete("Use OnMeasure")]
 		protected override SizeRequest OnSizeRequest (double widthConstraint, double heightConstraint)
 		{
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-			System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") enter");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") enter");
 			// result is from Platform.GetNativeSize(Element, widthConstraint, heightConstraint)
 			var result = base.OnSizeRequest (widthConstraint, heightConstraint);
 #if __IOS__
@@ -500,8 +500,8 @@ namespace Forms9Patch
 			}
 #endif
 			//System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
-			if (Text == "HEIGHTS AND AREAS CALCULATOR")
-			System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint +") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
+			//if (Text == "HEIGHTS AND AREAS CALCULATOR")
+			//System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint +") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
 			return result;
 		}
 
