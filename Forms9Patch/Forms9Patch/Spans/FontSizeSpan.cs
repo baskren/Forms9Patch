@@ -1,11 +1,12 @@
 ﻿using System;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Font size span.
 	/// </summary>
-	class FontSizeSpan : Span
+	class FontSizeSpan : Span, ICopiable<FontSizeSpan>
 	{
 		internal const string SpanKey = "Size";
 
@@ -40,6 +41,17 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public FontSizeSpan(FontSizeSpan span) : this(span.Start, span.End, span.Size) {
+		}
+
+		public void ValueFrom(FontSizeSpan source)
+		{
+			base.ValueFrom(source);
+			Size = source.Size;
+		}
+
+		public override Span Copy()
+		{
+			return new FontSizeSpan(Start, End, Size);
 		}
 	}
 }

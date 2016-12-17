@@ -1,11 +1,12 @@
 ﻿using Xamarin.Forms;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Font color span.
 	/// </summary>
-	class FontColorSpan : Span
+	class FontColorSpan : Span, ICopiable<FontColorSpan>
 	{
 		internal const string SpanKey = "FontColor";
 
@@ -40,6 +41,17 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public FontColorSpan(FontColorSpan span) : this (span.Start, span.End, span.Color) {
+		}
+
+		public void ValueFrom(FontColorSpan source)
+		{
+			base.ValueFrom(source);
+			Color = source.Color;
+		}
+
+		public override Span Copy()
+		{
+			return new FontColorSpan(Start, End, Color);
 		}
 	}
 }

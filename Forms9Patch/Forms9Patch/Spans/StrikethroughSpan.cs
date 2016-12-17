@@ -1,10 +1,11 @@
-﻿
+﻿using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Strikethrough span.
 	/// </summary>
-	class StrikethroughSpan : Span
+	class StrikethroughSpan : Span, ICopiable<StrikethroughSpan>
 	{
 		internal const string SpanKey = "Strikethrough";
 
@@ -24,6 +25,15 @@ namespace Forms9Patch
 		public StrikethroughSpan (StrikethroughSpan span) : this (span.Start, span.End) {
 		}
 
+		public void ValueFrom(StrikethroughSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new StrikethroughSpan(Start, End);
+		}
 	}
 }
 

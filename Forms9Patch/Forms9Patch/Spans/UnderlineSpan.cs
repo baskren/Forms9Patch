@@ -1,11 +1,12 @@
 ﻿using Xamarin.Forms;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Underline span.
 	/// </summary>
-	class UnderlineSpan : Span
+	class UnderlineSpan : Span, ICopiable<UnderlineSpan>
 	{
 		internal const string SpanKey = "Underline";
 
@@ -49,6 +50,16 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public UnderlineSpan (UnderlineSpan span) : this (span.Start, span.End/*, span.Color, span.Style*/) {
+		}
+
+		public void ValueFrom(UnderlineSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new UnderlineSpan(Start, End);
 		}
 	}
 }

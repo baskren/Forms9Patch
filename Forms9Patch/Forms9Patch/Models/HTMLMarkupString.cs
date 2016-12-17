@@ -113,7 +113,7 @@ namespace Forms9Patch
 				} else if (_string[i]=='&') {
 					// escape character
 					var escapeCode = "";
-					var stringBuilder = new StringBuilder();
+					//var stringBuilder = new StringBuilder();
 					int j = i+1;
 					while (j < _string.Length && _string [j] != ';') {
 						escapeCode += _string [j++];

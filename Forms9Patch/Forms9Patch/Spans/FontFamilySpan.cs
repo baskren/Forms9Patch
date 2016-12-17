@@ -1,10 +1,12 @@
-﻿
+﻿using System.Windows.Input;
+using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Font family span.
 	/// </summary>
-	class FontFamilySpan : Span
+	class FontFamilySpan : Span, ICopiable<FontFamilySpan>
 	{
 		internal const string SpanKey = "FontFamily";
 
@@ -39,6 +41,17 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public FontFamilySpan(FontFamilySpan span) : this (span.Start, span.End, span.FontFamilyName) {
+		}
+
+		public void ValueFrom(FontFamilySpan source)
+		{
+			base.ValueFrom(source);
+			FontFamilyName = source.FontFamilyName;
+		}
+
+		public override Span Copy()
+		{
+			return new FontFamilySpan(Start, End, FontFamilyName);
 		}
 	}
 }

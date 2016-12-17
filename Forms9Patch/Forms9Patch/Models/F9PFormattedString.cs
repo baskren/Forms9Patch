@@ -57,7 +57,8 @@ namespace Forms9Patch
 			_string = fs._string;
 			foreach (var span in _spans) {
 				var type = span.GetType ();
-				var instance = (Span) Activator.CreateInstance(type, new object[] { span });
+				//var instance = (Span) Activator.CreateInstance(type, new object[] { span });
+				var instance = span.Copy();
 				_spans.Add (instance);
 			}
 		}

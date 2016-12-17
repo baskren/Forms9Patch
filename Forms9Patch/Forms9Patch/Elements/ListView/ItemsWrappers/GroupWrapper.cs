@@ -8,6 +8,7 @@ using PCL.Utils;
 using Xamarin.Forms;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Reflection;
 
 namespace Forms9Patch
 {
@@ -351,7 +352,13 @@ namespace Forms9Patch
 			{
 				var objType = sourceObject.GetType();
 				var itemType = typeof(ItemWrapper<>).MakeGenericType(new[] { objType });
-				item = (ItemWrapper)Activator.CreateInstance(itemType);
+
+				// Approach 1
+				//item = (ItemWrapper)Activator.CreateInstance(itemType);
+
+				// Approach 2
+				item = (ItemWrapper)BaitAndSwitch.ObjectFactory.Constructor(itemType, new object[] { });
+
 				item.Source = sourceObject;
 			}
 			return item;

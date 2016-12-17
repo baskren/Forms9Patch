@@ -204,6 +204,10 @@
       <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>PCL.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\BaitAndSwitch\BaitAndSwitch.PCL\BaitAndSwitch.PCL.csproj">
+      <Project>{D94EC3BE-9503-440F-A7AA-4959F4BF3B32}</Project>
+      <Name>BaitAndSwitch.PCL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

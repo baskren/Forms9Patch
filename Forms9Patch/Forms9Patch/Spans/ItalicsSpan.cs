@@ -1,10 +1,11 @@
-﻿
+﻿using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Italics span.
 	/// </summary>
-	class ItalicsSpan : Span
+	class ItalicsSpan : Span, ICopiable<ItalicsSpan>
 	{
 		internal const string SpanKey = "Italics";
 
@@ -23,6 +24,16 @@ namespace Forms9Patch
 		/// <param name="span">Span.</param>
 		public ItalicsSpan(ItalicsSpan span) : base (span.Start, span.End) {
 		}
-	}
+
+		public void ValueFrom(ItalicsSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new ItalicsSpan(Start, End);
+		}
+	}	
 }
 

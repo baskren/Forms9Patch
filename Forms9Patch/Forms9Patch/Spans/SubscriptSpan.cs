@@ -1,10 +1,11 @@
-﻿
+﻿using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Subscript span.
 	/// </summary>
-	class SubscriptSpan : Span
+	class SubscriptSpan : Span, ICopiable<SubscriptSpan>
 	{
 		internal const string SpanKey = "Subscript";
 
@@ -22,6 +23,16 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public SubscriptSpan (SubscriptSpan span) : this (span.Start, span.End) {
+		}
+
+		public void ValueFrom(SubscriptSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new SubscriptSpan(Start, End);
 		}
 	}
 }

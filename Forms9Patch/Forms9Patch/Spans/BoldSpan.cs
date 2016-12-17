@@ -1,10 +1,11 @@
-﻿
+﻿using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Bold span.
 	/// </summary>
-	class BoldSpan : Span
+	class BoldSpan : Span, ICopiable<BoldSpan>
 	{
 		internal const string SpanKey = "Bold";
 
@@ -22,6 +23,16 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public BoldSpan (BoldSpan span) : this (span.Start, span.End) {
+		}
+
+		public void ValueFrom(BoldSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new BoldSpan(Start, End);
 		}
 	}
 }

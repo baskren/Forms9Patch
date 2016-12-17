@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
+using PCL.Utils;
+using System;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch FormattedString Span
 	/// </summary>
-	abstract class Span : INotifyPropertyChanged
+	abstract class Span : INotifyPropertyChanged, ICopiable<Span>
 	{
 		internal string Key;
 
@@ -82,8 +84,23 @@ namespace Forms9Patch
 			PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (propertyName));
 		}
 
+		#endregion
 
+
+		#region
+		public void ValueFrom(Span source)
+		{
+			Key = source.Key;
+			Start = source.Start;
+			End = source.End;
+		}
+
+		public virtual Span Copy()
+		{
+			throw new NotImplementedException();
+		}
 		#endregion
 	}
+
 }
 

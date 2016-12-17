@@ -4,9 +4,10 @@
 //  *
 //  *******************************************************************/
 using System;
+using PCL.Utils;
 namespace Forms9Patch
 {
-	class NumeratorSpan: Span
+	class NumeratorSpan: Span, ICopiable<NumeratorSpan>
 	{
 		internal const string SpanKey = "Numerator";
 
@@ -24,6 +25,16 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="span">Span.</param>
 		public NumeratorSpan(NumeratorSpan span) : this(span.Start, span.End) {
+		}
+
+		public void ValueFrom(NumeratorSpan source)
+		{
+			base.ValueFrom(source);
+		}
+
+		public override Span Copy()
+		{
+			return new NumeratorSpan(Start, End);
 		}
 	}
 }

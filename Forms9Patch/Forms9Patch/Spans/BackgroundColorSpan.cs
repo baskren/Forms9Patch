@@ -1,12 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
 	/// <summary>
 	/// Forms9Patch Background color span.
 	/// </summary>
-	class BackgroundColorSpan : Span
+	class BackgroundColorSpan : Span, ICopiable<BackgroundColorSpan>
 	{
 		internal const string SpanKey = "BackgroundColor";
 
@@ -41,6 +42,18 @@ namespace Forms9Patch
 		/// <param name="span">Span.</param>
 		public BackgroundColorSpan (BackgroundColorSpan span) : this (span.Start, span.End, span.Color) {
 		}
+
+		public void ValueFrom(BackgroundColorSpan source)
+		{
+			base.ValueFrom(source);
+			Color = source.Color;
+		}
+
+		public override Span Copy()
+		{
+			return new BackgroundColorSpan(Start, End, Color);
+		}
+
 	}
 }
 

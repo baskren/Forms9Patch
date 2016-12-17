@@ -11,6 +11,7 @@ namespace Forms9Patch
 	public class GroupTemplate : Xamarin.Forms.DataTemplateSelector
 	{
 
+		/*
 		Type _baseCellViewType = typeof(BaseCellView);
 		internal Type BaseCellViewType
 		{
@@ -23,6 +24,7 @@ namespace Forms9Patch
 				_baseCellViewType = value;
 			}
 		}
+		*/
 
 		/// <summary>
 		/// The cell templates.
@@ -156,8 +158,8 @@ namespace Forms9Patch
 				//cellView.BindingContext = item;
 				//return cellView;
 				//System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) enter",item);
-				//var baseCellView = new BaseCellView();
-				var baseCellView = (BaseCellView)Activator.CreateInstance(BaseCellViewType);
+				var baseCellView = new BaseCellView();
+				//var baseCellView = (BaseCellView)Activator.CreateInstance(BaseCellViewType);
 				baseCellView.Content = (View)Activator.CreateInstance (contentType);
 				baseCellView.BindingContext = item;
 				//System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) exit",item);
