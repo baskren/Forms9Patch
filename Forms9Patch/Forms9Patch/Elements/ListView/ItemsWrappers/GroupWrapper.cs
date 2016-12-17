@@ -354,10 +354,12 @@ namespace Forms9Patch
 				var itemType = typeof(ItemWrapper<>).MakeGenericType(new[] { objType });
 
 				// Approach 1
-				//item = (ItemWrapper)Activator.CreateInstance(itemType);
+				item = (ItemWrapper)Activator.CreateInstance(itemType);
 
 				// Approach 2
-				item = (ItemWrapper)BaitAndSwitch.ObjectFactory.Constructor(itemType, new object[] { });
+				//item = (ItemWrapper)BaitAndSwitch.ObjectFactory.Constructor(itemType, new object[] { });
+
+				// Approach 3
 
 				item.Source = sourceObject;
 			}
