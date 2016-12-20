@@ -394,19 +394,6 @@ namespace Forms9Patch
 			Cancelled?.Invoke(this, EventArgs.Empty);
 		}
 
-		/**
-		internal void SetRoundedBoxBindings(BindableObject bindable)
-		{
-			//HasShadow drives UpdateBasePadding - which is different in each inherited implementation.  So binding needs to happen in inherited class
-			bindable.SetBinding(RoundedBoxBase.ShadowInvertedProperty, "ShadowInverted");
-			bindable.SetBinding(RoundedBoxBase.OutlineColorProperty, "OutlineColor");
-			bindable.SetBinding(RoundedBoxBase.OutlineRadiusProperty, "OutlineRadius");
-			bindable.SetBinding(RoundedBoxBase.OutlineWidthProperty, "OutlineWidth");
-			//Padding drives UpdateBasePadding - which is different in each inherited implementation.  So binding needs to happen in inherited class
-			bindable.SetBinding(VisualElement.BackgroundColorProperty, "BackgroundColor");
-		}
-		*/
-
 		internal BoxView PageOverlay
 		{
 			get { return _pageOverlay; }

@@ -454,22 +454,17 @@ namespace Forms9Patch
 				VerticalTextAlignment = TextAlignment.Center,
 				HorizontalOptions = LayoutOptions.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
-				//FontSize = 12,
 				HeightRequest = 22,
-				MinimizeHeight = true
-				//Lines = 1,
-				//Fit = LabelFit.None
-				//LineBreakMode = LineBreakMode.TailTruncation,
+				MinimizeHeight = true,
+				Lines = Lines,
+				Fit = Fit,
+				LineBreakMode = LineBreakMode,
+				MinFontSize = MinFontSize,
+				MaxFontSize = MaxFontSize,
+				FontSize = FontSize,
+				FontAttributes = FontAttributes,
+				FontFamily = FontFamily
 			};
-			_label.BindingContext = this;
-			_label.SetBinding(Label.LinesProperty, LinesProperty.PropertyName);
-			_label.SetBinding(Label.FitProperty, FitProperty.PropertyName);
-			_label.SetBinding(Label.LineBreakModeProperty, LineBreakModeProperty.PropertyName);
-			_label.SetBinding(Label.MinFontSizeProperty, MinFontSizeProperty.PropertyName);
-			_label.SetBinding(Label.MaxFontSizeProperty, MaxFontSizeProperty.PropertyName);
-			_label.SetBinding(Label.FontSizeProperty, FontSizeProperty.PropertyName);
-			_label.SetBinding(Label.FontAttributesProperty, FontAttributesProperty.PropertyName);
-			_label.SetBinding(Label.FontFamilyProperty, FontFamilyProperty.PropertyName);
 
 			_stackLayout = new Xamarin.Forms.StackLayout {
 				Orientation = StackOrientation.Horizontal,
@@ -756,15 +751,18 @@ namespace Forms9Patch
 			base.OnPropertyChanging(propertyName);
 			if (_noUpdate)
 				return;
-			if (propertyName == CommandProperty.PropertyName) {
+			if (propertyName == CommandProperty.PropertyName)
+			{
 				ICommand command = Command;
-				if (command != null) {
+				if (command != null)
+				{
 					command.CanExecuteChanged -= CommandCanExecuteChanged;
-				//} else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
-				//	PressingState.PropertyChanged -= OnStatePropertyChanged;
+					//} else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
+					//	PressingState.PropertyChanged -= OnStatePropertyChanged;
 				}
 			}
 		}
+
 
 		void SetOrienations() {
 			if (Orientation == StackOrientation.Horizontal) {
@@ -924,6 +922,22 @@ namespace Forms9Patch
 						eventHandler (this, EventArgs.Empty);
 				}
 			}
+			else if (propertyName == LinesProperty.PropertyName)
+				_label.Lines = Lines;
+			else if (propertyName == FitProperty.PropertyName)
+				_label.Fit = Fit;
+			else if (propertyName == LineBreakModeProperty.PropertyName)
+				_label.LineBreakMode = LineBreakMode;
+			else if (propertyName == MinFontSizeProperty.PropertyName)
+				_label.MinFontSize = MinFontSize;
+			else if (propertyName == MaxFontSizeProperty.PropertyName)
+				_label.MaxFontSize = MaxFontSize;
+			else if (propertyName == FontSizeProperty.PropertyName)
+				_label.FontSize = FontSize;
+			else if (propertyName == FontAttributesProperty.PropertyName)
+				_label.FontAttributes = FontAttributes;
+			else if (propertyName == FontFamilyProperty.PropertyName)
+				_label.FontFamily = FontFamily;
 
 		}
 
