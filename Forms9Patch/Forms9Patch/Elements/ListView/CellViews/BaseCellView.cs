@@ -99,6 +99,7 @@ namespace Forms9Patch
 		}
 		#endregion
 
+		/*
 		#region Accessory appearance
 		/// <summary>
 		/// The start accessory property.
@@ -128,6 +129,7 @@ namespace Forms9Patch
 			set { SetValue(EndAccessoryProperty, value); }
 		}
 		#endregion
+		*/
 
 		#endregion
 
@@ -137,6 +139,7 @@ namespace Forms9Patch
 		internal int ID;
 
 		#region Accessories
+		/*
 		Label _startAccessory = new Label
 		{
 			HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -149,6 +152,7 @@ namespace Forms9Patch
 			VerticalOptions = LayoutOptions.CenterAndExpand,
 			TextColor = Color.Black
 		};
+		*/
 		#endregion
 
 
@@ -161,7 +165,7 @@ namespace Forms9Patch
 			BackgroundColor = Color.FromRgb(200,200,200),
 			Padding = 0,
 			Margin = 0,
-			OutlineWidth = 0,
+			OutlineWidth = 0
 		};
 		readonly Frame _swipeFrame1 = new Frame
 		{
@@ -180,7 +184,7 @@ namespace Forms9Patch
 		};
 		readonly Frame _touchBlocker = new Frame
 		{
-			BackgroundColor = Color.FromRgba(0, 0, 0, 1),
+			BackgroundColor = Color.FromRgba(0, 0, 0, 1)
 		};
 
 		readonly MaterialButton _swipeButton1 = new MaterialButton { WidthRequest = 50, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
@@ -209,21 +213,21 @@ namespace Forms9Patch
 			this.SetBinding(SeparatorLeftIndentProperty, SeparatorLeftIndentProperty.PropertyName);
 			this.SetBinding(SeparatorRightIndentProperty, SeparatorRightIndentProperty.PropertyName);
 
-			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
-			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
+			//this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
+			//this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
 
-			_startAccessory.SetBinding(Label.HorizontalTextAlignmentProperty,CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-			_startAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			//_startAccessory.SetBinding(Label.HorizontalTextAlignmentProperty,CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			//_startAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
 
-			_endAccessory.SetBinding(Label.HorizontalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-			_endAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			//_endAccessory.SetBinding(Label.HorizontalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
+			//_endAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
 
 
 			ColumnDefinitions = new ColumnDefinitionCollection
 			{
-				new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) },
-				new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-				new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) }
+				//new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) },
+				new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+				//new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) }
 			};
 			RowDefinitions = new RowDefinitionCollection
 			{
@@ -248,6 +252,8 @@ namespace Forms9Patch
 			_swipeButton1.Tapped += OnSwipeButtonTapped;
 			_swipeButton2.Tapped += OnSwipeButtonTapped;
 			_swipeButton3.Tapped += OnSwipeButtonTapped;
+
+
 		}
 		#endregion
 
@@ -272,16 +278,16 @@ namespace Forms9Patch
 			set
 			{
 				Content.TranslationX = value;
-				_startAccessory.TranslationX = value;
-				_endAccessory.TranslationX = value;
+				//_startAccessory.TranslationX = value;
+				//_endAccessory.TranslationX = value;
 			}
 		}
 
 		void TranslateChildrenTo(double x, double y, uint milliseconds, Easing easing)
 		{
 			Content.TranslateTo(x,y,milliseconds,easing);
-			_startAccessory.TranslateTo(x,y,milliseconds,easing);
-			_endAccessory.TranslateTo(x,y,milliseconds,easing);
+			//_startAccessory.TranslateTo(x,y,milliseconds,easing);
+			//_endAccessory.TranslateTo(x,y,milliseconds,easing);
 		}
 
 		void OnPanned(object sender, PanEventArgs e)
@@ -341,7 +347,7 @@ namespace Forms9Patch
 		{
 			if (_panVt)
 				return;
-			if (!_panVt && !_panVt)
+			if (!_panVt && !_panHz)
 			{
 				if (Math.Abs(e.TotalDistance.X) > 10)
 					_panHz = true;
@@ -546,7 +552,7 @@ namespace Forms9Patch
 					SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
 					OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
 					Padding = 5,
-					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
+					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
 				};
 				var cancelButton = new MaterialButton
 				{
@@ -560,7 +566,7 @@ namespace Forms9Patch
 					SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
 					OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
 					Padding = 5,
-					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
+					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
 				};
 				var stack = new StackLayout
 				{
@@ -568,7 +574,7 @@ namespace Forms9Patch
 					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
 					Children = { segmentedController, cancelButton }
 				};
-				var modal = new Forms9Patch.ModalPopup(this)
+				var modal = new ModalPopup(this)
 				{
 					BackgroundColor = Color.Transparent,
 					OutlineWidth = 0,
@@ -583,7 +589,7 @@ namespace Forms9Patch
 					{
 						Text = menuItem.Text,
 						IconText = menuItem.IconText,
-						ImageSource = menuItem.ImageSource,
+						ImageSource = menuItem.ImageSource
 					};
 					segment.Tapped += (s, arg) =>
 					{
@@ -655,8 +661,8 @@ namespace Forms9Patch
 				Content.BindingContext = item?.Source;
 				//System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
 			}
-			_freshContent = true;
-			UpdateLayout();
+			//_freshContent = true;
+			//UpdateLayout();
 			//System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
 			base.OnBindingContextChanged();
 		}
@@ -670,24 +676,28 @@ namespace Forms9Patch
 				var item = BindingContext as ItemWrapper;
 				if (item != null)
 					item.PropertyChanged -= OnItemPropertyChanged;
-				_startAccessory.HtmlText = null;
-				_endAccessory.HtmlText = null;
+				//_startAccessory.HtmlText = null;
+				//_endAccessory.HtmlText = null;
 				PutAwaySwipeButtons(false);
 			}
+			else if (propertyName == ContentProperty.PropertyName && Content!=null)
+				Children.Remove(Content);
+			/*
 			else if (propertyName == StartAccessoryProperty.PropertyName && StartAccessory != null)
 				StartAccessory.PropertyChanged -= OnStartAccessoryPropertyChanged;
 			else if (propertyName == EndAccessoryProperty.PropertyName && EndAccessory != null)
 				EndAccessory.PropertyChanged -= OnEndAccessoryPropertyChanged;
+				*/
 		}
 
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
 			base.OnPropertyChanged(propertyName);
-
+			/*
 			if (propertyName == StartAccessoryProperty.PropertyName)
 			{
-				_startAccessory.BindingContext = StartAccessory;
+				//_startAccessory.BindingContext = StartAccessory;
 				if (StartAccessory != null)
 				{
 					StartAccessory.PropertyChanged += OnStartAccessoryPropertyChanged;
@@ -696,19 +706,21 @@ namespace Forms9Patch
 			}
 			else if (propertyName == EndAccessoryProperty.PropertyName)
 			{
-				_endAccessory.BindingContext = EndAccessory;
+				//_endAccessory.BindingContext = EndAccessory;
 				if (EndAccessory != null)
 				{
 					EndAccessory.PropertyChanged += OnEndAccessoryPropertyChanged;
 					UpdateEndAccessoryWidth();
 				}
 			}
-				
+			*/
 
+			if (propertyName == ContentProperty.PropertyName && Content != null)
+				Children.Add(Content,0,1);
 
-			_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);
+			//_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);
 			//System.Diagnostics.Debug.WriteLine("OnPropertyChanged ["+propertyName+"] Item.Source=["+((Item)BindingContext)?.Source+"]");
-			UpdateLayout();
+			//UpdateLayout();
 		}
 
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -725,24 +737,25 @@ namespace Forms9Patch
 				SetHeights();
 				
 			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
-			_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
-			UpdateLayout();
+			///_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
+			//UpdateLayout();
 		}
 
+		/*
 		void OnStartAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
 				UpdateStartAccessoryWidth();
-			else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
-				UpdateLayout();
+			//else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
+			//	UpdateLayout();
 		}
 
 		void OnEndAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
 				UpdateEndAccessoryWidth();
-			else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
-				UpdateLayout();
+			//else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
+			//	UpdateLayout();
 		}
 
 		void UpdateStartAccessoryWidth()
@@ -757,8 +770,8 @@ namespace Forms9Patch
 			ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
 		}
 
-		bool _lastStartAccessoryActive;
-		bool _lastEndAccesoryActive;
+		//bool _lastStartAccessoryActive;
+		//bool _lastEndAccesoryActive;
 		bool _freshContent;
 		void UpdateLayout()
 		{
@@ -819,6 +832,7 @@ namespace Forms9Patch
 
 			}
 		}
+		*/
 
 		void UpdateUnBoundProperties()
 		{

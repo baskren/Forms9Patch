@@ -40,7 +40,7 @@ namespace Forms9Patch.iOS
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
-			//Control.ClearsContextBeforeDrawing = true;  // this causes Modal popup to not render property
+			Control.ClearsContextBeforeDrawing = true;  // this causes Modal popup to not render property
 			Control.ContentMode = UIViewContentMode.Redraw;
 
 			if (string.IsNullOrEmpty(Text))
