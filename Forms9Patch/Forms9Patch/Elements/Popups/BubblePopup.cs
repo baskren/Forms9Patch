@@ -127,6 +127,15 @@ namespace Forms9Patch
 				VerticalOptions = LayoutOptions.Center
 			};
 			SetRoundedBoxBindings (_bubbleLayout);
+			_bubbleLayout.PointerLength = PointerLength;
+			_bubbleLayout.PointerTipRadius = PointerTipRadius;
+			_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
+			_bubbleLayout.Padding = Padding;
+			_bubbleLayout.HasShadow = HasShadow;
+			_bubbleLayout.OutlineRadius = OutlineRadius;
+			_bubbleLayout.OutlineColor = OutlineColor;
+			_bubbleLayout.OutlineWidth = OutlineWidth;
+			/*
 			_bubbleLayout.SetBinding (BubbleLayout.PointerLengthProperty, "PointerLength");
 			_bubbleLayout.SetBinding (BubbleLayout.PointerTipRadiusProperty, "PointerTipRadius");
 			//_bubbleLayout.SetBinding (BubbleLayout.PointerAxialPositionProperty, "PointerAxialPosition");
@@ -136,6 +145,7 @@ namespace Forms9Patch
 			_bubbleLayout.SetBinding (BubbleLayout.PaddingProperty, "Padding");
 			_bubbleLayout.SetBinding (BubbleLayout.HasShadowProperty, "HasShadow");
 			_bubbleLayout.BindingContext = this;
+			*/
 			ContentView = _bubbleLayout;
 
 
@@ -158,33 +168,52 @@ namespace Forms9Patch
 			base.OnPropertyChanged (propertyName);
 			if (_bubbleLayout == null)
 				return;
-			if (propertyName == IsVisibleProperty.PropertyName) {
+			if (propertyName == IsVisibleProperty.PropertyName)
+			{
 				if (HostPage == null)
-					HostPage = Application.Current.MainPage;			
-				if (IsVisible) {
+					HostPage = Application.Current.MainPage;
+				if (IsVisible)
+				{
 					Content.TranslationX = 0;
 					Content.TranslationY = 0;
 					//System.Diagnostics.Debug.WriteLine ("======================================================================");
 					if (Target != null)
 						Target.SizeChanged += OnTargetSizeChanged;
 					Parent = HostPage;
-					HostPage.SetValue (PopupProperty, this);
+					HostPage.SetValue(PopupProperty, this);
 					HostPage.SizeChanged += OnTargetSizeChanged;
 					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion enter");
-					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
+					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
 					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion exit / ForceNativeLayout?Invoke() enter");
 					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-					ForceNativeLayout?.Invoke ();
+					ForceNativeLayout?.Invoke();
 					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) ForceNativeLayout?Invoke() exit");
-				} else {
+				}
+				else {
 					if (Target != null)
 						Target.SizeChanged -= OnTargetSizeChanged;
-					HostPage.SetValue (PopupProperty, null);
+					HostPage.SetValue(PopupProperty, null);
 					HostPage.SizeChanged -= OnTargetSizeChanged;
 					_bubbleLayout.PointerDirection = PointerDirection.None;
-					LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
+					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, -1, -1));
 				}
 			}
+			else if (propertyName == PointerLengthProperty.PropertyName)
+				_bubbleLayout.PointerLength = PointerLength;
+			else if (propertyName == PointerTipRadiusProperty.PropertyName)
+				_bubbleLayout.PointerTipRadius = PointerTipRadius;
+			else if (propertyName == PointerCornerRadiusProperty.PropertyName)
+				_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
+			else if (propertyName == PaddingProperty.PropertyName)
+				_bubbleLayout.Padding = Padding;
+			else if (propertyName == HasShadowProperty.PropertyName)
+				_bubbleLayout.HasShadow = HasShadow;
+			else if (propertyName == OutlineColorProperty.PropertyName)
+				_bubbleLayout.OutlineColor = OutlineColor;
+			else if (propertyName == OutlineWidthProperty.PropertyName)
+				_bubbleLayout.OutlineWidth = OutlineWidth;
+			else if (propertyName == OutlineRadiusProperty.PropertyName)
+				_bubbleLayout.OutlineRadius = OutlineRadius;
 		}
 
 
