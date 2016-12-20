@@ -7,6 +7,15 @@ namespace Forms9Patch
 	/// </summary>
 	public class ActivityIndicatorPopup : ModalPopup
 	{
+
+		public static readonly BindableProperty ColorProperty = BindableProperty.Create("Color", typeof(Color), typeof(ActivityIndicatorPopup), Color.Blue);
+		public Color Color
+		{
+			get { return (Color)GetValue(ColorProperty); }
+			set { SetValue(ColorProperty, value); }
+		}
+
+
 		/// <summary>
 		/// Create and displays an activity indictar on a full page layover.
 		/// </summary>
@@ -17,18 +26,31 @@ namespace Forms9Patch
 			return indicator;
 		}
 
+		#region Fields
+		ActivityIndicator _indicator = new ActivityIndicator
+		{
+			BackgroundColor = Color.Transparent,
+			Color = (Color)ColorProperty.DefaultValue
+		};
+		#endregion
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
 		/// </summary>
 		public ActivityIndicatorPopup(VisualElement target) : base(target)
 		{
-			var indicator = new ActivityIndicator();
-			indicator.SetBinding(ActivityIndicator.IsRunningProperty,IsVisibleProperty.PropertyName);
-			Content = indicator;
+			Content = _indicator;
 			CancelOnPageOverlayTouch = false;
-			indicator.BackgroundColor = Color.Transparent;
-			indicator.Color = Color.Blue;
 			BackgroundColor = Color.Transparent;
+		}
+
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == IsVisibleProperty.PropertyName)
+				_indicator.IsVisible = IsVisible;
+			else if (propertyName == ColorProperty.PropertyName)
+				_indicator.Color = Color;
 		}
 	}
 }

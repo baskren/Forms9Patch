@@ -14,6 +14,11 @@ namespace Forms9Patch.iOS
 	/// </summary>
 	public class LabelRenderer : ViewRenderer<Label, UILabel>
 	{
+		NSString Text;
+		string UnmarkedText;
+
+		bool InvalidLayout;
+
 		//
 		// Fields
 		//
@@ -35,12 +40,13 @@ namespace Forms9Patch.iOS
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
-			Control.ClearsContextBeforeDrawing = true;
-			string text = Element.Text ?? Element.F9PFormattedString?.Text;
-			if (string.IsNullOrEmpty(text))
+			//Control.ClearsContextBeforeDrawing = true;  // this causes Modal popup to not render property
+			Control.ContentMode = UIViewContentMode.Redraw;
+
+			if (string.IsNullOrEmpty(Text))
 				return new SizeRequest(Size.Zero);
 
-			if (Control.LineBreakMode != UILineBreakMode.WordWrap)
+			//if (Control.LineBreakMode != UILineBreakMode.WordWrap)
 				 Control.LineBreakMode = UILineBreakMode.WordWrap;
 
 			//var baseSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
@@ -87,7 +93,7 @@ namespace Forms9Patch.iOS
 			if (Element.Lines == 0 && Element.Fit != LabelFit.None)
 			{
 				Control.Lines = 0;
-				tmpFontSize = ZeroLinesFit(new NSString(text), widthConstraint, heightConstraint);
+				tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint);
 			}
 			else if (Element.Fit == LabelFit.Lines)
 			{
@@ -108,7 +114,9 @@ namespace Forms9Patch.iOS
 				}
 			}
 			else if (Element.Fit == LabelFit.Width)
-				tmpFontSize = WidthFit(new NSString(text), widthConstraint, heightConstraint);
+			{
+				tmpFontSize = WidthFit(widthConstraint);
+			}
 			else if (Element.Fit == LabelFit.None && Element.Lines > 0)
 			{
 				tmpHt = Control.Font.LineHeight * Element.Lines + Control.Font.Leading * (Element.Lines - 1);// + ContentScaleFactor;
@@ -146,7 +154,7 @@ namespace Forms9Patch.iOS
 				if (lines < Element.Lines)
 				{
 					tmpHt = Control.Font.LineHeight * lines + Control.Font.Leading * (lines - 1);
-					Control.Lines = (System.nint)Math.Ceiling(lines);
+					Control.Lines = (nint)Math.Ceiling(lines);
 					//if (Element.HtmlText == "degrees, °")
 					//	System.Diagnostics.Debug.WriteLine("\tRE-calculated tmpHt=[" + tmpHt + "] lines=[" + lines + "]");
 				}
@@ -269,7 +277,24 @@ namespace Forms9Patch.iOS
 
 
 		#region Fitting
-		nfloat WidthFit(NSString text, double widthConstraint, double heightConstraint)
+		CGSize LabelSize(double widthConstraint)
+		{
+			bool twice = (UnmarkedText.Length == 1);
+
+			CGSize labelSize;
+			var constraintSize = new CGSize(widthConstraint * (twice ? 2 : 1), double.PositiveInfinity);
+			if (Element.Text == null)
+			{
+				Control.AttributedText = Element.ToNSAttributedString(Control, Control.Font.PointSize, twice: twice);
+				labelSize = Control.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
+			}
+			else {
+				labelSize = Text.StringSize(Control.Font, constraintSize, UILineBreakMode.WordWrap);
+			}
+			return labelSize;
+		}
+
+		nfloat WidthFit(double widthConstraint)
 		{
 			UIFont font = Control.Font;
 			//nfloat result = ZeroLinesFit(text, widthConstraint, heightConstraint);
@@ -278,39 +303,29 @@ namespace Forms9Patch.iOS
 			if (minFontSize < 0)
 				minFontSize = 4;
 
+
 			nfloat step = (result - minFontSize)/5;
 			if (step > 0.05f)
 			{
-				result = DescendingWidthFit(font, text, widthConstraint, heightConstraint, result, minFontSize, step);
+				result = DescendingWidthFit(font, widthConstraint, result, minFontSize, step);
 				while (step > 0.25f)
 				{
 					step /= 5;
-					result = DescendingWidthFit(font, text, widthConstraint, heightConstraint, result + step * 5, result, step);
+					result = DescendingWidthFit(font, widthConstraint, result + step * 5, result, step);
 				}
 			}
 			//System.Diagnostics.Debug.WriteLine("WIDTHFIT result=["+result+"]");
 			return result;
 		}
 
-		nfloat DescendingWidthFit(UIFont font, NSString text, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
+		nfloat DescendingWidthFit(UIFont font, double widthConstraint, nfloat start, nfloat min, nfloat step)
 		{
 			nfloat result;
-			var unmarkedText = ((HTMLMarkupString)Element.F9PFormattedString)?.UnmarkedText ?? Element.HtmlText ?? text;
-			bool twice = (unmarkedText.Length == 1);
 			for (result = start; result > min; result -= step)
 			{
 				font = font.WithSize(result);
 				Control.Font = font;
-				var constraintSize = new CGSize(widthConstraint * (twice ? 2 : 1), double.PositiveInfinity);
-				CGSize labelSize;
-				if (Element.Text == null)
-				{
-					Control.AttributedText = Element.ToNSAttributedString(Control, font.PointSize, twice: twice);
-					labelSize = Control.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
-				}
-				else {
-					labelSize = text.StringSize(font, constraintSize, UILineBreakMode.WordWrap);
-				}
+				CGSize labelSize = LabelSize(widthConstraint);
 				//System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=["+result+"] lineHeight=["+font.LineHeight+"] height=["+labelSize.Height+"] lines=["+(labelSize.Height / font.LineHeight)+"]");
 				if ((labelSize.Height / font.LineHeight) <= Element.Lines + .005f)
 				{
@@ -323,7 +338,7 @@ namespace Forms9Patch.iOS
 			return result;
 		}
 
-		nfloat ZeroLinesFit(NSString text, double widthConstraint, double heightConstraint)
+		nfloat ZeroLinesFit(double widthConstraint, double heightConstraint)
 		{
 			UIFont font = Control.Font;
 			var startingFontSize = font.PointSize;
@@ -334,32 +349,23 @@ namespace Forms9Patch.iOS
 			if (minFontSize < 0)
 				minFontSize = 4;
 
-			nfloat result = DescendingZeroLinesFit(font, text, widthConstraint, heightConstraint, startingFontSize, minFontSize, 5);
-			result = DescendingZeroLinesFit(font, text, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize,result + 5f), result, 1);
-			result = DescendingZeroLinesFit(font, text, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 1f), result, 0.2f);
-			result = DescendingZeroLinesFit(font, text, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 0.2f), result, 0.04f);
+			nfloat result = DescendingZeroLinesFit(font, widthConstraint, heightConstraint, startingFontSize, minFontSize, 5);
+			result = DescendingZeroLinesFit(font, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize,result + 5f), result, 1);
+			result = DescendingZeroLinesFit(font, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 1f), result, 0.2f);
+			result = DescendingZeroLinesFit(font, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 0.2f), result, 0.04f);
 			//System.Diagnostics.Debug.WriteLine("ZEROLINESFIT result=["+result+"]");
 			return result;
 		}
 
-		nfloat DescendingZeroLinesFit(UIFont font, NSString text, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
+		nfloat DescendingZeroLinesFit(UIFont font, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
 		{
 			nfloat result;
-			var unmarkedText = ((HTMLMarkupString)Element.F9PFormattedString)?.UnmarkedText ?? Element.HtmlText ?? text;
-			bool twice = (unmarkedText.Length == 1);
 			for (result = start; result > min; result -= step)
 			{
 				
 				font = font.WithSize(result);
 				Control.Font = font;
-				var constraintSize = new CGSize(widthConstraint * (twice?2:1), double.PositiveInfinity);
-				CGSize labelSize;
-				if (Element.Text == null) {
-					Control.AttributedText = Element.ToNSAttributedString(Control, font.PointSize, twice: twice);
-					labelSize = Control.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
-				} else {
-					labelSize = text.StringSize(font, constraintSize, UILineBreakMode.WordWrap);
-				}
+				CGSize labelSize = LabelSize(widthConstraint);
 				//System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=[" + result + "] height=[" + labelSize.Height + "]");
 				if (labelSize.Height <= heightConstraint)
 				{
@@ -370,8 +376,9 @@ namespace Forms9Patch.iOS
 			return result;
 		}
 
+		/*
 		int _linesToFit = -1;
-		double LinesFitError(double fontSize, double widthConstraint, double heightConstraint)
+		double LinesFitError(double fontSize, double widthConstraint)
 		{
 			var boundingSize = new CGSize((nfloat)widthConstraint, nfloat.PositiveInfinity);
 			if (boundingSize.Height < 1 || boundingSize.Width < 1)
@@ -419,6 +426,7 @@ namespace Forms9Patch.iOS
 			//System.Diagnostics.Debug.WriteLine("LinesFitError fontSize=["+fontSize+"] tmpHt=["+tmpHt+"] leading=["+tmpFont.Leading+"] lineHeight=["+tmpFont.LineHeight+"] lines=[" + lines + "] error=["+error+"]");
 			return error;
 		}
+		*/
 
 		double WidthFitError(double fontSize)
 		{
@@ -467,6 +475,9 @@ namespace Forms9Patch.iOS
 			//System.Diagnostics.Debug.WriteLine("\twidthErr=["+widthErr+"]");
 			return widthErr;
 		}
+
+
+
 		#endregion
 
 
@@ -486,6 +497,8 @@ namespace Forms9Patch.iOS
 						BackgroundColor = UIColor.Clear
 					});
 				}
+				Control.Font = Element.ToUIFont();
+				UpdateFontColor();
 				UpdateText ();
 				UpdateAlignment ();
 				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
@@ -505,9 +518,13 @@ namespace Forms9Patch.iOS
 			if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName)
 				UpdateAlignment();
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
-				UpdateText();
+				UpdateFontColor();
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
-				UpdateText();
+			{
+				Control.Font = Element.ToUIFont();
+				UpdateFontColor();
+				InvalidLayout = true;
+			}
 			else if (e.PropertyName == Label.TextProperty.PropertyName)
 				UpdateText();
 			else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
@@ -536,10 +553,6 @@ namespace Forms9Patch.iOS
 
 		void UpdateText()
 		{
-			//perfectSizeValid = false;
-			Control.Font = Element.ToUIFont();
-			var color = (Color)Element.GetValue(Label.TextColorProperty);
-			Control.TextColor = color.ToUIColor(UIColor.Black);
 			if (Element.F9PFormattedString != null)
 			{
 				if (Settings.IsLicenseValid || Element._id < 4)
@@ -549,6 +562,24 @@ namespace Forms9Patch.iOS
 			}
 			else 
 				Control.Text = (string)Element.GetValue(Label.TextProperty);
+			var text = Element.Text ?? Element.F9PFormattedString?.Text;
+			if (text != null)
+			{
+				Text = new NSString(text);
+				UnmarkedText = ((HTMLMarkupString)Element.F9PFormattedString)?.UnmarkedText ?? Element.HtmlText ?? text;
+			}
+			else
+			{
+				Text = null;
+				UnmarkedText = null;
+			}
+			InvalidLayout = true;
+		}
+
+		void UpdateFontColor()
+		{
+			var color = (Color)Element.GetValue(Label.TextColorProperty);
+			Control.TextColor = color.ToUIColor(UIColor.Black);
 		}
 		#endregion
 

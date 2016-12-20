@@ -703,6 +703,7 @@ namespace Forms9Patch
 					UpdateEndAccessoryWidth();
 				}
 			}
+				
 
 
 			_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);

@@ -186,7 +186,7 @@ namespace Forms9Patch {
 				var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
 
 				var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
-				System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
+				//System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
 
 				LayoutChildIntoBoundingRegion (_frame, bounds);
 				//_frame.ForceLayout ();

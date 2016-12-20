@@ -53,6 +53,7 @@ namespace Forms9Patch
 			Text = s;
 		}
 
+		/*
 		internal F9PFormattedString(F9PFormattedString fs) {
 			_string = fs._string;
 			foreach (var span in _spans) {
@@ -74,6 +75,7 @@ namespace Forms9Patch
 					_spans.Add (new FontFamilySpan (index, end, span.FontFamily));
 			}
 		}
+		*/
 
 		#region Operators
 		/// <param name="formatted">Formatted.</param>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Linq;
 using System.Text;
 
 namespace Forms9Patch
@@ -12,14 +11,14 @@ namespace Forms9Patch
 	class HTMLMarkupString : F9PFormattedString
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.HTMLMarkupString"/> class.
+		/// Initializes a new instance of the <see cref="HTMLMarkupString"/> class.
 		/// </summary>
 		public HTMLMarkupString ()
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.HTMLMarkupString"/> class.
+		/// Initializes a new instance of the <see cref="HTMLMarkupString"/> class.
 		/// </summary>
 		/// <param name="s">S.</param>
 		public HTMLMarkupString (string s) : base (s) {
@@ -36,19 +35,22 @@ namespace Forms9Patch
 			public List<Attribute> Attributes = new List<Attribute> { Capacity = 10 };
 		}
 
+		StringBuilder _unmarkedText = new StringBuilder();
 		/// <summary>
 		/// Gets the unmarked text.
 		/// </summary>
 		/// <value>The unmarked text.</value>
 		public string UnmarkedText {
-			get;
-			private set;
+			get
+			{
+				return _unmarkedText.ToString();
+			}
 		}
 
-		bool inPreSpan=false;
+		bool inPreSpan;
 		void ProcessHTML() {
-			UnmarkedText = "";
-			if (String.IsNullOrWhiteSpace (_string))
+			_unmarkedText.Clear();
+			if (string.IsNullOrWhiteSpace (_string))
 				return;
 			// remove previously Translated spans
 			_spans.Clear();
@@ -387,15 +389,17 @@ namespace Forms9Patch
 						}
 						i = j;
 						if (unicodeInt != 0) {
-							string unicodeString = Char.ConvertFromUtf32 (unicodeInt);
+							string unicodeString = char.ConvertFromUtf32 (unicodeInt);
 							index += unicodeString.Length;
-							UnmarkedText += unicodeString;
+							//UnmarkedText += unicodeString;
+							_unmarkedText.Append(unicodeString);
 						}
 					}
 				} else {
-					if (inPreSpan || !(Char.IsWhiteSpace(_string,i) && i > 0 && Char.IsWhiteSpace(_string,i-1) )) {
+					if (inPreSpan || !(char.IsWhiteSpace(_string,i) && i > 0 && char.IsWhiteSpace(_string,i-1) )) {
 						index++;
-						UnmarkedText += _string [i];
+						//UnmarkedText += _string [i];
+						_unmarkedText.Append(_string[i]);
 					}
 				}
 			}

@@ -30,7 +30,7 @@ namespace Forms9Patch.iOS
 			else
 			{
 				string ellipsesText;
-				if (secondToLastEnd > 0 && Char.IsWhiteSpace(text[secondToLastEnd - 1]))
+				if (secondToLastEnd > 0 && char.IsWhiteSpace(text[secondToLastEnd - 1]))
 					ellipsesText = text.Substring(0, secondToLastEnd - 1) + "\n";
 				else
 					ellipsesText = text.Substring(0, secondToLastEnd);
@@ -46,7 +46,7 @@ namespace Forms9Patch.iOS
 					ellipsesLocation = midLastVisible + 1;
 				}
 				else {
-					if (Char.IsWhiteSpace(text[lastLineEnd - 1]))
+					if (char.IsWhiteSpace(text[lastLineEnd - 1]))
 					{
 						ellipsesText += text.Substring(lastLineStart, lastLineEnd - lastLineStart - 1) + "…";
 						ellipsesLocation = lastLineEnd;
