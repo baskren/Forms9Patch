@@ -394,6 +394,7 @@ namespace Forms9Patch
 			Cancelled?.Invoke(this, EventArgs.Empty);
 		}
 
+		/**
 		internal void SetRoundedBoxBindings(BindableObject bindable)
 		{
 			//HasShadow drives UpdateBasePadding - which is different in each inherited implementation.  So binding needs to happen in inherited class
@@ -404,6 +405,7 @@ namespace Forms9Patch
 			//Padding drives UpdateBasePadding - which is different in each inherited implementation.  So binding needs to happen in inherited class
 			bindable.SetBinding(VisualElement.BackgroundColorProperty, "BackgroundColor");
 		}
+		*/
 
 		internal BoxView PageOverlay
 		{
@@ -423,6 +425,7 @@ namespace Forms9Patch
 
 			}
 		}
+
 
 		/// <param name="propertyName">The name of the property that changed.</param>
 		/// <summary>
@@ -451,8 +454,19 @@ namespace Forms9Patch
 						popup = Popups.Pop();
 					}
 				}
-				
 			}
+			else if (propertyName == PaddingProperty.PropertyName)
+				_roundedBox.Padding = Padding;
+			else if (propertyName == HasShadowProperty.PropertyName)
+				_roundedBox.HasShadow = HasShadow;
+			else if (propertyName == OutlineColorProperty.PropertyName)
+				_roundedBox.OutlineColor = OutlineColor;
+			else if (propertyName == OutlineWidthProperty.PropertyName)
+				_roundedBox.OutlineWidth = OutlineWidth;
+			else if (propertyName == OutlineRadiusProperty.PropertyName)
+				_roundedBox.OutlineRadius = OutlineRadius;
+			else if (propertyName == BackgroundColorProperty.PropertyName)
+				_roundedBox.BackgroundColor = BackgroundColor;
 		}
 
 		internal Action ForceNativeLayout { get; set; }

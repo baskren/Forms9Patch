@@ -124,31 +124,18 @@ namespace Forms9Patch
 		public BubblePopup (VisualElement target) : base (target) {
 			_bubbleLayout = new BubbleLayout {
 				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center
+				VerticalOptions = LayoutOptions.Center,
+				Padding = Padding,
+				HasShadow = HasShadow,
+				OutlineColor = OutlineColor,
+				OutlineWidth = OutlineWidth,
+				OutlineRadius = OutlineRadius,
+				BackgroundColor = BackgroundColor,
+				PointerLength = PointerLength,
+				PointerTipRadius = PointerTipRadius,
+				PointerCornerRadius = PointerCornerRadius
 			};
-			SetRoundedBoxBindings (_bubbleLayout);
-			_bubbleLayout.PointerLength = PointerLength;
-			_bubbleLayout.PointerTipRadius = PointerTipRadius;
-			_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
-			_bubbleLayout.Padding = Padding;
-			_bubbleLayout.HasShadow = HasShadow;
-			_bubbleLayout.OutlineRadius = OutlineRadius;
-			_bubbleLayout.OutlineColor = OutlineColor;
-			_bubbleLayout.OutlineWidth = OutlineWidth;
-			/*
-			_bubbleLayout.SetBinding (BubbleLayout.PointerLengthProperty, "PointerLength");
-			_bubbleLayout.SetBinding (BubbleLayout.PointerTipRadiusProperty, "PointerTipRadius");
-			//_bubbleLayout.SetBinding (BubbleLayout.PointerAxialPositionProperty, "PointerAxialPosition");
-			// PointerDirection is too ambiguous here.  Need to clarify in LayoutChildren
-			//_bubbleLayout.SetBinding (BubbleLayout.PointerDirectionProperty, "PointerDirection");
-			_bubbleLayout.SetBinding (BubbleLayout.PointerCornerRadiusProperty, "PointerCornerRadius");
-			_bubbleLayout.SetBinding (BubbleLayout.PaddingProperty, "Padding");
-			_bubbleLayout.SetBinding (BubbleLayout.HasShadowProperty, "HasShadow");
-			_bubbleLayout.BindingContext = this;
-			*/
 			ContentView = _bubbleLayout;
-
-
 		}
 
 
@@ -204,16 +191,6 @@ namespace Forms9Patch
 				_bubbleLayout.PointerTipRadius = PointerTipRadius;
 			else if (propertyName == PointerCornerRadiusProperty.PropertyName)
 				_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
-			else if (propertyName == PaddingProperty.PropertyName)
-				_bubbleLayout.Padding = Padding;
-			else if (propertyName == HasShadowProperty.PropertyName)
-				_bubbleLayout.HasShadow = HasShadow;
-			else if (propertyName == OutlineColorProperty.PropertyName)
-				_bubbleLayout.OutlineColor = OutlineColor;
-			else if (propertyName == OutlineWidthProperty.PropertyName)
-				_bubbleLayout.OutlineWidth = OutlineWidth;
-			else if (propertyName == OutlineRadiusProperty.PropertyName)
-				_bubbleLayout.OutlineRadius = OutlineRadius;
 		}
 
 

@@ -70,23 +70,23 @@ namespace Forms9Patch {
 		/// <param name="target">Element or Page pointed to by Popup.</param>
 		public ModalPopup (VisualElement target) : base (target) 
 		{
+
+			_frame = new Frame
+			{
+				VerticalOptions = LayoutOptions.Center,
+				HorizontalOptions = LayoutOptions.Center,
+				Padding = Padding,
+				HasShadow = HasShadow,
+				OutlineColor = OutlineColor,
+				OutlineWidth = OutlineWidth,
+				OutlineRadius = OutlineRadius,
+				BackgroundColor = BackgroundColor
+			};
+			ContentView = _frame;
+
 			Margin = 0;
 			Padding = 10;
 
-			_frame = new Frame {
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center
-			};
-			SetRoundedBoxBindings (_frame);
-			_frame.SetBinding (Frame.HasShadowProperty, "HasShadow");
-			_frame.SetBinding (Frame.BackgroundImageProperty, "BackgroundImage");
-			_frame.SetBinding (Frame.PaddingProperty, "Padding");
-			//_frame.SetBinding(View.MarginProperty, MarginProperty.PropertyName);
-			//_frame.SetBinding(View.HorizontalOptionsProperty, HorizontalOptionsProperty.PropertyName);
-			//_frame.SetBinding(View.VerticalOptionsProperty, VerticalOptionsProperty.PropertyName);
-
-			_frame.BindingContext = this;
-			ContentView = _frame;
 		}
 
 
