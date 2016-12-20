@@ -37,14 +37,11 @@ namespace Forms9Patch
 		{
 			//SelectedItems = new ObservableCollection<object>();
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0);
-			//_upperGradient.EndColor = _overlayColor.WithAlpha(0);
+			_upperGradient.EndColor = _overlayColor.WithAlpha(0);
 			_basePicker.SelectBy = SelectBy.Default;
 			_manLayout.Children.Remove(_lowerEdge);
 			_manLayout.Children.Remove(_upperEdge);
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
-			_basePicker.StartAccessory = new CellAccessory();
-			_basePicker.StartAccessory.HorizontalAlignment = TextAlignment.End;
-			_basePicker.StartAccessory.TextFunction = (IItemWrapper arg) => arg.IsSelected ? "✓" : "";
 
 			SelectedItems = _basePicker.SelectedItems;
 

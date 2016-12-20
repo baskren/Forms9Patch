@@ -57,7 +57,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The index property.
 		/// </summary>
-		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(SinglePicker), 0, BindingMode.TwoWay);
+		public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(SinglePicker), 0);
 		/// <summary>
 		/// Gets or sets the index.
 		/// </summary>
@@ -71,7 +71,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The selected item property.
 		/// </summary>
-		public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(SinglePicker), null, BindingMode.TwoWay);
+		public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(SinglePicker), null);
 		/// <summary>
 		/// Gets or sets the selected item.
 		/// </summary>
@@ -136,15 +136,14 @@ namespace Forms9Patch
 			_manLayout.LayoutChildrenEvent += OnManualLayoutChildren;
 
 			_basePicker.SelectBy = SelectBy.Position;
-			//_basePicker.SetBinding(BasePicker.ItemsSourceProperty,ItemsSourceProperty.PropertyName);
-			_basePicker.SetBinding(BasePicker.RowHeightProperty,RowHeightProperty.PropertyName);
-			_basePicker.SetBinding(BasePicker.IndexProperty,IndexProperty.PropertyName);
-			_basePicker.SetBinding(BasePicker.SelectedItemProperty, SelectedItemProperty.PropertyName);
-			_basePicker.BindingContext = this;
+
+			_basePicker.RowHeight = RowHeight;
 
 			VerticalOptions = LayoutOptions.FillAndExpand;
 
 			Content = _manLayout;
+
+			_basePicker.PropertyChanged += BasePickerPropertyChanged;
 		}
 
 		#region change management
@@ -159,6 +158,12 @@ namespace Forms9Patch
 				OnManualLayoutChildren(this, new ManualLayoutEventArgs(X, Y, Width, Height));
 			else if (propertyName == ItemsSourceProperty.PropertyName)
 				_basePicker.ItemsSource = ItemsSource;
+			else if (propertyName == RowHeightProperty.PropertyName)
+				_basePicker.RowHeight = RowHeight;
+			else if (propertyName == IndexProperty.PropertyName)
+				_basePicker.Index = Index;
+			else if (propertyName == SelectedItemProperty.PropertyName)
+				_basePicker.SelectedItem = SelectedItem;
 		}
 
 		void OnManualLayoutChildren(object sender, ManualLayoutEventArgs e)
@@ -184,6 +189,14 @@ namespace Forms9Patch
 		public void Reset()
 		{
 			SelectedItem = null;
+		}
+
+		void BasePickerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == BasePicker.SelectedItemProperty.PropertyName)
+				SelectedItem = _basePicker.SelectedItem;
+			else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
+				Index = _basePicker.Index;
 		}
 	}
 }

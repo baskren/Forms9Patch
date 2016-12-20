@@ -117,33 +117,6 @@ namespace Forms9Patch
 			set { SetValue(RowHeightProperty, value); }
 		}
 
-		/// <summary>
-		/// The start accessory property.
-		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the start accessory.
-		/// </summary>
-		/// <value>The start accessory.</value>
-		public CellAccessory StartAccessory
-		{
-			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
-			set { SetValue(StartAccessoryProperty, value); }
-		}
-
-		/// <summary>
-		/// The end accessory property.
-		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the end accessory.
-		/// </summary>
-		/// <value>The end accessory.</value>
-		public CellAccessory EndAccessory
-		{
-			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
-			set { SetValue(EndAccessoryProperty, value); }
-		}
 		#endregion
 
 		#endregion
@@ -183,20 +156,13 @@ namespace Forms9Patch
 		public BasePicker()
 		{
 			BackgroundColor = Color.Transparent;
-
-			_listView.SetBinding(Xamarin.Forms.ListView.RowHeightProperty, RowHeightProperty.PropertyName);
-			_listView.SetBinding(ListView.StartAccessoryProperty, StartAccessoryProperty.PropertyName);
-			_listView.SetBinding(ListView.EndAccessoryProperty, EndAccessoryProperty.PropertyName);
-			_listView.SetBinding(ListView.GroupToggleBehaviorProperty, GroupToggleBehaviorProperty.PropertyName);
-			// TODO: Why doesn't the below binding work?
-			//_listView.SetBinding(ListView.ItemsSourceProperty, ItemsSourceProperty.PropertyName);
-			_listView.BindingContext = this;
+			_listView.RowHeight = RowHeight;
+			_listView.GroupToggleBehavior = GroupToggleBehavior;
 			_listView.BackgroundColor = Color.Transparent;
 			_listView.SelectedCellBackgroundColor = Color.Transparent;
 
 			_listView.ItemTapped += OnItemTapped;
 
-			Content = _listView;
 
 			_listView.Scrolled += OnScrolled;
 			_listView.Scrolling += OnScrolling;
@@ -206,12 +172,13 @@ namespace Forms9Patch
 			_listView.Footer = _lowerPadding;
 
 			SelectedItems = _listView.SelectedItems;
+			Content = _listView;
 		}
 		#endregion
 
 
 		#region Selection management
-		protected virtual void OnItemTapped(object sender, ItemTappedEventArgs e)
+		protected void OnItemTapped(object sender, ItemTappedEventArgs e)
 		{
 			if (_scrolling)
 				return;
@@ -266,6 +233,10 @@ namespace Forms9Patch
 				}
 
 			}
+			else if (propertyName == RowHeightProperty.PropertyName)
+				_listView.RowHeight = RowHeight;
+			else if (propertyName == GroupToggleBehaviorProperty.PropertyName)
+				_listView.GroupToggleBehavior = GroupToggleBehavior;
 		}
 
 		/// <summary>
