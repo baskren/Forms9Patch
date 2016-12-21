@@ -188,6 +188,9 @@ namespace Forms9Patch {
 				var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
 				//System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
 
+				_frame.HorizontalOptions = LayoutOptions.Fill;
+				_frame.VerticalOptions = LayoutOptions.Fill;
+
 				LayoutChildIntoBoundingRegion (_frame, bounds);
 				//_frame.ForceLayout ();
 			} else
