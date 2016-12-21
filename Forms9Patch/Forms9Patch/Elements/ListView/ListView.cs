@@ -204,36 +204,6 @@ namespace Forms9Patch
 		}
 		#endregion
 
-		#region Accessory appearance
-		/// <summary>
-		/// The start accessory property.
-		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the start accessory.
-		/// </summary>
-		/// <value>The start accessory.</value>
-		public CellAccessory StartAccessory
-		{
-			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
-			set { SetValue(StartAccessoryProperty, value); }
-		}
-
-		/// <summary>
-		/// The end accessory property.
-		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the end accessory.
-		/// </summary>
-		/// <value>The end accessory.</value>
-		public CellAccessory EndAccessory
-		{
-			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
-			set { SetValue(EndAccessoryProperty, value); }
-		}
-		#endregion
-
 		#endregion
 
 		#region Item Selection

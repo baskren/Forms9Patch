@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Forms9Patch
 {
@@ -49,18 +48,6 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The color of the selected cell background.</value>
 		Color SelectedCellBackgroundColor { get; }
-
-		/// <summary>
-		/// Gets the accessory for the start (left) side of the cell
-		/// </summary>
-		/// <value>The accessory position.</value>
-		CellAccessory StartAccessory { get; }
-
-		/// <summary>
-		/// Gets the accessory for the end (right) side of the cell
-		/// </summary>
-		/// <value>The end accessory.</value>
-		CellAccessory EndAccessory { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether this cell is selected.

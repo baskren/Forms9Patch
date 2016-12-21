@@ -37,12 +37,23 @@ namespace Forms9Patch
 			//filler.BindingContext = this;
 			//filler.SetBinding (VisualElement.HeightRequestProperty,"HeightRequest",BindingMode.OneWay,new RequestedHeightConverter());
 			//System.Diagnostics.Debug.WriteLine ("\t\t\t\tcreating NullCellView");
-			_layout.SetBinding (HeightRequestProperty, "RequestedHeight");
+			//_layout.SetBinding (HeightRequestProperty, "RequestedHeight");
 			_layout.Children.Add(_upperEdge);
 			_layout.Children.Add (_lowerEdge);
 			SeparatorHeight = 0;
 			Content = _layout;
 			BackgroundColor = Color.Transparent;
+		}
+
+		protected override void OnPropertyChanging(string propertyName = null)
+		{
+			base.OnPropertyChanging(propertyName);
+			if (propertyName == BindingContextProperty.PropertyName && BindingContext != null)
+			{
+				var nullItemWrapper = BindingContext as NullItemWrapper;
+				if (nullItemWrapper != null)
+					nullItemWrapper.PropertyChanged -= NullItemPropertyChanged;
+			}
 		}
 
 		/// <summary>
@@ -52,8 +63,15 @@ namespace Forms9Patch
 		{
 			_layout.BindingContext = BindingContext;
 			base.OnBindingContextChanged ();
+			var nullItemWrapper = BindingContext as NullItemWrapper;
+			if (nullItemWrapper!=null)
+				nullItemWrapper.PropertyChanged += NullItemPropertyChanged;
 		}
 
+		void NullItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			_layout.HeightRequest = ((NullItemWrapper)BindingContext).RequestedHeight;
+		}
 	}
 
 	/*

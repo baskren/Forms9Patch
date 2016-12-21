@@ -120,6 +120,10 @@ namespace Forms9Patch
 		/// </summary>
 		public Toast(VisualElement target) : base (target)
 		{
+			_okButton.BackgroundColor = OkButtonColor;
+			_okButton.FontColor = OkTextColor;
+			_okButton.HtmlText = OkText;
+
 			Margin = 30;
 			HasShadow = true;
 			OutlineRadius = 4;
@@ -128,18 +132,6 @@ namespace Forms9Patch
 			HeightRequest = 200;
 
 			HorizontalOptions = LayoutOptions.Center;
-
-			#region bindings
-			_titleLabel.SetBinding(Label.HtmlTextProperty, TitleProperty.PropertyName);
-			_titleLabel.BindingContext = this;
-			_textLabel.SetBinding(Label.HtmlTextProperty, TextProperty.PropertyName);
-			_textLabel.BindingContext = this;
-
-			_okButton.SetBinding(MaterialButton.HtmlTextProperty, OkTextProperty.PropertyName);
-			_okButton.SetBinding(MaterialButton.BackgroundColorProperty, OkButtonColorProperty.PropertyName);
-			_okButton.SetBinding(MaterialButton.FontColorProperty, OkTextColorProperty.PropertyName);
-			_okButton.BindingContext = this;
-			#endregion
 
 			_okButton.Tapped += (s, args) => Cancel();
 			Content = new StackLayout
@@ -167,6 +159,12 @@ namespace Forms9Patch
 				_titleLabel.HtmlText = Title;
 			else if (propertyName == TextProperty.PropertyName)
 				_textLabel.HtmlText = Text;
+			else if (propertyName == OkTextProperty.PropertyName)
+				_okButton.HtmlText = OkText;
+			else if (propertyName == OkButtonColorProperty.PropertyName)
+				_okButton.BackgroundColor = OkButtonColor;
+			else if (propertyName == OkTextColorProperty.PropertyName)
+				_okButton.FontColor = OkTextColor;
 		}
 
 	}

@@ -189,24 +189,17 @@ namespace Forms9Patch
 		/// <param name="target">Target.</param>
 		public PermissionPopup(VisualElement target) : base (target)
 		{
+			_cancelButton.BackgroundColor = CancelButtonColor;
+			_cancelButton.FontColor = CancelTextColor;
+			_cancelButton.HtmlText = CancelText;
+			_okButton.BackgroundColor = OkButtonColor;
+			_okButton.FontColor = OkTextColor;
+			_okButton.HtmlText = OkText;
+
 			Margin = 30;
 			HasShadow = true;
 			OutlineRadius = 4;
 
-			#region bindings
-			_titleLabel.SetBinding(Label.HtmlTextProperty, TitleProperty.PropertyName);
-			_titleLabel.BindingContext = this;
-			_textLabel.SetBinding(Label.HtmlTextProperty, TextProperty.PropertyName);
-			_textLabel.BindingContext = this;
-			_okButton.SetBinding(MaterialButton.HtmlTextProperty, OkTextProperty.PropertyName);
-			_okButton.SetBinding(MaterialButton.BackgroundColorProperty, OkButtonColorProperty.PropertyName);
-			_okButton.SetBinding(MaterialButton.FontColorProperty, OkTextColorProperty.PropertyName);
-			_okButton.BindingContext = this;
-			_cancelButton.SetBinding(MaterialButton.HtmlTextProperty, CancelTextProperty.PropertyName);
-			_cancelButton.SetBinding(MaterialButton.BackgroundColorProperty, CancelButtonColorProperty.PropertyName);
-			_cancelButton.SetBinding(MaterialButton.FontColorProperty, CancelTextColorProperty.PropertyName);
-			_cancelButton.BindingContext = this;
-			#endregion
 
 			_cancelButton.Tapped += (s, args) => Cancel();
 			_okButton.Tapped += (s, args) =>
@@ -248,8 +241,16 @@ namespace Forms9Patch
 				_textLabel.HtmlText = Text;
 			else if (propertyName == OkTextProperty.PropertyName)
 				_okButton.HtmlText = OkText;
+			else if (propertyName == OkButtonColorProperty.PropertyName)
+				_okButton.BackgroundColor = OkButtonColor;
+			else if (propertyName == OkTextColorProperty.PropertyName)
+				_okButton.FontColor = OkTextColor;
 			else if (propertyName == CancelTextProperty.PropertyName)
 				_cancelButton.HtmlText = CancelText;
+			else if (propertyName == CancelTextColorProperty.PropertyName)
+				_cancelButton.FontColor = CancelTextColor;
+			else if (propertyName == CancelButtonColorProperty.PropertyName)
+				_cancelButton.BackgroundColor = CancelButtonColor;
 		}
 	}
 }

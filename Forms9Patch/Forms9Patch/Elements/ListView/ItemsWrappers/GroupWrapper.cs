@@ -8,7 +8,6 @@ using PCL.Utils;
 using Xamarin.Forms;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Reflection;
 
 namespace Forms9Patch
 {
@@ -208,8 +207,6 @@ namespace Forms9Patch
 				group.VisibilityTest = group.VisibilityTest ?? VisibilityTest;
 				group.SubGroupType = group.SubGroupType ?? SubGroupType;
 			}
-			item.RowHeight = RowHeight;
-			//item.HasUnevenRows = HasUnevenRows;
 		}
 
 		void CommonAdd(ItemWrapper item) {
@@ -892,7 +889,7 @@ namespace Forms9Patch
 
 
 		#region Properties
-		public static readonly Xamarin.Forms.BindableProperty SourceSubPropertyMapProperty = Xamarin.Forms.BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), null);
+		public static readonly BindableProperty SourceSubPropertyMapProperty = BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), null);
 		public List<string> SourceSubPropertyMap
 		{
 			get { return (List<string>)GetValue(SourceSubPropertyMapProperty); }
@@ -1075,25 +1072,31 @@ namespace Forms9Patch
 				Source = null;
 				Source = source;
 			}
-			/*
-			else if (propertyName == HasUnevenRowsProperty.PropertyName)
-			{
-				foreach (var child in this)
-					child.HasUnevenRows = HasUnevenRows;
-			}
-			*/
 			else if (propertyName == RowHeightProperty.PropertyName)
-			{
 				foreach (var child in this)
 					child.RowHeight = RowHeight;
-			}
-
+			else if (propertyName == SeparatorColorProperty.PropertyName)
+				foreach (var child in this)
+					child.SeparatorColor = SeparatorColor;
+			else if (propertyName == SeparatorHeightProperty.PropertyName)
+				foreach (var child in this)
+					child.SeparatorHeight = SeparatorHeight;
+			else if (propertyName == SeparatorIsVisibleProperty.PropertyName)
+				foreach (var child in this)
+					child.SeparatorIsVisible = SeparatorIsVisible;
+			else if (propertyName == SeparatorLeftIndentProperty.PropertyName)
+				foreach (var child in this)
+					child.SeparatorLeftIndent = SeparatorLeftIndent;
+			else if (propertyName == SeparatorRightIndentProperty.PropertyName)
+				foreach (var child in this)
+					child.SeparatorRightIndent = SeparatorRightIndent;
+				
 		}
 		#endregion
 
 
 		#region Member Item Property Change Notificaiton
-		public event Xamarin.Forms.PropertyChangingEventHandler ItemWrapperPropertyChanging;
+		public event PropertyChangingEventHandler ItemWrapperPropertyChanging;
 		void OnItemWrapperPropertyChanging (object sender, PropertyChangingEventArgs e)
 		{
 			ItemWrapperPropertyChanging?.Invoke(sender, e);

@@ -15,7 +15,6 @@ namespace TestProject.iOS
 		{
 			global::Xamarin.Forms.Forms.Init ();
 			Forms9Patch.iOS.Settings.LicenseKey ="NJHS-HGTK-EWPL-789K-H4A3-9LHZ-67FA-P8AQ-ZJ8R-X83P-UNWE-QNYT-LGYA";
-			//FormsGestures.iOS.Settings.Init ();
 
 			// Code for starting up the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD

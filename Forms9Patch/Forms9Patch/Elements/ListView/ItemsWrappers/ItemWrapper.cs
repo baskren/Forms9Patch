@@ -10,7 +10,7 @@ namespace Forms9Patch
 
 
 		#region Fields
-		protected static bool debugProperties = false;
+		protected static bool debugProperties;
 		public readonly int ID;
 		#endregion
 
@@ -111,23 +111,6 @@ namespace Forms9Patch
 		}
 		#endregion
 
-		#region Accessory
-		public static readonly BindableProperty StartAccessoryProperty = BindableProperty.Create("StartAccessory", typeof(CellAccessory), typeof(ItemWrapper), null);
-		public CellAccessory StartAccessory
-		{
-			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
-			set { SetValue(StartAccessoryProperty, value); }
-		}
-
-		public static readonly BindableProperty EndAccessoryProperty = BindableProperty.Create("EndAccessory", typeof(CellAccessory), typeof(ItemWrapper), null);
-		public CellAccessory EndAccessory
-		{
-			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
-			set { SetValue(EndAccessoryProperty, value); }
-		}
-		#endregion
-
-
 		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ItemWrapper), false);
 		public bool IsSelected
 		{
@@ -217,23 +200,9 @@ namespace Forms9Patch
 		#region Constructors
 		static int instantiations;
 
-		protected ItemWrapper() {
+		protected ItemWrapper() 
+		{
 			ID = instantiations++;
-
-			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
-			this.SetBinding(SeparatorColorProperty, SeparatorColorProperty.PropertyName);
-			this.SetBinding(SeparatorHeightProperty, SeparatorHeightProperty.PropertyName);
-			this.SetBinding(SeparatorLeftIndentProperty, SeparatorLeftIndentProperty.PropertyName);
-			this.SetBinding(SeparatorRightIndentProperty, SeparatorRightIndentProperty.PropertyName);
-
-			this.SetBinding(CellBackgroundColorProperty, CellBackgroundColorProperty.PropertyName);
-			this.SetBinding(SelectedCellBackgroundColorProperty, SelectedCellBackgroundColorProperty.PropertyName);
-
-			this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
-			this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
-
-			//this.SetBinding(RowHeightProperty, RowHeightProperty.PropertyName);
-			//this.SetBinding(HasUnevenRowsProperty, HasUnevenRowsProperty.PropertyName);
 		}
 
 		#endregion
@@ -250,9 +219,6 @@ namespace Forms9Patch
 
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
-
-			StartAccessory = other.StartAccessory;
-			EndAccessory = other.EndAccessory;
 
 			Source = other.Source;
 		}
@@ -286,6 +252,22 @@ namespace Forms9Patch
 			}
 		}
 
+		protected override void OnBindingContextChanged()
+		{
+			base.OnBindingContextChanged();
+			var iItemWrapper = BindingContext as IItemWrapper;
+			if (iItemWrapper != null)
+			{
+				SeparatorIsVisible = iItemWrapper.SeparatorIsVisible;
+				SeparatorColor = iItemWrapper.SeparatorColor;
+				SeparatorHeight = iItemWrapper.SeparatorHeight;
+				SeparatorLeftIndent = iItemWrapper.SeparatorLeftIndent;
+				SeparatorRightIndent = iItemWrapper.SeparatorRightIndent;
+				CellBackgroundColor = iItemWrapper.CellBackgroundColor;
+				SelectedCellBackgroundColor = iItemWrapper.SelectedCellBackgroundColor;
+				RowHeight = iItemWrapper.RowHeight;
+			}
+		}
 		#endregion
 	}
 
