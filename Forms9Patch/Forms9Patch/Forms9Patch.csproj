@@ -147,7 +147,6 @@
     <Compile Include="Elements\Buttons\Segment.cs" />
     <Compile Include="Elements\ListView\EventArgs\ItemTappedEventArgs.cs" />
     <Compile Include="Layouts\ManualLayout.cs" />
-    <Compile Include="Elements\ListView\CellAccessory.cs" />
     <Compile Include="Spans\NumeratorSpan.cs" />
     <Compile Include="Spans\DenominatorSpan.cs" />
     <Compile Include="Elements\ListView\Interfaces\ICellHeight.cs" />

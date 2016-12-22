@@ -19,10 +19,12 @@ namespace Forms9Patch
 
 		#region Convenience
 		internal void ShallowCopy(ItemWrapper<TItem> other) {
+			/*
 			SeparatorColor = other.SeparatorColor;
 			SeparatorLeftIndent = other.SeparatorLeftIndent;
 			SeparatorRightIndent = other.SeparatorRightIndent;
 			SeparatorIsVisible = other.SeparatorIsVisible;
+			*/
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 			Source = other.Source;

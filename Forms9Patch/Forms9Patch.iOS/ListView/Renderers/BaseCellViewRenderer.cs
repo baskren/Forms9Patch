@@ -5,7 +5,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Forms9Patch.BaseCellView), typeof(BaseCellViewRenderer))]
+//[assembly: ExportRenderer(typeof(Forms9Patch.BaseCellView), typeof(BaseCellViewRenderer))]
 namespace Forms9Patch.iOS
 {
 	class BaseCellViewRenderer : VisualElementRenderer<BaseCellView> {
@@ -14,6 +14,7 @@ namespace Forms9Patch.iOS
 		{
 			base.OnElementPropertyChanged (sender, e);
 			//System.Diagnostics.Debug.WriteLine ("\t\tOEPC "+(Element!=null?((Item)Element.BindingContext).Title:"")+" "+e.PropertyName);
+			/*
 			if (e.PropertyName == BaseCellView.SeparatorIsVisibleProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorColorProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorHeightProperty.PropertyName
@@ -27,6 +28,7 @@ namespace Forms9Patch.iOS
 				//	return false;
 				//});
 			}
+			*/
 		}
 
 		public override void Draw (CGRect rect)
@@ -37,14 +39,14 @@ namespace Forms9Patch.iOS
 
 			ContentMode = UIViewContentMode.Redraw;
 
-
+			/*
 			var separatorColor = Element.SeparatorColor;
 			if (separatorColor == Color.Default) {
 				var tv = new UITableView ();
 				separatorColor = tv.SeparatorColor.ToColor ();
 			}
 			var separatorHeight = Element.SeparatorHeight<0 ? 1.0f : (nfloat)(Math.Max (0, Element.SeparatorHeight) );
-
+			System.Diagnostics.Debug.WriteLine("BaseCellRenderer.Draw ["+separatorColor+"]["+separatorHeight+"]["+Element.SeparatorIsVisible+"]");
 
 			base.Draw(rect);
 			if (Element.SeparatorIsVisible && (separatorColor.A > 0.01 && separatorHeight > 0.01 )) {
@@ -59,6 +61,7 @@ namespace Forms9Patch.iOS
 					g.RestoreState();
 				}
 			}
+			*/
 			BackgroundColor = Element.BackgroundColor.ToUIColor();
 			//System.Diagnostics.Debug.WriteLine("BaseCellViewRenderer["+Element.ID+"].BackgroundColor=[" + BackgroundColor + "] Element.BackgroundColor=[" + Element.BackgroundColor + "]");
 		}

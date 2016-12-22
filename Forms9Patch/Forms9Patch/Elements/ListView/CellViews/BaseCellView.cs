@@ -25,6 +25,7 @@ namespace Forms9Patch
 			set { SetValue(ContentProperty, value); }
 		}
 
+		/*
 		#region Separator appearance
 		/// <summary>
 		/// The separator is visible property.
@@ -99,6 +100,7 @@ namespace Forms9Patch
 			set { SetValue(SeparatorRightIndentProperty, value); }
 		}
 		#endregion
+		*/
 
 		#endregion
 
@@ -166,8 +168,7 @@ namespace Forms9Patch
 			};
 			RowDefinitions = new RowDefinitionCollection
 			{
-				new RowDefinition { Height = new GridLength(1, GridUnitType.Absolute) },
-				new RowDefinition { Height = GridLength.Auto }
+				new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
 			};
 
 			var thisListener = new Listener(this);
@@ -210,16 +211,12 @@ namespace Forms9Patch
 			set
 			{
 				Content.TranslationX = value;
-				//_startAccessory.TranslationX = value;
-				//_endAccessory.TranslationX = value;
 			}
 		}
 
 		void TranslateChildrenTo(double x, double y, uint milliseconds, Easing easing)
 		{
 			Content.TranslateTo(x,y,milliseconds,easing);
-			//_startAccessory.TranslateTo(x,y,milliseconds,easing);
-			//_endAccessory.TranslateTo(x,y,milliseconds,easing);
 		}
 
 		void OnPanned(object sender, PanEventArgs e)
@@ -340,12 +337,10 @@ namespace Forms9Patch
 					{
 						_settingup = true;
 
-						Children.Add(_touchBlocker, 0, 1);
-						//SetColumnSpan(_touchBlocker, 3);
+						Children.Add(_touchBlocker, 0, 0);
 						_touchBlocker.IsVisible = true;
 
-						Children.Add(_insetFrame, 0, 1);
-						//SetColumnSpan(_insetFrame, 3);
+						Children.Add(_insetFrame, 0, 0);
 						_insetFrame.TranslationX = (int)side * Width;
 
 						// setup buttons
@@ -410,18 +405,15 @@ namespace Forms9Patch
 									_swipeButton3.IconText = swipeMenu[2].IconText;
 									_swipeButton3.FontColor = swipeMenu[2].TextColor;
 								}
-								Children.Add(_swipeFrame3, 0, 1);
-								//SetColumnSpan(_swipeFrame3, 3);
+								Children.Add(_swipeFrame3, 0, 0);
 								_swipeFrame3.TranslationX = (int)side * Width;
 								_swipeFrame3.IsVisible = true;
 							}
-							Children.Add(_swipeFrame2, 0, 1);
-							//SetColumnSpan(_swipeFrame2, 3);
+							Children.Add(_swipeFrame2, 0, 0);
 							_swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
 							_swipeFrame2.IsVisible = true;
 						}
-						Children.Add(_swipeFrame1, 0, 1);
-						//SetColumnSpan(_swipeFrame1, 3);
+						Children.Add(_swipeFrame1, 0, 0);
 						_swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
 						_settingup = false;
 					}
@@ -630,7 +622,7 @@ namespace Forms9Patch
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ContentProperty.PropertyName && Content != null)
-				Children.Add(Content,0,1);
+				Children.Add(Content,0,0);
 		}
 
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -647,7 +639,7 @@ namespace Forms9Patch
 				SetHeights();
 				
 			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
-			///_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
+			//_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
 			//UpdateLayout();
 		}
 
@@ -658,16 +650,19 @@ namespace Forms9Patch
 			if (item != null)
 			{
 				BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
+				/*
 				SeparatorIsVisible = item.Index > 0 && item.SeparatorIsVisible;
 				SeparatorColor = item.SeparatorColor;
 				SeparatorHeight = item.SeparatorHeight;
 				SeparatorLeftIndent = item.SeparatorLeftIndent;
 				SeparatorRightIndent = item.SeparatorRightIndent;
+				System.Diagnostics.Debug.WriteLine("["+item.Source+"] SeparatorIsVisible="+item.SeparatorIsVisible);
+				*/
 			}
 			else
 			{
 				BackgroundColor = Color.Transparent;
-				SeparatorIsVisible = false;
+				//SeparatorIsVisible = false;
 			}
 		}
 
@@ -679,7 +674,7 @@ namespace Forms9Patch
 				if (content.CellHeight > 0)
 				{
 					HeightRequest = content.CellHeight + 1;
-					RowDefinitions[1] = new RowDefinition { Height = new GridLength(content.CellHeight, GridUnitType.Absolute) };
+					RowDefinitions[0] = new RowDefinition { Height = new GridLength(content.CellHeight, GridUnitType.Absolute) };
 				}
 				else
 				{
@@ -687,13 +682,13 @@ namespace Forms9Patch
 					if (itemWrapper != null)
 					{
 						HeightRequest = itemWrapper.RowHeight + 1;
-						RowDefinitions[1] = new RowDefinition { Height = new GridLength(itemWrapper.RowHeight, GridUnitType.Absolute) };
+						RowDefinitions[0] = new RowDefinition { Height = new GridLength(itemWrapper.RowHeight, GridUnitType.Absolute) };
 					}
 					else
 					{
 						HeightRequest = -1;
 						Content.HeightRequest = -1;
-						RowDefinitions[1] = new RowDefinition { Height = GridLength.Auto };
+						RowDefinitions[0] = new RowDefinition { Height = GridLength.Auto };
 					}
 				}
 			}

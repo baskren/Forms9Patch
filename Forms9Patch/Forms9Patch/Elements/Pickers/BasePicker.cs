@@ -126,7 +126,8 @@ namespace Forms9Patch
 		readonly ListView _listView = new ListView
 		{
 			IsGroupingEnabled = false,
-			SeparatorIsVisible = false,
+			//SeparatorIsVisible = false,
+			SeparatorVisibility = SeparatorVisibility.None,
 			BackgroundColor = Color.Transparent,
 			HasUnevenRows = false,
 			IsScrollListening = true,

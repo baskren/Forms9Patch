@@ -1075,6 +1075,7 @@ namespace Forms9Patch
 			else if (propertyName == RowHeightProperty.PropertyName)
 				foreach (var child in this)
 					child.RowHeight = RowHeight;
+			/*
 			else if (propertyName == SeparatorColorProperty.PropertyName)
 				foreach (var child in this)
 					child.SeparatorColor = SeparatorColor;
@@ -1090,6 +1091,7 @@ namespace Forms9Patch
 			else if (propertyName == SeparatorRightIndentProperty.PropertyName)
 				foreach (var child in this)
 					child.SeparatorRightIndent = SeparatorRightIndent;
+			*/
 				
 		}
 		#endregion

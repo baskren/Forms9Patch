@@ -16,7 +16,7 @@ namespace Forms9Patch
 
 
 		#region Properties
-
+		/*
 		#region Separator
 		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(ItemWrapper), true);
 		public bool SeparatorIsVisible {
@@ -89,6 +89,7 @@ namespace Forms9Patch
 			}
 		}
 		#endregion
+		*/
 
 		#region Background
 		public static readonly BindableProperty CellBackgroundColorProperty  = BindableProperty.Create("CellBackgroundColor",  typeof(Color), typeof(ItemWrapper), Color.Transparent);
@@ -211,12 +212,13 @@ namespace Forms9Patch
 		#region Convenience
 		internal void ShallowCopy(ItemWrapper other)
 		{
+			/*
 			SeparatorIsVisible = other.SeparatorIsVisible;
 			SeparatorColor = other.SeparatorColor;
 			SeparatorHeight = other.SeparatorHeight;
 			SeparatorLeftIndent = other.SeparatorLeftIndent;
 			SeparatorRightIndent = other.SeparatorRightIndent;
-
+			*/
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 
@@ -258,11 +260,13 @@ namespace Forms9Patch
 			var iItemWrapper = BindingContext as IItemWrapper;
 			if (iItemWrapper != null)
 			{
+				/*
 				SeparatorIsVisible = iItemWrapper.SeparatorIsVisible;
 				SeparatorColor = iItemWrapper.SeparatorColor;
 				SeparatorHeight = iItemWrapper.SeparatorHeight;
 				SeparatorLeftIndent = iItemWrapper.SeparatorLeftIndent;
 				SeparatorRightIndent = iItemWrapper.SeparatorRightIndent;
+				*/
 				CellBackgroundColor = iItemWrapper.CellBackgroundColor;
 				SelectedCellBackgroundColor = iItemWrapper.SelectedCellBackgroundColor;
 				RowHeight = iItemWrapper.RowHeight;

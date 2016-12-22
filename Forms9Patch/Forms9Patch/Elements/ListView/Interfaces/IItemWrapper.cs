@@ -7,6 +7,7 @@ namespace Forms9Patch
 	/// </summary>
 	public interface IItemWrapper
 	{
+		/*
 		/// <summary>
 		/// Gets a value indicating whether this cell's separator is visible.
 		/// </summary>
@@ -36,6 +37,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The separator right indent.</value>
 		double SeparatorRightIndent { get; }
+		*/
 
 		/// <summary>
 		/// Gets the unselected background color for this cell.

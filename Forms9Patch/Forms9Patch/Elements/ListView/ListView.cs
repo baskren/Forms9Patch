@@ -6,7 +6,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
-using System.IO;
 using System.Runtime.Serialization;
 
 namespace Forms9Patch
@@ -82,6 +81,7 @@ namespace Forms9Patch
 
 		#region Cell decoration
 
+		/*
 		#region Separator appearance
 		/// <summary>
 		/// The separator visibility property.
@@ -173,6 +173,7 @@ namespace Forms9Patch
 		}
 
 		#endregion
+		*/
 
 		#region Background appearance
 		/// <summary>
@@ -474,8 +475,8 @@ namespace Forms9Patch
 			HasUnevenRows = false;
 			BackgroundColor = Color.Transparent;
 
-			base.SeparatorColor = Color.Transparent;
-			base.SeparatorVisibility = SeparatorVisibility.None;
+			//base.SeparatorColor = Color.White;
+			//base.SeparatorVisibility = SeparatorVisibility.None;
 
 			base.ItemAppearing += OnItemAppearing;
 			base.ItemDisappearing += OnItemDisappearing;
@@ -1024,7 +1025,7 @@ namespace Forms9Patch
 				_baseItemsSource.NotifySourceOfChanges = false;
 				_baseItemsSource.DeepSwapItems (_longPress.Item, _nullItem);
 
-				_longPress.Item.SeparatorIsVisible = false;
+				//_longPress.Item.SeparatorIsVisible = false;
 				var contentView = ItemTemplates.MakeContentView (_longPress.Item);
 				contentView.WidthRequest = _nativeFrame.Width;
 				contentView.HeightRequest = _nativeFrame.Height;
