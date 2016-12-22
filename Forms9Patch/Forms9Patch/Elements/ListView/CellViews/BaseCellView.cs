@@ -7,8 +7,9 @@ namespace Forms9Patch
 	/// <summary>
 	/// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
 	/// </summary>
-	class BaseCellView : Xamarin.Forms.Grid
+	class BaseCellView : Xamarin.Forms.Grid  // why grid?  because you can put more than one view in the same place at the same time
 	{
+		
 		#region Properties
 		/// <summary>
 		/// The content property.
@@ -99,61 +100,12 @@ namespace Forms9Patch
 		}
 		#endregion
 
-		/*
-		#region Accessory appearance
-		/// <summary>
-		/// The start accessory property.
-		/// </summary>
-		public static readonly BindableProperty StartAccessoryProperty = ItemWrapper.StartAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the start accessory.
-		/// </summary>
-		/// <value>The start accessory.</value>
-		public CellAccessory StartAccessory
-		{
-			get { return (CellAccessory)GetValue(StartAccessoryProperty); }
-			set { SetValue(StartAccessoryProperty, value); }
-		}
-
-		/// <summary>
-		/// The end accessory property.
-		/// </summary>
-		public static readonly BindableProperty EndAccessoryProperty = ItemWrapper.EndAccessoryProperty;
-		/// <summary>
-		/// Gets or sets the end accessory.
-		/// </summary>
-		/// <value>The end accessory.</value>
-		public CellAccessory EndAccessory
-		{
-			get { return (CellAccessory)GetValue(EndAccessoryProperty); }
-			set { SetValue(EndAccessoryProperty, value); }
-		}
-		#endregion
-		*/
-
 		#endregion
 
 
 		#region Fields
 		static int _instances;
 		internal int ID;
-
-		#region Accessories
-		/*
-		Label _startAccessory = new Label
-		{
-			HorizontalOptions = LayoutOptions.CenterAndExpand,
-			VerticalOptions = LayoutOptions.CenterAndExpand,
-			TextColor = Color.Black
-		};
-		Label _endAccessory = new Label
-		{
-			HorizontalOptions = LayoutOptions.CenterAndExpand,
-			VerticalOptions = LayoutOptions.CenterAndExpand,
-			TextColor = Color.Black
-		};
-		*/
-		#endregion
 
 
 		#region Swipe Menu
@@ -207,27 +159,10 @@ namespace Forms9Patch
 			RowSpacing = 0;
 			Margin = 0;
 
-			this.SetBinding(SeparatorIsVisibleProperty, SeparatorIsVisibleProperty.PropertyName);
-			this.SetBinding(SeparatorColorProperty, SeparatorColorProperty.PropertyName);
-			this.SetBinding(SeparatorHeightProperty, SeparatorHeightProperty.PropertyName);
-			this.SetBinding(SeparatorLeftIndentProperty, SeparatorLeftIndentProperty.PropertyName);
-			this.SetBinding(SeparatorRightIndentProperty, SeparatorRightIndentProperty.PropertyName);
-
-			//this.SetBinding(StartAccessoryProperty, StartAccessoryProperty.PropertyName);
-			//this.SetBinding(EndAccessoryProperty, EndAccessoryProperty.PropertyName);
-
-			//_startAccessory.SetBinding(Label.HorizontalTextAlignmentProperty,CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-			//_startAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-
-			//_endAccessory.SetBinding(Label.HorizontalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-			//_endAccessory.SetBinding(Label.VerticalTextAlignmentProperty, CellAccessory.HorizonatalAlignmentProperty.PropertyName);
-
 
 			ColumnDefinitions = new ColumnDefinitionCollection
 			{
-				//new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) },
 				new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-				//new ColumnDefinition { Width = new GridLength(30, GridUnitType.Absolute) }
 			};
 			RowDefinitions = new RowDefinitionCollection
 			{
@@ -245,9 +180,6 @@ namespace Forms9Patch
 			_swipeFrame1.Content = _swipeButton1;
 			_swipeFrame2.Content = _swipeButton2;
 			_swipeFrame3.Content = _swipeButton3;
-
-			//var blockerListener = new Listener(_touchBlocker);
-			//blockerListener.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine("BLOCKER");;
 
 			_swipeButton1.Tapped += OnSwipeButtonTapped;
 			_swipeButton2.Tapped += OnSwipeButtonTapped;
@@ -349,10 +281,13 @@ namespace Forms9Patch
 				return;
 			if (!_panVt && !_panHz)
 			{
+				if (Math.Abs(e.TotalDistance.Y) > 10)
+				{
+					_panVt = true;
+					return;
+				}
 				if (Math.Abs(e.TotalDistance.X) > 10)
 					_panHz = true;
-				else if (Math.Abs(e.TotalDistance.Y) > 10)
-					_panVt = true;
 				else
 					return;
 			}
@@ -406,11 +341,11 @@ namespace Forms9Patch
 						_settingup = true;
 
 						Children.Add(_touchBlocker, 0, 1);
-						SetColumnSpan(_touchBlocker, 3);
+						//SetColumnSpan(_touchBlocker, 3);
 						_touchBlocker.IsVisible = true;
 
 						Children.Add(_insetFrame, 0, 1);
-						SetColumnSpan(_insetFrame, 3);
+						//SetColumnSpan(_insetFrame, 3);
 						_insetFrame.TranslationX = (int)side * Width;
 
 						// setup buttons
@@ -476,17 +411,17 @@ namespace Forms9Patch
 									_swipeButton3.FontColor = swipeMenu[2].TextColor;
 								}
 								Children.Add(_swipeFrame3, 0, 1);
-								SetColumnSpan(_swipeFrame3, 3);
+								//SetColumnSpan(_swipeFrame3, 3);
 								_swipeFrame3.TranslationX = (int)side * Width;
 								_swipeFrame3.IsVisible = true;
 							}
 							Children.Add(_swipeFrame2, 0, 1);
-							SetColumnSpan(_swipeFrame2, 3);
+							//SetColumnSpan(_swipeFrame2, 3);
 							_swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
 							_swipeFrame2.IsVisible = true;
 						}
 						Children.Add(_swipeFrame1, 0, 1);
-						SetColumnSpan(_swipeFrame1, 3);
+						//SetColumnSpan(_swipeFrame1, 3);
 						_swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
 						_settingup = false;
 					}
@@ -694,33 +629,8 @@ namespace Forms9Patch
 		{
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
 			base.OnPropertyChanged(propertyName);
-			/*
-			if (propertyName == StartAccessoryProperty.PropertyName)
-			{
-				//_startAccessory.BindingContext = StartAccessory;
-				if (StartAccessory != null)
-				{
-					StartAccessory.PropertyChanged += OnStartAccessoryPropertyChanged;
-					UpdateStartAccessoryWidth();
-				}
-			}
-			else if (propertyName == EndAccessoryProperty.PropertyName)
-			{
-				//_endAccessory.BindingContext = EndAccessory;
-				if (EndAccessory != null)
-				{
-					EndAccessory.PropertyChanged += OnEndAccessoryPropertyChanged;
-					UpdateEndAccessoryWidth();
-				}
-			}
-			*/
-
 			if (propertyName == ContentProperty.PropertyName && Content != null)
 				Children.Add(Content,0,1);
-
-			//_freshContent = (_freshContent || propertyName == ContentProperty.PropertyName);
-			//System.Diagnostics.Debug.WriteLine("OnPropertyChanged ["+propertyName+"] Item.Source=["+((Item)BindingContext)?.Source+"]");
-			//UpdateLayout();
 		}
 
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -741,99 +651,6 @@ namespace Forms9Patch
 			//UpdateLayout();
 		}
 
-		/*
-		void OnStartAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
-				UpdateStartAccessoryWidth();
-			//else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
-			//	UpdateLayout();
-		}
-
-		void OnEndAccessoryPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == CellAccessory.WidthProperty.PropertyName)
-				UpdateEndAccessoryWidth();
-			//else if (e.PropertyName == CellAccessory.TextFunctionProperty.PropertyName)
-			//	UpdateLayout();
-		}
-
-		void UpdateStartAccessoryWidth()
-		{
-			double width = StartAccessory.Width < 1 ? Width * StartAccessory.Width : StartAccessory.Width;
-			ColumnDefinitions[0] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
-		}
-
-		void UpdateEndAccessoryWidth()
-		{
-			double width = EndAccessory.Width < 1 ? Width * EndAccessory.Width : EndAccessory.Width;
-			ColumnDefinitions[2] = new ColumnDefinition { Width = new GridLength(width, GridUnitType.Absolute) };
-		}
-
-		//bool _lastStartAccessoryActive;
-		//bool _lastEndAccesoryActive;
-		bool _freshContent;
-		void UpdateLayout()
-		{
-			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateLayout");
-			var itemWrapper = BindingContext as ItemWrapper;
-			if (itemWrapper != null)
-			{
-				string startAccessoryText = itemWrapper.StartAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
-				//if (startAccessoryText != _startAccessory.HtmlText)
-				_startAccessory.HtmlText = startAccessoryText;
-				string endAccessoryText = itemWrapper.EndAccessory?.TextFunction?.Invoke((ItemWrapper)BindingContext);
-				//if (endAccessoryText != _endAccessory.HtmlText)
-				_endAccessory.HtmlText = endAccessoryText;
-
-				var startAccessoryActive = (_startAccessory.HtmlText != null);
-				var endAccessoryActive = (_endAccessory.HtmlText != null);
-
-				if (startAccessoryActive != _lastStartAccessoryActive || endAccessoryActive != _lastEndAccesoryActive || _freshContent)
-				{
-					if (_startAccessory != null && Children.Contains(_startAccessory))
-						Children.Remove(_startAccessory);
-					if (Content != null && Children.Contains(Content))
-						Children.Remove(Content);
-					if (_endAccessory != null && Children.Contains(_endAccessory))
-						Children.Remove(_endAccessory);
-					if (startAccessoryActive)
-					{
-						Children.Add(_startAccessory, 0, 1);
-						if (endAccessoryActive)
-						{
-							Children.Add(Content, 1, 1);
-							Children.Add(_endAccessory, 2, 1);
-						}
-						else
-						{
-							Children.Add(Content, 1, 3, 1, 2);
-							_endAccessory.HtmlText = null;
-						}
-					}
-					else
-					{
-						_startAccessory.HtmlText = null;
-						if (endAccessoryActive)
-						{
-							Children.Add(Content, 0, 2, 1, 2);
-							Children.Add(_endAccessory, 2, 1);
-						}
-						else
-						{
-							Children.Add(Content, 0, 3, 1, 2);
-							_endAccessory.HtmlText = null;
-						}
-					}
-					_lastStartAccessoryActive = startAccessoryActive;
-					_lastEndAccesoryActive = endAccessoryActive;
-					_freshContent = false;
-				}
-
-			}
-		}
-		*/
-
 		void UpdateUnBoundProperties()
 		{
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateUnBoundProperties");
@@ -842,6 +659,10 @@ namespace Forms9Patch
 			{
 				BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
 				SeparatorIsVisible = item.Index > 0 && item.SeparatorIsVisible;
+				SeparatorColor = item.SeparatorColor;
+				SeparatorHeight = item.SeparatorHeight;
+				SeparatorLeftIndent = item.SeparatorLeftIndent;
+				SeparatorRightIndent = item.SeparatorRightIndent;
 			}
 			else
 			{
@@ -855,16 +676,9 @@ namespace Forms9Patch
 			var content = Content as ICellHeight;
 			if (content != null)
 			{
-				if (/*!item.HasUnevenRows && */content.CellHeight > 0)
+				if (content.CellHeight > 0)
 				{
 					HeightRequest = content.CellHeight + 1;
-
-					//Content.HeightRequest = itemWrapper.RowHeight;
-					//_insetFrame.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
-					//_swipeFrame1.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
-					//_swipeFrame2.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
-					//_swipeFrame3.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
-					//_touchBlocker.HeightRequest = itemWrapper.RowHeight - Padding.Bottom;
 					RowDefinitions[1] = new RowDefinition { Height = new GridLength(content.CellHeight, GridUnitType.Absolute) };
 				}
 				else
