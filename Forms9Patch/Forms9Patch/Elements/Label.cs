@@ -426,7 +426,7 @@ namespace Forms9Patch
 		#region for use by MaterialButton and Autofit
 		internal bool MinimizeHeight;
 
-		internal Action SizeAndAlign;
+		//internal Action SizeAndAlign;
 
 		/// <summary>
 		/// Ons the size allocated.

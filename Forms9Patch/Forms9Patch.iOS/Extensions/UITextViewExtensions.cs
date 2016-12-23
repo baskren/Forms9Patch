@@ -22,5 +22,6 @@ namespace Forms9Patch.iOS
 			}
 			return numberOfLines;
 		}
+
 	}
 }
