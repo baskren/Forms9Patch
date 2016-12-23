@@ -260,13 +260,6 @@ namespace Forms9Patch
 			var iItemWrapper = BindingContext as IItemWrapper;
 			if (iItemWrapper != null)
 			{
-				/*
-				SeparatorIsVisible = iItemWrapper.SeparatorIsVisible;
-				SeparatorColor = iItemWrapper.SeparatorColor;
-				SeparatorHeight = iItemWrapper.SeparatorHeight;
-				SeparatorLeftIndent = iItemWrapper.SeparatorLeftIndent;
-				SeparatorRightIndent = iItemWrapper.SeparatorRightIndent;
-				*/
 				CellBackgroundColor = iItemWrapper.CellBackgroundColor;
 				SelectedCellBackgroundColor = iItemWrapper.SelectedCellBackgroundColor;
 				RowHeight = iItemWrapper.RowHeight;

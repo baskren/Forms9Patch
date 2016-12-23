@@ -817,7 +817,7 @@ namespace Forms9Patch
 
 		public void DeepRemoveItemsWithSource(object source)
 		{
-			System.Diagnostics.Debug.WriteLine("");
+			//System.Diagnostics.Debug.WriteLine("");
 			var items = this.Where(x => x.Source == source).ToList();
 			if (items.Count > 0)
 			{

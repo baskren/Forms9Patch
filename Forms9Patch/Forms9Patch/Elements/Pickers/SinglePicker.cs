@@ -123,6 +123,8 @@ namespace Forms9Patch
 		{
 			Padding = new Thickness(0, 0, 0, 0);
 
+			_basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
+
 			_upperGradient.StartColor = _overlayColor;
 			_upperGradient.EndColor = _overlayColor.WithAlpha(0.5);
 			_lowerGradient.StartColor = _overlayColor.WithAlpha(0.5);
@@ -194,7 +196,11 @@ namespace Forms9Patch
 		void BasePickerPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == BasePicker.SelectedItemProperty.PropertyName)
+			{
 				SelectedItem = _basePicker.SelectedItem;
+				//_basePicker.SelectedItem = null;
+				//_basePicker._listView.SelectedItem = null;
+			}
 			else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
 				Index = _basePicker.Index;
 		}

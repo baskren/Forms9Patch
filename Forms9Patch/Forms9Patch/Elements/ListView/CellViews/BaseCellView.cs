@@ -575,11 +575,11 @@ namespace Forms9Patch
 			{
 				item.BaseCellView = this;
 				item.PropertyChanged += OnItemPropertyChanged;
-				UpdateUnBoundProperties();
+				UpdateBackground();
 				SetHeights();
 			}
-			else
-				System.Diagnostics.Debug.WriteLine("");
+			//else
+			//	System.Diagnostics.Debug.WriteLine("");
 			var type = BindingContext?.GetType ();
 			if (type == typeof(NullItemWrapper) || type == typeof(BlankItemWrapper))
 				Content.BindingContext = item;
@@ -633,7 +633,7 @@ namespace Forms9Patch
 			    || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName
 			    || e.PropertyName == ItemWrapper.IndexProperty.PropertyName
 			   )
-				UpdateUnBoundProperties();
+				UpdateBackground();
 
 			if (e.PropertyName == ItemWrapper.RowHeightProperty.PropertyName)
 				SetHeights();
@@ -643,27 +643,13 @@ namespace Forms9Patch
 			//UpdateLayout();
 		}
 
-		void UpdateUnBoundProperties()
+		void UpdateBackground()
 		{
-			//System.Diagnostics.Debug.WriteLine("BaseCellView.UpdateUnBoundProperties");
 			var item = BindingContext as ItemWrapper;
 			if (item != null)
-			{
 				BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
-				/*
-				SeparatorIsVisible = item.Index > 0 && item.SeparatorIsVisible;
-				SeparatorColor = item.SeparatorColor;
-				SeparatorHeight = item.SeparatorHeight;
-				SeparatorLeftIndent = item.SeparatorLeftIndent;
-				SeparatorRightIndent = item.SeparatorRightIndent;
-				System.Diagnostics.Debug.WriteLine("["+item.Source+"] SeparatorIsVisible="+item.SeparatorIsVisible);
-				*/
-			}
 			else
-			{
 				BackgroundColor = Color.Transparent;
-				//SeparatorIsVisible = false;
-			}
 		}
 
 		void SetHeights()

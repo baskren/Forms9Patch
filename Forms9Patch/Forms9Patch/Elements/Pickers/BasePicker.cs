@@ -123,7 +123,7 @@ namespace Forms9Patch
 
 
 		#region Fields
-		readonly ListView _listView = new ListView
+		internal readonly ListView _listView = new ListView
 		{
 			IsGroupingEnabled = false,
 			//SeparatorIsVisible = false,
@@ -207,8 +207,8 @@ namespace Forms9Patch
 		/// <param name="propertyName">Property name.</param>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
-			if (propertyName == ItemsSourceProperty.PropertyName)
-				System.Diagnostics.Debug.WriteLine("");
+			//if (propertyName == ItemsSourceProperty.PropertyName)
+			//	System.Diagnostics.Debug.WriteLine("");
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ItemsSourceProperty.PropertyName)
 			{

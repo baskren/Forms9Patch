@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
+﻿
 namespace Forms9Patch
 {
 	class ItemWrapper<TItem> : ItemWrapper {
@@ -18,13 +16,8 @@ namespace Forms9Patch
 
 
 		#region Convenience
-		internal void ShallowCopy(ItemWrapper<TItem> other) {
-			/*
-			SeparatorColor = other.SeparatorColor;
-			SeparatorLeftIndent = other.SeparatorLeftIndent;
-			SeparatorRightIndent = other.SeparatorRightIndent;
-			SeparatorIsVisible = other.SeparatorIsVisible;
-			*/
+		internal void ShallowCopy(ItemWrapper<TItem> other) 
+		{
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 			Source = other.Source;

@@ -746,6 +746,10 @@ namespace Forms9Patch
 				//	BaseItemsSource.HasUnevenRows = HasUnevenRows;
 				else if (propertyName == RowHeightProperty.PropertyName)
 					BaseItemsSource.RowHeight = RowHeight;
+				else if (propertyName == CellBackgroundColorProperty.PropertyName)
+					BaseItemsSource.CellBackgroundColor = CellBackgroundColor;
+				else if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
+					BaseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
 			}
 			/*
 			else if (propertyName == SelectedItemsProperty.PropertyName && GroupToggleBehavior != GroupToggleBehavior.None)
@@ -781,8 +785,12 @@ namespace Forms9Patch
 			_baseItemsSource.VisibilityTest = VisibilityTest;
 			//_baseItemsSource.HasUnevenRows = HasUnevenRows;
 			_baseItemsSource.RowHeight = RowHeight;
+			_baseItemsSource.CellBackgroundColor = CellBackgroundColor;
+			_baseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+
 			_baseItemsSource.Source = ItemsSource;
 			base.ItemsSource = _baseItemsSource;
+
 			IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
 			ReevaluateSelectedItems();
 		}
