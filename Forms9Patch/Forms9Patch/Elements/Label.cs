@@ -427,6 +427,14 @@ namespace Forms9Patch
 		internal bool MinimizeHeight;
 
 		//internal Action SizeAndAlign;
+		internal Func<double, double, Size> RendererSizeForWidthAndFontSize;
+
+		public Size SizeForWidthAndFontSize(double width, double fontSize)
+		{
+			if (RendererSizeForWidthAndFontSize != null)
+				return RendererSizeForWidthAndFontSize.Invoke(width, fontSize);
+			return Size.Zero;
+		}
 
 		/// <summary>
 		/// Ons the size allocated.
