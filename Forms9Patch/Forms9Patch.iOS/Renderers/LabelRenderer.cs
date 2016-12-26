@@ -198,23 +198,6 @@ namespace Forms9Patch.iOS
 			//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
 
-			//if (!_delayingActualFontSizeUpdate)
-			//{
-			//	_delayingActualFontSizeUpdate = true;
-			//	Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
-			//	{
-			//		_delayingActualFontSizeUpdate = false;
-					if (Element!=null && Control != null)  // multipicker test was getting here with Element and Control both null
-						Element.ActualFontSize = ControlFontPointSize;
-			//		return false;
-			//	});
-			//}
-
-			Control.Font = ControlFont;
-			if (ControlAttributedText!=null)
-				Control.AttributedText = ControlAttributedText;
-			else
-				Control.Text = ControlText;
 
 			//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
 			//if (Element.HtmlText=="Fractional Mode")
@@ -232,6 +215,24 @@ namespace Forms9Patch.iOS
 		/// </summary>
 		public override void LayoutSubviews()
 		{
+			if (!_delayingActualFontSizeUpdate)
+			{
+				_delayingActualFontSizeUpdate = true;
+				Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
+				{
+					_delayingActualFontSizeUpdate = false;
+			if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+				Element.ActualFontSize = ControlFontPointSize;
+					return false;
+				});
+			}
+
+			Control.Font = ControlFont;
+			if (ControlAttributedText != null)
+				Control.AttributedText = ControlAttributedText;
+			else
+				Control.Text = ControlText;
+
 			base.LayoutSubviews();
 			if (Element != null)
 				GetDesiredSize(Element.Width, Element.Height);
