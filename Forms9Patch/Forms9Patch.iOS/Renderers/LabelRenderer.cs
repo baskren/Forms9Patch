@@ -32,6 +32,8 @@ namespace Forms9Patch.iOS
 		LabelFit LastFit = (LabelFit)Label.FitProperty.DefaultValue;
 		LineBreakMode LastLineBreakMode = (LineBreakMode)Xamarin.Forms.Label.LineBreakModeProperty.DefaultValue;
 		TextAlignment LastVerticalTextAlignment = (TextAlignment)Xamarin.Forms.Label.VerticalTextAlignmentProperty.DefaultValue;
+		double LastWidthConstraint = -1;
+		double LastHeightContraint = -1;
 
 		bool FirstRun=true;
 
@@ -55,8 +57,10 @@ namespace Forms9Patch.iOS
 
 
 
-			if (FirstRun || LastDesiredSize.Request == Size.Zero || Element.FontSize != LastElementFontSize || Element.MaxFontSize != LastElementFontSize || Element.MinFontSize != LastMinFontSize || Element.Lines != LastLines || Element.Fit != LastFit || Element.LineBreakMode != LastLineBreakMode || Element.VerticalTextAlignment != LastVerticalTextAlignment)
+			if (FirstRun || widthConstraint!= LastWidthConstraint || heightConstraint != LastHeightContraint|| Element.FontSize != LastElementFontSize || Element.MaxFontSize != LastElementFontSize || Element.MinFontSize != LastMinFontSize || Element.Lines != LastLines || Element.Fit != LastFit || Element.LineBreakMode != LastLineBreakMode || Element.VerticalTextAlignment != LastVerticalTextAlignment)
 			{
+				LastWidthConstraint = widthConstraint;
+				LastHeightContraint = heightConstraint;
 				FirstRun = false;
 				LastElementFontSize = Element.FontSize;
 				LastMaxFontSize = Element.MaxFontSize;
