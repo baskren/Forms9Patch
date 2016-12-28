@@ -56,8 +56,9 @@ namespace Forms9Patch.iOS
 
 			if (Invalid || widthConstraint!= LastWidthConstraint || heightConstraint != LastHeightContraint || Element.MaxFontSize != LastMaxFontSize || Element.MinFontSize != LastMinFontSize)
 			{
-				if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
-					System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter ["+(Element.Text??Element.F9PFormattedString.Text)+"]");
+				//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+				//if (Element.HtmlText == "2015 IBC")
+				//	System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter ["+(Element.Text??Element.F9PFormattedString.Text)+"]");
 
 				Invalid = false;
 				LastWidthConstraint = widthConstraint;
@@ -250,9 +251,9 @@ namespace Forms9Patch.iOS
 
 
 				LastDesiredSize = new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
-				if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+				//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
 				//if (Element.HtmlText=="Fractional Mode")
-					System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] Fit=["+Element.Fit+"] Lines=["+Element.Lines+"]");
+				//	System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] Fit=["+Element.Fit+"] Lines=["+Element.Lines+"]");
 			}
 			return LastDesiredSize;
 		}
@@ -311,6 +312,7 @@ namespace Forms9Patch.iOS
 			}
 			return labelSize;
 		}
+
 
 		nfloat WidthFit(double widthConstraint, nfloat startFontSize)
 		{
@@ -429,7 +431,7 @@ namespace Forms9Patch.iOS
 				UpdateTextColor();
 				UpdateFont();
 				UpdateText();
-				UpdateAlignment ();
+				UpdateHorizontalAlignment ();
 				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 				e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
 				Invalid = true;
@@ -447,7 +449,7 @@ namespace Forms9Patch.iOS
 		{
 			base.OnElementPropertyChanged (sender, e);
 			if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName)
-				UpdateAlignment();
+				UpdateHorizontalAlignment();
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
 			{
 				UpdateTextColor();
@@ -498,7 +500,7 @@ namespace Forms9Patch.iOS
 			BackgroundColor = color.ToUIColor ();
 		}
 
-		void UpdateAlignment ()
+		void UpdateHorizontalAlignment ()
 		{
 			Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment ();
 		}
