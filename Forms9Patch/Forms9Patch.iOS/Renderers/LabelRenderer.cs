@@ -27,15 +27,12 @@ namespace Forms9Patch.iOS
 		SizeRequest LastDesiredSize = new SizeRequest(Size.Zero,Size.Zero);
 		double LastMaxFontSize = (double)Label.MaxFontSizeProperty.DefaultValue;
 		double LastMinFontSize = (double)Label.MinFontSizeProperty.DefaultValue;
-		double LastElementFontSize = (double)Label.FontSizeProperty.DefaultValue;
-		int LastLines = (int)Label.LinesProperty.DefaultValue;
-		LabelFit LastFit = (LabelFit)Label.FitProperty.DefaultValue;
-		LineBreakMode LastLineBreakMode = (LineBreakMode)Xamarin.Forms.Label.LineBreakModeProperty.DefaultValue;
-		TextAlignment LastVerticalTextAlignment = (TextAlignment)Xamarin.Forms.Label.VerticalTextAlignmentProperty.DefaultValue;
+
+//		TextAlignment LastVerticalTextAlignment = (TextAlignment)Xamarin.Forms.Label.VerticalTextAlignmentProperty.DefaultValue;
 		double LastWidthConstraint = -1;
 		double LastHeightContraint = -1;
 
-		bool FirstRun=true;
+		bool Invalid=true;
 
 
 		#region Xamarin layout cycle
@@ -57,22 +54,20 @@ namespace Forms9Patch.iOS
 
 
 
-			if (FirstRun || widthConstraint!= LastWidthConstraint || heightConstraint != LastHeightContraint|| Element.FontSize != LastElementFontSize || Element.MaxFontSize != LastElementFontSize || Element.MinFontSize != LastMinFontSize || Element.Lines != LastLines || Element.Fit != LastFit || Element.LineBreakMode != LastLineBreakMode || Element.VerticalTextAlignment != LastVerticalTextAlignment)
+			if (Invalid || widthConstraint!= LastWidthConstraint || heightConstraint != LastHeightContraint || Element.MaxFontSize != LastMaxFontSize || Element.MinFontSize != LastMinFontSize)
 			{
+				if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+					System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter ["+(Element.Text??Element.F9PFormattedString.Text)+"]");
+
+				Invalid = false;
 				LastWidthConstraint = widthConstraint;
 				LastHeightContraint = heightConstraint;
-				FirstRun = false;
-				LastElementFontSize = Element.FontSize;
 				LastMaxFontSize = Element.MaxFontSize;
 				LastMinFontSize = Element.MinFontSize;
-				LastLines = Element.Lines;
-				LastFit = Element.Fit;
-				LastLineBreakMode = Element.LineBreakMode;
-				LastVerticalTextAlignment = Element.VerticalTextAlignment;
 
 				ControlLineBreakMode = UILineBreakMode.WordWrap;
 
-				var tmpFontSize = (nfloat)LastElementFontSize;
+				var tmpFontSize = (nfloat)Element.FontSize;
 				if (tmpFontSize < 0)
 					tmpFontSize = (nfloat)(UIFont.LabelFontSize * Math.Abs(tmpFontSize));
 				if (Math.Abs(tmpFontSize) <= double.Epsilon * 10)
@@ -93,7 +88,7 @@ namespace Forms9Patch.iOS
 				double tmpHt = -1;
 				double tmpWd = widthConstraint;
 
-				if (LastLines == 0 && LastFit != LabelFit.None)
+				if (Element.Lines == 0 && Element.Fit != LabelFit.None)
 				{
 					ControlLines = 0;
 					tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
@@ -103,14 +98,14 @@ namespace Forms9Patch.iOS
 						tmpFontSize = minFontSize;
 					ControlFont = ControlFont.WithSize(tmpFontSize);
 				}
-				else if (LastFit == LabelFit.Lines)
+				else if (Element.Fit == LabelFit.Lines)
 				{
 					if (double.IsPositiveInfinity(heightConstraint))
 					{
 						ControlFont = ControlFont.WithSize(tmpFontSize);
 						// we need to set the height of the Control to be Lines * FontHeight
 						//System.Diagnostics.Debug.WriteLine("\tAVAIL HT: INFINITE");
-						tmpHt = ControlFont.LineHeight * LastLines + ControlFont.Leading * (LastLines - 1);// + ContentScaleFactor;
+						tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines - 1);// + ContentScaleFactor;
 					}
 					else
 					{
@@ -118,7 +113,7 @@ namespace Forms9Patch.iOS
 						var lineHeightRatio = ControlFont.LineHeight / ControlFont.PointSize;
 						var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
 
-						tmpFontSize = (nfloat)(((heightConstraint) / (LastLines + leadingRatio * (LastLines - 1))) / lineHeightRatio - 0.1f);
+						tmpFontSize = (nfloat)(((heightConstraint) / (Element.Lines + leadingRatio * (Element.Lines - 1))) / lineHeightRatio - 0.1f);
 						if (tmpFontSize > maxFontSize)
 							tmpFontSize = maxFontSize;
 						if (tmpFontSize < minFontSize)
@@ -126,7 +121,7 @@ namespace Forms9Patch.iOS
 						ControlFont = ControlFont.WithSize(tmpFontSize);
 					}
 				}
-				else if (LastFit == LabelFit.Width)
+				else if (Element.Fit == LabelFit.Width)
 				{
 					tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
 					if (tmpFontSize > maxFontSize)
@@ -135,36 +130,36 @@ namespace Forms9Patch.iOS
 						tmpFontSize = minFontSize;
 					ControlFont = ControlFont.WithSize(tmpFontSize);
 				}
-				else if (LastFit == LabelFit.None && LastLines > 0)
+				else if (Element.Fit == LabelFit.None && Element.Lines > 0)
 				{
 					ControlFont = ControlFont.WithSize(tmpFontSize);
-					tmpHt = ControlFont.LineHeight * LastLines + ControlFont.Leading * (LastLines - 1);// + ContentScaleFactor;
+					tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines - 1);// + ContentScaleFactor;
 				}
 
-				ControlFontPointSize = ControlFont.PointSize;
+				ControlFontPointSize =  tmpFontSize;
 				CGSize cgSize = LabelSize(widthConstraint, ControlFontPointSize);
 				if (tmpHt < 0)
 					tmpHt = cgSize.Height;
 				tmpWd = cgSize.Width;
 
-				if (LastFit == LabelFit.None && LastLines > 0)
+				if (Element.Fit == LabelFit.None && Element.Lines > 0)
 				{
 					//System.Diagnostics.Debug.WriteLine("\tcgSize.Height=["+cgSize.Height+"]");
 					double lines = (cgSize.Height + ControlFont.Leading) / (ControlFont.LineHeight + ControlFont.Leading);
-					if (lines <LastLines)
+					if (lines <Element.Lines)
 					{
 						tmpHt = ControlFont.LineHeight * lines + ControlFont.Leading * (lines - 1);
 						ControlLines = (int)Math.Ceiling(lines);
 					}
 					else
-						ControlLines = LastLines;
+						ControlLines = Element.Lines;
 				}
 
 				//Control.BackgroundColor = UIColor.Blue;
 
-					if (LastFit == LabelFit.Width)
-						ControlLines = LastLines;
-					switch (LastLineBreakMode)
+					if (Element.Fit == LabelFit.Width)
+						ControlLines = Element.Lines;
+					switch (Element.LineBreakMode)
 					{
 						case LineBreakMode.NoWrap:
 							ControlLineBreakMode = UILineBreakMode.Clip;
@@ -189,7 +184,7 @@ namespace Forms9Patch.iOS
 
 				double gap = 0;
 				double height = 0;
-				if (LastFit == LabelFit.None && tmpHt < heightConstraint)
+				if (Element.Fit == LabelFit.None && tmpHt < heightConstraint)
 				{
 					gap = (nfloat)(heightConstraint - tmpHt);
 					height = tmpHt;
@@ -207,7 +202,7 @@ namespace Forms9Patch.iOS
 				if (gap > 0 && height > 0)
 				{
 					double y = 0;
-					switch (LastVerticalTextAlignment)
+					switch (Element.VerticalTextAlignment)
 					{
 						case TextAlignment.Center:
 							y = gap / 2.0;
@@ -223,6 +218,8 @@ namespace Forms9Patch.iOS
 
 				if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
 				{
+					//System.Diagnostics.Debug.WriteLine("Control Property Changed");
+					Control.Hidden = true;
 					Control.Lines = ControlLines;
 					Control.LineBreakMode = ControlLineBreakMode;
 
@@ -230,6 +227,7 @@ namespace Forms9Patch.iOS
 					Control.ClearsContextBeforeDrawing = true;
 					Control.ContentMode = UIViewContentMode.Redraw;
 
+					Control.Font = ControlFont;
 
 					if (ControlAttributedText != null)
 						Control.AttributedText = ControlAttributedText;
@@ -247,13 +245,14 @@ namespace Forms9Patch.iOS
 							return false;
 						});
 					}
+					Control.Hidden = false;
 				}
 
 
-				//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
+				LastDesiredSize = new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
+				if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
 				//if (Element.HtmlText=="Fractional Mode")
-				//	System.Diagnostics.Debug.WriteLine("\tresult=[" + tmpWd + "," + tmpHt + "] cgSize=[" + cgSize.Width + "," + cgSize.Height + "] [10," + Control.Font.LineHeight + "]");
-				LastDesiredSize =  new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
+					System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] Fit=["+Element.Fit+"] Lines=["+Element.Lines+"]");
 			}
 			return LastDesiredSize;
 		}
@@ -433,7 +432,7 @@ namespace Forms9Patch.iOS
 				UpdateAlignment ();
 				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 				e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
-				FirstRun = true;
+				Invalid = true;
 			}
 			base.OnElementChanged (e);
 
@@ -452,7 +451,7 @@ namespace Forms9Patch.iOS
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
 			{
 				UpdateTextColor();
-				if (ControlAttributedText!=null)
+				if (ControlAttributedText != null)
 					UpdateText();
 			}
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
@@ -465,8 +464,16 @@ namespace Forms9Patch.iOS
 				UpdateText();
 			else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
 				UpdateText();
-			else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
+			else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName ||
+					 e.PropertyName == Label.FitProperty.PropertyName ||
+					 e.PropertyName == Label.LinesProperty.PropertyName ||
+			         e.PropertyName == Label.LineBreakModeProperty.PropertyName ||
+			         e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName
+					)
+			{
+				Invalid = true;
 				LayoutSubviews();
+			}
 		}
 
 		void UpdateFont()
@@ -475,6 +482,7 @@ namespace Forms9Patch.iOS
 			Control.Font = ControlFont;
 			ControlFontPointSize = Control.Font.PointSize;
 			FontDescriptor = ControlFont.FontDescriptor;
+			Invalid = true;
 		}
 
 		/// <summary>
