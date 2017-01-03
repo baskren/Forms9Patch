@@ -10,6 +10,7 @@
     <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <AssemblyName>TestProject</AssemblyName>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -215,15 +216,11 @@
       <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+    <ProjectReference Include="..\..\formsgestures\FormsGestures\FormsGestures.csproj">
       <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\NumericalMethods\NumericalMethods.csproj">
-      <Project>{A3E44406-A6A6-47F6-8FEE-841E9E8B52DC}</Project>
-      <Name>NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+    <ProjectReference Include="..\..\formsgestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
       <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>PCL.Utils</Name>
     </ProjectReference>
