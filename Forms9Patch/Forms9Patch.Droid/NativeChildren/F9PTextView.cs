@@ -289,6 +289,7 @@ namespace Forms9Patch.Droid
 		{
 			return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, start, end, availWidth);
 		}
+
 		static ICharSequence TruncatedFormattedIter(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int endLow, int endHigh, float availWidth)
 		{
 			if (endHigh - endLow <= 1)
@@ -302,7 +303,6 @@ namespace Forms9Patch.Droid
 				return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
 			return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
 		}
-
 
 		static ICharSequence StartTruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
 		{
@@ -357,14 +357,11 @@ namespace Forms9Patch.Droid
 			return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
 		}
 
-
-
 		static string StartTruncatedLastLine(string text, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
 		{
 			return StartTruncatedIter(text, paint, secondToLastEnd, start, end, end, availWidth);
 		}
 
-		//Android.Graphics.Rect _truncBounds = new Android.Graphics.Rect();
 		static string StartTruncatedIter(string text, TextPaint paint, int secondToLastEnd, int startLow, int startHigh, int end, float availWidth)
 		{
 			if (startHigh-startLow<=1)

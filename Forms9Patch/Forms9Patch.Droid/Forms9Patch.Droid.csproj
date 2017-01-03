@@ -169,8 +169,6 @@
     <Compile Include="Effects\PopupEffect.cs" />
     <Compile Include="Effects\BackgroundImageEffect.cs" />
     <Compile Include="Effects\CustomFontEffect.cs" />
-    <Compile Include="ListView\Drawables\BaseCellViewDrawable.cs" />
-    <Compile Include="ListView\Renderers\BaseCellViewRenderer.cs" />
     <Compile Include="ListView\Renderers\ListViewRenderer.cs" />
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="ListView\Services\ListItemLocationService.cs" />

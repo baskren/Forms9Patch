@@ -20,6 +20,7 @@ namespace Forms9Patch.Droid
 		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			base.OnElementPropertyChanged (sender, e);
+			/*
 			if (e.PropertyName == BaseCellView.SeparatorIsVisibleProperty.PropertyName 
 				|| e.PropertyName == BaseCellView.SeparatorColorProperty.PropertyName
 				|| e.PropertyName == BaseCellView.SeparatorHeightProperty.PropertyName
@@ -30,6 +31,7 @@ namespace Forms9Patch.Droid
 				int[] colors = { Element.EndColor.ToAndroid (),Element.StartColor.ToAndroid () };
 				Background = new GradientDrawable(orientation,colors);
 			}
+			*/
 		}
 
 	}

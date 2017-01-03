@@ -44,6 +44,46 @@ namespace Forms9Patch.Droid
 		int _lastDesiredSizeWidthConstraint = -1;
 		int _lastDesiredSizeHeightConstraint = -1;
 
+		Xamarin.Forms.Size LabelXamarinSize(double widthConstraint, double fontSize)
+		{
+			var layout = LabelLayout((widthConstraint == double.MaxValue? int.MaxValue : (int)widthConstraint), (float)fontSize);
+			if (layout == null)
+				return Xamarin.Forms.Size.Zero;
+			float width = 0;
+			float height = 0;
+			for (int i = 0; i < layout.LineCount; i++)
+			{
+				var lineWidth = layout.GetLineWidth(i);
+				if (width < lineWidth)
+					width = lineWidth;
+				var blockHeight = layout.GetLineBottom(i);
+				if (height < blockHeight)
+					height = blockHeight;
+			}
+
+			return new Xamarin.Forms.Size(width, height);
+		}
+
+		StaticLayout LabelLayout(int widthConstraint, float fontSize)
+		{
+			
+			ICharSequence text;
+			if (Element.Text != null)
+				text = new Java.Lang.String(Element.Text);
+			else
+			{
+				if (Settings.IsLicenseValid || Element._id < 4)
+					text = Element.F9PFormattedString.ToSpannableString();
+				else
+					text = new Java.Lang.String("UNLICENSED COPY");
+			}
+			if (text == null)
+				return null;
+			var paint = new TextPaint(Control.Paint);
+			paint.TextSize = fontSize;
+			return new StaticLayout(text, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+		}
+
 		void LayoutForSize(int width, int height)
 		{
 			var widthConstraint = MeasureSpec.MakeMeasureSpec(width, MeasureSpecMode.AtMost);
@@ -240,6 +280,7 @@ namespace Forms9Patch.Droid
 			else
 				Control.TextFormatted = text;
 
+
 			_lastWidthConstraint = availWidth;
 			_lastHeightConstraint = availHeight;
 			_lastLines = Element.Lines;
@@ -277,31 +318,19 @@ namespace Forms9Patch.Droid
 				SetNativeControl(view);
 			}
 
-
-			if (e.OldElement != e.NewElement && e.NewElement != null)
+			if (e.OldElement != null)
 			{
-				Initialize();
-				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
-			}
-
-
-			if (e.OldElement == null)
-			{
-				UpdateText();
-			}
-			else
-			{
-				Control.SkipNextInvalidate();
-				UpdateText();
 				e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
+				e.OldElement.RendererSizeForWidthAndFontSize -= LabelXamarinSize;
 			}
-		}
 
-
-		void Initialize()
-		{
-			//Control.IsDynamicallySized = () => Element.IsDynamicallySized;
-			UpdateFont();
+			if (e.NewElement != null)
+			{
+				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
+				e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
+				UpdateText();
+				Control.SkipNextInvalidate();
+			}
 		}
 
 
