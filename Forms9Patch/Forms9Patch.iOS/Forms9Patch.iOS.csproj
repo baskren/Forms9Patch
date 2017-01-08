@@ -118,22 +118,6 @@
       <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\formsgestures\FormsGestures\FormsGestures.csproj">
-      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
-      <Name>FormsGestures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\formsgestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
-      <Project>{E68F0971-0308-4E5E-AFFA-F1F82EF69CDC}</Project>
-      <Name>FormsGestures.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\formsgestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
-      <Name>PCL.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\formsgestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj">
-      <Project>{802F3CDB-4AD3-40C1-AF8B-71342D059C3D}</Project>
-      <Name>PCL.Utils.iOS</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
