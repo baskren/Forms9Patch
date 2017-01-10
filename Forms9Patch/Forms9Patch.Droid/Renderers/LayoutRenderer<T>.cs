@@ -55,7 +55,7 @@ namespace Forms9Patch.Droid
 			}
 		}
 
-		bool waitingOnLayout = false;
+		//bool waitingOnLayout = false;
 		//bool waitingOnInvalidate = false;
 		/// <summary>
 		/// Raises the element property changed event.

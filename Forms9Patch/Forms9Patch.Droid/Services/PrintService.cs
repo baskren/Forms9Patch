@@ -20,7 +20,7 @@ namespace Forms9Patch.Droid
 				if (version >= Android.OS.BuildVersionCodes.Kitkat)
 				{
 					var printMgr = (PrintManager)Forms.Context.GetSystemService(Context.PrintService);
-					printMgr.Print(jobName, droidViewToPrint.CreatePrintDocumentAdapter(), null);
+					printMgr.Print(jobName, droidViewToPrint.CreatePrintDocumentAdapter(jobName), null);
 				}
 			}
 		}

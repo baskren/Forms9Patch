@@ -429,6 +429,12 @@ namespace Forms9Patch
 		//internal Action SizeAndAlign;
 		internal Func<double, double, Size> RendererSizeForWidthAndFontSize;
 
+		/// <summary>
+		/// Sizes the size of the for width and font.
+		/// </summary>
+		/// <returns>The for width and font size.</returns>
+		/// <param name="width">Width.</param>
+		/// <param name="fontSize">Font size.</param>
 		public Size SizeForWidthAndFontSize(double width, double fontSize)
 		{
 			if (RendererSizeForWidthAndFontSize != null)

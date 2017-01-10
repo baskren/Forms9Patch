@@ -454,6 +454,8 @@ namespace Forms9Patch
 				_roundedBox.OutlineRadius = OutlineRadius;
 			else if (propertyName == BackgroundColorProperty.PropertyName)
 				_roundedBox.BackgroundColor = BackgroundColor;
+			else if (propertyName == ShadowInvertedProperty.PropertyName)
+				_roundedBox.ShadowInverted = ShadowInverted;
 		}
 
 		internal Action ForceNativeLayout { get; set; }

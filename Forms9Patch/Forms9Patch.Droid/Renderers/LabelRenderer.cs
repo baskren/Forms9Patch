@@ -99,7 +99,7 @@ namespace Forms9Patch.Droid
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
 		{
-			string labelText = Element.Text ?? Element.F9PFormattedString?.Text;
+			//string labelText = Element.Text ?? Element.F9PFormattedString?.Text;
 			//Element.Sized = true;
 			if (string.IsNullOrEmpty(Element.Text ?? Element.F9PFormattedString?.Text) || Control == null)
 			{

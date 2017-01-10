@@ -14,8 +14,8 @@ namespace Forms9Patch
 {
 class NinePatch : UIImageView, INinePatch, IDisposable
 	{
-		static uint _instances;
-		uint id;
+		//static uint _instances;
+		//uint id;
 		UIImageView[,] _patchViews;
 		nint _fixedX;
 		nint _fixedY;
@@ -82,7 +82,7 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 		bool _yStartFixed;
 
 		public NinePatch(UIImage image, List<Range> xPatches = null, List<Range> yPatches = null) {
-			id = _instances++;
+			//id = _instances++;
 			var cgImage = image.CGImage;
 			if (cgImage == null) {
 				var ciContext = CIContext.FromOptions (null);

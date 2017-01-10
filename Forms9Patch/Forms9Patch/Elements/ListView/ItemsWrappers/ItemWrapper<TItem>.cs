@@ -7,7 +7,6 @@ namespace Forms9Patch
 		public new TItem Source {
 			get { return (TItem)GetValue(SourceProperty); }
 			set { 
-				if (debugProperties) System.Diagnostics.Debug.WriteLine ("Value: update from ["+(TItem)GetValue(SourceProperty)+"] to [" + value + "]");
 				if (!Equals(value,Source))
 					SetValue(SourceProperty, value);
 			}

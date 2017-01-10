@@ -55,7 +55,7 @@ namespace Forms9Patch.iOS
 		{
 			ContentMode = UIViewContentMode.Redraw;
 
-			var backgroundColor = (Color) Element.GetValue (VisualElement.BackgroundColorProperty);
+			var backgroundColor = (Color) Element.GetValue (BubbleLayout.BackgroundColorProperty);
 			var outlineColor = (Color) Element.GetValue (RoundedBoxBase.OutlineColorProperty);
 			var outlineWidth = (nfloat)(Math.Max (0, (float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) ) );
 

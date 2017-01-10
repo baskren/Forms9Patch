@@ -8,7 +8,7 @@ namespace Forms9Patch.Droid
 {
 	internal class NinePatch : INinePatch
 	{
-		static uint _instances;
+		//static uint _instances;
 		readonly Bitmap _bitmap;
 
 		public int SourceWidth {

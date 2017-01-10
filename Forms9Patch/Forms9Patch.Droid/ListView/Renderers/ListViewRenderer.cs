@@ -142,7 +142,7 @@ namespace Forms9Patch.Droid
 					cellHeight = Control.GetChildAt(position - first).Height;
 				else
 				{
-					CellAdapter adapter = Control.Adapter as CellAdapter;
+					//var adapter = Control.Adapter as CellAdapter;
 
 					//Android.Views.View view = _adapter.GetView(position, null, null);
 					//view.Measure(MeasureSpecFactory.MakeMeasureSpec(Control.Width, MeasureSpecMode.AtMost), MeasureSpecFactory.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
@@ -434,10 +434,13 @@ namespace Forms9Patch.Droid
 		}
 
 		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
 
-		protected virtual void Dispose(bool disposing)
+		/*
+		private bool disposedValue = false; // To detect redundant calls
+		
+		protected override void Dispose(bool disposing)
 		{
+			base.Dispose(disposing);
 			if (!disposedValue)
 			{
 				if (disposing)
@@ -466,6 +469,7 @@ namespace Forms9Patch.Droid
 			// TODO: uncomment the following line if the finalizer is overridden above.
 			// GC.SuppressFinalize(this);
 		}
+		*/
 		#endregion
 	}
 }

@@ -10,7 +10,6 @@ namespace Forms9Patch
 
 
 		#region Fields
-		protected static bool debugProperties;
 		public readonly int ID;
 		#endregion
 

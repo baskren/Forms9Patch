@@ -191,6 +191,7 @@ namespace Forms9Patch
 				_bubbleLayout.PointerTipRadius = PointerTipRadius;
 			else if (propertyName == PointerCornerRadiusProperty.PropertyName)
 				_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
+			
 		}
 
 
