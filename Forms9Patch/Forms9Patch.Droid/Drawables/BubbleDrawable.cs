@@ -27,7 +27,7 @@ namespace Forms9Patch.Droid
 			//System.Diagnostics.Debug.WriteLine ("\t\tBubbleDrawable.Draw.Bounds=[{0}, {1}, {2}, {3}]", Bounds.Left, Bounds.Top, Bounds.Width(), Bounds.Height());
 
 			//System.Diagnostics.Debug.WriteLine ("Draw");
-			var backgroundColor = (Xamarin.Forms.Color) _element.GetValue (VisualElement.BackgroundColorProperty);
+			var backgroundColor = (Xamarin.Forms.Color) _element.GetValue (BubbleLayout.BackgroundColorProperty);
 			var outlineColor = (Xamarin.Forms.Color) _element.GetValue (RoundedBoxBase.OutlineColorProperty);
 			var outlineWidth = Math.Max(0,(float)_element.GetValue (RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
 

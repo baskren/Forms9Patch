@@ -41,7 +41,7 @@ namespace Forms9Patch.Droid
 			    || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
 			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName
 			    || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
-				|| e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName
+				|| e.PropertyName == BubbleLayout.BackgroundColorProperty.PropertyName
 			    || e.PropertyName == BubbleLayout.PointerTipRadiusProperty.PropertyName
 				|| e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName 
 			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName) {
