@@ -22,6 +22,10 @@ namespace Forms9Patch.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<BubbleLayout> e)
 		{
 			base.OnElementChanged(e);
+			if (e.OldElement != null)
+				e.OldElement.ForceNativeLayout -= ForceNativeLayout;
+			if (e.NewElement != null)
+				e.NewElement.ForceNativeLayout += ForceNativeLayout;
 			if (e.NewElement != null) {
 				Background = new BubbleDrawable (e.NewElement);
 			}
@@ -81,6 +85,13 @@ namespace Forms9Patch.Droid
 			}
 		}
 
+		void ForceNativeLayout()
+		{
+			var scale = Forms.Context.Resources.DisplayMetrics.Density;
+			ViewGroup.Layout((int)(Element.Bounds.Left * scale), (int)(Element.Bounds.Top * scale), (int)(Element.Bounds.Right * scale), (int)(Element.Bounds.Bottom * scale));
+			//System.Diagnostics.Debug.WriteLine($"\tBounds=[{Element.Bounds.Left}, {Element.Bounds.Top}, {Element.Bounds.Width}, {Element.Bounds.Height}]");
+			//System.Diagnostics.Debug.WriteLine ($"\tPadding=[{Element.Padding.Left},{Element.Padding.Top},{Element.Padding.Right},{Element.Padding.Bottom}]")
+		}
 
 	}
 

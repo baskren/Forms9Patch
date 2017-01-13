@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch Frame layout.
 	/// </summary>
-	public class Frame : ContentView, IRoundedBox, IBackgroundImage
+	public class Frame : ContentView, IRoundedBox, IBackgroundImage, IForceNativeLayout
 	{
 
 		#region Debug support
@@ -152,6 +152,13 @@ namespace Forms9Patch
 				InvalidateLayout ();
 		}
 
+
+		public System.Action ForceNativeLayout { get; set; }
+
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
+		}
 
 	}
 }

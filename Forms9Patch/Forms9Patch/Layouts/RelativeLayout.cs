@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch RelativeLayout.
 	/// </summary>
-	public class RelativeLayout : Xamarin.Forms.RelativeLayout, IRoundedBox, IBackgroundImage
+	public class RelativeLayout : Xamarin.Forms.RelativeLayout, IRoundedBox, IBackgroundImage, IForceNativeLayout
 	{
 
 		#region debug support
@@ -149,6 +149,13 @@ namespace Forms9Patch
 			if (propertyName == PaddingProperty.PropertyName ||
 				propertyName == HasShadowProperty.PropertyName)
 				InvalidateLayout ();
+		}
+
+		public System.Action ForceNativeLayout { get; set; }
+
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
 		}
 
 

@@ -11,7 +11,7 @@ namespace Forms9Patch.Droid
 	/// <summary>
 	/// Forms9Patch Layout renderer.
 	/// </summary>
-	public class LayoutRenderer<TElement> : ViewRenderer<TElement,global::Android.Widget.RelativeLayout> where TElement : View, IBackgroundImage 
+	public class LayoutRenderer<TElement> : ViewRenderer<TElement,global::Android.Widget.RelativeLayout> where TElement : View, IBackgroundImage, IForceNativeLayout 
 	//public class LayoutRenderer<TElement> : ViewRenderer<TElement, F9PRelativeLayout> where TElement : View, IBackgroundImage
 	{
 		Image _oldImage;
@@ -37,6 +37,10 @@ namespace Forms9Patch.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<TElement> e)
 		{
 			base.OnElementChanged(e);
+			if (e.OldElement != null)
+				e.OldElement.ForceNativeLayout -= ForceNativeLayout;
+			if (e.NewElement != null)
+				e.NewElement.ForceNativeLayout += ForceNativeLayout;
 			if (e.NewElement != null) {
 				if (_imageViewManager == null) {
 					SetNativeControl(new global::Android.Widget.RelativeLayout(Context));
@@ -168,6 +172,13 @@ namespace Forms9Patch.Droid
 #pragma warning restore 4014
 		}
 
+		void ForceNativeLayout()
+		{
+			var scale = Forms.Context.Resources.DisplayMetrics.Density;
+			ViewGroup.Layout((int)(Element.Bounds.Left * scale), (int)(Element.Bounds.Top * scale), (int)(Element.Bounds.Right * scale), (int)(Element.Bounds.Bottom * scale));
+			//System.Diagnostics.Debug.WriteLine($"\tBounds=[{Element.Bounds.Left}, {Element.Bounds.Top}, {Element.Bounds.Width}, {Element.Bounds.Height}]");
+			//System.Diagnostics.Debug.WriteLine ($"\tPadding=[{Element.Padding.Left},{Element.Padding.Top},{Element.Padding.Right},{Element.Padding.Bottom}]");
+		}
 
 
 		void OnBackgroundImagePropertyChanged(object sender, PropertyChangedEventArgs e) {

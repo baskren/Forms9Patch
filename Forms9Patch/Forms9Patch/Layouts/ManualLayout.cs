@@ -69,7 +69,13 @@ namespace Forms9Patch
 			Width = width;
 			Height = height;
 		}
+
+		public System.Action ForceNativeLayout { get; set; }
+
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
+		}
+
 	}
-
-
 }

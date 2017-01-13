@@ -165,6 +165,7 @@
     <Compile Include="Extensions\WebViewExtensions.cs" />
     <Compile Include="Interfaces\IPrintService.cs" />
     <Compile Include="Elements\Popups\TargetedToast.cs" />
+    <Compile Include="Interfaces\IForceNativeLayout.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

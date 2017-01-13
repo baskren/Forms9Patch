@@ -460,7 +460,10 @@ namespace Forms9Patch
 
 		internal Action ForceNativeLayout { get; set; }
 
-
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
+		}
 
 	}
 }

@@ -1,6 +1,8 @@
 using System;
 
 using Xamarin.Forms;
+using PCL.Utils;
+using System.Linq;
 
 namespace TestProject
 {
@@ -172,6 +174,34 @@ namespace TestProject
 			//bubbleLabel.SetBinding (Label.TextProperty, "CornerRadius");
 			bubbleLabel.BindingContext = this;
 
+			var addItemButton = new Forms9Patch.MaterialButton
+			{
+				Text = "Add Item",
+				OutlineColor = Color.Black,
+				OutlineWidth = 1,
+				FontColor = Color.Red
+			};
+
+			var removeItemButton = new Forms9Patch.MaterialButton
+			{
+				Text = "Remove Item",
+				OutlineColor = Color.Black,
+				OutlineWidth = 1,
+				FontColor = Color.Red
+			};
+
+			var stackLayout = new Forms9Patch.StackLayout
+			{
+				Orientation = StackOrientation.Horizontal,
+				HorizontalOptions = LayoutOptions.Start,
+			};
+
+			var contentView = new Xamarin.Forms.ContentView
+			{
+				Content = stackLayout,
+				HorizontalOptions = LayoutOptions.Start
+			};
+
 			var bubble = new Forms9Patch.BubblePopup(this) {
 				//BackgroundColor = Color.Green,
 				//OutlineColor = Color.Black,
@@ -180,6 +210,7 @@ namespace TestProject
 				Content = new StackLayout {
 					Children = {
 						//bubbleLabel,
+						contentView,
 						new Label { Text = "Pointer Length:", FontSize=10, },
 						pointerLengthSlider,
 						new Label { Text = "Pointer Tip Radius:", FontSize=10, },
@@ -189,6 +220,8 @@ namespace TestProject
 						new Label { Text = "Pointer Corner Radius:" , FontSize=10, },
 						pointerCornerRadiusSlider,
 						bubbleButton,
+						addItemButton,
+						removeItemButton
 					}
 				},
 			};
@@ -204,6 +237,29 @@ namespace TestProject
 
 
 			bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;
+			addItemButton.Tapped += (sender, e) =>
+			{
+				stackLayout.Children.Add(new Label { Text = "X," });
+				//bubble.WidthRequest = 1;
+				stackLayout.WidthRequest = -1;
+				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
+				System.Diagnostics.Debug.WriteLine("WIDTH=["+stackLayout.Width+"] size.Request.Width=["+size.Request.Width+"]");
+				//stackLayout.WidthRequest = size.Request.Width + 1;
+				//this.CallMethod("InvalidateMeasure", new object[] {});
+				//contentView.WidthRequest = size.Request.Width;
+				Device.StartTimer(TimeSpan.FromMilliseconds(40), () =>
+					{
+						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
+						return false;
+					});
+				//bubble.CallMethod("ForceNativeLayout", new object[] { });
+
+			};
+			removeItemButton.Tapped += (sender, e) =>
+			{
+				stackLayout.Children.Remove(stackLayout.Children.Last());
+			};
+
 
 			var showButton = new Forms9Patch.MaterialButton {
 				Text = "Show BubblePopup",

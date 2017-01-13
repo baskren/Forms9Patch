@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch AbsoluteLayout.
 	/// </summary>
-	public class AbsoluteLayout : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IBackgroundImage
+	public class AbsoluteLayout : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IBackgroundImage, IForceNativeLayout
 	{
 
 		#region debug support
@@ -148,6 +148,13 @@ namespace Forms9Patch
 			if (propertyName == PaddingProperty.PropertyName ||
 				propertyName == HasShadowProperty.PropertyName)
 				InvalidateLayout ();
+		}
+
+		public System.Action ForceNativeLayout { get; set; }
+
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
 		}
 
 	}

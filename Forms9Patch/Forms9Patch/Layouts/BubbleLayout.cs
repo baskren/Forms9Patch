@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Bubble layout.
 	/// </summary>
-	internal class BubbleLayout: Xamarin.Forms.ContentView, IRoundedBox
+	internal class BubbleLayout: Xamarin.Forms.ContentView, IRoundedBox, IForceNativeLayout
 	{
 		#region Pointer Properties
 		/// <summary>
@@ -292,6 +292,13 @@ namespace Forms9Patch
 				return new Thickness (0);
 		}
 		#endregion
+
+		public System.Action ForceNativeLayout { get; set; }
+
+		public void Relayout()
+		{
+			ForceNativeLayout?.Invoke();
+		}
 
 	}
 }
