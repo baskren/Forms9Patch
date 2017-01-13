@@ -298,7 +298,7 @@ namespace Forms9Patch.Droid
 			}
 			int mid = (endLow + endHigh) / 2;
 			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
-			var layout = new StaticLayout(formattedText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(formattedText, paint, int.MaxValue-10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
 			return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -315,7 +315,7 @@ namespace Forms9Patch.Droid
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Start, secondToLastEnd, startHigh, end);
 			int mid = (startLow + startHigh) / 2;
 			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Start, 0, mid, end);
-			var layout = new StaticLayout(formattedText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, mid, startHigh, end, availWidth);
 			return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLow, mid, end, availWidth);
@@ -332,7 +332,7 @@ namespace Forms9Patch.Droid
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Mid, secondToLastEnd, startHigh, end, startLastVisible, midLastVisible);
 			int mid = (startLow + startHigh) / 2;
 			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Mid, 0, mid, end, startLastVisible, midLastVisible);
-			var layout = new StaticLayout(formattedText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
 			return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
@@ -351,7 +351,7 @@ namespace Forms9Patch.Droid
 			}
 			int mid = (endLow + endHigh) / 2;
 			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.End, 0, start, mid);
-			var layout = new StaticLayout(formattedText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
 			return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -371,7 +371,7 @@ namespace Forms9Patch.Droid
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth)
-			var layout = new StaticLayout(lastLineText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(lastLineText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return StartTruncatedIter(text, paint, secondToLastEnd, mid, startHigh, end, availWidth);
 			return StartTruncatedIter(text, paint, secondToLastEnd, startLow, mid, end, availWidth);
@@ -391,7 +391,7 @@ namespace Forms9Patch.Droid
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth)
-			var layout = new StaticLayout(lastLineText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(lastLineText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
 			return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
@@ -411,7 +411,7 @@ namespace Forms9Patch.Droid
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth-Scale)
-			var layout = new StaticLayout(lastLineText, paint, int.MaxValue, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+			var layout = new StaticLayout(lastLineText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return EndTruncatedIter(text, paint, secondToLastEnd, start, endLow, mid, availWidth);
 			return EndTruncatedIter(text, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -426,9 +426,9 @@ namespace Forms9Patch.Droid
 		{
 			//System.Diagnostics.Debug.WriteLine("F9PTextView.WidthFit: availWidth=["+availWidth+"] availHeight=["+availHeight+"]");
 
-			if (availWidth == int.MaxValue)
+			if (availWidth > int.MaxValue/3)
 			{
-				if (availHeight == int.MaxValue)
+				if (availHeight > int.MaxValue/3)
 					return max;
 				var fontMetrics = paint.GetFontMetrics();
 				var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
@@ -484,9 +484,9 @@ namespace Forms9Patch.Droid
 
 		internal static float ZeroLinesFit(ICharSequence text, TextPaint paint, float min, float max, int availWidth, int availHeight)
 		{
-			if (availHeight == int.MaxValue)
+			if (availHeight > int.MaxValue/3)
 				return max;
-			if (availWidth == int.MaxValue)
+			if (availWidth > int.MaxValue/3)
 			{
 				var fontMetrics = paint.GetFontMetrics();
 				var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;

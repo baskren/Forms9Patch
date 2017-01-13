@@ -41,12 +41,29 @@ namespace Forms9Patch.Droid
 			AutoPackage = false;
 		}
 
+		bool showDebugMsg
+		{
+			get
+			{
+				return (elementText.Length > 4 && elementText.Contains("5") && !elementText.Contains(","));
+				//return false;
+			}
+		}
+
+		string elementText
+		{
+			get
+			{
+				return (Element.HtmlText ?? Element.Text ?? "");
+			}
+		}
+
 		int _lastDesiredSizeWidthConstraint = -1;
 		int _lastDesiredSizeHeightConstraint = -1;
 
 		Xamarin.Forms.Size LabelXamarinSize(double widthConstraint, double fontSize)
 		{
-			var layout = LabelLayout((widthConstraint == double.MaxValue? int.MaxValue : (int)widthConstraint), (float)fontSize);
+			var layout = LabelLayout((widthConstraint > double.MaxValue/3 ? int.MaxValue/2 : (int)widthConstraint), (float)fontSize);
 			if (layout == null)
 				return Xamarin.Forms.Size.Zero;
 			float width = 0;
@@ -121,25 +138,30 @@ namespace Forms9Patch.Droid
 
 			int availWidth = MeasureSpec.GetSize(widthConstraint);
 			if (MeasureSpec.GetMode(widthConstraint) == Android.Views.MeasureSpecMode.Unspecified)
-				availWidth = int.MaxValue;
+				availWidth = int.MaxValue/2;
 			int availHeight = MeasureSpec.GetSize(heightConstraint);
 			if (MeasureSpec.GetMode(heightConstraint) == Android.Views.MeasureSpecMode.Unspecified)
-				availHeight = int.MaxValue;
+				availHeight = int.MaxValue/2;
 			//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize("+(availWidth==int.MaxValue?"infinity":availWidth.ToString())+","+(availHeight==int.MaxValue?"infinity":availHeight.ToString())+") enter");
 
-			//System.Diagnostics.Debug.WriteLine("[" + (Element.HtmlText ?? Element.Text) + "]LabelRenderer.GetDesiredSize(" + availWidth + "," + availHeight + ")");
+			if (showDebugMsg)
+				System.Diagnostics.Debug.WriteLine("[" + elementText + "]LabelRenderer.GetDesiredSize(" + availWidth + "," + availHeight + ")");
 			_lastDesiredSizeWidthConstraint = availWidth;
 			_lastDesiredSizeHeightConstraint = availHeight;
 
+			if (availHeight < - 10000)
+				System.Diagnostics.Debug.WriteLine("");
 
 			if (availWidth <= 0 || availHeight <= 0)
 			{
 				_lastSizeRequest = null;
-				//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize exit: !availWidth||!availHeight");
+				if (showDebugMsg)
+					System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize exit: !availWidth||!availHeight");
 				return new SizeRequest(Xamarin.Forms.Size.Zero);
 			}
 
-			//System.Diagnostics.Debug.WriteLine("LabelRenderer.GetDesiredSize(" + availWidth + "," + availHeight + ") enter text=[" + text + "]");
+			if (showDebugMsg)
+				System.Diagnostics.Debug.WriteLine("\t[" + elementText +"] LabelRenderer.GetDesiredSize(" + availWidth + "," + availHeight + ") enter text=[" + text + "]");
 
 			if (_lastSizeRequest.HasValue)
 			{
@@ -147,8 +169,12 @@ namespace Forms9Patch.Droid
 				canRecycleLast = canRecycleLast && _lastLines == Element.Lines && _lastFit == Element.Fit;
 				if (canRecycleLast)
 				{
-					//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\trecycled["+_lastSizeRequest.Value+"]");
-					//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize exit:_lastSizeRequest.HasValue("+ (availWidth == int.MaxValue ? "infinity" : availWidth.ToString()) + "," + (availHeight == int.MaxValue ? "infinity" : availHeight.ToString()) + ") ("+_lastSizeRequest.Value+")");
+					if (showDebugMsg)
+					{
+						System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize\trecycled[" + _lastSizeRequest.Value + "]");
+						System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize exit:_lastSizeRequest.HasValue(" + (availWidth == int.MaxValue / 3 ? "infinity" : availWidth.ToString()) + "," + (availHeight == int.MaxValue / 3 ? "infinity" : availHeight.ToString()) + ") (" + _lastSizeRequest.Value+")");
+						System.Diagnostics.Debug.WriteLine("\t\tControl.Visibility=[" + Control.Visibility + "]");
+					}
 					return _lastSizeRequest.Value;
 				}
 			}
@@ -157,7 +183,7 @@ namespace Forms9Patch.Droid
 			var tmpFontSize = ModelFontSize;
 			Control.TextSize = tmpFontSize;
 			Control.SetSingleLine(false);
-			Control.SetMaxLines(int.MaxValue);
+			Control.SetMaxLines(int.MaxValue/2);
 			Control.SetIncludeFontPadding(false);
 			Control.Ellipsize = null;
 
@@ -175,7 +201,7 @@ namespace Forms9Patch.Droid
 			else if (Element.Fit == LabelFit.Lines)
 			{
 
-				if (int.MaxValue == availHeight)
+				if (availHeight > int.MaxValue/3)
 				{
 					// we need to set the height of the Control to be Lines * FontHeight
 					//tmpHt = Control.Font.LineHeight * Element.Lines + Control.Font.Leading * (Element.Lines - 1);
@@ -207,7 +233,8 @@ namespace Forms9Patch.Droid
 			//	Control.SetMaxLines(Element.Lines);
 
 			Control.TextSize = BoundTextSize(tmpFontSize);
-			//System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\tControl.TextSize=["+Control.TextSize+"]");
+			if (showDebugMsg)
+				System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize\tControl.TextSize=["+Control.TextSize+"]");
 
 			//Control.SetBackgroundColor(Android.Graphics.Color.Orange);
 
@@ -229,9 +256,12 @@ namespace Forms9Patch.Droid
 						break;
 				}
 			}
-			//System.Diagnostics.Debug.WriteLine("availHeight=["+(availHeight - layout.TopPadding - layout.BottomPadding)+"]");
-			//System.Diagnostics.Debug.WriteLine("lines=["+lines+"]");
-			//System.Diagnostics.Debug.WriteLine("layout Height=["+layout.Height+"] lineCount=["+layout.LineCount+"]");
+			if (showDebugMsg)
+			{
+				System.Diagnostics.Debug.WriteLine("\t\tavailHeight=[" + (availHeight - layout.TopPadding - layout.BottomPadding) + "]");
+				System.Diagnostics.Debug.WriteLine("\t\tlines=[" + lines + "]");
+				System.Diagnostics.Debug.WriteLine("\t\tlayout Height=[" + layout.Height + "] lineCount=[" + layout.LineCount+"]");
+			}
 
 			if (layout.Height > availHeight || (lines > 0 && layout.LineCount > lines))
 			{
@@ -297,7 +327,27 @@ namespace Forms9Patch.Droid
 					return false;
 				});
 			}
-			//System.Diagnostics.Debug.WriteLine("[" + labelText + "] LabelRenderer.GetDesiredSize("+ (availWidth == int.MaxValue ? "infinity" : availWidth.ToString()) + "," + (availHeight == int.MaxValue ? "infinity" : availHeight.ToString()) + ") exit ("+_lastSizeRequest.Value+")");
+			if (showDebugMsg)
+			{
+				Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
+				Control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
+				System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize(" + (availWidth > int.MaxValue / 3 ? "infinity" : availWidth.ToString()) + "," + (availHeight > int.MaxValue / 3 ? "infinity" : availHeight.ToString()) + ") exit (" + _lastSizeRequest.Value + ")");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Visibility=["+Control.Visibility+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.TextFormatted=["+Control.TextFormatted.ToString()+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.TextSize=["+Control.TextSize+"]");
+				//System.Diagnostics.Debug.WriteLine("\t\tControl.ClipBounds=["+Control.ClipBounds.Width()+","+Control.ClipBounds.Height()+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Width["+Control.Width+"]  .Height=["+Control.Height+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.GetX["+Control.GetX()+"]  .GetY["+Control.GetY()+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Alpha["+Control.Alpha+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Background["+Control.Background+"]");
+				//System.Diagnostics.Debug.WriteLine("\t\tControl.Elevation["+Control.Elevation+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Enabled["+Control.Enabled+"]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.Error[" + Control.Error + "]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.IsOpaque[" + Control.IsOpaque + "]");
+				System.Diagnostics.Debug.WriteLine("\t\tControl.IsShown[" + Control .IsShown+ "]");
+				//Control.BringToFront();
+				System.Diagnostics.Debug.WriteLine("\t\t");			
+			}
 			return _lastSizeRequest.Value;
 		}
 
@@ -388,10 +438,19 @@ namespace Forms9Patch.Droid
 				return;
 
 			//if (c.IsDefault)
-			if (c==Xamarin.Forms.Color.Default)
+			if (c == Xamarin.Forms.Color.Default)
+			{
+				if (showDebugMsg)
+					System.Diagnostics.Debug.WriteLine("[" + elementText + "] UpdateColor: _labelTextColorDefault");
 				Control.SetTextColor(_labelTextColorDefault);
+			}
 			else
+			{
+				if (showDebugMsg)
+					System.Diagnostics.Debug.WriteLine("[" + elementText + "] UpdateColor: c.ToAndroid()");
 				Control.SetTextColor(c.ToAndroid());
+			}
+			Control.SetBackgroundColor(Android.Graphics.Color.Pink);
 		}
 
 		void UpdateFont(bool noDelay = false)
