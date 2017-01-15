@@ -61,6 +61,16 @@ namespace Forms9Patch.Droid
 		int _lastDesiredSizeWidthConstraint = -1;
 		int _lastDesiredSizeHeightConstraint = -1;
 
+
+		void ForceNativeLayout()
+		{
+			var scale = Forms.Context.Resources.DisplayMetrics.Density;
+			ViewGroup.Layout((int)(Element.Bounds.Left * scale), (int)(Element.Bounds.Top * scale), (int)(Element.Bounds.Right * scale), (int)(Element.Bounds.Bottom * scale));
+			System.Diagnostics.Debug.WriteLine("ForceNativeLayout ["+elementText+"] Bounds=["+Element.Bounds.Left+","+Element.Bounds.Top+ "," + Element.Bounds.Width+ "," + Element.Bounds.Height+"]");
+			//System.Diagnostics.Debug.WriteLine ($"\tPadding=[{Element.Padding.Left},{Element.Padding.Top},{Element.Padding.Right},{Element.Padding.Bottom}]");
+		}
+
+
 		Xamarin.Forms.Size LabelXamarinSize(double widthConstraint, double fontSize)
 		{
 			var layout = LabelLayout((widthConstraint > double.MaxValue/3 ? int.MaxValue/2 : (int)widthConstraint), (float)fontSize);
@@ -360,6 +370,11 @@ namespace Forms9Patch.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
 		{
 			base.OnElementChanged(e);
+			if (e.OldElement != null)
+				e.OldElement.ForceNativeLayout -= ForceNativeLayout;
+			if (e.NewElement != null)
+				e.NewElement.ForceNativeLayout += ForceNativeLayout;
+			
 			if (Control == null)
 			{
 				//_view = new TextView(Context);
@@ -389,6 +404,17 @@ namespace Forms9Patch.Droid
 			base.OnLayout(changed, l, t, r, b);
 		}
 
+		protected override void DrawableStateChanged()
+		{
+			base.DrawableStateChanged();
+			System.Diagnostics.Debug.WriteLine("DrawableStateChanged["+elementText+"]");
+		}
+
+		protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+		{
+			base.OnSizeChanged(w, h, oldw, oldh);
+			System.Diagnostics.Debug.WriteLine("OnSizeChanged[" + elementText + "]");
+		}
 
 
 		/// <summary>

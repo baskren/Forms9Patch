@@ -4,6 +4,7 @@ using Xamarin.Forms;
 
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
+using Forms9Patch;
 
 [assembly: AssemblyTitle("Forms9Patch.Droid")]
 [assembly: AssemblyDescription("")]
@@ -34,3 +35,4 @@ using Xamarin.Forms;
 [assembly: ExportRenderer(typeof(Forms9Patch.Grid), typeof(Forms9Patch.Droid.GridRenderer))]
 [assembly: ExportRenderer(typeof(Forms9Patch.AbsoluteLayout), typeof(Forms9Patch.Droid.AbsoluteLayoutRenderer))]
 [assembly: ExportRenderer(typeof(Forms9Patch.BubbleLayout), typeof(Forms9Patch.Droid.BubbleLayoutRenderer))]
+[assembly: ExportRenderer(typeof(Forms9Patch.ManualLayout), typeof(Forms9Patch.Droid.ManualLayoutRenderer))]
