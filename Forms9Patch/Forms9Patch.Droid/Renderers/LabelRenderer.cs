@@ -93,7 +93,8 @@ namespace Forms9Patch.Droid
 
 		StaticLayout LabelLayout(int widthConstraint, float fontSize)
 		{
-			
+			if (Element == null)
+				return null;
 			ICharSequence text;
 			if (Element.Text != null)
 				text = new Java.Lang.String(Element.Text);
@@ -476,7 +477,7 @@ namespace Forms9Patch.Droid
 					System.Diagnostics.Debug.WriteLine("[" + elementText + "] UpdateColor: c.ToAndroid()");
 				Control.SetTextColor(c.ToAndroid());
 			}
-			Control.SetBackgroundColor(Android.Graphics.Color.Pink);
+			//Control.SetBackgroundColor(Android.Graphics.Color.Pink);
 		}
 
 		void UpdateFont(bool noDelay = false)
