@@ -239,7 +239,7 @@ namespace TestProject
 			bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;
 			addItemButton.Tapped += (sender, e) =>
 			{
-				stackLayout.Children.Add(new Label { Text = "X," });
+				stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
 				//bubble.WidthRequest = 1;
 				stackLayout.WidthRequest = -1;
 				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
