@@ -146,7 +146,6 @@ namespace Forms9Patch.iOS
 			return new CGRect (rect.X + left, rect.Y + top, rect.Width - left - right, rect.Height - top - bottom);
 		}
 
-
 		static CGPath PerimeterPath(BubbleLayout element, CGRect rect, float radius) {
 
 			if (element.PointerDirection == PointerDirection.None)

@@ -8,7 +8,6 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-//[assembly: ResolutionGroupName("Forms9Patch")]
 [assembly: ExportEffect(typeof(Forms9Patch.iOS.CustomFontEffect), "CustomFontEffect")]
 namespace Forms9Patch.iOS
 {

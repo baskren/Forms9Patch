@@ -14,9 +14,9 @@ namespace Forms9Patch
 		/// <param name="target">Target.</param>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
-		public static Toast Create(VisualElement target, string title, string text)
+		public static Toast Create(string title, string text)
 		{
-			var toast = new Toast(target) { Title = title, Text = text };
+			var toast = new Toast() { Title = title, Text = text };
 			toast.IsVisible = true;
 			return toast;
 		}
@@ -118,7 +118,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
 		/// </summary>
-		public Toast(VisualElement target) : base (target)
+		public Toast(VisualElement target=null) : base (target)
 		{
 			_okButton.BackgroundColor = OkButtonColor;
 			_okButton.FontColor = OkTextColor;

@@ -86,6 +86,7 @@ namespace Forms9Patch.iOS
 		}
 
 
+
 		void OnBackgroundImagePropertyChanged(object sender, PropertyChangedEventArgs e) {
 			// No Wait or await here because we want RenderBackgroundImage to run in parallel
 #pragma warning disable 4014

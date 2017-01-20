@@ -20,9 +20,9 @@ namespace Forms9Patch
 		/// <param name="cancelButtonColor">Cancel button color.</param>
 		/// <param name="okTextColor">Ok text color.</param>
 		/// <param name="cancelTextColor">Cancel text color.</param>
-		public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
+		public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
 		{
-			var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText};
+			var popup = new PermissionPopup() { Title = title, Text = text, OkText = okText, CancelText = cancelText};
 			if (okTextColor != default(Color))
 				popup.OkTextColor = okTextColor;
 			if (okButtonColor != default(Color))
@@ -187,7 +187,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
 		/// </summary>
 		/// <param name="target">Target.</param>
-		public PermissionPopup(VisualElement target) : base (target)
+		public PermissionPopup(VisualElement target=null) : base (target)
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
 			_cancelButton.FontColor = CancelTextColor;

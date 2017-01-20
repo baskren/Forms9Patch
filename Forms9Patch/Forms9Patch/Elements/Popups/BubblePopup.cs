@@ -136,6 +136,11 @@ namespace Forms9Patch
 				PointerCornerRadius = PointerCornerRadius
 			};
 			ContentView = _bubbleLayout;
+			target.SizeChanged += (sender, e) =>
+			{
+				var b = Application.Current.MainPage.Bounds;
+				LayoutChildren(b.X,b.Y, b.Width, b.Height);
+			};
 		}
 
 
@@ -213,6 +218,7 @@ namespace Forms9Patch
 		}
 
 		Tuple<double,float> StartAndPointerLocation(double width, double targetStart, double targetWidth, double availableWidth) {
+			System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
 			_pwfWidth = width;
 			_pwfTargetStart = targetStart;
 			_pwfTargetWidth = targetWidth;
@@ -249,6 +255,7 @@ namespace Forms9Patch
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
 			base.LayoutChildren(x,y,width,height);
+			System.Diagnostics.Debug.WriteLine("LayoutChildren("+x+","+y+","+width+","+height+")");
 			if (width > 0 && height > 0) {
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);

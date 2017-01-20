@@ -14,6 +14,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -123,7 +124,6 @@
     <Compile Include="Extensions\ImageViewManagerExtension.cs" />
     <Compile Include="Extensions\LineBreakModeExtension.cs" />
     <Compile Include="Extensions\MeasureSpecFactory.cs" />
-    <Compile Include="Extensions\PageRendererExtensions.cs" />
     <Compile Include="Extensions\PathExtensions.cs" />
     <Compile Include="Models\BaselineSpan.cs" />
     <Compile Include="Models\ByteBuffer.cs" />
@@ -144,7 +144,6 @@
     <Compile Include="Renderers\ImageViewManager.cs" />
     <Compile Include="Renderers\LabelRenderer.cs" />
     <Compile Include="Renderers\LayoutRenderer&lt;T&gt;.cs" />
-    <Compile Include="Renderers\PopupBaseRenderer.cs" />
     <Compile Include="Renderers\RelativeLayout.cs" />
     <Compile Include="Renderers\StackLayoutRenderer.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
@@ -166,7 +165,6 @@
     <Compile Include="..\Forms9Patch\Extensions\INinePatchExtension.cs">
       <Link>Extensions\INinePatchExtension.cs</Link>
     </Compile>
-    <Compile Include="Effects\PopupEffect.cs" />
     <Compile Include="Effects\BackgroundImageEffect.cs" />
     <Compile Include="Effects\CustomFontEffect.cs" />
     <Compile Include="ListView\Renderers\ListViewRenderer.cs" />

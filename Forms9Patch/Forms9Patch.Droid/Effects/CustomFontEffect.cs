@@ -8,7 +8,6 @@ using Android.Graphics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-//[assembly: ResolutionGroupName("Forms9Patch")]
 [assembly: ExportEffect(typeof(Forms9Patch.Droid.CustomFontEffect), "CustomFontEffect")]
 namespace Forms9Patch.Droid
 {

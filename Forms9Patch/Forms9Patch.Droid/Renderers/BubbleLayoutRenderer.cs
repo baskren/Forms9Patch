@@ -22,10 +22,12 @@ namespace Forms9Patch.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<BubbleLayout> e)
 		{
 			base.OnElementChanged(e);
+			/*
 			if (e.OldElement != null)
 				e.OldElement.ForceNativeLayout -= ForceNativeLayout;
 			if (e.NewElement != null)
 				e.NewElement.ForceNativeLayout += ForceNativeLayout;
+				*/
 			if (e.NewElement != null) {
 				Background = new BubbleDrawable (e.NewElement);
 			}

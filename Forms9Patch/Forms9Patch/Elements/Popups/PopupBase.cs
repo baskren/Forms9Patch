@@ -2,7 +2,6 @@
 using System;
 using FormsGestures;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Forms9Patch
 {
@@ -13,23 +12,6 @@ namespace Forms9Patch
 	public abstract class PopupBase : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IDisposable //Xamarin.Forms.Layout<View>, IRoundedBox
 
 	{
-		#region Static Properties
-		static readonly Stack<PopupBase> Popups = new Stack<PopupBase>();
-
-		/// <summary>
-		/// Cancels the top popup.
-		/// </summary>
-		/// <returns><c>true</c>, if top popup was canceled, <c>false</c> otherwise.</returns>
-		public static bool CancelTopPopup()
-		{
-			if (Popups.Count > 0)
-			{
-				Popups.Pop().Cancel();
-				return true;
-			}
-			return false;
-		}
-		#endregion
 
 
 		#region Invalid Parent Properties
@@ -95,48 +77,6 @@ namespace Forms9Patch
 
 
 		#region Popup Properties
-		internal static readonly BindableProperty PopupProperty = BindableProperty.Create("Popup", typeof(PopupBase), typeof(PopupBase), null);
-
-		/*
-		/// <summary>
-		/// The host page property.
-		/// </summary>
-		internal static readonly BindableProperty HostProperty = BindableProperty.Create("Host", typeof(Page), typeof(PopupBase), default(Page));
-		/// <summary>
-		/// Gets or sets the popup's host page.
-		/// </summary>
-		/// <value>The host page (null defaults to MainPage).</value>
-		internal Page HostPage
-		{
-			get { return (Page)GetValue(HostProperty); }
-			set
-			{
-				
-				var currentPage = HostPage;
-				if (currentPage != value)
-				{
-					
-					//this seems to work on iOS  and only on BubblePopup on Android.  Bubble Popup has margin problem when first rendered - an orientation change fixes it
-					var effect = Effect.Resolve("Forms9Patch.PopupEffect");  // effects are needed on iOS but not on Andriod
-					HostPage?.Effects.Remove(effect);
-					var pageControl = HostPage as IPageController;
-					if (pageControl != null && pageControl.InternalChildren.Contains(this))
-						pageControl.InternalChildren.Remove(this);
-					SetValue(HostProperty, value);
-					pageControl = HostPage as IPageController;
-					var navPage = HostPage as NavigationPage;
-					if (navPage!=null)
-						pageControl = pageControl.InternalChildren.Last() as IPageController;
-					if (pageControl != null && !pageControl.InternalChildren.Contains(this))
-						pageControl.InternalChildren.Add(this);
-
-					HostPage?.Effects.Add(effect);
-					if (HostPage != null && (!effect.IsAttached || effect.ToString()=="Xamarin.Forms.NullEffect") )
-						System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");
-				}
-			}
-		}
-		*/
 
 		/// <summary>
 		/// The target property.
@@ -337,7 +277,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
 		/// </summary>
 		/// <param name="target">Page or Element on Page in which Popup will be presented.</param>
-		internal PopupBase(VisualElement target)
+		internal PopupBase(VisualElement target=null)
 		{
 			_rootPage = Application.Current.MainPage as RootPage;
 			if (_rootPage == null)
@@ -447,70 +387,16 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == PageOverlayColorProperty.PropertyName)
 				_pageOverlay.BackgroundColor = PageOverlayColor;
-			//if (propertyName == TargetProperty.PropertyName)
-			//	HostPage = Target.HostingPage();
-			//if (propertyName == "Parent")
-			//	HostPage = Target.HostingPage();
-			if (propertyName == IsVisibleProperty.PropertyName)
+			else if (propertyName == IsVisibleProperty.PropertyName)
 			{
-				/*
-				if (IsVisible)
-					Popups.Push(this);
-				else if (Popups.Contains(this))
-				{
-					var popup = Popups.Pop();
-					while (popup != this)
-					{
-						popup.IsVisible = false;
-						popup = Popups.Pop();
-					}
-				}
-
 				if (IsVisible)
 				{
-					if (HostPage == null)
-						HostPage = Application.Current.MainPage;
-					else
-						System.Diagnostics.Debug.WriteLine("this shouldn't happen");
-					
-					ContentView.TranslationX = 0;
-					ContentView.TranslationY = 0;
-					//System.Diagnostics.Debug.WriteLine ("======================================================================");
-					if (Target != null && Target != HostPage)
-						Target.SizeChanged += OnTargetSizeChanged;
-					Parent = HostPage;
-					HostPage.SetValue(PopupProperty, this);
-					HostPage.SizeChanged += OnTargetSizeChanged;
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion enter");
-					LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion exit / ForceNativeLayout?Invoke() enter");
-					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-					//ForceNativeLayout?.Invoke();  // with the changes made to date, this seems to not to be needed!
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) ForceNativeLayout?Invoke() exit");
-				}
-				else {
-					if (Target != null && Target != HostPage)
-						Target.SizeChanged -= OnTargetSizeChanged;
-					if (HostPage != null)
-					{
-						HostPage.SetValue(PopupProperty, null);
-						HostPage.SizeChanged -= OnTargetSizeChanged;
-						HostPage = null;
-					}
-					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, -1, -1));
-				}
-				*/
-				if (IsVisible)
-				{
-
 					ContentView.TranslationX = 0;
 					ContentView.TranslationY = 0;
 					_rootPage.AddPopup(this);
 				}
 				else
-				{
 					_rootPage.RemovePopup(this);
-				}
 			}
 			else if (propertyName == PaddingProperty.PropertyName)
 				_roundedBox.Padding = Padding;
@@ -528,32 +414,15 @@ namespace Forms9Patch
 				_roundedBox.ShadowInverted = ShadowInverted;
 		}
 
+
 		/*
-		void OnTargetSizeChanged(object sender, EventArgs e)
-		{
-			//Host = Host ?? Application.Current.MainPage;			
-			if (HostPage != null)
-			{
-				LayoutChildIntoBoundingRegion(this, new Rectangle(-1, -1, HostPage.Bounds.Width + 1, HostPage.Bounds.Height + 1));
-				ForceNativeLayout?.Invoke();
-				Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-				{
-					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
-					ForceNativeLayout?.Invoke();
-					return false;
-				});
-
-			}
-		}
-		*/
-
-
 		internal Action ForceNativeLayout { get; set; }
 
 		public void Relayout()
 		{
 			ForceNativeLayout?.Invoke();
 		}
+		*/
 
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{

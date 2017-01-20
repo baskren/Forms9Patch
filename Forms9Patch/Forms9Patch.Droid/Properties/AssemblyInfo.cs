@@ -21,6 +21,8 @@ using Forms9Patch;
 
 [assembly: AssemblyVersion("1.0.0")]
 
+[assembly: ResolutionGroupName("Forms9Patch")]
+
 // The following attributes are used to specify the signing key for the assembly, 
 // if desired. See the Mono documentation for more information about signing.
 

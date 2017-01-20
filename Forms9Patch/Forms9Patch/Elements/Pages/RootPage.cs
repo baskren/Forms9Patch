@@ -14,6 +14,7 @@ namespace Forms9Patch
 	/// </summary>
 	public class RootPage : Page
 	{
+		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
 		/// </summary>
