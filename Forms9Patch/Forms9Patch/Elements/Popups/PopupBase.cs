@@ -116,7 +116,7 @@ namespace Forms9Patch
 				{
 					
 					//this seems to work on iOS  and only on BubblePopup on Android.  Bubble Popup has margin problem when first rendered - an orientation change fixes it
-					var effect = Effect.Resolve("Forms9Patch.PopupEffect");
+					var effect = Effect.Resolve("Forms9Patch.PopupEffect");  // effects are needed on iOS but not on Andriod
 					HostPage?.Effects.Remove(effect);
 					var pageControl = HostPage as IPageController;
 					if (pageControl != null && pageControl.InternalChildren.Contains(this))
@@ -477,7 +477,7 @@ namespace Forms9Patch
 					LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
 					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion exit / ForceNativeLayout?Invoke() enter");
 					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-					ForceNativeLayout?.Invoke();
+					//ForceNativeLayout?.Invoke();  // with the changes made to date, this seems to not to be needed!
 					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) ForceNativeLayout?Invoke() exit");
 				}
 				else {
