@@ -262,7 +262,8 @@ namespace Forms9Patch
 				Rectangle bounds;
 				Rectangle targetBounds=Rectangle.Zero;
 				if (Target != null) {
-					targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
+					//targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
+					targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
 					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
 					var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength;
 					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength;

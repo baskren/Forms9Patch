@@ -97,6 +97,7 @@ namespace Forms9Patch
 		#region Popup Properties
 		internal static readonly BindableProperty PopupProperty = BindableProperty.Create("Popup", typeof(PopupBase), typeof(PopupBase), null);
 
+		/*
 		/// <summary>
 		/// The host page property.
 		/// </summary>
@@ -135,6 +136,7 @@ namespace Forms9Patch
 				}
 			}
 		}
+		*/
 
 		/// <summary>
 		/// The target property.
@@ -312,7 +314,6 @@ namespace Forms9Patch
 		#endregion
 
 
-
 		#region Events
 		/// <summary>
 		/// Occurs when popup has been cancelled.
@@ -326,6 +327,8 @@ namespace Forms9Patch
 		internal IRoundedBox _roundedBox;
 		internal BoxView _pageOverlay;
 		readonly Listener _listener;
+		readonly RootPage _rootPage;
+		internal DateTime PresentedAt;
 		#endregion
 
 
@@ -336,6 +339,10 @@ namespace Forms9Patch
 		/// <param name="target">Page or Element on Page in which Popup will be presented.</param>
 		internal PopupBase(VisualElement target)
 		{
+			_rootPage = Application.Current.MainPage as RootPage;
+			if (_rootPage == null)
+				throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
+			
 			IsVisible = false;
 			_pageOverlay = new BoxView
 			{
@@ -446,6 +453,7 @@ namespace Forms9Patch
 			//	HostPage = Target.HostingPage();
 			if (propertyName == IsVisibleProperty.PropertyName)
 			{
+				/*
 				if (IsVisible)
 					Popups.Push(this);
 				else if (Popups.Contains(this))
@@ -491,7 +499,18 @@ namespace Forms9Patch
 					}
 					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, -1, -1));
 				}
+				*/
+				if (IsVisible)
+				{
 
+					ContentView.TranslationX = 0;
+					ContentView.TranslationY = 0;
+					_rootPage.AddPopup(this);
+				}
+				else
+				{
+					_rootPage.RemovePopup(this);
+				}
 			}
 			else if (propertyName == PaddingProperty.PropertyName)
 				_roundedBox.Padding = Padding;
@@ -509,6 +528,7 @@ namespace Forms9Patch
 				_roundedBox.ShadowInverted = ShadowInverted;
 		}
 
+		/*
 		void OnTargetSizeChanged(object sender, EventArgs e)
 		{
 			//Host = Host ?? Application.Current.MainPage;			
@@ -525,6 +545,7 @@ namespace Forms9Patch
 
 			}
 		}
+		*/
 
 
 		internal Action ForceNativeLayout { get; set; }
@@ -538,7 +559,7 @@ namespace Forms9Patch
 		{
 			if (width > 0 && height > 0)
 			{
-				LayoutChildIntoBoundingRegion(PageOverlay, HostPage.Bounds);
+				LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x,y,width,height));
 			}
 			else
 				ContentView.IsVisible = false;

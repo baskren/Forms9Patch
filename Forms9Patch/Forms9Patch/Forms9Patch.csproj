@@ -10,6 +10,7 @@
     <AssemblyName>Forms9Patch</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -166,6 +167,7 @@
     <Compile Include="Interfaces\IPrintService.cs" />
     <Compile Include="Elements\Popups\TargetedToast.cs" />
     <Compile Include="Interfaces\IForceNativeLayout.cs" />
+    <Compile Include="Elements\Pages\RootPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -184,6 +186,7 @@
     <Folder Include="Elements\Popups\" />
     <Folder Include="Elements\Buttons\" />
     <Folder Include="Elements\ListView\TemplateSelectors\" />
+    <Folder Include="Elements\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />

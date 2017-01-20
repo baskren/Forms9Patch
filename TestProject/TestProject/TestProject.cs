@@ -96,7 +96,7 @@ namespace TestProject
 				//MainPage = new ImageCodePage();
 
 				//MainPage = new ZenmekPage();
-				MainPage = navPage;
+				MainPage = new Forms9Patch.RootPage(navPage);
 				//MainPage = new ModalPopupOnMasterDetailPage();
 			} else {
 				// The root page of your application
@@ -151,8 +151,6 @@ namespace TestProject
 					Content = fancyLabel
 				};
 				*/
-
-
 
 
 
