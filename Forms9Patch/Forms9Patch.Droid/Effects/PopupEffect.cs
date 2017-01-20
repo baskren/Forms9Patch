@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ResolutionGroupName("Forms9Patch")]
-[assembly: ExportEffect(typeof(Forms9Patch.Droid.PopupEffect), "PopupEffect")]
+//[assembly: ExportEffect(typeof(Forms9Patch.Droid.PopupEffect), "PopupEffect")]
 namespace Forms9Patch.Droid
 {
 	/// <summary>

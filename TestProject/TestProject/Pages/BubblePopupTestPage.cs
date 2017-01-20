@@ -253,6 +253,8 @@ namespace TestProject
 			bubble.SetBinding (Forms9Patch.BubblePopup.PointerCornerRadiusProperty, "PointerCornerRadius");
 			bubble.BindingContext = this;
 
+			const bool Relayout = false;
+
 
 			bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;
 			addItemButton.Tapped += (sender, e) =>
@@ -268,7 +270,7 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android)
+				if (Device.OS == TargetPlatform.Android && Relayout)
 				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
 					{
 						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
@@ -300,7 +302,7 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android)
+				if (Device.OS == TargetPlatform.Android && Relayout)
 				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
 					{
 						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
@@ -331,7 +333,7 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android)
+				if (Device.OS == TargetPlatform.Android && Relayout)
 				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
 					{
 						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added

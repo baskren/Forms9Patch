@@ -2,6 +2,7 @@
 using System;
 using FormsGestures;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -109,14 +110,27 @@ namespace Forms9Patch
 			get { return (Page)GetValue(HostProperty); }
 			set
 			{
+				
 				var currentPage = HostPage;
 				if (currentPage != value)
 				{
+					
+					//this seems to work on iOS  and only on BubblePopup on Android.  Bubble Popup has margin problem when first rendered - an orientation change fixes it
 					var effect = Effect.Resolve("Forms9Patch.PopupEffect");
 					HostPage?.Effects.Remove(effect);
+					var pageControl = HostPage as IPageController;
+					if (pageControl != null && pageControl.InternalChildren.Contains(this))
+						pageControl.InternalChildren.Remove(this);
 					SetValue(HostProperty, value);
+					pageControl = HostPage as IPageController;
+					var navPage = HostPage as NavigationPage;
+					if (navPage!=null)
+						pageControl = pageControl.InternalChildren.Last() as IPageController;
+					if (pageControl != null && !pageControl.InternalChildren.Contains(this))
+						pageControl.InternalChildren.Add(this);
+
 					HostPage?.Effects.Add(effect);
-					if (HostPage != null && !effect.IsAttached)
+					if (HostPage != null && (!effect.IsAttached || effect.ToString()=="Xamarin.Forms.NullEffect") )
 						System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");
 				}
 			}
