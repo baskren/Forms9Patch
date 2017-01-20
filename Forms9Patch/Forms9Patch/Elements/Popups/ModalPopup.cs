@@ -108,44 +108,8 @@ namespace Forms9Patch {
 			base.OnPropertyChanged (propertyName);
 			if (_frame == null)
 				return;
-			if (propertyName == IsVisibleProperty.PropertyName) {
-				if (HostPage == null)
-					HostPage = Application.Current.MainPage;			
-				if (HostPage != null) {
-					if (IsVisible) {
-						Content.TranslationX = 0;
-						Content.TranslationY = 0;
-						HostPage.SizeChanged += OnHostSizeChanged;
-						Parent = HostPage;
-						HostPage.SetValue (PopupProperty, this);
-						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
-						// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-						ForceNativeLayout?.Invoke ();
-					} else {
-						HostPage.SizeChanged -= OnHostSizeChanged;
-						HostPage.SetValue (PopupProperty, null);
-						LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, -1, -1));
-					}
-				}
-			}	
 		}
 
-		void OnHostSizeChanged(object sender, EventArgs e) {
-			//Host = Host ?? Application.Current.MainPage;			
-			if (HostPage != null) {
-				//LayoutChildIntoBoundingRegion (this, new Rectangle (0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
-				LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
-				// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-				ForceNativeLayout?.Invoke ();
-				Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-				{
-					//LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
-					LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
-					ForceNativeLayout?.Invoke();
-					return false;
-				});
-			}
-		}
 
 
 		/// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
@@ -159,24 +123,17 @@ namespace Forms9Patch {
 		/// still call the base method and modify its calculated results.</remarks>
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
-			if (width > 0 && height > 0) {
-				//_frame.IsVisible = true;
+			base.LayoutChildren(x, y, width, height);
 
-				//LayoutChildIntoBoundingRegion (PageOverlay, new Rectangle (x, y, width, height));
-				LayoutChildIntoBoundingRegion(PageOverlay, HostPage.Bounds);
+			if (width > 0 && height > 0) {
 
 				_frame.IsVisible = true;
 				_frame.Content.IsVisible = true;
 				RoundedBoxBase.UpdateBasePadding (_frame, true);
 				var frameShadow = BubbleLayout.ShadowPadding (_frame);
 
-				// new approach
-				//var request = _frame.Measure(Host.Bounds.Width, Host.Bounds.Height, MeasureFlags.IncludeMargins);
-				//var rboxSize = new Size(request.Request.Width, request.Request.Height);
-
-				// old approach
-				var availContentWidth = HostPage.Bounds.Width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - frameShadow.HorizontalThickness;
-				var availContentHeight = HostPage.Bounds.Height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - frameShadow.VerticalThickness;
+				var availContentWidth = width - Margin.HorizontalThickness - _frame.Padding.HorizontalThickness - frameShadow.HorizontalThickness;
+				var availContentHeight = height - Margin.VerticalThickness - _frame.Padding.VerticalThickness - frameShadow.VerticalThickness;
 				var request = _frame.Content.Measure(availContentWidth, availContentHeight, MeasureFlags.None);  //
 				var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availContentWidth : Math.Min(request.Request.Width,availContentWidth) + _frame.Padding.HorizontalThickness + frameShadow.HorizontalThickness);
 				var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availContentHeight : Math.Min(request.Request.Height,availContentHeight) +  _frame.Padding.VerticalThickness + frameShadow.VerticalThickness);
@@ -192,9 +149,7 @@ namespace Forms9Patch {
 				_frame.VerticalOptions = LayoutOptions.Fill;
 
 				LayoutChildIntoBoundingRegion (_frame, bounds);
-				//_frame.ForceLayout ();
-			} else
-				_frame.IsVisible = false;
+			} 
 		}
 
 

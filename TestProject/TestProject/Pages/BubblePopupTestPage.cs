@@ -190,6 +190,22 @@ namespace TestProject
 				FontColor = Color.Red
 			};
 
+			var enlargeItemsButton = new Forms9Patch.MaterialButton
+			{
+				Text = "Englarge Items",
+				OutlineColor = Color.Black,
+				OutlineWidth = 1,
+				FontColor = Color.Black
+			};
+
+			var shrinkItems = new Forms9Patch.MaterialButton
+			{
+				Text = "Shrink Items",
+				OutlineColor = Color.Black,
+				OutlineWidth = 1,
+				FontColor = Color.Black
+			};
+
 			var stackLayout = new Forms9Patch.StackLayout
 			{
 				Orientation = StackOrientation.Horizontal,
@@ -221,7 +237,9 @@ namespace TestProject
 						pointerCornerRadiusSlider,
 						bubbleButton,
 						addItemButton,
-						removeItemButton
+						removeItemButton,
+						enlargeItemsButton,
+						shrinkItems
 					}
 				},
 			};
@@ -239,7 +257,10 @@ namespace TestProject
 			bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;
 			addItemButton.Tapped += (sender, e) =>
 			{
-				stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
+				var count = stackLayout.Children.Count();
+				stackLayout.Children.Clear();
+				for (int i = 0; i <= count;i++)
+					   stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
 				//bubble.WidthRequest = 1;
 				stackLayout.WidthRequest = -1;
 				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
@@ -247,7 +268,40 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				Device.StartTimer(TimeSpan.FromMilliseconds(40), () =>
+				if (Device.OS == TargetPlatform.Android)
+				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
+					{
+						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
+						//bubble.Relayout(); // this won't do it.
+
+						return false;
+					});
+				//bubble.CallMethod("ForceNativeLayout", new object[] { });
+
+			};
+
+			enlargeItemsButton.Tapped += (sender, e) =>
+			{
+				var count = stackLayout.Children.Count();
+				var width = 1;
+				if (count > 0)
+					width = ((Label)stackLayout.Children[0]).Text.Length;
+				string text = "";
+				for (int i = 0; i < width; i++)
+					text += "X";
+				text += ",";
+				stackLayout.Children.Clear();
+				for (int i = 0; i < count; i++)
+					stackLayout.Children.Add(new Label { Text = text, TextColor = Color.Green });
+				//bubble.WidthRequest = 1;
+				stackLayout.WidthRequest = -1;
+				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
+				System.Diagnostics.Debug.WriteLine("WIDTH=[" + stackLayout.Width + "] size.Request.Width=[" + size.Request.Width + "]");
+				//stackLayout.WidthRequest = size.Request.Width + 1;
+				//this.CallMethod("InvalidateMeasure", new object[] {});
+				//contentView.WidthRequest = size.Request.Width;
+				if (Device.OS == TargetPlatform.Android)
+				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
 					{
 						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
 						return false;
@@ -255,6 +309,38 @@ namespace TestProject
 				//bubble.CallMethod("ForceNativeLayout", new object[] { });
 
 			};
+
+			shrinkItems.Tapped += (sender, e) =>
+			{
+				var count = stackLayout.Children.Count();
+				var width = 1;
+				if (count > 0)
+					width = ((Label)stackLayout.Children[0]).Text.Length;
+				string text = "";
+				for (int i = 0; i < width-2; i++)
+					text += "X";
+				text += ",";
+				System.Diagnostics.Debug.WriteLine("Text=["+text+"]");
+				stackLayout.Children.Clear();
+				for (int i = 0; i < count; i++)
+					stackLayout.Children.Add(new Label { Text = text, TextColor = Color.Green });
+				//bubble.WidthRequest = 1;
+				stackLayout.WidthRequest = -1;
+				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
+				System.Diagnostics.Debug.WriteLine("WIDTH=[" + stackLayout.Width + "] size.Request.Width=[" + size.Request.Width + "]");
+				//stackLayout.WidthRequest = size.Request.Width + 1;
+				//this.CallMethod("InvalidateMeasure", new object[] {});
+				//contentView.WidthRequest = size.Request.Width;
+				if (Device.OS == TargetPlatform.Android)
+				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
+					{
+						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
+						return false;
+					});
+				//bubble.CallMethod("ForceNativeLayout", new object[] { });
+
+			};
+
 			removeItemButton.Tapped += (sender, e) =>
 			{
 				stackLayout.Children.Remove(stackLayout.Children.Last());

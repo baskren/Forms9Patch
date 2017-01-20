@@ -19,7 +19,7 @@ namespace Forms9Patch.Droid
 		/// <remarks>To be added.</remarks>
 		protected override void OnAttached ()
 		{
-			//System.Diagnostics.Debug.WriteLine ("PopupEffect ATTACHED!!!!");
+			System.Diagnostics.Debug.WriteLine ("PopupEffect ATTACHED!!!!");
 		}
 
 		/// <summary>

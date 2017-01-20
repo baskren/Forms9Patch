@@ -23,16 +23,18 @@ namespace Forms9Patch
 				page = element as Page;
 			}
 			Page lastSoloPage = page;
+			/*
 			if (page != null)
 			{
 				// ok we have a page ... is it the right kind?
 				while (page != null && page.Parent != null)
 				{
-					if (!(page is MasterDetailPage /* && Device.OS == TargetPlatform.Android*/))
+					if (!(page is MasterDetailPage ))
 						lastSoloPage = page;
 					page = page.Parent as Page;
 				}
 			}
+			*/
 			return lastSoloPage;
 		}
 

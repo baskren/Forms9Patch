@@ -155,36 +155,6 @@ namespace Forms9Patch
 			base.OnPropertyChanged (propertyName);
 			if (_bubbleLayout == null)
 				return;
-			if (propertyName == IsVisibleProperty.PropertyName)
-			{
-				if (HostPage == null)
-					HostPage = Application.Current.MainPage;
-				if (IsVisible)
-				{
-					Content.TranslationX = 0;
-					Content.TranslationY = 0;
-					//System.Diagnostics.Debug.WriteLine ("======================================================================");
-					if (Target != null)
-						Target.SizeChanged += OnTargetSizeChanged;
-					Parent = HostPage;
-					HostPage.SetValue(PopupProperty, this);
-					HostPage.SizeChanged += OnTargetSizeChanged;
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion enter");
-					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion exit / ForceNativeLayout?Invoke() enter");
-					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
-					ForceNativeLayout?.Invoke();
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) ForceNativeLayout?Invoke() exit");
-				}
-				else {
-					if (Target != null)
-						Target.SizeChanged -= OnTargetSizeChanged;
-					HostPage.SetValue(PopupProperty, null);
-					HostPage.SizeChanged -= OnTargetSizeChanged;
-					_bubbleLayout.PointerDirection = PointerDirection.None;
-					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, -1, -1));
-				}
-			}
 			else if (propertyName == PointerLengthProperty.PropertyName)
 				_bubbleLayout.PointerLength = PointerLength;
 			else if (propertyName == PointerTipRadiusProperty.PropertyName)
@@ -194,20 +164,6 @@ namespace Forms9Patch
 			
 		}
 
-
-		void OnTargetSizeChanged(object sender, EventArgs e) {
-			//Host = Host ?? Application.Current.MainPage;			
-			if (HostPage != null) {
-				LayoutChildIntoBoundingRegion (this, new Rectangle(-1,-1,HostPage.Bounds.Width+1,HostPage.Bounds.Height+1));
-				ForceNativeLayout?.Invoke ();
-				Device.StartTimer (TimeSpan.FromMilliseconds(10), () => {
-					LayoutChildIntoBoundingRegion (this, new Rectangle(0,0,HostPage.Bounds.Width,HostPage.Bounds.Height));
-					ForceNativeLayout?.Invoke ();
-					return false;
-				});
-
-			}
-		}
 
 		double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;
 		double positionWeightingFunction(double start) {
@@ -292,11 +248,11 @@ namespace Forms9Patch
 		/// still call the base method and modify its calculated results.</remarks>
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
+			base.LayoutChildren(x,y,width,height);
 			if (width > 0 && height > 0) {
-				LayoutChildIntoBoundingRegion (PageOverlay, HostPage.Bounds);
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
-				var request = _bubbleLayout.Content.Measure (HostPage.Bounds.Width, HostPage.Bounds.Height);
+				var request = _bubbleLayout.Content.Measure (width, height);
 				//var request = _bubbleLayout.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
 				var rboxSize = new Size (request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
 
@@ -308,11 +264,11 @@ namespace Forms9Patch
 				if (Target != null) {
 					targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
 					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
-					var reqSpaceToRight = HostPage.Bounds.Width - targetBounds.Right - rboxSize.Width - PointerLength;
+					var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength;
 					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength;
-					var reqSpaceBelow = HostPage.Bounds.Height - targetBounds.Bottom - rboxSize.Height - PointerLength;
-					var reqHzSpace = HostPage.Bounds.Width - rboxSize.Width;
-					var reqVtSpace = HostPage.Bounds.Height - rboxSize.Height;
+					var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength;
+					var reqHzSpace = width - rboxSize.Width;
+					var reqVtSpace = height - rboxSize.Height;
 
 
 					double space = 0;
@@ -355,36 +311,30 @@ namespace Forms9Patch
 				_bubbleLayout.PointerDirection = pointerDir;
 				_bubbleLayout.IsVisible = true;
 				if (pointerDir == PointerDirection.None) {
-					LayoutChildIntoBoundingRegion (ContentView, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
+					LayoutChildIntoBoundingRegion (_bubbleLayout, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
 				} else {
 					Tuple<double,float> tuple;
 					if (pointerDir.IsVertical ()) {
-						tuple = StartAndPointerLocation (rboxSize.Width, targetBounds.Left, targetBounds.Width, HostPage.Bounds.Width);
+						tuple = StartAndPointerLocation (rboxSize.Width, targetBounds.Left, targetBounds.Width, width);
 						bounds = new Rectangle (
 							new Point (
-								tuple.Item1 + HostPage.Bounds.X,
-								(pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - rboxSize.Height - PointerLength) + HostPage.Bounds.Y),
+								tuple.Item1 + x,
+								(pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - rboxSize.Height - PointerLength) + y),
 							new Size (rboxSize.Width, rboxSize.Height + PointerLength)
 						);
 					} else {
-						tuple = StartAndPointerLocation (rboxSize.Height, targetBounds.Top, targetBounds.Height, HostPage.Bounds.Height);
+						tuple = StartAndPointerLocation (rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
 						bounds = new Rectangle (
 							new Point (
-								(pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + HostPage.Bounds.X, 
-								tuple.Item1 + HostPage.Bounds.Y),
+								(pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + x, 
+								tuple.Item1 + y),
 							new Size (rboxSize.Width + PointerLength, rboxSize.Height)
 						);
 					}
-					//System.Diagnostics.Debug.WriteLine ("\tBubblePopup.LayoutChildren bounds=" + bounds);
 					_bubbleLayout.PointerAxialPosition = tuple.Item2;	
-					//_bubbleLayout.PointerDirection = pointerDir;
-
-					//System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren LayoutChildIntoBoundingRegion("+bounds+")");
-
 					LayoutChildIntoBoundingRegion (_bubbleLayout, bounds);
 				}
-			} else
-				_bubbleLayout.IsVisible = false;
+			} 
 		}
 		#endregion
 

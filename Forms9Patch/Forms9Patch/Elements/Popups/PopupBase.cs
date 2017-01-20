@@ -109,13 +109,15 @@ namespace Forms9Patch
 			get { return (Page)GetValue(HostProperty); }
 			set
 			{
-				var effect = Effect.Resolve("Forms9Patch.PopupEffect");
-				HostPage?.Effects.Remove(effect);
-				SetValue(HostProperty, value);
-				HostPage?.Effects.Add(effect);
-				if (HostPage != null && !effect.IsAttached)
+				var currentPage = HostPage;
+				if (currentPage != value)
 				{
-					System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");
+					var effect = Effect.Resolve("Forms9Patch.PopupEffect");
+					HostPage?.Effects.Remove(effect);
+					SetValue(HostProperty, value);
+					HostPage?.Effects.Add(effect);
+					if (HostPage != null && !effect.IsAttached)
+						System.Diagnostics.Debug.WriteLine("Popup Effect Not Attached");
 				}
 			}
 		}
@@ -424,10 +426,10 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == PageOverlayColorProperty.PropertyName)
 				_pageOverlay.BackgroundColor = PageOverlayColor;
-			if (propertyName == TargetProperty.PropertyName)
-				HostPage = Target.HostingPage();
-			if (propertyName == "Parent")
-				HostPage = Target.HostingPage();
+			//if (propertyName == TargetProperty.PropertyName)
+			//	HostPage = Target.HostingPage();
+			//if (propertyName == "Parent")
+			//	HostPage = Target.HostingPage();
 			if (propertyName == IsVisibleProperty.PropertyName)
 			{
 				if (IsVisible)
@@ -441,6 +443,41 @@ namespace Forms9Patch
 						popup = Popups.Pop();
 					}
 				}
+
+				if (IsVisible)
+				{
+					if (HostPage == null)
+						HostPage = Application.Current.MainPage;
+					else
+						System.Diagnostics.Debug.WriteLine("this shouldn't happen");
+					
+					ContentView.TranslationX = 0;
+					ContentView.TranslationY = 0;
+					//System.Diagnostics.Debug.WriteLine ("======================================================================");
+					if (Target != null && Target != HostPage)
+						Target.SizeChanged += OnTargetSizeChanged;
+					Parent = HostPage;
+					HostPage.SetValue(PopupProperty, this);
+					HostPage.SizeChanged += OnTargetSizeChanged;
+					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion enter");
+					LayoutChildIntoBoundingRegion(this, HostPage.Bounds);
+					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) LayoutChildIntoBoundingRegion exit / ForceNativeLayout?Invoke() enter");
+					// So, Bounds is correct but the Android draw cycle seemed to happen too soon - so only the background is rendered, not the contents.
+					ForceNativeLayout?.Invoke();
+					//System.Diagnostics.Debug.WriteLine("BubblePopup.OnPropertyChanged(IsVisible) ForceNativeLayout?Invoke() exit");
+				}
+				else {
+					if (Target != null && Target != HostPage)
+						Target.SizeChanged -= OnTargetSizeChanged;
+					if (HostPage != null)
+					{
+						HostPage.SetValue(PopupProperty, null);
+						HostPage.SizeChanged -= OnTargetSizeChanged;
+						HostPage = null;
+					}
+					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, -1, -1));
+				}
+
 			}
 			else if (propertyName == PaddingProperty.PropertyName)
 				_roundedBox.Padding = Padding;
@@ -458,6 +495,24 @@ namespace Forms9Patch
 				_roundedBox.ShadowInverted = ShadowInverted;
 		}
 
+		void OnTargetSizeChanged(object sender, EventArgs e)
+		{
+			//Host = Host ?? Application.Current.MainPage;			
+			if (HostPage != null)
+			{
+				LayoutChildIntoBoundingRegion(this, new Rectangle(-1, -1, HostPage.Bounds.Width + 1, HostPage.Bounds.Height + 1));
+				ForceNativeLayout?.Invoke();
+				Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+				{
+					LayoutChildIntoBoundingRegion(this, new Rectangle(0, 0, HostPage.Bounds.Width, HostPage.Bounds.Height));
+					ForceNativeLayout?.Invoke();
+					return false;
+				});
+
+			}
+		}
+
+
 		internal Action ForceNativeLayout { get; set; }
 
 		public void Relayout()
@@ -465,6 +520,15 @@ namespace Forms9Patch
 			ForceNativeLayout?.Invoke();
 		}
 
+		protected override void LayoutChildren(double x, double y, double width, double height)
+		{
+			if (width > 0 && height > 0)
+			{
+				LayoutChildIntoBoundingRegion(PageOverlay, HostPage.Bounds);
+			}
+			else
+				ContentView.IsVisible = false;
+		}
 	}
 }
 
