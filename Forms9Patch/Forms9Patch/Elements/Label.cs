@@ -9,7 +9,7 @@ namespace Forms9Patch
 	/// Forms9Patch.Label
 	/// </summary>
 	[ContentProperty("HtmlText")]
-	public class Label : View, IFontElement, IForceNativeLayout
+	public class Label : View, IFontElement
 	{
 
 		#region Properties
@@ -534,15 +534,6 @@ namespace Forms9Patch
 			return RendererIndexAtPoint != null ? RendererIndexAtPoint(point) : -1;
 		}
 		#endregion
-
-		public System.Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
-		}
-
-
 	}
 
 }

@@ -371,11 +371,7 @@ namespace Forms9Patch.Droid
 		protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
 		{
 			base.OnElementChanged(e);
-			if (e.OldElement != null)
-				e.OldElement.ForceNativeLayout -= ForceNativeLayout;
-			if (e.NewElement != null)
-				e.NewElement.ForceNativeLayout += ForceNativeLayout;
-			
+
 			if (Control == null)
 			{
 				//_view = new TextView(Context);

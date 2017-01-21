@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Manual layout.
 	/// </summary>
-	public class ManualLayout : Xamarin.Forms.Layout<View>, IRoundedBox, IBackgroundImage, IForceNativeLayout
+	public class ManualLayout : Xamarin.Forms.Layout<View>, IRoundedBox, IBackgroundImage
 	{
 
 		#region Properties
@@ -145,13 +145,6 @@ namespace Forms9Patch
 		{
 			//System.Diagnostics.Debug.WriteLine("ManualLayout.LayoutChildren("+x+", "+y+", "+width+", "+height+")");
 			LayoutChildrenEvent?.Invoke(this, new ManualLayoutEventArgs(x, y, width, height));
-		}
-
-		public Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
 		}
 	}
 

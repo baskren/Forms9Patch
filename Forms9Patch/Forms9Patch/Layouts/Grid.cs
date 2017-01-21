@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch Grid layout.
 	/// </summary>
-	public class Grid : Xamarin.Forms.Grid, IRoundedBox, IBackgroundImage, IForceNativeLayout
+	public class Grid : Xamarin.Forms.Grid, IRoundedBox, IBackgroundImage
 	{
 
 		#region debug support
@@ -150,15 +150,6 @@ namespace Forms9Patch
 				propertyName == HasShadowProperty.PropertyName)
 				InvalidateLayout ();
 		}
-
-
-		public System.Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
-		}
-
 	}
 }
 

@@ -9,9 +9,8 @@ namespace Forms9Patch
 	public class Toast : ModalPopup
 	{
 		/// <summary>
-		/// Create the specified target, title and text.
+		/// Create the specified title and text.
 		/// </summary>
-		/// <param name="target">Target.</param>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
 		public static Toast Create(string title, string text)

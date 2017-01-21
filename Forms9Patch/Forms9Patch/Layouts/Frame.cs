@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch Frame layout.
 	/// </summary>
-	public class Frame : ContentView, IRoundedBox, IBackgroundImage, IForceNativeLayout
+	public class Frame : ContentView, IRoundedBox, IBackgroundImage
 	{
 
 		#region Debug support
@@ -150,14 +150,6 @@ namespace Forms9Patch
 			if (propertyName == PaddingProperty.PropertyName ||
 				propertyName == HasShadowProperty.PropertyName)
 				InvalidateLayout ();
-		}
-
-
-		public System.Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
 		}
 
 	}

@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch StackLayout.
 	/// </summary>
-	public class StackLayout : Xamarin.Forms.StackLayout, IRoundedBox, IBackgroundImage, IForceNativeLayout
+	public class StackLayout : Xamarin.Forms.StackLayout, IRoundedBox, IBackgroundImage
 	{
 
 		#region debug support
@@ -149,14 +149,6 @@ namespace Forms9Patch
 				propertyName == HasShadowProperty.PropertyName)
 				InvalidateLayout ();
 		}
-
-		public System.Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
-		}
-
 	}
 }
 

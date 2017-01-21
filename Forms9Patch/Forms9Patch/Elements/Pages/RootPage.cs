@@ -66,5 +66,18 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// Ons the back button pressed.
+		/// </summary>
+		/// <returns><c>true</c>, if back button pressed was oned, <c>false</c> otherwise.</returns>
+		protected override bool OnBackButtonPressed()
+		{
+			if (PageController.InternalChildren.Count() > 1)
+			{
+				PageController.InternalChildren.Remove(PageController.InternalChildren.Last());
+				return true;
+			}
+			return base.OnBackButtonPressed();
+		}
 	}
 }

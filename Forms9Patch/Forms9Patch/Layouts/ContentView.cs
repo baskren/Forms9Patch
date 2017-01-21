@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch ContentView.
 	/// </summary>
-	public class ContentView : Xamarin.Forms.ContentView, IBackgroundImage, IForceNativeLayout
+	public class ContentView : Xamarin.Forms.ContentView, IBackgroundImage
 	{
 
 		#region Debug support
@@ -55,14 +55,5 @@ namespace Forms9Patch
 			//else if (propertyName == "Binding")
 			//	InvalidateMeasure ();
 		}
-
-
-		public System.Action ForceNativeLayout { get; set; }
-
-		public void Relayout()
-		{
-			ForceNativeLayout?.Invoke();
-		}
-
 	}
 }

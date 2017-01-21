@@ -9,9 +9,8 @@ namespace Forms9Patch
 	public class PermissionPopup : ModalPopup
 	{
 		/// <summary>
-		/// Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
+		/// Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
 		/// </summary>
-		/// <param name="target">Target.</param>
 		/// <param name="title">Title.</param>
 		/// <param name="text">Text.</param>
 		/// <param name="okText">Ok text.</param>

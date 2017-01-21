@@ -424,6 +424,13 @@ namespace Forms9Patch
 		}
 		*/
 
+		/// <summary>
+		/// Layouts the children.
+		/// </summary>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
 			if (width > 0 && height > 0)
