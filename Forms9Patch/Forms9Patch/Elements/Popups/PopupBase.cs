@@ -267,10 +267,11 @@ namespace Forms9Patch
 		internal IRoundedBox _roundedBox;
 		internal BoxView _pageOverlay;
 		readonly Listener _listener;
-		readonly RootPage _rootPage;
 		internal DateTime PresentedAt;
 		#endregion
 
+
+		public RootPage RootPage { get { return Application.Current.MainPage as RootPage; } }
 
 		#region Constructor
 		/// <summary>
@@ -279,9 +280,6 @@ namespace Forms9Patch
 		/// <param name="target">Page or Element on Page in which Popup will be presented.</param>
 		internal PopupBase(VisualElement target=null)
 		{
-			_rootPage = Application.Current.MainPage as RootPage;
-			if (_rootPage == null)
-				throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
 			
 			IsVisible = false;
 			_pageOverlay = new BoxView
@@ -294,7 +292,7 @@ namespace Forms9Patch
 			_listener.Tapped += OnTapped;
 			_listener.Panning += OnPanning;
 			//HostPage = host ?? Application.Current.MainPage;
-			Target = target ?? Application.Current.MainPage;
+			//Target = target ?? Application.Current.MainPage;
 			base.Children.Add(_pageOverlay);
 		}
 		#endregion
@@ -383,7 +381,6 @@ namespace Forms9Patch
 		/// </summary>
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
-
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == PageOverlayColorProperty.PropertyName)
 				_pageOverlay.BackgroundColor = PageOverlayColor;
@@ -393,10 +390,12 @@ namespace Forms9Patch
 				{
 					ContentView.TranslationX = 0;
 					ContentView.TranslationY = 0;
-					_rootPage.AddPopup(this);
+					if (RootPage == null)
+						throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
+					RootPage.AddPopup(this);
 				}
 				else
-					_rootPage.RemovePopup(this);
+					RootPage?.RemovePopup(this);
 			}
 			else if (propertyName == PaddingProperty.PropertyName)
 				_roundedBox.Padding = Padding;
