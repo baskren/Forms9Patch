@@ -270,8 +270,7 @@ namespace Forms9Patch
 		internal DateTime PresentedAt;
 		#endregion
 
-
-		public RootPage RootPage { get { return Application.Current.MainPage as RootPage; } }
+		RootPage RootPage { get { return Application.Current.MainPage as RootPage; } }
 
 		#region Constructor
 		/// <summary>
