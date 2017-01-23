@@ -255,7 +255,8 @@ namespace Forms9Patch
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
 			base.LayoutChildren(x,y,width,height);
-			System.Diagnostics.Debug.WriteLine("LayoutChildren("+x+","+y+","+width+","+height+")");
+			if (_bubbleLayout?.Content == null)
+				return;
 			if (width > 0 && height > 0) {
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
