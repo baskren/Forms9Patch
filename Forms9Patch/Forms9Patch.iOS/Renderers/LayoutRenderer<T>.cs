@@ -52,9 +52,6 @@ namespace Forms9Patch.iOS
 		/// <param name="e">E.</param>
 		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e) {
 			base.OnElementPropertyChanged(sender, e);
-			var matButton = Element as MaterialButton;
-			if (matButton == null)
-				System.Diagnostics.Debug.WriteLine("");
 			if (
 				e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
 				|| e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName

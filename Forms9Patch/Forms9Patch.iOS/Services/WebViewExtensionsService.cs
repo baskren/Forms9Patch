@@ -1,11 +1,12 @@
-﻿using UIKit;
+﻿using System;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: Dependency(typeof(Forms9Patch.iOS.PrintService))]
+[assembly: Dependency(typeof(Forms9Patch.iOS.WebViewExtensionsService))]
 namespace Forms9Patch.iOS
 {
-	public class PrintService : IPrintService
+	public class WebViewExtensionsService : IWebViewExtensionService
 	{
 		public void Print(WebView viewToPrint, string jobName)
 		{
@@ -31,5 +32,6 @@ namespace Forms9Patch.iOS
 		{
 			return true;
 		}
+
 	}	
 }

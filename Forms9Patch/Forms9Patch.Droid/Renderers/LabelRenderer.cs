@@ -160,9 +160,6 @@ namespace Forms9Patch.Droid
 			_lastDesiredSizeWidthConstraint = availWidth;
 			_lastDesiredSizeHeightConstraint = availHeight;
 
-			if (availHeight < - 10000)
-				System.Diagnostics.Debug.WriteLine("");
-
 			if (availWidth <= 0 || availHeight <= 0)
 			{
 				_lastSizeRequest = null;

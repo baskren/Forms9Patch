@@ -85,6 +85,8 @@ namespace Forms9Patch.Droid
 		void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
 		{
 			ITemplatedItemsView<Cell> templatedItemsView = Element;
+			if (Element == null)
+				return;
 			ITemplatedItemsList<Cell> templatedItems = templatedItemsView.TemplatedItems;
 			Cell cell;
 			int position;

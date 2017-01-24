@@ -1,12 +1,15 @@
-﻿using Android.Content;
+﻿using System;
+using Android.Content;
 using Android.Print;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using PCL.Utils;
+using PCLStorage;
 
-[assembly: Dependency(typeof(Forms9Patch.Droid.PrintService))]
+[assembly: Dependency(typeof(Forms9Patch.Droid.WebViewExtensionsService))]
 namespace Forms9Patch.Droid
 {
-	public class PrintService : IPrintService
+	public class WebViewExtensionsService : IWebViewExtensionService
 	{
 		public void Print(WebView viewToPrint, string jobName)
 		{
@@ -29,5 +32,6 @@ namespace Forms9Patch.Droid
 		{
 			return Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Kitkat;
 		}
+
 	}
 }

@@ -47,6 +47,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage">
+      <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -107,8 +113,9 @@
     <Compile Include="ListView\Services\ListItemLocationService.cs" />
     <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
     <Compile Include="Services\ListViewExtensionService_iOS.cs" />
-    <Compile Include="Services\PrintService.cs" />
+    <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Extensions\UITextViewExtensions.cs" />
+    <Compile Include="Services\HtmlToPdfService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

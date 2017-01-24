@@ -249,6 +249,7 @@ namespace Forms9Patch
 			}
 			return Color.Default;
 		}
+
 	}
 }
 
