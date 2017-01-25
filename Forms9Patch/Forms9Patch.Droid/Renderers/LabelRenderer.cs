@@ -45,8 +45,8 @@ namespace Forms9Patch.Droid
 		{
 			get
 			{
-				return (elementText.Length > 4 && elementText.Contains("5") && !elementText.Contains(","));
-				//return false;
+				//return (elementText.Length > 4 && elementText.Contains("5") && !elementText.Contains(","));
+				return false;
 			}
 		}
 
@@ -339,6 +339,7 @@ namespace Forms9Patch.Droid
 			{
 				Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
 				Control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
+
 				System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize(" + (availWidth > int.MaxValue / 3 ? "infinity" : availWidth.ToString()) + "," + (availHeight > int.MaxValue / 3 ? "infinity" : availHeight.ToString()) + ") exit (" + _lastSizeRequest.Value + ")");
 				System.Diagnostics.Debug.WriteLine("\t\tControl.Visibility=["+Control.Visibility+"]");
 				System.Diagnostics.Debug.WriteLine("\t\tControl.TextFormatted=["+Control.TextFormatted.ToString()+"]");
@@ -354,7 +355,8 @@ namespace Forms9Patch.Droid
 				System.Diagnostics.Debug.WriteLine("\t\tControl.IsOpaque[" + Control.IsOpaque + "]");
 				System.Diagnostics.Debug.WriteLine("\t\tControl.IsShown[" + Control .IsShown+ "]");
 				//Control.BringToFront();
-				System.Diagnostics.Debug.WriteLine("\t\t");			
+				System.Diagnostics.Debug.WriteLine("\t\t");		
+
 			}
 			return _lastSizeRequest.Value;
 		}
@@ -398,6 +400,7 @@ namespace Forms9Patch.Droid
 			base.OnLayout(changed, l, t, r, b);
 		}
 
+		/*
 		protected override void DrawableStateChanged()
 		{
 			base.DrawableStateChanged();
@@ -408,8 +411,7 @@ namespace Forms9Patch.Droid
 		{
 			base.OnSizeChanged(w, h, oldw, oldh);
 			System.Diagnostics.Debug.WriteLine("OnSizeChanged[" + elementText + "]");
-		}
-
+		}*/
 
 		/// <summary>
 		/// Raises the element property changed event.
