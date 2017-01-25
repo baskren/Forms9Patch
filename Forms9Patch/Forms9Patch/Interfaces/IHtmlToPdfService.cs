@@ -15,7 +15,7 @@ namespace Forms9Patch
 		/// <param name="folder">Folder.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
-		void ToPdf(string html, Size size, string fileName, Action<IFile> onComplete);
+		void ToPdf(string html, Size size, string fileName, Action<string> onComplete);
 	}
 
 	/// <summary>
@@ -27,7 +27,7 @@ namespace Forms9Patch
 		/// Gets the file.
 		/// </summary>
 		/// <value>The file.</value>
-		public IFile File
+		public String Path
 		{
 			get;
 			private set;
@@ -37,9 +37,9 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PdfDoneArgs"/> class.
 		/// </summary>
 		/// <param name="file">File.</param>
-		public PdfDoneArgs(IFile file)
+		public PdfDoneArgs(string path)
 		{
-			File = file;
+			Path = path;
 		}
 	}
 }
