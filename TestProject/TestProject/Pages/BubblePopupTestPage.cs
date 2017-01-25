@@ -270,16 +270,6 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android && Relayout)
-				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
-					{
-						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
-						//bubble.Relayout(); // this won't do it.
-
-						return false;
-					});
-				//bubble.CallMethod("ForceNativeLayout", new object[] { });
-
 			};
 
 			enlargeItemsButton.Tapped += (sender, e) =>
@@ -302,14 +292,6 @@ namespace TestProject
 				//stackLayout.WidthRequest = size.Request.Width + 1;
 				//this.CallMethod("InvalidateMeasure", new object[] {});
 				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android && Relayout)
-				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
-					{
-						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
-						return false;
-					});
-				//bubble.CallMethod("ForceNativeLayout", new object[] { });
-
 			};
 
 			shrinkItems.Tapped += (sender, e) =>
@@ -330,17 +312,6 @@ namespace TestProject
 				stackLayout.WidthRequest = -1;
 				var size = stackLayout.Measure(double.MaxValue, double.MinValue);
 				System.Diagnostics.Debug.WriteLine("WIDTH=[" + stackLayout.Width + "] size.Request.Width=[" + size.Request.Width + "]");
-				//stackLayout.WidthRequest = size.Request.Width + 1;
-				//this.CallMethod("InvalidateMeasure", new object[] {});
-				//contentView.WidthRequest = size.Request.Width;
-				if (Device.OS == TargetPlatform.Android && Relayout)
-				Device.StartTimer(TimeSpan.FromMilliseconds(80), () =>
-					{
-						stackLayout.Relayout();  // this is the secret to address a Xamarin.Forms + Android bug where this StackLayout doesn't update when new content is added
-						return false;
-					});
-				//bubble.CallMethod("ForceNativeLayout", new object[] { });
-
 			};
 
 			removeItemButton.Tapped += (sender, e) =>

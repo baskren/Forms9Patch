@@ -98,6 +98,7 @@
       <DependentUpon>Burkhart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ModalPopupOnMasterDetailPage.cs" />
+    <Compile Include="Pages\HeapDemoPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -194,6 +195,12 @@
     <EmbeddedResource Include="Pages\Burkhart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\delay.png" />
+    <EmbeddedResource Include="Resources\delay%402x.png" />
+    <EmbeddedResource Include="Resources\delay%403x.png" />
+    <EmbeddedResource Include="Resources\tick.png" />
+    <EmbeddedResource Include="Resources\tick%402x.png" />
+    <EmbeddedResource Include="Resources\tick%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

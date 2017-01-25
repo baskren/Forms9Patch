@@ -12,11 +12,11 @@ namespace Forms9Patch.iOS
 {
 	public class HtmlToPdfService : IHtmlToPdfService
 	{
-		public void ToPdf(string html, Size size, IFolder folder, string fileName, Action<IFile> onComplete)
+		public void ToPdf(string html, Size size, string fileName, Action<IFile> onComplete)
 		{
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));
 
-			var callback = new WebViewCallBack(size, folder, fileName, onComplete);
+			var callback = new WebViewCallBack(size, fileName, onComplete);
 			webView.Delegate = callback;
 			webView.ScalesPageToFit = false;
 			webView.UserInteractionEnabled = false;
@@ -54,9 +54,9 @@ namespace Forms9Patch.iOS
 
 
 
-		public WebViewCallBack(Size size, IFolder folder, string fileName, Action<IFile> onComplete)
+		public WebViewCallBack(Size size, string fileName, Action<IFile> onComplete)
 		{
-			_folder = folder;
+			_folder = FileSystem.Current.LocalStorage;
 			_fileName = fileName;
 			_onComplete = onComplete;
 			_size = size;
