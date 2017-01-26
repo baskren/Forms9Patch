@@ -291,7 +291,7 @@ namespace Forms9Patch
 			_listener.Tapped += OnTapped;
 			_listener.Panning += OnPanning;
 			//HostPage = host ?? Application.Current.MainPage;
-			//Target = target ?? Application.Current.MainPage;
+			Target = target;
 			base.Children.Add(_pageOverlay);
 		}
 		#endregion
