@@ -65,10 +65,9 @@ namespace Forms9Patch {
 		#endregion
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ModalPopup"/> class.
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.
 		/// </summary>
-		/// <param name="target">Element or Page pointed to by Popup.</param>
-		public ModalPopup (VisualElement target) : base (target) 
+		public ModalPopup() : base()
 		{
 
 			_frame = new Frame
@@ -87,6 +86,16 @@ namespace Forms9Patch {
 			Margin = 0;
 			Padding = 10;
 
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ModalPopup"/> class.
+		/// </summary>
+		/// <param name="target">Element or Page pointed to by Popup.</param>
+		[Obsolete]
+		public ModalPopup (VisualElement target) : base (target) 
+		{
+			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
 
 

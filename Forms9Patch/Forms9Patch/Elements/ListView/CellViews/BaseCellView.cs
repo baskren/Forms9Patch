@@ -501,7 +501,7 @@ namespace Forms9Patch
 					WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
 					Children = { segmentedController, cancelButton }
 				};
-				var modal = new ModalPopup(this)
+				var modal = new ModalPopup()
 				{
 					BackgroundColor = Color.Transparent,
 					OutlineWidth = 0,

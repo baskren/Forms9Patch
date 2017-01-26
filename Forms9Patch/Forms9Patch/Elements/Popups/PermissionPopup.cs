@@ -185,8 +185,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
 		/// </summary>
-		/// <param name="target">Target.</param>
-		public PermissionPopup(VisualElement target=null) : base (target)
+		public PermissionPopup() : base ()
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
 			_cancelButton.FontColor = CancelTextColor;
@@ -226,6 +225,17 @@ namespace Forms9Patch
 				}
 			};
 		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		[Obsolete]
+		public PermissionPopup(VisualElement target = null) : base(target)
+		{
+			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
+		}
+
 
 		/// <summary>
 		/// Ons the property changed.

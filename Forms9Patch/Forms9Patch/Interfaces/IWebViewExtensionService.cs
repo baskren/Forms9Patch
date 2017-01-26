@@ -7,9 +7,9 @@ namespace Forms9Patch
 	public interface IWebViewExtensionService
 	{
 		/// <summary>
-		/// Print the specified viewToPrint and jobName.
+		/// Print the specified webView and jobName.
 		/// </summary>
-		/// <param name="viewToPrint">View to print.</param>
+		/// <param name="webView">Web view.</param>
 		/// <param name="jobName">Job name.</param>
 		void Print(Xamarin.Forms.WebView webView, string jobName);
 

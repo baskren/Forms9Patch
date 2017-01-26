@@ -43,12 +43,22 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
 		/// </summary>
-		public ActivityIndicatorPopup(VisualElement target) : base(target)
+		public ActivityIndicatorPopup() : base()
 		{
 			Content = _indicator;
 			CancelOnPageOverlayTouch = false;
 			BackgroundColor = Color.Transparent;
 			_indicator.IsVisible = true;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		[Obsolete]
+		public ActivityIndicatorPopup(VisualElement target) : base(target)
+		{
+			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
 
 		/// <summary>

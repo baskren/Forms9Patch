@@ -199,11 +199,13 @@ namespace Forms9Patch
 		/// <summary>
 		/// The backing store for the max font size property.
 		/// </summary>
+		[Obsolete]
 		public static readonly BindableProperty MaxFontSizeProperty = BindableProperty.Create("MaxFontSize", typeof(double), typeof(Label), -1.0);
 		/// <summary>
 		/// Gets or sets the maximum size of the font allowed during an autofit.
 		/// </summary>
 		/// <value>The size of the max font.</value>
+		[Obsolete]
 		public double MaxFontSize
 		{
 			get { return (double)GetValue(MaxFontSizeProperty); }

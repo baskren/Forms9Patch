@@ -1,5 +1,6 @@
 ﻿
 using Xamarin.Forms;
+using System;
 
 namespace Forms9Patch
 {
@@ -117,7 +118,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
 		/// </summary>
-		public Toast(VisualElement target=null) : base (target)
+		public Toast() : base ()
 		{
 			_okButton.BackgroundColor = OkButtonColor;
 			_okButton.FontColor = OkTextColor;
@@ -145,6 +146,16 @@ namespace Forms9Patch
 					_okButton
 				}
 			};
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		[Obsolete]
+		public Toast(VisualElement target = null) : base(target)
+		{
+			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
 
 		/// <summary>

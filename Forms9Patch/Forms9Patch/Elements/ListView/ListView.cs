@@ -509,7 +509,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="strategy">Strategy.</param>
 		public ListView(ListViewCachingStrategy strategy) : base (strategy){
-			_popup = new ModalPopup(this)
+			_popup = new ModalPopup()
 			{
 				Padding = 3,
 				HasShadow = true,
@@ -523,7 +523,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
 		public ListView() {
-			_popup = new ModalPopup(this)
+			_popup = new ModalPopup()
 			{
 				Padding = 3,
 				HasShadow = true,
