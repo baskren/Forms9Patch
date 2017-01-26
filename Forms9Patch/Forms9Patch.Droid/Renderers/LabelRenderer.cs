@@ -25,12 +25,6 @@ namespace Forms9Patch.Droid
 
 		SizeRequest? _lastSizeRequest;
 		ControlState _lastControlState;
-		//float _lastTextSize = -1f;
-
-		//Xamarin.Forms.Color _lastUpdateColor = Xamarin.Forms.Color.Default;
-		//TextView _view;
-		//F9PTextView _view;
-		//bool _wasFormatted;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="LabelRenderer"/> class.
@@ -44,7 +38,6 @@ namespace Forms9Patch.Droid
 		{
 			get
 			{
-				//return (elementText.Length > 4 && elementText.Contains("5") && !elementText.Contains(","));
 				return false;
 			}
 		}
@@ -274,9 +267,15 @@ namespace Forms9Patch.Droid
 			{
 				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 				e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
-				_currentControlState = new ControlState();
+				_currentControlState = new ControlState
+				{
+					Lines = Element.Lines,
+					Fit = Element.Fit,
+					LineBreakMode = Element.LineBreakMode,
+				};
 				_lastControlState = null;
 				Control.SetTextColor(_labelTextColorDefault);
+				Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
 				UpdateText();
 				UpdateColor();
 				UpdateFont();
@@ -300,40 +299,17 @@ namespace Forms9Patch.Droid
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
 				UpdateColor();
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
-			{
 				UpdateFont();
-				Layout();
-			}
 			else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
-			{
-				_currentControlState.LineBreakMode = Element.LineBreakMode;
-				Layout();
-			}
+				UpdateLineBreakMode();
 			else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)
-			{
 				UpdateText();
-				Layout();
-			}
 			else if (e.PropertyName == Label.FitProperty.PropertyName)
-			{
-				_currentControlState.Fit = Element.Fit;
-				Layout();
-			}
+				UpdateFit();
 			else if (e.PropertyName == Label.LinesProperty.PropertyName)
-			{
-				_currentControlState.Lines = Element.Lines;
-				Layout();
-			}
-			else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
-			{
-				_currentControlState.TextSize = ModelFontSize;
-				Layout();
-			}
+				UpdateLines();
 			else if (e.PropertyName == Label.MinFontSizeProperty.PropertyName)
-			{
-				_currentControlState.TextSize = ModelFontSize;
-				Layout();
-			}
+				UpdateMinFontSize();
 			else if (e.PropertyName == VisualElement.HeightProperty.PropertyName || e.PropertyName == VisualElement.WidthProperty.PropertyName)
 			{
 				/*
@@ -351,7 +327,33 @@ namespace Forms9Patch.Droid
 
 		void Layout()
 		{
+			if (Element.Width > -1 && Element.Height > -1 && Element.IsVisible)
+				if (_lastControlState==null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight)
 			LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
+		}
+
+		void UpdateLineBreakMode()
+		{
+			_currentControlState.LineBreakMode = Element.LineBreakMode;
+			Layout();
+		}
+
+		void UpdateMinFontSize()
+		{
+			_currentControlState.TextSize = ModelFontSize;
+			Layout();
+		}
+
+		void UpdateFit()
+		{
+			_currentControlState.Fit = Element.Fit;
+			Layout();
+		}
+
+		void UpdateLines()
+		{
+			_currentControlState.Lines = Element.Lines;
+			Layout();
 		}
 
 		void UpdateColor()
@@ -371,6 +373,7 @@ namespace Forms9Patch.Droid
 			if (_currentControlState.Typeface == Control.Typeface)
 				return;
 			Control.Typeface = _currentControlState.Typeface;
+			Layout();
 		}
 
 		#region FontSize helpers
@@ -421,7 +424,8 @@ namespace Forms9Patch.Droid
 				_currentControlState.Text = Element.Text;
 
 			UpdateColor();
-			UpdateFont();
+			//UpdateFont();
+			Layout();
 		}
 
 		int IndexAtPoint(Xamarin.Forms.Point p)
@@ -516,6 +520,7 @@ namespace Forms9Patch.Droid
 			LineBreakMode = source.LineBreakMode;
 		}
 
+
 		public override bool Equals(object obj)
 		{
 			var other = obj as ControlState;
@@ -531,7 +536,9 @@ namespace Forms9Patch.Droid
 
 		public static bool operator ==(ControlState a, ControlState b)
 		{
-			if (ReferenceEquals(a,null) || ReferenceEquals(b,null))
+			if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+				return true;
+			if (ReferenceEquals(a,null) || ReferenceEquals(b, null))
 				return false;
 			if (a.AvailWidth != b.AvailWidth)
 				return false;
