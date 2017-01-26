@@ -12,7 +12,7 @@ namespace Forms9Patch.iOS
 {
 	public class HtmlToPdfService : IHtmlToPdfService
 	{
-		public void ToPdf(string html, Size size, string fileName, Action<IFile> onComplete)
+		public void ToPdf(string html, Size size, string fileName, Action<string> onComplete)
 		{
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));
 
@@ -40,7 +40,7 @@ namespace Forms9Patch.iOS
 
 		readonly IFolder _folder;
 		readonly string _fileName;
-		readonly Action<IFile> _onComplete;
+		readonly Action<string> _onComplete;
 		Size _size;
 		public bool Completed
 		{
@@ -54,7 +54,7 @@ namespace Forms9Patch.iOS
 
 
 
-		public WebViewCallBack(Size size, string fileName, Action<IFile> onComplete)
+		public WebViewCallBack(Size size, string fileName, Action<string> onComplete)
 		{
 			_folder = FileSystem.Current.LocalStorage;
 			_fileName = fileName;
@@ -80,13 +80,15 @@ namespace Forms9Patch.iOS
 				return;
 			Completed = true;
 
-			var pages = 1;
+			var height = double.Parse(webView.EvaluateJavascript("document.body.scrollHeight"));
+
+			//var pages = 1;
 
 
 			var vertMargin = (nfloat)(0.25 * 72);
 			var horzMargin = vertMargin;
-			var height = (nfloat)((_size.Height * pages - 0.5) * 72);
-			var width = (nfloat)((_size.Width - 0.5) * 72);
+			//var height = (nfloat)((_size.Height * pages - 0.5) * 72);
+			//var width = (nfloat)((_size.Width - 0.5) * 72);
 
 			//width = 595.2;  // A4 210mm x 297mm (~8.26" x ~11.69") (595.27pt x 841.89pt)
 			//height = 841.8; // Letter 8.5" x 11" (612px x 792pt)
@@ -97,7 +99,7 @@ namespace Forms9Patch.iOS
 
 			var pageMargins = new UIEdgeInsets(vertMargin, horzMargin, vertMargin, horzMargin);
 			webView.ViewPrintFormatter.ContentInsets = pageMargins;
-			var renderer = new UIPrintPageRenderer();
+			//var renderer = new UIPrintPageRenderer();
 
 			/*
 			 * this only renders the first page
@@ -147,6 +149,7 @@ namespace Forms9Patch.iOS
 			*/
 
 
+			/* THIS WORKS!!!!
 			if (renderer != null)
 			{
 				renderer.AddPrintFormatter(webView.ViewPrintFormatter, 0);
@@ -163,7 +166,6 @@ namespace Forms9Patch.iOS
 				{
 					var path = Path.Combine(_folder.Path, _fileName+".pdf");
 					File.WriteAllBytes(path, data.ToArray());
-					var file = _folder.GetFile(_fileName+ ".pdf");
 					_onComplete?.Invoke(file);
 					return;
 				}
@@ -175,6 +177,59 @@ namespace Forms9Patch.iOS
 
 			Failed = true;
 			_onComplete?.Invoke(null);
+			*/
+
+			// BUT WHAT ABOUT PNGs???
+			UIImage image;
+
+			webView.ClipsToBounds = false;
+			webView.ScrollView.ClipsToBounds = false;
+
+
+			var size = new CGSize((_size.Width - 0.5) * 72, height);
+			UIGraphics.BeginImageContextWithOptions(size, false, UIScreen.MainScreen.Scale);
+			webView.Layer.RenderInContext(UIGraphics.GetCurrentContext()); 
+			image = UIGraphics.GetImageFromCurrentImageContext();
+			UIGraphics.EndImageContext();
+
+
+			/*
+			image = webView.Capture();  // bottom clipped
+			*/
+
+			//clipped on the bottom
+			/*
+			var size = new CGSize(webView.ScrollView.ContentSize.Width, height + 72);
+			UIGraphics.BeginImageContextWithOptions(size, webView.ScrollView.Opaque, UIScreen.MainScreen.Scale);
+			{
+				//CGPoint savedContentOffset = webView.ScrollView.ContentOffset;
+				//CGRect savedFrame = webView.ScrollView.Frame;
+
+				//webView.ScrollView.ContentOffset = new CGPoint(0,300);
+				webView.ScrollView.Frame = new CGRect(CGPoint.Empty,size);
+
+				webView.Layer.RenderInContext(UIGraphics.GetCurrentContext()); // blank at the bottom
+				image = UIGraphics.GetImageFromCurrentImageContext();
+
+				//webView.ScrollView.ContentOffset = savedContentOffset;
+		        //webView.ScrollView.Frame = savedFrame;
+		    }
+			UIGraphics.EndImageContext();
+			*/
+
+
+			var data = image.AsPNG();
+
+			if (data != null)
+			{
+				var path = Path.Combine(_folder.Path, _fileName + ".png");
+				File.WriteAllBytes(path, data.ToArray());
+				_onComplete?.Invoke(path);
+				return;
+			}
+			Failed = true;
+			_onComplete?.Invoke(null);
+
 		}
 
 		NSData PrintToPDFWithRenderer(UIPrintPageRenderer renderer, CGRect paperRect)
