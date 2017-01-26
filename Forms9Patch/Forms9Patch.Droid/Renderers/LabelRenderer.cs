@@ -275,11 +275,12 @@ namespace Forms9Patch.Droid
 				e.NewElement.RendererIndexAtPoint += IndexAtPoint;
 				e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
 				_currentControlState = new ControlState();
+				_lastControlState = null;
 				Control.SetTextColor(_labelTextColorDefault);
 				UpdateText();
 				UpdateColor();
 				UpdateFont();
-				Control.SkipNextInvalidate();
+				//Control.SkipNextInvalidate();
 			}
 		}
 
@@ -299,21 +300,43 @@ namespace Forms9Patch.Droid
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
 				UpdateColor();
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
+			{
 				UpdateFont();
+				Layout();
+			}
 			else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
+			{
 				_currentControlState.LineBreakMode = Element.LineBreakMode;
+				Layout();
+			}
 			else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)
+			{
 				UpdateText();
+				Layout();
+			}
 			else if (e.PropertyName == Label.FitProperty.PropertyName)
+			{
 				_currentControlState.Fit = Element.Fit;
+				Layout();
+			}
 			else if (e.PropertyName == Label.LinesProperty.PropertyName)
+			{
 				_currentControlState.Lines = Element.Lines;
+				Layout();
+			}
 			else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
+			{
 				_currentControlState.TextSize = ModelFontSize;
+				Layout();
+			}
 			else if (e.PropertyName == Label.MinFontSizeProperty.PropertyName)
+			{
 				_currentControlState.TextSize = ModelFontSize;
+				Layout();
+			}
 			else if (e.PropertyName == VisualElement.HeightProperty.PropertyName || e.PropertyName == VisualElement.WidthProperty.PropertyName)
 			{
+				/*
 				//TODO: EVALUATE THE NECESSITY AND EFFICACY OF THIS BLOCK
 				if (Element.Width > -1 && Element.Height > -1 && Element.IsVisible)
 					if (Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight)
@@ -321,7 +344,14 @@ namespace Forms9Patch.Droid
 						_lastSizeRequest = null;
 						LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
 					}
+				*/
+				Layout();
 			}
+		}
+
+		void Layout()
+		{
+			LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
 		}
 
 		void UpdateColor()
@@ -501,7 +531,7 @@ namespace Forms9Patch.Droid
 
 		public static bool operator ==(ControlState a, ControlState b)
 		{
-			if (a == null || b == null)
+			if (ReferenceEquals(a,null) || ReferenceEquals(b,null))
 				return false;
 			if (a.AvailWidth != b.AvailWidth)
 				return false;
