@@ -113,7 +113,7 @@ namespace Forms9Patch
 		#region Swipe Menu
 		readonly Frame _insetFrame = new Frame
 		{
-			VerticalOptions = LayoutOptions.FillAndExpand,
+			//VerticalOptions = LayoutOptions.FillAndExpand,
 			HasShadow = true,
 			ShadowInverted = true,
 			BackgroundColor = Color.FromRgb(200,200,200),
@@ -123,17 +123,17 @@ namespace Forms9Patch
 		};
 		readonly Frame _swipeFrame1 = new Frame
 		{
-			VerticalOptions = LayoutOptions.FillAndExpand,
+			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _swipeFrame2 = new Frame
 		{
-			VerticalOptions = LayoutOptions.FillAndExpand,
+			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _swipeFrame3 = new Frame
 		{
-			VerticalOptions = LayoutOptions.FillAndExpand,
+			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _touchBlocker = new Frame
@@ -437,6 +437,12 @@ namespace Forms9Patch
 				Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
 				{
 					_touchBlocker.IsVisible = false;
+					_swipeFrame1.HorizontalOptions = LayoutOptions.Fill;
+					_swipeFrame2.HorizontalOptions = LayoutOptions.Fill;
+					_swipeFrame3.HorizontalOptions = LayoutOptions.Fill;
+					_swipeFrame1.IsVisible = false;
+					_swipeFrame2.IsVisible = false;
+					_swipeFrame3.IsVisible = false;
 					return false;
 				});
 			}

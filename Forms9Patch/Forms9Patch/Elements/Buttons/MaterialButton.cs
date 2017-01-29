@@ -450,9 +450,9 @@ namespace Forms9Patch
 			Padding = new Thickness (8, 6, 8, 6);
 			OutlineRadius = 2;
 			_label = new Label {
-				VerticalOptions = LayoutOptions.CenterAndExpand,
+				//VerticalOptions = LayoutOptions.CenterAndExpand,
 				VerticalTextAlignment = TextAlignment.Center,
-				HorizontalOptions = LayoutOptions.Center,
+				//HorizontalOptions = LayoutOptions.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
 				HeightRequest = 22,
 				MinimizeHeight = true,
