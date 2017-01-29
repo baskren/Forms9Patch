@@ -101,17 +101,17 @@ namespace Forms9Patch
 			FontSize = 24,
 			FontAttributes = FontAttributes.Bold,
 			TextColor = Color.Black,
-			HorizontalOptions = LayoutOptions.Fill,
+			//HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly Label _textLabel = new Label
 		{
 			FontSize = 16,
 			TextColor = Color.Black,
-			HorizontalOptions = LayoutOptions.Fill,
+			//HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly MaterialButton _okButton = new MaterialButton
 		{
-			HorizontalOptions = LayoutOptions.Fill
+			//HorizontalOptions = LayoutOptions.Fill
 		};
 		#endregion
 
@@ -131,7 +131,7 @@ namespace Forms9Patch
 			WidthRequest = 200;
 			HeightRequest = 200;
 
-			HorizontalOptions = LayoutOptions.Center;
+			//HorizontalOptions = LayoutOptions.Center;
 
 			_okButton.Tapped += (s, args) => Cancel();
 			Content = new StackLayout

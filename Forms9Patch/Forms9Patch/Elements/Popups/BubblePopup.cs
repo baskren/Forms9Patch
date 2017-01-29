@@ -123,8 +123,8 @@ namespace Forms9Patch
 		/// <param name="target">Target.</param>
 		public BubblePopup (VisualElement target) : base (target) {
 			_bubbleLayout = new BubbleLayout {
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center,
+				//HorizontalOptions = LayoutOptions.Center,
+				//VerticalOptions = LayoutOptions.Center,
 				Padding = Padding,
 				HasShadow = HasShadow,
 				OutlineColor = OutlineColor,
