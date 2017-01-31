@@ -305,7 +305,7 @@ namespace Forms9Patch
 				return;
 			var bounds = new Rectangle(x, y, width, height);
 			base.LayoutChildren(x, y, width, height);
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (width > 0 && height > 0) {
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
@@ -424,6 +424,25 @@ namespace Forms9Patch
 				}
 			} 
 		}
+
+		protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+		{
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + widthConstraint + "] h=[" + heightConstraint + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			return base.OnMeasure(widthConstraint, heightConstraint);
+		}
+
+		double _lastWidthAllocated, _lastHeightAllocated;
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			if (Math.Abs(_lastWidthAllocated - width) < 0.001 && Math.Abs(_lastHeightAllocated - height) < 0.001)
+				return;
+			_lastWidthAllocated = width;
+			_lastHeightAllocated = height;
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + width + "] h=[" + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			base.OnSizeAllocated(width, height);
+		}
+
+
 		#endregion
 
 

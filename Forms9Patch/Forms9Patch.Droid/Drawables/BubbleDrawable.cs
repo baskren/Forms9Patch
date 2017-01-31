@@ -257,7 +257,7 @@ namespace Forms9Patch.Droid
 
 			}
 
-			GC.Collect ();
+			//GC.Collect ();
 
 		}
 
