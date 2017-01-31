@@ -89,7 +89,7 @@ namespace Forms9Patch
 		/// Backing store for the HasShadow bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static readonly BindableProperty HasShadowProperty = BindableProperty.Create ("HasShadow", typeof(bool), typeof(BubbleLayout), false, propertyChanged: UpdateBasePadding);
+		public static readonly BindableProperty HasShadowProperty = BindableProperty.Create ("BlHasShadow", typeof(bool), typeof(BubbleLayout), false, propertyChanged: UpdateBasePadding);
 		/// <summary>
 		/// Gets or sets a flag indicating if the AbsoluteLayout has a shadow displayed. This is a bindable property.
 		/// </summary>
@@ -159,7 +159,7 @@ namespace Forms9Patch
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create ("Padding", typeof(Thickness), typeof(BubbleLayout), new Thickness (20), BindingMode.OneWay, propertyChanged: UpdateBasePadding);
+		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create ("F9P.BL.Padding", typeof(Thickness), typeof(BubbleLayout), new Thickness (20), BindingMode.OneWay, propertyChanged: UpdateBasePadding);
 		/// <summary>
 		/// Gets or sets the inner padding of the Layout.
 		/// </summary>
@@ -174,7 +174,7 @@ namespace Forms9Patch
 		/// Identifies the BackgroundColor bindable property.
 		/// </summary>
 		/// <remarks>To be added.</remarks>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create ("BackgroundColor", typeof(Color), typeof(BubbleLayout), Color.White);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create ("F9P.BL.BackgroundColor", typeof(Color), typeof(BubbleLayout), Color.White);
 		/// <summary>
 		/// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
 		/// </summary>

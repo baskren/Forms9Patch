@@ -43,7 +43,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
 		/// </summary>
-		public ActivityIndicatorPopup() : base()
+		public ActivityIndicatorPopup() 
 		{
 			Content = _indicator;
 			CancelOnPageOverlayTouch = false;

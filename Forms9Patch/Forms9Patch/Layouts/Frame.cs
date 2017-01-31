@@ -32,7 +32,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the BackgroundImage bindable property.
 		/// </summary>
-		public static new BindableProperty BackgroundImageProperty = BindableProperty.Create ("BackgroundImage", typeof(Image), typeof(Frame), null);
+		public static new BindableProperty BackgroundImageProperty = BindableProperty.Create ("F9P.F.BackgroundImage", typeof(Image), typeof(Frame), null);
 		/// <summary>
 		/// Gets or sets the background image.
 		/// </summary>

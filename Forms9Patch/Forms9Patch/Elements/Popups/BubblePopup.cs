@@ -25,7 +25,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The target bias property backing Store.
 		/// </summary>
-		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("TargetBias", typeof(double), typeof(BubblePopup), 0.5);
+		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("BpuTargetBias", typeof(double), typeof(BubblePopup), 0.5);
 		/// <summary>
 		/// Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.
 		/// </summary>
@@ -45,7 +45,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer length property.
 		/// </summary>
-		public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength",typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue);
+		public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("BpuPointerLength",typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the length of the bubble layout's pointer.
 		/// </summary>
@@ -58,7 +58,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer tip radius property.
 		/// </summary>
-		public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue);
+		public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("BpuPointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the radius of the bubble's pointer tip.
 		/// </summary>
@@ -86,7 +86,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer direction property.
 		/// </summary>
-		public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
+		public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("BpuPointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the direction in which the pointer pointing.
 		/// </summary>
@@ -99,7 +99,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.
 		/// </summary>
-		public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue);
+		public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("BpuPointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the pointer corner radius.
 		/// </summary>
@@ -118,10 +118,11 @@ namespace Forms9Patch
 
 		#region Constructor / Destructor
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
 		/// </summary>
 		/// <param name="target">Target.</param>
-		public BubblePopup (VisualElement target) : base (target) {
+		/// <param name="retain">If set to <c>true</c> retain.</param>
+		public BubblePopup (VisualElement target,bool retain=false) : base (target,retain) {
 			_bubbleLayout = new BubbleLayout {
 				//HorizontalOptions = LayoutOptions.Center,
 				//VerticalOptions = LayoutOptions.Center,
@@ -136,11 +137,14 @@ namespace Forms9Patch
 				PointerCornerRadius = PointerCornerRadius
 			};
 			ContentView = _bubbleLayout;
+			/*
 			target.SizeChanged += (sender, e) =>
 			{
+				System.Diagnostics.Debug.WriteLine("BubblePopup target.SizeChanged ("+target.Bounds+")");
 				var b = Application.Current.MainPage.Bounds;
 				LayoutChildren(b.X,b.Y, b.Width, b.Height);
 			};
+*/
 		}
 
 
@@ -150,6 +154,42 @@ namespace Forms9Patch
 
 
 		#region Change management
+
+		void OnParentSizeChanged(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("BubblePopup ParentSizeChanged (" + Application.Current.MainPage.Bounds + ")");
+			if (Device.OS == TargetPlatform.Android)
+			{
+				Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+				 {
+					 var b = Application.Current.MainPage.Bounds;
+					 LayoutChildren(b.X, b.Y, b.Width, b.Height);
+					 return false;
+				 });
+			}
+			else
+			{
+				var b = Application.Current.MainPage.Bounds;
+				LayoutChildren(b.X, b.Y, b.Width, b.Height);
+			}
+		}
+
+		/// <summary>
+		/// Ons the property changing.
+		/// </summary>
+		/// <param name="propertyName">Property name.</param>
+		protected override void OnPropertyChanging(string propertyName = null)
+		{
+			base.OnPropertyChanging(propertyName);
+			if (propertyName == "Parent")
+			{
+				var rootPage = Parent as RootPage;
+				if (rootPage != null)
+					rootPage.SizeChanged -= OnParentSizeChanged;
+			}
+		}
+
+
 		/// <param name="propertyName">The name of the property that changed.</param>
 		/// <summary>
 		/// Call this method from a child class to notify that a change happened on a property.
@@ -166,7 +206,12 @@ namespace Forms9Patch
 				_bubbleLayout.PointerTipRadius = PointerTipRadius;
 			else if (propertyName == PointerCornerRadiusProperty.PropertyName)
 				_bubbleLayout.PointerCornerRadius = PointerCornerRadius;
-			
+			else if (propertyName == "Parent")
+			{
+				var rootPage = Parent as RootPage;
+				if (rootPage != null)
+					rootPage.SizeChanged += OnParentSizeChanged;
+			}
 		}
 
 
@@ -243,6 +288,8 @@ namespace Forms9Patch
 			return new Tuple<double, float> (optimalStart, pointerOffset );
 		}
 
+		Rectangle _lastBounds = Rectangle.Zero;
+		Rectangle _lastTargetBounds = Rectangle.Zero;
 		/// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
 		/// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
 		/// <param name="width">A value representing the width of the child region bounding box.</param>
@@ -254,24 +301,39 @@ namespace Forms9Patch
 		/// still call the base method and modify its calculated results.</remarks>
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
-			base.LayoutChildren(x,y,width,height);
 			if (_bubbleLayout?.Content == null)
 				return;
+			var bounds = new Rectangle(x, y, width, height);
+			base.LayoutChildren(x, y, width, height);
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (width > 0 && height > 0) {
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
-				var request = _bubbleLayout.Content.Measure (width, height);
+				SizeRequest request;
+				if (_bubbleLayout.Content.WidthRequest > 0 && _bubbleLayout.Content.HeightRequest > 0)
+					request = new SizeRequest(new Size(_bubbleLayout.Content.WidthRequest, _bubbleLayout.Content.HeightRequest));
+				else
+					request = _bubbleLayout.Content.Measure (width, height);
 				//var request = _bubbleLayout.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
 				var rboxSize = new Size (request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
 
 				//System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren _bubbleLayout size=[{0}, {1}]",rboxSize.Width, rboxSize.Height);
 				PointerDirection pointerDir = PointerDirection.None;
 
-				Rectangle bounds;
+				//Rectangle bounds;
 				Rectangle targetBounds=Rectangle.Zero;
-				if (Target != null) {
+				if (Target != null)
+				{
 					//targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
 					targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
+
+					if (_lastBounds == bounds && targetBounds == _lastTargetBounds)
+						return;
+					_lastBounds = bounds;
+					_lastTargetBounds = targetBounds;
+
+
+
 					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
 					var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength;
 					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength;
@@ -281,44 +343,61 @@ namespace Forms9Patch
 
 
 					double space = 0;
-					if (PointerDirection.UpAllowed () && Math.Min (reqSpaceBelow, reqHzSpace) > space) {
+					if (PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
+					{
 						pointerDir = PointerDirection.Up;
-						space = Math.Min (reqSpaceBelow, reqHzSpace);
+						space = Math.Min(reqSpaceBelow, reqHzSpace);
 					}
-					if (PointerDirection.DownAllowed () && Math.Min (reqSpaceAbove, reqHzSpace) > space) {
+					if (PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+					{
 						pointerDir = PointerDirection.Down;
-						space = Math.Min (reqSpaceAbove, reqHzSpace);
+						space = Math.Min(reqSpaceAbove, reqHzSpace);
 					}
-					if (PointerDirection.LeftAllowed () && Math.Min (reqSpaceToRight, reqVtSpace) > space) {
+					if (PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
+					{
 						pointerDir = PointerDirection.Left;
-						space = Math.Min (reqSpaceToRight, reqVtSpace);
+						space = Math.Min(reqSpaceToRight, reqVtSpace);
 					}
-					if (PointerDirection.RightAllowed () && Math.Min (reqSpaceToLeft, reqVtSpace) > space) {
+					if (PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
+					{
 						pointerDir = PointerDirection.Right;
-						space = Math.Min (reqSpaceToLeft, reqVtSpace);
+						space = Math.Min(reqSpaceToLeft, reqVtSpace);
 					}
-					if (space < 0.01) {
+					if (space < 0.01)
+					{
 						// it doesn't fit ... what's the closest fit?
 						space = int.MaxValue;
-						if (PointerDirection.UpAllowed () && Math.Abs (Math.Min (reqSpaceBelow, reqHzSpace)) < space) {
+						if (PointerDirection.UpAllowed() && Math.Abs(Math.Min(reqSpaceBelow, reqHzSpace)) < space)
+						{
 							pointerDir = PointerDirection.Up;
-							space = Math.Abs (Math.Min (reqSpaceBelow, reqHzSpace));
+							space = Math.Abs(Math.Min(reqSpaceBelow, reqHzSpace));
 						}
-						if (PointerDirection.DownAllowed () && Math.Abs (Math.Min (reqSpaceAbove, reqHzSpace)) < space) {
+						if (PointerDirection.DownAllowed() && Math.Abs(Math.Min(reqSpaceAbove, reqHzSpace)) < space)
+						{
 							pointerDir = PointerDirection.Down;
-							space = Math.Abs (Math.Min (reqSpaceAbove, reqHzSpace));
+							space = Math.Abs(Math.Min(reqSpaceAbove, reqHzSpace));
 						}
-						if (PointerDirection.LeftAllowed () && Math.Abs (Math.Min (reqSpaceToRight, reqVtSpace)) < space) {
+						if (PointerDirection.LeftAllowed() && Math.Abs(Math.Min(reqSpaceToRight, reqVtSpace)) < space)
+						{
 							pointerDir = PointerDirection.Left;
-							space = Math.Abs (Math.Min (reqSpaceToRight, reqVtSpace));
+							space = Math.Abs(Math.Min(reqSpaceToRight, reqVtSpace));
 						}
-						if (PointerDirection.RightAllowed () && Math.Abs (Math.Min (reqSpaceToLeft, reqVtSpace)) < space) {
+						if (PointerDirection.RightAllowed() && Math.Abs(Math.Min(reqSpaceToLeft, reqVtSpace)) < space)
+						{
 							pointerDir = PointerDirection.Right;
 						}
 					}
 				}
+				else
+				{
+					if (_lastBounds == bounds &&  _lastTargetBounds == Rectangle.Zero)
+						return;
+					_lastBounds = bounds;
+					_lastTargetBounds = Rectangle.Zero;
+
+				}
 				_bubbleLayout.PointerDirection = pointerDir;
-				_bubbleLayout.IsVisible = true;
+				//_bubbleLayout.IsVisible = true;
 				if (pointerDir == PointerDirection.None) {
 					LayoutChildIntoBoundingRegion (_bubbleLayout, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
 				} else {

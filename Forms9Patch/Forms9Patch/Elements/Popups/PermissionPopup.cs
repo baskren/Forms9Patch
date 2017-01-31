@@ -185,7 +185,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
 		/// </summary>
-		public PermissionPopup() : base ()
+		public PermissionPopup() 
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
 			_cancelButton.FontColor = CancelTextColor;

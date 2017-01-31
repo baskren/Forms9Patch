@@ -14,7 +14,6 @@ namespace Forms9Patch
 	/// </summary>
 	public class RootPage : Page
 	{
-		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
 		/// </summary>
@@ -37,32 +36,36 @@ namespace Forms9Patch
 		}
 
 
-
 		IPageController PageController => this as IPageController;
 
 		internal void AddPopup(PopupBase popup)
 		{
-			Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, Bounds);
-			PageController.InternalChildren.Add(popup);
+			//Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, Bounds);
+			popup.ManualLayout(Bounds);
+			if (!PageController.InternalChildren.Contains(popup))
+				PageController.InternalChildren.Add(popup);
 			popup.PresentedAt = DateTime.Now;
 		}
 
 		internal void RemovePopup(PopupBase popup)
 		{
+			if (popup.Retain)
+				return;
 			while (PageController.InternalChildren.Contains(popup))
 			{
 				PageController.InternalChildren.Remove(PageController.InternalChildren.Last());
-				Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, new Rectangle(0, 0, -1, -1));
+				//Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, new Rectangle(0, 0, -1, -1));
 			}
 		}
+
 
 		internal void RemovePopups(bool popping)
 		{
 			for (int i = PageController.InternalChildren.Count() - 1; i > 0; i--)
 			{
-				var popup = PageController.InternalChildren[i] as PopupBase;
-				if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
-					PageController.InternalChildren.RemoveAt(i);
+					var popup = PageController.InternalChildren[i] as PopupBase;
+					if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
+						PageController.InternalChildren.RemoveAt(i);
 			}
 		}
 

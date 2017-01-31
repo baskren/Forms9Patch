@@ -27,7 +27,7 @@ namespace Forms9Patch.Droid
 			}
 		}
 
-		bool waitingOnLayout = false;
+		//bool waitingOnLayout = false;
 		/// <summary>
 		/// Raises the element property changed event.
 		/// </summary>
@@ -46,6 +46,7 @@ namespace Forms9Patch.Droid
 				|| e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName 
 			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName) {
 				Background = new BubbleDrawable (Element);
+				/*
 			} else if (
 				e.PropertyName == BubbleLayout.PointerDirectionProperty.PropertyName
 				|| e.PropertyName == VisualElement.WidthProperty.PropertyName
@@ -56,12 +57,6 @@ namespace Forms9Patch.Droid
 				|| e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName
 				|| e.PropertyName == BubbleLayout.PointerLengthProperty.PropertyName ) {
 
-				/*
-				var s = Forms.Context.Resources.DisplayMetrics.Density;
-				var b = Element.Bounds;
-				Layout ((int)(b.Left * s), (int)(b.Top * s), (int)(b.Right * s), (int)(b.Bottom * s));
-				Background = new BubbleDrawable (Element);
-				*/
 
 				if (!waitingOnLayout) {
 					waitingOnLayout = true;
@@ -77,7 +72,7 @@ namespace Forms9Patch.Droid
 
 				//ViewGroup.RequestLayout();
 				//ViewGroup.ForceLayout ();
-
+				*/
 			}
 		}
 

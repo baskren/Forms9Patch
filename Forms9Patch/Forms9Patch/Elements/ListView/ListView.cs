@@ -23,7 +23,7 @@ namespace Forms9Patch
 		/// The item template property.
 		/// </summary>
 		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
-		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
+		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("F9P.LV.ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
 		/// <summary>
 		/// The item template property.
 		/// </summary>
@@ -63,7 +63,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("F9PItemsSource", typeof(IEnumerable), typeof(ListView), null);
+		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("F9P.LV.ItemsSource", typeof(IEnumerable), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
@@ -225,7 +225,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The most recently selected item property.
 		/// </summary>
-		public static new readonly BindableProperty SelectedItemProperty = BindableProperty.Create("Forms9Patch.ListView.SelectedItem", typeof(object), typeof(ListView), null);
+		public static new readonly BindableProperty SelectedItemProperty = BindableProperty.Create("F9P.LV.SelectedItem", typeof(object), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the most recently selected item.
 		/// </summary>

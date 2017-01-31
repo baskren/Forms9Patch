@@ -168,6 +168,7 @@
     <Compile Include="Elements\Pages\RootPage.cs" />
     <Compile Include="Interfaces\IHtmlToPdfService.cs" />
     <Compile Include="Extensions\HtmlStringExtensions.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

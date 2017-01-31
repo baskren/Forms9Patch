@@ -42,7 +42,7 @@ namespace Forms9Patch
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create ("Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(0));
+		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create ("F9P.MS.Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(0));
 		/// <summary>
 		/// Gets or sets the padding for SegmentedControl's segments.
 		/// </summary>
@@ -164,7 +164,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.BackgroundColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof (Color), typeof (MaterialSegmentedControl), Color.Transparent);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("F9P.MS.BackgroundColor", typeof (Color), typeof (MaterialSegmentedControl), Color.Transparent);
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
