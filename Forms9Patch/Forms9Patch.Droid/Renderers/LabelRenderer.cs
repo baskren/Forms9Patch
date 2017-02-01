@@ -445,7 +445,7 @@ namespace Forms9Patch.Droid
 			}
 			set
 			{
-				if (value != _textFormatted)
+				if (value != _textFormatted || value == null)
 				{
 					_textFormatted = value;
 					_text = null;
@@ -462,7 +462,7 @@ namespace Forms9Patch.Droid
 			}
 			set
 			{
-				if (value != _text)
+				if (value != _text || value==null)
 				{
 					_text = value;
 					_textFormatted = null;

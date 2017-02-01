@@ -43,9 +43,9 @@ namespace Forms9Patch
 		public FontColorSpan(FontColorSpan span) : this (span.Start, span.End, span.Color) {
 		}
 
-		public void ValueFrom(FontColorSpan source)
+		public void PropertiesFrom(FontColorSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 			Color = source.Color;
 		}
 

@@ -25,9 +25,9 @@ namespace Forms9Patch
 		public ItalicsSpan(ItalicsSpan span) : base (span.Start, span.End) {
 		}
 
-		public void ValueFrom(ItalicsSpan source)
+		public void PropertiesFrom(ItalicsSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

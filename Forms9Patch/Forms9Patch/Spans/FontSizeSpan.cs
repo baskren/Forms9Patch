@@ -43,9 +43,9 @@ namespace Forms9Patch
 		public FontSizeSpan(FontSizeSpan span) : this(span.Start, span.End, span.Size) {
 		}
 
-		public void ValueFrom(FontSizeSpan source)
+		public void PropertiesFrom(FontSizeSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 			Size = source.Size;
 		}
 

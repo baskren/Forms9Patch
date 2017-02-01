@@ -179,6 +179,7 @@
     <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Renderers\ManualLayoutRenderer.cs" />
     <Compile Include="Services\HtmlToPdfService.cs" />
+    <Compile Include="Services\HapticsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Effects\" />

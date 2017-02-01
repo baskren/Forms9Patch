@@ -27,14 +27,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BasePicker), null);
+		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(BasePicker), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
 		/// <value>The items source.</value>
-		public IEnumerable ItemsSource
+		public IList ItemsSource
 		{
-			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+			get { return (IList)GetValue(ItemsSourceProperty); }
 			set { 
 				SetValue(ItemsSourceProperty, value); 
 			}
@@ -183,6 +183,11 @@ namespace Forms9Patch
 		{
 			if (_scrolling)
 				return;
+			if (_scrolled)
+			{
+				_scrolled = false;
+				return;
+			}
 			_tapping = true;
 			int index=0;
 			foreach (var item in ItemsSource)
@@ -244,8 +249,9 @@ namespace Forms9Patch
 		/// Scrolls the index of the to.
 		/// </summary>
 		/// <param name="index">Index.</param>
-		public virtual void ScrollToIndex(int index)
+		public virtual void ScrollToIndex(int index, bool force = false)
 		{
+			//System.Diagnostics.Debug.WriteLine("ScrollToIndex("+index+")");
 			if (ItemsSource == null)
 				return;
 
@@ -270,7 +276,8 @@ namespace Forms9Patch
 					indexItem = lastItem;
 				if (indexItem != null)
 				{
-					if (!_scrolling)
+					//System.Diagnostics.Debug.WriteLine("indexItem=["+indexItem+"]");
+					if (!_scrolling || force)
 						_listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
 					if (SelectBy == SelectBy.Position)
 					{
@@ -299,11 +306,14 @@ namespace Forms9Patch
 			}
 		}
 
+		bool _scrolled;
 		void OnScrolled(object sender, EventArgs e)
 		{
-			_scrolling = false;
 			if (SelectBy == SelectBy.Position)
-				ScrollToIndex(Index);
+				ScrollToIndex(Index,true);
+			//System.Diagnostics.Debug.WriteLine("Index=["+Index+"] ["+ItemsSource[Index]+"]");
+			_scrolling = false;
+			_scrolled = true;
 		}
 
 		#endregion

@@ -27,9 +27,9 @@ namespace Forms9Patch
 		public DenominatorSpan(DenominatorSpan span) : this (span.Start, span.End) {
 		}
 
-		public void ValueFrom(DenominatorSpan source)
+		public void PropertiesFrom(DenominatorSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

@@ -53,6 +53,8 @@ namespace Forms9Patch
 		/// SeparatorWidth for background of ListView Cell swipe popup menu buttons.
 		/// </summary>
 		public static float ListViewCellSwipePopupMenuButtonSeparatorWidth = 0;
+
+		public static bool Haptics = false;
 	}
 }
 

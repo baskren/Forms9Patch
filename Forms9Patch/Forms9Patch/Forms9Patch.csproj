@@ -169,6 +169,10 @@
     <Compile Include="Interfaces\IHtmlToPdfService.cs" />
     <Compile Include="Extensions\HtmlStringExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="Interfaces\IHapticService.cs" />
+    <Compile Include="Services\HapticsService.cs" />
+    <Compile Include="Enums\HapticEffect.cs" />
+    <Compile Include="Enums\HapticMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -188,6 +192,7 @@
     <Folder Include="Elements\Buttons\" />
     <Folder Include="Elements\ListView\TemplateSelectors\" />
     <Folder Include="Elements\Pages\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />

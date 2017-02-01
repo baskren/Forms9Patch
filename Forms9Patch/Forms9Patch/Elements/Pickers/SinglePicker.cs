@@ -27,14 +27,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(SinglePicker), null);
+		public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(SinglePicker), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
 		/// <value>The items source.</value>
-		public IEnumerable ItemsSource
+		public IList ItemsSource
 		{
-			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+			get { return (IList)GetValue(ItemsSourceProperty); }
 			set { 
 				SetValue(ItemsSourceProperty, value); 
 			}

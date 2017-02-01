@@ -25,9 +25,9 @@ namespace Forms9Patch
 		public BoldSpan (BoldSpan span) : this (span.Start, span.End) {
 		}
 
-		public void ValueFrom(BoldSpan source)
+		public void PropertiesFrom(BoldSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

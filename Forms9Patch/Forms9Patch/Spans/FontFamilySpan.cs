@@ -43,9 +43,9 @@ namespace Forms9Patch
 		public FontFamilySpan(FontFamilySpan span) : this (span.Start, span.End, span.FontFamilyName) {
 		}
 
-		public void ValueFrom(FontFamilySpan source)
+		public void PropertiesFrom(FontFamilySpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 			FontFamilyName = source.FontFamilyName;
 		}
 

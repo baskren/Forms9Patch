@@ -23,11 +23,13 @@ namespace Forms9Patch.iOS
 			if (oldElement != null) {
 				oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
 				oldElement.RendererScrollBy -= ScrollBy;
+				oldElement.RendererScrollToPos -= ScrollToItem;
 			}
 			var newElement = e.NewElement as ListView;
 			if (newElement != null) {
 				newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
 				newElement.RendererScrollBy += ScrollBy;
+				newElement.RendererScrollToPos += ScrollToItem;
 				if (newElement.IsScrollListening)
 				  Control.Delegate = new ScrollDelegate(newElement);  // why does this cause headers to not appear?
 				//Control.Delegate = null;
@@ -175,6 +177,33 @@ namespace Forms9Patch.iOS
 			return NativeView.ConvertPointToView (new CoreGraphics.CGPoint (p.X, p.Y), null).ToPoint();
 		}
 
+		void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
+		{
+			GroupWrapper group = ((ListView)Element).BaseItemsSource;
+			var path = group.DeepIndexOf(reqItem as ItemWrapper);
+
+			//System.Diagnostics.Debug.WriteLine("path.Length=["+path.Length+"]["+path[0]+"]");
+			if (path.Length < 1)
+				return;
+			nint section = (path.Length>1?path[0]:0);
+			nint row = (path.Length>1?path[1]:path[0]);
+
+			UITableViewScrollPosition pos = UITableViewScrollPosition.None;
+			switch (scrollToPosition)
+			{
+				case ScrollToPosition.Start:
+					pos = UITableViewScrollPosition.Top;
+					break;
+				case ScrollToPosition.Center:
+					pos = UITableViewScrollPosition.Middle;
+					break;
+				case ScrollToPosition.End:
+					pos = UITableViewScrollPosition.Bottom;
+					break;					
+			}
+
+			Control.ScrollToRow(NSIndexPath.FromItemSection(row,section),pos,animated);
+		}
 
 	}
 

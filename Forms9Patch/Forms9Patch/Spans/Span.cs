@@ -88,7 +88,7 @@ namespace Forms9Patch
 
 
 		#region
-		public void ValueFrom(Span source)
+		public void PropertiesFrom(Span source)
 		{
 			Key = source.Key;
 			Start = source.Start;

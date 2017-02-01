@@ -158,20 +158,12 @@ namespace Forms9Patch
 		void OnParentSizeChanged(object sender, EventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("BubblePopup ParentSizeChanged (" + Application.Current.MainPage.Bounds + ")");
-			if (Device.OS == TargetPlatform.Android)
-			{
-				Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
-				 {
-					 var b = Application.Current.MainPage.Bounds;
-					 LayoutChildren(b.X, b.Y, b.Width, b.Height);
-					 return false;
-				 });
-			}
-			else
+			Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
 			{
 				var b = Application.Current.MainPage.Bounds;
 				LayoutChildren(b.X, b.Y, b.Width, b.Height);
-			}
+				return false;
+			});
 		}
 
 		/// <summary>
@@ -263,7 +255,7 @@ namespace Forms9Patch
 		}
 
 		Tuple<double,float> StartAndPointerLocation(double width, double targetStart, double targetWidth, double availableWidth) {
-			System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
+			//System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
 			_pwfWidth = width;
 			_pwfTargetStart = targetStart;
 			_pwfTargetWidth = targetWidth;
@@ -288,8 +280,9 @@ namespace Forms9Patch
 			return new Tuple<double, float> (optimalStart, pointerOffset );
 		}
 
-		Rectangle _lastBounds = Rectangle.Zero;
-		Rectangle _lastTargetBounds = Rectangle.Zero;
+		//Using the below check seems to fail to render correct size on some popups!
+		//Rectangle _lastBounds = Rectangle.Zero;  
+		//Rectangle _lastTargetBounds = Rectangle.Zero;
 		/// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
 		/// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
 		/// <param name="width">A value representing the width of the child region bounding box.</param>
@@ -327,10 +320,10 @@ namespace Forms9Patch
 					//targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
 					targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
 
-					if (_lastBounds == bounds && targetBounds == _lastTargetBounds)
-						return;
-					_lastBounds = bounds;
-					_lastTargetBounds = targetBounds;
+					//if (_lastBounds == bounds && targetBounds == _lastTargetBounds)
+					//	return;
+					//_lastBounds = bounds;
+					//_lastTargetBounds = targetBounds;
 
 
 
@@ -390,10 +383,10 @@ namespace Forms9Patch
 				}
 				else
 				{
-					if (_lastBounds == bounds &&  _lastTargetBounds == Rectangle.Zero)
-						return;
-					_lastBounds = bounds;
-					_lastTargetBounds = Rectangle.Zero;
+					//if (_lastBounds == bounds &&  _lastTargetBounds == Rectangle.Zero)
+					//	return;
+					//_lastBounds = bounds;
+					//_lastTargetBounds = Rectangle.Zero;
 
 				}
 				_bubbleLayout.PointerDirection = pointerDir;

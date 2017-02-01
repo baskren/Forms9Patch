@@ -415,6 +415,7 @@ namespace Forms9Patch
 						}
 						Children.Add(_swipeFrame1, 0, 0);
 						_swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
+						_swipeFrame1.IsVisible = true;
 						_settingup = false;
 					}
 

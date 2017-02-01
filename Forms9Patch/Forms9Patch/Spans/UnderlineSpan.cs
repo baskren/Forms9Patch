@@ -52,9 +52,9 @@ namespace Forms9Patch
 		public UnderlineSpan (UnderlineSpan span) : this (span.Start, span.End/*, span.Color, span.Style*/) {
 		}
 
-		public void ValueFrom(UnderlineSpan source)
+		public void PropertiesFrom(UnderlineSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

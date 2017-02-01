@@ -27,9 +27,9 @@ namespace Forms9Patch
 		public NumeratorSpan(NumeratorSpan span) : this(span.Start, span.End) {
 		}
 
-		public void ValueFrom(NumeratorSpan source)
+		public void PropertiesFrom(NumeratorSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

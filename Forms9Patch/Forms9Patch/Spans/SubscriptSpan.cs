@@ -25,9 +25,9 @@ namespace Forms9Patch
 		public SubscriptSpan (SubscriptSpan span) : this (span.Start, span.End) {
 		}
 
-		public void ValueFrom(SubscriptSpan source)
+		public void PropertiesFrom(SubscriptSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

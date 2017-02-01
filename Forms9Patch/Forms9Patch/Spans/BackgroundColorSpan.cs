@@ -43,9 +43,9 @@ namespace Forms9Patch
 		public BackgroundColorSpan (BackgroundColorSpan span) : this (span.Start, span.End, span.Color) {
 		}
 
-		public void ValueFrom(BackgroundColorSpan source)
+		public void PropertiesFrom(BackgroundColorSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 			Color = source.Color;
 		}
 

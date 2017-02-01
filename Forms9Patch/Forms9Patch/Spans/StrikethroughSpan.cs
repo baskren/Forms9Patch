@@ -25,9 +25,9 @@ namespace Forms9Patch
 		public StrikethroughSpan (StrikethroughSpan span) : this (span.Start, span.End) {
 		}
 
-		public void ValueFrom(StrikethroughSpan source)
+		public void PropertiesFrom(StrikethroughSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()

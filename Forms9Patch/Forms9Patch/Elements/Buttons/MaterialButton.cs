@@ -385,6 +385,13 @@ namespace Forms9Patch
 			set { SetValue(MinFontSizeProperty, value); }
 		}
 
+		public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(MaterialButton), HapticEffect.KeyClick);
+		public HapticEffect HapticEffect
+		{
+			get { return (HapticEffect)GetValue(HapticEffectProperty); }
+			set { SetValue(HapticEffectProperty, value); }
+		}
+
 		#endregion
 
 
@@ -541,6 +548,8 @@ namespace Forms9Patch
 		{
 			if (IsEnabled)
 			{
+				HapticsService.Feedback(HapticEffect);
+
 				//Debug.WriteLine("tapped");
 				if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
 					|| GroupToggleBehavior == GroupToggleBehavior.Multiselect

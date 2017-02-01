@@ -79,8 +79,6 @@ namespace Forms9Patch
 				SetValue (PointerCornerRadiusProperty, value); 
 			}
 		}
-
-
 		#endregion
 
 

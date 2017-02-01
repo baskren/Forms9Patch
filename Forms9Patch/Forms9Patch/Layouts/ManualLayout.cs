@@ -124,6 +124,31 @@ namespace Forms9Patch
 			get { return (bool)GetValue(IsEllipticalProperty); }
 			set { SetValue(IsEllipticalProperty, value); }
 		}
+
+
+		bool _ignoreChildren;
+		public bool IgnoreChildren
+		{
+			get
+			{
+				return _ignoreChildren;
+			}
+			set
+			{
+				if (_ignoreChildren != value)
+				{
+					_ignoreChildren = value;
+					if (_ignoreChildren)
+						foreach (var child in Children)
+							child.MeasureInvalidated -= OnChildMeasureInvalidated;
+					else
+						foreach (var child in Children)
+							child.MeasureInvalidated += OnChildMeasureInvalidated;
+
+				}
+			}
+		}
+
 		#endregion
 
 

@@ -898,12 +898,13 @@ namespace Forms9Patch
 					ItemWrapperForSourceItem(item, group as IEnumerable, out itemWrapper);
 				}
 				Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
-					if (Device.OS == TargetPlatform.Android)
-					{
+					//if (Device.OS == TargetPlatform.Android)
+					//{
 						if (IsGroupingEnabled)
 							RendererScrollToPos?.Invoke(itemWrapper, group, position, animated);
 						else
 							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
+					/*
 					}
 					else 
 					{ 
@@ -912,6 +913,7 @@ namespace Forms9Patch
 						else 
 							base.ScrollTo(itemWrapper, position, animated); 
 					}
+					*/
 					return false;
 				});
 			}
@@ -935,18 +937,20 @@ namespace Forms9Patch
 				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
 				Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
 				{
-					if (Device.OS == TargetPlatform.Android)
-					{
+					//if (Device.OS == TargetPlatform.Android)
+					//{
 						if (IsGroupingEnabled)
 							RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
 						else
 							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
+				/*
 					}
 					//RendererScrollToItemInGroup(item, group, position, animated);
 					else
 					{
 						base.ScrollTo(itemWrapper, position, animated);
 					}
+					*/
 					return false;
 				});
 			else

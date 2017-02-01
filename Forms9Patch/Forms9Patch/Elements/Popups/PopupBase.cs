@@ -140,8 +140,14 @@ namespace Forms9Patch
 
 		#endregion
 
-
+		/// <summary>
+		/// The retain property.
+		/// </summary>
 		public static readonly BindableProperty RetainProperty = BindableProperty.Create("PobRetain", typeof(bool), typeof(PopupBase), default(bool));
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is retained after it is hidden.
+		/// </summary>
+		/// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
 		public bool Retain
 		{
 			get { return (bool)GetValue(RetainProperty); }
@@ -292,9 +298,10 @@ namespace Forms9Patch
 
 		#region Constructor
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BubblePopup"/> class.
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.PopupBase"/> class.
 		/// </summary>
-		/// <param name="target">Page or Element on Page in which Popup will be presented.</param>
+		/// <param name="target">Target.</param>
+		/// <param name="retain">If set to <c>true</c> retain.</param>
 		internal PopupBase(VisualElement target = null, bool retain = false)
 		{
 			Retain = retain;

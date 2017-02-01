@@ -45,6 +45,7 @@ namespace Forms9Patch
 			if (!PageController.InternalChildren.Contains(popup))
 				PageController.InternalChildren.Add(popup);
 			popup.PresentedAt = DateTime.Now;
+			popup.MeasureInvalidated -= OnChildMeasureInvalidated;
 		}
 
 		internal void RemovePopup(PopupBase popup)
@@ -82,5 +83,36 @@ namespace Forms9Patch
 			}
 			return base.OnBackButtonPressed();
 		}
+
+		bool _ignoreChildren;
+		public bool IgnoreChildren
+		{
+			get
+			{
+				return _ignoreChildren;
+			}
+			set
+			{
+				if (_ignoreChildren != value)
+				{
+					_ignoreChildren = value;
+					if (_ignoreChildren)
+						foreach (var child in PageController.InternalChildren)
+						{
+							var view = child as View;
+							if (view != null)
+								view.MeasureInvalidated -= OnChildMeasureInvalidated;
+						}
+					else
+						foreach (var child in PageController.InternalChildren)
+						{
+							var view = child as View;
+							if (view != null)
+								view.MeasureInvalidated += OnChildMeasureInvalidated;
+						}
+				}
+			}
+		}
+
 	}
 }

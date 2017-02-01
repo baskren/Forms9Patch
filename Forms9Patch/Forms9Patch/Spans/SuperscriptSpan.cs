@@ -25,9 +25,9 @@ namespace Forms9Patch
 		public SuperscriptSpan (SuperscriptSpan span) : this(span.Start, span.End) {
 		}
 
-		public void ValueFrom(SuperscriptSpan source)
+		public void PropertiesFrom(SuperscriptSpan source)
 		{
-			base.ValueFrom(source);
+			base.PropertiesFrom(source);
 		}
 
 		public override Span Copy()
