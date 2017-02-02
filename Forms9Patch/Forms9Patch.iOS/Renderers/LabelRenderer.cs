@@ -204,16 +204,19 @@ namespace Forms9Patch.iOS
 				{
 					
 					double y = 0;
-					switch (Element.VerticalTextAlignment)
+					if (heightConstraint < double.MaxValue / 3.0)
 					{
-						case TextAlignment.Center:
-							y = gap / 2.0;
-							break;
-						case TextAlignment.End:
-							y = gap;
-							break;
+						switch (Element.VerticalTextAlignment)
+						{
+							case TextAlignment.Center:
+								y = gap / 2.0;
+								break;
+							case TextAlignment.End:
+								y = gap;
+								break;
+						}
 					}
-					//Control.Frame = new CGRect(0, y, widthConstraint, height);
+					//Control.Frame = new CGRect(0, y, widthConstraint, height);  // doesn't work anymore but Control.Center does!
 
 					Control.Center = new CGPoint(widthConstraint/2.0, height/2.0 + y);
 				}
