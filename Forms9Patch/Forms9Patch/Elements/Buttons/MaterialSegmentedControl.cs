@@ -416,7 +416,7 @@ namespace Forms9Patch
 				for (int i = 1; i < count - 1; i++)
 					((MaterialButton)Children [i]).SegmentType = SegmentType.Mid;
 				((MaterialButton)Children[count-1]).SegmentType = SegmentType.End;
-			} else {
+			} else if (count==1) {
 				((MaterialButton)Children [0]).SegmentType = SegmentType.Not;
 			}
 			UpdateChildrenPadding ();
@@ -544,10 +544,15 @@ namespace Forms9Patch
 					{
 						foreach (var seg in _segments)
 						{
+							seg.IsSelected = seg.MaterialButton == button;
+							/*
 							if (seg.MaterialButton != button)
 							{
 								seg.IsSelected = false;
 							}
+							else
+								seg.Is
+								*/
 						}
 					}
 					else if (button.IsEnabled)
