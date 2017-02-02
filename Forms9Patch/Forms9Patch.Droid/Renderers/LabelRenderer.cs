@@ -300,6 +300,8 @@ namespace Forms9Patch.Droid
 				UpdateColor();
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
 				UpdateFont();
+			else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
+				UpdateFontSize();
 			else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
 				UpdateLineBreakMode();
 			else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)
@@ -335,6 +337,13 @@ namespace Forms9Patch.Droid
 		void UpdateLineBreakMode()
 		{
 			_currentControlState.LineBreakMode = Element.LineBreakMode;
+			Layout();
+		}
+
+
+		void UpdateFontSize()
+		{
+			_currentControlState.TextSize = (float)Element.FontSize;
 			Layout();
 		}
 

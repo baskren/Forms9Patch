@@ -470,7 +470,7 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			//System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (width > 0 && height > 0)
 			{
 				LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x,y,width,height));

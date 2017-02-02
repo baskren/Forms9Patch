@@ -219,7 +219,6 @@ namespace Forms9Patch.iOS
 					//Control.Frame = new CGRect(0, y, widthConstraint, height);  // doesn't work anymore but Control.Center does!
 
 					Control.Center = new CGPoint(Control.Center.X, height/2.0 + y);
-					System.Diagnostics.Debug.WriteLine("Center=["+Control.Center.X+","+Control.Center.Y+"]");
 				}
 				//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
