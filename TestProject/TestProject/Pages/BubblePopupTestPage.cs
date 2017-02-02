@@ -69,7 +69,9 @@ namespace TestProject
 		public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(Forms9Patch.PointerDirection), typeof(BubblePopupTestPage), Forms9Patch.PointerDirection.Any);
 		public Forms9Patch.PointerDirection PointerDirection {
 			get { return (Forms9Patch.PointerDirection) GetValue(PointerDirectionProperty); }
-			set { SetValue(PointerDirectionProperty, value); }
+			set { 
+				SetValue(PointerDirectionProperty, value); 
+			}
 		}
 
 		VisualElement _lastChanged;

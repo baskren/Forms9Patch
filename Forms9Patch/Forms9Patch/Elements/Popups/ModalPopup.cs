@@ -73,8 +73,6 @@ namespace Forms9Patch {
 
 			_frame = new Frame
 			{
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center,
 				Padding = Padding,
 				HasShadow = HasShadow,
 				OutlineColor = OutlineColor,
@@ -98,8 +96,6 @@ namespace Forms9Patch {
 		{
 			_frame = new Frame
 			{
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = LayoutOptions.Center,
 				Padding = Padding,
 				HasShadow = HasShadow,
 				OutlineColor = OutlineColor,
@@ -169,9 +165,6 @@ namespace Forms9Patch {
 
 				var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
 				//System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
-
-				_frame.HorizontalOptions = LayoutOptions.Fill;
-				_frame.VerticalOptions = LayoutOptions.Fill;
 
 				LayoutChildIntoBoundingRegion (_frame, bounds);
 			} 

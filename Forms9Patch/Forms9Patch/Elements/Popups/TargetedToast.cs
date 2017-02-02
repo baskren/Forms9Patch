@@ -109,7 +109,7 @@ namespace Forms9Patch
 		};
 		readonly MaterialButton _okButton = new MaterialButton
 		{
-			HorizontalOptions = LayoutOptions.Fill
+			//HorizontalOptions = LayoutOptions.Fill
 		};
 		#endregion
 

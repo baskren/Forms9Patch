@@ -35,6 +35,10 @@ namespace Forms9Patch
 		/// The is visible property.
 		/// </summary>
 		public static new readonly BindableProperty IsVisibleProperty = BindableProperty.Create("PobIsVisible", typeof(bool), typeof(PopupBase), default(bool));
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is visible.
+		/// </summary>
+		/// <value><c>true</c> if is visible; otherwise, <c>false</c>.</value>
 		public new bool IsVisible
 		{
 			get { return (bool)GetValue(IsVisibleProperty); }
@@ -309,8 +313,6 @@ namespace Forms9Patch
 			_pageOverlay = new BoxView
 			{
 				BackgroundColor = PageOverlayColor,
-				HorizontalOptions = LayoutOptions.Fill,
-				VerticalOptions = LayoutOptions.Fill
 			};
 			_listener = new Listener(_pageOverlay);
 			_listener.Tapped += OnTapped;

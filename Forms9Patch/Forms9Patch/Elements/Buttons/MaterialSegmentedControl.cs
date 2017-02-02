@@ -539,21 +539,12 @@ namespace Forms9Patch
 		internal void OnButtonPropertyChanged  (object sender, System.ComponentModel.PropertyChangedEventArgs e) {
 			var button = sender as MaterialButton;
 			if (e.PropertyName == MaterialButton.IsSelectedProperty.PropertyName) {
-				if (GroupToggleBehavior == GroupToggleBehavior.Radio) {
+				if (GroupToggleBehavior == GroupToggleBehavior.Radio)
+				{
 					if (button.IsSelected)
 					{
 						foreach (var seg in _segments)
-						{
 							seg.IsSelected = seg.MaterialButton == button;
-							/*
-							if (seg.MaterialButton != button)
-							{
-								seg.IsSelected = false;
-							}
-							else
-								seg.Is
-								*/
-						}
 					}
 					else if (button.IsEnabled)
 					{
@@ -569,6 +560,13 @@ namespace Forms9Patch
 							eseg.IsSelected = true;
 					}
 				}
+				else if (GroupToggleBehavior == GroupToggleBehavior.Multiselect)
+				{
+					foreach (var seg in _segments)
+						if (seg.MaterialButton == button)
+							seg.IsSelected = !seg.IsSelected;
+				}
+
 			}
 		}
 

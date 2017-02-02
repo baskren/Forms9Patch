@@ -540,23 +540,23 @@ namespace TestProject
 				Padding = 3,
 				Segments = {
 					new Forms9Patch.Segment {
-						Text = "A",
+						Text = "A none",
 						ImageSource = arrowIcon,
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.Segment {
-						Text = "B",
+						Text = "B none",
 						IsSelected = true,
 						ImageSource = infoIcon,
 						Orientation = StackOrientation.Vertical,
 					},
 
 					new Forms9Patch.Segment {
-						Text = "C",
+						Text = "C none",
 						ImageSource = arrowIcon,
 					},
 					new Forms9Patch.Segment {
-						Text = "D",
+						Text = "D none",
 						IsEnabled = false,
 						ImageSource = infoIcon,
 						Orientation = StackOrientation.Vertical,
@@ -580,19 +580,19 @@ namespace TestProject
 				Segments = {
 
 					new Forms9Patch.Segment {
-						Text = "A",
+						Text = "A multi",
 						ImageSource = arrowIcon,
 					},
 
 					new Forms9Patch.Segment {
-						Text = "B",
+						Text = "B multi",
 						IsSelected = true,
 					},
 					new Forms9Patch.Segment {
-						Text = "C",
+						Text = "C multi",
 					},
 					new Forms9Patch.Segment {
-						Text = "D",
+						Text = "D multi",
 						IsEnabled = false,
 					},
 
@@ -610,25 +610,25 @@ namespace TestProject
 				OutlineWidth = 0,
 				SeparatorWidth = 1,
 				Orientation = StackOrientation.Vertical,
-				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
+				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.None,
 				Padding = 3,
 				Segments = {
 
 					new Forms9Patch.Segment {
-						Text = "A",
+						Text = "A none",
 					},
 
 					new Forms9Patch.Segment {
-						Text = "B",
+						Text = "B none",
 						IsSelected = true,
 						ImageSource = arrowIcon,
 						//Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.Segment {
-						Text = "C",
+						Text = "C none",
 					},
 					new Forms9Patch.Segment {
-						Text = "D",
+						Text = "D none",
 						IsEnabled = false,
 					},
 
