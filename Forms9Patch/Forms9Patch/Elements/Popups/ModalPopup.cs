@@ -94,9 +94,24 @@ namespace Forms9Patch {
 		/// </summary>
 		/// <param name="target">Element or Page pointed to by Popup.</param>
 		[Obsolete]
-		public ModalPopup (VisualElement target) : base (target) 
+		public ModalPopup (VisualElement target) : base () 
 		{
-			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
+			_frame = new Frame
+			{
+				VerticalOptions = LayoutOptions.Center,
+				HorizontalOptions = LayoutOptions.Center,
+				Padding = Padding,
+				HasShadow = HasShadow,
+				OutlineColor = OutlineColor,
+				OutlineWidth = OutlineWidth,
+				OutlineRadius = OutlineRadius,
+				BackgroundColor = BackgroundColor
+			};
+			ContentView = _frame;
+
+			Margin = 0;
+			Padding = 10;
+			
 		}
 
 
