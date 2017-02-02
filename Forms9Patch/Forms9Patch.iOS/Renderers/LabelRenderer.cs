@@ -202,6 +202,7 @@ namespace Forms9Patch.iOS
 				}
 				if (gap > 0 && height > 0)
 				{
+					
 					double y = 0;
 					switch (Element.VerticalTextAlignment)
 					{
@@ -212,7 +213,9 @@ namespace Forms9Patch.iOS
 							y = gap;
 							break;
 					}
-					Control.Frame = new CGRect(0, y, widthConstraint, height);
+					//Control.Frame = new CGRect(0, y, widthConstraint, height);
+
+					Control.Center = new CGPoint(widthConstraint/2.0, height/2.0 + y);
 				}
 				//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
@@ -469,8 +472,7 @@ namespace Forms9Patch.iOS
 			else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName ||
 					 e.PropertyName == Label.FitProperty.PropertyName ||
 					 e.PropertyName == Label.LinesProperty.PropertyName ||
-			         e.PropertyName == Label.LineBreakModeProperty.PropertyName ||
-			         e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName
+			         e.PropertyName == Label.LineBreakModeProperty.PropertyName
 					)
 			{
 				Invalid = true;
