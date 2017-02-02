@@ -124,8 +124,6 @@ namespace Forms9Patch
 		/// <param name="retain">If set to <c>true</c> retain.</param>
 		public BubblePopup (VisualElement target,bool retain=false) : base (target,retain) {
 			_bubbleLayout = new BubbleLayout {
-				//HorizontalOptions = LayoutOptions.Center,
-				//VerticalOptions = LayoutOptions.Center,
 				Padding = Padding,
 				HasShadow = HasShadow,
 				OutlineColor = OutlineColor,

@@ -443,9 +443,7 @@ namespace Forms9Patch
 			Padding = new Thickness (8, 6, 8, 6);
 			OutlineRadius = 2;
 			_label = new Label {
-				//VerticalOptions = LayoutOptions.CenterAndExpand,
 				VerticalTextAlignment = TextAlignment.Center,
-				//HorizontalOptions = LayoutOptions.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
 				HeightRequest = 22,
 				MinimizeHeight = true,
@@ -766,14 +764,16 @@ namespace Forms9Patch
 				}
 				if (_iconLabel != null)
 				{
-					_iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
-					_iconLabel.HorizontalOptions = LayoutOptions.Center;
+					//_iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
+					//_iconLabel.HorizontalOptions = LayoutOptions.Center;
 					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
+					_iconLabel.HorizontalTextAlignment = TextAlignment.Center;
 				}
 				if (_label != null) {
-					_label.VerticalOptions = LayoutOptions.CenterAndExpand;
-					_label.HorizontalOptions = LayoutOptions.Center;
+					//_label.VerticalOptions = LayoutOptions.CenterAndExpand;
+					//_label.HorizontalOptions = LayoutOptions.Center;
 					_label.VerticalTextAlignment = TextAlignment.Center;
+					_label.HorizontalTextAlignment = TextAlignment.Center;
 					_label.MinimizeHeight = false;
 				}
 				_stackLayout.Spacing = 4;
@@ -784,15 +784,17 @@ namespace Forms9Patch
 				}
 				if (_iconLabel != null)
 				{
-					_iconLabel.VerticalOptions = LayoutOptions.Center;
-					_iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					//_iconLabel.VerticalOptions = LayoutOptions.Center;
+					//_iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
 					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
+					_iconLabel.HorizontalTextAlignment = TextAlignment.Center;
 				}
 				if (_label != null) {
-					_label.VerticalOptions = LayoutOptions.Center;
-					_label.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					//_label.VerticalOptions = LayoutOptions.Center;
+					//_label.HorizontalOptions = LayoutOptions.CenterAndExpand;
 					//_label.BackgroundColor = Color.Red;
 					_label.VerticalTextAlignment = TextAlignment.Center;
+					_label.HorizontalTextAlignment = TextAlignment.Center;
 					_label.MinimizeHeight = true;
 				}
 				_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
@@ -854,8 +856,8 @@ namespace Forms9Patch
 						TextColor = _label.TextColor, 
 						HorizontalTextAlignment = TextAlignment.Center, 
 						VerticalTextAlignment = TextAlignment.Center, 
-						HorizontalOptions = LayoutOptions.Center, 
-						VerticalOptions = LayoutOptions.Center,
+						//HorizontalOptions = LayoutOptions.Center, 
+						//VerticalOptions = LayoutOptions.Center,
 						Lines=0,
 					};
 					if (_iconLabel != null)

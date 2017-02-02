@@ -113,7 +113,6 @@ namespace Forms9Patch
 		#region Swipe Menu
 		readonly Frame _insetFrame = new Frame
 		{
-			//VerticalOptions = LayoutOptions.FillAndExpand,
 			HasShadow = true,
 			ShadowInverted = true,
 			BackgroundColor = Color.FromRgb(200,200,200),
@@ -123,17 +122,14 @@ namespace Forms9Patch
 		};
 		readonly Frame _swipeFrame1 = new Frame
 		{
-			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _swipeFrame2 = new Frame
 		{
-			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _swipeFrame3 = new Frame
 		{
-			//VerticalOptions = LayoutOptions.FillAndExpand,
 			Padding = new Thickness(-1)
 		};
 		readonly Frame _touchBlocker = new Frame
