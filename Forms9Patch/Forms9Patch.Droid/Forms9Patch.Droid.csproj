@@ -180,6 +180,7 @@
     <Compile Include="Renderers\ManualLayoutRenderer.cs" />
     <Compile Include="Services\HtmlToPdfService.cs" />
     <Compile Include="Services\HapticsService.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Effects\" />

@@ -173,6 +173,8 @@
     <Compile Include="Services\HapticsService.cs" />
     <Compile Include="Enums\HapticEffect.cs" />
     <Compile Include="Enums\HapticMode.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
+    <Compile Include="Interfaces\IKeyboardService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

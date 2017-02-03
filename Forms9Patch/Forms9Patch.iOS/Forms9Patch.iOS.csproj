@@ -117,6 +117,7 @@
     <Compile Include="Extensions\UITextViewExtensions.cs" />
     <Compile Include="Services\HtmlToPdfService.cs" />
     <Compile Include="Services\HapticService.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
