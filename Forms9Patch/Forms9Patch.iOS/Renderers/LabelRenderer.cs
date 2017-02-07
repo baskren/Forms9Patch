@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using CoreGraphics;
 using System.ComponentModel;
 using Foundation;
+using System.Threading;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.iOS.LabelRenderer))]
 namespace Forms9Patch.iOS
@@ -486,7 +487,10 @@ namespace Forms9Patch.iOS
 		void UpdateFont()
 		{
 			ControlFont = Element.ToUIFont();
-			Control.Font = ControlFont;
+			InvokeOnMainThread(() =>
+			{
+				Control.Font = ControlFont;
+			});
 			ControlFontPointSize = Control.Font.PointSize;
 			FontDescriptor = ControlFont.FontDescriptor;
 			Invalid = true;
@@ -507,7 +511,10 @@ namespace Forms9Patch.iOS
 
 		void UpdateHorizontalAlignment ()
 		{
-			Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment ();
+			InvokeOnMainThread(() =>
+			{
+				Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
+			});
 		}
 
 		void UpdateText()
@@ -526,13 +533,19 @@ namespace Forms9Patch.iOS
 
 			if (text != null)
 			{
-				Control.AttributedText = ControlAttributedText = null;
-				Control.Text = ControlText = new NSString(text);
+				InvokeOnMainThread(() =>
+				{
+					Control.AttributedText = ControlAttributedText = null;
+					Control.Text = ControlText = new NSString(text);
+				});
 			}
 			else
 			{
-				Control.Text = ControlText = null;
-				Control.AttributedText = ControlAttributedText = attributedText;
+				InvokeOnMainThread(() =>
+				{
+					Control.Text = ControlText = null;
+					Control.AttributedText = ControlAttributedText = attributedText;
+				});
 			}
 		}
 
@@ -540,7 +553,10 @@ namespace Forms9Patch.iOS
 		{
 			var color = (Color)Element.GetValue(Label.TextColorProperty);
 			ControlTextColor = color.ToUIColor(UIColor.Black);
-			Control.TextColor = ControlTextColor;
+			InvokeOnMainThread(() =>
+			{
+				Control.TextColor = ControlTextColor;
+			});
 		}
 		#endregion
 

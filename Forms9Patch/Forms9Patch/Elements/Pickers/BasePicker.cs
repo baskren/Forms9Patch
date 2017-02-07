@@ -183,9 +183,9 @@ namespace Forms9Patch
 		{
 			if (_scrolling)
 				return;
-			if (_scrolled)
+			if (_scrollCompleting)
 			{
-				_scrolled = false;
+				_scrollCompleting = false;
 				return;
 			}
 			_tapping = true;
@@ -306,14 +306,15 @@ namespace Forms9Patch
 			}
 		}
 
-		bool _scrolled;
+		bool _scrollCompleting;
 		void OnScrolled(object sender, EventArgs e)
 		{
 			if (SelectBy == SelectBy.Position)
 				ScrollToIndex(Index,true);
 			//System.Diagnostics.Debug.WriteLine("Index=["+Index+"] ["+ItemsSource[Index]+"]");
 			_scrolling = false;
-			_scrolled = true;
+			// so why was the following line added?  Android, perhaps?
+			//_scrollCompleting = true;
 		}
 
 		#endregion

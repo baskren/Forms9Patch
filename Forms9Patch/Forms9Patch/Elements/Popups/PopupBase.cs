@@ -418,6 +418,11 @@ namespace Forms9Patch
 				{
 					ContentView.TranslationX = 0;
 					ContentView.TranslationY = 0;
+					if (Application.Current.MainPage == null)
+					{
+						IsVisible = false;
+						return;
+					}
 					if (RootPage == null)
 						throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
 					RootPage?.AddPopup(this);
