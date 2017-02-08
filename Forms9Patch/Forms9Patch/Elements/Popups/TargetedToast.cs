@@ -16,6 +16,7 @@ namespace Forms9Patch
 		public static TargetedToast Create(VisualElement target, string title, string text)
 		{
 			var toast = new TargetedToast(target) { Title = title, Text = text };
+			toast.IsVisible = true;
 			return toast;
 		}
 
@@ -96,13 +97,13 @@ namespace Forms9Patch
 		#region Fields 
 		readonly Label _titleLabel = new Label
 		{
-			FontSize = 24,
+			//FontSize = 24,
 			FontAttributes = FontAttributes.Bold,
 			TextColor = Color.Black
 		};
 		readonly Label _textLabel = new Label
 		{
-			FontSize = 16,
+			//FontSize = 16,
 			TextColor = Color.Black
 			//Lines = 0,
 			//VerticalOptions = LayoutOptions.Fill,
@@ -125,8 +126,11 @@ namespace Forms9Patch
 			_okButton.HtmlText = OkText;
 
 			HasShadow = true;
-			OutlineRadius = 4;
-			PointerLength = 10;
+			OutlineRadius = 5;
+			Padding = 5;
+
+			Margin = 20;
+			//PointerLength = 10;
 
 			_okButton.Tapped += (s, args) => Cancel();
 			Content = new StackLayout
@@ -138,7 +142,6 @@ namespace Forms9Patch
 					{
 						Content = _textLabel
 					},
-					_okButton
 				}
 			};
 		}
@@ -155,7 +158,13 @@ namespace Forms9Patch
 			else if (propertyName == TextProperty.PropertyName)
 				_textLabel.HtmlText = Text;
 			else if (propertyName == OkTextProperty.PropertyName)
+			{
 				_okButton.HtmlText = OkText;
+				if (!string.IsNullOrWhiteSpace(_okButton.HtmlText) && !((StackLayout)Content).Children.Contains(_okButton))
+					((StackLayout)Content).Children.Add(_okButton);
+				else if (string.IsNullOrWhiteSpace(_okButton.HtmlText) && ((StackLayout)Content).Children.Contains(_okButton))
+					((StackLayout)Content).Children.Remove(_okButton);
+			}
 			else if (propertyName == OkButtonColorProperty.PropertyName)
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)

@@ -301,10 +301,25 @@ namespace Forms9Patch
 
 				var shadow = BubbleLayout.ShadowPadding (_bubbleLayout);
 				SizeRequest request;
+
 				if (_bubbleLayout.Content.WidthRequest > 0 && _bubbleLayout.Content.HeightRequest > 0)
 					request = new SizeRequest(new Size(_bubbleLayout.Content.WidthRequest, _bubbleLayout.Content.HeightRequest));
 				else
-					request = _bubbleLayout.Content.Measure (width, height);
+				{
+					double hz = width - (_bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness + Margin.HorizontalThickness);
+					if (_bubbleLayout.Content.WidthRequest > 0)
+						hz = _bubbleLayout.Content.WidthRequest;
+					double vt = height - (_bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness + Margin.HorizontalThickness);
+					if (_bubbleLayout.Content.HeightRequest > 0)
+						vt = _bubbleLayout.Content.HeightRequest;
+					request = _bubbleLayout.Content.Measure(hz, vt);
+				}
+				/*
+				if (_bubbleLayout.Content.WidthRequest > 0 && _bubbleLayout.Content.HeightRequest > 0)
+					request = new SizeRequest(new Size(_bubbleLayout.Content.WidthRequest, _bubbleLayout.Content.HeightRequest));
+				else
+					request = _bubbleLayout.Content.Measure (width - (_bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness + Margin.HorizontalThickness), height - (_bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness + Margin.HorizontalThickness));
+					*/
 				//var request = _bubbleLayout.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
 				var rboxSize = new Size (request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
 
@@ -325,12 +340,12 @@ namespace Forms9Patch
 
 
 
-					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength;
-					var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength;
-					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength;
-					var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength;
-					var reqHzSpace = width - rboxSize.Width;
-					var reqVtSpace = height - rboxSize.Height;
+					var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
+					var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength - Margin.Right;
+					var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength - Margin.Top;
+					var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength - Margin.Bottom;
+					var reqHzSpace = width - rboxSize.Width - Margin.HorizontalThickness;
+					var reqVtSpace = height - rboxSize.Height - Margin.VerticalThickness;
 
 
 					double space = 0;
@@ -390,7 +405,7 @@ namespace Forms9Patch
 				_bubbleLayout.PointerDirection = pointerDir;
 				//_bubbleLayout.IsVisible = true;
 				if (pointerDir == PointerDirection.None) {
-					LayoutChildIntoBoundingRegion (_bubbleLayout, new Rectangle (width / 2.0 - rboxSize.Width / 2.0, height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
+					LayoutChildIntoBoundingRegion (_bubbleLayout, new Rectangle (Margin.Left + width / 2.0 - rboxSize.Width / 2.0, Margin.Top + height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height));
 				} else {
 					Tuple<double,float> tuple;
 					if (pointerDir.IsVertical ()) {
