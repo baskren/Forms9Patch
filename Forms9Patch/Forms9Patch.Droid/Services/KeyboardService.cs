@@ -1,22 +1,40 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Views.InputMethods;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyboardService))]
 namespace Forms9Patch.Droid
 {
 	public class KeyboardService : IKeyboardService
 	{
+		InputMethodManager im;
+		bool _lastAcceptingText;
 		public void Hide()
 		{
-			var inputMethodManager = Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
-			if (inputMethodManager != null && Application.Context is Activity)
+			im = im ?? Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
+			var activity = Xamarin.Forms.Forms.Context as Activity;
+			if (im != null && activity != null)
 			{
-				var activity = Application.Context as Activity;
 				var token = activity.CurrentFocus == null ? null : activity.CurrentFocus.WindowToken;
-				inputMethodManager.HideSoftInputFromWindow(token, HideSoftInputFlags.ImplicitOnly);
+				im.HideSoftInputFromWindow(token, HideSoftInputFlags.NotAlways);
 			}		
+		}
+
+		public KeyboardService()
+		{
+			im = im ?? Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
+			Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
+			{
+				if (im.IsAcceptingText != _lastAcceptingText)
+				{
+					Forms9Patch.KeyboardService.OnVisiblityChange(im.IsAcceptingText?KeyboardVisibilityChange.Shown:KeyboardVisibilityChange.Hidden);
+					_lastAcceptingText = im.IsAcceptingText;
+				}
+				return true;
+			});
 		}
 	}
 }

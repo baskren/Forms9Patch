@@ -11,7 +11,7 @@ namespace Forms9Patch.iOS
 {
 	public class HtmlToPdfService : IHtmlToPngPdfService
 	{
-		public void ToAttachment(string html, Size size, string fileName, Action<string> onComplete)
+		public void ToPng(string html, Size size, string fileName, Action<string> onComplete)
 		{
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));
 
