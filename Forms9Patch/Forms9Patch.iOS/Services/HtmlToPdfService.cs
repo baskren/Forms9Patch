@@ -5,14 +5,13 @@ using Foundation;
 using PCLStorage;
 using UIKit;
 using Xamarin.Forms;
-using PCL.Utils;
 
 [assembly: Dependency(typeof(Forms9Patch.iOS.HtmlToPdfService))]
 namespace Forms9Patch.iOS
 {
-	public class HtmlToPdfService : IHtmlToPdfService
+	public class HtmlToPdfService : IHtmlToPngPdfService
 	{
-		public void ToPdf(string html, Size size, string fileName, Action<string> onComplete)
+		public void ToAttachment(string html, Size size, string fileName, Action<string> onComplete)
 		{
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));
 

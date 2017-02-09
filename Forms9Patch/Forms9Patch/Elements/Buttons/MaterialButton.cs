@@ -385,7 +385,14 @@ namespace Forms9Patch
 			set { SetValue(MinFontSizeProperty, value); }
 		}
 
+		/// <summary>
+		/// The haptic effect property.
+		/// </summary>
 		public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(MaterialButton), HapticEffect.KeyClick);
+		/// <summary>
+		/// Gets or sets the haptic effect.
+		/// </summary>
+		/// <value>The haptic effect.</value>
 		public HapticEffect HapticEffect
 		{
 			get { return (HapticEffect)GetValue(HapticEffectProperty); }

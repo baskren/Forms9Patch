@@ -274,8 +274,11 @@ namespace Forms9Patch.Droid
 					LineBreakMode = Element.LineBreakMode,
 				};
 				_lastControlState = null;
-				Control.SetTextColor(_labelTextColorDefault);
-				Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+				{
+					Control.SetTextColor(_labelTextColorDefault);
+					Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+				});
 				UpdateText();
 				UpdateColor();
 				UpdateFont();
@@ -295,7 +298,10 @@ namespace Forms9Patch.Droid
 			base.OnElementPropertyChanged(sender, e);
 
 			if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName || e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
-				Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+				{
+					Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+				});
 			else if (e.PropertyName == Label.TextColorProperty.PropertyName)
 				UpdateColor();
 			else if (e.PropertyName == Label.FontProperty.PropertyName)
@@ -370,10 +376,13 @@ namespace Forms9Patch.Droid
 			if (_currentControlState.TextColor == Element.TextColor)
 				return;
 			_currentControlState.TextColor = Element.TextColor;
-			if (_currentControlState.TextColor == Xamarin.Forms.Color.Default)
-				Control.SetTextColor(_labelTextColorDefault);
-			else
-				Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
+			((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+			{
+				if (_currentControlState.TextColor == Xamarin.Forms.Color.Default)
+					Control.SetTextColor(_labelTextColorDefault);
+				else
+					Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
+			});
 		}
 
 		void UpdateFont()
@@ -381,7 +390,11 @@ namespace Forms9Patch.Droid
 			_currentControlState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
 			if (_currentControlState.Typeface == Control.Typeface)
 				return;
-			Control.Typeface = _currentControlState.Typeface;
+			//Android.App.LocalActivityManager.CurrentActivity.RunOnUiThread(()=>
+			((Android.App.Activity)Forms.Context).RunOnUiThread(()=>
+			{
+				Control.Typeface = _currentControlState.Typeface;
+			});
 			Layout();
 		}
 

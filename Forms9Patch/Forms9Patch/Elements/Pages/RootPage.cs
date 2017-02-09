@@ -85,6 +85,10 @@ namespace Forms9Patch
 		}
 
 		bool _ignoreChildren;
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.StackLayout"/> will not invalidate itself when a child changes.
+		/// </summary>
+		/// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
 		public bool IgnoreChildren
 		{
 			get

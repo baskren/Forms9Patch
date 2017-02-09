@@ -18,13 +18,13 @@ using Android.Views;
 [assembly: Dependency(typeof(Forms9Patch.Droid.HtmlToPdfService))]
 namespace Forms9Patch.Droid
 {
-	public class HtmlToPdfService : Java.Lang.Object, IHtmlToPdfService
+	public class HtmlToPdfService : Java.Lang.Object, IHtmlToPngPdfService
 	{
-		public void ToPdf(string html, Size size, string fileName, Action<string> onComplete)
+		public void ToPng(string html, Size size, string fileName, Action<string> onComplete)
 		{
 			var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
 			var dir = new Java.IO.File(externalPath);
-			var file = new Java.IO.File(dir + "/" + fileName + ".pdf");
+			var file = new Java.IO.File(dir + "/" + fileName + ".png");
 			if (!dir.Exists())
 				dir.Mkdir();
 			if (file.Exists())

@@ -166,7 +166,7 @@
     <Compile Include="Interfaces\IWebViewExtensionService.cs" />
     <Compile Include="Elements\Popups\TargetedToast.cs" />
     <Compile Include="Elements\Pages\RootPage.cs" />
-    <Compile Include="Interfaces\IHtmlToPdfService.cs" />
+    <Compile Include="Interfaces\IHtmlToPngPdfService.cs" />
     <Compile Include="Extensions\HtmlStringExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Interfaces\IHapticService.cs" />

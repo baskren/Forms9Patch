@@ -384,31 +384,31 @@ namespace Forms9Patch
 
 		#region Collection management
 		void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if (e.OldItems != null) foreach (Segment oldItem in e.OldItems) {
-					var button = oldItem.MaterialButton;
-					button.PropertyChanged -= OnButtonPropertyChanged;
-					Children.Remove (button);
-					button.Tapped -= OnSegmentTapped;
-					button.Selected -= OnSegmentSelected;
-					button.LongPressing -= OnSegmentLongPressing;
-					button.LongPressed -= OnSegmentLongPressed;
-			}
-			int index = e.NewStartingIndex;
-			if (e.NewItems != null) foreach (Segment newItem in e.NewItems) {
-					var button = newItem.MaterialButton;
-					UpdateSegment(newItem);
-					button.PropertyChanged += OnButtonPropertyChanged;
-					button.Tapped += OnSegmentTapped;
-					button.Selected += OnSegmentSelected;
-					button.LongPressing += OnSegmentLongPressing;
-					button.LongPressed += OnSegmentLongPressed;
-					Children.Insert (index++, button);
-					if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio) {
-						foreach (var segment in _segments)
-							if (segment != newItem)
-								segment.IsSelected = false;
-					}
-
+			int index;
+			switch (e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					index = e.NewStartingIndex;
+					if (e.NewItems != null)
+						foreach (Segment newItem in e.NewItems)
+							InsertSegment(index++, newItem);
+					break;
+				case NotifyCollectionChangedAction.Remove:
+					if (e.OldItems != null)
+						foreach (Segment oldItem in e.OldItems)
+							RemoveSegment(oldItem);
+					break;
+				case NotifyCollectionChangedAction.Replace:
+					// not used?
+					throw new NotImplementedException();
+					break;
+				case NotifyCollectionChangedAction.Move:
+					throw new NotImplementedException();
+					break;
+				case NotifyCollectionChangedAction.Reset:
+					for (int i = Children.Count - 1; i >= 0; i--)
+						RemoveButton(Children[i] as MaterialButton);
+					break;
 			}
 			int count = Children.Count;
 			if (count > 1) {
@@ -420,6 +420,42 @@ namespace Forms9Patch
 				((MaterialButton)Children [0]).SegmentType = SegmentType.Not;
 			}
 			UpdateChildrenPadding ();
+		}
+
+		void InsertSegment(int index, Segment s)
+		{
+			var button = s.MaterialButton;
+			UpdateSegment(s);
+			button.PropertyChanged += OnButtonPropertyChanged;
+			button.Tapped += OnSegmentTapped;
+			button.Selected += OnSegmentSelected;
+			button.LongPressing += OnSegmentLongPressing;
+			button.LongPressed += OnSegmentLongPressed;
+			Children.Insert(index, button);
+			if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
+			{
+				foreach (var segment in _segments)
+					if (segment != s)
+						segment.IsSelected = false;
+			}
+		}
+
+		void RemoveSegment(Segment s)
+		{
+			var button = s.MaterialButton;
+			RemoveButton(button);
+		}
+
+		void RemoveButton(MaterialButton button)
+		{
+			if (button == null)
+				return;
+			button.PropertyChanged -= OnButtonPropertyChanged;
+			Children.Remove(button);
+			button.Tapped -= OnSegmentTapped;
+			button.Selected -= OnSegmentSelected;
+			button.LongPressing -= OnSegmentLongPressing;
+			button.LongPressed -= OnSegmentLongPressed;
 		}
 
 		void UpdateChildrenPadding() {

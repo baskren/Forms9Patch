@@ -246,9 +246,10 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
-		/// Scrolls the index of the to.
+		/// Scrolls to index
 		/// </summary>
 		/// <param name="index">Index.</param>
+		/// <param name="force">If set to <c>true</c> scroll to index even if already scrolling.</param>
 		public virtual void ScrollToIndex(int index, bool force = false)
 		{
 			//System.Diagnostics.Debug.WriteLine("ScrollToIndex("+index+")");

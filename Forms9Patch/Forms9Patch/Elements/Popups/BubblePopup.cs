@@ -431,12 +431,15 @@ namespace Forms9Patch
 			} 
 		}
 
+		/*
 		protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
 		{
 		//	System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + widthConstraint + "] h=[" + heightConstraint + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			return base.OnMeasure(widthConstraint, heightConstraint);
 		}
+		*/
 
+		/*
 		//double _lastWidthAllocated, _lastHeightAllocated;
 		protected override void OnSizeAllocated(double width, double height)
 		{
@@ -447,6 +450,7 @@ namespace Forms9Patch
 		//	System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + width + "] h=[" + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			base.OnSizeAllocated(width, height);
 		}
+		*/
 
 
 		#endregion
