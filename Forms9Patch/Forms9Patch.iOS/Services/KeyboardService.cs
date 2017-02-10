@@ -8,8 +8,8 @@ namespace Forms9Patch.iOS
 	{
 		public KeyboardService()
 		{
-			UIKeyboard.Notifications.ObserveDidHide(OnHidden);
-			UIKeyboard.Notifications.ObserveDidShow(OnShown);
+			UIKeyboard.Notifications.ObserveWillHide(OnHidden);
+			UIKeyboard.Notifications.ObserveWillShow(OnShown);
 		}
 
 		void OnHidden(object sender, UIKeyboardEventArgs e)

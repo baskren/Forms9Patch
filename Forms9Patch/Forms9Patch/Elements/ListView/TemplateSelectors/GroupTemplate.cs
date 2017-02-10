@@ -127,6 +127,14 @@ namespace Forms9Patch
 				var source = itemWrapper.Source;
 				if (source != null)
 				{
+					var sourceType = source.GetType();
+					if (sourceType.IsConstructedGenericType)
+					{
+						var genericSourceType = sourceType.GetGenericTypeDefinition();
+						var genericItemType = typeof(ItemWrapper<>).MakeGenericType(new[] { genericSourceType });
+						if (_cellTemplates.ContainsKey(genericItemType))
+							return _cellTemplates[genericItemType];
+					}
 					var template = TemplateForType(source.GetType());
 					return template;
 				}
