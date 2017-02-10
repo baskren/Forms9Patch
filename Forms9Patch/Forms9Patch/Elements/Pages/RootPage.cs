@@ -52,11 +52,15 @@ namespace Forms9Patch
 		{
 			if (popup.Retain)
 				return;
+			/* seems to be causing some problems (race condition?) with presenting a
 			while (PageController.InternalChildren.Contains(popup))
 			{
 				PageController.InternalChildren.Remove(PageController.InternalChildren.Last());
 				//Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, new Rectangle(0, 0, -1, -1));
 			}
+			*/
+			if (PageController.InternalChildren.Contains(popup))
+				PageController.InternalChildren.Remove(popup);
 		}
 
 
