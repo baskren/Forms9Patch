@@ -11,6 +11,9 @@ namespace Forms9Patch
 	{
 		static IKeyboardService _service;
 
+		/// <summary>
+		/// Initializes the <see cref="T:Forms9Patch.KeyboardService"/> class.
+		/// </summary>
 		static KeyboardService()
 		{
 			_service = _service ?? DependencyService.Get<IKeyboardService>();
@@ -25,6 +28,10 @@ namespace Forms9Patch
 			_service?.Hide();
 		}
 
+		/// <summary>
+		/// Ons the visiblity change.
+		/// </summary>
+		/// <param name="state">State.</param>
 		public static void OnVisiblityChange(KeyboardVisibilityChange state)
 		{
 			switch (state)
@@ -38,10 +45,19 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// Occurs when hidden.
+		/// </summary>
 		public static event EventHandler Hidden;
+		/// <summary>
+		/// Occurs when shown.
+		/// </summary>
 		public static event EventHandler Shown;
 	}
 
+	/// <summary>
+	/// Keyboard visibility change.
+	/// </summary>
 	public enum KeyboardVisibilityChange
 	{
 		Shown,
