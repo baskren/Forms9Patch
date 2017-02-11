@@ -131,6 +131,11 @@ namespace Forms9Patch.iOS
 			await LayoutImage (image);
 		}
 
+		/// <summary>
+		/// Images the property changed.
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		void ImagePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName)

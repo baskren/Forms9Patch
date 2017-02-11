@@ -60,7 +60,13 @@ namespace Forms9Patch
 	/// </summary>
 	public enum KeyboardVisibilityChange
 	{
+		/// <summary>
+		/// The keyboard will show/has shown.
+		/// </summary>
 		Shown,
+		/// <summary>
+		/// The keyboard will hide/has been hidden.
+		/// </summary>
 		Hidden
 	}
 }

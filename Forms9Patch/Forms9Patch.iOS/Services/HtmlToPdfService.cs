@@ -9,8 +9,18 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Forms9Patch.iOS.HtmlToPdfService))]
 namespace Forms9Patch.iOS
 {
+	/// <summary>
+	/// Html to pdf service.
+	/// </summary>
 	public class HtmlToPdfService : IHtmlToPngPdfService
 	{
+		/// <summary>
+		/// Tos the png.
+		/// </summary>
+		/// <param name="html">Html.</param>
+		/// <param name="size">Size.</param>
+		/// <param name="fileName">File name.</param>
+		/// <param name="onComplete">On complete.</param>
 		public void ToPng(string html, Size size, string fileName, Action<string> onComplete)
 		{
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));

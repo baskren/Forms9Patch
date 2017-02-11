@@ -2,11 +2,12 @@
 using Android.Graphics.Drawables;
 using System.Collections.Generic;
 using Android.App;
+using System;
 
 
 namespace Forms9Patch.Droid
 {
-	internal class NinePatch : INinePatch
+	internal class NinePatch : INinePatch, IDisposable
 	{
 		//static uint _instances;
 		readonly Bitmap _bitmap;
@@ -127,6 +128,35 @@ namespace Forms9Patch.Droid
 		internal static Bitmap TrimBitmap (Bitmap bitmap) {
 			return Bitmap.CreateBitmap (bitmap, 1, 1, bitmap.Width - 2, bitmap.Height - 2);
 		}
+
+		#region IDisposable Support
+		~NinePatch()
+		{
+			_ranges = null;
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+		}
+
+		private bool disposedValue = false; // To detect redundant calls
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					_ranges = null;
+					System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+				}
+				disposedValue = true;
+			}
+		}
+
+		public void Dispose()
+		{
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			Dispose(true);
+		}
+		#endregion
 
 
 	}

@@ -5,7 +5,6 @@ using Xamarin.Forms;
 using CoreGraphics;
 using System.ComponentModel;
 using Foundation;
-using System.Threading;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.iOS.LabelRenderer))]
 namespace Forms9Patch.iOS
@@ -26,7 +25,6 @@ namespace Forms9Patch.iOS
 		int ControlLines = -1;
 
 		SizeRequest LastDesiredSize = new SizeRequest(Size.Zero,Size.Zero);
-		double LastMaxFontSize = (double)Label.MaxFontSizeProperty.DefaultValue;
 		double LastMinFontSize = (double)Label.MinFontSizeProperty.DefaultValue;
 
 //		TextAlignment LastVerticalTextAlignment = (TextAlignment)Xamarin.Forms.Label.VerticalTextAlignmentProperty.DefaultValue;
@@ -55,7 +53,7 @@ namespace Forms9Patch.iOS
 
 
 
-			if (Invalid || widthConstraint!= LastWidthConstraint || heightConstraint != LastHeightContraint || Element.MaxFontSize != LastMaxFontSize || Element.MinFontSize != LastMinFontSize)
+			if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
 			{
 				//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
 				//if (Element.HtmlText == "2015 IBC")
@@ -64,7 +62,6 @@ namespace Forms9Patch.iOS
 				Invalid = false;
 				LastWidthConstraint = widthConstraint;
 				LastHeightContraint = heightConstraint;
-				LastMaxFontSize = Element.MaxFontSize;
 				LastMinFontSize = Element.MinFontSize;
 
 				ControlLineBreakMode = UILineBreakMode.WordWrap;
@@ -74,14 +71,9 @@ namespace Forms9Patch.iOS
 					tmpFontSize = (nfloat)(UIFont.LabelFontSize * Math.Abs(tmpFontSize));
 				if (Math.Abs(tmpFontSize) <= double.Epsilon * 10)
 					tmpFontSize = UIFont.LabelFontSize;
-				var maxFontSize = (nfloat)LastMaxFontSize;
-				if (maxFontSize < 0)
-					maxFontSize = 256;
 				var minFontSize = (nfloat)LastMinFontSize;
 				if (minFontSize < 0)
 					minFontSize = 4;
-				if (tmpFontSize > maxFontSize)
-					tmpFontSize = maxFontSize;
 				if (tmpFontSize < minFontSize)
 					tmpFontSize = minFontSize;
 
@@ -94,8 +86,6 @@ namespace Forms9Patch.iOS
 				{
 					ControlLines = 0;
 					tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
-					if (tmpFontSize > maxFontSize)
-						tmpFontSize = maxFontSize;
 					if (tmpFontSize < minFontSize)
 						tmpFontSize = minFontSize;
 					ControlFont = ControlFont.WithSize(tmpFontSize);
@@ -116,8 +106,6 @@ namespace Forms9Patch.iOS
 						var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
 
 						tmpFontSize = (nfloat)(((heightConstraint) / (Element.Lines + leadingRatio * (Element.Lines - 1))) / lineHeightRatio - 0.1f);
-						if (tmpFontSize > maxFontSize)
-							tmpFontSize = maxFontSize;
 						if (tmpFontSize < minFontSize)
 							tmpFontSize = minFontSize;
 						ControlFont = ControlFont.WithSize(tmpFontSize);
@@ -126,8 +114,6 @@ namespace Forms9Patch.iOS
 				else if (Element.Fit == LabelFit.Width)
 				{
 					tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
-					if (tmpFontSize > maxFontSize)
-						tmpFontSize = maxFontSize;
 					if (tmpFontSize < minFontSize)
 						tmpFontSize = minFontSize;
 					ControlFont = ControlFont.WithSize(tmpFontSize);
@@ -323,7 +309,7 @@ namespace Forms9Patch.iOS
 
 		nfloat WidthFit(double widthConstraint, nfloat startFontSize)
 		{
-			if (widthConstraint == 0)
+			if (Math.Abs(widthConstraint) < 0.01)
 				return 0;
 			if (widthConstraint < 0)
 				return startFontSize;

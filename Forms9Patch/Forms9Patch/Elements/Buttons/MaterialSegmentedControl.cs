@@ -401,10 +401,8 @@ namespace Forms9Patch
 				case NotifyCollectionChangedAction.Replace:
 					// not used?
 					throw new NotImplementedException();
-					break;
 				case NotifyCollectionChangedAction.Move:
 					throw new NotImplementedException();
-					break;
 				case NotifyCollectionChangedAction.Reset:
 					for (int i = Children.Count - 1; i >= 0; i--)
 						RemoveButton(Children[i] as MaterialButton);

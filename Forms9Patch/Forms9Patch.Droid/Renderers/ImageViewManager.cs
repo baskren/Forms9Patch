@@ -45,14 +45,20 @@ namespace Forms9Patch.Droid
 			_element = element;
 		}
 
+		~ImageViewManager()
+		{
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+		}
 
 		bool _disposed;
 		public void Dispose(){
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			Dispose(true);
-			GC.SuppressFinalize(this);
+			//GC.SuppressFinalize(this);
 		}
 
 		protected virtual void Dispose(bool disposing){
+			System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing=["+disposing+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (!_disposed && disposing){
 				//if (_ninePatch != null)
 				//	_ninePatch.RemoveFromSuperview();
@@ -62,6 +68,7 @@ namespace Forms9Patch.Droid
 					droidViewGroup.RemoveView (_imageView);
 					_imageView = null;
 				}
+				_image = null;
 				_disposed = true;
 			}
 		}
@@ -147,7 +154,7 @@ namespace Forms9Patch.Droid
 					var toDispose = _imageView;
 					Device.StartTimer (TimeSpan.FromMilliseconds (10), () => {
 						toDispose.Alpha -= 0.25f;
-						if (toDispose.Alpha > 0)
+						if (toDispose.Alpha > 0 || _disposed)
 							return true;
 						droidViewGroup.RemoveView (toDispose);
 						toDispose.Alpha = 1;

@@ -21,16 +21,29 @@ namespace Forms9Patch
 			set { SetValue(ColorProperty, value); }
 		}
 
-
 		/// <summary>
-		/// Create and displays an activity indictar on a full page layover.
+		/// Create this instance.
 		/// </summary>
-		public static ActivityIndicatorPopup Create(VisualElement target)
+		public static ActivityIndicatorPopup Create()
 		{
-			var indicator = new ActivityIndicatorPopup(target);
+			var indicator = new ActivityIndicatorPopup();
 			indicator.IsVisible = true;
 			return indicator;
 		}
+
+		/// <summary>
+		/// Create the specified target.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		[Obsolete]
+		public static ActivityIndicatorPopup Create(VisualElement target = null)
+		{
+			var indicator = new ActivityIndicatorPopup();
+			indicator.IsVisible = true;
+			return indicator;
+		}
+
+
 
 		#region Fields
 		ActivityIndicator _indicator = new ActivityIndicator

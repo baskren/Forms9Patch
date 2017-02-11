@@ -4,8 +4,16 @@ using Foundation;
 
 namespace Forms9Patch.iOS
 {
+	/// <summary>
+	/// UIT ext view extensions.
+	/// </summary>
 	public static class UITextViewExtensions
 	{
+		/// <summary>
+		/// Numbers the of lines.
+		/// </summary>
+		/// <returns>The of lines.</returns>
+		/// <param name="view">View.</param>
 		public static uint NumberOfLines(this UITextView view)
 		{
 			var layoutManager = view.LayoutManager;
