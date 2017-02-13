@@ -217,7 +217,7 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ItemsSourceProperty.PropertyName)
 			{
-				_listView.ItemsSource = ItemsSource;
+				_listView.F9PItemsSource = ItemsSource;
 				if (ItemsSource != null)
 					ScrollToIndex(Index);
 			}

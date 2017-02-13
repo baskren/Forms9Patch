@@ -23,7 +23,7 @@ namespace Forms9Patch
 		/// The item template property.
 		/// </summary>
 		[Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
-		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), null);
+		public static new readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(DataTemplate), typeof(ListView), null);
 		/// <summary>
 		/// The item template property.
 		/// </summary>
@@ -38,11 +38,12 @@ namespace Forms9Patch
 		/// Gets or sets the item template.
 		/// </summary>
 		/// <value>The item template.</value>
-		public Forms9Patch.DataTemplateSelector ItemTemplates
+		public DataTemplateSelector ItemTemplates
 		{
-			get { return (Forms9Patch.DataTemplateSelector)GetValue(Xamarin.Forms.ListView.ItemTemplateProperty); }
-			private set { 
-				SetValue(Xamarin.Forms.ListView.ItemTemplateProperty, value); 
+			get { return (DataTemplateSelector)GetValue(ItemsView<Cell>.ItemTemplateProperty); }
+			private set
+			{
+				SetValue(ItemsView<Cell>.ItemTemplateProperty, value);
 			}
 		}
 
@@ -60,19 +61,23 @@ namespace Forms9Patch
 			set { SetValue(SourcePropertyMapProperty, value); }
 		}
 
+
+
+
 		/// <summary>
 		/// The items source property.
 		/// </summary>
-		public static new readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(ListView), null);
+		public static readonly BindableProperty F9PItemsSourceProperty = BindableProperty.Create("F9PItemsSource", typeof(IEnumerable), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the items source.
 		/// </summary>
 		/// <value>The items source.</value>
-		public new IEnumerable ItemsSource
+		public new IEnumerable F9PItemsSource
 		{
-			get { return (IEnumerable)GetValue(ItemsSourceProperty); }
-			set { 
-				SetValue(ItemsSourceProperty, value);  
+			get { return (IEnumerable)GetValue(F9PItemsSourceProperty); }
+			set
+			{
+				SetValue(F9PItemsSourceProperty, value);
 			}
 		}
 
@@ -80,100 +85,6 @@ namespace Forms9Patch
 		#endregion
 
 		#region Cell decoration
-
-		/*
-		#region Separator appearance
-		/// <summary>
-		/// The separator visibility property.
-		/// </summary>
-		[Obsolete("Use SeparatorIsVisibleProperty")]
-		public static new readonly BindableProperty SeparatorVisibilityProperty = BindableProperty.Create("SeparatorVisibility", typeof(SeparatorVisibility), typeof(ListView), SeparatorVisibility.Default);
-		/// <summary>
-		/// Gets the separator visibility.
-		/// </summary>
-		/// <value>The separator visibility.</value>
-		[Obsolete("Use SeparatorIsVisible")]
-		public new SeparatorVisibility SeparatorVisibility
-		{
-			get { return (SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
-			private set { SetValue(SeparatorVisibilityProperty, value); }
-		}
-
-
-		/// <summary>
-		/// The separator visibility property.
-		/// </summary>
-		public static readonly BindableProperty SeparatorIsVisibleProperty = ItemWrapper.SeparatorIsVisibleProperty;
-		/// <summary>
-		/// Gets or sets the separator visibility.
-		/// </summary>
-		/// <value>The separator visibility.</value>
-		public bool SeparatorIsVisible {
-			get { return (bool)GetValue (SeparatorIsVisibleProperty); }
-			set { SetValue (SeparatorIsVisibleProperty, value); }
-		}
-
-		/// <summary>
-		/// The separator color property.
-		/// </summary>
-		public static new readonly BindableProperty SeparatorColorProperty = ItemWrapper.SeparatorColorProperty;
-		/// <summary>
-		/// Gets or sets the color of the separator.
-		/// </summary>
-		/// <value>The color of the separator.</value>
-		public new Color SeparatorColor
-		{
-			get { return (Color)GetValue(SeparatorColorProperty); }
-			set { 
-				SetValue(SeparatorColorProperty, value); 
-				//System.Diagnostics.Debug.WriteLine("ListView.SeparatorColor["+value+"]");
-			}
-		}
-
-		/// <summary>
-		/// The separator height property backing store.
-		/// </summary>
-		public static readonly BindableProperty SeparatorHeightProperty = ItemWrapper.SeparatorHeightProperty;
-		/// <summary>
-		/// Gets or sets the height of the cell separator.
-		/// </summary>
-		/// <value>The height of the separator.</value>
-		public double SeparatorHeight
-		{
-			get { return (double)GetValue(SeparatorHeightProperty); }
-			set { SetValue(SeparatorHeightProperty, value); }
-		}
-
-		/// <summary>
-		/// The separator left indent property backing store.
-		/// </summary>
-		public static readonly BindableProperty SeparatorLeftIndentProperty = ItemWrapper.SeparatorLeftIndentProperty;
-		/// <summary>
-		/// Gets or sets the cell separator left indent.
-		/// </summary>
-		/// <value>The separator left indent.</value>
-		public double SeparatorLeftIndent
-		{
-			get { return (double)GetValue(SeparatorLeftIndentProperty); }
-			set { SetValue(SeparatorLeftIndentProperty, value); }
-		}
-
-		/// <summary>
-		/// The separator right indent property backing store.
-		/// </summary>
-		public static readonly BindableProperty SeparatorRightIndentProperty = ItemWrapper.SeparatorRightIndentProperty;
-		/// <summary>
-		/// Gets or sets the cell separator right indent.
-		/// </summary>
-		/// <value>The separator right indent.</value>
-		public double SeparatorRightIndent
-		{
-			get { return (double)GetValue(SeparatorRightIndentProperty); }
-			set { SetValue(SeparatorRightIndentProperty, value); }
-		}
-
-		#endregion
-		*/
 
 		#region Background appearance
 		/// <summary>
@@ -184,9 +95,10 @@ namespace Forms9Patch
 		/// Gets or sets the color of the cell background.
 		/// </summary>
 		/// <value>The color of the cell background.</value>
-		public Color CellBackgroundColor {
-			get { return (Color)GetValue (CellBackgroundColorProperty); }
-			set { SetValue (CellBackgroundColorProperty, value); }
+		public Color CellBackgroundColor
+		{
+			get { return (Color)GetValue(CellBackgroundColorProperty); }
+			set { SetValue(CellBackgroundColorProperty, value); }
 		}
 
 		/// <summary>
@@ -200,7 +112,9 @@ namespace Forms9Patch
 		public Color SelectedCellBackgroundColor
 		{
 			get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
-			set { SetValue(SelectedCellBackgroundColorProperty, value);
+			set
+			{
+				SetValue(SelectedCellBackgroundColorProperty, value);
 			}
 		}
 		#endregion
@@ -275,14 +189,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The cell visibility test property.
 		/// </summary>
-		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(ListView), null);
+		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object, bool>), typeof(ListView), null);
 		/// <summary>
 		/// Gets or sets the cell visibility test.
 		/// </summary>
 		/// <value>The visibility test.</value>
-		public Func<object,bool> VisibilityTest
+		public Func<object, bool> VisibilityTest
 		{
-			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
+			get { return (Func<object, bool>)GetValue(VisibilityTestProperty); }
 			set { SetValue(VisibilityTestProperty, value); }
 		}
 
@@ -332,7 +246,7 @@ namespace Forms9Patch
 		{
 			var itemWrapper = BaseItemsSource.WrapperForSource(item);
 			var args = new ItemWrapperTapEventArgs(itemWrapper);
-			OnItemTapped(this,args);
+			OnItemTapped(this, args);
 		}
 
 		ItemWrapper _selectedF9PItem;
@@ -467,7 +381,8 @@ namespace Forms9Patch
 
 		readonly ModalPopup _popup;
 
-		void init() {
+		void init()
+		{
 			//this.DisableSelection();
 			//Margin = new Thickness(5, 0, 5, 0);
 
@@ -483,7 +398,7 @@ namespace Forms9Patch
 			//base.ItemTapped += (sender, e) => System.Diagnostics.Debug.WriteLine("ListView base.ItemTapped");
 
 			IsEnabled = true;
-			_listener = new Listener (this);
+			_listener = new Listener(this);
 			//_listener.LongPressed += OnLongPressed;
 			//_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;
@@ -508,7 +423,8 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
 		/// <param name="strategy">Strategy.</param>
-		public ListView(ListViewCachingStrategy strategy) : base (strategy){
+		public ListView(ListViewCachingStrategy strategy) : base(strategy)
+		{
 			_popup = new ModalPopup()
 			{
 				Padding = 3,
@@ -516,13 +432,14 @@ namespace Forms9Patch
 				OutlineRadius = 4
 			};
 
-			init ();
+			init();
 		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
 		/// </summary>
-		public ListView() {
+		public ListView()
+		{
 			_popup = new ModalPopup()
 			{
 				Padding = 3,
@@ -530,13 +447,14 @@ namespace Forms9Patch
 				OutlineRadius = 4
 			};
 
-			init ();
+			init();
 		}
 
 		/// <summary>
 		/// Description this instance.
 		/// </summary>
-		public string Description() {
+		public string Description()
+		{
 			return "ListView[" + id + "]";
 		}
 		#endregion
@@ -557,7 +475,7 @@ namespace Forms9Patch
 				_selectedF9PItems.Add(f9pItem);
 			_selectedF9PItem = f9pItem;
 			//if (sourceItem != SelectedItem)
-				SelectedItem = sourceItem;
+			SelectedItem = sourceItem;
 			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && !SelectedItems.Contains(sourceItem))
 				SelectedItems.Add(sourceItem);
 			_internalAddRemove = false;
@@ -593,7 +511,7 @@ namespace Forms9Patch
 				SelectedItem = null;
 				_selectedF9PItem = null;
 			}
-			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && sourceItem != null && SelectedItems.Contains(sourceItem) )
+			if (GroupToggleBehavior == GroupToggleBehavior.Multiselect && sourceItem != null && SelectedItems.Contains(sourceItem))
 				SelectedItems.Remove(sourceItem);
 			_internalAddRemove = false;
 		}
@@ -603,7 +521,7 @@ namespace Forms9Patch
 			if (f9pItem == null)
 				return;
 			var sourceItem = f9pItem.Source;
-			RemoveSelection(f9pItem,sourceItem);
+			RemoveSelection(f9pItem, sourceItem);
 		}
 
 		void RemoveSelectedSourceItem(object sourceItem)
@@ -626,7 +544,7 @@ namespace Forms9Patch
 		{
 			if (sourceItems == null)
 				return;
-			for (int i = sourceItems.Count-1; i >=0 ;i--)
+			for (int i = sourceItems.Count - 1; i >= 0; i--)
 			{
 				var sourceItem = sourceItems[i];
 				RemoveSelectedSourceItem(sourceItem);
@@ -695,7 +613,8 @@ namespace Forms9Patch
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
 			base.OnPropertyChanging(propertyName);
-			if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio) {
+			if (propertyName == SelectedItemProperty.PropertyName && GroupToggleBehavior == GroupToggleBehavior.Radio)
+			{
 				RemoveSelectedSourceItem(SelectedItem);
 			}
 			/*
@@ -713,9 +632,9 @@ namespace Forms9Patch
 		/// Trigged with a property has changed
 		/// </summary>
 		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged (string propertyName = null)
+		protected override void OnPropertyChanged(string propertyName = null)
 		{
-			if (propertyName == ItemsSourceProperty.PropertyName)
+			if (propertyName == F9PItemsSourceProperty.PropertyName)
 			{
 				//System.Diagnostics.Debug.WriteLine("ListView.OnPropertyChanging(ItemsSource)");
 				UpdateItemsSource();
@@ -726,7 +645,7 @@ namespace Forms9Patch
 				UpdateItemsSource();
 				return;
 			}
-			base.OnPropertyChanged (propertyName);
+			base.OnPropertyChanged(propertyName);
 			/*
 			if (propertyName == SeparatorColorProperty.PropertyName
 				|| propertyName == SeparatorVisibilityProperty.PropertyName
@@ -762,7 +681,7 @@ namespace Forms9Patch
 
 		void UpdateItemsSource()
 		{
-			if (ItemsSource == null)
+			if (F9PItemsSource == null)
 				return;
 			if (_baseItemsSource != null)
 			{
@@ -788,7 +707,7 @@ namespace Forms9Patch
 			_baseItemsSource.CellBackgroundColor = CellBackgroundColor;
 			_baseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
 
-			_baseItemsSource.Source = ItemsSource;
+			_baseItemsSource.Source = F9PItemsSource;
 			base.ItemsSource = _baseItemsSource;
 
 			IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
@@ -819,7 +738,8 @@ namespace Forms9Patch
 		/// Occurs when a property of a ListViewItem is about to change.
 		/// </summary>
 		public event PropertyChangingEventHandler ItemPropertyChanging;
-		void OnItemPropertyChanging(object sender, PropertyChangingEventArgs e) {
+		void OnItemPropertyChanging(object sender, PropertyChangingEventArgs e)
+		{
 			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanging");
 			ItemPropertyChanging?.Invoke(sender, e);
 		}
@@ -828,7 +748,8 @@ namespace Forms9Patch
 		/// Occurs when property of a ListViewItem has changed.
 		/// </summary>
 		public event PropertyChangedEventHandler ItemPropertyChanged;
-		void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e) {
+		void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
 			//System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
 			ItemPropertyChanged?.Invoke(sender, e);
 		}
@@ -836,29 +757,34 @@ namespace Forms9Patch
 
 
 		#region DragDrop support
-		internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled",typeof(bool),typeof(ListView),true);
-		internal bool ScrollEnabled {
-			get { return (bool)GetValue (ScrollEnabledProperty); }
-			set { SetValue (ScrollEnabledProperty, value); }
+		internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled", typeof(bool), typeof(ListView), true);
+		internal bool ScrollEnabled
+		{
+			get { return (bool)GetValue(ScrollEnabledProperty); }
+			set { SetValue(ScrollEnabledProperty, value); }
 		}
 
 
 		internal Func<Rectangle, DragEventArgs> RendererFindItemDataUnderRectangle;
-		internal DragEventArgs FindItemDataUnderRectangle(Rectangle rect) {
-			return RendererFindItemDataUnderRectangle != null ? RendererFindItemDataUnderRectangle (rect) : null;
+		internal DragEventArgs FindItemDataUnderRectangle(Rectangle rect)
+		{
+			return RendererFindItemDataUnderRectangle != null ? RendererFindItemDataUnderRectangle(rect) : null;
 		}
 
 
-		internal Func<double,bool> RendererScrollBy;
+		internal Func<double, bool> RendererScrollBy;
 		internal Action<object, object, ScrollToPosition, bool> RendererScrollToPos;
 
 
 		double _scrollSpeed;
 		bool _scrolling;
-		void ScrollSpeed(double speed) {
-			if (!_scrolling &&  Math.Abs(_scrollSpeed) > 0) {
+		void ScrollSpeed(double speed)
+		{
+			if (!_scrolling && Math.Abs(_scrollSpeed) > 0)
+			{
 				_scrolling = true;
-				Device.StartTimer (TimeSpan.FromMilliseconds (25), () => {
+				Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
+				{
 					_scrolling = RendererScrollBy(_scrollSpeed);
 					_scrolling &= Math.Abs(_scrollSpeed) > 0;
 					return _scrolling;
@@ -873,8 +799,9 @@ namespace Forms9Patch
 		/// </summary>
 		/// <returns><c>true</c>, if by was scrolled, <c>false</c> otherwise.</returns>
 		/// <param name="delta">Delta.</param>
-		public bool ScrollBy(double delta) {
-			return RendererScrollBy (delta);
+		public bool ScrollBy(double delta)
+		{
+			return RendererScrollBy(delta);
 		}
 
 
@@ -897,13 +824,14 @@ namespace Forms9Patch
 					// this will happen when item is inside of a group that is not of SubGroupType type 
 					ItemWrapperForSourceItem(item, group as IEnumerable, out itemWrapper);
 				}
-				Device.StartTimer(TimeSpan.FromMilliseconds(150), () => {
+				Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
+				{
 					//if (Device.OS == TargetPlatform.Android)
 					//{
-						if (IsGroupingEnabled)
-							RendererScrollToPos?.Invoke(itemWrapper, group, position, animated);
-						else
-							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
+					if (IsGroupingEnabled)
+						RendererScrollToPos?.Invoke(itemWrapper, group, position, animated);
+					else
+						RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
 					/*
 					}
 					else 
@@ -931,7 +859,7 @@ namespace Forms9Patch
 			if (itemWrapper == null)
 			{
 				// this will happen when item is inside of a group that is not of SubGroupType type 
-				ItemWrapperForSourceItem(item, ItemsSource, out itemWrapper);
+				ItemWrapperForSourceItem(item, F9PItemsSource, out itemWrapper);
 			}
 			if (itemWrapper != null)
 				// required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
@@ -939,18 +867,18 @@ namespace Forms9Patch
 				{
 					//if (Device.OS == TargetPlatform.Android)
 					//{
-						if (IsGroupingEnabled)
-							RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
-						else
-							RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
-				/*
-					}
-					//RendererScrollToItemInGroup(item, group, position, animated);
+					if (IsGroupingEnabled)
+						RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
 					else
-					{
-						base.ScrollTo(itemWrapper, position, animated);
-					}
-					*/
+						RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
+					/*
+						}
+						//RendererScrollToItemInGroup(item, group, position, animated);
+						else
+						{
+							base.ScrollTo(itemWrapper, position, animated);
+						}
+						*/
 					return false;
 				});
 			else
@@ -970,7 +898,7 @@ namespace Forms9Patch
 					return true;
 				}
 				var enumerable = item as IEnumerable;
-				if (enumerable!=null && ItemWrapperForSourceItem(sourceItem, enumerable, out itemWrapper))
+				if (enumerable != null && ItemWrapperForSourceItem(sourceItem, enumerable, out itemWrapper))
 				{
 					// source is a child of this object!
 					itemWrapper = itemWrapper ?? BaseItemsSource.WrapperForSource(enumerable);
@@ -990,16 +918,16 @@ namespace Forms9Patch
 		/// <summary>
 		/// Delegate function that will be called to query if a item (at a deep index location) can be dragged
 		/// </summary>
-		public Func<ListView, object, int[],bool> CanDrag;
+		public Func<ListView, object, int[], bool> CanDrag;
 		/// <summary>
 		/// Delegate function that will be called to query if a item being dragged can be dropped at location specified by a deep index.
 		/// </summary>
-		public Func<ListView, object, int[],bool> CanDrop;
+		public Func<ListView, object, int[], bool> CanDrop;
 
 		DragEventArgs _longPress;
 		// TODO:  MAJOR TODO !!! NEED TO REFACTOR _longPress TO WORK WITH BETTER INFORMATION PROVIDED BY ItemWrapperLongPressEventArgs
 
-		readonly NullItemWrapper _nullItem = new NullItemWrapper ();
+		readonly NullItemWrapper _nullItem = new NullItemWrapper();
 		readonly BlankItemWrapper _blankItem = new BlankItemWrapper();
 
 		Rectangle _nativeFrame;
@@ -1017,13 +945,15 @@ namespace Forms9Patch
 			// we need to know what item is being pressed and it's corresponding view
 			//System.Diagnostics.Debug.WriteLine ("LONGPRESSING ["+e.Listener.Element+"]");
 
-			_longPress = DependencyService.Get<IListItemLocation>().DragEventArgsForItemAtPoint(this,e.Center);
-			if (_longPress != null && _longPress.Item.BaseCellView != null) {
+			_longPress = DependencyService.Get<IListItemLocation>().DragEventArgsForItemAtPoint(this, e.Center);
+			if (_longPress != null && _longPress.Item.BaseCellView != null)
+			{
 				// can we drag this Item?
 				bool canDrag = true;
 				if (CanDrag != null)
-					canDrag = CanDrag (this,_longPress.Item.Source, _longPress.DeepIndex);
-				if (!canDrag) {
+					canDrag = CanDrag(this, _longPress.Item.Source, _longPress.DeepIndex);
+				if (!canDrag)
+				{
 					_longPress = null;
 					return;
 				}
@@ -1035,10 +965,10 @@ namespace Forms9Patch
 				_nullItem.CellBackgroundColor = BackgroundColor;
 
 				_baseItemsSource.NotifySourceOfChanges = false;
-				_baseItemsSource.DeepSwapItems (_longPress.Item, _nullItem);
+				_baseItemsSource.DeepSwapItems(_longPress.Item, _nullItem);
 
 				//_longPress.Item.SeparatorIsVisible = false;
-				var contentView = ItemTemplates.MakeContentView (_longPress.Item);
+				var contentView = ItemTemplates.MakeContentView(_longPress.Item);
 				contentView.WidthRequest = _nativeFrame.Width;
 				contentView.HeightRequest = _nativeFrame.Height;
 				contentView.BackgroundColor = Color.Transparent;
@@ -1049,16 +979,19 @@ namespace Forms9Patch
 				_popup.IsVisible = true;
 
 				ScrollEnabled = false;
-			} else {
+			}
+			else {
 				_longPress = null;
 			}
 		}
 
 
-		void OnPanning(object sender, PanEventArgs e) {
+		void OnPanning(object sender, PanEventArgs e)
+		{
 			//System.Diagnostics.Debug.WriteLine("ListView.OnPanning");
 			Panning?.Invoke(this, EventArgs.Empty);
-			if (_longPress != null) {
+			if (_longPress != null)
+			{
 				//_longPressPan = true;
 				//System.Diagnostics.Debug.WriteLine("PAN ["+e.Listener.Element+"]");
 				System.Diagnostics.Debug.WriteLine("LONGPRESS PANNING");
@@ -1066,31 +999,35 @@ namespace Forms9Patch
 				_popup.TranslationY = e.TotalDistance.Y;
 
 				Point currentOrigin = _nativeFrame.Location + (Size)e.TotalDistance;
-				var cellRect = new Rectangle (currentOrigin, _nativeFrame.Size);
+				var cellRect = new Rectangle(currentOrigin, _nativeFrame.Size);
 				var currentDragOver = FindItemDataUnderRectangle(cellRect);
-				if (currentDragOver != null && currentDragOver.Item != _nullItem && currentDragOver.Item!=null) {
+				if (currentDragOver != null && currentDragOver.Item != _nullItem && currentDragOver.Item != null)
+				{
 					//System.Diagnostics.Debug.WriteLine ("current=[{0}]", currentDragOver.Item.Title);
 					// can we drop here?
 					bool canDrop = true;
 					if (CanDrop != null)
 						canDrop = CanDrop(this, currentDragOver.Item.Source, currentDragOver.DeepIndex);
-					if (canDrop) {
+					if (canDrop)
+					{
 						// yes: put the NullItem here
 						_baseItemsSource.DeepRemove(_nullItem);
-						_baseItemsSource.DeepInsert (currentDragOver.DeepIndex, _nullItem);
-					} else if (_baseItemsSource.DeepContains(_nullItem) && !_baseItemsSource.DeepIndexOf (_nullItem).SequenceEqual (_longPress.DeepIndex)) {
+						_baseItemsSource.DeepInsert(currentDragOver.DeepIndex, _nullItem);
+					}
+					else if (_baseItemsSource.DeepContains(_nullItem) && !_baseItemsSource.DeepIndexOf(_nullItem).SequenceEqual(_longPress.DeepIndex))
+					{
 						// no: put the NullItem at the location where we started 
 						_baseItemsSource.DeepRemove(_nullItem);
-						_baseItemsSource.DeepInsert (_longPress.DeepIndex, _nullItem);
+						_baseItemsSource.DeepInsert(_longPress.DeepIndex, _nullItem);
 					}
 				}
 
 				if (cellRect.Top < 40 && e.DeltaDistance.Y <= 2)
-					ScrollSpeed (cellRect.Top - 40);
+					ScrollSpeed(cellRect.Top - 40);
 				else if (cellRect.Bottom + 40 > Height && e.DeltaDistance.Y >= -2)
-					ScrollSpeed (cellRect.Bottom + 40 - Height);
+					ScrollSpeed(cellRect.Bottom + 40 - Height);
 				else
-					ScrollSpeed (0);
+					ScrollSpeed(0);
 			}
 		}
 
@@ -1110,29 +1047,32 @@ namespace Forms9Patch
 		}
 
 		//void OnLongPressed(object sender, LongPressEventArgs e) {
-		void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e) {
+		void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e)
+		{
 			//System.Diagnostics.Debug.WriteLine ("ListView.LONGPRESSED ["+e.Listener.Element+"]");
 			//System.Diagnostics.Debug.WriteLine("ListView.LONGPRESSED [" + e.ItemWrapper.Source + "]");
 
-			if (_longPress != null) {
+			if (_longPress != null)
+			{
 				ScrollSpeed(0);
 				ScrollEnabled = true;
 
 				// next two lines are for Android - without them, if you try to drag the same cell twice, the ModalPopup content is blank.
-				var blankView = ItemTemplates.MakeContentView (_blankItem);
+				var blankView = ItemTemplates.MakeContentView(_blankItem);
 				_popup.Content = blankView;
 
 				_popup.IsVisible = false;
 
 				// return to our pre-drag state
-				var nullIndex = _baseItemsSource.DeepIndexOf (_nullItem);
-				_baseItemsSource.DeepRemove (_nullItem);
-				_baseItemsSource.DeepInsert (_longPress.DeepIndex, _longPress.Item);
+				var nullIndex = _baseItemsSource.DeepIndexOf(_nullItem);
+				_baseItemsSource.DeepRemove(_nullItem);
+				_baseItemsSource.DeepInsert(_longPress.DeepIndex, _longPress.Item);
 				_baseItemsSource.NotifySourceOfChanges = true;
-				if (!nullIndex.SequenceEqual (_longPress.DeepIndex)) {
+				if (!nullIndex.SequenceEqual(_longPress.DeepIndex))
+				{
 					// we made a allowed move, so make that move
 					_baseItemsSource.DeepRemove(_longPress.Item);
-					_baseItemsSource.DeepInsert (nullIndex, _longPress.Item);
+					_baseItemsSource.DeepInsert(nullIndex, _longPress.Item);
 				}
 				_longPress = null;
 				_popup.Content = null;
