@@ -147,7 +147,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The retain property.
 		/// </summary>
-		public static readonly BindableProperty RetainProperty = BindableProperty.Create("PobRetain", typeof(bool), typeof(PopupBase), default(bool));
+		public static readonly BindableProperty RetainProperty = BindableProperty.Create("Retain", typeof(bool), typeof(PopupBase), default(bool));
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is retained after it is hidden.
 		/// </summary>
@@ -235,7 +235,7 @@ namespace Forms9Patch
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("PubPadding", typeof(Thickness), typeof(PopupBase), (Thickness)RoundedBoxBase.PaddingProperty.DefaultValue);
+		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(PopupBase), (Thickness)RoundedBoxBase.PaddingProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the inner padding of the Layout.
 		/// </summary>
@@ -251,7 +251,7 @@ namespace Forms9Patch
 		/// Identifies the BackgroundColor bindable property.
 		/// </summary>
 		/// <remarks>To be added.</remarks>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("PubBackgroundColor", typeof(Color), typeof(PopupBase), Color.White);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(PopupBase), Color.White);
 		/// <summary>
 		/// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
 		/// </summary>
@@ -444,7 +444,9 @@ namespace Forms9Patch
 				}
 			}
 			else if (propertyName == PaddingProperty.PropertyName)
+			{
 				_roundedBox.Padding = Padding;
+			}
 			else if (propertyName == HasShadowProperty.PropertyName)
 				_roundedBox.HasShadow = HasShadow;
 			else if (propertyName == OutlineColorProperty.PropertyName)

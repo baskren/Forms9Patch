@@ -125,7 +125,7 @@ namespace TestProject
 				FontSize = 10,
 			};
 
-			var modal = new Forms9Patch.ModalPopup(this) {
+			var modal = new Forms9Patch.ModalPopup() {
 				Content = new StackLayout {
 					Children = {
 						new Label { 
@@ -151,12 +151,12 @@ namespace TestProject
 				WidthRequest = 200,
 				Margin = 0,
 			};
-			modal.SetBinding (Forms9Patch.ModalPopup.OutlineRadiusProperty, "CornerRadius");
-			modal.SetBinding (Forms9Patch.ModalPopup.OutlineWidthProperty, "OutlineWidth");
-			modal.SetBinding (Forms9Patch.ModalPopup.PaddingProperty, "PUPadding");
-			modal.SetBinding (Forms9Patch.ModalPopup.HasShadowProperty, "HasShadow");
-			modal.SetBinding (Forms9Patch.ModalPopup.ShadowInvertedProperty, "ShadowInverted");
-			modal.SetBinding (Forms9Patch.ModalPopup.CancelOnPageOverlayTouchProperty, "CancelOnBackgroundTouch");
+			modal.SetBinding (Forms9Patch.PopupBase.OutlineRadiusProperty, "CornerRadius");
+			modal.SetBinding (Forms9Patch.PopupBase.OutlineWidthProperty, "OutlineWidth");
+			modal.SetBinding (Forms9Patch.PopupBase.PaddingProperty, "PUPadding");
+			modal.SetBinding (Forms9Patch.PopupBase.HasShadowProperty, "HasShadow");
+			modal.SetBinding (Forms9Patch.PopupBase.ShadowInvertedProperty, "ShadowInverted");
+			modal.SetBinding (Forms9Patch.PopupBase.CancelOnPageOverlayTouchProperty, "CancelOnBackgroundTouch");
 			modal.BindingContext = this;
 
 

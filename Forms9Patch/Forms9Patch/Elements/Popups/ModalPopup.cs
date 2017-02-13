@@ -24,7 +24,7 @@ namespace Forms9Patch {
 		/// <summary>
 		/// The background image property backing store.
 		/// </summary>
-		public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create ("MpuBackgroundImage", typeof(Image), typeof(ModalPopup), null);
+		public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create ("BackgroundImage", typeof(Image), typeof(ModalPopup), null);
 		/// <summary>
 		/// Gets or sets the background image.
 		/// </summary>
@@ -37,7 +37,7 @@ namespace Forms9Patch {
 		/// <summary>
 		/// The location property backing store.
 		/// </summary>
-		public static readonly BindableProperty LocationProperty = BindableProperty.Create ("MpuLocation", typeof(Point), typeof(ModalPopup), new Point(double.NegativeInfinity,double.NegativeInfinity));
+		public static readonly BindableProperty LocationProperty = BindableProperty.Create ("Location", typeof(Point), typeof(ModalPopup), new Point(double.NegativeInfinity,double.NegativeInfinity));
 		/// <summary>
 		/// Gets or sets the Modal Popup's location.
 		/// </summary>
@@ -147,7 +147,6 @@ namespace Forms9Patch {
 			base.LayoutChildren(x, y, width, height);
 
 			if (width > 0 && height > 0) {
-
 				_frame.IsVisible = true;
 				_frame.Content.IsVisible = true;
 				RoundedBoxBase.UpdateBasePadding (_frame, true);

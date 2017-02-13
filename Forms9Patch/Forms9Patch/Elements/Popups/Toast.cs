@@ -25,7 +25,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The title property backing store.
 		/// </summary>
-		public static readonly BindableProperty TitleProperty = BindableProperty.Create("ToastTitle", typeof(string), typeof(Toast), default(string));
+		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Toast), default(string));
 		/// <summary>
 		/// Gets or sets the title.
 		/// </summary>
@@ -39,7 +39,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The text property backing store.
 		/// </summary>
-		public static readonly BindableProperty TextProperty = BindableProperty.Create("ToastText", typeof(string), typeof(Toast), default(string));
+		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Toast), default(string));
 		/// <summary>
 		/// Gets or sets the text.
 		/// </summary>
@@ -53,7 +53,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The ok text property.
 		/// </summary>
-		public static readonly BindableProperty OkTextProperty = BindableProperty.Create("ToastOkText", typeof(string), typeof(Toast), "OK");
+		public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(Toast), "OK");
 		/// <summary>
 		/// Gets or sets the ok text.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The ok button color property.
 		/// </summary>
-		public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create("ToastOkButtonColor", typeof(Color), typeof(Toast), default(Color));
+		public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create("OkButtonColor", typeof(Color), typeof(Toast), default(Color));
 		/// <summary>
 		/// Gets or sets the color of the ok button.
 		/// </summary>
@@ -81,7 +81,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The ok text color property.
 		/// </summary>
-		public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create("ToastOkTextColor", typeof(Color), typeof(Toast), Color.Blue);
+		public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create("OkTextColor", typeof(Color), typeof(Toast), Color.Blue);
 		/// <summary>
 		/// Gets or sets the color of the ok text.
 		/// </summary>

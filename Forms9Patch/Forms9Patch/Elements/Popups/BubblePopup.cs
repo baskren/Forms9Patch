@@ -25,7 +25,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The target bias property backing Store.
 		/// </summary>
-		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("BpuTargetBias", typeof(double), typeof(BubblePopup), 0.5);
+		public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("TargetBias", typeof(double), typeof(BubblePopup), 0.5);
 		/// <summary>
 		/// Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.
 		/// </summary>
@@ -45,7 +45,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer length property.
 		/// </summary>
-		public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("BpuPointerLength",typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue);
+		public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength",typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the length of the bubble layout's pointer.
 		/// </summary>
@@ -58,7 +58,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer tip radius property.
 		/// </summary>
-		public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("BpuPointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue);
+		public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the radius of the bubble's pointer tip.
 		/// </summary>
@@ -86,7 +86,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for pointer direction property.
 		/// </summary>
-		public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("BpuPointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
+		public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the direction in which the pointer pointing.
 		/// </summary>
@@ -99,7 +99,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.
 		/// </summary>
-		public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("BpuPointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue);
+		public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue);
 		/// <summary>
 		/// Gets or sets the pointer corner radius.
 		/// </summary>

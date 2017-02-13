@@ -195,7 +195,7 @@ namespace TestProject
 			bubble.SetBinding (Forms9Patch.BubblePopup.OutlineRadiusProperty, "CornerRadius");
 			bubble.SetBinding (Forms9Patch.BubblePopup.PointerLengthProperty, "PointerLength");
 			bubble.SetBinding (Forms9Patch.BubblePopup.PointerTipRadiusProperty, "PointerTipRadius");
-			bubble.SetBinding (Forms9Patch.BubblePopup.PaddingProperty, "PUPadding");
+			bubble.SetBinding (Forms9Patch.BubblePopup.PaddingProperty, "Padding");
 			bubble.SetBinding (Forms9Patch.BubblePopup.HasShadowProperty, "HasShadow");
 			bubble.SetBinding (Forms9Patch.BubblePopup.ShadowInvertedProperty, "ShadowInverted");
 			bubble.SetBinding (Forms9Patch.BubblePopup.PointerDirectionProperty, "PointerDirection");

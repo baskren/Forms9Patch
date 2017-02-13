@@ -12,39 +12,39 @@ namespace Forms9Patch
 		/// Backing store for the HasShadow bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static readonly BindableProperty HasShadowProperty = BindableProperty.Create ("RbbHasShadow", typeof(bool), typeof(RoundedBoxBase), false, BindingMode.OneWay, UpdateBasePadding);
+		public static readonly BindableProperty HasShadowProperty = BindableProperty.Create ("HasShadow", typeof(bool), typeof(RoundedBoxBase), false, BindingMode.OneWay, UpdateBasePadding);
 
 		/// <summary>
 		/// Inverts shadow to create an embossed effect
 		/// </summary>
-		public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("RbbShadowInverted", typeof(bool), typeof(RoundedBoxBase), false);
+		public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(RoundedBoxBase), false);
 
 		/// <summary>
 		/// Backing store for the OutlineColor bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create ("RbbOutlineColor", typeof(Color), typeof(RoundedBoxBase), Color.Default);
+		public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create ("OutlineColor", typeof(Color), typeof(RoundedBoxBase), Color.Default);
 
 		/// <summary>
 		/// Backing store for the OutlineRadius bindable property.
 		/// </summary>
-		public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("RbbOutlineRadius", typeof (float), typeof (RoundedBoxBase), (object) -1.0f);
+		public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof (float), typeof (RoundedBoxBase), (object) -1.0f);
 
 		/// <summary>
 		/// Backing store for the OutlineWidth bindable property.
 		/// </summary>
-		public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("RbbOutlineWidth", typeof (float), typeof (RoundedBoxBase), (object) -1.0f);
+		public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof (float), typeof (RoundedBoxBase), (object) -1.0f);
 
 		/// <summary>
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static readonly BindableProperty PaddingProperty = BindableProperty.Create ("RbbPadding", typeof(Thickness), typeof(RoundedBoxBase), new Thickness (0), BindingMode.OneWay, UpdateBasePadding);
+		public static readonly BindableProperty PaddingProperty = BindableProperty.Create ("Padding", typeof(Thickness), typeof(RoundedBoxBase), new Thickness (0), BindingMode.OneWay, UpdateBasePadding);
 
 		/// <summary>
 		/// The elliptical property backing store.
 		/// </summary>
-		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("RbbIsElliptical", typeof(bool), typeof(RoundedBoxBase), false);
+		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(RoundedBoxBase), false);
 
 		internal static bool UpdateBasePadding(BindableObject bindable, object newValue) {
 			var layout = bindable as Layout;

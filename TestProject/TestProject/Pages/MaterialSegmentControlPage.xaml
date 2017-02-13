@@ -11,7 +11,7 @@ Padding = "40"
 	<ContentPage.Content>
 		<StackLayout>
 			<Label Text="MaterialSegmentedControl Example" TextColor="Black"/>
-			<f9p:MaterialSegmentedControl BackgroundColor="White" FontSize="16" FontColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5">
+			<f9p:MaterialSegmentedControl BackgroundColor="White" FontSize="16" FontColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5" GroupToggleBehavior="Multiselect">
 				<f9p:Segment Text="Pause 5"/>
 				<f9p:Segment Text="Pause 10"/>
 				<f9p:Segment Text="Pause 15"/>

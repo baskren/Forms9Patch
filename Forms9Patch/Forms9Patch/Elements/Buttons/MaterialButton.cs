@@ -25,7 +25,7 @@ namespace Forms9Patch
 		/// Backing store for the MaterialButton.HasShadow bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create ("F9P.MB.HasShadow", typeof(bool), typeof(MaterialButton), false);
+		public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create ("HasShadow", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a flag indicating if the MaterialButton has a shadow displayed. This is a bindable property.
 		/// </summary>
@@ -38,7 +38,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.Image bindable property.
 		/// </summary>
-		public static BindableProperty ImageSourceProperty = BindableProperty.Create ("F9P.MB.ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
+		public static BindableProperty ImageSourceProperty = BindableProperty.Create ("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the companion image - alternatively, use ImageText.
 		/// </summary>
@@ -51,7 +51,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The image text property backing store
 		/// </summary>
-		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("F9P.MB.IconText", typeof(string), typeof(MaterialButton), default(string));
+		public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(MaterialButton), default(string));
 		/// <summary>
 		/// Gets or sets the image text - use this to specify the image as an HTML markup string.
 		/// </summary>
@@ -67,7 +67,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.Text bindable property.
 		/// </summary>
-		public static readonly BindableProperty TextProperty =  BindableProperty.Create ("F9P.MB.Text", typeof(string), typeof(MaterialButton), null);
+		public static readonly BindableProperty TextProperty =  BindableProperty.Create ("Text", typeof(string), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the text.
 		/// </summary>
@@ -80,7 +80,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the formatted text property.
 		/// </summary>
-		public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create ("F9P.MB.HtmlText", typeof(string), typeof(MaterialButton), null);
+		public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create ("HtmlText", typeof(string), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the formatted text.
 		/// </summary>
@@ -108,7 +108,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.FontAttributes bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create ( "F9P.MB.FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
+		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create ( "FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
 		/// <summary>
 		/// Gets or sets the font attributes.
 		/// </summary>
@@ -122,7 +122,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.FontSize bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "F9P.MB.FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
 		/// <summary>
 		/// Gets or sets the size of the font.
 		/// </summary>
@@ -135,7 +135,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.FontFamiily bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create ( "F9P.MB.FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
+		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create ( "FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
 		/// <summary>
 		/// Gets or sets the font family.
 		/// </summary>
@@ -148,7 +148,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the OutlineWidth bindable property.
 		/// </summary>
-		public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("F9P.MB.OutlineWidth", typeof (float), typeof (MaterialButton), -1.0f);
+		public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof (float), typeof (MaterialButton), -1.0f);
 		/// <summary>
 		/// Gets or sets the width of the outline.
 		/// </summary>
@@ -162,7 +162,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.OutlineColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("F9P.MB.OutlineColor", typeof (Color), typeof (MaterialButton), Color.Default);
+		public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof (Color), typeof (MaterialButton), Color.Default);
 		/// <summary>
 		/// Gets or sets the color of the border.
 		/// </summary>
@@ -175,7 +175,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.BackgroundColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("F9P.MB.BackgroundColor", typeof (Color), typeof (MaterialButton), Color.Transparent);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof (Color), typeof (MaterialButton), Color.Transparent);
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
@@ -187,7 +187,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.DarkTheme property.
 		/// </summary>
-		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create ("F9P.MB.DarkTheme", typeof(bool), typeof(MaterialButton), false);
+		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create ("DarkTheme", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="MaterialButton"/> if for a dark theme.
 		/// </summary>
@@ -200,7 +200,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.Command bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandProperty = BindableProperty.Create("F9P.MB.Command", typeof (ICommand), typeof (MaterialButton), null, BindingMode.OneWay, null, 
+		public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof (ICommand), typeof (MaterialButton), null, BindingMode.OneWay, null, 
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
 				((MaterialButton)bo).OnCommandChanged ()),
 			 null, null, null);
@@ -226,7 +226,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.CommandParameter bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("F9P.MB.CommandParameter", typeof (object), typeof (MaterialButton), null, BindingMode.OneWay, null, 
+		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof (object), typeof (MaterialButton), null, BindingMode.OneWay, null, 
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
 				((MaterialButton)bo).CommandCanExecuteChanged (bo, EventArgs.Empty)),
 			 null, null, null);
@@ -248,7 +248,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.IsSelected bindable property.
 		/// </summary>
-		public static BindableProperty IsSelectedProperty = BindableProperty.Create ("F9P.MB.IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
+		public static BindableProperty IsSelectedProperty = BindableProperty.Create ("IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> is selected.
 		/// </summary>
@@ -277,7 +277,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.ToggleBehavior bindable property.
 		/// </summary>
-		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("F9P.MB.ToggleBehavior", typeof(bool), typeof(MaterialButton), false);
+		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("ToggleBehavior", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
 		/// </summary>
@@ -292,7 +292,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.Alignment bindable property
 		/// </summary>
-		public static BindableProperty AlignmentProperty = BindableProperty.Create ("F9P.MB.Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+		public static BindableProperty AlignmentProperty = BindableProperty.Create ("Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
 		/// <summary>
 		/// Gets or sets the alignment of the image and text.
 		/// </summary>
@@ -305,7 +305,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton's orientation property.
 		/// </summary>
-		public static BindableProperty OrientationProperty = BindableProperty.Create("F9P.MB.Orientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
+		public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
 		/// <summary>
 		/// Gets or sets the orientation of the iamge and label.
 		/// </summary>
@@ -318,7 +318,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the trailing image property.
 		/// </summary>
-		public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create("F9P.MB.TrailingImage", typeof(bool), typeof(MaterialButton), default(bool));
+		public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create("TrailingImage", typeof(bool), typeof(MaterialButton), default(bool));
 		/// <summary>
 		/// Gets or sets if the image is to be rendered after the text.
 		/// </summary>
@@ -332,7 +332,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The lines property.
 		/// </summary>
-		public static readonly BindableProperty LinesProperty = BindableProperty.Create("F9P.MB.Lines", typeof(int), typeof(MaterialButton), 1);
+		public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialButton), 1);
 		/// <summary>
 		/// Gets or sets the lines.
 		/// </summary>
@@ -346,7 +346,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The fit property.
 		/// </summary>
-		public static readonly BindableProperty FitProperty = BindableProperty.Create("F9P.MB.Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.None);
+		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.None);
 		/// <summary>
 		/// Gets or sets the fit.
 		/// </summary>
@@ -360,7 +360,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The line break mode property.
 		/// </summary>
-		public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("F9P.MB.LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.TailTruncation);
+		public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.TailTruncation);
 		/// <summary>
 		/// Gets or sets the line break mode.
 		/// </summary>
@@ -374,7 +374,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The backing store for the minimum font size property.
 		/// </summary>
-		public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("F9P.MB.MinFontSize", typeof(double), typeof(Label), -1.0);
+		public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(Label), -1.0);
 		/// <summary>
 		/// Gets or sets the minimum size of the font allowed during an autofit. 
 		/// </summary>

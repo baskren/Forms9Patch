@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:local="clr-namespace:NORMA;assembly=NORMA" 
+		xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+		xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch" 
+		x:Class="TestLabel.ArticleListItemViewCell" 
+		Height="120">
+		<Grid Padding="7,0,7,7" RowSpacing="0" ColumnSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="1"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="1"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid BackgroundColor="#FFF" Grid.Row="0" Grid.Column="0" Padding="5" RowSpacing="0" ColumnSpacing="5">
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="65"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="90"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<!-- image -->
+				<ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" DownsampleToViewSize="true" Source="https://goo.gl/GjziD6"></ffimageloading:CachedImage>
+				<!-- content -->
+				<Grid Grid.Row="0" Grid.Column="1" ColumnSpacing="0" RowSpacing="5">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"></RowDefinition>
+						<RowDefinition Height="*"></RowDefinition>
+						<RowDefinition Height="Auto"></RowDefinition>
+					</Grid.RowDefinitions>
+					<!-- article company -->
+					<Label Grid.Row="0" Margin="0,5,0,0" YAlign="Center" LineBreakMode="TailTruncation" FontAttributes="Bold" FontSize="14" Text="{Binding txtMarke}"></Label>
+					<!-- article title -->
+					<Forms9Patch:Label Text="{Binding txtArtikel}" Grid.Row="1" MaxFontSize="14" FontSize="14" MinFontSize="14" Lines="3" TextColor="{Binding cfgTextColor}" Fit="Lines" LineBreakMode="TailTruncation" FontAttributes="Bold" VerticalOptions="Fill"></Forms9Patch:Label>
+					<!-- footer -->
+					<StackLayout Grid.Row="2" Orientation="Horizontal"  Spacing="10" Grid.Column="0" Margin="0,5,0,5">
+						<!-- market -->
+						<StackLayout Orientation="Horizontal" HorizontalOptions="Start" Spacing="0">
+							<Image Source="https://goo.gl/ZOa3LQ" Margin="0,0,5,0" HorizontalOptions="Start" WidthRequest="17"></Image>
+							<Label FontSize="10" YAlign="Center" Text="Filiale"></Label>
+						</StackLayout>
+						<!-- shop -->
+						<StackLayout x:Name="shopView" Orientation="Horizontal" Spacing="0">
+							<Image Source="https://goo.gl/tAZDmR" Margin="0,0,5,0" HorizontalOptions="Start" WidthRequest="17"></Image>
+							<Label FontSize="10" YAlign="Center" Text="Shop"></Label>
+						</StackLayout>
+					</StackLayout>
+				</Grid>
+				<!-- price -->
+				<Frame Grid.Row="0" Grid.Column="2"></Frame>
+			</Grid>
+			<!-- lines -->
+			<BoxView BackgroundColor="#C7C7C7" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></BoxView>
+			<BoxView BackgroundColor="#C7C7C7" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"></BoxView>
+		</Grid>
+</ViewCell>

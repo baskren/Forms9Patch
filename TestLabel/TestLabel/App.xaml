@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"  
+		x:Class="TestLabel.App">
+	<Application.Resources>
+        <ResourceDictionary>
+			<!-- common colors -->
+			<Color x:Key="red">#DC130C</Color>
+			<Color x:Key="redLight">#DE7571</Color>
+			<Color x:Key="orange">#FF7114</Color>
+			<Color x:Key="yellow">#FFCD34</Color>
+			<Color x:Key="grayLight">#F0F0F0</Color>
+			<Color x:Key="grayDark">#555555</Color>
+			<Color x:Key="defaultFontColor">#4d4d4d</Color>
+			<Color x:Key="popupBlue">#C1D4F1</Color>
+			<Color x:Key="popupDarkBlue">#2B59A2</Color>
+			<!-- font colors -->
+			<Color x:Key="grayLightFont">#8D8D8D</Color>
+			<Color x:Key="grayDarkFont">#757575</Color>
+			<!-- compontents -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource red}" />
+				<Setter Property="BarTextColor" Value="#FFF" />
+            </Style>
+			<Style TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource defaultFontColor}"></Setter>
+			</Style>
+			<Style TargetType="f9p:Label">
+				<Setter Property="TextColor" Value="{DynamicResource defaultFontColor}"></Setter>
+			</Style>
+			<!-- Article Detail action btn -->
+			<Style x:Key="articleDetailAction" TargetType="f9p:Frame">
+				<Setter Property="HeightRequest" Value="26" />
+				<Setter Property="WidthRequest" Value="26" />
+				<Setter Property="OutlineRadius" Value="2" />
+				<Setter Property="Padding" Value="5" />
+				<Setter Property="OutlineWidth" Value="1" />
+				<Setter Property="BackgroundColor" Value="#fff" />
+				<Setter Property="OutlineColor" Value="{DynamicResource grayLight}" />
+			</Style>
+			<!-- Marketplace finder action btn -->
+			<Style x:Key="marketplaceAction" TargetType="f9p:Frame">
+				<Setter Property="HeightRequest" Value="26" />
+				<Setter Property="WidthRequest" Value="26" />
+				<Setter Property="OutlineRadius" Value="2" />
+				<Setter Property="Padding" Value="3" />
+				<Setter Property="OutlineWidth" Value="1"></Setter>
+				<Setter Property="OutlineColor" Value="#FFF"></Setter>
+				<Setter Property="BackgroundColor" Value="{DynamicResource red}" />
+			</Style>
+			<!-- Shopping list edit icons -->
+			<Style x:Key="shoppingListEditIcon" TargetType="f9p:MaterialButton">
+				<Setter Property="HeightRequest" Value="30" />
+				<Setter Property="FontColor" Value="#FFF" />
+				<Setter Property="OutlineRadius" Value="0" />
+				<Setter Property="OutlineWidth" Value="0" />
+				<Setter Property="BackgroundColor" Value="{DynamicResource red}" />
+				<Setter Property="OutlineColor" Value="{DynamicResource red}" />
+				<Setter Property="FontSize" Value="14" />
+			</Style>
+			<!-- Sharing buttons -->
+			<Style x:Key="sharingButton" TargetType="f9p:Frame">
+				<Setter Property="HeightRequest" Value="45" />
+				<Setter Property="VerticalOptions" Value="Center" />
+				<Setter Property="OutlineRadius" Value="5" />
+				<Setter Property="Margin" Value="0,0,0,8" />
+				<Setter Property="HorizontalOptions" Value="FillAndExpand" />
+			</Style>
+			<Style x:Key="sharingText" TargetType="Label">
+				<Setter Property="TextColor" Value="#FFF" />
+				<Setter Property="FontSize" Value="16" />
+				<Setter Property="VerticalOptions" Value="Center" />
+			</Style>
+			<!-- PopUp -->
+			<Style x:Key="popUpTitle" TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource red}" />
+				<Setter Property="FontSize" Value="20" />
+				<Setter Property="HorizontalTextAlignment" Value="Center"/>
+				<Setter Property="VerticalOptions" Value="Center" />
+			</Style>
+			<Style x:Key="popUpActionBtn" TargetType="f9p:Frame">
+				<Setter Property="HeightRequest" Value="45" />
+				<Setter Property="OutlineRadius" Value="5" />
+				<Setter Property="VerticalOptions" Value="Center" />
+			</Style>
+			<Style x:Key="popUpActionBtnTxt" TargetType="Label">
+				<Setter Property="FontSize" Value="16" />
+				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+				<Setter Property="VerticalOptions" Value="Center" />
+			</Style>
+			<!-- Navigation button -->
+			<Style x:Key="ArticleNavBtnActive" TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource red}" />
+				<Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+				<Setter Property="FontSize" Value="14"></Setter>
+			</Style>
+			<!-- activated reminder -->
+			<Style x:Key="ArticleNavBtnInactive" TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource grayDark}" />
+				<Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+				<Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+				<Setter Property="FontSize" Value="14"></Setter>
+			</Style>
+			<!-- Navigation button -->
+			<Style x:Key="openingTimes" TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource defaultFontColor}" />
+				<Setter Property="VerticalTextAlignment" Value="Start" />
+			</Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

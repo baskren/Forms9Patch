@@ -137,7 +137,8 @@ namespace TestProject
 			var upSeg = new Forms9Patch.Segment {
 				Text = "⬆︎",
 			};
-			upSeg.Tapped += (sender, e) => _lastChanged = upSeg.VisualElement;
+			upSeg.Tapped += (sender, e) => 
+				_lastChanged = upSeg.VisualElement;
 			var rightSeg = new Forms9Patch.Segment {
 				Text = "➡︎",
 			};
