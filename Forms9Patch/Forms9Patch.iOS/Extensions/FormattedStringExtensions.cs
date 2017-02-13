@@ -62,88 +62,78 @@ namespace Forms9Patch.iOS
 				switch (span.Key) {
 				#region Spans that change UIFont attributes
 					case FontFamilySpan.SpanKey:
-						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
-							metaFont.Family = ((FontFamilySpan)span).FontFamilyName;
-						}
+						for (int i = spanStart; i < spanEnd; i++) 
+							metaFonts[i].Family = ((FontFamilySpan)span).FontFamilyName;
 						break;
 					case FontSizeSpan.SpanKey:
 						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
 							float size =  ((FontSizeSpan)span).Size;
-							metaFont.Size = (size < 0 ? metaFont.Size * (-size) : size );
+							metaFonts[i].Size = (size < 0 ? metaFonts[i].Size * (-size) : size );
 						}
 						break;
 					case BoldSpan.SpanKey:
-						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
-							metaFont.Bold = true;
-						}
+						for (int i = spanStart; i < spanEnd; i++) 
+							metaFonts[i].Bold = true;
 						break;
 					case ItalicsSpan.SpanKey:
-						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
-							metaFont.Italic = true;
-						}
+						for (int i = spanStart; i < spanEnd; i++) 
+							metaFonts[i].Italic = true;
 						break;
 					case SuperscriptSpan.SpanKey:
-						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
-							metaFont.Baseline = FontBaseline.Superscript;
-						}
+						for (int i = spanStart; i < spanEnd; i++) 
+							metaFonts[i].Baseline = FontBaseline.Superscript;
 						break;
 					case SubscriptSpan.SpanKey:
-						for (int i = spanStart; i < spanEnd; i++) {
-							var metaFont = metaFonts [i];
-							metaFont.Baseline = FontBaseline.Subscript;
-						}
+						for (int i = spanStart; i < spanEnd; i++) 
+							metaFonts[i].Baseline = FontBaseline.Subscript;
 						break;
 					case NumeratorSpan.SpanKey:
 						for (int i = spanStart; i < spanEnd; i++)
-						{
-							var metaFont = metaFonts[i];
-							metaFont.Baseline = FontBaseline.Numerator;
-						}
+							metaFonts[i].Baseline = FontBaseline.Numerator;
 						break;
 					case DenominatorSpan.SpanKey:
 						for (int i = spanStart; i < spanEnd; i++)
-						{
-							var metaFont = metaFonts[i];
-							metaFont.Baseline = FontBaseline.Denominator;
-						}
+							metaFonts[i].Baseline = FontBaseline.Denominator;
+						break;
+					case ActionSpan.SpanKey:
+						attr = new NSMutableDictionary();
+						attr[UIStringAttributeKey.ForegroundColor] = Xamarin.Forms.Color.Blue.ToUIColor();
+						attr[UIStringAttributeKey.UnderlineColor] = Xamarin.Forms.Color.Blue.ToUIColor();
+						attr[UIStringAttributeKey.StrikethroughColor] = Xamarin.Forms.Color.Blue.ToUIColor();
+						var uAttr = new NSDictionary(UIStringAttributeKey.UnderlineStyle, NSUnderlineStyle.Single);
+						attr[UIStringAttributeKey.UnderlineStyle] = uAttr[UIStringAttributeKey.UnderlineStyle];
+						result.AddAttributes(attr, new NSRange(spanStart, spanEnd - spanStart));
 						break;
 					#endregion
-				#region Font Color
-				case FontColorSpan.SpanKey:
-					var fontColorSpan = span as FontColorSpan;
-					attr = new NSMutableDictionary ();
-						attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
-						attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
-						attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
-						result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart ));
-					break;
-				#endregion
-				#region Background Color
-				case BackgroundColorSpan.SpanKey:
-				var backgroundColorSpan = span as BackgroundColorSpan;
-				attr = new NSDictionary (UIStringAttributeKey.BackgroundColor, backgroundColorSpan.Color.ToUIColor());
-				result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
-				break;
-				#endregion
-				#region Underline
-				case UnderlineSpan.SpanKey:
-					NSUnderlineStyle style =  NSUnderlineStyle.Single;
-					attr = new NSDictionary ( UIStringAttributeKey.UnderlineStyle, style );
-					result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
-					break;
-				#endregion
-				#region Strikethrough
-				case StrikethroughSpan.SpanKey:
-					style = NSUnderlineStyle.Single;
-					attr = new NSDictionary ( UIStringAttributeKey.StrikethroughStyle, style );
-					result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
-					break;
-				#endregion
+					#region Font Color
+					case FontColorSpan.SpanKey:
+						var fontColorSpan = span as FontColorSpan;
+						attr = new NSMutableDictionary ();
+							attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
+							attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
+							attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
+							result.AddAttributes (attr, new NSRange(spanStart, spanEnd-spanStart ));
+						break;
+					#endregion
+					#region Background Color
+					case BackgroundColorSpan.SpanKey:
+						var backgroundColorSpan = span as BackgroundColorSpan;
+						attr = new NSDictionary (UIStringAttributeKey.BackgroundColor, backgroundColorSpan.Color.ToUIColor());
+						result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
+						break;
+					#endregion
+					#region Underline
+					case UnderlineSpan.SpanKey:
+						attr = new NSDictionary ( UIStringAttributeKey.UnderlineStyle, NSUnderlineStyle.Single );
+						result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
+						break;
+					#endregion
+					#region Strikethrough
+					case StrikethroughSpan.SpanKey:
+						attr = new NSDictionary ( UIStringAttributeKey.StrikethroughStyle, NSUnderlineStyle.Single );
+						result.AddAttributes (attr, new NSRange(spanStart, spanEnd - spanStart ));
+						break;
+					#endregion
 				}
 			}
 			#endregion

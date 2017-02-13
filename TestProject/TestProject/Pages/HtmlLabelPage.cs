@@ -1,6 +1,7 @@
 ﻿
 
 using Xamarin.Forms;
+//using Forms9Patch;
 
 namespace TestProject
 {
@@ -8,12 +9,25 @@ namespace TestProject
 	{
 		public HtmlLabelPage ()
 		{
+			var aTagLabel = new Forms9Patch.Label
+			{
+				HtmlText = "This is a test of the &lt;a&gt; tag.  Tap <a id=\"the id attribute\" href=\"the href attribute\">here</a> to try it.",
+			};
+
+			aTagLabel.ActionTagTapped += (sender, e) =>
+			{
+				Forms9Patch.Toast.Create("&lt;a&gt; tagged label","<b>id:</b> "+e.Id+";\n<b>href:</b>"+e.Href+";");
+			};
+
+
 			Padding = new Thickness (5, 20, 5, 5);
 			Content = new ScrollView {
 				Content = new StackLayout {
 					Children = {
 						
 						new Label { Text = "Hello HtmlLabelPage" },
+
+						aTagLabel,
 
 						new Forms9Patch.Label { HtmlText =  "<b>\nEMBEDDED (resource) CUSTOM FONT:</b>"},
 						new Forms9Patch.Label { 
