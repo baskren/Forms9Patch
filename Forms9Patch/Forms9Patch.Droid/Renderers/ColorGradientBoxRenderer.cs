@@ -14,7 +14,15 @@ namespace Forms9Patch.Droid
 			base.OnElementChanged(e);
 			GradientDrawable.Orientation orientation = (Element.Orientation == StackOrientation.Horizontal ? GradientDrawable.Orientation.LeftRight : GradientDrawable.Orientation.BottomTop);
 			int[] colors = { Element.EndColor.ToAndroid (),Element.StartColor.ToAndroid () };
-			Background = e.NewElement != null ? new GradientDrawable(orientation,colors) : null;
+			if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+				SetBackgroundDrawable(e.NewElement != null ? new GradientDrawable(orientation, colors) : null);
+			else
+			{
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					SetBackgroundDrawable(e.NewElement != null ? new GradientDrawable(orientation, colors) : null);
+				else
+					Background = e.NewElement != null ? new GradientDrawable(orientation, colors) : null;
+			}
 		}
 
 		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)

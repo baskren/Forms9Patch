@@ -53,7 +53,12 @@ namespace Forms9Patch.Droid
 			{
 				var box = Element as IRoundedBox;
 				if (box != null)
-					Container.Background = new RoundRectDrawable(box);
+				{
+					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+						Container.SetBackgroundDrawable(new RoundRectDrawable(box));
+					else
+						Container.Background = new RoundRectDrawable(box);
+				}
 			}
 			else if (
 			  e.PropertyName == VisualElement.WidthProperty.PropertyName
@@ -154,7 +159,12 @@ namespace Forms9Patch.Droid
 			{
 				var roundedBoxElement = Element as IRoundedBox;
 				if (roundedBoxElement != null)
-					Container.Background = new RoundRectDrawable(roundedBoxElement);
+				{
+					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+						Container.SetBackgroundDrawable(new RoundRectDrawable(roundedBoxElement));
+					else
+						Container.Background = new RoundRectDrawable(roundedBoxElement);
+				}
 			}
 			else
 				Container.SetBackgroundColor(((VisualElement)Element).BackgroundColor.ToAndroid());

@@ -67,7 +67,12 @@ namespace Forms9Patch.Droid
 				|| e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName) {
 				var box = Element as IRoundedBox;
 				if (box != null)
-					Background = new RoundRectDrawable (box);
+				{
+					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+						SetBackgroundDrawable(new RoundRectDrawable(box));
+					else
+						Background = new RoundRectDrawable(box);
+				}
 			} else if (e.PropertyName == ContentView.BackgroundImageProperty.PropertyName) {
 				if (_oldImage != null)
 					_oldImage.PropertyChanged -= OnBackgroundImagePropertyChanged;
@@ -100,7 +105,12 @@ namespace Forms9Patch.Droid
 			if (!hasImage) {
 				var roundedBoxElement = Element as IRoundedBox;
 				if (roundedBoxElement != null)
-					Background = new RoundRectDrawable (roundedBoxElement);
+				{
+					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+						SetBackgroundDrawable(new RoundRectDrawable(roundedBoxElement));
+					else
+						Background = new RoundRectDrawable(roundedBoxElement);
+				}
 			} else
 				SetBackgroundColor (Element.BackgroundColor.ToAndroid ());
 
@@ -116,7 +126,10 @@ namespace Forms9Patch.Droid
 				_oldImage = null;
 				_imageViewManager?.Dispose();
 				_imageViewManager = null;
-				Background = null;
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					SetBackgroundDrawable(null);
+				else
+					Background = null;
 			}
 			base.Dispose(disposing);
 		}
@@ -127,7 +140,10 @@ namespace Forms9Patch.Droid
 			_oldImage = null;
 			_imageViewManager?.Dispose();
 			_imageViewManager = null;
-			Background = null;
+			if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+				SetBackgroundDrawable(null);
+			else
+				Background = null;
 		}
 	}
 

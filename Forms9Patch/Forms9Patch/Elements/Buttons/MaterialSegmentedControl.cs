@@ -10,7 +10,7 @@ namespace Forms9Patch
 	/// Forms9Patch Material Segmented Control.
 	/// </summary>
 	[ContentProperty ("Segments")]
-	public class MaterialSegmentedControl : Xamarin.Forms.StackLayout, IDisposable
+	public class MaterialSegmentedControl : Forms9Patch.StackLayout, IDisposable
 	{
 
 		#region Properties
@@ -281,6 +281,7 @@ namespace Forms9Patch
 		/// </summary>
 		public MaterialSegmentedControl ()
 		{
+			IgnoreChildren = true;
 			//Spacing = -.5 * Display.Scale;
 			base.Padding = new Thickness(0);
 			//Padding = new Thickness(2);

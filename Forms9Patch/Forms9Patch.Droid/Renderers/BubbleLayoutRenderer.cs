@@ -23,7 +23,10 @@ namespace Forms9Patch.Droid
 		{
 			base.OnElementChanged(e);
 			if (e.NewElement != null) {
-				Background = new BubbleDrawable (e.NewElement);
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					SetBackgroundDrawable(new BubbleDrawable(e.NewElement));
+				else
+					Background = new BubbleDrawable (e.NewElement);
 			}
 		}
 
@@ -45,7 +48,10 @@ namespace Forms9Patch.Droid
 			    || e.PropertyName == BubbleLayout.PointerTipRadiusProperty.PropertyName
 				|| e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName 
 			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName) {
-				Background = new BubbleDrawable (Element);
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					SetBackgroundDrawable(new BubbleDrawable(Element));
+				else
+					Background = new BubbleDrawable (Element);
 				/*
 			} else if (
 				e.PropertyName == BubbleLayout.PointerDirectionProperty.PropertyName

@@ -165,7 +165,11 @@ namespace Forms9Patch.Droid
 				this.ReleaseStreamBitmap (_source);
 				_source = null;
 				_imageView = null;
-				_control.Background = null;
+
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					_control.SetBackgroundDrawable(null);
+				else
+					_control.Background = null;
 
 				if (waiting) {
 					working = false;

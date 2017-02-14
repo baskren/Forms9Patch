@@ -14,7 +14,7 @@ namespace Forms9Patch.Droid
 		bool _lastAcceptingText;
 		public void Hide()
 		{
-			im = im ?? Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
+			im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
 			var activity = Xamarin.Forms.Forms.Context as Activity;
 			if (im != null && activity != null)
 			{
@@ -25,9 +25,9 @@ namespace Forms9Patch.Droid
 
 		public KeyboardService()
 		{
-			im = im ?? Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
 			Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
 			{
+				im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
 				if (im.IsAcceptingText != _lastAcceptingText)
 				{
 					Forms9Patch.KeyboardService.OnVisiblityChange(im.IsAcceptingText?KeyboardVisibilityChange.Shown:KeyboardVisibilityChange.Hidden);
