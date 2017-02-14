@@ -112,6 +112,7 @@ namespace Forms9Patch.Droid
 				int subIndex = 0;
 				var groupIndex = templatedItems.GetGroupIndexFromGlobal(position, out subIndex);
 				var group = templatedItems.GetGroup(groupIndex);
+				subIndex = group.GetGlobalIndexOfItem(reqItem);
 				cell = group[subIndex];
 			}
 			else
