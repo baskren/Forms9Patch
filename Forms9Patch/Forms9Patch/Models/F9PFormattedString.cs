@@ -21,6 +21,17 @@ namespace Forms9Patch
 		public override string ToString() {
 			return Text;
 		}
+
+		internal bool ContainsActionSpan
+		{
+			get
+			{
+				foreach (var span in _spans)
+					if (span is ActionSpan)
+						return true;
+				return false;
+			}
+		}
 			
 		internal string _string;
 		/// <summary>
@@ -52,30 +63,6 @@ namespace Forms9Patch
 		protected F9PFormattedString(string s) : this() {
 			Text = s;
 		}
-
-		/*
-		internal F9PFormattedString(F9PFormattedString fs) {
-			_string = fs._string;
-			foreach (var span in _spans) {
-				var type = span.GetType ();
-				//var instance = (Span) Activator.CreateInstance(type, new object[] { span });
-				var instance = span.Copy();
-				_spans.Add (instance);
-			}
-		}
-
-		internal  F9PFormattedString(Xamarin.Forms.FormattedString formsFormattedString) {
-			const int index = 0;
-			foreach (var span in formsFormattedString.Spans) {
-				Text += span.Text;
-				int end = index + span.Text.Length - 1;
-				if (span.BackgroundColor!=Xamarin.Forms.Color.Default)
-					_spans.Add(new BackgroundColorSpan(index, end, span.BackgroundColor));
-				if (span.FontFamily != null)
-					_spans.Add (new FontFamilySpan (index, end, span.FontFamily));
-			}
-		}
-		*/
 
 		#region Operators
 		/// <param name="formatted">Formatted.</param>
@@ -152,6 +139,8 @@ namespace Forms9Patch
 
 
 		#endregion
+
+
 
 
 	}

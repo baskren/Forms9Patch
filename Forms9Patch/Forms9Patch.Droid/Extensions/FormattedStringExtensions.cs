@@ -215,6 +215,10 @@ namespace Forms9Patch.Droid
 					case StrikethroughSpan.SpanKey:
 						result.SetSpan (new Android.Text.Style.StrikethroughSpan (), spanStart, spanEnd, 0);
 						break;
+					case ActionSpan.SpanKey:
+						result.SetSpan(new ForegroundColorSpan(Xamarin.Forms.Color.Blue.ToAndroid()), spanStart, spanEnd, 0);
+						result.SetSpan(new Android.Text.Style.UnderlineSpan(), spanStart, spanEnd, 0);
+						break;
 				}
 			}
 

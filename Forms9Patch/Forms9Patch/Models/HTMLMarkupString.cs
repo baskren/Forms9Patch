@@ -490,6 +490,24 @@ namespace Forms9Patch
 					span = new FontSizeSpan(tag.Start, index - 1, size);
 					_spans.Add(span);
 					break;
+				case "a":
+					string id = null;
+					string href = null;
+					foreach (var attr in tag.Attributes)
+					{
+						switch (attr.Name)
+						{
+							case "href":
+								href = attr.Value;
+								break;
+							case "id":
+								id = attr.Value;
+								break;
+						}
+					}
+					span = new ActionSpan(tag.Start, index - 1, id, href);
+					_spans.Add(span);
+					break;
 			}
 			// process  attributes
 			foreach (var attr in tag.Attributes)

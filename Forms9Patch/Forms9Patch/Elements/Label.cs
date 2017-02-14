@@ -249,6 +249,12 @@ namespace Forms9Patch
 		#endregion
 
 
+		#region events
+
+		public event EventHandler<ActionTagEventArgs> ActionTagTapped;
+		#endregion
+
+
 		#region Static Methods
 		static void FontStructPropertyChanged (BindableObject bindable, object oldValue, object newValue)
 		{
@@ -334,18 +340,18 @@ namespace Forms9Patch
 		bool cancelEvents;
 		static int instances;
 		readonly internal int _id;
+		FormsGestures.Listener _listener;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Label"/> class.
 		/// </summary>
 		public Label() {
 			_id=instances++;
-
-
+			_listener = new FormsGestures.Listener(this);
 		}
 		#endregion
 
-
 		#region PropertyChange 
+
 		/// <summary>
 		/// Ons the property changed.
 		/// </summary>
@@ -363,11 +369,17 @@ namespace Forms9Patch
 				}
 				else
 					F9PFormattedString = null;
+				if (F9PFormattedString != null && F9PFormattedString.ContainsActionSpan)
+					_listener.Tapped += OnTapped;
+				else
+					_listener.Tapped -= OnTapped;
+
 			}
 			else if (propertyName == TextProperty.PropertyName && Text!=null)
 			{
 				F9PFormattedString = null;
 				HtmlText = null;
+				_listener.Tapped -= OnTapped;
 			}
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == LinesProperty.PropertyName 
@@ -535,8 +547,43 @@ namespace Forms9Patch
 		{
 			return RendererIndexAtPoint != null ? RendererIndexAtPoint(point) : -1;
 		}
+
+		void OnTapped(object sender, FormsGestures.TapEventArgs e)
+		{
+			if (e.NumberOfTouches == 1)
+			{
+				var index = IndexAtPoint(e.Touches[0]);
+				//System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+				foreach (var span in F9PFormattedString._spans)
+				{
+					var actionSpan = span as ActionSpan;
+					if (actionSpan != null)
+					{
+						//System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+						if (index >= actionSpan.Start && index <= actionSpan.End)
+						{
+							//System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
+							ActionTagTapped?.Invoke(this, new ActionTagEventArgs(actionSpan.Id, actionSpan.Href));
+							return;
+						}
+					}
+				}
+			}
+		}
 		#endregion
 	}
 
+
+	public class ActionTagEventArgs : EventArgs
+	{
+		public string Href { get; private set;}
+		public string Id { get; private set; }
+
+		public ActionTagEventArgs(string id, string href)
+		{
+			Href = href;
+			Id = id;
+		}
+	}
 }
 
