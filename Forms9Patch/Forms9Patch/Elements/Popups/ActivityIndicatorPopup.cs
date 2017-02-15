@@ -60,7 +60,7 @@ namespace Forms9Patch
 		{
 			Content = _indicator;
 			CancelOnPageOverlayTouch = false;
-			BackgroundColor = Color.Transparent;
+			BackgroundColor = Color.FromRgba(0,0,0,1);
 			_indicator.IsVisible = true;
 		}
 

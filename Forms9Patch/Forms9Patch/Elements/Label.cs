@@ -573,12 +573,27 @@ namespace Forms9Patch
 		#endregion
 	}
 
-
+	/// <summary>
+	/// Action tag event arguments.
+	/// </summary>
 	public class ActionTagEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Gets the href.
+		/// </summary>
+		/// <value>The href.</value>
 		public string Href { get; private set;}
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>The identifier.</value>
 		public string Id { get; private set; }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActionTagEventArgs"/> class.
+		/// </summary>
+		/// <param name="id">Identifier.</param>
+		/// <param name="href">Href.</param>
 		public ActionTagEventArgs(string id, string href)
 		{
 			Href = href;

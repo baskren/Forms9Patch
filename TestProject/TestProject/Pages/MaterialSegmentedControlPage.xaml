@@ -10,7 +10,7 @@
 >
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="MaterialSegmentedControl Example" TextColor="Black"/>
+			<Label Text="MaterialSegmentedControl Example 2" TextColor="Black"/>
 			<f9p:MaterialSegmentedControl BackgroundColor="White" FontSize="16" FontColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5">
 				<f9p:Segment Text="Pause 5"/>
 				<f9p:Segment Text="Pause 10"/>
@@ -20,7 +20,11 @@
 			</f9p:MaterialSegmentedControl>
 			<f9p:MaterialSegmentedControl BackgroundColor="White" Padding="5,6,5,0"	FontSize="16" FontColor="#0076FF" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" >
 				<f9p:Segment Text="A" ImageSource="{local:ImageMultiResource TestProject.Resources.ArrowR}" Orientation="Vertical"/>
-				<f9p:Segment Text="B" ImageSource="{local:ImageMultiResource TestProject.Resources.Info}"  Orientation="Vertical"/>
+				<f9p:Segment Text="B" Orientation="Vertical">
+					<f9p:Segment.IconText>
+						&lt;font face="TestProject.Resources.Fonts.MaterialIcons-Regular.ttf"&gt;&lt;/font&gt;
+					</f9p:Segment.IconText>
+				</f9p:Segment>
 				<f9p:Segment Text="PIZZA"/>
 			</f9p:MaterialSegmentedControl>
 		</StackLayout>

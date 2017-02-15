@@ -51,6 +51,21 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// The text color property.
+		/// </summary>
+		public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(Toast), Color.Black);
+		/// <summary>
+		/// Gets or sets the color of the text.
+		/// </summary>
+		/// <value>The color of the text.</value>
+		public Color TextColor
+		{
+			get { return (Color)GetValue(TextColorProperty); }
+			set { SetValue(TextColorProperty, value); }
+		}
+
+
+		/// <summary>
 		/// The ok text property.
 		/// </summary>
 		public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(Toast), "OK");
@@ -100,13 +115,13 @@ namespace Forms9Patch
 		{
 			FontSize = 24,
 			FontAttributes = FontAttributes.Bold,
-			TextColor = Color.Black,
+			TextColor = (Color)TextColorProperty.DefaultValue,
 			//HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly Label _textLabel = new Label
 		{
 			FontSize = 16,
-			TextColor = Color.Black,
+			TextColor = (Color)TextColorProperty.DefaultValue,
 			//HorizontalOptions = LayoutOptions.Fill,
 		};
 		readonly MaterialButton _okButton = new MaterialButton
@@ -175,6 +190,11 @@ namespace Forms9Patch
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)
 				_okButton.FontColor = OkTextColor;
+			else if (propertyName == TextColorProperty.PropertyName)
+			{
+				_textLabel.TextColor = TextColor;
+				_titleLabel.TextColor = TextColor;
+			}
 		}
 
 	}

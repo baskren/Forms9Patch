@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	internal static class ColorExtension
+	public static class ColorExtension
 	{
-		internal static Color RgbBlend(this Color c, Color c2, double percent) {
+		public static Color RgbBlend(this Color c, Color c2, double percent) {
 			var c1 = new Color (c.R, c.G, c.B, c.A);
 			if (c1 == Color.Transparent)
 				c1 = new Color (1.0, 1.0, 1.0, 0.0);
@@ -16,7 +16,7 @@ namespace Forms9Patch
 			return new Color(R,G,B,A);
 		}
 
-		internal static Color WithAlpha(this Color c, double alpha) {
+		public static Color WithAlpha(this Color c, double alpha) {
 			return new Color (c.R, c.G, c.B, alpha);
 		}
 	}

@@ -81,7 +81,7 @@ namespace Forms9Patch
 			return 0;
 		}
 
-		internal static Color ToColor(this string s) {
+		public static Color ToColor(this string s) {
 			if (s.ToLower ().StartsWith ("rgb(", StringComparison.Ordinal)) {
 				var values = s.Substring (4, s.Length - 5).Split (',').Select (int.Parse).ToArray ();
 				if (values.Length != 3)

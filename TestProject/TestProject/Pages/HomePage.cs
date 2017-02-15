@@ -79,7 +79,7 @@ namespace TestProject
 						new TextCell {
 							Text = "MaterialSegmentControl ",
 							Command = navigateCommand,
-							CommandParameter = typeof(MaterialSegmentControlPage)
+							CommandParameter = typeof(MaterialSegmentedControlPage)
 						},
 
 						new TextCell {

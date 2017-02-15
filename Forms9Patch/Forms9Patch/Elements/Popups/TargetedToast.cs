@@ -50,6 +50,21 @@ namespace Forms9Patch
 		}
 
 		/// <summary>
+		/// The text color property.
+		/// </summary>
+		public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(TargetedToast), Color.Black);
+		/// <summary>
+		/// Gets or sets the color of the text.
+		/// </summary>
+		/// <value>The color of the text.</value>
+		public Color TextColor
+		{
+			get { return (Color)GetValue(TextColorProperty); }
+			set { SetValue(TextColorProperty, value); }
+		}
+
+
+		/// <summary>
 		/// The ok text property.
 		/// </summary>
 		public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(TargetedToast), "OK");
@@ -169,6 +184,11 @@ namespace Forms9Patch
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)
 				_okButton.FontColor = OkTextColor;
+			else if (propertyName == TextColorProperty.PropertyName)
+			{
+				_titleLabel.TextColor = TextColor;
+				_textLabel.TextColor = TextColor;
+			}
 		}
 	}
 }
