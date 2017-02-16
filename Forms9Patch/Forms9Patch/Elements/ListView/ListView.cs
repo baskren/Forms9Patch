@@ -72,7 +72,7 @@ namespace Forms9Patch
 		/// Gets or sets the items source.
 		/// </summary>
 		/// <value>The items source.</value>
-		public new IEnumerable F9PItemsSource
+		public IEnumerable F9PItemsSource
 		{
 			get { return (IEnumerable)GetValue(F9PItemsSourceProperty); }
 			set

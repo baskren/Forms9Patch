@@ -3,8 +3,18 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+	/// <summary>
+	/// Color extension.
+	/// </summary>
 	public static class ColorExtension
 	{
+		/// <summary>
+		/// Rgbs the blend.
+		/// </summary>
+		/// <returns>The blend.</returns>
+		/// <param name="c">C.</param>
+		/// <param name="c2">C2.</param>
+		/// <param name="percent">Percent.</param>
 		public static Color RgbBlend(this Color c, Color c2, double percent) {
 			var c1 = new Color (c.R, c.G, c.B, c.A);
 			if (c1 == Color.Transparent)
@@ -16,6 +26,12 @@ namespace Forms9Patch
 			return new Color(R,G,B,A);
 		}
 
+		/// <summary>
+		/// Withs the alpha.
+		/// </summary>
+		/// <returns>The alpha.</returns>
+		/// <param name="c">C.</param>
+		/// <param name="alpha">Alpha.</param>
 		public static Color WithAlpha(this Color c, double alpha) {
 			return new Color (c.R, c.G, c.B, alpha);
 		}

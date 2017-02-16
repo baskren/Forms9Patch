@@ -11,10 +11,9 @@ namespace Forms9Patch
 		static IHtmlToPngPdfService _htmlService;
 
 		/// <summary>
-		/// converts the string (assumed to be HTML) to a PNG file and passess the path of the file as the argument to the onComplete action.
+		/// Tos the png.
 		/// </summary>
 		/// <param name="html">Html.</param>
-		/// <param name="pageSize">Page size.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
 		public static void ToPng(this string html, string fileName, Action<string> onComplete)

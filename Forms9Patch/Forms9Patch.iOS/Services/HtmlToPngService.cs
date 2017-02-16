@@ -18,7 +18,6 @@ namespace Forms9Patch.iOS
 		/// Tos the png.
 		/// </summary>
 		/// <param name="html">Html.</param>
-		/// <param name="size">Size.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
 		public void ToPng(string html, string fileName, Action<string> onComplete)

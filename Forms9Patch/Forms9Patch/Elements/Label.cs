@@ -250,7 +250,9 @@ namespace Forms9Patch
 
 
 		#region events
-
+		/// <summary>
+		/// Occurs when HtmlText wrapped with an action (&lt;a&gt;) tag is tapped.
+		/// </summary>
 		public event EventHandler<ActionTagEventArgs> ActionTagTapped;
 		#endregion
 
