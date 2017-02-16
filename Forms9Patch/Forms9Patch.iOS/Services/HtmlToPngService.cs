@@ -6,13 +6,13 @@ using PCLStorage;
 using UIKit;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(Forms9Patch.iOS.HtmlToPdfService))]
+[assembly: Dependency(typeof(Forms9Patch.iOS.HtmlToPngService))]
 namespace Forms9Patch.iOS
 {
 	/// <summary>
 	/// Html to pdf service.
 	/// </summary>
-	public class HtmlToPdfService : IHtmlToPngPdfService
+	public class HtmlToPngService : IHtmlToPngPdfService
 	{
 		/// <summary>
 		/// Tos the png.
@@ -21,8 +21,9 @@ namespace Forms9Patch.iOS
 		/// <param name="size">Size.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
-		public void ToPng(string html, Size size, string fileName, Action<string> onComplete)
+		public void ToPng(string html, string fileName, Action<string> onComplete)
 		{
+			var size = new Size(8.5, 11);
 			var webView = new UIWebView(new CGRect(0, 0, (size.Width-0.5) * 72, (size.Height-0.5) * 72));
 
 			var callback = new WebViewCallBack(size, fileName, onComplete);

@@ -270,6 +270,33 @@ namespace Forms9Patch
 			set { SetValue(TrailingImageProperty, value); }
 		}
 
+		/// <summary>
+		/// The haptic effect property.
+		/// </summary>
+		public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(MaterialSegmentedControl), default(HapticEffect));
+		/// <summary>
+		/// Gets or sets the haptic effect.
+		/// </summary>
+		/// <value>The haptic effect.</value>
+		public HapticEffect HapticEffect
+		{
+			get { return (HapticEffect)GetValue(HapticEffectProperty); }
+			set { SetValue(HapticEffectProperty, value); }
+		}
+
+		/// <summary>
+		/// The haptic mode property.
+		/// </summary>
+		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(HapticMode), typeof(MaterialSegmentedControl), default(HapticMode));
+		/// <summary>
+		/// Gets or sets the haptic mode.
+		/// </summary>
+		/// <value>The haptic mode.</value>
+		public HapticMode HapticMode
+		{
+			get { return (HapticMode)GetValue(HapticModeProperty); }
+			set { SetValue(HapticModeProperty, value); }
+		}
 
 		#endregion
 
@@ -379,6 +406,8 @@ namespace Forms9Patch
 			if (!segment.FontAttributesSet)
 				segment.MaterialButton.FontAttributes = FontAttributes;
 			button.TrailingImage = TrailingImage;
+			button.HapticMode = HapticMode;
+			button.HapticEffect = HapticEffect;
 		}
 		#endregion
 
@@ -567,6 +596,12 @@ namespace Forms9Patch
 			else if (propertyName == TrailingImageProperty.PropertyName)
 				foreach (MaterialButton button in Children)
 					button.TrailingImage = TrailingImage;
+			else if (propertyName == HapticEffectProperty.PropertyName)
+				foreach (MaterialButton button in Children)
+					button.HapticEffect = HapticEffect;
+			else if (propertyName == HapticModeProperty.PropertyName)
+				foreach (MaterialButton button in Children)
+					button.HapticMode = HapticMode;
 		}
 
 		//Segment _lastSelectedSegment;

@@ -226,6 +226,34 @@ namespace Forms9Patch
 			set { SetValue(TrailingImageProperty, value); }
 		}
 
+		/// <summary>
+		/// The haptic effect property.
+		/// </summary>
+		public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(ImageButton), HapticEffect.KeyClick);
+		/// <summary>
+		/// Gets or sets the haptic effect.
+		/// </summary>
+		/// <value>The haptic effect.</value>
+		public HapticEffect HapticEffect
+		{
+			get { return (HapticEffect)GetValue(HapticEffectProperty); }
+			set { SetValue(HapticEffectProperty, value); }
+		}
+
+		/// <summary>
+		/// The haptic mode property.
+		/// </summary>
+		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(HapticMode), typeof(ImageButton), default(HapticMode));
+		/// <summary>
+		/// Gets or sets the haptic mode.
+		/// </summary>
+		/// <value>The haptic mode.</value>
+		public HapticMode HapticMode
+		{
+			get { return (HapticMode)GetValue(HapticModeProperty); }
+			set { SetValue(HapticModeProperty, value); }
+		}
+
 
 
 		#endregion
@@ -362,6 +390,8 @@ namespace Forms9Patch
 			System.Diagnostics.Debug.WriteLine("Up");
 			if (IsEnabled)
 			{
+				HapticsService.Feedback(HapticEffect, HapticMode);
+
 				Debug.WriteLine("tapped");
 				if (ToggleBehavior)
 				{

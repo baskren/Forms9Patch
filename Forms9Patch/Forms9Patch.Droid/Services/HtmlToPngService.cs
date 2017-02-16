@@ -15,13 +15,14 @@ using Java.Lang;
 using Android.Graphics;
 using Android.Views;
 
-[assembly: Dependency(typeof(Forms9Patch.Droid.HtmlToPdfService))]
+[assembly: Dependency(typeof(Forms9Patch.Droid.HtmlToPngService))]
 namespace Forms9Patch.Droid
 {
-	public class HtmlToPdfService : Java.Lang.Object, IHtmlToPngPdfService
+	public class HtmlToPngService : Java.Lang.Object, IHtmlToPngPdfService
 	{
-		public void ToPng(string html, Size size, string fileName, Action<string> onComplete)
+		public void ToPng(string html, string fileName, Action<string> onComplete)
 		{
+			var size = new Size(8.5, 11);
 			var externalPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
 			var dir = new Java.IO.File(externalPath);
 			var file = new Java.IO.File(dir + "/" + fileName + ".png");

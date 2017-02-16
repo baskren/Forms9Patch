@@ -14,7 +14,6 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -179,7 +178,7 @@
     <Compile Include="Services\ListViewExtensionService.cs" />
     <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Renderers\ManualLayoutRenderer.cs" />
-    <Compile Include="Services\HtmlToPdfService.cs" />
+    <Compile Include="Services\HtmlToPngService.cs" />
     <Compile Include="Services\HapticsService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
   </ItemGroup>

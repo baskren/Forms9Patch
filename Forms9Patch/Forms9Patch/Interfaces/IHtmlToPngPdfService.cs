@@ -14,7 +14,7 @@ namespace Forms9Patch
 		/// <param name="size">Size.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
-		void ToPng(string html, Size size, string fileName, Action<string> onComplete);
+		void ToPng(string html, string fileName, Action<string> onComplete);
 	}
 
 	/// <summary>

@@ -399,6 +399,21 @@ namespace Forms9Patch
 			set { SetValue(HapticEffectProperty, value); }
 		}
 
+		/// <summary>
+		/// The haptic mode property.
+		/// </summary>
+		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(HapticMode), typeof(MaterialButton), default(HapticMode));
+		/// <summary>
+		/// Gets or sets the haptic mode.
+		/// </summary>
+		/// <value>The haptic mode.</value>
+		public HapticMode HapticMode
+		{
+			get { return (HapticMode)GetValue(HapticModeProperty); }
+			set { SetValue(HapticModeProperty, value); }
+		}
+
+
 		#endregion
 
 
@@ -553,7 +568,7 @@ namespace Forms9Patch
 		{
 			if (IsEnabled)
 			{
-				HapticsService.Feedback(HapticEffect);
+				HapticsService.Feedback(HapticEffect, HapticMode);
 
 				//Debug.WriteLine("tapped");
 				if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None

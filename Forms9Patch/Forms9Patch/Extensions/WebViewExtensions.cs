@@ -19,7 +19,7 @@ namespace Forms9Patch
 		{
 			_service = _service ?? DependencyService.Get<IWebViewExtensionService>();
 			if (_service == null)
-				throw new NotSupportedException("Cannot get PrintService: must not be supported on this platform.");
+				throw new NotSupportedException("Cannot get IWebViewService: must not be supported on this platform.");
 			_service.Print(webview, jobName);
 		}
 
@@ -37,5 +37,6 @@ namespace Forms9Patch
 				return _service.CanPrint();
 			}
 		}
+
 	}
 }
