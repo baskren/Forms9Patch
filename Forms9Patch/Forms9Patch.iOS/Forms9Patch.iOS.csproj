@@ -118,6 +118,7 @@
     <Compile Include="Services\HtmlToPngService.cs" />
     <Compile Include="Services\HapticService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
+    <Compile Include="Services\FontService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

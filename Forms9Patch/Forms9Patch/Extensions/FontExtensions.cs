@@ -27,6 +27,44 @@ namespace Forms9Patch
 		{
 			return DependencyService.Get<IFontFamilies>().FontFamilies();
 		}
+
+		static IFontService _service;
+
+		public static double LineHeight(this IFontElement element)
+		{
+			return LineHeight(element.FontFamily, element.FontSize, element.FontAttributes);
+		}
+
+		public static double LineHeight(this Font font)
+		{
+			return LineHeight(font.FontFamily, font.FontSize, font.FontAttributes);
+		}
+
+		public static double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)
+		{
+			_service = _service ?? DependencyService.Get<IFontService>();
+			if (_service == null)
+				throw new NotSupportedException("IFontService is not supported on this platform.");
+			return _service.LineHeight(fontFamily, fontSize, fontAttributes);
+		}
+
+		public static double LineSpace(this IFontElement element)
+		{
+			return LineSpace(element.FontFamily, element.FontSize, element.FontAttributes);
+		}
+
+		public static double LineSpace(this Font font)
+		{
+			return LineSpace(font.FontFamily, font.FontSize, font.FontAttributes);
+		}
+
+		public static double LineSpace(string fontFamily, double fontSize, FontAttributes fontAttributes)
+		{
+			_service = _service ?? DependencyService.Get<IFontService>();
+			if (_service == null)
+				throw new NotSupportedException("IFontService is not supported on this platform.");
+			return _service.LineSpace(fontFamily, fontSize, fontAttributes);
+		}
 	}
 }
 
