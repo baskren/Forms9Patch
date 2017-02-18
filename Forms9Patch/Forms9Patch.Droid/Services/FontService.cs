@@ -6,6 +6,7 @@
 using System;
 using Xamarin.Forms;
 
+[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.FontService))]
 namespace Forms9Patch.Droid
 {
 	public class FontService : IFontService

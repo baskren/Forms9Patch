@@ -237,9 +237,10 @@ namespace Forms9Patch.iOS
 									//Console.WriteLine ("\tdebug description: " + error.DebugDescription);
 									throw new MissingMemberException ("Failed to register [" + resourceID + "] font.  Error messages in console.");
 								}
-							} 
-							_embeddedResourceFonts.Add (resourceID, font.FullName);
-							return UIFont.FromName (font.FullName, size);
+							}
+							//var psName = font.PostScriptName;
+							_embeddedResourceFonts.Add (resourceID, font.PostScriptName);
+							return UIFont.FromName (font.PostScriptName, size);
 						} else {
 							Console.WriteLine ("Could not retrieve data from Embedded Resource ["+resourceID+"].");
 						}
