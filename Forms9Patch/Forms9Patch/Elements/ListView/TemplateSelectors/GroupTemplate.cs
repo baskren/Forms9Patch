@@ -94,9 +94,9 @@ namespace Forms9Patch
 		/// <param name="viewType">View type.</param>
 
 		protected void Add(Type itemBaseType, Type viewType) {
-			Type itemType;
+			Type itemType = itemBaseType;
 			//itemType = itemBaseType;
-			itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
+			//itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
 			if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(itemType))
 				throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
 			Type cellType = typeof(Cell<>).MakeGenericType (new [] { viewType });
@@ -131,9 +131,11 @@ namespace Forms9Patch
 					if (sourceType.IsConstructedGenericType)
 					{
 						var genericSourceType = sourceType.GetGenericTypeDefinition();
-						var genericItemType = typeof(ItemWrapper<>).MakeGenericType(new[] { genericSourceType });
-						if (_cellTemplates.ContainsKey(genericItemType))
-							return _cellTemplates[genericItemType];
+						if (_cellTemplates.ContainsKey(genericSourceType))
+							return _cellTemplates[genericSourceType];
+						//var genericItemType = typeof(ItemWrapper<>).MakeGenericType(new[] { genericSourceType });
+						//if (_cellTemplates.ContainsKey(genericItemType))
+						//	return _cellTemplates[genericItemType];
 					}
 					var template = TemplateForType(source.GetType());
 					return template;
