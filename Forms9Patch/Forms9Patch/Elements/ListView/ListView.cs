@@ -329,7 +329,7 @@ namespace Forms9Patch
 		void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
 			//System.Diagnostics.Debug.WriteLine("OnItemAppearing");
-			var item = ((ItemWrapper)e?.Item);
+			var item = e?.Item as ItemWrapper;
 			var source = item?.Source;
 			if (source != null)
 				ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(source));
