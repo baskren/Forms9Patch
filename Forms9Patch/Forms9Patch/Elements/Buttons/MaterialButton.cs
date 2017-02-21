@@ -467,7 +467,7 @@ namespace Forms9Patch
 			_label = new Label {
 				VerticalTextAlignment = TextAlignment.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
-				HeightRequest = 22,
+				//HeightRequest = 22,
 				MinimizeHeight = true,
 				Lines = Lines,
 				Fit = Fit,
@@ -917,16 +917,18 @@ namespace Forms9Patch
 				_label.Text = Text;
 			} else if (propertyName == HtmlTextProperty.PropertyName) {
 				_label.HtmlText = HtmlText;
-			} 
-			if (propertyName == IsSelectedProperty.PropertyName) {
-				if (IsSelected) {
+			}
+			if (propertyName == IsSelectedProperty.PropertyName)
+			{
+				if (IsSelected)
+				{
 					ICommand command = Command;
-					if (command != null && GroupToggleBehavior!=GroupToggleBehavior.None)
+					if (command != null && GroupToggleBehavior != GroupToggleBehavior.None)
 						command.Execute(CommandParameter);
-					
+
 					EventHandler eventHandler = _selected;
 					if (eventHandler != null)
-						eventHandler (this, EventArgs.Empty);
+						eventHandler(this, EventArgs.Empty);
 				}
 			}
 			else if (propertyName == LinesProperty.PropertyName)
@@ -943,7 +945,13 @@ namespace Forms9Patch
 				_label.FontAttributes = FontAttributes;
 			else if (propertyName == FontFamilyProperty.PropertyName)
 				_label.FontFamily = FontFamily;
-
+			else if (propertyName == TrailingImageProperty.PropertyName && _stackLayout.Children.Contains(_label))
+			{
+				if (TrailingImage)
+					_stackLayout.LowerChild(_label);
+				else
+					_stackLayout.RaiseChild(_label);
+			}
 		}
 
 		void OnCommandChanged()

@@ -23,6 +23,16 @@ namespace TestProject
 							//Source = Xamarin.Forms.ImageSource.FromFile("button.9.png"),
 							Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button"),
 						},
+
+						new Label { Text = "X" },
+						new Forms9Patch.Image {
+							Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.adsBttn29"),
+						},
+						new Forms9Patch.Image {
+							Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.bluebutton_psd"),
+						},
+						new Label { Text = "X" },
+
 						#endregion
 
 						#region Original Image

@@ -13,7 +13,9 @@ namespace TestProject
 
 			#region Material Button
 			var mb1 = new Forms9Patch.MaterialButton {
-				HtmlText = "<i>Markup</i> button <font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+				IconText ="<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+				HtmlText = "<i>Markup</i> button",
+				TrailingImage = true,
 				//Text = "Pizza",
 				BackgroundColor = Color.FromRgb(200,200,200),
 				FontColor = Color.Blue,
@@ -30,20 +32,26 @@ namespace TestProject
 			var sc1 = new Forms9Patch.MaterialSegmentedControl {
 				HasShadow = true,
 				BackgroundColor = Color.FromRgb(200,200,200),
+				FontSize = 12,
+				Padding = 5,
 				//FontColor = Color.Blue,
 				Segments = {
 
 					new Forms9Patch.Segment {
-						HtmlText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> Cart",
+						Text = "Cart",
+						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
-						HtmlText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> Pay",
+						Text = "Pay",
+						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
-						HtmlText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> Ship",
+						Text = "Ship",
+						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
-						HtmlText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> Email",
+						Text = "Email",
+						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 				},
 			};

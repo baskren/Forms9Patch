@@ -201,6 +201,8 @@
     <EmbeddedResource Include="Resources\tick.png" />
     <EmbeddedResource Include="Resources\tick%402x.png" />
     <EmbeddedResource Include="Resources\tick%403x.png" />
+    <EmbeddedResource Include="Resources\adsBttn29.png" />
+    <EmbeddedResource Include="Resources\bluebutton_psd.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
