@@ -30,16 +30,33 @@ namespace Forms9Patch
 
 		static IFontService _service;
 
+		/// <summary>
+		/// Lines the height.
+		/// </summary>
+		/// <returns>The height.</returns>
+		/// <param name="element">Element.</param>
 		public static double LineHeight(this IFontElement element)
 		{
 			return LineHeight(element.FontFamily, element.FontSize, element.FontAttributes);
 		}
 
+		/// <summary>
+		/// Lines the height.
+		/// </summary>
+		/// <returns>The height.</returns>
+		/// <param name="font">Font.</param>
 		public static double LineHeight(this Font font)
 		{
 			return LineHeight(font.FontFamily, font.FontSize, font.FontAttributes);
 		}
 
+		/// <summary>
+		/// Lines the height.
+		/// </summary>
+		/// <returns>The height.</returns>
+		/// <param name="fontFamily">Font family.</param>
+		/// <param name="fontSize">Font size.</param>
+		/// <param name="fontAttributes">Font attributes.</param>
 		public static double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)
 		{
 			_service = _service ?? DependencyService.Get<IFontService>();
@@ -48,16 +65,33 @@ namespace Forms9Patch
 			return _service.LineHeight(fontFamily, fontSize, fontAttributes);
 		}
 
+		/// <summary>
+		/// Lines the space.
+		/// </summary>
+		/// <returns>The space.</returns>
+		/// <param name="element">Element.</param>
 		public static double LineSpace(this IFontElement element)
 		{
 			return LineSpace(element.FontFamily, element.FontSize, element.FontAttributes);
 		}
 
+		/// <summary>
+		/// Lines the space.
+		/// </summary>
+		/// <returns>The space.</returns>
+		/// <param name="font">Font.</param>
 		public static double LineSpace(this Font font)
 		{
 			return LineSpace(font.FontFamily, font.FontSize, font.FontAttributes);
 		}
 
+		/// <summary>
+		/// Lines the space.
+		/// </summary>
+		/// <returns>The space.</returns>
+		/// <param name="fontFamily">Font family.</param>
+		/// <param name="fontSize">Font size.</param>
+		/// <param name="fontAttributes">Font attributes.</param>
 		public static double LineSpace(string fontFamily, double fontSize, FontAttributes fontAttributes)
 		{
 			_service = _service ?? DependencyService.Get<IFontService>();
