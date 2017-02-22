@@ -140,10 +140,17 @@ namespace Forms9Patch.Droid
 			_oldImage = null;
 			_imageViewManager?.Dispose();
 			_imageViewManager = null;
-			if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
-				SetBackgroundDrawable(null);
-			else
-				Background = null;
+			try
+			{
+				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+					SetBackgroundDrawable(null);
+				else
+					Background = null;
+			}
+			catch (Exception e)
+			{
+				System.Console.WriteLine("This exception happened because Forms9Patch was being a good citizen and trying to dispose of all of it's objects.  Unfortunately, no good deed good unpunished.  In this case, the object Forms9Patch was trying to disposed had already been disposed.  Would be nice if Microsoft would just ignored this.  You're better - because you can!"); 
+			}
 		}
 	}
 
