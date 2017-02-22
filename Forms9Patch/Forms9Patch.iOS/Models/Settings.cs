@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using ObjCRuntime;
 using UIKit;
+using System.Reflection;
 //using Xamarin.Forms;
 //using System.Linq;
 
@@ -28,6 +29,9 @@ namespace Forms9Patch.iOS
 			get { return _valid; }
 		}
 
+		internal static Assembly ApplicationAssembly;
+
+
 		static string _licenseKey;
 		/// <summary>
 		/// Sets the Forms9Patch license key.
@@ -37,6 +41,7 @@ namespace Forms9Patch.iOS
 		{
 			set
 			{
+				ApplicationAssembly = System.Reflection.Assembly.GetCallingAssembly();
 				if (!string.IsNullOrEmpty(value))
 				{
 					_licenseKey = value;

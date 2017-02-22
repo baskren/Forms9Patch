@@ -5,6 +5,7 @@ using Android.Text.Style;
 using Android.Graphics;
 using System.Linq;
 using Forms9Patch.Droid;
+using PCL.Utils;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FontManagment))]
 namespace Forms9Patch.Droid
@@ -78,10 +79,15 @@ namespace Forms9Patch.Droid
 					throw new InvalidObjectException("Embedded Font file names must end with \".ttf\" or \".otf\".");
 				// what is the assembly?
 				var assemblyName = fontFamily.Substring(0,fontFamily.IndexOf(".Resources.Fonts."));
-				var assembly = System.Reflection.Assembly.Load (assemblyName);
+
+				//var assembly = System.Reflection.Assembly.Load (assemblyName);
+				var assembly = AppDomainWrapper.Instance.GetAssemblyByName(assemblyName) ?? Forms9Patch.Droid.Settings.ApplicationAssembly;
+
 				if (assembly == null) {
-					System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
-					return null;
+					// try using the current application assembly instead (as is the case with Shared Applications)
+					assembly = AppDomainWrapper.Instance.GetAssemblyByName(assemblyName + ".Droid");
+					///System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
+					//return null;
 				}
 				// move it to the Application's CacheDir
 				var inputStream = assembly.GetManifestResourceStream (fontFamily);

@@ -2,6 +2,7 @@ using Android.App;
 using System;
 //using Xamarin.Forms;
 using Dalvik.SystemInterop;
+using System.Reflection;
 
 [assembly: Xamarin.Forms.Dependency (typeof(Forms9Patch.Droid.Settings))]
 namespace Forms9Patch.Droid
@@ -25,6 +26,8 @@ namespace Forms9Patch.Droid
 		}
 
 		static string _licenseKey;
+
+		internal static Assembly ApplicationAssembly;
 		/// <summary>
 		/// Sets the Forms9Patch license key.
 		/// </summary>
@@ -33,6 +36,7 @@ namespace Forms9Patch.Droid
 		{
 			set
 			{
+				ApplicationAssembly = System.Reflection.Assembly.GetCallingAssembly();
 				if (!string.IsNullOrEmpty(value))
 				{
 					_licenseKey = value;

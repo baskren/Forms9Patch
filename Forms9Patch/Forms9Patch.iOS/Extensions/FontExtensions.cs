@@ -7,6 +7,7 @@ using Foundation;
 using CoreGraphics;
 using CoreText;
 using Forms9Patch.iOS;
+using PCL.Utils;
 
 [assembly: Dependency(typeof(FontFamilies))]
 namespace Forms9Patch.iOS
@@ -215,10 +216,13 @@ namespace Forms9Patch.iOS
 				lock (_loadFontLock) {
 					// what is the assembly?
 					var assemblyName = resourceID.Substring (0, resourceID.IndexOf (".Resources.Fonts."));
-					var assembly = System.Reflection.Assembly.Load (assemblyName);
+					//var assembly = System.Reflection.Assembly.Load (assemblyName);
+					var assembly = AppDomainWrapper.Instance.GetAssemblyByName(assemblyName) ?? Forms9Patch.iOS.Settings.ApplicationAssembly;
 					if (assembly == null) {
-						Console.WriteLine ("Assembly for Resource ID \"" + resourceID + "\" not found.");
-						return null;
+						// try using the current application assembly instead (as is the case with Shared Applications)
+						assembly = AppDomainWrapper.Instance.GetAssemblyByName(assemblyName + ".Droid");
+						//Console.WriteLine ("Assembly for Resource ID \"" + resourceID + "\" not found.");
+						//return null;
 					}
 					// load it!
 					var stream = assembly.GetManifestResourceStream (resourceID);
