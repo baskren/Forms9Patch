@@ -128,6 +128,8 @@ namespace Forms9Patch
 				if (source != null)
 				{
 					var sourceType = source.GetType();
+					if (_cellTemplates.ContainsKey(sourceType))
+						return _cellTemplates[sourceType];
 					if (sourceType.IsConstructedGenericType)
 					{
 						var genericSourceType = sourceType.GetGenericTypeDefinition();
