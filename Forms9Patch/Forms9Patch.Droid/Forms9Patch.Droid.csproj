@@ -8,12 +8,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Forms9Patch.Droid</RootNamespace>
     <AssemblyName>Forms9Patch.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
