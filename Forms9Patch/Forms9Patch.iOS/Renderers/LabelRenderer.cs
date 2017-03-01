@@ -293,7 +293,7 @@ namespace Forms9Patch.iOS
 			var font = UIFont.FromDescriptor(FontDescriptor, fontSize);
 			CGSize labelSize = CGSize.Empty;
 			var constraintSize = new CGSize(widthConstraint, double.PositiveInfinity);
-			if (Element.F9PFormattedString != null)
+			if (Element?.F9PFormattedString != null)
 			{
 				ControlAttributedText = Element.F9PFormattedString.ToNSAttributedString(font, ControlTextColor);//, twice: twice);
 				labelSize = ControlAttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
