@@ -85,6 +85,12 @@ namespace Forms9Patch
 				PageController.InternalChildren.Remove(PageController.InternalChildren.Last());
 				return true;
 			}
+			var masterDetailPage = (PageController.InternalChildren[0] as MasterDetailPage) ?? (PageController.InternalChildren[0] as NavigationPage)?.CurrentPage as MasterDetailPage;
+			if (masterDetailPage != null && masterDetailPage.IsPresented)
+			{
+				masterDetailPage.IsPresented = false;
+				return true;
+			}
 			return base.OnBackButtonPressed();
 		}
 
@@ -122,5 +128,12 @@ namespace Forms9Patch
 			}
 		}
 
+		protected override void LayoutChildren(double x, double y, double width, double height)
+		{
+			if (Device.OS == TargetPlatform.iOS && width < height)
+				base.LayoutChildren(x, 20, width, height - 20);
+			else
+				base.LayoutChildren(x, y, width, height);
+		}
 	}
 }

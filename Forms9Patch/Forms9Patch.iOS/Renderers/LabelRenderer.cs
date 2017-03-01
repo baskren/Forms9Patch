@@ -43,14 +43,15 @@ namespace Forms9Patch.iOS
 		/// <param name="heightConstraint">Height constraint.</param>
 		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
 		{
-			//if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
-			// System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
+
+			if (widthConstraint < 0 || heightConstraint < 0)
+				return new SizeRequest(Size.Zero);
+
 			if (Control == null)
 				return new SizeRequest(Size.Zero);
 
 			if (string.IsNullOrEmpty((ControlText??ControlAttributedText?.ToString())))
 				return new SizeRequest(Size.Zero);
-
 
 
 			if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
@@ -171,7 +172,13 @@ namespace Forms9Patch.iOS
 					}
 
 				double gap = 0;
-				double height = 0;
+				double height = Math.Max(Math.Max(heightConstraint,cgSize.Height),tmpHt);
+				double y = 0;
+
+				//if (Element.HtmlText == "System")
+				//	System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
+
+
 				if (Element.Fit == LabelFit.None && tmpHt < heightConstraint)
 				{
 					gap = (nfloat)(heightConstraint - tmpHt);
@@ -190,7 +197,6 @@ namespace Forms9Patch.iOS
 				if (gap > 0 && height > 0)
 				{
 					
-					double y = 0;
 					if (heightConstraint < double.MaxValue / 3.0)
 					{
 						switch (Element.VerticalTextAlignment)
@@ -205,8 +211,8 @@ namespace Forms9Patch.iOS
 					}
 					//Control.Frame = new CGRect(0, y, widthConstraint, height);  // doesn't work anymore but Control.Center does!
 
-					Control.Center = new CGPoint(Control.Center.X, height/2.0 + y);
 				}
+				Control.Center = new CGPoint(Control.Center.X, height / 2.0 + y);
 				//Element.ActualFontSize = Control.Font.PointSize;  // crashes on Unimposed Height LabelFit when Fit is set to Lines
 
 
