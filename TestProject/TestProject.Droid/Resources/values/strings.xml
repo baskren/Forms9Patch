@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">TestProject</string>
-	<string name="ApplicationName">TestProject</string>
+	<string name="app_name">Forms9PatchDemo</string>
+	<string name="ApplicationName">Forms9PatchDemo</string>
 	<string name="Hello">Hello</string>
 </resources>

@@ -7,7 +7,7 @@ using System;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class ZenmekPage : ContentPage
 	{
@@ -68,7 +68,7 @@ namespace TestProject
 			{
 				if (_baseResource == null)
 				{
-					_baseResource = "TestProject";
+					_baseResource = "Forms9PatchDemo";
 					//_baseResource = Assembly.GetExecutingAssembly().FullName.Split(',').FirstOrDefault();
 				}
 				return _baseResource;

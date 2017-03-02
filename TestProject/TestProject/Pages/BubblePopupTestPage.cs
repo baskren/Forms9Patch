@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using PCL.Utils;
 using System.Linq;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class BubblePopupTestPage : ContentPage
 	{

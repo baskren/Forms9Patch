@@ -1,11 +1,11 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * HeapDemoPage.cs copyright 2017 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using System;
 using Xamarin.Forms;
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class HeapDemoPage : ContentPage
 	{
@@ -22,14 +22,14 @@ namespace TestProject
 						{
 							BackgroundImage = new Forms9Patch.Image
 							{
-								Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.delay")
+								Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.delay")
 							},
 						},
 						SelectedState = new Forms9Patch.ImageButtonState
 						{
 							BackgroundImage = new Forms9Patch.Image
 							{
-								Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.tick")
+								Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.tick")
 							},
 						},
 						WidthRequest = 150,

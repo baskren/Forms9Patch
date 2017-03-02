@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	class HomePage : ContentPage
 	{
@@ -44,13 +44,19 @@ namespace TestProject
 						await this.Navigation.PushAsync(page);
 					});
 
-
-
 			this.Title = "Forms Gallery";
 			this.Content = new TableView
 			{
 				Intent = TableIntent.Menu,
+
 				Root = new TableRoot {
+					new TableSection("User Pages") {
+						new TextCell {
+							Text = "User Pages",
+							Command = navigateCommand,
+							CommandParameter = typeof(UserPagesHomePage)
+						},
+					},
 					new TableSection("XAML") {
 						new TextCell {
 							Text = "ContentView",
@@ -100,20 +106,9 @@ namespace TestProject
 							CommandParameter = typeof(CapsInsetPage)
 						},
 
-						new TextCell {
-							Text = "Burkhart Test",
-							Command = navigateCommand,
-							CommandParameter = typeof(Burkhart)
-						}
 					},
 
 					new TableSection("Code") {
-
-						new TextCell {
-							Text = "Popup on MasterDetail",
-							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupOnMasterDetailPage)
-						},
 
 						new TextCell {
 							Text = "Custom Font Effect",
@@ -179,12 +174,6 @@ namespace TestProject
 						},
 
 						new TextCell {
-							Text = "Chat using ListView",
-							Command = navigateCommand,
-							CommandParameter = typeof(ChatListPage)
-						},
-
-						new TextCell {
 							Text = "ImageButton",
 							Command = navigateCommand,
 							CommandParameter = typeof(ImageButtonCodePage)
@@ -240,40 +229,11 @@ namespace TestProject
 						},
 
 						new TextCell {
-							Text = "Popup + PushModalAsync++",
-							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupWithNavigationPages)
-						},
-
-						new TextCell {
-							Text = "Nested Bubble Popup",
-							Command = navigateCommand,
-							CommandParameter = typeof(NestedBubblePopupPage)
-						},
-
-						new TextCell {
 							Text = "Pan Gesture test",
 							Command = navigateCommand,
 							CommandParameter = typeof(PanGesturePage)
 						},
 
-						new TextCell {
-							Text = "ImageButton in ContentView test",
-							Command = navigateCommand,
-							CommandParameter = typeof(ZenmekPage)
-						},
-
-						new TextCell {
-							Text = "BackgroundImage opacity",
-							Command = navigateCommand,
-							CommandParameter = typeof(BackgroundImageOpacityPage)
-						},
-
-						new TextCell {
-							Text = "Segmented Control Navigation",
-							Command = navigateCommand,
-							CommandParameter = typeof(SegmentNavPage1)
-						},
 					}
 				}
 			};

@@ -6,10 +6,11 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TestProject</RootNamespace>
+    <RootNamespace>Forms9PatchDemo</RootNamespace>
     <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <AssemblyName>TestProject</AssemblyName>
+    <AssemblyName>Forms9PatchDemo</AssemblyName>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,7 +31,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TestProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\NinePatchButtonPage.xaml.cs">
       <DependentUpon>NinePatchButtonPage.xaml</DependentUpon>
@@ -41,7 +41,6 @@
     </Compile>
     <Compile Include="Pages\ModalPopupTestPage.cs" />
     <Compile Include="Pages\BubblePopupTestPage.cs" />
-    <Compile Include="Pages\ChatListPage.cs" />
     <Compile Include="Elements\ImageCircle.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
     <Compile Include="Pages\HomePage.cs" />
@@ -65,8 +64,6 @@
       <DependentUpon>MaterialSegmentControlPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PanGesturePage.cs" />
-    <Compile Include="Pages\ModalPopupWithNavigationPages.cs" />
-    <Compile Include="Pages\NestedBubblePopupPage.cs" />
     <Compile Include="Pages\HtmlLabelPage.cs" />
     <Compile Include="Pages\HtmlButtonsPage.cs" />
     <Compile Include="Pages\HtmlLabelsAndButtons.xaml.cs">
@@ -85,19 +82,25 @@
     <Compile Include="Pages\LayoutWithLabel.cs" />
     <Compile Include="Pages\LabelInHorizontalStackLayout.cs" />
     <Compile Include="Pages\ExternalEmbeddedResourceImage.cs" />
-    <Compile Include="Pages\ZenmekPage.cs" />
     <Compile Include="Pages\CustomFontEffectPage.cs" />
     <Compile Include="Pages\EllipticalMaterialButtonsPage.cs" />
-    <Compile Include="Pages\BackgroundImageOpacityPage.cs" />
-    <Compile Include="Pages\SegmentNavPage1.cs" />
-    <Compile Include="Pages\SegmentNavPage2.cs" />
-    <Compile Include="Pages\SegmentNavPage3.cs" />
     <Compile Include="Pages\MaterialButtonsPage-IconText.cs" />
-    <Compile Include="Pages\Burkhart.xaml.cs">
+    <Compile Include="Pages\HeapDemoPage.cs" />
+    <Compile Include="UserPages\CustomFontEffectPage.cs" />
+    <Compile Include="Forms9PatchDemo.cs" />
+    <Compile Include="UserPages\UserHomePage.cs" />
+    <Compile Include="UserPages\Burkhart.xaml.cs">
       <DependentUpon>Burkhart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ModalPopupOnMasterDetailPage.cs" />
-    <Compile Include="Pages\HeapDemoPage.cs" />
+    <Compile Include="UserPages\ModalPopupOnMasterDetailPage.cs" />
+    <Compile Include="UserPages\ChatListPage.cs" />
+    <Compile Include="UserPages\ModalPopupWithNavigationPages.cs" />
+    <Compile Include="UserPages\NestedBubblePopupPage.cs" />
+    <Compile Include="UserPages\ZenmekPage.cs" />
+    <Compile Include="UserPages\BackgroundImageOpacityPage.cs" />
+    <Compile Include="UserPages\SegmentNavPage1.cs" />
+    <Compile Include="UserPages\SegmentNavPage2.cs" />
+    <Compile Include="UserPages\SegmentNavPage3.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -105,6 +108,7 @@
     <Folder Include="Elements\" />
     <Folder Include="Extensions\" />
     <Folder Include="Resources\Fonts\" />
+    <Folder Include="UserPages\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\bubble.9.png" />
@@ -191,9 +195,6 @@
     <EmbeddedResource Include="Resources\button_01_pressing.png" />
     <EmbeddedResource Include="Resources\button_01_default.png" />
     <EmbeddedResource Include="Resources\Fonts\Pacifico.ttf" />
-    <EmbeddedResource Include="Pages\Burkhart.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\delay.png" />
     <EmbeddedResource Include="Resources\delay%402x.png" />
     <EmbeddedResource Include="Resources\delay%403x.png" />
@@ -202,6 +203,11 @@
     <EmbeddedResource Include="Resources\tick%403x.png" />
     <EmbeddedResource Include="Resources\adsBttn29.png" />
     <EmbeddedResource Include="Resources\bluebutton_psd.png" />
+    <EmbeddedResource Include="UserPages\Burkhart.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\CPMono_v07_Bold.otf" />
+    <EmbeddedResource Include="Resources\Fonts\luximb.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

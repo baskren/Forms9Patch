@@ -1,4 +1,4 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * LabelInHorizontalStackLayout.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class LabelInHorizontalStackLayout : ContentPage
 	{
@@ -29,12 +29,12 @@ namespace TestProject
 				BackgroundColor = Color.Pink,
 				Children = 
 				{ 
-					new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button")}				
+					new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button")}				
 				}
 			});
 			for (int i = 0; i < 6; i++)
 			{
-				images.Add(new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button") });
+				images.Add(new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button") });
 				labels.Add(new Forms9Patch.Label { BackgroundColor = Color.Green});
 				labels[i].SetBinding(Forms9Patch.Label.HtmlTextProperty, "Text");
 				labels[i].BindingContext = entry;

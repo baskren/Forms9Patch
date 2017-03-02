@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	#region Helper Classes
 
@@ -53,11 +53,11 @@ namespace TestProject
 	class InternalQuoteView : QuoteView {
 		public InternalQuoteView() {
 
-			Bubble.BackgroundImage.Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.BubbleInternal");
+			Bubble.BackgroundImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.BubbleInternal");
 			Bubble.Padding = new Thickness(10,10,17,10);
 			Bubble.HorizontalOptions = LayoutOptions.End;
 
-			HeadShot.Source = ImageSource.FromResource("TestProject.Resources.236-lincoln.png");
+			HeadShot.Source = ImageSource.FromResource("Forms9PatchDemo.Resources.236-lincoln.png");
 
 			ColumnDefinitions = new ColumnDefinitionCollection {
 				new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)  },
@@ -73,11 +73,11 @@ namespace TestProject
 	class ExternalQuoteView : QuoteView {
 		public ExternalQuoteView() {
 
-			Bubble.BackgroundImage.Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.BubbleExternal");
+			Bubble.BackgroundImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.BubbleExternal");
 			Bubble.Padding = new Thickness(17,10,10,10);
 			Bubble.HorizontalOptions = LayoutOptions.Start;
 
-			HeadShot.Source = ImageSource.FromResource("TestProject.Resources.236-baby.png");
+			HeadShot.Source = ImageSource.FromResource("Forms9PatchDemo.Resources.236-baby.png");
 
 			ColumnDefinitions = new ColumnDefinitionCollection {
 				new ColumnDefinition { Width = 40 },

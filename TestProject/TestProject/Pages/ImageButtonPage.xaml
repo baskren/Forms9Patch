@@ -3,8 +3,8 @@
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
-	xmlns:local="clr-namespace:TestProject;assembly=TestProject"
-	x:Class="TestProject.ImageButtonPage"
+	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+	x:Class="Forms9PatchDemo.ImageButtonPage"
 	Padding="5, 20, 5, 5">
 	<StackLayout>
 
@@ -16,10 +16,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="{Binding Path=Text}" FontColor="White" BindingContext="{x:Reference Name=textEntry}">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
@@ -27,7 +27,7 @@
 			<f9p:ImageButton.SelectedState>
 				<f9p:ImageButtonState FontColor="Red" Text="Selected" >
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.image}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.SelectedState>
@@ -40,10 +40,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Sticky w/o SelectedState" FontColor="Blue">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
@@ -51,7 +51,7 @@
 			<f9p:ImageButton.PressingState>
 				<f9p:ImageButtonState>
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.redButton}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.redButton}"/>
 					</f9p:ImageButtonState.BackgroundImage>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.PressingState>
@@ -68,10 +68,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Not Sticky"  FontColor="Blue">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
@@ -90,10 +90,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Sticky Default State" FontColor="White">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
@@ -101,7 +101,7 @@
 			<f9p:ImageButton.SelectedState>
 				<f9p:ImageButtonState FontColor="Red" Text="Selected" >
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.image}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.SelectedState>
@@ -113,10 +113,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Sticky w/o SelectedState" FontColor="Blue">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
@@ -133,10 +133,10 @@
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Not Sticky"  FontColor="Blue">
 					<f9p:ImageButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.button}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
 					<f9p:ImageButtonState.Image>
-						<f9p:Image Source="{local:ImageMultiResource TestProject.Resources.ArrowR}"/>
+						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
 					</f9p:ImageButtonState.Image>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>

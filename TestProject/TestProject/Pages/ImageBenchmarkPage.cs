@@ -2,7 +2,7 @@ using System;
 
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class ImageBenchmarkPage : ContentPage
 	{
@@ -19,7 +19,7 @@ namespace TestProject
 				//var image = new Xamarin.Forms.Image() {
 				WidthRequest = 100,
 				HeightRequest = 100,
-				Source = ImageSource.FromResource("TestProject.Resources.50x50.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.50x50.png"),
 			};
 
 
@@ -27,43 +27,43 @@ namespace TestProject
 				//var image = new Xamarin.Forms.Image() {
 				WidthRequest = 100,
 				HeightRequest = 100,
-				Source = ImageSource.FromResource("TestProject.Resources.100x100.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.100x100.png"),
 			};
 
 			var si200 = new Image {
 				//var image = new Xamarin.Forms.Image() {
 				WidthRequest = 100,
 				HeightRequest = 100,
-				Source = ImageSource.FromResource("TestProject.Resources.200x200.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.200x200.png"),
 			};
 
 			var i50 = new Image {
 				//WidthRequest = 50,
 				//HeightRequest = 100,
 				//Aspect = Aspect.,
-				Source = ImageSource.FromResource("TestProject.Resources.50x50.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.50x50.png"),
 			};
 			var i100 = new Image {
 				//WidthRequest = 50,
 				//HeightRequest = 100,
 				//Aspect = Aspect.,
-				Source = ImageSource.FromResource("TestProject.Resources.100x100.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.100x100.png"),
 			};
 			var i200 = new Image {
 				//WidthRequest = 50,
 				//HeightRequest = 100,
 				//Aspect = Aspect.,
-				Source = ImageSource.FromResource("TestProject.Resources.200x200.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.200x200.png"),
 			};
 
 
 			var siPU = new Image {
 				HeightRequest = 150,
-				Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.PopupDM.png"),
+				Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.PopupDM.png"),
 			};
 
 			var iPU = new Image {
-				Source = ImageSource.FromResource("TestProject.Resources.PopupDM.png"),
+				Source = ImageSource.FromResource("Forms9PatchDemo.Resources.PopupDM.png"),
 			};
 
 			var b1 = new Button {
@@ -77,15 +77,15 @@ namespace TestProject
 
 			#region ImageButtons
 			var b2 = new Image {
-						Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.button"),
 			};
 
 			var b3 = new Image {
-						Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.button"),
 			};
 
 			var b4 = new Image {
-						Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.button"),
 			};
 			#endregion
 
@@ -101,7 +101,7 @@ namespace TestProject
 			};
 
 			var relativeLayout = new Image {
-					Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.blackrocks"),
+					Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.blackrocks"),
 				Aspect = Aspect.AspectFit,
 				HeightRequest = 100,
 			};
@@ -111,10 +111,10 @@ namespace TestProject
 			Xamarin.Forms.ImageSource source;
 			switch (sourceMode) {
 			case "resource":
-				source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox");
+				source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox");
 				break;
 			case "uri":
-				source = ImageSource.FromUri(new Uri ("https://raw.githubusercontent.com/baskren/TestProject/master/TestProject/Resources/redGridBox.png"));
+				source = ImageSource.FromUri(new Uri ("https://raw.githubusercontent.com/baskren/Forms9PatchDemo/master/Forms9PatchDemo/Resources/redGridBox.png"));
 				break;
 			default:
 				source = ImageSource.FromFile("redGridBox.png");
@@ -448,27 +448,27 @@ namespace TestProject
 							Text = "Forms9Patch.Image",
 						},
 						new Image {
-							Source = Xamarin.Forms.ImageSource.FromResource("TestProject.Resources.water.gif"),
+							Source = Xamarin.Forms.ImageSource.FromResource("Forms9PatchDemo.Resources.water.gif"),
 							//TintColor = Color.White,
 							BackgroundColor = Color.Black,
 						},
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Aspect = Aspect.AspectFill,
 						},
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Aspect = Aspect.AspectFit,
 						},
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Aspect = Aspect.Fill,
 						},
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 						},
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Aspect = Aspect.AspectFill,
 						},
 						#endregion
@@ -547,7 +547,7 @@ namespace TestProject
 
 						#region CapsInset ContentView
 						new Xamarin.Forms.Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.redribbon"), 
+							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
 							//HeightRequest = 80,
 						},
 						new Xamarin.Forms.Label { Text = "Forms9Patch.ImageSource.FromMultiSource >> Xamarin.Forms.Image", 
@@ -557,21 +557,21 @@ namespace TestProject
 						},
 
 						new Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redribbon"),
+							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 						},
 
 						new Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redribbon"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 							//HeightRequest = 80,
 						},
 
 						new Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redribbon"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 							HeightRequest = 80,
 						},
 
 						new Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redribbon"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 							//HeightRequest = 80,
 						},
 						new Xamarin.Forms.Label { Text = "Forms9atch.ImageSource.FromMultiSource >> Forms9Patch.ContentView", 

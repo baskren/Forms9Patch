@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class LayoutsPage : ContentPage
 	{
@@ -21,7 +21,7 @@ namespace TestProject
 
 			var relativeLayout = new Forms9Patch.RelativeLayout {
 				BackgroundImage = new Forms9Patch.Image {
-					Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.ghosts"),
+					Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ghosts"),
 					Fill = Forms9Patch.Fill.Tile,
 				},
 				BackgroundColor = Color.White,
@@ -51,7 +51,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFill,
 							},
 							Content = new Label{
@@ -65,7 +65,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFit,
 							},
 							Content = new Label{
@@ -79,7 +79,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Fill,
 							},
 							Content = new Label{
@@ -93,7 +93,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Tile,
 							},
 							Content = new Label{
@@ -107,7 +107,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								CapInsets = new Thickness(10),
 							},
 							Content = new Label{
@@ -140,7 +140,7 @@ namespace TestProject
 						},
 						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFill,
 							},
 							Content = new Label {
@@ -157,7 +157,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFit,
 							},
 							Content = new Label {
@@ -171,7 +171,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Fill,
 							},
 							Content = new Label {
@@ -185,7 +185,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Tile,
 							},
 							Content = new Label {
@@ -199,7 +199,7 @@ namespace TestProject
 						},
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redGridBox"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								CapInsets = new Thickness(10),
 							},
 							Content = new Label {
@@ -215,7 +215,7 @@ namespace TestProject
 
 						#region CapsInset ContentView
 						new Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.redribbon"), 
+							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
 						},
 						new Label { Text = "Forms9Patch.ImageSource.FromMultiSource >> Xamarin.Forms.Image", 
 							FontSize = fontSize,
@@ -224,7 +224,7 @@ namespace TestProject
 
 						new Forms9Patch.ContentView {
 							BackgroundImage = new Forms9Patch.Image {
-								Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.redribbon"),
+								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 								CapInsets = new Thickness(30,-1,160,-1),
 							},
 							Content = new Label{

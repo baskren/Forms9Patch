@@ -1,11 +1,11 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * ExternalEmbeddedResourceImage.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class ExternalEmbeddedResourceImage : ContentPage
 	{

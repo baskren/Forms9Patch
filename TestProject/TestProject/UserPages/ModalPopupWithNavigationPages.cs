@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 using Forms9Patch;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class ModalPopupWithNavigationPages : ContentPage
 	{

@@ -1,4 +1,4 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * SegmentNavPage1.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
@@ -6,14 +6,14 @@
 using System;
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
-	public class SegmentNavPage3 : ContentPage
+	public class SegmentNavPage1 : ContentPage
 	{
-		public SegmentNavPage3()
+		public SegmentNavPage1()
 		{
 			Padding = new Thickness(5);
-			BackgroundColor = Color.Blue;
+			BackgroundColor = Color.Red;
 
 			// Define command for the items in the SegmentedController.
 			var navigateCommand = new Command<Type>(async (Type pageType) =>
@@ -38,15 +38,15 @@ namespace TestProject
 					},
 					new Forms9Patch.Segment
 					{
-						Text = "Page 1",
-						Command = navigateCommand,
-						CommandParameter = typeof(SegmentNavPage1),
-					},
-					new Forms9Patch.Segment
-					{
 						Text = "Page 2",
 						Command = navigateCommand,
 						CommandParameter = typeof(SegmentNavPage2),
+					},
+					new Forms9Patch.Segment
+					{
+						Text = "Page 3",
+						Command = navigateCommand,
+						CommandParameter = typeof(SegmentNavPage3),
 					}
 				},
 			};
@@ -54,10 +54,10 @@ namespace TestProject
 			var layout = new StackLayout
 			{
 				Children = {
-					new Label { Text = "Segment Nav Page 3" },
+					new Label { Text = "Segment Nav Page 1" },
 					segmentControl,
 					new Label {
-						Text = "3",
+						Text = "1",
 						HorizontalOptions = LayoutOptions.Center,
 						FontSize = 50,
 					}

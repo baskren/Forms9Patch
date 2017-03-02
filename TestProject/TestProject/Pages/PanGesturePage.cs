@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class PanGesturePage : ContentPage
 	{
@@ -24,7 +24,7 @@ namespace TestProject
 			button.Clicked += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON CLICKED!!!!");
 
 
-			var buttonListener = new FormsGestures.Listener(button);
+			var buttonListener = FormsGestures.Listener.For(button);
 			buttonListener.Down += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON DOWN ["+e.Touches[0]+"]"); // does not work with UIControl derived elements
 
 			buttonListener.LongPressing += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBUTTON LONG PRESSING ["+e.Touches[0]+"]");
@@ -57,7 +57,7 @@ namespace TestProject
 			var box = new BoxView {
 				BackgroundColor = Color.Green,
 			};
-			var boxListener = new FormsGestures.Listener (box);
+			var boxListener = FormsGestures.Listener.For(box);
 
 			//boxListener.Down += OnDown;
 			boxListener.Down += (sender, e) => System.Diagnostics.Debug.WriteLine ("\tBOX DOWN ["+e.Touches[0]+"]"); 

@@ -1,9 +1,9 @@
-﻿
+
 
 using Xamarin.Forms;
 //using Forms9Patch;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class HtmlLabelPage : ContentPage
 	{
@@ -32,7 +32,7 @@ namespace TestProject
 						new Forms9Patch.Label { HtmlText =  "<b>\nEMBEDDED (resource) CUSTOM FONT:</b>"},
 						new Forms9Patch.Label { 
 							Text = "",
-							FontFamily = "TestProject.Resources.Fonts.MaterialIcons-Regular.ttf",
+							FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
 						},
 
 						new Forms9Patch.Label { HtmlText =  "<b>\nSUPPORTED HTML TAGS:</b>" },
@@ -71,7 +71,7 @@ namespace TestProject
 						new Forms9Patch.Label { HtmlText =  "&lt;font face=&quot;Monospace&quot;&gt;: <font face=\"Monospace\">Monspace</font> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;font face=&quot;Serif&quot;&gt;: <font face=\"Serif\">Serif</font> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;font face=&quot;Sans-serif&quot;&gt;: <font face=\"Sans-serif\">Sans-serif</font> plain"},
-						new Forms9Patch.Label { HtmlText =  "&lt;font face=(resource)&gt;: <font face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> plain"},
+						new Forms9Patch.Label { HtmlText =  "&lt;font face=(resource)&gt;: <font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font> plain"},
 						new Forms9Patch.Label { HtmlText =  "&lt;pre&gt;: <pre>preformatted  text</pre> plain  \ttext"},
 						new Forms9Patch.Label { HtmlText =  "&lt;tt&gt;: <tt>teletype</tt> plain"},
 						
@@ -97,7 +97,7 @@ namespace TestProject
 						new Forms9Patch.Label { HtmlText =  "background-color: <div style=\"background-color:LightGrey\">LightGrey background</div> plain"},
 						new Forms9Patch.Label { HtmlText =  "color: <div style=\"color:Sienna\">Sienna Text</div> plain"},
 
-						new Forms9Patch.Label { HtmlText =  "font-family (resource): <div style=\"font-family:TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></div> plain"},
+						new Forms9Patch.Label { HtmlText =  "font-family (resource): <div style=\"font-family:Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></div> plain"},
 
 						new Forms9Patch.Label { HtmlText =  "font-size: <div style=\"font-size:50%\">50% Text</div> plain"},
 						new Forms9Patch.Label { HtmlText =  "font-size: <div style=\"font-size:8.5px\">8.5px Text</div> plain"},

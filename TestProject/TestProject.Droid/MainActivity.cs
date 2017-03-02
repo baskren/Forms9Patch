@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Android.App;
 using Android.Content;
@@ -8,12 +8,12 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms.Platform.Android;
-using TestProject;
+using Forms9PatchDemo;
 
 
-namespace TestProject.Droid
+namespace Forms9PatchDemo.Droid
 {
-	[Activity (Label = "TestProject", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "Forms9PatchDemo", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsApplicationActivity
 	{
 		protected override void OnCreate (Bundle bundle)

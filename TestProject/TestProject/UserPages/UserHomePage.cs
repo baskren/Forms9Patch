@@ -1,0 +1,118 @@
+using System;
+using Xamarin.Forms;
+
+namespace Forms9PatchDemo
+{
+	class UserPagesHomePage : ContentPage
+	{
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			/*
+			var modal = new Forms9Patch.ModalPopup
+			{
+				Content = new Forms9Patch.StackLayout
+				{
+					Children = {
+										new Xamarin.Forms.Label {
+											Text = "Hello Modal popup!",
+											TextColor = Color.Black}
+									},
+					BackgroundColor = Color.FromRgb(100, 100, 100),
+					Padding = 20,
+				},
+				OutlineRadius = 4,
+				OutlineWidth = 1,
+				OutlineColor = Color.Black,
+				BackgroundColor = Color.Aqua,
+				HasShadow = true,
+				HeightRequest = 200,
+				WidthRequest = 200,
+			};
+			modal.BindingContext = this;
+			modal.IsVisible = true;		
+			*/
+		}
+
+
+		public UserPagesHomePage()
+		{
+			// Define command for the items in the TableView.
+			var navigateCommand = 
+				new Command<Type>(async (Type pageType) => {
+						var page = (Page)Activator.CreateInstance(pageType);
+						await this.Navigation.PushAsync(page);
+					});
+
+
+
+			this.Title = "Forms Gallery";
+			this.Content = new TableView
+			{
+				Intent = TableIntent.Menu,
+				Root = new TableRoot {
+					new TableSection("XAML") {
+						new TextCell {
+							Text = "Burkhart Test",
+							Command = navigateCommand,
+							CommandParameter = typeof(Burkhart)
+						}
+					},
+
+					new TableSection("Code") {
+
+						new TextCell {
+							Text = "Popup on MasterDetail",
+							Command = navigateCommand,
+							CommandParameter = typeof(ModalPopupOnMasterDetailPage)
+						},
+
+						new TextCell {
+							Text = "Custom Font Effect",
+							Command = navigateCommand,
+							CommandParameter = typeof(ChrisCustomFontEffectPage)
+						},
+
+
+						new TextCell {
+							Text = "Chat using ListView",
+							Command = navigateCommand,
+							CommandParameter = typeof(ChatListPage)
+						},
+
+
+						new TextCell {
+							Text = "Popup + PushModalAsync++",
+							Command = navigateCommand,
+							CommandParameter = typeof(ModalPopupWithNavigationPages)
+						},
+
+						new TextCell {
+							Text = "Nested Bubble Popup",
+							Command = navigateCommand,
+							CommandParameter = typeof(NestedBubblePopupPage)
+						},
+
+						new TextCell {
+							Text = "ImageButton in ContentView test",
+							Command = navigateCommand,
+							CommandParameter = typeof(ZenmekPage)
+						},
+
+						new TextCell {
+							Text = "BackgroundImage opacity",
+							Command = navigateCommand,
+							CommandParameter = typeof(BackgroundImageOpacityPage)
+						},
+
+						new TextCell {
+							Text = "Segmented Control Navigation",
+							Command = navigateCommand,
+							CommandParameter = typeof(SegmentNavPage1)
+						},
+					}
+				}
+			};
+		}
+	}
+}

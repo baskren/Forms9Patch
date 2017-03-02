@@ -14,8 +14,9 @@ namespace Forms9Patch
 	/// </summary>
 	public class RootPage : Page
 	{
+		/*
 		static Rectangle _statusBarFrame;
-		static double _statusBarHeightAtStart;
+		static double _statusBarHeightAtStart=20;
 		/// <summary>
 		/// Gets or sets the status bar frame  - used for setup and responding to iOS status bar changes.
 		/// </summary>
@@ -33,6 +34,7 @@ namespace Forms9Patch
 				_statusBarFrame = value;
 			}
 		}
+		*/
 
 
 		/// <summary>
@@ -158,9 +160,9 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			if (Device.OS == TargetPlatform.iOS && width < height)
+			if (Device.OS == TargetPlatform.iOS && StatusBarService.IsVisible && !(PageController.InternalChildren[0] is NavigationPage))
 			{
-				var verticalY = 40 - _statusBarHeightAtStart;
+				var verticalY = 40 - StatusBarService.Height;
 				var verticalHeight = height - 20;
 				base.LayoutChildren(x, verticalY, width, verticalHeight);
 			}

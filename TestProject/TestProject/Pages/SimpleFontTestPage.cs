@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class SimpleFontTestPage : ContentPage
 	{
@@ -16,7 +16,7 @@ namespace TestProject
 						//HorizontalTextAlignment = TextAlignment.Center,
 						//Text = "",
 						HtmlText = "&#xE14E; &#xE195;  &#xEB3E;",
-						FontFamily = "TestProject.Resources.Fonts.MaterialIcons-Regular.ttf",
+						FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
 						BackgroundColor = Color.Gray
 					}
 				}

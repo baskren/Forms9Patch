@@ -3,7 +3,7 @@ using System;
 using Xamarin.Forms;
 using System.Windows.Input;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class EllipticalMaterialButtonsPage : ContentPage
 	{
@@ -47,8 +47,8 @@ namespace TestProject
 
 		public EllipticalMaterialButtonsPage ()
 		{
-			var infoIcon =  Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.Info");
-			var arrowIcon = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.ArrowR");
+			var infoIcon =  Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+			var arrowIcon = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR");
 
 			#region Material Buttons
 			var grid = new Grid {
@@ -112,7 +112,7 @@ namespace TestProject
 				HeightRequest = 50
 			};
 
-			var label1Listener = new FormsGestures.Listener (label1);
+			var label1Listener = FormsGestures.Listener.For(label1);
 			label1Listener.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine($"Tapped:{((Label)sender).Text}");
 			label1Listener.DoubleTapped += (sender, e) => System.Diagnostics.Debug.WriteLine($"DoubleTapped:{((Label)sender).Text}");
 			label1Listener.LongPressing += (sender, e) => System.Diagnostics.Debug.WriteLine($"LongPressing:{((Label)sender).Text}");

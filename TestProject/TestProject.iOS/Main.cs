@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
 using UIKit;
 
-namespace TestProject.iOS
+namespace Forms9PatchDemo.iOS
 {
 	public class Application
 	{

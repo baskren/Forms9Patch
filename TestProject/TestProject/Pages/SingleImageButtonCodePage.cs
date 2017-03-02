@@ -2,7 +2,7 @@ using System;
 
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class SingleImageButtonCodePage : ContentPage, IDisposable
 	{
@@ -30,7 +30,7 @@ namespace TestProject
 			{
 				BackgroundImage = new Forms9Patch.Image
 				{
-					Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button"),
+					Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
 				},
 				Image = new Image
 				{
@@ -43,7 +43,7 @@ namespace TestProject
 			{
 				BackgroundImage = new Forms9Patch.Image
 				{
-					Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.image"),
+					Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image"),
 				},
 				FontColor = Color.Red,
 				Text = "Selected",
@@ -60,7 +60,7 @@ namespace TestProject
 				{
 					BackgroundImage = new Forms9Patch.Image
 					{
-						Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
 					},
 					Image = new Image
 					{
@@ -73,7 +73,7 @@ namespace TestProject
 				{
 					BackgroundImage = new Forms9Patch.Image
 					{
-						Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.redButton"),
+						Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redButton"),
 					},
 				},
 				ToggleBehavior = true,
@@ -87,7 +87,7 @@ namespace TestProject
 				{
 					BackgroundImage = new Forms9Patch.Image
 					{
-						Source = Forms9Patch.ImageSource.FromMultiResource("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
 					},
 					Image = new Image
 					{

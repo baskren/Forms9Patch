@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	[ContentProperty ("Source")]
 	public class ImageMultiResourceExtension : IMarkupExtension

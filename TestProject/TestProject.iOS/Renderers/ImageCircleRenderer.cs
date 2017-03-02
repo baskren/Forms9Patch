@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using TestProject;
-using TestProject.iOS;
+using Forms9PatchDemo;
+using Forms9PatchDemo.iOS;
 
 [assembly: ExportRenderer(typeof(ImageCircle), typeof(ImageCircleRenderer))]
-namespace TestProject.iOS
+namespace Forms9PatchDemo.iOS
 {
 	public class ImageCircleRenderer : ImageRenderer
 	{

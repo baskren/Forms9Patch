@@ -2,7 +2,7 @@ using System;
 
 using Xamarin.Forms;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class HtmlButtonsPage : ContentPage
 	{
@@ -13,7 +13,7 @@ namespace TestProject
 
 			#region Material Button
 			var mb1 = new Forms9Patch.MaterialButton {
-				IconText ="<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+				IconText ="<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 				HtmlText = "<i>Markup</i> button",
 				TrailingImage = true,
 				//Text = "Pizza",
@@ -39,19 +39,19 @@ namespace TestProject
 
 					new Forms9Patch.Segment {
 						Text = "Cart",
-						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+						IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
 						Text = "Pay",
-						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+						IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
 						Text = "Ship",
-						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+						IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 					new Forms9Patch.Segment {
 						Text = "Email",
-						IconText = "<font size=\"4\" face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
+						IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
 					},
 				},
 			};
@@ -65,7 +65,7 @@ namespace TestProject
 			var ib1 = new Forms9Patch.ImageButton {
 				DefaultState = new Forms9Patch.ImageButtonState {
 					BackgroundImage = new Forms9Patch.Image {
-						Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.button"),
+						Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.button"),
 					},
 					Image = new Image {
 						Source = ImageSource.FromFile("five.png"),
@@ -76,7 +76,7 @@ namespace TestProject
 				},
 				SelectedState = new Forms9Patch.ImageButtonState {
 					BackgroundImage = new Forms9Patch.Image {
-						Source = Forms9Patch.ImageSource.FromMultiResource ("TestProject.Resources.image"),
+						Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.image"),
 					},
 					FontColor = Color.Red,
 					//Text = "Selected",

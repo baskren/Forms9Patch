@@ -3,7 +3,7 @@ using System;
 using Xamarin.Forms;
 using System.Windows.Input;
 
-namespace TestProject
+namespace Forms9PatchDemo
 {
 	public class MaterialButtons_IconTextPage : ContentPage
 	{
@@ -47,11 +47,11 @@ namespace TestProject
 
 		public MaterialButtons_IconTextPage ()
 		{
-			//var infoText =  Forms9Patch.IconText.FromMultiResource("TestProject.Resources.Info");
-			//var arrowText = Forms9Patch.IconText.FromMultiResource("TestProject.Resources.ArrowR");
+			//var infoText =  Forms9Patch.IconText.FromMultiResource("Forms9PatchDemo.Resources.Info");
+			//var arrowText = Forms9Patch.IconText.FromMultiResource("Forms9PatchDemo.Resources.ArrowR");
 
-			var infoText = "<font face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>";
-			var arrowText = "<font face=\"TestProject.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>";
+			var infoText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>";
+			var arrowText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>";
 
 			#region Material Buttons
 			var grid = new Grid {
@@ -112,7 +112,7 @@ namespace TestProject
 				HeightRequest = 50
 			};
 
-			var label1Listener = new FormsGestures.Listener (label1);
+			var label1Listener = FormsGestures.Listener.For(label1);
 			label1Listener.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine($"Tapped:{((Label)sender).Text}");
 			label1Listener.DoubleTapped += (sender, e) => System.Diagnostics.Debug.WriteLine($"DoubleTapped:{((Label)sender).Text}");
 			label1Listener.LongPressing += (sender, e) => System.Diagnostics.Debug.WriteLine($"LongPressing:{((Label)sender).Text}");

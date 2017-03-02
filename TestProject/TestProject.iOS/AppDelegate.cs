@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -6,7 +6,7 @@ using global::Xamarin.Forms.Platform.iOS;
 using Foundation;
 using UIKit;
 
-namespace TestProject.iOS
+namespace Forms9PatchDemo.iOS
 {
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate

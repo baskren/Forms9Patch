@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using TestProject;
-using TestProject.Droid;
+using Forms9PatchDemo;
+using Forms9PatchDemo.Droid;
 using Android.Graphics;
 
 [assembly: ExportRenderer(typeof(ImageCircle),typeof(ImageCircleRenderer))]
-namespace TestProject.Droid
+namespace Forms9PatchDemo.Droid
 {
 	public class ImageCircleRenderer : ImageRenderer
 	{
