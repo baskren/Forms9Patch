@@ -151,6 +151,9 @@ namespace Forms9Patch
 			}
 		}
 
+
+		static double _startingHeight=-1;
+
 		/// <summary>
 		/// Layouts the children.
 		/// </summary>
@@ -160,10 +163,78 @@ namespace Forms9Patch
 		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			if (Device.OS == TargetPlatform.iOS && StatusBarService.IsVisible && !(PageController.InternalChildren[0] is NavigationPage))
+			if (_startingHeight < 0)
+				_startingHeight = StatusBarService.Height;
+			
+			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
+			if (Device.OS == TargetPlatform.iOS && !(PageController.InternalChildren[0] is NavigationPage))
 			{
-				var verticalY = 40 - StatusBarService.Height;
-				var verticalHeight = height - 20;
+
+
+				/* keeping the below around just in case Apple decides to create more permutations for the status bar
+				var verticalY = 0.0;
+				var verticalHeight = height;
+				if (_startingHeight == 20)
+				{
+					// normal
+					if (StatusBarService.Height == 0)
+					{
+						verticalY = 0;
+						verticalHeight = height;
+					}
+					else if (StatusBarService.Height == 20)
+					{
+						verticalY = 20;
+						verticalHeight = height - 20;
+					}
+					else if (StatusBarService.Height == 40)
+					{
+						verticalY = 20;
+						verticalHeight = height - 20;
+					}
+				}
+				else if (_startingHeight == 40)
+				{
+					// call in progress status bar
+					if (StatusBarService.Height == 0)
+					{
+						verticalY = -20;
+						verticalHeight = height;
+					}
+					else if (StatusBarService.Height == 20)
+					{
+						verticalY = 0;
+						verticalHeight = height - 20;
+					}
+					else if (StatusBarService.Height == 40)
+					{
+						verticalY = 0;
+						verticalHeight = height - 20;
+					}
+				}
+				else if (_startingHeight == 0)
+				{
+					// hidden status bar
+					if (StatusBarService.Height == 0)
+					{
+						verticalY = 0;
+						verticalHeight = height;
+					}
+					else if (StatusBarService.Height == 20)
+					{
+						verticalY = 20;
+						verticalHeight = height - 20;
+					}
+					else if (StatusBarService.Height == 40)
+					{
+						verticalY = 20;
+						verticalHeight = height - 20;
+					}
+				}
+				*/
+				var verticalY = 20 - Math.Max(20,_startingHeight) + Math.Min(20,StatusBarService.Height);
+				var verticalHeight = height - Math.Min(20, StatusBarService.Height);
+
 				base.LayoutChildren(x, verticalY, width, verticalHeight);
 			}
 			else

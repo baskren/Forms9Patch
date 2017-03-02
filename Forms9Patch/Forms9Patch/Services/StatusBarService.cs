@@ -23,8 +23,8 @@ namespace Forms9Patch
 						return 20;
 					return 0;
 				}
-				if (!IsVisible)
-					return 0;
+				//if (!IsVisible)
+				//	return 0;
 				return _service.Height;
 			}
 		}
