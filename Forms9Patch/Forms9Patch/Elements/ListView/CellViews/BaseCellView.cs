@@ -167,7 +167,7 @@ namespace Forms9Patch
 				new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
 			};
 
-			var thisListener = new Listener(this);
+			var thisListener = FormsGestures.Listener.For(this);
 			thisListener.Tapped += OnTapped;
 			thisListener.LongPressed += OnLongPressed;
 			thisListener.LongPressing += OnLongPressing;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using System.ComponentModel;
 using FormsGestures;
@@ -398,7 +398,7 @@ namespace Forms9Patch
 			//base.ItemTapped += (sender, e) => System.Diagnostics.Debug.WriteLine("ListView base.ItemTapped");
 
 			IsEnabled = true;
-			_listener = new Listener(this);
+			_listener = FormsGestures.Listener.For(this);
 			//_listener.LongPressed += OnLongPressed;
 			//_listener.LongPressing += OnLongPressing;
 			_listener.Panning += OnPanning;

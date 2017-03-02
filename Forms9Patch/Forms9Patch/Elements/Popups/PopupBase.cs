@@ -314,7 +314,7 @@ namespace Forms9Patch
 			{
 				BackgroundColor = PageOverlayColor,
 			};
-			_listener = new Listener(_pageOverlay);
+			_listener = Listener.For(_pageOverlay);
 			_listener.Tapped += OnTapped;
 			_listener.Panning += OnPanning;
 			//HostPage = host ?? Application.Current.MainPage;

@@ -348,7 +348,7 @@ namespace Forms9Patch
 		/// </summary>
 		public Label() {
 			_id=instances++;
-			_listener = new FormsGestures.Listener(this);
+			_listener = FormsGestures.Listener.For(this);
 		}
 		#endregion
 

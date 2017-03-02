@@ -488,7 +488,7 @@ namespace Forms9Patch
 			base.Content = _stackLayout;
 			_noUpdate = false;
 
-			_gestureListener = new FormsGestures.Listener (this);
+			_gestureListener = FormsGestures.Listener.For(this);
 			_gestureListener.Tapped += OnTapped;
 			_gestureListener.LongPressed += OnLongPressed;
 			_gestureListener.LongPressing += OnLongPressing;

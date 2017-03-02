@@ -302,7 +302,7 @@ namespace Forms9Patch
 			ShowState (DefaultState);
 
 
-			_gestureListener = new FormsGestures.Listener (this);
+			_gestureListener = FormsGestures.Listener.For(this);
 
 
 			_gestureListener.Up += OnUp;

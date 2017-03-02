@@ -16,6 +16,10 @@ namespace Forms9Patch
 	{
 		static Rectangle _statusBarFrame;
 		static double _statusBarHeightAtStart;
+		/// <summary>
+		/// Gets or sets the status bar frame  - used for setup and responding to iOS status bar changes.
+		/// </summary>
+		/// <value>The status bar frame.</value>
 		static public Rectangle StatusBarFrame
 		{
 			get
