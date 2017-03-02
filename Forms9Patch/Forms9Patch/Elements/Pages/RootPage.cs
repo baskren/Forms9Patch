@@ -14,6 +14,23 @@ namespace Forms9Patch
 	/// </summary>
 	public class RootPage : Page
 	{
+		static Rectangle _statusBarFrame;
+		static double _statusBarHeightAtStart;
+		static public Rectangle StatusBarFrame
+		{
+			get
+			{
+				return _statusBarFrame;
+			}
+			set
+			{
+				if (_statusBarFrame == default(Rectangle))
+					_statusBarHeightAtStart = value.Height;
+				_statusBarFrame = value;
+			}
+		}
+
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
 		/// </summary>
@@ -128,10 +145,21 @@ namespace Forms9Patch
 			}
 		}
 
+		/// <summary>
+		/// Layouts the children.
+		/// </summary>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
 			if (Device.OS == TargetPlatform.iOS && width < height)
-				base.LayoutChildren(x, 20, width, height - 20);
+			{
+				var verticalY = 40 - _statusBarHeightAtStart;
+				var verticalHeight = height - 20;
+				base.LayoutChildren(x, verticalY, width, verticalHeight);
+			}
 			else
 				base.LayoutChildren(x, y, width, height);
 		}
