@@ -166,7 +166,7 @@ namespace Forms9Patch
 			if (_startingHeight < 0)
 				_startingHeight = StatusBarService.Height;
 			
-			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
+			//System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
 			if (Device.OS == TargetPlatform.iOS && !(PageController.InternalChildren[0] is NavigationPage))
 			{
 
