@@ -20,18 +20,24 @@ namespace Forms9Patch.iOS
 		/// </summary>
 		/// <param name="effect">Effect.</param>
 		/// <param name="mode">Mode.</param>
-		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.ApplicationDefault)
+		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.Default)
 		{
-			//var type = CFPreferences.CurrentApplication;
-			//CFPreferences.AppSynchronize();
-			//var keyboardPref = CFPreferences.GetAppValue("keyboard", "com.apple.Preferences");
-			//var keyboardSoundOn = CFPreferences.GetAppBooleanValue("keyboard", "/var/mobile/Library/Preferences/com.apple.preferences.sounds");
+			var soundEnabled = (mode & HapticMode.Sound) > 0;
+			var vibeEnabled = (mode & HapticMode.Vibrate) > 0;
+			if (mode == HapticMode.Default)
+			{
+				soundEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Sound) > 0;
+				vibeEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Vibrate) > 0;
+				if (Forms9Patch.Settings.HapticMode == HapticMode.Default)
+				{
+					// this no longer works and there doesn't appear to be a way to detect if keyclicks is on
+					var type = CFPreferences.CurrentApplication;
+					CFPreferences.AppSynchronize("/var/mobile/Library/Preferences/com.apple.preferences.sounds");
+					soundEnabled = CFPreferences.GetAppBooleanValue("keyboard", "/var/mobile/Library/Preferences/com.apple.preferences.sounds");
+				}
+			}
 
-			// It appears that there is not a way to detect if keyboard clicks system setting is enabled (on iOS).  
-			// So, if we got this far, play the sound.
-
-
-			if (Forms9Patch.Settings.Haptics)
+			if (soundEnabled)
 			{
 				switch (effect)
 				{
@@ -48,6 +54,9 @@ namespace Forms9Patch.iOS
 						return;
 				}
 			}
+
+			if (vibeEnabled)
+				SystemSound.Vibrate.PlaySystemSoundAsync();	
 		}
 
 	}

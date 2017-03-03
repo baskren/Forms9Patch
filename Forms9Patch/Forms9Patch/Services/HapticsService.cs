@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -15,9 +15,9 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="effect">Effect.</param>
 		/// <param name="mode">Mode.</param>
-		public static void Feedback(HapticEffect effect, HapticMode mode=HapticMode.ApplicationDefault)
+		public static void Feedback(HapticEffect effect, HapticMode mode=HapticMode.Default)
 		{
-			if (mode == HapticMode.Off || (mode == HapticMode.ApplicationDefault && !Settings.Haptics))
+			if (mode == HapticMode.Off)
 				return;
 			_service = _service ?? DependencyService.Get<IHapticService>();
 			_service?.Feedback(effect,mode);

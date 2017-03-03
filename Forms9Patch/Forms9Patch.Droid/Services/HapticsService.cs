@@ -10,17 +10,28 @@ namespace Forms9Patch.Droid
 		readonly static Vibrator _vibrator = (Vibrator)Android.App.Application.Context.GetSystemService(Context.VibratorService);
 		readonly static AudioManager _audio = (AudioManager)Android.App.Application.Context.GetSystemService(Context.AudioService);
 
-		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.ApplicationDefault)
+		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.Default)
 		{
-			var touchSoundEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.SoundEffectsEnabled)!=0;
-			var touchVibrateEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled)!=0;
+			var soundEnabled = (mode & HapticMode.Sound) > 0;
+			var vibeEnabled = (mode & HapticMode.Vibrate) > 0;
+			if (mode == HapticMode.Default)
+			{
+				soundEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Sound) > 0;
+				vibeEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Vibrate) > 0;
+				if (Forms9Patch.Settings.HapticMode == HapticMode.Default)
+				{
+					soundEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.SoundEffectsEnabled) != 0;
+					vibeEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
+				}
+			}
 
 
-			if (_vibrator != null && ((mode == HapticMode.SystemDefault && touchVibrateEnabled) || mode == HapticMode.Forced))
+
+			if (_vibrator != null && vibeEnabled)
 				_vibrator.Vibrate(300);
 
 
-			if (_audio != null && ((mode == HapticMode.SystemDefault && touchSoundEnabled) || mode == HapticMode.Forced))
+			if (_audio != null && soundEnabled)
 			{
 				SoundEffect sound = SoundEffect.KeyClick;
 				switch (effect)

@@ -4,23 +4,28 @@ namespace Forms9Patch
 	/// <summary>
 	/// The different haptic modes
 	/// </summary>
+	[Flags]
 	public enum HapticMode
 	{
 		/// <summary>
 		/// No haptic response
 		/// </summary>
-		Off,
+		Off=0,
 		/// <summary>
 		/// The system default haptic, if detectable (which it is not on iOS)
 		/// </summary>
-		SystemDefault,
+		Default=1,
 		/// <summary>
-		/// The default haptic response (as set by Forms9Patch.Settings.Haptics)
+		/// GIVE ME TOUCH SOUNDS!
 		/// </summary>
-		ApplicationDefault,
+		Sound=2,
 		/// <summary>
-		/// GIVE ME HAPTICS!
+		/// GIVE ME TOUCH VIBRATES!
 		/// </summary>
-		Forced
+		Vibrate=4,
+		/// <summary>
+		/// GIVE ME SOUNDS AND VIBRATIONS!
+		/// </summary>
+		SoundAndVibrate=6
 	}
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace Forms9Patch
 {
 	/// <summary>
@@ -11,7 +11,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <param name="effect">Effect.</param>
 		/// <param name="mode">Mode.</param>
-		void Feedback(HapticEffect effect, HapticMode mode=HapticMode.ApplicationDefault);
+		void Feedback(HapticEffect effect, HapticMode mode=HapticMode.Default);
 
 	}
 }
