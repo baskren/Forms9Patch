@@ -166,7 +166,7 @@ namespace Forms9Patch
 			if (_startingHeight < 0)
 				_startingHeight = StatusBarService.Height;
 			
-			//System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
+			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
 			if (Device.OS == TargetPlatform.iOS && !(PageController.InternalChildren[0] is NavigationPage))
 			{
 
@@ -232,10 +232,26 @@ namespace Forms9Patch
 					}
 				}
 				*/
-				var verticalY = 20 - Math.Max(20,_startingHeight) + Math.Min(20,StatusBarService.Height);
-				var verticalHeight = height - Math.Min(20, StatusBarService.Height);
 
+				double verticalY, verticalHeight;
+				if (Device.Idiom == TargetIdiom.Phone)
+				{
+					verticalY = 20 - Math.Max(20, _startingHeight) + Math.Min(20, StatusBarService.Height);
+					verticalHeight = height - Math.Min(20, StatusBarService.Height);
+				}
+				else
+				{
+					verticalY = 100;
+					verticalHeight = height;
+				}
 				base.LayoutChildren(x, verticalY, width, verticalHeight);
+				/*
+				var bounds = new Rectangle(x, verticalY, width, verticalHeight);
+				foreach (VisualElement child in PageController.InternalChildren)
+				{
+					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(child,bounds);
+				}
+				*/
 			}
 			else
 				base.LayoutChildren(x, y, width, height);

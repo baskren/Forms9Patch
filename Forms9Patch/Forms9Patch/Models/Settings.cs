@@ -56,7 +56,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Are haptics active by default?
 		/// </summary>
-		public static HapticMode HapticMode = HapticMode.Default;
+		public static KeyClicks HapticMode = KeyClicks.Default;
 	}
 }
 

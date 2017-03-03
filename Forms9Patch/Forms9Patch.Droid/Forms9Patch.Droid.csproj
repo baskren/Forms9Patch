@@ -180,7 +180,7 @@
     <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Renderers\ManualLayoutRenderer.cs" />
     <Compile Include="Services\HtmlToPngService.cs" />
-    <Compile Include="Services\HapticsService.cs" />
+    <Compile Include="Services\KeyClicksService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\FontService.cs" />
   </ItemGroup>

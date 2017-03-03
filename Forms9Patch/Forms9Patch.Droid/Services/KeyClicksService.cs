@@ -2,32 +2,30 @@
 using Android.OS;
 using Android.Media;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.HapticsService))]
+[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyClicksService))]
 namespace Forms9Patch.Droid
 {
-	public class HapticsService : IHapticService
+	public class KeyClicksService : IKeyClicksService
 	{
 		readonly static Vibrator _vibrator = (Vibrator)Android.App.Application.Context.GetSystemService(Context.VibratorService);
 		readonly static AudioManager _audio = (AudioManager)Android.App.Application.Context.GetSystemService(Context.AudioService);
 
-		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.Default)
+		public void Feedback(HapticEffect effect, KeyClicks mode = KeyClicks.Default)
 		{
-			var soundEnabled = (mode & HapticMode.Sound) > 0;
-			var vibeEnabled = (mode & HapticMode.Vibrate) > 0;
-			if (mode == HapticMode.Default)
+			var soundEnabled = (mode & KeyClicks.On) > 0;
+			if (mode == KeyClicks.Default)
 			{
-				soundEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Sound) > 0;
-				vibeEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Vibrate) > 0;
-				if (Forms9Patch.Settings.HapticMode == HapticMode.Default)
+				soundEnabled = (Forms9Patch.Settings.HapticMode & KeyClicks.On) > 0;
+				if (Forms9Patch.Settings.HapticMode == KeyClicks.Default)
 				{
 					soundEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.SoundEffectsEnabled) != 0;
-					vibeEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
+					//vibeEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
 				}
 			}
 
 
 
-			if (_vibrator != null && vibeEnabled)
+			if (_vibrator != null && Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0)
 				_vibrator.Vibrate(300);
 
 

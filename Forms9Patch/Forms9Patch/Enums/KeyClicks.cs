@@ -5,7 +5,7 @@ namespace Forms9Patch
 	/// The different haptic modes
 	/// </summary>
 	[Flags]
-	public enum HapticMode
+	public enum KeyClicks
 	{
 		/// <summary>
 		/// No haptic response
@@ -18,14 +18,6 @@ namespace Forms9Patch
 		/// <summary>
 		/// GIVE ME TOUCH SOUNDS!
 		/// </summary>
-		Sound=2,
-		/// <summary>
-		/// GIVE ME TOUCH VIBRATES!
-		/// </summary>
-		Vibrate=4,
-		/// <summary>
-		/// GIVE ME SOUNDS AND VIBRATIONS!
-		/// </summary>
-		SoundAndVibrate=6
+		On=2,
 	}
 }

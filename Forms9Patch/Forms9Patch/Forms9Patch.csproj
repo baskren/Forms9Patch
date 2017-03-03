@@ -10,7 +10,6 @@
     <AssemblyName>Forms9Patch</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -170,10 +169,10 @@
     <Compile Include="Interfaces\IHtmlToPngPdfService.cs" />
     <Compile Include="Extensions\HtmlStringExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
-    <Compile Include="Interfaces\IHapticService.cs" />
-    <Compile Include="Services\HapticsService.cs" />
+    <Compile Include="Interfaces\IKeyClicksService.cs" />
+    <Compile Include="Services\KeyClicksService.cs" />
     <Compile Include="Enums\HapticEffect.cs" />
-    <Compile Include="Enums\HapticMode.cs" />
+    <Compile Include="Enums\KeyClicks.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Interfaces\IKeyboardService.cs" />
     <Compile Include="Spans\ActionSpan.cs" />

@@ -243,14 +243,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The haptic mode property.
 		/// </summary>
-		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(HapticMode), typeof(ImageButton), default(HapticMode));
+		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(ImageButton), default(KeyClicks));
 		/// <summary>
 		/// Gets or sets the haptic mode.
 		/// </summary>
 		/// <value>The haptic mode.</value>
-		public HapticMode HapticMode
+		public KeyClicks HapticMode
 		{
-			get { return (HapticMode)GetValue(HapticModeProperty); }
+			get { return (KeyClicks)GetValue(HapticModeProperty); }
 			set { SetValue(HapticModeProperty, value); }
 		}
 
@@ -390,7 +390,7 @@ namespace Forms9Patch
 			System.Diagnostics.Debug.WriteLine("Up");
 			if (IsEnabled)
 			{
-				HapticsService.Feedback(HapticEffect, HapticMode);
+				KeyClicksService.Feedback(HapticEffect, HapticMode);
 
 				Debug.WriteLine("tapped");
 				if (ToggleBehavior)

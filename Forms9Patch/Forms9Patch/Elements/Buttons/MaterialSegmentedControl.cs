@@ -291,14 +291,14 @@ namespace Forms9Patch
 		/// <summary>
 		/// The haptic mode property.
 		/// </summary>
-		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(HapticMode), typeof(MaterialSegmentedControl), default(HapticMode));
+		public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(MaterialSegmentedControl), default(KeyClicks));
 		/// <summary>
 		/// Gets or sets the haptic mode.
 		/// </summary>
 		/// <value>The haptic mode.</value>
-		public HapticMode HapticMode
+		public KeyClicks HapticMode
 		{
-			get { return (HapticMode)GetValue(HapticModeProperty); }
+			get { return (KeyClicks)GetValue(HapticModeProperty); }
 			set { SetValue(HapticModeProperty, value); }
 		}
 

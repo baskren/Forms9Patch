@@ -3,13 +3,13 @@ using CoreFoundation;
 using AudioToolbox;
 using UIKit;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.HapticService))]
+[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.KeyClicksService))]
 namespace Forms9Patch.iOS
 {
 	/// <summary>
 	/// Haptic service.
 	/// </summary>
-	public class HapticService : IHapticService
+	public class KeyClicksService : IKeyClicksService
 	{
 		static SystemSound click = new SystemSound(1104);
 		static SystemSound modifier = new SystemSound(1156);
@@ -20,15 +20,13 @@ namespace Forms9Patch.iOS
 		/// </summary>
 		/// <param name="effect">Effect.</param>
 		/// <param name="mode">Mode.</param>
-		public void Feedback(HapticEffect effect, HapticMode mode = HapticMode.Default)
+		public void Feedback(HapticEffect effect, KeyClicks mode = KeyClicks.Default)
 		{
-			var soundEnabled = (mode & HapticMode.Sound) > 0;
-			var vibeEnabled = (mode & HapticMode.Vibrate) > 0;
-			if (mode == HapticMode.Default)
+			var soundEnabled = (mode & KeyClicks.On) > 0;
+			if (mode == KeyClicks.Default)
 			{
-				soundEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Sound) > 0;
-				vibeEnabled = (Forms9Patch.Settings.HapticMode & HapticMode.Vibrate) > 0;
-				if (Forms9Patch.Settings.HapticMode == HapticMode.Default)
+				soundEnabled = (Forms9Patch.Settings.HapticMode & KeyClicks.On) > 0;
+				if (Forms9Patch.Settings.HapticMode == KeyClicks.Default)
 				{
 					// this no longer works and there doesn't appear to be a way to detect if keyclicks is on
 					var type = CFPreferences.CurrentApplication;
@@ -42,21 +40,19 @@ namespace Forms9Patch.iOS
 				switch (effect)
 				{
 					case HapticEffect.None:
-						return;
+						break;
 					case HapticEffect.KeyClick:
 						click.PlaySystemSoundAsync();
-						return;
+						break;
 					case HapticEffect.Return:
 						modifier.PlaySystemSoundAsync();
-						return;
+						break;
 					case HapticEffect.Delete:
 						delete.PlaySystemSoundAsync();
-						return;
+						break;
 				}
 			}
 
-			if (vibeEnabled)
-				SystemSound.Vibrate.PlaySystemSoundAsync();	
 		}
 
 	}

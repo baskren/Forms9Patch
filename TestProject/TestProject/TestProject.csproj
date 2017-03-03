@@ -10,7 +10,6 @@
     <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <AssemblyName>Forms9PatchDemo</AssemblyName>
-    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
