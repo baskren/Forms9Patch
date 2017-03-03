@@ -120,6 +120,7 @@
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\FontService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
+    <Compile Include="Services\ApplicationInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

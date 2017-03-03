@@ -179,6 +179,8 @@
     <Compile Include="Interfaces\IFontService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Interfaces\IStatusBarService.cs" />
+    <Compile Include="Interfaces\IApplicationInfoService.cs" />
+    <Compile Include="Services\ApplicationInfoService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

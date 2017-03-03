@@ -14,50 +14,69 @@ namespace Forms9Patch
 	/// </summary>
 	public class RootPage : Page
 	{
-		/*
-		static Rectangle _statusBarFrame;
-		static double _statusBarHeightAtStart=20;
+		static RootPage _instance;
 		/// <summary>
-		/// Gets or sets the status bar frame  - used for setup and responding to iOS status bar changes.
+		/// Create the specified page.
 		/// </summary>
-		/// <value>The status bar frame.</value>
-		static public Rectangle StatusBarFrame
+		/// <returns>The create.</returns>
+		/// <param name="page">Page.</param>
+
+		public RootPage(Page page=null)
+		{
+			if (_instance != null)
+				throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Page instead");
+			_instance = this;
+			Page = page;
+		}
+
+		/// <summary>
+		/// Gets or sets the apps content page.
+		/// </summary>
+		/// <value>The page.</value>
+		public static Page Page
 		{
 			get
 			{
-				return _statusBarFrame;
+				var result = _instance.PageController.InternalChildren[0] as Page;
+				return result;
 			}
 			set
 			{
-				if (_statusBarFrame == default(Rectangle))
-					_statusBarHeightAtStart = value.Height;
-				_statusBarFrame = value;
+				_instance = _instance ?? new RootPage();
+				NavigationPage navPage;
+				if (_instance.PageController.InternalChildren.Count() > 0)
+				{
+					var page = _instance.PageController.InternalChildren[0] as Page;
+					navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+					if (navPage != null)
+					{
+						navPage.Popped -= OnNavigationPagePopped;
+						navPage.Pushed -= OnNavigationPagePushed;
+						navPage.PoppedToRoot -= OnNavigationPagePopped;
+					}
+					if (page != null)
+						_instance.PageController.InternalChildren.Remove(page);
+				}
+				_instance.PageController.InternalChildren.Insert(0,value);
+				navPage = value as NavigationPage;
+				if (navPage != null)
+				{
+					navPage.Popped += OnNavigationPagePopped;
+					navPage.Pushed += OnNavigationPagePushed;
+					navPage.PoppedToRoot += OnNavigationPagePopped;
+				}
 			}
 		}
-		*/
 
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
-		/// </summary>
-		/// <param name="contentPage">Content page.</param>
-		public RootPage(Page contentPage) : base()
+		static void OnNavigationPagePopped(object sender, NavigationEventArgs e)
 		{
-			if (contentPage == null)
-				throw new NotSupportedException("RootPage must be supported with a valid Page instance");
-			PageController.InternalChildren.Add(contentPage);
-
-			var navPage = contentPage as NavigationPage;
-			if (navPage != null)
-			{
-				navPage.Popped += (sender, e) => RemovePopups(true);
-
-				navPage.Pushed += (sender, e) => RemovePopups(false);
-
-				navPage.PoppedToRoot += (sender, e) => RemovePopups(true);
-			}
+			_instance?.RemovePopups(true);
 		}
 
+		static void OnNavigationPagePushed(object sender, NavigationEventArgs e)
+		{
+			_instance?.RemovePopups(false);
+		}
 
 		IPageController PageController => this as IPageController;
 
@@ -89,7 +108,7 @@ namespace Forms9Patch
 
 		internal void RemovePopups(bool popping)
 		{
-			for (int i = PageController.InternalChildren.Count() - 1; i > 0; i--)
+			for (int i =PageController.InternalChildren.Count() - 1; i > 0; i--)
 			{
 					var popup = PageController.InternalChildren[i] as PopupBase;
 					if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
@@ -117,12 +136,12 @@ namespace Forms9Patch
 			return base.OnBackButtonPressed();
 		}
 
-		bool _ignoreChildren;
+		static bool _ignoreChildren;
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.StackLayout"/> will not invalidate itself when a child changes.
 		/// </summary>
 		/// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
-		public bool IgnoreChildren
+		public static bool IgnoreChildren
 		{
 			get
 			{
@@ -134,25 +153,53 @@ namespace Forms9Patch
 				{
 					_ignoreChildren = value;
 					if (_ignoreChildren)
-						foreach (var child in PageController.InternalChildren)
+						foreach (var child in _instance.PageController.InternalChildren)
 						{
 							var view = child as View;
 							if (view != null)
-								view.MeasureInvalidated -= OnChildMeasureInvalidated;
+								view.MeasureInvalidated -= _instance.OnChildMeasureInvalidated;
 						}
 					else
-						foreach (var child in PageController.InternalChildren)
+						foreach (var child in _instance.PageController.InternalChildren)
 						{
 							var view = child as View;
 							if (view != null)
-								view.MeasureInvalidated += OnChildMeasureInvalidated;
+								view.MeasureInvalidated += _instance.OnChildMeasureInvalidated;
 						}
 				}
 			}
 		}
 
+		/// <summary>
+		/// Returns the amount of padding you'll need to keep your views from overlapping the status bar.
+		/// </summary>
+		/// <value>The status bar padding.</value>
+		public static double StatusBarPadding
+		{
+			get
+			{
+				if (_instance == null)
+					return 0;
+				var ignoresContainerArea = ((IPageController)_instance.PageController.InternalChildren[0]).IgnoresContainerArea;
+				double verticalY = 0;
+				if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
+				{
+					verticalY = 20;
+					if (Device.Idiom == TargetIdiom.Phone)
+						verticalY = 20 - Math.Max(20, _startingHeight) + Math.Min(20, StatusBarService.Height);
+				}
+				return verticalY;
+			}
+		}
+
+		/// <summary>
+		/// Occurs when status bar padding changed.
+		/// </summary>
+		public static event EventHandler StatusBarPaddingChanged;
+
 
 		static double _startingHeight=-1;
+		static double _oldStatusBarPadding = -1;
 
 		/// <summary>
 		/// Layouts the children.
@@ -165,96 +212,14 @@ namespace Forms9Patch
 		{
 			if (_startingHeight < 0)
 				_startingHeight = StatusBarService.Height;
-			
-			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
-			if (Device.OS == TargetPlatform.iOS && !(PageController.InternalChildren[0] is NavigationPage))
+			var newStatusBarPadding = StatusBarPadding;
+			if (Math.Abs(newStatusBarPadding - _oldStatusBarPadding) > 0.1)
 			{
-
-
-				/* keeping the below around just in case Apple decides to create more permutations for the status bar
-				var verticalY = 0.0;
-				var verticalHeight = height;
-				if (_startingHeight == 20)
-				{
-					// normal
-					if (StatusBarService.Height == 0)
-					{
-						verticalY = 0;
-						verticalHeight = height;
-					}
-					else if (StatusBarService.Height == 20)
-					{
-						verticalY = 20;
-						verticalHeight = height - 20;
-					}
-					else if (StatusBarService.Height == 40)
-					{
-						verticalY = 20;
-						verticalHeight = height - 20;
-					}
-				}
-				else if (_startingHeight == 40)
-				{
-					// call in progress status bar
-					if (StatusBarService.Height == 0)
-					{
-						verticalY = -20;
-						verticalHeight = height;
-					}
-					else if (StatusBarService.Height == 20)
-					{
-						verticalY = 0;
-						verticalHeight = height - 20;
-					}
-					else if (StatusBarService.Height == 40)
-					{
-						verticalY = 0;
-						verticalHeight = height - 20;
-					}
-				}
-				else if (_startingHeight == 0)
-				{
-					// hidden status bar
-					if (StatusBarService.Height == 0)
-					{
-						verticalY = 0;
-						verticalHeight = height;
-					}
-					else if (StatusBarService.Height == 20)
-					{
-						verticalY = 20;
-						verticalHeight = height - 20;
-					}
-					else if (StatusBarService.Height == 40)
-					{
-						verticalY = 20;
-						verticalHeight = height - 20;
-					}
-				}
-				*/
-
-				double verticalY, verticalHeight;
-				if (Device.Idiom == TargetIdiom.Phone)
-				{
-					verticalY = 20 - Math.Max(20, _startingHeight) + Math.Min(20, StatusBarService.Height);
-					verticalHeight = height - Math.Min(20, StatusBarService.Height);
-				}
-				else
-				{
-					verticalY = 100;
-					verticalHeight = height;
-				}
-				base.LayoutChildren(x, verticalY, width, verticalHeight);
-				/*
-				var bounds = new Rectangle(x, verticalY, width, verticalHeight);
-				foreach (VisualElement child in PageController.InternalChildren)
-				{
-					Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(child,bounds);
-				}
-				*/
+				_oldStatusBarPadding = newStatusBarPadding;
+				StatusBarPaddingChanged?.Invoke(this, EventArgs.Empty);
 			}
-			else
-				base.LayoutChildren(x, y, width, height);
+			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
+			base.LayoutChildren(x, y, width, height);
 		}
 	}
 }

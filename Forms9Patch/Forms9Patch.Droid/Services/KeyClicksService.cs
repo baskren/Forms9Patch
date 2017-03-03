@@ -1,6 +1,7 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Media;
+using Android.Content.PM;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyClicksService))]
 namespace Forms9Patch.Droid
@@ -24,8 +25,9 @@ namespace Forms9Patch.Droid
 			}
 
 
+			var permission = Android.App.Application.Context.CheckCallingOrSelfPermission("android.permission.VIBRATE");
 
-			if (_vibrator != null && Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0)
+			if (_vibrator != null && permission == Permission.Granted && Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0)
 				_vibrator.Vibrate(300);
 
 

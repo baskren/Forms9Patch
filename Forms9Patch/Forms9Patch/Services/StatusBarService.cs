@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	public static class StatusBarService
+	internal static class StatusBarService
 	{
 		static IStatusBarService _service;
 
