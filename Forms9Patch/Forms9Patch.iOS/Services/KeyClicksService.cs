@@ -25,8 +25,8 @@ namespace Forms9Patch.iOS
 			var soundEnabled = (mode & KeyClicks.On) > 0;
 			if (mode == KeyClicks.Default)
 			{
-				soundEnabled = (Forms9Patch.Settings.HapticMode & KeyClicks.On) > 0;
-				if (Forms9Patch.Settings.HapticMode == KeyClicks.Default)
+				soundEnabled = (Forms9Patch.Settings.KeyClicks & KeyClicks.On) > 0;
+				if (Forms9Patch.Settings.KeyClicks == KeyClicks.Default)
 				{
 					// this no longer works and there doesn't appear to be a way to detect if keyclicks is on
 					var type = CFPreferences.CurrentApplication;

@@ -16,8 +16,8 @@ namespace Forms9Patch.Droid
 			var soundEnabled = (mode & KeyClicks.On) > 0;
 			if (mode == KeyClicks.Default)
 			{
-				soundEnabled = (Forms9Patch.Settings.HapticMode & KeyClicks.On) > 0;
-				if (Forms9Patch.Settings.HapticMode == KeyClicks.Default)
+				soundEnabled = (Forms9Patch.Settings.KeyClicks & KeyClicks.On) > 0;
+				if (Forms9Patch.Settings.KeyClicks == KeyClicks.Default)
 				{
 					soundEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.SoundEffectsEnabled) != 0;
 					//vibeEnabled = Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0;
