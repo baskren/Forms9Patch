@@ -28,7 +28,7 @@ namespace Forms9Patch.Droid
 			var permission = Android.App.Application.Context.CheckCallingOrSelfPermission("android.permission.VIBRATE");
 
 			if (_vibrator != null && permission == Permission.Granted && Android.Provider.Settings.System.GetInt(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.System.HapticFeedbackEnabled) != 0)
-				_vibrator.Vibrate(300);
+				_vibrator.Vibrate(10);
 
 
 			if (_audio != null && soundEnabled)
