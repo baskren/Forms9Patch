@@ -48,7 +48,8 @@ namespace Forms9Patch
 		}
 
 		bool inPreSpan;
-		void ProcessHTML() {
+		void ProcessHTML() 
+		{
 			_unmarkedText.Clear();
 			if (string.IsNullOrWhiteSpace (_string))
 				return;
@@ -57,15 +58,19 @@ namespace Forms9Patch
 
 			var tags = new List<Tag> ();
 			int index = 0;
-			for (int i=0;i < _string.Length; i++) {
-				if (_string [i] == '<') {
+			for (int i=0;i < _string.Length; i++) 
+			{
+				if (_string [i] == '<') 
+				{
 					int j = i + 1;
 					bool closing = false;
-					if (j < _string.Length && _string [j] == '/') {
+					if (j < _string.Length && _string [j] == '/') 
+					{
 						closing = true;
 						j++;
 					}
-					while (j < _string.Length && _string [j] != '>') {
+					while (j < _string.Length && _string [j] != '>') 
+					{
 						j++;
 					}
 					if (j == _string.Length)
@@ -77,7 +82,12 @@ namespace Forms9Patch
 					// it was a closing tag, so ...
 					var tagString = _string.Substring (i + (closing ? 2 : 1), j - i - (closing ? 2 : 1));
 					if (!string.IsNullOrWhiteSpace(tagString)) {
-						if (closing)
+						if (tagString == "br")
+						{
+							index++;
+							_unmarkedText.Append("\n");
+						}
+						else if (closing)
 						{
 							//var tag = tags.Pop ();
 							var tag = tags.FindLast((Tag obj) => obj.Name == tagString.ToLower());
@@ -91,7 +101,8 @@ namespace Forms9Patch
 							// remove tag off of stack
 							processTag(tag, index);
 						}
-						else {
+						else 
+						{
 							// openning
 							//var contents = tagString.Split(' ');
 							const string pattern = @" ([^>=]*)=""([^""]*)""";
@@ -112,17 +123,22 @@ namespace Forms9Patch
 						}
 					}
 					i = j;
-				} else if (_string[i]=='&') {
+				} 
+				else if (_string[i]=='&') 
+				{
 					// escape character
 					var escapeCode = "";
 					//var stringBuilder = new StringBuilder();
 					int j = i+1;
-					while (j < _string.Length && _string [j] != ';') {
+					while (j < _string.Length && _string [j] != ';') 
+					{
 						escapeCode += _string [j++];
 					}
-					if (escapeCode.Length > 1) {
+					if (escapeCode.Length > 1) 
+					{
 						int unicodeInt = 0;
-						if (escapeCode [0] == '#') {
+						if (escapeCode [0] == '#') 
+						{
 							int start = 1;
 							int numBase = 10;
 							if (escapeCode [1] == 'x' || escapeCode[1]=='X') {
@@ -130,7 +146,9 @@ namespace Forms9Patch
 								numBase = 16;
 							}
 							unicodeInt = Convert.ToInt32 (escapeCode.Substring (start), numBase);
-						} else {
+						} 
+						else 
+						{
 							switch (escapeCode) {
 							case "quot": unicodeInt=0x0022; break;
 							case "amp": unicodeInt=0x0026; break;
@@ -388,15 +406,19 @@ namespace Forms9Patch
 							}
 						}
 						i = j;
-						if (unicodeInt != 0) {
+						if (unicodeInt != 0) 
+						{
 							string unicodeString = char.ConvertFromUtf32 (unicodeInt);
 							index += unicodeString.Length;
 							//UnmarkedText += unicodeString;
 							_unmarkedText.Append(unicodeString);
 						}
 					}
-				} else {
-					if (inPreSpan || !(char.IsWhiteSpace(_string,i) && i > 0 && char.IsWhiteSpace(_string,i-1) )) {
+				} 
+				else 
+				{
+					if (inPreSpan || !(char.IsWhiteSpace(_string,i) && i > 0 && char.IsWhiteSpace(_string,i-1) )) 
+					{
 						index++;
 						//UnmarkedText += _string [i];
 						_unmarkedText.Append(_string[i]);

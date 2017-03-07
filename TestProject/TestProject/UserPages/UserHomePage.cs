@@ -62,6 +62,12 @@ namespace Forms9PatchDemo
 					new TableSection("Code") {
 
 						new TextCell {
+							Text = "<br>",
+							Command = navigateCommand,
+							CommandParameter = typeof(br)
+						},
+
+						new TextCell {
 							Text = "Popup on MasterDetail",
 							Command = navigateCommand,
 							CommandParameter = typeof(ModalPopupOnMasterDetailPage)
