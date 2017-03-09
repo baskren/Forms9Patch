@@ -12,6 +12,10 @@ namespace Forms9Patch
 	{
 		static IStatusBarService _service;
 
+		/// <summary>
+		/// Gets the height.
+		/// </summary>
+		/// <value>The height.</value>
 		public static double Height
 		{
 			get

@@ -15,18 +15,28 @@ namespace Forms9Patch
 	public class RootPage : Page
 	{
 		static RootPage _instance;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
+		/// </summary>
+		/// <param name="page">Page.</param>
+		public RootPage(Page page=null)
+		{
+			if (_instance != null)
+				throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
+			_instance = this;
+			Page = page;
+		}
+
 		/// <summary>
 		/// Create the specified page.
 		/// </summary>
 		/// <returns>The create.</returns>
 		/// <param name="page">Page.</param>
-
-		public RootPage(Page page=null)
+		public static RootPage Create(Page page)
 		{
-			if (_instance != null)
-				throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Page instead");
-			_instance = this;
-			Page = page;
+			_instance = _instance ?? new RootPage(page);
+			return _instance;
 		}
 
 		/// <summary>

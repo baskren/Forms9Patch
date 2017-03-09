@@ -96,7 +96,7 @@ namespace Forms9PatchDemo
 				//MainPage = new ImageCodePage();
 
 				//MainPage = new ZenmekPage();
-				MainPage = new Forms9Patch.RootPage(navPage);
+				MainPage = Forms9Patch.RootPage.Create(navPage);
 				//MainPage = new HeapDemoPage();
 				//MainPage = new ModalPopupOnMasterDetailPage();
 			} else {

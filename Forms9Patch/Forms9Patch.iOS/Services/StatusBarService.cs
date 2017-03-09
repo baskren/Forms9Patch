@@ -9,7 +9,7 @@ using UIKit;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.StatusBarService))]
 namespace Forms9Patch.iOS
 {
-	public class StatusBarService : IStatusBarService
+	internal class StatusBarService : IStatusBarService
 	{
 		public double Height
 		{

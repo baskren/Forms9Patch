@@ -13,7 +13,7 @@ using Forms9PatchDemo;
 
 namespace Forms9PatchDemo.Droid
 {
-	[Activity (Label = "Forms9PatchDemo", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "Forms9Patch Demo", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsApplicationActivity
 	{
 		protected override void OnCreate (Bundle bundle)
@@ -22,7 +22,7 @@ namespace Forms9PatchDemo.Droid
 
 			// Xamarin.Forms.Forms.Init has to be here (for Android) otherwise Xamarin.Forms.Image() { Source = "local source file" } doesnt work!
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			Forms9Patch.Droid.Settings.LicenseKey = "NJHS-HGTK-EWPL-789K-H4A3-9LHZ-67FA-P8AQ-ZJ8R-X83P-UNWE-QNYT-LGYA";
+			Forms9Patch.Droid.Settings.LicenseKey = "NZPK-RMP4-PJVV-Z7LP-78JF-GNXB-CDJZ-SRYA-BLR2-WBZC-G64K-QJZW-65DB";
 			//FormsGestures.Droid.Settings.Init ();
 			//FormsPopups.Droid.Framework.Init();
 
