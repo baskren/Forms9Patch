@@ -9,6 +9,8 @@ using Android.Widget;
 using Java.Lang;
 using Android.Text;
 using Xamarin.Forms;
+using System;
+using Android.Runtime;
 
 namespace Forms9Patch.Droid
 {
@@ -22,16 +24,6 @@ namespace Forms9Patch.Droid
 		internal static float Scale = -1f;
 
 		#region Constructors
-
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
-		/// </summary>
-		/// <param name="context">Context.</param>
-		public F9PTextView(Context context) : base(context)
-		{
-			init(context, null, 0);
-		}
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
 		/// </summary>
@@ -41,6 +33,32 @@ namespace Forms9Patch.Droid
 		{
 			init(context, attrs, 0);
 		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
+		/// </summary>
+		/// <param name="javaReference">Java reference.</param>
+		/// <param name="transfer">Transfer.</param>
+		public F9PTextView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
+		/// </summary>
+		/// <param name="context">Context.</param>
+		/// <param name="attrs">Attrs.</param>
+		/// <param name="defStyleAttr">Def style attr.</param>
+		/// <param name="defStyleRes">Def style res.</param>
+		public F9PTextView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes) { }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
+		/// </summary>
+		/// <param name="context">Context.</param>
+		public F9PTextView(Context context) : base(context)
+		{
+			init(context, null, 0);
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
 		/// </summary>
@@ -200,8 +218,8 @@ namespace Forms9Patch.Droid
 
 		internal int IndexForPoint(Android.Graphics.Point p)
 		{
-			int line = Layout.GetLineForVertical(p.Y);
-			int offset = Layout.GetOffsetForHorizontal(line, p.X);
+			var line = Layout.GetLineForVertical(p.Y);
+			var offset = Layout.GetOffsetForHorizontal(line, p.X);
 			return offset;
 		}
 
@@ -215,7 +233,7 @@ namespace Forms9Patch.Droid
 			var fontMetrics = paint.GetFontMetrics();
 			var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
 			var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
-			textFormatted = ((ICharSequence)baseFormattedString?.ToSpannableString()) ?? new String(text);
+			textFormatted = ((ICharSequence)baseFormattedString?.ToSpannableString()) ?? new Java.Lang.String(text);
 			if (lines > 0)
 			{
 				if (baseFormattedString != null)
@@ -278,7 +296,7 @@ namespace Forms9Patch.Droid
 								text = text.Substring(0, layout.GetLineEnd(lines-1));
 								break;
 						}
-						textFormatted = new String(text);
+						textFormatted = new Java.Lang.String(text);
 					}
 				}
 			}
@@ -297,7 +315,7 @@ namespace Forms9Patch.Droid
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Char, secondToLastEnd, start, endLow);
 			}
 			int mid = (endLow + endHigh) / 2;
-			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
+			var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
 			var layout = new StaticLayout(formattedText, paint, int.MaxValue-10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
@@ -314,7 +332,7 @@ namespace Forms9Patch.Droid
 			if (startHigh-startLow<=1)
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Start, secondToLastEnd, startHigh, end);
 			int mid = (startLow + startHigh) / 2;
-			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Start, 0, mid, end);
+			var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Start, 0, mid, end);
 			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, mid, startHigh, end, availWidth);
@@ -331,7 +349,7 @@ namespace Forms9Patch.Droid
 			if (startHigh - startLow <= 1)
 				return baseFormattedString.ToSpannableString(EllipsePlacement.Mid, secondToLastEnd, startHigh, end, startLastVisible, midLastVisible);
 			int mid = (startLow + startHigh) / 2;
-			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Mid, 0, mid, end, startLastVisible, midLastVisible);
+			var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Mid, 0, mid, end, startLastVisible, midLastVisible);
 			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
@@ -350,7 +368,7 @@ namespace Forms9Patch.Droid
 				return baseFormattedString.ToSpannableString(EllipsePlacement.End, secondToLastEnd, start, endLow);
 			}
 			int mid = (endLow + endHigh) / 2;
-			SpannableStringBuilder formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.End, 0, start, mid);
+			var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.End, 0, start, mid);
 			var layout = new StaticLayout(formattedText, paint, int.MaxValue- 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 			if (layout.GetLineWidth(0) > availWidth)
 				return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
@@ -367,7 +385,7 @@ namespace Forms9Patch.Droid
 			if (startHigh-startLow<=1)
 				return  (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
 			int mid = (startLow + startHigh) / 2;
-			var lastLineText = new String("…" + text.Substring(mid, end - mid).TrimStart());
+			var lastLineText = new Java.Lang.String("…" + text.Substring(mid, end - mid).TrimStart());
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth)
@@ -387,7 +405,7 @@ namespace Forms9Patch.Droid
 			if (startHigh - startLow <= 1)
 				return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
 			int mid = (startLow + startHigh) / 2;
-			var lastLineText = new String(text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(mid, end - mid).TrimStart());
+			var lastLineText = new Java.Lang.String(text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(mid, end - mid).TrimStart());
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth)
@@ -407,7 +425,7 @@ namespace Forms9Patch.Droid
 			if (endHigh - endLow <= 1)
 				return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(start, endLow - start) + "…";
 			int mid = (endLow + endHigh) / 2;
-			var lastLineText = new String(text.Substring(start, mid - start) + "…");
+			var lastLineText = new Java.Lang.String(text.Substring(start, mid - start) + "…");
 			//var truncBounds = new Android.Graphics.Rect();
 			//paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
 			//if (truncBounds.Width() > availWidth-Scale)
@@ -454,7 +472,7 @@ namespace Forms9Patch.Droid
 			}
 			*/
 
-			float result = ZeroLinesFit(text, paint, min, max, availWidth, availHeight);
+			var result = ZeroLinesFit(text, paint, min, max, availWidth, availHeight);
 
 			float step = (result - min) / 5;
 			if (step > 0.05f)
