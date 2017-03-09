@@ -52,13 +52,13 @@ namespace Forms9Patch.Droid
 
 		bool _disposed;
 		public void Dispose(){
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			//System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			Dispose(true);
 			//GC.SuppressFinalize(this);
 		}
 
 		protected virtual void Dispose(bool disposing){
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing=["+disposing+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			//System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing=["+disposing+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (!_disposed && disposing){
 				//if (_ninePatch != null)
 				//	_ninePatch.RemoveFromSuperview();

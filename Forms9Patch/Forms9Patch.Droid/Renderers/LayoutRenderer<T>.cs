@@ -118,10 +118,10 @@ namespace Forms9Patch.Droid
 
 		protected override void Dispose(bool disposing)
 		{
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing=["+disposing+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			//System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing=["+disposing+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (disposing)
 			{
-				System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+				//System.Diagnostics.Debug.WriteLine("{0}[{1}] disposing", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 				SetBackgroundColor(Color.Transparent.ToAndroid());
 				_oldImage = null;
 				_imageViewManager?.Dispose();
@@ -136,7 +136,7 @@ namespace Forms9Patch.Droid
 
 		~LayoutRenderer()
 		{
-			System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+			//System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			_oldImage = null;
 			_imageViewManager?.Dispose();
 			_imageViewManager = null;

@@ -228,7 +228,7 @@ namespace Forms9Patch
 				_oldStatusBarPadding = newStatusBarPadding;
 				StatusBarPaddingChanged?.Invoke(this, EventArgs.Empty);
 			}
-			System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
+			//System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
 			base.LayoutChildren(x, y, width, height);
 		}
 	}
