@@ -524,7 +524,9 @@ namespace Forms9Patch
 					segment.Tapped += (s, arg) =>
 					{
 						modal.Cancel();
-						((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, menuItem));
+						var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, menuItem);
+						((ICellSwipeMenus)Content)?.OnSwipeMenuItemButtonTapped(this, args);
+						((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
 						//System.Diagnostics.Debug.WriteLine("SwipeMenu[" + menuItem.Key + "]");
 					};
 					segmentedController.Segments.Add(segment);
@@ -535,7 +537,9 @@ namespace Forms9Patch
 			else
 			{
 				PutAwaySwipeButtons(false);
-				((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content,(ItemWrapper)BindingContext,swipeMenu[index]));
+				var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, swipeMenu[index]);
+				((ICellSwipeMenus)Content)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+				((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
 				//System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
 			}
 		}

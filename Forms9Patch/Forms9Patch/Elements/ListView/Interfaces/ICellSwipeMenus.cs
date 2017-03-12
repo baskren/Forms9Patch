@@ -19,5 +19,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The end swipe menu.</value>
 		List<SwipeMenuItem> EndSwipeMenu { get; }
+
+		void OnSwipeMenuItemButtonTapped(object sender, SwipeMenuItemTappedArgs args);
 	}
 }
