@@ -598,6 +598,9 @@ namespace Forms9Patch
 			//_freshContent = true;
 			//UpdateLayout();
 			//System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
+			var selectableContent = Content as IIsSelectedAble;
+			if (selectableContent != null)
+				selectableContent.IsSelected = ((ItemWrapper)BindingContext).IsSelected;
 			base.OnBindingContextChanged();
 		}
 
@@ -635,12 +638,19 @@ namespace Forms9Patch
 		void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			//System.Diagnostics.Debug.WriteLine("BaseCellView.OnItemPropertyChanging(" + e.PropertyName + ")");
-			if (e.PropertyName == ItemWrapper.IsSelectedProperty.PropertyName 
-			    || e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName 
+			if (e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName 
 			    || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName
 			    || e.PropertyName == ItemWrapper.IndexProperty.PropertyName
 			   )
 				UpdateBackground();
+
+			if (e.PropertyName == ItemWrapper.IsSelectedProperty.PropertyName)
+			{
+				UpdateBackground();
+				var selectableContent = Content as IIsSelectedAble;
+				if (selectableContent!=null)
+					selectableContent.IsSelected = ((ItemWrapper)BindingContext).IsSelected;
+			}
 
 			if (e.PropertyName == ItemWrapper.RowHeightProperty.PropertyName)
 				SetHeights();

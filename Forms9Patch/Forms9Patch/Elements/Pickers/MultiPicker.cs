@@ -43,6 +43,9 @@ namespace Forms9Patch
 			_manLayout.Children.Remove(_upperEdge);
 			_basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 
+			_basePicker.ItemTemplates.RemoveFactoryDefaults();
+			_basePicker.ItemTemplates.Add(typeof(string), typeof(MultiPickerCellContentView));
+
 			SelectedItems = _basePicker.SelectedItems;
 
 			SelectedItems.CollectionChanged += (sender, e) => OnPropertyChanged(SelectedItemsPropertyKey.BindableProperty.PropertyName);
@@ -50,6 +53,83 @@ namespace Forms9Patch
 		#endregion
 
 
+	}
+
+
+
+	#region Cell Template
+	class MultiPickerCellContentView : Grid, ICellHeight, IIsSelectedAble
+	{
+		public double CellHeight { get; set; }
+
+		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MultiPickerCellContentView), default(bool));
+		public bool IsSelected
+		{
+			get { return (bool)GetValue(IsSelectedProperty); }
+			set { SetValue(IsSelectedProperty, value); }
+		}
+
+		#endregion
+
+		#region Fields
+		readonly Label checkLabel = new Label
+		{
+			Text = "✓",
+			TextColor = Color.Blue,
+			VerticalTextAlignment = TextAlignment.Center,
+			HorizontalTextAlignment = TextAlignment.Center,
+			IsVisible = false
+		};
+		readonly Label itemLabel = new Label
+		{
+			TextColor = Color.Black,
+			VerticalTextAlignment = TextAlignment.Center,
+			HorizontalTextAlignment = TextAlignment.Start
+		};
+
+		#endregion
+
+		#region Constructors
+		public MultiPickerCellContentView()
+		{
+			CellHeight = 50;
+			Padding = new Thickness(5, 1, 5, 1);
+			ColumnDefinitions = new ColumnDefinitionCollection
+			{
+				new ColumnDefinition { Width = new GridLength(30,GridUnitType.Absolute)},
+				new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star)}
+			};
+			RowDefinitions = new RowDefinitionCollection
+			{
+				new RowDefinition { Height = new GridLength(CellHeight - Padding.VerticalThickness, GridUnitType.Absolute)}
+			};
+			IgnoreChildren = true;
+			ColumnSpacing = 0;
+
+			Children.Add(itemLabel, 1, 0);
+			Children.Add(checkLabel, 0, 0);
+		}
+		#endregion
+
+
+		#region Change management
+		protected override void OnBindingContextChanged()
+		{
+			base.OnBindingContextChanged();
+			if (BindingContext != null)
+				itemLabel.Text = BindingContext.ToString();
+			else
+				itemLabel.Text = null;
+		}
+
+		protected override void OnPropertyChanged(string propertyName = null)
+		{
+			base.OnPropertyChanged(propertyName);
+			if (propertyName == IsSelectedProperty.PropertyName)
+				checkLabel.IsVisible = IsSelected;
+		}
+
+		#endregion
 	}
 }
 
