@@ -6,7 +6,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Permission popup.
 	/// </summary>
-	public class PermissionPopup : ModalPopup
+	public class PermissionPopup : BubblePopup
 	{
 		/// <summary>
 		/// Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
@@ -21,7 +21,7 @@ namespace Forms9Patch
 		/// <param name="cancelTextColor">Cancel text color.</param>
 		public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
 		{
-			var popup = new PermissionPopup() { Title = title, Text = text, OkText = okText, CancelText = cancelText};
+			var popup = new PermissionPopup{ Title = title, Text = text, OkText = okText, CancelText = cancelText};
 			if (okTextColor != default(Color))
 				popup.OkTextColor = okTextColor;
 			if (okButtonColor != default(Color))
@@ -34,6 +34,20 @@ namespace Forms9Patch
 			return popup;
 		}
 
+		public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
+		{
+			var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText };
+			if (okTextColor != default(Color))
+				popup.OkTextColor = okTextColor;
+			if (okButtonColor != default(Color))
+				popup.OkButtonColor = okButtonColor;
+			if (cancelTextColor != default(Color))
+				popup.CancelTextColor = cancelTextColor;
+			if (cancelButtonColor != default(Color))
+				popup.CancelButtonColor = cancelButtonColor;
+			popup.IsVisible = true;
+			return popup;
+		}
 
 		#region Properties
 
@@ -151,6 +165,7 @@ namespace Forms9Patch
 
 		#endregion
 
+
 		#region Events
 		/// <summary>
 		/// Occurs when ok button is tapped.
@@ -185,7 +200,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
 		/// </summary>
-		public PermissionPopup() 
+		public PermissionPopup(VisualElement target = null) : base(target) 
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
 			_cancelButton.FontColor = CancelTextColor;
@@ -224,16 +239,6 @@ namespace Forms9Patch
 					}
 				}
 			};
-		}
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
-		/// </summary>
-		/// <param name="target">Target.</param>
-		[Obsolete]
-		public PermissionPopup(VisualElement target = null) : base(target)
-		{
-			throw new NotSupportedException(PCL.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
 
 
