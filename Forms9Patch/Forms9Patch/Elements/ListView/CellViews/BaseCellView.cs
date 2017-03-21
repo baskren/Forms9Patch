@@ -402,14 +402,17 @@ namespace Forms9Patch
 									_swipeButton3.FontColor = swipeMenu[2].TextColor;
 								}
 								Children.Add(_swipeFrame3, 0, 0);
+								RaiseChild(_swipeFrame3);
 								_swipeFrame3.TranslationX = (int)side * Width;
 								_swipeFrame3.IsVisible = true;
 							}
 							Children.Add(_swipeFrame2, 0, 0);
+							RaiseChild(_swipeFrame2);
 							_swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
 							_swipeFrame2.IsVisible = true;
 						}
 						Children.Add(_swipeFrame1, 0, 0);
+						RaiseChild(_swipeFrame1);
 						_swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
 						_swipeFrame1.IsVisible = true;
 						_settingup = false;
