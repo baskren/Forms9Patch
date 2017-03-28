@@ -56,7 +56,12 @@ namespace Forms9PatchDemo
 							Text = "Burkhart Test",
 							Command = navigateCommand,
 							CommandParameter = typeof(Burkhart)
-						}
+						},
+						new TextCell {
+							Text = "F9P Label in Xamarin.ListView",
+							Command = navigateCommand,
+							CommandParameter = typeof(XamlPageWithListViewWithF9PLabelInCells)
+						},
 					},
 
 					new TableSection("Code") {

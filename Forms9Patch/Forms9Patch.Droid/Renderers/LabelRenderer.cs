@@ -99,7 +99,6 @@ namespace Forms9Patch.Droid
 			if (_currentControlState.IsNullOrEmpty || Control == null)
 				return new SizeRequest(Xamarin.Forms.Size.Zero);
 
-
 			_currentControlState.AvailWidth = MeasureSpec.GetSize(widthConstraint);
 			if (MeasureSpec.GetMode(widthConstraint) == Android.Views.MeasureSpecMode.Unspecified)
 				_currentControlState.AvailWidth = int.MaxValue / 2;
@@ -108,7 +107,7 @@ namespace Forms9Patch.Droid
 				_currentControlState.AvailHeight = int.MaxValue / 2;
 			if (_currentControlState.AvailWidth <= 0 || _currentControlState.AvailHeight <= 0)
 				return new SizeRequest(Xamarin.Forms.Size.Zero);
-			
+
 			if (_currentControlState == _lastControlState && _lastSizeRequest.HasValue)
 				return _lastSizeRequest.Value;
 
@@ -335,9 +334,13 @@ namespace Forms9Patch.Droid
 
 		void Layout()
 		{
-			if (Element.Width > -1 && Element.Height > -1 && Element.IsVisible)
-				if (_lastControlState==null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight)
-			LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
+			if (Element.IsVisible)
+			{
+				if (Element.Width > -1 && Element.Height > -1 && (_lastControlState == null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight))
+					LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
+				else
+					RequestLayout();
+			}
 		}
 
 		void UpdateLineBreakMode()
@@ -446,7 +449,6 @@ namespace Forms9Patch.Droid
 				_currentControlState.Text = Element.Text;
 
 			UpdateColor();
-			//UpdateFont();
 			Layout();
 		}
 

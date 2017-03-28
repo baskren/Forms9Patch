@@ -348,9 +348,10 @@ namespace Forms9Patch
 		/// </summary>
 		public Label() {
 			_id=instances++;
-			_listener = FormsGestures.Listener.For(this);
+			//_listener = FormsGestures.Listener.For(this);
 		}
 		#endregion
+
 
 		#region PropertyChange 
 
@@ -372,16 +373,32 @@ namespace Forms9Patch
 				else
 					F9PFormattedString = null;
 				if (F9PFormattedString != null && F9PFormattedString.ContainsActionSpan)
-					_listener.Tapped += OnTapped;
-				else
+				{
+					if (_listener == null)
+					{
+						_listener = FormsGestures.Listener.For(this);
+						_listener.Tapped += OnTapped;
+					}
+				}
+				else if (_listener!=null)
+				{
 					_listener.Tapped -= OnTapped;
+					_listener.Dispose();
+					_listener = null;
+				}
 
 			}
 			else if (propertyName == TextProperty.PropertyName && Text!=null)
 			{
 				F9PFormattedString = null;
 				HtmlText = null;
-				_listener.Tapped -= OnTapped;
+				//_listener.Tapped -= OnTapped;
+				if (_listener != null)
+				{
+					_listener.Tapped -= OnTapped;
+					_listener.Dispose();
+					_listener = null;
+				}
 			}
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == LinesProperty.PropertyName 
@@ -566,11 +583,13 @@ namespace Forms9Patch
 						{
 							//System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
 							ActionTagTapped?.Invoke(this, new ActionTagEventArgs(actionSpan.Id, actionSpan.Href));
+							e.Handled = true;
 							return;
 						}
 					}
 				}
 			}
+			e.Handled = false;
 		}
 		#endregion
 	}

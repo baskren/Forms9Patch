@@ -10,6 +10,7 @@
     <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <AssemblyName>Forms9PatchDemo</AssemblyName>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -107,6 +108,9 @@
     <Compile Include="UserPages\SegmentNavPage2.cs" />
     <Compile Include="UserPages\SegmentNavPage3.cs" />
     <Compile Include="Pages\br.cs" />
+    <Compile Include="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
+      <DependentUpon>XamlPageWithListViewWithF9PLabelInCells.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -214,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\CPMono_v07_Bold.otf" />
     <EmbeddedResource Include="Resources\Fonts\luximb.ttf" />
+    <EmbeddedResource Include="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

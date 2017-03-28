@@ -10,8 +10,15 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Forms9Patch.iOS.ApplicationInfoService))]
 namespace Forms9Patch.iOS
 {
+	/// <summary>
+	/// Application info service.
+	/// </summary>
 	public class ApplicationInfoService : IApplicationInfoService
 	{
+		/// <summary>
+		/// Gets the build.
+		/// </summary>
+		/// <value>The build.</value>
 		public int Build
 		{
 			get
@@ -23,6 +30,10 @@ namespace Forms9Patch.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets the identifier.
+		/// </summary>
+		/// <value>The identifier.</value>
 		public string Identifier
 		{
 			get
@@ -31,6 +42,10 @@ namespace Forms9Patch.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets the name.
+		/// </summary>
+		/// <value>The name.</value>
 		public string Name
 		{
 			get
@@ -39,6 +54,10 @@ namespace Forms9Patch.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets the version.
+		/// </summary>
+		/// <value>The version.</value>
 		public string Version
 		{
 			get
