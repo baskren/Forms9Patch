@@ -118,7 +118,8 @@ namespace Forms9Patch.Droid
 				while (working || instance < call) {
 					if (instance < call)
 						return;
-				};
+					await Task.Delay(TimeSpan.FromMilliseconds(200));
+				}
 				waiting=false;
 			}
 			working = true;
@@ -134,15 +135,14 @@ namespace Forms9Patch.Droid
 			}
 
 			Xamarin.Forms.ImageSource newSource;
-			if (Settings.IsLicenseValid || _instance < 4)
-				newSource = image?.Source;
-			else
+			newSource = image?.Source;
+			if (image != null && !Settings.IsLicenseValid)
 			{
 				newSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
 				//image.Fill = Forms9Patch.Fill.AspectFit;
 				_fail = true;
 			}
-			
+
 			Drawable drawable = null;
 
 			if (newSource == null || !Equals(_source, newSource)) {
@@ -399,7 +399,7 @@ namespace Forms9Patch.Droid
 							if (_firstLoad && image.Fill == Fill.Fill &&  (_element.HeightRequest > 0 || _element.WidthRequest >0 || droidImageView != null ) ) {
 								//System.Diagnostics.Debug.WriteLine ("FIRSTLOAD");
 								while (_element.Height < 0 || _element.Width < 0)
-									await Task.Delay (TimeSpan.FromMilliseconds (20));
+									await Task.Delay (TimeSpan.FromMilliseconds (100));
 								var layout = _element as Layout;
 								double hzThickness = 0, vtThickness = 0;
 								if (layout != null) {

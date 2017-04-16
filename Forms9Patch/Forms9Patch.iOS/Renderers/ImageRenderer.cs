@@ -69,8 +69,8 @@ namespace Forms9Patch.iOS
 			} else if (e.PropertyName == Xamarin.Forms.Image.IsOpaqueProperty.PropertyName) {
 				Control.Opaque = Element.IsOpaque;
 			} else if (e.PropertyName == Image.TintColorProperty.PropertyName) {
-				if (_imageViewManager.Tintable)
-					Control.TintColor = Element.TintColor.ToUIColor ();
+				if (_imageViewManager.Tintable && Element.TintColor != Color.Default)
+					Control.TintColor = Element.TintColor.ToUIColor();
 				else 
 					_imageViewManager.RelayoutImage (_oldImage);
 			} else if (e.PropertyName == VisualElement.WidthProperty.PropertyName) {

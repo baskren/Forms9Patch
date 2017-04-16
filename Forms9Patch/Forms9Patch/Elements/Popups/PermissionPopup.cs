@@ -34,6 +34,19 @@ namespace Forms9Patch
 			return popup;
 		}
 
+		/// <summary>
+		/// Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
+		/// </summary>
+		/// <returns>The create.</returns>
+		/// <param name="target">Target.</param>
+		/// <param name="title">Title.</param>
+		/// <param name="text">Text.</param>
+		/// <param name="okText">Ok text.</param>
+		/// <param name="cancelText">Cancel text.</param>
+		/// <param name="okButtonColor">Ok button color.</param>
+		/// <param name="cancelButtonColor">Cancel button color.</param>
+		/// <param name="okTextColor">Ok text color.</param>
+		/// <param name="cancelTextColor">Cancel text color.</param>
 		public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
 		{
 			var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText };

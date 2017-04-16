@@ -413,6 +413,33 @@ namespace Forms9Patch
 			set { SetValue(HapticModeProperty, value); }
 		}
 
+		/// <summary>
+		/// The tint image property backing store.
+		/// </summary>
+		public static readonly BindableProperty TintImageProperty = BindableProperty.Create("TintImage", typeof(bool), typeof(MaterialButton), true);
+		/// <summary>
+		/// Will the FontColor be applied to the ImageSource image?
+		/// </summary>
+		/// <value><c>true</c> tint ImageSource image with FontColor; otherwise, <c>false</c>.</value>
+		public bool TintImage
+		{
+			get { return (bool)GetValue(TintImageProperty); }
+			set { SetValue(TintImageProperty, value); }
+		}
+
+		/// <summary>
+		/// The has tight spacing property.
+		/// </summary>
+		public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(MaterialButton), default(bool));
+		/// <summary>
+		/// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
+		/// </summary>
+		/// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
+		public bool HasTightSpacing
+		{
+			get { return (bool)GetValue(HasTightSpacingProperty); }
+			set { SetValue(HasTightSpacingProperty, value); }
+		}
 
 		#endregion
 
@@ -481,8 +508,9 @@ namespace Forms9Patch
 			_stackLayout = new Xamarin.Forms.StackLayout {
 				Orientation = StackOrientation.Horizontal,
 				Spacing = 4,
-				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = Alignment.ToLayoutOptions ()
+				VerticalOptions = LayoutOptions.Fill,
+				//HorizontalOptions = Alignment.ToLayoutOptions ()
+				HorizontalOptions = LayoutOptions.Fill,
 			};
 
 			base.Content = _stackLayout;
@@ -496,6 +524,7 @@ namespace Forms9Patch
 			UpdateState ();
 
 			_label.PropertyChanged +=  OnLabelPropertyChanged;
+
 		}
 		#endregion
 
@@ -672,7 +701,7 @@ namespace Forms9Patch
 				//base.OutlineWidth = base.OutlineWidth > 0
 			}
 			if (_image != null)
-				_image.TintColor = _label.TextColor;
+				_image.TintColor = TintImage ? _label.TextColor : Color.Default;
 			if (_iconLabel != null)
 				_iconLabel.TextColor = _label.TextColor;
 			_noUpdate = false;
@@ -781,36 +810,48 @@ namespace Forms9Patch
 		void SetOrienations() {
 			if (Orientation == StackOrientation.Horizontal) {
 				if (_image != null) {
-					_image.VerticalOptions = LayoutOptions.Center;
-					_image.HorizontalOptions = LayoutOptions.Center;
+					_image.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+					_image.VerticalOptions = LayoutOptions.CenterAndExpand;
 				}
 				if (_iconLabel != null)
 				{
-					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
 					_iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
+					_iconLabel.HorizontalOptions = HasTightSpacing? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+					_iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
 				}
 				if (_label != null) {
 					_label.VerticalTextAlignment = TextAlignment.Center;
-					_label.HorizontalTextAlignment = TextAlignment.Center;
+					_label.HorizontalTextAlignment = Alignment; //TextAlignment.Center;
+					_label.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
+					_label.VerticalOptions = LayoutOptions.CenterAndExpand;
 					_label.MinimizeHeight = false;
 				}
 				_stackLayout.Spacing = 4;
+				_stackLayout.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
+				_stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
 			} else {
 				if (_image != null) {
-					_image.VerticalOptions = LayoutOptions.Center;
 					_image.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					_image.VerticalOptions = LayoutOptions.Center;
 				}
 				if (_iconLabel != null)
 				{
 					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
 					_iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+					_iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					_iconLabel.VerticalOptions = LayoutOptions.Center;
 				}
 				if (_label != null) {
-					_label.VerticalTextAlignment = TextAlignment.Center;
+					_label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
 					_label.HorizontalTextAlignment = TextAlignment.Center;
+					_label.HorizontalOptions = LayoutOptions.CenterAndExpand;
+					_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
 					_label.MinimizeHeight = true;
 				}
 				_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
+				_stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
+				_stackLayout.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
 			}
 			_stackLayout.Orientation = Orientation;
 		}
@@ -833,7 +874,8 @@ namespace Forms9Patch
 
 			if (propertyName == AlignmentProperty.PropertyName)
 			{
-				_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
+				//_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
+				SetOrienations();
 			}
 			else if (propertyName == ImageSourceProperty.PropertyName)
 			{
@@ -845,7 +887,7 @@ namespace Forms9Patch
 						_stackLayout.Children.Remove(_iconLabel);
 					_image = new Image { Source = ImageSource };
 					_image.Fill = Fill.AspectFit;
-					_image.TintColor = _label.TextColor;
+					_image.TintColor = TintImage ? _label.TextColor : Color.Default;
 					if (_image != null)
 					{
 						if (TrailingImage)
@@ -864,12 +906,13 @@ namespace Forms9Patch
 				{
 					if (_image != null)
 						_stackLayout.Children.Remove(_image);
-					_iconLabel = new Label { 
-						HtmlText = IconText, 
-						TextColor = _label.TextColor, 
-						HorizontalTextAlignment = TextAlignment.Center, 
-						VerticalTextAlignment = TextAlignment.Center, 
-						Lines=0,
+					_iconLabel = new Label
+					{
+						HtmlText = IconText,
+						TextColor = _label.TextColor,
+						HorizontalTextAlignment = TextAlignment.Center,
+						VerticalTextAlignment = TextAlignment.Center,
+						Lines = 0,
 					};
 					if (_iconLabel != null)
 					{
@@ -882,19 +925,19 @@ namespace Forms9Patch
 				}
 			}
 			else if (propertyName == BackgroundColorProperty.PropertyName
-			           || propertyName == OutlineColorProperty.PropertyName
-			           || propertyName == OutlineWidthProperty.PropertyName
-			           || propertyName == IsSelectedProperty.PropertyName
-			           || propertyName == IsEnabledProperty.PropertyName
-			           || propertyName == DarkThemeProperty.PropertyName
-			           || propertyName == HasShadowProperty.PropertyName
-			           || propertyName == SegmentTypeProperty.PropertyName) 
+					   || propertyName == OutlineColorProperty.PropertyName
+					   || propertyName == OutlineWidthProperty.PropertyName
+					   || propertyName == IsSelectedProperty.PropertyName
+					   || propertyName == IsEnabledProperty.PropertyName
+					   || propertyName == DarkThemeProperty.PropertyName
+					   || propertyName == HasShadowProperty.PropertyName
+					   || propertyName == SegmentTypeProperty.PropertyName)
 			{
-				UpdateState ();
-			} 
-			else if (propertyName == OrientationProperty.PropertyName) 
+				UpdateState();
+			}
+			else if (propertyName == OrientationProperty.PropertyName)
 			{
-				SetOrienations ();
+				SetOrienations();
 				/*
 			} else if (propertyName == FontFamilyProperty.PropertyName) {
 				_label.FontFamily = FontFamily;
@@ -903,15 +946,24 @@ namespace Forms9Patch
 			} else if (propertyName == FontAttributesProperty.PropertyName) {
 				_label.FontAttributes = FontAttributes;
 				*/
-			} 
-			else if (propertyName == FontColorProperty.PropertyName) 
+			}
+			else if (propertyName == FontColorProperty.PropertyName)
 			{
 				_label.TextColor = FontColor;
 				if (_iconLabel != null)
 					_iconLabel.TextColor = FontColor;
 				if (_image != null)
-					_image.TintColor = FontColor;
-			} 
+					//_image.TintColor = FontColor;
+					_image.TintColor = TintImage ? FontColor : Color.Default;
+			}
+			else if (propertyName == TintImageProperty.PropertyName && _image != null)
+			{
+				_image.TintColor = TintImage ? FontColor : Color.Default;
+			}
+			else if (propertyName == HasTightSpacingProperty.PropertyName)
+			{
+				SetOrienations();
+			}
 			else if (propertyName == TextProperty.PropertyName) 
 			{
 				_label.Text = Text;
@@ -947,6 +999,7 @@ namespace Forms9Patch
 				_label.FontFamily = FontFamily;
 			else if (propertyName == TrailingImageProperty.PropertyName && _stackLayout.Children.Contains(_label))
 			{
+                SetOrienations();
 				if (TrailingImage)
 					_stackLayout.LowerChild(_label);
 				else

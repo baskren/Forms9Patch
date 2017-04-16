@@ -581,10 +581,10 @@ namespace Forms9Patch
 		}
 
 		void SetLabelState(Label label, ImageButtonState state) {
-			label.TextColor = (state.FontColorSet ? state.FontColor : (DefaultState.FontColorSet ? DefaultState.FontColor : Device.OnPlatform(Color.Blue, Color.White, Color.White)));
-			label.FontSize = (state.FontSizeSet ? state.FontSize : (DefaultState.FontSizeSet ? DefaultState.FontSize : Device.GetNamedSize (NamedSize.Medium, _label)));
-			label.FontFamily = (state.FontFamilySet ? state.FontFamily : DefaultState.FontFamily);
-			label.FontAttributes = (state.FontAttributesSet ? state.FontAttributes : DefaultState.FontAttributes);
+			label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : Device.OnPlatform(Color.Blue, Color.White, Color.White)));
+			label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize (NamedSize.Medium, _label)));
+			label.FontFamily = (state.FontFamilySet || state.FontFamily!=(string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
+			label.FontAttributes = (state.FontAttributesSet || state.FontAttributes!=(FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? state.FontAttributes : DefaultState.FontAttributes);
 		}
 		#endregion
 

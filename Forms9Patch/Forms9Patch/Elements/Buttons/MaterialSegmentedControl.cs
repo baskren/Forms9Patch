@@ -302,6 +302,33 @@ namespace Forms9Patch
 			set { SetValue(HapticModeProperty, value); }
 		}
 
+		/// <summary>
+		/// The tint image property backing store.
+		/// </summary>
+		public static readonly BindableProperty TintImageProperty = BindableProperty.Create("TintImage", typeof(bool), typeof(MaterialSegmentedControl), true);
+		/// <summary>
+		/// Will the FontColor be applied to the ImageSource image?
+		/// </summary>
+		/// <value><c>true</c> tint ImageSource image with FontColor; otherwise, <c>false</c>.</value>
+		public bool TintImage
+		{
+			get { return (bool)GetValue(TintImageProperty); }
+			set { SetValue(TintImageProperty, value); }
+		}
+
+		/// <summary>
+		/// The has tight spacing property.
+		/// </summary>
+		public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(MaterialButton), default(bool));
+		/// <summary>
+		/// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
+		/// </summary>
+		/// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
+		public bool HasTightSpacing
+		{
+			get { return (bool)GetValue(HasTightSpacingProperty); }
+			set { SetValue(HasTightSpacingProperty, value); }
+		}
 		#endregion
 
 
@@ -407,6 +434,8 @@ namespace Forms9Patch
 			button.VerticalOptions = LayoutOptions.FillAndExpand;
 			if (segment.FontColor == Color.Default)
 				segment.MaterialButton.FontColor = FontColor;
+			button.TintImage = TintImage;
+			button.HasTightSpacing = HasTightSpacing;
 			if (!segment.FontAttributesSet)
 				segment.MaterialButton.FontAttributes = FontAttributes;
 			button.TrailingImage = TrailingImage;
@@ -558,6 +587,18 @@ namespace Forms9Patch
 					foreach (Segment segment in Segments)
 						if (segment.FontColor == Color.Default)
 							segment.MaterialButton.FontColor = FontColor;
+			}
+			else if (propertyName == TintImageProperty.PropertyName)
+			{
+				if (Segments != null)
+					foreach (Segment segment in Segments)
+						segment.MaterialButton.TintImage = TintImage;
+			}
+			else if (propertyName == HasTightSpacingProperty.PropertyName)
+			{
+				if (Segments != null)
+					foreach (Segment segment in Segments)
+						segment.MaterialButton.HasTightSpacing = HasTightSpacing;
 			}
 			else if (propertyName == FontAttributesProperty.PropertyName)
 			{

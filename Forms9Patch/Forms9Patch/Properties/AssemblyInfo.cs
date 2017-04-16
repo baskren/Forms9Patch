@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 // Information about this assembly is defined by the following attributes.
@@ -28,3 +28,6 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Forms9Patch.Droid")]
 [assembly: InternalsVisibleTo("Forms9Patch.iOS")]
 [assembly: InternalsVisibleTo("FormsDragNDropListView")]
+[assembly: InternalsVisibleTo("YvesForms9Patch.iOS")]
+[assembly: InternalsVisibleTo("YvesForms9Patch.Droid")]
+[assembly: InternalsVisibleTo("Forms9PatchAuth")]
