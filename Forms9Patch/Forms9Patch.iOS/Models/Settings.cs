@@ -32,6 +32,11 @@ namespace Forms9Patch.iOS
 		internal static Assembly ApplicationAssembly;
 
 
+		public static void Initialize(string licenseKey = null)
+		{
+			LicenseKey = licenseKey ??  "freebee";
+		}
+
 		static string _licenseKey;
 		/// <summary>
 		/// Sets the Forms9Patch license key.

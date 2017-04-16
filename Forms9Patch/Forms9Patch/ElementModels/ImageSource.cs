@@ -42,6 +42,8 @@ namespace Forms9Patch
 		/// <param name="assembly">Assembly in which the resource can be found</param> 
 		public static Xamarin.Forms.ImageSource FromMultiResource (string resource, Assembly assembly = null)
 		{
+			if (PCL.Utils.AppDomainWrapper.Instance == null)
+				throw new Exception("Forms9Patch is has not been initialized.");
 			if (assembly == null)
 			{
 				var resourcePath = resource.Split('.');

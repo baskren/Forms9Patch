@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Binding", "KenHoweTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Binding.iOS", "KenHoweTest\iOS\Forms9Binding.iOS.csproj", "{AF81B6ED-28A8-4CD0-BF25-333403F70938}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Binding.Droid", "KenHoweTest\Droid\Forms9Binding.Droid.csproj", "{423789BC-6194-41D8-BF53-FB459D299FFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -558,6 +560,24 @@ Global
 		{AF81B6ED-28A8-4CD0-BF25-333403F70938}.Release|Mixed Platforms.Build.0 = Release|iPhone
 		{AF81B6ED-28A8-4CD0-BF25-333403F70938}.Turkey|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{AF81B6ED-28A8-4CD0-BF25-333403F70938}.Turkey|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|iPhone.Build.0 = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
+		{423789BC-6194-41D8-BF53-FB459D299FFC}.Turkey|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = @Xamarin Forms is great for developing apps on Android and iOS but it is missing an important tool for developers - multi-screen image management. Andriod developers use NinePatch bitmaps and its Resources folder structure for this purpose. Likewise, iOS developers use ResizeableImageWithCapInsets and its @2x, @3x, @4x naming convention for this purpose.\n\nForms 9 Patch extends Forms Image and ImageSource to allow an iOS and/or an Android approach to multi-screen image managment. Knowing that there are pros/cons of each approach, Forms 9 Patch goes a step further and allows you to mix and match features of each approach.
@@ -596,5 +616,6 @@ Global
 		{C35AC013-889B-4690-85A2-C389F933A56D} = {113D1562-73A9-4EE8-9F86-A325CD0013C5}
 		{FE0A98F5-F4E1-45A3-8E55-7DE04FE3DA40} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
 		{AF81B6ED-28A8-4CD0-BF25-333403F70938} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
+		{423789BC-6194-41D8-BF53-FB459D299FFC} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
 	EndGlobalSection
 EndGlobal

@@ -468,6 +468,7 @@ namespace Forms9Patch
 					}
 				} else 
 					ShowState (DefaultState);
+				Opacity = 1.0;
 			} else {
 				if (IsSelected) {
 					ShowState (DisabledAndSelectedState ?? SelectedState ?? DisabledState ?? DefaultState);

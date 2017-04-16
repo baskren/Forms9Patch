@@ -25,6 +25,13 @@ namespace Forms9Patch.Droid
 			get { return _valid; }
 		}
 
+		public static void Initialize(string licenseKey = null)
+		{
+			LicenseKey = licenseKey ?? "freebee";
+		}
+
+
+
 		static string _licenseKey;
 
 		internal static Assembly ApplicationAssembly;
