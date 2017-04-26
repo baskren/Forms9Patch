@@ -65,8 +65,9 @@ namespace Forms9PatchDemo
 
 
 			var mb1 = new Forms9Patch.MaterialButton {
-				Text = "",
+				Text = "TI",
 				ImageSource = arrowIcon,
+				TintImage = false,
 			};
 			mb1.Tapped += OnMaterialButtonTapped;
 			mb1.Selected += OnMaterialButtonSelected;

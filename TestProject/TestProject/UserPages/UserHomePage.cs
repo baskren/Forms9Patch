@@ -52,6 +52,14 @@ namespace Forms9PatchDemo
 				Intent = TableIntent.Menu,
 				Root = new TableRoot {
 					new TableSection("XAML") {
+						new TextCell
+						{
+							Text = "SegmentBindingPage",
+							Command = navigateCommand,
+							CommandParameter = typeof(SegmentBindingPage)
+						},
+
+
 						new TextCell {
 							Text = "Burkhart Test",
 							Command = navigateCommand,

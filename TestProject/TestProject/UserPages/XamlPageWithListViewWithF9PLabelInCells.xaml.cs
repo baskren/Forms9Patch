@@ -1,4 +1,4 @@
-﻿// /*******************************************************************
+// /*******************************************************************
 //  *
 //  * XamlPageWithListViewWithF9PLabelInCells.xaml.cs copyright 2017 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *

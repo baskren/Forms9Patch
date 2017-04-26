@@ -20,13 +20,8 @@ namespace Forms9PatchDemo.Droid
 		{
 			base.OnCreate (bundle);
 
-			// Xamarin.Forms.Forms.Init has to be here (for Android) otherwise Xamarin.Forms.Image() { Source = "local source file" } doesnt work!
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			Forms9Patch.Droid.Settings.LicenseKey = "NZPK-RMP4-PJVV-Z7LP-78JF-GNXB-CDJZ-SRYA-BLR2-WBZC-G64K-QJZW-65DB";
-			//FormsGestures.Droid.Settings.Init ();
-			//FormsPopups.Droid.Framework.Init();
-
-
 			LoadApplication (new App ());
 		}
 	}

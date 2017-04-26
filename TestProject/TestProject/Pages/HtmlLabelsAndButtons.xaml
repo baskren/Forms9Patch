@@ -12,15 +12,51 @@
 		<StackLayout>
 			<Label Text="HTML Markuped Label Examples" TextColor="Black" FontAttributes="Bold"	/>
 
+			<f9p:MaterialButton
+				BackgroundColor="White"
+				FontSize="16"
+				Text="Tight Spacing"
+				ToggleBehavior="true"
+				BindingContext="{x:Reference msc}"
+				IsSelected="{Binding HasTightSpacing, Mode=OneWayToSource}"
+				/>
+			<f9p:MaterialButton
+				BackgroundColor="White"
+				FontSize="16"
+				Text="Trailing Image"
+				ToggleBehavior="true"
+				BindingContext="{x:Reference msc}"
+				IsSelected="{Binding TrailingImage, Mode=OneWayToSource}"
+			/>
+			<f9p:MaterialSegmentedControl
+				BackgroundColor="White"
+				FontSize="16"
+			>
+				<f9p:Segment Text="Start"></f9p:Segment>
+				<f9p:Segment Text="Center"></f9p:Segment>
+				<f9p:Segment Text="End"></f9p:Segment>
+			</f9p:MaterialSegmentedControl>
+			
 			<f9p:Label TextColor="Black">
 				plain &lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt;
 			</f9p:Label>
 
-			<f9p:MaterialSegmentedControl BackgroundColor="White" FontSize="16" FontColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5">
+			<f9p:MaterialSegmentedControl 
+				x:Name="msc"
+				BackgroundColor="White" 
+				FontSize="16" 
+				FontColor="#0076FF" 
+				Orientation="Vertical" 
+				OutlineColor="#CCC" 
+				OutlineWidth="0" 
+				SeparatorWidth="1" 
+				OutlineRadius="6" 
+				Padding="5"
+				>
 
-				<f9p:Segment>Pause &lt;b&gt;5&lt;/b&gt;</f9p:Segment>
-				<f9p:Segment>Pause &lt;b&gt;10&lt;/b&gt;</f9p:Segment>
-				<f9p:Segment>Pause &lt;b&gt;15&lt;/b&gt;</f9p:Segment>
+				<f9p:Segment ImageSource="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}" >Pause &lt;b&gt;5&lt;/b&gt;</f9p:Segment>
+				<f9p:Segment ImageSource="{local:ImageMultiResource Forms9PatchDemo.Resources.Info}">Pause &lt;b&gt;10&lt;/b&gt;</f9p:Segment>
+				<f9p:Segment IconText="#">Pause &lt;b&gt;15&lt;/b&gt;</f9p:Segment>
 
 				<f9p:Segment FontColor="Red">&lt;u&gt;Cancel&lt;/u&gt;</f9p:Segment>
 				<f9p:Segment HtmlText="&lt;s&gt;Launch&lt;/s&gt;" FontAttributes="Bold" IsEnabled="false"/>
