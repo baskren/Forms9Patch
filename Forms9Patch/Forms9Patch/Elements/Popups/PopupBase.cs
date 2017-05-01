@@ -426,7 +426,7 @@ namespace Forms9Patch
 					if (RootPage == null)
 						throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
 					RootPage?.AddPopup(this);
-					if (Device.OS == TargetPlatform.Android)
+					if (Device.RuntimePlatform == Device.Android)
 					{
 						Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
 						{
@@ -482,7 +482,7 @@ namespace Forms9Patch
 			//System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
 			if (width > 0 && height > 0)
 			{
-				LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x,y,width,height));
+				LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x, y, width, height));
 			}
 			else
 				ContentView.IsVisible = false;

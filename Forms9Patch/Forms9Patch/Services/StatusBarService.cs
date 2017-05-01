@@ -23,7 +23,8 @@ namespace Forms9Patch
 				_service = _service ?? DependencyService.Get<IStatusBarService>();
 				if (_service == null)
 				{
-					if (Device.OS == TargetPlatform.iOS)
+					//if (Device.OS == TargetPlatform.iOS)
+					if (Device.RuntimePlatform == Device.iOS)
 						return 20;
 					return 0;
 				}

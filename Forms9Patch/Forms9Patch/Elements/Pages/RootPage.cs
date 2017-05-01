@@ -20,7 +20,7 @@ namespace Forms9Patch
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
 		/// </summary>
 		/// <param name="page">Page.</param>
-		public RootPage(Page page=null)
+		public RootPage(Page page = null)
 		{
 			if (_instance != null)
 				throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
@@ -67,7 +67,7 @@ namespace Forms9Patch
 					if (page != null)
 						_instance.PageController.InternalChildren.Remove(page);
 				}
-				_instance.PageController.InternalChildren.Insert(0,value);
+				_instance.PageController.InternalChildren.Insert(0, value);
 				navPage = value as NavigationPage;
 				if (navPage != null)
 				{
@@ -118,11 +118,11 @@ namespace Forms9Patch
 
 		internal void RemovePopups(bool popping)
 		{
-			for (int i =PageController.InternalChildren.Count() - 1; i > 0; i--)
+			for (int i = PageController.InternalChildren.Count() - 1; i > 0; i--)
 			{
-					var popup = PageController.InternalChildren[i] as PopupBase;
-					if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
-						PageController.InternalChildren.RemoveAt(i);
+				var popup = PageController.InternalChildren[i] as PopupBase;
+				if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
+					PageController.InternalChildren.RemoveAt(i);
 			}
 		}
 
@@ -192,7 +192,7 @@ namespace Forms9Patch
 					return 0;
 				var ignoresContainerArea = ((IPageController)_instance.PageController.InternalChildren[0]).IgnoresContainerArea;
 				double verticalY = 0;
-				if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
+				if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
 				{
 					verticalY = 20;
 					if (Device.Idiom == TargetIdiom.Phone)
@@ -208,7 +208,7 @@ namespace Forms9Patch
 		public static event EventHandler StatusBarPaddingChanged;
 
 
-		static double _startingHeight=-1;
+		static double _startingHeight = -1;
 		static double _oldStatusBarPadding = -1;
 
 		/// <summary>

@@ -29,7 +29,7 @@ namespace Forms9Patch.iOS
 				if (Forms9Patch.Settings.KeyClicks == KeyClicks.Default)
 				{
 					// this no longer works and there doesn't appear to be a way to detect if keyclicks is on
-					var type = CFPreferences.CurrentApplication;
+					//var type = CFPreferences.CurrentApplication;
 					CFPreferences.AppSynchronize("/var/mobile/Library/Preferences/com.apple.preferences.sounds");
 					soundEnabled = CFPreferences.GetAppBooleanValue("keyboard", "/var/mobile/Library/Preferences/com.apple.preferences.sounds");
 				}
