@@ -582,13 +582,23 @@ namespace Forms9Patch
 
 				foreach (MaterialButton child in Children)
 				{
+					double plaformTweek = 0;
+					switch (Device.RuntimePlatform)
+					{
+						case Device.iOS:
+							plaformTweek = 0.1;
+							break;
+						case Device.Android:
+							plaformTweek = -1;
+							break;
+					}
 					switch (child.SegmentType)
 					{
 						case SegmentType.Start:
-							child.Padding = new Thickness(Padding.Left, Padding.Top + Device.OnPlatform(.1, -1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform(.1, -1, 0));
+							child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
 							break;
 						case SegmentType.Mid:
-							child.Padding = new Thickness(Padding.Left, Padding.Top + Device.OnPlatform(.1, -.1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform(.1, -.1, 0));
+							child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
 							break;
 						default:
 							child.Padding = Padding;

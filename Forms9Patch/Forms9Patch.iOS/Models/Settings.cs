@@ -8,7 +8,7 @@ using System.Reflection;
 //using Xamarin.Forms;
 //using System.Linq;
 
-[assembly: Xamarin.Forms.Dependency (typeof(Forms9Patch.iOS.Settings))]
+[assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.Settings))]
 namespace Forms9Patch.iOS
 {
 	/// <summary>
@@ -22,19 +22,25 @@ namespace Forms9Patch.iOS
 		/// </summary>
 		/// <value>true</value>
 		/// <c>false</c>
-		public bool IsLicensed {
+		public bool IsLicensed
+		{
 			get { return _valid; }
 		}
-		internal static bool IsLicenseValid {
+		internal static bool IsLicenseValid
+		{
 			get { return _valid; }
 		}
 
 		internal static Assembly ApplicationAssembly;
 
-
+		/// <summary>
+		/// Initialize the specified licenseKey.
+		/// </summary>
+		/// <returns>The initialize.</returns>
+		/// <param name="licenseKey">License key.</param>
 		public static void Initialize(string licenseKey = null)
 		{
-			LicenseKey = licenseKey ??  "freebee";
+			LicenseKey = licenseKey ?? "freebee";
 		}
 
 		static string _licenseKey;
@@ -53,11 +59,13 @@ namespace Forms9Patch.iOS
 					var licenseChecker = new LicenseChecker();
 					var keys = NSBundle.MainBundle.InfoDictionary.Keys;//.Where ((s) => ((NSString)s).Contains ((NSString)"CFBundleDisplayName"));
 					bool found = false;
-					foreach (var key in keys) {
+					foreach (var key in keys)
+					{
 						string keyNSString = key as NSString;
-						string keyString = keyNSString.ToString ();
-						if (keyString.Contains ("CFBundleName") || keyString.Contains ("CFBundleDisplayName")) {
-							_valid = licenseChecker.CheckLicenseKey (_licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary (keyString).ToString ());
+						string keyString = keyNSString.ToString();
+						if (keyString.Contains("CFBundleName") || keyString.Contains("CFBundleDisplayName"))
+						{
+							_valid = licenseChecker.CheckLicenseKey(_licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary(keyString).ToString());
 							found = true;
 						}
 						if (_valid)
@@ -67,30 +75,33 @@ namespace Forms9Patch.iOS
 					//var appName = (NSBundle.MainBundle.ObjectForInfoDictionary ("CFBundleName") ?? NSBundle.MainBundle.ObjectForInfoDictionary ("CFBundleDisplayName")).ToString ();
 					//var appName = NSBundle.MainBundle.ObjectForInfoDictionary ("CFBundleDisplayName").ToString ();
 					//if (appName == null) {
-					if (!found) {
-						throw new KeyNotFoundException ("CFBundleDisplayName or CFBundleName key was not found.  Is it missing from Info.plist?  Are there whitespace character(s) before or after this keyname in Info.plist?  It should be <key>CFBundleDisplayName</key><string>YOUR APP NAME HERE</string>."); 
+					if (!found)
+					{
+						throw new KeyNotFoundException("CFBundleDisplayName or CFBundleName key was not found.  Is it missing from Info.plist?  Are there whitespace character(s) before or after this keyname in Info.plist?  It should be <key>CFBundleDisplayName</key><string>YOUR APP NAME HERE</string>.");
 					}
 					//_valid = licenseChecker.CheckLicenseKey(_licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleDisplayName").ToString());
 
-					if (!_valid) {
-						Console.WriteLine (string.Format ("The LicenseKey '{0}' is not for the app '{1}'.", _licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleDisplayName")));
-						Console.WriteLine ("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
+					if (!_valid)
+					{
+						Console.WriteLine(string.Format("The LicenseKey '{0}' is not for the app '{1}'.", _licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleDisplayName")));
+						Console.WriteLine("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
 					}
-					FormsGestures.iOS.Settings.Init ();
+					FormsGestures.iOS.Settings.Init();
 					PCL.Utils.AppDomainWrapper.Instance = new PCL.Utils.iOS.AppDomainWrapperInstance();
 				}
-				DetectDisplay ();
+				DetectDisplay();
 			}
 		}
 
 
 		#region Display Property Detection
 
-		static void DetectDisplay() {
+		static void DetectDisplay()
+		{
 			// screen size in pixels
 			var nativeSize = UIScreen.MainScreen.NativeBounds;
-			Display.Width = (float)Math.Min (nativeSize.Width, nativeSize.Height);
-			Display.Height = (float)Math.Max (nativeSize.Height, nativeSize.Width);
+			Display.Width = (float)Math.Min(nativeSize.Width, nativeSize.Height);
+			Display.Height = (float)Math.Max(nativeSize.Height, nativeSize.Width);
 			//var name = UIDevice.CurrentDevice.Name;
 			//var model = UIDevice.CurrentDevice.Model;
 
@@ -133,7 +144,7 @@ namespace Forms9Patch.iOS
 			//else
 			//	Display.Density = 
 			*/
-			Console.WriteLine (/*"hardware="+hardwareVersion+*/"[Forms9Patch]\t DD native=" + nativeSize + " scale=" + Display.Scale + " density="+Display.Density);		
+			Console.WriteLine(/*"hardware="+hardwareVersion+*/"[Forms9Patch]\t DD native=" + nativeSize + " scale=" + Display.Scale + " density=" + Display.Density);
 		}
 
 		static string GetSystemProperty(string property)
@@ -156,11 +167,11 @@ namespace Forms9Patch.iOS
 
 		[DllImport(Constants.SystemLibrary)]
 		static extern int sysctl(
-			[MarshalAs(UnmanagedType.LPArray)] int[] name, 
-			uint namelen, 
-			out uint oldp, 
-			ref int oldlenp, 
-			IntPtr newp, 
+			[MarshalAs(UnmanagedType.LPArray)] int[] name,
+			uint namelen,
+			out uint oldp,
+			ref int oldlenp,
+			IntPtr newp,
 			uint newlen);
 
 		/*

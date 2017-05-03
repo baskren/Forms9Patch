@@ -35,8 +35,9 @@ namespace Forms9Patch
 		public IList ItemsSource
 		{
 			get { return (IList)GetValue(ItemsSourceProperty); }
-			set { 
-				SetValue(ItemsSourceProperty, value); 
+			set
+			{
+				SetValue(ItemsSourceProperty, value);
 			}
 		}
 		#endregion
@@ -67,8 +68,9 @@ namespace Forms9Patch
 		public object SelectedItem
 		{
 			get { return GetValue(SelectedItemProperty); }
-			set { 
-				SetValue(SelectedItemProperty, value); 
+			set
+			{
+				SetValue(SelectedItemProperty, value);
 			}
 		}
 
@@ -189,7 +191,7 @@ namespace Forms9Patch
 				return;
 			}
 			_tapping = true;
-			int index=0;
+			int index = 0;
 			foreach (var item in ItemsSource)
 			{
 				if (item == e.Item)
@@ -223,7 +225,7 @@ namespace Forms9Patch
 			}
 			else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
 			{
-				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + Device.OnPlatform(0, 8, 0);
+				_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.RuntimePlatform == Device.Android ? 8 : 0);
 				_lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
 			}
 			else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
@@ -257,9 +259,9 @@ namespace Forms9Patch
 				return;
 
 			int count = 0;
-			object firstItem=null;
-			object indexItem=null;
-			object lastItem=null;
+			object firstItem = null;
+			object indexItem = null;
+			object lastItem = null;
 			foreach (var item in ItemsSource)
 			{
 				if (count == 0)
@@ -311,7 +313,7 @@ namespace Forms9Patch
 		void OnScrolled(object sender, EventArgs e)
 		{
 			if (SelectBy == SelectBy.Position)
-				ScrollToIndex(Index,true);
+				ScrollToIndex(Index, true);
 			//System.Diagnostics.Debug.WriteLine("Index=["+Index+"] ["+ItemsSource[Index]+"]");
 			_scrolling = false;
 			// so why was the following line added?  Android, perhaps?
