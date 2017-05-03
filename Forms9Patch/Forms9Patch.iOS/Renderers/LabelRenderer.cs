@@ -171,40 +171,73 @@ namespace Forms9Patch.iOS
 				}
 
 				double gap = 0;
-				double height = Math.Max(Math.Max(heightConstraint, cgSize.Height), tmpHt);
+				double height = Math.Max(cgSize.Height, tmpHt);
+				if (!double.IsInfinity(heightConstraint))
+					height = Math.Max(height, heightConstraint);
 				double y = 0;
 
 				//if (Element.HtmlText == "System")
 				//	System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 
+				if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+					|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+					System.Diagnostics.Debug.WriteLine("cgSize.Height[" + cgSize.Height + "] tmpHt[" + tmpHt + "] heightConstraint[" + heightConstraint + "] height[" + height + "]");
 
-				if (Element.Fit == LabelFit.None && tmpHt < heightConstraint)
+				if (heightConstraint < tmpHt)
 				{
-					gap = (nfloat)(heightConstraint - tmpHt);
-					height = tmpHt;
+					gap = -(nfloat)(tmpHt - heightConstraint);
+					height = heightConstraint;
+					if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+						|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+						System.Diagnostics.Debug.WriteLine("D gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
 				}
-				else if (cgSize.Height < heightConstraint && !double.IsPositiveInfinity(heightConstraint))
+				else if (Element.Fit == LabelFit.None && tmpHt < height)
+				//if (tmpHt < height)
 				{
-					gap = (nfloat)(heightConstraint - cgSize.Height);
+					gap = (nfloat)(height - tmpHt);
+					height = tmpHt;
+					if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+						|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+						System.Diagnostics.Debug.WriteLine("A gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
+				}
+				else if (cgSize.Height < height)// && !double.IsPositiveInfinity(heightConstraint))
+				{
+					gap = (nfloat)(height - cgSize.Height);
 					height = cgSize.Height;
+					if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+						|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+						System.Diagnostics.Debug.WriteLine("B gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
 				}
 				else if (cgSize.Height < tmpHt)
 				{
 					gap = (nfloat)(tmpHt - cgSize.Height);
 					height = cgSize.Height / 2.0;
+					if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+						|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+						System.Diagnostics.Debug.WriteLine("C gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
 				}
+
+
+
+
 				if (gap > 0 && height > 0)
 				{
 
-					if (heightConstraint < double.MaxValue / 3.0)
+					//if (heightConstraint < double.MaxValue / 3.0)
 					{
 						switch (Element.VerticalTextAlignment)
 						{
 							case TextAlignment.Center:
 								y = gap / 2.0;
+								if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+									|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+									System.Diagnostics.Debug.WriteLine("CENTER");
 								break;
 							case TextAlignment.End:
 								y = gap;
+								if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
+									|| (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+									System.Diagnostics.Debug.WriteLine("END");
 								break;
 						}
 					}
