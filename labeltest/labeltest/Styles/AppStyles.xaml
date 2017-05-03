@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch" x:Class="labeltest.AppStyles">
+    <Color x:Key="DebugBackgroundColor">Fuschia</Color>
+    <Color x:Key="LightBackgroundColor">#E5E5EA</Color>
+    <Color x:Key="AppBackgroundColor">#000000</Color>
+    <!--<Color x:Key="PrimaryColor">#AC162C</Color>-->
+    <Color x:Key="PrimaryColor">#99242F</Color>
+    <Color x:Key="SecondaryColor">#414042</Color>
+    <Color x:Key="HeaderTextColor">#FFFFFF</Color>
+    <Color x:Key="ErrorColor">#E00000</Color>
+    <Color x:Key="WarningColor">#F09000</Color>
+    <Color x:Key="MenuBackgroundColor">#000000</Color>
+    <Color x:Key="MenuButtonBackground">#7F7F7F</Color>
+    <Color x:Key="MenuButtonTextColor">#FFFFFF</Color>
+    <Style x:Key="BackgroundPrimaryStyle" TargetType="VisualElement">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+    <Style x:Key="BackgroundSecondaryStyle" TargetType="VisualElement">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
+    </Style>
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource HeaderTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="MainStackLayoutStyle" TargetType="StackLayout">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="Spacing" Value="0" />
+        <Setter Property="Padding" Value="1" />
+    </Style>
+    <Style x:Key="MainButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="FontSize" Value="Large" />
+    </Style>
+    <Style x:Key="MainLabelStyle" TargetType="f9p:Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Lines" Value="1" />
+        <Setter Property="Fit" Value="Lines" />
+        <!-- Fixes an issue on iPhone 7 Plus having the text wrap and cutoff on this style (it should be on one line and this fixes that -->
+        <Setter Property="Margin" Value="1" />
+    </Style>
+    <Style x:Key="MainSubLabelStyle" TargetType="f9p:Label">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Lines" Value="1" />
+        <Setter Property="Fit" Value="Lines" />
+        <Setter Property="Margin" Value="1" />
+    </Style>
+</ResourceDictionary>

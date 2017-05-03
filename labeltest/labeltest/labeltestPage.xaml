@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch" xmlns:local="clr-namespace:labeltest;assembly=labeltest" x:Class="labeltest.labeltestPage" Title="Main" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="DebugBackgroundColor">Fuschia</Color>
+            <Color x:Key="LightBackgroundColor">#E5E5EA</Color>
+            <Color x:Key="AppBackgroundColor">#000000</Color>
+            <!--<Color x:Key="PrimaryColor">#AC162C</Color>-->
+            <Color x:Key="PrimaryColor">#99242F</Color>
+            <Color x:Key="SecondaryColor">#414042</Color>
+            <Color x:Key="HeaderTextColor">#FFFFFF</Color>
+            <Color x:Key="ErrorColor">#E00000</Color>
+            <Color x:Key="WarningColor">#F09000</Color>
+            <Color x:Key="MenuBackgroundColor">#000000</Color>
+            <Color x:Key="MenuButtonBackground">#7F7F7F</Color>
+            <Color x:Key="MenuButtonTextColor">#FFFFFF</Color>
+            <Style x:Key="BackgroundPrimaryStyle" TargetType="VisualElement">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+            </Style>
+            <Style x:Key="BackgroundSecondaryStyle" TargetType="VisualElement">
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
+            </Style>
+            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource HeaderTextColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="MainStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Spacing" Value="0" />
+                <Setter Property="Padding" Value="1" />
+            </Style>
+            <Style x:Key="MainButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+            <Style x:Key="MainLabelStyle" TargetType="Forms9Patch:Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Lines" Value="1" />
+                <Setter Property="Fit" Value="Lines" />
+                <!-- Fixes an issue on iPhone 7 Plus having the text wrap and cutoff on this style (it should be on one line and this fixes that -->
+            
+            </Style>
+            <Style x:Key="MainSubLabelStyle" TargetType="Forms9Patch:Label">
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Lines" Value="1" />
+                <Setter Property="Fit" Value="Lines" />
+             
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Grid.RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="headerSection" Grid.RowSpacing="0" Style="{DynamicResource BackgroundPrimaryStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform x:TypeArguments="GridLength">
+                            <On Platform="iOS">20</On>
+                            <On Platform="Android">0</On>
+                        </OnPlatform>
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition Height="35" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ContentView Padding="10,0,0,0" Grid.Row="1" Grid.Column="0" HorizontalOptions="Start">
+                <!--<Button x:Name="btnMenu" Text="Back" TextColor="White" Command="{Binding MenuCommand}" />-->
+            </ContentView>
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="AppName" Style="{StaticResource HeaderLabelStyle}" />
+            <!--<ContentView Padding="0,0,10,0" Grid.Row="1" Grid.Column="2" HorizontalOptions="End">
+                <Button x:Name="btnSettings" Text="Logout" FontAttributes="Bold" TextColor="White" />
+            </ContentView>-->
+        </Grid>
+         <ContentView Padding="0,0,10,0" Grid.Row="1" HorizontalOptions="End">
+                <Button x:Name="btnSettings" Text="Logout" FontAttributes="Bold" TextColor="Black" />
+            </ContentView>
+        <Grid Grid.RowSpacing="0" Grid.Row="2" BackgroundColor="Fuschia" Margin="5">
+            
+           
+            <!-- Start a Chat -->
+            <Forms9Patch:Grid Grid.Row="0" Grid.Column="0" Padding="25" BackgroundColor="{DynamicResource LightBackgroundColor}" OutlineRadius="5" HasShadow="true">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Forms9Patch:Label Grid.Row="1" Text="Start A Chat" Style="{StaticResource MainLabelStyle}" BackgroundColor="{StaticResource DebugBackgroundColor}" />
+                <Forms9Patch:Label Grid.Row="2" Text="with someone who knows how this should work" Style="{StaticResource MainSubLabelStyle}" />
+                <Image Grid.Row="0" Source="chat.png" />
+            </Forms9Patch:Grid>
+            <!-- Submit a Tip -->
+            <Forms9Patch:Grid Grid.Row="0" Grid.Column="1" Padding="25" BackgroundColor="{DynamicResource LightBackgroundColor}" OutlineRadius="5" HasShadow="true">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Forms9Patch:Label Grid.Row="1" Text="Submit A Tip" Style="{StaticResource MainLabelStyle}" BackgroundColor="{StaticResource DebugBackgroundColor}" />
+                <Forms9Patch:Label Grid.Row="2" Text="to someone cool that knows how this should work" Style="{StaticResource MainSubLabelStyle}" />
+                <Image Grid.Row="0" Source="tip.png" />
+            </Forms9Patch:Grid>
+          
+            <!-- Start a Call -->
+            <Forms9Patch:Grid Grid.Row="1" Grid.Column="0" Padding="25" BackgroundColor="{DynamicResource LightBackgroundColor}" OutlineRadius="5" HasShadow="true">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Forms9Patch:Label Grid.Row="1" Text="Start A Call" Style="{StaticResource MainLabelStyle}" BackgroundColor="{StaticResource DebugBackgroundColor}" Fit="Width" />
+                <Forms9Patch:Label Grid.Row="2" Text="with someone who knows how this should work" Style="{StaticResource MainSubLabelStyle}" />
+                <Image Grid.Row="0" Source="call.png" />
+            </Forms9Patch:Grid>
+            <!-- Access Existing Tips -->
+            <Forms9Patch:Grid Grid.Row="1" Grid.Column="1" Padding="25" BackgroundColor="{DynamicResource LightBackgroundColor}" OutlineRadius="5" HasShadow="true">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Forms9Patch:Label Grid.Row="1" Text="Existing Tips" Style="{StaticResource MainLabelStyle}" BackgroundColor="{StaticResource DebugBackgroundColor}" Fit="None" />
+                <Forms9Patch:Label Grid.Row="2" Text="from AppName" Style="{StaticResource MainSubLabelStyle}" />
+                <Image Grid.Row="0" Source="resources.png" />
+            </Forms9Patch:Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

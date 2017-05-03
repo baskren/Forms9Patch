@@ -79,6 +79,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Binding.iOS", "KenHow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Binding.Droid", "KenHoweTest\Droid\Forms9Binding.Droid.csproj", "{423789BC-6194-41D8-BF53-FB459D299FFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renzska LabelTest", "Renzska LabelTest", "{EF6B52CC-6580-4AAF-A9C4-88314FFCC8FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "labeltest", "labeltest\labeltest\labeltest.csproj", "{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "labeltest.Droid", "labeltest\Droid\labeltest.Droid.csproj", "{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "labeltest.iOS", "labeltest\iOS\labeltest.iOS.csproj", "{AA932551-EA93-45EA-B3BE-BD429B6F72E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -578,6 +586,60 @@ Global
 		{423789BC-6194-41D8-BF53-FB459D299FFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{423789BC-6194-41D8-BF53-FB459D299FFC}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
 		{423789BC-6194-41D8-BF53-FB459D299FFC}.Turkey|Any CPU.Build.0 = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|iPhone.Build.0 = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3}.Turkey|Any CPU.Build.0 = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|iPhone.Build.0 = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E}.Turkey|Any CPU.Build.0 = Debug|Any CPU
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|iPhone.Build.0 = Debug|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Debug|Mixed Platforms.Build.0 = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|Any CPU.Build.0 = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|iPhone.ActiveCfg = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|iPhone.Build.0 = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|Mixed Platforms.ActiveCfg = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Release|Mixed Platforms.Build.0 = Release|iPhone
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Turkey|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9}.Turkey|Any CPU.Build.0 = Debug|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = @Xamarin Forms is great for developing apps on Android and iOS but it is missing an important tool for developers - multi-screen image management. Andriod developers use NinePatch bitmaps and its Resources folder structure for this purpose. Likewise, iOS developers use ResizeableImageWithCapInsets and its @2x, @3x, @4x naming convention for this purpose.\n\nForms 9 Patch extends Forms Image and ImageSource to allow an iOS and/or an Android approach to multi-screen image managment. Knowing that there are pros/cons of each approach, Forms 9 Patch goes a step further and allows you to mix and match features of each approach.
@@ -617,5 +679,8 @@ Global
 		{FE0A98F5-F4E1-45A3-8E55-7DE04FE3DA40} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
 		{AF81B6ED-28A8-4CD0-BF25-333403F70938} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
 		{423789BC-6194-41D8-BF53-FB459D299FFC} = {532DD16A-98B0-40FD-9FCC-9AB687949EBF}
+		{8EAB8C7E-A8A2-4C84-9105-8E756F738EE3} = {EF6B52CC-6580-4AAF-A9C4-88314FFCC8FC}
+		{450B9D2A-DC42-42A8-B105-B540D6A8EA5E} = {EF6B52CC-6580-4AAF-A9C4-88314FFCC8FC}
+		{AA932551-EA93-45EA-B3BE-BD429B6F72E9} = {EF6B52CC-6580-4AAF-A9C4-88314FFCC8FC}
 	EndGlobalSection
 EndGlobal

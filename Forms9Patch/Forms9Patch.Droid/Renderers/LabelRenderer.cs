@@ -12,6 +12,7 @@ using FormsGestures.Droid;
 using Java.Interop;
 using System.Runtime.InteropServices;
 using Android.Drm;
+using Android.OS;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.Droid.LabelRenderer))]
 namespace Forms9Patch.Droid
@@ -144,7 +145,7 @@ namespace Forms9Patch.Droid
 			else if (_currentControlState.Fit == LabelFit.Width)
 				tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
 
-			Control.TextSize = BoundTextSize(tmpFontSize);;
+			Control.TextSize = BoundTextSize(tmpFontSize); ;
 			var layout = new StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
 			int lines = _currentControlState.Lines;
@@ -273,11 +274,24 @@ namespace Forms9Patch.Droid
 					LineBreakMode = Element.LineBreakMode,
 				};
 				_lastControlState = null;
-				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+
+				if (Control != null)
 				{
-					Control.SetTextColor(_labelTextColorDefault);
-					Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
-				});
+					if (Looper.MyLooper() == Looper.MainLooper)
+					{
+						Control.SetTextColor(_labelTextColorDefault);
+						Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+					}
+					else
+					{
+						var activity = Forms.Context as Android.App.Activity;
+						activity.RunOnUiThread(() =>
+						{
+							Control.SetTextColor(_labelTextColorDefault);
+							Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+						});
+					}
+				}
 				UpdateText();
 				UpdateColor();
 				UpdateFont();
@@ -297,7 +311,10 @@ namespace Forms9Patch.Droid
 			base.OnElementPropertyChanged(sender, e);
 
 			if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName || e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
-				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+				if (Looper.MyLooper() == Looper.MainLooper)
+					Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+				else
+					((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
 				{
 					Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
 				});
@@ -379,13 +396,21 @@ namespace Forms9Patch.Droid
 			if (_currentControlState.TextColor == Element.TextColor)
 				return;
 			_currentControlState.TextColor = Element.TextColor;
-			((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+			if (Looper.MyLooper() == Looper.MainLooper)
 			{
 				if (_currentControlState.TextColor == Xamarin.Forms.Color.Default)
 					Control.SetTextColor(_labelTextColorDefault);
 				else
 					Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
-			});
+			}
+			else
+				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+				{
+					if (_currentControlState.TextColor == Xamarin.Forms.Color.Default)
+						Control.SetTextColor(_labelTextColorDefault);
+					else
+						Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
+				});
 		}
 
 		void UpdateFont()
@@ -394,10 +419,13 @@ namespace Forms9Patch.Droid
 			if (_currentControlState.Typeface == Control.Typeface)
 				return;
 			//Android.App.LocalActivityManager.CurrentActivity.RunOnUiThread(()=>
-			((Android.App.Activity)Forms.Context).RunOnUiThread(()=>
-			{
+			if (Looper.MyLooper() == Looper.MainLooper)
 				Control.Typeface = _currentControlState.Typeface;
-			});
+			else
+				((Android.App.Activity)Forms.Context).RunOnUiThread(() =>
+				{
+					Control.Typeface = _currentControlState.Typeface;
+				});
 			Layout();
 		}
 
@@ -486,7 +514,7 @@ namespace Forms9Patch.Droid
 			}
 			set
 			{
-				if (value != _text || value==null)
+				if (value != _text || value == null)
 				{
 					_text = value;
 					_textFormatted = null;
@@ -562,13 +590,13 @@ namespace Forms9Patch.Droid
 		{
 			if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
 				return true;
-			if (ReferenceEquals(a,null) || ReferenceEquals(b, null))
+			if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
 				return false;
 			if (a.AvailWidth != b.AvailWidth)
 				return false;
 			if (a.AvailHeight != b.AvailHeight)
 				return false;
-			if (System.Math.Abs(a.TextSize-b.TextSize)>0.1)
+			if (System.Math.Abs(a.TextSize - b.TextSize) > 0.1)
 				return false;
 			if (a.Lines != b.Lines)
 				return false;
@@ -580,7 +608,7 @@ namespace Forms9Patch.Droid
 				return false;
 			if (a.Typeface != b.Typeface)
 				return false;
-			
+
 			return true;
 		}
 
