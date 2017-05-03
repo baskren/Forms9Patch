@@ -9,7 +9,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Forms9Patch Material Segmented Control.
 	/// </summary>
-	[ContentProperty ("Segments")]
+	[ContentProperty("Segments")]
 	public class MaterialSegmentedControl : Forms9Patch.StackLayout, IDisposable
 	{
 
@@ -19,8 +19,9 @@ namespace Forms9Patch
 		/// The container for the Segmented Control's buttons.
 		/// </summary>
 		/// <value>The buttons.</value>
-		public IList<Segment> Segments {
-			get {  return _segments; }
+		public IList<Segment> Segments
+		{
+			get { return _segments; }
 		}
 
 		/*
@@ -42,14 +43,15 @@ namespace Forms9Patch
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create ("Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(0));
+		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(0));
 		/// <summary>
 		/// Gets or sets the padding for SegmentedControl's segments.
 		/// </summary>
 		/// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
-		public new Thickness Padding {
-			get { return (Thickness)GetValue (PaddingProperty); }
-			set { SetValue (PaddingProperty, value); }
+		public new Thickness Padding
+		{
+			get { return (Thickness)GetValue(PaddingProperty); }
+			set { SetValue(PaddingProperty, value); }
 		}
 
 
@@ -57,54 +59,72 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.FontColor bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontColorProperty = BindableProperty.Create ("FontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+		public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
 		/// <summary>
 		/// Gets or sets the color of the font.
 		/// </summary>
 		/// <value>The color of the font.</value>
-		public Color FontColor {
-			get { return (Color)GetValue (FontColorProperty); }
-			set { SetValue (FontColorProperty, value); }
+		public Color FontColor
+		{
+			get { return (Color)GetValue(FontColorProperty); }
+			set { SetValue(FontColorProperty, value); }
+		}
+
+		/// <summary>
+		/// The selected font color property.
+		/// </summary>
+		public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create("SelectedFontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+		/// <summary>
+		/// Gets or sets the color of the selected font.
+		/// </summary>
+		/// <value>The color of the selected font.</value>
+		public Color SelectedFontColor
+		{
+			get { return (Color)GetValue(SelectedFontColorProperty); }
+			set { SetValue(SelectedFontColorProperty, value); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontAttributes bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create ( "FontAttributes", typeof(FontAttributes), typeof(MaterialSegmentedControl), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-		/// <summary>
-		/// Gets or sets the font attributes.
-		/// </summary>
-		/// <value>The font attributes.</value>
-		public FontAttributes FontAttributes {
-			get { return (FontAttributes)GetValue (FontAttributesProperty); }
-			set { SetValue (FontAttributesProperty, value); }
+		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(MaterialSegmentedControl), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
+																																																  /// <summary>
+																																																  /// Gets or sets the font attributes.
+																																																  /// </summary>
+																																																  /// <value>The font attributes.</value>
+		public FontAttributes FontAttributes
+		{
+			get { return (FontAttributes)GetValue(FontAttributesProperty); }
+			set { SetValue(FontAttributesProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontSize bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "FontSize", typeof(double), typeof(MaterialSegmentedControl), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-		/// <summary>
-		/// Gets or sets the size of the font.
-		/// </summary>
-		/// <value>The size of the font.</value>
-		public double FontSize {
-			get { return (double)GetValue (FontSizeProperty); }
-			set { SetValue (FontSizeProperty, value); }
+		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialSegmentedControl), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+																																							   /// <summary>
+																																							   /// Gets or sets the size of the font.
+																																							   /// </summary>
+																																							   /// <value>The size of the font.</value>
+		public double FontSize
+		{
+			get { return (double)GetValue(FontSizeProperty); }
+			set { SetValue(FontSizeProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontFamiily bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create ( "FontFamily", typeof(string), typeof(MaterialSegmentedControl), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-		/// <summary>
-		/// Gets or sets the font family.
-		/// </summary>
-		/// <value>The font family.</value>
-		public string FontFamily {
-			get { return (string)GetValue (FontFamilyProperty); }
-			set { SetValue (FontFamilyProperty, value); }
+		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(MaterialSegmentedControl), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
+																																								   /// <summary>
+																																								   /// Gets or sets the font family.
+																																								   /// </summary>
+																																								   /// <value>The font family.</value>
+		public string FontFamily
+		{
+			get { return (string)GetValue(FontFamilyProperty); }
+			set { SetValue(FontFamilyProperty, value); }
 		}
 
 		/*
@@ -168,38 +188,58 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.BackgroundColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof (Color), typeof (MaterialSegmentedControl), Color.Transparent);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Transparent);
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
 		/// <value>The color of the background.</value>
-		public new Color BackgroundColor {
-			get { return (Color)GetValue (BackgroundColorProperty);}
-			set { SetValue (BackgroundColorProperty, value); } }
+		public new Color BackgroundColor
+		{
+			get { return (Color)GetValue(BackgroundColorProperty); }
+			set { SetValue(BackgroundColorProperty, value); }
+		}
+
+
+		/// <summary>
+		/// Backing store for the Selected.BackgroundColor property.
+		/// </summary>
+		public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("SelectedBackgroundColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Transparent);
+		/// <summary>
+		/// Gets or sets the background color used when selected.
+		/// </summary>
+		/// <value>The selected background.</value>
+		public Color SelectedBackgroundColor
+		{
+			get { return (Color)GetValue(SelectedBackgroundColorProperty); }
+			set { SetValue(SelectedBackgroundColorProperty, value); }
+		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.DarkTheme property.
 		/// </summary>
-		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create ("DarkTheme", typeof(bool), typeof(MaterialSegmentedControl), false);
+		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("DarkTheme", typeof(bool), typeof(MaterialSegmentedControl), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="MaterialButton"/> if for a dark theme.
 		/// </summary>
 		/// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
-		public bool DarkTheme {
-			get { return (bool)GetValue (DarkThemeProperty);}
-			set { SetValue (DarkThemeProperty, value); }
+		public bool DarkTheme
+		{
+			get { return (bool)GetValue(DarkThemeProperty); }
+			set { SetValue(DarkThemeProperty, value); }
 		}
 
 		/// <summary>
 		/// Gets the selected segments(s).
 		/// </summary>
 		/// <value>The selected segment(s).</value>
-		public List<Segment> SelectedSegments {
-			get { 
-				var results = new List<Segment> ();
-				foreach (var segment in _segments) 
+		public List<Segment> SelectedSegments
+		{
+			get
+			{
+				var results = new List<Segment>();
+				foreach (var segment in _segments)
 					if (segment.IsSelected)
-						results.Add (segment);
+						results.Add(segment);
 				return results;
 			}
 		}
@@ -208,12 +248,14 @@ namespace Forms9Patch
 		/// Gets the selected index(es).
 		/// </summary>
 		/// <value>The selected index(es).</value>
-		public List<int> SelectedIndexes {
-			get { 
-				var results = new List<int> ();
+		public List<int> SelectedIndexes
+		{
+			get
+			{
+				var results = new List<int>();
 				for (int i = 0; i < _segments.Count; i++)
-					if (_segments [i].IsSelected)
-						results.Add (i);
+					if (_segments[i].IsSelected)
+						results.Add(i);
 				return results;
 			}
 		}
@@ -243,21 +285,24 @@ namespace Forms9Patch
 		/// Gets or sets the MaterialSegmentControl's Toggle behavior.
 		/// </summary>
 		/// <value>The Toggle behavior (None, Radio, Multiselect).</value>
-		public GroupToggleBehavior GroupToggleBehavior {
-			get { return (GroupToggleBehavior)GetValue (GroupToggleBehaviorProperty);}
-			set { SetValue (GroupToggleBehaviorProperty, value); } }
+		public GroupToggleBehavior GroupToggleBehavior
+		{
+			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
+			set { SetValue(GroupToggleBehaviorProperty, value); }
+		}
 
 		/// <summary>
 		/// The backing store for the MaterialSegmentControl's SeparatorWidth property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create ("SeparatorWidth", typeof(float), typeof(MaterialSegmentedControl), -1f);
+		public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(MaterialSegmentedControl), -1f);
 		/// <summary>
 		/// Gets or sets the width of the separator.  Uses OutlineWidth by default (-1).
 		/// </summary>
 		/// <value>The width of the separator.</value>
-		public float SeparatorWidth {
-			get { return (float)GetValue (SeparatorWidthProperty); }
-			set { SetValue (SeparatorWidthProperty, value); }
+		public float SeparatorWidth
+		{
+			get { return (float)GetValue(SeparatorWidthProperty); }
+			set { SetValue(SeparatorWidthProperty, value); }
 		}
 
 		/// <summary>
@@ -337,7 +382,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MaterialSegmentedControl"/> class.
 		/// </summary>
-		public MaterialSegmentedControl ()
+		public MaterialSegmentedControl()
 		{
 			IgnoreChildren = true;
 			//Spacing = -.5 * Display.Scale;
@@ -347,7 +392,7 @@ namespace Forms9Patch
 			OutlineRadius = 2;
 			OutlineWidth = 1;
 			Orientation = StackOrientation.Horizontal;
-			_segments = new ObservableCollection<Segment> ();
+			_segments = new ObservableCollection<Segment>();
 			_segments.CollectionChanged += OnCollectionChanged;
 			//base.BackgroundColor = Color.Red;
 		}
@@ -420,6 +465,7 @@ namespace Forms9Patch
 			var button = segment.MaterialButton;
 			button.DarkTheme = DarkTheme;
 			button.BackgroundColor = BackgroundColor;
+			button.SelectedBackgroundColor = SelectedBackgroundColor;
 			button.OutlineColor = OutlineColor;
 			button.OutlineRadius = OutlineRadius;
 			button.OutlineWidth = OutlineWidth;
@@ -434,6 +480,7 @@ namespace Forms9Patch
 			button.VerticalOptions = LayoutOptions.FillAndExpand;
 			if (segment.FontColor == Color.Default)
 				segment.MaterialButton.FontColor = FontColor;
+			button.SelectedFontColor = SelectedFontColor;
 			button.TintImage = TintImage;
 			button.HasTightSpacing = HasTightSpacing;
 			if (!segment.FontAttributesSet)
@@ -446,7 +493,8 @@ namespace Forms9Patch
 
 
 		#region Collection management
-		void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+		void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
 			int index;
 			switch (e.Action)
 			{
@@ -472,15 +520,18 @@ namespace Forms9Patch
 					break;
 			}
 			int count = Children.Count;
-			if (count > 1) {
-				((MaterialButton)Children [0]).SegmentType = SegmentType.Start;
+			if (count > 1)
+			{
+				((MaterialButton)Children[0]).SegmentType = SegmentType.Start;
 				for (int i = 1; i < count - 1; i++)
-					((MaterialButton)Children [i]).SegmentType = SegmentType.Mid;
-				((MaterialButton)Children[count-1]).SegmentType = SegmentType.End;
-			} else if (count==1) {
-				((MaterialButton)Children [0]).SegmentType = SegmentType.Not;
+					((MaterialButton)Children[i]).SegmentType = SegmentType.Mid;
+				((MaterialButton)Children[count - 1]).SegmentType = SegmentType.End;
 			}
-			UpdateChildrenPadding ();
+			else if (count == 1)
+			{
+				((MaterialButton)Children[0]).SegmentType = SegmentType.Not;
+			}
+			UpdateChildrenPadding();
 		}
 
 		void InsertSegment(int index, Segment s)
@@ -519,23 +570,29 @@ namespace Forms9Patch
 			button.LongPressed -= OnSegmentLongPressed;
 		}
 
-		void UpdateChildrenPadding() {
-			if (Orientation == StackOrientation.Horizontal) {
+		void UpdateChildrenPadding()
+		{
+			if (Orientation == StackOrientation.Horizontal)
+			{
 				foreach (MaterialButton child in Children)
 					child.Padding = Padding;
-			} else {
-				
-				foreach (MaterialButton child in Children) {
-					switch (child.SegmentType) {
-					case SegmentType.Start:
-						child.Padding = new Thickness (Padding.Left, Padding.Top + Device.OnPlatform (.1, -1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform (.1, -1, 0));
-						break;
-					case SegmentType.Mid:
-						child.Padding = new Thickness (Padding.Left, Padding.Top + Device.OnPlatform (.1, -.1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform (.1, -.1, 0));
-						break;
-					default:
-						child.Padding = Padding;
-						break;
+			}
+			else
+			{
+
+				foreach (MaterialButton child in Children)
+				{
+					switch (child.SegmentType)
+					{
+						case SegmentType.Start:
+							child.Padding = new Thickness(Padding.Left, Padding.Top + Device.OnPlatform(.1, -1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform(.1, -1, 0));
+							break;
+						case SegmentType.Mid:
+							child.Padding = new Thickness(Padding.Left, Padding.Top + Device.OnPlatform(.1, -.1, 0), Padding.Right, Padding.Bottom - Device.OnPlatform(.1, -.1, 0));
+							break;
+						default:
+							child.Padding = Padding;
+							break;
 					}
 				}
 
@@ -560,19 +617,20 @@ namespace Forms9Patch
 		/// Selects the segment at index.
 		/// </summary>
 		/// <param name="index">segment index.</param>
-		public void SelectIndex(int index) {
-			
+		public void SelectIndex(int index)
+		{
+
 			if (index >= 0 && index < _segments.Count)
-				_segments [index].IsSelected = true;
+				_segments[index].IsSelected = true;
 		}
 
 		/// <param name="propertyName">The name of the property that changed.</param>
 		/// <summary>
 		/// Call this method from a child class to notify that a change happened on a property.
 		/// </summary>
-		protected override void OnPropertyChanged (string propertyName = null)
+		protected override void OnPropertyChanged(string propertyName = null)
 		{
-			base.OnPropertyChanged (propertyName);
+			base.OnPropertyChanged(propertyName);
 			if (propertyName == GroupToggleBehaviorProperty.PropertyName)
 				foreach (MaterialButton button in Children)
 				{
@@ -587,6 +645,12 @@ namespace Forms9Patch
 					foreach (Segment segment in Segments)
 						if (segment.FontColor == Color.Default)
 							segment.MaterialButton.FontColor = FontColor;
+			}
+			else if (propertyName == SelectedFontColorProperty.PropertyName)
+			{
+				if (Segments != null)
+					foreach (Segment segment in Segments)
+						segment.MaterialButton.SelectedFontColor = SelectedFontColor;
 			}
 			else if (propertyName == TintImageProperty.PropertyName)
 			{
@@ -613,6 +677,9 @@ namespace Forms9Patch
 			else if (propertyName == BackgroundColorProperty.PropertyName)
 				foreach (MaterialButton button in Children)
 					button.BackgroundColor = BackgroundColor;
+			else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
+				foreach (MaterialButton button in Children)
+					button.SelectedBackgroundColor = SelectedBackgroundColor;
 			else if (propertyName == OutlineColorProperty.PropertyName)
 				foreach (MaterialButton button in Children)
 					button.OutlineColor = OutlineColor;
@@ -651,9 +718,11 @@ namespace Forms9Patch
 
 		//Segment _lastSelectedSegment;
 
-		internal void OnButtonPropertyChanged  (object sender, System.ComponentModel.PropertyChangedEventArgs e) {
+		internal void OnButtonPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
 			var button = sender as MaterialButton;
-			if (e.PropertyName == MaterialButton.IsSelectedProperty.PropertyName) {
+			if (e.PropertyName == MaterialButton.IsSelectedProperty.PropertyName)
+			{
 				if (GroupToggleBehavior == GroupToggleBehavior.Radio)
 				{
 					if (button.IsSelected)
@@ -695,12 +764,12 @@ namespace Forms9Patch
 		/// </summary>
 		/// <remarks>Implementors wishing to change the default behavior of a Layout should override this method. It is suggested to
 		/// still call the base method and modify its calculated results.</remarks>
-		protected override void LayoutChildren (double x, double y, double width, double height)
+		protected override void LayoutChildren(double x, double y, double width, double height)
 		{
-			
-			var p = new Thickness (0);
+
+			var p = new Thickness(0);
 			if (HasShadow && BackgroundColor.A > 0)
-				p = RoundedBoxBase.ShadowPadding (this);
+				p = RoundedBoxBase.ShadowPadding(this);
 			//Debug.WriteLine ("p=" + p.Description());
 
 			var hz = Orientation == StackOrientation.Horizontal;
@@ -711,36 +780,44 @@ namespace Forms9Patch
 
 			int count = Children.Count;
 
-			if (count > 0) {
+			if (count > 0)
+			{
 
-				x = Math.Round (x);
-				y = Math.Round (y);
+				x = Math.Round(x);
+				y = Math.Round(y);
 
 				double xOffset = hz ? newWidth / count : 0;
 				double yOffset = vt ? newHeight / count : 0;
 				double sWidth = hz ? xOffset : width;
 				double sHeight = vt ? yOffset : height;
 
-				for (int i = 0; i < count; i++) {
-					var view = Children [i];
-					if (view.IsVisible) {
+				for (int i = 0; i < count; i++)
+				{
+					var view = Children[i];
+					if (view.IsVisible)
+					{
 						double thisW, thisH;
-						if (i == 0) {
+						if (i == 0)
+						{
 							thisW = sWidth + (hz ? p.Left : 0);
 							thisH = sHeight + (vt ? p.Top : 0);
-						} else if (i == count - 1) {
+						}
+						else if (i == count - 1)
+						{
 							thisW = sWidth + (hz ? p.Right : 0);
 							thisH = sHeight + (vt ? p.Bottom : 0);
-						} else {
+						}
+						else
+						{
 							thisW = sWidth;
 							thisH = sHeight;
 						}
-						thisW = Math.Round (thisW);
-						thisH = Math.Round (thisH);
+						thisW = Math.Round(thisW);
+						thisH = Math.Round(thisH);
 						//Debug.WriteLine ("ShowPadding[" + i + "]: [" + x + ", " + y + ", " + thisW + ", " + thisH + "]");
-						LayoutChildIntoBoundingRegion (view, new Rectangle(x, y, thisW, thisH));
-						x = Math.Round( x + (hz ? thisW : 0));
-						y = Math.Round( y + (vt ? thisH : 0));
+						LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
+						x = Math.Round(x + (hz ? thisW : 0));
+						y = Math.Round(y + (vt ? thisH : 0));
 					}
 				}
 			}
@@ -749,18 +826,21 @@ namespace Forms9Patch
 
 
 		#region Event management
-			
+
 		/// <summary>
 		/// Occurs when one of the segments is tapped.
 		/// </summary>
 		public event SegmentedControlEventHandler SegmentTapped;
-		void OnSegmentTapped  (object sender, EventArgs e) {
-			for (int i = 0; i < _segments.Count; i++) {
-				var button = _segments [i].MaterialButton;
-				if (button.Equals (sender)) {
+		void OnSegmentTapped(object sender, EventArgs e)
+		{
+			for (int i = 0; i < _segments.Count; i++)
+			{
+				var button = _segments[i].MaterialButton;
+				if (button.Equals(sender))
+				{
 					SegmentedControlEventHandler eventHandler = SegmentTapped;
 					if (eventHandler != null)
-						eventHandler (this, new SegmentedControlEventArgs (i, _segments[i]));
+						eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
 					//Debug.WriteLine ("Tapped ["+i+"]");
 					return;
 				}
@@ -771,13 +851,16 @@ namespace Forms9Patch
 		/// Occurs when one of the segments is selected.
 		/// </summary>
 		public event SegmentedControlEventHandler SegmentSelected;
-		void OnSegmentSelected(object sender, EventArgs e) {
-			for (int i = 0; i < _segments.Count; i++) {
-				var button = _segments [i].MaterialButton;
-				if (button.Equals (sender) && button.IsSelected) {
+		void OnSegmentSelected(object sender, EventArgs e)
+		{
+			for (int i = 0; i < _segments.Count; i++)
+			{
+				var button = _segments[i].MaterialButton;
+				if (button.Equals(sender) && button.IsSelected)
+				{
 					SegmentedControlEventHandler eventHandler = SegmentSelected;
 					if (eventHandler != null)
-						eventHandler (this, new SegmentedControlEventArgs (i, _segments[i]));
+						eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
 					//Debug.WriteLine ("Selected ["+i+"]");
 					return;
 				}
@@ -788,13 +871,16 @@ namespace Forms9Patch
 		/// Occurs when segment long pressing.
 		/// </summary>
 		public event SegmentedControlEventHandler SegmentLongPressing;
-		void OnSegmentLongPressing(object sender, EventArgs e) {
-			for (int i = 0; i < _segments.Count; i++) {
-				var button = _segments [i].MaterialButton;
-				if (button.Equals (sender)) {
+		void OnSegmentLongPressing(object sender, EventArgs e)
+		{
+			for (int i = 0; i < _segments.Count; i++)
+			{
+				var button = _segments[i].MaterialButton;
+				if (button.Equals(sender))
+				{
 					SegmentedControlEventHandler eventHandler = SegmentLongPressing;
 					if (eventHandler != null)
-						eventHandler (this, new SegmentedControlEventArgs (i, _segments[i]));
+						eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
 					//Debug.WriteLine ("Tapped ["+i+"]");
 					return;
 				}
@@ -805,13 +891,16 @@ namespace Forms9Patch
 		/// Occurs when segment long pressed.
 		/// </summary>
 		public event SegmentedControlEventHandler SegmentLongPressed;
-		void OnSegmentLongPressed(object sender, EventArgs e) {
-			for (int i = 0; i < _segments.Count; i++) {
-				var button = _segments [i].MaterialButton;
-				if (button.Equals (sender)) {
+		void OnSegmentLongPressed(object sender, EventArgs e)
+		{
+			for (int i = 0; i < _segments.Count; i++)
+			{
+				var button = _segments[i].MaterialButton;
+				if (button.Equals(sender))
+				{
 					SegmentedControlEventHandler eventHandler = SegmentLongPressed;
 					if (eventHandler != null)
-						eventHandler (this, new SegmentedControlEventArgs (i, _segments[i]));
+						eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
 					//Debug.WriteLine ("Tapped ["+i+"]");
 					return;
 				}

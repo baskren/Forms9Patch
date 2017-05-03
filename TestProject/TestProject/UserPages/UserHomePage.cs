@@ -38,11 +38,12 @@ namespace Forms9PatchDemo
 		public UserPagesHomePage()
 		{
 			// Define command for the items in the TableView.
-			var navigateCommand = 
-				new Command<Type>(async (Type pageType) => {
-						var page = (Page)Activator.CreateInstance(pageType);
-						await this.Navigation.PushAsync(page);
-					});
+			var navigateCommand =
+				new Command<Type>(async (Type pageType) =>
+				{
+					var page = (Page)Activator.CreateInstance(pageType);
+					await this.Navigation.PushAsync(page);
+				});
 
 
 
@@ -73,6 +74,12 @@ namespace Forms9PatchDemo
 					},
 
 					new TableSection("Code") {
+
+						new TextCell {
+							Text = "Using MaterialButton SelectedBackground",
+							Command = navigateCommand,
+							CommandParameter = typeof(SegmentSelectedBackgroundPage)
+						},
 
 						new TextCell {
 							Text = "<br>",

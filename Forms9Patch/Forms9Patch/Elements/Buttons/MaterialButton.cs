@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Windows.Input;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
@@ -8,16 +9,17 @@ namespace Forms9Patch
 	/// Forms9Patch MaterialButton.
 	/// </summary>
 	public class MaterialButton : Frame, IDisposable
-{
-		
+	{
+
 		#region Properties
 		/// <summary>
 		/// UNSUPPORTED INHERITED PROPERTY.
 		/// </summary>
 		/// <value>The content.</value>
-		public new View Content {
-			get { throw new NotImplementedException ("[Forms9Patch.MaterialButton] Content property is not supported"); }
-			set { throw new NotImplementedException ("[Forms9Patch.MaterialButton] Content property is not supported"); }
+		public new View Content
+		{
+			get { throw new NotImplementedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
+			set { throw new NotImplementedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
 		}
 
 
@@ -25,27 +27,29 @@ namespace Forms9Patch
 		/// Backing store for the MaterialButton.HasShadow bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create ("HasShadow", typeof(bool), typeof(MaterialButton), false);
+		public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a flag indicating if the MaterialButton has a shadow displayed. This is a bindable property.
 		/// </summary>
 		/// <value><c>true</c> if this instance has shadow; otherwise, <c>false</c>.</value>
-		public new bool HasShadow {
-			get { return (bool)GetValue (HasShadowProperty); }
-			set { SetValue (HasShadowProperty, value); }
+		public new bool HasShadow
+		{
+			get { return (bool)GetValue(HasShadowProperty); }
+			set { SetValue(HasShadowProperty, value); }
 		}
-			
+
 		/// <summary>
 		/// Backing store for the MaterialButton.Image bindable property.
 		/// </summary>
-		public static BindableProperty ImageSourceProperty = BindableProperty.Create ("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
+		public static BindableProperty ImageSourceProperty = BindableProperty.Create("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the companion image - alternatively, use ImageText.
 		/// </summary>
 		/// <value>The image.</value>
-		public Xamarin.Forms.ImageSource ImageSource {
-			get { return (Xamarin.Forms.ImageSource)GetValue (ImageSourceProperty);}
-			set { SetValue (ImageSourceProperty, value); }
+		public Xamarin.Forms.ImageSource ImageSource
+		{
+			get { return (Xamarin.Forms.ImageSource)GetValue(ImageSourceProperty); }
+			set { SetValue(ImageSourceProperty, value); }
 		}
 
 		/// <summary>
@@ -67,144 +71,182 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.Text bindable property.
 		/// </summary>
-		public static readonly BindableProperty TextProperty =  BindableProperty.Create ("Text", typeof(string), typeof(MaterialButton), null);
+		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the text.
 		/// </summary>
 		/// <value>The text.</value>
-		public string Text {
-			get { return (string) GetValue(TextProperty); }
+		public string Text
+		{
+			get { return (string)GetValue(TextProperty); }
 			set { SetValue(TextProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the formatted text property.
 		/// </summary>
-		public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create ("HtmlText", typeof(string), typeof(MaterialButton), null);
+		public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(MaterialButton), null);
 		/// <summary>
 		/// Gets or sets the formatted text.
 		/// </summary>
 		/// <value>The formatted text.</value>
-		public string HtmlText {
-			get { return (string)GetValue (HtmlTextProperty); }
-			set { SetValue (HtmlTextProperty, value); }
+		public string HtmlText
+		{
+			get { return (string)GetValue(HtmlTextProperty); }
+			set { SetValue(HtmlTextProperty, value); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontColor bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontColorProperty = BindableProperty.Create ("FontColor", typeof(Color), typeof(MaterialButton), Color.Default);
+		public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialButton), Color.Default);
 		/// <summary>
 		/// Gets or sets the color of the font.
 		/// </summary>
 		/// <value>The color of the font.</value>
-		public Color FontColor {
-			get { return (Color)GetValue (FontColorProperty); }
-			set { SetValue (FontColorProperty, value); }
+		public Color FontColor
+		{
+			get { return (Color)GetValue(FontColorProperty); }
+			set { SetValue(FontColorProperty, value); }
 		}
 
+		/// <summary>
+		/// Backing store for the MaterialButton.SelectedFontColor bindable property.
+		/// </summary>
+		public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create("SelectedFontColor", typeof(Color), typeof(MaterialButton), Color.Default);
+		/// <summary>
+		/// Gets or sets the color of the font when selected.
+		/// </summary>
+		/// <value>The color of the font.</value>
+		public Color SelectedFontColor
+		{
+			get { return (Color)GetValue(SelectedFontColorProperty); }
+			set { SetValue(SelectedFontColorProperty, value); }
+		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontAttributes bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create ( "FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-		/// <summary>
-		/// Gets or sets the font attributes.
-		/// </summary>
-		/// <value>The font attributes.</value>
-		public FontAttributes FontAttributes {
-			get { return (FontAttributes)GetValue (FontAttributesProperty); }
-			set { SetValue (FontAttributesProperty, value); }
+		public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
+																																														/// <summary>
+																																														/// Gets or sets the font attributes.
+																																														/// </summary>
+																																														/// <value>The font attributes.</value>
+		public FontAttributes FontAttributes
+		{
+			get { return (FontAttributes)GetValue(FontAttributesProperty); }
+			set { SetValue(FontAttributesProperty, value); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontSize bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create ( "FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-		/// <summary>
-		/// Gets or sets the size of the font.
-		/// </summary>
-		/// <value>The size of the font.</value>
-		public double FontSize {
-			get { return (double)GetValue (FontSizeProperty); }
-			set { SetValue (FontSizeProperty, value); }
+		public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+																																					 /// <summary>
+																																					 /// Gets or sets the size of the font.
+																																					 /// </summary>
+																																					 /// <value>The size of the font.</value>
+		public double FontSize
+		{
+			get { return (double)GetValue(FontSizeProperty); }
+			set { SetValue(FontSizeProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.FontFamiily bindable property.
 		/// </summary>
-		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create ( "FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-		/// <summary>
-		/// Gets or sets the font family.
-		/// </summary>
-		/// <value>The font family.</value>
-		public string FontFamily {
-			get { return (string)GetValue (FontFamilyProperty); }
-			set { SetValue (FontFamilyProperty, value); }
+		public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
+																																						 /// <summary>
+																																						 /// Gets or sets the font family.
+																																						 /// </summary>
+																																						 /// <value>The font family.</value>
+		public string FontFamily
+		{
+			get { return (string)GetValue(FontFamilyProperty); }
+			set { SetValue(FontFamilyProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the OutlineWidth bindable property.
 		/// </summary>
-		public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof (float), typeof (MaterialButton), -1.0f);
+		public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(MaterialButton), -1.0f);
 		/// <summary>
 		/// Gets or sets the width of the outline.
 		/// </summary>
 		/// <value>The width of the outline.</value>
-		public new float OutlineWidth {
-			get { return (float) GetValue (OutlineWidthProperty); }
-			set { SetValue (OutlineWidthProperty, value); }
+		public new float OutlineWidth
+		{
+			get { return (float)GetValue(OutlineWidthProperty); }
+			set { SetValue(OutlineWidthProperty, value); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the MaterialButton.OutlineColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof (Color), typeof (MaterialButton), Color.Default);
+		public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(MaterialButton), Color.Default);
 		/// <summary>
 		/// Gets or sets the color of the border.
 		/// </summary>
 		/// <value>The color of the border.</value>
-		public new Color OutlineColor {
-			get { return (Color)GetValue (OutlineColorProperty);}
-			set { SetValue (OutlineColorProperty, value); }
+		public new Color OutlineColor
+		{
+			get { return (Color)GetValue(OutlineColorProperty); }
+			set { SetValue(OutlineColorProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.BackgroundColor bindable property.
 		/// </summary>
-		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof (Color), typeof (MaterialButton), Color.Transparent);
+		public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(MaterialButton), Color.Transparent);
 		/// <summary>
 		/// Gets or sets the color of the background.
 		/// </summary>
 		/// <value>The color of the background.</value>
-		public new Color BackgroundColor {
-			get { return (Color)GetValue (BackgroundColorProperty);}
-			set { SetValue (BackgroundColorProperty, value); } }
+		public new Color BackgroundColor
+		{
+			get { return (Color)GetValue(BackgroundColorProperty); }
+			set { SetValue(BackgroundColorProperty, value); }
+		}
+
+		/// <summary>
+		/// Backing store for the MaterialButton.SelectedBackgroundColor bindable property.
+		/// </summary>
+		public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("SelectedBackgroundColor", typeof(Color), typeof(MaterialButton), Color.Transparent);
+		/// <summary>
+		/// Gets or sets the background color used when selected.
+		/// </summary>
+		/// <value>The selected background.</value>
+		public Color SelectedBackgroundColor
+		{
+			get { return (Color)GetValue(SelectedBackgroundColorProperty); }
+			set { SetValue(SelectedBackgroundColorProperty, value); }
+		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.DarkTheme property.
 		/// </summary>
-		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create ("DarkTheme", typeof(bool), typeof(MaterialButton), false);
+		public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("DarkTheme", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="MaterialButton"/> if for a dark theme.
 		/// </summary>
 		/// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
-		public bool DarkTheme {
-			get { return (bool)GetValue (DarkThemeProperty);}
-			set { SetValue (DarkThemeProperty, value); }
+		public bool DarkTheme
+		{
+			get { return (bool)GetValue(DarkThemeProperty); }
+			set { SetValue(DarkThemeProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.Command bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof (ICommand), typeof (MaterialButton), null, BindingMode.OneWay, null, 
+		public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(MaterialButton), null, BindingMode.OneWay, null,
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
-				((MaterialButton)bo).OnCommandChanged ()),
+				((MaterialButton)bo).OnCommandChanged()),
 			 null, null, null);
-		
+
 		/// <summary>
 		/// Gets or sets the command to invoke when the button is activated. This is a bindable property.
 		/// </summary>
@@ -218,17 +260,17 @@ namespace Forms9Patch
 		/// </remarks>
 		public ICommand Command
 		{
-			get { return (ICommand)GetValue (CommandProperty); }
-			set { SetValue (CommandProperty, value); }
+			get { return (ICommand)GetValue(CommandProperty); }
+			set { SetValue(CommandProperty, value); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the MaterialButton.CommandParameter bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof (object), typeof (MaterialButton), null, BindingMode.OneWay, null, 
+		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(MaterialButton), null, BindingMode.OneWay, null,
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
-				((MaterialButton)bo).CommandCanExecuteChanged (bo, EventArgs.Empty)),
+				((MaterialButton)bo).CommandCanExecuteChanged(bo, EventArgs.Empty)),
 			 null, null, null);
 		/// <summary>
 		/// Gets or sets the parameter to pass to the Command property. This is a bindable property.
@@ -241,21 +283,22 @@ namespace Forms9Patch
 		/// <remarks/>
 		public object CommandParameter
 		{
-			get { return GetValue (CommandParameterProperty); }
-			set { SetValue (CommandParameterProperty, value); }
+			get { return GetValue(CommandParameterProperty); }
+			set { SetValue(CommandParameterProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.IsSelected bindable property.
 		/// </summary>
-		public static BindableProperty IsSelectedProperty = BindableProperty.Create ("IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
+		public static BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> is selected.
 		/// </summary>
 		/// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
-		public bool IsSelected {
-			get { return (bool)GetValue (IsSelectedProperty); }
-			set { SetValue (IsSelectedProperty, value); }
+		public bool IsSelected
+		{
+			get { return (bool)GetValue(IsSelectedProperty); }
+			set { SetValue(IsSelectedProperty, value); }
 		}
 
 		/// <summary>
@@ -277,29 +320,32 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the MaterialButton.ToggleBehavior bindable property.
 		/// </summary>
-		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("ToggleBehavior", typeof(bool), typeof(MaterialButton), false);
+		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create("ToggleBehavior", typeof(bool), typeof(MaterialButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
 		/// </summary>
 		/// <value><c>true</c> if togglable; otherwise, <c>false</c>.</value>
-		public bool ToggleBehavior {
-			get { return (bool)GetValue (ToggleBehaviorProperty); }
-			set { 
-				SetValue (ToggleBehaviorProperty, value); 
+		public bool ToggleBehavior
+		{
+			get { return (bool)GetValue(ToggleBehaviorProperty); }
+			set
+			{
+				SetValue(ToggleBehaviorProperty, value);
 			}
 		}
 
 		/// <summary>
 		/// Backing store for the MaterialButton.Alignment bindable property
 		/// </summary>
-		public static BindableProperty AlignmentProperty = BindableProperty.Create ("Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+		public static BindableProperty AlignmentProperty = BindableProperty.Create("Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
 		/// <summary>
 		/// Gets or sets the alignment of the image and text.
 		/// </summary>
 		/// <value>The alignment (left, center, right).</value>
-		public TextAlignment Alignment {
-			get { return (TextAlignment)GetValue (AlignmentProperty); }
-			set { SetValue (AlignmentProperty, value); }
+		public TextAlignment Alignment
+		{
+			get { return (TextAlignment)GetValue(AlignmentProperty); }
+			set { SetValue(AlignmentProperty, value); }
 		}
 
 		/// <summary>
@@ -310,9 +356,10 @@ namespace Forms9Patch
 		/// Gets or sets the orientation of the iamge and label.
 		/// </summary>
 		/// <value>The image and label orientation.</value>
-		public StackOrientation Orientation {
-			get { return (StackOrientation)GetValue (OrientationProperty); }
-			set { SetValue (OrientationProperty, value); }
+		public StackOrientation Orientation
+		{
+			get { return (StackOrientation)GetValue(OrientationProperty); }
+			set { SetValue(OrientationProperty, value); }
 		}
 
 		/// <summary>
@@ -446,28 +493,33 @@ namespace Forms9Patch
 
 		#region SegmentedButton Properties
 		internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(SegmentType), typeof(MaterialButton), SegmentType.Not);
-		internal SegmentType SegmentType {
-			get { return (SegmentType)GetValue (SegmentTypeProperty); }
-			set { SetValue (SegmentTypeProperty, value); }
+		internal SegmentType SegmentType
+		{
+			get { return (SegmentType)GetValue(SegmentTypeProperty); }
+			set { SetValue(SegmentTypeProperty, value); }
 		}
 
 		internal static BindableProperty SegmentOrientationProperty = BindableProperty.Create("SegmentOrientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
-		internal StackOrientation SegmentOrientation {
-			get { return (StackOrientation)GetValue (SegmentOrientationProperty); }
-			set { SetValue (SegmentOrientationProperty, value); }
+		internal StackOrientation SegmentOrientation
+		{
+			get { return (StackOrientation)GetValue(SegmentOrientationProperty); }
+			set { SetValue(SegmentOrientationProperty, value); }
 		}
 
 		internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(MaterialButton), -1f);
-		internal float SeparatorWidth {
-			get { return (float)GetValue (SeparatorWidthProperty); }
-			set { SetValue (SeparatorWidthProperty, value); }
+		internal float SeparatorWidth
+		{
+			get { return (float)GetValue(SeparatorWidthProperty); }
+			set { SetValue(SeparatorWidthProperty, value); }
 		}
 
 		internal static BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(MaterialButton), GroupToggleBehavior.None);
-		internal GroupToggleBehavior GroupToggleBehavior {
-			get { return (GroupToggleBehavior)GetValue (GroupToggleBehaviorProperty); }
-			set { 
-				SetValue (GroupToggleBehaviorProperty, value); 
+		internal GroupToggleBehavior GroupToggleBehavior
+		{
+			get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
+			set
+			{
+				SetValue(GroupToggleBehaviorProperty, value);
 			}
 		}
 		#endregion
@@ -487,11 +539,12 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MaterialButton"/> class.
 		/// </summary>
-		public MaterialButton ()
+		public MaterialButton()
 		{
-			Padding = new Thickness (8, 6, 8, 6);
+			Padding = new Thickness(8, 6, 8, 6);
 			OutlineRadius = 2;
-			_label = new Label {
+			_label = new Label
+			{
 				VerticalTextAlignment = TextAlignment.Center,
 				HorizontalTextAlignment = TextAlignment.Center,
 				//HeightRequest = 22,
@@ -505,7 +558,8 @@ namespace Forms9Patch
 				FontFamily = FontFamily
 			};
 
-			_stackLayout = new Xamarin.Forms.StackLayout {
+			_stackLayout = new Xamarin.Forms.StackLayout
+			{
 				Orientation = StackOrientation.Horizontal,
 				Spacing = 4,
 				VerticalOptions = LayoutOptions.Fill,
@@ -521,9 +575,9 @@ namespace Forms9Patch
 			_gestureListener.LongPressed += OnLongPressed;
 			_gestureListener.LongPressing += OnLongPressing;
 
-			UpdateState ();
+			UpdateState();
 
-			_label.PropertyChanged +=  OnLabelPropertyChanged;
+			_label.PropertyChanged += OnLabelPropertyChanged;
 
 		}
 		#endregion
@@ -604,7 +658,8 @@ namespace Forms9Patch
 					|| GroupToggleBehavior == GroupToggleBehavior.Multiselect
 					|| GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
 					IsSelected = !IsSelected;
-				else {
+				else
+				{
 					Opacity = 0.5;
 					Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
 					{
@@ -637,62 +692,95 @@ namespace Forms9Patch
 		/// <summary>
 		/// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
 		/// </summary>
-		public void UpdateState() {
+		public void UpdateState()
+		{
 			_noUpdate = true;
-			base.OutlineWidth = OutlineWidth < 0  ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
-			if (IsEnabled) {
+			base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
+			if (IsEnabled)
+			{
 				base.HasShadow = BackgroundColor.A > 0 && HasShadow;
-				ShadowInverted = IsSelected && SegmentType==SegmentType.Not;
-				_label.TextColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
-				if (IsSelected) {
-					base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend (Color.FromHex ("#000"), 0.25) : Color.FromHex (DarkTheme?"#FFF":"#000").WithAlpha (0.2);
-					base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend (Color.FromHex ("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
-				} else {
+				ShadowInverted = IsSelected && SegmentType == SegmentType.Not;
+
+				if (IsSelected && SelectedFontColor.A > 0)
+					_label.TextColor = SelectedFontColor;
+				else
+					_label.TextColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
+
+				if (IsSelected)
+				{
+					if (SelectedBackgroundColor.A > 0)
+						base.BackgroundColor = SelectedBackgroundColor;
+					else
+						base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
+					base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
+				}
+				else
+				{
 					base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
 					base.OutlineColor = OutlineColor;
 				}
-				if (OutlineColor == Color.Default) 
+				if (OutlineColor == Color.Default)
 					//base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
 					base.OutlineColor = _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
-			} else {
+			}
+			else
+			{
 				Color opaque, transp;
-				if (IsSelected) {
-					if (DarkTheme) {
-						opaque = Color.FromHex ("#FFF").WithAlpha (0.2);
-						transp = Color.FromHex ("#FFF").WithAlpha (0.1);
-						_label.TextColor = Color.FromHex ("#FFF").WithAlpha (0.30);
-					} else {
-						opaque = Color.FromHex ("#000").WithAlpha (0.2);
-						transp = Color.FromHex ("#000").WithAlpha (0.1);
-						_label.TextColor = Color.FromHex ("#000").WithAlpha (0.26);
+				if (IsSelected)
+				{
+					if (DarkTheme)
+					{
+						opaque = Color.FromHex("#FFF").WithAlpha(0.2);
+						transp = Color.FromHex("#FFF").WithAlpha(0.1);
+						_label.TextColor = Color.FromHex("#FFF").WithAlpha(0.30);
 					}
-				} else {
-					transp = Color.Transparent;
-					if (DarkTheme) {
-						opaque = Color.FromHex ("#FFF").WithAlpha (0.1);
-						_label.TextColor = Color.FromHex ("#FFF").WithAlpha (0.30);
-					} else {
-						opaque = Color.FromHex ("#000").WithAlpha (0.1);
-						_label.TextColor = Color.FromHex ("#000").WithAlpha (0.26);
+					else
+					{
+						opaque = Color.FromHex("#000").WithAlpha(0.2);
+						transp = Color.FromHex("#000").WithAlpha(0.1);
+						_label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
 					}
 				}
-				if (SegmentType == SegmentType.Not) {
+				else
+				{
+					transp = Color.Transparent;
+					if (DarkTheme)
+					{
+						opaque = Color.FromHex("#FFF").WithAlpha(0.1);
+						_label.TextColor = Color.FromHex("#FFF").WithAlpha(0.30);
+					}
+					else
+					{
+						opaque = Color.FromHex("#000").WithAlpha(0.1);
+						_label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
+					}
+				}
+				if (SegmentType == SegmentType.Not)
+				{
 					base.HasShadow = false;
 					base.BackgroundColor = BackgroundColor.A > 0 ? opaque : transp;
 					//base.OutlineColor = OutlineColor.A > 0 ? opaque : base.BackgroundColor;
-					base.OutlineColor = OutlineColor==Color.Default || OutlineColor.A > 0 ? opaque : BackgroundColor;
-				} else {
-					base.OutlineWidth = OutlineWidth < 0  ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor==Color.Transparent ? 0 : OutlineWidth;
+					base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? opaque : BackgroundColor;
+				}
+				else
+				{
+					base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
 					base.HasShadow = BackgroundColor.A > 0 && HasShadow;
-					if (IsSelected) {
-						base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend (Color.FromHex ("#000"), 0.25) : Color.FromHex (DarkTheme?"#FFF":"#000").WithAlpha (0.2);
-						base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend (Color.FromHex ("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
-					} else {
+					if (IsSelected)
+					{
+						if (SelectedBackgroundColor.A > 0)
+							base.BackgroundColor = SelectedBackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25);
+						else
+							base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
+						base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
+					}
+					else
+					{
 						base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
 						base.OutlineColor = OutlineColor;
 					}
 					//base.OutlineColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
-					if (OutlineColor == Color.Default) 
+					if (OutlineColor == Color.Default)
 						//base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
 						base.OutlineColor = _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
 				}
@@ -716,7 +804,7 @@ namespace Forms9Patch
 			set
 			{
 				//this.SetValueCore(VisualElement.IsEnabledProperty, (object) (bool) (value ? true : false), Xamarin.Forms.BindableObject.SetValueFlags.None);
-				SetValue(IsEnabledProperty, value );
+				SetValue(IsEnabledProperty, value);
 			}
 		}
 
@@ -728,16 +816,18 @@ namespace Forms9Patch
 		/// <remarks>
 		/// The user may be able to raise the clicked event using accessibility or keyboard controls when the Button has focus.
 		/// </remarks>
-		public event EventHandler Tapped {
+		public event EventHandler Tapped
+		{
 			add { _tapped += value; }
-			remove { _tapped -= value;}
+			remove { _tapped -= value; }
 		}
 
 		event EventHandler _selected;
 		/// <summary>
 		/// Occurs when transitioned to IsSelected=true.
 		/// </summary>
-		public event EventHandler Selected {
+		public event EventHandler Selected
+		{
 			add { _selected += value; }
 			remove { _selected -= value; }
 		}
@@ -746,8 +836,9 @@ namespace Forms9Patch
 		/// <summary>
 		/// Occurs when button is actively being long pressed
 		/// </summary>
-		public event EventHandler LongPressing {
-			add { _longPressing += value;}
+		public event EventHandler LongPressing
+		{
+			add { _longPressing += value; }
 			remove { _longPressing -= value; }
 		}
 
@@ -755,7 +846,8 @@ namespace Forms9Patch
 		/// <summary>
 		/// Occurs when long pressed has completed.
 		/// </summary>
-		public event EventHandler LongPressed {
+		public event EventHandler LongPressed
+		{
 			add { _longPressed += value; }
 			remove { _longPressed -= value; }
 		}
@@ -765,9 +857,11 @@ namespace Forms9Patch
 
 		#region Change Handlers
 
-		void OnLabelPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e) {
+		void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
 			var propertyName = e.PropertyName;
-			if (propertyName == Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName) {
+			if (propertyName == Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
+			{
 				if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
 					_stackLayout.Children.Remove(_label);
 				else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
@@ -777,7 +871,7 @@ namespace Forms9Patch
 					else
 						_stackLayout.Children.Add(_label);
 				}
-				SetOrienations ();
+				SetOrienations();
 			}
 		}
 
@@ -807,9 +901,12 @@ namespace Forms9Patch
 		}
 
 
-		void SetOrienations() {
-			if (Orientation == StackOrientation.Horizontal) {
-				if (_image != null) {
+		void SetOrienations()
+		{
+			if (Orientation == StackOrientation.Horizontal)
+			{
+				if (_image != null)
+				{
 					_image.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
 					_image.VerticalOptions = LayoutOptions.CenterAndExpand;
 				}
@@ -817,10 +914,11 @@ namespace Forms9Patch
 				{
 					_iconLabel.HorizontalTextAlignment = TextAlignment.Center;
 					_iconLabel.VerticalTextAlignment = TextAlignment.Center;
-					_iconLabel.HorizontalOptions = HasTightSpacing? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+					_iconLabel.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
 					_iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
 				}
-				if (_label != null) {
+				if (_label != null)
+				{
 					_label.VerticalTextAlignment = TextAlignment.Center;
 					_label.HorizontalTextAlignment = Alignment; //TextAlignment.Center;
 					_label.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
@@ -830,8 +928,11 @@ namespace Forms9Patch
 				_stackLayout.Spacing = 4;
 				_stackLayout.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
 				_stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-			} else {
-				if (_image != null) {
+			}
+			else
+			{
+				if (_image != null)
+				{
 					_image.HorizontalOptions = LayoutOptions.CenterAndExpand;
 					_image.VerticalOptions = LayoutOptions.Center;
 				}
@@ -842,7 +943,8 @@ namespace Forms9Patch
 					_iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
 					_iconLabel.VerticalOptions = LayoutOptions.Center;
 				}
-				if (_label != null) {
+				if (_label != null)
+				{
 					_label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
 					_label.HorizontalTextAlignment = TextAlignment.Center;
 					_label.HorizontalOptions = LayoutOptions.CenterAndExpand;
@@ -925,6 +1027,7 @@ namespace Forms9Patch
 				}
 			}
 			else if (propertyName == BackgroundColorProperty.PropertyName
+					   || propertyName == SelectedBackgroundColorProperty.PropertyName
 					   || propertyName == OutlineColorProperty.PropertyName
 					   || propertyName == OutlineWidthProperty.PropertyName
 					   || propertyName == IsSelectedProperty.PropertyName
@@ -947,27 +1050,43 @@ namespace Forms9Patch
 				_label.FontAttributes = FontAttributes;
 				*/
 			}
-			else if (propertyName == FontColorProperty.PropertyName)
+			else if (propertyName == FontColorProperty.PropertyName && !IsSelected)
 			{
-				_label.TextColor = FontColor;
-				if (_iconLabel != null)
-					_iconLabel.TextColor = FontColor;
-				if (_image != null)
-					//_image.TintColor = FontColor;
-					_image.TintColor = TintImage ? FontColor : Color.Default;
+				UpdateState();
+				/*
+					_label.TextColor = FontColor;
+					if (_iconLabel != null)
+						_iconLabel.TextColor = FontColor;
+					if (_image != null)
+						_image.TintColor = TintImage ? FontColor : Color.Default;
+						*/
+			}
+			else if (propertyName == SelectedFontColorProperty.PropertyName && IsSelected)
+			{
+				UpdateState();
+				/*
+					_label.TextColor = SelectedFontColor;
+					if (_iconLabel != null)
+						_iconLabel.TextColor = SelectedFontColor;
+					if (_image != null)
+						_image.TintColor = TintImage ? SelectedFontColor : Color.Default;
+						*/
 			}
 			else if (propertyName == TintImageProperty.PropertyName && _image != null)
 			{
-				_image.TintColor = TintImage ? FontColor : Color.Default;
+				UpdateState();
+				//_image.TintColor = TintImage ? FontColor : Color.Default;
 			}
 			else if (propertyName == HasTightSpacingProperty.PropertyName)
 			{
 				SetOrienations();
 			}
-			else if (propertyName == TextProperty.PropertyName) 
+			else if (propertyName == TextProperty.PropertyName)
 			{
 				_label.Text = Text;
-			} else if (propertyName == HtmlTextProperty.PropertyName) {
+			}
+			else if (propertyName == HtmlTextProperty.PropertyName)
+			{
 				_label.HtmlText = HtmlText;
 			}
 			if (propertyName == IsSelectedProperty.PropertyName)
@@ -999,7 +1118,7 @@ namespace Forms9Patch
 				_label.FontFamily = FontFamily;
 			else if (propertyName == TrailingImageProperty.PropertyName && _stackLayout.Children.Contains(_label))
 			{
-                SetOrienations();
+				SetOrienations();
 				if (TrailingImage)
 					_stackLayout.LowerChild(_label);
 				else
@@ -1029,7 +1148,7 @@ namespace Forms9Patch
 		void SendTapped()
 		{
 			ICommand command = Command;
-			if (command != null && GroupToggleBehavior==GroupToggleBehavior.None)
+			if (command != null && GroupToggleBehavior == GroupToggleBehavior.None)
 				command.Execute(CommandParameter);
 			_tapped?.Invoke(this, EventArgs.Empty);
 		}
