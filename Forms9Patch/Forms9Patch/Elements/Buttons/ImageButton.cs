@@ -11,7 +11,7 @@ namespace Forms9Patch
 	/// </summary>
 	public class ImageButton : ContentView, IDisposable
 	{
-		
+
 		#region Properties
 		/*
 		/// <summary>
@@ -33,97 +33,103 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the Command bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof (ICommand), typeof (ImageButton), (object) null, BindingMode.OneWay, (BindableProperty.ValidateValueDelegate) null, 
+		public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(ImageButton), (object)null, BindingMode.OneWay, (BindableProperty.ValidateValueDelegate)null,
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
-				((ImageButton)bo).OnCommandChanged ()), 
-			(BindableProperty.BindingPropertyChangingDelegate) null, 
-			(BindableProperty.CoerceValueDelegate) null, 
-			(BindableProperty.CreateDefaultValueDelegate) null);
+				((ImageButton)bo).OnCommandChanged()),
+			(BindableProperty.BindingPropertyChangingDelegate)null,
+			(BindableProperty.CoerceValueDelegate)null,
+			(BindableProperty.CreateDefaultValueDelegate)null);
 
 		/// <summary>
 		/// Backing store for the CommandParameter bindable property.
 		/// </summary>
-		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof (object), typeof (ImageButton), (object) null, BindingMode.OneWay, (BindableProperty.ValidateValueDelegate) null, 
+		public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(ImageButton), (object)null, BindingMode.OneWay, (BindableProperty.ValidateValueDelegate)null,
 			new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
-				((ImageButton)bo).CommandCanExecuteChanged (bo, EventArgs.Empty)), 
-			(BindableProperty.BindingPropertyChangingDelegate) null, (BindableProperty.CoerceValueDelegate) null, (BindableProperty.CreateDefaultValueDelegate) null);
+				((ImageButton)bo).CommandCanExecuteChanged(bo, EventArgs.Empty)),
+			(BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
 
 		/// <summary>
 		/// Backing store for the IsSelected bindable property.
 		/// </summary>
-		public static BindableProperty IsSelectedProperty = BindableProperty.Create ("IsSelected", typeof(bool), typeof(ImageButton), false);
+		public static BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ImageButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> is selected.
 		/// </summary>
 		/// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
-		public bool IsSelected {
-			get { return (bool)GetValue (IsSelectedProperty); }
-			set { SetValue (IsSelectedProperty, value); }
+		public bool IsSelected
+		{
+			get { return (bool)GetValue(IsSelectedProperty); }
+			set { SetValue(IsSelectedProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the DefaultState bindable property.
 		/// </summary>
-		public static BindableProperty DefaultStateProperty = BindableProperty.Create ("DefaultState", typeof(ImageButtonState), typeof(ImageButton), null);
+		public static BindableProperty DefaultStateProperty = BindableProperty.Create("DefaultState", typeof(ImageButtonState), typeof(ImageButton), null);
 		/// <summary>
 		/// Gets or sets the ImageButton's properties for the default button state.
 		/// </summary>
 		/// <value>The ImageButtonState structure for the default button state.</value>
-		public ImageButtonState DefaultState {
-			get { return (ImageButtonState)GetValue (DefaultStateProperty);}
-			set { SetValue (DefaultStateProperty, value); }
+		public ImageButtonState DefaultState
+		{
+			get { return (ImageButtonState)GetValue(DefaultStateProperty); }
+			set { SetValue(DefaultStateProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the PressingState bindable property.
 		/// </summary>
-		public static BindableProperty PressingStateProperty = BindableProperty.Create ("PressingState", typeof(ImageButtonState), typeof(Button), null);
+		public static BindableProperty PressingStateProperty = BindableProperty.Create("PressingState", typeof(ImageButtonState), typeof(Button), null);
 		/// <summary>
 		/// Gets or sets the ImageButton's properties for the pressing button state.
 		/// </summary>
 		/// <value>The ImageButtonState structure for the pressing button state.</value>
-		public ImageButtonState PressingState {
-			get { return (ImageButtonState)GetValue (PressingStateProperty);}
-			set { SetValue (PressingStateProperty, value); }
+		public ImageButtonState PressingState
+		{
+			get { return (ImageButtonState)GetValue(PressingStateProperty); }
+			set { SetValue(PressingStateProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the SelectedState bindable property.
 		/// </summary>
-		public static BindableProperty SelectedStateProperty = BindableProperty.Create ("SelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
+		public static BindableProperty SelectedStateProperty = BindableProperty.Create("SelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
 		/// <summary>
 		/// Gets or sets the ImageButton's properties for the selected button state.
 		/// </summary>
 		/// <value>The ImageButtonState structure for the selected button state.</value>
-		public ImageButtonState SelectedState {
-			get { return (ImageButtonState)GetValue (SelectedStateProperty);}
-			set { SetValue (SelectedStateProperty, value); }
+		public ImageButtonState SelectedState
+		{
+			get { return (ImageButtonState)GetValue(SelectedStateProperty); }
+			set { SetValue(SelectedStateProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the DisabledState bindable property.
 		/// </summary>
-		public static BindableProperty DisabledStateProperty = BindableProperty.Create ("DisabledState", typeof(ImageButtonState), typeof(ImageButton), null);
+		public static BindableProperty DisabledStateProperty = BindableProperty.Create("DisabledState", typeof(ImageButtonState), typeof(ImageButton), null);
 		/// <summary>
 		/// Gets or sets the ImageButton's properties for the disabled button state.
 		/// </summary>
 		/// <value>The ImageButtonState structure for the disabled button state.</value>
-		public ImageButtonState DisabledState {
-			get { return (ImageButtonState)GetValue (DisabledStateProperty);}
-			set { SetValue (DisabledStateProperty, value); }
+		public ImageButtonState DisabledState
+		{
+			get { return (ImageButtonState)GetValue(DisabledStateProperty); }
+			set { SetValue(DisabledStateProperty, value); }
 		}
 
 		/// <summary>
 		/// Backing store for the DisabledAndSelectedState bindable property.
 		/// </summary>
-		public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create ("DisabledAndSelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
+		public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create("DisabledAndSelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
 		/// <summary>
 		/// Gets or sets the ImageButton's properties for the disabled and selected button state.
 		/// </summary>
 		/// <value>The ImageButtonState structure for the disabled and selected button state.</value>
-		public ImageButtonState DisabledAndSelectedState {
-			get { return (ImageButtonState)GetValue (DisabledAndSelectedStateProperty);}
-			set { SetValue (DisabledAndSelectedStateProperty, value); }
+		public ImageButtonState DisabledAndSelectedState
+		{
+			get { return (ImageButtonState)GetValue(DisabledAndSelectedStateProperty); }
+			set { SetValue(DisabledAndSelectedStateProperty, value); }
 		}
 
 
@@ -139,35 +145,37 @@ namespace Forms9Patch
 		[Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead")]
 		public bool StickyBehavior
 		{
-			get { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead");  }
-			set { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead");  }
+			get { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
+			set { throw new NotSupportedException("StickyBehavior property is obsolete, use ToggleBehavior instead"); }
 		}
 
 
 		/// <summary>
 		/// Backing store for the ToggleBehavior bindable property.
 		/// </summary>
-		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create ("ToggleBehavior", typeof(bool), typeof(ImageButton), false);
+		public static BindableProperty ToggleBehaviorProperty = BindableProperty.Create("ToggleBehavior", typeof(bool), typeof(ImageButton), false);
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Button"/> will stay selected or unselected after a tap.
 		/// </summary>
 		/// <value><c>true</c> if Toggle; otherwise, <c>false</c>.</value>
-		public bool ToggleBehavior {
-			get { return (bool)GetValue (ToggleBehaviorProperty); }
-			set { SetValue (ToggleBehaviorProperty, value); }
+		public bool ToggleBehavior
+		{
+			get { return (bool)GetValue(ToggleBehaviorProperty); }
+			set { SetValue(ToggleBehaviorProperty, value); }
 		}
 
 		/// <summary>
 		/// The alignment of the image and text.
 		/// </summary>
-		public static BindableProperty AlignmentProperty = BindableProperty.Create ("Alignment", typeof(TextAlignment), typeof(ImageButton), TextAlignment.Center);
+		public static BindableProperty AlignmentProperty = BindableProperty.Create("Alignment", typeof(TextAlignment), typeof(ImageButton), TextAlignment.Center);
 		/// <summary>
 		/// Gets or sets the alignment of the image and text.
 		/// </summary>
 		/// <value>The alignment (left, center, right).</value>
-		public TextAlignment Alignment {
-			get { return (TextAlignment)GetValue (AlignmentProperty); }
-			set { SetValue (AlignmentProperty, value); }
+		public TextAlignment Alignment
+		{
+			get { return (TextAlignment)GetValue(AlignmentProperty); }
+			set { SetValue(AlignmentProperty, value); }
 		}
 
 		/// <summary>
@@ -187,7 +195,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// Backing store for the fit property.
 		/// </summary>
-		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(ImageButton), LabelFit.None);
+		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(ImageButton), LabelFit.Width);
 		/// <summary>
 		/// Gets or sets the fit of the label.
 		/// </summary>
@@ -275,11 +283,12 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Forms9Patch.ImageButton"/> class.
 		/// </summary>
-		public ImageButton ()
+		public ImageButton()
 		{
 			_constructing = true;
-			Padding = new Thickness (5);
-			_label = new Label {
+			Padding = new Thickness(4);
+			_label = new Label
+			{
 				VerticalOptions = LayoutOptions.CenterAndExpand,
 				//VerticalTextAlignment = TextAlignment.Center,
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -288,18 +297,19 @@ namespace Forms9Patch
 				Fit = LabelFit.None,
 				//BackgroundColor = Color.Pink
 			};
-			DefaultState = new ImageButtonState () ;
-			_stackLayout = new Xamarin.Forms.StackLayout {
+			DefaultState = new ImageButtonState();
+			_stackLayout = new Xamarin.Forms.StackLayout
+			{
 				Orientation = StackOrientation.Horizontal,
 				Spacing = 10,
 				VerticalOptions = LayoutOptions.Center,
-				HorizontalOptions = Alignment.ToLayoutOptions (),
+				HorizontalOptions = Alignment.ToLayoutOptions(),
 				//BackgroundColor = Color.Red,
 			};
-			_stackLayout.Children.Add (_label);
+			_stackLayout.Children.Add(_label);
 			Content = _stackLayout;
 			_noUpdate = false;
-			ShowState (DefaultState);
+			ShowState(DefaultState);
 
 
 			_gestureListener = FormsGestures.Listener.For(this);
@@ -382,7 +392,7 @@ namespace Forms9Patch
 		/// </summary>
 		public void Tap()
 		{
-			OnUp(this,new FormsGestures.DownUpEventArgs(null,null));
+			OnUp(this, new FormsGestures.DownUpEventArgs(null, null));
 		}
 
 		void OnUp(object sender, FormsGestures.DownUpEventArgs e)
@@ -409,14 +419,16 @@ namespace Forms9Patch
 						});
 					}
 				}
-				else {
-					if (PressingState != null && PressingState.Image!=null)
+				else
+				{
+					if (PressingState != null && PressingState.Image != null)
 						Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
 						{
 							UpdateState();
 							return false;
 						});
-					else {
+					else
+					{
 						Opacity = 0.5;
 						Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
 						{
@@ -459,31 +471,47 @@ namespace Forms9Patch
 		/// <summary>
 		/// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
 		/// </summary>
-		public void UpdateState() {
-			if (IsEnabled) {
-				if (IsSelected) {
-					ShowState (SelectedState ?? DefaultState);
-					if (SelectedState == null) {
+		public void UpdateState()
+		{
+			if (IsEnabled)
+			{
+				if (IsSelected)
+				{
+					ShowState(SelectedState ?? DefaultState);
+					if (SelectedState == null)
+					{
 						_label.FontAttributes = FontAttributes.Bold;
 					}
-				} else 
-					ShowState (DefaultState);
+				}
+				else
+					ShowState(DefaultState);
 				Opacity = 1.0;
-			} else {
-				if (IsSelected) {
-					ShowState (DisabledAndSelectedState ?? SelectedState ?? DisabledState ?? DefaultState);
-					if (DisabledAndSelectedState == null) {
-						if (SelectedState != null) {
+			}
+			else
+			{
+				if (IsSelected)
+				{
+					ShowState(DisabledAndSelectedState ?? SelectedState ?? DisabledState ?? DefaultState);
+					if (DisabledAndSelectedState == null)
+					{
+						if (SelectedState != null)
+						{
 							Opacity = 0.75;
-						} else if (DisabledState != null) {
+						}
+						else if (DisabledState != null)
+						{
 							_label.FontAttributes = FontAttributes.Bold;
-						} else {
+						}
+						else
+						{
 							Opacity = 0.75;
 							_label.FontAttributes = FontAttributes.Bold;
 						}
 					}
-				} else {
-					ShowState (DisabledState ?? DefaultState);
+				}
+				else
+				{
+					ShowState(DisabledState ?? DefaultState);
 					if (DisabledState == null)
 						Opacity = 0.75;
 				}
@@ -494,7 +522,8 @@ namespace Forms9Patch
 		/// Redraws the button to a custom ImageButtonState
 		/// </summary>
 		/// <param name="newState">Custom ImageButtonState.</param>
-		public void ShowState(ImageButtonState newState) {
+		public void ShowState(ImageButtonState newState)
+		{
 			newState = newState ?? DefaultState;
 			if (_currentState != null)
 				_currentState.PropertyChanged -= OnStatePropertyChanged;
@@ -506,27 +535,30 @@ namespace Forms9Patch
 					newBackgroundImage.Opacity = 1.0;
 				BackgroundImage = newBackgroundImage;
 			}
-			else if (!_constructing && Device.OnPlatform(false, true, false)) 
+			else if (!_constructing && Device.OnPlatform(false, true, false))
 			{
 				// this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
 				BackgroundImage = null;
 				if (newBackgroundImage != null)
-				Device.StartTimer(TimeSpan.FromMilliseconds(10), () => 
-				{
-					BackgroundImage = newBackgroundImage;
-					return false;
-				});
+					Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+					{
+						BackgroundImage = newBackgroundImage;
+						return false;
+					});
 			}
 			BackgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
 			var newImage = _currentState.Image ?? DefaultState.Image;
 			var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
 			var text = htmlText ?? _currentState.Text ?? DefaultState.Text;
-			if (newImage == null) {
+			if (newImage == null)
+			{
 				// label only
-				if (_image != null) {
+				if (_image != null)
+				{
 					var toDispose = _image;
 					if (toDispose != null)
-						Device.StartTimer (TimeSpan.FromMilliseconds (10), () => {
+						Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+						{
 							toDispose.Opacity -= 0.25;
 							if (toDispose.Opacity > 0)
 								return true;
@@ -543,24 +575,30 @@ namespace Forms9Patch
 					else
 						_stackLayout.Children.Add(_label);
 				}
-			} else {
+			}
+			else
+			{
 				// there is an image
 				newImage.Opacity = 1.0;
-				if (_image != newImage) {
+				if (_image != newImage)
+				{
 					// if it is a new image
 					if (_image != null)
-						_stackLayout.Children.Remove (_image);
+						_stackLayout.Children.Remove(_image);
 					_image = newImage;
 					if (TrailingImage)
 						_stackLayout.Children.Add(_image);
 					else
-						_stackLayout.Children.Insert (0, _image);
+						_stackLayout.Children.Insert(0, _image);
 				}
-				if (string.IsNullOrEmpty (text)) {
+				if (string.IsNullOrEmpty(text))
+				{
 					// no Label, just an image
 					if (_stackLayout.Children.Contains(_label))
-						_stackLayout.Children.Remove (_label);
-				} else {
+						_stackLayout.Children.Remove(_label);
+				}
+				else
+				{
 					// image and label
 					if (!_stackLayout.Children.Contains(_label))
 					{
@@ -575,17 +613,18 @@ namespace Forms9Patch
 				_label.Text = _currentState.Text ?? DefaultState.Text;
 			else
 				_label.HtmlText = htmlText;
-			SetLabelState (_label, _currentState);
+			SetLabelState(_label, _currentState);
 			_currentState.PropertyChanged += OnStatePropertyChanged;
 			//InvalidateMeasure ();
-		
+
 		}
 
-		void SetLabelState(Label label, ImageButtonState state) {
+		void SetLabelState(Label label, ImageButtonState state)
+		{
 			label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : Device.OnPlatform(Color.Blue, Color.White, Color.White)));
-			label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize (NamedSize.Medium, _label)));
-			label.FontFamily = (state.FontFamilySet || state.FontFamily!=(string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
-			label.FontAttributes = (state.FontAttributesSet || state.FontAttributes!=(FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? state.FontAttributes : DefaultState.FontAttributes);
+			label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
+			label.FontFamily = (state.FontFamilySet || state.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
+			label.FontAttributes = (state.FontAttributesSet || state.FontAttributes != (FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? state.FontAttributes : DefaultState.FontAttributes);
 		}
 		#endregion
 
@@ -604,8 +643,8 @@ namespace Forms9Patch
 		/// </remarks>
 		public ICommand Command
 		{
-			get { return (ICommand)GetValue (CommandProperty); }
-			set { SetValue (CommandProperty, value); }
+			get { return (ICommand)GetValue(CommandProperty); }
+			set { SetValue(CommandProperty, value); }
 		}
 
 		/// <summary>
@@ -619,8 +658,8 @@ namespace Forms9Patch
 		/// <remarks/>
 		public object CommandParameter
 		{
-			get { return GetValue (CommandParameterProperty); }
-			set { SetValue (CommandParameterProperty, value); }
+			get { return GetValue(CommandParameterProperty); }
+			set { SetValue(CommandParameterProperty, value); }
 		}
 
 		/// <summary>
@@ -639,7 +678,7 @@ namespace Forms9Patch
 		/// Gets the formatted text.
 		/// </summary>
 		/// <value>The formatted text.</value>
-		public string FormattedText 
+		public string FormattedText
 		{
 			get { return _label.HtmlText; }
 		}
@@ -683,7 +722,7 @@ namespace Forms9Patch
 		/// <remarks>
 		/// To be added.
 		/// </remarks>
-		[Xamarin.Forms.TypeConverter(typeof (FontSizeConverter))]
+		[Xamarin.Forms.TypeConverter(typeof(FontSizeConverter))]
 		public double FontSize
 		{
 			get { return _label.FontSize; }
@@ -727,7 +766,7 @@ namespace Forms9Patch
 			set
 			{
 				//this.SetValueCore(VisualElement.IsEnabledProperty, (object) (bool) (value ? true : false), Xamarin.Forms.BindableObject.SetValueFlags.None);
-				SetValue(VisualElement.IsEnabledProperty, (object) value );
+				SetValue(VisualElement.IsEnabledProperty, (object)value);
 			}
 		}
 
@@ -760,16 +799,17 @@ namespace Forms9Patch
 
 		#region Change Handlers
 
-		void OnStatePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) {
-			Debug.WriteLine ("OnStatePropertyChanged");
+		void OnStatePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			Debug.WriteLine("OnStatePropertyChanged");
 			if (sender == _currentState)
 			{
-				System.Diagnostics.Debug.WriteLine("\t"+e.PropertyName);
+				System.Diagnostics.Debug.WriteLine("\t" + e.PropertyName);
 				UpdateState();
 				//if (e.PropertyName == ImageButtonState.TextProperty.PropertyName || e.PropertyName == ImageButtonState.HtmlTextProperty.PropertyName)
-					//_stackLayout.
-					//System.Diagnostics.Debug.WriteLine("");
-					//_stackLayout.UpdateLayout();
+				//_stackLayout.
+				//System.Diagnostics.Debug.WriteLine("");
+				//_stackLayout.UpdateLayout();
 			}
 		}
 
@@ -786,12 +826,14 @@ namespace Forms9Patch
 		{
 			if (_noUpdate)
 				return;
-			if (propertyName == ImageButton.CommandProperty.PropertyName) {
+			if (propertyName == ImageButton.CommandProperty.PropertyName)
+			{
 				ICommand command = Command;
-				if (command != null) {
+				if (command != null)
+				{
 					command.CanExecuteChanged -= CommandCanExecuteChanged;
-				//} else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
-				//	PressingState.PropertyChanged -= OnStatePropertyChanged;
+					//} else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
+					//	PressingState.PropertyChanged -= OnStatePropertyChanged;
 				}
 			}
 			base.OnPropertyChanging(propertyName);
@@ -834,7 +876,7 @@ namespace Forms9Patch
 				_label.Fit = Fit;
 			else if (propertyName == ImageButton.LineBreakModeProperty.PropertyName)
 				_label.LineBreakMode = LineBreakMode;
-				
+
 			base.OnPropertyChanged(propertyName);
 
 		}

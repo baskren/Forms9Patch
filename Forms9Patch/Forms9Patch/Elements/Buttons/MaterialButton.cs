@@ -393,7 +393,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The fit property.
 		/// </summary>
-		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.None);
+		public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.Width);
 		/// <summary>
 		/// Gets or sets the fit.
 		/// </summary>

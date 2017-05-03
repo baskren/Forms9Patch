@@ -43,7 +43,7 @@ namespace Forms9Patch
 		/// Identifies the Padding bindable property.
 		/// </summary>
 		/// <remarks></remarks>
-		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(0));
+		public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(MaterialSegmentedControl), new Thickness(4));
 		/// <summary>
 		/// Gets or sets the padding for SegmentedControl's segments.
 		/// </summary>
