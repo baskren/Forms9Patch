@@ -143,6 +143,14 @@ namespace Forms9Patch
 				masterDetailPage.IsPresented = false;
 				return true;
 			}
+			// check if primary child is NavigationPage.  If so, pass the back button press to it.
+			var page = PageController.InternalChildren[0] as Page;
+			if (page != null)
+			{
+				var handled = page.SendBackButtonPressed();
+				if (handled)
+					return true;
+			}
 			return base.OnBackButtonPressed();
 		}
 
