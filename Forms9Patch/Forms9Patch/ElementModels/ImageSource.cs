@@ -16,11 +16,14 @@ namespace Forms9Patch
 		internal static readonly BindableProperty AssemblyProperty = BindableProperty.CreateAttached ("Assembly", typeof(Assembly), typeof(ImageSource), null);
 
 		#region Constructor
-		ImageSource() : this (1) {
+		ImageSource() //: this (1) 
+        {
 		}
 
+        /*
 		ImageSource(int i) : this() {
 		}
+		*/
 
 		class ImageSourceContainer {
 			public string Path;
@@ -46,8 +49,14 @@ namespace Forms9Patch
 				throw new Exception("Forms9Patch is has not been initialized.");
 			if (assembly == null)
 			{
-				var resourcePath = resource.Split('.');
-				if (resourcePath.Count() > 1)
+                var resourcePath = resource.Split('.').ToList();
+                if (resourcePath.Contains("Resources"))
+                {
+                    var index = resourcePath.IndexOf("Resources");
+                    var asmName = string.Join(".", resourcePath.GetRange(0, index));
+                    assembly = PCL.Utils.AppDomainWrapper.Instance.GetAssemblyByName(asmName);
+				}
+				if (assembly==null && resourcePath.Count() > 1)
 					assembly = PCL.Utils.AppDomainWrapper.Instance.GetAssemblyByName(resourcePath[0]);
 				if (assembly==null)
 					assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
