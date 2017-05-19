@@ -74,9 +74,26 @@
 		<Reference Include="System.Xml" />
 		<Reference Include="System.Core" />
 		<Reference Include="Mono.Android" />
+		<Reference Include="PCLStorage.Abstractions">
+			<HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\monoandroid\PCLStorage.Abstractions.dll</HintPath>
+		</Reference>
+		<Reference Include="PCLStorage">
+			<HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\monoandroid\PCLStorage.dll</HintPath>
+		</Reference>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.IO.Compression" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.10.0.2\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+		</Reference>
 		<Reference Include="Xamarin.Android.Support.v4">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
-			<Private>False</Private>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.v7.CardView">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Android.Support.Vector.Drawable">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
@@ -87,38 +104,26 @@
 		<Reference Include="Xamarin.Android.Support.v7.AppCompat">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
 		</Reference>
-		<Reference Include="Xamarin.Android.Support.v7.RecyclerView">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-		</Reference>
 		<Reference Include="Xamarin.Android.Support.Design">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Design.23.3.0\lib\MonoAndroid43\Xamarin.Android.Support.Design.dll</HintPath>
-		</Reference>
-		<Reference Include="Xamarin.Android.Support.v7.CardView">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Android.Support.v7.MediaRouter">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.MediaRouter.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
 		</Reference>
-		<Reference Include="PCLStorage.Abstractions">
-			<HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\monoandroid\PCLStorage.Abstractions.dll</HintPath>
-		</Reference>
-		<Reference Include="PCLStorage">
-			<HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\monoandroid\PCLStorage.dll</HintPath>
-		</Reference>
 		<Reference Include="FormsViewGroup">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Forms.Core">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Forms.Platform.Android">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Forms.Platform">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
 		</Reference>
 		<Reference Include="Xamarin.Forms.Xaml">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
@@ -195,9 +200,6 @@
 		<Folder Include="ListView\Services\" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="packages.config" />
-	</ItemGroup>
-	<ItemGroup>
 		<ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
 			<Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
 			<Name>Forms9Patch</Name>
@@ -223,7 +225,10 @@
 			<Name>PCL.Utils.Droid</Name>
 		</ProjectReference>
 	</ItemGroup>
+	<ItemGroup>
+		<None Include="packages.config" />
+	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
-	<Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>
