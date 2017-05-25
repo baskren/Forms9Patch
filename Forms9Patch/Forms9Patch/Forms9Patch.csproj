@@ -99,7 +99,7 @@
 		<Compile Include="Layouts\BubbleLayout.cs" />
 		<Compile Include="Interfaces\IDescendentBounds.cs" />
 		<Compile Include="Extensions\FontExtensions.cs" />
-		<Compile Include="Extensions\StringExtensions.cs" />
+		<Compile Include="Extensions\InternalStringExtensions.cs" />
 		<Compile Include="Interfaces\IFontElement.cs" />
 		<Compile Include="Spans\BackgroundColorSpan.cs" />
 		<Compile Include="Spans\BoldSpan.cs" />
@@ -187,6 +187,8 @@
 		<Compile Include="Interfaces\IStatusBarService.cs" />
 		<Compile Include="Interfaces\IApplicationInfoService.cs" />
 		<Compile Include="Services\ApplicationInfoService.cs" />
+		<Compile Include="Interfaces\IPopup.cs" />
+		<Compile Include="Extensions\StringExtensions.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>
