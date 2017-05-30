@@ -3,12 +3,12 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	class UserPagesHomePage : ContentPage
-	{
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			/*
+    class UserPagesHomePage : ContentPage
+    {
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            /*
 			var modal = new Forms9Patch.ModalPopup
 			{
 				Content = new Forms9Patch.StackLayout
@@ -32,113 +32,120 @@ namespace Forms9PatchDemo
 			modal.BindingContext = this;
 			modal.IsVisible = true;		
 			*/
-		}
+        }
 
 
-		public UserPagesHomePage()
-		{
-			// Define command for the items in the TableView.
-			var navigateCommand =
-				new Command<Type>(async (Type pageType) =>
-				{
-					var page = (Page)Activator.CreateInstance(pageType);
-					await this.Navigation.PushAsync(page);
-				});
+        public UserPagesHomePage()
+        {
+            // Define command for the items in the TableView.
+            var navigateCommand =
+                new Command<Type>(async (Type pageType) =>
+                {
+                    var page = (Page)Activator.CreateInstance(pageType);
+                    await this.Navigation.PushAsync(page);
+                });
 
 
 
-			this.Title = "Forms Gallery";
-			this.Content = new TableView
-			{
-				Intent = TableIntent.Menu,
-				Root = new TableRoot {
-					new TableSection("XAML") {
-						new TextCell
-						{
-							Text = "SegmentBindingPage",
-							Command = navigateCommand,
-							CommandParameter = typeof(SegmentBindingPage)
-						},
+            this.Title = "Forms Gallery";
+            this.Content = new TableView
+            {
+                Intent = TableIntent.Menu,
+                Root = new TableRoot {
+                    new TableSection("XAML") {
+                        new TextCell
+                        {
+                            Text = "SegmentBindingPage",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SegmentBindingPage)
+                        },
 
 
-						new TextCell {
-							Text = "Burkhart Test",
-							Command = navigateCommand,
-							CommandParameter = typeof(Burkhart)
-						},
-						new TextCell {
-							Text = "F9P Label in Xamarin.ListView",
-							Command = navigateCommand,
-							CommandParameter = typeof(XamlPageWithListViewWithF9PLabelInCells)
-						},
-					},
+                        new TextCell {
+                            Text = "Burkhart Test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(Burkhart)
+                        },
+                        new TextCell {
+                            Text = "F9P Label in Xamarin.ListView",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(XamlPageWithListViewWithF9PLabelInCells)
+                        },
+                    },
 
-					new TableSection("Code") {
+                    new TableSection("Code") {
 
-						new TextCell {
-							Text = "Using MaterialButton SelectedBackground",
-							Command = navigateCommand,
-							CommandParameter = typeof(SegmentSelectedBackgroundPage)
-						},
-
-						new TextCell {
-							Text = "<br>",
-							Command = navigateCommand,
-							CommandParameter = typeof(br)
-						},
-
-						new TextCell {
-							Text = "Popup on MasterDetail",
-							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupOnMasterDetailPage)
-						},
-
-						new TextCell {
-							Text = "Custom Font Effect",
-							Command = navigateCommand,
-							CommandParameter = typeof(ChrisCustomFontEffectPage)
-						},
+                        new TextCell {
+                            Text = "Segment alignments",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SegmentAlignments)
+                        },
 
 
-						new TextCell {
-							Text = "Chat using ListView",
-							Command = navigateCommand,
-							CommandParameter = typeof(ChatListPage)
-						},
+                        new TextCell {
+                            Text = "Using MaterialButton SelectedBackground",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SegmentSelectedBackgroundPage)
+                        },
+
+                        new TextCell {
+                            Text = "<br>",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(br)
+                        },
+
+                        new TextCell {
+                            Text = "Popup on MasterDetail",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ModalPopupOnMasterDetailPage)
+                        },
+
+                        new TextCell {
+                            Text = "Custom Font Effect",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ChrisCustomFontEffectPage)
+                        },
 
 
-						new TextCell {
-							Text = "Popup + PushModalAsync++",
-							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupWithNavigationPages)
-						},
+                        new TextCell {
+                            Text = "Chat using ListView",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ChatListPage)
+                        },
 
-						new TextCell {
-							Text = "Nested Bubble Popup",
-							Command = navigateCommand,
-							CommandParameter = typeof(NestedBubblePopupPage)
-						},
 
-						new TextCell {
-							Text = "ImageButton in ContentView test",
-							Command = navigateCommand,
-							CommandParameter = typeof(ZenmekPage)
-						},
+                        new TextCell {
+                            Text = "Popup + PushModalAsync++",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ModalPopupWithNavigationPages)
+                        },
 
-						new TextCell {
-							Text = "BackgroundImage opacity",
-							Command = navigateCommand,
-							CommandParameter = typeof(BackgroundImageOpacityPage)
-						},
+                        new TextCell {
+                            Text = "Nested Bubble Popup",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(NestedBubblePopupPage)
+                        },
 
-						new TextCell {
-							Text = "Segmented Control Navigation",
-							Command = navigateCommand,
-							CommandParameter = typeof(SegmentNavPage1)
-						},
-					}
-				}
-			};
-		}
-	}
+                        new TextCell {
+                            Text = "ImageButton in ContentView test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ZenmekPage)
+                        },
+
+                        new TextCell {
+                            Text = "BackgroundImage opacity",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(BackgroundImageOpacityPage)
+                        },
+
+                        new TextCell {
+                            Text = "Segmented Control Navigation",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SegmentNavPage1)
+                        },
+                    }
+                }
+            };
+        }
+    }
 }

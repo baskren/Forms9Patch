@@ -9,10 +9,12 @@ namespace Forms9Patch
     /// Forms9Patch.Label
     /// </summary>
     [ContentProperty("HtmlText")]
-    public class Label : View, IFontElement
+    public class Label : Xamarin.Forms.Label, IFontElement//View, IFontElement
     {
 
         #region Properties
+        /*
+// XF
         internal static readonly BindableProperty FontProperty = BindableProperty.Create("Font", typeof(Font), typeof(Label), default(Font), BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(FontStructPropertyChanged), null, null, null);
         internal Font Font
         {
@@ -20,7 +22,7 @@ namespace Forms9Patch
             set { SetValue(FontProperty, value); }
         }
 
-        /// <summary>
+// XF        /// <summary>
         /// Backing store for the font family property.
         /// </summary>
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(Label), null, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(OnFontFamilyChanged), null, null, null);
@@ -34,6 +36,7 @@ namespace Forms9Patch
             set { SetValue(FontFamilyProperty, value); }
         }
 
+// XF
         /// <summary>
         /// Backing store for the font size property.
         /// </summary>
@@ -49,6 +52,7 @@ namespace Forms9Patch
             set { SetValue(FontSizeProperty, value); }
         }
 
+// XF
         /// <summary>
         /// Backing store for the font attributes property.
         /// </summary>
@@ -63,6 +67,7 @@ namespace Forms9Patch
             set { SetValue(FontAttributesProperty, value); }
         }
 
+// XF
         /// <summary>
         /// Backing store for the text color property.
         /// </summary>
@@ -77,6 +82,7 @@ namespace Forms9Patch
             set { SetValue(TextColorProperty, value); }
         }
 
+// XF
         /// <summary>
         /// Backing store for the line break mode property.
         /// </summary>
@@ -93,6 +99,7 @@ namespace Forms9Patch
             set { SetValue(LineBreakModeProperty, value); }
         }
 
+// XF
         /// <summary>
         /// Backing store for the text property.
         /// </summary>
@@ -109,6 +116,37 @@ namespace Forms9Patch
                 SetValue(TextProperty, value);
             }
         }
+
+// XF
+		/// <summary>
+		/// Backing store for the horizontal text alignment property.
+		/// </summary>
+		public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(Label), TextAlignment.Start, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(OnHorizontalTextAlignmentPropertyChanged), null, null, null);
+		/// <summary>
+		/// Gets or sets the horizontal text alignment.
+		/// </summary>
+		/// <value>The horizontal text alignment.</value>
+		public TextAlignment HorizontalTextAlignment
+		{
+			get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
+			set { SetValue(HorizontalTextAlignmentProperty, value); }
+		}
+
+// XF
+		/// <summary>
+		/// Backing store for the vertical text alignment property.
+		/// </summary>
+		public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(Label), TextAlignment.Start, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(OnVerticalTextAlignmentPropertyChanged), null, null, null);
+		/// <summary>
+		/// Gets or sets the vertical text alignment.
+		/// </summary>
+		/// <value>The vertical text alignment.</value>
+		public TextAlignment VerticalTextAlignment
+		{
+			get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
+			set { SetValue(VerticalTextAlignmentProperty, value); }
+		}
+        */
 
         /// <summary>
         /// Backing store for the formatted text property.
@@ -136,35 +174,6 @@ namespace Forms9Patch
         {
             get { return (F9PFormattedString)GetValue(F9PFormattedStringProperty); }
             set { SetValue(F9PFormattedStringProperty, value); }
-        }
-
-
-        /// <summary>
-        /// Backing store for the horizontal text alignment property.
-        /// </summary>
-        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(Label), TextAlignment.Start, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(OnHorizontalTextAlignmentPropertyChanged), null, null, null);
-        /// <summary>
-        /// Gets or sets the horizontal text alignment.
-        /// </summary>
-        /// <value>The horizontal text alignment.</value>
-        public TextAlignment HorizontalTextAlignment
-        {
-            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
-            set { SetValue(HorizontalTextAlignmentProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the vertical text alignment property.
-        /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(Label), TextAlignment.Start, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate(OnVerticalTextAlignmentPropertyChanged), null, null, null);
-        /// <summary>
-        /// Gets or sets the vertical text alignment.
-        /// </summary>
-        /// <value>The vertical text alignment.</value>
-        public TextAlignment VerticalTextAlignment
-        {
-            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
-            set { SetValue(VerticalTextAlignmentProperty, value); }
         }
 
         /// <summary>
@@ -207,22 +216,6 @@ namespace Forms9Patch
         {
             get { return (double)GetValue(MinFontSizeProperty); }
             set { SetValue(MinFontSizeProperty, value); }
-        }
-
-        /// <summary>
-        /// The backing store for the max font size property.
-        /// </summary>
-        [Obsolete]
-        public static readonly BindableProperty MaxFontSizeProperty = BindableProperty.Create("MaxFontSize", typeof(double), typeof(Label), -1.0);
-        /// <summary>
-        /// Gets or sets the maximum size of the font allowed during an autofit.
-        /// </summary>
-        /// <value>The size of the max font.</value>
-        [Obsolete]
-        public double MaxFontSize
-        {
-            get { return (double)GetValue(MaxFontSizeProperty); }
-            set { SetValue(MaxFontSizeProperty, value); }
         }
 
         /// <summary>
