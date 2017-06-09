@@ -55,6 +55,10 @@ namespace Forms9Patch
         /// <value>The name.</value>
         public static string Name { get { return Service?.Name; } }
 
+        /// <summary>
+        /// Gets the fingerprint (valid on Android only).
+        /// </summary>
+        /// <value>The fingerprint.</value>
         public static string Fingerprint { get { return Service?.Fingerprint; } }
     }
 }

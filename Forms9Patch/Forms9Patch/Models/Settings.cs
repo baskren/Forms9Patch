@@ -59,6 +59,11 @@ namespace Forms9Patch
         public static KeyClicks KeyClicks = KeyClicks.Default;
 
         static string _licenseKey;
+
+        /// <summary>
+        /// Gets the license key.
+        /// </summary>
+        /// <value>The license key.</value>
         public static string LicenseKey
         {
             get
