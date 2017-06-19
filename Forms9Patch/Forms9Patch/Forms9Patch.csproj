@@ -162,7 +162,7 @@
 		<Compile Include="Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs" />
 		<Compile Include="Elements\ListView\EventArgs\SwipeMenuItemTappedArgs.cs" />
 		<Compile Include="Elements\Popups\Toast.cs" />
-		<Compile Include="Elements\ListView\TemplateSelectors\GroupTemplate.cs" />
+		<Compile Include="Elements\ListView\TemplateSelectors\TemplateSelectorBase.cs" />
 		<Compile Include="Elements\ListView\TemplateSelectors\DataTemplateSelector.cs" />
 		<Compile Include="Elements\Popups\ActivityIndicatorPopup.cs" />
 		<Compile Include="Extensions\ElementExtensions.cs" />
@@ -189,6 +189,7 @@
 		<Compile Include="Services\ApplicationInfoService.cs" />
 		<Compile Include="Interfaces\IPopup.cs" />
 		<Compile Include="Extensions\StringExtensions.cs" />
+		<Compile Include="Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>

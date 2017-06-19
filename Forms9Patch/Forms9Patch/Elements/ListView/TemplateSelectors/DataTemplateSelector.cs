@@ -4,7 +4,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// The Forms9Patch Data template selector.
 	/// </summary>
-	public class DataTemplateSelector : GroupTemplate
+	public class DataTemplateSelector : TemplateSelectorBase
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector"/> class.

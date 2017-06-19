@@ -8,41 +8,41 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	internal static class StatusBarService
-	{
-		static IStatusBarService _service;
+    internal static class StatusBarService
+    {
+        static IStatusBarService _service;
 
-		/// <summary>
-		/// Gets the height.
-		/// </summary>
-		/// <value>The height.</value>
-		public static double Height
-		{
-			get
-			{
-				_service = _service ?? DependencyService.Get<IStatusBarService>();
-				if (_service == null)
-				{
-					//if (Device.OS == TargetPlatform.iOS)
-					if (Device.RuntimePlatform == Device.iOS)
-						return 20;
-					return 0;
-				}
-				//if (!IsVisible)
-				//	return 0;
-				return _service.Height;
-			}
-		}
+        /// <summary>
+        /// Gets the height.
+        /// </summary>
+        /// <value>The height.</value>
+        public static double Height
+        {
+            get
+            {
+                _service = _service ?? DependencyService.Get<IStatusBarService>();
+                if (_service == null)
+                {
+                    if (Device.OS == TargetPlatform.iOS)
+                        //if (Device.RuntimePlatform == Device.iOS)
+                        return 20;
+                    return 0;
+                }
+                //if (!IsVisible)
+                //	return 0;
+                return _service.Height;
+            }
+        }
 
-		public static bool IsVisible
-		{
-			get
-			{
-				_service = _service ?? DependencyService.Get<IStatusBarService>();
-				if (_service == null)
-					return true;
-				return _service.IsVisible;
-			}
-		}
-	}
+        public static bool IsVisible
+        {
+            get
+            {
+                _service = _service ?? DependencyService.Get<IStatusBarService>();
+                if (_service == null)
+                    return true;
+                return _service.IsVisible;
+            }
+        }
+    }
 }
