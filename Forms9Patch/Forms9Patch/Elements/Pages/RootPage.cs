@@ -6,6 +6,7 @@
 using System;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Forms9Patch
 {
@@ -16,6 +17,7 @@ namespace Forms9Patch
     {
         static RootPage _instance;
 
+        static List<Page> _modals = new List<Page>();
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
         /// </summary>
@@ -26,6 +28,26 @@ namespace Forms9Patch
                 throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
             _instance = this;
             Page = page;
+            Application.Current.ModalPopping += (object sender, ModalPoppingEventArgs e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("ModalPopping");
+                RemovePopups(true);
+            };
+            Application.Current.ModalPushing += (object sender, ModalPushingEventArgs e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("ModalPusing");
+            };
+            Application.Current.ModalPushed += (object sender, ModalPushedEventArgs e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("Modal Pushed");
+                _modals.Add(e.Modal);
+            };
+            Application.Current.ModalPopped += (object sender, ModalPoppedEventArgs e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("ModalPopped");
+                _modals.Remove(e.Modal);
+            };
+
         }
 
         /// <summary>
@@ -88,7 +110,7 @@ namespace Forms9Patch
             _instance?.RemovePopups(false);
         }
 
-        IPageController PageController => this as IPageController;
+        IPageController PageController => (_modals.Count > 0 ? _modals.Last() : this) as IPageController;
 
         internal void AddPopup(PopupBase popup)
         {
@@ -198,7 +220,8 @@ namespace Forms9Patch
             {
                 if (_instance == null)
                     return 0;
-                var ignoresContainerArea = ((IPageController)_instance.PageController.InternalChildren[0]).IgnoresContainerArea;
+                var pageController = _instance.PageController.InternalChildren[0] as IPageController;
+                var ignoresContainerArea = pageController != null ? pageController.IgnoresContainerArea : true;
                 double verticalY = 0;
                 if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
                 //if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
