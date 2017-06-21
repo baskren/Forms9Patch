@@ -46,8 +46,8 @@ namespace Forms9PatchDemo
                 new Command<Type>(async (Type pageType) =>
                 {
                     var page = (Page)Activator.CreateInstance(pageType);
-                    //await this.Navigation.PushAsync(page);
-                    await this.Navigation.PushModalAsync(page);  // PushModalAsync will cause popups not to work
+                    await this.Navigation.PushAsync(page);
+                    //await this.Navigation.PushModalAsync(page);  // PushModalAsync will cause popups not to work
                 });
 
             this.Title = "Forms Gallery";

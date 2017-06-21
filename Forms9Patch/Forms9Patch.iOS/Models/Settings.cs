@@ -31,7 +31,6 @@ namespace Forms9Patch.iOS
             get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
 
-        internal static Assembly ApplicationAssembly;
 
         /// <summary>
         /// Initialize the specified licenseKey.
@@ -52,7 +51,6 @@ namespace Forms9Patch.iOS
         {
             private set
             {
-                ApplicationAssembly = System.Reflection.Assembly.GetCallingAssembly();
                 if (!string.IsNullOrEmpty(value))
                 {
                     _licenseKey = value;
@@ -84,7 +82,7 @@ namespace Forms9Patch.iOS
 
                     if (!_valid)
                     {
-                        Console.WriteLine(string.Format("The LicenseKey '{0}' is not for the app '{1}'.", _licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleDisplayName")));
+                        Console.WriteLine(string.Format("The LicenseKey '{0}' is not for the app '{1}' '{2}'.", _licenseKey, NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleDisplayName"), NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleName")));
                         Console.WriteLine("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
                     }
                     FormsGestures.iOS.Settings.Init();
