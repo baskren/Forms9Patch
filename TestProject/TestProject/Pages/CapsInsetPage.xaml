@@ -6,6 +6,7 @@
 	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
 	x:Class="Forms9PatchDemo.CapsInsetPage"
 	Padding="5, 20, 5, 5"
+    BackgroundColor="White"
 	>
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 		<Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" />
