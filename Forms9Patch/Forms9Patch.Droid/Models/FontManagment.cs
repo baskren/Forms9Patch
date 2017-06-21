@@ -83,12 +83,12 @@ namespace Forms9Patch.Droid
                 var assemblyName = fontFamily.Substring(0, fontFamily.IndexOf(".Resources.Fonts."));
 
                 //var assembly = System.Reflection.Assembly.Load (assemblyName);
-                var assembly = AppDomainWrapper.GetAssemblyByName(assemblyName) ?? Forms9Patch.Droid.Settings.ApplicationAssembly;
+                var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName) ?? Forms9Patch.Droid.Settings.ApplicationAssembly;
 
                 if (assembly == null)
                 {
                     // try using the current application assembly instead (as is the case with Shared Applications)
-                    assembly = AppDomainWrapper.GetAssemblyByName(assemblyName + ".Droid");
+                    assembly = ReflectionExtensions.GetAssemblyByName(assemblyName + ".Droid");
                     ///System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
                     //return null;
                 }
@@ -147,6 +147,8 @@ namespace Forms9Patch.Droid
                 var context = Xamarin.Forms.Forms.Context;
                 var fontAssetFileNames = context.Assets.List("Fonts");
                 var cachedFontDir = new File(context.CacheDir.AbsolutePath + "/AssetFonts");
+                if (!cachedFontDir.Exists())
+                    return null;
                 // move any Android Asset Fonts to the Applications CacheDir
                 foreach (var fontAssetFileName in fontAssetFileNames)
                 {

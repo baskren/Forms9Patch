@@ -190,6 +190,7 @@
 		<Compile Include="Interfaces\IPopup.cs" />
 		<Compile Include="Extensions\StringExtensions.cs" />
 		<Compile Include="Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" />
+		<Compile Include="Extensions\ApplicationExtensions.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>

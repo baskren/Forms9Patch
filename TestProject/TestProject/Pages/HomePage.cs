@@ -3,12 +3,12 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	class HomePage : ContentPage
-	{
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			/*
+    class HomePage : ContentPage
+    {
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            /*
 			var modal = new Forms9Patch.ModalPopup
 			{
 				Content = new Forms9Patch.StackLayout
@@ -32,114 +32,119 @@ namespace Forms9PatchDemo
 			modal.BindingContext = this;
 			modal.IsVisible = true;		
 			*/
-		}
+        }
 
 
-		public HomePage()
-		{
-			// Define command for the items in the TableView.
-			var navigateCommand = 
-				new Command<Type>(async (Type pageType) => {
-						var page = (Page)Activator.CreateInstance(pageType);
-						await this.Navigation.PushAsync(page);
-					});
-
-			this.Title = "Forms Gallery";
-			this.Content = new TableView
-			{
-				Intent = TableIntent.Menu,
-
-				Root = new TableRoot {
-					new TableSection("User Pages") {
-						new TextCell {
-							Text = "User Pages",
-							Command = navigateCommand,
-							CommandParameter = typeof(UserPagesHomePage)
-						},
-					},
-					new TableSection("XAML") {
-						new TextCell {
-							Text = "ContentView",
-							Command = navigateCommand,
-							CommandParameter = typeof(ContentViewDemoPage)
-						},
-
-						new TextCell {
-							Text = "Frame",
-							Command = navigateCommand,
-							CommandParameter = typeof(FrameDemoPage)
-						},
-
-						new TextCell {
-							Text = "Single ImageButton",
-							Command = navigateCommand,
-							CommandParameter = typeof(SingleImageButtonPage)
-						},
-
-						new TextCell {
-							Text = "ImageButton",
-							Command = navigateCommand,
-							CommandParameter = typeof(ImageButtonPage)
-						},
-
-						new TextCell {
-							Text = "MaterialSegmentControl ",
-							Command = navigateCommand,
-							CommandParameter = typeof(MaterialSegmentedControlPage)
-						},
-
-						new TextCell {
-							Text = "Image",
-							Command = navigateCommand,
-							CommandParameter = typeof(MyPage)
-						},
-
-						new TextCell {
-							Text = "HTML Labels and Buttons",
-							Command = navigateCommand,
-							CommandParameter = typeof(HtmlLabelsAndButtons)
-						},
-
-						new TextCell {
-							Text = "CapsInset Test",
-							Command = navigateCommand,
-							CommandParameter = typeof(CapsInsetPage)
-						},
-
-					},
-
-					new TableSection("Code") {
-
-						new TextCell {
-							Text = "Custom Font Effect",
-							Command = navigateCommand,
-							CommandParameter = typeof(CustomFontEffectPage)
-						},
-
-						new TextCell {
-							Text = "External EmbeddedResource Image",
-							Command = navigateCommand,
-							CommandParameter = typeof(ExternalEmbeddedResourceImage)
-						},
-
-						new TextCell {
-							Text = "Label in Layout",
-							Command = navigateCommand,
-							CommandParameter = typeof(LabelInHorizontalStackLayout)
-						},
+        public HomePage()
+        {
+            // Define command for the items in the TableView.
 
 
-						new TextCell {
-							Text = "Label Fit",
-							Command = navigateCommand,
-							CommandParameter = typeof(LabelFitPage)
-						},
 
-						new TextCell {
-							Text = "Unimposed Height Label Fit",
-							Command = navigateCommand,
-							CommandParameter = typeof(UnconstrainedLabelFitPage)
-						},
+            var navigateCommand =
+                new Command<Type>(async (Type pageType) =>
+                {
+                    var page = (Page)Activator.CreateInstance(pageType);
+                    //await this.Navigation.PushAsync(page);
+                    await this.Navigation.PushModalAsync(page);  // PushModalAsync will cause popups not to work
+                });
+
+            this.Title = "Forms Gallery";
+            this.Content = new TableView
+            {
+                Intent = TableIntent.Menu,
+
+                Root = new TableRoot {
+                    new TableSection("User Pages") {
+                        new TextCell {
+                            Text = "User Pages",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(UserPagesHomePage)
+                        },
+                    },
+                    new TableSection("XAML") {
+                        new TextCell {
+                            Text = "ContentView",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ContentViewDemoPage)
+                        },
+
+                        new TextCell {
+                            Text = "Frame",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(FrameDemoPage)
+                        },
+
+                        new TextCell {
+                            Text = "Single ImageButton",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SingleImageButtonPage)
+                        },
+
+                        new TextCell {
+                            Text = "ImageButton",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageButtonPage)
+                        },
+
+                        new TextCell {
+                            Text = "MaterialSegmentControl ",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(MaterialSegmentedControlPage)
+                        },
+
+                        new TextCell {
+                            Text = "Image",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(MyPage)
+                        },
+
+                        new TextCell {
+                            Text = "HTML Labels and Buttons",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(HtmlLabelsAndButtons)
+                        },
+
+                        new TextCell {
+                            Text = "CapsInset Test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(CapsInsetPage)
+                        },
+
+                    },
+
+                    new TableSection("Code") {
+
+                        new TextCell {
+                            Text = "Custom Font Effect",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(CustomFontEffectPage)
+                        },
+
+                        new TextCell {
+                            Text = "External EmbeddedResource Image",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ExternalEmbeddedResourceImage)
+                        },
+
+                        new TextCell {
+                            Text = "Label in Layout",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LabelInHorizontalStackLayout)
+                        },
+
+
+                        new TextCell {
+                            Text = "Label Fit",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LabelFitPage)
+                        },
+
+                        new TextCell {
+                            Text = "Unimposed Height Label Fit",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(UnconstrainedLabelFitPage)
+                        },
 
 						/*
 						new TextCell {
@@ -156,87 +161,87 @@ namespace Forms9PatchDemo
 */
 
 						new TextCell {
-							Text = "Simple Font Test",
-							Command = navigateCommand,
-							CommandParameter = typeof(SimpleFontTestPage)
-						},
+                            Text = "Simple Font Test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SimpleFontTestPage)
+                        },
 
-						new TextCell {
-							Text = "HTML Formatted Labels",
-							Command = navigateCommand,
-							CommandParameter = typeof(HtmlLabelPage)
-						},
+                        new TextCell {
+                            Text = "HTML Formatted Labels",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(HtmlLabelPage)
+                        },
 
-						new TextCell {
-							Text = "HTML Formatted Buttons",
-							Command = navigateCommand,
-							CommandParameter = typeof(HtmlButtonsPage)
-						},
+                        new TextCell {
+                            Text = "HTML Formatted Buttons",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(HtmlButtonsPage)
+                        },
 
-						new TextCell {
-							Text = "ImageButton",
-							Command = navigateCommand,
-							CommandParameter = typeof(ImageButtonCodePage)
-						},
+                        new TextCell {
+                            Text = "ImageButton",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageButtonCodePage)
+                        },
 
-						new TextCell {
-							Text = "Single ImageButton",
-							Command = navigateCommand,
-							CommandParameter = typeof(SingleImageButtonCodePage)
-						},
+                        new TextCell {
+                            Text = "Single ImageButton",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SingleImageButtonCodePage)
+                        },
 
 
-						new TextCell {
-							Text = "Image",
-							Command = navigateCommand,
-							CommandParameter = typeof(ImageCodePage)
-						},
+                        new TextCell {
+                            Text = "Image",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageCodePage)
+                        },
 
-						new TextCell {
-							Text = "Layouts",
-							Command = navigateCommand,
-							CommandParameter = typeof(LayoutsPage)
-						},
+                        new TextCell {
+                            Text = "Layouts",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LayoutsPage)
+                        },
 
-						new TextCell {
-							Text = "Material Buttons",
-							Command = navigateCommand,
-							CommandParameter = typeof(MaterialButtonsPage)
-						},
+                        new TextCell {
+                            Text = "Material Buttons",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(MaterialButtonsPage)
+                        },
 
-						new TextCell {
-							Text = "Material Buttons w/ IconText",
-							Command = navigateCommand,
-							CommandParameter = typeof(MaterialButtons_IconTextPage)
-						},
+                        new TextCell {
+                            Text = "Material Buttons w/ IconText",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(MaterialButtons_IconTextPage)
+                        },
 
-						new TextCell {
-							Text = "Elliptical Material Buttons",
-							Command = navigateCommand,
-							CommandParameter = typeof(EllipticalMaterialButtonsPage)
-						},
+                        new TextCell {
+                            Text = "Elliptical Material Buttons",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(EllipticalMaterialButtonsPage)
+                        },
 
-						new TextCell {
-							Text = "Modal Popup",
-							Command = navigateCommand,
-							CommandParameter = typeof(ModalPopupTestPage)
-						},
+                        new TextCell {
+                            Text = "Modal Popup",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ModalPopupTestPage)
+                        },
 
-						new TextCell {
-							Text = "Bubble Popup",
-							Command = navigateCommand,
-							CommandParameter = typeof(BubblePopupTestPage)
-						},
+                        new TextCell {
+                            Text = "Bubble Popup",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(BubblePopupTestPage)
+                        },
 
-						new TextCell {
-							Text = "Pan Gesture test",
-							Command = navigateCommand,
-							CommandParameter = typeof(PanGesturePage)
-						},
+                        new TextCell {
+                            Text = "Pan Gesture test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(PanGesturePage)
+                        },
 
-					}
-				}
-			};
-		}
-	}
+                    }
+                }
+            };
+        }
+    }
 }

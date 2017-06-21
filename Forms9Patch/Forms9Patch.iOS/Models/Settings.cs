@@ -24,11 +24,11 @@ namespace Forms9Patch.iOS
         /// <c>false</c>
         public bool IsLicensed
         {
-            get { return _valid; }
+            get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
         internal static bool IsLicenseValid
         {
-            get { return _valid; }
+            get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
 
         internal static Assembly ApplicationAssembly;
@@ -88,7 +88,6 @@ namespace Forms9Patch.iOS
                         Console.WriteLine("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
                     }
                     FormsGestures.iOS.Settings.Init();
-                    PCL.Utils.AppDomainWrapper.Instance = new PCL.Utils.iOS.AppDomainWrapperInstance();
                 }
                 DetectDisplay();
             }

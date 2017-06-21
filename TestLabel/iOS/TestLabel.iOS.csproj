@@ -151,10 +151,6 @@
       <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>PCL.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj">
-      <Project>{802F3CDB-4AD3-40C1-AF8B-71342D059C3D}</Project>
-      <Name>PCL.Utils.iOS</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />

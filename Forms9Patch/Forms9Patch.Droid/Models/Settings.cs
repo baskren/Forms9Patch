@@ -20,11 +20,11 @@ namespace Forms9Patch.Droid
         /// <c>false</c>
         public bool IsLicensed
         {
-            get { return _valid; }
+            get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
         internal static bool IsLicenseValid
         {
-            get { return _valid; }
+            get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
 
         public static void Initialize(string licenseKey = null)
@@ -58,7 +58,6 @@ namespace Forms9Patch.Droid
                         Console.WriteLine("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
                     }
                     FormsGestures.Droid.Settings.Init();
-                    PCL.Utils.AppDomainWrapper.Instance = new PCL.Utils.Droid.AppDomainWrapperInstance();
                 }
                 DetectDisplay();
             }

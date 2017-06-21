@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,8 +6,8 @@
     <ProjectGuid>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Forms9PatchDemo</RootNamespace>
-    <TargetFrameworkProfile>Profile44</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>Forms9PatchDemo</AssemblyName>
     <ReleaseVersion>0.9.13.3</ReleaseVersion>
   </PropertyGroup>
@@ -45,13 +44,13 @@
     <Compile Include="Pages\MaterialSegmentedControlPage.xaml.cs">
       <DependentUpon>MaterialSegmentedControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ModalPopupTestPage.cs" />
     <Compile Include="Pages\BubblePopupTestPage.cs" />
     <Compile Include="Elements\ImageCircle.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\ImageButtonCodePage.cs" />
     <Compile Include="Pages\ImageCodePage.cs" />
+    <Compile Include="Pages\ModalPopupTestPage.cs" />
     <Compile Include="Pages\LayoutsPage.cs" />
     <Compile Include="Pages\MaterialButtonsPage.cs" />
     <Compile Include="Pages\MyPage.xaml.cs">

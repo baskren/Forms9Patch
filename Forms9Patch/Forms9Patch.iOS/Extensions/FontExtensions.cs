@@ -223,11 +223,11 @@ namespace Forms9Patch.iOS
                     // what is the assembly?
                     var assemblyName = resourceID.Substring(0, resourceID.IndexOf(".Resources.Fonts."));
                     //var assembly = System.Reflection.Assembly.Load (assemblyName);
-                    var assembly = AppDomainWrapper.GetAssemblyByName(assemblyName) ?? Forms9Patch.iOS.Settings.ApplicationAssembly;
+                    var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName) ?? Forms9Patch.iOS.Settings.ApplicationAssembly;
                     if (assembly == null)
                     {
                         // try using the current application assembly instead (as is the case with Shared Applications)
-                        assembly = AppDomainWrapper.GetAssemblyByName(assemblyName + ".Droid");
+                        assembly = ReflectionExtensions.GetAssemblyByName(assemblyName + ".Droid");
                         //Console.WriteLine ("Assembly for Resource ID \"" + resourceID + "\" not found.");
                         //return null;
                     }

@@ -118,10 +118,6 @@
       <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>PCL.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils.Droid\PCL.Utils.Droid.csproj">
-      <Project>{B56178FB-CF76-4A84-A945-1596E34ADE28}</Project>
-      <Name>PCL.Utils.Droid</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

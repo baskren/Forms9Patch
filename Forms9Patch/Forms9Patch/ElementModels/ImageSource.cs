@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using Xamarin.Forms;
+using Forms9Patch.Extensions;
 
 namespace Forms9Patch
 {
@@ -47,7 +48,6 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly in which the resource can be found</param> 
         public static Xamarin.Forms.ImageSource FromMultiResource(string resource, Assembly assembly = null)
         {
-            //if (PCL.Utils.AppDomainWrapper.Instance == null)
             if (string.IsNullOrWhiteSpace(Settings.LicenseKey))
                 throw new Exception("Forms9Patch is has not been initialized.");
             if (assembly == null)
@@ -57,10 +57,14 @@ namespace Forms9Patch
                 {
                     var index = resourcePath.IndexOf("Resources");
                     var asmName = string.Join(".", resourcePath.GetRange(0, index));
-                    assembly = PCL.Utils.AppDomainWrapper.GetAssemblyByName(asmName);
+                    var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
+                    if (appAsm?.GetName().Name == asmName)
+                        assembly = appAsm;
+                    else
+                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
                 }
                 if (assembly == null && resourcePath.Count() > 1)
-                    assembly = PCL.Utils.AppDomainWrapper.GetAssemblyByName(resourcePath[0]);
+                    assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
                 if (assembly == null)
                     assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             }
@@ -86,9 +90,19 @@ namespace Forms9Patch
         {
             if (assembly == null)
             {
-                var resourcePath = path.Split('.');
-                if (resourcePath.Count() > 1)
-                    assembly = PCL.Utils.AppDomainWrapper.GetAssemblyByName(resourcePath[0]);
+                var resourcePath = path.Split('.').ToList();
+                if (resourcePath.Contains("Resources"))
+                {
+                    var index = resourcePath.IndexOf("Resources");
+                    var asmName = string.Join(".", resourcePath.GetRange(0, index));
+                    var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
+                    if (appAsm?.GetName().Name == asmName)
+                        assembly = appAsm;
+                    else
+                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
+                }
+                if (assembly == null && resourcePath.Count() > 1)
+                    assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
                 if (assembly == null)
                     assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             }
@@ -213,7 +227,6 @@ namespace Forms9Patch
             var reqResBaseName = tuple.Item1;
             var reqResExt = tuple.Item2;
 
-
             string[] resourceNames = null;
             if (SortedAppleResources.ContainsKey(assembly))
                 resourceNames = SortedAppleResources[assembly];
@@ -257,7 +270,6 @@ namespace Forms9Patch
         }
         #endregion
 
-
         #region Path Resolution Support
         static List<string> ValidImageExtensions = new List<string> {
 			// these extensions can be turned into Image file on all three platforms
@@ -271,6 +283,7 @@ namespace Forms9Patch
             public double Distance = -1;
             public float Scale;
         }
+
 
         static List<DeviceDensity> AppleDensities = new List<DeviceDensity> {
             new DeviceDensity { Name = "@2x",   Min=320, Max=399, Scale=2.0f },
@@ -308,6 +321,7 @@ namespace Forms9Patch
             return order < 0 || order >= AppleDensities.Count ? null : AppleDensities[order].Name;
         }
         #endregion
+
 
 
     }
