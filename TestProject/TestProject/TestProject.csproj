@@ -119,6 +119,7 @@
     <Compile Include="UserPages\DataForBinding.cs" />
     <Compile Include="UserPages\SegmentSelectedBackgroundPage.cs" />
     <Compile Include="UserPages\SegmentAlignments.cs" />
+    <Compile Include="Pages\FontSizeTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -147,28 +147,29 @@ namespace Forms9Patch.Droid
                 var context = Xamarin.Forms.Forms.Context;
                 var fontAssetFileNames = context.Assets.List("Fonts");
                 var cachedFontDir = new File(context.CacheDir.AbsolutePath + "/AssetFonts");
-                if (!cachedFontDir.Exists())
-                    return null;
                 // move any Android Asset Fonts to the Applications CacheDir
-                foreach (var fontAssetFileName in fontAssetFileNames)
+                if (fontAssetFileNames != null)
                 {
-                    if (!cachedFontDir.Exists())
-                        cachedFontDir.Mkdir();
-                    var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName);
-                    if (!cachedFontFile.Exists())
+                    foreach (var fontAssetFileName in fontAssetFileNames)
                     {
-                        // copy into CacheDir
-                        var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
-                        var outputStream = new FileOutputStream(cachedFontFile);
-                        const int bufferSize = 1024;
-                        var buffer = new byte[bufferSize];
-                        int length = -1;
-                        while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                        if (!cachedFontDir.Exists())
+                            cachedFontDir.Mkdir();
+                        var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName);
+                        if (!cachedFontFile.Exists())
                         {
-                            outputStream.Write(buffer, 0, length);
+                            // copy into CacheDir
+                            var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
+                            var outputStream = new FileOutputStream(cachedFontFile);
+                            const int bufferSize = 1024;
+                            var buffer = new byte[bufferSize];
+                            int length = -1;
+                            while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                            {
+                                outputStream.Write(buffer, 0, length);
+                            }
+                            inputStream.Close();
+                            outputStream.Close();
                         }
-                        inputStream.Close();
-                        outputStream.Close();
                     }
                 }
                 var fontdirs = new string[] { "/system/fonts", "/system/font", "/data/fonts", cachedFontDir.AbsolutePath };

@@ -1,5 +1,6 @@
 using System;
 using Xamarin.Forms;
+using Forms9PatchDemo.Pages;
 
 namespace Forms9PatchDemo
 {
@@ -114,6 +115,13 @@ namespace Forms9PatchDemo
                     },
 
                     new TableSection("Code") {
+
+                        new TextCell {
+                            Text = "Font Size test",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(FontSizeTest)
+                        },
+
 
                         new TextCell {
                             Text = "Custom Font Effect",
