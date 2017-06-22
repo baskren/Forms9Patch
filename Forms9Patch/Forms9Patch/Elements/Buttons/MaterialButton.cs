@@ -548,14 +548,16 @@ namespace Forms9Patch
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,
                 //HeightRequest = 22,
-                MinimizeHeight = true,
+                MinimizeHeight = false,
                 Lines = Lines,
                 Fit = Fit,
                 LineBreakMode = LineBreakMode,
                 MinFontSize = MinFontSize,
                 FontSize = FontSize,
                 FontAttributes = FontAttributes,
-                FontFamily = FontFamily
+                FontFamily = FontFamily,
+                Margin = 0,
+
             };
 
             _stackLayout = new Xamarin.Forms.StackLayout
@@ -564,6 +566,8 @@ namespace Forms9Patch
                 Spacing = 4,
                 VerticalOptions = LayoutOptions.Fill,
                 HorizontalOptions = LayoutOptions.Fill,
+                Padding = 0,
+                Margin = 0,
             };
 
             base.Content = _stackLayout;
@@ -914,14 +918,14 @@ namespace Forms9Patch
                     _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                     _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                     _iconLabel.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                    _iconLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                 }
                 if (_label != null)
                 {
                     _label.VerticalTextAlignment = TextAlignment.Center;
                     _label.HorizontalTextAlignment = Alignment; //TextAlignment.Center;
                     _label.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
-                    _label.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    _label.VerticalOptions = LayoutOptions.FillAndExpand;
                     _label.MinimizeHeight = false;
                 }
                 _stackLayout.Spacing = 4;
