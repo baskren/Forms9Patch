@@ -488,6 +488,13 @@ namespace Forms9Patch
             set { SetValue(HasTightSpacingProperty, value); }
         }
 
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(MaterialButton), 4.0);
+        public double Spacing
+        {
+            get { return (double)GetValue(SpacingProperty); }
+            set { SetValue(SpacingProperty, value); }
+        }
+
         #endregion
 
 
@@ -563,7 +570,7 @@ namespace Forms9Patch
             _stackLayout = new Xamarin.Forms.StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
-                Spacing = 4,
+                Spacing = Spacing,
                 VerticalOptions = LayoutOptions.Fill,
                 HorizontalOptions = LayoutOptions.Fill,
                 Padding = 0,
@@ -906,60 +913,122 @@ namespace Forms9Patch
 
         void SetOrienations()
         {
+            var horzOption = (Alignment == TextAlignment.Center ? LayoutOptions.Center : (Alignment == TextAlignment.Start ? LayoutOptions.Start : LayoutOptions.End));
             if (Orientation == StackOrientation.Horizontal)
             {
-                if (_image != null)
+                if (HasTightSpacing)
                 {
-                    _image.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                    _image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    if (_image != null)
+                    {
+                        _image.HorizontalOptions = horzOption;
+                        _image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalOptions = horzOption;
+                        _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
+                    }
+                    if (_label != null)
+                    {
+                        _label.VerticalTextAlignment = TextAlignment.Center;
+                        _label.HorizontalTextAlignment = Alignment;
+                        _label.HorizontalOptions = horzOption;
+                        _label.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _label.MinimizeHeight = false;
+                    }
+                    _stackLayout.HorizontalOptions = horzOption;
                 }
-                if (_iconLabel != null)
+                else
                 {
-                    _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                    _iconLabel.VerticalTextAlignment = TextAlignment.Center;
-                    _iconLabel.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                    _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
+                    if (_image != null)
+                    {
+                        _image.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
+                    }
+                    if (_label != null)
+                    {
+                        _label.VerticalTextAlignment = TextAlignment.Center;
+                        _label.HorizontalTextAlignment = Alignment;
+                        _label.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _label.MinimizeHeight = false;
+                    }
+                    _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
-                if (_label != null)
-                {
-                    _label.VerticalTextAlignment = TextAlignment.Center;
-                    _label.HorizontalTextAlignment = Alignment; //TextAlignment.Center;
-                    _label.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
-                    _label.VerticalOptions = LayoutOptions.FillAndExpand;
-                    _label.MinimizeHeight = false;
-                }
-                _stackLayout.Spacing = 4;
-                _stackLayout.HorizontalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
             }
             else
             {
-                if (_image != null)
+                if (HasTightSpacing)
                 {
-                    _image.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                    _image.VerticalOptions = LayoutOptions.Center;
+                    if (_image != null)
+                    {
+                        _image.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _image.VerticalOptions = LayoutOptions.Center;
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                        _iconLabel.VerticalOptions = LayoutOptions.Center;
+                    }
+                    if (_label != null)
+                    {
+                        _label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
+                        _label.HorizontalTextAlignment = TextAlignment.Center;
+                        _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                                                               //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
+                        _label.VerticalOptions = LayoutOptions.Center;
+                        _label.MinimizeHeight = true;
+                    }
+                    //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
+                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                    _stackLayout.VerticalOptions = LayoutOptions.Center;
                 }
-                if (_iconLabel != null)
+                else
                 {
-                    _iconLabel.VerticalTextAlignment = TextAlignment.Center;
-                    _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                    _iconLabel.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                    _iconLabel.VerticalOptions = LayoutOptions.Center;
+                    if (_image != null)
+                    {
+                        _image.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _image.VerticalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                    }
+                    if (_iconLabel != null)
+                    {
+                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                        _iconLabel.VerticalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                    }
+                    if (_label != null)
+                    {
+                        _label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
+                        _label.HorizontalTextAlignment = TextAlignment.Center;
+                        _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                                                               //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
+                        _label.VerticalOptions = (TrailingImage ? LayoutOptions.Start : LayoutOptions.End);
+                        _label.MinimizeHeight = true;
+                    }
+                    //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
+                    _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+                    _stackLayout.VerticalOptions = LayoutOptions.Fill;
                 }
-                if (_label != null)
-                {
-                    _label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
-                    _label.HorizontalTextAlignment = TextAlignment.Center;
-                    _label.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                    _label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
-                    _label.MinimizeHeight = true;
-                }
-                _stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
-                _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
-                _stackLayout.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.FillAndExpand;
             }
             _stackLayout.Orientation = Orientation;
         }
+
+
+
+        // WORKING ON:  NEED TO ADD VERTICAL ALIGNMENT PROPERTY!!!!
 
 
 
@@ -1121,12 +1190,18 @@ namespace Forms9Patch
                 _label.FontFamily = FontFamily;
             else if (propertyName == TrailingImageProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
-                SetOrienations();
                 if (TrailingImage)
                     _stackLayout.LowerChild(_label);
                 else
                     _stackLayout.RaiseChild(_label);
+                SetOrienations();
+
+                // following 2 lines are required to force an update.  ForceLayout() causes label to not be sized correctly
+                HasTightSpacing = !HasTightSpacing;
+                HasTightSpacing = !HasTightSpacing;
             }
+            else if (propertyName == SpacingProperty.PropertyName)
+                _stackLayout.Spacing = Spacing;
         }
 
         void OnCommandChanged()
