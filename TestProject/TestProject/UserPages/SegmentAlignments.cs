@@ -21,6 +21,16 @@ namespace Forms9PatchDemo
             }
         };
 
+        MaterialSegmentedControl _vtAlignmentElement = new MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Segment { Text = "START", },
+                new Segment { Text = "CENTER" },
+                new Segment { Text = "END" },
+            }
+        };
+
         MaterialSegmentedControl _optionsElement = new MaterialSegmentedControl
         {
             GroupToggleBehavior = GroupToggleBehavior.Multiselect,
@@ -31,6 +41,21 @@ namespace Forms9PatchDemo
                 new Segment { Text = "VERTICAL" }
             }
         };
+
+        MaterialSegmentedControl _iconElement = new MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Segment { HtmlText = "NONE" },
+                new Segment { HtmlText = "x"},
+                new Segment { HtmlText = "©" },
+                new Segment { HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
+                new Segment { HtmlText = "|" } ,
+                new Segment { ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") }
+            }
+        };
+
+
 
         Switch _imposedHeightSwitch = new Switch();
 
@@ -53,7 +78,10 @@ namespace Forms9PatchDemo
         MaterialButton _iconTextAndTextButton = new MaterialButton
         {
             Text = "Text",
-            IconText = "©"
+            //IconText = "©"
+            //IconText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>"
+            //IconText = "Żyłę;"
+
         };
 
         /*
@@ -131,10 +159,21 @@ namespace Forms9PatchDemo
         };
         */
 
+        Xamarin.Forms.Grid _grid = new Xamarin.Forms.Grid
+        {
+            ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
+            RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
+        };
 
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
         public SegmentAlignments()
         {
+            _grid.Children.Add(new Xamarin.Forms.Label { Text = "Spacing:" }, 0, 0);
+            _grid.Children.Add(_spacingSlider, 0, 1);
+            _grid.Children.Add(new Xamarin.Forms.Label { Text = "Imposed Ht:" }, 1, 0);
+            _grid.Children.Add(_imposedHeightSwitch, 1, 1);
+
+
             Padding = new Thickness(40, 20, 20, 20);
             Content = new Xamarin.Forms.ScrollView
             {
@@ -145,14 +184,17 @@ namespace Forms9PatchDemo
                         new Xamarin.Forms.Label { Text = "Horizontal Alignment:"},
                         _hzAlignmentElement,
 
+                        new Xamarin.Forms.Label { Text = "Vertical Alignment:"},
+                        _vtAlignmentElement,
+
                         new Xamarin.Forms.Label { Text = "Options:"},
                         _optionsElement,
 
-                        new Xamarin.Forms.Label { Text = "Spacing:"},
-                        _spacingSlider,
+                        new Xamarin.Forms.Label { Text = "Icon:"},
+                        _iconElement,
 
-                        new Xamarin.Forms.Label { Text = "Imposed Height:"},
-                        _imposedHeightSwitch,
+                        _grid,
+
 
                         new BoxView { HeightRequest = 1 },
 
@@ -204,7 +246,23 @@ namespace Forms9PatchDemo
 				_iconAndTextButton.Alignment = alignment;
 				*/
                 _labelElement.HorizontalTextAlignment = alignment;
-                _iconTextAndTextButton.Alignment = alignment;
+                _iconTextAndTextButton.HorizontalAlignment = alignment;
+            };
+
+            _vtAlignmentElement.SegmentTapped += (sender, e) =>
+            {
+                TextAlignment alignment;
+                var buttonText = string.Concat(e.Segment.Text.ToUpper().Substring(0, 1), e.Segment.Text.ToLower().Substring(1));
+                if (!Enum.TryParse<TextAlignment>(buttonText, out alignment))
+                    throw new Exception("doh");
+                /*
+                _iconOnlyButtonElement.Alignment = alignment;
+                _textOnlyButtonElement.Alignment = alignment;
+                _iconTextOnlyButtonElement.Alignment = alignment;
+                _iconAndTextButton.Alignment = alignment;
+                */
+                _labelElement.VerticalTextAlignment = alignment;
+                _iconTextAndTextButton.VerticalAlignment = alignment;
             };
 
             _optionsElement.SegmentTapped += (sender, e) =>
@@ -222,6 +280,14 @@ namespace Forms9PatchDemo
                 _iconTextAndTextButton.Orientation = orientation;
             };
 
+            _iconElement.SegmentTapped += (sender, e) =>
+            {
+                if (e.Segment.ImageSource != null)
+                    _iconTextAndTextButton.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                else
+                    SetIconText(e.Segment.HtmlText);
+            };
+
             _spacingSlider.ValueChanged += (sender, e) =>
             {
                 _iconTextAndTextButton.Spacing = _spacingSlider.Value;
@@ -232,14 +298,32 @@ namespace Forms9PatchDemo
                 _iconTextAndTextButton.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
             };
 
-            var defaultAlignment = _iconTextAndTextButton.Alignment;
-            if (defaultAlignment == TextAlignment.Start)
+            var defaultHzAlignment = _iconTextAndTextButton.HorizontalAlignment;
+            if (defaultHzAlignment == TextAlignment.Start)
                 _hzAlignmentElement.SelectIndex(0);
-            else if (defaultAlignment == TextAlignment.Center)
+            else if (defaultHzAlignment == TextAlignment.Center)
                 _hzAlignmentElement.SelectIndex(1);
             else
                 _hzAlignmentElement.SelectIndex(2);
 
+            var defaultVtAlignment = _iconTextAndTextButton.VerticalAlignment;
+            if (defaultVtAlignment == TextAlignment.Start)
+                _vtAlignmentElement.SelectIndex(0);
+            else if (defaultVtAlignment == TextAlignment.Center)
+                _vtAlignmentElement.SelectIndex(1);
+            else
+                _vtAlignmentElement.SelectIndex(2);
+
+            _iconElement.SelectIndex(0);
+        }
+
+        void SetIconText(string iconTextSetting)
+        {
+            _iconTextAndTextButton.ImageSource = null;
+            if (iconTextSetting == "NONE")
+                _iconTextAndTextButton.IconText = null;
+            else
+                _iconTextAndTextButton.IconText = iconTextSetting;
         }
     }
 }

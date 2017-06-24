@@ -10,6 +10,7 @@
 		<AssemblyName>Forms9Patch</AssemblyName>
 		<TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
 		<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+		<ReleaseVersion>0.9.13.3</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
@@ -191,6 +192,7 @@
 		<Compile Include="Extensions\StringExtensions.cs" />
 		<Compile Include="Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" />
 		<Compile Include="Extensions\ApplicationExtensions.cs" />
+		<Compile Include="Extensions\LayoutOptionsExtensions.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>

@@ -342,11 +342,42 @@ namespace Forms9Patch
         /// Gets or sets the alignment of the image and text.
         /// </summary>
         /// <value>The alignment (left, center, right).</value>
+        [Obsolete("Alignment is obsolete, use HorizontalAlignment instead")]
         public TextAlignment Alignment
         {
             get { return (TextAlignment)GetValue(AlignmentProperty); }
             set { SetValue(AlignmentProperty, value); }
         }
+
+        /// <summary>
+        /// Backing store for the MaterialButton.Alignment bindable property
+        /// </summary>
+        public static BindableProperty HorizontalAlignmentProperty = BindableProperty.Create("Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the alignment of the image and text.
+        /// </summary>
+        /// <value>The alignment (left, center, right).</value>
+        public TextAlignment HorizontalAlignment
+        {
+            get { return (TextAlignment)GetValue(HorizontalAlignmentProperty); }
+            set { SetValue(HorizontalAlignmentProperty, value); }
+        }
+
+        /// <summary>
+        /// Backing store for the vertical alignment property.
+        /// </summary>
+        public static readonly BindableProperty VerticalAlignmentProperty = BindableProperty.Create("VerticalAlignment", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the vertical alignment.
+        /// </summary>
+        /// <value>The vertical alignment.</value>
+        public TextAlignment VerticalAlignment
+        {
+            get { return (TextAlignment)GetValue(VerticalAlignmentProperty); }
+            set { SetValue(VerticalAlignmentProperty, value); }
+        }
+
+
 
         /// <summary>
         /// Backing store for the MaterialButton's orientation property.
@@ -913,7 +944,13 @@ namespace Forms9Patch
 
         void SetOrienations()
         {
-            var horzOption = (Alignment == TextAlignment.Center ? LayoutOptions.Center : (Alignment == TextAlignment.Start ? LayoutOptions.Start : LayoutOptions.End));
+            if (_iconLabel != null)
+                _iconLabel.BackgroundColor = Color.Pink;
+            if (_label != null)
+                _label.BackgroundColor = Color.Pink;
+
+            var horzOption = HorizontalAlignment.ToLayoutOptions();
+            var vertOption = VerticalAlignment.ToLayoutOptions();
             if (Orientation == StackOrientation.Horizontal)
             {
                 if (HasTightSpacing)
@@ -921,20 +958,20 @@ namespace Forms9Patch
                     if (_image != null)
                     {
                         _image.HorizontalOptions = horzOption;
-                        _image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                        _image.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
+                        _iconLabel.VerticalTextAlignment = VerticalAlignment;
                         _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalTextAlignment = Alignment;
+                        _label.HorizontalTextAlignment = HorizontalAlignment;
                         _label.HorizontalOptions = horzOption;
+                        _label.VerticalTextAlignment = VerticalAlignment;
                         _label.VerticalOptions = LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
@@ -945,20 +982,20 @@ namespace Forms9Patch
                     if (_image != null)
                     {
                         _image.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                        _image.VerticalOptions = LayoutOptions.CenterAndExpand;
+                        _image.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.VerticalTextAlignment = VerticalAlignment;
                         _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalTextAlignment = Alignment;
+                        _label.HorizontalTextAlignment = HorizontalAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _label.VerticalTextAlignment = VerticalAlignment;
                         _label.VerticalOptions = LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
@@ -984,7 +1021,7 @@ namespace Forms9Patch
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = HorizontalAlignment; //TextAlignment.Center;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
                         _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                                                                //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
@@ -993,7 +1030,7 @@ namespace Forms9Patch
                     }
                     //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
-                    _stackLayout.VerticalOptions = LayoutOptions.Center;
+                    _stackLayout.VerticalOptions = VerticalAlignment.ToLayoutOptions(true);
                 }
                 else
                 {
@@ -1011,11 +1048,11 @@ namespace Forms9Patch
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = Alignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = HorizontalAlignment; //TextAlignment.Center;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
                         _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                                                                //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
-                        _label.VerticalOptions = (TrailingImage ? LayoutOptions.Start : LayoutOptions.End);
+                        _label.VerticalOptions = VerticalAlignment.ToLayoutOptions(true);
                         _label.MinimizeHeight = true;
                     }
                     //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
@@ -1030,6 +1067,8 @@ namespace Forms9Patch
 
         // WORKING ON:  NEED TO ADD VERTICAL ALIGNMENT PROPERTY!!!!
 
+        bool _changingIconImageSource;
+        bool _changingIconText;
 
 
         /// <param name="propertyName">The name of the changed property.</param>
@@ -1046,19 +1085,27 @@ namespace Forms9Patch
             if (_noUpdate)
                 return;
 
-            if (propertyName == AlignmentProperty.PropertyName)
+            if (propertyName == HorizontalAlignmentProperty.PropertyName || propertyName == VerticalAlignmentProperty.PropertyName || propertyName == AlignmentProperty.PropertyName)
             {
                 //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
                 SetOrienations();
             }
             else if (propertyName == ImageSourceProperty.PropertyName)
             {
+                if (_changingIconText)
+                    return;
+                _changingIconImageSource = true;
                 if (_image != null)
                     _stackLayout.Children.Remove(_image);
                 if (ImageSource != null)
                 {
                     if (_iconLabel != null)
+                    {
                         _stackLayout.Children.Remove(_iconLabel);
+                        _iconLabel.HtmlText = null;
+                        _iconLabel.Text = null;
+                        IconText = null;
+                    }
                     _image = new Image { Source = ImageSource };
                     _image.Fill = Fill.AspectFit;
                     _image.TintColor = TintImage ? _label.TextColor : Color.Default;
@@ -1071,9 +1118,13 @@ namespace Forms9Patch
                         SetOrienations();
                     }
                 }
+                _changingIconImageSource = false;
             }
             else if (propertyName == IconTextProperty.PropertyName)
             {
+                if (_changingIconImageSource)
+                    return;
+                _changingIconText = true;
                 if (_iconLabel != null)
                     _stackLayout.Children.Remove(_iconLabel);
                 if (IconText != null)
@@ -1097,6 +1148,7 @@ namespace Forms9Patch
                         SetOrienations();
                     }
                 }
+                _changingIconText = false;
             }
             else if (propertyName == BackgroundColorProperty.PropertyName
                        || propertyName == SelectedBackgroundColorProperty.PropertyName
