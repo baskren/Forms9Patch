@@ -832,7 +832,10 @@ namespace Forms9Patch
             if (_image != null)
                 _image.TintColor = TintImage ? _label.TextColor : Color.Default;
             if (_iconLabel != null)
+            {
                 _iconLabel.TextColor = _label.TextColor;
+                _iconLabel.FontSize = _label.FontSize;
+            }
             _noUpdate = false;
         }
         #endregion
@@ -944,11 +947,6 @@ namespace Forms9Patch
 
         void SetOrienations()
         {
-            if (_iconLabel != null)
-                _iconLabel.BackgroundColor = Color.Pink;
-            if (_label != null)
-                _label.BackgroundColor = Color.Pink;
-
             var horzOption = HorizontalAlignment.ToLayoutOptions();
             var vertOption = VerticalAlignment.ToLayoutOptions();
             if (Orientation == StackOrientation.Horizontal)
@@ -1137,7 +1135,9 @@ namespace Forms9Patch
                         TextColor = _label.TextColor,
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
-                        Lines = 0,
+                        Lines = 1,
+                        FontSize = FontSize,
+                        Fit = LabelFit.None,
                     };
                     if (_iconLabel != null)
                     {

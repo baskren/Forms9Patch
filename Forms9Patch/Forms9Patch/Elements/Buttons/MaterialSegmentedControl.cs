@@ -637,6 +637,12 @@ namespace Forms9Patch
                 _segments[index].IsSelected = true;
         }
 
+        public void DeselectAll()
+        {
+            foreach (var segment in _segments)
+                segment.IsSelected = false;
+        }
+
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
@@ -644,6 +650,7 @@ namespace Forms9Patch
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == GroupToggleBehaviorProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                 {
@@ -727,6 +734,13 @@ namespace Forms9Patch
             else if (propertyName == HapticModeProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.HapticMode = HapticMode;
+            else if (propertyName == IsEnabledProperty.PropertyName)
+            {
+                if (IsEnabled)
+                    Opacity *= 2;
+                else
+                    Opacity /= 2;
+            }
         }
 
         //Segment _lastSelectedSegment;

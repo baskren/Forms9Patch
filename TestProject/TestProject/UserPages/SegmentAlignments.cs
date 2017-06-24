@@ -79,7 +79,7 @@ namespace Forms9PatchDemo
         {
             Text = "Text",
             //IconText = "©"
-            //IconText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>"
+            //HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
             //IconText = "Żyłę;"
 
         };
@@ -184,7 +184,7 @@ namespace Forms9PatchDemo
                         new Xamarin.Forms.Label { Text = "Horizontal Alignment:"},
                         _hzAlignmentElement,
 
-                        new Xamarin.Forms.Label { Text = "Vertical Alignment:"},
+                        new Xamarin.Forms.Label { Text = "Vertical Alignment: (imposed ht req'd)"},
                         _vtAlignmentElement,
 
                         new Xamarin.Forms.Label { Text = "Options:"},
@@ -296,6 +296,9 @@ namespace Forms9PatchDemo
             _imposedHeightSwitch.Toggled += (sender, e) =>
             {
                 _iconTextAndTextButton.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
+                _vtAlignmentElement.IsEnabled = _imposedHeightSwitch.IsToggled;
+                if (!_vtAlignmentElement.IsEnabled)
+                    _vtAlignmentElement.DeselectAll();
             };
 
             var defaultHzAlignment = _iconTextAndTextButton.HorizontalAlignment;
@@ -306,15 +309,9 @@ namespace Forms9PatchDemo
             else
                 _hzAlignmentElement.SelectIndex(2);
 
-            var defaultVtAlignment = _iconTextAndTextButton.VerticalAlignment;
-            if (defaultVtAlignment == TextAlignment.Start)
-                _vtAlignmentElement.SelectIndex(0);
-            else if (defaultVtAlignment == TextAlignment.Center)
-                _vtAlignmentElement.SelectIndex(1);
-            else
-                _vtAlignmentElement.SelectIndex(2);
 
             _iconElement.SelectIndex(0);
+            _vtAlignmentElement.IsEnabled = false;
         }
 
         void SetIconText(string iconTextSetting)
