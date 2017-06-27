@@ -76,13 +76,6 @@ namespace Forms9PatchDemo
                     new TableSection("Code") {
 
                         new TextCell {
-                            Text = "Segment alignments",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(SegmentAlignments)
-                        },
-
-
-                        new TextCell {
                             Text = "Using MaterialButton SelectedBackground",
                             Command = navigateCommand,
                             CommandParameter = typeof(SegmentSelectedBackgroundPage)

@@ -44,13 +44,14 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _iconElement = new MaterialSegmentedControl
         {
+            HasTightSpacing = true,
+            //FontSize = 10,
             Segments =
             {
                 new Segment { HtmlText = "NONE" },
                 new Segment { HtmlText = "x"},
                 new Segment { HtmlText = "©" },
                 new Segment { HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
-                new Segment { HtmlText = "|" } ,
                 new Segment { ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") }
             }
         };
@@ -67,99 +68,58 @@ namespace Forms9PatchDemo
 
         };
 
-        /*
-        MaterialButton _iconAndTextButton = new MaterialButton
-        {
-            Text = "Text",
-            ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.info"),
-        };
-        */
-
         MaterialButton _iconTextAndTextButton = new MaterialButton
         {
             Text = "Text",
-            //IconText = "©"
-            //HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
-            //IconText = "Żyłę;"
-
         };
 
-        /*
-        MaterialSegmentedControl _textOnlySegmentsElement = new MaterialSegmentedControl
+
+        MaterialSegmentedControl _hzSegmentsElement = new MaterialSegmentedControl
         {
             Segments =
                         {
                             new Segment
                             {
-                                Text = "TA",
+                                Text = "T1",
                             },
                             new Segment
                             {
-                                Text = "TB"
+                                Text = "T2"
                             },
                             new Segment
                             {
-                                Text = "TC"
+                                Text = "T3"
                             },
                         }
         };
 
-        MaterialSegmentedControl _iconTextOnlySegmentsElement = new MaterialSegmentedControl
+        MaterialSegmentedControl _vtSegmentsElement = new MaterialSegmentedControl
         {
+            Orientation = StackOrientation.Vertical,
             Segments =
-            {
-                new Segment
-                {
-                    IconText = "IA"
-                },
-                new Segment
-                {
-                    IconText = "IB"
-                },
-                new Segment
-                {
-                    IconText = "IC"
-                },
-            }
+                        {
+                            new Segment
+                            {
+                                Text = "T1",
+                            },
+                            new Segment
+                            {
+                                Text = "T2"
+                            },
+                            new Segment
+                            {
+                                Text = "T3"
+                            },
+                        }
         };
 
-
-        MaterialSegmentedControl _iconOnlySegmentsElement = new MaterialSegmentedControl
+        Xamarin.Forms.Grid _grid1 = new Xamarin.Forms.Grid
         {
-            Segments =
-            {
-                new Segment
-                {
-                    ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.info"),
-                },
-                new Segment
-                {
-                    ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR")
-                },
-                new Segment
-                {
-                    ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Exit")
-                },
-            }
+            ColumnDefinitions = { new ColumnDefinition { Width = new GridLength(19) }, new ColumnDefinition { Width = GridLength.Star } },
+            RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
         };
 
-        MaterialButton _textOnlyButtonElement = new MaterialButton
-        {
-            Text = "TA"
-        };
-
-        MaterialButton _iconTextOnlyButtonElement = new MaterialButton
-        {
-            IconText = "IA"
-        };
-
-        MaterialButton _iconOnlyButtonElement = new MaterialButton
-        {
-            ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR")
-        };
-        */
-
-        Xamarin.Forms.Grid _grid = new Xamarin.Forms.Grid
+        Xamarin.Forms.Grid _grid2 = new Xamarin.Forms.Grid
         {
             ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
             RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
@@ -168,10 +128,22 @@ namespace Forms9PatchDemo
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
         public SegmentAlignments()
         {
-            _grid.Children.Add(new Xamarin.Forms.Label { Text = "Spacing:" }, 0, 0);
-            _grid.Children.Add(_spacingSlider, 0, 1);
-            _grid.Children.Add(new Xamarin.Forms.Label { Text = "Imposed Ht:" }, 1, 0);
-            _grid.Children.Add(_imposedHeightSwitch, 1, 1);
+
+            _grid1.Children.Add(new Xamarin.Forms.Label { Text = "HZ", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 0);
+            _grid1.Children.Add(_hzAlignmentElement, 1, 0);
+            _grid1.Children.Add(new Xamarin.Forms.Label { Text = "VT", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 1);
+            _grid1.Children.Add(_vtAlignmentElement, 1, 1);
+            _grid1.Children.Add(new Xamarin.Forms.Label { Text = "Opt", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 2);
+            _grid1.Children.Add(_optionsElement, 1, 2);
+            _grid1.Children.Add(new Xamarin.Forms.Label { Text = "Icon", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 3);
+            _grid1.Children.Add(_iconElement, 1, 3);
+
+            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "Spacing:" }, 0, 0);
+            _grid2.Children.Add(_spacingSlider, 0, 1);
+            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "Imposed Ht:" }, 1, 0);
+            _grid2.Children.Add(_imposedHeightSwitch, 1, 1);
+
+
 
 
             Padding = new Thickness(40, 20, 20, 20);
@@ -181,54 +153,15 @@ namespace Forms9PatchDemo
                 {
                     Children =
                     {
-                        new Xamarin.Forms.Label { Text = "Horizontal Alignment:"},
-                        _hzAlignmentElement,
-
-                        new Xamarin.Forms.Label { Text = "Vertical Alignment: (imposed ht req'd)"},
-                        _vtAlignmentElement,
-
-                        new Xamarin.Forms.Label { Text = "Options:"},
-                        _optionsElement,
-
-                        new Xamarin.Forms.Label { Text = "Icon:"},
-                        _iconElement,
-
-                        _grid,
+                        _grid1,
+                        _grid2,
 
 
-                        new BoxView { HeightRequest = 1 },
+                        new BoxView { HeightRequest = 1, Color = Color.Black },
 
                         _iconTextAndTextButton,
-
-                        /*
-
-                        _iconAndTextButton,
-
-                        new BoxView { HeightRequest = 1 },
-
-                        new Xamarin.Forms.Label { Text = "Text Only Segments:"},
-                        _textOnlySegmentsElement,
-
-                        new Xamarin.Forms.Label { Text = "IconText Only Segments:"},
-                        _iconTextOnlySegmentsElement,
-
-                        new Xamarin.Forms.Label { Text = "Icon Only Segments:"},
-                        _iconOnlySegmentsElement,
-
-                        new BoxView { HeightRequest = 1 },
-
-                        new Xamarin.Forms.Label { Text = "Text Only Segments:"},
-                        _textOnlyButtonElement,
-
-                        new Xamarin.Forms.Label { Text = "IconText Only Segments:"},
-                        _iconTextOnlyButtonElement,
-
-                        new Xamarin.Forms.Label { Text = "Icon Only Segments:"},
-                        _iconOnlyButtonElement,
-
-                        new Xamarin.Forms.Label { Text = "Label:"},
-                        _labelElement
-                        */
+                        _hzSegmentsElement,
+                        _vtSegmentsElement
                     }
                 }
             };
@@ -239,14 +172,10 @@ namespace Forms9PatchDemo
                 var buttonText = string.Concat(e.Segment.Text.ToUpper().Substring(0, 1), e.Segment.Text.ToLower().Substring(1));
                 if (!Enum.TryParse<TextAlignment>(buttonText, out alignment))
                     throw new Exception("doh");
-                /*
-                _iconOnlyButtonElement.Alignment = alignment;
-                _textOnlyButtonElement.Alignment = alignment;
-                _iconTextOnlyButtonElement.Alignment = alignment;
-				_iconAndTextButton.Alignment = alignment;
-				*/
                 _labelElement.HorizontalTextAlignment = alignment;
-                _iconTextAndTextButton.HorizontalAlignment = alignment;
+                _iconTextAndTextButton.HorizontalTextAlignment = alignment;
+                _hzSegmentsElement.HorizontalTextAlignment = alignment;
+                _vtSegmentsElement.HorizontalTextAlignment = alignment;
             };
 
             _vtAlignmentElement.SegmentTapped += (sender, e) =>
@@ -255,14 +184,10 @@ namespace Forms9PatchDemo
                 var buttonText = string.Concat(e.Segment.Text.ToUpper().Substring(0, 1), e.Segment.Text.ToLower().Substring(1));
                 if (!Enum.TryParse<TextAlignment>(buttonText, out alignment))
                     throw new Exception("doh");
-                /*
-                _iconOnlyButtonElement.Alignment = alignment;
-                _textOnlyButtonElement.Alignment = alignment;
-                _iconTextOnlyButtonElement.Alignment = alignment;
-                _iconAndTextButton.Alignment = alignment;
-                */
                 _labelElement.VerticalTextAlignment = alignment;
-                _iconTextAndTextButton.VerticalAlignment = alignment;
+                _iconTextAndTextButton.VerticalTextAlignment = alignment;
+                _hzSegmentsElement.VerticalTextAlignment = alignment;
+                _vtSegmentsElement.VerticalTextAlignment = alignment;
             };
 
             _optionsElement.SegmentTapped += (sender, e) =>
@@ -278,12 +203,26 @@ namespace Forms9PatchDemo
                 _iconTextAndTextButton.HasTightSpacing = hasTightSpacing;
                 _iconTextAndTextButton.TrailingImage = trailingImage;
                 _iconTextAndTextButton.Orientation = orientation;
+
+                _hzSegmentsElement.HasTightSpacing = hasTightSpacing;
+                _hzSegmentsElement.TrailingImage = trailingImage;
+                _hzSegmentsElement.IntraSegmentOrientation = orientation;
+
+                _vtSegmentsElement.HasTightSpacing = hasTightSpacing;
+                _vtSegmentsElement.TrailingImage = trailingImage;
+                _vtSegmentsElement.IntraSegmentOrientation = orientation;
             };
 
             _iconElement.SegmentTapped += (sender, e) =>
             {
                 if (e.Segment.ImageSource != null)
+                {
                     _iconTextAndTextButton.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                    foreach (var segment in _hzSegmentsElement.Segments)
+                        segment.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                    foreach (var segment in _vtSegmentsElement.Segments)
+                        segment.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                }
                 else
                     SetIconText(e.Segment.HtmlText);
             };
@@ -291,17 +230,24 @@ namespace Forms9PatchDemo
             _spacingSlider.ValueChanged += (sender, e) =>
             {
                 _iconTextAndTextButton.Spacing = _spacingSlider.Value;
+                _hzSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
+                _vtSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
             };
 
             _imposedHeightSwitch.Toggled += (sender, e) =>
             {
                 _iconTextAndTextButton.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
+                _hzSegmentsElement.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
+                _vtSegmentsElement.HeightRequest = _imposedHeightSwitch.IsToggled ? 180 : -1;
+
                 _vtAlignmentElement.IsEnabled = _imposedHeightSwitch.IsToggled;
                 if (!_vtAlignmentElement.IsEnabled)
                     _vtAlignmentElement.DeselectAll();
+
+
             };
 
-            var defaultHzAlignment = _iconTextAndTextButton.HorizontalAlignment;
+            var defaultHzAlignment = _iconTextAndTextButton.HorizontalTextAlignment;
             if (defaultHzAlignment == TextAlignment.Start)
                 _hzAlignmentElement.SelectIndex(0);
             else if (defaultHzAlignment == TextAlignment.Center)
@@ -317,10 +263,18 @@ namespace Forms9PatchDemo
         void SetIconText(string iconTextSetting)
         {
             _iconTextAndTextButton.ImageSource = null;
+            foreach (var segment in _hzSegmentsElement.Segments)
+                segment.ImageSource = null;
+            foreach (var segment in _vtSegmentsElement.Segments)
+                segment.ImageSource = null;
             if (iconTextSetting == "NONE")
                 _iconTextAndTextButton.IconText = null;
             else
                 _iconTextAndTextButton.IconText = iconTextSetting;
+            foreach (var segment in _hzSegmentsElement.Segments)
+                segment.IconText = _iconTextAndTextButton.IconText;
+            foreach (var segment in _vtSegmentsElement.Segments)
+                segment.IconText = _iconTextAndTextButton.IconText;
         }
     }
 }

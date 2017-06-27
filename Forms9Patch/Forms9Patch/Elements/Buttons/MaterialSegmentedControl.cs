@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -23,21 +24,6 @@ namespace Forms9Patch
         {
             get { return _segments; }
         }
-
-        /*
-		/// <summary>
-		/// Backing store for the SegmentedMaterialButton.Orientation property
-		/// </summary>
-		public static new BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(SegmentOrientation), typeof(MaterialSegmentedControl), SegmentOrientation.Horizontal);
-		/// <summary>
-		/// Gets or sets the SegmentedMaterialButton's orientation.
-		/// </summary>
-		/// <value>The segmented buttton's orientation.</value>
-		public new SegmentOrientation Orientation {
-			get { return (SegmentOrientation) GetValue (OrientationProperty); }
-			set { SetValue (OrientationProperty, value); }
-		}
-		*/
 
         /// <summary>
         /// Identifies the Padding bindable property.
@@ -374,6 +360,56 @@ namespace Forms9Patch
             get { return (bool)GetValue(HasTightSpacingProperty); }
             set { SetValue(HasTightSpacingProperty, value); }
         }
+
+        /// <summary>
+        /// Backing store for the horizontal text alignment property.
+        /// </summary>
+        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the horizontal text alignment.
+        /// </summary>
+        /// <value>The horizontal text alignment.</value>
+        public TextAlignment HorizontalTextAlignment
+        {
+            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
+            set { SetValue(HorizontalTextAlignmentProperty, value); }
+        }
+
+        /// <summary>
+        /// Backing store for the vertical text alignment property.
+        /// </summary>
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the vertical text alignment.
+        /// </summary>
+        /// <value>The vertical text alignment.</value>
+        public TextAlignment VerticalTextAlignment
+        {
+            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
+            set { SetValue(VerticalTextAlignmentProperty, value); }
+        }
+
+        /// <summary>
+        /// The backing store for the segments orientation property.
+        /// </summary>
+        public static readonly BindableProperty IntraSegmentOrientationProperty = BindableProperty.Create("IntraSegmentOrientation", typeof(StackOrientation), typeof(MaterialSegmentedControl), StackOrientation.Horizontal);
+        /// <summary>
+        /// Gets or sets the orientation of elements within the segments.
+        /// </summary>
+        /// <value>The orientation of the elements within the segments.</value>
+        public StackOrientation IntraSegmentOrientation
+        {
+            get { return (StackOrientation)GetValue(IntraSegmentOrientationProperty); }
+            set { SetValue(IntraSegmentOrientationProperty, value); }
+        }
+
+        public static readonly BindableProperty IntraSegmentSpacingProperty = BindableProperty.Create("IntraSegmentSpacing", typeof(double), typeof(MaterialSegmentedControl), default(double));
+        public double IntraSegmentSpacing
+        {
+            get { return (double)GetValue(IntraSegmentSpacingProperty); }
+            set { SetValue(IntraSegmentSpacingProperty, value); }
+        }
+
         #endregion
 
 
@@ -472,7 +508,8 @@ namespace Forms9Patch
             button.FontFamily = FontFamily;
             button.FontSize = FontSize;
             button.HasShadow = HasShadow;
-            button.SegmentOrientation = Orientation;
+            button.ParentSegmentsOrientation = Orientation;
+            button.Orientation = IntraSegmentOrientation;
             button.SeparatorWidth = SeparatorWidth;
             button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
             button.GroupToggleBehavior = GroupToggleBehavior;
@@ -483,11 +520,14 @@ namespace Forms9Patch
             button.SelectedFontColor = SelectedFontColor;
             button.TintImage = TintImage;
             button.HasTightSpacing = HasTightSpacing;
+            button.HorizontalTextAlignment = HorizontalTextAlignment;
+            button.VerticalTextAlignment = VerticalTextAlignment;
             if (!segment.FontAttributesSet)
                 segment.MaterialButton.FontAttributes = FontAttributes;
             button.TrailingImage = TrailingImage;
             button.HapticMode = HapticMode;
             button.HapticEffect = HapticEffect;
+            button.Spacing = IntraSegmentSpacing;
         }
         #endregion
 
@@ -684,6 +724,18 @@ namespace Forms9Patch
                     foreach (Segment segment in Segments)
                         segment.MaterialButton.HasTightSpacing = HasTightSpacing;
             }
+            else if (propertyName == HorizontalTextAlignmentProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.HorizontalTextAlignment = HorizontalTextAlignment;
+            }
+            else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.VerticalTextAlignment = VerticalTextAlignment;
+            }
             else if (propertyName == FontAttributesProperty.PropertyName)
             {
                 if (Segments != null)
@@ -721,7 +773,10 @@ namespace Forms9Patch
 
             else if (propertyName == OrientationProperty.PropertyName)
                 foreach (MaterialButton button in Children)
-                    button.SegmentOrientation = Orientation;
+                    button.ParentSegmentsOrientation = Orientation;
+            else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
+                foreach (MaterialButton button in Children)
+                    button.Orientation = IntraSegmentOrientation;
             else if (propertyName == SeparatorWidthProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.SeparatorWidth = SeparatorWidth;
@@ -741,6 +796,9 @@ namespace Forms9Patch
                 else
                     Opacity /= 2;
             }
+            else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
+                foreach (MaterialButton button in Children)
+                    button.Spacing = IntraSegmentSpacing;
         }
 
         //Segment _lastSelectedSegment;
@@ -793,19 +851,23 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            System.Diagnostics.Debug.WriteLine("width[" + width + "] height[" + height + "]");
 
             var p = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0)
                 p = RoundedBoxBase.ShadowPadding(this);
-            //Debug.WriteLine ("p=" + p.Description());
+            //System.Diagnostics.Debug.WriteLine("p=" + p.Description());
 
             var hz = Orientation == StackOrientation.Horizontal;
             var vt = !hz;
             var newWidth = width - p.HorizontalThickness;
             var newHeight = height - p.VerticalThickness;
 
+            System.Diagnostics.Debug.WriteLine("newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
+
 
             int count = Children.Count;
+            System.Diagnostics.Debug.WriteLine("count=[" + count + "]");
 
             if (count > 0)
             {
@@ -818,7 +880,9 @@ namespace Forms9Patch
                 double sWidth = hz ? xOffset : width;
                 double sHeight = vt ? yOffset : height;
 
-                for (int i = 0; i < count; i++)
+                System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
+
+                for (int i = 0; i < count - 1; i++)
                 {
                     var view = Children[i];
                     if (view.IsVisible)
@@ -841,12 +905,14 @@ namespace Forms9Patch
                         }
                         thisW = Math.Round(thisW);
                         thisH = Math.Round(thisH);
-                        //Debug.WriteLine ("ShowPadding[" + i + "]: [" + x + ", " + y + ", " + thisW + ", " + thisH + "]");
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
                         x = Math.Round(x + (hz ? thisW : 0));
                         y = Math.Round(y + (vt ? thisH : 0));
                     }
                 }
+                var lastView = Children.Last();
+                if (lastView.IsVisible)
+                    LayoutChildIntoBoundingRegion(lastView, new Rectangle(x, y, newWidth - x, newHeight - y));
             }
         }
         #endregion

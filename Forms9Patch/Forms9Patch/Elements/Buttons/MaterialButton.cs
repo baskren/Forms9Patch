@@ -143,7 +143,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the MaterialButton.FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialButton), 12.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialButton), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
                                                                                                                                                      /// <summary>
                                                                                                                                                      /// Gets or sets the size of the font.
                                                                                                                                                      /// </summary>
@@ -342,7 +342,7 @@ namespace Forms9Patch
         /// Gets or sets the alignment of the image and text.
         /// </summary>
         /// <value>The alignment (left, center, right).</value>
-        [Obsolete("Alignment is obsolete, use HorizontalAlignment instead")]
+        [Obsolete("Alignment is obsolete, see HorizontalTextAlignment and VerticalTextAlignment")]
         public TextAlignment Alignment
         {
             get { return (TextAlignment)GetValue(AlignmentProperty); }
@@ -352,29 +352,29 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the MaterialButton.Alignment bindable property
         /// </summary>
-        public static BindableProperty HorizontalAlignmentProperty = BindableProperty.Create("Justificaiton", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
         /// <summary>
         /// Gets or sets the alignment of the image and text.
         /// </summary>
         /// <value>The alignment (left, center, right).</value>
-        public TextAlignment HorizontalAlignment
+        public TextAlignment HorizontalTextAlignment
         {
-            get { return (TextAlignment)GetValue(HorizontalAlignmentProperty); }
-            set { SetValue(HorizontalAlignmentProperty, value); }
+            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
+            set { SetValue(HorizontalTextAlignmentProperty, value); }
         }
 
         /// <summary>
         /// Backing store for the vertical alignment property.
         /// </summary>
-        public static readonly BindableProperty VerticalAlignmentProperty = BindableProperty.Create("VerticalAlignment", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(MaterialButton), TextAlignment.Center);
         /// <summary>
         /// Gets or sets the vertical alignment.
         /// </summary>
         /// <value>The vertical alignment.</value>
-        public TextAlignment VerticalAlignment
+        public TextAlignment VerticalTextAlignment
         {
-            get { return (TextAlignment)GetValue(VerticalAlignmentProperty); }
-            set { SetValue(VerticalAlignmentProperty, value); }
+            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
+            set { SetValue(VerticalTextAlignmentProperty, value); }
         }
 
 
@@ -537,11 +537,11 @@ namespace Forms9Patch
             set { SetValue(SegmentTypeProperty, value); }
         }
 
-        internal static BindableProperty SegmentOrientationProperty = BindableProperty.Create("SegmentOrientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
-        internal StackOrientation SegmentOrientation
+        internal static BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("ParentSegmentsOrientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
+        internal StackOrientation ParentSegmentsOrientation
         {
-            get { return (StackOrientation)GetValue(SegmentOrientationProperty); }
-            set { SetValue(SegmentOrientationProperty, value); }
+            get { return (StackOrientation)GetValue(ParentSegmentsOrientationProperty); }
+            set { SetValue(ParentSegmentsOrientationProperty, value); }
         }
 
         internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(MaterialButton), -1f);
@@ -947,8 +947,8 @@ namespace Forms9Patch
 
         void SetOrienations()
         {
-            var horzOption = HorizontalAlignment.ToLayoutOptions();
-            var vertOption = VerticalAlignment.ToLayoutOptions();
+            var horzOption = HorizontalTextAlignment.ToLayoutOptions();
+            var vertOption = VerticalTextAlignment.ToLayoutOptions();
             if (Orientation == StackOrientation.Horizontal)
             {
                 if (HasTightSpacing)
@@ -962,14 +962,14 @@ namespace Forms9Patch
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
-                        _iconLabel.VerticalTextAlignment = VerticalAlignment;
+                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
-                        _label.HorizontalTextAlignment = HorizontalAlignment;
+                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalOptions = horzOption;
-                        _label.VerticalTextAlignment = VerticalAlignment;
+                        _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.VerticalOptions = LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
@@ -986,14 +986,14 @@ namespace Forms9Patch
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                        _iconLabel.VerticalTextAlignment = VerticalAlignment;
+                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
-                        _label.HorizontalTextAlignment = HorizontalAlignment;
+                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        _label.VerticalTextAlignment = VerticalAlignment;
+                        _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.VerticalOptions = LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
@@ -1019,7 +1019,7 @@ namespace Forms9Patch
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = HorizontalAlignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = VerticalTextAlignment; //TextAlignment.Center;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
                         _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                                                                //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
@@ -1028,7 +1028,7 @@ namespace Forms9Patch
                     }
                     //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
-                    _stackLayout.VerticalOptions = VerticalAlignment.ToLayoutOptions(true);
+                    _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                 }
                 else
                 {
@@ -1046,11 +1046,11 @@ namespace Forms9Patch
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = HorizontalAlignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = HorizontalTextAlignment; //TextAlignment.Center;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
                         _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                                                                //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
-                        _label.VerticalOptions = VerticalAlignment.ToLayoutOptions(true);
+                        _label.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                         _label.MinimizeHeight = true;
                     }
                     //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
@@ -1083,7 +1083,9 @@ namespace Forms9Patch
             if (_noUpdate)
                 return;
 
-            if (propertyName == HorizontalAlignmentProperty.PropertyName || propertyName == VerticalAlignmentProperty.PropertyName || propertyName == AlignmentProperty.PropertyName)
+            if (propertyName == AlignmentProperty.PropertyName)
+                HorizontalTextAlignment = Alignment;
+            if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
                 //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
                 SetOrienations();

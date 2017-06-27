@@ -38,7 +38,7 @@ namespace Forms9Patch.iOS
         {
             get
             {
-                return NSBundle.MainBundle.InfoDictionary["CFBundleIdentifier"].ToString();
+                return NSBundle.MainBundle.BundleIdentifier;
             }
         }
 

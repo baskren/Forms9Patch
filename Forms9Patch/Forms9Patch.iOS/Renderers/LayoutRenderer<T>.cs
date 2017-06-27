@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using CoreGraphics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -125,7 +125,7 @@ namespace Forms9Patch.iOS
 
 			var materialButton = Element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			nfloat separatorWidth = materialButton == null || type == SegmentType.Not ? 
 				0 : 
@@ -306,7 +306,7 @@ namespace Forms9Patch.iOS
 		internal static CGPath RectangularPerimeterPath(IRoundedBox element, CGRect rect, float radius, bool counterClockWise = true) {
 			var materialButton = element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			//var diameter = radius * 2;
 			//var topLeft = new CGRect (rect.Left, rect.Top, diameter, diameter);
@@ -412,7 +412,7 @@ namespace Forms9Patch.iOS
 			lineWidth /= 2.0f;
 			var materialButton = element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			if (type == SegmentType.Not)
 				return RectangularPerimeterPath (element, rect, radius);

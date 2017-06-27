@@ -49,7 +49,7 @@ namespace Forms9Patch.Droid
 
 			var materialButton = Element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			float separatorWidth = materialButton == null || type==SegmentType.Not ? 
 				0 : 
@@ -282,7 +282,7 @@ namespace Forms9Patch.Droid
 		internal static CGPath PerimeterPath(IRoundedBox element, RectF rect, float radius, bool counterClockWise = true) {
 			var materialButton = element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			var diameter = radius * 2;
 			var topLeft = new RectF (rect.Left, rect.Top, rect.Left + diameter, rect.Top + diameter);
@@ -384,7 +384,7 @@ namespace Forms9Patch.Droid
 			lineWidth /= 2.0f;
 			var materialButton = element as MaterialButton;
 			SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+			StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 			if (type == SegmentType.Not)
 				return PerimeterPath (element, rect, radius);

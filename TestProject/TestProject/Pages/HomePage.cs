@@ -117,6 +117,14 @@ namespace Forms9PatchDemo
                     new TableSection("Code") {
 
                         new TextCell {
+                            Text = "Material Button & Segment alignments",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SegmentAlignments)
+                        },
+
+
+
+                        new TextCell {
                             Text = "Font Size test",
                             Command = navigateCommand,
                             CommandParameter = typeof(FontSizeTest)

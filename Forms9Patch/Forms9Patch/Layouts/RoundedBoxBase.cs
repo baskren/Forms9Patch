@@ -88,7 +88,7 @@ namespace Forms9Patch
 
 			if (makeRoomForShadow) {
 				SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-				StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.SegmentOrientation;
+				StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 				var shadowX = Settings.ShadowOffset.X;
 				var shadowY = Settings.ShadowOffset.Y;
