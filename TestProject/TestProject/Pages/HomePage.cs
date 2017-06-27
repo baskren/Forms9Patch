@@ -119,9 +119,14 @@ namespace Forms9PatchDemo
                         new TextCell {
                             Text = "Material Button & Segment alignments",
                             Command = navigateCommand,
-                            CommandParameter = typeof(SegmentAlignments)
+                            CommandParameter = typeof(MaterialButtonAndSegmentAlignments)
                         },
 
+                        new TextCell {
+                            Text = "ImageButton alignments",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageButtonAlignments)
+                        },
 
 
                         new TextCell {

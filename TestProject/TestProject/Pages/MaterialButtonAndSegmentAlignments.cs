@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Forms9PatchDemo
 {
-    public class SegmentAlignments : ContentPage
+    public class MaterialButtonAndSegmentAlignments : ContentPage
     {
 
 
@@ -126,7 +126,7 @@ namespace Forms9PatchDemo
         };
 
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
-        public SegmentAlignments()
+        public MaterialButtonAndSegmentAlignments()
         {
 
             _grid1.Children.Add(new Xamarin.Forms.Label { Text = "HZ", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 0);

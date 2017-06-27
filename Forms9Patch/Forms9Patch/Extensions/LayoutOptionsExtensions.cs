@@ -2,8 +2,16 @@
 using Xamarin.Forms;
 namespace Forms9Patch.Extensions
 {
+    /// <summary>
+    /// Layout options extensions.
+    /// </summary>
     public static class LayoutOptionsExtensions
     {
+        /// <summary>
+        /// Tos the text alignment.
+        /// </summary>
+        /// <returns>The text alignment.</returns>
+        /// <param name="options">Options.</param>
         public static TextAlignment ToTextAlignment(this LayoutOptions options)
         {
             switch (options.Alignment)

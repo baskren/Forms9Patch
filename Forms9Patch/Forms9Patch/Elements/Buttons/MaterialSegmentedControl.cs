@@ -403,7 +403,14 @@ namespace Forms9Patch
             set { SetValue(IntraSegmentOrientationProperty, value); }
         }
 
+        /// <summary>
+        /// The backing store for the intra segment spacing property.
+        /// </summary>
         public static readonly BindableProperty IntraSegmentSpacingProperty = BindableProperty.Create("IntraSegmentSpacing", typeof(double), typeof(MaterialSegmentedControl), default(double));
+        /// <summary>
+        /// Gets or sets the intra segment spacing.
+        /// </summary>
+        /// <value>The intra segment spacing.</value>
         public double IntraSegmentSpacing
         {
             get { return (double)GetValue(IntraSegmentSpacingProperty); }
@@ -677,6 +684,9 @@ namespace Forms9Patch
                 _segments[index].IsSelected = true;
         }
 
+        /// <summary>
+        /// Deselects all segments.
+        /// </summary>
         public void DeselectAll()
         {
             foreach (var segment in _segments)

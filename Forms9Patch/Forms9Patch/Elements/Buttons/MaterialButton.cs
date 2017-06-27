@@ -519,7 +519,14 @@ namespace Forms9Patch
             set { SetValue(HasTightSpacingProperty, value); }
         }
 
+        /// <summary>
+        /// Backing store for the spacing property.
+        /// </summary>
         public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(MaterialButton), 4.0);
+        /// <summary>
+        /// Gets or sets the spacing.
+        /// </summary>
+        /// <value>The spacing.</value>
         public double Spacing
         {
             get { return (double)GetValue(SpacingProperty); }
@@ -530,6 +537,9 @@ namespace Forms9Patch
 
 
         #region SegmentedButton Properties
+        /// <summary>
+        /// 
+        /// </summary>
         internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(SegmentType), typeof(MaterialButton), SegmentType.Not);
         internal SegmentType SegmentType
         {
@@ -565,20 +575,39 @@ namespace Forms9Patch
 
         #region Fields
         bool _noUpdate = true;
-        Xamarin.Forms.StackLayout _stackLayout;
-        Image _image;
-        Label _label;
+        bool _updateImageButtonState = false;
+        /// <summary>
+        /// The stack layout.
+        /// </summary>
+        internal protected Xamarin.Forms.StackLayout _stackLayout;
+        /// <summary>
+        /// The image.
+        /// </summary>
+        internal protected Image _image;
+        /// <summary>
+        /// The label.
+        /// </summary>
+        internal protected Label _label;
         Label _iconLabel;
-        FormsGestures.Listener _gestureListener;
+        /// <summary>
+        /// The gesture listener.
+        /// </summary>
+        internal protected FormsGestures.Listener _gestureListener;
         #endregion
 
 
         #region Constructor
         /// <summary>
+        /// The constructing.
+        /// </summary>
+        internal protected bool _constructing;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MaterialButton"/> class.
         /// </summary>
         public MaterialButton()
         {
+            _constructing = true;
             Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;
             _label = new Label
@@ -616,16 +645,16 @@ namespace Forms9Patch
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
 
-            UpdateState();
+            UpdateElements();
 
             _label.PropertyChanged += OnLabelPropertyChanged;
-
+            _constructing = false;
         }
         #endregion
 
 
         #region IDisposable Support
-        bool disposedValue; // To detect redundant calls
+        protected bool disposedValue; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -695,18 +724,21 @@ namespace Forms9Patch
                 KeyClicksService.Feedback(HapticEffect, HapticMode);
 
                 //Debug.WriteLine("tapped");
-                if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
-                    || GroupToggleBehavior == GroupToggleBehavior.Multiselect
-                    || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
-                    IsSelected = !IsSelected;
-                else
+                if (!(this is ImageButton))
                 {
-                    Opacity = 0.5;
-                    Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                    if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
+                        || GroupToggleBehavior == GroupToggleBehavior.Multiselect
+                        || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
+                        IsSelected = !IsSelected;
+                    else
                     {
-                        Opacity += 0.1;
-                        return Opacity < 1.0;
-                    });
+                        Opacity = 0.5;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                        {
+                            Opacity += 0.1;
+                            return Opacity < 1.0;
+                        });
+                    }
                 }
                 SendTapped();
                 e.Handled = true;
@@ -733,7 +765,7 @@ namespace Forms9Patch
         /// <summary>
         /// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
         /// </summary>
-        public void UpdateState()
+        public void UpdateElements()
         {
             _noUpdate = true;
             base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
@@ -865,6 +897,13 @@ namespace Forms9Patch
             add { _tapped += value; }
             remove { _tapped -= value; }
         }
+        /// <summary>
+        /// Invokes the tapped.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        internal protected void InvokeTapped(object sender, EventArgs args) => _tapped?.Invoke(sender, args);
+
 
         event EventHandler _selected;
         /// <summary>
@@ -875,6 +914,12 @@ namespace Forms9Patch
             add { _selected += value; }
             remove { _selected -= value; }
         }
+        /// <summary>
+        /// Invokes the selected.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        internal protected void InvokeSelected(object sender, EventArgs args) => _selected?.Invoke(sender, args);
 
         event EventHandler _longPressing;
         /// <summary>
@@ -885,6 +930,12 @@ namespace Forms9Patch
             add { _longPressing += value; }
             remove { _longPressing -= value; }
         }
+        /// <summary>
+        /// Invokes the long pressing.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        internal protected void InvokeLongPressing(object sender, EventArgs args) => _longPressing?.Invoke(sender, args);
 
         event EventHandler _longPressed;
         /// <summary>
@@ -895,6 +946,12 @@ namespace Forms9Patch
             add { _longPressed += value; }
             remove { _longPressed -= value; }
         }
+        /// <summary>
+        /// Invokes the long pressed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        internal protected void InvokeLongPressed(object sender, EventArgs args) => _longPressed?.Invoke(sender, args);
 
         #endregion
 
@@ -1162,7 +1219,7 @@ namespace Forms9Patch
                        || propertyName == HasShadowProperty.PropertyName
                        || propertyName == SegmentTypeProperty.PropertyName)
             {
-                UpdateState();
+                UpdateElements();
             }
             else if (propertyName == OrientationProperty.PropertyName)
             {
@@ -1178,7 +1235,7 @@ namespace Forms9Patch
             }
             else if (propertyName == FontColorProperty.PropertyName && !IsSelected)
             {
-                UpdateState();
+                UpdateElements();
                 /*
 					_label.TextColor = FontColor;
 					if (_iconLabel != null)
@@ -1189,7 +1246,7 @@ namespace Forms9Patch
             }
             else if (propertyName == SelectedFontColorProperty.PropertyName && IsSelected)
             {
-                UpdateState();
+                UpdateElements();
                 /*
 					_label.TextColor = SelectedFontColor;
 					if (_iconLabel != null)
@@ -1200,7 +1257,7 @@ namespace Forms9Patch
             }
             else if (propertyName == TintImageProperty.PropertyName && _image != null)
             {
-                UpdateState();
+                UpdateElements();
                 //_image.TintColor = TintImage ? FontColor : Color.Default;
             }
             else if (propertyName == HasTightSpacingProperty.PropertyName)
@@ -1277,7 +1334,7 @@ namespace Forms9Patch
             IsEnabledCore = command.CanExecute(CommandParameter);
         }
 
-        void SendTapped()
+        internal protected void SendTapped()
         {
             ICommand command = Command;
             if (command != null && GroupToggleBehavior == GroupToggleBehavior.None)
