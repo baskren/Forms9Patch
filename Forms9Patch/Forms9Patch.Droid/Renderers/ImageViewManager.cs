@@ -48,10 +48,12 @@ namespace Forms9Patch.Droid
             _element = element;
         }
 
+        /*
         ~ImageViewManager()
         {
             System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
         }
+        */
 
         bool _disposed;
         public void Dispose()

@@ -575,7 +575,6 @@ namespace Forms9Patch
 
         #region Fields
         bool _noUpdate = true;
-        bool _updateImageButtonState = false;
         /// <summary>
         /// The stack layout.
         /// </summary>
@@ -654,7 +653,10 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-        protected bool disposedValue; // To detect redundant calls
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
+        internal protected bool disposedValue; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -1334,6 +1336,9 @@ namespace Forms9Patch
             IsEnabledCore = command.CanExecute(CommandParameter);
         }
 
+        /// <summary>
+        /// Sends the tapped.
+        /// </summary>
         internal protected void SendTapped()
         {
             ICommand command = Command;
