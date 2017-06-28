@@ -17,6 +17,7 @@
 		<AndroidTlsProvider>
 		</AndroidTlsProvider>
 		<ReleaseVersion>0.9.13.3</ReleaseVersion>
+		<SynchReleaseVersion>false</SynchReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
