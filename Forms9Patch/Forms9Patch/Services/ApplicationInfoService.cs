@@ -5,6 +5,9 @@
 //  *******************************************************************/
 using System;
 using Xamarin.Forms;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -60,5 +63,68 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The fingerprint.</value>
         public static string Fingerprint { get { return Service?.Fingerprint; } }
+
+        /// <summary>
+        /// Gets the application's assembly.
+        /// </summary>
+        /// <value>The assembly.</value>
+        public static Assembly Assembly
+        {
+            get
+            {
+                return Application.Current.GetType().GetTypeInfo().Assembly;
+            }
+        }
+
+        /// <summary>
+        /// Gets the currently displayed page.
+        /// </summary>
+        /// <value>The current page.</value>
+        public static Page CurrentPage
+        {
+            get
+            {
+
+                if (Application.Current.MainPage == null)
+                    return null;
+                NavigationPage navPage = Application.Current.MainPage as NavigationPage;
+                if (navPage == null)
+                {
+                    IPageController rootController = Application.Current.MainPage;
+                    foreach (var child in rootController.InternalChildren)
+                    {
+                        navPage = child as NavigationPage;
+                        if (navPage != null)
+                            break;
+                    }
+                }
+                if (navPage != null)
+                {
+                    var modalStack = navPage.Navigation.ModalStack;
+                    if (modalStack.Count > 0)
+                        return modalStack.Last();
+                }
+                return navPage?.CurrentPage ?? Application.Current.MainPage;
+            }
+        }
+
+        static PCL.Utils.AsyncAwaitForSet<bool> _asyncAwaitForMainPageSet;
+        public static async Task WaitForMainPage()
+        {
+            if (Application.Current.MainPage != null)
+                return;
+            _asyncAwaitForMainPageSet = new PCL.Utils.AsyncAwaitForSet<bool>(null, null);
+            Application.Current.PropertyChanged += OnApplicationPropertyChanged;
+            await _asyncAwaitForMainPageSet.Result();
+            Application.Current.PropertyChanged -= OnApplicationPropertyChanged;
+            _asyncAwaitForMainPageSet = null;
+        }
+
+        static void OnApplicationPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "MainPage" && Application.Current.MainPage != null)
+                _asyncAwaitForMainPageSet?.Set(true);
+        }
+
     }
 }
