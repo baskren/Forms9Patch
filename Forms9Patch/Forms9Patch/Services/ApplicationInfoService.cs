@@ -84,7 +84,20 @@ namespace Forms9Patch
         {
             get
             {
+                if (Application.Current.MainPage == null)
+                    return null;
+                return NavigationPage?.CurrentPage ?? Application.Current.MainPage;
+            }
+        }
 
+        /// <summary>
+        /// Gets the application's navigation page.
+        /// </summary>
+        /// <value>The navigation page.</value>
+        public static NavigationPage NavigationPage
+        {
+            get
+            {
                 if (Application.Current.MainPage == null)
                     return null;
                 NavigationPage navPage = Application.Current.MainPage as NavigationPage;
@@ -98,13 +111,7 @@ namespace Forms9Patch
                             break;
                     }
                 }
-                if (navPage != null)
-                {
-                    var modalStack = navPage.Navigation.ModalStack;
-                    if (modalStack.Count > 0)
-                        return modalStack.Last();
-                }
-                return navPage?.CurrentPage ?? Application.Current.MainPage;
+                return navPage;
             }
         }
 
@@ -124,6 +131,21 @@ namespace Forms9Patch
         {
             if (e.PropertyName == "MainPage" && Application.Current.MainPage != null)
                 _asyncAwaitForMainPageSet?.Set(true);
+        }
+
+
+        public static bool IsPageInNavigationStacks(Page page)
+        {
+            if (page == CurrentPage)
+                return true;
+            //var navPage = NavigationPage as IPageController;
+            foreach (var p in CurrentPage.Navigation.NavigationStack)
+                if (p == page)
+                    return true;
+            foreach (var p in CurrentPage.Navigation.ModalStack)
+                if (p == page)
+                    return true;
+            return false;
         }
 
     }
