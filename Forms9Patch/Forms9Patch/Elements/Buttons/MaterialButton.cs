@@ -679,18 +679,12 @@ namespace Forms9Patch
                         Command.CanExecuteChanged -= CommandCanExecuteChanged;
                     disposedValue = true;
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
+                _tapped = null;
+                _selected = null;
+                _longPressed = null;
+                _longPressing = null;
             }
         }
-
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~MaterialButton() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
 
         // This code added to correctly implement the disposable pattern.
         /// <summary>
@@ -702,10 +696,7 @@ namespace Forms9Patch
         /// so the garbage collector can reclaim the memory that the <see cref="T:Forms9Patch.MaterialButton"/> was occupying.</remarks>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
         #endregion
 
