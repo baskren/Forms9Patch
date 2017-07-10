@@ -471,6 +471,56 @@ namespace Forms9Patch
 
             base.OnPropertyChanged(propertyName);
 
+            if (propertyName == TextProperty.PropertyName)
+            {
+                DefaultState.Text = Text;
+                UpdateState();
+            }
+            else if (propertyName == HtmlTextProperty.PropertyName)
+            {
+                DefaultState.HtmlText = HtmlText;
+                UpdateState();
+            }
+            else if (propertyName == ImageSourceProperty.PropertyName)
+            {
+                DefaultState.Image = new Image
+                {
+                    Source = ImageSource
+                };
+                UpdateState();
+            }
+            else if (propertyName == FontColorProperty.PropertyName)
+            {
+                DefaultState.FontColor = FontColor;
+                UpdateState();
+            }
+            else if (propertyName == FontAttributesProperty.PropertyName)
+            {
+                DefaultState.FontAttributes = FontAttributes;
+                UpdateState();
+            }
+            else if (propertyName == FontSizeProperty.PropertyName)
+            {
+                DefaultState.FontSize = FontSize;
+                UpdateState();
+            }
+            else if (propertyName == FontFamilyProperty.PropertyName)
+            {
+                DefaultState.FontFamily = FontFamily;
+                UpdateState();
+            }
+            else if (propertyName == BackgroundColorProperty.PropertyName)
+            {
+                DefaultState.BackgroundColor = BackgroundColor;
+                UpdateState();
+            }
+            else if (propertyName == BackgroundImageProperty.PropertyName)
+            {
+                DefaultState.BackgroundImage = BackgroundImage;
+                UpdateState();
+            }
+
+
         }
 
         #endregion

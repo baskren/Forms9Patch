@@ -116,6 +116,13 @@ namespace Forms9PatchDemo
 
                     new TableSection("Code") {
 
+                        new TextCell
+                        {
+                            Text = "Html link example",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LabelLink)
+                        },
+
                         new TextCell {
                             Text = "Material Button & Segment alignments",
                             Command = navigateCommand,

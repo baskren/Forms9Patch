@@ -121,6 +121,8 @@
     <Compile Include="Pages\FontSizeTest.cs" />
     <Compile Include="Pages\MaterialButtonAndSegmentAlignments.cs" />
     <Compile Include="Pages\ImageButtonAlignments.cs" />
+    <Compile Include="Pages\LabelLink.cs" />
+    <Compile Include="UserPages\ButtonTapped.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

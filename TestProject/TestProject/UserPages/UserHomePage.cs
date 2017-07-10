@@ -76,6 +76,13 @@ namespace Forms9PatchDemo
                     new TableSection("Code") {
 
                         new TextCell {
+                            Text = "ButtonTapped",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ButtonTapped)
+                        },
+
+
+                        new TextCell {
                             Text = "Using MaterialButton SelectedBackground",
                             Command = navigateCommand,
                             CommandParameter = typeof(SegmentSelectedBackgroundPage)
