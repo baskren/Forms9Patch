@@ -303,7 +303,9 @@ namespace Forms9Patch
             var fontAttributes = (FontAttributes)newValue;
             var text = (string)label.GetValue(FontFamilyProperty);
             var size = (double)label.GetValue(FontSizeProperty);
+#pragma warning disable CS0618 // Type or member is obsolete
             label.Font = text != null ? Font.OfSize(text, size).WithAttributes(fontAttributes) : Font.SystemFontOfSize(size, fontAttributes);
+#pragma warning restore CS0618 // Type or member is obsolete
             label.cancelEvents = false;
             label.InvalidateMeasure();
         }
@@ -317,7 +319,9 @@ namespace Forms9Patch
             var size = (double)label.GetValue(FontSizeProperty);
             var attr = (FontAttributes)label.GetValue(FontAttributesProperty);
             var text = (string)newValue;
+#pragma warning disable CS0618 // Type or member is obsolete
             label.Font = text != null ? Font.OfSize(text, size).WithAttributes(attr) : Font.SystemFontOfSize(size, attr);
+#pragma warning restore CS0618 // Type or member is obsolete
             label.cancelEvents = false;
             label.InvalidateMeasure();
         }
@@ -331,7 +335,9 @@ namespace Forms9Patch
             var size = (double)newValue;
             var text = (string)label.GetValue(FontFamilyProperty);
             var attr = (FontAttributes)label.GetValue(FontAttributesProperty);
+#pragma warning disable CS0618 // Type or member is obsolete
             label.Font = text != null ? Font.OfSize(text, size).WithAttributes(attr) : Font.SystemFontOfSize(size, attr);
+#pragma warning restore CS0618 // Type or member is obsolete
             label.cancelEvents = false;
             label.InvalidateMeasure();
         }

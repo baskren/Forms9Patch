@@ -241,8 +241,8 @@ namespace Forms9Patch
                     newBackgroundImage.Opacity = 1.0;
                 BackgroundImage = newBackgroundImage;
             }
-            else if (!_constructing && Device.OS == TargetPlatform.Android)
-            //else if (!_constructing && Device.RuntimePlatform == Device.Android)
+            //else if (!_constructing && Device.OS == TargetPlatform.Android)
+            else if (!_constructing && Device.RuntimePlatform == Device.Android)
             {
                 // this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
                 BackgroundImage = null;
@@ -328,7 +328,8 @@ namespace Forms9Patch
 
         void SetLabelState(Label label, ImageButtonState state)
         {
-            label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (/*Device.RuntimePlatform == Device.iOS*/ Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            //label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : ( Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
             label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
             label.FontFamily = (state.FontFamilySet || state.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
             label.FontAttributes = (state.FontAttributesSet || state.FontAttributes != (FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? state.FontAttributes : DefaultState.FontAttributes);

@@ -1134,7 +1134,9 @@ namespace Forms9Patch
                 return;
 
             if (propertyName == AlignmentProperty.PropertyName)
+#pragma warning disable CS0618 // Type or member is obsolete
                 HorizontalTextAlignment = Alignment;
+#pragma warning restore CS0618 // Type or member is obsolete
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
                 //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();

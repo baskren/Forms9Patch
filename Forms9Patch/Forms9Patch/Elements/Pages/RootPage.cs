@@ -223,8 +223,8 @@ namespace Forms9Patch
                 var pageController = _instance.PageController.InternalChildren[0] as IPageController;
                 var ignoresContainerArea = pageController != null ? pageController.IgnoresContainerArea : true;
                 double verticalY = 0;
-                if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
-                //if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
+                //if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
+                if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
                 {
                     verticalY = 20;
                     if (Device.Idiom == TargetIdiom.Phone)

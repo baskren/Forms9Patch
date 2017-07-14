@@ -116,6 +116,10 @@ namespace Forms9Patch
         }
 
         static PCL.Utils.AsyncAwaitForSet<bool> _asyncAwaitForMainPageSet;
+        /// <summary>
+        /// Waits for Xamarin.Forms.Application.MainPAge to be set.
+        /// </summary>
+        /// <returns>The for main page.</returns>
         public static async Task WaitForMainPage()
         {
             if (Application.Current.MainPage != null)
@@ -133,7 +137,11 @@ namespace Forms9Patch
                 _asyncAwaitForMainPageSet?.Set(true);
         }
 
-
+        /// <summary>
+        /// Is the page in the current navigation stacks.
+        /// </summary>
+        /// <returns><c>true</c>, if page in navigation stacks was ised, <c>false</c> otherwise.</returns>
+        /// <param name="page">Page.</param>
         public static bool IsPageInNavigationStacks(Page page)
         {
             if (page == CurrentPage)

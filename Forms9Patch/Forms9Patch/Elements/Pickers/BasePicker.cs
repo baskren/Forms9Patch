@@ -225,8 +225,8 @@ namespace Forms9Patch
             }
             else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
             {
-                //_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.RuntimePlatform == Device.Android ? 8 : 0);
-                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.OS == TargetPlatform.Android ? 8 : 0);
+                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.RuntimePlatform == Device.Android ? 8 : 0);
+                //_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.OS == TargetPlatform.Android ? 8 : 0);
                 _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
             }
             else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
