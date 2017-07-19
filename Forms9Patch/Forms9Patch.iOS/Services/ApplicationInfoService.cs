@@ -73,5 +73,8 @@ namespace Forms9Patch.iOS
                 throw new NotImplementedException();
             }
         }
+
+        public NetworkConnectivity NetworkConnectivity => Reachability.InternetConnectionStatus().ToNetworkConnectivity();
+
     }
 }

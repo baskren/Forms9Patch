@@ -194,6 +194,7 @@
 		<Compile Include="Extensions\ApplicationExtensions.cs" />
 		<Compile Include="Extensions\LayoutOptionsExtensions.cs" />
 		<Compile Include="Elements\Buttons\ImageButton.cs" />
+		<Compile Include="Enums\NetworkConnectivity.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>

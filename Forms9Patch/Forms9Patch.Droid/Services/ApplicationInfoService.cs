@@ -10,6 +10,7 @@ using Android.Content.PM;
 using Java.Security.Cert;
 using System.IO;
 using Java.Lang;
+//using Android.Net;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ApplicationInfoService))]
 namespace Forms9Patch.Droid
@@ -101,6 +102,19 @@ namespace Forms9Patch.Droid
                     e.PrintStackTrace();
                 }
                 return hexString;
+            }
+        }
+
+        public NetworkConnectivity NetworkConnectivity
+        {
+            get
+            {
+                Android.Net.NetworkInfo networkInfo = Android.Net.ConnectivityManager.FromContext(Xamarin.Forms.Forms.Context).ActiveNetworkInfo;
+                if (!networkInfo.IsConnected)
+                    return NetworkConnectivity.None;
+                if (networkInfo.Type == Android.Net.ConnectivityType.Wifi || networkInfo.Type == Android.Net.ConnectivityType.Ethernet || networkInfo.Type == Android.Net.ConnectivityType.Bluetooth)
+                    return NetworkConnectivity.LAN;
+                return NetworkConnectivity.Mobile;
             }
         }
 

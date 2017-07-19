@@ -91,6 +91,20 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// Gets the current state of network connectivity.
+        /// </summary>
+        /// <value>The network connectivity.</value>
+        public static NetworkConnectivity NetworkConnectivity
+        {
+            get
+            {
+                if (Service == null)
+                    return NetworkConnectivity.None;
+                return Service.NetworkConnectivity;
+            }
+        }
+
+        /// <summary>
         /// Gets the application's navigation page.
         /// </summary>
         /// <value>The navigation page.</value>
