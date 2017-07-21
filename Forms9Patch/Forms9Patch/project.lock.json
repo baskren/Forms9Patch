@@ -273,22 +273,22 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/Forms9Patch/Forms9Patch/Forms9Patch.csproj",
+      "projectUniqueName": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/Forms9Patch/Forms9Patch/Forms9Patch.csproj",
       "projectName": "Forms9Patch",
-      "projectPath": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/Forms9Patch/Forms9Patch/Forms9Patch.csproj",
-      "projectJsonPath": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/Forms9Patch/Forms9Patch/project.json",
+      "projectPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/Forms9Patch/Forms9Patch/Forms9Patch.csproj",
+      "projectJsonPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/Forms9Patch/Forms9Patch/project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "portable45-net45+win8+wpa81": {
           "projectReferences": {
-            "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/FormsGestures/FormsGestures.csproj": {
-              "projectPath": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/FormsGestures/FormsGestures.csproj"
+            "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/FormsGestures/FormsGestures.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/FormsGestures/FormsGestures.csproj"
             },
-            "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/NumbericalMethods/NumericalMethods.csproj": {
-              "projectPath": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/NumbericalMethods/NumericalMethods.csproj"
+            "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/NumbericalMethods/NumericalMethods.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/NumbericalMethods/NumericalMethods.csproj"
             },
-            "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj": {
-              "projectPath": "/Users/ben/Development/Xamarin/WaltSwims/Bc3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj"
+            "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj"
             }
           }
         }

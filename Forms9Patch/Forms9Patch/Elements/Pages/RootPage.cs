@@ -17,6 +17,13 @@ namespace Forms9Patch
     {
         static RootPage _instance;
 
+        public static event EventHandler<Page> ModalPopped;
+        public static event EventHandler<Page> ModalPopping;
+        public static event EventHandler<Page> ModalPushed;
+        public static event EventHandler<Page> ModalPushing;
+        public static event EventHandler<Page> NavigationPopped;
+        public static event EventHandler<Page> NavigationPushed;
+
         static List<Page> _modals = new List<Page>();
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
@@ -30,20 +37,24 @@ namespace Forms9Patch
             Page = page;
             Application.Current.ModalPopping += (object sender, ModalPoppingEventArgs e) =>
             {
+                ModalPopping?.Invoke(sender, e.Modal);
                 System.Diagnostics.Debug.WriteLine("ModalPopping");
                 RemovePopups(true);
             };
             Application.Current.ModalPushing += (object sender, ModalPushingEventArgs e) =>
             {
+                ModalPushing?.Invoke(sender, e.Modal);
                 System.Diagnostics.Debug.WriteLine("ModalPusing");
             };
             Application.Current.ModalPushed += (object sender, ModalPushedEventArgs e) =>
             {
+                ModalPushed?.Invoke(sender, e.Modal);
                 System.Diagnostics.Debug.WriteLine("Modal Pushed");
                 _modals.Add(e.Modal);
             };
             Application.Current.ModalPopped += (object sender, ModalPoppedEventArgs e) =>
             {
+                ModalPopped?.Invoke(sender, e.Modal);
                 System.Diagnostics.Debug.WriteLine("ModalPopped");
                 _modals.Remove(e.Modal);
             };
@@ -103,11 +114,13 @@ namespace Forms9Patch
         static void OnNavigationPagePopped(object sender, NavigationEventArgs e)
         {
             _instance?.RemovePopups(true);
+            NavigationPopped?.Invoke(sender, e.Page);
         }
 
         static void OnNavigationPagePushed(object sender, NavigationEventArgs e)
         {
             _instance?.RemovePopups(false);
+            NavigationPushed?.Invoke(sender, e.Page);
         }
 
         IPageController PageController => (_modals.Count > 0 ? _modals.Last() : this) as IPageController;
