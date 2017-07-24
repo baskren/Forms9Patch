@@ -17,11 +17,29 @@ namespace Forms9Patch
     {
         static RootPage _instance;
 
+        /// <summary>
+        /// Occurs when modal popped.
+        /// </summary>
         public static event EventHandler<Page> ModalPopped;
+        /// <summary>
+        /// Occurs when modal popping.
+        /// </summary>
         public static event EventHandler<Page> ModalPopping;
+        /// <summary>
+        /// Occurs when modal pushed.
+        /// </summary>
         public static event EventHandler<Page> ModalPushed;
+        /// <summary>
+        /// Occurs when modal pushing.
+        /// </summary>
         public static event EventHandler<Page> ModalPushing;
+        /// <summary>
+        /// Occurs when navigation popped.
+        /// </summary>
         public static event EventHandler<Page> NavigationPopped;
+        /// <summary>
+        /// Occurs when navigation pushed.
+        /// </summary>
         public static event EventHandler<Page> NavigationPushed;
 
         static List<Page> _modals = new List<Page>();
