@@ -66,6 +66,10 @@ namespace Forms9Patch.iOS
             }
         }
 
+        /// <summary>
+        /// Gets the fingerprint.
+        /// </summary>
+        /// <value>The fingerprint.</value>
         public string Fingerprint
         {
             get
@@ -74,6 +78,10 @@ namespace Forms9Patch.iOS
             }
         }
 
+        /// <summary>
+        /// Gets the network connectivity.
+        /// </summary>
+        /// <value>The network connectivity.</value>
         public NetworkConnectivity NetworkConnectivity => Reachability.InternetConnectionStatus().ToNetworkConnectivity();
 
     }

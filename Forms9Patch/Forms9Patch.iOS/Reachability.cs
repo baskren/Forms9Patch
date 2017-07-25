@@ -6,17 +6,40 @@ using CoreFoundation;
 
 namespace Forms9Patch.iOS
 {
+    /// <summary>
+    /// Network status.
+    /// </summary>
     public enum NetworkStatus
     {
+        /// <summary>
+        /// The not reachable.
+        /// </summary>
         NotReachable,
+        /// <summary>
+        /// The reachable via carrier data network.
+        /// </summary>
         ReachableViaCarrierDataNetwork,
+        /// <summary>
+        /// The reachable via wi fi network.
+        /// </summary>
         ReachableViaWiFiNetwork
     }
 
+    /// <summary>
+    /// Reachability.
+    /// </summary>
     public static class Reachability
     {
+        /// <summary>
+        /// The name of the host.
+        /// </summary>
         public static string HostName = "www.google.com";
 
+        /// <summary>
+        /// Ises the reachable without requiring connection.
+        /// </summary>
+        /// <returns><c>true</c>, if reachable without requiring connection was ised, <c>false</c> otherwise.</returns>
+        /// <param name="flags">Flags.</param>
         public static bool IsReachableWithoutRequiringConnection(NetworkReachabilityFlags flags)
         {
             // Is it reachable with the current network configuration?
@@ -30,6 +53,11 @@ namespace Forms9Patch.iOS
         }
 
         // Is the host reachable with the current network configuration
+        /// <summary>
+        /// Ises the host reachable.
+        /// </summary>
+        /// <returns><c>true</c>, if host reachable was ised, <c>false</c> otherwise.</returns>
+        /// <param name="host">Host.</param>
         public static bool IsHostReachable(string host)
         {
             if (string.IsNullOrEmpty(host))
@@ -50,7 +78,11 @@ namespace Forms9Patch.iOS
         // we do not even pass the info as to what changed, and
         // we lump all three status we probe into one
         //
+        /// <summary>
+        /// Occurs when reachability changed.
+        /// </summary>
         public static event EventHandler ReachabilityChanged;
+
 
         static void OnChange(NetworkReachabilityFlags flags)
         {
@@ -64,6 +96,11 @@ namespace Forms9Patch.iOS
         //
         static NetworkReachability adHocWiFiNetworkReachability;
 
+        /// <summary>
+        /// Ises the ad hoc wi fi network available.
+        /// </summary>
+        /// <returns><c>true</c>, if ad hoc wi fi network available was ised, <c>false</c> otherwise.</returns>
+        /// <param name="flags">Flags.</param>
         public static bool IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags)
         {
             if (adHocWiFiNetworkReachability == null)
@@ -93,6 +130,10 @@ namespace Forms9Patch.iOS
 
         static NetworkReachability remoteHostReachability;
 
+        /// <summary>
+        /// Remotes the host status.
+        /// </summary>
+        /// <returns>The host status.</returns>
         public static NetworkStatus RemoteHostStatus()
         {
             NetworkReachabilityFlags flags;
@@ -124,6 +165,10 @@ namespace Forms9Patch.iOS
                 NetworkStatus.ReachableViaCarrierDataNetwork : NetworkStatus.ReachableViaWiFiNetwork;
         }
 
+        /// <summary>
+        /// Internets the connection status.
+        /// </summary>
+        /// <returns>The connection status.</returns>
         public static NetworkStatus InternetConnectionStatus()
         {
             NetworkReachabilityFlags flags;
@@ -141,6 +186,10 @@ namespace Forms9Patch.iOS
             return NetworkStatus.ReachableViaWiFiNetwork;
         }
 
+        /// <summary>
+        /// Locals the wifi connection status.
+        /// </summary>
+        /// <returns>The wifi connection status.</returns>
         public static NetworkStatus LocalWifiConnectionStatus()
         {
             NetworkReachabilityFlags flags;
@@ -151,6 +200,11 @@ namespace Forms9Patch.iOS
             return NetworkStatus.NotReachable;
         }
 
+        /// <summary>
+        /// Tos the network connectivity.
+        /// </summary>
+        /// <returns>The network connectivity.</returns>
+        /// <param name="status">Status.</param>
         public static NetworkConnectivity ToNetworkConnectivity(this NetworkStatus status)
         {
             if (status == NetworkStatus.ReachableViaCarrierDataNetwork)
