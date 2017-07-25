@@ -14,7 +14,7 @@ namespace Forms9Patch.Droid
 {
     class ImageViewManager : IDisposable
     {
-        static int instances = 0;
+        //static int instances = 0;
 
         //int _instance;
         bool _fail;
@@ -185,7 +185,9 @@ namespace Forms9Patch.Droid
                 _imageView = null;
 
                 if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
                     _control.SetBackgroundDrawable(null);
+#pragma warning restore CS0618 // Type or member is obsolete
                 else
                     _control.Background = null;
 

@@ -2,6 +2,15 @@
   "version": 2,
   "targets": {
     ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
       "PCLStorage/1.0.2": {
         "type": "package",
         "compile": {
@@ -41,6 +50,28 @@
     }
   },
   "libraries": {
+    "Newtonsoft.Json/8.0.3": {
+      "sha512": "KGsYQdS2zLH+H8x2cZaSI7e+YZ4SFIbyy1YJQYl6GYBWjf5o4H1A68nxyq+WTyVSOJQ4GqS/DiPE+UseUizgMg==",
+      "type": "package",
+      "path": "newtonsoft.json/8.0.3",
+      "files": [
+        "Newtonsoft.Json.8.0.3.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "tools/install.ps1"
+      ]
+    },
     "PCLStorage/1.0.2": {
       "sha512": "9If+1ZFCk3QaT/asfiL+J9FMnx2CTMrLCU8tDMUOI/aCGWGWl9vJ1/KcMkjf92op23ZknenvYJZBLDAqE3sFlg==",
       "type": "package",
@@ -263,6 +294,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Newtonsoft.Json >= 8.0.3",
       "PCLStorage >= 1.0.2",
       "Xamarin.Forms >= 2.3.4.247"
     ],
@@ -295,6 +327,7 @@
       }
     },
     "dependencies": {
+      "Newtonsoft.Json": "8.0.3",
       "PCLStorage": "1.0.2",
       "Xamarin.Forms": "2.3.4.247"
     },

@@ -77,7 +77,9 @@ namespace Forms9Patch.Droid
                 if (box != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
                         SetBackgroundDrawable(new RoundRectDrawable(box));
+#pragma warning restore CS0618 // Type or member is obsolete
                     else
                         Background = new RoundRectDrawable(box);
                 }
@@ -122,7 +124,9 @@ namespace Forms9Patch.Droid
                 if (roundedBoxElement != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
                         SetBackgroundDrawable(new RoundRectDrawable(roundedBoxElement));
+#pragma warning restore CS0618 // Type or member is obsolete
                     else
                         Background = new RoundRectDrawable(roundedBoxElement);
                 }
@@ -143,7 +147,9 @@ namespace Forms9Patch.Droid
                 _imageViewManager?.Dispose();
                 _imageViewManager = null;
                 if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
                     SetBackgroundDrawable(null);
+#pragma warning restore CS0618 // Type or member is obsolete
                 else
                     Background = null;
             }

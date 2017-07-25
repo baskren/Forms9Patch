@@ -420,7 +420,9 @@ namespace Forms9Patch.Droid
 
         void UpdateFont()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             _currentControlState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
+#pragma warning restore CS0618 // Type or member is obsolete
             if (_currentControlState.Typeface == Control.Typeface)
                 return;
             //Android.App.LocalActivityManager.CurrentActivity.RunOnUiThread(()=>
@@ -439,7 +441,9 @@ namespace Forms9Patch.Droid
         {
             get
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 var textSize = (float)Element.Font.FontSize;
+#pragma warning restore CS0618 // Type or member is obsolete
                 if (System.Math.Abs(textSize) < 0.0001)
                     textSize = F9PTextView.DefaultTextSize;
                 return BoundTextSize(textSize);
@@ -449,7 +453,9 @@ namespace Forms9Patch.Droid
         float BoundTextSize(float textSize)
         {
             if (textSize < 0)
+#pragma warning disable CS0618 // Type or member is obsolete
                 textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.Font.FontSize));
+#pragma warning restore CS0618 // Type or member is obsolete
             if (textSize < ModelMinFontSize)
                 textSize = ModelMinFontSize;
             return textSize;

@@ -66,6 +66,12 @@
 		<Reference Include="Xamarin.Forms.Xaml">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
 		</Reference>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.IO.Compression" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="Newtonsoft.Json">
+		  <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Models\" />

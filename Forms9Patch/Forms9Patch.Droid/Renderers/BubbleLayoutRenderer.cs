@@ -7,52 +7,58 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Forms9Patch.Droid
 {
-	/// <summary>
-	/// Forms9Patch Layout renderer.
-	/// </summary>
-	internal class BubbleLayoutRenderer : ViewRenderer<BubbleLayout,global::Android.Widget.RelativeLayout> 
-	{
-		//Image _oldImage;
-		//ImageViewManager _imageViewManager;
+    /// <summary>
+    /// Forms9Patch Layout renderer.
+    /// </summary>
+    internal class BubbleLayoutRenderer : ViewRenderer<BubbleLayout, global::Android.Widget.RelativeLayout>
+    {
+        //Image _oldImage;
+        //ImageViewManager _imageViewManager;
 
-		/// <summary>
-		/// Raises the element changed event.
-		/// </summary>
-		/// <param name="e">E.</param>
-		protected override void OnElementChanged(ElementChangedEventArgs<BubbleLayout> e)
-		{
-			base.OnElementChanged(e);
-			if (e.NewElement != null) {
-				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
-					SetBackgroundDrawable(new BubbleDrawable(e.NewElement));
-				else
-					Background = new BubbleDrawable (e.NewElement);
-			}
-		}
+        /// <summary>
+        /// Raises the element changed event.
+        /// </summary>
+        /// <param name="e">E.</param>
+        protected override void OnElementChanged(ElementChangedEventArgs<BubbleLayout> e)
+        {
+            base.OnElementChanged(e);
+            if (e.NewElement != null)
+            {
+                if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
+                    SetBackgroundDrawable(new BubbleDrawable(e.NewElement));
+#pragma warning restore CS0618 // Type or member is obsolete
+                else
+                    Background = new BubbleDrawable(e.NewElement);
+            }
+        }
 
-		//bool waitingOnLayout = false;
-		/// <summary>
-		/// Raises the element property changed event.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="e">E.</param>
-		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged(sender, e);
-			if (
-				e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-			    || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
-			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName
-			    || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
-				|| e.PropertyName == BubbleLayout.BackgroundColorProperty.PropertyName
-			    || e.PropertyName == BubbleLayout.PointerTipRadiusProperty.PropertyName
-				|| e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName 
-			    || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName) {
-				if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
-					SetBackgroundDrawable(new BubbleDrawable(Element));
-				else
-					Background = new BubbleDrawable (Element);
-				/*
+        //bool waitingOnLayout = false;
+        /// <summary>
+        /// Raises the element property changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (
+                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
+                || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName
+                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
+                || e.PropertyName == BubbleLayout.BackgroundColorProperty.PropertyName
+                || e.PropertyName == BubbleLayout.PointerTipRadiusProperty.PropertyName
+                || e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName
+                || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName)
+            {
+                if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
+                    SetBackgroundDrawable(new BubbleDrawable(Element));
+#pragma warning restore CS0618 // Type or member is obsolete
+                else
+                    Background = new BubbleDrawable(Element);
+                /*
 			} else if (
 				e.PropertyName == BubbleLayout.PointerDirectionProperty.PropertyName
 				|| e.PropertyName == VisualElement.WidthProperty.PropertyName
@@ -79,9 +85,9 @@ namespace Forms9Patch.Droid
 				//ViewGroup.RequestLayout();
 				//ViewGroup.ForceLayout ();
 				*/
-			}
-		}
+            }
+        }
 
-	}
+    }
 
 }

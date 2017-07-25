@@ -11,87 +11,91 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(Forms9Patch.Droid.BackgroundImageEffect), "BackgroundImageEffect")]
 namespace Forms9Patch.Droid
 {
-	public class BackgroundImageEffect : PlatformEffect
-	{
-		//IVisualElementRenderer _puRenderer;
-		Image _oldImage;
-		ImageViewManager _imageViewManager;
+    public class BackgroundImageEffect : PlatformEffect
+    {
+        //IVisualElementRenderer _puRenderer;
+        Image _oldImage;
+        ImageViewManager _imageViewManager;
 
-		protected override void OnAttached()
-		{
-			System.Diagnostics.Debug.WriteLine("BackgroundImageEffect ATTACHED!!!!");
+        protected override void OnAttached()
+        {
+            System.Diagnostics.Debug.WriteLine("BackgroundImageEffect ATTACHED!!!!");
 
-			if (_imageViewManager == null)
-			{
-				//SetNativeControl(new global::Android.Widget.RelativeLayout(Context));
-				//SetNativeControl(new F9PRelativeLayout(Context));
-				_imageViewManager = new ImageViewManager(Container, (VisualElement)Element);
-				_imageViewManager.LayoutComplete += OnBackgroundImageLayoutComplete;
-			}
-			_oldImage = ((IBackgroundImage)Element)?.BackgroundImage;
-			_imageViewManager.LayoutImage(_oldImage);
-		}
+            if (_imageViewManager == null)
+            {
+                //SetNativeControl(new global::Android.Widget.RelativeLayout(Context));
+                //SetNativeControl(new F9PRelativeLayout(Context));
+                _imageViewManager = new ImageViewManager(Container, (VisualElement)Element);
+                _imageViewManager.LayoutComplete += OnBackgroundImageLayoutComplete;
+            }
+            _oldImage = ((IBackgroundImage)Element)?.BackgroundImage;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            _imageViewManager.LayoutImage(_oldImage);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        }
 
-		protected override void OnDetached()
-		{
-			if (_oldImage != null)
-				_oldImage.PropertyChanged -= OnBackgroundImagePropertyChanged;
-			if (_imageViewManager != null)
-				_imageViewManager.LayoutComplete -= OnBackgroundImageLayoutComplete;
-			_oldImage = null;
-			_imageViewManager = null;
-		}
+        protected override void OnDetached()
+        {
+            if (_oldImage != null)
+                _oldImage.PropertyChanged -= OnBackgroundImagePropertyChanged;
+            if (_imageViewManager != null)
+                _imageViewManager.LayoutComplete -= OnBackgroundImageLayoutComplete;
+            _oldImage = null;
+            _imageViewManager = null;
+        }
 
-		protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged(e);
-			if (
-				e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-				|| e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
-				|| e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
-				|| e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
-			{
-				var box = Element as IRoundedBox;
-				if (box != null)
-				{
-					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
-						Container.SetBackgroundDrawable(new RoundRectDrawable(box));
-					else
-						Container.Background = new RoundRectDrawable(box);
-				}
-			}
-			else if (
-			  e.PropertyName == VisualElement.WidthProperty.PropertyName
-			  || e.PropertyName == VisualElement.HeightProperty.PropertyName
-			  || e.PropertyName == VisualElement.XProperty.PropertyName
-			  || e.PropertyName == VisualElement.YProperty.PropertyName
-			  || e.PropertyName == RoundedBoxBase.HasShadowProperty.PropertyName
-			  || e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName)
-			{
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(e);
+            if (
+                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
+                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
+                || e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
+            {
+                var box = Element as IRoundedBox;
+                if (box != null)
+                {
+                    if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
+                        Container.SetBackgroundDrawable(new RoundRectDrawable(box));
+#pragma warning restore CS0618 // Type or member is obsolete
+                    else
+                        Container.Background = new RoundRectDrawable(box);
+                }
+            }
+            else if (
+              e.PropertyName == VisualElement.WidthProperty.PropertyName
+              || e.PropertyName == VisualElement.HeightProperty.PropertyName
+              || e.PropertyName == VisualElement.XProperty.PropertyName
+              || e.PropertyName == VisualElement.YProperty.PropertyName
+              || e.PropertyName == RoundedBoxBase.HasShadowProperty.PropertyName
+              || e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName)
+            {
 
-				LayoutCycle();
-				//Invalidate();
-			}
-			else if (e.PropertyName == ContentView.BackgroundImageProperty.PropertyName)
-			{
-				//System.Diagnostics.Debug.WriteLine ("\t["+text+"]propertyName=[" + e.PropertyName + "] ["+Element.Bounds+"]");
+                LayoutCycle();
+                //Invalidate();
+            }
+            else if (e.PropertyName == ContentView.BackgroundImageProperty.PropertyName)
+            {
+                //System.Diagnostics.Debug.WriteLine ("\t["+text+"]propertyName=[" + e.PropertyName + "] ["+Element.Bounds+"]");
 
-				if (_oldImage != null)
-					_oldImage.PropertyChanged -= OnBackgroundImagePropertyChanged;
-				_oldImage = ((IBackgroundImage)Element)?.BackgroundImage;
-				if (_oldImage != null)
-					_oldImage.PropertyChanged += OnBackgroundImagePropertyChanged;
+                if (_oldImage != null)
+                    _oldImage.PropertyChanged -= OnBackgroundImagePropertyChanged;
+                _oldImage = ((IBackgroundImage)Element)?.BackgroundImage;
+                if (_oldImage != null)
+                    _oldImage.PropertyChanged += OnBackgroundImagePropertyChanged;
 #pragma warning disable 4014
-				_imageViewManager.LayoutImage(_oldImage);
+                _imageViewManager.LayoutImage(_oldImage);
 #pragma warning restore 4014
-			}		
-		}
+            }
+        }
 
 
-		//bool waitingOnLayout = false;
-		void LayoutCycle()
-		{
-			/*
+        //bool waitingOnLayout = false;
+        void LayoutCycle()
+        {
+            /*
 			if (!waitingOnLayout && Element != null)
 			{
 				waitingOnLayout = true;
@@ -126,53 +130,55 @@ namespace Forms9Patch.Droid
 				});
 			}
 			*/
-		}
+        }
 
 
-		void LayoutImage()
-		{
+        void LayoutImage()
+        {
 
 #pragma warning disable 4014
-			_imageViewManager.LayoutImage(_oldImage);
+            _imageViewManager.LayoutImage(_oldImage);
 #pragma warning restore 4014
-		}
+        }
 
 
 
-		void OnBackgroundImagePropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
-			// No Wait or await here because we want RenderBackgroundImage to run in parallel
-			if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
-			{
+        void OnBackgroundImagePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // No Wait or await here because we want RenderBackgroundImage to run in parallel
+            if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
+            {
 #pragma warning disable 4014
-				_imageViewManager.LayoutImage(null);
-				_imageViewManager.LayoutImage(_oldImage);
+                _imageViewManager.LayoutImage(null);
+                _imageViewManager.LayoutImage(_oldImage);
 #pragma warning restore 4014
-			}
-		}
+            }
+        }
 
-		void OnBackgroundImageLayoutComplete(bool hasImage)
-		{
-			System.Diagnostics.Debug.WriteLine("Element=[" + Element.GetType() + "] hasImage=[" + hasImage + "]");
+        void OnBackgroundImageLayoutComplete(bool hasImage)
+        {
+            System.Diagnostics.Debug.WriteLine("Element=[" + Element.GetType() + "] hasImage=[" + hasImage + "]");
 
-			if (!hasImage)
-			{
-				var roundedBoxElement = Element as IRoundedBox;
-				if (roundedBoxElement != null)
-				{
-					if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
-						Container.SetBackgroundDrawable(new RoundRectDrawable(roundedBoxElement));
-					else
-						Container.Background = new RoundRectDrawable(roundedBoxElement);
-				}
-			}
-			else
-				Container.SetBackgroundColor(((VisualElement)Element).BackgroundColor.ToAndroid());
+            if (!hasImage)
+            {
+                var roundedBoxElement = Element as IRoundedBox;
+                if (roundedBoxElement != null)
+                {
+                    if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
+#pragma warning disable CS0618 // Type or member is obsolete
+                        Container.SetBackgroundDrawable(new RoundRectDrawable(roundedBoxElement));
+#pragma warning restore CS0618 // Type or member is obsolete
+                    else
+                        Container.Background = new RoundRectDrawable(roundedBoxElement);
+                }
+            }
+            else
+                Container.SetBackgroundColor(((VisualElement)Element).BackgroundColor.ToAndroid());
 
-			if (Element.GetType() == typeof(Forms9Patch.ContentView))
-				Container.SetBackgroundColor(Android.Graphics.Color.Orchid);
-		}
+            if (Element.GetType() == typeof(Forms9Patch.ContentView))
+                Container.SetBackgroundColor(Android.Graphics.Color.Orchid);
+        }
 
-	}
+    }
 }
 
