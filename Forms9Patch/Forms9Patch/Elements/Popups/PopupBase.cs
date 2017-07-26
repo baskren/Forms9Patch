@@ -427,8 +427,8 @@ namespace Forms9Patch
                     if (RootPage == null)
                         throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
                     RootPage?.AddPopup(this);
-                    if (Device.RuntimePlatform == Device.Android)
-                    //if (Device.OS == TargetPlatform.Android)
+                    //if (Device.RuntimePlatform == Device.Android)
+                    if (Device.OS == TargetPlatform.Android)
                     {
                         Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
                         {

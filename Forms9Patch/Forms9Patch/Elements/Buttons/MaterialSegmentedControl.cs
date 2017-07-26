@@ -630,15 +630,15 @@ namespace Forms9Patch
                 foreach (MaterialButton child in Children)
                 {
                     double plaformTweek = 0;
-                    //switch (Device.OS)
-                    switch (Device.RuntimePlatform)
+                    switch (Device.OS)
+                    //switch (Device.RuntimePlatform)
                     {
-                        case Device.iOS:
-                            //case TargetPlatform.iOS:
+                        //case Device.iOS:
+                            case TargetPlatform.iOS:
                             plaformTweek = 0.1;
                             break;
-                        case Device.Android:
-                            //case TargetPlatform.Android:
+                        //case Device.Android:
+                            case TargetPlatform.Android:
                             plaformTweek = -1;
                             break;
                     }
