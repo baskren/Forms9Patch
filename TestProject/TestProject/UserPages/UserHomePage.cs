@@ -1,5 +1,6 @@
 using System;
 using Xamarin.Forms;
+using Forms9PatchDemo;
 
 namespace Forms9PatchDemo
 {

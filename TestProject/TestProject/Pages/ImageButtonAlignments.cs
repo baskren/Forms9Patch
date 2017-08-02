@@ -131,7 +131,9 @@ namespace Forms9PatchDemo
             _grid2.Children.Add(_imposedHeightSwitch, 1, 1);
 
 
-
+            _iconTextAndTextButton.Tapped += (sender, e) => System.Diagnostics.Debug.WriteLine("Tapped");
+            _iconTextAndTextButton.LongPressed += (sender, e) => System.Diagnostics.Debug.WriteLine("LongPressed");
+            _iconTextAndTextButton.LongPressing += (sender, e) => System.Diagnostics.Debug.WriteLine("LongPressing");
 
             Padding = new Thickness(40, 20, 20, 20);
             Content = new Xamarin.Forms.ScrollView

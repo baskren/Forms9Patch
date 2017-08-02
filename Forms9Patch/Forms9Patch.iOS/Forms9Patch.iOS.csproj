@@ -70,7 +70,7 @@
 		<Reference Include="System.IO.Compression" />
 		<Reference Include="System.Net.Http" />
 		<Reference Include="Newtonsoft.Json">
-		  <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+			<HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>

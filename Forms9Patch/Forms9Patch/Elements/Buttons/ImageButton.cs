@@ -224,12 +224,14 @@ namespace Forms9Patch
             }
         }
 
+        bool _showingState;
         /// <summary>
         /// Redraws the button to a custom ImageButtonState
         /// </summary>
         /// <param name="newState">Custom ImageButtonState.</param>
         public void ShowState(ImageButtonState newState)
         {
+            _showingState = true;
             newState = newState ?? DefaultState;
             if (_currentState != null)
                 _currentState.PropertyChanged -= OnStatePropertyChanged;
@@ -249,7 +251,9 @@ namespace Forms9Patch
                 if (newBackgroundImage != null)
                     Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
                     {
+                        _showingState = true;
                         BackgroundImage = newBackgroundImage;
+                        _showingState = false;
                         return false;
                     });
             }
@@ -324,11 +328,12 @@ namespace Forms9Patch
             _currentState.PropertyChanged += OnStatePropertyChanged;
             //InvalidateMeasure ();
 
+            _showingState = false;
         }
 
         void SetLabelState(Label label, ImageButtonState state)
         {
-            label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : ( Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
             //label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
             label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
             label.FontFamily = (state.FontFamilySet || state.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
@@ -349,12 +354,12 @@ namespace Forms9Patch
 
         void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Up");
+            //System.Diagnostics.Debug.WriteLine("Up");
             if (IsEnabled)
             {
                 KeyClicksService.Feedback(HapticEffect, HapticMode);
 
-                System.Diagnostics.Debug.WriteLine("tapped");
+                //System.Diagnostics.Debug.WriteLine("tapped");
                 if (ToggleBehavior)
                 {
                     IsSelected = !IsSelected;
@@ -390,20 +395,20 @@ namespace Forms9Patch
                         });
                     }
                 }
-                SendTapped();
+                //SendTapped();  // handled by base class
             }
         }
 
         void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Down");
+            //System.Diagnostics.Debug.WriteLine("Down");
             if (IsEnabled)
                 ShowState(PressingState);
         }
 
         void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing");
+            //System.Diagnostics.Debug.WriteLine("LongPressing");
             if (IsEnabled)
                 //LongPressing?.Invoke(this, EventArgs.Empty);
                 InvokeLongPressing(this, EventArgs.Empty);
@@ -411,7 +416,7 @@ namespace Forms9Patch
 
         void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed");
+            //System.Diagnostics.Debug.WriteLine("LongPressed");
             if (IsEnabled)
             {
                 //LongPressed?.Invoke(this, EventArgs.Empty);
@@ -425,7 +430,7 @@ namespace Forms9Patch
         #region Change Handlers
         void OnStatePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("OnStatePropertyChanged");
+            //System.Diagnostics.Debug.WriteLine("OnStatePropertyChanged");
             if (sender == _currentState)
             {
                 System.Diagnostics.Debug.WriteLine("\t" + e.PropertyName);
@@ -472,17 +477,17 @@ namespace Forms9Patch
 
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == TextProperty.PropertyName)
+            if (propertyName == TextProperty.PropertyName && !_showingState)
             {
                 DefaultState.Text = Text;
                 UpdateState();
             }
-            else if (propertyName == HtmlTextProperty.PropertyName)
+            else if (propertyName == HtmlTextProperty.PropertyName && !_showingState)
             {
                 DefaultState.HtmlText = HtmlText;
                 UpdateState();
             }
-            else if (propertyName == ImageSourceProperty.PropertyName)
+            else if (propertyName == ImageSourceProperty.PropertyName && !_showingState)
             {
                 DefaultState.Image = new Image
                 {
@@ -490,32 +495,32 @@ namespace Forms9Patch
                 };
                 UpdateState();
             }
-            else if (propertyName == FontColorProperty.PropertyName)
+            else if (propertyName == FontColorProperty.PropertyName && !_showingState)
             {
                 DefaultState.FontColor = FontColor;
                 UpdateState();
             }
-            else if (propertyName == FontAttributesProperty.PropertyName)
+            else if (propertyName == FontAttributesProperty.PropertyName && !_showingState)
             {
                 DefaultState.FontAttributes = FontAttributes;
                 UpdateState();
             }
-            else if (propertyName == FontSizeProperty.PropertyName)
+            else if (propertyName == FontSizeProperty.PropertyName && !_showingState)
             {
                 DefaultState.FontSize = FontSize;
                 UpdateState();
             }
-            else if (propertyName == FontFamilyProperty.PropertyName)
+            else if (propertyName == FontFamilyProperty.PropertyName && !_showingState)
             {
                 DefaultState.FontFamily = FontFamily;
                 UpdateState();
             }
-            else if (propertyName == BackgroundColorProperty.PropertyName)
+            else if (propertyName == BackgroundColorProperty.PropertyName && !_showingState)
             {
                 DefaultState.BackgroundColor = BackgroundColor;
                 UpdateState();
             }
-            else if (propertyName == BackgroundImageProperty.PropertyName)
+            else if (propertyName == BackgroundImageProperty.PropertyName && !_showingState)
             {
                 DefaultState.BackgroundImage = BackgroundImage;
                 UpdateState();

@@ -79,8 +79,6 @@ namespace Forms9PatchDemo
         //static bool debugCollections = true;
 
         NavigationPage navPage = new NavigationPage(new HomePage());
-        //NavigationPage navPage = new NavigationPage(new ModalPopupOnMasterDetailPage());
-        //NavigationPage navPage = new NavigationPage(new ImageButtonPage());
 
 
         void OnPagePopped(object sender, NavigationEventArgs e)
@@ -109,9 +107,18 @@ namespace Forms9PatchDemo
                 //MainPage = new ImageCodePage();
 
                 //MainPage = new ZenmekPage();
-                MainPage = Forms9Patch.RootPage.Create(navPage);
                 //MainPage = new HeapDemoPage();
                 //MainPage = new ModalPopupOnMasterDetailPage();
+                /*
+                MainPage = new Forms9Patch.RootPage(new MasterDetailPage { Master = new ContentPage { Title = "Test", BackgroundColor = Color.Green }, Detail = new BubblePopupTestPage() })
+                {
+                    BackgroundColor = Color.Brown
+                };
+                */
+                //MainPage = new MasterDetailPage { Master = new ContentPage { Title = "Test", BackgroundColor = Color.Green }, Detail = new BubblePopupTestPage() };
+
+                MainPage = Forms9Patch.RootPage.Create(navPage);
+
             }
             else
             {

@@ -126,6 +126,17 @@ namespace Forms9Patch
                     navPage.Pushed += OnNavigationPagePushed;
                     navPage.PoppedToRoot += OnNavigationPagePopped;
                 }
+                var masterDetailPage = _instance.PageController.InternalChildren[0] as MasterDetailPage;
+                if (masterDetailPage != null)
+                {
+                    masterDetailPage.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+                    {
+                        if (e.PropertyName == "Renderer")
+                        {
+                            System.Diagnostics.Debug.WriteLine(masterDetailPage);
+                        }
+                    };
+                }
             }
         }
 

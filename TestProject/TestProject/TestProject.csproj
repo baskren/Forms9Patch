@@ -239,6 +239,9 @@
     <EmbeddedResource Include="UserPages\SegmentBindingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\btnRedH.9.png" />
+    <EmbeddedResource Include="Resources\btnRedH%402x.9.png" />
+    <EmbeddedResource Include="Resources\btnRedH%403x.9.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

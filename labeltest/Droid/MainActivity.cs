@@ -21,7 +21,7 @@ namespace labeltest.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            Forms9Patch.Droid.Settings.LicenseKey = "<your license key>";
+            Forms9Patch.Droid.Settings.Initialize("<your license key>");
 
             LoadApplication(new App());
         }
