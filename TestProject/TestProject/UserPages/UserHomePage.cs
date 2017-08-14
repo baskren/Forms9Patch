@@ -56,12 +56,16 @@ namespace Forms9PatchDemo
                     new TableSection("XAML") {
                         new TextCell
                         {
+                            Text = "Stretch Issue Page",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(StretchIssuePage)
+                        },
+                        new TextCell
+                        {
                             Text = "SegmentBindingPage",
                             Command = navigateCommand,
                             CommandParameter = typeof(SegmentBindingPage)
                         },
-
-
                         new TextCell {
                             Text = "Burkhart Test",
                             Command = navigateCommand,

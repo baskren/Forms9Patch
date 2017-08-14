@@ -89,6 +89,46 @@ namespace Forms9PatchDemo
 
         public App()
         {
+            var pageStyle = new Style(typeof(Page))
+            {
+                Setters = {
+                    new Setter { Property = Page.BackgroundColorProperty, Value = Color.White }
+                },
+                ApplyToDerivedTypes = true
+            };
+            var labelStyle = new Style(typeof(Label))
+            {
+                Setters = { new Setter { Property = Label.TextColorProperty, Value = Color.Black } },
+                ApplyToDerivedTypes = true
+            };
+            var entryStyle = new Style(typeof(Entry))
+            {
+                Setters = { new Setter { Property = Entry.TextColorProperty, Value = Color.Black } },
+                ApplyToDerivedTypes = true
+            };
+            var editorStyle = new Style(typeof(Editor))
+            {
+                Setters = { new Setter { Property = Editor.TextColorProperty, Value = Color.Black } },
+                ApplyToDerivedTypes = true
+            };
+            var buttonStyle = new Style(typeof(Button))
+            {
+                Setters = { new Setter { Property = Button.TextColorProperty, Value = Color.Blue } },
+                ApplyToDerivedTypes = true
+            };
+            var textCellStyle = new Style(typeof(TextCell))
+            {
+                Setters = { new Setter { Property = TextCell.TextColorProperty, Value = Color.Black } },
+                ApplyToDerivedTypes = true
+            };
+
+            Resources = new ResourceDictionary();
+            Resources.Add(pageStyle);
+            Resources.Add(labelStyle);
+            Resources.Add(entryStyle);
+            Resources.Add(editorStyle);
+            Resources.Add(buttonStyle);
+            Resources.Add(textCellStyle);
 
             navPage.Popped += OnPagePopped;
 
