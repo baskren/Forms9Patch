@@ -356,7 +356,8 @@ namespace Forms9Patch.Droid
                                 if (ninePatch != null)
                                 {
                                     drawable = ninePatch.Drawable();
-                                    image.Fill = Fill.Fill;
+                                    if (ninePatch.Ranges.PatchesX.Count > 0 && ninePatch.Ranges.PatchesY.Count > 0)
+                                        image.Fill = Fill.Fill;
                                     /*
 								if (drawable != null) {
 									if (image.ContentPadding.Left < 0) {
