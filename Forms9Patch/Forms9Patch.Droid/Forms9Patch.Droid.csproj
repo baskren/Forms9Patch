@@ -222,6 +222,14 @@
 			<Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
 			<Name>PCL.Utils</Name>
 		</ProjectReference>
+		<ProjectReference Include="..\..\..\..\..\..\TwinTechsFormsLib\TwinTechsForms\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
+		  <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
+		  <Name>TwinTechsForms.Core</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\..\..\..\TwinTechsFormsLib\TwinTechsForms\TwinTechsForms.Droid\TwinTechsForms.Droid.csproj">
+		  <Project>{F4FDDB8D-1DAD-4558-B62C-CDBD703F9B9D}</Project>
+		  <Name>TwinTechsForms.Droid</Name>
+		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="packages.config" />

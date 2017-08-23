@@ -46,6 +46,9 @@
       },
       "PCL.Utils/1.0.0": {
         "type": "project"
+      },
+      "TwinTechsForms.Core/1.0.0": {
+        "type": "project"
       }
     }
   },
@@ -290,6 +293,11 @@
       "type": "project",
       "path": "../../FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj",
       "msbuildProject": "../../FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj"
+    },
+    "TwinTechsForms.Core/1.0.0": {
+      "type": "project",
+      "path": "../../../../../../TwinTechsFormsLib/TwinTechsForms/TwinTechsForms.Core/TwinTechsForms.Core.csproj",
+      "msbuildProject": "../../../../../../TwinTechsFormsLib/TwinTechsForms/TwinTechsForms.Core/TwinTechsForms.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -321,6 +329,9 @@
             },
             "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj": {
               "projectPath": "/Users/ben/Development/Xamarin/AWC/HeightsAndAreas/BC3/Forms9Patch/FormsGestures/PCL.Utils/PCL.Utils/PCL.Utils.csproj"
+            },
+            "/Users/ben/Development/Xamarin/TwinTechsFormsLib/TwinTechsForms/TwinTechsForms.Core/TwinTechsForms.Core.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/TwinTechsFormsLib/TwinTechsForms/TwinTechsForms.Core/TwinTechsForms.Core.csproj"
             }
           }
         }

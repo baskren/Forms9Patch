@@ -163,6 +163,14 @@
 			<Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
 			<Name>PCL.Utils</Name>
 		</ProjectReference>
+		<ProjectReference Include="..\..\..\..\..\..\TwinTechsFormsLib\TwinTechsForms\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
+		  <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
+		  <Name>TwinTechsForms.Core</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\..\..\..\..\..\TwinTechsFormsLib\TwinTechsForms\TwinTechsForms.iOS\TwinTechsForms.iOS.csproj">
+		  <Project>{C0D2B64A-CBFC-42A2-B8A6-B8673976EE14}</Project>
+		  <Name>TwinTechsForms.iOS</Name>
+		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="packages.config" />
