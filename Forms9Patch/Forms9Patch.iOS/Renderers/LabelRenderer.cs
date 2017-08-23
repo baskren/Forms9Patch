@@ -59,8 +59,8 @@ namespace Forms9Patch.iOS
             {
                 //if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
                 //if (Element.HtmlText == "2015 IBC")
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter [" + (Element.Text ?? Element.F9PFormattedString.Text) + "]");
+                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                //    System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter [" + (Element.Text ?? Element.F9PFormattedString.Text) + "]");
 
                 Invalid = false;
                 LastWidthConstraint = widthConstraint;
@@ -93,7 +93,7 @@ namespace Forms9Patch.iOS
                     if (tmpFontSize < minFontSize)
                         tmpFontSize = minFontSize;
                     ControlFont = ControlFont.WithSize(tmpFontSize);
-                    System.Diagnostics.Debug.WriteLine("F.A");
+                    //System.Diagnostics.Debug.WriteLine("F.A");
                 }
                 else if (Element.Fit == LabelFit.Lines)
                 {
@@ -104,8 +104,8 @@ namespace Forms9Patch.iOS
                         //System.Diagnostics.Debug.WriteLine("\tAVAIL HT: INFINITE");
                         //tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines);//- 1);// + ContentScaleFactor;
                         tmpHt = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                        if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            System.Diagnostics.Debug.WriteLine("F.B");
+                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                        //    System.Diagnostics.Debug.WriteLine("F.B");
                     }
                     else
                     {
@@ -119,7 +119,7 @@ namespace Forms9Patch.iOS
                         if (tmpFontSize < minFontSize)
                             tmpFontSize = minFontSize;
                         ControlFont = ControlFont.WithSize(tmpFontSize);
-                        System.Diagnostics.Debug.WriteLine("F.C");
+                        //System.Diagnostics.Debug.WriteLine("F.C");
                     }
                 }
                 else if (Element.Fit == LabelFit.Width)
@@ -128,8 +128,8 @@ namespace Forms9Patch.iOS
                     if (tmpFontSize < minFontSize)
                         tmpFontSize = minFontSize;
                     ControlFont = ControlFont.WithSize(tmpFontSize);
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("F.D");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("F.D");
                 }
                 else if (Element.Fit == LabelFit.None)
                 {
@@ -138,8 +138,8 @@ namespace Forms9Patch.iOS
                         // redundant: ControlFont = ControlFont.WithSize(tmpFontSize);
                         //tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines);// - 1);// + ContentScaleFactor;
                         tmpHt = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                        if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            System.Diagnostics.Debug.WriteLine("F.E tmpFontSize=[" + tmpFontSize + "] tmpHt=[" + tmpHt + "]");
+                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                        //    System.Diagnostics.Debug.WriteLine("F.E tmpFontSize=[" + tmpFontSize + "] tmpHt=[" + tmpHt + "]");
                     }
                 }
 
@@ -150,8 +150,8 @@ namespace Forms9Patch.iOS
                     tmpHt = cgSize.Height;
                     if (heightConstraint > double.MaxValue / 4)
                         tmpHt += ControlFont.Leading;  // required to address an issue with unconstrained height, lines=0, some font sizes
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("G 1 tmpHt=[" + tmpHt + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("G 1 tmpHt=[" + tmpHt + "]");
                 }
 
 
@@ -183,8 +183,8 @@ namespace Forms9Patch.iOS
                     }
 */
 
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("H tmpHt=[" + tmpHt + "]  ControlLines=[" + ControlLines + "] lines=[" + lines + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("H tmpHt=[" + tmpHt + "]  ControlLines=[" + ControlLines + "] lines=[" + lines + "]");
                 }
                 tmpWd = cgSize.Width;
 
@@ -217,53 +217,54 @@ namespace Forms9Patch.iOS
 
                 double gap = 0;
                 double height = Math.Max(cgSize.Height, tmpHt);
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("cgSize.Height=[" + cgSize.Height + "] tmpHt=[" + tmpHt + "] height=[" + height + "]");
+                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                //    System.Diagnostics.Debug.WriteLine("cgSize.Height=[" + cgSize.Height + "] tmpHt=[" + tmpHt + "] height=[" + height + "]");
                 if (!double.IsInfinity(heightConstraint))
                 {
                     height = Math.Max(height, heightConstraint);
                     //height = Math.Max(height, tmpHt);
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("J heightContraint=[" + heightConstraint + "] height=[" + height + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("J heightContraint=[" + heightConstraint + "] height=[" + height + "]");
                 }
                 double y = 0;
 
                 //if (Element.HtmlText == "System")
                 //	System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
 
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("cgSize.Height[" + cgSize.Height + "] tmpHt[" + tmpHt + "] heightConstraint[" + heightConstraint + "] height[" + height + "]");
+                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                //    System.Diagnostics.Debug.WriteLine("cgSize.Height[" + cgSize.Height + "] tmpHt[" + tmpHt + "] heightConstraint[" + heightConstraint + "] height[" + height + "]");
 
                 if (heightConstraint < tmpHt)
                 {
                     gap = -(nfloat)(tmpHt - heightConstraint);
                     height = heightConstraint;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("D gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("D gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
                 else if (Element.Fit == LabelFit.None && tmpHt < height)
                 //if (tmpHt < height)
                 {
                     gap = (nfloat)(height - tmpHt);
                     height = tmpHt;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("A gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("A gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
                 else if (cgSize.Height < height)// && !double.IsPositiveInfinity(heightConstraint))
                 {
                     gap = (nfloat)(height - cgSize.Height);
                     height = cgSize.Height;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("B gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("B gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
                 else if (cgSize.Height < tmpHt)
                 {
                     gap = (nfloat)(tmpHt - cgSize.Height);
                     height = cgSize.Height / 2.0;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("C gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("C gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
 
+                /*
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                 {
                     System.Diagnostics.Debug.WriteLine("\tControlFont.Leading=[" + ControlFont.Leading + "]");
@@ -277,27 +278,28 @@ namespace Forms9Patch.iOS
 
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     System.Diagnostics.Debug.WriteLine("0 Controlines=[" + ControlLines + "]");
+                */
                 if (Element.Fit == LabelFit.None && Element.Lines == 0)
                 {
                     //var cgLines = Math.Ceiling(cgSize.Height / ControlFont.LineHeight);
                     var cgLines = cgSize.Height / ControlFont.LineHeight;
                     var portLines = heightConstraint / ControlFont.LineHeight;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("cgLines=[" + cgLines + "] portLines=[" + portLines + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("cgLines=[" + cgLines + "] portLines=[" + portLines + "]");
                     ControlLines = (int)Math.Min(cgLines, portLines);
                 }
                 else
                 {
                     ControlLines = Math.Min(ControlLines, Element.Lines);
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("1 Controlines=[" + ControlLines + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("1 Controlines=[" + ControlLines + "]");
                     ControlLines = firstRun ? Element.Lines : ControlLines;
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("2 Controlines=[" + ControlLines + "]");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("2 Controlines=[" + ControlLines + "]");
                     ControlLines = (int)Math.Min(Math.Floor(Control.Frame.Height / ControlFont.LineHeight), ControlLines);
                 }
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("3 Controlines=[" + ControlLines + "]");
+                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                //    System.Diagnostics.Debug.WriteLine("3 Controlines=[" + ControlLines + "]");
                 firstRun = false;
 
                 /*
@@ -325,60 +327,60 @@ namespace Forms9Patch.iOS
                     //Control.Frame = new CGRect(0, y, widthConstraint, height);  // doesn't work anymore but Control.Center does!
 
                 }
-                */
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                 {
                     System.Diagnostics.Debug.WriteLine("ControlFont.LineHeight=[" + ControlFont.LineHeight + "] Control.Lines=[" + Control.Lines + "]");
                     System.Diagnostics.Debug.WriteLine("Controlines=[" + ControlLines + "] gap=[" + gap + "]");
                     System.Diagnostics.Debug.WriteLine("xA");
                 }
+                */
 
                 if (Element.LineBreakMode == LineBreakMode.NoWrap && ControlLines > 0)
                 {
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("xB");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("xB");
                     switch (Element.VerticalTextAlignment)
                     {
                         case TextAlignment.Start:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("Nw S");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("Nw S");
                             Control.Center = new CGPoint(Control.Center.X, 0 + (Control.Font.LineHeight + Control.Font.Leading) / 2.0);
                             break;
                         case TextAlignment.Center:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("Nw C");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("Nw C");
                             Control.Center = new CGPoint(Control.Center.X, Control.Frame.Height / 2.0);
                             break;
                         case TextAlignment.End:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("Nw E");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("Nw E");
                             Control.Center = new CGPoint(Control.Center.X, Control.Frame.Height - (Control.Font.LineHeight + Control.Font.Leading) / 2.0);
                             break;
                     }
                 }
                 else if ((Element.Fit == LabelFit.Width || Element.Fit == LabelFit.Lines) && gap > 0)
                 {
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("xC");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("xC");
                     switch (Element.VerticalTextAlignment)
                     {
                         case TextAlignment.Center:
                             y = gap / 2.0;
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("CENTER");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("CENTER");
                             break;
                         case TextAlignment.End:
                             y = gap;
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("END");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("END");
                             break;
                     }
                     Control.Center = new CGPoint(Control.Center.X, height / 2.0 + y);
                 }
                 else if (ControlLines > 0 && Math.Abs(gap) > 0.1)
                 {
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("xD");
+                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                    //    System.Diagnostics.Debug.WriteLine("xD");
                     //System.Diagnostics.Debug.WriteLine("calc lines=[" + lines + "]");
 
                     //if (!(Element.Fit == LabelFit.None && Element.Lines == 0))
@@ -386,8 +388,8 @@ namespace Forms9Patch.iOS
                         double textBlockHeight = ControlFont.LineHeight * ControlLines;// + ControlFont.Leading * (ControlLines);// - 1);
 
                         gap = Control.Frame.Height - textBlockHeight;
-                        if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 Control.Frame.Height=[" + Control.Frame.Height + "] textBlockHeight=[" + textBlockHeight + "] gap=[" + gap + "]");
+                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                        //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 Control.Frame.Height=[" + Control.Frame.Height + "] textBlockHeight=[" + textBlockHeight + "] gap=[" + gap + "]");
                     }
 
 
@@ -395,28 +397,30 @@ namespace Forms9Patch.iOS
                     switch (Element.VerticalTextAlignment)
                     {
                         case TextAlignment.Start:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 S");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 S");
                             Control.Center = new CGPoint(Control.Center.X, Control.Center.Y - gap / 2);
                             break;
                         case TextAlignment.Center:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 C");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 C");
                             Control.Center = new CGPoint(Control.Center.X, Control.Center.Y);
                             break;
                         case TextAlignment.End:
-                            if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 E");
+                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
+                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 E");
                             Control.Center = new CGPoint(Control.Center.X, Control.Center.Y + gap / 2);
                             break;
                     }
                 }
+                /*
                 else
                 {
                     if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                         System.Diagnostics.Debug.WriteLine("xE");
 
                 }
+                */
 
 
                 if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
@@ -453,10 +457,12 @@ namespace Forms9Patch.iOS
 
 
                 LastDesiredSize = new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
+                /*
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     System.Diagnostics.Debug.WriteLine("tmpWd[" + tmpWd + "] tmpHt[" + tmpHt + "]");
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     System.Diagnostics.Debug.WriteLine("");
+                    */
                 //if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
                 //if (Element.HtmlText=="Fractional Mode")
                 //	System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] Fit=["+Element.Fit+"] Lines=["+Element.Lines+"]");

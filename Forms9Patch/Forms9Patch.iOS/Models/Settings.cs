@@ -7,6 +7,7 @@ using UIKit;
 using System.Reflection;
 //using Xamarin.Forms;
 //using System.Linq;
+using Xamarin.Forms;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.iOS.Settings))]
 namespace Forms9Patch.iOS
@@ -87,7 +88,7 @@ namespace Forms9Patch.iOS
                     }
                     FormsGestures.iOS.Settings.Init();
                 }
-                DetectDisplay();
+                Device.BeginInvokeOnMainThread(() => DetectDisplay());
             }
             get
             {

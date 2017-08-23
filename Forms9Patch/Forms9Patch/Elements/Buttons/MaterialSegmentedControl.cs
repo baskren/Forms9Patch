@@ -634,11 +634,11 @@ namespace Forms9Patch
                     //switch (Device.RuntimePlatform)
                     {
                         //case Device.iOS:
-                            case TargetPlatform.iOS:
+                        case TargetPlatform.iOS:
                             plaformTweek = 0.1;
                             break;
                         //case Device.Android:
-                            case TargetPlatform.Android:
+                        case TargetPlatform.Android:
                             plaformTweek = -1;
                             break;
                     }
@@ -861,7 +861,7 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine("width[" + width + "] height[" + height + "]");
+            //System.Diagnostics.Debug.WriteLine("width[" + width + "] height[" + height + "]");
 
             var p = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0)
@@ -873,11 +873,11 @@ namespace Forms9Patch
             var newWidth = width - p.HorizontalThickness;
             var newHeight = height - p.VerticalThickness;
 
-            System.Diagnostics.Debug.WriteLine("newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
+            //System.Diagnostics.Debug.WriteLine("newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
 
 
             int count = Children.Count;
-            System.Diagnostics.Debug.WriteLine("count=[" + count + "]");
+            //System.Diagnostics.Debug.WriteLine("count=[" + count + "]");
 
             if (count > 0)
             {
@@ -890,7 +890,7 @@ namespace Forms9Patch
                 double sWidth = hz ? xOffset : width;
                 double sHeight = vt ? yOffset : height;
 
-                System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
+                //System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
 
                 for (int i = 0; i < count - 1; i++)
                 {
