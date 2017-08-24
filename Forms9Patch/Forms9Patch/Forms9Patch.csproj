@@ -233,10 +233,6 @@
 			<Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
 			<Name>PCL.Utils</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\..\..\..\..\..\TwinTechsFormsLib\TwinTechsForms\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
-		  <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
-		  <Name>TwinTechsForms.Core</Name>
-		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="PCLStorage.Abstractions">
