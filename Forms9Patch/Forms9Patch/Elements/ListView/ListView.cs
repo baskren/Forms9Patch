@@ -685,49 +685,51 @@ namespace Forms9Patch
 			*/
         }
 
+        object _updateItemsSourceBlock = new object();
+
         void UpdateItemsSource()
         {
             //Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
             //{
-            Task.Run(() =>
+            if (F9PItemsSource == null)
+                return;
+            //Task.Run(() =>  // creates a race condition on picker view (Heights and Areas, Advanced, new OccupancyArea, select Occupancy
+            //{
+            if (_baseItemsSource != null)
             {
-                if (F9PItemsSource == null)
-                    return;
-                if (_baseItemsSource != null)
-                {
-                    _baseItemsSource.Tapped -= OnItemTapped;
-                    _baseItemsSource.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
-                    _baseItemsSource.LongPressed -= OnLongPressed;
-                    _baseItemsSource.LongPressing -= OnLongPressing;
-                }
-                //System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
-                //_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
-                _baseItemsSource = new GroupWrapper();
+                _baseItemsSource.Tapped -= OnItemTapped;
+                _baseItemsSource.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
+                _baseItemsSource.LongPressed -= OnLongPressed;
+                _baseItemsSource.LongPressing -= OnLongPressing;
+            }
+            //System.Diagnostics.Debug.WriteLine("UpdateItemsSource");
+            //_baseItemsSource = new Group(ItemsSource, SourcePropertyMap);
+            _baseItemsSource = new GroupWrapper();
 
-                _baseItemsSource.Tapped += OnItemTapped;
-                _baseItemsSource.LongPressed += OnLongPressed;
-                _baseItemsSource.LongPressing += OnLongPressing;
-                _baseItemsSource.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
+            _baseItemsSource.Tapped += OnItemTapped;
+            _baseItemsSource.LongPressed += OnLongPressed;
+            _baseItemsSource.LongPressing += OnLongPressing;
+            _baseItemsSource.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
 
-                _baseItemsSource.BindingContext = this;
-                _baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
-                _baseItemsSource.SubGroupType = SubGroupType;
-                _baseItemsSource.VisibilityTest = VisibilityTest;
-                //_baseItemsSource.HasUnevenRows = HasUnevenRows;
-                _baseItemsSource.RowHeight = RowHeight;
-                _baseItemsSource.CellBackgroundColor = CellBackgroundColor;
-                _baseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+            _baseItemsSource.BindingContext = this;
+            _baseItemsSource.SourceSubPropertyMap = SourcePropertyMap;
+            _baseItemsSource.SubGroupType = SubGroupType;
+            _baseItemsSource.VisibilityTest = VisibilityTest;
+            //_baseItemsSource.HasUnevenRows = HasUnevenRows;
+            _baseItemsSource.RowHeight = RowHeight;
+            _baseItemsSource.CellBackgroundColor = CellBackgroundColor;
+            _baseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
 
-                _baseItemsSource.Source = F9PItemsSource;
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    base.ItemsSource = _baseItemsSource;
+            _baseItemsSource.Source = F9PItemsSource;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                base.ItemsSource = _baseItemsSource;
 
-                    IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
-                    ReevaluateSelectedItems();
-                    ItemsSourceSet?.Invoke(this, EventArgs.Empty);
-                });
+                IsGroupingEnabled = _baseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
+                ReevaluateSelectedItems();
+                ItemsSourceSet?.Invoke(this, EventArgs.Empty);
             });
+            //});
             //return false;
             //});
         }
@@ -865,6 +867,8 @@ namespace Forms9Patch
             }
         }
 
+        int _scrollToInvocations;
+
         /// <summary>
         /// Scrolls to.
         /// </summary>
@@ -873,34 +877,43 @@ namespace Forms9Patch
         /// <param name="animated">If set to <c>true</c> animated.</param>
         public new void ScrollTo(object item, ScrollToPosition position, bool animated)
         {
+            _scrollToInvocations++;
             var itemWrapper = _baseItemsSource.WrapperForSource(item);
             if (itemWrapper == null)
-            {
                 // this will happen when item is inside of a group that is not of SubGroupType type 
                 ItemWrapperForSourceItem(item, F9PItemsSource, out itemWrapper);
+            if (itemWrapper == null)
+            {
+                itemWrapper = _baseItemsSource.WrapperForSource(item);
+                if (itemWrapper == null)
+                    ItemWrapperForSourceItem(item, F9PItemsSource, out itemWrapper);
+                //throw new InvalidDataContractException("Should not have any cell that doesn't have an items source!");
             }
-            if (itemWrapper != null)
-                // required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
-                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
-                {
-                    //if (Device.OS == TargetPlatform.Android)
-                    //{
-                    if (IsGroupingEnabled)
-                        RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
+            //else
+            //{
+            // required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
+            System.Diagnostics.Debug.WriteLine("A invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+            {
+                //if (Device.OS == TargetPlatform.Android)
+                //{
+                System.Diagnostics.Debug.WriteLine("B invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
+                if (IsGroupingEnabled)
+                    RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
+                else
+                    RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
+                /*
+                    }
+                    //RendererScrollToItemInGroup(item, group, position, animated);
                     else
-                        RendererScrollToPos?.Invoke(itemWrapper, null, position, animated);
-                    /*
-						}
-						//RendererScrollToItemInGroup(item, group, position, animated);
-						else
-						{
-							base.ScrollTo(itemWrapper, position, animated);
-						}
-						*/
-                    return false;
-                });
-            else
-                throw new InvalidDataContractException("Should not have any cell that doesn't have an items source!");
+                    {
+                        base.ScrollTo(itemWrapper, position, animated);
+                    }
+                    */
+                return false;
+            });
+            //}
         }
 
 

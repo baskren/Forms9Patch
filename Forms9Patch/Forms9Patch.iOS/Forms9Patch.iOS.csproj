@@ -21,7 +21,7 @@
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
 		<ConsolePause>false</ConsolePause>
-		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+		<CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<Optimize>true</Optimize>

@@ -22,8 +22,8 @@
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
 		<ConsolePause>false</ConsolePause>
-		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-		<DocumentationFile>bin\Debug\Forms9Patch.xml</DocumentationFile>
+		<CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+		<DocumentationFile></DocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<Optimize>true</Optimize>
