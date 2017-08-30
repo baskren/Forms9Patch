@@ -88,7 +88,8 @@ namespace Forms9Patch.iOS
                     }
                     FormsGestures.iOS.Settings.Init();
                 }
-                Device.BeginInvokeOnMainThread(() => DetectDisplay());
+                //Device.BeginInvokeOnMainThread(() => DetectDisplay());
+                DetectDisplay();
             }
             get
             {
