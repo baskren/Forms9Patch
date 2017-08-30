@@ -71,16 +71,29 @@ namespace Forms9Patch
             //	InvalidateMeasure ();
         }
 
+        /// <summary>
+        /// Shoulds the invalidate on child added.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child added was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
         protected override bool ShouldInvalidateOnChildAdded(View child)
         {
             return !IgnoreChildren; // stop pestering me
         }
 
+        /// <summary>
+        /// Shoulds the invalidate on child removed.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child removed was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
         protected override bool ShouldInvalidateOnChildRemoved(View child)
         {
             return !IgnoreChildren; // go away and leave me alone
         }
 
+        /// <summary>
+        /// Ons the child measure invalidated.
+        /// </summary>
         protected override void OnChildMeasureInvalidated()
         {
             // I'm ignoring you.  You'll take whatever size I want to give
