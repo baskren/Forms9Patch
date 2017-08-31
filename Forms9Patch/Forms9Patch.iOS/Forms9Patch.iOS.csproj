@@ -112,7 +112,7 @@
 		<Compile Include="Renderers\ContentViewRenderer.cs" />
 		<Compile Include="Renderers\StackLayoutRenderer.cs" />
 		<Compile Include="Renderers\ImageViewManager.cs" />
-		<Compile Include="Renderers\LayoutRenderer&lt;T&gt;.cs" />
+		<Compile Include="Renderers\LayoutRenderer_T_.cs" />
 		<Compile Include="Renderers\RelativeLayout.cs" />
 		<Compile Include="Renderers\GridRenderer.cs" />
 		<Compile Include="Renderers\AbsoluteLayoutRenderer.cs" />

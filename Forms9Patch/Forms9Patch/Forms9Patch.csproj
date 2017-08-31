@@ -135,7 +135,7 @@
 		<Compile Include="Elements\ListView\ItemsWrappers\BlankItemWrapper.cs" />
 		<Compile Include="Elements\ListView\ItemsWrappers\GroupWrapper.cs" />
 		<Compile Include="Elements\ListView\ItemsWrappers\ItemWrapper.cs" />
-		<Compile Include="Elements\ListView\ItemsWrappers\ItemWrapper&lt;TItem&gt;.cs" />
+		<Compile Include="Elements\ListView\ItemsWrappers\ItemWrapper_TItem_.cs" />
 		<Compile Include="Elements\ListView\ItemsWrappers\NullItemWrapper.cs" />
 		<Compile Include="Elements\ListView\ListView.cs" />
 		<Compile Include="Elements\ListView\ListViewExtensions.cs" />
