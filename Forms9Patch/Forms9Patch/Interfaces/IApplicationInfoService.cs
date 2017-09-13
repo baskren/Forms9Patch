@@ -47,5 +47,7 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The network availability.</value>
         NetworkConnectivity NetworkConnectivity { get; }
+
+
     }
 }

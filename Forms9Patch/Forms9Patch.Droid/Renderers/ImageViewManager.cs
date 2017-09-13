@@ -472,9 +472,9 @@ namespace Forms9Patch.Droid
                                         //										System.Diagnostics.Debug.WriteLine ("~~~~ W ~~~~");
                                     }
                                 }
-                                else if (_element.Height <= bitmap.Height / Display.Scale - vtThickness)
+                                else if (_element.Height <= bitmap.Height / FormsGestures.Display.Scale - vtThickness)
                                 {// || droidImageView != null) {
-                                    _element.HeightRequest = bitmap.Height / Display.Scale - vtThickness;
+                                    _element.HeightRequest = bitmap.Height / FormsGestures.Display.Scale - vtThickness;
                                     //									System.Diagnostics.Debug.WriteLine ("~~~~ X ~~~~");
                                 }
                                 if (_element.WidthRequest > 0)
@@ -485,9 +485,9 @@ namespace Forms9Patch.Droid
                                         //										System.Diagnostics.Debug.WriteLine ("~~~~ Y ~~~~");
                                     }
                                 }
-                                else if (_element.Width <= bitmap.Width / Display.Scale - hzThickness)
+                                else if (_element.Width <= bitmap.Width / FormsGestures.Display.Scale - hzThickness)
                                 { // || droidImageView != null) {
-                                    _element.WidthRequest = bitmap.Width / Display.Scale - hzThickness;
+                                    _element.WidthRequest = bitmap.Width / FormsGestures.Display.Scale - hzThickness;
                                     //									System.Diagnostics.Debug.WriteLine ("~~~~ Z ~~~~");
                                 }
                                 //System.Diagnostics.Debug.WriteLine ("WR=["+_element.WidthRequest+"] W=["+_element.Width+"] HR=["+_element.HeightRequest+"] H=["+_element.Height+"]");

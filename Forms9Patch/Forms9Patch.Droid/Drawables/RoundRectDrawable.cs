@@ -44,7 +44,7 @@ namespace Forms9Patch.Droid
 
 			var backgroundColor = (Xamarin.Forms.Color) Element.GetValue (VisualElement.BackgroundColorProperty);
 			var outlineColor = (Xamarin.Forms.Color) Element.GetValue (RoundedBoxBase.OutlineColorProperty);
-			var outlineWidth = Math.Max(0,(float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
+			var outlineWidth = Math.Max(0,(float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) * FormsGestures.Display.Scale);
 			var isElliptical = (bool)Element.GetValue(RoundedBoxBase.IsEllipticalProperty);
 
 			var materialButton = Element as MaterialButton;
@@ -54,14 +54,14 @@ namespace Forms9Patch.Droid
 			float separatorWidth = materialButton == null || type==SegmentType.Not ? 
 				0 : 
 				materialButton.SeparatorWidth < 0 ? 
-				outlineWidth : Math.Max (0, materialButton.SeparatorWidth * Display.Scale );
+				outlineWidth : Math.Max (0, materialButton.SeparatorWidth * FormsGestures.Display.Scale );
 
 			if (backgroundColor.A < 0.01 && (outlineColor.A < 0.01 || (outlineWidth < 0.01 && separatorWidth < 0.01))) {
 				//base.Draw (canvas);
 				return;
 			}
 
-			var outlineRadius = Math.Max(0f,(float)Element.GetValue (RoundedBoxBase.OutlineRadiusProperty) * Display.Scale);
+			var outlineRadius = Math.Max(0f,(float)Element.GetValue (RoundedBoxBase.OutlineRadiusProperty) * FormsGestures.Display.Scale);
 			var hasShadow = (bool)Element.GetValue (RoundedBoxBase.HasShadowProperty);
 
 			var hz = orientation == StackOrientation.Horizontal;
@@ -70,9 +70,9 @@ namespace Forms9Patch.Droid
 
 			var shadowInverted = ((bool)Element.GetValue (RoundedBoxBase.ShadowInvertedProperty));
 
-			var shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
-			var shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * Display.Scale);
-			var shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * Display.Scale);
+			var shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
+			var shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * FormsGestures.Display.Scale);
+			var shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * FormsGestures.Display.Scale);
 
 			var perimeter = new RectF(Bounds);
 
@@ -81,7 +81,7 @@ namespace Forms9Patch.Droid
 				// what additional padding was allocated to cast the button's shadow?
 				var shadowPad = RoundedBoxBase.ShadowPadding (Element as Layout);
 				// shrink the button's perimeter by that extra padding (so it is the size it was originally intended to be)
-				perimeter = new RectF ((float)(shadowPad.Left * Display.Scale + Bounds.Left), (float)(shadowPad.Top * Display.Scale + Bounds.Top), (float)(Bounds.Right - shadowPad.Right * Display.Scale), (float)(Bounds.Bottom - shadowPad.Bottom * Display.Scale));
+				perimeter = new RectF ((float)(shadowPad.Left * FormsGestures.Display.Scale + Bounds.Left), (float)(shadowPad.Top * FormsGestures.Display.Scale + Bounds.Top), (float)(Bounds.Right - shadowPad.Right * FormsGestures.Display.Scale), (float)(Bounds.Bottom - shadowPad.Bottom * FormsGestures.Display.Scale));
 
 				// set for a raised shadow
 				if (!shadowInverted && hasShadow && backgroundColor.A > 0) {
@@ -235,7 +235,7 @@ namespace Forms9Patch.Droid
 				shadowPaint.StrokeWidth = shadowR;
 				shadowPaint.Alpha = (int)(255 * 0.05 / shadowR);
 				shadowPaint.SetStyle (Paint.Style.Stroke);
-				for (int i = 0; i <= 2*shadowR+2*Display.Scale; i++) {
+				for (int i = 0; i <= 2*shadowR+2* FormsGestures.Display.Scale; i++) {
 					var r = Math.Max (0, outlineRadius);// - shadowR);
 					if (isElliptical)
 						shadowCanvas.DrawPath(EllipticalPath(insetShadowBounds), shadowPaint);

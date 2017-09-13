@@ -29,7 +29,7 @@ namespace Forms9Patch.Droid
 			//System.Diagnostics.Debug.WriteLine ("Draw");
 			var backgroundColor = (Xamarin.Forms.Color) _element.GetValue (BubbleLayout.BackgroundColorProperty);
 			var outlineColor = (Xamarin.Forms.Color) _element.GetValue (RoundedBoxBase.OutlineColorProperty);
-			var outlineWidth = Math.Max(0,(float)_element.GetValue (RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
+			var outlineWidth = Math.Max(0,(float)_element.GetValue (RoundedBoxBase.OutlineWidthProperty) * FormsGestures.Display.Scale);
 
 
 
@@ -46,7 +46,7 @@ namespace Forms9Patch.Droid
 				return;
 			}
 
-			var outlineRadius = Math.Max(0f,(float)_element.GetValue (RoundedBoxBase.OutlineRadiusProperty) * Display.Scale);
+			var outlineRadius = Math.Max(0f,(float)_element.GetValue (RoundedBoxBase.OutlineRadiusProperty) * FormsGestures.Display.Scale);
 			var hasShadow = (bool)_element.GetValue (BubbleLayout.HasShadowProperty);
 
 
@@ -55,9 +55,9 @@ namespace Forms9Patch.Droid
 
 			var shadowInverted = ((bool)_element.GetValue (RoundedBoxBase.ShadowInvertedProperty));
 
-			int shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
-			int shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * Display.Scale);
-			int shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * Display.Scale);
+			int shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
+			int shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * FormsGestures.Display.Scale);
+			int shadowR = (int)((Forms9Patch.Settings.ShadowRadius) * FormsGestures.Display.Scale);
 
 			var perimeter = new CGRect(Bounds);
 			//System.Diagnostics.Debug.WriteLine ("bounds=["+Bounds+"]");
@@ -65,7 +65,7 @@ namespace Forms9Patch.Droid
 				// what additional padding was allocated to cast the button's shadow?
 				var shadowPad = BubbleLayout.ShadowPadding (_element);
 				// shrink the button's perimeter by that extra padding (so it is the size it was originally intended to be)
-				perimeter = new CGRect ((float)(shadowPad.Left * Display.Scale + Bounds.Left), (float)(shadowPad.Top * Display.Scale + Bounds.Top), (float)(Bounds.Right - shadowPad.Right * Display.Scale), (float)(Bounds.Bottom - shadowPad.Bottom * Display.Scale));
+				perimeter = new CGRect ((float)(shadowPad.Left * FormsGestures.Display.Scale + Bounds.Left), (float)(shadowPad.Top * FormsGestures.Display.Scale + Bounds.Top), (float)(Bounds.Right - shadowPad.Right * FormsGestures.Display.Scale), (float)(Bounds.Bottom - shadowPad.Bottom * FormsGestures.Display.Scale));
 
 				// set for a raised shadow
 				if (!shadowInverted && hasShadow && backgroundColor.A > 0) {
@@ -233,7 +233,7 @@ namespace Forms9Patch.Droid
 				shadowPaint.StrokeWidth = (float)shadowR;
 				shadowPaint.Alpha = (int)(255 * 0.05 / shadowR);
 				shadowPaint.SetStyle (Paint.Style.Stroke);
-				for (int i = 0; i <= 2*shadowR+2*Display.Scale; i++) {
+				for (int i = 0; i <= 2*shadowR+2* FormsGestures.Display.Scale; i++) {
 					var r = Math.Max (0, outlineRadius);// - shadowR);
 					shadowCanvas.DrawPath(PerimeterPath(_element, insetShadowBounds, r), shadowPaint);
 					insetShadowBounds.Inset (-1, -1);
@@ -283,7 +283,7 @@ namespace Forms9Patch.Droid
 			if (element.PointerDirection == PointerDirection.None)
 				return RoundRectDrawable.PerimeterPath (element, rect, radius);
 			
-			var length = element.PointerLength * Display.Scale;
+			var length = element.PointerLength * FormsGestures.Display.Scale;
 
 			if (radius * 2 > rect.Height - (element.PointerDirection.IsVertical() ? length : 0))
 				radius = (float)((rect.Height - (element.PointerDirection.IsVertical() ? length : 0)) / 2.0);
@@ -291,7 +291,7 @@ namespace Forms9Patch.Droid
 				radius = (float)((rect.Width - (element.PointerDirection.IsHorizontal() ? length : 0)) / 2.0);
 
 			var filetRadius = element.PointerCornerRadius;
-			var tipRadius = element.PointerTipRadius * Display.Scale;
+			var tipRadius = element.PointerTipRadius * FormsGestures.Display.Scale;
 
 			if (filetRadius / 2.0 + tipRadius / 2.0 > length) {
 				filetRadius = (float)(2 * (length - tipRadius / 2.0));

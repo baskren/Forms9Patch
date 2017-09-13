@@ -85,7 +85,6 @@
     <Compile Include="Layouts\RelativeLayout.cs" />
     <Compile Include="Layouts\Grid.cs" />
     <Compile Include="Layouts\AbsoluteLayout.cs" />
-    <Compile Include="Models\Display.cs" />
     <Compile Include="Extensions\TextAlignmentExtension.cs" />
     <Compile Include="Models\ImageButtonState.cs" />
     <Compile Include="Models\Settings.cs" />

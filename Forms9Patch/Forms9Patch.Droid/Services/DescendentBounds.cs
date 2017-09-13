@@ -28,10 +28,10 @@ namespace Forms9Patch.Droid
 					elementNativeView.GetLocationInWindow (elementLocation);
 
 					var rect = new Rectangle (
-						(elementLocation [0] - pageLocation [0]) / Display.Scale,
-						(elementLocation [1] - pageLocation [1]) / Display.Scale,
-						(elementNativeView.Width) / Display.Scale,
-						(elementNativeView.Height) / Display.Scale);
+						(elementLocation [0] - pageLocation [0]) / FormsGestures.Display.Scale,
+						(elementLocation [1] - pageLocation [1]) / FormsGestures.Display.Scale,
+						(elementNativeView.Width) / FormsGestures.Display.Scale,
+						(elementNativeView.Height) / FormsGestures.Display.Scale);
 					return rect;
 				}
 			} 

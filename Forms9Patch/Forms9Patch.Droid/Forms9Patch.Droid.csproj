@@ -71,6 +71,9 @@
     <OutputPath>bin\Test</OutputPath>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -194,12 +197,7 @@
     <Compile Include="Services\ApplicationInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Effects\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="ListView\" />
     <Folder Include="ListView\Drawables\" />
-    <Folder Include="ListView\Renderers\" />
-    <Folder Include="ListView\Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

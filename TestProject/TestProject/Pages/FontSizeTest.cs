@@ -57,11 +57,11 @@ namespace Forms9PatchDemo.Pages
                     },
                     new Label
                     {
-                        Text = "Scale=[" + Forms9Patch.Display.Scale + "]"
+                        Text = "Scale=[" + FormsGestures.Display.Scale + "]"
                     },
                     new Label
                     {
-                        Text = "Density=["+ Forms9Patch.Display.Density +"]"
+                        Text = "Density=["+ FormsGestures.Display.Density +"]"
                     },
                     new StackLayout
                     {

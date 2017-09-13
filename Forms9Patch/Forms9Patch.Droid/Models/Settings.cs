@@ -59,7 +59,6 @@ namespace Forms9Patch.Droid
                     }
                     FormsGestures.Droid.Settings.Init();
                 }
-                DetectDisplay();
             }
             get
             {
@@ -67,14 +66,5 @@ namespace Forms9Patch.Droid
             }
         }
 
-        static void DetectDisplay()
-        {
-            var displayMetrics = global::Android.App.Application.Context.Resources.DisplayMetrics;
-            //Display.Density = (displayMetrics.Xdpi + displayMetrics.Ydpi)/2.0;
-            Display.Scale = displayMetrics.Density;
-            Display.Density = Display.Scale * 160;
-            Display.Width = Math.Min(displayMetrics.WidthPixels, displayMetrics.HeightPixels);
-            Display.Height = Math.Max(displayMetrics.WidthPixels, displayMetrics.HeightPixels);
-        }
     }
 }

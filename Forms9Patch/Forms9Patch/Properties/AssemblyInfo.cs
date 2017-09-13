@@ -27,6 +27,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Forms9Patch.Droid")]
 [assembly: InternalsVisibleTo("Forms9Patch.iOS")]
+[assembly: InternalsVisibleTo("Forms9Patch.UWP")]
 [assembly: InternalsVisibleTo("FormsDragNDropListView")]
 [assembly: InternalsVisibleTo("YvesForms9Patch.iOS")]
 [assembly: InternalsVisibleTo("YvesForms9Patch.Droid")]
