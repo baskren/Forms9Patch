@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;__DROID__;DONT_USE_MEASURE;</DefineConstants>
+    <DefineConstants>DEBUG;__DROID__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -37,13 +37,14 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Beta</OutputPath>
-    <DefineConstants>DEBUG;__DROID__;DONT_USE_MEASURE;</DefineConstants>
+    <DefineConstants>DEBUG;__DROID__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -54,25 +55,54 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Beta</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|iPhoneSimulator' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Beta</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|x86' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\x86\Beta</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\Test</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhone'">
+    <DefineConstants>__DROID__</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhoneSimulator'">
+    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -132,6 +162,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
+      <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\ContentViewRenderer.cs">
+      <Link>Renderers\ContentViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\FrameRenderer.cs">
+      <Link>Renderers\FrameRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\GridRenderer.cs">
+      <Link>Renderers\GridRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\RelativeLayout.cs">
+      <Link>Renderers\RelativeLayout.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\StackLayoutRenderer.cs">
+      <Link>Renderers\StackLayoutRenderer.cs</Link>
+    </Compile>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
@@ -152,17 +200,11 @@
     <Compile Include="Models\FontManagment.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="NativeChildren\F9PTextView.cs" />
-    <Compile Include="Renderers\AbsoluteLayoutRenderer.cs" />
     <Compile Include="Renderers\BubbleLayoutRenderer.cs" />
-    <Compile Include="Renderers\ContentViewRenderer.cs" />
-    <Compile Include="Renderers\FrameRenderer.cs" />
-    <Compile Include="Renderers\GridRenderer.cs" />
     <Compile Include="Renderers\ImageRenderer.cs" />
     <Compile Include="Renderers\ImageViewManager.cs" />
     <Compile Include="Renderers\LabelRenderer.cs" />
     <Compile Include="Renderers\LayoutRenderer_T_.cs" />
-    <Compile Include="Renderers\RelativeLayout.cs" />
-    <Compile Include="Renderers\StackLayoutRenderer.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Drawables\BubbleDrawable.cs" />
     <Compile Include="Drawables\NinePatch.cs" />

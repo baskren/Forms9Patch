@@ -10,8 +10,8 @@ namespace Forms9Patch.iOS
 	/// <summary>
 	/// Forms9Patch Layout renderer.
 	/// </summary>
-	public class LayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : VisualElement, IBackgroundImage
-	{
+	public class LayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, IBackgroundImage // VisualElement, IBackgroundImage
+    {
 		Image _oldImage;
 		ImageViewManager _imageViewManager;
 

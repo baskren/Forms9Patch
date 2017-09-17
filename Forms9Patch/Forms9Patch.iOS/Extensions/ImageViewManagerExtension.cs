@@ -15,23 +15,6 @@ namespace Forms9Patch.iOS
 
 		static readonly object _constructorLock = new object();
 
-		internal static bool Same(Xamarin.Forms.ImageSource thisSource, Xamarin.Forms.ImageSource otherSource) {
-			
-			if (thisSource == otherSource)
-				return true;
-			
-			var thisStreamSource = thisSource as Xamarin.Forms.StreamImageSource;
-			var otherStreamSource = otherSource as Xamarin.Forms.StreamImageSource;
-			if (thisStreamSource != null && otherStreamSource != null) {
-				if (thisStreamSource.GetValue (ImageSource.AssemblyProperty) != otherStreamSource.GetValue (ImageSource.AssemblyProperty))
-					return false;
-				return thisStreamSource.GetValue (ImageSource.PathProperty) != otherStreamSource.GetValue (ImageSource.PathProperty) ? false : true;
-			}
-
-			var thisFileSource = thisSource as Xamarin.Forms.FileImageSource;
-			var otherFileSource = otherSource as Xamarin.Forms.FileImageSource;
-			return thisFileSource != null && otherFileSource != null && thisFileSource.File == otherFileSource.File;
-		}
 
 #pragma warning disable 1998
 		internal static async Task<NSData> FetchResourceData(this ImageViewManager client, Xamarin.Forms.ImageSource streamSource, int _i)

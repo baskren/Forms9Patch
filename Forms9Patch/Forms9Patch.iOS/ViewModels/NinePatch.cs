@@ -140,7 +140,7 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 			// free up memory that won't be used again
 			_data = null;
 
-			Frame = new CGRect (0, 0, _width / Display.Scale , _height / Display.Scale);
+			Frame = new CGRect (0, 0, _width / FormsGestures.Display.Scale , _height / FormsGestures.Display.Scale);
 
 		}
 
@@ -230,17 +230,17 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 				
 			double scaleX = 0;
 			double failScaleX = 1;
-			if (_width - _compliantX > rect.Width*Display.Scale || _compliantX <= 0)
-				failScaleX = rect.Width * Display.Scale / (_width- _compliantX);
+			if (_width - _compliantX > rect.Width* FormsGestures.Display.Scale || _compliantX <= 0)
+				failScaleX = rect.Width * FormsGestures.Display.Scale / (_width- _compliantX);
 			else
-				scaleX = (rect.Width * Display.Scale - _fixedX) / _compliantX;
+				scaleX = (rect.Width * FormsGestures.Display.Scale - _fixedX) / _compliantX;
 
 			double xScaled=0, xSourced, wSourced, wScaled;
 			int region = 0;
 			int patch = 0;
 			if (_xStartFixed) {
 				wSourced = (_xRegions == 1 ? _width : Ranges.PatchesX [0].Start );
-				wScaled = wSourced * failScaleX / Display.Scale;
+				wScaled = wSourced * failScaleX / FormsGestures.Display.Scale;
 				DrawYPatches (rect, region++, xScaled, wScaled);
 				xScaled = wScaled;
 			}
@@ -250,14 +250,14 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 				//flex region
 				xSourced = Ranges.PatchesX [patch].Start;
 				wSourced = Ranges.PatchesX [patch].End - xSourced;
-				wScaled =  wSourced * scaleX / Display.Scale;
+				wScaled =  wSourced * scaleX / FormsGestures.Display.Scale;
 				DrawYPatches (rect, region++, xScaled, wScaled);
 				xScaled += wScaled;
 				//fixed region
 				if (region < _xRegions) {
 					xSourced = Ranges.PatchesX [patch].End;
 					wSourced = (patch < Ranges.PatchesX.Count - 1 ? Ranges.PatchesX [patch+1].Start : _width) - xSourced ;
-					wScaled = wSourced * failScaleX / Display.Scale;
+					wScaled = wSourced * failScaleX / FormsGestures.Display.Scale;
 					DrawYPatches (rect, region++, xScaled, wScaled);
 					xScaled += wScaled;
 				}
@@ -270,17 +270,17 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 		public void DrawYPatches(CGRect rect, int xIndex, double xScaled, double wScaled) {
 			double scaleY = 0;
 			double failScaleY = 1;
-			if (_height - _compliantY > rect.Height*Display.Scale || _compliantY <= 0)
-				failScaleY = rect.Height * Display.Scale / (_height - _compliantY);
+			if (_height - _compliantY > rect.Height* FormsGestures.Display.Scale || _compliantY <= 0)
+				failScaleY = rect.Height * FormsGestures.Display.Scale / (_height - _compliantY);
 			else
-				scaleY = (rect.Height * Display.Scale  - _fixedY) / _compliantY;
+				scaleY = (rect.Height * FormsGestures.Display.Scale  - _fixedY) / _compliantY;
 
 			double yScaled=0, ySourced, hSourced, hScaled;
 			int region = 0;
 			int patch = 0;
 			if (_yStartFixed) {
 				hSourced = (_yRegions == 1 ? _height : Ranges.PatchesY [0].Start );
-				hScaled = hSourced * failScaleY / Display.Scale;
+				hScaled = hSourced * failScaleY / FormsGestures.Display.Scale;
 				_patchViews [xIndex, region++].Frame = new CGRect (xScaled, yScaled, wScaled, hScaled);
 				yScaled = hScaled;
 			}
@@ -288,14 +288,14 @@ class NinePatch : UIImageView, INinePatch, IDisposable
 				//flex region
 				ySourced = Ranges.PatchesY [patch].Start;
 				hSourced = Ranges.PatchesY [patch].End - ySourced;
-				hScaled = hSourced * scaleY / Display.Scale;
+				hScaled = hSourced * scaleY / FormsGestures.Display.Scale;
 				_patchViews [xIndex, region++].Frame = new CGRect (xScaled, yScaled, wScaled, hScaled);
 				yScaled += hScaled;
 				//fixed region
 				if (region < _yRegions) {
 					ySourced = Ranges.PatchesY [patch].End;
 					hSourced = (patch < Ranges.PatchesY.Count - 1 ? Ranges.PatchesY [patch+1].Start : _height) - ySourced ;
-					hScaled = hSourced * failScaleY / Display.Scale;
+					hScaled = hSourced * failScaleY / FormsGestures.Display.Scale;
 					_patchViews [xIndex, region++].Frame = new CGRect (xScaled, yScaled, wScaled, hScaled);
 					yScaled += hScaled;
 				}

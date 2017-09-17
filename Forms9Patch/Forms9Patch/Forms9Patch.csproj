@@ -73,6 +73,7 @@
     <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ImageSourceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ThicknessExtension.cs" />
     <Compile Include="Interfaces\INativeSettings.cs" />

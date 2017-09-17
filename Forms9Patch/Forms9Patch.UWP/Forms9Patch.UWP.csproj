@@ -115,8 +115,37 @@
     <Compile Include="..\Forms9Patch\Models\RangeLists.cs">
       <Link>Models\RangeLists.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
+      <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\ContentViewRenderer.cs">
+      <Link>Renderers\ContentViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\FrameRenderer.cs">
+      <Link>Renderers\FrameRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\GridRenderer.cs">
+      <Link>Renderers\GridRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\RelativeLayout.cs">
+      <Link>Renderers\RelativeLayout.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\StackLayoutRenderer.cs">
+      <Link>Renderers\StackLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\F9PImageElementExtensions.cs" />
+    <Compile Include="Extensions\ImageViewManagerExtensions.cs" />
+    <Compile Include="Extensions\WriteableBitmapExtensions.cs" />
+    <Compile Include="ImageSourceHandlers\FileImageSourceHandler.cs" />
+    <Compile Include="ImageSourceHandlers\StreamImageSourceHandler.cs" />
+    <Compile Include="ImageSourceHandlers\UriImageSourceHandler.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomAccessMemoryStream.cs" />
+    <Compile Include="Renderers\ImageRenderer.cs" />
+    <Compile Include="Renderers\ImageViewManager.cs" />
+    <Compile Include="Renderers\LayoutRenderer_T_.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
     <EmbeddedResource Include="Properties\Forms9Patch.UWP.rd.xml" />
   </ItemGroup>
@@ -130,12 +159,18 @@
     <PackageReference Include="PCLStorage">
       <Version>1.0.2</Version>
     </PackageReference>
+    <PackageReference Include="WriteableBitmapEx">
+      <Version>1.5.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.3.4.270</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.UWP\FormsGestures.UWP.csproj">
+      <Project>{1f4ee6d4-ca44-4a60-9529-da6aaf91196d}</Project>
+      <Name>FormsGestures.UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
       <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
       <Name>FormsGestures</Name>
@@ -152,6 +187,9 @@
       <Project>{a45dea17-78a3-464a-9e00-0342d0503b00}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

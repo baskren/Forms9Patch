@@ -23,6 +23,8 @@ namespace Forms9Patch
 		/// Tile the unscaled image within the view's boundaries.  
 		/// </summary>
 		Tile,
+
+        None
 	}
 }
 

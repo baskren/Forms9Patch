@@ -162,6 +162,12 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
+            /*
+            var result =  base.OnSizeRequest(widthConstraint,heightConstraint);
+            return result;
+            */
+
+            /*
             SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
             double requestAspectRatio = sizeRequest.Request.Width / sizeRequest.Request.Height;
             double constraintAspectRatio = widthConstraint / heightConstraint;
@@ -208,6 +214,25 @@ namespace Forms9Patch
                 height = height * (width / width);
             }
             return new SizeRequest(new Size(width, height));
+            */
+
+
+            SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
+            double width = sizeRequest.Request.Width;
+            double height = sizeRequest.Request.Height;
+            if (Math.Abs(width) < float.Epsilon * 5 || Math.Abs(height) < float.Epsilon * 5)
+                //return new SizeRequest(new Size(40.0, 40.0));
+                return new SizeRequest(BaseImageSize);
+            Size result = new Size { Width = width, Height = height };
+            if (Fill != Fill.None)
+            {
+                if (!Double.IsInfinity(widthConstraint))
+                    result.Width = Math.Max(width, widthConstraint);
+                if (!Double.IsInfinity(heightConstraint))
+                    result.Height = Math.Max(height, heightConstraint);
+            }
+            return new SizeRequest(result);
+
         }
 
         #endregion

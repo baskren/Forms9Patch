@@ -159,10 +159,10 @@ namespace Forms9Patch.iOS
             }
         }
 
-        static int _iteration;
+        static int _iterations;
         async internal Task LayoutImage(Image image)
         {
-            int _i = _iteration++;
+            int iteration = _iterations++;
             if (_loading)
                 return;
 
@@ -186,7 +186,7 @@ namespace Forms9Patch.iOS
 
             //UIImage uiImage = null;
 
-            if (ImageViewManagerExtension.Same(_source, newSource))
+            if (_source.SameAs(newSource))
             {
                 LayoutComplete?.Invoke(_ninePatch != null || _imageView != null);
                 return;
@@ -254,12 +254,11 @@ namespace Forms9Patch.iOS
                     ((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, true);
 
                     //var start32 = DateTime.Now;
-                    var streamSource = newSource as StreamImageSource;
                     //delta = DateTime.Now - start32;
                     //System.Diagnostics.Debug.WriteLine ("\t{1}\tD3.2:\t{0}", delta.TotalSeconds, _i);
 
 
-                    if (streamSource != null && streamSource.Stream != null)
+                    if (newSource is StreamImageSource streamSource && streamSource.Stream != null)
                     {
                         NSData data = null;
                         //Stream stream = await streamSource.GetStreamAsync(cancelationToken).ConfigureAwait(false);
@@ -267,13 +266,13 @@ namespace Forms9Patch.iOS
                         {
                             //var start33 = DateTime.Now;
                             //Stream stream = await streamSource.Stream (default(CancellationToken));
-                            data = await this.FetchResourceData(streamSource, _i);
+                            data = await this.FetchResourceData(streamSource, iteration);
                             //delta = DateTime.Now - start33;
                             //System.Diagnostics.Debug.WriteLine ("\t{1}\tD3.3:\t{0}", delta.TotalSeconds, _i);
                         }
                         catch (Exception e)
                         {
-                            System.Diagnostics.Debug.WriteLine("{0} Failed to FetchDataResource.", _i);
+                            System.Diagnostics.Debug.WriteLine("{0} Failed to FetchDataResource.", iteration);
                             System.Diagnostics.Debug.WriteLine("msg: " + e.Message);
                         }
 
@@ -290,7 +289,7 @@ namespace Forms9Patch.iOS
                             }
                             catch (Exception e)
                             {
-                                System.Diagnostics.Debug.WriteLine("{0} Failed to NSData.FromStream.", _i);
+                                System.Diagnostics.Debug.WriteLine("{0} Failed to NSData.FromStream.", iteration);
                                 System.Diagnostics.Debug.WriteLine("msg: " + e.Message);
                             }
                         }
@@ -466,8 +465,7 @@ namespace Forms9Patch.iOS
                     if (Element.Height < 0 || Element.Width < 0)
                         await Task.Delay(TimeSpan.FromMilliseconds(20));
                     double hzThickness = 0, vtThickness = 0;
-                    var layout = Element as Layout;
-                    if (layout != null)
+                    if (Element is Layout layout)
                     {
                         hzThickness = layout.Padding.HorizontalThickness;
                         vtThickness = layout.Padding.VerticalThickness;
@@ -480,7 +478,7 @@ namespace Forms9Patch.iOS
                     else
                     {
                         if (Element.Height <= 0)
-                            Element.HeightRequest = _sourceImage.CGImage.Height / Display.Scale - vtThickness;
+                            Element.HeightRequest = _sourceImage.CGImage.Height / FormsGestures.Display.Scale - vtThickness;
                     }
                     if (Element.WidthRequest > 0)
                     {
@@ -490,7 +488,7 @@ namespace Forms9Patch.iOS
                     else
                     {
                         if (Element.Width <= 0)
-                            Element.WidthRequest = _sourceImage.CGImage.Width / Display.Scale - hzThickness;
+                            Element.WidthRequest = _sourceImage.CGImage.Width / FormsGestures.Display.Scale - hzThickness;
                     }
                 }
                 //delta = DateTime.Now-start7;
