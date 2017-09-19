@@ -15,7 +15,6 @@ namespace Forms9PatchDemo
 				Content = new StackLayout
 				{
 					Children = {
-                        /*
                         new Label { Text = "f9p: multiresource: button"},
 						new Forms9Patch.Image {
 							//Source = Xamarin.Forms.ImageSource.FromFile("sampleFile.png"),
@@ -26,6 +25,7 @@ namespace Forms9PatchDemo
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
                         
+                        /*
                         
 						new Label { Text = "f9p: multiresource: adsBttn29" },
 						new Forms9Patch.Image {
@@ -132,7 +132,7 @@ namespace Forms9PatchDemo
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 						#endregion
 
-                        */
+                        
 						#region Image
 
                         new Label { Text = "f9p: multiresource: redGridBox fill:None" },
@@ -176,6 +176,7 @@ namespace Forms9PatchDemo
                         
 						#endregion
                         
+                        */
                         
 
 					},

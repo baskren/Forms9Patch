@@ -167,7 +167,7 @@ namespace Forms9Patch
             return result;
             */
 
-            /*
+            
             SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
             double requestAspectRatio = sizeRequest.Request.Width / sizeRequest.Request.Height;
             double constraintAspectRatio = widthConstraint / heightConstraint;
@@ -214,9 +214,9 @@ namespace Forms9Patch
                 height = height * (width / width);
             }
             return new SizeRequest(new Size(width, height));
-            */
+            
 
-
+            /*
             SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
             double width = sizeRequest.Request.Width;
             double height = sizeRequest.Request.Height;
@@ -232,6 +232,7 @@ namespace Forms9Patch
                     result.Height = Math.Max(height, heightConstraint);
             }
             return new SizeRequest(result);
+            */
 
         }
 

@@ -13,6 +13,8 @@ namespace Forms9Patch
 	{
 		public double Start=-1;
 		public double End=double.MaxValue;
+
+        public double Width => End - Start;
 	}
 }
 
