@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Forms9Patch.UWP
 {
     public class ImageView : Windows.UI.Xaml.Controls.Grid, IDisposable
     {
-        bool _debugMessages = true;
+        bool _debugMessages = false;
 
         RangeLists _rangeLists=null;
 
@@ -86,9 +87,11 @@ namespace Forms9Patch.UWP
         }
 
 
+        int _instance;
 
-        public ImageView()
+        public ImageView(int instance)
         {
+            _instance = instance;
             BorderThickness = new Windows.UI.Xaml.Thickness(1);
             BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Pink);
             Padding = new Windows.UI.Xaml.Thickness();
@@ -124,6 +127,7 @@ namespace Forms9Patch.UWP
 
         void GenerateLayout()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             RowDefinitions.Clear();
             ColumnDefinitions.Clear();
 
@@ -153,16 +157,21 @@ namespace Forms9Patch.UWP
             else
             {
                 int xPatches = _rangeLists.PatchesX.Count;
-                if (_rangeLists.PatchesX[0].Start > 0)
-                    xPatches++;
+                if (xPatches > 0)
+                { 
+                    if (_rangeLists.PatchesX[0].Start > 0)
+                        xPatches++;
                 if (_rangeLists.PatchesX.Last<Range>().End < _source.PixelWidth - 1)
                     xPatches++;
+                }
                 int yPatches = _rangeLists.PatchesY.Count;
-                if (_rangeLists.PatchesY[0].Start > 0)
-                    yPatches++;
-                if (_rangeLists.PatchesY.Last<Range>().End < _source.PixelWidth - 1)
-                    yPatches++;
-
+                if (yPatches > 0)
+                {
+                    if (_rangeLists.PatchesY[0].Start > 0)
+                        yPatches++;
+                    if (_rangeLists.PatchesY.Last<Range>().End < _source.PixelWidth - 1)
+                        yPatches++;
+                }
 
                 int yPatchRow = 0;
                 int yPatchStart;
@@ -208,6 +217,8 @@ namespace Forms9Patch.UWP
                     });
                 }
             }
+            stopwatch.Stop();
+            System.Diagnostics.Debug.WriteLine("GenerateLayout ["+_instance+"]: "+stopwatch.ElapsedMilliseconds);
         }
 
         void PatchesForRow(int yPatchRow, int yPatchStart, int yPatchEnd, Windows.UI.Xaml.VerticalAlignment yStretch)

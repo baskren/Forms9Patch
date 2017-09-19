@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,23 +38,42 @@ namespace Forms9Patch.UWP
             return bitmap.GetPixel(x, y) == Colors.Black;
         }
 
+        static bool IsTransparentAt(this byte[] byteArray, int index)
+        {
+            int offset = index * 4;
+            return byteArray[offset+3] == 0;
+        }
+
+        static bool IsBlackAt(this byte[] byteArray, int index)
+        {
+            int offset = index * 4;
+            return byteArray[offset] == 0 && byteArray[offset + 1] == 0 && byteArray[offset + 2] == 0 && byteArray[offset + 3] == 255;
+        }
+
+
         static public RangeLists NinePatchRanges(this WriteableBitmap bitmap)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             int width = bitmap.PixelWidth;
             int height = bitmap.PixelHeight;
 
             var capsX = new List<Range>();
             int pos = -1;
+
+            var firstRow = bitmap.ToByteArray(0, bitmap.PixelWidth);
+
             for (int i = 1; i < width - 1; i++)
             {
-                if (bitmap.IsBlackAt(i, 0))
+                //if (bitmap.IsBlackAt(i, 0))
+                if (firstRow.IsBlackAt(i))
                 {
                     if (pos == -1)
                     {
                         pos = i;
                     }
                 }
-                else if (bitmap.IsTransparentAt(i, 0))
+                //else if (bitmap.IsTransparentAt(i, 0))
+                else if (firstRow.IsTransparentAt(i))
                 {
                     if (pos != -1)
                     {
@@ -80,16 +100,22 @@ namespace Forms9Patch.UWP
 
             var capsY = new List<Range>();
             pos = -1;
+
+            var firstColBitmap = bitmap.Crop(0, 0, 1, bitmap.PixelHeight);
+            var firstCol = firstColBitmap.ToByteArray();
+
             for (int i = 1; i < height - 1; i++)
             {
-                if (bitmap.IsBlackAt(0, i))
+                //if (bitmap.IsBlackAt(0, i))
+                if (firstCol.IsBlackAt(i))
                 {
                     if (pos == -1)
                     {
                         pos = i;
                     }
                 }
-                else if (bitmap.IsTransparentAt(0, i))
+                //else if (bitmap.IsTransparentAt(0, i))
+                else if (firstCol.IsTransparentAt(i))
                 {
                     if (pos != -1)
                     {
@@ -115,9 +141,12 @@ namespace Forms9Patch.UWP
 
             var margX = null as Range;
             pos = -1;
+            var lastRow = bitmap.ToByteArray((bitmap.PixelHeight-1)*bitmap.PixelWidth, bitmap.PixelWidth);
+
             for (int i = 1; i < width - 1; i++)
             {
-                if (bitmap.IsBlackAt(i, height - 1))
+                //if (bitmap.IsBlackAt(i, height - 1))
+                if (lastRow.IsBlackAt(i))
                 {
                     if (pos == -1)
                     {
@@ -130,7 +159,8 @@ namespace Forms9Patch.UWP
             {
                 for (int i = width - 1; i > pos; i--)
                 {
-                    if (bitmap.IsBlackAt(i, height - 1))
+                    //if (bitmap.IsBlackAt(i, height - 1))
+                    if (lastRow.IsBlackAt(i))
                     {
                         margX = new Range();
                         margX.Start = pos;
@@ -142,9 +172,14 @@ namespace Forms9Patch.UWP
 
             var margY = null as Range;
             pos = -1;
+
+            var lastColumnBitmap = bitmap.Crop(bitmap.PixelWidth - 1, 0, 1, bitmap.PixelHeight);
+            var lastCol = lastColumnBitmap.ToByteArray();
+
             for (int i = 1; i < height - 1; i++)
             {
-                if (bitmap.IsBlackAt(width - 1, i))
+                //if (bitmap.IsBlackAt(width - 1, i))
+                if (lastCol.IsBlackAt(i))
                 {
                     if (pos == -1)
                     {
@@ -157,7 +192,8 @@ namespace Forms9Patch.UWP
             {
                 for (int i = height - 1; i > pos; i--)
                 {
-                    if (bitmap.IsBlackAt(width - 1, i))
+                    //if (bitmap.IsBlackAt(width - 1, i))
+                    if (lastCol.IsBlackAt(i))
                     {
                         margY = new Range();
                         margY.Start = pos;
@@ -173,6 +209,8 @@ namespace Forms9Patch.UWP
             rangeLists.MarginX = margX;
             rangeLists.MarginY = margY;
 
+            stopwatch.Stop();
+            System.Diagnostics.Debug.WriteLine("NinePatchRanges: "+ stopwatch.ElapsedMilliseconds);
             return rangeLists;
         }
 
