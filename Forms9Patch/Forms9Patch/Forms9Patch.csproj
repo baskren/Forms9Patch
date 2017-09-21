@@ -81,7 +81,6 @@
 		<Compile Include="Layouts\RelativeLayout.cs" />
 		<Compile Include="Layouts\Grid.cs" />
 		<Compile Include="Layouts\AbsoluteLayout.cs" />
-		<Compile Include="Models\Display.cs" />
 		<Compile Include="Extensions\TextAlignmentExtension.cs" />
 		<Compile Include="Models\ImageButtonState.cs" />
 		<Compile Include="Models\Settings.cs" />
@@ -195,6 +194,9 @@
 		<Compile Include="Extensions\LayoutOptionsExtensions.cs" />
 		<Compile Include="Elements\Buttons\ImageButton.cs" />
 		<Compile Include="Enums\NetworkConnectivity.cs" />
+		<Compile Include="Interfaces\IDisplayService.cs" />
+		<Compile Include="Services\Display.cs" />
+		<Compile Include="Enums\DisplayOrientation.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 	<ItemGroup>

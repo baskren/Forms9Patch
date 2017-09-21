@@ -192,6 +192,7 @@
 		<Compile Include="Services\KeyboardService.cs" />
 		<Compile Include="Services\FontService.cs" />
 		<Compile Include="Services\ApplicationInfoService.cs" />
+		<Compile Include="Services\DisplayService.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Effects\" />

@@ -141,6 +141,9 @@
 		<Compile Include="Services\StatusBarService.cs" />
 		<Compile Include="Services\ApplicationInfoService.cs" />
 		<Compile Include="Reachability.cs" />
+		<Compile Include="Services\DisplayService.cs" />
+		<Compile Include="Extensions\UIInterfaceOrientaitonExtensions.cs" />
+		<Compile Include="Effects\WebViewFixEffect.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

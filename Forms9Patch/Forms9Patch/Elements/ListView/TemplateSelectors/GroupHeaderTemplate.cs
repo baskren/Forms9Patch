@@ -38,6 +38,8 @@ namespace Forms9Patch
                 {
                     if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
                         SetHeight();
+                    else if (e.PropertyName == "CellHeight")
+                        SetHeight();
                 };
             }
 

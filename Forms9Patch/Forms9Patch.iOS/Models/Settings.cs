@@ -32,15 +32,19 @@ namespace Forms9Patch.iOS
             get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
 
+        internal static UIApplicationDelegate AppDelegate;
+
 
         /// <summary>
         /// Initialize the specified licenseKey.
         /// </summary>
         /// <returns>The initialize.</returns>
         /// <param name="licenseKey">License key.</param>
-        public static void Initialize(string licenseKey = null)
+        public static void Initialize(UIKit.UIApplicationDelegate appDelegate, string licenseKey = null)
         {
+            AppDelegate = appDelegate;
             LicenseKey = licenseKey ?? "freebee";
+            //Display.SafeAreaInset = new Thickness(appDelegate.Window.SafeAreaInsets.Left, appDelegate.Window.SafeAreaInsets.Top, appDelegate.Window.SafeAreaInsets.Right, appDelegate.Window.SafeAreaInsets.Bottom);
         }
 
         static string _licenseKey;
@@ -89,7 +93,7 @@ namespace Forms9Patch.iOS
                     FormsGestures.iOS.Settings.Init();
                 }
                 //Device.BeginInvokeOnMainThread(() => DetectDisplay());
-                DetectDisplay();
+                //DetectDisplay();
             }
             get
             {
@@ -100,57 +104,7 @@ namespace Forms9Patch.iOS
 
         #region Display Property Detection
 
-        static void DetectDisplay()
-        {
-            // screen size in pixels
-            var nativeSize = UIScreen.MainScreen.NativeBounds;
-            Display.Width = (float)Math.Min(nativeSize.Width, nativeSize.Height);
-            Display.Height = (float)Math.Max(nativeSize.Height, nativeSize.Width);
-            //var name = UIDevice.CurrentDevice.Name;
-            //var model = UIDevice.CurrentDevice.Model;
-
-            // iOS point (~160 dpi) to pixel conversion.  Std displays: 1  Retina displays: 2
-            Display.Scale = (float)UIScreen.MainScreen.Scale;
-            //var hardwareVersion = GetSystemProperty("hw.machine");
-            //Console.WriteLine ("[Forms9Patch] DD 6");
-            /*
-			if (nativeSize.Width == 340 && nativeSize.Height == 272)
-				// Apple Watch, 38mm
-				Display.Density = 290;
-			else if (nativeSize.Width == 390 && nativeSize.Height == 312)
-				// Apple Watch, 42mm
-				Display.Density = 303;
-			else if (nativeSize.Width == 320 && nativeSize.Height == 480)
-				// iPhone 2/3/3S
-				Display.Density = 163;
-			else if (nativeSize.Width == 640 && nativeSize.Height == 960)
-				// iPhone 4/4S
-				Display.Density = 326;
-			else if (nativeSize.Width == 640 && nativeSize.Height == 1136)
-				// iPhone 5/5S/5C
-				Display.Density = 326;
-			else if (nativeSize.Width == 750 && nativeSize.Height == 1334)
-				// iPhone 6/6S
-				Display.Density = 326;
-			else if (nativeSize.Width == 1080 && nativeSize.Height == 1920)
-				// iPhone 6 Plus / 6S Plus
-				Display.Density = 401;
-			else if (nativeSize.Width == 768 && nativeSize.Height == 1024) {
-				// iPad 1/2, iPad mini 1
-				Display.Density = (float)(AppleScreenDesities.ContainsKey (hardwareVersion) ? AppleScreenDesities [hardwareVersion] : 163);
-			}
-			else if (nativeSize.Width == 1536 && nativeSize.Height == 2048)
-				// iPad Mini 2/3/4, iPad 3/4, iPad Air 1/2
-				Display.Density = (float)(AppleScreenDesities.ContainsKey (hardwareVersion) ? AppleScreenDesities [hardwareVersion] : 326);
-			else if (nativeSize.Width == 2048 && nativeSize.Height == 2732)
-				// iPad Pro
-				Display.Density = 264;
-			//else
-			//	Display.Density = 
-			*/
-            Console.WriteLine(/*"hardware="+hardwareVersion+*/"[Forms9Patch]\t DD native=" + nativeSize + " scale=" + Display.Scale + " density=" + Display.Density);
-        }
-
+        /*
         static string GetSystemProperty(string property)
         {
             var pLen = Marshal.AllocHGlobal(sizeof(int));
