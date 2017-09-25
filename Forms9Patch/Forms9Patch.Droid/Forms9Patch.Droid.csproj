@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;__DROID__</DefineConstants>
+    <DefineConstants>DEBUG;__DROID__;DONT_USE_MEASURE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -44,24 +44,12 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Beta</OutputPath>
-    <DefineConstants>DEBUG;__DROID__</DefineConstants>
+    <DefineConstants>DEBUG;__DROID__;DONT_USE_MEASURE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|iPhone' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\iPhone\Beta</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|iPhoneSimulator' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\iPhoneSimulator\Beta</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|x86' ">
     <Optimize>false</Optimize>
@@ -70,38 +58,11 @@
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Test</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhone'">
-    <DefineConstants>__DROID__</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhoneSimulator'">
     <DefineConstants>__DROID__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
@@ -237,9 +198,15 @@
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\FontService.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
+    <Compile Include="Services\DisplayService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Effects\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ListView\" />
     <Folder Include="ListView\Drawables\" />
+    <Folder Include="ListView\Renderers\" />
+    <Folder Include="ListView\Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
@@ -269,4 +236,5 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+
 </Project>

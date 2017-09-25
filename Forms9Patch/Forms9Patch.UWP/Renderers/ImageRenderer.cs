@@ -226,7 +226,7 @@ else
                 System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateSource() RETURN");
                 return;
             }
-
+           
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             //Element.SetIsLoading(true);
@@ -248,9 +248,14 @@ else
 
         }
 
+        Windows.Foundation.Size _lastFinalSize = Windows.Foundation.Size.Empty;
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].ArrangeOverride(" + finalSize+") ENTER/RETURN");
+
+            if (_lastFinalSize!=finalSize && Element.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
+                Control.GenerateLayout(finalSize);
+            _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);
         }
 

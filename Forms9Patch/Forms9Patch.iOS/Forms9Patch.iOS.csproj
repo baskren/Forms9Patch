@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -73,6 +74,19 @@
       <HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Renderers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
+    <Folder Include="Effects\" />
+    <Folder Include="Enums\" />
+    <Folder Include="ListView\" />
+    <Folder Include="ListView\Renderers\" />
+    <Folder Include="ListView\Services\" />
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
@@ -141,6 +155,9 @@
     <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
     <Compile Include="Reachability.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Extensions\UIInterfaceOrientaitonExtensions.cs" />
+    <Compile Include="Effects\WebViewFixEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
@@ -169,4 +186,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+
 </Project>

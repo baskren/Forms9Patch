@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch", "Forms9Patch\Forms9Patch\Forms9Patch.csproj", "{A45DEA17-78A3-464A-9E00-0342D0503B00}"
 EndProject
@@ -177,18 +177,18 @@ Global
 		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Release|x86.Build.0 = Release|x86
 		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Any CPU.Build.0 = Debug|Any CPU
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|ARM.ActiveCfg = Test|Any CPU
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|ARM.Build.0 = Test|Any CPU
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhone.ActiveCfg = Test|iPhone
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhone.Build.0 = Test|iPhone
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhoneSimulator.ActiveCfg = Test|iPhoneSimulator
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhoneSimulator.Build.0 = Test|iPhoneSimulator
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Mixed Platforms.ActiveCfg = Test|x86
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Mixed Platforms.Build.0 = Test|x86
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x64.ActiveCfg = Test|Any CPU
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x64.Build.0 = Test|Any CPU
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x86.ActiveCfg = Test|x86
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x86.Build.0 = Test|x86
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|ARM.ActiveCfg = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|ARM.Build.0 = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhone.ActiveCfg = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhone.Build.0 = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhoneSimulator.ActiveCfg = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|iPhoneSimulator.Build.0 = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Mixed Platforms.ActiveCfg = Beta|x86
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|Mixed Platforms.Build.0 = Beta|x86
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x64.ActiveCfg = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x64.Build.0 = Beta|Any CPU
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x86.ActiveCfg = Beta|x86
+		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}.Turkey|x86.Build.0 = Beta|x86
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|ARM.ActiveCfg = Debug|Any CPU

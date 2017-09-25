@@ -208,6 +208,16 @@ namespace Forms9Patch
                 {
                     if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
                         SetHeight();
+                    else if (e.PropertyName == "CellHeight")
+                    {
+                        var iCellHeight = BaseCellView.Content as ICellHeight;
+                        if (iCellHeight != null)
+                        {
+                            Height = iCellHeight.CellHeight + BaseCellView.Padding.VerticalThickness;
+                            //ForceUpdateSize();
+                        }
+                    }
+
                 };
             }
 

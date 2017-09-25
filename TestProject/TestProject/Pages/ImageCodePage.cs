@@ -16,7 +16,7 @@ namespace Forms9PatchDemo
 				{
 					Children = {
 
-                                          
+                           
 
                         new Label { Text = "f9p: multiresource: button"},
 						new Forms9Patch.Image {
@@ -167,11 +167,13 @@ namespace Forms9PatchDemo
 							Fill = Forms9Patch.Fill.Fill,
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
+                        
                         new Label { Text = "f9p: multiresource: redGridBox Fill.Tile" },
                         new Forms9Patch.Image {
 							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Fill = Forms9Patch.Fill.Tile,
 						},
+                        
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         new Label { Text = "f9p: multiresource: redGridBox Fill.AspectFill CAPINSETS:10" },
                         new Forms9Patch.Image {

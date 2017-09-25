@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -201,7 +202,25 @@
     <Compile Include="Enums\NetworkConnectivity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <ItemGroup />
+	<ItemGroup>
+		<Folder Include="Extensions\" />
+		<Folder Include="Models\" />
+		<Folder Include="Interfaces\" />
+		<Folder Include="Elements\" />
+		<Folder Include="ElementModels\" />
+		<Folder Include="Layouts\" />
+		<Folder Include="Enums\" />
+		<Folder Include="Events\" />
+		<Folder Include="Spans\" />
+		<Folder Include="Resources\" />
+		<Folder Include="Elements\ListView\" />
+		<Folder Include="Elements\Pickers\" />
+		<Folder Include="Elements\Popups\" />
+		<Folder Include="Elements\Buttons\" />
+		<Folder Include="Elements\ListView\TemplateSelectors\" />
+		<Folder Include="Elements\Pages\" />
+		<Folder Include="Services\" />
+	</ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
     <EmbeddedResource Include="Resources\unlicensedcopy.png" />
@@ -241,4 +260,5 @@
     <None Include="project.json" />
   </ItemGroup>
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+
 </Project>
