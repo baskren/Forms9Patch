@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,15 @@ namespace Forms9Patch.UWP
         bool _measured;
         bool _disposed;
 
-        bool _debugMessages;
+        bool _debugMessages=false;
+
+        static int _instances;
+        int _instance;
+
+        public ImageRenderer()
+        {
+            _instance = _instances++;
+        }
 
         /*
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
@@ -70,23 +79,25 @@ namespace Forms9Patch.UWP
 
         protected override async void OnElementChanged(ElementChangedEventArgs<Image> e)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnElementChanged(["+e.OldElement+", "+e.NewElement+"]");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer["+_instance+"].OnElementChanged(["+e.OldElement+", "+e.NewElement+"]");
             base.OnElementChanged(e);
 
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    SetNativeControl(new ImageView());
+                    SetNativeControl(new ImageView(_instance));
 
                 await TryUpdateSource();
                 UpdateAspect();
+                UpdateCapInsets();
             }
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnElementChanged([" + e.OldElement + ", " + e.NewElement + "] RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementChanged([" + e.OldElement + ", " + e.NewElement + "] RETURN");
         }
+
 
         protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnElementPropertyChanged(["+e.PropertyName+"]");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName+"]");
             base.OnElementPropertyChanged(sender, e);
 
             if (e.PropertyName == Image.SourceProperty.PropertyName)
@@ -97,8 +108,10 @@ namespace Forms9Patch.UWP
                 */
             else if (e.PropertyName == Image.FillProperty.PropertyName)
                 UpdateAspect();
+            else if (e.PropertyName == Image.CapInsetsProperty.PropertyName)
+                UpdateCapInsets();
 
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
         }
 
         /*
@@ -138,14 +151,21 @@ namespace Forms9Patch.UWP
 
         void RefreshImage()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.RefreshImage()");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage()");
             ((IVisualElementController)Element)?.InvalidateMeasure(InvalidationTrigger.RendererReady);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.RefreshImage() RETURN ");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage() RETURN ");
         }
+
+        private void UpdateCapInsets()
+        {
+            if (Control != null)
+                Control.CapInsets = Element.CapInsets;
+        }
+
 
         void UpdateAspect()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect()");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateAspect()");
             /*
 
 if (_disposed || Element == null || Control == null)
@@ -170,14 +190,15 @@ else
     Control.Stretch = Element.Fill.ToStretch();
     */
 
-            Control.Fill = Element.Fill;
+            if (Control!=null)
+                Control.Fill = Element.Fill;
 
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect() RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateAspect() RETURN");
         }
 
         protected virtual async Task TryUpdateSource()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.TryUpdateSource()");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].TryUpdateSource()");
             // By default we'll just catch and log any exceptions thrown by UpdateSource so we don't bring down
             // the application; a custom renderer can override this method and handle exceptions from
             // UpdateSource differently if it wants to
@@ -188,23 +209,25 @@ else
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(nameof(ImageRenderer), "Error loading image: {0}", ex);
+                System.Diagnostics.Debug.WriteLine(nameof(ImageRenderer), "ImageRenderer[" + _instance + "].TryUpdateSource() Error loading image: {0}", ex);
             }
             finally
             {
                 ((IImageController)Element)?.SetIsLoading(false);
             }
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.TryUpdateSource() RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].TryUpdateSource() RETURN");
         }
 
         protected async Task UpdateSource()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateSource()");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateSource()");
             if (_disposed || Element == null || Control == null)
             {
-                System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateSource() RETURN");
+                System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateSource() RETURN");
                 return;
             }
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             //Element.SetIsLoading(true);
             ((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, true);
@@ -212,42 +235,46 @@ else
             Xamarin.Forms.ImageSource source = Element.Source;
 
             await Control.SetSourceAsync(source);
+            
             RefreshImage();
+
+
 
             //Element.SetIsLoading(false);
             ((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, false);
 
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateSource() RETURN");
+            stopwatch.Stop();
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateSource() RETURN elapsedTime=["+stopwatch.ElapsedMilliseconds+"]");
 
         }
 
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.ArrangeOverride("+finalSize+") ENTER/RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].ArrangeOverride(" + finalSize+") ENTER/RETURN");
             return base.ArrangeOverride(finalSize);
         }
 
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.MeasureOverride(" + availableSize + ") ENTER/RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].MeasureOverride(" + availableSize + ") ENTER/RETURN");
             return base.MeasureOverride(availableSize);
         }
 
         protected override void UpdateBackgroundColor()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateBackgroundColor() ENTER/RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateBackgroundColor() ENTER/RETURN");
             base.UpdateBackgroundColor();
         }
 
         protected override void UpdateNativeControl()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateNativeControl() ENTER/RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateNativeControl() ENTER/RETURN");
             base.UpdateNativeControl();
         }
 
         protected override void OnApplyTemplate()
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnApplyTemplate() ENTER/RETURN");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnApplyTemplate() ENTER/RETURN");
             base.OnApplyTemplate();
         }
     }

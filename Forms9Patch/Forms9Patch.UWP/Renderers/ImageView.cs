@@ -19,10 +19,10 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                if (_source == null)
+                if (_bitmap == null)
                     return Size.Zero;
 
-                var result = new Size(_source.PixelWidth, _source.PixelHeight);
+                var result = new Size(_bitmap.PixelWidth, _bitmap.PixelHeight);
                 if (_rangeLists!=null)
                 {
                     result.Width -= 2;
@@ -32,40 +32,45 @@ namespace Forms9Patch.UWP
             }
         }
 
-        WriteableBitmap _source;
+        WriteableBitmap _bitmap;
+        Xamarin.Forms.ImageSource _xfImageSource;
         public async Task SetSourceAsync(Xamarin.Forms.ImageSource source)
         {
-
-            Xamarin.Forms.Platform.UWP.IImageSourceHandler handler = null;
-            if (source != null)
+            if (source != _xfImageSource)
             {
-                if (source is FileImageSource)
-                    handler = new FileImageSourceHandler();
-                else if (source is UriImageSource)
-                    handler = new UriImageSourceHandler();
-                else if (source is StreamImageSource)
-                    handler = new StreamImageSourceHandler();
-            }
-            if (handler != null)
-            {
-                Windows.UI.Xaml.Media.ImageSource imagesource;
-                try
+                _xfImageSource = source;
+                Xamarin.Forms.Platform.UWP.IImageSourceHandler handler = null;
+                if (source != null)
                 {
-                    imagesource = await handler.LoadImageAsync(source);
+                    if (source is FileImageSource)
+                        handler = new FileImageSourceHandler();
+                    else if (source is UriImageSource)
+                        handler = new UriImageSourceHandler();
+                    else if (source is StreamImageSource)
+                        handler = new StreamImageSourceHandler();
                 }
-                catch (OperationCanceledException)
+                if (handler != null)
                 {
-                    imagesource = null;
-                }
-                // In the time it takes to await the imagesource, some zippy little app
-                // might have disposed of this Image already.
-                if (imagesource is WriteableBitmap bitmap)
-                    _source = bitmap;
-                else
-                    _source = null;
+                    Windows.UI.Xaml.Media.ImageSource imagesource;
+                    try
+                    {
+                        imagesource = await handler.LoadImageAsync(source);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        imagesource = null;
+                    }
+                    // In the time it takes to await the imagesource, some zippy little app
+                    // might have disposed of this Image already.
 
-                GenerateLayout();
-                UpdateAspect();
+
+                    if (imagesource is WriteableBitmap bitmap)
+                        _bitmap = bitmap;
+                    else
+                        _bitmap = null;
+
+                    GenerateLayout();
+                }
             }
         }
 
@@ -82,6 +87,23 @@ namespace Forms9Patch.UWP
                 {
                     _fill = value;
                     UpdateAspect();
+                }
+            }
+        }
+
+        Xamarin.Forms.Thickness _capInsets;
+        public Xamarin.Forms.Thickness CapInsets
+        {
+            get
+            {
+                return _capInsets;
+            }
+            set
+            {
+                if (value != _capInsets)
+                {
+                    _capInsets = value;
+                    GenerateLayout();
                 }
             }
         }
@@ -124,35 +146,41 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect() RETURN");
         }
 
-
+        #region Layout 
         void GenerateLayout()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             RowDefinitions.Clear();
             ColumnDefinitions.Clear();
+            Children.Clear();
 
-            _rangeLists = _source?.NinePatchRanges();
+            _rangeLists = _bitmap?.NinePatchRanges();
+            _rangeLists = CapInsets.ToRangeLists(_bitmap.PixelWidth, _bitmap.PixelHeight, _xfImageSource, _rangeLists != null) ?? _rangeLists;  
+
+
+            
             if (_rangeLists == null)
             {
                 // NinePatch markup was not found
                 RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
                 {
-                    Height = Windows.UI.Xaml.GridLength.Auto
+                    Height = new Windows.UI.Xaml.GridLength(1,Windows.UI.Xaml.GridUnitType.Star)
                 });
                 ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
                 {
-                    Width = Windows.UI.Xaml.GridLength.Auto
+                    Width = new Windows.UI.Xaml.GridLength(1, Windows.UI.Xaml.GridUnitType.Star)
                 });
 
                 var image = new Windows.UI.Xaml.Controls.Image
                 {
-                    Source = _source,
+                    Source = _bitmap,
                 };
 
                 SetColumn(image, 0);
                 SetRow(image, 0);
 
                 Children.Add(image);
+                UpdateAspect();
             }
             else
             {
@@ -161,7 +189,7 @@ namespace Forms9Patch.UWP
                 { 
                     if (_rangeLists.PatchesX[0].Start > 0)
                         xPatches++;
-                if (_rangeLists.PatchesX.Last<Range>().End < _source.PixelWidth - 1)
+                if (_rangeLists.PatchesX.Last<Range>().End < _bitmap.PixelWidth - 1)
                     xPatches++;
                 }
                 int yPatches = _rangeLists.PatchesY.Count;
@@ -169,7 +197,7 @@ namespace Forms9Patch.UWP
                 {
                     if (_rangeLists.PatchesY[0].Start > 0)
                         yPatches++;
-                    if (_rangeLists.PatchesY.Last<Range>().End < _source.PixelWidth - 1)
+                    if (_rangeLists.PatchesY.Last<Range>().End < _bitmap.PixelWidth - 1)
                         yPatches++;
                 }
 
@@ -204,11 +232,11 @@ namespace Forms9Patch.UWP
                     });
                 }
 
-                if (yPatchEnd < _source.PixelHeight - 1)
+                if (yPatchEnd < _bitmap.PixelHeight - 1)
                 {
                     // there is a row of fixed height cells after the last range
                     yPatchStart = yPatchEnd + 1;
-                    yPatchEnd = _source.PixelHeight - 2;
+                    yPatchEnd = _bitmap.PixelHeight - 2;
                     PatchesForRow(yPatchRow, yPatchStart, yPatchEnd, Windows.UI.Xaml.VerticalAlignment.Top);
 
                     RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
@@ -242,7 +270,7 @@ namespace Forms9Patch.UWP
                     rect = new Windows.Foundation.Rect(xPatchStart, yPatchStart, xWidth, yWidth);
                     image = new Windows.UI.Xaml.Controls.Image
                     {
-                        Source = _source.Crop(rect),
+                        Source = _bitmap.Crop(rect),
                         HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left,
                         VerticalAlignment = yStretch,
                         Stretch = Windows.UI.Xaml.Media.Stretch.Fill
@@ -270,7 +298,7 @@ namespace Forms9Patch.UWP
                 rect = new Windows.Foundation.Rect(xPatchStart, yPatchStart, xWidth, yWidth);
                 image = new Windows.UI.Xaml.Controls.Image
                 {
-                    Source = _source.Crop(rect),
+                    Source = _bitmap.Crop(rect),
                     HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch,
                     VerticalAlignment = yStretch,
                     Stretch = Windows.UI.Xaml.Media.Stretch.Fill
@@ -289,16 +317,16 @@ namespace Forms9Patch.UWP
                 }
             }
 
-            if (xPatchEnd < _source.PixelWidth-1)
+            if (xPatchEnd < _bitmap.PixelWidth-1)
             {
                 // there is a column of fixed width cells after the last range
                 xPatchStart = xPatchEnd + 1;
-                xPatchEnd = _source.PixelWidth-2;
+                xPatchEnd = _bitmap.PixelWidth-2;
                 xWidth = xPatchEnd - xPatchStart + 1;
                 rect = new Windows.Foundation.Rect(xPatchStart, yPatchStart, xWidth, yWidth);
                 image = new Windows.UI.Xaml.Controls.Image
                 {
-                    Source = _source.Crop(rect),
+                    Source = _bitmap.Crop(rect),
                     HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left,
                     VerticalAlignment = yStretch,
                     Stretch = Windows.UI.Xaml.Media.Stretch.Fill
@@ -317,6 +345,8 @@ namespace Forms9Patch.UWP
                 }
             }
         }
+        #endregion  
+
 
         #region IDisposable Support
         private bool _disposed = false; // To detect redundant calls
@@ -327,7 +357,7 @@ namespace Forms9Patch.UWP
             {
                 if (disposing)
                 {
-                    _source = null;
+                    _bitmap = null;
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

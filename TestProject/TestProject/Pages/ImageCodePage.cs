@@ -15,6 +15,9 @@ namespace Forms9PatchDemo
 				Content = new StackLayout
 				{
 					Children = {
+
+                                          
+
                         new Label { Text = "f9p: multiresource: button"},
 						new Forms9Patch.Image {
 							//Source = Xamarin.Forms.ImageSource.FromFile("sampleFile.png"),
@@ -78,7 +81,7 @@ namespace Forms9PatchDemo
 							CapInsets = new Thickness(111,3,4,5),
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
-
+                        
                         new Label { Text = "f9p: multiresource: redribbon + CAPSINSET" },
                         new Forms9Patch.Image { 
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
@@ -86,7 +89,7 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
-
+                        
                         new Label { Text = "xf: multiresource: image.9.png" },
                         new Image { 
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image.9.png") },
@@ -135,6 +138,7 @@ namespace Forms9PatchDemo
                         
 						#region Image
 
+
                         new Label { Text = "f9p: multiresource: redGridBox fill:None" },
                         new Forms9Patch.Image {
                             Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
@@ -142,12 +146,15 @@ namespace Forms9PatchDemo
                         },
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
+    
                         new Label { Text = "f9p: multiresource: redGridBox fill:AspectFill" },
                         new Forms9Patch.Image {
 							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 							Fill = Forms9Patch.Fill.AspectFill,
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
+
+                        
                         new Label { Text = "f9p: multiresource: redGridBox fill:AspectFit" },
                         new Forms9Patch.Image {
 							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
@@ -173,8 +180,8 @@ namespace Forms9PatchDemo
 							CapInsets = new Thickness(10),
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
 						#endregion
+                        
                         
                         
                         
