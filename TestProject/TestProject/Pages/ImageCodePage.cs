@@ -16,7 +16,7 @@ namespace Forms9PatchDemo
 				{
 					Children = {
 
-                           
+                       
 
                         new Label { Text = "f9p: multiresource: button"},
 						new Forms9Patch.Image {
@@ -60,14 +60,14 @@ namespace Forms9PatchDemo
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
-
+                        
                         new Label { Text = "f9p: uri: redribbon + CAPSINSET" },
                         new Forms9Patch.Image {
 							Source = ImageSource.FromUri(new Uri("http://buildcalc.com/forms9patch/demo/redribbon.png")),
 							CapInsets = new Thickness(23,0,111,0),
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
-
+                        
                         new Label { Text = "f9p: mulitresource: button" },
                         new Forms9Patch.Image { 
 							Source =Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"), 
@@ -114,7 +114,7 @@ namespace Forms9PatchDemo
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image") ,
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
-
+                        
 
                         new Label { Text = "xf: file: cat.jpg" },
                         new Image { 
@@ -133,9 +133,9 @@ namespace Forms9PatchDemo
 							Source = ImageSource.FromFile("image.png"),
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
+                        
 						#endregion
 
-                        
 						#region Image
 
 
