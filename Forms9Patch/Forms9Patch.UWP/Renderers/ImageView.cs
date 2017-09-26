@@ -14,12 +14,16 @@ namespace Forms9Patch.UWP
     public class ImageView : Windows.UI.Xaml.Controls.Grid, IDisposable
     {
         #region Fields
-        bool _debugMessages = false;
+        bool _debugMessages = true;
 
         RangeLists _rangeLists=null;
 
         int _instance;
+        Windows.UI.Xaml.Controls.Canvas _tileCanvas;
+        int _tileCanvasWidth = 0;
+        int _tileCanvasHeight = 0;
 
+        bool _invalid = true;
         #endregion
 
 
@@ -52,6 +56,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SetSourceAsync enter");
             if (source != _xfImageSource)
             {
+                _invalid = true;
                 _xfImageSource = source;
                 Xamarin.Forms.Platform.UWP.IImageSourceHandler handler = null;
                 if (source != null)
@@ -83,6 +88,7 @@ namespace Forms9Patch.UWP
                     else
                         _sourceBitmap = null;
 
+
                     GenerateLayout();
                 }
             }
@@ -100,6 +106,7 @@ namespace Forms9Patch.UWP
             {
                 if (value != _fill)
                 {
+                    _invalid = true;
                     if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.set_Fill[" + _instance + "]: " + value);
                     _fill = value;
                     GenerateLayout();
@@ -119,6 +126,7 @@ namespace Forms9Patch.UWP
             {
                 if (value != _capInsets)
                 {
+                    _invalid = true;
                     _capInsets = value;
                     GenerateLayout();
                 }
@@ -139,6 +147,7 @@ namespace Forms9Patch.UWP
 
 
         #region Layout 
+
         void UpdateAspect()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect[" + _instance + "]");
@@ -166,8 +175,11 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect[" + _instance + "] RETURN");
         }
 
+
         internal void GenerateLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
+            if (!_invalid)
+                return;
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + Fill+"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
             if (_sourceBitmap == null )
                 return;
@@ -182,7 +194,7 @@ namespace Forms9Patch.UWP
 
             if (Fill == Fill.Tile)
             {
-                var canvas = new Windows.UI.Xaml.Controls.Canvas();
+                _tileCanvas = _tileCanvas ?? new Windows.UI.Xaml.Controls.Canvas();
                 var width = ActualWidth;
                 var height = ActualHeight;
                 if (size != default(Windows.Foundation.Size))
@@ -190,26 +202,30 @@ namespace Forms9Patch.UWP
                     width = size.Width;
                     height = size.Height;
                 }
-                for (int i = 0; i < width; i += _sourceBitmap.PixelWidth)
+                for (int i = _tileCanvasWidth; i < width; i += _sourceBitmap.PixelWidth)
                 {
-                    for (int j = 0; j < height; j += _sourceBitmap.PixelHeight)
+                    for (int j = _tileCanvasHeight; j < height; j += _sourceBitmap.PixelHeight)
                     {
                         var image = new Windows.UI.Xaml.Controls.Image { Source = _sourceBitmap };
-                        canvas.Children.Add(image);
+                        _tileCanvas.Children.Add(image);
                         Windows.UI.Xaml.Controls.Canvas.SetLeft(image, i);
                         Windows.UI.Xaml.Controls.Canvas.SetTop(image, j);
+                        if (j > _tileCanvasHeight)
+                            _tileCanvasHeight = j;
                     }
+                    if (i > _tileCanvasWidth)
+                        _tileCanvasWidth = i;
                 }
                 //var softBitmap = SoftwareBitmap.CreateCopyFromBuffer(_sourceBitmap.PixelBuffer, BitmapPixelFormat.Bgra8, _sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight);
                 //var source = new SoftwareBitmapSource();
                 //await source.SetBitmapAsync(softBitmap);
-                Children.Add(canvas);
-                canvas.Height = height;
-                canvas.Width = width;
+                Children.Add(_tileCanvas);
+                _tileCanvas.Height = height;
+                _tileCanvas.Width = width;
                 var clip = new Windows.UI.Xaml.Media.RectangleGeometry();
                 var rect = new Rect(0, 0, width, height);
                 clip.Rect = rect;
-                canvas.Clip = clip;
+                _tileCanvas.Clip = clip;
                 //canvas.Clip.Bounds.Height = height;
             }
             else if (_rangeLists == null)

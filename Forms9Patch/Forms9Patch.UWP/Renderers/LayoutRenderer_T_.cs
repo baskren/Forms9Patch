@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace Forms9Patch.UWP
 {
-    public class LayoutRenderer<TElement> : ViewRenderer<TElement, ImageView> where TElement : Layout //, IBackgroundImage
+    public class LayoutRenderer<TElement> : ViewRenderer<TElement, ImageView> where TElement : Layout, IBackgroundImage
     {
         #region Fields
         bool _disposed;
@@ -60,7 +60,7 @@ namespace Forms9Patch.UWP
                     SetNativeControl(new ImageView(_instance));
                 SizeChanged += OnSizeChanged;
 
-                if (((IBackgroundImage)Element)?.BackgroundImage != null)
+                if (Element?.BackgroundImage != null)
                     await TryUpdateSource();
                 UpdateAspect();
                 UpdateCapInsets();
@@ -131,16 +131,16 @@ namespace Forms9Patch.UWP
 
         private void UpdateCapInsets()
         {
-            if (Control != null && ((IBackgroundImage)Element)?.BackgroundImage != null)
-                Control.CapInsets = ((IBackgroundImage)Element).BackgroundImage.CapInsets;
+            if (Control != null && Element?.BackgroundImage != null)
+                Control.CapInsets = Element.BackgroundImage.CapInsets;
         }
 
         void UpdateAspect()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateAspect()");
 
-            if (Control != null && ((IBackgroundImage)Element)?.BackgroundImage!=null)
-                Control.Fill = ((IBackgroundImage)Element).BackgroundImage.Fill;
+            if (Control != null && Element?.BackgroundImage!=null)
+                Control.Fill = Element.BackgroundImage.Fill;
 
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateAspect() RETURN");
         }
@@ -163,7 +163,7 @@ namespace Forms9Patch.UWP
             finally
             {
                 //((IImageController)Element)?.SetIsLoading(false);
-                ((IImageController)((IBackgroundImage)Element)?.BackgroundImage)?.SetIsLoading(false);
+                ((IImageController)Element?.BackgroundImage)?.SetIsLoading(false);
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].TryUpdateSource() RETURN");
         }
@@ -180,9 +180,9 @@ namespace Forms9Patch.UWP
 
             //Element.SetIsLoading(true);
             //((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, true);
-                ((IImageController)((IBackgroundImage)Element).BackgroundImage).SetIsLoading(true);
+                ((IImageController)Element.BackgroundImage).SetIsLoading(true);
 
-            Xamarin.Forms.ImageSource source = ((IBackgroundImage)Element)?.BackgroundImage?.Source;
+            Xamarin.Forms.ImageSource source = Element?.BackgroundImage?.Source;
 
             await Control.SetSourceAsync(source);
 
@@ -192,7 +192,7 @@ namespace Forms9Patch.UWP
 
             //Element.SetIsLoading(false);
             //((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, false);
-            ((IImageController)((IBackgroundImage)Element).BackgroundImage).SetIsLoading(false);
+            ((IImageController)Element.BackgroundImage).SetIsLoading(false);
 
 
         }
@@ -203,7 +203,7 @@ namespace Forms9Patch.UWP
             
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].ArrangeOverride(" + finalSize + ") ENTER/RETURN");
 
-            if (((IBackgroundImage)Element)?.BackgroundImage!=null &&  _lastFinalSize != finalSize && ((IBackgroundImage)Element).BackgroundImage.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
+            if (Element?.BackgroundImage!=null &&  _lastFinalSize != finalSize && Element.BackgroundImage.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
                 Control.GenerateLayout(finalSize);
             _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);

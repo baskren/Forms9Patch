@@ -21,7 +21,7 @@ namespace Forms9Patch.UWP
         #region Fields
         bool _disposed;
 
-        bool _debugMessages=false;
+        bool _debugMessages=true;
 
         static int _instances;
         int _instance;
@@ -53,8 +53,12 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer["+_instance+"].OnElementChanged(["+e.OldElement+", "+e.NewElement+"]");
             base.OnElementChanged(e);
 
+            //if (e.OldElement != null)
+            //    e.OldElement.SizeChanged -= OnSizeChanged;
+
             if (e.NewElement != null)
             {
+                //e.NewElement.SizeChanged += OnSizeChanged;
                 if (Control == null)
                     SetNativeControl(new ImageView(_instance));
 
@@ -67,7 +71,7 @@ namespace Forms9Patch.UWP
 
         protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName+"]");
+            //if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName+"]");
             base.OnElementPropertyChanged(sender, e);
 
             if (e.PropertyName == Image.SourceProperty.PropertyName)
@@ -77,7 +81,7 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == Image.CapInsetsProperty.PropertyName)
                 UpdateCapInsets();
 
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
+            //if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
         }
         
         void RefreshImage()
@@ -155,6 +159,7 @@ namespace Forms9Patch.UWP
 
         }
 
+        
         Windows.Foundation.Size _lastFinalSize = Windows.Foundation.Size.Empty;
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
@@ -165,6 +170,19 @@ namespace Forms9Patch.UWP
             _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);
         }
+        
+
+        /*
+        Xamarin.Forms.Size _lastXfSize = Xamarin.Forms.Size.Zero;
+        private void OnSizeChanged(object sender, EventArgs e)
+        {
+            var size = Element.Bounds.Size;
+            if (_lastXfSize != size && Element.Fill == Fill.Tile && size.Width > 0 && size.Height > 0 && !Double.IsInfinity(size.Width) && !Double.IsInfinity(size.Height) && !Double.IsNaN(size.Width) && !Double.IsNaN(size.Height))
+                Control.GenerateLayout(new Windows.Foundation.Size(size.Width, size.Height));
+            _lastXfSize = size;
+        }
+        */
+
 
         #endregion
     }

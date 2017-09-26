@@ -220,7 +220,7 @@ namespace Forms9PatchDemo
 
 
                         new TextCell {
-                            Text = "Image",
+                            Text = "Images",
                             Command = navigateCommand,
                             CommandParameter = typeof(ImageCodePage)
                         },
@@ -229,6 +229,13 @@ namespace Forms9PatchDemo
                             Text = "Layouts",
                             Command = navigateCommand,
                             CommandParameter = typeof(LayoutsPage)
+                        },
+
+                        new TextCell
+                        {
+                            Text = "Image on page",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageOnPage)
                         },
 
                         new TextCell {
