@@ -18,52 +18,20 @@ namespace Forms9Patch.UWP
 {
     public class ImageRenderer : ViewRenderer<Image, ImageView>
     {
-        bool _measured;
+        #region Fields
         bool _disposed;
 
         bool _debugMessages=false;
 
         static int _instances;
         int _instance;
+        #endregion
 
+        #region Constructor / disposal
         public ImageRenderer()
         {
             _instance = _instances++;
         }
-
-        /*
-        public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.GetDesiredSize(" + widthConstraint + ", "+heightConstraint + ") ENTER");
-
-            if (Control?.Source is WriteableBitmap bitmap)
-            {
-                if (bitmap.PixelWidth < 1 || bitmap.PixelHeight < 1)
-                {
-                    if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.GetDesiredSize(" + widthConstraint + ", " + heightConstraint + ") RETURN: "+new SizeRequest());
-                    return new SizeRequest();
-                }
-                _measured = true;
-                Xamarin.Forms.Size result = new Xamarin.Forms.Size { Width = bitmap.PixelWidth, Height = bitmap.PixelHeight };
-                if (Element.Fill != Fill.None)
-                {
-                    if (!Double.IsInfinity(widthConstraint))
-                        result.Width = Math.Max(bitmap.PixelWidth, widthConstraint);
-                    if (!Double.IsInfinity(heightConstraint))
-                        result.Height = Math.Max(bitmap.PixelHeight, heightConstraint);
-                }
-                {
-                    if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.GetDesiredSize(" + widthConstraint + ", " + heightConstraint + ") RETURN: " + new SizeRequest(result));
-                    return new SizeRequest(result);
-                }
-            }
-            else
-            {
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.GetDesiredSize(" + widthConstraint + ", " + heightConstraint + ") RETURN: " + new SizeRequest());
-                return new SizeRequest();
-            }
-        }
-        */
 
         protected override void Dispose(bool disposing)
         {
@@ -76,7 +44,10 @@ namespace Forms9Patch.UWP
 
             base.Dispose(disposing);
         }
+        #endregion
 
+
+        #region Change managements
         protected override async void OnElementChanged(ElementChangedEventArgs<Image> e)
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer["+_instance+"].OnElementChanged(["+e.OldElement+", "+e.NewElement+"]");
@@ -94,7 +65,6 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementChanged([" + e.OldElement + ", " + e.NewElement + "] RETURN");
         }
 
-
         protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName+"]");
@@ -102,10 +72,6 @@ namespace Forms9Patch.UWP
 
             if (e.PropertyName == Image.SourceProperty.PropertyName)
                 await TryUpdateSource();
-            /*
-            else if (e.PropertyName == Image.AspectProperty.PropertyName)
-                UpdateAspect();
-                */
             else if (e.PropertyName == Image.FillProperty.PropertyName)
                 UpdateAspect();
             else if (e.PropertyName == Image.CapInsetsProperty.PropertyName)
@@ -113,42 +79,7 @@ namespace Forms9Patch.UWP
 
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
         }
-
-        /*
-        static Stretch GetStretch(Aspect aspect)
-        {
-            switch (aspect)
-            {
-                case Aspect.Fill:
-                    return Stretch.Fill;
-                case Aspect.AspectFill:
-                    return Stretch.UniformToFill;
-                default:
-                case Aspect.AspectFit:
-                    return Stretch.Uniform;
-            }
-        }
-        */
-
-            /*
-        void OnImageOpened(object sender, RoutedEventArgs routedEventArgs)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnImageOpened("+routedEventArgs+")");
-            if (_measured)
-                RefreshImage();
-            ((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, false);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnImageOpened(" + routedEventArgs + ") RETURN");
-        }
-
-        protected virtual void OnImageFailed(object sender, ExceptionRoutedEventArgs exceptionRoutedEventArgs)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnImageFaied("+exceptionRoutedEventArgs+")");
-            System.Diagnostics.Debug.WriteLine ("Image Loading", $"Image failed to load: {exceptionRoutedEventArgs.ErrorMessage}");
-            ((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, false);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.OnImageFaied(" + exceptionRoutedEventArgs + ") RETURN");
-        }
-        */
-
+        
         void RefreshImage()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage()");
@@ -162,33 +93,9 @@ namespace Forms9Patch.UWP
                 Control.CapInsets = Element.CapInsets;
         }
 
-
         void UpdateAspect()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateAspect()");
-            /*
-
-if (_disposed || Element == null || Control == null)
-{
-    return;
-}
-
-if (Element.Fill == Fill.Tile || Element.Fill == Fill.None)
-{
-    Control.HorizontalAlignment = HorizontalAlignment.Left;
-    Control.VerticalAlignment = VerticalAlignment.Top;
-}
-else
-{
-    Control.HorizontalAlignment = HorizontalAlignment.Center;
-    Control.VerticalAlignment = VerticalAlignment.Center;
-}
-
-if (Control.NineGrid.IsANineGrid())
-    Control.Stretch = Stretch.Fill;
-else
-    Control.Stretch = Element.Fill.ToStretch();
-    */
 
             if (Control!=null)
                 Control.Fill = Element.Fill;
@@ -259,28 +166,6 @@ else
             return base.ArrangeOverride(finalSize);
         }
 
-        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].MeasureOverride(" + availableSize + ") ENTER/RETURN");
-            return base.MeasureOverride(availableSize);
-        }
-
-        protected override void UpdateBackgroundColor()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateBackgroundColor() ENTER/RETURN");
-            base.UpdateBackgroundColor();
-        }
-
-        protected override void UpdateNativeControl()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateNativeControl() ENTER/RETURN");
-            base.UpdateNativeControl();
-        }
-
-        protected override void OnApplyTemplate()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnApplyTemplate() ENTER/RETURN");
-            base.OnApplyTemplate();
-        }
+        #endregion
     }
 }

@@ -145,7 +145,6 @@
     <Compile Include="RandomAccessMemoryStream.cs" />
     <Compile Include="Renderers\ImageView.cs" />
     <Compile Include="Renderers\ImageRenderer.cs" />
-    <Compile Include="Renderers\ImageViewManager.cs" />
     <Compile Include="Renderers\LayoutRenderer_T_.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
     <EmbeddedResource Include="Properties\Forms9Patch.UWP.rd.xml" />

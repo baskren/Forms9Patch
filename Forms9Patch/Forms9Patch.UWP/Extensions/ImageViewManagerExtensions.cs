@@ -14,12 +14,12 @@ namespace Forms9Patch.UWP
     {
         //static readonly Dictionary<string, >
         static readonly Dictionary<string, BitmapImage> Cache = new Dictionary<string, BitmapImage>();
-        static readonly Dictionary<string, List<ImageViewManager>> ImageViewManagers = new Dictionary<string, List<ImageViewManager>>();
+        static readonly Dictionary<string, List<ImageView>> ImageViews = new Dictionary<string, List<ImageView>>();
         static readonly object _constructorLock = new object();
         //static readonly Dictionary<string, object> ConstructionLocks = new Dictionary<string, object>();
 
 #pragma warning disable 1998
-        internal static async Task<BitmapImage> FetchResourceData(this ImageViewManager imageViewManager, Xamarin.Forms.ImageSource streamSource, int _i)
+        internal static async Task<BitmapImage> FetchResourceData(this ImageView imageViewManager, Xamarin.Forms.ImageSource streamSource, int _i)
 #pragma warning restore 1998
         {
             string path = (string)streamSource?.GetValue(ImageSource.PathProperty);
@@ -28,7 +28,7 @@ namespace Forms9Patch.UWP
 
             if (Cache.ContainsKey(path))
             {
-                ImageViewManagers[path].Add(imageViewManager);
+                ImageViews[path].Add(imageViewManager);
                 var result = Cache[path];
                 if (result == null)
                     throw new Exception();
@@ -46,9 +46,9 @@ namespace Forms9Patch.UWP
                 bitmap = new BitmapImage();
                 stream.Seek(0);
                 Cache[path] = bitmap;
-                if (!ImageViewManagers.ContainsKey(path))
-                    ImageViewManagers[path] = new List<ImageViewManager>();
-                ImageViewManagers[path].Add(imageViewManager);
+                if (!ImageViews.ContainsKey(path))
+                    ImageViews[path] = new List<ImageView>();
+                ImageViews[path].Add(imageViewManager);
                 await bitmap.SetSourceAsync(stream);
             }
             if (bitmap==null)
@@ -59,7 +59,7 @@ namespace Forms9Patch.UWP
 
 
 
-        internal static void ReleaseStreamData(this ImageViewManager imageViewManager, Xamarin.Forms.BindableObject streamSource)
+        internal static void ReleaseStreamData(this ImageView imageViewManager, Xamarin.Forms.BindableObject streamSource)
         {
             var path = (string)streamSource?.GetValue(ImageSource.PathProperty);
             if (path == null)
@@ -67,7 +67,7 @@ namespace Forms9Patch.UWP
             lock (_constructorLock)
             {
                 //System.Diagnostics.Debug.WriteLine ("\t\tR0");
-                var clients = ImageViewManagers[path];
+                var clients = ImageViews[path];
                 //System.Diagnostics.Debug.WriteLine ("\t\tR1");
                 clients?.Remove(imageViewManager);
                 //System.Diagnostics.Debug.WriteLine ("\t\tR2");
@@ -77,7 +77,7 @@ namespace Forms9Patch.UWP
                     return;
                 }
                 //System.Diagnostics.Debug.WriteLine ("\t\tR3");
-                ImageViewManagers.Remove(path);
+                ImageViews.Remove(path);
                 //System.Diagnostics.Debug.WriteLine ("\t\tR4");
                 Cache.Remove(path);
                 //System.Diagnostics.Debug.WriteLine ("\t\tR5");

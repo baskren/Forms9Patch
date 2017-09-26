@@ -166,7 +166,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect[" + _instance + "] RETURN");
         }
 
-        internal async void GenerateLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
+        internal void GenerateLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + Fill+"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
             if (_sourceBitmap == null )
