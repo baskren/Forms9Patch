@@ -332,12 +332,9 @@
       }
     },
     "dependencies": {
+      "Newtonsoft.Json": "10.0.3",
       "PCLStorage": "1.0.2",
-      "Xamarin.Forms": "2.3.4.270",
-      "Newtonsoft.Json": {
-        "target": "Package",
-        "version": "[10.0.3, )"
-      }
+      "Xamarin.Forms": "2.3.4.270"
     },
     "frameworks": {
       "portable45-net45+win8+wpa81": {}
