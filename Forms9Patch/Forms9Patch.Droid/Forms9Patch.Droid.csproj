@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.props" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.props')" />
 	<PropertyGroup>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -109,23 +111,44 @@
 		<Reference Include="Xamarin.Android.Support.v7.MediaRouter">
 			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.MediaRouter.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
 		</Reference>
-		<Reference Include="FormsViewGroup">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
-		</Reference>
-		<Reference Include="Xamarin.Forms.Core">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
-		</Reference>
-		<Reference Include="Xamarin.Forms.Platform.Android">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
-		</Reference>
-		<Reference Include="Xamarin.Forms.Platform">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
-		</Reference>
-		<Reference Include="Xamarin.Forms.Xaml">
-			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
-		</Reference>
 		<Reference Include="Newtonsoft.Json">
 			<HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Compat">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Compat.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Compat.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Core.UI">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.UI.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Core.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Core.Utils">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.Utils.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Core.Utils.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Media.Compat">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Media.Compat.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Media.Compat.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Fragment">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Fragment.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Fragment.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.Transition">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.Transition.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Transition.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Android.Support.v7.Palette">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.Palette.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.Palette.dll</HintPath>
+		</Reference>
+		<Reference Include="FormsViewGroup">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Forms.Core">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Forms.Platform.Android">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Forms.Platform">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+		</Reference>
+		<Reference Include="Xamarin.Forms.Xaml">
+			<HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
@@ -229,5 +252,13 @@
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
-	<Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.UI.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Core.UI.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.UI.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Core.UI.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.Utils.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Core.Utils.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Core.Utils.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Core.Utils.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Media.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Media.Compat.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Media.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Media.Compat.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Fragment.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Fragment.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Fragment.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Fragment.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.Palette.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.Palette.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Android.Support.v7.Palette.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.Palette.targets')" />
+	<Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

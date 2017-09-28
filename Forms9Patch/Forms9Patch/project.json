@@ -2,7 +2,7 @@
   "dependencies": {
     "Newtonsoft.Json": "10.0.3",
     "PCLStorage": "1.0.2",
-    "Xamarin.Forms": "2.3.4.270"
+    "Xamarin.Forms": "2.4.0.280"
   },
   "frameworks": {
     ".NETPortable,Version=v4.5,Profile=Profile111": {}
