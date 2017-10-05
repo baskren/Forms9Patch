@@ -1,9 +1,0 @@
-<WorkspaceItem ctype="Workspace">
-  <Items>
-    <Item>../../PCL.Utils/PCL.Utils.sln</Item>
-    <Item>../../NumericalMethods/NumericalMethods.sln</Item>
-    <Item>../../FormsGestures/FormsGestures.sln</Item>
-    <Item>../Forms9Patch.sln</Item>
-    <Item>../../Forms9PatchDemo/Forms9PatchDemo.sln</Item>
-  </Items>
-</WorkspaceItem>
