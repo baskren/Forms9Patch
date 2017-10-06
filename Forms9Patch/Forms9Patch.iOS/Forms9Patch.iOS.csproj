@@ -31,7 +31,7 @@
 		<WarningLevel>4</WarningLevel>
 		<ConsolePause>false</ConsolePause>
 		<DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
-		<DocumentationFile>bin\Release\Forms9Patch.iOS.xml</DocumentationFile>
+		<DocumentationFile></DocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
 		<Optimize>false</Optimize>
