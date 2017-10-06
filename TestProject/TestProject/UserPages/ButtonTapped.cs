@@ -46,7 +46,7 @@ namespace Forms9PatchDemo
             };
         }
 
-        private async void OnTapped(object sender, EventArgs e)
+        void OnTapped(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Tapped");
         }

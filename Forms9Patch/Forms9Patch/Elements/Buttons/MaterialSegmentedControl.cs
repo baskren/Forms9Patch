@@ -890,9 +890,9 @@ namespace Forms9Patch
                 double sWidth = hz ? xOffset : width;
                 double sHeight = vt ? yOffset : height;
 
-                //System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
+                System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
 
-                for (int i = 0; i < count - 1; i++)
+                for (int i = 0; i < count; i++)
                 {
                     var view = Children[i];
                     if (view.IsVisible)
@@ -913,6 +913,10 @@ namespace Forms9Patch
                             thisW = sWidth;
                             thisH = sHeight;
                         }
+                        if (x + thisW > width)
+                            thisW = width - x;
+                        if (y + thisH > height)
+                            thisH = height - y;
                         thisW = Math.Round(thisW);
                         thisH = Math.Round(thisH);
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
@@ -920,9 +924,11 @@ namespace Forms9Patch
                         y = Math.Round(y + (vt ? thisH : 0));
                     }
                 }
-                var lastView = Children.Last();
-                if (lastView.IsVisible)
-                    LayoutChildIntoBoundingRegion(lastView, new Rectangle(x, y, newWidth - x, newHeight - y));
+                //var lastView = Children.Last();
+                //if (lastView.IsVisible)
+                //{
+                //    LayoutChildIntoBoundingRegion(lastView, new Rectangle(x, y,  Math.Round(width - p.Right - x), Math.Round(height - p.Bottom - y)));
+                //}
             }
         }
         #endregion

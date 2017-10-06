@@ -13,7 +13,7 @@ namespace Forms9PatchDemo.Pages
                 Text = "",
                 FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
                 FontSize = 30,
-                BackgroundColor = Color.Orchid,
+                BackgroundColor = Color.FromRgb(218, 112, 214),
                 TextColor = Color.White
             };
             label.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
@@ -39,7 +39,7 @@ namespace Forms9PatchDemo.Pages
                                     label,
                                     new Frame {
                                         HasShadow = false,
-                                        CornerRadius = 0,
+                                        //CornerRadius = 0,
                                         Padding = 0,
                                         BackgroundColor = Color.Red,
                                         HeightRequest = 30,
@@ -59,10 +59,6 @@ namespace Forms9PatchDemo.Pages
                     {
                         Text = "Scale=[" + Forms9Patch.Display.Scale + "]"
                     },
-                    new Label
-                    {
-                        Text = "Density=["+ Forms9Patch.Display.Density +"]"
-                    },
                     new StackLayout
                     {
                         Children = {
@@ -81,12 +77,12 @@ namespace Forms9PatchDemo.Pages
                                         Text = "",
                                         FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
                                         FontSize = 30,
-                                        BackgroundColor = Color.Orchid,
+                                        BackgroundColor = Color.FromRgb(218, 112, 214),
                                         TextColor = Color.White
                                     },
                                     new Frame {
                                         HasShadow = false,
-                                        CornerRadius = 0,
+                                        //CornerRadius = 0,
                                         Padding = 0,
                                         BackgroundColor = Color.Red,
                                         HeightRequest = 30,
