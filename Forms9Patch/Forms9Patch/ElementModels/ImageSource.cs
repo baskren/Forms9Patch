@@ -299,8 +299,7 @@ namespace Forms9Patch
         static string AppleDensityMatch(int order)
         {
             //int dpi = (int)Display.Density;
-            //double scale = Display.Scale;
-            double scale = FormsGestures.Display.Scale;
+            double scale = Display.Scale;
             lock (_appleLock)
             {
                 if (AppleDensities[0].Distance < 0)

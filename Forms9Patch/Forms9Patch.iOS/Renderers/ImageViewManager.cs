@@ -478,7 +478,7 @@ namespace Forms9Patch.iOS
                     else
                     {
                         if (Element.Height <= 0)
-                            Element.HeightRequest = _sourceImage.CGImage.Height / FormsGestures.Display.Scale - vtThickness;
+                            Element.HeightRequest = _sourceImage.CGImage.Height / Display.Scale - vtThickness;
                     }
                     if (Element.WidthRequest > 0)
                     {
@@ -488,7 +488,7 @@ namespace Forms9Patch.iOS
                     else
                     {
                         if (Element.Width <= 0)
-                            Element.WidthRequest = _sourceImage.CGImage.Width / FormsGestures.Display.Scale - hzThickness;
+                            Element.WidthRequest = _sourceImage.CGImage.Width / Display.Scale - hzThickness;
                     }
                 }
                 //delta = DateTime.Now-start7;

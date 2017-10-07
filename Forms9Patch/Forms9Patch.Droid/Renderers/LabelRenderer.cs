@@ -358,7 +358,7 @@ namespace Forms9Patch.Droid
             if (Element.IsVisible)
             {
                 if (Element.Width > -1 && Element.Height > -1 && (_lastControlState == null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight))
-                    LayoutForSize((int)(Element.Width * FormsGestures.Display.Scale), (int)(Element.Height * FormsGestures.Display.Scale));
+                    LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
                 else
                     RequestLayout();
             }
