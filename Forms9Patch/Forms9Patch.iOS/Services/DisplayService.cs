@@ -6,14 +6,29 @@ using System.Linq;
 [assembly: Dependency(typeof(Forms9Patch.iOS.DisplayService))]
 namespace Forms9Patch.iOS
 {
+    /// <summary>
+    /// Display service.
+    /// </summary>
     public class DisplayService : IDisplayService
     {
         //public float Density => 163 * Scale;
 
+        /// <summary>
+        /// Gets the scale.
+        /// </summary>
+        /// <value>The scale.</value>
         public float Scale => (float)UIScreen.MainScreen.Scale;
 
+        /// <summary>
+        /// Gets the width.
+        /// </summary>
+        /// <value>The width.</value>
         public float Width => Display.IsPortrait ? Min : Max;
 
+        /// <summary>
+        /// Gets the height.
+        /// </summary>
+        /// <value>The height.</value>
         public float Height => Display.IsPortrait ? Max : Min;
 
         public Thickness SafeAreaInset

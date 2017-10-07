@@ -52,10 +52,22 @@ namespace Forms9Patch
         /// <value>The safe area inset.</value>
         public static Thickness SafeAreaInset => Service.SafeAreaInset;
 
+        /// <summary>
+        /// Gets the orientation.
+        /// </summary>
+        /// <value>The orientation.</value>
         public static DisplayOrientation Orientation => Service.Orientation;
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Forms9Patch.Display"/> is portrait.
+        /// </summary>
+        /// <value><c>true</c> if is portrait; otherwise, <c>false</c>.</value>
         public static bool IsPortrait => (Orientation == DisplayOrientation.Portrait || Orientation == DisplayOrientation.PortraitUpsideDown);
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Forms9Patch.Display"/> is landscape.
+        /// </summary>
+        /// <value><c>true</c> if is landscape; otherwise, <c>false</c>.</value>
         public static bool IsLandscape => (Orientation == DisplayOrientation.LandscapeLeft || Orientation == DisplayOrientation.LandscapeRight);
         #endregion
 
