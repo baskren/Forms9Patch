@@ -6,8 +6,8 @@ using System.Runtime.Remoting.Contexts;
 using Android.Views;
 using Android.Runtime;
 
-[assembly: Dependency(typeof(Forms9Patch.Droid.DisplayService))]
-namespace Forms9Patch.Droid
+[assembly: Dependency(typeof(FormsGestures.Droid.DisplayService))]
+namespace FormsGestures.Droid
 {
     public class DisplayService : IDisplayService
     {

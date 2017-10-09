@@ -200,9 +200,7 @@
 		<Compile Include="Extensions\LayoutOptionsExtensions.cs" />
 		<Compile Include="Elements\Buttons\ImageButton.cs" />
 		<Compile Include="Enums\NetworkConnectivity.cs" />
-		<Compile Include="Interfaces\IDisplayService.cs" />
 		<Compile Include="Services\Display.cs" />
-		<Compile Include="Enums\DisplayOrientation.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 
