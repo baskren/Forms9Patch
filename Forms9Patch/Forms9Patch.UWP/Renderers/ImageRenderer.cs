@@ -166,7 +166,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].ArrangeOverride(" + finalSize+") ENTER/RETURN");
 
             if (_lastFinalSize!=finalSize && Element.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
-                Control.GenerateLayout(finalSize);
+                Control.GenerateImageLayout(finalSize);
             _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);
         }

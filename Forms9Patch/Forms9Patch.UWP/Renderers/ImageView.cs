@@ -19,15 +19,19 @@ namespace Forms9Patch.UWP
         RangeLists _rangeLists=null;
 
         int _instance;
-        Windows.UI.Xaml.Controls.Canvas _tileCanvas;
         int _tileCanvasWidth = 0;
         int _tileCanvasHeight = 0;
 
-        bool _invalid = true;
+        bool _imageInvalid = true;
+        Windows.UI.Xaml.Controls.Canvas _tileCanvas;
+        bool _roundedBoxInvalid = true;
+        Windows.UI.Xaml.Controls.Canvas _roundedBoxCanvas;
+
         #endregion
 
 
-        #region Properties
+        #region Image Properties
+
         Xamarin.Forms.Size BaseImageSize
         {
             get
@@ -51,12 +55,12 @@ namespace Forms9Patch.UWP
 
         WriteableBitmap _sourceBitmap;
         Xamarin.Forms.ImageSource _xfImageSource;
-        public async Task SetSourceAsync(Xamarin.Forms.ImageSource source)
+        internal async Task SetSourceAsync(Xamarin.Forms.ImageSource source)
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SetSourceAsync enter");
             if (source != _xfImageSource)
             {
-                _invalid = true;
+                _imageInvalid = true;
                 _xfImageSource = source;
                 Xamarin.Forms.Platform.UWP.IImageSourceHandler handler = null;
                 if (source != null)
@@ -89,14 +93,14 @@ namespace Forms9Patch.UWP
                         _sourceBitmap = null;
 
 
-                    GenerateLayout();
+                    GenerateImageLayout();
                 }
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SetSourceAsync enter");
         }
 
         Fill _fill;
-        public Forms9Patch.Fill Fill
+        internal Forms9Patch.Fill Fill
         {
             get
             {
@@ -106,17 +110,17 @@ namespace Forms9Patch.UWP
             {
                 if (value != _fill)
                 {
-                    _invalid = true;
+                    _imageInvalid = true;
                     if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.set_Fill[" + _instance + "]: " + value);
                     _fill = value;
-                    GenerateLayout();
+                    GenerateImageLayout();
                     UpdateAspect();
                 }
             }
         }
 
         Xamarin.Forms.Thickness _capInsets;
-        public Xamarin.Forms.Thickness CapInsets
+        internal Xamarin.Forms.Thickness CapInsets
         {
             get
             {
@@ -126,13 +130,200 @@ namespace Forms9Patch.UWP
             {
                 if (value != _capInsets)
                 {
-                    _invalid = true;
+                    _imageInvalid = true;
                     _capInsets = value;
-                    GenerateLayout();
+                    GenerateImageLayout();
                 }
             }
         }
-        #endregion Properties
+        #endregion Image Properties
+
+
+        #region RoundedBox Properties
+        Windows.UI.Color _backgroundColor;
+        internal Color BackgroundColor
+        {
+            get
+            {
+                return _backgroundColor.ToXfColor();
+            }
+            set
+            {
+                var winColor = value.ToWindowsColor();
+                if (winColor != _backgroundColor)
+                {
+                    _backgroundColor = winColor;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        bool _hasShadow;
+        internal bool HasShadown
+        {
+            get { return _hasShadow; }
+            set
+            {
+                if (value != _hasShadow)
+                {
+                    _hasShadow = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        bool _shadowInverted;
+        internal bool ShadowInverted
+        {
+            get { return _shadowInverted; }
+            set
+            {
+                if (value != _shadowInverted)
+                {
+                    _shadowInverted = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        Windows.UI.Color _outlineColor;
+        internal Color OutlineColor
+        {
+            get
+            {
+                return _outlineColor.ToXfColor();
+            }
+            set
+            {
+                var winColor = value.ToWindowsColor(); 
+                if (winColor != _outlineColor)
+                {
+                    _outlineColor = winColor;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        float _outlineRadius;
+        internal float OutlineRadius
+        {
+            get { return _outlineRadius; }
+            set
+            {
+                if (_outlineRadius!=value)
+                {
+                    _outlineRadius = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        float _outlineWidth;
+        internal float OutlineWidth
+        {
+            get { return _outlineWidth; }
+            set
+            {
+                if (_outlineWidth != value)
+                {
+                    _outlineWidth = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        bool _isElliptical;
+        internal bool IsElliptical
+        {
+            get { return _isElliptical; }
+            set
+            {
+                if (_isElliptical != value)
+                {
+                    _isElliptical = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+        #endregion RoundedBoxProperties
+
+        #region MaterialButton Properties
+        StackOrientation _orientation;
+        internal StackOrientation Orientation
+        {
+            get { return _orientation; }
+            set
+            {
+                if (value!=_orientation)
+                {
+                    _orientation = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        SegmentType _segmentType;
+        internal SegmentType SegmentType
+        {
+            get { return _segmentType; }
+            set
+            {
+                if (value != _segmentType)
+                {
+                    _segmentType = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        StackOrientation _parentSegmentOrientation;
+        internal StackOrientation ParentSegmentOrientation
+        {
+            get { return _parentSegmentOrientation; }
+            set
+            {
+                if (value != _parentSegmentOrientation)
+                {
+                    _parentSegmentOrientation = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        float _separatorWidth;
+        internal float SeparatorWidth
+        {
+            get { return _separatorWidth; }
+            set
+            {
+                if (_separatorWidth!=value)
+                {
+                    _separatorWidth = value;
+                    _roundedBoxInvalid = true;
+                    GenerateOutlineLayout();
+                }
+            }
+        }
+
+        internal Func<Xamarin.Forms.Thickness> ShadowPaddingFunc;
+        internal Xamarin.Forms.Thickness ShadowPadding
+        {
+            get
+            {
+                return ShadowPaddingFunc?.Invoke() ?? default(Xamarin.Forms.Thickness);
+            }
+        }
+        #endregion
 
 
         #region Constructor
@@ -142,6 +333,29 @@ namespace Forms9Patch.UWP
             //BorderThickness = new Windows.UI.Xaml.Thickness(1);
             //BorderBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Pink);
             Padding = new Windows.UI.Xaml.Thickness();
+        }
+        #endregion
+
+
+        #region IDisposable Support
+        private bool _disposed = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _sourceBitmap = null;
+                    ShadowPaddingFunc = null;
+                }
+                _disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
         #endregion
 
@@ -176,10 +390,11 @@ namespace Forms9Patch.UWP
         }
 
 
-        internal void GenerateLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
+        internal void GenerateImageLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
-            if (!_invalid)
+            if (!_imageInvalid)
                 return;
+            _imageInvalid = false;
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + Fill+"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
             if (_sourceBitmap == null )
                 return;
@@ -417,44 +632,48 @@ namespace Forms9Patch.UWP
                 }
             }
         }
-        #endregion  
 
-
-
-        #region IDisposable Support
-        private bool _disposed = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
+        internal void GenerateOutlineLayout(Windows.Foundation.Size size= default(Windows.Foundation.Size))
         {
-            if (!_disposed)
+            if (!_roundedBoxInvalid)
+                return;
+            _roundedBoxCanvas = _roundedBoxCanvas ?? new Windows.UI.Xaml.Controls.Canvas();
+
+            bool drawBorder = _outlineWidth > 0.05 && _outlineColor.A > 0.01;
+            bool drawFill = _backgroundColor.A > 0.01;
+            if (!drawFill && !drawBorder && Children.Contains(_roundedBoxCanvas))
             {
-                if (disposing)
-                {
-                    _sourceBitmap = null;
-                }
+                Children.Remove(_roundedBoxCanvas);
+                _roundedBoxCanvas = null;
+                return;
+            }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
+            var width = ActualWidth;
+            var height = ActualHeight;
+            if (size != default(Windows.Foundation.Size))
+            {
+                width = size.Width;
+                height = size.Height;
+            }
 
-                _disposed = true;
+            var hz = Orientation == StackOrientation.Horizontal;
+            var vt = !hz;
+
+            var makeRoomForShadow = _hasShadow && !_shadowInverted;
+
+            var shadowX = Forms9Patch.Settings.ShadowOffset.X;
+            var shadowY = Forms9Patch.Settings.ShadowOffset.Y;
+            var shadowR = Forms9Patch.Settings.ShadowRadius;
+
+            var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToWindowsColor();
+
+            if (makeRoomForShadow)
+            {
+                // what additional padding was allocated to cast  the button's shadow?
             }
         }
+        #endregion  
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~Image() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
-        }
-        #endregion
 
 
     }

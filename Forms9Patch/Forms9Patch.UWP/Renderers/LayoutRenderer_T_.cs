@@ -33,7 +33,11 @@ namespace Forms9Patch.UWP
         {
             if (!_disposed)
             {
-                Control?.Dispose();
+                if (Control!=null)
+                {
+                    Control.ShadowPaddingFunc = null;
+                    Control?.Dispose();
+                }
                 SetNativeControl(null);
                 _disposed = true;
             }
@@ -52,6 +56,8 @@ namespace Forms9Patch.UWP
             {
                 SizeChanged -= OnSizeChanged;
                 SetAutomationId(null);
+                if (Control != null)
+                    Control.ShadowPaddingFunc = null;
             }
 
             if (e.NewElement != null)
@@ -59,6 +65,7 @@ namespace Forms9Patch.UWP
                 if (Control == null)
                     SetNativeControl(new ImageView(_instance));
                 SizeChanged += OnSizeChanged;
+                Control.ShadowPaddingFunc = Control.ShadowPaddingFunc ?? ShadowPaddingThickness;
 
                 if (Element?.BackgroundImage != null)
                     await TryUpdateSource();
@@ -72,6 +79,13 @@ namespace Forms9Patch.UWP
                     SetAutomationId(Element.AutomationId);
                 }
             }
+        }
+
+        private Xamarin.Forms.Thickness ShadowPaddingThickness()
+        {
+            if (Element == null)
+                return default(Xamarin.Forms.Thickness);
+            return Forms9Patch.RoundedBoxBase.ShadowPadding(Element as Layout);
         }
 
         protected override void UpdateBackgroundColor()
@@ -204,7 +218,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].ArrangeOverride(" + finalSize + ") ENTER/RETURN");
 
             if (Element?.BackgroundImage!=null &&  _lastFinalSize != finalSize && Element.BackgroundImage.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
-                Control.GenerateLayout(finalSize);
+                Control.GenerateImageLayout(finalSize);
             _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);
         }
