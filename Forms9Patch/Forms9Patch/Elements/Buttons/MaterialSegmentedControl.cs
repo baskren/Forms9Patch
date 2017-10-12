@@ -885,12 +885,12 @@ namespace Forms9Patch
                 x = Math.Round(x);
                 y = Math.Round(y);
 
-                double xOffset = hz ? newWidth / count : 0;
-                double yOffset = vt ? newHeight / count : 0;
+                double xOffset = hz ? OutlineWidth + (newWidth-OutlineWidth*(count+1)) / count : 0;
+                double yOffset = vt ? OutlineWidth + (newHeight - OutlineWidth * (count + 1)) / count : 0;
                 double sWidth = hz ? xOffset : width;
                 double sHeight = vt ? yOffset : height;
 
-                System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
+                //System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
 
                 for (int i = 0; i < count; i++)
                 {
@@ -905,8 +905,8 @@ namespace Forms9Patch
                         }
                         else if (i == count - 1)
                         {
-                            thisW = sWidth + (hz ? p.Right : 0);
-                            thisH = sHeight + (vt ? p.Bottom : 0);
+                            thisW = hz ? width - x : sWidth;
+                            thisH = vt ? height - y : sHeight;
                         }
                         else
                         {
@@ -917,11 +917,12 @@ namespace Forms9Patch
                             thisW = width - x;
                         if (y + thisH > height)
                             thisH = height - y;
-                        thisW = Math.Round(thisW);
-                        thisH = Math.Round(thisH);
+                        thisW = Math.Round(thisW * Display.Scale) / Display.Scale;
+                        thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
-                        x = Math.Round(x + (hz ? thisW : 0));
-                        y = Math.Round(y + (vt ? thisH : 0));
+                        //System.Diagnostics.Debug.WriteLine("MaterialSegmentedControl.LayoutChildren LayoutChildIntoBoundingRegion("+x+","+y+","+thisW+","+thisH+")");
+                        x = Math.Round( (x + (hz ? thisW : 0) ) * Display.Scale) / Display.Scale;
+                        y = Math.Round( (y + (vt ? thisH : 0) ) * Display.Scale)  / Display.Scale;
                     }
                 }
                 //var lastView = Children.Last();

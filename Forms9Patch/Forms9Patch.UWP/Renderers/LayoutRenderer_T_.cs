@@ -19,8 +19,6 @@ namespace Forms9Patch.UWP
         #region Fields
         bool _disposed;
 
-        bool _debugMessages = false;
-
         static int _instances;
         int _instance;
         #endregion
@@ -34,10 +32,7 @@ namespace Forms9Patch.UWP
             if (!_disposed)
             {
                 if (Control!=null)
-                {
-                    Control.ShadowPaddingFunc = null;
                     Control?.Dispose();
-                }
                 SetNativeControl(null);
                 _disposed = true;
             }
@@ -48,7 +43,7 @@ namespace Forms9Patch.UWP
 
 
         #region Change management
-        protected override async void OnElementChanged(ElementChangedEventArgs<TElement> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<TElement> e)
         {
             base.OnElementChanged(e);
 
@@ -57,7 +52,10 @@ namespace Forms9Patch.UWP
                 SizeChanged -= OnSizeChanged;
                 SetAutomationId(null);
                 if (Control != null)
-                    Control.ShadowPaddingFunc = null;
+                {
+                    Control.ImageElement = null;
+                    Control.RoundedBoxElement = null;
+                }
             }
 
             if (e.NewElement != null)
@@ -65,38 +63,31 @@ namespace Forms9Patch.UWP
                 if (Control == null)
                     SetNativeControl(new ImageView(_instance));
                 SizeChanged += OnSizeChanged;
-                Control.ShadowPaddingFunc = Control.ShadowPaddingFunc ?? ShadowPaddingThickness;
 
-                if (Element?.BackgroundImage != null)
-                    await TryUpdateSource();
-                UpdateAspect();
-                UpdateCapInsets();
-
-                UpdateClipToBounds();
+                Control.ImageElement = Element?.BackgroundImage;
+                Control.RoundedBoxElement = Element as IRoundedBox;
 
                 if (!string.IsNullOrEmpty(Element.AutomationId))
-                {
                     SetAutomationId(Element.AutomationId);
-                }
             }
         }
 
-        private Xamarin.Forms.Thickness ShadowPaddingThickness()
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (Element == null)
-                return default(Xamarin.Forms.Thickness);
-            return Forms9Patch.RoundedBoxBase.ShadowPadding(Element as Layout);
+            if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
+                return;
+            base.OnElementPropertyChanged(sender, e);
         }
 
         protected override void UpdateBackgroundColor()
         {
             base.UpdateBackgroundColor();
 
-            if (GetValue(BackgroundProperty) == null && Children.Count == 0)
-            {
+            //if (GetValue(BackgroundProperty) == null && Children.Count == 0)
+            //{
                 // Forces the layout to take up actual space if it's otherwise empty
                 Background = new SolidColorBrush(Colors.Transparent);
-            }
+            //}
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
@@ -106,21 +97,6 @@ namespace Forms9Patch.UWP
             return new FrameworkElementAutomationPeer(this);
         }
 
-        protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-
-            if (e.PropertyName == Layout.IsClippedToBoundsProperty.PropertyName)
-                UpdateClipToBounds();
-            else if (e.PropertyName == Image.SourceProperty.PropertyName)
-                await TryUpdateSource();
-            else if (e.PropertyName == Image.FillProperty.PropertyName)
-                UpdateAspect();
-            else if (e.PropertyName == Image.CapInsetsProperty.PropertyName)
-                UpdateCapInsets();
-
-
-        }
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -136,6 +112,7 @@ namespace Forms9Patch.UWP
             }
         }
 
+        /*
         void RefreshImage()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].RefreshImage()");
@@ -222,7 +199,7 @@ namespace Forms9Patch.UWP
             _lastFinalSize = finalSize;
             return base.ArrangeOverride(finalSize);
         }
-
+        */
         #endregion
     }
 }

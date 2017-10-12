@@ -138,6 +138,7 @@
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\F9PImageElementExtensions.cs" />
     <Compile Include="Extensions\ImageViewManagerExtensions.cs" />
+    <Compile Include="Extensions\PathSegmentCollectionExtensions.cs" />
     <Compile Include="Extensions\WriteableBitmapExtensions.cs" />
     <Compile Include="ImageSourceHandlers\FileImageSourceHandler.cs" />
     <Compile Include="ImageSourceHandlers\StreamImageSourceHandler.cs" />

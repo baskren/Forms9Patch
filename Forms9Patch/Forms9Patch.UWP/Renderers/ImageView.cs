@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
+using Windows.UI.Composition;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms;
 
 namespace Forms9Patch.UWP 
@@ -22,15 +26,93 @@ namespace Forms9Patch.UWP
         int _tileCanvasWidth = 0;
         int _tileCanvasHeight = 0;
 
-        bool _imageInvalid = true;
         Windows.UI.Xaml.Controls.Canvas _tileCanvas;
-        bool _roundedBoxInvalid = true;
-        Windows.UI.Xaml.Controls.Canvas _roundedBoxCanvas;
+
+        Forms9Patch.Image _imageElement;
+        WriteableBitmap _sourceBitmap;
+        Xamarin.Forms.ImageSource _xfImageSource;
+        Forms9Patch.IRoundedBox _roundedBoxElement;
 
         #endregion
 
 
-        #region Image Properties
+        #region Property Management
+
+        public Forms9Patch.Image ImageElement
+        {
+            get { return _imageElement;}
+            set
+            {
+                if (_imageElement != value)
+                {
+                    if (_imageElement != null)
+                    {
+                        _imageElement.PropertyChanged -= OnImageElementPropertyChanged;
+                        _imageElement.SizeChanged -= OnImageElementSizeChanged;
+                    }
+                    _imageElement = value;
+                    SetSourceAsync();
+                    if (_imageElement != null)
+                    {
+                        _imageElement.PropertyChanged += OnImageElementPropertyChanged;
+                        _imageElement.SizeChanged += OnImageElementSizeChanged;
+                    }
+                }
+            }
+        }
+
+        private void OnImageElementSizeChanged(object sender, EventArgs e)
+        {
+            GenerateImageLayout();
+        }
+
+        private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName)
+                GenerateImageLayout();
+        }
+
+        public Forms9Patch.IRoundedBox RoundedBoxElement
+        {
+            get { return _roundedBoxElement; }
+            set
+            {
+                if (_roundedBoxElement != value)
+                {
+                    if (_roundedBoxElement is VisualElement oldVisualElement)
+                    {
+                        oldVisualElement.PropertyChanged -= OnRoundedBoxElementPropertyChanged;
+                        oldVisualElement.SizeChanged -= OnRoundedBoxElementSizeChanged;
+                    }
+                    _roundedBoxElement = value;
+                    GenerateOutlineLayout();
+                    if (_roundedBoxElement is VisualElement newVisualElement)
+                    {
+                        newVisualElement.PropertyChanged += OnRoundedBoxElementPropertyChanged;
+                        newVisualElement.SizeChanged += OnRoundedBoxElementSizeChanged;
+                    }
+                }
+            }
+        }
+
+        private void OnRoundedBoxElementSizeChanged(object sender, EventArgs e)
+        {
+            GenerateOutlineLayout();
+        }
+
+        private void OnRoundedBoxElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Forms9Patch.RoundedBoxBase.HasShadowProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.RoundedBoxBase.IsEllipticalProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.RoundedBoxBase.OutlineColorProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.RoundedBoxBase.OutlineRadiusProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.RoundedBoxBase.OutlineWidthProperty.PropertyName ||
+                e.PropertyName == Forms9Patch.RoundedBoxBase.ShadowInvertedProperty.PropertyName)
+                GenerateOutlineLayout();
+        }
 
         Xamarin.Forms.Size BaseImageSize
         {
@@ -53,31 +135,31 @@ namespace Forms9Patch.UWP
             }
         }
 
-        WriteableBitmap _sourceBitmap;
-        Xamarin.Forms.ImageSource _xfImageSource;
-        internal async Task SetSourceAsync(Xamarin.Forms.ImageSource source)
+        internal async Task SetSourceAsync()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SetSourceAsync enter");
-            if (source != _xfImageSource)
+            if (ImageElement == null)
+                return;
+            if (ImageElement.Source != _xfImageSource)
             {
-                _imageInvalid = true;
-                _xfImageSource = source;
+                ((IImageController)ImageElement)?.SetIsLoading(true);
+                _xfImageSource = ImageElement.Source;
                 Xamarin.Forms.Platform.UWP.IImageSourceHandler handler = null;
-                if (source != null)
+                if (ImageElement.Source != null)
                 {
-                    if (source is FileImageSource)
+                    if (_xfImageSource is FileImageSource)
                         handler = new FileImageSourceHandler();
-                    else if (source is UriImageSource)
+                    else if (_xfImageSource is UriImageSource)
                         handler = new UriImageSourceHandler();
-                    else if (source is StreamImageSource)
+                    else if (_xfImageSource is StreamImageSource)
                         handler = new StreamImageSourceHandler();
                 }
-                if (handler != null)
+                Windows.UI.Xaml.Media.ImageSource imagesource = null;
+                if (handler != null && _xfImageSource!=null)
                 {
-                    Windows.UI.Xaml.Media.ImageSource imagesource;
                     try
                     {
-                        imagesource = await handler.LoadImageAsync(source);
+                        imagesource = await handler.LoadImageAsync(_xfImageSource);
                     }
                     catch (OperationCanceledException)
                     {
@@ -92,238 +174,16 @@ namespace Forms9Patch.UWP
                     else
                         _sourceBitmap = null;
 
-
+                    _tileCanvas = null;
                     GenerateImageLayout();
                 }
             }
+            ((IImageController)ImageElement)?.SetIsLoading(false);
+            RefreshImage();
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SetSourceAsync enter");
         }
 
-        Fill _fill;
-        internal Forms9Patch.Fill Fill
-        {
-            get
-            {
-                return _fill;
-            }
-            set
-            {
-                if (value != _fill)
-                {
-                    _imageInvalid = true;
-                    if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.set_Fill[" + _instance + "]: " + value);
-                    _fill = value;
-                    GenerateImageLayout();
-                    UpdateAspect();
-                }
-            }
-        }
-
-        Xamarin.Forms.Thickness _capInsets;
-        internal Xamarin.Forms.Thickness CapInsets
-        {
-            get
-            {
-                return _capInsets;
-            }
-            set
-            {
-                if (value != _capInsets)
-                {
-                    _imageInvalid = true;
-                    _capInsets = value;
-                    GenerateImageLayout();
-                }
-            }
-        }
-        #endregion Image Properties
-
-
-        #region RoundedBox Properties
-        Windows.UI.Color _backgroundColor;
-        internal Color BackgroundColor
-        {
-            get
-            {
-                return _backgroundColor.ToXfColor();
-            }
-            set
-            {
-                var winColor = value.ToWindowsColor();
-                if (winColor != _backgroundColor)
-                {
-                    _backgroundColor = winColor;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        bool _hasShadow;
-        internal bool HasShadown
-        {
-            get { return _hasShadow; }
-            set
-            {
-                if (value != _hasShadow)
-                {
-                    _hasShadow = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        bool _shadowInverted;
-        internal bool ShadowInverted
-        {
-            get { return _shadowInverted; }
-            set
-            {
-                if (value != _shadowInverted)
-                {
-                    _shadowInverted = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        Windows.UI.Color _outlineColor;
-        internal Color OutlineColor
-        {
-            get
-            {
-                return _outlineColor.ToXfColor();
-            }
-            set
-            {
-                var winColor = value.ToWindowsColor(); 
-                if (winColor != _outlineColor)
-                {
-                    _outlineColor = winColor;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        float _outlineRadius;
-        internal float OutlineRadius
-        {
-            get { return _outlineRadius; }
-            set
-            {
-                if (_outlineRadius!=value)
-                {
-                    _outlineRadius = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        float _outlineWidth;
-        internal float OutlineWidth
-        {
-            get { return _outlineWidth; }
-            set
-            {
-                if (_outlineWidth != value)
-                {
-                    _outlineWidth = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        bool _isElliptical;
-        internal bool IsElliptical
-        {
-            get { return _isElliptical; }
-            set
-            {
-                if (_isElliptical != value)
-                {
-                    _isElliptical = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-        #endregion RoundedBoxProperties
-
-        #region MaterialButton Properties
-        StackOrientation _orientation;
-        internal StackOrientation Orientation
-        {
-            get { return _orientation; }
-            set
-            {
-                if (value!=_orientation)
-                {
-                    _orientation = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        SegmentType _segmentType;
-        internal SegmentType SegmentType
-        {
-            get { return _segmentType; }
-            set
-            {
-                if (value != _segmentType)
-                {
-                    _segmentType = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        StackOrientation _parentSegmentOrientation;
-        internal StackOrientation ParentSegmentOrientation
-        {
-            get { return _parentSegmentOrientation; }
-            set
-            {
-                if (value != _parentSegmentOrientation)
-                {
-                    _parentSegmentOrientation = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        float _separatorWidth;
-        internal float SeparatorWidth
-        {
-            get { return _separatorWidth; }
-            set
-            {
-                if (_separatorWidth!=value)
-                {
-                    _separatorWidth = value;
-                    _roundedBoxInvalid = true;
-                    GenerateOutlineLayout();
-                }
-            }
-        }
-
-        internal Func<Xamarin.Forms.Thickness> ShadowPaddingFunc;
-        internal Xamarin.Forms.Thickness ShadowPadding
-        {
-            get
-            {
-                return ShadowPaddingFunc?.Invoke() ?? default(Xamarin.Forms.Thickness);
-            }
-        }
-        #endregion
+        #endregion Property Management
 
 
         #region Constructor
@@ -347,7 +207,11 @@ namespace Forms9Patch.UWP
                 if (disposing)
                 {
                     _sourceBitmap = null;
-                    ShadowPaddingFunc = null;
+                    ImageElement = null;
+                    RoundedBoxElement = null;
+                    _xfImageSource = null;
+                    _rangeLists = null;
+                    _tileCanvas = null;
                 }
                 _disposed = true;
             }
@@ -361,6 +225,12 @@ namespace Forms9Patch.UWP
 
 
         #region Layout 
+        void RefreshImage()
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView[" + _instance + "].RefreshImage()");
+            ((IVisualElementController)ImageElement)?.InvalidateMeasure(Xamarin.Forms.Internals.InvalidationTrigger.RendererReady);
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView[" + _instance + "].RefreshImage() RETURN ");
+        }
 
         void UpdateAspect()
         {
@@ -372,7 +242,7 @@ namespace Forms9Patch.UWP
             {
                 // it's a simple image
                 
-                if (Fill == Fill.Tile || Fill == Fill.None)
+                if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.None)
                 {
                     image.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                     image.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
@@ -382,32 +252,37 @@ namespace Forms9Patch.UWP
                 {
                     image.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                     image.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                    image.Stretch = Fill.ToStretch();
+                    image.Stretch = ImageElement.Fill.ToStretch();
                 }
                 return;
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer.UpdateAspect[" + _instance + "] RETURN");
         }
 
-
         internal void GenerateImageLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
-            if (!_imageInvalid)
-                return;
-            _imageInvalid = false;
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + Fill+"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + ImageElement.Fill +"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
             if (_sourceBitmap == null )
                 return;
             //Stopwatch stopwatch = Stopwatch.StartNew();
             RowDefinitions.Clear();
             ColumnDefinitions.Clear();
-            Children.Clear();
+
+            //Children.Clear();
+            if (Children.Contains(_tileCanvas))
+                Children.Remove(_tileCanvas);
+            if (Children.Any((view) => view is Windows.UI.Xaml.Controls.Image))
+            {
+                var oldImageView = Children.Where((view) => view is Windows.UI.Xaml.Controls.Image).First();
+                Children.Remove(oldImageView);
+            }
+
 
             _rangeLists = _sourceBitmap?.NinePatchRanges();
             bool sourceBitmapIsNinePatch = _rangeLists!=null;
-            _rangeLists = CapInsets.ToRangeLists(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight, _xfImageSource, sourceBitmapIsNinePatch) ?? _rangeLists;  
+            _rangeLists = ImageElement.CapInsets.ToRangeLists(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight, _xfImageSource, sourceBitmapIsNinePatch) ?? _rangeLists;  
 
-            if (Fill == Fill.Tile)
+            if (ImageElement.Fill == Fill.Tile)
             {
                 _tileCanvas = _tileCanvas ?? new Windows.UI.Xaml.Controls.Canvas();
                 var width = ActualWidth;
@@ -635,31 +510,60 @@ namespace Forms9Patch.UWP
 
         internal void GenerateOutlineLayout(Windows.Foundation.Size size= default(Windows.Foundation.Size))
         {
-            if (!_roundedBoxInvalid)
-                return;
-            _roundedBoxCanvas = _roundedBoxCanvas ?? new Windows.UI.Xaml.Controls.Canvas();
 
-            bool drawBorder = _outlineWidth > 0.05 && _outlineColor.A > 0.01;
-            bool drawFill = _backgroundColor.A > 0.01;
-            if (!drawFill && !drawBorder && Children.Contains(_roundedBoxCanvas))
+            if (RoundedBoxElement==null)
+                return;
+
+            var radius = RoundedBoxElement.OutlineRadius;
+            bool drawBorder = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
+            bool drawFill = RoundedBoxElement.BackgroundColor.A > 0.01;
+
+            if (Children.Any((view) => view != _tileCanvas && view is Windows.UI.Xaml.Controls.Canvas))
             {
-                Children.Remove(_roundedBoxCanvas);
-                _roundedBoxCanvas = null;
-                return;
+                var oldCanvas = Children.Where((view) => view != _tileCanvas && view is Windows.UI.Xaml.Controls.Canvas).First();
+                Children.Remove(oldCanvas);
             }
+            if (!drawFill && !drawBorder )
+                return;
 
-            var width = ActualWidth;
-            var height = ActualHeight;
+            var visualElement = RoundedBoxElement as VisualElement;
+            var width = visualElement.Width;
+            var height = visualElement.Height;
+
             if (size != default(Windows.Foundation.Size))
             {
                 width = size.Width;
                 height = size.Height;
             }
+            if (width <= 0 || height <= 0)
+                return;
 
-            var hz = Orientation == StackOrientation.Horizontal;
+            System.Diagnostics.Debug.WriteLine("====================================================================================");
+            System.Diagnostics.Debug.WriteLine("Bounds=["+visualElement.Bounds+"]  width=["+width+"] height=["+height+"]");
+            //System.Diagnostics.Debug.WriteLine("BackgroundColor=[" + RoundedBoxElement.BackgroundColor + "]");
+            //System.Diagnostics.Debug.WriteLine("OutlineColor=[" + RoundedBoxElement.OutlineColor + "]  OutlineWidth=[" + RoundedBoxElement.OutlineWidth + "]");
+
+
+            var canvas = new Windows.UI.Xaml.Controls.Canvas();
+
+            var rect = new Rect(0, 0, width, height);
+            var thickness = RoundedBoxElement.OutlineWidth;
+
+            SegmentType segmentType = SegmentType.Not;
+            var hz = true;
+            if (RoundedBoxElement is MaterialButton materialButton)
+            {
+                segmentType = materialButton.SegmentType;
+                hz = materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
+            }
+            else
+                materialButton = null;
+
+            //rect = RoundRect(rect, materialButton.Orientation, segmentType);
+
             var vt = !hz;
 
-            var makeRoomForShadow = _hasShadow && !_shadowInverted;
+            var makeRoomForShadow = RoundedBoxElement.HasShadow && !RoundedBoxElement.ShadowInverted;
 
             var shadowX = Forms9Patch.Settings.ShadowOffset.X;
             var shadowY = Forms9Patch.Settings.ShadowOffset.Y;
@@ -667,14 +571,564 @@ namespace Forms9Patch.UWP
 
             var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToWindowsColor();
 
+            var shadowPadding = RoundedBoxBase.ShadowPadding(RoundedBoxElement as Layout);
+
+            Rect perimeter = rect;
             if (makeRoomForShadow)
             {
                 // what additional padding was allocated to cast  the button's shadow?
+                //CompositionShadow shadow = new CompositionShadow()
+                perimeter = new Rect(rect.Left + shadowPadding.Left, rect.Top + shadowPadding.Top, rect.Width - shadowPadding.HorizontalThickness, rect.Height - shadowPadding.VerticalThickness);
+                if (segmentType != SegmentType.Not)
+                {
+                    // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
+                    double allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
+                    Rect result;
+                    if (segmentType == SegmentType.Start)
+                        result = new Rect(perimeter.Left - allowance, perimeter.Top - allowance, perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                    else if (segmentType == SegmentType.Mid)
+                        result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + (hz ? 0 : 2 * allowance), perimeter.Height + (vt ? 0 : 2 * allowance));
+                    else
+                        result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                    canvas.Clip = new Windows.UI.Xaml.Media.RectangleGeometry
+                    {
+                        Rect = result
+                    };
+
+                }
             }
+
+
+            // generate background
+            GeometryGroup geometryGroup = null;
+            var outlinePerimeter = perimeter;
+            if (drawFill)
+            {
+                //System.Diagnostics.Debug.WriteLine("FILL: ");
+                switch (segmentType)
+                {
+                    case SegmentType.Not:
+                        outlinePerimeter = RectInset(perimeter, thickness);
+                        break;
+                    case SegmentType.Start:
+                        outlinePerimeter = RectInset(perimeter, thickness, thickness, vt ? thickness : 0, hz ? thickness : 0);
+                        break;
+                    case SegmentType.Mid:
+                        outlinePerimeter = RectInset(perimeter, thickness, thickness, vt ? thickness : 0, hz ? thickness : 0);
+                        break;
+                    case SegmentType.End:
+                        outlinePerimeter = RectInset(perimeter,  thickness);
+                        break;
+                }
+                if (segmentType == SegmentType.Not)
+                {
+                    if (RoundedBoxElement.IsElliptical)
+                        geometryGroup = Ellipse(outlinePerimeter);
+                    else
+                        geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness : 0));
+                }
+                else
+                {
+                    // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
+                    //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
+                    geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness : 0));
+                }
+                var path = new Path();
+                path.Fill = new SolidColorBrush(RoundedBoxElement.BackgroundColor.ToWindowsColor());
+                path.Data = geometryGroup;
+                canvas.Children.Add(path);
+            }
+
+
+            if (drawBorder)
+            {
+                switch (segmentType)
+                {
+                    case SegmentType.Not:
+                        outlinePerimeter = RectInset(perimeter, thickness / 2);
+                        break;
+                    case SegmentType.Start:
+                        outlinePerimeter = RectInset(perimeter, thickness / 2, thickness / 2, vt ? thickness / 2 : 0, hz ? thickness / 2 : 0);
+                        break;
+                    case SegmentType.Mid:
+                        outlinePerimeter = RectInset(perimeter, thickness / 2, thickness / 2, vt ? thickness / 2 : 0, hz ? thickness / 2 : 0);
+                        break;
+                    case SegmentType.End:
+                        outlinePerimeter = RectInset(perimeter, thickness / 2);
+                        break;
+                }
+                if (segmentType == SegmentType.Not)
+                {
+                    if (RoundedBoxElement.IsElliptical)
+                        geometryGroup = Ellipse(outlinePerimeter);
+                    else
+                        geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness / 2 : 0));
+                }
+                else
+                {
+                    // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
+                    //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
+                    geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness / 2 : 0));
+                }
+                var path = new Path();
+                path.Stroke = new SolidColorBrush(RoundedBoxElement.OutlineColor.ToWindowsColor());
+                path.StrokeThickness = RoundedBoxElement.OutlineWidth;
+                path.Data = geometryGroup;
+                canvas.Children.Add(path);
+            }
+
+
+            Children.Add(canvas);
+
+            System.Diagnostics.Debug.WriteLine("====================================================================================");
         }
-        #endregion  
+        #endregion
 
 
+
+
+
+        #region RoundedBoxLayout Support
+
+        static Rect RoundRect(Rect rect, StackOrientation orientation, Forms9Patch.SegmentType type)
+        {
+            return rect;
+            
+            var left = Math.Ceiling(rect.Left);
+            var right = Math.Floor(rect.Right);
+            var top = Math.Ceiling(rect.Top);
+            var bottom = Math.Floor(rect.Bottom);
+
+
+            if (orientation == StackOrientation.Horizontal)
+            {
+                switch (type)
+                {
+                    case SegmentType.Start:
+                        right = Math.Round(rect.Right);
+                        break;
+                    case SegmentType.Mid:
+                        left = Math.Round(rect.Left);
+                        right = Math.Round(rect.Right);
+                        break;
+                    case SegmentType.End:
+                        left = Math.Round(rect.Left);
+                        break;
+                }
+            }
+            else
+            {
+                switch (type)
+                {
+                    case SegmentType.Start:
+                        bottom = Math.Round(rect.Bottom);
+                        break;
+                    case SegmentType.Mid:
+                        bottom = Math.Round(rect.Bottom);
+                        top = Math.Round(rect.Top);
+                        break;
+                    case SegmentType.End:
+                        top = Math.Round(rect.Top);
+                        break;
+                }
+            }
+            return new Rect(left, top, right - left, bottom - top);
+            
+        }
+
+        static Rect SegmentAllowanceRect(Rect rect, double allowance, StackOrientation orientation, Forms9Patch.SegmentType type)
+        {
+            Rect result;
+            switch (type)
+            {
+                case SegmentType.Start:
+                    result = new Rect(rect.Left, rect.Top, rect.Width + (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Height + (orientation == StackOrientation.Vertical ? allowance : 0));
+                    break;
+                case SegmentType.Mid:
+                    result = new Rect(rect.Left - (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == StackOrientation.Vertical ? allowance : 0), rect.Width + (orientation == StackOrientation.Horizontal ? allowance * 2 : 0), rect.Height + (orientation == StackOrientation.Vertical ? allowance * 2 : 0));
+                    break;
+                case SegmentType.End:
+                    result = new Rect(rect.Left - (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == StackOrientation.Vertical ? allowance : 0), rect.Width + (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Height + (orientation == StackOrientation.Vertical ? allowance : 0));
+                    break;
+                default:
+                    result = rect;
+                    break;
+            }
+            System.Diagnostics.Debug.WriteLine("ImageView.SegmentAllowanceRect result=[" + result + "]");
+            return result;
+        }
+
+        static Rect RectInset(Rect rect, double inset)
+        {
+            return RectInset(rect, inset, inset, inset, inset);
+        }
+
+        static Rect RectInset(Rect rect, double left, double top, double right, double bottom)
+        {
+            return new Rect(rect.X + left, rect.Y + top, rect.Width - left - right, rect.Height - top - bottom);
+        }
+
+        internal static GeometryGroup Ellipse(Rect perimeter)
+        {
+            var geometryGroup = new GeometryGroup
+            {
+                Children =
+                                {
+                                    new EllipseGeometry
+                                    {
+                                        Center = new Windows.Foundation.Point(perimeter.X + perimeter.Width/2, perimeter.Y + perimeter.Height/2),
+                                        RadiusX = perimeter.Width/2,
+                                        RadiusY = perimeter.Height/2
+                                    }
+                                }
+            };
+            return geometryGroup;
+        }
+
+        internal static GeometryGroup RectangularPerimeterPath(Forms9Patch.IRoundedBox element, Rect rect, float radius)
+        {
+            radius = Math.Max(radius, 0);
+
+            var materialButton = element as MaterialButton;
+            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
+
+            var pathFigure = new PathFigure();
+
+            //System.Diagnostics.Debug.WriteLine("RectangularPerimeterPath rect[" + rect + "] type=["+type+"] ");
+            //rect = RoundRect(rect, orientation, type);
+            //System.Diagnostics.Debug.WriteLine("RectangularPerimeterPath rect[" + rect + "] type=[" + type + "] ");
+            //System.Diagnostics.Debug.WriteLine("");
+
+            if (type==SegmentType.Not)
+            {
+                pathFigure.SetStartPoint((rect.Left + rect.Right) / 2, rect.Top);
+                pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
+                if (radius > 0)
+                    pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
+                pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                if (radius > 0)
+                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
+                pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                if (radius > 0)
+                    pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
+                pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
+                if (radius > 0)
+                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
+                pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+            }
+            else if (type == SegmentType.Start)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    pathFigure.SetStartPoint(rect.Right, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
+                }
+                else
+                {
+                    pathFigure.SetStartPoint(rect.Right, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+                }
+            }
+            else if (type == SegmentType.Mid)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    pathFigure.SetStartPoint(rect.Right, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
+                }
+                else
+                {
+                    pathFigure.SetStartPoint(rect.Right, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+                }
+            }
+            else if (type == SegmentType.End)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    pathFigure.SetStartPoint((rect.Left + rect.Right)/2, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Right-radius, rect.Bottom);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                }
+                else
+                {
+                    pathFigure.SetStartPoint((rect.Left + rect.Right)/2, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                    if (radius > 0)
+                        pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
+                    pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                }
+            }
+
+            /*
+            if (counterClockWise)
+            {
+                // top center
+                //result.MoveToPoint((Left + Right) / 2.0f, Top);
+                pathFigure.SetStartPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
+
+                // topLeft
+                if (type == SegmentType.Start || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
+                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
+                }
+                else
+                {
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                }
+
+                // bottom left
+                if (type == SegmentType.Start && orientation == StackOrientation.Horizontal || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+
+                // bottom right
+                if (type == SegmentType.End || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
+
+                // top right
+                if (type == SegmentType.End && orientation == StackOrientation.Horizontal || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);                   
+                    //result.AddArcToPoint (rect.Right, rect.Top - radius, rect.Right - radius, rect.Top, radius);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
+
+                // finish
+                pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
+            }
+            else
+            {
+                // leftCenter
+                //result.MoveToPoint(left, (rect.Top + rect.Bottom) / 2.0f);
+                pathFigure.SetStartPoint(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
+
+                // topLeft
+                if (type == SegmentType.Start || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top + radius);
+                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(Math.PI), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Top, radius);
+                }
+                else
+                {
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
+                }
+
+                // top right
+                if (type == SegmentType.End || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Top);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right, rect.Top + radius, radius);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
+
+                // bottom right
+                if (type == SegmentType.End || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom - radius);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Bottom, radius);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
+
+                // bottom left
+                if (type == SegmentType.Start || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                {
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Bottom);
+                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left, rect.Bottom - radius, radius);
+                }
+                else
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
+
+                //finish
+                pathFigure.AddLineToPoint(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
+            }
+            */
+
+            // finish
+            //result.AddLineToPoint(startX, startY);
+            //pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
+
+
+            var geometryGroup = new GeometryGroup
+            {
+                Children =
+                        {
+                            new PathGeometry
+                            {
+                                Figures =
+                                {
+                                    pathFigure
+                                }
+                            }
+                        }
+            };
+            return geometryGroup;
+        }
+
+        /*
+        static GeometryGroup OutlinePath(IRoundedBox element, Rect rect, float radius, float lineWidth)
+        {
+
+            //System.Diagnostics.Debug.WriteLine("OutlinePath(rect: " + rect + ", radius: " + radius + ", lineWidth: " + lineWidth + ")");
+
+            lineWidth /= 2.0f;
+            var materialButton = element as MaterialButton;
+            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
+
+            if (type == SegmentType.Not)
+                return RectangularPerimeterPath(element, rect, radius);
+
+            //var diameter = radius * 2;
+            //var topLeft = new RectF (left, rect.Top, left + diameter, rect.Top + diameter);
+            //var bottomLeft = new RectF (left, rect.Bottom - diameter, left + diameter, rect.Bottom);
+            //var bottomRight = new RectF (rect.Right - diameter, rect.Bottom - diameter, rect.Right, rect.Bottom);
+            //var topRight = new RectF (rect.Right - diameter, rect.Top, rect.Right, rect.Top + diameter);
+
+            rect = RoundRect(rect, orientation, type);
+
+            var pathFigure = new PathFigure();
+
+            if (orientation == StackOrientation.Horizontal)
+            {
+                if (type == SegmentType.Start)
+                {
+                    //result.MoveToPoint(rect.Right + lineWidth, rect.Bottom);
+                    pathFigure.SetStartPoint(rect.Right + lineWidth, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Bottom);
+                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(1 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left, rect.Bottom - radius, radius);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top + radius);
+                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(2 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Top, radius);
+                    pathFigure.AddLineToPoint(rect.Right + lineWidth, rect.Top);
+                }
+                else if (type == SegmentType.Mid)
+                { // mid
+                    //result.MoveToPoint(rect.Right + lineWidth, rect.Bottom);
+                    pathFigure.SetStartPoint(rect.Right + lineWidth, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Bottom);
+                    //result.MoveToPoint(left - lineWidth, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Right + lineWidth, rect.Top);
+                }
+                else
+                { // end
+                    //result.MoveToPoint(left - lineWidth, rect.Top);
+                    pathFigure.SetStartPoint(rect.Left - lineWidth, rect.Top);
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Top);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right, rect.Top + radius, radius);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom - radius);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Bottom, radius);
+                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Bottom);
+                }
+            }
+            else
+            { // vertical
+                if (type == SegmentType.Start)
+                {
+                    //result.MoveToPoint(rect.Right, rect.Bottom + lineWidth);
+                    pathFigure.SetStartPoint(rect.Right, rect.Bottom + lineWidth);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
+                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom + lineWidth);
+                }
+                else if (type == SegmentType.Mid)
+                {
+                    //result.MoveToPoint(rect.Right, rect.Bottom + lineWidth);
+                    pathFigure.SetStartPoint(rect.Right, rect.Bottom + lineWidth);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top - lineWidth);
+                    //result.MoveToPoint(left, rect.Top - lineWidth);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Top - lineWidth);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom + lineWidth);
+                }
+                else
+                { // end
+                    //result.MoveToPoint(left, rect.Top - lineWidth);
+                    pathFigure.SetStartPoint(rect.Left, rect.Top - lineWidth);
+                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(2 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(1 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
+                    pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
+                    pathFigure.AddLineToPoint(rect.Right, rect.Top - lineWidth);
+                }
+            }
+            var geometryGroup = new GeometryGroup
+            {
+                Children =
+                        {
+                            new PathGeometry
+                            {
+                                Figures =
+                                {
+                                    pathFigure
+                                }
+                            }
+                        }
+            };
+            return geometryGroup;
+        }
+        */
+        #endregion
 
     }
 }

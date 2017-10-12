@@ -9,10 +9,13 @@ namespace Forms9PatchDemo
 {
     public class MaterialButtonAndSegmentAlignments : ContentPage
     {
-
+        const float radius = 12;
+        const float width = 10;
 
         MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
         {
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Segments =
             {
                 new Segment { Text = "START", },
@@ -23,6 +26,8 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _vtAlignmentElement = new MaterialSegmentedControl
         {
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Segments =
             {
                 new Segment { Text = "START", },
@@ -34,6 +39,8 @@ namespace Forms9PatchDemo
         MaterialSegmentedControl _optionsElement = new MaterialSegmentedControl
         {
             GroupToggleBehavior = GroupToggleBehavior.Multiselect,
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Segments =
             {
                 new Segment { Text = "TIGHT" },
@@ -46,6 +53,8 @@ namespace Forms9PatchDemo
         {
             HasTightSpacing = true,
             //FontSize = 10,
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Segments =
             {
                 new Segment { HtmlText = "NONE" },
@@ -68,14 +77,31 @@ namespace Forms9PatchDemo
 
         };
 
+        Slider _outlineWidthSlider = new Slider
+        {
+            Maximum = 15,
+            Minimum = 0,
+            Value = width
+        };
+
+        Slider _outlineRadiusSlider = new Slider
+        {
+            Maximum = 15,
+            Minimum = 0,
+            Value = radius
+        };
+
         MaterialButton _iconTextAndTextButton = new MaterialButton
         {
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Text = "Text",
         };
 
-
         MaterialSegmentedControl _hzSegmentsElement = new MaterialSegmentedControl
         {
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Segments =
                         {
                             new Segment
@@ -95,6 +121,8 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _vtSegmentsElement = new MaterialSegmentedControl
         {
+            OutlineRadius = radius,
+            OutlineWidth = width,
             Orientation = StackOrientation.Vertical,
             Segments =
                         {
@@ -122,7 +150,7 @@ namespace Forms9PatchDemo
         Xamarin.Forms.Grid _grid2 = new Xamarin.Forms.Grid
         {
             ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
-            RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
+            RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
         };
 
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
@@ -142,7 +170,10 @@ namespace Forms9PatchDemo
             _grid2.Children.Add(_spacingSlider, 0, 1);
             _grid2.Children.Add(new Xamarin.Forms.Label { Text = "Imposed Ht:" }, 1, 0);
             _grid2.Children.Add(_imposedHeightSwitch, 1, 1);
-
+            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "OutlineWidth:" }, 2, 0);
+            _grid2.Children.Add(_outlineWidthSlider, 2, 1);
+            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "OutlineRadius:" }, 3, 0);
+            _grid2.Children.Add(_outlineRadiusSlider, 3, 1);
 
 
 
@@ -245,6 +276,28 @@ namespace Forms9PatchDemo
                     _vtAlignmentElement.DeselectAll();
 
 
+            };
+
+            _outlineRadiusSlider.ValueChanged += (sender, e) =>
+            {
+                _hzAlignmentElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                _vtAlignmentElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                _iconTextAndTextButton.OutlineRadius = (float) _outlineRadiusSlider.Value;
+                _optionsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                _iconElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                _hzSegmentsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                _vtSegmentsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+            };
+
+            _outlineWidthSlider.ValueChanged += (sender, e) =>
+            {
+                _hzAlignmentElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _vtAlignmentElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _iconTextAndTextButton.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _optionsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _iconElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _hzSegmentsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                _vtSegmentsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
             };
 
             var defaultHzAlignment = _iconTextAndTextButton.HorizontalTextAlignment;

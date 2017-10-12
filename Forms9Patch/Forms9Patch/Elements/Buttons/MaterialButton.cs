@@ -995,6 +995,21 @@ namespace Forms9Patch
         }
 
 
+        void SetStackLayoutPadding()
+        {
+            if (SegmentType == SegmentType.Not || SegmentType == SegmentType.End)
+                _stackLayout.Padding = OutlineWidth;
+            else
+            {
+                if (ParentSegmentsOrientation == StackOrientation.Horizontal)
+                    _stackLayout.Padding = new Thickness(OutlineWidth, OutlineWidth, 0, OutlineWidth);
+                else
+                    _stackLayout.Padding = new Thickness(OutlineWidth, OutlineWidth, OutlineWidth, 0);
+                
+            }
+            //_stackLayout.BackgroundColor = Color.Pink;
+        }
+
         void SetOrienations()
         {
             var horzOption = HorizontalTextAlignment.ToLayoutOptions();
@@ -1133,6 +1148,10 @@ namespace Forms9Patch
             if (_noUpdate)
                 return;
 
+            if (propertyName == OutlineWidthProperty.PropertyName
+                || propertyName == ParentSegmentsOrientationProperty.PropertyName
+                || propertyName == SegmentTypeProperty.PropertyName)
+                SetStackLayoutPadding();
             if (propertyName == AlignmentProperty.PropertyName)
 #pragma warning disable CS0618 // Type or member is obsolete
                 HorizontalTextAlignment = Alignment;

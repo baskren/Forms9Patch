@@ -53,8 +53,9 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer["+_instance+"].OnElementChanged(["+e.OldElement+", "+e.NewElement+"]");
             base.OnElementChanged(e);
 
-            //if (e.OldElement != null)
-            //    e.OldElement.SizeChanged -= OnSizeChanged;
+            /*
+            if (e.OldElement != null && Control != null)
+                Control.ImageElement = null;
 
             if (e.NewElement != null)
             {
@@ -67,8 +68,16 @@ namespace Forms9Patch.UWP
                 UpdateCapInsets();
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementChanged([" + e.OldElement + ", " + e.NewElement + "] RETURN");
+            */
+            if (e.NewElement != null)
+            {
+                if (Control == null)
+                    SetNativeControl(new ImageView(_instance));
+                Control.ImageElement = e.NewElement;
+            }
         }
 
+        /*
         protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName+"]");
@@ -76,13 +85,10 @@ namespace Forms9Patch.UWP
 
             if (e.PropertyName == Image.SourceProperty.PropertyName)
                 await TryUpdateSource();
-            else if (e.PropertyName == Image.FillProperty.PropertyName)
-                UpdateAspect();
-            else if (e.PropertyName == Image.CapInsetsProperty.PropertyName)
-                UpdateCapInsets();
 
             //if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].OnElementPropertyChanged([" + e.PropertyName + "] RETURN");
         }
+        */
         
         void RefreshImage()
         {
@@ -91,22 +97,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage() RETURN ");
         }
 
-        private void UpdateCapInsets()
-        {
-            if (Control != null)
-                Control.CapInsets = Element.CapInsets;
-        }
-
-        void UpdateAspect()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateAspect()");
-
-            if (Control!=null)
-                Control.Fill = Element.Fill;
-
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateAspect() RETURN");
-        }
-
+        /*
         protected virtual async Task TryUpdateSource()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].TryUpdateSource()");
@@ -129,6 +120,7 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].TryUpdateSource() RETURN");
         }
 
+        /*
         protected async Task UpdateSource()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].UpdateSource()");
