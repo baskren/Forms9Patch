@@ -12,6 +12,8 @@ namespace Forms9Patch.Droid
     /// </summary>
     public class Settings : INativeSettings
     {
+        public static Android.App.Activity Activity { get; private set; }
+
         static bool _valid = false;
         /// <summary>
         /// Gets a value indicating whether Forms9Patch is licensed.
@@ -27,8 +29,9 @@ namespace Forms9Patch.Droid
             get { return _valid || Xamarin.Forms.Application.Current == null; }
         }
 
-        public static void Initialize(string licenseKey = null)
+        public static void Initialize(Android.App.Activity activity, string licenseKey = null)
         {
+            Activity = activity;
             LicenseKey = licenseKey ?? "freebee";
         }
 

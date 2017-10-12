@@ -100,6 +100,9 @@ namespace Forms9Patch.Droid
                             r = 0;
                     }
                     canvas.DrawBitmap(shadow, 0, 0, p);
+
+                    c.Dispose();
+                    shadow.Dispose();
                 }
             }
             var insetShadowBounds = new CGRect(perimeter);
@@ -252,7 +255,8 @@ namespace Forms9Patch.Droid
                     //p.StrokeWidth -= 1;
                     //if (p.StrokeWidth < 0)
                     //	p.StrokeWidth = 0;
-                    shadowPaint.Alpha += (int)(255 * (0.125 * (i + 1) / shadowR));
+                    //shadowPaint.Alpha += (int)(255 * (0.125 * (i + 1) / shadowR));
+                    shadowPaint.Alpha += (int)(shadowR / 4.0);
                 }
                 shadowPaint.Alpha = 255;
 
@@ -267,9 +271,18 @@ namespace Forms9Patch.Droid
 
                 canvas.DrawBitmap(result, 0, 0, p);
 
+                shadowBitmap.Dispose();
+                maskBitmap.Dispose();
+                shadowPaint.Dispose();
+                maskPaint.Dispose();
+                resultPaint.Dispose();
+                resultCanvas.Dispose();
+                shadowCanvas.Dispose();
+                maskCanvas.Dispose();
+
             }
 
-            //GC.Collect ();
+            GC.Collect();
 
         }
 

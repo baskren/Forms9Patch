@@ -997,15 +997,16 @@ namespace Forms9Patch
 
         void SetStackLayoutPadding()
         {
+            var padding = OutlineWidth / Display.Scale;
             if (SegmentType == SegmentType.Not || SegmentType == SegmentType.End)
-                _stackLayout.Padding = OutlineWidth;
+                _stackLayout.Padding = padding;
             else
             {
                 if (ParentSegmentsOrientation == StackOrientation.Horizontal)
-                    _stackLayout.Padding = new Thickness(OutlineWidth, OutlineWidth, 0, OutlineWidth);
+                    _stackLayout.Padding = new Thickness(padding, padding, 0, padding);
                 else
-                    _stackLayout.Padding = new Thickness(OutlineWidth, OutlineWidth, OutlineWidth, 0);
-                
+                    _stackLayout.Padding = new Thickness(padding, padding, padding, 0);
+
             }
             //_stackLayout.BackgroundColor = Color.Pink;
         }

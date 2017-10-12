@@ -13,14 +13,14 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms;
 
-namespace Forms9Patch.UWP 
+namespace Forms9Patch.UWP
 {
     public class ImageView : Windows.UI.Xaml.Controls.Grid, IDisposable
     {
         #region Fields
         bool _debugMessages = true;
 
-        RangeLists _rangeLists=null;
+        RangeLists _rangeLists = null;
 
         int _instance;
         int _tileCanvasWidth = 0;
@@ -40,7 +40,7 @@ namespace Forms9Patch.UWP
 
         public Forms9Patch.Image ImageElement
         {
-            get { return _imageElement;}
+            get { return _imageElement; }
             set
             {
                 if (_imageElement != value)
@@ -125,7 +125,7 @@ namespace Forms9Patch.UWP
                 }
 
                 var result = new Xamarin.Forms.Size(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight);
-                if (_rangeLists!=null)
+                if (_rangeLists != null)
                 {
                     result.Width -= 2;
                     result.Height -= 2;
@@ -155,7 +155,7 @@ namespace Forms9Patch.UWP
                         handler = new StreamImageSourceHandler();
                 }
                 Windows.UI.Xaml.Media.ImageSource imagesource = null;
-                if (handler != null && _xfImageSource!=null)
+                if (handler != null && _xfImageSource != null)
                 {
                     try
                     {
@@ -241,7 +241,7 @@ namespace Forms9Patch.UWP
             if (Children.Count == 1 && Children[0] is Windows.UI.Xaml.Controls.Image image)
             {
                 // it's a simple image
-                
+
                 if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.None)
                 {
                     image.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
@@ -261,8 +261,8 @@ namespace Forms9Patch.UWP
 
         internal void GenerateImageLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + ImageElement.Fill +"] W,H=["+Width+","+Height+"] ActualWH=["+ActualWidth+","+ActualHeight+"] size=["+size+"]");
-            if (_sourceBitmap == null )
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + ImageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] size=[" + size + "]");
+            if (_sourceBitmap == null)
                 return;
             //Stopwatch stopwatch = Stopwatch.StartNew();
             RowDefinitions.Clear();
@@ -279,8 +279,8 @@ namespace Forms9Patch.UWP
 
 
             _rangeLists = _sourceBitmap?.NinePatchRanges();
-            bool sourceBitmapIsNinePatch = _rangeLists!=null;
-            _rangeLists = ImageElement.CapInsets.ToRangeLists(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight, _xfImageSource, sourceBitmapIsNinePatch) ?? _rangeLists;  
+            bool sourceBitmapIsNinePatch = _rangeLists != null;
+            _rangeLists = ImageElement.CapInsets.ToRangeLists(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight, _xfImageSource, sourceBitmapIsNinePatch) ?? _rangeLists;
 
             if (ImageElement.Fill == Fill.Tile)
             {
@@ -323,7 +323,7 @@ namespace Forms9Patch.UWP
                 // NinePatch markup was not found
                 RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
                 {
-                    Height = new Windows.UI.Xaml.GridLength(1,Windows.UI.Xaml.GridUnitType.Star)
+                    Height = new Windows.UI.Xaml.GridLength(1, Windows.UI.Xaml.GridUnitType.Star)
                 });
                 ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
                 {
@@ -335,7 +335,7 @@ namespace Forms9Patch.UWP
                     // Source = SoftwareBitmap.CreateCopyFromBuffer(_sourceBitmap.PixelBuffer, BitmapPixelFormat.Bgra8, _sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight);
                     Source = _sourceBitmap
                 };
-                
+
 
                 SetColumn(image, 0);
                 SetRow(image, 0);
@@ -347,11 +347,11 @@ namespace Forms9Patch.UWP
             {
                 int xPatches = _rangeLists.PatchesX.Count;
                 if (xPatches > 0)
-                { 
+                {
                     if (_rangeLists.PatchesX[0].Start > 0)
                         xPatches++;
-                if (_rangeLists.PatchesX.Last<Range>().End < _sourceBitmap.PixelWidth - 1)
-                    xPatches++;
+                    if (_rangeLists.PatchesX.Last<Range>().End < _sourceBitmap.PixelWidth - 1)
+                        xPatches++;
                 }
                 int yPatches = _rangeLists.PatchesY.Count;
                 if (yPatches > 0)
@@ -408,7 +408,7 @@ namespace Forms9Patch.UWP
             }
             //stopwatch.Stop();
             //if (_debugMessages) System.Diagnostics.Debug.WriteLine("GenerateLayout ["+_instance+"]: "+stopwatch.ElapsedMilliseconds);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout["+_instance+"] ");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "] ");
         }
 
         void PatchesForRow(int yPatchRow, int yPatchStart, int yPatchEnd, Windows.UI.Xaml.VerticalAlignment yStretch)
@@ -427,7 +427,7 @@ namespace Forms9Patch.UWP
                 {
                     // this is a column of fixed width cells before this range
                     xPatchStart = xPatchEnd + 1;
-                    xPatchEnd = (int)_rangeLists.PatchesX[xRange].Start-1;
+                    xPatchEnd = (int)_rangeLists.PatchesX[xRange].Start - 1;
                     xWidth = xPatchEnd - xPatchStart + 1;
                     rect = new Windows.Foundation.Rect(xPatchStart, yPatchStart, xWidth, yWidth);
                     image = new Windows.UI.Xaml.Controls.Image
@@ -437,7 +437,7 @@ namespace Forms9Patch.UWP
                         VerticalAlignment = yStretch,
                         Stretch = Windows.UI.Xaml.Media.Stretch.Fill
                     };
-                    SetColumn(image,xPatchCol);
+                    SetColumn(image, xPatchCol);
                     SetRow(image, yPatchRow);
                     Children.Add(image);
                     xPatchCol++;
@@ -450,7 +450,7 @@ namespace Forms9Patch.UWP
                         });
                     }
 
-                    
+
 
                 }
 
@@ -479,11 +479,11 @@ namespace Forms9Patch.UWP
                 }
             }
 
-            if (xPatchEnd < _sourceBitmap.PixelWidth-1)
+            if (xPatchEnd < _sourceBitmap.PixelWidth - 1)
             {
                 // there is a column of fixed width cells after the last range
                 xPatchStart = xPatchEnd + 1;
-                xPatchEnd = _sourceBitmap.PixelWidth-2;
+                xPatchEnd = _sourceBitmap.PixelWidth - 2;
                 xWidth = xPatchEnd - xPatchStart + 1;
                 rect = new Windows.Foundation.Rect(xPatchStart, yPatchStart, xWidth, yWidth);
                 image = new Windows.UI.Xaml.Controls.Image
@@ -508,14 +508,14 @@ namespace Forms9Patch.UWP
             }
         }
 
-        internal void GenerateOutlineLayout(Windows.Foundation.Size size= default(Windows.Foundation.Size))
+        internal void GenerateOutlineLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
 
-            if (RoundedBoxElement==null)
+            if (RoundedBoxElement == null)
                 return;
 
             var radius = RoundedBoxElement.OutlineRadius;
-            bool drawBorder = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
+            bool drawOutline = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
             bool drawFill = RoundedBoxElement.BackgroundColor.A > 0.01;
 
             if (Children.Any((view) => view != _tileCanvas && view is Windows.UI.Xaml.Controls.Canvas))
@@ -523,7 +523,7 @@ namespace Forms9Patch.UWP
                 var oldCanvas = Children.Where((view) => view != _tileCanvas && view is Windows.UI.Xaml.Controls.Canvas).First();
                 Children.Remove(oldCanvas);
             }
-            if (!drawFill && !drawBorder )
+            if (!drawFill && !drawOutline)
                 return;
 
             var visualElement = RoundedBoxElement as VisualElement;
@@ -539,7 +539,7 @@ namespace Forms9Patch.UWP
                 return;
 
             System.Diagnostics.Debug.WriteLine("====================================================================================");
-            System.Diagnostics.Debug.WriteLine("Bounds=["+visualElement.Bounds+"]  width=["+width+"] height=["+height+"]");
+            System.Diagnostics.Debug.WriteLine("Bounds=[" + visualElement.Bounds + "]  width=[" + width + "] height=[" + height + "]");
             //System.Diagnostics.Debug.WriteLine("BackgroundColor=[" + RoundedBoxElement.BackgroundColor + "]");
             //System.Diagnostics.Debug.WriteLine("OutlineColor=[" + RoundedBoxElement.OutlineColor + "]  OutlineWidth=[" + RoundedBoxElement.OutlineWidth + "]");
 
@@ -547,7 +547,7 @@ namespace Forms9Patch.UWP
             var canvas = new Windows.UI.Xaml.Controls.Canvas();
 
             var rect = new Rect(0, 0, width, height);
-            var thickness = RoundedBoxElement.OutlineWidth;
+            var outlineWidth = RoundedBoxElement.OutlineWidth;
 
             SegmentType segmentType = SegmentType.Not;
             var hz = true;
@@ -563,7 +563,7 @@ namespace Forms9Patch.UWP
 
             var vt = !hz;
 
-            var makeRoomForShadow = RoundedBoxElement.HasShadow && !RoundedBoxElement.ShadowInverted;
+            var makeRoomForShadow = RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0.01 && !RoundedBoxElement.ShadowInverted;
 
             var shadowX = Forms9Patch.Settings.ShadowOffset.X;
             var shadowY = Forms9Patch.Settings.ShadowOffset.Y;
@@ -600,80 +600,82 @@ namespace Forms9Patch.UWP
 
 
             // generate background
-            GeometryGroup geometryGroup = null;
-            var outlinePerimeter = perimeter;
             if (drawFill)
             {
+                GeometryGroup fillPath = null;
+                var FillBoundary = perimeter;
                 //System.Diagnostics.Debug.WriteLine("FILL: ");
                 switch (segmentType)
                 {
                     case SegmentType.Not:
-                        outlinePerimeter = RectInset(perimeter, thickness);
+                        FillBoundary = RectInset(perimeter, outlineWidth);
                         break;
                     case SegmentType.Start:
-                        outlinePerimeter = RectInset(perimeter, thickness, thickness, vt ? thickness : 0, hz ? thickness : 0);
+                        FillBoundary = RectInset(perimeter, outlineWidth, outlineWidth, vt ? outlineWidth : 0, hz ? outlineWidth : 0);
                         break;
                     case SegmentType.Mid:
-                        outlinePerimeter = RectInset(perimeter, thickness, thickness, vt ? thickness : 0, hz ? thickness : 0);
+                        FillBoundary = RectInset(perimeter, outlineWidth, outlineWidth, vt ? outlineWidth : 0, hz ? outlineWidth : 0);
                         break;
                     case SegmentType.End:
-                        outlinePerimeter = RectInset(perimeter,  thickness);
+                        FillBoundary = RectInset(perimeter, outlineWidth);
                         break;
                 }
                 if (segmentType == SegmentType.Not)
                 {
                     if (RoundedBoxElement.IsElliptical)
-                        geometryGroup = Ellipse(outlinePerimeter);
+                        fillPath = Ellipse(FillBoundary);
                     else
-                        geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness : 0));
+                        fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? outlineWidth : 0));
                 }
                 else
                 {
                     // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
                     //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
-                    geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness : 0));
+                    fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? outlineWidth : 0));
                 }
                 var path = new Path();
                 path.Fill = new SolidColorBrush(RoundedBoxElement.BackgroundColor.ToWindowsColor());
-                path.Data = geometryGroup;
+                path.Data = fillPath;
                 canvas.Children.Add(path);
             }
 
 
-            if (drawBorder)
+            if (drawOutline)
             {
+                GeometryGroup outlinePath = null;
+                var outlineBoundary = perimeter;
                 switch (segmentType)
                 {
                     case SegmentType.Not:
-                        outlinePerimeter = RectInset(perimeter, thickness / 2);
+                        outlineBoundary = RectInset(perimeter, outlineWidth / 2);
                         break;
                     case SegmentType.Start:
-                        outlinePerimeter = RectInset(perimeter, thickness / 2, thickness / 2, vt ? thickness / 2 : 0, hz ? thickness / 2 : 0);
+                        outlineBoundary = RectInset(perimeter, outlineWidth / 2, outlineWidth / 2, vt ? outlineWidth / 2 : 0, hz ? outlineWidth / 2 : 0);
                         break;
                     case SegmentType.Mid:
-                        outlinePerimeter = RectInset(perimeter, thickness / 2, thickness / 2, vt ? thickness / 2 : 0, hz ? thickness / 2 : 0);
+                        outlineBoundary = RectInset(perimeter, outlineWidth / 2, outlineWidth / 2, vt ? outlineWidth / 2 : 0, hz ? outlineWidth / 2 : 0);
                         break;
                     case SegmentType.End:
-                        outlinePerimeter = RectInset(perimeter, thickness / 2);
+                        outlineBoundary = RectInset(perimeter, outlineWidth / 2);
                         break;
                 }
                 if (segmentType == SegmentType.Not)
                 {
                     if (RoundedBoxElement.IsElliptical)
-                        geometryGroup = Ellipse(outlinePerimeter);
+                        outlinePath = Ellipse(outlineBoundary);
                     else
-                        geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness / 2 : 0));
+                        outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? outlineWidth / 2 : 0));
                 }
                 else
                 {
                     // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
                     //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
-                    geometryGroup = RectangularPerimeterPath(RoundedBoxElement, outlinePerimeter, radius - (drawBorder ? thickness / 2 : 0));
+                    outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? outlineWidth / 2 : 0));
                 }
                 var path = new Path();
                 path.Stroke = new SolidColorBrush(RoundedBoxElement.OutlineColor.ToWindowsColor());
                 path.StrokeThickness = RoundedBoxElement.OutlineWidth;
-                path.Data = geometryGroup;
+                path.Data = outlinePath;
                 canvas.Children.Add(path);
             }
 
@@ -693,7 +695,7 @@ namespace Forms9Patch.UWP
         static Rect RoundRect(Rect rect, StackOrientation orientation, Forms9Patch.SegmentType type)
         {
             return rect;
-            
+
             var left = Math.Ceiling(rect.Left);
             var right = Math.Floor(rect.Right);
             var top = Math.Ceiling(rect.Top);
@@ -733,7 +735,7 @@ namespace Forms9Patch.UWP
                 }
             }
             return new Rect(left, top, right - left, bottom - top);
-            
+
         }
 
         static Rect SegmentAllowanceRect(Rect rect, double allowance, StackOrientation orientation, Forms9Patch.SegmentType type)
@@ -800,7 +802,7 @@ namespace Forms9Patch.UWP
             //System.Diagnostics.Debug.WriteLine("RectangularPerimeterPath rect[" + rect + "] type=[" + type + "] ");
             //System.Diagnostics.Debug.WriteLine("");
 
-            if (type==SegmentType.Not)
+            if (type == SegmentType.Not)
             {
                 pathFigure.SetStartPoint((rect.Left + rect.Right) / 2, rect.Top);
                 pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
@@ -863,10 +865,10 @@ namespace Forms9Patch.UWP
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
-                    pathFigure.SetStartPoint((rect.Left + rect.Right)/2, rect.Top);
+                    pathFigure.SetStartPoint((rect.Left + rect.Right) / 2, rect.Top);
                     pathFigure.AddLineToPoint(rect.Left, rect.Top);
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
-                    pathFigure.AddLineToPoint(rect.Right-radius, rect.Bottom);
+                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
                     if (radius > 0)
                         pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
                     pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
@@ -876,7 +878,7 @@ namespace Forms9Patch.UWP
                 }
                 else
                 {
-                    pathFigure.SetStartPoint((rect.Left + rect.Right)/2, rect.Top);
+                    pathFigure.SetStartPoint((rect.Left + rect.Right) / 2, rect.Top);
                     pathFigure.AddLineToPoint(rect.Left, rect.Top);
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
                     if (radius > 0)
@@ -889,117 +891,6 @@ namespace Forms9Patch.UWP
                 }
             }
 
-            /*
-            if (counterClockWise)
-            {
-                // top center
-                //result.MoveToPoint((Left + Right) / 2.0f, Top);
-                pathFigure.SetStartPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
-
-                // topLeft
-                if (type == SegmentType.Start || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
-                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
-                }
-                else
-                {
-                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
-                }
-
-                // bottom left
-                if (type == SegmentType.Start && orientation == StackOrientation.Horizontal || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
-                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
-
-                // bottom right
-                if (type == SegmentType.End || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
-
-                // top right
-                if (type == SegmentType.End && orientation == StackOrientation.Horizontal || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);                   
-                    //result.AddArcToPoint (rect.Right, rect.Top - radius, rect.Right - radius, rect.Top, radius);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
-
-                // finish
-                pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
-            }
-            else
-            {
-                // leftCenter
-                //result.MoveToPoint(left, (rect.Top + rect.Bottom) / 2.0f);
-                pathFigure.SetStartPoint(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
-
-                // topLeft
-                if (type == SegmentType.Start || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Left, rect.Top + radius);
-                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(Math.PI), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Top, radius);
-                }
-                else
-                {
-                    pathFigure.AddLineToPoint(rect.Left, rect.Top);
-                }
-
-                // top right
-                if (type == SegmentType.End || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Top);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right, rect.Top + radius, radius);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top);
-
-                // bottom right
-                if (type == SegmentType.End || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom - radius);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Bottom, radius);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom);
-
-                // bottom left
-                if (type == SegmentType.Start || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
-                {
-                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Bottom);
-                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left, rect.Bottom - radius, radius);
-                }
-                else
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
-
-                //finish
-                pathFigure.AddLineToPoint(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
-            }
-            */
-
-            // finish
-            //result.AddLineToPoint(startX, startY);
-            //pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2.0f, rect.Top);
-
-
             var geometryGroup = new GeometryGroup
             {
                 Children =
@@ -1016,118 +907,7 @@ namespace Forms9Patch.UWP
             return geometryGroup;
         }
 
-        /*
-        static GeometryGroup OutlinePath(IRoundedBox element, Rect rect, float radius, float lineWidth)
-        {
 
-            //System.Diagnostics.Debug.WriteLine("OutlinePath(rect: " + rect + ", radius: " + radius + ", lineWidth: " + lineWidth + ")");
-
-            lineWidth /= 2.0f;
-            var materialButton = element as MaterialButton;
-            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-            StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
-
-            if (type == SegmentType.Not)
-                return RectangularPerimeterPath(element, rect, radius);
-
-            //var diameter = radius * 2;
-            //var topLeft = new RectF (left, rect.Top, left + diameter, rect.Top + diameter);
-            //var bottomLeft = new RectF (left, rect.Bottom - diameter, left + diameter, rect.Bottom);
-            //var bottomRight = new RectF (rect.Right - diameter, rect.Bottom - diameter, rect.Right, rect.Bottom);
-            //var topRight = new RectF (rect.Right - diameter, rect.Top, rect.Right, rect.Top + diameter);
-
-            rect = RoundRect(rect, orientation, type);
-
-            var pathFigure = new PathFigure();
-
-            if (orientation == StackOrientation.Horizontal)
-            {
-                if (type == SegmentType.Start)
-                {
-                    //result.MoveToPoint(rect.Right + lineWidth, rect.Bottom);
-                    pathFigure.SetStartPoint(rect.Right + lineWidth, rect.Bottom);
-                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Bottom);
-                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(1 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left, rect.Bottom - radius, radius);
-                    pathFigure.AddLineToPoint(rect.Left, rect.Top + radius);
-                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(2 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Top, radius);
-                    pathFigure.AddLineToPoint(rect.Right + lineWidth, rect.Top);
-                }
-                else if (type == SegmentType.Mid)
-                { // mid
-                    //result.MoveToPoint(rect.Right + lineWidth, rect.Bottom);
-                    pathFigure.SetStartPoint(rect.Right + lineWidth, rect.Bottom);
-                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Bottom);
-                    //result.MoveToPoint(left - lineWidth, rect.Top);
-                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Top);
-                    pathFigure.AddLineToPoint(rect.Right + lineWidth, rect.Top);
-                }
-                else
-                { // end
-                    //result.MoveToPoint(left - lineWidth, rect.Top);
-                    pathFigure.SetStartPoint(rect.Left - lineWidth, rect.Top);
-                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Top);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right, rect.Top + radius, radius);
-                    pathFigure.AddLineToPoint(rect.Right, rect.Bottom - radius);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Bottom, radius);
-                    pathFigure.AddLineToPoint(rect.Left - lineWidth, rect.Bottom);
-                }
-            }
-            else
-            { // vertical
-                if (type == SegmentType.Start)
-                {
-                    //result.MoveToPoint(rect.Right, rect.Bottom + lineWidth);
-                    pathFigure.SetStartPoint(rect.Right, rect.Bottom + lineWidth);
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top + radius);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right - radius, rect.Top, radius, SweepDirection.Counterclockwise);
-                    pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
-                    //result.AddRelativeArc(left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left, rect.Top + radius, radius, SweepDirection.Counterclockwise);
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom + lineWidth);
-                }
-                else if (type == SegmentType.Mid)
-                {
-                    //result.MoveToPoint(rect.Right, rect.Bottom + lineWidth);
-                    pathFigure.SetStartPoint(rect.Right, rect.Bottom + lineWidth);
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top - lineWidth);
-                    //result.MoveToPoint(left, rect.Top - lineWidth);
-                    pathFigure.AddLineToPoint(rect.Left, rect.Top - lineWidth);
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom + lineWidth);
-                }
-                else
-                { // end
-                    //result.MoveToPoint(left, rect.Top - lineWidth);
-                    pathFigure.SetStartPoint(rect.Left, rect.Top - lineWidth);
-                    pathFigure.AddLineToPoint(rect.Left, rect.Bottom - radius);
-                    //result.AddRelativeArc(left + radius, rect.Bottom - radius, radius, (nfloat)(2 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Left + radius, rect.Bottom, radius, SweepDirection.Counterclockwise);
-                    pathFigure.AddLineToPoint(rect.Right - radius, rect.Bottom);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(1 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    pathFigure.AddArcToPoint(rect.Right, rect.Bottom - radius, radius, SweepDirection.Counterclockwise);
-                    pathFigure.AddLineToPoint(rect.Right, rect.Top - lineWidth);
-                }
-            }
-            var geometryGroup = new GeometryGroup
-            {
-                Children =
-                        {
-                            new PathGeometry
-                            {
-                                Figures =
-                                {
-                                    pathFigure
-                                }
-                            }
-                        }
-            };
-            return geometryGroup;
-        }
-        */
         #endregion
 
     }

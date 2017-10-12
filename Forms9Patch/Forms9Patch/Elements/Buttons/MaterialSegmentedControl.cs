@@ -113,64 +113,6 @@ namespace Forms9Patch
             set { SetValue(FontFamilyProperty, value); }
         }
 
-        /*
-		/// <summary>
-		/// Backing store for the SegmentedMaterialButton.HasShadow bindable property.
-		/// </summary>
-		/// <remarks></remarks>
-		public static readonly BindableProperty HasShadowProperty = BindableProperty.Create ("HasShadow", typeof(bool), typeof(MaterialSegmentedControl), false);
-		/// <summary>
-		/// Gets or sets a flag indicating if the SegmentedMaterialButton has a shadow displayed. This is a bindable property.
-		/// </summary>
-		/// <value><c>true</c> if this instance has shadow; otherwise, <c>false</c>.</value>
-		public bool HasShadow {
-			get { return (bool)GetValue (HasShadowProperty); }
-			set { SetValue (HasShadowProperty, value); }
-		}
-
-		/// <summary>
-		/// Backing store for the OutlineWidth bindable property.
-		/// </summary>
-		public static readonly BindableProperty OutlineRadiusProperty = RoundedBoxBase.OutlineRadiusProperty;//BindableProperty.Create("OutlineRadius", typeof (float), typeof (MaterialSegmentedControl), 2.0f);
-		/// <summary>
-		/// Gets or sets the width of the outline.
-		/// </summary>
-		/// <value>The width of the outline.</value>
-		public float OutlineRadius {
-			get { return (float) GetValue (OutlineRadiusProperty); }
-			set { SetValue (OutlineRadiusProperty, value); }
-		}
-
-		/// <summary>
-		/// Backing store for the OutlineWidth bindable property.
-		/// </summary>
-		public static readonly BindableProperty OutlineWidthProperty = RoundedBoxBase.OutlineWidthProperty;//BindableProperty.Create("OutlineWidth", typeof (double), typeof (MaterialSegmentedControl), 1.0);
-		/// <summary>
-		/// Gets or sets the width of the outline.
-		/// </summary>
-		/// <value>The width of the outline.</value>
-		public float OutlineWidth {
-			get { return (float) GetValue (OutlineWidthProperty); }
-			set { SetValue (OutlineWidthProperty, value); }
-		}
-
-
-
-		/// <summary>
-		/// Backing store for the MaterialButton.OutlineColor bindable property.
-		/// </summary>
-		public static readonly BindableProperty OutlineColorProperty = RoundedBoxBase.OutlineColorProperty;//BindableProperty.Create("OutlineColor", typeof (Color), typeof (MaterialSegmentedControl), Color.Default);
-		/// <summary>
-		/// Gets or sets the color of the border.
-		/// </summary>
-		/// <value>The color of the border.</value>
-		public Color OutlineColor {
-			get { return (Color)GetValue (OutlineColorProperty);}
-			set { SetValue (OutlineColorProperty, value); }
-		}
-		*/
-
-
         /// <summary>
         /// Backing store for the MaterialButton.BackgroundColor bindable property.
         /// </summary>
@@ -885,8 +827,9 @@ namespace Forms9Patch
                 x = Math.Round(x);
                 y = Math.Round(y);
 
-                double xOffset = hz ? OutlineWidth + (newWidth-OutlineWidth*(count+1)) / count : 0;
-                double yOffset = vt ? OutlineWidth + (newHeight - OutlineWidth * (count + 1)) / count : 0;
+                var outlineWidth = OutlineWidth / Display.Scale;
+                double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
+                double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
                 double sWidth = hz ? xOffset : width;
                 double sHeight = vt ? yOffset : height;
 
@@ -921,8 +864,8 @@ namespace Forms9Patch
                         thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
                         //System.Diagnostics.Debug.WriteLine("MaterialSegmentedControl.LayoutChildren LayoutChildIntoBoundingRegion("+x+","+y+","+thisW+","+thisH+")");
-                        x = Math.Round( (x + (hz ? thisW : 0) ) * Display.Scale) / Display.Scale;
-                        y = Math.Round( (y + (vt ? thisH : 0) ) * Display.Scale)  / Display.Scale;
+                        x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
+                        y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
                     }
                 }
                 //var lastView = Children.Last();
