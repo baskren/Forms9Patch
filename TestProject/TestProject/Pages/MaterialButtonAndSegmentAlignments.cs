@@ -9,13 +9,16 @@ namespace Forms9PatchDemo
 {
     public class MaterialButtonAndSegmentAlignments : ContentPage
     {
-        const float radius = 12;
-        const float width = 10;
+
+        const float radius = 4;
+        const float width = 1;
+        static Color outlineColor = Color.Default; // Color.Red.WithAlpha(0.25);
 
         MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
         {
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Segments =
             {
                 new Segment { Text = "START", },
@@ -28,6 +31,7 @@ namespace Forms9PatchDemo
         {
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Segments =
             {
                 new Segment { Text = "START", },
@@ -41,6 +45,7 @@ namespace Forms9PatchDemo
             GroupToggleBehavior = GroupToggleBehavior.Multiselect,
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Segments =
             {
                 new Segment { Text = "TIGHT" },
@@ -55,6 +60,7 @@ namespace Forms9PatchDemo
             //FontSize = 10,
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Segments =
             {
                 new Segment { HtmlText = "NONE" },
@@ -95,6 +101,7 @@ namespace Forms9PatchDemo
         {
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Text = "Text",
         };
 
@@ -102,6 +109,7 @@ namespace Forms9PatchDemo
         {
             OutlineRadius = radius,
             OutlineWidth = width,
+            OutlineColor = outlineColor,
             Segments =
                         {
                             new Segment
@@ -124,6 +132,7 @@ namespace Forms9PatchDemo
             OutlineRadius = radius,
             OutlineWidth = width,
             Orientation = StackOrientation.Vertical,
+            OutlineColor = outlineColor,
             Segments =
                         {
                             new Segment
@@ -153,9 +162,13 @@ namespace Forms9PatchDemo
             RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
         };
 
+        Xamarin.Forms.Label _outlineWidthLabel = new Xamarin.Forms.Label { Text = "line W:" + width };
+        Xamarin.Forms.Label _outlineRadiusLabel = new Xamarin.Forms.Label { Text = "line R: " + radius };
+
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
         public MaterialButtonAndSegmentAlignments()
         {
+            //BackgroundColor = Color.Orange;
 
             _grid1.Children.Add(new Xamarin.Forms.Label { Text = "HZ", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 0);
             _grid1.Children.Add(_hzAlignmentElement, 1, 0);
@@ -170,9 +183,9 @@ namespace Forms9PatchDemo
             _grid2.Children.Add(_spacingSlider, 0, 1);
             _grid2.Children.Add(new Xamarin.Forms.Label { Text = "Imposed Ht:" }, 1, 0);
             _grid2.Children.Add(_imposedHeightSwitch, 1, 1);
-            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "OutlineWidth:" }, 2, 0);
+            _grid2.Children.Add(_outlineWidthLabel, 2, 0);
             _grid2.Children.Add(_outlineWidthSlider, 2, 1);
-            _grid2.Children.Add(new Xamarin.Forms.Label { Text = "OutlineRadius:" }, 3, 0);
+            _grid2.Children.Add(_outlineRadiusLabel, 3, 0);
             _grid2.Children.Add(_outlineRadiusSlider, 3, 1);
 
 
@@ -192,7 +205,8 @@ namespace Forms9PatchDemo
 
                         _iconTextAndTextButton,
                         _hzSegmentsElement,
-                        _vtSegmentsElement
+                        _vtSegmentsElement,
+                        new Xamarin.Forms.Label { Text="Display.Scale=["+Display.Scale+"]" }
                     }
                 }
             };
@@ -280,24 +294,28 @@ namespace Forms9PatchDemo
 
             _outlineRadiusSlider.ValueChanged += (sender, e) =>
             {
-                _hzAlignmentElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
-                _vtAlignmentElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
-                _iconTextAndTextButton.OutlineRadius = (float) _outlineRadiusSlider.Value;
-                _optionsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
-                _iconElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
-                _hzSegmentsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
-                _vtSegmentsElement.OutlineRadius = (float)_outlineRadiusSlider.Value;
+                int value = (int)_outlineRadiusSlider.Value;
+                _hzAlignmentElement.OutlineRadius = value;
+                _vtAlignmentElement.OutlineRadius = value;
+                _iconTextAndTextButton.OutlineRadius = value;
+                _optionsElement.OutlineRadius = value;
+                _iconElement.OutlineRadius = value;
+                _hzSegmentsElement.OutlineRadius = value;
+                _vtSegmentsElement.OutlineRadius = value;
+                _outlineRadiusLabel.Text = "line R: " + value;
             };
 
             _outlineWidthSlider.ValueChanged += (sender, e) =>
             {
-                _hzAlignmentElement.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _vtAlignmentElement.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _iconTextAndTextButton.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _optionsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _iconElement.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _hzSegmentsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
-                _vtSegmentsElement.OutlineWidth = (float)_outlineWidthSlider.Value;
+                int value = (int)_outlineWidthSlider.Value;
+                _hzAlignmentElement.OutlineWidth = value;
+                _vtAlignmentElement.OutlineWidth = value;
+                _iconTextAndTextButton.OutlineWidth = value;
+                _optionsElement.OutlineWidth = value;
+                _iconElement.OutlineWidth = value;
+                _hzSegmentsElement.OutlineWidth = value;
+                _vtSegmentsElement.OutlineWidth = value;
+                _outlineWidthLabel.Text = "line W: " + value;
             };
 
             var defaultHzAlignment = _iconTextAndTextButton.HorizontalTextAlignment;

@@ -5,6 +5,7 @@ using Forms9Patch;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using Android.Util;
+using Forms9Patch.Enums;
 
 namespace Forms9Patch.Droid
 {
@@ -37,6 +38,8 @@ namespace Forms9Patch.Droid
 
         public override void Draw(Canvas canvas)
         {
+            if (RoundedBoxElement is MaterialSegmentedControl)
+                return;
 
             //var radius = RoundedBoxElement.OutlineRadius;// * Display.Scale;
             bool drawOutline = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
@@ -58,7 +61,7 @@ namespace Forms9Patch.Droid
                 return;
 
             var rect = new RectF(Bounds.Left, Bounds.Top, Bounds.Right, Bounds.Bottom); //new Rect(0, 0, width, height);
-            var outlineWidth = RoundedBoxElement.OutlineWidth;
+            var outlineWidth = RoundedBoxElement.OutlineWidth * Display.Scale;
 
             SegmentType segmentType = SegmentType.Not;
             var hz = true;
@@ -79,11 +82,11 @@ namespace Forms9Patch.Droid
             var shadowY = (float)Forms9Patch.Settings.ShadowOffset.Y * Display.Scale;
             var shadowR = (float)Forms9Patch.Settings.ShadowRadius * Display.Scale;
 
-            var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToAndroid();
-
             var shadowPadding = RoundedBoxBase.ShadowPadding(RoundedBoxElement as Layout);
 
             RectF perimeter = rect;
+
+            System.Diagnostics.Debug.WriteLine("Bounds=[" + Bounds + "]");
 
             // exterior shadow
             if (makeRoomForShadow)
@@ -134,15 +137,16 @@ namespace Forms9Patch.Droid
             // generate background
             if (drawFill)
             {
-                CGPath fillPath = RoundedBoxPath(RoundedBoxElement, perimeter, outlineWidth);
+                CGPath fillPath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Fill);
                 p.Color = RoundedBoxElement.BackgroundColor.ToAndroid();
+                //p.Color = Android.Graphics.Color.Blue;
                 p.SetStyle(Paint.Style.Fill);
                 canvas.DrawPath(fillPath, p);
             }
 
             if (drawOutline)
             {
-                CGPath outlinePath = RoundedBoxPath(RoundedBoxElement, perimeter, outlineWidth / 2);
+                CGPath outlinePath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Outline);
                 p.StrokeWidth = (outlineWidth);
                 p.Color = RoundedBoxElement.OutlineColor.ToAndroid();
                 p.SetStyle(Paint.Style.Stroke);
@@ -387,8 +391,11 @@ namespace Forms9Patch.Droid
         }
 
 
-        static CGPath RoundedBoxPath(IRoundedBox roundedBox, RectF perimeter, float offset)
+        static CGPath RoundedBoxPath(IRoundedBox roundedBox, RectF perimeter, RoundRectPath pathType)
         {
+            var offset = roundedBox.OutlineWidth * Display.Scale;
+            if (pathType == RoundRectPath.Outline)
+                offset /= 2;
             bool drawOutline = roundedBox.OutlineWidth > 0.05 && roundedBox.OutlineColor.A > 0.01;
             CGPath result = default(CGPath);
             RectF boundary = default(RectF);
@@ -445,6 +452,17 @@ namespace Forms9Patch.Droid
         static RectF RectInset(RectF rect, float left, float top, float right, float bottom)
         {
             return new RectF(rect.Left + left, rect.Top + top, rect.Right - right, rect.Bottom - bottom);
+            /*
+            var newLeft = (float)Math.Round((rect.Left + left) * Display.Scale) / Display.Scale;
+            var newTop = (float)Math.Round((rect.Top + top) * Display.Scale) / Display.Scale;
+            var newRight = (float)Math.Round((rect.Right - right) * Display.Scale) / Display.Scale;
+            var newBottom = (float)Math.Round((rect.Bottom - bottom) * Display.Scale) / Display.Scale;
+
+            var newWidth = newRight - newLeft;
+            var newHeight = newBottom - newTop;
+
+            return new RectF(newLeft, newTop, newWidth, newHeight);
+            */
         }
 
         internal static CGPath PerimeterPath(IRoundedBox element, RectF rect, float radius, bool counterClockWise = true)

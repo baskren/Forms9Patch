@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using System;
+using Forms9Patch.Enums;
 
 namespace Forms9Patch.iOS
 {
@@ -117,21 +118,152 @@ namespace Forms9Patch.iOS
         /// <param name="rect">Rect.</param>
         public override void Draw(CGRect rect)
         {
-            System.Diagnostics.Debug.WriteLine("rect=[" + rect + "]");
+            //System.Diagnostics.Debug.WriteLine("rect=[" + rect + "]");
+
             if (_imageViewManager.HasBackgroundImage)
             {
                 _imageViewManager.Draw(rect);
                 base.Draw(rect);
                 return;
             }
-            var iRoundedBox = Element as IRoundedBox;
-            if (iRoundedBox == null)
+
+            var materialSegmentedControl = Element as MaterialSegmentedControl;
+            if (materialSegmentedControl != null)
+            {
+                base.Draw(rect);
+                return;
+            }
+
+            var RoundedBoxElement = Element as IRoundedBox;
+            if (RoundedBoxElement == null)
             {
                 base.Draw(rect);
                 return;
             }
 
             ContentMode = UIViewContentMode.Redraw;
+
+            var radius = RoundedBoxElement.OutlineRadius;
+            var backgroundColor = (Color)Element.GetValue(VisualElement.BackgroundColorProperty);
+            var outlineColor = (Color)Element.GetValue(RoundedBoxBase.OutlineColorProperty);
+            var outlineWidth = (nfloat)(Math.Max(0, (float)Element.GetValue(RoundedBoxBase.OutlineWidthProperty)));
+
+            bool drawOutline = outlineWidth > 0.05 && outlineColor.A > 0.01;
+            bool drawFill = RoundedBoxElement.BackgroundColor.A > 0.01;
+
+            var visualElement = RoundedBoxElement as VisualElement;
+
+            if (rect.Width <= 0 || rect.Height <= 0)
+            {
+                base.Draw(rect);
+                return;
+            }
+
+            SegmentType segmentType = SegmentType.Not;
+            var hz = true;
+            if (RoundedBoxElement is MaterialButton materialButton)
+            {
+                segmentType = materialButton.SegmentType;
+                hz = materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
+            }
+            else
+                materialButton = null;
+
+            var vt = !hz;
+
+
+            var makeRoomForShadow = RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0.01;// && !RoundedBoxElement.ShadowInverted;
+
+            var shadowX = (float)Forms9Patch.Settings.ShadowOffset.X * Display.Scale;
+            var shadowY = (float)Forms9Patch.Settings.ShadowOffset.Y * Display.Scale;
+            var shadowR = (float)Forms9Patch.Settings.ShadowRadius * Display.Scale;
+
+            var shadowPadding = RoundedBoxBase.ShadowPadding(RoundedBoxElement as Layout);
+
+            var perimeter = rect;
+
+            using (var g = UIGraphics.GetCurrentContext())
+            {
+                g.SaveState();
+                var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToCGColor();
+
+
+                if (makeRoomForShadow)
+                {
+                    var shadowPad = Forms9Patch.RoundedBoxBase.ShadowPadding(Element as Layout);
+                    perimeter = new CGRect(rect.Left + shadowPad.Left, rect.Top + shadowPad.Top, rect.Width - shadowPad.HorizontalThickness, rect.Height - shadowPad.VerticalThickness);
+                    if (!RoundedBoxElement.ShadowInverted)
+                    {
+                        if (segmentType != SegmentType.Not)
+                        {
+                            // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
+                            //var clipRect = SegmentAllowanceRect (perimeter, 20, orientation, type);
+                            double allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
+                            CGRect result;
+                            if (segmentType == SegmentType.Start)
+                                result = new CGRect(perimeter.Left - allowance, perimeter.Top - allowance, perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                            else if (segmentType == SegmentType.Mid)
+                                result = new CGRect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + (hz ? 0 : 2 * allowance), perimeter.Height + (vt ? 0 : 2 * allowance));
+                            else
+                                result = new CGRect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                            //Console.WriteLine ("clipRect:["+result.Left+", "+result.Top+", "+result.Width+", "+result.Height+"]");
+                            var clipPath = CGPath.FromRect(result);
+                            g.AddPath(clipPath);
+                            g.Clip();
+                        }
+                        g.SetShadow(new CGSize(shadowX, shadowY), shadowR, shadowColor);
+                    }
+                }
+
+                // generate background
+                if (drawFill)
+                {
+                    CGPath fillPath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Fill);
+                    g.SetFillColor(RoundedBoxElement.BackgroundColor.ToCGColor());
+                    g.AddPath(fillPath);
+                    g.FillPath();
+                }
+
+                if (drawOutline)
+                {
+                    CGPath outlinePath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Outline);
+                    g.SetLineWidth(outlineWidth);
+                    g.SetStrokeColor(outlineColor.ToCGColor());
+                    g.AddPath(outlinePath);
+                    g.StrokePath();
+                }
+
+                // interior shadow
+                if (RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0 && RoundedBoxElement.ShadowInverted)
+                {
+                    var orientation = materialButton.ParentSegmentsOrientation;
+
+                    var insetShadowPath = CGPath.FromRect(rect.Inset(-40, -40));
+                    CGRect newPerimenter = SegmentAllowanceRect(perimeter, 20, hz, segmentType);
+                    /*
+                    if (isElliptical)
+                        perimeterPath = CGPath.EllipseFromRect(newPerimenter);
+                    else
+                        perimeterPath = RectangularPerimeterPath(RoundedBoxElement, newPerimenter, outlineRadius);
+                        */
+                    var interiorShadowPath = RoundedBoxPath(RoundedBoxElement, newPerimenter, 0);
+                    insetShadowPath.AddPath(interiorShadowPath);
+                    insetShadowPath.CloseSubpath();
+                    g.AddPath(interiorShadowPath);
+                    g.Clip();
+                    shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToCGColor();
+                    g.SetShadow(new CGSize(shadowX, shadowY), shadowR, shadowColor);
+                    g.SetFillColor(shadowColor);
+                    g.SaveState();
+                    g.AddPath(insetShadowPath);
+                    g.EOFillPath();
+                    g.RestoreState();
+                }
+
+                g.RestoreState();
+            }
+            base.Draw(rect);
+            /*
 
             var backgroundColor = (Color)Element.GetValue(VisualElement.BackgroundColorProperty);
             var outlineColor = (Color)Element.GetValue(RoundedBoxBase.OutlineColorProperty);
@@ -212,14 +344,14 @@ namespace Forms9Patch.iOS
                         if (isElliptical)
                             perimeterPath = CGPath.EllipseFromRect(perimeter);
                         else
-                            perimeterPath = RectangularPerimeterPath(iRoundedBox, perimeter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0)));
+                            perimeterPath = RectangularPerimeterPath(RoundedBoxElement, perimeter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0)));
                         //Console.WriteLine ("periPath: [" + perimeter.Left + ", " + perimeter.Top + ", " + perimeter.Width + ", " + perimeter.Height + "]");
                     }
                     else
                     {
                         // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
                         CGRect newPerimenter = SegmentAllowanceRect(perimeter, 20, orientation, type);
-                        perimeterPath = RectangularPerimeterPath(iRoundedBox, newPerimenter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0)));
+                        perimeterPath = RectangularPerimeterPath(RoundedBoxElement, newPerimenter, (float)(outlineRadius + (outlineColor.A > 0 ? outlineWidth / 2.0f : 0)));
                         //Console.WriteLine ("periPath: ["+newPerimenter.Left+", "+newPerimenter.Top+", "+newPerimenter.Width+", "+newPerimenter.Height+"]");
                     }
                     g.AddPath(perimeterPath);
@@ -245,7 +377,7 @@ namespace Forms9Patch.iOS
                     if (isElliptical)
                         outlinePath = CGPath.EllipseFromRect(perimeter);
                     else
-                        outlinePath = OutlinePath(iRoundedBox, perimeter, outlineRadius, outlineWidth);
+                        outlinePath = OutlinePath(RoundedBoxElement, perimeter, outlineRadius, outlineWidth);
                     g.AddPath(outlinePath);
                     g.StrokePath();
                 }
@@ -297,7 +429,7 @@ namespace Forms9Patch.iOS
                     if (isElliptical)
                         perimeterPath = CGPath.EllipseFromRect(newPerimenter);
                     else
-                        perimeterPath = RectangularPerimeterPath(iRoundedBox, newPerimenter, outlineRadius);
+                        perimeterPath = RectangularPerimeterPath(RoundedBoxElement, newPerimenter, outlineRadius);
                     insetShadowPath.AddPath(perimeterPath);
                     insetShadowPath.CloseSubpath();
                     g.AddPath(perimeterPath);
@@ -314,8 +446,10 @@ namespace Forms9Patch.iOS
                 g.RestoreState();
             }
             base.Draw(rect);
+            */
         }
 
+        /*
         static CGRect SegmentAllowanceRect(CGRect rect, double allowance, StackOrientation orientation, SegmentType type)
         {
             CGRect result;
@@ -337,13 +471,214 @@ namespace Forms9Patch.iOS
             System.Diagnostics.Debug.WriteLine("SegmentAllowanceRect result=[" + result + "]");
             return result;
         }
+        */
+
+        static CGRect SegmentAllowanceRect(CGRect rect, nfloat allowance, bool hz, SegmentType type)
+        {
+            var vt = !hz;
+            CGRect result;
+            switch (type)
+            {
+                case SegmentType.Start:
+                    result = new CGRect(rect.Left, rect.Top, rect.Width + (hz ? allowance : 0), rect.Height + (vt ? allowance : 0));
+                    break;
+                case SegmentType.Mid:
+                    result = new CGRect(rect.Left - (hz ? allowance : 0), rect.Top - (vt ? allowance : 0), rect.Width + (hz ? allowance * 2 : 0), rect.Height + (vt ? allowance * 2 : 0));
+                    break;
+                case SegmentType.End:
+                    result = new CGRect(rect.Left - (hz ? allowance : 0), rect.Top - (vt ? allowance : 0), rect.Width + (hz ? allowance : 0), rect.Height + (vt ? allowance : 0));
+                    break;
+                default:
+                    result = rect;
+                    break;
+            }
+            //System.Diagnostics.Debug.WriteLine("SegmentAllowanceRect result=[" + result + "]");
+            return result;
+        }
+
+
+        static CGRect RectInset(CGRect rect, float inset)
+        {
+            return RectInset(rect, inset, inset, inset, inset);
+        }
 
         static CGRect RectInset(CGRect rect, double left, double top, double right, double bottom)
         {
-            return new CGRect(rect.X + left, rect.Y + top, rect.Width - left - right, rect.Height - top - bottom);
+
+            var newLeft = (nfloat)Math.Round((rect.X + left) * Display.Scale) / Display.Scale;
+            var newTop = (nfloat)Math.Round((rect.Y + top) * Display.Scale) / Display.Scale;
+            var newRight = (nfloat)Math.Round((rect.Right - right) * Display.Scale) / Display.Scale;
+            var newBottom = (nfloat)Math.Round((rect.Bottom - bottom) * Display.Scale) / Display.Scale;
+
+            var newWidth = newRight - newLeft;
+            var newHeight = newBottom - newTop;
+
+            return new CGRect(newLeft, newTop, newWidth, newHeight);
+
+            //return new CGRect(rect.X + left, rect.Y + top, rect.Width - left - right, rect.Height - top - bottom);
         }
 
-        internal static CGPath RectangularPerimeterPath(IRoundedBox element, CGRect rect, float radius, bool counterClockWise = true)
+
+        static readonly nfloat a90 = (nfloat)(Math.PI / 2.0);
+        static readonly nfloat a180 = (nfloat)Math.PI;
+        static readonly nfloat a270 = (nfloat)(a90 * 3);
+
+
+        static CGPath RoundedBoxPath(IRoundedBox roundedBox, CGRect perimeter, RoundRectPath pathType)
+        {
+            var offset = roundedBox.OutlineWidth;
+            if (pathType == RoundRectPath.Outline)
+                offset /= 2;
+            bool drawOutline = roundedBox.OutlineWidth > 0.05 && roundedBox.OutlineColor.A > 0.01;
+            CGPath result = default(CGPath);
+            CGRect boundary = default(CGRect);
+            var materialButton = roundedBox as MaterialButton;
+            var radius = roundedBox.OutlineRadius; // * Display.Scale;
+            var hz = materialButton == null || materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
+            var vt = !hz;
+            var segmentType = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            switch (segmentType)
+            {
+                case SegmentType.Not:
+                    boundary = RectInset(perimeter, offset);
+                    break;
+                case SegmentType.Start:
+                    boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
+                    break;
+                case SegmentType.Mid:
+                    boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
+                    break;
+                case SegmentType.End:
+                    boundary = RectInset(perimeter, offset);
+                    break;
+            }
+            if (segmentType == SegmentType.Not)
+            {
+                if (roundedBox.IsElliptical)
+                    result = Ellipse(boundary);
+                else
+                    result = RectangularPerimeterPath(roundedBox, boundary, radius - (drawOutline ? offset : 0));
+            }
+            else
+                result = RectangularPerimeterPath(roundedBox, boundary, radius - (drawOutline ? offset : 0));
+            return result;
+        }
+
+
+        static CGPath Ellipse(CGRect rect)
+        {
+            return CGPath.EllipseFromRect(rect);
+        }
+
+        internal static CGPath RectangularPerimeterPath(Forms9Patch.IRoundedBox element, CGRect rect, float radius)
+        {
+            radius = Math.Max(radius, 0);
+
+            var materialButton = element as MaterialButton;
+            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
+
+            var path = new CGPath();
+
+            if (type == SegmentType.Not)
+            {
+                path.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                path.AddLineToPoint(rect.Left + radius, rect.Top);
+                if (radius > 0)
+                    path.AddRelativeArc(rect.Left + radius, rect.Top + radius, radius, a270, -a90);
+                path.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                if (radius > 0)
+                    path.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, a180, -a90);
+                path.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                if (radius > 0)
+                    path.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, a90, -a90);
+                path.AddLineToPoint(rect.Right, rect.Top + radius);
+                if (radius > 0)
+                    path.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, -a90);
+                path.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+            }
+            else if (type == SegmentType.Start)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    path.MoveToPoint(rect.Right, rect.Top);
+                    path.AddLineToPoint(rect.Left + radius, rect.Top);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Left + radius, rect.Top + radius, radius, a270, -a90);
+                    path.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, a180, -a90);
+                    path.AddLineToPoint(rect.Right, rect.Bottom);
+                }
+                else
+                {
+                    path.MoveToPoint(rect.Right, rect.Bottom);
+                    path.AddLineToPoint(rect.Right, rect.Top + radius);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, -a90);
+                    path.AddLineToPoint(rect.Left + radius, rect.Top);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Left + radius, rect.Top + radius, radius, a270, -a90);
+                    path.AddLineToPoint(rect.Left, rect.Bottom);
+                }
+            }
+            else if (type == SegmentType.Mid)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    path.MoveToPoint(rect.Right, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Bottom);
+                    path.AddLineToPoint(rect.Right, rect.Bottom);
+                }
+                else
+                {
+                    path.MoveToPoint(rect.Right, rect.Bottom);
+                    path.AddLineToPoint(rect.Right, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Bottom);
+                }
+            }
+            else if (type == SegmentType.End)
+            {
+                if (orientation == StackOrientation.Horizontal)
+                {
+                    path.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Bottom);
+                    path.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, a90, -a90);
+                    path.AddLineToPoint(rect.Right, rect.Top + radius);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, -a90);
+                    path.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                }
+                else
+                {
+                    path.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Top);
+                    path.AddLineToPoint(rect.Left, rect.Bottom - radius);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, a180, -a90);
+                    path.AddLineToPoint(rect.Right - radius, rect.Bottom);
+                    if (radius > 0)
+                        path.AddRelativeArc(rect.Right - radius, rect.Bottom - radius, radius, a90, -a90);
+                    path.AddLineToPoint(rect.Right, rect.Top);
+                    path.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
+                }
+            }
+
+            return path;
+        }
+
+
+
+
+
+
+
+        internal static CGPath OldRectangularPerimeterPath(IRoundedBox element, CGRect rect, float radius, bool counterClockWise = true)
         {
             var materialButton = element as MaterialButton;
             SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
