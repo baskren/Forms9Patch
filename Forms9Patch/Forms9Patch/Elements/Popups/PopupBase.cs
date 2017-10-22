@@ -427,17 +427,7 @@ namespace Forms9Patch
                     if (RootPage == null)
                         throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
                     RootPage?.AddPopup(this);
-                    //if (Device.RuntimePlatform == Device.Android)
-                    if (Device.OS == TargetPlatform.Android)
-                    {
-                        Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
-                        {
-                            base.IsVisible = true;
-                            return false;
-                        });
-                    }
-                    else
-                        base.IsVisible = true;
+                    base.IsVisible = true;
                 }
                 else
                 {
@@ -481,7 +471,7 @@ namespace Forms9Patch
         /// <param name="height">Height.</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //System.Diagnostics.Debug.WriteLine("{0}[{1}] ", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+            System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
             {
                 LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x, y, width, height));

@@ -539,7 +539,7 @@ namespace Forms9Patch.UWP
                 return;
 
             System.Diagnostics.Debug.WriteLine("====================================================================================");
-            System.Diagnostics.Debug.WriteLine("Bounds=[" + visualElement.Bounds + "]  width=[" + width + "] height=[" + height + "]");
+            //System.Diagnostics.Debug.WriteLine("Bounds=[" + visualElement.Bounds + "]  width=[" + width + "] height=[" + height + "]");
             //System.Diagnostics.Debug.WriteLine("BackgroundColor=[" + RoundedBoxElement.BackgroundColor + "]");
             //System.Diagnostics.Debug.WriteLine("OutlineColor=[" + RoundedBoxElement.OutlineColor + "]  OutlineWidth=[" + RoundedBoxElement.OutlineWidth + "]");
 
