@@ -118,6 +118,16 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="balloons.jpg" />
     <Content Include="cat.jpg" />
+    <Content Include="five.png" />
+    <Content Include="five%40¾x.png" />
+    <Content Include="five%401½x.png" />
+    <Content Include="five%402x.png" />
+    <Content Include="five%403x.png" />
+    <Content Include="fivePlus.png" />
+    <Content Include="fivePlus%40¾x.png" />
+    <Content Include="fivePlus%401½x..png" />
+    <Content Include="fivePlus%402x..png" />
+    <Content Include="fivePlus%403x..png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

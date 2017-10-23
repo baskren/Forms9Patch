@@ -68,8 +68,9 @@ namespace Forms9Patch.UWP
 
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName ||
-                e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName ||
+            if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName)
+                SetSourceAsync();
+            else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName ||
                 e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName ||
                 e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName)
                 GenerateImageLayout();
@@ -264,11 +265,9 @@ namespace Forms9Patch.UWP
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "]  Fill=[" + ImageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] size=[" + size + "]");
             if (_sourceBitmap == null)
                 return;
-            //Stopwatch stopwatch = Stopwatch.StartNew();
             RowDefinitions.Clear();
             ColumnDefinitions.Clear();
 
-            //Children.Clear();
             if (Children.Contains(_tileCanvas))
                 Children.Remove(_tileCanvas);
             if (Children.Any((view) => view is Windows.UI.Xaml.Controls.Image))
@@ -306,9 +305,6 @@ namespace Forms9Patch.UWP
                     if (i > _tileCanvasWidth)
                         _tileCanvasWidth = i;
                 }
-                //var softBitmap = SoftwareBitmap.CreateCopyFromBuffer(_sourceBitmap.PixelBuffer, BitmapPixelFormat.Bgra8, _sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight);
-                //var source = new SoftwareBitmapSource();
-                //await source.SetBitmapAsync(softBitmap);
                 Children.Add(_tileCanvas);
                 _tileCanvas.Height = height;
                 _tileCanvas.Width = width;
@@ -345,6 +341,7 @@ namespace Forms9Patch.UWP
             }
             else
             {
+
                 int xPatches = _rangeLists.PatchesX.Count;
                 if (xPatches > 0)
                 {
@@ -366,6 +363,11 @@ namespace Forms9Patch.UWP
                 int yPatchStart;
                 int yPatchEnd = 0;
 
+                List<int> rowHeights = new List<int>();
+                List<int> minRowHeights = new List<int>();
+
+                int minHeight = 0;
+                int rowHeight;
                 for (int yRange = 0; yRange < _rangeLists.PatchesY.Count; yRange++)
                 {
                     if (_rangeLists.PatchesY[yRange].Start > 0)
@@ -376,10 +378,10 @@ namespace Forms9Patch.UWP
                         PatchesForRow(yPatchRow, yPatchStart, yPatchEnd, Windows.UI.Xaml.VerticalAlignment.Top);
                         yPatchRow++;
 
-                        RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
-                        {
-                            Height = new Windows.UI.Xaml.GridLength(yPatchEnd - yPatchStart + 1),
-                        });
+                        rowHeight = yPatchEnd - yPatchStart + 1;
+                        rowHeights.Add(rowHeight);
+                        minRowHeights.Add(rowHeight);
+                        minHeight += rowHeight;
                     }
 
                     yPatchStart = (int)_rangeLists.PatchesY[yRange].Start;
@@ -387,10 +389,9 @@ namespace Forms9Patch.UWP
                     PatchesForRow(yPatchRow, yPatchStart, yPatchEnd, Windows.UI.Xaml.VerticalAlignment.Stretch);
                     yPatchRow++;
 
-                    RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
-                    {
-                        Height = new Windows.UI.Xaml.GridLength(yPatchEnd - yPatchStart + 1, Windows.UI.Xaml.GridUnitType.Star),
-                    });
+                    rowHeight = yPatchEnd - yPatchStart + 1;
+                    rowHeights.Add(rowHeight);
+                    minRowHeights.Add(0);
                 }
 
                 if (yPatchEnd < _sourceBitmap.PixelHeight - 1)
@@ -400,14 +401,24 @@ namespace Forms9Patch.UWP
                     yPatchEnd = _sourceBitmap.PixelHeight - 2;
                     PatchesForRow(yPatchRow, yPatchStart, yPatchEnd, Windows.UI.Xaml.VerticalAlignment.Top);
 
-                    RowDefinitions.Add(new Windows.UI.Xaml.Controls.RowDefinition
+                    rowHeight = yPatchEnd - yPatchStart + 1;
+                    rowHeights.Add(rowHeight);
+                    minRowHeights.Add(rowHeight);
+                    minHeight += rowHeight;
+                }
+
+                bool scaledRows = minHeight > ActualHeight;
+                for (int row= 0; row < rowHeights.Count; row++)
+                {
+                    double height = scaledRows ? minRowHeights[row] * ActualHeight / minHeight : rowHeights[row];
+                    var gridLenth = new Windows.UI.Xaml.GridLength(height, minRowHeights[row] == 0 ? Windows.UI.Xaml.GridUnitType.Star : Windows.UI.Xaml.GridUnitType.Pixel);
+                    var rowDefinition = new Windows.UI.Xaml.Controls.RowDefinition
                     {
-                        Height = new Windows.UI.Xaml.GridLength(yPatchEnd - yPatchStart + 1),
-                    });
+                        Height = gridLenth
+                    };
+                    RowDefinitions.Add(rowDefinition);
                 }
             }
-            //stopwatch.Stop();
-            //if (_debugMessages) System.Diagnostics.Debug.WriteLine("GenerateLayout ["+_instance+"]: "+stopwatch.ElapsedMilliseconds);
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.GenerateLayout[" + _instance + "] ");
         }
 
@@ -420,6 +431,10 @@ namespace Forms9Patch.UWP
 
             Windows.Foundation.Rect rect;
             Windows.UI.Xaml.Controls.Image image;
+
+            List<int> colWidths = new List<int>();
+            List<int> minColWidths = new List<int>();
+            int minWidth = 0;
 
             for (int xRange = 0; xRange < _rangeLists.PatchesX.Count; xRange++)
             {
@@ -442,6 +457,7 @@ namespace Forms9Patch.UWP
                     Children.Add(image);
                     xPatchCol++;
 
+                    /*
                     if (ColumnDefinitions.Count < xPatchCol)
                     {
                         ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
@@ -449,8 +465,12 @@ namespace Forms9Patch.UWP
                             Width = new Windows.UI.Xaml.GridLength(xWidth)
                         });
                     }
+                    */
 
 
+                    colWidths.Add(xWidth);
+                    minColWidths.Add(xWidth);
+                    minWidth += xWidth;
 
                 }
 
@@ -470,6 +490,7 @@ namespace Forms9Patch.UWP
                 Children.Add(image);
                 xPatchCol++;
 
+                /*
                 if (ColumnDefinitions.Count < xPatchCol)
                 {
                     ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
@@ -477,6 +498,10 @@ namespace Forms9Patch.UWP
                         Width = new Windows.UI.Xaml.GridLength(xWidth, Windows.UI.Xaml.GridUnitType.Star)
                     });
                 }
+                */
+
+                colWidths.Add(xWidth);
+                minColWidths.Add(0);
             }
 
             if (xPatchEnd < _sourceBitmap.PixelWidth - 1)
@@ -498,6 +523,7 @@ namespace Forms9Patch.UWP
                 Children.Add(image);
                 xPatchCol++;
 
+                /*
                 if (ColumnDefinitions.Count < xPatchCol)
                 {
                     ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
@@ -505,14 +531,37 @@ namespace Forms9Patch.UWP
                         Width = new Windows.UI.Xaml.GridLength(xWidth)
                     });
                 }
+                */
+                colWidths.Add(xWidth);
+                minColWidths.Add(xWidth);
+                minWidth += xWidth;
             }
+
+            if (ColumnDefinitions.Count < xPatchCol)
+            {
+                bool scaledColumns = minWidth > ActualWidth;
+                for (int col = 0; col < colWidths.Count; col++)
+                {
+                    double height = scaledColumns ? minColWidths[col] * ActualHeight / minWidth : colWidths[col];
+                    var gridLenth = new Windows.UI.Xaml.GridLength(height, minColWidths[col] == 0 ? Windows.UI.Xaml.GridUnitType.Star : Windows.UI.Xaml.GridUnitType.Pixel);
+                    var colDefinition = new Windows.UI.Xaml.Controls.ColumnDefinition
+                    {
+                        Width = gridLenth
+                    };
+                    ColumnDefinitions.Add(colDefinition);
+                }
+            }
+
         }
 
         internal void GenerateOutlineLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
-
-            if (RoundedBoxElement == null)
+            if (RoundedBoxElement == null || ImageElement!=null)
                 return;
+
+            if (RoundedBoxElement is MaterialSegmentedControl materialSegmentedControl)
+                return;
+
 
             var radius = RoundedBoxElement.OutlineRadius;
             bool drawOutline = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;

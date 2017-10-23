@@ -76,6 +76,8 @@ namespace Forms9Patch.UWP
         {
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
                 return;
+            else if (e.PropertyName == "BackgroundImage")
+                Control.ImageElement = Element?.BackgroundImage;
             base.OnElementPropertyChanged(sender, e);
         }
 
