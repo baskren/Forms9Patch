@@ -21,7 +21,7 @@ namespace Forms9Patch.UWP
         #region Fields
         bool _disposed;
 
-        bool _debugMessages=true;
+        bool _debugMessages=false;
 
         static int _instances;
         int _instance;
@@ -46,6 +46,14 @@ namespace Forms9Patch.UWP
         }
         #endregion
 
+
+        public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
+        {
+            if (_debugMessages)  System.Diagnostics.Debug.WriteLine("["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] constraints=["+widthConstraint+", "+heightConstraint+"]");
+            var result = base.GetDesiredSize(widthConstraint, heightConstraint);
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] result=["+result+"]");
+            return result;
+        }
 
         #region Change managements
         protected override async void OnElementChanged(ElementChangedEventArgs<Image> e)
@@ -94,7 +102,7 @@ namespace Forms9Patch.UWP
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage()");
             ((IVisualElementController)Element)?.InvalidateMeasure(InvalidationTrigger.RendererReady);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage() RETURN ");
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageRenderer[" + _instance + "].RefreshImage() EXIT ");
         }
 
         /*

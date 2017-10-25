@@ -14,11 +14,19 @@ namespace Forms9Patch.UWP
 
         public bool IsLicensed
         {
-            get { return _valid || Xamarin.Forms.Application.Current == null; }
+            get {
+                if (Xamarin.Forms.Application.Current == null)
+                    return true;
+                return _valid;// && Forms9Patch.UWP.ApplicationInfoService.AppDisplayName().Result==Windows.ApplicationModel.Package.Current.DisplayName;
+            }
         }
         internal static bool IsLicenseValid
         {
-            get { return _valid || Xamarin.Forms.Application.Current == null; }
+            get {
+                if (Xamarin.Forms.Application.Current == null)
+                    return true;
+                return _valid;// && Forms9Patch.UWP.ApplicationInfoService.AppDisplayName().Result == Windows.ApplicationModel.Package.Current.DisplayName;
+            }
         }
 
         public static void Initialize(Windows.UI.Xaml.Application app, string licenseKey = null)
@@ -46,6 +54,7 @@ namespace Forms9Patch.UWP
                     _licenseKey = value;
                     Forms9Patch.Settings.LicenseKey = _licenseKey;
                     var licenseChecker = new LicenseChecker();
+                    System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 1");
                     _valid = licenseChecker.CheckLicenseKey(Settings._licenseKey, Forms9Patch.ApplicationInfoService.Name);
                     if (!_valid)
                     {
@@ -57,6 +66,7 @@ namespace Forms9Patch.UWP
                         };
                         errorDialog.ShowAsync();
                     }
+                    System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
                     //FormsGestures.Droid.Settings.Init();
                 }
             }
