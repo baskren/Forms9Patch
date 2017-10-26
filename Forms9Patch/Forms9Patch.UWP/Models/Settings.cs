@@ -31,6 +31,12 @@ namespace Forms9Patch.UWP
 
         public static void Initialize(Windows.UI.Xaml.Application app, string licenseKey = null)
         {
+            Xamarin.Forms.DependencyService.Register<FormsGestures.UWP.DisplayService>();
+            Xamarin.Forms.DependencyService.Register<FormsGestures.UWP.GestureService>();
+            Xamarin.Forms.DependencyService.Register<ApplicationInfoService>();
+
+
+
             _app = app;
             LicenseKey = licenseKey ?? "demo key";
         }
@@ -76,5 +82,19 @@ namespace Forms9Patch.UWP
             }
         }
 
+        static List<Assembly> _assembliesToInclude = new List<Assembly>
+        {
+            typeof(Forms9Patch.Settings).GetTypeInfo().Assembly,
+            typeof(Settings).GetTypeInfo().Assembly,
+            typeof(FormsGestures.Listener).GetTypeInfo().Assembly,
+            typeof(FormsGestures.UWP.UwpRotateEventArgs).GetTypeInfo().Assembly,
+            typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly,
+            typeof(PCL.Utils.FileCache).GetTypeInfo().Assembly,
+            typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly,
+            typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly,
+            typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly,
+            typeof(Windows.UI.Xaml.Media.Imaging.BitmapFactory).GetTypeInfo().Assembly,
+        };
+        public static List<Assembly> AssembliesToInclude => _assembliesToInclude;
     }
 }

@@ -32,3 +32,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("YvesForms9Patch.iOS")]
 [assembly: InternalsVisibleTo("YvesForms9Patch.Droid")]
 [assembly: InternalsVisibleTo("Forms9PatchAuth")]
+
+[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]

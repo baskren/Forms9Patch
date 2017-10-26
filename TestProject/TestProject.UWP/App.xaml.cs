@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PCL.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,26 +52,9 @@ namespace TestProject.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                var assembliesToInclude = new List<Assembly>();
-
-                assembliesToInclude.Add(typeof(Forms9Patch.Settings).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(Forms9Patch.UWP.Settings).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(FormsGestures.Listener).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(FormsGestures.UWP.UwpRotateEventArgs).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(PCL.Utils.FileCache).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly);
-                assembliesToInclude.Add(typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly);
-
-                Xamarin.Forms.Forms.Init(e, assembliesToInclude); // requires the `e` parameter
-
-                Xamarin.Forms.DependencyService.Register<FormsGestures.UWP.DisplayService>();
-                Xamarin.Forms.DependencyService.Register<FormsGestures.UWP.GestureService>();
-                Xamarin.Forms.DependencyService.Register<Forms9Patch.UWP.ApplicationInfoService>();
+                Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude); // requires the `e` parameter
 
                 Forms9Patch.UWP.Settings.Initialize(this, "NZPK-RMP4-PJVV-Z7LP-78JF-GNXB-CDJZ-SRYA-BLR2-WBZC-G64K-QJZW-65DB");
-
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

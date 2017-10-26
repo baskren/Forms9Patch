@@ -324,6 +324,90 @@ namespace Forms9Patch.UWP
             */
         }
 
+        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + availableSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+            var result = base.MeasureOverride(availableSize);
+
+            if (_sourceBitmap != null)
+            {
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
+            }
+            else
+            {
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
+            }
+
+
+            if (!_actualSizeIsValid && _sourceBitmap != null)
+            {
+                bool constrainedWidth = !double.IsInfinity(availableSize.Width) || ImageElement.WidthRequest > -1;
+                bool constrainedHeight = !double.IsInfinity(availableSize.Height) || ImageElement.HeightRequest > -1;
+
+                double constrainedWidthValue = availableSize.Width;
+                if (ImageElement.WidthRequest > -1)
+                    constrainedWidthValue = Math.Min(constrainedWidthValue, ImageElement.WidthRequest);
+                double constrainedHeightValue = availableSize.Height;
+                if (ImageElement.HeightRequest > -1)
+                    constrainedHeightValue = Math.Min(constrainedHeightValue, ImageElement.HeightRequest);
+
+                if ((!constrainedWidth && !constrainedHeight) || ImageElement.Fill == Fill.None)
+                    result = new Windows.Foundation.Size(BaseImageSize.Width, BaseImageSize.Height);
+                else
+                {
+                    var sourceAspect = BaseImageSize.Height / BaseImageSize.Width;
+
+                    if (constrainedWidth && constrainedHeight)
+                    {
+                        // if single image, SetAspect should do all the heavy lifting.  if stitched together, then it's ImageFill.Fill;
+                        result = new Windows.Foundation.Size(constrainedWidthValue, constrainedHeightValue);
+                    }
+                    else if (constrainedWidth)
+                    {
+                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
+                            result = new Windows.Foundation.Size(constrainedWidthValue, availableSize.Height);
+                        else
+                            result = new Windows.Foundation.Size(constrainedWidthValue, constrainedWidthValue * sourceAspect);
+                    }
+                    else if (constrainedHeight)
+                    {
+                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
+                            result = new Windows.Foundation.Size(availableSize.Width, constrainedHeightValue);
+                        else
+                            result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
+                    }
+                }
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
+            }
+
+            return result;
+        }
+
+        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+            var result = base.ArrangeOverride(finalSize);
+
+            if (!_actualSizeIsValid && _sourceBitmap != null && Children.Count > 0)
+            {
+                _validImageLayout = false;
+                GenerateImageLayout(finalSize);
+                _actualSizeIsValid = true;
+            }
+
+            if (_debugMessages)
+            {
+                if (_sourceBitmap != null)
+                    System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
+                else
+                    System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
+            }
+
+            return result;
+        }
+
+
+
         bool _validImageLayout;
         internal void GenerateImageLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
@@ -490,123 +574,6 @@ namespace Forms9Patch.UWP
             RefreshImage();
         }
 
-        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] availableSize=["+availableSize+ "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
-            var result = base.MeasureOverride(availableSize);
-
-            //Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 0, 0));
-
-            /*
-            if (_sourceBitmap == null || ActualHeight > 0 || ActualWidth > 0)
-            {
-
-            }
-            else
-                result = new Windows.Foundation.Size(_sourceBitmap.PixelWidth, _sourceBitmap.PixelHeight);
-
-            */
-
-
-            if (_sourceBitmap != null)
-            {
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
-            }
-            else
-            {
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
-            }
-
-
-            if (!_actualSizeIsValid && _sourceBitmap != null)
-            {
-                bool constrainedWidth = !double.IsInfinity(availableSize.Width) || ImageElement.WidthRequest > -1;
-                bool constrainedHeight = !double.IsInfinity(availableSize.Height) || ImageElement.HeightRequest > -1;
-
-                double constrainedWidthValue = availableSize.Width;
-                if (ImageElement.WidthRequest > -1)
-                    constrainedWidthValue = Math.Min(constrainedWidthValue, ImageElement.WidthRequest);
-                double constrainedHeightValue = availableSize.Height;
-                if (ImageElement.HeightRequest > -1)
-                    constrainedHeightValue = Math.Min(constrainedHeightValue, ImageElement.HeightRequest);
-
-                if ((!constrainedWidth && !constrainedHeight) ||  ImageElement.Fill == Fill.None)
-                    result = new Windows.Foundation.Size(BaseImageSize.Width, BaseImageSize.Height);
-                else
-                {
-                    var sourceAspect = BaseImageSize.Height / BaseImageSize.Width;
-
-                    if (constrainedWidth && constrainedHeight)
-                    {
-                        // if single image, SetAspect should do all the heavy lifting.  if stitched together, then it's ImageFill.Fill;
-                        result = new Windows.Foundation.Size(constrainedWidthValue, constrainedHeightValue);
-                    }
-                    else if (constrainedWidth)
-                    {
-                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
-                            result = new Windows.Foundation.Size(constrainedWidthValue, availableSize.Height);
-                        else
-                            result = new Windows.Foundation.Size(constrainedWidthValue, constrainedWidthValue * sourceAspect);
-                    }
-                    else if (constrainedHeight)
-                    {
-                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
-                            result = new Windows.Foundation.Size(availableSize.Width, constrainedHeightValue);
-                        else
-                            result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
-                    }
-
-                }
-
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
-
-            }
-
-            return result;
-        }
-
-        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=["+ActualWidth+", "+ActualHeight+"]");
-            var result = base.ArrangeOverride(finalSize);
-            
-            if (!_actualSizeIsValid && _sourceBitmap!=null && Children.Count>0)
-            {
-                //Width = Math.Max(finalSize.Width, ActualWidth);
-                //Height = Math.Max(finalSize.Height, ActualHeight);
-                GenerateImageLayout(finalSize);
-                _actualSizeIsValid = true;
-            }
-
-            if (_debugMessages)
-            {
-                if (_sourceBitmap != null)
-                    System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.PixelWidth + ", " + _sourceBitmap.PixelHeight + "]");
-                else
-                    System.Diagnostics.Debug.WriteLine("[" + _instance + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
-            }
-
-            return result;
-        }
-
-
-
-        void SetSize()
-        {
-            if (_imageElement.Fill == Fill.Tile || _imageElement.Fill == Fill.Fill)
-                return;
-            if (_imageElement.Fill == Fill.None)
-            {
-                Width = _sourceBitmap.PixelWidth;
-                Height = _sourceBitmap.PixelHeight;
-                return;
-            }
-            if (_imageElement.Fill == Fill.AspectFit)
-            {
-
-            }
-        }
- 
         void PatchesForRow(int yPatchRow, int yPatchStart, int yPatchEnd, Windows.UI.Xaml.VerticalAlignment yStretch, double sizeWidth)
         {
             int xPatchCol = 0;
@@ -642,21 +609,9 @@ namespace Forms9Patch.UWP
                     Children.Add(image);
                     xPatchCol++;
 
-                    /*
-                    if (ColumnDefinitions.Count < xPatchCol)
-                    {
-                        ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
-                        {
-                            Width = new Windows.UI.Xaml.GridLength(xWidth)
-                        });
-                    }
-                    */
-
-
                     colWidths.Add(xWidth);
                     minColWidths.Add(xWidth);
                     minWidth += xWidth;
-
                 }
 
                 xPatchStart = (int)_rangeLists.PatchesX[xRange].Start;
@@ -674,16 +629,6 @@ namespace Forms9Patch.UWP
                 SetRow(image, yPatchRow);
                 Children.Add(image);
                 xPatchCol++;
-
-                /*
-                if (ColumnDefinitions.Count < xPatchCol)
-                {
-                    ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
-                    {
-                        Width = new Windows.UI.Xaml.GridLength(xWidth, Windows.UI.Xaml.GridUnitType.Star)
-                    });
-                }
-                */
 
                 colWidths.Add(xWidth);
                 minColWidths.Add(0);
@@ -708,15 +653,6 @@ namespace Forms9Patch.UWP
                 Children.Add(image);
                 xPatchCol++;
 
-                /*
-                if (ColumnDefinitions.Count < xPatchCol)
-                {
-                    ColumnDefinitions.Add(new Windows.UI.Xaml.Controls.ColumnDefinition
-                    {
-                        Width = new Windows.UI.Xaml.GridLength(xWidth)
-                    });
-                }
-                */
                 colWidths.Add(xWidth);
                 minColWidths.Add(xWidth);
                 minWidth += xWidth;
@@ -737,6 +673,7 @@ namespace Forms9Patch.UWP
                         Width = gridLenth
                     };
                     ColumnDefinitions.Add(colDefinition);
+                    System.Diagnostics.Debug.WriteLine("["+_instance+"]["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] colDefinition:["+gridLenth+"]");
                 }
             }
 
@@ -927,14 +864,12 @@ namespace Forms9Patch.UWP
 
 
 
-
-
         #region RoundedBoxLayout Support
 
         static Rect RoundRect(Rect rect, StackOrientation orientation, Forms9Patch.SegmentType type)
         {
             return rect;
-
+            /*
             var left = Math.Ceiling(rect.Left);
             var right = Math.Floor(rect.Right);
             var top = Math.Ceiling(rect.Top);
@@ -974,7 +909,7 @@ namespace Forms9Patch.UWP
                 }
             }
             return new Rect(left, top, right - left, bottom - top);
-
+            */
         }
 
         static Rect SegmentAllowanceRect(Rect rect, double allowance, StackOrientation orientation, Forms9Patch.SegmentType type)
