@@ -761,16 +761,18 @@ namespace Forms9Patch
         public void UpdateElements()
         {
             _noUpdate = true;
+
+            var enabledLabelColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
+            if (IsSelected && SelectedFontColor.A > 0)
+                enabledLabelColor = SelectedFontColor;
+
             base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
             if (IsEnabled)
             {
                 base.HasShadow = BackgroundColor.A > 0 && HasShadow;
                 ShadowInverted = IsSelected && SegmentType == SegmentType.Not;
 
-                if (IsSelected && SelectedFontColor.A > 0)
-                    _label.TextColor = SelectedFontColor;
-                else
-                    _label.TextColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
+                _label.TextColor = enabledLabelColor;
 
                 if (IsSelected)
                 {
@@ -778,7 +780,7 @@ namespace Forms9Patch
                         base.BackgroundColor = SelectedBackgroundColor;
                     else
                         base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                    base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
+                    base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor;
                 }
                 else
                 {
@@ -787,7 +789,7 @@ namespace Forms9Patch
                 }
                 if (OutlineColor == Color.Default)
                     //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
-                    base.OutlineColor = _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
+                    base.OutlineColor = enabledLabelColor; // _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
             }
             else
             {
@@ -838,7 +840,7 @@ namespace Forms9Patch
                             base.BackgroundColor = SelectedBackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25);
                         else
                             base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor.RgbBlend(Color.FromHex("#000"), 0.25) : Color.FromHex(DarkTheme ? "#FFF" : "#000").WithAlpha(0.2);
-                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : _label.TextColor;
+                        base.OutlineColor = BackgroundColor.A > 0 ? OutlineColor.RgbBlend(Color.FromHex("#000"), 0.25) : base.BackgroundColor.A > 0 ? base.BackgroundColor : enabledLabelColor; // _label.TextColor;
                     }
                     else
                     {
@@ -848,7 +850,7 @@ namespace Forms9Patch
                     //base.OutlineColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
                     if (OutlineColor == Color.Default)
                         //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
-                        base.OutlineColor = _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
+                        base.OutlineColor = enabledLabelColor; //_label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                 }
                 //base.OutlineColor = _label.TextColor;
                 //base.OutlineColor = OutlineColor.A > 0 ? opaque : _label.TextColor;//base.BackgroundColor;
@@ -971,7 +973,7 @@ namespace Forms9Patch
                         _stackLayout.Children.Add(_label);
                 }
                 SetOrienations();
-            } 
+            }
             else if (propertyName == Label.TextColorProperty.PropertyName)
             {
                 UpdateIconTint();
@@ -1311,7 +1313,7 @@ namespace Forms9Patch
                 _stackLayout.Spacing = Spacing;
             else if (propertyName == TintImageProperty.PropertyName)
                 UpdateIconTint();
-            
+
         }
 
         void OnCommandChanged()

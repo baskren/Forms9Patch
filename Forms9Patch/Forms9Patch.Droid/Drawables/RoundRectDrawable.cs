@@ -11,6 +11,7 @@ namespace Forms9Patch.Droid
 {
     class RoundRectDrawable : Drawable
     {
+        #region ElementFields
         readonly IRoundedBox _element;
         IRoundedBox RoundedBoxElement
         {
@@ -25,7 +26,10 @@ namespace Forms9Patch.Droid
         {
             get { return 0; }
         }
+        #endregion
 
+
+        #region Constructor
         internal RoundRectDrawable(IRoundedBox element)
         {
             _element = element;
@@ -35,14 +39,27 @@ namespace Forms9Patch.Droid
                 FilterBitmap = true
             };
         }
+        #endregion
 
+
+        #region Overrides
+        public override void SetAlpha(int alpha) { }
+
+        public override void SetColorFilter(ColorFilter colorFilter) { }
+        #endregion
+
+
+        #region Layout
         public override void Draw(Canvas canvas)
         {
             if (RoundedBoxElement is MaterialSegmentedControl)
                 return;
 
             //var radius = RoundedBoxElement.OutlineRadius;// * Display.Scale;
-            bool drawOutline = RoundedBoxElement.OutlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
+            var radius = RoundedBoxElement.OutlineRadius * Display.Scale;
+            var outlineWidth = RoundedBoxElement.OutlineWidth * Display.Scale; // (nfloat)(Math.Max(0, (float)Element.GetValue(RoundedBoxBase.OutlineWidthProperty)));
+
+            bool drawOutline = outlineWidth > 0.05 && RoundedBoxElement.OutlineColor.A > 0.01;
             bool drawFill = RoundedBoxElement.BackgroundColor.A > 0.01;
 
             if (!drawFill && !drawOutline)
@@ -61,7 +78,6 @@ namespace Forms9Patch.Droid
                 return;
 
             var rect = new RectF(Bounds.Left, Bounds.Top, Bounds.Right, Bounds.Bottom); //new Rect(0, 0, width, height);
-            var outlineWidth = RoundedBoxElement.OutlineWidth * Display.Scale;
 
             SegmentType segmentType = SegmentType.Not;
             var hz = true;
@@ -75,6 +91,9 @@ namespace Forms9Patch.Droid
 
             var vt = !hz;
 
+            float separatorWidth = materialButton == null || segmentType == SegmentType.Not ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+            if (RoundedBoxElement.BackgroundColor.A < 0.01 && (RoundedBoxElement.OutlineColor.A < 0.01 || (outlineWidth < 0.01 && separatorWidth < 0.01)))
+                return;
 
             var makeRoomForShadow = RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0.01;// && !RoundedBoxElement.ShadowInverted;
 
@@ -108,7 +127,7 @@ namespace Forms9Patch.Droid
                     p.StrokeWidth = shadowR;
                     p.Alpha = (int)(255 / (shadowR * 4));
                     p.SetStyle(Paint.Style.Fill);
-                    var r = (int)(RoundedBoxElement.OutlineRadius * Display.Scale + shadowR);
+                    var r = (int)(radius + shadowR);
                     for (int i = 0; i <= 2 * shadowR; i++)
                     {
 
@@ -137,7 +156,7 @@ namespace Forms9Patch.Droid
             // generate background
             if (drawFill)
             {
-                CGPath fillPath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Fill);
+                CGPath fillPath = RoundedBoxPath(perimeter, RoundRectPath.Fill);
                 p.Color = RoundedBoxElement.BackgroundColor.ToAndroid();
                 //p.Color = Android.Graphics.Color.Blue;
                 p.SetStyle(Paint.Style.Fill);
@@ -146,7 +165,7 @@ namespace Forms9Patch.Droid
 
             if (drawOutline)
             {
-                CGPath outlinePath = RoundedBoxPath(RoundedBoxElement, perimeter, RoundRectPath.Outline);
+                CGPath outlinePath = RoundedBoxPath(perimeter, RoundRectPath.Outline);
                 p.StrokeWidth = (outlineWidth);
                 p.Color = RoundedBoxElement.OutlineColor.ToAndroid();
                 p.SetStyle(Paint.Style.Stroke);
@@ -162,7 +181,7 @@ namespace Forms9Patch.Droid
                 var maskPaint = new Paint(PaintFlags.AntiAlias);
                 maskPaint.Color = Android.Graphics.Color.Black;
                 maskPaint.SetStyle(Paint.Style.Fill);
-                maskCanvas.DrawPath(RoundedBoxPath(RoundedBoxElement, perimeter, 0), maskPaint);
+                maskCanvas.DrawPath(RoundedBoxPath(perimeter, 0), maskPaint);
 
                 var shadowBitmap = Bitmap.CreateBitmap(Bounds.Width(), Bounds.Height(), Bitmap.Config.Argb8888);// (bitmap.Width, bitmap.Height, Bitmap.Config.Argb8888);
                 var shadowCanvas = new Canvas(shadowBitmap);
@@ -187,7 +206,7 @@ namespace Forms9Patch.Droid
                     else
                         shadowCanvas.DrawPath(PerimeterPath(_element, insetShadowBounds, r), shadowPaint);
                         */
-                    shadowCanvas.DrawPath(RoundedBoxPath(RoundedBoxElement, insetShadowBounds, 0), shadowPaint);
+                    shadowCanvas.DrawPath(RoundedBoxPath(insetShadowBounds, 0), shadowPaint);
                     insetShadowBounds.Inset(-1, -1);
                     //p.StrokeWidth -= 1;
                     //if (p.StrokeWidth < 0)
@@ -390,9 +409,9 @@ namespace Forms9Patch.Droid
             */
         }
 
-
-        static CGPath RoundedBoxPath(IRoundedBox roundedBox, RectF perimeter, RoundRectPath pathType)
+        CGPath RoundedBoxPath(RectF perimeter, RoundRectPath pathType)
         {
+            var roundedBox = RoundedBoxElement;
             var offset = roundedBox.OutlineWidth * Display.Scale;
             if (pathType == RoundRectPath.Outline)
                 offset /= 2;
@@ -424,45 +443,21 @@ namespace Forms9Patch.Droid
                 if (roundedBox.IsElliptical)
                     result = Ellipse(boundary);
                 else
-                    result = RectangularPerimeterPath(roundedBox, boundary, radius - (drawOutline ? offset : 0));
+                    result = RectangularPerimeterPath(boundary, radius - (drawOutline ? offset : 0));
             }
             else
-                result = RectangularPerimeterPath(roundedBox, boundary, radius - (drawOutline ? offset : 0));
+                result = RectangularPerimeterPath(boundary, radius - (drawOutline ? offset : 0));
             return result;
         }
 
-
-        static RectF SegmentAllowanceRect(RectF rect, int allowance, StackOrientation orientation, SegmentType type)
-        {
-            RectF result;
-            if (type == SegmentType.Start)
-                result = new RectF(rect.Left, rect.Top, rect.Right + (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Bottom + (orientation == StackOrientation.Vertical ? allowance : 0));
-            else if (type == SegmentType.Mid)
-                result = new RectF(rect.Left - (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == StackOrientation.Vertical ? allowance : 0), rect.Right + (orientation == StackOrientation.Horizontal ? allowance * 2 : 0), rect.Bottom + (orientation == StackOrientation.Vertical ? allowance * 2 : 0));
-            else
-                result = new RectF(rect.Left - (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == StackOrientation.Vertical ? allowance : 0), rect.Right + (orientation == StackOrientation.Horizontal ? allowance : 0), rect.Bottom + (orientation == StackOrientation.Vertical ? allowance : 0));
-            return result;
-        }
-
-        static RectF RectInset(RectF rect, float inset)
+        RectF RectInset(RectF rect, float inset)
         {
             return RectInset(rect, inset, inset, inset, inset);
         }
 
-        static RectF RectInset(RectF rect, float left, float top, float right, float bottom)
+        RectF RectInset(RectF rect, float left, float top, float right, float bottom)
         {
             return new RectF(rect.Left + left, rect.Top + top, rect.Right - right, rect.Bottom - bottom);
-            /*
-            var newLeft = (float)Math.Round((rect.Left + left) * Display.Scale) / Display.Scale;
-            var newTop = (float)Math.Round((rect.Top + top) * Display.Scale) / Display.Scale;
-            var newRight = (float)Math.Round((rect.Right - right) * Display.Scale) / Display.Scale;
-            var newBottom = (float)Math.Round((rect.Bottom - bottom) * Display.Scale) / Display.Scale;
-
-            var newWidth = newRight - newLeft;
-            var newHeight = newBottom - newTop;
-
-            return new RectF(newLeft, newTop, newWidth, newHeight);
-            */
         }
 
         internal static CGPath PerimeterPath(IRoundedBox element, RectF rect, float radius, bool counterClockWise = true)
@@ -589,103 +584,16 @@ namespace Forms9Patch.Droid
             return result;
         }
 
-        static CGPath OutlinePath(IRoundedBox element, RectF rect, float radius, float lineWidth)
-        {
-            lineWidth /= 2.0f;
-            var materialButton = element as MaterialButton;
-            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
-            StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
-
-            if (type == SegmentType.Not)
-                return PerimeterPath(element, rect, radius);
-
-            var diameter = radius * 2;
-            var topLeft = new RectF(rect.Left, rect.Top, rect.Left + diameter, rect.Top + diameter);
-            var bottomLeft = new RectF(rect.Left, rect.Bottom - diameter, rect.Left + diameter, rect.Bottom);
-            var bottomRight = new RectF(rect.Right - diameter, rect.Bottom - diameter, rect.Right, rect.Bottom);
-            var topRight = new RectF(rect.Right - diameter, rect.Top, rect.Right, rect.Top + diameter);
-
-            var result = new CGPath();
-
-            if (orientation == StackOrientation.Horizontal)
-            {
-                if (type == SegmentType.Start)
-                {
-                    result.MoveTo(rect.Right + lineWidth, rect.Bottom);
-                    //result.LineTo (rect.Left + radius, rect.Bottom);
-                    //result.AddRelativeArc (rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(1*Math.PI/2.0), (nfloat)(Math.PI / 2.0));
-                    result.ArcTo(bottomLeft, 90, 90);
-                    //result.LineTo (rect.Left,          rect.Top + radius);
-                    //result.AddRelativeArc (rect.Left + radius, rect.Top    + radius, radius, (nfloat)(2*Math.PI/2.0), (nfloat)(Math.PI / 2.0));
-                    result.ArcTo(topLeft, 180, 90);
-                    result.LineTo(rect.Right + lineWidth, rect.Top);
-                }
-                else if (type == SegmentType.Mid)
-                { // mid
-                    result.MoveTo(rect.Right + lineWidth, rect.Bottom);
-                    result.LineTo(rect.Left - lineWidth, rect.Bottom);
-                    result.MoveTo(rect.Left - lineWidth, rect.Top);
-                    result.LineTo(rect.Right + lineWidth, rect.Top);
-                }
-                else
-                { // end
-                    result.MoveTo(rect.Left - lineWidth, rect.Top);
-                    //result.LineTo (rect.Right - radius, rect.Top);
-                    //result.AddRelativeArc (rect.Right - radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
-                    result.ArcTo(topRight, 270, 90);
-                    //result.LineTo (rect.Right, rect.Bottom - radius);
-                    //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
-                    result.ArcTo(bottomRight, 0, 90);
-                    result.LineTo(rect.Left - lineWidth, rect.Bottom);
-                }
-            }
-            else
-            { // vertical
-                if (type == SegmentType.Start)
-                {
-                    result.MoveTo(rect.Right, rect.Bottom + lineWidth);
-                    //result.LineTo (rect.Right, rect.Top + radius);
-                    //result.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, (nfloat)(-Math.PI / 2.0));
-                    result.ArcTo(topRight, 0, -90);
-                    //result.LineTo (rect.Left + radius, rect.Top);
-                    //result.AddRelativeArc (rect.Left + radius, rect.Top + radius, radius, (nfloat)(3*Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    result.ArcTo(topLeft, 270, -90);
-                    result.LineTo(rect.Left, rect.Bottom + lineWidth);
-                }
-                else if (type == SegmentType.Mid)
-                {
-                    result.MoveTo(rect.Right, rect.Bottom + lineWidth);
-                    result.LineTo(rect.Right, rect.Top - lineWidth);
-                    result.MoveTo(rect.Left, rect.Top - lineWidth);
-                    result.LineTo(rect.Left, rect.Bottom + lineWidth);
-                }
-                else
-                { // end
-                    result.MoveTo(rect.Left, rect.Top - lineWidth);
-                    //result.LineTo (rect.Left, rect.Bottom - radius);
-                    //result.AddRelativeArc (rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(2 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    result.ArcTo(bottomLeft, 180, -90);
-                    //result.LineTo (rect.Right - radius, rect.Bottom);
-                    //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(1 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
-                    result.ArcTo(bottomRight, 90, -90);
-                    result.LineTo(rect.Right, rect.Top - lineWidth);
-                }
-            }
-            return result;
-        }
-
-        static CGPath Ellipse(RectF rect, bool counterClockWise = true)
+        CGPath Ellipse(RectF rect, bool counterClockWise = true)
         {
             var path = new CGPath();
             path.AddOval(rect, counterClockWise ? Path.Direction.Ccw : Path.Direction.Cw);
             return path;
         }
-        public override void SetAlpha(int alpha) { }
 
-        public override void SetColorFilter(ColorFilter colorFilter) { }
-
-        internal static CGPath RectangularPerimeterPath(Forms9Patch.IRoundedBox element, RectF rect, float radius)
+        CGPath RectangularPerimeterPath(RectF rect, float radius)
         {
+            var element = RoundedBoxElement;
             radius = Math.Max(radius, 0);
 
 
@@ -794,8 +702,7 @@ namespace Forms9Patch.Droid
 
             return pathFigure;
         }
-
-
+        #endregion
     }
 }
 

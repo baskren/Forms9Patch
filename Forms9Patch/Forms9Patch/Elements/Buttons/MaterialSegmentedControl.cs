@@ -772,13 +772,14 @@ namespace Forms9Patch
                         int enabled = 0;
                         Segment eseg = null;
                         foreach (var seg in _segments)
+                        {
                             if (seg.IsEnabled)
                             {
                                 enabled++;
                                 eseg = seg;
                             }
-                        if (enabled == 1)
-                            eseg.IsSelected = true;
+                        }
+                        eseg.IsSelected |= enabled == 1;
                     }
                 }
                 /*
