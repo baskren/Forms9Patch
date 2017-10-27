@@ -187,25 +187,22 @@ namespace Forms9Patch.iOS
             }
 
             var makeRoomForShadow = _roundedBoxElement.HasShadow && _roundedBoxElement.BackgroundColor.A > 0.01;// && !RoundedBoxElement.ShadowInverted;
-
             var shadowX = (float)Forms9Patch.Settings.ShadowOffset.X * Display.Scale;
             var shadowY = (float)Forms9Patch.Settings.ShadowOffset.Y * Display.Scale;
             var shadowR = (float)Forms9Patch.Settings.ShadowRadius * Display.Scale;
-
-            var shadowPadding = RoundedBoxBase.ShadowPadding(_roundedBoxElement as Layout);
+            var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToCGColor();
+            var shadowPadding = RoundedBoxBase.ShadowPadding(Element as Layout);
 
             var perimeter = rect;
 
             using (var g = UIGraphics.GetCurrentContext())
             {
                 g.SaveState();
-                var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToCGColor();
 
 
                 if (makeRoomForShadow)
                 {
-                    var shadowPad = Forms9Patch.RoundedBoxBase.ShadowPadding(Element as Layout);
-                    perimeter = new CGRect(rect.Left + shadowPad.Left, rect.Top + shadowPad.Top, rect.Width - shadowPad.HorizontalThickness, rect.Height - shadowPad.VerticalThickness);
+                    perimeter = new CGRect(rect.Left + shadowPadding.Left, rect.Top + shadowPadding.Top, rect.Width - shadowPadding.HorizontalThickness, rect.Height - shadowPadding.VerticalThickness);
                     if (!_roundedBoxElement.ShadowInverted)
                     {
                         if (_segmentType != SegmentType.Not)
@@ -223,8 +220,6 @@ namespace Forms9Patch.iOS
                             var clipPath = CGPath.FromRect(result);
                             g.AddPath(clipPath);
                             g.Clip();
-
-
                         }
                         g.SetShadow(new CGSize(shadowX, shadowY), shadowR, shadowColor);
                     }
@@ -251,11 +246,12 @@ namespace Forms9Patch.iOS
                 }
 
                 // separators
-                if (_roundedBoxElement.OutlineWidth < 0.05 && separatorWidth > 0 && !_roundedBoxElement.IsElliptical)
+                if (materialButton!=null && _roundedBoxElement.OutlineWidth < 0.05 && separatorWidth > 0 && !_roundedBoxElement.IsElliptical)
                 {
                     g.SetShadow(new CGSize(0, 0), 0, Color.Transparent.ToCGColor());
-                    nfloat inset = _roundedBoxElement.OutlineColor.A > 0 ? _roundedBoxElement.OutlineWidth / 2.0f : 0;
-                    g.SetStrokeColor(_roundedBoxElement.OutlineColor.ToCGColor());
+         
+                    nfloat inset = materialButton.OutlineColor.A > 0 ? separatorWidth / 2.0f : 0;
+                    g.SetStrokeColor(materialButton.OutlineColor.ToCGColor());
                     g.SetLineWidth(separatorWidth);
                     if (_segmentType == SegmentType.Start || _segmentType == SegmentType.Mid)
                     {

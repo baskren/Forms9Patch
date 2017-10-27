@@ -270,7 +270,7 @@ namespace Forms9Patch.UWP
         #endregion
 
 
-        #region Layout 
+        #region Image Support 
         void RefreshImage()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "]ImageView[" + _instance + "].RefreshImage()");
@@ -406,8 +406,6 @@ namespace Forms9Patch.UWP
 
             return result;
         }
-
-
 
         bool _validImageLayout;
         internal void GenerateImageLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
@@ -684,9 +682,27 @@ namespace Forms9Patch.UWP
 
         }
 
+        void TintImage([System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        {
+            if (ImageElement?.Source != null && Children.Count == 1 && Children[0] is Windows.UI.Xaml.Controls.Image image && image.Source is WriteableBitmap bitmap)
+            {
+                if (ImageElement.TintColor != Xamarin.Forms.Color.Default)
+                    bitmap.ForEach((x, y, color) => Windows.UI.Color.FromArgb(color.A, (byte)(ImageElement.TintColor.R * 255), (byte)(ImageElement.TintColor.G * 255), (byte)(ImageElement.TintColor.B * 255)));
+                else if (callerName != "GenerateImageLayout")
+                {
+                    _validImageLayout = false;
+                    GenerateImageLayout();
+                }
+            }
+        }
+        #endregion
+
+
+        #region RoundedBoxLayout Support
+
         internal void GenerateOutlineLayout(Windows.Foundation.Size size = default(Windows.Foundation.Size))
         {
-            if (RoundedBoxElement == null || ImageElement!=null)
+            if (RoundedBoxElement == null || ImageElement != null)
                 return;
 
             ImmediatelyClearImageElements();
@@ -718,17 +734,8 @@ namespace Forms9Patch.UWP
             }
             if (width <= 0 || height <= 0)
                 return;
-
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "]====================================================================================");
-            //System.Diagnostics.Debug.WriteLine("Bounds=[" + visualElement.Bounds + "]  width=[" + width + "] height=[" + height + "]");
-            //System.Diagnostics.Debug.WriteLine("BackgroundColor=[" + RoundedBoxElement.BackgroundColor + "]");
-            //System.Diagnostics.Debug.WriteLine("OutlineColor=[" + RoundedBoxElement.OutlineColor + "]  OutlineWidth=[" + RoundedBoxElement.OutlineWidth + "]");
-
-
-            var canvas = new Windows.UI.Xaml.Controls.Canvas();
-
             var rect = new Rect(0, 0, width, height);
-            var outlineWidth = RoundedBoxElement.OutlineWidth;
+            var canvas = new Windows.UI.Xaml.Controls.Canvas();
 
             SegmentType segmentType = SegmentType.Not;
             var hz = true;
@@ -739,43 +746,44 @@ namespace Forms9Patch.UWP
             }
             else
                 materialButton = null;
-
-            //rect = RoundRect(rect, materialButton.Orientation, segmentType);
-
             var vt = !hz;
 
-            var makeRoomForShadow = RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0.01 && !RoundedBoxElement.ShadowInverted;
+            double separatorWidth = materialButton == null || segmentType == SegmentType.Not ? 0 : materialButton.SeparatorWidth < 0 ? _roundedBoxElement.OutlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+            if (_roundedBoxElement.BackgroundColor.A < 0.01 && (_roundedBoxElement.OutlineColor.A < 0.01 || (_roundedBoxElement.OutlineWidth < 0.01 && separatorWidth < 0.01)))
+                return;
 
+            var makeRoomForShadow = RoundedBoxElement.HasShadow && RoundedBoxElement.BackgroundColor.A > 0.01 && !RoundedBoxElement.ShadowInverted;
             var shadowX = Forms9Patch.Settings.ShadowOffset.X;
             var shadowY = Forms9Patch.Settings.ShadowOffset.Y;
             var shadowR = Forms9Patch.Settings.ShadowRadius;
-
             var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToWindowsColor();
-
             var shadowPadding = RoundedBoxBase.ShadowPadding(RoundedBoxElement as Layout);
 
             Rect perimeter = rect;
+
             if (makeRoomForShadow)
             {
                 // what additional padding was allocated to cast  the button's shadow?
                 //CompositionShadow shadow = new CompositionShadow()
                 perimeter = new Rect(rect.Left + shadowPadding.Left, rect.Top + shadowPadding.Top, rect.Width - shadowPadding.HorizontalThickness, rect.Height - shadowPadding.VerticalThickness);
-                if (segmentType != SegmentType.Not)
+                if (!RoundedBoxElement.ShadowInverted)
                 {
-                    // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
-                    double allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
-                    Rect result;
-                    if (segmentType == SegmentType.Start)
-                        result = new Rect(perimeter.Left - allowance, perimeter.Top - allowance, perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
-                    else if (segmentType == SegmentType.Mid)
-                        result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + (hz ? 0 : 2 * allowance), perimeter.Height + (vt ? 0 : 2 * allowance));
-                    else
-                        result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
-                    canvas.Clip = new Windows.UI.Xaml.Media.RectangleGeometry
+                    if (segmentType != SegmentType.Not)
                     {
-                        Rect = result
-                    };
-
+                        // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
+                        double allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
+                        Rect result;
+                        if (segmentType == SegmentType.Start)
+                            result = new Rect(perimeter.Left - allowance, perimeter.Top - allowance, perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                        else if (segmentType == SegmentType.Mid)
+                            result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + (hz ? 0 : 2 * allowance), perimeter.Height + (vt ? 0 : 2 * allowance));
+                        else
+                            result = new Rect(perimeter.Left - (hz ? 0 : allowance), perimeter.Top - (vt ? 0 : allowance), perimeter.Width + allowance * (hz ? 1 : 2), perimeter.Height + allowance * (vt ? 1 : 2));
+                        canvas.Clip = new Windows.UI.Xaml.Media.RectangleGeometry
+                        {
+                            Rect = result
+                        };
+                    }
                 }
             }
 
@@ -789,16 +797,16 @@ namespace Forms9Patch.UWP
                 switch (segmentType)
                 {
                     case SegmentType.Not:
-                        FillBoundary = RectInset(perimeter, outlineWidth);
+                        FillBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth);
                         break;
                     case SegmentType.Start:
-                        FillBoundary = RectInset(perimeter, outlineWidth, outlineWidth, vt ? outlineWidth : 0, hz ? outlineWidth : 0);
+                        FillBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth, RoundedBoxElement.OutlineWidth, vt ? RoundedBoxElement.OutlineWidth : 0, hz ? RoundedBoxElement.OutlineWidth : 0);
                         break;
                     case SegmentType.Mid:
-                        FillBoundary = RectInset(perimeter, outlineWidth, outlineWidth, vt ? outlineWidth : 0, hz ? outlineWidth : 0);
+                        FillBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth, RoundedBoxElement.OutlineWidth, vt ? RoundedBoxElement.OutlineWidth : 0, hz ? RoundedBoxElement.OutlineWidth : 0);
                         break;
                     case SegmentType.End:
-                        FillBoundary = RectInset(perimeter, outlineWidth);
+                        FillBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth);
                         break;
                 }
                 if (segmentType == SegmentType.Not)
@@ -806,13 +814,13 @@ namespace Forms9Patch.UWP
                     if (RoundedBoxElement.IsElliptical)
                         fillPath = Ellipse(FillBoundary);
                     else
-                        fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? outlineWidth : 0));
+                        fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? RoundedBoxElement.OutlineWidth : 0));
                 }
                 else
                 {
                     // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
                     //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
-                    fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? outlineWidth : 0));
+                    fillPath = RectangularPerimeterPath(RoundedBoxElement, FillBoundary, radius - (drawOutline ? RoundedBoxElement.OutlineWidth : 0));
                 }
                 var path = new Path();
                 path.Fill = new SolidColorBrush(RoundedBoxElement.BackgroundColor.ToWindowsColor());
@@ -828,16 +836,16 @@ namespace Forms9Patch.UWP
                 switch (segmentType)
                 {
                     case SegmentType.Not:
-                        outlineBoundary = RectInset(perimeter, outlineWidth / 2);
+                        outlineBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth / 2);
                         break;
                     case SegmentType.Start:
-                        outlineBoundary = RectInset(perimeter, outlineWidth / 2, outlineWidth / 2, vt ? outlineWidth / 2 : 0, hz ? outlineWidth / 2 : 0);
+                        outlineBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth / 2, RoundedBoxElement.OutlineWidth / 2, vt ? RoundedBoxElement.OutlineWidth / 2 : 0, hz ? RoundedBoxElement.OutlineWidth / 2 : 0);
                         break;
                     case SegmentType.Mid:
-                        outlineBoundary = RectInset(perimeter, outlineWidth / 2, outlineWidth / 2, vt ? outlineWidth / 2 : 0, hz ? outlineWidth / 2 : 0);
+                        outlineBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth / 2, RoundedBoxElement.OutlineWidth / 2, vt ? RoundedBoxElement.OutlineWidth / 2 : 0, hz ? RoundedBoxElement.OutlineWidth / 2 : 0);
                         break;
                     case SegmentType.End:
-                        outlineBoundary = RectInset(perimeter, outlineWidth / 2);
+                        outlineBoundary = RectInset(perimeter, RoundedBoxElement.OutlineWidth / 2);
                         break;
                 }
                 if (segmentType == SegmentType.Not)
@@ -845,13 +853,13 @@ namespace Forms9Patch.UWP
                     if (RoundedBoxElement.IsElliptical)
                         outlinePath = Ellipse(outlineBoundary);
                     else
-                        outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? outlineWidth / 2 : 0));
+                        outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? RoundedBoxElement.OutlineWidth / 2 : 0));
                 }
                 else
                 {
                     // make the button bigger on the overlap sides so the mask can trim off excess, including shadow
                     //Rect newPerimenter = SegmentAllowanceRect(outlinePerimeter, 0, materialButton.Orientation, materialButton.SegmentType);
-                    outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? outlineWidth / 2 : 0));
+                    outlinePath = RectangularPerimeterPath(RoundedBoxElement, outlineBoundary, radius - (drawOutline ? RoundedBoxElement.OutlineWidth / 2 : 0));
                 }
                 var path = new Path();
                 path.Stroke = new SolidColorBrush(RoundedBoxElement.OutlineColor.ToWindowsColor());
@@ -860,30 +868,94 @@ namespace Forms9Patch.UWP
                 canvas.Children.Add(path);
             }
 
+            // separators
+            if (materialButton!=null && RoundedBoxElement.OutlineWidth < 0.05 && separatorWidth > 0 && !_roundedBoxElement.IsElliptical)
+            {
+                var inset = RoundedBoxElement.OutlineColor.A > 0 ? separatorWidth  / 2.0f : 0;
+                var line = new Line();
+                line.Stroke = new SolidColorBrush(materialButton.OutlineColor.ToWindowsColor());
+                line.StrokeThickness = separatorWidth;
+                if (segmentType == SegmentType.Start || segmentType == SegmentType.Mid)
+                {
+                    if (hz)
+                    {
+                        line.X1 = perimeter.Right;
+                        line.Y1 = perimeter.Top + inset;
+                        line.X2 = line.X1;
+                        line.Y2 = perimeter.Bottom - inset;
+                    }
+                    else
+                    {
+                        line.X1 = perimeter.Left + inset;
+                        line.Y1 = perimeter.Bottom;
+                        line.X2 = perimeter.Right - inset;
+                        line.Y2 = line.Y1;
+                    }
+                }
+                if (segmentType == SegmentType.Mid || segmentType == SegmentType.End)
+                {
+                    if (hz)
+                    {
+                        line.X1 = perimeter.Left;
+                        line.Y1 = perimeter.Top + inset;
+                        line.X2 = line.X1;
+                        line.Y2 = perimeter.Bottom - inset;
+                    }
+                    else
+                    {
+                        line.X1 = perimeter.Left + inset;
+                        line.Y1 = perimeter.Top;
+                        line.X2 = perimeter.Right - inset;
+                        line.Y2 = line.Y1;
+                    }
+                }
+                canvas.Children.Add(line);
+
+                /*
+                g.SetShadow(new CGSize(0, 0), 0, Color.Transparent.ToCGColor());
+                nfloat inset = _roundedBoxElement.OutlineColor.A > 0 ? _roundedBoxElement.OutlineWidth / 2.0f : 0;
+                g.SetStrokeColor(_roundedBoxElement.OutlineColor.ToCGColor());
+                g.SetLineWidth(separatorWidth);
+                if (_segmentType == SegmentType.Start || _segmentType == SegmentType.Mid)
+                {
+                    if (_hz)
+                    {
+                        //g.MoveTo (perimeter.Right, perimeter.Top + inset);
+                        //g.AddLineToPoint (perimeter.Right, perimeter.Bottom - inset);
+                        g.MoveTo((nfloat)Math.Ceiling(perimeter.Right), perimeter.Top + inset);
+                        g.AddLineToPoint((nfloat)Math.Ceiling(perimeter.Right), perimeter.Bottom - inset);
+                    }
+                    else
+                    {
+                        g.MoveTo(perimeter.Left + inset, (nfloat)Math.Ceiling(perimeter.Bottom));
+                        g.AddLineToPoint(perimeter.Right - inset, (nfloat)Math.Ceiling(perimeter.Bottom));
+                    }
+                }
+                if (_segmentType == SegmentType.Mid || _segmentType == SegmentType.End)
+                {
+                    if (_hz)
+                    {
+                        g.MoveTo((nfloat)Math.Round(perimeter.Left), perimeter.Top + inset);
+                        g.AddLineToPoint((nfloat)Math.Round(perimeter.Left), perimeter.Bottom - inset);
+                    }
+                    else
+                    {
+                        g.MoveTo(perimeter.Left + inset, (nfloat)Math.Round(perimeter.Top));
+                        g.AddLineToPoint(perimeter.Right - inset, (nfloat)Math.Round(perimeter.Top));
+                    }
+                }
+
+                g.StrokePath();
+                */
+            }
+
+
 
             Children.Add(canvas);
 
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "]====================================================================================");
         }
-        #endregion
 
-
-        void TintImage([System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
-        {
-            if (ImageElement?.Source != null && Children.Count == 1 && Children[0] is Windows.UI.Xaml.Controls.Image image && image.Source is WriteableBitmap bitmap)
-            {
-                if (ImageElement.TintColor != Xamarin.Forms.Color.Default)
-                    bitmap.ForEach((x, y, color) => Windows.UI.Color.FromArgb(color.A, (byte)(ImageElement.TintColor.R * 255), (byte)(ImageElement.TintColor.G * 255), (byte)(ImageElement.TintColor.B * 255)));
-                else if (callerName!="GenerateImageLayout")
-                {
-                    _validImageLayout = false;
-                    GenerateImageLayout();
-                }
-            }
-        }
-
-
-        #region RoundedBoxLayout Support
 
         static Rect RoundRect(Rect rect, StackOrientation orientation, Forms9Patch.SegmentType type)
         {

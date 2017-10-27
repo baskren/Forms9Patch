@@ -67,13 +67,6 @@ namespace Forms9Patch.Droid
 
             var visualElement = RoundedBoxElement as VisualElement;
 
-            /*
-            var width = visualElement.Width;
-            var height = visualElement.Height;
-
-            if (width <= 0 || height <= 0)
-                return;
-            */
             if (Bounds.Width() <= 0 || Bounds.Height() <= 0)
                 return;
 
