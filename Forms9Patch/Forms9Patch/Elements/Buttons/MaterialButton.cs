@@ -623,8 +623,8 @@ namespace Forms9Patch
                 FontAttributes = FontAttributes,
                 FontFamily = FontFamily,
                 Margin = 0,
-
             };
+            _label.PropertyChanged += OnLabelPropertyChanged;
 
             _stackLayout = new Xamarin.Forms.StackLayout
             {
@@ -644,9 +644,9 @@ namespace Forms9Patch
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
 
+
             UpdateElements();
 
-            _label.PropertyChanged += OnLabelPropertyChanged;
             _constructing = false;
         }
         #endregion
@@ -854,6 +854,12 @@ namespace Forms9Patch
                 //base.OutlineColor = OutlineColor.A > 0 ? opaque : _label.TextColor;//base.BackgroundColor;
                 //base.OutlineWidth = base.OutlineWidth > 0
             }
+            UpdateIconTint();
+            _noUpdate = false;
+        }
+
+        public void UpdateIconTint()
+        {
             if (_image != null)
                 _image.TintColor = TintImage ? _label.TextColor : Color.Default;
             if (_iconLabel != null)
@@ -861,7 +867,6 @@ namespace Forms9Patch
                 _iconLabel.TextColor = _label.TextColor;
                 _iconLabel.FontSize = _label.FontSize;
             }
-            _noUpdate = false;
         }
         #endregion
 
@@ -966,6 +971,10 @@ namespace Forms9Patch
                         _stackLayout.Children.Add(_label);
                 }
                 SetOrienations();
+            } 
+            else if (propertyName == Label.TextColorProperty.PropertyName)
+            {
+                UpdateIconTint();
             }
         }
 
@@ -1180,7 +1189,8 @@ namespace Forms9Patch
                     }
                     _image = new Image { Source = ImageSource };
                     _image.Fill = Fill.AspectFit;
-                    _image.TintColor = TintImage ? _label.TextColor : Color.Default;
+                    //_image.TintColor = TintImage ? _label.TextColor : Color.Default;
+                    UpdateIconTint();
                     if (_image != null)
                     {
                         if (TrailingImage)
@@ -1221,6 +1231,7 @@ namespace Forms9Patch
                             _stackLayout.Children.Insert(0, _iconLabel);
                         SetOrienations();
                     }
+                    UpdateIconTint();
                 }
                 _changingIconText = false;
             }
@@ -1237,56 +1248,26 @@ namespace Forms9Patch
                 UpdateElements();
             }
             else if (propertyName == OrientationProperty.PropertyName)
-            {
                 SetOrienations();
-                /*
-			} else if (propertyName == FontFamilyProperty.PropertyName) {
-				_label.FontFamily = FontFamily;
-			} else if (propertyName == FontSizeProperty.PropertyName) {
-				_label.FontSize = FontSize;
-			} else if (propertyName == FontAttributesProperty.PropertyName) {
-				_label.FontAttributes = FontAttributes;
-				*/
-            }
             else if (propertyName == FontColorProperty.PropertyName && !IsSelected)
             {
                 UpdateElements();
-                /*
-					_label.TextColor = FontColor;
-					if (_iconLabel != null)
-						_iconLabel.TextColor = FontColor;
-					if (_image != null)
-						_image.TintColor = TintImage ? FontColor : Color.Default;
-						*/
+                UpdateIconTint();
             }
             else if (propertyName == SelectedFontColorProperty.PropertyName && IsSelected)
             {
                 UpdateElements();
-                /*
-					_label.TextColor = SelectedFontColor;
-					if (_iconLabel != null)
-						_iconLabel.TextColor = SelectedFontColor;
-					if (_image != null)
-						_image.TintColor = TintImage ? SelectedFontColor : Color.Default;
-						*/
+                UpdateIconTint();
             }
             else if (propertyName == TintImageProperty.PropertyName && _image != null)
-            {
                 UpdateElements();
-                //_image.TintColor = TintImage ? FontColor : Color.Default;
-            }
             else if (propertyName == HasTightSpacingProperty.PropertyName)
-            {
                 SetOrienations();
-            }
             else if (propertyName == TextProperty.PropertyName)
-            {
                 _label.Text = Text;
-            }
             else if (propertyName == HtmlTextProperty.PropertyName)
-            {
                 _label.HtmlText = HtmlText;
-            }
+
             if (propertyName == IsSelectedProperty.PropertyName)
             {
                 if (IsSelected)
@@ -1328,6 +1309,9 @@ namespace Forms9Patch
             }
             else if (propertyName == SpacingProperty.PropertyName)
                 _stackLayout.Spacing = Spacing;
+            else if (propertyName == TintImageProperty.PropertyName)
+                UpdateIconTint();
+            
         }
 
         void OnCommandChanged()

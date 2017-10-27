@@ -74,14 +74,15 @@ namespace Forms9Patch.UWP
         {
             if (e.PropertyName == Forms9Patch.Image.SourceProperty.PropertyName)
                 SetSourceAsync();
-            else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName ||
-                e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName)
+            else if (e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName)
             {
                 _validImageLayout = false;
                 GenerateImageLayout();
             }
             else if (e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName)
                 GenerateImageLayout();
+            else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName)
+                TintImage();
         }
 
         public Forms9Patch.IRoundedBox RoundedBoxElement
@@ -485,6 +486,9 @@ namespace Forms9Patch.UWP
                 Children.Add(image);
 
                 UpdateAspect();
+
+                TintImage();
+
             }
             else
             {
@@ -571,6 +575,7 @@ namespace Forms9Patch.UWP
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instance + "]ImageView.GenerateLayout[" + _instance + "] EXIT");
             _validImageLayout = true;
+
             RefreshImage();
         }
 
@@ -862,6 +867,20 @@ namespace Forms9Patch.UWP
         }
         #endregion
 
+
+        void TintImage([System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        {
+            if (ImageElement?.Source != null && Children.Count == 1 && Children[0] is Windows.UI.Xaml.Controls.Image image && image.Source is WriteableBitmap bitmap)
+            {
+                if (ImageElement.TintColor != Xamarin.Forms.Color.Default)
+                    bitmap.ForEach((x, y, color) => Windows.UI.Color.FromArgb(color.A, (byte)(ImageElement.TintColor.R * 255), (byte)(ImageElement.TintColor.G * 255), (byte)(ImageElement.TintColor.B * 255)));
+                else if (callerName!="GenerateImageLayout")
+                {
+                    _validImageLayout = false;
+                    GenerateImageLayout();
+                }
+            }
+        }
 
 
         #region RoundedBoxLayout Support

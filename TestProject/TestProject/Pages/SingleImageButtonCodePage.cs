@@ -57,7 +57,7 @@ namespace Forms9PatchDemo
             HorizontalTextAlignment = TextAlignment.Start,
         };
 
-
+        /*
         Forms9Patch.ImageButton b3 = new Forms9Patch.ImageButton
         {
             DefaultState = new Forms9Patch.ImageButtonState
@@ -104,7 +104,7 @@ namespace Forms9PatchDemo
             HeightRequest = 50,
             HorizontalTextAlignment = TextAlignment.End,
         };
-
+        */
         #endregion
 
 
@@ -115,7 +115,7 @@ namespace Forms9PatchDemo
             {
                 Children = {
                     new Label { Text = "Buttons Page" },
-                    b2,b3,b4,
+                    b2 //,b3,b4,
 
                 }
             };
@@ -134,20 +134,20 @@ namespace Forms9PatchDemo
                     b2.Selected -= OnImageButtonSelected;
                     b2.LongPressing -= OnImageButtonLongPressing;
                     b2.LongPressed -= OnImageButtonLongPressed;
-
+                    b2.Dispose();
+                    /*
                     b3.Tapped -= OnImageButtonTapped;
                     b3.Selected -= OnImageButtonSelected;
                     b3.LongPressing -= OnImageButtonLongPressing;
                     b3.LongPressed -= OnImageButtonLongPressed;
+                    b3.Dispose();
 
                     b4.Tapped -= OnImageButtonTapped;
                     b4.Selected -= OnImageButtonSelected;
                     b4.LongPressing -= OnImageButtonLongPressing;
                     b4.LongPressed -= OnImageButtonLongPressed;
-
-                    b2.Dispose();
-                    b3.Dispose();
                     b4.Dispose();
+                    */
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

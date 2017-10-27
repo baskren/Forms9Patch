@@ -114,6 +114,7 @@ namespace Forms9Patch
             _gestureListener.LongPressing += OnLongPressing;
 
             _constructing = false;
+            
         }
         #endregion
 
@@ -327,7 +328,7 @@ namespace Forms9Patch
             SetLabelState(_label, _currentState);
             _currentState.PropertyChanged += OnStatePropertyChanged;
             //InvalidateMeasure ();
-
+            UpdateIconTint();
             _showingState = false;
         }
 
