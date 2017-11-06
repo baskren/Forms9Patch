@@ -14,15 +14,15 @@ namespace Forms9Patch.UWP
     {
         //static readonly Dictionary<string, >
         static readonly Dictionary<string, BitmapImage> Cache = new Dictionary<string, BitmapImage>();
-        static readonly Dictionary<string, List<ImageView>> ImageViews = new Dictionary<string, List<ImageView>>();
+        static readonly Dictionary<string, List<SkiaView>> ImageViews = new Dictionary<string, List<SkiaView>>();
         static readonly object _constructorLock = new object();
         //static readonly Dictionary<string, object> ConstructionLocks = new Dictionary<string, object>();
 
 #pragma warning disable 1998
-        internal static async Task<BitmapImage> FetchResourceData(this ImageView imageViewManager, Xamarin.Forms.ImageSource streamSource, int _i)
+        internal static async Task<BitmapImage> FetchResourceData(this SkiaView imageViewManager, Xamarin.Forms.ImageSource streamSource, int _i)
 #pragma warning restore 1998
         {
-            string path = (string)streamSource?.GetValue(ImageSource.PathProperty);
+            string path = (string)streamSource?.GetValue(ImageSource.EmbeddedResourceIdProperty);
             if (path == null)
                 return null;
 
@@ -47,7 +47,7 @@ namespace Forms9Patch.UWP
                 stream.Seek(0);
                 Cache[path] = bitmap;
                 if (!ImageViews.ContainsKey(path))
-                    ImageViews[path] = new List<ImageView>();
+                    ImageViews[path] = new List<SkiaView>();
                 ImageViews[path].Add(imageViewManager);
                 await bitmap.SetSourceAsync(stream);
             }
@@ -59,9 +59,9 @@ namespace Forms9Patch.UWP
 
 
 
-        internal static void ReleaseStreamData(this ImageView imageViewManager, Xamarin.Forms.BindableObject streamSource)
+        internal static void ReleaseStreamData(this SkiaView imageViewManager, Xamarin.Forms.BindableObject streamSource)
         {
-            var path = (string)streamSource?.GetValue(ImageSource.PathProperty);
+            var path = (string)streamSource?.GetValue(ImageSource.EmbeddedResourceIdProperty);
             if (path == null)
                 return;
             lock (_constructorLock)

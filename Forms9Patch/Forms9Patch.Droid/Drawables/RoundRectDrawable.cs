@@ -72,7 +72,7 @@ namespace Forms9Patch.Droid
 
             var rect = new RectF(Bounds.Left, Bounds.Top, Bounds.Right, Bounds.Bottom); //new Rect(0, 0, width, height);
 
-            SegmentType segmentType = SegmentType.Not;
+            ButtonShape segmentType = ButtonShape.Rectangle;
             var hz = true;
             if (RoundedBoxElement is MaterialButton materialButton)
             {
@@ -84,7 +84,7 @@ namespace Forms9Patch.Droid
 
             var vt = !hz;
 
-            float separatorWidth = materialButton == null || segmentType == SegmentType.Not ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+            float separatorWidth = materialButton == null || segmentType == ButtonShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
             if (RoundedBoxElement.BackgroundColor.A < 0.01 && (RoundedBoxElement.OutlineColor.A < 0.01 || (outlineWidth < 0.01 && separatorWidth < 0.01)))
                 return;
 
@@ -415,23 +415,23 @@ namespace Forms9Patch.Droid
             var radius = roundedBox.OutlineRadius * Display.Scale;
             var hz = materialButton == null || materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
             var vt = !hz;
-            var segmentType = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            var segmentType = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
             switch (segmentType)
             {
-                case SegmentType.Not:
+                case ButtonShape.Rectangle:
                     boundary = RectInset(perimeter, offset);
                     break;
-                case SegmentType.Start:
+                case ButtonShape.SegmentStart:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case SegmentType.Mid:
+                case ButtonShape.SegmentMid:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case SegmentType.End:
+                case ButtonShape.SegmentEnd:
                     boundary = RectInset(perimeter, offset);
                     break;
             }
-            if (segmentType == SegmentType.Not)
+            if (segmentType == ButtonShape.Rectangle)
             {
                 if (roundedBox.IsElliptical)
                     result = Ellipse(boundary);
@@ -456,7 +456,7 @@ namespace Forms9Patch.Droid
         internal static CGPath PerimeterPath(IRoundedBox element, RectF rect, float radius, bool counterClockWise = true)
         {
             var materialButton = element as MaterialButton;
-            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            ButtonShape type = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
             StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var diameter = radius * 2;
@@ -473,7 +473,7 @@ namespace Forms9Patch.Droid
                 result.MoveTo((rect.Left + rect.Right) / 2.0f, rect.Top);
 
                 // topLeft
-                if (type == SegmentType.Start || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentStart || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Left + radius, rect.Top);
                     //result.AddRelativeArc (rect.Left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
@@ -485,7 +485,7 @@ namespace Forms9Patch.Droid
                 }
 
                 // bottom left
-                if (type == SegmentType.Start && orientation == StackOrientation.Horizontal || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentStart && orientation == StackOrientation.Horizontal || type == ButtonShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Left, rect.Bottom - radius);
                     //result.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI), (nfloat)(-Math.PI / 2.0));
@@ -495,7 +495,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Left, rect.Bottom);
 
                 // bottom right
-                if (type == SegmentType.End || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentEnd || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Right - radius, rect.Bottom);
                     //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(Math.PI/2.0), (nfloat)(-Math.PI / 2.0));
@@ -505,7 +505,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Bottom);
 
                 // top right
-                if (type == SegmentType.End && orientation == StackOrientation.Horizontal || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentEnd && orientation == StackOrientation.Horizontal || type == ButtonShape.SegmentStart && orientation == StackOrientation.Vertical || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Right, rect.Top + radius);					
                     //result.AddArcToPoint (rect.Right, rect.Top - radius, rect.Right - radius, rect.Top, radius);
@@ -524,7 +524,7 @@ namespace Forms9Patch.Droid
                 result.MoveTo(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
 
                 // topLeft
-                if (type == SegmentType.Start || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentStart || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Left, rect.Top + radius);
                     //result.AddRelativeArc (rect.Left + radius, rect.Top + radius, radius, (nfloat)(Math.PI), (nfloat)(Math.PI / 2.0));
@@ -536,7 +536,7 @@ namespace Forms9Patch.Droid
                 }
 
                 // top right
-                if (type == SegmentType.End || type == SegmentType.Start && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentEnd || type == ButtonShape.SegmentStart && orientation == StackOrientation.Vertical || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Right - radius, rect.Top);
                     //result.AddRelativeArc (rect.Right - radius, rect.Top + radius, radius, (nfloat)(3*Math.PI/2.0), (nfloat)(Math.PI / 2.0));
@@ -546,7 +546,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Top);
 
                 // bottom right
-                if (type == SegmentType.End || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentEnd || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Right, rect.Bottom - radius);
                     //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
@@ -556,7 +556,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Bottom);
 
                 // bottom left
-                if (type == SegmentType.Start || type == SegmentType.End && orientation == StackOrientation.Vertical || type == SegmentType.Not)
+                if (type == ButtonShape.SegmentStart || type == ButtonShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ButtonShape.Rectangle)
                 {
                     //result.LineTo (rect.Left + radius, rect.Bottom);
                     //result.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
@@ -591,7 +591,7 @@ namespace Forms9Patch.Droid
 
 
             var materialButton = element as MaterialButton;
-            SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+            ButtonShape type = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
             StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var diameter = radius * 2;
@@ -602,7 +602,7 @@ namespace Forms9Patch.Droid
 
             var pathFigure = new CGPath();
 
-            if (type == SegmentType.Not)
+            if (type == ButtonShape.Rectangle)
             {
                 pathFigure.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
                 pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
@@ -619,7 +619,7 @@ namespace Forms9Patch.Droid
                     pathFigure.ArcTo(topRight, 0, -90);
                 pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
             }
-            else if (type == SegmentType.Start)
+            else if (type == ButtonShape.SegmentStart)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -644,7 +644,7 @@ namespace Forms9Patch.Droid
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == SegmentType.Mid)
+            else if (type == ButtonShape.SegmentMid)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -661,7 +661,7 @@ namespace Forms9Patch.Droid
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == SegmentType.End)
+            else if (type == ButtonShape.SegmentEnd)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {

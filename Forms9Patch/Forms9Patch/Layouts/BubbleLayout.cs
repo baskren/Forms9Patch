@@ -197,13 +197,36 @@ namespace Forms9Patch
 			get { return (bool)GetValue(IsEllipticalProperty); }
 			set { SetValue(IsEllipticalProperty, value); }
 		}
-		#endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Forms9Patch.BubbleLayout"/> class.
-		/// </summary>
-		public BubbleLayout() {
+        /// <summary>
+        /// Backing store for the BackgroundImage bindable property.
+        /// </summary>
+        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Image), typeof(BubbleLayout), null);
+        /// <summary>
+        /// Gets or sets the background image.
+        /// </summary>
+        /// <value>The background image.</value>
+        public Image BackgroundImage
+        {
+            get { return (Image)GetValue(BackgroundImageProperty); }
+            set { SetValue(BackgroundImageProperty, value); }
+        }
+
+        /// <summary>
+        /// The Instance Id (for debugging purposes)
+        /// </summary>
+        public int InstanceId { get; private set; }
+
+        static int _instances = 0;
+
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Forms9Patch.BubbleLayout"/> class.
+        /// </summary>
+        public BubbleLayout() {
 			Padding = 10;
+            InstanceId = _instances++;
 			//BackgroundColor = Color.White;
 		}
 

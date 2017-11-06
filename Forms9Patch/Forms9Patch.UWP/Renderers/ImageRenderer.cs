@@ -16,7 +16,7 @@ using Xamarin.Forms.Platform.UWP;
 [assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.UWP.ImageRenderer))]
 namespace Forms9Patch.UWP
 {
-    public class ImageRenderer : ViewRenderer<Image, ImageView>
+    public class ImageRenderer : ViewRenderer<Image, SkiaView>
     {
         #region Fields
         bool _disposed;
@@ -80,7 +80,7 @@ namespace Forms9Patch.UWP
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    SetNativeControl(new ImageView(_instance));
+                    SetNativeControl(new SkiaView(_instance));
                 Control.ImageElement = e.NewElement;
             }
         }

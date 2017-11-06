@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// Forms9Patch Material Segmented Control.
     /// </summary>
     [ContentProperty("Segments")]
-    public class MaterialSegmentedControl : Forms9Patch.StackLayout, IDisposable
+    public class MaterialSegmentedControl : Forms9Patch.ManualLayout, IDisposable
     {
 
         #region Properties
@@ -359,6 +359,12 @@ namespace Forms9Patch
             set { SetValue(IntraSegmentSpacingProperty, value); }
         }
 
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(Xamarin.Forms.StackOrientation), typeof(MaterialSegmentedControl), StackOrientation.Horizontal);
+        public Xamarin.Forms.StackOrientation Orientation
+        {
+            get { return (Xamarin.Forms.StackOrientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
         #endregion
 
 
@@ -373,7 +379,7 @@ namespace Forms9Patch
             //Spacing = -.5 * Display.Scale;
             base.Padding = new Thickness(0);
             //Padding = new Thickness(2);
-            Spacing = 0;
+            //Spacing = 0;
             OutlineRadius = 2;
             OutlineWidth = 1;
             Orientation = StackOrientation.Horizontal;
@@ -511,14 +517,14 @@ namespace Forms9Patch
             int count = Children.Count;
             if (count > 1)
             {
-                ((MaterialButton)Children[0]).SegmentType = SegmentType.Start;
+                ((MaterialButton)Children[0]).SegmentType = ButtonShape.SegmentStart;
                 for (int i = 1; i < count - 1; i++)
-                    ((MaterialButton)Children[i]).SegmentType = SegmentType.Mid;
-                ((MaterialButton)Children[count - 1]).SegmentType = SegmentType.End;
+                    ((MaterialButton)Children[i]).SegmentType = ButtonShape.SegmentMid;
+                ((MaterialButton)Children[count - 1]).SegmentType = ButtonShape.SegmentEnd;
             }
             else if (count == 1)
             {
-                ((MaterialButton)Children[0]).SegmentType = SegmentType.Not;
+                ((MaterialButton)Children[0]).SegmentType = ButtonShape.Rectangle;
             }
             UpdateChildrenPadding();
         }
@@ -586,10 +592,10 @@ namespace Forms9Patch
                     }
                     switch (child.SegmentType)
                     {
-                        case SegmentType.Start:
+                        case ButtonShape.SegmentStart:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
-                        case SegmentType.Mid:
+                        case ButtonShape.SegmentMid:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
                         default:
@@ -793,6 +799,50 @@ namespace Forms9Patch
             }
         }
 
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            //return base.OnMeasure(widthConstraint, heightConstraint);
+            var hz = Orientation == StackOrientation.Horizontal;
+            var vt = !hz;
+
+            double requestHeight = 0;
+            double requestWidth = 0;
+            double minHeight = 0;
+            double minWidth = 0;
+
+            if (hz )//&& (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint)) )
+            {
+                // we have all the width in the world ... but what's the height?
+                foreach (var child in Children)
+                {
+                    var childSizeRequest = child.Measure(double.PositiveInfinity, heightConstraint, MeasureFlags.None);
+                    //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest["+child.Id+"]=["+childSizeRequest+"]");
+                    if (childSizeRequest.Request.Height > requestHeight)
+                        requestHeight = childSizeRequest.Request.Height;
+                    if (childSizeRequest.Minimum.Height > minHeight)
+                        minHeight = childSizeRequest.Minimum.Height;
+                    requestWidth += childSizeRequest.Request.Width;
+                    minWidth += childSizeRequest.Minimum.Width;
+                }
+            }
+            else // if (vt)// && (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint)))
+            {
+                // we have all the height in the world ... but what's the width?
+                foreach (var child in Children)
+                {
+                    var childSizeRequest = child.Measure(widthConstraint, double.PositiveInfinity, MeasureFlags.None);
+                    //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest[" + child.Id + "]=[" + childSizeRequest + "]");
+                    if (childSizeRequest.Request.Width > requestWidth)
+                        requestWidth = childSizeRequest.Request.Width;
+                    if (childSizeRequest.Minimum.Width > minWidth)
+                        minWidth = childSizeRequest.Minimum.Width;
+                    requestHeight += childSizeRequest.Request.Height;
+                    minHeight += childSizeRequest.Minimum.Height;
+                }
+            }
+            return new SizeRequest(new Size(requestWidth, requestHeight), new Size(minWidth, minHeight));
+        }
+
         /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
         /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
         /// <param name="width">A value representing the width of the child region bounding box.</param>
@@ -817,6 +867,8 @@ namespace Forms9Patch
             var newHeight = height - p.VerticalThickness;
 
             //System.Diagnostics.Debug.WriteLine("newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
+
+            var topPage = this.TopPage();
 
 
             int count = Children.Count;
@@ -857,16 +909,30 @@ namespace Forms9Patch
                             thisW = sWidth;
                             thisH = sHeight;
                         }
-                        if (x + thisW > width)
-                            thisW = width - x;
-                        if (y + thisH > height)
-                            thisH = height - y;
+
+                        // Math.Round with Display.Scale fixes UWP layout gaps but not UWP SkiaRoundedBoxView gaps
+
+                        //thisW = Math.Round(thisW);
+                        //thisH = Math.Round(thisH);
                         thisW = Math.Round(thisW * Display.Scale) / Display.Scale;
                         thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
+                        if (x + thisW > width)
+                            //thisW = width - x;
+                            //thisW = Math.Floor(width - x);
+                            thisW = Math.Floor((width - x) * Display.Scale) / Display.Scale;
+                        if (y + thisH > height)
+                            //thisH = height - y;
+                            //thisH = Math.Floor(height - y);
+                            thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
-                        //System.Diagnostics.Debug.WriteLine("MaterialSegmentedControl.LayoutChildren LayoutChildIntoBoundingRegion("+x+","+y+","+thisW+","+thisH+")");
+                        //if (vt)
+                        //System.Diagnostics.Debug.WriteLine("MaterialSegmentedControl.LayoutChildren LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
                         x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
                         y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
+                        //x = Math.Round(x + (hz ? thisW : 0));
+                        //y = Math.Round(y + (vt ? thisH : 0));
+                        //x = (x + (hz ? thisW : 0));
+                        //y = (y + (vt ? thisH : 0));
                     }
                 }
                 //var lastView = Children.Last();

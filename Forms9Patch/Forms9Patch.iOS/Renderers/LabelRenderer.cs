@@ -671,7 +671,7 @@ namespace Forms9Patch.iOS
                 if (ControlAttributedText != null)
                     UpdateText();
             }
-            else if (e.PropertyName == Label.FontProperty.PropertyName)
+            else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontSizeProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
             {
                 UpdateFont();
                 if (ControlAttributedText != null)

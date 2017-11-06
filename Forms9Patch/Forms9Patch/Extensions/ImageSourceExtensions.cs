@@ -18,7 +18,7 @@ namespace Forms9Patch
             {
                 if (thisStreamSource.GetValue(ImageSource.AssemblyProperty) != otherStreamSource.GetValue(ImageSource.AssemblyProperty))
                     return false;
-                return thisStreamSource.GetValue(ImageSource.PathProperty) != otherStreamSource.GetValue(ImageSource.PathProperty) ? false : true;
+                return thisStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) != otherStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) ? false : true;
             }
             var thisFileSource = thisSource as Xamarin.Forms.FileImageSource;
             var otherFileSource = otherSource as Xamarin.Forms.FileImageSource;

@@ -324,10 +324,8 @@ namespace Forms9Patch.Droid
                 });
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
                 UpdateColor();
-            else if (e.PropertyName == Label.FontProperty.PropertyName)
+            else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontSizeProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
                 UpdateFont();
-            else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
-                UpdateFontSize();
             else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
                 UpdateLineBreakMode();
             else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)

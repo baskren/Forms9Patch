@@ -159,6 +159,11 @@ namespace Forms9Patch
             set { SetValue(IgnoreChildrenProperty, value); }
         }
 
+        /// <summary>
+        /// The Instance Id (for debugging purposes)
+        /// </summary>
+        public int InstanceId => _id;
+
         #endregion
 
         /// <param name="propertyName">The name of the property that changed.</param>

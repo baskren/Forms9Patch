@@ -71,6 +71,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\Release\</OutputPath>
@@ -96,7 +97,7 @@
     <Compile Include="Extensions\GridExtension.cs" />
     <Compile Include="Extensions\AspectExtension.cs" />
     <Compile Include="Enums\Fill.cs" />
-    <Compile Include="Enums\SegmentType.cs" />
+    <Compile Include="Enums\ButtonShape.cs" />
     <Compile Include="Enums\GroupToggleBehavior.cs" />
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Events\SegmentedControlEventArgs.cs" />

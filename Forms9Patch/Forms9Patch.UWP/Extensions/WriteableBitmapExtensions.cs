@@ -210,7 +210,7 @@ namespace Forms9Patch.UWP
             rangeLists.MarginY = margY;
 
             stopwatch.Stop();
-            System.Diagnostics.Debug.WriteLine("NinePatchRanges: "+ stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("NinePatchRanges: "+ stopwatch.ElapsedMilliseconds);
             return rangeLists;
         }
 

@@ -540,10 +540,10 @@ namespace Forms9Patch
         /// <summary>
         /// 
         /// </summary>
-        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(SegmentType), typeof(MaterialButton), SegmentType.Not);
-        internal SegmentType SegmentType
+        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ButtonShape), typeof(MaterialButton), ButtonShape.Rectangle);
+        internal ButtonShape SegmentType
         {
-            get { return (SegmentType)GetValue(SegmentTypeProperty); }
+            get { return (ButtonShape)GetValue(SegmentTypeProperty); }
             set { SetValue(SegmentTypeProperty, value); }
         }
 
@@ -770,7 +770,7 @@ namespace Forms9Patch
             if (IsEnabled)
             {
                 base.HasShadow = BackgroundColor.A > 0 && HasShadow;
-                ShadowInverted = IsSelected && SegmentType == SegmentType.Not;
+                ShadowInverted = IsSelected && SegmentType == ButtonShape.Rectangle;
 
                 _label.TextColor = enabledLabelColor;
 
@@ -823,7 +823,7 @@ namespace Forms9Patch
                         _label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
                     }
                 }
-                if (SegmentType == SegmentType.Not)
+                if (SegmentType == ButtonShape.Rectangle)
                 {
                     base.HasShadow = false;
                     base.BackgroundColor = BackgroundColor.A > 0 ? opaque : transp;
@@ -1009,7 +1009,7 @@ namespace Forms9Patch
         void SetStackLayoutPadding()
         {
             var padding = OutlineWidth / Display.Scale;
-            if (SegmentType == SegmentType.Not || SegmentType == SegmentType.End)
+            if (SegmentType == ButtonShape.Rectangle || SegmentType == ButtonShape.SegmentEnd)
                 _stackLayout.Padding = padding;
             else
             {

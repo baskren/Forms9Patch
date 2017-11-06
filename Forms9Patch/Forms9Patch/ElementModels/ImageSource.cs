@@ -13,7 +13,7 @@ namespace Forms9Patch
     public class ImageSource : Xamarin.Forms.ImageSource
     {
         internal static readonly BindableProperty ImageScaleProperty = BindableProperty.CreateAttached("ImageScale", typeof(float), typeof(ImageSource), 1.0f);
-        internal static readonly BindableProperty PathProperty = BindableProperty.CreateAttached("Path", typeof(string), typeof(ImageSource), null);
+        internal static readonly BindableProperty EmbeddedResourceIdProperty = BindableProperty.CreateAttached("EmbeddedResourceId", typeof(string), typeof(ImageSource), null);
         internal static readonly BindableProperty AssemblyProperty = BindableProperty.CreateAttached("Assembly", typeof(Assembly), typeof(ImageSource), null);
 
         #region Constructor
@@ -74,7 +74,7 @@ namespace Forms9Patch
             if (imageSource != null)
             {
                 imageSource.SetValue(ImageScaleProperty, r == null ? 1.0f : r.Scale);
-                imageSource.SetValue(PathProperty, path);
+                imageSource.SetValue(EmbeddedResourceIdProperty, path);
                 imageSource.SetValue(AssemblyProperty, assembly);
             }
             return imageSource;
@@ -84,13 +84,13 @@ namespace Forms9Patch
         /// Cached selection of resource (literally - no automated selection of device, resolution, or extension).
         /// </summary>
         /// <returns>The resource.</returns>
-        /// <param name="path">Path.</param>
+        /// <param name="resourceId">Path.</param>
         /// <param name="assembly">Assembly.</param>
-        public static new Xamarin.Forms.ImageSource FromResource(string path, Assembly assembly = null)
+        public static new Xamarin.Forms.ImageSource FromResource(string resourceId, Assembly assembly = null)
         {
             if (assembly == null)
             {
-                var resourcePath = path.Split('.').ToList();
+                var resourcePath = resourceId.Split('.').ToList();
                 if (resourcePath.Contains("Resources"))
                 {
                     var index = resourcePath.IndexOf("Resources");
@@ -106,11 +106,11 @@ namespace Forms9Patch
                 if (assembly == null)
                     assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             }
-            var imageSource = Xamarin.Forms.ImageSource.FromResource(path, assembly);
+            var imageSource = Xamarin.Forms.ImageSource.FromResource(resourceId, assembly);
             if (imageSource != null)
             {
                 imageSource.SetValue(ImageScaleProperty, 1.0f);
-                imageSource.SetValue(PathProperty, path);
+                imageSource.SetValue(EmbeddedResourceIdProperty, resourceId);
                 imageSource.SetValue(AssemblyProperty, assembly);
             }
             return imageSource;

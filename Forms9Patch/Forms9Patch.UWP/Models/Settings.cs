@@ -60,7 +60,7 @@ namespace Forms9Patch.UWP
                     _licenseKey = value;
                     Forms9Patch.Settings.LicenseKey = _licenseKey;
                     var licenseChecker = new LicenseChecker();
-                    System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 1");
+                    //System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 1");
                     _valid = licenseChecker.CheckLicenseKey(Settings._licenseKey, Forms9Patch.ApplicationInfoService.Name);
                     if (!_valid)
                     {
@@ -72,7 +72,7 @@ namespace Forms9Patch.UWP
                         };
                         errorDialog.ShowAsync();
                     }
-                    System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
+                    //System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
                     //FormsGestures.Droid.Settings.Init();
                 }
             }

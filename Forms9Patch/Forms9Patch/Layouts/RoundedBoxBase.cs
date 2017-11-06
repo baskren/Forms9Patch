@@ -46,7 +46,12 @@ namespace Forms9Patch
 		/// </summary>
 		public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(RoundedBoxBase), false);
 
-		internal static bool UpdateBasePadding(BindableObject bindable, object newValue) {
+        /// <summary>
+        /// The elliptical property backing store.
+        /// </summary>
+        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(RoundedBoxBase), default(Forms9Patch.Image));
+
+        internal static bool UpdateBasePadding(BindableObject bindable, object newValue) {
 			var layout = bindable as Layout;
 			Thickness layoutPadding;
 			if (newValue is bool)
@@ -87,7 +92,7 @@ namespace Forms9Patch
 			var makeRoomForShadow = materialButton == null ? hasShadow : (bool)layout.GetValue (MaterialButton.HasShadowProperty);
 
 			if (makeRoomForShadow) {
-				SegmentType type = materialButton == null ? SegmentType.Not : materialButton.SegmentType;
+				ButtonShape type = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
 				StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
 				var shadowX = Settings.ShadowOffset.X;
@@ -95,10 +100,10 @@ namespace Forms9Patch
 				var shadowR = Settings.ShadowRadius;
 
 				// additional padding alocated for the button's shadow
-				var padL = orientation == StackOrientation.Horizontal && (type == SegmentType.Mid || type == SegmentType.End) ? 0 : Math.Max (0, shadowR - shadowX);
-				var padR = orientation == StackOrientation.Horizontal && (type == SegmentType.Start || type == SegmentType.Mid) ? 0 : Math.Max (0, shadowR + shadowX);
-				var padT = orientation == StackOrientation.Vertical && (type == SegmentType.Mid || type == SegmentType.End) ? 0 : Math.Max (0, shadowR - shadowY);
-				var padB = orientation == StackOrientation.Vertical && (type == SegmentType.Start || type == SegmentType.Mid) ? 0 : Math.Max (0, shadowR + shadowY);
+				var padL = orientation == StackOrientation.Horizontal && (type == ButtonShape.SegmentMid || type == ButtonShape.SegmentEnd) ? 0 : Math.Max (0, shadowR - shadowX);
+				var padR = orientation == StackOrientation.Horizontal && (type == ButtonShape.SegmentStart || type == ButtonShape.SegmentMid) ? 0 : Math.Max (0, shadowR + shadowX);
+				var padT = orientation == StackOrientation.Vertical && (type == ButtonShape.SegmentMid || type == ButtonShape.SegmentEnd) ? 0 : Math.Max (0, shadowR - shadowY);
+				var padB = orientation == StackOrientation.Vertical && (type == ButtonShape.SegmentStart || type == ButtonShape.SegmentMid) ? 0 : Math.Max (0, shadowR + shadowY);
 
 				return new Thickness (padL, padT, padR, padB);
 			} else

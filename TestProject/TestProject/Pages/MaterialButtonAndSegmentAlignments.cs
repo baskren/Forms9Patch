@@ -12,10 +12,16 @@ namespace Forms9PatchDemo
 
         const float radius = 4;
         const float width = 1;
+        const bool hasShadow = true;
         static Color outlineColor = Color.Default; // Color.Red.WithAlpha(0.25);
+        static Color backgroundColor = Color.White;
+        static bool ShadowInverted = true;
 
         MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
@@ -29,6 +35,9 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _vtAlignmentElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
@@ -42,6 +51,9 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _optionsElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             GroupToggleBehavior = GroupToggleBehavior.Multiselect,
             OutlineRadius = radius,
             OutlineWidth = width,
@@ -56,6 +68,9 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _iconElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             HasTightSpacing = true,
             //FontSize = 10,
             OutlineRadius = radius,
@@ -99,6 +114,9 @@ namespace Forms9PatchDemo
 
         MaterialButton _iconTextAndTextButton = new MaterialButton
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
@@ -107,6 +125,9 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _hzSegmentsElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
@@ -129,6 +150,9 @@ namespace Forms9PatchDemo
 
         MaterialSegmentedControl _vtSegmentsElement = new MaterialSegmentedControl
         {
+            ShadowInverted = ShadowInverted,
+            HasShadow = hasShadow,
+            BackgroundColor = backgroundColor,
             OutlineRadius = radius,
             OutlineWidth = width,
             Orientation = StackOrientation.Vertical,
@@ -197,6 +221,7 @@ namespace Forms9PatchDemo
                 {
                     Children =
                     {
+                        new Xamarin.Forms.Label { Text = "version 0.9.15.1"},
                         _grid1,
                         _grid2,
 

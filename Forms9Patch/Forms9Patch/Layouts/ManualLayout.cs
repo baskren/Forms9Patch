@@ -7,6 +7,10 @@ namespace Forms9Patch
     /// </summary>
     public class ManualLayout : Xamarin.Forms.Layout<View>, IRoundedBox, IBackgroundImage
     {
+        #region Fields
+        int _id;
+        int _instances;
+        #endregion  
 
         #region Properties
         /// <summary>
@@ -139,10 +143,19 @@ namespace Forms9Patch
             set { SetValue(IgnoreChildrenProperty, value); }
         }
 
+        /// <summary>
+        /// The Instance Id (for debugging purposes)
+        /// </summary>
+        public int InstanceId => _id;
+
         #endregion
 
 
 
+        public ManualLayout()
+        {
+            _id = _instances++;
+        }
 
         /// <summary>
         /// Occurs when layout children event is triggered.

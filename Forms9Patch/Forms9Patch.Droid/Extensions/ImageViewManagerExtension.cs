@@ -17,7 +17,7 @@ namespace Forms9Patch.Droid
 		internal static async Task<byte[]> FetchStreamData(this ImageViewManager client, Xamarin.Forms.StreamImageSource streamSource)
 #pragma warning restore 1998
 		{
-			var path =(string)streamSource?.GetValue (ImageSource.PathProperty);
+			var path =(string)streamSource?.GetValue (ImageSource.EmbeddedResourceIdProperty);
 			if (path == null) 
 				return null;
 
@@ -51,7 +51,7 @@ namespace Forms9Patch.Droid
 
 
 		internal static void ReleaseStreamBitmap(this ImageViewManager client, Xamarin.Forms.BindableObject streamSource) {
-			var path = (string)streamSource?.GetValue (ImageSource.PathProperty);
+			var path = (string)streamSource?.GetValue (ImageSource.EmbeddedResourceIdProperty);
 			if (path == null)
 				return;
 			lock (_constructorLock) {

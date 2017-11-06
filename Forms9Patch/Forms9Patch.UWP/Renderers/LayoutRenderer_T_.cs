@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace Forms9Patch.UWP
 {
-    public class LayoutRenderer<TElement> : ViewRenderer<TElement, ImageView> where TElement : Layout, IBackgroundImage
+    public class LayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxView> where TElement : Layout, IBackgroundImage
     {
         #region Fields
         bool _disposed;
@@ -53,19 +53,20 @@ namespace Forms9Patch.UWP
                 SetAutomationId(null);
                 if (Control != null)
                 {
-                    Control.ImageElement = null;
-                    Control.RoundedBoxElement = null;
+                    //Control.ImageElement = null;
+                    //Control.RoundedBoxElement = null;
                 }
             }
 
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    SetNativeControl(new ImageView(_instance));
+                    //SetNativeControl(new SkiaView(_instance));
+                    SetNativeControl(new SkiaRoundedBoxView(e.NewElement as IRoundedBox));
                 SizeChanged += OnSizeChanged;
 
-                Control.ImageElement = Element?.BackgroundImage;
-                Control.RoundedBoxElement = Element as IRoundedBox;
+                //Control.ImageElement = Element?.BackgroundImage;
+                //Control.RoundedBoxElement = Element as IRoundedBox;
 
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
@@ -76,20 +77,27 @@ namespace Forms9Patch.UWP
         {
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
                 return;
-            else if (e.PropertyName == "BackgroundImage")
-                Control.ImageElement = Element?.BackgroundImage;
+            //else if (e.PropertyName == "BackgroundImage")
+            //    Control.ImageElement = Element?.BackgroundImage;
             base.OnElementPropertyChanged(sender, e);
+
+            //Clip = null;
         }
 
+        static Random _random;
         protected override void UpdateBackgroundColor()
         {
+            _random = _random ?? new Random();
             base.UpdateBackgroundColor();
 
             //if (GetValue(BackgroundProperty) == null && Children.Count == 0)
             //{
-                // Forces the layout to take up actual space if it's otherwise empty
+            // Forces the layout to take up actual space if it's otherwise empty
                 Background = new SolidColorBrush(Colors.Transparent);
+            //Background = new SolidColorBrush(Xamarin.Forms.Color.FromRgb(_random.NextDouble(), _random.NextDouble(), _random.NextDouble()).ToWindowsColor());
             //}
+            //Clip = null;
+
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
@@ -102,16 +110,33 @@ namespace Forms9Patch.UWP
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateClipToBounds();
+            //UpdateClipToBounds();
+            //Control.Height = Math.Round(ActualHeight);
+            /*
+            if (Control?.ImageElement?.Source != null)
+            {
+                Control.Height = ActualHeight;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
+                Control.Width = ActualWidth;
+            }
+            else
+            {
+            */
+                Control.Height = ActualHeight + 1;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
+                Control.Width = ActualWidth + 1;
+            //}
+            //Control.Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight + 1) };
+            //Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight + 1) };
         }
 
         void UpdateClipToBounds()
         {
-            Clip = null;
+            //Clip = null;
+            /*
             if (Element.IsClippedToBounds)
             {
                 Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight) };
             }
+            */
         }
 
         /*

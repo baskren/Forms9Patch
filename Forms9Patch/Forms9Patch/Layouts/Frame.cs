@@ -138,13 +138,19 @@ namespace Forms9Patch
 			get { return (bool)GetValue(IsEllipticalProperty); }
 			set { SetValue(IsEllipticalProperty, value); }
 		}
-		#endregion
 
-		/// <param name="propertyName">The name of the property that changed.</param>
-		/// <summary>
-		/// Call this method from a child class to notify that a change happened on a property.
-		/// </summary>
-		protected override void OnPropertyChanged (string propertyName = null)
+        /// <summary>
+        /// The Instance Id (for debugging purposes)
+        /// </summary>
+        public int InstanceId => _id;
+
+        #endregion
+
+        /// <param name="propertyName">The name of the property that changed.</param>
+        /// <summary>
+        /// Call this method from a child class to notify that a change happened on a property.
+        /// </summary>
+        protected override void OnPropertyChanged (string propertyName = null)
 		{
 			base.OnPropertyChanged (propertyName);
 			if (propertyName == PaddingProperty.PropertyName ||

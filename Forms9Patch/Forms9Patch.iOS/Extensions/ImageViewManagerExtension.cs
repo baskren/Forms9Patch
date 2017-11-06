@@ -27,7 +27,7 @@ namespace Forms9Patch.iOS
             {
                 if (thisStreamSource.GetValue(ImageSource.AssemblyProperty) != otherStreamSource.GetValue(ImageSource.AssemblyProperty))
                     return false;
-                return thisStreamSource.GetValue(ImageSource.PathProperty) != otherStreamSource.GetValue(ImageSource.PathProperty) ? false : true;
+                return thisStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) != otherStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) ? false : true;
             }
 
             var thisFileSource = thisSource as Xamarin.Forms.FileImageSource;
@@ -39,7 +39,7 @@ namespace Forms9Patch.iOS
         internal static async Task<NSData> FetchResourceData(this ImageViewManager client, Xamarin.Forms.ImageSource streamSource, int _i)
 #pragma warning restore 1998
         {
-            string path = (string)streamSource?.GetValue(ImageSource.PathProperty);
+            string path = (string)streamSource?.GetValue(ImageSource.EmbeddedResourceIdProperty);
             if (path == null)
             {
                 //System.Diagnostics.Debug.WriteLine ("{0} Fetch.path==null", _i);
@@ -102,7 +102,7 @@ namespace Forms9Patch.iOS
 
         internal static void ReleaseStreamData(this ImageViewManager client, Xamarin.Forms.BindableObject streamSource)
         {
-            var path = (string)streamSource?.GetValue(ImageSource.PathProperty);
+            var path = (string)streamSource?.GetValue(ImageSource.EmbeddedResourceIdProperty);
             if (path == null)
                 return;
             lock (_constructorLock)

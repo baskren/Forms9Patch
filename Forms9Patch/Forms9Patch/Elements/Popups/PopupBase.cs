@@ -280,6 +280,25 @@ namespace Forms9Patch
             set { SetValue(IsEllipticalProperty, value); }
         }
 
+        /// <summary>
+        /// The BackgroundImageProperty
+        /// </summary>
+        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(PopupBase), default(Forms9Patch.Image));
+        /// <summary>
+        /// Gets or sets the BackgroundImage
+        /// </summary>
+        public Forms9Patch.Image BackgroundImage
+        {
+            get { return (Forms9Patch.Image)GetValue(BackgroundImageProperty); }
+            set { SetValue(BackgroundImageProperty, value); }
+        }
+
+        /// <summary>
+        /// The Instance Id (for debugging purposes)
+        /// </summary>
+        public int InstanceId { get; private set; }
+
+        static int _instances = 0;
         #endregion
 
 
@@ -309,6 +328,7 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
+            InstanceId = _instances++;
             Retain = retain;
             IsVisible = false;
             _pageOverlay = new BoxView

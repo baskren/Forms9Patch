@@ -55,6 +55,22 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value><c>true</c> if elliptical; otherwise, <c>false</c>.</value>
 		bool IsElliptical { get; set; }
+
+        /// <summary>
+        /// Gets or sets the shape of the button
+        /// </summary>
+        //ButtonShape ButtonShape { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the background image
+        /// </summary>
+        Forms9Patch.Image BackgroundImage { get; set; }
+
+        /// <summary>
+        /// Incremental instance id (starting at zero, increasing by one for each new instance)
+        /// </summary>
+        int InstanceId { get; }
 	}
 }
 
