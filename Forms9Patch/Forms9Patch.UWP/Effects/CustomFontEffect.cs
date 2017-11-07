@@ -64,8 +64,8 @@ namespace Forms9Patch.UWP
                 var elementFontFamily = elementFontFamilyProperty.GetValue(Element) as string;
                 var controlType = Control.GetType();
 				var controlFontFamilyProperty = controlType.GetProperty("FontFamily");
-                var fontFamilyName = FontExtensions.EmbeddedFontFamilyName(elementFontFamily);
-                controlFontFamilyProperty.SetValue(Control, fontFamilyName, null);
+                //var fontFamilyName = FontExtensions.EmbeddedFontFamilyName(elementFontFamily);
+                //controlFontFamilyProperty.SetValue(Control, fontFamilyName, null);
 			}
 		}
 	}

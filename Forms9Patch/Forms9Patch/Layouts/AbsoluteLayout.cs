@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch AbsoluteLayout.
     /// </summary>
-    public class AbsoluteLayout : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IBackgroundImage
+    public class AbsoluteLayout : Xamarin.Forms.AbsoluteLayout, IRoundedBox, IBackground
     {
 
         #region debug support

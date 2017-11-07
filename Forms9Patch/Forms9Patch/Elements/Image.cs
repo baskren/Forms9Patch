@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Image element.
     /// </summary>
-    public class Image : Xamarin.Forms.Image
+    public class Image : Xamarin.Forms.Image, IImage
     {
         #region Bindable Properties
 
@@ -98,6 +98,49 @@ namespace Forms9Patch
             get { return (Size)GetValue(BaseImageSizeProperty); }
             set { SetValue(BaseImageSizeProperty, value); }
         }
+
+        internal static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(Image), false);
+        public bool HasShadow
+        {
+            get { return (bool)GetValue(HasShadowProperty); }
+            set { SetValue(HasShadowProperty, value); }
+
+        }
+
+        internal static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(Image), false);
+        public bool ShadowInverted
+        {
+            get { return (bool)GetValue(ShadowInvertedProperty); }
+            set { SetValue(ShadowInvertedProperty, value); }
+        }
+
+        internal static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(Image), default(Color));
+        public Color OutlineColor
+        {
+            get { return (Color)GetValue(OutlineColorProperty); }
+            set { SetValue(OutlineColorProperty, value); }
+        }
+
+        internal static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(Image), default(float));
+        public float OutlineRadius
+        {
+            get { return (float)GetValue(OutlineRadiusProperty); }
+            set { SetValue(OutlineRadiusProperty, value); }
+        }
+
+        internal static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(Image), default(float));
+        public float OutlineWidth
+        {
+            get { return (float)GetValue(OutlineWidthProperty); }
+            set { SetValue(OutlineWidthProperty, value); }
+        }
+
+        public bool IsElliptical { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+
+        public int InstanceId => _f9pId;
+
+
 
         #endregion
 

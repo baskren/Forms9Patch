@@ -13,19 +13,20 @@ using System.Diagnostics;
 
 namespace Forms9Patch.UWP
 {
-    public class SkiaRoundedBoxView : SKXamlCanvas, IDisposable
+    public class SkiaRoundedBoxAndImageView : SKXamlCanvas, IDisposable
     {
 
         bool _debugMessages = true;
 
         #region Constructor
-        public SkiaRoundedBoxView(IRoundedBox roundedBoxElement)
+        internal SkiaRoundedBoxAndImageView(IRoundedBox roundedBoxElement)
         {
             _instanceId = roundedBoxElement.InstanceId;
             _roundedBoxElement = roundedBoxElement;
             if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
                 element.PropertyChanged += OnElementPropertyChanged;
-            ImageElement = _roundedBoxElement.BackgroundImage;
+            SetImageElement();
+            SizeChanged += OnSizeChanged;
         }
 
         private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -33,7 +34,15 @@ namespace Forms9Patch.UWP
             if (!ValidLayout(CanvasSize))
                 Invalidate();
             if (e.PropertyName == RoundedBoxBase.BackgroundImageProperty.PropertyName)
-                ImageElement = _roundedBoxElement.BackgroundImage;
+                SetImageElement();
+        }
+
+        void SetImageElement()
+        {
+            if (_roundedBoxElement is IBackground background)
+                ImageElement = background.BackgroundImage;
+            else if (_roundedBoxElement is Image image)
+                ImageElement = image;
         }
         #endregion
 
@@ -47,11 +56,11 @@ namespace Forms9Patch.UWP
             {
                 if (disposing)
                 {
-                    _xfImageSource?.ReleaseSkBitmap(this);
-                    _sourceBitmap?.Dispose();
+                    _xfImageSource?.ReleaseF9PBitmap(this);
                     _sourceBitmap = null;
                     if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
                         element.PropertyChanged -= OnElementPropertyChanged;
+                    SizeChanged -= OnSizeChanged;
                     // TODO: dispose managed state (managed objects).
                 }
 
@@ -80,41 +89,102 @@ namespace Forms9Patch.UWP
 
 
         #region local fields
-        Forms9Patch.IRoundedBox _roundedBoxElement = null;
-
-        
-        RangeLists _sourceRangeLists = null;
-
         int _instanceId;
 
-        //Windows.UI.Xaml.Controls.Canvas _tileCanvas;
+        Forms9Patch.IRoundedBox _roundedBoxElement = null;
 
         Forms9Patch.Image _imageElement;
-        SKBitmap _sourceBitmap;
         Xamarin.Forms.ImageSource _xfImageSource;
 
-        bool _invalidImage;
+        F9PBitmap _sourceBitmap;
+        RangeLists _sourceRangeLists = null;
+
+        bool _validLayout;
+        #endregion
+
+
+        #region Properties
+        internal Xamarin.Forms.Size SourceImageSize()
+        {
+            if (_sourceBitmap?.SKBitmap != null)
+                return new Xamarin.Forms.Size(_sourceBitmap.Width / Display.Scale, _sourceBitmap.Height / Display.Scale);
+            return Xamarin.Forms.Size.Zero;
+        }
+
+        //TODO: DELETE THIS?!?!
+        internal Xamarin.Forms.SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
+        {
+            if (ImageElement == null)
+                throw new InvalidCastException("DesiredSize is only valid with the Forms9Patch.Image element");
+            var size = SourceImageSize();
+            if (size.Width < 1 || size.Height < 1)
+                return new Xamarin.Forms.SizeRequest(Xamarin.Forms.Size.Zero);
+            var sourceAspect = size.Width / size.Height;
+           
+            switch (ImageElement.Fill)
+            {
+                case Fill.AspectFill:
+                    if (double.IsInfinity(widthConstraint) && double.IsInfinity(heightConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, heightConstraint), new Xamarin.Forms.Size(1,1));
+                    if (double.IsInfinity(widthConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(heightConstraint * sourceAspect, heightConstraint), new Xamarin.Forms.Size(1,1));
+                    if (double.IsInfinity(heightConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, widthConstraint / sourceAspect), new Xamarin.Forms.Size(1, 1));
+                    return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, heightConstraint), new Xamarin.Forms.Size(1, 1));
+                case Fill.AspectFit:
+                    var minSize = sourceAspect >= 1 ? new Xamarin.Forms.Size(sourceAspect, 1) : new Xamarin.Forms.Size(1, 1 / sourceAspect);
+                    if (double.IsInfinity(widthConstraint) && double.IsInfinity(heightConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, heightConstraint), minSize);
+                    if (double.IsInfinity(widthConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(heightConstraint * sourceAspect, heightConstraint), minSize);
+                    if (double.IsInfinity(heightConstraint))
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, widthConstraint / sourceAspect), minSize);
+                    var constraintAspect = widthConstraint / heightConstraint;
+                    if (constraintAspect > sourceAspect)
+                        return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(heightConstraint * sourceAspect, heightConstraint), minSize);
+                    return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(heightConstraint * constraintAspect, heightConstraint), minSize);
+                case Fill.None:
+                    return new Xamarin.Forms.SizeRequest(size, size);
+                default:  // Fill and Tile
+                    return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(widthConstraint, heightConstraint), new Xamarin.Forms.Size(1, 1));
+            }
+
+        }
         #endregion
 
 
         #region Layout State Fields
+
         SKSize _lastCanvasSize = default(SKSize);
 
+        #region RoundedBox Layout State
         Xamarin.Forms.Color _lastBackgroundColor = default(Xamarin.Forms.Color);
         bool _lastHasShadow = false;
         bool _lastShadowInverted = false;
         Xamarin.Forms.Color _lastOutlineColor = default(Xamarin.Forms.Color);
         double _lastRadius = -1;
         double _lastOutlineWidth = -1;
+        #endregion
+
+        #region Background Layout State
         Xamarin.Forms.Thickness _lastPadding = default(Xamarin.Forms.Thickness);
+        #endregion
+
+        #region Image Layout State
         //Forms9Patch.ButtonShape _lastButtonShape = ButtonShape.Rectangle;
+        bool _actualSizeValid;
+        #endregion
+
+
         #endregion
 
 
         #region Layout State
         bool ValidLayout(SKSize canvasSize)
         {
-            if (_invalidImage)
+            if (!_validLayout)
+                return false;
+            if (!_actualSizeValid)
                 return false;
             if (canvasSize != _lastCanvasSize)
                 return false;
@@ -130,7 +200,7 @@ namespace Forms9Patch.UWP
                 return false;
             if (_lastOutlineWidth != _roundedBoxElement.OutlineWidth)
                 return false;
-            if (_lastPadding != _roundedBoxElement.Padding)
+            if (_roundedBoxElement is IBackground backgroundElement && _lastPadding != backgroundElement.Padding)
                 return false;
             //if (_lastButtonShape != _roundedBoxElement.ButtonShape)
             //    return false;
@@ -146,8 +216,10 @@ namespace Forms9Patch.UWP
             _lastOutlineColor = _roundedBoxElement.OutlineColor;
             _lastRadius = _roundedBoxElement.OutlineRadius;
             _lastOutlineWidth = _roundedBoxElement.OutlineWidth;
-            _lastPadding = _roundedBoxElement.Padding;
-            _invalidImage = false;
+            if (_roundedBoxElement is IBackground backgroundElement)
+                _lastPadding = backgroundElement.Padding;
+            _validLayout = true;
+            _actualSizeValid = true;
             //_lastButtonShape = _roundedBoxElement.ButtonShape;
         }
 
@@ -158,17 +230,27 @@ namespace Forms9Patch.UWP
             {
                 if (value != _imageElement)
                 {
-                    if (_imageElement!=null)
+                    if (_imageElement != null)
+                    {
                         _imageElement.PropertyChanged -= OnImageElementPropertyChanged;
+                        _imageElement.SizeChanged -= OnImageElementSizeChanged;
+                    }
                     _imageElement = value;
-                    if (_imageElement!=null)
+                    if (_imageElement != null)
                     {
                         _imageElement.PropertyChanged += OnImageElementPropertyChanged;
-                        SetSourceAsync();
+                        _imageElement.SizeChanged += OnImageElementSizeChanged;
                     }
+                    SetSourceAsync();
                 }
             }
         }
+
+        private void OnImageElementSizeChanged(object sender, EventArgs e)
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] ImageElement.Size=[" + _imageElement.Bounds.Size + "] Size=[" + Width + ", " + Height + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+        }
+
 
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -177,9 +259,14 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.VisualElement.WidthRequestProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.VisualElement.HeightRequestProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.HorizontalOptionsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.VerticalOptionsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.MarginProperty.PropertyName
                 )
             {
-                _invalidImage = true;
+                _validLayout = false;
                 Invalidate();
             }
         }
@@ -190,8 +277,8 @@ namespace Forms9Patch.UWP
             if (_imageElement.Source != _xfImageSource)
             {
                 // release the previous
-                _xfImageSource?.ReleaseSkBitmap(this);
-                _sourceBitmap?.Dispose();
+                _xfImageSource?.ReleaseF9PBitmap(this);
+                _sourceBitmap = null;
 
                 var stopWatch = new Stopwatch();
                 stopWatch.Start();
@@ -209,30 +296,112 @@ namespace Forms9Patch.UWP
                 stopWatch.Reset();
                 stopWatch.Start();
 
-                _sourceBitmap = await _xfImageSource?.FetchSkBitmap(this);
-                // need to verify the the SKColorType!
+                _sourceBitmap = await _xfImageSource?.FetchF9PBitmap(this);
+                _sourceRangeLists = _sourceBitmap.RangeLists;
 
-                _sourceRangeLists = _sourceBitmap?.PatchRanges();
-
-                if (_sourceRangeLists!=null)
-                {
-                    var unmarkedBitmap = new SKBitmap(_sourceBitmap.Width - 2, _sourceBitmap.Height - 2, SKColorType.Rgba8888, SKAlphaType.Unpremul);
-                    //_sourceBitmap.ExtractAlpha(unmarkedBitmap);
-                    _sourceBitmap.ExtractSubset(unmarkedBitmap, SKRectI.Create(1, 1, _sourceBitmap.Width - 2, _sourceBitmap.Height - 2));
-                    _sourceBitmap.Dispose();
-                    _sourceBitmap = unmarkedBitmap;
-                }
-
-                _imageElement.BaseImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+                if (_sourceBitmap == null || _sourceBitmap.SKBitmap==null)
+                    _imageElement.BaseImageSize = Xamarin.Forms.Size.Zero;
+                else
+                    _imageElement.BaseImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
 
                 stopWatch.Stop();
                 if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] B[" + stopWatch.ElapsedMilliseconds + "]");
 
+                _actualSizeValid = false;
+                _validLayout = false;
                 Invalidate();
                 ((Xamarin.Forms.IImageController)_imageElement)?.SetIsLoading(false);
             }
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync EXIT");
         }
+        #endregion
+
+
+        #region Windows Layout Support
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _actualSizeValid = false;
+            Invalidate();
+        }
+
+
+
+        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + availableSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+
+            var result = base.MeasureOverride(availableSize);
+
+            if (_sourceBitmap != null)
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
+            else
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
+
+
+            if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _sourceBitmap != null)
+            {
+                bool constrainedWidth = !double.IsInfinity(availableSize.Width) || ImageElement.WidthRequest > -1;
+                bool constrainedHeight = !double.IsInfinity(availableSize.Height) || ImageElement.HeightRequest > -1;
+
+                double constrainedWidthValue = availableSize.Width;
+                if (ImageElement.WidthRequest > -1)
+                    constrainedWidthValue = Math.Min(constrainedWidthValue, ImageElement.WidthRequest);
+                double constrainedHeightValue = availableSize.Height;
+                if (ImageElement.HeightRequest > -1)
+                    constrainedHeightValue = Math.Min(constrainedHeightValue, ImageElement.HeightRequest);
+
+                if ((!constrainedWidth && !constrainedHeight) || ImageElement.Fill == Fill.None)
+                    result = new Windows.Foundation.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+                else
+                {
+                    var sourceAspect = _sourceBitmap.Height / _sourceBitmap.Width;
+
+                    if (constrainedWidth && constrainedHeight)
+                    {
+                        // if single image, SetAspect should do all the heavy lifting.  if stitched together, then it's ImageFill.Fill;
+                        result = new Windows.Foundation.Size(constrainedWidthValue, constrainedHeightValue);
+                    }
+                    else if (constrainedWidth)
+                    {
+                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
+                            result = new Windows.Foundation.Size(constrainedWidthValue, availableSize.Height);
+                        else
+                            result = new Windows.Foundation.Size(constrainedWidthValue, constrainedWidthValue * sourceAspect);
+                    }
+                    else if (constrainedHeight)
+                    {
+                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
+                            result = new Windows.Foundation.Size(availableSize.Width, constrainedHeightValue);
+                        else
+                            result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
+                    }
+                }
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
+            }
+
+            return result;
+        }
+
+        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+
+            var result = base.ArrangeOverride(finalSize);
+
+            if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _sourceBitmap != null && Children.Count > 0)
+                Invalidate();
+
+            if (_debugMessages)
+            {
+                if (_sourceBitmap != null)
+                    System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
+                else
+                    System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
+            }
+
+            return result;
+        }
+
         #endregion
 
 
@@ -274,11 +443,11 @@ namespace Forms9Patch.UWP
                 double separatorWidth = materialButton == null || buttonShape == ButtonShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
 
                 bool drawOutline = (_roundedBoxElement.OutlineColor.A > 0.01 && outlineWidth > 0.05);
-                bool drawImage = (_sourceBitmap != null && _sourceBitmap.Width > 0 && _sourceBitmap.Height > 0);
+                bool drawImage = ( _sourceBitmap?.SKBitmap!=null && _sourceBitmap.Width > 0 && _sourceBitmap.Height > 0);
                 bool drawSeparators = _roundedBoxElement.OutlineColor.A > 0.01 && materialButton != null && separatorWidth > 0.01;
                 bool drawFill = _roundedBoxElement.BackgroundColor.A > 0.01; // ||_roundedBoxElement.BackgroundImage?.Source !=null;
 
-                if (drawFill || drawOutline || drawSeparators)
+                if (drawFill || drawOutline || drawSeparators || drawImage)
                 {
 
                     var visualElement = _roundedBoxElement as Xamarin.Forms.VisualElement;
@@ -379,7 +548,7 @@ namespace Forms9Patch.UWP
                                 //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
                             };
                             var outlineRect = RectInsetForShape(perimeter, buttonShape, outlineWidth / 2, vt);
-                            var path = PerimeterPath(_roundedBoxElement, outlineRect, radius - (drawOutline ? outlineWidth : 0));
+                            var path = PerimeterPath(_roundedBoxElement, outlineRect, radius - (drawOutline ? outlineWidth / 2 : 0));
                             canvas.DrawPath(path, outlinePaint);
                         }
 
@@ -432,7 +601,7 @@ namespace Forms9Patch.UWP
             }
             base.OnPaintSurface(e);
 
-
+            _actualSizeValid = true;
 
 
         }
@@ -442,14 +611,14 @@ namespace Forms9Patch.UWP
         #region Image Layout
         void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath)
         {
-            if (_imageElement == null || _sourceBitmap == null || _sourceBitmap.Width < 1 || _sourceBitmap.Height < 1)
+            if (_imageElement == null || _sourceBitmap?.SKBitmap == null || _sourceBitmap.Width < 1 || _sourceBitmap.Height < 1)
                 return;
 
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.GenerateLayout[" + _instanceId + "]  Fill=[" + _imageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] ");
             canvas.Save();
             canvas.ClipPath(clipPath);
 
-            var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.Width, _sourceBitmap.Height, _xfImageSource, _sourceRangeLists!=null) ?? _sourceRangeLists;
+            var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.SKBitmap.Width, _sourceBitmap.SKBitmap.Height, _xfImageSource, _sourceRangeLists!=null) ?? _sourceRangeLists;
 
             var bitmap = _sourceBitmap;
         
@@ -470,18 +639,18 @@ namespace Forms9Patch.UWP
         */
             if (_imageElement.Fill == Fill.Tile)
             {
-                for (float x = fillRect.Left; x < fillRect.Right; x += _sourceBitmap.Width)
-                    for (float y = fillRect.Top; y < fillRect.Bottom; y += _sourceBitmap.Height)
-                        canvas.DrawBitmap(_sourceBitmap, x, y);
+                for (float x = fillRect.Left; x < fillRect.Right; x += _sourceBitmap.SKBitmap.Width)
+                    for (float y = fillRect.Top; y < fillRect.Bottom; y += _sourceBitmap.SKBitmap.Height)
+                        canvas.DrawBitmap(_sourceBitmap.SKBitmap, x, y);
             }
             else if (rangeLists == null)
             {
-                canvas.DrawBitmap(_sourceBitmap, _sourceBitmap.Info.Rect, fillRect);
+                canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect);
             }
             else
             {
-                var lattice = rangeLists.ToSKLattice(_sourceBitmap);
-                canvas.DrawBitmapLattice(_sourceBitmap, lattice, fillRect);
+                var lattice = rangeLists.ToSKLattice(_sourceBitmap.SKBitmap);
+                canvas.DrawBitmapLattice(_sourceBitmap.SKBitmap, lattice, fillRect);
                 //canvas.DrawBitmap(_sourceBitmap, _sourceBitmap.Info.Rect, fillRect);
             }
             canvas.Restore();
@@ -500,16 +669,16 @@ namespace Forms9Patch.UWP
             switch (buttonShape)
             {
                 case ButtonShape.SegmentStart:
-                    perimeter = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
+                    result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
                     break;
                 case ButtonShape.SegmentMid:
-                    perimeter = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
+                    result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
                     break;
                 case ButtonShape.SegmentEnd:
-                    perimeter = RectInset(perimeter, inset);
+                    result = RectInset(perimeter, inset);
                     break;
                 default:
-                    perimeter = RectInset(perimeter, inset);
+                    result = RectInset(perimeter, inset);
                     break;
             }
             return result;

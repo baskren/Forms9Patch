@@ -124,9 +124,6 @@
     <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
       <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch\Renderers\ContentViewRenderer.cs">
-      <Link>Renderers\ContentViewRenderer.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch\Renderers\FrameRenderer.cs">
       <Link>Renderers\FrameRenderer.cs</Link>
     </Compile>
@@ -139,27 +136,20 @@
     <Compile Include="..\Forms9Patch\Renderers\StackLayoutRenderer.cs">
       <Link>Renderers\StackLayoutRenderer.cs</Link>
     </Compile>
+    <Compile Include="Effects\CustomFontEffect.cs" />
+    <Compile Include="Effects\SliderStepSizeEffect.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
-    <Compile Include="Extensions\F9PImageElementExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
-    <Compile Include="Extensions\ImageViewManagerExtensions.cs" />
-    <Compile Include="Extensions\PathSegmentCollectionExtensions.cs" />
     <Compile Include="Extensions\SKBitmapExtensions.cs" />
     <Compile Include="Extensions\SKRectExtensions.cs" />
-    <Compile Include="Extensions\WriteableBitmapExtensions.cs" />
-    <Compile Include="ImageSourceHandlers\FileImageSourceHandler.cs" />
-    <Compile Include="ImageSourceHandlers\StreamImageSourceHandler.cs" />
-    <Compile Include="ImageSourceHandlers\UriImageSourceHandler.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="NativeElements\BackdropBlurBrush.cs" />
-    <Compile Include="SkiaElements\SkiaView.cs" />
+    <Compile Include="SkiaElements\F9PBitmap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NativeElements\RandomAccessMemoryStream.cs" />
     <Compile Include="Renderers\ImageRenderer.cs" />
     <Compile Include="Renderers\LayoutRenderer_T_.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
-    <Compile Include="SkiaElements\SkiaRoundedBoxView.cs" />
+    <Compile Include="SkiaElements\SkiaRoundedBoxAndImageView.cs" />
     <EmbeddedResource Include="Properties\Forms9Patch.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>

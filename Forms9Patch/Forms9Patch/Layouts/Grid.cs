@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Grid layout.
     /// </summary>
-    public class Grid : Xamarin.Forms.Grid, IRoundedBox, IBackgroundImage
+    public class Grid : Xamarin.Forms.Grid, IRoundedBox, IBackground
     {
 
         #region debug support

@@ -12,10 +12,12 @@ namespace Forms9PatchDemo
 
         const float radius = 4;
         const float width = 1;
-        const bool hasShadow = true;
-        static Color outlineColor = Color.Default; // Color.Red.WithAlpha(0.25);
-        static Color backgroundColor = Color.White;
+        const bool hasShadow = false;
+        static Color outlineColor =  Color.Default; // Color.Red.WithAlpha(0.25);
+        static Color backgroundColor =  Color.White;
         static bool ShadowInverted = true;
+
+        Switch _hasShadowSwitch = new Switch();
 
         MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
         {
@@ -86,31 +88,13 @@ namespace Forms9PatchDemo
             }
         };
 
-
-
         Switch _imposedHeightSwitch = new Switch();
 
-        Slider _spacingSlider = new Slider
-        {
-            Maximum = 50,
-            Minimum = 0,
-            Value = 5,
+        Slider _spacingSlider = new Slider(0, 50, 5);
 
-        };
+        Slider _outlineWidthSlider = new Slider(0, 7, width);
 
-        Slider _outlineWidthSlider = new Slider
-        {
-            Maximum = 15,
-            Minimum = 0,
-            Value = width
-        };
-
-        Slider _outlineRadiusSlider = new Slider
-        {
-            Maximum = 15,
-            Minimum = 0,
-            Value = radius
-        };
+        Slider _outlineRadiusSlider = new Slider(0, 16.0, radius);
 
         MaterialButton _iconTextAndTextButton = new MaterialButton
         {
@@ -186,10 +170,18 @@ namespace Forms9PatchDemo
             RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
         };
 
+        Xamarin.Forms.Grid _grid3 = new Xamarin.Forms.Grid
+        {
+            ColumnDefinitions = { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Star } },
+            RowDefinitions = { new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto }, new RowDefinition { Height = GridLength.Auto } }
+        };
+
+
+
         Xamarin.Forms.Label _outlineWidthLabel = new Xamarin.Forms.Label { Text = "line W:" + width };
         Xamarin.Forms.Label _outlineRadiusLabel = new Xamarin.Forms.Label { Text = "line R: " + radius };
-
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
+
         public MaterialButtonAndSegmentAlignments()
         {
             //BackgroundColor = Color.Orange;
@@ -212,7 +204,8 @@ namespace Forms9PatchDemo
             _grid2.Children.Add(_outlineRadiusLabel, 3, 0);
             _grid2.Children.Add(_outlineRadiusSlider, 3, 1);
 
-
+            _grid3.Children.Add(new Xamarin.Forms.Label { Text = "HasShadow:" }, 0, 0);
+            _grid3.Children.Add(_hasShadowSwitch, 0, 1);
 
             Padding = new Thickness(40, 20, 20, 20);
             Content = new Xamarin.Forms.ScrollView
@@ -221,10 +214,11 @@ namespace Forms9PatchDemo
                 {
                     Children =
                     {
+                       
                         new Xamarin.Forms.Label { Text = "version 0.9.15.1"},
                         _grid1,
                         _grid2,
-
+                        _grid3,
 
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
@@ -234,6 +228,17 @@ namespace Forms9PatchDemo
                         new Xamarin.Forms.Label { Text="Display.Scale=["+Display.Scale+"]" }
                     }
                 }
+            };
+
+            _hasShadowSwitch.Toggled += (sender, e) =>
+            {
+                _hzAlignmentElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _vtAlignmentElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
+                _optionsElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
+                _hzSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _vtSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
             };
 
             _hzAlignmentElement.SegmentTapped += (sender, e) =>
@@ -330,9 +335,10 @@ namespace Forms9PatchDemo
                 _outlineRadiusLabel.Text = "line R: " + value;
             };
 
+            _outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.5));
             _outlineWidthSlider.ValueChanged += (sender, e) =>
             {
-                int value = (int)_outlineWidthSlider.Value;
+                float value = (float)_outlineWidthSlider.Value; // (float)(Math.Round(_outlineWidthSlider.Value*2.0)/2.0);
                 _hzAlignmentElement.OutlineWidth = value;
                 _vtAlignmentElement.OutlineWidth = value;
                 _iconTextAndTextButton.OutlineWidth = value;
@@ -340,7 +346,7 @@ namespace Forms9PatchDemo
                 _iconElement.OutlineWidth = value;
                 _hzSegmentsElement.OutlineWidth = value;
                 _vtSegmentsElement.OutlineWidth = value;
-                _outlineWidthLabel.Text = "line W: " + value;
+                _outlineWidthLabel.Text = "line W: " + _outlineWidthSlider.Value;// + value;
             };
 
             var defaultHzAlignment = _iconTextAndTextButton.HorizontalTextAlignment;

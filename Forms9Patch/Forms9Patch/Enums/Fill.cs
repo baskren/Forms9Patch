@@ -24,6 +24,9 @@ namespace Forms9Patch
 		/// </summary>
 		Tile,
 
+        /// <summary>
+        /// Do not adjust the image size to fill the available space
+        /// </summary>
         None
 	}
 }

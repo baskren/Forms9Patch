@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
-    public class ModalPopup : PopupBase, IBackgroundImage
+    public class ModalPopup : PopupBase, IBackground
     {
 
 

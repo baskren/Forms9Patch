@@ -18,6 +18,6 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Absolute layout renderer.
     /// </summary>
-    public class AbsoluteLayoutRenderer : LayoutRenderer<AbsoluteLayout> { }
+    internal class AbsoluteLayoutRenderer : LayoutRenderer<AbsoluteLayout> { }
 }
 

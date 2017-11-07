@@ -1,34 +1,4 @@
-﻿/* 
- * Idea behind image cache
-
-1) Images come from 
-	a) Streams (file, memory, embedded resources)
-	b) files
-	c) URLs (only one cached in local storage)
-2) there can be some latency in retrieving the file
-3) URLs can be out of date 
-
-All images are cached in memory
-
-1) check memory
-2) check local storage
-3) retrieve from source
-
-if image source is url:
-	a) cache locally
-	b) kick off a process to get the latest version.  Need to get the expiration for urls.
-	c) if cache is updated, need to update any images that use it
-
-
-
-SKBitMap GetBitmap(this ImageSource source)
-{
-	// what kind of 
-}
-
-*/
-
-using System;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 using SkiaSharp.Views.UWP;
@@ -46,24 +16,16 @@ namespace Forms9Patch.UWP
     static class SKBitmapExtensions
     {
         #region Bitmap Caching
-        public static SKBitmap GetSKBitmap(this Xamarin.Forms.ImageSource source)
-        {
-            var key = source.ImageSourceKey();
-
-
-            return null;
-        }
-
-        static readonly Dictionary<string, SKBitmap> _cache = new Dictionary<string, SKBitmap>();
-        static readonly Dictionary<string, List<SkiaRoundedBoxView>> _views = new Dictionary<string, List<SkiaRoundedBoxView>>();
+        static readonly Dictionary<string, F9PBitmap> _cache = new Dictionary<string, F9PBitmap>();
+        static readonly Dictionary<string, List<SkiaRoundedBoxAndImageView>> _views = new Dictionary<string, List<SkiaRoundedBoxAndImageView>>();
         static readonly object _constructorLock = new object();
         static readonly Dictionary<string, object> _locks = new Dictionary<string, object>();
 
         #pragma warning disable 1998
-        internal static async Task<SKBitmap> FetchSkBitmap(this Xamarin.Forms.ImageSource imageSource, SkiaRoundedBoxView view, CancellationToken cancellationToken = new CancellationToken())
+        internal static async Task<F9PBitmap> FetchF9PBitmap(this Xamarin.Forms.ImageSource imageSource, SkiaRoundedBoxAndImageView view, CancellationToken cancellationToken = new CancellationToken())
 #pragma warning restore 1998
         {
-            SKBitmap bitmap = null;
+            F9PBitmap f9pBitmap = null;
 
             var key = imageSource.ImageSourceKey();
             if (key != null)
@@ -71,8 +33,8 @@ namespace Forms9Patch.UWP
                 if (_cache.ContainsKey(key))
                 {
                     _views[key].Add(view);
-                    bitmap = _cache[key];
-                    if (bitmap == null)
+                    f9pBitmap = _cache[key];
+                    if (f9pBitmap == null)
                         throw new InvalidDataContractException();
                 }
                 else
@@ -81,6 +43,7 @@ namespace Forms9Patch.UWP
                         _locks[key] = new object();
                     lock (_locks[key])
                     {
+                        SKBitmap skBitmap = null;
                         string path = null;
                         if (key.StartsWith("eri:"))
                         {
@@ -88,7 +51,7 @@ namespace Forms9Patch.UWP
                             var resourceId = key.Substring(4);
                             using (var stream = assembly.GetManifestResourceStream(resourceId))
                             using (var skStream = new SKManagedStream(stream))
-                                bitmap = SKBitmap.Decode(skStream);
+                                skBitmap = SKBitmap.Decode(skStream);
                         }
                         else if (key.StartsWith("uri:"))
                             path = PCL.Utils.FileCache.Download(key.Substring(4));
@@ -100,13 +63,15 @@ namespace Forms9Patch.UWP
                         {
                             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                             using (var skStream = new SKManagedStream(stream))
-                                bitmap = SKBitmap.Decode(skStream);
+                                skBitmap = SKBitmap.Decode(skStream);
                         }
-                        if (bitmap != null)
+                        if (skBitmap != null)
                         {
-                            _cache[key] = bitmap;
+                            f9pBitmap = F9PBitmap.Create(skBitmap);
+                            
+                            _cache[key] = f9pBitmap;
                             if (!_views.ContainsKey(key))
-                                _views[key] = new List<SkiaRoundedBoxView>();
+                                _views[key] = new List<SkiaRoundedBoxAndImageView>();
                             _views[key].Add(view);
                         }
                     }
@@ -122,19 +87,22 @@ namespace Forms9Patch.UWP
                         if (stream == null)
                             return null;
                         using (var skStream = new SKManagedStream(stream))
-                            bitmap = SKBitmap.Decode(skStream);
+                        {
+                            var skBitmap = SKBitmap.Decode(skStream);
+                            f9pBitmap = F9PBitmap.Create(skBitmap);
+                        }
                     }
                 }
                 else
                     throw new InvalidDataContractException();
             }
 
-            if (bitmap == null)
+            if (f9pBitmap == null)
                 System.Diagnostics.Debug.WriteLine("NO BITMAP FOUND FOR IMAGE SOURCE ["+imageSource+"]");
-            return bitmap;
+            return f9pBitmap;
         }
 
-        internal static void ReleaseSkBitmap(this Xamarin.Forms.ImageSource imageSource, SkiaRoundedBoxView view)
+        internal static void ReleaseF9PBitmap(this Xamarin.Forms.ImageSource imageSource, SkiaRoundedBoxAndImageView view)
         {
             var key = imageSource.ImageSourceKey();
             if (key == null)
@@ -188,31 +156,21 @@ namespace Forms9Patch.UWP
 
         static public RangeLists PatchRanges(this SKBitmap bitmap)
         {
+            if (bitmap.Info.ColorType != SKColorType.Bgra8888)
+                return null;
+
             Stopwatch stopwatch = Stopwatch.StartNew();
-            //int width = bitmap.Width;
-            //int height = bitmap.Height;
 
             var capsX = new List<Range>();
             int pos = -1;
-
-            if (bitmap.Info.ColorType != SKColorType.Bgra8888)
-                return null;
-            //var firstRow = bitmap.ToByteArray(0, bitmap.PixelWidth);
-            //SKBitmap rowBitmap = new SKBitmap(bitmap.Width - 2, 1, SKColorType.Bgra8888, SKAlphaType.Unpremul);
-            //bitmap.ExtractSubset(rowBitmap, SKRectI.Create(1,0, bitmap.Width - 2, 1));
-            //var firstRow = rowBitmap.Bytes;
-            //var pixels = bitmap.GetPixels();
-
             for (int i = 0; i < bitmap.Width - 2; i++)
             {
-                //if (bitmap.IsBlackAt(i, 0))
                 var pixel = bitmap.GetPixel(i+1, 0);
                 if (pixel == SKColors.Black)
                 {
                     if (pos == -1)
                         pos = i;
                 }
-                //else if (bitmap.IsTransparentAt(i, 0))
                 else if (pixel == 0)
                 {
                     if (pos != -1)
@@ -225,11 +183,8 @@ namespace Forms9Patch.UWP
                     }
                 }
                 else
-                {
                     // this is not a nine-patch;
-                    //rowBitmap.Dispose();
                     return null;
-                }
             }
             if (pos != -1)
             {
@@ -241,22 +196,14 @@ namespace Forms9Patch.UWP
 
             var capsY = new List<Range>();
             pos = -1;
-
-            //var firstColBitmap = bitmap.Crop(0, 0, 1, bitmap.PixelHeight);
-            //SKBitmap columnBitmap = new SKBitmap(1, bitmap.Height - 2, SKColorType.Bgra8888, SKAlphaType.Unpremul);
-            //bitmap.ExtractSubset(columnBitmap, SKRectI.Create(0, 1, 1, bitmap.Height - 2));
-            //var firstCol = columnBitmap.Bytes;
-
             for (int i = 0; i < bitmap.Height - 2; i++)
             {
-                //if (bitmap.IsBlackAt(0, i))
                 var pixel = bitmap.GetPixel(0, i+1);
                 if (pixel == SKColors.Black)
                 {
                     if (pos == -1)
                         pos = i;
                 }
-                //else if (bitmap.IsTransparentAt(0, i))
                 else if (pixel == 0)
                 {
                     if (pos != -1)
@@ -269,11 +216,7 @@ namespace Forms9Patch.UWP
                     }
                 }
                 else
-                {
-                    //columnBitmap.Dispose();
-                    //rowBitmap.Dispose();
                     return null;
-                }
             }
             if (pos != -1)
             {
@@ -285,10 +228,6 @@ namespace Forms9Patch.UWP
 
             var margX = null as Range;
             pos = -1;
-            //var lastRow = bitmap.ToByteArray((bitmap.PixelHeight - 1) * bitmap.PixelWidth, bitmap.PixelWidth);
-            //bitmap.ExtractSubset(rowBitmap, SKRectI.Create(1, bitmap.Height - 1, bitmap.Width - 2, 1));
-            //var lastRow = rowBitmap.Bytes;
-
             for (int i = 0; i < bitmap.Width - 2; i++)
             {
                 var pixel = bitmap.GetPixel(i+1, bitmap.Height-1);
@@ -318,12 +257,6 @@ namespace Forms9Patch.UWP
 
             var margY = null as Range;
             pos = -1;
-
-            //var lastColumnBitmap = bitmap.Crop(bitmap.PixelWidth - 1, 0, 1, bitmap.PixelHeight);
-            //var lastCol = lastColumnBitmap.ToByteArray();
-            //bitmap.ExtractSubset(columnBitmap, SKRectI.Create(bitmap.Width - 1, 1, 1, bitmap.Height - 2));
-            //var lastCol = columnBitmap.Bytes;
-
             for (int i = 0; i < bitmap.Height - 2; i++)
             {
                 var pixel = bitmap.GetPixel(bitmap.Width-1, i + 1);
@@ -360,6 +293,7 @@ namespace Forms9Patch.UWP
             stopwatch.Stop();
             System.Diagnostics.Debug.WriteLine("PatchRanges: "+ stopwatch.ElapsedMilliseconds + "ms");
 
+            /*
             System.Diagnostics.Debug.Write    ("      capsX: ");
             foreach (var cap in capsX)
                 System.Diagnostics.Debug.Write("["+cap.Start+","+cap.End+","+cap.Width+"]");
@@ -373,9 +307,7 @@ namespace Forms9Patch.UWP
             System.Diagnostics.Debug.WriteLine("      margX: [" + margX.Start + "," + margX.End + "," + margX.Width + "]");
             if (margY!=null)
             System.Diagnostics.Debug.WriteLine("      margY: [" + margY.Start + "," + margY.End + "," + margY.Width + "]");
-
-            //rowBitmap.Dispose();
-            //columnBitmap.Dispose();
+            */
 
             return rangeLists;
         }

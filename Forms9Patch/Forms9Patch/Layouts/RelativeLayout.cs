@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch RelativeLayout.
     /// </summary>
-    public class RelativeLayout : Xamarin.Forms.RelativeLayout, IRoundedBox, IBackgroundImage
+    public class RelativeLayout : Xamarin.Forms.RelativeLayout, IRoundedBox, IBackground
     {
 
         #region debug support

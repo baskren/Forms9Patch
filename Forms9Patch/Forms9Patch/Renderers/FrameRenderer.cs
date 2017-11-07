@@ -17,5 +17,5 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Frame renderer.
     /// </summary>
-    public class FrameRenderer : LayoutRenderer<Frame> {}
+    internal class FrameRenderer : LayoutRenderer<Frame> {}
 }

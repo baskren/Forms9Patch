@@ -5,13 +5,15 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch ContentView.
     /// </summary>
-    public class ContentView : Xamarin.Forms.ContentView, IBackgroundImage
+    [System.Obsolete("Use Forms9Patch.Frame")]
+    public class ContentView : Xamarin.Forms.ContentView
     {
 
         #region Debug support
         static int _count = 0;
         int _id;
 
+        [System.Obsolete("Use Forms9Patch.Frame")]
         /// <summary>
         /// Initializes a new instance of the <see cref="Forms9Patch.ContentView"/> class.
         /// </summary>

@@ -312,7 +312,7 @@ namespace Forms9Patch
 
         #region Fields
         //readonly Xamarin.Forms.AbsoluteLayout _layout = new Xamarin.Forms.AbsoluteLayout ();
-        internal IRoundedBox _roundedBox;
+        internal IBackground _background;
         internal BoxView _pageOverlay;
         readonly Listener _listener;
         internal DateTime PresentedAt;
@@ -411,14 +411,14 @@ namespace Forms9Patch
 
         internal View ContentView
         {
-            get { return (View)_roundedBox; }
+            get { return (View)_background; }
             set
             {
-                _roundedBox = (IRoundedBox)value;
+                _background = (IBackground)value;
                 if (base.Children.Count < 2)
-                    base.Children.Add((View)_roundedBox);
+                    base.Children.Add((View)_background);
                 else
-                    base.Children[1] = (View)_roundedBox;
+                    base.Children[1] = (View)_background;
 
             }
         }
@@ -457,20 +457,20 @@ namespace Forms9Patch
             }
             else if (propertyName == PaddingProperty.PropertyName)
             {
-                _roundedBox.Padding = Padding;
+                _background.Padding = Padding;
             }
             else if (propertyName == HasShadowProperty.PropertyName)
-                _roundedBox.HasShadow = HasShadow;
+                _background.HasShadow = HasShadow;
             else if (propertyName == OutlineColorProperty.PropertyName)
-                _roundedBox.OutlineColor = OutlineColor;
+                _background.OutlineColor = OutlineColor;
             else if (propertyName == OutlineWidthProperty.PropertyName)
-                _roundedBox.OutlineWidth = OutlineWidth;
+                _background.OutlineWidth = OutlineWidth;
             else if (propertyName == OutlineRadiusProperty.PropertyName)
-                _roundedBox.OutlineRadius = OutlineRadius;
+                _background.OutlineRadius = OutlineRadius;
             else if (propertyName == BackgroundColorProperty.PropertyName)
-                _roundedBox.BackgroundColor = BackgroundColor;
+                _background.BackgroundColor = BackgroundColor;
             else if (propertyName == ShadowInvertedProperty.PropertyName)
-                _roundedBox.ShadowInverted = ShadowInverted;
+                _background.ShadowInverted = ShadowInverted;
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
         }

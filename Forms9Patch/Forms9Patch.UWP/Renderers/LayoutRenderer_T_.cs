@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace Forms9Patch.UWP
 {
-    public class LayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxView> where TElement : Layout, IBackgroundImage
+    internal class LayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxAndImageView> where TElement : Layout, IBackground
     {
         #region Fields
         bool _disposed;
@@ -51,23 +51,13 @@ namespace Forms9Patch.UWP
             {
                 SizeChanged -= OnSizeChanged;
                 SetAutomationId(null);
-                if (Control != null)
-                {
-                    //Control.ImageElement = null;
-                    //Control.RoundedBoxElement = null;
-                }
             }
 
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    //SetNativeControl(new SkiaView(_instance));
-                    SetNativeControl(new SkiaRoundedBoxView(e.NewElement as IRoundedBox));
+                    SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IRoundedBox));
                 SizeChanged += OnSizeChanged;
-
-                //Control.ImageElement = Element?.BackgroundImage;
-                //Control.RoundedBoxElement = Element as IRoundedBox;
-
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
             }
@@ -77,27 +67,13 @@ namespace Forms9Patch.UWP
         {
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
                 return;
-            //else if (e.PropertyName == "BackgroundImage")
-            //    Control.ImageElement = Element?.BackgroundImage;
             base.OnElementPropertyChanged(sender, e);
-
-            //Clip = null;
         }
 
-        static Random _random;
         protected override void UpdateBackgroundColor()
         {
-            _random = _random ?? new Random();
             base.UpdateBackgroundColor();
-
-            //if (GetValue(BackgroundProperty) == null && Children.Count == 0)
-            //{
-            // Forces the layout to take up actual space if it's otherwise empty
-                Background = new SolidColorBrush(Colors.Transparent);
-            //Background = new SolidColorBrush(Xamarin.Forms.Color.FromRgb(_random.NextDouble(), _random.NextDouble(), _random.NextDouble()).ToWindowsColor());
-            //}
-            //Clip = null;
-
+            Background = new SolidColorBrush(Colors.Transparent);
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
@@ -110,123 +86,10 @@ namespace Forms9Patch.UWP
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //UpdateClipToBounds();
-            //Control.Height = Math.Round(ActualHeight);
-            /*
-            if (Control?.ImageElement?.Source != null)
-            {
-                Control.Height = ActualHeight;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
-                Control.Width = ActualWidth;
-            }
-            else
-            {
-            */
-                Control.Height = ActualHeight + 1;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
-                Control.Width = ActualWidth + 1;
-            //}
-            //Control.Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight + 1) };
-            //Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight + 1) };
+            Control.Height = ActualHeight + 1;
+            Control.Width = ActualWidth + 1;
         }
 
-        void UpdateClipToBounds()
-        {
-            //Clip = null;
-            /*
-            if (Element.IsClippedToBounds)
-            {
-                Clip = new RectangleGeometry { Rect = new Windows.Foundation.Rect(0, 0, ActualWidth, ActualHeight) };
-            }
-            */
-        }
-
-        /*
-        void RefreshImage()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].RefreshImage()");
-            ((IVisualElementController)Element)?.InvalidateMeasure(InvalidationTrigger.RendererReady);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].RefreshImage() RETURN ");
-        }
-
-        private void UpdateCapInsets()
-        {
-            if (Control != null && Element?.BackgroundImage != null)
-                Control.CapInsets = Element.BackgroundImage.CapInsets;
-        }
-
-        void UpdateAspect()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateAspect()");
-
-            if (Control != null && Element?.BackgroundImage!=null)
-                Control.Fill = Element.BackgroundImage.Fill;
-
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateAspect() RETURN");
-        }
-
-        protected virtual async Task TryUpdateSource()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].TryUpdateSource()");
-            // By default we'll just catch and log any exceptions thrown by UpdateSource so we don't bring down
-            // the application; a custom renderer can override this method and handle exceptions from
-            // UpdateSource differently if it wants to
-
-            try
-            {
-                await UpdateSource().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(nameof(ImageRenderer), "LayoutRenderer<>[" + _instance + "].TryUpdateSource() Error loading image: {0}", ex);
-            }
-            finally
-            {
-                //((IImageController)Element)?.SetIsLoading(false);
-                ((IImageController)Element?.BackgroundImage)?.SetIsLoading(false);
-            }
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].TryUpdateSource() RETURN");
-        }
-
-        protected async Task UpdateSource()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateSource()");
-            if (_disposed || Element == null || Control == null)
-            {
-                System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].UpdateSource() RETURN");
-                return;
-            }
-
-
-            //Element.SetIsLoading(true);
-            //((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, true);
-                ((IImageController)Element.BackgroundImage).SetIsLoading(true);
-
-            Xamarin.Forms.ImageSource source = Element?.BackgroundImage?.Source;
-
-            await Control.SetSourceAsync(source);
-
-            RefreshImage();
-
-
-
-            //Element.SetIsLoading(false);
-            //((IElementController)Element).SetValueFromRenderer(Xamarin.Forms.Image.IsLoadingProperty, false);
-            ((IImageController)Element.BackgroundImage).SetIsLoading(false);
-
-
-        }
-
-        Windows.Foundation.Size _lastFinalSize = Windows.Foundation.Size.Empty;
-        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
-        {
-            
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("LayoutRenderer<>[" + _instance + "].ArrangeOverride(" + finalSize + ") ENTER/RETURN");
-
-            if (Element?.BackgroundImage!=null &&  _lastFinalSize != finalSize && Element.BackgroundImage.Fill == Fill.Tile && finalSize.Width > 0 && finalSize.Height > 0 && !Double.IsInfinity(finalSize.Width) && !Double.IsInfinity(finalSize.Height) && !Double.IsNaN(finalSize.Width) && !Double.IsNaN(finalSize.Height))
-                Control.GenerateImageLayout(finalSize);
-            _lastFinalSize = finalSize;
-            return base.ArrangeOverride(finalSize);
-        }
-        */
         #endregion
     }
 }

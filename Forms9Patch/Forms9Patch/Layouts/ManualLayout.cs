@@ -5,7 +5,7 @@ namespace Forms9Patch
     /// <summary>
     /// Manual layout.
     /// </summary>
-    public class ManualLayout : Xamarin.Forms.Layout<View>, IRoundedBox, IBackgroundImage
+    public class ManualLayout : Xamarin.Forms.Layout<View>, IRoundedBox, IBackground
     {
         #region Fields
         int _id;

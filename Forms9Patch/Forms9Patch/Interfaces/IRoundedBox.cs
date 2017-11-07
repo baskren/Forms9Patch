@@ -45,12 +45,6 @@ namespace Forms9Patch
 		float OutlineWidth { get; set; }
 
 		/// <summary>
-		/// Gets or sets the padding.
-		/// </summary>
-		/// <value>The padding.</value>
-		Thickness Padding { get; set; }
-
-		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IRoundedBox"/> is elliptical  (rather than rectangular with rounded corners).
 		/// </summary>
 		/// <value><c>true</c> if elliptical; otherwise, <c>false</c>.</value>
@@ -65,7 +59,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets or sets the background image
         /// </summary>
-        Forms9Patch.Image BackgroundImage { get; set; }
+        //Forms9Patch.Image BackgroundImage { get; set; }
 
         /// <summary>
         /// Incremental instance id (starting at zero, increasing by one for each new instance)
