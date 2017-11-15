@@ -31,7 +31,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Fill bindable property.
         /// </summary>
-        public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Fill), typeof(Image), Fill.AspectFit);
+        public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Fill), typeof(Image), Fill.None);
         /// <summary>
         /// Fill behavior for nonscalable (not NinePatch or CapInsets not set) image. 
         /// </summary>

@@ -1343,7 +1343,7 @@ namespace Forms9Patch
                         IconText = null;
                     }
                     _iconImage = IconImage;
-                    _iconImage.Fill = Fill.AspectFit;
+                    //_iconImage.Fill = Fill.AspectFit;
                     //_image.TintColor = TintIcon ? _label.TextColor : Color.Default;
                     UpdateIconTint();
                     if (_iconImage != null)

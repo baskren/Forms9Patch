@@ -169,6 +169,7 @@ namespace Forms9PatchDemo
 					},
 					mb1,mb2, mb3, mb4,
 
+                    /*
 					new Xamarin.Forms.Label {
 						Text = "Outline, Light",
 						TextColor = Color.Black,
@@ -265,7 +266,7 @@ namespace Forms9PatchDemo
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						Image = (FileImageSource)arrowIcon,
 					},	
-
+                    */
 				},
 			}, 0, 0);
 
@@ -274,6 +275,7 @@ namespace Forms9PatchDemo
 				Padding = new Thickness(10),
 				BackgroundColor = Color.FromHex("#003"),
 				Children = {
+                    /*
 					new Xamarin.Forms.Label {
 						Text = "Default, Dark Theme",
 						TextColor = Color.White,
@@ -427,6 +429,7 @@ namespace Forms9PatchDemo
 						DarkTheme = true,
 						HasShadow = true,
 					},
+                    */
 				},
 			},1,0);
 			#endregion
@@ -439,6 +442,7 @@ namespace Forms9PatchDemo
 				Content = new StackLayout {
 					Children = {
 						label1,
+                        /*
 						si50, si100, si200, i50, i100,i200,
 
 
@@ -792,6 +796,7 @@ namespace Forms9PatchDemo
 
 						grid,
 
+                        */
 						new Label { Text = "Hello ContentPage" }
 					},
 				}

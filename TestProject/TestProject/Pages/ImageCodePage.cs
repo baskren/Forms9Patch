@@ -28,7 +28,7 @@ namespace Forms9PatchDemo
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
                         
-                        
+                        /*
                         
 						new Label { Text = "f9p: multiresource: adsBttn29" },
 						new Forms9Patch.Image {
@@ -185,7 +185,7 @@ namespace Forms9PatchDemo
 						#endregion
                         
                         
-                        
+                        */
                         
 
 					},

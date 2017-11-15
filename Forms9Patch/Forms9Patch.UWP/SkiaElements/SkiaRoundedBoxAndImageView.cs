@@ -281,7 +281,6 @@ namespace Forms9Patch.UWP
             Invalidate();
         }
 
-
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
@@ -387,7 +386,7 @@ namespace Forms9Patch.UWP
                     constrainedHeightValue = Math.Min(constrainedHeightValue, ImageElement.HeightRequest);
 
                 if ((!constrainedWidth && !constrainedHeight) || ImageElement.Fill == Fill.None)
-                    result = new Windows.Foundation.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+                    result = new Windows.Foundation.Size(_sourceBitmap.Width / Display.Scale, _sourceBitmap.Height / Display.Scale);
                 else
                 {
                     var sourceAspect = _sourceBitmap.Height / _sourceBitmap.Width;
@@ -399,15 +398,15 @@ namespace Forms9Patch.UWP
                     }
                     else if (constrainedWidth)
                     {
-                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
-                            result = new Windows.Foundation.Size(constrainedWidthValue, availableSize.Height);
+                        if (ImageElement.Fill == Fill.Tile)
+                            result = new Windows.Foundation.Size(constrainedWidthValue, availableSize.Height / Display.Scale);
                         else
                             result = new Windows.Foundation.Size(constrainedWidthValue, constrainedWidthValue * sourceAspect);
                     }
                     else if (constrainedHeight)
                     {
-                        if (ImageElement.Fill == Fill.Tile || ImageElement.Fill == Fill.Fill)
-                            result = new Windows.Foundation.Size(availableSize.Width, constrainedHeightValue);
+                        if (ImageElement.Fill == Fill.Tile)
+                            result = new Windows.Foundation.Size(availableSize.Width / Display.Scale, constrainedHeightValue);
                         else
                             result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
                     }
@@ -753,6 +752,8 @@ namespace Forms9Patch.UWP
 
         static SKRect RectInsetForShape(SKRect perimeter, ElementShape buttonShape, float inset, bool vt)
         {
+            if (inset < 0)
+                inset = 0;
             var result = perimeter;
             var hz = !vt;
             switch (buttonShape)
