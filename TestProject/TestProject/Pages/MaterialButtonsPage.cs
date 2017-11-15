@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 using Xamarin.Forms;
 using System.Windows.Input;
@@ -7,12 +7,13 @@ namespace Forms9PatchDemo
 {
 	public class MaterialButtonsPage : ContentPage
 	{
-		readonly ICommand _trueCommand = new Command (parameter => System.Diagnostics.Debug.WriteLine ("_simpleCommand Parameter[" + parameter + "]"), parameter=>true );
+
+        readonly ICommand _trueCommand = new Command (parameter => System.Diagnostics.Debug.WriteLine ("_simpleCommand Parameter[" + parameter + "]"), parameter=>true );
 
 		readonly ICommand _falseCommand = new Command (parameter => System.Diagnostics.Debug.WriteLine ("_commandB [" + parameter + "]"), parameter => false);
 
-
-		static void OnSegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e) {
+        #region Gesture Handlers
+        static void OnSegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e) {
 			System.Diagnostics.Debug.WriteLine ("Tapped Segment[" + e.Index + "] Text=["+e.Segment.Text+"]");
 		}
 
@@ -43,12 +44,71 @@ namespace Forms9PatchDemo
 		static void OnMaterialButtonLongPressed(object sender, EventArgs e) {
 			System.Diagnostics.Debug.WriteLine ("LongPressed Button Text=["+((Forms9Patch.MaterialButton)sender).Text+"]");
 		}
+        #endregion
 
 
-		public MaterialButtonsPage ()
+        #region Shapes
+        static string Rectangle = "▭";
+        static string Square = "□";
+        static string Circle = "○";
+        static string Ellipse = "⬭";
+        static string Obround = "◖▮◗";
+        #endregion
+
+        #region Icons
+        static string _infoIconText = "🛈";
+        static string _arrowIconText = "⇨";
+        static Xamarin.Forms.ImageSource _infoIconSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+        static Xamarin.Forms.ImageSource _arrowIconSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR");
+        #endregion#
+
+        #region Fields
+        Forms9Patch.MaterialSegmentedControl _shapesSelector = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment { Text = Rectangle },
+                new Forms9Patch.Segment { Text = Square },
+                new Forms9Patch.Segment { Text = Circle },
+                new Forms9Patch.Segment { Text = Ellipse },
+                new Forms9Patch.Segment { Text = Obround }
+            }
+        };
+        Forms9Patch.MaterialSegmentedControl _iconSelector = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment { },
+                new Forms9Patch.Segment { IconText = _infoIconText },
+                new Forms9Patch.Segment { IconText = _arrowIconText },
+                new Forms9Patch.Segment { IconImage = new Forms9Patch.Image { Source =_infoIconSource } },
+                new Forms9Patch.Segment { IconImage = new Forms9Patch.Image { Source =_arrowIconSource } },
+            }
+        };
+        Forms9Patch.MaterialSegmentedControl _horizontalTextAlignment = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment { Text = "LEFT" },
+                new Forms9Patch.Segment { Text = "CENTER" },
+                new Forms9Patch.Segment { Text = "RIGHT" },
+            }
+        };
+        Forms9Patch.MaterialSegmentedControl _verticalTextAlignment = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment { Text = "TOP" },
+                new Forms9Patch.Segment { Text = "CENTER" },
+                new Forms9Patch.Segment { Text = "BOTTOM" },
+            }
+        };
+        Xamarin.Forms.Entry _textEntry = new Entry { Text = "ButtonText "};
+        #endregion
+
+
+        public MaterialButtonsPage ()
 		{
-			var infoIcon =  Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
-			var arrowIcon = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR");
 
 			#region Material Buttons
 			var grid = new Grid {
@@ -66,8 +126,8 @@ namespace Forms9PatchDemo
 
 			var mb1 = new Forms9Patch.MaterialButton {
 				Text = "TI",
-				ImageSource = arrowIcon,
-				TintImage = false,
+				IconImage = new Forms9Patch.Image { Source = _arrowIconSource },
+				TintIcon = false,
 			};
 			mb1.Tapped += OnMaterialButtonTapped;
 			mb1.Selected += OnMaterialButtonSelected;
@@ -76,7 +136,7 @@ namespace Forms9PatchDemo
 			var mb2 = new Forms9Patch.MaterialButton {
 				//Text = "toggle",
 				ToggleBehavior = true,
-				ImageSource = infoIcon,
+				IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 			};
 			mb2.Tapped += OnMaterialButtonTapped;
 			mb2.Selected += OnMaterialButtonSelected;
@@ -86,7 +146,7 @@ namespace Forms9PatchDemo
 				//Text = "disabled",
 				ToggleBehavior = true,
 				IsEnabled = false,
-				ImageSource = arrowIcon,
+				IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 			};
 			mb3.Tapped += OnMaterialButtonTapped;
 			mb3.Selected += OnMaterialButtonSelected;
@@ -96,7 +156,7 @@ namespace Forms9PatchDemo
 				//Text = "selected disabled",
 				IsEnabled = false,
 				IsSelected = true,
-				ImageSource = infoIcon,
+				IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 			};
 			mb4.Tapped += OnMaterialButtonTapped;
 			mb4.Selected += OnMaterialButtonSelected;
@@ -138,27 +198,27 @@ namespace Forms9PatchDemo
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "",
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						OutlineWidth = 0,
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "toggle",
 						ToggleBehavior = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 						OutlineWidth = 0,
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						OutlineWidth = 0,
 					},
 					new Forms9Patch.MaterialButton {
 						//Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 						OutlineWidth = 0,
 					},
 
@@ -169,28 +229,28 @@ namespace Forms9PatchDemo
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},	
 
 					new Label {
@@ -200,27 +260,27 @@ namespace Forms9PatchDemo
 					new Forms9Patch.MaterialButton {
 						Text = "default",
 						HasShadow = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						HasShadow = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						HasShadow = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
 						HasShadow = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 
 					new Label {
@@ -231,14 +291,14 @@ namespace Forms9PatchDemo
 						Text = "default",
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "disabled",
@@ -246,7 +306,7 @@ namespace Forms9PatchDemo
 						IsEnabled = false,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 					},
 					new Forms9Patch.MaterialButton {
 						Text = "selected disabled",
@@ -254,7 +314,7 @@ namespace Forms9PatchDemo
 						IsSelected = true,
 						BackgroundColor = Color.FromHex("#E0E0E0"),
 						HasShadow = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},	
 
 				},
@@ -329,7 +389,7 @@ namespace Forms9PatchDemo
 						Text = "default",
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.MaterialButton {
@@ -431,14 +491,14 @@ namespace Forms9PatchDemo
 
 					new Forms9Patch.Segment {
 						Text = "A",
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						Command = _trueCommand,
 						CommandParameter = "sc1 A",
 					},
 					new Forms9Patch.Segment {
 						//Text = "B",
 						IsSelected = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						Command = _trueCommand,
 						CommandParameter = "sc1 B",
 					},
@@ -463,7 +523,7 @@ namespace Forms9PatchDemo
 
 			var seg1 = new Forms9Patch.Segment {
 				//Text = "A",
-				ImageSource = arrowIcon,
+				IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 			};
 			seg1.Tapped += OnMaterialButtonTapped;
 			seg1.Selected += OnMaterialButtonTapped;
@@ -524,7 +584,7 @@ namespace Forms9PatchDemo
 					new Forms9Patch.Segment {
 						//Text = "D",
 						IsEnabled = false,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 				},
 			};
@@ -542,24 +602,24 @@ namespace Forms9PatchDemo
 				Segments = {
 					new Forms9Patch.Segment {
 						Text = "A none",
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.Segment {
 						Text = "B none",
 						IsSelected = true,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 						Orientation = StackOrientation.Vertical,
 					},
 
 					new Forms9Patch.Segment {
 						Text = "C none",
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 					new Forms9Patch.Segment {
 						Text = "D none",
 						IsEnabled = false,
-						ImageSource = infoIcon,
+						IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 						Orientation = StackOrientation.Vertical,
 					},
 
@@ -582,7 +642,7 @@ namespace Forms9PatchDemo
 
 					new Forms9Patch.Segment {
 						Text = "A multi",
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 					},
 
 					new Forms9Patch.Segment {
@@ -622,7 +682,7 @@ namespace Forms9PatchDemo
 					new Forms9Patch.Segment {
 						Text = "B none",
 						IsSelected = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 						//Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.Segment {
@@ -692,7 +752,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													//Text = "B",
 													IsSelected = true,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 												new Forms9Patch.Segment {
 													Text = "C",
@@ -713,7 +773,7 @@ namespace Forms9PatchDemo
 
 												new Forms9Patch.Segment {
 													//Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 												new Forms9Patch.Segment {
 													Text = "B",
@@ -748,7 +808,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													//Text = "D",
 													IsEnabled = false,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 											},
 										},
@@ -761,24 +821,24 @@ namespace Forms9PatchDemo
 											Segments = {
 												new Forms9Patch.Segment {
 													Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 													Orientation = StackOrientation.Vertical,
 												},
 												new Forms9Patch.Segment {
 													Text = "B",
 													IsSelected = true,
-													ImageSource = infoIcon,
+													IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 													Orientation = StackOrientation.Vertical,
 												},
 
 												new Forms9Patch.Segment {
 													Text = "C",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 												new Forms9Patch.Segment {
 													Text = "D",
 													IsEnabled = false,
-													ImageSource = infoIcon,
+													IconImage = new Forms9Patch.Image {  Source = _infoIconSource },
 													Orientation = StackOrientation.Vertical,
 												},
 
@@ -798,7 +858,7 @@ namespace Forms9PatchDemo
 
 												new Forms9Patch.Segment {
 													Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 
 												new Forms9Patch.Segment {
@@ -835,7 +895,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													Text = "B",
 													IsSelected = true,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image {  Source = _arrowIconSource },
 												},
 												new Forms9Patch.Segment {
 													Text = "C",

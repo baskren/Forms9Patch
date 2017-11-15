@@ -75,7 +75,7 @@ namespace Forms9PatchDemo
 		public NestedBubblePopupPage ()
 		{
 			BackgroundColor = Color.White;
-			Padding = new Thickness(20,Device.OnPlatform(20,0,0),20,20);
+			Padding = new Thickness(20,Device.RuntimePlatform==Device.iOS?20:0,20,20);
 
 			var shadowToggle = new Switch ();
 			shadowToggle.SetBinding (Switch.IsToggledProperty, "HasShadow");
@@ -167,7 +167,7 @@ namespace Forms9PatchDemo
 				Text = "Close",
 				//BackgroundColor = Color.Blue,
 				OutlineColor = Color.Blue,
-				FontColor = Color.Blue,
+				TextColor = Color.Blue,
 			};
 			//bubbleLabel.SetBinding (Label.TextProperty, "CornerRadius");
 			bubbleLabel.BindingContext = this;
@@ -236,7 +236,7 @@ namespace Forms9PatchDemo
 			var showButton = new Forms9Patch.MaterialButton {
 				Text = "Show BubblePopup",
 				OutlineColor = Color.Blue,
-				FontColor = Color.Blue,
+				TextColor = Color.Blue,
 			};
 			showButton.Tapped += (object sender, EventArgs e) => {
 				bubble.Target = _lastChanged;

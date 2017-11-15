@@ -27,10 +27,10 @@ namespace Forms9Patch.iOS
 		/// <param name="e">E.</param>
 		protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e) {
 			base.OnElementPropertyChanged(sender, e);
-			if (e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName ||
+			if (e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName ||
 				e.PropertyName == BubbleLayout.HasShadowProperty.PropertyName ||
-				e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName ||
-				e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName ||
+				e.PropertyName == ShapeBase.OutlineWidthProperty.PropertyName ||
+				e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName ||
 				e.PropertyName == BubbleLayout.BackgroundColorProperty.PropertyName ||
 				e.PropertyName == BubbleLayout.PaddingProperty.PropertyName ||
 				e.PropertyName == BubbleLayout.PointerLengthProperty.PropertyName ||
@@ -39,7 +39,7 @@ namespace Forms9Patch.iOS
 				e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName ||
 				//e.PropertyName == BubbleLayout.PointerDirectionProperty.PropertyName ||
 				e.PropertyName == VisualElement.WidthProperty.PropertyName ||
-				e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
+				e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
 			) {
 				SetNeedsDisplay ();
 			}
@@ -56,17 +56,17 @@ namespace Forms9Patch.iOS
 			ContentMode = UIViewContentMode.Redraw;
 
 			var backgroundColor = (Color) Element.GetValue (BubbleLayout.BackgroundColorProperty);
-			var outlineColor = (Color) Element.GetValue (RoundedBoxBase.OutlineColorProperty);
-			var outlineWidth = (nfloat)(Math.Max (0, (float)Element.GetValue (RoundedBoxBase.OutlineWidthProperty) ) );
+			var outlineColor = (Color) Element.GetValue (ShapeBase.OutlineColorProperty);
+			var outlineWidth = (nfloat)(Math.Max (0, (float)Element.GetValue (ShapeBase.OutlineWidthProperty) ) );
 
 			if (backgroundColor.A < 0.01 && (outlineColor.A < 0.01 || outlineWidth < 0.01 )) {
 				base.Draw (rect);
 				return;
 			}
 
-			var outlineRadius = Math.Max (0, (float)Element.GetValue (RoundedBoxBase.OutlineRadiusProperty));
+			var outlineRadius = Math.Max (0, (float)Element.GetValue (ShapeBase.OutlineRadiusProperty));
 			var hasShadow = (bool)Element.GetValue (BubbleLayout.HasShadowProperty);
-			var shadowInverted = ((bool)Element.GetValue (RoundedBoxBase.ShadowInvertedProperty));
+			var shadowInverted = ((bool)Element.GetValue (ShapeBase.ShadowInvertedProperty));
 
 			var shadowX = (nfloat)Forms9Patch.Settings.ShadowOffset.X;//* Display.Scale);
 			var shadowY = (nfloat)Forms9Patch.Settings.ShadowOffset.Y;// * Display.Scale);

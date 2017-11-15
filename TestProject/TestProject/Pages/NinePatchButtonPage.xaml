@@ -12,18 +12,18 @@
 		<f9p:ImageButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
 
 			<f9p:ImageButton.DefaultState>
-				<f9p:ImageButtonState Text="Sticky Default State" FontColor="White">
+				<f9p:ImageButtonState Text="Sticky Default State" TextColor="White">
 					<f9p:ImageButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.Image>
+					<f9p:ImageButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.Image>
+					</f9p:ImageButtonState.IconImage>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
 
 			<f9p:ImageButton.SelectedState>
-				<f9p:ImageButtonState FontColor="Red" Text="Selected" >
+				<f9p:ImageButtonState TextColor="Red" Text="Selected" >
 					<f9p:ImageButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
@@ -33,16 +33,16 @@
 		</f9p:ImageButton>
 
 
-		<f9p:ImageButton ToggleBehavior="true" HeightRequest="80" Alignment="Center" TrailingImage="true">
+		<f9p:ImageButton ToggleBehavior="true" HeightRequest="80" Alignment="Center" TrailingIcon="true">
 
 			<f9p:ImageButton.DefaultState>
 				<f9p:ImageButtonState Text="Sticky w/o SelectedState" >
 					<f9p:ImageButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.Image>
+					<f9p:ImageButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.Image>
+					</f9p:ImageButtonState.IconImage>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
 
@@ -61,9 +61,9 @@
 					<f9p:ImageButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
 					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.Image>
+					<f9p:ImageButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.Image>
+					</f9p:ImageButtonState.IconImage>
 				</f9p:ImageButtonState>
 			</f9p:ImageButton.DefaultState>
 

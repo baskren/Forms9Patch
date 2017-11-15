@@ -338,7 +338,7 @@ namespace Forms9PatchDemo
 						Text = "default",
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
-						ImageSource = arrowIcon,
+						IconImage = new Forms9Patch.Image { Source = arrowIcon },
 						Orientation = StackOrientation.Vertical,
 					},
 					new Forms9Patch.MaterialButton {
@@ -433,7 +433,7 @@ namespace Forms9PatchDemo
 
 
 
-			Padding = new Thickness (5, Xamarin.Forms.Device.OnPlatform (20, 0, 0), 5, 0);
+			Padding = new Thickness (5, Device.RuntimePlatform==Device.iOS ? 20 : 0, 5, 0);
 			BackgroundColor = Color.White;
 			Content = new ScrollView { 
 				Content = new StackLayout {
@@ -631,7 +631,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													//Text = "B",
 													IsSelected = true,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 												new Forms9Patch.Segment {
 													Text = "C",
@@ -651,7 +651,7 @@ namespace Forms9PatchDemo
 
 												new Forms9Patch.Segment {
 													//Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 												new Forms9Patch.Segment {
 													Text = "B",
@@ -685,7 +685,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													//Text = "D",
 													IsEnabled = false,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 											},
 										},
@@ -697,24 +697,24 @@ namespace Forms9PatchDemo
 											Segments = {
 												new Forms9Patch.Segment {
 													Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 													Orientation = StackOrientation.Vertical,
 												},
 												new Forms9Patch.Segment {
 													Text = "B",
 													IsSelected = true,
-													ImageSource = infoIcon,
+													IconImage = new Forms9Patch.Image { Source = infoIcon },
 													Orientation = StackOrientation.Vertical,
 												},
 
 												new Forms9Patch.Segment {
 													Text = "C",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 												new Forms9Patch.Segment {
 													Text = "D",
 													IsEnabled = false,
-													ImageSource = infoIcon,
+													IconImage = new Forms9Patch.Image { Source = infoIcon },
 													Orientation = StackOrientation.Vertical,
 												},
 
@@ -733,7 +733,7 @@ namespace Forms9PatchDemo
 
 												new Forms9Patch.Segment {
 													Text = "A",
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 
 												new Forms9Patch.Segment {
@@ -769,7 +769,7 @@ namespace Forms9PatchDemo
 												new Forms9Patch.Segment {
 													Text = "B",
 													IsSelected = true,
-													ImageSource = arrowIcon,
+													IconImage = new Forms9Patch.Image { Source = arrowIcon },
 												},
 												new Forms9Patch.Segment {
 													Text = "C",

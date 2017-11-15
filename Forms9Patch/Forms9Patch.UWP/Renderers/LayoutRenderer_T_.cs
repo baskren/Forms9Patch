@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace Forms9Patch.UWP
 {
-    internal class LayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxAndImageView> where TElement : Layout, IBackground
+    internal class LayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxAndImageView> where TElement : Layout, ILayout
     {
         #region Fields
         bool _disposed;
@@ -56,7 +56,7 @@ namespace Forms9Patch.UWP
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IRoundedBox));
+                    SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
                 SizeChanged += OnSizeChanged;
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);

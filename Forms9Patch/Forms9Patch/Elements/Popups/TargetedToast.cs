@@ -137,7 +137,7 @@ namespace Forms9Patch
 		public TargetedToast(VisualElement target) : base (target)
 		{
 			_okButton.BackgroundColor = OkButtonColor;
-			_okButton.FontColor = OkTextColor;
+			_okButton.TextColor = OkTextColor;
 			_okButton.HtmlText = OkText;
 
 			HasShadow = true;
@@ -183,7 +183,7 @@ namespace Forms9Patch
 			else if (propertyName == OkButtonColorProperty.PropertyName)
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)
-				_okButton.FontColor = OkTextColor;
+				_okButton.TextColor = OkTextColor;
 			else if (propertyName == TextColorProperty.PropertyName)
 			{
 				_titleLabel.TextColor = TextColor;

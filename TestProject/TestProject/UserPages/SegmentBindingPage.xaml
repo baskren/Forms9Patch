@@ -22,7 +22,7 @@
 
 
 										<f9p:MaterialSegmentedControl BackgroundColor="White" WidthRequest="100"
-												Padding="1" FontSize="12" FontColor="#0076FF" OutlineColor="#CCC" GroupToggleBehavior="Radio"
+												Padding="1" FontSize="12" TextColor="#0076FF" OutlineColor="#CCC" GroupToggleBehavior="Radio"
 												OutlineWidth="1" SeparatorWidth="1" OutlineRadius="3" HorizontalOptions="End">
 											<f9p:Segment Text="Playing" Orientation="Vertical" IsSelected="{Binding IsPlaying}"/>
 											<f9p:Segment Text="Resting" Orientation="Vertical"/>

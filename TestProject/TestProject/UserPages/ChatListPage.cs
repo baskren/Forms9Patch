@@ -29,7 +29,7 @@ namespace Forms9PatchDemo
 			VerticalOptions = LayoutOptions.End,
 		};
 
-		public readonly Forms9Patch.ContentView Bubble = new Forms9Patch.ContentView ();
+		public readonly Forms9Patch.Frame Bubble = new Forms9Patch.Frame ();
 
 		readonly Label _label = new Label ();
 

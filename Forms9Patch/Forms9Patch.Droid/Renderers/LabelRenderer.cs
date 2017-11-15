@@ -440,7 +440,7 @@ namespace Forms9Patch.Droid
             get
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                var textSize = (float)Element.Font.FontSize;
+                var textSize = (float)Element.FontSize;
 #pragma warning restore CS0618 // Type or member is obsolete
                 if (System.Math.Abs(textSize) < 0.0001)
                     textSize = F9PTextView.DefaultTextSize;
@@ -452,7 +452,7 @@ namespace Forms9Patch.Droid
         {
             if (textSize < 0)
 #pragma warning disable CS0618 // Type or member is obsolete
-                textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.Font.FontSize));
+                textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
 #pragma warning restore CS0618 // Type or member is obsolete
             if (textSize < ModelMinFontSize)
                 textSize = ModelMinFontSize;

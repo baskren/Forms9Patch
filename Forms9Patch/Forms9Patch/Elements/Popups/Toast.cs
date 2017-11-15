@@ -136,7 +136,7 @@ namespace Forms9Patch
 		public Toast() 
 		{
 			_okButton.BackgroundColor = OkButtonColor;
-			_okButton.FontColor = OkTextColor;
+			_okButton.TextColor = OkTextColor;
 			_okButton.HtmlText = OkText;
 
 			Margin = 30;
@@ -189,7 +189,7 @@ namespace Forms9Patch
 			else if (propertyName == OkButtonColorProperty.PropertyName)
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)
-				_okButton.FontColor = OkTextColor;
+				_okButton.TextColor = OkTextColor;
 			else if (propertyName == TextColorProperty.PropertyName)
 			{
 				_textLabel.TextColor = TextColor;

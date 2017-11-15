@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    interface IBackground : IRoundedBox
+    interface IBackground : IShape
     {
-        /// <summary>
-        /// Gets or sets the padding.
-        /// </summary>
-        /// <value>The padding.</value>
-        Xamarin.Forms.Thickness Padding { get; set; }
-
-
         Forms9Patch.Image BackgroundImage { get; set; }
     }
 

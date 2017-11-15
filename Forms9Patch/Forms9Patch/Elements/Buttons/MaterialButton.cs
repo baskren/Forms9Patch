@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch MaterialButton.
     /// </summary>
-    public class MaterialButton : Frame, IDisposable
+    public class MaterialButton : Frame, IDisposable, IButton
     {
 
         #region Properties
@@ -16,201 +16,48 @@ namespace Forms9Patch
         /// UNSUPPORTED INHERITED PROPERTY.
         /// </summary>
         /// <value>The content.</value>
+        [Obsolete("Unsupported Property")]
         public new View Content
         {
-            get { throw new NotImplementedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
-            set { throw new NotImplementedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
+            get { throw new NotSupportedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
+            set { throw new NotSupportedException("[Forms9Patch.MaterialButton] Content property is not supported"); }
         }
 
 
-        /// <summary>
-        /// Backing store for the MaterialButton.HasShadow bindable property.
-        /// </summary>
-        /// <remarks></remarks>
-        public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(MaterialButton), false);
-        /// <summary>
-        /// Gets or sets a flag indicating if the MaterialButton has a shadow displayed. This is a bindable property.
-        /// </summary>
-        /// <value><c>true</c> if this instance has shadow; otherwise, <c>false</c>.</value>
-        public new bool HasShadow
-        {
-            get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
-        }
+        #region IButton
 
+        #region SelectedTextColor
         /// <summary>
-        /// Backing store for the MaterialButton.Image bindable property.
+        /// OBSOLETE: Use SelectedTextColorProperty
         /// </summary>
-        public static BindableProperty ImageSourceProperty = BindableProperty.Create("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
-        /// <summary>
-        /// Gets or sets the companion image - alternatively, use ImageText.
-        /// </summary>
-        /// <value>The image.</value>
-        public Xamarin.Forms.ImageSource ImageSource
-        {
-            get { return (Xamarin.Forms.ImageSource)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
-        }
-
-        /// <summary>
-        /// The image text property backing store
-        /// </summary>
-        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(MaterialButton), default(string));
-        /// <summary>
-        /// Gets or sets the image text - use this to specify the image as an HTML markup string.
-        /// </summary>
-        /// <value>The image text.</value>
-        public string IconText
-        {
-            get { return (string)GetValue(IconTextProperty); }
-            set { SetValue(IconTextProperty, value); }
-        }
-
-
-
-        /// <summary>
-        /// Backing store for the MaterialButton.Text bindable property.
-        /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(MaterialButton), null);
-        /// <summary>
-        /// Gets or sets the text.
-        /// </summary>
-        /// <value>The text.</value>
-        public string Text
-        {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the formatted text property.
-        /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(MaterialButton), null);
-        /// <summary>
-        /// Gets or sets the formatted text.
-        /// </summary>
-        /// <value>The formatted text.</value>
-        public string HtmlText
-        {
-            get { return (string)GetValue(HtmlTextProperty); }
-            set { SetValue(HtmlTextProperty, value); }
-        }
-
-
-        /// <summary>
-        /// Backing store for the MaterialButton.FontColor bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialButton), Color.Default);
-        /// <summary>
-        /// Gets or sets the color of the font.
-        /// </summary>
-        /// <value>The color of the font.</value>
-        public Color FontColor
-        {
-            get { return (Color)GetValue(FontColorProperty); }
-            set { SetValue(FontColorProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the MaterialButton.SelectedFontColor bindable property.
-        /// </summary>
+        [Obsolete("Use SelectedTextColorProperty")]
         public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create("SelectedFontColor", typeof(Color), typeof(MaterialButton), Color.Default);
         /// <summary>
-        /// Gets or sets the color of the font when selected.
+        /// OBSOLETE: Use SelectedTextColor
         /// </summary>
         /// <value>The color of the font.</value>
+        [Obsolete("Use SelectedTextColor")]
         public Color SelectedFontColor
         {
-            get { return (Color)GetValue(SelectedFontColorProperty); }
-            set { SetValue(SelectedFontColorProperty, value); }
+            get { throw new NotSupportedException("SelectedFontColor has been replaced with TextColor"); }
+            set { throw new NotSupportedException("SelectedFontColor has been replaced with TextColor"); }
         }
 
         /// <summary>
-        /// Backing store for the MaterialButton.FontAttributes bindable property.
+        /// Backing store for the SelectedTextColor property
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-                                                                                                                                                                                        /// <summary>
-                                                                                                                                                                                        /// Gets or sets the font attributes.
-                                                                                                                                                                                        /// </summary>
-                                                                                                                                                                                        /// <value>The font attributes.</value>
-        public FontAttributes FontAttributes
+        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create("SelectedTextColor", typeof(Color), typeof(MaterialButton), Color.Default);
+        /// <summary>
+        /// Gets or sets the font color of the Text or the base font color of the HtmlText for when the button is selected
+        /// </summary>
+        public Color SelectedTextColor
         {
-            get { return (FontAttributes)GetValue(FontAttributesProperty); }
-            set { SetValue(FontAttributesProperty, value); }
+            get { return (Color)GetValue(SelectedTextColorProperty); }
+            set { SetValue(SelectedTextColorProperty, value); }
         }
+        #endregion SelectedTextColor
 
-
-        /// <summary>
-        /// Backing store for the MaterialButton.FontSize bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialButton), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-                                                                                                                                                     /// <summary>
-                                                                                                                                                     /// Gets or sets the size of the font.
-                                                                                                                                                     /// </summary>
-                                                                                                                                                     /// <value>The size of the font.</value>
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the MaterialButton.FontFamiily bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-                                                                                                                                                         /// <summary>
-                                                                                                                                                         /// Gets or sets the font family.
-                                                                                                                                                         /// </summary>
-                                                                                                                                                         /// <value>The font family.</value>
-        public string FontFamily
-        {
-            get { return (string)GetValue(FontFamilyProperty); }
-            set { SetValue(FontFamilyProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the OutlineWidth bindable property.
-        /// </summary>
-        public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(MaterialButton), -1.0f);
-        /// <summary>
-        /// Gets or sets the width of the outline.
-        /// </summary>
-        /// <value>The width of the outline.</value>
-        public new float OutlineWidth
-        {
-            get { return (float)GetValue(OutlineWidthProperty); }
-            set { SetValue(OutlineWidthProperty, value); }
-        }
-
-
-        /// <summary>
-        /// Backing store for the MaterialButton.OutlineColor bindable property.
-        /// </summary>
-        public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(MaterialButton), Color.Default);
-        /// <summary>
-        /// Gets or sets the color of the border.
-        /// </summary>
-        /// <value>The color of the border.</value>
-        public new Color OutlineColor
-        {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the MaterialButton.BackgroundColor bindable property.
-        /// </summary>
-        public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(MaterialButton), Color.Transparent);
-        /// <summary>
-        /// Gets or sets the color of the background.
-        /// </summary>
-        /// <value>The color of the background.</value>
-        public new Color BackgroundColor
-        {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
-        }
-
+        #region SelectedBackgroundColor
         /// <summary>
         /// Backing store for the MaterialButton.SelectedBackgroundColor bindable property.
         /// </summary>
@@ -225,20 +72,9 @@ namespace Forms9Patch
             set { SetValue(SelectedBackgroundColorProperty, value); }
         }
 
-        /// <summary>
-        /// Backing store for the MaterialButton.DarkTheme property.
-        /// </summary>
-        public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("DarkTheme", typeof(bool), typeof(MaterialButton), false);
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="MaterialButton"/> if for a dark theme.
-        /// </summary>
-        /// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
-        public bool DarkTheme
-        {
-            get { return (bool)GetValue(DarkThemeProperty); }
-            set { SetValue(DarkThemeProperty, value); }
-        }
+        #endregion SelectedBackgroundColor
 
+        #region Command
         /// <summary>
         /// Backing store for the MaterialButton.Command bindable property.
         /// </summary>
@@ -263,8 +99,9 @@ namespace Forms9Patch
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
+        #endregion Command
 
-
+        #region CommandParameter
         /// <summary>
         /// Backing store for the MaterialButton.CommandParameter bindable property.
         /// </summary>
@@ -286,21 +123,9 @@ namespace Forms9Patch
             get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
+        #endregion CommandParameter
 
-        /// <summary>
-        /// Backing store for the MaterialButton.IsSelected bindable property.
-        /// </summary>
-        public static BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="Button"/> is selected.
-        /// </summary>
-        /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
-        public bool IsSelected
-        {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
-        }
-
+        #region ToggleBehavior
         /// <summary>
         /// OBSOLETE: Use ToggleBehaviorProperty instead.
         /// </summary>
@@ -333,7 +158,350 @@ namespace Forms9Patch
                 SetValue(ToggleBehaviorProperty, value);
             }
         }
+        #endregion ToggleBehavior
 
+        // IsEnabled inherited
+
+        #region IsSelected
+        /// <summary>
+        /// Backing store for the MaterialButton.IsSelected bindable property.
+        /// </summary>
+        public static BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MaterialButton), false, BindingMode.TwoWay);
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="Button"/> is selected.
+        /// </summary>
+        /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
+        }
+        #endregion IsSelected
+
+        #region HapticEffect
+        /// <summary>
+        /// The haptic effect property.
+        /// </summary>
+        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(MaterialButton), HapticEffect.KeyClick);
+        /// <summary>
+        /// Gets or sets the haptic effect.
+        /// </summary>
+        /// <value>The haptic effect.</value>
+        public HapticEffect HapticEffect
+        {
+            get { return (HapticEffect)GetValue(HapticEffectProperty); }
+            set { SetValue(HapticEffectProperty, value); }
+        }
+        #endregion HapticEffect
+
+        #region HapticMode
+        /// <summary>
+        /// The haptic mode property.
+        /// </summary>
+        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(MaterialButton), default(KeyClicks));
+        /// <summary>
+        /// Gets or sets the haptic mode.
+        /// </summary>
+        /// <value>The haptic mode.</value>
+        public KeyClicks HapticMode
+        {
+            get { return (KeyClicks)GetValue(HapticModeProperty); }
+            set { SetValue(HapticModeProperty, value); }
+        }
+        #endregion HapticMode
+
+        #region IButtonState
+
+        #region IconImage
+        /// <summary>
+        /// OBSOLETE: Use IconImageProperty
+        /// </summary>
+        [Obsolete("Use IconImageProperty")]
+        public static BindableProperty ImageSourceProperty = BindableProperty.Create("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(MaterialButton), null);
+        /// <summary>
+        /// OBSOLETE: Use IconImage.
+        /// </summary>
+        /// <value>The image.</value>
+        [Obsolete("Use IconImage")]
+        public Xamarin.Forms.ImageSource ImageSource
+        {
+            get { throw new NotSupportedException("Use IconImage instead"); }
+            set { throw new NotSupportedException("Use IconImage instead"); }
+        }
+
+        /// <summary>
+        /// Backing store for the IconImage property
+        /// </summary>
+        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(MaterialButton), null);
+        /// <summary>
+        /// Gets or sets the icon image.  Alternatively, use IconText
+        /// </summary>
+        public Forms9Patch.Image IconImage
+        {
+            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
+            set { SetValue(IconImageProperty, value); }
+        }
+        #endregion IconImage
+
+        #region IconText
+        /// <summary>
+        /// The image text property backing store
+        /// </summary>
+        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(MaterialButton), default(string));
+        /// <summary>
+        /// Gets or sets the image text - use this to specify the image as an HTML markup string.
+        /// </summary>
+        /// <value>The image text.</value>
+        public string IconText
+        {
+            get { return (string)GetValue(IconTextProperty); }
+            set { SetValue(IconTextProperty, value); }
+        }
+        #endregion IconText
+
+        #region TrailingIcon
+        /// <summary>
+        /// OBSOLETE: Use TrailingIconProperty
+        /// </summary>
+        [Obsolete("Use TrailingIconProperty")]
+        public static readonly BindableProperty TrailingImageProperty = null;
+        /// <summary>
+        /// OBSOLETE: Use TrailingIcon
+        /// </summary>
+        [Obsolete("Use TrailingIcon")]
+        public bool TrailingImage
+        {
+            get { throw new NotSupportedException("Use TrailingIcon"); }
+            set { throw new NotSupportedException("Use TrailingIcon"); }
+        }
+
+        /// <summary>
+        /// Backing store for the trailing image property.
+        /// </summary>
+        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create("TrailingIcon", typeof(bool), typeof(MaterialButton), default(bool));
+        /// <summary>
+        /// Gets or sets if the image is to be rendered after the text.
+        /// </summary>
+        /// <value>default=false</value>
+        public bool TrailingIcon
+        {
+            get { return (bool)GetValue(TrailingIconProperty); }
+            set { SetValue(TrailingIconProperty, value); }
+        }
+        #endregion TrailingIcon
+
+        #region TintIcon
+        [Obsolete("Use TintIconProperty")]
+        public static readonly BindableProperty TintImageProperty = null;
+        [Obsolete("Use TintIcon")]
+        public bool TintImage
+        {
+            get { throw new NotSupportedException("Use TintIcon"); }
+            set { throw new NotSupportedException("Use TintIcon"); }
+        }
+
+        /// <summary>
+        /// The tint image property backing store.
+        /// </summary>
+        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(MaterialButton), true);
+        /// <summary>
+        /// Will the TextColor be used to tint the IconImage?
+        /// </summary>
+        /// <value><c>true</c> tint IconImage with TextColor; otherwise, <c>false</c>.</value>
+        public bool TintIcon
+        {
+            get { return (bool)GetValue(TintIconProperty); }
+            set { SetValue(TintIconProperty, value); }
+        }
+
+        #endregion TintIcon
+
+        #region HasTightSpacing
+        /// <summary>
+        /// The has tight spacing property.
+        /// </summary>
+        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(MaterialButton), default(bool));
+        /// <summary>
+        /// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
+        /// </summary>
+        /// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
+        public bool HasTightSpacing
+        {
+            get { return (bool)GetValue(HasTightSpacingProperty); }
+            set { SetValue(HasTightSpacingProperty, value); }
+        }
+        #endregion HasTightSpacing
+
+        #region Spacing
+        /// <summary>
+        /// Backing store for the spacing property.
+        /// </summary>
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(MaterialButton), 4.0);
+        /// <summary>
+        /// Gets or sets the spacing.
+        /// </summary>
+        /// <value>The spacing.</value>
+        public double Spacing
+        {
+            get { return (double)GetValue(SpacingProperty); }
+            set { SetValue(SpacingProperty, value); }
+        }
+        #endregion Spacing
+
+        #region Orientation
+        /// <summary>
+        /// Backing store for the MaterialButton's orientation property.
+        /// </summary>
+        public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
+        /// <summary>
+        /// Gets or sets the orientation of the iamge and label.
+        /// </summary>
+        /// <value>The image and label orientation.</value>
+        public StackOrientation Orientation
+        {
+            get { return (StackOrientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+        #endregion Orientation
+
+        #region ButtonShape property
+        public static readonly BindableProperty ButtonShapeProperty = BindableProperty.Create("ButtonShape", typeof(ButtonShape), typeof(MaterialButton), default(ButtonShape),
+            propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
+            {
+                ((IShape)bindable).ElementShape = ((ButtonShape)newValue).ToElementShape();
+            })
+            );
+        public ButtonShape ButtonShape
+        {
+            get { return (ButtonShape)GetValue(ButtonShapeProperty); }
+            set { SetValue(ButtonShapeProperty, value); }
+        }
+        #endregion ButtonShape property
+
+        #region IBackground 
+
+        // BackgroundImage inherited
+
+        #region IShape
+
+        #region BackgroundColor
+        /// <summary>
+        /// Backing store for the BackgroundColor property
+        /// </summary>
+        public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(MaterialButton), Color.Default);
+        /// <summary>
+        /// Gets or sets the button's background color
+        /// </summary>
+        public new Color BackgroundColor
+        {
+            get { return (Color)GetValue(BackgroundColorProperty); }
+            set { SetValue(BackgroundColorProperty, value); }
+        }
+        #endregion
+
+        #region HasShadow
+        public static new readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(MaterialButton), false);
+        public new bool HasShadow
+        {
+            get { return (bool)GetValue(HasShadowProperty); }
+            set { SetValue(HasShadowProperty, value); }
+        }
+        #endregion
+
+        // ShadowInverted inherited
+
+        #region OutlineColor
+        public static new readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(MaterialButton), Color.Default);
+        public new Color OutlineColor
+        {
+            get { return (Color)GetValue(OutlineColorProperty); }
+            set { SetValue(OutlineColorProperty, value); }
+        }
+        #endregion OutlineColor
+
+        // OutlineRadius inherited
+
+        #region OutlineWidth
+        public static new readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(MaterialButton), -1f);
+        public new float OutlineWidth
+        {
+            get { return (float)GetValue(OutlineWidthProperty); }
+            set { SetValue(OutlineWidthProperty, value); }
+        }
+        #endregion OutlineWidth
+
+        // ElementShape inherited from Forms9Patch.Frame
+
+        #endregion IShape
+
+        #endregion Superceding IBackground
+
+        #region ILabel
+
+        #region Text
+        /// <summary>
+        /// Backing store for the MaterialButton.Text bindable property.
+        /// </summary>
+        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(MaterialButton), null);
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
+        /// <value>The text.</value>
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+        #endregion Text
+
+        #region HtmlText
+        /// <summary>
+        /// Backing store for the formatted text property.
+        /// </summary>
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(MaterialButton), null);
+        /// <summary>
+        /// Gets or sets the formatted text.
+        /// </summary>
+        /// <value>The formatted text.</value>
+        public string HtmlText
+        {
+            get { return (string)GetValue(HtmlTextProperty); }
+            set { SetValue(HtmlTextProperty, value); }
+        }
+        #endregion HtmlText
+
+        #region TextColor
+        /// <summary>
+        /// OBSOLETE: Use TextColorProperty
+        /// </summary>
+        [Obsolete("Use TextColorProperty")]
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialButton), Color.Default);
+        /// <summary>
+        /// OBSOLETE: Use TextColor
+        /// </summary>
+        /// <value>The color of the font.</value>
+        [Obsolete("Use TextColor")]
+        public Color FontColor
+        {
+            get { throw new NotSupportedException("FontColor has been replaced with TextColor"); }
+            set { throw new NotSupportedException("FontColor has been replaced with TextColor"); }
+        }
+
+        /// <summary>
+        /// Backing store for the TextColor property
+        /// </summary>
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(MaterialButton), Color.Default);
+        /// <summary>
+        /// Gets or sets the font color of the Text or the base font color of the HtmlText
+        /// </summary>
+        public Color TextColor
+        {
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
+        }
+        #endregion TextColor
+
+        #region HorizontalTextAlignment
         /// <summary>
         /// Backing store for the MaterialButton.Alignment bindable property
         /// </summary>
@@ -345,8 +513,8 @@ namespace Forms9Patch
         [Obsolete("Alignment is obsolete, see HorizontalTextAlignment and VerticalTextAlignment")]
         public TextAlignment Alignment
         {
-            get { return (TextAlignment)GetValue(AlignmentProperty); }
-            set { SetValue(AlignmentProperty, value); }
+            get { throw new NotSupportedException("Use HorizontalTextAlignment and VerticalTextAlignment instead"); }
+            set { throw new NotSupportedException("Use HorizontalTextAlignment and VerticalTextAlignment instead"); }
         }
 
         /// <summary>
@@ -362,7 +530,9 @@ namespace Forms9Patch
             get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
             set { SetValue(HorizontalTextAlignmentProperty, value); }
         }
+        #endregion HorizontalTextAlignment
 
+        #region VerticalTextAlignment
         /// <summary>
         /// Backing store for the vertical alignment property.
         /// </summary>
@@ -376,65 +546,9 @@ namespace Forms9Patch
             get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
             set { SetValue(VerticalTextAlignmentProperty, value); }
         }
+        #endregion VerticalTextAlignment
 
-
-
-        /// <summary>
-        /// Backing store for the MaterialButton's orientation property.
-        /// </summary>
-        public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
-        /// <summary>
-        /// Gets or sets the orientation of the iamge and label.
-        /// </summary>
-        /// <value>The image and label orientation.</value>
-        public StackOrientation Orientation
-        {
-            get { return (StackOrientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the trailing image property.
-        /// </summary>
-        public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create("TrailingImage", typeof(bool), typeof(MaterialButton), default(bool));
-        /// <summary>
-        /// Gets or sets if the image is to be rendered after the text.
-        /// </summary>
-        /// <value>default=false</value>
-        public bool TrailingImage
-        {
-            get { return (bool)GetValue(TrailingImageProperty); }
-            set { SetValue(TrailingImageProperty, value); }
-        }
-
-        /// <summary>
-        /// The lines property.
-        /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialButton), 1);
-        /// <summary>
-        /// Gets or sets the lines.
-        /// </summary>
-        /// <value>The lines.</value>
-        public int Lines
-        {
-            get { return (int)GetValue(LinesProperty); }
-            set { SetValue(LinesProperty, value); }
-        }
-
-        /// <summary>
-        /// The fit property.
-        /// </summary>
-        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.Width);
-        /// <summary>
-        /// Gets or sets the fit.
-        /// </summary>
-        /// <value>The fit.</value>
-        public LabelFit Fit
-        {
-            get { return (LabelFit)GetValue(FitProperty); }
-            set { SetValue(FitProperty, value); }
-        }
-
+        #region LineBreakMode
         /// <summary>
         /// The line break mode property.
         /// </summary>
@@ -448,11 +562,45 @@ namespace Forms9Patch
             get { return (LineBreakMode)GetValue(LineBreakModeProperty); }
             set { SetValue(LineBreakModeProperty, value); }
         }
+        #endregion LineBreakMode
 
+        #region Fit
+        /// <summary>
+        /// The fit property.
+        /// </summary>
+        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.Width);
+        /// <summary>
+        /// Gets or sets the fit.
+        /// </summary>
+        /// <value>The fit.</value>
+        public LabelFit Fit
+        {
+            get { return (LabelFit)GetValue(FitProperty); }
+            set { SetValue(FitProperty, value); }
+        }
+        #endregion Fit
+
+        #region Lines
+        /// <summary>
+        /// The lines property.
+        /// </summary>
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialButton), 1);
+        /// <summary>
+        /// Gets or sets the lines.
+        /// </summary>
+        /// <value>The lines.</value>
+        public int Lines
+        {
+            get { return (int)GetValue(LinesProperty); }
+            set { SetValue(LinesProperty, value); }
+        }
+        #endregion Lines
+
+        #region MinFontSize
         /// <summary>
         /// The backing store for the minimum font size property.
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(Label), -1.0);
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(MaterialButton), -1.0);
         /// <summary>
         /// Gets or sets the minimum size of the font allowed during an autofit. 
         /// </summary>
@@ -462,90 +610,97 @@ namespace Forms9Patch
             get { return (double)GetValue(MinFontSizeProperty); }
             set { SetValue(MinFontSizeProperty, value); }
         }
+        #endregion MinFontSize
 
+        #region IFontElement
+
+        #region FontSize
         /// <summary>
-        /// The haptic effect property.
+        /// Backing store for the MaterialButton.FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(MaterialButton), HapticEffect.KeyClick);
-        /// <summary>
-        /// Gets or sets the haptic effect.
-        /// </summary>
-        /// <value>The haptic effect.</value>
-        public HapticEffect HapticEffect
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(MaterialButton), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
+                                                                                                                                                     /// <summary>
+                                                                                                                                                     /// Gets or sets the size of the font.
+                                                                                                                                                     /// </summary>
+                                                                                                                                                     /// <value>The size of the font.</value>
+        public double FontSize
         {
-            get { return (HapticEffect)GetValue(HapticEffectProperty); }
-            set { SetValue(HapticEffectProperty, value); }
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
         }
+        #endregion FontSize
 
+        #region FontFamily
         /// <summary>
-        /// The haptic mode property.
+        /// Backing store for the MaterialButton.FontFamiily bindable property.
         /// </summary>
-        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(MaterialButton), default(KeyClicks));
-        /// <summary>
-        /// Gets or sets the haptic mode.
-        /// </summary>
-        /// <value>The haptic mode.</value>
-        public KeyClicks HapticMode
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(MaterialButton), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
+                                                                                                                                                         /// <summary>
+                                                                                                                                                         /// Gets or sets the font family.
+                                                                                                                                                         /// </summary>
+                                                                                                                                                         /// <value>The font family.</value>
+        public string FontFamily
         {
-            get { return (KeyClicks)GetValue(HapticModeProperty); }
-            set { SetValue(HapticModeProperty, value); }
+            get { return (string)GetValue(FontFamilyProperty); }
+            set { SetValue(FontFamilyProperty, value); }
         }
+        #endregion FontFamily
 
+        #region FontAttributes
         /// <summary>
-        /// The tint image property backing store.
+        /// Backing store for the MaterialButton.FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty TintImageProperty = BindableProperty.Create("TintImage", typeof(bool), typeof(MaterialButton), true);
-        /// <summary>
-        /// Will the FontColor be applied to the ImageSource image?
-        /// </summary>
-        /// <value><c>true</c> tint ImageSource image with FontColor; otherwise, <c>false</c>.</value>
-        public bool TintImage
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(MaterialButton), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
+                                                                                                                                                                                        /// <summary>
+                                                                                                                                                                                        /// Gets or sets the font attributes.
+                                                                                                                                                                                        /// </summary>
+                                                                                                                                                                                        /// <value>The font attributes.</value>
+        public FontAttributes FontAttributes
         {
-            get { return (bool)GetValue(TintImageProperty); }
-            set { SetValue(TintImageProperty, value); }
+            get { return (FontAttributes)GetValue(FontAttributesProperty); }
+            set { SetValue(FontAttributesProperty, value); }
         }
+        #endregion FontAttributes
+
+        #endregion IFontElement
+
+        #endregion ILabel
+
+        #endregion IButtonState
+
+        #endregion IButton
+
+
 
         /// <summary>
-        /// The has tight spacing property.
+        /// Backing store for the MaterialButton.DarkTheme property.
         /// </summary>
-        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(MaterialButton), default(bool));
+        public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("DarkTheme", typeof(bool), typeof(MaterialButton), false);
         /// <summary>
-        /// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
+        /// Gets or sets a value indicating whether this <see cref="MaterialButton"/> if for a dark theme.
         /// </summary>
-        /// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
-        public bool HasTightSpacing
+        /// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
+        public bool DarkTheme
         {
-            get { return (bool)GetValue(HasTightSpacingProperty); }
-            set { SetValue(HasTightSpacingProperty, value); }
-        }
-
-        /// <summary>
-        /// Backing store for the spacing property.
-        /// </summary>
-        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(MaterialButton), 4.0);
-        /// <summary>
-        /// Gets or sets the spacing.
-        /// </summary>
-        /// <value>The spacing.</value>
-        public double Spacing
-        {
-            get { return (double)GetValue(SpacingProperty); }
-            set { SetValue(SpacingProperty, value); }
+            get { return (bool)GetValue(DarkThemeProperty); }
+            set { SetValue(DarkThemeProperty, value); }
         }
 
         #endregion
 
 
-        #region SegmentedButton Properties
+        #region Internal, SegmentedButton Properties
+        /*
         /// <summary>
         /// 
         /// </summary>
-        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ButtonShape), typeof(MaterialButton), ButtonShape.Rectangle);
-        internal ButtonShape SegmentType
+        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ElementShape), typeof(MaterialButton), ElementShape.Rectangle);
+        internal ElementShape SegmentType
         {
-            get { return (ButtonShape)GetValue(SegmentTypeProperty); }
+            get { return (ElementShape)GetValue(SegmentTypeProperty); }
             set { SetValue(SegmentTypeProperty, value); }
         }
+        */
 
         internal static BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("ParentSegmentsOrientation", typeof(StackOrientation), typeof(MaterialButton), StackOrientation.Horizontal);
         internal StackOrientation ParentSegmentsOrientation
@@ -582,7 +737,7 @@ namespace Forms9Patch
         /// <summary>
         /// The image.
         /// </summary>
-        internal protected Image _image;
+        internal protected Image _iconImage;
         /// <summary>
         /// The label.
         /// </summary>
@@ -762,16 +917,13 @@ namespace Forms9Patch
         {
             _noUpdate = true;
 
-            var enabledLabelColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
-            if (IsSelected && SelectedFontColor.A > 0)
-                enabledLabelColor = SelectedFontColor;
+            var enabledLabelColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
+            if (IsSelected && SelectedTextColor.A > 0)
+                enabledLabelColor = SelectedTextColor;
 
             base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
             if (IsEnabled)
             {
-                base.HasShadow = BackgroundColor.A > 0 && HasShadow;
-                ShadowInverted = IsSelected && SegmentType == ButtonShape.Rectangle;
-
                 _label.TextColor = enabledLabelColor;
 
                 if (IsSelected)
@@ -790,6 +942,11 @@ namespace Forms9Patch
                 if (OutlineColor == Color.Default)
                     //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                     base.OutlineColor = enabledLabelColor; // _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
+
+                base.HasShadow = base.BackgroundColor.A > 0 && HasShadow;
+                //var hasShadow = base.BackgroundColor.A > 0 && HasShadow;
+                //SetValue(ShapeBase.HasShadowProperty, hasShadow);
+                ShadowInverted = IsSelected && !this.IsSegment();
             }
             else
             {
@@ -823,7 +980,8 @@ namespace Forms9Patch
                         _label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
                     }
                 }
-                if (SegmentType == ButtonShape.Rectangle)
+                //if (ButtonShape == ElementShape.Rectangle)
+                if (!this.IsSegment())
                 {
                     base.HasShadow = false;
                     base.BackgroundColor = BackgroundColor.A > 0 ? opaque : transp;
@@ -847,7 +1005,7 @@ namespace Forms9Patch
                         base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
                         base.OutlineColor = OutlineColor;
                     }
-                    //base.OutlineColor = FontColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : FontColor;
+                    //base.OutlineColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
                     if (OutlineColor == Color.Default)
                         //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                         base.OutlineColor = enabledLabelColor; //_label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
@@ -862,8 +1020,8 @@ namespace Forms9Patch
 
         public void UpdateIconTint()
         {
-            if (_image != null)
-                _image.TintColor = TintImage ? _label.TextColor : Color.Default;
+            if (_iconImage != null)
+                _iconImage.TintColor = TintIcon ? _label.TextColor : Color.Default;
             if (_iconLabel != null)
             {
                 _iconLabel.TextColor = _label.TextColor;
@@ -967,7 +1125,7 @@ namespace Forms9Patch
                     _stackLayout.Children.Remove(_label);
                 else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
                 {
-                    if (TrailingImage)
+                    if (TrailingIcon)
                         _stackLayout.Children.Insert(0, _label);
                     else
                         _stackLayout.Children.Add(_label);
@@ -1005,11 +1163,10 @@ namespace Forms9Patch
             }
         }
 
-
         void SetStackLayoutPadding()
         {
             var padding = OutlineWidth / Display.Scale;
-            if (SegmentType == ButtonShape.Rectangle || SegmentType == ButtonShape.SegmentEnd)
+            if (!this.IsSegment() || ((IShape)this).ElementShape == ElementShape.SegmentEnd)
                 _stackLayout.Padding = padding;
             else
             {
@@ -1030,10 +1187,10 @@ namespace Forms9Patch
             {
                 if (HasTightSpacing)
                 {
-                    if (_image != null)
+                    if (_iconImage != null)
                     {
-                        _image.HorizontalOptions = horzOption;
-                        _image.VerticalOptions = vertOption;
+                        _iconImage.HorizontalOptions = horzOption;
+                        _iconImage.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
@@ -1054,15 +1211,15 @@ namespace Forms9Patch
                 }
                 else
                 {
-                    if (_image != null)
+                    if (_iconImage != null)
                     {
-                        _image.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
-                        _image.VerticalOptions = vertOption;
+                        _iconImage.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconImage.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
                     }
@@ -1082,10 +1239,10 @@ namespace Forms9Patch
             {
                 if (HasTightSpacing)
                 {
-                    if (_image != null)
+                    if (_iconImage != null)
                     {
-                        _image.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
-                        _image.VerticalOptions = LayoutOptions.Center;
+                        _iconImage.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _iconImage.VerticalOptions = LayoutOptions.Center;
                     }
                     if (_iconLabel != null)
                     {
@@ -1109,17 +1266,17 @@ namespace Forms9Patch
                 }
                 else
                 {
-                    if (_image != null)
+                    if (_iconImage != null)
                     {
-                        _image.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
-                        _image.VerticalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconImage.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _iconImage.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
-                        _iconLabel.VerticalOptions = (TrailingImage ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                     }
                     if (_label != null)
                     {
@@ -1142,7 +1299,7 @@ namespace Forms9Patch
 
         // WORKING ON:  NEED TO ADD VERTICAL ALIGNMENT PROPERTY!!!!
 
-        bool _changingIconImageSource;
+        bool _changingIconImage;
         bool _changingIconText;
 
 
@@ -1162,25 +1319,21 @@ namespace Forms9Patch
 
             if (propertyName == OutlineWidthProperty.PropertyName
                 || propertyName == ParentSegmentsOrientationProperty.PropertyName
-                || propertyName == SegmentTypeProperty.PropertyName)
+                || propertyName == ElementShapeProperty.PropertyName)
                 SetStackLayoutPadding();
-            if (propertyName == AlignmentProperty.PropertyName)
-#pragma warning disable CS0618 // Type or member is obsolete
-                HorizontalTextAlignment = Alignment;
-#pragma warning restore CS0618 // Type or member is obsolete
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
                 //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
                 SetOrienations();
             }
-            else if (propertyName == ImageSourceProperty.PropertyName)
+            else if (propertyName == IconImageProperty.PropertyName)
             {
                 if (_changingIconText)
                     return;
-                _changingIconImageSource = true;
-                if (_image != null)
-                    _stackLayout.Children.Remove(_image);
-                if (ImageSource != null)
+                _changingIconImage = true;
+                if (_iconImage != null)
+                    _stackLayout.Children.Remove(_iconImage);
+                if (IconImage != null)
                 {
                     if (_iconLabel != null)
                     {
@@ -1189,32 +1342,32 @@ namespace Forms9Patch
                         _iconLabel.Text = null;
                         IconText = null;
                     }
-                    _image = new Image { Source = ImageSource };
-                    _image.Fill = Fill.AspectFit;
-                    //_image.TintColor = TintImage ? _label.TextColor : Color.Default;
+                    _iconImage = IconImage;
+                    _iconImage.Fill = Fill.AspectFit;
+                    //_image.TintColor = TintIcon ? _label.TextColor : Color.Default;
                     UpdateIconTint();
-                    if (_image != null)
+                    if (_iconImage != null)
                     {
-                        if (TrailingImage)
-                            _stackLayout.Children.Add(_image);
+                        if (TrailingIcon)
+                            _stackLayout.Children.Add(_iconImage);
                         else
-                            _stackLayout.Children.Insert(0, _image);
+                            _stackLayout.Children.Insert(0, _iconImage);
                         SetOrienations();
                     }
                 }
-                _changingIconImageSource = false;
+                _changingIconImage = false;
             }
             else if (propertyName == IconTextProperty.PropertyName)
             {
-                if (_changingIconImageSource)
+                if (_changingIconImage)
                     return;
                 _changingIconText = true;
                 if (_iconLabel != null)
                     _stackLayout.Children.Remove(_iconLabel);
                 if (IconText != null)
                 {
-                    if (_image != null)
-                        _stackLayout.Children.Remove(_image);
+                    if (_iconImage != null)
+                        _stackLayout.Children.Remove(_iconImage);
                     _iconLabel = new Label
                     {
                         HtmlText = IconText,
@@ -1227,7 +1380,7 @@ namespace Forms9Patch
                     };
                     if (_iconLabel != null)
                     {
-                        if (TrailingImage)
+                        if (TrailingIcon)
                             _stackLayout.Children.Add(_iconLabel);
                         else
                             _stackLayout.Children.Insert(0, _iconLabel);
@@ -1238,30 +1391,31 @@ namespace Forms9Patch
                 _changingIconText = false;
             }
             else if (propertyName == BackgroundColorProperty.PropertyName
-                       || propertyName == SelectedBackgroundColorProperty.PropertyName
-                       || propertyName == OutlineColorProperty.PropertyName
-                       || propertyName == OutlineWidthProperty.PropertyName
-                       || propertyName == IsSelectedProperty.PropertyName
-                       || propertyName == IsEnabledProperty.PropertyName
-                       || propertyName == DarkThemeProperty.PropertyName
-                       || propertyName == HasShadowProperty.PropertyName
-                       || propertyName == SegmentTypeProperty.PropertyName)
+                || propertyName == HasShadowProperty.PropertyName
+                || propertyName == ShadowInvertedProperty.PropertyName
+                || propertyName == OutlineColorProperty.PropertyName
+                || propertyName == OutlineWidthProperty.PropertyName
+                || (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
+                || propertyName == IsSelectedProperty.PropertyName
+                || propertyName == IsEnabledProperty.PropertyName
+                || propertyName == DarkThemeProperty.PropertyName
+                || propertyName == ElementShapeProperty.PropertyName)
             {
                 UpdateElements();
             }
             else if (propertyName == OrientationProperty.PropertyName)
                 SetOrienations();
-            else if (propertyName == FontColorProperty.PropertyName && !IsSelected)
+            else if (propertyName == TextColorProperty.PropertyName && !IsSelected)
             {
                 UpdateElements();
                 UpdateIconTint();
             }
-            else if (propertyName == SelectedFontColorProperty.PropertyName && IsSelected)
+            else if (propertyName == SelectedTextColorProperty.PropertyName && IsSelected)
             {
                 UpdateElements();
                 UpdateIconTint();
             }
-            else if (propertyName == TintImageProperty.PropertyName && _image != null)
+            else if (propertyName == TintIconProperty.PropertyName && _iconImage != null)
                 UpdateElements();
             else if (propertyName == HasTightSpacingProperty.PropertyName)
                 SetOrienations();
@@ -1297,9 +1451,9 @@ namespace Forms9Patch
                 _label.FontAttributes = FontAttributes;
             else if (propertyName == FontFamilyProperty.PropertyName)
                 _label.FontFamily = FontFamily;
-            else if (propertyName == TrailingImageProperty.PropertyName && _stackLayout.Children.Contains(_label))
+            else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
-                if (TrailingImage)
+                if (TrailingIcon)
                     _stackLayout.LowerChild(_label);
                 else
                     _stackLayout.RaiseChild(_label);
@@ -1311,7 +1465,7 @@ namespace Forms9Patch
             }
             else if (propertyName == SpacingProperty.PropertyName)
                 _stackLayout.Spacing = Spacing;
-            else if (propertyName == TintImageProperty.PropertyName)
+            else if (propertyName == TintIconProperty.PropertyName)
                 UpdateIconTint();
 
         }
@@ -1346,6 +1500,10 @@ namespace Forms9Patch
             _tapped?.Invoke(this, EventArgs.Empty);
         }
 
+        public void SendClicked()
+        {
+            SendTapped();
+        }
         #endregion
 
 

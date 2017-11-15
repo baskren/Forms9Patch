@@ -13,21 +13,22 @@ namespace Forms9Patch.UWP
 
         public double Height => SKBitmap.Height;
 
-        static public F9PBitmap Create(SKBitmap skBitmap)
+        static public F9PBitmap Create(SKBitmap skBitmap, string key)
         {
             if (skBitmap == null)
                 return null;
-            return new F9PBitmap(skBitmap);
+            return new F9PBitmap(skBitmap, key);
         }
 
-        private F9PBitmap(SKBitmap skBitamp)
+        private F9PBitmap(SKBitmap skBitamp, string key)
         {
-            RangeLists = skBitamp.PatchRanges();
+            if (key!=null && key.ToLower().EndsWith("9.png"))
+                RangeLists = skBitamp.PatchRanges();
             if (RangeLists?.PatchesX!=null && RangeLists.PatchesX.Count>0 && RangeLists.PatchesY!=null && RangeLists.PatchesY.Count>0)
             {
                 var unmarkedBitmap = new SKBitmap(skBitamp.Width - 2, skBitamp.Height - 2, SKColorType.Rgba8888, SKAlphaType.Unpremul);
                 //_sourceBitmap.ExtractAlpha(unmarkedBitmap);
-                skBitamp.ExtractSubset(unmarkedBitmap, SKRectI.Create(1, 1, skBitamp.Width - 2, skBitamp.Height - 2));
+                skBitamp.ExtractSubset(unmarkedBitmap, SKRectI.Create(1, 1, skBitamp.Width - 1, skBitamp.Height - 1));
                 skBitamp.Dispose();
                 skBitamp = unmarkedBitmap.Copy();
             }

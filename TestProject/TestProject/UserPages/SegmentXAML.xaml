@@ -13,7 +13,7 @@
 			WidthRequest="100"  
 			Padding="1" 
 			FontSize="12" 
-			FontColor="#0076FF" 
+			TextColor="#0076FF" 
 			OutlineColor="#CCC" 
 			GroupToggleBehavior="Radio"
   			OutlineWidth="1" 

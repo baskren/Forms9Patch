@@ -68,12 +68,12 @@ namespace Forms9Patch.Droid
             //System.Diagnostics.Debug.WriteLine ("LayoutRenderer<>.OnElementPropertyChanged txt=["+text+"] w=["+Element.Width+"] h=["+Element.Height+"] propertyName=["+e.PropertyName+"]");
             base.OnElementPropertyChanged(sender, e);
             if (
-                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
+                e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName
                 || e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
             {
-                var box = Element as IRoundedBox;
+                var box = Element as IShape;
                 if (box != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
@@ -120,7 +120,7 @@ namespace Forms9Patch.Droid
         {
             if (!hasImage)
             {
-                var roundedBoxElement = Element as IRoundedBox;
+                var roundedBoxElement = Element as IShape;
                 if (roundedBoxElement != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)

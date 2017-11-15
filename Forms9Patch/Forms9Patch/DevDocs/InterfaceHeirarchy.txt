@@ -1,0 +1,12 @@
+﻿ IElement													ILabel
+     |														   |
+  IShape --------------------------------		----------------
+     |					|				|		|
+IBackground			 IImage			   IButtonState					Xamarin.Forms.ButtonController
+     |										|										|
+  ILayout									-----------------------------------------
+															   |
+															IButton
+
+
+

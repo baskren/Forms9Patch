@@ -216,10 +216,10 @@ namespace Forms9Patch
 		public PermissionPopup(VisualElement target = null) : base(target) 
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
-			_cancelButton.FontColor = CancelTextColor;
+			_cancelButton.TextColor = CancelTextColor;
 			_cancelButton.HtmlText = CancelText;
 			_okButton.BackgroundColor = OkButtonColor;
-			_okButton.FontColor = OkTextColor;
+			_okButton.TextColor = OkTextColor;
 			_okButton.HtmlText = OkText;
 
 			Margin = 30;
@@ -271,11 +271,11 @@ namespace Forms9Patch
 			else if (propertyName == OkButtonColorProperty.PropertyName)
 				_okButton.BackgroundColor = OkButtonColor;
 			else if (propertyName == OkTextColorProperty.PropertyName)
-				_okButton.FontColor = OkTextColor;
+				_okButton.TextColor = OkTextColor;
 			else if (propertyName == CancelTextProperty.PropertyName)
 				_cancelButton.HtmlText = CancelText;
 			else if (propertyName == CancelTextColorProperty.PropertyName)
-				_cancelButton.FontColor = CancelTextColor;
+				_cancelButton.TextColor = CancelTextColor;
 			else if (propertyName == CancelButtonColorProperty.PropertyName)
 				_cancelButton.BackgroundColor = CancelButtonColor;
 		}

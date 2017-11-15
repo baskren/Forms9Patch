@@ -32,7 +32,7 @@ namespace Forms9Patch
         /// <summary>
         /// Color for ListView Cell swipe popup menu text.
         /// </summary>
-        public static Color ListViewCellSwipePopupMenuFontColor = Color.FromHex("0076FF");
+        public static Color ListViewCellSwipePopupMenuTextColor = Color.FromHex("0076FF");
         /// <summary>
         /// Color for background of ListView Cell swipe popup menu buttons.
         /// </summary>

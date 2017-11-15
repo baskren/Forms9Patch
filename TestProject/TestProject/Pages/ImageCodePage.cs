@@ -8,7 +8,7 @@ namespace Forms9PatchDemo
 	{
 		public ImageCodePage ()
 		{
-			const double fontSize = 9;
+			//const double fontSize = 9;
 			Padding = 20;
 			Content = new ScrollView
 			{

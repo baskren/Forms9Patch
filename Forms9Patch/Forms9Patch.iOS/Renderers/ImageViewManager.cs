@@ -386,7 +386,7 @@ namespace Forms9Patch.iOS
                 var imageElement = Element as Forms9Patch.Image;
                 if (imageElement != null)
                 {
-                    imageElement.BaseImageSize = new Size(_sourceImage.CGImage.Width / scale, _sourceImage.CGImage.Height / scale);
+                    imageElement.SourceImageSize = new Size(_sourceImage.CGImage.Width / scale, _sourceImage.CGImage.Height / scale);
                 }
 
                 _ninePatch = new NinePatch(_sourceImage, (image.CapInsets.Left >= 0 ? capsX : null), (image.CapInsets.Top >= 0 ? capsY : null));

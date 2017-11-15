@@ -118,6 +118,20 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
+                            Text = "Single MaterialButton",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SingleMaterialButton)
+                        },
+
+                        new TextCell
+                        {
+                            Text = "Single SegmentedControl",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(SingleSegmentedController)
+                        },
+
+                        new TextCell
+                        {
                             Text = "Html link example",
                             Command = navigateCommand,
                             CommandParameter = typeof(LabelLink)
@@ -242,18 +256,6 @@ namespace Forms9PatchDemo
                             Text = "Material Buttons",
                             Command = navigateCommand,
                             CommandParameter = typeof(MaterialButtonsPage)
-                        },
-
-                        new TextCell {
-                            Text = "Material Buttons w/ IconText",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(MaterialButtons_IconTextPage)
-                        },
-
-                        new TextCell {
-                            Text = "Elliptical Material Buttons",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(EllipticalMaterialButtonsPage)
                         },
 
                         new TextCell {

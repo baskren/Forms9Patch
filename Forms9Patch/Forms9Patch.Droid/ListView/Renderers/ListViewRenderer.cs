@@ -240,7 +240,7 @@ namespace Forms9Patch.Droid
 		internal Forms9Patch.DragEventArgs ItemAtPoint(Point p) {
 			var scale = Forms.Context.Resources.DisplayMetrics.Density;
 			var pos = Control.PointToPosition ((int)(p.X * scale), (int)(p.Y * scale));
-			System.Diagnostics.Debug.WriteLine ("p=["+p+"] pos=["+pos+"]" );
+			//System.Diagnostics.Debug.WriteLine ("p=["+p+"] pos=["+pos+"]" );
 			return HoverOverForPosition (pos);
 		}
 

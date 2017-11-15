@@ -29,15 +29,15 @@ namespace Forms9PatchDemo
                 {
                     case "Orange":
                         matSegCtrl.SelectedBackgroundColor = Color.Orange;
-                        matSegCtrl.SelectedFontColor = Color.Default;
+                        matSegCtrl.SelectedTextColor = Color.Default;
                         break;
                     case "Blue":
                         matSegCtrl.SelectedBackgroundColor = Color.Blue;
-                        matSegCtrl.SelectedFontColor = Color.White;
+                        matSegCtrl.SelectedTextColor = Color.White;
                         break;
                     case "Yellow":
                         matSegCtrl.SelectedBackgroundColor = Color.Yellow;
-                        matSegCtrl.SelectedFontColor = Color.Default;
+                        matSegCtrl.SelectedTextColor = Color.Default;
                         break;
                 }
             };

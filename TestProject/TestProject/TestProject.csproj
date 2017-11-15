@@ -40,6 +40,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Pages\ImageOnPage.cs" />
+    <Compile Include="Pages\SingleMaterialButton.cs" />
+    <Compile Include="Pages\SingleSegmentedController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\NinePatchButtonPage.xaml.cs">
       <DependentUpon>NinePatchButtonPage.xaml</DependentUpon>
@@ -92,8 +94,6 @@
     <Compile Include="Pages\LabelInHorizontalStackLayout.cs" />
     <Compile Include="Pages\ExternalEmbeddedResourceImage.cs" />
     <Compile Include="Pages\CustomFontEffectPage.cs" />
-    <Compile Include="Pages\EllipticalMaterialButtonsPage.cs" />
-    <Compile Include="Pages\MaterialButtonsPage-IconText.cs" />
     <Compile Include="Pages\HeapDemoPage.cs" />
     <Compile Include="UserPages\CustomFontEffectPage.cs" />
     <Compile Include="Forms9PatchDemo.cs" />

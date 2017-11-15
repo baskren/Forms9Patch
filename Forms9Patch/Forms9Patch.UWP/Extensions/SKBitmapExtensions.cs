@@ -67,7 +67,7 @@ namespace Forms9Patch.UWP
                         }
                         if (skBitmap != null)
                         {
-                            f9pBitmap = F9PBitmap.Create(skBitmap);
+                            f9pBitmap = F9PBitmap.Create(skBitmap,key);
                             
                             _cache[key] = f9pBitmap;
                             if (!_views.ContainsKey(key))
@@ -89,7 +89,7 @@ namespace Forms9Patch.UWP
                         using (var skStream = new SKManagedStream(stream))
                         {
                             var skBitmap = SKBitmap.Decode(skStream);
-                            f9pBitmap = F9PBitmap.Create(skBitmap);
+                            f9pBitmap = F9PBitmap.Create(skBitmap,null);
                         }
                     }
                 }

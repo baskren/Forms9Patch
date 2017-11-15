@@ -43,10 +43,10 @@ namespace Forms9Patch.Droid
         {
             base.OnElementPropertyChanged(sender, e);
             if (
-                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
+                e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
                 || e.PropertyName == BubbleLayout.PointerAxialPositionProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName
                 || e.PropertyName == BubbleLayout.BackgroundColorProperty.PropertyName
                 || e.PropertyName == BubbleLayout.PointerTipRadiusProperty.PropertyName
                 || e.PropertyName == BubbleLayout.PointerCornerRadiusProperty.PropertyName

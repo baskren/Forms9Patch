@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Modal popup.
     /// </summary>
-    public class ModalPopup : PopupBase, IBackground
+    public class ModalPopup : PopupBase
     {
 
 
@@ -23,20 +23,10 @@ namespace Forms9Patch
         #endregion
 
 
+
         #region IBackgroundImage
-        /// <summary>
-        /// The background image property backing store.
-        /// </summary>
-        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Image), typeof(ModalPopup), null);
-        /// <summary>
-        /// Gets or sets the background image.
-        /// </summary>
-        /// <value>The background image.</value>
-        public Image BackgroundImage
-        {
-            get { return (Image)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
-        }
+
+        // BackgroundImage inherited from PopupBase
 
         /// <summary>
         /// The location property backing store.
@@ -69,6 +59,8 @@ namespace Forms9Patch
         readonly Frame _frame;
         #endregion
 
+
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.
         /// </summary>
@@ -113,8 +105,10 @@ namespace Forms9Patch
             Padding = 10;
 
         }
+        #endregion
 
 
+        #region Property Change management
         /// <summary>
         /// Responds to a change in a PopupBase property.
         /// </summary>
@@ -137,9 +131,10 @@ namespace Forms9Patch
             if (_frame == null)
                 return;
         }
+        #endregion
 
 
-
+        #region Layout
         /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
         /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
         /// <param name="width">A value representing the width of the child region bounding box.</param>
@@ -153,24 +148,27 @@ namespace Forms9Patch
         {
             if (_frame?.Content == null)
                 return;
+
+            // layout the page overlay
             base.LayoutChildren(x, y, width, height);
 
+            // layout the content
             if (width > 0 && height > 0)
             {
                 _frame.IsVisible = true;
                 _frame.Content.IsVisible = true;
-                RoundedBoxBase.UpdateBasePadding(_frame, true);
-                var shadow = BubbleLayout.ShadowPadding(_frame);
+                //ShapeBase.UpdateBasePadding(_frame, true);
+                //var shadow = ShadowPadding();
 
-                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
                 if (_frame.Content.WidthRequest > 0)
                     availWidth = _frame.Content.WidthRequest;
                 if (_frame.Content.HeightRequest > 0)
                     availHeight = _frame.Content.HeightRequest;
                 var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
-                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + _frame.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + _frame.Padding.VerticalThickness + shadow.VerticalThickness);
+                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
+                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
                 var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
@@ -182,8 +180,7 @@ namespace Forms9Patch
                 LayoutChildIntoBoundingRegion(_frame, bounds);
             }
         }
-
-
+        #endregion
     }
 }
 

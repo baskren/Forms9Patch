@@ -56,7 +56,7 @@ namespace Forms9PatchDemo
 		public ModalPopupTestPage ()
 		{
 			BackgroundColor = Color.White;
-			Padding = new Thickness(20,Device.OnPlatform(20,0,0),20,20);
+			Padding = new Thickness(20,Device.RuntimePlatform==Device.iOS ? 20:0,20,20);
 
 
 			var shadowToggle = new Switch ();

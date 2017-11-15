@@ -32,8 +32,8 @@ namespace Forms9Patch.Droid
 
             //System.Diagnostics.Debug.WriteLine ("Draw");
             var backgroundColor = (Xamarin.Forms.Color)_element.GetValue(BubbleLayout.BackgroundColorProperty);
-            var outlineColor = (Xamarin.Forms.Color)_element.GetValue(RoundedBoxBase.OutlineColorProperty);
-            var outlineWidth = Math.Max(0, (float)_element.GetValue(RoundedBoxBase.OutlineWidthProperty) * Display.Scale);
+            var outlineColor = (Xamarin.Forms.Color)_element.GetValue(ShapeBase.OutlineColorProperty);
+            var outlineWidth = Math.Max(0, (float)_element.GetValue(ShapeBase.OutlineWidthProperty) * Display.Scale);
 
 
 
@@ -51,14 +51,14 @@ namespace Forms9Patch.Droid
                 return;
             }
 
-            var outlineRadius = Math.Max(0f, (float)_element.GetValue(RoundedBoxBase.OutlineRadiusProperty) * Display.Scale);
+            var outlineRadius = Math.Max(0f, (float)_element.GetValue(ShapeBase.OutlineRadiusProperty) * Display.Scale);
             var hasShadow = (bool)_element.GetValue(BubbleLayout.HasShadowProperty);
 
 
 
 
 
-            var shadowInverted = ((bool)_element.GetValue(RoundedBoxBase.ShadowInvertedProperty));
+            var shadowInverted = ((bool)_element.GetValue(ShapeBase.ShadowInvertedProperty));
 
             int shadowX = (int)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
             int shadowY = (int)((Forms9Patch.Settings.ShadowOffset.Y) * Display.Scale);

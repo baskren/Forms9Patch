@@ -11,7 +11,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// Forms9Patch Layout renderer.
     /// </summary>
-    public class LayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, IBackgroundImage // VisualElement, IBackgroundImage
+    class LayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, ILayout // VisualElement, IBackgroundImage
     {
         #region Element Fields
         Image _oldImage;
@@ -52,7 +52,7 @@ namespace Forms9Patch.iOS
                 _imageViewManager.Dispose();
                 _imageViewManager = null;
             }
-            if (e.NewElement is IRoundedBox)
+            if (e.NewElement is IShape)
                 BackgroundColor = Color.Transparent.ToUIColor();
         }
 
@@ -64,24 +64,24 @@ namespace Forms9Patch.iOS
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (
-                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
-                || e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName
-                //) {
-                //_imageViewManager.LayoutImage (_oldImage);
-                //} else if (
+            if (e.PropertyName == ShapeBase.PaddingProperty.PropertyName
+                || e.PropertyName == ShapeBase.BackgroundImageProperty.PropertyName
+                || e.PropertyName == ShapeBase.BackgroundColorProperty.PropertyName
+                || e.PropertyName == ShapeBase.HasShadowProperty.PropertyName
+                || e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineWidthProperty.PropertyName
+                || e.PropertyName == ShapeBase.ElementShapeProperty.PropertyName
                 || e.PropertyName == VisualElement.WidthProperty.PropertyName
                 || e.PropertyName == VisualElement.HeightProperty.PropertyName
                 || e.PropertyName == VisualElement.XProperty.PropertyName
                 || e.PropertyName == VisualElement.YProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.HasShadowProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName
             )
             {
                 SetNeedsDisplay();
             }
+            /*
             else if (e.PropertyName == ContentView.BackgroundImageProperty.PropertyName)
             {
                 if (_oldImage != null)
@@ -93,8 +93,9 @@ namespace Forms9Patch.iOS
                 _imageViewManager.LayoutImage(_oldImage);
 #pragma warning restore 4014
             }
-            if (Element is IRoundedBox)
-                BackgroundColor = Color.Transparent.ToUIColor();
+            */
+            //if (Element is IShape)
+            //    BackgroundColor = Color.Transparent.ToUIColor();
         }
 
         void OnBackgroundImagePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -120,8 +121,8 @@ namespace Forms9Patch.iOS
         bool _drawOutline;
         bool _drawFill;
         bool _hz, _vt;
-        ButtonShape _segmentType;
-        IRoundedBox _roundedBoxElement;
+        ElementShape _segmentType;
+        IShape _roundedBoxElement;
         #endregion
 
 
@@ -147,7 +148,7 @@ namespace Forms9Patch.iOS
                 return;
             }
 
-            _roundedBoxElement = Element as IRoundedBox;
+            _roundedBoxElement = Element as IShape;
             if (_roundedBoxElement == null)
             {
                 base.Draw(rect);
@@ -168,7 +169,7 @@ namespace Forms9Patch.iOS
             }
 
 
-            _segmentType = ButtonShape.Rectangle;
+            _segmentType = ElementShape.Rectangle;
             _hz = true;
             if (_roundedBoxElement is MaterialButton materialButton)
             {
@@ -179,7 +180,7 @@ namespace Forms9Patch.iOS
                 materialButton = null;
             _vt = !_hz;
 
-            nfloat separatorWidth = materialButton == null || _segmentType == ButtonShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? _roundedBoxElement.OutlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+            nfloat separatorWidth = materialButton == null || _segmentType == ElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? _roundedBoxElement.OutlineWidth : Math.Max(0, materialButton.SeparatorWidth);
             if (_roundedBoxElement.BackgroundColor.A < 0.01 && (_roundedBoxElement.OutlineColor.A < 0.01 || (_roundedBoxElement.OutlineWidth < 0.01 && separatorWidth < 0.01)))
             {
                 base.Draw(rect);
@@ -191,7 +192,7 @@ namespace Forms9Patch.iOS
             var shadowY = (float)Forms9Patch.Settings.ShadowOffset.Y * Display.Scale;
             var shadowR = (float)Forms9Patch.Settings.ShadowRadius * Display.Scale;
             var shadowColor = Color.FromRgba(0.0, 0.0, 0.0, 0.55).ToCGColor();
-            var shadowPadding = RoundedBoxBase.ShadowPadding(Element as Layout);
+            var shadowPadding = ShapeBase.ShadowPadding(Element as Layout);
 
             var perimeter = rect;
 
@@ -205,14 +206,14 @@ namespace Forms9Patch.iOS
                     perimeter = new CGRect(rect.Left + shadowPadding.Left, rect.Top + shadowPadding.Top, rect.Width - shadowPadding.HorizontalThickness, rect.Height - shadowPadding.VerticalThickness);
                     if (!_roundedBoxElement.ShadowInverted)
                     {
-                        if (_segmentType != ButtonShape.Rectangle)
+                        if (_segmentType != ElementShape.Rectangle)
                         {
                             // it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
                             double allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
                             CGRect result;
-                            if (_segmentType == ButtonShape.SegmentStart)
+                            if (_segmentType == ElementShape.SegmentStart)
                                 result = new CGRect(perimeter.Left - allowance, perimeter.Top - allowance, perimeter.Width + allowance * (_hz ? 1 : 2), perimeter.Height + allowance * (_vt ? 1 : 2));
-                            else if (_segmentType == ButtonShape.SegmentMid)
+                            else if (_segmentType == ElementShape.SegmentMid)
                                 result = new CGRect(perimeter.Left - (_hz ? 0 : allowance), perimeter.Top - (_vt ? 0 : allowance), perimeter.Width + (_hz ? 0 : 2 * allowance), perimeter.Height + (_vt ? 0 : 2 * allowance));
                             else
                                 result = new CGRect(perimeter.Left - (_hz ? 0 : allowance), perimeter.Top - (_vt ? 0 : allowance), perimeter.Width + allowance * (_hz ? 1 : 2), perimeter.Height + allowance * (_vt ? 1 : 2));
@@ -253,7 +254,7 @@ namespace Forms9Patch.iOS
                     nfloat inset = materialButton.OutlineColor.A > 0 ? separatorWidth / 2.0f : 0;
                     g.SetStrokeColor(materialButton.OutlineColor.ToCGColor());
                     g.SetLineWidth(separatorWidth);
-                    if (_segmentType == ButtonShape.SegmentStart || _segmentType == ButtonShape.SegmentMid)
+                    if (_segmentType == ElementShape.SegmentStart || _segmentType == ElementShape.SegmentMid)
                     {
                         if (_hz)
                         {
@@ -268,7 +269,7 @@ namespace Forms9Patch.iOS
                             g.AddLineToPoint(perimeter.Right - inset, (nfloat)Math.Ceiling(perimeter.Bottom));
                         }
                     }
-                    if (_segmentType == ButtonShape.SegmentMid || _segmentType == ButtonShape.SegmentEnd)
+                    if (_segmentType == ElementShape.SegmentMid || _segmentType == ElementShape.SegmentEnd)
                     {
                         if (_hz)
                         {
@@ -316,11 +317,11 @@ namespace Forms9Patch.iOS
         {
             switch (_segmentType)
             {
-                case ButtonShape.SegmentStart:
+                case ElementShape.SegmentStart:
                     return new CGRect(rect.X, rect.Y, rect.Width + (_hz ? 20 : 0), rect.Height + (_hz ? 0 : 20));
-                case ButtonShape.SegmentMid:
+                case ElementShape.SegmentMid:
                     return new CGRect(rect.X + (_hz ? -20 : 0), rect.Y + (_hz ? 0 : -20), rect.Width + (_hz ? 40 : 0), rect.Height + (_hz ? 0 : 40));
-                case ButtonShape.SegmentEnd:
+                case ElementShape.SegmentEnd:
                     return new CGRect(rect.X + (_hz ? -20 : 0), rect.Y + (_hz ? 0 : -20), rect.Width + (_hz ? 20 : 0), rect.Height + (_hz ? 0 : 20));
             }
             return rect;
@@ -331,13 +332,13 @@ namespace Forms9Patch.iOS
             CGRect result;
             switch (_segmentType)
             {
-                case ButtonShape.SegmentStart:
+                case ElementShape.SegmentStart:
                     result = new CGRect(rect.Left, rect.Top, rect.Width + (_hz ? allowance : 0), rect.Height + (_vt ? allowance : 0));
                     break;
-                case ButtonShape.SegmentMid:
+                case ElementShape.SegmentMid:
                     result = new CGRect(rect.Left - (_hz ? allowance : 0), rect.Top - (_vt ? allowance : 0), rect.Width + (_hz ? allowance * 2 : 0), rect.Height + (_vt ? allowance * 2 : 0));
                     break;
-                case ButtonShape.SegmentEnd:
+                case ElementShape.SegmentEnd:
                     result = new CGRect(rect.Left - (_hz ? allowance : 0), rect.Top - (_vt ? allowance : 0), rect.Width + (_hz ? allowance : 0), rect.Height + (_vt ? allowance : 0));
                     break;
                 default:
@@ -384,23 +385,23 @@ namespace Forms9Patch.iOS
             //var _roundedBoxElement.OutlineRadius = roundedBox.OutlineRadius; // * Display.Scale;
             var hz = materialButton == null || materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
             var vt = !hz;
-            var segmentType = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
+            var segmentType = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
             switch (segmentType)
             {
-                case ButtonShape.Rectangle:
+                case ElementShape.Rectangle:
                     boundary = RectInset(perimeter, offset);
                     break;
-                case ButtonShape.SegmentStart:
+                case ElementShape.SegmentStart:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case ButtonShape.SegmentMid:
+                case ElementShape.SegmentMid:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case ButtonShape.SegmentEnd:
+                case ElementShape.SegmentEnd:
                     boundary = RectInset(perimeter, offset);
                     break;
             }
-            if (segmentType == ButtonShape.Rectangle)
+            if (segmentType == ElementShape.Rectangle)
             {
                 if (_roundedBoxElement.IsElliptical)
                     result = Ellipse(boundary);
@@ -417,17 +418,17 @@ namespace Forms9Patch.iOS
             return CGPath.EllipseFromRect(rect);
         }
 
-        internal static CGPath RectangularPerimeterPath(IRoundedBox element, CGRect rect, float radius)
+        internal static CGPath RectangularPerimeterPath(IShape element, CGRect rect, float radius)
         {
             radius = Math.Max(radius, 0);
 
             var materialButton = element as MaterialButton;
-            ButtonShape type = materialButton == null ? ButtonShape.Rectangle : materialButton.SegmentType;
+            ElementShape type = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
             StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var path = new CGPath();
 
-            if (type == ButtonShape.Rectangle)
+            if (type == ElementShape.Rectangle)
             {
                 path.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
                 path.AddLineToPoint(rect.Left + radius, rect.Top);
@@ -444,7 +445,7 @@ namespace Forms9Patch.iOS
                     path.AddRelativeArc(rect.Right - radius, rect.Top + radius, radius, 0, -a90);
                 path.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
             }
-            else if (type == ButtonShape.SegmentStart)
+            else if (type == ElementShape.SegmentStart)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -469,7 +470,7 @@ namespace Forms9Patch.iOS
                     path.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == ButtonShape.SegmentMid)
+            else if (type == ElementShape.SegmentMid)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -486,7 +487,7 @@ namespace Forms9Patch.iOS
                     path.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == ButtonShape.SegmentEnd)
+            else if (type == ElementShape.SegmentEnd)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {

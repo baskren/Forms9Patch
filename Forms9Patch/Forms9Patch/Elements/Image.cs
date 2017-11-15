@@ -1,4 +1,7 @@
-﻿using System;
+﻿#define Forms9Patch_Image
+
+using System;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -8,8 +11,9 @@ namespace Forms9Patch
     /// </summary>
     public class Image : Xamarin.Forms.Image, IImage
     {
-        #region Bindable Properties
+        #region IImage Properties
 
+        #region Fill
         /// <summary>
         /// UNSUPPORTED INHERITED PROPERTY. See <see cref="Forms9Patch.Fill"/>.
         /// </summary>
@@ -20,10 +24,9 @@ namespace Forms9Patch
         /// <value>The scaling method</value>
         public new Aspect Aspect
         {
-            get { throw new NotImplementedException("[Forms9Patch.Image]Aspect property is not supported"); }
-            set { throw new NotImplementedException("[Forms9Patch.Image]Aspect property is not supported"); }
+            get { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
+            set { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
         }
-
 
         /// <summary>
         /// Backing store for the Fill bindable property.
@@ -38,7 +41,9 @@ namespace Forms9Patch
             get { return (Fill)GetValue(FillProperty); }
             set { SetValue(FillProperty, value); }
         }
+        #endregion Fill
 
+        #region CapInsets
         /// <summary>
         /// Backing store for the CapsInset bindable property.
         /// </summary>
@@ -63,7 +68,9 @@ namespace Forms9Patch
                 SetValue(CapInsetsProperty, value);
             }
         }
+        #endregion CapInsets
 
+        #region ContentPadding
         /// <summary>
         /// Backing store for the ContentPadding bindable property.
         /// </summary>
@@ -75,9 +82,11 @@ namespace Forms9Patch
         public Thickness ContentPadding
         {
             get { return (Thickness)GetValue(ContentPaddingProperty); }
-            // set { SetValue (ContentPaddingProperty, value); }
+            internal set { SetValue (ContentPaddingProperty, value); }
         }
+        #endregion ContentPadding
 
+        #region TintColor
         /// <summary>
         /// The tint property.
         /// </summary>
@@ -91,58 +100,138 @@ namespace Forms9Patch
             get { return (Color)GetValue(TintColorProperty); }
             set { SetValue(TintColorProperty, value); }
         }
+        #endregion TintColor
 
+        #region SourceImageSize
         internal static readonly BindableProperty BaseImageSizeProperty = BindableProperty.Create("BaseImageSize", typeof(Size), typeof(Image), default(Size));
-        internal Size BaseImageSize
+        /// <summary>
+        /// The size of the source image
+        /// </summary>
+        public Size SourceImageSize
         {
             get { return (Size)GetValue(BaseImageSizeProperty); }
-            set { SetValue(BaseImageSizeProperty, value); }
+            internal set { SetValue(BaseImageSizeProperty, value); }
         }
+        #endregion SourceImageSize
 
-        internal static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(Image), false);
+        #region IShape
+
+        // BackgroundColor inherited from VisualElement
+
+        #region HasShadow property
+        /// <summary>
+        /// Backing store for HasShadow property
+        /// </summary>
+        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(Image), default(bool));
+        /// <summary>
+        /// Get/sets if the shape (if any) behind the image has a shadow
+        /// </summary>
         public bool HasShadow
         {
             get { return (bool)GetValue(HasShadowProperty); }
             set { SetValue(HasShadowProperty, value); }
-
         }
+        #endregion HasShadow property
 
-        internal static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(Image), false);
+        #region ShadowInverted property
+        /// <summary>
+        /// backing store for ShadowInverted property
+        /// </summary>
+        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(Image), default(bool));
+        /// <summary>
+        /// Gets/Sets the ShadowInverted property
+        /// </summary>
         public bool ShadowInverted
         {
             get { return (bool)GetValue(ShadowInvertedProperty); }
             set { SetValue(ShadowInvertedProperty, value); }
         }
+        #endregion ShadowInverted property
 
-        internal static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(Image), default(Color));
+        #region OutlineColor property
+        /// <summary>
+        /// backing store for OutlineColor property
+        /// </summary>
+        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(Image), default(Color));
+        /// <summary>
+        /// Gets/Sets the OutlineColor property
+        /// </summary>
         public Color OutlineColor
         {
             get { return (Color)GetValue(OutlineColorProperty); }
             set { SetValue(OutlineColorProperty, value); }
         }
+        #endregion OutlineColor property
 
-        internal static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(Image), default(float));
+        #region OutlineRadius property
+        /// <summary>
+        /// backing store for OutlineRadius property
+        /// </summary>
+        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(Image), default(float));
+        /// <summary>
+        /// Gets/Sets the OutlineRadius property
+        /// </summary>
         public float OutlineRadius
         {
             get { return (float)GetValue(OutlineRadiusProperty); }
             set { SetValue(OutlineRadiusProperty, value); }
         }
+        #endregion OutlineRadius property
 
-        internal static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(Image), default(float));
+        #region OutlineWidth property
+        /// <summary>
+        /// backing store for OutlineWidth property
+        /// </summary>
+        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(Image), -1f);
+        /// <summary>
+        /// Gets/Sets the OutlineWidth property
+        /// </summary>
         public float OutlineWidth
         {
             get { return (float)GetValue(OutlineWidthProperty); }
             set { SetValue(OutlineWidthProperty, value); }
         }
+        #endregion OutlineWidth property
 
-        public bool IsElliptical { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        #region ElementShape property
+        /// <summary>
+        /// backing store for ElementShape property
+        /// </summary>
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(Image), default(ElementShape));
+        /// <summary>
+        /// Gets/Sets the ElementShape property
+        /// </summary>
+        ElementShape IShape.ElementShape
+        {
+            get { return (ElementShape)GetValue(ElementShapeProperty); }
+            set { SetValue(ElementShapeProperty, value); }
+        }
+        #endregion ElementShape property
 
+        #region IgnoreShapePropertiesChanges
+        /// <summary>
+        /// Backging store for the IgnoreShapePropertiesChanges property
+        /// </summary>
+        //public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
+        /// <summary>
+        /// Prevent shape updates (to optimize performace)
+        /// </summary>
+        //public bool IgnoreShapePropertiesChanges
+       // {
+       //     get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
+       //     set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
+       // }
+        #endregion IgnoreShapePropertyChanges
+
+        #region IElement
 
         public int InstanceId => _f9pId;
 
+        #endregion IElement
 
+        #endregion IShape
 
-        #endregion
+        #endregion IImage
 
 
         #region Constructors
@@ -218,7 +307,7 @@ namespace Forms9Patch
             double height = sizeRequest.Request.Height;
             if (Math.Abs(width) < float.Epsilon * 5 || Math.Abs(height) < float.Epsilon * 5)
                 //return new SizeRequest(new Size(40.0, 40.0));
-                return new SizeRequest(BaseImageSize);
+                return new SizeRequest(SourceImageSize);
             if (constraintAspectRatio > requestAspectRatio)
             {
                 switch (Fill)
@@ -279,6 +368,42 @@ namespace Forms9Patch
 
         }
 
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (propertyName == HasShadowProperty.PropertyName)
+                InvalidateMeasure();
+            base.OnPropertyChanged(propertyName);
+        }
+        #endregion
+
+
+        #region Layout
+        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            if (HasShadow)
+            {
+                var shadowPadding = ((IShape)this).ShadowPadding();
+                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
+                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
+            }
+            return result;
+        }
+
+#if Forms9Patch_Image
+#else
+        protected override void LayoutChildren(double x, double y, double width, double height)
+        {
+            var shadowPadding = ((IShape)this).ShadowPadding();
+            x += shadowPadding.Left;
+            y += shadowPadding.Top;
+            width -= shadowPadding.HorizontalThickness;
+            height -= shadowPadding.VerticalThickness;
+            base.LayoutChildren(x, y, width, height);
+        }
+#endif
         #endregion
 
     }

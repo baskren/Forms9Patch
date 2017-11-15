@@ -356,7 +356,7 @@ namespace Forms9Patch
                         _swipeFrame1.BackgroundColor = swipeMenu[0].BackgroundColor;
                         _swipeButton1.HtmlText = swipeMenu[0].Text;
                         _swipeButton1.IconText = swipeMenu[0].IconText;
-                        _swipeButton1.FontColor = swipeMenu[0].TextColor;
+                        _swipeButton1.TextColor = swipeMenu[0].TextColor;
 
                         _swipeFrame2.IsVisible = false;
                         _swipeFrame3.IsVisible = false;
@@ -376,7 +376,7 @@ namespace Forms9Patch
                             _swipeFrame2.BackgroundColor = swipeMenu[1].BackgroundColor;
                             _swipeButton2.HtmlText = swipeMenu[1].Text;
                             _swipeButton2.IconText = swipeMenu[1].IconText;
-                            _swipeButton2.FontColor = swipeMenu[1].TextColor;
+                            _swipeButton2.TextColor = swipeMenu[1].TextColor;
                             if (swipeMenu.Count > 2)
                             {
                                 if (side == Side.End)
@@ -394,14 +394,14 @@ namespace Forms9Patch
                                     _swipeFrame3.BackgroundColor = Color.Gray;
                                     _swipeButton3.HtmlText = "More";
                                     _swipeButton3.IconText = "•••";
-                                    _swipeButton3.FontColor = Color.White;
+                                    _swipeButton3.TextColor = Color.White;
                                 }
                                 else
                                 {
                                     _swipeFrame3.BackgroundColor = swipeMenu[2].BackgroundColor;
                                     _swipeButton3.HtmlText = swipeMenu[2].Text;
                                     _swipeButton3.IconText = swipeMenu[2].IconText;
-                                    _swipeButton3.FontColor = swipeMenu[2].TextColor;
+                                    _swipeButton3.TextColor = swipeMenu[2].TextColor;
                                 }
                                 Children.Add(_swipeFrame3, 0, 0);
                                 RaiseChild(_swipeFrame3);
@@ -481,7 +481,7 @@ namespace Forms9Patch
                     Orientation = StackOrientation.Vertical,
                     BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
                     FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
-                    FontColor = Settings.ListViewCellSwipePopupMenuFontColor,
+                    TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
                     OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
                     OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
                     SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
@@ -495,7 +495,7 @@ namespace Forms9Patch
                     FontAttributes = FontAttributes.Bold,
                     BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
                     FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
-                    FontColor = Settings.ListViewCellSwipePopupMenuFontColor,
+                    TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
                     OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
                     OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
                     SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
@@ -524,7 +524,8 @@ namespace Forms9Patch
                     {
                         Text = menuItem.Text,
                         IconText = menuItem.IconText,
-                        ImageSource = menuItem.ImageSource
+                        //ImageSource = menuItem.ImageSource
+                        IconImage = new Image { Source = menuItem.ImageSource }
                     };
                     segment.Tapped += (s, arg) =>
                     {

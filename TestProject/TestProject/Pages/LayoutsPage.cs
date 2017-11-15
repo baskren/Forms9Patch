@@ -49,7 +49,7 @@ namespace Forms9PatchDemo
 						new Label {
 							Text = "Forms9Patch.ContentView",
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFill,
@@ -63,7 +63,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFit,
@@ -77,7 +77,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Fill,
@@ -91,7 +91,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Tile,
@@ -105,7 +105,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								CapInsets = new Thickness(10),
@@ -155,7 +155,7 @@ namespace Forms9PatchDemo
 							OutlineWidth = 1,
 							OutlineRadius = 4,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.AspectFit,
@@ -169,7 +169,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Fill,
@@ -183,7 +183,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								Fill = Forms9Patch.Fill.Tile,
@@ -197,7 +197,7 @@ namespace Forms9PatchDemo
 							Padding = new Thickness(10),
 							BackgroundColor = Color.Gray,
 						},
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
 								CapInsets = new Thickness(10),
@@ -222,7 +222,7 @@ namespace Forms9PatchDemo
 							HorizontalOptions = LayoutOptions.Center,
 						},
 
-						new Forms9Patch.ContentView {
+						new Forms9Patch.Frame {
 							BackgroundImage = new Forms9Patch.Image {
 								Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
 								CapInsets = new Thickness(30,-1,160,-1),

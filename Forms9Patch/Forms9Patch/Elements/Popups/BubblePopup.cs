@@ -212,7 +212,7 @@ namespace Forms9Patch
 
 
         double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;
-        double positionWeightingFunction(double start)
+        double PositionWeightingFunction(double start)
         {
             // how far apart is the popup center from the target?
             double err = 0;
@@ -239,7 +239,7 @@ namespace Forms9Patch
             return err;
         }
 
-        double pointerWeightingFunction(double offset)
+        double PointerWeightingFunction(double offset)
         {
             // how far is the offset from the center of the target?
             double err = 0;
@@ -272,7 +272,7 @@ namespace Forms9Patch
                 0,
                 targetStart + targetWidth / 2.0,
                 availableWidth - width,
-                positionWeightingFunction, 0.0001, out optimalStart);
+                PositionWeightingFunction, 0.0001, out optimalStart);
 
             _pwfStart = optimalStart;
 
@@ -281,7 +281,7 @@ namespace Forms9Patch
                 0,
                 width / 2.0,
                 width,
-                pointerWeightingFunction, 0.0001, out optimalPointerLoc);
+                PointerWeightingFunction, 0.0001, out optimalPointerLoc);
 
             var pointerOffset = (float)(optimalPointerLoc / width);
             return new Tuple<double, float>(optimalStart, pointerOffset);
@@ -304,51 +304,29 @@ namespace Forms9Patch
             if (_bubbleLayout?.Content == null)
                 return;
             var bounds = new Rectangle(x, y, width, height);
+
+            // layout the background
             base.LayoutChildren(x, y, width, height);
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
             {
                 _bubbleLayout.IsVisible = true;
                 _bubbleLayout.Content.IsVisible = true;
-                var shadow = BubbleLayout.ShadowPadding(_bubbleLayout);
+                //var shadow = BubbleLayout.ShadowPadding(_bubbleLayout);
+                var decoration = _bubbleLayout.DecorativePadding();
                 //SizeRequest request;
 
-                /*
-                if (_bubbleLayout.Content.WidthRequest > 0 && _bubbleLayout.Content.HeightRequest > 0)
-                    request = new SizeRequest(new Size(_bubbleLayout.Content.WidthRequest, _bubbleLayout.Content.HeightRequest));
-                else
-                {
-                    double availWidth = width - (_bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness + Margin.HorizontalThickness);
-                    if (_bubbleLayout.Content.WidthRequest > 0)
-                        availWidth = _bubbleLayout.Content.WidthRequest;
-                    double availHeight = height - (_bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness + Margin.HorizontalThickness);
-                    if (_bubbleLayout.Content.HeightRequest > 0)
-                        availHeight = _bubbleLayout.Content.HeightRequest;
-                    request = _bubbleLayout.Content.Measure(availWidth, availHeight);
-                }
-                */
-                var availWidth = width - (Margin.HorizontalThickness + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
+                var availWidth = width - (Margin.HorizontalThickness + decoration.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + decoration.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
                 if (_bubbleLayout.Content.WidthRequest > 0)
                     availWidth = _bubbleLayout.Content.WidthRequest;
                 if (_bubbleLayout.Content.HeightRequest > 0)
                     availHeight = _bubbleLayout.Content.HeightRequest;
                 var request = _bubbleLayout.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
-
-
-                /*
-				if (_bubbleLayout.Content.WidthRequest > 0 && _bubbleLayout.Content.HeightRequest > 0)
-					request = new SizeRequest(new Size(_bubbleLayout.Content.WidthRequest, _bubbleLayout.Content.HeightRequest));
-				else
-					request = _bubbleLayout.Content.Measure (width - (_bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness + Margin.HorizontalThickness), height - (_bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness + Margin.HorizontalThickness));
-					*/
-                //var request = _bubbleLayout.Content.Measure(Host.Bounds.Width, Host.Bounds.Height);
-
-
                 //var rboxSize = new Size(request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
-                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
+                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + decoration.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
+                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + decoration.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
                 //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren _bubbleLayout size=[{0}, {1}]",rboxSize.Width, rboxSize.Height);

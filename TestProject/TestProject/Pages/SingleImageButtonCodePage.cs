@@ -27,7 +27,7 @@ namespace Forms9PatchDemo
         }
 
 
-        #region ImageButtons
+        #region VisualElements
         Forms9Patch.ImageButton b2 = new Forms9Patch.ImageButton
         {
             DefaultState = new Forms9Patch.ImageButtonState
@@ -36,11 +36,11 @@ namespace Forms9PatchDemo
                 {
                     Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                 },
-                Image = new Forms9Patch.Image
+                IconImage = new Forms9Patch.Image
                 {
                     Source = ImageSource.FromFile("five.png"),
                 },
-                FontColor = Color.White,
+                TextColor = Color.White,
                 Text = "Sticky w/ SelectedState",
             },
             SelectedState = new Forms9Patch.ImageButtonState
@@ -49,7 +49,7 @@ namespace Forms9PatchDemo
                 {
                     Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image"),
                 },
-                FontColor = Color.Red,
+                TextColor = Color.Red,
                 Text = "Selected",
             },
             ToggleBehavior = true,
@@ -57,55 +57,41 @@ namespace Forms9PatchDemo
             HorizontalTextAlignment = TextAlignment.Start,
         };
 
-        /*
-        Forms9Patch.ImageButton b3 = new Forms9Patch.ImageButton
+        Forms9Patch.MaterialSegmentedControl _iconSwitcher = new Forms9Patch.MaterialSegmentedControl
         {
-            DefaultState = new Forms9Patch.ImageButtonState
+            Segments =
             {
-                BackgroundImage = new Forms9Patch.Image
+                new Forms9Patch.Segment
                 {
-                    Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
+                    IconText = "",
                 },
-                Image = new Forms9Patch.Image
+                new Forms9Patch.Segment
                 {
-                    Source = ImageSource.FromFile("five.png"),
+                    IconText = "@",
                 },
-                FontColor = Color.FromRgb(0.0, 0.0, 0.8),
-                Text = "Sticky w/o SelectedState",
-            },
-            PressingState = new Forms9Patch.ImageButtonState
-            {
-                BackgroundImage = new Forms9Patch.Image
+                 new Forms9Patch.Segment
                 {
-                    Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redButton"),
+                    IconText = "&amp;",
                 },
-            },
-            ToggleBehavior = true,
-            HeightRequest = 50,
-            HorizontalTextAlignment = TextAlignment.Center,
+                new Forms9Patch.Segment
+                {
+                    //ImageSource = ImageSource.FromFile("five.png"),
+                    IconImage = new Forms9Patch.Image { Source = ImageSource.FromFile("five.png")}
+                },
+                new Forms9Patch.Segment
+                {
+                    //ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR"),
+                    IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.ArrowR") }
+                },
+                new Forms9Patch.Segment
+                {
+                    //ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info"),
+                    IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") }
+                },
+            }
         };
-
-        Forms9Patch.ImageButton b4 = new Forms9Patch.ImageButton
-        {
-            DefaultState = new Forms9Patch.ImageButtonState
-            {
-                BackgroundImage = new Forms9Patch.Image
-                {
-                    Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
-                },
-                Image = new Forms9Patch.Image
-                {
-                    Source = ImageSource.FromFile("five.png"),
-                },
-                FontColor = Color.White,
-                Text = "Not toggle",
-            },
-            //ToggleBehavior = true,
-            HeightRequest = 50,
-            HorizontalTextAlignment = TextAlignment.End,
-        };
-        */
         #endregion
+        //Forms9PatchDemo.Resources.Info
 
 
         public SingleImageButtonCodePage()
@@ -115,9 +101,17 @@ namespace Forms9PatchDemo
             {
                 Children = {
                     new Label { Text = "Buttons Page" },
-                    b2 //,b3,b4,
+                    b2
 
                 }
+            };
+
+            _iconSwitcher.SegmentTapped += (sender, e) =>
+            {
+                if (e.Segment.IconText != null)
+                    b2.DefaultState.IconText = e.Segment.IconText;
+                else
+                    b2.DefaultState.IconImage = new Forms9Patch.Image { Source = e.Segment.IconImage.Source };
             };
         }
 
@@ -135,19 +129,6 @@ namespace Forms9PatchDemo
                     b2.LongPressing -= OnImageButtonLongPressing;
                     b2.LongPressed -= OnImageButtonLongPressed;
                     b2.Dispose();
-                    /*
-                    b3.Tapped -= OnImageButtonTapped;
-                    b3.Selected -= OnImageButtonSelected;
-                    b3.LongPressing -= OnImageButtonLongPressing;
-                    b3.LongPressed -= OnImageButtonLongPressed;
-                    b3.Dispose();
-
-                    b4.Tapped -= OnImageButtonTapped;
-                    b4.Selected -= OnImageButtonSelected;
-                    b4.LongPressing -= OnImageButtonLongPressing;
-                    b4.LongPressed -= OnImageButtonLongPressed;
-                    b4.Dispose();
-                    */
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

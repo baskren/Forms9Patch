@@ -8,7 +8,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Multi component picker.
 	/// </summary>
-	public class MultiComponentPicker : ContentView
+	public class MultiComponentPicker : Xamarin.Forms.ContentView
 	{
 		#region Properties
 		/// <summary>

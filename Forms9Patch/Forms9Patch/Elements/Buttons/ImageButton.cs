@@ -82,7 +82,6 @@ namespace Forms9Patch
         #endregion
 
 
-
         #region Fields
         bool _noUpdate = true;
         ImageButtonState _currentState;
@@ -91,8 +90,6 @@ namespace Forms9Patch
         //Label _label;
         //FormsGestures.Listener _gestureListener;
         #endregion
-
-
 
 
         #region Constructor
@@ -173,7 +170,6 @@ namespace Forms9Patch
         #endregion
 
 
-
         #region State Change responders
         /// <summary>
         /// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
@@ -233,6 +229,11 @@ namespace Forms9Patch
         public void ShowState(ImageButtonState newState)
         {
             _showingState = true;
+
+            // IconImage
+            // IconText
+            // BackgroundImage
+            // BackgroundColor
             newState = newState ?? DefaultState;
             if (_currentState != null)
                 _currentState.PropertyChanged -= OnStatePropertyChanged;
@@ -259,15 +260,15 @@ namespace Forms9Patch
                     });
             }
             BackgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
-            var newImage = _currentState.Image ?? DefaultState.Image;
+            var newImage = _currentState.IconImage ?? DefaultState.IconImage;
             var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
             var text = htmlText ?? _currentState.Text ?? DefaultState.Text;
             if (newImage == null)
             {
                 // label only
-                if (_image != null)
+                if (_iconImage != null)
                 {
-                    var toDispose = _image;
+                    var toDispose = _iconImage;
                     if (toDispose != null)
                         Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
                         {
@@ -279,10 +280,10 @@ namespace Forms9Patch
                             return false;
                         });
                 }
-                _image = null;
+                _iconImage = null;
                 if (!string.IsNullOrEmpty(text) && !_stackLayout.Children.Contains(_label))
                 {
-                    if (TrailingImage)
+                    if (TrailingIcon)
                         _stackLayout.Children.Insert(0, _label);
                     else
                         _stackLayout.Children.Add(_label);
@@ -292,16 +293,16 @@ namespace Forms9Patch
             {
                 // there is an image
                 newImage.Opacity = 1.0;
-                if (_image != newImage)
+                if (_iconImage != newImage)
                 {
                     // if it is a new image
-                    if (_image != null)
-                        _stackLayout.Children.Remove(_image);
-                    _image = newImage;
-                    if (TrailingImage)
-                        _stackLayout.Children.Add(_image);
+                    if (_iconImage != null)
+                        _stackLayout.Children.Remove(_iconImage);
+                    _iconImage = newImage;
+                    if (TrailingIcon)
+                        _stackLayout.Children.Add(_iconImage);
                     else
-                        _stackLayout.Children.Insert(0, _image);
+                        _stackLayout.Children.Insert(0, _iconImage);
                 }
                 if (string.IsNullOrEmpty(text))
                 {
@@ -314,7 +315,7 @@ namespace Forms9Patch
                     // image and label
                     if (!_stackLayout.Children.Contains(_label))
                     {
-                        if (TrailingImage)
+                        if (TrailingIcon)
                             _stackLayout.Children.Insert(0, _label);
                         else
                             _stackLayout.Children.Add(_label);
@@ -325,21 +326,88 @@ namespace Forms9Patch
                 _label.Text = _currentState.Text ?? DefaultState.Text;
             else
                 _label.HtmlText = htmlText;
-            SetLabelState(_label, _currentState);
-            _currentState.PropertyChanged += OnStatePropertyChanged;
             //InvalidateMeasure ();
+
+            #region IButtonState
+
+            TrailingIcon = _currentState.TrailingIconSet ? _currentState.TrailingIcon : DefaultState.TrailingIcon;
+
             UpdateIconTint();
+
+            HasTightSpacing = _currentState.HasTightSpacingSet ? _currentState.HasTightSpacing : DefaultState.HasTightSpacing;
+
+            Spacing = _currentState.SpacingSet ? _currentState.Spacing : DefaultState.Spacing;
+
+            Orientation = _currentState.OrientationSet ? _currentState.Orientation : DefaultState.Orientation;
+
+            ButtonShape = _currentState.ButtonShapeSet ? _currentState.ButtonShape : DefaultState.ButtonShape;
+
+            #region IBackground
+
+            // BackgroundImage handed above
+
+            #region IShape
+
+            // BackgroundColor handled above
+
+            HasShadow = _currentState.HasShadowSet ? _currentState.HasShadow : DefaultState.HasShadow;
+
+            ShadowInverted = _currentState.ShadowInvertedSet ? _currentState.ShadowInverted : DefaultState.ShadowInverted;
+
+            OutlineColor = _currentState.OutlineColorSet ? _currentState.OutlineColor : DefaultState.OutlineColor;
+
+            OutlineRadius = _currentState.OutlineRadiusSet ? _currentState.OutlineRadius : DefaultState.OutlineRadius;
+
+            OutlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
+
+            // ElementShape is set by ButtonShape setter, above
+
+            #endregion IShape
+
+            #endregion IBackground
+
+            #region ILabel
+
+            // Text handled above
+
+            // HtmlText handled above
+
+            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            //label.TextColor = (state.TextColorSet || state.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? state.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
+
+            HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
+
+            VerticalTextAlignment = _currentState.VerticalTextAlignmentSet ? _currentState.VerticalTextAlignment : DefaultState.VerticalTextAlignment;
+
+            LineBreakMode = _currentState.LineBreakModeSet ? _currentState.LineBreakMode : DefaultState.LineBreakMode;
+
+            Fit = _currentState.FitSet ? _currentState.Fit : DefaultState.Fit;
+
+            Lines = _currentState.LinesSet ? _currentState.Lines : DefaultState.Lines;
+
+            MinFontSize = _currentState.MinFontSizeSet ? _currentState.MinFontSize : DefaultState.MinFontSize;
+
+            #region IFontElement
+
+            _label.FontSize = (_currentState.FontSizeSet || Math.Abs(_currentState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? _currentState.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
+
+            _label.FontFamily = (_currentState.FontFamilySet || _currentState.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? _currentState.FontFamily : DefaultState.FontFamily);
+
+            _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
+
+            #endregion IFontElement
+
+
+
+            #endregion ILabel
+
+            #endregion IButtonState
+
+            _currentState.PropertyChanged += OnStatePropertyChanged;
+
             _showingState = false;
         }
 
-        void SetLabelState(Label label, ImageButtonState state)
-        {
-            label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
-            //label.TextColor = (state.FontColorSet || state.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? state.FontColor : (DefaultState.FontColorSet || DefaultState.FontColor != (Color)ImageButtonState.FontColorProperty.DefaultValue ? DefaultState.FontColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
-            label.FontSize = (state.FontSizeSet || Math.Abs(state.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? state.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
-            label.FontFamily = (state.FontFamilySet || state.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? state.FontFamily : DefaultState.FontFamily);
-            label.FontAttributes = (state.FontAttributesSet || state.FontAttributes != (FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? state.FontAttributes : DefaultState.FontAttributes);
-        }
         #endregion
 
 
@@ -380,7 +448,7 @@ namespace Forms9Patch
                 }
                 else
                 {
-                    if (PressingState != null && PressingState.Image != null)
+                    if (PressingState != null && PressingState.IconImage != null)
                         Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
                         {
                             UpdateState();
@@ -452,6 +520,7 @@ namespace Forms9Patch
             if (_noUpdate)
                 return;
 
+            #region State changes
             if (propertyName == ImageButton.DefaultStateProperty.PropertyName && IsEnabled && !IsSelected)
                 UpdateState();
             //          } else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
@@ -475,10 +544,93 @@ namespace Forms9Patch
             //    _label.Fit = Fit;
             //else if (propertyName == ImageButton.LineBreakModeProperty.PropertyName)
             //    _label.LineBreakMode = LineBreakMode;
+            #endregion
 
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == TextProperty.PropertyName && !_showingState)
+            #region IButtonState
+
+            if (propertyName == IconImageProperty.PropertyName && !_showingState)
+            {
+                DefaultState.IconImage = IconImage;
+                UpdateState();
+            }
+            else if (propertyName == IconTextProperty.PropertyName && !_showingState)
+            {
+                DefaultState.IconText = IconText;
+                UpdateState();
+            }
+            else if (propertyName == TrailingIconProperty.PropertyName && !_showingState)
+            {
+                DefaultState.TrailingIcon = TrailingIcon;
+                UpdateState();
+            }
+            else if (propertyName == TintIconProperty.PropertyName && !_showingState)
+            {
+                DefaultState.TintIcon = TintIcon;
+                UpdateState();
+            }
+            else if (propertyName == HasTightSpacingProperty.PropertyName && !_showingState)
+            {
+                DefaultState.HasTightSpacing = HasTightSpacing;
+                UpdateState();
+            }
+            else if (propertyName == SpacingProperty.PropertyName && !_showingState)
+            {
+                DefaultState.Spacing = Spacing;
+                UpdateState();
+            }
+            else if(propertyName == OrientationProperty.PropertyName && !_showingState)
+            {
+                DefaultState.Orientation = Orientation;
+                UpdateState();
+            }
+
+            #region IBackground
+
+            else if (propertyName == ShapeBase.BackgroundImageProperty.PropertyName && !_showingState)
+            {
+                DefaultState.BackgroundImage = BackgroundImage;
+                UpdateState();
+            }
+
+            #region IShape
+            else if (propertyName == BackgroundColorProperty.PropertyName && !_showingState)
+            {
+                DefaultState.BackgroundColor = BackgroundColor;
+                UpdateState();
+            }
+            else if (propertyName == HasShadowProperty.PropertyName && !_showingState)
+            {
+                DefaultState.HasShadow = HasShadow;
+                UpdateState();
+            }
+            else if (propertyName == ShadowInvertedProperty.PropertyName && !_showingState)
+            {
+                DefaultState.ShadowInverted = ShadowInverted;
+                UpdateState();
+            }
+            else if (propertyName == OutlineColorProperty.PropertyName && !_showingState)
+            {
+                DefaultState.OutlineColor = OutlineColor;
+                UpdateState();
+            }
+            else if (propertyName == OutlineRadiusProperty.PropertyName && !_showingState)
+            {
+                DefaultState.OutlineRadius = OutlineRadius;
+                UpdateState();
+            }
+            else if (propertyName == OutlineWidthProperty.PropertyName && !_showingState)
+            {
+                DefaultState.OutlineWidth = OutlineWidth;
+                UpdateState();
+            }
+            #endregion IShape
+
+            #endregion IBackground
+
+            #region ILabel
+            else if (propertyName == TextProperty.PropertyName && !_showingState)
             {
                 DefaultState.Text = Text;
                 UpdateState();
@@ -488,19 +640,43 @@ namespace Forms9Patch
                 DefaultState.HtmlText = HtmlText;
                 UpdateState();
             }
-            else if (propertyName == ImageSourceProperty.PropertyName && !_showingState)
+            else if (propertyName == TextColorProperty.PropertyName && !_showingState)
             {
-                DefaultState.Image = new Image
-                {
-                    Source = ImageSource
-                };
+                DefaultState.TextColor = TextColor;
                 UpdateState();
             }
-            else if (propertyName == FontColorProperty.PropertyName && !_showingState)
+            if (propertyName == HorizontalTextAlignmentProperty.PropertyName && !_showingState)
             {
-                DefaultState.FontColor = FontColor;
+                DefaultState.HorizontalTextAlignment = HorizontalTextAlignment;
                 UpdateState();
             }
+            else if (propertyName == VerticalTextAlignmentProperty.PropertyName && !_showingState)
+            {
+                DefaultState.VerticalTextAlignment = VerticalTextAlignment;
+                UpdateState();
+            }
+            if (propertyName == LineBreakModeProperty.PropertyName && !_showingState)
+            {
+                DefaultState.LineBreakMode = LineBreakMode;
+                UpdateState();
+            }
+            else if (propertyName == FitProperty.PropertyName && !_showingState)
+            {
+                DefaultState.Fit = Fit;
+                UpdateState();
+            }
+            if (propertyName == LinesProperty.PropertyName && !_showingState)
+            {
+                DefaultState.Lines = Lines;
+                UpdateState();
+            }
+            else if (propertyName == MinFontSizeProperty.PropertyName && !_showingState)
+            {
+                DefaultState.MinFontSize = MinFontSize;
+                UpdateState();
+            }
+
+            #region IFontElement
             else if (propertyName == FontAttributesProperty.PropertyName && !_showingState)
             {
                 DefaultState.FontAttributes = FontAttributes;
@@ -516,23 +692,14 @@ namespace Forms9Patch
                 DefaultState.FontFamily = FontFamily;
                 UpdateState();
             }
-            else if (propertyName == BackgroundColorProperty.PropertyName && !_showingState)
-            {
-                DefaultState.BackgroundColor = BackgroundColor;
-                UpdateState();
-            }
-            else if (propertyName == BackgroundImageProperty.PropertyName && !_showingState)
-            {
-                DefaultState.BackgroundImage = BackgroundImage;
-                UpdateState();
-            }
+            #endregion IFontElement
 
+            #endregion ILabel
+
+            #endregion IButtonState
 
         }
-
         #endregion
-
-
 
     }
 }

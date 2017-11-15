@@ -63,10 +63,10 @@ namespace Forms9Patch.Droid
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if (e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName ||
-                e.PropertyName == RoundedBoxBase.HasShadowProperty.PropertyName ||
-                e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName ||
-                e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName ||
+            if (e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName ||
+                e.PropertyName == ShapeBase.HasShadowProperty.PropertyName ||
+                e.PropertyName == ShapeBase.OutlineWidthProperty.PropertyName ||
+                e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName ||
                 e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
             {
 #pragma warning disable 4014

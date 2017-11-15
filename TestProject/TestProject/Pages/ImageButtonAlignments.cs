@@ -53,7 +53,7 @@ namespace Forms9PatchDemo
                 new Segment { HtmlText = "x"},
                 new Segment { HtmlText = "©" },
                 new Segment { HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
-                new Segment { ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") }
+                new Segment { IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") } }
             }
         };
 
@@ -77,11 +77,11 @@ namespace Forms9PatchDemo
                 {
                     Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                 },
-                Image = new Forms9Patch.Image
+                IconImage = new Forms9Patch.Image
                 {
                     Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info"),
                 },
-                FontColor = Color.White,
+                TextColor = Color.White,
                 Text = "Unselected",
             },
             SelectedState = new Forms9Patch.ImageButtonState
@@ -90,7 +90,7 @@ namespace Forms9PatchDemo
                 {
                     Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image"),
                 },
-                FontColor = Color.Red,
+                TextColor = Color.Red,
                 Text = "Selected",
             },
             ToggleBehavior = true,
@@ -179,20 +179,20 @@ namespace Forms9PatchDemo
                 foreach (var segment in _optionsElement.SelectedSegments)
                     options.Add(segment.Text.ToUpper());
                 var hasTightSpacing = options.Contains("TIGHT");
-                var trailingImage = options.Contains("TRAILING");
+                var trailingIcon = options.Contains("TRAILING");
                 var orientation = options.Contains("VERTICAL") ? StackOrientation.Vertical : StackOrientation.Horizontal;
 
 
                 _iconTextAndTextButton.HasTightSpacing = hasTightSpacing;
-                _iconTextAndTextButton.TrailingImage = trailingImage;
+                _iconTextAndTextButton.TrailingIcon = trailingIcon;
                 _iconTextAndTextButton.Orientation = orientation;
 
             };
 
             _iconElement.SegmentTapped += (sender, e) =>
             {
-                if (e.Segment.ImageSource != null)
-                    _iconTextAndTextButton.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                if (e.Segment.IconImage != null)
+                    _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = e.Segment.IconImage.Source }; // Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
                 else
                     SetIconText(e.Segment.HtmlText);
             };
@@ -228,7 +228,7 @@ namespace Forms9PatchDemo
 
         void SetIconText(string iconTextSetting)
         {
-            _iconTextAndTextButton.ImageSource = null;
+            _iconTextAndTextButton.IconImage = null;
             if (iconTextSetting == "NONE")
                 _iconTextAndTextButton.IconText = null;
             else

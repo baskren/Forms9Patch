@@ -10,17 +10,16 @@ namespace Forms9Patch
     /// Forms9Patch Popup base.
     /// </summary>
     [ContentProperty("Content")]
-    public abstract class PopupBase : Layout<View>, IRoundedBox, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IRoundedBox
+    public abstract class PopupBase : Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
-    {
-
-
+    { 
         #region Invalid Parent Properties
         /// <summary>
         /// Invalid Property, do not use
         /// </summary>
         /// <value>Invalid</value>
         /// <remarks>Do not use</remarks>
+        [Obsolete("Use Content")]
         public new IList<View> Children
         {
             get
@@ -31,7 +30,25 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Overridden VisualElementProperties
+        #region IPopup
+
+        /*#region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
+        /// <summary>
+        /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute & store shadow padding
+        /// </summary>
+        public static new BindableProperty PaddingProperty = ShapeBase.PaddingProperty;
+        /// <summary>
+        /// Gets or sets the inner padding of the Layout.
+        /// </summary>
+        /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
+        public new Thickness Padding
+        {
+            get { return (Thickness)GetValue(PaddingProperty); }
+            set { SetValue(PaddingProperty, value); }
+        }
+        #endregion Padding*/
+
+        #region IsVisible
         /// <summary>
         /// The is visible property.
         /// </summary>
@@ -45,7 +62,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(IsVisibleProperty); }
             set { SetValue(IsVisibleProperty, value); }
         }
+        #endregion IsVisible
 
+        #region Margin
         /// <summary>
         /// The margin property.
         /// </summary>
@@ -59,7 +78,9 @@ namespace Forms9Patch
             get { return (Thickness)GetValue(MarginProperty); }
             set { SetValue(MarginProperty, value); }
         }
+        #endregion Margin
 
+        #region HorizontalOptions
         /// <summary>
         /// The horizontal options property backing store.
         /// </summary>
@@ -74,6 +95,9 @@ namespace Forms9Patch
             set { SetValue(HorizontalOptionsProperty, value); }
         }
 
+        #endregion HorizontalOptions
+
+        #region VerticalOptions
         /// <summary>
         /// The vertical options property.
         /// </summary>
@@ -87,12 +111,9 @@ namespace Forms9Patch
             get { return (LayoutOptions)GetValue(VerticalOptionsProperty); }
             set { SetValue(VerticalOptionsProperty, value); }
         }
+        #endregion VerticalOptions
 
-        #endregion
-
-
-        #region Popup Properties
-
+        #region Target
         /// <summary>
         /// The target property.
         /// </summary>
@@ -106,14 +127,9 @@ namespace Forms9Patch
             get { return (VisualElement)GetValue(TargetProperty); }
             set { SetValue(TargetProperty, value); }
         }
+        #endregion Target
 
-
-        internal Listener Listener
-        {
-            get { return _listener; }
-        }
-
-
+        #region PageOverlayColor
         /// <summary>
         /// Identifies the PageOverlayColor bindable property.
         /// </summary>
@@ -128,7 +144,9 @@ namespace Forms9Patch
             get { return (Color)GetValue(PageOverlayColorProperty); }
             set { SetValue(PageOverlayColorProperty, value); }
         }
+        #endregion PageOverlayColor
 
+        #region CancelOnPageOverlayTouch
         /// <summary>
         /// Cancel the Popup when the PageOverlay is touched
         /// </summary>
@@ -142,9 +160,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(CancelOnPageOverlayTouchProperty); }
             set { SetValue(CancelOnPageOverlayTouchProperty, value); }
         }
+        #endregion CancelOnPageOverlayTouch
 
-        #endregion
-
+        #region Retain
         /// <summary>
         /// The retain property.
         /// </summary>
@@ -158,30 +176,64 @@ namespace Forms9Patch
             get { return (bool)GetValue(RetainProperty); }
             set { SetValue(RetainProperty, value); }
         }
+        #endregion Retail
 
+        #region IBackground
 
-        #region IRoundedBox Properties
+        #region BackgroundImage
         /// <summary>
-        /// Backing store for the HasShadow bindable property.
+        /// Backing store for the BackgroundImage bindable property.
         /// </summary>
-        /// <remarks></remarks>
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(PopupBase), true);
+        public static BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
         /// <summary>
-        /// Gets or sets a flag indicating if the AbsoluteLayout has a shadow displayed. This is a bindable property.
+        /// Gets or sets the background image.
         /// </summary>
-        /// <value><c>true</c> if this instance has shadow; otherwise, <c>false</c>.</value>
+        /// <value>The background image.</value>
+        public Image BackgroundImage
+        {
+            get { return (Image)GetValue(BackgroundImageProperty); }
+            set { SetValue(BackgroundImageProperty, value); }
+        }
+        #endregion BackgroundImage
+
+        #region IShape
+
+        // BackgroundColor inherited from VisualElement
+
+        #region HasShadow property
+#if _Forms9Patch_Frame_
+        /// <summary>
+        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute & store shadow padding
+        /// </summary>
+        public static new BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
+        /// <summary>
+        /// Gets/Sets the HasShadow property
+        /// </summary>
+        public new bool HasShadow
+#else
+        /// <summary>
+        /// HasShadow property backing store
+        /// </summary>
+        public static BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
+        /// <summary>
+        /// Gets/Sets the HasShadow property
+        /// </summary>
         public bool HasShadow
+#endif
         {
             get { return (bool)GetValue(HasShadowProperty); }
             set { SetValue(HasShadowProperty, value); }
         }
+        #endregion HasShadow property
 
+        #region ShadowInverted
         /// <summary>
-        /// The shadow inverted property backing store.
+        /// Backing store for the ShadowInverted bindable property.
         /// </summary>
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(PopupBase), (bool)RoundedBoxBase.ShadowInvertedProperty.DefaultValue);
+        /// <remarks></remarks>
+        public static readonly BindableProperty ShadowInvertedProperty = ShapeBase.ShadowInvertedProperty;
         /// <summary>
-        /// Gets or sets a flag indicating if the Frame's shadow is inverted. This is a bindable property.
+        /// Gets or sets a flag indicating if the layout's shadow is inverted. This is a bindable property.
         /// </summary>
         /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
         public bool ShadowInverted
@@ -189,25 +241,34 @@ namespace Forms9Patch
             get { return (bool)GetValue(ShadowInvertedProperty); }
             set { SetValue(ShadowInvertedProperty, value); }
         }
+        #endregion ShadowInverted
 
+        #region OutlineColor property
+
+#if _Forms9Patch_Frame_
+        // OutlineColor inherited from Xamarin.Forms.AbsoluteLayout
+#else
         /// <summary>
-        /// The outline color property.
+        /// backing store for OutlineColor property
         /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(PopupBase), (Color)RoundedBoxBase.OutlineColorProperty.DefaultValue);
+        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
         /// <summary>
-        /// Gets or sets the color of the border of the AbsoluteLayout. This is a bindable property.
+        /// Gets/Sets the OutlineColor property
         /// </summary>
-        /// <value>The color of the outline.</value>
         public Color OutlineColor
         {
             get { return (Color)GetValue(OutlineColorProperty); }
             set { SetValue(OutlineColorProperty, value); }
         }
+#endif
 
+        #endregion OutlineColor property
+
+        #region OutlineRadius
         /// <summary>
-        /// The outline radius property.
+        /// Backing store for the OutlineRadius bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(PopupBase), (float)RoundedBoxBase.OutlineRadiusProperty.DefaultValue);
+        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
         /// <summary>
         /// Gets or sets the outline radius.
         /// </summary>
@@ -217,11 +278,13 @@ namespace Forms9Patch
             get { return (float)GetValue(OutlineRadiusProperty); }
             set { SetValue(OutlineRadiusProperty, value); }
         }
+        #endregion OutlineRadius
 
+        #region OutlineWidth
         /// <summary>
-        /// The outline width property.
+        /// Backing store for the OutlineWidth bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(PopupBase), (float)RoundedBoxBase.OutlineWidthProperty.DefaultValue);
+        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
         /// <summary>
         /// Gets or sets the width of the outline.
         /// </summary>
@@ -231,75 +294,82 @@ namespace Forms9Patch
             get { return (float)GetValue(OutlineWidthProperty); }
             set { SetValue(OutlineWidthProperty, value); }
         }
+        #endregion OutlineWidth
 
+        #region ElementShape property
         /// <summary>
-        /// Identifies the Padding bindable property.
+        /// backing store for ElementShape property
         /// </summary>
-        /// <remarks></remarks>
-        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(PopupBase), (Thickness)RoundedBoxBase.PaddingProperty.DefaultValue);
+        internal static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
         /// <summary>
-        /// Gets or sets the inner padding of the Layout.
+        /// Gets/Sets the ElementShape property
         /// </summary>
-        /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
-        public new Thickness Padding
+        ElementShape IShape.ElementShape
         {
-            get { return (Thickness)GetValue(PaddingProperty); }
-            set { SetValue(PaddingProperty, value); }
+            get { return (ElementShape)GetValue(ElementShapeProperty); }
+            set { SetValue(ElementShapeProperty, value); }
         }
+        #endregion ElementShape property
 
-
+        /*#region IgnoreShapePropertiesChanges
         /// <summary>
-        /// Identifies the BackgroundColor bindable property.
+        /// Backging store for the IgnoreShapePropertiesChanges property
         /// </summary>
-        /// <remarks>To be added.</remarks>
-        public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(PopupBase), Color.White);
+        public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
         /// <summary>
-        /// Gets or sets the color which will fill the background of a VisualElement. This is a bindable property.
+        /// Prevent shape updates (to optimize performace)
         /// </summary>
-        /// <value>The color of the background.</value>
-        public new Color BackgroundColor
+        public bool IgnoreShapePropertiesChanges
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set
-            {
-                SetValue(BackgroundColorProperty, value);
-            }
+            get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
+            set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
         }
+        #endregion IgnoreShapePropertyChanges*/
 
-        /// <summary>
-        /// The is elliptical property.
-        /// </summary>
-        public static readonly BindableProperty IsEllipticalProperty = BindableProperty.Create("IsElliptical", typeof(bool), typeof(PopupBase), default(bool));
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is elliptical rathen than rectangular.
-        /// </summary>
-        /// <value><c>true</c> if is elliptical; otherwise, <c>false</c>.</value>
-        public bool IsElliptical
-        {
-            get { return (bool)GetValue(IsEllipticalProperty); }
-            set { SetValue(IsEllipticalProperty, value); }
-        }
+        #region IElement
 
-        /// <summary>
-        /// The BackgroundImageProperty
-        /// </summary>
-        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(PopupBase), default(Forms9Patch.Image));
-        /// <summary>
-        /// Gets or sets the BackgroundImage
-        /// </summary>
-        public Forms9Patch.Image BackgroundImage
-        {
-            get { return (Forms9Patch.Image)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
-        }
-
+        #region InstanceId
         /// <summary>
         /// The Instance Id (for debugging purposes)
         /// </summary>
-        public int InstanceId { get; private set; }
+        public int InstanceId => _id;
+        #endregion InstanceId
 
-        static int _instances = 0;
-        #endregion
+        #endregion IElement
+
+
+        #endregion IShape
+
+        #endregion IBackground
+
+        #endregion IPopup
+
+
+        #region Internal Properties
+
+        internal Listener Listener { get { return _listener; } }
+
+        internal RootPage RootPage { get { return Application.Current.MainPage as RootPage; } }
+
+        internal BoxView PageOverlay { get { return _pageOverlay; } }
+
+        #region ContentView property
+        internal View ContentView
+        {
+            get { return (View)_modalLayout; }
+            set
+            {
+                _modalLayout = (ILayout)value;
+                if (base.Children.Count < 2)
+                    base.Children.Add((View)_modalLayout);
+                else
+                    base.Children[1] = (View)_modalLayout;
+
+            }
+        }
+        #endregion ContentView property
+
+        #endregion Internal Properties
 
 
         #region Events
@@ -311,14 +381,14 @@ namespace Forms9Patch
 
 
         #region Fields
-        //readonly Xamarin.Forms.AbsoluteLayout _layout = new Xamarin.Forms.AbsoluteLayout ();
-        internal IBackground _background;
+        internal ILayout _modalLayout;
         internal BoxView _pageOverlay;
         readonly Listener _listener;
         internal DateTime PresentedAt;
+        static int _instances;
+        int _id;
         #endregion
 
-        RootPage RootPage { get { return Application.Current.MainPage as RootPage; } }
 
         #region Constructor
         /// <summary>
@@ -328,7 +398,7 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
-            InstanceId = _instances++;
+            _id = _instances++;
             Retain = retain;
             IsVisible = false;
             _pageOverlay = new BoxView
@@ -395,6 +465,7 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Public Methods
         /// <summary>
         /// Cancel the display of this Popup (will fire Cancelled event);
         /// </summary>
@@ -403,27 +474,10 @@ namespace Forms9Patch
             IsVisible = false;
             Cancelled?.Invoke(this, EventArgs.Empty);
         }
-
-        internal BoxView PageOverlay
-        {
-            get { return _pageOverlay; }
-        }
-
-        internal View ContentView
-        {
-            get { return (View)_background; }
-            set
-            {
-                _background = (IBackground)value;
-                if (base.Children.Count < 2)
-                    base.Children.Add((View)_background);
-                else
-                    base.Children[1] = (View)_background;
-
-            }
-        }
+        #endregion
 
 
+        #region PropertyChange managment
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
@@ -455,32 +509,66 @@ namespace Forms9Patch
                     RootPage?.RemovePopup(this);
                 }
             }
-            else if (propertyName == PaddingProperty.PropertyName)
-            {
-                _background.Padding = Padding;
-            }
-            else if (propertyName == HasShadowProperty.PropertyName)
-                _background.HasShadow = HasShadow;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                _background.OutlineColor = OutlineColor;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                _background.OutlineWidth = OutlineWidth;
-            else if (propertyName == OutlineRadiusProperty.PropertyName)
-                _background.OutlineRadius = OutlineRadius;
+
+            #region IPopup
+            //else if (propertyName == PaddingProperty.PropertyName)
+            //    _background.Padding = Padding;
+
+            #region IBackground
+            else if (propertyName == BackgroundImageProperty.PropertyName)
+                _modalLayout.BackgroundImage = BackgroundImage;
+
+            #region IShape
             else if (propertyName == BackgroundColorProperty.PropertyName)
-                _background.BackgroundColor = BackgroundColor;
+                _modalLayout.BackgroundColor = BackgroundColor;
+            else if (propertyName == HasShadowProperty.PropertyName)
+                _modalLayout.HasShadow = HasShadow;
             else if (propertyName == ShadowInvertedProperty.PropertyName)
-                _background.ShadowInverted = ShadowInverted;
+                _modalLayout.ShadowInverted = ShadowInverted;
+            else if (propertyName == OutlineColorProperty.PropertyName)
+                _modalLayout.OutlineColor = OutlineColor;
+            else if (propertyName == OutlineWidthProperty.PropertyName)
+                _modalLayout.OutlineWidth = OutlineWidth;
+            else if (propertyName == OutlineRadiusProperty.PropertyName)
+                _modalLayout.OutlineRadius = OutlineRadius;
+            else if (propertyName == ElementShapeProperty.PropertyName)
+                _modalLayout.ElementShape = ((IShape)this).ElementShape;
+            #endregion IShape
+
+            #endregion IBackground
+
+            #endregion IPopup
+
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
         }
+        #endregion
 
+
+        #region Layout
+        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            /*
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            if (HasShadow)
+            {
+                var shadowPadding = ((IShape)this).ShadowPadding();
+                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
+                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
+            }
+            */
+
+            // this is going to be the size of the root page.
+            var result = new SizeRequest(RootPage.Bounds.Size, RootPage.Bounds.Size);
+            return result;
+        }
 
         internal void ManualLayout(Rectangle bounds)
         {
             LayoutChildren(bounds.X, bounds.Y, bounds.Width, bounds.Height);
         }
-
 
         /// <summary>
         /// Layouts the children.
@@ -493,12 +581,11 @@ namespace Forms9Patch
         {
             System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
-            {
                 LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x, y, width, height));
-            }
             else
                 ContentView.IsVisible = false;
         }
+        #endregion
     }
 }
 

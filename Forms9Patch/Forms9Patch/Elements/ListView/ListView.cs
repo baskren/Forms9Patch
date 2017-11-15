@@ -31,8 +31,8 @@ namespace Forms9Patch
         [Obsolete("Use Forms9Patch.ListView.ItemTemplates property instead.", true)]
         public new Xamarin.Forms.DataTemplateSelector ItemTemplate
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { throw new NotImplementedException("Use Forms9Patch.ListView.ItemTemplates property"); }
+            set { throw new NotImplementedException("Use Forms9Patch.ListView.ItemTemplates property"); }
         }
 
         /// <summary>

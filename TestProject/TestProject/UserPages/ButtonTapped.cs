@@ -12,7 +12,7 @@ namespace Forms9PatchDemo
             var materialButton = new MaterialButton
             {
                 Text = "MaterialButton",
-                FontColor = Color.Pink,
+                TextColor = Color.Pink,
                 FontSize = 20,
                 HeightRequest = 30,
                 WidthRequest = 200,
@@ -27,7 +27,7 @@ namespace Forms9PatchDemo
             var imageButton = new ImageButton
             {
                 Text = "ImageButton",
-                FontColor = Color.Green,
+                TextColor = Color.Green,
                 FontSize = 20,
                 HeightRequest = 30,
                 WidthRequest = 200,

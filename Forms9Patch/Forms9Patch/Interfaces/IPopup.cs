@@ -5,8 +5,13 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Popup Interface.
     /// </summary>
-    public interface IPopup : ILayout
+    interface IPopup : IBackground
     {
+        /// <summary>
+        /// Padding between popup frame and its content
+        /// </summary>
+        Thickness Padding { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IPopup"/> is visible.
         /// </summary>
@@ -55,10 +60,5 @@ namespace Forms9Patch
         /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
         bool Retain { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IPopup"/> has shadow.
-        /// </summary>
-        /// <value><c>true</c> if has shadow; otherwise, <c>false</c>.</value>
-        bool HasShadow { get; set; }
     }
 }

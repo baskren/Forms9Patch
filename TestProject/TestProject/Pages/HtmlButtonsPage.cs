@@ -16,10 +16,10 @@ namespace Forms9PatchDemo
             {
                 IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
                 HtmlText = "<i>Markup</i> button",
-                TrailingImage = true,
+                TrailingIcon = true,
                 //Text = "Pizza",
                 BackgroundColor = Color.FromRgb(200, 200, 200),
-                FontColor = Color.Blue,
+                TextColor = Color.Blue,
                 HasShadow = true,
                 ToggleBehavior = true,
             };
@@ -36,7 +36,7 @@ namespace Forms9PatchDemo
                 BackgroundColor = Color.FromRgb(200, 200, 200),
                 FontSize = 12,
                 Padding = 5,
-                //FontColor = Color.Blue,
+                //TextColor = Color.Blue,
                 Segments = {
 
                     new Forms9Patch.Segment {
@@ -72,11 +72,11 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                     },
-                    Image = new Forms9Patch.Image
+                    IconImage = new Forms9Patch.Image
                     {
                         Source = ImageSource.FromFile("five.png"),
                     },
-                    FontColor = Color.White,
+                    TextColor = Color.White,
                     //Text = "Sticky w/ SelectedState",
                     HtmlText = "<b>Sticky</b> with <i>SelectedState</i>",
                 },
@@ -86,7 +86,7 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image"),
                     },
-                    FontColor = Color.Red,
+                    TextColor = Color.Red,
                     //Text = "Selected",
                     HtmlText = "<b><i>Selected</i></b>",
 

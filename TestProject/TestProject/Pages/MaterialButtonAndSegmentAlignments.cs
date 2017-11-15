@@ -12,12 +12,12 @@ namespace Forms9PatchDemo
 
         const float radius = 4;
         const float width = 1;
-        const bool hasShadow = false;
+        const bool hasShadow = true;
         static Color outlineColor =  Color.Default; // Color.Red.WithAlpha(0.25);
         static Color backgroundColor =  Color.White;
         static bool ShadowInverted = true;
 
-        Switch _hasShadowSwitch = new Switch();
+        Switch _hasShadowSwitch = new Switch { IsToggled = hasShadow };
 
         MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
         {
@@ -27,6 +27,8 @@ namespace Forms9PatchDemo
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
+            //SelectedTextColor = Color.Blue,
+          
             Segments =
             {
                 new Segment { Text = "START", },
@@ -80,11 +82,11 @@ namespace Forms9PatchDemo
             OutlineColor = outlineColor,
             Segments =
             {
-                new Segment { HtmlText = "NONE" },
-                new Segment { HtmlText = "x"},
+                new Segment { Text = "NONE" },
+                new Segment { Text = "x"},
                 new Segment { HtmlText = "©" },
                 new Segment { HtmlText = "<font face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>" },
-                new Segment { ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") }
+                new Segment { IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info"), TintColor=Color.Green }  }
             }
         };
 
@@ -216,15 +218,21 @@ namespace Forms9PatchDemo
                     {
                        
                         new Xamarin.Forms.Label { Text = "version 0.9.15.1"},
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _grid1,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _grid2,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _grid3,
 
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
                         _iconTextAndTextButton,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _hzSegmentsElement,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _vtSegmentsElement,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
                         new Xamarin.Forms.Label { Text="Display.Scale=["+Display.Scale+"]" }
                     }
                 }
@@ -234,8 +242,9 @@ namespace Forms9PatchDemo
             {
                 _hzAlignmentElement.HasShadow = _hasShadowSwitch.IsToggled;
                 _vtAlignmentElement.HasShadow = _hasShadowSwitch.IsToggled;
-                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
                 _optionsElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _iconElement.HasShadow = _hasShadowSwitch.IsToggled;
+                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
                 _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
                 _hzSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
                 _vtSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
@@ -271,32 +280,32 @@ namespace Forms9PatchDemo
                 foreach (var segment in _optionsElement.SelectedSegments)
                     options.Add(segment.Text.ToUpper());
                 var hasTightSpacing = options.Contains("TIGHT");
-                var trailingImage = options.Contains("TRAILING");
+                var trailingIcon = options.Contains("TRAILING");
                 var orientation = options.Contains("VERTICAL") ? StackOrientation.Vertical : StackOrientation.Horizontal;
 
 
                 _iconTextAndTextButton.HasTightSpacing = hasTightSpacing;
-                _iconTextAndTextButton.TrailingImage = trailingImage;
+                _iconTextAndTextButton.TrailingIcon = trailingIcon;
                 _iconTextAndTextButton.Orientation = orientation;
 
                 _hzSegmentsElement.HasTightSpacing = hasTightSpacing;
-                _hzSegmentsElement.TrailingImage = trailingImage;
+                _hzSegmentsElement.TrailingIcon = trailingIcon;
                 _hzSegmentsElement.IntraSegmentOrientation = orientation;
 
                 _vtSegmentsElement.HasTightSpacing = hasTightSpacing;
-                _vtSegmentsElement.TrailingImage = trailingImage;
+                _vtSegmentsElement.TrailingIcon = trailingIcon;
                 _vtSegmentsElement.IntraSegmentOrientation = orientation;
             };
 
             _iconElement.SegmentTapped += (sender, e) =>
             {
-                if (e.Segment.ImageSource != null)
+                if (e.Segment.IconImage != null)
                 {
-                    _iconTextAndTextButton.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                    _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                     foreach (var segment in _hzSegmentsElement.Segments)
-                        segment.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                        segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                     foreach (var segment in _vtSegmentsElement.Segments)
-                        segment.ImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info");
+                        segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                 }
                 else
                     SetIconText(e.Segment.HtmlText);
@@ -364,11 +373,11 @@ namespace Forms9PatchDemo
 
         void SetIconText(string iconTextSetting)
         {
-            _iconTextAndTextButton.ImageSource = null;
+            _iconTextAndTextButton.IconImage = null;
             foreach (var segment in _hzSegmentsElement.Segments)
-                segment.ImageSource = null;
+                segment.IconImage = null;
             foreach (var segment in _vtSegmentsElement.Segments)
-                segment.ImageSource = null;
+                segment.IconImage = null;
             if (iconTextSetting == "NONE")
                 _iconTextAndTextButton.IconText = null;
             else

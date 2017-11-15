@@ -48,12 +48,12 @@ namespace Forms9Patch.Droid
         {
             base.OnElementPropertyChanged(e);
             if (
-                e.PropertyName == RoundedBoxBase.OutlineColorProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.ShadowInvertedProperty.PropertyName
-                || e.PropertyName == RoundedBoxBase.OutlineRadiusProperty.PropertyName
+                e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName
+                || e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
+                || e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName
                 || e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
             {
-                var box = Element as IRoundedBox;
+                var box = Element as IShape;
                 if (box != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)
@@ -69,8 +69,8 @@ namespace Forms9Patch.Droid
               || e.PropertyName == VisualElement.HeightProperty.PropertyName
               || e.PropertyName == VisualElement.XProperty.PropertyName
               || e.PropertyName == VisualElement.YProperty.PropertyName
-              || e.PropertyName == RoundedBoxBase.HasShadowProperty.PropertyName
-              || e.PropertyName == RoundedBoxBase.OutlineWidthProperty.PropertyName)
+              || e.PropertyName == ShapeBase.HasShadowProperty.PropertyName
+              || e.PropertyName == ShapeBase.OutlineWidthProperty.PropertyName)
             {
 
                 LayoutCycle();
@@ -118,10 +118,10 @@ namespace Forms9Patch.Droid
 						//Invalidate();
 						//ViewGroup.ForceLayout();
 						//ViewGroup.Layout((int)(b.Left * s), (int)(b.Top * s), (int)(b.Right * s), (int)(b.Bottom * s));
-						//var box = Element as IRoundedBox;
+						//var box = Element as IShape;
 						//if (box != null)
 						//	Background = new RoundRectDrawable(box);
-						//var box = Element as IRoundedBox;
+						//var box = Element as IShape;
 						//if (box != null)
 						//	Background = new RoundRectDrawable(box);
 					}
@@ -161,7 +161,7 @@ namespace Forms9Patch.Droid
 
             if (!hasImage)
             {
-                var roundedBoxElement = Element as IRoundedBox;
+                var roundedBoxElement = Element as IShape;
                 if (roundedBoxElement != null)
                 {
                     if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.JellyBean)

@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Base picker.
     /// </summary>
-    class BasePicker : ContentView
+    class BasePicker : Xamarin.Forms.ContentView
     {
         #region Properties
 

@@ -23,7 +23,7 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromResource(BaseResource + ".Resources.button_01_default.png"),
                     },
-                    FontColor = Color.Black,
+                    TextColor = Color.Black,
                     Text = "Start",
                 },
                 PressingState = new Forms9Patch.ImageButtonState
@@ -48,7 +48,7 @@ namespace Forms9PatchDemo
             };
 
             //ContentView fnpcvMain = new ContentView
-            Forms9Patch.ContentView fnpcvMain = new Forms9Patch.ContentView
+            Forms9Patch.Frame fnpcvMain = new Forms9Patch.Frame
             {
                 Content = slMain,
             };

@@ -23,6 +23,15 @@ namespace Forms9Patch
         public IList<Segment> Segments
         {
             get { return _segments; }
+            set
+            {
+                _segments.Clear();
+                if (value != null)
+                {
+                    foreach (var segment in value)
+                        _segments.Add(segment);
+                }
+            }
         }
 
         /// <summary>
@@ -41,33 +50,66 @@ namespace Forms9Patch
         }
 
 
+        /// <summary>
+        /// OBSOLETE: Use TextColorProperty
+        /// </summary>
+        [Obsolete("Use TextColorProperty")]
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+        /// <summary>
+        /// OBSOLETE: Use TextColor
+        /// </summary>
+        /// <value>The color of the font.</value>
+        [Obsolete("Use TextColor")]
+        public Color FontColor
+        {
+            get { throw new NotSupportedException("Use TextColor"); }
+            set { throw new NotSupportedException("Use TextColor"); }
+        }
 
         /// <summary>
-        /// Backing store for the MaterialButton.FontColor bindable property.
+        /// OBSOLETE: Use SelectedTextColorProperty
         /// </summary>
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+        [Obsolete("Use SelectedTextColorProperty")]
+        public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create("SelectedFontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+        /// <summary>
+        /// OBSOLETE: Use SelectedTextColor property
+        /// </summary>
+        /// <value>The color of the selected font.</value>
+        [Obsolete("Use SelectedTextColor")]
+        public Color SelectedFontColor
+        {
+            get { throw new NotSupportedException("Use SelectedTextColor"); }
+            set { throw new NotSupportedException("Use SelectedTextColor"); }
+        }
+
+
+
+        /// <summary>
+        /// Backing store for the TextColor bindable property.
+        /// </summary>
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
         /// <summary>
         /// Gets or sets the color of the font.
         /// </summary>
         /// <value>The color of the font.</value>
-        public Color FontColor
+        public Color TextColor
         {
-            get { return (Color)GetValue(FontColorProperty); }
-            set { SetValue(FontColorProperty, value); }
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
         }
 
         /// <summary>
-        /// The selected font color property.
+        /// The selected text color property.
         /// </summary>
-        public static readonly BindableProperty SelectedFontColorProperty = BindableProperty.Create("SelectedFontColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create("SelectedTextColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
         /// <summary>
         /// Gets or sets the color of the selected font.
         /// </summary>
         /// <value>The color of the selected font.</value>
-        public Color SelectedFontColor
+        public Color SelectedTextColor
         {
-            get { return (Color)GetValue(SelectedFontColorProperty); }
-            set { SetValue(SelectedFontColorProperty, value); }
+            get { return (Color)GetValue(SelectedTextColorProperty); }
+            set { SetValue(SelectedTextColorProperty, value); }
         }
 
 
@@ -234,17 +276,32 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// OBSOLETE: Use TrailingIconProperty
+        /// </summary>
+        [Obsolete("Use TrailingIconProperty")]
+        public static readonly BindableProperty TrailingImageProperty = null;
+        /// <summary>
+        /// OBSOLETE: Use TrailingIcon
+        /// </summary>
+        [Obsolete("Use TrailingIcon")]
+        public bool TrailingImage
+        {
+            get { throw new NotSupportedException("Use TrailingIcon"); }
+            set { throw new NotSupportedException("Use TrailingIcon"); }
+        }
+
+        /// <summary>
         /// Backing store for the trailing image property.
         /// </summary>
-        public static readonly BindableProperty TrailingImageProperty = BindableProperty.Create("TrailingImage", typeof(bool), typeof(MaterialSegmentedControl), default(bool));
+        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create("TrailingIcon", typeof(bool), typeof(MaterialSegmentedControl), default(bool));
         /// <summary>
         /// Gets or sets if the image is to be rendered after the text.
         /// </summary>
         /// <value>default=false</value>
-        public bool TrailingImage
+        public bool TrailingIcon
         {
-            get { return (bool)GetValue(TrailingImageProperty); }
-            set { SetValue(TrailingImageProperty, value); }
+            get { return (bool)GetValue(TrailingIconProperty); }
+            set { SetValue(TrailingIconProperty, value); }
         }
 
         /// <summary>
@@ -275,18 +332,28 @@ namespace Forms9Patch
             set { SetValue(HapticModeProperty, value); }
         }
 
+        [Obsolete("Use TintIconProperty")]
+        public static readonly BindableProperty TintImageProperty = null;
+        [Obsolete("Use TintIcon")]
+        public bool TintImage
+        {
+            get { throw new NotSupportedException("Use TintIcon"); }
+            set { throw new NotSupportedException("Use TintIcon"); }
+        }
+
+
         /// <summary>
         /// The tint image property backing store.
         /// </summary>
-        public static readonly BindableProperty TintImageProperty = BindableProperty.Create("TintImage", typeof(bool), typeof(MaterialSegmentedControl), true);
+        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(MaterialSegmentedControl), true);
         /// <summary>
-        /// Will the FontColor be applied to the ImageSource image?
+        /// Will the TextColor be applied to the IconImage image?
         /// </summary>
-        /// <value><c>true</c> tint ImageSource image with FontColor; otherwise, <c>false</c>.</value>
-        public bool TintImage
+        /// <value><c>true</c> tint IconImage image with TextColor; otherwise, <c>false</c>.</value>
+        public bool TintIcon
         {
-            get { return (bool)GetValue(TintImageProperty); }
-            set { SetValue(TintImageProperty, value); }
+            get { return (bool)GetValue(TintIconProperty); }
+            set { SetValue(TintIconProperty, value); }
         }
 
         /// <summary>
@@ -470,16 +537,16 @@ namespace Forms9Patch
             button.GroupToggleBehavior = GroupToggleBehavior;
             button.HorizontalOptions = LayoutOptions.FillAndExpand;
             button.VerticalOptions = LayoutOptions.FillAndExpand;
-            if (segment.FontColor == Color.Default)
-                segment.MaterialButton.FontColor = FontColor;
-            button.SelectedFontColor = SelectedFontColor;
-            button.TintImage = TintImage;
+            if (segment.TextColor == Color.Default)
+                segment.MaterialButton.TextColor = TextColor;
+            button.SelectedTextColor = SelectedTextColor;
+            button.TintIcon = TintIcon;
             button.HasTightSpacing = HasTightSpacing;
             button.HorizontalTextAlignment = HorizontalTextAlignment;
             button.VerticalTextAlignment = VerticalTextAlignment;
             if (!segment.FontAttributesSet)
                 segment.MaterialButton.FontAttributes = FontAttributes;
-            button.TrailingImage = TrailingImage;
+            button.TrailingIcon = TrailingIcon;
             button.HapticMode = HapticMode;
             button.HapticEffect = HapticEffect;
             button.Spacing = IntraSegmentSpacing;
@@ -517,14 +584,14 @@ namespace Forms9Patch
             int count = Children.Count;
             if (count > 1)
             {
-                ((MaterialButton)Children[0]).SegmentType = ButtonShape.SegmentStart;
+                ((IShape)Children[0]).ElementShape = ElementShape.SegmentStart;
                 for (int i = 1; i < count - 1; i++)
-                    ((MaterialButton)Children[i]).SegmentType = ButtonShape.SegmentMid;
-                ((MaterialButton)Children[count - 1]).SegmentType = ButtonShape.SegmentEnd;
+                    ((IShape)Children[i]).ElementShape = ElementShape.SegmentMid;
+                ((IShape)Children[count - 1]).ElementShape = ElementShape.SegmentEnd;
             }
             else if (count == 1)
             {
-                ((MaterialButton)Children[0]).SegmentType = ButtonShape.Rectangle;
+                ((IShape)Children[0]).ElementShape = ElementShape.Rectangle;
             }
             UpdateChildrenPadding();
         }
@@ -565,17 +632,19 @@ namespace Forms9Patch
             button.LongPressed -= OnSegmentLongPressed;
         }
 
+    
         void UpdateChildrenPadding()
         {
-            if (Orientation == StackOrientation.Horizontal)
-            {
+            //if (Orientation == StackOrientation.Horizontal)
+            //{
                 foreach (MaterialButton child in Children)
                     child.Padding = Padding;
+                /*
             }
             else
             {
 
-                foreach (MaterialButton child in Children)
+                foreach (ILayout child in Children)
                 {
                     double plaformTweek = 0;
                     switch (Device.OS)
@@ -590,12 +659,13 @@ namespace Forms9Patch
                             plaformTweek = -1;
                             break;
                     }
-                    switch (child.SegmentType)
+                    //TODO: Can we elimenate "platformTweek"?
+                    switch (child.ElementShape)
                     {
-                        case ButtonShape.SegmentStart:
+                        case ElementShape.SegmentStart:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
-                        case ButtonShape.SegmentMid:
+                        case ElementShape.SegmentMid:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
                         default:
@@ -605,6 +675,7 @@ namespace Forms9Patch
                 }
 
             }
+            */
         }
         #endregion
 
@@ -647,6 +718,8 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (Orientation == StackOrientation.Vertical)
+                System.Diagnostics.Debug.WriteLine("["+GetType()+"]["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] propertyName=["+propertyName+"]");
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == GroupToggleBehaviorProperty.PropertyName)
@@ -657,24 +730,24 @@ namespace Forms9Patch
                 }
             else if (propertyName == PaddingProperty.PropertyName)
                 UpdateChildrenPadding();
-            else if (propertyName == FontColorProperty.PropertyName)
+            else if (propertyName == TextColorProperty.PropertyName)
             {
                 if (Segments != null)
                     foreach (Segment segment in Segments)
-                        if (segment.FontColor == Color.Default)
-                            segment.MaterialButton.FontColor = FontColor;
+                        if (segment.TextColor == Color.Default)
+                            segment.MaterialButton.TextColor = TextColor;
             }
-            else if (propertyName == SelectedFontColorProperty.PropertyName)
+            else if (propertyName == SelectedTextColorProperty.PropertyName)
             {
                 if (Segments != null)
                     foreach (Segment segment in Segments)
-                        segment.MaterialButton.SelectedFontColor = SelectedFontColor;
+                        segment.MaterialButton.SelectedTextColor = SelectedTextColor;
             }
-            else if (propertyName == TintImageProperty.PropertyName)
+            else if (propertyName == TintIconProperty.PropertyName)
             {
                 if (Segments != null)
                     foreach (Segment segment in Segments)
-                        segment.MaterialButton.TintImage = TintImage;
+                        segment.MaterialButton.TintIcon = TintIcon;
             }
             else if (propertyName == HasTightSpacingProperty.PropertyName)
             {
@@ -725,10 +798,20 @@ namespace Forms9Patch
             else if (propertyName == FontSizeProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.FontSize = FontSize;
-            else if (propertyName == HasShadowProperty.PropertyName)
+            else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
+            {
+                //var ignore = IgnoreShapePropertiesChanges;
+                //IgnoreShapePropertiesChanges = true;
                 foreach (MaterialButton button in Children)
+                {
+                    //var buttonIgnore = button.IgnoreShapePropertiesChanges;
+                    //button.IgnoreShapePropertiesChanges = true;
                     button.HasShadow = HasShadow;
-
+                    //button.IgnoreShapePropertiesChanges = button.IgnoreShapePropertiesChanges;
+                }
+                //IgnoreShapePropertiesChanges = ignore;
+                InvalidateLayout();
+            }
             else if (propertyName == OrientationProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.ParentSegmentsOrientation = Orientation;
@@ -738,9 +821,9 @@ namespace Forms9Patch
             else if (propertyName == SeparatorWidthProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.SeparatorWidth = SeparatorWidth;
-            else if (propertyName == TrailingImageProperty.PropertyName)
+            else if (propertyName == TrailingIconProperty.PropertyName)
                 foreach (MaterialButton button in Children)
-                    button.TrailingImage = TrailingImage;
+                    button.TrailingIcon = TrailingIcon;
             else if (propertyName == HapticEffectProperty.PropertyName)
                 foreach (MaterialButton button in Children)
                     button.HapticEffect = HapticEffect;
@@ -805,10 +888,14 @@ namespace Forms9Patch
             var hz = Orientation == StackOrientation.Horizontal;
             var vt = !hz;
 
-            double requestHeight = 0;
-            double requestWidth = 0;
-            double minHeight = 0;
-            double minWidth = 0;
+            var shadowPadding = new Thickness(0);
+            if (HasShadow && BackgroundColor.A > 0 && Children.Count>0)
+                shadowPadding = ShapeBase.ShadowPadding(this, HasShadow);
+
+            double requestHeight = shadowPadding.VerticalThickness;
+            double requestWidth = shadowPadding.HorizontalThickness;
+            double minHeight = shadowPadding.VerticalThickness;
+            double minWidth = shadowPadding.HorizontalThickness;
 
             if (hz )//&& (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint)) )
             {
@@ -854,21 +941,27 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //System.Diagnostics.Debug.WriteLine("width[" + width + "] height[" + height + "]");
+            //if ((bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty))
+            //    return;
 
-            var p = new Thickness(0);
+
+            var shadowPadding = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0)
-                p = RoundedBoxBase.ShadowPadding(this);
-            //System.Diagnostics.Debug.WriteLine("p=" + p.Description());
+                shadowPadding = ShapeBase.ShadowPadding(this, HasShadow);
 
             var hz = Orientation == StackOrientation.Horizontal;
             var vt = !hz;
-            var newWidth = width - p.HorizontalThickness;
-            var newHeight = height - p.VerticalThickness;
+            var newWidth = width - shadowPadding.HorizontalThickness;
+            var newHeight = height - shadowPadding.VerticalThickness;
 
-            //System.Diagnostics.Debug.WriteLine("newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
+            if (vt)
+            {
+                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] width[" + width + "] height[" + height + "]");
+                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] shadowPadding=" + shadowPadding.Description());
+                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
+            }
 
-            var topPage = this.TopPage();
+            //var topPage = this.TopPage();
 
 
             int count = Children.Count;
@@ -883,8 +976,8 @@ namespace Forms9Patch
                 var outlineWidth = OutlineWidth / Display.Scale;
                 double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
                 double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
-                double sWidth = hz ? xOffset : width;
-                double sHeight = vt ? yOffset : height;
+                double segmentWidth = hz ? xOffset : width;
+                double segmentHeight = vt ? yOffset : height;
 
                 //System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
 
@@ -896,18 +989,18 @@ namespace Forms9Patch
                         double thisW, thisH;
                         if (i == 0)
                         {
-                            thisW = sWidth + (hz ? p.Left : 0);
-                            thisH = sHeight + (vt ? p.Top : 0);
+                            thisW = segmentWidth + (hz ? shadowPadding.Left : 0);
+                            thisH = segmentHeight + (vt ? shadowPadding.Top : 0);
                         }
                         else if (i == count - 1)
                         {
-                            thisW = hz ? width - x : sWidth;
-                            thisH = vt ? height - y : sHeight;
+                            thisW = hz ? width - x : segmentWidth;
+                            thisH = vt ? height - y : segmentHeight;
                         }
                         else
                         {
-                            thisW = sWidth;
-                            thisH = sHeight;
+                            thisW = segmentWidth;
+                            thisH = segmentHeight;
                         }
 
                         // Math.Round with Display.Scale fixes UWP layout gaps but not UWP SkiaRoundedBoxView gaps
@@ -925,8 +1018,8 @@ namespace Forms9Patch
                             //thisH = Math.Floor(height - y);
                             thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
-                        //if (vt)
-                        //System.Diagnostics.Debug.WriteLine("MaterialSegmentedControl.LayoutChildren LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
+                        if (vt)
+                            System.Diagnostics.Debug.WriteLine("["+GetType()+"."+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
                         x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
                         y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
                         //x = Math.Round(x + (hz ? thisW : 0));

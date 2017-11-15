@@ -38,11 +38,11 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                     },
-                    Image = new Forms9Patch.Image
+                    IconImage = new Forms9Patch.Image
                     {
                         Source = ImageSource.FromFile("five.png"),
                     },
-                    FontColor = Color.White,
+                    TextColor = Color.White,
                     Text = "Sticky w/ SelectedState",
                 },
                 SelectedState = new Forms9Patch.ImageButtonState
@@ -51,7 +51,7 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image"),
                     },
-                    FontColor = Color.Red,
+                    TextColor = Color.Red,
                     Text = "Selected",
                 },
                 ToggleBehavior = true,
@@ -72,11 +72,11 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                     },
-                    Image = new Forms9Patch.Image
+                    IconImage = new Forms9Patch.Image
                     {
                         Source = ImageSource.FromFile("five.png"),
                     },
-                    FontColor = Color.FromRgb(0.0, 0.0, 0.8),
+                    TextColor = Color.FromRgb(0.0, 0.0, 0.8),
                     Text = "Sticky w/o SelectedState",
                 },
                 PressingState = new Forms9Patch.ImageButtonState
@@ -103,11 +103,11 @@ namespace Forms9PatchDemo
                     {
                         Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
                     },
-                    Image = new Forms9Patch.Image
+                    IconImage = new Forms9Patch.Image
                     {
                         Source = ImageSource.FromFile("five.png"),
                     },
-                    FontColor = Color.White,
+                    TextColor = Color.White,
                     Text = "Not toggle",
                 },
                 //ToggleBehavior = true,
