@@ -66,7 +66,6 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
-                        /*
                         new Label { Text = "f9p: mulitresource: button" },
                         new Forms9Patch.Image { 
 							Source =Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"), 
@@ -133,6 +132,7 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
+                                                /*
 
                          */
 						#endregion

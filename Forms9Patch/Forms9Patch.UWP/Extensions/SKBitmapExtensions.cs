@@ -19,9 +19,10 @@ namespace Forms9Patch.UWP
         static readonly Dictionary<string, F9PBitmap> _cache = new Dictionary<string, F9PBitmap>();
         static readonly Dictionary<string, List<SkiaRoundedBoxAndImageView>> _views = new Dictionary<string, List<SkiaRoundedBoxAndImageView>>();
         static readonly object _constructorLock = new object();
-        static readonly Dictionary<string, object> _locks = new Dictionary<string, object>();
+        //static readonly Dictionary<string, object> _locks = new Dictionary<string, object>();
+        static readonly Dictionary<string, SemaphoreSlim> _locks = new Dictionary<string, SemaphoreSlim>();
 
-        #pragma warning disable 1998
+#pragma warning disable 1998
         internal static async Task<F9PBitmap> FetchF9PBitmap(this Xamarin.Forms.ImageSource imageSource, SkiaRoundedBoxAndImageView view, CancellationToken cancellationToken = new CancellationToken())
 #pragma warning restore 1998
         {
@@ -40,8 +41,11 @@ namespace Forms9Patch.UWP
                 else
                 {
                     if (!_locks.ContainsKey(key))
-                        _locks[key] = new object();
-                    lock (_locks[key])
+                        //_locks[key] = new object();
+                        _locks[key] = new SemaphoreSlim(1, 1);
+                    //lock (_locks[key])
+                    await _locks[key].WaitAsync();
+                    try
                     {
                         SKBitmap skBitmap = null;
                         string path = null;
@@ -54,7 +58,7 @@ namespace Forms9Patch.UWP
                                 skBitmap = SKBitmap.Decode(skStream);
                         }
                         else if (key.StartsWith("uri:"))
-                            path = PCL.Utils.FileCache.Download(key.Substring(4));
+                            path = await PCL.Utils.FileCache.DownloadAsync(key.Substring(4));
                         else if (key.StartsWith("file:"))
                             path = key.Substring(5);
                         else
@@ -74,6 +78,12 @@ namespace Forms9Patch.UWP
                                 _views[key] = new List<SkiaRoundedBoxAndImageView>();
                             _views[key].Add(view);
                         }
+                    }
+                    finally
+                    {
+                        _locks[key].Release();
+                        if (f9pBitmap?.SKBitmap == null)
+                            _locks.Remove(key);
                     }
                 }
             }
