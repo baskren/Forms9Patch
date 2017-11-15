@@ -22,7 +22,7 @@ namespace Forms9Patch.UWP
 
         private F9PBitmap(SKBitmap skBitamp, string key)
         {
-            if (key!=null && key.ToLower().EndsWith("9.png"))
+            //if (key!=null && key.ToLower().EndsWith("9.png"))
                 RangeLists = skBitamp.PatchRanges();
             if (RangeLists?.PatchesX!=null && RangeLists.PatchesX.Count>0 && RangeLists.PatchesY!=null && RangeLists.PatchesY.Count>0)
             {

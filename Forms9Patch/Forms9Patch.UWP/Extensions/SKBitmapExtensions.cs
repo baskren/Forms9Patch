@@ -226,6 +226,10 @@ namespace Forms9Patch.UWP
                 capsY.Add(range);
             }
 
+            if (capsX.Count < 1 && capsY.Count < 1)
+                return null;
+
+
             var margX = null as Range;
             pos = -1;
             for (int i = 0; i < bitmap.Width - 2; i++)
@@ -283,6 +287,7 @@ namespace Forms9Patch.UWP
                     }
                 }
             }
+
 
             var rangeLists = new RangeLists();
             rangeLists.PatchesX = capsX;

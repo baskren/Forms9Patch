@@ -28,7 +28,6 @@ namespace Forms9PatchDemo
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
                         
-                        /*
                         
 						new Label { Text = "f9p: multiresource: adsBttn29" },
 						new Forms9Patch.Image {
@@ -54,7 +53,6 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
-                        
                         new Label { Text = "xf: multiresource: redribbon" },
                         new Image { 
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
@@ -68,6 +66,7 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
+                        /*
                         new Label { Text = "f9p: mulitresource: button" },
                         new Forms9Patch.Image { 
 							Source =Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"), 
@@ -134,7 +133,11 @@ namespace Forms9PatchDemo
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
+
+                         */
 						#endregion
+
+                                                /*
 
 						#region Image
 

@@ -224,7 +224,7 @@
     <EmbeddedResource Include="Resources\tick%402x.png" />
     <EmbeddedResource Include="Resources\tick%403x.png" />
     <EmbeddedResource Include="Resources\adsBttn29.png" />
-    <EmbeddedResource Include="Resources\bluebutton_psd.png" />
+    <EmbeddedResource Include="Resources\bluebutton_psd.9.png" />
     <EmbeddedResource Include="UserPages\Burkhart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
