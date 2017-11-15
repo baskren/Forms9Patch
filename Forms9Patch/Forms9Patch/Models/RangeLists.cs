@@ -34,15 +34,19 @@ namespace Forms9Patch
                 int offset = ninePatchSource ? 1 : 0;
                 bool normalized = (capInsets.Left <= 1 && capInsets.Right <= 1);
                 var scale = (float)imageSource.GetValue(ImageSource.ImageScaleProperty);
-                var capsX = new List<Range> {new Range {
+                var capsX = new List<Range>();
+                if (capInsets.Left > 0 || capInsets.Right > 0)
+                    capsX.Add(new Range {
                         Start = capInsets.Left * (normalized ?  bitmapWidth : scale) + offset,
-                        End = bitmapWidth - capInsets.Right * (normalized ? bitmapWidth :  scale) + offset
-                    }};
+                        End = bitmapWidth - 1 - capInsets.Right * (normalized ? bitmapWidth :  scale) + offset
+                    });
                 normalized = (capInsets.Top <= 1 && capInsets.Bottom <= 1);
-                var capsY = new List<Range> {new Range {
-                        Start = capInsets.Top * (normalized ? bitmapHeight :  scale) + offset,
-                        End = bitmapHeight - capInsets.Bottom * (normalized ? bitmapHeight :  scale) + offset,
-                    }};
+                var capsY = new List<Range>();
+                if (capInsets.Top > 0 || capInsets.Bottom > 0)  
+                    capsY.Add(new Range { 
+                            Start = capInsets.Top * (normalized ? bitmapHeight :  scale) + offset,
+                            End = bitmapHeight -1  - capInsets.Bottom * (normalized ? bitmapHeight :  scale) + offset,
+                        });
                 return new RangeLists
                 {
                     PatchesX = capsX,

@@ -685,7 +685,23 @@ namespace Forms9Patch.UWP
             canvas.Save();
             canvas.ClipPath(clipPath);
 
-            var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.SKBitmap.Width, _sourceBitmap.SKBitmap.Height, _xfImageSource, _sourceRangeLists!=null) ?? _sourceRangeLists;
+            var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.SKBitmap.Width, _sourceBitmap.SKBitmap.Height, _xfImageSource, _sourceRangeLists != null);
+            if (rangeLists==null)
+                rangeLists = _sourceRangeLists;
+            //else
+            //    System.Diagnostics.Debug.WriteLine("");
+
+            if (rangeLists != null)
+            {
+                if (rangeLists.PatchesX.Count == 1 && rangeLists.PatchesX[0].Start <= 0 && rangeLists.PatchesX[0].End >= _sourceBitmap.SKBitmap.Width-1)
+                    rangeLists.PatchesX.Clear();
+                if (rangeLists.PatchesY.Count == 1 && rangeLists.PatchesY[0].Start <= 0 && rangeLists.PatchesY[0].End >= _sourceBitmap.SKBitmap.Height-1)
+                    rangeLists.PatchesY.Clear();
+                if (rangeLists.PatchesX.Count == 0 && rangeLists.PatchesY.Count == 0)
+                    rangeLists = null;
+            }
+                    
+                
 
             var bitmap = _sourceBitmap;
 

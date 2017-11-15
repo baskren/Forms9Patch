@@ -63,6 +63,7 @@ namespace Forms9PatchDemo
                         new Forms9Patch.Image {
 							Source = ImageSource.FromUri(new Uri("http://buildcalc.com/forms9patch/demo/redribbon.png")),
 							CapInsets = new Thickness(23,0,111,0),
+                            //CapInsets = new Thickness(0.1,0, 0.1, 0)
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
                         
@@ -83,7 +84,7 @@ namespace Forms9PatchDemo
                         new Label { Text = "f9p: multiresource: redribbon + CAPSINSET" },
                         new Forms9Patch.Image { 
 							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
-							CapInsets = new Thickness(23.0/308.0,-1,111.0/308.0,-1),
+							CapInsets = new Thickness(23.0/308.0,0,111.0/308.0,0),
 						},
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
