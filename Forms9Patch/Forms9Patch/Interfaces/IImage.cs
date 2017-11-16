@@ -14,6 +14,10 @@ namespace Forms9Patch
         /// </summary>
         Xamarin.Forms.ImageSource Source { get; set; }
 
+        bool IsLoading { get; }
+
+        //bool IsOpaque { get; set; }
+
         Forms9Patch.Fill Fill { get; set; }
 
         Xamarin.Forms.Thickness CapInsets { get; set; }

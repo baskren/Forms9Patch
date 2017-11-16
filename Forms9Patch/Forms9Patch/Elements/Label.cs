@@ -145,6 +145,11 @@ namespace Forms9Patch
             _id = instances++;
             //_listener = FormsGestures.Listener.For(this);
         }
+
+        public Label(string text) :this ()
+        {
+            Text = text;
+        }
         #endregion
 
 

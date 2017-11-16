@@ -9,11 +9,52 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Image element.
     /// </summary>
-    public class Image : Xamarin.Forms.Image, IImage
+    public class Image : View, IImage, IImageController //, IElementConfiguration<Image> //Xamarin.Forms.Image, IImage
     {
+        #region Properties
+
+        #region IImageController
+        internal static readonly BindablePropertyKey IsLoadingPropertyKey = BindableProperty.CreateReadOnly("IsLoading", typeof(bool), typeof(Image), default(bool));
+
+        void IImageController.SetIsLoading(bool isLoading)
+        {
+            SetValue(IsLoadingPropertyKey, isLoading);
+        }
+        #endregion
+
         #region IImage Properties
 
+        #region Source property
+        /// <summary>
+        /// backing store for Source property
+        /// </summary>
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
+        /// <summary>
+        /// Gets/Sets the Source property
+        /// </summary>
+        public Xamarin.Forms.ImageSource Source
+        {
+            get { return (Xamarin.Forms.ImageSource)GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
+        }
+        #endregion Source property
+
+        #region IsLoading property
+        /// <summary>
+        /// backing store for IsLoading property
+        /// </summary>
+		public static readonly BindableProperty IsLoadingProperty = IsLoadingPropertyKey.BindableProperty;
+        /// <summary>
+        /// Gets/Sets the IsLoading property
+        /// </summary>
+        public bool IsLoading
+        {
+            get { return (bool)GetValue(IsLoadingProperty); }
+        }
+        #endregion IsLoading property
+
         #region Fill
+        /*
         /// <summary>
         /// UNSUPPORTED INHERITED PROPERTY. See <see cref="Forms9Patch.Fill"/>.
         /// </summary>
@@ -26,12 +67,12 @@ namespace Forms9Patch
         {
             get { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
             set { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
-        }
+        }*/
 
         /// <summary>
         /// Backing store for the Fill bindable property.
         /// </summary>
-        public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Fill), typeof(Image), Fill.None);
+        public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Fill), typeof(Image), Fill.Fill);
         /// <summary>
         /// Fill behavior for nonscalable (not NinePatch or CapInsets not set) image. 
         /// </summary>
@@ -116,13 +157,26 @@ namespace Forms9Patch
 
         #region IShape
 
-        // BackgroundColor inherited from VisualElement
+        #region BackgroundColor property
+        /// <summary>
+        /// backing store for BackgroundColor property
+        /// </summary>
+        public static new readonly BindableProperty BackgroundColorProperty = ShapeBase.BackgroundColorProperty;
+        /// <summary>
+        /// Gets/Sets the BackgroundColor property
+        /// </summary>
+        public new Color BackgroundColor
+        {
+            get { return (Color)GetValue(BackgroundColorProperty); }
+            set { SetValue(BackgroundColorProperty, value); }
+        }
+        #endregion BackgroundColor property
 
         #region HasShadow property
         /// <summary>
         /// Backing store for HasShadow property
         /// </summary>
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(Image), default(bool));
+        public static readonly BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty; // = BindableProperty.Create("HasShadow", typeof(bool), typeof(Image), default(bool));
         /// <summary>
         /// Get/sets if the shape (if any) behind the image has a shadow
         /// </summary>
@@ -137,7 +191,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for ShadowInverted property
         /// </summary>
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(Image), default(bool));
+        public static readonly BindableProperty ShadowInvertedProperty = ShapeBase.ShadowInvertedProperty; // = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(Image), default(bool));
         /// <summary>
         /// Gets/Sets the ShadowInverted property
         /// </summary>
@@ -152,7 +206,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for OutlineColor property
         /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(Image), default(Color));
+        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty; // = BindableProperty.Create("OutlineColor", typeof(Color), typeof(Image), default(Color));
         /// <summary>
         /// Gets/Sets the OutlineColor property
         /// </summary>
@@ -167,7 +221,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for OutlineRadius property
         /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(Image), default(float));
+        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty; // = BindableProperty.Create("OutlineRadius", typeof(float), typeof(Image), default(float));
         /// <summary>
         /// Gets/Sets the OutlineRadius property
         /// </summary>
@@ -182,7 +236,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for OutlineWidth property
         /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineWidth", typeof(float), typeof(Image), -1f);
+        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;// = BindableProperty.Create("OutlineWidth", typeof(float), typeof(Image), -1f);
         /// <summary>
         /// Gets/Sets the OutlineWidth property
         /// </summary>
@@ -195,18 +249,33 @@ namespace Forms9Patch
 
         #region ElementShape property
         /// <summary>
-        /// backing store for ElementShape property
+        /// Backing store for the ElementShape property
         /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(Image), default(ElementShape));
+        public static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
         /// <summary>
-        /// Gets/Sets the ElementShape property
+        /// Gets/sets the geometry of the element
         /// </summary>
-        ElementShape IShape.ElementShape
+        public ElementShape ElementShape
         {
             get { return (ElementShape)GetValue(ElementShapeProperty); }
             set { SetValue(ElementShapeProperty, value); }
         }
         #endregion ElementShape property
+
+        #region ExtendedElementShape property
+        /// <summary>
+        /// backing store for ExtendedElementShape property
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;// = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(Image), default(ExtendedElementShape));
+        /// <summary>
+        /// Gets/Sets the ExtendedElementShape property
+        /// </summary>
+        ExtendedElementShape IShape.ExtendedElementShape
+        {
+            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
+            set { SetValue(ExtendedElementShapeProperty, value); }
+        }
+        #endregion ExtendedElementShape property
 
         #region IgnoreShapePropertiesChanges
         /// <summary>
@@ -233,21 +302,41 @@ namespace Forms9Patch
 
         #endregion IImage
 
+        #endregion Properties
 
-        #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Image"/> class.
-        /// </summary>
-        public Image()
-        {
-            //base.Fill = Xamarin.Forms.Aspect.Fill;
-            _instances = 0;
-        }
 
+        #region Fields
         int _instances;
         int _f9pId;
 
+        #endregion
 
+        #region Constructors
+        /// <summary>
+        /// Instantiates a new instance of the <see cref="Image"/> class.
+        /// </summary>
+        public Image()
+        {
+            _instances = 0;
+        }
+
+        /// <summary>
+        /// Instantiates a new instance of Image from an MultiResource embedded resource
+        /// </summary>
+        /// <param name="embeddedResourceId"></param>
+        public Image(string embeddedResourceId) : this()
+        {
+            Source = Forms9Patch.ImageSource.FromMultiResource(embeddedResourceId);
+        }
+
+        /// <summary>
+        /// Instantiates a new instance of Image from an imageSource
+        /// </summary>
+        /// <param name="imageSource"></param>
+        public Image(Xamarin.Forms.ImageSource imageSource) : this()
+        {
+            Source = imageSource;
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="Image"/> class.
         /// </summary>
@@ -256,7 +345,7 @@ namespace Forms9Patch
         {
             _f9pId = _instances++;
             Fill = image.Aspect.ToF9pFill();
-            IsOpaque = image.IsOpaque;
+            //IsOpaque = image.IsOpaque;
             HorizontalOptions = image.HorizontalOptions;
             VerticalOptions = image.VerticalOptions;
             AnchorX = image.AnchorX;

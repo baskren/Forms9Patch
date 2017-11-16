@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    static class ButtonShapeExtensions
+    static class ElementShapeExtensions
     {
-        public static ElementShape ToElementShape(this ButtonShape buttonShape)
+        public static ExtendedElementShape ToExtendedElementShape(this ElementShape buttonShape)
         {
             switch(buttonShape)
             {
-                case ButtonShape.Square:        return ElementShape.Square;
-                case ButtonShape.Rectangle:     return ElementShape.Rectangle;
-                case ButtonShape.Circle:        return ElementShape.Circle;
-                case ButtonShape.Elliptical:    return ElementShape.Elliptical;
-                case ButtonShape.Obround:       return ElementShape.Obround;
+                case ElementShape.Square:        return ExtendedElementShape.Square;
+                case ElementShape.Rectangle:     return ExtendedElementShape.Rectangle;
+                case ElementShape.Circle:        return ExtendedElementShape.Circle;
+                case ElementShape.Elliptical:    return ExtendedElementShape.Elliptical;
+                case ElementShape.Obround:       return ExtendedElementShape.Obround;
             }
-            throw new NotSupportedException("ButtonShape ["+buttonShape+"] cannot be converted to ElementShape");
+            throw new NotSupportedException("ElementShape ["+buttonShape+"] cannot be converted to ExtendedElementShape");
         }
     }
 }

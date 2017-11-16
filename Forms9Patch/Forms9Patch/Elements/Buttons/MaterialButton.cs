@@ -364,20 +364,6 @@ namespace Forms9Patch
         }
         #endregion Orientation
 
-        #region ButtonShape property
-        public static readonly BindableProperty ButtonShapeProperty = BindableProperty.Create("ButtonShape", typeof(ButtonShape), typeof(MaterialButton), default(ButtonShape),
-            propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
-            {
-                ((IShape)bindable).ElementShape = ((ButtonShape)newValue).ToElementShape();
-            })
-            );
-        public ButtonShape ButtonShape
-        {
-            get { return (ButtonShape)GetValue(ButtonShapeProperty); }
-            set { SetValue(ButtonShapeProperty, value); }
-        }
-        #endregion ButtonShape property
-
         #region IBackground 
 
         // BackgroundImage inherited
@@ -431,6 +417,8 @@ namespace Forms9Patch
         #endregion OutlineWidth
 
         // ElementShape inherited from Forms9Patch.Frame
+
+        // ExtendedElementShape inherited from Forms9Patch.Frame
 
         #endregion IShape
 
@@ -694,10 +682,10 @@ namespace Forms9Patch
         /// <summary>
         /// 
         /// </summary>
-        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ElementShape), typeof(MaterialButton), ElementShape.Rectangle);
-        internal ElementShape SegmentType
+        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ExtendedElementShape), typeof(MaterialButton), ExtendedElementShape.Rectangle);
+        internal ExtendedElementShape SegmentType
         {
-            get { return (ElementShape)GetValue(SegmentTypeProperty); }
+            get { return (ExtendedElementShape)GetValue(SegmentTypeProperty); }
             set { SetValue(SegmentTypeProperty, value); }
         }
         */
@@ -980,7 +968,7 @@ namespace Forms9Patch
                         _label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
                     }
                 }
-                //if (ButtonShape == ElementShape.Rectangle)
+                //if (ElementShape == ExtendedElementShape.Rectangle)
                 if (!this.IsSegment())
                 {
                     base.HasShadow = false;
@@ -1166,7 +1154,7 @@ namespace Forms9Patch
         void SetStackLayoutPadding()
         {
             var padding = OutlineWidth / Display.Scale;
-            if (!this.IsSegment() || ((IShape)this).ElementShape == ElementShape.SegmentEnd)
+            if (!this.IsSegment() || ((IShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd)
                 _stackLayout.Padding = padding;
             else
             {
@@ -1319,7 +1307,7 @@ namespace Forms9Patch
 
             if (propertyName == OutlineWidthProperty.PropertyName
                 || propertyName == ParentSegmentsOrientationProperty.PropertyName
-                || propertyName == ElementShapeProperty.PropertyName)
+                || propertyName == ExtendedElementShapeProperty.PropertyName)
                 SetStackLayoutPadding();
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
@@ -1399,7 +1387,7 @@ namespace Forms9Patch
                 || propertyName == IsSelectedProperty.PropertyName
                 || propertyName == IsEnabledProperty.PropertyName
                 || propertyName == DarkThemeProperty.PropertyName
-                || propertyName == ElementShapeProperty.PropertyName)
+                || propertyName == ExtendedElementShapeProperty.PropertyName)
             {
                 UpdateElements();
             }

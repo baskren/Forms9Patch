@@ -72,7 +72,7 @@ namespace Forms9Patch.Droid
 
             var rect = new RectF(Bounds.Left, Bounds.Top, Bounds.Right, Bounds.Bottom); //new Rect(0, 0, width, height);
 
-            ElementShape segmentType = ElementShape.Rectangle;
+            ExtendedElementShape segmentType = ExtendedElementShape.Rectangle;
             var hz = true;
             if (RoundedBoxElement is MaterialButton materialButton)
             {
@@ -84,7 +84,7 @@ namespace Forms9Patch.Droid
 
             var vt = !hz;
 
-            float separatorWidth = materialButton == null || segmentType == ElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+            float separatorWidth = materialButton == null || segmentType == ExtendedElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
             if (RoundedBoxElement.BackgroundColor.A < 0.01 && (RoundedBoxElement.OutlineColor.A < 0.01 || (outlineWidth < 0.01 && separatorWidth < 0.01)))
                 return;
 
@@ -415,23 +415,23 @@ namespace Forms9Patch.Droid
             var radius = roundedBox.OutlineRadius * Display.Scale;
             var hz = materialButton == null || materialButton.ParentSegmentsOrientation == StackOrientation.Horizontal;
             var vt = !hz;
-            var segmentType = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
+            var segmentType = materialButton == null ? ExtendedElementShape.Rectangle : materialButton.SegmentType;
             switch (segmentType)
             {
-                case ElementShape.Rectangle:
+                case ExtendedElementShape.Rectangle:
                     boundary = RectInset(perimeter, offset);
                     break;
-                case ElementShape.SegmentStart:
+                case ExtendedElementShape.SegmentStart:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case ElementShape.SegmentMid:
+                case ExtendedElementShape.SegmentMid:
                     boundary = RectInset(perimeter, offset, offset, vt ? offset : 0, hz ? offset : 0);
                     break;
-                case ElementShape.SegmentEnd:
+                case ExtendedElementShape.SegmentEnd:
                     boundary = RectInset(perimeter, offset);
                     break;
             }
-            if (segmentType == ElementShape.Rectangle)
+            if (segmentType == ExtendedElementShape.Rectangle)
             {
                 if (roundedBox.IsElliptical)
                     result = Ellipse(boundary);
@@ -456,7 +456,7 @@ namespace Forms9Patch.Droid
         internal static CGPath PerimeterPath(IShape element, RectF rect, float radius, bool counterClockWise = true)
         {
             var materialButton = element as MaterialButton;
-            ElementShape type = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
+            ExtendedElementShape type = materialButton == null ? ExtendedElementShape.Rectangle : materialButton.SegmentType;
             StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var diameter = radius * 2;
@@ -473,7 +473,7 @@ namespace Forms9Patch.Droid
                 result.MoveTo((rect.Left + rect.Right) / 2.0f, rect.Top);
 
                 // topLeft
-                if (type == ElementShape.SegmentStart || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentStart || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Left + radius, rect.Top);
                     //result.AddRelativeArc (rect.Left + radius, rect.Top + radius, radius, (nfloat)(3 * Math.PI / 2.0), (nfloat)(-Math.PI / 2.0));
@@ -485,7 +485,7 @@ namespace Forms9Patch.Droid
                 }
 
                 // bottom left
-                if (type == ElementShape.SegmentStart && orientation == StackOrientation.Horizontal || type == ElementShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentStart && orientation == StackOrientation.Horizontal || type == ExtendedElementShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Left, rect.Bottom - radius);
                     //result.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI), (nfloat)(-Math.PI / 2.0));
@@ -495,7 +495,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Left, rect.Bottom);
 
                 // bottom right
-                if (type == ElementShape.SegmentEnd || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentEnd || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Right - radius, rect.Bottom);
                     //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, (nfloat)(Math.PI/2.0), (nfloat)(-Math.PI / 2.0));
@@ -505,7 +505,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Bottom);
 
                 // top right
-                if (type == ElementShape.SegmentEnd && orientation == StackOrientation.Horizontal || type == ElementShape.SegmentStart && orientation == StackOrientation.Vertical || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentEnd && orientation == StackOrientation.Horizontal || type == ExtendedElementShape.SegmentStart && orientation == StackOrientation.Vertical || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Right, rect.Top + radius);					
                     //result.AddArcToPoint (rect.Right, rect.Top - radius, rect.Right - radius, rect.Top, radius);
@@ -524,7 +524,7 @@ namespace Forms9Patch.Droid
                 result.MoveTo(rect.Left, (rect.Top + rect.Bottom) / 2.0f);
 
                 // topLeft
-                if (type == ElementShape.SegmentStart || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentStart || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Left, rect.Top + radius);
                     //result.AddRelativeArc (rect.Left + radius, rect.Top + radius, radius, (nfloat)(Math.PI), (nfloat)(Math.PI / 2.0));
@@ -536,7 +536,7 @@ namespace Forms9Patch.Droid
                 }
 
                 // top right
-                if (type == ElementShape.SegmentEnd || type == ElementShape.SegmentStart && orientation == StackOrientation.Vertical || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentEnd || type == ExtendedElementShape.SegmentStart && orientation == StackOrientation.Vertical || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Right - radius, rect.Top);
                     //result.AddRelativeArc (rect.Right - radius, rect.Top + radius, radius, (nfloat)(3*Math.PI/2.0), (nfloat)(Math.PI / 2.0));
@@ -546,7 +546,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Top);
 
                 // bottom right
-                if (type == ElementShape.SegmentEnd || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentEnd || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Right, rect.Bottom - radius);
                     //result.AddRelativeArc (rect.Right - radius, rect.Bottom - radius, radius, 0, (nfloat)(Math.PI / 2.0));
@@ -556,7 +556,7 @@ namespace Forms9Patch.Droid
                     result.LineTo(rect.Right, rect.Bottom);
 
                 // bottom left
-                if (type == ElementShape.SegmentStart || type == ElementShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ElementShape.Rectangle)
+                if (type == ExtendedElementShape.SegmentStart || type == ExtendedElementShape.SegmentEnd && orientation == StackOrientation.Vertical || type == ExtendedElementShape.Rectangle)
                 {
                     //result.LineTo (rect.Left + radius, rect.Bottom);
                     //result.AddRelativeArc(rect.Left + radius, rect.Bottom - radius, radius, (nfloat)(Math.PI / 2.0), (nfloat)(Math.PI / 2.0));
@@ -591,7 +591,7 @@ namespace Forms9Patch.Droid
 
 
             var materialButton = element as MaterialButton;
-            ElementShape type = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
+            ExtendedElementShape type = materialButton == null ? ExtendedElementShape.Rectangle : materialButton.SegmentType;
             StackOrientation orientation = materialButton == null ? StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var diameter = radius * 2;
@@ -602,7 +602,7 @@ namespace Forms9Patch.Droid
 
             var pathFigure = new CGPath();
 
-            if (type == ElementShape.Rectangle)
+            if (type == ExtendedElementShape.Rectangle)
             {
                 pathFigure.MoveToPoint((rect.Left + rect.Right) / 2, rect.Top);
                 pathFigure.AddLineToPoint(rect.Left + radius, rect.Top);
@@ -619,7 +619,7 @@ namespace Forms9Patch.Droid
                     pathFigure.ArcTo(topRight, 0, -90);
                 pathFigure.AddLineToPoint((rect.Left + rect.Right) / 2, rect.Top);
             }
-            else if (type == ElementShape.SegmentStart)
+            else if (type == ExtendedElementShape.SegmentStart)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -644,7 +644,7 @@ namespace Forms9Patch.Droid
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == ElementShape.SegmentMid)
+            else if (type == ExtendedElementShape.SegmentMid)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {
@@ -661,7 +661,7 @@ namespace Forms9Patch.Droid
                     pathFigure.AddLineToPoint(rect.Left, rect.Bottom);
                 }
             }
-            else if (type == ElementShape.SegmentEnd)
+            else if (type == ExtendedElementShape.SegmentEnd)
             {
                 if (orientation == StackOrientation.Horizontal)
                 {

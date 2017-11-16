@@ -32,6 +32,9 @@ namespace Forms9Patch
         object CommandParameter { get; set; }
 
         Xamarin.Forms.VisualElement VisualElement { get; }
+
+
+
     }
 
 }

@@ -322,7 +322,7 @@ namespace Forms9Patch
 
 
 
-        #region Constuctor
+        #region Constuctors
         /// <summary>
         /// Initializes a new instance of the <see cref="Segment"/> class.
         /// </summary>
@@ -362,6 +362,48 @@ namespace Forms9Patch
                         break;
                 }
             };
+        }
+
+        /// <summary>
+        /// Instantiates an new Segment and sets its Text and imageSource properties
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="imageSource"></param>
+        public Segment(string text, ImageSource imageSource=null) : this()
+        {
+            Text = text;
+            if (imageSource!=null)
+                IconImage = new Forms9Patch.Image(imageSource);
+        }
+
+        /// <summary>
+        /// Instantiates a new Segment and sets its Text and either its IconText or the embedded resource id of its IconImage
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="icon"></param>
+        public Segment(string text, string icon) : this()
+        {
+            Text = text;
+            bool isIconText=false;
+            if (icon.Contains("<") && icon.Contains("/>"))
+            {
+                int opens=0, closes=0;
+                for(int i=0;i<icon.Length;i++)
+                {
+                    if (icon[i] == '<')
+                        opens++;
+                    else if (icon[i]=='/' && (i+2)<icon.Length && icon[i+1]=='>')
+                    {
+                        closes++;
+                        i++;
+                    }
+                }
+                isIconText = opens > 0 && opens == closes;
+            }
+            if (isIconText)
+                IconText = icon;
+            else
+                IconImage = new Forms9Patch.Image(icon);
         }
         #endregion Constuctor
 

@@ -584,14 +584,14 @@ namespace Forms9Patch
             int count = Children.Count;
             if (count > 1)
             {
-                ((IShape)Children[0]).ElementShape = ElementShape.SegmentStart;
+                ((IShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
                 for (int i = 1; i < count - 1; i++)
-                    ((IShape)Children[i]).ElementShape = ElementShape.SegmentMid;
-                ((IShape)Children[count - 1]).ElementShape = ElementShape.SegmentEnd;
+                    ((IShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
+                ((IShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
             }
             else if (count == 1)
             {
-                ((IShape)Children[0]).ElementShape = ElementShape.Rectangle;
+                ((IShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
             UpdateChildrenPadding();
         }
@@ -660,12 +660,12 @@ namespace Forms9Patch
                             break;
                     }
                     //TODO: Can we elimenate "platformTweek"?
-                    switch (child.ElementShape)
+                    switch (child.ExtendedElementShape)
                     {
-                        case ElementShape.SegmentStart:
+                        case ExtendedElementShape.SegmentStart:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
-                        case ElementShape.SegmentMid:
+                        case ExtendedElementShape.SegmentMid:
                             child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
                             break;
                         default:

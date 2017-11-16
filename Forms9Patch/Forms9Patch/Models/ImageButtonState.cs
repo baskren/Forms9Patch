@@ -168,21 +168,21 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region ButtonShape property
-        internal bool ButtonShapeSet;
-        public static readonly BindableProperty ButtonShapeProperty = BindableProperty.Create("ButtonShape", typeof(ButtonShape), typeof(ImageButtonState), default(ButtonShape),
+        #region ElementShape property
+        internal bool ElementShapeSet;
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ImageButtonState), default(ElementShape),
             propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
             {
-                ((IShape)bindable).ElementShape = ((ButtonShape)newValue).ToElementShape();
-                ((ImageButtonState)bindable).ButtonShapeSet = true;
+                ((IShape)bindable).ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
+                ((ImageButtonState)bindable).ElementShapeSet = true;
             })
             );
-        public ButtonShape ButtonShape
+        public ElementShape ElementShape
         {
-            get { return (ButtonShape)GetValue(ButtonShapeProperty); }
-            set { SetValue(ButtonShapeProperty, value); }
+            get { return (ElementShape)GetValue(ElementShapeProperty); }
+            set { SetValue(ElementShapeProperty, value); }
         }
-        #endregion ButtonShape property
+        #endregion ElementShape property
 
         #region IBackground
 
@@ -335,14 +335,14 @@ namespace Forms9Patch
         }
         #endregion OutlineWidth
 
-        #region ElementShape property
-        internal static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ImageButtonState), default(ElementShape));
-        ElementShape IShape.ElementShape
+        #region ExtendedElementShape property
+        internal static readonly BindableProperty ExtendedElementShapeProperty = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(ImageButtonState), default(ExtendedElementShape));
+        ExtendedElementShape IShape.ExtendedElementShape
         {
-            get { return (ElementShape)GetValue(ElementShapeProperty); }
-            set { SetValue(ElementShapeProperty, value); }
+            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
+            set { SetValue(ExtendedElementShapeProperty, value); }
         }
-        #endregion ElementShape property
+        #endregion ExtendedElementShape property
 
         /*#region IgnoreShapePropertiesChanges
         /// <summary>
@@ -685,7 +685,7 @@ namespace Forms9Patch
             SpacingSet = source.SpacingSet;
             Orientation = source.Orientation;
             OrientationSet = source.OrientationSet;
-            ButtonShape = source.ButtonShape;
+            ElementShape = source.ElementShape;
 
             #region IBackground
 
@@ -704,7 +704,7 @@ namespace Forms9Patch
             OutlineRadiusSet = source.OutlineRadiusSet;
             OutlineWidth = source.OutlineWidth;
             OutlineWidthSet = source.OutlineWidthSet;
-            //ElementShape is set by ButtonShape setter.
+            //ExtendedElementShape is set by ElementShape setter.
             #endregion IShape
 
             #endregion IBackground

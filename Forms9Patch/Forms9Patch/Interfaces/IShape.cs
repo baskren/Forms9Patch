@@ -45,10 +45,14 @@ namespace Forms9Patch
 		float OutlineWidth { get; set; }
 
         /// <summary>
-        /// Gets or sets the shape of the button
+        /// For internal use only.  Goes beyond ElementShape to allow setting of segment shapes
+        /// </summary>
+        ExtendedElementShape ExtendedElementShape { get; set; }
+
+        /// <summary>
+        /// Gets or sets the geometry of the shape
         /// </summary>
         ElementShape ElementShape { get; set; }
-
       
         /// <summary>
         /// What is the shadow and pointer padding?

@@ -198,7 +198,20 @@ namespace Forms9Patch
 
         #region IShape
 
-        // BackgroundColor inherited from VisualElement
+        #region BackgroundColor property
+        /// <summary>
+        /// backing store for BackgroundColor property
+        /// </summary>
+        public static new readonly BindableProperty BackgroundColorProperty = ShapeBase.BackgroundColorProperty;
+        /// <summary>
+        /// Gets/Sets the BackgroundColor property
+        /// </summary>
+        public new Color BackgroundColor
+        {
+            get { return (Color)GetValue(BackgroundColorProperty); }
+            set { SetValue(BackgroundColorProperty, value); }
+        }
+        #endregion BackgroundColor property
 
         #region HasShadow property
 #if _Forms9Patch_Frame_
@@ -298,11 +311,11 @@ namespace Forms9Patch
 
         #region ElementShape property
         /// <summary>
-        /// backing store for ElementShape property
+        /// Backing store for the ElementShape property
         /// </summary>
         internal static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
         /// <summary>
-        /// Gets/Sets the ElementShape property
+        /// Gets/sets the geometry of the element
         /// </summary>
         ElementShape IShape.ElementShape
         {
@@ -310,6 +323,21 @@ namespace Forms9Patch
             set { SetValue(ElementShapeProperty, value); }
         }
         #endregion ElementShape property
+
+        #region ExtendedElementShape property
+        /// <summary>
+        /// backing store for ExtendedElementShape property
+        /// </summary>
+        internal static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;
+        /// <summary>
+        /// Gets/Sets the ExtendedElementShape property
+        /// </summary>
+        ExtendedElementShape IShape.ExtendedElementShape
+        {
+            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
+            set { SetValue(ExtendedElementShapeProperty, value); }
+        }
+        #endregion ExtendedElementShape property
 
         /*#region IgnoreShapePropertiesChanges
         /// <summary>
@@ -531,8 +559,8 @@ namespace Forms9Patch
                 _modalLayout.OutlineWidth = OutlineWidth;
             else if (propertyName == OutlineRadiusProperty.PropertyName)
                 _modalLayout.OutlineRadius = OutlineRadius;
-            else if (propertyName == ElementShapeProperty.PropertyName)
-                _modalLayout.ElementShape = ((IShape)this).ElementShape;
+            else if (propertyName == ExtendedElementShapeProperty.PropertyName)
+                _modalLayout.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
             #endregion IShape
 
             #endregion IBackground

@@ -22,7 +22,7 @@
             Source="{local:ImageMultiResource Forms9PatchDemo.Resources.icon_home_active}"
             HeightRequest="50"
             VerticalOptions="Fill"
-            Aspect="AspectFit" />
+            Fill="AspectFit" />
 
         <Grid 
             ColumnSpacing="5">
@@ -42,7 +42,7 @@
                 Grid.Row="0"
                 BackgroundColor="Red"
                 Source="{local:ImageMultiResource Forms9PatchDemo.Resources.icon_home_active}"
-                Aspect="AspectFit" />
+                Fill="AspectFit" />
                         
             <Image
                 Grid.Column="1"
@@ -54,7 +54,7 @@
                 Grid.Column="2"
                 BackgroundColor="Yellow"
                 Source="{local:ImageMultiResource Forms9PatchDemo.Resources.icon_home_active}"
-                Aspect="AspectFit"/>
+                Fill="AspectFit"/>
 
             <Image
                 Grid.Column="3"

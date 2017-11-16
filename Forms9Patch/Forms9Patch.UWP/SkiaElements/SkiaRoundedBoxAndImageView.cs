@@ -98,11 +98,74 @@ namespace Forms9Patch.UWP
         #region Properties
         MaterialButton MaterialButton => _roundedBoxElement as MaterialButton;
 
+        internal Forms9Patch.Image ImageElement
+        {
+            get { return _imageElement; }
+            set
+            {
+                if (value != _imageElement)
+                {
+                    if (_imageElement != null)
+                        _imageElement.PropertyChanged -= OnImageElementPropertyChanged;
+                    _imageElement = value;
+                    if (_imageElement != null)
+                        _imageElement.PropertyChanged += OnImageElementPropertyChanged;
+                    SetSourceAsync();
+                }
+            }
+        }
+
         Xamarin.Forms.BindableObject BindableObject => _roundedBoxElement as Xamarin.Forms.BindableObject;
 
-        //bool IgnoreChanges => (bool)BindableObject.GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty);
-
         Xamarin.Forms.Color BackgroundColor => (Xamarin.Forms.Color)BindableObject.GetValue(ShapeBase.BackgroundColorProperty);
+
+        internal async Task SetSourceAsync()
+        {
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync ENTER");
+            if (_imageElement.Source != _xfImageSource)
+            {
+                // release the previous
+                _xfImageSource?.ReleaseF9PBitmap(this);
+                _sourceBitmap = null;
+                _sourceRangeLists = null;
+
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+
+                ((Xamarin.Forms.IImageController)_imageElement)?.SetIsLoading(true);
+                if (Settings.IsLicenseValid || _instanceId < 4)
+                    _xfImageSource = _imageElement?.Source;
+                else if (_xfImageSource != null)
+                    _xfImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
+                else
+                    _xfImageSource = null;
+
+                stopWatch.Stop();
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] A[" + stopWatch.ElapsedMilliseconds + "]");
+                stopWatch.Reset();
+                stopWatch.Start();
+
+                if (_xfImageSource != null)
+                {
+                    _sourceBitmap = await _xfImageSource.FetchF9PBitmap(this);
+                    _sourceRangeLists = _sourceBitmap.RangeLists;
+                }
+
+                if (_sourceBitmap == null || _sourceBitmap.SKBitmap == null)
+                    _imageElement.SourceImageSize = Xamarin.Forms.Size.Zero;
+                else
+                    _imageElement.SourceImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+
+                stopWatch.Stop();
+                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] B[" + stopWatch.ElapsedMilliseconds + "]");
+
+                _actualSizeValid = false;
+                _validLayout = false;
+                Invalidate();
+                ((Xamarin.Forms.IImageController)_imageElement)?.SetIsLoading(false);
+            }
+            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync EXIT");
+        }
 
         bool HasShadow => (bool)BindableObject.GetValue(ShapeBase.HasShadowProperty);
 
@@ -114,7 +177,7 @@ namespace Forms9Patch.UWP
 
         float OutlineWidth => Display.Scale * (float)BindableObject.GetValue(ShapeBase.OutlineWidthProperty);
 
-        ElementShape ElementShape => (ElementShape)BindableObject.GetValue(ShapeBase.ElementShapeProperty);
+        ExtendedElementShape ExtendedElementShape => (ExtendedElementShape)BindableObject.GetValue(ShapeBase.ExtendedElementShapeProperty);
 
         Xamarin.Forms.Thickness ShadowPadding => _roundedBoxElement.ShadowPadding();
 
@@ -125,6 +188,10 @@ namespace Forms9Patch.UWP
             return Xamarin.Forms.Size.Zero;
         }
 
+        #endregion
+
+
+        /*#region Xamarin.Forms Measuring
         //TODO: DELETE THIS?!?!
         internal Xamarin.Forms.SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
@@ -164,7 +231,7 @@ namespace Forms9Patch.UWP
             }
 
         }
-        #endregion
+        #endregion*/
 
 
         #region local fields
@@ -193,7 +260,7 @@ namespace Forms9Patch.UWP
         Xamarin.Forms.Color _lastOutlineColor = default(Xamarin.Forms.Color);
         double _lastRadius = -1;
         double _lastOutlineWidth = -1;
-        ElementShape _lastElementShape = default(ElementShape);
+        ExtendedElementShape _lastExtendedElementShape = default(ExtendedElementShape);
         //bool _lastIgnoreChanges = false;
         #endregion
 
@@ -202,7 +269,7 @@ namespace Forms9Patch.UWP
         #endregion
 
         #region Image Layout State
-        //Forms9Patch.ButtonShape _lastButtonShape = ButtonShape.Rectangle;
+        //Forms9Patch.ElementShape _lastElementShape = ElementShape.Rectangle;
         bool _actualSizeValid;
         #endregion
 
@@ -234,7 +301,7 @@ namespace Forms9Patch.UWP
                 return false;
             if (_roundedBoxElement is ILayout backgroundElement && _lastPadding != ShadowPadding)
                 return false;
-            if (_lastElementShape != ElementShape)
+            if (_lastExtendedElementShape != ExtendedElementShape)
                 return false;
             return true;
         }
@@ -250,27 +317,10 @@ namespace Forms9Patch.UWP
             _lastOutlineWidth = OutlineWidth;
             if (_roundedBoxElement is ILayout backgroundElement)
                 _lastPadding = ShadowPadding;
-            _lastElementShape = ElementShape;
+            _lastExtendedElementShape = ExtendedElementShape;
             _validLayout = true;
             _actualSizeValid = true;
             //_lastIgnoreChanges = IgnoreChanges;
-        }
-
-        internal Forms9Patch.Image ImageElement
-        {
-            get { return _imageElement; }
-            set
-            {
-                if (value != _imageElement)
-                {
-                    if (_imageElement != null)
-                        _imageElement.PropertyChanged -= OnImageElementPropertyChanged;
-                    _imageElement = value;
-                    if (_imageElement != null)
-                        _imageElement.PropertyChanged += OnImageElementPropertyChanged;
-                    SetSourceAsync();
-                }
-            }
         }
 
         private void OnElementSizeChanged(object sender, EventArgs e)
@@ -299,50 +349,6 @@ namespace Forms9Patch.UWP
                 Invalidate();
             }
 
-        }
-
-        internal async Task SetSourceAsync()
-        {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync ENTER");
-            if (_imageElement.Source != _xfImageSource)
-            {
-                // release the previous
-                _xfImageSource?.ReleaseF9PBitmap(this);
-                _sourceBitmap = null;
-
-                var stopWatch = new Stopwatch();
-                stopWatch.Start();
-
-                ((Xamarin.Forms.IImageController)_imageElement)?.SetIsLoading(true);
-                if (Settings.IsLicenseValid || _instanceId < 4)
-                    _xfImageSource = _imageElement?.Source;
-                else if (_xfImageSource != null)
-                    _xfImageSource = Forms9Patch.ImageSource.FromMultiResource("Forms9Patch.Resources.unlicensedcopy");
-                else
-                    _xfImageSource = null;
-
-                stopWatch.Stop();
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] A[" + stopWatch.ElapsedMilliseconds + "]");
-                stopWatch.Reset();
-                stopWatch.Start();
-
-                _sourceBitmap = await _xfImageSource?.FetchF9PBitmap(this);
-                _sourceRangeLists = _sourceBitmap.RangeLists;
-
-                if (_sourceBitmap == null || _sourceBitmap.SKBitmap==null)
-                    _imageElement.SourceImageSize = Xamarin.Forms.Size.Zero;
-                else
-                    _imageElement.SourceImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
-
-                stopWatch.Stop();
-                if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] B[" + stopWatch.ElapsedMilliseconds + "]");
-
-                _actualSizeValid = false;
-                _validLayout = false;
-                Invalidate();
-                ((Xamarin.Forms.IImageController)_imageElement)?.SetIsLoading(false);
-            }
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync EXIT");
         }
         #endregion
 
@@ -378,10 +384,12 @@ namespace Forms9Patch.UWP
                 bool constrainedWidth = !double.IsInfinity(availableSize.Width) || ImageElement.WidthRequest > -1;
                 bool constrainedHeight = !double.IsInfinity(availableSize.Height) || ImageElement.HeightRequest > -1;
 
-                double constrainedWidthValue = availableSize.Width;
+                bool drawOutline = (OutlineColor.A > 0.01 && OutlineWidth > 0.05);
+
+                double constrainedWidthValue = availableSize.Width;// - (drawOutline ? OutlineWidth * 2 : 0);// - ShadowPadding.HorizontalThickness;
                 if (ImageElement.WidthRequest > -1)
                     constrainedWidthValue = Math.Min(constrainedWidthValue, ImageElement.WidthRequest);
-                double constrainedHeightValue = availableSize.Height;
+                double constrainedHeightValue = availableSize.Height;// - (drawOutline ? OutlineWidth * 2 : 0);// - ShadowPadding.VerticalThickness;
                 if (ImageElement.HeightRequest > -1)
                     constrainedHeightValue = Math.Min(constrainedHeightValue, ImageElement.HeightRequest);
 
@@ -483,9 +491,9 @@ namespace Forms9Patch.UWP
                 var outlineWidth = OutlineWidth;
                 var outlineRadius = OutlineRadius;
                 var outlineColor = OutlineColor;
-                var elementShape = ElementShape;
+                var elementShape = ExtendedElementShape;
 
-                double separatorWidth = MaterialButton == null || elementShape == ElementShape.Rectangle ? 0 : MaterialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, MaterialButton.SeparatorWidth);
+                double separatorWidth = MaterialButton == null || elementShape == ExtendedElementShape.Rectangle ? 0 : MaterialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, MaterialButton.SeparatorWidth);
 
                 bool drawOutline = (outlineColor.A > 0.01 && outlineWidth > 0.05);
                 bool drawImage = ( _sourceBitmap?.SKBitmap!=null && _sourceBitmap.Width > 0 && _sourceBitmap.Height > 0);
@@ -502,7 +510,7 @@ namespace Forms9Patch.UWP
                         if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)  if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + ","+ ((FrameworkElement)Parent).ActualHeight + "]");
                         var rect = new SKRect(0, 0, (float)(((FrameworkElement)Parent).ActualWidth * Display.Scale), (float)(((FrameworkElement)Parent).ActualHeight * Display.Scale));
 
-                        var makeRoomForShadow = hasShadow && backgroundColor.A > 0.01; // && !_roundedBoxElement.ShadowInverted;
+                        var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !_roundedBoxElement.ShadowInverted;
                         var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
                         var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * Display.Scale);
                         var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * Display.Scale);
@@ -518,13 +526,13 @@ namespace Forms9Patch.UWP
                             // what additional padding was allocated to cast the button's shadow?
                             switch (elementShape)
                             {
-                                case ElementShape.SegmentStart:
+                                case ExtendedElementShape.SegmentStart:
                                     perimeter = new SKRect(rect.Left + (float)shadowPadding.Left, rect.Top + (float)shadowPadding.Top, rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
                                     break;
-                                case ElementShape.SegmentMid:
+                                case ExtendedElementShape.SegmentMid:
                                     perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
                                     break;
-                                case ElementShape.SegmentEnd:
+                                case ExtendedElementShape.SegmentEnd:
                                     perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (float)shadowPadding.Right, rect.Bottom - (float)shadowPadding.Bottom);
                                     break;
                                 default:
@@ -538,11 +546,11 @@ namespace Forms9Patch.UWP
                                 float allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
                                 SKRect shadowRect = perimeter;
 
-                                if (elementShape == ElementShape.SegmentStart)
+                                if (elementShape == ExtendedElementShape.SegmentStart)
                                     shadowRect = new SKRect(perimeter.Left, perimeter.Top, perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
-                                else if (elementShape == ElementShape.SegmentMid)
+                                else if (elementShape == ExtendedElementShape.SegmentMid)
                                     shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
-                                else if (elementShape == ElementShape.SegmentEnd)
+                                else if (elementShape == ExtendedElementShape.SegmentEnd)
                                     shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right, perimeter.Bottom);
 
                                 Clip = new Windows.UI.Xaml.Media.RectangleGeometry
@@ -567,7 +575,7 @@ namespace Forms9Patch.UWP
                             }
                         }
 
-                        if (drawFill || drawImage )
+                        if (drawFill)
                         {
                             var fillRect = RectInsetForShape(perimeter, elementShape, outlineWidth, vt);
                             var path = PerimeterPath(_roundedBoxElement, fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
@@ -582,11 +590,16 @@ namespace Forms9Patch.UWP
                                 };
                                 canvas.DrawPath(path, fillPaint);
                             }
-                            // the path is for clipping!
-                            GenerateImageLayout(canvas, fillRect, path);
                         }
 
-                        if (drawOutline && !drawImage)
+                        if (drawImage)
+                        {
+                            //var fillRect = RectInsetForShape(perimeter, elementShape, 0, vt);
+                            var clipPath = PerimeterPath(_roundedBoxElement, perimeter, outlineRadius);
+                            GenerateImageLayout(canvas, perimeter, clipPath);
+                        }
+
+                        if (drawOutline)// && !drawImage)
                         {
                             var outlinePaint = new SKPaint
                             {
@@ -601,7 +614,7 @@ namespace Forms9Patch.UWP
                             canvas.DrawPath(path, outlinePaint);
                         }
 
-                        if (drawSeparators && !drawOutline && (elementShape == ElementShape.SegmentMid || elementShape == ElementShape.SegmentEnd))
+                        if (drawSeparators && !drawOutline && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
                         {
                             var separatorPaint = new SKPaint
                             {
@@ -688,9 +701,6 @@ namespace Forms9Patch.UWP
             var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.SKBitmap.Width, _sourceBitmap.SKBitmap.Height, _xfImageSource, _sourceRangeLists != null);
             if (rangeLists==null)
                 rangeLists = _sourceRangeLists;
-            //else
-            //    System.Diagnostics.Debug.WriteLine("");
-
             if (rangeLists != null)
             {
                 if (rangeLists.PatchesX.Count == 1 && rangeLists.PatchesX[0].Start <= 0 && rangeLists.PatchesX[0].End >= _sourceBitmap.SKBitmap.Width-1)
@@ -701,26 +711,7 @@ namespace Forms9Patch.UWP
                     rangeLists = null;
             }
                     
-                
-
             var bitmap = _sourceBitmap;
-
-            /*
-            if (_imageElement.TintColor!=default(Xamarin.Forms.Color) && _imageElement.TintColor!=Xamarin.Forms.Color.Transparent)
-            {
-                // not sure if this impacts image or can be used to create a new image
-                //var pixels = bitmap.Pixels;
-                //for(int i=0; i< pixels.Length; i++)
-                //    pixels[i] = _imageElement.TintColor.ToWindowsColor().ToSKColor().WithAlpha(pixels[i].Alpha);
-                //    
-                var color = _imageElement.TintColor.ToWindowsColor().ToSKColor();
-                bitmap = _sourceBitmap.Copy();
-                for (int x = 0; x < bitmap.Width; x++)
-                    for (int y = 0; y < bitmap.Height; y++)
-                        bitmap.SetPixel(x, y, color.WithAlpha(bitmap.GetPixel(x, y).Alpha));
-            }
-        */
-
             SKPaint paint = null;
             if (_imageElement.TintColor!=Xamarin.Forms.Color.Default && _imageElement.TintColor!=Xamarin.Forms.Color.Transparent)
             {
@@ -741,15 +732,116 @@ namespace Forms9Patch.UWP
                 };
             }
 
+            var fillRectAspect = fillRect.Width / fillRect.Height;
+            var bitmapAspect = _sourceBitmap.Width / _sourceBitmap.Height;
+
             if (_imageElement.Fill == Fill.Tile)
             {
                 for (float x = fillRect.Left; x < fillRect.Right; x += _sourceBitmap.SKBitmap.Width)
                     for (float y = fillRect.Top; y < fillRect.Bottom; y += _sourceBitmap.SKBitmap.Height)
                         canvas.DrawBitmap(_sourceBitmap.SKBitmap, x, y, paint);
             }
+            else if (_imageElement.Fill == Fill.None)
+            {
+                float left;
+                switch (_imageElement.HorizontalOptions.Alignment)
+                {
+                    case Xamarin.Forms.LayoutAlignment.Start:
+                        left = fillRect.Left;
+                        break;
+                    case Xamarin.Forms.LayoutAlignment.End:
+                        left = fillRect.Right - (float)(_sourceBitmap.Width);
+                        break;
+                    default:
+                        left = (fillRect.Right - (float)_sourceBitmap.Width)/2.0f ;
+                        break;
+                }
+                float top;
+                switch (_imageElement.VerticalOptions.Alignment)
+                {
+                    case Xamarin.Forms.LayoutAlignment.Start:
+                        top = fillRect.Top;
+                        break;
+                    case Xamarin.Forms.LayoutAlignment.End:
+                        top = fillRect.Bottom - (float)(_sourceBitmap.Height);
+                        break;
+                    default:
+                        top = (fillRect.Bottom - (float)_sourceBitmap.Height) / 2.0f;
+                        break;
+                }
+                fillRect = SKRect.Create(left, top, (float)_sourceBitmap.Width, (float)_sourceBitmap.Height);
+                canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect, paint);
+            }
             else if (rangeLists == null)
             {
-                canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect, paint);
+                if (_imageElement.Fill == Fill.AspectFill)
+                {
+                    var croppedWidth = bitmapAspect > fillRectAspect ? _sourceBitmap.Height * fillRectAspect : _sourceBitmap.Width;
+                    var croppedHeight = bitmapAspect > fillRectAspect ? _sourceBitmap.Height : _sourceBitmap.Width / fillRectAspect;
+                    float left;
+                    switch (_imageElement.HorizontalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            left = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            left = (float)(_sourceBitmap.Width - croppedWidth);
+                            break;
+                        default:
+                            left = (float)(_sourceBitmap.Width - croppedWidth) / 2.0f;
+                            break;
+                    }
+                    float top;
+                    switch (_imageElement.VerticalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            top = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            top = (float)(_sourceBitmap.Height - croppedHeight);
+                            break;
+                        default:
+                            top = (float)(_sourceBitmap.Height - croppedHeight) / 2.0f;
+                            break;
+                    }
+                    var cropRect = SKRect.Create(left, top, (float)croppedWidth, (float)croppedHeight);
+                    canvas.DrawBitmap(_sourceBitmap.SKBitmap, cropRect, fillRect, paint);
+                }
+                else if (_imageElement.Fill == Fill.AspectFit)
+                {
+                    var destWidth = bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect;
+                    var destHeight = bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height;
+                    float left;
+                    switch (_imageElement.HorizontalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            left = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            left = (float)(fillRect.Width - destWidth);
+                            break;
+                        default:
+                            left = (float)(fillRect.Width - destWidth) / 2.0f;
+                            break;
+                    }
+                    float top;
+                    switch (_imageElement.VerticalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            top = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            top = (float)(fillRect.Height - destHeight);
+                            break;
+                        default:
+                            top = (float)(fillRect.Height - destHeight) / 2.0f;
+                            break;
+                    }
+                    var destRect = SKRect.Create(left, top, (float)destWidth, (float)destHeight);
+                    canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, destRect, paint);
+                }
+                else // Fill==Fill.Fill
+                    canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect, paint);
             }
             else
             {
@@ -757,6 +849,7 @@ namespace Forms9Patch.UWP
                 canvas.DrawBitmapLattice(_sourceBitmap.SKBitmap, lattice, fillRect);
                 //canvas.DrawBitmap(_sourceBitmap, _sourceBitmap.Info.Rect, fillRect);
             }
+
             canvas.Restore();
         }
 
@@ -766,7 +859,7 @@ namespace Forms9Patch.UWP
 
         #region layout support 
 
-        static SKRect RectInsetForShape(SKRect perimeter, ElementShape buttonShape, float inset, bool vt)
+        static SKRect RectInsetForShape(SKRect perimeter, ExtendedElementShape buttonShape, float inset, bool vt)
         {
             if (inset < 0)
                 inset = 0;
@@ -774,13 +867,13 @@ namespace Forms9Patch.UWP
             var hz = !vt;
             switch (buttonShape)
             {
-                case ElementShape.SegmentStart:
+                case ExtendedElementShape.SegmentStart:
                     result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
                     break;
-                case ElementShape.SegmentMid:
+                case ExtendedElementShape.SegmentMid:
                     result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
                     break;
-                case ElementShape.SegmentEnd:
+                case ExtendedElementShape.SegmentEnd:
                     result = RectInset(perimeter, inset);
                     break;
                 default:
@@ -790,23 +883,23 @@ namespace Forms9Patch.UWP
             return result;
         }
 
-        static SKRect RoundRect(SKRect rect, Xamarin.Forms.StackOrientation orientation, Forms9Patch.ElementShape type)
+        static SKRect RoundRect(SKRect rect, Xamarin.Forms.StackOrientation orientation, Forms9Patch.ExtendedElementShape type)
         {
             return rect;
         }
 
-        static SKRect SegmentAllowanceRect(SKRect rect, double allowance, Xamarin.Forms.StackOrientation orientation, Forms9Patch.ElementShape type)
+        static SKRect SegmentAllowanceRect(SKRect rect, double allowance, Xamarin.Forms.StackOrientation orientation, Forms9Patch.ExtendedElementShape type)
         {
             SKRect result;
             switch (type)
             {
-                case ElementShape.SegmentStart:
+                case ExtendedElementShape.SegmentStart:
                     result = new Rect(rect.Left, rect.Top, rect.Width + (orientation == Xamarin.Forms.StackOrientation.Horizontal ? allowance : 0), rect.Height + (orientation == Xamarin.Forms.StackOrientation.Vertical ? allowance : 0)).ToSKRect();
                     break;
-                case ElementShape.SegmentMid:
+                case ExtendedElementShape.SegmentMid:
                     result = new Rect(rect.Left - (orientation == Xamarin.Forms.StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == Xamarin.Forms.StackOrientation.Vertical ? allowance : 0), rect.Width + (orientation == Xamarin.Forms.StackOrientation.Horizontal ? allowance * 2 : 0), rect.Height + (orientation == Xamarin.Forms.StackOrientation.Vertical ? allowance * 2 : 0)).ToSKRect();
                     break;
-                case ElementShape.SegmentEnd:
+                case ExtendedElementShape.SegmentEnd:
                     result = new Rect(rect.Left - (orientation == Xamarin.Forms.StackOrientation.Horizontal ? allowance : 0), rect.Top - (orientation == Xamarin.Forms.StackOrientation.Vertical ? allowance : 0), rect.Width + (orientation == Xamarin.Forms.StackOrientation.Horizontal ? allowance : 0), rect.Height + (orientation == Xamarin.Forms.StackOrientation.Vertical ? allowance : 0)).ToSKRect();
                     break;
                 default:
@@ -830,16 +923,23 @@ namespace Forms9Patch.UWP
             radius = Math.Max(radius, 0);
 
             var materialButton = element as MaterialButton;
-            //ElementShape type = materialButton == null ? ElementShape.Rectangle : materialButton.SegmentType;
+            //ExtendedElementShape type = materialButton == null ? ExtendedElementShape.Rectangle : materialButton.SegmentType;
             Xamarin.Forms.StackOrientation orientation = materialButton == null ? Xamarin.Forms.StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var path = new SKPath();
-            //path.FillType = SKPathFillType.InverseWinding;
 
-            //System.Diagnostics.Debug.WriteLine("RectangularPerimeterPath rect[" + rect + "] type=["+type+"] ");
-            //rect = RoundRect(rect, orientation, type);
-            //System.Diagnostics.Debug.WriteLine("RectangularPerimeterPath rect[" + rect + "] type=[" + type + "] ");
-            //System.Diagnostics.Debug.WriteLine("");
+            var length = Math.Min(rect.Width, rect.Height);
+            if (element.ExtendedElementShape == ExtendedElementShape.Square || element.ExtendedElementShape == ExtendedElementShape.Circle)
+            {
+                var location = new SKPoint(rect.MidX - length / 2f, rect.MidY - length / 2f);
+                var size = new SKSize(length, length);
+                //rect = new SKRect(rect.MidX - width / 2f, rect.MidY - width / 2f, width, width);
+                rect = SKRect.Create(location, size);
+            }
+            else if (element.ExtendedElementShape == ExtendedElementShape.Obround)
+                radius = length / 2f;
+            radius = Math.Min(radius, length / 2f);
+
             var diameter = radius * 2;
             var topLeft = new SKRect(rect.Left, rect.Top, rect.Left + diameter, rect.Top + diameter);
             var bottomLeft = new SKRect(rect.Left, rect.Bottom - diameter, rect.Left + diameter, rect.Bottom);
@@ -847,127 +947,140 @@ namespace Forms9Patch.UWP
             var topRight = new SKRect(rect.Right - diameter, rect.Top, rect.Right, rect.Top + diameter);
 
 
-            if (element.ElementShape == ElementShape.Rectangle)
+            switch (element.ExtendedElementShape)
             {
-                path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
-                path.LineTo(rect.Left + radius, rect.Top);
-                if (radius > 0)
-                    //path.ArcTo(rect.Left + radius, rect.Top + radius, rect.Left, rect.Top + radius, radius);
-                    path.ArcTo(topLeft, 270, -90, false);
-                path.LineTo(rect.Left, rect.Bottom - radius);
-                if (radius > 0)
-                    //path.ArcTo(rect.Left + radius, rect.Bottom - radius, rect.Left + radius, rect.Bottom, radius);
-                    path.ArcTo(bottomLeft, 180, -90, false);
-                path.LineTo(rect.Right - radius, rect.Bottom);
-                if (radius > 0)
-                    //path.ArcTo(rect.Right - radius, rect.Bottom - radius, rect.Right, rect.Bottom - radius, radius);
-                    path.ArcTo(bottomRight, 90, -90, false);
-                path.LineTo(rect.Right, rect.Top + radius);
-                if (radius > 0)
-                    //path.ArcTo(rect.Right - radius, rect.Top + radius, rect.Right - radius, rect.Top, radius);
-                    path.ArcTo(topRight, 0, -90, false);
-                path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
-            }
-            else if (element.ElementShape == ElementShape.SegmentStart)
-            {
-                if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
-                {
-                    path.MoveTo(rect.Right, rect.Top);
-                    path.LineTo(rect.Left + radius, rect.Top);
-                    if (radius > 0)
-                        path.ArcTo(topLeft, 270, -90, false);
-                    path.LineTo(rect.Left, rect.Bottom - radius);
-                    if (radius > 0)
-                        path.ArcTo(bottomLeft, 180, -90, false);
-                    path.LineTo(rect.Right, rect.Bottom);
-                }
-                else
-                {
-                    path.MoveTo(rect.Right, rect.Bottom);
-                    path.LineTo(rect.Right, rect.Top + radius);
-                    if (radius > 0)
-                        path.ArcTo(topRight, 0, -90, false);
-                    path.LineTo(rect.Left + radius, rect.Top);
-                    if (radius > 0)
-                        path.ArcTo(topLeft, 270, -90, false);
-                    path.LineTo(rect.Left, rect.Bottom);
-                }
-            }
-            else if (element.ElementShape == ElementShape.SegmentMid)
-            {
-                if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
-                {
-                    path.MoveTo(rect.Right, rect.Top);
-                    path.LineTo(rect.Left, rect.Top);
-                    path.LineTo(rect.Left, rect.Bottom);
-                    path.LineTo(rect.Right, rect.Bottom);
-                }
-                else
-                {
-                    path.MoveTo(rect.Right, rect.Bottom);
-                    path.LineTo(rect.Right, rect.Top);
-                    path.LineTo(rect.Left, rect.Top);
-                    path.LineTo(rect.Left, rect.Bottom);
-                }
-            }
-            else if (element.ElementShape == ElementShape.SegmentEnd)
-            {
-                if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
-                {
-                    path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
-                    path.LineTo(rect.Left, rect.Top);
-                    path.LineTo(rect.Left, rect.Bottom);
-                    path.LineTo(rect.Right - radius, rect.Bottom);
-                    if (radius > 0)
-                        path.ArcTo(bottomRight, 90, -90, false);
-                    path.LineTo(rect.Right, rect.Top + radius);
-                    if (radius > 0)
-                        path.ArcTo(topRight, 0, -90, false);
-                    path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
-                }
-                else
-                {
-                    path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
-                    path.LineTo(rect.Left, rect.Top);
-                    path.LineTo(rect.Left, rect.Bottom - radius);
-                    if (radius > 0)
-                        path.ArcTo(bottomLeft, 180, -90, false);
-                    path.LineTo(rect.Right - radius, rect.Bottom);
-                    if (radius > 0)
-                        path.ArcTo(bottomRight, 90, -90, false);
-                    path.LineTo(rect.Right, rect.Top);
-                    path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
-                }
-            }
-            else if (element.ElementShape == ElementShape.Obround)
-            {
-                if (rect.Width > rect.Height)
-                {
-                    radius = (float) (rect.Height / 2.0);
-                    var left = new SKRect(0, 0, rect.Height, rect.Height);
-                    var right = new SKRect(rect.Width - rect.Height, 0, rect.Height, rect.Height);
-                    path.MoveTo(rect.Right - radius, rect.Top);
-                    path.LineTo(rect.Left + radius, rect.Top);
-                    path.ArcTo(left, -90, -180, false);
-                    path.LineTo(rect.Right - radius, rect.Bottom);
-                    path.ArcTo(right, 90, -180, false);
-                }
-                else
-                {
-                    radius = (float)(rect.Width / 2.0);
-                    var top = new SKRect(0, 0, rect.Width, rect.Width);
-                    var bottom = new SKRect(0, rect.Height - rect.Width, rect.Width, rect.Width);
-                    path.MoveTo(rect.Left, rect.Top + radius);
-                    path.LineTo(rect.Left, rect.Bottom - radius);
-                    path.ArcTo(bottom, 180, -180, false);
-                    path.LineTo(rect.Right, rect.Top + radius);
-                    path.ArcTo(top, 0, -180, false);
-                }
-            }
-            else if (element.ElementShape == ElementShape.Elliptical)
-                path.AddOval(rect);
-            else if (element.ElementShape == ElementShape.Circle)
-                path.AddCircle(rect.MidX, rect.MidY, Math.Min(rect.Width, rect.Height) / 2);
+                case ExtendedElementShape.Rectangle:
+                case ExtendedElementShape.Square:
+                case ExtendedElementShape.Obround:
+                    {
+                        path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
+                        path.LineTo(rect.Left + radius, rect.Top);
+                        if (radius > 0)
+                            //path.ArcTo(rect.Left + radius, rect.Top + radius, rect.Left, rect.Top + radius, radius);
+                            path.ArcTo(topLeft, 270, -90, false);
+                        path.LineTo(rect.Left, rect.Bottom - radius);
+                        if (radius > 0)
+                            //path.ArcTo(rect.Left + radius, rect.Bottom - radius, rect.Left + radius, rect.Bottom, radius);
+                            path.ArcTo(bottomLeft, 180, -90, false);
+                        path.LineTo(rect.Right - radius, rect.Bottom);
+                        if (radius > 0)
+                            //path.ArcTo(rect.Right - radius, rect.Bottom - radius, rect.Right, rect.Bottom - radius, radius);
+                            path.ArcTo(bottomRight, 90, -90, false);
+                        path.LineTo(rect.Right, rect.Top + radius);
+                        if (radius > 0)
+                            //path.ArcTo(rect.Right - radius, rect.Top + radius, rect.Right - radius, rect.Top, radius);
+                            path.ArcTo(topRight, 0, -90, false);
+                        path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                    }
+                    break;
+                case ExtendedElementShape.Elliptical:
+                case ExtendedElementShape.Circle:
+                    path.AddOval(rect);
+                    break;
+                /*
+                case ExtendedElementShape.Obround:
+                    {
+                        if (rect.Width > rect.Height)
+                        {
+                            radius = (float)(rect.Height / 2.0);
+                            var left = new SKRect(0, 0, rect.Height, rect.Height);
+                            var right = new SKRect(rect.Width - rect.Height -1, 0, rect.Width -1, rect.Height -1);
+                            path.MoveTo(rect.Right - radius, rect.Top);
+                            path.LineTo(rect.Left + radius, rect.Top);
+                            path.ArcTo(left, -90, -180, false);
+                            path.LineTo(rect.Right - radius, rect.Bottom);
+                            path.ArcTo(right, 90, -180, false);
+                        }
+                        else
+                        {
+                            radius = (float)(rect.Width / 2.0);
+                            var top = new SKRect(0, 0, rect.Width, rect.Width);
+                            var bottom = new SKRect(0, rect.Height - rect.Width - 1, rect.Width - 1, rect.Height - 1);
+                            path.MoveTo(rect.Left, rect.Top + radius);
+                            path.LineTo(rect.Left, rect.Bottom - radius);
+                            path.ArcTo(bottom, 180, -180, false);
+                            path.LineTo(rect.Right, rect.Top + radius);
+                            path.ArcTo(top, 0, -180, false);
+                        }
+                    }
+                    break;*/
+                case ExtendedElementShape.SegmentStart:
+                    {
+                        if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
+                        {
+                            path.MoveTo(rect.Right, rect.Top);
+                            path.LineTo(rect.Left + radius, rect.Top);
+                            if (radius > 0)
+                                path.ArcTo(topLeft, 270, -90, false);
+                            path.LineTo(rect.Left, rect.Bottom - radius);
+                            if (radius > 0)
+                                path.ArcTo(bottomLeft, 180, -90, false);
+                            path.LineTo(rect.Right, rect.Bottom);
+                        }
+                        else
+                        {
+                            path.MoveTo(rect.Right, rect.Bottom);
+                            path.LineTo(rect.Right, rect.Top + radius);
+                            if (radius > 0)
+                                path.ArcTo(topRight, 0, -90, false);
+                            path.LineTo(rect.Left + radius, rect.Top);
+                            if (radius > 0)
+                                path.ArcTo(topLeft, 270, -90, false);
+                            path.LineTo(rect.Left, rect.Bottom);
+                        }
+                    }
+                    break;
+                case ExtendedElementShape.SegmentMid:
+                    {
+                        if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
+                        {
+                            path.MoveTo(rect.Right, rect.Top);
+                            path.LineTo(rect.Left, rect.Top);
+                            path.LineTo(rect.Left, rect.Bottom);
+                            path.LineTo(rect.Right, rect.Bottom);
+                        }
+                        else
+                        {
+                            path.MoveTo(rect.Right, rect.Bottom);
+                            path.LineTo(rect.Right, rect.Top);
+                            path.LineTo(rect.Left, rect.Top);
+                            path.LineTo(rect.Left, rect.Bottom);
+                        }
+                    }
+                    break;
+                case ExtendedElementShape.SegmentEnd:
+                    {
+                        if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
+                        {
+                            path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
+                            path.LineTo(rect.Left, rect.Top);
+                            path.LineTo(rect.Left, rect.Bottom);
+                            path.LineTo(rect.Right - radius, rect.Bottom);
+                            if (radius > 0)
+                                path.ArcTo(bottomRight, 90, -90, false);
+                            path.LineTo(rect.Right, rect.Top + radius);
+                            if (radius > 0)
+                                path.ArcTo(topRight, 0, -90, false);
+                            path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                        }
+                        else
+                        {
+                            path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
+                            path.LineTo(rect.Left, rect.Top);
+                            path.LineTo(rect.Left, rect.Bottom - radius);
+                            if (radius > 0)
+                                path.ArcTo(bottomLeft, 180, -90, false);
+                            path.LineTo(rect.Right - radius, rect.Bottom);
+                            if (radius > 0)
+                                path.ArcTo(bottomRight, 90, -90, false);
+                            path.LineTo(rect.Right, rect.Top);
+                            path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                        }
+                    }
+                    break;
+                default:
+                    throw new NotSupportedException("ExtendedElementShape [" + element.ExtendedElementShape + "] is not supported")
+;            }
             return path;
         }
 

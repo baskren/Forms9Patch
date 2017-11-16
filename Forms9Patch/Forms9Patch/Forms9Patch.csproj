@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
-    <Compile Include="Enums\ButtonShape.cs" />
+    <Compile Include="Enums\ElementShape.cs" />
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Extensions\GridExtension.cs" />
     <Compile Include="Extensions\AspectExtension.cs" />
     <Compile Include="Enums\Fill.cs" />
-    <Compile Include="Enums\ElementShape.cs" />
+    <Compile Include="Enums\ExtendedElementShape.cs" />
     <Compile Include="Enums\GroupToggleBehavior.cs" />
     <Compile Include="Elements\Label.cs" />
     <Compile Include="Events\SegmentedControlEventArgs.cs" />

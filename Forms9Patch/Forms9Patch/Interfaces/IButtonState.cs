@@ -18,7 +18,5 @@ namespace Forms9Patch
         double Spacing { get; set; }
 
         Xamarin.Forms.StackOrientation Orientation { get; set; }
-
-        ButtonShape ButtonShape { get; set; }
     }
 }

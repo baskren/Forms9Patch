@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    public enum ButtonShape
-    {
+	enum ExtendedElementShape
+	{
         Rectangle = 0,
         Square,
         Circle,
         Elliptical,
         Obround,
+        SegmentStart,
+        SegmentMid,
+        SegmentEnd,
     }
 }
+

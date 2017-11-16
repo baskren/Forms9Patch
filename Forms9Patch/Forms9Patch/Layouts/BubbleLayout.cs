@@ -268,11 +268,11 @@ namespace Forms9Patch
 
         #region ElementShape property
         /// <summary>
-        /// backing store for ElementShape property
+        /// Backing store for the ElementShape property
         /// </summary>
         internal static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
         /// <summary>
-        /// Gets/Sets the ElementShape property
+        /// Gets/sets the geometry of the element
         /// </summary>
         ElementShape IShape.ElementShape
         {
@@ -280,6 +280,21 @@ namespace Forms9Patch
             set { SetValue(ElementShapeProperty, value); }
         }
         #endregion ElementShape property
+
+        #region ExtendedElementShape property
+        /// <summary>
+        /// backing store for ExtendedElementShape property
+        /// </summary>
+        internal static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;
+        /// <summary>
+        /// Gets/Sets the ExtendedElementShape property
+        /// </summary>
+        ExtendedElementShape IShape.ExtendedElementShape
+        {
+            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
+            set { SetValue(ExtendedElementShapeProperty, value); }
+        }
+        #endregion ExtendedElementShape property
 
         #region IElement
 

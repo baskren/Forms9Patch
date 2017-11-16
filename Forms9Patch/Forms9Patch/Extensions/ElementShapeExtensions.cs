@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    static class ElementShapeExtensions
+    static class ExtendedElementShapeExtensions
     {
         public static bool IsSegment(this IShape element)
         {
-            switch(element.ElementShape)
+            switch(element.ExtendedElementShape)
             {
-                case ElementShape.SegmentEnd:
-                case ElementShape.SegmentMid:
-                case ElementShape.SegmentStart:
+                case ExtendedElementShape.SegmentEnd:
+                case ExtendedElementShape.SegmentMid:
+                case ExtendedElementShape.SegmentStart:
                     return true;
             }
             return false;

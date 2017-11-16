@@ -340,7 +340,7 @@ namespace Forms9Patch
 
             Orientation = _currentState.OrientationSet ? _currentState.Orientation : DefaultState.Orientation;
 
-            ButtonShape = _currentState.ButtonShapeSet ? _currentState.ButtonShape : DefaultState.ButtonShape;
+            ElementShape = _currentState.ElementShapeSet ? _currentState.ElementShape : DefaultState.ElementShape;
 
             #region IBackground
 
@@ -360,7 +360,7 @@ namespace Forms9Patch
 
             OutlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
 
-            // ElementShape is set by ButtonShape setter, above
+            // ExtendedElementShape is set by ElementShape setter, above
 
             #endregion IShape
 

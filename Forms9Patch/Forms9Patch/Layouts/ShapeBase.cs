@@ -71,10 +71,22 @@ namespace Forms9Patch
 
         #region ElementShape property
         /// <summary>
-        /// backing store for ElementShape property
+        /// backing store for ExtendedElementShape property
         /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ElementShape", typeof(ElementShape), typeof(ShapeBase), default(ElementShape));
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(AbsoluteLayout), default(ElementShape),
+            propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
+            {
+                ((IShape)bindable).ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
+            })
+            );
         #endregion ElementShape property
+
+        #region ExtendedElementShape property
+        /// <summary>
+        /// backing store for ExtendedElementShape property
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementShapeProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementShape", typeof(ExtendedElementShape), typeof(ShapeBase), default(ExtendedElementShape));
+        #endregion ExtendedElementShape property
 
         #endregion IShape backing stores
 
@@ -137,13 +149,13 @@ namespace Forms9Patch
                 if (shape is MaterialButton materialButton)
                 {
                     var orientation = materialButton.ParentSegmentsOrientation;
-                    if (orientation == StackOrientation.Horizontal && (shape.ElementShape == ElementShape.SegmentMid || shape.ElementShape == ElementShape.SegmentEnd))
+                    if (orientation == StackOrientation.Horizontal && (shape.ExtendedElementShape == ExtendedElementShape.SegmentMid || shape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
                         padL = 0;
-                    if (orientation == StackOrientation.Horizontal && (shape.ElementShape == ElementShape.SegmentStart || shape.ElementShape == ElementShape.SegmentMid))
+                    if (orientation == StackOrientation.Horizontal && (shape.ExtendedElementShape == ExtendedElementShape.SegmentStart || shape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padR = 0;
-                    if (orientation == StackOrientation.Vertical && (shape.ElementShape == ElementShape.SegmentMid || shape.ElementShape == ElementShape.SegmentEnd))
+                    if (orientation == StackOrientation.Vertical && (shape.ExtendedElementShape == ExtendedElementShape.SegmentMid || shape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
                         padT = 0;
-                    if (orientation == StackOrientation.Vertical && (shape.ElementShape == ElementShape.SegmentStart || shape.ElementShape == ElementShape.SegmentMid))
+                    if (orientation == StackOrientation.Vertical && (shape.ExtendedElementShape == ExtendedElementShape.SegmentStart || shape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padB = 0;
                 }
                 return new Thickness(padL, padT, padR, padB);
