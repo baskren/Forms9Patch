@@ -138,6 +138,49 @@ namespace Forms9PatchDemo
             capsInsetsBottomSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
             capsInsetsBottomSlider.Rotation = 180;
 
+            var outlineGrid = new Xamarin.Forms.Grid
+            {
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                },
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                },
+            };
+            outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineWidth:"), 0, 0);
+            outlineGrid.Children.Add(outlineWidthSlider, 0, 1);
+            outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineRadius:"), 1, 0);
+            outlineGrid.Children.Add(outlineRadiusSlider, 1, 1);
+
+            var capsInsetsGrid = new Xamarin.Forms.Grid
+            {
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                },
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                },
+            };
+            capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Top:"), 0, 0);
+            capsInsetsGrid.Children.Add(capsInsetsTopSlider, 0, 1);
+            capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Bottom:"), 0, 2);
+            capsInsetsGrid.Children.Add(capsInsetsBottomSlider, 0, 3);
+            capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Left:"), 1, 0);
+            capsInsetsGrid.Children.Add(capsInsetsLeftSlider, 1, 1);
+            capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Right:"), 1, 2);
+            capsInsetsGrid.Children.Add(capsInsetsRightSlider, 1, 3);
+
+
             Padding = new Thickness(20, 20, 0, 20);
             Content = new ScrollView
             {
@@ -156,20 +199,12 @@ namespace Forms9PatchDemo
                         shapesSelector,
                         new Forms9Patch.Label("Shape attributes (some value vs. default value)"),
                         shapeAttributesSelector,
-                        new Forms9Patch.Label("Forms9Patch.Image.OutlineWidth:"),
-                        outlineWidthSlider,
-                        new Forms9Patch.Label("Forms9Patch.Image.OutlineRadius:"),
-                        outlineRadiusSlider,
+                        outlineGrid,
+                        
                         new Forms9Patch.Label("Forms9Patch.Image.Source:"),
                         backgroundImageSelector,
-                        new Forms9Patch.Label("CapsInsets.Top:"),
-                        capsInsetsTopSlider,
-                        new Forms9Patch.Label("CapsInsets.Left:"),
-                        capsInsetsLeftSlider,
-                        new Forms9Patch.Label("CapsInsets.Right:"),
-                        capsInsetsRightSlider,
-                        new Forms9Patch.Label("CapsInsets.Bottom:"),
-                        capsInsetsBottomSlider,
+                        capsInsetsGrid,
+
                         new Forms9Patch.Label("Xamarin.Forms.VisualElement.HeightRequest:"),
                         heightRequestSlider,
 
