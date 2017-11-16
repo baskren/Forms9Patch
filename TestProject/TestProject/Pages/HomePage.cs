@@ -123,6 +123,12 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
+                            Text = "LayoutCodePage",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LayoutCodePage)
+                        },
+
+                        new TextCell {
                             Text = "Material Button & Segment alignments",
                             Command = navigateCommand,
                             CommandParameter = typeof(MaterialButtonAndSegmentAlignments)
