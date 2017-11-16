@@ -135,7 +135,7 @@ namespace Forms9Patch
         */
 
 
-		internal static Thickness ShadowPadding(IShape shape, bool hasShadow=true) {
+		internal static Thickness ShadowPadding(IShape shape, bool hasShadow=true, bool scaleForDisplay=false) {
 			if (hasShadow) {
                 var shadowX = Settings.ShadowOffset.X;
                 var shadowY = Settings.ShadowOffset.Y;
@@ -157,6 +157,13 @@ namespace Forms9Patch
                         padT = 0;
                     if (orientation == StackOrientation.Vertical && (shape.ExtendedElementShape == ExtendedElementShape.SegmentStart || shape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padB = 0;
+                }
+                if (scaleForDisplay)
+                {
+                    padL *= Display.Scale;
+                    padR *= Display.Scale;
+                    padT *= Display.Scale;
+                    padB *= Display.Scale;
                 }
                 return new Thickness(padL, padT, padR, padB);
             }

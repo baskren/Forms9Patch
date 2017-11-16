@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Forms9Patch
 {
@@ -381,7 +382,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="text"></param>
         /// <param name="icon"></param>
-        public Segment(string text, string icon) : this()
+        public Segment(string text, string icon, Assembly assembly=null) : this()
         {
             Text = text;
             bool isIconText=false;
@@ -403,7 +404,11 @@ namespace Forms9Patch
             if (isIconText)
                 IconText = icon;
             else
-                IconImage = new Forms9Patch.Image(icon);
+            {
+                if (assembly == null)
+                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+                IconImage = new Forms9Patch.Image(icon, assembly);
+            }
         }
         #endregion Constuctor
 

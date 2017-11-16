@@ -50,7 +50,7 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment("VT.START"),
                     new Forms9Patch.Segment("VT.CENTER"),
                     new Forms9Patch.Segment("VT.END"),
-                    new Forms9Patch.Segment("HZ.FILL")
+                    new Forms9Patch.Segment("VT.FILL")
                 }
             };
             vtOptionSegmentedControl.SelectIndex(3);
@@ -78,25 +78,23 @@ namespace Forms9PatchDemo
             {
                 Segments =
                 {
-                    new Forms9Patch.Segment("NONE"),
+                    //new Forms9Patch.Segment("NONE"),
                     new Forms9Patch.Segment("TILE"),
                     new Forms9Patch.Segment("ASPECTFILL"),
                     new Forms9Patch.Segment("ASPECTFIT"),
                     new Forms9Patch.Segment("FILL")
                 }
             };
-            fillSegmentedControl.SelectIndex(4);
+            fillSegmentedControl.SelectIndex(3);
             fillSegmentedControl.SegmentTapped += (sender3, e3) =>
             {
-                var fill = Forms9Patch.Fill.None;
+                var fill = Forms9Patch.Fill.Fill;
                 if (e3.Segment.Text == "TILE")
                     fill = Forms9Patch.Fill.Tile;
                 else if (e3.Segment.Text == "ASPECTFILL")
                     fill = Forms9Patch.Fill.AspectFill;
                 else if (e3.Segment.Text == "ASPECTFIT")
                     fill = Forms9Patch.Fill.AspectFit;
-                else if (e3.Segment.Text == "FILL")
-                    fill = Forms9Patch.Fill.Fill;
                 foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                     if (child is Forms9Patch.Image f9pImage)
                         f9pImage.Fill = fill;
@@ -109,7 +107,7 @@ namespace Forms9PatchDemo
                 new Forms9Patch.Segment { Text = Square },
                 new Forms9Patch.Segment { Text = Circle },
                 new Forms9Patch.Segment { Text = Ellipse },
-                new Forms9Patch.Segment { Text = Obround }
+                new Forms9Patch.Segment { Text = "OBROUND" }
                 }
             };
             shapesSelector.SelectIndex(0);
@@ -122,7 +120,7 @@ namespace Forms9PatchDemo
                     shape = Forms9Patch.ElementShape.Circle;
                 else if (e4.Segment.Text == Ellipse)
                     shape = Forms9Patch.ElementShape.Elliptical;
-                else if (e4.Segment.Text == Obround)
+                else if (e4.Segment.Text == "OBROUND")
                     shape = Forms9Patch.ElementShape.Obround;
                 foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                     if (child is Forms9Patch.Image f9pImage)
@@ -161,7 +159,6 @@ namespace Forms9PatchDemo
                 {
                     new Forms9Patch.Segment("BACKGROUND"),
                     new Forms9Patch.Segment("OUTLINE"),
-                    new Forms9Patch.Segment("RADIUS"),
                     new Forms9Patch.Segment("SHADOW"),
                     new Forms9Patch.Segment("INVERTED")
                 }
@@ -172,34 +169,28 @@ namespace Forms9PatchDemo
                 {
                     foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                         if (child is Forms9Patch.Image f9pImage)
-                            f9pImage.BackgroundColor = shapeAttributesSelector.Segments[0].IsSelected ? Color.Gray : Color.Default;
+                            f9pImage.BackgroundColor = e5.Segment.IsSelected ? Color.Orange : Color.Default;
                 }
                 else if (e5.Segment.Text == "OUTLINE")
                 {
                     foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                         if (child is Forms9Patch.Image f9pImage)
                         {
-                            f9pImage.OutlineColor = shapeAttributesSelector.Segments[1].IsSelected ? Color.Blue : Color.Default;
+                            f9pImage.OutlineColor = e5.Segment.IsSelected ? Color.Blue : Color.Default;
                             f9pImage.OutlineWidth = (float)outlineWidthSlider.Value;
                         }
-                }
-                else if (e5.Segment.Text == "RADIUS")
-                {
-                    foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                        if (child is Forms9Patch.Image f9pImage)
-                            f9pImage.OutlineRadius = shapeAttributesSelector.Segments[2].IsSelected ? (float)outlineRadiusSlider.Value : -1;
                 }
                 else if (e5.Segment.Text == "SHADOW")
                 {
                     foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                         if (child is Forms9Patch.Image f9pImage)
-                            f9pImage.HasShadow = shapeAttributesSelector.Segments[3].IsSelected;
+                            f9pImage.HasShadow = e5.Segment.IsSelected;
                 }
                 else if (e5.Segment.Text == "INVERTED")
                 {
                     foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                         if (child is Forms9Patch.Image f9pImage)
-                            f9pImage.ShadowInverted = shapeAttributesSelector.Segments[4].IsSelected;
+                            f9pImage.ShadowInverted = e5.Segment.IsSelected;
                 }
             };
             var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
@@ -207,8 +198,11 @@ namespace Forms9PatchDemo
                 Segments =
                 {
                     new Forms9Patch.Segment("NONE"),
-                    new Forms9Patch.Segment("redGridBox","Forms9PatchDemo.Resources.redGridBox"),
-                    new Forms9Patch.Segment("button", "Forms9PatchDemo.Resources.button")
+                    new Forms9Patch.Segment("gridBox","Forms9PatchDemo.Resources.redGridBox"),
+                    new Forms9Patch.Segment("button", "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment("cat"),
+                    new Forms9Patch.Segment("balloons"),
+                    new Forms9Patch.Segment("image.9"),
                 }
             };
             backgroundImageSelector.SelectIndex(1);
@@ -222,11 +216,20 @@ namespace Forms9PatchDemo
                             case "NONE":
                                 f9pImage.Source = null;
                                 break;
-                            case "redGridBox":
+                            case "gridBox":
                                 f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redGridBox");
                                 break;
                             case "button":
                                 f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button");
+                                break;
+                            case "cat":
+                                f9pImage.Source = ImageSource.FromFile("cat.jpg");
+                                break;
+                            case "balloons":
+                                f9pImage.Source = ImageSource.FromFile("balloons.jpg");
+                                break;
+                            case "image9":
+                                f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image.9.png");
                                 break;
                         }
                     }

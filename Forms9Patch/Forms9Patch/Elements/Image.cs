@@ -1,6 +1,7 @@
 ﻿#define Forms9Patch_Image
 
 using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -324,9 +325,11 @@ namespace Forms9Patch
         /// Instantiates a new instance of Image from an MultiResource embedded resource
         /// </summary>
         /// <param name="embeddedResourceId"></param>
-        public Image(string embeddedResourceId) : this()
+        public Image(string embeddedResourceId, Assembly assembly=null) : this()
         {
-            Source = Forms9Patch.ImageSource.FromMultiResource(embeddedResourceId);
+            if (assembly == null)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            Source = Forms9Patch.ImageSource.FromMultiResource(embeddedResourceId, assembly);
         }
 
         /// <summary>
@@ -390,6 +393,8 @@ namespace Forms9Patch
 
             
             SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
+
+            /*
             double requestAspectRatio = sizeRequest.Request.Width / sizeRequest.Request.Height;
             double constraintAspectRatio = widthConstraint / heightConstraint;
             double width = sizeRequest.Request.Width;
@@ -435,7 +440,8 @@ namespace Forms9Patch
                 height = height * (width / width);
             }
             return new SizeRequest(new Size(width, height));
-            
+            */
+            return sizeRequest;
 
             /*
             SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
@@ -459,7 +465,10 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (propertyName == HasShadowProperty.PropertyName)
+            if (propertyName == HasShadowProperty.PropertyName 
+                || propertyName == SourceProperty.PropertyName
+                || propertyName == OutlineWidthProperty.PropertyName
+                || propertyName == OutlineColorProperty.PropertyName)
                 InvalidateMeasure();
             base.OnPropertyChanged(propertyName);
         }
@@ -472,12 +481,14 @@ namespace Forms9Patch
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             var result = base.OnMeasure(widthConstraint, heightConstraint);
+            /*
             if (HasShadow)
             {
                 var shadowPadding = ((IShape)this).ShadowPadding();
                 result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
                     new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
             }
+            */
             return result;
         }
 
