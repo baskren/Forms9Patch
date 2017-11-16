@@ -146,21 +146,24 @@ namespace Forms9Patch.UWP
             if (rangelists == null)
                 throw new InvalidDataContractException("ToSKLattice cannot be applied to null RangeLists");
             var result = new SKLattice();
-            result.Bounds = SKRectI.Create(0, 0, bitmap.Width-1, bitmap.Height-1);
-            var xdivs = new List<int>();
-            for (int i = 0; i < rangelists.PatchesX.Count; i++)
-            {
-                xdivs.Add((int)rangelists.PatchesX[i].Start);
-                xdivs.Add((int)rangelists.PatchesX[i].End+1);
-            }
-            var ydivs = new List<int>();
-            for (int i = 0; i < rangelists.PatchesY.Count; i++)
-            {
-                ydivs.Add((int)rangelists.PatchesY[i].Start);
-                ydivs.Add((int)rangelists.PatchesY[i].End+1);
-            }
-            result.XDivs = xdivs.ToArray();
-            result.YDivs = ydivs.ToArray();
+            result.Bounds = SKRectI.Create(0, 0, bitmap.Width, bitmap.Height);
+
+                var xdivs = new List<int>();
+                for (int i = 0; i < rangelists.PatchesX.Count; i++)
+                {
+                    xdivs.Add((int)rangelists.PatchesX[i].Start);
+                    xdivs.Add((int)rangelists.PatchesX[i].End + 1);
+                }
+                result.XDivs = xdivs.ToArray();
+
+                var ydivs = new List<int>();
+                for (int i = 0; i < rangelists.PatchesY.Count; i++)
+                {
+                    ydivs.Add((int)rangelists.PatchesY[i].Start);
+                    ydivs.Add((int)rangelists.PatchesY[i].End + 1);
+                }
+                result.YDivs = ydivs.ToArray();
+
             return result;
         }
 

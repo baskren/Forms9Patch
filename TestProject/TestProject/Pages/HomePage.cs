@@ -116,6 +116,18 @@ namespace Forms9PatchDemo
 
                     new TableSection("Code") {
 
+                        new TextCell {
+                            Text = "ImageCodePage",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ImageCodePage)
+                        },
+
+                        new TextCell {
+                            Text = "Material Button & Segment alignments",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(MaterialButtonAndSegmentAlignments)
+                        },
+
                         new TextCell
                         {
                             Text = "Single MaterialButton",
@@ -135,12 +147,6 @@ namespace Forms9PatchDemo
                             Text = "Html link example",
                             Command = navigateCommand,
                             CommandParameter = typeof(LabelLink)
-                        },
-
-                        new TextCell {
-                            Text = "Material Button & Segment alignments",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(MaterialButtonAndSegmentAlignments)
                         },
 
                         new TextCell {
@@ -234,12 +240,6 @@ namespace Forms9PatchDemo
 
 
                         new TextCell {
-                            Text = "Images",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(ImageCodePage)
-                        },
-
-                        new TextCell {
                             Text = "Layouts",
                             Command = navigateCommand,
                             CommandParameter = typeof(LayoutsPage)
@@ -275,6 +275,11 @@ namespace Forms9PatchDemo
                             Command = navigateCommand,
                             CommandParameter = typeof(PanGesturePage)
                         },
+
+                    },
+
+                    new TableSection("Single Examples")
+                    {
 
                     }
                 }

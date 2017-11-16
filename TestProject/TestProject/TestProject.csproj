@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Pages\ImageOnPage.cs" />
+    <Compile Include="Pages\LayoutCodePage.cs" />
     <Compile Include="Pages\SingleMaterialButton.cs" />
     <Compile Include="Pages\SingleSegmentedController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

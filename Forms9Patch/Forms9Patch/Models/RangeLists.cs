@@ -36,17 +36,46 @@ namespace Forms9Patch
                 var scale = (float)imageSource.GetValue(ImageSource.ImageScaleProperty);
                 var capsX = new List<Range>();
                 if (capInsets.Left > 0 || capInsets.Right > 0)
+                {
+                    var start = capInsets.Left * (normalized ? bitmapWidth : scale) + offset;
+                    System.Diagnostics.Debug.WriteLine("START: ["+start+"]");
+                    var end = bitmapWidth - 1 - capInsets.Right * (normalized ? bitmapWidth : scale) + offset;
+                    System.Diagnostics.Debug.WriteLine("END:   ["+end+"]");
+                    if (start < 0)
+                        start = 0;
+                    if (start >= bitmapWidth - 1 )
+                        start = bitmapWidth - 2;
+                    if (end <= start)
+                        end = start + 1;
+                    if (end > bitmapWidth - 1)
+                        end = bitmapWidth - 1;
                     capsX.Add(new Range {
-                        Start = capInsets.Left * (normalized ?  bitmapWidth : scale) + offset,
-                        End = bitmapWidth - 1 - capInsets.Right * (normalized ? bitmapWidth :  scale) + offset
+                        Start = start,
+                        End = end
                     });
+                }
                 normalized = (capInsets.Top <= 1 && capInsets.Bottom <= 1);
                 var capsY = new List<Range>();
-                if (capInsets.Top > 0 || capInsets.Bottom > 0)  
-                    capsY.Add(new Range { 
-                            Start = capInsets.Top * (normalized ? bitmapHeight :  scale) + offset,
-                            End = bitmapHeight -1  - capInsets.Bottom * (normalized ? bitmapHeight :  scale) + offset,
-                        });
+                if (capInsets.Top > 0 || capInsets.Bottom > 0)
+                {
+                    var start = capInsets.Top * (normalized ? bitmapHeight : scale) + offset;
+                    System.Diagnostics.Debug.WriteLine("START: [" + start + "]");
+                    var end = bitmapHeight - 1 - capInsets.Bottom * (normalized ? bitmapHeight : scale) + offset;
+                    System.Diagnostics.Debug.WriteLine("END:   [" + end + "]");
+                    if (start < Display.Scale)
+                        start = Display.Scale;
+                    if (start >= bitmapHeight - 1)
+                        start = bitmapHeight - 2;
+                    if (end <= start)
+                        end = start + 1;
+                    if (end > bitmapHeight - 1)
+                        end = bitmapHeight - 1;
+                    capsY.Add(new Range
+                    {
+                        Start = start,
+                        End = end,
+                    });
+                }
                 return new RangeLists
                 {
                     PatchesX = capsX,
