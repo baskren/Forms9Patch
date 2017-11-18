@@ -146,13 +146,14 @@ namespace Forms9Patch.UWP
             if (rangelists == null)
                 throw new InvalidDataContractException("ToSKLattice cannot be applied to null RangeLists");
             var result = new SKLattice();
-            result.Bounds = SKRectI.Create(0, 0, bitmap.Width, bitmap.Height);
+            result.Bounds = bitmap.Info.Rect; // SKRectI.Create(0, 0, bitmap.Width+1, bitmap.Height);
 
                 var xdivs = new List<int>();
                 for (int i = 0; i < rangelists.PatchesX.Count; i++)
                 {
                     xdivs.Add((int)rangelists.PatchesX[i].Start);
-                    xdivs.Add((int)rangelists.PatchesX[i].End + 1);
+                    //xdivs.Add(Math.Min((int)rangelists.PatchesX[i].End+1, bitmap.Width));
+                    xdivs.Add(Math.Min((int)rangelists.PatchesX[i].End+1, bitmap.Width-1));
                 }
                 result.XDivs = xdivs.ToArray();
 
@@ -160,10 +161,11 @@ namespace Forms9Patch.UWP
                 for (int i = 0; i < rangelists.PatchesY.Count; i++)
                 {
                     ydivs.Add((int)rangelists.PatchesY[i].Start);
-                    ydivs.Add((int)rangelists.PatchesY[i].End + 1);
+                    ydivs.Add(Math.Min((int)rangelists.PatchesY[i].End+1, bitmap.Height-1));
                 }
                 result.YDivs = ydivs.ToArray();
 
+            
             return result;
         }
 
@@ -203,7 +205,7 @@ namespace Forms9Patch.UWP
             {
                 var range = new Range();
                 range.Start = pos;
-                range.End = bitmap.Width - 2;
+                range.End = bitmap.Width - 3;
                 capsX.Add(range);
             }
 
@@ -235,7 +237,7 @@ namespace Forms9Patch.UWP
             {
                 var range = new Range();
                 range.Start = pos;
-                range.End = bitmap.Height - 2;
+                range.End = bitmap.Height - 3;
                 capsY.Add(range);
             }
 

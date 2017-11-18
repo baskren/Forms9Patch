@@ -769,7 +769,7 @@ namespace Forms9Patch.UWP
             if (_imageElement == null || _sourceBitmap?.SKBitmap == null || _sourceBitmap.Width < 1 || _sourceBitmap.Height < 1)
                 return;
 
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]["+GetType()+"."+PCL.Utils.ReflectionExtensions.CallerMemberName()+"]  Fill=[" + _imageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] ");
+            //if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]["+GetType()+"."+PCL.Utils.ReflectionExtensions.CallerMemberName()+"]  Fill=[" + _imageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] ");
             workingCanvas.Save();
             if (clipPath!=null)
                 workingCanvas.ClipPath(clipPath);
@@ -777,6 +777,7 @@ namespace Forms9Patch.UWP
             var rangeLists = _imageElement.CapInsets.ToRangeLists(_sourceBitmap.SKBitmap.Width, _sourceBitmap.SKBitmap.Height, _xfImageSource, _sourceRangeLists != null);
             if (rangeLists==null)
                 rangeLists = _sourceRangeLists;
+            /*
             if (rangeLists != null)
             {
                 if (rangeLists.PatchesX.Count == 1 && rangeLists.PatchesX[0].Start <= 0 && rangeLists.PatchesX[0].End >= _sourceBitmap.SKBitmap.Width-1)
@@ -786,6 +787,7 @@ namespace Forms9Patch.UWP
                 if (rangeLists.PatchesX.Count == 0 && rangeLists.PatchesY.Count == 0)
                     rangeLists = null;
             }
+            */
                     
             var bitmap = _sourceBitmap;
             SKPaint paint = null;
@@ -927,6 +929,7 @@ namespace Forms9Patch.UWP
             else
             {
                 var lattice = rangeLists.ToSKLattice(_sourceBitmap.SKBitmap);
+                System.Diagnostics.Debug.WriteLine("lattice.x: ["+lattice.XDivs[0]+","+lattice.XDivs[1]+"] lattice.y: ["+lattice.YDivs[0]+","+lattice.YDivs[1]+"] lattice.Bounds=["+lattice.Bounds+"] lattice.Flags:" + lattice.Flags);
                 workingCanvas.DrawBitmapLattice(_sourceBitmap.SKBitmap, lattice, fillRect);
             }
 

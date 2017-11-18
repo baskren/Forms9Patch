@@ -13,17 +13,17 @@ namespace Forms9Patch.UWP
     class SliderStepSizeEffect : PlatformEffect
     {
         static int instances;
-        Forms9Patch.SliderStepSizeEffect stepSizeEffect;
+        Forms9Patch.SliderStepSizeEffect _stepSizeEffect;
 
         protected override void OnAttached()
         {
             instances++;
-            var stepSizeEffect = (Forms9Patch.SliderStepSizeEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.SliderStepSizeEffect);
+            _stepSizeEffect = (Forms9Patch.SliderStepSizeEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.SliderStepSizeEffect);
 
-            if (stepSizeEffect != null && Control is Windows.UI.Xaml.Controls.Slider slider)
+            if (_stepSizeEffect != null && Control is Windows.UI.Xaml.Controls.Slider slider)
             {
-                slider.StepFrequency = stepSizeEffect.StepSize;
-                stepSizeEffect.PropertyChanged += OnEffectPropertyChanged;
+                slider.StepFrequency = _stepSizeEffect.StepSize;
+                _stepSizeEffect.PropertyChanged += OnEffectPropertyChanged;
             }
 
 
@@ -31,15 +31,15 @@ namespace Forms9Patch.UWP
 
         protected override void OnDetached()
         {
-            if (stepSizeEffect != null)
-                stepSizeEffect.PropertyChanged -= OnEffectPropertyChanged;
-            stepSizeEffect = null;
+            if (_stepSizeEffect != null)
+                _stepSizeEffect.PropertyChanged -= OnEffectPropertyChanged;
+            _stepSizeEffect = null;
         }
 
         private void OnEffectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "StepSize" && stepSizeEffect!=null && Control is Windows.UI.Xaml.Controls.Slider slider)
-                slider.StepFrequency = stepSizeEffect.StepSize;
+            if (e.PropertyName == "StepSize" && _stepSizeEffect!=null && Control is Windows.UI.Xaml.Controls.Slider slider)
+                slider.StepFrequency = _stepSizeEffect.StepSize;
         }
 
         /// <param name="args">To be added.</param>

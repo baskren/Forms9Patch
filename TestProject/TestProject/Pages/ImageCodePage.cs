@@ -11,16 +11,25 @@ namespace Forms9PatchDemo
         static string Square = "□";
         static string Circle = "○";
         static string Ellipse = "⬭";
-        static string Obround = "◖▮◗";
+        //static string Obround = "◖▮◗";
         #endregion
 
-        Slider capsInsetsLeftSlider = new Slider(0, 1, 0.0);
-        Slider capsInsetsRightSlider = new Slider(0, 1, 0.0);
-        Slider capsInsetsTopSlider = new Slider(0, 1, 0.0);
-        Slider capsInsetsBottomSlider = new Slider(0, 1, 0.0);
+        Slider capsInsetsLeftSlider = new Slider(0, 100, 0.0);
+        Slider capsInsetsRightSlider = new Slider(0, 100, 0.0);
+        Slider capsInsetsTopSlider = new Slider(0, 100, 0.0);
+        Slider capsInsetsBottomSlider = new Slider(0, 100, 0.0);
+
+        Forms9Patch.SliderStepSizeEffect capsInsetsLStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
+        Forms9Patch.SliderStepSizeEffect capsInsetsRStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
+        Forms9Patch.SliderStepSizeEffect capsInsetsTStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
+        Forms9Patch.SliderStepSizeEffect capsInsetsBStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
+
+        Switch pixelCapsSwitch = new Switch();
 
         public ImageCodePage ()
 		{
+
+
 
             var hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
             {
@@ -117,24 +126,27 @@ namespace Forms9PatchDemo
                 Segments =
                 {
                     new Forms9Patch.Segment("NONE"),
-                    new Forms9Patch.Segment("gridBox","Forms9PatchDemo.Resources.redGridBox"),
-                    new Forms9Patch.Segment("button", "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment("gridBox"),
+                    new Forms9Patch.Segment("button"),
                     new Forms9Patch.Segment("cat"),
                     new Forms9Patch.Segment("balloons"),
-                    new Forms9Patch.Segment("image.9"),
+                    new Forms9Patch.Segment("image"),
+                    new Forms9Patch.Segment("redRibbon"),
+                    new Forms9Patch.Segment("bubble"),
+                    new Forms9Patch.Segment("blueButton")
                 }
             };
             backgroundImageSelector.SelectIndex(1);
             backgroundImageSelector.SegmentTapped += BackgroundImageSelector_SegmentTapped;
 
-            capsInsetsTopSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.01));
+            capsInsetsTopSlider.Effects.Add(capsInsetsTStepSizeEffect);
             capsInsetsTopSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
-            capsInsetsLeftSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.01));
+            capsInsetsLeftSlider.Effects.Add(capsInsetsLStepSizeEffect);
             capsInsetsLeftSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
-            capsInsetsRightSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.01));
+            capsInsetsRightSlider.Effects.Add(capsInsetsRStepSizeEffect);
             capsInsetsRightSlider.Rotation = 180;
             capsInsetsRightSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
-            capsInsetsBottomSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.01));
+            capsInsetsBottomSlider.Effects.Add(capsInsetsBStepSizeEffect);
             capsInsetsBottomSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
             capsInsetsBottomSlider.Rotation = 180;
 
@@ -155,6 +167,8 @@ namespace Forms9PatchDemo
             outlineGrid.Children.Add(outlineWidthSlider, 0, 1);
             outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineRadius:"), 1, 0);
             outlineGrid.Children.Add(outlineRadiusSlider, 1, 1);
+
+            pixelCapsSwitch.Toggled += PixelCapsSwitch_Toggled;
 
             var capsInsetsGrid = new Xamarin.Forms.Grid
             {
@@ -185,9 +199,9 @@ namespace Forms9PatchDemo
             Content = new ScrollView
             {
                 Padding = new Thickness(0, 0, 20, 0),
-				Content = new StackLayout
-				{
-					Children = {
+                Content = new StackLayout
+                {
+                    Children = {
 
                         new Forms9Patch.Label("Xamarin.Forms.VisualElement.HorizontalOptions (Alignment):"),
                         hzOptionSegmentedControl,
@@ -200,203 +214,54 @@ namespace Forms9PatchDemo
                         new Forms9Patch.Label("Shape attributes (some value vs. default value)"),
                         shapeAttributesSelector,
                         outlineGrid,
-                        
+
                         new Forms9Patch.Label("Forms9Patch.Image.Source:"),
                         backgroundImageSelector,
+                        new Forms9Patch.Label("CapsInsets Pixels (ON) / Percent (OFF):"),
+                        pixelCapsSwitch,
                         capsInsetsGrid,
 
                         new Forms9Patch.Label("Xamarin.Forms.VisualElement.HeightRequest:"),
                         heightRequestSlider,
 
-                       /*
-
-                        new Label { Text = "f9p: multiresource: button"},
-						new Forms9Patch.Image {
-							//Source = Xamarin.Forms.ImageSource.FromFile("sampleFile.png"),
-							//Source = Xamarin.Forms.ImageSource.FromFile("bubble.9.png"),
-							//Source = Xamarin.Forms.ImageSource.FromFile("button.9.png"),
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-                        
-                        
-						new Label { Text = "f9p: multiresource: adsBttn29" },
-						new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.adsBttn29"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        
-                        new Label { Text = "f9p: multiresource: bluebutton_psd" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bluebutton_psd"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-						#region Original Image
-
-                            
-
-						new Label { Text = "f9p: resource: bubble.9.png" },
-                        new Forms9Patch.Image {
-							Source = ImageSource.FromResource("Forms9PatchDemo.Resources.bubble.9.png"),
-							HeightRequest = 110,
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        new Label { Text = "xf: multiresource: redribbon" },
-                        new Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-                        new Label { Text = "f9p: uri: redribbon + CAPSINSET" },
-                        new Forms9Patch.Image {
-							Source = ImageSource.FromUri(new Uri("http://buildcalc.com/forms9patch/demo/redribbon.png")),
-							CapInsets = new Thickness(23,0,111,0),
-                            //CapInsets = new Thickness(0.1,0, 0.1, 0)
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-                        new Label { Text = "f9p: mulitresource: button" },
-                        new Forms9Patch.Image { 
-							Source =Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"), 
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-
-                        new Label { Text = "f9p: multiresource: button + CAPSINSET" },
-                        new Forms9Patch.Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button"), 
-							CapInsets = new Thickness(111,3,4,5),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-                        new Label { Text = "f9p: multiresource: redribbon + CAPSINSET" },
-                        new Forms9Patch.Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon"), 
-							CapInsets = new Thickness(23.0/308.0,0,111.0/308.0,0),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        
-                        new Label { Text = "xf: multiresource: image.9.png" },
-                        new Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image.9.png") },
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-
-                        new Label { Text = "f9p: multiresource: image.9.png" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image.9.png"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-
-                        new Label { Text = "xf: multiresource: image" },
-                        new Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image") 
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        new Label { Text = "f9p: multiresource: image" },
-                        new Forms9Patch.Image { 
-							Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image") ,
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-
-                        new Label { Text = "xf: file: cat.jpg" },
-                        new Image { 
-							Source = ImageSource.FromFile("cat.jpg"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        new Label { Text = "xf: file: balloons.jpg" },
-                        new Image { 
-							Source = ImageSource.FromFile("balloons.jpg"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        new Label { Text = "xf: file: image.png" },
-                        new Image { 
-							Source = ImageSource.FromFile("image.png"),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-						#endregion
-                        */
-
-
-						#region Image
 
 
                         new Label { Text = "f9p: multiresource: redGridBox fill:None HzOpt=Center" },
                         new Forms9Patch.Image {
                             Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-                            //Fill = Forms9Patch.Fill.None,
-                            //HorizontalOptions = LayoutOptions.Center
                         },
 
-                                                                        /*
-
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        new Label { Text = "f9p: multiresource: redGridBox fill:None HzOpt=Fill (default)" },
-                        new Forms9Patch.Image {
-                            Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-                            Fill = Forms9Patch.Fill.None,
-                            //HorizontalOptions = LayoutOptions.End
-                        },
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-    
-                        new Label { Text = "f9p: multiresource: redGridBox fill:AspectFill" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-							Fill = Forms9Patch.Fill.AspectFill,
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                        new Label { Text = "f9p: multiresource: redGridBox fill:AspectFit" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-							Fill = Forms9Patch.Fill.AspectFit,
-						},
-
-
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        new Label { Text = "f9p: multiresource: redGridBox Fill:fill" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-							Fill = Forms9Patch.Fill.Fill,
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        
-                        new Label { Text = "f9p: multiresource: redGridBox Fill.Tile" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-							Fill = Forms9Patch.Fill.Tile,
-						},
-                        
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-                        new Label { Text = "f9p: multiresource: redGridBox Fill.AspectFill CAPINSETS:10" },
-                        new Forms9Patch.Image {
-							Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-							Fill = Forms9Patch.Fill.AspectFill,
-							CapInsets = new Thickness(10),
-						},
-                        new BoxView { HeightRequest = 1, Color = Color.Black },
-
-                                                */
-
-						#endregion
-                        
-                        
 
 					},
 				},
 			};
 		}
+
+        private void PixelCapsSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                capsInsetsLeftSlider.Maximum = 200;
+                capsInsetsLeftSlider.Value = 0;
+                capsInsetsRightSlider.Maximum = 200;
+                capsInsetsRightSlider.Value = 0;
+                capsInsetsTopSlider.Maximum = 200;
+                capsInsetsTopSlider.Value = 0;
+                capsInsetsBottomSlider.Maximum = 200;
+                capsInsetsBottomSlider.Value = 0;
+            }
+            else
+            {
+                capsInsetsLeftSlider.Maximum = 100;
+                capsInsetsLeftSlider.Value = 0;
+                capsInsetsRightSlider.Maximum = 100;
+                capsInsetsRightSlider.Value = 0;
+                capsInsetsTopSlider.Maximum = 100;
+                capsInsetsTopSlider.Value = 0;
+                capsInsetsBottomSlider.Maximum = 100;
+                capsInsetsBottomSlider.Value = 0;
+            }
+        }
 
         private void HzOptionSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
@@ -520,8 +385,17 @@ namespace Forms9PatchDemo
                         case "balloons":
                             f9pImage.Source = ImageSource.FromFile("balloons.jpg");
                             break;
-                        case "image9":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image.9.png");
+                        case "image":
+                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image");
+                            break;
+                        case "redRibbon":
+                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon");
+                            break;
+                        case "bubble":
+                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bubble");
+                            break;
+                        case "blueButton":
+                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bluebutton_psd");
                             break;
                     }
                 }
@@ -530,7 +404,9 @@ namespace Forms9PatchDemo
 
         private void CapsInsetsSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            var capsInset = new Thickness(capsInsetsLeftSlider.Value, capsInsetsTopSlider.Value, capsInsetsRightSlider.Value, capsInsetsBottomSlider.Value);
+            double scale = pixelCapsSwitch.IsToggled ? 1 : 0.01;
+            var capsInset = new Thickness(capsInsetsLeftSlider.Value * scale, capsInsetsTopSlider.Value * scale, capsInsetsRightSlider.Value * scale, capsInsetsBottomSlider.Value * scale);
+            System.Diagnostics.Debug.WriteLine("CapsInset=["+Forms9Patch.ThicknessExtension.Description(capsInset)+"]");
             foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
                 if (child is Forms9Patch.Image f9pImage)
                     f9pImage.CapInsets = capsInset;
