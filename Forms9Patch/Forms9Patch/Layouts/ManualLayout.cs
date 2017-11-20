@@ -9,22 +9,6 @@ namespace Forms9Patch
     {
         #region ILayout Properties
 
-        /*#region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
-        /// <summary>
-        /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute & store shadow padding
-        /// </summary>
-        public static new BindableProperty PaddingProperty = ShapeBase.PaddingProperty;
-        /// <summary>
-        /// Gets or sets the inner padding of the Layout.
-        /// </summary>
-        /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
-        public new Thickness Padding
-        {
-            get { return (Thickness)GetValue(PaddingProperty); }
-            set { SetValue(PaddingProperty, value); }
-        }
-        #endregion Padding*/
-
         #region IgnoreChildren
         /// <summary>
         /// The ignore children property.
@@ -213,21 +197,6 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementShape property
 
-        /*#region IgnoreShapePropertiesChanges
-        /// <summary>
-        /// Backging store for the IgnoreShapePropertiesChanges property
-        /// </summary>
-        public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
-        /// <summary>
-        /// Prevent shape updates (to optimize performace)
-        /// </summary>
-        public bool IgnoreShapePropertiesChanges
-        {
-            get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
-            set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
-        }
-        #endregion IgnoreShapePropertyChanges*/
-
         #region IElement
 
         #region InstanceId
@@ -263,40 +232,36 @@ namespace Forms9Patch
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            if (HasShadow)
-            {
-                var shadowPadding = ((IShape)this).ShadowPadding();
-                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
-                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
-            }
-            return result;
-        }
-
         /// <summary>
         /// Occurs when layout children event is triggered.
         /// </summary>
         public event EventHandler<ManualLayoutEventArgs> LayoutChildrenEvent;
 
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            if (HasShadow)
+            {
+                var shadowPadding = ShapeBase.ShadowPadding(this);
+                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness), new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
+            }
+            return result;
+        }
 
-        /// <summary>
-        /// Layouts the children.
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-        /// <param name="width">Width.</param>
-        /// <param name="height">Height.</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            var shadowPadding = ((IShape)this).ShadowPadding();
-            x += shadowPadding.Left;
-            y += shadowPadding.Top;
-            width -= shadowPadding.HorizontalThickness;
-            height -= shadowPadding.VerticalThickness;
+            if (HasShadow)
+            {
+                var shadowPadding = ShapeBase.ShadowPadding(this);
+                x += shadowPadding.Left;
+                y += shadowPadding.Top;
+                width -= shadowPadding.HorizontalThickness;
+                height -= shadowPadding.VerticalThickness;
+            }
+            //base.LayoutChildren(x, y, width, height);
             LayoutChildrenEvent?.Invoke(this, new ManualLayoutEventArgs(x, y, width, height));
         }
+
         #endregion
 
 

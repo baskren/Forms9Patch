@@ -98,6 +98,8 @@ namespace Forms9Patch.UWP
         #region Properties
         MaterialButton MaterialButton => _roundedBoxElement as MaterialButton;
 
+        Xamarin.Forms.View View => _roundedBoxElement as Xamarin.Forms.View;
+
         internal Forms9Patch.Image ImageElement
         {
             get { return _imageElement; }
@@ -152,7 +154,7 @@ namespace Forms9Patch.UWP
                 if (_xfImageSource != null)
                 {
                     _sourceBitmap = await _xfImageSource.FetchF9PBitmap(this);
-                    _sourceRangeLists = _sourceBitmap.RangeLists;
+                    _sourceRangeLists = _sourceBitmap?.RangeLists;
                 }
 
                 if (_sourceBitmap == null || _sourceBitmap.SKBitmap == null)
@@ -512,12 +514,6 @@ namespace Forms9Patch.UWP
             var surfaceInfo = e.Info;
             var surface = e.Surface;
             var canvas = e.Surface.Canvas;
-
-           // if (IgnoreChanges)
-           // {
-           //     _lastIgnoreChanges = true;
-           //     return;
-           // }
 
             if (ValidLayout(CanvasSize))
                 return;

@@ -278,21 +278,6 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementShape property
 
-        #region IgnoreShapePropertiesChanges
-        /// <summary>
-        /// Backging store for the IgnoreShapePropertiesChanges property
-        /// </summary>
-        //public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
-        /// <summary>
-        /// Prevent shape updates (to optimize performace)
-        /// </summary>
-        //public bool IgnoreShapePropertiesChanges
-       // {
-       //     get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
-       //     set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
-       // }
-        #endregion IgnoreShapePropertyChanges
-
         #region IElement
 
         public int InstanceId => _f9pId;
@@ -311,6 +296,7 @@ namespace Forms9Patch
         int _f9pId;
 
         #endregion
+
 
         #region Constructors
         /// <summary>
@@ -376,93 +362,10 @@ namespace Forms9Patch
 
 
         #region Change management
-
         /// <summary>
-        /// Addresses a size request
+        /// PropertyChanged event handler
         /// </summary>
-        /// <returns>The size request.</returns>
-        /// <param name="widthConstraint">Width constraint.</param>
-        /// <param name="heightConstraint">Height constraint.</param>
-        [Obsolete("Use OnMeasure")]
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            /*
-            var result =  base.OnSizeRequest(widthConstraint,heightConstraint);
-            return result;
-            */
-
-            
-            SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
-
-            /*
-            double requestAspectRatio = sizeRequest.Request.Width / sizeRequest.Request.Height;
-            double constraintAspectRatio = widthConstraint / heightConstraint;
-            double width = sizeRequest.Request.Width;
-            double height = sizeRequest.Request.Height;
-            if (Math.Abs(width) < float.Epsilon * 5 || Math.Abs(height) < float.Epsilon * 5)
-                //return new SizeRequest(new Size(40.0, 40.0));
-                return new SizeRequest(SourceImageSize);
-            if (constraintAspectRatio > requestAspectRatio)
-            {
-                switch (Fill)
-                {
-                    case Fill.AspectFit:
-                    case Fill.AspectFill:
-                        height = Math.Min(height, heightConstraint);
-                        width = width * (height / height);
-                        break;
-                    case Fill.Fill:
-                    case Fill.Tile:
-                        width = Math.Min(width, widthConstraint);
-                        height = height * (width / width);
-                        break;
-                }
-            }
-            else if (constraintAspectRatio < requestAspectRatio)
-            {
-                switch (Fill)
-                {
-                    case Fill.AspectFit:
-                    case Fill.AspectFill:
-                        width = Math.Min(width, widthConstraint);
-                        height = height * (width / width);
-                        break;
-                    case Fill.Fill:
-                    case Fill.Tile:
-                        height = Math.Min(height, heightConstraint);
-                        width = width * (height / height);
-                        break;
-                }
-            }
-            else
-            {
-                width = Math.Min(width, widthConstraint);
-                height = height * (width / width);
-            }
-            return new SizeRequest(new Size(width, height));
-            */
-            return sizeRequest;
-
-            /*
-            SizeRequest sizeRequest = base.OnSizeRequest(double.PositiveInfinity, double.PositiveInfinity);
-            double width = sizeRequest.Request.Width;
-            double height = sizeRequest.Request.Height;
-            if (Math.Abs(width) < float.Epsilon * 5 || Math.Abs(height) < float.Epsilon * 5)
-                //return new SizeRequest(new Size(40.0, 40.0));
-                return new SizeRequest(BaseImageSize);
-            Size result = new Size { Width = width, Height = height };
-            if (Fill != Fill.None)
-            {
-                if (!Double.IsInfinity(widthConstraint))
-                    result.Width = Math.Max(width, widthConstraint);
-                if (!Double.IsInfinity(heightConstraint))
-                    result.Height = Math.Max(height, heightConstraint);
-            }
-            return new SizeRequest(result);
-            */
-
-        }
-
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (propertyName == HasShadowProperty.PropertyName 
@@ -477,33 +380,6 @@ namespace Forms9Patch
 
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
-
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            /*
-            if (HasShadow)
-            {
-                var shadowPadding = ((IShape)this).ShadowPadding();
-                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
-                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
-            }
-            */
-            return result;
-        }
-
-#if Forms9Patch_Image
-#else
-        protected override void LayoutChildren(double x, double y, double width, double height)
-        {
-            var shadowPadding = ((IShape)this).ShadowPadding();
-            x += shadowPadding.Left;
-            y += shadowPadding.Top;
-            width -= shadowPadding.HorizontalThickness;
-            height -= shadowPadding.VerticalThickness;
-            base.LayoutChildren(x, y, width, height);
-        }
-#endif
         #endregion
 
     }

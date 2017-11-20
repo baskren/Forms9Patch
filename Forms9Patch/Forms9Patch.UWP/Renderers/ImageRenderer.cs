@@ -56,9 +56,6 @@ namespace Forms9Patch.UWP
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
             if (_debugMessages)  System.Diagnostics.Debug.WriteLine("["+GetType()+"]["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] constraints=["+widthConstraint+", "+heightConstraint+"]");
-            //var result = base.GetDesiredSize(widthConstraint, heightConstraint);
-            //var result = Control.GetDesiredSize(widthConstraint, heightConstraint);
-            //var result = new SizeRequest(Control.SourceImageSize());
             var result = Control != null ? Control.GetDesiredSize(widthConstraint,heightConstraint) : default(Xamarin.Forms.SizeRequest);
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] result=["+result+"]");
             return result;

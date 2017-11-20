@@ -54,8 +54,16 @@ namespace Forms9Patch.UWP
                             var assembly = (Assembly)imageSource.GetValue(ImageSource.AssemblyProperty);
                             var resourceId = key.Substring(4);
                             using (var stream = assembly.GetManifestResourceStream(resourceId))
-                            using (var skStream = new SKManagedStream(stream))
-                                skBitmap = SKBitmap.Decode(skStream);
+                            {
+                                if (stream==null)
+                                {
+                                    Toast.Create("Cannot find EmbeddedResource", "Cannot find EmbeddedResource with Id of [" + resourceId + "] in Assembly [" + assembly + "]");
+                                    
+                                    return null;
+                                }
+                                using (var skStream = new SKManagedStream(stream))
+                                    skBitmap = SKBitmap.Decode(skStream);
+                            }
                         }
                         else if (key.StartsWith("uri:"))
                             path = await PCL.Utils.FileCache.DownloadAsync(key.Substring(4));
@@ -120,7 +128,8 @@ namespace Forms9Patch.UWP
             lock (_constructorLock)
             {
                 if (!_views.ContainsKey(key))
-                    throw new InvalidDataContractException();
+                    // this happens if there is a failure to load the view
+                    return;
                 var _clientViews = _views[key];
                 _clientViews?.Remove(view);
                 if (_clientViews.Count > 0)

@@ -92,23 +92,6 @@ namespace Forms9Patch
 
         #region ILayout properties
 
-        /*#region Padding property (Override base padding for shadow calculations)
-        /// <summary>
-        /// Identifies the Padding bindable property.
-        /// </summary>
-        /// <remarks></remarks>
-        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(BubbleLayout), new Thickness(20), BindingMode.OneWay, propertyChanged: UpdateBasePadding);
-        /// <summary>
-        /// Gets or sets the inner padding of the Layout.
-        /// </summary>
-        /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
-        public new Thickness Padding
-        {
-            get { return (Thickness)GetValue(PaddingProperty); }
-            set { SetValue(PaddingProperty, value); }
-        }
-        #endregion Padding property*/
-
         #region IgnoreChildren property
         /// <summary>
         /// backing store for IgnoreChildren property
@@ -307,21 +290,6 @@ namespace Forms9Patch
 
         #endregion IElement
 
-        /*#region IgnoreShapePropertiesChanges
-        /// <summary>
-        /// Backging store for the IgnoreShapePropertiesChanges property
-        /// </summary>
-        public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
-        /// <summary>
-        /// Prevent shape updates (to optimize performace)
-        /// </summary>
-        public bool IgnoreShapePropertiesChanges
-        {
-            get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
-            set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
-        }
-        #endregion IgnoreShapePropertyChanges*/
-
         #endregion IShape
 
         #endregion IBackground properties
@@ -404,37 +372,6 @@ namespace Forms9Patch
         #endregion Layout management
         
 
-        #region Base Padding Calculation
-        /*
-        internal static void UpdateBasePadding(BindableObject bindable, object oldValue, object newValue) {
-			var layout = bindable as BubbleLayout;
-
-			Thickness layoutPadding;
-			if (newValue is Thickness)
-				layoutPadding = (Thickness)newValue;
-			else
-				layoutPadding = layout.Padding;
-
-			double xLeft = layoutPadding.Left + (layout.PointerDirection == PointerDirection.Left ? layout.PointerLength : 0);
-			double xTop = layoutPadding.Top + (layout.PointerDirection==PointerDirection.Up ? layout.PointerLength : 0);
-			double xRight = layoutPadding.Right + (layout.PointerDirection==PointerDirection.Right ? layout.PointerLength : 0);
-			double xBottom = layoutPadding.Bottom + (layout.PointerDirection==PointerDirection.Down ? layout.PointerLength : 0);
-
-			if (layout.HasShadow) {
-				var shadowPadding = ShadowPadding (layout);
-				xLeft += shadowPadding.Left;
-				xTop +=  shadowPadding.Top;
-				xRight += shadowPadding.Right;
-				xBottom += shadowPadding.Bottom;
-			} 
-			var newPadding = new Thickness(xLeft, xTop, xRight, xBottom);
-			layout.SetValue(Xamarin.Forms.Layout.PaddingProperty, newPadding);
-			//System.Diagnostics.Debug.WriteLine ("newPadding: " + newPadding.Description ());
-			return;
-		}
-        */
-
-		#endregion
 	}
 }
 

@@ -96,6 +96,7 @@
     <Compile Include="Pages\ExternalEmbeddedResourceImage.cs" />
     <Compile Include="Pages\CustomFontEffectPage.cs" />
     <Compile Include="Pages\HeapDemoPage.cs" />
+    <Compile Include="UserPages\AbsoluteLayoutExplorationCode.cs" />
     <Compile Include="UserPages\CustomFontEffectPage.cs" />
     <Compile Include="Forms9PatchDemo.cs" />
     <Compile Include="UserPages\UserHomePage.cs" />
@@ -225,7 +226,7 @@
     <EmbeddedResource Include="Resources\tick%402x.png" />
     <EmbeddedResource Include="Resources\tick%403x.png" />
     <EmbeddedResource Include="Resources\adsBttn29.png" />
-    <EmbeddedResource Include="Resources\bluebutton_psd.9.png" />
+    <EmbeddedResource Include="Resources\bluebutton.9.png" />
     <EmbeddedResource Include="UserPages\Burkhart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -284,6 +285,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\redGridBox9.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\balloons.jpg" />
+    <EmbeddedResource Include="Resources\cat.jpg" />
   </ItemGroup>
   <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

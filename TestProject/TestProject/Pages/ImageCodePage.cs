@@ -395,7 +395,7 @@ namespace Forms9PatchDemo
                             f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bubble");
                             break;
                         case "blueButton":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bluebutton_psd");
+                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bluebutton");
                             break;
                     }
                 }

@@ -148,6 +148,12 @@ namespace Forms9PatchDemo
                             Command = navigateCommand,
                             CommandParameter = typeof(SegmentNavPage1)
                         },
+
+                        new TextCell {
+                            Text = "Absolute Layout Exploration Code",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(AbsoluteLayoutExplorationCode)
+                        },
                     }
                 }
             };
