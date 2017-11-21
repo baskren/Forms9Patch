@@ -9,7 +9,7 @@ namespace Forms9Patch
     public class ImageButton : MaterialButton
     {
 
-        #region Properties
+        #region State Properties
         /// <summary>
         /// Backing store for the DefaultState bindable property.
         /// </summary>
@@ -111,7 +111,7 @@ namespace Forms9Patch
             _gestureListener.LongPressing += OnLongPressing;
 
             _constructing = false;
-            
+
         }
         #endregion
 

@@ -548,16 +548,11 @@ namespace Forms9Patch.UWP
                 bool drawOutline =DrawOutline;
                 bool drawImage = DrawImage;
                 bool drawSeparators = outlineColor.A > 0.01 && MaterialButton != null && separatorWidth > 0.01;
-                //bool drawFill = backgroundColor.A > 0.01; // ||_roundedBoxElement.BackgroundImage?.Source !=null;
                 bool drawFill = DrawFill;
 
-                if (drawFill || drawOutline || drawSeparators || drawImage)
+                if ((drawFill || drawOutline || drawSeparators || drawImage) && CanvasSize != default(SKSize))
                 {
 
-                    //var visualElement = _roundedBoxElement as Xamarin.Forms.VisualElement;
-
-                    if (CanvasSize != default(SKSize))
-                    {
                         if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)  if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + ","+ ((FrameworkElement)Parent).ActualHeight + "]");
                         var rect = new SKRect(0, 0, (float)(((FrameworkElement)Parent).ActualWidth * Display.Scale), (float)(((FrameworkElement)Parent).ActualHeight * Display.Scale));
 
@@ -737,7 +732,6 @@ namespace Forms9Patch.UWP
 
                         StoreLayoutProperties();
                     }
-                }
             }
             base.OnPaintSurface(e);
 

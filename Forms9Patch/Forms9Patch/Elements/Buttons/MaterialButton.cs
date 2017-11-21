@@ -909,7 +909,8 @@ namespace Forms9Patch
             if (IsSelected && SelectedTextColor.A > 0)
                 enabledLabelColor = SelectedTextColor;
 
-            base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
+            base.OutlineWidth = OutlineWidth < 0 ?  (BackgroundImage?.Source!=null ? 0 : (BackgroundColor.A > 0 ? 0 : 1) )    :     (OutlineColor == Color.Transparent ? 0 : OutlineWidth);
+
             if (IsEnabled)
             {
                 _label.TextColor = enabledLabelColor;
@@ -978,7 +979,8 @@ namespace Forms9Patch
                 }
                 else
                 {
-                    base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
+                    // the next line is already covered above
+                    //base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
                     base.HasShadow = BackgroundColor.A > 0 && HasShadow;
                     if (IsSelected)
                     {
@@ -1379,6 +1381,7 @@ namespace Forms9Patch
                 _changingIconText = false;
             }
             else if (propertyName == BackgroundColorProperty.PropertyName
+                || propertyName == BackgroundImageProperty.PropertyName
                 || propertyName == HasShadowProperty.PropertyName
                 || propertyName == ShadowInvertedProperty.PropertyName
                 || propertyName == OutlineColorProperty.PropertyName
