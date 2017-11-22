@@ -66,7 +66,7 @@ namespace Forms9Patch.UWP
                             }
                         }
                         else if (key.StartsWith("uri:"))
-                            path = await PCL.Utils.FileCache.DownloadAsync(key.Substring(4));
+                            path = await PCL.Utils.DownloadCache.DownloadAsync(key.Substring(4));
                         else if (key.StartsWith("file:"))
                             path = key.Substring(5);
                         else

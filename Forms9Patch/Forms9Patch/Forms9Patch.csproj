@@ -77,6 +77,7 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Effects\CustomFontEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
     <Compile Include="Enums\ElementShape.cs" />
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Layouts\ShapeBase.cs" />
     <Compile Include="Enums\PointerDirection.cs" />
     <Compile Include="Extensions\PointerDirectionExtensions.cs" />
-    <Compile Include="ElementModels\ImageSource.cs" />
+    <Compile Include="Models\ImageSource.cs" />
     <Compile Include="Layouts\BubbleLayout.cs" />
     <Compile Include="Interfaces\IDescendentBounds.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />

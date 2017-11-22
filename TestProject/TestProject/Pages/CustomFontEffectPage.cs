@@ -16,28 +16,28 @@ namespace Forms9PatchDemo
 				Text = "Xamarin.Forms.Label",
 				FontFamily = "Forms9PatchDemo.Resources.Fonts.Pacifico.ttf"
 			};
-			label.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
+			label.Effects.Add(new Forms9Patch.CustomFontEffect());
 
 			var editor = new Xamarin.Forms.Editor
 			{
 				Text = "Xamarin.Forms.Editor",
 				FontFamily = "Forms9PatchDemo.Resources.Fonts.Pacifico.ttf"
 			};
-			editor.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
+			editor.Effects.Add(new Forms9Patch.CustomFontEffect());
 
 			var entry = new Xamarin.Forms.Entry
 			{
 				Text = "Xamarin.Forms.Entry",
 				FontFamily = "Forms9PatchDemo.Resources.Fonts.Pacifico.ttf"
 			};
-			entry.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
+			entry.Effects.Add(new Forms9Patch.CustomFontEffect());
 
 			var button = new Xamarin.Forms.Button
 			{
 				Text = "Xamarin.Forms.Button",
 				FontFamily = "Forms9PatchDemo.Resources.Fonts.Pacifico.ttf"
 			};
-			button.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
+			button.Effects.Add(new Forms9Patch.CustomFontEffect());
 
 			Content = new StackLayout
 			{

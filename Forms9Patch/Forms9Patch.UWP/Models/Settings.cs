@@ -89,7 +89,7 @@ namespace Forms9Patch.UWP
             typeof(FormsGestures.Listener).GetTypeInfo().Assembly,
             typeof(FormsGestures.UWP.UwpRotateEventArgs).GetTypeInfo().Assembly,
             typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly,
-            typeof(PCL.Utils.FileCache).GetTypeInfo().Assembly,
+            typeof(PCL.Utils.DownloadCache).GetTypeInfo().Assembly,
             typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly,
             typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly,
             typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly,

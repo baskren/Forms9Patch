@@ -9,6 +9,8 @@ namespace Forms9Patch
 {
     public class SliderStepSizeEffect : Xamarin.Forms.RoutingEffect, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         double _stepSize;
         public double StepSize
         {
@@ -32,6 +34,5 @@ namespace Forms9Patch
             _stepSize = stepSize;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
