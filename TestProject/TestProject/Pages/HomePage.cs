@@ -172,7 +172,7 @@ namespace Forms9PatchDemo
                         new TextCell {
                             Text = "Custom Font Effect",
                             Command = navigateCommand,
-                            CommandParameter = typeof(CustomFontEffectPage)
+                            CommandParameter = typeof(EmbeddedResourceFontEffectPage)
                         },
 
                         new TextCell {

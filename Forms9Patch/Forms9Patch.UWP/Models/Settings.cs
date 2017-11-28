@@ -94,6 +94,7 @@ namespace Forms9Patch.UWP
             typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly,
             typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly,
             typeof(Windows.UI.Xaml.Media.Imaging.BitmapFactory).GetTypeInfo().Assembly,
+            typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly,
         };
         public static List<Assembly> AssembliesToInclude => _assembliesToInclude;
     }

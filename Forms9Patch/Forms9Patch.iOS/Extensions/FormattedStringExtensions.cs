@@ -7,7 +7,7 @@ namespace Forms9Patch.iOS
 {
 	static class FormattedStringExtensions
 	{
-		static FontExtensions.MetaFont MathMetaFont;
+		static MetaFont MathMetaFont;
 
 		internal static NSAttributedString ToNSAttributedString (this F9PFormattedString formattedString, UIFont baseFont, UIColor baseColor) //, EllipsePlacement ellipsePlacement = EllipsePlacement.None, int secondToLastEnd = -1, int lastLineStart = 0, int lastLineEnd = -1, int startLastVisible = -1, int midLastVisible = -1, bool twice=false) {
 		{	
@@ -25,25 +25,25 @@ namespace Forms9Patch.iOS
 
 			#region Layout font-spans (MetaFonts)
 
-			var metaFonts = new List<FontExtensions.MetaFont> ();
-			var baseMetaFont = new FontExtensions.MetaFont (
+			var metaFonts = new List<MetaFont> ();
+			var baseMetaFont = new MetaFont (
 				baseFont.FamilyName, 
-				baseFont.PointSize, 
+				(float)baseFont.PointSize, 
 				(baseFont.FontDescriptor.Traits.SymbolicTrait & UIFontDescriptorSymbolicTraits.Bold) > 0,
 				(baseFont.FontDescriptor.Traits.SymbolicTrait & UIFontDescriptorSymbolicTraits.Italic) > 0);
 			
-			MathMetaFont = MathMetaFont ?? new FontExtensions.MetaFont ("STIXGeneral", baseFont.PointSize);
+			MathMetaFont = MathMetaFont ?? new MetaFont ("STIXGeneral", (float)baseFont.PointSize);
 
 
 			for (int i = 0; i < text.Length; i++)
 			{
 				if (i + 1 < text.Length && text[i] == '\ud835' && text[i + 1] >= '\udc00' && text[i + 1] <= '\udeff')
 				{
-					metaFonts.Add (new FontExtensions.MetaFont (MathMetaFont));
-					metaFonts.Add (new FontExtensions.MetaFont (MathMetaFont));  // there are two because we're using a double byte unicode character
+					metaFonts.Add (new MetaFont (MathMetaFont));
+					metaFonts.Add (new MetaFont (MathMetaFont));  // there are two because we're using a double byte unicode character
 					i++;
 				} else 
-					metaFonts.Add (new FontExtensions.MetaFont (baseMetaFont));
+					metaFonts.Add (new MetaFont (baseMetaFont));
 			}
 			#endregion
 

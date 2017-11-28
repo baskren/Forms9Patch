@@ -14,6 +14,8 @@ namespace Forms9Patch
 	{
 		internal const string SpanKey = "Action";
 
+        internal const string NullId = "ActionSpanNullId";
+
 		string _id;
 		public string Id
 		{
@@ -45,6 +47,9 @@ namespace Forms9Patch
 			Key = SpanKey;
 			Id = id;
 			Href = href;
+
+            if (IsEmpty())
+                Id = NullId;
 		}
 
 		public ActionSpan(ActionSpan span) : this (span.Start, span.End, span.Id) {
@@ -62,5 +67,6 @@ namespace Forms9Patch
 			return new ActionSpan(Start, End, Id, Href);
 		}
 
+        public bool IsEmpty() => string.IsNullOrEmpty(Id) && string.IsNullOrEmpty(Href);
 	}
 }

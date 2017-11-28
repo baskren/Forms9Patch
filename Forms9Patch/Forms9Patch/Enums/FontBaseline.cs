@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forms9Patch.iOS
+namespace Forms9Patch
 {
 	enum FontBaseline
 	{

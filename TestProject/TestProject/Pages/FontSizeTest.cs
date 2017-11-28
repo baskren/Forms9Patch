@@ -16,7 +16,7 @@ namespace Forms9PatchDemo.Pages
                 BackgroundColor = Color.FromRgb(218, 112, 214),
                 TextColor = Color.White
             };
-            label.Effects.Add(Effect.Resolve("Forms9Patch.CustomFontEffect"));
+            label.Effects.Add(Effect.Resolve("Forms9Patch.EmbeddedResourceFontEffect"));
 
 
             Padding = new Thickness(10, 30, 10, 10);

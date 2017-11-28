@@ -1,6 +1,6 @@
 ﻿// /*******************************************************************
 //  *
-//  * CustomFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
+//  * EmbeddedResourceFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using System;
@@ -8,13 +8,13 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportEffect(typeof(Forms9Patch.iOS.CustomFontEffect), "CustomFontEffect")]
+[assembly: ExportEffect(typeof(Forms9Patch.iOS.EmbeddedResourceFontEffect), "EmbeddedResourceFontEffect")]
 namespace Forms9Patch.iOS
 {
 	/// <summary>
 	/// Custom font effect.
 	/// </summary>
-	public class CustomFontEffect : PlatformEffect
+	public class EmbeddedResourceFontEffect : PlatformEffect
 	{
 		static int instances;
 

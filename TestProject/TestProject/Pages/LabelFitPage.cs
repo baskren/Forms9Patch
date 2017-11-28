@@ -54,7 +54,7 @@ namespace Forms9PatchDemo
                 BackgroundColor = Color.Black,
                 Text = editor.Text
             };
-            var effect = Effect.Resolve("Forms9Patch.CustomFontEffect");
+            var effect = Effect.Resolve("Forms9Patch.EmbeddedResourceFontEffect");
             xfLabel.Effects.Add(effect);
             #endregion
 

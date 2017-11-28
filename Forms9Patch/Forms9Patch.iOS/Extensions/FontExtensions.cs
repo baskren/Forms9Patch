@@ -118,6 +118,7 @@ namespace Forms9Patch.iOS
 			return result;
 		}
 		*/
+
         /*
 		internal static UIFont ToUIFont (this IFontElement element)
 		{
@@ -269,13 +270,13 @@ namespace Forms9Patch.iOS
                 }
                 //} else {
                 //	Console.WriteLine ("Font [] is assumed not to be an embedded resource because it does not contain \".Resources.Fonts.\" in its Resource ID");
-            }
+            }s
             return null;
         }
 
         internal static UIFont BestFont(MetaFont metaFont, UIFont baseFont)
         {
-            nfloat size = metaFont.Size / (metaFont.Baseline == FontBaseline.Normal ? 1f : 1.6f);
+            nfloat size = (nfloat)metaFont.Size / (metaFont.Baseline == FontBaseline.Normal ? 1f : 1.6f);
 
             return BestFont(metaFont.Family, size, metaFont.Bold, metaFont.Italic);
         }
@@ -406,70 +407,7 @@ namespace Forms9Patch.iOS
             return bestAttemptFont;
         }
 
-        internal class MetaFont
-        {
-            public string Family { get; set; }
-            public nfloat Size { get; set; }
-            public bool Italic { get; set; }
-            public bool Bold { get; set; }
-            public FontBaseline Baseline { get; set; }
-
-            public MetaFont(string family, nfloat size, bool bold = false, bool italic = false)
-            {
-                Baseline = FontBaseline.Normal;
-                Family = family;
-                Size = size;
-                Bold = bold;
-                Italic = italic;
-            }
-
-            public MetaFont(MetaFont f)
-            {
-                Baseline = f.Baseline;
-                Family = f.Family;
-                Size = f.Size;
-                Bold = f.Bold;
-                Italic = f.Italic;
-            }
-
-            public static bool operator ==(MetaFont f1, MetaFont f2)
-            {
-                if (((object)f1) == null || ((object)f2) == null)
-                    return false;
-                if (f1.Size != f2.Size)
-                    return false;
-                if (f1.Bold != f2.Bold)
-                    return false;
-                if (f1.Italic != f2.Italic)
-                    return false;
-                if (f1.Family != f2.Family)
-                    return false;
-                return f1.Baseline == f2.Baseline;
-            }
-
-
-            public static bool operator !=(MetaFont f1, MetaFont f2)
-            {
-                return !(f1 == f2);
-            }
-
-            public override bool Equals(object obj)
-            {
-                return this == (MetaFont)obj;
-            }
-
-            public override int GetHashCode()
-            {
-                var familyHash = Family.GetHashCode() << 12;
-                var sizeHash = ((int)Size) << 4;
-                var boldHash = (Bold ? 0x08 : 0x00);
-                var italicHash = (Italic ? 0x04 : 0x00);
-                var baselineHash = (int)Baseline;
-                return familyHash + sizeHash + boldHash + italicHash + baselineHash;
-            }
-
-        }
-
+ 
         internal static readonly Dictionary<string, string> _embeddedResourceFonts = new Dictionary<string, string>();
         static readonly object _loadFontLock = new object();
 

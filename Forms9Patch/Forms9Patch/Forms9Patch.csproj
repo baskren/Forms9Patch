@@ -77,9 +77,10 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Effects\CustomFontEffect.cs" />
+    <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
     <Compile Include="Enums\ElementShape.cs" />
+    <Compile Include="Enums\FontBaseline.cs" />
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="Interfaces\ILayout.cs" />
     <Compile Include="Interfaces\ISegment.cs" />
     <Compile Include="Interfaces\IImage.cs" />
+    <Compile Include="Models\FontSource.cs" />
+    <Compile Include="Models\MetaFont.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ThicknessExtension.cs" />
     <Compile Include="Interfaces\INativeSettings.cs" />

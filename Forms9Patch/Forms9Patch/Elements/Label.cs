@@ -370,6 +370,9 @@ namespace Forms9Patch
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
+            // we're going to handle windows via the Window's Hyperlink Span element
+            if (Device.OS != TargetPlatform.Windows)
+                return;
             if (e.NumberOfTouches == 1)
             {
                 var index = IndexAtPoint(e.Touches[0]);
@@ -383,7 +386,7 @@ namespace Forms9Patch
                         if (index >= actionSpan.Start && index <= actionSpan.End)
                         {
                             //System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
-                            ActionTagTapped?.Invoke(this, new ActionTagEventArgs(actionSpan.Id, actionSpan.Href));
+                            Tap(actionSpan);
                             e.Handled = true;
                             return;
                         }
@@ -391,6 +394,18 @@ namespace Forms9Patch
                 }
             }
             e.Handled = false;
+        }
+
+        internal void Tap(string id, string href)
+        {
+            if (id == ActionSpan.NullId)
+                id = null;
+            ActionTagTapped?.Invoke(this, new ActionTagEventArgs(id, href));
+        }
+
+        internal void Tap(ActionSpan actionSpan)
+        {
+            Tap(actionSpan?.Id, actionSpan?.Href);
         }
         #endregion
     }

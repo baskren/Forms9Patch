@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using PCL.Utils;
 
 namespace Forms9Patch
 {
@@ -9,6 +12,85 @@ namespace Forms9Patch
 	/// </summary>
 	public static class FontExtensions
 	{
+
+        internal static async Task<FontSource> GetEmbeddedResourceFontSourceAsync(string embeddedResourceId, Assembly assembly=null)
+        {
+            if (assembly == null)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            return await Service.GetEmbeddedResourceFontSource(embeddedResourceId, assembly);
+        }
+
+        internal static async Task<FontSource> GetFileFontSourceAsync(PCLStorage.IFile file)
+        {
+            return await Service.GetFileFontSource(file);
+        }
+
+        internal static async Task<FontSource> GetUrlFontSource(string url)
+        {
+            return await Service.GetUriFontSource(url);
+        }
+
+        /*
+        public static async Task SetFontSource(this Xamarin.Forms.VisualElement element, string embeddedResourceId, Assembly assembly = null)
+        {
+            if (element.HasProperty("FontFamily"))
+            {
+                if (assembly == null)
+                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+
+                // load font and set element's FontFamily
+                var fontFamily = await RegisterFontSource(embeddedResourceId, assembly);
+                element.SetPropertyValue("FontFamily", fontFamily);
+
+                // attach effect
+                bool containsEmbeddedResourceFontEffect = false;
+                foreach (var effect in element.Effects)
+                    if (effect is EmbeddedResourceFontEffect)
+                    {
+                        containsEmbeddedResourceFontEffect = true;
+                        break;
+                    }
+                if (!containsEmbeddedResourceFontEffect)
+                    element.Effects.Add(new EmbeddedResourceFontEffect());
+            }
+        }
+
+        // key = fontFamily, value = Tuple<embeddedResource, assembly>
+        internal static Dictionary<string, FontSource> FontSourceRegistry = new Dictionary<string, FontSource>();
+
+
+        /// <summary>
+        /// Makes a .ttf or .otf font file, stored as an EmbeddedResource, available to Text elements (EmbeddedResourceFontEffect needs to be added to Xamarin.Forms elements)
+        /// </summary>
+        /// <param name="embeddedResourceId"></param>
+        /// <param name="assembly"></param>
+        /// <returns>the FamilyName of the font or null if font fails to load</returns>
+        public static async Task<string> RegisterFontSource(string embeddedResourceId, Assembly assembly=null)
+        {
+            if (assembly==null)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            _service = _service ?? DependencyService.Get<IFontService>();
+            if (_service == null)
+                throw new NotSupportedException("IFontService is not supported on this platform.");
+
+            foreach (var fontSource in FontSourceRegistry.Values)
+            {
+                if (fontSource is EmbeddedResourceFontSource embeddedResourceFontSource)
+                {
+                    if (embeddedResourceFontSource.EmbeddedResourceId == embeddedResourceId)
+                        return embeddedResourceFontSource.FamilyName;
+                }
+            }
+            var source = await _service.GetEmbeddedResourceFontSource(embeddedResourceId, assembly);
+            if (source != null)
+                FontSourceRegistry.Add(source.FamilyName, source );
+
+            return source.FamilyName;
+        }
+        */
+        
+
+
 		/// <summary>
 		/// Is Int32 char in the Unicode math alphanumeric block.
 		/// </summary>
@@ -29,6 +111,16 @@ namespace Forms9Patch
 		}
 
 		static IFontService _service;
+        static IFontService Service
+        {
+            get
+            {
+                _service = _service ?? DependencyService.Get<IFontService>();
+                if (_service == null)
+                    throw new NotSupportedException("IFontService is not supported on this platform.");
+                return _service;
+            }
+        }
 
 		/// <summary>
 		/// Lines the height.
@@ -59,10 +151,7 @@ namespace Forms9Patch
 		/// <param name="fontAttributes">Font attributes.</param>
 		public static double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)
 		{
-			_service = _service ?? DependencyService.Get<IFontService>();
-			if (_service == null)
-				throw new NotSupportedException("IFontService is not supported on this platform.");
-			return _service.LineHeight(fontFamily, fontSize, fontAttributes);
+			return Service.LineHeight(fontFamily, fontSize, fontAttributes);
 		}
 
 		/// <summary>
@@ -94,10 +183,7 @@ namespace Forms9Patch
 		/// <param name="fontAttributes">Font attributes.</param>
 		public static double LineSpace(string fontFamily, double fontSize, FontAttributes fontAttributes)
 		{
-			_service = _service ?? DependencyService.Get<IFontService>();
-			if (_service == null)
-				throw new NotSupportedException("IFontService is not supported on this platform.");
-			return _service.LineSpace(fontFamily, fontSize, fontAttributes);
+			return Service.LineSpace(fontFamily, fontSize, fontAttributes);
 		}
 	}
 }

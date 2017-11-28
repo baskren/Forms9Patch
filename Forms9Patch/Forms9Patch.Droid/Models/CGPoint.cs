@@ -160,8 +160,8 @@ namespace Forms9Patch.Droid
 		/// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
 		public override int GetHashCode () {
 			int num = 23;
-			num = num * 31 + this.x.GetHashCode ();
-			return num * 31 + this.y.GetHashCode ();
+			num = num * 31 + x.GetHashCode ();
+			return num * 31 + y.GetHashCode ();
 		}
 
 		/*

@@ -1,6 +1,6 @@
 ﻿// /*******************************************************************
 //  *
-//  * CustomFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
+//  * EmbeddedResourceFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using System;
@@ -8,13 +8,13 @@ using Android.Graphics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportEffect(typeof(Forms9Patch.Droid.CustomFontEffect), "CustomFontEffect")]
+[assembly: ExportEffect(typeof(Forms9Patch.Droid.EmbeddedResourceFontEffect), "EmbeddedResourceFontEffect")]
 namespace Forms9Patch.Droid
 {
 	/// <summary>
 	/// Custom font effect.
 	/// </summary>
-	public class CustomFontEffect : PlatformEffect
+	public class EmbeddedResourceFontEffect : PlatformEffect
 	{
 		static int instances;
 

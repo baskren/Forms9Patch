@@ -1,6 +1,6 @@
 ﻿// /*******************************************************************
 //  *
-//  * CustomFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
+//  * EmbeddedResourceFontEffect.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using System;
@@ -13,17 +13,20 @@ using Forms9Patch.Extensions;
 using System.Collections.Generic;
 using Windows.Storage;
 
-[assembly: ExportEffect(typeof(Forms9Patch.UWP.CustomFontEffect), "CustomFontEffect")]
+//TODO: Can we get rid of this effect all together?
+
+    
+//[assembly: ExportEffect(typeof(Forms9Patch.UWP.EmbeddedResourceFontEffect), "EmbeddedResourceFontEffect")]
 namespace Forms9Patch.UWP
 {
 	/// <summary>
 	/// Custom font effect.
 	/// </summary>
-	public class CustomFontEffect : PlatformEffect
+	public class EmbeddedResourceFontEffect : PlatformEffect
 	{
 		static int _instances;
         int _instance;
-        Forms9Patch.CustomFontEffect _customFontEffect;
+        Forms9Patch.EmbeddedResourceFontEffect _customFontEffect;
 
         PropertyInfo _elementFontFamilyProperty = null;
         PropertyInfo _controlFontFamilyProperty = null;
@@ -40,15 +43,13 @@ namespace Forms9Patch.UWP
                 _instance = _instances++;
                 if (_instance > 4 && !Settings.IsLicenseValid)
                 {
-                    Toast.Create("UNLICENSED COPY", "Only 4 instances of Forms9Patch.CustomFontEffect is available without a license.");
+                    Toast.Create("UNLICENSED COPY", "Only 4 instances of Forms9Patch.EmbeddedResourceFontEffect is available without a license.");
                     _elementFontFamilyProperty = null;
                     _controlFontFamilyProperty = null;
                 }
                 else
                 {
-                    _customFontEffect = (Forms9Patch.CustomFontEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.CustomFontEffect);
-                    if (_customFontEffect != null)
-                        _customFontEffect.PropertyChanged += OnEffectPropertyChanged;
+                    _customFontEffect = (Forms9Patch.EmbeddedResourceFontEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.EmbeddedResourceFontEffect);
                     UpdateFont();
                 }
             }
@@ -65,8 +66,6 @@ namespace Forms9Patch.UWP
         /// </summary>
         protected override void OnDetached()
 		{
-            if (_customFontEffect!=null)
-                _customFontEffect.PropertyChanged -= OnEffectPropertyChanged;
             _customFontEffect = null;
 		}
 
@@ -88,7 +87,8 @@ namespace Forms9Patch.UWP
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {
                 var fontFamily = _elementFontFamilyProperty.GetValue(Element) as string;
-
+                //_controlFontFamilyProperty.SetValue(Control, await FontFamilyExtensions.ToUwpFontFamily(fontFamily, _customFontEffect.Assembly));
+                /*
                 if (fontFamily != null)
                 {
                     var fontFamilyParts = fontFamily.Split('#');
@@ -111,6 +111,7 @@ namespace Forms9Patch.UWP
                         _controlFontFamilyProperty.SetValue(Control, uwpFontFamily);
                     }
                 }
+                */
             }
 		}
 	}
