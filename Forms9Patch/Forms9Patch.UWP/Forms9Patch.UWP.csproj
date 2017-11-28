@@ -139,7 +139,6 @@
     <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
-    <Compile Include="Extensions\FontFamilyExtensions.cs" />
     <Compile Include="Extensions\FormattedStringExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
