@@ -301,14 +301,17 @@ namespace Forms9PatchDemo
             {
                 if (e.Segment.IconImage != null)
                 {
+                    /*
                     _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                     foreach (var segment in _hzSegmentsElement.Segments)
                         segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                     foreach (var segment in _vtSegmentsElement.Segments)
                         segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
+                        */
+                    SetIconImage(e.Segment.IconImage);
                 }
                 else
-                    SetIconText(e.Segment.HtmlText);
+                    SetIconText(e.Segment.HtmlText ?? e.Segment.Text);
             };
 
             _spacingSlider.ValueChanged += (sender, e) =>
@@ -373,11 +376,13 @@ namespace Forms9PatchDemo
 
         void SetIconText(string iconTextSetting)
         {
+            /*
             _iconTextAndTextButton.IconImage = null;
             foreach (var segment in _hzSegmentsElement.Segments)
                 segment.IconImage = null;
             foreach (var segment in _vtSegmentsElement.Segments)
                 segment.IconImage = null;
+                */
             if (iconTextSetting == "NONE")
                 _iconTextAndTextButton.IconText = null;
             else
@@ -386,6 +391,17 @@ namespace Forms9PatchDemo
                 segment.IconText = _iconTextAndTextButton.IconText;
             foreach (var segment in _vtSegmentsElement.Segments)
                 segment.IconText = _iconTextAndTextButton.IconText;
+        }
+
+        void SetIconImage(Forms9Patch.Image image)
+        {
+            var source = image.Source;
+            _iconTextAndTextButton.IconImage = new Forms9Patch.Image(image);
+            foreach (var segment in _hzSegmentsElement.Segments)
+                segment.IconImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.Info"); //new Forms9Patch.Image(image);
+            foreach (var segment in _vtSegmentsElement.Segments)
+                segment.IconImage = new Forms9Patch.Image(image.Source);
+
         }
     }
 }

@@ -239,7 +239,10 @@ namespace Forms9Patch
         public Forms9Patch.Image IconImage
         {
             get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set { SetValue(IconImageProperty, value); }
+            set
+            {
+                SetValue(IconImageProperty, value);
+            }
         }
         #endregion IconImage
 

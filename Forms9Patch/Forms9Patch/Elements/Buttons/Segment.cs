@@ -42,7 +42,10 @@ namespace Forms9Patch
         public Forms9Patch.Image IconImage
         {
             get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set { SetValue(IconImageProperty, value); }
+            set
+            {
+                SetValue(IconImageProperty, value);
+            }
         }
         #endregion IconImage property
 
@@ -432,7 +435,7 @@ namespace Forms9Patch
 			base.OnPropertyChanged(propertyName);
 			switch (propertyName)
 			{
-                case "ImageSource":
+                case "IconImage":
                     MaterialButton.IconImage = IconImage;
                     break;
                 case "IconText":
