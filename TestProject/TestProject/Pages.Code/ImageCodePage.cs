@@ -152,13 +152,16 @@ namespace Forms9PatchDemo
 
             var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
             {
+                HeightRequest = 40,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
                 TintIcon = false,
                 Segments =
                 {
                     new Forms9Patch.Segment(""),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
-                    new Forms9Patch.Segment(null, ImageSource.FromFile("cat.jpg")),
+                    //new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
+                    //new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("cat.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
                     /*
                     new Forms9Patch.Segment(null, ImageSource.FromFile("balloons.jpg")),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image"),

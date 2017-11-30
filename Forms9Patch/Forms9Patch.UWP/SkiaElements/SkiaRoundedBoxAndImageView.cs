@@ -856,8 +856,11 @@ namespace Forms9Patch.UWP
                 else if (_imageElement.Fill == Fill.AspectFit)
                 {
 
-                    var destWidth = _imageElement.HorizontalOptions.Alignment == Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect) : fillRect.Width;
-                    var destHeight = _imageElement.VerticalOptions.Alignment == Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height) : fillRect.Height;
+                    //var destWidth = _imageElement.HorizontalOptions.Alignment != Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect) : fillRect.Width;
+                    var destWidth = (bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect);
+                    //var destHeight = _imageElement.VerticalOptions.Alignment != Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height) : fillRect.Height;
+                    var destHeight = (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height);
+
                     float left = fillRect.MidX - (float)destWidth / 2f, top = fillRect.MidY - (float)destHeight / 2f;
                     destRect = SKRect.Create(left, top, (float)destWidth, (float)destHeight);
                 }

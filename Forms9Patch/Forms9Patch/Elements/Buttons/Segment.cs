@@ -380,6 +380,18 @@ namespace Forms9Patch
         /// Instantiates an new Segment and sets its Text and imageSource properties
         /// </summary>
         /// <param name="text"></param>
+        /// <param name="image"></param>
+        public Segment(string text, Forms9Patch.Image image) : this()
+        {
+            Text = text;
+            if (image!=null)
+                IconImage = image;
+        }
+
+        /// <summary>
+        /// Instantiates an new Segment and sets its Text property and sets the IconImage to a new image, created using the provided ImageSource
+        /// </summary>
+        /// <param name="text"></param>
         /// <param name="imageSource"></param>
         public Segment(string text, Xamarin.Forms.ImageSource imageSource=null) : this()
         {
@@ -389,7 +401,7 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Instantiates a new Segment and sets its Text and either its IconText or the embedded resource id of its IconImage
+        /// Instantiates a new Segment and sets its Text and either its IconText or its IconImage, created using the provided embedded resource id 
         /// </summary>
         /// <param name="text"></param>
         /// <param name="icon"></param>
@@ -397,7 +409,13 @@ namespace Forms9Patch
         {
             Text = text;
             bool isIconText=false;
-            if (icon.Contains("<") && icon.Contains("/>"))
+
+            if (assembly == null)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            var match = Forms9Patch.ImageSource.BestEmbeddedMultiResourceMatch(icon, assembly);
+
+            //if (icon.Contains("<") && icon.Contains("/>"))
+            if (match==null)
             {
                 int opens=0, closes=0;
                 for(int i=0;i<icon.Length;i++)
@@ -416,8 +434,6 @@ namespace Forms9Patch
                 IconText = icon;
             else
             {
-                if (assembly == null)
-                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
                 IconImage = new Forms9Patch.Image(icon, assembly);
             }
         }

@@ -195,6 +195,14 @@ namespace Forms9Patch
 
         #region Resource Resolution
 
+        internal static string BestEmbeddedMultiResourceMatch(string resourceId, Assembly assembly)
+        {
+            if (assembly == null)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            var r = BestGuessResource(resourceId, assembly);
+            return r?.Path;
+        }
+
         static ImageSourceContainer BestGuessResource(string pathString, Assembly assembly)
         {
             ImageSourceContainer result;
