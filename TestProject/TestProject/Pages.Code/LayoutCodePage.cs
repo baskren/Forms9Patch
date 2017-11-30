@@ -63,6 +63,13 @@ namespace Forms9PatchDemo
                 }
         };
 
+        Xamarin.Forms.Slider outlineWidthSlider = new Xamarin.Forms.Slider
+        {
+            Minimum = 0,
+            Maximum = 15,
+            Value = 2
+        };
+
 
         public LayoutCodePage()
         {
@@ -125,12 +132,6 @@ namespace Forms9PatchDemo
             shapesSelector.SelectIndex(0);
             shapesSelector.SegmentTapped += ShapesSelector_SegmentTapped;
 
-            var outlineWidthSlider = new Xamarin.Forms.Slider
-            {
-                Minimum = 0,
-                Maximum = 15,
-                Value = 0
-            };
             outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0 / Forms9Patch.Display.Scale));
             outlineWidthSlider.ValueChanged += OutlineWidthSlider_ValueChanged;
 
@@ -501,18 +502,26 @@ namespace Forms9PatchDemo
             switch (e.Segment.Text)
             {
                 case "BACKGROUND":
-                    absoluteLayout.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                    frame.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                    grid.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                    relativeLayout.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                    stackLayout.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
+                    var backgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
+                    absoluteLayout.BackgroundColor = backgroundColor;
+                    frame.BackgroundColor = backgroundColor;
+                    grid.BackgroundColor = backgroundColor;
+                    relativeLayout.BackgroundColor = backgroundColor;
+                    stackLayout.BackgroundColor = backgroundColor;
                     break;
                 case "OUTLINE":
-                    absoluteLayout.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                    frame.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                    grid.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                    relativeLayout.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                    stackLayout.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
+                    var outlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
+                    absoluteLayout.OutlineColor = outlineColor;
+                    frame.OutlineColor = outlineColor;
+                    grid.OutlineColor = outlineColor;
+                    relativeLayout.OutlineColor = outlineColor;
+                    stackLayout.OutlineColor = outlineColor;
+                    var outlineWidth = e.Segment.IsSelected ? (float)Math.Max(outlineWidthSlider.Value, 2) : 0;
+                    absoluteLayout.OutlineWidth = outlineWidth;
+                    frame.OutlineWidth = outlineWidth;
+                    grid.OutlineWidth = outlineWidth;
+                    relativeLayout.OutlineWidth = outlineWidth;
+                    stackLayout.OutlineWidth = outlineWidth;
                     break;
                 case "SHADOW":
                     absoluteLayout.HasShadow = e.Segment.IsSelected;

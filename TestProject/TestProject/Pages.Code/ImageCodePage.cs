@@ -26,6 +26,13 @@ namespace Forms9PatchDemo
 
         Switch pixelCapsSwitch = new Switch();
 
+        Xamarin.Forms.Slider outlineRadiusSlider = new Xamarin.Forms.Slider
+        {
+            Minimum = 0,
+            Maximum = 15,
+            Value = 2
+        };
+
         public ImageCodePage ()
 		{
 
@@ -99,12 +106,6 @@ namespace Forms9PatchDemo
             outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0 / Forms9Patch.Display.Scale));
             outlineWidthSlider.ValueChanged += OutlineWidthSlider_ValueChanged; 
 
-            var outlineRadiusSlider = new Xamarin.Forms.Slider
-            {
-                Minimum = 0,
-                Maximum = 15,
-                Value = 0
-            };
             outlineRadiusSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
             outlineRadiusSlider.ValueChanged += OutlineRadiusSlider_ValueChanged; 
 
@@ -353,6 +354,7 @@ namespace Forms9PatchDemo
                             break;
                         case "OUTLINE":
                             f9pImage.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
+                            f9pImage.OutlineWidth = e.Segment.IsSelected ? (float)Math.Max(outlineRadiusSlider.Value,2) : 0;
                             break;
                         case "SHADOW":
                             f9pImage.HasShadow = e.Segment.IsSelected;
