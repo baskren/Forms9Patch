@@ -19,12 +19,12 @@ namespace Forms9PatchDemo
 				Forms9Patch.Toast.Create("&lt;a&gt; tagged label","<b>id:</b> "+e.Id+";\n<b>href:</b>"+e.Href+";");
 			};
 
-
+            
 			Padding = new Thickness (5, 20, 5, 5);
 			Content = new ScrollView {
 				Content = new StackLayout {
 					Children = {
-						
+
 						new Label { Text = "Hello HtmlLabelPage" },
 
 						aTagLabel,
@@ -34,14 +34,16 @@ namespace Forms9PatchDemo
 							Text = "",
 							FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
 						},
+                        
 
 						new Forms9Patch.Label { HtmlText =  "<b>\nSUPPORTED HTML TAGS:</b>" },
 						new Forms9Patch.Label { HtmlText =  "plain: no tags"},
-						new Forms9Patch.Label { Text =  "non-html and very long.  Just trying to see what happens when a wrap is called for.  Let's see!"},
+						new Forms9Patch.Label { Text =  "non-html and very long.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"},
 						new Forms9Patch.Label { HtmlText =  "&lt;b&gt;: <b>Bold</b> plain"},
 
+                        
 						new Forms9Patch.Label { 
-							HtmlText =  "&lt;Bold&gt;: <b>Bold</b> w/ serif italic <div style=\"color:grey\">s</div><div style=\"color:grey\">e</div>rif base font",
+							HtmlText =  "&lt;Bold&gt;: <b>Bold</b> w/ serif italic <div style=\"color:red\">s</div><div style=\"color:green\">e</div>rif base font",
 							FontFamily = "Serif",
 							FontAttributes = FontAttributes.Italic,
 							TextColor = Color.Blue,
@@ -75,6 +77,7 @@ namespace Forms9PatchDemo
 						new Forms9Patch.Label { HtmlText =  "&lt;pre&gt;: <pre>preformatted  text</pre> plain  \ttext"},
 						new Forms9Patch.Label { HtmlText =  "&lt;tt&gt;: <tt>teletype</tt> plain"},
 						
+                        
 						new Forms9Patch.Label {
 							HtmlText = @"<font color=""red""><u><tt>This is a <i>very</i> <b>long block</b> of text which should wrap to the next line.</tt></b></font>",
 							BackgroundColor = Color.FromRgba(128,128,128,50),
@@ -107,9 +110,9 @@ namespace Forms9PatchDemo
 						new Forms9Patch.Label { HtmlText =  "font-size: <div style=\"font-size:34px\">34px Text</div> plain"},
 						new Forms9Patch.Label { HtmlText =  "font-weight: <div style=\"font-weight:Bold;font-style:Italic\">Bold+Italic Text</div> plain"},
 
-
+                        
 					}
-				}
+                }
 			};
 		}
 	}

@@ -58,8 +58,8 @@ namespace Forms9Patch.UWP
                         return false;
                     if (Strikethrough != other.Strikethrough)
                         return false;
+                    return true;
                 }
-                return true;
             }
             return false;
         }

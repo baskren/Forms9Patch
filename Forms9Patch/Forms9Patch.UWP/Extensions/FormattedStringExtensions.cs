@@ -37,17 +37,17 @@ namespace Forms9Patch.UWP
             #region Layout font-spans (MetaFonts)
             var metaFonts = new List<MetaFont>();
             var baseMetaFont = new MetaFont(
-                FontService.ReconcileFontFamily(label.FontFamily),
+                label.FontFamily,
                 textBlock.FontSize,
                 textBlock.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight,
                 (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0,
-                textColor: label.TextColor,
-                backgroundColor: label.BackgroundColor
+                textColor: label.TextColor//,
+                //backgroundColor: label.BackgroundColor
                 );
 
             var MathMetaFont = new MetaFont(baseMetaFont)
             {
-                Family = FontService.ReconcileFontFamily("Forms9Patch.Resources.Fonts.STIXGeneral.otf", PCL.Utils.ReflectionExtensions.GetAssembly(typeof(Forms9Patch.Label)))
+                Family = "STIXGeneral" //FontService.ReconcileFontFamily("Forms9Patch.Resources.Fonts.STIXGeneral.otf", PCL.Utils.ReflectionExtensions.GetAssembly(typeof(Forms9Patch.Label)))
             };
 
             for (int i = 0; i < text.Length; i++)
@@ -80,29 +80,17 @@ namespace Forms9Patch.UWP
                     {
                         case FontFamilySpan.SpanKey: // TextElement.FontFamily
                             var fontFamily = ((FontFamilySpan)span).FontFamilyName;
-                            switch(fontFamily.ToLower())
-                            {
-                                case "monospace":
-                                    fontFamily = "Consolas";
-                                    break;
-                                case "serif":
-                                    fontFamily = "Cambria";
-                                    break;
-                                case "sans-serif":
-                                    fontFamily = "Segoe UI";
-                                    break;
-                            }
                             metaFonts[i].Family = fontFamily;
                             break;
                         case FontSizeSpan.SpanKey:  // TextElement.FontSize
-                                float size = ((FontSizeSpan)span).Size;
-                                metaFonts[i].Size = (size < 0 ? metaFonts[i].Size * (-size) : size);
+                            float size = ((FontSizeSpan)span).Size;
+                            metaFonts[i].Size = (size < 0 ? metaFonts[i].Size * (-size) : size);
                             break;
                         case BoldSpan.SpanKey: // Bold span // TextElement.FontWeight (Thin, ExtraLight, Light, SemiLight, Normal, Medium, SemiBold, Bold, ExtraBold, Black, ExtraBlack)
-                                metaFonts[i].Bold = true;
+                            metaFonts[i].Bold = true;
                             break;
                         case ItalicsSpan.SpanKey: // Italic span // TextElement.FontStyle (Normal, Italic, Oblique)
-                                metaFonts[i].Italic = true;
+                            metaFonts[i].Italic = true;
                             break;
                         case FontColorSpan.SpanKey: // TextElement.Foreground
                             metaFonts[i].TextColor = ((FontColorSpan)span).Color;
@@ -114,16 +102,16 @@ namespace Forms9Patch.UWP
                             metaFonts[i].Strikethrough = true;
                             break;
                         case SuperscriptSpan.SpanKey: // Run with Typographic.Variants=FontVariants.Superscript while using Cambria
-                                metaFonts[i].Baseline = FontBaseline.Superscript;
+                            metaFonts[i].Baseline = FontBaseline.Superscript;
                             break;
                         case SubscriptSpan.SpanKey: // Run with Typographic.Varients=FontVariants.Subscript while using Cambria
-                                metaFonts[i].Baseline = FontBaseline.Subscript;
+                            metaFonts[i].Baseline = FontBaseline.Subscript;
                             break;
                         case NumeratorSpan.SpanKey: // no UWP solution - need to use SuperScript
-                                metaFonts[i].Baseline = FontBaseline.Numerator;
+                            metaFonts[i].Baseline = FontBaseline.Numerator;
                             break;
                         case DenominatorSpan.SpanKey: // no UWP solution - need to use Subscript
-                                metaFonts[i].Baseline = FontBaseline.Denominator;
+                            metaFonts[i].Baseline = FontBaseline.Denominator;
                             break;
                         case ActionSpan.SpanKey:  // Hyperlink span ??
                             metaFonts[i].Action = new MetaFontAction((ActionSpan)span);
@@ -155,8 +143,7 @@ namespace Forms9Patch.UWP
                     startIndex = i;
                 }
             }
-            if (lastMetaFont != baseMetaFont || startIndex==0)
-                AddInline(textBlock, label, lastMetaFont, text, startIndex, text.Length - startIndex);
+            AddInline(textBlock, label, lastMetaFont, text, startIndex, text.Length - startIndex);
             #endregion
 
         }
@@ -170,30 +157,32 @@ namespace Forms9Patch.UWP
             run.FontSize = metaFont.Size;
             run.FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;
             run.FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
-            run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
 
             run.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            if (metaFont.Underline)
-                run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
             if (metaFont.Strikethrough)
                 run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
 
             switch (metaFont.Baseline)
             {
                 case FontBaseline.Numerator:
+                    run.FontFamily = new Windows.UI.Xaml.Media.FontFamily("Cambria");
+                    Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Superscript);
+                    break;
                 case FontBaseline.Superscript:
                     run.FontFamily = new Windows.UI.Xaml.Media.FontFamily("Cambria");
                     Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Superscript);
                     break;
-
                 case FontBaseline.Denominator:
+                    run.FontFamily = new Windows.UI.Xaml.Media.FontFamily("Cambria");
+                    Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Subscript);
+                    break;
                 case FontBaseline.Subscript:
                     run.FontFamily = new Windows.UI.Xaml.Media.FontFamily("Cambria");
                     Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Subscript);
                     break;
                 default:
                     if (metaFont.Family!=null)
-                        run.FontFamily = new Windows.UI.Xaml.Media.FontFamily(metaFont.Family);
+                        run.FontFamily = new Windows.UI.Xaml.Media.FontFamily(FontService.ReconcileFontFamily(metaFont.Family));
                     break;
             }
 
@@ -210,9 +199,16 @@ namespace Forms9Patch.UWP
             }
 
             if (metaFont.IsActionEmpty())
+            {
+                run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
+                if (metaFont.Underline)
+                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
                 textBlock.Inlines.Add(run);
+            }
             else
             {
+                run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Xamarin.Forms.Color.Blue.ToWindowsColor());
+                run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
                 var hyperlink = new Hyperlink();
                 hyperlink.Inlines.Add(run);
                 hyperlink.Click += (Hyperlink sender, HyperlinkClickEventArgs args) => label.Tap(metaFont.Action.Id, metaFont.Action.Href);

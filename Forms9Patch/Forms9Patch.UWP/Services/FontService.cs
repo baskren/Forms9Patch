@@ -32,15 +32,29 @@ namespace Forms9Patch.UWP
         //public static Dictionary<string, string> UrlFontSources = new Dictionary<string, string>();
 
 
-        public static string ReconcileFontFamily(string embeddedResourceId, Assembly assembly=null)
+        public static string ReconcileFontFamily(string f9pFontFamily, Assembly assembly=null)
         {
-            if (string.IsNullOrWhiteSpace(embeddedResourceId))
+            if (string.IsNullOrWhiteSpace(f9pFontFamily))
                 return Windows.UI.Xaml.Media.FontFamily.XamlAutoFontFamily.Source;
 
-            if (EmbeddedFontSources.ContainsKey(embeddedResourceId))
-                return EmbeddedFontSources[embeddedResourceId];
+            switch (f9pFontFamily.ToLower())
+            {
+                case "monospace":
+                    return "Consolas";
+                case "serif":
+                    return "Cambria";
+                case "sans-serif":
+                    return "Segoe UI";
+                case "stixgeneral":
+                    f9pFontFamily = "Forms9Patch.Resources.Fonts.STIXGeneral.otf";
+                    assembly = PCL.Utils.ReflectionExtensions.GetAssembly(typeof(Forms9Patch.Label));
+                    break;
+            }
 
-            var idParts = embeddedResourceId.Split('#');
+            if (EmbeddedFontSources.ContainsKey(f9pFontFamily))
+                return EmbeddedFontSources[f9pFontFamily];
+
+            var idParts = f9pFontFamily.Split('#');
             var id = idParts[0];
 
             string localStorageFileName = null;
@@ -50,7 +64,7 @@ namespace Forms9Patch.UWP
             {
                 // we've got to go hunting for this ... and UWP doesn't give us much help
                 // first, try the main assembly!
-                var targetAsmName = embeddedResourceId.Split('.').First();
+                var targetAsmName = f9pFontFamily.Split('.').First();
                
                 if (targetAsmName == Forms9Patch.ApplicationInfoService.Assembly.GetName().Name)
                     localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(id, Forms9Patch.ApplicationInfoService.Assembly);
@@ -70,7 +84,7 @@ namespace Forms9Patch.UWP
             }
 
             if (localStorageFileName == null)
-                return embeddedResourceId;
+                return f9pFontFamily;
 
             string fontName = null;
             if (idParts.Count() > 1)
@@ -81,7 +95,7 @@ namespace Forms9Patch.UWP
                 fontName = TTFAnalyzer.FontFamily(cachedFile);
             }
             var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
-            EmbeddedFontSources.Add(embeddedResourceId, uwpFontFamily);
+            EmbeddedFontSources.Add(f9pFontFamily, uwpFontFamily);
             return uwpFontFamily;
         }
 
