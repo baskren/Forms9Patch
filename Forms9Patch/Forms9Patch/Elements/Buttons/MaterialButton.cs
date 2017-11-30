@@ -1455,15 +1455,15 @@ namespace Forms9Patch
                 _label.FontFamily = FontFamily;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
-                if (TrailingIcon)
-                    _stackLayout.LowerChild(_label);
-                else
-                    _stackLayout.RaiseChild(_label);
+                if (_label != null &&  _stackLayout.Children.Contains(_label))
+                {
+                    _stackLayout.Children.Remove(_label);
+                    if (TrailingIcon)
+                        _stackLayout.Children.Insert(0, _label);
+                    else
+                        _stackLayout.Children.Add(_label);
+                }
                 SetOrienations();
-
-                // following 2 lines are required to force an update.  ForceLayout() causes label to not be sized correctly
-                HasTightSpacing = !HasTightSpacing;
-                HasTightSpacing = !HasTightSpacing;
             }
             else if (propertyName == SpacingProperty.PropertyName)
                 _stackLayout.Spacing = Spacing;

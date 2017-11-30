@@ -175,18 +175,9 @@ namespace Forms9PatchDemo
 
             _optionsElement.SegmentTapped += (sender, e) =>
             {
-                var options = new List<string>();
-                foreach (var segment in _optionsElement.SelectedSegments)
-                    options.Add(segment.Text.ToUpper());
-                var hasTightSpacing = options.Contains("TIGHT");
-                var trailingIcon = options.Contains("TRAILING");
-                var orientation = options.Contains("VERTICAL") ? StackOrientation.Vertical : StackOrientation.Horizontal;
-
-
-                _iconTextAndTextButton.HasTightSpacing = hasTightSpacing;
-                _iconTextAndTextButton.TrailingIcon = trailingIcon;
-                _iconTextAndTextButton.Orientation = orientation;
-
+                _iconTextAndTextButton.HasTightSpacing = _optionsElement.IsIndexSelected(0);
+                _iconTextAndTextButton.TrailingIcon = _optionsElement.IsIndexSelected(1);
+                _iconTextAndTextButton.Orientation = _optionsElement.IsIndexSelected(2) ? StackOrientation.Vertical : StackOrientation.Horizontal;
             };
 
             _iconElement.SegmentTapped += (sender, e) =>
