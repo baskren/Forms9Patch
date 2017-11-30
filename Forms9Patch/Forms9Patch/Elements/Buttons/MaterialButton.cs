@@ -454,7 +454,12 @@ namespace Forms9Patch
         public string HtmlText
         {
             get { return (string)GetValue(HtmlTextProperty); }
-            set { SetValue(HtmlTextProperty, value); }
+            set
+            {
+                PCL.Utils.ReflectionExtensions.CallerAssembly();
+                
+                SetValue(HtmlTextProperty, value);
+            }
         }
         #endregion HtmlText
 

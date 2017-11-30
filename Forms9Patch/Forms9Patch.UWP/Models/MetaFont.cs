@@ -29,34 +29,40 @@ namespace Forms9Patch.UWP
 
         public MetaFont(MetaFont f) : base (f)
         {
-            Action = f.Action.Copy();
+            if (f == null)
+                return;
+            Action = f.Action?.Copy();
             BackgroundColor = f.BackgroundColor;
             TextColor = f.TextColor;
             Underline = f.Underline;
             Strikethrough = f.Strikethrough;
         }
 
-        public static bool operator ==(MetaFont f1, MetaFont f2)
+        public static bool operator ==(MetaFont f1, MetaFont f2) => Equals(f1, f2);
+
+        public static bool operator !=(MetaFont f1, MetaFont f2) => !Equals(f1, f2);
+
+        public override bool Equals(object obj)
         {
-            if (Forms9Patch.MetaFont.Equals(f1, f2))
+            if (obj is MetaFont other)
             {
-                if (f1.Action != f2.Action)
-                    return false;
-                if (f1.TextColor != f2.TextColor)
-                    return false;
-                if (f1.BackgroundColor != f2.BackgroundColor)
-                    return false;
-                if (f1.Underline != f2.Underline)
-                    return false;
-                if (f1.Strikethrough != f2.Strikethrough)
-                    return false;
+                if (base.Equals(other))
+                {
+                    if (Action != other.Action)
+                        return false;
+                    if (TextColor != other.TextColor)
+                        return false;
+                    if (BackgroundColor != other.BackgroundColor)
+                        return false;
+                    if (Underline != other.Underline)
+                        return false;
+                    if (Strikethrough != other.Strikethrough)
+                        return false;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
-
-        public static bool operator !=(MetaFont f1, MetaFont f2) => !(f1 == f2);
-
-        public override bool Equals(object obj) => this == (MetaFont)obj;
 
         public override int GetHashCode()
         {
@@ -70,6 +76,10 @@ namespace Forms9Patch.UWP
             return hash;
         }
 
+        public bool IsActionEmpty()
+        {
+            return Action == null || Action.IsEmpty();
+        }
     }
 
     class MetaFontAction

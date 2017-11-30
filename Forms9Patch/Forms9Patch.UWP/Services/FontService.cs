@@ -6,11 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using PCL.Utils;
 
 [assembly: Dependency(typeof(Forms9Patch.UWP.FontService))]
 namespace Forms9Patch.UWP
 {
-    class FontService : IFontService
+    internal class FontService : IFontService
     {
 
         // general concept:
@@ -24,47 +25,74 @@ namespace Forms9Patch.UWP
         //          ii) if it exists, reset it to the cached FontFamily
         //
 
+        public static Dictionary<string, string> EmbeddedFontSources = new Dictionary<string, string>();
+
+        //public static Dictionary<string, string> FileFontSources = new Dictionary<string, string>();
+
+        //public static Dictionary<string, string> UrlFontSources = new Dictionary<string, string>();
 
 
-        Dictionary<string,EmbeddedResourceFontSource> _embeddedFontSources = new Dictionary<string, EmbeddedResourceFontSource>();
-        public async Task<FontSource> GetEmbeddedResourceFontSource(string embeddedResourceId, Assembly assembly)
+        public static string ReconcileFontFamily(string embeddedResourceId, Assembly assembly=null)
         {
-            if (assembly ==null || string.IsNullOrWhiteSpace(embeddedResourceId))
-                return null;
+            if (string.IsNullOrWhiteSpace(embeddedResourceId))
+                return Windows.UI.Xaml.Media.FontFamily.XamlAutoFontFamily.Source;
 
-            if (_embeddedFontSources.ContainsKey(embeddedResourceId))
-                return _embeddedFontSources[embeddedResourceId];
+            if (EmbeddedFontSources.ContainsKey(embeddedResourceId))
+                return EmbeddedFontSources[embeddedResourceId];
 
             var idParts = embeddedResourceId.Split('#');
             var id = idParts[0];
-            var localStorageFileName = await PCL.Utils.EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResourceAsync(id, assembly);
+
+            string localStorageFileName = null;
+            if (assembly!=null)
+                localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(id, assembly);
+            if (localStorageFileName==null)
+            {
+                // we've got to go hunting for this ... and UWP doesn't give us much help
+                // first, try the main assembly!
+                var targetAsmName = embeddedResourceId.Split('.').First();
+               
+                if (targetAsmName == Forms9Patch.ApplicationInfoService.Assembly.GetName().Name)
+                    localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(id, Forms9Patch.ApplicationInfoService.Assembly);
+
+                // if that doesn't work, look through all known assemblies
+                if (localStorageFileName == null)
+                {
+                    foreach (var asm in Settings.AssembliesToInclude)
+                    {
+                        if (targetAsmName == asm.GetName().Name)
+                        {
+                            localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(id, Forms9Patch.ApplicationInfoService.Assembly);
+                            break;
+                        }
+                    }
+                }
+            }
 
             if (localStorageFileName == null)
-                return null;
+                return embeddedResourceId;
 
             string fontName = null;
             if (idParts.Count() > 1)
                 fontName = idParts.Last();
             else
             {
-                var cachedFile = await PCLStorage.FileSystem.Current.LocalStorage.GetFileAsync(localStorageFileName);
-                fontName = PCL.Utils.TTFAnalyzer.FontFamily(cachedFile);
+                var cachedFile = FileSystem.Current.LocalStorage.GetFile(localStorageFileName);
+                fontName = TTFAnalyzer.FontFamily(cachedFile);
             }
-            var fontFamilyString = "ms-appdata:///local/" + localStorageFileName + "#" + fontName;
-            var result = new EmbeddedResourceFontSource { FamilyName = fontName, EmbeddedResourceId = id, Assembly = assembly, XamarinFormsFontFamily = fontFamilyString };
-            _embeddedFontSources.Add(embeddedResourceId,result);
-            return result;
+            var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
+            EmbeddedFontSources.Add(embeddedResourceId, uwpFontFamily);
+            return uwpFontFamily;
         }
 
-
-        Dictionary<string,FileFontSource> _fileFontSources = new Dictionary<string, FileFontSource>();
+        /*
         public async Task<FontSource> GetFileFontSource(IFile file)
         {
             if (file == null)
                 return null;
 
-            if (_fileFontSources.ContainsKey(file.Path))
-                return _fileFontSources[file.Path];
+            if (FileFontSources.ContainsKey(file.Path))
+                return FileFontSources[file.Path];
 
             var localStorageFileName = await PCL.Utils.FileCache.CacheAsync(file);
             var cachedFile = await PCLStorage.FileSystem.Current.LocalStorage.GetFileAsync(localStorageFileName);
@@ -72,19 +100,18 @@ namespace Forms9Patch.UWP
 
             var fontFamilyString = "ms-appdata:///local/" + localStorageFileName + "#" + fontName;
             var result = new FileFontSource { FamilyName = fontName, File = file, XamarinFormsFontFamily = fontFamilyString };
-            _fileFontSources.Add(file.Path, result);
+            FileFontSources.Add(file.Path, result);
             return result;
         }
 
-        Dictionary<string,UrlFontSource> _urlFontSources = new Dictionary<string, UrlFontSource>();
         public async Task<FontSource> GetUriFontSource(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
                 return null;
 
-            if (_urlFontSources.ContainsKey(url))
+            if (UrlFontSources.ContainsKey(url))
                 // this will return UrlFontSources that are actively caching
-                return _urlFontSources[url];
+                return UrlFontSources[url];
 
             if (PCL.Utils.DownloadCache.IsCached(url))
             {
@@ -95,14 +122,14 @@ namespace Forms9Patch.UWP
 
                 var fontFamilyString = "ms-appdata:///local/" + localStorageFileName + "#" + fontName;
                 var result = new UrlFontSource { FamilyName = fontName, Url = url, XamarinFormsFontFamily = fontFamilyString };
-                _urlFontSources.Add(url, result);
+                UrlFontSources.Add(url, result);
                 return result;
             }
             else
             {
                 var cachingFamilyName = PCL.Utils.MD5.GetMd5String("caching:" + url);
                 var result = new UrlFontSource { Url = url, XamarinFormsFontFamily = cachingFamilyName };
-                _urlFontSources.Add(url, result);
+                UrlFontSources.Add(url, result);
                 var task = new Task(async () =>
                 {
                     var localStorageFileName = await PCL.Utils.DownloadCache.DownloadAsync(url);
@@ -144,6 +171,7 @@ namespace Forms9Patch.UWP
                 return result;
             }
         }
+        */
 
 
         public double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)

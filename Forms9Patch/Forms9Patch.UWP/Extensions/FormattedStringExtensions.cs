@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Controls;
 
+
 namespace Forms9Patch.UWP
 {
     static class FormattedStringExtensions
@@ -13,33 +14,41 @@ namespace Forms9Patch.UWP
 
         internal static void SetF9pFormattedText(this TextBlock textBlock, Forms9Patch.Label label)
         {
+            textBlock.Text = "";
             textBlock.Inlines.Clear();
+
             if (label.Text != null)
             {
                 textBlock.Text = label.Text;
                 return;
             }
-            var formattedString = label.F9PFormattedString;
-            var text = formattedString?.Text;
-            if (string.IsNullOrWhiteSpace(text) || label.HtmlText == text)
+
+            var text = label.F9PFormattedString?.Text;
+            if (label.F9PFormattedString is HTMLMarkupString htmlMarkupString)
+                text = htmlMarkupString.UnmarkedText;
+
+            if (string.IsNullOrWhiteSpace(text) || text == label.F9PFormattedString?.Text)
             {
+                // there isn't any markup!
                 textBlock.Text = text;
                 return;
             }
 
-            if (formattedString is HTMLMarkupString htmlMarkupString)
-                text = htmlMarkupString.UnmarkedText;
-
             #region Layout font-spans (MetaFonts)
             var metaFonts = new List<MetaFont>();
             var baseMetaFont = new MetaFont(
-                textBlock.FontFamily.ToString(),
+                FontService.ReconcileFontFamily(label.FontFamily),
                 textBlock.FontSize,
                 textBlock.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight,
-                (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0);
+                (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0,
+                textColor: label.TextColor,
+                backgroundColor: label.BackgroundColor
+                );
 
-            var MathMetaFont = new MetaFont("STIXGeneral", textBlock.FontSize);
-
+            var MathMetaFont = new MetaFont(baseMetaFont)
+            {
+                Family = FontService.ReconcileFontFamily("Forms9Patch.Resources.Fonts.STIXGeneral.otf", PCL.Utils.ReflectionExtensions.GetAssembly(typeof(Forms9Patch.Label)))
+            };
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -56,21 +65,34 @@ namespace Forms9Patch.UWP
 
 
             #region Apply non-font Spans
-            foreach (var span in formattedString._spans)
+            foreach (var span in label.F9PFormattedString._spans)
             {
                 int spanStart = span.Start;
                 int spanEnd = span.End;
 
-                spanEnd++;
+                //spanEnd++;
                 if (spanEnd >= text.Length)
                     spanEnd = text.Length - 1;
 
-                for (int i = spanStart; i < spanEnd; i++)
+                for (int i = spanStart; i <= spanEnd; i++)
                 {
                     switch (span.Key)
                     {
                         case FontFamilySpan.SpanKey: // TextElement.FontFamily
-                                metaFonts[i].Family = ((FontFamilySpan)span).FontFamilyName;
+                            var fontFamily = ((FontFamilySpan)span).FontFamilyName;
+                            switch(fontFamily.ToLower())
+                            {
+                                case "monospace":
+                                    fontFamily = "Consolas";
+                                    break;
+                                case "serif":
+                                    fontFamily = "Cambria";
+                                    break;
+                                case "sans-serif":
+                                    fontFamily = "Segoe UI";
+                                    break;
+                            }
+                            metaFonts[i].Family = fontFamily;
                             break;
                         case FontSizeSpan.SpanKey:  // TextElement.FontSize
                                 float size = ((FontSizeSpan)span).Size;
@@ -114,6 +136,7 @@ namespace Forms9Patch.UWP
             }
             #endregion
 
+
             #region Convert MetaFonts to InLines
             var inlineColection = new List<Inline>();
 
@@ -126,14 +149,14 @@ namespace Forms9Patch.UWP
                 if (lastMetaFont != metaFont)
                 {
                     // we are at the start of a new span
-                    if (i > 0 && lastMetaFont != baseMetaFont)
-                        AddInline(textBlock, label, lastMetaFont, text, startIndex, i - startIndex - 1);
+                    if (i > 0) // && lastMetaFont != baseMetaFont)
+                        AddInline(textBlock, label, lastMetaFont, text, startIndex, i - startIndex);
                     lastMetaFont = metaFont;
                     startIndex = i;
                 }
             }
-            if (lastMetaFont != baseMetaFont)
-                AddInline(textBlock, label, lastMetaFont, text, startIndex, text.Length - startIndex - 1);
+            if (lastMetaFont != baseMetaFont || startIndex==0)
+                AddInline(textBlock, label, lastMetaFont, text, startIndex, text.Length - startIndex);
             #endregion
 
         }
@@ -148,8 +171,12 @@ namespace Forms9Patch.UWP
             run.FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;
             run.FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
             run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
-            run.TextDecorations = Windows.UI.Text.TextDecorations.Underline;
-            run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
+
+            run.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            if (metaFont.Underline)
+                run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
+            if (metaFont.Strikethrough)
+                run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
 
             switch (metaFont.Baseline)
             {
@@ -165,27 +192,24 @@ namespace Forms9Patch.UWP
                     Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Subscript);
                     break;
                 default:
-                    run.FontFamily = new Windows.UI.Xaml.Media.FontFamily(metaFont.Family);
+                    if (metaFont.Family!=null)
+                        run.FontFamily = new Windows.UI.Xaml.Media.FontFamily(metaFont.Family);
                     break;
             }
 
-            if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
+            if (!metaFont.BackgroundColor.IsDefaultOrTransparent())
             {
-                // Window's fall creator's update
-                var highlighter = new TextHighlighter
+                try
                 {
-                    Background = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.BackgroundColor.ToWindowsColor()),
-                    Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor()),
-                };
-                highlighter.Ranges.Add(new TextRange
+                    textBlock.ApplyBackgroundColor(metaFont.BackgroundColor, startIndex, length);
+                }
+                catch (Exception e)
                 {
-                    StartIndex = startIndex,
-                    Length = length
-                });
-                textBlock.TextHighlighters.Add(highlighter);
+                    throw new Exception("It appears that this Xamarin.Forms.UWP app was built with a Windows TargetVersion < 10.0.16299.0 (Windows 10 Fall Creators Update).  10.0.16299.0 is needed to support Forms9Patch.Label.HtmlText background color attributes.", e);
+                }
             }
 
-            if (metaFont.Action.IsEmpty())
+            if (metaFont.IsActionEmpty())
                 textBlock.Inlines.Add(run);
             else
             {
@@ -195,5 +219,6 @@ namespace Forms9Patch.UWP
                 textBlock.Inlines.Add(hyperlink);
             }
         }
+
     }
 }

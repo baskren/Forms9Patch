@@ -82,7 +82,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null);
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null, 
+            propertyChanged: (bindable, oldValue, newValue) => 
+            {
+
+                System.Diagnostics.Debug.WriteLine("");
+            });
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -90,7 +95,10 @@ namespace Forms9Patch
         public string HtmlText
         {
             get { return (string)GetValue(HtmlTextProperty); }
-            set { SetValue(HtmlTextProperty, value); }
+            set
+            {
+                SetValue(HtmlTextProperty, value);
+            }
         }
         #endregion HtmlText property
 

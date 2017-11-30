@@ -32,10 +32,10 @@
 				BackgroundColor="White"
 				FontSize="16"
 			>
-				<f9p:Segment Text="Start"></f9p:Segment>
-				<f9p:Segment Text="Center"></f9p:Segment>
-				<f9p:Segment Text="End"></f9p:Segment>
-			</f9p:MaterialSegmentedControl>
+                <f9p:Segment Text="Start"/>
+                <f9p:Segment Text="Center"/>
+                <f9p:Segment Text="End"/>
+            </f9p:MaterialSegmentedControl>
 			
 			<f9p:Label TextColor="Black">
 				plain &lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt;

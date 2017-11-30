@@ -12,7 +12,7 @@ namespace Forms9Patch
 	/// </summary>
 	public static class FontExtensions
 	{
-
+        /*
         internal static async Task<FontSource> GetEmbeddedResourceFontSourceAsync(string embeddedResourceId, Assembly assembly=null)
         {
             if (assembly == null)
@@ -29,7 +29,7 @@ namespace Forms9Patch
         {
             return await Service.GetUriFontSource(url);
         }
-
+        */
         /*
         public static async Task SetFontSource(this Xamarin.Forms.VisualElement element, string embeddedResourceId, Assembly assembly = null)
         {

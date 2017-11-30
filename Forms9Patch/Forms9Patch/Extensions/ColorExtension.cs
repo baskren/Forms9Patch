@@ -35,6 +35,26 @@ namespace Forms9Patch
 		public static Color WithAlpha(this Color c, double alpha) {
 			return new Color (c.R, c.G, c.B, alpha);
 		}
+
+        /// <summary>
+        /// Tests if the color is one of the default values
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static bool IsDefault(this Color c)
+        {
+            return c == default(Color) || c == Color.Default;
+        }
+
+        /// <summary>
+        /// Tests if the color is a default or is transparent
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static bool IsDefaultOrTransparent(this Color c)
+        {
+            return IsDefault(c) || c.A == 0;
+        }
 	}
 }
 

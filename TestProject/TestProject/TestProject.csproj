@@ -39,63 +39,63 @@
     <AssemblyName>TestProject</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Pages\ImageOnPage.cs" />
-    <Compile Include="Pages\LayoutCodePage.cs" />
-    <Compile Include="Pages\SingleMaterialButton.cs" />
-    <Compile Include="Pages\SingleSegmentedController.cs" />
+    <Compile Include="Pages.Code\ImageOnPage.cs" />
+    <Compile Include="Pages.Code\LayoutCodePage.cs" />
+    <Compile Include="Pages.Code\SingleMaterialButton.cs" />
+    <Compile Include="Pages.Code\SingleSegmentedController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\NinePatchButtonPage.xaml.cs">
+    <Compile Include="Pages.Xaml\NinePatchButtonPage.xaml.cs">
       <DependentUpon>NinePatchButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ImageBenchmarkPage.cs" />
-    <Compile Include="Pages\MaterialSegmentedControlPage.xaml.cs">
+    <Compile Include="Pages.Code\ImageBenchmarkPage.cs" />
+    <Compile Include="Pages.Xaml\MaterialSegmentedControlPage.xaml.cs">
       <DependentUpon>MaterialSegmentedControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BubblePopupTestPage.cs" />
+    <Compile Include="Pages.Code\BubblePopupTestPage.cs" />
     <Compile Include="Elements\ImageCircle.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
-    <Compile Include="Pages\HomePage.cs" />
-    <Compile Include="Pages\ImageButtonCodePage.cs" />
-    <Compile Include="Pages\ImageCodePage.cs" />
-    <Compile Include="Pages\ModalPopupTestPage.cs" />
-    <Compile Include="Pages\LayoutsPage.cs" />
-    <Compile Include="Pages\MaterialButtonsPage.cs" />
-    <Compile Include="Pages\MyPage.xaml.cs">
+    <Compile Include="Pages.Code\HomePage.cs" />
+    <Compile Include="Pages.Code\ImageButtonCodePage.cs" />
+    <Compile Include="Pages.Code\ImageCodePage.cs" />
+    <Compile Include="Pages.Code\ModalPopupTestPage.cs" />
+    <Compile Include="Pages.Code\LayoutsPage.cs" />
+    <Compile Include="Pages.Code\MaterialButtonsPage.cs" />
+    <Compile Include="Pages.Code\MyPage.xaml.cs">
       <DependentUpon>MyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContentViewDemoPage.xaml.cs">
+    <Compile Include="Pages.Xaml\ContentViewDemoPage.xaml.cs">
       <DependentUpon>ContentViewDemoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\FrameDemoPage.xaml.cs">
+    <Compile Include="Pages.Xaml\FrameDemoPage.xaml.cs">
       <DependentUpon>FrameDemoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ImageButtonPage.xaml.cs">
+    <Compile Include="Pages.Xaml\ImageButtonPage.xaml.cs">
       <DependentUpon>ImageButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MaterialSegmentControlPage.xaml.cs">
+    <Compile Include="Pages.Xaml\MaterialSegmentControlPage.xaml.cs">
       <DependentUpon>MaterialSegmentControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PanGesturePage.cs" />
-    <Compile Include="Pages\HtmlLabelPage.cs" />
-    <Compile Include="Pages\HtmlButtonsPage.cs" />
-    <Compile Include="Pages\HtmlLabelsAndButtons.xaml.cs">
+    <Compile Include="Pages.Code\PanGesturePage.cs" />
+    <Compile Include="Pages.Code\HtmlLabelPage.cs" />
+    <Compile Include="Pages.Code\HtmlButtonsPage.cs" />
+    <Compile Include="Pages.Xaml\HtmlLabelsAndButtons.xaml.cs">
       <DependentUpon>HtmlLabelsAndButtons.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SimpleFontTestPage.cs" />
-    <Compile Include="Pages\CapsInsetPage.xaml.cs">
+    <Compile Include="Pages.Code\SimpleFontTestPage.cs" />
+    <Compile Include="Pages.Xaml\CapsInsetPage.xaml.cs">
       <DependentUpon>CapsInsetPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LabelFitPage.cs" />
-    <Compile Include="Pages\UnconstrainedLabelFitPage.cs" />
-    <Compile Include="Pages\SingleImageButtonPage.xaml.cs">
+    <Compile Include="Pages.Code\LabelFitPage.cs" />
+    <Compile Include="Pages.Code\UnconstrainedLabelFitPage.cs" />
+    <Compile Include="Pages.Xaml\SingleImageButtonPage.xaml.cs">
       <DependentUpon>SingleImageButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SingleImageButtonCodePage.cs" />
-    <Compile Include="Pages\LayoutWithLabel.cs" />
-    <Compile Include="Pages\LabelInHorizontalStackLayout.cs" />
-    <Compile Include="Pages\ExternalEmbeddedResourceImage.cs" />
-    <Compile Include="Pages\CustomFontEffectPage.cs" />
-    <Compile Include="Pages\HeapDemoPage.cs" />
+    <Compile Include="Pages.Code\SingleImageButtonCodePage.cs" />
+    <Compile Include="Pages.Code\LayoutWithLabel.cs" />
+    <Compile Include="Pages.Code\LabelInHorizontalStackLayout.cs" />
+    <Compile Include="Pages.Code\ExternalEmbeddedResourceImage.cs" />
+    <Compile Include="Pages.Code\CustomFontEffectPage.cs" />
+    <Compile Include="Pages.Code\HeapDemoPage.cs" />
     <Compile Include="UserPages\AbsoluteLayoutExplorationCode.cs" />
     <Compile Include="UserPages\CustomFontEffectPage.cs" />
     <Compile Include="Forms9PatchDemo.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="UserPages\SegmentNavPage1.cs" />
     <Compile Include="UserPages\SegmentNavPage2.cs" />
     <Compile Include="UserPages\SegmentNavPage3.cs" />
-    <Compile Include="Pages\br.cs" />
+    <Compile Include="Pages.Code\br.cs" />
     <Compile Include="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
       <DependentUpon>XamlPageWithListViewWithF9PLabelInCells.xaml</DependentUpon>
     </Compile>
@@ -124,10 +124,10 @@
     </Compile>
     <Compile Include="UserPages\DataForBinding.cs" />
     <Compile Include="UserPages\SegmentSelectedBackgroundPage.cs" />
-    <Compile Include="Pages\FontSizeTest.cs" />
-    <Compile Include="Pages\MaterialButtonAndSegmentAlignments.cs" />
-    <Compile Include="Pages\ImageButtonAlignments.cs" />
-    <Compile Include="Pages\LabelLink.cs" />
+    <Compile Include="Pages.Code\FontSizeTest.cs" />
+    <Compile Include="Pages.Code\MaterialButtonAndSegmentAlignments.cs" />
+    <Compile Include="Pages.Code\ImageButtonAlignments.cs" />
+    <Compile Include="Pages.Code\LabelLink.cs" />
     <Compile Include="UserPages\ButtonTapped.cs" />
     <Compile Include="UserPages\StretchIssuePage.xaml.cs">
       <DependentUpon>StretchIssuePage.xaml</DependentUpon>
@@ -189,10 +189,10 @@
     <EmbeddedResource Include="Resources\redButton%403x.9.png" />
     <EmbeddedResource Include="Resources\redButton%404x.9.png" />
     <EmbeddedResource Include="Resources\redButton%40¾x.9.png" />
-    <EmbeddedResource Include="Pages\NinePatchButtonPage.xaml">
+    <EmbeddedResource Include="Pages.Xaml\NinePatchButtonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MaterialSegmentedControlPage.xaml">
+    <EmbeddedResource Include="Pages.Xaml\MaterialSegmentedControlPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\236-baby.png" />
@@ -203,19 +203,19 @@
     <EmbeddedResource Include="Resources\BubbleInternal.9.png" />
     <EmbeddedResource Include="Resources\BubbleInternal%402x.9.png" />
     <EmbeddedResource Include="Resources\BubbleInternal%403x.9.png" />
-    <EmbeddedResource Include="Pages\MyPage.xaml" />
-    <EmbeddedResource Include="Pages\ImageButtonPage.xaml" />
-    <EmbeddedResource Include="Pages\FrameDemoPage.xaml" />
-    <EmbeddedResource Include="Pages\ContentViewDemoPage.xaml" />
-    <EmbeddedResource Include="Pages\MaterialSegmentControlPage.xaml" />
+    <EmbeddedResource Include="Pages.Code\MyPage.xaml" />
+    <EmbeddedResource Include="Pages.Xaml\ImageButtonPage.xaml" />
+    <EmbeddedResource Include="Pages.Xaml\FrameDemoPage.xaml" />
+    <EmbeddedResource Include="Pages.Xaml\ContentViewDemoPage.xaml" />
+    <EmbeddedResource Include="Pages.Xaml\MaterialSegmentControlPage.xaml" />
     <EmbeddedResource Include="Resources\Fonts\MaterialIcons-Regular.ttf" />
-    <EmbeddedResource Include="Pages\HtmlLabelsAndButtons.xaml">
+    <EmbeddedResource Include="Pages.Xaml\HtmlLabelsAndButtons.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\CapsInsetPage.xaml">
+    <EmbeddedResource Include="Pages.Xaml\CapsInsetPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\SingleImageButtonPage.xaml" />
+    <EmbeddedResource Include="Pages.Xaml\SingleImageButtonPage.xaml" />
     <EmbeddedResource Include="Resources\button_01_pressing.png" />
     <EmbeddedResource Include="Resources\button_01_default.png" />
     <EmbeddedResource Include="Resources\Fonts\Pacifico.ttf" />

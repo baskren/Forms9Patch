@@ -32,30 +32,25 @@ namespace Forms9Patch
             Italic = f.Italic;
         }
 
-        public static bool operator ==(MetaFont f1, MetaFont f2)
-        {
-            if (((object)f1) == null || ((object)f2) == null)
-                return false;
-            if (f1.Size != f2.Size)
-                return false;
-            if (f1.Bold != f2.Bold)
-                return false;
-            if (f1.Italic != f2.Italic)
-                return false;
-            if (f1.Family != f2.Family)
-                return false;
-            return f1.Baseline == f2.Baseline;
-        }
+        public static bool operator ==(MetaFont f1, MetaFont f2) => f1.Equals(f2);
 
-
-        public static bool operator !=(MetaFont f1, MetaFont f2)
-        {
-            return !(f1 == f2);
-        }
+        public static bool operator !=(MetaFont f1, MetaFont f2) => !f1.Equals(f2);
 
         public override bool Equals(object obj)
         {
-            return this == (MetaFont)obj;
+            if (obj is MetaFont other)
+            {
+                if (Size != other.Size)
+                    return false;
+                if (Bold != other.Bold)
+                    return false;
+                if (Italic != other.Italic)
+                    return false;
+                if (Family != other.Family)
+                    return false;
+                return Baseline == other.Baseline;
+            }
+            return false;
         }
 
         public override int GetHashCode()

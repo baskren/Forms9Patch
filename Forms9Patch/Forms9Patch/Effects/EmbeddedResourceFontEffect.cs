@@ -11,9 +11,11 @@ namespace Forms9Patch
 {
     public class EmbeddedResourceFontEffect : Xamarin.Forms.RoutingEffect
     {
+        internal Assembly Assembly { get; }
 
-        public EmbeddedResourceFontEffect() : base("Forms9Patch.EmbeddedResourceFontEffect")
+        public EmbeddedResourceFontEffect(Assembly assembly=null) : base("Forms9Patch.EmbeddedResourceFontEffect")
         {
+            Assembly = assembly ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
         }
 
     }

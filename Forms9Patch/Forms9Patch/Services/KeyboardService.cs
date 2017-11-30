@@ -14,19 +14,24 @@ namespace Forms9Patch
 		/// <summary>
 		/// Initializes the <see cref="T:Forms9Patch.KeyboardService"/> class.
 		/// </summary>
-		static KeyboardService()
+		static IKeyboardService Service
 		{
-			_service = _service ?? DependencyService.Get<IKeyboardService>();
+            get
+            {
+                _service = _service ?? DependencyService.Get<IKeyboardService>();
+                if (_service == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("KeyboardService is not available");
+                    //throw new ServiceNotAvailableException("KeyboardService is not available");
+                }
+                return _service;
+            }
 		}
 
 		/// <summary>
 		/// Forces the device's on screen keyboard to be hidden
 		/// </summary>
-		public static void Hide()
-		{
-			_service = _service ?? DependencyService.Get<IKeyboardService>();
-			_service?.Hide();
-		}
+		public static void Hide() => Service.Hide();
 
 		/// <summary>
 		/// Ons the visiblity change.

@@ -11,6 +11,20 @@ namespace Forms9Patch
     internal static class StatusBarService
     {
         static IStatusBarService _service;
+        static IStatusBarService Service
+        {
+            get
+            {
+                _service = _service ?? Xamarin.Forms.DependencyService.Get<IStatusBarService>();
+                if (_service==null)
+                {
+                    System.Diagnostics.Debug.WriteLine("StatusBarService is not available");
+                    //throw new ServiceNotAvailableException("StatusBarService is not available");
+                }
+                return _service;
+            }
+        }
+
 
         /// <summary>
         /// Gets the height.
@@ -20,8 +34,7 @@ namespace Forms9Patch
         {
             get
             {
-                _service = _service ?? DependencyService.Get<IStatusBarService>();
-                if (_service == null)
+                if (Service == null)
                 {
                     if (Device.OS == TargetPlatform.iOS)
                     //if (Device.RuntimePlatform == Device.iOS)
@@ -30,7 +43,7 @@ namespace Forms9Patch
                 }
                 //if (!IsVisible)
                 //	return 0;
-                return _service.Height;
+                return Service.Height;
             }
         }
 
@@ -38,10 +51,9 @@ namespace Forms9Patch
         {
             get
             {
-                _service = _service ?? DependencyService.Get<IStatusBarService>();
-                if (_service == null)
+                if (Service == null)
                     return true;
-                return _service.IsVisible;
+                return Service.IsVisible;
             }
         }
     }

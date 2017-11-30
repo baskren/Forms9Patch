@@ -82,7 +82,8 @@ namespace Forms9Patch.UWP
             }
         }
 
-        static List<Assembly> _assembliesToInclude = new List<Assembly>
+
+        internal static List<Assembly> Forms9PatchAssemblies = new List<Assembly>
         {
             typeof(Forms9Patch.Settings).GetTypeInfo().Assembly,
             typeof(Settings).GetTypeInfo().Assembly,
@@ -96,6 +97,20 @@ namespace Forms9Patch.UWP
             typeof(Windows.UI.Xaml.Media.Imaging.BitmapFactory).GetTypeInfo().Assembly,
             typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly,
         };
-        public static List<Assembly> AssembliesToInclude => _assembliesToInclude;
+
+        static List<Assembly> _assembliesToInclude;
+        public static List<Assembly> AssembliesToInclude
+        {
+            get
+            {
+                if (_assembliesToInclude==null)
+                {
+                    _assembliesToInclude = new List<Assembly>();
+                    _assembliesToInclude.AddRange(Forms9PatchAssemblies);
+                }
+                return _assembliesToInclude;
+            }
+        }
+
     }
 }

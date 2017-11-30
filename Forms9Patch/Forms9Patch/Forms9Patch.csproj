@@ -84,6 +84,7 @@
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
+    <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Interfaces\IBubbleLayout.cs" />
     <Compile Include="Interfaces\IBackground.cs" />
     <Compile Include="Interfaces\IBubblePopup.cs" />
@@ -92,10 +93,11 @@
     <Compile Include="Interfaces\IElement.cs" />
     <Compile Include="Interfaces\ILabel.cs" />
     <Compile Include="Interfaces\ILayout.cs" />
+    <Compile Include="Interfaces\IOsInformationService.cs" />
     <Compile Include="Interfaces\ISegment.cs" />
     <Compile Include="Interfaces\IImage.cs" />
-    <Compile Include="Models\FontSource.cs" />
     <Compile Include="Models\MetaFont.cs" />
+    <Compile Include="Models\VersionString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ThicknessExtension.cs" />
     <Compile Include="Interfaces\INativeSettings.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Extensions\InternalStringExtensions.cs" />
     <Compile Include="Interfaces\IFontElement.cs" />
+    <Compile Include="Services\ServiceNotAvailableException.cs" />
     <Compile Include="Spans\BackgroundColorSpan.cs" />
     <Compile Include="Spans\BoldSpan.cs" />
     <Compile Include="Spans\FontColorSpan.cs" />
