@@ -557,21 +557,21 @@ namespace Forms9Patch
         }
         #endregion LineBreakMode
 
-        #region Fit
+        #region AutoFit
         /// <summary>
         /// The fit property.
         /// </summary>
-        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(MaterialButton), LabelFit.Width);
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(MaterialButton), AutoFit.Width);
         /// <summary>
         /// Gets or sets the fit.
         /// </summary>
         /// <value>The fit.</value>
-        public LabelFit Fit
+        public AutoFit AutoFit
         {
-            get { return (LabelFit)GetValue(FitProperty); }
-            set { SetValue(FitProperty, value); }
+            get { return (AutoFit)GetValue(AutoFitProperty); }
+            set { SetValue(AutoFitProperty, value); }
         }
-        #endregion Fit
+        #endregion AutoFit
 
         #region Lines
         /// <summary>
@@ -764,7 +764,7 @@ namespace Forms9Patch
                 //HeightRequest = 22,
                 MinimizeHeight = false,
                 Lines = Lines,
-                Fit = Fit,
+                AutoFit = AutoFit,
                 LineBreakMode = LineBreakMode,
                 MinFontSize = MinFontSize,
                 FontSize = FontSize,
@@ -1377,7 +1377,7 @@ namespace Forms9Patch
                         VerticalTextAlignment = TextAlignment.Center,
                         Lines = 1,
                         FontSize = FontSize,
-                        Fit = LabelFit.None,
+                        AutoFit = AutoFit.None,
                     };
                     if (_iconLabel != null)
                     {
@@ -1441,8 +1441,8 @@ namespace Forms9Patch
             }
             else if (propertyName == LinesProperty.PropertyName)
                 _label.Lines = Lines;
-            else if (propertyName == FitProperty.PropertyName)
-                _label.Fit = Fit;
+            else if (propertyName == AutoFitProperty.PropertyName)
+                _label.AutoFit = AutoFit;
             else if (propertyName == LineBreakModeProperty.PropertyName)
                 _label.LineBreakMode = LineBreakMode;
             else if (propertyName == MinFontSizeProperty.PropertyName)

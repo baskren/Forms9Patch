@@ -85,6 +85,7 @@
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
+    <Compile Include="Interfaces\ILabelStyle.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Interfaces\IBubbleLayout.cs" />
     <Compile Include="Interfaces\IBackground.cs" />

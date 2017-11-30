@@ -41,12 +41,12 @@ namespace Forms9PatchDemo
 				if (i > 3)
 				{
 					labels[i].Lines = 2;
-					labels[i].Fit = Forms9Patch.LabelFit.Lines;
+					labels[i].AutoFit = Forms9Patch.AutoFit.Lines;
 				}
 				else if (i > 1)
 				{
 					labels[i].Lines = 2;
-					labels[i].Fit = Forms9Patch.LabelFit.Width;
+					labels[i].AutoFit = Forms9Patch.AutoFit.Width;
 				}
 				labels[i].LineBreakMode = LineBreakMode.TailTruncation;
 				layouts.Add(new StackLayout
@@ -57,7 +57,7 @@ namespace Forms9PatchDemo
 				});
 				if (i % 2 == 0)
 					layouts[i].HeightRequest = 50;
-				content.Children.Add(new Label { Text = "Lines="+labels[i].Lines+"\tHeightRequest="+layouts[i].HeightRequest+"\tFit="+labels[i].Fit });
+				content.Children.Add(new Label { Text = "Lines="+labels[i].Lines+"\tHeightRequest="+layouts[i].HeightRequest+"\tFit="+labels[i].AutoFit });
 				content.Children.Add(layouts[i]);
 			}
 

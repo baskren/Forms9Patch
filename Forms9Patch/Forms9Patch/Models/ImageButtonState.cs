@@ -507,27 +507,27 @@ namespace Forms9Patch
         }
         #endregion LineBreakMode
 
-        #region Fit
-        internal bool FitSet;
+        #region AutoFit
+        internal bool AutoFitSet;
         /// <summary>
         /// The fit property.
         /// </summary>
-        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(ImageButtonState), LabelFit.Width,
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(ImageButtonState), AutoFit.Width,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).FitSet = true;
+                ((ImageButtonState)bindable).AutoFitSet = true;
             })
         );
         /// <summary>
         /// Gets or sets the fit.
         /// </summary>
         /// <value>The fit.</value>
-        public LabelFit Fit
+        public AutoFit AutoFit
         {
-            get { return (LabelFit)GetValue(FitProperty); }
-            set { SetValue(FitProperty, value); }
+            get { return (AutoFit)GetValue(AutoFitProperty); }
+            set { SetValue(AutoFitProperty, value); }
         }
-        #endregion Fit
+        #endregion AutoFit
 
         #region Lines
         internal bool LinesSet;
@@ -720,8 +720,8 @@ namespace Forms9Patch
             VerticalTextAlignmentSet = source.VerticalTextAlignmentSet;
             LineBreakMode = source.LineBreakMode;
             LineBreakModeSet = source.LineBreakModeSet;
-            Fit = source.Fit;
-            FitSet = source.FitSet;
+            AutoFit = source.AutoFit;
+            AutoFitSet = source.AutoFitSet;
             Lines = source.Lines;
             LinesSet = source.LinesSet;
             MinFontSize = source.MinFontSize;

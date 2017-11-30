@@ -381,7 +381,7 @@ namespace Forms9Patch
 
             LineBreakMode = _currentState.LineBreakModeSet ? _currentState.LineBreakMode : DefaultState.LineBreakMode;
 
-            Fit = _currentState.FitSet ? _currentState.Fit : DefaultState.Fit;
+            AutoFit = _currentState.AutoFitSet ? _currentState.AutoFit : DefaultState.AutoFit;
 
             Lines = _currentState.LinesSet ? _currentState.Lines : DefaultState.Lines;
 
@@ -532,18 +532,8 @@ namespace Forms9Patch
                 UpdateState();
             else if (propertyName == DisabledStateProperty.PropertyName && !IsEnabled && IsSelected)
                 UpdateState();
-            //} else if (propertyName == Button.PaddingProperty.PropertyName) {
-            //  _stackLayout.Padding = Padding;
-            //else if (propertyName == ImageButton.AlignmentProperty.PropertyName)
-            //   _stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
             else if (propertyName == IsEnabledProperty.PropertyName || propertyName == IsSelectedProperty.PropertyName)
                 UpdateState();
-            //else if (propertyName == ImageButton.LinesProperty.PropertyName)
-            //    _label.Lines = Lines;
-            //else if (propertyName == ImageButton.FitProperty.PropertyName)
-            //    _label.Fit = Fit;
-            //else if (propertyName == ImageButton.LineBreakModeProperty.PropertyName)
-            //    _label.LineBreakMode = LineBreakMode;
             #endregion
 
             base.OnPropertyChanged(propertyName);
@@ -660,9 +650,9 @@ namespace Forms9Patch
                 DefaultState.LineBreakMode = LineBreakMode;
                 UpdateState();
             }
-            else if (propertyName == FitProperty.PropertyName && !_showingState)
+            else if (propertyName == AutoFitProperty.PropertyName && !_showingState)
             {
-                DefaultState.Fit = Fit;
+                DefaultState.AutoFit = AutoFit;
                 UpdateState();
             }
             if (propertyName == LinesProperty.PropertyName && !_showingState)

@@ -227,7 +227,7 @@ namespace Forms9Patch.Droid
 		#region Truncation
 
 		//bool _truncating;
-		internal static StaticLayout Truncate(string text, F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, LabelFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
+		internal static StaticLayout Truncate(string text, F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, AutoFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
 		{
 			StaticLayout layout=null;
 			var fontMetrics = paint.GetFontMetrics();

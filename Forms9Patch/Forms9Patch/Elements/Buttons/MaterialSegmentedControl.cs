@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// Forms9Patch Material Segmented Control.
     /// </summary>
     [ContentProperty("Segments")]
-    public class MaterialSegmentedControl : Forms9Patch.ManualLayout, IDisposable
+    public class MaterialSegmentedControl : Forms9Patch.ManualLayout, IDisposable, ILabelStyle
     {
 
         #region Properties
@@ -83,20 +83,6 @@ namespace Forms9Patch
         }
 
 
-
-        /// <summary>
-        /// Backing store for the TextColor bindable property.
-        /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
-        /// <summary>
-        /// Gets or sets the color of the font.
-        /// </summary>
-        /// <value>The color of the font.</value>
-        public Color TextColor
-        {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
-        }
 
         /// <summary>
         /// The selected text color property.
@@ -382,33 +368,7 @@ namespace Forms9Patch
             set { SetValue(HasTightSpacingProperty, value); }
         }
 
-        /// <summary>
-        /// Backing store for the horizontal text alignment property.
-        /// </summary>
-        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
-        /// <summary>
-        /// Gets or sets the horizontal text alignment.
-        /// </summary>
-        /// <value>The horizontal text alignment.</value>
-        public TextAlignment HorizontalTextAlignment
-        {
-            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
-            set { SetValue(HorizontalTextAlignmentProperty, value); }
-        }
 
-        /// <summary>
-        /// Backing store for the vertical text alignment property.
-        /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
-        /// <summary>
-        /// Gets or sets the vertical text alignment.
-        /// </summary>
-        /// <value>The vertical text alignment.</value>
-        public TextAlignment VerticalTextAlignment
-        {
-            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
-            set { SetValue(VerticalTextAlignmentProperty, value); }
-        }
 
         /// <summary>
         /// The backing store for the segments orientation property.
@@ -444,6 +404,119 @@ namespace Forms9Patch
             get { return (Xamarin.Forms.StackOrientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
         }
+
+        #region ILabelStyle
+
+        #region TextColor
+        /// <summary>
+        /// Backing store for the TextColor bindable property.
+        /// </summary>
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(MaterialSegmentedControl), Color.Default);
+        /// <summary>
+        /// Gets or sets the color of the font.
+        /// </summary>
+        /// <value>The color of the font.</value>
+        public Color TextColor
+        {
+            get { return (Color)GetValue(TextColorProperty); }
+            set { SetValue(TextColorProperty, value); }
+        }
+        #endregion
+
+        #region HorizontalTextAlignment
+        /// <summary>
+        /// Backing store for the horizontal text alignment property.
+        /// </summary>
+        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the horizontal text alignment.
+        /// </summary>
+        /// <value>The horizontal text alignment.</value>
+        public TextAlignment HorizontalTextAlignment
+        {
+            get { return (TextAlignment)GetValue(HorizontalTextAlignmentProperty); }
+            set { SetValue(HorizontalTextAlignmentProperty, value); }
+        }
+        #endregion
+
+        #region VerticalTextAlignment
+        /// <summary>
+        /// Backing store for the vertical text alignment property.
+        /// </summary>
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(MaterialSegmentedControl), TextAlignment.Center);
+        /// <summary>
+        /// Gets or sets the vertical text alignment.
+        /// </summary>
+        /// <value>The vertical text alignment.</value>
+        public TextAlignment VerticalTextAlignment
+        {
+            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
+            set { SetValue(VerticalTextAlignmentProperty, value); }
+        }
+        #endregion
+
+        #region LineBreakMode property
+        /// <summary>
+        /// backing store for LineBreakMode property
+        /// </summary>
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialSegmentedControl), default(LineBreakMode));
+        /// <summary>
+        /// Gets/Sets the LineBreakMode property
+        /// </summary>
+        public LineBreakMode LineBreakMode
+        {
+            get { return (LineBreakMode)GetValue(LineBreakModeProperty); }
+            set { SetValue(LineBreakModeProperty, value); }
+        }
+        #endregion LineBreakMode property
+
+        #region AutoFit property
+        /// <summary>
+        /// backing store for AutoFit property
+        /// </summary>
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(MaterialSegmentedControl), default(AutoFit));
+        /// <summary>
+        /// Gets/Sets the AutoFit property
+        /// </summary>
+        public AutoFit AutoFit
+        {
+            get { return (AutoFit)GetValue(AutoFitProperty); }
+            set { SetValue(AutoFitProperty, value); }
+        }
+        #endregion AutoFit property
+
+        #region Lines property
+        /// <summary>
+        /// backing store for Lines property
+        /// </summary>
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialSegmentedControl), default(int));
+        /// <summary>
+        /// Gets/Sets the Lines property
+        /// </summary>
+        public int Lines
+        {
+            get { return (int)GetValue(LinesProperty); }
+            set { SetValue(LinesProperty, value); }
+        }
+        #endregion Lines property
+
+        #region MinFontSize property
+        /// <summary>
+        /// backing store for MinFontSize property
+        /// </summary>
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(MaterialSegmentedControl), default(double));
+        /// <summary>
+        /// Gets/Sets the MinFontSize property
+        /// </summary>
+        public double MinFontSize
+        {
+            get { return (double)GetValue(MinFontSizeProperty); }
+            set { SetValue(MinFontSizeProperty, value); }
+        }
+        #endregion MinFontSize property
+
+        #endregion
+
         #endregion
 
 
@@ -556,6 +629,10 @@ namespace Forms9Patch
             button.HasTightSpacing = HasTightSpacing;
             button.HorizontalTextAlignment = HorizontalTextAlignment;
             button.VerticalTextAlignment = VerticalTextAlignment;
+            button.LineBreakMode = LineBreakMode;
+            button.AutoFit = AutoFit;
+            button.Lines = Lines;
+            button.MinFontSize = MinFontSize;
             if (!segment.FontAttributesSet)
                 segment.MaterialButton.FontAttributes = FontAttributes;
             button.TrailingIcon = TrailingIcon;
@@ -797,6 +874,30 @@ namespace Forms9Patch
                 if (Segments != null)
                     foreach (Segment segment in Segments)
                         segment.MaterialButton.VerticalTextAlignment = VerticalTextAlignment;
+            }
+            else if (propertyName == LineBreakModeProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.LineBreakMode = LineBreakMode;
+            }
+            else if (propertyName == AutoFitProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.AutoFit = AutoFit;
+            }
+            else if (propertyName == LinesProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.Lines = Lines;
+            }
+            else if (propertyName == MinFontSizeProperty.PropertyName)
+            {
+                if (Segments != null)
+                    foreach (Segment segment in Segments)
+                        segment.MaterialButton.MinFontSize = MinFontSize;
             }
             else if (propertyName == FontAttributesProperty.PropertyName)
             {

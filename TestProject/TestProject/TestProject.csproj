@@ -85,8 +85,8 @@
     <Compile Include="Pages.Xaml\CapsInsetPage.xaml.cs">
       <DependentUpon>CapsInsetPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages.Code\LabelFitPage.cs" />
-    <Compile Include="Pages.Code\UnconstrainedLabelFitPage.cs" />
+    <Compile Include="Pages.Code\LabelAutoFitPage.cs" />
+    <Compile Include="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
     <Compile Include="Pages.Xaml\SingleImageButtonPage.xaml.cs">
       <DependentUpon>SingleImageButtonPage.xaml</DependentUpon>
     </Compile>

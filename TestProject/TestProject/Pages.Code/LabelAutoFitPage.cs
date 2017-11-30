@@ -6,11 +6,10 @@
 using System;
 
 using Xamarin.Forms;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace Forms9PatchDemo
 {
-    public class UnconstrainedLabelFitPage : ContentPage
+    public class LabelAutoFitPage : ContentPage
     {
         static string text1 = "Żyłę;^`g <b><em>Lorem</em></b> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
@@ -22,12 +21,12 @@ namespace Forms9PatchDemo
 
 
 
-        readonly Forms9Patch.MaterialSegmentedControl fitSelector = new Forms9Patch.MaterialSegmentedControl();
+        //readonly Forms9Patch.MaterialSegmentedControl fitSelector = new Forms9Patch.MaterialSegmentedControl();
 
         double lastFontSize = -1;
         bool rendering = false;
 
-        public UnconstrainedLabelFitPage()
+        public LabelAutoFitPage()
         {
 
             BackgroundColor = Color.Gray;
@@ -43,6 +42,7 @@ namespace Forms9PatchDemo
                 HeightRequest = 130,
                 FontSize = 15,
             };
+
             #endregion
 
 
@@ -54,6 +54,8 @@ namespace Forms9PatchDemo
                 BackgroundColor = Color.Black,
                 Text = editor.Text
             };
+            var effect = Effect.Resolve("Forms9Patch.EmbeddedResourceFontEffect");
+            xfLabel.Effects.Add(effect);
             #endregion
 
 
@@ -61,14 +63,21 @@ namespace Forms9PatchDemo
             var f9pLabel = new Forms9Patch.Label
             {
                 //HeightRequest = 50,
-                Lines = 3,
+                Lines = 5,
                 FontSize = 15,
                 TextColor = Color.White,
-                Fit = Forms9Patch.LabelFit.None,
+                AutoFit = Forms9Patch.AutoFit.None,
                 BackgroundColor = Color.Black,
                 Text = editor.Text
             };
+
+            var listener = FormsGestures.Listener.For(f9pLabel);
+            listener.Tapped += (object sender, FormsGestures.TapEventArgs e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("Point=[" + e.Touches[0] + "] Index=[" + f9pLabel.IndexAtPoint(e.Touches[0]) + "]");
+            };
             #endregion
+
 
             #region Mode
             var modeSwitch = new Switch
@@ -91,29 +100,32 @@ namespace Forms9PatchDemo
             editor.TextChanged += (sender, e) =>
             {
                 xfLabel.Text = editor.Text;
-                f9pLabel.HtmlText = editor.Text;
+                if (modeSwitch.IsToggled)
+                    f9pLabel.HtmlText = editor.Text;
+                else
+                    f9pLabel.Text = editor.Text;
             };
             #endregion
 
-            /*
-			#region Frames for Labels
-			var frameForF9P = new Frame
-			{
-				HeightRequest = 100,
-				WidthRequest = 200,
-				Padding = 0,
-				Content = f9pLabel
-			};
 
-			var frameForXF = new Frame
-			{
-				HeightRequest = 100,
-				WidthRequest = 200,
-				Padding = 0,
-				Content = xfLabel
-			};
-			#endregion
-			*/
+            #region Frames for Labels
+            var frameForF9P = new Frame
+            {
+                HeightRequest = 100,
+                WidthRequest = 200,
+                Padding = 0,
+                Content = f9pLabel
+            };
+
+            var frameForXF = new Frame
+            {
+                HeightRequest = 100,
+                WidthRequest = 200,
+                Padding = 0,
+                Content = xfLabel
+            };
+            #endregion
+
 
             #region Font Size selection
             var fontSizeSlider = new Slider
@@ -152,26 +164,24 @@ namespace Forms9PatchDemo
             {
                 Text = "Actual Font Size: 15"
             };
-
             f9pLabel.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == Forms9Patch.Label.ActualFontSizeProperty.PropertyName)
                     actualFontSizeLabel.Text = "ActualFontSize: " + f9pLabel.ActualFontSize;
             };
-
             #endregion
 
 
             #region Lines selection
             var linesLabel = new Label
             {
-                Text = "Lines: 3"
+                Text = "Lines: 5"
             };
             var linesSlider = new Slider
             {
                 Minimum = 0,
                 Maximum = 8,
-                Value = 3
+                Value = 5
             };
             linesSlider.ValueChanged += (sender, e) =>
             {
@@ -181,37 +191,32 @@ namespace Forms9PatchDemo
             #endregion
 
 
-            #region Fit Selection
+            #region AutoFit Selection
             var fitSelector = new Forms9Patch.MaterialSegmentedControl();
             fitSelector.Segments.Add(new Forms9Patch.Segment
             {
                 Text = "None",
-                Command = new Command(x =>
-                {
-                    f9pLabel.Fit = Forms9Patch.LabelFit.None;
-                })
+                Command = new Command(x => { f9pLabel.AutoFit = Forms9Patch.AutoFit.None; })
             });
             var widthSegment = new Forms9Patch.Segment
             {
                 Text = "Width",
-                Command = new Command(x => { f9pLabel.Fit = Forms9Patch.LabelFit.Width; }),
+                Command = new Command(x => { f9pLabel.AutoFit = Forms9Patch.AutoFit.Width; }),
                 //IsEnabled = f9pLabel.HasImposedSize,
-                BindingContext = f9pLabel,
-                //IsEnabled = false
+                //BindingContext = f9pLabel
             };
             //widthSegment.SetBinding(Forms9Patch.Segment.IsEnabledProperty, "HasImposedSize");
             fitSelector.Segments.Add(widthSegment);
             var linesSegment = new Forms9Patch.Segment
             {
                 Text = "Lines",
-                Command = new Command(x => { f9pLabel.Fit = Forms9Patch.LabelFit.Lines; }),
+                Command = new Command(x => { f9pLabel.AutoFit = Forms9Patch.AutoFit.Lines; }),
                 //IsEnabled = f9pLabel.HasImposedSize,
-                BindingContext = f9pLabel
+                //BindingContext = f9pLabel
             };
             //linesSegment.SetBinding(Forms9Patch.Segment.IsEnabledProperty, "HasImposedSize");
             fitSelector.Segments.Add(linesSegment);
             fitSelector.SelectIndex(0);
-
             #endregion
 
 
@@ -362,18 +367,10 @@ namespace Forms9PatchDemo
             #endregion
 
 
-            xfLabel.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == HeightProperty.PropertyName)
-                    System.Diagnostics.Debug.WriteLine("xfLabel.Height=[" + xfLabel.Height + "]\n");
-            };
-
             #region FontSelection
             Picker fontPicker = new Picker
             {
                 Title = "Default",
-                //HeightRequest = 300,
-                //VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
 
             };
@@ -382,7 +379,6 @@ namespace Forms9PatchDemo
                 fontPicker.Items.Add(fontFamily);
             fontPicker.SelectedIndexChanged += (sender, e) =>
             {
-                //string family = null;
                 if (fontPicker.SelectedIndex > -1 && fontPicker.SelectedIndex < fontFamilies.Count)
                 {
                     f9pLabel.FontFamily = fontFamilies[fontPicker.SelectedIndex];
@@ -415,25 +411,21 @@ namespace Forms9PatchDemo
                         },
 
                         new Label { Text = "Xamarin.Forms.Label:" },
-                        xfLabel,
+                        frameForXF,
                         new Label { Text = "Forms9Patch.Label:" },
-                        f9pLabel,
-                        new StackLayout
-                        {
-                            Orientation = StackOrientation.Horizontal,
-                            Children = {
-                                new Label {
-                                    Text = "Font Family:",
-                                    HorizontalOptions = LayoutOptions.Start
-                                },
-                            fontPicker
-                            }
+                        frameForF9P,
+
+
+                        new Label {
+                            Text = "Font Family:",
+                            HorizontalOptions = LayoutOptions.Start
                         },
+                        fontPicker,
 
                         fontSizeLabel,
                         fontSizeSlider,
                         actualFontSizeLabel,
-                        new Label { Text = "Fit:" },
+                        new Label { Text = "AutoFit:" },
                         fitSelector,
                         linesLabel,
                         linesSlider,

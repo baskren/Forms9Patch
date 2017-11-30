@@ -128,9 +128,9 @@ namespace Forms9Patch.Droid
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
 
 
-            if (_currentControlState.Lines == 0 && _currentControlState.Fit != LabelFit.None)
+            if (_currentControlState.Lines == 0 && _currentControlState.AutoFit != AutoFit.None)
                 tmpFontSize = F9PTextView.ZeroLinesFit(_currentControlState.JavaText, new TextPaint(Control.Paint), ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
-            else if (_currentControlState.Fit == LabelFit.Lines)
+            else if (_currentControlState.AutoFit == AutoFit.Lines)
             {
 
                 if (_currentControlState.AvailHeight > int.MaxValue / 3)
@@ -143,14 +143,14 @@ namespace Forms9Patch.Droid
                     tmpFontSize = ((_currentControlState.AvailHeight / (_currentControlState.Lines + leadingRatio * (_currentControlState.Lines - 1))) / lineHeightRatio - 0.1f);
                 }
             }
-            else if (_currentControlState.Fit == LabelFit.Width)
+            else if (_currentControlState.AutoFit == AutoFit.Width)
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
 
             Control.TextSize = BoundTextSize(tmpFontSize); ;
             var layout = new StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
             int lines = _currentControlState.Lines;
-            if (lines == 0 && _currentControlState.Fit == LabelFit.None)
+            if (lines == 0 && _currentControlState.AutoFit == AutoFit.None)
             {
                 for (int i = 0; i < layout.LineCount; i++)
                 {
@@ -169,7 +169,7 @@ namespace Forms9Patch.Droid
                     Control.Ellipsize = _currentControlState.LineBreakMode.ToEllipsize();
                 }
                 else
-                    layout = F9PTextView.Truncate(_currentControlState.Text, Element.F9PFormattedString, new TextPaint(Control.Paint), _currentControlState.AvailWidth, _currentControlState.AvailHeight, Element.Fit, Element.LineBreakMode, ref lines, ref text);
+                    layout = F9PTextView.Truncate(_currentControlState.Text, Element.F9PFormattedString, new TextPaint(Control.Paint), _currentControlState.AvailWidth, _currentControlState.AvailHeight, Element.AutoFit, Element.LineBreakMode, ref lines, ref text);
             }
             lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
             for (int i = 0; i < lines; i++)
@@ -180,11 +180,11 @@ namespace Forms9Patch.Droid
                 if (width > tmpWd)
                     tmpWd = (int)System.Math.Ceiling(width);
             }
-            if (_currentControlState.Fit == LabelFit.None && _currentControlState.Lines > 0)
+            if (_currentControlState.AutoFit == AutoFit.None && _currentControlState.Lines > 0)
                 Control.SetMaxLines(_currentControlState.Lines);
 
             //System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\ttmp.size=[" + tmpWd + ", " + tmpHt + "]");
-            if (Element.IsDynamicallySized && _currentControlState.Lines > 0 && _currentControlState.Fit == LabelFit.Lines)
+            if (Element.IsDynamicallySized && _currentControlState.Lines > 0 && _currentControlState.AutoFit == AutoFit.Lines)
             {
                 fontMetrics = Control.Paint.GetFontMetrics();
                 fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
@@ -274,7 +274,7 @@ namespace Forms9Patch.Droid
                 _currentControlState = new ControlState
                 {
                     Lines = Element.Lines,
-                    Fit = Element.Fit,
+                    AutoFit = Element.AutoFit,
                     LineBreakMode = Element.LineBreakMode,
                 };
                 _lastControlState = null;
@@ -330,7 +330,7 @@ namespace Forms9Patch.Droid
                 UpdateLineBreakMode();
             else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)
                 UpdateText();
-            else if (e.PropertyName == Label.FitProperty.PropertyName)
+            else if (e.PropertyName == Label.AutoFitProperty.PropertyName)
                 UpdateFit();
             else if (e.PropertyName == Label.LinesProperty.PropertyName)
                 UpdateLines();
@@ -384,7 +384,7 @@ namespace Forms9Patch.Droid
 
         void UpdateFit()
         {
-            _currentControlState.Fit = Element.Fit;
+            _currentControlState.AutoFit = Element.AutoFit;
             Layout();
         }
 
@@ -559,7 +559,7 @@ namespace Forms9Patch.Droid
 
         public float TextSize;
         public int Lines = (int)Label.LinesProperty.DefaultValue;
-        public LabelFit Fit = (LabelFit)Label.FitProperty.DefaultValue;
+        public AutoFit AutoFit = (AutoFit)Label.AutoFitProperty.DefaultValue;
         public LineBreakMode LineBreakMode = (LineBreakMode)Label.LineBreakModeProperty.DefaultValue;
 
         public bool IsNullOrEmpty
@@ -583,7 +583,7 @@ namespace Forms9Patch.Droid
             AvailHeight = source.AvailHeight;
             TextSize = source.TextSize;
             Lines = source.Lines;
-            Fit = source.Fit;
+            AutoFit = source.AutoFit;
             LineBreakMode = source.LineBreakMode;
         }
 
@@ -615,7 +615,7 @@ namespace Forms9Patch.Droid
                 return false;
             if (a.Lines != b.Lines)
                 return false;
-            if (a.Fit != b.Fit)
+            if (a.AutoFit != b.AutoFit)
                 return false;
             if (a.LineBreakMode != b.LineBreakMode)
                 return false;

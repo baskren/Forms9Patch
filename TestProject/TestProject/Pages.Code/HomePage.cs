@@ -189,15 +189,15 @@ namespace Forms9PatchDemo
 
 
                         new TextCell {
-                            Text = "Label Fit",
+                            Text = "Label AutoFit",
                             Command = navigateCommand,
-                            CommandParameter = typeof(LabelFitPage)
+                            CommandParameter = typeof(LabelAutoFitPage)
                         },
 
                         new TextCell {
-                            Text = "Unimposed Height Label Fit",
+                            Text = "Unimposed Height Label AutoFit",
                             Command = navigateCommand,
-                            CommandParameter = typeof(UnconstrainedLabelFitPage)
+                            CommandParameter = typeof(UnconstrainedLabelAutoFitPage)
                         },
 
 						/*

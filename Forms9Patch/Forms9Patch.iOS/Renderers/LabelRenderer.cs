@@ -86,7 +86,7 @@ namespace Forms9Patch.iOS
                 double tmpHt = -1;
                 double tmpWd = widthConstraint;
 
-                if (Element.Lines == 0 && Element.Fit != LabelFit.None)
+                if (Element.Lines == 0 && Element.AutoFit != AutoFit.None)
                 {
                     ControlLines = 0;
                     tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
@@ -95,7 +95,7 @@ namespace Forms9Patch.iOS
                     ControlFont = ControlFont.WithSize(tmpFontSize);
                     //System.Diagnostics.Debug.WriteLine("F.A");
                 }
-                else if (Element.Fit == LabelFit.Lines)
+                else if (Element.AutoFit == AutoFit.Lines)
                 {
                     if (double.IsPositiveInfinity(heightConstraint))
                     {
@@ -122,7 +122,7 @@ namespace Forms9Patch.iOS
                         //System.Diagnostics.Debug.WriteLine("F.C");
                     }
                 }
-                else if (Element.Fit == LabelFit.Width)
+                else if (Element.AutoFit == AutoFit.Width)
                 {
                     tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
                     if (tmpFontSize < minFontSize)
@@ -131,7 +131,7 @@ namespace Forms9Patch.iOS
                     //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     //    System.Diagnostics.Debug.WriteLine("F.D");
                 }
-                else if (Element.Fit == LabelFit.None)
+                else if (Element.AutoFit == AutoFit.None)
                 {
                     if (Element.Lines > 0)
                     {
@@ -155,7 +155,7 @@ namespace Forms9Patch.iOS
                 }
 
 
-                if (Element.Fit == LabelFit.None && Element.Lines > 0)
+                if (Element.AutoFit == AutoFit.None && Element.Lines > 0)
                 {
                     double lines = (cgSize.Height + ControlFont.Leading) / (ControlFont.LineHeight + ControlFont.Leading);
                     ControlLines = lines < Element.Lines ? (int)Math.Ceiling(lines) : Element.Lines;
@@ -190,7 +190,7 @@ namespace Forms9Patch.iOS
 
                 // Control.BackgroundColor = UIColor.FromRGBA(0, 0, 255, 100);
 
-                if (Element.Fit == LabelFit.Width)
+                if (Element.AutoFit == AutoFit.Width)
                     ControlLines = Element.Lines;
                 switch (Element.LineBreakMode)
                 {
@@ -241,7 +241,7 @@ namespace Forms9Patch.iOS
                     //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     //    System.Diagnostics.Debug.WriteLine("D gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
-                else if (Element.Fit == LabelFit.None && tmpHt < height)
+                else if (Element.AutoFit == AutoFit.None && tmpHt < height)
                 //if (tmpHt < height)
                 {
                     gap = (nfloat)(height - tmpHt);
@@ -279,7 +279,7 @@ namespace Forms9Patch.iOS
                 if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     System.Diagnostics.Debug.WriteLine("0 Controlines=[" + ControlLines + "]");
                 */
-                if (Element.Fit == LabelFit.None && Element.Lines == 0)
+                if (Element.AutoFit == AutoFit.None && Element.Lines == 0)
                 {
                     //var cgLines = Math.Ceiling(cgSize.Height / ControlFont.LineHeight);
                     var cgLines = cgSize.Height / ControlFont.LineHeight;
@@ -358,7 +358,7 @@ namespace Forms9Patch.iOS
                             break;
                     }
                 }
-                else if ((Element.Fit == LabelFit.Width || Element.Fit == LabelFit.Lines) && gap > 0)
+                else if ((Element.AutoFit == AutoFit.Width || Element.AutoFit == AutoFit.Lines) && gap > 0)
                 {
                     //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
                     //    System.Diagnostics.Debug.WriteLine("xC");
@@ -383,7 +383,7 @@ namespace Forms9Patch.iOS
                     //    System.Diagnostics.Debug.WriteLine("xD");
                     //System.Diagnostics.Debug.WriteLine("calc lines=[" + lines + "]");
 
-                    //if (!(Element.Fit == LabelFit.None && Element.Lines == 0))
+                    //if (!(Element.AutoFit == LabelFit.None && Element.Lines == 0))
                     {
                         double textBlockHeight = ControlFont.LineHeight * ControlLines;// + ControlFont.Leading * (ControlLines);// - 1);
 
@@ -465,7 +465,7 @@ namespace Forms9Patch.iOS
                     */
                 //if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
                 //if (Element.HtmlText=="Fractional Mode")
-                //	System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] Fit=["+Element.Fit+"] Lines=["+Element.Lines+"]");
+                //	System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] AutoFit=["+Element.AutoFit+"] Lines=["+Element.Lines+"]");
             }
             return LastDesiredSize;
         }
@@ -689,7 +689,7 @@ namespace Forms9Patch.iOS
                 LayoutSubviews();
             }
             else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName ||
-                     e.PropertyName == Label.FitProperty.PropertyName ||
+                     e.PropertyName == Label.AutoFitProperty.PropertyName ||
                      e.PropertyName == Label.LinesProperty.PropertyName ||
                      e.PropertyName == Label.LineBreakModeProperty.PropertyName
                     )

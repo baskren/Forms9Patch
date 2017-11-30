@@ -43,17 +43,17 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// The backing store for the Fit property.
+        /// The backing store for the AutoFit property.
         /// </summary>
-        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(Label), LabelFit.None);
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(Label), AutoFit.None);
         /// <summary>
         /// Gets or sets the fit method.  Ignored if the Width and Height is not fixed by a parent, HeightRequest, and/or WidthRequest.
         /// </summary>
         /// <value>The fit.</value>
-        public LabelFit Fit
+        public AutoFit AutoFit
         {
-            get { return (LabelFit)GetValue(FitProperty); }
-            set { SetValue(FitProperty, value); }
+            get { return (AutoFit)GetValue(AutoFitProperty); }
+            set { SetValue(AutoFitProperty, value); }
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Forms9Patch
             }
             base.OnPropertyChanged(propertyName);
             if (propertyName == LinesProperty.PropertyName
-                || propertyName == FitProperty.PropertyName
+                || propertyName == AutoFitProperty.PropertyName
                 || propertyName == HtmlTextProperty.PropertyName
                 || propertyName == TextProperty.PropertyName
                //|| propertyName == WidthProperty.PropertyName 

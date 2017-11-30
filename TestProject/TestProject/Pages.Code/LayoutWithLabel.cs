@@ -19,7 +19,7 @@ namespace Forms9PatchDemo
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				BackgroundColor = Color.Blue,
 				TextColor = Color.Red,
-				Fit = Forms9Patch.LabelFit.Lines,
+				AutoFit = Forms9Patch.LabelFit.Lines,
 				Lines = 1,
 			};
 			Forms9Patch.Label rightLabel = new Forms9Patch.Label { 
@@ -27,7 +27,7 @@ namespace Forms9PatchDemo
 				HorizontalOptions = LayoutOptions.EndAndExpand,
 				BackgroundColor = Color.Red,
 				TextColor = Color.Blue,
-				Fit = Forms9Patch.LabelFit.Lines,
+				AutoFit = Forms9Patch.LabelFit.Lines,
 				HorizontalTextAlignment = TextAlignment.End,
 				Lines=1,
 			};
@@ -54,7 +54,7 @@ namespace Forms9PatchDemo
 				VerticalTextAlignment = TextAlignment.Center,
 				BackgroundColor = Color.Green,
 				TextColor = Color.White,
-				Fit = Forms9Patch.LabelFit.Width,
+				AutoFit = Forms9Patch.AutoFit.Width,
 				HorizontalTextAlignment = TextAlignment.Center,
 				Lines = 1,
 				FontSize = 200,

@@ -9,7 +9,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// Label fit options.
 	/// </summary>
-	public enum LabelFit
+	public enum AutoFit
 	{
 		/// <summary>
 		/// Perform no auto fit

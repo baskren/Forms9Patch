@@ -65,7 +65,9 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment("FILL"),
                     new Forms9Patch.Segment("EXPAND")
                 },
-            GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect
+            GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
+            Lines=1,
+            AutoFit = Forms9Patch.AutoFit.Width
         };
         Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
         {
@@ -153,22 +155,22 @@ namespace Forms9PatchDemo
             var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
             {
                 HeightRequest = 40,
+                HasTightSpacing = true,
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center,
                 TintIcon = false,
                 Segments =
                 {
                     new Forms9Patch.Segment(""),
-                    //new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
-                    //new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
                     new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("cat.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
-                    /*
-                    new Forms9Patch.Segment(null, ImageSource.FromFile("balloons.jpg")),
+                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("balloons.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image"),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon"),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble"),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton")
-                    */
+                    
                 }
             };
             backgroundImageSelector.SelectIndex(1);
@@ -256,6 +258,7 @@ namespace Forms9PatchDemo
             Master = new ContentPage
             {
                 Title = "Controls",
+                BackgroundColor = Color.LightGray,
                 Content = new ScrollView
                 {
                     Content = new StackLayout
