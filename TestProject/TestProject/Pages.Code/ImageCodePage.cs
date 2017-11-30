@@ -4,16 +4,16 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public class ImageCodePage : ContentPage
+	public class ImageCodePage : MasterDetailPage
 	{
-        #region Shapes
+        #region Shape Strings
         static string Rectangle = "▭";
         static string Square = "□";
         static string Circle = "○";
         static string Ellipse = "⬭";
-        //static string Obround = "◖▮◗";
         #endregion
 
+        #region Global Elements
         Slider capsInsetsLeftSlider = new Slider(0, 100, 0.0);
         Slider capsInsetsRightSlider = new Slider(0, 100, 0.0);
         Slider capsInsetsTopSlider = new Slider(0, 100, 0.0);
@@ -24,7 +24,17 @@ namespace Forms9PatchDemo
         Forms9Patch.SliderStepSizeEffect capsInsetsTStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
         Forms9Patch.SliderStepSizeEffect capsInsetsBStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
 
-        Switch pixelCapsSwitch = new Switch();
+        //Switch pixelCapsSwitch = new Switch();
+        Forms9Patch.MaterialSegmentedControl capsUnitsSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment("PIXL"),
+                new Forms9Patch.Segment("%")
+            },
+        };
+
+        Switch antiAliasSwitch = new Switch();
 
         Xamarin.Forms.Slider outlineRadiusSlider = new Xamarin.Forms.Slider
         {
@@ -33,34 +43,52 @@ namespace Forms9PatchDemo
             Value = 2
         };
 
-        public ImageCodePage ()
-		{
+        Forms9Patch.Image f9pImage = new Forms9Patch.Image {
+            Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redGridBox"),
+        };
 
+        Xamarin.Forms.Image xamarinImage = new Xamarin.Forms.Image
+        {
+            Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redGridBox"),
+            Aspect = Aspect.Fill
+        };
 
+        //BoxView f9pImageWidthBox = new BoxView { Color = Color.Red, HeightRequest = 1 };
 
-            var hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
+        Forms9Patch.MaterialSegmentedControl hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
                 {
                     new Forms9Patch.Segment("START"),
                     new Forms9Patch.Segment("CENTER"),
                     new Forms9Patch.Segment("END"),
-                    new Forms9Patch.Segment("FILL")
+                    new Forms9Patch.Segment("FILL"),
+                    new Forms9Patch.Segment("EXPAND")
                 },
-            };
+            GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect
+        };
+        Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+                {
+                    new Forms9Patch.Segment("START"),
+                    new Forms9Patch.Segment("CENTER"),
+                    new Forms9Patch.Segment("END"),
+                    new Forms9Patch.Segment("FILL"),
+                    new Forms9Patch.Segment("EXPAND")
+                },
+            GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect
+        };
+        #endregion
+
+        public ImageCodePage ()
+		{
+            Title = "ImageCodePage";
+
+            #region Local Elements
             hzOptionSegmentedControl.SelectIndex(3);
             hzOptionSegmentedControl.SegmentTapped += HzOptionSegmentedControl_SegmentTapped;
 
-            var vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
-                {
-                    new Forms9Patch.Segment("START"),
-                    new Forms9Patch.Segment("CENTER"),
-                    new Forms9Patch.Segment("END"),
-                    new Forms9Patch.Segment("FILL")
-                }
-            };
             vtOptionSegmentedControl.SelectIndex(3);
             vtOptionSegmentedControl.SegmentTapped += VtOptionSegmentedControl_SegmentTapped; 
 
@@ -124,17 +152,20 @@ namespace Forms9PatchDemo
 
             var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
             {
+                TintIcon = false,
                 Segments =
                 {
-                    new Forms9Patch.Segment("NONE"),
-                    new Forms9Patch.Segment("gridBox"),
-                    new Forms9Patch.Segment("button"),
-                    new Forms9Patch.Segment("cat"),
-                    new Forms9Patch.Segment("balloons"),
-                    new Forms9Patch.Segment("image"),
-                    new Forms9Patch.Segment("redRibbon"),
-                    new Forms9Patch.Segment("bubble"),
-                    new Forms9Patch.Segment("blueButton")
+                    new Forms9Patch.Segment(""),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment(null, ImageSource.FromFile("cat.jpg")),
+                    /*
+                    new Forms9Patch.Segment(null, ImageSource.FromFile("balloons.jpg")),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton")
+                    */
                 }
             };
             backgroundImageSelector.SelectIndex(1);
@@ -169,7 +200,7 @@ namespace Forms9PatchDemo
             outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineRadius:"), 1, 0);
             outlineGrid.Children.Add(outlineRadiusSlider, 1, 1);
 
-            pixelCapsSwitch.Toggled += PixelCapsSwitch_Toggled;
+            //pixelCapsSwitch.Toggled += PixelCapsSwitch_Toggled;
 
             var capsInsetsGrid = new Xamarin.Forms.Grid
             {
@@ -195,52 +226,100 @@ namespace Forms9PatchDemo
             capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Right:"), 1, 2);
             capsInsetsGrid.Children.Add(capsInsetsRightSlider, 1, 3);
 
-
-            Padding = new Thickness(20, 20, 0, 20);
-            Content = new ScrollView
+            capsUnitsSegmentedControl.SelectIndex(0);
+            capsUnitsSegmentedControl.SegmentTapped += CapsUnitsSegmentedControl_SegmentTapped;
+            antiAliasSwitch.Toggled += AntiAliasSwitch_Toggled;
+            var capsInsetsAndAntiAliasGrid = new Grid
             {
-                Padding = new Thickness(0, 0, 20, 0),
-                Content = new StackLayout
+                RowDefinitions = new RowDefinitionCollection
                 {
-                    Children = {
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                },
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                },
+            };
+            capsInsetsAndAntiAliasGrid.Children.Add(new Forms9Patch.Label("CapsInsets Units:"), 0, 0);
+            capsInsetsAndAntiAliasGrid.Children.Add(capsUnitsSegmentedControl, 0, 1);
+            capsInsetsAndAntiAliasGrid.Children.Add(new Forms9Patch.Label("AntiAlias:"), 1, 0);
+            capsInsetsAndAntiAliasGrid.Children.Add(antiAliasSwitch, 1, 1);
 
-                        new Forms9Patch.Label("Xamarin.Forms.VisualElement.HorizontalOptions (Alignment):"),
+            #endregion
+
+            #region Content
+            Master = new ContentPage
+            {
+                Title = "Controls",
+                Content = new ScrollView
+                {
+                    Content = new StackLayout
+                    {
+                        Padding = new Thickness(10, 10, 20, 10),
+                        Children = {
+
+                        new Forms9Patch.Label("HorizontalOptions:"),
                         hzOptionSegmentedControl,
-                        new Forms9Patch.Label("Xamarin.Forms.VisualElement.VerticalOptions (Alignment):"),
+                        new Forms9Patch.Label("VerticalOptions:"),
                         vtOptionSegmentedControl,
-                        new Forms9Patch.Label("Forms9Patch.Image.Fill:"),
+                        new Forms9Patch.Label("Fill / Aspect:"),
                         fillSegmentedControl,
-                        new Forms9Patch.Label("Forms9Patch.Image.ElementShape:"),
+                        new Forms9Patch.Label("ElementShape:"),
                         shapesSelector,
-                        new Forms9Patch.Label("Shape attributes (some value vs. default value)"),
+                        new Forms9Patch.Label("Shape attributes:"),
                         shapeAttributesSelector,
                         outlineGrid,
 
-                        new Forms9Patch.Label("Forms9Patch.Image.Source:"),
+                        new Forms9Patch.Label("ImageSource:"),
                         backgroundImageSelector,
-                        new Forms9Patch.Label("CapsInsets Pixels (ON) / Percent (OFF):"),
-                        pixelCapsSwitch,
+
+                        capsInsetsAndAntiAliasGrid,
                         capsInsetsGrid,
 
-                        new Forms9Patch.Label("Xamarin.Forms.VisualElement.HeightRequest:"),
+                        new Forms9Patch.Label("HeightRequest:"),
                         heightRequestSlider,
 
 
 
-                        new Label { Text = "f9p: multiresource: redGridBox fill:None HzOpt=Center" },
-                        new Forms9Patch.Image {
-                            Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redGridBox"),
-                        },
 
+                    },
+                    },
+                }
+            };
+            Detail = new ContentPage
+            {
+                Title = "Images",
+                Content = new StackLayout
+                {
+                    Children =
+                    {
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        new Forms9Patch.Label("Forms9Patch.Image:"),
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        f9pImage,
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        new Forms9Patch.Label("Xamarin.Forms.Image:"),
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        xamarinImage,
+                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                    }
+                }
+            };
+            #endregion
+        }
 
-					},
-				},
-			};
-		}
-
-        private void PixelCapsSwitch_Toggled(object sender, ToggledEventArgs e)
+        private void AntiAliasSwitch_Toggled(object sender, ToggledEventArgs e)
         {
-            if (e.Value)
+            f9pImage.AntiAlias = e.Value;
+        }
+
+        #region Event Handlers
+        private void CapsUnitsSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        {
+            if (e.Index==0)
             {
                 capsInsetsLeftSlider.Maximum = 200;
                 capsInsetsLeftSlider.Value = 0;
@@ -266,51 +345,110 @@ namespace Forms9PatchDemo
 
         private void HzOptionSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            var layoutOption = LayoutOptions.Fill;
-            if (e.Segment.Text == "START")
-                layoutOption = LayoutOptions.Start;
-            else if (e.Segment.Text == "CENTER")
-                layoutOption = LayoutOptions.Center;
-            else if (e.Segment.Text == "END")
-                layoutOption = LayoutOptions.End;
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.HorizontalOptions = layoutOption;
+            switch (e.Segment.Text)
+            {
+                case "START":
+                    hzOptionSegmentedControl.SelectIndex(0);
+                    f9pImage.HorizontalOptions = (hzOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.StartAndExpand : LayoutOptions.Start);
+                    hzOptionSegmentedControl.DeselectIndex(1);
+                    hzOptionSegmentedControl.DeselectIndex(2);
+                    hzOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "CENTER":
+                    hzOptionSegmentedControl.SelectIndex(1);
+                    f9pImage.HorizontalOptions = (hzOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.CenterAndExpand : LayoutOptions.Center);
+                    hzOptionSegmentedControl.DeselectIndex(0);
+                    hzOptionSegmentedControl.DeselectIndex(2);
+                    hzOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "END":
+                    hzOptionSegmentedControl.SelectIndex(2);
+                    f9pImage.HorizontalOptions = (hzOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.EndAndExpand : LayoutOptions.End);
+                    hzOptionSegmentedControl.DeselectIndex(0);
+                    hzOptionSegmentedControl.DeselectIndex(1);
+                    hzOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "FILL":
+
+                    hzOptionSegmentedControl.SelectIndex(3);
+                    f9pImage.HorizontalOptions = (hzOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.FillAndExpand : LayoutOptions.Fill);
+                    hzOptionSegmentedControl.DeselectIndex(0);
+                    hzOptionSegmentedControl.DeselectIndex(1);
+                    hzOptionSegmentedControl.DeselectIndex(2);
+                    break;
+                case "EXPAND":
+                    f9pImage.HorizontalOptions = new LayoutOptions(f9pImage.HorizontalOptions.Alignment, e.Segment.IsSelected);
+                    break;
+            }
+            xamarinImage.HorizontalOptions = f9pImage.HorizontalOptions;
         }
 
         private void VtOptionSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            var layoutOption = LayoutOptions.Fill;
-            if (e.Segment.Text == "START")
-                layoutOption = LayoutOptions.Start;
-            else if (e.Segment.Text == "CENTER")
-                layoutOption = LayoutOptions.Center;
-            else if (e.Segment.Text == "END")
-                layoutOption = LayoutOptions.End;
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.VerticalOptions = layoutOption;
+            switch (e.Segment.Text)
+            {
+                case "START":
+                    vtOptionSegmentedControl.SelectIndex(0);
+                    f9pImage.VerticalOptions = (vtOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.StartAndExpand : LayoutOptions.Start);
+                    vtOptionSegmentedControl.DeselectIndex(1);
+                    vtOptionSegmentedControl.DeselectIndex(2);
+                    vtOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "CENTER":
+                    vtOptionSegmentedControl.SelectIndex(1);
+                    f9pImage.VerticalOptions = (vtOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.CenterAndExpand : LayoutOptions.Center);
+                    vtOptionSegmentedControl.DeselectIndex(0);
+                    vtOptionSegmentedControl.DeselectIndex(2);
+                    vtOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "END":
+                    vtOptionSegmentedControl.SelectIndex(2);
+                    f9pImage.VerticalOptions = (vtOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.EndAndExpand : LayoutOptions.End);
+                    vtOptionSegmentedControl.DeselectIndex(0);
+                    vtOptionSegmentedControl.DeselectIndex(1);
+                    vtOptionSegmentedControl.DeselectIndex(3);
+                    break;
+                case "FILL":
+                    vtOptionSegmentedControl.SelectIndex(3);
+                    f9pImage.VerticalOptions = (vtOptionSegmentedControl.IsIndexSelected(4) ? LayoutOptions.FillAndExpand : LayoutOptions.Fill);
+                    vtOptionSegmentedControl.DeselectIndex(0);
+                    vtOptionSegmentedControl.DeselectIndex(1);
+                    vtOptionSegmentedControl.DeselectIndex(2);
+                    break;
+                case "EXPAND":
+                    f9pImage.VerticalOptions = new LayoutOptions(f9pImage.VerticalOptions.Alignment, e.Segment.IsSelected);
+                    break;
+            }
+            xamarinImage.VerticalOptions = f9pImage.VerticalOptions;
         }
 
         private void HeightRequestSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.HeightRequest = e.NewValue;
+            f9pImage.HeightRequest = e.NewValue;
+            xamarinImage.HeightRequest = e.NewValue;
         }
 
         private void FillSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            var fill = Forms9Patch.Fill.Fill;
-            if (e.Segment.Text == "TILE")
-                fill = Forms9Patch.Fill.Tile;
-            else if (e.Segment.Text == "ASPECTFILL")
-                fill = Forms9Patch.Fill.AspectFill;
-            else if (e.Segment.Text == "ASPECTFIT")
-                fill = Forms9Patch.Fill.AspectFit;
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.Fill = fill;
+            switch (e.Segment.Text)
+            {
+                case "TILE":
+                    f9pImage.Fill = Forms9Patch.Fill.Tile;
+                    xamarinImage.Aspect = Xamarin.Forms.Aspect.Fill;
+                    break;
+                case "ASPECTFILL":
+                    f9pImage.Fill = Forms9Patch.Fill.AspectFill;
+                    xamarinImage.Aspect = Xamarin.Forms.Aspect.AspectFill;
+                    break;
+                case "ASPECTFIT":
+                    f9pImage.Fill = Forms9Patch.Fill.AspectFit;
+                    xamarinImage.Aspect = Xamarin.Forms.Aspect.AspectFit;
+                    break;
+                default:
+                    f9pImage.Fill = Forms9Patch.Fill.Fill;
+                    xamarinImage.Aspect = Xamarin.Forms.Aspect.Fill;
+                    break;
+            }
         }
 
         private void ShapesSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
@@ -324,95 +462,55 @@ namespace Forms9PatchDemo
                 shape = Forms9Patch.ElementShape.Elliptical;
             else if (e.Segment.Text == "OBROUND")
                 shape = Forms9Patch.ElementShape.Obround;
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.ElementShape = shape;
+            f9pImage.ElementShape = shape;
         }
 
         private void OutlineWidthSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.OutlineWidth = (float)e.NewValue;
+            f9pImage.OutlineWidth = (float)e.NewValue;
         }
 
         private void OutlineRadiusSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.OutlineRadius = (float)e.NewValue;
+            f9pImage.OutlineRadius = (float)e.NewValue;
         }
 
         private void ShapeAttributesSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    switch (e.Segment.Text)
+            switch (e.Segment.Text)
             {
                 case "BACKGROUND":
-                            f9pImage.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                            break;
-                        case "OUTLINE":
-                            f9pImage.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                            f9pImage.OutlineWidth = e.Segment.IsSelected ? (float)Math.Max(outlineRadiusSlider.Value,2) : 0;
-                            break;
-                        case "SHADOW":
-                            f9pImage.HasShadow = e.Segment.IsSelected;
-                            break;
-                        case "INVERTED":
-                            f9pImage.ShadowInverted = e.Segment.IsSelected;
-                            break;
+                    f9pImage.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
+                    xamarinImage.BackgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
+                    break;
+                case "OUTLINE":
+                    f9pImage.OutlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
+                    f9pImage.OutlineWidth = e.Segment.IsSelected ? (float)Math.Max(outlineRadiusSlider.Value, 2) : 0;
+                    break;
+                case "SHADOW":
+                    f9pImage.HasShadow = e.Segment.IsSelected;
+                    break;
+                case "INVERTED":
+                    f9pImage.ShadowInverted = e.Segment.IsSelected;
+                    break;
             }
         }
 
         private void BackgroundImageSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                {
-                    switch (e.Segment.Text)
-                    {
-                        case "NONE":
-                            f9pImage.Source = null;
-                            break;
-                        case "gridBox":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redGridBox");
-                            break;
-                        case "button":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.button");
-                            break;
-                        case "cat":
-                            f9pImage.Source = ImageSource.FromFile("cat.jpg");
-                            break;
-                        case "balloons":
-                            f9pImage.Source = ImageSource.FromFile("balloons.jpg");
-                            break;
-                        case "image":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.image");
-                            break;
-                        case "redRibbon":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redribbon");
-                            break;
-                        case "bubble":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bubble");
-                            break;
-                        case "blueButton":
-                            f9pImage.Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.bluebutton");
-                            break;
-                    }
-                }
-
+            f9pImage.Source = e.Segment.IconImage?.Source;
+            xamarinImage.Source = e.Segment.IconImage?.Source;
         }
 
         private void CapsInsetsSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            double scale = pixelCapsSwitch.IsToggled ? 1 : 0.01;
+            double scale = capsUnitsSegmentedControl.IsIndexSelected(0) ? 1 : 0.01; // pixelCapsSwitch.IsToggled ? 1 : 0.01;
             var capsInset = new Thickness(capsInsetsLeftSlider.Value * scale, capsInsetsTopSlider.Value * scale, capsInsetsRightSlider.Value * scale, capsInsetsBottomSlider.Value * scale);
             System.Diagnostics.Debug.WriteLine("CapsInset=["+Forms9Patch.ThicknessExtension.Description(capsInset)+"]");
-            foreach (var child in ((StackLayout)((ScrollView)Content).Content).Children)
-                if (child is Forms9Patch.Image f9pImage)
-                    f9pImage.CapInsets = capsInset;
+            f9pImage.CapInsets = capsInset;
         }
+        #endregion
+
     }
 }
 

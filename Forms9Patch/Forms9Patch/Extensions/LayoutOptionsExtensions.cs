@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
-namespace Forms9Patch.Extensions
+
+namespace Forms9Patch
 {
     /// <summary>
     /// Layout options extensions.
@@ -24,6 +25,11 @@ namespace Forms9Patch.Extensions
                     return TextAlignment.End;
             }
             return TextAlignment.Start;
+        }
+
+        public static bool IsEqualTo(this LayoutOptions o1, LayoutOptions o2)
+        {
+            return o1.Alignment == o2.Alignment && o1.Expands == o2.Expands;
         }
     }
 }

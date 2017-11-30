@@ -239,10 +239,7 @@ namespace Forms9Patch
         public Forms9Patch.Image IconImage
         {
             get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set
-            {
-                SetValue(IconImageProperty, value);
-            }
+            set { SetValue(IconImageProperty, value); }
         }
         #endregion IconImage
 
@@ -1333,6 +1330,12 @@ namespace Forms9Patch
                     _stackLayout.Children.Remove(_iconImage);
                 if (IconImage != null)
                 {
+                    if (!IconImage.FillOrLayoutSet)
+                    {
+                        IconImage.Fill = Fill.AspectFit;
+                        IconImage.HorizontalOptions = LayoutOptions.Center;
+                        IconImage.VerticalOptions = LayoutOptions.Center;
+                    }
                     if (_iconLabel != null)
                     {
                         _stackLayout.Children.Remove(_iconLabel);

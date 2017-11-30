@@ -156,6 +156,21 @@ namespace Forms9Patch
         }
         #endregion SourceImageSize
 
+        #region AntiAlias property
+        /// <summary>
+        /// backing store for AntiAlias property
+        /// </summary>
+        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("AntiAlias", typeof(bool), typeof(Image), default(bool));
+        /// <summary>
+        /// Gets/Sets the AntiAlias property
+        /// </summary>
+        public bool AntiAlias
+        {
+            get { return (bool)GetValue(AntiAliasProperty); }
+            set { SetValue(AntiAliasProperty, value); }
+        }
+        #endregion AntiAlias property
+
         #region IShape
 
         #region BackgroundColor property
@@ -290,6 +305,7 @@ namespace Forms9Patch
 
         #endregion Properties
 
+        internal bool FillOrLayoutSet;
 
         #region Fields
         int _instances;
@@ -334,6 +350,7 @@ namespace Forms9Patch
         {
             _f9pId = _instances++;
             Fill = image.Aspect.ToF9pFill();
+            FillOrLayoutSet = !image.HasDefaultAspectAndLayoutOptions();
             //IsOpaque = image.IsOpaque;
             HorizontalOptions = image.HorizontalOptions;
             VerticalOptions = image.VerticalOptions;
@@ -397,6 +414,7 @@ namespace Forms9Patch
             ContentPadding = image.ContentPadding;
             CapInsets = image.CapInsets;
             Fill = image.Fill;
+            FillOrLayoutSet = image.FillOrLayoutSet;
             Source = image.Source;
 
         }
@@ -410,11 +428,16 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (propertyName == HasShadowProperty.PropertyName 
+            if (propertyName == HasShadowProperty.PropertyName
                 || propertyName == SourceProperty.PropertyName
                 || propertyName == OutlineWidthProperty.PropertyName
                 || propertyName == OutlineColorProperty.PropertyName)
                 InvalidateMeasure();
+            else if (propertyName == FillProperty.PropertyName
+                || propertyName == HorizontalOptionsProperty.PropertyName
+                || propertyName == VerticalOptionsProperty.PropertyName
+                )
+                FillOrLayoutSet = true;
             base.OnPropertyChanged(propertyName);
         }
         #endregion

@@ -211,8 +211,10 @@ namespace Forms9Patch.UWP
             var size = SourceImageSize();
             if (size.Width < 1 || size.Height < 1)
                 return new Xamarin.Forms.SizeRequest(Xamarin.Forms.Size.Zero);
+
             var sourceAspect = size.Width / size.Height;
 
+            /*
             if (WidthRequest > 0 && WidthRequest < widthConstraint)
                 widthConstraint = WidthRequest;
             if (HeightRequest > 0 && HeightRequest < heightConstraint)
@@ -230,6 +232,7 @@ namespace Forms9Patch.UWP
             var minHeight = 1.0;
 
 
+            
             switch (ImageElement.Fill)
             {
                 case Fill.AspectFill:
@@ -257,16 +260,20 @@ namespace Forms9Patch.UWP
                     else if (constrainedWidth)
                         reqHeight = availWidth / sourceAspect;
                     break;
-                    /*
-                case Fill.None:
-                    reqWidth = size.Width;
-                    reqHeight = size.Height;
-                    minWidth = size.Width;
-                    minHeight = size.Height;
-                    break;
-                    */
+                //case Fill.None:
+                //    reqWidth = size.Width;
+                //    reqHeight = size.Height;
+                //    minWidth = size.Width;
+                //    minHeight = size.Height;
+                //    break;
             }
-            
+            */
+
+            var reqWidth = size.Width;
+            var reqHeight = size.Height;
+            var minWidth = (sourceAspect > 1 ? sourceAspect : 1);
+            var minHeight = (sourceAspect > 1 ? 1 : 1 / sourceAspect);
+
             if (HasShadow && (DrawFill || DrawImage))
             {
                 var shadowPadding = ShapeBase.ShadowPadding(_roundedBoxElement);
@@ -399,6 +406,7 @@ namespace Forms9Patch.UWP
                 || e.PropertyName == Xamarin.Forms.View.HorizontalOptionsProperty.PropertyName
                 || e.PropertyName == Xamarin.Forms.View.VerticalOptionsProperty.PropertyName
                 || e.PropertyName == Xamarin.Forms.View.MarginProperty.PropertyName
+                || e.PropertyName == Forms9Patch.Image.AntiAliasProperty.PropertyName
                 )
             {
                 _validLayout = false;
@@ -809,39 +817,10 @@ namespace Forms9Patch.UWP
                     for (float y = fillRect.Top; y < fillRect.Bottom; y += _sourceBitmap.SKBitmap.Height)
                         workingCanvas.DrawBitmap(_sourceBitmap.SKBitmap, x, y, paint);
             }
-            /*else if (_imageElement.Fill == Fill.None)
-            {
-                float left;
-                switch (_imageElement.HorizontalOptions.Alignment)
-                {
-                    case Xamarin.Forms.LayoutAlignment.Start:
-                        left = fillRect.Left;
-                        break;
-                    case Xamarin.Forms.LayoutAlignment.End:
-                        left = fillRect.Right - (float)(_sourceBitmap.Width);
-                        break;
-                    default:
-                        left = (fillRect.Right - (float)_sourceBitmap.Width)/2.0f ;
-                        break;
-                }
-                float top;
-                switch (_imageElement.VerticalOptions.Alignment)
-                {
-                    case Xamarin.Forms.LayoutAlignment.Start:
-                        top = fillRect.Top;
-                        break;
-                    case Xamarin.Forms.LayoutAlignment.End:
-                        top = fillRect.Bottom - (float)(_sourceBitmap.Height);
-                        break;
-                    default:
-                        top = (fillRect.Bottom - (float)_sourceBitmap.Height) / 2.0f;
-                        break;
-                }
-                fillRect = SKRect.Create(left, top, (float)_sourceBitmap.Width, (float)_sourceBitmap.Height);
-                canvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect, paint);
-            }*/
             else if (rangeLists == null)
             {
+                var sourceRect = new SKRect(_sourceBitmap.SKBitmap.Info.Rect.Left, _sourceBitmap.SKBitmap.Info.Rect.Top, _sourceBitmap.SKBitmap.Info.Rect.Right, _sourceBitmap.SKBitmap.Info.Rect.Bottom);
+                var destRect = fillRect;
                 if (_imageElement.Fill == Fill.AspectFill)
                 {
                     var croppedWidth = bitmapAspect > fillRectAspect ? _sourceBitmap.Height * fillRectAspect : _sourceBitmap.Width;
@@ -872,49 +851,30 @@ namespace Forms9Patch.UWP
                             top = (float)(_sourceBitmap.Height - croppedHeight) / 2.0f;
                             break;
                     }
-                    var cropRect = SKRect.Create(left, top, (float)croppedWidth, (float)croppedHeight);
-                    workingCanvas.DrawBitmap(_sourceBitmap.SKBitmap, cropRect, fillRect, paint);
+                    sourceRect = SKRect.Create(left, top, (float)croppedWidth, (float)croppedHeight);
                 }
                 else if (_imageElement.Fill == Fill.AspectFit)
                 {
 
-                    var destWidth = _imageElement.HorizontalOptions.Alignment==Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect) : fillRect.Width;
+                    var destWidth = _imageElement.HorizontalOptions.Alignment == Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width : fillRect.Height * bitmapAspect) : fillRect.Width;
                     var destHeight = _imageElement.VerticalOptions.Alignment == Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height) : fillRect.Height;
-                    /*
-                    float left;
-                    switch (_imageElement.HorizontalOptions.Alignment)
-                    {
-                        case Xamarin.Forms.LayoutAlignment.Start:
-                            left = 0;
-                            break;
-                        case Xamarin.Forms.LayoutAlignment.End:
-                            left = (float)(fillRect.Width - destWidth);
-                            break;
-                        default:
-                            left = (float)(fillRect.Width - destWidth) / 2.0f;
-                            break;
-                    }
-                    float top;
-                    switch (_imageElement.VerticalOptions.Alignment)
-                    {
-                        case Xamarin.Forms.LayoutAlignment.Start:
-                            top = 0;
-                            break;
-                        case Xamarin.Forms.LayoutAlignment.End:
-                            top = (float)(fillRect.Height - destHeight);
-                            break;
-                        default:
-                            top = (float)(fillRect.Height - destHeight) / 2.0f;
-                            break;
-                    }
-                    */
-                    float left = fillRect.MidX - (float)destWidth/2f, top = fillRect.MidY - (float)destHeight/2f;
-                    var destRect = SKRect.Create(left, top, (float)destWidth, (float)destHeight);
-                    workingCanvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, destRect, paint);
+                    float left = fillRect.MidX - (float)destWidth / 2f, top = fillRect.MidY - (float)destHeight / 2f;
+                    destRect = SKRect.Create(left, top, (float)destWidth, (float)destHeight);
                 }
-                else // Fill==Fill.Fill
-                
-                    workingCanvas.DrawBitmap(_sourceBitmap.SKBitmap, _sourceBitmap.SKBitmap.Info.Rect, fillRect, paint);
+                //else Fill==Fill.Fill
+
+                if (_imageElement.AntiAlias && (destRect.Width > sourceRect.Width || destRect.Height > sourceRect.Height))
+                {
+                    var croppedBitmap = new SKBitmap((int)sourceRect.Width, (int)sourceRect.Height);
+                    var destBitmap = new SKBitmap((int)destRect.Width, (int)destRect.Height);
+                    _sourceBitmap.SKBitmap.ExtractSubset(croppedBitmap, new SKRectI((int)sourceRect.Left, (int)sourceRect.Top, (int)sourceRect.Right, (int)sourceRect.Bottom));
+                    SKBitmap.Resize(destBitmap, croppedBitmap, SKBitmapResizeMethod.Lanczos3);
+                    workingCanvas.DrawBitmap(destBitmap, destBitmap.Info.Rect, destRect, paint);
+                }
+                else
+                {
+                    workingCanvas.DrawBitmap(_sourceBitmap.SKBitmap, sourceRect, destRect, paint);
+                }
             }
             else
             {
@@ -929,7 +889,6 @@ namespace Forms9Patch.UWP
             {
                 paint = shadowPaint;
                 canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect, paint);
-                //canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect);
             }
         }
 

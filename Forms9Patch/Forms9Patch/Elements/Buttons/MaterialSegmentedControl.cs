@@ -231,6 +231,18 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// Answers the question: Is an index selected?
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool IsIndexSelected(int index)
+        {
+            if (index < 0 || index >= _segments.Count)
+                return false;
+            return _segments[index].IsSelected;
+        }
+
+        /// <summary>
         /// OBSOLETE: Use ToggleBehaviorProperty instead.
         /// </summary>
         [Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead")]
@@ -701,6 +713,25 @@ namespace Forms9Patch
 
             if (index >= 0 && index < _segments.Count)
                 _segments[index].IsSelected = true;
+        }
+
+        /// <summary>
+        /// Deselected the segment at index
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeselectIndex(int index)
+        {
+            if (index >= 0 && index < _segments.Count)
+                _segments[index].IsSelected = false;
+        }
+
+        /// <summary>
+        /// Selects all segments
+        /// </summary>
+        public void SelectAll()
+        {
+            foreach (var segment in _segments)
+                segment.IsSelected = true;
         }
 
         /// <summary>

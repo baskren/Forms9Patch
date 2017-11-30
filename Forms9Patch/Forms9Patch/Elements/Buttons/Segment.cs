@@ -381,7 +381,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="text"></param>
         /// <param name="imageSource"></param>
-        public Segment(string text, ImageSource imageSource=null) : this()
+        public Segment(string text, Xamarin.Forms.ImageSource imageSource=null) : this()
         {
             Text = text;
             if (imageSource!=null)

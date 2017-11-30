@@ -27,5 +27,7 @@ namespace Forms9Patch
         Xamarin.Forms.Color TintColor { get; set; }
 
         Xamarin.Forms.Size SourceImageSize { get; }
+
+        bool AntiAlias { get; set; }
     }
 }
