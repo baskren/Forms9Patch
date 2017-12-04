@@ -147,8 +147,8 @@ namespace Forms9Patch.UWP
 
             else if (e.PropertyName == Forms9Patch.Label.LinesProperty.PropertyName)
                 ForceLayout(Control);
-            //else if (e.PropertyName == Forms9Patch.Label.AutoFitProperty.PropertyName)
-            //    ForceLayout(Control);
+            else if (e.PropertyName == Forms9Patch.Label.AutoFitProperty.PropertyName)
+                ForceLayout(Control);
             else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
                 UpdateMinFontSize(Control);
 
@@ -271,63 +271,9 @@ namespace Forms9Patch.UWP
         #region Xamarin GetDesiredSize
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
-            /*
-            DebugMessage("ENTER");
-
-            if (!_perfectSizeValid)
-            {
-                _perfectSize = base.GetDesiredSize(double.PositiveInfinity, double.PositiveInfinity);
-                _perfectSize.Minimum = new Xamarin.Forms.Size(Math.Min(10, _perfectSize.Request.Width), _perfectSize.Request.Height);
-                _perfectSizeValid = true;
-            }
-            DebugMessage("\t\tPerfectSize=[" + _perfectSize + "]");
-
-            var widthFits = widthConstraint >= _perfectSize.Request.Width;
-            var heightFits = heightConstraint >= _perfectSize.Request.Height;
-
-            if (widthFits && heightFits)
-            {
-                DebugGetDesiredRequest("EXIT A", widthConstraint, heightConstraint, _perfectSize);
-                return _perfectSize;
-            }
-
-            var result = base.GetDesiredSize(widthConstraint, heightConstraint);
-
-            DebugMessage("\t\tBase.GetDesiredSize=[" + result + "]");
-
-            var tinyWidth = Math.Min(10, result.Request.Width);
-            result.Minimum = new Size(tinyWidth, result.Request.Height);
-
-            if (widthFits || Element.LineBreakMode == LineBreakMode.NoWrap)
-            {
-                DebugGetDesiredRequest("EXIT B", widthConstraint, heightConstraint, result);
-                return result;
-            }
-
-            bool containerIsNotInfinitelyWide = !double.IsInfinity(widthConstraint);
-
-            if (containerIsNotInfinitelyWide)
-            {
-                bool textCouldHaveWrapped = Element.LineBreakMode == LineBreakMode.WordWrap || Element.LineBreakMode == LineBreakMode.CharacterWrap;
-                bool textExceedsContainer = result.Request.Width > widthConstraint;
-
-                if (textExceedsContainer || textCouldHaveWrapped)
-                {
-                    var expandedWidth = Math.Max(tinyWidth, widthConstraint);
-                    result.Request = new Size(expandedWidth, result.Request.Height);
-                }
-            }
-
-
-
-            DebugGetDesiredRequest("EXIT C", widthConstraint, heightConstraint, result);
-            return result;
-            */
-
             var desiredSize = MeasureOverride(new Windows.Foundation.Size(widthConstraint, heightConstraint));
             var minSize = new Xamarin.Forms.Size(10, FontExtensions.LineHeightForFontSize(Element.DecipheredMinFontSize()));
             return new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
-
         }
         #endregion
 
@@ -443,11 +389,6 @@ namespace Forms9Patch.UWP
                         return _lastMeasureOverrideResult;
                     }
                     */
-                    
-                    // if we have infinite height, we need to return the size of the text with the current font.
-
-
-
                     tmpHt = h;
                     if (availableSize.Height > int.MaxValue / 3)
                         tmpHt = h = label.Lines * FontExtensions.LineHeightForFontSize(tmpFontSize);
@@ -483,7 +424,7 @@ namespace Forms9Patch.UWP
 
 
 
-
+                // we needed the following in Android as well.  Xamarin layout really doesn't like this to be changed in real time.
                 Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
                  {
                      label.ActualFontSize = tmpFontSize;
