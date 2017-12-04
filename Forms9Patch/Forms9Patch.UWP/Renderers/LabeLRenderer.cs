@@ -482,9 +482,13 @@ namespace Forms9Patch.UWP
                 //    throw new Exception("We should never exceed the available bounds if the FontSize is greater than label.MinFontSize");
 
 
-                
 
-                label.ActualFontSize = tmpFontSize;
+
+                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+                 {
+                     label.ActualFontSize = tmpFontSize;
+                     return false;
+                 });
 
                 //result.Height = tmpHt > 0 ? tmpHt : textBlock.DesiredSize.Height;
                 result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width),Math.Ceiling(tmpHt > -1 ? tmpHt : textBlock.DesiredSize.Height));
