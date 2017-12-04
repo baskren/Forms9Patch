@@ -77,20 +77,7 @@ namespace Forms9Patch.UWP
         bool _defaultNativeFontIsItalics;
         #endregion
 
-        bool _layoutValid;
-        bool LayoutValid
-        {
-            get
-            {
-                return _layoutValid;
-            }
-            set
-            {
-                _layoutValid = value;
-                if (DebugCondition)
-                    System.Diagnostics.Debug.WriteLine("");
-            }
-        }
+        bool LayoutValid { get; set; }
 
         Windows.Foundation.Size _lastAvailableSize = new Windows.Foundation.Size(0, 0);
         Windows.Foundation.Size _lastMeasureOverrideResult = new Windows.Foundation.Size(0, 0);
@@ -310,8 +297,6 @@ namespace Forms9Patch.UWP
                     break;
             }
 
-            if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("");
             rect.Height = childHeight;
             rect.Width = finalSize.Width;
             Control.Arrange(rect);
@@ -364,12 +349,6 @@ namespace Forms9Patch.UWP
 				w = Math.Max(0, w);
 				h = Math.Max(0, h);
 
-
-                if (DebugCondition)
-                {
-                    System.Diagnostics.Debug.WriteLine("");
-                    //Element.BackgroundColor = Color.Green;
-                }
 
                 // reset FontSize
 

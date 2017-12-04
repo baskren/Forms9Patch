@@ -88,8 +88,7 @@ namespace Forms9Patch
         public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null, 
             propertyChanged: (bindable, oldValue, newValue) => 
             {
-
-                System.Diagnostics.Debug.WriteLine("");
+                //System.Diagnostics.Debug.WriteLine("");
             });
         /// <summary>
         /// Gets or sets the formatted text.

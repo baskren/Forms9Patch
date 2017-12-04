@@ -16,7 +16,7 @@ namespace Forms9Patch.UWP
     public class SkiaRoundedBoxAndImageView : SKXamlCanvas, IDisposable
     {
 
-        bool _debugMessages = true;
+        bool _debugMessages = false;
 
         #region Constructor
         internal SkiaRoundedBoxAndImageView(IShape roundedBoxElement)
@@ -34,8 +34,8 @@ namespace Forms9Patch.UWP
 
         private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
-                System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
+            //if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
+            //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
             //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
             //    System.Diagnostics.Debug.WriteLine("            IgnoreChanges=["+IgnoreChanges+"]");
             if (!ValidLayout(CanvasSize))
@@ -128,7 +128,7 @@ namespace Forms9Patch.UWP
         internal async Task SetSourceAsync()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync ENTER");
-            if (_imageElement.Source != _xfImageSource)
+            if (_imageElement?.Source != _xfImageSource)
             {
                 // release the previous
                 _xfImageSource?.ReleaseF9PBitmap(this);
@@ -157,10 +157,13 @@ namespace Forms9Patch.UWP
                     _sourceRangeLists = _sourceBitmap?.RangeLists;
                 }
 
-                if (_sourceBitmap == null || _sourceBitmap.SKBitmap == null)
-                    _imageElement.SourceImageSize = Xamarin.Forms.Size.Zero;
-                else
-                    _imageElement.SourceImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+                if (_imageElement != null)
+                {
+                    if (_sourceBitmap == null || _sourceBitmap.SKBitmap == null)
+                        _imageElement.SourceImageSize = Xamarin.Forms.Size.Zero;
+                    else
+                        _imageElement.SourceImageSize = new Xamarin.Forms.Size(_sourceBitmap.Width, _sourceBitmap.Height);
+                }
 
                 stopWatch.Stop();
                 if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] B[" + stopWatch.ElapsedMilliseconds + "]");
@@ -888,7 +891,7 @@ namespace Forms9Patch.UWP
             else
             {
                 var lattice = rangeLists.ToSKLattice(_sourceBitmap.SKBitmap);
-                System.Diagnostics.Debug.WriteLine("lattice.x: ["+lattice.XDivs[0]+","+lattice.XDivs[1]+"] lattice.y: ["+lattice.YDivs[0]+","+lattice.YDivs[1]+"] lattice.Bounds=["+lattice.Bounds+"] lattice.Flags:" + lattice.Flags);
+                //System.Diagnostics.Debug.WriteLine("lattice.x: ["+lattice.XDivs[0]+","+lattice.XDivs[1]+"] lattice.y: ["+lattice.YDivs[0]+","+lattice.YDivs[1]+"] lattice.Bounds=["+lattice.Bounds+"] lattice.Flags:" + lattice.Flags);
                 workingCanvas.DrawBitmapLattice(_sourceBitmap.SKBitmap, lattice, fillRect);
             }
 

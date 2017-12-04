@@ -84,7 +84,7 @@ namespace Forms9PatchDemo
         void OnPagePopped(object sender, NavigationEventArgs e)
         {
             IDisposable displosable = e.Page as IDisposable;
-            System.Diagnostics.Debug.WriteLine("");
+            //System.Diagnostics.Debug.WriteLine("");
         }
 
         public App()

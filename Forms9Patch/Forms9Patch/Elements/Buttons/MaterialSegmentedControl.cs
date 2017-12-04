@@ -828,8 +828,8 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (Orientation == StackOrientation.Vertical)
-                System.Diagnostics.Debug.WriteLine("["+GetType()+"]["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] propertyName=["+propertyName+"]");
+            //if (Orientation == StackOrientation.Vertical)
+            //    System.Diagnostics.Debug.WriteLine("["+GetType()+"]["+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] propertyName=["+propertyName+"]");
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == GroupToggleBehaviorProperty.PropertyName)
@@ -1024,8 +1024,12 @@ namespace Forms9Patch
                 if (segment.MaterialButton.LabelActualFontSize < minFontSize)
                     minFontSize = segment.MaterialButton.LabelActualFontSize;
             }
-            foreach (var segment in _segments)
-                segment.MaterialButton.FontSize = minFontSize;
+            if (minFontSize > 0)
+            {
+                foreach (var segment in _segments)
+                    segment.MaterialButton.FontSize = minFontSize;
+                //System.Diagnostics.Debug.WriteLine("minFontSize=[" + minFontSize + "]");
+            }
         }
 
 
@@ -1102,12 +1106,14 @@ namespace Forms9Patch
             var newWidth = width - shadowPadding.HorizontalThickness;
             var newHeight = height - shadowPadding.VerticalThickness;
 
+            /*
             if (vt)
             {
                 System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] width[" + width + "] height[" + height + "]");
                 System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] shadowPadding=" + shadowPadding.Description());
                 System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
             }
+            */
 
             //var topPage = this.TopPage();
 
@@ -1166,8 +1172,8 @@ namespace Forms9Patch
                             //thisH = Math.Floor(height - y);
                             thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
                         LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
-                        if (vt)
-                            System.Diagnostics.Debug.WriteLine("["+GetType()+"."+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
+                        //if (vt)
+                        //    System.Diagnostics.Debug.WriteLine("["+GetType()+"."+PCL.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
                         x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
                         y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
                         //x = Math.Round(x + (hz ? thisW : 0));

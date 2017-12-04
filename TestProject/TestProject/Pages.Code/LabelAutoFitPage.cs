@@ -475,7 +475,7 @@ namespace Forms9PatchDemo
         {
             base.OnAppearing();
             _appeared = true;
-            System.Diagnostics.Debug.WriteLine("");
+            //System.Diagnostics.Debug.WriteLine("");
             fontSizeSlider.Value = 15;
             PageWidthLabel.Text = "Page Width: " + this.Width;
         }
@@ -483,7 +483,7 @@ namespace Forms9PatchDemo
         void OnFontSizeSliderValueChanged(object sender, ValueChangedEventArgs e)
         {
 
-            System.Diagnostics.Debug.WriteLine("");
+            //System.Diagnostics.Debug.WriteLine("");
             fontSizeLabel.Text = "Font Size: " + e.NewValue;
             f9pLabel.FontSize = e.NewValue;
             if (!rendering)

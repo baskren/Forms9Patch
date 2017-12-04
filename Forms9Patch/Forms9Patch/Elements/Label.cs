@@ -177,8 +177,8 @@ namespace Forms9Patch
         protected override void OnPropertyChanged(string propertyName = null)
         {
             //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged("+propertyName+")");
-            if (propertyName == FontSizeProperty.PropertyName && ((Text!=null && Text.StartsWith("Żyłę;^`g ")) || (HtmlText!=null && HtmlText.StartsWith("Żyłę;^`g "))) )
-                System.Diagnostics.Debug.WriteLine("");
+            //if (propertyName == FontSizeProperty.PropertyName && ((Text!=null && Text.StartsWith("Żyłę;^`g ")) || (HtmlText!=null && HtmlText.StartsWith("Żyłę;^`g "))) )
+            //    System.Diagnostics.Debug.WriteLine("");
             if (propertyName == HtmlTextProperty.PropertyName)
             {
                 if (HtmlText != null)

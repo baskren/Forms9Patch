@@ -320,23 +320,6 @@ namespace Forms9Patch.UWP
             rangeLists.MarginY = margY;
 
             stopwatch.Stop();
-            System.Diagnostics.Debug.WriteLine("PatchRanges: "+ stopwatch.ElapsedMilliseconds + "ms");
-
-            /*
-            System.Diagnostics.Debug.Write    ("      capsX: ");
-            foreach (var cap in capsX)
-                System.Diagnostics.Debug.Write("["+cap.Start+","+cap.End+","+cap.Width+"]");
-            System.Diagnostics.Debug.WriteLine("");
-            System.Diagnostics.Debug.Write("      capsY: ");
-            foreach (var cap in capsY)
-                System.Diagnostics.Debug.Write("[" + cap.Start + "," + cap.End + "," + cap.Width + "]");
-            System.Diagnostics.Debug.WriteLine("");
-
-            if (margX!=null)
-            System.Diagnostics.Debug.WriteLine("      margX: [" + margX.Start + "," + margX.End + "," + margX.Width + "]");
-            if (margY!=null)
-            System.Diagnostics.Debug.WriteLine("      margY: [" + margY.Start + "," + margY.End + "," + margY.Width + "]");
-            */
 
             return rangeLists;
         }
