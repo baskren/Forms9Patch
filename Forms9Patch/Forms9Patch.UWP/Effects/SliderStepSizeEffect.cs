@@ -47,9 +47,21 @@ namespace Forms9Patch.UWP
         /// Called when a property is changed
         /// </summary>
         /// <remarks>To be added.</remarks>
-        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
-            base.OnElementPropertyChanged(args);
+            /*
+            if (e.PropertyName == Slider.ValueProperty.PropertyName && Element is Xamarin.Forms.Slider slider)
+            {
+                var value = slider.Value;
+                var steppedValue = Math.Round(value / _stepSizeEffect.StepSize) * _stepSizeEffect.StepSize;
+                if (Math.Abs(value - steppedValue) > double.Epsilon * 2)
+                {
+                    slider.Value = steppedValue;
+                    return;
+                }
+            }
+            */
+            base.OnElementPropertyChanged(e);
         }
 
     }

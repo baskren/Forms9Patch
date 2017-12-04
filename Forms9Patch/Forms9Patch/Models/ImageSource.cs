@@ -44,16 +44,37 @@ namespace Forms9Patch
         /// Cached selection of best fit multi-device / multi-resolution image embedded resource 
         /// </summary>
         /// <returns>Xamarin.Forms.ImageSource</returns>
-        /// <param name="resource">ResourceID without extension, resolution modifier, or device modifier</param>
+        /// <param name="resourceId">ResourceID without extension, resolution modifier, or device modifier</param>
         /// <param name="assembly">Assembly in which the resource can be found</param> 
-        public static Xamarin.Forms.ImageSource FromMultiResource(string resource, Assembly assembly = null)
+        public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
-            if (string.IsNullOrWhiteSpace(Settings.LicenseKey) && Xamarin.Forms.Application.Current != null)
-                throw new Exception("Forms9Patch is has not been initialized. Xamarin.Forms.Application.Current=[" + Xamarin.Forms.Application.Current + "]");
+            Settings.ConfirmInitialization();
             if (assembly == null)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-            var r = BestGuessResource(resource, assembly);
-            var path = r == null ? resource : r.Path;
+            {
+                if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+                {
+                    // this block does not work with UWP
+                    var resourcePath = resourceId.Split('.').ToList();
+                    if (resourcePath.Contains("Resources"))
+                    {
+                        var index = resourcePath.IndexOf("Resources");
+                        var asmName = string.Join(".", resourcePath.GetRange(0, index));
+                        var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
+                        if (appAsm?.GetName().Name == asmName)
+                            assembly = appAsm;
+                        else
+                            assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
+                    }
+                    if (assembly == null && resourcePath.Count() > 1)
+                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
+                    if (assembly == null)
+                        assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+                }
+                else
+                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            }
+            var r = BestGuessResource(resourceId, assembly);
+            var path = r == null ? resourceId : r.Path;
             var imageSource = Xamarin.Forms.ImageSource.FromResource(path, assembly);
             if (imageSource != null)
             {
@@ -74,22 +95,26 @@ namespace Forms9Patch
         {
             if (assembly == null)
             {
-                /* this block does not work with UWP
-                var resourcePath = resourceId.Split('.').ToList();
-                if (resourcePath.Contains("Resources"))
+                if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
                 {
-                    var index = resourcePath.IndexOf("Resources");
-                    var asmName = string.Join(".", resourcePath.GetRange(0, index));
-                    var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
-                    if (appAsm?.GetName().Name == asmName)
-                        assembly = appAsm;
-                    else
-                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
+                    // this block does not work with UWP
+                    var resourcePath = resourceId.Split('.').ToList();
+                    if (resourcePath.Contains("Resources"))
+                    {
+                        var index = resourcePath.IndexOf("Resources");
+                        var asmName = string.Join(".", resourcePath.GetRange(0, index));
+                        var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
+                        if (appAsm?.GetName().Name == asmName)
+                            assembly = appAsm;
+                        else
+                            assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
+                    }
+                    if (assembly == null && resourcePath.Count() > 1)
+                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
+                    if (assembly == null)
+                        assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
                 }
-                if (assembly == null && resourcePath.Count() > 1)
-                    assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
-                if (assembly == null)
-                */
+                else
                     assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             }
             var imageSource = Xamarin.Forms.ImageSource.FromResource(resourceId, assembly);

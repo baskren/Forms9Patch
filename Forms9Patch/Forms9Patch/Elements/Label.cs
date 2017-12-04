@@ -14,6 +14,7 @@ namespace Forms9Patch
 
         #region Properties
 
+        #region HtmlText property
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
@@ -33,7 +34,9 @@ namespace Forms9Patch
                 SetValue(HtmlTextProperty, value);
             }
         }
+        #endregion
 
+        #region F9PFormattedString
         // not public, so not bindable!
         internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create("F9PFormattedString", typeof(F9PFormattedString), typeof(Label), null);
         internal F9PFormattedString F9PFormattedString
@@ -41,7 +44,9 @@ namespace Forms9Patch
             get { return (F9PFormattedString)GetValue(F9PFormattedStringProperty); }
             set { SetValue(F9PFormattedStringProperty, value); }
         }
+        #endregion
 
+        #region AutoFit property
         /// <summary>
         /// The backing store for the AutoFit property.
         /// </summary>
@@ -55,7 +60,9 @@ namespace Forms9Patch
             get { return (AutoFit)GetValue(AutoFitProperty); }
             set { SetValue(AutoFitProperty, value); }
         }
+        #endregion
 
+        #region Lines property
         /// <summary>
         /// The backing store for the lines property.
         /// </summary>
@@ -69,7 +76,9 @@ namespace Forms9Patch
             get { return (int)GetValue(LinesProperty); }
             set { SetValue(LinesProperty, value); }
         }
+        #endregion
 
+        #region MinFontSize
         /// <summary>
         /// The backing store for the minimum font size property.
         /// </summary>
@@ -83,7 +92,9 @@ namespace Forms9Patch
             get { return (double)GetValue(MinFontSizeProperty); }
             set { SetValue(MinFontSizeProperty, value); }
         }
+        #endregion
 
+        #region IsDynamicallySize property
         /// <summary>
         /// The backing store for fixed size property.
         /// </summary>
@@ -103,7 +114,9 @@ namespace Forms9Patch
                 SetValue(IsDynamicallySizedProperty, value);
             }
         }
+        #endregion
 
+        #region ActualFontSize property
         internal static readonly BindablePropertyKey ActualFontSizePropertyKey = BindableProperty.CreateReadOnly("ActualFontSize", typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Backing store for the actual font size property after fitting.
@@ -118,7 +131,7 @@ namespace Forms9Patch
             get { return (double)GetValue(ActualFontSizeProperty); }
             internal set { SetValue(ActualFontSizePropertyKey, value); }
         }
-
+        #endregion
 
         #endregion
 
@@ -142,6 +155,7 @@ namespace Forms9Patch
         /// </summary>
         public Label()
         {
+            Settings.ConfirmInitialization();
             _id = instances++;
             //_listener = FormsGestures.Listener.For(this);
         }
@@ -163,6 +177,8 @@ namespace Forms9Patch
         protected override void OnPropertyChanged(string propertyName = null)
         {
             //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged("+propertyName+")");
+            if (propertyName == FontSizeProperty.PropertyName && ((Text!=null && Text.StartsWith("Żyłę;^`g ")) || (HtmlText!=null && HtmlText.StartsWith("Żyłę;^`g "))) )
+                System.Diagnostics.Debug.WriteLine("");
             if (propertyName == HtmlTextProperty.PropertyName)
             {
                 if (HtmlText != null)
@@ -408,6 +424,8 @@ namespace Forms9Patch
             Tap(actionSpan?.Id, actionSpan?.Href);
         }
         #endregion
+
+
     }
 
     /// <summary>

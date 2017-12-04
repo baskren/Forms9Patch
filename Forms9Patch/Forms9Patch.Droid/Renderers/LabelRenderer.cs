@@ -450,7 +450,7 @@ namespace Forms9Patch.Droid
 
         float BoundTextSize(float textSize)
         {
-            if (textSize < 0)
+            if (textSize < 0.0001)
 #pragma warning disable CS0618 // Type or member is obsolete
                 textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
 #pragma warning restore CS0618 // Type or member is obsolete

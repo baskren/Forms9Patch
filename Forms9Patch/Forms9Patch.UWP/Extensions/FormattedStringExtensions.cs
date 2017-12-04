@@ -12,14 +12,31 @@ namespace Forms9Patch.UWP
     static class FormattedStringExtensions
     {
 
-        internal static void SetF9pFormattedText(this TextBlock textBlock, Forms9Patch.Label label)
+
+        internal static void SetAndFormatText(this TextBlock winTextBlock, Forms9Patch.Label f9pLabel, double altFontSize=-1)
         {
+            var label = f9pLabel;
+            var textBlock = winTextBlock;
+
+            if (f9pLabel == null || textBlock==null)
+                return;
+
             textBlock.Text = "";
             textBlock.Inlines.Clear();
+            textBlock.FontSize = (altFontSize > 0 ? altFontSize : label.DecipheredFontSize());
+            textBlock.LineHeight = FontExtensions.LineHeightForFontSize(textBlock.FontSize);
+            textBlock.FontFamily = FontService.GetWinFontFamily(label.FontFamily);
 
             if (label.Text != null)
             {
                 textBlock.Text = label.Text;
+                return;
+            }
+            if (label.FormattedText!=null)
+            {
+                var formattedText = label.FormattedText;
+                for (var i = 0; i < formattedText.Spans.Count; i++)
+                    textBlock.Inlines.Add(formattedText.Spans[i].ToRun());
                 return;
             }
 
@@ -38,9 +55,9 @@ namespace Forms9Patch.UWP
             var metaFonts = new List<MetaFont>();
             var baseMetaFont = new MetaFont(
                 label.FontFamily,
-                textBlock.FontSize,
-                textBlock.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight,
-                (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0,
+                textBlock.FontSize, //(altFontSize > 0 ? altFontSize : label.DecipheredFontSize()), //(label.FontSize < 0 ? (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"] : label.FontSize)), //label.FontSize,
+                (label.FontAttributes & Xamarin.Forms.FontAttributes.Bold) > 0,//textBlock.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight,
+                (label.FontAttributes & Xamarin.Forms.FontAttributes.Italic) > 0,// (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0,
                 textColor: label.TextColor//,
                 //backgroundColor: label.BackgroundColor
                 );

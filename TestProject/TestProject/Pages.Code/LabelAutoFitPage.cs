@@ -14,31 +14,66 @@ namespace Forms9PatchDemo
         static string text1 = "Żyłę;^`g <b><em>Lorem</em></b> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 
-
-
-
-
-
-
-
-        //readonly Forms9Patch.MaterialSegmentedControl fitSelector = new Forms9Patch.MaterialSegmentedControl();
-
         double lastFontSize = -1;
         bool rendering = false;
+
+        Forms9Patch.Label f9pLabel = new Forms9Patch.Label
+        {
+            //HeightRequest = 50,
+            Lines = 5,
+            FontSize = 15,
+            TextColor = Color.White,
+            AutoFit = Forms9Patch.AutoFit.None,
+            BackgroundColor = Color.Black,
+            Text = text1
+        };
+
+        Label xfLabel = new Label
+        {
+            FontSize = 15,
+            TextColor = Color.White,
+            BackgroundColor = Color.Black,
+            Text = text1
+        };
+        Label fontSizeLabel = new Label
+        {
+            Text = "Font Size: 15"
+        };
+        Label actualFontSizeLabel = new Label
+        {
+            Text = "Actual Font Size: 15"
+        };
+        Slider fontSizeSlider = new Slider
+        {
+            Maximum = 104,
+            Minimum = 4,
+            Value = 15
+        };
+        Slider LinesSlider = new Slider
+        {
+            Minimum = 0,
+            Maximum = 8,
+            Value = 5
+        };
+        Label PageWidthLabel = new Label();
+
+
+        bool _appeared;
 
         public LabelAutoFitPage()
         {
 
-            BackgroundColor = Color.Gray;
-            Padding = 0;
+            LinesSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0));
+
+            BackgroundColor = Color.LightGray;
+            Padding = 10;
 
             #region Editor
             var editor = new Editor
             {
-                //Text = "Żorem ipsum dolor sit amet, consectetur adięiscing ełit",
                 Text = text1,
-                TextColor = Color.White,
-                BackgroundColor = Color.Black,
+                TextColor = Color.Black,
+                BackgroundColor = Color.White,
                 HeightRequest = 130,
                 FontSize = 15,
             };
@@ -47,30 +82,12 @@ namespace Forms9PatchDemo
 
 
             #region Xamarin Forms label
-            var xfLabel = new Label
-            {
-                FontSize = 15,
-                TextColor = Color.White,
-                BackgroundColor = Color.Black,
-                Text = editor.Text
-            };
             var effect = Effect.Resolve("Forms9Patch.EmbeddedResourceFontEffect");
-            xfLabel.Effects.Add(effect);
+            //xfLabel.Effects.Add(effect);
             #endregion
 
 
             #region Forms9Patch Label
-            var f9pLabel = new Forms9Patch.Label
-            {
-                //HeightRequest = 50,
-                Lines = 5,
-                FontSize = 15,
-                TextColor = Color.White,
-                AutoFit = Forms9Patch.AutoFit.None,
-                BackgroundColor = Color.Black,
-                Text = editor.Text
-            };
-
             var listener = FormsGestures.Listener.For(f9pLabel);
             listener.Tapped += (object sender, FormsGestures.TapEventArgs e) =>
             {
@@ -112,58 +129,65 @@ namespace Forms9PatchDemo
             var frameForF9P = new Frame
             {
                 HeightRequest = 100,
-                WidthRequest = 200,
+                //WidthRequest = 200,
                 Padding = 0,
-                Content = f9pLabel
+                Content = f9pLabel,
+                CornerRadius = 0
             };
 
             var frameForXF = new Frame
             {
                 HeightRequest = 100,
-                WidthRequest = 200,
+                //WidthRequest = 200,
                 Padding = 0,
-                Content = xfLabel
+                Content = xfLabel,
+                CornerRadius = 0
+            };
+            #endregion
+
+
+            #region Impose Height
+            var imposeHeightSwitch = new Switch { IsToggled = true };
+            var heightRequestSlider = new Slider(0, 800, 100);
+            var imposedHeightGrid = new Grid
+            {
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition { Height = GridLength.Star },
+                    new RowDefinition { Height = GridLength.Star }
+                },
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition { Width = GridLength.Auto },
+                    new ColumnDefinition { Width = GridLength.Star },
+                },
+            };
+            var heightRequestLabel = new Forms9Patch.Label("HeightRequest: " + 100);
+            imposedHeightGrid.Children.Add(new Forms9Patch.Label("Impose Height?"), 0, 0);
+            imposedHeightGrid.Children.Add(heightRequestLabel, 1, 0);
+            imposedHeightGrid.Children.Add(imposeHeightSwitch, 0, 1);
+            imposedHeightGrid.Children.Add(heightRequestSlider, 1, 1);
+
+            imposeHeightSwitch.Toggled += (ihs, ihsArgs) =>
+            {
+                double heightRequest = imposeHeightSwitch.IsToggled ? heightRequestSlider.Value : -1;
+                frameForXF.HeightRequest = heightRequest;
+                frameForF9P.HeightRequest = heightRequest;
+            };
+
+            heightRequestSlider.ValueChanged += (hrs, hrsArgs) =>
+            {
+                double heightRequest = imposeHeightSwitch.IsToggled ? heightRequestSlider.Value : -1;
+                frameForXF.HeightRequest = heightRequest;
+                frameForF9P.HeightRequest = heightRequest;
+                heightRequestLabel.Text = "HeightRequest: " + heightRequestSlider.Value;
             };
             #endregion
 
 
             #region Font Size selection
-            var fontSizeSlider = new Slider
-            {
-                Maximum = 104,
-                Minimum = 4,
-                Value = 15
-            };
+            fontSizeSlider.ValueChanged += OnFontSizeSliderValueChanged;
 
-            var fontSizeLabel = new Label
-            {
-                Text = "Font Size: 15"
-            };
-            fontSizeSlider.ValueChanged += (sender, e) =>
-            {
-                fontSizeLabel.Text = "Font Size: " + fontSizeSlider.Value;
-                f9pLabel.FontSize = fontSizeSlider.Value;
-                if (!rendering)
-                {
-                    rendering = true;
-                    xfLabel.FontSize = fontSizeSlider.Value;
-                    Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                    {
-                        if (Math.Abs(xfLabel.FontSize - lastFontSize) > double.Epsilon * 5)
-                        {
-                            xfLabel.FontSize = lastFontSize;
-                            return true;
-                        }
-                        rendering = false;
-                        return false;
-                    });
-                }
-                lastFontSize = fontSizeSlider.Value;
-            };
-            var actualFontSizeLabel = new Label
-            {
-                Text = "Actual Font Size: 15"
-            };
             f9pLabel.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == Forms9Patch.Label.ActualFontSizeProperty.PropertyName)
@@ -177,16 +201,11 @@ namespace Forms9PatchDemo
             {
                 Text = "Lines: 5"
             };
-            var linesSlider = new Slider
+            
+            LinesSlider.ValueChanged += (sender, e) =>
             {
-                Minimum = 0,
-                Maximum = 8,
-                Value = 5
-            };
-            linesSlider.ValueChanged += (sender, e) =>
-            {
-                linesLabel.Text = "Lines: " + ((int)Math.Round(linesSlider.Value));
-                f9pLabel.Lines = ((int)Math.Round(linesSlider.Value));
+                linesLabel.Text = "Lines: " + ((int)Math.Round(LinesSlider.Value));
+                f9pLabel.Lines = ((int)Math.Round(LinesSlider.Value));
             };
             #endregion
 
@@ -391,10 +410,10 @@ namespace Forms9PatchDemo
 
             Content = new ScrollView
             {
-                Padding = 0,
+                Padding = 10,
                 Content = new StackLayout
                 {
-                    Padding = 20,
+                    Padding = 50,
                     Children = {
                         new Label { Text = "Text:" },
                         editor,
@@ -428,7 +447,9 @@ namespace Forms9PatchDemo
                         new Label { Text = "AutoFit:" },
                         fitSelector,
                         linesLabel,
-                        linesSlider,
+                        LinesSlider,
+                        imposedHeightGrid,
+
 
                         new Label { Text = "Horizontal Alignment:" },
                         hzAlignmentSelector,
@@ -441,6 +462,47 @@ namespace Forms9PatchDemo
                     }
                 }
             };
+
+            SizeChanged += LabelAutoFitPage_SizeChanged;
+        }
+
+        private void LabelAutoFitPage_SizeChanged(object sender, EventArgs e)
+        {
+            PageWidthLabel.Text = "Page Width: " + this.Width;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _appeared = true;
+            System.Diagnostics.Debug.WriteLine("");
+            fontSizeSlider.Value = 15;
+            PageWidthLabel.Text = "Page Width: " + this.Width;
+        }
+
+        void OnFontSizeSliderValueChanged(object sender, ValueChangedEventArgs e)
+        {
+
+            System.Diagnostics.Debug.WriteLine("");
+            fontSizeLabel.Text = "Font Size: " + e.NewValue;
+            f9pLabel.FontSize = e.NewValue;
+            if (!rendering)
+            {
+                rendering = true;
+                xfLabel.FontSize = e.NewValue;
+                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                {
+                    if (Math.Abs(xfLabel.FontSize - lastFontSize) > double.Epsilon * 5)
+                    {
+                        xfLabel.FontSize = lastFontSize;
+                        return true;
+                    }
+                    rendering = false;
+                    return false;
+                });
+            }
+            lastFontSize = e.NewValue;
+            
         }
     }
 }

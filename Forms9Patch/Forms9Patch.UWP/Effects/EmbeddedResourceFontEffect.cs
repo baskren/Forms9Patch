@@ -85,7 +85,10 @@ namespace Forms9Patch.UWP
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {
                 var fontFamily = _elementFontFamilyProperty.GetValue(Element) as string;
-                var uwpFontFamily = FontService.ReconcileFontFamily(fontFamily, _embeddedResourceFontEffect.Assembly);
+                var assembly = _embeddedResourceFontEffect?.Assembly;
+                if (assembly != null && !Settings.AssembliesToInclude.Contains(assembly))
+                    Settings.AssembliesToInclude.Add(assembly);
+                var uwpFontFamily = FontService.ReconcileFontFamily(fontFamily);
                 _controlFontFamilyProperty.SetValue(Control, new FontFamily(uwpFontFamily));
             }
 		}

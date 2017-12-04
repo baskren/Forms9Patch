@@ -754,6 +754,7 @@ namespace Forms9Patch
         /// </summary>
         public MaterialButton()
         {
+            Settings.ConfirmInitialization();
             _constructing = true;
             Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;

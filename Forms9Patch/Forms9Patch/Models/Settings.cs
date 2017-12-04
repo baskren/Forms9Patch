@@ -75,6 +75,16 @@ namespace Forms9Patch
                 _licenseKey = value;
             }
         }
+
+        static bool _confirmed;
+        internal static void ConfirmInitialization()
+        {
+            if (_confirmed)
+                return;
+            if (string.IsNullOrWhiteSpace(LicenseKey) && Application.Current != null)
+                throw new Exception("Forms9Patch has not been initialized.  See http://http://buildcalc.com/forms9patch/index.html#HowToConfigureTheLicenseKey.  Xamarin.Forms.Application.Current=[" + Xamarin.Forms.Application.Current + "]");
+            _confirmed = true;
+        }
     }
 }
 

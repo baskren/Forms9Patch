@@ -13,6 +13,7 @@ namespace Forms9Patch
         {
             get
             {
+                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IKeyClicksService>();
                 if (_service == null)
                 {

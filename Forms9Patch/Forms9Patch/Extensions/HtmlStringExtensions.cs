@@ -18,7 +18,8 @@ namespace Forms9Patch
 		/// <param name="onComplete">On complete.</param>
 		public static void ToPng(this string html, string fileName, Action<string> onComplete)
 		{
-			_htmlService = _htmlService ?? DependencyService.Get<IHtmlToPngPdfService>();
+            Settings.ConfirmInitialization();
+            _htmlService = _htmlService ?? DependencyService.Get<IHtmlToPngPdfService>();
 			if (_htmlService == null)
 				throw new NotSupportedException("Cannot get HtmlService: must not be supported on this platform.");
 			_htmlService.ToPng(html, fileName, onComplete);

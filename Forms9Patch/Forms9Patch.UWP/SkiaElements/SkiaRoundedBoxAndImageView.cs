@@ -528,8 +528,6 @@ namespace Forms9Patch.UWP
 
             canvas.Clear();
 
-            //Background = new Windows.UI.Xaml.Media.SolidColorBrush(Xamarin.Forms.Color.Black.WithAlpha(0.25).ToWindowsColor());
-
             if (_roundedBoxElement is MaterialSegmentedControl materialSegmentedControl)
             {
                 // do nothing
@@ -562,13 +560,18 @@ namespace Forms9Patch.UWP
                 {
 
                         if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)  if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + ","+ ((FrameworkElement)Parent).ActualHeight + "]");
-                        var rect = new SKRect(0, 0, (float)(((FrameworkElement)Parent).ActualWidth * Display.Scale), (float)(((FrameworkElement)Parent).ActualHeight * Display.Scale));
+
+                    SKRect rect = new SKRect(0, 0, e.Info.Width, e.Info.Height);
+                    if (Parent is FrameworkElement parent)
+                    {
+                        rect = new SKRect(0, 0, (float)(parent.ActualWidth * Display.Scale), (float)(parent.ActualHeight * Display.Scale));
+                    }
 
                         var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !_roundedBoxElement.ShadowInverted;
                         var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * Display.Scale);
                         var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * Display.Scale);
                         var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * Display.Scale);
-                        var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToWindowsColor().ToSKColor();
+                    var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
                         var shadowPadding = ShapeBase.ShadowPadding(_roundedBoxElement, hasShadow, true);
                        
 
@@ -648,7 +651,8 @@ namespace Forms9Patch.UWP
                                 var fillPaint = new SKPaint
                                 {
                                     Style = SKPaintStyle.Fill,
-                                    Color = backgroundColor.ToWindowsColor().ToSKColor(),
+                                    //Color = backgroundColor.ToWindowsColor().ToSKColor(),
+                                    Color = backgroundColor.ToSKColor(),
                                     IsAntialias = true,
                                 };
                                 canvas.DrawPath(path, fillPaint);
@@ -667,7 +671,8 @@ namespace Forms9Patch.UWP
                             var outlinePaint = new SKPaint
                             {
                                 Style = SKPaintStyle.Stroke,
-                                Color = outlineColor.ToWindowsColor().ToSKColor(),
+                                //Color = outlineColor.ToWindowsColor().ToSKColor(),
+                                Color = outlineColor.ToSKColor(),
                                 StrokeWidth = outlineWidth,
                                 IsAntialias = true,
                                 //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
@@ -682,7 +687,8 @@ namespace Forms9Patch.UWP
                             var separatorPaint = new SKPaint
                             {
                                 Style = SKPaintStyle.Stroke,
-                                Color = outlineColor.ToWindowsColor().ToSKColor(),
+                                //Color = outlineColor.ToWindowsColor().ToSKColor(),
+                                Color = outlineColor.ToSKColor(),
                                 StrokeWidth = outlineWidth,
                                 IsAntialias = true,
                                 //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)

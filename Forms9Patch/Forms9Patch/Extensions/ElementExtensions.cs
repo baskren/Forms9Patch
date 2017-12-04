@@ -1,5 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
+using PCL.Utils;
+
 namespace Forms9Patch
 {
 	/// <summary>
@@ -67,5 +69,16 @@ namespace Forms9Patch
 			}
 			return null;
 		}
+
+        public static bool IsInNativeLayout(this VisualElement e)
+        {
+            var isInNativeLayout = (bool)e.GetPropertyValue("IsInNativeLayout");
+            return isInNativeLayout;
+        }
+
+        public static void SetIsInNativeLayout(this VisualElement e, bool value)
+        {
+            e.SetPropertyValue("IsInNativeLayout", value);
+        }
 	}
 }

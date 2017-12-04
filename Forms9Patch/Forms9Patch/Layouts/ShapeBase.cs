@@ -136,7 +136,8 @@ namespace Forms9Patch
 
 
 		internal static Thickness ShadowPadding(IShape shape, bool hasShadow=true, bool scaleForDisplay=false) {
-			if (hasShadow) {
+            Settings.ConfirmInitialization();
+            if (hasShadow) {
                 var shadowX = Settings.ShadowOffset.X;
                 var shadowY = Settings.ShadowOffset.Y;
                 var shadowR = Settings.ShadowRadius;

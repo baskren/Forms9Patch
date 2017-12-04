@@ -459,19 +459,6 @@ namespace Forms9Patch.Droid
 					ans = max;
 				return ans;
 			}
-			//if (availHeight == int.MaxValue)
-			//	return max;
-
-			/*
-			bool twice = (text.Length() == 1);
-
-			if (twice)
-			{
-				text = new Java.Lang.String(new char[] { text.CharAt(0), text.CharAt(0)});
-				availWidth *= 2;
-			}
-			*/
-
 			var result = ZeroLinesFit(text, paint, min, max, availWidth, availHeight);
 
 			float step = (result - min) / 5;

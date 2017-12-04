@@ -18,6 +18,7 @@ namespace Forms9Patch
 		{
             get
             {
+                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IKeyboardService>();
                 if (_service == null)
                 {

@@ -504,7 +504,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for MinFontSize property
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(MaterialSegmentedControl), default(double));
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(MaterialSegmentedControl), -1.0);
         /// <summary>
         /// Gets/Sets the MinFontSize property
         /// </summary>

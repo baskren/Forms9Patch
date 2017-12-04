@@ -320,6 +320,7 @@ namespace Forms9Patch
         /// </summary>
         public Image()
         {
+            Settings.ConfirmInitialization();
             _instances = 0;
         }
 
@@ -348,6 +349,7 @@ namespace Forms9Patch
         /// <param name="image">Image.</param>
         public Image(Xamarin.Forms.Image image)
         {
+            Settings.ConfirmInitialization();
             _f9pId = _instances++;
             Fill = image.Aspect.ToF9pFill();
             FillOrLayoutSet = !image.HasDefaultAspectAndLayoutOptions();

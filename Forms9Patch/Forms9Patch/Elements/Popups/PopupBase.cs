@@ -426,6 +426,8 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
+            Settings.ConfirmInitialization();
+
             _id = _instances++;
             Retain = retain;
             IsVisible = false;

@@ -15,6 +15,7 @@ namespace Forms9Patch
         {
             get
             {
+                Settings.ConfirmInitialization();
                 _service = _service ?? Xamarin.Forms.DependencyService.Get<IStatusBarService>();
                 if (_service==null)
                 {

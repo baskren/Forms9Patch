@@ -83,6 +83,7 @@
     <Compile Include="Enums\FontBaseline.cs" />
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
+    <Compile Include="Extensions\IFontElementExtensions.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
     <Compile Include="Interfaces\ILabelStyle.cs" />

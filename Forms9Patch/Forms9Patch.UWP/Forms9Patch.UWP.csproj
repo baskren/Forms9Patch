@@ -138,12 +138,16 @@
     </Compile>
     <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
+    <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Extensions\FormattedStringExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
+    <Compile Include="Extensions\InLineExtensions.cs" />
     <Compile Include="Extensions\SKBitmapExtensions.cs" />
     <Compile Include="Extensions\SKRectExtensions.cs" />
+    <Compile Include="Extensions\XamarinSpanExtentions.cs" />
     <Compile Include="Models\MetaFont.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Renderers\LabeLRenderer.cs" />
@@ -212,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Renderers\LabelRendererMeasureLayoutCycle.txt" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

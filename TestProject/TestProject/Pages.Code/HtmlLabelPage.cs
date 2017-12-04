@@ -34,6 +34,8 @@ namespace Forms9PatchDemo
 							Text = "",
 							FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
 						},
+
+                        new Forms9Patch.Label("ColorFonts: ☺⛄☂♨⛅"),
                         
 
 						new Forms9Patch.Label { HtmlText =  "<b>\nSUPPORTED HTML TAGS:</b>" },

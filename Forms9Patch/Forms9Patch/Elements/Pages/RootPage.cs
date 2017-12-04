@@ -49,6 +49,8 @@ namespace Forms9Patch
         /// <param name="page">Page.</param>
         public RootPage(Page page = null)
         {
+            Settings.ConfirmInitialization();
+
             if (_instance != null)
                 throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
             _instance = this;

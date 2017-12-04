@@ -21,6 +21,7 @@ namespace Forms9Patch
         {
             get
             {
+                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IApplicationInfoService>();
                 if (_service == null)
                 {
