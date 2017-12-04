@@ -459,7 +459,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for LineBreakMode property
         /// </summary>
-        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialSegmentedControl), default(LineBreakMode));
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialSegmentedControl), LineBreakMode.WordWrap);
         /// <summary>
         /// Gets/Sets the LineBreakMode property
         /// </summary>
@@ -474,7 +474,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for AutoFit property
         /// </summary>
-        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(MaterialSegmentedControl), default(AutoFit));
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(MaterialSegmentedControl), AutoFit.Width);
         /// <summary>
         /// Gets/Sets the AutoFit property
         /// </summary>
@@ -489,7 +489,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Lines property
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialSegmentedControl), default(int));
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(MaterialSegmentedControl), 1);
         /// <summary>
         /// Gets/Sets the Lines property
         /// </summary>
@@ -694,6 +694,7 @@ namespace Forms9Patch
             button.Selected += OnSegmentSelected;
             button.LongPressing += OnSegmentLongPressing;
             button.LongPressed += OnSegmentLongPressed;
+            button.ActualFontSizeChanged += Button_ActualFontSizeChanged;
             Children.Insert(index, button);
             if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
             {
@@ -719,6 +720,7 @@ namespace Forms9Patch
             button.Selected -= OnSegmentSelected;
             button.LongPressing -= OnSegmentLongPressing;
             button.LongPressed -= OnSegmentLongPressed;
+            button.ActualFontSizeChanged -= Button_ActualFontSizeChanged;
         }
 
     
@@ -1013,6 +1015,20 @@ namespace Forms9Patch
 				*/
             }
         }
+
+        private void Button_ActualFontSizeChanged(object sender, EventArgs e)
+        {
+            var minFontSize = double.MaxValue;
+            foreach (var segment in _segments)
+            {
+                if (segment.MaterialButton.LabelActualFontSize < minFontSize)
+                    minFontSize = segment.MaterialButton.LabelActualFontSize;
+            }
+            foreach (var segment in _segments)
+                segment.MaterialButton.FontSize = minFontSize;
+        }
+
+
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {

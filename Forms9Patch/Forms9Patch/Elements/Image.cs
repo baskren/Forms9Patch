@@ -381,44 +381,46 @@ namespace Forms9Patch
         public Image(Image image)
         {
             _f9pId = _instances++;
-            //IsOpaque = image.IsOpaque;
-            HorizontalOptions = image.HorizontalOptions;
-            VerticalOptions = image.VerticalOptions;
-            AnchorX = image.AnchorX;
-            AnchorY = image.AnchorY;
-            BackgroundColor = image.BackgroundColor;
-            HeightRequest = image.HeightRequest;
-            InputTransparent = image.InputTransparent;
-            IsEnabled = image.IsEnabled;
-            IsVisible = image.IsVisible;
-            MinimumHeightRequest = image.MinimumHeightRequest;
-            MinimumWidthRequest = image.MinimumWidthRequest;
-            Opacity = image.Opacity;
-            Resources = image.Resources;
-            Rotation = image.Rotation;
-            RotationX = image.RotationX;
-            RotationY = image.RotationY;
-            Scale = image.Scale;
-            Style = image.Style;
-            TranslationX = image.TranslationX;
-            TranslationY = image.TranslationY;
-            WidthRequest = image.WidthRequest;
+            if (image != null)
+            {
+                //IsOpaque = image.IsOpaque;
+                HorizontalOptions = image.HorizontalOptions;
+                VerticalOptions = image.VerticalOptions;
+                AnchorX = image.AnchorX;
+                AnchorY = image.AnchorY;
+                BackgroundColor = image.BackgroundColor;
+                HeightRequest = image.HeightRequest;
+                InputTransparent = image.InputTransparent;
+                IsEnabled = image.IsEnabled;
+                IsVisible = image.IsVisible;
+                MinimumHeightRequest = image.MinimumHeightRequest;
+                MinimumWidthRequest = image.MinimumWidthRequest;
+                Opacity = image.Opacity;
+                Resources = image.Resources;
+                Rotation = image.Rotation;
+                RotationX = image.RotationX;
+                RotationY = image.RotationY;
+                Scale = image.Scale;
+                Style = image.Style;
+                TranslationX = image.TranslationX;
+                TranslationY = image.TranslationY;
+                WidthRequest = image.WidthRequest;
 
-            ((IShape)this).ExtendedElementShape = ((IShape)image).ExtendedElementShape;
-            ElementShape = image.ElementShape;
-            OutlineWidth = image.OutlineWidth;
-            OutlineRadius = image.OutlineRadius;
-            OutlineColor = image.OutlineColor;
-            ShadowInverted = image.ShadowInverted;
-            HasShadow = image.HasShadow;
+                ((IShape)this).ExtendedElementShape = ((IShape)image).ExtendedElementShape;
+                ElementShape = image.ElementShape;
+                OutlineWidth = image.OutlineWidth;
+                OutlineRadius = image.OutlineRadius;
+                OutlineColor = image.OutlineColor;
+                ShadowInverted = image.ShadowInverted;
+                HasShadow = image.HasShadow;
 
-            TintColor = image.TintColor;
-            ContentPadding = image.ContentPadding;
-            CapInsets = image.CapInsets;
-            Fill = image.Fill;
-            FillOrLayoutSet = image.FillOrLayoutSet;
-            Source = image.Source;
-
+                TintColor = image.TintColor;
+                ContentPadding = image.ContentPadding;
+                CapInsets = image.CapInsets;
+                Fill = image.Fill;
+                FillOrLayoutSet = image.FillOrLayoutSet;
+                Source = image.Source;
+            }
         }
         #endregion
 

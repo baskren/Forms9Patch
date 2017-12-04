@@ -545,7 +545,7 @@ namespace Forms9Patch
         /// <summary>
         /// The line break mode property.
         /// </summary>
-        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.TailTruncation);
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(MaterialButton), LineBreakMode.WordWrap);
         /// <summary>
         /// Gets or sets the line break mode.
         /// </summary>
@@ -718,6 +718,8 @@ namespace Forms9Patch
                 SetValue(GroupToggleBehaviorProperty, value);
             }
         }
+
+        internal double LabelActualFontSize => _label.ActualFontSize;
         #endregion
 
 
@@ -774,6 +776,7 @@ namespace Forms9Patch
                 Margin = 0,
             };
             _label.PropertyChanged += OnLabelPropertyChanged;
+            
 
             _stackLayout = new Xamarin.Forms.StackLayout
             {
@@ -1027,7 +1030,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region CurrentProperties
+        #region Events
 
         bool IsEnabledCore
         {
@@ -1107,6 +1110,14 @@ namespace Forms9Patch
         /// <param name="args">Arguments.</param>
         internal protected void InvokeLongPressed(object sender, EventArgs args) => _longPressed?.Invoke(sender, args);
 
+
+        event EventHandler _actualFontSizeChanged;
+        internal event EventHandler ActualFontSizeChanged
+        {
+            add { _actualFontSizeChanged += value; }
+            remove { _actualFontSizeChanged -= value; }
+        }
+
         #endregion
 
 
@@ -1132,6 +1143,9 @@ namespace Forms9Patch
             {
                 UpdateIconTint();
             }
+
+            else if (propertyName == Label.ActualFontSizeProperty.PropertyName)
+                _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <param name="propertyName">The name of the changed property.</param>
@@ -1193,14 +1207,14 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalOptions = horzOption;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = horzOption;
@@ -1217,19 +1231,21 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.VerticalOptions = LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
+                        //_label.BackgroundColor = Color.Green;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
+                //_stackLayout.BackgroundColor = Color.Green;
             }
             else
             {

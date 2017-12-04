@@ -299,8 +299,8 @@ namespace Forms9PatchDemo
 
             _iconElement.SegmentTapped += (sender, e) =>
             {
-                if (e.Segment.IconImage != null)
-                {
+                //if (e.Segment.IconImage != null)
+                //{
                     /*
                     _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                     foreach (var segment in _hzSegmentsElement.Segments)
@@ -309,8 +309,8 @@ namespace Forms9PatchDemo
                         segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
                         */
                     SetIconImage(e.Segment.IconImage);
-                }
-                else
+                //}
+                //else
                     SetIconText(e.Segment.HtmlText ?? e.Segment.Text);
             };
 
@@ -395,12 +395,17 @@ namespace Forms9PatchDemo
 
         void SetIconImage(Forms9Patch.Image image)
         {
-            var source = image.Source;
+            var source = image?.Source;
             _iconTextAndTextButton.IconImage = new Forms9Patch.Image(image);
             foreach (var segment in _hzSegmentsElement.Segments)
-                segment.IconImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.Info"); //new Forms9Patch.Image(image);
+            {
+                if (source != null)
+                    segment.IconImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.Info"); //new Forms9Patch.Image(image);
+                else
+                    segment.IconImage = null;
+            }
             foreach (var segment in _vtSegmentsElement.Segments)
-                segment.IconImage = new Forms9Patch.Image(image.Source);
+                segment.IconImage = new Forms9Patch.Image(source);
 
         }
     }

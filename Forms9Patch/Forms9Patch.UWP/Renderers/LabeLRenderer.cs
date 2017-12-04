@@ -16,7 +16,9 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                return (Element.Text != null && Element.Text.StartsWith("Żyłę;^`g ")) || (Element.HtmlText != null && Element.HtmlText.StartsWith("Żyłę;^`g "));
+                //string labelTextStart = "Żyłę;^`g ";
+                string labelTextStart = "BACKGROUND";
+                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
             }
         }
 
@@ -181,7 +183,8 @@ namespace Forms9Patch.UWP
 
             //textBlock.TextAlignment = label.HorizontalTextAlignment.ToNativeTextAlignment();
             textBlock.VerticalAlignment = label.VerticalTextAlignment.ToNativeVerticalAlignment();
-            ArrangeOverride(new Windows.Foundation.Size(Element.Bounds.Width, Element.Bounds.Height));
+            if (Element.Bounds.Width > 0 && Element.Bounds.Height > 0)
+                ArrangeOverride(new Windows.Foundation.Size(Element.Bounds.Width, Element.Bounds.Height));
         }
 
 
@@ -291,8 +294,6 @@ namespace Forms9Patch.UWP
             DebugMessage("ENTER FontSize=["+textBlock.FontSize+"] BaseLineOffset=["+textBlock.BaselineOffset+"] LineHeight=["+textBlock.LineHeight+"]");
             DebugArrangeOverride(finalSize);
 
-            double topPadding =  textBlock.BaselineOffset - textBlock.FontSize;
-
             double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var rect = new Windows.Foundation.Rect();
 
@@ -308,8 +309,10 @@ namespace Forms9Patch.UWP
                     rect.Y = finalSize.Height - childHeight;
                     break;
             }
-            rect.Y -= topPadding;
-            rect.Height = childHeight + topPadding;
+
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
+            rect.Height = childHeight;
             rect.Width = finalSize.Width;
             Control.Arrange(rect);
 
@@ -360,14 +363,20 @@ namespace Forms9Patch.UWP
 					h = availableSize.Height;
 				w = Math.Max(0, w);
 				h = Math.Max(0, h);
-                
 
+
+                if (DebugCondition)
+                {
+                    System.Diagnostics.Debug.WriteLine("");
+                    //Element.BackgroundColor = Color.Green;
+                }
 
                 // reset FontSize
 
                 var tmpFontSize = label.DecipheredFontSize();
                 var minFontSize = label.DecipheredMinFontSize();
                 textBlock.MaxLines = int.MaxValue/3;
+                //textBlock.TextWrapping = TextWrapping.
 
                 double tmpHt = -1;
 
