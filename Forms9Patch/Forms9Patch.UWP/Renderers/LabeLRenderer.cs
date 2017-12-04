@@ -122,7 +122,7 @@ namespace Forms9Patch.UWP
                 }
 
                 UpdateColor(Control);
-                UpdateAlign(Control);
+                UpdateHorizontalAlign(Control);
                 UpdateTextAndFont(Control);
                 UpdateLineBreakMode(Control);
 
@@ -135,8 +135,10 @@ namespace Forms9Patch.UWP
                 UpdateTextAndFont(Control);
             else if (e.PropertyName == Forms9Patch.Label.TextColorProperty.PropertyName)
                 UpdateColor(Control);
-            else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName || e.PropertyName == Forms9Patch.Label.VerticalTextAlignmentProperty.PropertyName)
-                UpdateAlign(Control);
+            else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
+                UpdateHorizontalAlign(Control);
+            else if (e.PropertyName == Forms9Patch.Label.VerticalTextAlignmentProperty.PropertyName)
+                UpdateVerticalAlign(Control);
             else if (e.PropertyName == Forms9Patch.Label.FontProperty.PropertyName)
                 UpdateTextAndFont(Control);
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
@@ -153,7 +155,7 @@ namespace Forms9Patch.UWP
             base.OnElementPropertyChanged(sender, e);
         }
 
-        void UpdateAlign(TextBlock textBlock)
+        void UpdateHorizontalAlign(TextBlock textBlock)
         {
             _perfectSizeValid = false;
 
@@ -165,8 +167,22 @@ namespace Forms9Patch.UWP
                 return;
 
             textBlock.TextAlignment = label.HorizontalTextAlignment.ToNativeTextAlignment();
-            textBlock.VerticalAlignment = label.VerticalTextAlignment.ToNativeVerticalAlignment();
         }
+
+        void UpdateVerticalAlign(TextBlock textBlock)
+        {
+            if (textBlock == null)
+                return;
+
+            Label label = Element;
+            if (label == null)
+                return;
+
+            //textBlock.TextAlignment = label.HorizontalTextAlignment.ToNativeTextAlignment();
+            textBlock.VerticalAlignment = label.VerticalTextAlignment.ToNativeVerticalAlignment();
+            ArrangeOverride(new Windows.Foundation.Size(Element.Bounds.Width, Element.Bounds.Height));
+        }
+
 
         void UpdateColor(TextBlock textBlock)
         {
