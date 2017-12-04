@@ -25,6 +25,7 @@ namespace Forms9Patch.UWP
             textBlock.Inlines.Clear();
             textBlock.FontSize = (altFontSize > 0 ? altFontSize : label.DecipheredFontSize());
             textBlock.LineHeight = FontExtensions.LineHeightForFontSize(textBlock.FontSize);
+            textBlock.LineStackingStrategy = Windows.UI.Xaml.LineStackingStrategy.BaselineToBaseline;
             textBlock.FontFamily = FontService.GetWinFontFamily(label.FontFamily);
 
             if (label.Text != null)

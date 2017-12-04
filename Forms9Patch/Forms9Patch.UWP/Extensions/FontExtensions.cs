@@ -14,9 +14,35 @@ namespace Forms9Patch.UWP
 {
     static class FontExtensions
     {
+        const double lineHeightToFontSizeRatio = 1.4;
+        const double roundToNearest = 1;
+
         internal static double LineHeightForFontSize(double fontSize)
         {
-            return Math.Ceiling(1.25 * fontSize / 4) * 4;
+            //return Math.Ceiling(1.25 * fontSize / 4) * 4;
+            //return Math.Ceiling(lineHeightToFontSizeRatio * fontSize / roundToNearest) * roundToNearest;
+            return lineHeightToFontSizeRatio * fontSize;
+        }
+
+        internal static double FontSizeFromLineHeight(double lineHeight)
+        {
+            //var uwpLineHeight = Math.Floor(lineHeight / 4) * 4;
+            //var uwpLineHeight = Math.Floor(lineHeight / roundToNearest) * roundToNearest - 1;
+            var uwpLineHeight = lineHeight;
+            var fontSize = uwpLineHeight / lineHeightToFontSizeRatio;
+            return fontSize;
+        }
+
+        internal static double ClipFontSize(double size, Forms9Patch.Label label)
+        {
+            return ClipFontSize(size, label.MinFontSize, label.FontSize);
+        }
+
+        internal static double ClipFontSize(double size, double min, double max)
+        {
+            if (size >= max)
+                return max;
+            return ClipFontSize(size, min);
         }
 
         internal static double ClipFontSize(double size, double min)
