@@ -419,6 +419,9 @@ namespace Forms9Patch
         {
             Settings.ConfirmInitialization();
 
+            BackgroundColor = Color.White;
+            HasShadow = true;
+
             _id = _instances++;
             Retain = retain;
             IsVisible = false;
@@ -509,7 +512,7 @@ namespace Forms9Patch
 
             #region IShape
 
-            layout.BackgroundColor = BackgroundColor;
+            layout.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
             layout.HasShadow = HasShadow;
             layout.ShadowInverted = ShadowInverted;
             layout.OutlineColor = OutlineColor;
@@ -570,40 +573,43 @@ namespace Forms9Patch
                     RootPage?.RemovePopup(this);
                 }
             }
-
-            #region ILayout
-            else if (propertyName == PaddingProperty.PropertyName)
-                _modalLayout.Padding = Padding;
-            #endregion
-
-            #region IBackground
-            else if (propertyName == BackgroundImageProperty.PropertyName)
-                _modalLayout.BackgroundImage = BackgroundImage;
-
-            #region IShape
-            else if (propertyName == BackgroundColorProperty.PropertyName)
-                _modalLayout.BackgroundColor = BackgroundColor;
-            else if (propertyName == HasShadowProperty.PropertyName)
-                _modalLayout.HasShadow = HasShadow;
-            else if (propertyName == ShadowInvertedProperty.PropertyName)
-                _modalLayout.ShadowInverted = ShadowInverted;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                _modalLayout.OutlineColor = OutlineColor;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                _modalLayout.OutlineWidth = OutlineWidth;
-            else if (propertyName == OutlineRadiusProperty.PropertyName)
-                _modalLayout.OutlineRadius = OutlineRadius;
-            else if (propertyName == ElementShapeProperty.PropertyName)
-                _modalLayout.ElementShape = ElementShape;
-            else if (propertyName == ExtendedElementShapeProperty.PropertyName)
-                _modalLayout.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
-            #endregion IShape
-
-            #endregion IBackground
-
-
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
+
+
+            if (_modalLayout != null)
+            { 
+                #region ILayout
+                if (propertyName == PaddingProperty.PropertyName)
+                    _modalLayout.Padding = Padding;
+                #endregion
+
+                #region IBackground
+                else if (propertyName == BackgroundImageProperty.PropertyName)
+                    _modalLayout.BackgroundImage = BackgroundImage;
+
+                #region IShape
+                else if (propertyName == BackgroundColorProperty.PropertyName)
+                    _modalLayout.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
+                else if (propertyName == HasShadowProperty.PropertyName)
+                    _modalLayout.HasShadow = HasShadow;
+                else if (propertyName == ShadowInvertedProperty.PropertyName)
+                    _modalLayout.ShadowInverted = ShadowInverted;
+                else if (propertyName == OutlineColorProperty.PropertyName)
+                    _modalLayout.OutlineColor = OutlineColor;
+                else if (propertyName == OutlineWidthProperty.PropertyName)
+                    _modalLayout.OutlineWidth = OutlineWidth;
+                else if (propertyName == OutlineRadiusProperty.PropertyName)
+                    _modalLayout.OutlineRadius = OutlineRadius;
+                else if (propertyName == ElementShapeProperty.PropertyName)
+                    _modalLayout.ElementShape = ElementShape;
+                else if (propertyName == ExtendedElementShapeProperty.PropertyName)
+                    _modalLayout.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
+                #endregion IShape
+
+                #endregion IBackground
+            }
+
 
         }
         #endregion
