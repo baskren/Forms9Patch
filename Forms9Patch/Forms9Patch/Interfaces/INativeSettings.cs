@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using System.Reflection;
+
 namespace Forms9Patch
 {
 	/// <summary>
@@ -12,7 +15,9 @@ namespace Forms9Patch
 		/// <value><c>true</c> if this instance is licensed; otherwise, <c>false</c>.</value>
 		bool IsLicensed {
 			get;
-		}			
-	}
+		}
+
+        List<Assembly> IncludedAssemblies { get; }
+    }
 }
 

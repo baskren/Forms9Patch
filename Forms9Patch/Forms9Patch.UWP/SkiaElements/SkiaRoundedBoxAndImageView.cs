@@ -25,35 +25,11 @@ namespace Forms9Patch.UWP
             _roundedBoxElement = roundedBoxElement;
             if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
             {
-                element.PropertyChanged += OnElementPropertyChanged;
+                element.PropertyChanged += OnShapeElementPropertyChanged;
                 element.SizeChanged += OnElementSizeChanged;
             }
             SetImageElement();
             SizeChanged += OnSizeChanged;
-        }
-
-        private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
-            //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
-            //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
-            //    System.Diagnostics.Debug.WriteLine("            IgnoreChanges=["+IgnoreChanges+"]");
-            if (!ValidLayout(CanvasSize))
-                Invalidate();
-            if (e.PropertyName == ShapeBase.BackgroundImageProperty.PropertyName)
-                SetImageElement();
-            else if (e.PropertyName == Forms9Patch.BubbleLayout.PointerAxialPositionProperty.PropertyName
-                || e.PropertyName == Forms9Patch.BubbleLayout.PointerCornerRadiusProperty.PropertyName
-                || e.PropertyName == Forms9Patch.BubbleLayout.PointerDirectionProperty.PropertyName
-                //|| e.PropertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName  // Already handled by the change in location / paddiing
-                || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
-                || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
-                )
-            {
-                _validLayout = false;
-                Invalidate();
-            }
-
         }
 
         void SetImageElement()
@@ -78,7 +54,7 @@ namespace Forms9Patch.UWP
                     _xfImageSource?.ReleaseF9PBitmap(this);
                     _sourceBitmap = null;
                     if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
-                        element.PropertyChanged -= OnElementPropertyChanged;
+                        element.PropertyChanged -= OnShapeElementPropertyChanged;
                     SizeChanged -= OnSizeChanged;
                     // TODO: dispose managed state (managed objects).
                 }
@@ -192,7 +168,7 @@ namespace Forms9Patch.UWP
 
         bool ShadowInverted => (bool)BindableObject.GetValue(ShapeBase.ShadowInvertedProperty);
 
-        bool DrawImage => (_sourceBitmap?.SKBitmap != null && _sourceBitmap.Width > 0 && _sourceBitmap.Height > 0);
+        bool DrawImage => (_imageElement!= null && _imageElement.Opacity > 0 && _sourceBitmap?.SKBitmap != null && _sourceBitmap.Width > 0 && _sourceBitmap.Height > 0);
 
         bool DrawOutline => (OutlineColor.A > 0.01 && OutlineWidth > 0.05);
 
@@ -217,6 +193,60 @@ namespace Forms9Patch.UWP
 
         #endregion
 
+
+        #region Property Change Management
+
+        private void OnShapeElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
+            //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
+            //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
+            //    System.Diagnostics.Debug.WriteLine("            IgnoreChanges=["+IgnoreChanges+"]");
+            if (!ValidLayout(CanvasSize))
+                Invalidate();
+            if (e.PropertyName == ShapeBase.BackgroundImageProperty.PropertyName)
+                SetImageElement();
+            else if (e.PropertyName == Forms9Patch.BubbleLayout.PointerAxialPositionProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerCornerRadiusProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerDirectionProperty.PropertyName
+                //|| e.PropertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName  // Already handled by the change in location / paddiing
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
+                )
+            {
+                _validLayout = false;
+                Invalidate();
+            }
+            else if (e.PropertyName == Xamarin.Forms.VisualElement.OpacityProperty.PropertyName && _roundedBoxElement != null)
+                Opacity = View.Opacity;
+        }
+
+        private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
+                SetImageSourceAsync();
+            else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
+                || e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName
+                || e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.VisualElement.WidthRequestProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.VisualElement.HeightRequestProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.HorizontalOptionsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.VerticalOptionsProperty.PropertyName
+                || e.PropertyName == Xamarin.Forms.View.MarginProperty.PropertyName
+                || e.PropertyName == Forms9Patch.Image.AntiAliasProperty.PropertyName
+                )
+            {
+                _validLayout = false;
+                Invalidate();
+            }
+            else if (e.PropertyName == Xamarin.Forms.VisualElement.OpacityProperty.PropertyName && ImageElement != null)
+            {
+                    _validLayout = false;
+                    Invalidate();
+            }
+        }
+
+        #endregion
 
         #region Xamarin.Forms Measuring
         internal Xamarin.Forms.SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
@@ -409,25 +439,6 @@ namespace Forms9Patch.UWP
             Invalidate();
         }
 
-        private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
-                SetImageSourceAsync();
-            else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
-                || e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName
-                || e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName
-                || e.PropertyName == Xamarin.Forms.VisualElement.WidthRequestProperty.PropertyName
-                || e.PropertyName == Xamarin.Forms.VisualElement.HeightRequestProperty.PropertyName
-                || e.PropertyName == Xamarin.Forms.View.HorizontalOptionsProperty.PropertyName
-                || e.PropertyName == Xamarin.Forms.View.VerticalOptionsProperty.PropertyName
-                || e.PropertyName == Xamarin.Forms.View.MarginProperty.PropertyName
-                || e.PropertyName == Forms9Patch.Image.AntiAliasProperty.PropertyName
-                )
-            {
-                _validLayout = false;
-                Invalidate();
-            }
-        }
         #endregion
 
 
@@ -827,6 +838,14 @@ namespace Forms9Patch.UWP
                 {
                     ColorFilter = cf,
                     IsAntialias = true,
+                };
+            }
+            else if (_imageElement.Opacity<1.0)
+            {
+                var transparency = SKColors.White.WithAlpha((byte)(_imageElement.Opacity*255)); // 127 => 50%
+                paint = new SKPaint
+                {
+                    ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn)
                 };
             }
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using Xamarin.Forms;
-using Forms9Patch.Extensions;
 
 namespace Forms9Patch
 {
@@ -49,30 +48,9 @@ namespace Forms9Patch
         public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
             Settings.ConfirmInitialization();
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId) ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             if (assembly == null)
-            {
-                if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
-                {
-                    // this block does not work with UWP
-                    var resourcePath = resourceId.Split('.').ToList();
-                    if (resourcePath.Contains("Resources"))
-                    {
-                        var index = resourcePath.IndexOf("Resources");
-                        var asmName = string.Join(".", resourcePath.GetRange(0, index));
-                        var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
-                        if (appAsm?.GetName().Name == asmName)
-                            assembly = appAsm;
-                        else
-                            assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
-                    }
-                    if (assembly == null && resourcePath.Count() > 1)
-                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
-                    if (assembly == null)
-                        assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-                }
-                else
-                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-            }
+                return null;
             var r = BestGuessResource(resourceId, assembly);
             var path = r == null ? resourceId : r.Path;
             var imageSource = Xamarin.Forms.ImageSource.FromResource(path, assembly);
@@ -93,30 +71,8 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly.</param>
         public static new Xamarin.Forms.ImageSource FromResource(string resourceId, Assembly assembly = null)
         {
-            if (assembly == null)
-            {
-                if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
-                {
-                    // this block does not work with UWP
-                    var resourcePath = resourceId.Split('.').ToList();
-                    if (resourcePath.Contains("Resources"))
-                    {
-                        var index = resourcePath.IndexOf("Resources");
-                        var asmName = string.Join(".", resourcePath.GetRange(0, index));
-                        var appAsm = ApplicationExtensions.GetXamarinFormsApplicationAssembly();
-                        if (appAsm?.GetName().Name == asmName)
-                            assembly = appAsm;
-                        else
-                            assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
-                    }
-                    if (assembly == null && resourcePath.Count() > 1)
-                        assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(resourcePath[0]);
-                    if (assembly == null)
-                        assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-                }
-                else
-                    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-            }
+            Settings.ConfirmInitialization();
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId) ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             var imageSource = Xamarin.Forms.ImageSource.FromResource(resourceId, assembly);
             if (imageSource != null)
             {
@@ -166,7 +122,6 @@ namespace Forms9Patch
 		}
 		*/
         #endregion
-
 
 
         #region Path Parsing 
@@ -288,6 +243,7 @@ namespace Forms9Patch
             return null;
         }
         #endregion
+
 
         #region Path Resolution Support
         static List<string> ValidImageExtensions = new List<string> {

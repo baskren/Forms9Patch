@@ -81,6 +81,7 @@
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
     <Compile Include="Enums\ElementShape.cs" />
     <Compile Include="Enums\FontBaseline.cs" />
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\ButtonShapeExtensions.cs" />
     <Compile Include="Extensions\ElementShapeExtensions.cs" />
     <Compile Include="Extensions\IFontElementExtensions.cs" />

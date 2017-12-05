@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace Forms9Patch.Extensions
+namespace Forms9Patch
 {
     /// <summary>
     /// Application extensions.

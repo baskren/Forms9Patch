@@ -409,8 +409,7 @@ namespace Forms9Patch
             Text = text;
             bool isIconText=false;
 
-            if (assembly == null)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            assembly = assembly ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             var match = Forms9Patch.ImageSource.BestEmbeddedMultiResourceMatch(icon, assembly);
 
             //if (icon.Contains("<") && icon.Contains("/>"))

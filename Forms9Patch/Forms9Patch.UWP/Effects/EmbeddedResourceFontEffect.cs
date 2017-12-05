@@ -9,9 +9,6 @@ using System.Reflection;
 using Windows.UI.Xaml.Media;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
-using Forms9Patch.Extensions;
-using System.Collections.Generic;
-using Windows.Storage;
 
 [assembly: ExportEffect(typeof(Forms9Patch.UWP.EmbeddedResourceFontEffect), "EmbeddedResourceFontEffect")]
 namespace Forms9Patch.UWP

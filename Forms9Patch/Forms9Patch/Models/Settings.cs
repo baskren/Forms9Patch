@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -85,6 +87,18 @@ namespace Forms9Patch
                 throw new Exception("Forms9Patch has not been initialized.  See http://http://buildcalc.com/forms9patch/index.html#HowToConfigureTheLicenseKey.  Xamarin.Forms.Application.Current=[" + Xamarin.Forms.Application.Current + "]");
             _confirmed = true;
         }
+
+        static INativeSettings _nativeSettings;
+        static INativeSettings NativeSettings
+        {
+            get
+            {
+                _nativeSettings = _nativeSettings ?? Xamarin.Forms.DependencyService.Get<INativeSettings>();
+                return _nativeSettings;
+            }
+        }
+
+        internal static List<Assembly> IncludedAssemblies => NativeSettings?.IncludedAssemblies;
     }
 }
 

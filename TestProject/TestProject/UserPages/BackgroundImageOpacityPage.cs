@@ -13,17 +13,21 @@ namespace Forms9PatchDemo
 		public BackgroundImageOpacityPage()
 		{
 
-			Forms9Patch.Image image = new Forms9Patch.Image();
-			image.Source = Forms9Patch.ImageSource.FromMultiResource("FormsGestures.Resources.rocket");
-			image.Opacity = 0.3f;
-			image.Fill = Forms9Patch.Fill.Fill;
+            Forms9Patch.Image image = new Forms9Patch.Image
+            {
+                Source = Forms9Patch.ImageSource.FromMultiResource("FormsGestures.Resources.rocket"),
+                Opacity = 1,
+                Fill = Forms9Patch.Fill.AspectFit
+            };
 
-			Slider slider = new Slider
+            Slider slider = new Slider
 			{
 				Minimum = 0.0,
-				Maximum = 1.0
+				Maximum = 1.0,
+                Value = 1.0
 			};
 			slider.ValueChanged += (sender, e) => image.Opacity = e.NewValue;
+            slider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.01));
 
 			Forms9Patch.StackLayout stack = new Forms9Patch.StackLayout
 			{

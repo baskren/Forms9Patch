@@ -82,6 +82,8 @@ namespace Forms9Patch.UWP
             }
         }
 
+        public List<Assembly> IncludedAssemblies => AssembliesToInclude;
+
 
         internal static List<Assembly> Forms9PatchAssemblies = new List<Assembly>
         {

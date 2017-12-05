@@ -84,7 +84,7 @@ namespace Forms9Patch.UWP
             var fontEmbeddedResourceIds = Forms9Patch.ApplicationInfoService.Assembly.GetManifestResourceNames().Where((resourceId) => IsFont(resourceId));
             results.AddRange(fontEmbeddedResourceIds);
             
-            var appIncludedAssemblies = Settings.AssembliesToInclude.Except(Settings.Forms9PatchAssemblies);
+            var appIncludedAssemblies = Settings.AssembliesToInclude;
             foreach (var asm in appIncludedAssemblies)
             {
                 fontEmbeddedResourceIds = asm.GetManifestResourceNames().Where((resourceId) => IsFont(resourceId));
