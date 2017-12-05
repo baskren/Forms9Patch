@@ -240,6 +240,12 @@ namespace Forms9Patch
         /// </summary>
         /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Grid"/>.</returns>
         public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Grid"/>.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => Description();
         #endregion
 
 

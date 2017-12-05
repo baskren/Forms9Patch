@@ -1,5 +1,8 @@
-﻿using System;
+﻿#define _Forms9Patch_BubbleLayout_
+
+using System;
 using Xamarin.Forms;
+
 
 namespace Forms9Patch
 {
@@ -41,6 +44,24 @@ namespace Forms9Patch
             set { SetValue(PointerTipRadiusProperty, value); }
         }
         #endregion PointerTipRadius property
+
+
+        #region PointerAngle property
+        /// <summary>
+        /// backing store for PointerAngle property
+        /// </summary>
+        internal static readonly BindableProperty PointerAngleProperty = BindableProperty.Create("PointerAngle", typeof(float), typeof(BubbleLayout), 60f);
+        /// <summary>
+        /// Gets/Sets the PointerAngle property
+        /// </summary>
+        internal float PointerAngle
+        {
+            get { return (float)GetValue(PointerAngleProperty); }
+            set { SetValue(PointerAngleProperty, value); }
+        }
+        #endregion PointerAngle property
+
+
 
         #region PointerAxialPosition property
         /// <summary>
@@ -317,19 +338,74 @@ namespace Forms9Patch
         #endregion Constructor
 
 
-        #region PropertyChange management
+        #region Description
+        public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
+
+        public override string ToString() =>  Description();
+        #endregion
+
+
+        #region OnPropertyChanged
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
         /// </summary>
         protected override void OnPropertyChanged (string propertyName = null)
 		{
+            if (propertyName == PointerAngleProperty.PropertyName)
+            {
+                if (PointerAngle < 1)
+                {
+                    PointerAngle = 1;
+                    return;
+                }
+                if (PointerAngle > 89)
+                {
+                    PointerAngle = 89;
+                    return;
+                }
+            }
+
 			base.OnPropertyChanged (propertyName);
 			if (propertyName == PointerLengthProperty.PropertyName
                 || propertyName == HasShadowProperty.PropertyName)
 				InvalidateMeasure();
         }
         #endregion PropertyChange management
+
+
+        #region IgnoreChildren handlers
+        /// <summary>
+        /// Shoulds the invalidate on child added.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child added was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
+        protected override bool ShouldInvalidateOnChildAdded(View child)
+        {
+            return !IgnoreChildren; // stop pestering me
+        }
+
+        /// <summary>
+        /// Shoulds the invalidate on child removed.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child removed was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
+        protected override bool ShouldInvalidateOnChildRemoved(View child)
+        {
+            return !IgnoreChildren; // go away and leave me alone
+        }
+
+        /// <summary>
+        /// Ons the child measure invalidated.
+        /// </summary>
+        protected override void OnChildMeasureInvalidated()
+        {
+            // I'm ignoring you.  You'll take whatever size I want to give
+            // you.  And you'll like it.
+            if (!IgnoreChildren)
+                base.OnChildMeasureInvalidated();
+        }
+        #endregion IgnoreChildren handlers
 
 
         #region Layout management
@@ -346,6 +422,16 @@ namespace Forms9Patch
         }
 
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            var decorativePadding = DecorativePadding();
+            result = new SizeRequest(new Size(result.Request.Width + decorativePadding.HorizontalThickness, result.Request.Height + decorativePadding.VerticalThickness), new Size(result.Minimum.Width + decorativePadding.HorizontalThickness, result.Minimum.Height + decorativePadding.VerticalThickness));
+            return result;
+        }
+
 
         /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
         /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>

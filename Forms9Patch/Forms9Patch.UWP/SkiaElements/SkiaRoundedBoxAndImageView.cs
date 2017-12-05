@@ -42,6 +42,18 @@ namespace Forms9Patch.UWP
                 Invalidate();
             if (e.PropertyName == ShapeBase.BackgroundImageProperty.PropertyName)
                 SetImageElement();
+            else if (e.PropertyName == Forms9Patch.BubbleLayout.PointerAxialPositionProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerCornerRadiusProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerDirectionProperty.PropertyName
+                //|| e.PropertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName  // Already handled by the change in location / paddiing
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
+                || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
+                )
+            {
+                _validLayout = false;
+                Invalidate();
+            }
+
         }
 
         void SetImageElement()
@@ -96,7 +108,7 @@ namespace Forms9Patch.UWP
 
 
         #region Properties
-        MaterialButton MaterialButton => _roundedBoxElement as MaterialButton;
+        //MaterialButton materialButton => _roundedBoxElement as MaterialButton;
 
         Xamarin.Forms.View View => _roundedBoxElement as Xamarin.Forms.View;
 
@@ -112,7 +124,7 @@ namespace Forms9Patch.UWP
                     _imageElement = value;
                     if (_imageElement != null)
                         _imageElement.PropertyChanged += OnImageElementPropertyChanged;
-                    SetSourceAsync();
+                    SetImageSourceAsync();
                 }
             }
         }
@@ -125,7 +137,7 @@ namespace Forms9Patch.UWP
 
         Xamarin.Forms.Color BackgroundColor => (Xamarin.Forms.Color)BindableObject.GetValue(ShapeBase.BackgroundColorProperty);
 
-        internal async Task SetSourceAsync()
+        internal async Task SetImageSourceAsync()
         {
             if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]ImageView.SetSourceAsync ENTER");
             if (_imageElement?.Source != _xfImageSource)
@@ -184,7 +196,7 @@ namespace Forms9Patch.UWP
 
         bool DrawOutline => (OutlineColor.A > 0.01 && OutlineWidth > 0.05);
 
-        bool DrawFill => BackgroundColor.A > 0.01; 
+        bool DrawFill => BackgroundColor.A > 0.01;
 
         Xamarin.Forms.Color OutlineColor => (Xamarin.Forms.Color)BindableObject.GetValue(ShapeBase.OutlineColorProperty);
 
@@ -391,7 +403,7 @@ namespace Forms9Patch.UWP
 
         private void OnElementSizeChanged(object sender, EventArgs e)
         {
-            if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
+            if (_roundedBoxElement is MaterialButton materialButton && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
                 if (_debugMessages)
                     System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] element.Size=[" + ((Xamarin.Forms.VisualElement)_roundedBoxElement).Bounds.Size + "] Size=[" + Width + ", " + Height + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
             Invalidate();
@@ -400,7 +412,7 @@ namespace Forms9Patch.UWP
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
-                SetSourceAsync();
+                SetImageSourceAsync();
             else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName
@@ -415,7 +427,6 @@ namespace Forms9Patch.UWP
                 _validLayout = false;
                 Invalidate();
             }
-
         }
         #endregion
 
@@ -429,11 +440,11 @@ namespace Forms9Patch.UWP
 
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
-            if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + availableSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+            //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + availableSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
 
             var result = base.MeasureOverride(availableSize);
-
-            if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
+            /*
+            if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
             {
                 if (_sourceBitmap != null)
                 {
@@ -444,6 +455,7 @@ namespace Forms9Patch.UWP
                     if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
                 }
             }
+            */
 
 
             if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _sourceBitmap != null)
@@ -486,7 +498,7 @@ namespace Forms9Patch.UWP
                             result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
                     }
                 }
-                if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
+                //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
             }
 
             return result;
@@ -494,14 +506,15 @@ namespace Forms9Patch.UWP
 
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
-            if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+            //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
 
             var result = base.ArrangeOverride(finalSize);
 
             if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _sourceBitmap != null && Children.Count > 0)
                 Invalidate();
 
-            if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
+            /*
+            if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
             {
                 if (_debugMessages)
                 {
@@ -511,6 +524,7 @@ namespace Forms9Patch.UWP
                         System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap is null");
                 }
             }
+            */
 
             return result;
         }
@@ -538,10 +552,9 @@ namespace Forms9Patch.UWP
             else
             {
                 var hz = true;
-                if (MaterialButton!=null)
-                {
-                    hz = MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Horizontal;
-                }
+                var materialButton = _roundedBoxElement as MaterialButton;
+                if (materialButton!=null)
+                    hz = materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Horizontal;
                 var vt = !hz;
 
                 var backgroundColor = BackgroundColor;
@@ -552,17 +565,17 @@ namespace Forms9Patch.UWP
                 var outlineColor = OutlineColor;
                 var elementShape = ExtendedElementShape;
 
-                double separatorWidth = MaterialButton == null || elementShape == ExtendedElementShape.Rectangle ? 0 : MaterialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, MaterialButton.SeparatorWidth);
+                double separatorWidth = materialButton == null || elementShape == ExtendedElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
 
                 bool drawOutline =DrawOutline;
                 bool drawImage = DrawImage;
-                bool drawSeparators = outlineColor.A > 0.01 && MaterialButton != null && separatorWidth > 0.01;
+                bool drawSeparators = outlineColor.A > 0.01 && materialButton != null && separatorWidth > 0.01;
                 bool drawFill = DrawFill;
 
                 if ((drawFill || drawOutline || drawSeparators || drawImage) && CanvasSize != default(SKSize))
                 {
 
-                        if (MaterialButton != null && MaterialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)  if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + ","+ ((FrameworkElement)Parent).ActualHeight + "]");
+                        if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)  if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + PCL.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + ","+ ((FrameworkElement)Parent).ActualHeight + "]");
 
                     SKRect rect = new SKRect(0, 0, e.Info.Width, e.Info.Height);
                     if (Parent is FrameworkElement parent)
@@ -973,6 +986,9 @@ namespace Forms9Patch.UWP
         {
             radius = Math.Max(radius, 0);
 
+            if (element is BubbleLayout bubble && bubble.PointerDirection != PointerDirection.None)
+                return BubblePerimeterPath(bubble, rect, radius);
+            
             var materialButton = element as MaterialButton;
             Xamarin.Forms.StackOrientation orientation = materialButton == null ? Xamarin.Forms.StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
@@ -1103,6 +1119,368 @@ namespace Forms9Patch.UWP
             return path;
         }
 
+        internal static SKPath BubblePerimeterPath(BubbleLayout bubble, SKRect rect, float radius)
+        {
+            var length = bubble.PointerLength * Display.Scale;
+
+            if (radius * 2 > rect.Height - (bubble.PointerDirection.IsVertical() ? length : 0))
+                radius = (float)((rect.Height - (bubble.PointerDirection.IsVertical() ? length : 0)) / 2.0);
+            if (radius * 2 > rect.Width - (bubble.PointerDirection.IsHorizontal() ? length : 0))
+                radius = (float)((rect.Width - (bubble.PointerDirection.IsHorizontal() ? length : 0)) / 2.0);
+
+            var filetRadius = bubble.PointerCornerRadius;
+            var tipRadius = bubble.PointerTipRadius * Display.Scale;
+
+            if (filetRadius / 2.0 + tipRadius / 2.0 > length)
+            {
+                filetRadius = (float)(2 * (length - tipRadius / 2.0));
+                if (filetRadius < 0)
+                {
+                    filetRadius = 0;
+                    tipRadius = 2 * length;
+                }
+            }
+
+            //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "L-Fr/2=["+(length-filetRadius/2.0)+"]  Tr/2=[" + (tipRadius/2.0) + "] length=["+length+"]");
+            if (length - filetRadius / 2.0 < tipRadius / 2.0)
+                tipRadius = (float)(2 * (length - filetRadius / 2.0));
+            //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "L-Fr/2=["+(length-filetRadius/2.0)+"]  Tr=/2[" + (tipRadius/2.0) + "] length=["+length+"]");
+
+
+
+            var result = new SKPath();
+            var position = bubble.PointerAxialPosition;
+            if (position <= 1.0)
+            {
+                if (bubble.PointerDirection == PointerDirection.Down || bubble.PointerDirection == PointerDirection.Up)
+                    position = rect.Width * position;
+                else
+                    position = rect.Height * position;
+            }
+            var left = rect.Left;
+            var right = rect.Right;
+            var top = rect.Top;
+            var bottom = rect.Bottom;
+
+            const float sqrt3 = (float)1.732050807568877;
+            const float sqrt3d2 = (float)0.86602540378444;
+            //const float rad60 = (float)(Math.PI / 3.0);
+            //const float rad90 = (float)(Math.PI / 2.0);
+            //const float rad30 = (float)(Math.PI / 6.0);
+
+           /*
+            var pointerAngle = bubble.PointerAngle * Math.PI / 180;
+            var tipRadiusWidth = 2 * tipRadius * Math.Sin((Math.PI - pointerAngle) / 2);
+            var tipRadiusHeight = tipRadius * (1 - Math.Cos((Math.PI - pointerAngle) / 2) );
+            var tipC1 = tipRadiusHeight / Math.Tan(pointerAngle / 2);
+            var tipC0 = tipRadiusWidth / 2 - tipC1;
+            var tipProjection = tipC0 * Math.Tan(pointerAngle / 2);
+            */
+
+            float tipCornerHalfWidth = tipRadius * sqrt3d2;
+            float pointerToCornerIntercept = (float)Math.Sqrt((2 * radius * Math.Sin(Math.PI / 12.0)) * (2 * radius * Math.Sin(Math.PI / 12.0)) - (radius * radius / 4.0));
+
+            float pointerAtLimitSansTipHalfWidth = (float)(pointerToCornerIntercept + radius / (2.0 * sqrt3) + (length - tipRadius / 2.0) / sqrt3);
+            float pointerAtLimitHalfWidth = pointerAtLimitSansTipHalfWidth + tipRadius * sqrt3d2;
+
+            float pointerSansFiletHalfWidth = (float)(tipCornerHalfWidth + (length - filetRadius / 2.0 - tipRadius / 2.0) / sqrt3);
+            float pointerFiletWidth = filetRadius * sqrt3d2;
+            float pointerAndFiletHalfWidth = pointerSansFiletHalfWidth + pointerFiletWidth;
+
+            int dir = 1;
+
+            if (bubble.PointerDirection.IsHorizontal())
+            {
+                float start = left;
+                float end = right;
+                if (bubble.PointerDirection == PointerDirection.Right)
+                {
+                    dir = -1;
+                    start = right;
+                    end = left;
+                }
+                float baseX = start + dir * length;
+
+                float tipY = position;
+                if (tipY > rect.Height - pointerAtLimitHalfWidth)
+                    tipY = rect.Height - pointerAtLimitHalfWidth;
+                if (tipY < pointerAtLimitHalfWidth)
+                    tipY = pointerAtLimitHalfWidth;
+                if (rect.Height <= 2 * pointerAtLimitHalfWidth)
+                    tipY = (float)(rect.Height / 2.0);
+
+                result.MoveTo(start + dir * (length + radius), top);
+                result.ArcTo(end, top, end, bottom, radius);
+                result.ArcTo(end, bottom, start, bottom, radius);
+
+                // bottom half
+                if (tipY >= rect.Height - pointerAndFiletHalfWidth - radius)
+                {
+                    result.LineTo(start + dir * (length + radius), bottom);
+                    float endRatio = (rect.Height - tipY) / (pointerAndFiletHalfWidth + radius);
+                    //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "A endRatio=[" + endRatio + "]");
+                    result.CubicTo(
+                        start + dir * (length + radius - endRatio * 4 * radius / 3.0f), bottom,
+                        start + dir * (length - filetRadius / 2.0f + filetRadius * sqrt3d2), top + tipY + pointerSansFiletHalfWidth + filetRadius / 2.0f,
+                        start + dir * (length - filetRadius / 2.0f), top + tipY + pointerSansFiletHalfWidth);
+                }
+                else
+                {
+                    //result.ArcWithCenterTo(start + dir * (length + radius), bottom - radius, radius, 90, dir * 90);
+                    result.ArcTo(baseX, bottom, baseX, top, radius);
+
+                    //result.LineTo(
+                    //    start + dir * length,
+                    //    top + tip + pointerAndFiletHalfWidth
+                    //);
+                    //result.AddRelativeArc(
+                    //    start + dir * (length - filetRadius),
+                    //    top + tip + pointerAndFiletHalfWidth,
+                    //    filetRadius, rad90 - dir * rad90, dir * -rad60);
+                    result.ArcWithCenterTo(start + dir * (length - filetRadius), top + tipY + pointerAndFiletHalfWidth, filetRadius, 90 - 90 * dir, dir * -60);
+                    //result.ArcTo(baseX, top + tipY + pointerAndFiletHalfWidth, start, top + tipY, filetRadius);
+                }
+
+                //tip
+
+                //result.AddLineToPoint(
+                //    (float)(start + dir * tipRadius / 2.0),
+                //    top + tip + tipCornerHalfWidth
+                //);
+                //result.AddRelativeArc(
+                //    start + dir * tipRadius,
+                //    top + tip,
+                //    tipRadius,
+                //    rad90 + dir * rad30,
+                //    dir * 2 * rad60);
+                result.ArcWithCenterTo(start + dir * tipRadius, top + tipY, tipRadius, 90 + dir * 30, dir * 2 * 60);
+
+
+                // top half
+                if (tipY <= pointerAndFiletHalfWidth + radius)
+                {
+                    var startRatio = tipY / (pointerAndFiletHalfWidth + radius);
+                    //result.AddLineToPoint(
+                    //    (float)(start + dir * (length - filetRadius / 2.0)),
+                    //    top + tip - pointerSansFiletHalfWidth
+                    //);
+                    //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "C startRatio=[" + startRatio + "]");
+                    //result.AddCurveToPoint(
+                    //    new CGPoint(start + dir * (length - filetRadius / 2.0 + filetRadius * sqrt3d2), top + tip - pointerSansFiletHalfWidth - filetRadius / 2.0),
+                    //    new CGPoint(start + dir * (length + radius - startRatio * 4 * radius / 3.0), top),
+                    //    new CGPoint(start + dir * (length + radius), top)
+                    //);
+                    result.CubicTo(
+                        start + dir * (length - filetRadius / 2.0f + filetRadius * sqrt3d2), top + tipY - pointerSansFiletHalfWidth - filetRadius / 2.0f, 
+                        start + dir * (length + radius - startRatio * 4 * radius / 3.0f), top, 
+                        start + dir * (length + radius), top);
+                }
+                else
+                {
+                    //result.AddLineToPoint(
+                    //    (float)(start + dir * (length - filetRadius / 2.0)),
+                    //    top + tip - pointerSansFiletHalfWidth
+                    //);
+                    //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "D");
+                    //result.AddRelativeArc(
+                    //    start + dir * (length - filetRadius),
+                    //    top + tip - pointerAndFiletHalfWidth,
+                    //    filetRadius,
+                    //    rad90 - dir * rad30,
+                    //    dir * -rad60);
+                    result.ArcWithCenterTo(start + dir * (length - filetRadius), top + tipY - pointerAndFiletHalfWidth, filetRadius, 90 - dir * 30, dir * -60);
+
+                    //result.AddLineToPoint(
+                    //    start + dir * length,
+                    //    top + radius
+                    //);
+                    //result.AddRelativeArc(
+                    //    start + dir * (length + radius),
+                    //    top + radius,
+                    //    radius,
+                    //    rad90 + dir * rad90,
+                    //    dir * rad90);
+                    result.ArcWithCenterTo(start + dir * (length + radius), top + radius, radius, 90 + dir * 90, dir * 90);
+                }
+                if (dir > 0)
+                {
+                    var reverse = new SKPath();
+                    reverse.AddPathReverse(result);
+                    return reverse;
+                }
+            }
+            else
+            {
+                float start = top;
+                float end = bottom;
+                if (bubble.PointerDirection == PointerDirection.Down)
+                {
+                    dir = -1;
+                    start = bottom;
+                    end = top;
+                }
+                float tip = position;
+                if (tip > rect.Width - pointerAtLimitHalfWidth)
+                    tip = rect.Width - pointerAtLimitHalfWidth;
+                if (tip < pointerAtLimitHalfWidth)
+                    tip = pointerAtLimitHalfWidth;
+                if (rect.Width <= 2 * pointerAtLimitHalfWidth)
+                    tip = (float)(rect.Width / 2.0);
+                result.MoveTo(left, start + dir * (length + radius));
+                result.ArcTo(left, end, right, end, radius);
+                result.ArcTo(right, end, right, start, radius);
+
+                // right half
+                if (tip > rect.Width - pointerAndFiletHalfWidth - radius)
+                {
+                    var endRatio = (rect.Width - tip) / (pointerAndFiletHalfWidth + radius);
+                    //result.AddLineToPoint(right, start + dir * (radius + length));
+                    //result.AddCurveToPoint(
+                    //    new CGPoint(right, start + dir * (length + radius - endRatio * 4 * radius / 3.0)),
+                    //    new CGPoint(left + tip + pointerSansFiletHalfWidth + filetRadius / 2.0, start + dir * (length - filetRadius / 2.0 + filetRadius * sqrt3d2)),
+                    //    new CGPoint(left + tip + pointerSansFiletHalfWidth, start + dir * (length - filetRadius / 2.0))
+                    //);
+                    result.CubicTo(
+                        right, start + dir * (length + radius - endRatio * 4 * radius / 3.0f),
+                        left + tip + pointerSansFiletHalfWidth + filetRadius / 2.0f, start + dir * (length - filetRadius / 2.0f + filetRadius * sqrt3d2),
+                        left + tip + pointerSansFiletHalfWidth, start + dir * (length - filetRadius / 2.0f)
+                        );
+                }
+                else
+                {
+                    //result.AddLineToPoint(right, start + dir * (radius + length));
+                    //result.AddRelativeArc(
+                    //    right - radius,
+                    //    start + dir * (length + radius),
+                    //    radius, 0, dir * -rad90);
+                    result.ArcWithCenterTo(
+                        right - radius,
+                        start + dir * (length + radius),
+                        radius, 0, dir * -90
+                        );
+                    //result.AddLineToPoint(
+                    //    left + tip + pointerAndFiletHalfWidth,
+                    //    start + dir * length
+                    //);
+                    //result.AddRelativeArc(
+                    //    left + tip + pointerAndFiletHalfWidth,
+                    //    start + dir * (length - filetRadius),
+                    //    filetRadius, dir * rad90, dir * rad60);
+                    result.ArcWithCenterTo(
+                        left + tip + pointerAndFiletHalfWidth,
+                        start + dir * (length - filetRadius),
+                        filetRadius, dir * 90, dir * 60
+                        );
+                }
+
+                //tip
+                /*
+                result.AddLineToPoint(
+                    left + tip + tipCornerHalfWidth,
+                    (float)(start + dir * tipRadius / 2.0)
+                );
+                result.AddRelativeArc(
+                    left + tip,
+                    start + dir * tipRadius,
+                    tipRadius,
+                    dir * -rad30,
+                    dir * -2 * rad60
+                    );
+                    */
+                result.ArcWithCenterTo(
+                    left + tip,
+                    start + dir * tipRadius,
+                    tipRadius,
+                    dir * -30,
+                    dir * -2 * 60
+                    );
+
+
+                // left half
+                if (tip < pointerAndFiletHalfWidth + radius)
+                {
+                    var startRatio = tip / (pointerAndFiletHalfWidth + radius);
+                    /*
+                    result.AddLineToPoint(
+                        left + tip - pointerSansFiletHalfWidth,
+                        (float)(start + dir * (length - filetRadius / 2.0))
+                    );
+                    result.AddCurveToPoint(
+                        new CGPoint(
+                            left + tip - pointerSansFiletHalfWidth - filetRadius / 2.0,
+                            start + dir * (length - filetRadius / 2.0 + filetRadius * sqrt3d2)
+                        ),
+                        new CGPoint(
+                            left,
+                            start + dir * (length + radius - startRatio * 4 * radius / 3.0)
+                        ),
+                        new CGPoint(
+                            left,
+                            start + dir * (length + radius)
+                        )
+                    );
+                    */
+                    result.CubicTo(
+                            left + tip - pointerSansFiletHalfWidth - filetRadius / 2.0f,
+                            start + dir * (length - filetRadius / 2.0f + filetRadius * sqrt3d2),
+                            left,
+                            start + dir * (length + radius - startRatio * 4 * radius / 3.0f),
+                            left,
+                            start + dir * (length + radius)
+                        );
+                }
+                else
+                {
+                    /*
+                    result.AddLineToPoint(
+                        left + tip - pointerSansFiletHalfWidth,
+                        (float)(start + dir * (length - filetRadius / 2.0))
+                    );
+                    result.AddRelativeArc(
+                        left + tip - pointerAndFiletHalfWidth,
+                        start + dir * (length - filetRadius),
+                        filetRadius,
+                        dir * rad30,
+                        dir * rad60
+                        );
+                        */
+                    result.ArcWithCenterTo(
+                        left + tip - pointerAndFiletHalfWidth,
+                        start + dir * (length - filetRadius),
+                        filetRadius,
+                        dir * 30,
+                        dir * 60
+                        );
+                    /*
+                    result.AddLineToPoint(
+                        left + radius,
+                        start + dir * length
+                    );
+                    result.AddRelativeArc(
+                        left + radius,
+                        start + dir * (length + radius),
+                        radius,
+                        dir * -rad90,
+                        dir * -rad90
+                        );
+                        */
+                    result.ArcWithCenterTo(
+                        left + radius,
+                        start + dir * (length + radius),
+                        radius,
+                        dir * -90,
+                        dir * -90
+                        );
+                }
+                if (dir < 0)
+                {
+                    var reverse = new SKPath();
+                    reverse.AddPathReverse(result);
+                    return reverse;
+                }
+            }
+            return result;
+        }
         #endregion
     }
 }

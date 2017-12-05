@@ -256,8 +256,10 @@ namespace Forms9PatchDemo
                 Content = new StackLayout
                 {
                     Children = {
-						//bubbleLabel,
+						bubbleLabel,
 						contentView,
+                        new Label { Text = "Padding:", FontSize=10, TextColor=Color.Black },
+                        paddingSlider,
                         new Label { Text = "Pointer Length:", FontSize=10, TextColor=Color.Black },
                         pointerLengthSlider,
                         new Label { Text = "Pointer Tip Radius:", FontSize=10, TextColor=Color.Black },
@@ -387,8 +389,8 @@ namespace Forms9PatchDemo
                             }
                         }
                     },
-                    new Label { Text = "Padding:", FontSize=10, TextColor=Color.Black },
-                    paddingSlider,
+                    //new Label { Text = "Padding:", FontSize=10, TextColor=Color.Black },
+                    //paddingSlider,
                     new Label { Text = "Pointer Direction", FontSize=10,  TextColor=Color.Black},
                     directionSegmentControl,
                     showButton,

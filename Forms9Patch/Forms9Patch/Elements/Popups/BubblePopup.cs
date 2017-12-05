@@ -8,6 +8,7 @@ namespace Forms9Patch
     /// </summary>
     public class BubblePopup : PopupBase
     {
+        #region Properties
 
         #region Content 
         /// <summary>
@@ -20,7 +21,6 @@ namespace Forms9Patch
             set { _bubbleLayout.Content = value; }
         }
         #endregion
-
 
         #region Bubble Properties
         /// <summary>
@@ -42,8 +42,9 @@ namespace Forms9Patch
 
         #endregion
 
-
         #region Pointer Properties
+
+        #region PointerLength
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
@@ -57,7 +58,9 @@ namespace Forms9Patch
             get { return (float)GetValue(PointerLengthProperty); }
             set { SetValue(PointerLengthProperty, value); }
         }
+        #endregion
 
+        #region PointerTipRadius
         /// <summary>
         /// Backing store for pointer tip radius property.
         /// </summary>
@@ -71,6 +74,7 @@ namespace Forms9Patch
             get { return (float)GetValue(PointerTipRadiusProperty); }
             set { SetValue(PointerTipRadiusProperty, value); }
         }
+        #endregion
 
         /*
 		/// <summary>
@@ -87,6 +91,7 @@ namespace Forms9Patch
 		}
 		*/
 
+        #region PointerDirection
         /// <summary>
         /// Backing store for pointer direction property.
         /// </summary>
@@ -100,7 +105,9 @@ namespace Forms9Patch
             get { return (PointerDirection)GetValue(PointerDirectionProperty); }
             set { SetValue(PointerDirectionProperty, value); }
         }
+        #endregion
 
+        #region PointerCornerRadius
         /// <summary>
         /// The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.
         /// </summary>
@@ -114,6 +121,25 @@ namespace Forms9Patch
             get { return (float)GetValue(PointerCornerRadiusProperty); }
             set { SetValue(PointerCornerRadiusProperty, value); }
         }
+        #endregion
+
+        #region PointerAngle property
+        /// <summary>
+        /// backing store for PointerAngle property
+        /// </summary>
+        internal static readonly BindableProperty PointerAngleProperty = BindableProperty.Create("PointerAngle", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerAngleProperty.DefaultValue);
+        /// <summary>
+        /// Gets/Sets the PointerAngle property
+        /// </summary>
+        internal float PointerAngle
+        {
+            get { return (float)GetValue(PointerAngleProperty); }
+            set { SetValue(PointerAngleProperty, value); }
+        }
+        #endregion PointerAngle property
+
+        #endregion
+
         #endregion
 
 
@@ -140,6 +166,7 @@ namespace Forms9Patch
                 BackgroundColor = BackgroundColor,
 
                 PointerLength = PointerLength,
+                PointerAngle = PointerAngle,
                 PointerTipRadius = PointerTipRadius,
                 PointerCornerRadius = PointerCornerRadius
             };
@@ -149,15 +176,11 @@ namespace Forms9Patch
             Padding = 10;
 
         }
-
-
-
         #endregion
 
 
-
         #region Change management
-
+        /*
         void OnParentSizeChanged(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("BubblePopup ParentSizeChanged (" + Application.Current.MainPage.Bounds + ")");
@@ -183,7 +206,7 @@ namespace Forms9Patch
                     rootPage.SizeChanged -= OnParentSizeChanged;
             }
         }
-
+        */
 
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
@@ -191,101 +214,72 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
-            //if (propertyName == IsPresentedProperty.PropertyName) {
+            if (propertyName == TranslationXProperty.PropertyName)
+            {
+                Content.TranslationX = TranslationX;
+                return;
+            }
+            if (propertyName == TranslationYProperty.PropertyName)
+            {
+                Content.TranslationY = TranslationY;
+                return;
+            }
+            if (propertyName == RotationProperty.PropertyName)
+            {
+                Content.Rotation = Rotation;
+                return;
+            }
+            if (propertyName == RotationXProperty.PropertyName)
+            {
+                Content.RotationX = RotationX;
+                return;
+            }
+            if (propertyName == RotationYProperty.PropertyName)
+            {
+                Content.RotationY = RotationY;
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
+
             if (_bubbleLayout == null)
                 return;
-            else if (propertyName == PointerLengthProperty.PropertyName)
+
+            if (propertyName == PointerLengthProperty.PropertyName)
                 _bubbleLayout.PointerLength = PointerLength;
+            else if (propertyName == PointerAngleProperty.PropertyName)
+            {
+                if (propertyName == PointerAngleProperty.PropertyName)
+                {
+                    if (PointerAngle < 1)
+                    {
+                        PointerAngle = 1;
+                        return;
+                    }
+                    if (PointerAngle > 89)
+                    {
+                        PointerAngle = 89;
+                        return;
+                    }
+                }
+                _bubbleLayout.PointerAngle = PointerAngle;
+            }
             else if (propertyName == PointerTipRadiusProperty.PropertyName)
                 _bubbleLayout.PointerTipRadius = PointerTipRadius;
             else if (propertyName == PointerCornerRadiusProperty.PropertyName)
                 _bubbleLayout.PointerCornerRadius = PointerCornerRadius;
+            /*
             else if (propertyName == "Parent")
             {
-                var rootPage = Parent as RootPage;
-                if (rootPage != null)
+                if (Parent is RootPage rootPage)
                     rootPage.SizeChanged += OnParentSizeChanged;
             }
+            */
         }
+        #endregion
 
 
-        double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;
-        double PositionWeightingFunction(double start)
-        {
-            // how far apart is the popup center from the target?
-            double err = 0;
-            if (TargetBias < 0)
-                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
-            else if (TargetBias > 1)
-                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + TargetBias));
-            else
-                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
-            //double err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
-
-            // does the popup and the target overlap?
-            err += (start + _pwfWidth >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - start - _pwfWidth);
-            err += (start <= _pwfTargetStart + _pwfTargetWidth ? 0 : 100 * start - (_pwfTargetStart + _pwfTargetWidth));
-
-            // are we close to the edges?
-            err += (start < 20 ? 20 * (20 - start) : 0);
-            err += (start + _pwfWidth > _pwfAvailableWidth - 20 ? 20 * (start + _pwfWidth - _pwfAvailableWidth + 20) : 0);
-
-            // are we off the screen?
-            err += (start < 0 ? 1000 * -start : 0);
-            err += (start + _pwfWidth > _pwfAvailableWidth ? 1000 * (start + _pwfWidth - _pwfAvailableWidth) : 0);
-            //System.Diagnostics.Debug.WriteLine ("\t\t\tstart="+start+" err=" + err);
-            return err;
-        }
-
-        double PointerWeightingFunction(double offset)
-        {
-            // how far is the offset from the center of the target?
-            double err = 0;
-            if (TargetBias < -1)
-                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
-            else if (TargetBias < 0)
-                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * (1 + TargetBias)));
-            else if (TargetBias > 1)
-                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + TargetBias));
-            else
-                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
-            //double err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
-
-            // does the pointer overlap the target?
-            err += (_pwfStart + offset >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - _pwfStart - offset);
-            err += (_pwfStart + offset <= _pwfTargetStart + _pwfTargetWidth ? 0 : 100 * _pwfStart + offset - (_pwfTargetStart + _pwfTargetWidth));
-
-            return err;
-        }
-
-        Tuple<double, float> StartAndPointerLocation(double width, double targetStart, double targetWidth, double availableWidth)
-        {
-            //System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
-            _pwfWidth = width;
-            _pwfTargetStart = targetStart;
-            _pwfTargetWidth = targetWidth;
-            _pwfAvailableWidth = availableWidth;
-            double optimalStart;
-            NumericalMethods.Search1D.BrentMin(
-                0,
-                targetStart + targetWidth / 2.0,
-                availableWidth - width,
-                PositionWeightingFunction, 0.0001, out optimalStart);
-
-            _pwfStart = optimalStart;
-
-            double optimalPointerLoc;
-            NumericalMethods.Search1D.BrentMin(
-                0,
-                width / 2.0,
-                width,
-                PointerWeightingFunction, 0.0001, out optimalPointerLoc);
-
-            var pointerOffset = (float)(optimalPointerLoc / width);
-            return new Tuple<double, float>(optimalStart, pointerOffset);
-        }
+        #region Layout
 
         //Using the below check seems to fail to render correct size on some popups!
         //Rectangle _lastBounds = Rectangle.Zero;  
@@ -312,21 +306,23 @@ namespace Forms9Patch
             {
                 _bubbleLayout.IsVisible = true;
                 _bubbleLayout.Content.IsVisible = true;
-                //var shadow = BubbleLayout.ShadowPadding(_bubbleLayout);
-                var decoration = _bubbleLayout.DecorativePadding();
-                //SizeRequest request;
 
-                var availWidth = width - (Margin.HorizontalThickness + decoration.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + decoration.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
+                var availWidth = width - (Margin.HorizontalThickness + _bubbleLayout.Padding.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + _bubbleLayout.Padding.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
                 if (_bubbleLayout.Content.WidthRequest > 0)
                     availWidth = _bubbleLayout.Content.WidthRequest;
                 if (_bubbleLayout.Content.HeightRequest > 0)
                     availHeight = _bubbleLayout.Content.HeightRequest;
                 var request = _bubbleLayout.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
-                //var rboxSize = new Size(request.Request.Width + _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness, request.Request.Height + _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
-                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + decoration.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + decoration.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
+                var decoration = ShapeBase.ShadowPadding(_bubbleLayout, HasShadow);// _bubbleLayout.DecorativePadding();
+
+                var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
+                rBoxWidth += _bubbleLayout.Padding.HorizontalThickness;
+                rBoxWidth += decoration.HorizontalThickness;
+                var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
+                rBoxHeight += _bubbleLayout.Padding.VerticalThickness;
+                rBoxHeight += decoration.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
                 //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren _bubbleLayout size=[{0}, {1}]",rboxSize.Width, rboxSize.Height);
@@ -448,6 +444,85 @@ namespace Forms9Patch
             }
         }
 
+        #region Layout Support 
+        double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;
+        double PositionWeightingFunction(double start)
+        {
+            // how far apart is the popup center from the target?
+            double err = 0;
+            if (TargetBias < 0)
+                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
+            else if (TargetBias > 1)
+                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + TargetBias));
+            else
+                err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
+            //double err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
+
+            // does the popup and the target overlap?
+            err += (start + _pwfWidth >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - start - _pwfWidth);
+            err += (start <= _pwfTargetStart + _pwfTargetWidth ? 0 : 100 * start - (_pwfTargetStart + _pwfTargetWidth));
+
+            // are we close to the edges?
+            err += (start < 20 ? 20 * (20 - start) : 0);
+            err += (start + _pwfWidth > _pwfAvailableWidth - 20 ? 20 * (start + _pwfWidth - _pwfAvailableWidth + 20) : 0);
+
+            // are we off the screen?
+            err += (start < 0 ? 1000 * -start : 0);
+            err += (start + _pwfWidth > _pwfAvailableWidth ? 1000 * (start + _pwfWidth - _pwfAvailableWidth) : 0);
+            //System.Diagnostics.Debug.WriteLine ("\t\t\tstart="+start+" err=" + err);
+            return err;
+        }
+
+        double PointerWeightingFunction(double offset)
+        {
+            // how far is the offset from the center of the target?
+            double err = 0;
+            if (TargetBias < -1)
+                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
+            else if (TargetBias < 0)
+                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * (1 + TargetBias)));
+            else if (TargetBias > 1)
+                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + TargetBias));
+            else
+                err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
+            //double err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
+
+            // does the pointer overlap the target?
+            err += (_pwfStart + offset >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - _pwfStart - offset);
+            err += (_pwfStart + offset <= _pwfTargetStart + _pwfTargetWidth ? 0 : 100 * _pwfStart + offset - (_pwfTargetStart + _pwfTargetWidth));
+
+            return err;
+        }
+
+        Tuple<double, float> StartAndPointerLocation(double width, double targetStart, double targetWidth, double availableWidth)
+        {
+            //System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
+            _pwfWidth = width;
+            _pwfTargetStart = targetStart;
+            _pwfTargetWidth = targetWidth;
+            _pwfAvailableWidth = availableWidth;
+            double optimalStart;
+            NumericalMethods.Search1D.BrentMin(
+                0,
+                targetStart + targetWidth / 2.0,
+                availableWidth - width,
+                PositionWeightingFunction, 0.0001, out optimalStart);
+
+            _pwfStart = optimalStart;
+
+            double optimalPointerLoc;
+            NumericalMethods.Search1D.BrentMin(
+                0,
+                width / 2.0,
+                width,
+                PointerWeightingFunction, 0.0001, out optimalPointerLoc);
+
+            var pointerOffset = (float)(optimalPointerLoc / width);
+            return new Tuple<double, float>(optimalStart, pointerOffset);
+        }
+        #endregion
+
+        #region Sizing
         /*
 		protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
 		{
@@ -468,7 +543,7 @@ namespace Forms9Patch
 			base.OnSizeAllocated(width, height);
 		}
 		*/
-
+        #endregion
 
         #endregion
 

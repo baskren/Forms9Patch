@@ -146,11 +146,14 @@
     <Compile Include="Extensions\ImageSourceExtensions.cs" />
     <Compile Include="Extensions\InLineExtensions.cs" />
     <Compile Include="Extensions\SKBitmapExtensions.cs" />
+    <Compile Include="Extensions\SKPathExtensions.cs" />
     <Compile Include="Extensions\SKRectExtensions.cs" />
     <Compile Include="Extensions\XamarinSpanExtentions.cs" />
     <Compile Include="Models\MetaFont.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Renderers\BubbleLayoutRenderer.cs" />
     <Compile Include="Renderers\LabeLRenderer.cs" />
+    <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Services\FontFamilies.cs" />
     <Compile Include="Services\FontService.cs" />
     <Compile Include="Services\OsInfoService.cs" />

@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// </summary>
     public class ModalPopup : PopupBase
     {
-
+        #region Properties
 
         #region Content
         /// <summary>
@@ -21,8 +21,6 @@ namespace Forms9Patch
             set { _frame.Content = value; }
         }
         #endregion
-
-
 
         #region IBackgroundImage
 
@@ -52,6 +50,8 @@ namespace Forms9Patch
 			set { SetValue (TranslationYProperty, value); }
 		}
 		*/
+        #endregion
+
         #endregion
 
 
@@ -88,24 +88,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="target">Element or Page pointed to by Popup.</param>
         [Obsolete]
-        public ModalPopup(VisualElement target) : base()
-        {
-            _frame = new Forms9Patch.Frame
-            {
-                Padding = Padding,
-                HasShadow = HasShadow,
-                OutlineColor = OutlineColor,
-                OutlineWidth = OutlineWidth,
-                OutlineRadius = OutlineRadius,
-                BackgroundColor = BackgroundColor
-            };
-            ContentView = _frame;
-
-            Margin = 0;
-            Padding = 10;
-
-
-        }
+        public ModalPopup(VisualElement target) : this() { }
         #endregion
 
 
@@ -128,6 +111,22 @@ namespace Forms9Patch
                 Content.TranslationY = TranslationY;
                 return;
             }
+            if (propertyName == RotationProperty.PropertyName)
+            {
+                Content.Rotation = Rotation;
+                return;
+            }
+            if (propertyName == RotationXProperty.PropertyName)
+            {
+                Content.RotationX = RotationX;
+                return;
+            }
+            if (propertyName == RotationYProperty.PropertyName)
+            {
+                Content.RotationY = RotationY;
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
             if (_frame == null)
                 return;
@@ -185,10 +184,10 @@ namespace Forms9Patch
 
                 var shadowPadding = ShapeBase.ShadowPadding(_frame, HasShadow);
 
-                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth));// + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
+                var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth);// + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
                 rBoxWidth += _frame.Padding.HorizontalThickness;
                 rBoxWidth += shadowPadding.HorizontalThickness;
-                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight));// + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
+                var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight);// + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
                 rBoxHeight += _frame.Padding.VerticalThickness;
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);

@@ -243,6 +243,12 @@ namespace Forms9Patch
         /// </summary>
         /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.</returns>
         public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => Description();
         #endregion
 
 
@@ -305,15 +311,6 @@ namespace Forms9Patch
                 var shadowPadding = ShapeBase.ShadowPadding(this);
                 result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness), new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
             }
-            /*
-            if (Parent is PopupBase popupBase)
-            {
-                var request = new Size(result.Request.Width + popupBase.Padding.HorizontalThickness, result.Request.Height + popupBase.Padding.VerticalThickness);
-                var min = new Size(result.Minimum.Width + popupBase.Padding.HorizontalThickness, result.Minimum.Height + popupBase.Padding.VerticalThickness);
-                result = new SizeRequest(request, min);
-            }
-            */
-
             return result;
         }
 

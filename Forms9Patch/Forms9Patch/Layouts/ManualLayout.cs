@@ -229,6 +229,21 @@ namespace Forms9Patch
         #endregion Constructor
 
 
+        #region Description
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.
+        /// </summary>
+        /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.</returns>
+        public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => Description();
+        #endregion
+
+
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 

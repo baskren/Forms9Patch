@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,10 +15,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.UWP;
 
-[assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.UWP.ImageRenderer))]
+[assembly: ExportRenderer(typeof(Forms9Patch.BubbleLayout), typeof(Forms9Patch.UWP.BubbleLayoutRenderer))]
 namespace Forms9Patch.UWP
 {
-    public class ImageRenderer : ViewRenderer<Image, SkiaRoundedBoxAndImageView>
+    internal class BubbleLayoutRenderer : ViewRenderer<BubbleLayout, SkiaRoundedBoxAndImageView> 
     {
         #region Fields
         bool _disposed;
@@ -29,10 +29,10 @@ namespace Forms9Patch.UWP
         int _instance;
         #endregion
 
-        #region Constructor / disposal
-        public ImageRenderer()
+        #region Constructor / Disposer
+        public BubbleLayoutRenderer() 
         {
-            _instance = _instances++;
+        	_instances = _instance++;
         }
 
         protected override void Dispose(bool disposing)
@@ -64,20 +64,21 @@ namespace Forms9Patch.UWP
         }
         #endregion
 
-        #region Change managements
-        protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
+        #region Change management
+        protected override void OnElementChanged(ElementChangedEventArgs<BubbleLayout> e)
         {
             base.OnElementChanged(e);
 
-            if (e.OldElement!=null)
+            if (e.OldElement != null)
             {
                 SizeChanged -= OnSizeChanged;
                 SetAutomationId(null);
             }
+
             if (e.NewElement != null)
             {
                 if (Control == null)
-                    SetNativeControl(new SkiaRoundedBoxAndImageView(Element));
+                    SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
                 SizeChanged += OnSizeChanged;
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
@@ -91,8 +92,13 @@ namespace Forms9Patch.UWP
             base.OnElementPropertyChanged(sender, e);
         }
 
-
+        protected override AutomationPeer OnCreateAutomationPeer()
+        {
+            // Since layouts in Forms can be interacted with, we need to create automation peers
+            // for them so we can interact with them in automated tests
+            return new FrameworkElementAutomationPeer(this);
+        }
 
         #endregion
-    }
+	}
 }
