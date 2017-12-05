@@ -90,7 +90,7 @@ namespace Forms9Patch
         [Obsolete]
         public ModalPopup(VisualElement target) : base()
         {
-            _frame = new Frame
+            _frame = new Forms9Patch.Frame
             {
                 Padding = Padding,
                 HasShadow = HasShadow,
@@ -103,6 +103,7 @@ namespace Forms9Patch
 
             Margin = 0;
             Padding = 10;
+
 
         }
         #endregion
@@ -135,6 +136,20 @@ namespace Forms9Patch
 
 
         #region Layout
+        /*
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            var result =  base.OnMeasure(widthConstraint, heightConstraint);
+            if (Parent is PopupBase popupBase)
+            {
+                var request = new Size(result.Request.Width + popupBase.Padding.HorizontalThickness, result.Request.Height + popupBase.Padding.VerticalThickness);
+                var min = new Size(result.Minimum.Width + popupBase.Padding.HorizontalThickness, result.Minimum.Height + popupBase.Padding.VerticalThickness);
+                result = new SizeRequest(request, min);
+            }
+            return result;
+        }
+        */
+
         /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
         /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
         /// <param name="width">A value representing the width of the child region bounding box.</param>
@@ -160,15 +175,22 @@ namespace Forms9Patch
                 //ShapeBase.UpdateBasePadding(_frame, true);
                 //var shadow = ShadowPadding();
 
-                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
+                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness ); // + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness ); // + shadow.VerticalThickness);
                 if (_frame.Content.WidthRequest > 0)
                     availWidth = _frame.Content.WidthRequest;
                 if (_frame.Content.HeightRequest > 0)
                     availHeight = _frame.Content.HeightRequest;
                 var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
-                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth) + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
-                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight) + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
+
+                var shadowPadding = ShapeBase.ShadowPadding(_frame, HasShadow);
+
+                var rBoxWidth = (HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth));// + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
+                rBoxWidth += _frame.Padding.HorizontalThickness;
+                rBoxWidth += shadowPadding.HorizontalThickness;
+                var rBoxHeight = (VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight));// + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
+                rBoxHeight += _frame.Padding.VerticalThickness;
+                rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
                 var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;

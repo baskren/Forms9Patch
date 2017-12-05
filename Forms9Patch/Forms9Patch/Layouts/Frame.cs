@@ -299,12 +299,21 @@ namespace Forms9Patch
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
+           var result = base.OnMeasure(widthConstraint, heightConstraint);
             if (HasShadow)
             {
                 var shadowPadding = ShapeBase.ShadowPadding(this);
                 result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness), new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
             }
+            /*
+            if (Parent is PopupBase popupBase)
+            {
+                var request = new Size(result.Request.Width + popupBase.Padding.HorizontalThickness, result.Request.Height + popupBase.Padding.VerticalThickness);
+                var min = new Size(result.Minimum.Width + popupBase.Padding.HorizontalThickness, result.Minimum.Height + popupBase.Padding.VerticalThickness);
+                result = new SizeRequest(request, min);
+            }
+            */
+
             return result;
         }
 

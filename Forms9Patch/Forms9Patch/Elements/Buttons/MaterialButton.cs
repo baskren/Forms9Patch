@@ -719,7 +719,20 @@ namespace Forms9Patch
             }
         }
 
-        internal double LabelActualFontSize => _label.ActualFontSize;
+        /// <summary>
+        /// Gets the OptimalFontSize of the button's text (assuming it hasn't been overridden by SychronizedFontSize
+        /// </summary>
+        public double OptimalFontSize => _label.OptimalFontSize;
+
+        /// <summary>
+        /// Overrides the button's label's FontSize for the purpose of synchronization between 
+        /// </summary>
+        public double SynchronizedFontSize
+        {
+            get { return _label.SynchronizedFontSize; }
+            set { _label.SynchronizedFontSize = value; }
+        }
+
         #endregion
 
 
@@ -1144,7 +1157,7 @@ namespace Forms9Patch
                 UpdateIconTint();
             }
 
-            else if (propertyName == Label.ActualFontSizeProperty.PropertyName)
+            else if (propertyName == Label.OptimalFontSizeProperty.PropertyName)
                 _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
         }
 

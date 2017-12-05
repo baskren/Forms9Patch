@@ -113,7 +113,7 @@ namespace Forms9Patch.UWP
 
                 UpdateColor(Control);
                 UpdateHorizontalAlign(Control);
-                UpdateTextAndFont(Control);
+                //UpdateTextAndFont(Control);
                 UpdateLineBreakMode(Control);
 
             }
@@ -122,7 +122,8 @@ namespace Forms9Patch.UWP
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == Forms9Patch.Label.TextProperty.PropertyName || e.PropertyName == Forms9Patch.Label.HtmlTextProperty.PropertyName)
-                UpdateTextAndFont(Control);
+                //UpdateTextAndFont(Control);
+                ForceLayout(Control);
             else if (e.PropertyName == Forms9Patch.Label.TextColorProperty.PropertyName)
                 UpdateColor(Control);
             else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
@@ -130,7 +131,8 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == Forms9Patch.Label.VerticalTextAlignmentProperty.PropertyName)
                 UpdateVerticalAlign(Control);
             else if (e.PropertyName == Forms9Patch.Label.FontProperty.PropertyName)
-                UpdateTextAndFont(Control);
+                //UpdateTextAndFont(Control);
+                ForceLayout(Control);
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
                 UpdateLineBreakMode(Control);
 
@@ -140,6 +142,8 @@ namespace Forms9Patch.UWP
                 ForceLayout(Control);
             else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
                 UpdateMinFontSize(Control);
+            else if (e.PropertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
+                UpdateSynchrnoizedFontSize(Control);
 
 
             base.OnElementPropertyChanged(sender, e);
@@ -187,6 +191,7 @@ namespace Forms9Patch.UWP
                 textBlock.ClearValue(TextBlock.ForegroundProperty);
         }
 
+        /*
         void UpdateTextAndFont(TextBlock textBlock)
         {
             if (textBlock != null)
@@ -198,6 +203,17 @@ namespace Forms9Patch.UWP
                 LayoutValid = false;
                 textBlock.SetAndFormatText(label);
             }
+        }
+        */
+
+
+        void UpdateSynchrnoizedFontSize(TextBlock textBlock)
+        {
+            var label = Element as ILabel;
+            if (label == null)
+                return;
+            if (label.SynchronizedFontSize != textBlock.FontSize)
+                ForceLayout(textBlock);
         }
 
         void UpdateLineBreakMode(TextBlock textBlock)
@@ -415,12 +431,18 @@ namespace Forms9Patch.UWP
                 // we needed the following in Android as well.  Xamarin layout really doesn't like this to be changed in real time.
                 Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
                  {
-                     label.ActualFontSize = tmpFontSize;
+                     label.OptimalFontSize = tmpFontSize;
                      return false;
                  });
 
-                //result.Height = tmpHt > 0 ? tmpHt : textBlock.DesiredSize.Height;
-                result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width),Math.Ceiling(tmpHt > -1 ? tmpHt : textBlock.DesiredSize.Height));
+                var syncFontSize = ((ILabel)label).SynchronizedFontSize;
+                if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
+                {
+                    tmpHt = -1;
+                    textBlock.SetAndFormatText(label, syncFontSize);
+                    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                }
+                result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width), Math.Ceiling(tmpHt > -1 ? tmpHt : textBlock.DesiredSize.Height));
                 
                 DebugMessage("result=[" + result + "] FontSize=["+textBlock.FontSize+"] LineHeight=["+textBlock.LineHeight+"]");
 
@@ -445,6 +467,7 @@ namespace Forms9Patch.UWP
 
         #region LineHeight estimation
         #endregion
+
 
         #region Fitting
 

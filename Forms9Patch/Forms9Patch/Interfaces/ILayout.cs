@@ -8,8 +8,7 @@ namespace Forms9Patch
 {
     interface ILayout : IBackground
     {
-        // IMPORTANT: Need to override (new) ILayoutElement's Padding property in order to correctly compute & store shadow padding
-        //Xamarin.Forms.Thickness Padding { get; set; }
+        Xamarin.Forms.Thickness Padding { get; set; }
         bool IgnoreChildren { get; set; }
     }
 }

@@ -206,7 +206,7 @@ namespace Forms9Patch.Droid
                 Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
                 {
                     if (Element != null && Control != null)
-                        Element.ActualFontSize = Control.TextSize;
+                        Element.OptimalFontSize = Control.TextSize;
                     _delayingActualFontSizeUpdate = false;
                     return false;
                 });

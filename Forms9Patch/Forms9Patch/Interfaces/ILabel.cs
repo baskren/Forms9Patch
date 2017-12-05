@@ -11,5 +11,8 @@ namespace Forms9Patch
     {
         string Text { get; set; }
         string HtmlText { get; set; }
+
+        double OptimalFontSize { get; }
+        double SynchronizedFontSize { get; set; }
     }
 }

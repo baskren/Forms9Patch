@@ -694,7 +694,7 @@ namespace Forms9Patch
             button.Selected += OnSegmentSelected;
             button.LongPressing += OnSegmentLongPressing;
             button.LongPressed += OnSegmentLongPressed;
-            button.ActualFontSizeChanged += Button_ActualFontSizeChanged;
+            button.ActualFontSizeChanged += Button_OptimalFontSizeChanged;
             Children.Insert(index, button);
             if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
             {
@@ -720,7 +720,7 @@ namespace Forms9Patch
             button.Selected -= OnSegmentSelected;
             button.LongPressing -= OnSegmentLongPressing;
             button.LongPressed -= OnSegmentLongPressed;
-            button.ActualFontSizeChanged -= Button_ActualFontSizeChanged;
+            button.ActualFontSizeChanged -= Button_OptimalFontSizeChanged;
         }
 
     
@@ -1016,20 +1016,17 @@ namespace Forms9Patch
             }
         }
 
-        private void Button_ActualFontSizeChanged(object sender, EventArgs e)
+        private void Button_OptimalFontSizeChanged(object sender, EventArgs e)
         {
-            var minFontSize = double.MaxValue;
+            var minOptimalFontSize = double.MaxValue;
             foreach (var segment in _segments)
             {
-                if (segment.MaterialButton.LabelActualFontSize < minFontSize)
-                    minFontSize = segment.MaterialButton.LabelActualFontSize;
+                if (segment.MaterialButton.OptimalFontSize < minOptimalFontSize)
+                    minOptimalFontSize = segment.MaterialButton.OptimalFontSize;
             }
-            if (minFontSize > 0)
-            {
-                foreach (var segment in _segments)
-                    segment.MaterialButton.FontSize = minFontSize;
-                //System.Diagnostics.Debug.WriteLine("minFontSize=[" + minFontSize + "]");
-            }
+                    foreach (var segment in _segments)
+                        ((ILabel)segment.MaterialButton).SynchronizedFontSize = minOptimalFontSize;
+                    System.Diagnostics.Debug.WriteLine("minActualFontSize=[" + minOptimalFontSize + "]");
         }
 
 

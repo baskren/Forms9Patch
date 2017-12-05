@@ -448,7 +448,7 @@ namespace Forms9Patch.iOS
                         {
                             _delayingActualFontSizeUpdate = false;
                             if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                                Element.ActualFontSize = ControlFontPointSize;
+                                Element.OptimalFontSize = ControlFontPointSize;
                             return false;
                         });
                     }

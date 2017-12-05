@@ -116,22 +116,40 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region ActualFontSize property
-        internal static readonly BindablePropertyKey ActualFontSizePropertyKey = BindableProperty.CreateReadOnly("ActualFontSize", typeof(double), typeof(Label), -1.0);
+        #region OptimalFontSize property
+        internal static readonly BindablePropertyKey OptimalFontSizePropertyKey = BindableProperty.CreateReadOnly("OptimalFontSize", typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Backing store for the actual font size property after fitting.
         /// </summary>
-        public static readonly BindableProperty ActualFontSizeProperty = ActualFontSizePropertyKey.BindableProperty;
+        public static readonly BindableProperty OptimalFontSizeProperty = OptimalFontSizePropertyKey.BindableProperty;
         /// <summary>
         /// Gets the actual size of the font (after fitting).
         /// </summary>
         /// <value>The actual size of the font.</value>
-        public double ActualFontSize
+        public double OptimalFontSize
         {
-            get { return (double)GetValue(ActualFontSizeProperty); }
-            internal set { SetValue(ActualFontSizePropertyKey, value); }
+            get { return (double)GetValue(OptimalFontSizeProperty); }
+            internal set { SetValue(OptimalFontSizePropertyKey, value); }
         }
         #endregion
+
+
+        #region SynchronizedFontSize property
+        /// <summary>
+        /// backing store for SynchronizedFontSize property
+        /// </summary>
+        public static readonly BindableProperty SynchronizedFontSizeProperty = BindableProperty.Create("SynchronizedFontSize", typeof(double), typeof(Label), -1.0);
+        /// <summary>
+        /// Gets/Sets the SynchronizedFontSize property
+        /// </summary>
+        public double SynchronizedFontSize
+        {
+            get { return (double)GetValue(SynchronizedFontSizeProperty); }
+            set { SetValue(SynchronizedFontSizeProperty, value); }
+        }
+        #endregion SynchronizedFontSize property
+
+
 
         #endregion
 

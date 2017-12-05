@@ -190,8 +190,8 @@ namespace Forms9PatchDemo
 
             f9pLabel.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName == Forms9Patch.Label.ActualFontSizeProperty.PropertyName)
-                    actualFontSizeLabel.Text = "ActualFontSize: " + f9pLabel.ActualFontSize;
+                if (e.PropertyName == Forms9Patch.Label.OptimalFontSizeProperty.PropertyName)
+                    actualFontSizeLabel.Text = "OptimalFontSize: " + f9pLabel.OptimalFontSize;
             };
             #endregion
 

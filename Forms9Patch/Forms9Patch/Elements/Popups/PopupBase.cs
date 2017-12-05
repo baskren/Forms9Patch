@@ -3,6 +3,7 @@ using System;
 using FormsGestures;
 using System.Collections.Generic;
 using Forms9Patch;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
@@ -32,11 +33,11 @@ namespace Forms9Patch
 
         #region IPopup
 
-        /*#region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
+        #region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
         /// <summary>
         /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute & store shadow padding
         /// </summary>
-        public static new BindableProperty PaddingProperty = ShapeBase.PaddingProperty;
+        public static new BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(PopupBase), default(Thickness));
         /// <summary>
         /// Gets or sets the inner padding of the Layout.
         /// </summary>
@@ -46,7 +47,7 @@ namespace Forms9Patch
             get { return (Thickness)GetValue(PaddingProperty); }
             set { SetValue(PaddingProperty, value); }
         }
-        #endregion Padding*/
+        #endregion Padding
 
         #region IsVisible
         /// <summary>
@@ -313,11 +314,11 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ElementShape property
         /// </summary>
-        internal static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
+        public static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
         /// <summary>
         /// Gets/sets the geometry of the element
         /// </summary>
-        ElementShape IShape.ElementShape
+        public ElementShape ElementShape
         {
             get { return (ElementShape)GetValue(ElementShapeProperty); }
             set { SetValue(ElementShapeProperty, value); }
@@ -338,21 +339,6 @@ namespace Forms9Patch
             set { SetValue(ExtendedElementShapeProperty, value); }
         }
         #endregion ExtendedElementShape property
-
-        /*#region IgnoreShapePropertiesChanges
-        /// <summary>
-        /// Backging store for the IgnoreShapePropertiesChanges property
-        /// </summary>
-        public static BindableProperty IgnoreShapePropertiesChangesProperty = ShapeBase.IgnoreShapePropertiesChangesProperty;
-        /// <summary>
-        /// Prevent shape updates (to optimize performace)
-        /// </summary>
-        public bool IgnoreShapePropertiesChanges
-        {
-            get { return (bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty); }
-            set { SetValue(ShapeBase.IgnoreShapePropertiesChangesProperty, value); }
-        }
-        #endregion IgnoreShapePropertyChanges*/
 
         #region IElement
 
@@ -387,12 +373,17 @@ namespace Forms9Patch
             get { return (View)_modalLayout; }
             set
             {
+                if (_modalLayout is VisualElement oldLayout)
+                    oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
                 _modalLayout = (ILayout)value;
+                if (_modalLayout is VisualElement newLayout)
+                    newLayout.PropertyChanged += OnContentViewPropertyChanged;
                 if (base.Children.Count < 2)
                     base.Children.Add((View)_modalLayout);
                 else
                     base.Children[1] = (View)_modalLayout;
-
+                _modalLayout.IgnoreChildren = false;
+                
             }
         }
         #endregion ContentView property
@@ -441,6 +432,7 @@ namespace Forms9Patch
             //HostPage = host ?? Application.Current.MainPage;
             Target = target;
             base.Children.Add(_pageOverlay);
+            
         }
         #endregion
 
@@ -508,6 +500,45 @@ namespace Forms9Patch
 
 
         #region PropertyChange managment
+
+        void InitializeILayoutProperties(ILayout layout)
+        {
+            #region IBackground
+
+            layout.BackgroundImage = BackgroundImage;
+
+            #region IShape
+
+            layout.BackgroundColor = BackgroundColor;
+            layout.HasShadow = HasShadow;
+            layout.ShadowInverted = ShadowInverted;
+            layout.OutlineColor = OutlineColor;
+            layout.OutlineRadius = OutlineRadius;
+            layout.OutlineWidth = OutlineWidth;
+            layout.ElementShape = ElementShape;
+            layout.ExtendedElementShape = ((ILayout)this).ExtendedElementShape;
+
+            #endregion IShape
+
+            #endregion IBackground
+
+            #region ILayout
+
+            layout.Padding = Padding;
+            layout.IgnoreChildren = false;
+
+            #endregion ILayout
+
+        }
+
+        private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName)
+            {
+                LayoutChildren(RootPage.X,RootPage.Y,RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
+            }
+        }
+
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
@@ -540,9 +571,10 @@ namespace Forms9Patch
                 }
             }
 
-            #region IPopup
-            //else if (propertyName == PaddingProperty.PropertyName)
-            //    _background.Padding = Padding;
+            #region ILayout
+            else if (propertyName == PaddingProperty.PropertyName)
+                _modalLayout.Padding = Padding;
+            #endregion
 
             #region IBackground
             else if (propertyName == BackgroundImageProperty.PropertyName)
@@ -561,16 +593,18 @@ namespace Forms9Patch
                 _modalLayout.OutlineWidth = OutlineWidth;
             else if (propertyName == OutlineRadiusProperty.PropertyName)
                 _modalLayout.OutlineRadius = OutlineRadius;
+            else if (propertyName == ElementShapeProperty.PropertyName)
+                _modalLayout.ElementShape = ElementShape;
             else if (propertyName == ExtendedElementShapeProperty.PropertyName)
                 _modalLayout.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
             #endregion IShape
 
             #endregion IBackground
 
-            #endregion IPopup
 
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
+
         }
         #endregion
 
@@ -580,16 +614,6 @@ namespace Forms9Patch
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            /*
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            if (HasShadow)
-            {
-                var shadowPadding = ((IShape)this).ShadowPadding();
-                result = new SizeRequest(new Size(result.Request.Width + shadowPadding.HorizontalThickness, result.Request.Height + shadowPadding.VerticalThickness),
-                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness, result.Minimum.Height + shadowPadding.VerticalThickness));
-            }
-            */
-
             // this is going to be the size of the root page.
             var result = new SizeRequest(RootPage.Bounds.Size, RootPage.Bounds.Size);
             return result;

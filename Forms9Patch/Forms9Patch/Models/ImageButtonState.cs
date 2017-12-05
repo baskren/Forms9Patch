@@ -573,6 +573,10 @@ namespace Forms9Patch
         }
         #endregion MinFontSize
 
+        double ILabel.OptimalFontSize { get; }
+
+        double ILabel.SynchronizedFontSize { get; set; }
+
         #region IFontElement
 
         #region FontAttributes
