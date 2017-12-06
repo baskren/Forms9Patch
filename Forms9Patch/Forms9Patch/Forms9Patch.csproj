@@ -229,6 +229,8 @@
     <Compile Include="Enums\NetworkConnectivity.cs" />
     <Compile Include="Services\Display.cs" />
     <Compile Include="Enums\RoundRectPath.cs" />
+    <Compile Include="Models\Range.cs" />
+    <Compile Include="Models\RangeLists.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -274,6 +276,10 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

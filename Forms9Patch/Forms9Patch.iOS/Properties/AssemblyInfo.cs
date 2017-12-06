@@ -6,20 +6,20 @@ using Forms9Patch;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("Forms9Patch.iOS")]
-[assembly: AssemblyDescription ("")]
-[assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("42nd Parallel")]
-[assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("42nd Parallel, 2015")]
-[assembly: AssemblyTrademark ("42nd Parallel")]
-[assembly: AssemblyCulture ("")]
+//[assembly: AssemblyTitle ("Forms9Patch.iOS")]
+//[assembly: AssemblyDescription ("")]
+[assembly: AssemblyConfiguration("")]
+//[assembly: AssemblyCompany ("42nd Parallel")]
+//[assembly: AssemblyProduct ("")]
+//[assembly: AssemblyCopyright ("42nd Parallel, 2015")]
+//[assembly: AssemblyTrademark ("42nd Parallel")]
+[assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion ("0.9.11.*")]
+//[assembly: AssemblyVersion ("0.9.11.*")]
 
 [assembly: ResolutionGroupName("Forms9Patch")]
 

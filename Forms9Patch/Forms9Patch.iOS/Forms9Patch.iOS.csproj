@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.props" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,17 +63,23 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\..\..\..\..\.nuget\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.iOS">
+      <HintPath>..\..\..\..\..\.nuget\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />
@@ -99,29 +106,9 @@
     <Compile Include="..\Forms9Patch\Models\LicenseChecker.cs">
       <Link>Models\LicenseChecker.cs</Link>
     </Compile>
-    <Compile Include="ViewModels\NinePatch.cs" />
-    <Compile Include="Extensions\UIImageExtension.cs" />
-    <Compile Include="Renderers\ImageRenderer.cs" />
-    <Compile Include="..\Forms9Patch\Models\Range.cs">
-      <Link>Models\Range.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch\Models\RangeLists.cs">
-      <Link>Models\RangeLists.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch\Interfaces\INinePatch.cs">
-      <Link>Interfaces\INinePatch.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch\Extensions\INinePatchExtension.cs">
-      <Link>Extensions\INinePatchExtension.cs</Link>
-    </Compile>
     <Compile Include="Models\Settings.cs" />
     <Compile Include="UIViewContentMode.cs" />
-    <Compile Include="Renderers\ImageViewManager.cs" />
-    <Compile Include="Renderers\LayoutRenderer_T_.cs" />
     <Compile Include="Extensions\Debug.cs" />
-    <Compile Include="Extensions\ImageViewManagerExtension.cs" />
-    <Compile Include="Renderers\BubbleLayoutRenderer.cs" />
-    <Compile Include="Renderers\PopupBaseRenderer.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
@@ -143,6 +130,36 @@
     <Compile Include="Services\ApplicationInfoService.cs" />
     <Compile Include="Reachability.cs" />
     <Compile Include="Effects\WebViewFixEffect.cs" />
+    <Compile Include="..\Forms9Patch\Shared\SkiaRoundedBoxAndImageView.cs">
+      <Link>SkiaElements\SkiaRoundedBoxAndImageView.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\F9PBitmap.cs">
+      <Link>SkiaElements\F9PBitmap.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKRectExtensions.cs">
+      <Link>SkiaElements\SKRectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKPathExtensions.cs">
+      <Link>SkiaElements\SKPathExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKBitmapExtensions.cs">
+      <Link>SkiaElements\SKBitmapExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\LayoutRenderer_T_.cs">
+      <Link>Renderers\LayoutRenderer_T_.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SkiaColorExtensions.cs">
+      <Link>Extensions\SkiaColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\InvalidDataContractException.cs">
+      <Link>Exceptions\InvalidDataContractException.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\ImageRenderer.cs">
+      <Link>Renderers\ImageRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\BubbleLayoutRenderer.cs">
+      <Link>Renderers\BubbleLayoutRenderer.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
@@ -169,6 +186,13 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SkiaElements\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

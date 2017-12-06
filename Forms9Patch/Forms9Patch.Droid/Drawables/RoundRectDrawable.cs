@@ -5,7 +5,6 @@ using Forms9Patch;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using Android.Util;
-using Forms9Patch.Enums;
 
 namespace Forms9Patch.Droid
 {

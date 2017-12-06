@@ -17,5 +17,5 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Stack layout renderer.
     /// </summary>
-    internal class StackLayoutRenderer : LayoutRenderer<StackLayout> {}
+    internal class StackLayoutRenderer : F9pLayoutRenderer<StackLayout> { }
 }

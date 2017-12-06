@@ -3,6 +3,7 @@ using System;
 //using Xamarin.Forms;
 using Dalvik.SystemInterop;
 using System.Reflection;
+using System.Collections.Generic;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.Settings))]
 namespace Forms9Patch.Droid
@@ -69,5 +70,6 @@ namespace Forms9Patch.Droid
             }
         }
 
+        public List<Assembly> IncludedAssemblies => throw new NotImplementedException();
     }
 }

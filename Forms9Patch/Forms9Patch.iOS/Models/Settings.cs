@@ -101,6 +101,8 @@ namespace Forms9Patch.iOS
             }
         }
 
+        public List<Assembly> IncludedAssemblies => throw new NotImplementedException();
+
 
         #region Display Property Detection
 

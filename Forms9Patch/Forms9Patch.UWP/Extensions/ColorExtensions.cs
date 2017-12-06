@@ -39,7 +39,7 @@ namespace Forms9Patch.UWP
 
         public static bool IsNotNinePatchMark(this int argb)
         {
-            return (argb & 0xFF000000)!=0 && argb != MarkedPixel;
+            return (argb & 0xFF000000) != 0 && argb != MarkedPixel;
         }
 
         public static Windows.UI.Xaml.Media.Brush ToBrush(this Xamarin.Forms.Color color)
@@ -47,9 +47,5 @@ namespace Forms9Patch.UWP
             return new Windows.UI.Xaml.Media.SolidColorBrush(color.ToWindowsColor());
         }
 
-        public static SkiaSharp.SKColor ToSKColor(this Xamarin.Forms.Color color)
-        {
-            return new SkiaSharp.SKColor((byte)(color.R*255), (byte)(color.G * 255), (byte)(color.B * 255), (byte)(color.A * 255));
-        }
     }
 }

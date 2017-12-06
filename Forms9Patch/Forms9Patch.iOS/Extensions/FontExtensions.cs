@@ -270,7 +270,7 @@ namespace Forms9Patch.iOS
                 }
                 //} else {
                 //	Console.WriteLine ("Font [] is assumed not to be an embedded resource because it does not contain \".Resources.Fonts.\" in its Resource ID");
-            }s
+            }
             return null;
         }
 
@@ -407,7 +407,7 @@ namespace Forms9Patch.iOS
             return bestAttemptFont;
         }
 
- 
+
         internal static readonly Dictionary<string, string> _embeddedResourceFonts = new Dictionary<string, string>();
         static readonly object _loadFontLock = new object();
 

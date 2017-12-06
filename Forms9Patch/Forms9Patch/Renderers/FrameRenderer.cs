@@ -17,5 +17,5 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Frame renderer.
     /// </summary>
-    internal class FrameRenderer : LayoutRenderer<Frame> {}
+    class FrameRenderer : F9pLayoutRenderer<Frame> { }
 }

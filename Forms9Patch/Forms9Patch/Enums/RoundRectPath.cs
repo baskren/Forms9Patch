@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Forms9Patch.Enums
+namespace Forms9Patch
 {
     internal enum RoundRectPath
     {

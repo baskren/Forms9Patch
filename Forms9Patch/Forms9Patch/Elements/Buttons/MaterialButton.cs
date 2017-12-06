@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Windows.Input;
 using PCL.Utils;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
@@ -457,7 +458,7 @@ namespace Forms9Patch
             set
             {
                 PCL.Utils.ReflectionExtensions.CallerAssembly();
-                
+
                 SetValue(HtmlTextProperty, value);
             }
         }
@@ -789,7 +790,7 @@ namespace Forms9Patch
                 Margin = 0,
             };
             _label.PropertyChanged += OnLabelPropertyChanged;
-            
+
 
             _stackLayout = new Xamarin.Forms.StackLayout
             {
@@ -931,7 +932,7 @@ namespace Forms9Patch
             if (IsSelected && SelectedTextColor.A > 0)
                 enabledLabelColor = SelectedTextColor;
 
-            base.OutlineWidth = OutlineWidth < 0 ?  (BackgroundImage?.Source!=null ? 0 : (BackgroundColor.A > 0 ? 0 : 1) )    :     (OutlineColor == Color.Transparent ? 0 : OutlineWidth);
+            base.OutlineWidth = OutlineWidth < 0 ? (BackgroundImage?.Source != null ? 0 : (BackgroundColor.A > 0 ? 0 : 1)) : (OutlineColor == Color.Transparent ? 0 : OutlineWidth);
 
             if (IsEnabled)
             {
@@ -1130,6 +1131,13 @@ namespace Forms9Patch
             add { _actualFontSizeChanged += value; }
             remove { _actualFontSizeChanged -= value; }
         }
+
+        public event EventHandler Clicked;
+
+        public event EventHandler Pressed;
+
+        public event EventHandler Released;
+
 
         #endregion
 
@@ -1485,7 +1493,7 @@ namespace Forms9Patch
                 _label.FontFamily = FontFamily;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
-                if (_label != null &&  _stackLayout.Children.Contains(_label))
+                if (_label != null && _stackLayout.Children.Contains(_label))
                 {
                     _stackLayout.Children.Remove(_label);
                     if (TrailingIcon)
@@ -1530,15 +1538,31 @@ namespace Forms9Patch
             if (command != null && GroupToggleBehavior == GroupToggleBehavior.None)
                 command.Execute(CommandParameter);
             _tapped?.Invoke(this, EventArgs.Empty);
+            Clicked?.Invoke(this, EventArgs.Empty);
         }
 
+        #endregion
+
+        #region IButtonController
         public void SendClicked()
         {
             SendTapped();
         }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SendPressed()
+        {
+            Pressed?.Invoke(this, EventArgs.Empty);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SendReleased()
+        {
+            Released?.Invoke(this, EventArgs.Empty);
+        }
+
+
         #endregion
-
-
     }
 }
 

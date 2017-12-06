@@ -178,7 +178,7 @@ namespace Forms9Patch
             //_listener = FormsGestures.Listener.For(this);
         }
 
-        public Label(string text) :this ()
+        public Label(string text) : this()
         {
             Text = text;
         }
@@ -405,7 +405,8 @@ namespace Forms9Patch
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
             // we're going to handle windows via the Window's Hyperlink Span element
-            if (Device.OS != TargetPlatform.Windows)
+            //if (Device.OS != TargetPlatform.Windows)
+            if (Device.RuntimePlatform == Device.UWP)
                 return;
             if (e.NumberOfTouches == 1)
             {

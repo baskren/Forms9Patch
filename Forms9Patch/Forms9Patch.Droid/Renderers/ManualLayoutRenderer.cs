@@ -1,9 +1,10 @@
 
 namespace Forms9Patch.Droid
 {
-	/// <summary>
-	/// Forms9Patch Stack layout renderer.
-	/// </summary>
-	public class ManualLayoutRenderer : LayoutRenderer<ManualLayout> {
-	}
+    /// <summary>
+    /// Forms9Patch Stack layout renderer.
+    /// </summary>
+    class ManualLayoutRenderer : F9pLayoutRenderer<ManualLayout>
+    {
+    }
 }

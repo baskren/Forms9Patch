@@ -17,5 +17,5 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Grid renderer.
     /// </summary>
-    internal class GridRenderer : LayoutRenderer<Grid> {}
+    internal class GridRenderer : F9pLayoutRenderer<Grid> { }
 }

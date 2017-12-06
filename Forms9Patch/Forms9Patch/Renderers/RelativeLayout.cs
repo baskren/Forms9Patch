@@ -17,5 +17,5 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Relative layout renderer.
     /// </summary>
-    internal class RelativeLayoutRenderer : LayoutRenderer<RelativeLayout> {}
+    internal class RelativeLayoutRenderer : F9pLayoutRenderer<RelativeLayout> { }
 }

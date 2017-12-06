@@ -29,6 +29,6 @@ using Forms9Patch;
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
-[assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.Droid.ImageRenderer))]
-[assembly: ExportRenderer(typeof(Forms9Patch.BubbleLayout), typeof(Forms9Patch.Droid.BubbleLayoutRenderer))]
-[assembly: ExportRenderer(typeof(Forms9Patch.ManualLayout), typeof(Forms9Patch.Droid.ManualLayoutRenderer))]
+//[assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.Droid.ImageRenderer))]
+//[assembly: ExportRenderer(typeof(Forms9Patch.BubbleLayout), typeof(Forms9Patch.Droid.BubbleLayoutRenderer))]
+//[assembly: ExportRenderer(typeof(Forms9Patch.ManualLayout), typeof(Forms9Patch.Droid.ManualLayoutRenderer))]

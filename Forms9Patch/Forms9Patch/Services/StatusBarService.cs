@@ -17,7 +17,7 @@ namespace Forms9Patch
             {
                 Settings.ConfirmInitialization();
                 _service = _service ?? Xamarin.Forms.DependencyService.Get<IStatusBarService>();
-                if (_service==null)
+                if (_service == null)
                 {
                     System.Diagnostics.Debug.WriteLine("StatusBarService is not available");
                     //throw new ServiceNotAvailableException("StatusBarService is not available");
@@ -37,8 +37,8 @@ namespace Forms9Patch
             {
                 if (Service == null)
                 {
-                    if (Device.OS == TargetPlatform.iOS)
-                    //if (Device.RuntimePlatform == Device.iOS)
+                    //if (Device.OS == TargetPlatform.iOS)
+                    if (Device.RuntimePlatform == Device.iOS)
                         return 20;
                     return 0;
                 }

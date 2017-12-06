@@ -19,8 +19,12 @@ namespace Forms9Patch.Droid
             IVisualElementRenderer elementRenderer = Platform.GetRenderer(element);
             if (pageRenderer != null && elementRenderer != null)
             {
+                /*
                 var elementNativeView = elementRenderer.ViewGroup;
                 var pageNativeView = pageRenderer.ViewGroup;
+                */
+                var elementNativeView = elementRenderer.View;
+                var pageNativeView = pageRenderer.View;
                 if (elementNativeView != null && pageNativeView != null)
                 {
                     var elementLocation = new int[2];

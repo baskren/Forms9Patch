@@ -245,8 +245,8 @@ namespace Forms9Patch
                     newBackgroundImage.Opacity = 1.0;
                 BackgroundImage = newBackgroundImage;
             }
-            else if (!_constructing && Device.OS == TargetPlatform.Android)
-            //else if (!_constructing && Device.RuntimePlatform == Device.Android)
+            //else if (!_constructing && Device.OS == TargetPlatform.Android)
+            else if (!_constructing && Device.RuntimePlatform == Device.Android)
             {
                 // this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
                 BackgroundImage = null;
@@ -372,8 +372,8 @@ namespace Forms9Patch
 
             // HtmlText handled above
 
-            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
-            //label.TextColor = (state.TextColorSet || state.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? state.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
+            //_label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
 
             HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
 
@@ -570,7 +570,7 @@ namespace Forms9Patch
                 DefaultState.Spacing = Spacing;
                 UpdateState();
             }
-            else if(propertyName == OrientationProperty.PropertyName && !_showingState)
+            else if (propertyName == OrientationProperty.PropertyName && !_showingState)
             {
                 DefaultState.Orientation = Orientation;
                 UpdateState();
