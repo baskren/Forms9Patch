@@ -48,6 +48,15 @@ namespace Forms9Patch
         bool _debugMessages;
 
         #region Constructor
+#if __DROID__  // needed for NativeGestureHandler?
+        public SkiaRoundedBoxAndImageView() : base(Xamarin.Forms.Forms.Context) { }
+
+        public SkiaRoundedBoxAndImageView(IntPtr javaReference, Android.Runtime.JniHandleOwnership transfer) : base(javaReference, transfer) { }
+
+        public SkiaRoundedBoxAndImageView(Android.Content.Context context, Android.Util.IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
+
+        public SkiaRoundedBoxAndImageView(Android.Content.Context context, Android.Util.IAttributeSet attrs) : base(context, attrs) { }
+#endif
 
         internal SkiaRoundedBoxAndImageView(IShape roundedBoxElement)
 #if __DROID__
@@ -73,8 +82,8 @@ namespace Forms9Patch
 
         void SetImageElement()
         {
-            if (_roundedBoxElement is ILayout background)
-                ImageElement = background.BackgroundImage;
+            if (_roundedBoxElement is ILayout layout)
+                ImageElement = layout.BackgroundImage;
             else if (_roundedBoxElement is Image image)
                 ImageElement = image;
         }
@@ -84,9 +93,9 @@ namespace Forms9Patch
         #region IDisposable Support
         private bool disposedValue; // To detect redundant calls
 
-#if __IOS__ || __DROID__ 
+#if __IOS__ || __DROID__
         protected override void Dispose(bool disposing)
-#else 
+#else
         protected virtual void Dispose(bool disposing)
 #endif
         {
@@ -598,39 +607,6 @@ namespace Forms9Patch
 #endif
         #endregion
 
-        /*
-                public override void Draw(CGRect rect)
-                {
-                    var ctx = UIGraphics.GetCurrentContext();
-                    SKImageInfo info = new SKImageInfo();
-
-                    var skiaiOSAsm = typeof(SkiaSharp.Views.iOS.SKCanvasView).Assembly;
-                    var types = skiaiOSAsm.GetTypes();
-                    Type skDrawableType = null;
-                    foreach (var type in types)
-                    {
-                        if (type.Name == "SKDrawable")
-                            skDrawableType = type;
-                    }
-                    var skDrawableCreateSurfaceMethod = skDrawableType.GetMethod("CreateSurface", new Type[] { typeof(CGRect), typeof(nfloat), typeof(SKImageInfo).MakeByRefType() });
-
-                    //var drawable = skDrawableType.GetField("drawable");
-                    var drawable = PCL.Utils.ReflectionExtensions.GetFieldValue(this, "drawable");
-                    var parameters = new object[] { rect, IgnorePixelScaling ? 1 : ContentScaleFactor, info };
-                    var surface = skDrawableCreateSurfaceMethod.Invoke(drawable, parameters) as SKSurface;
-
-                    var newInfo = parameters[2];
-                    //var properties = skDrawableType.GetProperties();
-
-                    var skDrawSurfaceMethod = skDrawableType.GetMethod("DrawSurface", new Type[] { typeof(CGContext), typeof(CGRect), typeof(SKImageInfo), typeof(SKSurface) });
-
-                    DrawInSurface(surface, info);
-
-                    skDrawSurfaceMethod.Invoke(drawable, new object[] { ctx, rect, info, surface });
-
-                    //base.Draw(rect);
-                }
-        */
 
         #region Layout
 
@@ -693,8 +669,8 @@ namespace Forms9Patch
                     if (Superview is UIView parent)
                         rect = new SKRect(0, 0, (float)(parent.Bounds.Width * FormsGestures.Display.Scale), (float)(parent.Bounds.Height * FormsGestures.Display.Scale));
 #elif __DROID__
-                    if (Parent is Android.Views.View parent)
-                        rect = new SKRect(0, 0, (float)(parent.Width * FormsGestures.Display.Scale), (float)(parent.Height * FormsGestures.Display.Scale));
+                    //if (Parent is Android.Views.View parent)
+                    //    rect = new SKRect(0, 0, (float)(parent.Width), (float)(parent.Height));
 #elif WINDOWS_UWP
                     if (Parent is FrameworkElement parent)
                         rect = new SKRect(0, 0, (float)(parent.ActualWidth * FormsGestures.Display.Scale), (float)(parent.ActualHeight * FormsGestures.Display.Scale));
@@ -763,12 +739,9 @@ namespace Forms9Patch
 #if __IOS__
                             ClipsToBounds = true;
 #elif __DROID__
-                            ClipBounds = new Android.Graphics.Rect(0, 0, Width - 1, Height - 1);
+                            ClipBounds = new Android.Graphics.Rect(0, 0, Width, Height);
 #elif WINDOWS_UWP
-                            Clip = new Windows.UI.Xaml.Media.RectangleGeometry
-                            {
-                                Rect = new Rect(0, 0, Width - 1, Height - 1)
-                            };
+                            Clip = new Windows.UI.Xaml.Media.RectangleGeometry { Rect = new Rect(0, 0, Width - 1, Height - 1) };
 #else
                             Clips;
 #endif
@@ -827,7 +800,6 @@ namespace Forms9Patch
                         var outlinePaint = new SKPaint
                         {
                             Style = SKPaintStyle.Stroke,
-                            //Color = outlineColor.ToWindowsColor().ToSKColor(),
                             Color = outlineColor.ToSKColor(),
                             StrokeWidth = outlineWidth,
                             IsAntialias = true,
@@ -843,7 +815,6 @@ namespace Forms9Patch
                         var separatorPaint = new SKPaint
                         {
                             Style = SKPaintStyle.Stroke,
-                            //Color = outlineColor.ToWindowsColor().ToSKColor(),
                             Color = outlineColor.ToSKColor(),
                             StrokeWidth = outlineWidth,
                             IsAntialias = true,

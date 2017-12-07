@@ -10,9 +10,11 @@ using Xamarin.Forms.Internals;
 
 #if __IOS__
 using Xamarin.Forms.Platform.iOS;
+[assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.iOS.ImageRenderer))]
 namespace Forms9Patch.iOS
 #elif __DROID__
 using Xamarin.Forms.Platform.Android;
+[assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.Droid.ImageRenderer))]
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
 using Windows.Foundation;
@@ -41,21 +43,7 @@ namespace Forms9Patch
 
 
         #region Constructor / disposal
-        public ImageRenderer()
-        {
-            _instance = _instances++;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                Control?.Dispose();
-                SetNativeControl(null);
-                _disposed = true;
-            }
-            base.Dispose(disposing);
-        }
+        public ImageRenderer() => _instance = _instances++;
         #endregion
 
 
@@ -64,12 +52,13 @@ namespace Forms9Patch
 #if WINDOWS_UWP
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Control.Height = ActualHeight + 1;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
+            Control.Height = ActualHeight + 1;
             Control.Width = ActualWidth + 1;
         }
 #endif
 
 #if __DROID__
+
         public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
         {
             var result = Control != null ? Control.GetDesiredSize(widthConstraint, heightConstraint) : default(Xamarin.Forms.SizeRequest);
@@ -78,28 +67,13 @@ namespace Forms9Patch
 #else
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] constraints=[" + widthConstraint + ", " + heightConstraint + "]");
             var result = Control != null ? Control.GetDesiredSize(widthConstraint, heightConstraint) : default(Xamarin.Forms.SizeRequest);
-            if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "]");
             return result;
         }
 #endif
 
         #endregion
 
-
-        #region Drawing
-#if __IOS__
-#elif __DROID__
-        // THIS DOENS"T SEEM TO DO ANY THING
-        protected override void OnDraw(Android.Graphics.Canvas canvas)
-        {
-            base.OnDraw(canvas);
-        }
-#elif WINDOWS_UWP
-#else
-#endif
-        #endregion
 
         #region Change managements
         protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
@@ -108,16 +82,18 @@ namespace Forms9Patch
 
             if (e.OldElement != null)
             {
-                //TODO: does this break UWP?
-                //SizeChanged -= OnSizeChanged;
+#if WINDOWS_UWP
+                SizeChanged -= OnSizeChanged;
+#endif
                 SetAutomationId(null);
             }
             if (e.NewElement != null)
             {
                 if (Control == null)
                     SetNativeControl(new SkiaRoundedBoxAndImageView(Element));
-                //TODO: does this break UWP?
-                //SizeChanged += OnSizeChanged;
+#if WINDOWS_UWP
+                SizeChanged += OnSizeChanged;
+#endif
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
             }

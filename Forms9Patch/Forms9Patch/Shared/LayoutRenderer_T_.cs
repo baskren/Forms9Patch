@@ -36,28 +36,11 @@ namespace Forms9Patch
 
         static int _instances;
         int _instance;
-        SkiaRoundedBoxAndImageView _skiaView;
         #endregion
 
 
         #region Constructor / Disposer
-        public F9pLayoutRenderer() => _instances = _instance++;
-
-        protected override void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                //if (Control != null)
-                //    Control?.Dispose();  this is handled by base.Dispose(bool disposing)
-                //SetNativeControl(null);
-                _skiaView?.Dispose();
-                _skiaView = null;
-                _disposed = true;
-
-            }
-
-            base.Dispose(disposing);
-        }
+        public F9pLayoutRenderer() => _instance = _instances++;
         #endregion
 
 
@@ -78,16 +61,13 @@ namespace Forms9Patch
             {
                 if (Control == null)
                     SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
-                //_skiaView = _skiaView ?? new SkiaRoundedBoxAndImageView(e.NewElement as IShape);
 #if __IOS__
-                //Add(_skiaView);
-                //_skiaView.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
-                //AddSubview(_skiaView);
 
 #endif
 #if WINDOWS_UWP
                 SizeChanged += OnSizeChanged;
 #endif
+
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
             }
@@ -108,18 +88,11 @@ namespace Forms9Patch
 
         public override void Draw(CGRect rect)
         {
-            //_skiaView.Draw(rect);
-            //SendSubviewToBack(_skiaView);
             SendSubviewToBack(Control);
             base.Draw(rect);
         }
 
 #elif __DROID__
-        protected override void OnDraw(Android.Graphics.Canvas canvas)
-        {
-            base.OnDraw(canvas);
-        }
-
 
 #elif WINDOWS_UWP
         protected override void UpdateBackgroundColor()
@@ -135,7 +108,6 @@ namespace Forms9Patch
             return new FrameworkElementAutomationPeer(this);
         }
 
-// TODO: Can we get rid of this?
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Control.Height = ActualHeight + 1;
