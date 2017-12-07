@@ -192,8 +192,11 @@ namespace Forms9Patch
 
         static public RangeLists PatchRanges(this SKBitmap bitmap)
         {
-            if (bitmap.Info.ColorType != SKColorType.Bgra8888)
+            if (bitmap.Info.ColorType != SKColorType.Bgra8888 && bitmap.Info.ColorType != SKColorType.Rgba8888)
+            {
+                System.Diagnostics.Debug.WriteLine("bitmap colortype [" + bitmap.Info.ColorType + "] not Bgra888");
                 return null;
+            }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 

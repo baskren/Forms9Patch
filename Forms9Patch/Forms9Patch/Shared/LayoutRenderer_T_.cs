@@ -135,7 +135,7 @@ namespace Forms9Patch
             return new FrameworkElementAutomationPeer(this);
         }
 
-
+// TODO: Can we get rid of this?
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Control.Height = ActualHeight + 1;
