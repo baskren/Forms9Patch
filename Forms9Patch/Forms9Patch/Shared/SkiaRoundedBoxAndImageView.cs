@@ -66,6 +66,7 @@ namespace Forms9Patch
             _instanceId = roundedBoxElement.InstanceId;
             _roundedBoxElement = roundedBoxElement;
 #if __IOS__ || __DROID__
+            //TODO: Needed?
             PaintSurface += OnPaintSurface;
 #endif
 #if __IOS__
@@ -317,6 +318,7 @@ namespace Forms9Patch
 
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+
             if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
                 SetImageSourceAsync();
             else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
@@ -330,6 +332,7 @@ namespace Forms9Patch
                 || e.PropertyName == Forms9Patch.Image.AntiAliasProperty.PropertyName
                 )
             {
+
                 _validLayout = false;
                 InvalidateView();
             }

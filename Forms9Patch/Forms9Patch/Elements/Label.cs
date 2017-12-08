@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// Forms9Patch.Label
     /// </summary>
     [ContentProperty("HtmlText")]
-    public class Label : Xamarin.Forms.Label, ILabel //View, IFontElement
+    public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
     {
 
         #region Properties
@@ -135,6 +135,7 @@ namespace Forms9Patch
 
 
         #region SynchronizedFontSize property
+
         /// <summary>
         /// backing store for SynchronizedFontSize property
         /// </summary>
@@ -145,11 +146,16 @@ namespace Forms9Patch
         public double SynchronizedFontSize
         {
             get { return (double)GetValue(SynchronizedFontSizeProperty); }
-            set { SetValue(SynchronizedFontSizeProperty, value); }
+            set
+            {
+                SetValue(SynchronizedFontSizeProperty, value);
+            }
         }
         #endregion SynchronizedFontSize property
 
-
+        #region IElement
+        public int InstanceId => _id;
+        #endregion
 
         #endregion
 

@@ -731,9 +731,13 @@ namespace Forms9Patch
         public double SynchronizedFontSize
         {
             get { return _label.SynchronizedFontSize; }
-            set { _label.SynchronizedFontSize = value; }
+            set
+            {
+                _label.SynchronizedFontSize = value;
+            }
         }
 
+        internal int LabelInstanceId => _label.InstanceId;
         #endregion
 
 
@@ -1542,6 +1546,7 @@ namespace Forms9Patch
         }
 
         #endregion
+
 
         #region IButtonController
         public void SendClicked()

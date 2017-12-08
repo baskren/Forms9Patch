@@ -22,6 +22,11 @@ namespace Forms9Patch.Droid
     /// </summary>
     public class LabelRenderer : ViewRenderer<Label, F9PTextView>
     {
+
+        static int _instances = 0;
+        int _instance;
+        double _fittedFontSize = -1;
+
         ColorStateList _labelTextColorDefault;
 
         SizeRequest? _lastSizeRequest;
@@ -32,6 +37,7 @@ namespace Forms9Patch.Droid
         /// </summary>
         public LabelRenderer()
         {
+            _instance = _instances++;
             AutoPackage = false;
         }
 
@@ -113,7 +119,7 @@ namespace Forms9Patch.Droid
                 return _lastSizeRequest.Value;
 
             ICharSequence text = _currentControlState.JavaText;
-            var tmpFontSize = ModelFontSize;
+            var tmpFontSize = BoundTextSize(Element.FontSize);
             Control.TextSize = tmpFontSize;
             Control.SetSingleLine(false);
             Control.SetMaxLines(int.MaxValue / 2);
@@ -146,7 +152,32 @@ namespace Forms9Patch.Droid
             else if (_currentControlState.AutoFit == AutoFit.Width)
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
 
-            Control.TextSize = BoundTextSize(tmpFontSize); ;
+
+            _fittedFontSize = tmpFontSize = BoundTextSize(tmpFontSize);
+            System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] A FittedFontSize=[" + _fittedFontSize + "]");
+
+            var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
+            if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
+                Control.TextSize = syncFontSize;
+            else
+                Control.TextSize = tmpFontSize;
+            _currentControlState.TextSize = Control.TextSize;
+
+            if (!_delayingActualFontSizeUpdate && _fittedFontSize != syncFontSize)
+            {
+                _delayingActualFontSizeUpdate = true;
+                System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] C FittedFontSize=[" + _fittedFontSize + "]");
+                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+                {
+                    if (Element != null && Control != null)
+                        Element.OptimalFontSize = _fittedFontSize;
+                    System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] OptimalFontSize=[" + _fittedFontSize + "]");
+                    _delayingActualFontSizeUpdate = false;
+                    return false;
+                });
+            }
+
+
             var layout = new StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
             int lines = _currentControlState.Lines;
@@ -200,17 +231,6 @@ namespace Forms9Patch.Droid
                 Control.TextFormatted = text;
 
             _lastSizeRequest = new SizeRequest(new Xamarin.Forms.Size(tmpWd, tmpHt), new Xamarin.Forms.Size(10, tmpHt));
-            if (!_delayingActualFontSizeUpdate)
-            {
-                _delayingActualFontSizeUpdate = true;
-                Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
-                {
-                    if (Element != null && Control != null)
-                        Element.OptimalFontSize = Control.TextSize;
-                    _delayingActualFontSizeUpdate = false;
-                    return false;
-                });
-            }
             if (showDebugMsg)
             {
                 Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
@@ -349,6 +369,18 @@ namespace Forms9Patch.Droid
 				*/
                 Layout();
             }
+            else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
+            {
+                if (_currentControlState.TextSize > 0)
+                {
+                    var syncFontSize = ((ILabel)Element).SynchronizedFontSize;
+                    if (syncFontSize >= 0 && _currentControlState.TextSize != syncFontSize)
+                    {
+                        _currentControlState.TextSize = -200;
+                        Layout();
+                    }
+                }
+            }
         }
 
         void Layout()
@@ -378,7 +410,7 @@ namespace Forms9Patch.Droid
 
         void UpdateMinFontSize()
         {
-            _currentControlState.TextSize = ModelFontSize;
+            _currentControlState.TextSize = BoundTextSize(Element.FontSize);
             Layout();
         }
 
@@ -435,18 +467,7 @@ namespace Forms9Patch.Droid
         }
 
         #region FontSize helpers
-        float ModelFontSize
-        {
-            get
-            {
-#pragma warning disable CS0618 // Type or member is obsolete
-                var textSize = (float)Element.FontSize;
-#pragma warning restore CS0618 // Type or member is obsolete
-                if (System.Math.Abs(textSize) < 0.0001)
-                    textSize = F9PTextView.DefaultTextSize;
-                return BoundTextSize(textSize);
-            }
-        }
+        float BoundTextSize(double textSize) => BoundTextSize((float)textSize);
 
         float BoundTextSize(float textSize)
         {

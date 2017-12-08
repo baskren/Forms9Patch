@@ -78,17 +78,22 @@ namespace Forms9Patch
                             }
                         }
                         else if (key.StartsWith("uri:", StringComparison.Ordinal))
-                            path = await PCL.Utils.DownloadCache.DownloadAsync(key.Substring(4));
-                        else if (key.StartsWith("file:", StringComparison.Ordinal))
-                            path = key.Substring(5);
-                        else
-                            throw new InvalidDataContractException();
-                        if (path != null)
                         {
-                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                            path = await PCL.Utils.DownloadCache.DownloadAsync(key.Substring(4));
+                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))  // works for Windows ... not Android
                             using (var skStream = new SKManagedStream(stream))
                                 skBitmap = SKBitmap.Decode(skStream);
                         }
+                        else if (key.StartsWith("file:", StringComparison.Ordinal))  // does this work for Windows or iOS?
+                        {
+                            //path = key.Substring(5);
+                            string file = ((FileImageSource)imageSource).File;
+                            if (File.Exists(file))
+                                skBitmap = SKBitmap.Decode(file);
+
+                        }
+                        else
+                            throw new InvalidDataContractException();
                         if (skBitmap != null)
                         {
                             f9pBitmap = F9PBitmap.Create(skBitmap, key);

@@ -188,6 +188,19 @@ namespace Forms9Patch.iOS
                 }
                 tmpWd = cgSize.Width;
 
+
+
+                var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
+                if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
+                {
+                    ControlFont = ControlFont.WithSize(syncFontSize);
+                    cgSize = LabelSize(widthConstraint, syncFontSize);
+                    tmpWd = cgSize.Width;
+                    tmpHt = cgSize.Height;
+                }
+
+
+
                 // Control.BackgroundColor = UIColor.FromRGBA(0, 0, 255, 100);
 
                 if (Element.AutoFit == AutoFit.Width)
@@ -264,21 +277,6 @@ namespace Forms9Patch.iOS
                     //    System.Diagnostics.Debug.WriteLine("C gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
                 }
 
-                /*
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                {
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.Leading=[" + ControlFont.Leading + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.LineHeight=[" + ControlFont.LineHeight + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.Ascender=[" + ControlFont.Ascender + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.Descender=[" + ControlFont.Descender + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.CapHeight=[" + ControlFont.CapHeight + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.PointSize=[" + ControlFont.PointSize + "]");
-                    System.Diagnostics.Debug.WriteLine("\tControlFont.xHeight=[" + ControlFont.xHeight + "]");
-                }
-
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("0 Controlines=[" + ControlLines + "]");
-                */
                 if (Element.AutoFit == AutoFit.None && Element.Lines == 0)
                 {
                     //var cgLines = Math.Ceiling(cgSize.Height / ControlFont.LineHeight);
@@ -302,38 +300,41 @@ namespace Forms9Patch.iOS
                 //    System.Diagnostics.Debug.WriteLine("3 Controlines=[" + ControlLines + "]");
                 firstRun = false;
 
-                /*
-                if (gap > 0 && height > 0)
-                {
 
-                    //if (heightConstraint < double.MaxValue / 3.0)
+
+                if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
+                {
+                    //System.Diagnostics.Debug.WriteLine("Control Property Changed");
+                    Control.Hidden = true;
+                    Control.Lines = ControlLines;
+                    Control.LineBreakMode = ControlLineBreakMode;
+
+                    Control.AdjustsFontSizeToFitWidth = false;
+                    Control.ClearsContextBeforeDrawing = true;
+                    Control.ContentMode = UIViewContentMode.Redraw;
+
+                    Control.Font = ControlFont;
+
+                    if (ControlAttributedText != null)
+                        Control.AttributedText = ControlAttributedText;
+                    else
+                        Control.Text = ControlText;
+
+                    if (!_delayingActualFontSizeUpdate)
                     {
-                        switch (Element.VerticalTextAlignment)
+                        _delayingActualFontSizeUpdate = true;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
                         {
-                            case TextAlignment.Center:
-                                y = gap / 2.0;
-                                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
-                                    || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                    System.Diagnostics.Debug.WriteLine("CENTER");
-                                break;
-                            case TextAlignment.End:
-                                y = gap;
-                                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;"))
-                                    || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                                    System.Diagnostics.Debug.WriteLine("END");
-                                break;
-                        }
+                            _delayingActualFontSizeUpdate = false;
+                            if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+                                Element.OptimalFontSize = ControlFontPointSize;
+                            return false;
+                        });
                     }
-                    //Control.Frame = new CGRect(0, y, widthConstraint, height);  // doesn't work anymore but Control.Center does!
+                    Control.Hidden = false;
+                }
 
-                }
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                {
-                    System.Diagnostics.Debug.WriteLine("ControlFont.LineHeight=[" + ControlFont.LineHeight + "] Control.Lines=[" + Control.Lines + "]");
-                    System.Diagnostics.Debug.WriteLine("Controlines=[" + ControlLines + "] gap=[" + gap + "]");
-                    System.Diagnostics.Debug.WriteLine("xA");
-                }
-                */
+
 
                 if (Element.LineBreakMode == LineBreakMode.NoWrap && ControlLines > 0)
                 {
@@ -413,47 +414,6 @@ namespace Forms9Patch.iOS
                             break;
                     }
                 }
-                /*
-                else
-                {
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        System.Diagnostics.Debug.WriteLine("xE");
-
-                }
-                */
-
-
-                if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
-                {
-                    //System.Diagnostics.Debug.WriteLine("Control Property Changed");
-                    Control.Hidden = true;
-                    Control.Lines = ControlLines;
-                    Control.LineBreakMode = ControlLineBreakMode;
-
-                    Control.AdjustsFontSizeToFitWidth = false;
-                    Control.ClearsContextBeforeDrawing = true;
-                    Control.ContentMode = UIViewContentMode.Redraw;
-
-                    Control.Font = ControlFont;
-
-                    if (ControlAttributedText != null)
-                        Control.AttributedText = ControlAttributedText;
-                    else
-                        Control.Text = ControlText;
-
-                    if (!_delayingActualFontSizeUpdate)
-                    {
-                        _delayingActualFontSizeUpdate = true;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
-                        {
-                            _delayingActualFontSizeUpdate = false;
-                            if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                                Element.OptimalFontSize = ControlFontPointSize;
-                            return false;
-                        });
-                    }
-                    Control.Hidden = false;
-                }
 
 
                 LastDesiredSize = new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
@@ -471,6 +431,16 @@ namespace Forms9Patch.iOS
         }
         bool _delayingActualFontSizeUpdate;
 
+        void UpdateSynchronizedFontSize()
+        {
+            var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
+            var syncFont = ControlFont.WithSize(syncFontSize);
+            if (syncFont != ControlFont)
+            {
+                Invalid = true;
+                GetDesiredSize(LastWidthConstraint, LastHeightContraint);
+            }
+        }
         #endregion
 
 
@@ -697,6 +667,8 @@ namespace Forms9Patch.iOS
                 Invalid = true;
                 LayoutSubviews();
             }
+            else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
+                UpdateSynchronizedFontSize();
         }
 
         void UpdateFont()

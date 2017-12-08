@@ -723,50 +723,50 @@ namespace Forms9Patch
             button.ActualFontSizeChanged -= Button_OptimalFontSizeChanged;
         }
 
-    
+
         void UpdateChildrenPadding()
         {
             //if (Orientation == StackOrientation.Horizontal)
             //{
-                foreach (MaterialButton child in Children)
-                    child.Padding = Padding;
-                /*
-            }
-            else
+            foreach (MaterialButton child in Children)
+                child.Padding = Padding;
+            /*
+        }
+        else
+        {
+
+            foreach (ILayout child in Children)
             {
-
-                foreach (ILayout child in Children)
+                double plaformTweek = 0;
+                switch (Device.OS)
+                //switch (Device.RuntimePlatform)
                 {
-                    double plaformTweek = 0;
-                    switch (Device.OS)
-                    //switch (Device.RuntimePlatform)
-                    {
-                        //case Device.iOS:
-                        case TargetPlatform.iOS:
-                            plaformTweek = 0.1;
-                            break;
-                        //case Device.Android:
-                        case TargetPlatform.Android:
-                            plaformTweek = -1;
-                            break;
-                    }
-                    //TODO: Can we elimenate "platformTweek"?
-                    switch (child.ExtendedElementShape)
-                    {
-                        case ExtendedElementShape.SegmentStart:
-                            child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
-                            break;
-                        case ExtendedElementShape.SegmentMid:
-                            child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
-                            break;
-                        default:
-                            child.Padding = Padding;
-                            break;
-                    }
+                    //case Device.iOS:
+                    case TargetPlatform.iOS:
+                        plaformTweek = 0.1;
+                        break;
+                    //case Device.Android:
+                    case TargetPlatform.Android:
+                        plaformTweek = -1;
+                        break;
                 }
-
+                //TODO: Can we elimenate "platformTweek"?
+                switch (child.ExtendedElementShape)
+                {
+                    case ExtendedElementShape.SegmentStart:
+                        child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
+                        break;
+                    case ExtendedElementShape.SegmentMid:
+                        child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
+                        break;
+                    default:
+                        child.Padding = Padding;
+                        break;
+                }
             }
-            */
+
+        }
+        */
         }
         #endregion
 
@@ -1016,17 +1016,25 @@ namespace Forms9Patch
             }
         }
 
+        static int _iterations;
         private void Button_OptimalFontSizeChanged(object sender, EventArgs e)
         {
+            int iteration = _iterations++;
             var minOptimalFontSize = double.MaxValue;
             foreach (var segment in _segments)
             {
-                if (segment.MaterialButton.OptimalFontSize < minOptimalFontSize)
+                var segmentOptimalFontSize = segment.MaterialButton.OptimalFontSize;
+                //System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] segmentOptimalFontSize=[" + segmentOptimalFontSize + "]");
+                if (segmentOptimalFontSize > 0 && segmentOptimalFontSize < minOptimalFontSize)
                     minOptimalFontSize = segment.MaterialButton.OptimalFontSize;
             }
-                    foreach (var segment in _segments)
-                        ((ILabel)segment.MaterialButton).SynchronizedFontSize = minOptimalFontSize;
-                    System.Diagnostics.Debug.WriteLine("minActualFontSize=[" + minOptimalFontSize + "]");
+            if (minOptimalFontSize == double.MaxValue)
+                minOptimalFontSize = FontSize;
+            foreach (var segment in _segments)
+            {
+                ((ILabel)segment.MaterialButton).SynchronizedFontSize = minOptimalFontSize;
+                //System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] SynchronizedFontSize=[" + minOptimalFontSize + "]");
+            }
         }
 
 
@@ -1038,7 +1046,7 @@ namespace Forms9Patch
             var vt = !hz;
 
             var shadowPadding = new Thickness(0);
-            if (HasShadow && BackgroundColor.A > 0 && Children.Count>0)
+            if (HasShadow && BackgroundColor.A > 0 && Children.Count > 0)
                 shadowPadding = ShapeBase.ShadowPadding(this, HasShadow);
 
             double requestHeight = shadowPadding.VerticalThickness;
@@ -1046,7 +1054,7 @@ namespace Forms9Patch
             double minHeight = shadowPadding.VerticalThickness;
             double minWidth = shadowPadding.HorizontalThickness;
 
-            if (hz )//&& (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint)) )
+            if (hz)//&& (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint)) )
             {
                 // we have all the width in the world ... but what's the height?
                 foreach (var child in Children)
