@@ -90,7 +90,13 @@ namespace Forms9Patch
                             string file = ((FileImageSource)imageSource).File;
                             if (File.Exists(file))
                                 skBitmap = SKBitmap.Decode(file);
-
+#if __DROID__
+                            else
+                            {
+                                var nativeBitmap = Xamarin.Forms.Forms.Context.Resources.GetBitmap(file);
+                                skBitmap = nativeBitmap.ToSKBitmap();
+                            }
+#endif
                         }
                         else
                             throw new InvalidDataContractException();

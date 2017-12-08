@@ -156,7 +156,6 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
-    <Compile Include="Extensions\Debug.cs" />
     <Compile Include="Extensions\FormattedStringExtensions.cs" />
     <Compile Include="Extensions\LineBreakModeExtension.cs" />
     <Compile Include="Extensions\MeasureSpecFactory.cs" />
@@ -219,7 +218,6 @@
     <Folder Include="ListView\Drawables\" />
     <Folder Include="SkiaElements\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Drawables\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
