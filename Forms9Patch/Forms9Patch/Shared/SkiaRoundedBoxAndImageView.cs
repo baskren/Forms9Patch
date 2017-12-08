@@ -887,14 +887,9 @@ namespace Forms9Patch
                     StoreLayoutProperties();
                 }
             }
-#if __IOS__
-            base.DrawInSurface(surface, info);
-#elif __DROID__
-            base.OnDraw(surface, info);
-#elif WINDOWS_UWP
+
+#if WINDOWS_UWP
             base.OnPaintSurface(e);
-#else
-            base.DrawSomethingHere();
 #endif
 
             _actualSizeValid = true;
