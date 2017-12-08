@@ -928,7 +928,7 @@ namespace Forms9Patch
         /// <summary>
         /// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
         /// </summary>
-        public void UpdateElements([System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
+        public void UpdateElements()
         {
             if (this is ImageButton)
                 return;
@@ -942,7 +942,7 @@ namespace Forms9Patch
 
             if (IsEnabled)
             {
-                System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "] _label.TextColor=[" + enabledLabelColor + "]");
+                //System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "] _label.TextColor=[" + enabledLabelColor + "]");
 
                 _label.TextColor = enabledLabelColor;
 

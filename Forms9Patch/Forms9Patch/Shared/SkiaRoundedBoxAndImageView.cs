@@ -22,6 +22,7 @@ namespace Forms9Patch.iOS
 #elif __DROID__
 using SkiaSharp.Views.Android;
 using Android.Sax;
+using Xamarin.Forms;
 
 namespace Forms9Patch.Droid
 {
@@ -307,6 +308,7 @@ namespace Forms9Patch
                 //|| e.PropertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName  // Already handled by the change in location / paddiing
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
+                     || e.PropertyName == Forms9Patch.MaterialButton.SeparatorWidthProperty.PropertyName
                 )
             {
                 _validLayout = false;
@@ -664,7 +666,7 @@ namespace Forms9Patch
                 var outlineColor = OutlineColor;
                 var elementShape = ExtendedElementShape;
 
-                double separatorWidth = materialButton == null || elementShape == ExtendedElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth);
+                float separatorWidth = FormsGestures.Display.Scale * (materialButton == null || elementShape == ExtendedElementShape.Rectangle ? 0 : materialButton.SeparatorWidth < 0 ? outlineWidth : Math.Max(0, materialButton.SeparatorWidth));
 
                 bool drawOutline = DrawOutline;
                 bool drawImage = DrawImage;
@@ -829,7 +831,7 @@ namespace Forms9Patch
                         {
                             Style = SKPaintStyle.Stroke,
                             Color = outlineColor.ToSKColor(),
-                            StrokeWidth = outlineWidth,
+                            StrokeWidth = separatorWidth,
                             IsAntialias = true,
                             //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
                         };

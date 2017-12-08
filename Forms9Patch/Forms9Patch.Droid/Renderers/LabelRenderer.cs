@@ -448,7 +448,7 @@ namespace Forms9Patch.Droid
                     else
                         Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
                 });
-            System.Diagnostics.Debug.WriteLine("Color [" + Element.TextColor + "]");
+            //System.Diagnostics.Debug.WriteLine("Color [" + Element.TextColor + "]");
         }
 
         void UpdateFont()

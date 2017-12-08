@@ -16,7 +16,7 @@ namespace Forms9PatchDemo.Pages
                 GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
                 BackgroundColor = Color.NavajoWhite,
                 OutlineRadius = 5,
-
+                OutlineWidth = 0,
                 Segments =
                 {
                     new Forms9Patch.Segment { Text = "Start"},
@@ -31,6 +31,9 @@ namespace Forms9PatchDemo.Pages
             var hasOutlineSwitch = new Switch();
             hasOutlineSwitch.Toggled += (sender, e) => segementControl.OutlineWidth = e.Value ? 1 : 0;
 
+            var hasSeparatorsSwitch = new Switch();
+            hasSeparatorsSwitch.Toggled += (sender, e) => segementControl.SeparatorWidth = e.Value ? 1 : 0;
+
 
             Padding = 20;
             Content = new StackLayout
@@ -40,6 +43,8 @@ namespace Forms9PatchDemo.Pages
                     hasShadowSwitch,
                     new Label { Text = "HasOutline"},
                     hasOutlineSwitch,
+                    new Forms9Patch.Label("HasSeparators"),
+                    hasSeparatorsSwitch,
 
                     segementControl,
                 }
