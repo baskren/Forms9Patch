@@ -928,8 +928,10 @@ namespace Forms9Patch
         /// <summary>
         /// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
         /// </summary>
-        public void UpdateElements()
+        public void UpdateElements([System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         {
+            if (this is ImageButton)
+                return;
             _noUpdate = true;
 
             var enabledLabelColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
@@ -940,6 +942,8 @@ namespace Forms9Patch
 
             if (IsEnabled)
             {
+                System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "] _label.TextColor=[" + enabledLabelColor + "]");
+
                 _label.TextColor = enabledLabelColor;
 
                 if (IsSelected)
@@ -1445,6 +1449,7 @@ namespace Forms9Patch
                 || propertyName == DarkThemeProperty.PropertyName
                 || propertyName == ExtendedElementShapeProperty.PropertyName)
             {
+                System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
                 UpdateElements();
             }
             else if (propertyName == OrientationProperty.PropertyName)

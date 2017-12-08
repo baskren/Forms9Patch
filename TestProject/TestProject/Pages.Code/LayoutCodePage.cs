@@ -270,6 +270,7 @@ namespace Forms9PatchDemo
             Master = new ContentPage
             {
                 Title = "Layout Settings",
+                BackgroundColor = Color.LightGray,
                 Content = new ScrollView
                 {
                     Content = new StackLayout
@@ -322,7 +323,6 @@ namespace Forms9PatchDemo
             Detail = new ContentPage
             {
                 Title = "ABSOLUTE",
-                BackgroundColor = Color.LightGray,
                 Content = GenerateAbsoluteLayout()
             };
             SetLayoutProperties();

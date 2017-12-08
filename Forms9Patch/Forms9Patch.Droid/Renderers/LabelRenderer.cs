@@ -154,7 +154,7 @@ namespace Forms9Patch.Droid
 
 
             _fittedFontSize = tmpFontSize = BoundTextSize(tmpFontSize);
-            System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] A FittedFontSize=[" + _fittedFontSize + "]");
+            //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] A FittedFontSize=[" + _fittedFontSize + "]");
 
             var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
             if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
@@ -166,12 +166,12 @@ namespace Forms9Patch.Droid
             if (!_delayingActualFontSizeUpdate && _fittedFontSize != syncFontSize)
             {
                 _delayingActualFontSizeUpdate = true;
-                System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] C FittedFontSize=[" + _fittedFontSize + "]");
+                //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] C FittedFontSize=[" + _fittedFontSize + "]");
                 Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
                 {
                     if (Element != null && Control != null)
                         Element.OptimalFontSize = _fittedFontSize;
-                    System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] OptimalFontSize=[" + _fittedFontSize + "]");
+                    //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] OptimalFontSize=[" + _fittedFontSize + "]");
                     _delayingActualFontSizeUpdate = false;
                     return false;
                 });
@@ -426,8 +426,10 @@ namespace Forms9Patch.Droid
             Layout();
         }
 
+        //void UpdateColor([System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         void UpdateColor()
         {
+            //System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "]");
             if (_currentControlState.TextColor == Element.TextColor)
                 return;
             _currentControlState.TextColor = Element.TextColor;
@@ -446,6 +448,7 @@ namespace Forms9Patch.Droid
                     else
                         Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
                 });
+            System.Diagnostics.Debug.WriteLine("Color [" + Element.TextColor + "]");
         }
 
         void UpdateFont()
