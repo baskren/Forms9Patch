@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    internal interface IButtonState : IBackground, ILabel
+    public interface IButtonState : IBackground, ILabel
     {
         Forms9Patch.Image IconImage { get; set; }
         string IconText { get; set; }

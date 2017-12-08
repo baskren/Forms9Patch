@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Forms9Patch
 {
     interface IImage : IShape
-
     {
         /// <summary>
         /// 

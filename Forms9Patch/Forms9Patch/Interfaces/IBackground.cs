@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    interface IBackground : IShape
+    public interface IBackground : IShape
     {
         Forms9Patch.Image BackgroundImage { get; set; }
     }

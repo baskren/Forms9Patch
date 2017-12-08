@@ -2,8 +2,8 @@
 
 namespace Forms9Patch
 {
-	enum ExtendedElementShape
-	{
+    public enum ExtendedElementShape
+    {
         Rectangle = 0,
         Square,
         Circle,

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Forms9Patch
 {
-    internal interface IButton :  Xamarin.Forms.IButtonController, IButtonState
+    public interface IButton : Xamarin.Forms.IButtonController, IButtonState
     {
         Xamarin.Forms.Color SelectedTextColor { get; set; }
 

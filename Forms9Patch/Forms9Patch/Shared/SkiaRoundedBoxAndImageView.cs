@@ -21,6 +21,7 @@ namespace Forms9Patch.iOS
 
 #elif __DROID__
 using SkiaSharp.Views.Android;
+using Android.Sax;
 
 namespace Forms9Patch.Droid
 {
@@ -417,6 +418,7 @@ namespace Forms9Patch
             var minWidth = (sourceAspect > 1 ? sourceAspect : 1);
             var minHeight = (sourceAspect > 1 ? 1 : 1 / sourceAspect);
 
+
             if (HasShadow && (DrawFill || DrawImage))
             {
                 var shadowPadding = ShapeBase.ShadowPadding(_roundedBoxElement);
@@ -433,6 +435,14 @@ namespace Forms9Patch
                 minWidth += outlineWidth;
                 minHeight += outlineWidth;
             }
+
+#if __DROID__
+            reqWidth *= Forms9Patch.Display.Scale;
+            reqHeight *= Forms9Patch.Display.Scale;
+            minWidth *= Forms9Patch.Display.Scale;
+            minHeight *= Forms9Patch.Display.Scale;
+#endif
+
             var reqSize = new Xamarin.Forms.Size(reqWidth, reqHeight);
             var minSize = new Xamarin.Forms.Size(minWidth, minHeight);
             return new Xamarin.Forms.SizeRequest(reqSize, minSize);

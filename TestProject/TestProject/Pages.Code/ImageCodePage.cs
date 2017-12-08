@@ -4,8 +4,8 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public class ImageCodePage : MasterDetailPage
-	{
+    public class ImageCodePage : MasterDetailPage
+    {
         #region Shape Strings
         static string Rectangle = "▭";
         static string Square = "□";
@@ -43,7 +43,8 @@ namespace Forms9PatchDemo
             Value = 2
         };
 
-        Forms9Patch.Image f9pImage = new Forms9Patch.Image {
+        Forms9Patch.Image f9pImage = new Forms9Patch.Image
+        {
             Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.redGridBox"),
         };
 
@@ -66,7 +67,7 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment("EXPAND")
                 },
             GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-            Lines=1,
+            Lines = 1,
             AutoFit = Forms9Patch.AutoFit.Width
         };
         Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
@@ -83,16 +84,17 @@ namespace Forms9PatchDemo
         };
         #endregion
 
-        public ImageCodePage ()
-		{
+        public ImageCodePage()
+        {
             Title = "ImageCodePage";
+            IsPresented = true;
 
             #region Local Elements
             hzOptionSegmentedControl.SelectIndex(3);
             hzOptionSegmentedControl.SegmentTapped += HzOptionSegmentedControl_SegmentTapped;
 
             vtOptionSegmentedControl.SelectIndex(3);
-            vtOptionSegmentedControl.SegmentTapped += VtOptionSegmentedControl_SegmentTapped; 
+            vtOptionSegmentedControl.SegmentTapped += VtOptionSegmentedControl_SegmentTapped;
 
 
             var heightRequestSlider = new Slider(-1, 300, -1);
@@ -111,7 +113,7 @@ namespace Forms9PatchDemo
                 }
             };
             fillSegmentedControl.SelectIndex(3);
-            fillSegmentedControl.SegmentTapped += FillSegmentedControl_SegmentTapped; 
+            fillSegmentedControl.SegmentTapped += FillSegmentedControl_SegmentTapped;
 
             Forms9Patch.MaterialSegmentedControl shapesSelector = new Forms9Patch.MaterialSegmentedControl
             {
@@ -125,7 +127,7 @@ namespace Forms9PatchDemo
                 }
             };
             shapesSelector.SelectIndex(0);
-            shapesSelector.SegmentTapped += ShapesSelector_SegmentTapped; 
+            shapesSelector.SegmentTapped += ShapesSelector_SegmentTapped;
 
             var outlineWidthSlider = new Xamarin.Forms.Slider
             {
@@ -134,10 +136,10 @@ namespace Forms9PatchDemo
                 Value = 2
             };
             outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0 / Forms9Patch.Display.Scale));
-            outlineWidthSlider.ValueChanged += OutlineWidthSlider_ValueChanged; 
+            outlineWidthSlider.ValueChanged += OutlineWidthSlider_ValueChanged;
 
             outlineRadiusSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
-            outlineRadiusSlider.ValueChanged += OutlineRadiusSlider_ValueChanged; 
+            outlineRadiusSlider.ValueChanged += OutlineRadiusSlider_ValueChanged;
 
             var shapeAttributesSelector = new Forms9Patch.MaterialSegmentedControl
             {
@@ -170,7 +172,7 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon"),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble"),
                     new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton")
-                    
+
                 }
             };
             backgroundImageSelector.SelectIndex(1);
@@ -288,6 +290,7 @@ namespace Forms9PatchDemo
                         heightRequestSlider,
 
 
+                            new Xamarin.Forms.Label { Text="Display.Scale=["+Forms9Patch.Display.Scale+"]" }
 
 
                     },
@@ -297,35 +300,42 @@ namespace Forms9PatchDemo
             Detail = new ContentPage
             {
                 Title = "Images",
-                Content = new StackLayout
+
+                Content = new ScrollView
                 {
-                    Children =
+                    Content = new StackLayout
                     {
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
-                        new Forms9Patch.Label("Forms9Patch.Image:"),
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
-                        f9pImage,
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
-                        new Forms9Patch.Label("Xamarin.Forms.Image:"),
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
-                        xamarinImage,
-                        new BoxView { Color=Color.Black, HeightRequest = 1},
+                        Children =
+                        {
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                            new Forms9Patch.Label("Forms9Patch.Image:"),
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                            f9pImage,
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                            new Forms9Patch.Label("Xamarin.Forms.Image:"),
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                            xamarinImage,
+                            new BoxView { Color=Color.Black, HeightRequest = 1},
+                        }
                     }
                 }
             };
+
             #endregion
+
         }
 
+        #region Event Handlers
         private void AntiAliasSwitch_Toggled(object sender, ToggledEventArgs e)
         {
             f9pImage.AntiAlias = e.Value;
         }
 
-        #region Event Handlers
+
         private void CapsUnitsSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
         {
-            if (e.Index==0)
+            if (e.Index == 0)
             {
                 capsInsetsLeftSlider.Maximum = 200;
                 capsInsetsLeftSlider.Value = 0;
@@ -512,7 +522,7 @@ namespace Forms9PatchDemo
         {
             double scale = capsUnitsSegmentedControl.IsIndexSelected(0) ? 1 : 0.01; // pixelCapsSwitch.IsToggled ? 1 : 0.01;
             var capsInset = new Thickness(capsInsetsLeftSlider.Value * scale, capsInsetsTopSlider.Value * scale, capsInsetsRightSlider.Value * scale, capsInsetsBottomSlider.Value * scale);
-            System.Diagnostics.Debug.WriteLine("CapsInset=["+Forms9Patch.ThicknessExtension.Description(capsInset)+"]");
+            System.Diagnostics.Debug.WriteLine("CapsInset=[" + Forms9Patch.ThicknessExtension.Description(capsInset) + "]");
             f9pImage.CapInsets = capsInset;
         }
         #endregion

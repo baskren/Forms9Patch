@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    interface IElement
+    public interface IElement
     {
         /// <summary>
         /// Incremental instance id (starting at zero, increasing by one for each new instance)

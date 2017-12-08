@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    internal interface ILabel : ILabelStyle//IFontElement //TODO:, IElement
+    public interface ILabel : ILabelStyle, IElement
     {
         string Text { get; set; }
         string HtmlText { get; set; }

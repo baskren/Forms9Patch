@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
-    interface ILayout : IBackground
+    public interface ILayout : IBackground
     {
         Xamarin.Forms.Thickness Padding { get; set; }
         bool IgnoreChildren { get; set; }

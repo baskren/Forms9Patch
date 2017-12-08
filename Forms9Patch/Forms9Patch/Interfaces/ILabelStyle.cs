@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    interface ILabelStyle : IFontElement
+    public interface ILabelStyle : IFontElement
     {
         Color TextColor { get; set; }
 

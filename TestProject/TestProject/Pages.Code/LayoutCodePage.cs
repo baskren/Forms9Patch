@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Forms9PatchDemo
 {
@@ -24,42 +25,44 @@ namespace Forms9PatchDemo
         Forms9Patch.SliderStepSizeEffect capsInsetsTStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
         Forms9Patch.SliderStepSizeEffect capsInsetsBStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
 
-        Switch pixelCapsSwitch = new Switch();
+        //Switch pixelCapsSwitch = new Switch();
 
-        Forms9Patch.AbsoluteLayout absoluteLayout = new Forms9Patch.AbsoluteLayout
+        /*
+        */
+
+
+        View Content => ((ContentPage)Detail).Content;
+
+        Forms9Patch.MaterialSegmentedControl hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
         {
-            BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.redGridBox"),
-        };
-        Forms9Patch.Frame frame = new Forms9Patch.Frame
-        {
-            BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.redGridBox"),
-            Content = new Forms9Patch.Label("CONTENT") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment=TextAlignment.Center, FontAttributes = FontAttributes.Bold },
-        };
-        Forms9Patch.Grid grid = new Forms9Patch.Grid
-        {
-            BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.redGridBox"),
-            ColumnDefinitions = new ColumnDefinitionCollection
+            Segments =
                 {
-                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
-                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
-                },
-            RowDefinitions = new RowDefinitionCollection
-                {
-                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Star)},
-                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Star)},
+                    new Forms9Patch.Segment("START"),
+                    new Forms9Patch.Segment("CENTER"),
+                    new Forms9Patch.Segment("END"),
+                    new Forms9Patch.Segment("FILL")
                 },
         };
-        Forms9Patch.RelativeLayout relativeLayout = new Forms9Patch.RelativeLayout
+        Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
         {
-            BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.redGridBox"),
-        };
-        Forms9Patch.StackLayout stackLayout = new Forms9Patch.StackLayout
-        {
-            BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.redGridBox"),
-            Children =
+            Segments =
                 {
-                    new Forms9Patch.Label("Child 1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment=TextAlignment.Center, FontAttributes=FontAttributes.Bold },
-                    new Forms9Patch.Label("Child 2") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment=TextAlignment.Center, FontAttributes=FontAttributes.Bold }
+                    new Forms9Patch.Segment("START"),
+                    new Forms9Patch.Segment("CENTER"),
+                    new Forms9Patch.Segment("END"),
+                    new Forms9Patch.Segment("FILL")
+                }
+        };
+        Slider heightRequestSlider = new Slider(-1, 300, -1);
+        Forms9Patch.MaterialSegmentedControl fillSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+                {
+                    //new Forms9Patch.Segment("NONE"),
+                    new Forms9Patch.Segment("TILE"),
+                    new Forms9Patch.Segment("ASPECTFILL"),
+                    new Forms9Patch.Segment("ASPECTFIT"),
+                    new Forms9Patch.Segment("FILL")
                 }
         };
 
@@ -69,58 +72,9 @@ namespace Forms9PatchDemo
             Maximum = 15,
             Value = 2
         };
-
-
-        public LayoutCodePage()
+        Forms9Patch.MaterialSegmentedControl shapesSelector = new Forms9Patch.MaterialSegmentedControl
         {
-            var hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
-                {
-                    new Forms9Patch.Segment("START"),
-                    new Forms9Patch.Segment("CENTER"),
-                    new Forms9Patch.Segment("END"),
-                    new Forms9Patch.Segment("FILL")
-                },
-            };
-            hzOptionSegmentedControl.SelectIndex(3);
-            hzOptionSegmentedControl.SegmentTapped += HzOptionSegmentedControl_SegmentTapped;
-
-            var vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
-                {
-                    new Forms9Patch.Segment("START"),
-                    new Forms9Patch.Segment("CENTER"),
-                    new Forms9Patch.Segment("END"),
-                    new Forms9Patch.Segment("FILL")
-                }
-            };
-            vtOptionSegmentedControl.SelectIndex(3);
-            vtOptionSegmentedControl.SegmentTapped += VtOptionSegmentedControl_SegmentTapped;
-
-
-            var heightRequestSlider = new Slider(-1, 300, -1);
-            heightRequestSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
-            heightRequestSlider.ValueChanged += HeightRequestSlider_ValueChanged;
-
-            var fillSegmentedControl = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
-                {
-                    //new Forms9Patch.Segment("NONE"),
-                    new Forms9Patch.Segment("TILE"),
-                    new Forms9Patch.Segment("ASPECTFILL"),
-                    new Forms9Patch.Segment("ASPECTFIT"),
-                    new Forms9Patch.Segment("FILL")
-                }
-            };
-            fillSegmentedControl.SelectIndex(3);
-            fillSegmentedControl.SegmentTapped += FillSegmentedControl_SegmentTapped;
-
-            Forms9Patch.MaterialSegmentedControl shapesSelector = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
+            Segments =
                 {
                 new Forms9Patch.Segment { Text = Rectangle },
                 new Forms9Patch.Segment { Text = Square },
@@ -128,62 +82,96 @@ namespace Forms9PatchDemo
                 new Forms9Patch.Segment { Text = Ellipse },
                 new Forms9Patch.Segment { Text = "OBROUND" }
                 }
-            };
-            shapesSelector.SelectIndex(0);
-            shapesSelector.SegmentTapped += ShapesSelector_SegmentTapped;
-
-            outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0 / Forms9Patch.Display.Scale));
-            outlineWidthSlider.ValueChanged += OutlineWidthSlider_ValueChanged;
-
-            var outlineRadiusSlider = new Xamarin.Forms.Slider
-            {
-                Minimum = 0,
-                Maximum = 15,
-                Value = 0
-            };
-            outlineRadiusSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
-            outlineRadiusSlider.ValueChanged += OutlineRadiusSlider_ValueChanged;
-
-            var shapeAttributesSelector = new Forms9Patch.MaterialSegmentedControl
-            {
-                GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-                Segments =
+        };
+        Forms9Patch.MaterialSegmentedControl shapeAttributesSelector = new Forms9Patch.MaterialSegmentedControl
+        {
+            GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
+            Segments =
                 {
                     new Forms9Patch.Segment("BACKGROUND"),
                     new Forms9Patch.Segment("OUTLINE"),
                     new Forms9Patch.Segment("SHADOW"),
                     new Forms9Patch.Segment("INVERTED")
                 }
-            };
-            shapeAttributesSelector.SegmentTapped += ShapeAttributesSelector_SegmentTapped;
-
-            var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
-            {
-                Segments =
+        };
+        Forms9Patch.MaterialSegmentedControl backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
+        {
+            HeightRequest = 40,
+            HasTightSpacing = true,
+            HorizontalTextAlignment = TextAlignment.Center,
+            VerticalTextAlignment = TextAlignment.Center,
+            TintIcon = false,
+            Segments =
                 {
-                    new Forms9Patch.Segment("NONE"),
-                    new Forms9Patch.Segment("redGridBox"),
-                    new Forms9Patch.Segment("button"),
-                    new Forms9Patch.Segment("cat"),
-                    new Forms9Patch.Segment("balloons"),
-                    new Forms9Patch.Segment("image"),
-                    new Forms9Patch.Segment("redribbon"),
-                    new Forms9Patch.Segment("bubble"),
-                    new Forms9Patch.Segment("bluebutton"),
+                    new Forms9Patch.Segment(""),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
+                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("cat.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
+                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("balloons.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble"),
+                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton")
                 }
-            };
+        };
+
+
+        Slider outlineRadiusSlider = new Xamarin.Forms.Slider
+        {
+            Minimum = 0,
+            Maximum = 15,
+            Value = 0
+        };
+
+        Forms9Patch.MaterialSegmentedControl capsUnitsSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        {
+            Segments =
+            {
+                new Forms9Patch.Segment("PIXL"),
+                new Forms9Patch.Segment("%")
+            },
+        };
+
+        Switch antiAliasSwitch = new Switch();
+
+
+        public LayoutCodePage()
+        {
+            hzOptionSegmentedControl.SelectIndex(3);
+            hzOptionSegmentedControl.SegmentTapped += SetHzLayoutOptions;
+
+            vtOptionSegmentedControl.SelectIndex(3);
+            vtOptionSegmentedControl.SegmentTapped += SetVtLayoutOptions;
+
+            heightRequestSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
+            heightRequestSlider.ValueChanged += SetHeightRequest;
+
+            fillSegmentedControl.SelectIndex(3);
+            fillSegmentedControl.SegmentTapped += SetFill;
+
+            shapesSelector.SelectIndex(0);
+            shapesSelector.SegmentTapped += SetShape;
+
+            outlineWidthSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1.0 / Forms9Patch.Display.Scale));
+            outlineWidthSlider.ValueChanged += SetOutlineWidth;
+
+            outlineRadiusSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
+            outlineRadiusSlider.ValueChanged += SetOutlineRadius;
+
+            shapeAttributesSelector.SegmentTapped += SetShapeAttributes;
+
             backgroundImageSelector.SelectIndex(1);
-            backgroundImageSelector.SegmentTapped += BackgroundImageSelector_SegmentTapped;
+            backgroundImageSelector.SegmentTapped += SetBackgroundImage;
 
             capsInsetsTopSlider.Effects.Add(capsInsetsTStepSizeEffect);
-            capsInsetsTopSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
+            capsInsetsTopSlider.ValueChanged += SetCapsInsets;
             capsInsetsLeftSlider.Effects.Add(capsInsetsTStepSizeEffect);
-            capsInsetsLeftSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
+            capsInsetsLeftSlider.ValueChanged += SetCapsInsets;
             capsInsetsRightSlider.Effects.Add(capsInsetsTStepSizeEffect);
             capsInsetsRightSlider.Rotation = 180;
-            capsInsetsRightSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
+            capsInsetsRightSlider.ValueChanged += SetCapsInsets;
             capsInsetsBottomSlider.Effects.Add(capsInsetsTStepSizeEffect);
-            capsInsetsBottomSlider.ValueChanged += CapsInsetsSlider_ValueChanged;
+            capsInsetsBottomSlider.ValueChanged += SetCapsInsets;
             capsInsetsBottomSlider.Rotation = 180;
 
             var outlineGrid = new Xamarin.Forms.Grid
@@ -199,12 +187,10 @@ namespace Forms9PatchDemo
                     new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
                 },
             };
-            outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineWidth:"), 0, 0);
+            outlineGrid.Children.Add(new Forms9Patch.Label("OutlineWidth:"), 0, 0);
             outlineGrid.Children.Add(outlineWidthSlider, 0, 1);
-            outlineGrid.Children.Add(new Forms9Patch.Label("Forms9Patch.Image.OutlineRadius:"), 1, 0);
+            outlineGrid.Children.Add(new Forms9Patch.Label("OutlineRadius:"), 1, 0);
             outlineGrid.Children.Add(outlineRadiusSlider, 1, 1);
-
-            pixelCapsSwitch.Toggled += PixelCapsSwitch_Toggled;
 
             var capsInsetsGrid = new Xamarin.Forms.Grid
             {
@@ -230,63 +216,27 @@ namespace Forms9PatchDemo
             capsInsetsGrid.Children.Add(new Forms9Patch.Label("CapsInsets.Right:"), 1, 2);
             capsInsetsGrid.Children.Add(capsInsetsRightSlider, 1, 3);
 
-            var absoluteLayoutContent = new Forms9Patch.Label("CONTENT")
+            capsUnitsSegmentedControl.SelectIndex(0);
+            capsUnitsSegmentedControl.SegmentTapped += SetCapsUnits;
+            antiAliasSwitch.Toggled += SetAntiAlias;
+            var capsInsetsAndAntiAliasGrid = new Grid
             {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center ,
-                FontAttributes = FontAttributes.Bold
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto)},
+                },
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                },
             };
-            AbsoluteLayout.SetLayoutBounds(absoluteLayoutContent, new Rectangle(0.5, 0.5, 1.0, 1.0));
-            AbsoluteLayout.SetLayoutFlags(absoluteLayoutContent, AbsoluteLayoutFlags.All);
-            absoluteLayout.Children.Add(absoluteLayoutContent);
+            capsInsetsAndAntiAliasGrid.Children.Add(new Forms9Patch.Label("CapsInsets Units:"), 0, 0);
+            capsInsetsAndAntiAliasGrid.Children.Add(capsUnitsSegmentedControl, 0, 1);
+            capsInsetsAndAntiAliasGrid.Children.Add(new Forms9Patch.Label("AntiAlias:"), 1, 0);
+            capsInsetsAndAntiAliasGrid.Children.Add(antiAliasSwitch, 1, 1);
 
-            grid.Children.Add(new Forms9Patch.Label("C0R0") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 0, 0);
-            grid.Children.Add(new Forms9Patch.Label("C0R1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 0, 1);
-            grid.Children.Add(new Forms9Patch.Label("C1R0") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 1, 0);
-            grid.Children.Add(new Forms9Patch.Label("C1R1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 1, 1);
-
-            var cView = new Forms9Patch.Label("C")
-            {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
-            };
-            var lView = new Forms9Patch.Label("L")
-            {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
-            };
-            var rView = new Forms9Patch.Label("R")
-            {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
-            };
-            var tView = new Forms9Patch.Label("T")
-            {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
-            };
-            var bView = new Forms9Patch.Label("T")
-            {
-                TextColor = Color.White,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalTextAlignment = TextAlignment.Center,
-                FontAttributes = FontAttributes.Bold
-            };
-
-            relativeLayout.Children.Add(cView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToParent((parent) => parent.Height / 2));
-            relativeLayout.Children.Add(tView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToView(cView, (parent, sibling) => sibling.Y - parent.Height / 4));
-            relativeLayout.Children.Add(bView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToView(cView, (parent, sibling) => sibling.Y + parent.Height / 4));
-            relativeLayout.Children.Add(lView, Constraint.RelativeToView(cView, (parent, sibling) => sibling.X - parent.Width / 4), Constraint.RelativeToParent((parent) => parent.Height / 2));
-            relativeLayout.Children.Add(rView, Constraint.RelativeToView(cView, (parent, sibling) => sibling.X + parent.Width / 4), Constraint.RelativeToParent((parent) => parent.Height / 2));
 
 
             var layoutTypeSegmentedController = new Forms9Patch.MaterialSegmentedControl
@@ -303,15 +253,16 @@ namespace Forms9PatchDemo
             layoutTypeSegmentedController.SegmentTapped += (sender, e) =>
             {
                 Layout layout = null;
-                switch(e.Segment.Text)
+                switch (e.Segment.Text)
                 {
-                    case "ABSOLUTE": layout = absoluteLayout; break;
-                    case "FRAME": layout = frame; break;
-                    case "GRID": layout = grid; break;
-                    case "RELATIVE": layout = relativeLayout; break;
-                    case "STACK": layout = stackLayout; break;
+                    case "ABSOLUTE": layout = GenerateAbsoluteLayout(); break;
+                    case "FRAME": layout = GenerateFrame(); break;
+                    case "GRID": layout = GenerateGrid(); break;
+                    case "RELATIVE": layout = GenerateRelativeLayout(); break;
+                    case "STACK": layout = GenerateStackLayout(); break;
                 }
                 ((ContentPage)Detail).Content = layout;
+                SetLayoutProperties();
                 ((ContentPage)Detail).Title = e.Segment.Text;
             };
 
@@ -356,14 +307,14 @@ namespace Forms9PatchDemo
 
                             new BoxView { HeightRequest = 1, BackgroundColor = Color.Black },
 
-                            new Forms9Patch.Label("CapsInsets Pixels (ON) / Percent (OFF):"),
-                            pixelCapsSwitch,
+                            capsInsetsAndAntiAliasGrid,
                             capsInsetsGrid,
 
                             new BoxView { HeightRequest = 1, BackgroundColor = Color.Black },
 
                             new Forms9Patch.Label("Xamarin.Forms.VisualElement.HeightRequest:"),
                             heightRequestSlider,
+                            new Xamarin.Forms.Label { Text="Display.Scale=["+Forms9Patch.Display.Scale+"]" }
                         },
                     },
                 }
@@ -371,15 +322,25 @@ namespace Forms9PatchDemo
             Detail = new ContentPage
             {
                 Title = "ABSOLUTE",
-                Content = absoluteLayout
+                BackgroundColor = Color.LightGray,
+                Content = GenerateAbsoluteLayout()
             };
+            SetLayoutProperties();
 
-
+            IsPresented = true;
+            MasterBehavior = MasterBehavior.Default;
         }
 
-        private void PixelCapsSwitch_Toggled(object sender, ToggledEventArgs e)
+        void SetAntiAlias(object sender = null, ToggledEventArgs e = null)
         {
-            if (e.Value)
+            if (((Forms9Patch.ILayout)Content).BackgroundImage != null)
+                ((Forms9Patch.ILayout)Content).BackgroundImage.AntiAlias = antiAliasSwitch.IsToggled;
+        }
+
+
+        void SetCapsUnits(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
+        {
+            if (capsUnitsSegmentedControl.IsIndexSelected(0))
             {
                 capsInsetsLeftSlider.Maximum = 200;
                 capsInsetsLeftSlider.Value = 0;
@@ -401,178 +362,351 @@ namespace Forms9PatchDemo
                 capsInsetsBottomSlider.Maximum = 100;
                 capsInsetsBottomSlider.Value = 0;
             }
+            SetCapsInsets();
         }
 
-        private void HzOptionSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetHzLayoutOptions(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
+            var text = hzOptionSegmentedControl.SelectedSegments.First().Text;
             var layoutOption = LayoutOptions.Fill;
-            if (e.Segment.Text == "START")
+            if (text == "START")
                 layoutOption = LayoutOptions.Start;
-            else if (e.Segment.Text == "CENTER")
+            else if (text == "CENTER")
                 layoutOption = LayoutOptions.Center;
-            else if (e.Segment.Text == "END")
+            else if (text == "END")
                 layoutOption = LayoutOptions.End;
+            Content.HorizontalOptions = layoutOption;
+            /*
             absoluteLayout.HorizontalOptions = layoutOption;
             frame.HorizontalOptions = layoutOption;
             grid.HorizontalOptions = layoutOption;
             relativeLayout.HorizontalOptions = layoutOption;
             stackLayout.HorizontalOptions = layoutOption;
+            */
         }
 
-        private void VtOptionSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetVtLayoutOptions(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
+            var text = vtOptionSegmentedControl.SelectedSegments.First().Text;
             var layoutOption = LayoutOptions.Fill;
-            if (e.Segment.Text == "START")
+            if (text == "START")
                 layoutOption = LayoutOptions.Start;
-            else if (e.Segment.Text == "CENTER")
+            else if (text == "CENTER")
                 layoutOption = LayoutOptions.Center;
-            else if (e.Segment.Text == "END")
+            else if (text == "END")
                 layoutOption = LayoutOptions.End;
+            Content.VerticalOptions = layoutOption;
+            /*
             absoluteLayout.VerticalOptions = layoutOption;
             frame.VerticalOptions = layoutOption;
             grid.VerticalOptions = layoutOption;
             relativeLayout.VerticalOptions = layoutOption;
             stackLayout.VerticalOptions = layoutOption;
+            */
         }
 
-        private void HeightRequestSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        void SetHeightRequest(object sender = null, ValueChangedEventArgs args = null)
         {
+            Content.HeightRequest = heightRequestSlider.Value;
+            /*
             absoluteLayout.HeightRequest = e.NewValue;
             frame.HeightRequest = e.NewValue;
             grid.HeightRequest = e.NewValue;
             relativeLayout.HeightRequest = e.NewValue;
             stackLayout.HeightRequest = e.NewValue;
+            */
         }
 
-        private void FillSegmentedControl_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetFill(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
-            var fill = Forms9Patch.Fill.Fill;
-            if (e.Segment.Text == "TILE")
-                fill = Forms9Patch.Fill.Tile;
-            else if (e.Segment.Text == "ASPECTFILL")
-                fill = Forms9Patch.Fill.AspectFill;
-            else if (e.Segment.Text == "ASPECTFIT")
-                fill = Forms9Patch.Fill.AspectFit;
-            absoluteLayout.BackgroundImage.Fill = fill;
-            frame.BackgroundImage.Fill = fill;
-            grid.BackgroundImage.Fill = fill;
-            relativeLayout.BackgroundImage.Fill = fill;
-            stackLayout.BackgroundImage.Fill = fill;
+            if (((Forms9Patch.ILayout)Content).BackgroundImage != null)
+            {
+                var text = fillSegmentedControl.SelectedSegments.First().Text;
+
+                var fill = Forms9Patch.Fill.Fill;
+                if (text == "TILE")
+                    fill = Forms9Patch.Fill.Tile;
+                else if (text == "ASPECTFILL")
+                    fill = Forms9Patch.Fill.AspectFill;
+                else if (text == "ASPECTFIT")
+                    fill = Forms9Patch.Fill.AspectFit;
+                ((Forms9Patch.ILayout)Content).BackgroundImage.Fill = fill;
+                /*
+                absoluteLayout.BackgroundImage.Fill = fill;
+                frame.BackgroundImage.Fill = fill;
+                grid.BackgroundImage.Fill = fill;
+                relativeLayout.BackgroundImage.Fill = fill;
+                stackLayout.BackgroundImage.Fill = fill;*/
+            }
         }
 
-        private void ShapesSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetShape(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
+            var text = shapesSelector.SelectedSegments.First().Text;
             var shape = Forms9Patch.ElementShape.Rectangle;
-            if (e.Segment.Text == Square)
+            if (text == Square)
                 shape = Forms9Patch.ElementShape.Square;
-            else if (e.Segment.Text == Circle)
+            else if (text == Circle)
                 shape = Forms9Patch.ElementShape.Circle;
-            else if (e.Segment.Text == Ellipse)
+            else if (text == Ellipse)
                 shape = Forms9Patch.ElementShape.Elliptical;
-            else if (e.Segment.Text == "OBROUND")
+            else if (text == "OBROUND")
                 shape = Forms9Patch.ElementShape.Obround;
-            
+            ((Forms9Patch.ILayout)Content).ElementShape = shape;
+            /*
             absoluteLayout.ElementShape = shape;
             frame.ElementShape = shape;
             grid.ElementShape = shape;
             relativeLayout.ElementShape = shape;
             stackLayout.ElementShape = shape;
+            */
         }
 
-        private void OutlineWidthSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        void SetOutlineWidth(object sender = null, ValueChangedEventArgs agrs = null)
         {
+            ((Forms9Patch.ILayout)Content).OutlineWidth = (float)outlineWidthSlider.Value;
+            /*
             absoluteLayout.OutlineWidth = (float)e.NewValue;
             frame.OutlineWidth = (float)e.NewValue;
             grid.OutlineWidth = (float)e.NewValue;
             relativeLayout.OutlineWidth = (float)e.NewValue;
             stackLayout.OutlineWidth = (float)e.NewValue;
+            */
         }
 
-        private void OutlineRadiusSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        void SetOutlineRadius(object sender = null, ValueChangedEventArgs args = null)
         {
+            ((Forms9Patch.ILayout)Content).OutlineRadius = (float)outlineRadiusSlider.Value;
+            /*
             absoluteLayout.OutlineRadius = (float)e.NewValue;
             frame.OutlineRadius = (float)e.NewValue;
             grid.OutlineRadius = (float)e.NewValue;
             relativeLayout.OutlineRadius = (float)e.NewValue;
             stackLayout.OutlineRadius = (float)e.NewValue;
+            */
         }
 
-        private void ShapeAttributesSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetShapeAttributes(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
-            switch (e.Segment.Text)
-            {
-                case "BACKGROUND":
-                    var backgroundColor = e.Segment.IsSelected ? Color.Orange : Color.Default;
-                    absoluteLayout.BackgroundColor = backgroundColor;
-                    frame.BackgroundColor = backgroundColor;
-                    grid.BackgroundColor = backgroundColor;
-                    relativeLayout.BackgroundColor = backgroundColor;
-                    stackLayout.BackgroundColor = backgroundColor;
-                    break;
-                case "OUTLINE":
-                    var outlineColor = e.Segment.IsSelected ? Color.Blue : Color.Default;
-                    absoluteLayout.OutlineColor = outlineColor;
-                    frame.OutlineColor = outlineColor;
-                    grid.OutlineColor = outlineColor;
-                    relativeLayout.OutlineColor = outlineColor;
-                    stackLayout.OutlineColor = outlineColor;
-                    var outlineWidth = e.Segment.IsSelected ? (float)Math.Max(outlineWidthSlider.Value, 2) : 0;
-                    absoluteLayout.OutlineWidth = outlineWidth;
-                    frame.OutlineWidth = outlineWidth;
-                    grid.OutlineWidth = outlineWidth;
-                    relativeLayout.OutlineWidth = outlineWidth;
-                    stackLayout.OutlineWidth = outlineWidth;
-                    break;
-                case "SHADOW":
-                    absoluteLayout.HasShadow = e.Segment.IsSelected;
-                    frame.HasShadow = e.Segment.IsSelected;
-                    grid.HasShadow = e.Segment.IsSelected;
-                    relativeLayout.HasShadow = e.Segment.IsSelected;
-                    stackLayout.HasShadow = e.Segment.IsSelected;
-                    break;
-                case "INVERTED":
-                    absoluteLayout.ShadowInverted = e.Segment.IsSelected;
-                    frame.ShadowInverted = e.Segment.IsSelected;
-                    grid.ShadowInverted = e.Segment.IsSelected;
-                    relativeLayout.ShadowInverted = e.Segment.IsSelected;
-                    stackLayout.ShadowInverted = e.Segment.IsSelected;
-                    break;
-            }
+            foreach (var segment in shapeAttributesSelector.Segments)
+                switch (segment.Text)
+                {
+                    case "BACKGROUND":
+                        var backgroundColor = segment.IsSelected ? Color.Orange : Color.Default;
+                        ((Forms9Patch.ILayout)Content).BackgroundColor = backgroundColor;
+                        /*
+                        absoluteLayout.BackgroundColor = backgroundColor;
+                        frame.BackgroundColor = backgroundColor;
+                        grid.BackgroundColor = backgroundColor;
+                        relativeLayout.BackgroundColor = backgroundColor;
+                        stackLayout.BackgroundColor = backgroundColor;
+                        */
+                        break;
+                    case "OUTLINE":
+                        var outlineColor = segment.IsSelected ? Color.Blue : Color.Default;
+                        ((Forms9Patch.ILayout)Content).OutlineColor = outlineColor;
+                        /*
+                        absoluteLayout.OutlineColor = outlineColor;
+                        frame.OutlineColor = outlineColor;
+                        grid.OutlineColor = outlineColor;
+                        relativeLayout.OutlineColor = outlineColor;
+                        stackLayout.OutlineColor = outlineColor;
+                        */
+                        var outlineWidth = segment.IsSelected ? (float)Math.Max(outlineWidthSlider.Value, 2) : 0;
+                        ((Forms9Patch.ILayout)Content).OutlineWidth = outlineWidth;
+                        /*
+                        absoluteLayout.OutlineWidth = outlineWidth;
+                        frame.OutlineWidth = outlineWidth;
+                        grid.OutlineWidth = outlineWidth;
+                        relativeLayout.OutlineWidth = outlineWidth;
+                        stackLayout.OutlineWidth = outlineWidth;
+                        */
+                        break;
+                    case "SHADOW":
+                        ((Forms9Patch.ILayout)Content).HasShadow = segment.IsSelected;
+                        /*
+                        absoluteLayout.HasShadow = segment.IsSelected;
+                        frame.HasShadow = segment.IsSelected;
+                        grid.HasShadow = segment.IsSelected;
+                        relativeLayout.HasShadow = segment.IsSelected;
+                        stackLayout.HasShadow = segment.IsSelected;
+                        */
+                        break;
+                    case "INVERTED":
+                        ((Forms9Patch.ILayout)Content).ShadowInverted = segment.IsSelected;
+                        /*
+                        absoluteLayout.ShadowInverted = segment.IsSelected;
+                        frame.ShadowInverted = segment.IsSelected;
+                        grid.ShadowInverted = segment.IsSelected;
+                        relativeLayout.ShadowInverted = segment.IsSelected;
+                        stackLayout.ShadowInverted = segment.IsSelected;
+                        */
+                        break;
+                }
         }
 
-        private void BackgroundImageSelector_SegmentTapped(object sender, Forms9Patch.SegmentedControlEventArgs e)
+        void SetBackgroundImage(object sender = null, Forms9Patch.SegmentedControlEventArgs args = null)
         {
-            if (e.Segment.Text=="NONE")
+            var segment = backgroundImageSelector.SelectedSegments.First();
+            if (segment.Text == "NONE")
             {
+                ((Forms9Patch.ILayout)Content).BackgroundImage = null;
+                /*
                 absoluteLayout.BackgroundImage = null;
                 frame.BackgroundImage = null;
                 grid.BackgroundImage = null;
                 relativeLayout.BackgroundImage = null;
                 stackLayout.BackgroundImage = null;
+                */
                 return;
             }
-            string embeddedResourceId = "Forms9PatchDemo.Resources." + e.Segment.Text;
+            ((Forms9Patch.ILayout)Content).BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            /*
+            absoluteLayout.BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            frame.BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            grid.BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            relativeLayout.BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            stackLayout.BackgroundImage = new Forms9Patch.Image(segment.IconImage?.Source);
+            */
+            SetFill();
+            SetCapsInsets();
+            SetAntiAlias();
+        }
 
-            absoluteLayout.BackgroundImage = new Forms9Patch.Image(embeddedResourceId);
-            frame.BackgroundImage = new Forms9Patch.Image(embeddedResourceId);
-            grid.BackgroundImage = new Forms9Patch.Image(embeddedResourceId);
-            relativeLayout.BackgroundImage = new Forms9Patch.Image(embeddedResourceId);
-            stackLayout.BackgroundImage = new Forms9Patch.Image(embeddedResourceId);
-    }
-
-        private void CapsInsetsSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        void SetCapsInsets(object sender = null, ValueChangedEventArgs args = null)
         {
-            double scale = pixelCapsSwitch.IsToggled ? 1 : 0.01;
-            var capsInset = new Thickness(capsInsetsLeftSlider.Value * scale, capsInsetsTopSlider.Value * scale, capsInsetsRightSlider.Value * scale, capsInsetsBottomSlider.Value * scale);
-            System.Diagnostics.Debug.WriteLine("CapsInset=[" + Forms9Patch.ThicknessExtension.Description(capsInset) + "]");
-            if (absoluteLayout?.BackgroundImage?.Source != null)
+            if (((Forms9Patch.ILayout)Content)?.BackgroundImage?.Source != null)
             {
+                double scale = capsUnitsSegmentedControl.IsIndexSelected(0) ? 1 : 0.01;
+                var capsInset = new Thickness(capsInsetsLeftSlider.Value * scale, capsInsetsTopSlider.Value * scale, capsInsetsRightSlider.Value * scale, capsInsetsBottomSlider.Value * scale);
+                System.Diagnostics.Debug.WriteLine("CapsInset=[" + Forms9Patch.ThicknessExtension.Description(capsInset) + "]");
+                ((Forms9Patch.ILayout)Content).BackgroundImage.CapInsets = capsInset;
+                /*
                 absoluteLayout.BackgroundImage.CapInsets = capsInset;
                 frame.BackgroundImage.CapInsets = capsInset;
                 grid.BackgroundImage.CapInsets = capsInset;
                 relativeLayout.BackgroundImage.CapInsets = capsInset;
                 stackLayout.BackgroundImage.CapInsets = capsInset;
+                */
             }
+        }
+
+        void SetLayoutProperties()
+        {
+            SetHzLayoutOptions();
+            SetVtLayoutOptions();
+            SetHeightRequest();
+            SetShape();
+            SetOutlineWidth();
+            SetOutlineRadius();
+            SetShapeAttributes();
+            SetBackgroundImage();
+        }
+
+        Forms9Patch.AbsoluteLayout GenerateAbsoluteLayout()
+        {
+            var absoluteLayout = new Forms9Patch.AbsoluteLayout();
+            var absoluteLayoutContent = new Forms9Patch.Label("CONTENT")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            AbsoluteLayout.SetLayoutBounds(absoluteLayoutContent, new Rectangle(0.5, 0.5, 1.0, 1.0));
+            AbsoluteLayout.SetLayoutFlags(absoluteLayoutContent, AbsoluteLayoutFlags.All);
+            absoluteLayout.Children.Add(absoluteLayoutContent);
+            return absoluteLayout;
+        }
+
+        Forms9Patch.Frame GenerateFrame()
+        {
+            var frame = new Forms9Patch.Frame
+            {
+                Content = new Forms9Patch.Label("CONTENT") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold },
+            };
+            return frame;
+        }
+
+        Forms9Patch.Grid GenerateGrid()
+        {
+            var grid = new Forms9Patch.Grid
+            {
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                    new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star)},
+                },
+                RowDefinitions = new RowDefinitionCollection
+                {
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Star)},
+                    new RowDefinition() { Height = new GridLength(1, GridUnitType.Star)},
+                },
+            };
+            grid.Children.Add(new Forms9Patch.Label("C0R0") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 0, 0);
+            grid.Children.Add(new Forms9Patch.Label("C0R1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 0, 1);
+            grid.Children.Add(new Forms9Patch.Label("C1R0") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 1, 0);
+            grid.Children.Add(new Forms9Patch.Label("C1R1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center, FontAttributes = FontAttributes.Bold }, 1, 1);
+            return grid;
+        }
+
+        Forms9Patch.RelativeLayout GenerateRelativeLayout()
+        {
+            var relativeLayout = new Forms9Patch.RelativeLayout();
+            var cView = new Forms9Patch.Label("C")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            var lView = new Forms9Patch.Label("L")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            var rView = new Forms9Patch.Label("R")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            var tView = new Forms9Patch.Label("T")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            var bView = new Forms9Patch.Label("T")
+            {
+                TextColor = Color.White,
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontAttributes = FontAttributes.Bold
+            };
+            relativeLayout.Children.Add(cView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToParent((parent) => parent.Height / 2));
+            relativeLayout.Children.Add(tView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToView(cView, (parent, sibling) => sibling.Y - parent.Height / 4));
+            relativeLayout.Children.Add(bView, Constraint.RelativeToParent((parent) => parent.Width / 2), Constraint.RelativeToView(cView, (parent, sibling) => sibling.Y + parent.Height / 4));
+            relativeLayout.Children.Add(lView, Constraint.RelativeToView(cView, (parent, sibling) => sibling.X - parent.Width / 4), Constraint.RelativeToParent((parent) => parent.Height / 2));
+            relativeLayout.Children.Add(rView, Constraint.RelativeToView(cView, (parent, sibling) => sibling.X + parent.Width / 4), Constraint.RelativeToParent((parent) => parent.Height / 2));
+            return relativeLayout;
+        }
+
+        Forms9Patch.StackLayout GenerateStackLayout()
+        {
+            var stackLayout = new Forms9Patch.StackLayout
+            {
+                Children =
+                {
+                    new Forms9Patch.Label("Child 1") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment=TextAlignment.Center, FontAttributes=FontAttributes.Bold },
+                    new Forms9Patch.Label("Child 2") { TextColor = Color.White, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment=TextAlignment.Center, FontAttributes=FontAttributes.Bold }
+                }
+            };
+            return stackLayout;
         }
     }
 
