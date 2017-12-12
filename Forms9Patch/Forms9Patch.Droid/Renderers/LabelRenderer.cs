@@ -152,46 +152,13 @@ namespace Forms9Patch.Droid
             else if (_currentControlState.AutoFit == AutoFit.Width)
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
 
-
-
-            //_fittedFontSize = 
             tmpFontSize = BoundTextSize(tmpFontSize);
-            //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] A FittedFontSize=[" + _fittedFontSize + "]");
-
-            /*
-            var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
-            if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
-                Control.TextSize = syncFontSize;
-            else
-                Control.TextSize = tmpFontSize;
-            _currentControlState.TextSize = Control.TextSize;
-
-            if (!_delayingActualFontSizeUpdate && _fittedFontSize != syncFontSize)
-            {
-                _delayingActualFontSizeUpdate = true;
-                //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] C FittedFontSize=[" + _fittedFontSize + "]");
-                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
-                {
-                    if (Element != null && Control != null)
-                        Element.OptimalFontSize = _fittedFontSize;
-                    //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] OptimalFontSize=[" + _fittedFontSize + "]");
-                    _delayingActualFontSizeUpdate = false;
-                    return false;
-                });
-            }
-            */
-
-            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
             // this is the optimal font size.  Let it be known!
             if (tmpFontSize != Element.OptimalFontSize)
             {
                 Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                 {
-                    if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                        System.Diagnostics.Debug.WriteLine("");
-
                     if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                     {
                         if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == F9PTextView.DefaultTextSize))
@@ -205,15 +172,8 @@ namespace Forms9Patch.Droid
 
 
             var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
-
-            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
-
             if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                 tmpFontSize = syncFontSize;
-
-            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
 
             Control.TextSize = tmpFontSize;
