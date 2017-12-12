@@ -13,8 +13,8 @@ namespace Forms9PatchDemo
         const float radius = 4;
         const float width = 1;
         const bool hasShadow = true;
-        static Color outlineColor =  Color.Default; // Color.Red.WithAlpha(0.25);
-        static Color backgroundColor =  Color.White;
+        static Color outlineColor = Color.Default; // Color.Red.WithAlpha(0.25);
+        static Color backgroundColor = Color.White;
         static bool ShadowInverted = true;
 
         Switch _hasShadowSwitch = new Switch { IsToggled = hasShadow };
@@ -28,7 +28,7 @@ namespace Forms9PatchDemo
             OutlineWidth = width,
             OutlineColor = outlineColor,
             //SelectedTextColor = Color.Blue,
-          
+
             Segments =
             {
                 new Segment { Text = "START", },
@@ -121,15 +121,15 @@ namespace Forms9PatchDemo
                         {
                             new Segment
                             {
-                                Text = "T1",
+                                Text = "H1",
                             },
                             new Segment
                             {
-                                Text = "T2"
+                                Text = "H2"
                             },
                             new Segment
                             {
-                                Text = "T3"
+                                Text = "H3"
                             },
                         }
         };
@@ -147,15 +147,15 @@ namespace Forms9PatchDemo
                         {
                             new Segment
                             {
-                                Text = "T1",
+                                Text = "V1",
                             },
                             new Segment
                             {
-                                Text = "T2"
+                                Text = "V2"
                             },
                             new Segment
                             {
-                                Text = "T3"
+                                Text = "V3"
                             },
                         }
         };
@@ -216,7 +216,7 @@ namespace Forms9PatchDemo
                 {
                     Children =
                     {
-                       
+
                         new Xamarin.Forms.Label { Text = "version 0.9.15.1"},
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _grid1,
@@ -301,17 +301,17 @@ namespace Forms9PatchDemo
             {
                 //if (e.Segment.IconImage != null)
                 //{
-                    /*
-                    _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
-                    foreach (var segment in _hzSegmentsElement.Segments)
-                        segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
-                    foreach (var segment in _vtSegmentsElement.Segments)
-                        segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
-                        */
-                    SetIconImage(e.Segment.IconImage);
+                /*
+                _iconTextAndTextButton.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
+                foreach (var segment in _hzSegmentsElement.Segments)
+                    segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
+                foreach (var segment in _vtSegmentsElement.Segments)
+                    segment.IconImage = new Forms9Patch.Image { Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.Info") };
+                    */
+                SetIconImage(e.Segment.IconImage);
                 //}
                 //else
-                    SetIconText(e.Segment.HtmlText ?? e.Segment.Text);
+                SetIconText(e.Segment.HtmlText ?? e.Segment.Text);
             };
 
             _spacingSlider.ValueChanged += (sender, e) =>

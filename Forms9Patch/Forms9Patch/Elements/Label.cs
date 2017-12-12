@@ -240,21 +240,17 @@ namespace Forms9Patch
                     _listener = null;
                 }
             }
+
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == LinesProperty.PropertyName
                 || propertyName == AutoFitProperty.PropertyName
                 || propertyName == HtmlTextProperty.PropertyName
                 || propertyName == TextProperty.PropertyName
-               //|| propertyName == WidthProperty.PropertyName 
-               //|| propertyName == HeightProperty.PropertyName
                )
             {
-                //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged(" + propertyName + ")");
                 InvalidateMeasure();
             }
-
-            //System.Diagnostics.Debug.WriteLine("");
-            //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged(" + propertyName + ")");
         }
 
         /// <summary>
@@ -450,6 +446,49 @@ namespace Forms9Patch
         }
         #endregion
 
+        /*
+        public static readonly BindableProperty Field1Property = BindableProperty.Create("F9PFrameHeight", typeof(string), typeof(Label), default(string));
+        public string Field1
+        {
+            get { return (string)GetValue(Field1Property); }
+            set { SetValue(Field1Property, value); }
+        }
+
+        public static readonly BindableProperty Field2Property = BindableProperty.Create("F9PBoundsHeight", typeof(string), typeof(Label), default(string));
+        public string Field2
+        {
+            get { return (string)GetValue(Field2Property); }
+            set { SetValue(Field2Property, value); }
+        }
+
+        public static readonly BindableProperty Field3Property = BindableProperty.Create("F9PCgSizeHeight", typeof(string), typeof(Label), default(string));
+        public string Field3
+        {
+            get { return (string)GetValue(Field3Property); }
+            set { SetValue(Field3Property, value); }
+        }
+
+        public static readonly BindableProperty Field4Property = BindableProperty.Create("Pizza", typeof(string), typeof(Label), default(string));
+        public string Field4
+        {
+            get { return (string)GetValue(Field4Property); }
+            set { SetValue(Field4Property, value); }
+        }
+
+        public static readonly BindableProperty Field5Property = BindableProperty.Create("Field5", typeof(string), typeof(Label), default(string));
+        public string Field5
+        {
+            get { return (string)GetValue(Field5Property); }
+            set { SetValue(Field5Property, value); }
+        }
+
+        public static readonly BindableProperty Field6Property = BindableProperty.Create("Field6", typeof(string), typeof(Label), default(string));
+        public string Field6
+        {
+            get { return (string)GetValue(Field6Property); }
+            set { SetValue(Field6Property, value); }
+        }
+*/
 
     }
 

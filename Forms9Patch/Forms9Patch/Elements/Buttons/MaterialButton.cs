@@ -1228,52 +1228,66 @@ namespace Forms9Patch
                 {
                     if (_iconImage != null)
                     {
-                        _iconImage.HorizontalOptions = horzOption;
+                        _iconImage.HorizontalOptions = LayoutOptions.Center;
                         _iconImage.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
+                        _iconLabel.HorizontalOptions = LayoutOptions.Center;
+                        _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
-                        _label.HorizontalOptions = horzOption;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.VerticalOptions = vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
+                        _label.HorizontalOptions = LayoutOptions.Start;
+                        _label.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = horzOption;
+                    //_stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 else
                 {
                     if (_iconImage != null)
                     {
-                        _iconImage.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconImage.HorizontalOptions = LayoutOptions.Center; // (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                         _iconImage.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
                     {
+                        /*
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;
+                        _iconLabel.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;*/
+                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
+                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
+                        _iconLabel.HorizontalOptions = LayoutOptions.Center;
+                        _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
                     }
                     if (_label != null)
                     {
+                        /*
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;
                         _label.MinimizeHeight = false;
                         //_label.BackgroundColor = Color.Green;
+                        */
+                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
+                        _label.VerticalTextAlignment = VerticalTextAlignment;
+                        _label.HorizontalOptions = LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
+                        _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
+                _label.BackgroundColor = Color.Orange.WithAlpha(0.5);
                 //_stackLayout.BackgroundColor = Color.Green;
             }
             else

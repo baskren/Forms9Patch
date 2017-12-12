@@ -209,6 +209,7 @@ namespace Forms9PatchDemo
             {
                 if (e.PropertyName == Forms9Patch.Label.OptimalFontSizeProperty.PropertyName)
                     actualFontSizeLabel.Text = "OptimalFontSize: " + f9pLabel.OptimalFontSize;
+                /*
                 else if (e.PropertyName == Forms9Patch.Label.Field1Property.PropertyName)
                     _field1.Text = f9pLabel.Field1;
                 else if (e.PropertyName == Forms9Patch.Label.Field2Property.PropertyName)
@@ -219,6 +220,7 @@ namespace Forms9PatchDemo
                     _field4.Text = f9pLabel.Field4;
                 else if (e.PropertyName == Forms9Patch.Label.Field5Property.PropertyName)
                     _field5.Text = f9pLabel.Field5;
+                    */
             };
             #endregion
 

@@ -99,8 +99,8 @@ namespace Forms9Patch.iOS
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;
 
-                //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
-                //    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] WidthConstraint=[" + widthConstraint + "] HeightConstraint=[" + heightConstraint + "]");
 
                 ControlLines = int.MaxValue;
 
@@ -133,31 +133,38 @@ namespace Forms9Patch.iOS
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;
 
-                // this is the optimal font size.  Let it be known!
-                if (/*!_delayingActualFontSizeUpdate &&*/ tmpFontSize != Element.OptimalFontSize)
+
+                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+
+                if (tmpFontSize != Element.OptimalFontSize)
                 {
-                    //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
-                    //    System.Diagnostics.Debug.WriteLine("B tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
-                    //_delayingActualFontSizeUpdate = true;
                     Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                     {
-                        //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
-                        //    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] ");
-                        //_delayingActualFontSizeUpdate = false;
+                        if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                            System.Diagnostics.Debug.WriteLine("");
+
                         if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                            Element.OptimalFontSize = tmpFontSize;
+                        {
+                            if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize))
+                                Element.OptimalFontSize = -1;
+                            else
+                                Element.OptimalFontSize = tmpFontSize;
+                        }
                         return false;
                     });
                 }
 
 
                 var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
+                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
-                {
-                    //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
-                    //    System.Diagnostics.Debug.WriteLine("D tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] sync=[" + syncFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
                     tmpFontSize = syncFontSize;
-                }
+
+                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+
 
                 ControlFont = ControlFont.WithSize(tmpFontSize);
                 //ControlFontPointSize = tmpFontSize;
@@ -255,6 +262,10 @@ namespace Forms9Patch.iOS
                     }
 
                 }
+
+                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                    System.Diagnostics.Debug.WriteLine("D ALG=[" + alg + "]");
+
 
                 //Control.BackgroundColor = Color.Orange.WithAlpha(0.5).ToUIColor();
                 /*

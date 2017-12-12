@@ -528,16 +528,12 @@ namespace Forms9Patch
         public MaterialSegmentedControl()
         {
             IgnoreChildren = true;
-            //Spacing = -.5 * Display.Scale;
             base.Padding = new Thickness(0);
-            //Padding = new Thickness(2);
-            //Spacing = 0;
             OutlineRadius = 2;
             OutlineWidth = 1;
             Orientation = StackOrientation.Horizontal;
             _segments = new ObservableCollection<Segment>();
             _segments.CollectionChanged += OnCollectionChanged;
-            //base.BackgroundColor = Color.Red;
         }
 
         #endregion
@@ -822,6 +818,7 @@ namespace Forms9Patch
                 segment.IsSelected = false;
         }
 
+
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
@@ -1015,49 +1012,69 @@ namespace Forms9Patch
 				*/
             }
         }
+        #endregion
 
+
+        #region FontSize Synchronization
+        DateTime _lastFontSizeResetTime = DateTime.MinValue;
         static int _iterations;
+        bool _waitingForThingsToCalmDown;
         private void Button_OptimalFontSizeChanged(object sender, EventArgs e)
         {
-            int iteration = _iterations++;
-            var maxOptimalFontSize = double.MinValue;
-            var minOptimalFontSize = double.MaxValue;
-            var maxSyncFontSize = double.MinValue;
-            var minSyncFontSize = double.MaxValue;
-            //bool debug = (_segments[0].MaterialButton.Text == "START");
-            foreach (var segment in _segments)
+            _lastFontSizeResetTime = DateTime.Now;
+            if (!_waitingForThingsToCalmDown)
             {
-                var segmentOptimalFontSize = segment.MaterialButton.OptimalFontSize;
-                //if (debug)
-                //    System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] segmentOptimalFontSize=[" + segmentOptimalFontSize + "] segmentSyncFontSize=[" + segment.MaterialButton.SynchronizedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
-                if (segmentOptimalFontSize < minOptimalFontSize)
-                    minOptimalFontSize = segment.MaterialButton.OptimalFontSize;
-                if (segmentOptimalFontSize > maxOptimalFontSize)
-                    maxOptimalFontSize = segmentOptimalFontSize;
+                _waitingForThingsToCalmDown = true;
+                Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
+                 {
+                     if (DateTime.Now - _lastFontSizeResetTime > TimeSpan.FromMilliseconds(150))
+                     {
+                         int iteration = _iterations++;
+                         var maxOptimalFontSize = -1.0;
+                         var minOptimalFontSize = double.MaxValue;
+                         var maxSyncFontSize = double.MinValue;
+                         var minSyncFontSize = double.MaxValue;
+                         bool debug = (_segments[0].MaterialButton.Text == "BACKGROUND" || _segments[0].MaterialButton.Text == "H1");
+                         foreach (var segment in _segments)
+                         {
+                             var segmentOptimalFontSize = segment.MaterialButton.OptimalFontSize;
+                             if (debug)
+                                 System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] segmentOptimalFontSize=[" + segmentOptimalFontSize + "] segmentSyncFontSize=[" + segment.MaterialButton.SynchronizedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
 
-                var segmentSyncFontSize = segment.MaterialButton.SynchronizedFontSize;
-                if (segmentSyncFontSize < minSyncFontSize)
-                    minSyncFontSize = segmentSyncFontSize;
-                if (segmentSyncFontSize > maxSyncFontSize)
-                    maxSyncFontSize = segmentSyncFontSize;
-            }
-            //if (debug)
-            //    System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "] maxSync=[" + maxSyncFontSize + "] minSync=[" + minSyncFontSize + "] maxOpt=[" + maxOptimalFontSize + "] minOpt=[" + minOptimalFontSize + "]");
-            if (minOptimalFontSize < 0 || Math.Abs(maxOptimalFontSize - minOptimalFontSize) < 0.05)
-                return;
-            if (maxSyncFontSize > 0 && maxSyncFontSize <= minOptimalFontSize + 0.05)
-                return;
+                             if (segmentOptimalFontSize < minOptimalFontSize && segmentOptimalFontSize > 0)
+                                 minOptimalFontSize = segment.MaterialButton.OptimalFontSize;
+                             if (segmentOptimalFontSize > maxOptimalFontSize)
+                                 maxOptimalFontSize = segmentOptimalFontSize;
 
-            foreach (var segment in _segments)
-            {
-                ((ILabel)segment.MaterialButton).SynchronizedFontSize = minOptimalFontSize;
-                //if (debug)
-                //    System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] SynchronizedFontSize=[" + minOptimalFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
+                             var segmentSyncFontSize = segment.MaterialButton.SynchronizedFontSize;
+                             if (segmentSyncFontSize < minSyncFontSize)
+                                 minSyncFontSize = segmentSyncFontSize;
+                             if (segmentSyncFontSize > maxSyncFontSize)
+                                 maxSyncFontSize = segmentSyncFontSize;
+                         }
+                         if (debug)
+                             System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "] maxSync=[" + maxSyncFontSize + "] minSync=[" + minSyncFontSize + "] maxOpt=[" + maxOptimalFontSize + "] minOpt=[" + minOptimalFontSize + "]");
+
+                         if (minOptimalFontSize >= double.MaxValue / 3)
+                             minOptimalFontSize = -1;
+
+                         foreach (var segment in _segments)
+                         {
+                             ((ILabel)segment.MaterialButton).SynchronizedFontSize = minOptimalFontSize;
+                             if (debug)
+                                 System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment.MaterialButton.LabelInstanceId + "] SynchronizedFontSize=[" + minOptimalFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
+                         }
+                         _waitingForThingsToCalmDown = false;
+                         return false;
+                     }
+                     return true;
+                 });
             }
         }
+        #endregion
 
 
-
+        #region Xamarin Layout
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             //return base.OnMeasure(widthConstraint, heightConstraint);
@@ -1217,7 +1234,6 @@ namespace Forms9Patch
 
 
         #region Event management
-
         /// <summary>
         /// Occurs when one of the segments is tapped.
         /// </summary>
