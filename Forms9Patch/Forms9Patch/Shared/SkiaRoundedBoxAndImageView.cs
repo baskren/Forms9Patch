@@ -94,7 +94,7 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-        private bool disposedValue; // To detect redundant calls
+        private bool _disposed; // To detect redundant calls
 
 #if __IOS__ || __DROID__
         protected override void Dispose(bool disposing)
@@ -102,7 +102,7 @@ namespace Forms9Patch
         protected virtual void Dispose(bool disposing)
 #endif
         {
-            if (!disposedValue)
+            if (!_disposed)
             {
                 if (disposing)
                 {
@@ -118,7 +118,7 @@ namespace Forms9Patch
                         //element.SizeChanged -= OnElementSizeChanged;
                     }
                 }
-                disposedValue = true;
+                _disposed = true;
             }
 #if __IOS__
             base.Dispose(disposing);
@@ -253,6 +253,7 @@ namespace Forms9Patch
 #if __IOS__
         void InvalidateView()
         {
+        if (!_disposed)
             SetNeedsDisplay();
         }
 
@@ -270,7 +271,8 @@ namespace Forms9Patch
 
         void InvalidateView()
         {
-            Invalidate();
+            if (!_disposed)
+                Invalidate();
         }
 
 
@@ -283,6 +285,7 @@ namespace Forms9Patch
 
         void InvalidateView()
         {
+        if (!_disposed)
             Invalidate();
         }
 #else
@@ -294,6 +297,8 @@ namespace Forms9Patch
 
         private void OnShapeElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_disposed)
+                return;
             //if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
             //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
             //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
@@ -321,6 +326,8 @@ namespace Forms9Patch
 
         private void OnImageElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_disposed)
+                return;
 
             if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
                 SetImageSourceAsync();
@@ -352,6 +359,8 @@ namespace Forms9Patch
         #region Xamarin.Forms Measuring
         internal Xamarin.Forms.SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
+            if (_disposed)
+                return new Xamarin.Forms.SizeRequest(Xamarin.Forms.Size.Zero); ;
             if (ImageElement == null)
                 throw new InvalidCastException("DesiredSize is only valid with the Forms9Patch.Image element");
             var size = SourceImageSize();
@@ -497,6 +506,8 @@ namespace Forms9Patch
         #region Layout State
         bool ValidLayout(SKSize canvasSize)
         {
+            if (_disposed)
+                return true;
             //if (!IgnoreChanges && _lastIgnoreChanges == true)
             //    return false;
             if (!_validLayout)
@@ -526,6 +537,8 @@ namespace Forms9Patch
 
         void StoreLayoutProperties()
         {
+            if (_disposed)
+                return;
             _lastCanvasSize = CanvasSize;
             _lastBackgroundColor = ElementBackgroundColor;
             _lastHasShadow = HasShadow;
@@ -559,6 +572,8 @@ namespace Forms9Patch
 
         private protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
+            if (_disposed)
+                return new Windows.Foundation.Size();
             var result = base.MeasureOverride(availableSize);
 
             if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _sourceBitmap != null)
@@ -632,6 +647,9 @@ namespace Forms9Patch
         protected void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
 #endif
+            if (_disposed)
+                return;
+
             var info = e.Info;
             var surface = e.Surface;
             var canvas = e.Surface?.Canvas;

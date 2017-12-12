@@ -99,8 +99,8 @@ namespace Forms9Patch.iOS
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;
 
-                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] WidthConstraint=[" + widthConstraint + "] HeightConstraint=[" + heightConstraint + "]");
+                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                //    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] WidthConstraint=[" + widthConstraint + "] HeightConstraint=[" + heightConstraint + "]");
 
                 ControlLines = int.MaxValue;
 
@@ -134,15 +134,15 @@ namespace Forms9Patch.iOS
                     tmpFontSize = minFontSize;
 
 
-                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                //    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
                 if (tmpFontSize != Element.OptimalFontSize)
                 {
                     Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                     {
-                        if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                            System.Diagnostics.Debug.WriteLine("");
+                        //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                        //    System.Diagnostics.Debug.WriteLine("");
 
                         if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                         {
@@ -157,13 +157,13 @@ namespace Forms9Patch.iOS
 
 
                 var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
-                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
+                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                //    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                     tmpFontSize = syncFontSize;
 
-                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                //    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
 
                 ControlFont = ControlFont.WithSize(tmpFontSize);
@@ -199,72 +199,77 @@ namespace Forms9Patch.iOS
                 firstRun = false;
 
                 double reqWidth = cgSize.Width;
-                double reqHeight = cgSize.Height;
-                var textHeight = cgSize.Height + 0.05;
+                double reqHeight = cgSize.Height + 0.05;
+                var textHeight = cgSize.Height;
                 var textLines = Lines(textHeight, Control.Font);
-                string alg = "--";
-                string cnstLinesStr = "CL: n/a    ";
-                string lineHeight = "LH: " + Control.Font.LineHeight.ToString("00.000");
-                string cnstLinesHeight = "CLH: n/a   ";
+                //string alg = "--";
+                //string cnstLinesStr = "CL: n/a    ";
+                //string lineHeight = "LH: " + Control.Font.LineHeight.ToString("00.000");
+                //string cnstLinesHeight = "CLH: n/a   ";
 
                 if (double.IsPositiveInfinity(heightConstraint))
                 {
-                    if (Element.Lines > 0 && (Element.AutoFit != AutoFit.Width || Element.Lines <= textLines))// && Element.Lines <= textLines)
+                    if (Element.Lines > 0)
                     {
-                        reqHeight = Element.Lines * Control.Font.LineHeight;
-                        alg = "∞A";
+                        if (Element.AutoFit == AutoFit.Lines)// && Element.Lines <= textLines)
+                            reqHeight = Element.Lines * Control.Font.LineHeight;
+                        else if (Element.AutoFit == AutoFit.None && Element.Lines <= textLines)
+                            reqHeight = Element.Lines * Control.Font.LineHeight;
                     }
+
+                    //    alg = "∞A";
+                    //}
                     Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
 
-                    if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
-                    {
-                        //System.Diagnostics.Debug.WriteLine("A FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   TEXT:" + Element.Text);
-                        //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
-                    }
+                    //if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
+                    //{
+                    //System.Diagnostics.Debug.WriteLine("A FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   TEXT:" + Element.Text);
+                    //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
+                    //}
                 }
                 else
                 {
                     var constraintLines = Lines(heightConstraint, Control.Font);
                     var constraintLinesHeight = Math.Floor(constraintLines) * Control.Font.LineHeight;
-                    cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
+                    //cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
 
 
                     if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
-                    {
+                        //{
                         reqHeight = Element.Lines * Control.Font.LineHeight;
-                        alg = "A";
-                    }
+                    //alg = "A";
+                    //}
                     else if (textLines <= constraintLines)
-                    {
+                        //{
                         reqHeight = textHeight;
-                        alg = "B";
-                    }
+                    //alg = "B";
+                    //}
                     else if (constraintLines >= 1)
-                    {
+                        //{
                         reqHeight = constraintLinesHeight;
-                        alg = "C";
-                    }
+                    //alg = "C";
+                    //}
                     else
-                    {
+                        //{
                         reqHeight = heightConstraint;
-                        alg = "D";
-                    }
+                    //alg = "D";
+                    //}
 
                     if (Element.VerticalTextAlignment == TextAlignment.Start)
                         Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
                     else if (Element.VerticalTextAlignment == TextAlignment.End)
                         Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
 
-                    if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
-                    {
-                        //System.Diagnostics.Debug.WriteLine("B FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   CL:" + constraintLines.ToString("0") + "   CLH:" + constraintLinesHeight.ToString("000.000") + "   TEXT:" + Element.Text);
-                        //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
-                    }
+                    //if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
+                    //{
+                    //System.Diagnostics.Debug.WriteLine("B FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   CL:" + constraintLines.ToString("0") + "   CLH:" + constraintLinesHeight.ToString("000.000") + "   TEXT:" + Element.Text);
+                    //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
+                    //}
 
                 }
 
-                if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                    System.Diagnostics.Debug.WriteLine("D ALG=[" + alg + "]");
+                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                //    System.Diagnostics.Debug.WriteLine("D ALG=[" + alg + "]");
 
 
                 //Control.BackgroundColor = Color.Orange.WithAlpha(0.5).ToUIColor();

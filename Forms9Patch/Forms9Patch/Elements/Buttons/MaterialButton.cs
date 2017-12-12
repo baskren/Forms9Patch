@@ -1287,7 +1287,7 @@ namespace Forms9Patch
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-                _label.BackgroundColor = Color.Orange.WithAlpha(0.5);
+                //_label.BackgroundColor = Color.Orange.WithAlpha(0.5);
                 //_stackLayout.BackgroundColor = Color.Green;
             }
             else

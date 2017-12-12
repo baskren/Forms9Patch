@@ -25,7 +25,7 @@ namespace Forms9Patch.Droid
 
         static int _instances = 0;
         int _instance;
-        double _fittedFontSize = -1;
+        //double _fittedFontSize = -1;
 
         ColorStateList _labelTextColorDefault;
 
@@ -153,9 +153,12 @@ namespace Forms9Patch.Droid
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
 
 
-            _fittedFontSize = tmpFontSize = BoundTextSize(tmpFontSize);
+
+            //_fittedFontSize = 
+            tmpFontSize = BoundTextSize(tmpFontSize);
             //System.Diagnostics.Debug.WriteLine("[" + Element.InstanceId + "] A FittedFontSize=[" + _fittedFontSize + "]");
 
+            /*
             var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
             if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
                 Control.TextSize = syncFontSize;
@@ -176,7 +179,44 @@ namespace Forms9Patch.Droid
                     return false;
                 });
             }
+            */
 
+            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+
+            // this is the optimal font size.  Let it be known!
+            if (tmpFontSize != Element.OptimalFontSize)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                {
+                    if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                        System.Diagnostics.Debug.WriteLine("");
+
+                    if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+                    {
+                        if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == F9PTextView.DefaultTextSize))
+                            Element.OptimalFontSize = -1;
+                        else
+                            Element.OptimalFontSize = tmpFontSize;
+                    }
+                    return false;
+                });
+            }
+
+
+            var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
+
+            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
+
+            if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
+                tmpFontSize = syncFontSize;
+
+            if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
+                System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+
+
+            Control.TextSize = tmpFontSize;
 
             var layout = new StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
@@ -296,6 +336,7 @@ namespace Forms9Patch.Droid
                     Lines = Element.Lines,
                     AutoFit = Element.AutoFit,
                     LineBreakMode = Element.LineBreakMode,
+                    SyncFontSize = (float)Element.SynchronizedFontSize,
                 };
                 _lastControlState = null;
 
@@ -371,20 +412,23 @@ namespace Forms9Patch.Droid
             }
             else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
             {
-                if (_currentControlState.TextSize > 0)
-                {
-                    var syncFontSize = ((ILabel)Element).SynchronizedFontSize;
-                    if (syncFontSize >= 0 && _currentControlState.TextSize != syncFontSize)
-                    {
-                        _currentControlState.TextSize = -200;
-                        Layout();
-                    }
-                }
+                //if (_currentControlState.TextSize > 0)
+                //{
+                //    var syncFontSize = ((ILabel)Element).SynchronizedFontSize;
+                //    if (syncFontSize >= 0 && _currentControlState.TextSize != syncFontSize)
+                //    {
+                //        _currentControlState.TextSize = -200;
+                _currentControlState.SyncFontSize = (float)Element.SynchronizedFontSize;
+                Layout();
+                //    }
+                //}
             }
         }
 
         void Layout()
         {
+            if (Element.Text == "BACKGROUND")
+                System.Diagnostics.Debug.WriteLine("");
             if (Element.IsVisible)
             {
                 if (Element.Width > -1 && Element.Height > -1 && (_lastControlState == null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight))
@@ -585,6 +629,7 @@ namespace Forms9Patch.Droid
         public int Lines = (int)Label.LinesProperty.DefaultValue;
         public AutoFit AutoFit = (AutoFit)Label.AutoFitProperty.DefaultValue;
         public LineBreakMode LineBreakMode = (LineBreakMode)Label.LineBreakModeProperty.DefaultValue;
+        public float SyncFontSize;
 
         public bool IsNullOrEmpty
         {
@@ -609,6 +654,7 @@ namespace Forms9Patch.Droid
             Lines = source.Lines;
             AutoFit = source.AutoFit;
             LineBreakMode = source.LineBreakMode;
+            SyncFontSize = source.SyncFontSize;
         }
 
 
@@ -646,6 +692,8 @@ namespace Forms9Patch.Droid
             if (a._javaText != b._javaText)
                 return false;
             if (a.Typeface != b.Typeface)
+                return false;
+            if (a.SyncFontSize != b.SyncFontSize)
                 return false;
 
             return true;
