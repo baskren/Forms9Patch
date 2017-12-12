@@ -51,8 +51,8 @@ namespace Forms9Patch
         {
             if (!_disposed)
             {
-                Control?.Dispose();
-                SetNativeControl(null);
+                //Control?.Dispose();
+                //SetNativeControl(null);
                 _disposed = true;
             }
             base.Dispose(disposing);
@@ -60,12 +60,39 @@ namespace Forms9Patch
         #endregion
 
         #region Size Management
-#if WINDOWS_UWP
+
+
+#if __IOS__
+
+
+        public override void Draw(CoreGraphics.CGRect rect)
+        {
+            SendSubviewToBack(Control);
+            base.Draw(rect);
+        }
+
+#elif __DROID__
+
+#elif WINDOWS_UWP
+        protected override void UpdateBackgroundColor()
+        {
+            base.UpdateBackgroundColor();
+            Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        protected override AutomationPeer OnCreateAutomationPeer()
+        {
+            // Since layouts in Forms can be interacted with, we need to create automation peers
+            // for them so we can interact with them in automated tests
+            return new FrameworkElementAutomationPeer(this);
+        }
+
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Control.Height = ActualHeight + 1;//Math.Round(ActualHeight * Display.Scale + 0.75) / Display.Scale;
+            Control.Height = ActualHeight + 1;
             Control.Width = ActualWidth + 1;
         }
+
 #endif
 
         /*

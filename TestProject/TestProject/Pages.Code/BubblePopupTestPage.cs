@@ -91,8 +91,8 @@ namespace Forms9PatchDemo
         public BubblePopupTestPage()
         {
             BackgroundColor = Color.White;
-            
-            Padding = new Thickness(20, Device.RuntimePlatform==Device.iOS ? 20 : 0 , 20, 20);
+
+            Padding = new Thickness(20, Device.RuntimePlatform == Device.iOS ? 20 : 0, 20, 20);
 
             var shadowToggle = new Switch();
             shadowToggle.SetBinding(Switch.IsToggledProperty, "HasShadow");
@@ -240,6 +240,7 @@ namespace Forms9PatchDemo
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.Start,
             };
+            //stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
 
             var contentView = new Xamarin.Forms.ContentView
             {
@@ -256,8 +257,8 @@ namespace Forms9PatchDemo
                 Content = new StackLayout
                 {
                     Children = {
-						bubbleLabel,
-						contentView,
+                        bubbleLabel,
+                        contentView,
                         new Label { Text = "Padding:", FontSize=10, TextColor=Color.Black },
                         paddingSlider,
                         new Label { Text = "Pointer Length:", FontSize=10, TextColor=Color.Black },
@@ -292,10 +293,10 @@ namespace Forms9PatchDemo
             bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;
             addItemButton.Tapped += (sender, e) =>
             {
-                var count = stackLayout.Children.Count();
-                stackLayout.Children.Clear();
-                for (int i = 0; i <= count; i++)
-                    stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
+                //var count = stackLayout.Children.Count();
+                //stackLayout.Children.Clear();
+                //for (int i = 0; i <= count; i++)
+                stackLayout.Children.Add(new Label { Text = "X,", TextColor = Color.Green });
                 //bubble.WidthRequest = 1;
                 stackLayout.WidthRequest = -1;
                 var size = stackLayout.Measure(double.MaxValue, double.MinValue);
@@ -303,6 +304,7 @@ namespace Forms9PatchDemo
                 //stackLayout.WidthRequest = size.Request.Width + 1;
                 //this.CallMethod("InvalidateMeasure", new object[] {});
                 //contentView.WidthRequest = size.Request.Width;
+                stackLayout.Children.Last().IsVisible = true;
             };
 
             enlargeItemsButton.Tapped += (sender, e) =>
@@ -349,7 +351,8 @@ namespace Forms9PatchDemo
 
             removeItemButton.Tapped += (sender, e) =>
             {
-                stackLayout.Children.Remove(stackLayout.Children.Last());
+                if (stackLayout.Children.Count > 0)
+                    stackLayout.Children.Remove(stackLayout.Children.Last());
             };
 
 

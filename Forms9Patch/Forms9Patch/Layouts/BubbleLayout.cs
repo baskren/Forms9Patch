@@ -6,11 +6,11 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Bubble layout.
-	/// </summary>
-	internal class BubbleLayout: Xamarin.Forms.ContentView, ILayout
-	{
+    /// <summary>
+    /// Bubble layout.
+    /// </summary>
+    internal class BubbleLayout : Xamarin.Forms.ContentView, ILayout
+    {
         #region IBubbleLayout Properties
 
         #region PoinerLength property
@@ -330,18 +330,19 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="Forms9Patch.BubbleLayout"/> class.
         /// </summary>
-        public BubbleLayout() {
-			Padding = 10;
+        public BubbleLayout()
+        {
+            Padding = 10;
             _id = _instances++;
-			//BackgroundColor = Color.White;
-		}
+            //BackgroundColor = Color.White;
+        }
         #endregion Constructor
 
 
         #region Description
         public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
 
-        public override string ToString() =>  Description();
+        public override string ToString() => Description();
         #endregion
 
 
@@ -350,8 +351,8 @@ namespace Forms9Patch
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
         /// </summary>
-        protected override void OnPropertyChanged (string propertyName = null)
-		{
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
             if (propertyName == PointerAngleProperty.PropertyName)
             {
                 if (PointerAngle < 1)
@@ -366,15 +367,16 @@ namespace Forms9Patch
                 }
             }
 
-			base.OnPropertyChanged (propertyName);
-			if (propertyName == PointerLengthProperty.PropertyName
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == PointerLengthProperty.PropertyName
                 || propertyName == HasShadowProperty.PropertyName)
-				InvalidateMeasure();
+                InvalidateMeasure();
         }
         #endregion PropertyChange management
 
 
         #region IgnoreChildren handlers
+
         /// <summary>
         /// Shoulds the invalidate on child added.
         /// </summary>
@@ -456,8 +458,8 @@ namespace Forms9Patch
             LayoutChildIntoBoundingRegion(base.Content, new Rectangle(x, y, width, height));
         }
         #endregion Layout management
-        
 
-	}
+
+    }
 }
 

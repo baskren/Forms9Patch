@@ -264,6 +264,8 @@ namespace Forms9Patch
 
 
         #region IgnoreChildren handlers
+        bool _child1Visibility;
+
         /// <summary>
         /// Shoulds the invalidate on child added.
         /// </summary>
@@ -271,6 +273,17 @@ namespace Forms9Patch
         /// <param name="child">Child.</param>
         protected override bool ShouldInvalidateOnChildAdded(View child)
         {
+            var count = Children.Count;
+            if (Children.Count == 1 && Children.Contains(child))
+            {
+                _child1Visibility = child.IsVisible;
+                child.IsVisible = false;
+                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                {
+                    child.IsVisible = _child1Visibility;
+                    return false;
+                });
+            }
             return !IgnoreChildren; // stop pestering me
         }
 
