@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using CoreGraphics;
 using System.ComponentModel;
 using Foundation;
+using CoreMotion;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.iOS.LabelRenderer))]
 namespace Forms9Patch.iOS
@@ -29,7 +30,6 @@ namespace Forms9Patch.iOS
         SizeRequest LastDesiredSize = new SizeRequest(Size.Zero, Size.Zero);
         double LastMinFontSize = (double)Label.MinFontSizeProperty.DefaultValue;
 
-        //		TextAlignment LastVerticalTextAlignment = (TextAlignment)Xamarin.Forms.Label.VerticalTextAlignmentProperty.DefaultValue;
         double LastWidthConstraint = -1;
         double LastHeightContraint = -1;
 
@@ -55,19 +55,38 @@ namespace Forms9Patch.iOS
                 return new SizeRequest(Size.Zero);
 
 
-            if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
+            //if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
             {
-                //if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
-                //if (Element.HtmlText == "2015 IBC")
-                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                //    System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter [" + (Element.Text ?? Element.F9PFormattedString.Text) + "]");
 
                 Invalid = false;
                 LastWidthConstraint = widthConstraint;
                 LastHeightContraint = heightConstraint;
                 LastMinFontSize = Element.MinFontSize;
 
-                ControlLineBreakMode = UILineBreakMode.WordWrap;
+                switch (Element.LineBreakMode)
+                {
+                    case LineBreakMode.HeadTruncation:
+                        ControlLineBreakMode = UILineBreakMode.HeadTruncation;
+                        break;
+                    case LineBreakMode.TailTruncation:
+                        ControlLineBreakMode = UILineBreakMode.TailTruncation;
+                        break;
+                    case LineBreakMode.MiddleTruncation:
+                        ControlLineBreakMode = UILineBreakMode.MiddleTruncation;
+                        break;
+                    case LineBreakMode.NoWrap:
+                        ControlLineBreakMode = UILineBreakMode.Clip;
+                        ControlLines = 1;
+                        break;
+                    case LineBreakMode.CharacterWrap:
+                        ControlLineBreakMode = UILineBreakMode.CharacterWrap;
+                        break;
+                    case LineBreakMode.WordWrap:
+                    default:
+                        ControlLineBreakMode = UILineBreakMode.WordWrap;
+                        break;
+                }
+
 
                 var tmpFontSize = (nfloat)Element.FontSize;
                 if (tmpFontSize < 0)
@@ -80,233 +99,79 @@ namespace Forms9Patch.iOS
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;
 
-                ControlFont = ControlFont.WithSize(tmpFontSize);
+                //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
+                //    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+
                 ControlLines = int.MaxValue;
 
-                double tmpHt = -1;
-                double tmpWd = widthConstraint;
+                double linesHeight = -1;
+                double desiredWidth = widthConstraint;
 
-                if (Element.Lines == 0 && Element.AutoFit != AutoFit.None)
+                if (Element.Lines == 0 && !double.IsInfinity(heightConstraint))
                 {
                     ControlLines = 0;
                     tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
-                    if (tmpFontSize < minFontSize)
-                        tmpFontSize = minFontSize;
-                    ControlFont = ControlFont.WithSize(tmpFontSize);
-                    //System.Diagnostics.Debug.WriteLine("F.A");
                 }
                 else if (Element.AutoFit == AutoFit.Lines)
                 {
                     if (double.IsPositiveInfinity(heightConstraint))
-                    {
-                        // redundant : ControlFont = ControlFont.WithSize(tmpFontSize);
-                        // we need to set the height of the Control to be Lines * FontHeight
-                        //System.Diagnostics.Debug.WriteLine("\tAVAIL HT: INFINITE");
-                        //tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines);//- 1);// + ContentScaleFactor;
-                        tmpHt = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        //    System.Diagnostics.Debug.WriteLine("F.B");
-                    }
+                        linesHeight = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
                     else
                     {
-                        //System.Diagnostics.Debug.WriteLine("\tAVAIL HT: "+heightConstraint);
                         var lineHeightRatio = ControlFont.LineHeight / ControlFont.PointSize;
                         var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
 
-                        //tmpFontSize = (nfloat)(((heightConstraint) / (Element.Lines + leadingRatio * (Element.Lines /*- 1*/))) / lineHeightRatio - 0.1f);
-                        tmpFontSize = (nfloat)(((heightConstraint) / ((1 + leadingRatio) * Element.Lines)) / lineHeightRatio - 0.1f);
+                        //tmpFontSize = (nfloat)(((heightConstraint) / ((1 + leadingRatio) * Element.Lines)) / lineHeightRatio - 0.1f);
+                        var tmpLineSize = (nfloat)(heightConstraint - 0.05f) / Element.Lines;
+                        tmpFontSize = tmpLineSize / lineHeightRatio;
 
-                        if (tmpFontSize < minFontSize)
-                            tmpFontSize = minFontSize;
-                        ControlFont = ControlFont.WithSize(tmpFontSize);
-                        //System.Diagnostics.Debug.WriteLine("F.C");
                     }
                 }
                 else if (Element.AutoFit == AutoFit.Width)
-                {
                     tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
-                    if (tmpFontSize < minFontSize)
-                        tmpFontSize = minFontSize;
-                    ControlFont = ControlFont.WithSize(tmpFontSize);
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("F.D");
-                }
-                else if (Element.AutoFit == AutoFit.None)
+
+                if (tmpFontSize < minFontSize)
+                    tmpFontSize = minFontSize;
+
+                // this is the optimal font size.  Let it be known!
+                if (/*!_delayingActualFontSizeUpdate &&*/ tmpFontSize != Element.OptimalFontSize)
                 {
-                    if (Element.Lines > 0)
+                    //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
+                    //    System.Diagnostics.Debug.WriteLine("B tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+                    //_delayingActualFontSizeUpdate = true;
+                    Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                     {
-                        // redundant: ControlFont = ControlFont.WithSize(tmpFontSize);
-                        //tmpHt = ControlFont.LineHeight * Element.Lines + ControlFont.Leading * (Element.Lines);// - 1);// + ContentScaleFactor;
-                        tmpHt = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        //    System.Diagnostics.Debug.WriteLine("F.E tmpFontSize=[" + tmpFontSize + "] tmpHt=[" + tmpHt + "]");
-                    }
+                        //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
+                        //    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] ");
+                        //_delayingActualFontSizeUpdate = false;
+                        if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+                            Element.OptimalFontSize = tmpFontSize;
+                        return false;
+                    });
                 }
-
-                ControlFontPointSize = tmpFontSize;
-                CGSize cgSize = LabelSize(widthConstraint, ControlFontPointSize);
-                if (tmpHt < 0)
-                {
-                    tmpHt = cgSize.Height;
-                    if (heightConstraint > double.MaxValue / 4)
-                        tmpHt += ControlFont.Leading;  // required to address an issue with unconstrained height, lines=0, some font sizes
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("G 1 tmpHt=[" + tmpHt + "]");
-                }
-
-
-                if (Element.AutoFit == AutoFit.None && Element.Lines > 0)
-                {
-                    double lines = (cgSize.Height + ControlFont.Leading) / (ControlFont.LineHeight + ControlFont.Leading);
-                    ControlLines = lines < Element.Lines ? (int)Math.Ceiling(lines) : Element.Lines;
-                    //tmpHt = ControlFont.LineHeight * ControlLines + ControlFont.Leading * (ControlLines);// - 1);
-                    if (heightConstraint < double.MaxValue / 5)
-                    {
-                        //System.Diagnostics.Debug.WriteLine("heightConstraint=[BIG] Element.Lines=[" + Element.Lines + "]");
-                        tmpHt = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                    }
-                    else
-                    {
-                        //System.Diagnostics.Debug.WriteLine("heightConstraint=[" + heightConstraint + "] ControlLines=[" + ControlLines + "]");
-                        tmpHt = ControlLines * (ControlFont.LineHeight + ControlFont.Leading);
-                    }
-                    /*
-                    if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    {
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.Leading=[" + ControlFont.Leading + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.LineHeight=[" + ControlFont.LineHeight + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.Ascender=[" + ControlFont.Ascender + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.Descender=[" + ControlFont.Descender + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.CapHeight=[" + ControlFont.CapHeight + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.PointSize=[" + ControlFont.PointSize + "]");
-                        System.Diagnostics.Debug.WriteLine("\tControlFont.xHeight=[" + ControlFont.xHeight + "]");
-                    }
-*/
-
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("H tmpHt=[" + tmpHt + "]  ControlLines=[" + ControlLines + "] lines=[" + lines + "]");
-                }
-                tmpWd = cgSize.Width;
-
 
 
                 var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                 {
-                    ControlFont = ControlFont.WithSize(syncFontSize);
-                    cgSize = LabelSize(widthConstraint, syncFontSize);
-                    tmpWd = cgSize.Width;
-                    tmpHt = cgSize.Height;
+                    //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
+                    //    System.Diagnostics.Debug.WriteLine("D tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] sync=[" + syncFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
+                    tmpFontSize = syncFontSize;
                 }
 
+                ControlFont = ControlFont.WithSize(tmpFontSize);
+                //ControlFontPointSize = tmpFontSize;
+                CGSize cgSize = LabelSize(widthConstraint, tmpFontSize);
+
+                //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
+                //    System.Diagnostics.Debug.WriteLine("E tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
 
-                // Control.BackgroundColor = UIColor.FromRGBA(0, 0, 255, 100);
 
-                if (Element.AutoFit == AutoFit.Width)
-                    ControlLines = Element.Lines;
-                switch (Element.LineBreakMode)
+                //if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
                 {
-                    case LineBreakMode.NoWrap:
-                        ControlLineBreakMode = UILineBreakMode.Clip;
-                        ControlLines = 1;
-                        break;
-                    case LineBreakMode.WordWrap:
-                        ControlLineBreakMode = UILineBreakMode.WordWrap;
-                        break;
-                    case LineBreakMode.CharacterWrap:
-                        ControlLineBreakMode = UILineBreakMode.CharacterWrap;
-                        break;
-                    case LineBreakMode.HeadTruncation:
-                        ControlLineBreakMode = UILineBreakMode.HeadTruncation;
-                        break;
-                    case LineBreakMode.TailTruncation:
-                        ControlLineBreakMode = UILineBreakMode.TailTruncation;
-                        break;
-                    case LineBreakMode.MiddleTruncation:
-                        ControlLineBreakMode = UILineBreakMode.MiddleTruncation;
-                        break;
-                }
-
-                double gap = 0;
-                double height = Math.Max(cgSize.Height, tmpHt);
-                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                //    System.Diagnostics.Debug.WriteLine("cgSize.Height=[" + cgSize.Height + "] tmpHt=[" + tmpHt + "] height=[" + height + "]");
-                if (!double.IsInfinity(heightConstraint))
-                {
-                    height = Math.Max(height, heightConstraint);
-                    //height = Math.Max(height, tmpHt);
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("J heightContraint=[" + heightConstraint + "] height=[" + height + "]");
-                }
-                double y = 0;
-
-                //if (Element.HtmlText == "System")
-                //	System.Diagnostics.Debug.WriteLine("GetDesiredSize(" + widthConstraint + "," + heightConstraint + ") enter");
-
-                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                //    System.Diagnostics.Debug.WriteLine("cgSize.Height[" + cgSize.Height + "] tmpHt[" + tmpHt + "] heightConstraint[" + heightConstraint + "] height[" + height + "]");
-
-                if (heightConstraint < tmpHt)
-                {
-                    gap = -(nfloat)(tmpHt - heightConstraint);
-                    height = heightConstraint;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("D gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
-                }
-                else if (Element.AutoFit == AutoFit.None && tmpHt < height)
-                //if (tmpHt < height)
-                {
-                    gap = (nfloat)(height - tmpHt);
-                    height = tmpHt;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("A gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
-                }
-                else if (cgSize.Height < height)// && !double.IsPositiveInfinity(heightConstraint))
-                {
-                    gap = (nfloat)(height - cgSize.Height);
-                    height = cgSize.Height;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("B gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
-                }
-                else if (cgSize.Height < tmpHt)
-                {
-                    gap = (nfloat)(tmpHt - cgSize.Height);
-                    height = cgSize.Height / 2.0;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("C gap[" + gap + "] height=[" + height + "] Center.Y=[" + (height / 2.0 + y) + "]");
-                }
-
-                if (Element.AutoFit == AutoFit.None && Element.Lines == 0)
-                {
-                    //var cgLines = Math.Ceiling(cgSize.Height / ControlFont.LineHeight);
-                    var cgLines = cgSize.Height / ControlFont.LineHeight;
-                    var portLines = heightConstraint / ControlFont.LineHeight;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("cgLines=[" + cgLines + "] portLines=[" + portLines + "]");
-                    ControlLines = (int)Math.Min(cgLines, portLines);
-                }
-                else
-                {
-                    ControlLines = Math.Min(ControlLines, Element.Lines);
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("1 Controlines=[" + ControlLines + "]");
-                    ControlLines = firstRun ? Element.Lines : ControlLines;
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("2 Controlines=[" + ControlLines + "]");
-                    ControlLines = (int)Math.Min(Math.Floor(Control.Frame.Height / ControlFont.LineHeight), ControlLines);
-                }
-                //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                //    System.Diagnostics.Debug.WriteLine("3 Controlines=[" + ControlLines + "]");
-                firstRun = false;
-
-
-
-                if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
-                {
-                    //System.Diagnostics.Debug.WriteLine("Control Property Changed");
                     Control.Hidden = true;
-                    Control.Lines = ControlLines;
+                    Control.Lines = Element.Lines;
                     Control.LineBreakMode = ControlLineBreakMode;
 
                     Control.AdjustsFontSizeToFitWidth = false;
@@ -320,112 +185,91 @@ namespace Forms9Patch.iOS
                     else
                         Control.Text = ControlText;
 
-                    if (!_delayingActualFontSizeUpdate)
-                    {
-                        _delayingActualFontSizeUpdate = true;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
-                        {
-                            _delayingActualFontSizeUpdate = false;
-                            if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                                Element.OptimalFontSize = ControlFontPointSize;
-                            return false;
-                        });
-                    }
                     Control.Hidden = false;
                 }
 
 
+                firstRun = false;
 
-                if (Element.LineBreakMode == LineBreakMode.NoWrap && ControlLines > 0)
+                double reqWidth = cgSize.Width;
+                double reqHeight = cgSize.Height;
+                var textHeight = cgSize.Height + 0.05;
+                var textLines = Lines(textHeight, Control.Font);
+                string alg = "--";
+                string cnstLinesStr = "CL: n/a    ";
+                string lineHeight = "LH: " + Control.Font.LineHeight.ToString("00.000");
+                string cnstLinesHeight = "CLH: n/a   ";
+
+                if (double.IsPositiveInfinity(heightConstraint))
                 {
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("xB");
-                    switch (Element.VerticalTextAlignment)
+                    if (Element.Lines > 0 && (Element.AutoFit != AutoFit.Width || Element.Lines <= textLines))// && Element.Lines <= textLines)
                     {
-                        case TextAlignment.Start:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("Nw S");
-                            Control.Center = new CGPoint(Control.Center.X, 0 + (Control.Font.LineHeight + Control.Font.Leading) / 2.0);
-                            break;
-                        case TextAlignment.Center:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("Nw C");
-                            Control.Center = new CGPoint(Control.Center.X, Control.Frame.Height / 2.0);
-                            break;
-                        case TextAlignment.End:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("Nw E");
-                            Control.Center = new CGPoint(Control.Center.X, Control.Frame.Height - (Control.Font.LineHeight + Control.Font.Leading) / 2.0);
-                            break;
+                        reqHeight = Element.Lines * Control.Font.LineHeight;
+                        alg = "∞A";
+                    }
+                    Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
+
+                    if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
+                    {
+                        //System.Diagnostics.Debug.WriteLine("A FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   TEXT:" + Element.Text);
+                        //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
                     }
                 }
-                else if ((Element.AutoFit == AutoFit.Width || Element.AutoFit == AutoFit.Lines) && gap > 0)
+                else
                 {
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("xC");
-                    switch (Element.VerticalTextAlignment)
+                    var constraintLines = Lines(heightConstraint, Control.Font);
+                    var constraintLinesHeight = Math.Floor(constraintLines) * Control.Font.LineHeight;
+                    cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
+
+
+                    if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
                     {
-                        case TextAlignment.Center:
-                            y = gap / 2.0;
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("CENTER");
-                            break;
-                        case TextAlignment.End:
-                            y = gap;
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("END");
-                            break;
+                        reqHeight = Element.Lines * Control.Font.LineHeight;
+                        alg = "A";
                     }
-                    Control.Center = new CGPoint(Control.Center.X, height / 2.0 + y);
-                }
-                else if (ControlLines > 0 && Math.Abs(gap) > 0.1)
-                {
-                    //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    //    System.Diagnostics.Debug.WriteLine("xD");
-                    //System.Diagnostics.Debug.WriteLine("calc lines=[" + lines + "]");
-
-                    //if (!(Element.AutoFit == LabelFit.None && Element.Lines == 0))
+                    else if (textLines <= constraintLines)
                     {
-                        double textBlockHeight = ControlFont.LineHeight * ControlLines;// + ControlFont.Leading * (ControlLines);// - 1);
-
-                        gap = Control.Frame.Height - textBlockHeight;
-                        //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                        //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 Control.Frame.Height=[" + Control.Frame.Height + "] textBlockHeight=[" + textBlockHeight + "] gap=[" + gap + "]");
+                        reqHeight = textHeight;
+                        alg = "B";
+                    }
+                    else if (constraintLines >= 1)
+                    {
+                        reqHeight = constraintLinesHeight;
+                        alg = "C";
+                    }
+                    else
+                    {
+                        reqHeight = heightConstraint;
+                        alg = "D";
                     }
 
+                    if (Element.VerticalTextAlignment == TextAlignment.Start)
+                        Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
+                    else if (Element.VerticalTextAlignment == TextAlignment.End)
+                        Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
 
-
-                    switch (Element.VerticalTextAlignment)
+                    if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
                     {
-                        case TextAlignment.Start:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 S");
-                            Control.Center = new CGPoint(Control.Center.X, Control.Center.Y - gap / 2);
-                            break;
-                        case TextAlignment.Center:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 C");
-                            Control.Center = new CGPoint(Control.Center.X, Control.Center.Y);
-                            break;
-                        case TextAlignment.End:
-                            //if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                            //    System.Diagnostics.Debug.WriteLine("CL>0 ABS(gap)>0 E");
-                            Control.Center = new CGPoint(Control.Center.X, Control.Center.Y + gap / 2);
-                            break;
+                        //System.Diagnostics.Debug.WriteLine("B FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   CL:" + constraintLines.ToString("0") + "   CLH:" + constraintLinesHeight.ToString("000.000") + "   TEXT:" + Element.Text);
+                        //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
                     }
+
                 }
 
-
-                LastDesiredSize = new SizeRequest(new Size(tmpWd, tmpHt), new Size(10, ControlFont.LineHeight));
+                //Control.BackgroundColor = Color.Orange.WithAlpha(0.5).ToUIColor();
                 /*
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("tmpWd[" + tmpWd + "] tmpHt[" + tmpHt + "]");
-                if ((Element.Text != null && Element.Text.StartsWith("Żyłę;")) || (Control.Text != null && Control.Text.StartsWith("Żyłę;")))
-                    System.Diagnostics.Debug.WriteLine("");
-                    */
-                //if (Element.Text == "HEIGHTS AND AREAS CALCULATOR")
-                //if (Element.HtmlText=="Fractional Mode")
-                //	System.Diagnostics.Debug.WriteLine("\tresult=[" + LastDesiredSize + "] Font=["+Control.Font+"] AutoFit=["+Element.AutoFit+"] Lines=["+Element.Lines+"]");
+                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                {
+                    Element.Field1 = "TH: " + textHeight.ToString("000.000");
+                    Element.Field2 = "TL: " + textLines.ToString("0.00000");
+                    Element.Field3 = "CH: " + heightConstraint.ToString("000.000");
+                    Element.Field4 = cnstLinesStr;
+                    Element.Field5 = alg;
+                    Element.Field6 = lineHeight;
+                    return false;
+                });
+*/
+                LastDesiredSize = new SizeRequest(new Size(reqWidth, reqHeight), new Size(10, ControlFont.LineHeight));
             }
             return LastDesiredSize;
         }
@@ -539,7 +383,7 @@ namespace Forms9Patch.iOS
             {
                 var font = Control.Font.WithSize(result);
                 CGSize labelSize = LabelSize(widthConstraint, result);
-                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=["+result+"] lineHeight=["+font.LineHeight+"] height=["+labelSize.Height+"] lines=["+(labelSize.Height / font.LineHeight)+"]");
+                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=["+result+"] lineHeight=["+font.LineHeight+"] textBodyHeight=["+labelSize.Height+"] lines=["+(labelSize.Height / font.LineHeight)+"]");
                 if ((labelSize.Height / font.LineHeight) <= Element.Lines + .005f)
                 {
                     // the backspace character is tripping up this algorithm.  So we need to do a second check
@@ -576,7 +420,7 @@ namespace Forms9Patch.iOS
             for (result = start; result > min; result -= step)
             {
                 CGSize labelSize = LabelSize(widthConstraint, result);
-                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=[" + result + "] height=[" + labelSize.Height + "]");
+                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=[" + result + "] textBodyHeight=[" + labelSize.Height + "]");
                 if (labelSize.Height <= heightConstraint)
                 {
                     labelSize = Control.IntrinsicContentSize;
@@ -590,6 +434,12 @@ namespace Forms9Patch.iOS
 
         #endregion
 
+
+        double Lines(double height, UIFont font)
+        {
+            //return (height + font.Leading) / (font.LineHeight + font.Leading);
+            return (height) / (font.LineHeight);
+        }
 
         #region Change management
         /// <summary>
@@ -632,6 +482,7 @@ namespace Forms9Patch.iOS
         /// <param name="e">E.</param>
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine("PROPERTYCHANGED [" + e.PropertyName + "]");
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName)
                 UpdateHorizontalAlignment();

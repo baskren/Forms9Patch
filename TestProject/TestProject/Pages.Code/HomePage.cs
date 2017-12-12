@@ -114,7 +114,15 @@ namespace Forms9PatchDemo
 
                     },
 
+
                     new TableSection("Code") {
+
+                        new TextCell {
+                            Text = "Label AutoFit",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(LabelAutoFitPage)
+                        },
+
 
                         new TextCell {
                             Text = "ImageCodePage",
@@ -187,12 +195,6 @@ namespace Forms9PatchDemo
                             CommandParameter = typeof(LabelInHorizontalStackLayout)
                         },
 
-
-                        new TextCell {
-                            Text = "Label AutoFit",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(LabelAutoFitPage)
-                        },
 
                         new TextCell {
                             Text = "Unimposed Height Label AutoFit",

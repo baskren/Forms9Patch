@@ -1449,7 +1449,7 @@ namespace Forms9Patch
                 || propertyName == DarkThemeProperty.PropertyName
                 || propertyName == ExtendedElementShapeProperty.PropertyName)
             {
-                System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
+                //System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
                 UpdateElements();
             }
             else if (propertyName == OrientationProperty.PropertyName)

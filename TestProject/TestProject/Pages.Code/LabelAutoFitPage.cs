@@ -17,6 +17,17 @@ namespace Forms9PatchDemo
         double lastFontSize = -1;
         bool rendering = false;
 
+        Label _field1 = new Label { FontSize = 10 };
+        Label _field2 = new Label { FontSize = 10 };
+        Label _field3 = new Label { FontSize = 10 };
+        Label _field4 = new Label { FontSize = 10 };
+        Label _field5 = new Label { FontSize = 10 };
+        Label _field6 = new Label { FontSize = 10 };
+
+        Forms9Patch.MaterialSegmentedControl hzAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
+        Forms9Patch.MaterialSegmentedControl vtAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
+        Label vtAlignmentSelectorLabel = new Label { Text = "Vertical Alignment:" };
+
         Forms9Patch.Label f9pLabel = new Forms9Patch.Label
         {
             //HeightRequest = 50,
@@ -25,7 +36,8 @@ namespace Forms9PatchDemo
             TextColor = Color.White,
             AutoFit = Forms9Patch.AutoFit.None,
             BackgroundColor = Color.Black,
-            Text = text1
+            Text = text1,
+            VerticalTextAlignment = TextAlignment.End
         };
 
         Label xfLabel = new Label
@@ -149,6 +161,7 @@ namespace Forms9PatchDemo
             #region Impose Height
             var imposeHeightSwitch = new Switch { IsToggled = true };
             var heightRequestSlider = new Slider(0, 800, 100);
+            heightRequestSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(0.5));
             var imposedHeightGrid = new Grid
             {
                 RowDefinitions = new RowDefinitionCollection
@@ -173,6 +186,10 @@ namespace Forms9PatchDemo
                 double heightRequest = imposeHeightSwitch.IsToggled ? heightRequestSlider.Value : -1;
                 frameForXF.HeightRequest = heightRequest;
                 frameForF9P.HeightRequest = heightRequest;
+                heightRequestSlider.IsVisible = imposeHeightSwitch.IsToggled;
+                heightRequestLabel.IsVisible = imposeHeightSwitch.IsToggled;
+                vtAlignmentSelector.IsVisible = imposeHeightSwitch.IsToggled;
+                vtAlignmentSelectorLabel.IsVisible = imposeHeightSwitch.IsToggled;
             };
 
             heightRequestSlider.ValueChanged += (hrs, hrsArgs) =>
@@ -180,7 +197,7 @@ namespace Forms9PatchDemo
                 double heightRequest = imposeHeightSwitch.IsToggled ? heightRequestSlider.Value : -1;
                 frameForXF.HeightRequest = heightRequest;
                 frameForF9P.HeightRequest = heightRequest;
-                heightRequestLabel.Text = "HeightRequest: " + heightRequestSlider.Value;
+                heightRequestLabel.Text = "HeightRequest: " + heightRequestSlider.Value.ToString("####.###");
             };
             #endregion
 
@@ -192,6 +209,16 @@ namespace Forms9PatchDemo
             {
                 if (e.PropertyName == Forms9Patch.Label.OptimalFontSizeProperty.PropertyName)
                     actualFontSizeLabel.Text = "OptimalFontSize: " + f9pLabel.OptimalFontSize;
+                else if (e.PropertyName == Forms9Patch.Label.Field1Property.PropertyName)
+                    _field1.Text = f9pLabel.Field1;
+                else if (e.PropertyName == Forms9Patch.Label.Field2Property.PropertyName)
+                    _field2.Text = f9pLabel.Field2;
+                else if (e.PropertyName == Forms9Patch.Label.Field3Property.PropertyName)
+                    _field3.Text = f9pLabel.Field3;
+                else if (e.PropertyName == Forms9Patch.Label.Field4Property.PropertyName)
+                    _field4.Text = f9pLabel.Field4;
+                else if (e.PropertyName == Forms9Patch.Label.Field5Property.PropertyName)
+                    _field5.Text = f9pLabel.Field5;
             };
             #endregion
 
@@ -201,7 +228,7 @@ namespace Forms9PatchDemo
             {
                 Text = "Lines: 5"
             };
-            
+
             LinesSlider.ValueChanged += (sender, e) =>
             {
                 linesLabel.Text = "Lines: " + ((int)Math.Round(LinesSlider.Value));
@@ -240,8 +267,6 @@ namespace Forms9PatchDemo
 
 
             #region Alignment Selection
-            var hzAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
-            var vtAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
             hzAlignmentSelector.Segments.Add(
                 new Forms9Patch.Segment
                 {
@@ -410,11 +435,12 @@ namespace Forms9PatchDemo
 
             Content = new ScrollView
             {
-                Padding = 10,
+                Padding = 0,
                 Content = new StackLayout
                 {
-                    Padding = 50,
+                    Padding = 10,
                     Children = {
+                        /*
                         new Label { Text = "Text:" },
                         editor,
                         new StackLayout
@@ -431,30 +457,37 @@ namespace Forms9PatchDemo
 
                         new Label { Text = "Xamarin.Forms.Label:" },
                         frameForXF,
+                        */
                         new Label { Text = "Forms9Patch.Label:" },
                         frameForF9P,
 
-
-                        new Label {
-                            Text = "Font Family:",
-                            HorizontalOptions = LayoutOptions.Start
+                        new StackLayout{
+                            Orientation = StackOrientation.Horizontal,
+                            Children = { _field1, _field2, _field3, _field4, _field5, _field6 }
                         },
-                        fontPicker,
+
+                        new StackLayout {
+                            Orientation = StackOrientation.Horizontal,
+                            Children = { new Label { Text = "Font:", HorizontalOptions = LayoutOptions.Start }, fontPicker, }
+                        },
 
                         fontSizeLabel,
                         fontSizeSlider,
                         actualFontSizeLabel,
+
                         new Label { Text = "AutoFit:" },
                         fitSelector,
+
                         linesLabel,
                         LinesSlider,
+
                         imposedHeightGrid,
 
 
+                        vtAlignmentSelectorLabel,
+                        vtAlignmentSelector,
                         new Label { Text = "Horizontal Alignment:" },
                         hzAlignmentSelector,
-                        new Label { Text = "Vertical Alignment:" },
-                        vtAlignmentSelector,
                         new Label { Text = "Truncation Mode:" },
                         breakModeSelector,
 
@@ -502,7 +535,7 @@ namespace Forms9PatchDemo
                 });
             }
             lastFontSize = e.NewValue;
-            
+
         }
     }
 }

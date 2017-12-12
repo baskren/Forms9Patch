@@ -160,6 +160,7 @@
     <Compile Include="..\Forms9Patch\Renderers\BubbleLayoutRenderer.cs">
       <Link>Renderers\BubbleLayoutRenderer.cs</Link>
     </Compile>
+    <Compile Include="Effects\SliderStepSizeEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
