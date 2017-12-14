@@ -28,5 +28,17 @@ namespace Forms9Patch
             Assembly = assembly;
         }
 
+        public static bool ApplyTo(VisualElement element, Assembly assembly = null)
+        {
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            var effect = new EmbeddedResourceFontEffect(assembly);
+            if (effect != null)
+            {
+                element.Effects.Add(effect);
+                return element.Effects.Contains(effect);
+            }
+            return false;
+        }
     }
 }

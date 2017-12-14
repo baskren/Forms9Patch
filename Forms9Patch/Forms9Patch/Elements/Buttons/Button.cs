@@ -488,6 +488,7 @@ namespace Forms9Patch
 
         #region IShape
 
+       
         #region BackgroundColor
         /// <summary>
         /// Backing store for the BackgroundColor property
@@ -502,6 +503,7 @@ namespace Forms9Patch
             set { SetValue(BackgroundColorProperty, value); }
         }
         #endregion
+
 
         #region HasShadow
         /// <summary>
@@ -534,6 +536,7 @@ namespace Forms9Patch
             set { SetValue(OutlineColorProperty, value); }
         }
         #endregion OutlineColor
+        
 
         // OutlineRadius inherited
 
@@ -555,10 +558,10 @@ namespace Forms9Patch
 
 
 
-
         // ElementShape inherited from Forms9Patch.Frame
 
         // ExtendedElementShape inherited from Forms9Patch.Frame
+            
 
         #endregion IShape
 
@@ -1131,7 +1134,7 @@ namespace Forms9Patch
                     //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                     base.OutlineColor = enabledLabelColor; // _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
 
-                base.HasShadow = base.BackgroundColor.A > 0 && HasShadow;
+                base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source!=null) && HasShadow;
                 //var hasShadow = base.BackgroundColor.A > 0 && HasShadow;
                 //SetValue(ShapeBase.HasShadowProperty, hasShadow);
                 ShadowInverted = IsSelected && !this.IsSegment();

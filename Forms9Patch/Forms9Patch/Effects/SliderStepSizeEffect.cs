@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Enabled StepSize control of Xamarin.Forms.Slider element
     /// </summary>
-    public class SliderStepSizeEffect : Xamarin.Forms.RoutingEffect, INotifyPropertyChanged
+    public class SliderStepSizeEffect : RoutingEffect, INotifyPropertyChanged
     {
         /// <summary>
         /// PropertyChanged event handler
@@ -50,6 +52,18 @@ namespace Forms9Patch
         {
             _stepSize = stepSize;
         }
+
+        public static bool ApplyTo(Slider slider, Assembly assembly = null)
+        {
+            var effect = new SliderStepSizeEffect();
+            if (effect != null)
+            {
+                slider.Effects.Add(effect);
+                return slider.Effects.Contains(effect);
+            }
+            return false;
+        }
+
 
     }
 }

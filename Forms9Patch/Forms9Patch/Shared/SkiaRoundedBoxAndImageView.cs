@@ -314,6 +314,7 @@ namespace Forms9Patch
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
                      || e.PropertyName == Forms9Patch.Button.SeparatorWidthProperty.PropertyName
+                     || e.PropertyName == Forms9Patch.Button.HasShadowProperty.PropertyName
                 )
             {
                 _validLayout = false;
