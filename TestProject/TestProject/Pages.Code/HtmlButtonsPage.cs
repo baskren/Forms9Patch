@@ -12,7 +12,7 @@ namespace Forms9PatchDemo
             BackgroundColor = Color.White;
 
             #region Material Button
-            var mb1 = new Forms9Patch.MaterialButton
+            var mb1 = new Forms9Patch.Button
             {
                 IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
                 HtmlText = "<i>Markup</i> button",
@@ -30,7 +30,7 @@ namespace Forms9PatchDemo
             #endregion
 
             #region Segmented Button
-            var sc1 = new Forms9Patch.MaterialSegmentedControl
+            var sc1 = new Forms9Patch.SegmentedControl
             {
                 HasShadow = true,
                 BackgroundColor = Color.FromRgb(200, 200, 200),
@@ -64,9 +64,9 @@ namespace Forms9PatchDemo
             #endregion
 
             #region Image Button
-            var ib1 = new Forms9Patch.ImageButton
+            var ib1 = new Forms9Patch.StateButton
             {
-                DefaultState = new Forms9Patch.ImageButtonState
+                DefaultState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -80,7 +80,7 @@ namespace Forms9PatchDemo
                     //Text = "Sticky w/ SelectedState",
                     HtmlText = "<b>Sticky</b> with <i>SelectedState</i>",
                 },
-                SelectedState = new Forms9Patch.ImageButtonState
+                SelectedState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -135,22 +135,22 @@ namespace Forms9PatchDemo
 
         static void OnImageButtonTapped(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonSelected(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressing(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
         #endregion
 

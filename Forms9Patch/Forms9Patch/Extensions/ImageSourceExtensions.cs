@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// ImageSource extension methods
+    /// </summary>
     public static class ImageSourceExtensions
     {
+        /// <summary>
+        /// Determins if two ImageSources are the same
+        /// </summary>
+        /// <param name="thisSource"></param>
+        /// <param name="otherSource"></param>
+        /// <returns></returns>
         public static bool SameAs(this Xamarin.Forms.ImageSource thisSource, Xamarin.Forms.ImageSource otherSource)
         {
             if (thisSource == otherSource)

@@ -37,42 +37,42 @@ namespace Forms9PatchDemo
 
         void OnMaterialButtonTapped(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.MaterialButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.Button)sender).Text + "]");
         }
 
         void OnMaterialButtonSelected(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.MaterialButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.Button)sender).Text + "]");
         }
 
         void OnMaterialButtonLongPressing(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.MaterialButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.Button)sender).Text + "]");
         }
 
         void OnMaterialButtonLongPressed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.MaterialButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.Button)sender).Text + "]");
         }
 
         void OnImageButtonTapped(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         void OnImageButtonSelected(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         void OnImageButtonLongPressing(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         void OnImageButtonLongPressed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         const bool debugProperties = true;

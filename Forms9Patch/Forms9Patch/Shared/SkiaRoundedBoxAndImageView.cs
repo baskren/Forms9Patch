@@ -138,7 +138,7 @@ namespace Forms9Patch
 
 
         #region Properties
-        //MaterialButton materialButton => _roundedBoxElement as MaterialButton;
+        //Button materialButton => _roundedBoxElement as Button;
 
         Xamarin.Forms.View View => _roundedBoxElement as Xamarin.Forms.View;
 
@@ -279,7 +279,7 @@ namespace Forms9Patch
 #elif WINDOWS_UWP
         double ViewOpacity
         {
-            get => Opacity
+            get => Opacity;
             set => Opacity = value; 
         }
 
@@ -299,7 +299,7 @@ namespace Forms9Patch
         {
             if (_disposed)
                 return;
-            //if (MaterialButton!=null && MaterialButton.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
+            //if (Button!=null && Button.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
             //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
             //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
             //    System.Diagnostics.Debug.WriteLine("            IgnoreChanges=["+IgnoreChanges+"]");
@@ -313,7 +313,7 @@ namespace Forms9Patch
                 //|| e.PropertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName  // Already handled by the change in location / paddiing
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName
                 || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
-                     || e.PropertyName == Forms9Patch.MaterialButton.SeparatorWidthProperty.PropertyName
+                     || e.PropertyName == Forms9Patch.Button.SeparatorWidthProperty.PropertyName
                 )
             {
                 _validLayout = false;
@@ -557,7 +557,7 @@ namespace Forms9Patch
         /* TODO: Candidate for deletion
                 private void OnElementSizeChanged(object sender, EventArgs e)
                 {
-                    //if (_roundedBoxElement is MaterialButton materialButton && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
+                    //if (_roundedBoxElement is Button materialButton && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical)
                     //    if (_debugMessages)
                     //        System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] element.Size=[" + ((Xamarin.Forms.VisualElement)_roundedBoxElement).Bounds.Size + "] Size=[" + Width + ", " + Height + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
                     Invalidate();
@@ -570,7 +570,7 @@ namespace Forms9Patch
         #region Windows Layout Support
 #if WINDOWS_UWP
 
-        private protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
+        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
             if (_disposed)
                 return new Windows.Foundation.Size();
@@ -622,7 +622,7 @@ namespace Forms9Patch
             return result;
         }
 
-        private protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
+        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
             //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
 
@@ -659,19 +659,19 @@ namespace Forms9Patch
 
 
 
-            if (ValidLayout(CanvasSize))
+            if (ValidLayout(CanvasSize) && Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP)
                 return;
 
             canvas.Clear();
 
-            if (_roundedBoxElement is MaterialSegmentedControl materialSegmentedControl)
+            if (_roundedBoxElement is SegmentedControl materialSegmentedControl)
             {
                 // do nothing
             }
             else
             {
                 var hz = true;
-                var materialButton = _roundedBoxElement as MaterialButton;
+                var materialButton = _roundedBoxElement as Button;
                 if (materialButton != null)
                     hz = materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Horizontal;
                 var vt = !hz;
@@ -774,7 +774,10 @@ namespace Forms9Patch
 #elif __DROID__
                             ClipBounds = new Android.Graphics.Rect(0, 0, Width, Height);
 #elif WINDOWS_UWP
-                            Clip = new Windows.UI.Xaml.Media.RectangleGeometry { Rect = new Rect(0, 0, Width - 1, Height - 1) };
+
+                            var w = double.IsNaN(Width) ? e.Info.Width+1 : Width;
+                            var h = double.IsNaN(Height) ? e.Info.Height+1 : Height;
+                            Clip = new Windows.UI.Xaml.Media.RectangleGeometry { Rect = new Rect(0, 0, w - 1, h - 1) };
 #else
                             Clips;
 #endif
@@ -836,14 +839,14 @@ namespace Forms9Patch
                             Color = outlineColor.ToSKColor(),
                             StrokeWidth = outlineWidth,
                             IsAntialias = true,
+                            //StrokeJoin = SKStrokeJoin.Bevel
                             //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
                         };
                         var outlineRect = RectInsetForShape(perimeter, elementShape, outlineWidth / 2, vt);
                         var path = PerimeterPath(_roundedBoxElement, outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0));
                         canvas.DrawPath(path, outlinePaint);
                     }
-
-                    if (drawSeparators && !drawOutline && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
+                    else if (drawSeparators && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
                     {
                         var separatorPaint = new SKPaint
                         {
@@ -861,8 +864,8 @@ namespace Forms9Patch
                         }
                         else
                         {
-                            path.MoveTo(perimeter.Left + outlineWidth / 2.0f, perimeter.Top);
-                            path.LineTo(perimeter.Left + outlineWidth / 2.0f, perimeter.Bottom);
+                            path.MoveTo(perimeter.Left + outlineWidth, perimeter.Top);
+                            path.LineTo(perimeter.Left + outlineWidth, perimeter.Bottom);
                         }
                         canvas.DrawPath(path, separatorPaint);
                     }
@@ -1149,7 +1152,7 @@ namespace Forms9Patch
             if (element is BubbleLayout bubble && bubble.PointerDirection != PointerDirection.None)
                 return BubblePerimeterPath(bubble, rect, radius);
 
-            var materialButton = element as MaterialButton;
+            var materialButton = element as Button;
             Xamarin.Forms.StackOrientation orientation = materialButton == null ? Xamarin.Forms.StackOrientation.Horizontal : materialButton.ParentSegmentsOrientation;
 
             var path = new SKPath();

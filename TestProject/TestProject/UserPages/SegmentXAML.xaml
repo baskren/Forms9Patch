@@ -8,7 +8,7 @@
 	>
 	<ContentPage.Content>
 
-	<f9p:MaterialSegmentedControl 
+	<f9p:SegmentedControl 
 			BackgroundColor="White" 
 			WidthRequest="100"  
 			Padding="1" 
@@ -22,7 +22,7 @@
 			HorizontalOptions="End">
     		<f9p:Segment Text="Playing" Orientation="Vertical" IsSelected="{Binding IsPlaying}"/>
      		<f9p:Segment Text="Resting" Orientation="Vertical"/>
-	</f9p:MaterialSegmentedControl>
+	</f9p:SegmentedControl>
 		
 	</ContentPage.Content>
 </ContentPage>

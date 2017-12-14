@@ -31,19 +31,6 @@ namespace Forms9Patch
 			return indicator;
 		}
 
-		/// <summary>
-		/// Create the specified target.
-		/// </summary>
-		/// <param name="target">Target.</param>
-		[Obsolete]
-		public static ActivityIndicatorPopup Create(VisualElement target = null)
-		{
-			var indicator = new ActivityIndicatorPopup();
-			indicator.IsVisible = true;
-			return indicator;
-		}
-
-
 
 		#region Fields
 		ActivityIndicator _indicator = new ActivityIndicator

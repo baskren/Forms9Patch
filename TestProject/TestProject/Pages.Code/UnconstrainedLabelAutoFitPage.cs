@@ -22,7 +22,7 @@ namespace Forms9PatchDemo
 
 
 
-        readonly Forms9Patch.MaterialSegmentedControl fitSelector = new Forms9Patch.MaterialSegmentedControl();
+        readonly Forms9Patch.SegmentedControl fitSelector = new Forms9Patch.SegmentedControl();
 
         double lastFontSize = -1;
         bool rendering = false;
@@ -155,8 +155,8 @@ namespace Forms9PatchDemo
 
             f9pLabel.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName == Forms9Patch.Label.OptimalFontSizeProperty.PropertyName)
-                    actualFontSizeLabel.Text = "OptimalFontSize: " + f9pLabel.OptimalFontSize;
+                if (e.PropertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName)
+                    actualFontSizeLabel.Text = "FittedFontSize: " + f9pLabel.FittedFontSize;
             };
 
             #endregion
@@ -182,7 +182,7 @@ namespace Forms9PatchDemo
 
 
             #region AutoFit Selection
-            var fitSelector = new Forms9Patch.MaterialSegmentedControl();
+            var fitSelector = new Forms9Patch.SegmentedControl();
             fitSelector.Segments.Add(new Forms9Patch.Segment
             {
                 Text = "None",
@@ -216,8 +216,8 @@ namespace Forms9PatchDemo
 
 
             #region Alignment Selection
-            var hzAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
-            var vtAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
+            var hzAlignmentSelector = new Forms9Patch.SegmentedControl();
+            var vtAlignmentSelector = new Forms9Patch.SegmentedControl();
             hzAlignmentSelector.Segments.Add(
                 new Forms9Patch.Segment
                 {
@@ -290,7 +290,7 @@ namespace Forms9PatchDemo
 
 
             #region BreakMode selection
-            var breakModeSelector = new Forms9Patch.MaterialSegmentedControl();
+            var breakModeSelector = new Forms9Patch.SegmentedControl();
             breakModeSelector.Segments.Add(
                 new Forms9Patch.Segment
                 {

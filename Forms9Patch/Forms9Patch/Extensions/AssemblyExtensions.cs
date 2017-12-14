@@ -38,9 +38,19 @@ namespace Forms9Patch
             for (int i = resourcePath.Count - 1; i < 0; i--)
             {
                 var asmName = string.Join(".", resourcePath.GetRange(0, i));
-                assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
-                if (assembly != null)
-                    return assembly;
+                if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
+                {
+                    assembly = PCL.Utils.ReflectionExtensions.GetAssemblyByName(asmName);
+                    if (assembly != null)
+                        return assembly;
+                }
+                else if (Device.RuntimePlatform == Device.UWP)
+                {
+                    foreach (var asm in Settings.IncludedAssemblies)
+                        if (asm?.GetName().Name == asmName)
+                            return asm;
+                }
+
             }
             return null;
         }

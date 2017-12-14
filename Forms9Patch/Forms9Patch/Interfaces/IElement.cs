@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// The foundation of Forms9Patch visual elements
+    /// </summary>
     public interface IElement
     {
         /// <summary>

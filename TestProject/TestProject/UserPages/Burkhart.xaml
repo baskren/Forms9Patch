@@ -20,10 +20,10 @@
 
 		<!--Entry x:Name="textEntry" Text="Button Label Text"  Grid.Row="0" Grid.Column="0" /-->
 
-		<f9p:ImageButton x:Name="SignInButton" ToggleBehavior="true" HeightRequest="80" Alignment="Start"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+		<f9p:StateButton x:Name="SignInButton" ToggleBehavior="true" HeightRequest="80" Alignment="Start"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
 
 
-		</f9p:ImageButton>
+		</f9p:StateButton>
 
 
 

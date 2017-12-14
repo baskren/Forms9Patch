@@ -32,8 +32,6 @@ namespace Forms9Patch
                                                                                                                              //class F9pLayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, ILayout // VisualElement, IBackgroundImage
     {
         #region Fields
-        bool _disposed;
-
         static int _instances;
         int _instance;
         #endregion

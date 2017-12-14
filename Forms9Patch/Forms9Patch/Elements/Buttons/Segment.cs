@@ -12,9 +12,23 @@ namespace Forms9Patch
 	[ContentProperty("HtmlText")]
 	public class Segment : BindableObject, ISegment
 	{
-        #region ISegment properties
+        #region Obsolete Properties
+        /// <summary>
+        /// OBSOLETE: Use TextColorProperty
+        /// </summary>
+        [Obsolete("Use TextColorProperty")]
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(Segment), Color.Default);
+        /// <summary>
+        /// OBSOLETE: Use TextColor
+        /// </summary>
+        /// <value>The color of the font.</value>
+        [Obsolete("Use TextColor")]
+        public Color FontColor
+        {
+            get { throw new NotSupportedException("Use TextColor"); }
+            set { throw new NotSupportedException("Use TextColor"); }
+        }
 
-        #region IconImage property
         /// <summary>
         /// Backing store for the Image bindable property.
         /// </summary>
@@ -31,7 +45,12 @@ namespace Forms9Patch
             set { throw new NotSupportedException("Use IconImage instead"); }
         }
 
+        #endregion
 
+
+        #region ISegment properties
+
+        #region IconImage property
         /// <summary>
         /// Bindable Property for the IconImage property
         /// </summary>
@@ -105,22 +124,6 @@ namespace Forms9Patch
         #endregion HtmlText property
 
         #region TextColor property
-        /// <summary>
-        /// OBSOLETE: Use TextColorProperty
-        /// </summary>
-        [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(Segment), Color.Default);
-        /// <summary>
-        /// OBSOLETE: Use TextColor
-        /// </summary>
-        /// <value>The color of the font.</value>
-        [Obsolete("Use TextColor")]
-        public Color FontColor
-        {
-            get { throw new NotSupportedException("Use TextColor"); }
-            set { throw new NotSupportedException("Use TextColor"); }
-        }
-
         /// <summary>
         /// Backing store for the Segment.TextColor bindable property.
         /// </summary>
@@ -233,8 +236,8 @@ namespace Forms9Patch
         {
             //get { return (ICommand)GetValue (CommandProperty); }
             //set { SetValue (CommandProperty, value); }
-            get { return MaterialButton.Command; }
-            set { MaterialButton.Command = value; }
+            get { return _button.Command; }
+            set { _button.Command = value; }
         }
         #endregion ICommand property
 
@@ -256,8 +259,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get { return MaterialButton.CommandParameter; }
-            set { MaterialButton.CommandParameter = value; }
+            get { return _button.CommandParameter; }
+            set { _button.CommandParameter = value; }
         }
         #endregion ICommandParameter property
 
@@ -268,7 +271,7 @@ namespace Forms9Patch
         /// <value>The visual element.</value>
         public VisualElement VisualElement
         {
-            get { return MaterialButton; }
+            get { return _button; }
         }
         #endregion
 
@@ -283,8 +286,8 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler Tapped
         {
-            add { MaterialButton.Tapped += value; }
-            remove { MaterialButton.Tapped -= value; }
+            add { _button.Tapped += value; }
+            remove { _button.Tapped -= value; }
         }
         #endregion Tapped eventhandler
 
@@ -294,8 +297,8 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler Selected
         {
-            add { MaterialButton.Selected += value; }
-            remove { MaterialButton.Selected -= value; }
+            add { _button.Selected += value; }
+            remove { _button.Selected -= value; }
         }
         #endregion Selected event handler
 
@@ -305,8 +308,8 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler LongPressing
         {
-            add { MaterialButton.LongPressing += value; }
-            remove { MaterialButton.LongPressing -= value; }
+            add { _button.LongPressing += value; }
+            remove { _button.LongPressing -= value; }
         }
         #endregion LongPressing event handlre
 
@@ -316,8 +319,8 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler LongPressed
         {
-            add { MaterialButton.LongPressed += value; }
-            remove { MaterialButton.LongPressed -= value; }
+            add { _button.LongPressed += value; }
+            remove { _button.LongPressed -= value; }
         }
         #endregion LongPressed event handler
 
@@ -325,8 +328,8 @@ namespace Forms9Patch
 
 
         #region Fields
-        internal GroupToggleBehavior ToggleBehavior;
-        internal readonly MaterialButton MaterialButton;
+        internal GroupToggleBehavior _toggleBehavior;
+        internal readonly Button _button;
         #endregion Fields
 
 
@@ -339,37 +342,37 @@ namespace Forms9Patch
         /// </summary>
         public Segment()
         {
-            MaterialButton = new MaterialButton();
-            MaterialButton.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+            _button = new Button();
+            _button.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
             {
                 switch (e.PropertyName)
                 {
-                    case "IsEnabled":
-                        IsEnabled = MaterialButton.IsEnabled;
-                        break;
-                    case "ImageSource":
-                        IconImage = MaterialButton.IconImage;
+                    case "ImageImage":
+                        IconImage = _button.IconImage;
                         break;
                     case "IconText":
-                        IconText = MaterialButton.IconText;
+                        IconText = _button.IconText;
                         break;
                     case "Text":
-                        Text = MaterialButton.Text;
+                        Text = _button.Text;
                         break;
                     case "HtmlText":
-                        HtmlText = MaterialButton.HtmlText;
+                        HtmlText = _button.HtmlText;
                         break;
-                    case "FontColor":
-                        TextColor = MaterialButton.TextColor;
+                    case "TextColor":
+                        TextColor = _button.TextColor;
                         break;
                     case "FontAttributes":
-                        FontAttributes = MaterialButton.FontAttributes;
+                        FontAttributes = _button.FontAttributes;
+                        break;
+                    case "IsEnabled":
+                        IsEnabled = _button.IsEnabled;
                         break;
                     case "IsSelected":
-                        IsSelected = MaterialButton.IsSelected;
+                        IsSelected = _button.IsSelected;
                         break;
                     case "Orienation":
-                        Orientation = MaterialButton.Orientation;
+                        Orientation = _button.Orientation;
                         break;
                 }
             };
@@ -402,14 +405,19 @@ namespace Forms9Patch
         /// <summary>
         /// Instantiates a new Segment and sets its Text and either its IconText or its IconImage, created using the provided embedded resource id 
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="icon"></param>
+        /// <param name="text">Segment's text</param>
+        /// <param name="icon">Segments's icon (either EmbeddedResourceId or HtmlText)</param>
+        /// <param name="assembly">Assembly that has EmbeddedResource used for Icon</param>
         public Segment(string text, string icon, Assembly assembly=null) : this()
         {
             Text = text;
             bool isIconText=false;
 
-            assembly = assembly ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(icon);
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+
             var match = Forms9Patch.ImageSource.BestEmbeddedMultiResourceMatch(icon, assembly);
 
             //if (icon.Contains("<") && icon.Contains("/>"))
@@ -450,31 +458,31 @@ namespace Forms9Patch
 			switch (propertyName)
 			{
                 case "IconImage":
-                    MaterialButton.IconImage = IconImage;
+                    _button.IconImage = IconImage;
                     break;
                 case "IconText":
-                    MaterialButton.IconText = IconText;
+                    _button.IconText = IconText;
                     break;
                 case "Text":
-                    MaterialButton.Text = Text;
+                    _button.Text = Text;
                     break;
                 case "HtmlText":
-                    MaterialButton.HtmlText = HtmlText;
+                    _button.HtmlText = HtmlText;
                     break;
                 case "TextColor":
-                    MaterialButton.TextColor = TextColor;
+                    _button.TextColor = TextColor;
                     break;
                 case "FontAttributes":
-                    MaterialButton.FontAttributes = FontAttributes;
+                    _button.FontAttributes = FontAttributes;
                     break;
                 case "IsEnabled":
-					MaterialButton.IsEnabled = IsEnabled;
+					_button.IsEnabled = IsEnabled;
 					break;
 				case "IsSelected":
-					MaterialButton.IsSelected = IsSelected;
+					_button.IsSelected = IsSelected;
 					break;
 				case "Orienation":
-					MaterialButton.Orientation = Orientation;
+					_button.Orientation = Orientation;
 					break;
 			}
 		}
@@ -487,7 +495,7 @@ namespace Forms9Patch
         /// </summary>
         public void Tap()
 		{
-			MaterialButton.Tap();
+			_button.Tap();
 		}
 
         /// <summary>
@@ -495,7 +503,7 @@ namespace Forms9Patch
         /// </summary>
         public void SendClicked()
         {
-            MaterialButton.SendClicked();
+            _button.SendClicked();
         }
         #endregion
 

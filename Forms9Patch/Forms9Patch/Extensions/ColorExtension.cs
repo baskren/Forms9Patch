@@ -58,12 +58,32 @@ namespace Forms9Patch
             return IsDefault(c) || c.A == 0;
         }
 
+        /// <summary>
+        /// Returns a Xamarin.Forms.Color's red value in byte form
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static byte ByteR(this Color color) => (byte)(color.R * 255);
 
+        /// <summary>
+        /// Returns a Xamarin.Forms.Color's green value in byte form
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static byte ByteG(this Color color) => (byte)(color.G * 255);
 
+        /// <summary>
+        /// Returns a Xamarin.Forms.Color's blue value in byte form
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static byte ByteB(this Color color) => (byte)(color.B * 255);
 
+        /// <summary>
+        /// Returns a Xamarin.Forms.Color's alpha (opacity) value in byte form
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static byte ByteA(this Color color) => (byte)(color.A * 255);
     }
 }

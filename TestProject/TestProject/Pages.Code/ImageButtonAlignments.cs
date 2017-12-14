@@ -11,7 +11,7 @@ namespace Forms9PatchDemo
     {
 
 
-        MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
+        SegmentedControl _hzAlignmentElement = new SegmentedControl
         {
             Segments =
             {
@@ -21,7 +21,7 @@ namespace Forms9PatchDemo
             }
         };
 
-        MaterialSegmentedControl _vtAlignmentElement = new MaterialSegmentedControl
+        SegmentedControl _vtAlignmentElement = new SegmentedControl
         {
             Segments =
             {
@@ -31,7 +31,7 @@ namespace Forms9PatchDemo
             }
         };
 
-        MaterialSegmentedControl _optionsElement = new MaterialSegmentedControl
+        SegmentedControl _optionsElement = new SegmentedControl
         {
             GroupToggleBehavior = GroupToggleBehavior.Multiselect,
             Segments =
@@ -43,7 +43,7 @@ namespace Forms9PatchDemo
         };
 
 
-        MaterialSegmentedControl _iconElement = new MaterialSegmentedControl
+        SegmentedControl _iconElement = new SegmentedControl
         {
             HasTightSpacing = true,
             //FontSize = 10,
@@ -69,9 +69,9 @@ namespace Forms9PatchDemo
 
         };
 
-        ImageButton _iconTextAndTextButton = new ImageButton
+        StateButton _iconTextAndTextButton = new StateButton
         {
-            DefaultState = new ImageButtonState
+            DefaultState = new ButtonState
             {
                 BackgroundImage = new Forms9Patch.Image
                 {
@@ -84,7 +84,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.White,
                 Text = "Unselected",
             },
-            SelectedState = new Forms9Patch.ImageButtonState
+            SelectedState = new Forms9Patch.ButtonState
             {
                 BackgroundImage = new Forms9Patch.Image
                 {

@@ -24,8 +24,8 @@ namespace Forms9PatchDemo
         Label _field5 = new Label { FontSize = 10 };
         Label _field6 = new Label { FontSize = 10 };
 
-        Forms9Patch.MaterialSegmentedControl hzAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
-        Forms9Patch.MaterialSegmentedControl vtAlignmentSelector = new Forms9Patch.MaterialSegmentedControl();
+        Forms9Patch.SegmentedControl hzAlignmentSelector = new Forms9Patch.SegmentedControl();
+        Forms9Patch.SegmentedControl vtAlignmentSelector = new Forms9Patch.SegmentedControl();
         Label vtAlignmentSelectorLabel = new Label { Text = "Vertical Alignment:" };
 
         Forms9Patch.Label f9pLabel = new Forms9Patch.Label
@@ -207,8 +207,8 @@ namespace Forms9PatchDemo
 
             f9pLabel.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName == Forms9Patch.Label.OptimalFontSizeProperty.PropertyName)
-                    actualFontSizeLabel.Text = "OptimalFontSize: " + f9pLabel.OptimalFontSize;
+                if (e.PropertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName)
+                    actualFontSizeLabel.Text = "FittedFontSize: " + f9pLabel.FittedFontSize;
                 /*
                 else if (e.PropertyName == Forms9Patch.Label.Field1Property.PropertyName)
                     _field1.Text = f9pLabel.Field1;
@@ -240,7 +240,7 @@ namespace Forms9PatchDemo
 
 
             #region AutoFit Selection
-            var fitSelector = new Forms9Patch.MaterialSegmentedControl();
+            var fitSelector = new Forms9Patch.SegmentedControl();
             fitSelector.Segments.Add(new Forms9Patch.Segment
             {
                 Text = "None",
@@ -341,7 +341,7 @@ namespace Forms9PatchDemo
 
 
             #region BreakMode selection
-            var breakModeSelector = new Forms9Patch.MaterialSegmentedControl();
+            var breakModeSelector = new Forms9Patch.SegmentedControl();
             breakModeSelector.Segments.Add(
                 new Forms9Patch.Segment
                 {

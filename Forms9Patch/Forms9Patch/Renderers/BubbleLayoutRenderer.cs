@@ -144,15 +144,6 @@ namespace Forms9Patch
             base.OnElementPropertyChanged(sender, e);
         }
 
-#if __DROID__ || __IOS__
-#else
-        protected override AutomationPeer OnCreateAutomationPeer()
-        {
-            // Since layouts in Forms can be interacted with, we need to create automation peers
-            // for them so we can interact with them in automated tests
-            return new FrameworkElementAutomationPeer(this);
-        }
-#endif
 
         #endregion
     }

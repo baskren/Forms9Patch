@@ -11,6 +11,50 @@ namespace Forms9Patch
     [ContentProperty("HtmlText")]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
     {
+        #region Obsolete Properties
+        /// <summary>
+        /// backing store for Fit property
+        /// </summary>
+        [Obsolete("FitProperty is obsolete.  Use AutoFitProperty instead.")]
+        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(Label), LabelFit.None, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is Label label && newValue is LabelFit fit)
+            {
+                switch (fit)
+                {
+                    case LabelFit.None: label.AutoFit = AutoFit.None; break;
+                    case LabelFit.Width: label.AutoFit = AutoFit.Width; break;
+                    case LabelFit.Lines: label.AutoFit = AutoFit.Lines; break;
+                }
+            }
+        });
+
+        /// <summary>
+        /// Gets/Sets the Fit property
+        /// </summary>
+        [Obsolete("Fit property is obsolete.  Use AutoFit property instead.")]
+        public LabelFit Fit
+        {
+            get { return (LabelFit)GetValue(FitProperty); }
+            set { SetValue(FitProperty, value); }
+        }
+
+        /// <summary>
+        /// OBSOLETE: Use FittedFontSizeProperty instead
+        /// </summary>
+        [Obsolete("Use FittedFontSizeProperty instead.", true)]
+        public static readonly BindableProperty ActualFontSizeProperty = BindableProperty.Create("ActualFontSize", typeof(double), typeof(Label), default(double));
+        /// <summary>
+        /// OBSOLETE: Use FittedFontSize property instead
+        /// </summary>
+        [Obsolete("Use FittedFontSize property instead.", true)]
+        public double ActualFontSize
+        {
+            get { return (double)GetValue(ActualFontSizeProperty); }
+            set { SetValue(ActualFontSizeProperty, value); }
+        }
+        #endregion
+
 
         #region Properties
 
@@ -68,7 +112,7 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(Label), 0);
         /// <summary>
-        /// Gets or sets the number of lines used in a fit.  If zero and fit is not LabelFit.None or ignored, will maximize the font size to best width and height with minimum number of lines.
+        /// Gets or sets the number of lines used in a fit.  If zero and fit is not AutoFit.None or ignored, will maximize the font size to best width and height with minimum number of lines.
         /// </summary>
         /// <value>The lines.</value>
         public int Lines
@@ -116,23 +160,24 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region OptimalFontSize property
-        internal static readonly BindablePropertyKey OptimalFontSizePropertyKey = BindableProperty.CreateReadOnly("OptimalFontSize", typeof(double), typeof(Label), -1.0);
+        #region FittedFontSize property
+
+
+        internal static readonly BindablePropertyKey FittedFontSizePropertyKey = BindableProperty.CreateReadOnly("FittedFontSize", typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Backing store for the actual font size property after fitting.
         /// </summary>
-        public static readonly BindableProperty OptimalFontSizeProperty = OptimalFontSizePropertyKey.BindableProperty;
+        public static readonly BindableProperty FittedFontSizeProperty = FittedFontSizePropertyKey.BindableProperty;
         /// <summary>
         /// Gets the actual size of the font (after fitting).
         /// </summary>
         /// <value>The actual size of the font.</value>
-        public double OptimalFontSize
+        public double FittedFontSize
         {
-            get { return (double)GetValue(OptimalFontSizeProperty); }
-            internal set { SetValue(OptimalFontSizePropertyKey, value); }
+            get { return (double)GetValue(FittedFontSizeProperty); }
+            internal set { SetValue(FittedFontSizePropertyKey, value); }
         }
         #endregion
-
 
         #region SynchronizedFontSize property
 
@@ -154,6 +199,9 @@ namespace Forms9Patch
         #endregion SynchronizedFontSize property
 
         #region IElement
+        /// <summary>
+        /// Incremental identity (starting at 0) of instance of this class
+        /// </summary>
         public int InstanceId => _id;
         #endregion
 
@@ -184,6 +232,10 @@ namespace Forms9Patch
             //_listener = FormsGestures.Listener.For(this);
         }
 
+        /// <summary>
+        /// Convenience constructor for Forms9Patch.Label instance
+        /// </summary>
+        /// <param name="text"></param>
         public Label(string text) : this()
         {
             Text = text;
@@ -293,7 +345,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region for use by MaterialButton and Autofit
+        #region for use by Button and Autofit
         internal bool MinimizeHeight;
 
         //internal Action SizeAndAlign;

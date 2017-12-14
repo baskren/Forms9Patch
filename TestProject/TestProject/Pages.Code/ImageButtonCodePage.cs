@@ -8,31 +8,31 @@ namespace Forms9PatchDemo
     {
         static void OnImageButtonTapped(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonSelected(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressing(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         public ImageButtonCodePage()
         {
 
             #region ImageButtons
-            var b2 = new Forms9Patch.ImageButton
+            var b2 = new Forms9Patch.StateButton
             {
-                DefaultState = new Forms9Patch.ImageButtonState
+                DefaultState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -45,7 +45,7 @@ namespace Forms9PatchDemo
                     TextColor = Color.White,
                     Text = "Sticky w/ SelectedState",
                 },
-                SelectedState = new Forms9Patch.ImageButtonState
+                SelectedState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -64,9 +64,9 @@ namespace Forms9PatchDemo
             b2.LongPressed += OnImageButtonLongPressed;
 
 
-            var b3 = new Forms9Patch.ImageButton
+            var b3 = new Forms9Patch.StateButton
             {
-                DefaultState = new Forms9Patch.ImageButtonState
+                DefaultState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -79,7 +79,7 @@ namespace Forms9PatchDemo
                     TextColor = Color.FromRgb(0.0, 0.0, 0.8),
                     Text = "Sticky w/o SelectedState",
                 },
-                PressingState = new Forms9Patch.ImageButtonState
+                PressingState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -95,9 +95,9 @@ namespace Forms9PatchDemo
             b3.LongPressing += OnImageButtonLongPressing;
             b3.LongPressed += OnImageButtonLongPressed;
 
-            var b4 = new Forms9Patch.ImageButton
+            var b4 = new Forms9Patch.StateButton
             {
-                DefaultState = new Forms9Patch.ImageButtonState
+                DefaultState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -124,7 +124,7 @@ namespace Forms9PatchDemo
 
             var textEntry = new Entry { Text = "Text Entry Text" };
 
-            b2.DefaultState.SetBinding(Forms9Patch.ImageButtonState.TextProperty, "Text");
+            b2.DefaultState.SetBinding(Forms9Patch.ButtonState.TextProperty, "Text");
             b2.DefaultState.BindingContext = textEntry;
 
             Padding = 10;

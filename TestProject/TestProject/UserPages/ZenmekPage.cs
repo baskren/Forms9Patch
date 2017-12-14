@@ -11,13 +11,13 @@ namespace Forms9PatchDemo
 {
     public class ZenmekPage : ContentPage
     {
-        Forms9Patch.ImageButton ibStartStop;
+        Forms9Patch.StateButton ibStartStop;
 
         public ZenmekPage()
         {
-            ibStartStop = new Forms9Patch.ImageButton
+            ibStartStop = new Forms9Patch.StateButton
             {
-                DefaultState = new Forms9Patch.ImageButtonState
+                DefaultState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {
@@ -26,7 +26,7 @@ namespace Forms9PatchDemo
                     TextColor = Color.Black,
                     Text = "Start",
                 },
-                PressingState = new Forms9Patch.ImageButtonState
+                PressingState = new Forms9Patch.ButtonState
                 {
                     BackgroundImage = new Forms9Patch.Image
                     {

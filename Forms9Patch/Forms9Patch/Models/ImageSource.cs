@@ -48,7 +48,10 @@ namespace Forms9Patch
         public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
             Settings.ConfirmInitialization();
-            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId) ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+
             if (assembly == null)
                 return null;
             var r = BestGuessResource(resourceId, assembly);
@@ -72,7 +75,10 @@ namespace Forms9Patch
         public static new Xamarin.Forms.ImageSource FromResource(string resourceId, Assembly assembly = null)
         {
             Settings.ConfirmInitialization();
-            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId) ?? (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+
             var imageSource = Xamarin.Forms.ImageSource.FromResource(resourceId, assembly);
             if (imageSource != null)
             {
@@ -177,7 +183,8 @@ namespace Forms9Patch
 
         internal static string BestEmbeddedMultiResourceMatch(string resourceId, Assembly assembly)
         {
-            if (assembly == null)
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             var r = BestGuessResource(resourceId, assembly);
             return r?.Path;

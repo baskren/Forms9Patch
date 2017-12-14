@@ -70,6 +70,8 @@ namespace Forms9Patch
 			return null;
 		}
 
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static bool IsInNativeLayout(this VisualElement e)
         {
             var isInNativeLayout = (bool)e.GetPropertyValue("IsInNativeLayout");
@@ -81,4 +83,5 @@ namespace Forms9Patch
             e.SetPropertyValue("IsInNativeLayout", value);
         }
 	}
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

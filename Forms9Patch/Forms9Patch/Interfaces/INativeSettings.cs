@@ -17,6 +17,9 @@ namespace Forms9Patch
 			get;
 		}
 
+        /// <summary>
+        /// Needed by UWP implemenation to assure Xamarin.Forms works AND EmbeddedResource loading works
+        /// </summary>
         List<Assembly> IncludedAssemblies { get; }
     }
 }

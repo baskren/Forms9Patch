@@ -3,37 +3,69 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// OBSOLETE: Use ButtonState
+    /// </summary>
+    [Obsolete("Use ButtonState")]
+    public class ImageButtonState : ButtonState  {  }
 
     /// <summary>
-    /// Describes the properties of a <see cref="ImageButton"/> for a given state.
+    /// Describes the properties of a <see cref="StateButton"/> for a given state.
     /// </summary>
     [ContentProperty("HtmlText")]
-    public class ImageButtonState : BindableObject, IButtonState
+    public class ButtonState : BindableObject, IButtonState
     {
-        int _instances;
 
-        #region IButtonState
-
-        #region IconImage
+        #region Obsolete Properties
         /// <summary>
         /// OBSOLETE: Use IconImageProperty
         /// </summary>
         [Obsolete("Use IconImageProperty")]
-        public static BindableProperty ImageProperty = null;
+        public static BindableProperty ImageProperty = BindableProperty.Create("Image", typeof(Forms9Patch.Image), typeof(ImageButtonState), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is ImageButtonState state && newValue is Image image)
+                state.IconImage = image;
+        });
         /// <summary>
         /// OBSOLETE: Use IconImage
         /// </summary>
         [Obsolete("Use IconImage")]
         public Image Image
         {
-            get { throw new NotSupportedException("Use IconImage"); }
-            set { throw new NotSupportedException("Use IconImage"); }
+            get { return (Forms9Patch.Image)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
         }
 
         /// <summary>
+        /// OBSOLETE: Use TextColorProperty
+        /// </summary>
+        [Obsolete("Use TextColorProperty")]
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(ImageButtonState), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is ImageButtonState state && newValue is Color color)
+                state.TextColor = color;
+        });
+        /// <summary>
+        /// OBSOLETE: Use TextColor
+        /// </summary>
+        [Obsolete("Use TextColor")]
+        public Color FontColor
+        {
+            get { return (Color)GetValue(FontColorProperty); }
+            set { SetValue(FontColorProperty, value); }
+        }
+
+        #endregion
+
+        int _instances;
+
+        #region IButtonState
+
+        #region IconImage
+        /// <summary>
         /// Backing store for the Image bindable property.
         /// </summary>
-        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Image), typeof(ImageButtonState), null);
+        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the companion image.
         /// </summary>
@@ -49,7 +81,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for IconText property
         /// </summary>
-        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(ImageButtonState), null);
+        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets/Sets the IconText (Alternative to IconImage).
         /// </summary>
@@ -65,10 +97,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the TrailiingImage property
         /// </summary>
-        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create("TrailingIcon", typeof(bool), typeof(ImageButtonState), false,
+        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create("TrailingIcon", typeof(bool), typeof(ButtonState), false,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).TrailingIconSet = true;
+                ((ButtonState)bindable).TrailingIconSet = true;
             })
         );
         /// <summary>
@@ -86,10 +118,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the TintIcon property
         /// </summary>
-        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(ImageButtonState), true,
+        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(ButtonState), true,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).TintIconSet = true;
+                ((ButtonState)bindable).TintIconSet = true;
             })
         );
         /// <summary>
@@ -107,10 +139,10 @@ namespace Forms9Patch
         /// <summary>
         /// The has tight spacing property.
         /// </summary>
-        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(ImageButtonState), default(bool),
+        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(ButtonState), default(bool),
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).HasTightSpacingSet = true;
+                ((ButtonState)bindable).HasTightSpacingSet = true;
             })
         );
         /// <summary>
@@ -129,10 +161,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the spacing property.
         /// </summary>
-        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(ImageButtonState), 4.0,
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(ButtonState), 4.0,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).SpacingSet = true;
+                ((ButtonState)bindable).SpacingSet = true;
             })
         );
         /// <summary>
@@ -149,12 +181,12 @@ namespace Forms9Patch
         #region Orientation
         internal bool OrientationSet;
         /// <summary>
-        /// Backing store for the MaterialButton's orientation property.
+        /// Backing store for the Button's orientation property.
         /// </summary>
-        public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(ImageButtonState), StackOrientation.Horizontal,
+        public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(ButtonState), StackOrientation.Horizontal,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).OrientationSet = true;
+                ((ButtonState)bindable).OrientationSet = true;
             })
         );
         /// <summary>
@@ -170,13 +202,19 @@ namespace Forms9Patch
 
         #region ElementShape property
         internal bool ElementShapeSet;
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ImageButtonState), default(ElementShape),
+        /// <summary>
+        /// Backing store for the ElementShape property
+        /// </summary>
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ButtonState), default(ElementShape),
             propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
             {
                 ((IShape)bindable).ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
-                ((ImageButtonState)bindable).ElementShapeSet = true;
+                ((ButtonState)bindable).ElementShapeSet = true;
             })
             );
+        /// <summary>
+        /// controls the shape of a 
+        /// </summary>
         public ElementShape ElementShape
         {
             get { return (ElementShape)GetValue(ElementShapeProperty); }
@@ -190,7 +228,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundImage bindable property.
         /// </summary>
-        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Image), typeof(ImageButtonState), null);
+        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the background image.
         /// </summary>
@@ -209,10 +247,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundColor bindable property.
         /// </summary>
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(ImageButtonState), (object)Color.Transparent,
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(ButtonState), (object)Color.Transparent,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).BackgroundColorSet = true;
+                ((ButtonState)bindable).BackgroundColorSet = true;
             }
         );
         /// <summary>
@@ -231,10 +269,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the HasShadow property
         /// </summary>
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(ImageButtonState), false,
+        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(ButtonState), false,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).HasShadowSet = true;
+                ((ButtonState)bindable).HasShadowSet = true;
             }
         );
         /// <summary>
@@ -253,10 +291,10 @@ namespace Forms9Patch
         /// Backing store for the ShadowInverted bindable property.
         /// </summary>
         /// <remarks></remarks>
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(ImageButtonState), false,
+        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(ButtonState), false,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).ShadowInvertedSet = true;
+                ((ButtonState)bindable).ShadowInvertedSet = true;
             }
         );
         /// <summary>
@@ -275,10 +313,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backging store for the OutlineColor property
         /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(ImageButtonState), Color.Default,
+        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(ButtonState), Color.Default,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).OutlineColorSet = true;
+                ((ButtonState)bindable).OutlineColorSet = true;
             }
         );
         /// <summary>
@@ -296,10 +334,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the OutlineRadius bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ImageButtonState), -1f,
+        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ButtonState), -1f,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).OutlineRadiusSet = true;
+                ((ButtonState)bindable).OutlineRadiusSet = true;
             }
         );
         /// <summary>
@@ -318,10 +356,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the OutlineWidth bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ImageButtonState), -1f,
+        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ButtonState), -1f,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).OutlineWidthSet = true;
+                ((ButtonState)bindable).OutlineWidthSet = true;
             }
         );
         /// <summary>
@@ -336,7 +374,7 @@ namespace Forms9Patch
         #endregion OutlineWidth
 
         #region ExtendedElementShape property
-        internal static readonly BindableProperty ExtendedElementShapeProperty = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(ImageButtonState), default(ExtendedElementShape));
+        internal static readonly BindableProperty ExtendedElementShapeProperty = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(ButtonState), default(ExtendedElementShape));
         ExtendedElementShape IShape.ExtendedElementShape
         {
             get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
@@ -361,6 +399,10 @@ namespace Forms9Patch
 
         #region IElement
 
+
+        /// <summary>
+        /// returns instance index (starts at 0)
+        /// </summary>
         public int InstanceId { get; set; }
 
         #endregion IElement
@@ -375,7 +417,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Text bindable property.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(ImageButtonState), null);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -391,7 +433,7 @@ namespace Forms9Patch
         /// <summary>
         /// The formatted text property backing store.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(ImageButtonState), null);
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -404,30 +446,16 @@ namespace Forms9Patch
         #endregion
 
         #region TextColor
-        /// <summary>
-        /// OBSOLETE: Use TextColorProperty
-        /// </summary>
-        [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = null;
-        /// <summary>
-        /// OBSOLETE: Use TextColor
-        /// </summary>
-        [Obsolete("Use TextColor")]
-        public Color FontColor
-        {
-            get { throw new NotSupportedException("Use TextColor"); }
-            set { throw new NotSupportedException("Use TextColor"); }
-        }
 
 
         internal bool TextColorSet;
         /// <summary>
         /// Backing store for the FontColor bindable property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(ImageButtonState), Color.Default,
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(ButtonState), Color.Default,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).TextColorSet = (((Color)newValue) != Color.Default);
+                ((ButtonState)bindable).TextColorSet = (((Color)newValue) != Color.Default);
             })
         );
         /// <summary>
@@ -444,12 +472,12 @@ namespace Forms9Patch
         #region HorizontalTextAlignment
         internal bool HorizontalTextAlignmentSet;
         /// <summary>
-        /// Backing store for the MaterialButton.Alignment bindable property
+        /// Backing store for the Button.Alignment bindable property
         /// </summary>
-        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(ImageButtonState), TextAlignment.Center,
+        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).HorizontalTextAlignmentSet = true;
+                ((ButtonState)bindable).HorizontalTextAlignmentSet = true;
             })
         );
         /// <summary>
@@ -468,10 +496,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the vertical alignment property.
         /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(ImageButtonState), TextAlignment.Center,
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).VerticalTextAlignmentSet = true;
+                ((ButtonState)bindable).VerticalTextAlignmentSet = true;
             })
         );
         /// <summary>
@@ -490,10 +518,10 @@ namespace Forms9Patch
         /// <summary>
         /// The line break mode property.
         /// </summary>
-        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(ImageButtonState), LineBreakMode.TailTruncation,
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(ButtonState), LineBreakMode.TailTruncation,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).LineBreakModeSet = true;
+                ((ButtonState)bindable).LineBreakModeSet = true;
             })
         );
         /// <summary>
@@ -512,10 +540,10 @@ namespace Forms9Patch
         /// <summary>
         /// The fit property.
         /// </summary>
-        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(ImageButtonState), AutoFit.Width,
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(ButtonState), AutoFit.Width,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).AutoFitSet = true;
+                ((ButtonState)bindable).AutoFitSet = true;
             })
         );
         /// <summary>
@@ -534,10 +562,10 @@ namespace Forms9Patch
         /// <summary>
         /// The lines property.
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(ImageButtonState), 1,
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(ButtonState), 1,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).LinesSet = true;
+                ((ButtonState)bindable).LinesSet = true;
             })
         );
         /// <summary>
@@ -556,10 +584,10 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the minimum font size property.
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(ImageButtonState), -1.0,
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).MinFontSizeSet = true;
+                ((ButtonState)bindable).MinFontSizeSet = true;
             })
         );
         /// <summary>
@@ -573,7 +601,7 @@ namespace Forms9Patch
         }
         #endregion MinFontSize
 
-        double ILabel.OptimalFontSize { get; }
+        double ILabel.FittedFontSize { get; }
 
         double ILabel.SynchronizedFontSize { get; set; }
 
@@ -584,10 +612,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(ImageButtonState), Xamarin.Forms.FontAttributes.None,
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(ButtonState), Xamarin.Forms.FontAttributes.None,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).FontAttributesSet = true;
+                ((ButtonState)bindable).FontAttributesSet = true;
             }
         );//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
           /// <summary>
@@ -610,10 +638,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(ImageButtonState), -1.0,
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).FontSizeSet = ((double)newValue) >= 0;
+                ((ButtonState)bindable).FontSizeSet = ((double)newValue) >= 0;
             }
         );//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
           /// <summary>
@@ -632,10 +660,10 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontFamiily bindable property.
         /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(ImageButtonState), null,
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(ButtonState), null,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
-                ((ImageButtonState)bindable).FontFamilySet = newValue != null;
+                ((ButtonState)bindable).FontFamilySet = newValue != null;
             }
         );//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
           /// <summary>
@@ -662,18 +690,18 @@ namespace Forms9Patch
 
         #region Construtors
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageButtonState"/> class.
+        /// Initializes a new instance of the <see cref="ButtonState"/> class.
         /// </summary>
-        public ImageButtonState()
+        public ButtonState()
         {
             InstanceId = _instances++;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageButtonState"/> class to the same properties of Source instance.
+        /// Initializes a new instance of the <see cref="ButtonState"/> class to the same properties of Source instance.
         /// </summary>
         /// <param name="source">Source instance.</param>
-        public ImageButtonState(ImageButtonState source)
+        public ButtonState(ButtonState source)
         {
             #region IButtonState
 
@@ -770,7 +798,7 @@ namespace Forms9Patch
         #region Operators
 
         /// <param name="state">State.</param>
-        public static explicit operator string(ImageButtonState state)
+        public static explicit operator string(ButtonState state)
         {
             return state.HtmlText ?? state.Text;
         }

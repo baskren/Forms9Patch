@@ -2,8 +2,13 @@
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// For Forms9Patch internal use.  Good luck!
+    /// </summary>
     public enum ExtendedElementShape
     {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         Rectangle = 0,
         Square,
         Circle,
@@ -12,6 +17,7 @@ namespace Forms9Patch
         SegmentStart,
         SegmentMid,
         SegmentEnd,
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }
 

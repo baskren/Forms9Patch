@@ -88,7 +88,7 @@ namespace Forms9PatchDemo
 
 
                         new TextCell {
-                            Text = "Using MaterialButton SelectedBackground",
+                            Text = "Using Button SelectedBackground",
                             Command = navigateCommand,
                             CommandParameter = typeof(SegmentSelectedBackgroundPage)
                         },
@@ -132,7 +132,7 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "ImageButton in ContentView test",
+                            Text = "StateButton in ContentView test",
                             Command = navigateCommand,
                             CommandParameter = typeof(ZenmekPage)
                         },

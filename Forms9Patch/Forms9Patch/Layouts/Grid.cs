@@ -313,6 +313,12 @@ namespace Forms9Patch
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
+        /// <summary>
+        /// Processes the layout measurement
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             var result = base.OnMeasure(widthConstraint, heightConstraint);
@@ -324,6 +330,13 @@ namespace Forms9Patch
             return result;
         }
 
+        /// <summary>
+        /// Processes the layout of the layout's children
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             if (HasShadow)

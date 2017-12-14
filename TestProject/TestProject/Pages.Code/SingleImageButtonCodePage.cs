@@ -8,29 +8,29 @@ namespace Forms9PatchDemo
     {
         static void OnImageButtonTapped(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Tapped Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonSelected(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("Selected Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressing(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressing Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
         static void OnImageButtonLongPressed(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.ImageButton)sender).Text + "]");
+            System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
 
         #region VisualElements
-        Forms9Patch.ImageButton b2 = new Forms9Patch.ImageButton
+        Forms9Patch.StateButton b2 = new Forms9Patch.StateButton
         {
-            DefaultState = new Forms9Patch.ImageButtonState
+            DefaultState = new Forms9Patch.ButtonState
             {
                 BackgroundImage = new Forms9Patch.Image
                 {
@@ -43,7 +43,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.White,
                 Text = "Sticky w/ SelectedState",
             },
-            SelectedState = new Forms9Patch.ImageButtonState
+            SelectedState = new Forms9Patch.ButtonState
             {
                 BackgroundImage = new Forms9Patch.Image
                 {
@@ -57,7 +57,7 @@ namespace Forms9PatchDemo
             HorizontalTextAlignment = TextAlignment.Start,
         };
 
-        Forms9Patch.MaterialSegmentedControl _iconSwitcher = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl _iconSwitcher = new Forms9Patch.SegmentedControl
         {
             Segments =
             {

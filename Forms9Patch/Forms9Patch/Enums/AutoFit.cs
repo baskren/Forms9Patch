@@ -6,10 +6,23 @@
 using System;
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Label fit options.
-	/// </summary>
-	public enum AutoFit
+    /// <summary>
+    /// OBSOLETE: USE AutoFit
+    /// </summary>
+    [Obsolete("Use AutoFit instead.")]
+    public enum LabelFit
+    {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        None = AutoFit.None,
+        Width = AutoFit.Width,
+        Lines = AutoFit.Lines
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+    }
+
+    /// <summary>
+    /// Label fit options.
+    /// </summary>
+    public enum AutoFit
 	{
 		/// <summary>
 		/// Perform no auto fit

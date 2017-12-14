@@ -280,22 +280,22 @@ namespace Forms9PatchDemo
 						Text = "Default, Dark Theme",
 						TextColor = Color.White,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "default",
 						DarkTheme = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
@@ -306,25 +306,25 @@ namespace Forms9PatchDemo
 						Text = "Outline, Dark Theme",
 						TextColor = Color.White,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "default",
 						DarkTheme = true,
 						OutlineWidth = 0,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
 						OutlineWidth = 0,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 						OutlineWidth = 0,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
@@ -336,21 +336,21 @@ namespace Forms9PatchDemo
 						Text = "Background Color, Dark Theme",
 						TextColor = Color.White,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						IconImage = new Forms9Patch.Image { Source = arrowIcon },
 						Orientation = StackOrientation.Vertical,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 					},
 
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
@@ -358,7 +358,7 @@ namespace Forms9PatchDemo
 						DarkTheme = true,
 					},
 
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
@@ -369,25 +369,25 @@ namespace Forms9PatchDemo
 						Text = "Shadow, Dark Theme",
 						TextColor = Color.White,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "default",
 						DarkTheme = true,
 						HasShadow = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "toggle",
 						ToggleBehavior = true,
 						DarkTheme = true,
 						HasShadow = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
 						DarkTheme = true,
 						HasShadow = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
@@ -398,13 +398,13 @@ namespace Forms9PatchDemo
 						Text = "Shadow Background Color, Dark Theme",
 						TextColor = Color.White,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "default",
 						BackgroundColor = Color.FromHex("#1194F6"),
 						DarkTheme = true,
 						HasShadow = true,
 					},
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "toggle",
 						ToggleBehavior = true,
 						BackgroundColor = Color.FromHex("#1194F6"),
@@ -412,7 +412,7 @@ namespace Forms9PatchDemo
 						HasShadow = true,
 					},
 
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "disabled",
 						ToggleBehavior = true,
 						IsEnabled = false,
@@ -421,7 +421,7 @@ namespace Forms9PatchDemo
 						HasShadow = true,
 					},
 
-					new Forms9Patch.MaterialButton {
+					new Forms9Patch.Button {
 						Text = "selected disabled",
 						IsEnabled = false,
 						IsSelected = true,
@@ -624,7 +624,7 @@ namespace Forms9PatchDemo
 											TextColor = Color.White,
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											//OutlineColor = Color.Transparent,
 											DarkTheme = true,
 											Segments = {
@@ -648,7 +648,7 @@ namespace Forms9PatchDemo
 											},
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											DarkTheme = true,
 											OutlineWidth = 0,
 											Segments = {
@@ -672,7 +672,7 @@ namespace Forms9PatchDemo
 											},
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											DarkTheme = true,
 											BackgroundColor = Color.FromHex("#1194F6"),
 											Segments = {
@@ -694,7 +694,7 @@ namespace Forms9PatchDemo
 											},
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											DarkTheme = true,
 											BackgroundColor = Color.FromHex("#1194F6"),
 											OutlineWidth = 0,
@@ -725,7 +725,7 @@ namespace Forms9PatchDemo
 											},
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											DarkTheme = true,
 											BackgroundColor = Color.FromHex("#1194F6"),
 											HasShadow = true,
@@ -755,7 +755,7 @@ namespace Forms9PatchDemo
 											},
 										},
 
-										new Forms9Patch.MaterialSegmentedControl {
+										new Forms9Patch.SegmentedControl {
 											DarkTheme = true,
 											BackgroundColor = Color.FromHex("#1194F6"),
 											HasShadow = true,

@@ -33,7 +33,7 @@ namespace Forms9PatchDemo
 
         View Content => ((ContentPage)Detail).Content;
 
-        Forms9Patch.MaterialSegmentedControl hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl hzOptionSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -43,7 +43,7 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment("FILL")
                 },
         };
-        Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl vtOptionSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -54,7 +54,7 @@ namespace Forms9PatchDemo
                 }
         };
         Slider heightRequestSlider = new Slider(-1, 300, -1);
-        Forms9Patch.MaterialSegmentedControl fillSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl fillSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -72,7 +72,7 @@ namespace Forms9PatchDemo
             Maximum = 15,
             Value = 2
         };
-        Forms9Patch.MaterialSegmentedControl shapesSelector = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl shapesSelector = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -83,7 +83,7 @@ namespace Forms9PatchDemo
                 new Forms9Patch.Segment { Text = "OBROUND" }
                 }
         };
-        Forms9Patch.MaterialSegmentedControl shapeAttributesSelector = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl shapeAttributesSelector = new Forms9Patch.SegmentedControl
         {
             GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
             Segments =
@@ -94,7 +94,7 @@ namespace Forms9PatchDemo
                     new Forms9Patch.Segment("INVERTED")
                 }
         };
-        Forms9Patch.MaterialSegmentedControl backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl backgroundImageSelector = new Forms9Patch.SegmentedControl
         {
             HeightRequest = 40,
             HasTightSpacing = true,
@@ -123,7 +123,7 @@ namespace Forms9PatchDemo
             Value = 0
         };
 
-        Forms9Patch.MaterialSegmentedControl capsUnitsSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl capsUnitsSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
             {
@@ -239,7 +239,7 @@ namespace Forms9PatchDemo
 
 
 
-            var layoutTypeSegmentedController = new Forms9Patch.MaterialSegmentedControl
+            var layoutTypeSegmentedController = new Forms9Patch.SegmentedControl
             {
                 Segments =
                 {

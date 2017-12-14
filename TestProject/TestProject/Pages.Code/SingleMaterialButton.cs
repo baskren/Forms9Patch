@@ -11,7 +11,7 @@ namespace Forms9PatchDemo.Pages
 	{
 		public SingleMaterialButton ()
 		{
-            var button = new Forms9Patch.MaterialButton { Text = "Click me", ToggleBehavior = true, BackgroundColor=Color.NavajoWhite, OutlineRadius=5 };
+            var button = new Forms9Patch.Button { Text = "Click me", ToggleBehavior = true, BackgroundColor=Color.NavajoWhite, OutlineRadius=5 };
 
             var hasShadowSwitch = new Switch();
             hasShadowSwitch.Toggled += (sender, e) => button.HasShadow = e.Value;

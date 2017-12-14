@@ -16,16 +16,16 @@ namespace Forms9PatchDemo
             {
                 VerticalOptions = LayoutOptions.Center,
                 Children = {
-                    new Forms9Patch.ImageButton
+                    new Forms9Patch.StateButton
                     {
-                        DefaultState = new Forms9Patch.ImageButtonState
+                        DefaultState = new Forms9Patch.ButtonState
                         {
                             BackgroundImage = new Forms9Patch.Image
                             {
                                 Source = Forms9Patch.ImageSource.FromMultiResource("Forms9PatchDemo.Resources.delay")
                             },
                         },
-                        SelectedState = new Forms9Patch.ImageButtonState
+                        SelectedState = new Forms9Patch.ButtonState
                         {
                             BackgroundImage = new Forms9Patch.Image
                             {

@@ -123,7 +123,7 @@ namespace Forms9Patch
 			//Lines = 0,
 			//VerticalOptions = LayoutOptions.Fill,
 		};
-		readonly MaterialButton _okButton = new MaterialButton
+		readonly Button _okButton = new Button
 		{
 			//HorizontalOptions = LayoutOptions.Fill
 		};

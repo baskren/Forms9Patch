@@ -138,9 +138,9 @@ namespace Forms9Patch
             BackgroundColor = Color.FromRgba(0, 0, 0, 1)
         };
 
-        readonly MaterialButton _swipeButton1 = new MaterialButton { WidthRequest = 50, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
-        readonly MaterialButton _swipeButton2 = new MaterialButton { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
-        readonly MaterialButton _swipeButton3 = new MaterialButton { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+        readonly Button _swipeButton1 = new Button { WidthRequest = 50, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+        readonly Button _swipeButton2 = new Button { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+        readonly Button _swipeButton3 = new Button { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
 
         #endregion
 
@@ -476,7 +476,7 @@ namespace Forms9Patch
             {
                 // show remaining menu items in a modal list
 
-                var segmentedController = new MaterialSegmentedControl
+                var segmentedController = new SegmentedControl
                 {
                     Orientation = StackOrientation.Vertical,
                     BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
@@ -489,7 +489,7 @@ namespace Forms9Patch
                     Padding = 5,
                     WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
                 };
-                var cancelButton = new MaterialButton
+                var cancelButton = new Button
                 {
                     Text = "Cancel",
                     FontAttributes = FontAttributes.Bold,

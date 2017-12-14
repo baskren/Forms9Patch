@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Provides characteristics of the display in which the app is presented
+    /// </summary>
     public static class Display
     {
         #region Extension Static Properties

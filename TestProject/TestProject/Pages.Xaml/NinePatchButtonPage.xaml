@@ -9,64 +9,64 @@
 	Padding = "40"
 	>
 	<StackLayout>
-		<f9p:ImageButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
+		<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
 
-			<f9p:ImageButton.DefaultState>
-				<f9p:ImageButtonState Text="Sticky Default State" TextColor="White">
-					<f9p:ImageButtonState.BackgroundImage>
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Sticky Default State" TextColor="White">
+					<f9p:ButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
-					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.IconImage>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.IconImage>
-				</f9p:ImageButtonState>
-			</f9p:ImageButton.DefaultState>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
 
-			<f9p:ImageButton.SelectedState>
-				<f9p:ImageButtonState TextColor="Red" Text="Selected" >
-					<f9p:ImageButtonState.BackgroundImage>
+			<f9p:StateButton.SelectedState>
+				<f9p:ButtonState TextColor="Red" Text="Selected" >
+					<f9p:ButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
-					</f9p:ImageButtonState.BackgroundImage> 
-				</f9p:ImageButtonState>
-			</f9p:ImageButton.SelectedState>
+					</f9p:ButtonState.BackgroundImage> 
+				</f9p:ButtonState>
+			</f9p:StateButton.SelectedState>
 
-		</f9p:ImageButton>
+		</f9p:StateButton>
 
 
-		<f9p:ImageButton ToggleBehavior="true" HeightRequest="80" Alignment="Center" TrailingIcon="true">
+		<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Center" TrailingIcon="true">
 
-			<f9p:ImageButton.DefaultState>
-				<f9p:ImageButtonState Text="Sticky w/o SelectedState" >
-					<f9p:ImageButtonState.BackgroundImage>
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Sticky w/o SelectedState" >
+					<f9p:ButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
-					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.IconImage>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.IconImage>
-				</f9p:ImageButtonState>
-			</f9p:ImageButton.DefaultState>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
 
-			<f9p:ImageButton.SelectedState>
-				<f9p:ImageButtonState Text="Pizza Cheese and a small coke" >
-				</f9p:ImageButtonState>
-			</f9p:ImageButton.SelectedState>
+			<f9p:StateButton.SelectedState>
+				<f9p:ButtonState Text="Pizza Cheese and a small coke" >
+				</f9p:ButtonState>
+			</f9p:StateButton.SelectedState>
 			
-		</f9p:ImageButton>
+		</f9p:StateButton>
 
 
-		<f9p:ImageButton ToggleBehavior="false" HeightRequest="80" Alignment="End">
+		<f9p:StateButton ToggleBehavior="false" HeightRequest="80" Alignment="End">
 
-			<f9p:ImageButton.DefaultState>
-				<f9p:ImageButtonState Text="Not Sticky" >
-					<f9p:ImageButtonState.BackgroundImage>
+			<f9p:StateButton.DefaultState>
+				<f9p:ButtonState Text="Not Sticky" >
+					<f9p:ButtonState.BackgroundImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
-					</f9p:ImageButtonState.BackgroundImage> 
-					<f9p:ImageButtonState.IconImage>
+					</f9p:ButtonState.BackgroundImage> 
+					<f9p:ButtonState.IconImage>
 						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
-					</f9p:ImageButtonState.IconImage>
-				</f9p:ImageButtonState>
-			</f9p:ImageButton.DefaultState>
+					</f9p:ButtonState.IconImage>
+				</f9p:ButtonState>
+			</f9p:StateButton.DefaultState>
 
-		</f9p:ImageButton>
+		</f9p:StateButton>
 	</StackLayout>
 </ContentPage>

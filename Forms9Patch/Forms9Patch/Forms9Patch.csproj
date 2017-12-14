@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\Forms9Patch.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Layouts\Grid.cs" />
     <Compile Include="Layouts\AbsoluteLayout.cs" />
     <Compile Include="Extensions\TextAlignmentExtension.cs" />
-    <Compile Include="Models\ImageButtonState.cs" />
+    <Compile Include="Models\ButtonState.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\GridExtension.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="Models\F9PFormattedString.cs" />
     <Compile Include="Models\HTMLMarkupString.cs" />
     <Compile Include="Models\SpanFormattedString.cs" />
-    <Compile Include="Enums\LabelFit.cs" />
+    <Compile Include="Enums\AutoFit.cs" />
     <Compile Include="Interfaces\IFontFamilies.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Elements\ColorGradientBox.cs" />
@@ -181,8 +182,8 @@
     <Compile Include="Elements\Popups\ModalPopup.cs" />
     <Compile Include="Elements\Popups\PopupBase.cs" />
     <Compile Include="Elements\Popups\BubblePopup.cs" />
-    <Compile Include="Elements\Buttons\MaterialButton.cs" />
-    <Compile Include="Elements\Buttons\MaterialSegmentedControl.cs" />
+    <Compile Include="Elements\Buttons\Button.cs" />
+    <Compile Include="Elements\Buttons\SegmentedControl.cs" />
     <Compile Include="Elements\Buttons\Segment.cs" />
     <Compile Include="Elements\ListView\EventArgs\ItemTappedEventArgs.cs" />
     <Compile Include="Layouts\ManualLayout.cs" />
@@ -225,7 +226,7 @@
     <Compile Include="Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" />
     <Compile Include="Extensions\ApplicationExtensions.cs" />
     <Compile Include="Extensions\LayoutOptionsExtensions.cs" />
-    <Compile Include="Elements\Buttons\ImageButton.cs" />
+    <Compile Include="Elements\Buttons\StateButton.cs" />
     <Compile Include="Enums\NetworkConnectivity.cs" />
     <Compile Include="Services\Display.cs" />
     <Compile Include="Enums\RoundRectPath.cs" />
@@ -267,19 +268,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>$(NUGET_PACKAGES)\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Shared\" />
     <Folder Include="Renderers\" />
+    <Folder Include="Shared\" />
   </ItemGroup>
-  <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

@@ -67,7 +67,7 @@ namespace Forms9Patch
         #region HasShadow property
 #if _Forms9Patch_Frame_
         /// <summary>
-        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute & store shadow padding
+        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute and store shadow padding
         /// </summary>
         public static new BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
         /// <summary>
@@ -303,6 +303,12 @@ namespace Forms9Patch
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
+        /// <summary>
+        /// processes measurement of layout
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
            var result = base.OnMeasure(widthConstraint, heightConstraint);
@@ -314,6 +320,13 @@ namespace Forms9Patch
             return result;
         }
 
+        /// <summary>
+        /// processes child layout
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             if (HasShadow)

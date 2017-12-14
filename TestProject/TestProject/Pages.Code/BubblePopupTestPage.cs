@@ -171,7 +171,7 @@ namespace Forms9PatchDemo
             downSeg.Tapped += (sender, e) => _lastChanged = downSeg.VisualElement;
 
             PointerDirection = Forms9Patch.PointerDirection.Left;
-            var directionSegmentControl = new Forms9Patch.MaterialSegmentedControl
+            var directionSegmentControl = new Forms9Patch.SegmentedControl
             {
                 Segments = { leftSeg, upSeg, rightSeg, downSeg, },
                 GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
@@ -193,7 +193,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.Black,
                 //BackgroundColor = Color.Green,
             };
-            var bubbleButton = new Forms9Patch.MaterialButton
+            var bubbleButton = new Forms9Patch.Button
             {
                 Text = "Close",
                 //BackgroundColor = Color.Blue,
@@ -203,7 +203,7 @@ namespace Forms9PatchDemo
             //bubbleLabel.SetBinding (Label.TextProperty, "CornerRadius");
             bubbleLabel.BindingContext = this;
 
-            var addItemButton = new Forms9Patch.MaterialButton
+            var addItemButton = new Forms9Patch.Button
             {
                 Text = "Add Item",
                 OutlineColor = Color.Black,
@@ -211,7 +211,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.Red
             };
 
-            var removeItemButton = new Forms9Patch.MaterialButton
+            var removeItemButton = new Forms9Patch.Button
             {
                 Text = "Remove Item",
                 OutlineColor = Color.Black,
@@ -219,7 +219,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.Red
             };
 
-            var enlargeItemsButton = new Forms9Patch.MaterialButton
+            var enlargeItemsButton = new Forms9Patch.Button
             {
                 Text = "Englarge Items",
                 OutlineColor = Color.Black,
@@ -227,7 +227,7 @@ namespace Forms9PatchDemo
                 TextColor = Color.Black
             };
 
-            var shrinkItems = new Forms9Patch.MaterialButton
+            var shrinkItems = new Forms9Patch.Button
             {
                 Text = "Shrink Items",
                 OutlineColor = Color.Black,
@@ -356,7 +356,7 @@ namespace Forms9PatchDemo
             };
 
 
-            var showButton = new Forms9Patch.MaterialButton
+            var showButton = new Forms9Patch.Button
             {
                 Text = "Show BubblePopup",
                 OutlineColor = Color.Blue,

@@ -105,7 +105,12 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\"".\[\]
             return EmailRegex.IsMatch(strIn);
         }
 
-
+        /// <summary>
+        /// Determines if two version strings are the same
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
         public static int CompareVersionStrings(this string s1, string s2)
         {
             if (s1 == null && s2 == null)

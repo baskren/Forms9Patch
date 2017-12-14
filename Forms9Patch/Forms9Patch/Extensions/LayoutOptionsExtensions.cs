@@ -27,6 +27,12 @@ namespace Forms9Patch
             return TextAlignment.Start;
         }
 
+        /// <summary>
+        /// Determines if two LayoutOptinos are the same
+        /// </summary>
+        /// <param name="o1"></param>
+        /// <param name="o2"></param>
+        /// <returns></returns>
         public static bool IsEqualTo(this LayoutOptions o1, LayoutOptions o2)
         {
             return o1.Alignment == o2.Alignment && o1.Expands == o2.Expands;

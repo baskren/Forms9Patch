@@ -4,79 +4,87 @@ using Xamarin.Forms;
 namespace Forms9Patch
 {
     /// <summary>
+    /// Depricated: Use StateButton
+    /// </summary>
+    [Obsolete("Depricated: Use Forms9Patch.StateButton")]
+    public class ImageButton : StateButton
+    {
+    }
+
+    /// <summary>
     /// Image button.
     /// </summary>
-    public class ImageButton : MaterialButton
+    public class StateButton : Button
     {
 
         #region State Properties
         /// <summary>
         /// Backing store for the DefaultState bindable property.
         /// </summary>
-        public static BindableProperty DefaultStateProperty = BindableProperty.Create("DefaultState", typeof(ImageButtonState), typeof(ImageButton), null);
+        public static BindableProperty DefaultStateProperty = BindableProperty.Create("DefaultState", typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
-        /// Gets or sets the ImageButton's properties for the default button state.
+        /// Gets or sets the StateButton's properties for the default button state.
         /// </summary>
-        /// <value>The ImageButtonState structure for the default button state.</value>
-        public ImageButtonState DefaultState
+        /// <value>The ButtonState structure for the default button state.</value>
+        public ButtonState DefaultState
         {
-            get { return (ImageButtonState)GetValue(DefaultStateProperty); }
+            get { return (ButtonState)GetValue(DefaultStateProperty); }
             set { SetValue(DefaultStateProperty, value); }
         }
 
         /// <summary>
         /// Backing store for the PressingState bindable property.
         /// </summary>
-        public static BindableProperty PressingStateProperty = BindableProperty.Create("PressingState", typeof(ImageButtonState), typeof(Button), null);
+        public static BindableProperty PressingStateProperty = BindableProperty.Create("PressingState", typeof(ButtonState), typeof(Button), null);
         /// <summary>
-        /// Gets or sets the ImageButton's properties for the pressing button state.
+        /// Gets or sets the StateButton's properties for the pressing button state.
         /// </summary>
-        /// <value>The ImageButtonState structure for the pressing button state.</value>
-        public ImageButtonState PressingState
+        /// <value>The ButtonState structure for the pressing button state.</value>
+        public ButtonState PressingState
         {
-            get { return (ImageButtonState)GetValue(PressingStateProperty); }
+            get { return (ButtonState)GetValue(PressingStateProperty); }
             set { SetValue(PressingStateProperty, value); }
         }
 
         /// <summary>
         /// Backing store for the SelectedState bindable property.
         /// </summary>
-        public static BindableProperty SelectedStateProperty = BindableProperty.Create("SelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
+        public static BindableProperty SelectedStateProperty = BindableProperty.Create("SelectedState", typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
-        /// Gets or sets the ImageButton's properties for the selected button state.
+        /// Gets or sets the StateButton's properties for the selected button state.
         /// </summary>
-        /// <value>The ImageButtonState structure for the selected button state.</value>
-        public ImageButtonState SelectedState
+        /// <value>The ButtonState structure for the selected button state.</value>
+        public ButtonState SelectedState
         {
-            get { return (ImageButtonState)GetValue(SelectedStateProperty); }
+            get { return (ButtonState)GetValue(SelectedStateProperty); }
             set { SetValue(SelectedStateProperty, value); }
         }
 
         /// <summary>
         /// Backing store for the DisabledState bindable property.
         /// </summary>
-        public static BindableProperty DisabledStateProperty = BindableProperty.Create("DisabledState", typeof(ImageButtonState), typeof(ImageButton), null);
+        public static BindableProperty DisabledStateProperty = BindableProperty.Create("DisabledState", typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
-        /// Gets or sets the ImageButton's properties for the disabled button state.
+        /// Gets or sets the StateButton's properties for the disabled button state.
         /// </summary>
-        /// <value>The ImageButtonState structure for the disabled button state.</value>
-        public ImageButtonState DisabledState
+        /// <value>The ButtonState structure for the disabled button state.</value>
+        public ButtonState DisabledState
         {
-            get { return (ImageButtonState)GetValue(DisabledStateProperty); }
+            get { return (ButtonState)GetValue(DisabledStateProperty); }
             set { SetValue(DisabledStateProperty, value); }
         }
 
         /// <summary>
         /// Backing store for the DisabledAndSelectedState bindable property.
         /// </summary>
-        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create("DisabledAndSelectedState", typeof(ImageButtonState), typeof(ImageButton), null);
+        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create("DisabledAndSelectedState", typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
-        /// Gets or sets the ImageButton's properties for the disabled and selected button state.
+        /// Gets or sets the StateButton's properties for the disabled and selected button state.
         /// </summary>
-        /// <value>The ImageButtonState structure for the disabled and selected button state.</value>
-        public ImageButtonState DisabledAndSelectedState
+        /// <value>The ButtonState structure for the disabled and selected button state.</value>
+        public ButtonState DisabledAndSelectedState
         {
-            get { return (ImageButtonState)GetValue(DisabledAndSelectedStateProperty); }
+            get { return (ButtonState)GetValue(DisabledAndSelectedStateProperty); }
             set { SetValue(DisabledAndSelectedStateProperty, value); }
         }
         #endregion
@@ -84,7 +92,7 @@ namespace Forms9Patch
 
         #region Fields
         bool _noUpdate = true;
-        ImageButtonState _currentState;
+        ButtonState _currentState;
         //Xamarin.Forms.StackLayout _stackLayout;
         //Xamarin.Forms.Image _image;
         //Label _label;
@@ -94,12 +102,12 @@ namespace Forms9Patch
 
         #region Constructor
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.ImageButton"/> class.
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.StateButton"/> class.
         /// </summary>
-        public ImageButton() : base()
+        public StateButton() : base()
         {
             _constructing = true;
-            DefaultState = new ImageButtonState();
+            DefaultState = new ButtonState();
 
             _noUpdate = false;
             ShowState(DefaultState);
@@ -147,19 +155,19 @@ namespace Forms9Patch
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~ImageButton() {
+        // ~StateButton() {
         //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         //   Dispose(false);
         // }
 
         // This code added to correctly implement the disposable pattern.
         /// <summary>
-        /// Releases all resource used by the <see cref="T:Forms9Patch.ImageButton"/> object.
+        /// Releases all resource used by the <see cref="T:Forms9Patch.StateButton"/> object.
         /// </summary>
-        /// <remarks>Call <see cref="O:Forms9Patch.ImageButton.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.ImageButton"/>. The
-        /// <see cref="O:Forms9Patch.ImageButton.Dispose"/> method leaves the <see cref="T:Forms9Patch.ImageButton"/> in an unusable state. After
-        /// calling <see cref="O:Forms9Patch.ImageButton.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.ImageButton"/> so
-        /// the garbage collector can reclaim the memory that the <see cref="T:Forms9Patch.ImageButton"/> was occupying.</remarks>
+        /// <remarks>Call <see cref="O:Forms9Patch.StateButton.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.StateButton"/>. The
+        /// <see cref="O:Forms9Patch.StateButton.Dispose"/> method leaves the <see cref="T:Forms9Patch.StateButton"/> in an unusable state. After
+        /// calling <see cref="O:Forms9Patch.StateButton.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.StateButton"/> so
+        /// the garbage collector can reclaim the memory that the <see cref="T:Forms9Patch.StateButton"/> was occupying.</remarks>
         public new void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
@@ -223,10 +231,10 @@ namespace Forms9Patch
 
         bool _showingState;
         /// <summary>
-        /// Redraws the button to a custom ImageButtonState
+        /// Redraws the button to a custom ButtonState
         /// </summary>
-        /// <param name="newState">Custom ImageButtonState.</param>
-        public void ShowState(ImageButtonState newState)
+        /// <param name="newState">Custom ButtonState.</param>
+        public void ShowState(ButtonState newState)
         {
             _showingState = true;
 
@@ -372,8 +380,8 @@ namespace Forms9Patch
 
             // HtmlText handled above
 
-            //_label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
-            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ImageButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
+            //_label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
+            _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
 
             HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
 
@@ -389,11 +397,11 @@ namespace Forms9Patch
 
             #region IFontElement
 
-            _label.FontSize = (_currentState.FontSizeSet || Math.Abs(_currentState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? _currentState.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ImageButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
+            _label.FontSize = (_currentState.FontSizeSet || Math.Abs(_currentState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? _currentState.FontSize : (DefaultState.FontSizeSet || Math.Abs(DefaultState.FontSize - (double)ButtonState.FontSizeProperty.DefaultValue) > 0.01 ? DefaultState.FontSize : Device.GetNamedSize(NamedSize.Medium, _label)));
 
-            _label.FontFamily = (_currentState.FontFamilySet || _currentState.FontFamily != (string)ImageButtonState.FontFamilyProperty.DefaultValue ? _currentState.FontFamily : DefaultState.FontFamily);
+            _label.FontFamily = (_currentState.FontFamilySet || _currentState.FontFamily != (string)ButtonState.FontFamilyProperty.DefaultValue ? _currentState.FontFamily : DefaultState.FontFamily);
 
-            _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ImageButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
+            _label.FontAttributes = (_currentState.FontAttributesSet || _currentState.FontAttributes != (FontAttributes)ButtonState.FontAttributesProperty.DefaultValue ? _currentState.FontAttributes : DefaultState.FontAttributes);
 
             #endregion IFontElement
 
@@ -504,7 +512,7 @@ namespace Forms9Patch
             {
                 System.Diagnostics.Debug.WriteLine("\t" + e.PropertyName);
                 UpdateState();
-                //if (e.PropertyName == ImageButtonState.TextProperty.PropertyName || e.PropertyName == ImageButtonState.HtmlTextProperty.PropertyName)
+                //if (e.PropertyName == ButtonState.TextProperty.PropertyName || e.PropertyName == ButtonState.HtmlTextProperty.PropertyName)
                 //_stackLayout.
                 //System.Diagnostics.Debug.WriteLine("");
                 //_stackLayout.UpdateLayout();
@@ -521,7 +529,7 @@ namespace Forms9Patch
                 return;
 
             #region State changes
-            if (propertyName == ImageButton.DefaultStateProperty.PropertyName && IsEnabled && !IsSelected)
+            if (propertyName == StateButton.DefaultStateProperty.PropertyName && IsEnabled && !IsSelected)
                 UpdateState();
             //          } else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
             //              PressingState.PropertyChanged += OnStatePropertyChanged;

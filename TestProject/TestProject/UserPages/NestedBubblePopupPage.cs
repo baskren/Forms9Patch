@@ -144,7 +144,7 @@ namespace Forms9PatchDemo
 			downSeg.Tapped += (sender, e) => _lastChanged = downSeg.VisualElement;
 
 			PointerDirection = Forms9Patch.PointerDirection.Left;
-			var directionSegmentControl = new Forms9Patch.MaterialSegmentedControl {
+			var directionSegmentControl = new Forms9Patch.SegmentedControl {
 				Segments = { leftSeg, upSeg, rightSeg, downSeg, },
 				GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
 			};
@@ -163,7 +163,7 @@ namespace Forms9PatchDemo
 				TextColor = Color.Black,
 				//BackgroundColor = Color.Green,
 			};
-			var bubbleButton = new Forms9Patch.MaterialButton {
+			var bubbleButton = new Forms9Patch.Button {
 				Text = "Close",
 				//BackgroundColor = Color.Blue,
 				OutlineColor = Color.Blue,
@@ -233,7 +233,7 @@ namespace Forms9PatchDemo
 				newbubble.IsVisible = true;
 			};
 
-			var showButton = new Forms9Patch.MaterialButton {
+			var showButton = new Forms9Patch.Button {
 				Text = "Show BubblePopup",
 				OutlineColor = Color.Blue,
 				TextColor = Color.Blue,

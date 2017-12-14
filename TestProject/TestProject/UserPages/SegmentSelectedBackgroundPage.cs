@@ -10,7 +10,7 @@ namespace Forms9PatchDemo
 
         public SegmentSelectedBackgroundPage()
         {
-            var matSegCtrl = new MaterialSegmentedControl
+            var matSegCtrl = new SegmentedControl
             {
                 Padding = 4,
                 BackgroundColor = Color.FromRgb(112, 128, 144),

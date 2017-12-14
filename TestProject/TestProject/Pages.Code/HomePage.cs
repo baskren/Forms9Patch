@@ -77,13 +77,13 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "Single ImageButton",
+                            Text = "Single StateButton",
                             Command = navigateCommand,
                             CommandParameter = typeof(SingleImageButtonPage)
                         },
 
                         new TextCell {
-                            Text = "ImageButton",
+                            Text = "StateButton",
                             Command = navigateCommand,
                             CommandParameter = typeof(ImageButtonPage)
                         },
@@ -144,7 +144,7 @@ namespace Forms9PatchDemo
 
                         new TextCell
                         {
-                            Text = "Single MaterialButton",
+                            Text = "Single Button",
                             Command = navigateCommand,
                             CommandParameter = typeof(SingleMaterialButton)
                         },
@@ -164,7 +164,7 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "ImageButton alignments",
+                            Text = "StateButton alignments",
                             Command = navigateCommand,
                             CommandParameter = typeof(ImageButtonAlignments)
                         },
@@ -235,13 +235,13 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "ImageButton",
+                            Text = "StateButton",
                             Command = navigateCommand,
                             CommandParameter = typeof(ImageButtonCodePage)
                         },
 
                         new TextCell {
-                            Text = "Single ImageButton",
+                            Text = "Single StateButton",
                             Command = navigateCommand,
                             CommandParameter = typeof(SingleImageButtonCodePage)
                         },

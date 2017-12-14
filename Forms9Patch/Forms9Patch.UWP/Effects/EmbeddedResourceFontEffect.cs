@@ -77,7 +77,7 @@ namespace Forms9Patch.UWP
                 base.OnElementPropertyChanged(args);
         }
 
-        async void UpdateFont()
+        void UpdateFont()
 		{
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {

@@ -9,9 +9,9 @@ namespace Forms9PatchDemo
 
         public ButtonTapped()
         {
-            var materialButton = new MaterialButton
+            var materialButton = new Forms9Patch.Button
             {
-                Text = "MaterialButton",
+                Text = "Button",
                 TextColor = Color.Pink,
                 FontSize = 20,
                 HeightRequest = 30,
@@ -24,9 +24,9 @@ namespace Forms9PatchDemo
             };
             materialButton.Tapped += OnTapped;
 
-            var imageButton = new ImageButton
+            var imageButton = new StateButton
             {
-                Text = "ImageButton",
+                Text = "StateButton",
                 TextColor = Color.Green,
                 FontSize = 20,
                 HeightRequest = 30,

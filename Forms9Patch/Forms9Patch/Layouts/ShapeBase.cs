@@ -8,15 +8,6 @@ namespace Forms9Patch
 	/// </summary>
 	public static class ShapeBase 
 	{
-        #region Overridden BinableProperties backing stores
-        /// <summary>
-        /// Identifies the Padding bindable property.
-        /// </summary>
-        /// <remarks></remarks>
-        //public static readonly BindableProperty PaddingProperty = BindableProperty.Create("Forms9Patch.ShapeBase.Padding", typeof(Thickness), typeof(ShapeBase), new Thickness(0), BindingMode.OneWay, UpdateBasePadding);
-
-        //internal static readonly BindableProperty IgnoreShapePropertiesChangesProperty = BindableProperty.Create("Forms9Patch.Shapebase.IgnoreShapePropertiesChanges", typeof(bool), typeof(ShapeBase), false);
-        #endregion
 
         #region IBackground backing stores
 
@@ -92,49 +83,7 @@ namespace Forms9Patch
 
         #endregion IBackground backing stores
 
-        /*
-        internal static bool UpdateBasePadding(BindableObject bindable, object newValue) {
-			var layout = bindable as ILayout;
-			Thickness layoutPadding;
-            var hasShadow = (bool)bindable.GetValue(ShapeBase.HasShadowProperty);
-            if (newValue is bool)
-            {
-                layoutPadding = (Thickness)bindable.GetValue(ShapeBase.PaddingProperty);
-                hasShadow = (bool)newValue;
-            }
-            else
-            {
-                layoutPadding = (Thickness)newValue;
-            }
-            //var materialButton = layout as MaterialButton;
-            //var makeRoomForShadow = materialButton == null ? hasShadow : (bool)layout.GetValue (MaterialButton.HasShadowProperty);
-
-            //var updating = (bool)bindable.GetValue(IgnoreShapePropertiesChangesProperty);
-            //bindable.SetValue(IgnoreShapePropertiesChangesProperty, true);
-			if (hasShadow) {
-				
-				var shadowPadding = ShadowPadding (layout, hasShadow);
-
-				Thickness newPadding;
-				double xLeft = layoutPadding.Left + shadowPadding.Left;
-				double xTop = layoutPadding.Top + shadowPadding.Top;
-				double xRight = layoutPadding.Right + shadowPadding.Right;
-				double xBottom = layoutPadding.Bottom + shadowPadding.Bottom;
-				newPadding = new Thickness (xLeft, xTop, xRight, xBottom);
-
-                bindable.SetValue (Layout.PaddingProperty, newPadding);
-				//System.Diagnostics.Debug.WriteLine ("\tRoundedBoxBase.UpdateBasePadding newPadding: " + newPadding.Description ());
-			} else {
-                bindable.SetValue (Layout.PaddingProperty, layoutPadding);
-				//System.Diagnostics.Debug.WriteLine ("\tRoundedBoxBase.UpdateBasePadding layoutPadding: " + layoutPadding.Description ());
-			}
-            //var contentView = bindable as ContentView;
-            //bindable.SetValue(IgnoreShapePropertiesChangesProperty, updating);
-            return true;
-		}
-        */
-
-
+ 
 		internal static Thickness ShadowPadding(IShape shape, bool hasShadow=true, bool scaleForDisplay=false) {
             Settings.ConfirmInitialization();
             if (hasShadow) {
@@ -147,7 +96,7 @@ namespace Forms9Patch
                 var padT = Math.Max(0, shadowR - shadowY);
                 var padB = Math.Max(0, shadowR + shadowY);
 
-                if (shape is MaterialButton materialButton)
+                if (shape is Button materialButton)
                 {
                     var orientation = materialButton.ParentSegmentsOrientation;
                     if (orientation == StackOrientation.Horizontal && (shape.ExtendedElementShape == ExtendedElementShape.SegmentMid || shape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))

@@ -9,10 +9,8 @@ namespace Forms9PatchDemo
 	{
 		public ModalPopupWithNavigationPages ()
 		{
-			var button = new Button {
-				Text = "Show Test Page",
-			};
-			button.Clicked += (sender, e) => this.Navigation.PushModalAsync (new BubbonPushModalAsyncPage ());
+            var button = new Forms9Patch.Button("Show Test Page");
+            button.Clicked += (sender, e) => this.Navigation.PushModalAsync (new BubbonPushModalAsyncPage ());
 			// The root page of your application
 			var content = new Xamarin.Forms.ContentView
 			{
@@ -35,14 +33,14 @@ namespace Forms9PatchDemo
 
 	public class BubbonPushModalAsyncPage : ContentPage
 	{
-		Button button1;
-		Button button2;
+        Forms9Patch.Button button1;
+        Forms9Patch.Button button2;
 		BubblePopup bubble;
 
 		public BubbonPushModalAsyncPage()
 		{
-			button1 = new Button { Text = "No Target" };
-			button2 = new Button { Text = "Target" };
+			button1 = new Forms9Patch.Button("No Target");
+			button2 = new Forms9Patch.Button("Target");
 
 			Content = new Xamarin.Forms.StackLayout
 			{

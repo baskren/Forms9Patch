@@ -19,7 +19,7 @@ namespace Forms9PatchDemo
 
         Switch _hasShadowSwitch = new Switch { IsToggled = hasShadow };
 
-        MaterialSegmentedControl _hzAlignmentElement = new MaterialSegmentedControl
+        SegmentedControl _hzAlignmentElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -37,7 +37,7 @@ namespace Forms9PatchDemo
             }
         };
 
-        MaterialSegmentedControl _vtAlignmentElement = new MaterialSegmentedControl
+        SegmentedControl _vtAlignmentElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -53,7 +53,7 @@ namespace Forms9PatchDemo
             }
         };
 
-        MaterialSegmentedControl _optionsElement = new MaterialSegmentedControl
+        SegmentedControl _optionsElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -70,7 +70,7 @@ namespace Forms9PatchDemo
             }
         };
 
-        MaterialSegmentedControl _iconElement = new MaterialSegmentedControl
+        SegmentedControl _iconElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -98,7 +98,7 @@ namespace Forms9PatchDemo
 
         Slider _outlineRadiusSlider = new Slider(0, 16.0, radius);
 
-        MaterialButton _iconTextAndTextButton = new MaterialButton
+        Forms9Patch.Button _iconTextAndTextButton = new Forms9Patch.Button
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -109,7 +109,7 @@ namespace Forms9PatchDemo
             Text = "Text",
         };
 
-        MaterialSegmentedControl _hzSegmentsElement = new MaterialSegmentedControl
+        SegmentedControl _hzSegmentsElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -134,7 +134,7 @@ namespace Forms9PatchDemo
                         }
         };
 
-        MaterialSegmentedControl _vtSegmentsElement = new MaterialSegmentedControl
+        SegmentedControl _vtSegmentsElement = new SegmentedControl
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,

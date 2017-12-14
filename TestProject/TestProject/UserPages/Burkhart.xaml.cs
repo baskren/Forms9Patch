@@ -15,8 +15,8 @@ namespace Forms9PatchDemo
 		public Burkhart()
 		{
 			InitializeComponent();
-			SignInButton.DefaultState = new ImageButtonState() { Text = "Sign In", BackgroundColor = Color.FromHex("84849B"), TextColor = Color.Black };
-			SignInButton.DisabledState = new ImageButtonState() { TextColor = Color.Gray };
+			SignInButton.DefaultState = new ButtonState() { Text = "Sign In", BackgroundColor = Color.FromHex("84849B"), TextColor = Color.Black };
+			SignInButton.DisabledState = new ButtonState() { TextColor = Color.Gray };
 
 		}
 	}

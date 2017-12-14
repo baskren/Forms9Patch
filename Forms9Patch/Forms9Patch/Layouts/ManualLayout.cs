@@ -222,6 +222,9 @@ namespace Forms9Patch
 
 
         #region Constructor
+        /// <summary>
+        /// Constructor for ManualLayout
+        /// </summary>
         public ManualLayout()
         {
             _id = _instances++;
@@ -252,6 +255,12 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler<ManualLayoutEventArgs> LayoutChildrenEvent;
 
+        /// <summary>
+        /// processes measurement of layout
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             var result = base.OnMeasure(widthConstraint, heightConstraint);
@@ -263,6 +272,13 @@ namespace Forms9Patch
             return result;
         }
 
+        /// <summary>
+        /// processes child layouts
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             if (HasShadow)

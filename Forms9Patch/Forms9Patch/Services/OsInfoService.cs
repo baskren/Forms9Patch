@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Provides information about the operating system in which the app is running
+    /// </summary>
     public static class OsInfoService
     {
         static IOsInformationService _service;
@@ -21,6 +24,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Operating system version
+        /// </summary>
         public static Version Version => Service.Version;
 
     }

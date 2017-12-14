@@ -25,7 +25,7 @@ namespace Forms9PatchDemo
         Forms9Patch.SliderStepSizeEffect capsInsetsBStepSizeEffect = new Forms9Patch.SliderStepSizeEffect(1);
 
         //Switch pixelCapsSwitch = new Switch();
-        Forms9Patch.MaterialSegmentedControl capsUnitsSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl capsUnitsSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
             {
@@ -56,7 +56,7 @@ namespace Forms9PatchDemo
 
         //BoxView f9pImageWidthBox = new BoxView { Color = Color.Red, HeightRequest = 1 };
 
-        Forms9Patch.MaterialSegmentedControl hzOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl hzOptionSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -70,7 +70,7 @@ namespace Forms9PatchDemo
             Lines = 1,
             AutoFit = Forms9Patch.AutoFit.Width
         };
-        Forms9Patch.MaterialSegmentedControl vtOptionSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+        Forms9Patch.SegmentedControl vtOptionSegmentedControl = new Forms9Patch.SegmentedControl
         {
             Segments =
                 {
@@ -101,7 +101,7 @@ namespace Forms9PatchDemo
             heightRequestSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
             heightRequestSlider.ValueChanged += HeightRequestSlider_ValueChanged;
 
-            var fillSegmentedControl = new Forms9Patch.MaterialSegmentedControl
+            var fillSegmentedControl = new Forms9Patch.SegmentedControl
             {
                 Segments =
                 {
@@ -115,7 +115,7 @@ namespace Forms9PatchDemo
             fillSegmentedControl.SelectIndex(3);
             fillSegmentedControl.SegmentTapped += FillSegmentedControl_SegmentTapped;
 
-            Forms9Patch.MaterialSegmentedControl shapesSelector = new Forms9Patch.MaterialSegmentedControl
+            Forms9Patch.SegmentedControl shapesSelector = new Forms9Patch.SegmentedControl
             {
                 Segments =
                 {
@@ -141,7 +141,7 @@ namespace Forms9PatchDemo
             outlineRadiusSlider.Effects.Add(new Forms9Patch.SliderStepSizeEffect(1));
             outlineRadiusSlider.ValueChanged += OutlineRadiusSlider_ValueChanged;
 
-            var shapeAttributesSelector = new Forms9Patch.MaterialSegmentedControl
+            var shapeAttributesSelector = new Forms9Patch.SegmentedControl
             {
                 GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
                 Segments =
@@ -154,7 +154,17 @@ namespace Forms9PatchDemo
             };
             shapeAttributesSelector.SegmentTapped += ShapeAttributesSelector_SegmentTapped;
 
-            var backgroundImageSelector = new Forms9Patch.MaterialSegmentedControl
+            var seg1 = new Forms9Patch.Segment("");
+            var seg2 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox");
+            var seg3 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button");
+            var seg4 = new Forms9Patch.Segment(null, new Forms9Patch.Image { Source = ImageSource.FromFile("cat.jpg"), Fill = Forms9Patch.Fill.AspectFit });
+            var seg5 = new Forms9Patch.Segment(null, new Forms9Patch.Image { Source = ImageSource.FromFile("balloons.jpg"), Fill = Forms9Patch.Fill.AspectFit });
+            var seg6 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image");
+            var seg7 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon");
+            var seg8 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble");
+            var seg9 = new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton");
+
+            var backgroundImageSelector = new Forms9Patch.SegmentedControl
             {
                 HeightRequest = 40,
                 HasTightSpacing = true,
@@ -163,18 +173,29 @@ namespace Forms9PatchDemo
                 TintIcon = false,
                 Segments =
                 {
-                    new Forms9Patch.Segment(""),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redGridBox"),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.button"),
-                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("cat.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
-                    new Forms9Patch.Segment(null, new Forms9Patch.Image { Source=ImageSource.FromFile("balloons.jpg"), Fill=Forms9Patch.Fill.AspectFit }),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.image"),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.redribbon"),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bubble"),
-                    new Forms9Patch.Segment(null, "Forms9PatchDemo.Resources.bluebutton")
+                    seg1,
+                    seg2,
+                    seg3,
+                    seg4,
+                    seg5,
+                    seg6,
+                    seg7,
+                    seg8,
+                    seg9
 
                 }
             };
+            /*
+            backgroundImageSelector.Segments.Add(seg1);
+            backgroundImageSelector.Segments.Add(seg2);
+            backgroundImageSelector.Segments.Add(seg3);
+            backgroundImageSelector.Segments.Add(seg4);
+            backgroundImageSelector.Segments.Add(seg5);
+            backgroundImageSelector.Segments.Add(seg6);
+            backgroundImageSelector.Segments.Add(seg7);
+            backgroundImageSelector.Segments.Add(seg8);
+            backgroundImageSelector.Segments.Add(seg9);
+            */
             backgroundImageSelector.SelectIndex(1);
             backgroundImageSelector.SegmentTapped += BackgroundImageSelector_SegmentTapped;
 

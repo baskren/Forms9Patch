@@ -53,7 +53,6 @@ namespace Forms9Patch.UWP
         {
             private set
             {
-                //ApplicationAssembly = System.Reflection.Assembly.GetCallingAssembly();
                 ApplicationAssembly = _app.GetType().GetTypeInfo().Assembly;
                 if (!string.IsNullOrEmpty(value))
                 {
@@ -85,7 +84,52 @@ namespace Forms9Patch.UWP
         public List<Assembly> IncludedAssemblies => AssembliesToInclude;
 
 
-        internal static List<Assembly> Forms9PatchAssemblies = new List<Assembly>
+        static List<Assembly> _forms9PatchAssemblies = null;
+        internal static List<Assembly> Forms9PatchAssemblies
+        {
+            get
+            {
+                if (_forms9PatchAssemblies==null)
+                {
+                    _forms9PatchAssemblies = new List<Assembly>();
+                    try  { _forms9PatchAssemblies.Add(typeof(Forms9Patch.Settings).GetTypeInfo().Assembly);  }
+                    catch(Exception e) { throw new Exception("Cannot load Forms9Patch assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(Settings).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load Forms9Patch.UWP assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(FormsGestures.Listener).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load FormsGestures assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load NumericalMethods assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(PCL.Utils.DownloadCache).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load PCL.Utils assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load Windows.ApplicationModel.Core assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load PCLStorage assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load Newtonsoft.Json assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load SkiaSharp assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(SkiaSharp.Views.UWP.SKXamlCanvas).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load SkiaSharp.Views.UWP assembly"); }
+
+                    try { _forms9PatchAssemblies.Add(typeof(SharpDX.Direct2D1.Factory).GetTypeInfo().Assembly); }
+                    catch (Exception e) { throw new Exception("Cannot load SharpDX.Direct2D1 assembly"); }
+
+                }
+                return _forms9PatchAssemblies;
+            }
+        }
+        /*= new List<Assembly>
         {
             typeof(Forms9Patch.Settings).GetTypeInfo().Assembly,
             typeof(Settings).GetTypeInfo().Assembly,
@@ -96,9 +140,11 @@ namespace Forms9Patch.UWP
             typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly,
             typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly,
             typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly,
-            typeof(Windows.UI.Xaml.Media.Imaging.BitmapFactory).GetTypeInfo().Assembly,
             typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly,
+            typeof(SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs).GetTypeInfo().Assembly,
+            typeof(SharpDX.Direct2D1.Factory).GetTypeInfo().Assembly,
         };
+        */
 
         static List<Assembly> _assembliesToInclude;
         public static List<Assembly> AssembliesToInclude

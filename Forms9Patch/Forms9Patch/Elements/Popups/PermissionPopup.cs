@@ -199,11 +199,11 @@ namespace Forms9Patch
 			FontSize = 16,
 			TextColor = Color.Black
 		};
-		readonly MaterialButton _okButton = new MaterialButton
+		readonly Button _okButton = new Button
 		{
 			HorizontalOptions = LayoutOptions.FillAndExpand
 		};
-		readonly MaterialButton _cancelButton = new MaterialButton
+		readonly Button _cancelButton = new Button
 		{
 			HorizontalOptions = LayoutOptions.FillAndExpand
 

@@ -11,7 +11,7 @@ namespace Forms9PatchDemo.Pages
     {
         public SingleSegmentedController()
         {
-            var segementControl = new Forms9Patch.MaterialSegmentedControl
+            var segementControl = new Forms9Patch.SegmentedControl
             {
                 GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
                 BackgroundColor = Color.NavajoWhite,

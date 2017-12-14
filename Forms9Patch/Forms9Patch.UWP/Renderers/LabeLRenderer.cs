@@ -17,7 +17,7 @@ namespace Forms9Patch.UWP
             get
             {
                 //string labelTextStart = "Żyłę;^`g ";
-                string labelTextStart = "BACKGROUND";
+                string labelTextStart = "X";
                 return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
             }
         }
@@ -121,6 +121,7 @@ namespace Forms9Patch.UWP
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            DebugMessage("property=[" + e.PropertyName + "]");
             if (e.PropertyName == Forms9Patch.Label.TextProperty.PropertyName || e.PropertyName == Forms9Patch.Label.HtmlTextProperty.PropertyName)
                 //UpdateTextAndFont(Control);
                 ForceLayout(Control);
@@ -277,8 +278,10 @@ namespace Forms9Patch.UWP
         #region Xamarin GetDesiredSize
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
+            DebugMessage("ENTER(" + widthConstraint + "," + heightConstraint + ")");
             var desiredSize = MeasureOverride(new Windows.Foundation.Size(widthConstraint, heightConstraint));
             var minSize = new Xamarin.Forms.Size(10, FontExtensions.LineHeightForFontSize(Element.DecipheredMinFontSize()));
+            DebugMessage("EXIT(" + desiredSize + ")");
             return new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
         }
         #endregion
@@ -332,15 +335,17 @@ namespace Forms9Patch.UWP
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
         }
 
+        DateTime _lastMeasure = DateTime.MaxValue;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
+            DebugMessage("pre-Enter");
             var label = Element;
             var textBlock = Control;
 
             if (label == null || textBlock == null || availableSize.Width == 0 || availableSize.Height == 0)
                 return new Windows.Foundation.Size(0, 0);
 
-            if (LayoutValid && _lastAvailableSize == availableSize)
+            if (LayoutValid && _lastAvailableSize == availableSize && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
                 return _lastMeasureOverrideResult;
 
             if (DebugCondition)
@@ -431,7 +436,7 @@ namespace Forms9Patch.UWP
                 // we needed the following in Android as well.  Xamarin layout really doesn't like this to be changed in real time.
                 Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
                  {
-                     label.OptimalFontSize = tmpFontSize;
+                     label.FittedFontSize = tmpFontSize;
                      return false;
                  });
 
@@ -460,6 +465,7 @@ namespace Forms9Patch.UWP
             _lastMeasureOverrideResult = result;
             _lastAutoFit = label.AutoFit;
             _lastLines = label.Lines;
+            _lastMeasure = DateTime.Now;
             return result;
         }
         #endregion

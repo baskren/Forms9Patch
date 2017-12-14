@@ -124,7 +124,7 @@ namespace Forms9Patch
 			TextColor = (Color)TextColorProperty.DefaultValue,
 			//HorizontalOptions = LayoutOptions.Fill,
 		};
-		readonly MaterialButton _okButton = new MaterialButton
+		readonly Button _okButton = new Button
 		{
 			//HorizontalOptions = LayoutOptions.Fill
 		};

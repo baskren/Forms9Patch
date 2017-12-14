@@ -85,12 +85,12 @@ namespace Forms9PatchDemo
 
 			//var listener = new FormsOrientation.Listener ();
 
-			var hidePopupButton = new Forms9Patch.MaterialButton {
+			var hidePopupButton = new Forms9Patch.Button {
 				Text = "DONE",
 				BackgroundColor = Color.Blue,
 				DarkTheme = true,
 			};
-			var showPopupButton = new Forms9Patch.MaterialButton {
+			var showPopupButton = new Forms9Patch.Button {
 				Text = "Show Modal popup",
 				BackgroundColor = Color.Blue,
 				DarkTheme = true,
@@ -98,13 +98,13 @@ namespace Forms9PatchDemo
 				HorizontalOptions = LayoutOptions.Center,
 			};
 
-			var cancelOnBackgroundTouchButton = new Forms9Patch.MaterialButton
+			var cancelOnBackgroundTouchButton = new Forms9Patch.Button
 			{
 				Text = "Cancel on Background touch",
 				ToggleBehavior = true,
 				IsSelected = true
 			};
-			cancelOnBackgroundTouchButton.SetBinding(Forms9Patch.MaterialButton.IsSelectedProperty,"CancelOnBackgroundTouch");
+			cancelOnBackgroundTouchButton.SetBinding(Forms9Patch.Button.IsSelectedProperty,"CancelOnBackgroundTouch");
 			cancelOnBackgroundTouchButton.BindingContext = this;
 
 
@@ -113,7 +113,7 @@ namespace Forms9PatchDemo
 			var greenSegment = new Forms9Patch.Segment { HtmlText = "<font color=\"#00FF00\">Green</font>" };
 			var blueSegment = new Forms9Patch.Segment { HtmlText = "<font color=\"#0000FF\">Blue</font>" };
 
-			var overlayColorSelector = new Forms9Patch.MaterialSegmentedControl
+			var overlayColorSelector = new Forms9Patch.SegmentedControl
 			{
 				Segments = {
 					blackSegment,

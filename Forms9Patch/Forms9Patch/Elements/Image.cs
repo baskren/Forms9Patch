@@ -295,6 +295,9 @@ namespace Forms9Patch
 
         #region IElement
 
+        /// <summary>
+        /// Returns index instance ID for this class (starts at 0)
+        /// </summary>
         public int InstanceId => _f9pId;
 
         #endregion IElement
@@ -327,10 +330,11 @@ namespace Forms9Patch
         /// <summary>
         /// Instantiates a new instance of Image from an MultiResource embedded resource
         /// </summary>
-        /// <param name="embeddedResourceId"></param>
+        /// <param name="embeddedResourceId">EmbeddedResourceId for image</param>
+        /// <param name="assembly">Assembly in which embedded resource is embedded</param>
         public Image(string embeddedResourceId, Assembly assembly=null) : this()
         {
-            if (assembly == null)
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             Source = Forms9Patch.ImageSource.FromMultiResource(embeddedResourceId, assembly);
         }
@@ -378,6 +382,10 @@ namespace Forms9Patch
             Source = image.Source;
         }
 
+        /// <summary>
+        /// Convenience constructor for Forms9Patch.Image
+        /// </summary>
+        /// <param name="image"></param>
         public Image(Image image)
         {
             _f9pId = _instances++;

@@ -35,7 +35,7 @@ namespace Forms9Patch
 
         #region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
         /// <summary>
-        /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute & store shadow padding
+        /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute and store shadow padding
         /// </summary>
         public static new BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(PopupBase), default(Thickness));
         /// <summary>
@@ -618,6 +618,12 @@ namespace Forms9Patch
         #region Layout
         Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
+        /// <summary>
+        /// processes measurement requests
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             // this is going to be the size of the root page.

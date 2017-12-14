@@ -33,10 +33,6 @@ namespace Forms9Patch
     public class ImageRenderer : ViewRenderer<Image, SkiaRoundedBoxAndImageView>
     {
         #region Fields
-        bool _disposed;
-
-        bool _debugMessages;
-
         static int _instances;
         int _instance;
         #endregion
