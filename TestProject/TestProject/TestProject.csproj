@@ -42,8 +42,8 @@
     <Compile Include="ObsoletePages\ImageOnPage.cs" />
     <Compile Include="Pages.Code\ButtonCodePage.cs" />
     <Compile Include="Pages.Code\LayoutCodePage.cs" />
-    <Compile Include="Pages.Code\SingleMaterialButton.cs" />
-    <Compile Include="Pages.Code\SingleSegmentedController.cs" />
+    <Compile Include="Pages.Code\SingleButton.cs" />
+    <Compile Include="Pages.Code\SingleSegmentedControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages.Xaml\XamlNinePatchButtonPage.xaml.cs">
       <DependentUpon>XamlNinePatchButtonPage.xaml</DependentUpon>
@@ -79,7 +79,6 @@
     <Compile Include="Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs">
       <DependentUpon>XamlHtmlLabelsAndButtonsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages.Code\SimpleFontTestPage.cs" />
     <Compile Include="Pages.Xaml\XamlCapsInsetPage.xaml.cs">
       <DependentUpon>XamlCapsInsetPage.xaml</DependentUpon>
     </Compile>
@@ -88,7 +87,6 @@
     <Compile Include="Pages.Xaml\XamlSingleStateButtonPage.xaml.cs">
       <DependentUpon>XamlSingleStateButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages.Code\SingleImageButtonCodePage.cs" />
     <Compile Include="ObsoletePages\LayoutWithLabel.cs" />
     <Compile Include="ObsoletePages\LabelInHorizontalStackLayout.cs" />
     <Compile Include="Pages.Code\ExternalEmbeddedResourceImage.cs" />
@@ -122,14 +120,16 @@
     </Compile>
     <Compile Include="UserPages\DataForBinding.cs" />
     <Compile Include="UserPages\SegmentSelectedBackgroundPage.cs" />
-    <Compile Include="Pages.Code\FontSizeTest.cs" />
     <Compile Include="Pages.Code\ButtonAndSegmentAlignments.cs" />
     <Compile Include="ObsoletePages\ImageButtonAlignments.cs" />
-    <Compile Include="Pages.Code\LabelLink.cs" />
+    <Compile Include="Pages.Code\HtmlLink.cs" />
     <Compile Include="UserPages\ButtonTapped.cs" />
     <Compile Include="UserPages\StretchIssuePage.xaml.cs">
       <DependentUpon>StretchIssuePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObsoletePages\FontSizeTest.cs" />
+    <Compile Include="ObsoletePages\SingleImageButtonCodePage.cs" />
+    <Compile Include="ObsoletePages\SimpleFontTestPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

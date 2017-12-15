@@ -238,7 +238,7 @@ namespace Forms9Patch
         /// <param name="text"></param>
         public Label(string text) : this()
         {
-            Text = text;
+            HtmlText = text;
         }
         #endregion
 

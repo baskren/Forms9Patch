@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo.Pages
 {
-    public class SingleSegmentedController : ContentPage
+    public class SingleSegmentedControl : ContentPage
     {
-        public SingleSegmentedController()
+        public SingleSegmentedControl()
         {
             var segementControl = new Forms9Patch.SegmentedControl
             {

@@ -132,20 +132,20 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "LayoutCodePage",
+                            Text = "Layout CodePage",
                             Command = navigateCommand,
                             CommandParameter = typeof(LayoutCodePage)
                         },
 
                         new TextCell {
-                            Text = "Button & Segment alignments",
+                            Text = "Button & Segment Alignments",
                             Command = navigateCommand,
                             CommandParameter = typeof(ButtonAndSegmentAlignments)
                         },
 
                         new TextCell
                         {
-                            Text = "ButtonCodePage",
+                            Text = "Button CodePage",
                             Command = navigateCommand,
                             CommandParameter = typeof(ButtonCodePage)
                         },
@@ -154,39 +154,25 @@ namespace Forms9PatchDemo
                         {
                             Text = "Single Button",
                             Command = navigateCommand,
-                            CommandParameter = typeof(SingleMaterialButton)
+                            CommandParameter = typeof(SingleButton)
                         },
 
                         new TextCell
                         {
                             Text = "Single SegmentedControl",
                             Command = navigateCommand,
-                            CommandParameter = typeof(SingleSegmentedController)
+                            CommandParameter = typeof(SingleSegmentedControl)
                         },
 
                         new TextCell
                         {
-                            Text = "Html link example",
+                            Text = "Html Link",
                             Command = navigateCommand,
-                            CommandParameter = typeof(LabelLink)
+                            CommandParameter = typeof(HtmlLink)
                         },
 
                         new TextCell {
-                            Text = "StateButton alignments",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(ImageButtonAlignments)
-                        },
-
-
-                        new TextCell {
-                            Text = "Font Size test",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(FontSizeTest)
-                        },
-
-
-                        new TextCell {
-                            Text = "Custom Font Effect",
+                            Text = "EmbeddedResource Font Effect",
                             Command = navigateCommand,
                             CommandParameter = typeof(EmbeddedResourceFontEffectPage)
                         },
@@ -207,18 +193,6 @@ namespace Forms9PatchDemo
                             Text = "HTML Formatted Buttons",
                             Command = navigateCommand,
                             CommandParameter = typeof(HtmlButtonsPage)
-                        },
-
-                        new TextCell {
-                            Text = "StateButton",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(OldImageButtonCodePage)
-                        },
-
-                        new TextCell {
-                            Text = "Single StateButton",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(SingleImageButtonCodePage)
                         },
 
                         new TextCell {

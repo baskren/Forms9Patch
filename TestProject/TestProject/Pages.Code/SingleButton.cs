@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo.Pages
 {
-	public class SingleMaterialButton : ContentPage
-	{
-		public SingleMaterialButton ()
-		{
-            var button = new Forms9Patch.Button { Text = "Click me", ToggleBehavior = true, BackgroundColor=Color.NavajoWhite, OutlineRadius=5 };
+    public class SingleButton : ContentPage
+    {
+        public SingleButton()
+        {
+            var button = new Forms9Patch.Button { Text = "Click me", ToggleBehavior = true, BackgroundColor = Color.NavajoWhite, OutlineRadius = 5 };
 
             var hasShadowSwitch = new Switch();
             hasShadowSwitch.Toggled += (sender, e) => button.HasShadow = e.Value;
@@ -21,17 +21,18 @@ namespace Forms9PatchDemo.Pages
 
 
             Padding = 20;
-			Content = new StackLayout {
-				Children = {
-					new Label { Text = "HasShadow" },
+            Content = new StackLayout
+            {
+                Children = {
+                    new Label { Text = "HasShadow" },
                     hasShadowSwitch,
                     new Label { Text = "HasOutline"},
                     hasOutlineSwitch,
-                    
+
                     button,
-				}
-			};
-		}
+                }
+            };
+        }
 
     }
 }
