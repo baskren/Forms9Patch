@@ -7,7 +7,7 @@ namespace Forms9Patch
     /// OBSOLETE: Use ButtonState
     /// </summary>
     [Obsolete("Use ButtonState")]
-    public class ImageButtonState : ButtonState  {  }
+    public class ImageButtonState : ButtonState { }
 
     /// <summary>
     /// Describes the properties of a <see cref="StateButton"/> for a given state.
@@ -161,7 +161,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the spacing property.
         /// </summary>
-        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(ButtonState), 4.0,
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).SpacingSet = true;

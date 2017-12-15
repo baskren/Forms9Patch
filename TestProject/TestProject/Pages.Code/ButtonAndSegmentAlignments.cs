@@ -115,7 +115,7 @@ namespace Forms9PatchDemo
             SelectedState = new ButtonState
             {
                 Text = "Selected",
-                BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.ghosts") { Fill= Fill.Tile },
+                BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.ghosts") { Fill = Fill.Tile },
                 OutlineColor = Color.Red,
                 TextColor = Color.White,
             },
@@ -348,6 +348,7 @@ namespace Forms9PatchDemo
             _spacingSlider.ValueChanged += (sender, e) =>
             {
                 _button.Spacing = _spacingSlider.Value;
+                //_stateButton.Spacing = _spacingSlider.Value;
                 _stateButton.DefaultState.Spacing = _spacingSlider.Value;
                 _hzSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
                 _vtSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
@@ -411,40 +412,39 @@ namespace Forms9PatchDemo
 
         void SetIconText(string iconTextSetting)
         {
-            /*
-            _iconTextAndTextButton.IconImage = null;
-            foreach (var segment in _hzSegmentsElement.Segments)
-                segment.IconImage = null;
-            foreach (var segment in _vtSegmentsElement.Segments)
-                segment.IconImage = null;
-                */
             if (iconTextSetting == "NONE")
                 _button.IconText = null;
             else
                 _button.IconText = iconTextSetting;
+            _stateButton.DefaultState.IconText = _button.IconText;
             foreach (var segment in _hzSegmentsElement.Segments)
                 segment.IconText = _button.IconText;
             foreach (var segment in _vtSegmentsElement.Segments)
                 segment.IconText = _button.IconText;
 
-            _stateButton.DefaultState.IconText = _button.IconText;
         }
 
         void SetIconImage(Forms9Patch.Image image)
         {
             var source = image?.Source;
-            _button.IconImage = new Forms9Patch.Image(image);
-            foreach (var segment in _hzSegmentsElement.Segments)
+            if (source != null)
             {
-                if (source != null)
-                    segment.IconImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.Info"); //new Forms9Patch.Image(image);
-                else
+                _button.IconImage = new Forms9Patch.Image(source);
+                _stateButton.DefaultState.IconImage = new Forms9Patch.Image(source);
+                foreach (var segment in _hzSegmentsElement.Segments)
+                    segment.IconImage = new Forms9Patch.Image(source); //new Forms9Patch.Image(image);
+                foreach (var segment in _vtSegmentsElement.Segments)
+                    segment.IconImage = new Forms9Patch.Image(source);
+            }
+            else
+            {
+                _button.IconImage = null;
+                _stateButton.DefaultState.IconImage = null;
+                foreach (var segment in _hzSegmentsElement.Segments)
+                    segment.IconImage = null;
+                foreach (var segment in _vtSegmentsElement.Segments)
                     segment.IconImage = null;
             }
-            foreach (var segment in _vtSegmentsElement.Segments)
-                segment.IconImage = new Forms9Patch.Image(source);
-
-            _stateButton.DefaultState.IconImage = _button.IconImage;
         }
     }
 }

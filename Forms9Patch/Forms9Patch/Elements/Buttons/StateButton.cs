@@ -17,6 +17,73 @@ namespace Forms9Patch
     public class StateButton : Button
     {
 
+        #region Overridden Properties
+
+        #region Text
+        /// <summary>
+        /// Backing store for the Button.Text bindable property.
+        /// </summary>
+        public static new readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Button), null);
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
+        /// <value>The text.</value>
+        public new string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+        #endregion Text
+
+        #region HtmlText
+        /// <summary>
+        /// Backing store for the formatted text property.
+        /// </summary>
+        public static new readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Button), null);
+        /// <summary>
+        /// Gets or sets the formatted text.
+        /// </summary>
+        /// <value>The formatted text.</value>
+        public new string HtmlText
+        {
+            get { return (string)GetValue(HtmlTextProperty); }
+            set { SetValue(HtmlTextProperty, value); }
+        }
+        #endregion HtmlText
+
+        #region IconImage
+        /// <summary>
+        /// Backing store for the IconImage property
+        /// </summary>
+        public static new BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(Button), null);
+        /// <summary>
+        /// Gets or sets the icon image.  Alternatively, use IconText
+        /// </summary>
+        public new Forms9Patch.Image IconImage
+        {
+            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
+            set { SetValue(IconImageProperty, value); }
+        }
+        #endregion IconImage
+
+        #region IconText
+        /// <summary>
+        /// The image text property backing store
+        /// </summary>
+        public static new readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(Button), default(string));
+        /// <summary>
+        /// Gets or sets the image text - use this to specify the image as an HTML markup string.
+        /// </summary>
+        /// <value>The image text.</value>
+        public new string IconText
+        {
+            get { return (string)GetValue(IconTextProperty); }
+            set { SetValue(IconTextProperty, value); }
+        }
+        #endregion IconText
+
+        #endregion
+
         #region State Properties
         /// <summary>
         /// Backing store for the DefaultState bindable property.
@@ -238,6 +305,7 @@ namespace Forms9Patch
         {
             _showingState = true;
 
+
             // IconImage
             // IconText
             // BackgroundImage
@@ -246,6 +314,7 @@ namespace Forms9Patch
             if (_currentState != null)
                 _currentState.PropertyChanged -= OnStatePropertyChanged;
             _currentState = newState;
+
             var newBackgroundImage = _currentState.BackgroundImage ?? DefaultState.BackgroundImage;
             if (newBackgroundImage != BackgroundImage)
             {
@@ -268,10 +337,38 @@ namespace Forms9Patch
                     });
             }
             BackgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
-            var newImage = _currentState.IconImage ?? DefaultState.IconImage;
+
+            var newIconImage = _currentState.IconImage ?? DefaultState.IconImage;
             var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
             var text = htmlText ?? _currentState.Text ?? DefaultState.Text;
-            if (newImage == null)
+            var iconText = _currentState.IconText ?? DefaultState.IconText;
+
+            if (base.IconText == iconText && base.IconImage != newIconImage)
+                base.IconImage = newIconImage;
+            else if (base.IconText != iconText && base.IconImage == newIconImage)
+                base.IconText = iconText;
+            else if (base.IconText != iconText && base.IconImage != newIconImage)
+            {
+                if (iconText != null)
+                    base.IconText = iconText;
+                else if (newIconImage != null)
+                    base.IconImage = newIconImage;
+                else
+                {
+                    base.IconText = null;
+                    base.IconImage = null;
+                }
+            }
+
+
+            //base.IconImage = newIconImage;
+            //base.IconText = iconText;
+            base.HtmlText = htmlText;
+            if (base.HtmlText == null)
+                base.Text = text;
+
+            /*
+            if (newIconImage == null)
             {
                 // label only
                 if (_iconImage != null)
@@ -289,6 +386,7 @@ namespace Forms9Patch
                         });
                 }
                 _iconImage = null;
+                IconText = iconText;
                 if (!string.IsNullOrEmpty(text) && !_stackLayout.Children.Contains(_label))
                 {
                     if (TrailingIcon)
@@ -299,14 +397,15 @@ namespace Forms9Patch
             }
             else
             {
+                IconText = null;
                 // there is an image
-                newImage.Opacity = 1.0;
-                if (_iconImage != newImage)
+                newIconImage.Opacity = 1.0;
+                if (_iconImage != newIconImage)
                 {
                     // if it is a new image
                     if (_iconImage != null)
                         _stackLayout.Children.Remove(_iconImage);
-                    _iconImage = newImage;
+                    _iconImage = newIconImage;
                     if (TrailingIcon)
                         _stackLayout.Children.Add(_iconImage);
                     else
@@ -335,7 +434,7 @@ namespace Forms9Patch
             else
                 _label.HtmlText = htmlText;
             //InvalidateMeasure ();
-
+*/
             #region IButtonState
 
             TrailingIcon = _currentState.TrailingIconSet ? _currentState.TrailingIcon : DefaultState.TrailingIcon;

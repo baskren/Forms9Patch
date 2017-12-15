@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// DEPRICATED: Use Button
     /// </summary>
     [Obsolete("Depricated: Use Forms9Patch.Button")]
-    public class MaterialButton : Forms9Patch.Button {  }
+    public class MaterialButton : Forms9Patch.Button { }
 
     /// <summary>
     /// Forms9Patch Button.
@@ -206,7 +206,7 @@ namespace Forms9Patch
         /// UNSUPPORTED INHERITED PROPERTY.
         /// </summary>
         /// <value>The content.</value>
-        [Obsolete("Unsupported Property",true)]
+        [Obsolete("Unsupported Property", true)]
         public new View Content
         {
             get { throw new NotSupportedException("[Forms9Patch.Button] Content property is not supported"); }
@@ -488,7 +488,7 @@ namespace Forms9Patch
 
         #region IShape
 
-       
+
         #region BackgroundColor
         /// <summary>
         /// Backing store for the BackgroundColor property
@@ -536,7 +536,7 @@ namespace Forms9Patch
             set { SetValue(OutlineColorProperty, value); }
         }
         #endregion OutlineColor
-        
+
 
         // OutlineRadius inherited
 
@@ -561,7 +561,7 @@ namespace Forms9Patch
         // ElementShape inherited from Forms9Patch.Frame
 
         // ExtendedElementShape inherited from Forms9Patch.Frame
-            
+
 
         #endregion IShape
 
@@ -720,10 +720,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontSize bindable property.
         /// </summary>
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(Button), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-                                                                                                                                                     /// <summary>
-                                                                                                                                                     /// Gets or sets the size of the font.
-                                                                                                                                                     /// </summary>
-                                                                                                                                                     /// <value>The size of the font.</value>
+                                                                                                                                             /// <summary>
+                                                                                                                                             /// Gets or sets the size of the font.
+                                                                                                                                             /// </summary>
+                                                                                                                                             /// <value>The size of the font.</value>
         public double FontSize
         {
             get { return (double)GetValue(FontSizeProperty); }
@@ -736,10 +736,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontFamiily bindable property.
         /// </summary>
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(Button), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-                                                                                                                                                         /// <summary>
-                                                                                                                                                         /// Gets or sets the font family.
-                                                                                                                                                         /// </summary>
-                                                                                                                                                         /// <value>The font family.</value>
+                                                                                                                                                 /// <summary>
+                                                                                                                                                 /// Gets or sets the font family.
+                                                                                                                                                 /// </summary>
+                                                                                                                                                 /// <value>The font family.</value>
         public string FontFamily
         {
             get { return (string)GetValue(FontFamilyProperty); }
@@ -752,10 +752,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontAttributes bindable property.
         /// </summary>
         public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(Button), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-                                                                                                                                                                                        /// <summary>
-                                                                                                                                                                                        /// Gets or sets the font attributes.
-                                                                                                                                                                                        /// </summary>
-                                                                                                                                                                                        /// <value>The font attributes.</value>
+                                                                                                                                                                                /// <summary>
+                                                                                                                                                                                /// Gets or sets the font attributes.
+                                                                                                                                                                                /// </summary>
+                                                                                                                                                                                /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
             get { return (FontAttributes)GetValue(FontAttributesProperty); }
@@ -862,7 +862,7 @@ namespace Forms9Patch
         /// The label.
         /// </summary>
         internal protected Label _label;
-        Label _iconLabel;
+        internal protected Label _iconLabel;
         /// <summary>
         /// The gesture listener.
         /// </summary>
@@ -1134,7 +1134,7 @@ namespace Forms9Patch
                     //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                     base.OutlineColor = enabledLabelColor; // _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
 
-                base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source!=null) && HasShadow;
+                base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
                 //var hasShadow = base.BackgroundColor.A > 0 && HasShadow;
                 //SetValue(ShapeBase.HasShadowProperty, hasShadow);
                 ShadowInverted = IsSelected && !this.IsSegment();
