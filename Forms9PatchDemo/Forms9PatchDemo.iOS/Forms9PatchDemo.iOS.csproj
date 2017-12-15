@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Forms9PatchDemo.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Forms9PatchDemo.iOS</AssemblyName>
+    <ReleaseVersion>0.9.13.3</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>false</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchExtraArgs>
+    </MtouchExtraArgs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Test</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage">
+      <HintPath>$(NUGET_PACKAGES)\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(NUGET_PACKAGES)\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.iOS">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-60%403x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
+    <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+    <BundleResource Include="Resources\Icon-Small%403x.png" />
+    <BundleResource Include="Resources\Icon-Small-40.png" />
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
+    <BundleResource Include="Resources\MaterialIcons-Regular.ttf" />
+    <BundleResource Include="Resources\five.png" />
+    <BundleResource Include="Resources\five%401½x.png" />
+    <BundleResource Include="Resources\five%402x.png" />
+    <BundleResource Include="Resources\five%403x.png" />
+    <BundleResource Include="Resources\five%40¾x.png" />
+    <BundleResource Include="Resources\fivePlus.png" />
+    <BundleResource Include="Resources\fivePlus%40¾x.png" />
+    <BundleResource Include="Resources\fivePlus%401½x..png" />
+    <BundleResource Include="Resources\fivePlus%402x..png" />
+    <BundleResource Include="Resources\fivePlus%403x..png" />
+    <BundleResource Include="Resources\redGridBox.png" />
+    <BundleResource Include="Resources\ArrowR.png" />
+    <BundleResource Include="Resources\ArrowR%40¾x.png" />
+    <BundleResource Include="Resources\ArrowR%401½x.png" />
+    <BundleResource Include="Resources\ArrowR%402x.png" />
+    <BundleResource Include="Resources\ArrowR%403x.png" />
+    <BundleResource Include="Resources\balloons-fromfile.jpg" />
+    <BundleResource Include="Resources\cat-fromFile.jpg" />
+    <BundleResource Include="Resources\image.png" />
+    <BundleResource Include="Resources\image%401½x.png" />
+    <BundleResource Include="Resources\image%401½x~iPad.png" />
+    <BundleResource Include="Resources\image%402x.png" />
+    <BundleResource Include="Resources\image%402x~iPad.png" />
+    <BundleResource Include="Resources\image%403x.png" />
+    <BundleResource Include="Resources\image%403x~iPad.png" />
+    <BundleResource Include="Resources\image%404x.png" />
+    <BundleResource Include="Resources\image%404x~iPad.png" />
+    <BundleResource Include="Resources\image%40¾x.png" />
+    <BundleResource Include="Resources\image%40¾x~iPad.png" />
+    <BundleResource Include="Resources\image~iPad.png" />
+    <BundleResource Include="Resources\balloons.jpg" />
+    <BundleResource Include="Resources\cat.jpg" />
+    <BundleResource Include="Resources\sampleFile.png" />
+    <BundleResource Include="Resources\bubble.9.png" />
+    <BundleResource Include="Resources\button.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="libSkiaSharp.dylib" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\ImageCircleRenderer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="ITunesArtwork" />
+    <ITunesArtwork Include="ITunesArtwork%402x" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
+      <Name>Forms9Patch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
+      <Project>{1C6AB883-A0E1-4B84-91D9-FACA09F563F4}</Project>
+      <Name>Forms9Patch.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
+      <Project>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</Project>
+      <Name>Forms9PatchDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
+      <Project>{E68F0971-0308-4E5E-AFFA-F1F82EF69CDC}</Project>
+      <Name>FormsGestures.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
+      <Project>{A3E44406-A6A6-47F6-8FEE-841E9E8B52DC}</Project>
+      <Name>NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Name>PCL.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
+</Project>

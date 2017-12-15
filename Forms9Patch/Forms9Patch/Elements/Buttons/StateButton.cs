@@ -609,7 +609,7 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("OnStatePropertyChanged");
             if (sender == _currentState)
             {
-                System.Diagnostics.Debug.WriteLine("\t" + e.PropertyName);
+                //System.Diagnostics.Debug.WriteLine("\t" + e.PropertyName);
                 UpdateState();
                 //if (e.PropertyName == ButtonState.TextProperty.PropertyName || e.PropertyName == ButtonState.HtmlTextProperty.PropertyName)
                 //_stackLayout.

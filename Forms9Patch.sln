@@ -13,11 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.Droid", "Forms9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo", "Forms9PatchDemo", "{8F8B58E8-CBB0-4036-9D2A-E3E5A4FDE15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo", "TestProject\TestProject\Forms9PatchDemo.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo", "Forms9PatchDemo\Forms9PatchDemo\Forms9PatchDemo.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Droid", "TestProject\TestProject.Droid\Forms9PatchDemo.Droid.csproj", "{6F877EA4-9297-4513-8D4B-8A04D096F27E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Droid", "Forms9PatchDemo\Forms9PatchDemo.Droid\Forms9PatchDemo.Droid.csproj", "{6F877EA4-9297-4513-8D4B-8A04D096F27E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.iOS", "TestProject\TestProject.iOS\Forms9PatchDemo.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.iOS", "Forms9PatchDemo\Forms9PatchDemo.iOS\Forms9PatchDemo.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{3655EE70-FDA0-4E6A-8F03-69DA60DA8D40}"
 EndProject
@@ -41,7 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCL.Utils.Droid", "FormsGes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCL.Utils.iOS", "FormsGestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj", "{E0310C06-794F-4B67-90B9-E1A5C4E84E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.UWP", "TestProject\TestProject.UWP\Forms9PatchDemo.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.UWP", "Forms9PatchDemo\Forms9PatchDemo.UWP\Forms9PatchDemo.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.UWP", "Forms9Patch\Forms9Patch.UWP\Forms9Patch.UWP.csproj", "{321F4DDA-F8AA-4CE5-9A3C-9497EB3EA0BC}"
 EndProject

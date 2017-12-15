@@ -154,7 +154,9 @@ namespace Forms9Patch
                     _imageElement = value;
                     if (_imageElement != null)
                         _imageElement.PropertyChanged += OnImageElementPropertyChanged;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     SetImageSourceAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             }
         }
@@ -331,7 +333,9 @@ namespace Forms9Patch
                 return;
 
             if (e.PropertyName == Xamarin.Forms.Image.SourceProperty.PropertyName)
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 SetImageSourceAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             else if (e.PropertyName == Forms9Patch.Image.TintColorProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.FillProperty.PropertyName
                 || e.PropertyName == Forms9Patch.Image.CapInsetsProperty.PropertyName

@@ -243,6 +243,7 @@ var/
 sdist/
 develop-eggs/
 .installed.cfg
+*.dylib
 
 # Installer logs
 pip-log.txt

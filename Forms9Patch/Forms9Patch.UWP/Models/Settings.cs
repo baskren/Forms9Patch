@@ -69,7 +69,9 @@ namespace Forms9Patch.UWP
                             Content = "The LicenseKey [" + Settings._licenseKey + "] is not for the app [" + Forms9Patch.ApplicationInfoService.Name + "].  You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings.",
                             CloseButtonText = "Whatever"
                         };
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         errorDialog.ShowAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     }
                     //System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
                     //FormsGestures.Droid.Settings.Init();
@@ -93,37 +95,37 @@ namespace Forms9Patch.UWP
                 {
                     _forms9PatchAssemblies = new List<Assembly>();
                     try  { _forms9PatchAssemblies.Add(typeof(Forms9Patch.Settings).GetTypeInfo().Assembly);  }
-                    catch(Exception e) { throw new Exception("Cannot load Forms9Patch assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load Forms9Patch assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(Settings).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load Forms9Patch.UWP assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load Forms9Patch.UWP assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(FormsGestures.Listener).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load FormsGestures assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load FormsGestures assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load NumericalMethods assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load NumericalMethods assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(PCL.Utils.DownloadCache).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load PCL.Utils assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load PCL.Utils assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load Windows.ApplicationModel.Core assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load Windows.ApplicationModel.Core assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load PCLStorage assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load PCLStorage assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load Newtonsoft.Json assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load Newtonsoft.Json assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load SkiaSharp assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load SkiaSharp assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(SkiaSharp.Views.UWP.SKXamlCanvas).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load SkiaSharp.Views.UWP assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load SkiaSharp.Views.UWP assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(SharpDX.Direct2D1.Factory).GetTypeInfo().Assembly); }
-                    catch (Exception e) { throw new Exception("Cannot load SharpDX.Direct2D1 assembly"); }
+                    catch (Exception) { throw new Exception("Cannot load SharpDX.Direct2D1 assembly"); }
 
                 }
                 return _forms9PatchAssemblies;
