@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Forms9PatchDemo
 {
-    public class MaterialButtonAndSegmentAlignments : ContentPage
+    public class ButtonAndSegmentAlignments : ContentPage
     {
 
         const float radius = 4;
@@ -98,7 +98,31 @@ namespace Forms9PatchDemo
 
         Slider _outlineRadiusSlider = new Slider(0, 16.0, radius);
 
-        Forms9Patch.Button _iconTextAndTextButton = new Forms9Patch.Button
+        Forms9Patch.StateButton _stateButton = new Forms9Patch.StateButton
+        {
+            ShadowInverted = ShadowInverted,
+            BackgroundColor = backgroundColor,
+            OutlineRadius = radius,
+            OutlineWidth = width,
+            OutlineColor = outlineColor,
+            DefaultState = new ButtonState
+            {
+                Text = "StateButton",
+                BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.button"),
+                TextColor = Color.Black,
+                HasShadow = hasShadow
+            },
+            SelectedState = new ButtonState
+            {
+                Text = "Selected",
+                BackgroundImage = new Forms9Patch.Image("Forms9PatchDemo.Resources.ghosts") { Fill= Fill.Tile },
+                OutlineColor = Color.Red,
+                TextColor = Color.White,
+            },
+            ToggleBehavior = true
+        };
+
+        Forms9Patch.Button _button = new Forms9Patch.Button
         {
             ShadowInverted = ShadowInverted,
             HasShadow = hasShadow,
@@ -106,7 +130,7 @@ namespace Forms9PatchDemo
             OutlineRadius = radius,
             OutlineWidth = width,
             OutlineColor = outlineColor,
-            Text = "Text",
+            Text = "Button",
         };
 
         SegmentedControl _hzSegmentsElement = new SegmentedControl
@@ -184,9 +208,8 @@ namespace Forms9PatchDemo
         Xamarin.Forms.Label _outlineRadiusLabel = new Xamarin.Forms.Label { Text = "line R: " + radius };
         Forms9Patch.Label _labelElement = new Forms9Patch.Label { Text = "Text" };
 
-        public MaterialButtonAndSegmentAlignments()
+        public ButtonAndSegmentAlignments()
         {
-            //BackgroundColor = Color.Orange;
 
             _grid1.Children.Add(new Xamarin.Forms.Label { Text = "HZ", VerticalTextAlignment = TextAlignment.Center, FontSize = 9 }, 0, 0);
             _grid1.Children.Add(_hzAlignmentElement, 1, 0);
@@ -227,7 +250,9 @@ namespace Forms9PatchDemo
 
                         new BoxView { HeightRequest = 1, Color = Color.Black },
 
-                        _iconTextAndTextButton,
+                        _stateButton,
+                        new BoxView { HeightRequest = 1, Color = Color.Gray },
+                        _button,
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
                         _hzSegmentsElement,
                         new BoxView { HeightRequest = 1, Color = Color.Gray },
@@ -244,8 +269,8 @@ namespace Forms9PatchDemo
                 _vtAlignmentElement.HasShadow = _hasShadowSwitch.IsToggled;
                 _optionsElement.HasShadow = _hasShadowSwitch.IsToggled;
                 _iconElement.HasShadow = _hasShadowSwitch.IsToggled;
-                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
-                _iconTextAndTextButton.HasShadow = _hasShadowSwitch.IsToggled;
+                _button.HasShadow = _hasShadowSwitch.IsToggled;
+                _stateButton.DefaultState.HasShadow = _hasShadowSwitch.IsToggled;
                 _hzSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
                 _vtSegmentsElement.HasShadow = _hasShadowSwitch.IsToggled;
             };
@@ -257,7 +282,8 @@ namespace Forms9PatchDemo
                 if (!Enum.TryParse<TextAlignment>(buttonText, out alignment))
                     throw new Exception("doh");
                 _labelElement.HorizontalTextAlignment = alignment;
-                _iconTextAndTextButton.HorizontalTextAlignment = alignment;
+                _button.HorizontalTextAlignment = alignment;
+                _stateButton.DefaultState.HorizontalTextAlignment = alignment;
                 _hzSegmentsElement.HorizontalTextAlignment = alignment;
                 _vtSegmentsElement.HorizontalTextAlignment = alignment;
             };
@@ -269,7 +295,8 @@ namespace Forms9PatchDemo
                 if (!Enum.TryParse<TextAlignment>(buttonText, out alignment))
                     throw new Exception("doh");
                 _labelElement.VerticalTextAlignment = alignment;
-                _iconTextAndTextButton.VerticalTextAlignment = alignment;
+                _button.VerticalTextAlignment = alignment;
+                _stateButton.DefaultState.VerticalTextAlignment = alignment;
                 _hzSegmentsElement.VerticalTextAlignment = alignment;
                 _vtSegmentsElement.VerticalTextAlignment = alignment;
             };
@@ -284,9 +311,13 @@ namespace Forms9PatchDemo
                 var orientation = options.Contains("VERTICAL") ? StackOrientation.Vertical : StackOrientation.Horizontal;
 
 
-                _iconTextAndTextButton.HasTightSpacing = hasTightSpacing;
-                _iconTextAndTextButton.TrailingIcon = trailingIcon;
-                _iconTextAndTextButton.Orientation = orientation;
+                _button.HasTightSpacing = hasTightSpacing;
+                _button.TrailingIcon = trailingIcon;
+                _button.Orientation = orientation;
+
+                _stateButton.DefaultState.HasTightSpacing = hasTightSpacing;
+                _stateButton.DefaultState.TrailingIcon = trailingIcon;
+                _stateButton.DefaultState.Orientation = orientation;
 
                 _hzSegmentsElement.HasTightSpacing = hasTightSpacing;
                 _hzSegmentsElement.TrailingIcon = trailingIcon;
@@ -316,14 +347,16 @@ namespace Forms9PatchDemo
 
             _spacingSlider.ValueChanged += (sender, e) =>
             {
-                _iconTextAndTextButton.Spacing = _spacingSlider.Value;
+                _button.Spacing = _spacingSlider.Value;
+                _stateButton.DefaultState.Spacing = _spacingSlider.Value;
                 _hzSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
                 _vtSegmentsElement.IntraSegmentSpacing = _spacingSlider.Value;
             };
 
             _imposedHeightSwitch.Toggled += (sender, e) =>
             {
-                _iconTextAndTextButton.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
+                _button.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
+                _stateButton.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
                 _hzSegmentsElement.HeightRequest = _imposedHeightSwitch.IsToggled ? 60 : -1;
                 _vtSegmentsElement.HeightRequest = _imposedHeightSwitch.IsToggled ? 180 : -1;
 
@@ -339,7 +372,8 @@ namespace Forms9PatchDemo
                 int value = (int)_outlineRadiusSlider.Value;
                 _hzAlignmentElement.OutlineRadius = value;
                 _vtAlignmentElement.OutlineRadius = value;
-                _iconTextAndTextButton.OutlineRadius = value;
+                _button.OutlineRadius = value;
+                _stateButton.DefaultState.OutlineRadius = value;
                 _optionsElement.OutlineRadius = value;
                 _iconElement.OutlineRadius = value;
                 _hzSegmentsElement.OutlineRadius = value;
@@ -353,7 +387,8 @@ namespace Forms9PatchDemo
                 float value = (float)_outlineWidthSlider.Value; // (float)(Math.Round(_outlineWidthSlider.Value*2.0)/2.0);
                 _hzAlignmentElement.OutlineWidth = value;
                 _vtAlignmentElement.OutlineWidth = value;
-                _iconTextAndTextButton.OutlineWidth = value;
+                _button.OutlineWidth = value;
+                _stateButton.DefaultState.OutlineWidth = value;
                 _optionsElement.OutlineWidth = value;
                 _iconElement.OutlineWidth = value;
                 _hzSegmentsElement.OutlineWidth = value;
@@ -361,7 +396,7 @@ namespace Forms9PatchDemo
                 _outlineWidthLabel.Text = "line W: " + _outlineWidthSlider.Value;// + value;
             };
 
-            var defaultHzAlignment = _iconTextAndTextButton.HorizontalTextAlignment;
+            var defaultHzAlignment = _button.HorizontalTextAlignment;
             if (defaultHzAlignment == TextAlignment.Start)
                 _hzAlignmentElement.SelectIndex(0);
             else if (defaultHzAlignment == TextAlignment.Center)
@@ -384,19 +419,21 @@ namespace Forms9PatchDemo
                 segment.IconImage = null;
                 */
             if (iconTextSetting == "NONE")
-                _iconTextAndTextButton.IconText = null;
+                _button.IconText = null;
             else
-                _iconTextAndTextButton.IconText = iconTextSetting;
+                _button.IconText = iconTextSetting;
             foreach (var segment in _hzSegmentsElement.Segments)
-                segment.IconText = _iconTextAndTextButton.IconText;
+                segment.IconText = _button.IconText;
             foreach (var segment in _vtSegmentsElement.Segments)
-                segment.IconText = _iconTextAndTextButton.IconText;
+                segment.IconText = _button.IconText;
+
+            _stateButton.DefaultState.IconText = _button.IconText;
         }
 
         void SetIconImage(Forms9Patch.Image image)
         {
             var source = image?.Source;
-            _iconTextAndTextButton.IconImage = new Forms9Patch.Image(image);
+            _button.IconImage = new Forms9Patch.Image(image);
             foreach (var segment in _hzSegmentsElement.Segments)
             {
                 if (source != null)
@@ -407,6 +444,7 @@ namespace Forms9PatchDemo
             foreach (var segment in _vtSegmentsElement.Segments)
                 segment.IconImage = new Forms9Patch.Image(source);
 
+            _stateButton.DefaultState.IconImage = _button.IconImage;
         }
     }
 }

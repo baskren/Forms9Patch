@@ -17,6 +17,8 @@ namespace Forms9PatchDemo
                 IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
                 HtmlText = "<i>Markup</i> button",
                 TrailingIcon = true,
+                HasTightSpacing = true,
+                Spacing = 10,
                 //Text = "Pizza",
                 BackgroundColor = Color.FromRgb(200, 200, 200),
                 TextColor = Color.Blue,
@@ -34,7 +36,7 @@ namespace Forms9PatchDemo
             {
                 HasShadow = true,
                 BackgroundColor = Color.FromRgb(200, 200, 200),
-                FontSize = 12,
+                FontSize = 15,
                 Padding = 5,
                 //TextColor = Color.Blue,
                 Segments = {
@@ -56,6 +58,8 @@ namespace Forms9PatchDemo
                         IconText = "<font size=\"4\" face=\"Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf\"></font>",
                     },
                 },
+                HasTightSpacing = true,
+                IntraSegmentSpacing = 10
             };
             sc1.SegmentSelected += OnSegmentSelected;
             sc1.SegmentTapped += OnSegmentTapped;

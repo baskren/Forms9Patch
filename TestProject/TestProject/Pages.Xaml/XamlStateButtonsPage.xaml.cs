@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class ImageButtonPage : ContentPage
+	public partial class XamlStateButtonsPage : ContentPage
 	{
-		public ImageButtonPage ()
+		public XamlStateButtonsPage ()
 		{
 			InitializeComponent ();
 		}

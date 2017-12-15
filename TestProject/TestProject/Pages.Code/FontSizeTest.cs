@@ -16,7 +16,7 @@ namespace Forms9PatchDemo.Pages
                 BackgroundColor = Color.FromRgb(218, 112, 214),
                 TextColor = Color.White
             };
-            label.Effects.Add(Effect.Resolve("Forms9Patch.EmbeddedResourceFontEffect"));
+            Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(label);
 
 
             Padding = new Thickness(10, 30, 10, 10);
@@ -78,7 +78,8 @@ namespace Forms9PatchDemo.Pages
                                         FontFamily = "Forms9PatchDemo.Resources.Fonts.MaterialIcons-Regular.ttf",
                                         FontSize = 30,
                                         BackgroundColor = Color.FromRgb(218, 112, 214),
-                                        TextColor = Color.White
+                                        TextColor = Color.White,
+                                        AutoFit = Forms9Patch.AutoFit.None
                                     },
                                     new Frame {
                                         HasShadow = false,
@@ -89,7 +90,7 @@ namespace Forms9PatchDemo.Pages
                                         Content = new Forms9Patch.Label
                                         {
                                             FontSize = 30,
-                                            Text = "Qwetry"
+                                            Text = "Qwetry",
                                         }
                                     },
 

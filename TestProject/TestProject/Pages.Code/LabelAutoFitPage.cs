@@ -17,13 +17,6 @@ namespace Forms9PatchDemo
         double lastFontSize = -1;
         bool rendering = false;
 
-        Label _field1 = new Label { FontSize = 10 };
-        Label _field2 = new Label { FontSize = 10 };
-        Label _field3 = new Label { FontSize = 10 };
-        Label _field4 = new Label { FontSize = 10 };
-        Label _field5 = new Label { FontSize = 10 };
-        Label _field6 = new Label { FontSize = 10 };
-
         Forms9Patch.SegmentedControl hzAlignmentSelector = new Forms9Patch.SegmentedControl();
         Forms9Patch.SegmentedControl vtAlignmentSelector = new Forms9Patch.SegmentedControl();
         Label vtAlignmentSelectorLabel = new Label { Text = "Vertical Alignment:" };
@@ -209,18 +202,6 @@ namespace Forms9PatchDemo
             {
                 if (e.PropertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName)
                     actualFontSizeLabel.Text = "FittedFontSize: " + f9pLabel.FittedFontSize;
-                /*
-                else if (e.PropertyName == Forms9Patch.Label.Field1Property.PropertyName)
-                    _field1.Text = f9pLabel.Field1;
-                else if (e.PropertyName == Forms9Patch.Label.Field2Property.PropertyName)
-                    _field2.Text = f9pLabel.Field2;
-                else if (e.PropertyName == Forms9Patch.Label.Field3Property.PropertyName)
-                    _field3.Text = f9pLabel.Field3;
-                else if (e.PropertyName == Forms9Patch.Label.Field4Property.PropertyName)
-                    _field4.Text = f9pLabel.Field4;
-                else if (e.PropertyName == Forms9Patch.Label.Field5Property.PropertyName)
-                    _field5.Text = f9pLabel.Field5;
-                    */
             };
             #endregion
 
@@ -462,11 +443,6 @@ namespace Forms9PatchDemo
                         */
                         new Label { Text = "Forms9Patch.Label:" },
                         frameForF9P,
-
-                        new StackLayout{
-                            Orientation = StackOrientation.Horizontal,
-                            Children = { _field1, _field2, _field3, _field4, _field5, _field6 }
-                        },
 
                         new StackLayout {
                             Orientation = StackOrientation.Horizontal,

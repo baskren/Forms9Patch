@@ -1,6 +1,6 @@
 // /*******************************************************************
 //  *
-//  * CapsInsetPage.xaml.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
+//  * XamlCapsInsetPage.xaml.cs copyright 2016 ben, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
 using System;
@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class CapsInsetPage : ContentPage
+	public partial class XamlCapsInsetPage : ContentPage
 	{
-		public CapsInsetPage()
+		public XamlCapsInsetPage()
 		{
 			InitializeComponent();
 		}

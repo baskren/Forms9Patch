@@ -2,7 +2,7 @@
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="Forms9PatchDemo.HtmlLabelsAndButtons"
+	x:Class="Forms9PatchDemo.XamlHtmlLabelsAndButtonsPage"
 	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
 	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
 	BackgroundColor = "Gray"

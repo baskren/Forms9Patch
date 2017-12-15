@@ -65,51 +65,51 @@ namespace Forms9PatchDemo
                     },
                     new TableSection("XAML") {
                         new TextCell {
-                            Text = "ContentView",
+                            Text = "XamlContentViewDemoPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(ContentViewDemoPage)
+                            CommandParameter = typeof(XamlContentViewDemoPage)
                         },
 
                         new TextCell {
-                            Text = "Frame",
+                            Text = "XamlFrameDemoPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(FrameDemoPage)
+                            CommandParameter = typeof(XamlFrameDemoPage)
                         },
 
                         new TextCell {
-                            Text = "Single StateButton",
+                            Text = "XamlSingleStateButton",
                             Command = navigateCommand,
-                            CommandParameter = typeof(SingleImageButtonPage)
+                            CommandParameter = typeof(XamlSingleStateButtonPage)
                         },
 
                         new TextCell {
-                            Text = "StateButton",
+                            Text = "XamlStateButtonsPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(ImageButtonPage)
+                            CommandParameter = typeof(XamlStateButtonsPage)
                         },
 
                         new TextCell {
-                            Text = "MaterialSegmentControl ",
+                            Text = "XamlSegmentedControlPage ",
                             Command = navigateCommand,
-                            CommandParameter = typeof(MaterialSegmentedControlPage)
+                            CommandParameter = typeof(XamlSegmentedControlPage)
                         },
 
                         new TextCell {
-                            Text = "Image",
+                            Text = "XamlImagesPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(MyPage)
+                            CommandParameter = typeof(XamlImagesPage)
                         },
 
                         new TextCell {
-                            Text = "HTML Labels and Buttons",
+                            Text = "XamlHtmlLabelsAndButtonsPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(HtmlLabelsAndButtons)
+                            CommandParameter = typeof(XamlHtmlLabelsAndButtonsPage)
                         },
 
                         new TextCell {
-                            Text = "CapsInset Test",
+                            Text = "XamlCapsInsetPage",
                             Command = navigateCommand,
-                            CommandParameter = typeof(CapsInsetPage)
+                            CommandParameter = typeof(XamlCapsInsetPage)
                         },
 
                     },
@@ -117,8 +117,9 @@ namespace Forms9PatchDemo
 
                     new TableSection("Code") {
 
+
                         new TextCell {
-                            Text = "Label AutoFit",
+                            Text = "LabelAutoFitPage",
                             Command = navigateCommand,
                             CommandParameter = typeof(LabelAutoFitPage)
                         },
@@ -137,9 +138,16 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "Material Button & Segment alignments",
+                            Text = "Button & Segment alignments",
                             Command = navigateCommand,
-                            CommandParameter = typeof(MaterialButtonAndSegmentAlignments)
+                            CommandParameter = typeof(ButtonAndSegmentAlignments)
+                        },
+
+                        new TextCell
+                        {
+                            Text = "ButtonCodePage",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(ButtonCodePage)
                         },
 
                         new TextCell
@@ -190,39 +198,6 @@ namespace Forms9PatchDemo
                         },
 
                         new TextCell {
-                            Text = "Label in Layout",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(LabelInHorizontalStackLayout)
-                        },
-
-
-                        new TextCell {
-                            Text = "Unimposed Height Label AutoFit",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(UnconstrainedLabelAutoFitPage)
-                        },
-
-						/*
-						new TextCell {
-							Text = "Scale Font to Fit Bounds",
-							Command = navigateCommand,
-							CommandParameter = typeof(LabelScaleToFitPage)
-						},
-
-						new TextCell {
-							Text = "Html Text, Scale Font to Fit Bounds",
-							Command = navigateCommand,
-							CommandParameter = typeof(HtmlLabelScaleToFitPage)
-						},
-*/
-
-						new TextCell {
-                            Text = "Simple Font Test",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(SimpleFontTestPage)
-                        },
-
-                        new TextCell {
                             Text = "HTML Formatted Labels",
                             Command = navigateCommand,
                             CommandParameter = typeof(HtmlLabelPage)
@@ -237,33 +212,13 @@ namespace Forms9PatchDemo
                         new TextCell {
                             Text = "StateButton",
                             Command = navigateCommand,
-                            CommandParameter = typeof(ImageButtonCodePage)
+                            CommandParameter = typeof(OldImageButtonCodePage)
                         },
 
                         new TextCell {
                             Text = "Single StateButton",
                             Command = navigateCommand,
                             CommandParameter = typeof(SingleImageButtonCodePage)
-                        },
-
-
-                        new TextCell {
-                            Text = "Layouts",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(LayoutsPage)
-                        },
-
-                        new TextCell
-                        {
-                            Text = "Image on page",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(ImageOnPage)
-                        },
-
-                        new TextCell {
-                            Text = "Material Buttons",
-                            Command = navigateCommand,
-                            CommandParameter = typeof(MaterialButtonsPage)
                         },
 
                         new TextCell {

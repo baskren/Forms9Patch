@@ -4,7 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
 	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
-	x:Class="Forms9PatchDemo.SingleImageButtonPage"
+	x:Class="Forms9PatchDemo.XamlSingleStateButtonPage"
 	Padding="5, 20, 5, 5">
 	<StackLayout>
 

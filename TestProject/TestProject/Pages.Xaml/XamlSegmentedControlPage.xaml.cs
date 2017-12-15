@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class MaterialSegmentedControlPage : ContentPage
+	public partial class XamlSegmentedControlPage : ContentPage
 	{
-		public MaterialSegmentedControlPage ()
+		public XamlSegmentedControlPage ()
 		{
 			InitializeComponent ();
 		}

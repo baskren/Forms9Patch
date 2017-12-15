@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class HtmlLabelsAndButtons : ContentPage
+	public partial class XamlFrameDemoPage : ContentPage
 	{
-		public HtmlLabelsAndButtons ()
+		public XamlFrameDemoPage ()
 		{
 			InitializeComponent ();
 		}

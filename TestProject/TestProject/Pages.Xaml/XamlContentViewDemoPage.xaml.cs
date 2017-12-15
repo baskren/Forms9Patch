@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class ContentViewDemoPage : ContentPage
+	public partial class XamlContentViewDemoPage : ContentPage
 	{
-		public ContentViewDemoPage ()
+		public XamlContentViewDemoPage ()
 		{
 			InitializeComponent ();
 		}

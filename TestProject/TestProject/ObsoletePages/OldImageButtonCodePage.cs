@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-    public class ImageButtonCodePage : ContentPage
+    public class OldImageButtonCodePage : ContentPage
     {
         static void OnImageButtonTapped(object sender, EventArgs e)
         {
@@ -26,7 +26,7 @@ namespace Forms9PatchDemo
             System.Diagnostics.Debug.WriteLine("LongPressed Button Text=[" + ((Forms9Patch.StateButton)sender).Text + "]");
         }
 
-        public ImageButtonCodePage()
+        public OldImageButtonCodePage()
         {
 
             #region ImageButtons

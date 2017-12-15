@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9PatchDemo
 {
-	public partial class FrameDemoPage : ContentPage
+	public partial class XamlImagesPage : ContentPage
 	{
-		public FrameDemoPage ()
+		public XamlImagesPage ()
 		{
 			InitializeComponent ();
 		}

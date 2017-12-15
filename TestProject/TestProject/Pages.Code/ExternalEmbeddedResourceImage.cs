@@ -15,8 +15,10 @@ namespace Forms9PatchDemo
 			{
 				
 				Children = {
-					new Forms9Patch.Image {
-					Source = Forms9Patch.ImageSource.FromMultiResource("FormsGestures.Resources.rocket")
+					new Forms9Patch.Image
+                    {
+					    Source = Forms9Patch.ImageSource.FromMultiResource("FormsGestures.Resources.rocket"),
+                        Fill = Forms9Patch.Fill.AspectFit
 					}
 				}
 			};

@@ -134,14 +134,14 @@ namespace Forms9PatchDemo
 
             if (true)
             {
-                //MainPage = new MaterialSegmentedControlPage();
+                //MainPage = new XamlSegmentedControlPage();
                 //MainPage = new NinePatchButtonPage();
                 //MainPage = new ModalPopupTestPage();
                 //MainPage = new BubbleLayoutTestPage();
                 //MainPage = new ImageBenchmarkPage();
                 //MainPage = new BubblePopupTestPage();
                 //MainPage = new ChatListPage();
-                //MainPage = new ImageButtonPage();
+                //MainPage = new XamlStateButtonsPage();
                 //MainPage = new HtmlButtonsPage();
                 //MainPage = new HtmlLabelPage();
                 //MainPage = new ImageCodePage();
