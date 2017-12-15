@@ -1,6 +1,7 @@
 using System;
 using Xamarin.Forms;
 using Forms9PatchDemo.Pages;
+using Forms9PatchDemo.Pages.Code;
 
 namespace Forms9PatchDemo
 {
@@ -205,6 +206,12 @@ namespace Forms9PatchDemo
                             Text = "Bubble Popup",
                             Command = navigateCommand,
                             CommandParameter = typeof(BubblePopupTestPage)
+                        },
+
+                        new TextCell {
+                            Text = "PopupsPage",
+                            Command = navigateCommand,
+                            CommandParameter = typeof(PopupsPage)
                         },
 
                         new TextCell {

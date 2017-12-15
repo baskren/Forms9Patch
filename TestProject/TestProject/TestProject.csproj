@@ -130,6 +130,7 @@
     <Compile Include="ObsoletePages\FontSizeTest.cs" />
     <Compile Include="ObsoletePages\SingleImageButtonCodePage.cs" />
     <Compile Include="ObsoletePages\SimpleFontTestPage.cs" />
+    <Compile Include="Pages.Code\PopupsPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
