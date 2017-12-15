@@ -16,8 +16,6 @@ namespace Forms9Patch.iOS
     public class LabelRenderer : ViewRenderer<Label, UILabel>
     {
 
-        bool firstRun = true;
-
         NSString ControlText;
         NSAttributedString ControlAttributedText;
         UIColor ControlTextColor;
@@ -32,8 +30,6 @@ namespace Forms9Patch.iOS
 
         double LastWidthConstraint = -1;
         double LastHeightContraint = -1;
-
-        bool Invalid = true;
 
 
         #region Xamarin layout cycle
@@ -58,7 +54,6 @@ namespace Forms9Patch.iOS
             //if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
             {
 
-                Invalid = false;
                 LastWidthConstraint = widthConstraint;
                 LastHeightContraint = heightConstraint;
                 LastMinFontSize = Element.MinFontSize;
@@ -196,8 +191,6 @@ namespace Forms9Patch.iOS
                 }
 
 
-                firstRun = false;
-
                 double reqWidth = cgSize.Width;
                 double reqHeight = cgSize.Height + 0.05;
                 var textHeight = cgSize.Height;
@@ -289,7 +282,6 @@ namespace Forms9Patch.iOS
             }
             return LastDesiredSize;
         }
-        bool _delayingActualFontSizeUpdate;
 
         void UpdateSynchronizedFontSize()
         {
@@ -297,7 +289,6 @@ namespace Forms9Patch.iOS
             var syncFont = ControlFont.WithSize(syncFontSize);
             if (syncFont != ControlFont)
             {
-                Invalid = true;
                 GetDesiredSize(LastWidthConstraint, LastHeightContraint);
             }
         }
@@ -485,7 +476,6 @@ namespace Forms9Patch.iOS
                 UpdateHorizontalAlignment();
                 e.NewElement.RendererIndexAtPoint += IndexAtPoint;
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
-                Invalid = true;
             }
             base.OnElementChanged(e);
 
@@ -531,7 +521,6 @@ namespace Forms9Patch.iOS
                      e.PropertyName == Label.LineBreakModeProperty.PropertyName
                     )
             {
-                Invalid = true;
                 LayoutSubviews();
             }
             else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
@@ -547,7 +536,6 @@ namespace Forms9Patch.iOS
             });
             ControlFontPointSize = Control.Font.PointSize;
             FontDescriptor = ControlFont.FontDescriptor;
-            Invalid = true;
         }
 
         /// <summary>
@@ -602,7 +590,6 @@ namespace Forms9Patch.iOS
                     Control.AttributedText = ControlAttributedText = attributedText;
                 });
             }
-            Invalid = true;
         }
 
         void UpdateTextColor()

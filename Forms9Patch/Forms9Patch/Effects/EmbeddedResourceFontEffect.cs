@@ -20,7 +20,7 @@ namespace Forms9Patch
         /// Constructor for Forms9Patch.EmbeddedResourceFontEffect
         /// </summary>
         /// <param name="assembly"></param>
-        public EmbeddedResourceFontEffect(Assembly assembly=null) : base("Forms9Patch.EmbeddedResourceFontEffect")
+        public EmbeddedResourceFontEffect(Assembly assembly = null) : base("Forms9Patch.EmbeddedResourceFontEffect")
         {
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
@@ -28,6 +28,12 @@ namespace Forms9Patch
             Assembly = assembly;
         }
 
+        /// <summary>
+        /// Applies EmbeddedResourceFontEffect to a Xamarin.Forms.VisualElement
+        /// </summary>
+        /// <returns><c>true</c>, if to was applyed, <c>false</c> otherwise.</returns>
+        /// <param name="element">Element.</param>
+        /// <param name="assembly">Assembly.</param>
         public static bool ApplyTo(VisualElement element, Assembly assembly = null)
         {
             if (assembly == null && Device.RuntimePlatform != Device.UWP)

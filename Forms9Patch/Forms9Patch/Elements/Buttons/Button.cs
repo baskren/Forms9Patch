@@ -862,6 +862,9 @@ namespace Forms9Patch
         /// The label.
         /// </summary>
         internal protected Label _label;
+        /// <summary>
+        /// The icon label.
+        /// </summary>
         internal protected Label _iconLabel;
         /// <summary>
         /// The gesture listener.

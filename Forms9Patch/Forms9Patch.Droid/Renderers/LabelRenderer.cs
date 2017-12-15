@@ -262,8 +262,6 @@ namespace Forms9Patch.Droid
             return _lastSizeRequest.Value;
         }
 
-        bool _delayingActualFontSizeUpdate;
-
 
         ControlState _currentControlState;
         /// <summary>

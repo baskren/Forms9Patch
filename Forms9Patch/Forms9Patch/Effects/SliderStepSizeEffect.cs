@@ -53,6 +53,12 @@ namespace Forms9Patch
             _stepSize = stepSize;
         }
 
+        /// <summary>
+        /// Applies SliderStepSizeEffect to a Xamarin.Forms.Slider
+        /// </summary>
+        /// <returns><c>true</c>, if to was applyed, <c>false</c> otherwise.</returns>
+        /// <param name="slider">Slider.</param>
+        /// <param name="assembly">Assembly.</param>
         public static bool ApplyTo(Slider slider, Assembly assembly = null)
         {
             var effect = new SliderStepSizeEffect();
