@@ -7,80 +7,6 @@ namespace Forms9PatchDemo
     public class NestedBubblePopupPage : ContentPage
     {
 
-        public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create("CornerRadius", typeof(double), typeof(NestedBubblePopupPage), 4.0);
-        public double CornerRadius
-        {
-            get { return (double)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
-        }
-
-        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(double), typeof(NestedBubblePopupPage), 4.0);
-        public double PointerCornerRadius
-        {
-            get { return (double)GetValue(PointerCornerRadiusProperty); }
-            set { SetValue(PointerCornerRadiusProperty, value); }
-        }
-
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength", typeof(double), typeof(NestedBubblePopupPage), 10.0);
-        public double PointerLength
-        {
-            get { return (double)GetValue(PointerLengthProperty); }
-            set { SetValue(PointerLengthProperty, value); }
-        }
-
-        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(double), typeof(NestedBubblePopupPage), 0.0);
-        public double PointerTipRadius
-        {
-            get { return (double)GetValue(PointerTipRadiusProperty); }
-            set { SetValue(PointerTipRadiusProperty, value); }
-        }
-
-        public static readonly BindableProperty PUDPaddingProperty = BindableProperty.Create("PUDPadding", typeof(double), typeof(NestedBubblePopupPage), 10.0);
-        public double PUDPadding
-        {
-            get { return (double)GetValue(PUDPaddingProperty); }
-            set
-            {
-                SetValue(PUDPaddingProperty, value);
-                PUPadding = new Thickness(value);
-            }
-        }
-
-        public static readonly BindableProperty PUPaddingProperty = BindableProperty.Create("PUPadding", typeof(Thickness), typeof(NestedBubblePopupPage), new Thickness((double)NestedBubblePopupPage.PUDPaddingProperty.DefaultValue));
-        public Thickness PUPadding
-        {
-            get { return (Thickness)GetValue(PUPaddingProperty); }
-            set { SetValue(PUPaddingProperty, value); }
-        }
-
-        public static readonly BindableProperty PositionProperty = BindableProperty.Create("Position", typeof(double), typeof(NestedBubblePopupPage), 0.5);
-        public double Position
-        {
-            get { return (double)GetValue(PositionProperty); }
-            set { SetValue(PositionProperty, value); }
-        }
-
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(NestedBubblePopupPage), false);
-        public bool HasShadow
-        {
-            get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
-        }
-
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(NestedBubblePopupPage), false);
-        public bool ShadowInverted
-        {
-            get { return (bool)GetValue(ShadowInvertedProperty); }
-            set { SetValue(ShadowInvertedProperty, value); }
-        }
-
-        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(Forms9Patch.PointerDirection), typeof(NestedBubblePopupPage), Forms9Patch.PointerDirection.Any);
-        public Forms9Patch.PointerDirection PointerDirection
-        {
-            get { return (Forms9Patch.PointerDirection)GetValue(PointerDirectionProperty); }
-            set { SetValue(PointerDirectionProperty, value); }
-        }
-
         VisualElement _lastChanged;
 
         public NestedBubblePopupPage()
@@ -89,12 +15,8 @@ namespace Forms9PatchDemo
             Padding = new Thickness(20, Device.RuntimePlatform == Device.iOS ? 20 : 0, 20, 20);
 
             var shadowToggle = new Switch();
-            shadowToggle.SetBinding(Switch.IsToggledProperty, "HasShadow");
-            shadowToggle.BindingContext = this;
 
             var shadowInvertedToggle = new Switch();
-            shadowInvertedToggle.SetBinding(Switch.IsToggledProperty, "ShadowInverted");
-            shadowInvertedToggle.BindingContext = this;
 
             var cornerRadiusSlider = new Slider
             {
@@ -102,8 +24,6 @@ namespace Forms9PatchDemo
                 Minimum = 0,
                 HeightRequest = 20,
             };
-            cornerRadiusSlider.SetBinding(Slider.ValueProperty, "CornerRadius");
-            cornerRadiusSlider.BindingContext = this;
 
             var pointerLengthSlider = new Slider
             {
@@ -111,8 +31,6 @@ namespace Forms9PatchDemo
                 Minimum = 0,
                 HeightRequest = 20,
             };
-            pointerLengthSlider.SetBinding(Slider.ValueProperty, "PointerLength");
-            pointerLengthSlider.BindingContext = this;
 
             var pointerTipRadiusSlider = new Slider
             {
@@ -120,8 +38,6 @@ namespace Forms9PatchDemo
                 Minimum = 0,
                 HeightRequest = 20,
             };
-            pointerTipRadiusSlider.SetBinding(Slider.ValueProperty, "PointerTipRadius");
-            pointerTipRadiusSlider.BindingContext = this;
 
             var paddingSlider = new Slider
             {
@@ -129,8 +45,6 @@ namespace Forms9PatchDemo
                 Minimum = 0,
                 HeightRequest = 20,
             };
-            paddingSlider.SetBinding(Slider.ValueProperty, "PUDPadding");
-            paddingSlider.BindingContext = this;
 
             var pointerCornerRadiusSlider = new Slider
             {
@@ -138,8 +52,6 @@ namespace Forms9PatchDemo
                 Minimum = 0,
                 HeightRequest = 20,
             };
-            pointerCornerRadiusSlider.SetBinding(Slider.ValueProperty, "PointerCornerRadius");
-            pointerCornerRadiusSlider.BindingContext = this;
 
             var leftSeg = new Forms9Patch.Segment
             {
@@ -163,21 +75,10 @@ namespace Forms9PatchDemo
             };
             downSeg.Tapped += (sender, e) => _lastChanged = downSeg.VisualElement;
 
-            PointerDirection = Forms9Patch.PointerDirection.Left;
             var directionSegmentControl = new Forms9Patch.SegmentedControl
             {
                 Segments = { leftSeg, upSeg, rightSeg, downSeg, },
                 GroupToggleBehavior = Forms9Patch.GroupToggleBehavior.Multiselect,
-            };
-            directionSegmentControl.SegmentTapped += (sender, e) =>
-            {
-                var dir = Forms9Patch.PointerDirection.None;
-                dir |= (leftSeg.IsSelected ? Forms9Patch.PointerDirection.Left : Forms9Patch.PointerDirection.None);
-                dir |= (rightSeg.IsSelected ? Forms9Patch.PointerDirection.Right : Forms9Patch.PointerDirection.None);
-                dir |= (upSeg.IsSelected ? Forms9Patch.PointerDirection.Up : Forms9Patch.PointerDirection.None);
-                dir |= (downSeg.IsSelected ? Forms9Patch.PointerDirection.Down : Forms9Patch.PointerDirection.None);
-                PointerDirection = dir;
-                System.Diagnostics.Debug.WriteLine("Direction changed");
             };
 
             var bubbleLabel = new Label
@@ -203,9 +104,11 @@ namespace Forms9PatchDemo
                 //BackgroundColor = Color.Green,
                 //OutlineColor = Color.Black,
                 //OutlineWidth = 1,
+                Padding = 0,
                 PointerCornerRadius = 0,
                 Content = new StackLayout
                 {
+                    Padding = 5,
                     Children = {
 						//bubbleLabel,
                         childBubbleButton,
@@ -213,15 +116,24 @@ namespace Forms9PatchDemo
                     }
                 },
             };
-            bubble.SetBinding(Forms9Patch.BubblePopup.OutlineRadiusProperty, "CornerRadius");
-            bubble.SetBinding(Forms9Patch.BubblePopup.PointerLengthProperty, "PointerLength");
-            bubble.SetBinding(Forms9Patch.BubblePopup.PointerTipRadiusProperty, "PointerTipRadius");
-            bubble.SetBinding(Forms9Patch.BubblePopup.PaddingProperty, "Padding");
-            bubble.SetBinding(Forms9Patch.BubblePopup.HasShadowProperty, "HasShadow");
-            bubble.SetBinding(Forms9Patch.BubblePopup.ShadowInvertedProperty, "ShadowInverted");
-            bubble.SetBinding(Forms9Patch.BubblePopup.PointerDirectionProperty, "PointerDirection");
-            bubble.SetBinding(Forms9Patch.BubblePopup.PointerCornerRadiusProperty, "PointerCornerRadius");
-            bubble.BindingContext = this;
+
+            cornerRadiusSlider.ValueChanged += (s, e) => bubble.OutlineRadius = (float)cornerRadiusSlider.Value;
+            pointerLengthSlider.ValueChanged += (s, e) => bubble.PointerLength = (float)pointerLengthSlider.Value;
+            pointerTipRadiusSlider.ValueChanged += (s, e) => bubble.PointerTipRadius = (float)pointerTipRadiusSlider.Value;
+            shadowToggle.Toggled += (s, e) => bubble.HasShadow = shadowToggle.IsToggled;
+            shadowInvertedToggle.Toggled += (s, e) => bubble.ShadowInverted = shadowInvertedToggle.IsToggled;
+            pointerCornerRadiusSlider.ValueChanged += (s,e) => bubble.PointerCornerRadius = (float)pointerCornerRadiusSlider.Value;
+            paddingSlider.ValueChanged += (s, e) => bubble.Padding = paddingSlider.Value;
+            directionSegmentControl.SegmentTapped += (sender, e) =>
+            {
+                var dir = Forms9Patch.PointerDirection.None;
+                dir |= (leftSeg.IsSelected ? Forms9Patch.PointerDirection.Left : Forms9Patch.PointerDirection.None);
+                dir |= (rightSeg.IsSelected ? Forms9Patch.PointerDirection.Right : Forms9Patch.PointerDirection.None);
+                dir |= (upSeg.IsSelected ? Forms9Patch.PointerDirection.Up : Forms9Patch.PointerDirection.None);
+                dir |= (downSeg.IsSelected ? Forms9Patch.PointerDirection.Down : Forms9Patch.PointerDirection.None);
+                bubble.PointerDirection = dir;
+                System.Diagnostics.Debug.WriteLine("Direction changed");
+            };
 
 
             bubbleButton.Tapped += (sender, e) => bubble.IsVisible = false;

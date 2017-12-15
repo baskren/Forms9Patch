@@ -45,7 +45,6 @@ namespace Forms9Patch
         }
         #endregion PointerTipRadius property
 
-
         #region PointerAngle property
         /// <summary>
         /// backing store for PointerAngle property
@@ -60,8 +59,6 @@ namespace Forms9Patch
             set { SetValue(PointerAngleProperty, value); }
         }
         #endregion PointerAngle property
-
-
 
         #region PointerAxialPosition property
         /// <summary>

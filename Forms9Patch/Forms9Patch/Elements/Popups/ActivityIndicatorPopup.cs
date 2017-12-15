@@ -36,7 +36,8 @@ namespace Forms9Patch
 		ActivityIndicator _indicator = new ActivityIndicator
 		{
 			BackgroundColor = Color.Transparent,
-			Color = Color.Blue
+			Color = Color.Blue,
+           
 		};
 		#endregion
 
@@ -45,7 +46,10 @@ namespace Forms9Patch
 		/// </summary>
 		public ActivityIndicatorPopup() 
 		{
+            if (Device.RuntimePlatform == Device.UWP)
+                _indicator.WidthRequest = 300;
 			Content = _indicator;
+
 			CancelOnPageOverlayTouch = false;
 			BackgroundColor = Color.FromRgba(0,0,0,1);
 			_indicator.IsVisible = true;
