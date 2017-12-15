@@ -333,7 +333,10 @@ namespace Forms9Patch
                 if (Target != null)
                 {
                     //targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
-                    targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
+                    if (Target is PopupBase popup)
+                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, popup.ContentView);
+                    else
+                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
 
                     //if (_lastBounds == bounds && targetBounds == _lastTargetBounds)
                     //	return;

@@ -137,7 +137,7 @@ namespace Forms9Patch.iOS
                 //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
                 //    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
 
-                if (tmpFontSize != Element.OptimalFontSize)
+                if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.05)
                 {
                     Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                     {
@@ -147,9 +147,9 @@ namespace Forms9Patch.iOS
                         if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                         {
                             if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize))
-                                Element.OptimalFontSize = -1;
+                                Element.FittedFontSize = -1;
                             else
-                                Element.OptimalFontSize = tmpFontSize;
+                                Element.FittedFontSize = tmpFontSize;
                         }
                         return false;
                     });

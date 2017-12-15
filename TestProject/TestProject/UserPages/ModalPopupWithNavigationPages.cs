@@ -5,83 +5,93 @@ using Forms9Patch;
 
 namespace Forms9PatchDemo
 {
-	public class ModalPopupWithNavigationPages : ContentPage
-	{
-		public ModalPopupWithNavigationPages ()
-		{
+    public class ModalPopupWithNavigationPages : ContentPage
+    {
+        public ModalPopupWithNavigationPages()
+        {
             var button = new Forms9Patch.Button("Show Test Page");
-            button.Clicked += (sender, e) => this.Navigation.PushModalAsync (new BubbonPushModalAsyncPage ());
-			// The root page of your application
-			var content = new Xamarin.Forms.ContentView
-			{
-				//Title = "BubbleTest",
-				Content = new Xamarin.Forms.StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Xamarin.Forms.Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						},
-						button,
-					}
-				}
-			};
-			Content = content;
-		}
-	}
+            button.Clicked += (sender, e) => this.Navigation.PushModalAsync(new BubbonPushModalAsyncPage());
+            // The root page of your application
+            var content = new Xamarin.Forms.ContentView
+            {
+                //Title = "BubbleTest",
+                Content = new Xamarin.Forms.StackLayout
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Children = {
+                        new Xamarin.Forms.Label {
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            Text = "Welcome to Xamarin Forms!"
+                        },
+                        button,
+                    }
+                }
+            };
+            Content = content;
+        }
+    }
 
-	public class BubbonPushModalAsyncPage : ContentPage
-	{
+    public class BubbonPushModalAsyncPage : ContentPage
+    {
         Forms9Patch.Button button1;
         Forms9Patch.Button button2;
-		BubblePopup bubble;
+        Forms9Patch.Button returnButton = new Forms9Patch.Button("RETURN");
+        BubblePopup bubble;
 
-		public BubbonPushModalAsyncPage()
-		{
-			button1 = new Forms9Patch.Button("No Target");
-			button2 = new Forms9Patch.Button("Target");
+        public BubbonPushModalAsyncPage()
+        {
+            button1 = new Forms9Patch.Button("No Target");
+            button2 = new Forms9Patch.Button("Target");
 
-			Content = new Xamarin.Forms.StackLayout
-			{
-				VerticalOptions = LayoutOptions.Center,
-				Children = {
-					button1,
-					button2,
-				}
-			};
 
-			bubble = new BubblePopup(this)
-			{
-				Padding =25,
-				BackgroundColor = Color.Blue,
-				//Target = button, // Uncomment this line, and it crashes too
-				Content = new Xamarin.Forms.StackLayout
-				{
-					Children = {
-						new Xamarin.Forms.Label { Text = "This is a test bubble" }
-					}
-				}
-			};
+            Content = new Xamarin.Forms.StackLayout
+            {
+                VerticalOptions = LayoutOptions.Center,
+                Children = {
+                    button1,
+                    button2,
+                    returnButton,
+                }
+            };
 
-			button1.Clicked += (sender, e) => {
-				bubble.Target = null;
-				bubble.IsVisible = true;
-			};
+            bubble = new BubblePopup(this)
+            {
+                Padding = 25,
+                BackgroundColor = Color.Blue,
+                //Target = button, // Uncomment this line, and it crashes too
+                Content = new Xamarin.Forms.StackLayout
+                {
+                    Children = {
+                        new Xamarin.Forms.Label { Text = "This is a test bubble" }
+                    }
+                }
+            };
 
-			button2.Clicked += (sender, e) => {
-				bubble.Target = button1;
-				bubble.IsVisible = true;
-			};
-		}
+            button1.Clicked += (sender, e) =>
+            {
+                bubble.Target = null;
+                bubble.IsVisible = true;
+            };
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+            button2.Clicked += (sender, e) =>
+            {
+                bubble.Target = button1;
+                bubble.IsVisible = true;
+            };
 
-			//bubble.IsVisible = true;
-		}
-	}
+            returnButton.Clicked += (sender, e) =>
+            {
+                this.Navigation.PopModalAsync();
+            };
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //bubble.IsVisible = true;
+        }
+    }
 }
 
 
