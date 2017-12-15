@@ -13,7 +13,7 @@ namespace Forms9Patch
     [ContentProperty("Content")]
     public abstract class PopupBase : Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
-    { 
+    {
         #region Invalid Parent Properties
         /// <summary>
         /// Invalid Property, do not use
@@ -383,7 +383,7 @@ namespace Forms9Patch
                 else
                     base.Children[1] = (View)_modalLayout;
                 _modalLayout.IgnoreChildren = false;
-                
+
             }
         }
         #endregion ContentView property
@@ -435,7 +435,7 @@ namespace Forms9Patch
             //HostPage = host ?? Application.Current.MainPage;
             Target = target;
             base.Children.Add(_pageOverlay);
-            
+
         }
         #endregion
 
@@ -538,7 +538,7 @@ namespace Forms9Patch
         {
             if (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName)
             {
-                LayoutChildren(RootPage.X,RootPage.Y,RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
+                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
             }
         }
 
@@ -578,7 +578,7 @@ namespace Forms9Patch
 
 
             if (_modalLayout != null)
-            { 
+            {
                 #region ILayout
                 if (propertyName == PaddingProperty.PropertyName)
                     _modalLayout.Padding = Padding;
@@ -645,7 +645,7 @@ namespace Forms9Patch
         /// <param name="height">Height.</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+            //System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
                 LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x, y, width, height));
             else

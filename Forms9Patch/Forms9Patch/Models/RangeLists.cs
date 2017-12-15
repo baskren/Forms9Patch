@@ -39,9 +39,9 @@ namespace Forms9Patch
                 if (capInsets.Left > 0 || capInsets.Right > 0)
                 {
                     var start = capInsets.Left * (normalized ? bitmapWidth : scale) + offset;
-                    System.Diagnostics.Debug.WriteLine("START: [" + start + "]");
+                    //System.Diagnostics.Debug.WriteLine("START: [" + start + "]");
                     var end = bitmapWidth - 1 - capInsets.Right * (normalized ? bitmapWidth : scale) + offset;
-                    System.Diagnostics.Debug.WriteLine("END:   [" + end + "]");
+                    //System.Diagnostics.Debug.WriteLine("END:   [" + end + "]");
                     if (start < 0)
                         start = 0;
                     if (end > bitmapWidth - 1)// - System.Math.Ceiling(Display.Scale))
@@ -67,9 +67,9 @@ namespace Forms9Patch
                 if (capInsets.Top > 0 || capInsets.Bottom > 0)
                 {
                     var start = capInsets.Top * (normalized ? bitmapHeight : scale) + offset;
-                    System.Diagnostics.Debug.WriteLine("START: [" + start + "]");
+                    //System.Diagnostics.Debug.WriteLine("START: [" + start + "]");
                     var end = bitmapHeight - 1 - capInsets.Bottom * (normalized ? bitmapHeight : scale) + offset;
-                    System.Diagnostics.Debug.WriteLine("END:   [" + end + "]");
+                    //System.Diagnostics.Debug.WriteLine("END:   [" + end + "]");
                     if (start < 0)
                         start = 0;
                     if (end > bitmapHeight - 1) // - System.Math.Ceiling(Display.Scale))

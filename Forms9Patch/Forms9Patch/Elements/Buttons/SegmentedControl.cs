@@ -177,10 +177,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontAttributes bindable property.
         /// </summary>
         public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(SegmentedControl), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-                                                                                                                                                                                                  /// <summary>
-                                                                                                                                                                                                  /// Gets or sets the font attributes.
-                                                                                                                                                                                                  /// </summary>
-                                                                                                                                                                                                  /// <value>The font attributes.</value>
+                                                                                                                                                                                          /// <summary>
+                                                                                                                                                                                          /// Gets or sets the font attributes.
+                                                                                                                                                                                          /// </summary>
+                                                                                                                                                                                          /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
             get { return (FontAttributes)GetValue(FontAttributesProperty); }
@@ -191,10 +191,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontSize bindable property.
         /// </summary>
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(SegmentedControl), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-                                                                                                                                                               /// <summary>
-                                                                                                                                                               /// Gets or sets the size of the font.
-                                                                                                                                                               /// </summary>
-                                                                                                                                                               /// <value>The size of the font.</value>
+                                                                                                                                                       /// <summary>
+                                                                                                                                                       /// Gets or sets the size of the font.
+                                                                                                                                                       /// </summary>
+                                                                                                                                                       /// <value>The size of the font.</value>
         public double FontSize
         {
             get { return (double)GetValue(FontSizeProperty); }
@@ -205,10 +205,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontFamiily bindable property.
         /// </summary>
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SegmentedControl), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-                                                                                                                                                                   /// <summary>
-                                                                                                                                                                   /// Gets or sets the font family.
-                                                                                                                                                                   /// </summary>
-                                                                                                                                                                   /// <value>The font family.</value>
+                                                                                                                                                           /// <summary>
+                                                                                                                                                           /// Gets or sets the font family.
+                                                                                                                                                           /// </summary>
+                                                                                                                                                           /// <value>The font family.</value>
         public string FontFamily
         {
             get { return (string)GetValue(FontFamilyProperty); }
@@ -1072,7 +1072,7 @@ namespace Forms9Patch
                          var minFittedFontSize = double.MaxValue;
                          var maxSyncFontSize = double.MinValue;
                          var minSyncFontSize = double.MaxValue;
-                         bool debug = (_segments[0]._button.Text == "BACKGROUND" || _segments[0]._button.Text == "H1");
+                         bool debug = false; // (_segments[0]._button.Text == "BACKGROUND" || _segments[0]._button.Text == "H1");
                          foreach (var segment in _segments)
                          {
                              var segmentFittedFontSize = segment._button.FittedFontSize;
