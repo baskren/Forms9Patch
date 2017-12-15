@@ -107,14 +107,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\layout\" />
+    <Folder Include="Assets\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />
     <Folder Include="Resources\mipmap-xxhdpi\" />
     <Folder Include="Resources\mipmap-xxxhdpi\" />
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -164,9 +162,9 @@
       <Project>{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}</Project>
       <Name>Forms9Patch.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestProject\TestProject.csproj">
+    <ProjectReference Include="..\TestProject\Forms9PatchDemo.csproj">
       <Project>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</Project>
-      <Name>TestProject</Name>
+      <Name>Forms9PatchDemo</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
       <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>

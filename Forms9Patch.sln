@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch", "Forms9Patch\Forms9Patch\Forms9Patch.csproj", "{A45DEA17-78A3-464A-9E00-0342D0503B00}"
 EndProject
@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch", "Forms9Patch"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.Droid", "Forms9Patch\Forms9Patch.Droid\Forms9Patch.Droid.csproj", "{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProject - NEW", "TestProject - NEW", "{8F8B58E8-CBB0-4036-9D2A-E3E5A4FDE15F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo", "Forms9PatchDemo", "{8F8B58E8-CBB0-4036-9D2A-E3E5A4FDE15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject\TestProject.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo", "TestProject\TestProject\Forms9PatchDemo.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject.Droid", "TestProject\TestProject.Droid\TestProject.Droid.csproj", "{6F877EA4-9297-4513-8D4B-8A04D096F27E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Droid", "TestProject\TestProject.Droid\Forms9PatchDemo.Droid.csproj", "{6F877EA4-9297-4513-8D4B-8A04D096F27E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject.iOS", "TestProject\TestProject.iOS\TestProject.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.iOS", "TestProject\TestProject.iOS\Forms9PatchDemo.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{3655EE70-FDA0-4E6A-8F03-69DA60DA8D40}"
 EndProject
@@ -41,7 +41,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCL.Utils.Droid", "FormsGes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCL.Utils.iOS", "FormsGestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj", "{E0310C06-794F-4B67-90B9-E1A5C4E84E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject.UWP", "TestProject\TestProject.UWP\TestProject.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.UWP", "TestProject\TestProject.UWP\Forms9PatchDemo.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.UWP", "Forms9Patch\Forms9Patch.UWP\Forms9Patch.UWP.csproj", "{321F4DDA-F8AA-4CE5-9A3C-9497EB3EA0BC}"
 EndProject
