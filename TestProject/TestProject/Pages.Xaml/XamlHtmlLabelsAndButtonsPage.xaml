@@ -13,28 +13,31 @@
 			<Label Text="HTML Markuped Label Examples" TextColor="Black" FontAttributes="Bold"	/>
 
 			<f9p:Button
+                x:Name="TightSpacingButton"
 				BackgroundColor="White"
 				FontSize="16"
-				Text="Tight Spacing"
+				Text="HasTightSpacing"
 				ToggleBehavior="true"
 				BindingContext="{x:Reference msc}"
 				IsSelected="{Binding HasTightSpacing, Mode=OneWayToSource}"
 				/>
 			<f9p:Button
+                x:Name="TrailingIconButton"
 				BackgroundColor="White"
 				FontSize="16"
-				Text="Trailing Image"
+				Text="Trailing Icon"
 				ToggleBehavior="true"
 				BindingContext="{x:Reference msc}"
 				IsSelected="{Binding TrailingIcon, Mode=OneWayToSource}"
 			/>
 			<f9p:SegmentedControl
+                x:Name="TextAlignmentControl"
 				BackgroundColor="White"
 				FontSize="16"
 			>
-                <f9p:Segment Text="Start"/>
-                <f9p:Segment Text="Center"/>
-                <f9p:Segment Text="End"/>
+                <f9p:Segment Text="Start" x:Name="StartSegment"/>
+                <f9p:Segment Text="Center" x:Name="CenterSegment"/>
+                <f9p:Segment Text="End" x:Name="EndSegment"/>
             </f9p:SegmentedControl>
 			
 			<f9p:Label TextColor="Black">
@@ -75,7 +78,7 @@
 
 
 
-			<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
+			<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start" x:Name="StateButton">
 
 				<f9p:StateButton.DefaultState>
 					<f9p:ButtonState HtmlText="&lt;i&gt;Sticky&lt;/i&gt; Default State" TextColor="White">
