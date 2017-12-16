@@ -236,7 +236,6 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <Content Include="DevDocs\InterfaceHeirarchy.txt" />
-    <Content Include="f9pIssues.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
@@ -258,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="DevDocs\f9pIssues.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PCLStorage.Abstractions">

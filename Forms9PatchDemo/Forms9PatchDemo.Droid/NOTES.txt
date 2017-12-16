@@ -1,0 +1,5 @@
+﻿Files are linked to ../../../Forms9PatchDemo equivalents except:
+
+- AndroidManifest.xml
+- packages.config
+- .csproj

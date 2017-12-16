@@ -1,0 +1,6 @@
+﻿Files are linked to ../../../Forms9PatchDemo equivalents except:
+
+
+- packages.config
+- anything in ObsoletePages
+- .csproj
