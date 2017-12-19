@@ -1,12 +1,10 @@
 Forms9Patch Open Issues:
 
-- popup background is padded on Modally navigated page with padding
-
 Demos:
 
-- Padding needs adjustment in some pages
 - Some pages need to be embedded in a scroll view for smaller screens
 
 TODO:
 
 - Verify Android WebViewExtensions.Print works
+- Do UWP WebViewExtensions.Print

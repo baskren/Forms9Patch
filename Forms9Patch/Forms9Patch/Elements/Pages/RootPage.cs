@@ -51,8 +51,9 @@ namespace Forms9Patch
         {
             Settings.ConfirmInitialization();
 
-            if (_instance != null)
-                throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
+            // needed to comment out the following because Android was repeating the MainAcitivty.OnCreate during a resume.
+            //if (_instance != null)
+            //    throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
             _instance = this;
             Page = page;
             Application.Current.ModalPopping += (object sender, ModalPoppingEventArgs e) =>
@@ -88,7 +89,8 @@ namespace Forms9Patch
         /// <param name="page">Page.</param>
         public static RootPage Create(Page page)
         {
-            _instance = _instance ?? new RootPage(page);
+            //_instance = _instance ?? new RootPage(page);
+            _instance = new RootPage(page);
             return _instance;
         }
 

@@ -646,8 +646,22 @@ namespace Forms9Patch
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", PCL.Utils.ReflectionExtensions.CallerString(), GetType());
+
+            var targetPage = Application.Current.MainPage;
+            var hostingPage = this.HostingPage();
+            foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
+            {
+                if (page == hostingPage)
+                {
+                    targetPage = hostingPage;
+                    break;
+                }
+            }
+
+
+
             if (width > 0 && height > 0)
-                LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(x, y, width, height));
+                LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(-targetPage.Padding.Left, -targetPage.Padding.Top, targetPage.Width, targetPage.Height));
             else
                 ContentView.IsVisible = false;
         }

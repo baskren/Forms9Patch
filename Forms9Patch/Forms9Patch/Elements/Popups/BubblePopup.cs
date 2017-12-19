@@ -329,32 +329,34 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren _bubbleLayout size=[{0}, {1}]",rboxSize.Width, rboxSize.Height);
                 PointerDirection pointerDir = PointerDirection.None;
 
+
+                var targetPage = Application.Current.MainPage;
+                var hostingPage = this.HostingPage();
+                foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
+                {
+                    if (page == hostingPage)
+                    {
+                        targetPage = hostingPage;
+                        break;
+                    }
+                }
+
                 //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;
                 if (Target != null)
                 {
-                    var targetPage = Application.Current.MainPage;
-                    var hostingPage = Target.HostingPage();
-                    foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
-                    {
-                        if (page == hostingPage)
-                        {
-                            targetPage = hostingPage;
-                            break;
-                        }
-                    }
 
                     // NOTE: Use of PageDescentBounds is deliberate.  It has different behaviour on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
                     //       FormsGestures coordintate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
 
                     if (Target is PopupBase popup)
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.ContentView);
-                        //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
+                    //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
                     else
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
-                        //targetBounds = Target.BoundsToEleCoord(targetPage);
+                    //targetBounds = Target.BoundsToEleCoord(targetPage);
 
-                        var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
+                    var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
                     var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength - Margin.Right;
                     var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength - Margin.Top;
                     var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength - Margin.Bottom;
@@ -451,7 +453,7 @@ namespace Forms9Patch
                         );
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
-                    LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
+                    LayoutChildIntoBoundingRegion(_bubbleLayout, new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height));
                 }
             }
         }
