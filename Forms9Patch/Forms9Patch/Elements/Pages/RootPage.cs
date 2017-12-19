@@ -80,6 +80,16 @@ namespace Forms9Patch
                 _modals.Remove(e.Modal);
             };
 
+
+            Application.Current.ChildRemoved += (s, e) =>
+                {
+                    System.Diagnostics.Debug.WriteLine("");
+                };
+
+            Application.Current.DescendantRemoved += (s, e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("");
+            };
         }
 
         /// <summary>
@@ -202,18 +212,21 @@ namespace Forms9Patch
         {
             if (PageController.InternalChildren.Count() > 1)
             {
-                PageController.InternalChildren.Remove(PageController.InternalChildren.Last());
+                var lastChild = PageController.InternalChildren.Last();
+                if (lastChild is PopupBase popup)
+                    popup.Cancel();
+                else
+                    PageController.InternalChildren.Remove(lastChild);
                 return true;
             }
             var masterDetailPage = (PageController.InternalChildren[0] as MasterDetailPage) ?? (PageController.InternalChildren[0] as NavigationPage)?.CurrentPage as MasterDetailPage;
-            if (masterDetailPage != null && masterDetailPage.IsPresented)
+            if (Device.RuntimePlatform!=Device.UWP && masterDetailPage != null && masterDetailPage.IsPresented)
             {
                 masterDetailPage.IsPresented = false;
                 return true;
             }
             // check if primary child is NavigationPage.  If so, pass the back button press to it.
-            var page = PageController.InternalChildren[0] as Page;
-            if (page != null)
+            if (PageController.InternalChildren[0] is Page page)
             {
                 var handled = page.SendBackButtonPressed();
                 if (handled)
