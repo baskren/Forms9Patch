@@ -219,6 +219,7 @@
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\HomePage.cs">
       <Link>HomePage.cs</Link>
     </Compile>
+    <Compile Include="ObsoletePages\StateButtonHasShadow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

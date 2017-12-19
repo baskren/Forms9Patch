@@ -516,7 +516,11 @@ namespace Forms9Patch
         public new bool HasShadow
         {
             get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
+            set
+            {
+                System.Diagnostics.Debug.WriteLine("setting Button.HasShadow ");
+                SetValue(HasShadowProperty, value);
+            }
         }
         #endregion
 

@@ -255,8 +255,8 @@ namespace Forms9Patch
 #if __IOS__
         void InvalidateView()
         {
-        if (!_disposed)
-            SetNeedsDisplay();
+            if (!_disposed)
+                SetNeedsDisplay();
         }
 
         double ViewOpacity

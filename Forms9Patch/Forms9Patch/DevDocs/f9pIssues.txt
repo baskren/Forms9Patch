@@ -1,8 +1,6 @@
 Forms9Patch Open Issues:
 
-- StateButton does not have shadow or outline in ButtonAndSegmentAlignment
 - ModalPopupWithNavigationPages: Bubble popup not located properly in UWP
-- StateButton flickers between default and selected on Android only (or at least when running in Windows' Andriod Emulator)
 
 Demos:
 

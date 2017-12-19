@@ -156,7 +156,6 @@ namespace Forms9Patch
         }
         #endregion
 
-
         #region Fields
         bool _noUpdate = true;
         ButtonState _currentState;
@@ -165,7 +164,6 @@ namespace Forms9Patch
         //Label _label;
         //FormsGestures.Listener _gestureListener;
         #endregion
-
 
         #region Constructor
         /// <summary>
@@ -189,7 +187,6 @@ namespace Forms9Patch
 
         }
         #endregion
-
 
         #region IDisposable Support
 
@@ -323,6 +320,7 @@ namespace Forms9Patch
                 BackgroundImage = newBackgroundImage;
             }
             //else if (!_constructing && Device.OS == TargetPlatform.Android)
+            /*  NOTE: Commented out on 12/18/17 because was causing flicker upon button press in Android.  Tested on XamlStateButtonsPage and did not see failure to resize.
             else if (!_constructing && Device.RuntimePlatform == Device.Android)
             {
                 // this is a hack that compensates for a failure to resize the label when > 4 ImageButtons are on a ContentPage inside a NavigationPage
@@ -336,7 +334,9 @@ namespace Forms9Patch
                         return false;
                     });
             }
-            BackgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
+            */
+            var backgroundColor = _currentState.BackgroundColorSet ? _currentState.BackgroundColor : DefaultState.BackgroundColor;
+            SetValue(ShapeBase.BackgroundColorProperty, backgroundColor);
 
             var newIconImage = _currentState.IconImage ?? DefaultState.IconImage;
             var htmlText = _currentState.HtmlText ?? DefaultState.HtmlText;
@@ -457,15 +457,18 @@ namespace Forms9Patch
 
             // BackgroundColor handled above
 
-            HasShadow = _currentState.HasShadowSet ? _currentState.HasShadow : DefaultState.HasShadow;
+            var hasShadow = _currentState.HasShadowSet ? _currentState.HasShadow : DefaultState.HasShadow;
+            SetValue(ShapeBase.HasShadowProperty, hasShadow);
 
             ShadowInverted = _currentState.ShadowInvertedSet ? _currentState.ShadowInverted : DefaultState.ShadowInverted;
 
-            OutlineColor = _currentState.OutlineColorSet ? _currentState.OutlineColor : DefaultState.OutlineColor;
+            var outlineColor = _currentState.OutlineColorSet ? _currentState.OutlineColor : DefaultState.OutlineColor;
+            SetValue(ShapeBase.OutlineColorProperty, outlineColor);
 
             OutlineRadius = _currentState.OutlineRadiusSet ? _currentState.OutlineRadius : DefaultState.OutlineRadius;
 
-            OutlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
+            var outlineWidth = _currentState.OutlineWidthSet ? _currentState.OutlineWidth : DefaultState.OutlineWidth;
+            SetValue(ShapeBase.OutlineWidthProperty, outlineWidth);
 
             // ExtendedElementShape is set by ElementShape setter, above
 
