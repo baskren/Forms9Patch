@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using FormsGestures;
 
 namespace Forms9Patch
 {
@@ -332,20 +333,28 @@ namespace Forms9Patch
                 Rectangle targetBounds = Rectangle.Zero;
                 if (Target != null)
                 {
-                    //targetBounds = DependencyService.Get<IDescendentBounds> ().PageDescendentBounds (HostPage, Target);
+                    var targetPage = Application.Current.MainPage;
+                    var hostingPage = Target.HostingPage();
+                    foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
+                    {
+                        if (page == hostingPage)
+                        {
+                            targetPage = hostingPage;
+                            break;
+                        }
+                    }
+
+                    // NOTE: Use of PageDescentBounds is deliberate.  It has different behaviour on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
+                    //       FormsGestures coordintate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
+
                     if (Target is PopupBase popup)
-                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, popup.ContentView);
+                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.ContentView);
+                        //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
                     else
-                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(Application.Current.MainPage, Target);
+                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
+                        //targetBounds = Target.BoundsToEleCoord(targetPage);
 
-                    //if (_lastBounds == bounds && targetBounds == _lastTargetBounds)
-                    //	return;
-                    //_lastBounds = bounds;
-                    //_lastTargetBounds = targetBounds;
-
-
-
-                    var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
+                        var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
                     var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength - Margin.Right;
                     var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength - Margin.Top;
                     var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength - Margin.Bottom;

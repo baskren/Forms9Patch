@@ -1,7 +1,5 @@
 Forms9Patch Open Issues:
 
-- ModalPopupWithNavigationPages: Bubble popup not located properly in UWP
-
 Demos:
 
 - Padding needs adjustment in some pages

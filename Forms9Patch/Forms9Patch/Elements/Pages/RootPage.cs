@@ -15,7 +15,7 @@ namespace Forms9Patch
     /// </summary>
     public class RootPage : Page
     {
-        static RootPage _instance;
+        static internal RootPage _instance;
 
         /// <summary>
         /// Occurs when modal popped.
