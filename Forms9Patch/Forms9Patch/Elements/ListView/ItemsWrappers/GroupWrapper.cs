@@ -14,7 +14,7 @@ namespace Forms9Patch
 	class GroupWrapper : ItemWrapper<object>, IList<ItemWrapper>, ICollection<ItemWrapper>, IEnumerable<ItemWrapper>, IEnumerable, IList, ICollection, IReadOnlyList<ItemWrapper>, IReadOnlyCollection<ItemWrapper>, INotifyCollectionChanged  {
 
 
-		#region Source / Target (Visibles) coupling
+		#region Source / Target (Visible) coupling
 		bool _notifySourceOfChanges;
 		public bool NotifySourceOfChanges {
 			get {
@@ -175,13 +175,13 @@ namespace Forms9Patch
 				iCollectionIEnumerable.Remove ((IEnumerable)item.Source);
 				IgnoreSourceChanges = false;
 			}
-			var iList = SourceChildren as IList;
-			if (iList != null) {
-				IgnoreSourceChanges = true;
-				iList.Remove (item.Source);
-				IgnoreSourceChanges = false;
-			}
-		}
+            if (SourceChildren is IList iList)
+            {
+                IgnoreSourceChanges = true;
+                iList.Remove(item.Source);
+                IgnoreSourceChanges = false;
+            }
+        }
 		#endregion
 
 
@@ -442,7 +442,7 @@ namespace Forms9Patch
 			}
 		}
 
-		// used for subscrbing to hidden source objects
+		// used for subscribing to hidden source objects
 		void SubscribeToHiddenSourcePropertyChanged(object source)
 		{
 			var iNotifiableSource = source as INotifyPropertyChanged;
@@ -478,7 +478,7 @@ namespace Forms9Patch
 
 		void OnItemSourcePropertyChanged(object source, PropertyChangedEventArgs e)
 		{
-			// if the change impacts visibiltiy then remove itemwrapper from groupwrapper
+			// if the change impacts visibility then remove itemwrapper from groupwrapper
 			if (!VisibilityTest(source))
 				RefreshVisibility();
 		}
@@ -1079,9 +1079,9 @@ namespace Forms9Patch
 		#endregion
 
 
-		#region Member Item Property Change Notificaiton
-		public event PropertyChangingEventHandler ItemWrapperPropertyChanging;
-		void OnItemWrapperPropertyChanging (object sender, PropertyChangingEventArgs e)
+		#region Member Item Property Change Notification
+		public event Xamarin.Forms.PropertyChangingEventHandler ItemWrapperPropertyChanging;
+		void OnItemWrapperPropertyChanging (object sender, Xamarin.Forms.PropertyChangingEventArgs e)
 		{
 			ItemWrapperPropertyChanging?.Invoke(sender, e);
 		}
@@ -1095,7 +1095,7 @@ namespace Forms9Patch
 			var item = sender as Item;
 			var mateGroup = Source;
 			if (Coupled && item != null && mateGroup != null && validMateTest!=null) {
-				// TODO: determine if getting ride of ValidMateTriggerProperty has no percievable impact upon performance
+				// TODO: determine if getting ride of ValidMateTriggerProperty has no perceivable impact upon performance
 				if (ValidMateTriggerProperty == null || e.PropertyName == ValidMateTriggerProperty) {
 					if (validMateTest (item))
 						MateInsert (item);

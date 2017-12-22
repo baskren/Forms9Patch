@@ -1,5 +1,4 @@
-﻿using PCLStorage;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using PCL.Utils;
+#if NETSTANDARD
+#else
+using PCLStorage;
+#endif
 
 [assembly: Dependency(typeof(Forms9Patch.UWP.FontService))]
 namespace Forms9Patch.UWP
@@ -98,8 +101,13 @@ namespace Forms9Patch.UWP
                 fontName = idParts.Last();
             else
             {
+#if NETSTANDARD
+                var cachedFilePath = System.IO.Path.Combine(PCL.Utils.Environment.ApplicationDataPath, localStorageFileName);
+                fontName = TTFAnalyzer.FontFamily(cachedFilePath);
+#else
                 var cachedFile = FileSystem.Current.LocalStorage.GetFile(localStorageFileName);
                 fontName = TTFAnalyzer.FontFamily(cachedFile);
+#endif
             }
             var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
             EmbeddedFontSources.Add(f9pFontFamily, uwpFontFamily);

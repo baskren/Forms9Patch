@@ -61,5 +61,7 @@
 	<string>Forms9PatchDemo</string>
 	<key>CFBundleName</key>
 	<string>Forms9Patch Demo</string>
+	<key>CFBundleDisplayName</key>
+	<string>Forms9Patch Demo</string>
 </dict>
 </plist>

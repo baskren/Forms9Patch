@@ -224,14 +224,9 @@ namespace Forms9Patch
         //   Dispose(false);
         // }
 
-        // This code added to correctly implement the disposable pattern.
         /// <summary>
-        /// Releases all resource used by the <see cref="T:Forms9Patch.StateButton"/> object.
+        /// Dispose of Forms9Patch.StateButton element.
         /// </summary>
-        /// <remarks>Call <see cref="O:Forms9Patch.StateButton.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.StateButton"/>. The
-        /// <see cref="O:Forms9Patch.StateButton.Dispose"/> method leaves the <see cref="T:Forms9Patch.StateButton"/> in an unusable state. After
-        /// calling <see cref="O:Forms9Patch.StateButton.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.StateButton"/> so
-        /// the garbage collector can reclaim the memory that the <see cref="T:Forms9Patch.StateButton"/> was occupying.</remarks>
         public new void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.

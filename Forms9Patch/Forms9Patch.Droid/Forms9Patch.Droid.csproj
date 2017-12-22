@@ -166,9 +166,6 @@
     <Compile Include="NativeChildren\F9PTextView.cs" />
     <Compile Include="Renderers\LabelRenderer.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
-    <Compile Include="..\Forms9Patch\Interfaces\INinePatch.cs">
-      <Link>Interfaces\INinePatch.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch\Models\LicenseChecker.cs">
       <Link>Models\LicenseChecker.cs</Link>
     </Compile>
@@ -187,7 +184,7 @@
       <Link>Renderers\LayoutRenderer_T_.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch\Shared\SkiaColorExtensions.cs">
-      <Link>Extensions\SkiaColorExtensions.cs</Link>
+      <Link>SkiaElements\SkiaColorExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch\Shared\F9PBitmap.cs">
       <Link>SkiaElements\F9PBitmap.cs</Link>
@@ -216,9 +213,8 @@
     <Compile Include="Effects\SliderStepSizeEffect.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Interfaces\" />
     <Folder Include="ListView\Drawables\" />
-    <Folder Include="SkiaElements\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">

@@ -1034,14 +1034,9 @@ namespace Forms9Patch
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
         /// <summary>
-        /// Releases all resource used by the <see cref="T:Forms9Patch.Button"/> object.
+        /// Dispose of Forms9Patch.Button object.
         /// </summary>
-        /// <remarks>Call <see cref="O:Forms9Patch.Button.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.Button"/>. The
-        /// <see cref="O:Forms9Patch.Button.Dispose"/> method leaves the <see cref="T:Forms9Patch.Button"/> in an unusable state. After
-        /// calling <see cref="O:Forms9Patch.Button.Dispose"/>, you must release all references to the <see cref="T:Forms9Patch.Button"/>
-        /// so the garbage collector can reclaim the memory that the <see cref="T:Forms9Patch.Button"/> was occupying.</remarks>
         public void Dispose()
         {
             Dispose(true);

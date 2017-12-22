@@ -220,6 +220,9 @@
       <Link>HomePage.cs</Link>
     </Compile>
     <Compile Include="ObsoletePages\StateButtonHasShadow.cs" />
+    <Compile Include="Pages.Xaml\CDATA.xaml.cs">
+      <DependentUpon>CDATA.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -586,12 +589,12 @@
       <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Pages.Code\" />
-    <Folder Include="Resources\Fonts\" />
-    <Folder Include="UserPages\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Properties\" />
+    <EmbeddedResource Include="Pages.Xaml\CDATA.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

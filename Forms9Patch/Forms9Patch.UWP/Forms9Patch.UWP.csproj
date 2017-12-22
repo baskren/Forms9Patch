@@ -136,7 +136,7 @@
       <Link>Renderers\LayoutRenderer_T_.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch\Shared\SkiaColorExtensions.cs">
-      <Link>Extensions\SkiaColorExtensions.cs</Link>
+      <Link>SkiaElements\SkiaColorExtensions.cs</Link>
     </Compile>
     <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="Effects\SliderStepSizeEffect.cs" />

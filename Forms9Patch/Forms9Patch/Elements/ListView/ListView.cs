@@ -53,7 +53,7 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty SourcePropertyMapProperty = BindableProperty.Create("SourcePropertyMap", typeof(List<string>), typeof(ListView), default(List<string>));
         /// <summary>
-        /// Gets or sets the source property map.  Used to map the properties in a heirachial ItemsSource used to make the heirachy and bind (as items) to the CellViews
+        /// Gets or sets the source property map.  Used to map the properties in a hierarchical ItemsSource used to make the hierarchy and bind (as items) to the CellViews
         /// </summary>
         /// <value>The source property map.</value>
         public List<string> SourcePropertyMap
@@ -364,7 +364,6 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler Panned;
         #endregion
-
 
         #region Scroll
         /// <summary>
@@ -757,8 +756,8 @@ namespace Forms9Patch
         /// <summary>
         /// Occurs when a property of a ListViewItem is about to change.
         /// </summary>
-        public event PropertyChangingEventHandler ItemPropertyChanging;
-        void OnItemPropertyChanging(object sender, PropertyChangingEventArgs e)
+        public event Xamarin.Forms.PropertyChangingEventHandler ItemPropertyChanging;
+        void OnItemPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("OnItemPropertyChanging");
             ItemPropertyChanging?.Invoke(sender, e);
@@ -941,8 +940,6 @@ namespace Forms9Patch
 
 
         #endregion
-
-
 
 
         #region Drag/Drop

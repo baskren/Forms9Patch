@@ -82,7 +82,10 @@
       <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
       <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
@@ -149,7 +152,7 @@
       <Link>Renderers\LayoutRenderer_T_.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch\Shared\SkiaColorExtensions.cs">
-      <Link>Extensions\SkiaColorExtensions.cs</Link>
+      <Link>SkiaElements\SkiaColorExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch\Shared\InvalidDataContractException.cs">
       <Link>Exceptions\InvalidDataContractException.cs</Link>
@@ -187,12 +190,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SkiaElements\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('$(NUGET_PACKAGES)\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />

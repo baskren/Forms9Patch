@@ -1,17 +1,8 @@
 ﻿using System;
-using PCLStorage;
 using System.IO;
-using PCL.Utils;
 using Xamarin.Forms;
-using Android.Print;
-using System.Security.Policy;
 using Android.Content;
-using Android.Print.Pdf;
-using Android.Graphics.Pdf;
-using System.Security.AccessControl;
-using Java.IO;
 using Android.Webkit;
-using Java.Lang;
 using Android.Graphics;
 using Android.Views;
 

@@ -617,15 +617,9 @@ namespace Forms9Patch
         //   Dispose(false);
         // }
 
-        // This code added to correctly implement the disposable pattern.
         /// <summary>
-        /// Releases all resource used by the <see cref="T:Forms9Patch.SegmentedControl"/> object.
+        /// Dispose of Forms9Patch.SegmentedControl element.
         /// </summary>
-        /// <remarks>Call <see cref="O:Forms9Patch.SegmentedControl.Dispose"/> when you are finished using the <see cref="T:Forms9Patch.SegmentedControl"/>.
-        /// The <see cref="O:Forms9Patch.SegmentedControl.Dispose"/> method leaves the <see cref="T:Forms9Patch.SegmentedControl"/> in an unusable
-        /// state. After calling <see cref="O:Forms9Patch.SegmentedControl.Dispose"/>, you must release all references to the
-        /// <see cref="T:Forms9Patch.SegmentedControl"/> so the garbage collector can reclaim the memory that the
-        /// <see cref="T:Forms9Patch.SegmentedControl"/> was occupying.</remarks>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.

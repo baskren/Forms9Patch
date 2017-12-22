@@ -2,7 +2,10 @@
 using System.IO;
 using CoreGraphics;
 using Foundation;
+#if NETSTANDARD
+#else
 using PCLStorage;
+#endif
 using UIKit;
 using Xamarin.Forms;
 
@@ -10,14 +13,14 @@ using Xamarin.Forms;
 namespace Forms9Patch.iOS
 {
 	/// <summary>
-	/// Html to pdf service.
+	/// HTML to PDF service.
 	/// </summary>
 	public class HtmlToPngService : IHtmlToPngPdfService
 	{
 		/// <summary>
-		/// Tos the png.
+		/// Converts HTML to PNG
 		/// </summary>
-		/// <param name="html">Html.</param>
+		/// <param name="html">HTML.</param>
 		/// <param name="fileName">File name.</param>
 		/// <param name="onComplete">On complete.</param>
 		public void ToPng(string html, string fileName, Action<string> onComplete)
@@ -46,9 +49,13 @@ namespace Forms9Patch.iOS
 
 	class WebViewCallBack : UIWebViewDelegate
 	{
-
-		readonly IFolder _folder;
-		readonly string _fileName;
+#if NETSTANDARD
+        readonly string _folderPath = PCL.Utils.Environment.TemporaryStoragePath;
+#else
+        //readonly IFolder _folder = FileSystem.Current.LocalStorage;
+        readonly string _folderPath = FileSystem.Current.LocalStorage.Path;
+#endif
+        readonly string _fileName;
 		readonly Action<string> _onComplete;
 		Size _size;
 		public bool Completed
@@ -65,7 +72,6 @@ namespace Forms9Patch.iOS
 
 		public WebViewCallBack(Size size, string fileName, Action<string> onComplete)
 		{
-			_folder = FileSystem.Current.LocalStorage;
 			_fileName = fileName;
 			_onComplete = onComplete;
 			_size = size;
@@ -127,7 +133,7 @@ namespace Forms9Patch.iOS
 				_onComplete?.Invoke(file);
 				return;
 			}
-			this only renderes the first page
+			this only renders the first page
 			*/
 
 			/* and same with this approach in spite of what StackOverflow says 
@@ -231,7 +237,7 @@ namespace Forms9Patch.iOS
 
 			if (data != null)
 			{
-				var path = Path.Combine(_folder.Path, _fileName + ".png");
+				var path = Path.Combine(_folderPath, _fileName + ".png");
 				File.WriteAllBytes(path, data.ToArray());
 				_onComplete?.Invoke(path);
 				return;

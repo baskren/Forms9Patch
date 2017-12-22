@@ -1,11 +1,7 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Print;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using PCL.Utils;
-using PCLStorage;
-using System.IO;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.WebViewExtensionsService))]
 namespace Forms9Patch.Droid

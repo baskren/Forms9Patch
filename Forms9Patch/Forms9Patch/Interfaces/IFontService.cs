@@ -1,9 +1,8 @@
 ﻿// /*******************************************************************
 //  *
-//  * IFontService.cs copyright 2017 ben, 42nd Parallel - ALL RIGHTS RESERVED.
+//  * IFontService.cs copyright 2017 Ben Askren, 42nd Parallel - ALL RIGHTS RESERVED.
 //  *
 //  *******************************************************************/
-using PCLStorage;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

@@ -66,7 +66,7 @@ namespace Forms9Patch.UWP
                         var errorDialog = new Windows.UI.Xaml.Controls.ContentDialog
                         {
                             Title = "Forms9Patch licensing failure",
-                            Content = "The LicenseKey [" + Settings._licenseKey + "] is not for the app [" + Forms9Patch.ApplicationInfoService.Name + "].  You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings.",
+                            Content = "The LicenseKey [" + Settings._licenseKey + "] is not for the application [" + Forms9Patch.ApplicationInfoService.Name + "].  You are in trial mode and will be able to render 1 scalable image and 5 formatted strings.",
                             CloseButtonText = "Whatever"
                         };
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -112,8 +112,11 @@ namespace Forms9Patch.UWP
                     try { _forms9PatchAssemblies.Add(typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load Windows.ApplicationModel.Core assembly"); }
 
+#if NETSTANDARD
+#else
                     try { _forms9PatchAssemblies.Add(typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load PCLStorage assembly"); }
+#endif
 
                     try { _forms9PatchAssemblies.Add(typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load Newtonsoft.Json assembly"); }

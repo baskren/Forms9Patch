@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{740C3DFF-E410-4632-BDD9-82594F3E21B4}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Forms9Patch.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Forms9Patch.iOS</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;__IOS__;__MOBILE__;__UNIFIED__;DONT_USE_MEASURE;NETSTANDARD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.iOS, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.iOS, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Forms9Patch.iOS\Effects\CustomFontEffect.cs">
+      <Link>Effects\CustomFontEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Effects\SliderStepSizeEffect.cs">
+      <Link>Effects\SliderStepSizeEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Effects\WebViewFixEffect.cs">
+      <Link>Effects\WebViewFixEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Extensions\AlignmentExtensions.cs">
+      <Link>Extensions\AlignmentExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Extensions\Debug.cs">
+      <Link>Extensions\Debug.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Extensions\FontExtensions.cs">
+      <Link>Extensions\FontExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Extensions\FormattedStringExtensions.cs">
+      <Link>Extensions\FormattedStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Extensions\UITextViewExtensions.cs">
+      <Link>Extensions\UITextViewExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\ListView\Renderers\BaseCellViewRenderer.cs">
+      <Link>ListView\Renderers\BaseCellViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\ListView\Renderers\ListViewRenderer.cs">
+      <Link>ListView\Renderers\ListViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\ListView\Services\ListItemLocationService.cs">
+      <Link>ListView\Services\ListItemLocationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Models\Settings.cs">
+      <Link>Models\Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Reachability.cs">
+      <Link>Reachability.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Renderers\ColorGradientBoxRenderer.cs">
+      <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Renderers\LabelRenderer.cs">
+      <Link>Renderers\LabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\ApplicationInfoService.cs">
+      <Link>Services\ApplicationInfoService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\DescendentBounds.cs">
+      <Link>Services\DescendentBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\FontService.cs">
+      <Link>Services\FontService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\HtmlToPngService.cs">
+      <Link>Services\HtmlToPngService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\KeyboardService.cs">
+      <Link>Services\KeyboardService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\KeyClicksService.cs">
+      <Link>Services\KeyClicksService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\ListViewExtensionService_iOS.cs">
+      <Link>Services\ListViewExtensionService_iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\StatusBarService.cs">
+      <Link>Services\StatusBarService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\Services\WebViewExtensionsService.cs">
+      <Link>Services\WebViewExtensionsService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.iOS\UIViewContentMode.cs">
+      <Link>UIViewContentMode.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Models\LicenseChecker.cs">
+      <Link>Models\LicenseChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\AbsoluteLayoutRenderer.cs">
+      <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\BubbleLayoutRenderer.cs">
+      <Link>Renderers\BubbleLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\ContentViewRenderer.cs">
+      <Link>Renderers\ContentViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\FrameRenderer.cs">
+      <Link>Renderers\FrameRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\GridRenderer.cs">
+      <Link>Renderers\GridRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\ImageRenderer.cs">
+      <Link>Renderers\ImageRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\RelativeLayout.cs">
+      <Link>Renderers\RelativeLayout.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Renderers\StackLayoutRenderer.cs">
+      <Link>Renderers\StackLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\F9PBitmap.cs">
+      <Link>SkiaElements\F9PBitmap.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\InvalidDataContractException.cs">
+      <Link>Exceptions\InvalidDataContractException.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\LayoutRenderer_T_.cs">
+      <Link>Renderers\LayoutRenderer_T_.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKBitmapExtensions.cs">
+      <Link>SkiaElements\SKBitmapExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SkiaColorExtensions.cs">
+      <Link>SkiaElements\SkiaColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SkiaRoundedBoxAndImageView.cs">
+      <Link>SkiaElements\SkiaRoundedBoxAndImageView.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKPathExtensions.cs">
+      <Link>SkiaElements\SKPathExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch\Shared\SKRectExtensions.cs">
+      <Link>SkiaElements\SKRectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.iOS\FormsGestures.NetStandard.iOS.csproj">
+      <Project>{48adfbe6-0cba-4317-8371-250a7f0647ae}</Project>
+      <Name>FormsGestures.NetStandard.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
+      <Project>{0b3a1716-e6f3-44a7-8acd-e79055a67caf}</Project>
+      <Name>FormsGestures.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
+      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
+      <Name>NumericalMethods.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
+      <Project>{aa7ca62c-f379-46e0-82b4-f33855f4cb8a}</Project>
+      <Name>PCL.Utils.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
+      <Project>{dfb4eff6-befa-42fc-a9d6-c483df3d5d12}</Project>
+      <Name>Forms9Patch.NetStandard</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets'))" />
+  </Target>
+  <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
+</Project>

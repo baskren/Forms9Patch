@@ -69,14 +69,8 @@ namespace Forms9Patch
         /// <value>The formatted text.</value>
         public string HtmlText
         {
-            get
-            {
-                return (string)GetValue(HtmlTextProperty);
-            }
-            set
-            {
-                SetValue(HtmlTextProperty, value);
-            }
+            get => (string)GetValue(HtmlTextProperty);
+            set => SetValue(HtmlTextProperty, value);
         }
         #endregion
 
