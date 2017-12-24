@@ -74,7 +74,8 @@ namespace Forms9Patch.UWP
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     }
                     //System.Diagnostics.Debug.WriteLine("[" + PCL.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
-                    //FormsGestures.Droid.Settings.Init();
+                    FormsGestures.UWP.Settings.Init();
+
                 }
             }
             get
