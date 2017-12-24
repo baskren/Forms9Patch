@@ -21,11 +21,12 @@ namespace Forms9Patch
 			return toast;
 		}
 
-		#region Properties
-		/// <summary>
-		/// The title property backing store.
-		/// </summary>
-		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Toast), default(string));
+        #region Properties
+
+        /// <summary>
+        /// The title property backing store.
+        /// </summary>
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Toast), default(string));
 		/// <summary>
 		/// Gets or sets the title.
 		/// </summary>
@@ -36,10 +37,11 @@ namespace Forms9Patch
 			set { SetValue(TitleProperty, value); }
 		}
 
-		/// <summary>
-		/// The text property backing store.
-		/// </summary>
-		public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Toast), default(string));
+        #region Text Properties
+        /// <summary>
+        /// The text property backing store.
+        /// </summary>
+        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Toast), default(string));
 		/// <summary>
 		/// Gets or sets the text.
 		/// </summary>
@@ -63,57 +65,109 @@ namespace Forms9Patch
 			get { return (Color)GetValue(TextColorProperty); }
 			set { SetValue(TextColorProperty, value); }
 		}
+        #endregion
 
 
-		/// <summary>
-		/// The ok text property.
-		/// </summary>
-		public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(Toast), "OK");
-		/// <summary>
-		/// Gets or sets the ok text.
-		/// </summary>
-		/// <value>The ok text.</value>
-		public string OkText
+        #region Button Properties
+
+        #region Button Text Property
+
+        /// <summary>
+        /// OBSOLETE: USE ButtonTextProperty
+        /// </summary>
+        [Obsolete("Use ButtonTextProperty")]
+        public static readonly BindableProperty OkTextProperty = ButtonTextProperty;
+        /// <summary>
+        /// OBSOLETE: Use ButtonText property
+        /// </summary>
+        [Obsolete("Use ButtonText property")]
+        public string OkText
+        {
+            get { return (string)GetValue(ButtonTextProperty); }
+            set { SetValue(ButtonTextProperty, value); }
+        }
+
+        /// <summary>
+        /// The ButtonText property backing store
+        /// </summary>
+        public static readonly BindableProperty ButtonTextProperty = BindableProperty.Create("ButtonText", typeof(string), typeof(Toast), null);
+        /// <summary>
+        /// The ButtonText property
+        /// </summary>
+		public string ButtonText
 		{
-			get { return (string)GetValue(OkTextProperty); }
-			set { SetValue(OkTextProperty, value); }
+			get { return (string)GetValue(ButtonTextProperty); }
+			set { SetValue(ButtonTextProperty, value); }
 		}
+        #endregion
 
-		/// <summary>
-		/// The ok button color property.
-		/// </summary>
-		public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create("OkButtonColor", typeof(Color), typeof(Toast), default(Color));
-		/// <summary>
-		/// Gets or sets the color of the ok button.
-		/// </summary>
-		/// <value>The color of the ok button.</value>
-		public Color OkButtonColor
+        #region Button BackgroundColor Property
+        /// <summary>
+        /// OBSOLETE: Use ButtonBackgroundColorProperty instead
+        /// </summary>
+        [Obsolete("Use ButtonBackgroundColorProperty")]
+        public static readonly BindableProperty OkButtonColorProperty = ButtonBackgroundColorProperty;
+        /// <summary>
+        /// OBSOLETE: Use ButtonBackgroundColor property instead
+        /// </summary>
+        [Obsolete("Use ButtonBackgroundColor property")]
+        public Color OkButtonColor
+        {
+            get { return (Color)GetValue(ButtonBackgroundColorProperty); }
+            set { SetValue(ButtonBackgroundColorProperty, value); }
+        }
+        /// <summary>
+        /// The ButtongBackgroundColor property backing store
+        /// </summary>
+        public static readonly BindableProperty ButtonBackgroundColorProperty = BindableProperty.Create("ButtonColor", typeof(Color), typeof(Toast), default(Color));
+        /// <summary>
+        /// The ButtonBackgroundColor property
+        /// </summary>
+		public Color ButtonBackgroundColor
 		{
-			get { return (Color)GetValue(OkButtonColorProperty); }
-			set { SetValue(OkButtonColorProperty, value); }
+			get { return (Color)GetValue(ButtonBackgroundColorProperty); }
+			set { SetValue(ButtonBackgroundColorProperty, value); }
 		}
+        #endregion
 
-		/// <summary>
-		/// The ok text color property.
-		/// </summary>
-		public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create("OkTextColor", typeof(Color), typeof(Toast), Color.Blue);
-		/// <summary>
-		/// Gets or sets the color of the ok text.
-		/// </summary>
-		/// <value>The color of the ok text.</value>
-		public Color OkTextColor
+        #region ButtonTextColor property
+        /// <summary>
+        /// OBSOLETE: Use ButtonTextColorColorProperty instead
+        /// </summary>
+        [Obsolete("Use ButtonTextColorProperty")]
+        public static readonly BindableProperty OkTextColorColorProperty = ButtonTextColorColorProperty;
+        /// <summary>
+        /// OBSOLETE: Use ButtonTextColor instead
+        /// </summary>
+        [Obsolete("Use ButtonTextColor")]
+        public Color OkTextColor
+        {
+            get { return (Color)GetValue(ButtonTextColorColorProperty); }
+            set { SetValue(ButtonTextColorColorProperty, value); }
+        }
+        /// <summary>
+        /// ButtonTextColor property backing store
+        /// </summary>
+        public static readonly BindableProperty ButtonTextColorColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(Toast), default(Color));
+        /// <summary>
+        /// ButtonTextColor property
+        /// </summary>
+		public Color ButtonTextColor
 		{
-			get { return (Color)GetValue(OkTextColorProperty); }
-			set { SetValue(OkTextColorProperty, value); }
+			get { return (Color)GetValue(ButtonTextColorColorProperty); }
+			set { SetValue(ButtonTextColorColorProperty, value); }
 		}
+        #endregion
 
-		#endregion
+        #endregion
+
+        #endregion
 
 
-		#region Fields 
-		readonly Label _titleLabel = new Label
+        #region Fields 
+        readonly Label _titleLabel = new Label
 		{
-			FontSize = 24,
+			FontSize = 22,
 			FontAttributes = FontAttributes.Bold,
 			TextColor = (Color)TextColorProperty.DefaultValue,
 			//HorizontalOptions = LayoutOptions.Fill,
@@ -135,9 +189,9 @@ namespace Forms9Patch
 		/// </summary>
 		public Toast() 
 		{
-			_okButton.BackgroundColor = OkButtonColor;
-			_okButton.TextColor = OkTextColor;
-			_okButton.HtmlText = OkText;
+			_okButton.BackgroundColor = ButtonBackgroundColor;
+			_okButton.TextColor = ButtonTextColor;
+			_okButton.HtmlText = ButtonText;
 
 			Margin = 30;
 			HasShadow = true;
@@ -158,7 +212,7 @@ namespace Forms9Patch
 					{
 						Content = _textLabel
 					},
-					_okButton
+					//_okButton
 				}
 			};
 		}
@@ -184,19 +238,32 @@ namespace Forms9Patch
 				_titleLabel.HtmlText = Title;
 			else if (propertyName == TextProperty.PropertyName)
 				_textLabel.HtmlText = Text;
-			else if (propertyName == OkTextProperty.PropertyName)
-				_okButton.HtmlText = OkText;
-			else if (propertyName == OkButtonColorProperty.PropertyName)
-				_okButton.BackgroundColor = OkButtonColor;
-			else if (propertyName == OkTextColorProperty.PropertyName)
-				_okButton.TextColor = OkTextColor;
+			else if (propertyName == ButtonTextProperty.PropertyName)
+				_okButton.HtmlText = ButtonText;
+			else if (propertyName == ButtonBackgroundColorProperty.PropertyName)
+				_okButton.BackgroundColor = ButtonBackgroundColor;
+			else if (propertyName == ButtonTextColorColorProperty.PropertyName)
+				_okButton.TextColor = ButtonTextColor;
 			else if (propertyName == TextColorProperty.PropertyName)
 			{
 				_textLabel.TextColor = TextColor;
 				_titleLabel.TextColor = TextColor;
 			}
+
 		}
 
+        void UpdateOKButton()
+        {
+            if (ButtonText != null || (ButtonBackgroundColor != default(Color) && ButtonBackgroundColor != Color.Default) || (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default))
+            {
+                if (!((StackLayout)Content).Children.Contains(_okButton))
+                    ((StackLayout)Content).Children.Add(_okButton);
+                if (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default)
+                    _okButton.TextColor = Color.Blue;
+            }
+            else if (((StackLayout)Content).Children.Contains(_okButton))
+                ((StackLayout)Content).Children.Remove(_okButton);
+        }
 	}
 }
 

@@ -190,7 +190,7 @@ namespace Forms9Patch
 		#region Fields 
 		readonly Label _titleLabel = new Label
 		{
-			FontSize = 24,
+			FontSize = 22,
 			FontAttributes = FontAttributes.Bold,
 			TextColor = Color.Black
 		};

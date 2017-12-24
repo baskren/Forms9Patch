@@ -112,13 +112,13 @@ namespace Forms9Patch
 		#region Fields 
 		readonly Label _titleLabel = new Label
 		{
-			//FontSize = 24,
+			FontSize = 22,
 			FontAttributes = FontAttributes.Bold,
 			TextColor = Color.Black
 		};
 		readonly Label _textLabel = new Label
 		{
-			//FontSize = 16,
+			FontSize = 16,
 			TextColor = Color.Black
 			//Lines = 0,
 			//VerticalOptions = LayoutOptions.Fill,
