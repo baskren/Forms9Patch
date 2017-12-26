@@ -136,6 +136,9 @@
     <Compile Include="..\Forms9Patch.iOS\UIViewContentMode.cs">
       <Link>UIViewContentMode.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\SharedPlatformAssemblyInfo.cs">
+      <Link>SharedPlatformAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch\Models\LicenseChecker.cs">
       <Link>Models\LicenseChecker.cs</Link>
     </Compile>

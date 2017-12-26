@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SharedPlatformAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Fonts\STIXGeneral.otf" />
     <None Remove="Resources\unlicensedcopy.png" />
   </ItemGroup>

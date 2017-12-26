@@ -47,7 +47,9 @@ namespace Forms9Patch
 #endif
     {
 
+#pragma warning disable CS0649
         bool _debugMessages;
+#pragma warning restore CS0649
 
         #region Constructor
 #if __DROID__  // needed for NativeGestureHandler?

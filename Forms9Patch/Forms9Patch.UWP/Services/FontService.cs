@@ -109,7 +109,10 @@ namespace Forms9Patch.UWP
                 fontName = TTFAnalyzer.FontFamily(cachedFile);
 #endif
             }
-            var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
+            var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName.Replace('\\','/') + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
+            //var uwpFontFamily = "ms-appdata:///local/EmbeddedResourceCache/02fe60e0da81514d145d946ab9ad9b97#Pacifico";
+            //foreach (var c in uwpFontFamily)
+            //    System.Diagnostics.Debug.WriteLine("c=["+c+"]["+(int)c+"]");
             EmbeddedFontSources.Add(f9pFontFamily, uwpFontFamily);
             return uwpFontFamily;
         }

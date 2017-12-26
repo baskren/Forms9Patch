@@ -29,6 +29,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -88,9 +89,11 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
+
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -106,6 +109,7 @@
     </AppxManifest>
     <None Include="Forms9PatchDemo.NetStandard.UWP_TemporaryKey.pfx" />
   </ItemGroup>
+
   <ItemGroup>
     <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-100.png">
       <Link>Assets\LargeTile.scale-100.png</Link>
@@ -256,6 +260,7 @@
     </Content>
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
+
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -266,14 +271,16 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.4</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.4.0.280</Version>
     </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard.UWP\Forms9Patch.NetStandard.UWP.csproj">
       <Project>{c35275fd-92ee-4b8a-8c49-d98ec73b3c45}</Project>
@@ -304,15 +311,10 @@
       <Name>Forms9PatchDemo.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>
+
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
+  
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

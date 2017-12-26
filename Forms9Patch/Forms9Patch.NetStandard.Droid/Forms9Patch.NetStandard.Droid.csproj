@@ -158,6 +158,9 @@
     <Compile Include="..\Forms9Patch.Droid\Services\WebViewExtensionsService.cs">
       <Link>Services\WebViewExtensionsService.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\SharedPlatformAssemblyInfo.cs">
+      <Link>SharedPlatformAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch\Models\LicenseChecker.cs">
       <Link>Models\LicenseChecker.cs</Link>
     </Compile>

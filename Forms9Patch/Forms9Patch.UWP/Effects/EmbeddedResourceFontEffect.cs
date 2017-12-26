@@ -18,7 +18,26 @@ namespace Forms9Patch.UWP
 	/// </summary>
 	public class EmbeddedResourceFontEffect : PlatformEffect
 	{
-		static int _instances;
+        #region Debug support
+        bool DebugCondition
+        {
+            get
+            {
+                //string labelTextStart = "Żyłę;^`g ";
+                //string labelTextStart = "X";
+                //return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                return true;
+            }
+        }
+
+        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        {
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + callerName + ": " + message);
+        }
+        #endregion
+
+        static int _instances;
         int _instance;
         Forms9Patch.EmbeddedResourceFontEffect _embeddedResourceFontEffect;
 
@@ -77,16 +96,36 @@ namespace Forms9Patch.UWP
                 base.OnElementPropertyChanged(args);
         }
 
-        void UpdateFont()
+        async void UpdateFont()
 		{
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {
-                var fontFamily = _elementFontFamilyProperty.GetValue(Element) as string;
+                var fontFamilyName = _elementFontFamilyProperty.GetValue(Element) as string;
                 var assembly = _embeddedResourceFontEffect?.Assembly;
                 if (assembly != null && !Settings.AssembliesToInclude.Contains(assembly))
                     Settings.AssembliesToInclude.Add(assembly);
-                var uwpFontFamily = FontService.ReconcileFontFamily(fontFamily);
-                _controlFontFamilyProperty.SetValue(Control, new FontFamily(uwpFontFamily));
+                var uwpFontFamilyName = FontService.ReconcileFontFamily(fontFamilyName);
+                DebugMessage("uwpFontFamily=[" + uwpFontFamilyName + "] Length=[" + uwpFontFamilyName.Length + "]");
+                var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new System.Uri(uwpFontFamilyName + "x"));
+                
+                //var x = Windows.Storage.UserDataPaths.GetForUser(Windows.System.User.)
+                //var appDataPaths = Windows.Storage.AppDataPaths.GetDefault();
+                //var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+               
+                var fontFamily = new FontFamily(uwpFontFamilyName);
+                System.Diagnostics.Debug.WriteLine("uwpFontFamilyName = " + uwpFontFamilyName);
+                if (Control is Windows.UI.Xaml.Controls.TextBlock textBlock)
+                {
+                    textBlock.FontFamily = fontFamily;
+                    //textBlock.FontFamily = fontFamily;
+                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                    {
+                        System.Diagnostics.Debug.WriteLine("textBlock.FontFamily=[" + textBlock.FontFamily.Source + "]");
+                        return false;
+                    });
+                }
+                else
+                    _controlFontFamilyProperty.SetValue(Control, fontFamily);
             }
 		}
 	}

@@ -1,2 +1,0 @@
-MainPackage=C:\Users\ben\Development\Xamarin\Forms9Patch\Forms9PatchDemo\Forms9PatchDemo.UWP\bin\x64\Release\Forms9PatchDemo.UWP_0.10.0.0_x64.appx
-SymbolPackage=C:\Users\ben\Development\Xamarin\Forms9Patch\Forms9PatchDemo\Forms9PatchDemo.UWP\AppPackages\Forms9PatchDemo.UWP_0.10.0.0_Test\Forms9PatchDemo.UWP_0.10.0.0_x64.appxsym
