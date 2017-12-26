@@ -10,7 +10,7 @@
     <RootNamespace>Forms9PatchDemo.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Forms9PatchDemo.iOS</AssemblyName>
-    <ReleaseVersion>0.9.13.3</ReleaseVersion>
+    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
