@@ -47,17 +47,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.UWP", "Forms9Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.UWP", "FormsGestures\FormsGestures.UWP\FormsGestures.UWP.csproj", "{1F4EE6D4-CA44-4A60-9529-DA6AAF91196D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.DocFX", "Forms9Patch\Forms9Patch.DocFX\Forms9Patch.DocFX.csproj", "{41F35813-7B98-4652-96AD-075CEA93C424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.DocFX", "Forms9Patch\Forms9Patch.DocFX\Forms9Patch.DocFX.csproj", "{41F35813-7B98-4652-96AD-075CEA93C424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard", "FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj", "{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.NetStandard", "FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj", "{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AA7CA62C-F379-46E0-82B4-F33855F4CB8A} = {AA7CA62C-F379-46E0-82B4-F33855F4CB8A}
 		{FF06FA6A-A6F4-47E4-9E3B-A5681040C648} = {FF06FA6A-A6F4-47E4-9E3B-A5681040C648}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCL.Utils.NetStandard", "FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj", "{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCL.Utils.NetStandard", "FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj", "{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericalMethods.NetStandard", "FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj", "{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericalMethods.NetStandard", "FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj", "{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.UWP", "FormsGestures\FormsGestures.NetStandard.UWP\FormsGestures.NetStandard.UWP.csproj", "{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}"
 EndProject
@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.i
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.Droid", "FormsGestures\FormsGestures.NetStandard.Droid\FormsGestures.NetStandard.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard", "Forms9Patch\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj", "{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.NetStandard", "Forms9Patch\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj", "{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.Droid", "Forms9Patch\Forms9Patch.NetStandard.Droid\Forms9Patch.NetStandard.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
 EndProject
@@ -79,7 +79,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.UWP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo.NetStd", "Forms9PatchDemo.NetStd", "{1B25CD7E-9828-411D-BC3D-69F55CD742BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{5F6799DF-C4E4-4050-9902-92006CA8C84C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{5F6799DF-C4E4-4050-9902-92006CA8C84C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.UWP", "Forms9PatchDemo\Forms9PatchDemo.NetStandard.UWP\Forms9PatchDemo.NetStandard.UWP.csproj", "{B98207E7-0765-4E37-ACA0-BCCCC80317CB}"
 EndProject
@@ -636,6 +636,8 @@ Global
 		{E0310C06-794F-4B67-90B9-E1A5C4E84E87}.Turkey|x64.ActiveCfg = Release|Any CPU
 		{E0310C06-794F-4B67-90B9-E1A5C4E84E87}.Turkey|x86.ActiveCfg = Release|Any CPU
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|Any CPU.Build.0 = Debug|x86
+		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|ARM.ActiveCfg = Debug|ARM
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|ARM.Build.0 = Debug|ARM
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -651,6 +653,8 @@ Global
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|x86.Build.0 = Debug|x86
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Debug|x86.Deploy.0 = Debug|x86
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|Any CPU.ActiveCfg = Release|x86
+		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|Any CPU.Build.0 = Release|x86
+		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|Any CPU.Deploy.0 = Release|x86
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|ARM.ActiveCfg = Release|ARM
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|ARM.Build.0 = Release|ARM
 		{45454AAB-F431-422F-BECB-D0B959D1899A}.Release|ARM.Deploy.0 = Release|ARM
@@ -1275,6 +1279,8 @@ Global
 		{5F6799DF-C4E4-4050-9902-92006CA8C84C}.Turkey|x86.ActiveCfg = Debug|Any CPU
 		{5F6799DF-C4E4-4050-9902-92006CA8C84C}.Turkey|x86.Build.0 = Debug|Any CPU
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|Any CPU.Build.0 = Debug|x86
+		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|ARM.ActiveCfg = Debug|ARM
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|ARM.Build.0 = Debug|ARM
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -1290,6 +1296,8 @@ Global
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|x86.Build.0 = Debug|x86
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Debug|x86.Deploy.0 = Debug|x86
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|Any CPU.ActiveCfg = Release|x86
+		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|Any CPU.Build.0 = Release|x86
+		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|Any CPU.Deploy.0 = Release|x86
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|ARM.ActiveCfg = Release|ARM
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|ARM.Build.0 = Release|ARM
 		{B98207E7-0765-4E37-ACA0-BCCCC80317CB}.Release|ARM.Deploy.0 = Release|ARM

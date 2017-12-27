@@ -43,6 +43,7 @@ namespace Forms9Patch.UWP
 
         PropertyInfo _elementFontFamilyProperty = null;
         PropertyInfo _controlFontFamilyProperty = null;
+        PropertyInfo _controlTextProperty = null;
 
 		/// <summary>
 		/// Called when the effect is attached.
@@ -51,6 +52,7 @@ namespace Forms9Patch.UWP
 		{
             _elementFontFamilyProperty = Element.GetType().GetProperty("FontFamily");
             _controlFontFamilyProperty = Control.GetType().GetProperty("FontFamily");
+            _controlTextProperty = Control.GetType().GetProperty("Text");
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {
                 _instance = _instances++;
@@ -96,7 +98,7 @@ namespace Forms9Patch.UWP
                 base.OnElementPropertyChanged(args);
         }
 
-        async void UpdateFont()
+        void UpdateFont()
 		{
             if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
             {
@@ -106,29 +108,14 @@ namespace Forms9Patch.UWP
                     Settings.AssembliesToInclude.Add(assembly);
                 var uwpFontFamilyName = FontService.ReconcileFontFamily(fontFamilyName);
                 DebugMessage("uwpFontFamily=[" + uwpFontFamilyName + "] Length=[" + uwpFontFamilyName.Length + "]");
-                var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new System.Uri(uwpFontFamilyName + "x"));
-                
-                //var x = Windows.Storage.UserDataPaths.GetForUser(Windows.System.User.)
-                //var appDataPaths = Windows.Storage.AppDataPaths.GetDefault();
-                //var localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
-               
+
                 var fontFamily = new FontFamily(uwpFontFamilyName);
-                System.Diagnostics.Debug.WriteLine("uwpFontFamilyName = " + uwpFontFamilyName);
-                if (Control is Windows.UI.Xaml.Controls.TextBlock textBlock)
-                {
-                    textBlock.FontFamily = fontFamily;
-                    //textBlock.FontFamily = fontFamily;
-                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                    {
-                        System.Diagnostics.Debug.WriteLine("textBlock.FontFamily=[" + textBlock.FontFamily.Source + "]");
-                        return false;
-                    });
-                }
-                else
-                    _controlFontFamilyProperty.SetValue(Control, fontFamily);
+                _controlFontFamilyProperty.SetValue(Control, fontFamily);
+
             }
-		}
-	}
+
+        }
+    }
 
 }
 
