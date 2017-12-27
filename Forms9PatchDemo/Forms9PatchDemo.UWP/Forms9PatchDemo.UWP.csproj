@@ -299,29 +299,29 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard.UWP\Forms9Patch.NetStandard.UWP.csproj">
-      <Project>{c35275fd-92ee-4b8a-8c49-d98ec73b3c45}</Project>
-      <Name>Forms9Patch.NetStandard.UWP</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.UWP\Forms9Patch.UWP.csproj">
+      <Project>{321f4dda-f8aa-4ce5-9a3c-9497eb3ea0bc}</Project>
+      <Name>Forms9Patch.UWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
-      <Project>{dfb4eff6-befa-42fc-a9d6-c483df3d5d12}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{a45dea17-78a3-464a-9e00-0342d0503b00}</Project>
+      <Name>Forms9Patch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.UWP\FormsGestures.NetStandard.UWP.csproj">
-      <Project>{2eaa5d09-b436-40f8-a1f3-7e9acde2e8c0}</Project>
-      <Name>FormsGestures.NetStandard.UWP</Name>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.UWP\FormsGestures.UWP.csproj">
+      <Project>{1f4ee6d4-ca44-4a60-9529-da6aaf91196d}</Project>
+      <Name>FormsGestures.UWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
-      <Project>{0b3a1716-e6f3-44a7-8acd-e79055a67caf}</Project>
-      <Name>FormsGestures.NetStandard</Name>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
+      <Name>FormsGestures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
-      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
-      <Name>NumericalMethods.NetStandard</Name>
+    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
+      <Project>{a3e44406-a6a6-47f6-8fee-841e9e8b52dc}</Project>
+      <Name>NumericalMethods</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
-      <Project>{aa7ca62c-f379-46e0-82b4-f33855f4cb8a}</Project>
-      <Name>PCL.Utils.NetStandard</Name>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>PCL.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
       <Project>{5f026db4-caae-4de0-8105-ff133a3655b7}</Project>
