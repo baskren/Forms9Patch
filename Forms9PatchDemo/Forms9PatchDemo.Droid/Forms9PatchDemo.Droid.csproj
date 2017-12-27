@@ -243,33 +243,33 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
-      <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
-      <Name>Forms9Patch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.Droid\Forms9Patch.Droid.csproj">
-      <Project>{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}</Project>
-      <Name>Forms9Patch.Droid</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
       <Project>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</Project>
       <Name>Forms9PatchDemo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
-      <Name>FormsGestures</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
+      <Project>{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}</Project>
+      <Name>Forms9Patch.NetStandard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.Droid\FormsGestures.Droid.csproj">
-      <Project>{EB3B97E9-BFF9-4D72-BDB9-29E74E21D78F}</Project>
-      <Name>FormsGestures.Droid</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard.Droid\Forms9Patch.NetStandard.Droid.csproj">
+      <Project>{D394BC61-9B90-4B1C-9771-35F93865AC5C}</Project>
+      <Name>Forms9Patch.NetStandard.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
-      <Project>{A3E44406-A6A6-47F6-8FEE-841E9E8B52DC}</Project>
-      <Name>NumericalMethods</Name>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
+      <Project>{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}</Project>
+      <Name>FormsGestures.NetStandard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
-      <Name>PCL.Utils</Name>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.Droid\FormsGestures.NetStandard.Droid.csproj">
+      <Project>{00E0CDDC-B671-4876-8E78-927C50D2596A}</Project>
+      <Name>FormsGestures.NetStandard.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
+      <Project>{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}</Project>
+      <Name>NumericalMethods.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
+      <Project>{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}</Project>
+      <Name>PCL.Utils.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
