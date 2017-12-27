@@ -19,6 +19,7 @@
 		<TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
 		<NuGetPackageImportStamp>
 		</NuGetPackageImportStamp>
+		<ReleaseVersion></ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
@@ -30,10 +31,10 @@
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>pdbonly</DebugType>
+		<DebugType></DebugType>
 		<Optimize>true</Optimize>
 		<OutputPath>bin\Release\</OutputPath>
-		<DefineConstants>TRACE</DefineConstants>
+		<DefineConstants>TRACE;__DROID__;NETSTANDARD</DefineConstants>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>

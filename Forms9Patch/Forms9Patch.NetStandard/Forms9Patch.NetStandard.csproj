@@ -4,12 +4,17 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Forms9Patch</AssemblyName>
     <RootNamespace>Forms9Patch</RootNamespace>
+    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD1_3</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3;NETSTANDARD</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;NETSTANDARD</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="SharedPlatformAssemblyInfo.cs" />
   </ItemGroup>

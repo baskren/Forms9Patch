@@ -14,6 +14,7 @@
 		<AssemblyName>Forms9Patch.iOS</AssemblyName>
 		<NuGetPackageImportStamp>
 		</NuGetPackageImportStamp>
+		<ReleaseVersion></ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
@@ -26,9 +27,10 @@
 		<ConsolePause>false</ConsolePause>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>full</DebugType>
+		<DebugType></DebugType>
 		<Optimize>true</Optimize>
 		<OutputPath>bin\Release</OutputPath>
+		<DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DONT_USE_MEASURE;NETSTANDARD</DefineConstants>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
 		<ConsolePause>false</ConsolePause>
