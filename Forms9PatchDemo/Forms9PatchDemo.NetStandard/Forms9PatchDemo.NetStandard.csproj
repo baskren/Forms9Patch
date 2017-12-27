@@ -11,219 +11,222 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Extensions\ImageResourceExtension.cs" Link="Extensions\ImageResourceExtension.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Forms9PatchDemo.cs" Link="Forms9PatchDemo.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\HomePage.cs" Link="HomePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\BubblePopupTestPage.cs" Link="Pages.Code\BubblePopupTestPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\ButtonAndSegmentAlignments.cs" Link="Pages.Code\ButtonAndSegmentAlignments.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\ButtonCodePage.cs" Link="Pages.Code\ButtonCodePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\CustomFontEffectPage.cs" Link="Pages.Code\CustomFontEffectPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\ExternalEmbeddedResourceImage.cs" Link="Pages.Code\ExternalEmbeddedResourceImage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\HtmlButtonsPage.cs" Link="Pages.Code\HtmlButtonsPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\HtmlLabelPage.cs" Link="Pages.Code\HtmlLabelPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\HtmlLink.cs" Link="Pages.Code\HtmlLink.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\ImageCodePage.cs" Link="Pages.Code\ImageCodePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\LabelAutoFitPage.cs" Link="Pages.Code\LabelAutoFitPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\LayoutCodePage.cs" Link="Pages.Code\LayoutCodePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\ModalPopupTestPage.cs" Link="Pages.Code\ModalPopupTestPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\PanGesturePage.cs" Link="Pages.Code\PanGesturePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\PopupsPage.cs" Link="Pages.Code\PopupsPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\SingleButton.cs" Link="Pages.Code\SingleButton.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\SingleSegmentedControl.cs" Link="Pages.Code\SingleSegmentedControl.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Code\UnconstrainedLabelAutoFitPage.cs" Link="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlCapsInsetPage.xaml.cs" Link="Pages.Xaml\XamlCapsInsetPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Extensions\ImageResourceExtension.cs" Link="Extensions\ImageResourceExtension.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Forms9PatchDemo.cs" Link="Forms9PatchDemo.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\HomePage.cs" Link="HomePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\BubblePopupTestPage.cs" Link="Pages.Code\BubblePopupTestPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ButtonAndSegmentAlignments.cs" Link="Pages.Code\ButtonAndSegmentAlignments.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ButtonCodePage.cs" Link="Pages.Code\ButtonCodePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\CustomFontEffectPage.cs" Link="Pages.Code\CustomFontEffectPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ExternalEmbeddedResourceImage.cs" Link="Pages.Code\ExternalEmbeddedResourceImage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\HtmlButtonsPage.cs" Link="Pages.Code\HtmlButtonsPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\HtmlLabelPage.cs" Link="Pages.Code\HtmlLabelPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\HtmlLink.cs" Link="Pages.Code\HtmlLink.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ImageCodePage.cs" Link="Pages.Code\ImageCodePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\LabelAutoFitPage.cs" Link="Pages.Code\LabelAutoFitPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\LayoutCodePage.cs" Link="Pages.Code\LayoutCodePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ModalPopupTestPage.cs" Link="Pages.Code\ModalPopupTestPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\PanGesturePage.cs" Link="Pages.Code\PanGesturePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\PopupsPage.cs" Link="Pages.Code\PopupsPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\SingleButton.cs" Link="Pages.Code\SingleButton.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\SingleSegmentedControl.cs" Link="Pages.Code\SingleSegmentedControl.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\UnconstrainedLabelAutoFitPage.cs" Link="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCapsInsetPage.xaml.cs" Link="Pages.Xaml\XamlCapsInsetPage.xaml.cs">
       <DependentUpon>XamlCapsInsetPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlContentViewDemoPage.xaml.cs" Link="Pages.Xaml\XamlContentViewDemoPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlContentViewDemoPage.xaml.cs" Link="Pages.Xaml\XamlContentViewDemoPage.xaml.cs">
       <DependentUpon>XamlContentViewDemoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlFrameDemoPage.xaml.cs" Link="Pages.Xaml\XamlFrameDemoPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlFrameDemoPage.xaml.cs" Link="Pages.Xaml\XamlFrameDemoPage.xaml.cs">
       <DependentUpon>XamlFrameDemoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs" Link="Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs" Link="Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs">
       <DependentUpon>XamlHtmlLabelsAndButtonsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlImagesPage.xaml.cs" Link="Pages.Xaml\XamlImagesPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlImagesPage.xaml.cs" Link="Pages.Xaml\XamlImagesPage.xaml.cs">
       <DependentUpon>XamlImagesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlNinePatchButtonPage.xaml.cs" Link="Pages.Xaml\XamlNinePatchButtonPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlNinePatchButtonPage.xaml.cs" Link="Pages.Xaml\XamlNinePatchButtonPage.xaml.cs">
       <DependentUpon>XamlNinePatchButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlSegmentedControlPage.xaml.cs" Link="Pages.Xaml\XamlSegmentedControlPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlSegmentedControlPage.xaml.cs" Link="Pages.Xaml\XamlSegmentedControlPage.xaml.cs">
       <DependentUpon>XamlSegmentedControlPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlSingleStateButtonPage.xaml.cs" Link="Pages.Xaml\XamlSingleStateButtonPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlSingleStateButtonPage.xaml.cs" Link="Pages.Xaml\XamlSingleStateButtonPage.xaml.cs">
       <DependentUpon>XamlSingleStateButtonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlStateButtonsPage.xaml.cs" Link="Pages.Xaml\XamlStateButtonsPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlStateButtonsPage.xaml.cs" Link="Pages.Xaml\XamlStateButtonsPage.xaml.cs">
       <DependentUpon>XamlStateButtonsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\br.cs" Link="UserPages\br.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\Burkhart.xaml.cs" Link="UserPages\Burkhart.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\br.cs" Link="UserPages\br.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\Burkhart.xaml.cs" Link="UserPages\Burkhart.xaml.cs">
       <DependentUpon>Burkhart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\ButtonTapped.cs" Link="UserPages\ButtonTapped.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\ChatListPage.cs" Link="UserPages\ChatListPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\CustomFontEffectPage.cs" Link="UserPages\CustomFontEffectPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\DataForBinding.cs" Link="UserPages\DataForBinding.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\HeapDemoPage.cs" Link="UserPages\HeapDemoPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\ModalPopupOnMasterDetailPage.cs" Link="UserPages\ModalPopupOnMasterDetailPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\ModalPopupWithNavigationPages.cs" Link="UserPages\ModalPopupWithNavigationPages.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\NestedBubblePopupPage.cs" Link="UserPages\NestedBubblePopupPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentBindingPage.xaml.cs" Link="UserPages\SegmentBindingPage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ButtonTapped.cs" Link="UserPages\ButtonTapped.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ChatListPage.cs" Link="UserPages\ChatListPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\CustomFontEffectPage.cs" Link="UserPages\CustomFontEffectPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\DataForBinding.cs" Link="UserPages\DataForBinding.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\HeapDemoPage.cs" Link="UserPages\HeapDemoPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ModalPopupOnMasterDetailPage.cs" Link="UserPages\ModalPopupOnMasterDetailPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ModalPopupWithNavigationPages.cs" Link="UserPages\ModalPopupWithNavigationPages.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\NestedBubblePopupPage.cs" Link="UserPages\NestedBubblePopupPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentBindingPage.xaml.cs" Link="UserPages\SegmentBindingPage.xaml.cs">
       <DependentUpon>SegmentBindingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentNavPage1.cs" Link="UserPages\SegmentNavPage1.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentNavPage2.cs" Link="UserPages\SegmentNavPage2.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentNavPage3.cs" Link="UserPages\SegmentNavPage3.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentSelectedBackgroundPage.cs" Link="UserPages\SegmentSelectedBackgroundPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentXAML.xaml.cs" Link="UserPages\SegmentXAML.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage1.cs" Link="UserPages\SegmentNavPage1.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage2.cs" Link="UserPages\SegmentNavPage2.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage3.cs" Link="UserPages\SegmentNavPage3.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentSelectedBackgroundPage.cs" Link="UserPages\SegmentSelectedBackgroundPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentXAML.xaml.cs" Link="UserPages\SegmentXAML.xaml.cs">
       <DependentUpon>SegmentXAML.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\StretchIssuePage.xaml.cs" Link="UserPages\StretchIssuePage.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\StretchIssuePage.xaml.cs" Link="UserPages\StretchIssuePage.xaml.cs">
       <DependentUpon>StretchIssuePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\UserHomePage.cs" Link="UserPages\UserHomePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\UserHomePage.cs" Link="UserPages\UserHomePage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
       <DependentUpon>XamlPageWithListViewWithF9PLabelInCells.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\ZenmekPage.cs" Link="UserPages\ZenmekPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ZenmekPage.cs" Link="UserPages\ZenmekPage.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlCapsInsetPage.xaml" Link="Pages.Xaml\XamlCapsInsetPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCapsInsetPage.xaml" Link="Pages.Xaml\XamlCapsInsetPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlContentViewDemoPage.xaml" Link="Pages.Xaml\XamlContentViewDemoPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlContentViewDemoPage.xaml" Link="Pages.Xaml\XamlContentViewDemoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlFrameDemoPage.xaml" Link="Pages.Xaml\XamlFrameDemoPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlFrameDemoPage.xaml" Link="Pages.Xaml\XamlFrameDemoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml" Link="Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml" Link="Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlImagesPage.xaml" Link="Pages.Xaml\XamlImagesPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlImagesPage.xaml" Link="Pages.Xaml\XamlImagesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlNinePatchButtonPage.xaml" Link="Pages.Xaml\XamlNinePatchButtonPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlNinePatchButtonPage.xaml" Link="Pages.Xaml\XamlNinePatchButtonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlSegmentedControlPage.xaml" Link="Pages.Xaml\XamlSegmentedControlPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlSegmentedControlPage.xaml" Link="Pages.Xaml\XamlSegmentedControlPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlSingleStateButtonPage.xaml" Link="Pages.Xaml\XamlSingleStateButtonPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlSingleStateButtonPage.xaml" Link="Pages.Xaml\XamlSingleStateButtonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Pages.Xaml\XamlStateButtonsPage.xaml" Link="Pages.Xaml\XamlStateButtonsPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlStateButtonsPage.xaml" Link="Pages.Xaml\XamlStateButtonsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\100x100.png" Link="Resources\100x100.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\150x150.png" Link="Resources\150x150.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\200x200.png" Link="Resources\200x200.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\236-baby.png" Link="Resources\236-baby.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\236-lincoln.png" Link="Resources\236-lincoln.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\50x50.png" Link="Resources\50x50.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\adsBttn29.png" Link="Resources\adsBttn29.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR.png" Link="Resources\ArrowR.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR@1½x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR@¾x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\balloons.jpg" Link="Resources\balloons.jpg" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\blackrocks.png" Link="Resources\blackrocks.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\bluebutton.9.png" Link="Resources\bluebutton.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\bluebuttontrimmedtransp.9.png" Link="Resources\bluebuttontrimmedtransp.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\btnRedH.9.png" Link="Resources\btnRedH.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\btnRedH@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\btnRedH@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\bubble.9.png" Link="Resources\bubble.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleExternal.9.png" Link="Resources\BubbleExternal.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleExternal@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleExternal@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleInternal.9.png" Link="Resources\BubbleInternal.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleInternal@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleInternal@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button.9.png" Link="Resources\button.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button@1½x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button@4x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button@¾x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button_01_default.png" Link="Resources\button_01_default.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button_01_pressing.png" Link="Resources\button_01_pressing.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\cat.jpg" Link="Resources\cat.jpg" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\delay.png" Link="Resources\delay.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\delay@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\delay@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Delete.png" Link="Resources\Delete.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Delete@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Delete@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Exit.png" Link="Resources\Exit.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Exit@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Exit@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Fonts\CPMono_v07_Bold.otf" Link="Resources\Fonts\CPMono_v07_Bold.otf" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Fonts\luximb.ttf" Link="Resources\Fonts\luximb.ttf" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Fonts\MaterialIcons-Regular.ttf" Link="Resources\Fonts\MaterialIcons-Regular.ttf" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Fonts\Pacifico.ttf" Link="Resources\Fonts\Pacifico.ttf" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ghosts.png" Link="Resources\ghosts.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\grey_up.png" Link="Resources\grey_up.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active@1x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image.9.png" Link="Resources\image.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image.png" Link="Resources\image.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@1½x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@1½x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@4x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@4x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@¾x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image@¾x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info.png" Link="Resources\Info.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info@1½x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info@¾x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ltblueUp.png" Link="Resources\ltblueUp.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ltblueUp@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\PopupDM.png" Link="Resources\PopupDM.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton.9.png" Link="Resources\redButton.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton@1½x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton@2x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton@3x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton@4x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton@¾x.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redGridBox.png" Link="Resources\redGridBox.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redGridBox.svg" Link="Resources\redGridBox.svg" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redGridBox9.9.png" Link="Resources\redGridBox9.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redribbon.png" Link="Resources\redribbon.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redribbon@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redribbon@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\red_up.9.png" Link="Resources\red_up.9.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tick.png" Link="Resources\tick.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tick@2x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tick@3x.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tree.png" Link="Resources\tree.png" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\water.gif" Link="Resources\water.gif" />
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\Burkhart.xaml" Link="UserPages\Burkhart.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCDATA.xaml" Link="Pages.Xaml\XamlCDATA.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentBindingPage.xaml" Link="UserPages\SegmentBindingPage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\100x100.png" Link="Resources\100x100.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\150x150.png" Link="Resources\150x150.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\200x200.png" Link="Resources\200x200.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\236-baby.png" Link="Resources\236-baby.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\236-lincoln.png" Link="Resources\236-lincoln.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\50x50.png" Link="Resources\50x50.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\adsBttn29.png" Link="Resources\adsBttn29.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR.png" Link="Resources\ArrowR.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR@1½x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR@¾x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\balloons.jpg" Link="Resources\balloons.jpg" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\blackrocks.png" Link="Resources\blackrocks.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\bluebutton.9.png" Link="Resources\bluebutton.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\bluebuttontrimmedtransp.9.png" Link="Resources\bluebuttontrimmedtransp.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\btnRedH.9.png" Link="Resources\btnRedH.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\btnRedH@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\btnRedH@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\bubble.9.png" Link="Resources\bubble.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleExternal.9.png" Link="Resources\BubbleExternal.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleExternal@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleExternal@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleInternal.9.png" Link="Resources\BubbleInternal.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleInternal@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleInternal@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button.9.png" Link="Resources\button.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button@1½x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button@4x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button@¾x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button_01_default.png" Link="Resources\button_01_default.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button_01_pressing.png" Link="Resources\button_01_pressing.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\cat.jpg" Link="Resources\cat.jpg" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\delay.png" Link="Resources\delay.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\delay@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\delay@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Delete.png" Link="Resources\Delete.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Delete@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Delete@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Exit.png" Link="Resources\Exit.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Exit@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Exit@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Fonts\CPMono_v07_Bold.otf" Link="Resources\Fonts\CPMono_v07_Bold.otf" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Fonts\luximb.ttf" Link="Resources\Fonts\luximb.ttf" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Fonts\MaterialIcons-Regular.ttf" Link="Resources\Fonts\MaterialIcons-Regular.ttf" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Fonts\Pacifico.ttf" Link="Resources\Fonts\Pacifico.ttf" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ghosts.png" Link="Resources\ghosts.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\grey_up.png" Link="Resources\grey_up.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active@1x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image.9.png" Link="Resources\image.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image.png" Link="Resources\image.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@1½x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@1½x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@4x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@4x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@¾x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image@¾x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info.png" Link="Resources\Info.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info@1½x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info@¾x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ltblueUp.png" Link="Resources\ltblueUp.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ltblueUp@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\PopupDM.png" Link="Resources\PopupDM.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton.9.png" Link="Resources\redButton.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton@1½x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton@2x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton@3x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton@4x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton@¾x.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redGridBox.png" Link="Resources\redGridBox.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redGridBox.svg" Link="Resources\redGridBox.svg" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redGridBox9.9.png" Link="Resources\redGridBox9.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon.png" Link="Resources\redribbon.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\red_up.9.png" Link="Resources\red_up.9.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick.png" Link="Resources\tick.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick@2x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick@3x.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tree.png" Link="Resources\tree.png" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\water.gif" Link="Resources\water.gif" />
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\Burkhart.xaml" Link="UserPages\Burkhart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\SegmentXAML.xaml" Link="UserPages\SegmentXAML.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentBindingPage.xaml" Link="UserPages\SegmentBindingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\StretchIssuePage.xaml" Link="UserPages\StretchIssuePage.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentXAML.xaml" Link="UserPages\SegmentXAML.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml">
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\StretchIssuePage.xaml" Link="UserPages\StretchIssuePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -248,58 +251,55 @@
 
 
   <ItemGroup>
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR%401½x.png" Link="Resources\ArrowR%401½x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR%402x.png" Link="Resources\ArrowR%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR%403x.png" Link="Resources\ArrowR%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ArrowR%40¾x.png" Link="Resources\ArrowR%40¾x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\btnRedH%402x.9.png" Link="Resources\btnRedH%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\btnRedH%403x.9.png" Link="Resources\btnRedH%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleExternal%402x.9.png" Link="Resources\BubbleExternal%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleExternal%403x.9.png" Link="Resources\BubbleExternal%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleInternal%402x.9.png" Link="Resources\BubbleInternal%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\BubbleInternal%403x.9.png" Link="Resources\BubbleInternal%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button%401½x.9.png" Link="Resources\button%401½x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button%402x.9.png" Link="Resources\button%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button%403x.9.png" Link="Resources\button%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button%404x.9.png" Link="Resources\button%404x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\button%40¾x.9.png" Link="Resources\button%40¾x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\delay%402x.png" Link="Resources\delay%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\delay%403x.png" Link="Resources\delay%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Delete%402x.png" Link="Resources\Delete%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Delete%403x.png" Link="Resources\Delete%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Exit%402x.png" Link="Resources\Exit%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Exit%403x.png" Link="Resources\Exit%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active%401x.png" Link="Resources\icon_home_active%401x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active%402x.png" Link="Resources\icon_home_active%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\icon_home_active%403x.png" Link="Resources\icon_home_active%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%401½x.9.png" Link="Resources\image%401½x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%401½x.png" Link="Resources\image%401½x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%402x.9.png" Link="Resources\image%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%402x.png" Link="Resources\image%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%403x.9.png" Link="Resources\image%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%403x.png" Link="Resources\image%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%404x.9.png" Link="Resources\image%404x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%404x.png" Link="Resources\image%404x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%40¾x.9.png" Link="Resources\image%40¾x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\image%40¾x.png" Link="Resources\image%40¾x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info%401½x.png" Link="Resources\Info%401½x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info%402x.png" Link="Resources\Info%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info%403x.png" Link="Resources\Info%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\Info%40¾x.png" Link="Resources\Info%40¾x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\ltblueUp%402x.png" Link="Resources\ltblueUp%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton%401½x.9.png" Link="Resources\redButton%401½x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton%402x.9.png" Link="Resources\redButton%402x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton%403x.9.png" Link="Resources\redButton%403x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton%404x.9.png" Link="Resources\redButton%404x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redButton%40¾x.9.png" Link="Resources\redButton%40¾x.9.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redribbon%402x.png" Link="Resources\redribbon%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\redribbon%403x.png" Link="Resources\redribbon%403x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tick%402x.png" Link="Resources\tick%402x.png" />
-    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo\Resources\tick%403x.png" Link="Resources\tick%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR%401½x.png" Link="Resources\ArrowR%401½x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR%402x.png" Link="Resources\ArrowR%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR%403x.png" Link="Resources\ArrowR%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ArrowR%40¾x.png" Link="Resources\ArrowR%40¾x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\btnRedH%402x.9.png" Link="Resources\btnRedH%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\btnRedH%403x.9.png" Link="Resources\btnRedH%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleExternal%402x.9.png" Link="Resources\BubbleExternal%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleExternal%403x.9.png" Link="Resources\BubbleExternal%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleInternal%402x.9.png" Link="Resources\BubbleInternal%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\BubbleInternal%403x.9.png" Link="Resources\BubbleInternal%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button%401½x.9.png" Link="Resources\button%401½x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button%402x.9.png" Link="Resources\button%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button%403x.9.png" Link="Resources\button%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button%404x.9.png" Link="Resources\button%404x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\button%40¾x.9.png" Link="Resources\button%40¾x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\delay%402x.png" Link="Resources\delay%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\delay%403x.png" Link="Resources\delay%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Delete%402x.png" Link="Resources\Delete%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Delete%403x.png" Link="Resources\Delete%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Exit%402x.png" Link="Resources\Exit%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Exit%403x.png" Link="Resources\Exit%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active%401x.png" Link="Resources\icon_home_active%401x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active%402x.png" Link="Resources\icon_home_active%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\icon_home_active%403x.png" Link="Resources\icon_home_active%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%401½x.9.png" Link="Resources\image%401½x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%401½x.png" Link="Resources\image%401½x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%402x.9.png" Link="Resources\image%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%402x.png" Link="Resources\image%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%403x.9.png" Link="Resources\image%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%403x.png" Link="Resources\image%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%404x.9.png" Link="Resources\image%404x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%404x.png" Link="Resources\image%404x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%40¾x.9.png" Link="Resources\image%40¾x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\image%40¾x.png" Link="Resources\image%40¾x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info%401½x.png" Link="Resources\Info%401½x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info%402x.png" Link="Resources\Info%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info%403x.png" Link="Resources\Info%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\Info%40¾x.png" Link="Resources\Info%40¾x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\ltblueUp%402x.png" Link="Resources\ltblueUp%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton%401½x.9.png" Link="Resources\redButton%401½x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton%402x.9.png" Link="Resources\redButton%402x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton%403x.9.png" Link="Resources\redButton%403x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton%404x.9.png" Link="Resources\redButton%404x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redButton%40¾x.9.png" Link="Resources\redButton%40¾x.9.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon%402x.png" Link="Resources\redribbon%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon%403x.png" Link="Resources\redribbon%403x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick%402x.png" Link="Resources\tick%402x.png" />
+    <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick%403x.png" Link="Resources\tick%403x.png" />
     <EmbeddedResource Update="Pages.Xaml\Page1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="..\Forms9PatchDemo\Pages.Xaml\CDATA.xaml" Link="Pages.Xaml\CDATA.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

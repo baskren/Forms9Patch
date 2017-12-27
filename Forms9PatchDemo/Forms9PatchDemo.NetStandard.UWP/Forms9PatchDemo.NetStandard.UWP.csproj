@@ -108,151 +108,151 @@
     <None Include="Forms9PatchDemo.NetStandard.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-100.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LargeTile.scale-100.png">
       <Link>Assets\LargeTile.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-125.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LargeTile.scale-125.png">
       <Link>Assets\LargeTile.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-150.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LargeTile.scale-150.png">
       <Link>Assets\LargeTile.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LargeTile.scale-200.png">
       <Link>Assets\LargeTile.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LargeTile.scale-400.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LargeTile.scale-400.png">
       <Link>Assets\LargeTile.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\LockScreenLogo.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\LockScreenLogo.scale-200.png">
       <Link>Assets\LockScreenLogo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SmallTile.scale-100.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SmallTile.scale-100.png">
       <Link>Assets\SmallTile.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SmallTile.scale-125.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SmallTile.scale-125.png">
       <Link>Assets\SmallTile.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SmallTile.scale-150.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SmallTile.scale-150.png">
       <Link>Assets\SmallTile.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SmallTile.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SmallTile.scale-200.png">
       <Link>Assets\SmallTile.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SmallTile.scale-400.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SmallTile.scale-400.png">
       <Link>Assets\SmallTile.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SplashScreen.scale-100.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SplashScreen.scale-100.png">
       <Link>Assets\SplashScreen.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SplashScreen.scale-125.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SplashScreen.scale-125.png">
       <Link>Assets\SplashScreen.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SplashScreen.scale-150.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SplashScreen.scale-150.png">
       <Link>Assets\SplashScreen.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SplashScreen.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SplashScreen.scale-200.png">
       <Link>Assets\SplashScreen.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\SplashScreen.scale-400.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\SplashScreen.scale-400.png">
       <Link>Assets\SplashScreen.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square150x150Logo.scale-100.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square150x150Logo.scale-100.png">
       <Link>Assets\Square150x150Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square150x150Logo.scale-125.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square150x150Logo.scale-125.png">
       <Link>Assets\Square150x150Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square150x150Logo.scale-150.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square150x150Logo.scale-150.png">
       <Link>Assets\Square150x150Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square150x150Logo.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square150x150Logo.scale-200.png">
       <Link>Assets\Square150x150Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square150x150Logo.scale-400.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square150x150Logo.scale-400.png">
       <Link>Assets\Square150x150Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
       <Link>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
       <Link>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
       <Link>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
       <Link>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.scale-100.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.scale-100.png">
       <Link>Assets\Square44x44Logo.scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.scale-125.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.scale-125.png">
       <Link>Assets\Square44x44Logo.scale-125.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.scale-150.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.scale-150.png">
       <Link>Assets\Square44x44Logo.scale-150.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.scale-200.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.scale-200.png">
       <Link>Assets\Square44x44Logo.scale-200.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.scale-400.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.scale-400.png">
       <Link>Assets\Square44x44Logo.scale-400.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-16.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-16.png">
       <Link>Assets\Square44x44Logo.targetsize-16.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-24.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-24.png">
       <Link>Assets\Square44x44Logo.targetsize-24.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <Link>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-256.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-256.png">
       <Link>Assets\Square44x44Logo.targetsize-256.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-32.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-32.png">
       <Link>Assets\Square44x44Logo.targetsize-32.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\Assets\Square44x44Logo.targetsize-48.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Assets\Square44x44Logo.targetsize-48.png">
       <Link>Assets\Square44x44Logo.targetsize-48.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\balloons.jpg">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\balloons.jpg">
       <Link>balloons.jpg</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\cat.jpg">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\cat.jpg">
       <Link>cat.jpg</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\five%401½x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\five%401½x.png">
       <Link>five%401½x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\five%402x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\five%402x.png">
       <Link>five%402x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\five%403x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\five%403x.png">
       <Link>five%403x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\five%40¾x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\five%40¾x.png">
       <Link>five%40¾x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\five.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\five.png">
       <Link>five.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\fivePlus%401½x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\fivePlus%401½x.png">
       <Link>fivePlus%401½x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\fivePlus%402x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\fivePlus%402x.png">
       <Link>fivePlus%402x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\fivePlus%403x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\fivePlus%403x.png">
       <Link>fivePlus%403x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\fivePlus%40¾x.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\fivePlus%40¾x.png">
       <Link>fivePlus%40¾x.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\fivePlus.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\fivePlus.png">
       <Link>fivePlus.png</Link>
     </Content>
-    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.UWP\image.png">
+    <Content Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\image.png">
       <Link>image.png</Link>
     </Content>
     <Content Include="Properties\Default.rd.xml" />

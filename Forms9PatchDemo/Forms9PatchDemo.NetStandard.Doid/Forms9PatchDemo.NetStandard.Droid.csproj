@@ -94,7 +94,7 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\MainActivity.cs">
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\MainActivity.cs">
       <Link>MainActivity.cs</Link>
     </Compile>
   </ItemGroup>
@@ -110,37 +110,37 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\ArrowR.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\ArrowR.png">
       <Link>Resources\drawable\ArrowR.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\balloons.jpg">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\balloons.jpg">
       <Link>Resources\drawable\balloons.jpg</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\bubble.9.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\bubble.9.png">
       <Link>Resources\drawable\bubble.9.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\cat.jpg">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\cat.jpg">
       <Link>Resources\drawable\cat.jpg</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\five.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\five.png">
       <Link>Resources\drawable\five.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\fivePlus.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\fivePlus.png">
       <Link>Resources\drawable\fivePlus.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\icon.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\icon.png">
       <Link>Resources\drawable\icon.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\image.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\image.png">
       <Link>Resources\drawable\image.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\Info.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\Info.png">
       <Link>Resources\drawable\Info.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\redGridBox.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\redGridBox.png">
       <Link>Resources\drawable\redGridBox.png</Link>
     </AndroidResource>
-    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.Droid\Resources\drawable\sampleFile.png">
+    <AndroidResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\\Resources\drawable\sampleFile.png">
       <Link>Resources\drawable\sampleFile.png</Link>
     </AndroidResource>
     <AndroidResource Include="Resources\values\strings.xml" />
