@@ -568,24 +568,6 @@
     <None Include="NOTES.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
-      <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
-      <Name>Forms9Patch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
-      <Name>FormsGestures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
-      <Project>{A3E44406-A6A6-47F6-8FEE-841E9E8B52DC}</Project>
-      <Name>NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
-      <Name>PCL.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -596,7 +578,24 @@
       <HintPath>..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{a45dea17-78a3-464a-9e00-0342d0503b00}</Project>
+      <Name>Forms9Patch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
+      <Project>{a3e44406-a6a6-47f6-8fee-841e9e8b52dc}</Project>
+      <Name>NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>PCL.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

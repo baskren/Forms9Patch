@@ -13,7 +13,9 @@
   <ItemGroup>
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Extensions\ImageResourceExtension.cs" Link="Extensions\ImageResourceExtension.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Forms9PatchDemo.cs" Link="Forms9PatchDemo.cs" />
+
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\HomePage.cs" Link="HomePage.cs" />
+    
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\BubblePopupTestPage.cs" Link="Pages.Code\BubblePopupTestPage.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ButtonAndSegmentAlignments.cs" Link="Pages.Code\ButtonAndSegmentAlignments.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\ButtonCodePage.cs" Link="Pages.Code\ButtonCodePage.cs" />
@@ -31,8 +33,12 @@
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\SingleButton.cs" Link="Pages.Code\SingleButton.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\SingleSegmentedControl.cs" Link="Pages.Code\SingleSegmentedControl.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Code\UnconstrainedLabelAutoFitPage.cs" Link="Pages.Code\UnconstrainedLabelAutoFitPage.cs" />
+
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCapsInsetPage.xaml.cs" Link="Pages.Xaml\XamlCapsInsetPage.xaml.cs">
       <DependentUpon>XamlCapsInsetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCDATA.xaml.cs" Link="Pages.Xaml\XamlCDATA.xaml.cs">
+      <DependentUpon>XamlCDATA.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlContentViewDemoPage.xaml.cs" Link="Pages.Xaml\XamlContentViewDemoPage.xaml.cs">
       <DependentUpon>XamlContentViewDemoPage.xaml</DependentUpon>
@@ -58,12 +64,26 @@
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlStateButtonsPage.xaml.cs" Link="Pages.Xaml\XamlStateButtonsPage.xaml.cs">
       <DependentUpon>XamlStateButtonsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\br.cs" Link="UserPages\br.cs" />
+
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\Burkhart.xaml.cs" Link="UserPages\Burkhart.xaml.cs">
       <DependentUpon>Burkhart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentBindingPage.xaml.cs" Link="UserPages\SegmentBindingPage.xaml.cs">
+      <DependentUpon>SegmentBindingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentXAML.xaml.cs" Link="UserPages\SegmentXAML.xaml.cs">
+      <DependentUpon>SegmentXAML.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\StretchIssuePage.xaml.cs" Link="UserPages\StretchIssuePage.xaml.cs">
+      <DependentUpon>StretchIssuePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
+      <DependentUpon>XamlPageWithListViewWithF9PLabelInCells.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\AbsoluteLayoutExplorationCode.cs" Link="UserPages\AbsoluteLayoutExplorationCode.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\BackgroundImageOpacityPage.cs" Link="UserPages\BackgroundImageOpacityPage.cs" />
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\br.cs" Link="UserPages\br.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ButtonTapped.cs" Link="UserPages\ButtonTapped.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ChatListPage.cs" Link="UserPages\ChatListPage.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\CustomFontEffectPage.cs" Link="UserPages\CustomFontEffectPage.cs" />
@@ -72,28 +92,19 @@
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ModalPopupOnMasterDetailPage.cs" Link="UserPages\ModalPopupOnMasterDetailPage.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ModalPopupWithNavigationPages.cs" Link="UserPages\ModalPopupWithNavigationPages.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\NestedBubblePopupPage.cs" Link="UserPages\NestedBubblePopupPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentBindingPage.xaml.cs" Link="UserPages\SegmentBindingPage.xaml.cs">
-      <DependentUpon>SegmentBindingPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage1.cs" Link="UserPages\SegmentNavPage1.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage2.cs" Link="UserPages\SegmentNavPage2.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentNavPage3.cs" Link="UserPages\SegmentNavPage3.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentSelectedBackgroundPage.cs" Link="UserPages\SegmentSelectedBackgroundPage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentXAML.xaml.cs" Link="UserPages\SegmentXAML.xaml.cs">
-      <DependentUpon>SegmentXAML.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\StretchIssuePage.xaml.cs" Link="UserPages\StretchIssuePage.xaml.cs">
-      <DependentUpon>StretchIssuePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\UserHomePage.cs" Link="UserPages\UserHomePage.cs" />
-    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml.cs">
-      <DependentUpon>XamlPageWithListViewWithF9PLabelInCells.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ZenmekPage.cs" Link="UserPages\ZenmekPage.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCapsInsetPage.xaml" Link="Pages.Xaml\XamlCapsInsetPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCDATA.xaml" Link="Pages.Xaml\XamlCDATA.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlContentViewDemoPage.xaml" Link="Pages.Xaml\XamlContentViewDemoPage.xaml">
@@ -120,9 +131,7 @@
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlStateButtonsPage.xaml" Link="Pages.Xaml\XamlStateButtonsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Pages.Xaml\XamlCDATA.xaml" Link="Pages.Xaml\XamlCDATA.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\100x100.png" Link="Resources\100x100.png" />
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\150x150.png" Link="Resources\150x150.png" />
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\200x200.png" Link="Resources\200x200.png" />
@@ -214,6 +223,7 @@
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick@3x.png" />
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tree.png" Link="Resources\tree.png" />
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\water.gif" Link="Resources\water.gif" />
+
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\Burkhart.xaml" Link="UserPages\Burkhart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -229,6 +239,7 @@
     <EmbeddedResource Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml" Link="UserPages\XamlPageWithListViewWithF9PLabelInCells.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+
   </ItemGroup>
 
   <ItemGroup>
@@ -299,9 +310,6 @@
     <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\redribbon%403x.png" Link="Resources\redribbon%403x.png" />
     <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick%402x.png" Link="Resources\tick%402x.png" />
     <EmbeddedResource Update="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\Resources\tick%403x.png" Link="Resources\tick%403x.png" />
-    <EmbeddedResource Update="Pages.Xaml\Page1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
-    <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;NETSTANDARD</DefineConstants>
+    <DefineConstants>TRACE;RELEASE;NETSTANDARD;NETSTANDARD1_3</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="SharedPlatformAssemblyInfo.cs" />

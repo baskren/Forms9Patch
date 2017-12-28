@@ -10,7 +10,8 @@
     <RootNamespace>Forms9PatchDemo.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Forms9PatchDemo.iOS</AssemblyName>
-    <ReleaseVersion></ReleaseVersion>
+    <ReleaseVersion>
+    </ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -177,39 +178,43 @@
     <ITunesArtwork Include="ITunesArtwork%402x" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Renderers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
+      <Project>{1c6ab883-a0e1-4b84-91d9-faca09f563f4}</Project>
+      <Name>Forms9Patch.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{a45dea17-78a3-464a-9e00-0342d0503b00}</Project>
+      <Name>Forms9Patch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
+      <Project>{e68f0971-0308-4e5e-affa-f1f82ef69cdc}</Project>
+      <Name>FormsGestures.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\NumbericalMethods\NumericalMethods.csproj">
+      <Project>{a3e44406-a6a6-47f6-8fee-841e9e8b52dc}</Project>
+      <Name>NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils\PCL.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>PCL.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
       <Project>{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}</Project>
       <Name>Forms9PatchDemo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
-      <Project>{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}</Project>
-      <Name>PCL.Utils.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
-      <Project>{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}</Project>
-      <Name>NumericalMethods.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.iOS\FormsGestures.NetStandard.iOS.csproj">
-      <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
-      <Name>FormsGestures.NetStandard.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
-      <Project>{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}</Project>
-      <Name>FormsGestures.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard.iOS\Forms9Patch.NetStandard.iOS.csproj">
-      <Project>{740C3DFF-E410-4632-BDD9-82594F3E21B4}</Project>
-      <Name>Forms9Patch.NetStandard.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
-      <Project>{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Renderers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\..\.nuget\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>
