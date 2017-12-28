@@ -33,6 +33,7 @@
 		<DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DONT_USE_MEASURE;NETSTANDARD</DefineConstants>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
+		<DocumentationFile></DocumentationFile>
 		<ConsolePause>false</ConsolePause>
 	</PropertyGroup>
 	<ItemGroup>
