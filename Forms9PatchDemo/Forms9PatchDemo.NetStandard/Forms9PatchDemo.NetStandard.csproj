@@ -68,6 +68,8 @@
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\Burkhart.xaml.cs" Link="UserPages\Burkhart.xaml.cs">
       <DependentUpon>Burkhart.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ListViewWithF9PLabelInCells.cs" Link="UserPages\ListViewWithF9PLabelInCells.cs" />
     <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\SegmentBindingPage.xaml.cs" Link="UserPages\SegmentBindingPage.xaml.cs">
       <DependentUpon>SegmentBindingPage.xaml</DependentUpon>
     </Compile>
@@ -256,7 +258,6 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Resources\Fonts\" />
-    <Folder Include="UserPages\" />
     <Folder Include="Pages.Code\" />
   </ItemGroup>
 

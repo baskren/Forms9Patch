@@ -11,7 +11,20 @@ namespace Forms9Patch.UWP
 {
     static class FormattedStringExtensions
     {
-
+        static bool _textDecorationsPresent;
+        static bool _textDecorationsPresentSet;
+        public static bool TextDecorationsPresent
+        {
+            get
+            {
+                if (!_textDecorationsPresentSet)
+                {
+                    _textDecorationsPresent = Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Text.TextDecorations");
+                    _textDecorationsPresentSet = true;
+                }
+                return _textDecorationsPresent;
+            }
+        }
 
         internal static void SetAndFormatText(this TextBlock winTextBlock, Forms9Patch.Label f9pLabel, double altFontSize=-1)
         {
@@ -176,9 +189,13 @@ namespace Forms9Patch.UWP
             run.FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;
             run.FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
 
-            run.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            if (metaFont.Strikethrough)
-                run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
+            
+            if (TextDecorationsPresent)
+            {
+                run.TextDecorations = Windows.UI.Text.TextDecorations.None;
+                if (metaFont.Strikethrough)
+                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
+            }
 
             switch (metaFont.Baseline)
             {
@@ -219,14 +236,15 @@ namespace Forms9Patch.UWP
             if (metaFont.IsActionEmpty())
             {
                 run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
-                if (metaFont.Underline)
+                if (metaFont.Underline && TextDecorationsPresent)
                     run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
                 textBlock.Inlines.Add(run);
             }
             else
             {
                 run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Xamarin.Forms.Color.Blue.ToWindowsColor());
-                run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
+                if (TextDecorationsPresent)
+                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
                 var hyperlink = new Hyperlink();
                 hyperlink.Inlines.Add(run);
                 hyperlink.Click += (Hyperlink sender, HyperlinkClickEventArgs args) => label.Tap(metaFont.Action.Id, metaFont.Action.Href);

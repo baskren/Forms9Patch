@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\Forms9PatchDemo\Forms9PatchDemo.PCL\UserPages\ListViewWithF9PLabelInCells.cs">
+      <Link>UserPages\ListViewWithF9PLabelInCells.cs</Link>
+    </Compile>
     <Compile Include="ObsoletePages\ImageOnPage.cs" />
     <Compile Include="ObsoletePages\ImageBenchmarkPage.cs" />
     <Compile Include="ObsoletePages\OldImageButtonCodePage.cs" />

@@ -67,7 +67,7 @@ namespace Forms9Patch.UWP
                         {
                             Title = "Forms9Patch licensing failure",
                             Content = "The LicenseKey [" + Settings._licenseKey + "] is not for the application [" + Forms9Patch.ApplicationInfoService.Name + "].  You are in trial mode and will be able to render 1 scalable image and 5 formatted strings.",
-                            CloseButtonText = "Whatever"
+                            //CloseButtonText = "Whatever"
                         };
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                         errorDialog.ShowAsync();

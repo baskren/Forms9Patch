@@ -16,6 +16,37 @@ namespace Forms9Patch.UWP
 {
     internal class FontService : IFontService
     {
+        static bool _xamlAutoFontFamilyPresent;
+        static bool _xamlAutoFontFamilyPresentSet;
+        public static bool XamlAutoFontFamilyPresent
+        {
+            get
+            {
+                if (!_xamlAutoFontFamilyPresentSet)
+                {
+                    _xamlAutoFontFamilyPresent = Windows.Foundation.Metadata.ApiInformation.IsPropertyPresent("Windows.UI.Xaml.Media.FontFamily", "XamlAutoFontFamily");
+                    _xamlAutoFontFamilyPresentSet = true;
+                }
+                return _xamlAutoFontFamilyPresent;
+            }
+        }
+
+        static string _defaultFontFamily;
+        public static string DefaultSystemFontFamily
+        {
+            get
+            {
+                if (_defaultFontFamily==null)
+                {
+                    if (XamlAutoFontFamilyPresent)
+                        _defaultFontFamily = Windows.UI.Xaml.Media.FontFamily.XamlAutoFontFamily.Source;
+                    else
+                        _defaultFontFamily = "DEFAULT_FONT_FAMILY_NOT_AVAIABLE";
+                }
+                return _defaultFontFamily;
+            }
+        }
+
 
         public static Dictionary<string, string> EmbeddedFontSources = new Dictionary<string, string>();
 
@@ -29,7 +60,7 @@ namespace Forms9Patch.UWP
         public static string ReconcileFontFamily(string f9pFontFamily)
         {
             if (string.IsNullOrWhiteSpace(f9pFontFamily))
-                return Windows.UI.Xaml.Media.FontFamily.XamlAutoFontFamily.Source;
+                return DefaultSystemFontFamily;
 
             string localStorageFileName = null;
             string resourceId = null;

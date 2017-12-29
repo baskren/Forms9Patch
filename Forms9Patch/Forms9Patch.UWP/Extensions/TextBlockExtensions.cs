@@ -9,6 +9,22 @@ namespace Forms9Patch.UWP
 {
     static class TextBlockExtensions
     {
+        static bool _textHighlighterPresent;
+        static bool _textHighlighterPresentSet;
+        public static bool TextHeghLighterPresent
+        {
+            get
+            {
+                if (!_textHighlighterPresentSet)
+                {
+                    _textHighlighterPresent = Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Documents.TextHighlighter");
+                    _textHighlighterPresentSet = true;
+                }
+                return _textHighlighterPresent;
+            }
+        }
+
+
         /// <summary>
         /// WARNING!  Calling this will cause a crash IF target version of APP is not set to Windows10 FallCreatorsUpdate (10.0.16299.0) or greater
         /// </summary>
@@ -18,7 +34,7 @@ namespace Forms9Patch.UWP
         /// <param name="length"></param>
         public static void ApplyBackgroundColor(this Windows.UI.Xaml.Controls.TextBlock textBlock, Xamarin.Forms.Color color, int startIndex=0, int length=-1)
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Documents.TextHighlighter"))
+            if (TextHeghLighterPresent)
             {
 
                 if (length < 0)
