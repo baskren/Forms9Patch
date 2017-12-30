@@ -5,7 +5,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Popup Interface.
     /// </summary>
-    interface IPopup : IBackground
+    public interface IPopup : IBackground
     {
         /// <summary>
         /// Padding between popup frame and its content
