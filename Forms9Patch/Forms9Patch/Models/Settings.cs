@@ -10,6 +10,11 @@ namespace Forms9Patch
     /// </summary>
     public class Settings
     {
+        static Settings()
+        {
+            PCL.Utils.Environment.EmbeddedResourceAssemblyResolver = AssemblyExtensions.AssemblyFromResourceId;
+        }
+
         /// <summary>
         /// The shadow offset.
         /// </summary>
@@ -99,6 +104,8 @@ namespace Forms9Patch
         }
 
         internal static List<Assembly> IncludedAssemblies => NativeSettings?.IncludedAssemblies;
+
+
     }
 }
 

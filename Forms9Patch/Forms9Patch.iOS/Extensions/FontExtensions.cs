@@ -8,6 +8,7 @@ using CoreGraphics;
 using CoreText;
 using Forms9Patch.iOS;
 using PCL.Utils;
+using System.Reflection;
 
 [assembly: Dependency(typeof(FontFamilies))]
 namespace Forms9Patch.iOS
@@ -204,25 +205,26 @@ namespace Forms9Patch.iOS
 
 
 
-        internal static UIFont EmbeddedFont(string resourceID, nfloat size)
+        internal static UIFont EmbeddedFont(string resourceId, nfloat size, Assembly assembly = null)
         {
-            if (resourceID == "STIXGeneral")
-                resourceID = "Forms9Patch.Resources.Fonts.STIXGeneral.otf";
+            if (resourceId == "STIXGeneral")
+                resourceId = "Forms9Patch.Resources.Fonts.STIXGeneral.otf";
 
-            if (_embeddedResourceFonts.ContainsKey(resourceID))
+            if (_embeddedResourceFonts.ContainsKey(resourceId))
             {
-                string family = _embeddedResourceFonts[resourceID];
+                string family = _embeddedResourceFonts[resourceId];
                 return UIFont.FromName(family, size);
             }
-            if (resourceID.Contains(".Resources.Fonts."))
+            if (resourceId.Contains(".Resources.Fonts."))
             {
                 // it's an Embedded Resource
-                if (!resourceID.ToLower().EndsWith(".ttf") && !resourceID.ToLower().EndsWith(".otf"))
+                if (!resourceId.ToLower().EndsWith(".ttf") && !resourceId.ToLower().EndsWith(".otf"))
                     throw new MissingMemberException("Embedded Font file names must end with \".ttf\" or \".otf\".");
                 lock (_loadFontLock)
                 {
                     // what is the assembly?
-                    var assemblyName = resourceID.Substring(0, resourceID.IndexOf(".Resources.Fonts."));
+                    /*
+                    var assemblyName = resourceId.Substring(0, resourceId.IndexOf(".Resources.Fonts."));
                     //var assembly = System.Reflection.Assembly.Load (assemblyName);
                     var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
                     if (assembly == null)
@@ -232,44 +234,36 @@ namespace Forms9Patch.iOS
                         //Console.WriteLine ("Assembly for Resource ID \"" + resourceID + "\" not found.");
                         //return null;
                     }
+                    */
                     // load it!
-                    var stream = assembly.GetManifestResourceStream(resourceID);
-                    if (stream != null)
+                    using (var stream = EmbeddedResource.GetStream(resourceId, assembly))
                     {
+                        if (stream == null)
+                        {
+                            Console.WriteLine("Could not open Embedded Resource [" + resourceId + "]");
+                            return null;
+                        }
                         var data = NSData.FromStream(stream);
-                        stream.Close();
-                        if (data != null)
+                        if (data == null)
                         {
-                            var provider = new CGDataProvider(data);
-                            var font = CGFont.CreateFromProvider(provider);
-                            NSError error;
-                            if (!CTFontManager.RegisterGraphicsFont(font, out error))
+                            Console.WriteLine("Could not retrieve data from Embedded Resource [" + resourceId + "].");
+                            return null;
+                        }
+                        var provider = new CGDataProvider(data);
+                        var font = CGFont.CreateFromProvider(provider);
+                        if (!CTFontManager.RegisterGraphicsFont(font, out NSError error))
+                        {
+                            if (error.Code != 105)
                             {
-                                if (error.Code != 105)
-                                {
-                                    Console.WriteLine("Could load but failed to register [" + resourceID + "] font.  Error messages:");
-                                    Console.WriteLine("\tdescription: " + error.Description);
-                                    //Console.WriteLine ("\tlocalized description: " + error.LocalizedDescription);
-                                    //Console.WriteLine ("\tdebug description: " + error.DebugDescription);
-                                    throw new MissingMemberException("Failed to register [" + resourceID + "] font.  Error messages in console.");
-                                }
+                                Console.WriteLine("Could load but failed to register [" + resourceId + "] font.  Error messages:");
+                                Console.WriteLine("\tdescription: " + error.Description);
+                                throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
                             }
-                            //var psName = font.PostScriptName;
-                            _embeddedResourceFonts.Add(resourceID, font.PostScriptName);
-                            return UIFont.FromName(font.PostScriptName, size);
                         }
-                        else
-                        {
-                            Console.WriteLine("Could not retrieve data from Embedded Resource [" + resourceID + "].");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Could not open Embedded Resource [" + resourceID + "]");
+                        _embeddedResourceFonts.Add(resourceId, font.PostScriptName);
+                        return UIFont.FromName(font.PostScriptName, size);
                     }
                 }
-                //} else {
-                //	Console.WriteLine ("Font [] is assumed not to be an embedded resource because it does not contain \".Resources.Fonts.\" in its Resource ID");
             }
             return null;
         }

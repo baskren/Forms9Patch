@@ -16,6 +16,7 @@ namespace Forms9Patch.iOS
 #elif __DROID__
 using Xamarin.Forms.Platform.Android;
 using SkiaSharp.Views.Android;
+using PCL.Utils;
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
 using Xamarin.Forms.Platform.UWP;
@@ -65,7 +66,8 @@ namespace Forms9Patch
                         {
                             var assembly = (Assembly)imageSource.GetValue(ImageSource.AssemblyProperty);
                             var resourceId = key.Substring(4);
-                            using (var stream = assembly.GetManifestResourceStream(resourceId))
+
+                            using (var stream = PCL.Utils.EmbeddedResource.GetStream(resourceId, assembly))
                             {
                                 if (stream == null)
                                 {

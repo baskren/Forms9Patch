@@ -6,6 +6,7 @@ using Android.Graphics;
 using System.Linq;
 using Forms9Patch.Droid;
 using PCL.Utils;
+using System.Reflection;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FontManagment))]
 namespace Forms9Patch.Droid
@@ -26,7 +27,7 @@ namespace Forms9Patch.Droid
             return null;
         }
 
-        public static Typeface TypefaceForFontFamily(string fontFamily)
+        public static Typeface TypefaceForFontFamily(string fontFamily, Assembly assembly = null)
         {
             //string fontFilePath;
             if (fontFamily == null)
@@ -76,10 +77,12 @@ namespace Forms9Patch.Droid
 
             if (fontFamily.Contains(".Resources.Fonts."))
             {
+
                 // it's an Embedded Resource
                 if (!fontFamily.ToLower().EndsWith(".ttf") && !fontFamily.ToLower().EndsWith(".otf"))
                     throw new InvalidObjectException("Embedded Font file names must end with \".ttf\" or \".otf\".");
                 // what is the assembly?
+                /*
                 var assemblyName = fontFamily.Substring(0, fontFamily.IndexOf(".Resources.Fonts."));
 
                 //var assembly = System.Reflection.Assembly.Load (assemblyName);
@@ -92,37 +95,38 @@ namespace Forms9Patch.Droid
                     ///System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
                     //return null;
                 }
+                */
                 // move it to the Application's CacheDir
-                var inputStream = assembly.GetManifestResourceStream(fontFamily);
-                if (inputStream == null)
+                using (var inputStream = EmbeddedResource.GetStream(fontFamily, assembly))
                 {
-                    System.Console.WriteLine("Embedded Resource for FontFamily \"" + fontFamily + "\" not found.");
-                    return null;
-                }
+                    if (inputStream == null)
+                    {
+                        System.Console.WriteLine("Embedded Resource for FontFamily \"" + fontFamily + "\" not found.");
+                        return null;
+                    }
 
-                var cachedFontDir = new File(Xamarin.Forms.Forms.Context.CacheDir + "/ResourceFonts");
-                if (!cachedFontDir.Exists())
-                    cachedFontDir.Mkdir();
+                    var cachedFontDir = new File(Xamarin.Forms.Forms.Context.CacheDir + "/ResourceFonts");
+                    if (!cachedFontDir.Exists())
+                        cachedFontDir.Mkdir();
 
-                var cachedFontFile = new File(cachedFontDir, fontFamily);
-                var outputStream = new FileOutputStream(cachedFontFile);
-                const int bufferSize = 1024;
-                var buffer = new byte[bufferSize];
-                int length = -1;
-                while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
-                {
-                    outputStream.Write(buffer, 0, length);
+                    var cachedFontFile = new File(cachedFontDir, fontFamily);
+                    using (var outputStream = new FileOutputStream(cachedFontFile))
+                    {
+                        const int bufferSize = 1024;
+                        var buffer = new byte[bufferSize];
+                        int length = -1;
+                        while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                            outputStream.Write(buffer, 0, length);
+                    }
+                    Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
+                    if (typeface == null)
+                    {
+                        System.Console.WriteLine("Embedded Resource font file (" + fontFamily + ") could not be loaded as an Android Typeface.");
+                        return null;
+                    }
+                    _fontFiles.Add(fontFamily, cachedFontFile.AbsolutePath);
+                    return typeface;
                 }
-                inputStream.Close();
-                outputStream.Close();
-                Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
-                if (typeface == null)
-                {
-                    System.Console.WriteLine("Embedded Resource font file (" + fontFamily + ") could not be loaded as an Android Typeface.");
-                    return null;
-                }
-                _fontFiles.Add(fontFamily, cachedFontFile.AbsolutePath);
-                return typeface;
             }
             return null;
         }

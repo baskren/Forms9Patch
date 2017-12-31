@@ -4,7 +4,6 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Forms9Patch</AssemblyName>
     <RootNamespace>Forms9Patch</RootNamespace>
-    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
