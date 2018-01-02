@@ -14,7 +14,6 @@
 		<AssemblyName>Forms9Patch.iOS</AssemblyName>
 		<NuGetPackageImportStamp>
 		</NuGetPackageImportStamp>
-		<ReleaseVersion></ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugSymbols>true</DebugSymbols>
@@ -206,19 +205,19 @@
 			<IsWatchApp>false</IsWatchApp>
 		</ProjectReference>
 		<ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
-			<Project>{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}</Project>
+			<Project>{7D54AC1A-8F90-4E0F-A5D4-C2420D708C06}</Project>
 			<Name>FormsGestures.NetStandard</Name>
 		</ProjectReference>
 		<ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
-			<Project>{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}</Project>
+			<Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
 			<Name>NumericalMethods.NetStandard</Name>
 		</ProjectReference>
 		<ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
-			<Project>{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}</Project>
+			<Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
 			<Name>PCL.Utils.NetStandard</Name>
 		</ProjectReference>
 		<ProjectReference Include="..\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
-			<Project>{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}</Project>
+			<Project>{995CBDCE-1D72-47FA-8FA9-08A73DCA9CCB}</Project>
 			<Name>Forms9Patch.NetStandard</Name>
 		</ProjectReference>
 		<ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj">

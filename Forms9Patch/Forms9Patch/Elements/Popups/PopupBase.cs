@@ -536,7 +536,7 @@ namespace Forms9Patch
 
         private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName)
+            if (RootPage != null && e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName)
             {
                 LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
             }
