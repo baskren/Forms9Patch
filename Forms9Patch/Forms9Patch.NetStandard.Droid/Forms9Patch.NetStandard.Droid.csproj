@@ -19,6 +19,7 @@
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -225,20 +226,24 @@
       <Name>FormsGestures.NetStandard.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.csproj">
-      <Project>{4C182030-72C0-4C7D-BE89-1360D7B36528}</Project>
+      <Project>{0B3A1716-E6F3-44A7-8ACD-E79055A67CAF}</Project>
       <Name>FormsGestures.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\NumericalMethods.NetStandard\NumericalMethods.NetStandard.csproj">
-      <Project>{5B70B9F4-F252-445C-BA75-92ABE1551792}</Project>
+      <Project>{FF06FA6A-A6F4-47E4-9E3B-A5681040C648}</Project>
       <Name>NumericalMethods.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\PCL.Utils\NetStandardUtils\PCL.Utils.NetStandard.csproj">
-      <Project>{0815CCE6-E4BE-49CA-9D5D-E327C2B7D18D}</Project>
+      <Project>{AA7CA62C-F379-46E0-82B4-F33855F4CB8A}</Project>
       <Name>PCL.Utils.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.NetStandard\Forms9Patch.NetStandard.csproj">
-      <Project>{5BCA2CD1-5151-4C4A-85AD-B6D3E1BD31CA}</Project>
+      <Project>{DFB4EFF6-BEFA-42FC-A9D6-C483DF3D5D12}</Project>
       <Name>Forms9Patch.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils.Droid\PCL.Utils.Droid.csproj">
+      <Project>{2EFB5A37-DF19-4897-B6A6-914E55047BDF}</Project>
+      <Name>PCL.Utils.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

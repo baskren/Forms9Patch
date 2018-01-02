@@ -185,6 +185,10 @@
 			<Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
 			<Name>PCL.Utils</Name>
 		</ProjectReference>
+		<ProjectReference Include="..\..\FormsGestures\PCL.Utils\PCL.Utils.iOS\PCL.Utils.iOS.csproj">
+		  <Project>{E0310C06-794F-4B67-90B9-E1A5C4E84E87}</Project>
+		  <Name>PCL.Utils.iOS</Name>
+		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="packages.config" />
