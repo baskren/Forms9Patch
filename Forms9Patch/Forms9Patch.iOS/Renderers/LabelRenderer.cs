@@ -50,7 +50,6 @@ namespace Forms9Patch.iOS
             if (string.IsNullOrEmpty((ControlText ?? ControlAttributedText?.ToString())))
                 return new SizeRequest(Size.Zero);
 
-
             //if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
             {
 
@@ -94,9 +93,6 @@ namespace Forms9Patch.iOS
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;
 
-                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                //    System.Diagnostics.Debug.WriteLine("A tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] WidthConstraint=[" + widthConstraint + "] HeightConstraint=[" + heightConstraint + "]");
-
                 ControlLines = int.MaxValue;
 
                 double linesHeight = -1;
@@ -129,16 +125,10 @@ namespace Forms9Patch.iOS
                     tmpFontSize = minFontSize;
 
 
-                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                //    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
-
                 if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.05)
                 {
                     Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                     {
-                        //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                        //    System.Diagnostics.Debug.WriteLine("");
-
                         if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                         {
                             if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize))
@@ -152,22 +142,12 @@ namespace Forms9Patch.iOS
 
 
                 var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
-                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                //    System.Diagnostics.Debug.WriteLine("B.1 tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "] SyncFontSize=[" + syncFontSize + "]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                     tmpFontSize = syncFontSize;
 
-                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                //    System.Diagnostics.Debug.WriteLine("C tmp=[" + tmpFontSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
-
-
                 ControlFont = ControlFont.WithSize(tmpFontSize);
-                //ControlFontPointSize = tmpFontSize;
+
                 CGSize cgSize = LabelSize(widthConstraint, tmpFontSize);
-
-                //if (Element.Text == "TILE" || Element.Text == "ASPECTFILL")
-                //    System.Diagnostics.Debug.WriteLine("E tmp=[" + tmpFontSize + "] ControlFontPointSize=[" + ControlFontPointSize + "] txt=[" + (Element.Text ?? Element.HtmlText) + "]");
-
 
 
                 //if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
@@ -214,11 +194,6 @@ namespace Forms9Patch.iOS
                     //}
                     Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
 
-                    //if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
-                    //{
-                    //System.Diagnostics.Debug.WriteLine("A FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   TEXT:" + Element.Text);
-                    //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
-                    //}
                 }
                 else
                 {
@@ -252,32 +227,7 @@ namespace Forms9Patch.iOS
                         Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
                     else if (Element.VerticalTextAlignment == TextAlignment.End)
                         Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
-
-                    //if (Element.Text == "SHADOW" || Element.Text == "INVERTED")
-                    //{
-                    //System.Diagnostics.Debug.WriteLine("B FLH:" + Control.Font.LineHeight + "   TH:" + textHeight.ToString("000.000") + "   TL:" + textLines.ToString("0") + "   CH:" + heightConstraint.ToString("000.000") + "   CL:" + constraintLines.ToString("0") + "   CLH:" + constraintLinesHeight.ToString("000.000") + "   TEXT:" + Element.Text);
-                    //System.Diagnostics.Debug.WriteLine("  ALG:" + alg + "   CENTER:" + Control.Center);
-                    //}
-
                 }
-
-                //if (Element.Text == "H1" || Element.Text == "H2" || Element.Text == "H3" || Element.Text == "BACKGROUND")
-                //    System.Diagnostics.Debug.WriteLine("D ALG=[" + alg + "]");
-
-
-                //Control.BackgroundColor = Color.Orange.WithAlpha(0.5).ToUIColor();
-                /*
-                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
-                {
-                    Element.Field1 = "TH: " + textHeight.ToString("000.000");
-                    Element.Field2 = "TL: " + textLines.ToString("0.00000");
-                    Element.Field3 = "CH: " + heightConstraint.ToString("000.000");
-                    Element.Field4 = cnstLinesStr;
-                    Element.Field5 = alg;
-                    Element.Field6 = lineHeight;
-                    return false;
-                });
-*/
                 LastDesiredSize = new SizeRequest(new Size(reqWidth, reqHeight), new Size(10, ControlFont.LineHeight));
             }
             return LastDesiredSize;
@@ -309,24 +259,12 @@ namespace Forms9Patch.iOS
 
 
         #region Fitting
-        /// <summary>
-        /// Get Label Size w/o impact to label
-        /// </summary>
-        /// <returns>The size.</returns>
-        /// <param name="widthConstraint">Width constraint.</param>
-        /// <param name="fontSize">Font size.</param>
         Size LabelXamarinSize(double widthConstraint, double fontSize)
         {
             var cgsize = LabelSize(widthConstraint, (nfloat)fontSize);
             return new Size(cgsize.Width, cgsize.Height);
         }
 
-        /// <summary>
-        /// Get Label Size w/o impact to label
-        /// </summary>
-        /// <returns>The size.</returns>
-        /// <param name="widthConstraint">Width constraint.</param>
-        /// <param name="fontSize">Font size.</param>
         CGSize LabelSize(double widthConstraint, nfloat fontSize)
         {
             var font = UIFont.FromDescriptor(FontDescriptor, fontSize);
@@ -345,7 +283,6 @@ namespace Forms9Patch.iOS
             }
             return labelSize;
         }
-
 
         nfloat WidthFit(double widthConstraint, nfloat startFontSize)
         {
@@ -378,8 +315,6 @@ namespace Forms9Patch.iOS
                     }
                 }
             }
-
-            //System.Diagnostics.Debug.WriteLine("WIDTHFIT result=["+result+"]");
             return result;
         }
 
@@ -390,7 +325,6 @@ namespace Forms9Patch.iOS
             {
                 var font = Control.Font.WithSize(result);
                 CGSize labelSize = LabelSize(widthConstraint, result);
-                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=["+result+"] lineHeight=["+font.LineHeight+"] textBodyHeight=["+labelSize.Height+"] lines=["+(labelSize.Height / font.LineHeight)+"]");
                 if ((labelSize.Height / font.LineHeight) <= Element.Lines + .005f)
                 {
                     // the backspace character is tripping up this algorithm.  So we need to do a second check
@@ -417,7 +351,6 @@ namespace Forms9Patch.iOS
             result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 5f), result, 1);
             result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 1f), result, 0.2f);
             result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 0.2f), result, 0.04f);
-            //System.Diagnostics.Debug.WriteLine("ZEROLINESFIT result=["+result+"]");
             return result;
         }
 
@@ -427,7 +360,6 @@ namespace Forms9Patch.iOS
             for (result = start; result > min; result -= step)
             {
                 CGSize labelSize = LabelSize(widthConstraint, result);
-                //System.Diagnostics.Debug.WriteLine("\tstep=["+step+"] size=[" + result + "] textBodyHeight=[" + labelSize.Height + "]");
                 if (labelSize.Height <= heightConstraint)
                 {
                     labelSize = Control.IntrinsicContentSize;
@@ -449,10 +381,6 @@ namespace Forms9Patch.iOS
         }
 
         #region Change management
-        /// <summary>
-        /// Raises the element changed event.
-        /// </summary>
-        /// <param name="e">E.</param>
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
             if (e.OldElement != null)
@@ -488,7 +416,6 @@ namespace Forms9Patch.iOS
         /// <param name="e">E.</param>
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("PROPERTYCHANGED [" + e.PropertyName + "]");
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName)
                 UpdateHorizontalAlignment();
@@ -608,7 +535,6 @@ namespace Forms9Patch.iOS
         int IndexAtPoint(Point point)
         {
             var cgPoint = new CGPoint(point.X, point.Y - Control.Frame.Y);
-            //System.Diagnostics.Debug.WriteLine("cgPoint=[" + cgPoint + "] Frame=[" + Control.Frame + "]");
 
             // init text storage
             var textStorage = new NSTextStorage();

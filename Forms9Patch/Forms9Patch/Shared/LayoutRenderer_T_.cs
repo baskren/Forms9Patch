@@ -84,10 +84,14 @@ namespace Forms9Patch
 
 #if __IOS__
 
-        public override void Draw(CGRect rect)
+        public override void SubviewAdded(UIView uiview)
         {
-            SendSubviewToBack(Control);
-            base.Draw(rect);
+            base.SubviewAdded(uiview);
+
+            if (uiview is SkiaRoundedBoxAndImageView)
+                SendSubviewToBack(uiview);
+            else
+                BringSubviewToFront(uiview);
         }
 
 #elif __DROID__
