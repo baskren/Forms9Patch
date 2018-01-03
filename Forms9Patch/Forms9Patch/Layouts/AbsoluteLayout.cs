@@ -229,7 +229,6 @@ namespace Forms9Patch
         public AbsoluteLayout()
         {
             _id = _instances++;
-            Padding = new Thickness(20);
         }
         #endregion
 

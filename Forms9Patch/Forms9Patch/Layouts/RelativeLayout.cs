@@ -230,7 +230,6 @@ namespace Forms9Patch
         public RelativeLayout()
         {
             _id = _instances++;
-            Padding = new Thickness(20);
         }
         #endregion
 

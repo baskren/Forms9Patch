@@ -229,7 +229,6 @@ namespace Forms9Patch
         public Grid()
         {
             _id = _instances++;
-            Padding = new Thickness(20);
         }
         #endregion
 

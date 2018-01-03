@@ -229,7 +229,6 @@ namespace Forms9Patch
         public StackLayout()
         {
             _id = _instances++;
-            Padding = new Thickness(20);
         }
         #endregion
 
