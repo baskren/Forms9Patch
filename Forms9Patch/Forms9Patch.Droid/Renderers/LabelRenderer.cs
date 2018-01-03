@@ -385,8 +385,6 @@ namespace Forms9Patch.Droid
 
         void Layout()
         {
-            if (Element.Text == "BACKGROUND")
-                System.Diagnostics.Debug.WriteLine("");
             if (Element.IsVisible)
             {
                 if (Element.Width > -1 && Element.Height > -1 && (_lastControlState == null || Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight))

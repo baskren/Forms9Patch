@@ -891,13 +891,13 @@ namespace Forms9Patch
             //else
             //{
             // required because of race condition: Xamarin.Forms ListView doesn't scroll to index if it's still digesting a new ItemsSource?
-            System.Diagnostics.Debug.WriteLine("A invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
+            //System.Diagnostics.Debug.WriteLine("A invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
 
             Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
             {
                 //if (Device.OS == TargetPlatform.Android)
                 //{
-                System.Diagnostics.Debug.WriteLine("B invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
+                //System.Diagnostics.Debug.WriteLine("B invocation=[" + _scrollToInvocations + "] itemWrapper.ID=[" + itemWrapper.ID + "]  _baseItemsSource.ID=[" + _baseItemsSource.ID + "]");
                 if (IsGroupingEnabled)
                     RendererScrollToPos?.Invoke(itemWrapper, BaseItemsSource, position, animated);
                 else
@@ -1023,7 +1023,7 @@ namespace Forms9Patch
             {
                 //_longPressPan = true;
                 //System.Diagnostics.Debug.WriteLine("PAN ["+e.Listener.Element+"]");
-                System.Diagnostics.Debug.WriteLine("LONGPRESS PANNING");
+                //System.Diagnostics.Debug.WriteLine("LONGPRESS PANNING");
                 _popup.TranslationX = e.TotalDistance.X;
                 _popup.TranslationY = e.TotalDistance.Y;
 

@@ -83,12 +83,12 @@ namespace Forms9Patch
 
             Application.Current.ChildRemoved += (s, e) =>
                 {
-                    System.Diagnostics.Debug.WriteLine("");
+                    //System.Diagnostics.Debug.WriteLine("");
                 };
 
             Application.Current.DescendantRemoved += (s, e) =>
             {
-                System.Diagnostics.Debug.WriteLine("");
+                //System.Diagnostics.Debug.WriteLine("");
             };
         }
 
@@ -220,7 +220,7 @@ namespace Forms9Patch
                 return true;
             }
             var masterDetailPage = (PageController.InternalChildren[0] as MasterDetailPage) ?? (PageController.InternalChildren[0] as NavigationPage)?.CurrentPage as MasterDetailPage;
-            if (Device.RuntimePlatform!=Device.UWP && masterDetailPage != null && masterDetailPage.IsPresented)
+            if (Device.RuntimePlatform != Device.UWP && masterDetailPage != null && masterDetailPage.IsPresented)
             {
                 masterDetailPage.IsPresented = false;
                 return true;

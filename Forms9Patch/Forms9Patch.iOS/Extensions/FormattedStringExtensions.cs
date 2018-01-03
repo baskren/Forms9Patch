@@ -17,9 +17,6 @@ namespace Forms9Patch.iOS
             if (formattedString is HTMLMarkupString hTMLMarkupString)
                 text = hTMLMarkupString.UnmarkedText;
 
-            if (text == "Done")
-                System.Diagnostics.Debug.WriteLine("");
-
             var result = new NSMutableAttributedString(text);
 
             result.AddAttribute(UIStringAttributeKey.Font, baseFont, new NSRange(0, text.Length));

@@ -202,8 +202,8 @@ namespace Forms9Patch.iOS
         void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
         {
             GroupWrapper group = ((ListView)Element).BaseItemsSource;
-            if (reqItem is ItemWrapper)
-                System.Diagnostics.Debug.WriteLine("   itemWrapper.ID=[" + ((ItemWrapper)reqItem).ID + "]  group.ID=[" + group.ID + "]");
+            //if (reqItem is ItemWrapper)
+            //System.Diagnostics.Debug.WriteLine("   itemWrapper.ID=[" + ((ItemWrapper)reqItem).ID + "]  group.ID=[" + group.ID + "]");
             var path = group.DeepIndexOf(reqItem as ItemWrapper);
 
             //System.Diagnostics.Debug.WriteLine("path.Length=["+path.Length+"]["+path[0]+"]");
