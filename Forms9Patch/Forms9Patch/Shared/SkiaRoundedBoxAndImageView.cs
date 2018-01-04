@@ -730,8 +730,19 @@ namespace Forms9Patch
 
 #if __IOS__
                     ClipsToBounds = false;
+#elif __DROIDv15__
+                    hasShadow = false;
+                    makeRoomForShadow = false;
+                    shadowInverted = false;
 #elif __DROID__
-                    ClipBounds = null;
+                    if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.JellyBeanMr2)
+                        ClipBounds = null;
+                    else if (elementShape==ExtendedElementShape.SegmentEnd || elementShape==ExtendedElementShape.SegmentMid || elementShape==ExtendedElementShape.SegmentStart)
+                    {
+                        hasShadow = false;
+                        makeRoomForShadow = false;
+                        shadowInverted = false;
+                    }
 #elif WINDOWS_UWP
                     Clip = null;
 #else
@@ -778,6 +789,7 @@ namespace Forms9Patch
 
 #if __IOS__
                             ClipsToBounds = true;
+#elif __DROIDv15__
 #elif __DROID__
                             ClipBounds = new Android.Graphics.Rect(0, 0, Width, Height);
 #elif WINDOWS_UWP
