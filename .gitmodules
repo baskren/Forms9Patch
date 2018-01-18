@@ -1,7 +1,3 @@
 [submodule "P42.Utils"]
 	path = P42.Utils
 	url = https://baskren@bitbucket.org/baskren/p42.utils.git
-[submodule "Xamarin.Forms"]
-	path = Xamarin.Forms
-	url = https://github.com/xamarin/Xamarin.Forms
-	branch = 2.4.0
