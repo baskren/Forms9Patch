@@ -1,0 +1,10 @@
+Forms9Patch Open Issues:
+
+Demos:
+
+- Some pages need to be embedded in a scroll view for smaller screens
+
+TODO:
+
+- Verify Android WebViewExtensions.Print works
+- Do UWP WebViewExtensions.Print

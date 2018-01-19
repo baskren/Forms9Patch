@@ -1,142 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProductVersion>8.0.30703</ProductVersion>
-		<SchemaVersion>2.0</SchemaVersion>
-		<ProjectGuid>{00E0CDDC-B671-4876-8E78-927C50D2596A}</ProjectGuid>
-		<ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-		<OutputType>Library</OutputType>
-		<AppDesignerFolder>Properties</AppDesignerFolder>
-		<RootNamespace>FormsGestures.Droid</RootNamespace>
-		<AssemblyName>FormsGestures.Droid</AssemblyName>
-		<FileAlignment>512</FileAlignment>
-		<AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
-		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-		<AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-		<NuGetPackageImportStamp>
-		</NuGetPackageImportStamp>
-		<TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
-		<DefineConstants>TRACE;DEBUG;__DROID__;DONT_USE_MEASURE;NETSTANDARD;</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<DebugType>
-		</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release\</OutputPath>
-		<DefineConstants>TRACE;__DROID__;DONT_USE_MEASURE;NETSTANDARD;</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<DocumentationFile>
-		</DocumentationFile>
-	</PropertyGroup>
-	<ItemGroup>
-		<Reference Include="Microsoft.CSharp" />
-		<Reference Include="Mono.Android" />
-		<Reference Include="mscorlib" />
-		<Reference Include="System" />
-		<Reference Include="System.Core" />
-		<Reference Include="System.Xml.Linq" />
-		<Reference Include="System.Xml" />
-	</ItemGroup>
-	<ItemGroup>
-		
-		<Compile Include="Detectors\DownUpGestureDetector.cs"/>
-		<Compile Include="Detectors\MultiTouchGestureDetector.cs"/>
-		<Compile Include="Detectors\NativeGestureDetector.cs"/>
-
-		<Compile Include="EventArgs\AndroidDownUpEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidEventArgsHelper.cs"/>
-		<Compile Include="EventArgs\AndroidLongPressEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidPanEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidPinchEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidRotateEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidSwipeEventArgs.cs"/>
-		<Compile Include="EventArgs\AndroidTapEventArgs.cs"/>
-
-		<Compile Include="Exensions\AndroidViewExtensions.cs"/>
-		<Compile Include="Exensions\PointExtensions.cs"/>
-
-		<Compile Include="Listeners\DownUpGestureListener.cs"/>
-		<Compile Include="Listeners\IMultiTouchGestureListener.cs"/>
-		<Compile Include="Listeners\NativeGestureListener.cs"/>
-		<Compile Include="Listeners\OnTouchListener.cs"/>
-
-		<Compile Include="Services\CoordTransformService.cs"/>
-		<Compile Include="Services\DisplayService.cs"/>
-		<Compile Include="Services\GestureService.cs"/>
-
-		<Compile Include="DIP.cs" />
-		<Compile Include="NativeGestureHandler.cs" />
-		<Compile Include="Settings.cs" />
-
-		<Compile Include="Properties\AssemblyInfo.cs" />
-
-		<Compile Include="Resources\Resource.Designer.cs" />
-
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="Resources\AboutResources.txt" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
-			<Project>{7D54AC1A-8F90-4E0F-A5D4-C2420D708C06}</Project>
-			<Name>FormsGestures.NetStandard</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
-			<Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
-			<Name>P42.NumericalMethods.NetStandard</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
-			<Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
-			<Name>P42.Utils.NetStandard</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
-			<Project>{2EFB5A37-DF19-4897-B6A6-914E55047BDF}</Project>
-			<Name>P42.Utils.Droid</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
-		  <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
-		  <Name>Xamarin.Forms.Xaml</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
-		  <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
-		  <Name>Xamarin.Forms.Platform.Android</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
-		  <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
-		  <Name>Xamarin.Forms.Core</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-		  <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
-		  <Name>Xamarin.Forms.Platform</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.AppLinks\Xamarin.Forms.Platform.Android.AppLinks.csproj">
-		  <Project>{42DB052E-0909-45D2-8240-187F99F393FB}</Project>
-		  <Name>Xamarin.Forms.Platform.Android.AppLinks</Name>
-		</ProjectReference>
-		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\Xamarin.Forms.Platform.Android.FormsViewGroup.csproj">
-		  <Project>{3B72465B-ACAE-43AE-9327-10F372FE5F80}</Project>
-		  <Name>Xamarin.Forms.Platform.Android.FormsViewGroup</Name>
-		</ProjectReference>
-	</ItemGroup>
-	<ItemGroup />
-	<Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-	<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-		<PropertyGroup>
-			<ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-		</PropertyGroup>
-	</Target>
-	<!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{803F6E5C-CD93-43AC-92D9-984D09B264DC}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FormsGestures.Droid</RootNamespace>
+    <AssemblyName>FormsGestures.Droid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__DROID__;DONT_USE_MEASURE;NETSTANDARD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>
+    </DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;__DROID__;DONT_USE_MEASURE;NETSTANDARD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Detectors\DownUpGestureDetector.cs" />
+    <Compile Include="Detectors\MultiTouchGestureDetector.cs" />
+    <Compile Include="Detectors\NativeGestureDetector.cs" />
+    <Compile Include="EventArgs\AndroidDownUpEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidEventArgsHelper.cs" />
+    <Compile Include="EventArgs\AndroidLongPressEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidPanEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidPinchEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidRotateEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidSwipeEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidTapEventArgs.cs" />
+    <Compile Include="Exensions\AndroidViewExtensions.cs" />
+    <Compile Include="Exensions\PointExtensions.cs" />
+    <Compile Include="Listeners\DownUpGestureListener.cs" />
+    <Compile Include="Listeners\IMultiTouchGestureListener.cs" />
+    <Compile Include="Listeners\NativeGestureListener.cs" />
+    <Compile Include="Listeners\OnTouchListener.cs" />
+    <Compile Include="Services\CoordTransformService.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Services\GestureService.cs" />
+    <Compile Include="DIP.cs" />
+    <Compile Include="NativeGestureHandler.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
+      <Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
+      <Name>P42.NumericalMethods.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
+      <Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
+      <Name>P42.Utils.NetStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
+      <Project>{2EFB5A37-DF19-4897-B6A6-914E55047BDF}</Project>
+      <Name>P42.Utils.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
+      <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
+      <Name>Xamarin.Forms.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
+      <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
+      <Name>Xamarin.Forms.Platform.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
+      <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
+      <Name>Xamarin.Forms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
+      <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
+      <Name>Xamarin.Forms.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\Xamarin.Forms.Platform.Android.FormsViewGroup.csproj">
+      <Project>{3B72465B-ACAE-43AE-9327-10F372FE5F80}</Project>
+      <Name>Xamarin.Forms.Platform.Android.FormsViewGroup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
+      <Project>{52e3c505-3123-48ed-afe5-e700f1d5a01a}</Project>
+      <Name>FormsGestures.NetStandard.XfSource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

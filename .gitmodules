@@ -4,3 +4,6 @@
 [submodule "Xamarin.Forms"]
 	path = Xamarin.Forms
 	url = https://github.com/xamarin/Xamarin.Forms
+[submodule "Forms9PatchDemo"]
+	path = Forms9PatchDemo
+	url = https://github.com/baskren/Forms9PatchDemo
