@@ -31,7 +31,7 @@ namespace FormsGestures.UWP
                 var documentsFolderPath = Windows.Storage.KnownFolders.DocumentsLibrary?.Path;
                 P42.Utils.Environment.DocumentsPath = documentsFolderPath;//Windows.Storage.ApplicationData.Current.LocalFolder.Path; 
             }
-            catch (System.UnauthorizedAccessException e)
+            catch (System.UnauthorizedAccessException)
             {
                 // we don't have access.  Oh well.
             }

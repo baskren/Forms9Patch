@@ -88,43 +88,43 @@
 		<None Include="Resources\AboutResources.txt" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
+		<ProjectReference Include="..\..\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
 			<Project>{7D54AC1A-8F90-4E0F-A5D4-C2420D708C06}</Project>
 			<Name>FormsGestures.NetStandard</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
+		<ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
 			<Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
 			<Name>P42.NumericalMethods.NetStandard</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
+		<ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
 			<Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
 			<Name>P42.Utils.NetStandard</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
+		<ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
 			<Project>{2EFB5A37-DF19-4897-B6A6-914E55047BDF}</Project>
 			<Name>P42.Utils.Droid</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
 		  <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
 		  <Name>Xamarin.Forms.Xaml</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
 		  <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
 		  <Name>Xamarin.Forms.Platform.Android</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
 		  <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
 		  <Name>Xamarin.Forms.Core</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
 		  <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
 		  <Name>Xamarin.Forms.Platform</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Platform.Android.AppLinks\Xamarin.Forms.Platform.Android.AppLinks.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.AppLinks\Xamarin.Forms.Platform.Android.AppLinks.csproj">
 		  <Project>{42DB052E-0909-45D2-8240-187F99F393FB}</Project>
 		  <Name>Xamarin.Forms.Platform.Android.AppLinks</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\Xamarin.Forms.Platform.Android.FormsViewGroup.csproj">
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\Xamarin.Forms.Platform.Android.FormsViewGroup.csproj">
 		  <Project>{3B72465B-ACAE-43AE-9327-10F372FE5F80}</Project>
 		  <Name>Xamarin.Forms.Platform.Android.FormsViewGroup</Name>
 		</ProjectReference>

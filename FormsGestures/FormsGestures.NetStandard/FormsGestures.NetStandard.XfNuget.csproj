@@ -19,6 +19,7 @@
     <DefineConstants>TRACE;NETSTANDARD;RELEASE;NETSTANDARD1_3</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.3\FormsGestures.xml</DocumentationFile>
   </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\rocket%401½x.png" />
     <None Remove="Resources\rocket%402x.png" />
@@ -38,11 +39,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj" />
-    <ProjectReference Include="..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj" />
-    <ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
-    <ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
-    <ProjectReference Include="..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.280" />
+  </ItemGroup>
+
+
 
 </Project>

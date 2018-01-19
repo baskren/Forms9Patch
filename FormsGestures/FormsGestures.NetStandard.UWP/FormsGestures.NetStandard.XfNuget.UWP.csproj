@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F4EE6D4-CA44-4A60-9529-DA6AAF91196D}</ProjectGuid>
+    <ProjectGuid>{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FormsGestures.UWP</RootNamespace>
     <AssemblyName>FormsGestures.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;NETSTANDARD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -32,16 +32,15 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;NETSTANDARD</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;NETSTANDARD;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -50,21 +49,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;</DefineConstants>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;NETSTANDARD</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;NETSTANDARD;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
@@ -73,21 +71,20 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;NETSTANDARD</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UWP;NETSTANDARD;</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -96,67 +93,36 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;NETSTANDARD</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpDownUpArgs.cs">
-      <Link>EventArgs\UWPDownUpArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpLongPressEventArgs.cs">
-      <Link>EventArgs\UwpLongPressEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpPanEventArgs.cs">
-      <Link>EventArgs\UwpPanEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpPinchEventArgs.cs">
-      <Link>EventArgs\UwpPinchEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpRotateEventArgs.cs">
-      <Link>EventArgs\UwpRotateEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\EventArgs\UwpTapEventArgs.cs">
-      <Link>EventArgs\UwpTapEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\Extensions\DisplayOrientationExtensions.cs">
-      <Link>Extensions\DisplayOrientationExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\Extensions\FrameworkElementExtensions.cs">
-      <Link>Extensions\FrameworkElementExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\Extensions\PointExtensions.cs">
-      <Link>Extensions\PointExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\Extensions\RectangleExtensions.cs">
-      <Link>Extensions\RectangleExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\CoordinateTransformService.cs">
-      <Link>CoordinateTransformService.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\DisplayService.cs">
-      <Link>DisplayService.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\GestureService.cs">
-      <Link>GestureService.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\NativeGestureHandler.cs">
-      <Link>NativeGestureHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\FormsGestures.NetStandard.UWP\Settings.cs">
-      <Link>Settings.cs</Link>
-    </Compile>
+    <Compile Include="EventArgs\UwpDownUpArgs.cs" />
+    <Compile Include="EventArgs\UwpLongPressEventArgs.cs" />
+    <Compile Include="EventArgs\UwpPanEventArgs.cs" />
+    <Compile Include="EventArgs\UwpPinchEventArgs.cs" />
+    <Compile Include="EventArgs\UwpRotateEventArgs.cs" />
+    <Compile Include="EventArgs\UwpTapEventArgs.cs" />
+    <Compile Include="Extensions\DisplayOrientationExtensions.cs" />
+    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="DisplayService.cs" />
+    <Compile Include="GestureService.cs" />
+    <Compile Include="CoordinateTransformService.cs" />
+    <Compile Include="NativeGestureHandler.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\FormsGestures.UWP.rd.xml" />
+    <EmbeddedResource Include="Properties\FormsGestures.NetStandard.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -166,17 +132,18 @@
       <Version>2.4.0.280</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures.NetStandard\FormsGestures.NetStandard.XfNuget.csproj">
-      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
+      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
       <Name>FormsGestures.NetStandard.XfNuget</Name>
     </ProjectReference>
-    <ProjectReference Include="..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
-      <Project>{a3e44406-a6a6-47f6-8fee-841e9e8b52dc}</Project>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
+      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
       <Name>P42.NumericalMethods.NetStandard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
-      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
+      <Project>{fb3bcd64-62c1-4ac5-a5d5-3330c9a58853}</Project>
       <Name>P42.Utils.NetStandard</Name>
     </ProjectReference>
   </ItemGroup>

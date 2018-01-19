@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{DDCDB76B-2DE1-44F2-A3D8-73EEF0BA6406}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FormsGestures</RootNamespace>
+    <AssemblyName>FormsGestures</AssemblyName>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>
+    </ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <!--DebugType>full</DebugType-->
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <!--DebugType>
+    </DebugType-->
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Release\FormsGestures.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Test</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\FormsGestures.NetStandard\Debug.cs">
+      <Link>Debug.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Display.cs">
+      <Link>Display.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Enums\Direction.cs">
+      <Link>Enums\Direction.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Enums\DisplayOrientation.cs">
+      <Link>Enums\DisplayOrientation.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Enums\HoverOverAlignment.cs">
+      <Link>Enums\HoverOverAlignment.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\BaseGestureEventArgs.cs">
+      <Link>EventArgs\BaseGestureEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\DownUpEventArgs.cs">
+      <Link>EventArgs\DownUpEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\LongPressEventArgs.cs">
+      <Link>EventArgs\LongPressEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\PanEventArgs.cs">
+      <Link>EventArgs\PanEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\PinchEventArgs.cs">
+      <Link>EventArgs\PinchEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\RotateEventArgs.cs">
+      <Link>EventArgs\RotateEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\SwipeEventArgs.cs">
+      <Link>EventArgs\SwipeEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\EventArgs\TapEventArgs.cs">
+      <Link>EventArgs\TapEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Extensions\PointExtensions.cs">
+      <Link>Extensions\PointExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Extensions\VisualElementExtensions.cs">
+      <Link>Extensions\VisualElementExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Interfaces\ICoordTransform.cs">
+      <Link>Interfaces\ICoordTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Interfaces\IDisplayService.cs">
+      <Link>Interfaces\IDisplayService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Interfaces\IGestureService.cs">
+      <Link>Interfaces\IGestureService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.NetStandard\Listener.cs">
+      <Link>Listener.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\rocket.png" />
+    <EmbeddedResource Include="Resources\rocket%401½x.png" />
+    <EmbeddedResource Include="Resources\rocket%402x.png" />
+    <EmbeddedResource Include="Resources\rocket%403x.png" />
+    <EmbeddedResource Include="Resources\rocket%404x.png" />
+    <EmbeddedResource Include="Resources\rocket%40¾x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.XfNuget.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.PCL\P42.NumericalMethods.PCL.csproj">
+      <Project>{afc00402-9bff-4164-ae61-021210c2ce70}</Project>
+      <Name>P42.NumericalMethods.PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.PCL\P42.Utils.PCL.csproj">
+      <Project>{043a7c06-6b2c-42e0-be23-9b8ade9f4748}</Project>
+      <Name>P42.Utils.PCL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets'))" />
+  </Target>
+</Project>
