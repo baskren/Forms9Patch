@@ -1,0 +1,161 @@
+<Project DefaultTargets = "Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <ItemGroup>
+    <!-- EFFECTS -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">
+      <Link>Effects\CustomFontEffect.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Effects\SliderStepSizeEffect.cs">
+      <Link>Effects\SliderStepSizeEffect.cs</Link>
+    </Compile>
+    <!-- EXCEPTIONS -->
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\InvalidDataContractException.cs">
+      <Link>Exceptions\InvalidDataContractException.cs</Link>
+    </Compile>
+    <!-- EXTENSIONS -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs">
+      <Link>Extensions\AlignmentExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs">
+      <Link>Extensions\FormattedStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs">
+      <Link>Extensions\LineBreakModeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs">
+      <Link>Extensions\MeasureSpecFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Extensions\SKBitmapExtensions.cs">
+      <Link>Extensions\SKBitmapExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Extensions\SkiaColorExtensions.cs">
+      <Link>Extensions\SkiaColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Extensions\SKPathExtensions.cs">
+      <Link>Extensions\SKPathExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Extensions\SKRectExtensions.cs">
+      <Link>Extensions\SKRectExtensions.cs</Link>
+    </Compile>
+    <!-- LISTVIEW -->
+    <Compile Include="..\Forms9Patch.Source.Droid\ListView\ListItemLocationService.cs">
+      <Link>ListView\ListItemLocationService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\ListView\ListViewExtensionService.cs">
+      <Link>ListView\ListViewExtensionService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\ListView\ListViewRenderer.cs">
+      <Link>ListView\ListViewRenderer.cs</Link>
+    </Compile>
+    <!-- MODELS -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\BaselineSpan.cs">
+      <Link>Models\BaselineSpan.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs">
+      <Link>Models\CustomTypefaceSpan.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Models\F9PImageData.cs">
+      <Link>Models\F9PImageData.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\FontManagment.cs">
+      <Link>Models\FontManagment.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Models\LicenseChecker.cs">
+      <Link>Models\LicenseChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\Settings.cs">
+      <Link>Models\Settings.cs</Link>
+    </Compile>
+    <!-- PLATORM VIEWS -->
+    <Compile Include="..\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs">
+      <Link>PlatformViews\F9PTextView.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\SkiaRoundedBoxAndImageView.cs">
+      <Link>PlatformViews\SkiaRoundedBoxAndImageView.cs</Link>
+    </Compile>
+    <!-- RENDERERS -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs">
+      <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs">
+      <Link>Renderers\LabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\AbsoluteLayoutRenderer.cs">
+      <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\BubbleLayoutRenderer.cs">
+      <Link>Renderers\BubbleLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\ContentViewRenderer.cs">
+      <Link>Renderers\ContentViewRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\FrameRenderer.cs">
+      <Link>Renderers\FrameRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\GridRenderer.cs">
+      <Link>Renderers\GridRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\ImageRenderer.cs">
+      <Link>Renderers\ImageRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\RelativeLayout.cs">
+      <Link>Renderers\RelativeLayout.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\StackLayoutRenderer.cs">
+      <Link>Renderers\StackLayoutRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\Renderers\LayoutRenderer_T_.cs">
+      <Link>Renderers\LayoutRenderer_T_.cs</Link>
+    </Compile>
+    <!-- SERVICES -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
+      <Link>Services\ApplicationInfoService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\DescendentBounds.cs">
+      <Link>Services\DescendentBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\FontService.cs">
+      <Link>Services\FontService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs">
+      <Link>Services\HtmlToPngService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\KeyboardService.cs">
+      <Link>Services\KeyboardService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Services\WebViewExtensionsService.cs">
+      <Link>Services\WebViewExtensionsService.cs</Link>
+    </Compile>
+    <!-- Assembly Info -->
+    <Compile Include="..\Forms9Patch.NetStandard\Platform\PlatformAssemblyInfo.cs">
+      <Link>SharedPlatformAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Effects\" />
+    <Folder Include="Elements\" />
+    <Folder Include="Elements\Buttons\" />
+    <Folder Include="Elements\ListView\" />
+    <Folder Include="Elements\ListView\CellViews\" />
+    <Folder Include="Elements\ListView\Enums\" />
+    <Folder Include="Elements\ListView\EventArgs\" />
+    <Folder Include="Elements\ListView\Interfaces\" />
+    <Folder Include="Elements\ListView\ItemsWrappers\" />
+    <Folder Include="Elements\ListView\TemplateSelectors\" />
+    <Folder Include="Elements\Pickers\" />
+    <Folder Include="Elements\Popups\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Events\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Layouts\" />
+    <Folder Include="Models\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Services\" />
+    <Folder Include="Spans\" />
+  </ItemGroup>
+
+
+</Project>

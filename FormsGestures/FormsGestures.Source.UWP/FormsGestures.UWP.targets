@@ -1,0 +1,52 @@
+<Project DefaultTargets = "Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+ 
+  <ItemGroup>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpDownUpArgs.cs">
+      <Link>EventArgs\UWPDownUpArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpLongPressEventArgs.cs">
+      <Link>EventArgs\UwpLongPressEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpPanEventArgs.cs">
+      <Link>EventArgs\UwpPanEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpPinchEventArgs.cs">
+      <Link>EventArgs\UwpPinchEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpRotateEventArgs.cs">
+      <Link>EventArgs\UwpRotateEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpTapEventArgs.cs">
+      <Link>EventArgs\UwpTapEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\Extensions\DisplayOrientationExtensions.cs">
+      <Link>Extensions\DisplayOrientationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\Extensions\FrameworkElementExtensions.cs">
+      <Link>Extensions\FrameworkElementExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\Extensions\PointExtensions.cs">
+      <Link>Extensions\PointExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\Extensions\RectangleExtensions.cs">
+      <Link>Extensions\RectangleExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\CoordinateTransformService.cs">
+      <Link>CoordinateTransformService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\DisplayService.cs">
+      <Link>DisplayService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\GestureService.cs">
+      <Link>GestureService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\NativeGestureHandler.cs">
+      <Link>NativeGestureHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\Settings.cs">
+      <Link>Settings.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+ </Project>
