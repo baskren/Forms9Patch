@@ -345,6 +345,7 @@
       "packagesPath": "/Users/ben/.nuget/packages",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
+        "/Users/ben/Development/Xamarin/Forms9Patch2/.nuget/nuget.config",
         "/Users/ben/.config/NuGet/NuGet.Config"
       ],
       "sources": {
