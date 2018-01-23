@@ -38,19 +38,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.iOS, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="SkiaSharp.Svg">
-      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -65,18 +56,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.iOS\FormsGestures.NetStandard.XfSource.iOS.csproj">
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.XfSource.iOS\FormsGestures.NetStandard.XfSource.iOS.csproj">
       <Project>{a6d42c80-cdfe-4c4e-b0fb-72a403793b95}</Project>
       <Name>FormsGestures.NetStandard.XfSource.iOS</Name>
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.XfSource\FormsGestures.NetStandard.XfSource.csproj">
       <Project>{7D54AC1A-8F90-4E0F-A5D4-C2420D708C06}</Project>
-      <Name>FormsGestures.NetStandard</Name>
+      <Name>FormsGestures.NetStandard.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
-      <Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
       <Name>P42.NumericalMethods.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard.iOS\P42.Utils.NetStandard.iOS.csproj">
@@ -86,12 +77,12 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
-      <Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>P42.Utils.NetStandard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forms9Patch.NetStandard\Forms9Patch.NetStandard.XfSource.csproj">
+    <ProjectReference Include="..\Forms9Patch.NetStandard.XfSource\Forms9Patch.NetStandard.XfSource.csproj">
       <Project>{995CBDCE-1D72-47FA-8FA9-08A73DCA9CCB}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
+      <Name>Forms9Patch.NetStandard.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
       <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>

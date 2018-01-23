@@ -2,13 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{1966B931-FFE0-431F-BF02-25F891E8ABE6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "P42.Utils", "P42.Utils", "{68AC6393-E8BD-45AD-860D-4EFE00B466D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.PCL", "P42.Utils\P42.Utils.PCL\P42.Utils.PCL.csproj", "{043A7C06-6B2C-42E0-BE23-9B8ADE9F4748}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.Utils.NetStandard", "P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard", "P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard.Droid", "P42.Utils\P42.Utils.NetStandard.Droid\P42.Utils.NetStandard.Droid.csproj", "{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}"
 EndProject
@@ -18,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard.iOS",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.PCL.iOS", "P42.Utils\P42.Utils.PCL.iOS\P42.Utils.PCL.iOS.csproj", "{E0310C06-794F-4B67-90B9-E1A5C4E84E87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.NumericalMethods.NetStandard", "P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods.NetStandard", "P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods.PCL", "P42.Utils\P42.NumericalMethods.PCL\P42.NumericalMethods.PCL.csproj", "{AFC00402-9BFF-4164-AE61-021210C2CE70}"
 EndProject
@@ -38,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfNuget.iOS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfNuget.UWP", "Forms9Patch\Forms9Patch.PCL.XfNuget.UWP\Forms9Patch.PCL.XfNuget.UWP.csproj", "{321F4DDA-F8AA-4CE5-9A3C-9497EB3EA0BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.NetStandard.XfNuget", "FormsGestures\FormsGestures.NetStandard.XfNuget\FormsGestures.NetStandard.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget", "FormsGestures\FormsGestures.NetStandard.XfNuget\FormsGestures.NetStandard.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget.Droid", "FormsGestures\FormsGestures.NetStandard.XfNuget.Droid\FormsGestures.NetStandard.XfNuget.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
 EndProject
@@ -54,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource.UWP", "FormsGestures\FormsGestures.PCL.XfSource.UWP\FormsGestures.PCL.XfSource.UWP.csproj", "{8B10BE2D-1311-4A42-851A-5184885B4EC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.NetStandard.XfSource", "FormsGestures\FormsGestures.NetStandard.XfSource\FormsGestures.NetStandard.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource", "FormsGestures\FormsGestures.NetStandard.XfSource\FormsGestures.NetStandard.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource.iOS", "FormsGestures\FormsGestures.NetStandard.XfSource.iOS\FormsGestures.NetStandard.XfSource.iOS.csproj", "{A6D42C80-CDFE-4C4E-B0FB-72A403793B95}"
 EndProject
@@ -62,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.X
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource.UWP", "FormsGestures\FormsGestures.NetStandard.XfSource.UWP\FormsGestures.NetStandard.XfSource.UWP.csproj", "{F86AA167-0272-43C7-A783-2847E3624235}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.NetStandard.XfSource", "Forms9Patch\Forms9Patch.NetStandard.XfSource\Forms9Patch.NetStandard.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource", "Forms9Patch\Forms9Patch.NetStandard.XfSource\Forms9Patch.NetStandard.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource.Droid", "Forms9Patch\Forms9Patch.NetStandard.XfSource.Droid\Forms9Patch.NetStandard.XfSource.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
 EndProject
@@ -120,6 +118,626 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfSource", "XfSource", "{2B0B9D08-0382-44D6-8AD2-F819A56338E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\Debug.cs = FormsGestures\FormsGestures.Source\Debug.cs
+		FormsGestures\FormsGestures.Source\Display.cs = FormsGestures\FormsGestures.Source\Display.cs
+		FormsGestures\FormsGestures.Source\Listener.cs = FormsGestures\FormsGestures.Source\Listener.cs
+		FormsGestures\FormsGestures.Source\FormsGestures.targets = FormsGestures\FormsGestures.Source\FormsGestures.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{1A58427B-131D-4E66-A909-2CCE69C6F75E}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\Enums\Direction.cs = FormsGestures\FormsGestures.Source\Enums\Direction.cs
+		FormsGestures\FormsGestures.Source\Enums\DisplayOrientation.cs = FormsGestures\FormsGestures.Source\Enums\DisplayOrientation.cs
+		FormsGestures\FormsGestures.Source\Enums\HoverOverAlignment.cs = FormsGestures\FormsGestures.Source\Enums\HoverOverAlignment.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{9C37E6E4-7B6C-4F3F-80EA-BA6B3D4BA2CC}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\EventArgs\BaseGestureEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\BaseGestureEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\DownUpEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\DownUpEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\LongPressEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\LongPressEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\PanEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\PanEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\PinchEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\PinchEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\RotateEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\RotateEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\SwipeEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\SwipeEventArgs.cs
+		FormsGestures\FormsGestures.Source\EventArgs\TapEventArgs.cs = FormsGestures\FormsGestures.Source\EventArgs\TapEventArgs.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{FDDB629D-CE0F-4357-BACC-14AFC8FB8A14}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\Extensions\PointExtensions.cs = FormsGestures\FormsGestures.Source\Extensions\PointExtensions.cs
+		FormsGestures\FormsGestures.Source\Extensions\VisualElementExtensions.cs = FormsGestures\FormsGestures.Source\Extensions\VisualElementExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{2BEF27FC-5D83-42E8-8113-33D965A0EE49}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\Interfaces\ICoordTransform.cs = FormsGestures\FormsGestures.Source\Interfaces\ICoordTransform.cs
+		FormsGestures\FormsGestures.Source\Interfaces\IDisplayService.cs = FormsGestures\FormsGestures.Source\Interfaces\IDisplayService.cs
+		FormsGestures\FormsGestures.Source\Interfaces\IGestureService.cs = FormsGestures\FormsGestures.Source\Interfaces\IGestureService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{3A506629-F689-441C-B4A9-B110C9D99A41}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source\Resources\rocket.png = FormsGestures\FormsGestures.Source\Resources\rocket.png
+		FormsGestures\FormsGestures.Source\Resources\rocket%401½x.png = FormsGestures\FormsGestures.Source\Resources\rocket%401½x.png
+		FormsGestures\FormsGestures.Source\Resources\rocket%402x.png = FormsGestures\FormsGestures.Source\Resources\rocket%402x.png
+		FormsGestures\FormsGestures.Source\Resources\rocket%403x.png = FormsGestures\FormsGestures.Source\Resources\rocket%403x.png
+		FormsGestures\FormsGestures.Source\Resources\rocket%404x.png = FormsGestures\FormsGestures.Source\Resources\rocket%404x.png
+		FormsGestures\FormsGestures.Source\Resources\rocket%40¾x.png = FormsGestures\FormsGestures.Source\Resources\rocket%40¾x.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.Droid", "Source.Droid", "{A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\DIP.cs = FormsGestures\FormsGestures.Source.Droid\DIP.cs
+		FormsGestures\FormsGestures.Source.Droid\FormsGestures.Droid.targets = FormsGestures\FormsGestures.Source.Droid\FormsGestures.Droid.targets
+		FormsGestures\FormsGestures.Source.Droid\NativeGestureHandler.cs = FormsGestures\FormsGestures.Source.Droid\NativeGestureHandler.cs
+		FormsGestures\FormsGestures.Source.Droid\Settings.cs = FormsGestures\FormsGestures.Source.Droid\Settings.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Detectors", "Detectors", "{42647908-552E-4D08-873E-63345EB2A4CE}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\Detectors\DownUpGestureDetector.cs = FormsGestures\FormsGestures.Source.Droid\Detectors\DownUpGestureDetector.cs
+		FormsGestures\FormsGestures.Source.Droid\Detectors\MultiTouchGestureDetector.cs = FormsGestures\FormsGestures.Source.Droid\Detectors\MultiTouchGestureDetector.cs
+		FormsGestures\FormsGestures.Source.Droid\Detectors\NativeGestureDetector.cs = FormsGestures\FormsGestures.Source.Droid\Detectors\NativeGestureDetector.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{F07BB693-334D-417C-BC2A-75F4A424E532}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidDownUpEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidDownUpEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidEventArgsHelper.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidEventArgsHelper.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidLongPressEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidLongPressEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidPanEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidPanEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidPinchEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidPinchEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidRotateEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidRotateEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidSwipeEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidSwipeEventArgs.cs
+		FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidTapEventArgs.cs = FormsGestures\FormsGestures.Source.Droid\EventArgs\AndroidTapEventArgs.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{25C15DC5-F14E-4CB8-AEB9-E1D11695B78C}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\Exensions\AndroidViewExtensions.cs = FormsGestures\FormsGestures.Source.Droid\Exensions\AndroidViewExtensions.cs
+		FormsGestures\FormsGestures.Source.Droid\Exensions\PointExtensions.cs = FormsGestures\FormsGestures.Source.Droid\Exensions\PointExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listeners", "Listeners", "{25824AD8-FCBE-4182-B573-6A4DABE7289D}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\Listeners\DownUpGestureListener.cs = FormsGestures\FormsGestures.Source.Droid\Listeners\DownUpGestureListener.cs
+		FormsGestures\FormsGestures.Source.Droid\Listeners\IMultiTouchGestureListener.cs = FormsGestures\FormsGestures.Source.Droid\Listeners\IMultiTouchGestureListener.cs
+		FormsGestures\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs = FormsGestures\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs
+		FormsGestures\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs = FormsGestures\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C47C1DFD-1EAA-420C-90AA-AF6E9CF85595}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.Droid\Services\CoordTransformService.cs = FormsGestures\FormsGestures.Source.Droid\Services\CoordTransformService.cs
+		FormsGestures\FormsGestures.Source.Droid\Services\DisplayService.cs = FormsGestures\FormsGestures.Source.Droid\Services\DisplayService.cs
+		FormsGestures\FormsGestures.Source.Droid\Services\GestureService.cs = FormsGestures\FormsGestures.Source.Droid\Services\GestureService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.iOS", "Source.iOS", "{4EB08D47-5498-4D62-94DF-C4276FCCB606}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.iOS\DownUpGestureRecognizer.cs = FormsGestures\FormsGestures.Source.iOS\DownUpGestureRecognizer.cs
+		FormsGestures\FormsGestures.Source.iOS\FormsGestures.iOS.targets = FormsGestures\FormsGestures.Source.iOS\FormsGestures.iOS.targets
+		FormsGestures\FormsGestures.Source.iOS\NativeGestureHandler.cs = FormsGestures\FormsGestures.Source.iOS\NativeGestureHandler.cs
+		FormsGestures\FormsGestures.Source.iOS\Settings.cs = FormsGestures\FormsGestures.Source.iOS\Settings.cs
+		FormsGestures\FormsGestures.Source.iOS\UIInterfaceOrientaitonExtensions.cs = FormsGestures\FormsGestures.Source.iOS\UIInterfaceOrientaitonExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{04C2B18F-F2CC-4F08-850F-02874CAE275D}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSDownUpEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSDownUpEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSEventArgsHelper.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSEventArgsHelper.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSLongPressEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSLongPressEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSPanEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSPanEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSPinchEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSPinchEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSRotateEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSRotateEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSSwipeEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSSwipeEventArgs.cs
+		FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSTapEventArgs.cs = FormsGestures\FormsGestures.Source.iOS\EventArgs\iOSTapEventArgs.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0B4F0B2D-4E18-49AD-854D-A54E4CA986EC}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.iOS\Services\DisplayService.cs = FormsGestures\FormsGestures.Source.iOS\Services\DisplayService.cs
+		FormsGestures\FormsGestures.Source.iOS\Services\GestureService.cs = FormsGestures\FormsGestures.Source.iOS\Services\GestureService.cs
+		FormsGestures\FormsGestures.Source.iOS\Services\LocationService.cs = FormsGestures\FormsGestures.Source.iOS\Services\LocationService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.UWP", "Source.UWP", "{87AA43A3-3D1A-446A-B297-C310B1C35E7F}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.UWP\CoordinateTransformService.cs = FormsGestures\FormsGestures.Source.UWP\CoordinateTransformService.cs
+		FormsGestures\FormsGestures.Source.UWP\DisplayService.cs = FormsGestures\FormsGestures.Source.UWP\DisplayService.cs
+		FormsGestures\FormsGestures.Source.UWP\FormsGestures.UWP.targets = FormsGestures\FormsGestures.Source.UWP\FormsGestures.UWP.targets
+		FormsGestures\FormsGestures.Source.UWP\GestureService.cs = FormsGestures\FormsGestures.Source.UWP\GestureService.cs
+		FormsGestures\FormsGestures.Source.UWP\NativeGestureHandler.cs = FormsGestures\FormsGestures.Source.UWP\NativeGestureHandler.cs
+		FormsGestures\FormsGestures.Source.UWP\Settings.cs = FormsGestures\FormsGestures.Source.UWP\Settings.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{626F5170-C69A-430E-9348-B113C9580DD7}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpDownUpArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpDownUpArgs.cs
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpLongPressEventArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpLongPressEventArgs.cs
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpPanEventArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpPanEventArgs.cs
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpPinchEventArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpPinchEventArgs.cs
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpRotateEventArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpRotateEventArgs.cs
+		FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpTapEventArgs.cs = FormsGestures\FormsGestures.Source.UWP\EventArgs\UwpTapEventArgs.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{979C95CB-A6B1-4BDD-981C-D0748A95F11C}"
+	ProjectSection(SolutionItems) = preProject
+		FormsGestures\FormsGestures.Source.UWP\Extensions\DisplayOrientationExtensions.cs = FormsGestures\FormsGestures.Source.UWP\Extensions\DisplayOrientationExtensions.cs
+		FormsGestures\FormsGestures.Source.UWP\Extensions\FrameworkElementExtensions.cs = FormsGestures\FormsGestures.Source.UWP\Extensions\FrameworkElementExtensions.cs
+		FormsGestures\FormsGestures.Source.UWP\Extensions\PointExtensions.cs = FormsGestures\FormsGestures.Source.UWP\Extensions\PointExtensions.cs
+		FormsGestures\FormsGestures.Source.UWP\Extensions\RectangleExtensions.cs = FormsGestures\FormsGestures.Source.UWP\Extensions\RectangleExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{6DEB15E5-44A1-40F5-82D9-147363E7793C}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\AdditionalAssemblyInfo.cs = Forms9Patch\Forms9Patch.Source\AdditionalAssemblyInfo.cs
+		Forms9Patch\Forms9Patch.Source\Forms9Patch.targets = Forms9Patch\Forms9Patch.Source\Forms9Patch.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effects", "Effects", "{82260832-051A-490F-8E43-3456806CE1E3}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs = Forms9Patch\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs
+		Forms9Patch\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs = Forms9Patch\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elements", "Elements", "{CA3492E5-A916-4D3D-89C6-372601626109}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ColorGradientBox.cs = Forms9Patch\Forms9Patch.Source\Elements\ColorGradientBox.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Image.cs = Forms9Patch\Forms9Patch.Source\Elements\Image.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Label.cs = Forms9Patch\Forms9Patch.Source\Elements\Label.cs
+		Forms9Patch\Forms9Patch.Source\Elements\RootPage.cs = Forms9Patch\Forms9Patch.Source\Elements\RootPage.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Buttons", "Buttons", "{E2D06138-86A5-449C-89DC-692EB789C384}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\Buttons\Button.cs = Forms9Patch\Forms9Patch.Source\Elements\Buttons\Button.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Buttons\Segment.cs = Forms9Patch\Forms9Patch.Source\Elements\Buttons\Segment.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Buttons\SegmentedControl.cs = Forms9Patch\Forms9Patch.Source\Elements\Buttons\SegmentedControl.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Buttons\StateButton.cs = Forms9Patch\Forms9Patch.Source\Elements\Buttons\StateButton.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ListView", "ListView", "{D349786E-8DB5-4F38-B797-B7060F595940}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellAccessory-deleteMe.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellAccessory-deleteMe.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ListView.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ListView.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ListViewExtensions.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ListViewExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\SwipeMenuItem.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\SwipeMenuItem.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CellViews", "CellViews", "{E079BC3F-FC8D-439C-B2F1-CB932480D60C}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\BaseCellView.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\BaseCellView.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\BlankCellView.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\BlankCellView.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\GroupHeaderView.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\GroupHeaderView.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\NullItemCellView.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\NullItemCellView.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\TextCellViewContent.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\CellViews\TextCellViewContent.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{3A469E3E-5E6B-405D-AC99-52942469E15E}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\AccessoryPosition.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\AccessoryPosition.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\HoverOverAlignment.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\HoverOverAlignment.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{652A2B41-5864-4ABF-9E87-AFF142E30695}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\DragEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\DragEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemTappedEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemTappedEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SwipeMenuItemTappedArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SwipeMenuItemTappedArgs.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{6ADD5926-B5A5-49A0-8604-8ED1170E0100}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\ICellHeight.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\ICellHeight.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\ICellSwipeMenus.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\ICellSwipeMenus.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IHoverOver.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IHoverOver.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IIsSelectedAble.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IIsSelectedAble.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IItemWrapper.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IItemWrapper.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IListItemLocation.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IListItemLocation.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IListViewExtensionService.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Interfaces\IListViewExtensionService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemsWrappers", "ItemsWrappers", "{4671BA23-10EF-48A8-B502-13094991A7A1}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\BlankItemWrapper.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\BlankItemWrapper.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\GroupWrapper.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\GroupWrapper.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper_TItem_.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper_TItem_.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\NullItemWrapper.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\ItemsWrappers\NullItemWrapper.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TemplateSelectors", "TemplateSelectors", "{8B899CDC-46F2-4E7B-9C31-E4090DEBB6CF}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\DataTemplateSelector.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\DataTemplateSelector.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\TemplateSelectorBase.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\TemplateSelectors\TemplateSelectorBase.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pickers", "Pickers", "{C40237AC-8AC0-466F-8F99-67E8C8A36834}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\Pickers\BasePicker.cs = Forms9Patch\Forms9Patch.Source\Elements\Pickers\BasePicker.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Pickers\MultiComponentPicker.cs = Forms9Patch\Forms9Patch.Source\Elements\Pickers\MultiComponentPicker.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Pickers\MultiPicker.cs = Forms9Patch\Forms9Patch.Source\Elements\Pickers\MultiPicker.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Pickers\SelectBy.cs = Forms9Patch\Forms9Patch.Source\Elements\Pickers\SelectBy.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Pickers\SinglePicker.cs = Forms9Patch\Forms9Patch.Source\Elements\Pickers\SinglePicker.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Popups", "Popups", "{AE6D5EC0-9337-4D06-9775-4B12F5741C53}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\ActivityIndicatorPopup.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\ActivityIndicatorPopup.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\BubblePopup.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\BubblePopup.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\ModalPopup.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\ModalPopup.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\PermissionPopup.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\PermissionPopup.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\PopupBase.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\PopupBase.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\TargetedToast.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\TargetedToast.cs
+		Forms9Patch\Forms9Patch.Source\Elements\Popups\Toast.cs = Forms9Patch\Forms9Patch.Source\Elements\Popups\Toast.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{A2E52D87-F932-459A-9A99-A83DE14BDADA}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Enums\AutoFit.cs = Forms9Patch\Forms9Patch.Source\Enums\AutoFit.cs
+		Forms9Patch\Forms9Patch.Source\Enums\ElementShape.cs = Forms9Patch\Forms9Patch.Source\Enums\ElementShape.cs
+		Forms9Patch\Forms9Patch.Source\Enums\ExtendedElementShape.cs = Forms9Patch\Forms9Patch.Source\Enums\ExtendedElementShape.cs
+		Forms9Patch\Forms9Patch.Source\Enums\Fill.cs = Forms9Patch\Forms9Patch.Source\Enums\Fill.cs
+		Forms9Patch\Forms9Patch.Source\Enums\FontBaseline.cs = Forms9Patch\Forms9Patch.Source\Enums\FontBaseline.cs
+		Forms9Patch\Forms9Patch.Source\Enums\GroupToggleBehavior.cs = Forms9Patch\Forms9Patch.Source\Enums\GroupToggleBehavior.cs
+		Forms9Patch\Forms9Patch.Source\Enums\HapticEffect.cs = Forms9Patch\Forms9Patch.Source\Enums\HapticEffect.cs
+		Forms9Patch\Forms9Patch.Source\Enums\KeyClicks.cs = Forms9Patch\Forms9Patch.Source\Enums\KeyClicks.cs
+		Forms9Patch\Forms9Patch.Source\Enums\NetworkConnectivity.cs = Forms9Patch\Forms9Patch.Source\Enums\NetworkConnectivity.cs
+		Forms9Patch\Forms9Patch.Source\Enums\PointerDirection.cs = Forms9Patch\Forms9Patch.Source\Enums\PointerDirection.cs
+		Forms9Patch\Forms9Patch.Source\Enums\RoundRectPath.cs = Forms9Patch\Forms9Patch.Source\Enums\RoundRectPath.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{01299013-2062-4BA0-9683-278D8F604AF9}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Events\SegmentedControlEventArgs.cs = Forms9Patch\Forms9Patch.Source\Events\SegmentedControlEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Events\SegmentedControlEventHandler.cs = Forms9Patch\Forms9Patch.Source\Events\SegmentedControlEventHandler.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{347D12D9-D758-43ED-9CFA-C0ABE717850A}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Extensions\ApplicationExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ApplicationExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\AspectExtension.cs = Forms9Patch\Forms9Patch.Source\Extensions\AspectExtension.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\AssemblyExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\AssemblyExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ButtonShapeExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ButtonShapeExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ColorExtension.cs = Forms9Patch\Forms9Patch.Source\Extensions\ColorExtension.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ElementExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ElementExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ElementShapeExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ElementShapeExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\FontExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\FontExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\GridExtension.cs = Forms9Patch\Forms9Patch.Source\Extensions\GridExtension.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\HtmlStringExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\HtmlStringExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\IFontElementExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\IFontElementExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ImageExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ImageExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ImageSourceExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\ImageSourceExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\InternalStringExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\InternalStringExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\LayoutOptionsExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\LayoutOptionsExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\PointerDirectionExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\PointerDirectionExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\PointExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\PointExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\RectangleExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\RectangleExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\StringExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\StringExtensions.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\TextAlignmentExtension.cs = Forms9Patch\Forms9Patch.Source\Extensions\TextAlignmentExtension.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\ThicknessExtension.cs = Forms9Patch\Forms9Patch.Source\Extensions\ThicknessExtension.cs
+		Forms9Patch\Forms9Patch.Source\Extensions\WebViewExtensions.cs = Forms9Patch\Forms9Patch.Source\Extensions\WebViewExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{2CD768C1-9C64-4AD1-8AF8-532B8A3B4AF5}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Interfaces\IApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IBackground.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IBackground.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IBubbleLayout.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IBubbleLayout.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IBubblePopup.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IBubblePopup.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IButton.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IButton.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IButtonState.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IButtonState.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IDescendentBounds.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IDescendentBounds.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IElement.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IElement.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IFontElement.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IFontElement.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IFontFamilies.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IFontFamilies.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IFontService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IFontService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IHtmlToPngPdfService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IHtmlToPngPdfService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IImage.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IImage.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IKeyboardService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IKeyboardService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IKeyClicksService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IKeyClicksService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\ILabel.cs = Forms9Patch\Forms9Patch.Source\Interfaces\ILabel.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\ILabelStyle.cs = Forms9Patch\Forms9Patch.Source\Interfaces\ILabelStyle.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\ILayout.cs = Forms9Patch\Forms9Patch.Source\Interfaces\ILayout.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\INativeSettings.cs = Forms9Patch\Forms9Patch.Source\Interfaces\INativeSettings.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IOsInformationService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IOsInformationService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IPopup.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IPopup.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\ISegment.cs = Forms9Patch\Forms9Patch.Source\Interfaces\ISegment.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IShape.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IShape.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IStatusBarService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IStatusBarService.cs
+		Forms9Patch\Forms9Patch.Source\Interfaces\IWebViewExtensionService.cs = Forms9Patch\Forms9Patch.Source\Interfaces\IWebViewExtensionService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Layouts", "Layouts", "{73FB7F22-E299-434F-84AF-59DFC51578E6}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Layouts\AbsoluteLayout.cs = Forms9Patch\Forms9Patch.Source\Layouts\AbsoluteLayout.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\BubbleLayout.cs = Forms9Patch\Forms9Patch.Source\Layouts\BubbleLayout.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\ContentView.cs = Forms9Patch\Forms9Patch.Source\Layouts\ContentView.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\Frame.cs = Forms9Patch\Forms9Patch.Source\Layouts\Frame.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\Grid.cs = Forms9Patch\Forms9Patch.Source\Layouts\Grid.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\ManualLayout.cs = Forms9Patch\Forms9Patch.Source\Layouts\ManualLayout.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\RelativeLayout.cs = Forms9Patch\Forms9Patch.Source\Layouts\RelativeLayout.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\ShapeBase.cs = Forms9Patch\Forms9Patch.Source\Layouts\ShapeBase.cs
+		Forms9Patch\Forms9Patch.Source\Layouts\StackLayout.cs = Forms9Patch\Forms9Patch.Source\Layouts\StackLayout.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{7FF118ED-3C69-411C-B548-FDF0C894EC6B}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Models\ButtonState.cs = Forms9Patch\Forms9Patch.Source\Models\ButtonState.cs
+		Forms9Patch\Forms9Patch.Source\Models\F9PFormattedString.cs = Forms9Patch\Forms9Patch.Source\Models\F9PFormattedString.cs
+		Forms9Patch\Forms9Patch.Source\Models\HTMLMarkupString.cs = Forms9Patch\Forms9Patch.Source\Models\HTMLMarkupString.cs
+		Forms9Patch\Forms9Patch.Source\Models\ImageSource.cs = Forms9Patch\Forms9Patch.Source\Models\ImageSource.cs
+		Forms9Patch\Forms9Patch.Source\Models\MetaFont.cs = Forms9Patch\Forms9Patch.Source\Models\MetaFont.cs
+		Forms9Patch\Forms9Patch.Source\Models\Range.cs = Forms9Patch\Forms9Patch.Source\Models\Range.cs
+		Forms9Patch\Forms9Patch.Source\Models\RangeLists.cs = Forms9Patch\Forms9Patch.Source\Models\RangeLists.cs
+		Forms9Patch\Forms9Patch.Source\Models\Settings.cs = Forms9Patch\Forms9Patch.Source\Models\Settings.cs
+		Forms9Patch\Forms9Patch.Source\Models\SpanFormattedString.cs = Forms9Patch\Forms9Patch.Source\Models\SpanFormattedString.cs
+		Forms9Patch\Forms9Patch.Source\Models\VersionString.cs = Forms9Patch\Forms9Patch.Source\Models\VersionString.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{A68C9E96-CBBF-44C9-BF56-B2ED5600696B}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Resources\unlicensedcopy.png = Forms9Patch\Forms9Patch.Source\Resources\unlicensedcopy.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{170D091D-4C59-4FDE-B1EE-5CF1B1FF51C1}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source\Services\Display.cs = Forms9Patch\Forms9Patch.Source\Services\Display.cs
+		Forms9Patch\Forms9Patch.Source\Services\KeyboardService.cs = Forms9Patch\Forms9Patch.Source\Services\KeyboardService.cs
+		Forms9Patch\Forms9Patch.Source\Services\KeyClicksService.cs = Forms9Patch\Forms9Patch.Source\Services\KeyClicksService.cs
+		Forms9Patch\Forms9Patch.Source\Services\OsInfoService.cs = Forms9Patch\Forms9Patch.Source\Services\OsInfoService.cs
+		Forms9Patch\Forms9Patch.Source\Services\ServiceNotAvailableException.cs = Forms9Patch\Forms9Patch.Source\Services\ServiceNotAvailableException.cs
+		Forms9Patch\Forms9Patch.Source\Services\StatusBarService.cs = Forms9Patch\Forms9Patch.Source\Services\StatusBarService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spans", "Spans", "{6AC311C7-335E-4DE0-B98D-979EB889B02A}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source\Spans\ActionSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\ActionSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\BackgroundColorSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\BackgroundColorSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\BoldSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\BoldSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\DenominatorSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\DenominatorSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\FontColorSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\FontColorSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\FontFamilySpan.cs = Forms9Patch\Forms9Patch.Source\Spans\FontFamilySpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\FontSizeSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\FontSizeSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\ItalicsSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\ItalicsSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\NumeratorSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\NumeratorSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\Span.cs = Forms9Patch\Forms9Patch.Source\Spans\Span.cs
+		Forms9Patch\Forms9Patch.Source\Spans\StrikethroughSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\StrikethroughSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\SubscriptSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\SubscriptSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\SuperscriptSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\SuperscriptSpan.cs
+		Forms9Patch\Forms9Patch.Source\Spans\UnderlineSpan.cs = Forms9Patch\Forms9Patch.Source\Spans\UnderlineSpan.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fonts", "Fonts", "{31037449-5E67-4038-8ED8-FDC5E83F71CA}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\STIXGeneral.otf = Forms9Patch\STIXGeneral.otf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.Droid", "Source.Droid", "{92F755F5-DC5B-4F85-A9CB-DE66806E4308}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets = Forms9Patch\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effects", "Effects", "{6190F4A1-8FC4-4DF3-A002-6258CC730AC5}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs = Forms9Patch\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Effects\ListViewSelectionDisabledEffect.cs = Forms9Patch\Forms9Patch.Source.Droid\Effects\ListViewSelectionDisabledEffect.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Effects\SliderStepSizeEffect.cs = Forms9Patch\Forms9Patch.Source.Droid\Effects\SliderStepSizeEffect.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{83291844-EA71-44AC-AD31-C1B983FD7D32}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ListView", "ListView", "{FBABABB9-B3DB-44AA-AC01-388E0EF48561}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\ListView\ListItemLocationService.cs = Forms9Patch\Forms9Patch.Source.Droid\ListView\ListItemLocationService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\ListView\ListViewExtensionService.cs = Forms9Patch\Forms9Patch.Source.Droid\ListView\ListViewExtensionService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\ListView\ListViewRenderer.cs = Forms9Patch\Forms9Patch.Source.Droid\ListView\ListViewRenderer.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{AE5E7CFB-8152-4111-BDE3-F537559AE2FA}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Models\BaselineSpan.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\BaselineSpan.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Models\dont forget to get LicenseChecker.txt = Forms9Patch\Forms9Patch.Source.Droid\Models\dont forget to get LicenseChecker.txt
+		Forms9Patch\Forms9Patch.Source.Droid\Models\FontManagment.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\FontManagment.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\Settings.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformViews", "PlatformViews", "{7CE43EAC-9930-4FF2-82F2-282074CA2C1D}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PRelativeLayout-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PRelativeLayout-DELETEME.cs
+		Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs = Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{0A50041D-6099-44B9-8F31-C3D9F498D94F}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Renderers\BaseCellViewRenderer-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\Renderers\BaseCellViewRenderer-DELETEME.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs = Forms9Patch\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Renderers\ImageViewManager.cs = Forms9Patch\Forms9Patch.Source.Droid\Renderers\ImageViewManager.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs = Forms9Patch\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Renderers\RootPageRenderer-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\Renderers\RootPageRenderer-DELETEME.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{110D2C00-17C6-466B-B5EF-44501BC3E9FF}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\DisplayService-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\DisplayService-DELETEME.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\KeyboardService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\KeyboardService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\KeyClicksService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\KeyClicksService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\TypeExtensions-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\TypeExtensions-DELETEME.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\WebViewExtensionsService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\WebViewExtensionsService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.iOS", "Source.iOS", "{5371C977-B4EA-4E3F-A780-2F9B696C716C}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets = Forms9Patch\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets
+		Forms9Patch\Forms9Patch.Source.iOS\Reachability.cs = Forms9Patch\Forms9Patch.Source.iOS\Reachability.cs
+		Forms9Patch\Forms9Patch.Source.iOS\UIViewContentMode.cs = Forms9Patch\Forms9Patch.Source.iOS\UIViewContentMode.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effects", "Effects", "{70CC6122-0555-409E-A62D-91996EBC5612}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Effects\BackgroundImageEffect.cs = Forms9Patch\Forms9Patch.Source.iOS\Effects\BackgroundImageEffect.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs = Forms9Patch\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Effects\SliderStepSizeEffect.cs = Forms9Patch\Forms9Patch.Source.iOS\Effects\SliderStepSizeEffect.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs = Forms9Patch\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{331E5AE9-F4CB-4110-9809-B2D122B81153}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\CALayerExtension.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\CALayerExtension.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\Debug.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\Debug.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\ImageViewManagerExtension.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\ImageViewManagerExtension.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\UIImageExtension.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\UIImageExtension.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ListView", "ListView", "{91F5636A-B4AF-420E-A586-A1070EC53A58}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\ListView\BaseCellViewRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\ListView\BaseCellViewRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\ListView\ListItemLocationService.cs = Forms9Patch\Forms9Patch.Source.iOS\ListView\ListItemLocationService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\ListView\ListViewRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\ListView\ListViewRenderer.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{3D4FFDCB-23F5-4C46-96B3-BECC990CF9EE}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.iOS\Models\Settings.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{511779C7-3ECA-4D69-B04F-346C6DF2C6CF}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\ImageViewManager.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\ImageViewManager.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldBubbleLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldBubbleLayoutRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldImageRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldImageRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldLayoutRenderer_T_.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\OldLayoutRenderer_T_.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5054117B-CB9C-4223-A2E1-44E7D46DA04D}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\DescendentBounds.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\FontService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\KeyboardService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\KeyboardService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\KeyClicksService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\KeyClicksService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\ListViewExtensionService_iOS.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\ListViewExtensionService_iOS.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\StatusBarService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\StatusBarService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\TypeExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\TypeExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\WebViewExtensionsService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\WebViewExtensionsService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.UWP", "Source.UWP", "{B034D3ED-CA00-4332-BD5D-F0BF3516A16E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effects", "Effects", "{030F3DDF-5965-48A5-B818-F2B099830ECD}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Effects\EmbeddedResourceFontEffect.cs = Forms9Patch\Forms9Patch.Source.UWP\Effects\EmbeddedResourceFontEffect.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Effects\SliderStepSizeEffect.cs = Forms9Patch\Forms9Patch.Source.UWP\Effects\SliderStepSizeEffect.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{B8819D23-4E3E-48E4-A43E-5C0A6606F28F}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\AlignmentExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\AlignmentExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\ColorExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\ColorExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\FontExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\FontExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\FormattedStringExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\FormattedStringExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\FrameworkElementExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\FrameworkElementExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\InLineExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\InLineExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\OldFontExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\OldFontExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\TextBlockExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\TextBlockExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\UwpWebViewExtensions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\UwpWebViewExtensions.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Extensions\XamarinSpanExtentions.cs = Forms9Patch\Forms9Patch.Source.UWP\Extensions\XamarinSpanExtentions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ListView", "ListView", "{17FEDDB0-3C39-4BCA-80CB-37129F5A6BCD}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\ListView\ListViewRenderer.cs = Forms9Patch\Forms9Patch.Source.UWP\ListView\ListViewRenderer.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{225518E4-00F4-424C-ABA4-CEFFD046DFA4}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Models\MetaFont.cs = Forms9Patch\Forms9Patch.Source.UWP\Models\MetaFont.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Models\SizeI.cs = Forms9Patch\Forms9Patch.Source.UWP\Models\SizeI.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{00271EAD-5196-40CE-8E1F-ADA73B92B7FD}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Renderers\ImageViewManager.cs = Forms9Patch\Forms9Patch.Source.UWP\Renderers\ImageViewManager.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Renderers\LabeLRenderer.cs = Forms9Patch\Forms9Patch.Source.UWP\Renderers\LabeLRenderer.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9E8657C9-0040-4EA7-9C8B-B811D102AF8E}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\DescendentBounds.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\DisplayService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\DisplayService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\FontFamilies.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\FontFamilies.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\FontService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\HtmlToPngService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\KeyboardService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\KeyboardService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\OsInfoService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\OsInfoService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\WebViewExtensionService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\WebViewExtensionService.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.Platform", "Source.Platform", "{511C26CC-6004-406F-ADA5-DBE10232DE78}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs = Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs
+		Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs = Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{5B624595-F648-4143-9E9A-5C7600ABC90A}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKBitmapExtensions.cs = Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKBitmapExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Extensions\SkiaColorExtensions.cs = Forms9Patch\Forms9Patch.Source.Platform\Extensions\SkiaColorExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKPathExtensions.cs = Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKPathExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKRectExtensions.cs = Forms9Patch\Forms9Patch.Source.Platform\Extensions\SKRectExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{3C693943-9490-412F-8DAF-4534E7C46006}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Platform\Models\F9PImageData.cs = Forms9Patch\Forms9Patch.Source.Platform\Models\F9PImageData.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Models\LicenseChecker.cs = Forms9Patch\Forms9Patch.Source.Platform\Models\LicenseChecker.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{F024E851-73E3-4634-A969-12E366FC2AF5}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\AbsoluteLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\AbsoluteLayoutRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\BubbleLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\BubbleLayoutRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\ContentViewRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\ContentViewRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\FrameRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\FrameRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\GridRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\GridRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\ImageRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\ImageRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2974,7 +3592,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{68AC6393-E8BD-45AD-860D-4EFE00B466D4} = {1966B931-FFE0-431F-BF02-25F891E8ABE6}
 		{043A7C06-6B2C-42E0-BE23-9B8ADE9F4748} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
 		{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
 		{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
@@ -3007,7 +3624,6 @@ Global
 		{D394BC61-9B90-4B1C-9771-35F93865AC5C} = {EDB4F296-5B36-4763-8561-B9EFA3640529}
 		{740C3DFF-E410-4632-BDD9-82594F3E21B4} = {EDB4F296-5B36-4763-8561-B9EFA3640529}
 		{C35275FD-92EE-4B8A-8C49-D98EC73B3C45} = {EDB4F296-5B36-4763-8561-B9EFA3640529}
-		{0ACF2386-A71B-4A07-AD0C-D0227D3CC680} = {1966B931-FFE0-431F-BF02-25F891E8ABE6}
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{57B8B73D-C3B5-4C42-869E-7B2F17D354AC} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{9DB2F292-8034-4E06-89AD-98BBDA4306B9} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
@@ -3027,6 +3643,73 @@ Global
 		{707FE75B-82D3-461A-8418-31B3097A2F45} = {09BF3FD0-50C7-4D75-94E9-EB3AE4B3A00E}
 		{2B0B9D08-0382-44D6-8AD2-F819A56338E4} = {FD45A3D3-BBE9-4497-91F7-F21248F2E992}
 		{45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A} = {FD45A3D3-BBE9-4497-91F7-F21248F2E992}
+		{A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
+		{1A58427B-131D-4E66-A909-2CCE69C6F75E} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
+		{9C37E6E4-7B6C-4F3F-80EA-BA6B3D4BA2CC} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
+		{FDDB629D-CE0F-4357-BACC-14AFC8FB8A14} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
+		{2BEF27FC-5D83-42E8-8113-33D965A0EE49} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
+		{3A506629-F689-441C-B4A9-B110C9D99A41} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
+		{A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
+		{42647908-552E-4D08-873E-63345EB2A4CE} = {A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}
+		{F07BB693-334D-417C-BC2A-75F4A424E532} = {A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}
+		{25C15DC5-F14E-4CB8-AEB9-E1D11695B78C} = {A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}
+		{25824AD8-FCBE-4182-B573-6A4DABE7289D} = {A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}
+		{C47C1DFD-1EAA-420C-90AA-AF6E9CF85595} = {A8D78ECD-8D36-474E-B9D8-0D3F9F63C6B4}
+		{4EB08D47-5498-4D62-94DF-C4276FCCB606} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
+		{04C2B18F-F2CC-4F08-850F-02874CAE275D} = {4EB08D47-5498-4D62-94DF-C4276FCCB606}
+		{0B4F0B2D-4E18-49AD-854D-A54E4CA986EC} = {4EB08D47-5498-4D62-94DF-C4276FCCB606}
+		{87AA43A3-3D1A-446A-B297-C310B1C35E7F} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
+		{626F5170-C69A-430E-9348-B113C9580DD7} = {87AA43A3-3D1A-446A-B297-C310B1C35E7F}
+		{979C95CB-A6B1-4BDD-981C-D0748A95F11C} = {87AA43A3-3D1A-446A-B297-C310B1C35E7F}
+		{6DEB15E5-44A1-40F5-82D9-147363E7793C} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{82260832-051A-490F-8E43-3456806CE1E3} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{CA3492E5-A916-4D3D-89C6-372601626109} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{E2D06138-86A5-449C-89DC-692EB789C384} = {CA3492E5-A916-4D3D-89C6-372601626109}
+		{D349786E-8DB5-4F38-B797-B7060F595940} = {CA3492E5-A916-4D3D-89C6-372601626109}
+		{E079BC3F-FC8D-439C-B2F1-CB932480D60C} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{3A469E3E-5E6B-405D-AC99-52942469E15E} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{652A2B41-5864-4ABF-9E87-AFF142E30695} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{6ADD5926-B5A5-49A0-8604-8ED1170E0100} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{4671BA23-10EF-48A8-B502-13094991A7A1} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{8B899CDC-46F2-4E7B-9C31-E4090DEBB6CF} = {D349786E-8DB5-4F38-B797-B7060F595940}
+		{C40237AC-8AC0-466F-8F99-67E8C8A36834} = {CA3492E5-A916-4D3D-89C6-372601626109}
+		{AE6D5EC0-9337-4D06-9775-4B12F5741C53} = {CA3492E5-A916-4D3D-89C6-372601626109}
+		{A2E52D87-F932-459A-9A99-A83DE14BDADA} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{01299013-2062-4BA0-9683-278D8F604AF9} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{347D12D9-D758-43ED-9CFA-C0ABE717850A} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{2CD768C1-9C64-4AD1-8AF8-532B8A3B4AF5} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{73FB7F22-E299-434F-84AF-59DFC51578E6} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{7FF118ED-3C69-411C-B548-FDF0C894EC6B} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{A68C9E96-CBBF-44C9-BF56-B2ED5600696B} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{170D091D-4C59-4FDE-B1EE-5CF1B1FF51C1} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{6AC311C7-335E-4DE0-B98D-979EB889B02A} = {6DEB15E5-44A1-40F5-82D9-147363E7793C}
+		{31037449-5E67-4038-8ED8-FDC5E83F71CA} = {A68C9E96-CBBF-44C9-BF56-B2ED5600696B}
+		{92F755F5-DC5B-4F85-A9CB-DE66806E4308} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{6190F4A1-8FC4-4DF3-A002-6258CC730AC5} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{83291844-EA71-44AC-AD31-C1B983FD7D32} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{FBABABB9-B3DB-44AA-AC01-388E0EF48561} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{AE5E7CFB-8152-4111-BDE3-F537559AE2FA} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{7CE43EAC-9930-4FF2-82F2-282074CA2C1D} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{0A50041D-6099-44B9-8F31-C3D9F498D94F} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{110D2C00-17C6-466B-B5EF-44501BC3E9FF} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{5371C977-B4EA-4E3F-A780-2F9B696C716C} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{70CC6122-0555-409E-A62D-91996EBC5612} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{331E5AE9-F4CB-4110-9809-B2D122B81153} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{91F5636A-B4AF-420E-A586-A1070EC53A58} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{3D4FFDCB-23F5-4C46-96B3-BECC990CF9EE} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{511779C7-3ECA-4D69-B04F-346C6DF2C6CF} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{5054117B-CB9C-4223-A2E1-44E7D46DA04D} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
+		{B034D3ED-CA00-4332-BD5D-F0BF3516A16E} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{030F3DDF-5965-48A5-B818-F2B099830ECD} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{B8819D23-4E3E-48E4-A43E-5C0A6606F28F} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{17FEDDB0-3C39-4BCA-80CB-37129F5A6BCD} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{225518E4-00F4-424C-ABA4-CEFFD046DFA4} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{00271EAD-5196-40CE-8E1F-ADA73B92B7FD} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{9E8657C9-0040-4EA7-9C8B-B811D102AF8E} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
+		{511C26CC-6004-406F-ADA5-DBE10232DE78} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{5B624595-F648-4143-9E9A-5C7600ABC90A} = {511C26CC-6004-406F-ADA5-DBE10232DE78}
+		{3C693943-9490-412F-8DAF-4534E7C46006} = {511C26CC-6004-406F-ADA5-DBE10232DE78}
+		{F024E851-73E3-4634-A969-12E366FC2AF5} = {511C26CC-6004-406F-ADA5-DBE10232DE78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FAAF233-96A8-4005-93A0-A34046BAEFE8}

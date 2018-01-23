@@ -57,15 +57,6 @@
     <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PCLStorage.1.0.2\lib\monoandroid\PCLStorage.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.3\lib\MonoAndroid\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Svg, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Android, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.3\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

@@ -20,7 +20,7 @@
     <DocumentationFile>bin\Release\netstandard1.3\FormsGestures.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Import Project="..\FormsGestures.Source\FormsGestures.targets"  />
+  <Import Project="..\FormsGestures.Source\FormsGestures.targets" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj" />

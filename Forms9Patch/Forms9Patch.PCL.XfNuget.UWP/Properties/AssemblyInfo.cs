@@ -29,6 +29,4 @@ using Xamarin.Forms;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: ComVisible(false)]
 
-[assembly: ResolutionGroupName("Forms9Patch")]
-
 [assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]

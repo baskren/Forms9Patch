@@ -119,15 +119,6 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp">
-      <HintPath>..\..\packages\SkiaSharp.1.59.2\lib\MonoAndroid\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Android">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Svg">
-      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -144,7 +135,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.PCL.Droid\P42.Utils.PCL.Droid.csproj">
       <Project>{2EFB5A37-DF19-4897-B6A6-914E55047BDF}</Project>
-      <Name>P42.Utils.Droid</Name>
+      <Name>P42.Utils.PCL.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.PCL\P42.NumericalMethods.PCL.csproj">
       <Project>{afc00402-9bff-4164-ae61-021210c2ce70}</Project>
@@ -154,13 +145,13 @@
       <Project>{ddcdb76b-2de1-44f2-a3d8-73eef0ba6406}</Project>
       <Name>FormsGestures.PCL.XfNuget</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.PCL.Droid\FormsGestures.PCL.XfNuget.Droid.csproj">
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.PCL.XfNuget.Droid\FormsGestures.PCL.XfNuget.Droid.csproj">
       <Project>{EB3B97E9-BFF9-4D72-BDB9-29E74E21D78F}</Project>
-      <Name>FormsGestures.PCL.Droid</Name>
+      <Name>FormsGestures.PCL.XfNuget.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forms9Patch.PCL\Forms9Patch.PCL.XfNuget.csproj">
+    <ProjectReference Include="..\Forms9Patch.PCL.XfNuget\Forms9Patch.PCL.XfNuget.csproj">
       <Project>{A45DEA17-78A3-464A-9E00-0342D0503B00}</Project>
-      <Name>Forms9Patch.PCL</Name>
+      <Name>Forms9Patch.PCL.XfNuget</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

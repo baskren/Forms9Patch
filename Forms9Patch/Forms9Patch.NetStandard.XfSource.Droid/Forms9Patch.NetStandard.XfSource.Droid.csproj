@@ -74,15 +74,6 @@
       <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
   -->
-    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.3\lib\MonoAndroid\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Android, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Svg">
-      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -97,24 +88,12 @@
       <Name>P42.Utils.NetStandard.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
-      <Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>P42.Utils.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
-      <Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
       <Name>P42.NumericalMethods.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard\FormsGestures.NetStandard.XfSource.csproj">
-      <Project>{7D54AC1A-8F90-4E0F-A5D4-C2420D708C06}</Project>
-      <Name>FormsGestures.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.Droid\FormsGestures.NetStandard.XfSource.Droid.csproj">
-      <Project>{803f6e5c-cd93-43ac-92d9-984d09b264dc}</Project>
-      <Name>FormsGestures.NetStandard.XfSource.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forms9Patch.NetStandard\Forms9Patch.NetStandard.XfSource.csproj">
-      <Project>{995CBDCE-1D72-47FA-8FA9-08A73DCA9CCB}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
@@ -135,6 +114,18 @@
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
       <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
       <Name>Xamarin.Forms.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.XfSource.Droid\FormsGestures.NetStandard.XfSource.Droid.csproj">
+      <Project>{803f6e5c-cd93-43ac-92d9-984d09b264dc}</Project>
+      <Name>FormsGestures.NetStandard.XfSource.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.NetStandard.XfSource\FormsGestures.NetStandard.XfSource.csproj">
+      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Name>FormsGestures.NetStandard.XfSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forms9Patch.NetStandard.XfSource\Forms9Patch.NetStandard.XfSource.csproj">
+      <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
+      <Name>Forms9Patch.NetStandard.XfSource</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

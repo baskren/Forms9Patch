@@ -68,11 +68,11 @@
       <Name>FormsGestures.NetStandard.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj">
-      <Project>{C41F14C5-77B5-430B-8B89-5DD59484BB36}</Project>
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
       <Name>P42.NumericalMethods.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj">
-      <Project>{FB3BCD64-62C1-4AC5-A5D5-3330C9A58853}</Project>
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>P42.Utils.NetStandard</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.PCL.iOS\P42.Utils.PCL.iOS.csproj">

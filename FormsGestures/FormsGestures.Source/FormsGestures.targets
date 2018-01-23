@@ -1,5 +1,4 @@
-<Project DefaultTargets = "Build"
-    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <ItemGroup>
     <Compile Include="..\FormsGestures.Source\Debug.cs" Link="Debug.cs" />

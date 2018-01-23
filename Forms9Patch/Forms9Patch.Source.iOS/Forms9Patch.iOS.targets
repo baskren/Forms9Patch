@@ -3,6 +3,7 @@
 
   <ItemGroup>
 
+    <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
       <Link>Effects\CustomFontEffect.cs</Link>
     </Compile>
@@ -12,6 +13,8 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs">
       <Link>Effects\WebViewFixEffect.cs</Link>
     </Compile>
+
+    <!-- EXTENSIONS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs">
       <Link>Extensions\AlignmentExtensions.cs</Link>
     </Compile>
@@ -27,27 +30,32 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
       <Link>Extensions\UITextViewExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\Renderers\BaseCellViewRenderer.cs">
+
+    <!-- LISTVIEW -->
+    <Compile Include="..\Forms9Patch.Source.iOS\ListView\BaseCellViewRenderer.cs">
       <Link>ListView\Renderers\BaseCellViewRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\Renderers\ListViewRenderer.cs">
+    <Compile Include="..\Forms9Patch.Source.iOS\ListView\ListViewRenderer.cs">
       <Link>ListView\Renderers\ListViewRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\Services\ListItemLocationService.cs">
+    <Compile Include="..\Forms9Patch.Source.iOS\ListView\ListItemLocationService.cs">
       <Link>ListView\Services\ListItemLocationService.cs</Link>
     </Compile>
+
+    <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Reachability.cs">
-      <Link>Reachability.cs</Link>
-    </Compile>
+
+    <!-- RENDERERS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs">
       <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs">
       <Link>Renderers\LabelRenderer.cs</Link>
     </Compile>
+
+    <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </Compile>
@@ -75,66 +83,31 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\WebViewExtensionsService.cs">
       <Link>Services\WebViewExtensionsService.cs</Link>
     </Compile>
+
+    <Compile Include="..\Forms9Patch.Source.iOS\Reachability.cs">
+      <Link>Reachability.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\UIViewContentMode.cs">
       <Link>UIViewContentMode.cs</Link>
     </Compile>
 
-    <Compile Include="..\Forms9Patch.Source\Platform\PlatformAssemblyInfo.cs">
-      <Link>PlatformAssemblyInfo.cs</Link>
-    </Compile>
-    
-    <Compile Include="..\Forms9Patch.Source\Platform\Models\LicenseChecker.cs">
-      <Link>Models\LicenseChecker.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\AbsoluteLayoutRenderer.cs">
-      <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\BubbleLayoutRenderer.cs">
-      <Link>Renderers\BubbleLayoutRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\ContentViewRenderer.cs">
-      <Link>Renderers\ContentViewRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\FrameRenderer.cs">
-      <Link>Renderers\FrameRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\GridRenderer.cs">
-      <Link>Renderers\GridRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\ImageRenderer.cs">
-      <Link>Renderers\ImageRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\RelativeLayout.cs">
-      <Link>Renderers\RelativeLayout.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\StackLayoutRenderer.cs">
-      <Link>Renderers\StackLayoutRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Models\F9PImageData.cs">
-      <Link>SkiaElements\F9PImageData.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\InvalidDataContractException.cs">
-      <Link>Exceptions\InvalidDataContractException.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\LayoutRenderer_T_.cs">
-      <Link>Renderers\LayoutRenderer_T_.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Extensions\SKBitmapExtensions.cs">
-      <Link>SkiaElements\SKBitmapExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Extensions\SkiaColorExtensions.cs">
-      <Link>SkiaElements\SkiaColorExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Renderers\SkiaRoundedBoxAndImageView.cs">
-      <Link>SkiaElements\SkiaRoundedBoxAndImageView.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Extensions\SKPathExtensions.cs">
-      <Link>SkiaElements\SKPathExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source\Platform\Extensions\SKRectExtensions.cs">
-      <Link>SkiaElements\SKRectExtensions.cs</Link>
-    </Compile>
   </ItemGroup>
 
+  <Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
+
+  <ItemGroup>
+    <!--Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference-->
+    <Reference Include="SkiaSharp">
+      <HintPath>..\..\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.iOS">
+      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Svg">
+      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

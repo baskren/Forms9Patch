@@ -39,11 +39,7 @@
         }
       },
       "FormsGestures.PCL.XfNuget/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "P42.NumericalMethods.PCL": "1.0.0",
-          "P42.Utils.PCL": "1.0.0"
-        }
+        "type": "project"
       },
       "P42.NumericalMethods.PCL/1.0.0": {
         "type": "project"
@@ -338,51 +334,43 @@
     ".NETPortable,Version=v4.5,Profile=Profile111": []
   },
   "packageFolders": {
-    "C:\\Users\\ben\\.nuget\\packages": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "/Users/ben/.nuget/packages": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\Forms9Patch\\Forms9Patch.PCL\\Forms9Patch.PCL.XfNuget.csproj",
+      "projectUniqueName": "/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.PCL.XfNuget/Forms9Patch.PCL.XfNuget.csproj",
       "projectName": "Forms9Patch.PCL.XfNuget",
-      "projectPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\Forms9Patch\\Forms9Patch.PCL\\Forms9Patch.PCL.XfNuget.csproj",
-      "projectJsonPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\Forms9Patch\\Forms9Patch.PCL\\project.json",
-      "packagesPath": "C:\\Users\\ben\\.nuget\\packages",
-      "outputPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\Forms9Patch\\Forms9Patch.PCL\\obj\\",
+      "projectPath": "/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.PCL.XfNuget/Forms9Patch.PCL.XfNuget.csproj",
+      "projectJsonPath": "/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.PCL.XfNuget/project.json",
+      "packagesPath": "/Users/ben/.nuget/packages",
       "projectStyle": "ProjectJson",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\.nuget\\NuGet.Config",
-        "C:\\Users\\ben\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "/Users/ben/.config/NuGet/NuGet.Config"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "/Volumes/BOOTCAMP/Users/ben/Desktop/Forms9Patch": {},
+        "https://www.nuget.org/api/v2/": {}
       },
       "frameworks": {
         "portable45-net45+win8+wpa81": {
           "projectReferences": {
-            "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\FormsGestures\\FormsGestures.PCL.XfNuget\\FormsGestures.PCL.XfNuget.csproj": {
-              "projectPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\FormsGestures\\FormsGestures.PCL.XfNuget\\FormsGestures.PCL.XfNuget.csproj"
+            "/Users/ben/Development/Xamarin/Forms9Patch2/FormsGestures/FormsGestures.PCL.XfNuget/FormsGestures.PCL.XfNuget.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/Forms9Patch2/FormsGestures/FormsGestures.PCL.XfNuget/FormsGestures.PCL.XfNuget.csproj"
             },
-            "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\P42.Utils\\P42.NumericalMethods.PCL\\P42.NumericalMethods.PCL.csproj": {
-              "projectPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\P42.Utils\\P42.NumericalMethods.PCL\\P42.NumericalMethods.PCL.csproj"
+            "/Users/ben/Development/Xamarin/Forms9Patch2/P42.Utils/P42.NumericalMethods.PCL/P42.NumericalMethods.PCL.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/Forms9Patch2/P42.Utils/P42.NumericalMethods.PCL/P42.NumericalMethods.PCL.csproj"
             },
-            "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\P42.Utils\\P42.Utils.PCL\\P42.Utils.PCL.csproj": {
-              "projectPath": "C:\\Users\\ben\\Development\\Xamarin\\Forms9Patch\\P42.Utils\\P42.Utils.PCL\\P42.Utils.PCL.csproj"
+            "/Users/ben/Development/Xamarin/Forms9Patch2/P42.Utils/P42.Utils.PCL/P42.Utils.PCL.csproj": {
+              "projectPath": "/Users/ben/Development/Xamarin/Forms9Patch2/P42.Utils/P42.Utils.PCL/P42.Utils.PCL.csproj"
             }
           }
         }
       }
     },
     "dependencies": {
-      "Newtonsoft.Json": "[10.0.3, )",
-      "PCLStorage": "[1.0.2, )",
-      "Xamarin.Forms": "[2.4.0.280, )"
+      "Newtonsoft.Json": "10.0.3",
+      "PCLStorage": "1.0.2",
+      "Xamarin.Forms": "2.4.0.280"
     },
     "frameworks": {
       "portable45-net45+win8+wpa81": {}

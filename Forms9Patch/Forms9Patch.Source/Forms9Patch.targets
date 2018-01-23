@@ -155,6 +155,7 @@
     <Compile Include="..\Forms9Patch.Source\Spans\SubscriptSpan.cs" Link="Spans\SubscriptSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\SuperscriptSpan.cs" Link="Spans\SuperscriptSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\UnderlineSpan.cs" Link="Spans\UnderlineSpan.cs" />
+    <Compile Include="..\Forms9Patch.Source\AdditionalAssemblyInfo.cs" Link="AdditionalAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
