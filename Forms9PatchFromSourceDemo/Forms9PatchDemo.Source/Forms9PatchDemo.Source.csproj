@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.3</TargetFramework>
+		<AssemblyName>Forms9PatchDemo</AssemblyName>
+		<RootNamespace>Forms9PatchDemo</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3;FROM_SOURCE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <DebugType></DebugType>
+	  <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;FROM_SOURCE</DefineConstants>
+	</PropertyGroup>
+
+
+
+	<!-- LOAD PROJECT CONTENT -->
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
+	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
+	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
+	  <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+	  <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+	  <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj" />
+	  <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj" />
+	</ItemGroup>
+    <Choose>
+    	<When Condition="Exists('$(SolutionDir)\Forms9Patch\Forms9PatchDemo\Source')">
+    		<PropertyGroup>
+	    		<Forms9PatchDemoSourceDir>$(SolutionDir)\Forms9Patch\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
+	    	</PropertyGroup>
+	    </When>
+    	<When Condition="Exists('$(SolutionDir)\Forms9PatchDemo\Source')">
+    		<PropertyGroup>
+	    		<Forms9PatchDemoSourceDir>$(SolutionDir)\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
+	    	</PropertyGroup>
+	    </When>
+    	<When Condition="Exists('$(SolutionDir)\Source')">
+    		<PropertyGroup>
+	    		<Forms9PatchDemoSourceDir>$(SolutionDir)\Source</Forms9PatchDemoSourceDir>
+	    	</PropertyGroup>
+	    </When>
+    </Choose>
+	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
+	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
+
+
+</Project>

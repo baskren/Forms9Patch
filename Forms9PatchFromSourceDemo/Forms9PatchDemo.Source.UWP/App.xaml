@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Forms9PatchDemo.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Forms9PatchDemo.UWP"
+    RequestedTheme="Light">
+
+</Application>
