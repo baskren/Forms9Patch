@@ -22,6 +22,10 @@ Windows: ``` c:> mklink /D .nuget Xamarin.Forms\.nuget```
 OSX: ``` $ ln -s Xamarin.Forms/.nuget .nuget```
 
 
+### Address ```System.ArgumentException: element is not of type Xamarin.Forms.View``` in ```Xamarin.Forms.Platform.Android.VisualElementRenderer``` where ```element``` is ```Forms9Patch.RootPage``` when running Android Build
+
+
+
 ### Notes in case you have to start all over again
 
 1. Xamarin.Forms projects to include:
