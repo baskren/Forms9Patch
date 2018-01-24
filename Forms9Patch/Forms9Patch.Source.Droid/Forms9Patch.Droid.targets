@@ -85,29 +85,6 @@
 
 	</ItemGroup>
 
-	<!--ItemGroup>
-		<Folder Include="Effects\" />
-		<Folder Include="Elements\" />
-		<Folder Include="Elements\Buttons\" />
-		<Folder Include="Elements\ListView\" />
-		<Folder Include="Elements\ListView\CellViews\" />
-		<Folder Include="Elements\ListView\Enums\" />
-		<Folder Include="Elements\ListView\EventArgs\" />
-		<Folder Include="Elements\ListView\Interfaces\" />
-		<Folder Include="Elements\ListView\ItemsWrappers\" />
-		<Folder Include="Elements\ListView\TemplateSelectors\" />
-		<Folder Include="Elements\Pickers\" />
-		<Folder Include="Elements\Popups\" />
-		<Folder Include="Enums\" />
-		<Folder Include="Events\" />
-		<Folder Include="Extensions\" />
-		<Folder Include="Interfaces\" />
-		<Folder Include="Layouts\" />
-		<Folder Include="Models\" />
-		<Folder Include="Services\" />
-		<Folder Include="Spans\" />
-	</ItemGroup-->
-
 	<Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
 
 	<ItemGroup>
