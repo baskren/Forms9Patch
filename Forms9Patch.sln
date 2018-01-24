@@ -4,15 +4,15 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "P42.Utils", "P42.Utils", "{68AC6393-E8BD-45AD-860D-4EFE00B466D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.Utils", "P42.Utils\P42.Utils\P42.Utils.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils", "P42.Utils\P42.Utils\P42.Utils.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.Droid", "P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj", "{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.iOS", "P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj", "{530E21BA-A725-4714-8678-74CCA5CDBB38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.NumericalMethods", "P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods", "P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.XfNuget", "FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget", "FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.Droid", "FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
 EndProject
@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.iOS",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.UWP", "FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj", "{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.XfSource", "FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource", "FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.iOS", "FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj", "{A6D42C80-CDFE-4C4E-B0FB-72A403793B95}"
 EndProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.Droi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.UWP", "FormsGestures\FormsGestures.XfSource.UWP\FormsGestures.XfSource.UWP.csproj", "{F86AA167-0272-43C7-A783-2847E3624235}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfSource", "Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource", "Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource.Droid", "Forms9Patch\Forms9Patch.XfSource.Droid\Forms9Patch.XfSource.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
 EndProject
@@ -691,7 +691,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo", "Forms9PatchDemo", "{B425138C-F6BB-4949-B957-16C9A5807909}"
 EndProject
@@ -710,7 +710,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromNugetPackages", "FromNu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromSource", "FromSource", "{54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.Source", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.Droid", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source.Droid\Forms9PatchDemo.Source.Droid.csproj", "{CFA91476-BECE-4F45-9F60-334610335117}"
 EndProject
@@ -720,9 +720,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.UWP"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Build.Tasks", "Xamarin.Forms\Xamarin.Forms.Build.Tasks\Xamarin.Forms.Build.Tasks.csproj", "{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.CustomAttributes", "Xamarin.Forms\Xamarin.Forms.CustomAttributes\Xamarin.Forms.CustomAttributes.csproj", "{4DCD0420-1168-4B77-86DB-6196EE4BD491}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL\Forms9PatchDemo.PCL.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
 EndProject
@@ -3377,90 +3375,6 @@ Global
 		{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}.Turkey|x64.Build.0 = Turkey|Any CPU
 		{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}.Turkey|x86.ActiveCfg = Turkey|Any CPU
 		{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}.Turkey|x86.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|Any CPU.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|Any CPU.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|ARM.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|ARM.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhoneSimulator.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|x64.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|x64.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|x86.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|x86.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|ARM.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|x64.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.AppStore|x86.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|Any CPU.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|ARM.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|ARM.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|iPhone.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|iPhone.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|x64.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|x64.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|x86.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Beta|x86.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|ARM.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|x64.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Debug|x86.Build.0 = Debug|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|ARM.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|ARM.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|iPhone.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|x64.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|x64.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|x86.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Release|x86.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|Any CPU.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|Any CPU.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|ARM.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|ARM.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|iPhone.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|iPhone.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|iPhoneSimulator.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|x64.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|x64.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|x86.ActiveCfg = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Test|x86.Build.0 = Release|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|Any CPU.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|Any CPU.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|ARM.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|ARM.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|iPhone.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|iPhone.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|iPhoneSimulator.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|iPhoneSimulator.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|x64.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|x64.Build.0 = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|x86.ActiveCfg = Turkey|Any CPU
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|x86.Build.0 = Turkey|Any CPU
 		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -4566,7 +4480,6 @@ Global
 		{773C755A-1265-414D-968F-B8DC5CA73A87} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
 		{C2C9B778-07F5-4955-B413-299A66D14FEA} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
 		{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
-		{4DCD0420-1168-4B77-86DB-6196EE4BD491} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98} = {43FB1312-C02E-49C6-A7BB-CEAB338097E5}
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}

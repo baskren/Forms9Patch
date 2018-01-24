@@ -87,10 +87,6 @@
       <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
       <Name>Xamarin.Forms.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-      <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
-      <Name>Xamarin.Forms.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
       <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
       <Name>Xamarin.Forms.Platform.Android</Name>

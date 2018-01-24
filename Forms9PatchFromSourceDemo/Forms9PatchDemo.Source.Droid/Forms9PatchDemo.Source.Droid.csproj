@@ -130,14 +130,6 @@
       <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
       <Name>Xamarin.Forms.Platform.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-      <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
-      <Name>Xamarin.Forms.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.CustomAttributes\Xamarin.Forms.CustomAttributes.csproj">
-      <Project>{4DCD0420-1168-4B77-86DB-6196EE4BD491}</Project>
-      <Name>Xamarin.Forms.CustomAttributes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
       <Name>Xamarin.Forms.Core</Name>
