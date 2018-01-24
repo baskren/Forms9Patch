@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C35275FD-92EE-4B8A-8C49-D98EC73B3C45}</ProjectGuid>
+    <ProjectGuid>{FC0AE786-B0F2-4F62-B898-E591B65014F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Forms9Patch.UWP</RootNamespace>
@@ -105,13 +105,7 @@
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Forms9Patch.UWP.rd.xml" />
-  </ItemGroup>
-
   <Import Project="..\Forms9Patch.Source.UWP\Forms9Patch.UWP.targets" />
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.4.0</Version>
@@ -120,29 +114,29 @@
       <Version>2.4.0.280</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj">
-      <Project>{f86aa167-0272-43c7-a783-2847e3624235}</Project>
+      <Project>{2eaa5d09-b436-40f8-a1f3-7e9acde2e8c0}</Project>
       <Name>FormsGestures.XfNuget.UWP</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{0b3a1716-e6f3-44a7-8acd-e79055a67caf}</Project>
+      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.csproj">
-      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
-      <Name>P42.NumericalMethods.NetStandard</Name>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
+      <Name>P42.NumericalMethods</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.csproj">
-      <Project>{fb3bcd64-62c1-4ac5-a5d5-3330c9a58853}</Project>
-      <Name>P42.Utils.NetStandard</Name>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{995cbdce-1d72-47fa-8fa9-08a73dca9ccb}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
+      <Project>{b1ca1e82-65f0-4eed-beb6-e133fbd2c4d9}</Project>
+      <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

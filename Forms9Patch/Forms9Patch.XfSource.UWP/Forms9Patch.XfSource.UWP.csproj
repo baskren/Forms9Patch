@@ -105,23 +105,29 @@
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Forms9Patch.UWP.rd.xml" />
-  </ItemGroup>
-
-  <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
-
+  <Import Project="..\Forms9Patch.Source.UWP\Forms9Patch.UWP.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.UWP\FormsGestures.XfSource.UWP.csproj">
       <Project>{f86aa167-0272-43c7-a783-2847e3624235}</Project>
       <Name>FormsGestures.XfSource.UWP</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
+      <Project>{52e3c505-3123-48ed-afe5-e700f1d5a01a}</Project>
+      <Name>FormsGestures.XfSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57b8b73d-c3b5-4c42-869e-7b2f17d354ac}</Project>
       <Name>Xamarin.Forms.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\\Xamarin.Forms\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.csproj">
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.csproj">
       <Project>{00d8d049-ffaa-4759-8fc9-1eca30777f72}</Project>
       <Name>Xamarin.Forms.Platform.UAP</Name>
     </ProjectReference>
@@ -133,21 +139,9 @@
       <Project>{9db2f292-8034-4e06-89ad-98bbda4306b9}</Project>
       <Name>Xamarin.Forms.Xaml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{0b3a1716-e6f3-44a7-8acd-e79055a67caf}</Project>
-      <Name>FormsGestures.XfSource</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.csproj">
-      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
-      <Name>P42.NumericalMethods.NetStandard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.csproj">
-      <Project>{fb3bcd64-62c1-4ac5-a5d5-3330c9a58853}</Project>
-      <Name>P42.Utils.NetStandard</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-      <Project>{995cbdce-1d72-47fa-8fa9-08a73dca9ccb}</Project>
-      <Name>Forms9Patch.NetStandard</Name>
+      <Project>{bc3f43de-5eb6-4b08-bb0c-f813d809eac0}</Project>
+      <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

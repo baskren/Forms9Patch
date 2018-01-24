@@ -107,7 +107,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\FormsGestures.UWP.rd.xml" />
   </ItemGroup>
   <Import Project="..\FormsGestures.Source.UWP\FormsGestures.UWP.targets" />
   <ItemGroup>
@@ -115,15 +114,17 @@
       <Version>5.4.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.csproj">
-      <Project>{ff06fa6a-a6f4-47e4-9e3b-a5681040c648}</Project>
-      <Name>P42.NumericalMethods.NetStandard</Name>
+    <TransformFile Include="Properties\FormsGestures.NetStandard.UWP.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
+      <Name>P42.NumericalMethods</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.NetStandard\P42.Utils.csproj">
-      <Project>{fb3bcd64-62c1-4ac5-a5d5-3330c9a58853}</Project>
-      <Name>P42.Utils.NetStandard</Name>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
+      <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57b8b73d-c3b5-4c42-869e-7b2f17d354ac}</Project>

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{740C3DFF-E410-4632-BDD9-82594F3E21B4}</ProjectGuid>
+    <ProjectGuid>{1D9DAC1B-92F4-4EFE-B915-5A998435B02F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>Forms9Patch.iOS</RootNamespace>
@@ -61,9 +61,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
-
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

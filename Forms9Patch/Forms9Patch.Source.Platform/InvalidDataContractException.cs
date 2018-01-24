@@ -1,4 +1,5 @@
-﻿
+﻿#if WINDOWS_UWP
+#else
 namespace System.Runtime.Serialization
 {
     public class InvalidDataContractException : Exception
@@ -12,3 +13,4 @@ namespace System.Runtime.Serialization
         public InvalidDataContractException(string msg, Exception innterException) : base(msg, innterException) { }
     }
 }
+#endif

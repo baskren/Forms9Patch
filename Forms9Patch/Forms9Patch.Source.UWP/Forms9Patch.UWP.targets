@@ -110,5 +110,15 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Forms9Patch.Source.UWP\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <TransformFile Include="..\Forms9Patch.Source.UWP\Properties\Forms9Patch.NetStandard.UWP.rd.xml">
+      <Link>Properties\Forms9Patch.NetStandard.UWP.rd.xml</Link>
+    </TransformFile>
+  </ItemGroup>
 
 </Project>
