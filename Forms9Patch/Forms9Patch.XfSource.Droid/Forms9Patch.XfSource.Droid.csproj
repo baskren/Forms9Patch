@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D394BC61-9B90-4B1C-9771-35F93865AC5C}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Forms9Patch.Droid</RootNamespace>
+    <AssemblyName>Forms9Patch.Droid</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;__DROID__;DONT_USE_MEASURE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>
+    </DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETSTANDARD;__DROID__;DONT_USE_MEASURE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <!--
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.Design.23.3.0\lib\MonoAndroid43\Xamarin.Android.Support.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v7.MediaRouter.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+    </Reference>
+  -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
+      <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
+      <Name>Xamarin.Forms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
+      <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
+      <Name>Xamarin.Forms.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android.csproj">
+      <Project>{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A}</Project>
+      <Name>Xamarin.Forms.Platform.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\Xamarin.Forms.Platform.Android.FormsViewGroup.csproj">
+      <Project>{3B72465B-ACAE-43AE-9327-10F372FE5F80}</Project>
+      <Name>Xamarin.Forms.Platform.Android.FormsViewGroup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
+      <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
+      <Name>Xamarin.Forms.Xaml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
+      <Project>{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}</Project>
+      <Name>P42.Utils.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.Droid\FormsGestures.XfSource.Droid.csproj">
+      <Project>{803F6E5C-CD93-43AC-92D9-984D09B264DC}</Project>
+      <Name>FormsGestures.XfSource.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
+      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Name>FormsGestures.XfSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
+      <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
+      <Name>Forms9Patch.XfSource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!--
+  <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets'))" />
+  </Target>
+-->
+  <Import Project="..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

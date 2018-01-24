@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <AssemblyName>FormsGestures</AssemblyName>
+    <RootNamespace>FormsGestures</RootNamespace>
+    <Authors>Ben Askren</Authors>
+    <Company>42nd Parallel</Company>
+    <Copyright>2017, 42nd Parallel.  All Rights Reserverd</Copyright>
+    <Description>Gestures library for Xamarin Forms</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD1_3</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DefineConstants>TRACE;NETSTANDARD;RELEASE;NETSTANDARD1_3</DefineConstants>
+    <DocumentationFile>bin\Release\netstandard1.3\FormsGestures.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <Import Project="..\FormsGestures.Source\FormsGestures.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

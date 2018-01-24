@@ -4,69 +4,37 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "P42.Utils", "P42.Utils", "{68AC6393-E8BD-45AD-860D-4EFE00B466D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.PCL", "P42.Utils\P42.Utils.PCL\P42.Utils.PCL.csproj", "{043A7C06-6B2C-42E0-BE23-9B8ADE9F4748}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils", "P42.Utils\P42.Utils\P42.Utils.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard", "P42.Utils\P42.Utils.NetStandard\P42.Utils.NetStandard.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.Droid", "P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj", "{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard.Droid", "P42.Utils\P42.Utils.NetStandard.Droid\P42.Utils.NetStandard.Droid.csproj", "{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.iOS", "P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj", "{530E21BA-A725-4714-8678-74CCA5CDBB38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.PCL.Droid", "P42.Utils\P42.Utils.PCL.Droid\P42.Utils.PCL.Droid.csproj", "{2EFB5A37-DF19-4897-B6A6-914E55047BDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods", "P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.NetStandard.iOS", "P42.Utils\P42.Utils.NetStandard.iOS\P42.Utils.NetStandard.iOS.csproj", "{530E21BA-A725-4714-8678-74CCA5CDBB38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget", "FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.PCL.iOS", "P42.Utils\P42.Utils.PCL.iOS\P42.Utils.PCL.iOS.csproj", "{E0310C06-794F-4B67-90B9-E1A5C4E84E87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.Droid", "FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods.NetStandard", "P42.Utils\P42.NumericalMethods.NetStandard\P42.NumericalMethods.NetStandard.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.iOS", "FormsGestures\FormsGestures.XfNuget.iOS\FormsGestures.XfNuget.iOS.csproj", "{48ADFBE6-0CBA-4317-8371-250A7F0647AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods.PCL", "P42.Utils\P42.NumericalMethods.PCL\P42.NumericalMethods.PCL.csproj", "{AFC00402-9BFF-4164-AE61-021210C2CE70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.UWP", "FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj", "{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfNuget", "FormsGestures\FormsGestures.PCL.XfNuget\FormsGestures.PCL.XfNuget.csproj", "{DDCDB76B-2DE1-44F2-A3D8-73EEF0BA6406}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource", "FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfNuget.Droid", "FormsGestures\FormsGestures.PCL.XfNuget.Droid\FormsGestures.PCL.XfNuget.Droid.csproj", "{EB3B97E9-BFF9-4D72-BDB9-29E74E21D78F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.iOS", "FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj", "{A6D42C80-CDFE-4C4E-B0FB-72A403793B95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfNuget.iOS", "FormsGestures\FormsGestures.PCL.XfNuget.iOS\FormsGestures.PCL.XfNuget.iOS.csproj", "{E68F0971-0308-4E5E-AFFA-F1F82EF69CDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.Droid", "FormsGestures\FormsGestures.XfSource.Droid\FormsGestures.XfSource.Droid.csproj", "{803F6E5C-CD93-43AC-92D9-984D09B264DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfNuget.UWP", "FormsGestures\FormsGestures.PCL.XfNuget.UWP\FormsGestures.PCL.XfNuget.UWP.csproj", "{1F4EE6D4-CA44-4A60-9529-DA6AAF91196D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.UWP", "FormsGestures\FormsGestures.XfSource.UWP\FormsGestures.XfSource.UWP.csproj", "{F86AA167-0272-43C7-A783-2847E3624235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfSource", "Forms9Patch\Forms9Patch.PCL.XfSource\Forms9Patch.PCL.XfSource.csproj", "{A45DEA17-78A3-464A-9E00-0342D0503B00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource", "Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfSource.Droid", "Forms9Patch\Forms9Patch.PCL.XfSource.Droid\Forms9Patch.PCL.XfSource.Droid.csproj", "{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource.Droid", "Forms9Patch\Forms9Patch.XfSource.Droid\Forms9Patch.XfSource.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfSource.iOS", "Forms9Patch\Forms9Patch.PCL.XfSource.iOS\Forms9Patch.PCL.XfSource.iOS.csproj", "{1C6AB883-A0E1-4B84-91D9-FACA09F563F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource.iOS", "Forms9Patch\Forms9Patch.XfSource.iOS\Forms9Patch.XfSource.iOS.csproj", "{740C3DFF-E410-4632-BDD9-82594F3E21B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.PCL.XfSource.UWP", "Forms9Patch\Forms9Patch.PCL.XfSource.UWP\Forms9Patch.PCL.XfSource.UWP.csproj", "{321F4DDA-F8AA-4CE5-9A3C-9497EB3EA0BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget", "FormsGestures\FormsGestures.NetStandard.XfNuget\FormsGestures.NetStandard.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget.Droid", "FormsGestures\FormsGestures.NetStandard.XfNuget.Droid\FormsGestures.NetStandard.XfNuget.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget.iOS", "FormsGestures\FormsGestures.NetStandard.XfNuget.iOS\FormsGestures.NetStandard.XfNuget.iOS.csproj", "{48ADFBE6-0CBA-4317-8371-250A7F0647AE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfNuget.UWP", "FormsGestures\FormsGestures.NetStandard.XfNuget.UWP\FormsGestures.NetStandard.XfNuget.UWP.csproj", "{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource", "FormsGestures\FormsGestures.PCL.XfSource\FormsGestures.PCL.XfSource.csproj", "{6A6BCD9F-8704-44BD-BEE2-B4DAF03AC95E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource.iOS", "FormsGestures\FormsGestures.PCL.XfSource.iOS\FormsGestures.PCL.XfSource.iOS.csproj", "{8FCFFFAF-8A78-4390-9C2D-2C65F7D1A71F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource.Droid", "FormsGestures\FormsGestures.PCL.XfSource.Droid\FormsGestures.PCL.XfSource.Droid.csproj", "{6012C70E-C527-4F82-9201-3A4B0E15E7CD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.PCL.XfSource.UWP", "FormsGestures\FormsGestures.PCL.XfSource.UWP\FormsGestures.PCL.XfSource.UWP.csproj", "{8B10BE2D-1311-4A42-851A-5184885B4EC9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource", "FormsGestures\FormsGestures.NetStandard.XfSource\FormsGestures.NetStandard.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource.iOS", "FormsGestures\FormsGestures.NetStandard.XfSource.iOS\FormsGestures.NetStandard.XfSource.iOS.csproj", "{A6D42C80-CDFE-4C4E-B0FB-72A403793B95}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource.Droid", "FormsGestures\FormsGestures.NetStandard.XfSource.Droid\FormsGestures.NetStandard.XfSource.Droid.csproj", "{803F6E5C-CD93-43AC-92D9-984D09B264DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.NetStandard.XfSource.UWP", "FormsGestures\FormsGestures.NetStandard.XfSource.UWP\FormsGestures.NetStandard.XfSource.UWP.csproj", "{F86AA167-0272-43C7-A783-2847E3624235}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource", "Forms9Patch\Forms9Patch.NetStandard.XfSource\Forms9Patch.NetStandard.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource.Droid", "Forms9Patch\Forms9Patch.NetStandard.XfSource.Droid\Forms9Patch.NetStandard.XfSource.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource.iOS", "Forms9Patch\Forms9Patch.NetStandard.XfSource.iOS\Forms9Patch.NetStandard.XfSource.iOS.csproj", "{740C3DFF-E410-4632-BDD9-82594F3E21B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfSource.UWP", "Forms9Patch\Forms9Patch.NetStandard.XfSource.UWP\Forms9Patch.NetStandard.XfSource.UWP.csproj", "{C35275FD-92EE-4B8A-8C49-D98EC73B3C45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource.UWP", "Forms9Patch\Forms9Patch.XfSource.UWP\Forms9Patch.XfSource.UWP.csproj", "{C35275FD-92EE-4B8A-8C49-D98EC73B3C45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms", "Xamarin.Forms", "{0ACF2386-A71B-4A07-AD0C-D0227D3CC680}"
 EndProject
@@ -93,31 +61,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Platform.Andr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch", "Forms9Patch", "{6CE42746-AF2D-4B4D-B294-B88867A60D9C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PCL", "PCL", "{29E13D5D-338D-48A0-88D0-D92F714B100D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetStandard", "NetStandard", "{F8BC865B-1638-44F0-87AB-446F5D34796A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{194A67C8-8923-492D-98FE-3EC10FC435BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfSource", "XfSource", "{EDB4F296-5B36-4763-8561-B9EFA3640529}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{3550E38B-0954-4598-AB80-8CC327BBF59C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfSource", "XfSource", "{35755212-E131-459D-B4F8-18DDFDD2D25C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FormsGestures", "FormsGestures", "{446EB5EB-7582-4522-AF25-DB97A3BAD89F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetStandard", "NetStandard", "{09BF3FD0-50C7-4D75-94E9-EB3AE4B3A00E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PCL", "PCL", "{FD45A3D3-BBE9-4497-91F7-F21248F2E992}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfSource", "XfSource", "{707FE75B-82D3-461A-8418-31B3097A2F45}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfSource", "XfSource", "{2B0B9D08-0382-44D6-8AD2-F819A56338E4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}"
 	ProjectSection(SolutionItems) = preProject
@@ -739,45 +691,233 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.NetStandard.XfNuget", "Forms9Patch\Forms9Patch.NetStandard.XfNuget\Forms9Patch.NetStandard.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo", "Forms9PatchDemo", "{B425138C-F6BB-4949-B957-16C9A5807909}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetStandard", "NetStandard", "{43FB1312-C02E-49C6-A7BB-CEAB338097E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetStandard Target Framework", "NetStandard Target Framework", "{43FB1312-C02E-49C6-A7BB-CEAB338097E5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PCL", "PCL", "{EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PCL Target Framework", "PCL Target Framework", "{EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Forms9PatchDemo.cs = Forms9PatchDemo\Source\Forms9PatchDemo.cs
+		Forms9PatchDemo\Source\Forms9PatchDemo.targets = Forms9PatchDemo\Source\Forms9PatchDemo.targets
+		Forms9PatchDemo\Source\Forms9PatchDemoXaml.targets = Forms9PatchDemo\Source\Forms9PatchDemoXaml.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromNugetPackages", "FromNugetPackages", "{57A7DB2A-EFCE-4F9E-9A77-3D30BCDAED34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromSource", "FromSource", "{54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetStandard", "NetStandard", "{3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PCL", "PCL", "{71AA5B20-50B5-4D84-AD4E-0B63E0C9F2EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.Droid", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source.Droid\Forms9PatchDemo.Source.Droid.csproj", "{CFA91476-BECE-4F45-9F60-334610335117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{60C1AF69-C514-4588-85D5-EEE37AEFCAE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.iOS", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source.iOS\Forms9PatchDemo.Source.iOS.csproj", "{773C755A-1265-414D-968F-B8DC5CA73A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Source", "Forms9PatchFromSourceDemo\PCL\Forms9PatchDemo.PCL.Source\Forms9PatchDemo.PCL.Source.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Source.Droid", "Forms9PatchFromSourceDemo\NetStandard\Forms9PatchDemo.NetStandard.Source.Droid\Forms9PatchDemo.NetStandard.Source.Droid.csproj", "{CFA91476-BECE-4F45-9F60-334610335117}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Source.iOS", "Forms9PatchFromSourceDemo\NetStandard\Forms9PatchDemo.NetStandard.Source.iOS\Forms9PatchDemo.NetStandard.Source.iOS.csproj", "{773C755A-1265-414D-968F-B8DC5CA73A87}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Source.UWP", "Forms9PatchFromSourceDemo\NetStandard\Forms9PatchDemo.NetStandard.Source.UWP\Forms9PatchDemo.NetStandard.Source.UWP.csproj", "{C2C9B778-07F5-4955-B413-299A66D14FEA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Source.Droid", "Forms9PatchFromSourceDemo\PCL\Forms9PatchDemo.PCL.Source.Droid\Forms9PatchDemo.PCL.Source.Droid.csproj", "{585BAF24-E652-4668-BAF3-21A25BEBFE79}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Source.iOS", "Forms9PatchFromSourceDemo\PCL\Forms9PatchDemo.PCL.Source.iOS\Forms9PatchDemo.PCL.Source.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.UWP", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.UWP\Forms9PatchDemo.PCL.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Source", "Forms9PatchFromSourceDemo\NetStandard\Forms9PatchDemo.NetStandard.Source\Forms9PatchDemo.NetStandard.Source.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.UWP", "Forms9PatchFromSourceDemo\Forms9PatchDemo.Source.UWP\Forms9PatchDemo.Source.UWP.csproj", "{C2C9B778-07F5-4955-B413-299A66D14FEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Build.Tasks", "Xamarin.Forms\Xamarin.Forms.Build.Tasks\Xamarin.Forms.Build.Tasks.csproj", "{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.CustomAttributes", "Xamarin.Forms\Xamarin.Forms.CustomAttributes\Xamarin.Forms.CustomAttributes.csproj", "{4DCD0420-1168-4B77-86DB-6196EE4BD491}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL\Forms9PatchDemo.PCL.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Droid", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.Droid\Forms9PatchDemo.PCL.Droid.csproj", "{585BAF24-E652-4668-BAF3-21A25BEBFE79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.iOS", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.iOS\Forms9PatchDemo.PCL.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.UWP", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.UWP\Forms9PatchDemo.PCL.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{9AF66E2B-2813-491B-A4E4-7BD81E018F46}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Extensions\ImageResourceExtension.cs = Forms9PatchDemo\Source\Extensions\ImageResourceExtension.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Code", "Pages.Code", "{71DA4641-70B1-49B6-909F-9D3BC1BC3B32}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Pages.Code\BubblePopupTestPage.cs = Forms9PatchDemo\Source\Pages.Code\BubblePopupTestPage.cs
+		Forms9PatchDemo\Source\Pages.Code\ButtonAndSegmentAlignments.cs = Forms9PatchDemo\Source\Pages.Code\ButtonAndSegmentAlignments.cs
+		Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs = Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs
+		Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs = Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs
+		Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs = Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs
+		Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs
+		Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs
+		Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs
+		Forms9PatchDemo\Source\Pages.Code\ImageCodePage.cs = Forms9PatchDemo\Source\Pages.Code\ImageCodePage.cs
+		Forms9PatchDemo\Source\Pages.Code\LabelAutoFitPage.cs = Forms9PatchDemo\Source\Pages.Code\LabelAutoFitPage.cs
+		Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs = Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs
+		Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs = Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs
+		Forms9PatchDemo\Source\Pages.Code\PanGesturePage.cs = Forms9PatchDemo\Source\Pages.Code\PanGesturePage.cs
+		Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs = Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs
+		Forms9PatchDemo\Source\Pages.Code\SingleButton.cs = Forms9PatchDemo\Source\Pages.Code\SingleButton.cs
+		Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs = Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs
+		Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs = Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs
+		Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs = Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Xaml", "Pages.Xaml", "{F311DBED-FA26-4CE4-90E5-F23BE46352E9}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Pages.Xaml\XamlCapsInsetPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlCapsInsetPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlCapsInsetPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlCapsInsetPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlCDATA.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlCDATA.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlCDATA.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlCDATA.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlContentViewDemoPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlContentViewDemoPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlContentViewDemoPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlContentViewDemoPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlFrameDemoPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlFrameDemoPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlFrameDemoPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlFrameDemoPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlHtmlLabelsAndButtonsPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlImagesPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlImagesPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlImagesPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlImagesPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlNinePatchButtonPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlNinePatchButtonPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlNinePatchButtonPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlNinePatchButtonPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlSegmentedControlPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlSegmentedControlPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlSegmentedControlPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlSegmentedControlPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlSingleStateButtonPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlSingleStateButtonPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlSingleStateButtonPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlSingleStateButtonPage.xaml.cs
+		Forms9PatchDemo\Source\Pages.Xaml\XamlStateButtonsPage.xaml = Forms9PatchDemo\Source\Pages.Xaml\XamlStateButtonsPage.xaml
+		Forms9PatchDemo\Source\Pages.Xaml\XamlStateButtonsPage.xaml.cs = Forms9PatchDemo\Source\Pages.Xaml\XamlStateButtonsPage.xaml.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserPages", "UserPages", "{A850E60D-2E64-4BBF-87AF-CCD963F6795D}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\UserPages\AbsoluteLayoutExplorationCode.cs = Forms9PatchDemo\Source\UserPages\AbsoluteLayoutExplorationCode.cs
+		Forms9PatchDemo\Source\UserPages\BackgroundImageOpacityPage.cs = Forms9PatchDemo\Source\UserPages\BackgroundImageOpacityPage.cs
+		Forms9PatchDemo\Source\UserPages\br.cs = Forms9PatchDemo\Source\UserPages\br.cs
+		Forms9PatchDemo\Source\UserPages\Burkhart.xaml = Forms9PatchDemo\Source\UserPages\Burkhart.xaml
+		Forms9PatchDemo\Source\UserPages\Burkhart.xaml.cs = Forms9PatchDemo\Source\UserPages\Burkhart.xaml.cs
+		Forms9PatchDemo\Source\UserPages\ButtonTapped.cs = Forms9PatchDemo\Source\UserPages\ButtonTapped.cs
+		Forms9PatchDemo\Source\UserPages\ChatListPage.cs = Forms9PatchDemo\Source\UserPages\ChatListPage.cs
+		Forms9PatchDemo\Source\UserPages\CustomFontEffectPage.cs = Forms9PatchDemo\Source\UserPages\CustomFontEffectPage.cs
+		Forms9PatchDemo\Source\UserPages\DataForBinding.cs = Forms9PatchDemo\Source\UserPages\DataForBinding.cs
+		Forms9PatchDemo\Source\UserPages\HeapDemoPage.cs = Forms9PatchDemo\Source\UserPages\HeapDemoPage.cs
+		Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.cs = Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.cs
+		Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.xaml = Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.xaml
+		Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.xaml.cs = Forms9PatchDemo\Source\UserPages\ListViewWithF9PLabelInCells.xaml.cs
+		Forms9PatchDemo\Source\UserPages\ModalPopupOnMasterDetailPage.cs = Forms9PatchDemo\Source\UserPages\ModalPopupOnMasterDetailPage.cs
+		Forms9PatchDemo\Source\UserPages\ModalPopupWithNavigationPages.cs = Forms9PatchDemo\Source\UserPages\ModalPopupWithNavigationPages.cs
+		Forms9PatchDemo\Source\UserPages\NestedBubblePopupPage.cs = Forms9PatchDemo\Source\UserPages\NestedBubblePopupPage.cs
+		Forms9PatchDemo\Source\UserPages\SegmentBindingPage.xaml = Forms9PatchDemo\Source\UserPages\SegmentBindingPage.xaml
+		Forms9PatchDemo\Source\UserPages\SegmentBindingPage.xaml.cs = Forms9PatchDemo\Source\UserPages\SegmentBindingPage.xaml.cs
+		Forms9PatchDemo\Source\UserPages\SegmentNavPage1.cs = Forms9PatchDemo\Source\UserPages\SegmentNavPage1.cs
+		Forms9PatchDemo\Source\UserPages\SegmentNavPage2.cs = Forms9PatchDemo\Source\UserPages\SegmentNavPage2.cs
+		Forms9PatchDemo\Source\UserPages\SegmentNavPage3.cs = Forms9PatchDemo\Source\UserPages\SegmentNavPage3.cs
+		Forms9PatchDemo\Source\UserPages\SegmentSelectedBackgroundPage.cs = Forms9PatchDemo\Source\UserPages\SegmentSelectedBackgroundPage.cs
+		Forms9PatchDemo\Source\UserPages\SegmentXAML.xaml = Forms9PatchDemo\Source\UserPages\SegmentXAML.xaml
+		Forms9PatchDemo\Source\UserPages\SegmentXAML.xaml.cs = Forms9PatchDemo\Source\UserPages\SegmentXAML.xaml.cs
+		Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml = Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml
+		Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml.cs = Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml.cs
+		Forms9PatchDemo\Source\UserPages\UserHomePage.cs = Forms9PatchDemo\Source\UserPages\UserHomePage.cs
+		Forms9PatchDemo\Source\UserPages\ZenmekPage.cs = Forms9PatchDemo\Source\UserPages\ZenmekPage.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{A3896D3C-491F-4E9D-980F-C971E65A41DE}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Resources\50x50.png = Forms9PatchDemo\Source\Resources\50x50.png
+		Forms9PatchDemo\Source\Resources\100x100.png = Forms9PatchDemo\Source\Resources\100x100.png
+		Forms9PatchDemo\Source\Resources\150x150.png = Forms9PatchDemo\Source\Resources\150x150.png
+		Forms9PatchDemo\Source\Resources\200x200.png = Forms9PatchDemo\Source\Resources\200x200.png
+		Forms9PatchDemo\Source\Resources\236-baby.png = Forms9PatchDemo\Source\Resources\236-baby.png
+		Forms9PatchDemo\Source\Resources\236-lincoln.png = Forms9PatchDemo\Source\Resources\236-lincoln.png
+		Forms9PatchDemo\Source\Resources\adsBttn29.png = Forms9PatchDemo\Source\Resources\adsBttn29.png
+		Forms9PatchDemo\Source\Resources\ArrowR.png = Forms9PatchDemo\Source\Resources\ArrowR.png
+		Forms9PatchDemo\Source\Resources\ArrowR%401½x.png = Forms9PatchDemo\Source\Resources\ArrowR%401½x.png
+		Forms9PatchDemo\Source\Resources\ArrowR%402x.png = Forms9PatchDemo\Source\Resources\ArrowR%402x.png
+		Forms9PatchDemo\Source\Resources\ArrowR%403x.png = Forms9PatchDemo\Source\Resources\ArrowR%403x.png
+		Forms9PatchDemo\Source\Resources\ArrowR%40¾x.png = Forms9PatchDemo\Source\Resources\ArrowR%40¾x.png
+		Forms9PatchDemo\Source\Resources\balloons.jpg = Forms9PatchDemo\Source\Resources\balloons.jpg
+		Forms9PatchDemo\Source\Resources\blackrocks.png = Forms9PatchDemo\Source\Resources\blackrocks.png
+		Forms9PatchDemo\Source\Resources\bluebutton.9.png = Forms9PatchDemo\Source\Resources\bluebutton.9.png
+		Forms9PatchDemo\Source\Resources\bluebuttontrimmedtransp.9.png = Forms9PatchDemo\Source\Resources\bluebuttontrimmedtransp.9.png
+		Forms9PatchDemo\Source\Resources\blueWhiteGradient.svg = Forms9PatchDemo\Source\Resources\blueWhiteGradient.svg
+		Forms9PatchDemo\Source\Resources\btnRedH.9.png = Forms9PatchDemo\Source\Resources\btnRedH.9.png
+		Forms9PatchDemo\Source\Resources\btnRedH%402x.9.png = Forms9PatchDemo\Source\Resources\btnRedH%402x.9.png
+		Forms9PatchDemo\Source\Resources\btnRedH%403x.9.png = Forms9PatchDemo\Source\Resources\btnRedH%403x.9.png
+		Forms9PatchDemo\Source\Resources\bubble.9.png = Forms9PatchDemo\Source\Resources\bubble.9.png
+		Forms9PatchDemo\Source\Resources\BubbleExternal.9.png = Forms9PatchDemo\Source\Resources\BubbleExternal.9.png
+		Forms9PatchDemo\Source\Resources\BubbleExternal%402x.9.png = Forms9PatchDemo\Source\Resources\BubbleExternal%402x.9.png
+		Forms9PatchDemo\Source\Resources\BubbleExternal%403x.9.png = Forms9PatchDemo\Source\Resources\BubbleExternal%403x.9.png
+		Forms9PatchDemo\Source\Resources\BubbleInternal.9.png = Forms9PatchDemo\Source\Resources\BubbleInternal.9.png
+		Forms9PatchDemo\Source\Resources\BubbleInternal%402x.9.png = Forms9PatchDemo\Source\Resources\BubbleInternal%402x.9.png
+		Forms9PatchDemo\Source\Resources\BubbleInternal%403x.9.png = Forms9PatchDemo\Source\Resources\BubbleInternal%403x.9.png
+		Forms9PatchDemo\Source\Resources\button_01_default.png = Forms9PatchDemo\Source\Resources\button_01_default.png
+		Forms9PatchDemo\Source\Resources\button_01_pressing.png = Forms9PatchDemo\Source\Resources\button_01_pressing.png
+		Forms9PatchDemo\Source\Resources\button.9.png = Forms9PatchDemo\Source\Resources\button.9.png
+		Forms9PatchDemo\Source\Resources\button%401½x.9.png = Forms9PatchDemo\Source\Resources\button%401½x.9.png
+		Forms9PatchDemo\Source\Resources\button%402x.9.png = Forms9PatchDemo\Source\Resources\button%402x.9.png
+		Forms9PatchDemo\Source\Resources\button%403x.9.png = Forms9PatchDemo\Source\Resources\button%403x.9.png
+		Forms9PatchDemo\Source\Resources\button%404x.9.png = Forms9PatchDemo\Source\Resources\button%404x.9.png
+		Forms9PatchDemo\Source\Resources\button%40¾x.9.png = Forms9PatchDemo\Source\Resources\button%40¾x.9.png
+		Forms9PatchDemo\Source\Resources\cat.jpg = Forms9PatchDemo\Source\Resources\cat.jpg
+		Forms9PatchDemo\Source\Resources\delay.png = Forms9PatchDemo\Source\Resources\delay.png
+		Forms9PatchDemo\Source\Resources\delay%402x.png = Forms9PatchDemo\Source\Resources\delay%402x.png
+		Forms9PatchDemo\Source\Resources\delay%403x.png = Forms9PatchDemo\Source\Resources\delay%403x.png
+		Forms9PatchDemo\Source\Resources\Delete.png = Forms9PatchDemo\Source\Resources\Delete.png
+		Forms9PatchDemo\Source\Resources\Delete%402x.png = Forms9PatchDemo\Source\Resources\Delete%402x.png
+		Forms9PatchDemo\Source\Resources\Delete%403x.png = Forms9PatchDemo\Source\Resources\Delete%403x.png
+		Forms9PatchDemo\Source\Resources\Exit.png = Forms9PatchDemo\Source\Resources\Exit.png
+		Forms9PatchDemo\Source\Resources\Exit%402x.png = Forms9PatchDemo\Source\Resources\Exit%402x.png
+		Forms9PatchDemo\Source\Resources\Exit%403x.png = Forms9PatchDemo\Source\Resources\Exit%403x.png
+		Forms9PatchDemo\Source\Resources\ghosts.png = Forms9PatchDemo\Source\Resources\ghosts.png
+		Forms9PatchDemo\Source\Resources\greenWhiteGradient.svg = Forms9PatchDemo\Source\Resources\greenWhiteGradient.svg
+		Forms9PatchDemo\Source\Resources\grey_up.png = Forms9PatchDemo\Source\Resources\grey_up.png
+		Forms9PatchDemo\Source\Resources\icon_home_active%401x.png = Forms9PatchDemo\Source\Resources\icon_home_active%401x.png
+		Forms9PatchDemo\Source\Resources\icon_home_active%402x.png = Forms9PatchDemo\Source\Resources\icon_home_active%402x.png
+		Forms9PatchDemo\Source\Resources\icon_home_active%403x.png = Forms9PatchDemo\Source\Resources\icon_home_active%403x.png
+		Forms9PatchDemo\Source\Resources\image.9.png = Forms9PatchDemo\Source\Resources\image.9.png
+		Forms9PatchDemo\Source\Resources\image.png = Forms9PatchDemo\Source\Resources\image.png
+		Forms9PatchDemo\Source\Resources\image%401½x.9.png = Forms9PatchDemo\Source\Resources\image%401½x.9.png
+		Forms9PatchDemo\Source\Resources\image%401½x.png = Forms9PatchDemo\Source\Resources\image%401½x.png
+		Forms9PatchDemo\Source\Resources\image%402x.9.png = Forms9PatchDemo\Source\Resources\image%402x.9.png
+		Forms9PatchDemo\Source\Resources\image%402x.png = Forms9PatchDemo\Source\Resources\image%402x.png
+		Forms9PatchDemo\Source\Resources\image%403x.9.png = Forms9PatchDemo\Source\Resources\image%403x.9.png
+		Forms9PatchDemo\Source\Resources\image%403x.png = Forms9PatchDemo\Source\Resources\image%403x.png
+		Forms9PatchDemo\Source\Resources\image%404x.9.png = Forms9PatchDemo\Source\Resources\image%404x.9.png
+		Forms9PatchDemo\Source\Resources\image%404x.png = Forms9PatchDemo\Source\Resources\image%404x.png
+		Forms9PatchDemo\Source\Resources\image%40¾x.9.png = Forms9PatchDemo\Source\Resources\image%40¾x.9.png
+		Forms9PatchDemo\Source\Resources\image%40¾x.png = Forms9PatchDemo\Source\Resources\image%40¾x.png
+		Forms9PatchDemo\Source\Resources\Info.png = Forms9PatchDemo\Source\Resources\Info.png
+		Forms9PatchDemo\Source\Resources\Info%401½x.png = Forms9PatchDemo\Source\Resources\Info%401½x.png
+		Forms9PatchDemo\Source\Resources\Info%402x.png = Forms9PatchDemo\Source\Resources\Info%402x.png
+		Forms9PatchDemo\Source\Resources\Info%403x.png = Forms9PatchDemo\Source\Resources\Info%403x.png
+		Forms9PatchDemo\Source\Resources\Info%40¾x.png = Forms9PatchDemo\Source\Resources\Info%40¾x.png
+		Forms9PatchDemo\Source\Resources\ltblueUp.png = Forms9PatchDemo\Source\Resources\ltblueUp.png
+		Forms9PatchDemo\Source\Resources\ltblueUp%402x.png = Forms9PatchDemo\Source\Resources\ltblueUp%402x.png
+		Forms9PatchDemo\Source\Resources\PopupDM.png = Forms9PatchDemo\Source\Resources\PopupDM.png
+		Forms9PatchDemo\Source\Resources\red_up.9.png = Forms9PatchDemo\Source\Resources\red_up.9.png
+		Forms9PatchDemo\Source\Resources\redButton.9.png = Forms9PatchDemo\Source\Resources\redButton.9.png
+		Forms9PatchDemo\Source\Resources\redButton%401½x.9.png = Forms9PatchDemo\Source\Resources\redButton%401½x.9.png
+		Forms9PatchDemo\Source\Resources\redButton%402x.9.png = Forms9PatchDemo\Source\Resources\redButton%402x.9.png
+		Forms9PatchDemo\Source\Resources\redButton%403x.9.png = Forms9PatchDemo\Source\Resources\redButton%403x.9.png
+		Forms9PatchDemo\Source\Resources\redButton%404x.9.png = Forms9PatchDemo\Source\Resources\redButton%404x.9.png
+		Forms9PatchDemo\Source\Resources\redButton%40¾x.9.png = Forms9PatchDemo\Source\Resources\redButton%40¾x.9.png
+		Forms9PatchDemo\Source\Resources\redGridBox.png = Forms9PatchDemo\Source\Resources\redGridBox.png
+		Forms9PatchDemo\Source\Resources\redGridBox.svg = Forms9PatchDemo\Source\Resources\redGridBox.svg
+		Forms9PatchDemo\Source\Resources\redGridBox9.9.png = Forms9PatchDemo\Source\Resources\redGridBox9.9.png
+		Forms9PatchDemo\Source\Resources\redribbon.png = Forms9PatchDemo\Source\Resources\redribbon.png
+		Forms9PatchDemo\Source\Resources\redribbon%402x.png = Forms9PatchDemo\Source\Resources\redribbon%402x.png
+		Forms9PatchDemo\Source\Resources\redribbon%403x.png = Forms9PatchDemo\Source\Resources\redribbon%403x.png
+		Forms9PatchDemo\Source\Resources\redWhiteGradient.svg = Forms9PatchDemo\Source\Resources\redWhiteGradient.svg
+		Forms9PatchDemo\Source\Resources\SvgSample.svg = Forms9PatchDemo\Source\Resources\SvgSample.svg
+		Forms9PatchDemo\Source\Resources\SvgSample2.svg = Forms9PatchDemo\Source\Resources\SvgSample2.svg
+		Forms9PatchDemo\Source\Resources\tick.png = Forms9PatchDemo\Source\Resources\tick.png
+		Forms9PatchDemo\Source\Resources\tick%402x.png = Forms9PatchDemo\Source\Resources\tick%402x.png
+		Forms9PatchDemo\Source\Resources\tick%403x.png = Forms9PatchDemo\Source\Resources\tick%403x.png
+		Forms9PatchDemo\Source\Resources\tree.png = Forms9PatchDemo\Source\Resources\tree.png
+		Forms9PatchDemo\Source\Resources\water.gif = Forms9PatchDemo\Source\Resources\water.gif
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fonts", "Fonts", "{0439210D-9837-4E2B-8F69-E377B6A30D0B}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9PatchDemo\Source\Resources\Fonts\CPMono_v07_Bold.otf = Forms9PatchDemo\Source\Resources\Fonts\CPMono_v07_Bold.otf
+		Forms9PatchDemo\Source\Resources\Fonts\luximb.ttf = Forms9PatchDemo\Source\Resources\Fonts\luximb.ttf
+		Forms9PatchDemo\Source\Resources\Fonts\MaterialIcons-Regular.ttf = Forms9PatchDemo\Source\Resources\Fonts\MaterialIcons-Regular.ttf
+		Forms9PatchDemo\Source\Resources\Fonts\Pacifico.ttf = Forms9PatchDemo\Source\Resources\Fonts\Pacifico.ttf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3854,30 +3994,30 @@ Global
 		{60C1AF69-C514-4588-85D5-EEE37AEFCAE3}.Turkey|x86.Build.0 = Release|Any CPU
 		{60C1AF69-C514-4588-85D5-EEE37AEFCAE3}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{60C1AF69-C514-4588-85D5-EEE37AEFCAE3}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|ARM.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|ARM.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhone.ActiveCfg = Release|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x64.Build.0 = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x86.Build.0 = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|Any CPU.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|ARM.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|ARM.Build.0 = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x64.Build.0 = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.AppStore|x86.Build.0 = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|Any CPU.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|ARM.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|ARM.Build.0 = Release|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhone.ActiveCfg = Release|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhone.Build.0 = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x64.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x64.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x86.ActiveCfg = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x86.Build.0 = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|iPhoneSimulator.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x64.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x64.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x86.ActiveCfg = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Beta|x86.Build.0 = Release|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -3918,16 +4058,16 @@ Global
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|Any CPU.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|ARM.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|ARM.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhone.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhone.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhone.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhone.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|x64.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|x64.Build.0 = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|x86.ActiveCfg = Debug|Any CPU
 		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Turkey|x86.Build.0 = Debug|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{CFA91476-BECE-4F45-9F60-334610335117}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
 		{CFA91476-BECE-4F45-9F60-334610335117}.AppStore|Any CPU.Build.0 = Release|Any CPU
 		{CFA91476-BECE-4F45-9F60-334610335117}.AppStore|ARM.ActiveCfg = Release|Any CPU
@@ -4150,30 +4290,30 @@ Global
 		{C2C9B778-07F5-4955-B413-299A66D14FEA}.Turkey|x86.Build.0 = Debug|x86
 		{C2C9B778-07F5-4955-B413-299A66D14FEA}.Ad-Hoc|iPhone.ActiveCfg = Debug|ARM
 		{C2C9B778-07F5-4955-B413-299A66D14FEA}.Ad-Hoc|iPhone.Build.0 = Debug|ARM
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|ARM.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|ARM.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhone.ActiveCfg = Release|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x64.Build.0 = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x86.Build.0 = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|Any CPU.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|Any CPU.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|ARM.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|ARM.Build.0 = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x64.Build.0 = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.AppStore|x86.Build.0 = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|Any CPU.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|ARM.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|ARM.Build.0 = Release|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhone.ActiveCfg = Release|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhone.Build.0 = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x64.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x64.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x86.ActiveCfg = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x86.Build.0 = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|iPhoneSimulator.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x64.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x64.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x86.ActiveCfg = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Beta|x86.Build.0 = Release|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -4214,40 +4354,40 @@ Global
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|Any CPU.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|ARM.ActiveCfg = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|ARM.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhone.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhone.Build.0 = Release|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhone.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhone.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|x64.ActiveCfg = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|x64.Build.0 = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|x86.ActiveCfg = Debug|Any CPU
 		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Turkey|x86.Build.0 = Debug|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|Any CPU.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|Any CPU.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|ARM.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|ARM.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhone.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhone.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x64.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x64.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x86.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x86.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|Any CPU.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|ARM.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|ARM.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhone.ActiveCfg = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhone.Build.0 = Release|iPhone
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x64.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x64.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x86.ActiveCfg = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x86.Build.0 = Debug|iPhoneSimulator
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|ARM.ActiveCfg = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|ARM.Build.0 = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhone.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhone.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhoneSimulator.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|iPhoneSimulator.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x64.ActiveCfg = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x64.Build.0 = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x86.ActiveCfg = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.AppStore|x86.Build.0 = Debug|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|Any CPU.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|Any CPU.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|ARM.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|ARM.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhone.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhone.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhoneSimulator.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|iPhoneSimulator.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x64.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x64.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x86.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Beta|x86.Build.0 = Test|Any CPU
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
@@ -4260,18 +4400,18 @@ Global
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|x64.Build.0 = Debug|iPhoneSimulator
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Debug|x86.Build.0 = Debug|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|ARM.ActiveCfg = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|ARM.Build.0 = Release|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|Any CPU.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|Any CPU.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|ARM.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|ARM.Build.0 = Test|Any CPU
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|iPhone.ActiveCfg = Release|iPhone
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|iPhone.Build.0 = Release|iPhone
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x64.ActiveCfg = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x64.Build.0 = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x86.ActiveCfg = Release|iPhoneSimulator
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x86.Build.0 = Release|iPhoneSimulator
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x64.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x64.Build.0 = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x86.ActiveCfg = Test|Any CPU
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Release|x86.Build.0 = Test|Any CPU
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Test|Any CPU.Build.0 = Test|Any CPU
 		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}.Test|ARM.ActiveCfg = Test|Any CPU
@@ -4594,6 +4734,80 @@ Global
 		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Turkey|x86.Build.0 = Turkey|Any CPU
 		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{4DCD0420-1168-4B77-86DB-6196EE4BD491}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|x64.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.AppStore|x86.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|Any CPU.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|ARM.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|ARM.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|iPhone.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|iPhone.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|iPhoneSimulator.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|x64.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|x64.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|x86.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Beta|x86.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|ARM.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|x64.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Debug|x86.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|ARM.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|ARM.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|iPhone.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|x64.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|x64.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Release|x86.Build.0 = Release|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|ARM.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|ARM.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|iPhone.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|iPhone.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|x64.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|x64.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|x86.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Test|x86.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|Any CPU.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|ARM.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|ARM.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|iPhone.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|iPhone.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|x64.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|x64.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|x86.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Turkey|x86.Build.0 = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -4607,22 +4821,10 @@ Global
 		{E0310C06-794F-4B67-90B9-E1A5C4E84E87} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
 		{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
 		{AFC00402-9BFF-4164-AE61-021210C2CE70} = {68AC6393-E8BD-45AD-860D-4EFE00B466D4}
-		{DDCDB76B-2DE1-44F2-A3D8-73EEF0BA6406} = {45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}
-		{EB3B97E9-BFF9-4D72-BDB9-29E74E21D78F} = {45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}
-		{E68F0971-0308-4E5E-AFFA-F1F82EF69CDC} = {45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}
-		{1F4EE6D4-CA44-4A60-9529-DA6AAF91196D} = {45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A}
-		{A45DEA17-78A3-464A-9E00-0342D0503B00} = {35755212-E131-459D-B4F8-18DDFDD2D25C}
-		{2C7623D2-F5E9-4BF7-B0FF-5D753CEE80EB} = {35755212-E131-459D-B4F8-18DDFDD2D25C}
-		{1C6AB883-A0E1-4B84-91D9-FACA09F563F4} = {35755212-E131-459D-B4F8-18DDFDD2D25C}
-		{321F4DDA-F8AA-4CE5-9A3C-9497EB3EA0BC} = {35755212-E131-459D-B4F8-18DDFDD2D25C}
 		{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89} = {0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17}
 		{00E0CDDC-B671-4876-8E78-927C50D2596A} = {0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17}
 		{48ADFBE6-0CBA-4317-8371-250A7F0647AE} = {0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17}
 		{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0} = {0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17}
-		{6A6BCD9F-8704-44BD-BEE2-B4DAF03AC95E} = {2B0B9D08-0382-44D6-8AD2-F819A56338E4}
-		{8FCFFFAF-8A78-4390-9C2D-2C65F7D1A71F} = {2B0B9D08-0382-44D6-8AD2-F819A56338E4}
-		{6012C70E-C527-4F82-9201-3A4B0E15E7CD} = {2B0B9D08-0382-44D6-8AD2-F819A56338E4}
-		{8B10BE2D-1311-4A42-851A-5184885B4EC9} = {2B0B9D08-0382-44D6-8AD2-F819A56338E4}
 		{52E3C505-3123-48ED-AFE5-E700F1D5A01A} = {707FE75B-82D3-461A-8418-31B3097A2F45}
 		{A6D42C80-CDFE-4C4E-B0FB-72A403793B95} = {707FE75B-82D3-461A-8418-31B3097A2F45}
 		{803F6E5C-CD93-43AC-92D9-984D09B264DC} = {707FE75B-82D3-461A-8418-31B3097A2F45}
@@ -4638,18 +4840,10 @@ Global
 		{00D8D049-FFAA-4759-8FC9-1ECA30777F72} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{3B72465B-ACAE-43AE-9327-10F372FE5F80} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{0E16E70A-D6DD-4323-AD5D-363ABFF42D6A} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
-		{29E13D5D-338D-48A0-88D0-D92F714B100D} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
-		{F8BC865B-1638-44F0-87AB-446F5D34796A} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
-		{194A67C8-8923-492D-98FE-3EC10FC435BB} = {F8BC865B-1638-44F0-87AB-446F5D34796A}
-		{EDB4F296-5B36-4763-8561-B9EFA3640529} = {F8BC865B-1638-44F0-87AB-446F5D34796A}
-		{3550E38B-0954-4598-AB80-8CC327BBF59C} = {29E13D5D-338D-48A0-88D0-D92F714B100D}
-		{35755212-E131-459D-B4F8-18DDFDD2D25C} = {29E13D5D-338D-48A0-88D0-D92F714B100D}
-		{09BF3FD0-50C7-4D75-94E9-EB3AE4B3A00E} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
-		{FD45A3D3-BBE9-4497-91F7-F21248F2E992} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
-		{0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17} = {09BF3FD0-50C7-4D75-94E9-EB3AE4B3A00E}
-		{707FE75B-82D3-461A-8418-31B3097A2F45} = {09BF3FD0-50C7-4D75-94E9-EB3AE4B3A00E}
-		{2B0B9D08-0382-44D6-8AD2-F819A56338E4} = {FD45A3D3-BBE9-4497-91F7-F21248F2E992}
-		{45F524DA-63FC-4BE1-B59B-1B1CEDEE5B8A} = {FD45A3D3-BBE9-4497-91F7-F21248F2E992}
+		{194A67C8-8923-492D-98FE-3EC10FC435BB} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{EDB4F296-5B36-4763-8561-B9EFA3640529} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
+		{0B72C6D3-79CB-4C03-B4A6-9C07EAC16B17} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
+		{707FE75B-82D3-461A-8418-31B3097A2F45} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
 		{A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
 		{1A58427B-131D-4E66-A909-2CCE69C6F75E} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
 		{9C37E6E4-7B6C-4F3F-80EA-BA6B3D4BA2CC} = {A4B58F0C-4AB7-4DDF-AEEF-89DEBF1B6E4F}
@@ -4723,19 +4917,24 @@ Global
 		{8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0} = {B425138C-F6BB-4949-B957-16C9A5807909}
 		{57A7DB2A-EFCE-4F9E-9A77-3D30BCDAED34} = {B425138C-F6BB-4949-B957-16C9A5807909}
 		{54E2A1BD-D19F-4F3D-A252-E19FF9DBF930} = {B425138C-F6BB-4949-B957-16C9A5807909}
-		{3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
-		{71AA5B20-50B5-4D84-AD4E-0B63E0C9F2EC} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
 		{60C1AF69-C514-4588-85D5-EEE37AEFCAE3} = {43FB1312-C02E-49C6-A7BB-CEAB338097E5}
-		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7} = {71AA5B20-50B5-4D84-AD4E-0B63E0C9F2EC}
-		{CFA91476-BECE-4F45-9F60-334610335117} = {3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34}
-		{773C755A-1265-414D-968F-B8DC5CA73A87} = {3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34}
-		{C2C9B778-07F5-4955-B413-299A66D14FEA} = {3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34}
-		{585BAF24-E652-4668-BAF3-21A25BEBFE79} = {71AA5B20-50B5-4D84-AD4E-0B63E0C9F2EC}
-		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF} = {71AA5B20-50B5-4D84-AD4E-0B63E0C9F2EC}
+		{5F026DB4-CAAE-4DE0-8105-FF133A3655B7} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}
+		{CFA91476-BECE-4F45-9F60-334610335117} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
+		{773C755A-1265-414D-968F-B8DC5CA73A87} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
+		{C2C9B778-07F5-4955-B413-299A66D14FEA} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
+		{585BAF24-E652-4668-BAF3-21A25BEBFE79} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}
+		{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}
 		{45454AAB-F431-422F-BECB-D0B959D1899A} = {EFE1ECF8-0B3E-4086-B5D6-87C7F3F23A96}
-		{23E697E4-43E4-4BA2-B681-D136F20422C6} = {3E2AF1FD-CB94-4C43-AEEC-94FA08F46E34}
+		{23E697E4-43E4-4BA2-B681-D136F20422C6} = {54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}
 		{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 		{4DCD0420-1168-4B77-86DB-6196EE4BD491} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
+		{0DF60C1F-EE1B-4112-9E7F-0E098D356C98} = {43FB1312-C02E-49C6-A7BB-CEAB338097E5}
+		{9AF66E2B-2813-491B-A4E4-7BD81E018F46} = {8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}
+		{71DA4641-70B1-49B6-909F-9D3BC1BC3B32} = {8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}
+		{F311DBED-FA26-4CE4-90E5-F23BE46352E9} = {8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}
+		{A850E60D-2E64-4BBF-87AF-CCD963F6795D} = {8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}
+		{A3896D3C-491F-4E9D-980F-C971E65A41DE} = {8DB247B9-0E65-473C-AB0D-D5D7BC19D1A0}
+		{0439210D-9837-4E2B-8F69-E377B6A30D0B} = {A3896D3C-491F-4E9D-980F-C971E65A41DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FAAF233-96A8-4005-93A0-A34046BAEFE8}

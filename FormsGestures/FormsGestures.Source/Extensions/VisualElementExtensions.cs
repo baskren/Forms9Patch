@@ -38,7 +38,7 @@ namespace FormsGestures
         }
 
 
-         // THIS MAY NOT WORK WITH UWP .NET NATIVE COMPILER CHAIN
+        // THIS MAY NOT WORK WITH UWP .NET NATIVE COMPILER CHAIN
         /// <summary>
         /// Is this element a descendent of an ancestor element?
         /// </summary>
@@ -226,7 +226,7 @@ namespace FormsGestures
                 }
             }
 
-            if (parentElement is T && propertyName==null || parentElement.HasProperty(propertyName)) 
+            if (parentElement is T && propertyName == null || parentElement.HasProperty(propertyName))
                 result.Add(parentElement as T);
 
             return result;
@@ -249,7 +249,7 @@ namespace FormsGestures
         /// <typeparam name="T"></typeparam>
         /// <param name="parentElement"></param>
         /// <returns></returns>
-        public static List<T> FindVisualElementsOfType<T>(this VisualElement parentElement) where T: VisualElement
+        public static List<T> FindVisualElementsOfType<T>(this VisualElement parentElement) where T : VisualElement
         {
             return FindChildrenWithPropertyAndOfType<T>(parentElement, null);
         }
@@ -260,7 +260,7 @@ namespace FormsGestures
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public static List<T> FindVisualElementsWithPropertyAndOfType<T>(string propertyName) where T: VisualElement
+        public static List<T> FindVisualElementsWithPropertyAndOfType<T>(string propertyName) where T : VisualElement
         {
             return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, propertyName);
         }
@@ -284,7 +284,7 @@ namespace FormsGestures
         {
             return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, null);
         }
-        
+
 
     }
 }
