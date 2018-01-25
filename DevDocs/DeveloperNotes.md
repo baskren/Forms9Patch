@@ -59,4 +59,6 @@ Heck, it might not work when deployed to an actual device.  It *does* work when 
 Because I haven't been able to take the time to figure out why Xaml files are not being compiled and embedded properly when using Xamarin.Forms source.  Again, if you know how to do this, please share!
 
 
+#### UWP: Unable to load `System.Runtime. The located assembly's manifest definition does not match the assembly reference.`
 
+Change the Windows target version to 14393.   

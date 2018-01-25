@@ -19,10 +19,33 @@ namespace Forms9Patch.UWP
             {
                 if (!_textDecorationsPresentSet)
                 {
-                    _textDecorationsPresent = Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Text.TextDecorations");
+                    //_textDecorationsPresent = Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Text.TextDecorations");
+                    var run = new Run();
+                    try
+                    {
+                        _textDecorationsPresent = TestTextDecorations();
+                    }
+                    catch (Exception)
+                    {
+                        _textDecorationsPresent = false;
+                    }
                     _textDecorationsPresentSet = true;
                 }
                 return _textDecorationsPresent;
+            }
+        }
+
+        static bool TestTextDecorations()
+        {
+            var run = new Run();
+            try
+            {
+                run.TextDecorations = Windows.UI.Text.TextDecorations.None;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -180,6 +203,32 @@ namespace Forms9Patch.UWP
         }
 
 
+        enum Decoration
+        {
+            Strikethrough,
+            Underline,
+        }
+
+        static void ApplyTextDecorations(Run run, Decoration decoration)
+        {
+            try
+            {
+                switch(decoration)
+                {
+                    case Decoration.Strikethrough:
+                        run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
+                        break;
+                    case Decoration.Underline:
+                        run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
+                        break;
+
+                }
+            } catch (Exception)
+            {
+                // o
+            }
+        }
+
         static void AddInline(TextBlock textBlock, Forms9Patch.Label label, MetaFont metaFont, string text, int startIndex, int length)
         {
             var run = new Run();
@@ -189,13 +238,9 @@ namespace Forms9Patch.UWP
             run.FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;
             run.FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
 
-            
-            if (TextDecorationsPresent)
-            {
-                run.TextDecorations = Windows.UI.Text.TextDecorations.None;
-                if (metaFont.Strikethrough)
-                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
-            }
+
+            if (TextDecorationsPresent && metaFont.Strikethrough)
+                ApplyTextDecorations(run, Decoration.Strikethrough);
 
             switch (metaFont.Baseline)
             {
@@ -229,22 +274,22 @@ namespace Forms9Patch.UWP
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("It appears that this Xamarin.Forms.UWP app was built with a Windows TargetVersion < 10.0.16299.0 (Windows 10 Fall Creators Update).  10.0.16299.0 is needed to support Forms9Patch.Label.HtmlText background color attributes.", e);
+                    //throw new Exception("It appears that this Xamarin.Forms.UWP app was built with a Windows TargetVersion < 10.0.16299.0 (Windows 10 Fall Creators Update).  10.0.16299.0 is needed to support Forms9Patch.Label.HtmlText background color attributes.", e);
                 }
             }
 
             if (metaFont.IsActionEmpty())
             {
                 run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
-                if (metaFont.Underline && TextDecorationsPresent)
-                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
+                if (TextDecorationsPresent && metaFont.Underline)
+                    ApplyTextDecorations(run, Decoration.Underline);
                 textBlock.Inlines.Add(run);
             }
             else
             {
                 run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Xamarin.Forms.Color.Blue.ToWindowsColor());
                 if (TextDecorationsPresent)
-                    run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
+                    ApplyTextDecorations(run, Decoration.Underline);
                 var hyperlink = new Hyperlink();
                 hyperlink.Inlines.Add(run);
                 hyperlink.Click += (Hyperlink sender, HyperlinkClickEventArgs args) => label.Tap(metaFont.Action.Id, metaFont.Action.Href);
