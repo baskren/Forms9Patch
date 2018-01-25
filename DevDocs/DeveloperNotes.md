@@ -49,7 +49,14 @@ This may likely not be a problem in the future but currently VisualStudio doesn'
 
 
 
+#### Forms9PatchDemo.PCL.Droid won't run when built and deployed from VisualStudio 2017 (Windows) to Android Emulator
 
+Heck, it might not work when deployed to an actual device.  It *does* work when deployed from VisualStudio Mac to Android Emulator.  1 point for VisualStudio Mac!  If you know why it doesn't work on Windows, please share!
+
+
+#### Why are the Xaml examples not in the Forms9PatchDemo.Source apps?
+
+Because I haven't been able to take the time to figure out why Xaml files are not being compiled and embedded properly when using Xamarin.Forms source.  Again, if you know how to do this, please share!
 
 
 

@@ -5,7 +5,6 @@
 		<TargetFramework>netstandard1.3</TargetFramework>
 		<AssemblyName>Forms9PatchDemo</AssemblyName>
 		<RootNamespace>Forms9PatchDemo</RootNamespace>
-		<UseXaml>USE_XAML</UseXaml>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	  <DefineConstants>TRACE;DEBUG;FROM_SOURCE;$(UseXaml);NETSTANDARD1_3</DefineConstants>
