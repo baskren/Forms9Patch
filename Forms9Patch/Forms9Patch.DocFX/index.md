@@ -1,6 +1,6 @@
 # Forms9Patch 
 
-Simplify image management and text formatting in your PCL and Shared Library Xamarin.Forms iOS, Android and UWP applications.
+A suite of elements with simple image management and text formatting for your NetStandard, PCL, and Shared Library Xamarin.Forms iOS, Android and UWP applications.
 
 ## Overview
 
@@ -17,13 +17,13 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
 
 ## So, what exactly is Forms9Patch?
 
-Simply stated, Forms9Patch is three core elements, five layouts, three buttons, six pop-ups, and some extensions and services.   The three core elements are:
+Simply stated, Forms9Patch is three core elements from which five layouts, three buttons, six pop-ups are built upon.  And, to make your life easier, some extensions, effects, and services are added.   The three core elements are:
 
- - `Forms9Patch.ImageSource`: a free to use derivative of `Xamarin.Forms.ImageSource` to support multi-device / multi-density image management from Embedded Resources
- - `Forms9Patch.Image`: an enhanced implementation of `Xamarin.Forms.Image` with border (outline), shadow, patch scaling, tiling, and tinting support **_plus_** support of SVG images 
- - `Forms9Patch.Label`: an enhanced implementation of `Xamarin.Forms.Label` for easy access to single-point-of-use custom fonts, auto-fitting, and text formatting via markup tags
+ - `Forms9Patch.ImageSource`: a free to use derivative of `Xamarin.Forms.ImageSource` to support multi-device / multi-density image management from Embedded Resources.
+ - `Forms9Patch.Image`: an enhanced implementation of `Xamarin.Forms.Image` with border (outline) and shadow properties  **_plus_** support of SVG vector images.  Raster images (.png, .jpg, .bmp) images also have patch scaling, tiling, and tinting support.
+ - `Forms9Patch.Label`: an enhanced implementation of `Xamarin.Forms.Label` for easy access to single-point-of-use custom fonts, auto-fitting, and text formatting via markup tags.
 
-Next, it is derivative of the five `Xamarin.Forms.Layout` subclasses that applies the enhancements from `Forms9Patch.Image` (patch-scaling, tiling, tinting, borders, and shadows) to the layouts' background.
+Forms9Patch's five layouts are derivatives of the five `Xamarin.Forms.Layout` subclasses - enhanced with the ability to use a `Forms9Patch.Image` as a background.
 
  - `Forms9Patch.Frame`
  - `Forms9Patch.AbsoluteLayout`
@@ -31,34 +31,40 @@ Next, it is derivative of the five `Xamarin.Forms.Layout` subclasses that applie
  - `Forms9Patch.RelativeLayout`
  - `Forms9Patch.StackLayout`
 
-Additionally, the three button elements (`Forms9Patch.Button`, `Forms9Patch.StateButton`, and `Forms9Patch.SegmentedControl`) are all derived from `Xamarin.Forms.Button` and share the following enhancements:
+Forms9Patch's three button elements (`Forms9Patch.Button`, `Forms9Patch.StateButton`, and `Forms9Patch.SegmentedControl`) are all derived from `Xamarin.Forms.Button` and share the following enhancements:
 
+ - A `BackgroundImage` property: Use a `Forms9Patch.Image` as a button background.
  - An icon:
      - Specified either as markup text (`IconText` property) or as a `Forms9Patch.Image` (`IconImage` property).  `IconText` makes it easy to use custom icon fonts like [Material Icons](https://material.io/icons/).  `IconImage` makes it easy to tint raster images or use `SVG` vector images.  
      - A button's icon can be before (default) or after (`TrailingIcon` property `true`) its text and at the edge of the button (default) or next to the button's text (`TightSpacing` property `true`).  
-     - A button's icon or text can be arranged horizontally (default) or vertically (`Orienation` property set to `StackOrientation.Vertical`).
+     - A button's icon or text can be arranged horizontally (default) or vertically (`Orientation` property set to `StackOrientation.Vertical`).
+ - A label:
+     - Specified either as plain text (`Text` property) or markup text (`HtmlText` property).
+     - Autofitting algorithms (see [Autofitting](Autofitting) )
+- `LongPressing` and `LongPressed` touch events.
 
- - `Forms9Patch.Button`: an enhanced implementation of `Xamarin.Forms.Button` that applies the enhancements from `Forms9Patch.Image' to the button's background and icon image and the enhancements from `Forms9Patch.Label` to the buttons' icon (as text) and label, and adds long-press events
+The three Forms9Patch button elements are:
+
+ - `Forms9Patch.Button`
  - `Forms9Patch.StateButton`: a further enhanced implementation of `Forms9Patch.Button` that allow most enhanced properties to be configured by the button's state (Default, Pressing, Selected, Disabled, DisabledAndSelected) 
- - `Forms9Patch.SegmentControl`: a segmented button control that  allows for border, separator, and shadow control
+ - `Forms9Patch.SegmentControl`: a segmented button control that allows for border, separator, and shadow control.  Note that there is currently no support for background images.
 
 
 
-Likewise, it is a series of pop-up elements that have page overlay backgrounds and the ability to be canceled by tapping the background:
+Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (outline and background image capabilities) that rendere with full page overlay backgrounds and the ability to be canceled by tapping the background.  These popup elements are:
 
- - `Forms9Patch.ModalPopup`: takes the enhancements (borders; patch-scalable, tintable, tile-able background images; shadows) from `Forms9Patch.Frame` and puts it into a pop-up layout
- - `Forms9Patch.BubblePopup`: goes a step further than `Forms9Patch.ModalPopup` by pointing to a target `Xamarin.Forms.VisualElement`
- - `Forms9Patch.ActivityIndicatorPopup`: a convenience element that presents a `Xamarin.Forms.ActivityIndicator` over a page overlay
- - `Forms9Patch.Toast`: a convenience element that presents a title, a message and an optional confirmation button
- - `Forms9Patch.PermissionPopup`: a convenience element that presents a title, a message, and an accept and a decline button
- - `Forms9Patch.TargetedToast`: similar to `Forms9Patch.Toast` but enhanced to point to a `Xamarin.Forms.VisualElement`
+ - `Forms9Patch.ModalPopup`: takes the enhancements (borders; patch-scalable, tintable, tile-able background images; shadows) from `Forms9Patch.Frame` and puts it into a pop-up layout.
+ - `Forms9Patch.BubblePopup`: goes a step further than `Forms9Patch.ModalPopup` by pointing to a target `Xamarin.Forms.VisualElement`.  The pointer has `PointerLength`, `PointerTipRadius` and `PointerCornerRadius` properties.
+ - `Forms9Patch.ActivityIndicatorPopup`: a convenience element that presents a `Xamarin.Forms.ActivityIndicator` over a page overlay.
+ - `Forms9Patch.Toast`: a convenience element that presents a title, a message and an optional confirmation button.
+ - `Forms9Patch.PermissionPopup`: a convenience element that presents a title, a message, and an accept and a decline button.
+ - `Forms9Patch.TargetedToast`: similar to `Forms9Patch.Toast` but enhanced to point to a `Xamarin.Forms.VisualElement`.
 
 Then there are Forms9Patch's extensions.  A few noteworthy ones are:
 
- - Color Extensions
- - WebView Extensions 
- - String Extensions
- - HtmlString Extensions
+ - Color Extensions: Blend two colors, change a color's opacity, convert between Xamarin.Forms.Color and string representations.
+ - WebView Extensions: Print the contents of a `Xamarin.Forms.WebView` (currently iOS and Android only).
+ - HtmlString Extensions: Convert HTML markup to a PNG file.
 
 And lastly is Forms9Patch's services:
 
