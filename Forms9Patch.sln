@@ -720,15 +720,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.Source.UWP"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Build.Tasks", "Xamarin.Forms\Xamarin.Forms.Build.Tasks\Xamarin.Forms.Build.Tasks.csproj", "{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL\Forms9PatchDemo.PCL.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL", "Forms9PatchDemo\Forms9PatchDemo.PCL\Forms9PatchDemo.PCL.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Droid", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.Droid\Forms9PatchDemo.PCL.Droid.csproj", "{585BAF24-E652-4668-BAF3-21A25BEBFE79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.Droid", "Forms9PatchDemo\Forms9PatchDemo.PCL.Droid\Forms9PatchDemo.PCL.Droid.csproj", "{585BAF24-E652-4668-BAF3-21A25BEBFE79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.iOS", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.iOS\Forms9PatchDemo.PCL.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.iOS", "Forms9PatchDemo\Forms9PatchDemo.PCL.iOS\Forms9PatchDemo.PCL.iOS.csproj", "{1A7FACFB-952B-42CA-9D70-61CB0D5FDEDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.UWP", "Forms9PatchDemo\PCL\Forms9PatchDemo.PCL.UWP\Forms9PatchDemo.PCL.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL.UWP", "Forms9PatchDemo\Forms9PatchDemo.PCL.UWP\Forms9PatchDemo.PCL.UWP.csproj", "{45454AAB-F431-422F-BECB-D0B959D1899A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{9AF66E2B-2813-491B-A4E4-7BD81E018F46}"
 	ProjectSection(SolutionItems) = preProject
@@ -929,11 +929,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 		Forms9Patch\Forms9Patch.Source.UWP\Properties\Forms9Patch.NetStandard.UWP.rd.xml = Forms9Patch\Forms9Patch.Source.UWP\Properties\Forms9Patch.NetStandard.UWP.rd.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Droid", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard.Droid\Forms9PatchDemo.NetStandard.Droid.csproj", "{12A221C5-135C-4148-B348-323735D10C55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.Droid", "Forms9PatchDemo\Forms9PatchDemo.NetStandard.Droid\Forms9PatchDemo.NetStandard.Droid.csproj", "{12A221C5-135C-4148-B348-323735D10C55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.iOS", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard.iOS\Forms9PatchDemo.NetStandard.iOS.csproj", "{7B5EDC91-C784-476D-A3EF-90369B57DF20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.iOS", "Forms9PatchDemo\Forms9PatchDemo.NetStandard.iOS\Forms9PatchDemo.NetStandard.iOS.csproj", "{7B5EDC91-C784-476D-A3EF-90369B57DF20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.UWP", "Forms9PatchDemo\NetStandard\Forms9PatchDemo.NetStandard.UWP\Forms9PatchDemo.NetStandard.UWP.csproj", "{592FEF99-BE8D-4111-909B-D7448835B157}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.UWP", "Forms9PatchDemo\Forms9PatchDemo.NetStandard.UWP\Forms9PatchDemo.NetStandard.UWP.csproj", "{592FEF99-BE8D-4111-909B-D7448835B157}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

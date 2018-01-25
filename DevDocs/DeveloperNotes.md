@@ -2,28 +2,7 @@
 
 ## Project Configuration
 
-#### Every solution needs a ```packages``` folder
-
-Because of the way VisualStudio, Nuget, and Git (don't) work together, relative paths are not valid for Nuget packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the solutions root folder and the root folder for each submodule (ex: Xamarin.Forms) and symbolically link ```packages``` directory to your working Nuget packages folder.
-
-Windows: ``` c:> mklink /D packages \Users\ben\.nuget\packages ```
-
-OSX: ``` $ ln -s /Users/ben/.nuget/packages packages ```
-
-#### Address error:  ``` Project '..\Xamarin.Forms ... .csproj' targets 'netstandard2.0' ```
-
-1. You're very likely referencing the latest and greatest Xamarin.Forms ```master``` branch commit.  Back up by switching to a ```2.4.0``` build.  You may have to wipe Xamarin.Forms submodule and reinstall.  If so, remember 
-2. Manual clean out the ```bin``` and ```obj``` folders (SuperClean.exe) and Restore Packages.
-
-#### Every root solution that builds Xamarin.Forms from source needs a ```.nuget``` folder
-
-Windows: ``` c:> mklink /D .nuget Xamarin.Forms\.nuget```
-
-OSX: ``` $ ln -s Xamarin.Forms/.nuget .nuget```
-
-
-
-### Notes in case you have to start all over again
+#### Notes for those starting from scratch 
 
 1. Switch to a Xamarin.Forms commit tagged 2.4.0-sr2
 2. Xamarin.Forms projects used:
@@ -39,6 +18,38 @@ OSX: ``` $ ln -s Xamarin.Forms/.nuget .nuget```
    1. needs to be built with Android 7.1 (Project Properties / Application / Compile using Android version)
    2. needs to have ```ROOT_RENDERERS``` symbol defined (Project Properties / Compiler / Define Symbols)
    3. Properties/AssemblyInfo.cs: comment out ```[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]```
+5. Set up ```packages``` symbolic links (see below)
+
+Note that the above may need to be repeated if switching to a different Xamarin.Forms git commit.
+
+#### Every submodule needs a ```packages``` folder
+
+Because of the way VisualStudio, Nuget, and Git (don't) work together, relative paths are not valid for Nuget packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the following directories (below) and symbolically link the ```packages``` subdirectory to the solution's working Nuget packages directory:
+
+ - Forms9Patch/Forms9PatchDemo
+ - Forms9Patch/P42
+ - Forms9Patch/Xamarin.Forms
+
+Below are example commands of how to symbolically link to your VisualStudio solution's (and git root module) Nuget packages folder.  For the case of building Forms9Patch source and demo code using just this git module, the below command lines are meant to be executed in the above directories.
+
+ - **Windows:** ``` c:> mklink /D packages ..\packages ```
+ - **OSX:** ``` $ ln -s ../ packages ```
+
+If you are using Forms9Patch source as a submodule in another git module, modify the above command lines to cause the symbolic links to point to the ```packages``` directory in the root directory of the VisualStudio solution associated with that git module.   
+
+
+#### Address error:  ``` Project '..\Xamarin.Forms ... .csproj' targets 'netstandard2.0' ```
+
+1. You're very likely referencing the latest and greatest Xamarin.Forms ```master``` branch commit.  Back up by switching to a ```2.4.0``` build.   
+2. Manual clean out the ```bin``` and ```obj``` folders (SuperClean.exe) and Restore Packages.
+
+#### Changes to Forms9PatchDemo, Forms9Patch, or FormsGestures source code isn't updating
+
+This may likely not be a problem in the future but currently VisualStudio doesn't always show changes to ```.target``` files.  The extreme version of this can be seen in how ```.target``` file references are not seen at all in ```.PCL```, ```.iOS```, ```.Droid``` and ```.UWP``` projects.  Why am I using ```.target``` files then?  Because it saves a lot of work in keeping the source code for various permutations of builds in sync.
+
+
+
+
 
 
 
