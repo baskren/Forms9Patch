@@ -37,7 +37,7 @@ namespace FormsGestures.Droid
         static void PlatformPathLoader()
         {
 #if NETSTANDARD
-            P42.Utils.Environment.DocumentsPath = Context.FilesDir.Path;
+            //P42.Utils.Environment.DocumentsPath = Context.FilesDir.Path;
             P42.Utils.Environment.ApplicationDataPath = System.IO.Path.Combine(Context.ApplicationInfo.DataDir, "AppData");
             P42.Utils.Environment.ApplicationCachePath = Context.CacheDir.Path;
             P42.Utils.Environment.TemporaryStoragePath = System.IO.Path.Combine(Context.CacheDir.Path, "tmp");

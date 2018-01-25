@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.3</TargetFramework>
+		<AssemblyName>Forms9PatchDemo</AssemblyName>
+		<RootNamespace>Forms9PatchDemo</RootNamespace>
+		<UseXaml>USE_XAML</UseXaml>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <DefineConstants>TRACE;DEBUG;$(UseXaml);FROM_SOURCE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <DebugType></DebugType>
+	  <DefineConstants>TRACE;$(UseXaml);FROM_SOURCE</DefineConstants>
+	</PropertyGroup>
+
+
+
+	<!-- LOAD PROJECT CONTENT -->
+
+    <PropertyGroup>
+    	<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
+    </PropertyGroup>
+	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
+	<ItemGroup>
+	  <PackageReference Include="Xamarin.Forms" Version="2.4.0.280" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj" />
+	  <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj" />
+	  <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+	  <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+	</ItemGroup>
+	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
+
+
+</Project>

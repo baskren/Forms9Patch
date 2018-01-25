@@ -24,12 +24,12 @@ namespace FormsGestures.UWP
 #if NETSTANDARD
         static void PlatformPathLoader()
         {
-            var envVars = System.Environment.GetEnvironmentVariables();
+            //var envVars = System.Environment.GetEnvironmentVariables();
 
             try
             {
-                var documentsFolderPath = Windows.Storage.KnownFolders.DocumentsLibrary?.Path;
-                P42.Utils.Environment.DocumentsPath = documentsFolderPath;//Windows.Storage.ApplicationData.Current.LocalFolder.Path; 
+                //var documentsFolderPath = Windows.Storage.KnownFolders.DocumentsLibrary?.Path;
+                //P42.Utils.Environment.DocumentsPath = documentsFolderPath;//Windows.Storage.ApplicationData.Current.LocalFolder.Path; 
             }
             catch (System.UnauthorizedAccessException)
             {

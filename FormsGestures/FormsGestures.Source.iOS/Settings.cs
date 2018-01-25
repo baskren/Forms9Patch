@@ -78,11 +78,11 @@ namespace FormsGestures.iOS
         {
 #if NETSTANDARD
             var nsError = new NSError();
-            var documentsDir = NSFileManager.DefaultManager.GetUrl(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomain.User, null, true, out nsError);
-            if (nsError == null && !string.IsNullOrWhiteSpace(documentsDir?.Path))
-                P42.Utils.Environment.DocumentsPath = documentsDir.Path;
-            else
-                throw new Exception("Could not get iOS Documents Directory");
+            //var documentsDir = NSFileManager.DefaultManager.GetUrl(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomain.User, null, true, out nsError);
+            //if (nsError == null && !string.IsNullOrWhiteSpace(documentsDir?.Path))
+            //    P42.Utils.Environment.DocumentsPath = documentsDir.Path;
+            //else
+            //    throw new Exception("Could not get iOS Documents Directory");
 
             var appSupportDir = NSFileManager.DefaultManager.GetUrl(NSSearchPathDirectory.ApplicationSupportDirectory, NSSearchPathDomain.User, null, true, out nsError);
             if (nsError == null && !string.IsNullOrWhiteSpace(appSupportDir?.Path))
