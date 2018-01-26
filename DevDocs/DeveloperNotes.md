@@ -20,7 +20,7 @@
    3. Properties/AssemblyInfo.cs: comment out ```[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]```
 5. Set up ```packages``` symbolic links (see below)
 6. Set up symbolic link that links from ```Xamarin.Forms/.nuget``` to ```.nuget``` in the solution's root directory.
-7. Be sure there is a copy of ```Xamarin.Forms.2.4.0.280``` in the solution's ```packages``` directory.
+7. Be sure there is a copy of the ```Xamarin.Forms.2.4.0.280``` nuget package in the solution's ```packages``` directory.
     
 
 Note that the above may need to be repeated if switching to a different Xamarin.Forms git commit.
