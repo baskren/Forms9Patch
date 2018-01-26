@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -160,17 +159,26 @@ namespace Forms9Patch
         {
             if (s.ToLower().StartsWith("rgb(", StringComparison.Ordinal))
             {
-                var values = s.Substring(4, s.Length - 5).Split(',').Select(int.Parse).ToArray();
-                if (values.Length != 3)
+                //var values = s.Substring(4, s.Length - 5).Split(',').Select(int.Parse).ToArray();
+                var components = s.Substring(4, s.Length - 5).Split(',');
+                if (components.Length != 3)
                     throw new FormatException("Could not parse [" + s + "] into RGB integer components");
-                return Color.FromRgb(values[0], values[1], values[2]);
+                var r = int.Parse(components[0]);
+                var g = int.Parse(components[1]);
+                var b = int.Parse(components[2]);
+                return Color.FromRgb(r,g,b);
             }
             if (s.ToLower().StartsWith("rgba(", StringComparison.Ordinal))
             {
-                var values = s.Substring(5, s.Length - 6).Split(',').Select(int.Parse).ToArray();
-                if (values.Length != 4)
+                //var values = s.Substring(5, s.Length - 6).Split(',').Select(int.Parse).ToArray();
+                var components = s.Substring(5, s.Length - 6).Split(',');
+                if (components.Length != 4)
                     throw new FormatException("Could not parse [" + s + "] into RGBA integer components");
-                return Color.FromRgba(values[0], values[1], values[2], values[3]);
+                var r = int.Parse(components[0]);
+                var g = int.Parse(components[1]);
+                var b = int.Parse(components[2]);
+                var a = int.Parse(components[3]);
+                return Color.FromRgba(r,g,b,a);
             }
             if (s.StartsWith("#", StringComparison.Ordinal))
             {

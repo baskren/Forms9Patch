@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using Xamarin.Forms;
 
@@ -15,7 +11,7 @@ namespace Forms9Patch
             if (string.IsNullOrWhiteSpace(resourceId))
                 return null;
             Assembly assembly = null;
-            var resourcePath = resourceId.Split('.').ToList();
+            var resourcePath = new List<string>(resourceId.Split('.'));
             if (resourceId.Contains(".Resources."))
             {
                 var resourceIndex = resourcePath.IndexOf("Resources");

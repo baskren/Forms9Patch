@@ -69,7 +69,7 @@ namespace Forms9Patch
                             var assembly = (Assembly)imageSource.GetValue(ImageSource.AssemblyProperty);
                             var resourceId = key.Substring(4);
 
-                            using (var stream = P42.Utils.EmbeddedResource.GetStream(resourceId, assembly))
+                            using (var stream = await P42.Utils.EmbeddedResourceCache.GetStreamAsync(resourceId, assembly))
                             {
                                 if (stream == null)
                                 {

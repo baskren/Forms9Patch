@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -139,12 +138,12 @@ namespace Forms9Patch
             var reqResBasePath = pathString;
             //var reqResSplit = pathString.Split(new char[] { '.', '/', '\\' });
             var reqResSplit = pathString.Split('.');
-            if (reqResSplit.Count() > 1 && ValidImageExtensions.Contains(reqResSplit.Last().ToLower()))
+            if (reqResSplit.Length > 1 && ValidImageExtensions.Contains(reqResSplit[reqResSplit.Length-1].ToLower()))
             {
-                reqResExt = reqResSplit.Last();
+                reqResExt = reqResSplit[reqResSplit.Length-1];
                 reqResBasePath = pathString.Substring(0, pathString.Length - reqResExt.Length - 1);
             }
-            if (reqResExt == "png" && reqResSplit.Count() > 2 && reqResSplit[reqResSplit.Count() - 2] == "9")
+            if (reqResExt == "png" && reqResSplit.Length > 2 && reqResSplit[reqResSplit.Length - 2] == "9")
             {
                 reqResExt = "9.png";
                 reqResBasePath = reqResBasePath.Substring(0, reqResBasePath.Length - 2);
@@ -157,10 +156,19 @@ namespace Forms9Patch
             if (pathString == null)
                 return null;
             //var reqResSplit = pathString.Split(new char[] { '.', '/', '\\' }).ToList();
-            var reqResSplit = pathString.Split('.').ToList();
-            if (reqResSplit.Count > 1)
+            var reqResSplit = pathString.Split('.');
+            if (reqResSplit.Length > 1)
             {
-                var reqResIndex = reqResSplit.IndexOf("Resources");
+                //var reqResIndex = reqResSplit.IndexOf("Resources");
+                var reqResIndex = -1;
+                for (int i=0; i<reqResSplit.Length;i++)
+                    if (reqResSplit[i]=="Resources")
+                    {
+                        reqResIndex = i;
+                        break;
+                    }
+
+            
                 if (reqResIndex >= 0)
                 {
                     int index = 0;
@@ -219,7 +227,13 @@ namespace Forms9Patch
                 resourceNames = SortedAppleResources[assembly];
             }
 
-            resourceNames = resourceNames.Where(arg => arg.Contains(reqResBaseName)).ToArray();
+            //resourceNames = resourceNames.Where(arg => arg.Contains(reqResBaseName)).ToArray();
+            var matchingResourceNames = new List<string>();
+            for (int i=0; i<resourceNames.Length; i++)
+            {
+                if (resourceNames[i].Contains(reqResBaseName))
+                    matchingResourceNames.Add(resourceNames[i]);
+            }
 
             string resMultiple;
             int attempt = 0;
@@ -227,7 +241,7 @@ namespace Forms9Patch
             {
                 var scale = AppleDensities[attempt].Scale;
                 resMultiple = AppleDensityMatch(attempt++);
-                foreach (var resourceName in resourceNames)
+                foreach (var resourceName in matchingResourceNames)
                 {
                     tuple = GetiOSBasePathAndExt(resourceName);
                     if (tuple != null)

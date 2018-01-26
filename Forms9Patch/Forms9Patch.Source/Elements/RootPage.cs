@@ -5,7 +5,6 @@
 //  *******************************************************************/
 using System;
 using Xamarin.Forms;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace Forms9Patch
@@ -119,7 +118,7 @@ namespace Forms9Patch
             {
                 _instance = _instance ?? new RootPage();
                 NavigationPage navPage;
-                if (_instance.PageController.InternalChildren.Count() > 0)
+                if (_instance.PageController.InternalChildren.Count > 0)
                 {
                     var page = _instance.PageController.InternalChildren[0] as Page;
                     navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
@@ -166,7 +165,7 @@ namespace Forms9Patch
             NavigationPushed?.Invoke(sender, e.Page);
         }
 
-        IPageController PageController => (_modals.Count > 0 ? _modals.Last() : this) as IPageController;
+        IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count-1]: this) as IPageController;
 
         internal void AddPopup(PopupBase popup)
         {
@@ -196,7 +195,7 @@ namespace Forms9Patch
 
         internal void RemovePopups(bool popping)
         {
-            for (int i = PageController.InternalChildren.Count() - 1; i > 0; i--)
+            for (int i = PageController.InternalChildren.Count - 1; i > 0; i--)
             {
                 var popup = PageController.InternalChildren[i] as PopupBase;
                 if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
@@ -210,9 +209,9 @@ namespace Forms9Patch
         /// <returns><c>true</c>, if back button pressed was oned, <c>false</c> otherwise.</returns>
         protected override bool OnBackButtonPressed()
         {
-            if (PageController.InternalChildren.Count() > 1)
+            if (PageController.InternalChildren.Count > 1)
             {
-                var lastChild = PageController.InternalChildren.Last();
+                var lastChild = PageController.InternalChildren[PageController.InternalChildren.Count-1];
                 if (lastChild is PopupBase popup)
                     popup.Cancel();
                 else

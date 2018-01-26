@@ -7,7 +7,6 @@ using System;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Forms9Patch
 {

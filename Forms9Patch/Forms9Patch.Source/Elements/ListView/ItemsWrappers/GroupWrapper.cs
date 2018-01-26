@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using P42.Utils;
 using Xamarin.Forms;
-using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Forms9Patch
@@ -819,13 +818,13 @@ namespace Forms9Patch
 
 		public void DeepRemoveItemsWithSource(object source)
 		{
-			//System.Diagnostics.Debug.WriteLine("");
-			var items = this.Where(x => x.Source == source).ToList();
+            List<ItemWrapper> items = new List<ItemWrapper>();
+            foreach (var item in this)
+                if (item.Source == source)
+                    items.Add(item);
 			if (items.Count > 0)
-			{
 				foreach (var item in items)
 					Remove(item);
-			}
 			foreach (var item in this)
 			{
 				var group = item as GroupWrapper;

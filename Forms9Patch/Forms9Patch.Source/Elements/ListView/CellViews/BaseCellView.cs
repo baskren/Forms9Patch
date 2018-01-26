@@ -1,7 +1,6 @@
 ﻿using Xamarin.Forms;
 using System;
 using FormsGestures;
-using System.Linq;
 
 namespace Forms9Patch
 {
@@ -239,8 +238,8 @@ namespace Forms9Patch
                         PutAwaySwipeButtons(true);
                         return;
                     }
-                    if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)Content)?.EndSwipeMenu != null && ((ICellSwipeMenus)Content).EndSwipeMenu.Any() && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated) ||
-                        (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)Content)?.StartSwipeMenu != null && ((ICellSwipeMenus)Content).StartSwipeMenu.Any() && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated))
+                    if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)Content)?.EndSwipeMenu != null && ((ICellSwipeMenus)Content).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated) ||
+                        (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)Content)?.StartSwipeMenu != null && ((ICellSwipeMenus)Content).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated))
                     {
                         // execute full swipe
                         _swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
@@ -331,7 +330,7 @@ namespace Forms9Patch
                 if (iCellSwipeMenus != null)
                 {
                     var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
-                    if (swipeMenu != null && swipeMenu.Any())
+                    if (swipeMenu != null && swipeMenu.Count > 0)
                     {
                         _settingup = true;
 

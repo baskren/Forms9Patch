@@ -2,13 +2,10 @@ using System;
 using Xamarin.Forms;
 using System.ComponentModel;
 using FormsGestures;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using P42.Utils;
+using System.Linq;
 
 namespace Forms9Patch
 {
