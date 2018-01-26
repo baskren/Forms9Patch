@@ -76,11 +76,12 @@ And lastly is Forms9Patch's services:
  
 ## Forms9Patch Fundamentals
 
- - using ```Forms9Patch.ImageSource```
- - using ```Forms9Patch.Image```
- - using Forms9Patch's Layouts
- - using Custom Fonts
- - 
+ - Using ```Forms9Patch.ImageSource```
+ - Using ```Forms9Patch.Image```
+ - Using Forms9Patch's Layouts
+ - Custom Fonts
+ - HTML markup
+ - Auto fitting
 
 
 
