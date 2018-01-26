@@ -97,7 +97,7 @@ namespace Forms9Patch.Droid
                 }
                 */
                 // move it to the Application's CacheDir
-                using (var inputStream = EmbeddedResource.GetStream(fontFamily, assembly))
+                using (var inputStream = EmbeddedResourceCache.GetStream(fontFamily, assembly))
                 {
                     if (inputStream == null)
                     {

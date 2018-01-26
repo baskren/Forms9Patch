@@ -236,7 +236,7 @@ namespace Forms9Patch.iOS
                     }
                     */
                     // load it!
-                    using (var stream = EmbeddedResource.GetStream(resourceId, assembly))
+                    using (var stream = EmbeddedResourceCache.GetStream(resourceId, assembly))
                     {
                         if (stream == null)
                         {

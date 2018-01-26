@@ -19,6 +19,9 @@
    2. needs to have ```ROOT_RENDERERS``` symbol defined (Project Properties / Compiler / Define Symbols)
    3. Properties/AssemblyInfo.cs: comment out ```[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]```
 5. Set up ```packages``` symbolic links (see below)
+6. Set up symbolic link that links from ```Xamarin.Forms/.nuget``` to ```.nuget``` in the solution's root directory.
+7. Be sure there is a copy of ```Xamarin.Forms.2.4.0.280``` in the solution's ```packages``` directory.
+    
 
 Note that the above may need to be repeated if switching to a different Xamarin.Forms git commit.
 
@@ -33,7 +36,7 @@ Because of the way VisualStudio, Nuget, and Git (don't) work together, relative 
 Below are example commands of how to symbolically link to your VisualStudio solution's (and git root module) Nuget packages folder.  For the case of building Forms9Patch source and demo code using just this git module, the below command lines are meant to be executed in the above directories.
 
  - **Windows:** ``` c:> mklink /D packages ..\packages ```
- - **OSX:** ``` $ ln -s ../ packages ```
+ - **OSX:** ``` $ ln -s ../packages packages ```
 
 If you are using Forms9Patch source as a submodule in another git module, modify the above command lines to cause the symbolic links to point to the ```packages``` directory in the root directory of the VisualStudio solution associated with that git module.   
 
