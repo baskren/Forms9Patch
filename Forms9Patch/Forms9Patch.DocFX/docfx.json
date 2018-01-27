@@ -11,11 +11,14 @@
             "**/bin/**",
             "_site/**"
           ],
-          "src": "../Forms9Patch"
+          "src": "../Forms9Patch.XfNuget"
         }
       ],
       "dest": "api",
-      "disableGitFeatures": false
+      "disableGitFeatures": false,
+      "properties": {
+        "TargetFramework": "netstandard1.3"
+      }
     }
   ],
   "build": {

@@ -1,6 +1,6 @@
-# Getting Started
+# Getting Started: VisualStudio 2017
 
-Learn what it takes to build a cross platform Xamarin.Forms application using Forms9Patch
+Enhancing your Xamarin.Forms app with Learn what it takes to build a cross platform Xamarin.Forms application using Forms9Patch
 
 Before you begin, check out the system requirements to be sure your application and development environment is ready.
 

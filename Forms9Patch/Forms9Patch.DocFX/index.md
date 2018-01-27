@@ -74,8 +74,9 @@ And lastly is Forms9Patch's services:
  - Application Info Service: Do you want to quickly know your application's Name, Bundle/Package ID, Build number and Version string?
  - OS Info Service: What is the version of the device's operating system?
  
-## Forms9Patch Fundamentals
+## Forms9Patch Guides
 
+ - Getting Started
  - Using ```Forms9Patch.ImageSource```
  - Using ```Forms9Patch.Image```
  - Using Forms9Patch's Layouts
