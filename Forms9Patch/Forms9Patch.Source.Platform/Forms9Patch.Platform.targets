@@ -54,6 +54,9 @@
 	<Compile Include="..\Forms9Patch.Source.Platform\Renderers\ImageRenderer.cs">
 		<Link>Renderers\ImageRenderer.cs</Link>
 	</Compile>
+	<Compile Include="..\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs">
+		<Link>Renderers\ManualLayoutRenderer.cs</Link>
+	</Compile>
 	<Compile Include="..\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs">
 		<Link>Renderers\RelativeLayout.cs</Link>
 	</Compile>
