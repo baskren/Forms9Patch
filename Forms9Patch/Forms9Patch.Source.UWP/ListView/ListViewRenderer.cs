@@ -19,15 +19,13 @@ namespace Forms9Patch.UWP
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
         {
             base.OnElementChanged(e);
-            var oldElement = e.OldElement as Forms9Patch.ListView;
-            if (oldElement != null)
+            if (e.OldElement is ListView oldElement)
             {
                 oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
                 oldElement.RendererScrollBy -= ScrollBy;
                 oldElement.RendererScrollToPos -= ScrollToItem;
             }
-            var newElement = e.NewElement as ListView;
-            if (newElement != null)
+            if (e.NewElement is ListView newElement)
             {
                 newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
                 newElement.RendererScrollBy += ScrollBy;
@@ -36,7 +34,8 @@ namespace Forms9Patch.UWP
                 if (newElement.IsScrollListening)
                     Control.Delegate = new ScrollDelegate(newElement);  // why does this cause headers to not appear?
                                                                         //Control.Delegate = null;
-                                                                        */
+                 */
+                SetCellStyle();
             }
         }
 
@@ -56,6 +55,64 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == ListView.IsScrollListeningProperty.PropertyName && !Element.IsGroupingEnabled && Control != null)
                 Control.Delegate = new ScrollDelegate(Element as Forms9Patch.ListView);  // why does this cause headers to not appear?
                 */
+        }
+
+        void SetCellStyle()
+        {
+            var listView = Control as Windows.UI.Xaml.Controls.ListView;
+            if (listView == null)
+                return;
+
+            var style = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
+            listView.ItemContainerStyle = style;
+            //Windows.UI.Xaml.VisualStateManager.GoToState(listView, "PointerOver", false);
+
+            /*
+            var controlTemplate = new ControlTemplate();
+
+            var group = new Windows.UI.Xaml.VisualStateGroup();
+            var state = group.CurrentState;
+
+            var groups = Windows.UI.Xaml.VisualStateManager.GetVisualStateGroups(listView);
+           // groups.Add()
+            var x = new Windows.UI.Xaml.VisualStateManager();
+            Windows.UI.Xaml.VisualStateManager.SetCustomVisualStateManager(listView, x);
+            //x.RegisterPropertyChangedCallback
+            //listView.ItemTemplate = new Windows.UI.Xaml.DataTemplate();
+            //listView.Style = null;
+
+            //var style = listView.ItemContainerStyle;
+            //var setters = style.Setters;
+            //var template = style.GetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty);
+
+            /* doesn't work!
+            listView.Resources["ListViewItemBackgroundPointerOver"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+            listView.Resources["ListViewItemBackgroundPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+            listView.Resources["ListViewItemBackgroundSelected"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+            listView.Resources["ListViewItemBackgroundSelectedPointerOver"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+            listView.Resources["ListViewItemBackgroundSelectedPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+            listView.Resources["ListViewItemBackgroundPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
+
+            var template = listView.ItemTemplate;
+
+            var style = listView.Style;
+            // var containerStyle = listView.ItemContainerStyle;
+            //var controlTemplate = (ControlTemplate)containerStyle.GetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty);
+
+            //containerStyle.SetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty, new ControlTemplate(typeof(Windows.UI.Xaml.Controls.ListViewItem)));
+            */
+
+            /*
+            var listViewItemPresenter = new Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter
+            {
+
+            };
+
+            var listViewItemTemplate = new ControlTemplate(typeof(Windows.UI.Xaml.Controls.ListViewItem));
+            //listViewItemTemplate.CreateContent();
+            listView.ItemContainerStyle = new Windows.UI.Xaml.Style(typeof(Windows.UI.Xaml.Controls.ListViewItem));
+            listView.ItemContainerStyle.SetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty, listViewItemTemplate);
+            */
         }
 
         /*

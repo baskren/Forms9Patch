@@ -1,0 +1,51 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Forms9Patch.UWP.Resources">
+	
+
+	<Style x:Key="Forms9PatchListViewItem" TargetType="ListViewItem">
+		<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+		<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+		<Setter Property="TabNavigation" Value="Local" />
+		<Setter Property="IsHoldingEnabled" Value="True" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+		<Setter Property="MinHeight" Value="0" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListViewItem">
+					<ListViewItemPresenter
+						CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+						ContentMargin="{TemplateBinding Padding}"
+						CheckMode="Inline"
+						ContentTransitions="{TemplateBinding ContentTransitions}"
+						CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+						DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+						DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+						DragBackground="Transparent"
+						DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+						FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+						FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+						HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+						PointerOverForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+						PressedBackground="Transparent"
+						PlaceholderBackground="Transparent"
+						PointerOverBackground="Transparent"
+						ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+						SelectedPressedBackground="Transparent"
+						SelectionCheckMarkVisualEnabled="True"
+						SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+						SelectedPointerOverBackground="Transparent"
+						SelectedBackground="Transparent"
+						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+</ResourceDictionary>

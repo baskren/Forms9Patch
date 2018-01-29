@@ -44,7 +44,20 @@ namespace Forms9Patch.UWP
             LicenseKey = licenseKey ?? "demo key";
 
             FormsGestures.UWP.Settings.Init();
+
+            var forms9PatchResources = GetResources();
+            Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
+
         }
+
+        static Windows.UI.Xaml.ResourceDictionary GetResources()
+        {
+            return new Windows.UI.Xaml.ResourceDictionary
+            {
+                Source = new Uri("ms-appx:///Forms9Patch.UWP/Resources.xbf")
+            };
+        }
+
 
         static string _licenseKey;
         static Windows.UI.Xaml.Application _app;
