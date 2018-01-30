@@ -109,7 +109,6 @@ namespace Forms9Patch
         static int _instances;
         internal int ID;
 
-
         #region Swipe Menu
         readonly Frame _insetFrame = new Frame
         {
@@ -165,7 +164,8 @@ namespace Forms9Patch
             };
             RowDefinitions = new RowDefinitionCollection
             {
-                new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
+                new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                new RowDefinition { Height = new GridLength(1, GridUnitType.Absolute)}
             };
 
             var thisListener = FormsGestures.Listener.For(this);
@@ -184,6 +184,25 @@ namespace Forms9Patch
             _swipeButton3.Tapped += OnSwipeButtonTapped;
 
 
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                var line = new BoxView
+                {
+                    HeightRequest = 1,
+                    HorizontalOptions = LayoutOptions.Fill,
+                    Color = Color.LightGray
+                };
+                var grid = new Grid
+                {
+                    ColumnDefinitions = new ColumnDefinitionCollection
+                    {
+                        new ColumnDefinition { Width = new GridLength(25, GridUnitType.Absolute) },
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                    },
+                };
+                grid.AddChild(line,0,1);
+                Children.Add(grid, 0, 1);
+            }
         }
         #endregion
 
