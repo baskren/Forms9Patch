@@ -15,14 +15,14 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                return false;
-                /*
+                //return false;
+                
                 //string labelTextStart = "Żyłę;^`g ";
-                if (Element.Parent.GetType().ToString() != "Bc3.Forms.KeypadButton")
-                    return false;
-                string labelTextStart = "9";
+                //if (Element.Parent.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                //    return false;
+                string labelTextStart = "12";
                 return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
-                */
+                
             }
         }
 
@@ -192,7 +192,6 @@ namespace Forms9Patch.UWP
                 ArrangeOverride(new Windows.Foundation.Size(Element.Bounds.Width, Element.Bounds.Height));
         }
 
-
         void UpdateColor(TextBlock textBlock)
         {
             if (textBlock == null)
@@ -274,7 +273,10 @@ namespace Forms9Patch.UWP
         void ForceLayout(TextBlock textBlock)
         {
             LayoutValid = false;
-            MeasureOverride(_lastAvailableSize);
+            //MeasureOverride(_lastAvailableSize);
+            //InvalidateArrange();
+            //InvalidateMeasure();
+            ((VisualElement)Element).InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
         }
 
         void UpdateMinFontSize(TextBlock textBlock)
@@ -355,6 +357,9 @@ namespace Forms9Patch.UWP
         DateTime _lastMeasure = DateTime.MaxValue;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
+            if (DebugCondition && double.IsInfinity(availableSize.Width))
+                System.Diagnostics.Debug.WriteLine("");
+
             DebugMessage("pre-Enter");
             var label = Element;
             var textBlock = Control;
@@ -380,9 +385,9 @@ namespace Forms9Patch.UWP
 
                 double w = label.Width;
                 double h = label.Height;
-                if (w == -1)
+                if (w == -1 || availableSize.Width > label.Width)
                     w = availableSize.Width;
-                if (h == -1)
+                if (h == -1 || availableSize.Height > label.Height)
                     h = availableSize.Height;
                 w = Math.Max(0, w);
                 h = Math.Max(0, h);
