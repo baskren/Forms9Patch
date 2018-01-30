@@ -18,9 +18,9 @@ namespace Forms9Patch.UWP
                 //return false;
                 
                 //string labelTextStart = "Żyłę;^`g ";
-                //if (Element.Parent.GetType().ToString() != "Bc3.Forms.KeypadButton")
-                //    return false;
-                string labelTextStart = "12";
+                if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                    return false;
+                string labelTextStart = "9";
                 return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
                 
             }
@@ -98,7 +98,7 @@ namespace Forms9Patch.UWP
             if (e.OldElement != null)
             {
                 
-                //e.OldElement.SizeChanged -= Label_SizeChanged;
+                e.OldElement.SizeChanged -= Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged -= Control_SizeChanged;
                     
@@ -115,7 +115,7 @@ namespace Forms9Patch.UWP
                     SetNativeControl(nativeControl);
                 }
 
-                //e.NewElement.SizeChanged += Label_SizeChanged;
+                e.NewElement.SizeChanged += Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged += Control_SizeChanged;
 
@@ -343,6 +343,7 @@ namespace Forms9Patch.UWP
         private void Control_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
         {
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
+            DebugMessage("e.NewSize=["+e.NewSize+"]");
             //Control.UpdateLayout();
             MeasureOverride(e.NewSize);
         }
@@ -351,7 +352,7 @@ namespace Forms9Patch.UWP
         {
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
             //Element.Layout(Element.Bounds);
-            
+            //MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
         }
 
         DateTime _lastMeasure = DateTime.MaxValue;
@@ -385,10 +386,19 @@ namespace Forms9Patch.UWP
 
                 double w = label.Width;
                 double h = label.Height;
-                if (w == -1 || availableSize.Width > label.Width)
-                    w = availableSize.Width;
-                if (h == -1 || availableSize.Height > label.Height)
-                    h = availableSize.Height;
+
+
+                // somehow this works.  Think carefully before changing it.
+                if (w == -1 || (availableSize.Width > label.Width))// && !double.IsInfinity(availableSize.Width) && label.Lines!=0))
+                {
+                    //if (!Double.IsInfinity(availableSize.Width) || label.Lines!=0 )
+                        w = availableSize.Width;
+                }
+                if (h == -1 )//|| availableSize.Height > label.Height)
+                {
+                    //if (!Double.IsInfinity(availableSize.Height) || label.Lines != 0)
+                        h = availableSize.Height;
+                }
                 w = Math.Max(0, w);
                 h = Math.Max(0, h);
 
