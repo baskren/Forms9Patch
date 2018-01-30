@@ -16,7 +16,9 @@ namespace Forms9Patch.UWP
             get
             {
                 //string labelTextStart = "Żyłę;^`g ";
-                string labelTextStart = "X";
+                if (Element.Parent.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                    return false;
+                string labelTextStart = "9";
                 return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
             }
         }
@@ -92,11 +94,11 @@ namespace Forms9Patch.UWP
 
             if (e.OldElement != null)
             {
-                /*
+                
                 e.OldElement.SizeChanged -= Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged -= Control_SizeChanged;
-                    */
+                    
             }
             if (e.NewElement != null)
             {
@@ -110,6 +112,11 @@ namespace Forms9Patch.UWP
                     SetNativeControl(nativeControl);
                 }
 
+                e.NewElement.SizeChanged += Label_SizeChanged;
+                if (Control != null)
+                    Control.SizeChanged += Control_SizeChanged;
+
+
                 UpdateColor(Control);
                 UpdateHorizontalAlign(Control);
                 //UpdateTextAndFont(Control);
@@ -121,6 +128,10 @@ namespace Forms9Patch.UWP
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             DebugMessage("property=[" + e.PropertyName + "]");
+
+            if (e.PropertyName == "Renderer" && DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
+
             if (e.PropertyName == Forms9Patch.Label.TextProperty.PropertyName || e.PropertyName == Forms9Patch.Label.HtmlTextProperty.PropertyName)
                 //UpdateTextAndFont(Control);
                 ForceLayout(Control);
@@ -327,11 +338,15 @@ namespace Forms9Patch.UWP
         private void Control_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
         {
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
+            //Control.UpdateLayout();
+            MeasureOverride(e.NewSize);
         }
 
         private void Label_SizeChanged(object sender, EventArgs e)
         {
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
+            //Element.Layout(Element.Bounds);
+            
         }
 
         DateTime _lastMeasure = DateTime.MaxValue;

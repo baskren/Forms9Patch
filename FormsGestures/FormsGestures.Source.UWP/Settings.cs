@@ -18,7 +18,7 @@ namespace FormsGestures.UWP
 #if NETSTANDARD
             P42.Utils.Environment.PlatformPathLoader = PlatformPathLoader;
 #endif
-            System.Diagnostics.Debug.WriteLine("FormsGestures.Droid.Settings.Init()");
+            System.Diagnostics.Debug.WriteLine("FormsGestures.UWP.Settings.Init()");
         }
 
 #if NETSTANDARD

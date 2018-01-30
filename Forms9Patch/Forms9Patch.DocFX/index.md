@@ -76,13 +76,14 @@ And lastly is Forms9Patch's services:
  
 ## Forms9Patch Guides
 
- - Getting Started
- - Using ```Forms9Patch.ImageSource```
+ - [Getting Started](guides/GettingStarted.md)
+ - [Using ```Forms9Patch.ImageSource```](guides/ImageSource.md)
  - Using ```Forms9Patch.Image```
- - Using Forms9Patch's Layouts
+ - Using Forms9Patch's layouts
+ - Using Forms9Patch's pop-ups
  - Custom Fonts
- - HTML markup
- - Auto fitting
+ - Using ```Forms9Patch.Label```
+ - Putting it all together: Using Forms9Patch's buttons
 
 
 

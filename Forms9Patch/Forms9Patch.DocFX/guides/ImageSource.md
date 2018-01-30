@@ -1,0 +1,7 @@
+# Using ```Forms9Patch.ImageSource```
+
+Xamarin Forms utilizes native iOS, Android, and Windows UWP multi-screen image management (described here).  This requires storing your iOS images using the native iOS schema, storing your Android images using the Android schema, and storing your UWP images using the UWP schema.  In other words, duplicative efforts to get the same results on both Android, iOS, and UWP.  Forms9Patch.ImageSource extends Xamarin.Forms.ImageSource capabilities to bring multi-screen image management to your Shared Library, PCL Assemblies, and .NetStandrad - so you only have to generate and configure your app's image resources once.  Forms9Patch.ImageSource is a cross-platform implementation to sourcing multi-screen images in Xamarin Forms .NetStandard, PCL, and Shared Library apps as embedded resources.
+
+## Embedded Resource Id Schema
+
+All embedded resources have an EmbeddedResourceId string that is used to reference it at runtime.  This EmbeddedResourceId is based upon the namespace for the project in which the embedded resource is in, appended by the names of each folder in the solution folder structure (in the project) for the embedded resource file, plus the embedded resource's file name (each of these are joined by a ".").  Confusing?  You'll be happy to learn that VisualStudio Mac makes this super easy to find by just looking at the properties for an embedded resource.  If you're using VisualStudio for Windows    Forms9Patch 

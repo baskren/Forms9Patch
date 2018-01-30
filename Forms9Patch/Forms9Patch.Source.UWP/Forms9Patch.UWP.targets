@@ -90,6 +90,16 @@
 
   </ItemGroup>
 
+  <!-- Forms9Patch modifications to Window's defaults -->
+  <ItemGroup>
+    <Page Include="..\Forms9Patch.Source.UWP\Resources.xaml">
+      <Link>Resources.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+
   <Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
 
   <ItemGroup>

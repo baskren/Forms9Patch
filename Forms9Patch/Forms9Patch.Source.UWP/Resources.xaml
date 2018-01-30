@@ -19,7 +19,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ListViewItem">
-					<ListViewItemPresenter
+                    <ListViewItemPresenter
 						CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
 						ContentMargin="{TemplateBinding Padding}"
 						CheckMode="Inline"
@@ -42,8 +42,9 @@
 						SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
 						SelectedPointerOverBackground="Transparent"
 						SelectedBackground="Transparent"
-						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-				</ControlTemplate>
+						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                    </ListViewItemPresenter>
+                </ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>

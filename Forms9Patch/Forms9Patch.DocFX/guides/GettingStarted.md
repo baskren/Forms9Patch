@@ -1,6 +1,6 @@
 # Getting Started: VisualStudio 2017
 
-Enhancing your Xamarin.Forms app with Learn what it takes to build a cross platform Xamarin.Forms application using Forms9Patch
+Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.
 
 Before you begin, check out the system requirements to be sure your application and development environment is ready.
 
@@ -25,7 +25,7 @@ Create the LinkTest application as follows:
 
     ![](../images/Guides_GettingStarted_NewProjectDialog.png)
 
- 4. In the New Cross Platform App dialog, click Blank App, select Xamarin.Forms as the UI Technology, select Portable Class Library (PCL) as the Code Sharing Strategy, and click the OK button:
+ 4. In the New Cross Platform App dialog, click "Blank App", select "Xamarin.Forms" as the UI Technology, select Portable Class Library (PCL) as the Code Sharing Strategy, and click the OK button:
 
     ![Guides Getting Started New Cross Platform App](../images/Guides_GettingStarted_NewCrossPlatformApp.png)
 
