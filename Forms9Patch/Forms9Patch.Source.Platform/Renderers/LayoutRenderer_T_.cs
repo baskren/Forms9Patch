@@ -112,8 +112,11 @@ namespace Forms9Patch
 
         void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Control.Height = ActualHeight + 1;
-            Control.Width = ActualWidth + 1;
+            if (Element.ExtendedElementShape.IsSegment())
+            {
+                Control.Height = ActualHeight + 1;
+                Control.Width = ActualWidth + 1;
+            }
         }
 
 #endif

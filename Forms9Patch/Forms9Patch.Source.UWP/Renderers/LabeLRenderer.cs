@@ -15,11 +15,14 @@ namespace Forms9Patch.UWP
         {
             get
             {
+                return false;
+                /*
                 //string labelTextStart = "Żyłę;^`g ";
                 if (Element.Parent.GetType().ToString() != "Bc3.Forms.KeypadButton")
                     return false;
                 string labelTextStart = "9";
                 return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                */
             }
         }
 
@@ -95,7 +98,7 @@ namespace Forms9Patch.UWP
             if (e.OldElement != null)
             {
                 
-                e.OldElement.SizeChanged -= Label_SizeChanged;
+                //e.OldElement.SizeChanged -= Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged -= Control_SizeChanged;
                     
@@ -112,7 +115,7 @@ namespace Forms9Patch.UWP
                     SetNativeControl(nativeControl);
                 }
 
-                e.NewElement.SizeChanged += Label_SizeChanged;
+                //e.NewElement.SizeChanged += Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged += Control_SizeChanged;
 

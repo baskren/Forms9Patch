@@ -16,5 +16,10 @@ namespace Forms9Patch
             }
             throw new NotSupportedException("ElementShape ["+buttonShape+"] cannot be converted to ExtendedElementShape");
         }
+
+        public static bool IsSegment(this ExtendedElementShape shape)
+        {
+            return shape == ExtendedElementShape.SegmentEnd || shape == ExtendedElementShape.SegmentMid || shape == ExtendedElementShape.SegmentStart;
+        }
     }
 }
