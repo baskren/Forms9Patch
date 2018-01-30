@@ -740,6 +740,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Code", "Pages.Code", 
 		Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs = Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs
 		Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs = Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs
 		Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs = Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs
+		Forms9PatchDemo\Source\Pages.Code\FontSizeTest.cs = Forms9PatchDemo\Source\Pages.Code\FontSizeTest.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs
