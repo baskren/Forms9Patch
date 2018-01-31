@@ -61,8 +61,12 @@ namespace FormsGestures.UWP
                     //FrameworkElement.Tapped -= _UwpElement_Tapped;
                     //FrameworkElement.RightTapped -= _UwpElement_RightTapped;
                     //FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
-                    FrameworkElement.PointerReleased -= OnPointerReleased;
+
+                    //FrameworkElement.PointerReleased -= OnPointerReleased;
                     FrameworkElement.PointerPressed -= OnPointerPressed;
+
+                    FrameworkElement.Tapped -= OnTapped;
+
                     //_UwpElement.PointerMoved -= OnPointerMoved;
                     //FrameworkElement.PointerExited -= _UwpElement_PointerExited;
                     //FrameworkElement.PointerEntered -= _UwpElement_PointerEntered;
@@ -91,8 +95,12 @@ namespace FormsGestures.UWP
                 //FrameworkElement.Tapped += _UwpElement_Tapped;
                 //FrameworkElement.RightTapped += _UwpElement_RightTapped;
                 //FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
-                FrameworkElement.PointerReleased += OnPointerReleased;
+
+                //FrameworkElement.PointerReleased += OnPointerReleased;
                 FrameworkElement.PointerPressed += OnPointerPressed;
+
+                FrameworkElement.Tapped += OnTapped;
+
                 //_UwpElement.PointerMoved += OnPointerMoved;
                 //FrameworkElement.PointerExited += _UwpElement_PointerExited;
                 //FrameworkElement.PointerEntered += _UwpElement_PointerEntered;
@@ -749,7 +757,8 @@ namespace FormsGestures.UWP
 
         bool _runningTapCounterResetter;
 
-        private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
+        //private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
+        private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;

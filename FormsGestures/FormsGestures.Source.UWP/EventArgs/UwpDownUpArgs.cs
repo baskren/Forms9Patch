@@ -19,5 +19,13 @@ namespace FormsGestures.UWP
             TriggeringTouches = new[] { 0 };
         }
 
+        public UWPDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
+        {
+            Cancelled = false;
+            ViewPosition = element.GetXfViewFrame();
+            var currentPoint = args.GetPosition(null);
+            Touches = new Xamarin.Forms.Point[] { currentPoint.ToXfPoint() };
+            TriggeringTouches = new[] { 0 };
+        }
     }
 }

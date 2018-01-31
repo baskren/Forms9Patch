@@ -63,8 +63,20 @@ namespace Forms9Patch.UWP
             if (listView == null)
                 return;
 
+
             var style = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
             listView.ItemContainerStyle = style;
+            /* */
+            /* 
+            listView.SelectionMode = Windows.UI.Xaml.Controls.ListViewSelectionMode.None;
+            listView.IsMultiSelectCheckBoxEnabled = false;
+            listView.IsTapEnabled = false;
+            listView.IsItemClickEnabled = false;
+            listView.IsSwipeEnabled = false;
+            */
+            
+            //listView.IsItemClickEnabled = false;
+
             //Windows.UI.Xaml.VisualStateManager.GoToState(listView, "PointerOver", false);
 
             /*

@@ -16,10 +16,15 @@
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
 		<Setter Property="MinHeight" Value="0" />
+
+    <!--Setter Property="IsHitTestVisible" Value="False"/--><!-- This kills click/tap ability for cell AND its content.  Too blunt for our needs. -->
+
+    <Setter Property="IsTapEnabled" Value="False"/>
+    
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ListViewItem">
-                    <ListViewItemPresenter
+                    <!--ListViewItemPresenter
 						CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
 						ContentMargin="{TemplateBinding Padding}"
 						CheckMode="Inline"
@@ -43,10 +48,34 @@
 						SelectedPointerOverBackground="Transparent"
 						SelectedBackground="Transparent"
 						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-                    </ListViewItemPresenter>
+                    </ListViewItemPresenter-->
+                    
+                    <Grid> <!-- Use this to stop animating cell clicks AND remove selection background color -->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Pressed" />
+                             </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <ContentPresenter x:Name="ListViewItemContent" />
+                            
+                        </Grid>
+                    </Grid>
+
                 </ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
     
+
+            <Style x:Key="Forms9PatchNoTiltListView" TargetType="ListView">
+                <Setter Property="ItemContainerTransitions">
+                    <Setter.Value>
+                        <TransitionCollection/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
 </ResourceDictionary>
