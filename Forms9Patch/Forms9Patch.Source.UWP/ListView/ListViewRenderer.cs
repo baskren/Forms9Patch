@@ -36,6 +36,7 @@ namespace Forms9Patch.UWP
                                                                         //Control.Delegate = null;
                  */
                 SetCellStyle();
+                
             }
         }
 
@@ -63,68 +64,60 @@ namespace Forms9Patch.UWP
             if (listView == null)
                 return;
 
+            listView.ShowsScrollingPlaceholders = true;
+            
+
+            /* */
 
             var style = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
             listView.ItemContainerStyle = style;
-            /* */
-            /* 
-            listView.SelectionMode = Windows.UI.Xaml.Controls.ListViewSelectionMode.None;
-            listView.IsMultiSelectCheckBoxEnabled = false;
-            listView.IsTapEnabled = false;
-            listView.IsItemClickEnabled = false;
-            listView.IsSwipeEnabled = false;
-            */
-            
-            //listView.IsItemClickEnabled = false;
-
-            //Windows.UI.Xaml.VisualStateManager.GoToState(listView, "PointerOver", false);
 
             /*
-            var controlTemplate = new ControlTemplate();
-
-            var group = new Windows.UI.Xaml.VisualStateGroup();
-            var state = group.CurrentState;
-
-            var groups = Windows.UI.Xaml.VisualStateManager.GetVisualStateGroups(listView);
-           // groups.Add()
-            var x = new Windows.UI.Xaml.VisualStateManager();
-            Windows.UI.Xaml.VisualStateManager.SetCustomVisualStateManager(listView, x);
-            //x.RegisterPropertyChangedCallback
-            //listView.ItemTemplate = new Windows.UI.Xaml.DataTemplate();
-            //listView.Style = null;
-
-            //var style = listView.ItemContainerStyle;
-            //var setters = style.Setters;
-            //var template = style.GetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty);
-
-            /* doesn't work!
-            listView.Resources["ListViewItemBackgroundPointerOver"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-            listView.Resources["ListViewItemBackgroundPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-            listView.Resources["ListViewItemBackgroundSelected"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-            listView.Resources["ListViewItemBackgroundSelectedPointerOver"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-            listView.Resources["ListViewItemBackgroundSelectedPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-            listView.Resources["ListViewItemBackgroundPressed"] = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
-
-            var template = listView.ItemTemplate;
-
-            var style = listView.Style;
-            // var containerStyle = listView.ItemContainerStyle;
-            //var controlTemplate = (ControlTemplate)containerStyle.GetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty);
-
-            //containerStyle.SetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty, new ControlTemplate(typeof(Windows.UI.Xaml.Controls.ListViewItem)));
-            */
-
-            /*
-            var listViewItemPresenter = new Windows.UI.Xaml.Controls.Primitives.ListViewItemPresenter
+            var scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+            if (scrollViewer != null)
             {
-
-            };
-
-            var listViewItemTemplate = new ControlTemplate(typeof(Windows.UI.Xaml.Controls.ListViewItem));
-            //listViewItemTemplate.CreateContent();
-            listView.ItemContainerStyle = new Windows.UI.Xaml.Style(typeof(Windows.UI.Xaml.Controls.ListViewItem));
-            listView.ItemContainerStyle.SetValue(Windows.UI.Xaml.Controls.ListViewItem.TemplateProperty, listViewItemTemplate);
+                scrollViewer.VerticalScrollMode = Windows.UI.Xaml.Controls.ScrollMode.Enabled;
+                scrollViewer.VerticalContentAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
             */
+        }
+
+        bool _viewChangeEventSet;
+        void SetViewChangedEvent()
+        {
+            if (_viewChangeEventSet)
+                return;
+            var listView = Control as Windows.UI.Xaml.Controls.ListView;
+            if (listView == null)
+                return;
+
+            var scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+            if (scrollViewer == null)
+                return;
+
+
+            scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
+            _viewChangeEventSet = true;
+        }
+
+        void UnsetViewChangedEvent()
+        {
+            if (_viewChangeEventSet)
+            {
+                var listView = Control as Windows.UI.Xaml.Controls.ListView;
+                if (listView != null)
+                {
+                    var scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+                    if (scrollViewer != null)
+                        scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
+                }
+                _viewChangeEventSet = false;
+            }
+        }
+
+        private void ScrollViewer_ViewChanged(object sender, Windows.UI.Xaml.Controls.ScrollViewerViewChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("CHANGED");
         }
 
         /*
@@ -146,21 +139,13 @@ namespace Forms9Patch.UWP
 
         bool ScrollBy(double delta)
         {
-            /*
-            if (delta < 0 && Control.ContentOffset.Y + delta <= 0)
+            if (Control is Windows.UI.Xaml.Controls.ListView listView)
             {
-                Control.ContentOffset = new CoreGraphics.CGPoint(Control.ContentOffset.X, 0);
-                return false;
+                var scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+                if (scrollViewer != null)
+                    return scrollViewer.ChangeView(null, delta, null);
             }
-            if (delta > 0 && Control.ContentOffset.Y + delta + Control.Bounds.Height > Control.ContentSize.Height)
-            {
-                Control.ContentOffset = new CoreGraphics.CGPoint(Control.ContentOffset.X, Control.ContentSize.Height - Control.Bounds.Height);
-                return false;
-            }
-            //System.Diagnostics.Debug.WriteLine ("delta=["+delta+"]");
-            Control.ContentOffset = new CoreGraphics.CGPoint(Control.ContentOffset.X, Control.ContentOffset.Y + delta);
-            */
-            return true;
+            return false;
         }
 
         /*
@@ -265,108 +250,68 @@ namespace Forms9Patch.UWP
 			}
 			return null;
 			*/
-            /*
-            GroupWrapper group = ((ListView)Element).BaseItemsSource;
-            if (group != null)
-            {
-                var displayDeepIndex = new[] { indexPath.Section, indexPath.Row };
-                var item = group.ItemAtDeepIndex(displayDeepIndex);
-                var sourceDeepIndex = group.DeepSourceIndexOf(item);
-                return new DragEventArgs { DeepIndex = sourceDeepIndex, Item = item };
-            }
-            return null;
-        }
-        */
-
-            /*
-        Point ConvertToWindow(Point p)
+        /*
+        GroupWrapper group = ((ListView)Element).BaseItemsSource;
+        if (group != null)
         {
-            return NativeView.ConvertPointToView(new CoreGraphics.CGPoint(p.X, p.Y), null).ToPoint();
+            var displayDeepIndex = new[] { indexPath.Section, indexPath.Row };
+            var item = group.ItemAtDeepIndex(displayDeepIndex);
+            var sourceDeepIndex = group.DeepSourceIndexOf(item);
+            return new DragEventArgs { DeepIndex = sourceDeepIndex, Item = item };
         }
-        */
+        return null;
+    }
+    */
+        /*
+    Point ConvertToWindow(Point p)
+    {
+        return NativeView.ConvertPointToView(new CoreGraphics.CGPoint(p.X, p.Y), null).ToPoint();
+    }
+    */
 
         void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
         {
-            /*
-            GroupWrapper group = ((ListView)Element).BaseItemsSource;
-            //if (reqItem is ItemWrapper)
-            //System.Diagnostics.Debug.WriteLine("   itemWrapper.ID=[" + ((ItemWrapper)reqItem).ID + "]  group.ID=[" + group.ID + "]");
-            var path = group.DeepIndexOf(reqItem as ItemWrapper);
-
-            //System.Diagnostics.Debug.WriteLine("path.Length=["+path.Length+"]["+path[0]+"]");
-            if (path.Length < 1)
-                return;
-            nint section = (path.Length > 1 ? path[0] : 0);
-            nint row = (path.Length > 1 ? path[1] : path[0]);
-
-            UITableViewScrollPosition pos = UITableViewScrollPosition.None;
-            switch (scrollToPosition)
+            if (Control is Windows.UI.Xaml.Controls.ListView listView)
             {
-                case ScrollToPosition.Start:
-                    pos = UITableViewScrollPosition.Top;
-                    break;
-                case ScrollToPosition.Center:
-                    pos = UITableViewScrollPosition.Middle;
-                    break;
-                case ScrollToPosition.End:
-                    pos = UITableViewScrollPosition.Bottom;
-                    break;
+                var scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+                if (scrollViewer != null)
+                {
+                    //System.Diagnostics.Debug.WriteLine("ScrollOffet["+scrollViewer.VerticalOffset+"] A");
+
+                    var headerHeight = 0.0;
+                    if (listView.Header is Xamarin.Forms.VisualElement xfHeader)
+                        headerHeight = xfHeader.Height;
+                    else if (listView.Header is Windows.UI.Xaml.FrameworkElement header)
+                        headerHeight = header.Height;
+                    var footerHeight = 0.0;
+                    if (listView.Footer is Xamarin.Forms.VisualElement xfFooter)
+                        footerHeight = xfFooter.Height;
+                    else if (listView.Footer is Windows.UI.Xaml.FrameworkElement footer)
+                        footerHeight = footer.Height;
+
+                    //System.Diagnostics.Debug.WriteLine("\t headerHeight=["+headerHeight+"]");
+                    //System.Diagnostics.Debug.WriteLine("\t OffsetFromTop=["+ ((Forms9Patch.ListView)Element).OffsetFromTop(reqItem) + "]");
+                    //System.Diagnostics.Debug.WriteLine("\t CellHeight=[" + ((Forms9Patch.ListView)Element).CellHeightForItem(reqItem) + "]");
+                    //System.Diagnostics.Debug.WriteLine("\t viewportHeight=["+scrollViewer.ViewportHeight+"]");
+
+                    var targetPosition = headerHeight + ((Forms9Patch.ListView)Element).OffsetFromTop(reqItem);
+                    if (scrollToPosition == ScrollToPosition.Center)
+                        targetPosition += ((Forms9Patch.ListView)Element).CellHeightForItem(reqItem)/2;
+                    else if (scrollToPosition == ScrollToPosition.End)
+                        targetPosition += ((Forms9Patch.ListView)Element).CellHeightForItem(reqItem);
+
+                    if (scrollToPosition == ScrollToPosition.Center)
+                        targetPosition -= scrollViewer.ViewportHeight / 2;
+                    else if (scrollToPosition == ScrollToPosition.End)
+                        targetPosition -= scrollViewer.ViewportHeight;
+                    //System.Diagnostics.Debug.WriteLine("\t targetPosition=["+targetPosition+"]");
+
+                    scrollViewer.ChangeView(null, targetPosition, null, !animated);
+                    //System.Diagnostics.Debug.WriteLine("ScrollOffet[" + scrollViewer.VerticalOffset + "] B");
+                }
             }
-
-            Control.ScrollToRow(NSIndexPath.FromItemSection(row, section), pos, animated);
-            */
-        }
-
-    }
-
-    /*
-    class ScrollDelegate : UITableViewDelegate
-    {
-        public Forms9Patch.ListView Element;
-
-        public ScrollDelegate(Forms9Patch.ListView element) : base()
-        {
-            Element = element;
-        }
-
-        bool _scrolling;
-
-        public override void DraggingStarted(UIScrollView scrollView)
-        {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingStarted");
-            Element?.OnScrolling(this, EventArgs.Empty);
-            _scrolling = true;
-        }
-
-        public override void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
-        {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingEnded");
-            if (!willDecelerate)
-            {
-                _scrolling = false;
-                Element?.OnScrolled(this, EventArgs.Empty);
-            }
-        }
-
-        public override void DecelerationEnded(UIScrollView scrollView)
-        {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate DecelerationEnded");
-            Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
-            {
-                _scrolling = false;
-                Element?.OnScrolled(this, EventArgs.Empty);
-                return false;
-            });
-        }
-
-        public override void Scrolled(UIScrollView scrollView)
-        {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
-            if (_scrolling)
-                Element?.OnScrolling(this, EventArgs.Empty);
         }
 
 
     }
-    */
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace Forms9Patch.UWP
 {
@@ -32,6 +33,61 @@ namespace Forms9Patch.UWP
                 uwpElement = uwpElement.Parent as FrameworkElement;
             }
             return root;
+        }
+
+        public static T GetChild<T>(this DependencyObject parent) where T : Windows.UI.Xaml.DependencyObject
+        {
+            T child = default(T);
+            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < numVisuals; i++)
+            {
+                var v = VisualTreeHelper.GetChild(parent, i);
+                child = v as T;
+                if (child == null && v!=null)
+                    child = GetChild<T>(v);
+                if (child != null)
+                    break;
+            }
+            return child;
+        }
+
+        /*
+        public static List<FrameworkElement> GetChildren(this FrameworkElement parent)
+        {
+            var result = new List<FrameworkElement>();
+            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < numVisuals; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                result.Add(child);
+            }
+            return result;
+        }
+        */
+
+        public static List<Windows.UI.Xaml.Controls.ListViewItem> GetItemViews(this Windows.UI.Xaml.Controls.ListView listView)
+        {
+            return listView.GetChildren<Windows.UI.Xaml.Controls.ListViewItem>();
+        }
+
+        public static List<T> GetChildren<T>(this DependencyObject parent) where T : Windows.UI.Xaml.DependencyObject
+        {
+            var results = new List<T>();
+            T child = default(T);
+            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < numVisuals; i++)
+            {
+                var v = VisualTreeHelper.GetChild(parent, i);
+                child = v as T;
+                if (child == null && v != null)
+                {
+                    var children = GetChildren<T>(v);
+                    results.AddRange(children);
+                }
+                if (child != null)
+                    results.Add(child);
+            }
+            return results;
         }
     }
 }

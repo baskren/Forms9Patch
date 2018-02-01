@@ -958,6 +958,66 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Cell size and offset
+        public double OffsetFromBottom(object item)
+        {
+            double result = 0;
+            for (int i = BaseItemsSource.Count - 1; i >= 0; i--)
+            {
+                var topItem = BaseItemsSource[i];
+                if (topItem is GroupWrapper gr)
+                {
+                    for (int j = gr.Count - 1; j >= 0; j--)
+                    {
+                        var subItem = gr[i];
+                        if (subItem == item || subItem.Source == item)
+                            return result;
+                        result += subItem.RowHeight < 0 ? RowHeight : subItem.RowHeight;
+                    }
+                }
+                if (topItem == item || topItem.Source == item)
+                    return result;
+                // account for the header
+                result += topItem.RowHeight < 0 ? RowHeight : topItem.RowHeight;
+            }
+            // there is no result
+            return -1;
+        }
+
+
+        public double OffsetFromTop(object item)
+        {
+            double result = 0;
+            foreach (var topItem in BaseItemsSource)
+            {
+                if (item == topItem || item == topItem.Source)
+                    return result;
+                result += topItem.RowHeight < 0 ? RowHeight : topItem.RowHeight;
+                if (topItem is GroupWrapper gr)
+                {
+                    foreach (var subItem in gr)
+                    {
+                        if (item == subItem || item == subItem.Source)
+                            return result;
+                        result += subItem.RowHeight < 0 ? RowHeight : subItem.RowHeight;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        public double CellHeightForItem(object item)
+        {
+            var itemWrapper = BaseItemsSource.ItemWrapperForItem(item);
+            if (itemWrapper.CellView != null)
+                return itemWrapper.RowHeight;
+            return -1;
+        }
+
+        #endregion
+
+
+
         #region Drag/Drop
         /// <summary>
         /// Delegate function that will be called to query if a item (at a deep index location) can be dragged

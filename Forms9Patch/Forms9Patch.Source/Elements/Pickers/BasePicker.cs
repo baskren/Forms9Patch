@@ -263,14 +263,25 @@ namespace Forms9Patch
             object firstItem = null;
             object indexItem = null;
             object lastItem = null;
-            foreach (var item in ItemsSource)
+            if (ItemsSource is IList list)
             {
-                if (count == 0)
-                    firstItem = item;
-                if (count == index)
-                    indexItem = item;
-                lastItem = item;
-                count++;
+                firstItem = list[0];
+                lastItem = list[list.Count - 1];
+                if (index > -1 && index < list.Count)
+                    indexItem = list[index];
+                count = list.Count;
+            }
+            else
+            {
+                foreach (var item in ItemsSource)
+                {
+                    if (count == 0)
+                        firstItem = item;
+                    if (count == index)
+                        indexItem = item;
+                    lastItem = item;
+                    count++;
+                }
             }
             if (count > 0)
             {

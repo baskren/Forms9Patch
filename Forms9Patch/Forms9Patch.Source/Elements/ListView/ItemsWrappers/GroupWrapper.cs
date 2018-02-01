@@ -844,20 +844,19 @@ namespace Forms9Patch
 			{
 				// count this header/cell
 				pos++;
-				if (topItem.Source == item)
+				if (topItem.Source == item || topItem == item)
 					return pos;
-				var gr = topItem as GroupWrapper;
-				if (gr != null)
-				{
-					foreach (var subItem in gr)
-					{
-						// count this cell
-						pos++;
-						if (subItem.Source == item)
-							return pos;
-					}
-				}
-			}
+                if (topItem is GroupWrapper gr)
+                {
+                    foreach (var subItem in gr)
+                    {
+                        // count this cell
+                        pos++;
+                        if (subItem.Source == item || subItem == item)
+                            return pos;
+                    }
+                }
+            }
 			return -1;
 		}
 
@@ -870,27 +869,43 @@ namespace Forms9Patch
 			{
 				// count this header/cell
 				pos++;
-				if (topItem.Source == item)
+				if (topItem.Source == item || topItem == item)
 					return pos - 1;
-				var gr = topItem as GroupWrapper;
-				if (gr != null)
-				{
-					foreach (var subItem in gr)
-					{
-						// count this cell
-						pos++;
-						if (subItem.Source == item && topItem.Source == group)
-							return pos - 1;
-					}
-				}
-			}
+                if (topItem is GroupWrapper gr)
+                {
+                    foreach (var subItem in gr)
+                    {
+                        // count this cell
+                        pos++;
+                        if ((subItem.Source == item || subItem==item) && (topItem.Source == group || topItem == group) )
+                            return pos - 1;
+                    }
+                }
+            }
 			return -1;
 		}
-		#endregion
+
+        public ItemWrapper ItemWrapperForItem(object item)
+        {
+            if (item is ItemWrapper wrapper)
+                return wrapper;
+            ItemWrapper result = null;
+            foreach (var topItem in _items)
+            {
+                if (topItem == item || topItem.Source == item)
+                    return topItem;
+                if (topItem is GroupWrapper gr)
+                    result = gr.ItemWrapperForItem(item);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
+        #endregion
 
 
-		#region Properties
-		public static readonly BindableProperty SourceSubPropertyMapProperty = BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), null);
+        #region Properties
+        public static readonly BindableProperty SourceSubPropertyMapProperty = BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), null);
 		public List<string> SourceSubPropertyMap
 		{
 			get { return (List<string>)GetValue(SourceSubPropertyMapProperty); }
