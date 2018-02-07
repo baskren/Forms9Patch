@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 namespace Forms9Patch
 {
-	internal class TextCellViewContent : Label
+	internal class TextCellViewContent : Label //, ICellHeight
 	{
 
 		public TextCellViewContent()
@@ -12,10 +12,12 @@ namespace Forms9Patch
 			HorizontalTextAlignment = TextAlignment.Start;
 		}
 
-		#region change management
-		#endregion
+        //public int CellHeight => (int) System.Math.Ceiling(Bounds.Height);
 
-		protected override void OnBindingContextChanged()
+        #region change management
+        #endregion
+
+        protected override void OnBindingContextChanged()
 		{
 			base.OnBindingContextChanged();
 			if (BindingContext != null)

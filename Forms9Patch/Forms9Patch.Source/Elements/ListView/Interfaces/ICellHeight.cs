@@ -12,7 +12,7 @@ namespace Forms9Patch
 		/// Gets the height of the cell if the list HasUnevenRows=true.
 		/// </summary>
 		/// <value>The height of the cell.</value>
-		double CellHeight { get; }
+		int CellHeight { get; }
 
 	}
 }

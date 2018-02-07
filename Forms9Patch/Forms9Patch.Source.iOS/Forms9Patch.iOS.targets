@@ -38,9 +38,6 @@
     <Compile Include="..\Forms9Patch.Source.iOS\ListView\ListViewRenderer.cs">
       <Link>ListView\Renderers\ListViewRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\ListItemLocationService.cs">
-      <Link>ListView\Services\ListItemLocationService.cs</Link>
-    </Compile>
 
     <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
@@ -73,9 +70,6 @@
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Services\KeyClicksService.cs">
       <Link>Services\KeyClicksService.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Services\ListViewExtensionService_iOS.cs">
-      <Link>Services\ListViewExtensionService_iOS.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Services\StatusBarService.cs">
       <Link>Services\StatusBarService.cs</Link>

@@ -26,12 +26,6 @@
 		</Compile>
 
 		<!-- LISTVIEW -->
-		<Compile Include="..\Forms9Patch.Source.Droid\ListView\ListItemLocationService.cs">
-			<Link>ListView\ListItemLocationService.cs</Link>
-		</Compile>
-		<Compile Include="..\Forms9Patch.Source.Droid\ListView\ListViewExtensionService.cs">
-			<Link>ListView\ListViewExtensionService.cs</Link>
-		</Compile>
 		<Compile Include="..\Forms9Patch.Source.Droid\ListView\ListViewRenderer.cs">
 			<Link>ListView\ListViewRenderer.cs</Link>
 		</Compile>

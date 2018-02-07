@@ -5,7 +5,7 @@
     <Compile Include="..\FormsGestures.Source\Display.cs" Link="Display.cs" />
     <Compile Include="..\FormsGestures.Source\Enums\Direction.cs" Link="Enums\Direction.cs" />
     <Compile Include="..\FormsGestures.Source\Enums\DisplayOrientation.cs" Link="Enums\DisplayOrientation.cs" />
-    <Compile Include="..\FormsGestures.Source\Enums\HoverOverAlignment.cs" Link="Enums\HoverOverAlignment.cs" />
+    <Compile Include="..\FormsGestures.Source\Enums\Proximity.cs" Link="Enums\Proximity.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\BaseGestureEventArgs.cs" Link="EventArgs\BaseGestureEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\DownUpEventArgs.cs" Link="EventArgs\DownUpEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\LongPressEventArgs.cs" Link="EventArgs\LongPressEventArgs.cs" />

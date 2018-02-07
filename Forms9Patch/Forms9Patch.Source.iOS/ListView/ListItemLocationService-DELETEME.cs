@@ -17,7 +17,7 @@ namespace Forms9Patch.iOS
 		/// <returns>The event arguments for item at point.</returns>
 		/// <param name="listView">List view.</param>
 		/// <param name="p">P.</param>
-		public DragEventArgs DragEventArgsForItemAtPoint(ListView listView, Point p) {
+		public CellProximityEventArgs CellProximityEventArgsForItemAtPoint(ListView listView, Point p) {
 			var listViewRenderer = Platform.GetRenderer (listView) as ListViewRenderer;
 			return listViewRenderer?.ItemAtPoint (p);
 		}

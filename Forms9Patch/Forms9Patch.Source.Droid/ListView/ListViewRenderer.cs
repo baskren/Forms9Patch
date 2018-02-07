@@ -246,7 +246,7 @@ namespace Forms9Patch.Droid
         }
 
 
-        internal Forms9Patch.DragEventArgs ItemAtPoint(Point p)
+        internal Forms9Patch.CellProximityEventArgs ItemAtPoint(Point p)
         {
             var scale = Settings.Context.Resources.DisplayMetrics.Density;
             var pos = Control.PointToPosition((int)(p.X * scale), (int)(p.Y * scale));
@@ -254,7 +254,7 @@ namespace Forms9Patch.Droid
             return HoverOverForPosition(pos);
         }
 
-        Forms9Patch.DragEventArgs FindItemDataUnderRectangle(Rectangle rect)
+        Forms9Patch.CellProximityEventArgs FindItemDataUnderRectangle(Rectangle rect)
         {
             var listView = Control;
 
@@ -269,7 +269,7 @@ namespace Forms9Patch.Droid
             var hoCenter = HoverOverForPosition(pCenter);
             if (hoCenter != null)
             {
-                hoCenter.Alignment = HoverOverAlignment.Center;
+                hoCenter.Proximity = Proximity.Aligned;
                 return hoCenter;
             }
 
@@ -277,7 +277,7 @@ namespace Forms9Patch.Droid
             var hoStart = HoverOverForPosition(pStart);
             if (hoStart != null)
             {
-                hoStart.Alignment = HoverOverAlignment.After;
+                hoStart.Proximity = Proximity.After;
                 return hoStart;
             }
 
@@ -285,13 +285,13 @@ namespace Forms9Patch.Droid
             var hoEnd = HoverOverForPosition(pEnd);
             if (hoEnd != null)
             {
-                hoEnd.Alignment = HoverOverAlignment.Before;
+                hoEnd.Proximity = Proximity.Before;
                 return hoEnd;
             }
             return null;
         }
 
-        internal Forms9Patch.DragEventArgs HoverOverForPosition(int pos)
+        internal Forms9Patch.CellProximityEventArgs HoverOverForPosition(int pos)
         {
             object javaObj = Control.GetItemAtPosition(pos);
             if (javaObj == null)
@@ -359,7 +359,7 @@ namespace Forms9Patch.Droid
 
 
 
-        Forms9Patch.DragEventArgs HoverOverForObject(object obj)
+        Forms9Patch.CellProximityEventArgs HoverOverForObject(object obj)
         {
             /*
 			int section = 0;
@@ -373,13 +373,13 @@ namespace Forms9Patch.Droid
 					row = 0;
 					foreach (var groupItem in group) {
 						if (groupItem.Equals(obj))
-							return new Forms9Patch.DragEventArgs {DeepIndex = new [] {section,row}, Item=obj as Item};
+							return new Forms9Patch.CellProximityEventArgs {DeepIndex = new [] {section,row}, Item=obj as Item};
 						row++;
 					}
 					section++;
 				} else {
 					if (item.Equals(obj))
-						return new Forms9Patch.DragEventArgs {DeepIndex = new [] {section,row}, Item=obj as Item};
+						return new Forms9Patch.CellProximityEventArgs {DeepIndex = new [] {section,row}, Item=obj as Item};
 					row++;
 				}
 			}
@@ -392,7 +392,7 @@ namespace Forms9Patch.Droid
                 var item = obj as ItemWrapper;
                 var sourceDeepIndex = group.DeepSourceIndexOf(item);
                 if (((ListView)Element).IsGroupingEnabled && sourceDeepIndex.Length > 1)
-                    return new Forms9Patch.DragEventArgs { DeepIndex = sourceDeepIndex, Item = item };
+                    return new Forms9Patch.CellProximityEventArgs { DeepIndex = sourceDeepIndex, Item = item };
             }
             return null;
         }

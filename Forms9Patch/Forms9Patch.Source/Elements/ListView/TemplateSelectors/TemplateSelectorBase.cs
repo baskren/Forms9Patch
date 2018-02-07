@@ -11,6 +11,8 @@ namespace Forms9Patch
     public class TemplateSelectorBase : Xamarin.Forms.DataTemplateSelector
     {
 
+        // this is here in preparation for the day Xamarin fixes ListView to support template selectors for ListView.GroupHeaderTempate on all platforms
+
         /*
 		Type _baseCellViewType = typeof(BaseCellView);
 		internal Type BaseCellViewType
@@ -40,21 +42,21 @@ namespace Forms9Patch
         {
             //Add (typeof(NullItem), typeof (NullCellView));
             var viewType = typeof(NullItemCellView);
-            Type cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
+            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             var template = new DataTemplate(cellType);
             var itemType = typeof(NullItemWrapper);
             _cellTemplates[itemType] = template;
             _contentTypes[itemType] = viewType;
 
             viewType = typeof(BlankCellView);
-            cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
+            cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             template = new DataTemplate(cellType);
             itemType = typeof(BlankItemWrapper);
             _cellTemplates[itemType] = template;
             _contentTypes[itemType] = viewType;
 
             viewType = typeof(TextCellViewContent);
-            cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
+            cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             template = new DataTemplate(cellType);
             itemType = typeof(ItemWrapper<string>);
             _cellTemplates[itemType] = template;
@@ -82,7 +84,7 @@ namespace Forms9Patch
         public TemplateSelectorBase(Type groupContentViewType) : this()
         {
             var itemType = typeof(GroupWrapper);
-            Type cellType = typeof(Cell<>).MakeGenericType(new[] { groupContentViewType });
+            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { groupContentViewType });
             var template = new DataTemplate(cellType);
             _cellTemplates[itemType] = template;
             _contentTypes[itemType] = groupContentViewType;
@@ -91,20 +93,20 @@ namespace Forms9Patch
         /// <summary>
         /// Add to the DetaTemplateSelector a viewType that will be used to display any objects of itemBaseType.
         /// </summary>
-        /// <param name="itemBaseType">Item base type.</param>
+        /// <param name="dataType">Item base type.</param>
         /// <param name="viewType">View type.</param>
 
-        protected void Add(Type itemBaseType, Type viewType)
+        protected void Add(Type dataType, Type viewType)
         {
-            Type itemType = itemBaseType;
+           // Type itemType = dataType;
             //itemType = itemBaseType;
             //itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
-            if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(itemType))
+            if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(dataType))
                 throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
-            Type cellType = typeof(Cell<>).MakeGenericType(new[] { viewType });
+            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             var template = new DataTemplate(cellType);
-            _cellTemplates[itemType] = template;
-            _contentTypes[itemType] = viewType;
+            _cellTemplates[dataType] = template;
+            _contentTypes[dataType] = viewType;
         }
 
 
@@ -120,8 +122,7 @@ namespace Forms9Patch
             //var group = item as Group;
             //Type itemType = group?.Source.GetType () ?? item.GetType ();
             //Type itemType = ((item as Item)?.Source ?? item).GetType();
-            var itemWrapper = item as ItemWrapper;
-            if (itemWrapper != null)
+            if (item is ItemWrapper itemWrapper)
             {
                 Type itemType = itemWrapper.GetType();
                 if (_cellTemplates.ContainsKey(itemType))
@@ -177,87 +178,13 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) enter",item);
                 var baseCellView = new BaseCellView();
                 //var baseCellView = (BaseCellView)Activator.CreateInstance(BaseCellViewType);
-                baseCellView.Content = (View)Activator.CreateInstance(contentType);
+                baseCellView.ContentView = (View)Activator.CreateInstance(contentType);
                 baseCellView.BindingContext = item;
                 //System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) exit",item);
                 return baseCellView;
             }
             return null;
         }
-
-
-        //class Cell<TContent> : ViewCell where TContent : ContentView, new() {
-        class Cell<TContent> : ViewCell where TContent : View, new()
-        {
-
-            internal BaseCellView BaseCellView = new BaseCellView();
-            readonly ICellHeight _iCellContent;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector.Cell`1"/> class.
-            /// </summary>
-            public Cell()
-            {
-                //System.Diagnostics.Debug.WriteLine("\t\t\t{0} start", this.GetType());
-                View = BaseCellView;
-                BaseCellView.Content = new TContent();
-                _iCellContent = BaseCellView.Content as ICellHeight;
-                if (_iCellContent != null && _iCellContent.CellHeight >= 0)
-                    Height = _iCellContent.CellHeight;
-                BaseCellView.Content.PropertyChanged += (sender, e) =>
-                {
-                    if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName)
-                        SetHeight();
-                    else if (e.PropertyName == "CellHeight")
-                    {
-                        var iCellHeight = BaseCellView.Content as ICellHeight;
-                        if (iCellHeight != null)
-                        {
-                            Height = iCellHeight.CellHeight + BaseCellView.Padding.VerticalThickness;
-                            //ForceUpdateSize();
-                        }
-                    }
-
-                };
-            }
-
-            /// <summary>
-            /// Triggered before a property is changed.
-            /// </summary>
-            /// <param name="propertyName">Property name.</param>
-            protected override void OnPropertyChanging(string propertyName = null)
-            {
-                base.OnPropertyChanging(propertyName);
-                if (propertyName == BindingContextProperty.PropertyName && View != null)
-                    View.BindingContext = null;
-            }
-
-            /// <summary>
-            /// Triggered by a change in the binding context.
-            /// </summary>
-            protected override void OnBindingContextChanged()
-            {
-                base.OnBindingContextChanged();
-                if (View != null)
-                    View.BindingContext = BindingContext;
-                SetHeight();
-            }
-
-            void SetHeight()
-            {
-                var iItem = BindingContext as IItemWrapper;
-                if (iItem != null)
-                {
-                    if (_iCellContent != null && _iCellContent.CellHeight >= 0)
-                        Height = _iCellContent.CellHeight + 1;
-                    else
-                        Height = iItem.RowHeight + 1;
-                }
-                View.HeightRequest = Height;
-                //System.Diagnostics.Debug.WriteLine("GroupTemplate.SetHeight View.HeightRequest = ["+Height+"]");
-            }
-        }
-
     }
 }
 

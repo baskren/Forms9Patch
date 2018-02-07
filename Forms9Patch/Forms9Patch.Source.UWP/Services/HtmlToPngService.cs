@@ -32,6 +32,7 @@ namespace Forms9Patch.UWP
         DependencyProperty WebViewProperty = DependencyProperty.Register("WebView", typeof(Windows.UI.Xaml.Controls.WebView), typeof(HtmlToPngService), null);
         DependencyProperty HtmlStringProperty = DependencyProperty.Register("HtmlString", typeof(string), typeof(HtmlToPngService), null);
 
+#pragma warning disable CS1998
         /// <summary>
         /// Converts HTML to PNG
         /// </summary>
@@ -66,9 +67,8 @@ namespace Forms9Patch.UWP
             webView.NavigationFailed += WebView_NavigationFailed;
 
             webView.NavigateToString(html);
-
-
         }
+#pragma warning restore CS1998
 
         private void WebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
         {

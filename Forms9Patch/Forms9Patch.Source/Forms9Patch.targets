@@ -14,8 +14,9 @@
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\CellViews\NullItemCellView.cs" Link="Elements\ListView\CellViews\NullItemCellView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\CellViews\TextCellViewContent.cs" Link="Elements\ListView\CellViews\TextCellViewContent.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\Enums\AccessoryPosition.cs" Link="Elements\ListView\Enums\AccessoryPosition.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ListView\Enums\HoverOverAlignment.cs" Link="Elements\ListView\Enums\HoverOverAlignment.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\DragEventArgs.cs" Link="Elements\ListView\EventArgs\DragEventArgs.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\Enums\Proximity.cs" Link="Elements\ListView\Enums\Proximity.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\CellProximityEventArgs.cs" Link="Elements\ListView\EventArgs\CellProximityEventArgs.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\CellEventArgs.cs" Link="Elements\ListView\EventArgs\CellEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\ItemTappedEventArgs.cs" Link="Elements\ListView\EventArgs\ItemTappedEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs" Link="Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs" Link="Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs" />
@@ -25,19 +26,19 @@
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\Interfaces\IHoverOver.cs" Link="Elements\ListView\Interfaces\IHoverOver.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\Interfaces\IIsSelectedAble.cs" Link="Elements\ListView\Interfaces\IIsSelectedAble.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\Interfaces\IItemWrapper.cs" Link="Elements\ListView\Interfaces\IItemWrapper.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ListView\Interfaces\IListItemLocation.cs" Link="Elements\ListView\Interfaces\IListItemLocation.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ListView\Interfaces\IListViewExtensionService.cs" Link="Elements\ListView\Interfaces\IListViewExtensionService.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\BlankItemWrapper.cs" Link="Elements\ListView\ItemsWrappers\BlankItemWrapper.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\GroupWrapper.cs" Link="Elements\ListView\ItemsWrappers\GroupWrapper.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper.cs" Link="Elements\ListView\ItemsWrappers\ItemWrapper.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs" Link="Elements\ListView\ItemsWrappers\ItemWrapperLongPressEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\ItemWrapper_TItem_.cs" Link="Elements\ListView\ItemsWrappers\ItemWrapper_TItem_.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\NullItemWrapper.cs" Link="Elements\ListView\ItemsWrappers\NullItemWrapper.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\ItemsWrappers\OffsetDataSet.cs" Link="Elements\ListView\ItemsWrappers\OffsetDataSet.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\TemplateSelectors\DataTemplateSelector.cs" Link="Elements\ListView\TemplateSelectors\DataTemplateSelector.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" Link="Elements\ListView\TemplateSelectors\GroupHeaderTemplate.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\TemplateSelectors\TemplateSelectorBase.cs" Link="Elements\ListView\TemplateSelectors\TemplateSelectorBase.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\Cell_T_.cs" Link="Elements\ListView\Cell_T_.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ListView.cs" Link="Elements\ListView\ListView.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ListView\ListViewExtensions.cs" Link="Elements\ListView\ListViewExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ListView\EnhancedListView.cs" Link="Elements\ListView\EnhancedListView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\SwipeMenuItem.cs" Link="Elements\ListView\SwipeMenuItem.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\BasePicker.cs" Link="Elements\Pickers\BasePicker.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\MultiComponentPicker.cs" Link="Elements\Pickers\MultiComponentPicker.cs" />

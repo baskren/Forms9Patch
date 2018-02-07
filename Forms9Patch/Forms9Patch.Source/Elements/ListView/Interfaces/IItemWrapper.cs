@@ -5,9 +5,9 @@ namespace Forms9Patch
 	/// <summary>
 	/// Interface used to queary current state of Forms9Patch.ListView cells and the ItemSource object bound to the cells view.
 	/// </summary>
-	public interface IItemWrapper
+	internal interface IItemWrapper
 	{
-		/*
+		
 		/// <summary>
 		/// Gets a value indicating whether this cell's separator is visible.
 		/// </summary>
@@ -24,7 +24,7 @@ namespace Forms9Patch
 		/// Gets the height of this cell's separator.
 		/// </summary>
 		/// <value>The height of the separator.</value>
-		double SeparatorHeight { get; }
+		int RequestedSeparatorHeight { get; }
 
 		/// <summary>
 		/// Gets the separator left indent for this cell.
@@ -37,7 +37,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The separator right indent.</value>
 		double SeparatorRightIndent { get; }
-		*/
+		
 
 		/// <summary>
 		/// Gets the unselected background color for this cell.
@@ -81,7 +81,17 @@ namespace Forms9Patch
 		/// Gets the global height of the row.
 		/// </summary>
 		/// <value>The height of the row.</value>
-		int RowHeight { get; }
+		int RequestedRowHeight { get; }
+
+        /// <summary>
+        /// Answers the question, "Should a separator be rendered after the cell for this item?"
+        /// </summary>
+        int SeparatorHeight { get; }
+
+        /// <summary>
+        /// Used to record what row height was actually used for cell's height request (takes into account BaseCellView.ContentView.CellHeight value)
+        /// </summary>
+        int RenderedRowHeight { get; set; }
 	}
 }
 

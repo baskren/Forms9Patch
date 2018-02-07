@@ -60,7 +60,8 @@ namespace Forms9Patch
 	#region Cell Template
 	class MultiPickerCellContentView : Grid, ICellHeight, IIsSelectedAble
 	{
-		public double CellHeight { get; set; }
+
+		public int CellHeight { get; set; }
 
 		public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MultiPickerCellContentView), default(bool));
 		public bool IsSelected

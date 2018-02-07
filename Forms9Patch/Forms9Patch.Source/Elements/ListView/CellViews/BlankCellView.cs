@@ -16,7 +16,7 @@ namespace Forms9Patch
 		/// DO NOT USE: Initializes a new instance of the <see cref="T:Forms9Patch.BlankCellView"/> class.
 		/// </summary>
 		public BlankCellView () {
-			Content = _boxView;
+			ContentView = _boxView;
 			//TODO: bind _boxView.HeightRequest
 		}
 

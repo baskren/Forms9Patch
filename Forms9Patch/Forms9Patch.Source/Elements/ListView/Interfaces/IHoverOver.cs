@@ -2,6 +2,7 @@
 
 namespace Forms9Patch
 {
+    /*
 	/// <summary>
 	/// Hover over interface.
 	/// </summary>
@@ -10,8 +11,9 @@ namespace Forms9Patch
 		/// <summary>
 		/// Occurs when cell is hovered over by a dragging cell.
 		/// </summary>
-		event EventHandler<DragEventArgs> OnHoverOver;
+		event EventHandler<CellProximityEventArgs> OnHoverOver;
 	}
+    */
 }
 
 

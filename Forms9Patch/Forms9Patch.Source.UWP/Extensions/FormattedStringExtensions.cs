@@ -272,7 +272,7 @@ namespace Forms9Patch.UWP
                 {
                     textBlock.ApplyBackgroundColor(metaFont.BackgroundColor, startIndex, length);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //throw new Exception("It appears that this Xamarin.Forms.UWP app was built with a Windows TargetVersion < 10.0.16299.0 (Windows 10 Fall Creators Update).  10.0.16299.0 is needed to support Forms9Patch.Label.HtmlText background color attributes.", e);
                 }

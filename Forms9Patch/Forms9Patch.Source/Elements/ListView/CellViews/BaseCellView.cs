@@ -10,21 +10,93 @@ namespace Forms9Patch
     class BaseCellView : Xamarin.Forms.Grid  // why grid?  because you can put more than one view in the same place at the same time
     {
 
+        #region debug convenience
+        bool Debug
+        {
+            get
+            {
+                //return (BindingContext is ItemWrapper<string> itemWrapper && itemWrapper.Index == 0);
+                return false;
+                //return (BindingContext is GroupWrapper wrapper && wrapper.Index == 0);
+            }
+        }
+
+        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
+        {
+            if (Debug)
+                System.Diagnostics.Debug.WriteLine("["+GetType()+"."+callerName+":"+lineNumber+"]["+InstanceId+"] "+message);
+        }
+        #endregion
+
         #region Properties
         /// <summary>
         /// The content property.
         /// </summary>
-        public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(BaseCellView), default(View));
+        public static readonly BindableProperty ContentViewProperty = BindableProperty.Create("ContentView", typeof(View), typeof(BaseCellView), default(View));
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
         /// <value>The content.</value>
-        public View Content
+        public View ContentView
         {
-            get { return (View)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get { return (View)GetValue(ContentViewProperty); }
+            set { SetValue(ContentViewProperty, value); }
         }
 
+        // ViewHeight priority : (1) value of View.CellHeight (2) TemplateSelectorBase.SetHeight() can try to set (if View.CellHeight doesn't exist or is -1).
+        int _requestedRowHeight;
+        internal int RenderedRowHeight
+        {
+            get
+            {
+                if (ContentView is ICellHeight cellHeightView && cellHeightView.CellHeight > -1)
+                {
+                    DebugMessage("Get via ICellHeight=["+ cellHeightView.CellHeight + "] ContentView=["+ContentView+"]");
+                    return cellHeightView.CellHeight;
+                }
+
+                DebugMessage("Get via _requestedRowHeight=["+_requestedRowHeight+"]");
+                return _requestedRowHeight;
+            }
+        }
+
+        internal int RequestedRowHeight
+        {
+            get => _requestedRowHeight;
+            set
+            {
+                DebugMessage("Enter _requestedRowHeight=[" + _requestedRowHeight + "] value=[" + value + "]");
+                if (_requestedRowHeight != value)
+                {
+                    _requestedRowHeight = value;
+                    UpdateHeights();
+                }
+                DebugMessage("Exit");
+            }
+        }
+
+
+        // SeparatorHeight setter priority: (1) TemplateSelectorBase
+        double _separatorHeight;
+        internal double SeparatorHeight
+        {
+            get
+            {
+                if (BindingContext is IItemWrapper itemWrapper && !itemWrapper.SeparatorIsVisible)
+                    return 0;
+                return _separatorHeight;
+            }
+            set
+            {
+                DebugMessage("Enter _separatorHeight=["+ _separatorHeight + "] value=[" + value + "]");
+                if (_separatorHeight != value)
+                {
+                    _separatorHeight = value;
+                    UpdateHeights();
+                }
+                DebugMessage("Exit");
+            }
+        }
         /*
 		#region Separator appearance
 		/// <summary>
@@ -107,7 +179,15 @@ namespace Forms9Patch
 
         #region Fields
         static int _instances;
-        internal int ID;
+        internal int InstanceId;
+
+        readonly BoxView _separator = new BoxView
+        {
+            Color = Color.Black,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            Margin = 0,
+        };
 
         #region Swipe Menu
         readonly Frame _insetFrame = new Frame
@@ -117,28 +197,55 @@ namespace Forms9Patch
             BackgroundColor = Color.FromRgb(200, 200, 200),
             Padding = 0,
             Margin = 0,
-            OutlineWidth = 0
+            OutlineWidth = 0,
+            VerticalOptions = LayoutOptions.FillAndExpand,
         };
         readonly Frame _swipeFrame1 = new Frame
         {
-            Padding = new Thickness(-1)
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            //Padding = new Thickness(-1)
         };
         readonly Frame _swipeFrame2 = new Frame
         {
-            Padding = new Thickness(-1)
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            //Padding = new Thickness(-1)
         };
         readonly Frame _swipeFrame3 = new Frame
         {
-            Padding = new Thickness(-1)
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            //Padding = new Thickness(-1)
         };
         readonly Frame _touchBlocker = new Frame
         {
+            VerticalOptions = LayoutOptions.FillAndExpand,
             BackgroundColor = Color.FromRgba(0, 0, 0, 1)
         };
 
-        readonly Button _swipeButton1 = new Button { WidthRequest = 50, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
-        readonly Button _swipeButton2 = new Button { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
-        readonly Button _swipeButton3 = new Button { WidthRequest = 44, OutlineWidth = 0, OutlineRadius = 0, Orientation = StackOrientation.Vertical };
+        readonly Button _swipeButton1 = new Button
+        {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            WidthRequest = 50,
+            OutlineWidth = 0,
+            OutlineRadius = 0,
+            Orientation = 
+            StackOrientation.Vertical
+        };
+        readonly Button _swipeButton2 = new Button
+        {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            WidthRequest = 44,
+            OutlineWidth = 0,
+            OutlineRadius = 0,
+            Orientation = StackOrientation.Vertical
+        };
+        readonly Button _swipeButton3 = new Button
+        {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            WidthRequest = 44,
+            OutlineWidth = 0,
+            OutlineRadius = 0,
+            Orientation = StackOrientation.Vertical
+        };
 
         #endregion
 
@@ -151,7 +258,7 @@ namespace Forms9Patch
         /// </summary>
         public BaseCellView()
         {
-            ID = _instances++;
+            InstanceId = _instances++;
             Padding = 0; // new Thickness(0,1,0,1);
             ColumnSpacing = 0;
             RowSpacing = 0;
@@ -183,7 +290,7 @@ namespace Forms9Patch
             _swipeButton2.Tapped += OnSwipeButtonTapped;
             _swipeButton3.Tapped += OnSwipeButtonTapped;
 
-
+            /*
             if (Device.RuntimePlatform == Device.UWP)
             {
                 var line = new BoxView
@@ -203,6 +310,11 @@ namespace Forms9Patch
                 grid.AddChild(line,0,1);
                 Children.Add(grid, 0, 1);
             }
+            */
+            Children.Add(_separator, 0, 1);
+
+            UpdateHeights();
+            UpdateSeparator();
         }
         #endregion
 
@@ -222,17 +334,17 @@ namespace Forms9Patch
         {
             get
             {
-                return Content.TranslationX;
+                return ContentView.TranslationX;
             }
             set
             {
-                Content.TranslationX = value;
+                ContentView.TranslationX = value;
             }
         }
 
         void TranslateChildrenTo(double x, double y, uint milliseconds, Easing easing)
         {
-            Content.TranslateTo(x, y, milliseconds, easing);
+            ContentView.TranslateTo(x, y, milliseconds, easing);
         }
 
         void OnPanned(object sender, PanEventArgs e)
@@ -243,7 +355,7 @@ namespace Forms9Patch
                 return;
             }
             _panHz = false;
-            var iCellSwipeMenus = Content as ICellSwipeMenus;
+            var iCellSwipeMenus = ContentView as ICellSwipeMenus;
             if (iCellSwipeMenus != null)
             {
                 double distance = e.TotalDistance.X + _translateOnUp;
@@ -257,8 +369,8 @@ namespace Forms9Patch
                         PutAwaySwipeButtons(true);
                         return;
                     }
-                    if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)Content)?.EndSwipeMenu != null && ((ICellSwipeMenus)Content).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated) ||
-                        (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)Content)?.StartSwipeMenu != null && ((ICellSwipeMenus)Content).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated))
+                    if ((_endButtons > 0 && side == Side.End && /*_swipeFrame1.TranslationX < Width - 210 */ distance <= -210 && ((ICellSwipeMenus)ContentView)?.EndSwipeMenu != null && ((ICellSwipeMenus)ContentView).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).EndSwipeMenu[0].SwipeActivated) ||
+                        (_startButtons > 0 && side == Side.Start && /*_swipeFrame1.TranslationX > 210 - Width */ distance >= 210 && ((ICellSwipeMenus)ContentView)?.StartSwipeMenu != null && ((ICellSwipeMenus)ContentView).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).StartSwipeMenu[0].SwipeActivated))
                     {
                         // execute full swipe
                         _swipeFrame1.TranslateTo(0, 0, 250, Easing.Linear);
@@ -316,9 +428,9 @@ namespace Forms9Patch
                 {
                     // we're beyond the limit of presentation of the buttons
                     ContentX = (int)side * -180;
-                    if (side == Side.End && distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellSwipeMenus)Content)?.EndSwipeMenu != null && ((ICellSwipeMenus)Content).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).EndSwipeMenu[0].SwipeActivated)
+                    if (side == Side.End && distance <= -210 && e.DeltaDistance.X <= 0 && ((ICellSwipeMenus)ContentView)?.EndSwipeMenu != null && ((ICellSwipeMenus)ContentView).EndSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).EndSwipeMenu[0].SwipeActivated)
                         _swipeFrame1.TranslateTo(0, 0, 200, Easing.Linear);
-                    else if (side == Side.Start && distance >= 210 && e.DeltaDistance.X >= 0 && ((ICellSwipeMenus)Content)?.StartSwipeMenu != null && ((ICellSwipeMenus)Content).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)Content).StartSwipeMenu[0].SwipeActivated)
+                    else if (side == Side.Start && distance >= 210 && e.DeltaDistance.X >= 0 && ((ICellSwipeMenus)ContentView)?.StartSwipeMenu != null && ((ICellSwipeMenus)ContentView).StartSwipeMenu.Count > 0 && ((ICellSwipeMenus)ContentView).StartSwipeMenu[0].SwipeActivated)
                         _swipeFrame1.TranslateTo(0, 0, 200, Easing.Linear);
                     else
                         _swipeFrame1.TranslateTo((int)side * (Width - 60), 0, 200, Easing.Linear);
@@ -345,7 +457,7 @@ namespace Forms9Patch
             {
                 // setup end SwipeMenu
                 var side = distance < 0 ? Side.End : Side.Start;
-                var iCellSwipeMenus = Content as ICellSwipeMenus;
+                var iCellSwipeMenus = ContentView as ICellSwipeMenus;
                 if (iCellSwipeMenus != null)
                 {
                     var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
@@ -489,7 +601,7 @@ namespace Forms9Patch
                 index = 1;
             else if (sender == _swipeButton3)
                 index = 2;
-            var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)Content)?.EndSwipeMenu : ((ICellSwipeMenus)Content)?.StartSwipeMenu;
+            var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
             if (index == 2 && _endButtons + _startButtons > 2)
             {
                 // show remaining menu items in a modal list
@@ -548,8 +660,8 @@ namespace Forms9Patch
                     segment.Tapped += (s, arg) =>
                     {
                         modal.Cancel();
-                        var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, menuItem);
-                        ((ICellSwipeMenus)Content)?.OnSwipeMenuItemButtonTapped(this, args);
+                        var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
+                        ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this, args);
                         ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
                         //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + menuItem.Key + "]");
                     };
@@ -561,8 +673,8 @@ namespace Forms9Patch
             else
             {
                 PutAwaySwipeButtons(false);
-                var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)Content, (ItemWrapper)BindingContext, swipeMenu[index]);
-                ((ICellSwipeMenus)Content)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, swipeMenu[index]);
+                ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
                 ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
                 //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + swipeMenu[index].Key + "]");
             }
@@ -599,34 +711,30 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnBindingContextChanged");
+            DebugMessage("Enter BindingContext=[" + BindingContext + "]");
             if (BindingContext == null)
                 return;
-            var item = BindingContext as ItemWrapper;
-            if (item != null)
+
+            if (BindingContext is ItemWrapper itemWrapper)
             {
-                item.BaseCellView = this;
-                item.PropertyChanged += OnItemPropertyChanged;
+                itemWrapper.BaseCellView = this;
+                itemWrapper.PropertyChanged += OnItemPropertyChanged;
+                DebugMessage("Set ContentView.BindingContext=[" + itemWrapper.Source + "]");
+                ContentView.BindingContext = itemWrapper.Source;
+                DebugMessage("ContentView.BindingContext=[" + ContentView.BindingContext + "]");
                 UpdateBackground();
-                SetHeights();
+                UpdateHeights();
+                UpdateSeparator();
+
+                if (ContentView is IIsSelectedAble contentView)
+                    contentView.IsSelected = itemWrapper.IsSelected;
             }
-            //else
-            //	System.Diagnostics.Debug.WriteLine("");
-            var type = BindingContext?.GetType();
-            if (type == typeof(NullItemWrapper) || type == typeof(BlankItemWrapper))
-                Content.BindingContext = item;
             else
-            {
-                Content.BindingContext = item?.Source;
-                //System.Diagnostics.Debug.WriteLine("item.Index=[" + item.Index + "] item.Source=[" + item.Source + "] item.SeparatorIsVisible[" + item.SeparatorIsVisible + "]");
-            }
-            //_freshContent = true;
-            //UpdateLayout();
-            //System.Diagnostics.Debug.WriteLine("OnBindingContextChanged");
-            var selectableContent = Content as IIsSelectedAble;
-            if (selectableContent != null)
-                selectableContent.IsSelected = ((ItemWrapper)BindingContext).IsSelected;
+                throw new Exception("ItemWrapper and GroupWrapper are the only thing that be the BindingContext for BaseCellView.");
+
             base.OnBindingContextChanged();
+
+            DebugMessage("Exit");
         }
 
         protected override void OnPropertyChanging(string propertyName = null)
@@ -635,51 +743,53 @@ namespace Forms9Patch
             base.OnPropertyChanging(propertyName);
             if (propertyName == BindingContextProperty.PropertyName)
             {
-                var item = BindingContext as ItemWrapper;
-                if (item != null)
+                if (BindingContext is ItemWrapper item)
                     item.PropertyChanged -= OnItemPropertyChanged;
-                //_startAccessory.HtmlText = null;
-                //_endAccessory.HtmlText = null;
                 PutAwaySwipeButtons(false);
             }
-            else if (propertyName == ContentProperty.PropertyName && Content != null)
-                Children.Remove(Content);
-            /*
-			else if (propertyName == StartAccessoryProperty.PropertyName && StartAccessory != null)
-				StartAccessory.PropertyChanged -= OnStartAccessoryPropertyChanged;
-			else if (propertyName == EndAccessoryProperty.PropertyName && EndAccessory != null)
-				EndAccessory.PropertyChanged -= OnEndAccessoryPropertyChanged;
-				*/
+            else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+                Children.Remove(ContentView);
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
             //System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
             base.OnPropertyChanged(propertyName);
-            if (propertyName == ContentProperty.PropertyName && Content != null)
-                Children.Add(Content, 0, 0);
+            if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+                Children.Add(ContentView, 0, 0);
         }
 
         void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("BaseCellView.OnItemPropertyChanging(" + e.PropertyName + ")");
-            if (e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName
-                || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName
-                || e.PropertyName == ItemWrapper.IndexProperty.PropertyName
-               )
+            if (e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName)
                 UpdateBackground();
 
-            if (e.PropertyName == ItemWrapper.IsSelectedProperty.PropertyName)
+            else if (e.PropertyName == ItemWrapper.IndexProperty.PropertyName)
             {
                 UpdateBackground();
-                var selectableContent = Content as IIsSelectedAble;
-                if (selectableContent != null)
-                    selectableContent.IsSelected = ((ItemWrapper)BindingContext).IsSelected;
+                UpdateHeights();
+                UpdateSeparator();
             }
 
-            if (e.PropertyName == ItemWrapper.RowHeightProperty.PropertyName)
-                SetHeights();
+            else if (e.PropertyName == ItemWrapper.IsSelectedProperty.PropertyName)
+            {
+                UpdateBackground();
+                if (ContentView is IIsSelectedAble view)
+                    view.IsSelected = ((ItemWrapper)BindingContext).IsSelected;
+            }
 
+            else if (e.PropertyName == ItemWrapper.RequestedRowHeightProperty.PropertyName)
+                UpdateHeights();
+
+            else if (e.PropertyName == ItemWrapper.SeparatorIsVisibleProperty.PropertyName || e.PropertyName == ItemWrapper.RequestedSeparatorHeightProperty.PropertyName)
+            {
+                UpdateHeights();
+                UpdateSeparator();
+            }
+
+            else if (e.PropertyName == ItemWrapper.SeparatorColorProperty.PropertyName || e.PropertyName == ItemWrapper.SeparatorLeftIndentProperty.PropertyName || e.PropertyName == ItemWrapper.SeparatorRightIndentProperty.PropertyName)
+                UpdateSeparator();
             //System.Diagnostics.Debug.WriteLine("OnItemPropertyChanged");
             //_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
             //UpdateLayout();
@@ -687,40 +797,44 @@ namespace Forms9Patch
 
         void UpdateBackground()
         {
-            var item = BindingContext as ItemWrapper;
-            if (item != null)
+            if (BindingContext is IItemWrapper item)
                 BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
             else
                 BackgroundColor = Color.Transparent;
+
         }
 
-        void SetHeights()
+        
+        void UpdateHeights()
         {
-            var content = Content as ICellHeight;
-            if (content != null)
+            DebugMessage("Enter RenderedRowHeight=["+RenderedRowHeight+"] SeparatorHeight=["+SeparatorHeight+"]");
+            var newHeightRequest = RenderedRowHeight + SeparatorHeight;
+            DebugMessage("newHeightRequest=[" + newHeightRequest + "]");
+            if (newHeightRequest != HeightRequest)
             {
-                if (content.CellHeight > 0)
-                {
-                    HeightRequest = content.CellHeight + 1;
-                    RowDefinitions[0] = new RowDefinition { Height = new GridLength(content.CellHeight, GridUnitType.Absolute) };
-                }
-                else
-                {
-                    var itemWrapper = BindingContext as ItemWrapper;
-                    if (itemWrapper != null)
-                    {
-                        HeightRequest = itemWrapper.RowHeight + 1;
-                        RowDefinitions[0] = new RowDefinition { Height = new GridLength(itemWrapper.RowHeight, GridUnitType.Absolute) };
-                    }
-                    else
-                    {
-                        HeightRequest = -1;
-                        Content.HeightRequest = -1;
-                        RowDefinitions[0] = new RowDefinition { Height = GridLength.Auto };
-                    }
-                }
+                RowDefinitions[0] = new RowDefinition { Height = new GridLength(RenderedRowHeight, GridUnitType.Absolute) };
+                RowDefinitions[1] = new RowDefinition { Height = new GridLength(SeparatorHeight, GridUnitType.Absolute) };
+                DebugMessage("Set HeightRequest");
+                HeightRequest = newHeightRequest;
+                DebugMessage("HeightRequest=[" + HeightRequest + "]");
             }
-            //System.Diagnostics.Debug.WriteLine("HeightRequest = [" + HeightRequest + "]");
+
+            if (BindingContext is IItemWrapper itemWrapper)
+            {
+                DebugMessage("Set itemWrapper.RenderedRowHeight");
+                itemWrapper.RenderedRowHeight = RenderedRowHeight;
+                DebugMessage(" itemWrapper.RenderedRowHeight=[" + itemWrapper.RenderedRowHeight + "]");
+            }
+            DebugMessage("Exit");
+        }
+
+        void UpdateSeparator()
+        {
+            if (BindingContext is IItemWrapper itemWrapper)
+            {
+                _separator.Color = itemWrapper.SeparatorColor;
+                _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
+            }
         }
 
         protected override void LayoutChildren(double x, double y, double width, double height)

@@ -12,7 +12,7 @@ namespace Forms9Patch.Droid
 	{
 		#region ILocation implementation
 
-		public DragEventArgs DragEventArgsForItemAtPoint(ListView listView, Point p) {
+		public CellProximityEventArgs CellProximityEventArgsForItemAtPoint(ListView listView, Point p) {
 			var listViewRenderer = Platform.GetRenderer (listView) as ListViewRenderer;
 			return listViewRenderer?.ItemAtPoint (p);
 		}

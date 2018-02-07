@@ -41,10 +41,11 @@ namespace Forms9Patch
 			_layout.Children.Add(_upperEdge);
 			_layout.Children.Add (_lowerEdge);
 			//SeparatorHeight = 0;
-			Content = _layout;
+			ContentView = _layout;
 			BackgroundColor = Color.Transparent;
 		}
 
+        /*
 		protected override void OnPropertyChanging(string propertyName = null)
 		{
 			base.OnPropertyChanging(propertyName);
@@ -72,6 +73,7 @@ namespace Forms9Patch
 		{
 			_layout.HeightRequest = ((NullItemWrapper)BindingContext).RequestedHeight;
 		}
+        */
 	}
 
 	/*

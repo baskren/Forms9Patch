@@ -125,14 +125,14 @@ namespace Forms9Patch
 
 
         #region Fields
-        internal readonly ListView _listView = new ListView
+        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView
         {
+            /*
             IsGroupingEnabled = false,
-            //SeparatorIsVisible = false,
-            SeparatorVisibility = SeparatorVisibility.None,
+            IsSeparatorVisible = false,
             BackgroundColor = Color.Transparent,
-            HasUnevenRows = false,
             IsScrollListening = true,
+            */
         };
 
         readonly BoxView _upperPadding = new BoxView
@@ -163,6 +163,9 @@ namespace Forms9Patch
             _listView.GroupToggleBehavior = GroupToggleBehavior;
             _listView.BackgroundColor = Color.Transparent;
             _listView.SelectedCellBackgroundColor = Color.Transparent;
+
+            _listView.IsGroupingEnabled = false;
+            _listView.IsSeparatorVisible = false;
 
             _listView.ItemTapped += OnItemTapped;
 
@@ -219,7 +222,7 @@ namespace Forms9Patch
             base.OnPropertyChanged(propertyName);
             if (propertyName == ItemsSourceProperty.PropertyName)
             {
-                _listView.F9PItemsSource = ItemsSource;
+                _listView.ItemsSource = ItemsSource;
                 if (ItemsSource != null)
                     ScrollToIndex(Index);
             }
@@ -255,6 +258,7 @@ namespace Forms9Patch
         /// <param name="force">If set to <c>true</c> scroll to index even if already scrolling.</param>
         public virtual void ScrollToIndex(int index, bool force = false)
         {
+
             //System.Diagnostics.Debug.WriteLine("ScrollToIndex("+index+")");
             if (ItemsSource == null)
                 return;
@@ -303,6 +307,7 @@ namespace Forms9Patch
                     }
                 }
             }
+            
         }
 
         #endregion
@@ -312,13 +317,9 @@ namespace Forms9Patch
         void OnScrolling(object sender, EventArgs e)
         {
             _scrolling = true;
-            var indexPath = ListViewExtensions.IndexPathAtCenter(_listView);
-            if (indexPath != null)
-            {
-                if (indexPath.Item1 != 0)
-                    throw new InvalidDataContractException("SinglePicker should not be grouped");
-                Index = indexPath.Item2;
-            }
+            var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
+            if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
+                Index = deepDataSet.Index[0];
         }
 
         bool _scrollCompleting;

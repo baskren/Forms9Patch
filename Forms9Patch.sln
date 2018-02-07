@@ -83,7 +83,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{1A58427B
 	ProjectSection(SolutionItems) = preProject
 		FormsGestures\FormsGestures.Source\Enums\Direction.cs = FormsGestures\FormsGestures.Source\Enums\Direction.cs
 		FormsGestures\FormsGestures.Source\Enums\DisplayOrientation.cs = FormsGestures\FormsGestures.Source\Enums\DisplayOrientation.cs
-		FormsGestures\FormsGestures.Source\Enums\HoverOverAlignment.cs = FormsGestures\FormsGestures.Source\Enums\HoverOverAlignment.cs
+		FormsGestures\FormsGestures.Source\Enums\Proximity.cs = FormsGestures\FormsGestures.Source\Enums\Proximity.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{9C37E6E4-7B6C-4F3F-80EA-BA6B3D4BA2CC}"
@@ -273,12 +273,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enums", "Enums", "{3A469E3E-5E6B-405D-AC99-52942469E15E}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\AccessoryPosition.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\AccessoryPosition.cs
-		Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\HoverOverAlignment.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\HoverOverAlignment.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\Proximity.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\Enums\Proximity.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventArgs", "EventArgs", "{652A2B41-5864-4ABF-9E87-AFF142E30695}"
 	ProjectSection(SolutionItems) = preProject
-		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\DragEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\DragEventArgs.cs
+		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\CellProximityEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\CellProximityEventArgs.cs
 		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemTappedEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemTappedEventArgs.cs
 		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\ItemWrapperTapEventArgs.cs
 		Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs = Forms9Patch\Forms9Patch.Source\Elements\ListView\EventArgs\SelectedItemChangedEventArgs.cs

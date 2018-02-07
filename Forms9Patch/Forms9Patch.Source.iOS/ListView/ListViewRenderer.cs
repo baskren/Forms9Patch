@@ -19,17 +19,15 @@ namespace Forms9Patch.iOS
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
         {
             base.OnElementChanged(e);
-            var oldElement = e.OldElement as ListView;
-            if (oldElement != null)
+            if (e.OldElement is ListView oldElement)
             {
-                oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
+                //oldElement.RendererFindItemDataUnderRectangle -= FindItemDataUnderRectangle;
                 oldElement.RendererScrollBy -= ScrollBy;
                 oldElement.RendererScrollToPos -= ScrollToItem;
             }
-            var newElement = e.NewElement as ListView;
-            if (newElement != null)
+            if (e.NewElement is ListView newElement)
             {
-                newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
+                //newElement.RendererFindItemDataUnderRectangle += FindItemDataUnderRectangle;
                 newElement.RendererScrollBy += ScrollBy;
                 newElement.RendererScrollToPos += ScrollToItem;
                 if (newElement.IsScrollListening)
@@ -54,6 +52,7 @@ namespace Forms9Patch.iOS
                 Control.Delegate = new ScrollDelegate(Element as Forms9Patch.ListView);  // why does this cause headers to not appear?
         }
 
+        /*
         bool Extended(double delta)
         {
             return MinScroll(delta) || MaxScroll(delta);
@@ -68,6 +67,7 @@ namespace Forms9Patch.iOS
         {
             return (delta > 0 && Control.ContentOffset.Y + delta + Control.Bounds.Height > Control.ContentSize.Height);
         }
+        */
 
         bool ScrollBy(double delta)
         {
@@ -86,7 +86,8 @@ namespace Forms9Patch.iOS
             return true;
         }
 
-        internal DragEventArgs ItemAtPoint(Point p)
+        /*
+        internal CellProximityEventArgs ItemAtPoint(Point p)
         {
             var visibleIndexPath = Control.IndexPathsForVisibleRows;
             var offset = Control.ContentOffset.ToPoint();
@@ -102,7 +103,8 @@ namespace Forms9Patch.iOS
             return null;
         }
 
-        DragEventArgs FindItemDataUnderRectangle(Rectangle rect)
+        /*
+        CellProximityEventArgs FindItemDataUnderRectangle(Rectangle rect)
         {
             // return the best candidate to be replaced item (that is being hovered over by the frame represented by rect)
             double left = Math.Max(rect.Left, Control.Frame.Left);
@@ -120,13 +122,13 @@ namespace Forms9Patch.iOS
                 var cellFrame = Control.RectForRowAtIndexPath(indexPath).ToRectangle();
                 var cellViewFrame = new Rectangle(cellFrame.Location - (Size)offset, cellFrame.Size);
                 //System.Diagnostics.Debug.WriteLine ("ip:" + indexPath + " offset:"+offset  + " cellFrame:" + cellFrame + " viewFrame:"+viewFrame);
-                DragEventArgs result;
+                CellProximityEventArgs result;
                 if (cellViewFrame.Contains(new Point(left, top)))
                 {
                     result = ItemAt(indexPath);
                     if (result != null)
                     {
-                        result.Alignment = HoverOverAlignment.Center;
+                        result.Proximity = Proximity.Aligned;
                         return result;
                     }
                 }
@@ -135,7 +137,7 @@ namespace Forms9Patch.iOS
                     result = ItemAt(indexPath);
                     if (result != null)
                     {
-                        result.Alignment = HoverOverAlignment.After;
+                        result.Proximity = Proximity.After;
                         return result;
                     }
                 }
@@ -144,7 +146,7 @@ namespace Forms9Patch.iOS
                     result = ItemAt(indexPath);
                     if (result != null)
                     {
-                        result.Alignment = HoverOverAlignment.Before;
+                        result.Proximity = Proximity.Before;
                         return result;
                     }
                 }
@@ -153,43 +155,15 @@ namespace Forms9Patch.iOS
             return null;
         }
 
-        DragEventArgs ItemAt(NSIndexPath indexPath)
+        CellProximityEventArgs ItemAt(NSIndexPath indexPath)
         {
-            /*
-			int section = 0;
-			int row = 0;
-			IEnumerable items = Element.ItemsSource;
-			foreach (var item in items) {
-				var group = item as IEnumerable;
-				if (group != null) {
-					if (section == indexPath.Section) {
-						foreach (var groupItem in group) {
-							if (row == indexPath.Row) {
-								return new DragEventArgs { DeepIndex = new []  {section,row}, Item = groupItem as Item };
-							}
-							row++;
-						}
-					}
-					section++;
-				} else if (indexPath.Section > 0) {
-					throw new NotSupportedException ("ListViewRenderer.CellAt: attempt to get cell from group>0 from 1D ItemsSource");
-				} else {
-					if (row == indexPath.Row) {
-						return new DragEventArgs { DeepIndex = new [] {section,row}, Item = item as Item};
-					}
-					row++;
-				}
-			}
-			return null;
-			*/
-
             GroupWrapper group = ((ListView)Element).BaseItemsSource;
             if (group != null)
             {
                 var displayDeepIndex = new[] { indexPath.Section, indexPath.Row };
                 var item = group.ItemAtDeepIndex(displayDeepIndex);
                 var sourceDeepIndex = group.DeepSourceIndexOf(item);
-                return new DragEventArgs { DeepIndex = sourceDeepIndex, Item = item };
+                return new CellProximityEventArgs { DeepIndex = sourceDeepIndex, Item = item };
             }
             return null;
         }
@@ -198,6 +172,7 @@ namespace Forms9Patch.iOS
         {
             return NativeView.ConvertPointToView(new CoreGraphics.CGPoint(p.X, p.Y), null).ToPoint();
         }
+        */
 
         void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
         {

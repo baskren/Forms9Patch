@@ -15,7 +15,7 @@ namespace Forms9Patch
 
 
 		#region Properties
-		/*
+		
 		#region Separator
 		public static readonly BindableProperty SeparatorIsVisibleProperty  = BindableProperty.Create("SeparatorIsVisible",  typeof(bool), typeof(ItemWrapper), true);
 		public bool SeparatorIsVisible {
@@ -40,18 +40,15 @@ namespace Forms9Patch
 		/// <summary>
 		/// The separator height property.
 		/// </summary>
-		public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(double), typeof(ItemWrapper), 1.0);
+		public static readonly BindableProperty RequestedSeparatorHeightProperty = BindableProperty.Create("RequestedSeparatorHeight", typeof(int), typeof(ItemWrapper), 1);
 		/// <summary>
 		/// Gets or sets the height of the separator.
 		/// </summary>
 		/// <value>The height of the separator.</value>
-		public double SeparatorHeight
+		public int RequestedSeparatorHeight
 		{
-			get { return (double)GetValue(SeparatorHeightProperty); }
-			set { 
-				SetValue(SeparatorHeightProperty, value); 
-				//System.Diagnostics.Debug.WriteLine("Item.SeparatorHeight=["+value+"]");
-			}
+			get { return (int)GetValue(RequestedSeparatorHeightProperty); }
+			set {  SetValue(RequestedSeparatorHeightProperty, value); }
 		}
 
 		/// <summary>
@@ -88,7 +85,7 @@ namespace Forms9Patch
 			}
 		}
 		#endregion
-		*/
+		
 
 		#region Background
 		public static readonly BindableProperty CellBackgroundColorProperty  = BindableProperty.Create("CellBackgroundColor",  typeof(Color), typeof(ItemWrapper), Color.Transparent);
@@ -135,28 +132,52 @@ namespace Forms9Patch
 			internal set { SetValue(IndexProperty, value); }
 		}
 
-		public View CellView
+        #region CellView convenience property
+        public View CellView
 		{
-			get { return BaseCellView.Content; }
+			get { return BaseCellView.ContentView; }
 		}
+        #endregion
 
-		public static readonly BindableProperty RowHeightProperty = Xamarin.Forms.ListView.RowHeightProperty;
-		public int RowHeight
+        #region RequestedRowHeight
+        public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create("RequestedRowHeight", typeof(int), typeof(ItemWrapper), 40);
+        public int RequestedRowHeight
 		{
-			get { return (int)GetValue(RowHeightProperty); }
-			set { SetValue(RowHeightProperty, value); }
+			get { return (int)GetValue(RequestedRowHeightProperty); }
+			set { SetValue(RequestedRowHeightProperty, value); }
 		}
+        #endregion
 
-		public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
+
+        #region RenderedRowHeight property
+        /// <summary>
+        /// backing store for RenderedRowHeight property
+        /// </summary>
+        public static readonly BindableProperty RenderedRowHeightProperty = BindableProperty.Create("RenderedRowHeight", typeof(int), typeof(ItemWrapper), -1);
+        /// <summary>
+        /// Gets/Sets the RenderedRowHeight property
+        /// </summary>
+        public int RenderedRowHeight
+        {
+            get { return (int)GetValue(RenderedRowHeightProperty); }
+            set { SetValue(RenderedRowHeightProperty, value); }
+        }
+        #endregion RenderedRowHeight property
+
+
+
+        #region Parent property
+        public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
 		public GroupWrapper Parent
 		{
 			get { return (GroupWrapper)GetValue(ParentProperty); }
 			set { SetValue(ParentProperty, value); }
 		}
+        #endregion
 
 
 
-		/*
+        /*
 		public static readonly BindableProperty HasUnevenRowsProperty = Xamarin.Forms.ListView.HasUnevenRowsProperty;
 		public bool HasUnevenRows
 		{
@@ -164,12 +185,12 @@ namespace Forms9Patch
 			set { SetValue(HasUnevenRowsProperty, value); }
 		}
 */
-		#endregion
+        #endregion
 
 
-		#region Events
-		// used by BaseCellView to communicate touch events to ListView via Group.
-		public event EventHandler<ItemWrapperTapEventArgs> Tapped;
+        #region Events
+        // used by BaseCellView to communicate touch events to ListView via Group.
+        public event EventHandler<ItemWrapperTapEventArgs> Tapped;
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressing;
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressed;
 		public event EventHandler<SwipeMenuItemTappedArgs> SwipeMenuItemTapped;
@@ -211,13 +232,13 @@ namespace Forms9Patch
 		#region Convenience
 		internal void ShallowCopy(ItemWrapper other)
 		{
-			/*
+			
 			SeparatorIsVisible = other.SeparatorIsVisible;
 			SeparatorColor = other.SeparatorColor;
-			SeparatorHeight = other.SeparatorHeight;
+			RequestedSeparatorHeight = other.RequestedSeparatorHeight;
 			SeparatorLeftIndent = other.SeparatorLeftIndent;
 			SeparatorRightIndent = other.SeparatorRightIndent;
-			*/
+			
 			CellBackgroundColor = other.CellBackgroundColor;
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 
@@ -228,6 +249,33 @@ namespace Forms9Patch
 		{
 			return string.Format("{0}[{1}]",GetType().Name,ID);
 		}
+
+        public bool IsLastChild
+        {
+            get
+            {
+                if (Parent is GroupWrapper parent)
+                {
+                    return Index == Parent.Count - 1;
+                }
+                return false;
+            }
+        }
+
+        public bool ShouldRenderSeparator => SeparatorIsVisible && !IsLastChild;
+
+        public int SeparatorHeight => ShouldRenderSeparator ? RequestedSeparatorHeight : 0;
+
+        public int BestGuessItemRowHeight()
+        {
+            if (RenderedRowHeight >= 0)
+                return RenderedRowHeight;
+            if (RequestedRowHeight >= 0)
+                return RequestedRowHeight;
+            if (Parent is GroupWrapper parent && parent.RequestedRowHeight >= 0)
+                return parent.RequestedRowHeight;
+            return 40;
+        }
 		#endregion
 
 
@@ -242,28 +290,38 @@ namespace Forms9Patch
 
 		#region Property change management
 
+        internal void SignalPropertyChanged(string propertyName=null)
+        {
+            OnPropertyChanged(propertyName);
+        }
+
 		protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == IsSelectedProperty.PropertyName)
 			{
-				var isSelectedSource = Source as IIsSelectedAble;
-				if (isSelectedSource != null)
-					isSelectedSource.IsSelected = IsSelected;
-			}
+                if (Source is IIsSelectedAble isSelectedSource)
+                    isSelectedSource.IsSelected = IsSelected;
+            }
 		}
 
 		protected override void OnBindingContextChanged()
 		{
 			base.OnBindingContextChanged();
-			var iItemWrapper = BindingContext as IItemWrapper;
-			if (iItemWrapper != null)
-			{
-				CellBackgroundColor = iItemWrapper.CellBackgroundColor;
-				SelectedCellBackgroundColor = iItemWrapper.SelectedCellBackgroundColor;
-				RowHeight = iItemWrapper.RowHeight;
-			}
-		}
+            if (BindingContext is IItemWrapper iItemWrapper)
+            {
+                CellBackgroundColor = iItemWrapper.CellBackgroundColor;
+                SelectedCellBackgroundColor = iItemWrapper.SelectedCellBackgroundColor;
+                RequestedRowHeight = iItemWrapper.RequestedRowHeight;
+
+                SeparatorIsVisible = iItemWrapper.SeparatorIsVisible;
+                SeparatorColor = iItemWrapper.SeparatorColor;
+                RequestedSeparatorHeight = iItemWrapper.RequestedSeparatorHeight;
+                SeparatorLeftIndent = iItemWrapper.SeparatorLeftIndent;
+                SeparatorRightIndent = iItemWrapper.SeparatorRightIndent;
+
+            }
+        }
 		#endregion
 	}
 

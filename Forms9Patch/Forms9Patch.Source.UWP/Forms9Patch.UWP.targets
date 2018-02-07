@@ -41,11 +41,6 @@
       <Link>Extensions\XamarinSpanExtentions.cs</Link>
     </Compile>
 
-    <!-- LISTVIEW -->
-    <Compile Include="..\Forms9Patch.Source.UWP\ListView\ListViewRenderer.cs">
-      <Link>ListView\ListViewRenderer.cs</Link>
-    </Compile>
-
     <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.UWP\Models\MetaFont.cs">
       <Link>Models\MetaFont.cs</Link>
@@ -60,6 +55,9 @@
     <!-- RENDERERS -->
     <Compile Include="..\Forms9Patch.Source.UWP\Renderers\LabeLRenderer.cs">
       <Link>Renderers\LabeLRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Renderers\EnhancedListViewRenderer.cs">
+      <Link>Renderers\EnhancedListViewRenderer.cs</Link>
     </Compile>
 
     <!-- SERVICES -->

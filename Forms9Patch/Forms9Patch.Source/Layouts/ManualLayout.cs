@@ -237,7 +237,7 @@ namespace Forms9Patch
         /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.
         /// </summary>
         /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.</returns>
-        public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
+        public virtual string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.ManualLayout"/>.
