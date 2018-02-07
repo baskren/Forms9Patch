@@ -307,7 +307,7 @@ namespace Forms9Patch
                     }
                 }
             }
-            
+
         }
 
         #endregion
@@ -318,6 +318,9 @@ namespace Forms9Patch
         {
             _scrolling = true;
             var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
+
+            //System.Diagnostics.Debug.WriteLine("deepDataSet=[" + deepDataSet + "]");
+
             if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
                 Index = deepDataSet.Index[0];
         }

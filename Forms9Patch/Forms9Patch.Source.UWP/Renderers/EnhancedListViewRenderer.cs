@@ -45,7 +45,7 @@ namespace Forms9Patch.UWP
                 SetCellStyle();
                 SetViewChangedEvent();
 
-                
+
             }
         }
 
@@ -66,7 +66,7 @@ namespace Forms9Patch.UWP
                 return;
 
             listView.ShowsScrollingPlaceholders = true;
-            
+
             var style = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
             listView.ItemContainerStyle = style;
 
@@ -87,19 +87,19 @@ namespace Forms9Patch.UWP
         {
             if (!_viewChangeEventSet)
             {
-                Device.StartTimer(TimeSpan.FromMilliseconds(100),()=>
-                {
-                    if (Control is Windows.UI.Xaml.Controls.ListView listView)
-                    {
-                        _scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
-                        if (_scrollViewer != null)
-                        {
-                            _scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
-                            return false;
-                        }
-                    }
-                    return true;
-                });
+                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                 {
+                     if (Control is Windows.UI.Xaml.Controls.ListView listView)
+                     {
+                         _scrollViewer = listView.GetChild<Windows.UI.Xaml.Controls.ScrollViewer>();
+                         if (_scrollViewer != null)
+                         {
+                             _scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
+                             return false;
+                         }
+                     }
+                     return true;
+                 });
                 _viewChangeEventSet = true;
             }
         }
@@ -127,37 +127,17 @@ namespace Forms9Patch.UWP
         bool ScrollBy(double delta, bool animated)
         {
             if (_scrollViewer != null)
-                    return _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null, !animated);
+                return _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null, !animated);
             return false;
         }
 
         bool ScrollTo(double offset, bool animated)
         {
-            if (_scrollViewer !=null)
+            if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, offset, null, !animated);
             return false;
         }
 
-        /*
-        void ScrollToItem(object reqItem, object reqGroup, ScrollToPosition scrollToPosition, bool animated)
-        {
-                if (_scrollViewer != null)
-                {
-                    var targetPosition = ((Forms9Patch.EnhancedListView)Element).OffsetFromTop(reqItem);
-                    if (scrollToPosition == ScrollToPosition.Center)
-                        targetPosition += ((Forms9Patch.EnhancedListView)Element).CellHeightForItem(reqItem)/2;
-                    else if (scrollToPosition == ScrollToPosition.End)
-                        targetPosition += ((Forms9Patch.EnhancedListView)Element).CellHeightForItem(reqItem);
-
-                    if (scrollToPosition == ScrollToPosition.Center)
-                        targetPosition -= _scrollViewer.ViewportHeight / 2;
-                    else if (scrollToPosition == ScrollToPosition.End)
-                        targetPosition -= _scrollViewer.ViewportHeight;
-
-                    _scrollViewer.ChangeView(null, targetPosition, null, !animated);
-                }
-        }
-        */
         #endregion
 
 

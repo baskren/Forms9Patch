@@ -31,14 +31,6 @@
       <Link>Extensions\UITextViewExtensions.cs</Link>
     </Compile>
 
-    <!-- LISTVIEW -->
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\BaseCellViewRenderer.cs">
-      <Link>ListView\Renderers\BaseCellViewRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\ListView\ListViewRenderer.cs">
-      <Link>ListView\Renderers\ListViewRenderer.cs</Link>
-    </Compile>
-
     <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
@@ -51,6 +43,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs">
       <Link>Renderers\LabelRenderer.cs</Link>
     </Compile>
+    <!--Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
+      <Link>Renderers\EnhancedListViewRenderer.cs</Link>
+    </Compile-->
 
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
