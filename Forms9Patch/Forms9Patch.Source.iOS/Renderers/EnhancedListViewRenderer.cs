@@ -123,7 +123,8 @@ namespace Forms9Patch.iOS
         public override void DraggingStarted(UIScrollView scrollView)
         {
             //System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingStarted");
-            Element?.OnScrolling(this, EventArgs.Empty);
+            if (Element?.ItemsSource != null)
+                Element?.OnScrolling(this, EventArgs.Empty);
             _scrolling = true;
             Source.DraggingStarted(scrollView);
         }
@@ -135,7 +136,8 @@ namespace Forms9Patch.iOS
             if (!willDecelerate)
             {
                 _scrolling = false;
-                Element?.OnScrolled(this, EventArgs.Empty);
+                if (Element?.ItemsSource != null)
+                    Element?.OnScrolled(this, EventArgs.Empty);
             }
             Source.DraggingEnded(scrollView, willDecelerate);
         }
@@ -146,7 +148,8 @@ namespace Forms9Patch.iOS
             Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
             {
                 _scrolling = false;
-                Element?.OnScrolled(this, EventArgs.Empty);
+                if (Element?.ItemsSource != null)
+                    Element?.OnScrolled(this, EventArgs.Empty);
                 return false;
             });
         }
@@ -155,7 +158,7 @@ namespace Forms9Patch.iOS
         public override void Scrolled(UIScrollView scrollView)
         {
             //System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
-            if (_scrolling)
+            if (_scrolling && Element?.ItemsSource != null)
                 Element?.OnScrolling(this, EventArgs.Empty);
             Source.Scrolled(scrollView);
         }

@@ -12,9 +12,19 @@ namespace Forms9Patch
     /// <summary>
     /// FormsDragNDropListView List view.
     /// </summary>
-    public class ListView : Forms9Patch.ManualLayout, IElement
+    public class ListView : Forms9Patch.Frame, IElement //  Forms9Patch.ManualLayout, IElement
     {
         #region Properties
+
+        [Obsolete("Invalid property", true)]
+        public static new readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ListView), default(View));
+        [Obsolete("Invalid property", true)]
+        public new View Content
+        {
+            get { return (View)GetValue(ContentProperty); }
+            set { SetValue(ContentProperty, value); }
+        }
+
 
         #region Cell Decoration
 
@@ -168,7 +178,8 @@ namespace Forms9Patch
         #endregion row selection properties
 
         #region Drag/Drop properties
-        /// The editable property.
+        /// <summary>
+        /// The editable property backing store.
         /// </summary>
         public static readonly BindableProperty EditableProperty = BindableProperty.Create("Editable", typeof(bool), typeof(ListView), false);
         /// <summary>
@@ -207,8 +218,9 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty HeaderTemplateProperty = BindableProperty.Create("HeaderTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), default(Xamarin.Forms.DataTemplate));
         /// <summary>
-        /// Gets/Sets the HeaderTemplate property
-        /// </suXamarin.Forms.DataTemplatery>
+        /// Gets or sets the header template.
+        /// </summary>
+        /// <value>The header template.</value>
         public Xamarin.Forms.DataTemplate HeaderTemplate
         {
             get { return (Xamarin.Forms.DataTemplate)GetValue(HeaderTemplateProperty); }
@@ -281,7 +293,7 @@ namespace Forms9Patch
             set { SetValue(RowHeightProperty, value); }
         }
         #endregion RowHeight property
-        
+
 
         #endregion
 
@@ -534,6 +546,9 @@ namespace Forms9Patch
 
         void Init()
         {
+            Padding = 0;
+            Margin = 0;
+
             _listView.HasUnevenRows = true;
             _listView.ItemAppearing += OnItemAppearing;
             _listView.ItemDisappearing += OnItemDisappearing;
@@ -557,29 +572,22 @@ namespace Forms9Patch
             VerticalOptions = LayoutOptions.FillAndExpand;
             IgnoreChildren = false;
 
-            Children.Add(_listView);
+            //Children.Add(_listView);
+            base.Content = _listView;
         }
 
-        public ListView() : base()
+        public ListView()
         {
             _listView = new EnhancedListView();
             Init();
         }
 
-        public ListView(ListViewCachingStrategy cachingStrategy) : base()
+        public ListView(ListViewCachingStrategy cachingStrategy)
         {
             _listView = new EnhancedListView(cachingStrategy);
             Init();
         }
 
-
-        /// <summary>
-        /// Description this instance.
-        /// </summary>
-        public override string Description()
-        {
-            return "ListView[" + InstanceId + "]";
-        }
         #endregion
 
 
@@ -657,8 +665,8 @@ namespace Forms9Patch
 
             // Drag/Drop properties (Editable) are managed privately 
 
-            if (_listView!=null)
-            { 
+            if (_listView != null)
+            {
 
                 #region Xamarin.Forms.ListView analogs
 
@@ -679,7 +687,7 @@ namespace Forms9Patch
                 else if (propertyName == RowHeightProperty.PropertyName)
                     // note that BaseItemsSource.RowHeight is set in the above BaseItemsSource!=null section
                     _listView.RowHeight = RowHeight;
-                
+
 
                 // HasUnevenRows ... we are assuming this is always the case
                 #endregion
@@ -834,14 +842,14 @@ namespace Forms9Patch
                 var result = new List<int[]>();
                 if (_listView.ItemsSource is GroupWrapper itemsSource)
                 {
-                    for (int i = 0; i <itemsSource.Count; i++)
+                    for (int i = 0; i < itemsSource.Count; i++)
                     {
                         var itemWrapper = itemsSource[i];
                         if (_visibleItemWrappers.Contains(itemWrapper))
                             result.Add(new int[] { i });
                         if (itemWrapper is GroupWrapper gr)
                         {
-                            for (int j=0; j<gr.Count; j++)
+                            for (int j = 0; j < gr.Count; j++)
                             {
                                 var subItemWrapper = gr[j];
                                 if (_visibleItemWrappers.Contains(subItemWrapper))
@@ -864,7 +872,7 @@ namespace Forms9Patch
                 return result;
             }
         }
-        
+
         #endregion
 
 
@@ -1132,7 +1140,7 @@ namespace Forms9Patch
 
 
         internal void OnScrolling(object sender, EventArgs e) => Scrolling?.Invoke(this, EventArgs.Empty);
-        
+
         internal void OnScrolled(object sender, EventArgs e) => Scrolled?.Invoke(this, EventArgs.Empty);
 
         public bool IsScrollEnabled
@@ -1142,9 +1150,9 @@ namespace Forms9Patch
         }
 
         public double ScrollOffset => _listView.ScrollOffset;
-        
-        public bool ScrollTo(double offset, bool animiated=true) =>_listView.ScrollTo(offset, animiated);
-        
+
+        public bool ScrollTo(double offset, bool animiated = true) => _listView.ScrollTo(offset, animiated);
+
         internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled", typeof(bool), typeof(ListView), true);
         internal bool ScrollEnabled
         {
@@ -1157,7 +1165,7 @@ namespace Forms9Patch
         /// </summary>
         /// <returns><c>true</c>, if by was scrolled, <c>false</c> otherwise.</returns>
         /// <param name="delta">Delta.</param>
-        public bool ScrollBy(double delta, bool animated=true) => _listView.ScrollBy(delta, animated);
+        public bool ScrollBy(double delta, bool animated = true) => _listView.ScrollBy(delta, animated);
 
 
         int _scrollToInvocations;
@@ -1187,7 +1195,7 @@ namespace Forms9Patch
         /// <param name="animated"></param>
         /// <returns></returns>
         public bool ScrollTo(int[] index, ScrollToPosition position, bool animated = true) => ScrollTo(BaseItemsSource.TwoDeepDataSet(index), position, animated);
-        
+
 
         bool ScrollTo(DeepDataSet dataSet, ScrollToPosition position, bool animated = true)
         {
@@ -1240,7 +1248,7 @@ namespace Forms9Patch
             if (p.Y < Bounds.Top || p.Y > Bounds.Bottom)
                 return null;
             var offset = _listView.ScrollOffset - _listView.HeaderHeight + p.Y;
-            var result = BaseItemsSource.TwoDeepDataSetForOffset(offset);
+            var result = BaseItemsSource?.TwoDeepDataSetForOffset(offset);
             return result;
         }
 

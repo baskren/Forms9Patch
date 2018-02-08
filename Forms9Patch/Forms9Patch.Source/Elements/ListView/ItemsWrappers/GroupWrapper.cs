@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 
 namespace Forms9Patch
 {
-	class GroupWrapper : ItemWrapper<object>, IList<ItemWrapper>, ICollection<ItemWrapper>, IEnumerable<ItemWrapper>, IEnumerable, IList, ICollection, IReadOnlyList<ItemWrapper>, IReadOnlyCollection<ItemWrapper>, INotifyCollectionChanged
+    class GroupWrapper : ItemWrapper<object>, IList<ItemWrapper>, ICollection<ItemWrapper>, IEnumerable<ItemWrapper>, IEnumerable, IList, ICollection, IReadOnlyList<ItemWrapper>, IReadOnlyCollection<ItemWrapper>, INotifyCollectionChanged
     {
 
         #region Properties
@@ -107,6 +107,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Property Change Management
 
         protected override void OnPropertyChanging(string propertyName = null)
@@ -115,8 +116,7 @@ namespace Forms9Patch
             if (propertyName == SourceProperty.PropertyName && Source != null)
             {
                 SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? Source as IEnumerable : Source.GetPropertyValue(childrenPropertyName) as IEnumerable;
-                var observableCollection = SourceChildren as INotifyCollectionChanged;
-                if (observableCollection != null)
+                if (SourceChildren is INotifyCollectionChanged observableCollection)
                     observableCollection.CollectionChanged -= OnSourceCollectionChanged;
             }
         }
@@ -139,8 +139,7 @@ namespace Forms9Patch
                     return;
                 foreach (var obj in SourceChildren)
                     AddSourceObject(obj);
-                var observableCollection = SourceChildren as INotifyCollectionChanged;
-                if (observableCollection != null)
+                if (SourceChildren is INotifyCollectionChanged observableCollection)
                     observableCollection.CollectionChanged += OnSourceCollectionChanged;
             }
             else if (propertyName == SourceSubPropertyMapProperty.PropertyName)
@@ -196,41 +195,46 @@ namespace Forms9Patch
 
         #region Source to ItemWrapper coupling
         bool _notifySourceOfChanges;
-		public bool NotifySourceOfChanges {
-			get => _notifySourceOfChanges;
-			set {
-				foreach (var itemWrapper in this) {
+        public bool NotifySourceOfChanges
+        {
+            get => _notifySourceOfChanges;
+            set
+            {
+                foreach (var itemWrapper in this)
+                {
                     if (itemWrapper is GroupWrapper groupWrapper)
                         groupWrapper.NotifySourceOfChanges = value;
                 }
-				_notifySourceOfChanges = value;
-			}
-		}
+                _notifySourceOfChanges = value;
+            }
+        }
 
-		public bool IgnoreSourceChanges {
-			get;
-			set;
-		}
+        public bool IgnoreSourceChanges
+        {
+            get;
+            set;
+        }
 
-		/// <summary>
-		/// The visibility test property backing store.
-		/// </summary>
-		public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object,bool>), typeof(GroupWrapper), default(Func<object,bool>));
-		/// <summary>
-		/// Gets or sets the test used to determine if a source item or group will be visible.
-		/// </summary>
-		/// <value>The visibility test.</value>
-		public Func<object,bool> VisibilityTest
-		{
-			get { return (Func<object,bool>)GetValue(VisibilityTestProperty); }
-			set { SetValue(VisibilityTestProperty, value); }
-		}
+        /// <summary>
+        /// The visibility test property backing store.
+        /// </summary>
+        public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object, bool>), typeof(GroupWrapper), default(Func<object, bool>));
+        /// <summary>
+        /// Gets or sets the test used to determine if a source item or group will be visible.
+        /// </summary>
+        /// <value>The visibility test.</value>
+        public Func<object, bool> VisibilityTest
+        {
+            get { return (Func<object, bool>)GetValue(VisibilityTestProperty); }
+            set { SetValue(VisibilityTestProperty, value); }
+        }
 
 
-		// note: Even though a items in a group source may not be unique to  (ex: Source= { a, a, "pizza", null, null }), a GroupWrapper's ItemWrappers are because they are each created from a new instance of ItemWrapper.
+        // note: Even though a items in a group source may not be unique to  (ex: Source= { a, a, "pizza", null, null }), a GroupWrapper's ItemWrappers are because they are each created from a new instance of ItemWrapper.
 
-		int SourceCount() {
-			int sourceCount = -1;
+        int SourceCount()
+        {
+            int sourceCount = -1;
             if (SourceChildren is ICollection<IEnumerable> iCollectionIenumerble)
                 sourceCount = iCollectionIenumerble.Count;
             else
@@ -245,13 +249,14 @@ namespace Forms9Patch
                 }
             }
             return sourceCount;
-		}
+        }
 
-		int SourceIndexOf(ItemWrapper itemWrapper) {
-			if (SourceChildren == null)
-				return -1;
-			if (!Contains (itemWrapper))
-				return -1;
+        int SourceIndexOf(ItemWrapper itemWrapper)
+        {
+            if (SourceChildren == null)
+                return -1;
+            if (!Contains(itemWrapper))
+                return -1;
 
             if (SourceChildren is IList<IEnumerable> iListiEnumerblle)
                 return iListiEnumerblle.IndexOf((IEnumerable)itemWrapper.Source);
@@ -259,17 +264,19 @@ namespace Forms9Patch
                 return iList.IndexOf(itemWrapper.Source);
 
             int index = 0;
-			foreach (var obj in SourceChildren) {
-				if (obj == itemWrapper.Source)
-					return index;
-				index++;
-			}
-			return -1;
-		}
+            foreach (var obj in SourceChildren)
+            {
+                if (obj == itemWrapper.Source)
+                    return index;
+                index++;
+            }
+            return -1;
+        }
 
-		void SourceInsert(ItemWrapper itemWrapper) {
-			if (SourceChildren == null)
-				throw new MissingMemberException ("Cannot SourceInsert a source item into a null SourceChildren");
+        void SourceInsert(ItemWrapper itemWrapper)
+        {
+            if (SourceChildren == null)
+                throw new MissingMemberException("Cannot SourceInsert a source item into a null SourceChildren");
             if (SourceChildren is IList<IEnumerable> iListIEnumerable)
             {
                 var sourceIndex = iListIEnumerable.IndexOf((IEnumerable)itemWrapper.Source);
@@ -291,10 +298,11 @@ namespace Forms9Patch
             }
         }
 
-		void SourceAdd(ItemWrapper itemWrapper) {
-			//System.Diagnostics.Debug.WriteLine ("[" + this + "].MateAdd(" + itemWrapper + ")");
-			if (SourceChildren == null)
-				throw new MissingMemberException ("Cannot SourceAdd a source item into a null SourceChildren");
+        void SourceAdd(ItemWrapper itemWrapper)
+        {
+            //System.Diagnostics.Debug.WriteLine ("[" + this + "].MateAdd(" + itemWrapper + ")");
+            if (SourceChildren == null)
+                throw new MissingMemberException("Cannot SourceAdd a source item into a null SourceChildren");
             if (SourceChildren is ICollection<IEnumerable> iCollectionIEnumerable)
             {
                 IgnoreSourceChanges = true;
@@ -310,10 +318,11 @@ namespace Forms9Patch
             }
         }
 
-		void SourceRemove(ItemWrapper itemWrapper) {
-			//System.Diagnostics.Debug.WriteLine ("[" + this + "].MateRemove(" + itemWrapper + ")");
-			if (SourceChildren == null)
-				throw new MissingMemberException ("Cannot SourceRemove a source item from a null SourceChildren");
+        void SourceRemove(ItemWrapper itemWrapper)
+        {
+            //System.Diagnostics.Debug.WriteLine ("[" + this + "].MateRemove(" + itemWrapper + ")");
+            if (SourceChildren == null)
+                throw new MissingMemberException("Cannot SourceRemove a source item from a null SourceChildren");
             if (SourceChildren is ICollection<IEnumerable> iCollectionIEnumerable)
             {
                 IgnoreSourceChanges = true;
@@ -327,67 +336,70 @@ namespace Forms9Patch
                 IgnoreSourceChanges = false;
             }
         }
-		#endregion
+        #endregion
 
 
-		#region add/remove common actions
-		void CommonNew(ItemWrapper itemWrapper)
-		{
-			if (itemWrapper == null)
-				return;
-			SubscribeToItemWrapperSourcePropertyChanged(itemWrapper);
-			itemWrapper.PropertyChanged += OnItemWrapperPropertyChanged;
-			itemWrapper.PropertyChanging += OnItemWrapperPropertyChanging;
-			itemWrapper.Tapped += OnTapped;
-			itemWrapper.LongPressed += OnLongPressed;
-			itemWrapper.LongPressing += OnLongPressing;
-			itemWrapper.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
-			itemWrapper.BindingContext = this;
-			itemWrapper.Parent = this;
-			//if (itemWrapper.GetType()==typeof(GroupWrapper))
+        #region add/remove common actions
+        void CommonNew(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper == null)
+                return;
+            SubscribeToItemWrapperSourcePropertyChanged(itemWrapper);
+            itemWrapper.PropertyChanged += OnItemWrapperPropertyChanged;
+            itemWrapper.PropertyChanging += OnItemWrapperPropertyChanging;
+            itemWrapper.Tapped += OnTapped;
+            itemWrapper.LongPressed += OnLongPressed;
+            itemWrapper.LongPressing += OnLongPressing;
+            itemWrapper.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
+            itemWrapper.BindingContext = this;
+            itemWrapper.Parent = this;
+            //if (itemWrapper.GetType()==typeof(GroupWrapper))
             if (itemWrapper is GroupWrapper groupWrapper)
-			{
-				//var groupWrapper = itemWrapper as GroupWrapper;
-				groupWrapper.VisibilityTest = groupWrapper.VisibilityTest ?? VisibilityTest;
-				groupWrapper.SubGroupType = groupWrapper.SubGroupType ?? SubGroupType;
-			}
-		}
+            {
+                //var groupWrapper = itemWrapper as GroupWrapper;
+                groupWrapper.VisibilityTest = groupWrapper.VisibilityTest ?? VisibilityTest;
+                groupWrapper.SubGroupType = groupWrapper.SubGroupType ?? SubGroupType;
+            }
+        }
 
-		void CommonAdd(ItemWrapper itemWrapper) {
-			CommonNew(itemWrapper);
-			if (NotifySourceOfChanges) 
-				SourceAdd (itemWrapper);
-		}
+        void CommonAdd(ItemWrapper itemWrapper)
+        {
+            CommonNew(itemWrapper);
+            if (NotifySourceOfChanges)
+                SourceAdd(itemWrapper);
+        }
 
-		void CommonInsert(ItemWrapper itemWrapper) {
-			CommonNew(itemWrapper);
-			if (NotifySourceOfChanges) 
-				SourceInsert (itemWrapper);
-		}
+        void CommonInsert(ItemWrapper itemWrapper)
+        {
+            CommonNew(itemWrapper);
+            if (NotifySourceOfChanges)
+                SourceInsert(itemWrapper);
+        }
 
-		void CommonRemove(ItemWrapper itemWrapper) {
-			if (itemWrapper == null)
-				return;
-			UnsubscribeToItemWrapperSourcePropertyChanged(itemWrapper);
-			if (NotifySourceOfChanges) 
-				SourceRemove (itemWrapper);
-			itemWrapper.PropertyChanged -= OnItemWrapperPropertyChanged;
-			itemWrapper.PropertyChanging -= OnItemWrapperPropertyChanging;
-			itemWrapper.Tapped -= OnTapped;
-			itemWrapper.LongPressed -= OnLongPressed;
-			itemWrapper.LongPressing -= OnLongPressing;
-			itemWrapper.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
-			itemWrapper.BindingContext = null;
-			itemWrapper.Parent = null;
-		}
-
-
-		#endregion
-
+        void CommonRemove(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper == null)
+                return;
+            UnsubscribeToItemWrapperSourcePropertyChanged(itemWrapper);
+            if (NotifySourceOfChanges)
+                SourceRemove(itemWrapper);
+            itemWrapper.PropertyChanged -= OnItemWrapperPropertyChanged;
+            itemWrapper.PropertyChanging -= OnItemWrapperPropertyChanging;
+            itemWrapper.Tapped -= OnTapped;
+            itemWrapper.LongPressed -= OnLongPressed;
+            itemWrapper.LongPressing -= OnLongPressing;
+            itemWrapper.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
+            itemWrapper.BindingContext = null;
+            itemWrapper.Parent = null;
+        }
 
 
-		void Reindex(int index=0)
-		{
+        #endregion
+
+
+
+        void Reindex(int index = 0)
+        {
             for (int i = index; i < _itemWrappers.Count; i++)
             {
                 _itemWrappers[i].Index = i;
@@ -398,136 +410,146 @@ namespace Forms9Patch
 
 
 
-		#region IList<T> implementation
-		public int IndexOf (ItemWrapper itemWrapper) {
-			// need to return -1 if itemWrapper is not in this group to communicate to DeepIndexOf to begin searching subgroups
-			return _itemWrappers.IndexOf(itemWrapper);
-		}
+        #region IList<T> implementation
+        public int IndexOf(ItemWrapper itemWrapper)
+        {
+            // need to return -1 if itemWrapper is not in this group to communicate to DeepIndexOf to begin searching subgroups
+            return _itemWrappers.IndexOf(itemWrapper);
+        }
 
-		public void Insert (int index, ItemWrapper itemWrapper) { 
-			if (itemWrapper == null)
-				return;
-			if (Contains (itemWrapper))
-				throw new NotSupportedException ();
-			_itemWrappers.Insert (index, itemWrapper);
-			Reindex(index);
-			CommonInsert (itemWrapper);
-		}
+        public void Insert(int index, ItemWrapper itemWrapper)
+        {
+            if (itemWrapper == null)
+                return;
+            if (Contains(itemWrapper))
+                throw new NotSupportedException();
+            _itemWrappers.Insert(index, itemWrapper);
+            Reindex(index);
+            CommonInsert(itemWrapper);
+        }
 
-		public void RemoveAt (int index) {
-			var itemWrapper = _itemWrappers[index];
-			CommonRemove (_itemWrappers[index]);
-			itemWrapper.Index = -1;
-			_itemWrappers.RemoveAt (index);
-			Reindex(index);
-		}
+        public void RemoveAt(int index)
+        {
+            var itemWrapper = _itemWrappers[index];
+            CommonRemove(_itemWrappers[index]);
+            itemWrapper.Index = -1;
+            _itemWrappers.RemoveAt(index);
+            Reindex(index);
+        }
 
-		public ItemWrapper this [int index] {
-			get {
-				if (index < 0 || index > _itemWrappers.Count-1)
-					return null;
-				return _itemWrappers[index]; 
-			}
-			set { 
-				if (DeepContains (value) || index < 0 || index > Count)
-					// will this create problems for move/swap operations?  I think so!  
-					throw new NotSupportedException ();
-				if (index < Count)
-				{
-					_itemWrappers[index].Index = -1;
-					CommonRemove(_itemWrappers[index]);
-				}
-				//System.Diagnostics.Debug.WriteLine ("\t\tsetting _item start");
-				_itemWrappers[index] = value;
-				_itemWrappers[index].Index = index;
-				//System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
-				CommonAdd (value);
-			}
-		}
-		#endregion
+        public ItemWrapper this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > _itemWrappers.Count - 1)
+                    return null;
+                return _itemWrappers[index];
+            }
+            set
+            {
+                if (DeepContains(value) || index < 0 || index > Count)
+                    // will this create problems for move/swap operations?  I think so!  
+                    throw new NotSupportedException();
+                if (index < Count)
+                {
+                    _itemWrappers[index].Index = -1;
+                    CommonRemove(_itemWrappers[index]);
+                }
+                //System.Diagnostics.Debug.WriteLine ("\t\tsetting _item start");
+                _itemWrappers[index] = value;
+                _itemWrappers[index].Index = index;
+                //System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
+                CommonAdd(value);
+            }
+        }
+        #endregion
 
-        
-		#region Source object coupling
-		public GroupContentType ContentType { get; set; }
 
-		internal enum GroupContentType {
-			Unknown,
-			Lists,
-			Objects
-		}
+        #region Source object coupling
+        public GroupContentType ContentType { get; set; }
 
-		void VerifyContentType(GroupContentType contentType) {
-			if (ContentType == GroupContentType.Unknown)
-				ContentType = contentType;
-			if (ContentType != contentType)
-				throw new InvalidCastException ("Cannot group IEnumerable with non-IEnumerable objects");
-		}
+        internal enum GroupContentType
+        {
+            Unknown,
+            Lists,
+            Objects
+        }
 
-		ItemWrapper CreateItemWrapper(object sourceObject) {
+        void VerifyContentType(GroupContentType contentType)
+        {
+            if (ContentType == GroupContentType.Unknown)
+                ContentType = contentType;
 
-			string propertyName=null;
-			List<string> subgroupPropertyMap;
-			if (_subPropertyMap != null && _subPropertyMap.Count > 0) {
-				subgroupPropertyMap = new List<string> (_subPropertyMap);
-				subgroupPropertyMap [0] = null;
-				propertyName = _subPropertyMap [0];
-			}
+            //if (ContentType != contentType)
+            //    throw new InvalidCastException("Cannot group IEnumerable with non-IEnumerable objects");
+        }
 
-			var children = string.IsNullOrWhiteSpace (propertyName) ? sourceObject : sourceObject.GetPropertyValue (propertyName);
-			if (!(children is string))
-			{
-				var iEnumerable = children as IEnumerable;
-				if (iEnumerable != null)
-				{
-					if (SubGroupType == null || children.GetType() == SubGroupType)
-					{
-						// groups
-						VerifyContentType(GroupContentType.Lists);
-						var group = new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest, SubGroupType);
-						return group;
-					}
-				}
-			}
-			// items
-			VerifyContentType(GroupContentType.Objects);
-			ItemWrapper itemWrapper;
-			if (sourceObject == null)
-				itemWrapper = new ItemWrapper<object>();
-			else
-			{
-				var objType = sourceObject.GetType();
-				var itemType = typeof(ItemWrapper<>).MakeGenericType(new[] { objType });
+        ItemWrapper CreateItemWrapper(object sourceObject)
+        {
 
-				// Approach 1
-				itemWrapper = (ItemWrapper)Activator.CreateInstance(itemType);
+            string propertyName = null;
+            List<string> subgroupPropertyMap;
+            if (_subPropertyMap != null && _subPropertyMap.Count > 0)
+            {
+                subgroupPropertyMap = new List<string>(_subPropertyMap) { [0] = null };
+                propertyName = _subPropertyMap[0];
+            }
 
-				// Approach 2
-				//itemWrapper = (ItemWrapper)BaitAndSwitch.ObjectFactory.Constructor(itemType, new object[] { });
+            var children = string.IsNullOrWhiteSpace(propertyName) ? sourceObject : sourceObject.GetPropertyValue(propertyName);
+            if (!(children is string))
+            {
+                if (children is IEnumerable iEnumerable)
+                {
+                    if (SubGroupType == null || children.GetType() == SubGroupType)
+                    {
+                        // groups
+                        VerifyContentType(GroupContentType.Lists);
+                        return new GroupWrapper(sourceObject, _subPropertyMap, VisibilityTest, SubGroupType);
+                    }
+                }
+            }
+            // items
+            VerifyContentType(GroupContentType.Objects);
+            ItemWrapper itemWrapper;
+            if (sourceObject == null)
+                itemWrapper = new ItemWrapper<object>();
+            else
+            {
+                var objType = sourceObject.GetType();
+                var itemType = typeof(ItemWrapper<>).MakeGenericType(new[] { objType });
 
-				// Approach 3
+                // Approach 1
+                itemWrapper = (ItemWrapper)Activator.CreateInstance(itemType);
 
-				itemWrapper.Source = sourceObject;
-			}
-			return itemWrapper;
-		}
+                // Approach 2
+                //itemWrapper = (ItemWrapper)BaitAndSwitch.ObjectFactory.Constructor(itemType, new object[] { });
 
-		void AddSourceObject(object sourceObject) {
-			if (VisibilityTest == null || VisibilityTest(sourceObject))
-			{
-				NotifySourceOfChanges = false;
-				var itemWrapper = CreateItemWrapper(sourceObject);
-				Add(itemWrapper);
-				NotifySourceOfChanges = true;
-			}
-			else
-				SubscribeToHiddenSourcePropertyChanged(sourceObject);
-		}
+                // Approach 3
 
-		int IndexFromSourceIndex(int requestedSourceIndex) {
-			if (SourceChildren==null)
-				throw new MissingMemberException ("Cannot get an index of an ItemWrapper in a null SourceChildren");
-			int localIndex = -1;
-			/*
+                itemWrapper.Source = sourceObject;
+            }
+            return itemWrapper;
+        }
+
+        void AddSourceObject(object sourceObject)
+        {
+            if (VisibilityTest == null || VisibilityTest(sourceObject))
+            {
+                NotifySourceOfChanges = false;
+                var itemWrapper = CreateItemWrapper(sourceObject);
+                Add(itemWrapper);
+                NotifySourceOfChanges = true;
+            }
+            else
+                SubscribeToHiddenSourcePropertyChanged(sourceObject);
+        }
+
+        int IndexFromSourceIndex(int requestedSourceIndex)
+        {
+            if (SourceChildren == null)
+                throw new MissingMemberException("Cannot get an index of an ItemWrapper in a null SourceChildren");
+            int localIndex = -1;
+            /*
 			int sourceCount = SourceCount ();
 			for (int sourceIndex = 0; sourceIndex < sourceCount; sourceIndex++) {
 				if (VisiblityTest == null || VisiblityTest(Source[sourceIndex])) {
@@ -536,261 +558,279 @@ namespace Forms9Patch
 						return localIndex;
 				}
 			}*/
-			int sourceIndex = 0;
-			foreach (var sourceItem in SourceChildren) {
-				if (VisibilityTest == null || VisibilityTest (sourceItem)) {
-					localIndex++;
-					if (sourceIndex == requestedSourceIndex)
-						return localIndex;
-				}
-				sourceIndex++;
-			}
-			return localIndex;
-		}
+            int sourceIndex = 0;
+            foreach (var sourceItem in SourceChildren)
+            {
+                if (VisibilityTest == null || VisibilityTest(sourceItem))
+                {
+                    localIndex++;
+                    if (sourceIndex == requestedSourceIndex)
+                        return localIndex;
+                }
+                sourceIndex++;
+            }
+            return localIndex;
+        }
 
-		void InsertSourceObject(int sourceIndex, object sourceObject) {
-			if (VisibilityTest == null || VisibilityTest (sourceObject)) {
-				NotifySourceOfChanges = false;
-				var index = IndexFromSourceIndex (sourceIndex);
-				var itemWrapper = CreateItemWrapper (sourceObject);
-				if (index > -1)
-					Insert (index, itemWrapper);
-				else
-					Add (itemWrapper);
-				NotifySourceOfChanges = true;
-			}
-			else
-				SubscribeToHiddenSourcePropertyChanged(sourceObject);
-		}
+        void InsertSourceObject(int sourceIndex, object sourceObject)
+        {
+            if (VisibilityTest == null || VisibilityTest(sourceObject))
+            {
+                NotifySourceOfChanges = false;
+                var index = IndexFromSourceIndex(sourceIndex);
+                var itemWrapper = CreateItemWrapper(sourceObject);
+                if (index > -1)
+                    Insert(index, itemWrapper);
+                else
+                    Add(itemWrapper);
+                NotifySourceOfChanges = true;
+            }
+            else
+                SubscribeToHiddenSourcePropertyChanged(sourceObject);
+        }
 
-		void RemoveItemWithSourceIndex(int sourceIndex) {
-			var index = IndexFromSourceIndex (sourceIndex);
-			if (index > -1) {
-				NotifySourceOfChanges = false;
-				RemoveAt (index);
-				NotifySourceOfChanges = true;
-			}
-		}
+        void RemoveItemWithSourceIndex(int sourceIndex)
+        {
+            var index = IndexFromSourceIndex(sourceIndex);
+            if (index > -1)
+            {
+                NotifySourceOfChanges = false;
+                RemoveAt(index);
+                NotifySourceOfChanges = true;
+            }
+        }
 
-		void ReplaceItemAtSourceIndex(int sourceIndex, object oldSourceObject, object newSourceObject) {
-			var index = IndexFromSourceIndex (sourceIndex);
-			if (VisibilityTest == null || VisibilityTest (newSourceObject) && VisibilityTest (oldSourceObject)) {
-				// replace object
-				NotifySourceOfChanges = false;
-				var itemWrapper = CreateItemWrapper (newSourceObject);
-				this [index] = itemWrapper;
-				NotifySourceOfChanges = true;
-			} else if (VisibilityTest (oldSourceObject)) {
-				// remove object
-				RemoveItemWithSourceIndex (sourceIndex);
-				SubscribeToHiddenSourcePropertyChanged(newSourceObject);
-			} else if (VisibilityTest (newSourceObject)) {
-				// insert object
-				InsertSourceObject(sourceIndex, newSourceObject);
-			}
-		}
+        void ReplaceItemAtSourceIndex(int sourceIndex, object oldSourceObject, object newSourceObject)
+        {
+            var index = IndexFromSourceIndex(sourceIndex);
+            if (VisibilityTest == null || VisibilityTest(newSourceObject) && VisibilityTest(oldSourceObject))
+            {
+                // replace object
+                NotifySourceOfChanges = false;
+                var itemWrapper = CreateItemWrapper(newSourceObject);
+                this[index] = itemWrapper;
+                NotifySourceOfChanges = true;
+            }
+            else if (VisibilityTest(oldSourceObject))
+            {
+                // remove object
+                RemoveItemWithSourceIndex(sourceIndex);
+                SubscribeToHiddenSourcePropertyChanged(newSourceObject);
+            }
+            else if (VisibilityTest(newSourceObject))
+            {
+                // insert object
+                InsertSourceObject(sourceIndex, newSourceObject);
+            }
+        }
 
-		// used for subscribing to hidden source objects
-		void SubscribeToHiddenSourcePropertyChanged(object source)
-		{
-			var iNotifiableSource = source as INotifyPropertyChanged;
-			if (iNotifiableSource != null)
-				iNotifiableSource.PropertyChanged += OnHiddenSourcePropertyChanged;
-		}
-
-
-		void UnsubscribeToHiddenSourcePropertyChanged(object source)
-		{
-			var iNotifiableSource = source as INotifyPropertyChanged;
-			if (iNotifiableSource != null)
-				iNotifiableSource.PropertyChanged -= OnHiddenSourcePropertyChanged;
-		}
-
-
-		// used for subscribing to unhidden source objects
-		void SubscribeToItemWrapperSourcePropertyChanged(ItemWrapper itemWrapper)
-		{
-			var iNotifiableSource = itemWrapper.Source as INotifyPropertyChanged;
-			if (iNotifiableSource != null)
-				iNotifiableSource.PropertyChanged += OnItemWrapperSourcePropertyChanged;
-		}
+        // used for subscribing to hidden source objects
+        void SubscribeToHiddenSourcePropertyChanged(object source)
+        {
+            if (source is INotifyPropertyChanged iNotifiableSource)
+                iNotifiableSource.PropertyChanged += OnHiddenSourcePropertyChanged;
+        }
 
 
-		// used for unsubscribing to unhidden source objects
-		void UnsubscribeToItemWrapperSourcePropertyChanged(ItemWrapper itemWrapper)
-		{
-			var iNotifiableSource = itemWrapper.Source as INotifyPropertyChanged;
-			if (iNotifiableSource != null)
-				iNotifiableSource.PropertyChanged -= OnItemWrapperSourcePropertyChanged;
-		}
-
-		void OnItemWrapperSourcePropertyChanged(object source, PropertyChangedEventArgs e)
-		{
-			// if the change impacts visibility then remove itemwrapper from groupwrapper
-			if (!VisibilityTest(source))
-				RefreshVisibility();
-		}
-
-		void OnHiddenSourcePropertyChanged(object source, PropertyChangedEventArgs e)
-		{
-			if (VisibilityTest(source))
-				RefreshVisibility();
-		}
-
-		void RefreshVisibility()
-		{
-			NotifySourceOfChanges = false;
-			int index = 0;
-			int sourceIndex = 0;
-			foreach (var sourceItem in SourceChildren)
-			{
-				if (VisibilityTest(sourceItem))
-				{
-					if (index >= _itemWrappers.Count || _itemWrappers[index].Source != sourceItem)
-					{
-						UnsubscribeToHiddenSourcePropertyChanged(sourceItem);
-						InsertSourceObject(sourceIndex, sourceItem);
-					}
-					index++;
-				}
-				else
-				{
-					if (index < _itemWrappers.Count && _itemWrappers[index].Source == sourceItem)
-					{
-						RemoveAt(index);
-						SubscribeToHiddenSourcePropertyChanged(sourceItem);
-					}
-				}
-				sourceIndex++;
-			}
-			NotifySourceOfChanges = true;
-			if (index != _itemWrappers.Count)
-				throw new InvalidDataContractException("should have iterated through all visible sourceItems and itemWrappers");
-		}
-
-		#endregion
+        void UnsubscribeToHiddenSourcePropertyChanged(object source)
+        {
+            if (source is INotifyPropertyChanged iNotifiableSource)
+                iNotifiableSource.PropertyChanged -= OnHiddenSourcePropertyChanged;
+        }
 
 
-		#region ICollection<T> implementation
-		public void Add (ItemWrapper itemWrapper) { 
-			if (itemWrapper == null)
-				return;
-			if (Contains (itemWrapper))
-				throw new NotSupportedException ();
-			itemWrapper.Index = _itemWrappers.Count;
-			_itemWrappers.Add (itemWrapper); 
-			CommonAdd (itemWrapper);
-		}
+        // used for subscribing to unhidden source objects
+        void SubscribeToItemWrapperSourcePropertyChanged(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper.Source is INotifyPropertyChanged iNotifiableSource)
+                iNotifiableSource.PropertyChanged += OnItemWrapperSourcePropertyChanged;
+        }
 
-		public void Clear () { 
-			for (int i = _itemWrappers.Count - 1; i >= 0; i--) {
-				var subGroup = _itemWrappers[i] as GroupWrapper;
-				subGroup?.Clear();
-				RemoveAt(i);
-			}
-		}
 
-		public bool Contains (ItemWrapper itemWrapper) {
+        // used for unsubscribing to unhidden source objects
+        void UnsubscribeToItemWrapperSourcePropertyChanged(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper.Source is INotifyPropertyChanged iNotifiableSource)
+                iNotifiableSource.PropertyChanged -= OnItemWrapperSourcePropertyChanged;
+        }
+
+        void OnItemWrapperSourcePropertyChanged(object source, PropertyChangedEventArgs e)
+        {
+            // if the change impacts visibility then remove itemwrapper from groupwrapper
+            if (!VisibilityTest(source))
+                RefreshVisibility();
+        }
+
+        void OnHiddenSourcePropertyChanged(object source, PropertyChangedEventArgs e)
+        {
+            if (VisibilityTest(source))
+                RefreshVisibility();
+        }
+
+        void RefreshVisibility()
+        {
+            NotifySourceOfChanges = false;
+            int index = 0;
+            int sourceIndex = 0;
+            foreach (var sourceItem in SourceChildren)
+            {
+                if (VisibilityTest(sourceItem))
+                {
+                    if (index >= _itemWrappers.Count || _itemWrappers[index].Source != sourceItem)
+                    {
+                        UnsubscribeToHiddenSourcePropertyChanged(sourceItem);
+                        InsertSourceObject(sourceIndex, sourceItem);
+                    }
+                    index++;
+                }
+                else
+                {
+                    if (index < _itemWrappers.Count && _itemWrappers[index].Source == sourceItem)
+                    {
+                        RemoveAt(index);
+                        SubscribeToHiddenSourcePropertyChanged(sourceItem);
+                    }
+                }
+                sourceIndex++;
+            }
+            NotifySourceOfChanges = true;
+            if (index != _itemWrappers.Count)
+                throw new InvalidDataContractException("should have iterated through all visible sourceItems and itemWrappers");
+        }
+
+        #endregion
+
+
+        #region ICollection<T> implementation
+        public void Add(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper == null)
+                return;
+            if (Contains(itemWrapper))
+                throw new NotSupportedException();
+            itemWrapper.Index = _itemWrappers.Count;
+            _itemWrappers.Add(itemWrapper);
+            CommonAdd(itemWrapper);
+        }
+
+        public void Clear()
+        {
+            for (int i = _itemWrappers.Count - 1; i >= 0; i--)
+            {
+                var subGroup = _itemWrappers[i] as GroupWrapper;
+                subGroup?.Clear();
+                RemoveAt(i);
+            }
+        }
+
+        public bool Contains(ItemWrapper itemWrapper)
+        {
             //return itemWrapper != null && DeepContains (itemWrapper);
             return itemWrapper != null && _itemWrappers.Contains(itemWrapper);
-		}
+        }
 
-		public void CopyTo (ItemWrapper[] array, int arrayIndex) { 
-			if (array == null)
-				return;
-			int offset = 0;
-			foreach (var itemWrapper in array)
-				Insert (arrayIndex + offset++, itemWrapper);
-		}
+        public void CopyTo(ItemWrapper[] array, int arrayIndex)
+        {
+            if (array == null)
+                return;
+            int offset = 0;
+            foreach (var itemWrapper in array)
+                Insert(arrayIndex + offset++, itemWrapper);
+        }
 
-		public bool Remove (ItemWrapper itemWrapper) {
-			var index = itemWrapper.Index;
-			CommonRemove(itemWrapper);
-			var result = _itemWrappers.Remove (itemWrapper); 
-			Reindex(index);
-			return result;
-		}
+        public bool Remove(ItemWrapper itemWrapper)
+        {
+            var index = itemWrapper.Index;
+            CommonRemove(itemWrapper);
+            var result = _itemWrappers.Remove(itemWrapper);
+            Reindex(index);
+            return result;
+        }
 
-		public int Count { 
-			get { return _itemWrappers.Count; }
-		}
+        public int Count
+        {
+            get { return _itemWrappers.Count; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
-		#endregion
-
-
-		#region IEnumerable<T> implementation
-		public IEnumerator<ItemWrapper> GetEnumerator () {
-			return _itemWrappers.GetEnumerator ();
-		}
-		#endregion
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+        #endregion
 
 
-		#region IEnumerable implementation
-		IEnumerator IEnumerable.GetEnumerator () {
-			return _itemWrappers.GetEnumerator ();
-		}
-		#endregion
+        #region IEnumerable<T> implementation
+        public IEnumerator<ItemWrapper> GetEnumerator()
+        {
+            return _itemWrappers.GetEnumerator();
+        }
+        #endregion
 
 
-		#region IList implementation
-		public int Add (object value)
-		{
-			Add (value as ItemWrapper);
-			return _itemWrappers.Count - 1;
-		}
+        #region IEnumerable implementation
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _itemWrappers.GetEnumerator();
+        }
+        #endregion
 
-		public bool Contains (object value)
-		{
-			return Contains (value as ItemWrapper);
-		}
 
-		public int IndexOf (object value)
-		{
-			return IndexOf (value as ItemWrapper);
-		}
+        #region IList implementation
+        public int Add(object value)
+        {
+            Add(value as ItemWrapper);
+            return _itemWrappers.Count - 1;
+        }
 
-		public void Insert (int index, object value)
-		{
+        public bool Contains(object value)
+        {
+            return Contains(value as ItemWrapper);
+        }
+
+        public int IndexOf(object value)
+        {
+            return IndexOf(value as ItemWrapper);
+        }
+
+        public void Insert(int index, object value)
+        {
             if (value is ItemWrapper itemWrapper)
                 Insert(index, itemWrapper);
             else
                 throw new InvalidCastException();
         }
 
-		public void Remove (object value)
-		{
+        public void Remove(object value)
+        {
             if (value is ItemWrapper itemWrapper)
                 Remove(itemWrapper);
         }
 
-		public bool IsFixedSize {
-			get { return false; }
-		}
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
 
-		public void CopyTo (Array array, int index)
-		{
+        public void CopyTo(Array array, int index)
+        {
             if (array is ItemWrapper[] itemWrapperArray)
-			    CopyTo (itemWrapperArray, index);
-		}
+                CopyTo(itemWrapperArray, index);
+        }
 
-		public bool IsSynchronized {
-			get { throw new NotImplementedException (); }
-		}
+        public bool IsSynchronized => false;
 
-		public object SyncRoot {
-			get { throw new NotImplementedException (); }
-		}
+        public object SyncRoot => false;
 
-		object IList.this [int index] {
-			get {
+        object IList.this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > _itemWrappers.Count)
                     return null;
-				return _itemWrappers[index];
-			}
-			set {
+                return _itemWrappers[index];
+            }
+            set
+            {
                 if (value is ItemWrapper itemWrapper && index <= _itemWrappers.Count && index > -1)
                 {
                     if (Contains(itemWrapper))
@@ -807,7 +847,7 @@ namespace Forms9Patch
                 else
                     throw new InvalidCastException();
             }
-		}
+        }
         #endregion
 
 
@@ -846,7 +886,10 @@ namespace Forms9Patch
         {
             bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => (index.Length == 1 && index[0] == i);
             bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (index.Length == 1 && index[0] == i);
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => (index.Length == 2 && index[0] == i && index[1] == j);
+            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            {
+                return (index.Length >= 2 && index[0] == i && index[1] == j);
+            }
 
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
@@ -860,7 +903,14 @@ namespace Forms9Patch
 
             bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => (groupWrapper == item || groupWrapper.Source == item);
             bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (itemWrapper == item || itemWrapper.Source == item);
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => (subItemWrapper == item || subItemWrapper.Source == item);
+            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            {
+                if (subItemWrapper == item || subItemWrapper.Source == item)
+                    return true;
+                if (subItemWrapper is GroupWrapper subGroupWrapper && subGroupWrapper.DeepContains(item))
+                    return true;
+                return false;
+            }
 
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
@@ -870,7 +920,17 @@ namespace Forms9Patch
 
             bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => ((group == groupWrapper || group == groupWrapper.Source) && item == null);
             bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (group == null && (item == itemWrapper || item == itemWrapper.Source));
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => ((group == groupWrapper || group == groupWrapper.Source) && (item == subItemWrapper || item == subItemWrapper.Source));
+            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            {
+                if ((group == groupWrapper || group == groupWrapper.Source) && (item == subItemWrapper || item == subItemWrapper.Source))
+                    return true;
+                if (subItemWrapper is GroupWrapper subGroupWrapper && subGroupWrapper.DeepContains(item))
+                {
+                    var itemWrapper = DeepItemWrapperForItem(item);
+                    return (itemWrapper.Parent is GroupWrapper gr && (gr == group || gr.Source == group));
+                }
+                return false;
+            }
 
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
@@ -884,14 +944,14 @@ namespace Forms9Patch
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     var groupCellHeight = groupWrapper.BestGuessGroupHeaderHeight();
-                    if ( groupSelector(calcOffset + groupCellHeight, i, groupWrapper) )
+                    if (groupSelector(calcOffset + groupCellHeight, i, groupWrapper))
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, groupCellHeight);
                     calcOffset += groupCellHeight;
                     for (int j = 0; j < groupWrapper.Count; j++)
                     {
                         var subItemWrapper = groupWrapper[j];
                         var cellHeight = subItemWrapper.BestGuessItemRowHeight();
-                        if ( subItemSelector(calcOffset + cellHeight, i, j, groupWrapper, subItemWrapper) )
+                        if (subItemSelector(calcOffset + cellHeight, i, j, groupWrapper, subItemWrapper))
                             return new DeepDataSet(subItemWrapper, calcOffset, new int[] { i }, cellHeight);
                         calcOffset += cellHeight;
                         if (j < groupWrapper.Count - 1)
@@ -901,7 +961,7 @@ namespace Forms9Patch
                 else
                 {
                     var cellHeight = itemWrapper.BestGuessItemRowHeight();
-                    if ( itemSelector(calcOffset + cellHeight, i, itemWrapper))
+                    if (itemSelector(calcOffset + cellHeight, i, itemWrapper))
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, cellHeight);
                     calcOffset += cellHeight;
                     if (i < Count - 1)
@@ -931,25 +991,60 @@ namespace Forms9Patch
             return subGroup.ItemWrapperAtDeepIndex(subGroupDeepIndex);
         }
 
-        public bool DeepContains(ItemWrapper itemWrapper) {
+        /*
+        public bool DeepContains(ItemWrapper itemWrapper)
+        {
             if (itemWrapper == null)
                 return false;
-			if (Contains (itemWrapper))
-				return true;
-			foreach (var member in this) {
+            if (Contains(itemWrapper))
+                return true;
+            foreach (var member in this)
+            {
                 if (member is GroupWrapper group && group.DeepContains(itemWrapper))
                     return true;
             }
-			return false;
-		}
+            return false;
+        }
+        */
+
+        public bool DeepContains(object item)
+        {
+            if (item is ItemWrapper itemWrapper)
+            {
+                if (itemWrapper == null)
+                    return false;
+                if (Contains(itemWrapper))
+                    return true;
+                foreach (var member in this)
+                {
+                    if (member is GroupWrapper groupWrapper && groupWrapper.DeepContains(itemWrapper))
+                        return true;
+                }
+                return false;
+            }
+            foreach (var member in this)
+            {
+                if (member.Source == item)
+                    return true;
+                if (member is GroupWrapper groupWrapper && groupWrapper.DeepContains(item))
+                    return true;
+            }
+            return false;
+        }
+
 
         #region IndexOf
-        public int[] DeepSourceIndexOf(ItemWrapper itemWrapper) {
-			int pos = SourceIndexOf (itemWrapper);
-			if (pos > -1) {
-				return new [] { pos };
-			} else {
-				for (pos = 0; pos < Count; pos++) {
+        public int[] DeepSourceIndexOf(ItemWrapper itemWrapper)
+        {
+            int pos = SourceIndexOf(itemWrapper);
+            if (pos > -1)
+            {
+                return new[] { pos };
+            }
+            else
+            {
+                for (pos = 0; pos < Count; pos++)
+                {
                     if (this[pos] is GroupWrapper subGroup)
                     {
                         int[] subGroupDeepIndex = subGroup.DeepSourceIndexOf(itemWrapper);
@@ -962,16 +1057,21 @@ namespace Forms9Patch
                         }
                     }
                 }
-			}
-			return null;
-		}
+            }
+            return null;
+        }
 
-		public int[] DeepIndexOf(ItemWrapper itemWrapper) {
-			int pos = IndexOf (itemWrapper);
-			if (pos > -1) {
-				return new [] { pos };
-			} else {
-				for (pos = 0; pos < Count; pos++) {
+        public int[] DeepIndexOf(ItemWrapper itemWrapper)
+        {
+            int pos = IndexOf(itemWrapper);
+            if (pos > -1)
+            {
+                return new[] { pos };
+            }
+            else
+            {
+                for (pos = 0; pos < Count; pos++)
+                {
                     if (this[pos] is GroupWrapper subGroup)
                     {
                         int[] subGroupDeepIndex = subGroup.DeepIndexOf(itemWrapper);
@@ -984,111 +1084,120 @@ namespace Forms9Patch
                         }
                     }
                 }
-			}
-			return null;
-		}
+            }
+            return null;
+        }
         #endregion
 
-        public void DeepInsert (int[] deepIndex, ItemWrapper itemWrapper) { 
-			if (DeepContains (itemWrapper))
-				throw new NotSupportedException ("DeepInsert: Group already contain itemWrapper");
-				//return;
-			if (deepIndex==null || deepIndex.Length == 0)
-				throw new NotSupportedException ("DeepInsert: deepIndex=null || deepIndex.Length=0");
-			if (deepIndex.Length == 1)
+        public void DeepInsert(int[] deepIndex, ItemWrapper itemWrapper)
+        {
+            if (DeepContains(itemWrapper))
+                throw new NotSupportedException("DeepInsert: Group already contain itemWrapper");
+            //return;
+            if (deepIndex == null || deepIndex.Length == 0)
+                throw new NotSupportedException("DeepInsert: deepIndex=null || deepIndex.Length=0");
+            if (deepIndex.Length == 1)
             {
-				Insert (deepIndex [0], itemWrapper);
-				return;
-			}
-			var subGroup = this[deepIndex [0]] as GroupWrapper;
-			if (subGroup == null)
-				throw new NotSupportedException ("DeepInsert: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
-			var subGroupDeepIndex = new int[deepIndex.Length - 1];
-			Array.Copy (deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
-			subGroup.DeepInsert (subGroupDeepIndex, itemWrapper);
-		}
+                Insert(deepIndex[0], itemWrapper);
+                return;
+            }
+            var subGroup = this[deepIndex[0]] as GroupWrapper;
+            if (subGroup == null)
+                throw new NotSupportedException("DeepInsert: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
+            var subGroupDeepIndex = new int[deepIndex.Length - 1];
+            Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
+            subGroup.DeepInsert(subGroupDeepIndex, itemWrapper);
+        }
 
-		public void DeepRemove(ItemWrapper itemWrapper) {
-			if (!DeepContains (itemWrapper))
-				return;
-			var deepIndex = DeepIndexOf (itemWrapper);
-			DeepRemoveAt (deepIndex);
-		}
+        public void DeepRemove(ItemWrapper itemWrapper)
+        {
+            if (!DeepContains(itemWrapper))
+                return;
+            var deepIndex = DeepIndexOf(itemWrapper);
+            DeepRemoveAt(deepIndex);
+        }
 
-		public void DeepRemoveAt (int[] deepIndex) { 
-			if (deepIndex==null || deepIndex.Length == 0)
-				throw new NotSupportedException ("DeepRemove: deepIndex=null || deepIndex.Length=0");
-			if (deepIndex.Length == 1) {
-				RemoveAt (deepIndex [0]);
-				return;
-			}
-			var subGroup = this[deepIndex [0]] as GroupWrapper;
-			if (subGroup == null)
-				throw new NotSupportedException ("DeepRemove: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
-			var subGroupDeepIndex = new int[deepIndex.Length - 1];
-			Array.Copy (deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
-			subGroup.DeepRemoveAt (subGroupDeepIndex);
-		}
+        public void DeepRemoveAt(int[] deepIndex)
+        {
+            if (deepIndex == null || deepIndex.Length == 0)
+                throw new NotSupportedException("DeepRemove: deepIndex=null || deepIndex.Length=0");
+            if (deepIndex.Length == 1)
+            {
+                RemoveAt(deepIndex[0]);
+                return;
+            }
+            var subGroup = this[deepIndex[0]] as GroupWrapper;
+            if (subGroup == null)
+                throw new NotSupportedException("DeepRemove: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
+            var subGroupDeepIndex = new int[deepIndex.Length - 1];
+            Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
+            subGroup.DeepRemoveAt(subGroupDeepIndex);
+        }
 
-		public void DeepSwap(ItemWrapper itemWrapper1, ItemWrapper itemWrapper2) {
-			var deepIndex1 = DeepIndexOf (itemWrapper1);
-			var deepIndex2 = DeepIndexOf (itemWrapper2);
-			if (deepIndex1 == deepIndex2)
-				return;
-			DeepSet (deepIndex1, itemWrapper2);
-			DeepSet (deepIndex2, itemWrapper1);
-		}
+        public void DeepSwap(ItemWrapper itemWrapper1, ItemWrapper itemWrapper2)
+        {
+            var deepIndex1 = DeepIndexOf(itemWrapper1);
+            var deepIndex2 = DeepIndexOf(itemWrapper2);
+            if (deepIndex1 == deepIndex2)
+                return;
+            DeepSet(deepIndex1, itemWrapper2);
+            DeepSet(deepIndex2, itemWrapper1);
+        }
 
-		public void DeepSet(int[] deepIndex, ItemWrapper itemWrapper) {
-			if (deepIndex == null || deepIndex.Length == 0)
-				return;
-			int index = deepIndex [0];
-			if (deepIndex.Length == 1) {// && deepIndex[0] >=0 && deepIndex[0] <= items.Count) {
-				if (index < 0 || index > Count)
-					return;
-				//items [index] = item;
-				this[index] = itemWrapper;
-			} else {
-				var subGroup = this[index] as GroupWrapper;
-				if (subGroup == null)
-					throw new NotSupportedException ("DeepSet: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
-				// create a new index (subGroupDeepIndex) that contains everything except the [0] index of deepIndex.
-				var subGroupDeepIndex = new int[deepIndex.Length - 1];
-				Array.Copy (deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
-				subGroup.DeepSet (subGroupDeepIndex, itemWrapper);
-			}
-		}
+        public void DeepSet(int[] deepIndex, ItemWrapper itemWrapper)
+        {
+            if (deepIndex == null || deepIndex.Length == 0)
+                return;
+            int index = deepIndex[0];
+            if (deepIndex.Length == 1)
+            {// && deepIndex[0] >=0 && deepIndex[0] <= items.Count) {
+                if (index < 0 || index > Count)
+                    return;
+                //items [index] = item;
+                this[index] = itemWrapper;
+            }
+            else
+            {
+                var subGroup = this[index] as GroupWrapper;
+                if (subGroup == null)
+                    throw new NotSupportedException("DeepSet: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
+                // create a new index (subGroupDeepIndex) that contains everything except the [0] index of deepIndex.
+                var subGroupDeepIndex = new int[deepIndex.Length - 1];
+                Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
+                subGroup.DeepSet(subGroupDeepIndex, itemWrapper);
+            }
+        }
 
-		public void DeepRemoveItemsWithSource(object source)
-		{
+        public void DeepRemoveItemsWithSource(object source)
+        {
             List<ItemWrapper> itemWrappers = new List<ItemWrapper>();
             foreach (var itemWrapper in this)
                 if (itemWrapper.Source == source)
                     itemWrappers.Add(itemWrapper);
-			if (itemWrappers.Count > 0)
-				foreach (var itemWrapper in itemWrappers)
-					Remove(itemWrapper);
-			foreach (var itemWrapper in this)
-			{
-				var group = itemWrapper as GroupWrapper;
-				group?.DeepRemoveItemsWithSource(source);
-			}
-		}
-		#endregion
+            if (itemWrappers.Count > 0)
+                foreach (var itemWrapper in itemWrappers)
+                    Remove(itemWrapper);
+            foreach (var itemWrapper in this)
+            {
+                var groupWrapper = itemWrapper as GroupWrapper;
+                groupWrapper?.DeepRemoveItemsWithSource(source);
+            }
+        }
+        #endregion
 
 
-		#region Flat Position enhancements
-		public int FlatPositionOf(object item)
-		{
-			if (item == null)
-				return -1;
-			int pos = 0;
-			foreach (var itemWrapper in this)
-			{
-				// count this header/cell
-				pos++;
-				if (itemWrapper.Source == item || itemWrapper == item)
-					return pos;
+        #region Flat Position enhancements
+        public int FlatPositionOf(object item)
+        {
+            if (item == null)
+                return -1;
+            int pos = 0;
+            foreach (var itemWrapper in this)
+            {
+                // count this header/cell
+                pos++;
+                if (itemWrapper.Source == item || itemWrapper == item)
+                    return pos;
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     foreach (var subItem in groupWrapper)
@@ -1100,35 +1209,35 @@ namespace Forms9Patch
                     }
                 }
             }
-			return -1;
-		}
+            return -1;
+        }
 
-		public int FlatPositionOfItemInGroup(object item, object group)
-		{
-			if (item == null || group == null)
-				return -1;
-			int pos = 0;
-			foreach (var itemWrapper in this)
-			{
-				// count this header/cell
-				pos++;
-				if (itemWrapper.Source == item || itemWrapper == item)
-					return pos - 1;
+        public int FlatPositionOfItemInGroup(object item, object group)
+        {
+            if (item == null || group == null)
+                return -1;
+            int pos = 0;
+            foreach (var itemWrapper in this)
+            {
+                // count this header/cell
+                pos++;
+                if (itemWrapper.Source == item || itemWrapper == item)
+                    return pos - 1;
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     foreach (var subItemWrapper in groupWrapper)
                     {
                         // count this cell
                         pos++;
-                        if ((subItemWrapper.Source == item || subItemWrapper==item) && (groupWrapper.Source == group || groupWrapper == group) )
+                        if ((subItemWrapper.Source == item || subItemWrapper == item) && (groupWrapper.Source == group || groupWrapper == group))
                             return pos - 1;
                     }
                 }
             }
-			return -1;
-		}
+            return -1;
+        }
 
-        public ItemWrapper ItemWrapperForItem(object item)
+        public ItemWrapper DeepItemWrapperForItem(object item)
         {
             if (item is ItemWrapper result)
                 return result;
@@ -1138,7 +1247,7 @@ namespace Forms9Patch
                 if (itemWrapper == item || itemWrapper.Source == item)
                     return itemWrapper;
                 if (itemWrapper is GroupWrapper groupWrapper)
-                    result = groupWrapper.ItemWrapperForItem(item);
+                    result = groupWrapper.DeepItemWrapperForItem(item);
                 if (result != null)
                     return result;
             }
@@ -1147,138 +1256,143 @@ namespace Forms9Patch
         #endregion
 
 
-		#region Source INotifyCollectionChanged implementation
-		void OnSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			if (IgnoreSourceChanges)
-				return;
-			NotifySourceOfChanges = false;
-			switch (e.Action) {
-			case NotifyCollectionChangedAction.Add:
-				if (e.NewStartingIndex < 0)
-					for (int i = 0; i < e.NewItems.Count; i++) 
-						AddSourceObject (e.NewItems [i]);
-				else
-					for (int i = 0; i < e.NewItems.Count; i++) 
-						InsertSourceObject (i + e.NewStartingIndex, e.NewItems [i]);
-				break;
+        #region Source INotifyCollectionChanged implementation
+        void OnSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (IgnoreSourceChanges)
+                return;
+            NotifySourceOfChanges = false;
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewStartingIndex < 0)
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                            AddSourceObject(e.NewItems[i]);
+                    else
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                            InsertSourceObject(i + e.NewStartingIndex, e.NewItems[i]);
+                    break;
 
-			case NotifyCollectionChangedAction.Move:
-				for (int i = e.OldItems.Count - 1; i >= 0; i--)
-					RemoveItemWithSourceIndex (i + e.OldStartingIndex);
-				if (e.NewStartingIndex < 0)
-					for (int i = 0; i < e.NewItems.Count; i++) 
-						AddSourceObject (e.NewItems [i]);
-				else
-					for (int i = 0; i < e.NewItems.Count; i++) 
-						InsertSourceObject (i + e.NewStartingIndex, e.NewItems [i]);
-				break;
+                case NotifyCollectionChangedAction.Move:
+                    for (int i = e.OldItems.Count - 1; i >= 0; i--)
+                        RemoveItemWithSourceIndex(i + e.OldStartingIndex);
+                    if (e.NewStartingIndex < 0)
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                            AddSourceObject(e.NewItems[i]);
+                    else
+                        for (int i = 0; i < e.NewItems.Count; i++)
+                            InsertSourceObject(i + e.NewStartingIndex, e.NewItems[i]);
+                    break;
 
-			case NotifyCollectionChangedAction.Remove:
-					if (e.OldStartingIndex < 0)
-					{
-						// we don't have an index but we can figure it out IF the objects are unique!
-						//throw new NotSupportedException("Cannot remove Source object with unknown index");
-						foreach (var sourceItem in e.OldItems)
-							DeepRemoveItemsWithSource(sourceItem);
-					}
-					else
-					{
-						for (int i = e.OldItems.Count - 1; i >= 0; i--)
-							RemoveItemWithSourceIndex(i + e.OldStartingIndex);
-					}
-				break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldStartingIndex < 0)
+                    {
+                        // we don't have an index but we can figure it out IF the objects are unique!
+                        //throw new NotSupportedException("Cannot remove Source object with unknown index");
+                        foreach (var sourceItem in e.OldItems)
+                            DeepRemoveItemsWithSource(sourceItem);
+                    }
+                    else
+                    {
+                        for (int i = e.OldItems.Count - 1; i >= 0; i--)
+                            RemoveItemWithSourceIndex(i + e.OldStartingIndex);
+                    }
+                    break;
 
-			case NotifyCollectionChangedAction.Replace:
-				if (e.NewStartingIndex < 0 && e.OldStartingIndex < 0)
-					throw new NotSupportedException ("Cannot remove Source object with unknown index");
-				var startingIndex = e.NewStartingIndex;
-				if (startingIndex < 0)
-					startingIndex = e.OldStartingIndex;
-				for (int i = 0; i < e.NewItems.Count; i++)
-					ReplaceItemAtSourceIndex (startingIndex + i, e.OldItems [i], e.NewItems [i]);
-				break;
+                case NotifyCollectionChangedAction.Replace:
+                    if (e.NewStartingIndex < 0 && e.OldStartingIndex < 0)
+                        throw new NotSupportedException("Cannot remove Source object with unknown index");
+                    var startingIndex = e.NewStartingIndex;
+                    if (startingIndex < 0)
+                        startingIndex = e.OldStartingIndex;
+                    for (int i = 0; i < e.NewItems.Count; i++)
+                        ReplaceItemAtSourceIndex(startingIndex + i, e.OldItems[i], e.NewItems[i]);
+                    break;
 
-			case NotifyCollectionChangedAction.Reset:
-				NotifySourceOfChanges = false;
-				Clear ();
-				Source = sender;
-				SourceChildren = string.IsNullOrWhiteSpace (childrenPropertyName) ? sender as IEnumerable : sender.GetPropertyValue (childrenPropertyName) as IEnumerable;
-				if (SourceChildren == null || Source==null) {
-					throw new ArgumentException ("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
-				}
-				foreach (var obj in SourceChildren)
-					AddSourceObject (obj);
-				NotifySourceOfChanges = true;
-				break;
-			}
-			NotifySourceOfChanges = true;
-		}
-		#endregion
-
-
-		#region INotifyCollectionChanged implementation
-		event NotifyCollectionChangedEventHandler _collectionChanged;
-		public event NotifyCollectionChangedEventHandler CollectionChanged {
-			add { _collectionChanged += value; }
-			remove { _collectionChanged -= value; }
-		}
-
-		void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-			//System.Diagnostics.Debug.WriteLine (GetType ().Name + ".OnCollectionChanged( " + sender + ", " + e);
-			_collectionChanged?.Invoke(sender,e);
-		}
-		#endregion
+                case NotifyCollectionChangedAction.Reset:
+                    NotifySourceOfChanges = false;
+                    Clear();
+                    Source = sender;
+                    SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? sender as IEnumerable : sender.GetPropertyValue(childrenPropertyName) as IEnumerable;
+                    if (SourceChildren == null || Source == null)
+                    {
+                        throw new ArgumentException("Group source must be IEnumerable -or- SourcePropertyMap is set to an IEnumerable property of source");
+                    }
+                    foreach (var obj in SourceChildren)
+                        AddSourceObject(obj);
+                    NotifySourceOfChanges = true;
+                    break;
+            }
+            NotifySourceOfChanges = true;
+        }
+        #endregion
 
 
-		#region Source finding
-		public ItemWrapper ItemWrapperForSource(object source)
-		{
-			if (Source == source)
-				return this;
-			foreach (var item in this)
-			{
-				if (item.Source == source)
-					return item;
-				var group = item as GroupWrapper;
-				var subItem = group?.ItemWrapperForSource(source);
-				if (subItem != null)
-					return subItem;
-			}
-			return null;
-		}
+        #region INotifyCollectionChanged implementation
+        event NotifyCollectionChangedEventHandler _collectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add { _collectionChanged += value; }
+            remove { _collectionChanged -= value; }
+        }
 
-		public GroupWrapper GroupWrapperForItemWrapper(ItemWrapper itemWrapper)
-		{
-			if (itemWrapper == null)
-				return null;
-			if (Contains(itemWrapper))
-				return this;
-		    foreach (var member in this)
-			{
-				var groupWrapper = member as GroupWrapper;
-				var result = groupWrapper?.GroupWrapperForItemWrapper(itemWrapper);
-				if (result != null)
-					return result;
-			}
-			return null;
-		}
+        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine (GetType ().Name + ".OnCollectionChanged( " + sender + ", " + e);
+            _collectionChanged?.Invoke(sender, e);
+        }
+        #endregion
 
-		public Tuple<GroupWrapper, ItemWrapper> GroupAndItemWrappersForSource(object source)
-		{
-			if (Source == source)
-				return new Tuple<GroupWrapper,ItemWrapper>(Parent,this);
-			foreach (var itemWrapper in this)
-			{
-				if (itemWrapper.Source == source)
-					return new Tuple<GroupWrapper, ItemWrapper>(this, itemWrapper);
-				var groupWrapper = itemWrapper as GroupWrapper;
-				var subItem = groupWrapper?.GroupAndItemWrappersForSource(source);
-				if (subItem != null)
-					return subItem;
-			}
-			return null;
-		}
-		#endregion
-	}
+
+        #region Source finding
+        public ItemWrapper ItemWrapperForSource(object source)
+        {
+            if (Source == source)
+                return this;
+            foreach (var item in this)
+            {
+                if (item.Source == source)
+                    return item;
+                var groupWrapper = item as GroupWrapper;
+                var subItem = groupWrapper?.ItemWrapperForSource(source);
+                if (subItem != null)
+                    return subItem;
+            }
+            return null;
+        }
+
+        public GroupWrapper GroupWrapperForItemWrapper(ItemWrapper itemWrapper)
+        {
+            if (itemWrapper == null)
+                return null;
+            if (Contains(itemWrapper))
+                return this;
+            foreach (var member in this)
+            {
+                var groupWrapper = member as GroupWrapper;
+                var result = groupWrapper?.GroupWrapperForItemWrapper(itemWrapper);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
+
+        public Tuple<GroupWrapper, ItemWrapper> GroupAndItemWrappersForSource(object source)
+        {
+            if (Source == source)
+                return new Tuple<GroupWrapper, ItemWrapper>(Parent, this);
+            foreach (var itemWrapper in this)
+            {
+                if (itemWrapper.Source == source)
+                    return new Tuple<GroupWrapper, ItemWrapper>(this, itemWrapper);
+                var groupWrapper = itemWrapper as GroupWrapper;
+                var subItem = groupWrapper?.GroupAndItemWrappersForSource(source);
+                if (subItem != null)
+                    return subItem;
+            }
+            return null;
+        }
+        #endregion
+    }
 }
 
