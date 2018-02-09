@@ -875,18 +875,18 @@ namespace Forms9Patch
             if (offset < 0)
                 return null;
 
-            bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => (offset < calcOffset);
-            bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (offset < calcOffset);
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => (offset < calcOffset);
+            bool groupSelector(int calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => (offset < calcOffset);
+            bool itemSelector(int calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (offset < calcOffset);
+            bool subItemSelector(int calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => (offset < calcOffset);
 
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
 
         public DeepDataSet TwoDeepDataSetForIndex(int[] index)
         {
-            bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => (index.Length == 1 && index[0] == i);
-            bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (index.Length == 1 && index[0] == i);
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            bool groupSelector(int calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => (index.Length == 1 && index[0] == i);
+            bool itemSelector(int calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (index.Length == 1 && index[0] == i);
+            bool subItemSelector(int calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
             {
                 return (index.Length >= 2 && index[0] == i && index[1] == j);
             }
@@ -894,16 +894,27 @@ namespace Forms9Patch
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
 
+        public DeepDataSet TwoDeepDataSetForFlatIndex(int reqFlatIndex)
+        {
+            bool groupSelector(int calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => (reqFlatIndex == flatIndex);
+            bool itemSelector(int calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (reqFlatIndex == flatIndex);
+            bool subItemSelector(int calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper) => (reqFlatIndex == flatIndex);
+
+            return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
+        }
+
         public DeepDataSet TwoDeepDataSet(object item)
         {
+            if (item is int fIndex)
+                return TwoDeepDataSetForFlatIndex(fIndex);
             if (item is double number)
                 return TwoDeepDataSetForOffset(number);
             if (item is int[] index)
                 return TwoDeepDataSetForIndex(index);
 
-            bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => (groupWrapper == item || groupWrapper.Source == item);
-            bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (itemWrapper == item || itemWrapper.Source == item);
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            bool groupSelector(int calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => (groupWrapper == item || groupWrapper.Source == item);
+            bool itemSelector(int calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (itemWrapper == item || itemWrapper.Source == item);
+            bool subItemSelector(int calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
             {
                 if (subItemWrapper == item || subItemWrapper.Source == item)
                     return true;
@@ -918,9 +929,9 @@ namespace Forms9Patch
         public DeepDataSet TwoDeepDataSet(object group, object item)
         {
 
-            bool groupSelector(int calcOffset, int i, GroupWrapper groupWrapper) => ((group == groupWrapper || group == groupWrapper.Source) && item == null);
-            bool itemSelector(int calcOffset, int i, ItemWrapper itemWrapper) => (group == null && (item == itemWrapper || item == itemWrapper.Source));
-            bool subItemSelector(int calcOffset, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
+            bool groupSelector(int calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => ((group == groupWrapper || group == groupWrapper.Source) && item == null);
+            bool itemSelector(int calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (group == null && (item == itemWrapper || item == itemWrapper.Source));
+            bool subItemSelector(int calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
             {
                 if ((group == groupWrapper || group == groupWrapper.Source) && (item == subItemWrapper || item == subItemWrapper.Source))
                     return true;
@@ -935,25 +946,28 @@ namespace Forms9Patch
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
 
-        DeepDataSet TwoDeepDataSet(Func<int, int, GroupWrapper, bool> groupSelector, Func<int, int, ItemWrapper, bool> itemSelector, Func<int, int, int, GroupWrapper, ItemWrapper, bool> subItemSelector)
+        DeepDataSet TwoDeepDataSet(Func<int, int, int, GroupWrapper, bool> groupSelector, Func<int, int, int, ItemWrapper, bool> itemSelector, Func<int, int, int, int, GroupWrapper, ItemWrapper, bool> subItemSelector)
         {
             var calcOffset = 0;
+            var flatIndex = 0;
             for (int i = 0; i < Count; i++)
             {
                 var itemWrapper = this[i];
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     var groupCellHeight = groupWrapper.BestGuessGroupHeaderHeight();
-                    if (groupSelector(calcOffset + groupCellHeight, i, groupWrapper))
-                        return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, groupCellHeight);
+                    if (groupSelector(calcOffset + groupCellHeight, flatIndex, i, groupWrapper))
+                        return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, groupCellHeight);
                     calcOffset += groupCellHeight;
+                    flatIndex++;
                     for (int j = 0; j < groupWrapper.Count; j++)
                     {
                         var subItemWrapper = groupWrapper[j];
                         var cellHeight = subItemWrapper.BestGuessItemRowHeight();
-                        if (subItemSelector(calcOffset + cellHeight, i, j, groupWrapper, subItemWrapper))
-                            return new DeepDataSet(subItemWrapper, calcOffset, new int[] { i }, cellHeight);
+                        if (subItemSelector(calcOffset + cellHeight, flatIndex, i, j, groupWrapper, subItemWrapper))
+                            return new DeepDataSet(subItemWrapper, calcOffset, new int[] { i, j }, flatIndex, cellHeight);
                         calcOffset += cellHeight;
+                        flatIndex++;
                         if (j < groupWrapper.Count - 1)
                             calcOffset += subItemWrapper.RequestedSeparatorHeight;
                     }
@@ -961,9 +975,10 @@ namespace Forms9Patch
                 else
                 {
                     var cellHeight = itemWrapper.BestGuessItemRowHeight();
-                    if (itemSelector(calcOffset + cellHeight, i, itemWrapper))
-                        return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, cellHeight);
+                    if (itemSelector(calcOffset + cellHeight, flatIndex, i, itemWrapper))
+                        return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, cellHeight);
                     calcOffset += cellHeight;
+                    flatIndex++;
                     if (i < Count - 1)
                         calcOffset += itemWrapper.RequestedSeparatorHeight;
                 }

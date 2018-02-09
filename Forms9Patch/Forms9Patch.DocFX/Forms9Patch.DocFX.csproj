@@ -8,4 +8,9 @@
     <PackageReference Include="docfx.console" Version="2.28.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="images\Guides\" />
+    <Folder Include="images\Guides\GettingStarted\" />
+    <Folder Include="images\Guides\ImageSource\" />
+  </ItemGroup>
 </Project>

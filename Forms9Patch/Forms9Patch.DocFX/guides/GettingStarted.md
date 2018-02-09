@@ -23,37 +23,37 @@ Create the LinkTest application as follows:
  2. Create a new Xamarin Forms project by clicking File / New / Project menu item.
  3. In the New Project dialog, click Cross-Platform, select the Cross Platform App (Xamarin.Forms or Native) template, set the Name and Solution name to `LinkTest`, choose a suitable location for the project and click the OK button:
 
-    ![](../images/Guides_GettingStarted_NewProjectDialog.png)
+    ![](../images/Guides/GettingStarted/NewProjectDialog.png)
 
  4. In the New Cross Platform App dialog, click "Blank App", select "Xamarin.Forms" as the UI Technology, select Portable Class Library (PCL) as the Code Sharing Strategy, and click the OK button:
 
-    ![Guides Getting Started New Cross Platform App](../images/Guides_GettingStarted_NewCrossPlatformApp.png)
+    ![Guides Getting Started New Cross Platform App](../images/Guides/GettingStarted/NewCrossPlatformApp.png)
 
  5. Add the Forms9Patch Nuget package to each of your solution's projects:  
 
     1. In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:
 
-        ![Guides Getting Started Manage Nuget Packages For Solution](../images/Guides_GettingStarted_ManageNugetPackagesForSolution.png)
+        ![Guides Getting Started Manage Nuget Packages For Solution](../images/Guides/GettingStarted/ManageNugetPackagesForSolution.png)
 
     2. ... select the Browse tab ...:
     
-	    ![Guides Getting Started Select The Browse Tab](../images/Guides_GettingStarted_SelectTheBrowseTab.png)
+     ![Guides Getting Started Select The Browse Tab](../images/Guides/GettingStarted/SelectTheBrowseTab.png)
 
     3. ... and search for "Forms9Patch":
 
-        ![Guides Getting Started Search For Forms9 Patch](../images/Guides_GettingStarted_SearchForForms9Patch.png)
+        ![Guides Getting Started Search For Forms9 Patch](../images/Guides/GettingStarted/SearchForForms9Patch.png)
 
     4. Select the Forms9Patch Nuget package:
 
-        ![Guides Getting Started Select The Forms9 Patch Nuget Package](../images/Guides_GettingStarted_SelectTheForms9PatchNugetPackage.png)
+        ![Guides Getting Started Select The Forms9 Patch Nuget Package](../images/Guides/GettingStarted/SelectTheForms9PatchNugetPackage.png)
 
     5. Apply it to all of your solution's projects by selecting the check box at the top of the project selection column:
 
-        ![Guides Getting Started Select All Projects](../images/Guides_GettingStarted_SelectAllProjects.png)
+        ![Guides Getting Started Select All Projects](../images/Guides/GettingStarted/SelectAllProjects.png)
 
     6. Be sure the latest stable package is selected and then click [Install]:
 
-        ![Guides Getting Started Click Install](../images/Guides_GettingStarted_ClickInstall.png)
+        ![Guides Getting Started Click Install](../images/Guides/GettingStarted/ClickInstall.png)
 
  6. Initialize Forms9Patch in each of your platform projects:
 

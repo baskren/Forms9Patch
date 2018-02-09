@@ -40,11 +40,14 @@ namespace Forms9Patch
 
     internal class DeepDataSet : OffsetDataSetBase
     {
-        public int[] Index { get;  }
+        public int[] Index { get; }
 
-        public DeepDataSet(ItemWrapper itemWrapper, double offset,  int[] index, double cellHeight) : base(itemWrapper, offset, cellHeight)
+        public int FlatIndex { get; }
+
+        public DeepDataSet(ItemWrapper itemWrapper, double offset, int[] index, int flatIndex, double cellHeight) : base(itemWrapper, offset, cellHeight)
         {
             Index = index;
+            FlatIndex = flatIndex;
         }
 
         public override string ToString()

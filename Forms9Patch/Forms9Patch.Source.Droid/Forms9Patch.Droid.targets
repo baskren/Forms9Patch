@@ -11,6 +11,7 @@
 			<Link>Effects\SliderStepSizeEffect.cs</Link>
 		</Compile>
 
+
 		<!-- EXTENSIONS -->
 		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs">
 			<Link>Extensions\AlignmentExtensions.cs</Link>
@@ -25,10 +26,6 @@
 			<Link>Extensions\MeasureSpecFactory.cs</Link>
 		</Compile>
 
-		<!-- LISTVIEW -->
-		<Compile Include="..\Forms9Patch.Source.Droid\ListView\ListViewRenderer.cs">
-			<Link>ListView\ListViewRenderer.cs</Link>
-		</Compile>
 
 		<!-- MODELS -->
 		<Compile Include="..\Forms9Patch.Source.Droid\Models\BaselineSpan.cs">
@@ -44,10 +41,12 @@
 			<Link>Models\Settings.cs</Link>
 		</Compile>
 
+
 		<!-- PLATORM VIEWS -->
 		<Compile Include="..\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs">
 			<Link>PlatformViews\F9PTextView.cs</Link>
 		</Compile>
+
 
 		<!-- RENDERERS -->
 		<Compile Include="..\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs">
@@ -56,6 +55,10 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs">
 			<Link>Renderers\LabelRenderer.cs</Link>
 		</Compile>
+		<!--Compile Include="..\Forms9Patch.Source.Droid\Renderers\EnhancedListViewRenderer.cs">
+			<Link>Renderers\EnhancedListViewRenderer.cs</Link>
+		</Compile-->
+
 
 		<!-- SERVICES -->
 		<Compile Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
