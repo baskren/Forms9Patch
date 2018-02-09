@@ -15,7 +15,7 @@ namespace FormsGestures.Droid
         static readonly BindableProperty GestureHandlerProperty = BindableProperty.Create("GestureHandler", typeof(NativeGestureHandler), typeof(NativeGestureHandler), null);
 
         //global::Android.Views.View _view;
-        Java.Lang.Ref.WeakReference _weakReferenceView;
+        //Java.Lang.Ref.WeakReference _weakReferenceView;
 
         NativeGestureListener nativeListener;
 
@@ -158,12 +158,15 @@ namespace FormsGestures.Droid
         }
 
 
-
+        IVisualElementRenderer Renderer = null;
 
         List<Xamarin.Forms.View> _children = new List<Xamarin.Forms.View>();
 
         static int instances;
         int _id;
+
+
+
         NativeGestureHandler(VisualElement element)
         {
             _id = instances++;
@@ -174,7 +177,7 @@ namespace FormsGestures.Droid
 
 
 
-
+        /*
         void RendererDisconnect()
         {
             ClearGestureRecognizers();
@@ -182,26 +185,33 @@ namespace FormsGestures.Droid
             if (renderer != null)
                 renderer.ElementChanged -= OnRendererElementChanged;
         }
+        */
 
         void RendererConnect()
         {
-            var renderer = Platform.GetRenderer(_element);
-            if (renderer != null)
+            var currentRenderer = Platform.GetRenderer(_element);
+            if (currentRenderer != Renderer)
             {
-                renderer.ElementChanged += OnRendererElementChanged;
-                //var view = renderer.GetPropertyValue("Control") as Android.Views.View ?? renderer.ViewGroup;
-                var view = renderer.GetPropertyValue("Control") as Android.Views.View ?? renderer.View;
-                // will be needed for 2.3.5
-                //var _view = renderer.View;
-                if (view == null)
+                if (Renderer != null)
+                    ClearGestureRecognizers();
+                Renderer = currentRenderer;
+                if (Renderer != null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("");
-                    return;
+                    //var view = renderer.GetPropertyValue("Control") as Android.Views.View ?? renderer.ViewGroup;
+                    //var view = currentRenderer.GetPropertyValue("Control") as Android.Views.View ?? currentRenderer.View;
+                    // will be needed for 2.3.5
+                    //var _view = renderer.View;
+                    if (Renderer.View == null)
+                        //{
+                        //System.Diagnostics.Debug.WriteLine("");
+                        return;
+                    //}
+                    ResetGestureRecognizers(Renderer.View);
                 }
-                ResetGestureRecognizers(view);
             }
         }
 
+        /*
         void OnRendererElementChanged(object sender, ElementChangedEventArgs<VisualElement> e)
         {
             if (e.OldElement != null)
@@ -210,34 +220,27 @@ namespace FormsGestures.Droid
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine("OnRendererElementChanged RendererDisconnect");
             }
         }
+        */
 
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (sender is VisualElement element)
-            {
-                if (e.PropertyName == "Renderer")
-                {
-                    RendererDisconnect();
-                    //if (_debugEvents) System.Diagnostics.Debug.WriteLine("OnElementPropertyChanging RendererDisconnect");
-                }
-                else if (e.PropertyName == GestureHandlerProperty.PropertyName)
-                {
-                    _element.Behaviors.Remove(this);
-                }
-
-            }
+            //if (sender is VisualElement element)
+            //{
+            //if (e.PropertyName == "Renderer")
+            //{
+            //RendererDisconnect();
+            //    RendererConnect();
+            //}
+            //else 
+            if (e.PropertyName == GestureHandlerProperty.PropertyName)
+                _element.Behaviors.Remove(this);
+            //}
         }
 
         void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is VisualElement element)
-            {
-                if (e.PropertyName == "Renderer")
-                {
-                    RendererConnect();
-                    //if (_debugEvents) System.Diagnostics.Debug.WriteLine("OnElementPropertyChanged RendererConnect");
-                }
-            }
+            if (e.PropertyName == "Renderer")
+                RendererConnect();
         }
 
 
@@ -255,7 +258,8 @@ namespace FormsGestures.Droid
         {
             // arguably, none of this is necessary since Element owns everything.
             // silence events
-            RendererDisconnect();
+            //RendererDisconnect();
+            RendererConnect();
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("OnDetachingFrom RendererDisconnect");
             bindable.PropertyChanging -= OnElementPropertyChanging;
             bindable.PropertyChanged -= OnElementPropertyChanged;
@@ -282,7 +286,7 @@ namespace FormsGestures.Droid
             nativeListener = new NativeGestureListener(view, _listeners);
             nativeDetector = new NativeGestureDetector(Droid.Settings.Context, nativeListener);
             view.Touch += HandleTouch;
-            _weakReferenceView = new Java.Lang.Ref.WeakReference(view);
+            //_weakReferenceView = new Java.Lang.Ref.WeakReference(view);
         }
 
         internal void ClearGestureRecognizers()
@@ -315,13 +319,15 @@ namespace FormsGestures.Droid
 
         void RemoveTouchHandler()
         {
-            var _view = (Android.Views.View)_weakReferenceView?.Get();
-            if (_view != null)
+            var view = Renderer?.View;
+            //if (view == null)
+            //    view = (Android.Views.View)_weakReferenceView?.Get();
+            if (view != null)
             {
                 try
                 {
 
-                    _view.Touch -= HandleTouch;
+                    view.Touch -= HandleTouch;
                     //_view.SetOnTouchListener(null);
                 }
 #pragma warning disable 0168
@@ -339,9 +345,9 @@ namespace FormsGestures.Droid
                     string s = "You got this Exception because FormsGestures doesn't want to leak nor have gestures go to the wrong listeners.  Ignore it.  It's really ok.";
                     Console.WriteLine(s);
                 }
-                _view = null;
-                _weakReferenceView?.Clear();
-                _weakReferenceView = null;
+                view = null;
+                //_weakReferenceView?.Clear();
+                //_weakReferenceView = null;
             }
 
         }
@@ -381,7 +387,10 @@ namespace FormsGestures.Droid
 
         void XamarinForms_2_4_WorkAround()
         {
-            if (_weakReferenceView?.Get() is FormsViewGroup formsViewGroup)
+            Android.Views.View view = Renderer?.View;
+            //if (view == null)
+            //    view = _weakReferenceView?.Get();
+            if (view is FormsViewGroup formsViewGroup)
             {
                 var parent = formsViewGroup.Parent;
                 if (parent != null)
@@ -394,7 +403,7 @@ namespace FormsGestures.Droid
                     if (objType != null)
                     {
                         var fieldInfo = P42.Utils.ReflectionExtensions.GetFieldInfo(objType, fieldName);
-                        if (fieldInfo != null)
+                        if (fieldInfo != null && parentType.GetField(fieldName) != null)
                             try
                             {
                                 //var _notReallyHandled = (bool)fieldInfo.GetValue(parent);
@@ -428,14 +437,15 @@ namespace FormsGestures.Droid
             object scrollEnabled = _element.GetPropertyValue("ScrollEnabled");
             if (scrollEnabled == null || ((bool)scrollEnabled) || e.Action != MotionEventActions.Move)
             {
-                var _view = (Android.Views.View)_weakReferenceView?.Get();
-                if (_view != null)
+                var view = Renderer?.View;
+                //var view = (Android.Views.View)_weakReferenceView?.Get();
+                if (view != null)
                 {
                     var renderer = Platform.GetRenderer(_element);
                     //var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.ViewGroup;
                     var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.View;
-                    if (currentView != null && _view == currentView)
-                        _view.OnTouchEvent(e);
+                    if (currentView != null && view == currentView)
+                        view.OnTouchEvent(e);
                 }
             }
             //}
