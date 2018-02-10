@@ -16,8 +16,15 @@ namespace Forms9Patch
     {
         #region Properties
 
+        /// <summary>
+        /// There is nothing to see here.  Move on.
+        /// </summary>
         [Obsolete("Invalid property", true)]
         public static new readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ListView), default(View));
+        /// <summary>
+        /// There is nothing to see here.  Move on.
+        /// </summary>
+        /// <value>The content.</value>
         [Obsolete("Invalid property", true)]
         public new View Content
         {
@@ -576,12 +583,19 @@ namespace Forms9Patch
             base.Content = _listView;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
+        /// </summary>
         public ListView()
         {
             _listView = new EnhancedListView();
             Init();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.ListView"/> class.
+        /// </summary>
+        /// <param name="cachingStrategy">Caching strategy.</param>
         public ListView(ListViewCachingStrategy cachingStrategy)
         {
             _listView = new EnhancedListView(cachingStrategy);
@@ -592,6 +606,13 @@ namespace Forms9Patch
 
 
         #region Layout
+        /// <summary>
+        /// Layouts the children.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             base.LayoutChildren(x, y, width, height);
@@ -733,6 +754,10 @@ namespace Forms9Patch
             OnItemTapped(this, args);
         }
 
+        /// <summary>
+        /// Simulates a tap of the item at point in this ListView.
+        /// </summary>
+        /// <param name="p">P.</param>
         public void TapItemAtPoint(Point p)
         {
             var dataSet = TwoDeepDataSetAtPoint(p);
@@ -845,6 +870,10 @@ namespace Forms9Patch
 
         internal List<ItemWrapper> VisibleItemWrappers => new List<ItemWrapper>(_visibleItemWrappers);
 
+        /// <summary>
+        /// Gets a list of the ListView's visible indexes.
+        /// </summary>
+        /// <value>The visible indexes.</value>
         public List<int[]> VisibleIndexes
         {
             get
@@ -872,6 +901,10 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Gets a list of the ListView's visible items.
+        /// </summary>
+        /// <value>The visible items.</value>
         public List<object> VisibleItems
         {
             get
@@ -1153,14 +1186,28 @@ namespace Forms9Patch
 
         internal void OnScrolled(object sender, EventArgs e) => Scrolled?.Invoke(this, EventArgs.Empty);
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is scroll enabled.
+        /// </summary>
+        /// <value><c>true</c> if is scroll enabled; otherwise, <c>false</c>.</value>
         public bool IsScrollEnabled
         {
             get => _listView.IsScrollEnabled;
             set => _listView.IsScrollEnabled = value;
         }
 
+        /// <summary>
+        /// Gets the scroll offset (current position) of ListView.
+        /// </summary>
+        /// <value>The scroll offset.</value>
         public double ScrollOffset => _listView.ScrollOffset;
 
+        /// <summary>
+        /// Scrolls ListView to a position (offset) in pixels from the start
+        /// </summary>
+        /// <returns><c>true</c>, if to was scrolled, <c>false</c> otherwise.</returns>
+        /// <param name="offset">Offset (position) to scroll to.</param>
+        /// <param name="animiated">If set to <c>true</c> animiated.</param>
         public bool ScrollTo(double offset, bool animiated = true) => _listView.ScrollTo(offset, animiated);
 
         internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled", typeof(bool), typeof(ListView), true);
@@ -1171,10 +1218,11 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Scroll the ListView by so many DIPs
+        /// Scrolls the ListView by delta pixels.
         /// </summary>
         /// <returns><c>true</c>, if by was scrolled, <c>false</c> otherwise.</returns>
-        /// <param name="delta">Delta.</param>
+        /// <param name="delta">Delta to move list relative to current position</param>
+        /// <param name="animated">If set to <c>true</c> animated.</param>
         public bool ScrollBy(double delta, bool animated = true) => _listView.ScrollBy(delta, animated);
 
 

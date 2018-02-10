@@ -55,9 +55,9 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs">
 			<Link>Renderers\LabelRenderer.cs</Link>
 		</Compile>
-		<!--Compile Include="..\Forms9Patch.Source.Droid\Renderers\EnhancedListViewRenderer.cs">
+		<Compile Include="..\Forms9Patch.Source.Droid\Renderers\EnhancedListViewRenderer.cs">
 			<Link>Renderers\EnhancedListViewRenderer.cs</Link>
-		</Compile-->
+		</Compile>
 
 
 		<!-- SERVICES -->

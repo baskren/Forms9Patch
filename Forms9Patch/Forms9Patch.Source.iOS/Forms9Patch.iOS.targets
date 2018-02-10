@@ -43,9 +43,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs">
       <Link>Renderers\LabelRenderer.cs</Link>
     </Compile>
-    <!--Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
       <Link>Renderers\EnhancedListViewRenderer.cs</Link>
-    </Compile-->
+    </Compile>
 
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">

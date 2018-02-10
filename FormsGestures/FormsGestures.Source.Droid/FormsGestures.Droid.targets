@@ -65,9 +65,9 @@
     <Compile Include="..\FormsGestures.Source.Droid\DIP.cs" >
       <Link>DIP.cs</Link>
     </Compile>
-    <!--Compile Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs" >
+    <Compile Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs" >
       <Link>NativeGestureHandler.cs</Link>
-    </Compile-->
+    </Compile>
     <Compile Include="..\FormsGestures.Source.Droid\Settings.cs" >
       <Link>Settings.cs</Link>
     </Compile>
