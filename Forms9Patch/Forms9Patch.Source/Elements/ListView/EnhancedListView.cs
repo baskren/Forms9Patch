@@ -37,8 +37,8 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the ScrollOffset property
         /// </summary>
-        public double ScrollOffset => RendererScrollOffset.Invoke(); 
-        
+        public double ScrollOffset => RendererScrollOffset.Invoke();
+
         #endregion ScrollOffset property
 
 
@@ -54,13 +54,14 @@ namespace Forms9Patch
         /// Constructor for Forms9Patch.EnhancedListView
         /// </summary>
         public EnhancedListView() : base() { }
-       
+
         /// <summary>
         /// Constructor for Forms9Patch.EnhancedListView
         /// </summary>
         /// <param name="cachingStrategy"></param>
         public EnhancedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy) { }
         #endregion
+
 
         #region  Platform method delegates
         internal Func<double, bool, bool> RendererScrollBy;
@@ -71,14 +72,14 @@ namespace Forms9Patch
 
         #region Methods
 
-        public bool ScrollBy(double delta, bool animated=true)
+        public bool ScrollBy(double delta, bool animated = true)
         {
             if (RendererScrollBy != null)
                 return RendererScrollBy(delta, animated);
             return false;
         }
 
-        public bool ScrollTo(double offset, bool animated=true)
+        public bool ScrollTo(double offset, bool animated = true)
         {
             if (RendererScrollTo != null)
                 return RendererScrollTo(offset, animated);
@@ -118,11 +119,13 @@ namespace Forms9Patch
         internal void OnScrolling(object sender, EventArgs args)
         {
             Scrolling?.Invoke(this, args);
+            //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolling: offset=[" + ScrollOffset + "]");
         }
 
         internal void OnScrolled(object sender, EventArgs args)
         {
-            Scrolled?.Invoke(this, args); 
+            Scrolled?.Invoke(this, args);
+            //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolled: offset=[" + ScrollOffset + "]");
         }
         #endregion
     }

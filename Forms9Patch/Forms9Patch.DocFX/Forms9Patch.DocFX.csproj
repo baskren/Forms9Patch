@@ -12,5 +12,6 @@
     <Folder Include="images\Guides\" />
     <Folder Include="images\Guides\GettingStarted\" />
     <Folder Include="images\Guides\ImageSource\" />
+    <Folder Include="images\Guides\Image\" />
   </ItemGroup>
 </Project>

@@ -11,8 +11,8 @@ namespace Forms9Patch.Droid
 {
     public class EnhancedListViewRenderer : Xamarin.Forms.Platform.Android.ListViewRenderer
     {
-        /*
-        ScrollListener _scrollListener = null;
+
+        ScrollListener _scrollListener;
         ScrollListener ScrollListener
         {
             get
@@ -21,7 +21,7 @@ namespace Forms9Patch.Droid
                 return _scrollListener;
             }
         }
-        */
+
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
         {
@@ -32,7 +32,7 @@ namespace Forms9Patch.Droid
                 oldElement.RendererScrollTo -= ScrollTo;
                 oldElement.RendererScrollOffset -= ScrollOffset;
                 oldElement.RendererHeaderHeight -= HeaderHeight;
-                //ScrollListener.Element = null;
+                ScrollListener.Element = null;
             }
             if (e.NewElement is EnhancedListView newElement)
             {
@@ -41,14 +41,12 @@ namespace Forms9Patch.Droid
                 newElement.RendererScrollOffset += ScrollOffset;
                 newElement.RendererHeaderHeight += HeaderHeight;
 
-                //ScrollListener.Element = newElement;
-                //Control.SetOnScrollListener(ScrollListener);
-
-                Control.ScrollStateChanged += Control_ScrollStateChanged;
+                ScrollListener.Element = newElement;
+                Control.SetOnScrollListener(ScrollListener);
 
             }
             Control.Divider = null;
-            Control.DividerHeight = -1;
+            Control.DividerHeight = 0;
             /* none of the following seem to do anything!
 			Control.SetSelector(Android.Resource.Color.Transparent);
 			Control.ChoiceMode = ChoiceMode.MultipleModal;
@@ -75,17 +73,13 @@ namespace Forms9Patch.Droid
             return true;
         }
 
-
         bool ScrollTo(double offset, bool animated)
         {
             if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
             {
-                var deepDataSource = groupWrapper.TwoDeepDataSetForOffset(offset);
-                var delta = offset - deepDataSource.Offset;
-                if (animated)
-                    Control.SmoothScrollToPositionFromTop(deepDataSource.FlatIndex, (int)delta);
-                else
-                    Control.SetSelectionFromTop(deepDataSource.FlatIndex, (int)delta);
+                // Animation not supported on Android because SmoothScrollToTop fires a bunch of ScrollListener.OnScrolledStateChanged(ScrolledState.Idle) calls during animation.
+                // There appears to be no way of knowing when the animation is on going without overriding the native Android.ListView's LinearLayoutManager.  Too tall of an order.
+                Control.SetSelectionFromTop(0, (int)Math.Round(-offset * Forms9Patch.Display.Scale));
                 return true;
             }
             return false;
@@ -95,19 +89,28 @@ namespace Forms9Patch.Droid
         {
             if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
             {
+                var cellView = Control.GetChildAt(0);
+                if (cellView == null)
+                    return -1;
+
                 int index = Control.FirstVisiblePosition;
-                var deepDataSource = groupWrapper.TwoDeepDataSetForFlatIndex(index);
-                var cellView = Control.GetChildAt(index);
-                if (cellView != null)
+                if (index == 0)
+                    return -cellView.Top / Forms9Patch.Display.Scale;
+
+                if (Control.HeaderViewsCount > 0)
                 {
-                    var offset = HeaderHeight() + deepDataSource.Offset + cellView.Top - Control.ListPaddingTop;
-                    return offset;
+                    index--;
+                    if (Control.HeaderViewsCount > 1)
+                        throw new NotSupportedException("EnhancedListViewRenderer only supports 0 or 1 ListView.Header");
                 }
+
+                var deepDataSource = groupWrapper.TwoDeepDataSetForFlatIndex(index);
+                return HeaderHeight() + deepDataSource.Offset - cellView.Top / Forms9Patch.Display.Scale;
             }
             return 0;
         }
 
-        double HeaderHeight()
+        double NativeHeaderHeight()
         {
             if (Element.HeaderElement is VisualElement headerElement)
             {
@@ -118,43 +121,35 @@ namespace Forms9Patch.Droid
             return 0;
         }
 
-        void Control_ScrollStateChanged(object sender, AbsListView.ScrollStateChangedEventArgs e)
+        double HeaderHeight() => NativeHeaderHeight() / Forms9Patch.Display.Scale;
+
+
+        double NativeFooterHeight()
         {
-            if (e.ScrollState == ScrollState.Idle)
-                ((EnhancedListView)Element).OnScrolled(this, EventArgs.Empty);
-            else
-                ((EnhancedListView)Element).OnScrolling(this, EventArgs.Empty);
+            if (Element.FooterElement is VisualElement footerElement)
+            {
+                if (Platform.GetRenderer(footerElement) is IVisualElementRenderer footerRenderer)
+                    return footerRenderer.View.Height;
+                throw new Exception("Element.HeaderElement should have a renderer");
+            }
+            return 0;
         }
+
+        double FooterHeight() => NativeFooterHeight() / Forms9Patch.Display.Scale;
     }
 
-    /*
+
     class ScrollListener : Java.Lang.Object, Android.Widget.ListView.IOnScrollListener
     {
-        public Forms9Patch.ListView Element;
+        public Forms9Patch.EnhancedListView Element;
 
-        public ScrollListener()
-        {
-        }
-
-        //bool _scrolling;
-        public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
-        {
-            //System.Diagnostics.Debug.WriteLine("SCROLLING");
-            //IVisualElementRenderer renderer = Platform.GetRenderer(Element);
-            //if (renderer != null)
-            Element?.OnScrolling(this, EventArgs.Empty);
-        }
+        public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) => Element?.OnScrolling(this, EventArgs.Empty);
 
         public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
         {
-            //System.Diagnostics.Debug.WriteLine("SCROLL STATE=["+scrollState+"]");
-            //IVisualElementRenderer renderer = Platform.GetRenderer(Element);
-            //if (renderer != null)
-            {
-                if (scrollState == ScrollState.Idle)
-                    Element?.OnScrolled(this, EventArgs.Empty);
-            }
+            if (scrollState == ScrollState.Idle)
+                Element?.OnScrolled(this, EventArgs.Empty);
         }
     }
-    */
+
 }

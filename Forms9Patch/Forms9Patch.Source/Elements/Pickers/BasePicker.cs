@@ -158,6 +158,8 @@ namespace Forms9Patch
         /// </summary>
         public BasePicker()
         {
+            //_lowerPadding.SizeChanged += _lowerPadding_SizeChanged;
+
             BackgroundColor = Color.Transparent;
             _listView.RowHeight = RowHeight;
             _listView.GroupToggleBehavior = GroupToggleBehavior;
@@ -228,9 +230,9 @@ namespace Forms9Patch
             }
             else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
             {
-                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.RuntimePlatform == Device.Android ? 8 : 0);
-                //_upperPadding.HeightRequest = (Height - RowHeight) / 2.0 + (Device.OS == TargetPlatform.Android ? 8 : 0);
-                _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
+                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0; // + (Device.RuntimePlatform == Device.Android ? 8 : 0);
+                _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;// * (Device.RuntimePlatform == Device.Android ? Forms9Patch.Display.Scale : 1);
+                _lowerPadding.MinimumHeightRequest = _lowerPadding.HeightRequest;
             }
             else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
                 ScrollToIndex(Index);
@@ -319,10 +321,11 @@ namespace Forms9Patch
             _scrolling = true;
             var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
 
-            //System.Diagnostics.Debug.WriteLine("deepDataSet=[" + deepDataSet + "]");
+            //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolling() deepDataSet=[" + deepDataSet + "]");
 
             if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
                 Index = deepDataSet.Index[0];
+
         }
 
         bool _scrollCompleting;
@@ -337,6 +340,23 @@ namespace Forms9Patch
         }
 
         #endregion
+
+        /*
+        #region ListView Property Change Response
+
+        void _lowerPadding_SizeChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("_lowerPadding .Height=[" + _lowerPadding.Height + "] .HieghtRequest=[" + _lowerPadding.HeightRequest + "]");
+            var error = _lowerPadding.Height - (Height - RowHeight) / 2.0;
+            if (Math.Abs(error) > 0.1)
+            {
+                _lowerPadding.HeightRequest = _lowerPadding.MinimumHeightRequest = _lowerPadding.HeightRequest + error;
+            }
+        }
+
+        #endregion
+        */
+
     }
 }
 

@@ -36,6 +36,11 @@ namespace Forms9Patch
         {
             return "ItemWrapper[" + ItemWrapper.Description() + "] Offset[" + Offset + "] CellHeight[" + CellHeight + "]";
         }
+
+        public virtual string Description()
+        {
+            return ItemWrapper.Description() + ", " + Offset + ", " + CellHeight;
+        }
     }
 
     internal class DeepDataSet : OffsetDataSetBase
@@ -52,7 +57,12 @@ namespace Forms9Patch
 
         public override string ToString()
         {
-            return base.ToString() + " Index[{" + string.Join(", ", Index) + "}]";
+            return base.ToString() + " Index[{" + string.Join(", ", Index) + "} FlatIndex=[" + FlatIndex + "]";
+        }
+
+        public override string Description()
+        {
+            return base.Description() + ", {" + string.Join(", ", Index) + "}, " + FlatIndex;
         }
     }
 

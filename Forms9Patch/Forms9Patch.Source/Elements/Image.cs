@@ -55,20 +55,6 @@ namespace Forms9Patch
         #endregion IsLoading property
 
         #region Fill
-        /*
-        /// <summary>
-        /// UNSUPPORTED INHERITED PROPERTY. See <see cref="Forms9Patch.Fill"/>.
-        /// </summary>
-        public new static readonly BindableProperty AspectProperty = BindableProperty.Create("Aspect", typeof(Aspect), typeof(Image), Aspect.Fill, BindingMode.OneWay, null, null, null, null, null);
-        /// <summary>
-        /// UNSUPPORTED INHERITED PROPERTY. See <see cref="Forms9Patch.Fill"/>.
-        /// </summary>
-        /// <value>The scaling method</value>
-        public new Aspect Aspect
-        {
-            get { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
-            set { throw new NotSupportedException("[Forms9Patch.Image]Aspect property is not supported"); }
-        }*/
 
         /// <summary>
         /// Backing store for the Fill bindable property.
@@ -124,7 +110,7 @@ namespace Forms9Patch
         public Thickness ContentPadding
         {
             get { return (Thickness)GetValue(ContentPaddingProperty); }
-            internal set { SetValue (ContentPaddingProperty, value); }
+            internal set { SetValue(ContentPaddingProperty, value); }
         }
         #endregion ContentPadding
 
@@ -332,7 +318,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="embeddedResourceId">EmbeddedResourceId for image</param>
         /// <param name="assembly">Assembly in which embedded resource is embedded</param>
-        public Image(string embeddedResourceId, Assembly assembly=null) : this()
+        public Image(string embeddedResourceId, Assembly assembly = null) : this()
         {
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
