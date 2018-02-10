@@ -11,7 +11,7 @@ namespace Forms9Patch.Droid
 {
     public class EnhancedListViewRenderer : Xamarin.Forms.Platform.Android.ListViewRenderer
     {
-
+        #region Fields
         ScrollListener _scrollListener;
         ScrollListener ScrollListener
         {
@@ -21,8 +21,10 @@ namespace Forms9Patch.Droid
                 return _scrollListener;
             }
         }
+        #endregion
 
 
+        #region ElementChanged
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
         {
             base.OnElementChanged(e);
@@ -32,6 +34,7 @@ namespace Forms9Patch.Droid
                 oldElement.RendererScrollTo -= ScrollTo;
                 oldElement.RendererScrollOffset -= ScrollOffset;
                 oldElement.RendererHeaderHeight -= HeaderHeight;
+                oldElement.PropertyChanging -= OnElementPropertyChanging;
                 ScrollListener.Element = null;
             }
             if (e.NewElement is EnhancedListView newElement)
@@ -40,9 +43,13 @@ namespace Forms9Patch.Droid
                 newElement.RendererScrollTo += ScrollTo;
                 newElement.RendererScrollOffset += ScrollOffset;
                 newElement.RendererHeaderHeight += HeaderHeight;
+                newElement.PropertyChanging += OnElementPropertyChanging;
 
                 ScrollListener.Element = newElement;
                 Control.SetOnScrollListener(ScrollListener);
+
+                if (newElement.FooterElement is VisualElement footer)
+                    footer.PropertyChanged += Footer_PropertyChanged;
 
             }
             Control.Divider = null;
@@ -55,9 +62,40 @@ namespace Forms9Patch.Droid
             //Control.Enabled = false;  // disables selection AND scrolling!
             Control.Clickable = false;  // appears to do nothing?
         }
+        #endregion
 
-        //int offset;
-        //int lastIndex = -1;
+
+        #region Element Property Change Responders
+        void OnElementPropertyChanging(object sender, PropertyChangingEventArgs e)
+        {
+            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element.FooterElement is VisualElement footer)
+                footer.PropertyChanged -= Footer_PropertyChanged;
+        }
+
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element.FooterElement is VisualElement footer)
+                footer.PropertyChanged += Footer_PropertyChanged;
+        }
+
+        void Footer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName && Element.FooterElement is VisualElement footer)
+            {
+                footer.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
+                var sizeRequest = footer.Measure(Element.Width, double.PositiveInfinity);
+                if (footer.Bounds.Size != sizeRequest.Request && Platform.GetRenderer(footer) is IVisualElementRenderer footerRenderer)
+                {
+                    footer.Layout(new Rectangle(0, 0, sizeRequest.Request.Width, sizeRequest.Request.Height));
+                    footerRenderer.UpdateLayout();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Scrolling
         bool ScrollBy(double delta, bool animated)
         {
             if (animated)
@@ -109,7 +147,10 @@ namespace Forms9Patch.Droid
             }
             return 0;
         }
+        #endregion
 
+
+        #region HeaderHeight
         double NativeHeaderHeight()
         {
             if (Element.HeaderElement is VisualElement headerElement)
@@ -122,8 +163,10 @@ namespace Forms9Patch.Droid
         }
 
         double HeaderHeight() => NativeHeaderHeight() / Forms9Patch.Display.Scale;
+        #endregion
 
 
+        #region FooterHeight
         double NativeFooterHeight()
         {
             if (Element.FooterElement is VisualElement footerElement)
@@ -136,9 +179,10 @@ namespace Forms9Patch.Droid
         }
 
         double FooterHeight() => NativeFooterHeight() / Forms9Patch.Display.Scale;
+        #endregion
     }
 
-
+    #region ScrollListener 
     class ScrollListener : Java.Lang.Object, Android.Widget.ListView.IOnScrollListener
     {
         public Forms9Patch.EnhancedListView Element;
@@ -151,5 +195,5 @@ namespace Forms9Patch.Droid
                 Element?.OnScrolled(this, EventArgs.Empty);
         }
     }
-
+    #endregion
 }

@@ -47,7 +47,7 @@ like Android's `Draw 9-patch` to mark the horizontal and vertical stretchable re
 
 | **Before marking** | **After marking** |
 |---|---|
-|![bubble.png](../Images/Guides/Image/bubble.png) | ![bubble.9.png](../Images/Guides/Image/bubble.9.png)|
+|![bubble.png](../images/Guides/Image/bubble.png) | ![bubble.9.png](../images/Guides/Image/bubble.9.png)|
 |`bubble.png` | `bubble.9.png` |
 |200x122 | 202x124|
 
@@ -69,7 +69,7 @@ var label = new label ()
 
 Resulting in:
 
-![bubbleScreenshotIOS.png](../Images/Guides/Image/bubbleScreenshotIOS.png)
+![bubbleScreenshotIOS.png](../images/Guides/Image/bubbleScreenshotIOS.png)
 
 ## CapsInset Property
 
@@ -79,7 +79,7 @@ The `CapInset` property is used to specify the regions (distance inset from the
 edges) which will not scale when the image is stretched to fill it's parent view.  
 For example, let's make the following image a banner by scaling it horizontally.
 
-| ![redribbon.png](../Images/Guides/Image/redribbon.png) |
+| ![redribbon.png](../images/Guides/Image/redribbon.png) |
 | --- |
 | **ResourceID:** MyDemoApp.Resources.Images.redribbon.png |
 | **Image Size:** 308x80 |
@@ -107,7 +107,7 @@ var image2 = new Forms9Patch.Image ()
 ```
 | **iPhone** | **Android** |
 |------------|-------------|
-| ![iPhone screen shot](../Images/Guides/Image/ribbonIOS.png) | ![Android scren shot](../Images/Guides/Image/ribbonAndroid.png) |
+| ![iPhone screen shot](../images/Guides/Image/ribbonIOS.png) | ![Android scren shot](../images/Guides/Image/ribbonAndroid.png) |
 
 ### XAML Example for `CapsInset`
 
@@ -141,6 +141,10 @@ need to add an XAML markup extension to the assembly that contains those images
 </ContentPage>
 ```
 
+## Embedded Resource Convenience Constructor
+
+If you do most of your layouts in code (rather than XAML), there are some tasks
+
 ## Fill Property
 
 `Forms9Patch.Image.Fill` property is almost identical to `Xamarin.Forms.Image.Aspect` 
@@ -155,8 +159,19 @@ this is by changing the color of monochrome images (often used as icons).  Forms
 makes this easy by giving `Forms9Patch.Image` the `TintColor` property.  By example,
 let's say you have the following multi-resolution image set:
 
-| **1x** | **2x** | **3x** |
+| *Scale* | **1x** | **2x** | **3x** |
+|---|---|---|---|
+| *Image* | ![ic_explore.png](../images/Guides/Image/ic_explore.png) | ![ic_explore@2x.png](../images/Guides/Image/ic_explore@2x.png) | ![ic_explore@3x.png](../images/Guides/Image/ic_explore@3x.png) |
+| *ResourceId* | MyApp.Resources.ic_explore.png | MyApp.Resource.ic_explore@2x.png | MyApp.Resource.ic_explore@3x.png |
 
+The below example will tint them to `Xamarin.Forms.Color.Blue`:
+
+```csharp
+    var image = new Forms9Patch.Image
+    {
+        Source = Forms9Patch.ImageSource
+    };
+```
 
 **Note:** The `TintColor` property is intented for use with *raster* images that have and 
 makes use of the transparent color plane.  Results will likely be undesireable 

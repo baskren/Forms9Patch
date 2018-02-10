@@ -125,27 +125,10 @@ namespace Forms9Patch
 
 
         #region Fields
-        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView
-        {
-            /*
-            IsGroupingEnabled = false,
-            IsSeparatorVisible = false,
-            BackgroundColor = Color.Transparent,
-            IsScrollListening = true,
-            */
-        };
+        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView();
+        readonly PickerHeader _upperPadding = new PickerHeader();
+        readonly PickerFooter _lowerPadding = new PickerFooter();
 
-        readonly BoxView _upperPadding = new BoxView
-        {
-            BackgroundColor = Color.Transparent
-        };
-
-        readonly BoxView _lowerPadding = new BoxView
-        {
-            BackgroundColor = Color.Transparent
-        };
-
-        //internal bool PositionToSelect;
         internal SelectBy SelectBy;
         bool _tapping;
         bool _scrolling;
@@ -158,8 +141,6 @@ namespace Forms9Patch
         /// </summary>
         public BasePicker()
         {
-            //_lowerPadding.SizeChanged += _lowerPadding_SizeChanged;
-
             BackgroundColor = Color.Transparent;
             _listView.RowHeight = RowHeight;
             _listView.GroupToggleBehavior = GroupToggleBehavior;
@@ -219,9 +200,8 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //if (propertyName == ItemsSourceProperty.PropertyName)
-            //	System.Diagnostics.Debug.WriteLine("");
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == ItemsSourceProperty.PropertyName)
             {
                 _listView.ItemsSource = ItemsSource;
@@ -230,9 +210,8 @@ namespace Forms9Patch
             }
             else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
             {
-                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0; // + (Device.RuntimePlatform == Device.Android ? 8 : 0);
-                _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;// * (Device.RuntimePlatform == Device.Android ? Forms9Patch.Display.Scale : 1);
-                _lowerPadding.MinimumHeightRequest = _lowerPadding.HeightRequest;
+                _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
+                _upperPadding.HeightRequest = (Height - RowHeight) / 2.0;
             }
             else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
                 ScrollToIndex(Index);
@@ -260,8 +239,6 @@ namespace Forms9Patch
         /// <param name="force">If set to <c>true</c> scroll to index even if already scrolling.</param>
         public virtual void ScrollToIndex(int index, bool force = false)
         {
-
-            //System.Diagnostics.Debug.WriteLine("ScrollToIndex("+index+")");
             if (ItemsSource == null)
                 return;
 
@@ -297,7 +274,6 @@ namespace Forms9Patch
                     indexItem = lastItem;
                 if (indexItem != null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("indexItem=["+indexItem+"]");
                     if (!_scrolling || force)
                         _listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
                     if (SelectBy == SelectBy.Position)
@@ -311,7 +287,6 @@ namespace Forms9Patch
             }
 
         }
-
         #endregion
 
 
@@ -320,12 +295,8 @@ namespace Forms9Patch
         {
             _scrolling = true;
             var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
-
-            //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolling() deepDataSet=[" + deepDataSet + "]");
-
             if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
                 Index = deepDataSet.Index[0];
-
         }
 
         bool _scrollCompleting;
@@ -333,30 +304,29 @@ namespace Forms9Patch
         {
             if (SelectBy == SelectBy.Position)
                 ScrollToIndex(Index, true);
-            //System.Diagnostics.Debug.WriteLine("Index=["+Index+"] ["+ItemsSource[Index]+"]");
             _scrolling = false;
-            // so why was the following line added?  Android, perhaps?
-            //_scrollCompleting = true;
         }
 
         #endregion
-
-        /*
-        #region ListView Property Change Response
-
-        void _lowerPadding_SizeChanged(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("_lowerPadding .Height=[" + _lowerPadding.Height + "] .HieghtRequest=[" + _lowerPadding.HeightRequest + "]");
-            var error = _lowerPadding.Height - (Height - RowHeight) / 2.0;
-            if (Math.Abs(error) > 0.1)
-            {
-                _lowerPadding.HeightRequest = _lowerPadding.MinimumHeightRequest = _lowerPadding.HeightRequest + error;
-            }
-        }
-
-        #endregion
-        */
 
     }
+
+    class PickerFooter : Xamarin.Forms.BoxView
+    {
+        public PickerFooter()
+        {
+            BackgroundColor = Color.Transparent;
+        }
+    }
+
+    class PickerHeader : Xamarin.Forms.BoxView
+    {
+        public PickerHeader()
+        {
+            BackgroundColor = Color.Transparent;
+        }
+    }
+
+
 }
 
