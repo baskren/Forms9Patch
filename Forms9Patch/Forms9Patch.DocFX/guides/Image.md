@@ -37,7 +37,7 @@ management of textures.  See the [Forms9PatchDemo app](https://github.com/baskre
 for examples of it in action.
 
 
-## Intro to NinePatch images
+## NinePatch images
 
 Let's describe the use of `Forms9Patch.Image` for NinePatch images through an example.  
 Say you want to display a pop-up message bubble where the tip is centered.  
@@ -70,6 +70,8 @@ var label = new label ()
 Resulting in:
 
 ![bubbleScreenshotIOS.png](../images/Guides/Image/bubbleScreenshotIOS.png)
+
+
 
 ## CapsInset Property
 
@@ -141,6 +143,7 @@ need to add an XAML markup extension to the assembly that contains those images
 </ContentPage>
 ```
 
+
 ## Embedded Resource Convenience Constructor
 
 If you do most of your layouts in code (rather than XAML), there are tasks you 
@@ -149,10 +152,10 @@ of that task would be convenient.  If you often use `Forms9Patch.ImageSource.Fro
 `Forms9Patch.ImageSource.FromResource`, or `Xamarin.Forms.ImageSource.FromResource` 
 as the source for your `Forms9Patch.Image` or `Xamarin.Forms.Image`, you will be
 happy to know that you can instead pass the EmbeddedResourceId as an parameter
-to the `Forms9Patch.Image` constructor!
+to the `Forms9Patch.Image` constructor.
 
 ```csharp
-    var image = new Forms9Patch.Image("
+    var image = new Forms9Patch.Image("Forms9PatchDemo.Resources.Images.redribbon");
 ```
 
 
@@ -162,6 +165,8 @@ to the `Forms9Patch.Image` constructor!
 property.  It is only different in that it uses `Forms9Patch.Fill` instead of 
 `Xamarin.Forms.Aspect` - which means it also supports `Forms9Patch.Fill.Tile` 
 to direct `Forms9Patch.Image` to tile a source image in the image layout.
+
+
 
 ## TintColor Property
 
@@ -178,9 +183,9 @@ let's say you have the following multi-resolution image set:
 The below example will tint them to `Xamarin.Forms.Color.Blue`:
 
 ```csharp
-    var image = new Forms9Patch.Image
+    var image = new Forms9Patch.Image("MyApp.Resource.ic_explore")
     {
-        Source = Forms9Patch.ImageSource
+        TintColor = Color.Blue
     };
 ```
 
@@ -189,3 +194,5 @@ makes use of the transparent color plane.  Results will likely be undesireable
 for other types of raster images.  This property is ignored for vector (`.svg`) 
 images.  
 
+
+## 

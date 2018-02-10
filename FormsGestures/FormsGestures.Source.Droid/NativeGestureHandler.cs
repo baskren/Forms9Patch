@@ -281,7 +281,6 @@ namespace FormsGestures.Droid
 
         internal void ResetGestureRecognizers(Android.Views.View view)
         {
-
             ClearGestureRecognizers();
             nativeListener = new NativeGestureListener(view, _listeners);
             nativeDetector = new NativeGestureDetector(Droid.Settings.Context, nativeListener);
@@ -403,7 +402,7 @@ namespace FormsGestures.Droid
                     if (objType != null)
                     {
                         var fieldInfo = P42.Utils.ReflectionExtensions.GetFieldInfo(objType, fieldName);
-                        if (fieldInfo != null && parentType.GetField(fieldName) != null)
+                        if (fieldInfo != null) // && parentType.GetField(fieldName) != null)  THIS CODE CAUSES the Listener for PoupBase._pageOverlay to not work.
                             try
                             {
                                 //var _notReallyHandled = (bool)fieldInfo.GetValue(parent);
