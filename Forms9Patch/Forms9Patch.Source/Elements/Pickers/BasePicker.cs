@@ -126,8 +126,8 @@ namespace Forms9Patch
 
         #region Fields
         internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView();
-        readonly PickerHeader _upperPadding = new PickerHeader();
-        readonly PickerFooter _lowerPadding = new PickerFooter();
+        readonly BoxView _upperPadding = new BoxView { Color = Color.Transparent };
+        readonly BoxView _lowerPadding = new BoxView { Color = Color.Transparent };
 
         internal SelectBy SelectBy;
         bool _tapping;
@@ -190,6 +190,10 @@ namespace Forms9Patch
             _tapping = false;
         }
 
+        public void TapItemAtPoint(Point p)
+        {
+            _listView.TapItemAtPoint(p);
+        }
         #endregion
 
 
@@ -309,22 +313,6 @@ namespace Forms9Patch
 
         #endregion
 
-    }
-
-    class PickerFooter : Xamarin.Forms.BoxView
-    {
-        public PickerFooter()
-        {
-            BackgroundColor = Color.Transparent;
-        }
-    }
-
-    class PickerHeader : Xamarin.Forms.BoxView
-    {
-        public PickerHeader()
-        {
-            BackgroundColor = Color.Transparent;
-        }
     }
 
 

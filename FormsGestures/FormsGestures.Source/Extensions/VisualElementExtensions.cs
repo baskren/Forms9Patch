@@ -68,100 +68,100 @@ namespace FormsGestures
         /// <summary>
         /// Translates the bounds of an element to the coordinates of app's window
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="fromElement"></param>
         /// <returns></returns>
-        public static Rectangle BoundsToWinCoord(this VisualElement element)
+        public static Rectangle BoundsToWinCoord(this VisualElement fromElement)
         {
-            return element.BoundsToEleCoord(Application.Current.MainPage);
+            return fromElement.BoundsToEleCoord(Application.Current.MainPage);
         }
 
         /// <summary>
         /// Translates the bounds of an element to the coordinates of another, reference element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="referenceElement"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="toElement"></param>
         /// <returns></returns>
-        public static Rectangle BoundsToEleCoord(this VisualElement element, VisualElement referenceElement)
+        public static Rectangle BoundsToEleCoord(this VisualElement fromElement, VisualElement toElement)
         {
-            return Service.CoordTransform(element, element.Bounds, referenceElement);
+            return Service.CoordTransform(fromElement, fromElement.Bounds, toElement);
         }
 
         /// <summary>
         /// Translates the location of an element to the app's window's coordinates
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="fromElement"></param>
         /// <returns></returns>
-        public static Point LocationToWinCoord(this VisualElement element)
+        public static Point LocationToWinCoord(this VisualElement fromElement)
         {
-            return element.LocationToEleCoord(Application.Current.MainPage);
+            return fromElement.LocationToEleCoord(Application.Current.MainPage);
         }
 
         /// <summary>
         /// Translates the location of an element to the coordinates of another, reference element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="referenceElement"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="toElement"></param>
         /// <returns></returns>
-        public static Point LocationToEleCoord(this VisualElement element, VisualElement referenceElement)
+        public static Point LocationToEleCoord(this VisualElement fromElement, VisualElement toElement)
         {
-            return Service.CoordTransform(element, element.Bounds.Location, referenceElement);
+            return Service.CoordTransform(fromElement, fromElement.Bounds.Location, toElement);
         }
 
         /// <summary>
         /// determines if point in this element is withing the bounds of another, test element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="p"></param>
-        /// <param name="testElement"></param>
+        /// <param name="hitElement"></param>
+        /// <param name="hitPoint"></param>
+        /// <param name="targetElement"></param>
         /// <returns></returns>
-        public static bool HitTest(this VisualElement element, Point p, VisualElement testElement)
+        public static bool HitTest(this VisualElement hitElement, Point hitPoint, VisualElement targetElement)
         {
-            var testPoint = CoordTransform(element, p, testElement);
-            return testElement.Bounds.Contains(testPoint);
+            var testPoint = CoordTransform(hitElement, hitPoint, targetElement);
+            return targetElement.Bounds.Contains(testPoint);
         }
 
         /// <summary>
         /// translates a point in this element's coordinate space to the app's window's coordintate space
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="p"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="fromPoint"></param>
         /// <returns></returns>
-        public static Point ToWinCoord(this VisualElement element, Point p)
+        public static Point ToWinCoord(this VisualElement fromElement, Point fromPoint)
         {
-            return element.ToEleCoord(p, Application.Current.MainPage);
+            return fromElement.ToEleCoord(fromPoint, Application.Current.MainPage);
         }
 
         /// <summary>
         /// translates a point in this element's coordinate space to the coordinate space of another, reference element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="p"></param>
-        /// <param name="altElement"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="fromPoint"></param>
+        /// <param name="toElement"></param>
         /// <returns></returns>
-        public static Point ToEleCoord(this VisualElement element, Point p, VisualElement altElement)
+        public static Point ToEleCoord(this VisualElement fromElement, Point fromPoint, VisualElement toElement)
         {
-            return Service.CoordTransform(element, p, altElement);
+            return Service.CoordTransform(fromElement, fromPoint, toElement);
         }
 
         /// <summary>
         /// translates a point in the app's window coordinate space to that of this element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="p"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="fromPoint"></param>
         /// <returns></returns>
-        public static Point WinToEleCoord(this VisualElement element, Point p)
+        public static Point WinToEleCoord(this VisualElement fromElement, Point fromPoint)
         {
-            return Service.CoordTransform(Application.Current.MainPage, p, element);
+            return Service.CoordTransform(Application.Current.MainPage, fromPoint, fromElement);
         }
         /// <summary>
         /// translates a rectangle from the app's window coordinates to that of this element
         /// </summary>
-        /// <param name="element"></param>
-        /// <param name="windowRect"></param>
+        /// <param name="fromElement"></param>
+        /// <param name="fromRectangle"></param>
         /// <returns></returns>
-        public static Rectangle WinToEleCoord(this VisualElement element, Rectangle windowRect)
+        public static Rectangle WinToEleCoord(this VisualElement fromElement, Rectangle fromRectangle)
         {
-            return Service.CoordTransform(Application.Current.MainPage, windowRect, element);
+            return Service.CoordTransform(Application.Current.MainPage, fromRectangle, fromElement);
         }
 
         /// <summary>
@@ -284,7 +284,6 @@ namespace FormsGestures
         {
             return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, null);
         }
-
 
     }
 }

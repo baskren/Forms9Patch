@@ -45,8 +45,10 @@ namespace Forms9Patch.Droid
                 newElement.RendererHeaderHeight += HeaderHeight;
                 newElement.PropertyChanging += OnElementPropertyChanging;
 
+                ScrollListener.IsBuildingLayOut = true;
                 ScrollListener.Element = newElement;
                 Control.SetOnScrollListener(ScrollListener);
+                ScrollListener.IsBuildingLayOut = false;
 
                 if (newElement.FooterElement is VisualElement footer)
                     footer.PropertyChanged += Footer_PropertyChanged;
@@ -60,10 +62,9 @@ namespace Forms9Patch.Droid
 			Control.SetMultiChoiceModeListener(new ChoiceListener());
 			*/
             //Control.Enabled = false;  // disables selection AND scrolling!
-            Control.Clickable = false;  // appears to do nothing?
+            //Control.Clickable = false;  // this will disable Click (tap) gesture
         }
         #endregion
-
 
         #region Element Property Change Responders
         void OnElementPropertyChanging(object sender, PropertyChangingEventArgs e)
@@ -94,6 +95,13 @@ namespace Forms9Patch.Droid
         }
 
         #endregion
+
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        {
+            ScrollListener.IsBuildingLayOut = true;
+            base.OnLayout(changed, l, t, r, b);
+            ScrollListener.IsBuildingLayOut = false;
+        }
 
         #region Scrolling
         bool ScrollBy(double delta, bool animated)
@@ -149,7 +157,6 @@ namespace Forms9Patch.Droid
         }
         #endregion
 
-
         #region HeaderHeight
         double NativeHeaderHeight()
         {
@@ -164,7 +171,6 @@ namespace Forms9Patch.Droid
 
         double HeaderHeight() => NativeHeaderHeight() / Forms9Patch.Display.Scale;
         #endregion
-
 
         #region FooterHeight
         double NativeFooterHeight()
@@ -186,8 +192,13 @@ namespace Forms9Patch.Droid
     class ScrollListener : Java.Lang.Object, Android.Widget.ListView.IOnScrollListener
     {
         public Forms9Patch.EnhancedListView Element;
+        public bool IsBuildingLayOut;
 
-        public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) => Element?.OnScrolling(this, EventArgs.Empty);
+        public void OnScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+        {
+            if (!IsBuildingLayOut)
+                Element?.OnScrolling(this, EventArgs.Empty);
+        }
 
         public void OnScrollStateChanged(AbsListView view, [GeneratedEnum] ScrollState scrollState)
         {

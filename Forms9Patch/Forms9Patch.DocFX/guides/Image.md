@@ -143,7 +143,18 @@ need to add an XAML markup extension to the assembly that contains those images
 
 ## Embedded Resource Convenience Constructor
 
-If you do most of your layouts in code (rather than XAML), there are some tasks
+If you do most of your layouts in code (rather than XAML), there are tasks you 
+repeat very often.  And because they are repeated so often, a shorter version
+of that task would be convenient.  If you often use `Forms9Patch.ImageSource.FromMultiResource`,
+`Forms9Patch.ImageSource.FromResource`, or `Xamarin.Forms.ImageSource.FromResource` 
+as the source for your `Forms9Patch.Image` or `Xamarin.Forms.Image`, you will be
+happy to know that you can instead pass the EmbeddedResourceId as an parameter
+to the `Forms9Patch.Image` constructor!
+
+```csharp
+    var image = new Forms9Patch.Image("
+```
+
 
 ## Fill Property
 

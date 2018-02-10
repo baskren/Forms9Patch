@@ -732,6 +732,16 @@ namespace Forms9Patch
             var args = new ItemWrapperTapEventArgs(itemWrapper);
             OnItemTapped(this, args);
         }
+
+        public void TapItemAtPoint(Point p)
+        {
+            var dataSet = TwoDeepDataSetAtPoint(p);
+            if (dataSet != null && dataSet.ItemWrapper != null)
+            {
+                var args = new ItemWrapperTapEventArgs(dataSet.ItemWrapper);
+                OnItemTapped(this, args);
+            }
+        }
         #endregion
 
 
