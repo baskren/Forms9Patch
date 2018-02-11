@@ -155,7 +155,7 @@ namespace Forms9Patch
         #endregion
 
         #region FittedFontSize property
-
+        DateTime _lastTimeFittedFontSizeSet = DateTime.MinValue;
 
         internal static readonly BindablePropertyKey FittedFontSizePropertyKey = BindableProperty.CreateReadOnly("FittedFontSize", typeof(double), typeof(Label), -1.0);
         /// <summary>
@@ -169,7 +169,19 @@ namespace Forms9Patch
         public double FittedFontSize
         {
             get { return (double)GetValue(FittedFontSizeProperty); }
-            internal set { SetValue(FittedFontSizePropertyKey, value); }
+            internal set
+            {
+                if (value != FittedFontSize)
+                {
+                    if (value < 0 && DateTime.Now - _lastTimeFittedFontSizeSet < TimeSpan.FromMilliseconds(250))
+                        return;
+                    SetValue(FittedFontSizePropertyKey, value);
+                    _lastTimeFittedFontSizeSet = DateTime.Now;
+                    if (Text == "BACKGROUND" || HtmlText == "BACKGROUND")
+                        System.Diagnostics.Debug.WriteLine("FittedFontSize=["+value+"]");
+                    FittedFontSizeChanged?.Invoke(this,value);
+                }
+            }
         }
         #endregion
 
@@ -207,6 +219,8 @@ namespace Forms9Patch
         /// Occurs when HtmlText wrapped with an action (&lt;a&gt;) tag is tapped.
         /// </summary>
         public event EventHandler<ActionTagEventArgs> ActionTagTapped;
+
+        internal event EventHandler<double> FittedFontSizeChanged;
         #endregion
 
 
@@ -249,6 +263,8 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged("+propertyName+")");
             //if (propertyName == FontSizeProperty.PropertyName && ((Text!=null && Text.StartsWith("Żyłę;^`g ")) || (HtmlText!=null && HtmlText.StartsWith("Żyłę;^`g "))) )
             //    System.Diagnostics.Debug.WriteLine("");
+            if (propertyName == FittedFontSizeProperty.PropertyName)
+                return;
             if (propertyName == HtmlTextProperty.PropertyName)
             {
                 if (HtmlText != null)

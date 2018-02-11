@@ -45,10 +45,15 @@ namespace Forms9Patch.UWP
             return ClipFontSize(size, min);
         }
 
+        internal static double DefaultFontSize()
+        {
+            return (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"];
+        }
+
         internal static double ClipFontSize(double size, double min)
         {
             if (size < 0)
-                return (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"] * Math.Abs(size);
+                return DefaultFontSize() * Math.Abs(size);
             if (size < min)
                 return min;
             return size;
@@ -57,7 +62,7 @@ namespace Forms9Patch.UWP
         internal static double DecipheredFontSize(this Forms9Patch.Label label)
         {
             if (label == null)
-                return (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"];
+                return DefaultFontSize();
             return ClipFontSize(label.FontSize, DecipheredMinFontSize(label));
         }
 
@@ -77,7 +82,7 @@ namespace Forms9Patch.UWP
             switch (size)
             {
                 case NamedSize.Default:
-                    return (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"];
+                    return DefaultFontSize();
                 case NamedSize.Micro:
                     return 18.667 - 3;
                 case NamedSize.Small:

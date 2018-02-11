@@ -15,13 +15,13 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                //return false;
+                return false;
                 
                 //string labelTextStart = "Żyłę;^`g ";
-                if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
-                    return false;
-                string labelTextStart = "9";
-                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                //    return false;
+                //string labelTextStart = "BACKGROUND";
+                //return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
                 
             }
         }
@@ -355,13 +355,16 @@ namespace Forms9Patch.UWP
             //MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
         }
 
+        bool _walkThrough;
+
         DateTime _lastMeasure = DateTime.MaxValue;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
             if (DebugCondition && double.IsInfinity(availableSize.Width))
                 System.Diagnostics.Debug.WriteLine("");
 
-            DebugMessage("pre-Enter");
+            DebugMessage("");
+            DebugMessage("pre-Enter availableSize=["+availableSize+"]");
             var label = Element;
             var textBlock = Control;
 
@@ -371,10 +374,10 @@ namespace Forms9Patch.UWP
             if (LayoutValid && _lastAvailableSize == availableSize && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
                 return _lastMeasureOverrideResult;
 
-            if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("");
+            //if (DebugCondition)
+            //    System.Diagnostics.Debug.WriteLine("");
 
-            DebugMessage("ENTER");
+            DebugMessage("ENTER availableSize=[" + availableSize + "]");
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
@@ -404,6 +407,9 @@ namespace Forms9Patch.UWP
 
 
                 // reset FontSize
+
+                if (_walkThrough)
+                    System.Diagnostics.Debug.WriteLine("");
 
                 var tmpFontSize = label.DecipheredFontSize();
                 var minFontSize = label.DecipheredMinFontSize();
@@ -466,13 +472,30 @@ namespace Forms9Patch.UWP
 
 
                 // we needed the following in Android as well.  Xamarin layout really doesn't like this to be changed in real time.
-                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
-                 {
-                     label.FittedFontSize = tmpFontSize;
-                     return false;
-                 });
+                //Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
+                // {
+                     //label.FittedFontSize = tmpFontSize;
+                     //return false;
+                     if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+                     {
+                         if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == FontExtensions.DefaultFontSize()))
+                         {
+                             //DebugMessage("UWP.LabelRenderer Element.FittedFontSize=[-1]");
+                             Element.FittedFontSize = -1;
+                         }
+                         else
+                         {
+                             //DebugMessage("UWP.LabelRenderer Element.FittedFontSize=["+tmpFontSize+"]");
+                             if (DebugCondition)
+                                 _walkThrough = true;
+                             Element.FittedFontSize = tmpFontSize;
+                         }
+                     }
+                    // return false;
+                 //});
 
                 var syncFontSize = ((ILabel)label).SynchronizedFontSize;
+                DebugMessage("syncFontSize=["+syncFontSize+"]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                 {
                     tmpHt = -1;

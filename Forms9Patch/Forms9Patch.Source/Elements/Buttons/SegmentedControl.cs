@@ -721,7 +721,7 @@ namespace Forms9Patch
             button.Selected += OnSegmentSelected;
             button.LongPressing += OnSegmentLongPressing;
             button.LongPressed += OnSegmentLongPressed;
-            button.ActualFontSizeChanged += Button_FittedFontSizeChanged;
+            button.FittedFontSizeChanged += Button_FittedFontSizeChanged;
             Children.Insert(index, button);
             if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
             {
@@ -747,7 +747,7 @@ namespace Forms9Patch
             button.Selected -= OnSegmentSelected;
             button.LongPressing -= OnSegmentLongPressing;
             button.LongPressed -= OnSegmentLongPressed;
-            button.ActualFontSizeChanged -= Button_FittedFontSizeChanged;
+            button.FittedFontSizeChanged -= Button_FittedFontSizeChanged;
         }
 
 
@@ -1050,7 +1050,7 @@ namespace Forms9Patch
         DateTime _lastFontSizeResetTime = DateTime.MinValue;
         static int _iterations;
         bool _waitingForThingsToCalmDown;
-        private void Button_FittedFontSizeChanged(object sender, EventArgs e)
+        private void Button_FittedFontSizeChanged(object sender, double e)
         {
             _lastFontSizeResetTime = DateTime.Now;
             if (!_waitingForThingsToCalmDown)

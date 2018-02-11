@@ -1334,11 +1334,11 @@ namespace Forms9Patch
         internal protected void InvokeLongPressed(object sender, EventArgs args) => _longPressed?.Invoke(sender, args);
 
 
-        event EventHandler _actualFontSizeChanged;
-        internal event EventHandler ActualFontSizeChanged
+        //event EventHandler _actualFontSizeChanged;
+        internal event EventHandler<double> FittedFontSizeChanged
         {
-            add { _actualFontSizeChanged += value; }
-            remove { _actualFontSizeChanged -= value; }
+            add { _label.FittedFontSizeChanged += value; }
+            remove { _label.FittedFontSizeChanged -= value; }
         }
 
         #endregion
@@ -1367,8 +1367,8 @@ namespace Forms9Patch
                 UpdateIconTint();
             }
 
-            else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
-                _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
+            //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
+            //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <param name="propertyName">The name of the changed property.</param>

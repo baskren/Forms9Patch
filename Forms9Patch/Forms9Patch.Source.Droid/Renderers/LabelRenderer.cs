@@ -157,8 +157,8 @@ namespace Forms9Patch.Droid
             // this is the optimal font size.  Let it be known!
             if (tmpFontSize != Element.FittedFontSize)
             {
-                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                {
+                //Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                //{
                     if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                     {
                         if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == F9PTextView.DefaultTextSize))
@@ -166,8 +166,8 @@ namespace Forms9Patch.Droid
                         else
                             Element.FittedFontSize = tmpFontSize;
                     }
-                    return false;
-                });
+                //    return false;
+                //});
             }
 
 
@@ -401,7 +401,6 @@ namespace Forms9Patch.Droid
             Layout();
         }
 
-
         void UpdateFontSize()
         {
             _currentControlState.TextSize = (float)Element.FontSize;
@@ -495,7 +494,6 @@ namespace Forms9Patch.Droid
         }
 
         #endregion
-
 
         void UpdateText()
         {

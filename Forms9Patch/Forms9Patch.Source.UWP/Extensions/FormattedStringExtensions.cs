@@ -84,7 +84,7 @@ namespace Forms9Patch.UWP
             if (string.IsNullOrWhiteSpace(text) || text == label.F9PFormattedString?.Text)
             {
                 // there isn't any markup!
-                textBlock.Text = text;
+                textBlock.Text = text ?? "";
                 return;
             }
 
