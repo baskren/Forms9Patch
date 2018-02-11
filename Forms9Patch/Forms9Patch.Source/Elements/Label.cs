@@ -177,9 +177,7 @@ namespace Forms9Patch
                         return;
                     SetValue(FittedFontSizePropertyKey, value);
                     _lastTimeFittedFontSizeSet = DateTime.Now;
-                    if (Text == "BACKGROUND" || HtmlText == "BACKGROUND")
-                        System.Diagnostics.Debug.WriteLine("FittedFontSize=["+value+"]");
-                    FittedFontSizeChanged?.Invoke(this,value);
+                    FittedFontSizeChanged?.Invoke(this, value);
                 }
             }
         }
@@ -220,9 +218,11 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler<ActionTagEventArgs> ActionTagTapped;
 
-        internal event EventHandler<double> FittedFontSizeChanged;
+        /// <summary>
+        /// Occurs when label has performed fitting algorithm.  A value of -1 indicates that value of the FontSize property was used.
+        /// </summary>
+        public event EventHandler<double> FittedFontSizeChanged;
         #endregion
-
 
 
         #region Constructor & Fields
@@ -260,11 +260,10 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]Forms9Patch.Label.OnPropertyChanged("+propertyName+")");
-            //if (propertyName == FontSizeProperty.PropertyName && ((Text!=null && Text.StartsWith("Żyłę;^`g ")) || (HtmlText!=null && HtmlText.StartsWith("Żyłę;^`g "))) )
-            //    System.Diagnostics.Debug.WriteLine("");
             if (propertyName == FittedFontSizeProperty.PropertyName)
+                // required to keep the layout system calm.  
                 return;
+
             if (propertyName == HtmlTextProperty.PropertyName)
             {
                 if (HtmlText != null)
@@ -507,50 +506,6 @@ namespace Forms9Patch
             Tap(actionSpan?.Id, actionSpan?.Href);
         }
         #endregion
-
-        /*
-        public static readonly BindableProperty Field1Property = BindableProperty.Create("F9PFrameHeight", typeof(string), typeof(Label), default(string));
-        public string Field1
-        {
-            get { return (string)GetValue(Field1Property); }
-            set { SetValue(Field1Property, value); }
-        }
-
-        public static readonly BindableProperty Field2Property = BindableProperty.Create("F9PBoundsHeight", typeof(string), typeof(Label), default(string));
-        public string Field2
-        {
-            get { return (string)GetValue(Field2Property); }
-            set { SetValue(Field2Property, value); }
-        }
-
-        public static readonly BindableProperty Field3Property = BindableProperty.Create("F9PCgSizeHeight", typeof(string), typeof(Label), default(string));
-        public string Field3
-        {
-            get { return (string)GetValue(Field3Property); }
-            set { SetValue(Field3Property, value); }
-        }
-
-        public static readonly BindableProperty Field4Property = BindableProperty.Create("Pizza", typeof(string), typeof(Label), default(string));
-        public string Field4
-        {
-            get { return (string)GetValue(Field4Property); }
-            set { SetValue(Field4Property, value); }
-        }
-
-        public static readonly BindableProperty Field5Property = BindableProperty.Create("Field5", typeof(string), typeof(Label), default(string));
-        public string Field5
-        {
-            get { return (string)GetValue(Field5Property); }
-            set { SetValue(Field5Property, value); }
-        }
-
-        public static readonly BindableProperty Field6Property = BindableProperty.Create("Field6", typeof(string), typeof(Label), default(string));
-        public string Field6
-        {
-            get { return (string)GetValue(Field6Property); }
-            set { SetValue(Field6Property, value); }
-        }
-*/
 
     }
 

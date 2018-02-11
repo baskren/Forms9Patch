@@ -159,13 +159,13 @@ namespace Forms9Patch.Droid
             {
                 //Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                 //{
-                    if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                    {
-                        if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == F9PTextView.DefaultTextSize))
-                            Element.FittedFontSize = -1;
-                        else
-                            Element.FittedFontSize = tmpFontSize;
-                    }
+                if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
+                {
+                    if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == F9PTextView.DefaultTextSize))
+                        Element.FittedFontSize = -1;
+                    else
+                        Element.FittedFontSize = tmpFontSize;
+                }
                 //    return false;
                 //});
             }
@@ -343,7 +343,11 @@ namespace Forms9Patch.Droid
                 });
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
                 UpdateColor();
-            else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontSizeProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
+            else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
+                UpdateFontSize();
+            else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
+                UpdateMinFontSize();
+            else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
                 UpdateFont();
             else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
                 UpdateLineBreakMode();
