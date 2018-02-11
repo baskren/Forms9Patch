@@ -24,9 +24,10 @@ namespace Forms9Patch
         void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         {
             if (Debug)
-                System.Diagnostics.Debug.WriteLine("["+GetType()+"."+callerName+":"+lineNumber+"]["+InstanceId+"] "+message);
+                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + callerName + ":" + lineNumber + "][" + InstanceId + "] " + message);
         }
         #endregion
+
 
         #region Properties
         /// <summary>
@@ -51,11 +52,11 @@ namespace Forms9Patch
             {
                 if (ContentView is ICellHeight cellHeightView && cellHeightView.CellHeight > -1)
                 {
-                    DebugMessage("Get via ICellHeight=["+ cellHeightView.CellHeight + "] ContentView=["+ContentView+"]");
+                    DebugMessage("Get via ICellHeight=[" + cellHeightView.CellHeight + "] ContentView=[" + ContentView + "]");
                     return cellHeightView.CellHeight;
                 }
 
-                DebugMessage("Get via _requestedRowHeight=["+_requestedRowHeight+"]");
+                DebugMessage("Get via _requestedRowHeight=[" + _requestedRowHeight + "]");
                 return _requestedRowHeight;
             }
         }
@@ -88,7 +89,7 @@ namespace Forms9Patch
             }
             set
             {
-                DebugMessage("Enter _separatorHeight=["+ _separatorHeight + "] value=[" + value + "]");
+                DebugMessage("Enter _separatorHeight=[" + _separatorHeight + "] value=[" + value + "]");
                 if (_separatorHeight != value)
                 {
                     _separatorHeight = value;
@@ -227,7 +228,7 @@ namespace Forms9Patch
             WidthRequest = 50,
             OutlineWidth = 0,
             OutlineRadius = 0,
-            Orientation = 
+            Orientation =
             StackOrientation.Vertical
         };
         readonly Button _swipeButton2 = new Button
@@ -719,9 +720,9 @@ namespace Forms9Patch
             {
                 itemWrapper.BaseCellView = this;
                 itemWrapper.PropertyChanged += OnItemPropertyChanged;
-                DebugMessage("Set ContentView.BindingContext=[" + itemWrapper.Source + "]");
+                //DebugMessage("Set ContentView.BindingContext=[" + itemWrapper.Source + "]");
                 ContentView.BindingContext = itemWrapper.Source;
-                DebugMessage("ContentView.BindingContext=[" + ContentView.BindingContext + "]");
+                //DebugMessage("ContentView.BindingContext=[" + ContentView.BindingContext + "]");
                 UpdateBackground();
                 UpdateHeights();
                 UpdateSeparator();
@@ -729,8 +730,8 @@ namespace Forms9Patch
                 if (ContentView is IIsSelectedAble contentView)
                     contentView.IsSelected = itemWrapper.IsSelected;
             }
-            else
-                throw new Exception("ItemWrapper and GroupWrapper are the only thing that be the BindingContext for BaseCellView.");
+            //else
+            //    throw new Exception("ItemWrapper and GroupWrapper are the only thing that be the BindingContext for BaseCellView.");
 
             base.OnBindingContextChanged();
 
@@ -743,8 +744,13 @@ namespace Forms9Patch
             base.OnPropertyChanging(propertyName);
             if (propertyName == BindingContextProperty.PropertyName)
             {
-                if (BindingContext is ItemWrapper item)
-                    item.PropertyChanged -= OnItemPropertyChanged;
+                if (BindingContext is ItemWrapper itemWrapper)
+                {
+                    itemWrapper.BaseCellView = null;
+                    itemWrapper.PropertyChanged -= OnItemPropertyChanged;
+                    //ContentView.BindingContext = null;
+
+                }
                 PutAwaySwipeButtons(false);
             }
             else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
@@ -804,10 +810,10 @@ namespace Forms9Patch
 
         }
 
-        
+
         void UpdateHeights()
         {
-            DebugMessage("Enter RenderedRowHeight=["+RenderedRowHeight+"] SeparatorHeight=["+SeparatorHeight+"]");
+            DebugMessage("Enter RenderedRowHeight=[" + RenderedRowHeight + "] SeparatorHeight=[" + SeparatorHeight + "]");
             var newHeightRequest = RenderedRowHeight + SeparatorHeight;
             DebugMessage("newHeightRequest=[" + newHeightRequest + "]");
             if (newHeightRequest != HeightRequest)

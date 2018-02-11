@@ -14,8 +14,8 @@ namespace Forms9Patch
             {
                 if (BindingContext is GroupWrapper groupWrapper)
                     view.RequestedRowHeight = groupWrapper.BestGuessGroupHeaderHeight();
-                else if (BindingContext != null)
-                    throw new Exception("Forms9Patch.GroupHeaderTemplate only works with Forms9Patch.ListView.  HeaderCell can only be used with a GroupWrapper as BindingContext.");
+                //else if (BindingContext != null)
+                //    throw new Exception("Forms9Patch.GroupHeaderTemplate only works with Forms9Patch.ListView.  HeaderCell can only be used with a GroupWrapper as BindingContext.");
 
                 view.SeparatorHeight = 0;
 
@@ -40,14 +40,14 @@ namespace Forms9Patch
                     view.RequestedRowHeight = itemWrapper.BestGuessItemRowHeight();
                     view.SeparatorHeight = itemWrapper.SeparatorHeight;
                 }
-                else if (BindingContext != null)
-                    throw new Exception("Forms9Patch.DataTemplateSelector only works with Forms9Patch.ListView.  ItemCell can only be used with a ItemWrapper as the BindingContext.");
+                //else if (BindingContext != null)
+                //    throw new Exception("Forms9Patch.DataTemplateSelector only works with Forms9Patch.ListView.  ItemCell can only be used with a ItemWrapper as the BindingContext.");
 
                 DebugMessage("Set Height=[" + view.HeightRequest + "]");
                 Height = view.HeightRequest;
                 DebugMessage("Height=[" + Height + "]");
             }
-            else 
+            else
                 throw new Exception("Forms9Patch.DataTemplateSelector only works with Forms9Patch.ListView.  ItemCell can only be used with a BaseCellView as the View.");
         }
     }
@@ -64,7 +64,7 @@ namespace Forms9Patch
             get
             {
                 //return (BindingContext is ItemWrapper<string> itemWrapper && itemWrapper.Index == 0);
-                return false; 
+                return false;
                 // return (BindingContext is GroupWrapper wrapper && wrapper.Index == 0);
             }
         }
@@ -72,7 +72,7 @@ namespace Forms9Patch
         protected void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         {
             if (Debug)
-                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + callerName + ":" + lineNumber + "]["+InstanceId+"] " + message);
+                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + callerName + ":" + lineNumber + "][" + InstanceId + "] " + message);
         }
         #endregion
 
@@ -117,10 +117,10 @@ namespace Forms9Patch
             }
         }
 
-    /// <summary>
-    /// Triggered by a change in the binding context.
-    /// </summary>
-    protected override void OnBindingContextChanged()
+        /// <summary>
+        /// Triggered by a change in the binding context.
+        /// </summary>
+        protected override void OnBindingContextChanged()
         {
             DebugMessage("Enter BindingContext=[" + BindingContext + "]");
 
