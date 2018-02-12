@@ -1152,36 +1152,19 @@ namespace FormsGestures
         #endregion
 
         #region Command / Event executors
-        void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs
-        {
-            if (handler != null)
-            {
-                //Device.BeginInvokeOnMainThread(delegate {
-                handler(this, args);
-                //});
-            }
-        }
-
+        void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs => handler?.Invoke(this, args);
+        
         void ExecuteCommand(ICommand command, object parameter, BaseGestureEventArgs args)
         {
             parameter = (parameter ?? args);
             if (command != null && command.CanExecute(parameter))
-            {
-                //Device.BeginInvokeOnMainThread(delegate {
                 command.Execute(parameter);
-                //});
-            }
         }
 
         void ExecuteCallback(Action<Listener, object> callback, object parameter, BaseGestureEventArgs args)
         {
             parameter = (parameter ?? args);
-            if (callback != null)
-            {
-                //Device.BeginInvokeOnMainThread (delegate {
-                callback.Invoke(this, parameter);
-                //});
-            }
+            callback?.Invoke(this, parameter);
         }
         #endregion
 

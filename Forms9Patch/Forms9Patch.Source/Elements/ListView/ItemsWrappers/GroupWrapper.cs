@@ -351,6 +351,8 @@ namespace Forms9Patch
             itemWrapper.LongPressed += OnLongPressed;
             itemWrapper.LongPressing += OnLongPressing;
             itemWrapper.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
+            itemWrapper.Panned += OnPanned;
+            itemWrapper.Panning += OnPanning;
             itemWrapper.BindingContext = this;
             itemWrapper.Parent = this;
             //if (itemWrapper.GetType()==typeof(GroupWrapper))
@@ -389,6 +391,8 @@ namespace Forms9Patch
             itemWrapper.LongPressed -= OnLongPressed;
             itemWrapper.LongPressing -= OnLongPressing;
             itemWrapper.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
+            itemWrapper.Panned -= OnPanned;
+            itemWrapper.Panning -= OnPanning;
             itemWrapper.BindingContext = null;
             itemWrapper.Parent = null;
         }

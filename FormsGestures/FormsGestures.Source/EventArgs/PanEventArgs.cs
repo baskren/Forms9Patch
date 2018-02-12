@@ -101,5 +101,13 @@ namespace FormsGestures
             hash = hash * 23 + Velocity.GetHashCode();
             return hash;
         }
+
+        public void ValueFrom(PanEventArgs source)
+        {
+            base.ValueFrom(source);
+            DeltaDistance = source.DeltaDistance;
+            TotalDistance = source.TotalDistance;
+            Velocity = source.Velocity;
+        }
 	}
 }

@@ -350,6 +350,7 @@ namespace Forms9Patch
 
         void OnPanned(object sender, PanEventArgs e)
         {
+            ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
             {
                 _panVt = false;
@@ -403,6 +404,7 @@ namespace Forms9Patch
         bool _panHz, _panVt;
         void OnPanning(object sender, PanEventArgs e)
         {
+            ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
                 return;
             if (!_panVt && !_panHz)

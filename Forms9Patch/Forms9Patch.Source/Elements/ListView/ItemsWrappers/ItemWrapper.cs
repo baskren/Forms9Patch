@@ -194,27 +194,20 @@ namespace Forms9Patch
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressing;
 		public event EventHandler<ItemWrapperLongPressEventArgs> LongPressed;
 		public event EventHandler<SwipeMenuItemTappedArgs> SwipeMenuItemTapped;
+        public event EventHandler<ItemWrapperPanEventArgs> Panning;
+        public event EventHandler<ItemWrapperPanEventArgs> Panned;
 
-		internal void OnTapped(object sender, ItemWrapperTapEventArgs e)
-		{
-			Tapped?.Invoke(sender, e);
-		}
+		internal void OnTapped(object sender, ItemWrapperTapEventArgs e) =>Tapped?.Invoke(sender, e);
 
-		internal void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e)
-		{
-			LongPressing?.Invoke(sender, e);
-		}
+		internal void OnLongPressing(object sender, ItemWrapperLongPressEventArgs e) => LongPressing?.Invoke(sender, e);
 
-		internal void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e)
-		{
-			LongPressed?.Invoke(sender, e);
-		}
+		internal void OnLongPressed(object sender, ItemWrapperLongPressEventArgs e) => LongPressed?.Invoke(sender, e);
 
-		internal void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e)
-		{
-			SwipeMenuItemTapped?.Invoke(sender, e);
-		}
+		internal void OnSwipeMenuItemTapped(object sender, SwipeMenuItemTappedArgs e) => SwipeMenuItemTapped?.Invoke(sender, e);
 
+        internal void OnPanning(object sender, ItemWrapperPanEventArgs e) => Panning?.Invoke(sender, e);
+
+        internal void OnPanned(object sender, ItemWrapperPanEventArgs e) => Panned?.Invoke(sender, e);
 		#endregion
 
 

@@ -27,4 +27,8 @@
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Elements\ListView\Extensions\" />
+  </ItemGroup>
+
 </Project>

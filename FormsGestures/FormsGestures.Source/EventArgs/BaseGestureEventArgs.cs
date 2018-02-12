@@ -8,7 +8,7 @@ namespace FormsGestures
 	/// </summary>
 	public class BaseGestureEventArgs : EventArgs
 	{
-		bool _handled = true;
+		bool _handled = false;
 
 		Point _center;
 
@@ -127,5 +127,15 @@ namespace FormsGestures
 		public override int GetHashCode() {
 			return Touches.GetHashCode();
 		}
+
+        public void ValueFrom(BaseGestureEventArgs source)
+        {
+            _handled = source._handled;
+            _center = source._center;
+            Listener = source.Listener;
+            Cancelled = source.Cancelled;
+            ViewPosition = source.ViewPosition;
+            Touches = source.Touches;
+        }
 	}
 }

@@ -35,5 +35,12 @@ namespace FormsGestures
 			}
 		}
 
+        public void ValueFrom(SwipeEventArgs source)
+        {
+            base.ValueFrom(source);
+            Direction = source.Direction;
+            VelocityX = source.VelocityX;
+            VelocityY = source.VelocityY;
+        }
 	}
 }

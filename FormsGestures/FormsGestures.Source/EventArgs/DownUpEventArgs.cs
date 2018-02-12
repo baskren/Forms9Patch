@@ -22,5 +22,10 @@ namespace FormsGestures
 				TriggeringTouches = (int[])source.TriggeringTouches.Clone ();
 		}
 
+        public void ValueFrom(DownUpEventArgs source)
+        {
+            base.ValueFrom(source);
+            TriggeringTouches = source.TriggeringTouches;
+        }
 	}
 }

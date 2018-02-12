@@ -22,5 +22,10 @@ namespace FormsGestures
 				Duration = source.Duration;
 		}
 
+        public void ValueFrom(LongPressEventArgs source)
+        {
+            base.ValueFrom(source);
+            Duration = source.Duration;
+        }
 	}
 }

@@ -91,5 +91,13 @@ namespace FormsGestures
 				DeltaScale = TotalScale / lastArgs.TotalScale
 			};
 		}
+
+        public void ValueFrom(PinchEventArgs source)
+        {
+            base.ValueFrom(source);
+            Distance = source.Distance;
+            DeltaScale = source.DeltaScale;
+            TotalScale = source.TotalScale;
+        }
 	}
 }

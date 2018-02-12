@@ -17,28 +17,117 @@ namespace FormsGestures.UWP
 {
     class NativeGestureHandler : Behavior<VisualElement>, IDisposable
     {
-        static int DebugVerbosity = 0;  // "1" (method names), "2" (method details)
-        static void DebugMethodName([System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        static int DebugVerbosity = 1;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
+        void DebugMethodName(int verbosity=0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            if (DebugVerbosity > 0)
+            if (DebugVerbosity >= verbosity && DebugCondition)
             {
                 System.Diagnostics.Debug.WriteLine("⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽");
-                System.Diagnostics.Debug.WriteLine(callerName + ":");
+                System.Diagnostics.Debug.WriteLine(callerName + " Element=["+_xfElement+"] id=["+_xfElement.Id+"]");
                 System.Diagnostics.Debug.WriteLine("⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺");
             }
         }
 
-        static void DebugMessage(string message)
+
+
+        void DebugMessage(string message, int verbosity = 3)
         {
-            if (DebugVerbosity > 1)
+            if (DebugVerbosity >= verbosity && DebugCondition)
                 System.Diagnostics.Debug.WriteLine("\t"+message);
+        }
+
+
+        bool DebugCondition
+        {
+            get
+            {
+                return false;
+                //return _xfElement.GetType().ToString() == "Forms9Patch.BaseCellView";
+            }
         }
 
         static readonly BindableProperty GestureHandlerProperty = BindableProperty.Create("GestureHandler", typeof(NativeGestureHandler), typeof(NativeGestureHandler), null);
 
         readonly VisualElement _xfElement;
 
-        WeakReference<Windows.UI.Xaml.FrameworkElement> _uwpElementWeakReference;  
+        IVisualElementRenderer _renderer;
+        void SetRenderer()
+        {
+            var value = Platform.GetRenderer(_xfElement);
+            if (value != _renderer)
+            {
+                if (FrameworkElement != null)
+                {
+                    _renderer.ElementChanged -= OnRendererElementChanged;
+
+                    FrameworkElement.ManipulationMode = ManipulationModes.None;
+                    //FrameworkElement.ManipulationStarting -= OnManipulationStarting;
+                    FrameworkElement.ManipulationStarted -= OnManipulationStarted;
+                    FrameworkElement.ManipulationDelta -= OnManipulationDelta;
+                    FrameworkElement.ManipulationInertiaStarting -= OnManipulationInertiaStarting;
+                    FrameworkElement.ManipulationCompleted -= OnManipulationComplete;
+
+                    //FrameworkElement.Tapped -= _UwpElement_Tapped;
+                    //FrameworkElement.RightTapped -= _UwpElement_RightTapped;
+                    //FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
+
+                    FrameworkElement.PointerPressed -= OnPointerPressed;
+                    //FrameworkElement.PointerReleased -= OnPointerReleased;
+
+                    FrameworkElement.Tapped -= OnTapped;
+
+                    //_UwpElement.PointerMoved -= OnPointerMoved;
+                    //FrameworkElement.PointerExited -= _UwpElement_PointerExited;
+                    //FrameworkElement.PointerEntered -= _UwpElement_PointerEntered;
+                    FrameworkElement.PointerCaptureLost -= OnPointerCaptureLost;
+                    FrameworkElement.PointerCanceled -= OnPointerCancelled;
+
+                    //FrameworkElement.Holding -= OnHolding;
+
+                    FrameworkElement.DoubleTapped -= OnDoubleTapped;
+                    FrameworkElement.IsDoubleTapEnabled = false;
+                }
+
+                _renderer = value;
+
+                if (FrameworkElement != null)
+                {
+                    _renderer.ElementChanged += OnRendererElementChanged;
+
+                    //FrameworkElement.ManipulationStarting += OnManipulationStarting;
+                    FrameworkElement.ManipulationStarted += OnManipulationStarted;
+                    FrameworkElement.ManipulationDelta += OnManipulationDelta;
+                    FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
+                    FrameworkElement.ManipulationCompleted += OnManipulationComplete;
+                    FrameworkElement.ManipulationMode = ManipulationModes.All;
+
+
+                    //FrameworkElement.Tapped += _UwpElement_Tapped;
+                    //FrameworkElement.RightTapped += _UwpElement_RightTapped;
+                    //FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
+
+                    FrameworkElement.PointerPressed += OnPointerPressed;
+                    //FrameworkElement.PointerReleased += OnPointerReleased;
+
+                    FrameworkElement.Tapped += OnTapped;
+
+                    //_UwpElement.PointerMoved += OnPointerMoved;
+                    //FrameworkElement.PointerExited += _UwpElement_PointerExited;
+                    //FrameworkElement.PointerEntered += _UwpElement_PointerEntered;
+                    FrameworkElement.PointerCaptureLost += OnPointerCaptureLost;
+                    FrameworkElement.PointerCanceled += OnPointerCancelled;
+
+                    //FrameworkElement.Holding += OnHolding;  // holding event doesn't work with Mouse (https://stackoverflow.com/questions/34995594/holding-event-for-desktop-app-not-firing)
+
+                    FrameworkElement.DoubleTapped += OnDoubleTapped;
+                    FrameworkElement.IsDoubleTapEnabled = true;
+                }
+            }
+        }
+
+
+        FrameworkElement FrameworkElement => _renderer as FrameworkElement;
+        /*
         FrameworkElement FrameworkElement
         {
             get
@@ -49,6 +138,7 @@ namespace FormsGestures.UWP
             }
             set
             {
+                DebugMethodName();                
                 if (FrameworkElement != null)
                 {
                     FrameworkElement.ManipulationMode = ManipulationModes.None;
@@ -80,7 +170,6 @@ namespace FormsGestures.UWP
                 }
                 if (value==null)
                 {
-                    _uwpElementWeakReference = null;
                     return;
                 }
                 _uwpElementWeakReference = new WeakReference<FrameworkElement>(value);
@@ -113,6 +202,7 @@ namespace FormsGestures.UWP
 
             }
         }
+        */
 
         bool _panning;
         bool _pinching;
@@ -160,9 +250,13 @@ namespace FormsGestures.UWP
             //if (_listeners!=null) {
             if (_listeners.Contains(listener))
                 _listeners.Remove(listener);
-            if (_listeners.Count < 1)
+            if (_listeners.Count < 1 && _xfElement != null)
+            {
                 // no one is listening so shut down
                 _xfElement.SetValue(GestureHandlerProperty, null);
+                _xfElement.PropertyChanging -= OnElementPropertyChanging;
+                _xfElement.PropertyChanged -= OnElementPropertyChanged;
+            }
             //}
         }
 
@@ -178,43 +272,21 @@ namespace FormsGestures.UWP
             return iOSGestureHandler;
         }
 
-        void RendererDisconnect()
-        {
-            FrameworkElement = null;
-            IVisualElementRenderer renderer = Platform.GetRenderer(_xfElement);
-            if (renderer != null)
-                renderer.ElementChanged -= OnRendererElementChanged;
-        }
-
-        void RendererConnect()
-        {
-            IVisualElementRenderer renderer = Platform.GetRenderer(_xfElement);
-            if (renderer != null)
-            {
-                renderer.ElementChanged += OnRendererElementChanged;
-                FrameworkElement = renderer as FrameworkElement;
-                if (FrameworkElement==null)
-                    throw new Exception("If we have a renderer, should it not always be a FrameworkElement?");
-            }
-        }
 
         void OnRendererElementChanged(object sender, ElementChangedEventArgs<VisualElement> e)
         {
-            if (e.OldElement != null)
-                RendererDisconnect();
+            SetRenderer();
         }
 
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
+            
             if (sender is VisualElement element)
             {
                 if (e.PropertyName == "Renderer")
-                    RendererDisconnect();
+                    SetRenderer();
                 else if (e.PropertyName == GestureHandlerProperty.PropertyName)
-                {
                     _xfElement.Behaviors.Remove(this);
-                }
-
             }
         }
 
@@ -223,7 +295,7 @@ namespace FormsGestures.UWP
             if (sender is VisualElement element)
             {
                 if (e.PropertyName == "Renderer")
-                    RendererConnect();
+                    SetRenderer();
             }
         }
 
@@ -231,15 +303,15 @@ namespace FormsGestures.UWP
         NativeGestureHandler(VisualElement element)
         {
             _xfElement = element;
+            _xfElement.PropertyChanging += OnElementPropertyChanging;
+            _xfElement.PropertyChanged += OnElementPropertyChanged;
             _xfElement.Behaviors.Add(this);
         }
 
         protected override void OnAttachedTo(VisualElement bindable)
         {
             bindable.SetValue(GestureHandlerProperty, this);
-            bindable.PropertyChanging += OnElementPropertyChanging;
-            bindable.PropertyChanged += OnElementPropertyChanged;
-            RendererConnect();
+            SetRenderer();
             base.OnAttachedTo(bindable);
         }
 
@@ -247,13 +319,12 @@ namespace FormsGestures.UWP
         {
             // arguably, none of this is necessary since Element owns everything.
             // silence events
-            RendererDisconnect();
-            bindable.PropertyChanging -= OnElementPropertyChanging;
-            bindable.PropertyChanged -= OnElementPropertyChanged;
+            SetRenderer();
             bindable.SetValue(GestureHandlerProperty, null);
             base.OnDetachingFrom(bindable);
         }
         #endregion
+
 
         #region Handles tests
         bool HandlesDownUps
@@ -341,7 +412,7 @@ namespace FormsGestures.UWP
             var currentPoint = e.GetCurrentPoint(null);
             if (!currentPoint.IsInContact)
                 return false;
-            DebugMethodName(commandName);
+            DebugMethodName(1,commandName);
             DebugMessage("CurrentPoint: id=[" + currentPoint.PointerId + "] device=[" + currentPoint.PointerDevice + "] pos=[" + currentPoint.Position.X + "," + currentPoint.Position.Y + "] IsInContact=[" + currentPoint.IsInContact + "]");
             return true;
         }
@@ -397,7 +468,7 @@ namespace FormsGestures.UWP
 
         void HandledDebugString(bool handled)
         {
-            DebugMessage("Handled=["+handled+"]");
+            DebugMessage("Handled=["+handled+"] Element=["+_xfElement+"]");
         }
 
         void VelocitiesDebugString(ManipulationVelocities velocities)
@@ -410,19 +481,20 @@ namespace FormsGestures.UWP
 
 
         #region UWP Manipulations (multi-touch)
-        /*
+        
         void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
-            DebugMethodName("OnManipulationStarting:");
+            DebugMethodName(2);
             ModesDebugMessage(e.Mode);
             PivotDebugMessage(e.Pivot);
             ContainerDebugMessage(e.Container);
         }
-        */
+        
 
         void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            DebugMethodName("OnManipulationStarted:");
+            DebugMethodName(2);
+            DebugMessage("Element=["+_xfElement+"]");
             PointerDeviceTypeDebugMessage(e.PointerDeviceType);
             PositionDebugMessage(e.Position);
             ManipulationDeltaDebugMessage(e.Cumulative,"Cumul");
@@ -439,7 +511,7 @@ namespace FormsGestures.UWP
                 _holdTimer?.Stop();
                 _holdTimer = null;
             }
-            System.Diagnostics.Debug.WriteLine("\t elapse=["+elapsed+"]");
+            DebugMessage("elapse=["+elapsed+"]");
             if (!_panning || !_pinching || !_rotating)
             {
                 _longPressing = elapsed > 750;
@@ -453,12 +525,14 @@ namespace FormsGestures.UWP
                             args.Listener = listener;
                             listener?.OnLongPressing(args);
                             e.Handled = args.Handled;
+                            DebugMessage("LongPressing Handled=[" + e.Handled + "]");
                             if (e.Handled)
                                 break;
                         }
                     }
                 }
             }
+            HandledDebugString(e.Handled);
         }
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -477,7 +551,8 @@ namespace FormsGestures.UWP
             if (!_rotating && Math.Abs(e.Cumulative.Rotation) > 0)
                 _rotating = true;
 
-            DebugMethodName("OnManipulationDelta");
+            DebugMethodName(2);
+            DebugMessage("Element=[" + _xfElement + "]");
             PointerDeviceTypeDebugMessage(e.PointerDeviceType);
             PositionDebugMessage(e.Position);
             ManipulationDeltaDebugMessage(e.Delta, "Delta");
@@ -495,6 +570,7 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnPanning(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Panning Handled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
                 {
@@ -502,6 +578,7 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnPinching(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Pinching Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
                 {
@@ -509,15 +586,18 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnRotating(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Rotating Handled=[" + e.Handled + "]");
                 }
                 if (e.Handled)
                     break;
             }
+            HandledDebugString(e.Handled);
         }
 
         private void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
-            DebugMethodName("OnManipulationInertiaStarting");
+            DebugMethodName(2);
+            DebugMessage("Element=[" + _xfElement + "]");
             PointerDeviceTypeDebugMessage(e.PointerDeviceType);
             ManipulationDeltaDebugMessage(e.Delta, "Delta");
             ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
@@ -534,7 +614,8 @@ namespace FormsGestures.UWP
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
 
-            DebugMethodName("OnManipulationComplete");
+            DebugMethodName(2);
+            DebugMessage("Element=[" + _xfElement + "]");
             PointerDeviceTypeDebugMessage(e.PointerDeviceType);
             PositionDebugMessage(e.Position);
             ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
@@ -551,6 +632,7 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnPanned(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Panned tHandled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
                 {
@@ -558,6 +640,7 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnPinched(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Pinched Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
                 {
@@ -565,8 +648,10 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnRotated(args);
                     e.Handled |= args.Handled;
+                    DebugMessage("Rotated Handled=[" + e.Handled + "]");
                 }
 
+                DebugMessage("Handled=[" + e.Handled + "] Element=["+_xfElement+"]");
                 if (e.Handled)
                     break;
             }
@@ -671,7 +756,7 @@ namespace FormsGestures.UWP
         private void _UwpElement_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             var currentPoint = e.GetPosition(null);
-            DebugMethodName("RIGHT TAPPED");
+            DebugMethodName(2);
             DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=["+e.Handled+"] type=["+e.PointerDeviceType+"]");
         }
 
@@ -679,7 +764,7 @@ namespace FormsGestures.UWP
         {
             
             var currentPoint = e.GetPosition(null);
-            DebugMethodName("TAPPED");
+            DebugMethodName(2);
             DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=[" + e.Handled + "] type=[" + e.PointerDeviceType + "]");
 
             long elapsed = 0;
@@ -722,7 +807,7 @@ namespace FormsGestures.UWP
         {            
             if (!_xfElement.IsVisible || FrameworkElement==null)
                 return;
-            DebugMethodName();
+            DebugMethodName(2);
 
             if (_releaseTimer == null || _releaseTimer.Elapsed.TotalMilliseconds > 750)
             {
@@ -763,7 +848,7 @@ namespace FormsGestures.UWP
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
 
-            DebugMethodName();
+            DebugMethodName(2);
 
             long elapsed = 0;
             if (_holdTimer != null)
@@ -826,7 +911,7 @@ namespace FormsGestures.UWP
         {
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
-            DebugMethodName();
+            DebugMethodName(2);
             foreach (var listener in _listeners)
             {
                 if (listener.HandlesDoubleTapped)
@@ -843,13 +928,13 @@ namespace FormsGestures.UWP
         
         private void OnHolding(object sender, HoldingRoutedEventArgs e)
         {
-            DebugMethodName();
+            DebugMethodName(2);
         }
 
             
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            DebugMethodName();
+            DebugMethodName(2);
             throw new NotImplementedException();
         }
 
@@ -894,6 +979,11 @@ namespace FormsGestures.UWP
                 return;
             if (!_disposed && disposing)
             {
+                if (_xfElement != null)
+                {
+                    _xfElement.PropertyChanging -= OnElementPropertyChanging;
+                    _xfElement.PropertyChanged -= OnElementPropertyChanged;
+                }
                 /*
                 if (_gestureRecognizers != null)
                 {

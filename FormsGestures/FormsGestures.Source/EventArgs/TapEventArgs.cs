@@ -21,5 +21,10 @@ namespace FormsGestures
 				NumberOfTaps = source.NumberOfTaps;
 		}
 
-	}
+        public void ValueFrom(TapEventArgs source) 
+        {
+            base.ValueFrom(source);
+            NumberOfTaps = source.NumberOfTaps;
+        }
+    }
 }

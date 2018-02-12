@@ -80,5 +80,13 @@ namespace FormsGestures
 				DeltaAngle = Angle - lastArgs.Angle
 			};
 		}
+
+        public void ValueFrom(RotateEventArgs source)
+        {
+            base.ValueFrom(source);
+            Angle = source.Angle;
+            DeltaAngle = source.DeltaAngle;
+            TotalAngle = source.TotalAngle;
+        }
 	}
 }

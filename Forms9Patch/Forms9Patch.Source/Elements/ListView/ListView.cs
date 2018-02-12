@@ -834,6 +834,34 @@ namespace Forms9Patch
                 _processingItemTapped = false;
             }
         }
+
+        bool _itemPanning;
+        bool _itemVerticalPanning;
+        private void OnItemPanning(object sender, ItemWrapperPanEventArgs e)
+        {
+            _itemPanning = true;
+            if (Math.Abs(e.TotalDistance.Y) > 10)
+                _itemVerticalPanning = true;
+            //System.Diagnostics.Debug.WriteLine("OnItemPanning(" + e.DeltaDistance + ")");
+            ScrollBy(-e.DeltaDistance.Y, false);
+            if (_itemVerticalPanning)
+                Scrolling?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnItemPanned(object sender, ItemWrapperPanEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("OnItemPanned("+e.DeltaDistance+")");
+            ScrollBy(-e.DeltaDistance.Y, false);
+            if (_itemVerticalPanning)
+                Scrolled?.Invoke(this, EventArgs.Empty);
+            _itemVerticalPanning = false;
+            Device.StartTimer(TimeSpan.FromMilliseconds(100),()=>
+            {
+                _itemPanning = false;
+                return false;
+            });
+        }
+
         #endregion
 
 
@@ -1071,6 +1099,11 @@ namespace Forms9Patch
             {
                 groupWrapper.Tapped -= OnItemTapped;
                 groupWrapper.SwipeMenuItemTapped -= OnSwipeMenuItemTapped;
+                if (Device.RuntimePlatform == Device.UWP)
+                {
+                    groupWrapper.Panning -= OnItemPanning;
+                    groupWrapper.Panned -= OnItemPanned;
+                }
                 //groupWrapper.LongPressed -= OnLongPressed;
                 //groupWrapper.LongPressing -= OnLongPressing;
             }
@@ -1080,9 +1113,14 @@ namespace Forms9Patch
 
                 #region Gestures
                 groupWrapper.Tapped += OnItemTapped;
+                groupWrapper.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
+                if (Device.RuntimePlatform == Device.UWP)
+                {
+                    groupWrapper.Panning += OnItemPanning;
+                    groupWrapper.Panned += OnItemPanned;
+                }
                 //groupWrapper.LongPressed += OnLongPressed;
                 //groupWrapper.LongPressing += OnLongPressing;
-                groupWrapper.SwipeMenuItemTapped += OnSwipeMenuItemTapped;
                 #endregion
 
                 #region Data mapping and filtering
@@ -1182,9 +1220,26 @@ namespace Forms9Patch
         */
 
 
-        internal void OnScrolling(object sender, EventArgs e) => Scrolling?.Invoke(this, EventArgs.Empty);
+        internal void OnScrolling(object sender, EventArgs e)
+        {
+            if (!_itemPanning)
+            {
+                // let OnPanning handle this
+                //System.Diagnostics.Debug.WriteLine("==SCROLLING==");
+                Scrolling?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
-        internal void OnScrolled(object sender, EventArgs e) => Scrolled?.Invoke(this, EventArgs.Empty);
+        internal void OnScrolled(object sender, EventArgs e)
+        {
+
+            if (!_itemPanning)
+            {
+                //System.Diagnostics.Debug.WriteLine("~~SCROLLED~~");
+                // let OnPanned handle this
+                Scrolled?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is scroll enabled.
