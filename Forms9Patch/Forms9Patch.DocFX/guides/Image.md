@@ -8,7 +8,7 @@ bounds, and the rendering of SVG images.  The ImageSource for the
 formats are NinePatch (`.9.png`), `.png`, `.jpg`, `.jpeg`, `.gif`, `.bmp`, 
 `.bmpf`, and `.svg`.
 
-iOS's UIKit provides `resizableImageWithCapInsets:` to make an UIImage a scalable 
+iOS's UIKit provides `resizableImageWithCapInsets:` to make an UIImage a patch scalable 
 image.  The `capInset` argument is used to specify the regions (distance inset 
 from the edges) which will not scale (or scale in only one direction) when the
 image is stretched to fill it's parent view.  Similarly, Android provides 
@@ -17,7 +17,7 @@ drawing elements.  The Nine-patch image format is used to specify the regions
 that are allowed scale when the image is stretched to fill it's parent view. 
 
 Both approaches have their advantages.  Unlike iOS's `resizableImageWithCapInsets:`, 
-Android and Forms9Patch's use of the Nine-patch image format allows for unscalable 
+Android's and Forms9Patch's use of the Nine-patch image format allows for unscalable 
 regions to be anywhere in the image (not just at the edges).  And, because the 
 scaled regions are marked within the image file, scaling can be customized to 
 each file.  On the other hand, `resizableImageWithCapInsets:` provides the 
