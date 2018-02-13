@@ -16,6 +16,7 @@ namespace Forms9Patch
     {
         #region Properties
 
+        #region Obsolete properties
         /// <summary>
         /// There is nothing to see here.  Move on.
         /// </summary>
@@ -31,27 +32,28 @@ namespace Forms9Patch
             get { return (View)GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }
         }
+        #endregion
 
+        #region Forms9Patch Cell Decoration properties
 
-        #region Cell Decoration
-
-        #region CellBackgroundColor property
+        #region GroupHeaderRowHeight
         /// <summary>
-        /// The cell background color property.
+        /// backing store for GroupHeaderRowHeight property
         /// </summary>
-        public static readonly BindableProperty CellBackgroundColorProperty = ItemWrapper.CellBackgroundColorProperty;
+        public static readonly BindableProperty GroupHeaderRowHeightProperty = GroupWrapper.RequestedGroupHeaderRowHeightProperty;
         /// <summary>
-        /// Gets or sets the color of the cell background.
+        /// Gets/Sets the GroupHeaderRowHeight property
         /// </summary>
-        /// <value>The color of the cell background.</value>
-        public Color CellBackgroundColor
+        public double GroupHeaderRowHeight
         {
-            get { return (Color)GetValue(CellBackgroundColorProperty); }
-            set { SetValue(CellBackgroundColorProperty, value); }
+            get { return (double)GetValue(GroupHeaderRowHeightProperty); }
+            set { SetValue(GroupHeaderRowHeightProperty, value); }
         }
-        #endregion CellBackgroundColor property
+        #endregion GroupHeaderRowHeight property
 
-        #region SelectedCellBackgroundColor property
+        #region BackgroundColor properties
+
+        #region SelectedCellBackgroundColor
         /// <summary>
         /// The selected cell background color property.
         /// </summary>
@@ -70,26 +72,109 @@ namespace Forms9Patch
         }
         #endregion SelectedCellBackgroundColor property
 
-        #region GroupHeaderRowHeight property
+        #region GroupHeaderBackgroundColor
         /// <summary>
-        /// backing store for GroupHeaderRowHeight property
+        /// The group header background color property backing store
         /// </summary>
-        public static readonly BindableProperty GroupHeaderRowHeightProperty = BindableProperty.Create("GroupHeaderRowHeight", typeof(double), typeof(ListView), -1.0);
+        public static readonly BindableProperty GroupHeaderBackgroundColorProperty = GroupWrapper.GroupHeaderBackgroundColorProperty;
         /// <summary>
-        /// Gets/Sets the GroupHeaderRowHeight property
+        /// Gets or sets the color of the group header background.
         /// </summary>
-        public double GroupHeaderRowHeight
+        /// <value>The color of the group header background.</value>
+        public Color GroupHeaderBackgroundColor
         {
-            get { return (double)GetValue(GroupHeaderRowHeightProperty); }
-            set { SetValue(GroupHeaderRowHeightProperty, value); }
+            get { return (Color)GetValue(GroupHeaderBackgroundColorProperty); }
+            set { SetValue(GroupHeaderBackgroundColorProperty, value); }
         }
-        #endregion GroupHeaderRowHeight property
+        #endregion GroupHeaderBackgroundColor property
+
+        #endregion
+
+        #region Separator properties
+
+        #region SeparatorVisibility property
+        /// <summary>
+        /// backing store for SeparatorVisibility property
+        /// </summary>
+        public static readonly BindableProperty SeparatorVisibilityProperty = ItemWrapper.SeparatorVisibilityProperty;
+        /// <summary>
+        /// Gets/Sets the SeparatorVisibility property
+        /// </summary>
+        public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
+        {
+            get { return (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
+            set { SetValue(SeparatorVisibilityProperty, value); }
+        }
+        #endregion SeparatorVisibility property
+
+        #region SeparatorColor property
+        /// <summary>
+        /// backing store for SeparatorColor property
+        /// </summary>
+        public static readonly BindableProperty SeparatorColorProperty = ItemWrapper.SeparatorColorProperty;
+        /// <summary>
+        /// Gets/Sets the SeparatorColor property
+        /// </summary>
+        public Color SeparatorColor
+        {
+            get { return (Color)GetValue(SeparatorColorProperty); }
+            set { SetValue(SeparatorColorProperty, value); }
+        }
+        #endregion SeparatorColor property
+
+        #region SeparatorLeftIndent property
+        /// <summary>
+        /// backing store for SeparatorLeftIndent property
+        /// </summary>
+        public static readonly BindableProperty SeparatorLeftIndentProperty = ItemWrapper.SeparatorLeftIndentProperty;
+        /// <summary>
+        /// Gets/Sets the SeparatorLeftIndent property
+        /// </summary>
+        public double SeparatorLeftIndent
+        {
+            get { return (double)GetValue(SeparatorLeftIndentProperty); }
+            set { SetValue(SeparatorLeftIndentProperty, value); }
+        }
+        #endregion SeparatorLeftIndent property
+
+        #region SeparatorRightIndent property
+        /// <summary>
+        /// backing store for SeparatorRightIndent property
+        /// </summary>
+        public static readonly BindableProperty SeparatorRightIndentProperty = ItemWrapper.SeparatorRightIndentProperty;
+        /// <summary>
+        /// Gets/Sets the SeparatorRightIndent property
+        /// </summary>
+        public double SeparatorRightIndent
+        {
+            get { return (double)GetValue(SeparatorRightIndentProperty); }
+            set { SetValue(SeparatorRightIndentProperty, value); }
+        }
+        #endregion SeparatorRightIndent property
+
+        #region SeparatorHeight property
+        /// <summary>
+        /// backing store for SeparatorHeight property
+        /// </summary>
+        public static readonly BindableProperty SeparatorHeightProperty = ItemWrapper.RequestedSeparatorHeightProperty;
+        /// <summary>
+        /// Gets/Sets the SeparatorHeight property
+        /// </summary>
+        public double SeparatorHeight
+        {
+            get { return (double)GetValue(SeparatorHeightProperty); }
+            set { SetValue(SeparatorHeightProperty, value); }
+        }
+        #endregion SeparatorHeight property
+
+        #endregion
+
 
         #endregion
 
         #region Data mapping and filtering properties
 
-        #region SourcePropertyMap property
+        #region SourcePropertyMap
         /// <summary>
         /// The source property map property.
         /// </summary>
@@ -103,9 +188,9 @@ namespace Forms9Patch
             get { return (List<string>)GetValue(SourcePropertyMapProperty); }
             set { SetValue(SourcePropertyMapProperty, value); }
         }
-        #endregion SourcePropertyMap property
+        #endregion SourcePropertyMap
 
-        #region VisibilityTest property
+        #region VisibilityTest
         /// <summary>
         /// The cell visibility test property.
         /// </summary>
@@ -119,9 +204,9 @@ namespace Forms9Patch
             get { return (Func<object, bool>)GetValue(VisibilityTestProperty); }
             set { SetValue(VisibilityTestProperty, value); }
         }
-        #endregion VisiblilityTest property
+        #endregion VisiblilityTest
 
-        #region SubGroupType property
+        #region SubGroupType
         /// <summary>
         /// The sub group type property backing store.
         /// </summary>
@@ -135,22 +220,13 @@ namespace Forms9Patch
             get { return (Type)GetValue(SubGroupTypeProperty); }
             set { SetValue(SubGroupTypeProperty, value); }
         }
-
-        /*
-        internal static readonly BindableProperty IsScrollListeningProperty = BindableProperty.Create("IsScrollListening", typeof(bool), typeof(ListView), default(bool));
-        internal bool IsScrollListening
-        {
-            get { return (bool)GetValue(IsScrollListeningProperty); }
-            set { SetValue(IsScrollListeningProperty, value); }
-        }
-        */
         #endregion
 
         #endregion
 
-        #region row selection properties
+        #region Row Selection properties
 
-        #region GroupToggleBehavior property
+        #region GroupToggleBehavior
         /// <summary>
         /// The backing store for the ListViews's GroupToggleBehavior property.
         /// </summary>
@@ -166,7 +242,7 @@ namespace Forms9Patch
         }
         #endregion GroupToggleBehavior property
 
-        #region SelectedItems property
+        #region SelectedItems
         /// <summary>
         /// The selected items property.
         /// </summary>
@@ -184,7 +260,7 @@ namespace Forms9Patch
 
         #endregion row selection properties
 
-        #region Drag/Drop properties
+        #region Editable
         /// <summary>
         /// The editable property backing store.
         /// </summary>
@@ -198,13 +274,13 @@ namespace Forms9Patch
             get { return (bool)GetValue(EditableProperty); }
             set { SetValue(EditableProperty, value); }
         }
-        #endregion Drag/Drop properties
+        #endregion Editable
 
         #region Xamarin.Forms.ListView analogs
 
         #region Header / Footer properties
 
-        #region Header property
+        #region Header
         /// <summary>
         /// backing store for Header property
         /// </summary>
@@ -217,9 +293,9 @@ namespace Forms9Patch
             get { return (object)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
-        #endregion Header property
+        #endregion Header
 
-        #region HeaderTemplate property
+        #region HeaderTemplate
         /// <summary>
         /// backing store for HeaderTemplate property
         /// </summary>
@@ -233,9 +309,9 @@ namespace Forms9Patch
             get { return (Xamarin.Forms.DataTemplate)GetValue(HeaderTemplateProperty); }
             set { SetValue(HeaderTemplateProperty, value); }
         }
-        #endregion HeaderTemplate property
+        #endregion HeaderTemplate 
 
-        #region Footer property
+        #region Footer
         /// <summary>
         /// backing store for Footer property
         /// </summary>
@@ -248,9 +324,9 @@ namespace Forms9Patch
             get { return (object)GetValue(FooterProperty); }
             set { SetValue(FooterProperty, value); }
         }
-        #endregion Footer property
+        #endregion Footer
 
-        #region FooterTemplate property
+        #region FooterTemplate
         /// <summary>
         /// backing store for FooterTemplate property
         /// </summary>
@@ -263,11 +339,11 @@ namespace Forms9Patch
             get { return (DataTemplate)GetValue(FooterTemplateProperty); }
             set { SetValue(FooterTemplateProperty, value); }
         }
-        #endregion FooterTemplate property
+        #endregion FooterTemplate
 
-        #endregion
+        #endregion Header / Footer properties
 
-        #region SelectedItem property
+        #region SelectedItem
         /// <summary>
         /// backing store for SelectedItem property
         /// </summary>
@@ -280,13 +356,13 @@ namespace Forms9Patch
             get { return (object)GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
-        #endregion SelectedItem property
+        #endregion SelectedItem
 
         #region Row Height properties
 
         // HasUnevenRows not supported because Forms9Patch.ListView assumes all lists have uneven rows
 
-        #region RowHeight property
+        #region RowHeight
         /// <summary>
         /// backing store for RowHeight property
         /// </summary>
@@ -299,14 +375,13 @@ namespace Forms9Patch
             get { return (int)GetValue(RowHeightProperty); }
             set { SetValue(RowHeightProperty, value); }
         }
-        #endregion RowHeight property
+        #endregion RowHeight
 
-
-        #endregion
+        #endregion RowHeight properties
 
         #region Group behavior properties
 
-        #region GroupHeaderTemplate property
+        #region GroupHeaderTemplate
         /// <summary>
         /// backing store for GroupHeaderTemplate property
         /// </summary>
@@ -319,9 +394,9 @@ namespace Forms9Patch
             get { return (Xamarin.Forms.DataTemplate)GetValue(GroupHeaderTemplateProperty); }
             set { SetValue(GroupHeaderTemplateProperty, value); }
         }
-        #endregion GroupHeaderTemplate property
+        #endregion GroupHeaderTemplate
 
-        #region IsGroupingEnabled property
+        #region IsGroupingEnabled
         /// <summary>
         /// backing store for IsGroupingEnabled property
         /// </summary>
@@ -334,94 +409,13 @@ namespace Forms9Patch
             get { return (bool)GetValue(IsGroupingEnabledProperty); }
             set { SetValue(IsGroupingEnabledProperty, value); }
         }
-        #endregion IsGroupingEnabled property
-
-        #endregion
-
-        #region Separator properties
-
-        #region SeparatorVisibility property
-        /// <summary>
-        /// backing store for SeparatorVisibility property
-        /// </summary>
-        public static readonly BindableProperty SeparatorVisibilityProperty = Xamarin.Forms.ListView.SeparatorVisibilityProperty;
-        /// <summary>
-        /// Gets/Sets the SeparatorVisibility property
-        /// </summary>
-        public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
-        {
-            get { return (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
-            set { SetValue(SeparatorVisibilityProperty, value); }
-        }
-        #endregion SeparatorVisibility property
-
-        #region SeparatorColor property
-        /// <summary>
-        /// backing store for SeparatorColor property
-        /// </summary>
-        public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("SeparatorColor", typeof(Color), typeof(ListView), Color.Default);
-        /// <summary>
-        /// Gets/Sets the SeparatorColor property
-        /// </summary>
-        public Color SeparatorColor
-        {
-            get { return (Color)GetValue(SeparatorColorProperty); }
-            set { SetValue(SeparatorColorProperty, value); }
-        }
-        #endregion SeparatorColor property
-
-        #region SeparatorLeftIndent property
-        /// <summary>
-        /// backing store for SeparatorLeftIndent property
-        /// </summary>
-        public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create("SeparatorLeftIndent", typeof(double), typeof(ListView), default(double));
-        /// <summary>
-        /// Gets/Sets the SeparatorLeftIndent property
-        /// </summary>
-        public double SeparatorLeftIndent
-        {
-            get { return (double)GetValue(SeparatorLeftIndentProperty); }
-            set { SetValue(SeparatorLeftIndentProperty, value); }
-        }
-        #endregion SeparatorLeftIndent property
-
-        #region SeparatorRightIndent property
-        /// <summary>
-        /// backing store for SeparatorRightIndent property
-        /// </summary>
-        public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create("SeparatorRightIndent", typeof(double), typeof(ListView), default(double));
-        /// <summary>
-        /// Gets/Sets the SeparatorRightIndent property
-        /// </summary>
-        public double SeparatorRightIndent
-        {
-            get { return (double)GetValue(SeparatorRightIndentProperty); }
-            set { SetValue(SeparatorRightIndentProperty, value); }
-        }
-        #endregion SeparatorRightIndent property
-
-        #region SeparatorHeight property
-        /// <summary>
-        /// backing store for SeparatorHeight property
-        /// </summary>
-        public static readonly BindableProperty SeparatorHeightProperty = BindableProperty.Create("SeparatorHeight", typeof(int), typeof(ListView), default(int));
-        /// <summary>
-        /// Gets/Sets the SeparatorHeight property
-        /// </summary>
-        public int SeparatorHeight
-        {
-            get { return (int)GetValue(SeparatorHeightProperty); }
-            set { SetValue(SeparatorHeightProperty, value); }
-        }
-        #endregion SeparatorHeight property
-
-
+        #endregion IsGroupingEnabled
 
         #endregion
 
         #region Xamarin.Forms.ItemsView analogs
 
-        #region ItemsSource property
+        #region ItemsSource
         /// <summary>
         /// backing store for ItemsSource property
         /// </summary>
@@ -434,9 +428,9 @@ namespace Forms9Patch
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
-        #endregion ItemsSource property
+        #endregion ItemsSource
 
-        #region ItemTemplates property
+        #region ItemTemplates
         /// <summary>
         /// backing store for ItemTemplates property
         /// </summary>
@@ -450,7 +444,7 @@ namespace Forms9Patch
             set { SetValue(ItemTemplatesProperty, value); }
         }
 
-        #endregion ItemTemplates property
+        #endregion ItemTemplates
 
         #endregion Xamarin.Forms.ItemsView analogs
 
@@ -647,9 +641,11 @@ namespace Forms9Patch
             if (BaseItemsSource != null)
             {
                 #region Cell decoration
-                if (propertyName == CellBackgroundColorProperty.PropertyName)
-                    BaseItemsSource.CellBackgroundColor = CellBackgroundColor;
-                else if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
+                // going to use Transparent
+                //if (propertyName == CellBackgroundColorProperty.PropertyName)
+                //    BaseItemsSource.CellBackgroundColor = CellBackgroundColor;
+                //else 
+                if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
                     BaseItemsSource.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
                 else if (propertyName == GroupHeaderRowHeightProperty.PropertyName)
                     BaseItemsSource.RequestedGroupHeaderRowHeight = GroupHeaderRowHeight;
@@ -837,20 +833,17 @@ namespace Forms9Patch
 
         bool _itemPanning;
         bool _itemVerticalPanning;
-        private void OnItemPanning(object sender, ItemWrapperPanEventArgs e)
+        void OnItemPanning(object sender, ItemWrapperPanEventArgs e)
         {
             _itemPanning = true;
-            if (Math.Abs(e.TotalDistance.Y) > 10)
-                _itemVerticalPanning = true;
-            //System.Diagnostics.Debug.WriteLine("OnItemPanning(" + e.DeltaDistance + ")");
+            _itemVerticalPanning |= Math.Abs(e.TotalDistance.Y) > 10;
             ScrollBy(-e.DeltaDistance.Y, false);
             if (_itemVerticalPanning)
                 Scrolling?.Invoke(this, EventArgs.Empty);
         }
 
-        private void OnItemPanned(object sender, ItemWrapperPanEventArgs e)
+        void OnItemPanned(object sender, ItemWrapperPanEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("OnItemPanned("+e.DeltaDistance+")");
             ScrollBy(-e.DeltaDistance.Y, false);
             if (_itemVerticalPanning)
                 Scrolled?.Invoke(this, EventArgs.Empty);
@@ -1130,9 +1123,7 @@ namespace Forms9Patch
                 groupWrapper.VisibilityTest = VisibilityTest;
                 #endregion
 
-                #region CellDecoration
-                groupWrapper.CellBackgroundColor = CellBackgroundColor;
-                groupWrapper.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+                #region RowHeight Properties
                 groupWrapper.RequestedGroupHeaderRowHeight = GroupHeaderRowHeight;
                 groupWrapper.RequestedRowHeight = RowHeight;
                 #endregion
@@ -1143,6 +1134,12 @@ namespace Forms9Patch
                 groupWrapper.SeparatorRightIndent = SeparatorRightIndent;
                 groupWrapper.RequestedSeparatorHeight = SeparatorHeight;
                 groupWrapper.SeparatorColor = SeparatorColor;
+                #endregion
+
+                #region Background Colors
+                //groupWrapper.CellBackgroundColor = Color.Transparent;
+                groupWrapper.GroupHeaderBackgroundColor = GroupHeaderBackgroundColor;
+                groupWrapper.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
                 #endregion
 
                 groupWrapper.Source = ItemsSource;

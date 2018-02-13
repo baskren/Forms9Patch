@@ -17,15 +17,51 @@ namespace Forms9Patch
 
         #region Properties
 
-        #region Separator
+        #region RowHeight Properties
+        public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create("RequestedRowHeight", typeof(double), typeof(ItemWrapper), 40.0);
+        public double RequestedRowHeight
+        {
+            get { return (double)GetValue(RequestedRowHeightProperty); }
+            set { SetValue(RequestedRowHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// backing store for RenderedRowHeight property
+        /// </summary>
+        public static readonly BindableProperty RenderedRowHeightProperty = BindableProperty.Create("RenderedRowHeight", typeof(double), typeof(ItemWrapper), -1.0);
+        /// <summary>
+        /// Gets/Sets the RenderedRowHeight property
+        /// </summary>
+        public double RenderedRowHeight
+        {
+            get { return (double)GetValue(RenderedRowHeightProperty); }
+            set { SetValue(RenderedRowHeightProperty, value); }
+        }
+        #endregion RowHeight properties
+
+        #region Separator properties
+        /// <summary>
+        /// The separator visibility property.
+        /// </summary>
         public static readonly BindableProperty SeparatorVisibilityProperty = Xamarin.Forms.ListView.SeparatorVisibilityProperty; //BindableProperty.Create("SeparatorVisibility", typeof(Xamarin.Forms.SeparatorVisibility), typeof(ItemWrapper), true);
+        /// <summary>
+        /// Gets or sets the separator visibility.
+        /// </summary>
+        /// <value>The separator visibility.</value>
         public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
         {
             get { return (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
             internal set { SetValue(SeparatorVisibilityProperty, value); }
         }
 
+        /// <summary>
+        /// The separator color property.
+        /// </summary>
         public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("SeparatorColor", typeof(Color), typeof(ItemWrapper), Color.FromRgba(0, 0, 0, 0.12));
+        /// <summary>
+        /// Gets or sets the color of the separator.
+        /// </summary>
+        /// <value>The color of the separator.</value>
         public Color SeparatorColor
         {
             get { return (Color)GetValue(SeparatorColorProperty); }
@@ -83,31 +119,23 @@ namespace Forms9Patch
         }
         #endregion
 
-
-        #region Background
+        #region Background properties
         public static readonly BindableProperty CellBackgroundColorProperty = BindableProperty.Create("CellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Transparent);
         public Color CellBackgroundColor
         {
             get { return (Color)GetValue(CellBackgroundColorProperty); }
-            internal set
-            {
-                SetValue(CellBackgroundColorProperty, value);
-                //System.Diagnostics.Debug.WriteLine("Item.CellBackgroundColor=["+value+"]");
-            }
+            internal set { SetValue(CellBackgroundColorProperty, value); }
         }
 
         public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Gray);
         public Color SelectedCellBackgroundColor
         {
             get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
-            set
-            {
-                SetValue(SelectedCellBackgroundColorProperty, value);
-                //System.Diagnostics.Debug.WriteLine("Item.SelectedCellBackgroundColor=["+value+"]");
-            }
+            set { SetValue(SelectedCellBackgroundColorProperty, value); }
         }
         #endregion
 
+        #region IsSelected
         public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ItemWrapper), false);
         public bool IsSelected
         {
@@ -117,56 +145,34 @@ namespace Forms9Patch
                 SetValue(IsSelectedProperty, value);
             }
         }
+        #endregion IsSelected property
 
+        #region Source
         public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(ItemWrapper), null);
         public object Source
         {
             get { return GetValue(SourceProperty); }
             internal set { SetValue(SourceProperty, value); }
         }
+        #endregion
 
+        #region Index
         public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(ItemWrapper), -1);
         public int Index
         {
             get { return (int)GetValue(IndexProperty); }
             internal set { SetValue(IndexProperty, value); }
         }
+        #endregion
 
-        #region CellView convenience property
+        #region CellView
         public View CellView
         {
             get { return BaseCellView.ContentView; }
         }
         #endregion
 
-        #region RequestedRowHeight
-        public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create("RequestedRowHeight", typeof(double), typeof(ItemWrapper), 40.0);
-        public double RequestedRowHeight
-        {
-            get { return (double)GetValue(RequestedRowHeightProperty); }
-            set { SetValue(RequestedRowHeightProperty, value); }
-        }
-        #endregion
-
-
-        #region RenderedRowHeight property
-        /// <summary>
-        /// backing store for RenderedRowHeight property
-        /// </summary>
-        public static readonly BindableProperty RenderedRowHeightProperty = BindableProperty.Create("RenderedRowHeight", typeof(double), typeof(ItemWrapper), -1.0);
-        /// <summary>
-        /// Gets/Sets the RenderedRowHeight property
-        /// </summary>
-        public double RenderedRowHeight
-        {
-            get { return (double)GetValue(RenderedRowHeightProperty); }
-            set { SetValue(RenderedRowHeightProperty, value); }
-        }
-        #endregion RenderedRowHeight property
-
-
-
-        #region Parent property
+        #region Parent
         public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
         public GroupWrapper Parent
         {
@@ -175,16 +181,6 @@ namespace Forms9Patch
         }
         #endregion
 
-
-
-        /*
-		public static readonly BindableProperty HasUnevenRowsProperty = Xamarin.Forms.ListView.HasUnevenRowsProperty;
-		public bool HasUnevenRows
-		{
-			get { return (bool)GetValue(HasUnevenRowsProperty); }
-			set { SetValue(HasUnevenRowsProperty, value); }
-		}
-*/
         #endregion
 
 
@@ -225,15 +221,24 @@ namespace Forms9Patch
         #region Convenience
         internal void ShallowCopy(ItemWrapper other)
         {
+            #region RowHeighty
+            RequestedRowHeight = other.RequestedRowHeight;
+            RenderedRowHeight = other.RenderedRowHeight;
+            #endregion
 
+            #region Separator
             SeparatorVisibility = other.SeparatorVisibility;
             SeparatorColor = other.SeparatorColor;
             RequestedSeparatorHeight = other.RequestedSeparatorHeight;
             SeparatorLeftIndent = other.SeparatorLeftIndent;
             SeparatorRightIndent = other.SeparatorRightIndent;
+            #endregion
 
+            #region Background
             CellBackgroundColor = other.CellBackgroundColor;
             SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
+            #endregion
+
 
             Source = other.Source;
         }

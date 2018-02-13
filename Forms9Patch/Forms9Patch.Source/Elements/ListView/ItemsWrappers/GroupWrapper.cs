@@ -45,7 +45,7 @@ namespace Forms9Patch
         }
         #endregion SubGroupType property
 
-        #region GroupHeaderCellHeight property
+        #region GroupHeader properties
         /// <summary>
         /// backing store for GroupHeaderCellHeight property
         /// </summary>
@@ -58,7 +58,17 @@ namespace Forms9Patch
             get { return (double)GetValue(RequestedGroupHeaderRowHeightProperty); }
             set { SetValue(RequestedGroupHeaderRowHeightProperty, value); }
         }
-        #endregion GroupHeaderCellHeight property
+
+        /// <summary>
+        /// The group header background color property.
+        /// </summary>
+        public static readonly BindableProperty GroupHeaderBackgroundColorProperty = BindableProperty.Create("GroupHeaderBackgroundColor", typeof(Color), typeof(GroupWrapper), Color.DarkGray);
+        public Color GroupHeaderBackgroundColor
+        {
+            get { return (Color)GetValue(GroupHeaderBackgroundColorProperty); }
+            set { SetValue(GroupHeaderBackgroundColorProperty, value); }
+        }
+        #endregion GroupHeader properties
 
         #endregion
 
@@ -126,6 +136,7 @@ namespace Forms9Patch
         {
             base.OnPropertyChanged(propertyName);
 
+            #region Data Mapping properties
             if (propertyName == SourceProperty.PropertyName)
             {
                 _itemWrappers.Clear();
@@ -160,19 +171,53 @@ namespace Forms9Patch
                 Source = null;
                 Source = source;
             }
-            else if (propertyName == RequestedRowHeightProperty.PropertyName)
-            {
-                foreach (var child in this)
-                    child.RequestedRowHeight = RequestedRowHeight;
-            }
+            #endregion
+
+            #region RowHeight properties
             else if (propertyName == RequestedGroupHeaderRowHeightProperty.PropertyName)
-            {
                 foreach (var child in this)
                 {
                     if (child is GroupWrapper subGroup)
                         subGroup.RequestedGroupHeaderRowHeight = RequestedGroupHeaderRowHeight;
                 }
+            else if (propertyName == RequestedRowHeightProperty.PropertyName)
+                foreach (var child in this)
+                    child.RequestedRowHeight = RequestedRowHeight;
+            #endregion
+
+            #region Separator properties
+            else if (propertyName == SeparatorVisibilityProperty.PropertyName)
+                foreach (var child in this)
+                    child.SeparatorVisibility = SeparatorVisibility;
+            else if (propertyName == RequestedSeparatorHeightProperty.PropertyName)
+                foreach (var child in this)
+                    child.RequestedSeparatorHeight = RequestedSeparatorHeight;
+            else if (propertyName == SeparatorLeftIndentProperty.PropertyName)
+                foreach (var child in this)
+                    child.SeparatorLeftIndent = SeparatorLeftIndent;
+            else if (propertyName == SeparatorRightIndentProperty.PropertyName)
+                foreach (var child in this)
+                    child.SeparatorRightIndent = SeparatorRightIndent;
+            else if (propertyName == SeparatorColorProperty.PropertyName)
+                foreach (var child in this)
+                    child.SeparatorColor = SeparatorColor;
+            #endregion
+
+            #region Background Color properties
+            else if (propertyName == GroupHeaderBackgroundColorProperty.PropertyName)
+            {
+                foreach (var child in this)
+                    if (child is GroupWrapper childGroup)
+                        childGroup.GroupHeaderBackgroundColor = GroupHeaderBackgroundColor;
             }
+            else if (propertyName == CellBackgroundColorProperty.PropertyName)
+                foreach (var child in this)
+                    child.CellBackgroundColor = CellBackgroundColor;
+            else if (propertyName == SelectedCellBackgroundColorProperty.PropertyName)
+                foreach (var child in this)
+                    child.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+            #endregion
+
         }
         #endregion
 
@@ -361,7 +406,29 @@ namespace Forms9Patch
                 //var groupWrapper = itemWrapper as GroupWrapper;
                 groupWrapper.VisibilityTest = groupWrapper.VisibilityTest ?? VisibilityTest;
                 groupWrapper.SubGroupType = groupWrapper.SubGroupType ?? SubGroupType;
+                groupWrapper.SourceSubPropertyMap = _subPropertyMap;
+                groupWrapper.RequestedGroupHeaderRowHeight = RequestedGroupHeaderRowHeight;
+                groupWrapper.GroupHeaderBackgroundColor = GroupHeaderBackgroundColor;
             }
+
+            #region RowHeight properties
+            // RequestedGroupHeight is above
+            itemWrapper.RequestedRowHeight = RequestedRowHeight;
+            #endregion
+
+            #region Separator properties
+            itemWrapper.SeparatorVisibility = SeparatorVisibility;
+            itemWrapper.RequestedSeparatorHeight = RequestedSeparatorHeight;
+            itemWrapper.SeparatorLeftIndent = SeparatorLeftIndent;
+            itemWrapper.SeparatorRightIndent = SeparatorRightIndent;
+            itemWrapper.SeparatorColor = SeparatorColor;
+            #endregion
+
+            #region BackgroundColor properties
+            // GroupHeaderBackgroundColor is above
+            itemWrapper.CellBackgroundColor = CellBackgroundColor;
+            itemWrapper.SelectedCellBackgroundColor = SelectedCellBackgroundColor;
+            #endregion
         }
 
         void CommonAdd(ItemWrapper itemWrapper)

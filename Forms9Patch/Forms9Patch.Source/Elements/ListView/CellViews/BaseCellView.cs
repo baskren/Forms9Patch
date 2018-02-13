@@ -274,27 +274,6 @@ namespace Forms9Patch
             _swipeButton2.Tapped += OnSwipeButtonTapped;
             _swipeButton3.Tapped += OnSwipeButtonTapped;
 
-            /*
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                var line = new BoxView
-                {
-                    HeightRequest = 1,
-                    HorizontalOptions = LayoutOptions.Fill,
-                    Color = Color.LightGray
-                };
-                var grid = new Grid
-                {
-                    ColumnDefinitions = new ColumnDefinitionCollection
-                    {
-                        new ColumnDefinition { Width = new GridLength(25, GridUnitType.Absolute) },
-                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-                    },
-                };
-                grid.AddChild(line,0,1);
-                Children.Add(grid, 0, 1);
-            }
-            */
             Children.Add(_separator, 0, 1);
         }
         #endregion
@@ -696,13 +675,14 @@ namespace Forms9Patch
             if (BindingContext == null)
                 return;
 
+            if (((IItemWrapper)BindingContext)?.Source.GetType().ToString() == "HeightsAndAreas.FrontageSegment")
+                System.Diagnostics.Debug.WriteLine("");
+
             if (BindingContext is ItemWrapper itemWrapper)
             {
                 itemWrapper.BaseCellView = this;
                 itemWrapper.PropertyChanged += OnItemPropertyChanged;
-                //DebugMessage("Set ContentView.BindingContext=[" + itemWrapper.Source + "]");
                 ContentView.BindingContext = itemWrapper.Source;
-                //DebugMessage("ContentView.BindingContext=[" + ContentView.BindingContext + "]");
                 UpdateBackground();
                 UpdateHeights();
                 UpdateSeparator();
@@ -711,11 +691,7 @@ namespace Forms9Patch
                     contentView.IsSelected = itemWrapper.IsSelected;
             }
             else
-            {
                 HeightRequest = -1;
-            }
-            //else
-            //    throw new Exception("ItemWrapper and GroupWrapper are the only thing that be the BindingContext for BaseCellView.");
 
             base.OnBindingContextChanged();
 
@@ -724,7 +700,6 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanging("+propertyName+")");
             base.OnPropertyChanging(propertyName);
             if (propertyName == BindingContextProperty.PropertyName)
             {
@@ -742,7 +717,6 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnPropertyChanged(" + propertyName + ")");
             base.OnPropertyChanged(propertyName);
             if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
                 Children.Add(ContentView, 0, 0);
@@ -750,7 +724,6 @@ namespace Forms9Patch
 
         void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnItemPropertyChanging(" + e.PropertyName + ")");
             if (e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName)
                 UpdateBackground();
 
@@ -786,23 +759,20 @@ namespace Forms9Patch
 
         void UpdateBackground()
         {
-            if (BindingContext is IItemWrapper item)
-                BackgroundColor = item.IsSelected ? item.SelectedCellBackgroundColor : item.CellBackgroundColor;
+            if (BindingContext is IItemWrapper item && item.IsSelected)
+                BackgroundColor = item.SelectedCellBackgroundColor;
             else
                 BackgroundColor = Color.Transparent;
-
         }
-
 
         void UpdateHeights()
         {
             var rowHeight = RowHeight;
-            if (RowDefinitions[0].Height.Value != rowHeight)
+            if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
                 RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
             HeightRequest = rowHeight + SeparatorHeight;
             if (Parent is ICell_T_Height cell)
                 cell.Height = HeightRequest;
-            DebugMessage("Exit");
         }
 
         void UpdateSeparator()
@@ -810,7 +780,7 @@ namespace Forms9Patch
             if (BindingContext is IItemWrapper itemWrapper)
             {
                 var separatorHeight = SeparatorHeight;
-                if (RowDefinitions[1].Height.Value != separatorHeight)
+                if (Math.Abs(RowDefinitions[1].Height.Value - separatorHeight) > 0.1)
                     RowDefinitions[1] = new RowDefinition { Height = new GridLength(separatorHeight, GridUnitType.Absolute) };
                 HeightRequest = RowHeight + separatorHeight;
                 _separator.Color = itemWrapper.SeparatorColor;
