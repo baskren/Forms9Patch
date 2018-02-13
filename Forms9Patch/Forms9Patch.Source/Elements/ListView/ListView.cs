@@ -74,13 +74,13 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for GroupHeaderRowHeight property
         /// </summary>
-        public static readonly BindableProperty GroupHeaderRowHeightProperty = BindableProperty.Create("GroupHeaderRowHeight", typeof(int), typeof(ListView), -1);
+        public static readonly BindableProperty GroupHeaderRowHeightProperty = BindableProperty.Create("GroupHeaderRowHeight", typeof(double), typeof(ListView), -1.0);
         /// <summary>
         /// Gets/Sets the GroupHeaderRowHeight property
         /// </summary>
-        public int GroupHeaderRowHeight
+        public double GroupHeaderRowHeight
         {
-            get { return (int)GetValue(GroupHeaderRowHeightProperty); }
+            get { return (double)GetValue(GroupHeaderRowHeightProperty); }
             set { SetValue(GroupHeaderRowHeightProperty, value); }
         }
         #endregion GroupHeaderRowHeight property
@@ -344,14 +344,14 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SeparatorVisibility property
         /// </summary>
-        public static readonly BindableProperty IsSeparatorVisibleProperty = BindableProperty.Create("IsSeparatorVisible", typeof(bool), typeof(ListView), default(bool));
+        public static readonly BindableProperty SeparatorVisibilityProperty = Xamarin.Forms.ListView.SeparatorVisibilityProperty;
         /// <summary>
         /// Gets/Sets the SeparatorVisibility property
         /// </summary>
-        public bool IsSeparatorVisible
+        public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
         {
-            get { return (bool)GetValue(IsSeparatorVisibleProperty); }
-            set { SetValue(IsSeparatorVisibleProperty, value); }
+            get { return (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
+            set { SetValue(SeparatorVisibilityProperty, value); }
         }
         #endregion SeparatorVisibility property
 
@@ -559,7 +559,7 @@ namespace Forms9Patch
             _listView.HasUnevenRows = true;
             _listView.ItemAppearing += OnItemAppearing;
             _listView.ItemDisappearing += OnItemDisappearing;
-            _listView.SeparatorVisibility = SeparatorVisibility.None;
+            _listView.SeparatorVisibility = Xamarin.Forms.SeparatorVisibility.None;
 
 
             _listView.Scrolling += OnScrolling;
@@ -671,8 +671,8 @@ namespace Forms9Patch
 
 
                 #region Separator Properties
-                else if (propertyName == IsSeparatorVisibleProperty.PropertyName)
-                    BaseItemsSource.SeparatorIsVisible = IsSeparatorVisible;
+                else if (propertyName == SeparatorVisibilityProperty.PropertyName)
+                    BaseItemsSource.SeparatorVisibility = SeparatorVisibility;
                 else if (propertyName == SeparatorLeftIndentProperty.PropertyName)
                     BaseItemsSource.SeparatorLeftIndent = SeparatorLeftIndent;
                 else if (propertyName == SeparatorRightIndentProperty.PropertyName)
@@ -855,11 +855,11 @@ namespace Forms9Patch
             if (_itemVerticalPanning)
                 Scrolled?.Invoke(this, EventArgs.Empty);
             _itemVerticalPanning = false;
-            Device.StartTimer(TimeSpan.FromMilliseconds(100),()=>
-            {
-                _itemPanning = false;
-                return false;
-            });
+            Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+             {
+                 _itemPanning = false;
+                 return false;
+             });
         }
 
         #endregion
@@ -1138,7 +1138,7 @@ namespace Forms9Patch
                 #endregion
 
                 #region Separator properties
-                groupWrapper.SeparatorIsVisible = IsSeparatorVisible;
+                groupWrapper.SeparatorVisibility = SeparatorVisibility;
                 groupWrapper.SeparatorLeftIndent = SeparatorLeftIndent;
                 groupWrapper.SeparatorRightIndent = SeparatorRightIndent;
                 groupWrapper.RequestedSeparatorHeight = SeparatorHeight;

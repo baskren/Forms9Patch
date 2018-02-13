@@ -16,10 +16,14 @@ namespace Forms9Patch
             get
             {
                 //return (BindingContext is ItemWrapper<string> itemWrapper && itemWrapper.Index == 0);
-                return false;
+                //return false;
                 //return (BindingContext is GroupWrapper wrapper && wrapper.Index == 0);
+
+                //return BindingContext is GroupWrapper wrapper && wrapper.Source.GetType().ToString() == "HeightsAndAreas.FrontageSegment";
+                return false;
             }
         }
+
 
         void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         {
@@ -44,58 +48,37 @@ namespace Forms9Patch
             set { SetValue(ContentViewProperty, value); }
         }
 
+        internal bool IsHeader;
+
+
         // ViewHeight priority : (1) value of View.CellHeight (2) TemplateSelectorBase.SetHeight() can try to set (if View.CellHeight doesn't exist or is -1).
-        int _requestedRowHeight;
-        internal int RenderedRowHeight
+        internal double RowHeight
         {
             get
             {
-                if (ContentView is ICellHeight cellHeightView && cellHeightView.CellHeight > -1)
+                if (BindingContext is IItemWrapper wrapper)
                 {
-                    DebugMessage("Get via ICellHeight=[" + cellHeightView.CellHeight + "] ContentView=[" + ContentView + "]");
-                    return cellHeightView.CellHeight;
-                }
+                    if (ContentView is ICellHeight contentView && contentView.CellHeight > -1)
+                        wrapper.RenderedRowHeight = contentView.CellHeight;
+                    else if (IsHeader && BindingContext is GroupWrapper groupWrapper)
+                        wrapper.RenderedRowHeight = groupWrapper.RequestedGroupHeaderRowHeight;
 
-                DebugMessage("Get via _requestedRowHeight=[" + _requestedRowHeight + "]");
-                return _requestedRowHeight;
+                    return wrapper.BestGuessItemRowHeight();
+                }
+                return 40.0;
             }
         }
-
-        internal int RequestedRowHeight
-        {
-            get => _requestedRowHeight;
-            set
-            {
-                DebugMessage("Enter _requestedRowHeight=[" + _requestedRowHeight + "] value=[" + value + "]");
-                if (_requestedRowHeight != value)
-                {
-                    _requestedRowHeight = value;
-                    UpdateHeights();
-                }
-                DebugMessage("Exit");
-            }
-        }
-
 
         // SeparatorHeight setter priority: (1) TemplateSelectorBase
-        double _separatorHeight;
         internal double SeparatorHeight
         {
             get
             {
-                if (BindingContext is IItemWrapper itemWrapper && !itemWrapper.SeparatorIsVisible)
+                if (IsHeader)
                     return 0;
-                return _separatorHeight;
-            }
-            set
-            {
-                DebugMessage("Enter _separatorHeight=[" + _separatorHeight + "] value=[" + value + "]");
-                if (_separatorHeight != value)
-                {
-                    _separatorHeight = value;
-                    UpdateHeights();
-                }
-                DebugMessage("Exit");
+                if (BindingContext is IItemWrapper itemWrapper)
+                    return itemWrapper.RenderedSeparatorHeight;
+                return 1;
             }
         }
         /*
@@ -313,9 +296,6 @@ namespace Forms9Patch
             }
             */
             Children.Add(_separator, 0, 1);
-
-            UpdateHeights();
-            UpdateSeparator();
         }
         #endregion
 
@@ -357,8 +337,7 @@ namespace Forms9Patch
                 return;
             }
             _panHz = false;
-            var iCellSwipeMenus = ContentView as ICellSwipeMenus;
-            if (iCellSwipeMenus != null)
+            if (ContentView is ICellSwipeMenus iCellSwipeMenus)
             {
                 double distance = e.TotalDistance.X + _translateOnUp;
                 if (_endButtons + _startButtons > 0)
@@ -460,8 +439,7 @@ namespace Forms9Patch
             {
                 // setup end SwipeMenu
                 var side = distance < 0 ? Side.End : Side.Start;
-                var iCellSwipeMenus = ContentView as ICellSwipeMenus;
-                if (iCellSwipeMenus != null)
+                if (ContentView is ICellSwipeMenus iCellSwipeMenus)
                 {
                     var swipeMenu = side == Side.End ? iCellSwipeMenus.EndSwipeMenu : iCellSwipeMenus.StartSwipeMenu;
                     if (swipeMenu != null && swipeMenu.Count > 0)
@@ -732,6 +710,10 @@ namespace Forms9Patch
                 if (ContentView is IIsSelectedAble contentView)
                     contentView.IsSelected = itemWrapper.IsSelected;
             }
+            else
+            {
+                HeightRequest = -1;
+            }
             //else
             //    throw new Exception("ItemWrapper and GroupWrapper are the only thing that be the BindingContext for BaseCellView.");
 
@@ -750,8 +732,7 @@ namespace Forms9Patch
                 {
                     itemWrapper.BaseCellView = null;
                     itemWrapper.PropertyChanged -= OnItemPropertyChanged;
-                    //ContentView.BindingContext = null;
-
+                    HeightRequest = -1;
                 }
                 PutAwaySwipeButtons(false);
             }
@@ -790,7 +771,7 @@ namespace Forms9Patch
             else if (e.PropertyName == ItemWrapper.RequestedRowHeightProperty.PropertyName)
                 UpdateHeights();
 
-            else if (e.PropertyName == ItemWrapper.SeparatorIsVisibleProperty.PropertyName || e.PropertyName == ItemWrapper.RequestedSeparatorHeightProperty.PropertyName)
+            else if (e.PropertyName == ItemWrapper.SeparatorVisibilityProperty.PropertyName || e.PropertyName == ItemWrapper.RequestedSeparatorHeightProperty.PropertyName)
             {
                 UpdateHeights();
                 UpdateSeparator();
@@ -815,24 +796,12 @@ namespace Forms9Patch
 
         void UpdateHeights()
         {
-            DebugMessage("Enter RenderedRowHeight=[" + RenderedRowHeight + "] SeparatorHeight=[" + SeparatorHeight + "]");
-            var newHeightRequest = RenderedRowHeight + SeparatorHeight;
-            DebugMessage("newHeightRequest=[" + newHeightRequest + "]");
-            if (newHeightRequest != HeightRequest)
-            {
-                RowDefinitions[0] = new RowDefinition { Height = new GridLength(RenderedRowHeight, GridUnitType.Absolute) };
-                RowDefinitions[1] = new RowDefinition { Height = new GridLength(SeparatorHeight, GridUnitType.Absolute) };
-                DebugMessage("Set HeightRequest");
-                HeightRequest = newHeightRequest;
-                DebugMessage("HeightRequest=[" + HeightRequest + "]");
-            }
-
-            if (BindingContext is IItemWrapper itemWrapper)
-            {
-                DebugMessage("Set itemWrapper.RenderedRowHeight");
-                itemWrapper.RenderedRowHeight = RenderedRowHeight;
-                DebugMessage(" itemWrapper.RenderedRowHeight=[" + itemWrapper.RenderedRowHeight + "]");
-            }
+            var rowHeight = RowHeight;
+            if (RowDefinitions[0].Height.Value != rowHeight)
+                RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
+            HeightRequest = rowHeight + SeparatorHeight;
+            if (Parent is ICell_T_Height cell)
+                cell.Height = HeightRequest;
             DebugMessage("Exit");
         }
 
@@ -840,6 +809,10 @@ namespace Forms9Patch
         {
             if (BindingContext is IItemWrapper itemWrapper)
             {
+                var separatorHeight = SeparatorHeight;
+                if (RowDefinitions[1].Height.Value != separatorHeight)
+                    RowDefinitions[1] = new RowDefinition { Height = new GridLength(separatorHeight, GridUnitType.Absolute) };
+                HeightRequest = RowHeight + separatorHeight;
                 _separator.Color = itemWrapper.SeparatorColor;
                 _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
             }

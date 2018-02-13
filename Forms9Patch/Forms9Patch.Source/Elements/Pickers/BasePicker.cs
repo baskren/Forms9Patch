@@ -148,7 +148,7 @@ namespace Forms9Patch
             _listView.SelectedCellBackgroundColor = Color.Transparent;
 
             _listView.IsGroupingEnabled = false;
-            _listView.IsSeparatorVisible = false;
+            _listView.SeparatorVisibility = SeparatorVisibility.None;
 
             _listView.ItemTapped += OnItemTapped;
 
