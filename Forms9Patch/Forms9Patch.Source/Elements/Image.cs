@@ -146,7 +146,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for AntiAlias property
         /// </summary>
-        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("AntiAlias", typeof(bool), typeof(Image), default(bool));
+        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("AntiAlias", typeof(bool), typeof(Image), true);
         /// <summary>
         /// Gets/Sets the AntiAlias property
         /// </summary>

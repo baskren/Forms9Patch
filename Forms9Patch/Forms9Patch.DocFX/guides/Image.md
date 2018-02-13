@@ -195,4 +195,37 @@ for other types of raster images.  This property is ignored for vector (`.svg`)
 images.  
 
 
-## 
+## SourceImageSize Property
+
+Want to be sure you got the image you intended to ask for?  This question can come up 
+when you're doing cross platform development.  The SourceImageSize property can help
+with this by giving you the size of the ImageSource being used for the image.  
+
+**NOTE:** For NinePatch images (`.9.png`), the value returned **does not** include 
+the two extra pixels in width and height for the NinePatch markup.
+
+
+## AntiAlias Property
+
+`Xamarin.Forms` relies on the platform image elements to render images.  A small
+performance improvement can be had by not applying an anti-alias algorithm to the 
+image during rendering.  Just as `Xamarin.Forms`, `Forms9Patch.Image` preforms this 
+anti-alias step by default. However, if you're upscaling an image a bit much and you 
+don't care about some pixalization, then you want a little more performance by 
+settting this property to `true`.
+
+
+## BackgroundColor Property
+
+What?  Why would an image need a background color?  Well, usually it wouldn't *but*
+images with transparent regions (`.png` and `.svg`) create an opportunity.  Just as
+you can use the `TintColor` to theme a monocrome raster image, you can use `BackgroundColor`
+to them the transparent regions of such an image.  Cool, huh?
+
+## Outline Properties
+
+
+
+## HasShadow and ShadowInverted Properties
+
+Taking things a step further than we did with the BackgroundColor property, 

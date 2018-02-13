@@ -1249,6 +1249,12 @@ namespace Forms9Patch
         }
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is actively scrolling.
+        /// </summary>
+        /// <value><c>true</c> if is actively scrolling; otherwise, <c>false</c>.</value>
+        public bool IsScrolling => _listView.IsScrolling;
+
+        /// <summary>
         /// Gets the scroll offset (current position) of ListView.
         /// </summary>
         /// <value>The scroll offset.</value>

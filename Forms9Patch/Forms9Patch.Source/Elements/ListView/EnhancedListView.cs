@@ -39,15 +39,34 @@ namespace Forms9Patch
         /// </summary>
         public double ScrollOffset => RendererScrollOffset.Invoke();
 
+        bool _isScrolling;
+        DateTime _lastScrolling = DateTime.MinValue;
+        public bool IsScrolling
+        {
+            get
+            {
+                if (_isScrolling && DateTime.Now - _lastScrolling < TimeSpan.FromSeconds(3))
+                    _isScrolling = false;
+                return _isScrolling;
+            }
+            set
+            {
+                _isScrolling = value;
+                if (_scrolling)
+                    _lastScrolling = DateTime.Now;
+            }
+        }
         #endregion ScrollOffset property
 
 
         #endregion
 
+
         #region Events
         public event EventHandler Scrolling;
         public event EventHandler Scrolled;
         #endregion
+
 
         #region Constructors
         /// <summary>
@@ -69,6 +88,7 @@ namespace Forms9Patch
         internal Func<double> RendererScrollOffset;
         internal Func<double> RendererHeaderHeight;
         #endregion
+
 
         #region Methods
 
@@ -115,15 +135,20 @@ namespace Forms9Patch
 
         #endregion
 
+
         #region Event Handles
         internal void OnScrolling(object sender, EventArgs args)
         {
+            System.Diagnostics.Debug.WriteLine("scrolling");
+            IsScrolling = true;
             Scrolling?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolling: offset=[" + ScrollOffset + "]");
         }
 
         internal void OnScrolled(object sender, EventArgs args)
         {
+            System.Diagnostics.Debug.WriteLine("!!! STOP !!!");
+            IsScrolling = false;
             Scrolled?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolled: offset=[" + ScrollOffset + "]");
         }

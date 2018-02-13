@@ -2,12 +2,18 @@
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
   <ItemGroup>
+
+    <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs" Link="Effects\SliderStepSizeEffect.cs" />
+
+    <!-- Buttons -->
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Button.cs" Link="Elements\Buttons\Button.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Segment.cs" Link="Elements\Buttons\Segment.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentedControl.cs" Link="Elements\Buttons\SegmentedControl.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\StateButton.cs" Link="Elements\Buttons\StateButton.cs" />
+
+    <!-- Elements ListView -->
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\CellViews\BaseCellView.cs" Link="Elements\ListView\CellViews\BaseCellView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\CellViews\BlankCellView.cs" Link="Elements\ListView\CellViews\BlankCellView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\CellViews\GroupHeaderView.cs" Link="Elements\ListView\CellViews\GroupHeaderView.cs" />
@@ -40,11 +46,15 @@
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\ListView.cs" Link="Elements\ListView\ListView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\EnhancedListView.cs" Link="Elements\ListView\EnhancedListView.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ListView\SwipeMenuItem.cs" Link="Elements\ListView\SwipeMenuItem.cs" />
+
+    <!-- Elements Pickers -->
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\BasePicker.cs" Link="Elements\Pickers\BasePicker.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\MultiComponentPicker.cs" Link="Elements\Pickers\MultiComponentPicker.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\MultiPicker.cs" Link="Elements\Pickers\MultiPicker.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\SelectBy.cs" Link="Elements\Pickers\SelectBy.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Pickers\SinglePicker.cs" Link="Elements\Pickers\SinglePicker.cs" />
+
+    <!-- Elements Popups -->
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\ActivityIndicatorPopup.cs" Link="Elements\Popups\ActivityIndicatorPopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\BubblePopup.cs" Link="Elements\Popups\BubblePopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\ModalPopup.cs" Link="Elements\Popups\ModalPopup.cs" />
@@ -52,10 +62,14 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\PopupBase.cs" Link="Elements\Popups\PopupBase.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\TargetedToast.cs" Link="Elements\Popups\TargetedToast.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\Toast.cs" Link="Elements\Popups\Toast.cs" />
+
+    <!-- Elements Misc -->
     <Compile Include="..\Forms9Patch.Source\Elements\Image.cs" Link="Elements\Image.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\RootPage.cs" Link="Elements\RootPage.cs" />
+
+    <!-- Enums -->
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ElementShape.cs" Link="Enums\ElementShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ExtendedElementShape.cs" Link="Enums\ExtendedElementShape.cs" />
@@ -67,8 +81,12 @@
     <Compile Include="..\Forms9Patch.Source\Enums\NetworkConnectivity.cs" Link="Enums\NetworkConnectivity.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\PointerDirection.cs" Link="Enums\PointerDirection.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\RoundRectPath.cs" Link="Enums\RoundRectPath.cs" />
+
+    <!-- Events -->
     <Compile Include="..\Forms9Patch.Source\Events\SegmentedControlEventArgs.cs" Link="Events\SegmentedControlEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Events\SegmentedControlEventHandler.cs" Link="Events\SegmentedControlEventHandler.cs" />
+
+    <!-- Extensions -->
     <Compile Include="..\Forms9Patch.Source\Extensions\ApplicationExtensions.cs" Link="Extensions\ApplicationExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\AspectExtension.cs" Link="Extensions\AspectExtension.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\AssemblyExtensions.cs" Link="Extensions\AssemblyExtensions.cs" />
@@ -91,6 +109,8 @@
     <Compile Include="..\Forms9Patch.Source\Extensions\TextAlignmentExtension.cs" Link="Extensions\TextAlignmentExtension.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\ThicknessExtension.cs" Link="Extensions\ThicknessExtension.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\WebViewExtensions.cs" Link="Extensions\WebViewExtensions.cs" />
+
+    <!-- Interfaces -->
     <Compile Include="..\Forms9Patch.Source\Interfaces\IApplicationInfoService.cs" Link="Interfaces\IApplicationInfoService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IBackground.cs" Link="Interfaces\IBackground.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IBubbleLayout.cs" Link="Interfaces\IBubbleLayout.cs" />
@@ -116,6 +136,8 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\IShape.cs" Link="Interfaces\IShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IStatusBarService.cs" Link="Interfaces\IStatusBarService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IWebViewExtensionService.cs" Link="Interfaces\IWebViewExtensionService.cs" />
+
+    <!-- Layouts -->
     <Compile Include="..\Forms9Patch.Source\Layouts\AbsoluteLayout.cs" Link="Layouts\AbsoluteLayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\BubbleLayout.cs" Link="Layouts\BubbleLayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\ContentView.cs" Link="Layouts\ContentView.cs" />
@@ -125,6 +147,8 @@
     <Compile Include="..\Forms9Patch.Source\Layouts\RelativeLayout.cs" Link="Layouts\RelativeLayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\ShapeBase.cs" Link="Layouts\ShapeBase.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\StackLayout.cs" Link="Layouts\StackLayout.cs" />
+
+    <!-- Models -->
     <Compile Include="..\Forms9Patch.Source\Models\ButtonState.cs" Link="Models\ButtonState.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\F9PFormattedString.cs" Link="Models\F9PFormattedString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\HTMLMarkupString.cs" Link="Models\HTMLMarkupString.cs" />
@@ -135,6 +159,8 @@
     <Compile Include="..\Forms9Patch.Source\Models\Settings.cs" Link="Models\Settings.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\SpanFormattedString.cs" Link="Models\SpanFormattedString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\VersionString.cs" Link="Models\VersionString.cs" />
+
+    <!-- Services -->
     <Compile Include="..\Forms9Patch.Source\Services\ApplicationInfoService.cs" Link="Services\ApplicationInfoService.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\Display.cs" Link="Services\Display.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\KeyboardService.cs" Link="Services\KeyboardService.cs" />
@@ -142,6 +168,8 @@
     <Compile Include="..\Forms9Patch.Source\Services\OsInfoService.cs" Link="Services\OsInfoService.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\ServiceNotAvailableException.cs" Link="Services\ServiceNotAvailableException.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\StatusBarService.cs" Link="Services\StatusBarService.cs" />
+
+    <!-- Spans -->
     <Compile Include="..\Forms9Patch.Source\Spans\ActionSpan.cs" Link="Spans\ActionSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\BackgroundColorSpan.cs" Link="Spans\BackgroundColorSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\BoldSpan.cs" Link="Spans\BoldSpan.cs" />
@@ -156,6 +184,8 @@
     <Compile Include="..\Forms9Patch.Source\Spans\SubscriptSpan.cs" Link="Spans\SubscriptSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\SuperscriptSpan.cs" Link="Spans\SuperscriptSpan.cs" />
     <Compile Include="..\Forms9Patch.Source\Spans\UnderlineSpan.cs" Link="Spans\UnderlineSpan.cs" />
+
+
     <Compile Include="..\Forms9Patch.Source\AdditionalAssemblyInfo.cs" Link="AdditionalAssemblyInfo.cs" />
   </ItemGroup>
 
