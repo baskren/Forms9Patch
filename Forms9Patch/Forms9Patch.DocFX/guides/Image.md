@@ -119,7 +119,7 @@ desired.  Also note that, if you want to use Embedded Resource images, you will
 need to add an XAML markup extension to the assembly that contains those images 
 (see [Using `Forms9Patch.ImageSource`](ImageSource.md)).  For example:
 
-```xaml
+```XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
