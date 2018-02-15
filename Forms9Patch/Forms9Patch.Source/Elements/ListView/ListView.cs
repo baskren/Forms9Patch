@@ -366,7 +366,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for RowHeight property
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(ListView), -1);
+        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(ListView), 40);
         /// <summary>
         /// Gets/Sets the RowHeight property
         /// </summary>

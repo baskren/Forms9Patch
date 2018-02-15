@@ -45,8 +45,8 @@ namespace Forms9Patch.UWP
 
             FormsGestures.UWP.Settings.Init();
 
-            var forms9PatchResources = GetResources();
-            Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
+            //var forms9PatchResources = GetResources();
+            //Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
 
         }
 
@@ -54,7 +54,7 @@ namespace Forms9Patch.UWP
         {
             return new Windows.UI.Xaml.ResourceDictionary
             {
-                Source = new Uri("ms-appx:///Forms9Patch.UWP/Resources.xbf")
+                Source = new Uri("ms-appx:///Forms9Patch.UWP/Forms9Patch.UWP.EnhancedListView.Resources.xbf")
             };
         }
 

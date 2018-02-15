@@ -90,12 +90,15 @@
 
   <!-- Forms9Patch modifications to Window's defaults -->
   <ItemGroup>
-    <Page Include="..\Forms9Patch.Source.UWP\Resources.xaml">
-      <Link>Resources.xaml</Link>
+    <EmbeddedResource Include="..\Forms9Patch.Source.UWP\EnhancedListView.Resources.xaml" Link="EnhancedListView.Resources.xaml" />
+  </ItemGroup>
+  <!--ItemGroup>  
+    <Page Include="..\Forms9Patch.Source.UWP\EnhancedListView.Resources.xaml">
+      <Link>EnhancedListView.Resources.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
+  </ItemGroup-->
 
 
   <Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />

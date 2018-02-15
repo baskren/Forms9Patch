@@ -65,6 +65,8 @@ namespace Forms9Patch
             InstanceId = _instances++;
             View = BaseCellView;
             BaseCellView.ContentView = new TContent();
+            if (BaseCellView.ContentView is ICellHeight contentView)
+                Height = contentView.CellHeight;
         }
 
         /// <summary>
@@ -87,6 +89,10 @@ namespace Forms9Patch
                 View.BindingContext = BindingContext;
 
             base.OnBindingContextChanged();
+
+            if (BaseCellView.IsHeader)
+                System.Diagnostics.Debug.WriteLine("");
+
         }
 
     }

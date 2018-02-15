@@ -56,6 +56,8 @@ namespace Forms9Patch
         {
             get
             {
+                if (IsHeader)
+                    System.Diagnostics.Debug.WriteLine("");
                 if (BindingContext is IItemWrapper wrapper)
                 {
                     if (ContentView is ICellHeight contentView && contentView.CellHeight > -1)
@@ -703,11 +705,18 @@ namespace Forms9Patch
             if (BindingContext is IItemWrapper item && item.IsSelected)
                 BackgroundColor = item.SelectedCellBackgroundColor;
             else
-                BackgroundColor = Color.Transparent;
+                //BackgroundColor = Color.Transparent;
+                BackgroundColor = Color.Orange;
+
+            if (IsHeader)
+                BackgroundColor =  Color.Green.WithAlpha(0.25);
+
         }
 
         void UpdateHeights()
         {
+            if (IsHeader)
+                System.Diagnostics.Debug.WriteLine("");
             var rowHeight = RowHeight;
             if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
                 RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };

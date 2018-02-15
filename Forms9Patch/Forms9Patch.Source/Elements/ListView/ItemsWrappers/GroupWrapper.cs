@@ -49,7 +49,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for GroupHeaderCellHeight property
         /// </summary>
-        public static readonly BindableProperty RequestedGroupHeaderRowHeightProperty = BindableProperty.Create("RequestedGroupHeaderRowHeight", typeof(double), typeof(GroupWrapper), -1.0);
+        public static readonly BindableProperty RequestedGroupHeaderRowHeightProperty = BindableProperty.Create("RequestedGroupHeaderRowHeight", typeof(double), typeof(GroupWrapper), 40.0);
         /// <summary>
         /// Gets/Sets the GroupHeaderCellHeight property
         /// </summary>
