@@ -188,6 +188,7 @@ namespace Forms9Patch
                 index++;
             }
             _tapping = false;
+            e.Handled = true;
         }
 
         public void TapItemAtPoint(Point p)

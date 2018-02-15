@@ -886,6 +886,8 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnTapped(args);
                     e.Handled = args.Handled;
+                    //if (args.Handled)
+                    //    break;
                 }
                 if (_longPressing && listener.HandlesLongPressed)
                 {
@@ -893,6 +895,8 @@ namespace FormsGestures.UWP
                     args.Listener = listener;
                     listener?.OnLongPressed(args);
                     e.Handled = args.Handled;
+                    //if (args.Handled)
+                    //    break;
                 }
                 if (listener.HandlesDown)
                 {

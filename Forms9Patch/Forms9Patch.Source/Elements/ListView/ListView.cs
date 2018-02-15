@@ -786,7 +786,9 @@ namespace Forms9Patch
                 if (tappedItemWrapper?.Source != null)
                 {
                     // null source items are not tappable or selectable
-                    ItemTapped?.Invoke(this, new ItemTappedEventArgs(group.Source, tappedItemWrapper.Source, tappedItemWrapper.CellView));
+                    var itemTappedArgs = new ItemTappedEventArgs(group.Source, tappedItemWrapper.Source, tappedItemWrapper.CellView);
+                    ItemTapped?.Invoke(this, itemTappedArgs);
+                    e.Handled = itemTappedArgs.Handled;
                     switch (GroupToggleBehavior)
                     {
                         case GroupToggleBehavior.None:

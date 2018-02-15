@@ -7,6 +7,8 @@ namespace Forms9Patch
 	/// </summary>
 	public class ItemTappedEventArgs: Xamarin.Forms.ItemTappedEventArgs
 	{
+        public bool Handled;
+
 		/// <summary>
 		/// Gets the cell view bound to the tapped item.
 		/// </summary>
