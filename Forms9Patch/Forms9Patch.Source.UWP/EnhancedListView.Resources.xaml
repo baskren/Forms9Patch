@@ -76,7 +76,7 @@
 	        <Style TargetType="ListViewHeaderItem">
 	            <Setter Property="Margin" Value="0" />
 	            <Setter Property="Padding" Value="0" />
-	            <Setter Property="Background" Value="Red" />
+	            <!--Setter Property="Background" Value="Red" /-->
 	            <Setter Property="HorizontalAlignment" Value="Stretch" />
 	            <Setter Property="VerticalAlignment" Value="Stretch" />
 	            <Setter Property="HorizontalContentAlignment" Value="Stretch" />

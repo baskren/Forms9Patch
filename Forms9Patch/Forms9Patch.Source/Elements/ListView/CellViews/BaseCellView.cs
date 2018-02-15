@@ -705,12 +705,8 @@ namespace Forms9Patch
             if (BindingContext is IItemWrapper item && item.IsSelected)
                 BackgroundColor = item.SelectedCellBackgroundColor;
             else
-                //BackgroundColor = Color.Transparent;
-                BackgroundColor = Color.Orange;
-
-            if (IsHeader)
-                BackgroundColor =  Color.Green.WithAlpha(0.25);
-
+                BackgroundColor = Color.Transparent;
+                //BackgroundColor = Color.Orange;
         }
 
         void UpdateHeights()
