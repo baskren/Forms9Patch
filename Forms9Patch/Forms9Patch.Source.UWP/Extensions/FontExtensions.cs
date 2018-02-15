@@ -40,6 +40,10 @@ namespace Forms9Patch.UWP
 
         internal static double ClipFontSize(double size, double min, double max)
         {
+            if (max == -1)
+                max = DefaultFontSize();
+            if (min == -1)
+                min = 4;
             if (size >= max)
                 return max;
             return ClipFontSize(size, min);
