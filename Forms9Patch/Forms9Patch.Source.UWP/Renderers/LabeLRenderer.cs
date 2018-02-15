@@ -15,13 +15,14 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                return false;
-                
-                //string labelTextStart = "Żyłę;^`g ";
+                //return false;
+
+                string labelTextStart = "HEIGHTS "; // "Żyłę;^`g ";
                 //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
                 //    return false;
                 //string labelTextStart = "BACKGROUND";
-                //return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                
+                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
                 
             }
         }
@@ -204,22 +205,6 @@ namespace Forms9Patch.UWP
                 textBlock.ClearValue(TextBlock.ForegroundProperty);
         }
 
-        /*
-        void UpdateTextAndFont(TextBlock textBlock)
-        {
-            if (textBlock != null)
-            {
-                //_perfectSizeValid = false;
-                Label label = Element;
-                if (label == null)
-                    return;
-                LayoutValid = false;
-                textBlock.SetAndFormatText(label);
-            }
-        }
-        */
-
-
         void UpdateSynchrnoizedFontSize(TextBlock textBlock)
         {
             var label = Element as ILabel;
@@ -291,6 +276,7 @@ namespace Forms9Patch.UWP
 
 
         #region Xamarin GetDesiredSize
+
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
             DebugMessage("ENTER(" + widthConstraint + "," + heightConstraint + ")");
@@ -314,6 +300,10 @@ namespace Forms9Patch.UWP
 
             DebugMessage("ENTER FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
             DebugArrangeOverride(finalSize);
+
+            if (DebugCondition && (finalSize.Width > Element.Width || finalSize.Height > Element.Height) && Element.FittedFontSize > Element.MinFontSize)
+                System.Diagnostics.Debug.WriteLine("finalSize a bit big!");
+            //    MeasureOverride(finalSize);
 
             double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var rect = new Windows.Foundation.Rect();
@@ -363,8 +353,10 @@ namespace Forms9Patch.UWP
             if (DebugCondition && double.IsInfinity(availableSize.Width))
                 System.Diagnostics.Debug.WriteLine("");
 
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
             DebugMessage("");
-            DebugMessage("pre-Enter availableSize=["+availableSize+"]");
+            DebugMessage("pre-Enter availableSize=["+availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]");
             var label = Element;
             var textBlock = Control;
 
@@ -374,6 +366,7 @@ namespace Forms9Patch.UWP
             if (LayoutValid && _lastAvailableSize == availableSize && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
                 return _lastMeasureOverrideResult;
 
+            //_lastAvailableSize = availableSize;
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
 
@@ -381,30 +374,13 @@ namespace Forms9Patch.UWP
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
-            double width = Math.Max(0, label.Width);
-            double height = Math.Max(0, label.Height);
+
+            double width = label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            double height = label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
             var result = new Windows.Foundation.Size(width, height);
+
             if (textBlock != null)
             {
-
-                double w = label.Width;
-                double h = label.Height;
-
-
-                // somehow this works.  Think carefully before changing it.
-                if (w == -1 || (availableSize.Width > label.Width))// && !double.IsInfinity(availableSize.Width) && label.Lines!=0))
-                {
-                    //if (!Double.IsInfinity(availableSize.Width) || label.Lines!=0 )
-                        w = availableSize.Width;
-                }
-                if (h == -1 )//|| availableSize.Height > label.Height)
-                {
-                    //if (!Double.IsInfinity(availableSize.Height) || label.Lines != 0)
-                        h = availableSize.Height;
-                }
-                w = Math.Max(0, w);
-                h = Math.Max(0, h);
-
 
                 // reset FontSize
 
@@ -422,43 +398,37 @@ namespace Forms9Patch.UWP
                 {
                     // do our best job to fit the existing space.
                     textBlock.SetAndFormatText(label, tmpFontSize);
-                    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                    textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
 
-                    if (textBlock.DesiredSize.Width - w > Precision || textBlock.DesiredSize.Height - h > Precision)
-                        tmpFontSize = ZeroLinesFit(label, textBlock, minFontSize, tmpFontSize, w, h);
+                    if (textBlock.DesiredSize.Width - width > Precision || textBlock.DesiredSize.Height - height > Precision)
+                        tmpFontSize = ZeroLinesFit(label, textBlock, minFontSize, tmpFontSize, width, height);
                 }
                 else if (label.AutoFit == AutoFit.Lines)
                 {
-                    /*
-                    if (_lastAutoFit == AutoFit.Lines && _lastAvailableSize.Height==double.PositiveInfinity && LayoutValid)
-                    {
-                        textBlock.MaxLines = label.Lines;
-                        return _lastMeasureOverrideResult;
-                    }
-                    */
-                    tmpHt = h;
+                    tmpHt = height;
                     if (availableSize.Height > int.MaxValue / 3)
-                        tmpHt = h = label.Lines * FontExtensions.LineHeightForFontSize(tmpFontSize);
+                        tmpHt = height = label.Lines * FontExtensions.LineHeightForFontSize(tmpFontSize);
                     else // set the font size to fit Label.Lines into the available height
-                        tmpFontSize = FontExtensions.FontSizeFromLineHeight(h / label.Lines);
+                        tmpFontSize = FontExtensions.FontSizeFromLineHeight(height / label.Lines);
 
                     tmpFontSize = FontExtensions.ClipFontSize(tmpFontSize, label);
 
-                    textBlock?.SetAndFormatText(label, tmpFontSize);
-                    textBlock?.Measure(new Windows.Foundation.Size(w, h));
+                    textBlock.SetAndFormatText(label, tmpFontSize);
+                    textBlock.Measure(new Windows.Foundation.Size(width, height));
                 }
                 else if (label.AutoFit == AutoFit.Width)
                 {
                     textBlock.SetAndFormatText(label, tmpFontSize);
-                    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                    textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                     if (textBlock.DesiredSize.Height / textBlock.LineHeight > label.Lines)
-                        tmpFontSize = WidthAndLinesFit(label, textBlock, label.Lines, minFontSize, tmpFontSize, w);
+                        tmpFontSize = WidthAndLinesFit(label, textBlock, label.Lines, minFontSize, tmpFontSize, width);
                 }
-                else // autofit is off!
-                {
-                    textBlock.SetAndFormatText(label, tmpFontSize);
-                    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
-                }
+                // autofit is off!  
+                // No need to do anything at the moment.  Will textBlock.SetAndFormat and textBlock.Measure at the end
+                //{
+                //    textBlock.SetAndFormatText(label, tmpFontSize);
+                //    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                //}
 
                 // none of these should happen so let's keep an eye out for it to be sure everything upstream is working
                 if (tmpFontSize > label.DecipheredFontSize())
@@ -500,17 +470,23 @@ namespace Forms9Patch.UWP
                 {
                     tmpHt = -1;
                     textBlock.SetAndFormatText(label, syncFontSize);
-                    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                    textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                }
+                else
+                {
+                    textBlock.SetAndFormatText(label, tmpFontSize);
+                    textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                 }
                 result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width), Math.Ceiling(tmpHt > -1 ? tmpHt : textBlock.DesiredSize.Height));
 
+                if (DebugCondition && label.Width>0 && label.Height > 0 &&(textBlock.DesiredSize.Width > label.Width || textBlock.DesiredSize.Height > label.Height))
+                    System.Diagnostics.Debug.WriteLine("");
                 DebugMessage("result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "]");
 
                 textBlock.MaxLines = label.Lines;
 
             }
 
-            //Element.IsInNativeLayout = false;
             label.SetIsInNativeLayout(false);
 
             DebugMessage("EXIT");
@@ -521,6 +497,7 @@ namespace Forms9Patch.UWP
             _lastAutoFit = label.AutoFit;
             _lastLines = label.Lines;
             _lastMeasure = DateTime.Now;
+
             return result;
         }
         #endregion
@@ -550,14 +527,14 @@ namespace Forms9Patch.UWP
                 return min;
 
             var mid = (max + min) / 2.0;
-            textBlock?.SetAndFormatText(label, mid);
-            textBlock?.Measure(new Windows.Foundation.Size(availWidth, double.PositiveInfinity));
+            textBlock.SetAndFormatText(label, mid);
+            textBlock.Measure(new Windows.Foundation.Size(availWidth-4, double.PositiveInfinity));
             var height = textBlock.DesiredSize.Height;
             if (height > availHeight)
                 return ZeroLinesFit(label, textBlock, min, mid, availWidth, availHeight);
             if (height < availHeight)
                 return ZeroLinesFit(label, textBlock, mid, max, availWidth, availHeight);
-            return mid;
+            return min;
         }
 
         double WidthAndLinesFit(Label label, TextBlock textBlock, int lines, double min, double max, double availWidth)
@@ -568,7 +545,7 @@ namespace Forms9Patch.UWP
                 if (textBlock.FontSize != min)
                 {
                     textBlock?.SetAndFormatText(label, min);
-                    textBlock?.Measure(new Windows.Foundation.Size(availWidth, double.PositiveInfinity));
+                    textBlock?.Measure(new Windows.Foundation.Size(availWidth-4, double.PositiveInfinity));
                 }
                 return min;
             }
