@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>netstandard1.3</TargetFramework>
 		<AssemblyName>Forms9PatchDemo</AssemblyName>
 		<RootNamespace>Forms9PatchDemo</RootNamespace>
+		<UseXaml>USE_XAML</UseXaml>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	  <DefineConstants>TRACE;DEBUG;FROM_SOURCE;$(UseXaml);NETSTANDARD1_3</DefineConstants>
+		<DefineConstants>TRACE;DEBUG;$(UseXaml);FROM_SOURCE;NETSTANDARD1_3</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	  <DebugType></DebugType>
-	  <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;FROM_SOURCE</DefineConstants>
+		<DebugType>
+		</DebugType>
+		<DefineConstants>TRACE;$(UseXaml);FROM_SOURCE;RELEASE;NETSTANDARD1_3;</DefineConstants>
 	</PropertyGroup>
-
-
-
 	<!-- LOAD PROJECT CONTENT -->
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
-	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
-	  <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
-	  <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
-	  <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
-	  <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj" />
-	  <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj" />
-	</ItemGroup>
-
-    <PropertyGroup>
-    	<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
-    </PropertyGroup>
+	<PropertyGroup>
+		<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
+	</PropertyGroup>
 	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
+	<ItemGroup>
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
+		<ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
+		<ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+		<ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+		<ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj" />
+		<ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj" />
+	</ItemGroup>
 	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
-
-
 </Project>

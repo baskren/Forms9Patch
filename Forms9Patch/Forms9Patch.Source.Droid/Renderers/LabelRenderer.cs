@@ -23,6 +23,55 @@ namespace Forms9Patch.Droid
     public class LabelRenderer : ViewRenderer<Label, F9PTextView>
     {
 
+        #region Debug support
+        bool DebugCondition
+        {
+            get
+            {
+                //return false;
+
+                string labelTextStart = "3/14/201"; // "Żyłę;^`g ";
+                                                    //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                                                    //    return false;
+                                                    //string labelTextStart = "BACKGROUND";
+
+                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+
+            }
+        }
+
+        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        {
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + callerName + ": " + message);
+        }
+
+        void DebugGetDesiredRequest(string mark, double widthConstraint, double heightConstraint, SizeRequest request, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        {
+            DebugMessage(mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
+        }
+
+        string DebugControlSizes()
+        {
+            if (Control != null)
+            {
+                var result = "Ctrl.MaxLines=[" + Control.MaxLines + "] .Width=[" + Control?.Width + "] .Height=[" + Control?.Height + "] ";
+                if (!double.IsInfinity(Control.MaxWidth) || !double.IsInfinity(Control.MaxHeight))
+                    result += ".MaxSz=[" + Control?.MaxWidth + "," + Control?.MaxHeight + "] ";
+                if (Control.MinWidth != 0 || Control.MinHeight != 0)
+                    result += ".MinSz=[" + Control?.MinWidth + "," + Control?.MinHeight + "] ";
+                if (Control.LineHeight != 0)
+                    result += ".LineHt=[" + Control.LineHeight + "] ";
+
+                return result;
+            }
+            return null;
+        }
+
+        #endregion
+
+
+
         static int _instances = 0;
         int _instance;
         //double _fittedFontSize = -1;
@@ -112,11 +161,15 @@ namespace Forms9Patch.Droid
             _currentControlState.AvailHeight = MeasureSpec.GetSize(heightConstraint);
             if (MeasureSpec.GetMode(heightConstraint) == Android.Views.MeasureSpecMode.Unspecified)
                 _currentControlState.AvailHeight = int.MaxValue / 2;
+
             if (_currentControlState.AvailWidth <= 0 || _currentControlState.AvailHeight <= 0)
                 return new SizeRequest(Xamarin.Forms.Size.Zero);
 
             if (_currentControlState == _lastControlState && _lastSizeRequest.HasValue)
                 return _lastSizeRequest.Value;
+
+
+
 
             ICharSequence text = _currentControlState.JavaText;
             var tmpFontSize = BoundTextSize(Element.FontSize);
@@ -133,8 +186,34 @@ namespace Forms9Patch.Droid
             var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
 
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
 
-            if (_currentControlState.Lines == 0 && _currentControlState.AutoFit != AutoFit.None)
+            if (_currentControlState.Lines == 0)
+            {
+                if (_currentControlState.AvailHeight < int.MaxValue / 3)
+                    tmpFontSize = F9PTextView.ZeroLinesFit(_currentControlState.JavaText, new TextPaint(Control.Paint), ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
+            }
+            else
+            {
+                if (_currentControlState.AutoFit == AutoFit.Lines)
+                {
+                    if (_currentControlState.AvailHeight > int.MaxValue / 3)
+                        tmpHt = (int)System.Math.Round(_currentControlState.Lines * fontLineHeight + (_currentControlState.Lines - 1) * fontLeading);
+                    else
+                    {
+                        var fontPointSize = tmpFontSize;
+                        var lineHeightRatio = fontLineHeight / fontPointSize;
+                        var leadingRatio = fontLeading / fontPointSize;
+                        tmpFontSize = ((_currentControlState.AvailHeight / (_currentControlState.Lines + leadingRatio * (_currentControlState.Lines - 1))) / lineHeightRatio - 0.1f);
+                    }
+                }
+                else if (_currentControlState.AutoFit == AutoFit.Width)
+                    tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
+            }
+
+            /*
+            if (_currentControlState.Lines == 0) // && _currentControlState.AutoFit != AutoFit.None)
                 tmpFontSize = F9PTextView.ZeroLinesFit(_currentControlState.JavaText, new TextPaint(Control.Paint), ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
             else if (_currentControlState.AutoFit == AutoFit.Lines)
             {
@@ -151,6 +230,7 @@ namespace Forms9Patch.Droid
             }
             else if (_currentControlState.AutoFit == AutoFit.Width)
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
+                */
 
             tmpFontSize = BoundTextSize(tmpFontSize);
 

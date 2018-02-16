@@ -222,10 +222,11 @@ images with transparent regions (`.png` and `.svg`) create an opportunity.  Just
 you can use the `TintColor` to theme a monocrome raster image, you can use `BackgroundColor`
 to them the transparent regions of such an image.  Cool, huh?
 
-## Outline Properties
+## Outline and Shape Properties
 
-
+Taking things a step further than we did with the BackgroundColor property, why not 
+be able to continue to dress up the image?  The outline and shape properties make 
+a lot of common image deco
 
 ## HasShadow and ShadowInverted Properties
 
-Taking things a step further than we did with the BackgroundColor property, 
