@@ -704,8 +704,8 @@ namespace Forms9Patch.UWP
                     //if (Parent is Android.Views.View parent)
                     //    rect = new SKRect(0, 0, (float)(parent.Width), (float)(parent.Height));
 #elif WINDOWS_UWP
-                    if (Parent is FrameworkElement parent)
-                        rect = new SKRect(0, 0, (float)(parent.ActualWidth * FormsGestures.Display.Scale), (float)(parent.ActualHeight * FormsGestures.Display.Scale));
+                    //if (Parent is FrameworkElement parent)
+                    //    rect = new SKRect(0, 0, (float)(parent.ActualWidth * FormsGestures.Display.Scale), (float)(parent.ActualHeight * FormsGestures.Display.Scale));
 #else
                     ParentX;
 #endif
