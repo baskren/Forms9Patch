@@ -98,28 +98,34 @@ namespace Forms9Patch.iOS
                 double linesHeight = -1;
                 double desiredWidth = widthConstraint;
 
-                if (Element.Lines == 0 && !double.IsInfinity(heightConstraint))
+                if (Element.Lines == 0)
                 {
-                    ControlLines = 0;
-                    tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
-                }
-                else if (Element.AutoFit == AutoFit.Lines)
-                {
-                    if (double.IsPositiveInfinity(heightConstraint))
-                        linesHeight = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                    else
+                    if (!double.IsInfinity(heightConstraint))
                     {
-                        var lineHeightRatio = ControlFont.LineHeight / ControlFont.PointSize;
-                        var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
-
-                        //tmpFontSize = (nfloat)(((heightConstraint) / ((1 + leadingRatio) * Element.Lines)) / lineHeightRatio - 0.1f);
-                        var tmpLineSize = (nfloat)(heightConstraint - 0.05f) / Element.Lines;
-                        tmpFontSize = tmpLineSize / lineHeightRatio;
-
+                        ControlLines = 0;
+                        tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
                     }
                 }
-                else if (Element.AutoFit == AutoFit.Width)
-                    tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
+                else
+                {
+                    if (Element.AutoFit == AutoFit.Lines)
+                    {
+                        if (double.IsPositiveInfinity(heightConstraint))
+                            linesHeight = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
+                        else
+                        {
+                            var lineHeightRatio = ControlFont.LineHeight / ControlFont.PointSize;
+                            var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
+
+                            //tmpFontSize = (nfloat)(((heightConstraint) / ((1 + leadingRatio) * Element.Lines)) / lineHeightRatio - 0.1f);
+                            var tmpLineSize = (nfloat)(heightConstraint - 0.05f) / Element.Lines;
+                            tmpFontSize = tmpLineSize / lineHeightRatio;
+
+                        }
+                    }
+                    else if (Element.AutoFit == AutoFit.Width)
+                        tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
+                }
 
                 if (tmpFontSize < minFontSize)
                     tmpFontSize = minFontSize;

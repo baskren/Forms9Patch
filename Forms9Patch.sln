@@ -785,6 +785,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserPages", "UserPages", "{
 		Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml.cs = Forms9PatchDemo\Source\UserPages\StretchIssuePage.xaml.cs
 		Forms9PatchDemo\Source\UserPages\UserHomePage.cs = Forms9PatchDemo\Source\UserPages\UserHomePage.cs
 		Forms9PatchDemo\Source\UserPages\ZenmekPage.cs = Forms9PatchDemo\Source\UserPages\ZenmekPage.cs
+		Forms9PatchDemo\Source\UserPages\fontsizetestPage.xaml = Forms9PatchDemo\Source\UserPages\fontsizetestPage.xaml
+		Forms9PatchDemo\Source\UserPages\fontsizetestPage.xaml.cs = Forms9PatchDemo\Source\UserPages\fontsizetestPage.xaml.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{A3896D3C-491F-4E9D-980F-C971E65A41DE}"
