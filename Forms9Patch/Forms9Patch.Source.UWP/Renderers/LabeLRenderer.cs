@@ -17,7 +17,7 @@ namespace Forms9Patch.UWP
             {
                 //return false;
 
-                string labelTextStart = "HEIGHTS "; // "Żyłę;^`g ";
+                string labelTextStart = "A4"; // "Żyłę;^`g ";
                 //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
                 //    return false;
                 //string labelTextStart = "BACKGROUND";
@@ -374,9 +374,11 @@ namespace Forms9Patch.UWP
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
 
-            double width = label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
-            double height = label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
+            double width = !double.IsInfinity(availableSize.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            double height = !double.IsInfinity(availableSize.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
             var result = new Windows.Foundation.Size(width, height);
 
             if (textBlock != null)

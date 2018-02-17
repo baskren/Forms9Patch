@@ -329,8 +329,15 @@ namespace Forms9Patch
             if (!IsDynamicallySized && Width > 0 && Height > 0)// || !Sized )
             {
                 if (HtmlText != null || Text != null)
+                {
                     //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure.OnMeasure()");
-                    OnMeasure(Width, Height);
+                    //OnMeasure(Width, Height);
+                    if (HtmlText!=null && HtmlText.StartsWith("A4"))
+                        System.Diagnostics.Debug.WriteLine("");
+
+                    var layout = this.ParentInheritedFrom<Layout>();
+                    layout.ForceLayout();
+                }
             }
 
             //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure>>");

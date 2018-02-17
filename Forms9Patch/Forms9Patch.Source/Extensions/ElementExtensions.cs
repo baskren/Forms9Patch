@@ -70,6 +70,19 @@ namespace Forms9Patch
 			return null;
 		}
 
+        public static T ParentInheritedFrom<T>(this Element element) where T : Element
+        {
+            if (element == null)
+                return null;
+            while (element.Parent != null)
+            {
+                element = element.Parent;
+                if (element is T)
+                    return (T)element;
+            }
+            return null;
+        }
+
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static bool IsInNativeLayout(this VisualElement e)
