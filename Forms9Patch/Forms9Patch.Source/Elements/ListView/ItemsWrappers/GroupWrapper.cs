@@ -1041,7 +1041,7 @@ namespace Forms9Patch
                         calcOffset += cellHeight;
                         flatIndex++;
                         if (j < groupWrapper.Count - 1)
-                            calcOffset += subItemWrapper.RequestedSeparatorHeight - (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
+                            calcOffset += subItemWrapper.RenderedSeparatorHeight - (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
                     }
                 }
                 else
@@ -1052,7 +1052,7 @@ namespace Forms9Patch
                     calcOffset += cellHeight;
                     flatIndex++;
                     if (i < Count - 1)
-                        calcOffset += itemWrapper.RequestedSeparatorHeight - (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
+                        calcOffset += itemWrapper.RenderedSeparatorHeight - (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
                 }
             }
             return null;
