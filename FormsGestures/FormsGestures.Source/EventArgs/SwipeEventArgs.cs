@@ -35,6 +35,10 @@ namespace FormsGestures
 			}
 		}
 
+        /// <summary>
+        /// Updates properties from the values from another instance
+        /// </summary>
+        /// <param name="source"></param>
         public void ValueFrom(SwipeEventArgs source)
         {
             base.ValueFrom(source);

@@ -70,6 +70,12 @@ namespace Forms9Patch
 			return null;
 		}
 
+        /// <summary>
+        /// Fine an ancestor of this element of a type that is inherited from T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public static T ParentInheritedFrom<T>(this Element element) where T : Element
         {
             if (element == null)

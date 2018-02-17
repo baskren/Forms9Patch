@@ -21,6 +21,10 @@ namespace FormsGestures
 				NumberOfTaps = source.NumberOfTaps;
 		}
 
+        /// <summary>
+        /// Updates properties from the values from another instance
+        /// </summary>
+        /// <param name="source"></param>
         public void ValueFrom(TapEventArgs source) 
         {
             base.ValueFrom(source);

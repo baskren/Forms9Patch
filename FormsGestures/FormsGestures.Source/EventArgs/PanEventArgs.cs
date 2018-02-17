@@ -102,6 +102,10 @@ namespace FormsGestures
             return hash;
         }
 
+        /// <summary>
+        /// Updates properties from the values from another instance
+        /// </summary>
+        /// <param name="source"></param>
         public void ValueFrom(PanEventArgs source)
         {
             base.ValueFrom(source);

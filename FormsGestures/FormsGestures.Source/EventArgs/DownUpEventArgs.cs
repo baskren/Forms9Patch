@@ -22,6 +22,10 @@ namespace FormsGestures
 				TriggeringTouches = (int[])source.TriggeringTouches.Clone ();
 		}
 
+        /// <summary>
+        /// Updates properties from the values from another instance
+        /// </summary>
+        /// <param name="source"></param>
         public void ValueFrom(DownUpEventArgs source)
         {
             base.ValueFrom(source);

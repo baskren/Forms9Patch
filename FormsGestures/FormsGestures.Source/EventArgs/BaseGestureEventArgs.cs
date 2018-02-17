@@ -128,14 +128,18 @@ namespace FormsGestures
 			return Touches.GetHashCode();
 		}
 
-        public void ValueFrom(BaseGestureEventArgs source)
+        /// <summary>
+        /// Updates properties of this instance with values from an other instance
+        /// </summary>
+        /// <param name="other"></param>
+        public void ValueFrom(BaseGestureEventArgs other)
         {
-            _handled = source._handled;
-            _center = source._center;
-            Listener = source.Listener;
-            Cancelled = source.Cancelled;
-            ViewPosition = source.ViewPosition;
-            Touches = source.Touches;
+            _handled = other._handled;
+            _center = other._center;
+            Listener = other.Listener;
+            Cancelled = other.Cancelled;
+            ViewPosition = other.ViewPosition;
+            Touches = other.Touches;
         }
 	}
 }

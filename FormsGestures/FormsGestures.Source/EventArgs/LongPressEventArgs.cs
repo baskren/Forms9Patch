@@ -22,6 +22,10 @@ namespace FormsGestures
 				Duration = source.Duration;
 		}
 
+        /// <summary>
+        /// Updates properties from the values from another instance
+        /// </summary>
+        /// <param name="source"></param>
         public void ValueFrom(LongPressEventArgs source)
         {
             base.ValueFrom(source);

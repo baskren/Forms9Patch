@@ -7,6 +7,9 @@ namespace Forms9Patch
 	/// </summary>
 	public class ItemTappedEventArgs: Xamarin.Forms.ItemTappedEventArgs
 	{
+        /// <summary>
+        /// Set to true if you have handled this event and don't want other handlers to have a crack at it
+        /// </summary>
         public bool Handled;
 
 		/// <summary>
