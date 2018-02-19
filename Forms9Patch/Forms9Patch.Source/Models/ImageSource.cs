@@ -49,7 +49,8 @@ namespace Forms9Patch
             Settings.ConfirmInitialization();
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly")?.Invoke(null, new object[0]);
+
 
             if (assembly == null)
                 return null;

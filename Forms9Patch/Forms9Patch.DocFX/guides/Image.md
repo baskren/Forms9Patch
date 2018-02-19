@@ -45,11 +45,11 @@ Because they can have multiple scalable regions, the Nine-patch format works
 great for this.  Starting with a .png of the bubble, use a NinePatch editor, 
 like Android's `Draw 9-patch` to mark the horizontal and vertical stretchable regions.
 
-| **Before marking** | **After marking** |
-|---|---|
-|![bubble.png](../images/Guides/Image/bubble.png) | ![bubble.9.png](../images/Guides/Image/bubble.9.png)|
-|`bubble.png` | `bubble.9.png` |
-|200x122 | 202x124|
+    | **Before marking** | **After marking** |
+    |---|---|
+    |![bubble.png](../images/Guides/Image/bubble.png) | ![bubble.9.png](../images/Guides/Image/bubble.9.png)|
+    |`bubble.png` | `bubble.9.png` |
+    |200x122 | 202x124|
 
 After adding `bubble.9.png` to your cross-platfrom project as an EmbeddedResource, 
 you can display it using something like the following:
@@ -81,10 +81,10 @@ The `CapInset` property is used to specify the regions (distance inset from the
 edges) which will not scale when the image is stretched to fill it's parent view.  
 For example, let's make the following image a banner by scaling it horizontally.
 
-| ![redribbon.png](../images/Guides/Image/redribbon.png) |
-| --- |
-| **ResourceID:** MyDemoApp.Resources.Images.redribbon.png |
-| **Image Size:** 308x80 |
+    | ![redribbon.png](../images/Guides/Image/redribbon.png) |
+    | --- |
+    | **ResourceID:** MyDemoApp.Resources.Images.redribbon.png |
+    | **Image Size:** 308x80 |
 
 Load it using `Xamarin.Forms.ImageSource` as the source to `Forms9Patch.Image` and then, set the `CapInsets` property:
 
@@ -107,9 +107,9 @@ var image2 = new Forms9Patch.Image ()
     CapInsets = new Thickness(23, 0, 110, 0),
 }
 ```
-| **iPhone** | **Android** |
-|------------|-------------|
-| ![iPhone screen shot](../images/Guides/Image/ribbonIOS.png) | ![Android scren shot](../images/Guides/Image/ribbonAndroid.png) |
+    | **iPhone** | **Android** |
+    |------------|-------------|
+    | ![iPhone screen shot](../images/Guides/Image/ribbonIOS.png) | ![Android scren shot](../images/Guides/Image/ribbonAndroid.png) |
 
 ### XAML Example for `CapsInset`
 
@@ -172,22 +172,18 @@ to direct `Forms9Patch.Image` to tile a source image in the image layout.
 
 There are times where it is desireable to theme an app at runtime.  One way of doing
 this is by changing the color of monochrome images (often used as icons).  Forms9Patch
-makes this easy by giving `Forms9Patch.Image` the `TintColor` property.  By example,
-let's say you have the following multi-resolution image set:
-
-| *Scale* | **1x** | **2x** | **3x** |
-|---|---|---|---|
-| *Image* | ![ic_explore.png](../images/Guides/Image/ic_explore.png) | ![ic_explore@2x.png](../images/Guides/Image/ic_explore@2x.png) | ![ic_explore@3x.png](../images/Guides/Image/ic_explore@3x.png) |
-| *ResourceId* | MyApp.Resources.ic_explore.png | MyApp.Resource.ic_explore@2x.png | MyApp.Resource.ic_explore@3x.png |
-
-The below example will tint them to `Xamarin.Forms.Color.Blue`:
+makes this easy by giving `Forms9Patch.Image` the `TintColor` property.  
 
 ```csharp
-    var image = new Forms9Patch.Image("MyApp.Resource.ic_explore")
+    var image = new Forms9Patch.Image("MyApp.Resource.Printer.png")
     {
         TintColor = Color.Blue
     };
 ```
+
+	| Source Image                                        | w/ `TintColor=Color.Blue`                                |
+	|-----------------------------------------------------|----------------------------------------------------------|
+	| ![Source Image](../images/Guides/Image/Printer.png) | ![Tinted Image](../images/Guides/Image/Printer.Tint.png) |
 
 **Note:** The `TintColor` property is intented for use with *raster* images that have and 
 makes use of the transparent color plane.  Results will likely be undesireable 
@@ -222,11 +218,51 @@ images with transparent regions (`.png` and `.svg`) create an opportunity.  Just
 you can use the `TintColor` to theme a monocrome raster image, you can use `BackgroundColor`
 to them the transparent regions of such an image.  Cool, huh?
 
+	| Source image  |  `BackgroundColor=Color.Orange` |
+    |---------------|---------------------------------------------|
+    |  ![Background Example](../images/Guides/Image/printerIcon.png) | ![Background Example](../images/Guides/Image/Printer.Background.png) |
+
+Note the corners are rounded on this image!
+
 ## Outline and Shape Properties
 
 Taking things a step further than we did with the BackgroundColor property, why not 
-be able to continue to dress up the image?  The outline and shape properties make 
-a lot of common image deco
+be able to continue to dress up the image?  Clipping an image to a shape and/or adding a border
+are two common operations applied to images when they are used as app assets.  Since this is so 
+common, Forms9Patch has them built-in.  To set the shape, use the `ElementShape` property (which
+takes a `Forms9Patch.ElementShape` value).  Available values are:
+
+    | ElementShape     | Description                           | Full Blead Image Exmaple                                  |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+    | Rectangle        | pretty much the same as "don't clip"  | ![Rectangle](../images/Guides/Image/Shape.Rectangle.png)  |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+    | Square           | clip the longest side to be the same  |  ![Square](../images/Guides/Image/Shape.Square.png)       |
+	|                  |length as the shortest side            |                                                           |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+    | Circle           | because, circle clipped head shots    |  ![Circle](../images/Guides/Image/Shape.Circle.png)       |
+	|                  | are so 2015                           |                                                           |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+    | Ellipse          | still waiting for this one to be cool | ![Ellipse](../images/Guides/Image/Shape.Ellipse.png)      |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+    | Obround          | embarrased how long it took me to     | ![Obround](../images/Guides/Image/Shape.Obround.png)      |
+	|                  | find out there was a name for this    |                                                           |
+    |------------------|---------------------------------------|-----------------------------------------------------------|
+ 
+ And, if you used `Xamarin.Forms.Frame` before, Forms9Patch's Outline properties will seem familiar:
+ 
+    | Property      | Description                                 | Transparent PNG Example                                            |
+	|---------------|---------------------------------------------|--------------------------------------------------------------------|
+	| OutlineColor  | Color of Forms9Patch ElementShape's outline | ![OutlineColor](../images/Guides/Image/Printer.OutlineColor.png)   |
+	|---------------|---------------------------------------------|--------------------------------------------------------------------|
+	| OutlineWidth  | Width of Forms9Patch ElementShape's outline | ![OutlineWidth](../images/Guides/Image/Printer.OutlineWidth.png)   |
+	|---------------|---------------------------------------------|--------------------------------------------------------------------|
+	| OutlineRadius | Forms9Patch Element's corner radius. Only   | ![OutlineRadius](../images/Guides/Image/Printer.OutlineRadius.png) |
+	|               | applies to `Rectangle` and `Square` shapes  |                                                                    |
+	|---------------|---------------------------------------------|--------------------------------------------------------------------|
+
+	![Obround with outline](../images/Guides/Image/Shape.Obround/Outline.png)
+
 
 ## HasShadow and ShadowInverted Properties
+
 

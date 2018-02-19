@@ -25,7 +25,7 @@
     
     
     <!-- Add your application specific runtime directives here. -->
-
-
+    <Namespace Name="Forms9PatchDemo" Dynamic="Required All" />
+    
   </Application>
 </Directives>

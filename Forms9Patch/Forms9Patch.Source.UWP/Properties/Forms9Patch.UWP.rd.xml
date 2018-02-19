@@ -25,9 +25,11 @@
     https://go.microsoft.com/fwlink/?LinkID=391919
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="FormsGestures.NetStandard.UWP">
+  <Library Name="Forms9Patch.UWP">
 
   	<!-- add directives for your library here -->
+    <Namespace Name="SkiaSharp" Dynamic="Required All" />
+    <Namespace Name="SkiaSharp.Views.UWP" Dynamic="Required All" />
 
   </Library>
 </Directives>

@@ -105,43 +105,8 @@
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
   <Import Project="..\FormsGestures.Source.UWP\FormsGestures.UWP.targets" />
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.4.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TransformFile Include="Properties\FormsGestures.NetStandard.UWP.rd.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
-      <Name>P42.NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
-      <Name>P42.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
-      <Project>{57b8b73d-c3b5-4c42-869e-7b2f17d354ac}</Project>
-      <Name>Xamarin.Forms.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.UAP\Xamarin.Forms.Platform.UAP.csproj">
-      <Project>{00d8d049-ffaa-4759-8fc9-1eca30777f72}</Project>
-      <Name>Xamarin.Forms.Platform.UAP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>Xamarin.Forms.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
-      <Project>{9db2f292-8034-4e06-89ad-98bbda4306b9}</Project>
-      <Name>Xamarin.Forms.Xaml</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
       <Project>{ef8ffcc7-770b-4c3e-8ac8-efad51e30552}</Project>
       <Name>FormsGestures.XfSource</Name>

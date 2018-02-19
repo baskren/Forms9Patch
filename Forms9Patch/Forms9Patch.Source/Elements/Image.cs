@@ -12,6 +12,31 @@ namespace Forms9Patch
     /// </summary>
     public class Image : View, IImage, IImageController //, IElementConfiguration<Image> //Xamarin.Forms.Image, IImage
     {
+        #region Static Implementation
+
+
+        #region Static Fields
+        internal static string EmbeddedResourceImageCacheFolderName = "EmbeddedResourceImageCache";
+        internal static string UriImageCacheFolderName = "UriResourceImageCache";
+        #endregion
+
+        #region Static Methods
+        /// <summary>
+        /// Clears the cache of Forms9Patch images sourced using Xamarin.Forms.ImageSource.FromUri
+        /// </summary>
+        /// <param name="uri">The URI of the image.  If null, all cached images are cleared.</param>
+        public static void ClearDownloadCache(string uri = null) => P42.Utils.DownloadCache.Clear(uri, UriImageCacheFolderName);
+
+        /// <summary>
+        /// Apps run faster when Embedded Resources image don't have to be extracted EVERY SINGLE TIME.  This clears the cache of these images.
+        /// </summary>
+        /// <param name="resourceId">The ResourceId of the image.  If null, all cahced images are cleared.</param>
+        public static void ClearEmbeddedResourceCache(string resourceId = null) => P42.Utils.EmbeddedResourceCache.Clear(resourceId, EmbeddedResourceImageCacheFolderName);
+        #endregion
+
+        #endregion
+
+
         #region Properties
 
         #region IImageController
@@ -295,6 +320,7 @@ namespace Forms9Patch
         #endregion Properties
 
         internal bool FillOrLayoutSet;
+
 
         #region Fields
         int _instances;

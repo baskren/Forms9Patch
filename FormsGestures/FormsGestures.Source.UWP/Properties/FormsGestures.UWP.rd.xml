@@ -25,9 +25,9 @@
     https://go.microsoft.com/fwlink/?LinkID=391919
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="Forms9Patch.NetStandard.UWP">
+  <Library Name="FormsGestures.UWP">
 
-  	<!-- add directives for your library here -->
+  	<!-- add directives for your library X here -->
 
   </Library>
 </Directives>

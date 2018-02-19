@@ -65,3 +65,23 @@ Because I haven't been able to take the time to figure out why Xaml files are no
 #### UWP: Unable to load `System.Runtime. The located assembly's manifest definition does not match the assembly reference.`
 
 Change the Windows target version to 14393.   
+
+#### UWP: Getting exceptions at Xamarin.Forms.Init
+
+When using `Compile with .Net Native tool chain` build setting, `System.IO.FileNotFoundException` execeptions for the following files (maybe more) can occur at Xamarin.Forms.Init when the Common Language Runtime Exceptions are all enabled:
+
+ - clrcompression
+ - libgl
+ - libglex
+ - SkiaSharp.Views
+
+You need to use `Compile with .Net Native tool chain` for your app to be accepted by Windows Store.  What appears to work is to return the Common Language Runtime Exceptions to its defaults.  As of this writing (2/19/2018), the defaults are:
+ 
+ - System.Reflection.MissingMetaDataException
+ - System.Reflection.MissingRuntimeArtifactException 
+ - System.Windows.Markup.XamlParseException
+
+
+ #### UWP: Crashes when when trying to open an image using `Xamarin.Forms.ImageSource.FromResource` but *not* when using `Forms9Patch.ImageSource.FromMultiResource`
+
+ Boy, did I loose a lot of time on this one.  Turns out the solution to [UWP: Getting exceptions at Xamarin.Forms.Init](UWP: Getting exceptions at Xamarin.Forms.Init) was the fix.  I have no idea why.

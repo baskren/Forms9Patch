@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
+    <DebugType>full</DebugType>
     <DefineConstants>TRACE;NETSTANDARD;RELEASE;NETSTANDARD1_3</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.3\FormsGestures.xml</DocumentationFile>
   </PropertyGroup>

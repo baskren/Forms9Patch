@@ -69,7 +69,7 @@ namespace Forms9Patch
                             var assembly = (Assembly)imageSource.GetValue(ImageSource.AssemblyProperty);
                             var resourceId = key.Substring(4);
 
-                            using (var stream = await P42.Utils.EmbeddedResourceCache.GetStreamAsync(resourceId, assembly))
+                            using (var stream = await P42.Utils.EmbeddedResourceCache.GetStreamAsync(resourceId, assembly, Forms9Patch.Image.EmbeddedResourceImageCacheFolderName))
                             {
                                 if (stream == null)
                                 {
@@ -85,10 +85,8 @@ namespace Forms9Patch
                         }
                         else if (key.StartsWith("uri:", StringComparison.Ordinal))
                         {
-                            path = await P42.Utils.DownloadCache.DownloadAsync(key.Substring(4));
-                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))  // works for Windows ... not Android
-                                                                                                              //using (var skStream = new SKManagedStream(stream))
-                                                                                                              //    skBitmap = SKBitmap.Decode(skStream);
+                            path = await P42.Utils.DownloadCache.DownloadAsync(key.Substring(4), Forms9Patch.Image.UriImageCacheFolderName);
+                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))  
                                 f9pImageData = F9PImageData.Create(stream, key);
                         }
                         else if (key.StartsWith("file:", StringComparison.Ordinal))  // does this work for Windows or iOS?

@@ -12,7 +12,8 @@
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>
 		</DebugType>
-		<DefineConstants>TRACE;$(UseXaml);FROM_SOURCE</DefineConstants>
+		<DefineConstants>TRACE;USE_XAML;FROM_SOURCE;RELEASE;NETSTANDARD1_3</DefineConstants>
+		<Optimize>true</Optimize>
 	</PropertyGroup>
 	<!-- LOAD PROJECT CONTENT -->
 	<PropertyGroup>
