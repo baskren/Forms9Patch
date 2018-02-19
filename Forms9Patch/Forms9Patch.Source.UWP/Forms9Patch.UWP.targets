@@ -125,14 +125,9 @@
     <Compile Include="..\Forms9Patch.Source.UWP\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <!--EmbeddedResource Include="..\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd.xml">
+    <EmbeddedResource Include="..\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd.xml">
       <Link>Properties\Forms9Patch.UWP.rd.xml</Link>
-    </EmbeddedResource-->
+    </EmbeddedResource>
   </ItemGroup>
-  <!--ItemGroup>
-    <TransformFile Include="..\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd.xml">
-      <Link>Properties\Forms9Patch.UWP.rd.xml</Link>
-    </TransformFile>
-  </ItemGroup-->
 
 </Project>
