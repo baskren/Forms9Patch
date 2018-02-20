@@ -1323,10 +1323,7 @@ namespace Forms9Patch
                 var button = _segments[i]._button;
                 if (button.Equals(sender))
                 {
-                    SegmentedControlEventHandler eventHandler = SegmentTapped;
-                    if (eventHandler != null)
-                        eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
-                    //Debug.WriteLine ("Tapped ["+i+"]");
+                    SegmentTapped?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     return;
                 }
             }
@@ -1343,9 +1340,7 @@ namespace Forms9Patch
                 var button = _segments[i]._button;
                 if (button.Equals(sender) && button.IsSelected)
                 {
-                    SegmentedControlEventHandler eventHandler = SegmentSelected;
-                    if (eventHandler != null)
-                        eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    SegmentSelected?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     //Debug.WriteLine ("Selected ["+i+"]");
                     return;
                 }
@@ -1363,9 +1358,7 @@ namespace Forms9Patch
                 var button = _segments[i]._button;
                 if (button.Equals(sender))
                 {
-                    SegmentedControlEventHandler eventHandler = SegmentLongPressing;
-                    if (eventHandler != null)
-                        eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    SegmentLongPressing?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     //Debug.WriteLine ("Tapped ["+i+"]");
                     return;
                 }
@@ -1383,9 +1376,7 @@ namespace Forms9Patch
                 var button = _segments[i]._button;
                 if (button.Equals(sender))
                 {
-                    SegmentedControlEventHandler eventHandler = SegmentLongPressed;
-                    if (eventHandler != null)
-                        eventHandler(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    SegmentLongPressed?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
                     //Debug.WriteLine ("Tapped ["+i+"]");
                     return;
                 }

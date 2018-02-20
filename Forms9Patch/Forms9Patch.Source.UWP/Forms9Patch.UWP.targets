@@ -64,6 +64,9 @@
     <Compile Include="..\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Services\ClipboardService.cs">
+      <Link>Services\ClipboardService.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch.Source.UWP\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>
     </Compile>

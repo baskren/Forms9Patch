@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -174,7 +175,7 @@ namespace Forms9Patch
             OutlineRadius = 4,
         };
         #endregion
-
+        
 
         #region Constructor / Factory
         /// <summary>
@@ -218,6 +219,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region PropertyChange handlers
         protected override void OnPropertyChanged(string propertyName = null)
         {
@@ -251,32 +253,44 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region ButtonFactory
-        Button CreateButton(Segment segment)
+        void ConfigureSegment(Segment segment)
         {
-            var button = new Button
-            {
-                Text = segment.Text,
-                HtmlText = segment.HtmlText,
-                IconImage = segment.IconImage,
-                IconText = segment.IconText,
-                Spacing = 4,
-                TintIcon = true,
-                HasTightSpacing = true,
-                Padding = new Thickness(4, 0, 4, 4),
-                TextColor = TextColor,
-                VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                VerticalOptions = LayoutOptions.Fill,
-                HorizontalOptions = LayoutOptions.Center,
-                BackgroundColor = BackgroundColor,
-                Lines = 1,
-                AutoFit = AutoFit.None,
-            };
-            button.SizeChanged += OnButtonSizeChanged;
-            return button;
+            segment._button.Text = segment.Text;
+            segment._button.HtmlText = segment.HtmlText;
+            segment._button.IconImage = segment.IconImage;
+            segment._button.IconText = segment.IconText;
+            segment._button.Spacing = 4;
+            segment._button.TintIcon = true;
+            segment._button.HasTightSpacing = true;
+            segment._button.Padding = new Thickness(4, 0, 4, 4);
+            segment._button.TextColor = TextColor;
+            segment._button.VerticalTextAlignment = TextAlignment.Center;
+            segment._button.HorizontalTextAlignment = TextAlignment.Center;
+            segment._button.VerticalOptions = LayoutOptions.Fill;
+            segment._button.HorizontalOptions = LayoutOptions.Center;
+            segment._button.BackgroundColor = BackgroundColor;
+            segment._button.Lines = 1;
+            segment._button.AutoFit = AutoFit.None;
+
+            segment._button.SizeChanged += OnButtonSizeChanged;
+            segment._button.Tapped += OnButtonTapped;
         }
+
+        void UnconfiguerButton(Button button)
+        {
+            button.SizeChanged -= OnButtonSizeChanged;
+            button.Tapped -= OnButtonTapped;
+        }
+
+        private void OnButtonTapped(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
+
 
         #region Collection Management
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -287,9 +301,8 @@ namespace Forms9Patch
                     foreach (var item in e.NewItems)
                         if (item is Segment segment)
                         {
-                            var button = CreateButton(segment);
-                            _stackLayout.Children.Add(button);
-                            //_buttonSizes.Add(Size.Zero);
+                            ConfigureSegment(segment);
+                            _stackLayout.Children.Add(segment._button);
                         }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
@@ -301,18 +314,12 @@ namespace Forms9Patch
                     var tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
                     _stackLayout.Children.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
                     _stackLayout.Children.InsertRange(e.NewStartingIndex, tmpButtons);
-                    /*
-                    var tmpSizes = _buttonSizes.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    _buttonSizes.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
-                    _buttonSizes.InsertRange(e.NewStartingIndex, tmpSizes);
-                    */
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                     tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    foreach (var button in tmpButtons)
-                        button.SizeChanged -= OnButtonSizeChanged;
+                    foreach (Button button in tmpButtons)
+                        UnconfiguerButton(button);
                     _stackLayout.Children.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
-                    //_buttonSizes.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
                     if (e.OldItems.Count < e.NewItems.Count)
@@ -320,31 +327,28 @@ namespace Forms9Patch
                     if (e.OldStartingIndex + e.OldItems.Count >= _stackLayout.Children.Count)
                         throw new System.Exception("(e.OldStartingIndex + e.OldItems.Count >= _buttons.Count.  That's not expected.");
                     tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    foreach (var button in tmpButtons)
-                        button.SizeChanged -= OnButtonSizeChanged;
+                    foreach (Button button in tmpButtons)
+                        UnconfiguerButton(button);
                     tmpButtons.Clear();
-                    //tmpSizes = new List<Size>();
                     foreach (var item in e.NewItems)
                         if (item is Segment segment)
                         {
-                            var button = CreateButton(segment);
-                            tmpButtons.Add(button);
-                            //tmpSizes.Add(Size.Zero);
+                            ConfigureSegment(segment);
+                            tmpButtons.Add(segment._button);
                         };
                     if (tmpButtons != null && tmpButtons.Count > 0)
-                    {
                         _stackLayout.Children.InsertRange(e.NewStartingIndex, tmpButtons);
-                        //_buttonSizes.InsertRange(e.NewStartingIndex, tmpSizes);
-                    }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    foreach (Button button in _stackLayout.Children)
+                        UnconfiguerButton(button);
                     _stackLayout.Children.Clear();
-                    //_buttonSizes.Clear();
                     break;
             }
             UpdateButtonVisibilities();
         }
         #endregion
+
 
         #region Layout
 
@@ -379,14 +383,12 @@ namespace Forms9Patch
             {
                 width = 0.0;
                 foreach (Button button in _stackLayout.Children)
-                //foreach (var button in _buttons)
                 {
                     button.HorizontalOptions = LayoutOptions.CenterAndExpand;
                     button.IsVisible = true;
                 }
                 var pages = 1;
                 foreach (Button button in _stackLayout.Children)
-                //foreach (var button in _buttons)
                 {
                     width += button.Bounds.Width + SeparatorWidth;
                     if (width + _rightArrowButton.Width  >= Width)
@@ -400,8 +402,25 @@ namespace Forms9Patch
             else
             {
                 foreach (Button button in _stackLayout.Children)
-                    //foreach (var button in _buttons)
                     button.HorizontalOptions = LayoutOptions.Center;
+            }
+        }
+        #endregion
+
+
+        #region Events
+
+        public event SegmentedControlEventHandler SegmentSelected;
+        void OnSegmentSelected(object sender, EventArgs e)
+        {
+            for (int i = 0; i < _segments.Count; i++)
+            {
+                var button = _segments[i]._button;
+                if (button.Equals(sender) && button.IsSelected)
+                {
+                    SegmentSelected?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    return;
+                }
             }
         }
         #endregion
