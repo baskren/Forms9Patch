@@ -10,7 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Popup base.
     /// </summary>
-    [ContentProperty("Content")]
+    [ContentProperty("ContentView")]
     public abstract class PopupBase : Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
     {
@@ -20,7 +20,7 @@ namespace Forms9Patch
         /// </summary>
         /// <value>Invalid</value>
         /// <remarks>Do not use</remarks>
-        [Obsolete("Use Content")]
+        [Obsolete("Use ContentView")]
         public new IList<View> Children
         {
             get
@@ -368,21 +368,21 @@ namespace Forms9Patch
         internal BoxView PageOverlay { get { return _pageOverlay; } }
 
         #region ContentView property
-        internal View ContentView
+        internal protected View DecorativeContainerView
         {
-            get { return (View)_modalLayout; }
+            get { return (View)_decorativeContainerView; }
             set
             {
-                if (_modalLayout is VisualElement oldLayout)
+                if (_decorativeContainerView is VisualElement oldLayout)
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
-                _modalLayout = (ILayout)value;
-                if (_modalLayout is VisualElement newLayout)
+                _decorativeContainerView = (ILayout)value;
+                if (_decorativeContainerView is VisualElement newLayout)
                     newLayout.PropertyChanged += OnContentViewPropertyChanged;
                 if (base.Children.Count < 2)
-                    base.Children.Add((View)_modalLayout);
+                    base.Children.Add((View)_decorativeContainerView);
                 else
-                    base.Children[1] = (View)_modalLayout;
-                _modalLayout.IgnoreChildren = false;
+                    base.Children[1] = (View)_decorativeContainerView;
+                _decorativeContainerView.IgnoreChildren = false;
 
             }
         }
@@ -400,7 +400,7 @@ namespace Forms9Patch
 
 
         #region Fields
-        internal ILayout _modalLayout;
+        internal ILayout _decorativeContainerView;
         internal BoxView _pageOverlay;
         readonly Listener _listener;
         internal DateTime PresentedAt;
@@ -555,8 +555,8 @@ namespace Forms9Patch
             {
                 if (IsVisible)
                 {
-                    ContentView.TranslationX = 0;
-                    ContentView.TranslationY = 0;
+                    DecorativeContainerView.TranslationX = 0;
+                    DecorativeContainerView.TranslationY = 0;
                     if (Application.Current.MainPage == null)
                     {
                         IsVisible = false;
@@ -577,34 +577,34 @@ namespace Forms9Patch
                 Dispose();
 
 
-            if (_modalLayout != null)
+            if (_decorativeContainerView != null)
             {
                 #region ILayout
                 if (propertyName == PaddingProperty.PropertyName)
-                    _modalLayout.Padding = Padding;
+                    _decorativeContainerView.Padding = Padding;
                 #endregion
 
                 #region IBackground
                 else if (propertyName == BackgroundImageProperty.PropertyName)
-                    _modalLayout.BackgroundImage = BackgroundImage;
+                    _decorativeContainerView.BackgroundImage = BackgroundImage;
 
                 #region IShape
                 else if (propertyName == BackgroundColorProperty.PropertyName)
-                    _modalLayout.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
+                    _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
                 else if (propertyName == HasShadowProperty.PropertyName)
-                    _modalLayout.HasShadow = HasShadow;
+                    _decorativeContainerView.HasShadow = HasShadow;
                 else if (propertyName == ShadowInvertedProperty.PropertyName)
-                    _modalLayout.ShadowInverted = ShadowInverted;
+                    _decorativeContainerView.ShadowInverted = ShadowInverted;
                 else if (propertyName == OutlineColorProperty.PropertyName)
-                    _modalLayout.OutlineColor = OutlineColor;
+                    _decorativeContainerView.OutlineColor = OutlineColor;
                 else if (propertyName == OutlineWidthProperty.PropertyName)
-                    _modalLayout.OutlineWidth = OutlineWidth;
+                    _decorativeContainerView.OutlineWidth = OutlineWidth;
                 else if (propertyName == OutlineRadiusProperty.PropertyName)
-                    _modalLayout.OutlineRadius = OutlineRadius;
+                    _decorativeContainerView.OutlineRadius = OutlineRadius;
                 else if (propertyName == ElementShapeProperty.PropertyName)
-                    _modalLayout.ElementShape = ElementShape;
+                    _decorativeContainerView.ElementShape = ElementShape;
                 else if (propertyName == ExtendedElementShapeProperty.PropertyName)
-                    _modalLayout.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
+                    _decorativeContainerView.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
                 #endregion IShape
 
                 #endregion IBackground
@@ -663,7 +663,7 @@ namespace Forms9Patch
             if (width > 0 && height > 0)
                 LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(-targetPage.Padding.Left, -targetPage.Padding.Top, targetPage.Width, targetPage.Height));
             else
-                ContentView.IsVisible = false;
+                DecorativeContainerView.IsVisible = false;
         }
         #endregion
     }

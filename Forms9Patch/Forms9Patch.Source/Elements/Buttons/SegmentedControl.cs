@@ -118,7 +118,10 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Properties
+
+        #region Segments
         readonly ObservableCollection<Segment> _segments;
         /// <summary>
         /// The container for the Segmented Control's buttons.
@@ -137,7 +140,9 @@ namespace Forms9Patch
                 }
             }
         }
+        #endregion
 
+        #region Padding
         /// <summary>
         /// Identifies the Padding bindable property.
         /// </summary>
@@ -152,11 +157,9 @@ namespace Forms9Patch
             get { return (Thickness)GetValue(PaddingProperty); }
             set { SetValue(PaddingProperty, value); }
         }
+        #endregion
 
-
-        /// <summary>
-        /// OBSOLETE: Use TextColorProperty
-        /// </summary>
+        #region SelectedTextColor
         /// <summary>
         /// The selected text color property.
         /// </summary>
@@ -170,50 +173,60 @@ namespace Forms9Patch
             get { return (Color)GetValue(SelectedTextColorProperty); }
             set { SetValue(SelectedTextColorProperty, value); }
         }
+        #endregion
 
-
+        #region FontAttributes
         /// <summary>
         /// Backing store for the Button.FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(SegmentedControl), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-                                                                                                                                                                                          /// <summary>
-                                                                                                                                                                                          /// Gets or sets the font attributes.
-                                                                                                                                                                                          /// </summary>
-                                                                                                                                                                                          /// <value>The font attributes.</value>
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(SegmentedControl), FontAttributes.None);
+
+        /// <summary>
+        /// Gets or sets the font attributes.
+        /// </summary>
+        /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
             get { return (FontAttributes)GetValue(FontAttributesProperty); }
             set { SetValue(FontAttributesProperty, value); }
         }
+        #endregion
 
+        #region FontSize
         /// <summary>
         /// Backing store for the Button.FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(SegmentedControl), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-                                                                                                                                                       /// <summary>
-                                                                                                                                                       /// Gets or sets the size of the font.
-                                                                                                                                                       /// </summary>
-                                                                                                                                                       /// <value>The size of the font.</value>
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(SegmentedControl), -1.0);
+
+        /// <summary>
+        /// Gets or sets the size of the font.
+        /// </summary>
+        /// <value>The size of the font.</value>
         public double FontSize
         {
             get { return (double)GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
+        #endregion
 
+        #region FontFamily
         /// <summary>
         /// Backing store for the Button.FontFamiily bindable property.
         /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SegmentedControl), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-                                                                                                                                                           /// <summary>
-                                                                                                                                                           /// Gets or sets the font family.
-                                                                                                                                                           /// </summary>
-                                                                                                                                                           /// <value>The font family.</value>
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SegmentedControl), null);
+
+        /// <summary>
+        /// Gets or sets the font family.
+        /// </summary>
+        /// <value>The font family.</value>
         public string FontFamily
         {
             get { return (string)GetValue(FontFamilyProperty); }
             set { SetValue(FontFamilyProperty, value); }
         }
+        #endregion
 
+        #region BackgroundColor
         /// <summary>
         /// Backing store for the Button.BackgroundColor bindable property.
         /// </summary>
@@ -227,8 +240,9 @@ namespace Forms9Patch
             get { return (Color)GetValue(BackgroundColorProperty); }
             set { SetValue(BackgroundColorProperty, value); }
         }
+        #endregion
 
-
+        #region SelectedBackgroundColor
         /// <summary>
         /// Backing store for the Selected.BackgroundColor property.
         /// </summary>
@@ -242,7 +256,9 @@ namespace Forms9Patch
             get { return (Color)GetValue(SelectedBackgroundColorProperty); }
             set { SetValue(SelectedBackgroundColorProperty, value); }
         }
+        #endregion
 
+        #region DarkThemem
         /// <summary>
         /// Backing store for the Button.DarkTheme property.
         /// </summary>
@@ -256,7 +272,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(DarkThemeProperty); }
             set { SetValue(DarkThemeProperty, value); }
         }
+        #endregion
 
+        #region SelectedSegments
         /// <summary>
         /// Gets the selected segments(s).
         /// </summary>
@@ -272,7 +290,9 @@ namespace Forms9Patch
                 return results;
             }
         }
+        #endregion
 
+        #region SelectedIndexes
         /// <summary>
         /// Gets the selected index(es).
         /// </summary>
@@ -288,6 +308,8 @@ namespace Forms9Patch
                 return results;
             }
         }
+        #endregion
+
 
         /// <summary>
         /// Answers the question: Is an index selected?
@@ -301,6 +323,8 @@ namespace Forms9Patch
             return _segments[index].IsSelected;
         }
 
+
+        #region GroupToggleBehavior
         /// <summary>
         /// The backing store for the MaterialSegmentControl's ToggleBehavior property.
         /// </summary>
@@ -314,7 +338,9 @@ namespace Forms9Patch
             get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
             set { SetValue(GroupToggleBehaviorProperty, value); }
         }
+        #endregion
 
+        #region SeparatorWidth
         /// <summary>
         /// The backing store for the MaterialSegmentControl's SeparatorWidth property.
         /// </summary>
@@ -328,7 +354,9 @@ namespace Forms9Patch
             get { return (float)GetValue(SeparatorWidthProperty); }
             set { SetValue(SeparatorWidthProperty, value); }
         }
+        #endregion
 
+        #region TrailingIcon
         /// <summary>
         /// Backing store for the trailing image property.
         /// </summary>
@@ -342,7 +370,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(TrailingIconProperty); }
             set { SetValue(TrailingIconProperty, value); }
         }
+        #endregion
 
+        #region HapticEffect
         /// <summary>
         /// The haptic effect property.
         /// </summary>
@@ -356,7 +386,9 @@ namespace Forms9Patch
             get { return (HapticEffect)GetValue(HapticEffectProperty); }
             set { SetValue(HapticEffectProperty, value); }
         }
+        #endregion
 
+        #region HapticMode
         /// <summary>
         /// The haptic mode property.
         /// </summary>
@@ -370,7 +402,9 @@ namespace Forms9Patch
             get { return (KeyClicks)GetValue(HapticModeProperty); }
             set { SetValue(HapticModeProperty, value); }
         }
+        #endregion
 
+        #region TintIcon
         /// <summary>
         /// The tint image property backing store.
         /// </summary>
@@ -384,7 +418,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(TintIconProperty); }
             set { SetValue(TintIconProperty, value); }
         }
+        #endregion
 
+        #region HasTightSpacing
         /// <summary>
         /// The has tight spacing property.
         /// </summary>
@@ -398,9 +434,9 @@ namespace Forms9Patch
             get { return (bool)GetValue(HasTightSpacingProperty); }
             set { SetValue(HasTightSpacingProperty, value); }
         }
+        #endregion
 
-
-
+        #region IntraSegmentOrientation
         /// <summary>
         /// The backing store for the segments orientation property.
         /// </summary>
@@ -414,7 +450,9 @@ namespace Forms9Patch
             get { return (StackOrientation)GetValue(IntraSegmentOrientationProperty); }
             set { SetValue(IntraSegmentOrientationProperty, value); }
         }
+        #endregion
 
+        #region IntraSegmentSpacing
         /// <summary>
         /// The backing store for the intra segment spacing property.
         /// </summary>
@@ -428,7 +466,9 @@ namespace Forms9Patch
             get { return (double)GetValue(IntraSegmentSpacingProperty); }
             set { SetValue(IntraSegmentSpacingProperty, value); }
         }
+        #endregion
 
+        #region Orientation
         /// <summary>
         /// Backing store for the Orienation property
         /// </summary>
@@ -441,6 +481,7 @@ namespace Forms9Patch
             get { return (Xamarin.Forms.StackOrientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
         }
+        #endregion
 
         #region ILabelStyle
 

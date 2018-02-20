@@ -77,21 +77,6 @@ namespace Forms9Patch
         }
         #endregion
 
-        /*
-		/// <summary>
-		/// Backing store for pointer axial position property.
-		/// </summary>
-		public static readonly BindableProperty PointerAxialPositionProperty = BindableProperty.Create("PointerAxialPosition", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerAxialPositionProperty.DefaultValue);
-		/// <summary>
-		/// Gets or sets the position of the bubble's pointer along the face it's on.
-		/// </summary>
-		/// <value>The pointer axial position (left/top is zero).</value>
-		public float PointerAxialPosition {
-			get { return (float)GetValue (PointerAxialPositionProperty); }
-			set { SetValue (PointerAxialPositionProperty, value); }
-		}
-		*/
-
         #region PointerDirection
         /// <summary>
         /// Backing store for pointer direction property.
@@ -107,6 +92,21 @@ namespace Forms9Patch
             set { SetValue(PointerDirectionProperty, value); }
         }
         #endregion
+
+        #region PreferredPointerDirection property
+        /// <summary>
+        /// backing store for PreferredPointerDirection property
+        /// </summary>
+        public static readonly BindableProperty PreferredPointerDirectionProperty = BindableProperty.Create("PreferredPointerDirection", typeof(PointerDirection), typeof(BubblePopup), PointerDirection.None);
+        /// <summary>
+        /// Gets/Sets the PreferredPointerDirection property
+        /// </summary>
+        public PointerDirection PreferredPointerDirection
+        {
+            get { return (PointerDirection)GetValue(PreferredPointerDirectionProperty); }
+            set { SetValue(PreferredPointerDirectionProperty, value); }
+        }
+        #endregion PreferredPointerDirection property
 
         #region PointerCornerRadius
         /// <summary>
@@ -171,7 +171,7 @@ namespace Forms9Patch
                 PointerTipRadius = PointerTipRadius,
                 PointerCornerRadius = PointerCornerRadius
             };
-            ContentView = _bubbleLayout;
+            DecorativeContainerView = _bubbleLayout;
 
             Margin = 0;
             Padding = 10;
@@ -350,7 +350,7 @@ namespace Forms9Patch
                     //       FormsGestures coordinate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
 
                     if (Target is PopupBase popup)
-                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.ContentView);
+                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView);
                     //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
                     else
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
@@ -365,27 +365,56 @@ namespace Forms9Patch
 
 
                     double space = 0;
-                    if (PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
+
+                    if (PreferredPointerDirection!=PointerDirection.None)
                     {
-                        pointerDir = PointerDirection.Up;
-                        space = Math.Min(reqSpaceBelow, reqHzSpace);
+                        if (PreferredPointerDirection.DownAllowed() && PointerDirection.DownAllowed()  && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Down;
+                            space = Math.Min(reqSpaceAbove, reqHzSpace);
+                        }
+                        if (PreferredPointerDirection.UpAllowed() && PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Up;
+                            space = Math.Min(reqSpaceBelow, reqHzSpace);
+                        }
+                        if (PreferredPointerDirection.LeftAllowed() && PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Left;
+                            space = Math.Min(reqSpaceToRight, reqVtSpace);
+                        }
+                        if (PreferredPointerDirection.RightAllowed() && PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Right;
+                            space = Math.Min(reqSpaceToLeft, reqVtSpace);
+                        }
                     }
-                    if (PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+
+                    if (space < 1)
                     {
-                        pointerDir = PointerDirection.Down;
-                        space = Math.Min(reqSpaceAbove, reqHzSpace);
+                        if (PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Down;
+                            space = Math.Min(reqSpaceAbove, reqHzSpace);
+                        }
+                        if (PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Up;
+                            space = Math.Min(reqSpaceBelow, reqHzSpace);
+                        }
+                        if (PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Left;
+                            space = Math.Min(reqSpaceToRight, reqVtSpace);
+                        }
+                        if (PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
+                        {
+                            pointerDir = PointerDirection.Right;
+                            space = Math.Min(reqSpaceToLeft, reqVtSpace);
+                        }
                     }
-                    if (PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
-                    {
-                        pointerDir = PointerDirection.Left;
-                        space = Math.Min(reqSpaceToRight, reqVtSpace);
-                    }
-                    if (PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
-                    {
-                        pointerDir = PointerDirection.Right;
-                        space = Math.Min(reqSpaceToLeft, reqVtSpace);
-                    }
-                    if (space < 0.01)
+
+                    if (space < 1)
                     {
                         // it doesn't fit ... what's the closest fit?
                         space = int.MaxValue;
@@ -457,6 +486,8 @@ namespace Forms9Patch
                 }
             }
         }
+
+        
 
         #region Layout Support 
         double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;

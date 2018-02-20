@@ -609,11 +609,23 @@ namespace Forms9Patch
 
         private void OnRightClicked(object sender, RightClickEventArgs e)
         {
-            if (e.Center.X < 100 || e.Center.X > Width - 100)
+            /*
+            if (ContentView is ICellSwipeMenus iCellSwipeMenus && (iCellSwipeMenus.StartSwipeMenu.Count>0 || iCellSwipeMenus.EndSwipeMenu.Count>0))
+            {
+
+            }
+            */
+            
+                if (e.Center.X < 100)
             {
                 Toast.Create(null, "In the zone.");
                 e.Handled = true;
             }
+            else if (e.Center.X > Width - 100)
+            {
+                e.Handled = true;
+            }
+            
         }
 
         #endregion

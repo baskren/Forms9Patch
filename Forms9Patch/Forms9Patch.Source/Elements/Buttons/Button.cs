@@ -201,6 +201,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Properties
         /// <summary>
         /// UNSUPPORTED INHERITED PROPERTY.
@@ -787,6 +788,42 @@ namespace Forms9Patch
             set { SetValue(DarkThemeProperty, value); }
         }
 
+
+        internal Size UnexpandedTightSize
+        {
+            get
+            {
+                var width = 0.0;
+                var height = 0.0;
+                int childCount = 0;
+                foreach (var child in Children)
+                {
+                    if (child is VisualElement element && element.IsVisible)
+                    {
+                        childCount++;
+                        if (Orientation == StackOrientation.Horizontal)
+                        {
+                            width += element.Width;
+                            height = Math.Max(height, element.Height);
+                        }
+                        else
+                        {
+                            width = Math.Max(width, element.Width);
+                            height += element.Height;
+                        }
+                    }
+                }
+                if (childCount > 1)
+                {
+                    width += Orientation == StackOrientation.Horizontal ? Spacing : 0;
+                    height += Orientation == StackOrientation.Vertical ? Spacing : 0;
+
+                }
+                width += Padding.HorizontalThickness;
+                height += Padding.VerticalThickness;
+                return new Size(width, height);
+            }
+        }
         #endregion
 
 

@@ -84,6 +84,7 @@ namespace Forms9Patch
 
         #endregion
 
+
         #region State Properties
         /// <summary>
         /// Backing store for the DefaultState bindable property.
@@ -156,6 +157,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Fields
         bool _noUpdate = true;
         ButtonState _currentState;
@@ -164,6 +166,7 @@ namespace Forms9Patch
         //Label _label;
         //FormsGestures.Listener _gestureListener;
         #endregion
+
 
         #region Constructor
         /// <summary>
@@ -187,6 +190,7 @@ namespace Forms9Patch
 
         }
         #endregion
+
 
         #region IDisposable Support
 

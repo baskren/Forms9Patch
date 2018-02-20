@@ -57,6 +57,7 @@ namespace Forms9Patch
 		public static bool DownAllowed(this PointerDirection dir) {
 			return (dir & PointerDirection.Down) != 0;
 		}
+
 	}
 }
 

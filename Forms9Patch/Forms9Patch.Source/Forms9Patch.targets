@@ -60,6 +60,7 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\ModalPopup.cs" Link="Elements\Popups\ModalPopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\PermissionPopup.cs" Link="Elements\Popups\PermissionPopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\PopupBase.cs" Link="Elements\Popups\PopupBase.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\Popups\TargetedMenu.cs" Link="Elements\Popups\TargetedMenu.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\TargetedToast.cs" Link="Elements\Popups\TargetedToast.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\Toast.cs" Link="Elements\Popups\Toast.cs" />
 
@@ -98,6 +99,7 @@
     <Compile Include="..\Forms9Patch.Source\Extensions\GridExtension.cs" Link="Extensions\GridExtension.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\HtmlStringExtensions.cs" Link="Extensions\HtmlStringExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\IFontElementExtensions.cs" Link="Extensions\IFontElementExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\IList_T_Extensions.cs" Link="Extensions\IList_T_Extensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\ImageExtensions.cs" Link="Extensions\ImageExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\ImageSourceExtensions.cs" Link="Extensions\ImageSourceExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\InternalStringExtensions.cs" Link="Extensions\InternalStringExtensions.cs" />

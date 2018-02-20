@@ -76,7 +76,7 @@ namespace Forms9Patch
                 OutlineRadius = OutlineRadius,
                 BackgroundColor = BackgroundColor
             };
-            ContentView = _frame;
+            DecorativeContainerView = _frame;
 
             Margin = 0;
             Padding = 10;
