@@ -260,9 +260,7 @@ takes a `Forms9Patch.ElementShape` value).  Available values are:
 	|               | applies to `Rectangle` and `Square` shapes  |                                                                    |
 	|---------------|---------------------------------------------|--------------------------------------------------------------------|
 
-	![Obround with outline](../images/Guides/Image/Shape.Obround/Outline.png)
-
 
 ## HasShadow and ShadowInverted Properties
 
-
+Let's go out on '

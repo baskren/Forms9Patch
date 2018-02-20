@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 
 namespace FormsGestures.UWP
 {
@@ -14,6 +16,16 @@ namespace FormsGestures.UWP
             Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
         }
+
+        public static bool FireTapped(FrameworkElement element, TappedRoutedEventArgs e, int numberOfTaps, Listener listener)
+        {
+            var args = new UwpTapEventArgs(element, e, numberOfTaps);
+            args.Listener = listener;
+            listener.OnTapped(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
 
         //PointerRoutedEventArgs
         public UwpTapEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs args, int numberOfTaps)
@@ -29,6 +41,15 @@ namespace FormsGestures.UWP
             ViewPosition = element.GetXfViewFrame();
             Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
             NumberOfTaps = numberOfTaps;
+        }
+
+        public static bool FireDoubleTapped(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e, int numberOfTaps, Listener listener)
+        {
+            var args = new UwpTapEventArgs(element, e, numberOfTaps);
+            args.Listener = listener;
+            listener.OnDoubleTapped(args);
+            e.Handled = args.Handled;
+            return e.Handled;
         }
     }
 }

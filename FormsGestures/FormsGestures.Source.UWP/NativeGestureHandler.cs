@@ -17,7 +17,7 @@ namespace FormsGestures.UWP
 {
     class NativeGestureHandler : Behavior<VisualElement>, IDisposable
     {
-        static int DebugVerbosity = 1;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
+        static int DebugVerbosity = 2;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
         void DebugMethodName(int verbosity=0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
             if (DebugVerbosity >= verbosity && DebugCondition)
@@ -68,7 +68,7 @@ namespace FormsGestures.UWP
                     FrameworkElement.ManipulationCompleted -= OnManipulationComplete;
 
                     //FrameworkElement.Tapped -= _UwpElement_Tapped;
-                    //FrameworkElement.RightTapped -= _UwpElement_RightTapped;
+                    FrameworkElement.RightTapped -= OnElementRightTapped;
                     //FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
 
                     FrameworkElement.PointerPressed -= OnPointerPressed;
@@ -103,7 +103,7 @@ namespace FormsGestures.UWP
 
 
                     //FrameworkElement.Tapped += _UwpElement_Tapped;
-                    //FrameworkElement.RightTapped += _UwpElement_RightTapped;
+                    FrameworkElement.RightTapped += OnElementRightTapped;
                     //FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
 
                     FrameworkElement.PointerPressed += OnPointerPressed;
@@ -703,7 +703,7 @@ namespace FormsGestures.UWP
                 }
                 if (listener.HandlesDown)
                 {
-                    var args = new UWPDownUpArgs(FrameworkElement, e);
+                    var args = new UwpDownUpArgs(FrameworkElement, e);
                     args.Listener = listener;
                     args.Cancelled = true;
                     listener.OnUp(args);
@@ -803,6 +803,25 @@ namespace FormsGestures.UWP
         }
         */
 
+        private void OnElementRightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            if (!_xfElement.IsVisible || FrameworkElement == null)
+                return;
+            DebugMethodName(2);
+
+            var currentPoint = e.GetPosition(null);
+            DebugMethodName(2);
+            DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=[" + e.Handled + "] type=[" + e.PointerDeviceType + "]");
+
+            foreach (var listener in _listeners)
+                if (listener.HandlesRightClicked && UwpRightClickEventArgs.Fire(FrameworkElement,e, listener))
+                     return;
+        }
+
+
+
+
+
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {            
             if (!_xfElement.IsVisible || FrameworkElement==null)
@@ -827,17 +846,8 @@ namespace FormsGestures.UWP
             _longPressing = false;
 
             foreach (var listener in _listeners)
-            {
-                if (listener.HandlesDown)
-                {
-                    var args = new UWPDownUpArgs(FrameworkElement, e);
-                    args.Listener = listener;
-                    listener.OnDown(args);
-                    e.Handled = args.Handled;
-                    if (e.Handled)
-                        return;
-                }
-            }
+                if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
+                    return;
         }
 
         bool _runningTapCounterResetter;
@@ -879,36 +889,19 @@ namespace FormsGestures.UWP
             }
 
             foreach (var listener in _listeners)
-            {
-                if (listener.HandlesTapped)
-                {
-                    var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps);
-                    args.Listener = listener;
-                    listener?.OnTapped(args);
-                    e.Handled = args.Handled;
-                    //if (args.Handled)
-                    //    break;
-                }
-                if (_longPressing && listener.HandlesLongPressed)
-                {
-                    var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed);
-                    args.Listener = listener;
-                    listener?.OnLongPressed(args);
-                    e.Handled = args.Handled;
-                    //if (args.Handled)
-                    //    break;
-                }
-                if (listener.HandlesDown)
-                {
-                    var args = new UWPDownUpArgs(FrameworkElement, e);
-                    args.Listener = listener;
-                    listener.OnUp(args);
-                    e.Handled = args.Handled;
-                    if (e.Handled)
-                        return;
-                }
-            }
+                if (listener.HandlesTapped && UwpTapEventArgs.FireTapped(FrameworkElement, e, _numberOfTaps, listener))
+                    break;
+
+            foreach (var listener in _listeners)
+                if (_longPressing && listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
+                    break;
+
+            foreach (var listener in _listeners)
+                if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
+                    break;
+             
             _longPressing = false;
+
         }
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -917,14 +910,8 @@ namespace FormsGestures.UWP
                 return;
             DebugMethodName(2);
             foreach (var listener in _listeners)
-            {
-                if (listener.HandlesDoubleTapped)
-                {
-                    var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps);
-                    args.Listener = listener;
-                    listener.OnDoubleTapped(args);
-                }
-            }
+                if (listener.HandlesDoubleTapped && UwpTapEventArgs.FireDoubleTapped(FrameworkElement, e, _numberOfTaps, listener))
+                    break;
             _longPressing = false;
         }
 

@@ -32,73 +32,95 @@ namespace FormsGestures
         #region Event / Command Property List
         internal static readonly string[] AllEventsAndCommands = {
             "Down",
-            "Up",
-            "Tapping",
-            "Tapped",
-            "DoubleTapped",
-            "LongPressing",
-            "LongPressed",
-            "Pinching",
-            "Pinched",
-            "Panning",
-            "Panned",
-            "Swiped",
-            "Rotating",
-            "Rotated",
             "DownCommand",
-            "UpCommand",
-            "TappingCommand",
-            "TappedCommand",
-            "DoubleTappedCommand",
-            "LongPressingCommand",
-            "LongPressedCommand",
-            "PinchingCommand",
-            "PinchedCommand",
-            "PanningCommand",
-            "PannedCommand",
-            "SwipedCommand",
-            "RotatingCommand",
-            "RotatedCommand",
             "DownCommandParameter",
-            "UpCommandParameter",
-            "TappingCommandParameter",
-            "TappedCommandParameter",
-            "DoubleTappedCommandParameter",
-            "LongPressingCommandParameter",
-            "LongPressedCommandParameter",
-            "PinchingCommandParameter",
-            "PinchedCommandParameter",
-            "PanningCommandParameter",
-            "PannedCommandParameter",
-            "SwipedCommandParameter",
-            "RotatingCommandParameter",
-            "RotatedCommandParameter",
-            "TappingCallback",
-            "TappedCallback",
-            "DoubleTappedCallback",
-            "LongPressingCallback",
-            "LongPressedCallback",
-            "PinchingCallback",
-            "PinchedCallback",
-            "PanningCallback",
-            "PannedCallback",
-            "SwipedCallback",
-            "RotatingCallback",
-            "RotatedCallback",
+            "DownCallback",
             "DownCallbackParameter",
+
+            "Up",
+            "UpCommand",
+            "UpCommandParameter",
+            "UpCallback",
             "UpCallbackParameter",
+
+            "Tapping",
+            "TappingCommand",
+            "TappingCommandParameter",
+            "TappingCallback",
             "TappingCallbackParameter",
+
+            "Tapped",
+            "TappedCommand",
+            "TappedCommandParameter",
+            "TappedCallback",
             "TappedCallbackParameter",
+
+            "DoubleTapped",
+            "DoubleTappedCommand",
+            "DoubleTappedCommandParameter",
+            "DoubleTappedCallback",
             "DoubleTappedCallbackParameter",
+
+            "LongPressing",
+            "LongPressingCommand",
+            "LongPressingCommandParameter",
+            "LongPressingCallback",
             "LongPressingCallbackParameter",
+
+            "LongPressed",
+            "LongPressedCommand",
+            "LongPressedCommandParameter",
+            "LongPressedCallback",
             "LongPressedCallbackParameter",
+
+            "Pinching",
+            "PinchingCommand",
+            "PinchingCommandParameter",
+            "PinchingCallback",
             "PinchingCallbackParameter",
+
+            "Pinched",
+            "PinchedCommand",
+            "PinchedCommandParameter",
+            "PinchedCallback",
             "PinchedCallbackParameter",
+
+            "Panning",
+            "PanningCommand",
+            "PanningCommandParameter",
+            "PanningCallback",
             "PanningCallbackParameter",
+
+            "Panned",
+            "PannedCommand",
+            "PannedCommandParameter",
+            "PannedCallback",
             "PannedCallbackParameter",
+
+            "Swiped",
+            "SwipedCommand",
+            "SwipedCommandParameter",
+            "SwipedCallback",
             "SwipedCallbackParameter",
+
+            "Rotating",
+            "RotatingCommand",
+            "RotatingCommandParameter",
+            "RotatingCallback",
             "RotatingCallbackParameter",
-            "RotatedCallbackParameter"
+
+            "Rotated",
+            "RotatedCommand",
+            "RotatedCommandParameter",
+            "RotatedCallback",
+            "RotatedCallbackParameter",
+
+            "RightClicked",
+            "RightClickedCommand",
+            "RightClickedCommandParameter",
+            "RightClickedCallback",
+            "RightClickedCallbackParameter",
+
         };
         #endregion
 
@@ -1150,6 +1172,80 @@ namespace FormsGestures
             return result;
         }
         #endregion
+
+        #region RightClicked
+        /// <summary>
+        /// Tapped event handler
+        /// </summary>
+        public event EventHandler<RightClickEventArgs> RightClicked;
+        /// <summary>
+        /// backing store for the TappedCommand property
+        /// </summary>
+        public static readonly BindableProperty RightClickedCommandProperty = BindableProperty.Create("RightClickedCommand", typeof(ICommand), typeof(Listener), null);
+        /// <summary>
+        /// backing store for the TappedCommandParameter property
+        /// </summary>
+        public static readonly BindableProperty RightClickedCommandParameterProperty = BindableProperty.Create("RightClickedCommandParameter", typeof(object), typeof(Listener), null);
+        /// <summary>
+        /// Command invoked after a tap motion
+        /// </summary>
+        public ICommand RightClickedCommand
+        {
+            get { return (ICommand)GetValue(RightClickedCommandProperty); }
+            set { SetValue(RightClickedCommandProperty, value); }
+        }
+        /// <summary>
+        /// Parameter passed with Command invoked after a tap motion
+        /// </summary>
+        public object RightClickedCommandParameter
+        {
+            get { return GetValue(RightClickedCommandParameterProperty); }
+            set { SetValue(RightClickedCommandParameterProperty, value); }
+        }
+        /// <summary>
+        /// backing store for a TappedCallback property
+        /// </summary>
+        public static readonly BindableProperty RightClickedCallbackProperty = BindableProperty.Create("RightClickedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        /// <summary>
+        /// backing store for a TappedCallbackParameter property
+        /// </summary>
+        public static readonly BindableProperty RightClickedCallbackParameterProperty = BindableProperty.Create("RightClickedCallbackParameter", typeof(object), typeof(Listener), null);
+        /// <summary>
+        /// Action invoked after a tap motion
+        /// </summary>
+        public Action<Listener, object> RightClickedCallback
+        {
+            get { return (Action<Listener, object>)GetValue(RightClickedCallbackProperty); }
+            set { SetValue(RightClickedCallbackProperty, value); }
+        }
+        /// <summary>
+        /// Parameter passed to Action invoked after a tap motion
+        /// </summary>
+        public object RightClickedCallbackParameter
+        {
+            get { return GetValue(RightClickedCallbackParameterProperty); }
+            set { SetValue(RightClickedCallbackParameterProperty, value); }
+        }
+        /// <summary>
+        /// does this Listener invoke anything after a tap motion?
+        /// </summary>
+        public bool HandlesRightClicked
+        {
+            get { return RightClicked != null || RightClickedCommand != null || RightClickedCallback != null; }
+        }
+        internal bool OnRightClicked(RightClickEventArgs args)
+        {
+            bool result = false;
+            if (HandlesRightClicked)
+            {
+                RaiseEvent<RightClickEventArgs>(RightClicked, args);
+                ExecuteCommand(RightClickedCommand, RightClickedCommandParameter, args);
+                result = args.Handled;
+            }
+            return result;
+        }
+        #endregion
+
 
         #region Command / Event executors
         void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs => handler?.Invoke(this, args);

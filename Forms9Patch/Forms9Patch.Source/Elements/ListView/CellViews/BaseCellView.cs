@@ -207,6 +207,7 @@ namespace Forms9Patch
             thisListener.LongPressing += OnLongPressing;
             thisListener.Panned += OnPanned;
             thisListener.Panning += OnPanning;
+            thisListener.RightClicked += OnRightClicked;
 
             _swipeFrame1.Content = _swipeButton1;
             _swipeFrame2.Content = _swipeButton2;
@@ -218,6 +219,7 @@ namespace Forms9Patch
 
             Children.Add(_separator, 0, 1);
         }
+
         #endregion
 
 
@@ -604,6 +606,16 @@ namespace Forms9Patch
             if (_endButtons + _startButtons == 0)
                 ((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
         }
+
+        private void OnRightClicked(object sender, RightClickEventArgs e)
+        {
+            if (e.Center.X < 100 || e.Center.X > Width - 100)
+            {
+                Toast.Create(null, "In the zone.");
+                e.Handled = true;
+            }
+        }
+
         #endregion
 
 

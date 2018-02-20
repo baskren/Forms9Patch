@@ -8,9 +8,9 @@ using Windows.UI.Xaml.Input;
 
 namespace FormsGestures.UWP
 {
-    class UWPDownUpArgs : DownUpEventArgs
+    class UwpDownUpArgs : DownUpEventArgs
     {
-        public UWPDownUpArgs(FrameworkElement element, PointerRoutedEventArgs args)
+        public UwpDownUpArgs(FrameworkElement element, PointerRoutedEventArgs args)
         {
             Cancelled = false;
             ViewPosition = element.GetXfViewFrame();
@@ -19,7 +19,16 @@ namespace FormsGestures.UWP
             TriggeringTouches = new[] { 0 };
         }
 
-        public UWPDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
+        public static bool FireDown(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
+        {
+            var args = new UwpDownUpArgs(element, e);
+            args.Listener = listener;
+            listener.OnDown(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
+        public UwpDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
         {
             Cancelled = false;
             ViewPosition = element.GetXfViewFrame();
@@ -27,5 +36,16 @@ namespace FormsGestures.UWP
             Touches = new Xamarin.Forms.Point[] { currentPoint.ToXfPoint() };
             TriggeringTouches = new[] { 0 };
         }
+
+        public static bool FireDown(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
+        {
+            var args = new UwpDownUpArgs(element, e);
+            args.Listener = listener;
+            listener.OnDown(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
+
     }
 }

@@ -11,6 +11,7 @@
     <Compile Include="..\FormsGestures.Source\EventArgs\LongPressEventArgs.cs" Link="EventArgs\LongPressEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\PanEventArgs.cs" Link="EventArgs\PanEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\PinchEventArgs.cs" Link="EventArgs\PinchEventArgs.cs" />
+    <Compile Include="..\FormsGestures.Source\EventArgs\RightClickEventArgs.cs" Link="EventArgs\RightClickEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\RotateEventArgs.cs" Link="EventArgs\RotateEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\SwipeEventArgs.cs" Link="EventArgs\SwipeEventArgs.cs" />
     <Compile Include="..\FormsGestures.Source\EventArgs\TapEventArgs.cs" Link="EventArgs\TapEventArgs.cs" />

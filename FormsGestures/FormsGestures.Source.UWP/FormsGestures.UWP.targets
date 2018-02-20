@@ -14,6 +14,9 @@
     <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpPinchEventArgs.cs">
       <Link>EventArgs\UwpPinchEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpRightClickEventArgs.cs">
+      <Link>EventArgs\UwpRightClickEventArgs.cs</Link>
+    </Compile>
     <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpRotateEventArgs.cs">
       <Link>EventArgs\UwpRotateEventArgs.cs</Link>
     </Compile>
