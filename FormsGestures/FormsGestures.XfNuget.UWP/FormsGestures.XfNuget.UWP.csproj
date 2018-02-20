@@ -107,6 +107,11 @@
   </PropertyGroup>
   <Import Project="..\FormsGestures.Source.UWP\FormsGestures.UWP.targets" />
   <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.280</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
       <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
       <Name>FormsGestures.XfNuget</Name>

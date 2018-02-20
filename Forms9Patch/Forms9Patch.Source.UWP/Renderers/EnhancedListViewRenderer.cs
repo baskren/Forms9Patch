@@ -14,7 +14,7 @@ namespace Forms9Patch.UWP
 {
     class EnhancedListViewRenderer : Xamarin.Forms.Platform.UWP.ListViewRenderer
     {
-        /*
+        
         static Windows.UI.Xaml.ResourceDictionary _enhancedListViewResources;
         Windows.UI.Xaml.ResourceDictionary EnhancedListViewResources
         {
@@ -27,7 +27,7 @@ namespace Forms9Patch.UWP
                 return _enhancedListViewResources;
             }
         }
-        */
+        
         
 
         #region Fields
@@ -96,12 +96,13 @@ namespace Forms9Patch.UWP
 
             listView.ShowsScrollingPlaceholders = true;
 
-            var itemStyle = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
-            //var itemStyle = (Windows.UI.Xaml.Style)EnhancedListViewResources["Forms9PatchListViewItem"];
+            
+            //var itemStyle = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
+            var itemStyle = (Windows.UI.Xaml.Style)EnhancedListViewResources["Forms9PatchListViewItem"];
             listView.ItemContainerStyle = itemStyle;
 
-            var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewGroupStyle"];
-            //var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)EnhancedListViewResources["Forms9PatchListViewGroupStyle"];
+            //var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewGroupStyle"];
+            var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)EnhancedListViewResources["Forms9PatchListViewGroupStyle"];
             listView.GroupStyleSelector = new GroupStyleSelector(forms9PatchListViewGroupStyle);
 
         }

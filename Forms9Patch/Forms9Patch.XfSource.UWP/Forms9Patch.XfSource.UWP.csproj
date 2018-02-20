@@ -144,12 +144,8 @@
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="..\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd.xml">
-      <Link>Properties\Forms9Patch.UWP.rd.xml</Link>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

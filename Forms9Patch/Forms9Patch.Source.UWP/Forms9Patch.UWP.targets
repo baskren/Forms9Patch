@@ -89,16 +89,16 @@
   </ItemGroup>
 
   <!-- Forms9Patch modifications to Window's defaults -->
-  <!--ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="..\Forms9Patch.Source.UWP\EnhancedListView.Resources.xaml" Link="EnhancedListView.Resources.xaml" />
-  </ItemGroup-->
-  <ItemGroup>  
+  </ItemGroup>
+  <!--ItemGroup>  
     <Page Include="..\Forms9Patch.Source.UWP\EnhancedListView.Resources.xaml">
       <Link>EnhancedListView.Resources.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
+  </ItemGroup-->
 
 
   <Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
