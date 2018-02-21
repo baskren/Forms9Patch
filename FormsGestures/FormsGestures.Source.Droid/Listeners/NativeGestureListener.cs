@@ -225,18 +225,21 @@ namespace FormsGestures.Droid
             // called by longPressTimer
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("onLongPressing [{0}]",_id);
 
-            foreach (var listener in _listeners)
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
-                if (listener.HandlesLongPressing)
+                foreach (var listener in _listeners)
                 {
-                    var _view = (Android.Views.View)_weakReferenceView?.Get();
-                    var args = new AndroidLongPressEventArgs(Start, null, _view, _viewLocationAtOnDown);
-                    args.Listener = listener;
-                    listener.OnLongPressing(args);
-                    //if (args.Handled)
-                    //	break;
+                    if (listener.HandlesLongPressing)
+                    {
+                        var _view = (Android.Views.View)_weakReferenceView?.Get();
+                        var args = new AndroidLongPressEventArgs(Start, null, _view, _viewLocationAtOnDown);
+                        args.Listener = listener;
+                        listener.OnLongPressing(args);
+                        //if (args.Handled)
+                        //	break;
+                    }
                 }
-            }
+            });
         }
 
         /*

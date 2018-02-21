@@ -2,7 +2,7 @@ using System;
 
 namespace Forms9Patch
 {
-    public class Clipboard
+    public static class Clipboard
     {
         static IClipboardService _service;
         static IClipboardService Service
@@ -14,10 +14,11 @@ namespace Forms9Patch
             }
         }
 
-        public static string Value
+        public static ClipboardData Data
         {
-            get => Service.Value;
-            set => Service.Value = value;   
+            get => Service.Data;
+
+            set => Service.Data = value;
         }
     }
 }

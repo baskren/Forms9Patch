@@ -4,6 +4,6 @@ namespace Forms9Patch
 {
     interface IClipboardService
     {
-        string Value { get; set; }
+        ClipboardData Data { get; set; }
     }
 }

@@ -153,6 +153,7 @@
 
     <!-- Models -->
     <Compile Include="..\Forms9Patch.Source\Models\ButtonState.cs" Link="Models\ButtonState.cs" />
+    <Compile Include="..\Forms9Patch.Source\Models\ClipboardData.cs" Link="Models\ClipboardData.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\F9PFormattedString.cs" Link="Models\F9PFormattedString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\HTMLMarkupString.cs" Link="Models\HTMLMarkupString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\ImageSource.cs" Link="Models\ImageSource.cs" />

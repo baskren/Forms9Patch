@@ -139,21 +139,21 @@ namespace Forms9Patch
         {
             FontFamily = "Forms9Patch.Resources.Fonts.MaterialIcons.ttf",
             HtmlText = "&#xE314;",
-            Padding = new Thickness(4, 0, 4, 4),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4),
             TextColor = DefaultTextColor,
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
             HorizontalOptions = LayoutOptions.Start,
             BackgroundColor = DefaultBackgroundColor,
-            Lines=1,
+            Lines = 1,
             AutoFit = AutoFit.None,
         };
         readonly Button _rightArrowButton = new Button
         {
             FontFamily = "Forms9Patch.Resources.Fonts.MaterialIcons.ttf",
             HtmlText = "&#xE315;",
-            Padding = new Thickness(4, 0, 4, 4),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4),
             TextColor = DefaultTextColor,
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
@@ -175,7 +175,7 @@ namespace Forms9Patch
             OutlineRadius = 4,
         };
         #endregion
-        
+
 
         #region Constructor / Factory
         /// <summary>
@@ -184,10 +184,10 @@ namespace Forms9Patch
         /// <param name="target">VisualElement to target</param>
         /// <param name="htmlTexts">List of text for menu items (with optional HTML markup)</param>
         /// <returns></returns>
-        public static TargetedMenu Create(VisualElement target, List<string> htmlTexts=null)
+        public static TargetedMenu Create(VisualElement target, List<string> htmlTexts = null)
         {
             var targetedMenu = new TargetedMenu(target);
-            if (htmlTexts!=null)
+            if (htmlTexts != null)
             {
                 foreach (var htmlText in htmlTexts)
                     targetedMenu.Segments.Add(new Segment
@@ -241,7 +241,7 @@ namespace Forms9Patch
             else if (propertyName == OutlineColorProperty.PropertyName)
                 _stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
             else if (propertyName == OutlineRadiusProperty.PropertyName)
-                _stackLayout.OutlineRadius = OutlineRadius;
+                _stackLayout.OutlineRadius = OutlineRadius + 1;
             else if (propertyName == SeparatorWidthProperty.PropertyName)
                 _stackLayout.Spacing = SeparatorWidth;
             else if (propertyName == HapticEffectProperty.PropertyName)
@@ -264,7 +264,7 @@ namespace Forms9Patch
             segment._button.Spacing = 4;
             segment._button.TintIcon = true;
             segment._button.HasTightSpacing = true;
-            segment._button.Padding = new Thickness(4, 0, 4, 4);
+            segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4);
             segment._button.TextColor = TextColor;
             segment._button.VerticalTextAlignment = TextAlignment.Center;
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
@@ -284,18 +284,13 @@ namespace Forms9Patch
             button.Tapped -= OnButtonTapped;
         }
 
-        private void OnButtonTapped(object sender, System.EventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         #endregion
 
 
         #region Collection Management
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            switch(e.Action)
+            switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                     foreach (var item in e.NewItems)
@@ -310,7 +305,7 @@ namespace Forms9Patch
                         throw new System.Exception("e.OldItems.Count < e.NewItems.Count.  That's not expected.");
                     if (e.OldStartingIndex + e.OldItems.Count >= _stackLayout.Children.Count)
                         throw new System.Exception("(e.OldStartingIndex + e.OldItems.Count >= _buttons.Count.  That's not expected.");
-                    
+
                     var tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
                     _stackLayout.Children.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
                     _stackLayout.Children.InsertRange(e.NewStartingIndex, tmpButtons);
@@ -367,7 +362,7 @@ namespace Forms9Patch
             if (Width < 0)
                 return;
             // calculate pages
-            bool multiPage=false;
+            bool multiPage = false;
             var width = 0.0;
             foreach (Button button in _stackLayout.Children)
             {
@@ -391,7 +386,7 @@ namespace Forms9Patch
                 foreach (Button button in _stackLayout.Children)
                 {
                     width += button.Bounds.Width + SeparatorWidth;
-                    if (width + _rightArrowButton.Width  >= Width)
+                    if (width + _rightArrowButton.Width >= Width)
                     {
                         pages++;
                         width = _leftArrowButton.Width;
@@ -410,19 +405,21 @@ namespace Forms9Patch
 
         #region Events
 
-        public event SegmentedControlEventHandler SegmentSelected;
-        void OnSegmentSelected(object sender, EventArgs e)
+        public event SegmentedControlEventHandler SegmentTapped;
+        void OnButtonTapped(object sender, System.EventArgs e)
         {
             for (int i = 0; i < _segments.Count; i++)
             {
                 var button = _segments[i]._button;
-                if (button.Equals(sender) && button.IsSelected)
+                if (button.Equals(sender))
                 {
-                    SegmentSelected?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
-                    return;
+                    SegmentTapped?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
+                    break;
                 }
             }
+            IsVisible = false;
         }
+
         #endregion
     }
 }
