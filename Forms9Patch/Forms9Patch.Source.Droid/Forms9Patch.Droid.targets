@@ -67,9 +67,9 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
 			<Link>Services\ApplicationInfoService.cs</Link>
 		</Compile>
-		<!--Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
+		<Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
 			<Link>Services\ClipboardService.cs</Link>
-		</Compile-->
+		</Compile>
 		<Compile Include="..\Forms9Patch.Source.Droid\Services\DescendentBounds.cs">
 			<Link>Services\DescendentBounds.cs</Link>
 		</Compile>

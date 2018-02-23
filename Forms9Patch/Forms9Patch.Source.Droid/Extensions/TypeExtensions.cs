@@ -6,7 +6,7 @@ namespace Forms9Patch.Droid
 {
     static class TypeExtensions
     {
-        public static FieldType GetAndroidFieldType(Type type)
+        public static FieldType ToAndroidFieldType(this Type type)
         {
             if (type == typeof(byte[]))
                 return FieldType.Blob;
@@ -17,6 +17,22 @@ namespace Forms9Patch.Droid
             if (type == typeof(string))
                 return FieldType.String;
             return FieldType.Null;
+        }
+
+        public static Type ToCSharpType(this FieldType fieldType)
+        {
+            switch (fieldType)
+            {
+                case FieldType.Blob:
+                    return typeof(byte[]);
+                case FieldType.Float:
+                    return typeof(double);
+                case FieldType.Integer:
+                    return typeof(int);
+                case FieldType.String:
+                    return typeof(string);
+            }
+            return null;
         }
     }
 

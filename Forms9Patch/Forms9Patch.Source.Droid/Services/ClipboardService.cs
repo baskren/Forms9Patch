@@ -33,6 +33,84 @@ namespace Forms9Patch.Droid
         #endregion
 
 
+        class ReturnClipboardEntryItem : IClipboardEntryItem
+        {
+            public string MimeType { get; protected set; }
+
+            ICursor _cursor = null;
+            ICursor Cursor
+            {
+                get
+                {
+                    if (_cursor == null)
+                    {
+                        var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
+                        _cursor = (ICursor)loader.LoadInBackground();
+                    }
+                    return _cursor;
+                }
+            }
+
+            public object Item
+            {
+                get
+                {
+                    if (Cursor.Count == 0)
+                        return null;
+                    if (Cursor.Count == 1)
+                    {
+                        switch (Cursor.GetType(0))
+                        {
+                            case FieldType.Blob:
+                                return Cursor.GetBlob(0);
+                            case FieldType.Float:
+                                return Cursor.GetDouble(0);
+                            case FieldType.Integer:
+                                return Cursor.GetInt(0);
+                            case FieldType.Null:
+                                return null;
+                            case FieldType.String:
+                                return Cursor.GetString(0);
+                        }
+                    }
+                    return null;
+                }
+            }
+
+            Type _type;
+            public Type Type
+            {
+                get
+                {
+                    _type = _type ?? DetermineType();
+                    return _type;
+                }
+            }
+
+            readonly Android.Net.Uri _uri;
+
+            public ReturnClipboardEntryItem(Android.Net.Uri uri)
+            {
+                _uri = uri;
+                MimeType = Settings.Activity.ContentResolver.GetType(uri);
+            }
+
+            Type DetermineType()
+            {
+                if (Cursor.ColumnCount == 0)
+                    return null;
+                if (Cursor.ColumnCount == 1)
+                {
+                    var type = Cursor.GetType(0).ToCSharpType();
+                    return type;
+                }
+                for (int i = 0; i < Cursor.ColumnCount; i++)
+                    System.Diagnostics.Debug.WriteLine("column[" + i + "] type=[" + Cursor.GetType(i) + "]");
+                return null;
+            }
+        }
+
+
         #region IClipboardService
         public ClipboardEntry Entry
         {
@@ -40,45 +118,47 @@ namespace Forms9Patch.Droid
             {
                 if (!Clipboard.HasPrimaryClip)
                     return null;
-                var result = new ClipboardEntry();
+                var entry = new ClipboardEntry();
                 var description = Clipboard.PrimaryClipDescription;
                 var clipData = Clipboard.PrimaryClip;
 
-                result.Description = description.Label;
+                entry.Description = description.Label;
 
                 for (int i = 0; i < clipData.ItemCount; i++)
                 {
                     var item = clipData.GetItemAt(i);
                     if (!string.IsNullOrEmpty(item.HtmlText))
-                        result.HtmlText = item.HtmlText;
+                        entry.HtmlText = item.HtmlText;
                     if (!string.IsNullOrEmpty(item.Text))
-                        result.PlainText = item.Text;
-
+                        entry.PlainText = item.Text;
+                    if (item.Uri != null)
+                    {
+                        var entryItem = new ReturnClipboardEntryItem(item.Uri);
+                        entry.AdditionalItems.Add(entryItem);
+                    }
                 }
-                return result;
+                return entry;
             }
             set
             {
                 if (value == null)
                     return;
                 ClipData clipData = null;
+
                 if (string.IsNullOrEmpty(value.HtmlText))
                     clipData = ClipData.NewPlainText(value.Description, value.PlainText);
                 else
                     clipData = ClipData.NewHtmlText(value.Description, value.PlainText, value.HtmlText);
 
                 UriItems.Clear();
-                if (value.AdditionalItems != null && value.AdditionalItems.Count > 0 && value is Forms9Patch.IPlatformKey platform)
+                foreach (var item in value.AdditionalItems)
                 {
-                    foreach (var item in value.AdditionalItems)
-                    {
-                        // here is where we would detect if the item is a FilePathEntryItem or the item.Type is a System.IO.File and then setup things to use a android.support.v4.content.FileProvider
-                        var uri = ClipboardContentProvider.NextItemUri;
-                        UriItems[uri] = item;
-                        //}
-                        var androidClipItem = new ClipData.Item(uri);
-                        clipData.AddItem(androidClipItem);
-                    }
+                    // here is where we would detect if the item is a FilePathEntryItem or the item.Type is a System.IO.File and then setup things to use a android.support.v4.content.FileProvider
+                    var uri = ClipboardContentProvider.NextItemUri;
+                    UriItems[uri] = item;
+                    //}
+                    var androidClipItem = new ClipData.Item(uri);
+                    clipData.AddItem(androidClipItem);
                 }
 
                 //ContentValues contentValues = new ContentValues(2);
@@ -104,7 +184,7 @@ namespace Forms9Patch.Droid
         {
             _list = list;
             _mimeType = mimeType;
-            _fieldType = itemsType.GetAndroidFieldType();
+            _fieldType = itemsType.ToAndroidFieldType();
             _itemsType = itemsType;
         }
 
@@ -171,7 +251,7 @@ namespace Forms9Patch.Droid
         public PrimativeCursor(string mimeType, object primative)
         {
             _primative = primative;
-            if (primative.GetType().GetAndroidFieldType() == FieldType.Null && primative != null)
+            if (primative.GetType().ToAndroidFieldType() == FieldType.Null && primative != null)
             {
                 throw new InvalidDataException("PrimativeCursor does not work with [" + primative.GetType() + "]");
             }
@@ -235,7 +315,7 @@ namespace Forms9Patch.Droid
         {
             if (_primative == null)
                 return FieldType.Null;
-            var fieldType = _primative.GetType().GetAndroidFieldType();
+            var fieldType = _primative.GetType().ToAndroidFieldType();
             if (fieldType != FieldType.Null)
                 return fieldType;
             return FieldType.String;
@@ -246,13 +326,49 @@ namespace Forms9Patch.Droid
     [ContentProvider(new string[] { "@string/forms9patch_copy_paste_authority" })]
     public class ClipboardContentProvider : ContentProvider
     {
+        static Forms9Patch.IClipboardEntryItem ItemForUri(Android.Net.Uri uri)
+        {
+            foreach (var key in ClipboardService.UriItems.Keys)
+                if (key.Equals(uri))
+                    return ClipboardService.UriItems[key];
+            return null;
+        }
 
-        static readonly int _resourceId = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-        public static readonly string AUTHORITY = Settings.Activity.Resources.GetString(_resourceId);
-        public static readonly Android.Net.Uri CONTENT_URI = Android.Net.Uri.Parse("content://" + AUTHORITY);
+        static int _resourceId
+        {
+            get
+            {
+                var result = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+                return result;
+            }
+        } // = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+        public static string AUTHORITY
+        {
+            get
+            {
+                var result = Settings.Activity.Resources.GetString(_resourceId);
+                return result;
+            }
+        }// = Settings.Activity.Resources.GetString(_resourceId);
+        public static Android.Net.Uri CONTENT_URI
+        {
+            get
+            {
+                var result = Android.Net.Uri.Parse("content://" + AUTHORITY);
+                return result;
+            }
+        }
+        //= Android.Net.Uri.Parse("content://" + AUTHORITY);
 
         static int _index;
-        public static Android.Net.Uri NextItemUri => Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
+        public static Android.Net.Uri NextItemUri
+        {
+            get
+            {
+                var result = Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
+                return result;
+            }
+        }
 
         public override int Delete(Android.Net.Uri uri, string selection, string[] selectionArgs)
         {
@@ -261,9 +377,8 @@ namespace Forms9Patch.Droid
 
         public override string GetType(Android.Net.Uri uri)
         {
-            if (!ClipboardService.UriItems.ContainsKey(uri))
-                return null;
-            return ClipboardService.UriItems[uri].MimeType;
+            var item = ItemForUri(uri);
+            return item?.MimeType;
         }
 
         public override Android.Net.Uri Insert(Android.Net.Uri uri, ContentValues values)
@@ -273,20 +388,23 @@ namespace Forms9Patch.Droid
 
         public override bool OnCreate()
         {
+            //_resourceId = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+            //AUTHORITY = Settings.Activity.Resources.GetString(_resourceId);
+            //CONTENT_URI = Android.Net.Uri.Parse("content://" + AUTHORITY);
             return true;
         }
 
         public override ICursor Query(Android.Net.Uri uri, string[] projection, string selection, string[] selectionArgs, string sortOrder)
         {
-            if (!ClipboardService.UriItems.ContainsKey(uri))
+            var item = ItemForUri(uri);
+            if (item == null)
                 return null;
-            var item = ClipboardService.UriItems[uri];
-            if (item.Type.GetAndroidFieldType() != FieldType.Null)
+            if (item.Type.ToAndroidFieldType() != FieldType.Null)
                 return new PrimativeCursor(item.MimeType, item.Item);
             if (item.Type is IList list && item.Type.IsGenericType)
             {
                 var elementType = item.Type.GetElementType();
-                var fieldType = elementType.GetAndroidFieldType();
+                var fieldType = elementType.ToAndroidFieldType();
                 if (fieldType != FieldType.Null)
                     return new IListCursor(item.MimeType, list, elementType);
             }
@@ -297,6 +415,7 @@ namespace Forms9Patch.Droid
         {
             return -1;
         }
+
 
         static int GetResourceId(String pVariableName, String pResourcename, String pPackageName)
         {

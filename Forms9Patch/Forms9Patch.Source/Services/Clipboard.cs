@@ -20,5 +20,6 @@ namespace Forms9Patch
 
             set => Service.Entry = value;
         }
+
     }
 }

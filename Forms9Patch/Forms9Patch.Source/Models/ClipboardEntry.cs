@@ -4,19 +4,31 @@ using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Collections;
 using System.Reflection;
+using Xamarin.Forms.Internals;
+using P42.Utils;
 
 namespace Forms9Patch
 {
+    #region Clipboard Entry
+    public interface IClipboardEntry
+    {
+        string Description { get; }
 
+        string PlainText { get; }
 
-    public class ClipboardEntry
+        string HtmlText { get; }
+
+        List<IClipboardEntryItem> AdditionalItems { get; }
+    }
+
+    public class ClipboardEntry : IClipboardEntry
     {
         /// <summary>
         /// Short, descriptive text that can be used by app to display
         /// to the user what this data represents.
         /// </summary>
         /// <value>The description.</value>
-        public string Description { get; set; }
+        public string Description { get; set; } = ApplicationInfoService.Name + " Clipboard";
 
         /// <summary>
         /// Gets or sets the plain text representation of this data (if any)
@@ -31,8 +43,58 @@ namespace Forms9Patch
         public string HtmlText { get; set; }
 
         readonly List<IClipboardEntryItem> _items = new List<IClipboardEntryItem>();
+        public List<IClipboardEntryItem> AdditionalItems
+        {
+            get => _items;
+            set
+            {
+                _items.Clear();
+                foreach (var item in value)
+                    _items.Add(item);
+            }
+        }
 
-        public List<IClipboardEntryItem> AdditionalItems => _items;
+        public List<string> MimeTypes
+        {
+            get
+            {
+                var result = new List<string>();
+                if (!string.IsNullOrEmpty(PlainText))
+                    result.Add("text/plain");
+                if (!string.IsNullOrEmpty(HtmlText))
+                    result.Add("text/html");
+                foreach (var item in _items)
+                    result.Add(item.MimeType);
+                return result;
+            }
+        }
+
+        public bool ContainsMimeType(string mimeType)
+        {
+            return MimeTypes.Contains(mimeType);
+        }
+
+        public IClipboardEntryItem GetItem(string mimeType)
+        {
+            if (mimeType == "text/plain" && PlainText != null)
+                return new PlaceholderEntryItem(mimeType, PlainText);
+            if (mimeType == "text/html" && HtmlText != null)
+                return new PlaceholderEntryItem(mimeType, HtmlText);
+            foreach (var item in _items)
+                if (item.MimeType == mimeType)
+                    return item;
+            return null;
+        }
+
+        public void AddItem<T>(string mimeType, T item)
+        {
+            _items.Add(new ClipboardEntryItem<T>(mimeType, item));
+        }
+
+        public void AddOnDemandItem<T>(string mimeType, Func<T> onDemandFunction)
+        {
+            _items.Add(new LazyClipboardEntryItem<T>(mimeType, onDemandFunction));
+        }
 
 
         // Notes to self: 
@@ -72,9 +134,14 @@ namespace Forms9Patch
         // - UWP:
         // Would that work with UWP? 
 
+        class PlaceholderEntryItem : ClipboardEntryItem<string>
+        {
+            public PlaceholderEntryItem(string mimeType, string item) : base(mimeType, item) { }
+        }
     }
+    #endregion
 
-
+    #region ClipboardEntryItem
     public interface IClipboardEntryItem
     {
         string MimeType { get; }
@@ -124,10 +191,13 @@ namespace Forms9Patch
                 return true;
             if (type == typeof(string))
                 return true;
-            if (type is IList list && type.GetTypeInfo().IsGenericType)
+            var typeInfo = type.GetTypeInfo();
+            if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)) && typeInfo.IsGenericType)
             {
-                var elementType = type.GetElementType();
-                if (elementType is IEnumerable)
+                var elementType = typeInfo.GenericTypeArguments[0];
+                if (elementType == typeof(string))
+                    return true;
+                if (elementType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IEnumerable)))
                     return false;
                 return ValidEntryItemType(elementType);
             }
@@ -155,7 +225,13 @@ namespace Forms9Patch
             Type = typeof(T);
             if (!ValidEntryItemType(Type))
                 throw new ArgumentException("Item type [" + Type + "] is not a valid ClipboardEntryItem type.");
-            MimeType = !string.IsNullOrWhiteSpace(mimeType) ? mimeType : throw new InvalidDataContractException("Empty or null mime type is not allowed.");
+            if (string.IsNullOrWhiteSpace(mimeType))
+                throw new InvalidDataContractException("Empty or null mime type is not allowed.");
+            if (mimeType == "text/plain")
+                throw new InvalidDataContractException("Use ClipboardEntry.PlainText instead.");
+            if (mimeType == "text/html")
+                throw new InvalidDataContractException("Use ClipboardEntry.HtmlText instead.");
+            MimeType = mimeType;
         }
     }
 
@@ -168,12 +244,12 @@ namespace Forms9Patch
         }
     }
 
-    public class OnDemandClipboardEntryItem<T> : ClipboardItemBase<T>
+    public class LazyClipboardEntryItem<T> : ClipboardItemBase<T>
     {
         readonly Func<T> _onDemandFunction;
         public override object Item => _onDemandFunction.Invoke();
 
-        public OnDemandClipboardEntryItem(string mimeType, Func<T> onDemandFunction) : base(mimeType)
+        public LazyClipboardEntryItem(string mimeType, Func<T> onDemandFunction) : base(mimeType)
         {
             _onDemandFunction = onDemandFunction ?? throw new Exception("Must set a valid Func<T> for onDemandFunction");
         }
@@ -185,5 +261,5 @@ namespace Forms9Patch
         public FilePathEntryItem(string mimeType, string path) : base(mimeType, path) { }
     }
     */
-
+    #endregion
 }
