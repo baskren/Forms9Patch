@@ -607,7 +607,7 @@ namespace Forms9Patch
                 ((ItemWrapper)BindingContext)?.OnLongPressing(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
         }
 
-        private void OnRightClicked(object sender, RightClickEventArgs e)
+        void OnRightClicked(object sender, RightClickEventArgs e)
         {
             /*
             if (ContentView is ICellSwipeMenus iCellSwipeMenus && (iCellSwipeMenus.StartSwipeMenu.Count>0 || iCellSwipeMenus.EndSwipeMenu.Count>0))
@@ -615,8 +615,8 @@ namespace Forms9Patch
 
             }
             */
-            
-                if (e.Center.X < 100)
+
+            if (e.Center.X < 100)
             {
                 Toast.Create(null, "In the zone.");
                 e.Handled = true;
@@ -625,7 +625,7 @@ namespace Forms9Patch
             {
                 e.Handled = true;
             }
-            
+
         }
 
         #endregion
@@ -730,7 +730,7 @@ namespace Forms9Patch
                 BackgroundColor = item.SelectedCellBackgroundColor;
             else
                 BackgroundColor = Color.Transparent;
-                //BackgroundColor = Color.Orange;
+            //BackgroundColor = Color.Orange;
         }
 
         void UpdateHeights()

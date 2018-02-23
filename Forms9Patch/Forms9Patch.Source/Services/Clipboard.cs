@@ -14,11 +14,11 @@ namespace Forms9Patch
             }
         }
 
-        public static ClipboardData Data
+        public static ClipboardEntry Entry
         {
-            get => Service.Data;
+            get => Service.Entry;
 
-            set => Service.Data = value;
+            set => Service.Entry = value;
         }
     }
 }

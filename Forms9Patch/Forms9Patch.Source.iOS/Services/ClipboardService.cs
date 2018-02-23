@@ -9,14 +9,14 @@ namespace Forms9Patch.iOS
 {
     public class ClipboardService : Forms9Patch.IClipboardService
     {
-        public ClipboardData Data
+        public ClipboardEntry Entry
         {
             get
             {
                 var items = UIPasteboard.General.Items[0]; //UIPasteboard.General.GetDictionaryOfValuesFromKeys(new NSString[] { new NSString("public.html") });
                 var plainText = items["public.utf8-plain-text"] as NSString;
                 var htmlText = items["public.html"] as NSString;
-                var result = new ClipboardData
+                var result = new ClipboardEntry
                 {
                     PlainText = plainText,
                     HtmlText = htmlText,
