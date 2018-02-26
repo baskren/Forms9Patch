@@ -86,12 +86,12 @@ namespace Forms9Patch
             return null;
         }
 
-        public void AddItem<T>(string mimeType, T item)
+        public void AddValue<T>(string mimeType, T value)
         {
-            _items.Add(new ClipboardEntryItem<T>(mimeType, item));
+            _items.Add(new ClipboardEntryItem<T>(mimeType, value));
         }
 
-        public void AddOnDemandItem<T>(string mimeType, Func<T> onDemandFunction)
+        public void AddOnDemandValue<T>(string mimeType, Func<T> onDemandFunction)
         {
             _items.Add(new LazyClipboardEntryItem<T>(mimeType, onDemandFunction));
         }
@@ -136,7 +136,7 @@ namespace Forms9Patch
 
         class PlaceholderEntryItem : ClipboardEntryItem<string>
         {
-            public PlaceholderEntryItem(string mimeType, string item) : base(mimeType, item) { }
+            public PlaceholderEntryItem(string mimeType, string value) : base(mimeType, value) { }
         }
     }
     #endregion
@@ -146,7 +146,7 @@ namespace Forms9Patch
     {
         string MimeType { get; }
 
-        object Item { get; }
+        object Value { get; }
 
         Type Type { get; }
     }
@@ -165,9 +165,9 @@ namespace Forms9Patch
     {
         public static bool ValidEntryItemType(Type type)
         {
-            if (type == typeof(byte))
-                return true;
             if (type == typeof(byte[]))
+                return true;
+            if (type == typeof(byte))
                 return true;
             if (type == typeof(char))
                 return true;
@@ -192,10 +192,11 @@ namespace Forms9Patch
             if (type == typeof(string))
                 return true;
             var typeInfo = type.GetTypeInfo();
+            //if (item.Value is IList ilist && typeInfo.IsGenericType)
             if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)) && typeInfo.IsGenericType)
             {
                 var elementType = typeInfo.GenericTypeArguments[0];
-                if (elementType == typeof(string))
+                if (elementType == typeof(string))  // need to do this because string is an IEnumerable
                     return true;
                 if (elementType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IEnumerable)))
                     return false;
@@ -210,7 +211,7 @@ namespace Forms9Patch
         public string MimeType { get; protected set; }
 
         object _item;
-        public virtual object Item
+        public virtual object Value
         {
             get => _item;
             protected set => _item = value;
@@ -238,16 +239,16 @@ namespace Forms9Patch
     public class ClipboardEntryItem<T> : ClipboardItemBase<T>
     {
 
-        public ClipboardEntryItem(string mimeType, T item) : base(mimeType)
+        public ClipboardEntryItem(string mimeType, T value) : base(mimeType)
         {
-            Item = item;
+            Value = value;
         }
     }
 
     public class LazyClipboardEntryItem<T> : ClipboardItemBase<T>
     {
         readonly Func<T> _onDemandFunction;
-        public override object Item => _onDemandFunction.Invoke();
+        public override object Value => _onDemandFunction.Invoke();
 
         public LazyClipboardEntryItem(string mimeType, Func<T> onDemandFunction) : base(mimeType)
         {

@@ -51,7 +51,7 @@ namespace Forms9Patch.Droid
                 }
             }
 
-            public object Item
+            public object Value
             {
                 get
                 {
@@ -400,8 +400,8 @@ namespace Forms9Patch.Droid
             if (item == null)
                 return null;
             if (item.Type.ToAndroidFieldType() != FieldType.Null)
-                return new PrimativeCursor(item.MimeType, item.Item);
-            if (item.Type is IList list && item.Type.IsGenericType)
+                return new PrimativeCursor(item.MimeType, item.Value);
+            if (item.Value is IList list && item.Type.IsGenericType)
             {
                 var elementType = item.Type.GetElementType();
                 var fieldType = elementType.ToAndroidFieldType();

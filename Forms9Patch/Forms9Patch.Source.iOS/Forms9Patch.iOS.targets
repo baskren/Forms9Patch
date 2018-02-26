@@ -27,6 +27,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
       <Link>Extensions\FormattedStringExtensions.cs</Link>
     </Compile>
+    <!--Compile Include="..\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs">
+      <Link>Extensions\NSObjectExtensions.cs</Link>
+    </Compile-->
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
       <Link>Extensions\UITextViewExtensions.cs</Link>
     </Compile>
@@ -51,9 +54,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
+    <!--Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
       <Link>Services\ClipboardService.cs</Link>
-    </Compile>
+    </Compile-->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>
     </Compile>
