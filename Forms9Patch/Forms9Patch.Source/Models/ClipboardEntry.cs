@@ -171,16 +171,16 @@ namespace Forms9Patch
                 return true;
             if (type == typeof(char))
                 return true;
-            if (type == typeof(ushort))
-                return true;
+            //if (type == typeof(ushort))
+            //    return true;
             if (type == typeof(short))
                 return true;
-            if (type == typeof(uint))
-                return true;
+            //if (type == typeof(uint))
+            //    return true;
             if (type == typeof(int))
                 return true;
-            if (type == typeof(ulong))
-                return true;
+            //if (type == typeof(ulong))
+            //    return true;
             if (type == typeof(long))
                 return true;
             if (type == typeof(float))

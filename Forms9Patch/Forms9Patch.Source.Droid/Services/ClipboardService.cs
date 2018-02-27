@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using Java.Nio.FileNio;
 using System.Collections;
 using System.IO;
+using System.Linq;
+using Android.OS;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ClipboardService))]
 namespace Forms9Patch.Droid
@@ -57,21 +59,53 @@ namespace Forms9Patch.Droid
                 {
                     if (Cursor.Count == 0)
                         return null;
+                    var typeString = Cursor.Extras.GetString("CSharpType");
+                    Type type = null;
+                    if (!string.IsNullOrWhiteSpace(typeString))
+                        type = Type.GetType(typeString);
                     if (Cursor.Count == 1)
+                        return GetCursorItem(0, type);
+                    if (type != null)
                     {
-                        switch (Cursor.GetType(0))
+                        var ilist = (IList)Activator.CreateInstance(type);
+                        var itemsTypeString = Cursor.Extras.GetString("CSharpItemsType");
+                        var itemsType = Type.GetType(itemsTypeString);
+                        for (int i = 0; i < Cursor.Count; i++)
+                            ilist.Add(GetCursorItem(i, itemsType));
+                        return ilist;
+                    }
+                    try
+                    {
+                        var ilist = new List<object>();
+                        var fieldTypes = new List<FieldType>();
+                        for (int i = 0; i < Cursor.Count; i++)
                         {
-                            case FieldType.Blob:
-                                return Cursor.GetBlob(0);
-                            case FieldType.Float:
-                                return Cursor.GetDouble(0);
-                            case FieldType.Integer:
-                                return Cursor.GetInt(0);
-                            case FieldType.Null:
-                                return null;
-                            case FieldType.String:
-                                return Cursor.GetString(0);
+                            ilist.Add(GetCursorItem(i));
+                            fieldTypes.Add(Cursor.GetType(i));
                         }
+                        bool allSame = true;
+                        FieldType fieldType = fieldTypes[0];
+                        for (int i = 1; i < Cursor.Count; i++)
+                            if (fieldTypes[i] != fieldType)
+                            {
+                                allSame = false;
+                                break;
+                            }
+                        if (!allSame)
+                            return ilist;
+                        var itemType = fieldType.ToCSharpType();
+                        if (itemType.IsGenericType)
+                            return ilist;
+                        var listType = typeof(List<>);
+                        var constructedListType = listType.MakeGenericType(itemType);
+                        var result = (IList)Activator.CreateInstance(constructedListType);
+                        foreach (var item in ilist)
+                            result.Add(item);
+                        return result;
+                    }
+                    catch (Exception)
+                    {
+
                     }
                     return null;
                 }
@@ -97,15 +131,69 @@ namespace Forms9Patch.Droid
 
             Type DetermineType()
             {
+                var typeString = Cursor.Extras.GetString("CSharpType");
+                if (!string.IsNullOrWhiteSpace(typeString))
+                    return Type.GetType(typeString);
+
                 if (Cursor.ColumnCount == 0)
                     return null;
+
                 if (Cursor.ColumnCount == 1)
                 {
-                    var type = Cursor.GetType(0).ToCSharpType();
-                    return type;
+                    if (Cursor.Count == 0)
+                        return null;
+                    if (Cursor.Count == 1)
+                        return Cursor.GetType(0).ToCSharpType();
+                    var fieldTypes = new List<FieldType>();
+                    for (int i = 0; i < Cursor.Count; i++)
+                        fieldTypes.Add(Cursor.GetType(i));
+                    bool allSame = true;
+                    FieldType fieldType = fieldTypes[0];
+                    for (int i = 1; i < Cursor.Count; i++)
+                        if (fieldTypes[i] != fieldType)
+                        {
+                            allSame = false;
+                            break;
+                        }
+                    if (!allSame)
+                        return typeof(object);
+                    return fieldType.ToCSharpType();
                 }
-                for (int i = 0; i < Cursor.ColumnCount; i++)
-                    System.Diagnostics.Debug.WriteLine("column[" + i + "] type=[" + Cursor.GetType(i) + "]");
+
+                return null;
+            }
+
+            object GetCursorItem(int index, Type type = null)
+            {
+                Cursor.MoveToPosition(index);
+                if (type == typeof(bool))
+                    return Cursor.GetInt(index) == 1;
+                if (type == typeof(char))
+                    return (char)Cursor.GetShort(index);
+                if (type == typeof(short))
+                    return Cursor.GetShort(index);
+                if (type == typeof(long))
+                    return (long)Cursor.GetLong(index);
+                switch (Cursor.GetType(index))
+                {
+                    case FieldType.Blob:
+                        var blob = Cursor.GetBlob(index);
+                        if (blob.Length == 1)
+                        {
+                            if (type == typeof(sbyte))
+                                return (sbyte)blob[0];
+                            return blob[0];
+                        }
+                        return blob;
+                    case FieldType.Float:
+                        return Cursor.GetDouble(index);
+                    case FieldType.Integer:
+                        return Cursor.GetInt(index);
+                    case FieldType.Null:
+                        return null;
+                    case FieldType.String:
+                        return Cursor.GetString(index);
+                }
                 return null;
             }
         }
@@ -151,6 +239,7 @@ namespace Forms9Patch.Droid
                     clipData = ClipData.NewHtmlText(value.Description, value.PlainText, value.HtmlText);
 
                 UriItems.Clear();
+
                 foreach (var item in value.AdditionalItems)
                 {
                     // here is where we would detect if the item is a FilePathEntryItem or the item.Type is a System.IO.File and then setup things to use a android.support.v4.content.FileProvider
@@ -186,13 +275,23 @@ namespace Forms9Patch.Droid
             _mimeType = mimeType;
             _fieldType = itemsType.ToAndroidFieldType();
             _itemsType = itemsType;
+            Bundle bundle = new Bundle();
+            bundle.PutString("CSharpType", list.GetType().FullName);
+            bundle.PutString("CSharpItemsType", itemsType.FullName);
+            Extras = bundle;
+            if (itemsType == typeof(byte) || itemsType == typeof(sbyte))
+            {
+                _list = new List<byte[]>();
+                foreach (byte item in list)
+                    _list.Add(new byte[] { (byte)item });
+            }
         }
 
         public override int Count => _list.Count;
 
         public override string[] GetColumnNames()
         {
-            return new string[] { _mimeType };
+            return new string[] { _itemsType.FullName };
         }
 
         public override double GetDouble(int column)
@@ -211,23 +310,19 @@ namespace Forms9Patch.Droid
 
         public override int GetInt(int column)
         {
-            if (_fieldType == FieldType.Integer || _fieldType == FieldType.Integer)
+            if (_fieldType == FieldType.Integer)
                 return (int)_list[Position];
             throw new InvalidCastException("itemsType [" + _itemsType + "] cannot be cast to int");
         }
 
         public override long GetLong(int column)
         {
-            if (_fieldType == FieldType.Integer || _fieldType == FieldType.Integer)
-                return (long)_list[Position];
-            throw new InvalidCastException("itemsType [" + _itemsType + "] cannot be cast to long");
+            return (long)_list[Position];
         }
 
         public override short GetShort(int column)
         {
-            if (_fieldType == FieldType.Integer || _fieldType == FieldType.Integer)
-                return (short)_list[Position];
-            throw new InvalidCastException("itemsType [" + _itemsType + "] cannot be cast to short");
+            return (short)_list[Position];
         }
 
         public override string GetString(int column)
@@ -241,16 +336,55 @@ namespace Forms9Patch.Droid
         {
             return _list[Position] == null;
         }
+
+        public override FieldType GetType(int column)
+        {
+            if (_itemsType == null)
+                return FieldType.Null;
+            var fieldType = _itemsType.ToAndroidFieldType();
+            if (fieldType != FieldType.Null)
+                return fieldType;
+            return FieldType.String;
+        }
     }
 
     class PrimativeCursor : AbstractCursor
     {
         readonly object _primative;
+        readonly Type _primativeType;
         readonly string _mimeType;
 
         public PrimativeCursor(string mimeType, object primative)
         {
             _primative = primative;
+            _primativeType = primative.GetType();
+            Bundle bundle = new Bundle();
+            bundle.PutString("CSharpType", _primativeType.FullName);
+            Extras = bundle;
+            /*
+            if (_primativeType == typeof(bool))
+            {
+                var byteValue = (byte)(((bool)_primative) ? 0x1 : 0x0);
+                _primative = new byte[] { (byte)primative };
+            }
+            */
+            if (_primativeType == typeof(byte) || _primativeType == typeof(sbyte))
+            {
+                var byteValue = (byte)primative;
+                _primative = new byte[] { (byte)primative };
+            }
+            /*
+            else if (_primativeType == typeof(char))
+            {
+                var charValue = (char)primative;
+                _primative = BitConverter.GetBytes(charValue);
+            }
+            else if (_primativeType == typeof(short) || _primativeType == typeof(ushort))
+            {
+                var shortValue = (short)primative;
+                _primative = BitConverter.GetBytes(shortValue);
+            }
+            */
             if (primative.GetType().ToAndroidFieldType() == FieldType.Null && primative != null)
             {
                 throw new InvalidDataException("PrimativeCursor does not work with [" + primative.GetType() + "]");
@@ -264,32 +398,33 @@ namespace Forms9Patch.Droid
 
         public override string[] GetColumnNames()
         {
-            return new string[] { _mimeType };
+            return new string[] { _primativeType.FullName };
         }
 
         public override double GetDouble(int column)
         {
-            return (double)_primative;
+            return Convert.ToDouble(_primative);
         }
 
         public override float GetFloat(int column)
         {
-            return (float)_primative;
+            return Convert.ToSingle(_primative);
         }
 
         public override int GetInt(int column)
         {
-            return (int)_primative;
+            var result = Convert.ToInt32(_primative);
+            return Convert.ToInt32(_primative);
         }
 
         public override long GetLong(int column)
         {
-            return (long)_primative;
+            return Convert.ToInt64(_primative);
         }
 
         public override short GetShort(int column)
         {
-            return (short)_primative;
+            return Convert.ToInt16(_primative);
         }
 
         public override string GetString(int column)
@@ -403,10 +538,10 @@ namespace Forms9Patch.Droid
                 return new PrimativeCursor(item.MimeType, item.Value);
             if (item.Value is IList list && item.Type.IsGenericType)
             {
-                var elementType = item.Type.GetElementType();
-                var fieldType = elementType.ToAndroidFieldType();
-                if (fieldType != FieldType.Null)
-                    return new IListCursor(item.MimeType, list, elementType);
+                var elementType = item.Type.GenericTypeArguments[0];
+                //var fieldType = elementType.ToAndroidFieldType();
+                //if (fieldType != FieldType.Null)
+                return new IListCursor(item.MimeType, list, elementType);
             }
             return null;
         }
