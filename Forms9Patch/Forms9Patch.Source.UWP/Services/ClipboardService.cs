@@ -13,12 +13,33 @@ namespace Forms9Patch.UWP
 {
     public class ClipboardService : Forms9Patch.IClipboardService
     {
+        public ClipboardService()
+        {
+            Windows.ApplicationModel.DataTransfer.Clipboard.ContentChanged += (sender, e) =>
+            {
+                if (!_lastChangedByThis)
+                    _lastEntry = null;
+                _lastChangedByThis = false;
+                Clipboard.OnContentChanged(this, EventArgs.Empty);
+            };
+        }
+
+        private void Clipboard_ContentChanged(object sender, object e)
+        {
+            throw new NotImplementedException();
+        }
+
         public Windows.ApplicationModel.DataTransfer.DataPackage DataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
 
+        ClipboardEntry _lastEntry = null;
+        bool _lastChangedByThis = false;
+        
         public ClipboardEntry Entry
         {
             get
             {
+                if (_lastEntry != null)
+                    return _lastEntry;
                 var result = new ClipboardEntry();
                 var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
                 if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text))
@@ -46,6 +67,7 @@ namespace Forms9Patch.UWP
                     var item = (IClipboardEntryItem)Activator.CreateInstance(constructedListType, new object [] { key,value });
                     result.AdditionalItems.Add(item);
                 }
+                _lastEntry = result;
                 return result;
             }
             set
@@ -74,6 +96,8 @@ namespace Forms9Patch.UWP
                     else
                         properties.Add(formatId, item.Value);
                 }
+                _lastEntry = value;
+                _lastChangedByThis = true;
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }
@@ -149,55 +173,6 @@ namespace Forms9Patch.UWP
         {
             return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
         }
-        /*
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(bool obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(char obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(short obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(int obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(long obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(float obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(double obj)
-        {
-            var arr = BitConverter.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-
-        internal static RandomAccessStreamReference ToRandomAccessStreamReference(string obj)
-        {
-            var arr = System.Text.Encoding.Unicode.GetBytes(obj);
-            return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
-        }
-        */
     }
 
     static class DataPackageViewExtensions

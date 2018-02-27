@@ -27,5 +27,14 @@ namespace Forms9Patch
             set => Service.Entry = value;
         }
 
+        /// <summary>
+        /// Event fired when the content on the clipboard has changed
+        /// </summary>
+        public static event EventHandler ContentChanged;
+
+        internal static void OnContentChanged(object sender, EventArgs args)
+        {
+            ContentChanged?.Invoke(null, args);
+        }
     }
 }
