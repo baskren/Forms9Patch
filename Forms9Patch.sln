@@ -520,6 +520,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{110D2C00-17C6-466B-B5EF-44501BC3E9FF}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Services\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\ClipboardService.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\DisplayService-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\DisplayService-DELETEME.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs
@@ -572,6 +573,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5054117B-CB9C-4223-A2E1-44E7D46DA04D}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Services\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\ClipboardService.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\DescendentBounds.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\FontService.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs
@@ -625,6 +627,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9E8657C9-0040-4EA7-9C8B-B811D102AF8E}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs
+		Forms9Patch\Forms9Patch.Source.UWP\Services\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\ClipboardService.cs
 		Forms9Patch\Forms9Patch.Source.UWP\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\DescendentBounds.cs
 		Forms9Patch\Forms9Patch.Source.UWP\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\FontService.cs
 		Forms9Patch\Forms9Patch.Source.UWP\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.UWP\Services\HtmlToPngService.cs

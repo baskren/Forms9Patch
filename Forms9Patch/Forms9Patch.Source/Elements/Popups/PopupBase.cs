@@ -368,6 +368,9 @@ namespace Forms9Patch
         internal BoxView PageOverlay { get { return _pageOverlay; } }
 
         #region ContentView property
+        /// <summary>
+        /// What is the decorative container view for the popup (BubbleLayout, Frame)?
+        /// </summary>
         internal protected View DecorativeContainerView
         {
             get { return (View)_decorativeContainerView; }

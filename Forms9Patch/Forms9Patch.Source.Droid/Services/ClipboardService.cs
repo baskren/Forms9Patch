@@ -238,6 +238,7 @@ namespace Forms9Patch.Droid
                 else
                     clipData = ClipData.NewHtmlText(value.Description, value.PlainText, value.HtmlText);
 
+
                 UriItems.Clear();
 
                 foreach (var item in value.AdditionalItems)

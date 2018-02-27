@@ -2,6 +2,9 @@ using System;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Forms9Patch.Clipboard class
+    /// </summary>
     public static class Clipboard
     {
         static IClipboardService _service;
@@ -14,6 +17,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Gets/Sets the current Entry on the clipboard
+        /// </summary>
         public static ClipboardEntry Entry
         {
             get => Service.Entry;

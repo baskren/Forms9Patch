@@ -5,6 +5,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Forms9Patch.TargetedMenu class 
+    /// </summary>
     [ContentProperty("Segments")]
     public class TargetedMenu : BubblePopup
     {
@@ -221,6 +224,10 @@ namespace Forms9Patch
 
 
         #region PropertyChange handlers
+        /// <summary>
+        /// A property changed.  Let's deal with it.
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -404,7 +411,9 @@ namespace Forms9Patch
 
 
         #region Events
-
+        /// <summary>
+        /// Event fired with a menu item (segment) has been tapped
+        /// </summary>
         public event SegmentedControlEventHandler SegmentTapped;
         void OnButtonTapped(object sender, System.EventArgs e)
         {
