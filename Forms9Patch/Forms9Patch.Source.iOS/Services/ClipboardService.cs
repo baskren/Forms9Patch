@@ -24,18 +24,19 @@ namespace Forms9Patch.iOS
             UIPasteboard.Notifications.ObserveRemoved(OnPasteboardChanged);
         }
 
-        private static void OnPasteboardChanged(object sender, UIPasteboardChangeEventArgs e)
+        static void OnPasteboardChanged(object sender, UIPasteboardChangeEventArgs e)
         {
             Forms9Patch.Clipboard.OnContentChanged(null, EventArgs.Empty);
         }
 
+        #region Entry property
         nint _changeCount = int.MinValue;
         ClipboardEntry _lastEntry = null;
         public ClipboardEntry Entry
         {
             get
             {
-                if (_changeCount == UIPasteboard.General.ChangeCount)
+                if (EntryCaching && _changeCount == UIPasteboard.General.ChangeCount)
                     return _lastEntry;
 
                 var stopWatch = new Stopwatch();
@@ -121,6 +122,11 @@ namespace Forms9Patch.iOS
                         var nsArray = ilist.ToNSArray();
                         keyedArchive = NSKeyedArchiver.ArchivedDataWithRootObject(nsArray);
                     }
+                    else if (item.Value is IDictionary dictionary && typeInfo.IsGenericType)
+                    {
+                        var nsDictionary = dictionary.ToNSDictionary();
+                        keyedArchive = NSKeyedArchiver.ArchivedDataWithRootObject(nsDictionary);
+                    }
                     else
                     {
                         var nsObject = NSObject.FromObject(item.Value);
@@ -178,6 +184,11 @@ namespace Forms9Patch.iOS
             }
         }
 
+        public bool EntryCaching { get; set; } = true;
+
+        #endregion
+
+        #region ReturnClipboadEntryItem
         class ReturnClipboardEntryItem : IClipboardEntryItem
         {
             public string MimeType { get; private set; }
@@ -202,8 +213,7 @@ namespace Forms9Patch.iOS
                 Type = tuple.Item2;
             }
         }
-
-
+        #endregion
     }
 
     static class IClipboardEntryItemExtensions

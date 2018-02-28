@@ -159,7 +159,7 @@ namespace Forms9Patch
             if (mimeType == "text/html" && HtmlText != null)
                 return new PlaceholderEntryItem(mimeType, HtmlText);
             foreach (var item in _items)
-                if (item.MimeType == mimeType)
+                if (item.MimeType.ToLower() == mimeType.ToLower())
                     return item;
             return null;
         }

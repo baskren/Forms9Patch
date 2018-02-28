@@ -4,9 +4,9 @@
 	<ItemGroup>
 
 		<!-- CLIPBOARD -->
-		<!--Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
+		<Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
 			<Link>Services\ClipboardService.cs</Link>
-		</Compile-->
+		</Compile>
 
 
 		<!-- EFFECTS -->

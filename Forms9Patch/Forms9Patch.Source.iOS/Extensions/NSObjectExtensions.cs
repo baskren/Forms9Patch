@@ -10,17 +10,42 @@ using ObjCRuntime;
 using CoreFoundation;
 using EventKit;
 using System.Runtime.Serialization;
+using System.Linq;
 
 namespace Forms9Patch.iOS
 {
     public static class NSObjectExtensions
     {
+        public static NSDictionary ToNSDictionary(this IDictionary dictionary)
+        {
+            var dictionaryType = dictionary.GetType();
+            if (!dictionaryType.IsGenericType)
+                throw new Exception("Only works with Generic IDictionary objects");
+            var genericArgs = dictionaryType.GetGenericArguments();
+            if (genericArgs[0] != typeof(string))
+                throw new Exception("Only works with Dictionary<string,T> objects");
+            var nsDictionary = new NSMutableDictionary();
+            foreach (var key in dictionary.Keys)
+            {
+                var nsItem = NSObject.FromObject(dictionary[key]);
+                nsDictionary.Add(new NSString(key.ToString()), nsItem);
+            }
+            return nsDictionary;
+        }
+
+
         public static NSArray ToNSArray(this IList list)
         {
             var nsArray = new NSMutableArray();
+            var arrayType = list.GetType();
+            bool isArrayOfDictionaries = arrayType.IsGenericType && arrayType.GetGenericArguments()[0].GetTypeInfo().ImplementedInterfaces.Contains(typeof(IDictionary));
             foreach (var item in list)
             {
-                var nsItem = NSObject.FromObject(item);
+                NSObject nsItem = null;
+                if (isArrayOfDictionaries)
+                    nsItem = ((IDictionary)item).ToNSDictionary();
+                else
+                    nsItem = NSObject.FromObject(item);
                 nsArray.Add(nsItem);
             }
             return nsArray;
@@ -52,6 +77,54 @@ namespace Forms9Patch.iOS
         //          DateTime,
         //          String = 18
         //      }
+
+        public static Tuple<object, Type> ToDictionary(this NSDictionary nsDictionary)
+        {
+            var keyList = new List<string>();
+            var valueList = new List<object>();
+            var typeList = new List<Type>();
+
+            foreach (var key in nsDictionary.Keys)
+            {
+                keyList.Add(key.ToString());
+                try
+                {
+                    var nsObj = nsDictionary[key];
+                    var tuple = nsObj.ToObject();
+                    valueList.Add(tuple.Item1);
+                    typeList.Add(tuple.Item2);
+                }
+                catch (Exception)
+                {
+                    valueList.Add(null);
+                    typeList.Add(null);
+                }
+            }
+            bool allSame = true;
+            if (typeList.Count > 1)
+            {
+                for (int i = 1; i < typeList.Count; i++)
+                    if (typeList[i] != typeList[0])
+                    {
+                        allSame = false;
+                        break;
+                    }
+            }
+            if (typeList.Count > 0)
+            {
+                var dictionaryType = typeof(Dictionary<,>);
+                var elementType = allSame && typeList[0] != null ? typeList[0] : typeof(object);
+                var constructedDictionaryType = dictionaryType.MakeGenericType(typeof(string), elementType);
+                var result = (IDictionary)Activator.CreateInstance(constructedDictionaryType);
+                //var result = Convert.ChangeType(itemList, constructedListType);  // List is not IConvertable
+                for (int i = 0; i < keyList.Count; i++)
+                {
+                    result.Add(keyList[i].ToString(), valueList[i]);
+                }
+                return new Tuple<object, Type>(result, constructedDictionaryType);
+            }
+            return new Tuple<object, Type>(null, typeof(Dictionary<string, object>));
+        }
 
         public static Tuple<object, Type> ToList(this NSArray nsArray)
         {
@@ -93,9 +166,9 @@ namespace Forms9Patch.iOS
                 //var result = Convert.ChangeType(itemList, constructedListType);  // List is not IConvertable
                 foreach (var item in itemList)
                     result.Add(item);
-                return new Tuple<object, Type>(result, typeList[0]);
+                return new Tuple<object, Type>(result, constructedListType);
             }
-            return new Tuple<object, Type>(itemList, typeof(object));
+            return new Tuple<object, Type>(itemList, typeof(List<object>));
         }
 
         public static bool Implements(this Type type, Type requestedInterface)
@@ -109,6 +182,44 @@ namespace Forms9Patch.iOS
 
         public static Tuple<object, Type> ToObject(this NSObject nsO, Type type)
         {
+            if (nsO is NSDictionary nsDictionary)
+            {
+                if (type == null)
+                {
+                    var tuple = nsDictionary.ToDictionary();
+                    return tuple;
+                }
+                if (type.Implements(typeof(IDictionary)))
+                {
+                    IDictionary result;
+                    Type genericType;
+                    if (type.IsGenericType)
+                    {
+                        result = Activator.CreateInstance(type) as IDictionary;
+                        genericType = type.GetTypeInfo().GenericTypeArguments[1];
+                    }
+                    else
+                    {
+                        result = new Dictionary<string, object>();
+                        genericType = typeof(object);
+                    }
+                    foreach (var key in nsDictionary.Keys)
+                    {
+                        try
+                        {
+                            var nsObj = nsDictionary[key];
+                            var tuple = nsObj.ToObject();
+                            result.Add(key.ToString(), tuple.Item1);
+                        }
+                        catch (Exception)
+                        {
+                            result.Add(key.ToString(), null);
+                        }
+                    }
+                    return new Tuple<object, Type>(result, type);
+                }
+                throw new InvalidDataContractException("Cannot reliablity convert NSDictionary to type [" + type + "].");
+            }
             if (nsO is NSArray nsArray)
             {
                 if (type == null)
