@@ -3,6 +3,14 @@
 
   <ItemGroup>
 
+    <!-- CLIPBOARD -->
+    <Compile Include="..\Forms9Patch.Source\Clipboard\Clipboard.cs" Link="Clipboard\Clipboard.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntry.cs" Link="Clipboard\ClipboardEntry.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntryItem.cs" Link="Clipboard\ClipboardEntryItem.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntry.cs" Link="Clipboard\IClipboardEntry.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntryItem.cs" Link="Clipboard\IClipboardEntryItem.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardService.cs" Link="Clipboard\IClipboardService.cs" />
+
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs" Link="Effects\SliderStepSizeEffect.cs" />
@@ -119,7 +127,6 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\IBubblePopup.cs" Link="Interfaces\IBubblePopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IButton.cs" Link="Interfaces\IButton.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IButtonState.cs" Link="Interfaces\IButtonState.cs" />
-    <Compile Include="..\Forms9Patch.Source\Interfaces\IClipboardService.cs" Link="Interfaces\IClipboardService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IDescendentBounds.cs" Link="Interfaces\IDescendentBounds.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IElement.cs" Link="Interfaces\IElement.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IFontElement.cs" Link="Interfaces\IFontElement.cs" />
@@ -153,7 +160,6 @@
 
     <!-- Models -->
     <Compile Include="..\Forms9Patch.Source\Models\ButtonState.cs" Link="Models\ButtonState.cs" />
-    <Compile Include="..\Forms9Patch.Source\Models\ClipboardEntry.cs" Link="Models\ClipboardEntry.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\F9PFormattedString.cs" Link="Models\F9PFormattedString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\HTMLMarkupString.cs" Link="Models\HTMLMarkupString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\ImageSource.cs" Link="Models\ImageSource.cs" />
@@ -166,7 +172,6 @@
 
     <!-- Services -->
     <Compile Include="..\Forms9Patch.Source\Services\ApplicationInfoService.cs" Link="Services\ApplicationInfoService.cs" />
-    <Compile Include="..\Forms9Patch.Source\Services\Clipboard.cs" Link="Services\Clipboard.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\Display.cs" Link="Services\Display.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\KeyboardService.cs" Link="Services\KeyboardService.cs" />
     <Compile Include="..\Forms9Patch.Source\Services\KeyClicksService.cs" Link="Services\KeyClicksService.cs" />

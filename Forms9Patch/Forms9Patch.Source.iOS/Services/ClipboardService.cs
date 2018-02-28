@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.IO;
 using System.Reflection;
+using System.Diagnostics;
 
 [assembly: Dependency(typeof(Forms9Patch.iOS.ClipboardService))]
 namespace Forms9Patch.iOS
@@ -17,10 +18,29 @@ namespace Forms9Patch.iOS
     {
         static NSString TypeListUti = new NSString(UTType.CreatePreferredIdentifier(UTType.TagClassMIMEType, "application/f9p-clipboard-typelist", null));
 
+        static ClipboardService()
+        {
+            UIPasteboard.Notifications.ObserveChanged(OnPasteboardChanged);
+            UIPasteboard.Notifications.ObserveRemoved(OnPasteboardChanged);
+        }
+
+        private static void OnPasteboardChanged(object sender, UIPasteboardChangeEventArgs e)
+        {
+            Forms9Patch.Clipboard.OnContentChanged(null, EventArgs.Empty);
+        }
+
+        nint _changeCount = int.MinValue;
+        ClipboardEntry _lastEntry = null;
         public ClipboardEntry Entry
         {
             get
             {
+                if (_changeCount == UIPasteboard.General.ChangeCount)
+                    return _lastEntry;
+
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+
                 var items = UIPasteboard.General.Items[0]; //UIPasteboard.General.GetDictionaryOfValuesFromKeys(new NSString[] { new NSString("public.html") });
                 var plainText = items["public.utf8-plain-text"] as NSString;
                 var htmlText = items["public.html"] as NSString;
@@ -62,10 +82,18 @@ namespace Forms9Patch.iOS
                         result.AdditionalItems.Add(entryItem);
                     }
                 }
+
+                stopWatch.Stop();
+                System.Diagnostics.Debug.WriteLine("SET: " + stopWatch.ElapsedMilliseconds);
+
+                _changeCount = UIPasteboard.General.ChangeCount;
+                _lastEntry = result;
                 return result;
             }
             set
             {
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
                 var items = new NSMutableDictionary();
                 var typeDictionary = new NSMutableDictionary();
                 if (!string.IsNullOrEmpty(value.PlainText))
@@ -73,9 +101,13 @@ namespace Forms9Patch.iOS
                 if (!string.IsNullOrEmpty(value.HtmlText))
                     items.Add(new NSString("public.html"), new NSString(value.HtmlText));
 
-
+                int t = 0;
+                long lastT = 0;
                 foreach (var item in value.AdditionalItems)
                 {
+                    var tMark = stopWatch.ElapsedMilliseconds;
+                    System.Diagnostics.Debug.WriteLine("tMark[" + (t++) + "]=[" + tMark + "] elapsed=[" + (tMark - lastT) + "]");
+                    lastT = tMark;
                     NSData keyedArchive = null;
                     var nsUti = item.ToNsUti();
                     var typeInfo = item.Type.GetTypeInfo();
@@ -120,8 +152,29 @@ namespace Forms9Patch.iOS
                         items.Add(nsUti, NSObject.FromObject(item.Value));
                         */
                 }
+                var tX = stopWatch.ElapsedMilliseconds;
+                System.Diagnostics.Debug.WriteLine("tX=[" + tX + "] elapsedT=[" + (tX - lastT) + "]");
+                lastT = tX;
+
                 items.Add(TypeListUti, NSKeyedArchiver.ArchivedDataWithRootObject(typeDictionary));
+
+                var tY = stopWatch.ElapsedMilliseconds;
+                System.Diagnostics.Debug.WriteLine("tY=[" + tY + "] elapsedT=[" + (tY - lastT) + "]");
+                lastT = tY;
+
+                var changeCount = UIPasteboard.General.ChangeCount;
+
                 UIPasteboard.General.Items = new NSDictionary[] { items };
+
+                var tZ = stopWatch.ElapsedMilliseconds;
+                System.Diagnostics.Debug.WriteLine("tZ=[" + tZ + "] elapsedT=[" + (tZ - lastT) + "]");
+                lastT = tZ;
+
+                _lastEntry = value;
+                _changeCount = UIPasteboard.General.ChangeCount;
+
+                stopWatch.Stop();
+                System.Diagnostics.Debug.WriteLine("SET: " + stopWatch.ElapsedMilliseconds);
             }
         }
 

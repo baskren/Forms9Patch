@@ -24,16 +24,11 @@ namespace Forms9Patch.UWP
             };
         }
 
-        private void Clipboard_ContentChanged(object sender, object e)
-        {
-            throw new NotImplementedException();
-        }
-
         public Windows.ApplicationModel.DataTransfer.DataPackage DataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
 
         ClipboardEntry _lastEntry = null;
         bool _lastChangedByThis = false;
-        
+
         public ClipboardEntry Entry
         {
             get
@@ -64,7 +59,7 @@ namespace Forms9Patch.UWP
                     var value = property.Value;
                     var type = value.GetType();
                     var constructedListType = typeof(ClipboardEntryItem<>).MakeGenericType(type);
-                    var item = (IClipboardEntryItem)Activator.CreateInstance(constructedListType, new object [] { key,value });
+                    var item = (IClipboardEntryItem)Activator.CreateInstance(constructedListType, new object[] { key, value });
                     result.AdditionalItems.Add(item);
                 }
                 _lastEntry = result;
@@ -92,7 +87,7 @@ namespace Forms9Patch.UWP
                         dataPackage.SetRtf(item.Value as string);
                     else if (item.Type == typeof(byte[]))
                         dataPackage.SetData(formatId, ToIRandomAccessStream(item.Value as byte[]));
-                        //dataPackage.SetData(formatId, item.Value);
+                    //dataPackage.SetData(formatId, item.Value);
                     else
                         properties.Add(formatId, item.Value);
                 }
@@ -104,31 +99,31 @@ namespace Forms9Patch.UWP
 
         static byte[] GetByteArray(DataPackageView dpv, string formatId)
         {
-            var task = Task<byte[]>.Run( async ()=>
-            {
-                try
-                {
+            var task = Task<byte[]>.Run(async () =>
+           {
+               try
+               {
                     //var reference = (IRandomAccessStreamReference)await dpv.GetDataAsync(formatId);
                     var random = (IRandomAccessStream)await dpv.GetDataAsync(formatId);
                     //return reference as byte[];
 
                     //var random = (Windows.Storage.Streams.IRandomAccessStream)reference.OpenReadAsync();
-                    
+
                     //using (var reader = new DataReader(random.GetInputStreamAt(0)))
                     using (var reader = new DataReader(random))
-                    {
-                        var bytes = new byte[random.Size];
-                        await reader.LoadAsync((uint)random.Size);
-                        reader.ReadBytes(bytes);
-                        return bytes;
-                    }
-                    
-                } 
-                catch (Exception e)
-                {
-                    return null;
-                }
-            });
+                   {
+                       var bytes = new byte[random.Size];
+                       await reader.LoadAsync((uint)random.Size);
+                       reader.ReadBytes(bytes);
+                       return bytes;
+                   }
+
+               }
+               catch (Exception e)
+               {
+                   return null;
+               }
+           });
             return task.Result;
         }
 
@@ -136,11 +131,11 @@ namespace Forms9Patch.UWP
         {
             var task = Task<byte[]>.Run(async () =>
             {
-               var reference = await dpv.GetBitmapAsync();
-               var random = (Windows.Storage.Streams.IRandomAccessStream)reference.OpenReadAsync();
-               Windows.Graphics.Imaging.BitmapDecoder decoder = await Windows.Graphics.Imaging.BitmapDecoder.CreateAsync(random);
-               Windows.Graphics.Imaging.PixelDataProvider pixelData = await decoder.GetPixelDataAsync();
-               return pixelData.DetachPixelData();
+                var reference = await dpv.GetBitmapAsync();
+                var random = (Windows.Storage.Streams.IRandomAccessStream)reference.OpenReadAsync();
+                Windows.Graphics.Imaging.BitmapDecoder decoder = await Windows.Graphics.Imaging.BitmapDecoder.CreateAsync(random);
+                Windows.Graphics.Imaging.PixelDataProvider pixelData = await decoder.GetPixelDataAsync();
+                return pixelData.DetachPixelData();
             });
             return task.Result;
         }
@@ -159,7 +154,7 @@ namespace Forms9Patch.UWP
         {
             if (mime == "image/bmp")
                 return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Bitmap;
-            if (mime== "text/richtext")
+            if (mime == "text/richtext")
                 return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf;
             return mime;
         }

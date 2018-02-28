@@ -3,6 +3,12 @@
 
 	<ItemGroup>
 
+		<!-- CLIPBOARD -->
+		<!--Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
+			<Link>Services\ClipboardService.cs</Link>
+		</Compile-->
+
+
 		<!-- EFFECTS -->
 		<Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">
 			<Link>Effects\CustomFontEffect.cs</Link>
@@ -25,9 +31,9 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs">
 			<Link>Extensions\MeasureSpecFactory.cs</Link>
 		</Compile>
-		<!--Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
+		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
 			<Link>Extensions\TypeExtensions.cs</Link>
-		</Compile-->
+		</Compile>
 
 
 		<!-- MODELS -->
@@ -67,9 +73,6 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
 			<Link>Services\ApplicationInfoService.cs</Link>
 		</Compile>
-		<!--Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
-			<Link>Services\ClipboardService.cs</Link>
-		</Compile-->
 		<Compile Include="..\Forms9Patch.Source.Droid\Services\DescendentBounds.cs">
 			<Link>Services\DescendentBounds.cs</Link>
 		</Compile>
