@@ -33,7 +33,7 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                if (_lastEntry != null)
+                if (EntryCaching && _lastEntry != null)
                     return _lastEntry;
                 var result = new ClipboardEntry();
                 var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
@@ -96,6 +96,8 @@ namespace Forms9Patch.UWP
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }
+
+        public bool EntryCaching { get; set; } = true;
 
         static byte[] GetByteArray(DataPackageView dpv, string formatId)
         {
