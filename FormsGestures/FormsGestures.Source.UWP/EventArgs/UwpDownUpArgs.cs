@@ -28,6 +28,15 @@ namespace FormsGestures.UWP
             return e.Handled;
         }
 
+        public static bool FireUp(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
+        {
+            var args = new UwpDownUpArgs(element, e);
+            args.Listener = listener;
+            listener.OnUp(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
         public UwpDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
         {
             Cancelled = false;
@@ -45,6 +54,16 @@ namespace FormsGestures.UWP
             e.Handled = args.Handled;
             return e.Handled;
         }
+
+        public static bool FireUp(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
+        {
+            var args = new UwpDownUpArgs(element, e);
+            args.Listener = listener;
+            listener.OnUp(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
 
 
     }

@@ -851,8 +851,6 @@ namespace FormsGestures.UWP
         }
 
         bool _runningTapCounterResetter;
-
-        //private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (!_xfElement.IsVisible || FrameworkElement == null)
@@ -896,9 +894,11 @@ namespace FormsGestures.UWP
                 if (_longPressing && listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
                     break;
 
+            
             foreach (var listener in _listeners)
-                if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
+                if (listener.HandlesDown && UwpDownUpArgs.FireUp(FrameworkElement, e, listener))
                     break;
+                    
              
             _longPressing = false;
 
