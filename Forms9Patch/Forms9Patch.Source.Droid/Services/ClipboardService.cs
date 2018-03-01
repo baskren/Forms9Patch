@@ -36,6 +36,23 @@ namespace Forms9Patch.Droid
         #endregion
 
         #region ReturnClipboardEntryItem
+
+        class ReturnClipboardEntryItem<T> : IClipboardEntryItem<T>
+        {
+            ReturnClipboardEntryItem _source;
+
+            public string MimeType => _source.MimeType;
+            public T Value => (T)_source.Value;
+            public Type Type => _source.Type;
+
+            object IClipboardEntryItem.Value => _source.Value;
+
+            public ReturnClipboardEntryItem(ReturnClipboardEntryItem source)
+            {
+                _source = source;
+            }
+        }
+
         class ReturnClipboardEntryItem : IClipboardEntryItem
         {
             public string MimeType { get; protected set; }
@@ -153,6 +170,7 @@ namespace Forms9Patch.Droid
                 if (Cursor.ColumnCount == 1)
                     return Cursor.GetType(0).ToCSharpType();
 
+                Cursor.MoveToPosition(0);
                 var fieldTypes = new List<FieldType>();
                 for (int i = 0; i < Cursor.ColumnCount; i++)
                     fieldTypes.Add(Cursor.GetType(i));
@@ -256,7 +274,9 @@ namespace Forms9Patch.Droid
                     if (item.Uri != null)
                     {
                         var entryItem = new ReturnClipboardEntryItem(item.Uri);
-                        entry.AdditionalItems.Add(entryItem);
+                        var entryItemType = typeof(ReturnClipboardEntryItem<>).MakeGenericType(entryItem.Type);
+                        var typedEntryItem = (IClipboardEntryItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
+                        entry.AdditionalItems.Add(typedEntryItem);
                     }
                 }
 

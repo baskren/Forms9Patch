@@ -10,12 +10,13 @@ using P42.Utils;
 
 namespace Forms9Patch
 {
-	/// <summary>
+    /// <summary>
     /// Generic Interface for ClipboardEntryITem
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IClipboardEntryItem<T> : IClipboardEntryItem
     {
+        new T Value { get; }
     }
 
 

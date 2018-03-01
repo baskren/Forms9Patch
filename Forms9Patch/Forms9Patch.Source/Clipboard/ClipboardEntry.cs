@@ -152,7 +152,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="mimeType"></param>
         /// <returns></returns>
-        public IClipboardEntryItem GetItem(string mimeType)
+        public IClipboardEntryItem GetUntypedItem(string mimeType)
         {
             if (mimeType == "text/plain" && PlainText != null)
                 return new PlaceholderEntryItem(mimeType, PlainText);
@@ -162,6 +162,19 @@ namespace Forms9Patch
                 if (item.MimeType.ToLower() == mimeType.ToLower())
                     return item;
             return null;
+        }
+
+        /// <summary>
+        /// Get me the item in this ClipboardEntry that has a particular mimeType
+        /// </summary>
+        /// <returns>The item.</returns>
+        /// <param name="mimeType">MIME type.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public IClipboardEntryItem<T> GetItem<T>(string mimeType)
+        {
+            var untypedItem = GetUntypedItem(mimeType);
+            var typedItem = untypedItem as IClipboardEntryItem<T>;
+            return typedItem;
         }
 
         /// <summary>

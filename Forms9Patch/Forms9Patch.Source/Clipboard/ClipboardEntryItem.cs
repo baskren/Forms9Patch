@@ -14,8 +14,14 @@ namespace Forms9Patch
     /// ClipboardEntryItem class
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ClipboardEntryItem<T> : ClipboardItemBase<T>
+    public class ClipboardEntryItem<T> : ClipboardItemBase, IClipboardEntryItem<T>
     {
+        new public T Value
+        {
+            get => (T)base.Value;
+            set => base.Value = value;
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -23,6 +29,9 @@ namespace Forms9Patch
         /// <param name="value"></param>
         public ClipboardEntryItem(string mimeType, T value) : base(mimeType)
         {
+            Type = typeof(T);
+            if (!ClipboardEntry.ValidItemType(Type))
+                throw new ArgumentException("Item type [" + Type + "] is not a valid ClipboardEntryItem type.");
             Value = value;
         }
     }
@@ -30,8 +39,7 @@ namespace Forms9Patch
     /// <summary>
     /// Base class for a ClipboardEntryItem
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class ClipboardItemBase<T> : IClipboardEntryItem<T> //, IPlatformKey
+    public abstract class ClipboardItemBase : IClipboardEntryItem //, IPlatformKey
     {
         /// <summary>
         /// Get the MimeType of this ClipboardEntryItem
@@ -61,9 +69,6 @@ namespace Forms9Patch
         /// <param name="mimeType"></param>
         protected ClipboardItemBase(string mimeType)
         {
-            Type = typeof(T);
-            if (!ClipboardEntry.ValidItemType(Type))
-                throw new ArgumentException("Item type [" + Type + "] is not a valid ClipboardEntryItem type.");
             if (string.IsNullOrWhiteSpace(mimeType))
                 throw new InvalidDataContractException("Empty or null mime type is not allowed.");
             if (mimeType == "text/plain")
