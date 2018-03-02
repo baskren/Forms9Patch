@@ -12,6 +12,16 @@ namespace Forms9Patch.Droid
     {
         InputMethodManager im;
         bool _lastAcceptingText;
+
+        public bool IsHardwareKeyboardActive
+        {
+            get
+            {
+                var activity = Settings.Context as Activity;
+                return activity.Resources.Configuration.HardKeyboardHidden == Android.Content.Res.HardKeyboardHidden.No;
+            }
+        }
+
         public void Hide()
         {
             im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;

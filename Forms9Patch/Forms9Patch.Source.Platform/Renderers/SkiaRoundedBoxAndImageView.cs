@@ -22,6 +22,8 @@ namespace Forms9Patch.iOS
     public class SkiaRoundedBoxAndImageView : SKCanvasView, IDisposable
 
 #elif __DROID__
+using Android.Runtime;
+using Android.Views;
 using SkiaSharp.Views.Android;
 using Android.Sax;
 using Xamarin.Forms;
@@ -244,10 +246,30 @@ internal Xamarin.Forms.Size SourceImageSize()
     return Xamarin.Forms.Size.Zero;
 }
 
-#endregion
+        #endregion
+
+        #region Keyboard
+
+#if __IOS__
+
+#elif __DROID__
+
+        public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            System.Diagnostics.Debug.WriteLine("\tkeyCode="+keyCode.ToString(), " \te.Action="+e.Action + " \te.IsAltPressed="+e.IsAltPressed + " \te.IsCtrlPressed="+e.IsCtrlPressed + "\te.IsFunctionPressed="+e.IsFunctionPressed + " \te.IsPressed"+e.IsShiftPressed +" \te.IsCapsLockOn=" + e.IsCapsLockOn);
+
+            return base.OnKeyUp(keyCode, e);
+        }
+
+#elif WINDOWS_UWP
 
 
-#region Platform Specific
+#endif
+
+        #endregion
+
+
+        #region Platform Specific
 
 #if __IOS__
         void InvalidateView()
@@ -1731,7 +1753,7 @@ internal static SKPath BubblePerimeterPath(BubbleLayout bubble, SKRect rect, flo
     }
     return result;
 }
-        #endregion
+#endregion
     }
 }
 

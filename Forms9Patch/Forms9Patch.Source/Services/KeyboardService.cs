@@ -59,6 +59,8 @@ namespace Forms9Patch
 		/// Occurs when shown.
 		/// </summary>
 		public static event EventHandler Shown;
+
+        public static bool IsHardwareKeyboardActive => Service.IsHardwareKeyboardActive;
 	}
 
 	/// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Input;
 using Windows.UI.ViewManagement;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.KeyboardService))]
@@ -10,6 +11,15 @@ namespace Forms9Patch.UWP
 {
     class KeyboardService : IKeyboardService
     {
+        public bool IsHardwareKeyboardActive
+        {
+            get
+            {
+                KeyboardCapabilities keyboardCapabilities = new Windows.Devices.Input.KeyboardCapabilities();
+                return keyboardCapabilities.KeyboardPresent != 0;
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.iOS.KeyboardService"/> class.
         /// </summary>

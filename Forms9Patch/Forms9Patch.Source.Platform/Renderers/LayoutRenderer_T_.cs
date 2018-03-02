@@ -14,6 +14,8 @@ using UIKit;
 using SkiaSharp;
 namespace Forms9Patch.iOS
 #elif __DROID__
+using Android.Runtime;
+using Android.Views;
 using Xamarin.Forms.Platform.Android;
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
@@ -38,9 +40,43 @@ namespace Forms9Patch
 
 
         #region Constructor / Disposer
-        public F9pLayoutRenderer() => _instance = _instances++;
+        public F9pLayoutRenderer()
+        {
+            _instance = _instances++;
+
+#if __IOS__
+#elif __DROID__
+
+            
+
+#elif WINDOWS_UWP
+            KeyUp += OnKeyUp;
+            KeyDown += OnKeyDown;
+#endif
+
+        }
+
         #endregion
 
+#if __IOS__
+#elif __DROID__
+        public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
+        {
+            return base.OnKeyUp(keyCode, e);
+        }
+#elif WINDOWS_UWP
+
+        private void OnKeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("OnKeyDown["+e.Key+"] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.Handled=[" + e.Handled + "] \te.KeyStatus=[" + e.KeyStatus+"]");
+        }
+
+        private void OnKeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("OnKeyUp["+e.Key+"]   Element=["+Element+ "] Parent=[" + Element.Parent + "]  \te.Handled=["+e.Handled+"] \te.KeyStatus=["+e.KeyStatus + "]");
+        }
+
+#endif
 
         #region Change management
         protected override void OnElementChanged(ElementChangedEventArgs<TElement> e)
@@ -120,6 +156,6 @@ namespace Forms9Patch
         }
 
 #endif
-        #endregion
+#endregion
     }
 }

@@ -9,10 +9,18 @@ namespace Forms9Patch.iOS
 	/// </summary>
 	public class KeyboardService : IKeyboardService
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.iOS.KeyboardService"/> class.
-		/// </summary>
-		public KeyboardService()
+        public bool IsHardwareKeyboardActive
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.iOS.KeyboardService"/> class.
+        /// </summary>
+        public KeyboardService()
 		{
 			UIKeyboard.Notifications.ObserveWillHide(OnHidden);
 			UIKeyboard.Notifications.ObserveWillShow(OnShown);

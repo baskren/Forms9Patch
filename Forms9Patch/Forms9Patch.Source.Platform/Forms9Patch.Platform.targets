@@ -63,9 +63,9 @@
 	<Compile Include="..\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs">
 		<Link>Renderers\StackLayoutRenderer.cs</Link>
 	</Compile>
-	<Compile Include="..\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs">
+    <!--Compile Include="..\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs">
 		<Link>Renderers\LayoutRenderer_T_.cs</Link>
-	</Compile>
+	</Compile-->
 
 	<!-- Assembly Info -->
 	<Compile Include="..\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs">

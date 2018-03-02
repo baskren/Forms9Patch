@@ -10,5 +10,7 @@ namespace Forms9Patch
 		/// Forces the device's on screen keyboard to be hidden.
 		/// </summary>
 		void Hide();
+
+        bool IsHardwareKeyboardActive { get; }
 	}
 }
