@@ -32,9 +32,9 @@ namespace FormsGestures.UWP
 
         //public float Height => (float)((Windows.UI.Xaml.Controls.Frame)Window.Current.Content).ActualHeight;
 
-        public float Width => (float)_applicationView.VisibleBounds.Width;
+        public float Width => _applicationView == null ? (float) Xamarin.Forms.Application.Current.MainPage.Bounds.Width : (float)_applicationView.VisibleBounds.Width;
 
-        public float Height => (float)_applicationView.VisibleBounds.Height;
+        public float Height => _applicationView == null ? (float)Xamarin.Forms.Application.Current.MainPage.Bounds.Height : (float)_applicationView.VisibleBounds.Height;
 
         public Xamarin.Forms.Thickness SafeAreaInset => default(Xamarin.Forms.Thickness);
 

@@ -16,9 +16,10 @@ namespace Forms9Patch.UWP
             get
             {
                 //return false;
-
-                string labelTextStart = "A4"; // "Żyłę;^`g ";
-                //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                if (Element.Parent?.GetType().ToString() != "Bc3.Forms.OperandLabel")
+                    return false;
+                string labelTextStart = "23"; // "Żyłę;^`g ";
+                //return (Element.HtmlText == "Conv" && Element.Parent?.GetType().ToString() == "Bc3.Forms.KeypadButton");
                 //    return false;
                 //string labelTextStart = "BACKGROUND";
                 
@@ -85,6 +86,7 @@ namespace Forms9Patch.UWP
         bool LayoutValid { get; set; }
 
         Windows.Foundation.Size _lastAvailableSize = new Windows.Foundation.Size(0, 0);
+        Xamarin.Forms.Size _lastElementSize = Xamarin.Forms.Size.Zero;
         Windows.Foundation.Size _lastMeasureOverrideResult = new Windows.Foundation.Size(0, 0);
         AutoFit _lastAutoFit = (AutoFit)Forms9Patch.Label.AutoFitProperty.DefaultValue;
         int _lastLines = (int)Forms9Patch.Label.LinesProperty.DefaultValue;
@@ -98,7 +100,7 @@ namespace Forms9Patch.UWP
 
             if (e.OldElement != null)
             {
-                
+                e.OldElement.RendererSizeForWidthAndFontSize -= LabelXamarinSize;
                 e.OldElement.SizeChanged -= Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged -= Control_SizeChanged;
@@ -115,7 +117,7 @@ namespace Forms9Patch.UWP
                     _defaultNativeFontIsItalics = nativeControl.FontStyle != Windows.UI.Text.FontStyle.Normal;
                     SetNativeControl(nativeControl);
                 }
-
+                e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
                 e.NewElement.SizeChanged += Label_SizeChanged;
                 if (Control != null)
                     Control.SizeChanged += Control_SizeChanged;
@@ -348,47 +350,53 @@ namespace Forms9Patch.UWP
         bool _walkThrough;
 
         DateTime _lastMeasure = DateTime.MaxValue;
+        int _measureOverrideInvocation;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
-            if (DebugCondition && double.IsInfinity(availableSize.Width))
-                System.Diagnostics.Debug.WriteLine("");
-
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
-            DebugMessage("");
-            DebugMessage("pre-Enter availableSize=["+availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]");
+
+            DebugMessage("["+_measureOverrideInvocation+"] pre-Enter availableSize=["+availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]  PageSize=["+Xamarin.Forms.Application.Current.MainPage.Bounds.Size+"]");
+            DebugMessage("[" + _measureOverrideInvocation + "] \t\t availWidth>=Page.Width=[" + (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) + "]");
+            DebugMessage("[" + _measureOverrideInvocation + "] \t\t availHeight>=Page.Height=[" + (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) + "]");
+            DebugMessage("[" + _measureOverrideInvocation + "] \t\t Element.Parent=["+ Element.Parent + "]");
             var label = Element;
             var textBlock = Control;
 
             if (label == null || textBlock == null || availableSize.Width == 0 || availableSize.Height == 0)
                 return new Windows.Foundation.Size(0, 0);
 
-            if (LayoutValid && _lastAvailableSize == availableSize && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
+            if (LayoutValid && _lastAvailableSize == availableSize && _lastElementSize == Element.Bounds.Size && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
                 return _lastMeasureOverrideResult;
 
             //_lastAvailableSize = availableSize;
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
 
-            DebugMessage("ENTER availableSize=[" + availableSize + "]");
+            DebugMessage("[" + _measureOverrideInvocation + "] ENTER availableSize=[" + availableSize + "]");
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
-            if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("");
+            double width = Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            double height = Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
 
-            double width = !double.IsInfinity(availableSize.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
-            double height = !double.IsInfinity(availableSize.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
+            if (Double.IsInfinity(availableSize.Width))
+                width = availableSize.Width;
+            if (Double.IsInfinity(availableSize.Height))
+                height = availableSize.Height;
+
+            DebugMessage("[" + _measureOverrideInvocation + "] \t\t width=[" + width+"] height=["+height+"]");
+
+            //double width = !double.IsInfinity(availableSize.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            //double height = !double.IsInfinity(availableSize.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
+            //double width  = availableSize.Width;
+            //double height = availableSize.Height;
+
             var result = new Windows.Foundation.Size(width, height);
 
             if (textBlock != null)
             {
-
                 // reset FontSize
-
-                if (_walkThrough)
-                    System.Diagnostics.Debug.WriteLine("");
-
                 var tmpFontSize = label.DecipheredFontSize();
                 var minFontSize = label.DecipheredMinFontSize();
                 textBlock.MaxLines = int.MaxValue / 3;
@@ -467,7 +475,7 @@ namespace Forms9Patch.UWP
                  //});
 
                 var syncFontSize = ((ILabel)label).SynchronizedFontSize;
-                DebugMessage("syncFontSize=["+syncFontSize+"]");
+                DebugMessage("[" + _measureOverrideInvocation + "] syncFontSize=[" + syncFontSize+"]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                 {
                     tmpHt = -1;
@@ -483,7 +491,7 @@ namespace Forms9Patch.UWP
 
                 if (DebugCondition && label.Width>0 && label.Height > 0 &&(textBlock.DesiredSize.Width > label.Width || textBlock.DesiredSize.Height > label.Height))
                     System.Diagnostics.Debug.WriteLine("");
-                DebugMessage("result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "]");
+                DebugMessage("[" + _measureOverrideInvocation + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "]");
 
                 textBlock.MaxLines = label.Lines;
 
@@ -491,14 +499,18 @@ namespace Forms9Patch.UWP
 
             label.SetIsInNativeLayout(false);
 
-            DebugMessage("EXIT");
+            DebugMessage("[" + _measureOverrideInvocation + "] EXIT");
 
             LayoutValid = true;
             _lastAvailableSize = availableSize;
+            _lastElementSize = Element.Bounds.Size;
             _lastMeasureOverrideResult = result;
             _lastAutoFit = label.AutoFit;
             _lastLines = label.Lines;
             _lastMeasure = DateTime.Now;
+
+            if (DebugCondition)
+                _measureOverrideInvocation++;
 
             return result;
         }
@@ -506,6 +518,26 @@ namespace Forms9Patch.UWP
 
 
         #region Fitting
+
+        Size LabelXamarinSize(double widthConstraint, double fontSize)
+        {
+            var size = LabelSize(widthConstraint, fontSize);
+            return new Size(size.Width, size.Height);
+        }
+
+        Windows.Foundation.Size LabelSize(double widthConstraint, double fontSize)
+        {
+            var textBlock = Control;
+            var label = Element;
+            if (textBlock != null && label!=null)
+            {
+                textBlock.SetAndFormatText(label, fontSize);
+                textBlock.Measure(new Windows.Foundation.Size(widthConstraint, double.PositiveInfinity));
+                return new Windows.Foundation.Size(textBlock.DesiredSize.Width, textBlock.DesiredSize.Height);
+            }
+            return Windows.Foundation.Size.Empty;
+        }
+
 
         // remember, we enter these methods with textBlock's FontSize set to min or max.  
 
