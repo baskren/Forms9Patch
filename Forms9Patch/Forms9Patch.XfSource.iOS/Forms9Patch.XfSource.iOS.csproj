@@ -89,11 +89,11 @@
       <Name>FormsGestures.XfSource.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Project>{EF8FFCC7-770B-4C3E-8AC8-EFAD51E30552}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-      <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
+      <Project>{B2A77150-CF06-40A1-A16B-A11FCA853FEE}</Project>
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
   </ItemGroup>

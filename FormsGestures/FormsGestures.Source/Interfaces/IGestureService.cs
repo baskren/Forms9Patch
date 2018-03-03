@@ -2,12 +2,13 @@
 
 namespace FormsGestures
 {
-	/// <summary>
-	/// Interface for FormsGestures' service.
-	/// </summary>
-	interface IGestureService
-	{
-		void For(Listener handler);
-	}
+    /// <summary>
+    /// Interface for FormsGestures' service.
+    /// </summary>
+    interface IGestureService
+    {
+        void For(Listener handler);
+        void Cancel();
+    }
 }
 

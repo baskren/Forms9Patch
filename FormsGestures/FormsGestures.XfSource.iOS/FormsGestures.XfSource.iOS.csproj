@@ -64,7 +64,7 @@
       <Name>Xamarin.Forms.Platform.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Project>{EF8FFCC7-770B-4C3E-8AC8-EFAD51E30552}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">

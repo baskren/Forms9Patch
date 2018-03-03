@@ -2,19 +2,24 @@
 using Xamarin.Forms;
 using FormsGestures;
 
-[assembly: Dependency (typeof(FormsGestures.iOS.GestureService))]
+[assembly: Dependency(typeof(FormsGestures.iOS.GestureService))]
 namespace FormsGestures.iOS
 {
-	public class GestureService : IGestureService
-	{
-		#region IGestureService implementation
+    public class GestureService : IGestureService
+    {
+        public void Cancel()
+        {
+            NativeGestureHandler.Cancel();
+        }
+        #region IGestureService implementation
 
-		public void For (Listener listener) {
-			NativeGestureHandler.GetInstanceForListener (listener);
-		}
+        public void For(Listener listener)
+        {
+            NativeGestureHandler.GetInstanceForListener(listener);
+        }
 
-		#endregion
+        #endregion
 
-	}
+    }
 }
 

@@ -1249,7 +1249,7 @@ namespace FormsGestures
 
         #region Command / Event executors
         void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs => handler?.Invoke(this, args);
-        
+
         void ExecuteCommand(ICommand command, object parameter, BaseGestureEventArgs args)
         {
             parameter = (parameter ?? args);
@@ -1267,6 +1267,20 @@ namespace FormsGestures
         #endregion
 
         #region Constructor / Disposer
+
+        static IGestureService _gestureService;
+        static IGestureService GestureService
+        {
+            get
+            {
+                _gestureService = _gestureService ?? DependencyService.Get<IGestureService>();
+                if (_gestureService == null)
+                    throw new MissingMemberException("FormsGestures: Failed to load IGestureService instance");
+                return _gestureService;
+            }
+        }
+
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -1299,11 +1313,12 @@ namespace FormsGestures
             }
             if (!inserted)
                 Listeners.Insert(0, this);
-            var gestureService = DependencyService.Get<IGestureService>();
-            if (gestureService == null)
-                throw new MissingMemberException("FormsGestures: Failed to load IGestureService instance");
-            gestureService.For(this);
-            //DependencyService.Get<IGestureService> ().For (this);
+            GestureService.For(this);
+        }
+
+        public static void CancelActiveGestures()
+        {
+            GestureService.Cancel();
         }
 
         bool disposed;

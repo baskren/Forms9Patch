@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using FormsGestures;
 
 namespace Forms9Patch
 {
@@ -139,6 +140,7 @@ namespace Forms9Patch
         #region Event Handles
         internal void OnScrolling(object sender, EventArgs args)
         {
+            Listener.CancelActiveGestures();
             System.Diagnostics.Debug.WriteLine("scrolling");
             IsScrolling = true;
             Scrolling?.Invoke(this, args);
@@ -147,6 +149,7 @@ namespace Forms9Patch
 
         internal void OnScrolled(object sender, EventArgs args)
         {
+            Listener.CancelActiveGestures();
             System.Diagnostics.Debug.WriteLine("!!! STOP !!!");
             IsScrolling = false;
             Scrolled?.Invoke(this, args);

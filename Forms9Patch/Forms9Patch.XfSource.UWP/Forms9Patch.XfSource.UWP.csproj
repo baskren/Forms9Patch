@@ -147,11 +147,6 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs">
-      <Link>LayoutRenderer_T_.cs</Link>
-    </Compile>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

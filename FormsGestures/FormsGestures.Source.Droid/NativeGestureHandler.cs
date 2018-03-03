@@ -406,12 +406,12 @@ namespace FormsGestures.Droid
                             try
                             {
                                 //var _notReallyHandled = (bool)fieldInfo.GetValue(parent);
-                                fieldInfo.SetValue(parent, false);
+                                fieldInfo?.SetValue(parent, false);
                             }
-                            catch (System.ArgumentException)
+                            catch (System.ArgumentException e)
                             {
                                 // this seems to be happening occasionally.  Need to get to the bottom of it!
-                                System.Diagnostics.Debug.WriteLine("IGNORE THIS EXCEPTION.  EVERYTHING IS OK");
+                                System.Diagnostics.Debug.WriteLine("IGNORE THIS EXCEPTION.  EVERYTHING IS OK. _element=[" + _element + "] _element.Parent=[" + _element?.Parent + "] view=[" + view + "] parent=[" + parent + "] e=[" + e.Message + "]");
                             }
                     }
                 }

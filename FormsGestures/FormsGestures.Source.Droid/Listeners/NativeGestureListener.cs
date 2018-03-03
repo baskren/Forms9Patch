@@ -21,13 +21,12 @@ namespace FormsGestures.Droid
         MotionEvent _lastPan;
         MotionEvent _secondToLastPan;
 
-        bool _longPressing;
+        static bool _longPressing;
         bool _panning;
+        static bool _cancelled;
 
         PanEventArgs _lastPanArgs;
         PanEventArgs _secondToLastPanArgs;
-
-        P42.Utils.Timer _longPressTimer;
 
         int[] _viewLocationAtOnDown = { 0, 0 };
 
@@ -145,49 +144,45 @@ namespace FormsGestures.Droid
                 _weakReferenceView?.Clear();
                 _weakReferenceView = null;
                 _listeners = null;
-                _longPressTimer = null;
                 _disposed = true;
             }
             base.Dispose(disposing);
         }
 
 
-        bool _longPressTimerActive;
+        static bool _longPressTimerActive;
         void LongPressTimerStart()
         {
             if (_longPressing || !HandlesLongPresses)
                 return;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("longPressTimerStart [{0}]",_id);
 
-            if (_longPressTimer == null)
+            if (!_longPressTimerActive)
             {
-                _longPressTimer = new P42.Utils.Timer(
-                    state =>
-                    {
-                        if (_longPressTimerActive)
-                        {
-                            _longPressing = true;
-                            _longPressTimer = null;
-                            _longPressTimerActive = false;
-                            LongPressing();
-                        }
-                        return false;
-                    },
-                    null);
+                _longPressTimerActive = true;
+                Xamarin.Forms.Device.StartTimer(TimeSpan.FromMilliseconds(500), () =>
+                     {
+                         if (_longPressTimerActive)
+                         {
+                             _longPressing = true;
+                             _longPressTimerActive = false;
+                             LongPressing();
+                         }
+                         return false;
+                     });
             }
-            _longPressTimerActive = true;
-            _longPressTimer.Change(500);
         }
 
-        void LongPressTimerStop()
+        public static void Cancel()
         {
-            if (_longPressTimerActive)
-            {
-                //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("timerStop [{0}]", _id);
-                _longPressTimerActive = false;
-                _longPressTimer?.Change();
-                _longPressTimer = null;
-            }
+            _cancelled = true;
+            LongPressTimerStop();
+        }
+
+        public static void LongPressTimerStop()
+        {
+            _longPressTimerActive = false;
+            _longPressing = false;
         }
 
 
@@ -195,6 +190,7 @@ namespace FormsGestures.Droid
         public override bool OnDown(MotionEvent e)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDown [{0}]",_id);
+            _cancelled = false;
             Start = e;
             _longPressing = false;
             _panning = false;
@@ -225,6 +221,9 @@ namespace FormsGestures.Droid
             // called by longPressTimer
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("onLongPressing [{0}]",_id);
 
+            if (_cancelled)
+                return;
+
             Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
             {
                 foreach (var listener in _listeners)
@@ -253,6 +252,8 @@ namespace FormsGestures.Droid
 
         public bool OnUp(MotionEvent ev)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("onUp [{0}]",_id);
             //bool handled = false;
             LongPressTimerStop();
@@ -322,6 +323,8 @@ namespace FormsGestures.Droid
 
         public override bool OnSingleTapUp(MotionEvent e)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnSingleTapUp [{0}]",_id);
 
             bool handled = false;
@@ -348,6 +351,8 @@ namespace FormsGestures.Droid
 
         public override bool OnDoubleTap(MotionEvent e)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDoubleTap [{0}]",_id);
 
             bool handled = false;
@@ -375,11 +380,14 @@ namespace FormsGestures.Droid
 
         public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnScroll ["+eN.Action+"]["+_id+"] e1=["+e0+"] e2=["+eN+"]");
+            System.Diagnostics.Debug.WriteLine("SCROLL");
             bool handled = false;
+            LongPressTimerStop();
             if (!_multiMoving)
             {
-                LongPressTimerStop();
 
                 var _view = (Android.Views.View)_weakReferenceView?.Get();
                 if (_view == null || _listeners == null || !_listeners.Any())
@@ -407,6 +415,8 @@ namespace FormsGestures.Droid
 
         public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnFling [{0}]",_id);
             LongPressTimerStop();
 
@@ -478,6 +488,10 @@ namespace FormsGestures.Droid
         //MotionEvent.PointerCoords[] _lastCoords;
         public bool OnMultiDown(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
+
+            LongPressTimerStop();
             MultiStart = ev;
             _multiMoving = false;
             //_lastCoords = coords;
@@ -487,6 +501,8 @@ namespace FormsGestures.Droid
 
         public bool OnMultiMove(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             LongPressTimerStop();
             var _view = (Android.Views.View)_weakReferenceView?.Get();
             if (_view != null && !_multiMoving)
@@ -517,6 +533,8 @@ namespace FormsGestures.Droid
 
         public bool OnMultiUp(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             bool handled = false;
             if (_multiMoving)
             {
@@ -548,7 +566,10 @@ namespace FormsGestures.Droid
 
         bool OnPinching(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("onPinching [{0}]", _id);
+            LongPressTimerStop();
 
             var _view = (Android.Views.View)_weakReferenceView?.Get();
             if (_view == null || _listeners == null || !_listeners.Any())
@@ -572,7 +593,10 @@ namespace FormsGestures.Droid
 
         bool OnRotating(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("onRotating [{0}]", _id);
+            LongPressTimerStop();
 
             var _view = (Android.Views.View)_weakReferenceView?.Get();
             if (_view == null || _listeners == null || !_listeners.Any())
@@ -597,7 +621,10 @@ namespace FormsGestures.Droid
 
         bool OnPinched(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("onPinched [{0}]", _id);
+            LongPressTimerStop();
 
             var _view = (Android.Views.View)_weakReferenceView?.Get();
             if (_view == null || _listeners == null || !_listeners.Any())
@@ -625,7 +652,10 @@ namespace FormsGestures.Droid
 
         bool OnRotated(MotionEvent ev, MotionEvent.PointerCoords[] coords)
         {
+            if (_cancelled)
+                return false;
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("onRotated [{0}]", _id);
+            LongPressTimerStop();
 
             var _view = (Android.Views.View)_weakReferenceView?.Get();
             if (_view == null || _listeners == null || !_listeners.Any())

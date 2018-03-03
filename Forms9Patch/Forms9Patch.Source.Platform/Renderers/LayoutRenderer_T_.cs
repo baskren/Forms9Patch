@@ -47,7 +47,7 @@ namespace Forms9Patch
 #if __IOS__
 #elif __DROID__
 
-            
+            KeyPress += (sender, e) => System.Diagnostics.Debug.WriteLine("KeyPress [" + e.KeyCode + "] [" + e.Event + "] [" + e.Handled + "]"); ;
 
 #elif WINDOWS_UWP
             KeyUp += OnKeyUp;
@@ -62,7 +62,14 @@ namespace Forms9Patch
 #elif __DROID__
         public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
+            System.Diagnostics.Debug.WriteLine("OnKeyDown[" + keyCode + "] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.UnicodeChar=[" + (char)e.UnicodeChar + "]");
             return base.OnKeyUp(keyCode, e);
+        }
+
+        public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
+        {
+            System.Diagnostics.Debug.WriteLine("OnKeyDown[" + keyCode + "] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.UnicodeChar=[" + (char)e.UnicodeChar + "]");
+            return base.OnKeyDown(keyCode, e);
         }
 #elif WINDOWS_UWP
 
@@ -156,6 +163,6 @@ namespace Forms9Patch
         }
 
 #endif
-#endregion
+        #endregion
     }
 }

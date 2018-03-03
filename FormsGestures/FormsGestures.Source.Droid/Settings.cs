@@ -2,6 +2,7 @@
 
 namespace FormsGestures.Droid
 {
+
     public static class Settings
     {
         public static Android.App.Activity Activity { get; private set; }
@@ -27,22 +28,20 @@ namespace FormsGestures.Droid
             Activity = activity;
 
             P42.Utils.Environment.Init();
-#if NETSTANDARD
             P42.Utils.Environment.PlatformPathLoader = PlatformPathLoader;
-#endif
             _msUntilTapped = 200;
             System.Diagnostics.Debug.WriteLine("FormsGestures.Droid.Settings.Init()");
         }
 
         static void PlatformPathLoader()
         {
-#if NETSTANDARD
             //P42.Utils.Environment.DocumentsPath = Context.FilesDir.Path;
             P42.Utils.Environment.ApplicationDataPath = System.IO.Path.Combine(Context.ApplicationInfo.DataDir, "AppData");
             P42.Utils.Environment.ApplicationCachePath = Context.CacheDir.Path;
             P42.Utils.Environment.TemporaryStoragePath = System.IO.Path.Combine(Context.CacheDir.Path, "tmp");
-#endif
         }
+
+
 
     }
 }
