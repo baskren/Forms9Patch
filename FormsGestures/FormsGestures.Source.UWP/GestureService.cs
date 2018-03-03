@@ -10,6 +10,10 @@ namespace FormsGestures.UWP
 {
     public class GestureService : IGestureService
     {
+        public void Cancel()
+        {
+            NativeGestureHandler.Cancel();
+        }
         #region IGestureService implementation
 
         public void For(Listener listener)

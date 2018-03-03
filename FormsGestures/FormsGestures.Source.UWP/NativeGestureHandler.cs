@@ -50,6 +50,14 @@ namespace FormsGestures.UWP
 
         readonly VisualElement _xfElement;
 
+        static bool _cancelled;
+        public static void Cancel()
+        {
+            _cancelled = true;
+            _longPressing = false;
+            
+        }
+
         IVisualElementRenderer _renderer;
         void SetRenderer()
         {
@@ -207,7 +215,7 @@ namespace FormsGestures.UWP
         bool _panning;
         bool _pinching;
         bool _rotating;
-        bool _longPressing;
+        static bool _longPressing;
 
         int _numberOfTaps;
 
@@ -501,6 +509,9 @@ namespace FormsGestures.UWP
             ContainerDebugMessage(e.Container);
             HandledDebugString(e.Handled);
 
+            if (_cancelled)
+                return;
+
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
 
@@ -540,6 +551,9 @@ namespace FormsGestures.UWP
             _longPressing = false;
             _holdTimer?.Stop();
             _holdTimer = null;
+
+            if (_cancelled)
+                return;
 
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
@@ -611,6 +625,9 @@ namespace FormsGestures.UWP
 
         private void OnManipulationComplete(object sender, ManipulationCompletedRoutedEventArgs e)
         {
+            if (_cancelled)
+                return;
+
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
 
@@ -667,6 +684,8 @@ namespace FormsGestures.UWP
         #region UWP Pointer Event Responders
         private void OnPointerCancelled(object sender, PointerRoutedEventArgs e)
         {
+            if (_cancelled)
+                return;
 
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
@@ -805,6 +824,9 @@ namespace FormsGestures.UWP
 
         private void OnElementRightTapped(object sender, RightTappedRoutedEventArgs e)
         {
+            if (_cancelled)
+                return;
+
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
             DebugMethodName(2);
@@ -823,7 +845,9 @@ namespace FormsGestures.UWP
 
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
-        {            
+        {
+            _cancelled = false;
+
             if (!_xfElement.IsVisible || FrameworkElement==null)
                 return;
             DebugMethodName(2);
@@ -906,6 +930,9 @@ namespace FormsGestures.UWP
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            if (_cancelled)
+                return;
+
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
             DebugMethodName(2);

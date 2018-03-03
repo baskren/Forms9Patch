@@ -210,6 +210,7 @@ namespace Forms9Patch
         {
             PointerDirection = PointerDirection.Any;
             PreferredPointerDirection = PointerDirection.Down;
+            PointerLength = 10;
             BackgroundColor = DefaultBackgroundColor;
             HasShadow = false;
             Padding = 0;
@@ -271,7 +272,7 @@ namespace Forms9Patch
             segment._button.Spacing = 4;
             segment._button.TintIcon = true;
             segment._button.HasTightSpacing = true;
-            segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4);
+            segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8);
             segment._button.TextColor = TextColor;
             segment._button.VerticalTextAlignment = TextAlignment.Center;
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
