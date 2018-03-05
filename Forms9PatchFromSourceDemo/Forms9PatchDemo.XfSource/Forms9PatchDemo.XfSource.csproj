@@ -4,10 +4,9 @@
 		<TargetFramework>netstandard1.3</TargetFramework>
 		<AssemblyName>Forms9PatchDemo</AssemblyName>
 		<RootNamespace>Forms9PatchDemo</RootNamespace>
-		<UseXaml>USE_XAML</UseXaml>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DefineConstants>TRACE;DEBUG;$(UseXaml);FROM_SOURCE;NETSTANDARD1_3</DefineConstants>
+		<DefineConstants>TRACE;FROM_SOURCE;DEBUG;NETSTANDARD1_3</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>

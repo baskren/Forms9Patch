@@ -285,6 +285,41 @@ namespace FormsGestures
             return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, null);
         }
 
+        public static VisualElement FindFocused()
+        {
+            return Xamarin.Forms.Application.Current.MainPage.FindChildWithFocus();
+        }
+
+        public static VisualElement FindChildWithFocus(this Element element)
+        {
+            if (element is VisualElement visualElement)
+            {
+                if (visualElement.IsFocused)
+                    return visualElement;
+                if (visualElement is Xamarin.Forms.Layout layout)
+                {
+                    foreach (var child in layout.Children)
+                    {
+                        var focused = child.FindChildWithFocus();
+                        if (focused != null)
+                            return focused;
+                    }
+                }
+            }
+            if (element is Page page && page.IsFocused)
+                return page;
+
+            if (element is IPageController pageController)
+            {
+                foreach (var child in pageController.InternalChildren)
+                {
+                    var focused = child.FindChildWithFocus();
+                    if (focused != null)
+                        return focused;
+                }
+            }
+            return null;
+        }
     }
 }
 

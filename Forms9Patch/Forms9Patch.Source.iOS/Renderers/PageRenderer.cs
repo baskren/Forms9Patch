@@ -6,45 +6,109 @@ using ObjCRuntime;
 using Xamarin.Forms;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.RootPage), typeof(Forms9Patch.iOS.PageRenderer))]
+[assembly: ExportRenderer(typeof(Forms9Patch.ContentPage), typeof(Forms9Patch.iOS.PageRenderer))]
+
 namespace Forms9Patch.iOS
 {
-    public class PageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer
+    /*
+    public static class FirstResponderExtensions
     {
+        public static UIView GetFirstResponder(this UIView parent)
+        {
+            if (parent.IsFirstResponder)
+                return parent;
+            foreach (var subview in parent.Subviews)
+            {
+                var responder = subview.GetFirstResponder();
+                if (responder != null)
+                    return responder;
+            }
+            return null;
+        }
+
+        public static object GetFirstResponder(this UIViewController parent)
+        {
+            if (parent.IsFirstResponder)
+                return parent;
+            var view = parent.View.GetFirstResponder();
+            if (view != null)
+                return view;
+            foreach (var subview in parent.ChildViewControllers)
+            {
+                var responder = subview.GetFirstResponder();
+                if (responder != null)
+                    return responder;
+            }
+            return null;
+        }
+    }
+    */
+
+    public class PageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer //, IUIKeyInput
+    {
+        int _seconds;
+
         public PageRenderer()
         {
+            System.Diagnostics.Debug.WriteLine("PageRenderer Instantiated Element=[" + Element + "]");
+            //BecomeFirstResponder();
+            /*
+            Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            {
+                System.Diagnostics.Debug.WriteLine("[" + (_seconds++) + "] FirstResponder=[" + this.GetFirstResponder() + "] Element=[" + Element + "]");
+                if (!IsFirstResponder)
+                    BecomeFirstResponder();
+                return true;
+            });
+            */
+
+
         }
 
-        public override void DidUpdateFocus(UIFocusUpdateContext context, UIFocusAnimationCoordinator coordinator)
+        /*
+        public override bool CanBecomeFirstResponder
         {
-            base.DidUpdateFocus(context, coordinator);
-        }
+            get
+            {
+                //var x = base.CanBecomeFirstResponder;
+                //System.Diagnostics.Debug.WriteLine("CanBecomeFirstResponder (x=[" + x + "]) Element=[" + Element + "]");
+                return true;
+                //return base.CanBecomeFirstResponder;
 
-        public override bool ShouldUpdateFocus(UIFocusUpdateContext context)
-        {
-            return base.ShouldUpdateFocus(context);
+            }
         }
-
-        public override void UpdateFocusIfNeeded()
-        {
-            base.UpdateFocusIfNeeded();
-        }
-
-        public override void SetNeedsFocusUpdate()
-        {
-            base.SetNeedsFocusUpdate();
-        }
+        */
 
 
         [Export("OnKeyPress:")]
         void OnKeyPress(UIKeyCommand cmd)
         {
-            System.Diagnostics.Debug.WriteLine("cmd.Input=[" + cmd.Input + "] cmd.ModifierFlags[" + cmd.ModifierFlags + "]");
+            System.Diagnostics.Debug.WriteLine("cmd.Input=[" + cmd.Input + "] cmd.ModifierFlags[" + cmd.ModifierFlags + "] Element=[" + Element + "]");
         }
+
+        /*
+        public void InsertText(string text)
+        {
+            System.Diagnostics.Debug.WriteLine("InsertText:[" + text + "] Element=[" + Element + "]");
+        }
+
+        public void DeleteBackward()
+        {
+            System.Diagnostics.Debug.WriteLine("DeleteBackward! Element=[" + Element + "]");
+        }
+        */
 
         public override UIKeyCommand[] KeyCommands
         {
             get
             {
+                var focused = FormsGestures.VisualElementExtensions.FindFocused();
+                System.Diagnostics.Debug.WriteLine("FOCUSED=[" + focused + "]");
+
+                if (focused is Xamarin.Forms.InputView)
+                    return null;
+
+                //System.Diagnostics.Debug.WriteLine("GET KeyCommands Element=[" + Element + "]");
                 var baseCommands = base.KeyCommands;
                 var sel = new Selector("OnKeyPress:");
 
@@ -83,7 +147,9 @@ namespace Forms9Patch.iOS
                 commandList.Add(cDiv);
                 commandList.Add(cEql);
 
-                return commandList.ToArray();
+
+                var result = commandList.ToArray();
+                return result;
             }
         }
 

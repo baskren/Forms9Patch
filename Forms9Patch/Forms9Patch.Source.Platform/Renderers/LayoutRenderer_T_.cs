@@ -32,8 +32,8 @@ namespace Forms9Patch
 #endif
 
 {
-    class F9pLayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxAndImageView>, IUIKeyInput where TElement : Layout, ILayout  // works but renders SkiaRoundedBoxAndImageView over children views
-                                                                                                                                          //class F9pLayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, ILayout // VisualElement, IBackgroundImage
+    class F9pLayoutRenderer<TElement> : ViewRenderer<TElement, SkiaRoundedBoxAndImageView> /*, IUIKeyInput*/ where TElement : Layout, ILayout  // works but renders SkiaRoundedBoxAndImageView over children views
+                                                                                                                                               //class F9pLayoutRenderer<TElement> : VisualElementRenderer<TElement> where TElement : View, ILayout // VisualElement, IBackgroundImage
     {
         #region Fields
         static int _instances;
@@ -65,7 +65,7 @@ namespace Forms9Patch
         #endregion
 
 #if __IOS__
-
+        /*
         public override void DidUpdateFocus(UIFocusUpdateContext context, UIFocusAnimationCoordinator coordinator)
         {
             base.DidUpdateFocus(context, coordinator);
@@ -172,6 +172,7 @@ namespace Forms9Patch
         public bool EnablesReturnKeyAutomatically { get; set; } = true;
         public bool SecureTextEntry { get; set; } = false;
         public UITextSpellCheckingType SpellCheckingType { get; set; } = UITextSpellCheckingType.No;
+        */
 #elif __DROID__
         public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
         {

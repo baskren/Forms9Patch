@@ -681,6 +681,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{8DB247
 		Forms9PatchDemo\Source\Forms9PatchDemo.cs = Forms9PatchDemo\Source\Forms9PatchDemo.cs
 		Forms9PatchDemo\Source\Forms9PatchDemo.targets = Forms9PatchDemo\Source\Forms9PatchDemo.targets
 		Forms9PatchDemo\Source\Forms9PatchDemoXaml.targets = Forms9PatchDemo\Source\Forms9PatchDemoXaml.targets
+		Forms9PatchDemo\Source\HomePage.cs = Forms9PatchDemo\Source\HomePage.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromNugetPackages", "FromNugetPackages", "{57A7DB2A-EFCE-4F9E-9A77-3D30BCDAED34}"

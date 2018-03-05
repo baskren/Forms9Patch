@@ -64,7 +64,7 @@ namespace Forms9Patch
             Application.Current.ModalPushing += (object sender, ModalPushingEventArgs e) =>
             {
                 ModalPushing?.Invoke(sender, e.Modal);
-                System.Diagnostics.Debug.WriteLine("ModalPusing");
+                System.Diagnostics.Debug.WriteLine("ModalPushing");
             };
             Application.Current.ModalPushed += (object sender, ModalPushedEventArgs e) =>
             {
@@ -82,12 +82,12 @@ namespace Forms9Patch
 
             Application.Current.ChildRemoved += (s, e) =>
                 {
-                    //System.Diagnostics.Debug.WriteLine("");
+                    System.Diagnostics.Debug.WriteLine("ChildRemoved");
                 };
 
             Application.Current.DescendantRemoved += (s, e) =>
             {
-                //System.Diagnostics.Debug.WriteLine("");
+                System.Diagnostics.Debug.WriteLine("ChildAdded");
             };
         }
 
@@ -165,7 +165,7 @@ namespace Forms9Patch
             NavigationPushed?.Invoke(sender, e.Page);
         }
 
-        IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count-1]: this) as IPageController;
+        IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count - 1] : this) as IPageController;
 
         internal void AddPopup(PopupBase popup)
         {
@@ -211,7 +211,7 @@ namespace Forms9Patch
         {
             if (PageController.InternalChildren.Count > 1)
             {
-                var lastChild = PageController.InternalChildren[PageController.InternalChildren.Count-1];
+                var lastChild = PageController.InternalChildren[PageController.InternalChildren.Count - 1];
                 if (lastChild is PopupBase popup)
                     popup.Cancel();
                 else

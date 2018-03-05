@@ -77,6 +77,7 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\RootPage.cs" Link="Elements\RootPage.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ContentPage.cs" Link="Elements\ContentPage.cs" />
 
     <!-- Enums -->
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />
