@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using Foundation;
 
 #if __IOS__
 using CoreGraphics;
@@ -14,6 +13,7 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using SkiaSharp;
 using ObjCRuntime;
+using Foundation;
 namespace Forms9Patch.iOS
 #elif __DROID__
 using Android.Runtime;

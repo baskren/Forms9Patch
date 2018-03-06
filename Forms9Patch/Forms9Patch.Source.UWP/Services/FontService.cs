@@ -63,6 +63,7 @@ namespace Forms9Patch.UWP
                 return DefaultSystemFontFamily;
 
             string localStorageFileName = null;
+            string uri = null;
             string resourceId = null;
 
             switch (f9pFontFamily.ToLower())
@@ -107,7 +108,11 @@ namespace Forms9Patch.UWP
 
                 var appAsmName = Forms9Patch.ApplicationInfoService.Assembly.GetName().Name;
                 if (targetAsmNameA == appAsmName || targetAsmNameB == appAsmName)
+                {
                     localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(resourceId, Forms9Patch.ApplicationInfoService.Assembly);
+                    if (localStorageFileName!=null)
+                        uri = EmbeddedResourceCache.ApplicationUri(resourceId, Forms9Patch.ApplicationInfoService.Assembly);
+                }
 
                 // if that doesn't work, look through all known assemblies
                 if (localStorageFileName == null)
@@ -118,6 +123,7 @@ namespace Forms9Patch.UWP
                         if (targetAsmNameA == asmName || targetAsmNameB == asmName)
                         {
                             localStorageFileName = EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(resourceId, asm);
+                            uri = EmbeddedResourceCache.ApplicationUri(resourceId, asm);
                             break;
                         }
                     }
@@ -132,15 +138,12 @@ namespace Forms9Patch.UWP
                 fontName = idParts.Last();
             else
             {
-#if NETSTANDARD
-                var cachedFilePath = System.IO.Path.Combine(P42.Utils.Environment.ApplicationDataPath, localStorageFileName);
+                //var cachedFilePath = System.IO.Path.Combine(P42.Utils.Environment.ApplicationDataPath, localStorageFileName);
+                var cachedFilePath = System.IO.Path.Combine(P42.Utils.EmbeddedResourceCache.FolderPath(), localStorageFileName);
                 fontName = TTFAnalyzer.FontFamily(cachedFilePath);
-#else
-                var cachedFile = FileSystem.Current.LocalStorage.GetFile(localStorageFileName);
-                fontName = TTFAnalyzer.FontFamily(cachedFile);
-#endif
             }
-            var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName.Replace('\\','/') + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
+            //var uwpFontFamily = "ms-appdata:///local/" + localStorageFileName.Replace('\\','/') + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
+            var uwpFontFamily = uri + (string.IsNullOrWhiteSpace(fontName) ? null : "#" + fontName);
             //var uwpFontFamily = "ms-appdata:///local/EmbeddedResourceCache/02fe60e0da81514d145d946ab9ad9b97#Pacifico";
             //foreach (var c in uwpFontFamily)
             //    System.Diagnostics.Debug.WriteLine("c=["+c+"]["+(int)c+"]");

@@ -51,6 +51,8 @@ namespace Forms9Patch.iOS
         public PageRenderer()
         {
             System.Diagnostics.Debug.WriteLine("PageRenderer Instantiated Element=[" + Element + "]");
+
+
             //BecomeFirstResponder();
             /*
             Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>

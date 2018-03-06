@@ -10,7 +10,7 @@ namespace Forms9Patch.UWP
 {
     static class FrameworkElementExtensions
     {
-        public static T GetParent<T>(this FrameworkElement uwpElement) where T:class
+        public static T GetClosestAncestor<T>(this FrameworkElement uwpElement) where T:class
         {
             while (uwpElement?.Parent != null)
             {
@@ -22,7 +22,7 @@ namespace Forms9Patch.UWP
             return null;
         }
 
-        public static T GetProginator<T>(this FrameworkElement uwpElement) where T: class
+        public static T GetFurthestAncestor<T>(this FrameworkElement uwpElement) where T: class
         {
             T root = null;
             while (uwpElement?.Parent != null)
@@ -88,6 +88,23 @@ namespace Forms9Patch.UWP
                     results.Add(child);
             }
             return results;
+        }
+
+        public static string GenerateHeirachry(this FrameworkElement element, string leader = "", bool last=true)
+        {
+            var result = leader + (leader.Length>0 && last ? " └─" : " ├─") + element + "\n";
+
+            leader = leader + (last ? "   " : " │ ");
+
+            var children = element.GetChildren<FrameworkElement>();
+            if (children != null)
+                for (int i=0;i<children.Count;i++)
+                {
+                    var lastChild = i == children.Count - 1;
+                    result += children[i].GenerateHeirachry(leader, lastChild);
+                }
+
+            return result;
         }
     }
 }
