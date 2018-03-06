@@ -24,7 +24,16 @@ namespace Forms9PatchDemo.Droid
             ActionBar.Hide();
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetHomeButtonEnabled(false);
+
+
         }
+
+        public override bool OnKeyUp(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
+        {
+            System.Diagnostics.Debug.WriteLine("MainActivity.OnKeyUp[" + keyCode + "] e.Action[" + e.Action + "] e.Characters[" + e.Characters + "] e.DisplayLabel[" + e.DisplayLabel + "] e.Flags[" + e.Flags + "] e.MetaStates[" + e.MetaState + "] e.Modifiers[" + e.Modifiers + "] e.Unicode[" + (char)e.UnicodeChar + "] ");
+            return base.OnKeyUp(keyCode, e);
+        }
+
     }
 }
 

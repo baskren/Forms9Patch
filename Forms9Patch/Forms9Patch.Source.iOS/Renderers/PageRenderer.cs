@@ -6,8 +6,7 @@ using ObjCRuntime;
 using Xamarin.Forms;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.RootPage), typeof(Forms9Patch.iOS.PageRenderer))]
-[assembly: ExportRenderer(typeof(Forms9Patch.ContentPage), typeof(Forms9Patch.iOS.PageRenderer))]
-
+//[assembly: ExportRenderer(typeof(Forms9Patch.ContentPage), typeof(Forms9Patch.iOS.PageRenderer))]
 namespace Forms9Patch.iOS
 {
     /*

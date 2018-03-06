@@ -92,6 +92,12 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Forms9Patch.Source.Droid\Renderers\PageRenderer.cs">
+      <Link>PageRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\AndroidViewExtensions.cs">
+      <Link>AndroidViewExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
   <ItemGroup>
