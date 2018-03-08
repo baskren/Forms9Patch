@@ -17,12 +17,13 @@ namespace Forms9Patch.UWP
 
         public PageRenderer() : base ()
         {
-            KeyUp += OnKeyUp;
-            KeyDown += OnKeyDown;
+            //KeyUp += OnKeyUp;
+            //KeyDown += OnKeyDown;
 
-            Loaded += PageRenderer_Loaded;
+            //Loaded += PageRenderer_Loaded;
 
             Window.Current.CoreWindow.CharacterReceived += CoreWindow_CharacterReceived;
+            Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
             /*
             Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(4), () =>
              {
@@ -66,11 +67,19 @@ namespace Forms9Patch.UWP
              */
         }
 
+        private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            System.Diagnostics.Debug.WriteLine("CoreWindow.KeyUp ["+args.VirtualKey+"]");
+            
+        }
+
         private void CoreWindow_CharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
         {
             System.Diagnostics.Debug.WriteLine("CharRecv["+(char)args.KeyCode+"]["+args.KeyStatus+"]");
+            var element = Windows.UI.Xaml.Input.FocusManager.GetFocusedElement();
+            System.Diagnostics.Debug.WriteLine("\t Focused:["+element+"]");
         }
-
+        /*
         private void PageRenderer_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var root = this.GetFurthestAncestor<Windows.UI.Xaml.FrameworkElement>();
@@ -90,6 +99,7 @@ namespace Forms9Patch.UWP
         {
             System.Diagnostics.Debug.WriteLine("OnKeyUp[" + e.Key + "][" + e.OriginalKey + "]   Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.Handled=[" + e.Handled + "] \te.KeyStatus=[" + e.KeyStatus + "]");
         }
+        */
 
     }
 }
