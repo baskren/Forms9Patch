@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="Xamarin.Forms keycapture" FOLDED="false" ID="ID_1834029228" CREATED="1520422053599" MODIFIED="1520422073351" STYLE="oval">
 <font SIZE="18"/>
-<hook NAME="MapStyle" zoom="1.5">
+<hook NAME="MapStyle">
     <properties fit_to_viewport="false" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
 
 <map_styles>
@@ -421,15 +421,15 @@
 <node TEXT="DiscoverabilityTitle" ID="ID_118367220" CREATED="1520471890581" MODIFIED="1520471894623"/>
 </node>
 </node>
+<node TEXT="HardwareKeyEventArgs" ID="ID_282998850" CREATED="1520472951887" MODIFIED="1520509910578">
+<node TEXT="HardwareKey" ID="ID_1197066110" CREATED="1520472960527" MODIFIED="1520554374646"/>
+<node TEXT="Element" ID="ID_1501409978" CREATED="1520472964551" MODIFIED="1520472966465"/>
+</node>
 <node TEXT="Forms9Patch.HardwareKeyListener" ID="ID_1693838140" CREATED="1520509951761" MODIFIED="1520509963096">
 <node TEXT="HardwareKey" ID="ID_1383483216" CREATED="1520509963815" MODIFIED="1520509969059"/>
 <node TEXT="Command" ID="ID_529958593" CREATED="1520471853981" MODIFIED="1520471865271"/>
 <node TEXT="Command Params" ID="ID_333809558" CREATED="1520471866037" MODIFIED="1520471870863"/>
 <node TEXT="Action" ID="ID_208086393" CREATED="1520471872013" MODIFIED="1520509996683"/>
-</node>
-<node TEXT="HardwareKeyEventArgs" ID="ID_282998850" CREATED="1520472951887" MODIFIED="1520509910578">
-<node TEXT="HardwareKey" ID="ID_1197066110" CREATED="1520472960527" MODIFIED="1520554374646"/>
-<node TEXT="Element" ID="ID_1501409978" CREATED="1520472964551" MODIFIED="1520472966465"/>
 </node>
 <node TEXT="VisualElement extensions" ID="ID_828677281" CREATED="1520471914861" MODIFIED="1520472724290">
 <node TEXT="public static Forms9Patch.HardwareKeyListener AddHardwareKeyListener();" ID="ID_2530056" CREATED="1520472211307" MODIFIED="1520510028656"/>
@@ -438,7 +438,7 @@
 <node TEXT="Attached Behaviour and Effect" ID="ID_1604876997" CREATED="1520510121358" MODIFIED="1520510143992"/>
 <node TEXT="Behavior manages list of HardwareKeyListeners" ID="ID_402035130" CREATED="1520510147323" MODIFIED="1520510163812"/>
 <node TEXT="Effect sets up back channel to RootPageRenderer for the purpose of maintaining list of Element / Renderers that are meant to be listened to." ID="ID_1388881382" CREATED="1520510164203" MODIFIED="1520510249991"/>
-<node TEXT="This list is backed by an Dictionary&lt;VisualElement, ObservableList&lt;HardwareKeyListener&gt;&gt;.  Any change on an ObservableList calls Element.PropertyChanged(&quot;HardwareKeyListeners&quot;);" ID="ID_614399580" CREATED="1520561336332" MODIFIED="1520561494398"/>
+<node TEXT="This list is backed by an ObservableList&lt;HardwareKeyListener&gt;.  Any change on an ObservableList calls Element.PropertyChanged(&quot;HardwareKeyListeners&quot;);" ID="ID_614399580" CREATED="1520561336332" MODIFIED="1520566053303"/>
 <node TEXT="How do we deallocate KVPs from above when an Element is discarded?  How about behaviours?  Yes, because it has &quot;OnAttachedTo&quot; and &quot;OnDetachedFrom&quot;, which can be used to solve this problem." ID="ID_1951678802" CREATED="1520561505502" MODIFIED="1520562739318"/>
 </node>
 <node TEXT="public static void HardwareKeyboardFocus(this VisualElement element);" ID="ID_578741829" CREATED="1520510350364" MODIFIED="1520561086368">

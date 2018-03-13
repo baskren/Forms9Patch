@@ -1,0 +1,45 @@
+﻿<Properties StartupConfiguration="{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}|Default">
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.PCL.Forms9PatchDemo.PCL.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.NetStandard.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyFocus.cs">
+    <Files>
+      <File FileName="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" Line="368" Column="23" />
+      <File FileName="Forms9PatchDemo/Source/Forms9PatchDemo.cs" Line="163" Column="17" />
+      <File FileName="Forms9Patch/Forms9Patch.Source.iOS/Renderers/PageRenderer.cs" Line="93" Column="49" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/RootPage.cs" Line="118" Column="13" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/Page1.cs" Line="99" Column="15" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerExtensions.cs" Line="16" Column="56" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerBehavior.cs" Line="29" Column="54" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyFocus.cs" Line="14" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.NetStandard.Forms9PatchDemo.NetStandard.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Xamarin.Forms/Xamarin.Forms.Platform.iOS/ViewRenderer.cs" relfile="Xamarin.Forms/Xamarin.Forms.Platform.iOS/ViewRenderer.cs" line="235" column="1" />
+      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.XfSource.iOS/FocusableEffect.cs" relfile="Forms9Patch/Forms9Patch.XfSource.iOS/FocusableEffect.cs" line="16" column="1" />
+      <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" relfile="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" line="189" column="50" />
+      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" relfile="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" line="178" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <Debugger.DebugSourceFolders>
+    <String>/Users/ben/Development/Xamarin/Forms9Patch2/Xamarin.Forms</String>
+  </Debugger.DebugSourceFolders>
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromNugetPackages.NetStandard_220Target_220Framework.Forms9PatchDemo.NetStandard.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Forms9Patch.PCL.XfSource.Forms9Patch.PCL.XfSource.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9PatchDemo.Source.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.Forms9Patch.PCL.XfNuget.Forms9Patch.PCL.XfNuget.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9Patch_220Source.Forms9PatchDemo.F9pSource.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Xamarin.Forms_220and_220Forms9Patch_220Source.Forms9PatchDemo.XfSource.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromNugetPackages.PCL_220Target_220Framework.Forms9PatchDemo.PCL.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Xamarin.Forms_220and_220Forms9Patch_220Source.Forms9PatchDemo.XfSource.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromNugetPackages.NetStandard_220Target_220Framework.Forms9PatchDemo.NetStandard.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9PatchDemo.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromNugetPackages.PCL_220Target_220Framework.Forms9PatchDemo.PCL.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9Patch_220Source.Forms9PatchDemo.F9pSource.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
+</Properties>

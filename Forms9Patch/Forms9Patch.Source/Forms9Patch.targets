@@ -14,6 +14,7 @@
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs" Link="Effects\SliderStepSizeEffect.cs" />
+    <Compile Include="..\Forms9Patch.Source\Effects\HardwareKeyHandlerEffect.cs" Link="Effects\HardwareKeyHandlerEffect.cs" />
 
     <!-- Buttons -->
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Button.cs" Link="Elements\Buttons\Button.cs" />
@@ -124,9 +125,11 @@
     <!-- HardwareKeyListener -->
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKey.cs" Link="HardwareKeyListener\HardwareKey.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyEventArgs.cs" Link="HardwareKeyListener\HardwareKeyEventArgs.cs" />
+    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyFocus.cs" Link="HardwareKeyListener\HardwareKeyFocus.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListener.cs" Link="HardwareKeyListener\HardwareKeyListener.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerBehavior.cs" Link="HardwareKeyListener\HardwareKeyListenerBehavior.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerExtensions.cs" Link="HardwareKeyListener\HardwareKeyListenerExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyModifierKeys.cs" Link="HardwareKeyListener\HardwareKeyModifierKeys.cs" />
 
 
     <!-- Interfaces -->

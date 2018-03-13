@@ -89,6 +89,11 @@
 			<Link>Services\WebViewExtensionsService.cs</Link>
 		</Compile>
 
+		<Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyHandler.cs">
+			<Link>HardwareKeyHandler.cs</Link>
+		</Compile>
+
+
 	</ItemGroup>
 
 	<Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />

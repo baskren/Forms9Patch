@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
+
 		<!-- EFFECTS -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
 			<Link>Effects\CustomFontEffect.cs</Link>
@@ -11,6 +12,7 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs">
 			<Link>Effects\WebViewFixEffect.cs</Link>
 		</Compile>
+
 		<!-- EXTENSIONS -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs">
 			<Link>Extensions\AlignmentExtensions.cs</Link>
@@ -30,10 +32,12 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
 			<Link>Extensions\UITextViewExtensions.cs</Link>
 		</Compile>
+
 		<!-- MODELS -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
 			<Link>Models\Settings.cs</Link>
 		</Compile>
+
 		<!-- RENDERERS -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs">
 			<Link>Renderers\ColorGradientBoxRenderer.cs</Link>
@@ -44,9 +48,10 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
 			<Link>Renderers\EnhancedListViewRenderer.cs</Link>
 		</Compile>
-		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs">
+		<!--Compile Include="..\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs">
 			<Link>Renderers\PageRenderer.cs</Link>
-		</Compile>
+		</Compile-->
+
 		<!-- SERVICES -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
 			<Link>Services\ApplicationInfoService.cs</Link>
@@ -82,11 +87,10 @@
 			<Link>UIViewContentMode.cs</Link>
 		</Compile>
 	</ItemGroup>
+
 	<Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
+
 	<ItemGroup>
-		<!--Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
-    </Reference-->
 		<Reference Include="SkiaSharp">
 			<HintPath>..\..\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
 		</Reference>

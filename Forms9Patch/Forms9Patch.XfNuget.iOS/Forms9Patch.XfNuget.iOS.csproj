@@ -59,6 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs">
+      <Link>PageRenderer.cs</Link>
+    </Compile>
+    <Compile Include="UIViewExtensions.cs" />
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
   <ItemGroup>

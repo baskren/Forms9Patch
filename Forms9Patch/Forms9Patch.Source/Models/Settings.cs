@@ -15,6 +15,7 @@ namespace Forms9Patch
             P42.Utils.Environment.EmbeddedResourceAssemblyResolver = AssemblyExtensions.AssemblyFromResourceId;
         }
 
+        #region Shadow properties
         /// <summary>
         /// The shadow offset.
         /// </summary>
@@ -24,10 +25,12 @@ namespace Forms9Patch
         /// The shadow radius.
         /// </summary>
         public static double ShadowRadius = 3;
+        #endregion
 
         internal static TimeSpan MsUntilTapped = TimeSpan.FromMilliseconds(210);
 
 
+        #region Swipe menu
         /// <summary>
         /// WidthRequest for ListView Cell swipe popup menu.
         /// </summary>
@@ -63,8 +66,12 @@ namespace Forms9Patch
         /// <summary>
         /// Are haptics active by default?
         /// </summary>
+        #endregion
+
+
         public static KeyClicks KeyClicks = KeyClicks.Default;
 
+        #region Licensing
         static string _licenseKey;
 
         /// <summary>
@@ -82,7 +89,10 @@ namespace Forms9Patch
                 _licenseKey = value;
             }
         }
+        #endregion
 
+
+        #region Confirm that Forms9Patch has been initialized
         static bool _confirmed;
         internal static void ConfirmInitialization()
         {
@@ -92,7 +102,10 @@ namespace Forms9Patch
                 throw new Exception("Forms9Patch has not been initialized.  See http://http://buildcalc.com/forms9patch/index.html#HowToConfigureTheLicenseKey.  Xamarin.Forms.Application.Current=[" + Xamarin.Forms.Application.Current + "]");
             _confirmed = true;
         }
+        #endregion
 
+
+        #region Native Settings (mostly used for UWP initialization)
         static INativeSettings _nativeSettings;
         static INativeSettings NativeSettings
         {
@@ -104,6 +117,7 @@ namespace Forms9Patch
         }
 
         internal static List<Assembly> IncludedAssemblies => NativeSettings?.IncludedAssemblies;
+        #endregion
 
 
     }

@@ -14,7 +14,9 @@ namespace Forms9Patch
     /// </summary>
     public class RootPage : Page
     {
-        static internal RootPage _instance;
+
+
+        #region Events
 
         /// <summary>
         /// Occurs when modal popped.
@@ -40,8 +42,16 @@ namespace Forms9Patch
         /// Occurs when navigation pushed.
         /// </summary>
         public static event EventHandler<Page> NavigationPushed;
+        #endregion
 
+
+        #region Fields
+        static internal RootPage _instance;
         static List<Page> _modals = new List<Page>();
+        #endregion
+
+
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
         /// </summary>
@@ -55,31 +65,12 @@ namespace Forms9Patch
             //    throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
             _instance = this;
             Page = page;
-            Application.Current.ModalPopping += (object sender, ModalPoppingEventArgs e) =>
-            {
-                ModalPopping?.Invoke(sender, e.Modal);
-                System.Diagnostics.Debug.WriteLine("ModalPopping");
-                RemovePopups(true);
-            };
-            Application.Current.ModalPushing += (object sender, ModalPushingEventArgs e) =>
-            {
-                ModalPushing?.Invoke(sender, e.Modal);
-                System.Diagnostics.Debug.WriteLine("ModalPushing");
-            };
-            Application.Current.ModalPushed += (object sender, ModalPushedEventArgs e) =>
-            {
-                ModalPushed?.Invoke(sender, e.Modal);
-                System.Diagnostics.Debug.WriteLine("Modal Pushed");
-                _modals.Add(e.Modal);
-            };
-            Application.Current.ModalPopped += (object sender, ModalPoppedEventArgs e) =>
-            {
-                ModalPopped?.Invoke(sender, e.Modal);
-                System.Diagnostics.Debug.WriteLine("ModalPopped");
-                _modals.Remove(e.Modal);
-            };
+            Application.Current.ModalPopping += OnModalPopping;
+            Application.Current.ModalPushing += OnModalPushing;
+            Application.Current.ModalPushed += OnModalPushed;
+            Application.Current.ModalPopped += OnModalPopped;
 
-
+            /*
             Application.Current.ChildRemoved += (s, e) =>
                 {
                     System.Diagnostics.Debug.WriteLine("ChildRemoved");
@@ -89,8 +80,14 @@ namespace Forms9Patch
             {
                 System.Diagnostics.Debug.WriteLine("ChildAdded");
             };
-        }
+            */
 
+            //HardwareKeyHandlerEffect.ApplyTo(this);
+        }
+        #endregion
+
+
+        #region Factory
         /// <summary>
         /// Create the specified page.
         /// </summary>
@@ -102,7 +99,10 @@ namespace Forms9Patch
             _instance = new RootPage(page);
             return _instance;
         }
+        #endregion
 
+
+        #region Page Property
         /// <summary>
         /// Gets or sets the apps content page.
         /// </summary>
@@ -117,54 +117,129 @@ namespace Forms9Patch
             set
             {
                 _instance = _instance ?? new RootPage();
+
                 NavigationPage navPage;
                 if (_instance.PageController.InternalChildren.Count > 0)
                 {
-                    var page = _instance.PageController.InternalChildren[0] as Page;
+                    var oldPage = _instance.PageController.InternalChildren[0] as Page;
                     navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
                     if (navPage != null)
                     {
-                        navPage.Popped -= OnNavigationPagePopped;
                         navPage.Pushed -= OnNavigationPagePushed;
+                        navPage.Popped -= OnNavigationPagePopped;
                         navPage.PoppedToRoot -= OnNavigationPagePopped;
                     }
-                    if (page != null)
-                        _instance.PageController.InternalChildren.Remove(page);
-                }
-                _instance.PageController.InternalChildren.Insert(0, value);
-                navPage = value as NavigationPage;
-                if (navPage != null)
-                {
-                    navPage.Popped += OnNavigationPagePopped;
-                    navPage.Pushed += OnNavigationPagePushed;
-                    navPage.PoppedToRoot += OnNavigationPagePopped;
-                }
-                var masterDetailPage = _instance.PageController.InternalChildren[0] as MasterDetailPage;
-                if (masterDetailPage != null)
-                {
-                    masterDetailPage.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+                    if (oldPage != null)
                     {
-                        if (e.PropertyName == "Renderer")
+                        HardwareKeyFocus.DetachFrom(oldPage);
+                        _instance.PageController.InternalChildren.Remove(oldPage);
+                    }
+                }
+
+                if (value != null)
+                {
+                    HardwareKeyFocus.AttachTo(value);
+                    _instance.PageController.InternalChildren.Insert(0, value);
+                    navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+                    if (navPage != null)
+                    {
+                        navPage.Pushed += OnNavigationPagePushed;
+                        navPage.Popped += OnNavigationPagePopped;
+                        navPage.PoppedToRoot += OnNavigationPagePopped;
+                    }
+                    var masterDetailPage = _instance.PageController.InternalChildren[0] as MasterDetailPage;
+                    if (masterDetailPage != null)
+                    {
+                        masterDetailPage.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
                         {
-                            System.Diagnostics.Debug.WriteLine(masterDetailPage);
-                        }
-                    };
+                            if (e.PropertyName == "Renderer")
+                            {
+                                System.Diagnostics.Debug.WriteLine(masterDetailPage);
+                            }
+                        };
+                    }
                 }
             }
+        }
+
+        #endregion
+
+
+        #region Navigation Event Handlers
+
+
+
+        static void OnNavigationPagePushed(object sender, NavigationEventArgs e)
+        {
+            _instance?.RemovePopups(false);
+            NavigationPushed?.Invoke(sender, e.Page);
+            var navPage = sender as NavigationPage;
+            var previousPage = navPage.InternalChildren[navPage.InternalChildren.Count - 2] as Page;
+            HardwareKeyFocus.DetachFrom(previousPage);
+            HardwareKeyFocus.AttachTo(e.Page);
         }
 
         static void OnNavigationPagePopped(object sender, NavigationEventArgs e)
         {
             _instance?.RemovePopups(true);
             NavigationPopped?.Invoke(sender, e.Page);
+            HardwareKeyFocus.DetachFrom(e.Page);
+            var navPage = sender as NavigationPage;
+            var currentPage = navPage.InternalChildren[navPage.InternalChildren.Count - 1] as Page;
+            HardwareKeyFocus.AttachTo(currentPage);
         }
 
-        static void OnNavigationPagePushed(object sender, NavigationEventArgs e)
+        void OnModalPushing(object sender, ModalPushingEventArgs e)
         {
-            _instance?.RemovePopups(false);
-            NavigationPushed?.Invoke(sender, e.Page);
+            ModalPushing?.Invoke(sender, e.Modal);
+            //System.Diagnostics.Debug.WriteLine("ModalPushing");
         }
 
+        void OnModalPopping(object sender, ModalPoppingEventArgs e)
+        {
+            ModalPopping?.Invoke(sender, e.Modal);
+            //System.Diagnostics.Debug.WriteLine("ModalPopping");
+            RemovePopups(true);
+        }
+
+        void OnModalPushed(object sender, ModalPushedEventArgs e)
+        {
+            if (_modals.Count > 0)
+            {
+                var lastPage = _modals[_modals.Count - 1];
+                HardwareKeyFocus.DetachFrom(lastPage);
+            }
+            else
+                HardwareKeyFocus.DetachFrom(Page);
+
+            ModalPushed?.Invoke(sender, e.Modal);
+            _modals.Add(e.Modal);
+            //HardwareKeyHandlerEffect.ApplyTo(e.Modal);
+            System.Diagnostics.Debug.WriteLine("Modal Pushed");
+            HardwareKeyFocus.AttachTo(e.Modal);
+        }
+
+        void OnModalPopped(object sender, ModalPoppedEventArgs e)
+        {
+            ModalPopped?.Invoke(sender, e.Modal);
+            _modals.Remove(e.Modal);
+            //HardwareKeyHandlerEffect.RemoveFrom(e.Modal);
+            System.Diagnostics.Debug.WriteLine("ModalPopped");
+            HardwareKeyFocus.DetachFrom(e.Modal);
+
+            if (_modals.Count > 0)
+            {
+                var lastPage = _modals[_modals.Count - 1];
+                HardwareKeyFocus.AttachTo(lastPage);
+            }
+            else
+                HardwareKeyFocus.AttachTo(Page);
+
+        }
+        #endregion
+
+
+        #region Popup stack
         IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count - 1] : this) as IPageController;
 
         internal void AddPopup(PopupBase popup)
@@ -192,7 +267,6 @@ namespace Forms9Patch
                 PageController.InternalChildren.Remove(popup);
         }
 
-
         internal void RemovePopups(bool popping)
         {
             for (int i = PageController.InternalChildren.Count - 1; i > 0; i--)
@@ -202,7 +276,10 @@ namespace Forms9Patch
                     PageController.InternalChildren.RemoveAt(i);
             }
         }
+        #endregion
 
+
+        #region Android back button
         /// <summary>
         /// Ons the back button pressed.
         /// </summary>
@@ -233,7 +310,10 @@ namespace Forms9Patch
             }
             return base.OnBackButtonPressed();
         }
+        #endregion
 
+
+        #region Layout
         static bool _ignoreChildren;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.StackLayout"/> will not invalidate itself when a child changes.
@@ -268,36 +348,6 @@ namespace Forms9Patch
             }
         }
 
-        /// <summary>
-        /// Returns the amount of padding you'll need to keep your views from overlapping the status bar.
-        /// </summary>
-        /// <value>The status bar padding.</value>
-        public static double StatusBarPadding
-        {
-            get
-            {
-                if (_instance == null)
-                    return 0;
-                var pageController = _instance.PageController.InternalChildren[0] as IPageController;
-                var ignoresContainerArea = pageController != null ? pageController.IgnoresContainerArea : true;
-                double verticalY = 0;
-                //if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
-                if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
-                {
-                    verticalY = 20;
-                    if (Device.Idiom == TargetIdiom.Phone)
-                        verticalY = 20 - Math.Max(20, _startingHeight) + Math.Min(20, StatusBarService.Height);
-                }
-                return verticalY;
-            }
-        }
-
-        /// <summary>
-        /// Occurs when status bar padding changed.
-        /// </summary>
-        public static event EventHandler StatusBarPaddingChanged;
-
-
         static double _startingHeight = -1;
         static double _oldStatusBarPadding = -1;
 
@@ -318,8 +368,41 @@ namespace Forms9Patch
                 _oldStatusBarPadding = newStatusBarPadding;
                 StatusBarPaddingChanged?.Invoke(this, EventArgs.Empty);
             }
-            //System.Diagnostics.Debug.WriteLine("_startingHeight=["+_startingHeight+"]  StatusBar.Visible=["+StatusBarService.IsVisible+"] StatusBar.Height=["+StatusBarService.Height+"]");
             base.LayoutChildren(x, y, width, height);
         }
+        #endregion
+
+
+        #region iPhone X
+        /// <summary>
+        /// Returns the amount of padding you'll need to keep your views from overlapping the status bar.
+        /// </summary>
+        /// <value>The status bar padding.</value>
+        public static double StatusBarPadding
+        {
+            get
+            {
+                if (_instance == null)
+                    return 0;
+                var pageController = _instance.PageController.InternalChildren[0] as IPageController;
+                var ignoresContainerArea = pageController == null || pageController.IgnoresContainerArea;
+                double verticalY = 0;
+                //if (Device.OS == TargetPlatform.iOS && !ignoresContainerArea)
+                if (Device.RuntimePlatform == Device.iOS && !ignoresContainerArea)
+                {
+                    verticalY = 20;
+                    if (Device.Idiom == TargetIdiom.Phone)
+                        verticalY = 20 - Math.Max(20, _startingHeight) + Math.Min(20, StatusBarService.Height);
+                }
+                return verticalY;
+            }
+        }
+
+        /// <summary>
+        /// Occurs when status bar padding changed.
+        /// </summary>
+        public static event EventHandler StatusBarPaddingChanged;
+        #endregion
+
     }
 }
