@@ -130,15 +130,11 @@ namespace Forms9Patch
                         navPage.PoppedToRoot -= OnNavigationPagePopped;
                     }
                     if (oldPage != null)
-                    {
-                        HardwareKeyFocus.DetachFrom(oldPage);
                         _instance.PageController.InternalChildren.Remove(oldPage);
-                    }
                 }
 
                 if (value != null)
                 {
-                    HardwareKeyFocus.AttachTo(value);
                     _instance.PageController.InternalChildren.Insert(0, value);
                     navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
                     if (navPage != null)
@@ -153,9 +149,7 @@ namespace Forms9Patch
                         masterDetailPage.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
                         {
                             if (e.PropertyName == "Renderer")
-                            {
                                 System.Diagnostics.Debug.WriteLine(masterDetailPage);
-                            }
                         };
                     }
                 }
@@ -173,20 +167,12 @@ namespace Forms9Patch
         {
             _instance?.RemovePopups(false);
             NavigationPushed?.Invoke(sender, e.Page);
-            var navPage = sender as NavigationPage;
-            var previousPage = navPage.InternalChildren[navPage.InternalChildren.Count - 2] as Page;
-            HardwareKeyFocus.DetachFrom(previousPage);
-            HardwareKeyFocus.AttachTo(e.Page);
         }
 
         static void OnNavigationPagePopped(object sender, NavigationEventArgs e)
         {
             _instance?.RemovePopups(true);
             NavigationPopped?.Invoke(sender, e.Page);
-            HardwareKeyFocus.DetachFrom(e.Page);
-            var navPage = sender as NavigationPage;
-            var currentPage = navPage.InternalChildren[navPage.InternalChildren.Count - 1] as Page;
-            HardwareKeyFocus.AttachTo(currentPage);
         }
 
         void OnModalPushing(object sender, ModalPushingEventArgs e)
@@ -204,37 +190,16 @@ namespace Forms9Patch
 
         void OnModalPushed(object sender, ModalPushedEventArgs e)
         {
-            if (_modals.Count > 0)
-            {
-                var lastPage = _modals[_modals.Count - 1];
-                HardwareKeyFocus.DetachFrom(lastPage);
-            }
-            else
-                HardwareKeyFocus.DetachFrom(Page);
-
             ModalPushed?.Invoke(sender, e.Modal);
             _modals.Add(e.Modal);
-            //HardwareKeyHandlerEffect.ApplyTo(e.Modal);
             System.Diagnostics.Debug.WriteLine("Modal Pushed");
-            HardwareKeyFocus.AttachTo(e.Modal);
         }
 
         void OnModalPopped(object sender, ModalPoppedEventArgs e)
         {
             ModalPopped?.Invoke(sender, e.Modal);
             _modals.Remove(e.Modal);
-            //HardwareKeyHandlerEffect.RemoveFrom(e.Modal);
             System.Diagnostics.Debug.WriteLine("ModalPopped");
-            HardwareKeyFocus.DetachFrom(e.Modal);
-
-            if (_modals.Count > 0)
-            {
-                var lastPage = _modals[_modals.Count - 1];
-                HardwareKeyFocus.AttachTo(lastPage);
-            }
-            else
-                HardwareKeyFocus.AttachTo(Page);
-
         }
         #endregion
 

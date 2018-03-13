@@ -1,16 +1,16 @@
 ﻿<Properties StartupConfiguration="{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}|Default">
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.PCL.Forms9PatchDemo.PCL.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.NetStandard.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyFocus.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage.cs">
     <Files>
-      <File FileName="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" Line="368" Column="23" />
-      <File FileName="Forms9PatchDemo/Source/Forms9PatchDemo.cs" Line="163" Column="17" />
-      <File FileName="Forms9Patch/Forms9Patch.Source.iOS/Renderers/PageRenderer.cs" Line="93" Column="49" />
-      <File FileName="Forms9PatchDemo/Source/Pages.Code/RootPage.cs" Line="118" Column="13" />
-      <File FileName="Forms9PatchDemo/Source/Pages.Code/Page1.cs" Line="99" Column="15" />
-      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerExtensions.cs" Line="16" Column="56" />
-      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerBehavior.cs" Line="29" Column="54" />
-      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyFocus.cs" Line="14" Column="1" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" Line="153" Column="1" />
+      <File FileName="Forms9PatchDemo/Source/Forms9PatchDemo.cs" Line="163" Column="19" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage.cs" Line="149" Column="62" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/ModalHardwareKeyPage.cs" Line="113" Column="145" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/CustomFontEffectPage.cs" Line="56" Column="1" />
+      <File FileName="Forms9PatchDemo/Source/HomePage.cs" Line="233" Column="62" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerExtensions.cs" Line="144" Column="1" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyPage.cs" Line="44" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.NetStandard.Forms9PatchDemo.NetStandard.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
@@ -20,8 +20,6 @@
       <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Xamarin.Forms/Xamarin.Forms.Platform.iOS/ViewRenderer.cs" relfile="Xamarin.Forms/Xamarin.Forms.Platform.iOS/ViewRenderer.cs" line="235" column="1" />
       <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.XfSource.iOS/FocusableEffect.cs" relfile="Forms9Patch/Forms9Patch.XfSource.iOS/FocusableEffect.cs" line="16" column="1" />
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
-      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" relfile="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" line="189" column="50" />
-      <Breakpoint file="/Users/ben/Development/Xamarin/Forms9Patch2/Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" relfile="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" line="178" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <Debugger.DebugSourceFolders>

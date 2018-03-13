@@ -14,7 +14,6 @@
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs" Link="Effects\SliderStepSizeEffect.cs" />
-    <Compile Include="..\Forms9Patch.Source\Effects\HardwareKeyHandlerEffect.cs" Link="Effects\HardwareKeyHandlerEffect.cs" />
 
     <!-- Buttons -->
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Button.cs" Link="Elements\Buttons\Button.cs" />
@@ -78,7 +77,6 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\RootPage.cs" Link="Elements\RootPage.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ContentPage.cs" Link="Elements\ContentPage.cs" />
 
     <!-- Enums -->
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />
@@ -123,12 +121,13 @@
     <Compile Include="..\Forms9Patch.Source\Extensions\WebViewExtensions.cs" Link="Extensions\WebViewExtensions.cs" />
 
     <!-- HardwareKeyListener -->
+    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\FocusMonitor.cs" Link="HardwareKeyListener\FocusMonitor.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKey.cs" Link="HardwareKeyListener\HardwareKey.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyEventArgs.cs" Link="HardwareKeyListener\HardwareKeyEventArgs.cs" />
-    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyFocus.cs" Link="HardwareKeyListener\HardwareKeyFocus.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListener.cs" Link="HardwareKeyListener\HardwareKeyListener.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerBehavior.cs" Link="HardwareKeyListener\HardwareKeyListenerBehavior.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerExtensions.cs" Link="HardwareKeyListener\HardwareKeyListenerExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyPage.cs" Link="HardwareKeyListener\HardwareKeyPage.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyModifierKeys.cs" Link="HardwareKeyListener\HardwareKeyModifierKeys.cs" />
 
 

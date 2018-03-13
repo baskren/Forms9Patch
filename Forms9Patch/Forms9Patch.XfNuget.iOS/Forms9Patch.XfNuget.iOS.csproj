@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs">
-      <Link>PageRenderer.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
+      <Link>HardwareKeyPageRenderer.cs</Link>
     </Compile>
     <Compile Include="UIViewExtensions.cs" />
   </ItemGroup>

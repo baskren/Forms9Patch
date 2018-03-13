@@ -20,8 +20,8 @@ namespace Forms9Patch
 
         protected override void OnDetachingFrom(VisualElement bindable)
         {
-            if (HardwareKeyFocus.Element == bindable)
-                HardwareKeyFocus.Element = null;
+            if (HardwareKeyPage.FocusedElement == bindable)
+                HardwareKeyPage.FocusedElement = null;
             HardwareKeyListeners.Clear();
             base.OnDetachingFrom(bindable);
         }

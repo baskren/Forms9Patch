@@ -857,7 +857,6 @@ namespace Forms9Patch
         /// <param name="index">segment index.</param>
         public void SelectIndex(int index)
         {
-
             if (index >= 0 && index < _segments.Count)
                 _segments[index].IsSelected = true;
         }

@@ -3,45 +3,63 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    public static class HardwareKeyFocus
+    public static class FocusMonitor
     {
+        #region Properties
+        static bool _enabled;
+        public static bool Enabled
+        {
+            get => _enabled;
+            set => _enabled = value;
+        }
+
         static VisualElement _element;
-        public static VisualElement Element
+        public static VisualElement FocusedElement
         {
             get { return _element; }
             set
             {
-                value?.Focus();
-                if (_element != value)
+                bool changed = false;
+                if (_element != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("==============================================");
-                    System.Diagnostics.Debug.WriteLine("HardwareKeyFocusElement Was=[" + _element + "]");
-                    _element = value;
-                    ElementChanged?.Invoke(value, EventArgs.Empty);
-                    System.Diagnostics.Debug.WriteLine("HardwareKeyFocusElement  Is=[" + _element + "]");
-                    System.Diagnostics.Debug.WriteLine("==============================================");
-                    System.Diagnostics.Debug.WriteLine("");
+                    _element = null;
+                    changed = true;
                 }
+                if (value != null)
+                {
+                    var focused = value.Focus();
+                    if (focused)
+                    {
+                        _element = value;
+                        changed = true;
+                    }
+                }
+                if (changed)
+                    FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
             }
         }
+        #endregion
 
-        public static VisualElement DefaultElement { get; set; }
+        public static event EventHandler FocusedElementChanged;
 
-        public static event EventHandler ElementChanged;
 
 
         #region Focus Monitoring
-        internal static void AttachTo(VisualElement element)
+        public static void Start(VisualElement element)
         {
-            if (element == null)
+            if (!_enabled || element == null)
                 return;
+
+            if (element.IsFocused)
+                _element = element;
+
             if (element is NavigationPage navPage)
             {
                 // we don't attach to NavigationPages
                 if (navPage.InternalChildren.Count > 0)
                 {
                     var lastPage = navPage.InternalChildren[navPage.InternalChildren.Count - 1] as Page;
-                    AttachTo(lastPage);
+                    Start(lastPage);
                 }
             }
             else
@@ -53,18 +71,20 @@ namespace Forms9Patch
                 element.ChildRemoved += OnVisualElementChildRemoved;
                 foreach (var child in element.LogicalChildren)
                     if (child is VisualElement childElement)
-                        AttachTo(childElement);
+                        Start(childElement);
             }
         }
 
-        internal static void DetachFrom(VisualElement element)
+        public static void Stop(VisualElement element)
         {
             if (element == null)
                 return;
-            if (element == Element)
-                Element = null;
-            if (element == DefaultElement)
-                DefaultElement = null;
+            if (element == FocusedElement)
+                _element = null;
+            if (element == HardwareKeyPage.FocusedElement)
+                HardwareKeyPage._element = null;
+            if (element == HardwareKeyPage.DefaultFocusedElement)
+                HardwareKeyPage.DefaultFocusedElement = null;
 
             System.Diagnostics.Debug.WriteLine("DetachFrom[" + element + "]");
             element.Focused -= OnVisualElementFocused;
@@ -73,36 +93,35 @@ namespace Forms9Patch
             element.ChildRemoved -= OnVisualElementChildRemoved;
             foreach (var child in element.LogicalChildren)
                 if (child is VisualElement childElement)
-                    DetachFrom(childElement);
+                    Stop(childElement);
         }
 
         static void OnVisualElementUnfocused(object sender, FocusEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("OnVisualElementUnfocused[" + e.VisualElement + "]");
-            if (Element == e.VisualElement)
-                Element = null;
+            //System.Diagnostics.Debug.WriteLine("OnVisualElementUnfocused[" + e.VisualElement + "]");
+            if (FocusedElement == e.VisualElement)
+                FocusedElement = null;
         }
 
         static void OnVisualElementFocused(object sender, FocusEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("OnVisualElementFocused[" + e.VisualElement + "]");
-            Element = e.VisualElement;
+            //System.Diagnostics.Debug.WriteLine("OnVisualElementFocused[" + e.VisualElement + "]");
+            FocusedElement = e.VisualElement;
         }
 
 
         static void OnVisualElementChildRemoved(object sender, ElementEventArgs e)
         {
             if (sender is VisualElement visualElement)
-                DetachFrom(visualElement);
+                Stop(visualElement);
         }
 
         static void OnVisualElementChildAdded(object sender, ElementEventArgs e)
         {
             if (sender is VisualElement visualElement)
-                AttachTo(visualElement);
+                Start(visualElement);
         }
         #endregion
-
 
 
     }

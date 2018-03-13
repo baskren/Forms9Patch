@@ -7,18 +7,18 @@ using Xamarin.Forms;
 using P42.Utils;
 
 //[assembly: ExportRenderer(typeof(Forms9Patch.RootPage), typeof(Forms9Patch.iOS.PageRenderer))]
-[assembly: ExportRenderer(typeof(Xamarin.Forms.Page), typeof(Forms9Patch.iOS.PageRenderer))]
-//[assembly: ExportRenderer(typeof(Xamarin.Forms.ContentPage), typeof(Forms9Patch.iOS.PageRenderer))]
+//[assembly: ExportRenderer(typeof(Xamarin.Forms.Page), typeof(Forms9Patch.iOS.PageRenderer))]
+[assembly: ExportRenderer(typeof(Forms9Patch.HardwareKeyPage), typeof(Forms9Patch.iOS.HardwareKeyPageRenderer))]
 namespace Forms9Patch.iOS
 {
-    public class PageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer
+    public class HardwareKeyPageRenderer : Xamarin.Forms.Platform.iOS.PageRenderer
     {
         public override bool CanBecomeFirstResponder => true;
 
         [Export("OnKeyPress:")]
         void OnKeyPress(UIKeyCommand cmd)
         {
-            var element = HardwareKeyFocus.Element ?? HardwareKeyFocus.DefaultElement;
+            var element = HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement;
             if (element == null)
                 return;
             //System.Diagnostics.Debug.WriteLine("Forms9Patch.PageRenderer: cmd.Input=[" + cmd.Input + "] cmd.ModifierFlags[" + cmd.ModifierFlags + "] ");
@@ -88,7 +88,7 @@ namespace Forms9Patch.iOS
         {
             get
             {
-                var element = HardwareKeyFocus.Element ?? HardwareKeyFocus.DefaultElement;
+                var element = HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement;
                 if (element == null)
                     return null;
 

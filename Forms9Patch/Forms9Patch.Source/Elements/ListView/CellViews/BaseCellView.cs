@@ -679,14 +679,20 @@ namespace Forms9Patch
                 PutAwaySwipeButtons(false);
             }
             else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+            {
+                FocusMonitor.Stop(ContentView);
                 Children.Remove(ContentView);
+            }
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
             if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
+            {
+                FocusMonitor.Start(ContentView);
                 Children.Add(ContentView, 0, 0);
+            }
         }
 
         void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
