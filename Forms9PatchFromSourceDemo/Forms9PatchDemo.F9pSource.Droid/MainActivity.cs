@@ -28,13 +28,14 @@ namespace Forms9PatchDemo.Droid
 
         }
 
-        public override bool OnKeyUp(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
+        public override bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
         {
             //System.Diagnostics.Debug.WriteLine("MainActivity.OnKeyUp[" + keyCode + "] e.Action[" + e.Action + "] e.Characters[" + e.Characters + "] e.DisplayLabel[" + e.DisplayLabel + "] e.Flags[" + e.Flags + "] e.MetaStates[" + e.MetaState + "] e.Modifiers[" + e.Modifiers + "] e.Unicode[" + (char)e.UnicodeChar + "] " + e.Characters + "");
-            var handled = Forms9Patch.Droid.HardwareKeyHandler.OnKeyUp(keyCode, e);
+
+            var handled = Forms9Patch.Droid.HardwareKeyListener.OnKeyDown(keyCode, e);
             if (handled)
                 return true;
-            return base.OnKeyUp(keyCode, e);
+            return base.OnKeyDown(keyCode, e);
         }
 
     }

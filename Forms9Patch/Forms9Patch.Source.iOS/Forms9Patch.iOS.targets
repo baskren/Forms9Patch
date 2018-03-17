@@ -32,6 +32,9 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
 			<Link>Extensions\UITextViewExtensions.cs</Link>
 		</Compile>
+		<Compile Include="..\Forms9Patch.Source.iOS\Extensions\UIViewExtensions.cs">
+			<Link>Extensions\UIViewExtensions.cs</Link>
+		</Compile>
 
 		<!-- MODELS -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
@@ -48,9 +51,9 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
 			<Link>Renderers\EnhancedListViewRenderer.cs</Link>
 		</Compile>
-		<!--Compile Include="..\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs">
+		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
 			<Link>Renderers\PageRenderer.cs</Link>
-		</Compile-->
+		</Compile>
 
 		<!-- SERVICES -->
 		<Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">

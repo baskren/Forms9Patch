@@ -22,6 +22,9 @@
 		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs">
 			<Link>Extensions\AlignmentExtensions.cs</Link>
 		</Compile>
+		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\AndroidViewExtensions.cs">
+			<Link>Extensions\AndroidViewExtensions.cs</Link>
+		</Compile>
 		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs">
 			<Link>Extensions\FormattedStringExtensions.cs</Link>
 		</Compile>
@@ -33,6 +36,15 @@
 		</Compile>
 		<Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
 			<Link>Extensions\TypeExtensions.cs</Link>
+		</Compile>
+
+
+		<!-- HARDWARE KEY LISTENER -->
+		<Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs">
+			<Link>HardwareKeyListener\HardwareKeyListener.cs</Link>
+		</Compile>
+		<Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListenerEffect.cs">
+			<Link>HardwareKeyListener\HardwareKeyListenerEffect.cs</Link>
 		</Compile>
 
 
@@ -89,9 +101,6 @@
 			<Link>Services\WebViewExtensionsService.cs</Link>
 		</Compile>
 
-		<Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyHandler.cs">
-			<Link>HardwareKeyHandler.cs</Link>
-		</Compile>
 
 
 	</ItemGroup>

@@ -15,11 +15,13 @@ namespace Forms9Patch
 
         protected override void OnAttachedTo(VisualElement bindable)
         {
+            HardwareKeyListenerEffect.AttachTo(bindable);
             base.OnAttachedTo(bindable);
         }
 
         protected override void OnDetachingFrom(VisualElement bindable)
         {
+            HardwareKeyListenerEffect.DetachFrom(bindable);
             if (HardwareKeyPage.FocusedElement == bindable)
                 HardwareKeyPage.FocusedElement = null;
             HardwareKeyListeners.Clear();

@@ -43,7 +43,6 @@ namespace Forms9Patch
         public static event EventHandler FocusedElementChanged;
 
 
-
         #region Focus Monitoring
         public static void Start(VisualElement element)
         {

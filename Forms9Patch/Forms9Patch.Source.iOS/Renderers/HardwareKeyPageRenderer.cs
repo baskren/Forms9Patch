@@ -15,6 +15,58 @@ namespace Forms9Patch.iOS
     {
         public override bool CanBecomeFirstResponder => true;
 
+        /* These have no impact
+        public override void PressesBegan(NSSet<UIPress> presses, UIPressesEvent evt)
+        {
+            base.PressesBegan(presses, evt);
+        }
+
+        public override void PressesEnded(NSSet<UIPress> presses, UIPressesEvent evt)
+        {
+            base.PressesEnded(presses, evt);
+        }
+
+        public override void PressesChanged(NSSet<UIPress> presses, UIPressesEvent evt)
+        {
+            base.PressesChanged(presses, evt);
+        }
+
+        public override void PressesCancelled(NSSet<UIPress> presses, UIPressesEvent evt)
+        {
+            base.PressesCancelled(presses, evt);
+        }
+
+        public override bool CanPerform(Selector action, NSObject withSender)
+        {
+            System.Diagnostics.Debug.WriteLine("CanPerform: " + action.Name);
+            return base.CanPerform(action, withSender);
+        }
+
+        public override NSObject GetTargetForAction(Selector action, NSObject sender)
+        {
+            System.Diagnostics.Debug.WriteLine("GetTargetForAction: " + action.Name);
+            return base.GetTargetForAction(action, sender);
+        }
+
+        public override UIViewController GetTargetViewControllerForAction(Selector action, NSObject sender)
+        {
+            return base.GetTargetViewControllerForAction(action, sender);
+        }
+
+        public override IntPtr GetMethodForSelector(Selector sel)
+        {
+            System.Diagnostics.Debug.WriteLine("GetMethodForSelector: " + sel.Name);
+            return base.GetMethodForSelector(sel);
+        }
+
+        public override bool RespondsToSelector(Selector sel)
+        {
+            System.Diagnostics.Debug.WriteLine("RespondsToSelector: " + sel.Name);
+            return base.RespondsToSelector(sel);
+        }
+        */
+
+
         [Export("OnKeyPress:")]
         void OnKeyPress(UIKeyCommand cmd)
         {
@@ -23,38 +75,64 @@ namespace Forms9Patch.iOS
                 return;
             //System.Diagnostics.Debug.WriteLine("Forms9Patch.PageRenderer: cmd.Input=[" + cmd.Input + "] cmd.ModifierFlags[" + cmd.ModifierFlags + "] ");
 
-            var isFirstResponder = CanBecomeFirstResponder;
-            var directBinding = (bool)this.GetPropertyValue("IsDirectBinding");
+            //var isFirstResponder = CanBecomeFirstResponder;
+            //var directBinding = (bool)this.GetPropertyValue("IsDirectBinding");
 
             var modifiers = HardwareKeyModifierKeys.None;
-            string input = cmd.Input.ToString();
+            string keyLabel = cmd.Input.ToString().ToUpper();
             if (cmd.Input == UIKeyCommand.DownArrow)
-                input = HardwareKey.DownArrowInput;
+                keyLabel = HardwareKey.DownArrowKeyLabel;
             else if (cmd.Input == UIKeyCommand.UpArrow)
-                input = HardwareKey.UpArrowInput;
+                keyLabel = HardwareKey.UpArrowKeyLabel;
             else if (cmd.Input == UIKeyCommand.LeftArrow)
-                input = HardwareKey.LeftArrowInput;
+                keyLabel = HardwareKey.LeftArrowKeyLabel;
             else if (cmd.Input == UIKeyCommand.RightArrow)
-                input = HardwareKey.RightArrowInput;
+                keyLabel = HardwareKey.RightArrowKeyLabel;
             else if (cmd.Input == UIKeyCommand.Escape)
-                input = HardwareKey.EscapeInput;
+                keyLabel = HardwareKey.EscapeKeyLabel;
             else if (cmd.Input == "\b")
-                input = HardwareKey.BackspaceDeleteInput;
+                keyLabel = HardwareKey.BackspaceDeleteKeyLabel;
             else if (cmd.Input == "\0x7F")
-                input = HardwareKey.ForwardDeleteInput;
+                keyLabel = HardwareKey.ForwardDeleteKeyLabel;
             else if (cmd.Input == "\t")
-                input = HardwareKey.TabInput;
+                keyLabel = HardwareKey.TabKeyLabel;
             else if (cmd.Input == "\r")
-                input = HardwareKey.EnterReturnInput;
+                keyLabel = HardwareKey.EnterReturnKeyLabel;
             else if (cmd.Input == "UIKeyInputPageUp")
-                input = HardwareKey.PageUpInput;
+                keyLabel = HardwareKey.PageUpKeyLabel;
             else if (cmd.Input == "UIKeyInputPageDown")
-                input = HardwareKey.PageDownInput;
+                keyLabel = HardwareKey.PageDownKeyLabel;
             else if (cmd.Input == "UIKeyInputHome")
-                input = HardwareKey.HomeInput;
+                keyLabel = HardwareKey.HomeKeyLabel;
             else if (cmd.Input == "UIKeyInputEnd")
-                input = HardwareKey.EndInput;
+                keyLabel = HardwareKey.EndKeyLabel;
 
+            /*
+            else if (cmd.Input == "\\^P")
+                input = HardwareKey.F1Label;
+            else if (cmd.Input == "UIKeyInputF2")
+                input = HardwareKey.F2KeyLabel;
+            else if (cmd.Input == "UIKeyInputF3")
+                input = HardwareKey.F3KeyLabel;
+            else if (cmd.Input == "UIKeyInputF4")
+                input = HardwareKey.F4KeyLabel;
+            else if (cmd.Input == "UIKeyInputF5")
+                input = HardwareKey.F5KeyLabel;
+            else if (cmd.Input == "UIKeyInputF6")
+                input = HardwareKey.F6KeyLabel;
+            else if (cmd.Input == "UIKeyInputF7")
+                input = HardwareKey.F7KeyLabel;
+            else if (cmd.Input == "UIKeyInputF8")
+                input = HardwareKey.F8KeyLabel;
+            else if (cmd.Input == "UIKeyInputF9")
+                input = HardwareKey.F9KeyLabel;
+            else if (cmd.Input == "UIKeyInputF10")
+                input = HardwareKey.F10KeyLabel;
+            else if (cmd.Input == "UIKeyInputF11")
+                input = HardwareKey.F11KeyLabel;
+            else if (cmd.Input == "UIKeyInputF12")
+                input = HardwareKey.F12KeyLabel;
+            */
 
             if ((cmd.ModifierFlags & UIKeyModifierFlags.AlphaShift) > 0)
                 modifiers |= HardwareKeyModifierKeys.CapsLock;
@@ -73,7 +151,7 @@ namespace Forms9Patch.iOS
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (listener.HardwareKey.Input.ToLower() == input && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyLabel == keyLabel.ToUpper() && listener.HardwareKey.ModifierKeys == modifiers)
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);
@@ -98,59 +176,101 @@ namespace Forms9Patch.iOS
                 for (int i = 0; i < listeners.Count; i++)
                 {
                     var listener = listeners[i];
-                    var input = listener.HardwareKey.Input;
+                    var keyLabel = listener.HardwareKey.KeyLabel;
                     UIKeyModifierFlags flags = (UIKeyModifierFlags)0;
                     NSString nsInput = null;
-                    if (input.Length > 1)
+                    if (keyLabel.Length > 1)
                     {
-                        switch (input)
+                        switch (keyLabel)
                         {
-                            case HardwareKey.UpArrowInput:
+                            case HardwareKey.UpArrowKeyLabel:
                                 nsInput = UIKeyCommand.UpArrow;
                                 break;
-                            case HardwareKey.DownArrowInput:
+                            case HardwareKey.DownArrowKeyLabel:
                                 nsInput = UIKeyCommand.DownArrow;
                                 break;
-                            case HardwareKey.LeftArrowInput:
+                            case HardwareKey.LeftArrowKeyLabel:
                                 nsInput = UIKeyCommand.LeftArrow;
                                 break;
-                            case HardwareKey.RightArrowInput:
+                            case HardwareKey.RightArrowKeyLabel:
                                 nsInput = UIKeyCommand.RightArrow;
                                 break;
-                            case HardwareKey.EscapeInput:
+                            case HardwareKey.EscapeKeyLabel:
                                 nsInput = UIKeyCommand.Escape;
                                 break;
-                            case HardwareKey.BackspaceDeleteInput:
+                            case HardwareKey.BackspaceDeleteKeyLabel:
                                 nsInput = new NSString("\b");
                                 break;
-                            case HardwareKey.ForwardDeleteInput:
+                            case HardwareKey.ForwardDeleteKeyLabel:
                                 nsInput = new NSString("\0x7F");
                                 break;
-                            // there is not an insert key on macs.  Maps to Fn key?
-                            case HardwareKey.TabInput:
+                            // there is not an insert key on mac extended keyboard.  In it's place is the Fn?
+                            case HardwareKey.TabKeyLabel:
                                 nsInput = new NSString("\t");
                                 break;
-                            case HardwareKey.EnterReturnInput:
+                            case HardwareKey.EnterReturnKeyLabel:
                                 nsInput = new NSString("\r");
                                 break;
-                            case HardwareKey.PageUpInput:
+                            case HardwareKey.PageUpKeyLabel:
                                 nsInput = new NSString("UIKeyInputPageUp");
                                 break;
-                            case HardwareKey.PageDownInput:
+                            case HardwareKey.PageDownKeyLabel:
                                 nsInput = new NSString("UIKeyInputPageDown");
                                 break;
-                            case HardwareKey.HomeInput:
+                            case HardwareKey.HomeKeyLabel:
                                 nsInput = new NSString("UIKeyInputHome");
                                 break;
-                            case HardwareKey.EndInput:
+                            case HardwareKey.EndKeyLabel:
                                 nsInput = new NSString("UIKeyInputEnd");
                                 break;
+
+                            /* Don't know how to get Function keys on mac!
+                            case HardwareKey.F1Label:
+                                //nsInput = new NSString("UIKeyInputF1");
+                                //nsInput = new NSString("" + (char)58);
+                                nsInput = new NSString("\\^P");
+                                break;
+                            case HardwareKey.F2KeyLabel:
+                                nsInput = new NSString("UIKeyInputF2");
+                                break;
+                            case HardwareKey.F3KeyLabel:
+                                nsInput = new NSString("UIKeyInputF3");
+                                break;
+                            case HardwareKey.F4KeyLabel:
+                                nsInput = new NSString("UIKeyInputF4");
+                                break;
+                            case HardwareKey.F5KeyLabel:
+                                nsInput = new NSString("UIKeyInputF5");
+                                break;
+                            case HardwareKey.F6KeyLabel:
+                                nsInput = new NSString("UIKeyInputF6");
+                                break;
+                            case HardwareKey.F7KeyLabel:
+                                nsInput = new NSString("UIKeyInputF7");
+                                break;
+                            case HardwareKey.F8KeyLabel:
+                                nsInput = new NSString("UIKeyInputF8");
+                                break;
+                            case HardwareKey.F9KeyLabel:
+                                nsInput = new NSString("UIKeyInputF9");
+                                break;
+                            case HardwareKey.F10KeyLabel:
+                                nsInput = new NSString("UIKeyInputF10");
+                                break;
+                            case HardwareKey.F11KeyLabel:
+                                nsInput = new NSString("UIKeyInputF11");
+                                break;
+                            case HardwareKey.F12KeyLabel:
+                                nsInput = new NSString("UIKeyInputF12");
+                                break;
+                            */
+
                             default:
                                 continue;
                         }
                     }
                     else
-                        nsInput = new NSString(input.ToLower());
+                        nsInput = new NSString(keyLabel.ToLower());
 
                     var modifier = listener.HardwareKey.ModifierKeys;
                     if ((modifier & HardwareKeyModifierKeys.Alternate) > 0)

@@ -1,18 +1,7 @@
-﻿<Properties StartupConfiguration="{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}|Default">
+﻿<Properties StartupConfiguration="{F653783E-527A-4C07-9C07-52964F225729}|Default">
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.PCL.Forms9PatchDemo.PCL.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.NetStandard.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage.cs">
-    <Files>
-      <File FileName="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" Line="153" Column="1" />
-      <File FileName="Forms9PatchDemo/Source/Forms9PatchDemo.cs" Line="163" Column="19" />
-      <File FileName="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage.cs" Line="149" Column="62" />
-      <File FileName="Forms9PatchDemo/Source/Pages.Code/ModalHardwareKeyPage.cs" Line="113" Column="145" />
-      <File FileName="Forms9PatchDemo/Source/Pages.Code/CustomFontEffectPage.cs" Line="56" Column="1" />
-      <File FileName="Forms9PatchDemo/Source/HomePage.cs" Line="233" Column="62" />
-      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyListenerExtensions.cs" Line="144" Column="1" />
-      <File FileName="Forms9Patch/Forms9Patch.Source/HardwareKeyListener/HardwareKeyPage.cs" Line="44" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.NetStandard.Forms9PatchDemo.NetStandard.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

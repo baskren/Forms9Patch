@@ -126,6 +126,7 @@
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyEventArgs.cs" Link="HardwareKeyListener\HardwareKeyEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListener.cs" Link="HardwareKeyListener\HardwareKeyListener.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerBehavior.cs" Link="HardwareKeyListener\HardwareKeyListenerBehavior.cs" />
+    <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerEffect.cs" Link="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyListenerExtensions.cs" Link="HardwareKeyListener\HardwareKeyListenerExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyPage.cs" Link="HardwareKeyListener\HardwareKeyPage.cs" />
     <Compile Include="..\Forms9Patch.Source\HardwareKeyListener\HardwareKeyModifierKeys.cs" Link="HardwareKeyListener\HardwareKeyModifierKeys.cs" />

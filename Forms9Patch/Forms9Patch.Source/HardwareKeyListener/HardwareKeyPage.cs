@@ -61,10 +61,12 @@ namespace Forms9Patch
             {
                 if (value != _defaultElement)
                 {
-                    if (value is View || value is HardwareKeyPage)
+                    if (value is View || value is Forms9Patch.HardwareKeyPage)
                         _defaultElement = value;
+                    else if (value != null)
+                        throw new Exception("DefaultElement can only be a Xamarin.Forms.View or Forms9Patch.HardwareKeyPage. [" + value + "]");
                     else
-                        throw new Exception("DefaultElement can only be a Xamarin.Forms.View or Forms9Patch.HardwareKeyPage");
+                        _defaultElement = null;
                 }
             }
         }
