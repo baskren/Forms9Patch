@@ -79,7 +79,7 @@ And lastly is Forms9Patch's services:
  - [Getting Started](guides/GettingStarted.md)
  - [Using ```Forms9Patch.ImageSource```](guides/ImageSource.md)
  - [Using ```Forms9Patch.Image```](guides/Image.md)
- - Using Forms9Patch's layouts
+ - [Using Forms9Patch's layouts](guides/Layouts.md)
  - Using Forms9Patch's pop-ups
  - Custom Fonts
  - Using ```Forms9Patch.Label```

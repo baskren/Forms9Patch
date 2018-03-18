@@ -263,4 +263,12 @@ takes a `Forms9Patch.ElementShape` value).  Available values are:
 
 ## HasShadow and ShadowInverted Properties
 
-Let's go out on '
+Let's go out on limb and keep adding embelishments to the image.  Once you have the ability to impose a shape to your image, 
+it is common to want a shadow to match the imposed shape.  `HasShadow` makes that happen.  And, going even further, `ShadowInverted` 
+reverses the shadow to give a recessed effect to the shadow.  
+
+Now, here is where Forms9Patch can do something a bit clever.  If the `ImageSource` is a *.png image **with** transparency in the image,
+the `HasShadow` property of Forms9Patch will impose the shadow on the overlap of the `ElementShape` *and* the non-transparent parts of
+the image!  NOTE: Setting `ShadowInverted` to true breaks this functionality.
+
+
