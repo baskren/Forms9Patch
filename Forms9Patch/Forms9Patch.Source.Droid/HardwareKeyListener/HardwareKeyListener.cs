@@ -6,7 +6,7 @@ namespace Forms9Patch.Droid
     {
         public static bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
         {
-            System.Diagnostics.Debug.WriteLine("HardwareKeyPageListener.OnKeyUp[" + keyCode + "] dispLabel=[" + (e.DisplayLabel == null ? "" : e.DisplayLabel) + "] number=[" + (e.Number == null ? "" : e.Number) + "] [" + (char)e.UnicodeChar == null + "] [" + e + "] ");
+            System.Diagnostics.Debug.WriteLine("HardwareKeyPageListener.OnKeyUp[" + keyCode + "] dispLabel=[" + (e.DisplayLabel == 0 ? "" : ""+e.DisplayLabel) + "] number=[" + (e.Number == 0 ? "" : ""+e.Number) + "] [" + (char)e.UnicodeChar == null + "] [" + e + "] ");
 
             var element = HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement;
             if (element == null)

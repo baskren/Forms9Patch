@@ -52,12 +52,12 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.HardwareKey"/> class.
         /// </summary>
-        /// <param name="input">KeyLabel.</param>
+        /// <param name="keyLabel">KeyLabel.</param>
         /// <param name="modifierKeys">Modifier keys.</param>
         /// <param name="discoverableTitle">Discoverable title.</param>
-        public HardwareKey(string input, HardwareKeyModifierKeys modifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null)
+        public HardwareKey(string keyLabel, HardwareKeyModifierKeys modifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null)
         {
-            KeyLabel = input;
+            KeyLabel = keyLabel;
             ModifierKeys = modifierKeys;
             DiscoverableTitle = discoverableTitle;
         }
@@ -84,25 +84,25 @@ namespace Forms9Patch
         /// <summary>
         /// Escape key HardwareKey.KeyLabel
         /// </summary>
-        public const string EscapeKeyLabel = "▣ ESC";
+        public const string EscapeKeyLabel = "▣ ␛ ESCAPE";
 
-        public const string BackspaceDeleteKeyLabel = "▣ BACKSPACE/DELETE";
+        public const string BackspaceDeleteKeyLabel = "▣ ⌫ BACKSPACE/DELETE";
 
-        public const string ForwardDeleteKeyLabel = "▣ FOWARD DELETE";
+        public const string ForwardDeleteKeyLabel = "▣ ⌦ FORWARED DELETE";
 
-        public const string InsertKeyLabel = "▣ INSERT";
+        public const string InsertKeyLabel = "▣ ⎀ INSERT";
 
-        public const string TabKeyLabel = "▣ TAB";
+        public const string TabKeyLabel = "▣ ⇥ TAB";
 
-        public const string EnterReturnKeyLabel = "▣ ENTER/RETURN";
+        public const string EnterReturnKeyLabel = "▣ ⏎ ENTER/RETURN";
 
-        public const string PageUpKeyLabel = "▣ PAGE UP";
+        public const string PageUpKeyLabel = "▣ ⤒ PAGE UP";
 
-        public const string PageDownKeyLabel = "▣ PAGE DOWN";
+        public const string PageDownKeyLabel = "▣ ⤓ PAGE DOWN";
 
-        public const string HomeKeyLabel = "▣ HOME";
+        public const string HomeKeyLabel = "▣ ⇤ HOME";
 
-        public const string EndKeyLabel = "▣ END";
+        public const string EndKeyLabel = "▣ ⇥ END";
 
         /* Not supported in iOS */
         public const string F1KeyLabel = "▣ F1";
@@ -129,6 +129,27 @@ namespace Forms9Patch
 
         public const string F12KeyLabel = "▣ F12";
 
+        public const string Numpad0 = "▣ N0";
+
+        public const string Numpad1 = "▣ N1";
+
+        public const string Numpad2 = "▣ N2";
+
+        public const string Numpad3 = "▣ N3";
+
+        public const string Numpad4 = "▣ N4";
+
+        public const string Numpad5 = "▣ N5";
+
+        public const string Numpad6 = "▣ N6";
+
+        public const string Numpad7 = "▣ N7";
+
+        public const string Numpad8 = "▣ N8";
+
+        public const string Numpad9 = "▣ N9";
+
+        
         #endregion
 
 
