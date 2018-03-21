@@ -7,17 +7,17 @@ namespace Forms9Patch
     {
         #region properties
         /// <summary>
-        /// Backing store for the KeyLabel property 
+        /// Backing store for the KeyInput property 
         /// </summary>
-        public static readonly BindableProperty KeyLabelProperty = BindableProperty.Create("KeyLabel", typeof(string), typeof(HardwareKey), default(string));
+        public static readonly BindableProperty KeyInputProperty = BindableProperty.Create("KeyInput", typeof(string), typeof(HardwareKey), default(string));
         /// <summary>
         /// A case sensitive string representing the key pressed.  
         /// </summary>
         /// <value>The input.</value>
-        public string KeyLabel
+        public string KeyInput
         {
-            get { return (string)GetValue(KeyLabelProperty); }
-            set { SetValue(KeyLabelProperty, value.ToUpper()); }
+            get { return (string)GetValue(KeyInputProperty); }
+            set { SetValue(KeyInputProperty, value.ToUpper()); }
         }
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.HardwareKey"/> class.
         /// </summary>
-        /// <param name="keyLabel">KeyLabel.</param>
+        /// <param name="keyInput">KeyInput.</param>
         /// <param name="modifierKeys">Modifier keys.</param>
         /// <param name="discoverableTitle">Discoverable title.</param>
-        public HardwareKey(string keyLabel, HardwareKeyModifierKeys modifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null)
+        public HardwareKey(string keyInput, HardwareKeyModifierKeys modifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null)
         {
-            KeyLabel = keyLabel;
+            KeyInput = keyInput;
             ModifierKeys = modifierKeys;
             DiscoverableTitle = discoverableTitle;
         }
@@ -66,90 +66,122 @@ namespace Forms9Patch
         #region Constants
 
         /// <summary>
-        /// Up arrow key HardwareKey.KeyLabel
+        /// Up arrow key HardwareKey.KeyInput
         /// </summary>
-        public const string UpArrowKeyLabel = "↑ UP ARROW";
+        public const string UpArrowKeyInput = "↑";
         /// <summary>
-        /// Down arrow key HardwareKey.KeyLabel
+        /// Down arrow key HardwareKey.KeyInput
         /// </summary>
-        public const string DownArrowKeyLabel = "↓ DOWN ARROW";
+        public const string DownArrowKeyInput = "↓";
         /// <summary>
-        /// Left arrow key HardwareKey.KeyLabel
+        /// Left arrow key HardwareKey.KeyInput
         /// </summary>
-        public const string LeftArrowKeyLabel = "← LEFT ARROW";
+        public const string LeftArrowKeyInput = "←";
         /// <summary>
-        /// Right arrow key HardwareKey.KeyLabel
+        /// Right arrow key HardwareKey.KeyInput
         /// </summary>
-        public const string RightArrowKeyLabel = "→ RIGHT ARROW";
+        public const string RightArrowKeyInput = "→";
         /// <summary>
-        /// Escape key HardwareKey.KeyLabel
+        /// Escape key HardwareKey.KeyInput
         /// </summary>
-        public const string EscapeKeyLabel = "▣ ␛ ESCAPE";
+        public const string EscapeKeyInput = "␛";
 
-        public const string BackspaceDeleteKeyLabel = "▣ ⌫ BACKSPACE/DELETE";
+        /// <summary>
+        /// The backspace delete key HardwareKey.KeyInput.
+        /// </summary>
+        public const string BackspaceDeleteKeyInput = "⌫";
 
-        public const string ForwardDeleteKeyLabel = "▣ ⌦ FORWARED DELETE";
+        /// <summary>
+        /// The forward delete key HardwareKey.KeyInput.
+        /// </summary>
+        public const string ForwardDeleteKeyInput = "⌦";
 
-        public const string InsertKeyLabel = "▣ ⎀ INSERT";
+        /// <summary>
+        /// The insert key HardwareKey.KeyInput.
+        /// </summary>
+        public const string InsertKeyInput = "⤹";
 
-        public const string TabKeyLabel = "▣ ⇥ TAB";
+        /// <summary>
+        /// The tab key HardwareKey.KeyInput.
+        /// </summary>
+        public const string TabKeyInput = "⇥";
 
-        public const string EnterReturnKeyLabel = "▣ ⏎ ENTER/RETURN";
+        /// <summary>
+        /// The enter return key HardwareKey.KeyInput.
+        /// </summary>
+        public const string EnterReturnKeyInput = "⏎";
 
-        public const string PageUpKeyLabel = "▣ ⤒ PAGE UP";
+        /// <summary>
+        /// The page up key HardwareKey.KeyInput.
+        /// </summary>
+        public const string PageUpKeyInput = "⇧";
 
-        public const string PageDownKeyLabel = "▣ ⤓ PAGE DOWN";
+        /// <summary>
+        /// The page down key HardwareKey.KeyInput.
+        /// </summary>
+        public const string PageDownKeyInput = "⇩";
 
-        public const string HomeKeyLabel = "▣ ⇤ HOME";
+        /// <summary>
+        /// The home key HardwareKey.KeyInput.
+        /// </summary>
+        public const string HomeKeyInput = "⇦";
 
-        public const string EndKeyLabel = "▣ ⇥ END";
+        /// <summary>
+        /// The end key HardwareKey.KeyInput.
+        /// </summary>
+        public const string EndKeyInput = "⇨";
 
-        /* Not supported in iOS */
-        public const string F1KeyLabel = "▣ F1";
+        /* Function keys are not supported in iOS */
 
-        public const string F2KeyLabel = "▣ F2";
+        /// <summary>
+        /// The f1 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F1KeyInput = "①";
+        /// <summary>
+        /// The f2 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F2KeyInput = "②";
+        /// <summary>
+        /// The f3 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F3KeyInput = "③";
+        /// <summary>
+        /// The f4 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F4KeyInput = "④";
+        /// <summary>
+        /// The f5 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F5KeyInput = "⑤";
+        /// <summary>
+        /// The f6 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F6KeyInput = "⑥";
+        /// <summary>
+        /// The f7 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F7KeyInput = "⑦";
+        /// <summary>
+        /// The f8 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F8KeyInput = "⑧";
+        /// <summary>
+        /// The f9 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F9KeyInput = "⑨";
+        /// <summary>
+        /// The f10 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F10KeyInput = "⑩";
+        /// <summary>
+        /// The f11 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F11KeyInput = "⑪";
+        /// <summary>
+        /// The f12 key HardwareKey.KeyInput.
+        /// </summary>
+        public const string F12KeyInput = "⑫";
 
-        public const string F3KeyLabel = "▣ F3";
-
-        public const string F4KeyLabel = "▣ F4";
-
-        public const string F5KeyLabel = "▣ F5";
-
-        public const string F6KeyLabel = "▣ F6";
-
-        public const string F7KeyLabel = "▣ F7";
-
-        public const string F8KeyLabel = "▣ F8";
-
-        public const string F9KeyLabel = "▣ F9";
-
-        public const string F10KeyLabel = "▣ F10";
-
-        public const string F11KeyLabel = "▣ F11";
-
-        public const string F12KeyLabel = "▣ F12";
-
-        public const string Numpad0 = "▣ N0";
-
-        public const string Numpad1 = "▣ N1";
-
-        public const string Numpad2 = "▣ N2";
-
-        public const string Numpad3 = "▣ N3";
-
-        public const string Numpad4 = "▣ N4";
-
-        public const string Numpad5 = "▣ N5";
-
-        public const string Numpad6 = "▣ N6";
-
-        public const string Numpad7 = "▣ N7";
-
-        public const string Numpad8 = "▣ N8";
-
-        public const string Numpad9 = "▣ N9";
-
-        
         #endregion
 
 

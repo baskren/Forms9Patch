@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Views.InputMethods;
 using Xamarin.Forms;
+using Java.Util;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyboardService))]
 namespace Forms9Patch.Droid
@@ -45,6 +46,29 @@ namespace Forms9Patch.Droid
                 }
                 return true;
             });
+        }
+
+        public string LanguageRegion
+        {
+            get
+            {
+                var imm = (InputMethodManager)Forms9Patch.Droid.Settings.Context.GetSystemService(Context.InputMethodService);
+                var ims = imm.CurrentInputMethodSubtype;
+                var result = ims?.Locale.Replace('_', '-');
+
+                if (string.IsNullOrWhiteSpace(result))
+                {
+                    var language = Locale.Default.Language;
+                    var country = Locale.Default.Country;
+
+                    if (string.IsNullOrWhiteSpace(language))
+                        return country;
+                    if (string.IsNullOrWhiteSpace(country))
+                        return language;
+                    return language + "-" + country;
+                }
+                return result;
+            }
         }
     }
 }

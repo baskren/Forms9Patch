@@ -41,5 +41,10 @@ namespace Forms9Patch
         /// Was the key press occompanied by the function [fn] key?
         /// </summary>
         FunctionKey = 64,
+        /// <summary>
+        /// Match any modifier key combination
+        /// </summary>
+        Any = 128,
+
     }
 }

@@ -96,7 +96,7 @@ namespace Forms9Patch.UWP
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int GetKeyNameText(int lParam, StringBuilder lpString, int cchSize);
 
-        string KeyLabel(uint keycode)
+        string KeyInput(uint keycode)
         {
             var buffer = new StringBuilder(64);
             //int lParam = ((int)keycode) << 16;
@@ -110,162 +110,162 @@ namespace Forms9Patch.UWP
         private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             keyDownCaptured = false;
-            var keyLabel = "";
+            var keyInput = "";
             switch(args.VirtualKey)
             {
                 case Windows.System.VirtualKey.Back:
-                    keyLabel = Forms9Patch.HardwareKey.BackspaceDeleteKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.BackspaceDeleteKeyInput;
                     break;
                 case Windows.System.VirtualKey.Delete:
-                    keyLabel = Forms9Patch.HardwareKey.ForwardDeleteKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.ForwardDeleteKeyInput;
                     break;
                 case Windows.System.VirtualKey.Down:
-                    keyLabel = Forms9Patch.HardwareKey.DownArrowKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.DownArrowKeyInput;
                     break;
                 case Windows.System.VirtualKey.End:
-                    keyLabel = Forms9Patch.HardwareKey.EndKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.EndKeyInput;
                     break;
                 case Windows.System.VirtualKey.Escape:
-                    keyLabel = Forms9Patch.HardwareKey.EscapeKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.EscapeKeyInput;
                     break;
                 case Windows.System.VirtualKey.F1:
-                    keyLabel = Forms9Patch.HardwareKey.F1KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F1KeyInput;
                     break;
                 case Windows.System.VirtualKey.F2:
-                    keyLabel = Forms9Patch.HardwareKey.F2KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F2KeyInput;
                     break;
                 case Windows.System.VirtualKey.F3:
-                    keyLabel = Forms9Patch.HardwareKey.F3KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F3KeyInput;
                     break;
                 case Windows.System.VirtualKey.F4:
-                    keyLabel = Forms9Patch.HardwareKey.F4KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F4KeyInput;
                     break;
                 case Windows.System.VirtualKey.F5:
-                    keyLabel = Forms9Patch.HardwareKey.F5KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F5KeyInput;
                     break;
                 case Windows.System.VirtualKey.F6:
-                    keyLabel = Forms9Patch.HardwareKey.F6KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F6KeyInput;
                     break;
                 case Windows.System.VirtualKey.F7:
-                    keyLabel = Forms9Patch.HardwareKey.F7KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F7KeyInput;
                     break;
                 case Windows.System.VirtualKey.F8:
-                    keyLabel = Forms9Patch.HardwareKey.F8KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F8KeyInput;
                     break;
                 case Windows.System.VirtualKey.F9:
-                    keyLabel = Forms9Patch.HardwareKey.F9KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F9KeyInput;
                     break;
                 case Windows.System.VirtualKey.F10:
-                    keyLabel = Forms9Patch.HardwareKey.F10KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F10KeyInput;
                     break;
                 case Windows.System.VirtualKey.F11:
-                    keyLabel = Forms9Patch.HardwareKey.F11KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F11KeyInput;
                     break;
                 case Windows.System.VirtualKey.F12:
-                    keyLabel = Forms9Patch.HardwareKey.F12KeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.F12KeyInput;
                     break;
                 case Windows.System.VirtualKey.Home:
-                    keyLabel = Forms9Patch.HardwareKey.HomeKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.HomeKeyInput;
                     break;
                 case Windows.System.VirtualKey.Insert:
-                    keyLabel = Forms9Patch.HardwareKey.InsertKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.InsertKeyInput;
                     break;
                 case Windows.System.VirtualKey.Left:
-                    keyLabel = Forms9Patch.HardwareKey.LeftArrowKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.LeftArrowKeyInput;
                     break;
                 case Windows.System.VirtualKey.PageDown:
-                    keyLabel = Forms9Patch.HardwareKey.PageDownKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.PageDownKeyInput;
                     break;
                 case Windows.System.VirtualKey.PageUp:
-                    keyLabel = Forms9Patch.HardwareKey.PageUpKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.PageUpKeyInput;
                     break;
                 case Windows.System.VirtualKey.Right:
-                    keyLabel = Forms9Patch.HardwareKey.RightArrowKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.RightArrowKeyInput;
                     break;
                 case Windows.System.VirtualKey.Up:
-                    keyLabel = Forms9Patch.HardwareKey.UpArrowKeyLabel;
+                    keyInput = Forms9Patch.HardwareKey.UpArrowKeyInput;
                     break;
 
 
                 case Windows.System.VirtualKey.NumberPad0:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad0;
+                    keyInput = Forms9Patch.HardwareKey.Numpad0;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad1:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad1;
+                    keyInput = Forms9Patch.HardwareKey.Numpad1;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad2:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad2;
+                    keyInput = Forms9Patch.HardwareKey.Numpad2;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad3:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad3;
+                    keyInput = Forms9Patch.HardwareKey.Numpad3;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad4:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad4;
+                    keyInput = Forms9Patch.HardwareKey.Numpad4;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad5:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad5;
+                    keyInput = Forms9Patch.HardwareKey.Numpad5;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad6:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad6;
+                    keyInput = Forms9Patch.HardwareKey.Numpad6;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad7:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad7;
+                    keyInput = Forms9Patch.HardwareKey.Numpad7;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad8:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad8;
+                    keyInput = Forms9Patch.HardwareKey.Numpad8;
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.NumberPad9:
-                    keyLabel = Forms9Patch.HardwareKey.Numpad9;
+                    keyInput = Forms9Patch.HardwareKey.Numpad9;
                     keyDownCaptured = true;
                     break;
 
                 case Windows.System.VirtualKey.Number0:
-                    keyLabel = "0";
+                    keyInput = "0";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number1:
-                    keyLabel = "1";
+                    keyInput = "1";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number2:
-                    keyLabel = "2";
+                    keyInput = "2";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number3:
-                    keyLabel = "3";
+                    keyInput = "3";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number4:
-                    keyLabel = "4";
+                    keyInput = "4";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number5:
-                    keyLabel = "5";
+                    keyInput = "5";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number6:
-                    keyLabel = "6";
+                    keyInput = "6";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number7:
-                    keyLabel = "7";
+                    keyInput = "7";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number8:
-                    keyLabel = "8";
+                    keyInput = "8";
                     keyDownCaptured = true;
                     break;
                 case Windows.System.VirtualKey.Number9:
-                    keyLabel = "9";
+                    keyInput = "9";
                     keyDownCaptured = true;
                     break;
 
@@ -276,13 +276,13 @@ namespace Forms9Patch.UWP
             }
 
             var modifiers = GetModifierKeys();
-            //var result = new Forms9Patch.HardwareKey(keyLabel, GetModifierKeys());
+            //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = Element.GetHardwareKeyListeners();
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (listener.HardwareKey.KeyLabel == keyLabel && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyInput == keyInput && listener.HardwareKey.ModifierKeys == modifiers)
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);
@@ -315,16 +315,16 @@ namespace Forms9Patch.UWP
                 return;
             }
 
-            var keyLabel = ("" + (char)args.KeyCode).ToUpper();
+            var keyInput = ("" + (char)args.KeyCode).ToUpper();
 
             var modifiers = GetModifierKeys();
-            //var result = new Forms9Patch.HardwareKey(keyLabel, GetModifierKeys());
+            //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = Element.GetHardwareKeyListeners();
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (listener.HardwareKey.KeyLabel == keyLabel && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyInput == keyInput && listener.HardwareKey.ModifierKeys == modifiers)
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);

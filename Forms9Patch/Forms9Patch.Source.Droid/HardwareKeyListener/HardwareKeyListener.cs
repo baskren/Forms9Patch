@@ -6,198 +6,198 @@ namespace Forms9Patch.Droid
     {
         public static bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
         {
-            System.Diagnostics.Debug.WriteLine("HardwareKeyPageListener.OnKeyUp[" + keyCode + "] dispLabel=[" + (e.DisplayLabel == 0 ? "" : ""+e.DisplayLabel) + "] number=[" + (e.Number == 0 ? "" : ""+e.Number) + "] [" + (char)e.UnicodeChar == null + "] [" + e + "] ");
+            System.Diagnostics.Debug.WriteLine("HardwareKeyPageListener.OnKeyDown[" + keyCode + "] dispLabel=[" + (e.DisplayLabel == 0 ? "" : "" + e.DisplayLabel) + "] number=[" + (e.Number == 0 ? "" : "" + e.Number) + "] [" + (char)e.UnicodeChar == null + "] [" + e + "] ");
 
             var element = HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement;
             if (element == null)
                 return false;
 
-            var keyLabel = ("" + (char)e.DisplayLabel).ToUpper();
+            var keyInput = ("" + (char)e.UnicodeChar).ToUpper();
             var modifiers = HardwareKeyModifierKeys.None;
             switch (keyCode)
             {
                 case Android.Views.Keycode.Numpad0:
-                    keyLabel = "0";
+                    keyInput = "0";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad1:
-                    keyLabel = "1";
+                    keyInput = "1";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad2:
-                    keyLabel = "2";
+                    keyInput = "2";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad3:
-                    keyLabel = "3";
+                    keyInput = "3";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad4:
-                    keyLabel = "4";
+                    keyInput = "4";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad5:
-                    keyLabel = "5";
+                    keyInput = "5";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad6:
-                    keyLabel = "6";
+                    keyInput = "6";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad7:
-                    keyLabel = "7";
+                    keyInput = "7";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad8:
-                    keyLabel = "8";
+                    keyInput = "8";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.Numpad9:
-                    keyLabel = "9";
+                    keyInput = "9";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadAdd:
-                    keyLabel = "+";
+                    keyInput = "+";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadComma:
-                    keyLabel = ",";
+                    keyInput = ",";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadDivide:
-                    keyLabel = "/";
+                    keyInput = "/";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadDot:
-                    keyLabel = ".";
+                    keyInput = ".";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadEnter:
-                    keyLabel = HardwareKey.EnterReturnKeyLabel;
+                    keyInput = HardwareKey.EnterReturnKeyInput;
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadEquals:
-                    keyLabel = "=";
+                    keyInput = "=";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadLeftParen:
-                    keyLabel = "(";
+                    keyInput = "(";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadRightParen:
-                    keyLabel = ")";
+                    keyInput = ")";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.NumpadSubtract:
-                    keyLabel = "-";
+                    keyInput = "-";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
                     break;
                 case Android.Views.Keycode.DpadDown:
-                    keyLabel = HardwareKey.DownArrowKeyLabel;
+                    keyInput = HardwareKey.DownArrowKeyInput;
                     break;
                 case Android.Views.Keycode.DpadUp:
-                    keyLabel = HardwareKey.UpArrowKeyLabel;
+                    keyInput = HardwareKey.UpArrowKeyInput;
                     break;
                 case Android.Views.Keycode.DpadLeft:
-                    keyLabel = HardwareKey.LeftArrowKeyLabel;
+                    keyInput = HardwareKey.LeftArrowKeyInput;
                     break;
                 case Android.Views.Keycode.DpadRight:
-                    keyLabel = HardwareKey.RightArrowKeyLabel;
+                    keyInput = HardwareKey.RightArrowKeyInput;
                     break;
                 case Android.Views.Keycode.Escape:
-                    keyLabel = HardwareKey.EscapeKeyLabel;
+                    keyInput = HardwareKey.EscapeKeyInput;
                     break;
 
                 case Android.Views.Keycode.F1:
-                    keyLabel = HardwareKey.F1KeyLabel;
+                    keyInput = HardwareKey.F1KeyInput;
                     break;
                 case Android.Views.Keycode.F2:
-                    keyLabel = HardwareKey.F2KeyLabel;
+                    keyInput = HardwareKey.F2KeyInput;
                     break;
                 case Android.Views.Keycode.F3:
-                    keyLabel = HardwareKey.F3KeyLabel;
+                    keyInput = HardwareKey.F3KeyInput;
                     break;
                 case Android.Views.Keycode.F4:
-                    keyLabel = HardwareKey.F4KeyLabel;
+                    keyInput = HardwareKey.F4KeyInput;
                     break;
                 case Android.Views.Keycode.F5:
-                    keyLabel = HardwareKey.F5KeyLabel;
+                    keyInput = HardwareKey.F5KeyInput;
                     break;
                 case Android.Views.Keycode.F6:
-                    keyLabel = HardwareKey.F6KeyLabel;
+                    keyInput = HardwareKey.F6KeyInput;
                     break;
                 case Android.Views.Keycode.F7:
-                    keyLabel = HardwareKey.F7KeyLabel;
+                    keyInput = HardwareKey.F7KeyInput;
                     break;
                 case Android.Views.Keycode.F8:
-                    keyLabel = HardwareKey.F8KeyLabel;
+                    keyInput = HardwareKey.F8KeyInput;
                     break;
                 case Android.Views.Keycode.F9:
-                    keyLabel = HardwareKey.F9KeyLabel;
+                    keyInput = HardwareKey.F9KeyInput;
                     break;
                 case Android.Views.Keycode.F10:
-                    keyLabel = HardwareKey.F10KeyLabel;
+                    keyInput = HardwareKey.F10KeyInput;
                     break;
                 case Android.Views.Keycode.F11:
-                    keyLabel = HardwareKey.F11KeyLabel;
+                    keyInput = HardwareKey.F11KeyInput;
                     break;
                 case Android.Views.Keycode.F12:
-                    keyLabel = HardwareKey.F12KeyLabel;
+                    keyInput = HardwareKey.F12KeyInput;
                     break;
 
                 case Android.Views.Keycode.PageUp:
-                    keyLabel = HardwareKey.PageUpKeyLabel;
+                    keyInput = HardwareKey.PageUpKeyInput;
                     break;
                 case Android.Views.Keycode.PageDown:
-                    keyLabel = HardwareKey.PageDownKeyLabel;
+                    keyInput = HardwareKey.PageDownKeyInput;
                     break;
                 case Android.Views.Keycode.Insert:
-                    keyLabel = HardwareKey.InsertKeyLabel;
+                    keyInput = HardwareKey.InsertKeyInput;
                     break;
                 case Android.Views.Keycode.Del:
-                    keyLabel = HardwareKey.BackspaceDeleteKeyLabel;
+                    keyInput = HardwareKey.BackspaceDeleteKeyInput;
                     break;
                 case Android.Views.Keycode.ForwardDel:
-                    keyLabel = HardwareKey.ForwardDeleteKeyLabel;
+                    keyInput = HardwareKey.ForwardDeleteKeyInput;
                     break;
                 case Android.Views.Keycode.Home:
-                    keyLabel = HardwareKey.HomeKeyLabel;
+                    keyInput = HardwareKey.HomeKeyInput;
                     break;
                 case Android.Views.Keycode.Endcall:
-                    keyLabel = HardwareKey.EndKeyLabel;
+                    keyInput = HardwareKey.EndKeyInput;
                     break;
-
-                case Android.Views.Keycode.Num0:
-                    keyLabel = "0";
-                    break;
-                case Android.Views.Keycode.Num1:
-                    keyLabel = "1";
-                    break;
-                case Android.Views.Keycode.Num2:
-                    keyLabel = "2";
-                    break;
-                case Android.Views.Keycode.Num3:
-                    keyLabel = "3";
-                    break;
-                case Android.Views.Keycode.Num4:
-                    keyLabel = "4";
-                    break;
-                case Android.Views.Keycode.Num5:
-                    keyLabel = "5";
-                    break;
-                case Android.Views.Keycode.Num6:
-                    keyLabel = "6";
-                    break;
-                case Android.Views.Keycode.Num7:
-                    keyLabel = "7";
-                    break;
-                case Android.Views.Keycode.Num8:
-                    keyLabel = "8";
-                    break;
-                case Android.Views.Keycode.Num9:
-                    keyLabel = "9";
-                    break;
-
+                /*
+            case Android.Views.Keycode.Num0:
+                keyInput = "0";
+                break;
+            case Android.Views.Keycode.Num1:
+                keyInput = "1";
+                break;
+            case Android.Views.Keycode.Num2:
+                keyInput = "2";
+                break;
+            case Android.Views.Keycode.Num3:
+                keyInput = "3";
+                break;
+            case Android.Views.Keycode.Num4:
+                keyInput = "4";
+                break;
+            case Android.Views.Keycode.Num5:
+                keyInput = "5";
+                break;
+            case Android.Views.Keycode.Num6:
+                keyInput = "6";
+                break;
+            case Android.Views.Keycode.Num7:
+                keyInput = "7";
+                break;
+            case Android.Views.Keycode.Num8:
+                keyInput = "8";
+                break;
+            case Android.Views.Keycode.Num9:
+                keyInput = "9";
+                break;
+*/
                 default:
                     if (e.UnicodeChar == 0)
                         return false;
@@ -221,11 +221,12 @@ namespace Forms9Patch.Droid
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (listener.HardwareKey.KeyLabel == keyLabel && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyInput == keyInput.ToUpper() && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys.HasFlag(HardwareKeyModifierKeys.Any)))
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);
-                    listener.Pressed?.Invoke(element, new HardwareKeyEventArgs(listener.HardwareKey, element));
+                    var observedHardwareKey = new HardwareKey(keyInput.ToUpper(), modifiers);
+                    listener.Pressed?.Invoke(element, new HardwareKeyEventArgs(observedHardwareKey, element));
                     //System.Diagnostics.Debug.WriteLine("SUCCESS!!!");
                     return true;
                 }
