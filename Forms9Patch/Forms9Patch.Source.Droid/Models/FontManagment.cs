@@ -15,6 +15,9 @@ namespace Forms9Patch.Droid
     class FontManagment : IFontFamilies
     {
 
+        //static string CustomFontDirRoot => Settings.Context.CacheDir.AbsolutePath;
+        static string CustomFontDirRoot => Settings.Context.DataDir.AbsolutePath;
+
         static Typeface TrySystemFont(string fontFamily)
         {
             string fontFilePath;
@@ -96,7 +99,7 @@ namespace Forms9Patch.Droid
                     //return null;
                 }
                 */
-                // move it to the Application's CacheDir
+                // move it to the Application's CustomFontDirRoot
                 using (var inputStream = EmbeddedResourceCache.GetStream(fontFamily, assembly))
                 {
                     if (inputStream == null)
@@ -105,7 +108,7 @@ namespace Forms9Patch.Droid
                         return null;
                     }
 
-                    var cachedFontDir = new File(Settings.Context.CacheDir + "/ResourceFonts");
+                    var cachedFontDir = new File(CustomFontDirRoot + "/ResourceFonts");
                     if (!cachedFontDir.Exists())
                         cachedFontDir.Mkdir();
 
@@ -150,8 +153,8 @@ namespace Forms9Patch.Droid
                     return _fontFiles;
                 var context = Settings.Context;
                 var fontAssetFileNames = context.Assets.List("Fonts");
-                var cachedFontDir = new File(context.CacheDir.AbsolutePath + "/AssetFonts");
-                // move any Android Asset Fonts to the Applications CacheDir
+                var cachedFontDir = new File(CustomFontDirRoot + "/AssetFonts");
+                // move any Android Asset Fonts to the Applications CustomFontDirRoot
                 if (fontAssetFileNames != null)
                 {
                     foreach (var fontAssetFileName in fontAssetFileNames)
@@ -161,7 +164,7 @@ namespace Forms9Patch.Droid
                         var cachedFontFile = new File(cachedFontDir.AbsolutePath, fontAssetFileName);
                         if (!cachedFontFile.Exists())
                         {
-                            // copy into CacheDir
+                            // copy into CustomFontDirRoot
                             var inputStream = context.Assets.Open("Fonts/" + fontAssetFileName);
                             var outputStream = new FileOutputStream(cachedFontFile);
                             const int bufferSize = 1024;
