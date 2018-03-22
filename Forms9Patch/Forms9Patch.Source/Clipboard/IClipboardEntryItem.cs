@@ -16,6 +16,10 @@ namespace Forms9Patch
     /// <typeparam name="T"></typeparam>
     public interface IClipboardEntryItem<T> : IClipboardEntryItem
     {
+        /// <summary>
+        /// Gets the value of this IClipboardEntryItem
+        /// </summary>
+        /// <value>The value.</value>
         new T Value { get; }
     }
 

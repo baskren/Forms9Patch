@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Making it easier to manage HardwareKeyListeners
+    /// </summary>
     public static class HardwareKeyListenerExtensions
     {
         internal static ObservableCollection<HardwareKeyListener> GetHardwareKeyListeners(this VisualElement visualElement)
@@ -41,37 +44,80 @@ namespace Forms9Patch
             return hardwareKeyListener;
         }
 
-
         /// <summary>
-        /// Instantiates and adds a hardware key listener to this Xamarin.Forms.View.
+        /// Adds the hardware key listener to a View.
         /// </summary>
         /// <returns>The hardware key listener.</returns>
-        /// <param name="view">Xamarin.Forms.View.</param>
-        /// <param name="keyInput">Key Label.</param>
+        /// <param name="view">View.</param>
+        /// <param name="keyInput">Key input.</param>
         /// <param name="hardwareKeyModifierKeys">Hardware key modifier keys.</param>
         /// <param name="discoverableTitle">Discoverable title.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this View view, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys, string discoverableTitle, EventHandler<HardwareKeyEventArgs> onPressed = null) => AddHardwareKeyListener(view as VisualElement, keyInput, hardwareKeyModifierKeys, discoverableTitle, onPressed);
 
+        /// <summary>
+        /// Adds the hardware key listener to a View.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="view">View.</param>
+        /// <param name="keyInput">Key input.</param>
+        /// <param name="hardwareKeyModifierKeys">Hardware key modifier keys.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this View view, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs> onPressed = null) => AddHardwareKeyListener(view as VisualElement, keyInput, hardwareKeyModifierKeys, null, onPressed);
 
+        /// <summary>
+        /// Adds the hardware key listener to a View.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="view">View.</param>
+        /// <param name="keyInput">Key input.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this View view, string keyInput, EventHandler<HardwareKeyEventArgs> onPressed) => AddHardwareKeyListener(view as VisualElement, keyInput, HardwareKeyModifierKeys.None, null, onPressed);
 
+        /// <summary>
+        /// Adds the hardware key listener to a View.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="view">View.</param>
+        /// <param name="keyInput">Key input.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this View view, string keyInput) => AddHardwareKeyListener(view as VisualElement, keyInput, HardwareKeyModifierKeys.None, null, null);
 
         /// <summary>
-        /// Instantiates and adds a hardware key listener to this ContentPage.
+        /// Adds a hardware key listener to a HardwareKeyPage.
         /// </summary>
         /// <returns>The hardware key listener.</returns>
-        /// <param name="page">Forms9Patch.HardwareKeyPage.</param>
-        /// <param name="keyInput">Key Label.</param>
+        /// <param name="page">Page.</param>
+        /// <param name="keyInput">Key input.</param>
         /// <param name="hardwareKeyModifierKeys">Hardware key modifier keys.</param>
         /// <param name="discoverableTitle">Discoverable title.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this Forms9Patch.HardwareKeyPage page, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys, string discoverableTitle, EventHandler<HardwareKeyEventArgs> onPressed = null) => AddHardwareKeyListener(page as VisualElement, keyInput, hardwareKeyModifierKeys, discoverableTitle, onPressed);
 
+        /// <summary>
+        /// Adds a hardware key listener to a HardwareKeyPage.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="page">Page.</param>
+        /// <param name="keyInput">Key input.</param>
+        /// <param name="hardwareKeyModifierKeys">Hardware key modifier keys.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this Forms9Patch.HardwareKeyPage page, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs> onPressed = null) => AddHardwareKeyListener(page as VisualElement, keyInput, hardwareKeyModifierKeys, null, onPressed);
 
+        /// <summary>
+        /// Adds a hardware key listener to a HardwareKeyPage.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="page">Page.</param>
+        /// <param name="keyInput">Key input.</param>
+        /// <param name="onPressed">On pressed.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this Forms9Patch.HardwareKeyPage page, string keyInput, EventHandler<HardwareKeyEventArgs> onPressed) => AddHardwareKeyListener(page as VisualElement, keyInput, HardwareKeyModifierKeys.None, null, onPressed);
 
+        /// <summary>
+        /// Adds a hardware key listener to HardwareKeyPage.
+        /// </summary>
+        /// <returns>The hardware key listener.</returns>
+        /// <param name="page">Page.</param>
+        /// <param name="keyInput">Key input.</param>
         public static HardwareKeyListener AddHardwareKeyListener(this Forms9Patch.HardwareKeyPage page, string keyInput) => AddHardwareKeyListener(page as VisualElement, keyInput, HardwareKeyModifierKeys.None, null, null);
 
 

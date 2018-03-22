@@ -3,6 +3,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Required to enable Hardware Key Listening capability
+    /// </summary>
     public class HardwareKeyPage : ContentPage
     {
         #region static implementation
@@ -34,6 +37,10 @@ namespace Forms9Patch
         }
 
         internal static VisualElement _element;
+        /// <summary>
+        /// Gets or sets the currently focused element - the element who'sHardwareKeyListeners are currently active
+        /// </summary>
+        /// <value>The focused element.</value>
         public static VisualElement FocusedElement
         {
             get { return _element; }
@@ -54,6 +61,10 @@ namespace Forms9Patch
         }
 
         static VisualElement _defaultElement;
+        /// <summary>
+        /// Gets or sets the default focused element - the element who's HardwareKeyListeners are active if no element has focus 
+        /// </summary>
+        /// <value>The default focused element.</value>
         public static VisualElement DefaultFocusedElement
         {
             get => _defaultElement;
@@ -71,9 +82,15 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Event called when the HardwareKay.FocusedElement has changed
+        /// </summary>
         public static event EventHandler FocusedElementChanged;
         #endregion
 
+        /// <summary>
+        /// Called when the HardwareKeyPage appears
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -81,6 +98,9 @@ namespace Forms9Patch
             FocusMonitor.Start(this);
         }
 
+        /// <summary>
+        /// Called when the HardwareKeyPage disappers
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

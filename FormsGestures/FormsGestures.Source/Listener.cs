@@ -1316,6 +1316,9 @@ namespace FormsGestures
             GestureService.For(this);
         }
 
+        /// <summary>
+        /// Cancels the active gestures.
+        /// </summary>
         public static void CancelActiveGestures()
         {
             GestureService.Cancel();

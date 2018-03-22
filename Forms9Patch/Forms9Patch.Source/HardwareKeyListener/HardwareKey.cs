@@ -3,6 +3,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Hardware key: Defines a key stroke for which to be listened
+    /// </summary>
     public class HardwareKey : BindableObject
     {
         #region properties

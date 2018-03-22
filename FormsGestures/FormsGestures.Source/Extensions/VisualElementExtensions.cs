@@ -275,6 +275,7 @@ namespace FormsGestures
             return FindChildrenWithPropertyAndOfType<VisualElement>(Xamarin.Forms.Application.Current.MainPage, propertyName);
         }
 
+
         /// <summary>
         /// Enumarates all VisualElements with a given type (T) 
         /// </summary>
@@ -285,11 +286,20 @@ namespace FormsGestures
             return FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.Application.Current.MainPage, null);
         }
 
+        /// <summary>
+        /// Finds the currently focused VisualElement.
+        /// </summary>
+        /// <returns>The focused.</returns>
         public static VisualElement FindFocused()
         {
             return Xamarin.Forms.Application.Current.MainPage.FindChildWithFocus();
         }
 
+        /// <summary>
+        /// Finds the child VisualElement that is currently focused.
+        /// </summary>
+        /// <returns>The child with focus.</returns>
+        /// <param name="element">Element.</param>
         public static VisualElement FindChildWithFocus(this Element element)
         {
             if (element is VisualElement visualElement)

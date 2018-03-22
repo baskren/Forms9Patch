@@ -258,102 +258,100 @@ namespace Forms9Patch.iOS
                     var listener = listeners[i];
                     var keyInput = listener.HardwareKey.KeyInput;
                     NSString nsInput = null;
-                    if (keyInput.Length > 1)
+                    //if (keyInput.Length > 1)
+                    //{
+                    switch (keyInput)
                     {
-                        switch (keyInput)
-                        {
-                            case HardwareKey.UpArrowKeyInput:
-                                nsInput = UIKeyCommand.UpArrow;
-                                break;
-                            case HardwareKey.DownArrowKeyInput:
-                                nsInput = UIKeyCommand.DownArrow;
-                                break;
-                            case HardwareKey.LeftArrowKeyInput:
-                                nsInput = UIKeyCommand.LeftArrow;
-                                break;
-                            case HardwareKey.RightArrowKeyInput:
-                                nsInput = UIKeyCommand.RightArrow;
-                                break;
-                            case HardwareKey.EscapeKeyInput:
-                                nsInput = UIKeyCommand.Escape;
-                                break;
-                            case HardwareKey.BackspaceDeleteKeyInput:
-                                nsInput = new NSString("\b");
-                                break;
-                            case HardwareKey.ForwardDeleteKeyInput:
-                                //nsInput = new NSString("\0x7F");
-                                nsInput = new NSString("UIKeyInputDelete");
-                                break;
-                            // there is not an insert key on mac extended keyboard.  In it's place is the Fn?
-                            case HardwareKey.TabKeyInput:
-                                nsInput = new NSString("\t");
-                                break;
-                            case HardwareKey.EnterReturnKeyInput:
-                                nsInput = new NSString("\r");
-                                break;
-                            case HardwareKey.PageUpKeyInput:
-                                nsInput = new NSString("UIKeyInputPageUp");
-                                break;
-                            case HardwareKey.PageDownKeyInput:
-                                nsInput = new NSString("UIKeyInputPageDown");
-                                break;
-                            case HardwareKey.HomeKeyInput:
-                                nsInput = new NSString("UIKeyInputHome");
-                                break;
-                            case HardwareKey.EndKeyInput:
-                                nsInput = new NSString("UIKeyInputEnd");
-                                break;
-                            case HardwareKey.InsertKeyInput:
-                                nsInput = new NSString("UIKeyInputInsert");
-                                break;
+                        case HardwareKey.UpArrowKeyInput:
+                            nsInput = UIKeyCommand.UpArrow;
+                            break;
+                        case HardwareKey.DownArrowKeyInput:
+                            nsInput = UIKeyCommand.DownArrow;
+                            break;
+                        case HardwareKey.LeftArrowKeyInput:
+                            nsInput = UIKeyCommand.LeftArrow;
+                            break;
+                        case HardwareKey.RightArrowKeyInput:
+                            nsInput = UIKeyCommand.RightArrow;
+                            break;
+                        case HardwareKey.EscapeKeyInput:
+                            nsInput = UIKeyCommand.Escape;
+                            break;
+                        case HardwareKey.BackspaceDeleteKeyInput:
+                            nsInput = new NSString("\b");
+                            break;
+                        case HardwareKey.ForwardDeleteKeyInput:
+                            //nsInput = new NSString("\0x7F");
+                            nsInput = new NSString("UIKeyInputDelete");
+                            break;
+                        // there is not an insert key on mac extended keyboard.  In it's place is the Fn?
+                        case HardwareKey.TabKeyInput:
+                            nsInput = new NSString("\t");
+                            break;
+                        case HardwareKey.EnterReturnKeyInput:
+                            nsInput = new NSString("\r");
+                            break;
+                        case HardwareKey.PageUpKeyInput:
+                            nsInput = new NSString("UIKeyInputPageUp");
+                            break;
+                        case HardwareKey.PageDownKeyInput:
+                            nsInput = new NSString("UIKeyInputPageDown");
+                            break;
+                        case HardwareKey.HomeKeyInput:
+                            nsInput = new NSString("UIKeyInputHome");
+                            break;
+                        case HardwareKey.EndKeyInput:
+                            nsInput = new NSString("UIKeyInputEnd");
+                            break;
+                        case HardwareKey.InsertKeyInput:
+                            nsInput = new NSString("UIKeyInputInsert");
+                            break;
 
-                            /* Don't know how to get Function keys on mac!
-                            case HardwareKey.F1Label:
-                                //nsInput = new NSString("UIKeyInputF1");
-                                //nsInput = new NSString("" + (char)58);
-                                nsInput = new NSString("\\^P");
-                                break;
-                            case HardwareKey.F2KeyInput:
-                                nsInput = new NSString("UIKeyInputF2");
-                                break;
-                            case HardwareKey.F3KeyInput:
-                                nsInput = new NSString("UIKeyInputF3");
-                                break;
-                            case HardwareKey.F4KeyInput:
-                                nsInput = new NSString("UIKeyInputF4");
-                                break;
-                            case HardwareKey.F5KeyInput:
-                                nsInput = new NSString("UIKeyInputF5");
-                                break;
-                            case HardwareKey.F6KeyInput:
-                                nsInput = new NSString("UIKeyInputF6");
-                                break;
-                            case HardwareKey.F7KeyInput:
-                                nsInput = new NSString("UIKeyInputF7");
-                                break;
-                            case HardwareKey.F8KeyInput:
-                                nsInput = new NSString("UIKeyInputF8");
-                                break;
-                            case HardwareKey.F9KeyInput:
-                                nsInput = new NSString("UIKeyInputF9");
-                                break;
-                            case HardwareKey.F10KeyInput:
-                                nsInput = new NSString("UIKeyInputF10");
-                                break;
-                            case HardwareKey.F11KeyInput:
-                                nsInput = new NSString("UIKeyInputF11");
-                                break;
-                            case HardwareKey.F12KeyInput:
-                                nsInput = new NSString("UIKeyInputF12");
-                                break;
-                            */
+                        /* Don't know how to get Function keys on mac!
+                        case HardwareKey.F1Label:
+                            //nsInput = new NSString("UIKeyInputF1");
+                            //nsInput = new NSString("" + (char)58);
+                            nsInput = new NSString("\\^P");
+                            break;
+                        case HardwareKey.F2KeyInput:
+                            nsInput = new NSString("UIKeyInputF2");
+                            break;
+                        case HardwareKey.F3KeyInput:
+                            nsInput = new NSString("UIKeyInputF3");
+                            break;
+                        case HardwareKey.F4KeyInput:
+                            nsInput = new NSString("UIKeyInputF4");
+                            break;
+                        case HardwareKey.F5KeyInput:
+                            nsInput = new NSString("UIKeyInputF5");
+                            break;
+                        case HardwareKey.F6KeyInput:
+                            nsInput = new NSString("UIKeyInputF6");
+                            break;
+                        case HardwareKey.F7KeyInput:
+                            nsInput = new NSString("UIKeyInputF7");
+                            break;
+                        case HardwareKey.F8KeyInput:
+                            nsInput = new NSString("UIKeyInputF8");
+                            break;
+                        case HardwareKey.F9KeyInput:
+                            nsInput = new NSString("UIKeyInputF9");
+                            break;
+                        case HardwareKey.F10KeyInput:
+                            nsInput = new NSString("UIKeyInputF10");
+                            break;
+                        case HardwareKey.F11KeyInput:
+                            nsInput = new NSString("UIKeyInputF11");
+                            break;
+                        case HardwareKey.F12KeyInput:
+                            nsInput = new NSString("UIKeyInputF12");
+                            break;
+                        */
 
-                            default:
-                                continue;
-                        }
+                        default:
+                            nsInput = new NSString(keyInput.ToLower());
+                            break;
                     }
-                    else
-                        nsInput = new NSString(keyInput.ToLower());
 
                     var modifier = listener.HardwareKey.ModifierKeys;
                     if (modifier.HasFlag(HardwareKeyModifierKeys.Any))

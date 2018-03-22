@@ -60,8 +60,16 @@ namespace Forms9Patch
         /// </summary>
         public static event EventHandler Shown;
 
+        /// <summary>
+        /// Gets a value indicating whether the hardware keyboard is active.
+        /// </summary>
+        /// <value><c>true</c> if is hardware keyboard active; otherwise, <c>false</c>.</value>
         public static bool IsHardwareKeyboardActive => Service.IsHardwareKeyboardActive;
 
+        /// <summary>
+        /// Gets the Keyboard's language-region.
+        /// </summary>
+        /// <value>The language region.</value>
         public static string LanguageRegion => Service.LanguageRegion;
     }
 

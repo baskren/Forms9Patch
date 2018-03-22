@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Hardware key listener: Configures what key stroke to listen for and what to do when it's heard.
+    /// </summary>
     public class HardwareKeyListener : BindableObject
     {
         #region properties

@@ -3,6 +3,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Hardware key event arguments.
+    /// </summary>
     public class HardwareKeyEventArgs : EventArgs
     {
         /// <summary>

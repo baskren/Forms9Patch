@@ -3,10 +3,17 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Focus monitor: Helps you keep up with what VisualElement currently has focus
+    /// </summary>
     public static class FocusMonitor
     {
         #region Properties
         static bool _enabled;
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.FocusMonitor"/> is enabled.
+        /// </summary>
+        /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         public static bool Enabled
         {
             get => _enabled;
@@ -14,6 +21,10 @@ namespace Forms9Patch
         }
 
         static VisualElement _element;
+        /// <summary>
+        /// Gets or sets the focused element.
+        /// </summary>
+        /// <value>The focused element.</value>
         public static VisualElement FocusedElement
         {
             get { return _element; }
@@ -40,10 +51,18 @@ namespace Forms9Patch
         }
         #endregion
 
+        /// <summary>
+        /// Occurs when focused element changed.
+        /// </summary>
         public static event EventHandler FocusedElementChanged;
 
 
         #region Focus Monitoring
+        /// <summary>
+        /// Starts monitoring a VisualElement and all of its decendants
+        /// </summary>
+        /// <returns>The start.</returns>
+        /// <param name="element">Element.</param>
         public static void Start(VisualElement element)
         {
             if (!_enabled || element == null)
@@ -74,6 +93,11 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Stops monitoring a VisualElement and all of its decendants
+        /// </summary>
+        /// <returns>The stop.</returns>
+        /// <param name="element">Element.</param>
         public static void Stop(VisualElement element)
         {
             if (element == null)

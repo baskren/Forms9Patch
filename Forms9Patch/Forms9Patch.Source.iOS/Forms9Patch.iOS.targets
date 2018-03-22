@@ -52,7 +52,7 @@
 			<Link>Renderers\EnhancedListViewRenderer.cs</Link>
 		</Compile>
 		<Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
-			<Link>Renderers\PageRenderer.cs</Link>
+			<Link>Renderers\HardwareKeyPageRenderer.cs</Link>
 		</Compile>
 
 		<!-- SERVICES -->

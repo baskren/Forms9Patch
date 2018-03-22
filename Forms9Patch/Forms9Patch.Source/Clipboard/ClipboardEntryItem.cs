@@ -16,6 +16,10 @@ namespace Forms9Patch
     /// <typeparam name="T"></typeparam>
     public class ClipboardEntryItem<T> : ClipboardItemBase, IClipboardEntryItem<T>
     {
+        /// <summary>
+        /// Gets or sets the value of this ClipboadEntryItem.
+        /// </summary>
+        /// <value>The value.</value>
         new public T Value
         {
             get => (T)base.Value;
