@@ -320,7 +320,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{
 		Forms9Patch\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs
-		Forms9Patch\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\PageRenderer.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs = Forms9Patch\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5054117B-CB9C-4223-A2E1-44E7D46DA04D}"
@@ -684,6 +684,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource.iOS", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource.iOS\Forms9PatchDemo.F9pSource.iOS.csproj", "{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource.UWP", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource.UWP\Forms9PatchDemo.F9pSource.UWP.csproj", "{3666D856-8FC5-42F6-B426-EF12BF6CE958}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HardwareKeyListener", "HardwareKeyListener", "{243C6286-1A7D-4009-9B4E-A8A3AAB8FDE4}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs = Forms9Patch\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs
+		Forms9Patch\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListenerEffect.cs = Forms9Patch\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListenerEffect.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HardwareKeyListener", "HardwareKeyListener", "{D6925B9A-8366-475D-968A-93B42DFE7D4D}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\HardwareKeyListener\HardwareKeyListenerEffect.cs = Forms9Patch\Forms9Patch.Source.UWP\HardwareKeyListener\HardwareKeyListenerEffect.cs
+		Forms9Patch\Forms9Patch.Source.UWP\HardwareKeyListener\HardwareKeyPageRenderer.cs = Forms9Patch\Forms9Patch.Source.UWP\HardwareKeyListener\HardwareKeyPageRenderer.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -4709,6 +4721,8 @@ Global
 		{F653783E-527A-4C07-9C07-52964F225729} = {1C338DFE-D29B-49A5-8E70-2947336BB638}
 		{3DF2DDF6-175F-4E04-B6D2-AF07307A8906} = {1C338DFE-D29B-49A5-8E70-2947336BB638}
 		{3666D856-8FC5-42F6-B426-EF12BF6CE958} = {1C338DFE-D29B-49A5-8E70-2947336BB638}
+		{243C6286-1A7D-4009-9B4E-A8A3AAB8FDE4} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{D6925B9A-8366-475D-968A-93B42DFE7D4D} = {B034D3ED-CA00-4332-BD5D-F0BF3516A16E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FAAF233-96A8-4005-93A0-A34046BAEFE8}
