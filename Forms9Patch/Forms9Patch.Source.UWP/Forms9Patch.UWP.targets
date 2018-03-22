@@ -41,6 +41,11 @@
       <Link>Extensions\XamarinSpanExtentions.cs</Link>
     </Compile>
 
+    <!-- HARDWARE KEY LISTENER -->
+    <Compile Include="..\Forms9Patch.Source.UWP\HardwareKeyListener\HardwareKeyPageRenderer.cs">
+      <Link>HardwareKeyListener\HardwareKeyPageRenderer.cs</Link>
+    </Compile>
+
     <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.UWP\Models\MetaFont.cs">
       <Link>Models\MetaFont.cs</Link>

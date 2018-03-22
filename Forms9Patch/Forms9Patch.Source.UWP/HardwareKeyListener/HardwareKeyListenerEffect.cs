@@ -2,19 +2,15 @@
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
-using Android.Widget;
-using Android.Views;
+using Xamarin.Forms.Platform.UWP;
 
-[assembly: ExportEffect(typeof(Forms9Patch.Droid.HardwareKeyListenerEffect), "HardwareKeyListenerEffect")]
-namespace Forms9Patch.Droid
+[assembly: ExportEffect(typeof(Forms9Patch.UWP.HardwareKeyListenerEffect), "HardwareKeyListenerEffect")]
+namespace Forms9Patch.UWP
 {
     public class HardwareKeyListenerEffect : PlatformEffect
     {
         protected override void OnAttached()
         {
-            if (Element is HardwareKeyPage)
-                return;
             if (Control != null)
                 Control.KeyPress += OnControlKeyPress;
             else if (Container != null)

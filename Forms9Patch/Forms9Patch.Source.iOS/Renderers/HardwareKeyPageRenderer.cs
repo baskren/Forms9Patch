@@ -66,27 +66,29 @@ namespace Forms9Patch.iOS
         }
         */
 
-        // Dictionary to convert international cmd.Input to their KeyInputs
-        // Dictionary<language-Region, Dictionary<cmd.Input, KeyInput>
-        Dictionary<string, Dictionary<string, string>> regionalShiftedKeyInputs = new Dictionary<string, Dictionary<string, string>>
-        {
-            { "EN", new Dictionary<string, string>
-                {
-                    {"~","`"}, { "!","1" }, { "@","2"}, {"#","3"}, {"$","4"}, {"%","5"}, {"^","6"}, {"&","7"}, {"*","8"}, {"(","9"}, {")","0"}, {"_","-"}, {"+","="},
-                    {"{","["}, {"}","]"}, {"|","\\"},
-                    {":",";"}, {"\"","'"},
-                    {"<",","}, {">","."}, {"/","?"}
-                }
-            },
-            { "fr-FR", new Dictionary<string, string>
-                {
-                    {">","<"}, { "1","&" }, { "2","é"}, {"3","\""}, {"4","'"}, {"5","("}, {"6","-"}, {"7","è"}, {"8","_"}, {"9","ç"}, {"0","à"}, {"°",")"},{"_","-"},
-                    {"¨","^"}, {"*","$"}, {"£","`"},
-                    {"%","ù"},
-                    {"?",","}, {".",";"}, {"/",":"}, {"+","="}
-                }
+        /*
+    // Dictionary to convert international cmd.Input to their KeyInputs
+    // Dictionary<language-Region, Dictionary<cmd.Input, KeyInput>
+    Dictionary<string, Dictionary<string, string>> regionalShiftedKeyInputs = new Dictionary<string, Dictionary<string, string>>
+    {
+        { "EN", new Dictionary<string, string>
+            {
+                {"~","`"}, { "!","1" }, { "@","2"}, {"#","3"}, {"$","4"}, {"%","5"}, {"^","6"}, {"&","7"}, {"*","8"}, {"(","9"}, {")","0"}, {"_","-"}, {"+","="},
+                {"{","["}, {"}","]"}, {"|","\\"},
+                {":",";"}, {"\"","'"},
+                {"<",","}, {">","."}, {"/","?"}
             }
-        };
+        },
+        { "fr-FR", new Dictionary<string, string>
+            {
+                {">","<"}, { "1","&" }, { "2","é"}, {"3","\""}, {"4","'"}, {"5","("}, {"6","-"}, {"7","è"}, {"8","_"}, {"9","ç"}, {"0","à"}, {"°",")"},{"_","-"},
+                {"¨","^"}, {"*","$"}, {"£","`"},
+                {"%","ù"},
+                {"?",","}, {".",";"}, {"/",":"}, {"+","="}
+            }
+        }
+    };
+    */
 
         Selector _onKeyPressSelector = new Selector("OnKeyPress:");
 

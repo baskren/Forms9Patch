@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Xamarin.Forms;
@@ -13,20 +15,28 @@ using Xamarin.Forms.Platform.UWP;
 //[assembly: ExportRenderer(typeof(Forms9Patch.ContentPage), typeof(Forms9Patch.UWP.PageRenderer))]
 namespace Forms9Patch.UWP
 {
-    class HardwareKeyPageRenderer  : Xamarin.Forms.Platform.UWP.PageRenderer
+    public class HardwareKeyPageRenderer  : Xamarin.Forms.Platform.UWP.PageRenderer
     {
         void Connect()
         {
-            Window.Current.CoreWindow.CharacterReceived += CoreWindow_CharacterReceived;
-            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+            Window.Current.CoreWindow.CharacterReceived += OnCharacterReceived;
+            Window.Current.CoreWindow.KeyDown += OnKeyDown;
             //Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
+
+            //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
+            //interceptor.KeyDown += OnInterceptorKeyDown;
+            //interceptor.IsInterceptionEnabledWhenInForeground = true;
         }
 
         void Disconnect()
         {
-            Window.Current.CoreWindow.CharacterReceived -= CoreWindow_CharacterReceived;
-            Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
+            Window.Current.CoreWindow.CharacterReceived -= OnCharacterReceived;
+            Window.Current.CoreWindow.KeyDown -= OnKeyDown;
             //Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
+
+            //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
+            //interceptor.KeyDown -= OnInterceptorKeyDown;
+            //interceptor.IsInterceptionEnabledWhenInForeground = false;
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
@@ -38,80 +48,23 @@ namespace Forms9Patch.UWP
                 Connect();
         }
 
-        public HardwareKeyPageRenderer() : base ()
+        static bool keyDownCaptured = false;
+
+        private void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
         {
-            //KeyUp += OnKeyUp;
-            //KeyDown += OnKeyDown;
-
-            //Loaded += PageRenderer_Loaded;
-
-
-            
-
-            
-            /*
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(4), () =>
-             {
-                 var element = Windows.UI.Xaml.Input.FocusManager.GetFocusedElement();
-                 if (element is Windows.UI.Xaml.FrameworkElement frameworkElement)
-                 {
-                     //System.Diagnostics.Debug.WriteLine("\tName=[" + frameworkElement.Name + "]");
-                     //System.Diagnostics.Debug.WriteLine("\tParent=[" + frameworkElement.Parent + "]");
-                 }
-                 //System.Diagnostics.Debug.WriteLine("Focus: ["+element+"]");
-                 if (element is Windows.UI.Xaml.Controls.ScrollViewer scrollViewer && scrollViewer.Parent==null)
-                 {
-                     
-                     System.Diagnostics.Debug.WriteLine("\tHorizontalScrollBarVisibility=["+ scrollViewer.HorizontalScrollBarVisibility + "]");
-                     System.Diagnostics.Debug.WriteLine("\tVerticalScrollBarVisibility=[" + scrollViewer.VerticalScrollBarVisibility + "]");
-                     System.Diagnostics.Debug.WriteLine("\tIsDeferredScrollingEnabled=[" + scrollViewer.IsDeferredScrollingEnabled + "]");
-                     System.Diagnostics.Debug.WriteLine("\tHorizontalScrollMode=[" + scrollViewer.HorizontalScrollMode + "]");
-                     System.Diagnostics.Debug.WriteLine("\tIsTabStop=[" + scrollViewer.IsTabStop + "]");
-                     System.Diagnostics.Debug.WriteLine("\tIsVerticalRailEnabled=[" + scrollViewer.IsVerticalRailEnabled + "]");
-                     System.Diagnostics.Debug.WriteLine("\tMargin=[" + scrollViewer.Margin + "]");
-                     System.Diagnostics.Debug.WriteLine("\tVerticalScrollMode=[" + scrollViewer.VerticalScrollMode + "]");
-                     System.Diagnostics.Debug.WriteLine("\tZoomMode=[" + scrollViewer.ZoomMode + "]");
-                     //if (scrollViewer.HorizontalScrollBarVisibility== Windows.UI.Xaml.Controls.ScrollBarVisibility.Hidden  && scrollViewer.VerticalScrollBarVisibility == Windows.UI.Xaml.Controls.ScrollBarVisibility.Hidden && !scrollViewer.IsDeferredScrollingEnabled)
-                     scrollViewer.IsTabStop = false;
-                     Windows.UI.Xaml.Input.FocusManager.TryMoveFocus(Windows.UI.Xaml.Input.FocusNavigationDirection.Next);
-                     
-                     
-                     scrollViewer.IsTabStop = false;
-                     Windows.UI.Xaml.Input.FocusManager.TryMoveFocus(Windows.UI.Xaml.Input.FocusNavigationDirection.Next);
-                     System.Diagnostics.Debug.WriteLine("NEUTRALIZED");
-                     return false;
-                     
-
-                     System.Diagnostics.Debug.WriteLine("=================Hierarchy ============== \n"+ scrollViewer.GenerateHeirachry());
-                     System.Diagnostics.Debug.WriteLine("=========================================");
-
-                     return false;
-                 }
-                 return true;
-             });
-             */
+            args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
 
-        /*
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern int GetKeyNameText(int lParam, StringBuilder lpString, int cchSize);
-
-        string KeyInput(uint keycode)
+        public void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
-            var buffer = new StringBuilder(64);
-            //int lParam = ((int)keycode) << 16;
-            int lParam = (int)keycode;
-            GetKeyNameText(lParam, buffer, buffer.Capacity);
-            return buffer.ToString();
+            args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
-        */
 
-        bool keyDownCaptured = false;
-        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        public static bool ProcessVirualKey(VisualElement element, Windows.System.VirtualKey virtualKey)
         {
             keyDownCaptured = false;
             var keyInput = "";
-            switch(args.VirtualKey)
+            switch(virtualKey)
             {
                 case Windows.System.VirtualKey.Back:
                     keyInput = Forms9Patch.HardwareKey.BackspaceDeleteKeyInput;
@@ -186,7 +139,7 @@ namespace Forms9Patch.UWP
                     keyInput = Forms9Patch.HardwareKey.UpArrowKeyInput;
                     break;
 
-
+                    /*
                 case Windows.System.VirtualKey.NumberPad0:
                     keyInput = Forms9Patch.HardwareKey.Numpad0;
                     keyDownCaptured = true;
@@ -268,17 +221,17 @@ namespace Forms9Patch.UWP
                     keyInput = "9";
                     keyDownCaptured = true;
                     break;
-
+                    */
 
 
                 default:
-                    return;
+                    return false;
             }
 
             var modifiers = GetModifierKeys();
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
-            var listeners = Element.GetHardwareKeyListeners();
+            var listeners = element.GetHardwareKeyListeners();
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
@@ -286,58 +239,51 @@ namespace Forms9Patch.UWP
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);
-                    listener.Pressed?.Invoke(Element, new HardwareKeyEventArgs(listener.HardwareKey, Element));
+                    listener.Pressed?.Invoke(element, new HardwareKeyEventArgs(listener.HardwareKey, element));
                     //System.Diagnostics.Debug.WriteLine("SUCCESS!!!");
-                    args.Handled = true;
-                    return;
+                    return true;
                 }
             }
 
 
             //System.Diagnostics.Debug.WriteLine("CoreWindow.KeyDown ["+args.VirtualKey+"] dev:["+args.DeviceId+"] handled["+args.Handled+"]" + KeyStatusString(args.KeyStatus));
 
-
+            return false;
         }
 
-        /*
-        private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        public void OnCharacterReceived( Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("CoreWindow.KeyUp [" + args.VirtualKey + "] dev:[" + args.DeviceId + "] handled[" + args.Handled + "]" + KeyStatusString(args.KeyStatus));
-
+            ProcessCharacter(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, (char)args.KeyCode);
         }
-        */
 
-        private void CoreWindow_CharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
+        public static bool ProcessCharacter(VisualElement element, char keyCode)
         {
             if (keyDownCaptured)
             {
                 keyDownCaptured = false;
-                return;
+                return false;
             }
 
-            var keyInput = ("" + (char)args.KeyCode).ToUpper();
+            var keyInput = ("" + keyCode).ToUpper();
+            System.Diagnostics.Debug.WriteLine("CoreWindow_CharacterReceived keyInput=["+keyInput+"]");
 
             var modifiers = GetModifierKeys();
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
-            var listeners = Element.GetHardwareKeyListeners();
+            var listeners = element.GetHardwareKeyListeners();
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (listener.HardwareKey.KeyInput == keyInput && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyInput == keyInput.ToUpper() && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys.HasFlag(HardwareKeyModifierKeys.Any)))
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);
-                    listener.Pressed?.Invoke(Element, new HardwareKeyEventArgs(listener.HardwareKey, Element));
-                    //System.Diagnostics.Debug.WriteLine("SUCCESS!!!");
-                    args.Handled = true;
-                    return;
+                    var observedHardwareKey = new HardwareKey(keyInput.ToUpper(), modifiers);
+                    listener.Pressed?.Invoke(element, new HardwareKeyEventArgs(observedHardwareKey, element));
+                    return true;
                 }
             }
-
-
-            //System.Diagnostics.Debug.WriteLine("CharRecv[" + (char)args.KeyCode + "]" + KeyStatusString(args.KeyStatus));
-            //System.Diagnostics.Debug.WriteLine("");
+            return false;
         }
 
         string KeyStatusString(Windows.UI.Core.CorePhysicalKeyStatus KeyStatus)
@@ -359,7 +305,7 @@ namespace Forms9Patch.UWP
 
         }
 
-        Forms9Patch.HardwareKeyModifierKeys GetModifierKeys()
+        static Forms9Patch.HardwareKeyModifierKeys GetModifierKeys()
         {
             var shiftState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Shift).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
             var ctrlState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Control).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
@@ -383,35 +329,6 @@ namespace Forms9Patch.UWP
 
             return result;
         }
-
-        /*
-        protected override void OnProcessKeyboardAccelerators(ProcessKeyboardAcceleratorEventArgs args)
-        {
-            System.Diagnostics.Debug.WriteLine("PageRenderer.OnProcessKeyboardAccelerators VirtualKey["+args.Key+"] modifiers["+args.Modifiers+"] handled["+args.Handled+"]");
-            base.OnProcessKeyboardAccelerators(args);
-        }
-        */
-        /*
-        private void PageRenderer_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            var root = this.GetFurthestAncestor<Windows.UI.Xaml.FrameworkElement>();
-            if (root is Windows.UI.Xaml.Controls.ScrollViewer scrollViewer)
-                scrollViewer.IsTabStop = false;
-        }
-
-        private void OnKeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("OnKeyDown[" + e.Key + "]["+e.OriginalKey+"]  Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.Handled=[" + e.Handled + "] \te.KeyStatus=[" + e.KeyStatus + "] ");
-
-            // This is a french keyboard?  The quick brown fox jumped over the lazy dog? 
-            
-        }
-
-        private void OnKeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("OnKeyUp[" + e.Key + "][" + e.OriginalKey + "]   Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.Handled=[" + e.Handled + "] \te.KeyStatus=[" + e.KeyStatus + "]");
-        }
-        */
 
     }
 }

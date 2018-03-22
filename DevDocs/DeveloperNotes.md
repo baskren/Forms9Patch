@@ -86,3 +86,8 @@ You need to use `Compile with .Net Native tool chain` for your app to be accepte
  #### UWP: Crashes when when trying to open an image using `Xamarin.Forms.ImageSource.FromResource` but *not* when using `Forms9Patch.ImageSource.FromMultiResource`
 
  Boy, did I loose a lot of time on this one.  Turns out the solution to [UWP: Getting exceptions at Xamarin.Forms.Init](UWP: Getting exceptions at Xamarin.Forms.Init) was the fix.  I have no idea why.
+
+
+ #### UWP Hardware Key Listening
+
+ To enable hardware key intercept in UWP, you will need to define the "inputForegroundObservation" capability in the app manifest.  This then requires Microsoft approval for Windows Store.  Let's see if there's an easier way.

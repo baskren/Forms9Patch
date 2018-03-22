@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Input;
@@ -25,8 +27,6 @@ namespace Forms9Patch.UWP
         /// </summary>
         public KeyboardService()
         {
-            //UIKeyboard.Notifications.ObserveWillHide(OnHidden);
-            //UIKeyboard.Notifications.ObserveWillShow(OnShown);
             InputPane.GetForCurrentView().Hiding += KeyboardService_Hiding;
             InputPane.GetForCurrentView().Showing += KeyboardService_Showing;
         }
@@ -48,6 +48,14 @@ namespace Forms9Patch.UWP
         public void Hide()
         {
             InputPane.GetForCurrentView().TryHide();
+        }
+
+        public string LanguageRegion
+        {
+            get
+            {
+                return Windows.Globalization.Language.CurrentInputMethodLanguageTag;
+            }
         }
 
     }

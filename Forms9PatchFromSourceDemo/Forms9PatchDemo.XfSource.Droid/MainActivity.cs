@@ -25,6 +25,16 @@ namespace Forms9PatchDemo.Droid
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetHomeButtonEnabled(false);
         }
+
+        public override bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
+        {
+            //System.Diagnostics.Debug.WriteLine("MainActivity.OnKeyUp[" + keyCode + "] e.Action[" + e.Action + "] e.Characters[" + e.Characters + "] e.DisplayLabel[" + e.DisplayLabel + "] e.Flags[" + e.Flags + "] e.MetaStates[" + e.MetaState + "] e.Modifiers[" + e.Modifiers + "] e.Unicode[" + (char)e.UnicodeChar + "] " + e.Characters + "");
+            var handled = Forms9Patch.Droid.HardwareKeyListener.OnKeyDown(keyCode, e);
+            if (handled)
+                return true;
+            return base.OnKeyDown(keyCode, e);
+        }
+
     }
 }
 
