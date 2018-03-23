@@ -531,7 +531,7 @@ namespace FormsGestures.iOS
                 _numberOfTaps = 0;
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    if (_cancelled)
+                    if (_cancelled || _listeners == null)
                         return;
 
                     foreach (var listener in _listeners)

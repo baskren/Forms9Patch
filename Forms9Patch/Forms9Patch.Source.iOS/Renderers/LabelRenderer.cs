@@ -465,7 +465,8 @@ namespace Forms9Patch.iOS
             ControlFont = Element.ToUIFont();
             InvokeOnMainThread(() =>
             {
-                Control.Font = ControlFont;
+                if (Control != null)
+                    Control.Font = ControlFont;
             });
             ControlFontPointSize = Control.Font.PointSize;
             FontDescriptor = ControlFont.FontDescriptor;
@@ -489,7 +490,8 @@ namespace Forms9Patch.iOS
         {
             InvokeOnMainThread(() =>
             {
-                Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
+                if (Control != null)
+                    Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
             });
         }
 
@@ -507,20 +509,26 @@ namespace Forms9Patch.iOS
             else
                 text = (string)Element.GetValue(Label.TextProperty);
 
-            if (text != null)
+            if (text != null && Control != null)
             {
                 InvokeOnMainThread(() =>
                 {
-                    Control.AttributedText = ControlAttributedText = null;
-                    Control.Text = ControlText = new NSString(text);
+                    if (Control != null)
+                    {
+                        Control.AttributedText = ControlAttributedText = null;
+                        Control.Text = ControlText = new NSString(text);
+                    }
                 });
             }
             else
             {
                 InvokeOnMainThread(() =>
                 {
-                    Control.Text = ControlText = null;
-                    Control.AttributedText = ControlAttributedText = attributedText;
+                    if (Control != null)
+                    {
+                        Control.Text = ControlText = null;
+                        Control.AttributedText = ControlAttributedText = attributedText;
+                    }
                 });
             }
         }
@@ -531,7 +539,8 @@ namespace Forms9Patch.iOS
             ControlTextColor = color.ToUIColor(UIColor.Black);
             InvokeOnMainThread(() =>
             {
-                Control.TextColor = ControlTextColor;
+                if (Control != null)
+                    Control.TextColor = ControlTextColor;
             });
         }
         #endregion
