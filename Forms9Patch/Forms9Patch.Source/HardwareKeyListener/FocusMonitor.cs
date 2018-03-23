@@ -8,6 +8,8 @@ namespace Forms9Patch
     /// </summary>
     public static class FocusMonitor
     {
+
+
         #region Properties
         static bool _enabled;
         /// <summary>
@@ -65,8 +67,10 @@ namespace Forms9Patch
         /// <param name="element">Element.</param>
         public static void Start(VisualElement element)
         {
-            if (!_enabled || element == null)
+            if (!_enabled || element == null || element.IsFocusMonitoring())
                 return;
+
+            element.IsFocusMonitoring(true);
 
             if (element.IsFocused)
                 _element = element;
@@ -102,6 +106,9 @@ namespace Forms9Patch
         {
             if (element == null)
                 return;
+
+            element.IsFocusMonitoring(false);
+
             if (element == FocusedElement)
                 _element = null;
             if (element == HardwareKeyPage.FocusedElement)
@@ -147,5 +154,20 @@ namespace Forms9Patch
         #endregion
 
 
+    }
+
+    internal static class FocusMonitoringExtensions
+    {
+        public static readonly BindableProperty IsFocusMonitoringProperty = BindableProperty.Create("IsFocus", typeof(bool), typeof(FocusMonitoringExtensions), default(bool));
+
+        public static bool IsFocusMonitoring(this VisualElement visualElement)
+        {
+            return (bool)visualElement.GetValue(IsFocusMonitoringProperty);
+        }
+
+        public static void IsFocusMonitoring(this VisualElement visualElement, bool value)
+        {
+            visualElement.SetValue(IsFocusMonitoringProperty, value);
+        }
     }
 }
