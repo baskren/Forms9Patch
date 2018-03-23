@@ -33,14 +33,9 @@ namespace Forms9Patch
 
         internal static HardwareKeyListener AddHardwareKeyListener(this VisualElement visualElement, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null, EventHandler<HardwareKeyEventArgs> onPressed = null)
         {
-            var hardwareKeyListener = new HardwareKeyListener
-            {
-                HardwareKey = new HardwareKey(keyInput, hardwareKeyModifierKeys, discoverableTitle)
-            };
-            hardwareKeyListener.Pressed += onPressed;
+            var hardwareKeyListener = new HardwareKeyListener(new HardwareKey(keyInput, hardwareKeyModifierKeys, discoverableTitle), onPressed);
             var listeners = visualElement.GetHardwareKeyListeners();
             listeners.Add(hardwareKeyListener);
-
             return hardwareKeyListener;
         }
 

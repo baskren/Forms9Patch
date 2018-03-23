@@ -15,7 +15,7 @@ using Xamarin.Forms.Platform.UWP;
 //[assembly: ExportRenderer(typeof(Forms9Patch.ContentPage), typeof(Forms9Patch.UWP.PageRenderer))]
 namespace Forms9Patch.UWP
 {
-    public class HardwareKeyPageRenderer  : Xamarin.Forms.Platform.UWP.PageRenderer
+    public class HardwareKeyPageRenderer : Xamarin.Forms.Platform.UWP.PageRenderer
     {
         void Connect()
         {
@@ -64,7 +64,7 @@ namespace Forms9Patch.UWP
         {
             keyDownCaptured = false;
             var keyInput = "";
-            switch(virtualKey)
+            switch (virtualKey)
             {
                 case Windows.System.VirtualKey.Back:
                     keyInput = Forms9Patch.HardwareKey.BackspaceDeleteKeyInput;
@@ -139,89 +139,89 @@ namespace Forms9Patch.UWP
                     keyInput = Forms9Patch.HardwareKey.UpArrowKeyInput;
                     break;
 
-                    /*
-                case Windows.System.VirtualKey.NumberPad0:
-                    keyInput = Forms9Patch.HardwareKey.Numpad0;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad1:
-                    keyInput = Forms9Patch.HardwareKey.Numpad1;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad2:
-                    keyInput = Forms9Patch.HardwareKey.Numpad2;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad3:
-                    keyInput = Forms9Patch.HardwareKey.Numpad3;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad4:
-                    keyInput = Forms9Patch.HardwareKey.Numpad4;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad5:
-                    keyInput = Forms9Patch.HardwareKey.Numpad5;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad6:
-                    keyInput = Forms9Patch.HardwareKey.Numpad6;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad7:
-                    keyInput = Forms9Patch.HardwareKey.Numpad7;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad8:
-                    keyInput = Forms9Patch.HardwareKey.Numpad8;
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.NumberPad9:
-                    keyInput = Forms9Patch.HardwareKey.Numpad9;
-                    keyDownCaptured = true;
-                    break;
+                /*
+            case Windows.System.VirtualKey.NumberPad0:
+                keyInput = Forms9Patch.HardwareKey.Numpad0;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad1:
+                keyInput = Forms9Patch.HardwareKey.Numpad1;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad2:
+                keyInput = Forms9Patch.HardwareKey.Numpad2;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad3:
+                keyInput = Forms9Patch.HardwareKey.Numpad3;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad4:
+                keyInput = Forms9Patch.HardwareKey.Numpad4;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad5:
+                keyInput = Forms9Patch.HardwareKey.Numpad5;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad6:
+                keyInput = Forms9Patch.HardwareKey.Numpad6;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad7:
+                keyInput = Forms9Patch.HardwareKey.Numpad7;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad8:
+                keyInput = Forms9Patch.HardwareKey.Numpad8;
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.NumberPad9:
+                keyInput = Forms9Patch.HardwareKey.Numpad9;
+                keyDownCaptured = true;
+                break;
 
-                case Windows.System.VirtualKey.Number0:
-                    keyInput = "0";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number1:
-                    keyInput = "1";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number2:
-                    keyInput = "2";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number3:
-                    keyInput = "3";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number4:
-                    keyInput = "4";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number5:
-                    keyInput = "5";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number6:
-                    keyInput = "6";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number7:
-                    keyInput = "7";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number8:
-                    keyInput = "8";
-                    keyDownCaptured = true;
-                    break;
-                case Windows.System.VirtualKey.Number9:
-                    keyInput = "9";
-                    keyDownCaptured = true;
-                    break;
-                    */
+            case Windows.System.VirtualKey.Number0:
+                keyInput = "0";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number1:
+                keyInput = "1";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number2:
+                keyInput = "2";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number3:
+                keyInput = "3";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number4:
+                keyInput = "4";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number5:
+                keyInput = "5";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number6:
+                keyInput = "6";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number7:
+                keyInput = "7";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number8:
+                keyInput = "8";
+                keyDownCaptured = true;
+                break;
+            case Windows.System.VirtualKey.Number9:
+                keyInput = "9";
+                keyDownCaptured = true;
+                break;
+                */
 
 
                 default:
@@ -235,6 +235,8 @@ namespace Forms9Patch.UWP
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
+                if (string.IsNullOrEmpty(listener.HardwareKey.KeyInput))
+                    continue;
                 if (listener.HardwareKey.KeyInput == keyInput && listener.HardwareKey.ModifierKeys == modifiers)
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
@@ -251,7 +253,7 @@ namespace Forms9Patch.UWP
             return false;
         }
 
-        public void OnCharacterReceived( Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
+        public void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
         {
             ProcessCharacter(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, (char)args.KeyCode);
         }
@@ -265,7 +267,7 @@ namespace Forms9Patch.UWP
             }
 
             var keyInput = ("" + keyCode).ToUpper();
-            System.Diagnostics.Debug.WriteLine("CoreWindow_CharacterReceived keyInput=["+keyInput+"]");
+            System.Diagnostics.Debug.WriteLine("CoreWindow_CharacterReceived keyInput=[" + keyInput + "]");
 
             var modifiers = GetModifierKeys();
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
@@ -274,6 +276,8 @@ namespace Forms9Patch.UWP
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
+                if (string.IsNullOrEmpty(listener.HardwareKey.KeyInput))
+                    continue;
                 if (listener.HardwareKey.KeyInput == keyInput.ToUpper() && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys.HasFlag(HardwareKeyModifierKeys.Any)))
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
@@ -301,7 +305,7 @@ namespace Forms9Patch.UWP
 
 
 
-            return "shft=["+shiftState+"] ctrl=["+ctrlState+"] altState=["+altState+"] pltf=["+platformState+"] capl=["+capsState+"] numl=["+numLock+"] ext:[" + KeyStatus.IsExtendedKey + "] rel:[" + KeyStatus.IsKeyReleased + "] men:[" + KeyStatus.IsMenuKeyDown + "]  rep:[" + KeyStatus.RepeatCount + "] cod:[" + KeyStatus.ScanCode + "] wasDown:[" + KeyStatus.WasKeyDown + "]";
+            return "shft=[" + shiftState + "] ctrl=[" + ctrlState + "] altState=[" + altState + "] pltf=[" + platformState + "] capl=[" + capsState + "] numl=[" + numLock + "] ext:[" + KeyStatus.IsExtendedKey + "] rel:[" + KeyStatus.IsKeyReleased + "] men:[" + KeyStatus.IsMenuKeyDown + "]  rep:[" + KeyStatus.RepeatCount + "] cod:[" + KeyStatus.ScanCode + "] wasDown:[" + KeyStatus.WasKeyDown + "]";
 
         }
 

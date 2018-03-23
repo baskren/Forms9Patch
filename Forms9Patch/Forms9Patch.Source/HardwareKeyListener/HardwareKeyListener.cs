@@ -58,5 +58,14 @@ namespace Forms9Patch
         public EventHandler<HardwareKeyEventArgs> Pressed;
         #endregion
 
+
+
+        public HardwareKeyListener(HardwareKey hardwareKey, EventHandler<HardwareKeyEventArgs> onPressed = null)
+        {
+            HardwareKey = hardwareKey;
+            if (onPressed != null)
+                Pressed += onPressed;
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace Forms9Patch
         public string KeyInput
         {
             get { return (string)GetValue(KeyInputProperty); }
-            set { SetValue(KeyInputProperty, value.ToUpper()); }
+            set { SetValue(KeyInputProperty, value?.ToUpper()); }
         }
 
         /// <summary>
