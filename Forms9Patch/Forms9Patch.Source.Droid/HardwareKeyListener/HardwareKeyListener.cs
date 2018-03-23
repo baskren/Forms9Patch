@@ -221,7 +221,7 @@ namespace Forms9Patch.Droid
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (string.IsNullOrEmpty(listener.HardwareKey.KeyInput))
+                if (string.IsNullOrEmpty(listener?.HardwareKey?.KeyInput))
                     continue;
                 if (listener.HardwareKey.KeyInput == keyInput.ToUpper() && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys.HasFlag(HardwareKeyModifierKeys.Any)))
                 {

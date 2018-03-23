@@ -231,7 +231,7 @@ namespace Forms9Patch.iOS
             for (int i = 0; i < listeners.Count; i++)
             {
                 var listener = listeners[i];
-                if (string.IsNullOrEmpty(listener.HardwareKey.KeyInput))
+                if (string.IsNullOrEmpty(listener?.HardwareKey?.KeyInput))
                     continue;
                 if (listener.HardwareKey.KeyInput == keyInput.ToUpper() && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys.HasFlag(HardwareKeyModifierKeys.Any)))
                 {
@@ -258,7 +258,7 @@ namespace Forms9Patch.iOS
                 for (int i = 0; i < listeners.Count; i++)
                 {
                     var listener = listeners[i];
-                    var keyInput = listener.HardwareKey.KeyInput;
+                    var keyInput = listener?.HardwareKey?.KeyInput;
                     if (string.IsNullOrEmpty(keyInput))
                         continue;
                     NSString nsInput = null;
