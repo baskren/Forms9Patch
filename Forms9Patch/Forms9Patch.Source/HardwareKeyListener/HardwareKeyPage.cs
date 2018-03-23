@@ -98,6 +98,13 @@ namespace Forms9Patch
             FocusMonitor.Start(this);
         }
 
+        // Called by RootPage to address failure of Android to call OnAppearing when popping a page
+        internal void OnReappearing()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+                OnAppearing();
+        }
+
         /// <summary>
         /// Called when the HardwareKeyPage disappers
         /// </summary>

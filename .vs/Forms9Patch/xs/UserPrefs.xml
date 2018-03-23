@@ -1,7 +1,16 @@
 ﻿<Properties StartupConfiguration="{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}|Default">
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.PCL.Forms9PatchDemo.PCL.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.NetStandard.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage1.cs">
+    <Files>
+      <File FileName="Forms9PatchFromSourceDemo/Forms9PatchDemo.F9pSource.Droid/MainActivity.cs" Line="34" Column="1" />
+      <File FileName="Forms9Patch/Forms9Patch.Source.Droid/HardwareKeyListener/HardwareKeyListener.cs" Line="11" Column="68" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage.cs" Line="135" Column="14" />
+      <File FileName="Forms9Patch/Forms9Patch.Source/Elements/RootPage.cs" Line="200" Column="2" />
+      <File FileName="Forms9PatchDemo/Source/HomePage.cs" Line="231" Column="37" />
+      <File FileName="Forms9PatchDemo/Source/Pages.Code/HardwareKeyPage1.cs" Line="150" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.NetStandard.Forms9PatchDemo.NetStandard.Source.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

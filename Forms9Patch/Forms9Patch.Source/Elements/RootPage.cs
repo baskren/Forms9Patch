@@ -48,6 +48,7 @@ namespace Forms9Patch
         #region Fields
         static internal RootPage _instance;
         static List<Page> _modals = new List<Page>();
+        static internal NavigationPage _navPage;
         #endregion
 
 
@@ -118,16 +119,16 @@ namespace Forms9Patch
             {
                 _instance = _instance ?? new RootPage();
 
-                NavigationPage navPage;
+                //NavigationPage navPage;
                 if (_instance.PageController.InternalChildren.Count > 0)
                 {
                     var oldPage = _instance.PageController.InternalChildren[0] as Page;
-                    navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
-                    if (navPage != null)
+                    _navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+                    if (_navPage != null)
                     {
-                        navPage.Pushed -= OnNavigationPagePushed;
-                        navPage.Popped -= OnNavigationPagePopped;
-                        navPage.PoppedToRoot -= OnNavigationPagePopped;
+                        _navPage.Pushed -= OnNavigationPagePushed;
+                        _navPage.Popped -= OnNavigationPagePopped;
+                        _navPage.PoppedToRoot -= OnNavigationPagePopped;
                     }
                     if (oldPage != null)
                         _instance.PageController.InternalChildren.Remove(oldPage);
@@ -136,12 +137,12 @@ namespace Forms9Patch
                 if (value != null)
                 {
                     _instance.PageController.InternalChildren.Insert(0, value);
-                    navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
-                    if (navPage != null)
+                    _navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+                    if (_navPage != null)
                     {
-                        navPage.Pushed += OnNavigationPagePushed;
-                        navPage.Popped += OnNavigationPagePopped;
-                        navPage.PoppedToRoot += OnNavigationPagePopped;
+                        _navPage.Pushed += OnNavigationPagePushed;
+                        _navPage.Popped += OnNavigationPagePopped;
+                        _navPage.PoppedToRoot += OnNavigationPagePopped;
                     }
                     var masterDetailPage = _instance.PageController.InternalChildren[0] as MasterDetailPage;
                     if (masterDetailPage != null)
@@ -200,6 +201,10 @@ namespace Forms9Patch
             ModalPopped?.Invoke(sender, e.Modal);
             _modals.Remove(e.Modal);
             System.Diagnostics.Debug.WriteLine("ModalPopped");
+            var current = _modals.Count > 0 ? _modals[_modals.Count - 1] : null;
+            current = current ?? (_navPage.Navigation.NavigationStack.Count > 0 ? _navPage.Navigation.NavigationStack[_navPage.Navigation.NavigationStack.Count - 1] : null);
+            if (current is HardwareKeyPage hkPage)
+                hkPage.OnReappearing();
         }
         #endregion
 
