@@ -31,6 +31,30 @@ namespace Forms9Patch
 
 
 
+        /// <summary>
+        /// Clears the hardware key listeners for this visualElemnt.
+        /// </summary>
+        /// <param name="visualElement">Visual element.</param>
+        internal static void ClearHardwareKeyListeners(this VisualElement visualElement)
+        {
+            var hkl = visualElement.GetHardwareKeyListeners();
+            hkl.Clear();
+        }
+
+        /// <summary>
+        /// Clears the hardware key listeners for this View.
+        /// </summary>
+        /// <param name="view">View.</param>
+        public static void ClearHardwareKeyListeners(this View view) => ClearHardwareKeyListeners(view as VisualElement);
+
+        /// <summary>
+        /// Clears the hardware key listeners for this Forms9Patch.HardwareKeyPage.
+        /// </summary>
+        /// <param name="page">Page.</param>
+        public static void ClearHardwareKeyListeners(this HardwareKeyPage page) => ClearHardwareKeyListeners(page as VisualElement);
+
+
+
         internal static HardwareKeyListener AddHardwareKeyListener(this VisualElement visualElement, string keyInput, HardwareKeyModifierKeys hardwareKeyModifierKeys = HardwareKeyModifierKeys.None, string discoverableTitle = null, EventHandler<HardwareKeyEventArgs> onPressed = null)
         {
             var hardwareKeyListener = new HardwareKeyListener(new HardwareKey(keyInput, hardwareKeyModifierKeys, discoverableTitle), onPressed);
