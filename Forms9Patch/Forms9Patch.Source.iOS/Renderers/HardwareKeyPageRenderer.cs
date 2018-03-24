@@ -104,8 +104,8 @@ namespace Forms9Patch.iOS
             //var isFirstResponder = CanBecomeFirstResponder;
             //var directBinding = (bool)this.GetPropertyValue("IsDirectBinding");
 
-            var modifiers = HardwareKeyModifierKeys.None;
             string keyInput = cmd.Input.ToString().ToUpper();
+            bool useShift = true;
             if (cmd.Input == UIKeyCommand.DownArrow)
                 keyInput = HardwareKey.DownArrowKeyInput;
             else if (cmd.Input == UIKeyCommand.UpArrow)
@@ -136,6 +136,8 @@ namespace Forms9Patch.iOS
                 keyInput = HardwareKey.InsertKeyInput;
             else if (cmd.Input == "UIKeyInputDelete")
                 keyInput = HardwareKey.ForwardDeleteKeyInput;
+            else
+                useShift = keyInput.Length > 0 && char.IsLetter(keyInput[0]);
 
             /*
             else if (cmd.Input == "\\^P")
@@ -164,6 +166,8 @@ namespace Forms9Patch.iOS
                 input = HardwareKey.F12KeyInput;
             */
 
+            /*
+            var modifiers = HardwareKeyModifierKeys.None;
             if ((cmd.ModifierFlags & UIKeyModifierFlags.AlphaShift) > 0)
                 modifiers |= HardwareKeyModifierKeys.CapsLock;
             if ((cmd.ModifierFlags & UIKeyModifierFlags.Alternate) > 0)
@@ -174,8 +178,11 @@ namespace Forms9Patch.iOS
                 modifiers |= HardwareKeyModifierKeys.NumericPadKey;
             if ((cmd.ModifierFlags & UIKeyModifierFlags.Command) > 0)
                 modifiers |= HardwareKeyModifierKeys.PlatformKey;
-            if ((cmd.ModifierFlags & UIKeyModifierFlags.Shift) > 0)
+            if (keyInput.Length > 0 && char.IsLetter(keyInput[0]) && (cmd.ModifierFlags & UIKeyModifierFlags.Shift) > 0)
                 modifiers |= HardwareKeyModifierKeys.Shift;
+                */
+
+            var modifiers = GetModifierKeys(cmd.ModifierFlags, useShift);
 
             /*
             if (!modifiers.HasFlag(HardwareKeyModifierKeys.NumericPadKey))
@@ -243,6 +250,24 @@ namespace Forms9Patch.iOS
                     return;
                 }
             }
+        }
+
+        static Forms9Patch.HardwareKeyModifierKeys GetModifierKeys(UIKeyModifierFlags uIKeyModifierFlags, bool includeShift)
+        {
+            var modifiers = Forms9Patch.HardwareKeyModifierKeys.None;
+            if ((uIKeyModifierFlags & UIKeyModifierFlags.AlphaShift) > 0)
+                modifiers |= HardwareKeyModifierKeys.CapsLock;
+            if ((uIKeyModifierFlags & UIKeyModifierFlags.Alternate) > 0)
+                modifiers |= HardwareKeyModifierKeys.Alternate;
+            if ((uIKeyModifierFlags & UIKeyModifierFlags.Control) > 0)
+                modifiers |= HardwareKeyModifierKeys.Control;
+            if ((uIKeyModifierFlags & UIKeyModifierFlags.NumericPad) > 0)
+                modifiers |= HardwareKeyModifierKeys.NumericPadKey;
+            if ((uIKeyModifierFlags & UIKeyModifierFlags.Command) > 0)
+                modifiers |= HardwareKeyModifierKeys.PlatformKey;
+            if (includeShift && (uIKeyModifierFlags & UIKeyModifierFlags.Shift) > 0)
+                modifiers |= HardwareKeyModifierKeys.Shift;
+            return modifiers;
         }
 
         public override UIKeyCommand[] KeyCommands

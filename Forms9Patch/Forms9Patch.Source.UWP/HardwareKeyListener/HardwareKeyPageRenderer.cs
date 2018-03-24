@@ -228,7 +228,7 @@ namespace Forms9Patch.UWP
                     return false;
             }
 
-            var modifiers = GetModifierKeys();
+            var modifiers = GetModifierKeys(true);
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = element.GetHardwareKeyListeners();
@@ -269,7 +269,7 @@ namespace Forms9Patch.UWP
             var keyInput = ("" + keyCode).ToUpper();
             System.Diagnostics.Debug.WriteLine("CoreWindow_CharacterReceived keyInput=[" + keyInput + "]");
 
-            var modifiers = GetModifierKeys();
+            var modifiers = GetModifierKeys(char.IsLetter(keyCode));
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = element.GetHardwareKeyListeners();
@@ -309,7 +309,7 @@ namespace Forms9Patch.UWP
 
         }
 
-        static Forms9Patch.HardwareKeyModifierKeys GetModifierKeys()
+        static Forms9Patch.HardwareKeyModifierKeys GetModifierKeys(bool includeShift)
         {
             var shiftState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Shift).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
             var ctrlState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.Control).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
@@ -320,7 +320,7 @@ namespace Forms9Patch.UWP
             var numLock = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.NumberKeyLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
 
             Forms9Patch.HardwareKeyModifierKeys result = HardwareKeyModifierKeys.None;
-            if (shiftState)
+            if (shiftState && char.IsLetter(c))
                 result |= HardwareKeyModifierKeys.Shift;
             if (ctrlState)
                 result |= HardwareKeyModifierKeys.Control;

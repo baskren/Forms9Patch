@@ -17,85 +17,96 @@ namespace Forms9Patch.Droid
             if (element == null)
                 return false;
 
-            var keyInput = ("" + (char)e.UnicodeChar).ToUpper();
+            var keyInput = ("" + Convert.ToChar(e.UnicodeChar)).ToUpper();
             var modifiers = HardwareKeyModifierKeys.None;
+            bool useShift = true;
             switch (keyCode)
             {
                 case Android.Views.Keycode.Numpad0:
                     keyInput = "0";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad1:
                     keyInput = "1";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad2:
                     keyInput = "2";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad3:
                     keyInput = "3";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad4:
                     keyInput = "4";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad5:
                     keyInput = "5";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad6:
                     keyInput = "6";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad7:
                     keyInput = "7";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad8:
                     keyInput = "8";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.Numpad9:
                     keyInput = "9";
                     modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadAdd:
                     keyInput = "+";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadComma:
                     keyInput = ",";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadDivide:
                     keyInput = "/";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadDot:
                     keyInput = ".";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadEnter:
                     keyInput = HardwareKey.EnterReturnKeyInput;
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadEquals:
                     keyInput = "=";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadLeftParen:
                     keyInput = "(";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadRightParen:
                     keyInput = ")";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadSubtract:
                     keyInput = "-";
-                    modifiers = HardwareKeyModifierKeys.NumericPadKey;
+                    useShift = false;
                     break;
                 case Android.Views.Keycode.DpadDown:
                     keyInput = HardwareKey.DownArrowKeyInput;
@@ -206,9 +217,11 @@ namespace Forms9Patch.Droid
                 default:
                     if (e.UnicodeChar == 0)
                         return false;
+                    useShift = keyInput.Length > 0 && char.IsLetter(keyInput[0]);
                     break;
             }
 
+            /*
             if ((e.Modifiers & Android.Views.MetaKeyStates.CapsLockOn) > 0)
                 modifiers |= HardwareKeyModifierKeys.CapsLock;
             if ((e.Modifiers & Android.Views.MetaKeyStates.AltMask) > 0)
@@ -219,8 +232,11 @@ namespace Forms9Patch.Droid
                 modifiers |= HardwareKeyModifierKeys.FunctionKey;
             if ((e.Modifiers & Android.Views.MetaKeyStates.SymOn) > 0)
                 modifiers |= HardwareKeyModifierKeys.PlatformKey;
-            if ((e.Modifiers & Android.Views.MetaKeyStates.ShiftMask) > 0)
+            if (keyInput.Length > 0 && char.IsLetter(keyInput[0]) && (e.Modifiers & Android.Views.MetaKeyStates.ShiftMask) > 0)
                 modifiers |= HardwareKeyModifierKeys.Shift;
+                */
+
+            modifiers |= GetModifierKeys(e.Modifiers, useShift);
 
             var listeners = element.GetHardwareKeyListeners();
             for (int i = 0; i < listeners.Count; i++)
@@ -239,6 +255,24 @@ namespace Forms9Patch.Droid
                 }
             }
             return false;
+        }
+
+        static Forms9Patch.HardwareKeyModifierKeys GetModifierKeys(Android.Views.MetaKeyStates metaKeyStates, bool includeShift)
+        {
+            var modifiers = HardwareKeyModifierKeys.None;
+            if ((metaKeyStates & Android.Views.MetaKeyStates.CapsLockOn) > 0)
+                modifiers |= HardwareKeyModifierKeys.CapsLock;
+            if ((metaKeyStates & Android.Views.MetaKeyStates.AltMask) > 0)
+                modifiers |= HardwareKeyModifierKeys.Alternate;
+            if ((metaKeyStates & Android.Views.MetaKeyStates.CtrlMask) > 0)
+                modifiers |= HardwareKeyModifierKeys.Control;
+            if ((metaKeyStates & Android.Views.MetaKeyStates.FunctionOn) > 0)
+                modifiers |= HardwareKeyModifierKeys.FunctionKey;
+            if ((metaKeyStates & Android.Views.MetaKeyStates.SymOn) > 0)
+                modifiers |= HardwareKeyModifierKeys.PlatformKey;
+            if (includeShift && (metaKeyStates & Android.Views.MetaKeyStates.ShiftMask) > 0)
+                modifiers |= HardwareKeyModifierKeys.Shift;
+            return modifiers;
         }
     }
 }
