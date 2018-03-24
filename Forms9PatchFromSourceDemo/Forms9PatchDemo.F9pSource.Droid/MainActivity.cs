@@ -30,7 +30,8 @@ namespace Forms9PatchDemo.Droid
 
         public override bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)
         {
-            //System.Diagnostics.Debug.WriteLine("MainActivity.OnKeyUp[" + keyCode + "] e.Action[" + e.Action + "] e.Characters[" + e.Characters + "] e.DisplayLabel[" + e.DisplayLabel + "] e.Flags[" + e.Flags + "] e.MetaStates[" + e.MetaState + "] e.Modifiers[" + e.Modifiers + "] e.Unicode[" + (char)e.UnicodeChar + "] " + e.Characters + "");
+            System.Diagnostics.Debug.WriteLine("=======================================================================");
+            System.Diagnostics.Debug.WriteLine("MainActivity.OnKeyUp[" + keyCode + "] e.Action[" + e.Action + "] e.Characters[" + e.Characters + "] e.DisplayLabel[" + (e.DisplayLabel == 0 ? "" : e.DisplayLabel.ToString()) + "] e.Flags[" + e.Flags + "] e.MetaStates[" + e.MetaState + "] e.Modifiers[" + e.Modifiers + "] e.Unicode[" + (e.UnicodeChar == 0 ? "" : ((char)e.UnicodeChar).ToString()) + "] ");
             var handled = Forms9Patch.Droid.HardwareKeyListener.OnKeyDown(keyCode, e);
             if (handled)
                 return true;
