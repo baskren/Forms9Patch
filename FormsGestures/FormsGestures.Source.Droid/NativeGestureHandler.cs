@@ -386,10 +386,10 @@ namespace FormsGestures.Droid
 
         void XamarinForms_2_4_WorkAround()
         {
-            Android.Views.View view = Renderer?.View;
+            Android.Views.View renderer = Renderer?.View;
             //if (view == null)
             //    view = _weakReferenceView?.Get();
-            if (view is FormsViewGroup formsViewGroup)
+            if (renderer is FormsViewGroup formsViewGroup)
             {
                 var parent = formsViewGroup.Parent;
                 if (parent != null)
@@ -401,7 +401,8 @@ namespace FormsGestures.Droid
                         objType = parentType.GetNestedType("DefaultRenderer", System.Reflection.BindingFlags.NonPublic);
                     if (objType != null)
                     {
-                        var fieldInfo = P42.Utils.ReflectionExtensions.GetFieldInfo(objType, fieldName);
+                        //var fieldInfo = P42.Utils.ReflectionExtensions.GetFieldInfo(objType, fieldName);
+                        var fieldInfo = P42.Utils.ReflectionExtensions.GetFieldInfo(parentType, fieldName);
                         if (fieldInfo != null) // && parentType.GetField(fieldName) != null)  THIS CODE CAUSES the Listener for PoupBase._pageOverlay to not work.
                             try
                             {
@@ -411,7 +412,7 @@ namespace FormsGestures.Droid
                             catch (System.ArgumentException e)
                             {
                                 // this seems to be happening occasionally.  Need to get to the bottom of it!
-                                System.Diagnostics.Debug.WriteLine("IGNORE THIS EXCEPTION.  EVERYTHING IS OK. _element=[" + _element + "] _element.Parent=[" + _element?.Parent + "] view=[" + view + "] parent=[" + parent + "] e=[" + e.Message + "]");
+                                System.Diagnostics.Debug.WriteLine("IGNORE THIS EXCEPTION.  EVERYTHING IS OK. _element=[" + _element + "] _element.Parent=[" + _element?.Parent + "] view=[" + renderer + "] parent=[" + parent + "] e=[" + e.Message + "]");
                             }
                     }
                 }

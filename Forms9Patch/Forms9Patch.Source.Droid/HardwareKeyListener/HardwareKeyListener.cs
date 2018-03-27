@@ -90,7 +90,6 @@ namespace Forms9Patch.Droid
                     break;
                 case Android.Views.Keycode.NumpadEnter:
                     keyInput = HardwareKey.EnterReturnKeyInput;
-                    useShift = false;
                     break;
                 case Android.Views.Keycode.NumpadEquals:
                     keyInput = "=";
@@ -123,7 +122,9 @@ namespace Forms9Patch.Droid
                 case Android.Views.Keycode.Escape:
                     keyInput = HardwareKey.EscapeKeyInput;
                     break;
-
+                case Android.Views.Keycode.Enter:
+                    keyInput = HardwareKey.EnterReturnKeyInput;
+                    break;
                 case Android.Views.Keycode.F1:
                     keyInput = HardwareKey.F1KeyInput;
                     break;

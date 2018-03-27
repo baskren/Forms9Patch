@@ -141,7 +141,7 @@ namespace Forms9Patch
         internal void OnScrolling(object sender, EventArgs args)
         {
             Listener.CancelActiveGestures();
-            System.Diagnostics.Debug.WriteLine("scrolling");
+            //System.Diagnostics.Debug.WriteLine("scrolling");
             IsScrolling = true;
             Scrolling?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolling: offset=[" + ScrollOffset + "]");
@@ -150,7 +150,7 @@ namespace Forms9Patch
         internal void OnScrolled(object sender, EventArgs args)
         {
             Listener.CancelActiveGestures();
-            System.Diagnostics.Debug.WriteLine("!!! STOP !!!");
+            //System.Diagnostics.Debug.WriteLine("!!! STOP !!!");
             IsScrolling = false;
             Scrolled?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolled: offset=[" + ScrollOffset + "]");

@@ -1,5 +1,7 @@
 using System;
 using Xamarin.Forms;
+using System.Linq;
+using System.Reflection;
 
 namespace Forms9Patch
 {
@@ -8,7 +10,30 @@ namespace Forms9Patch
     /// </summary>
     public static class FocusMonitor
     {
+        static PropertyInfo _currentlyFocusedPropertyInfo;
+        static FocusMonitor()
+        {
 
+            var type = typeof(Xamarin.Forms.VisualElement);
+            _currentlyFocusedPropertyInfo = type.GetProperty("CurrentlyFocused", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            if (_currentlyFocusedPropertyInfo != null)
+            {
+                var eventInfo = type.GetEvent("FocusChanged");
+                var methodInfo = typeof(FocusMonitor).GetMethod("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
+                if (methodInfo != null)
+                {
+                    Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, null, methodInfo);
+                    eventInfo.AddEventHandler(null, handler);
+                }
+                else
+                    _currentlyFocusedPropertyInfo = null;
+            }
+        }
+
+        internal static void OnVisualElementFocusChanged(object fromElement, VisualElement toElement)
+        {
+            FocusedElementChanged?.Invoke(fromElement, toElement);
+        }
 
         #region Properties
         static bool _enabled;
@@ -18,8 +43,17 @@ namespace Forms9Patch
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         public static bool Enabled
         {
-            get => _enabled;
-            set => _enabled = value;
+            get
+            {
+                if (_currentlyFocusedPropertyInfo != null)
+                    return true;
+                return _enabled;
+            }
+            set
+            {
+                if (_currentlyFocusedPropertyInfo == null)
+                    _enabled = value;
+            }
         }
 
         static VisualElement _element;
@@ -29,26 +63,46 @@ namespace Forms9Patch
         /// <value>The focused element.</value>
         public static VisualElement FocusedElement
         {
-            get { return _element; }
+            get
+            {
+                if (_currentlyFocusedPropertyInfo != null)
+                {
+                    var result = (VisualElement)_currentlyFocusedPropertyInfo.GetValue(null);
+                    return result;
+                }
+                return _element;
+            }
             set
             {
-                bool changed = false;
-                if (_element != null)
+                if (FocusedElement == value)
+                    return;
+
+
+                if (_currentlyFocusedPropertyInfo != null)
+                    _currentlyFocusedPropertyInfo.SetValue(null, value);
+                else
                 {
-                    _element = null;
-                    changed = true;
-                }
-                if (value != null)
-                {
-                    var focused = value.Focus();
-                    if (focused)
+                    var wasElement = _element;
+
+                    bool changed = false;
+                    if (_element != null)
                     {
-                        _element = value;
+                        _element = null;
                         changed = true;
                     }
+                    if (value != null)
+                    {
+                        var focused = value.Focus();
+                        if (focused)
+                        {
+                            _element = value;
+                            changed = true;
+                        }
+                    }
+
+                    if (changed)
+                        FocusedElementChanged?.Invoke(wasElement, _element);
                 }
-                if (changed)
-                    FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
             }
         }
         #endregion
@@ -56,7 +110,8 @@ namespace Forms9Patch
         /// <summary>
         /// Occurs when focused element changed.
         /// </summary>
-        public static event EventHandler FocusedElementChanged;
+        public static event EventHandler<VisualElement> FocusedElementChanged;
+
 
 
         #region Focus Monitoring

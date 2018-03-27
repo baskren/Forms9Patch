@@ -262,7 +262,15 @@ namespace Forms9Patch
 
         public bool ShouldRenderSeparator => SeparatorVisibility != SeparatorVisibility.None && !IsLastChild;
 
-        public double RenderedSeparatorHeight => ShouldRenderSeparator ? RequestedSeparatorHeight : 0;
+        public double RenderedSeparatorHeight
+        {
+            get
+            {
+                var result = ShouldRenderSeparator ? RequestedSeparatorHeight : 0;
+                //System.Diagnostics.Debug.WriteLine("RendereredSeparatorHeight SeparatorVisibiity[" + SeparatorVisibility + "] IsLastChild[" + IsLastChild + "] [" + RequestedSeparatorHeight + "] => [" + result + "]");
+                return result;
+            }
+        }
 
         public double BestGuessItemRowHeight()
         {

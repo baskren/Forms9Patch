@@ -761,6 +761,7 @@ namespace Forms9Patch
                 HeightRequest = RowHeight + separatorHeight;
                 _separator.Color = itemWrapper.SeparatorColor;
                 _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
+                _separator.HeightRequest = separatorHeight;
             }
         }
 

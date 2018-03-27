@@ -31,9 +31,9 @@ namespace Forms9Patch
             FocusMonitor.FocusedElementChanged += OnFocusElementChanged;
         }
 
-        static void OnFocusElementChanged(object sender, EventArgs e)
+        static void OnFocusElementChanged(object wasElement, VisualElement currentElement)
         {
-            FocusedElement = sender as VisualElement;
+            FocusedElement = currentElement;
         }
 
         internal static VisualElement _element;
