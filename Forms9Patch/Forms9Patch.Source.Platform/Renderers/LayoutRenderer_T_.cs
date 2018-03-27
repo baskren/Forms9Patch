@@ -53,11 +53,11 @@ namespace Forms9Patch
 
 #elif __DROID__
 
-            KeyPress += (sender, e) => System.Diagnostics.Debug.WriteLine("KeyPress [" + e.KeyCode + "] [" + e.Event + "] [" + e.Handled + "]"); ;
+            //KeyPress += (sender, e) => System.Diagnostics.Debug.WriteLine("KeyPress [" + e.KeyCode + "] [" + e.Event + "] [" + e.Handled + "]"); ;
 
 #elif WINDOWS_UWP
-            KeyUp += OnKeyUp;
-            KeyDown += OnKeyDown;
+            //KeyUp += OnKeyUp;
+            //KeyDown += OnKeyDown;
 #endif
 
         }
@@ -174,6 +174,7 @@ namespace Forms9Patch
         public UITextSpellCheckingType SpellCheckingType { get; set; } = UITextSpellCheckingType.No;
         */
 #elif __DROID__
+        /*
         public override bool OnKeyUp([GeneratedEnum] Keycode keyCode, KeyEvent e)
         {
             System.Diagnostics.Debug.WriteLine("OnKeyDown[" + keyCode + "] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.UnicodeChar=[" + (char)e.UnicodeChar + "]");
@@ -185,8 +186,9 @@ namespace Forms9Patch
             System.Diagnostics.Debug.WriteLine("OnKeyDown[" + keyCode + "] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.UnicodeChar=[" + (char)e.UnicodeChar + "]");
             return base.OnKeyDown(keyCode, e);
         }
+        */
 #elif WINDOWS_UWP
-
+        /*
         private void OnKeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("OnKeyDown["+e.Key+"] Element=[" + Element + "] Parent=[" + Element.Parent + "]  \te.Handled=[" + e.Handled + "] \te.KeyStatus=[" + e.KeyStatus+"]");
@@ -196,7 +198,7 @@ namespace Forms9Patch
         {
             System.Diagnostics.Debug.WriteLine("OnKeyUp["+e.Key+"]   Element=["+Element+ "] Parent=[" + Element.Parent + "]  \te.Handled=["+e.Handled+"] \te.KeyStatus=["+e.KeyStatus + "]");
         }
-
+        */
 #endif
 
         #region Change management

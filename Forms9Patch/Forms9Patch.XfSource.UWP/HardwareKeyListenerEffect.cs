@@ -43,6 +43,7 @@ namespace Forms9Patch.UWP
 
         private void OnCharacterReceived(UIElement sender, CharacterReceivedRoutedEventArgs args)
         {
+            System.Diagnostics.Debug.WriteLine("HardwareKeyListenerEffect.OnCharacterReceived("+Element+")");
             if (Element is VisualElement element)
             args.Handled = HardwareKeyPageRenderer.ProcessCharacter(element, args.Character);
             

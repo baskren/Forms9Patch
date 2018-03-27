@@ -61,7 +61,6 @@ namespace Forms9Patch.UWP
                 SetCellStyle();
                 SetViewChangedEvent();
 
-
             }
         }
 
@@ -130,6 +129,7 @@ namespace Forms9Patch.UWP
                          if (_scrollViewer != null)
                          {
                              _scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
+                             _scrollViewer.AllowFocusOnInteraction = false;
                              return false;
                          }
                      }

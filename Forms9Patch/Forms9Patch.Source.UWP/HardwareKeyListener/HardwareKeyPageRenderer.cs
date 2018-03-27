@@ -62,6 +62,8 @@ namespace Forms9Patch.UWP
 
         public static bool ProcessVirualKey(VisualElement element, Windows.System.VirtualKey virtualKey)
         {
+            if (element == null)
+                return false;
             keyDownCaptured = false;
             var keyInput = "";
             switch (virtualKey)
@@ -80,6 +82,9 @@ namespace Forms9Patch.UWP
                     break;
                 case Windows.System.VirtualKey.Escape:
                     keyInput = Forms9Patch.HardwareKey.EscapeKeyInput;
+                    break;
+                case Windows.System.VirtualKey.Enter:
+                    keyInput = Forms9Patch.HardwareKey.EnterReturnKeyInput;
                     break;
                 case Windows.System.VirtualKey.F1:
                     keyInput = Forms9Patch.HardwareKey.F1KeyInput;
@@ -255,11 +260,14 @@ namespace Forms9Patch.UWP
 
         public void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
         {
+            System.Diagnostics.Debug.WriteLine("HardwareKeyPageRenderer.OnCharacterReceived");
             ProcessCharacter(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, (char)args.KeyCode);
         }
 
         public static bool ProcessCharacter(VisualElement element, char keyCode)
         {
+            if (element == null)
+                return false;
             if (keyDownCaptured)
             {
                 keyDownCaptured = false;
@@ -267,7 +275,7 @@ namespace Forms9Patch.UWP
             }
 
             var keyInput = ("" + keyCode).ToUpper();
-            System.Diagnostics.Debug.WriteLine("CoreWindow_CharacterReceived keyInput=[" + keyInput + "]");
+            System.Diagnostics.Debug.WriteLine("ProcessCharacter keyInput=[" + keyInput + "]");
 
             var modifiers = GetModifierKeys(char.IsLetter(keyCode));
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
@@ -320,7 +328,7 @@ namespace Forms9Patch.UWP
             var numLock = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.NumberKeyLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
 
             Forms9Patch.HardwareKeyModifierKeys result = HardwareKeyModifierKeys.None;
-            if (shiftState && char.IsLetter(c))
+            if (shiftState && includeShift)
                 result |= HardwareKeyModifierKeys.Shift;
             if (ctrlState)
                 result |= HardwareKeyModifierKeys.Control;

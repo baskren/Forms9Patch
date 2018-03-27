@@ -30,6 +30,8 @@ namespace Forms9Patch
 
         public static HardwareKeyListenerBehavior GetFor(VisualElement visualElement)
         {
+            if (visualElement == null)
+                return null;
             foreach (var behavior in visualElement.Behaviors)
                 if (behavior is HardwareKeyListenerBehavior hklBehavior)
                     return hklBehavior;
