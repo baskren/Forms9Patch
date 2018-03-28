@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using System;
 using FormsGestures;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
@@ -680,6 +681,7 @@ namespace Forms9Patch
             }
             else if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
             {
+                ContentView.PropertyChanged -= OnContentViewPropertyChanged;
                 FocusMonitor.Stop(ContentView);
                 Children.Remove(ContentView);
             }
@@ -692,7 +694,14 @@ namespace Forms9Patch
             {
                 FocusMonitor.Start(ContentView);
                 Children.Add(ContentView, 0, 0);
+                ContentView.PropertyChanged += OnContentViewPropertyChanged;
             }
+        }
+
+        private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == HeightRequestProperty.PropertyName || e.PropertyName == "CellHeight")
+                UpdateHeights();
         }
 
         void OnItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -729,6 +738,8 @@ namespace Forms9Patch
             //_freshContent = (_freshContent || e.PropertyName == ContentProperty.PropertyName);
             //UpdateLayout();
         }
+
+
 
         void UpdateBackground()
         {
