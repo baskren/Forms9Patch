@@ -2,6 +2,7 @@ using System;
 using Xamarin.Forms;
 using System.Linq;
 using System.Reflection;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -14,15 +15,13 @@ namespace Forms9Patch
         static FocusMonitor()
         {
 
-            var type = typeof(Xamarin.Forms.VisualElement);
-            //_currentlyFocusedPropertyInfo = type.GetProperty("CurrentlyFocused", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-            _currentlyFocusedPropertyInfo = type.GetRuntimeProperty("CurrentlyFocused");
+            var visualElementType = typeof(Xamarin.Forms.VisualElement);
+            _currentlyFocusedPropertyInfo = visualElementType.GetPropertyInfo("CurrentlyFocused");
             if (_currentlyFocusedPropertyInfo != null)
             {
-                //var eventInfo = type.GetEvent("FocusChanged");
-                var eventInfo = type.GetRuntimeEvent("FocusChanged");
-                //var methodInfo = typeof(FocusMonitor).GetMethod("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
-                var methodInfo = typeof(FocusMonitor).GetRuntimeMethod("OnVisualElementFocusChanged", null);   // ("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
+                var eventInfo = visualElementType.GetRuntimeEvent("FocusChanged");
+                var focusMonitorType = typeof(FocusMonitor);
+                var methodInfo = focusMonitorType.GetMethodInfo("OnVisualElementFocusChanged");
                 if (methodInfo != null)
                 {
                     //Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, null, methodInfo);

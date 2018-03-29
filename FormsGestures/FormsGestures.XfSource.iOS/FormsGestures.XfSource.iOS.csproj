@@ -64,15 +64,15 @@
       <Name>Xamarin.Forms.Platform.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Project>{EF8FFCC7-770B-4C3E-8AC8-EFAD51E30552}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
+      <Project>{067AADEA-34BA-472C-B9AA-0D6E423E272D}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Project>{0381ECA9-6959-4A89-B18A-45A01D44D696}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
