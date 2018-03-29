@@ -54,7 +54,8 @@ namespace Forms9Patch.Droid
             {
                 var imm = (InputMethodManager)Forms9Patch.Droid.Settings.Context.GetSystemService(Context.InputMethodService);
                 var ims = imm.CurrentInputMethodSubtype;
-                var result = ims?.Locale.Replace('_', '-');
+                var result = ims?.LanguageTag.Replace('_', '-');
+                //var result = ims?.Locale.Replace('_', '-');
 
                 if (string.IsNullOrWhiteSpace(result))
                 {

@@ -59,7 +59,11 @@ namespace Forms9Patch
         #endregion
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.HardwareKeyListener"/> class.
+        /// </summary>
+        /// <param name="hardwareKey">Hardware key.</param>
+        /// <param name="onPressed">On pressed.</param>
         public HardwareKeyListener(HardwareKey hardwareKey, EventHandler<HardwareKeyEventArgs> onPressed = null)
         {
             HardwareKey = hardwareKey;

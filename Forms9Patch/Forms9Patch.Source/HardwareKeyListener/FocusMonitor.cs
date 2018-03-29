@@ -15,14 +15,18 @@ namespace Forms9Patch
         {
 
             var type = typeof(Xamarin.Forms.VisualElement);
-            _currentlyFocusedPropertyInfo = type.GetProperty("CurrentlyFocused", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            //_currentlyFocusedPropertyInfo = type.GetProperty("CurrentlyFocused", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+            _currentlyFocusedPropertyInfo = type.GetRuntimeProperty("CurrentlyFocused");
             if (_currentlyFocusedPropertyInfo != null)
             {
-                var eventInfo = type.GetEvent("FocusChanged");
-                var methodInfo = typeof(FocusMonitor).GetMethod("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
+                //var eventInfo = type.GetEvent("FocusChanged");
+                var eventInfo = type.GetRuntimeEvent("FocusChanged");
+                //var methodInfo = typeof(FocusMonitor).GetMethod("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
+                var methodInfo = typeof(FocusMonitor).GetRuntimeMethod("OnVisualElementFocusChanged", null);   // ("OnVisualElementFocusChanged", BindingFlags.Static | BindingFlags.NonPublic);
                 if (methodInfo != null)
                 {
-                    Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, null, methodInfo);
+                    //Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, null, methodInfo);
+                    var handler = methodInfo.CreateDelegate(typeof(EventHandler<VisualElement>));
                     eventInfo.AddEventHandler(null, handler);
                 }
                 else
