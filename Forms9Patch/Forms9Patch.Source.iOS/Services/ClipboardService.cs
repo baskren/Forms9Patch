@@ -39,7 +39,11 @@ namespace Forms9Patch.iOS
                 if (EntryCaching && _changeCount == UIPasteboard.General.ChangeCount)
                     return _lastEntry;
 
-                var items = UIPasteboard.General.Items[0]; //UIPasteboard.General.GetDictionaryOfValuesFromKeys(new NSString[] { new NSString("public.html") });
+                NSDictionary[] pasteboardItems = UIPasteboard.General?.Items;
+                if (pasteboardItems == null || pasteboardItems.Length < 1)
+                    return null;
+
+                var items = pasteboardItems[0]; //UIPasteboard.General.GetDictionaryOfValuesFromKeys(new NSString[] { new NSString("public.html") });
                 var plainText = items["public.utf8-plain-text"] as NSString;
                 var htmlText = items["public.html"] as NSString;
                 var result = new ClipboardEntry
