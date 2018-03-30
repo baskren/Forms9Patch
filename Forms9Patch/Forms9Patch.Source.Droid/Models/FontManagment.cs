@@ -7,6 +7,7 @@ using System.Linq;
 using Forms9Patch.Droid;
 using P42.Utils;
 using System.Reflection;
+using Android.Content.PM;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FontManagment))]
 namespace Forms9Patch.Droid
@@ -16,7 +17,17 @@ namespace Forms9Patch.Droid
     {
 
         //static string CustomFontDirRoot => Settings.Context.CacheDir.AbsolutePath;
-        static string CustomFontDirRoot => Settings.Context.DataDir.AbsolutePath;
+        //static string CustomFontDirRoot => Settings.Context.DataDir.AbsolutePath;
+        static string CustomFontDirRoot
+        {
+            get
+            {
+                PackageManager m = Settings.Context.PackageManager;
+                String s = Settings.Context.PackageName;
+                PackageInfo p = m.GetPackageInfo(s, 0);
+                return p.ApplicationInfo.DataDir;
+            }
+        }
 
         static Typeface TrySystemFont(string fontFamily)
         {

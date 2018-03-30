@@ -69,21 +69,43 @@ namespace Forms9Patch.iOS
                         var mime = kvp.ToMime();
                         ReturnClipboardEntryItem entryItem = null;
 
-                        foreach (var typeKvp in typelist)
+                        if (typelist != null)
                         {
-                            var typeMime = typeKvp.ToMime();
-                            if (typeKvp.Key.ToString() == nsUti.ToString())
+                            foreach (var typeKvp in typelist)
                             {
-                                entryItem = new ReturnClipboardEntryItem(kvp, typeKvp.Value?.ToString());
-                                break;
+                                var typeMime = typeKvp.ToMime();
+                                if (typeKvp.Key.ToString() == nsUti.ToString())
+                                {
+                                    try
+                                    {
+                                        entryItem = new ReturnClipboardEntryItem(kvp, typeKvp.Value?.ToString());
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                    }
+                                    break;
+                                }
                             }
                         }
                         if (entryItem == null)
-                            entryItem = new ReturnClipboardEntryItem(kvp);
+                        {
+                            try
+                            {
+                                entryItem = new ReturnClipboardEntryItem(kvp);
+                            }
+                            catch (Exception)
+                            {
 
-                        var entryItemType = typeof(ReturnClipboardEntryItem<>).MakeGenericType(entryItem.Type);
-                        var typedEntryItem = (IClipboardEntryItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
-                        result.AdditionalItems.Add(typedEntryItem);
+                            }
+                        }
+
+                        if (entryItem != null)
+                        {
+                            var entryItemType = typeof(ReturnClipboardEntryItem<>).MakeGenericType(entryItem.Type);
+                            var typedEntryItem = (IClipboardEntryItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
+                            result.AdditionalItems.Add(typedEntryItem);
+                        }
                     }
                 }
 
@@ -194,6 +216,7 @@ namespace Forms9Patch.iOS
                 var uti = kvp.Key.ToString();
                 //var values = UIPasteboard.General.DataForPasteboardType(uti);
                 MimeType = UTType.GetPreferredTag(uti, UTType.TagClassMIMEType);
+
                 var keyedArchive = (NSData)kvp.Value;
                 var nsObject = NSKeyedUnarchiver.UnarchiveObject(keyedArchive);
 
