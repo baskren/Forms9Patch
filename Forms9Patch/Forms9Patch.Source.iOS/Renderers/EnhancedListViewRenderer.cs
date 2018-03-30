@@ -12,7 +12,7 @@ namespace Forms9Patch.iOS
     /// <summary>
     /// List view renderer.
     /// </summary>
-    public class EnhancedListViewRenderer : Xamarin.Forms.Platform.iOS.ListViewRenderer
+    public class EnhancedListViewRenderer : Xamarin.Forms.Platform.iOS.ListViewRenderer, IScrollView
     {
 
         ScrollDelegate ScrollDelegate = null;
@@ -26,10 +26,15 @@ namespace Forms9Patch.iOS
             base.OnElementChanged(e);
             if (e.OldElement is EnhancedListView oldElement)
             {
+                /*
                 oldElement.RendererScrollBy -= ScrollBy;
                 oldElement.RendererScrollTo -= ScrollTo;
                 oldElement.RendererScrollOffset -= ScrollOffset;
                 oldElement.RendererHeaderHeight -= HeaderHeight;
+                oldElement.GetScrollEnabled -= GetScrollEnabled;
+                */
+                oldElement.Renderer = null;
+
                 if (Control != null)
                     Control.Delegate = null;
                 if (ScrollDelegate != null)
@@ -41,10 +46,13 @@ namespace Forms9Patch.iOS
             }
             if (e.NewElement is EnhancedListView newElement)
             {
+                /*
                 newElement.RendererScrollBy += ScrollBy;
                 newElement.RendererScrollTo += ScrollTo;
                 newElement.RendererScrollOffset += ScrollOffset;
                 newElement.RendererHeaderHeight += HeaderHeight;
+                */
+                newElement.Renderer = this;
 
                 ScrollDelegate = new ScrollDelegate(newElement, Control.Source);
                 Control.Delegate = ScrollDelegate;
@@ -66,12 +74,9 @@ namespace Forms9Patch.iOS
         }
 
         #region Scrolling
-        private double ScrollOffset()
-        {
-            return Control.ContentOffset.Y;
-        }
+        public double ScrollOffset => Control.ContentOffset.Y;
 
-        bool ScrollBy(double delta, bool animated)
+        public bool ScrollBy(double delta, bool animated)
         {
             if (delta < 0 && Control.ContentOffset.Y + delta <= 0)
             {
@@ -87,20 +92,31 @@ namespace Forms9Patch.iOS
             return true;
         }
 
-        bool ScrollTo(double offset, bool animated)
+        public bool ScrollTo(double offset, bool animated)
         {
             Control.SetContentOffset(new CoreGraphics.CGPoint(Control.ContentOffset.X, offset), animated);
             return offset >= 0 && offset < Control.ContentSize.Height - Control.Bounds.Height;
         }
+
+        public bool IsScrollEnabled
+        {
+            get => Control.ScrollEnabled;
+            set => Control.ScrollEnabled = value;
+        }
+
         #endregion
 
         #region Header
-        double HeaderHeight()
+        public double HeaderHeight
         {
-            if (Control?.TableHeaderView != null)
-                return Control.TableHeaderView.Bounds.Height;
-            return 0;
+            get
+            {
+                if (Control?.TableHeaderView != null)
+                    return Control.TableHeaderView.Bounds.Height;
+                return 0;
+            }
         }
+
         #endregion
     }
 

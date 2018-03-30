@@ -209,6 +209,7 @@ namespace Forms9Patch
             thisListener.Panned += OnPanned;
             thisListener.Panning += OnPanning;
             thisListener.RightClicked += OnRightClicked;
+            //thisListener.Swiped += OnSwipe;
 
             _swipeFrame1.Content = _swipeButton1;
             _swipeFrame2.Content = _swipeButton2;
@@ -225,6 +226,14 @@ namespace Forms9Patch
 
 
         #region Swipe Menu
+        private void OnSwipe(object sender, SwipeEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Swiped:" + e);
+        }
+
+
+
+
         enum Side
         {
             Start = -1,
@@ -327,6 +336,11 @@ namespace Forms9Patch
                 else
                     return;
             }
+
+            e.Handled = _panHz;
+            var listView = this.Parent<ListView>();
+            if (listView != null)
+                listView.IsScrollEnabled = false;
 
             double distance = e.TotalDistance.X + _translateOnUp;
             if (_settingup)
@@ -462,6 +476,9 @@ namespace Forms9Patch
 
         void PutAwaySwipeButtons(bool animated)
         {
+            var listView = this.Parent<ListView>();
+            if (listView != null)
+                listView.IsScrollEnabled = true;
             var parkingX = _endButtons > 0 ? Width : -Width;
             if (animated)
             {
@@ -502,6 +519,9 @@ namespace Forms9Patch
 
         void OnSwipeButtonTapped(object sender, EventArgs e)
         {
+            var listView = this.Parent<ListView>();
+            if (listView != null)
+                listView.IsScrollEnabled = true;
             int index = 0;
             if (sender == _swipeButton2)
                 index = 1;
@@ -643,8 +663,8 @@ namespace Forms9Patch
             if (BindingContext == null)
                 return;
 
-            if (((IItemWrapper)BindingContext)?.Source.GetType().ToString() == "HeightsAndAreas.FrontageSegment")
-                System.Diagnostics.Debug.WriteLine("");
+            //if (((IItemWrapper)BindingContext)?.Source.GetType().ToString() == "HeightsAndAreas.FrontageSegment")
+            //    System.Diagnostics.Debug.WriteLine("");
 
             if (BindingContext is ItemWrapper itemWrapper)
             {

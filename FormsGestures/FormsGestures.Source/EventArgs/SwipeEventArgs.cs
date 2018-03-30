@@ -1,15 +1,16 @@
 
 namespace FormsGestures
 {
-	/// <summary>
-	/// FormsGestures Swipe event arguments.
-	/// </summary>
-	public class SwipeEventArgs : BaseGestureEventArgs {
-		
+    /// <summary>
+    /// FormsGestures Swipe event arguments.
+    /// </summary>
+    public class SwipeEventArgs : BaseGestureEventArgs
+    {
+
         /// <summary>
         /// Direction of swipe
         /// </summary>
-		public virtual Direction Direction { get; protected set; }
+        public virtual Direction Direction { get; protected set; }
 
         /// <summary>
         /// current x velocity
@@ -26,14 +27,16 @@ namespace FormsGestures
         /// </summary>
         /// <param name="source"></param>
         /// <param name="newListener"></param>
-		public SwipeEventArgs(SwipeEventArgs source=null, Listener newListener=null) : base(source, newListener) {
-			if (source != null) {
-				Direction = source.Direction;
-				VelocityX = source.VelocityX;
-				VelocityY = source.VelocityY;
+		public SwipeEventArgs(SwipeEventArgs source = null, Listener newListener = null) : base(source, newListener)
+        {
+            if (source != null)
+            {
+                Direction = source.Direction;
+                VelocityX = source.VelocityX;
+                VelocityY = source.VelocityY;
 
-			}
-		}
+            }
+        }
 
         /// <summary>
         /// Updates properties from the values from another instance
@@ -46,5 +49,10 @@ namespace FormsGestures
             VelocityX = source.VelocityX;
             VelocityY = source.VelocityY;
         }
-	}
+
+        public override string ToString()
+        {
+            return "[dir:" + Direction + "; VelX:" + VelocityX + "; VelY:" + VelocityY + ";]";
+        }
+    }
 }

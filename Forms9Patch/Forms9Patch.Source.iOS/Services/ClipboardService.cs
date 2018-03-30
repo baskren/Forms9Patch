@@ -75,6 +75,8 @@ namespace Forms9Patch.iOS
                             {
                                 var typeMime = typeKvp.ToMime();
                                 if (typeKvp.Key.ToString() == nsUti.ToString())
+                                    entryItem = ReturnClipboardEntryItem.Parse(kvp, typeKvp.Value?.ToString());
+                                /*
                                 {
                                     try
                                     {
@@ -86,19 +88,23 @@ namespace Forms9Patch.iOS
                                     }
                                     break;
                                 }
+                                */
                             }
                         }
                         if (entryItem == null)
+                            entryItem = ReturnClipboardEntryItem.Parse(kvp);
+                        /*
+                    {
+                        try
                         {
-                            try
-                            {
-                                entryItem = new ReturnClipboardEntryItem(kvp);
-                            }
-                            catch (Exception)
-                            {
-
-                            }
+                            entryItem = new ReturnClipboardEntryItem(kvp);
                         }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+                    */
 
                         if (entryItem != null)
                         {
@@ -211,7 +217,8 @@ namespace Forms9Patch.iOS
 
             public Type Type { get; private set; }
 
-            public ReturnClipboardEntryItem(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
+            /*
+            private ReturnClipboardEntryItem(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
             {
                 var uti = kvp.Key.ToString();
                 //var values = UIPasteboard.General.DataForPasteboardType(uti);
@@ -226,6 +233,40 @@ namespace Forms9Patch.iOS
                 var tuple = nsObject.ToObject(type);
                 Value = tuple.Item1;
                 Type = tuple.Item2;
+            }
+            */
+
+            public static ReturnClipboardEntryItem Parse(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
+            {
+                if (kvp.Key == null)
+                    return null;
+                var uti = kvp.Key.ToString();
+                if (uti == null)
+                    return null;
+                //var values = UIPasteboard.General.DataForPasteboardType(uti);
+                var mimeType = UTType.GetPreferredTag(uti, UTType.TagClassMIMEType);
+                if (mimeType == null)
+                    return null;
+
+                var keyedArchive = kvp.Value as NSData;
+                if (keyedArchive == null)
+                    return null;
+                var nsObject = NSKeyedUnarchiver.UnarchiveObject(keyedArchive);
+                if (nsObject == null)
+                    return null;
+
+                Type type = null;
+                if (typeCodeString != null)
+                    type = Type.GetType(typeCodeString);
+                var tuple = nsObject.ToObject(type);
+                if (tuple == null)
+                    return null;
+
+                var result = new ReturnClipboardEntryItem();
+                result.Value = tuple.Item1;
+                result.Type = tuple.Item2;
+                result.MimeType = mimeType;
+                return result;
             }
         }
         #endregion

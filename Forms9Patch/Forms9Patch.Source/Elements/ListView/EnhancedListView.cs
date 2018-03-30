@@ -6,29 +6,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using FormsGestures;
+using P42.NumericalMethods;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
-    internal class EnhancedListView : Xamarin.Forms.ListView
+    internal class EnhancedListView : Xamarin.Forms.ListView, IScrollView
     {
         #region Properties
 
 
         #region IsScrollEnabled property
         /// <summary>
-        /// backing store for IsScrollEnabled property
-        /// </summary>
-        public static readonly BindableProperty IsScrollEnabledProperty = BindableProperty.Create("IsScrollEnabled", typeof(bool), typeof(EnhancedListView), default(bool));
-        /// <summary>
         /// Gets/Sets the IsScrollEnabled property
         /// </summary>
         public bool IsScrollEnabled
         {
-            get { return (bool)GetValue(IsScrollEnabledProperty); }
-            set { SetValue(IsScrollEnabledProperty, value); }
+            get
+            {
+                if (Renderer != null)
+                    return Renderer.IsScrollEnabled;
+                return true;
+            }
+            set
+            {
+                if (Renderer != null)
+                    Renderer.IsScrollEnabled = value;
+            }
         }
         #endregion IsScrollEnabled property
 
@@ -38,7 +44,15 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the ScrollOffset property
         /// </summary>
-        public double ScrollOffset => RendererScrollOffset.Invoke();
+        public double ScrollOffset
+        {
+            get
+            {
+                if (Renderer != null)
+                    return Renderer.ScrollOffset;
+                return -1;
+            }
+        }
 
         bool _isScrolling;
         DateTime _lastScrolling = DateTime.MinValue;
@@ -84,10 +98,9 @@ namespace Forms9Patch
 
 
         #region  Platform method delegates
-        internal Func<double, bool, bool> RendererScrollBy;
-        internal Func<double, bool, bool> RendererScrollTo;
-        internal Func<double> RendererScrollOffset;
-        internal Func<double> RendererHeaderHeight;
+
+        internal IScrollView Renderer;
+
         #endregion
 
 
@@ -95,15 +108,15 @@ namespace Forms9Patch
 
         public bool ScrollBy(double delta, bool animated = true)
         {
-            if (RendererScrollBy != null)
-                return RendererScrollBy(delta, animated);
+            if (Renderer != null)
+                Renderer.ScrollBy(delta, animated);
             return false;
         }
 
         public bool ScrollTo(double offset, bool animated = true)
         {
-            if (RendererScrollTo != null)
-                return RendererScrollTo(offset, animated);
+            if (Renderer != null)
+                return Renderer.ScrollTo(offset, animated);
             return false;
         }
 
@@ -128,8 +141,8 @@ namespace Forms9Patch
         {
             get
             {
-                if (RendererHeaderHeight != null)
-                    return RendererHeaderHeight.Invoke();
+                if (Renderer != null)
+                    return Renderer.HeaderHeight;
                 return 0;
             }
         }
