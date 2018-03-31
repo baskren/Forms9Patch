@@ -72,7 +72,8 @@ namespace Forms9Patch.UWP
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
                 var properties = dataPackage.Properties;
                 //properties.ApplicationName = Forms9Patch.ApplicationInfoService.Name;
-                properties.Description = value.Description;
+                if (value.Description!=null)
+                    properties.Description = value.Description;
                 dataPackage.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
                 if (!string.IsNullOrEmpty(value.PlainText))
                     dataPackage.SetText(value.PlainText);

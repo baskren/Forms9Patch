@@ -83,7 +83,20 @@ namespace Forms9Patch
             return ValidItemType(keyType);// && ValidItemType(valueType);
         }
 
-
+        /// <summary>
+        /// Convenience factory for entry with just PlainText
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static ClipboardEntry ForPlainText(string plainText, string description=null)
+        {
+            return new ClipboardEntry
+            {
+                PlainText = plainText,
+                Description = description
+            };
+        }
 
         /// <summary>
         /// Short, descriptive text that can be used by app to display
