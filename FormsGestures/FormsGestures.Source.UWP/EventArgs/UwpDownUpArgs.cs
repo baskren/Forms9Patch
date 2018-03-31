@@ -14,7 +14,8 @@ namespace FormsGestures.UWP
         {
             Cancelled = false;
             ViewPosition = element.GetXfViewFrame();
-            var currentPoint = args.GetCurrentPoint(null);
+            //var currentPoint = args.GetCurrentPoint(null);
+            var currentPoint = args.GetCurrentPoint(element);
             Touches = new Xamarin.Forms.Point[] { currentPoint.Position.ToXfPoint() };
             TriggeringTouches = new[] { 0 };
         }
@@ -41,7 +42,8 @@ namespace FormsGestures.UWP
         {
             Cancelled = false;
             ViewPosition = element.GetXfViewFrame();
-            var currentPoint = args.GetPosition(null);
+            //var currentPoint = args.GetPosition(null);
+            var currentPoint = args.GetPosition(element);
             Touches = new Xamarin.Forms.Point[] { currentPoint.ToXfPoint() };
             TriggeringTouches = new[] { 0 };
         }

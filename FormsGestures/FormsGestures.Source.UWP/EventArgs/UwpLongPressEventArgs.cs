@@ -18,7 +18,8 @@ namespace FormsGestures.UWP
         public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs args, long elapsedMilliseconds)
         {
             ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
+            //Touches = new Xamarin.Forms.Point[] { args.GetPosition(null).ToXfPoint() };
+            Touches = new Xamarin.Forms.Point[] { args.GetPosition(element).ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
@@ -35,7 +36,8 @@ namespace FormsGestures.UWP
         public UwpLongPressEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs args, long elapsedMilliseconds)
         {
             ViewPosition = element.GetXfViewFrame();
-            Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(null).Position.ToXfPoint() };
+            //Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(null).Position.ToXfPoint() };
+            Touches = new Xamarin.Forms.Point[] { args.GetCurrentPoint(element).Position.ToXfPoint() };
             Duration = elapsedMilliseconds;
         }
 
