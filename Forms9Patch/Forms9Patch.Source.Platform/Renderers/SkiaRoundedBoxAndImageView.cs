@@ -248,6 +248,7 @@ internal Xamarin.Forms.Size SourceImageSize()
 
         #endregion
 
+
         #region Keyboard
 
 #if __IOS__
@@ -336,6 +337,13 @@ private void OnShapeElementPropertyChanged(object sender, PropertyChangedEventAr
         || e.PropertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName
              || e.PropertyName == Forms9Patch.Button.SeparatorWidthProperty.PropertyName
              || e.PropertyName == Forms9Patch.Button.HasShadowProperty.PropertyName
+             || e.PropertyName == ShapeBase.BackgroundColorProperty.PropertyName
+             || e.PropertyName == ShapeBase.HasShadowProperty.PropertyName
+             || e.PropertyName == ShapeBase.ShadowInvertedProperty.PropertyName
+             || e.PropertyName == ShapeBase.OutlineColorProperty.PropertyName
+             || e.PropertyName == ShapeBase.OutlineRadiusProperty.PropertyName
+             || e.PropertyName == ShapeBase.OutlineWidthProperty.PropertyName
+             || e.PropertyName == ShapeBase.ExtendedElementShapeProperty.PropertyName
         )
     {
         _validLayout = false;
