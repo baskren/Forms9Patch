@@ -9,7 +9,7 @@ using Android.Runtime;
 [assembly: ExportRenderer(typeof(Forms9Patch.EnhancedListView), typeof(Forms9Patch.Droid.EnhancedListViewRenderer))]
 namespace Forms9Patch.Droid
 {
-    public class EnhancedListViewRenderer : Xamarin.Forms.Platform.Android.ListViewRenderer
+    public class EnhancedListViewRenderer : Xamarin.Forms.Platform.Android.ListViewRenderer, IScrollView
     {
         #region Fields
         ScrollListener _scrollListener;
@@ -30,20 +30,26 @@ namespace Forms9Patch.Droid
             base.OnElementChanged(e);
             if (e.OldElement is EnhancedListView oldElement)
             {
+                /*
                 oldElement.RendererScrollBy -= ScrollBy;
                 oldElement.RendererScrollTo -= ScrollTo;
                 oldElement.RendererScrollOffset -= ScrollOffset;
                 oldElement.RendererHeaderHeight -= HeaderHeight;
+                */
                 oldElement.PropertyChanging -= OnElementPropertyChanging;
+                oldElement.Renderer = null;
                 ScrollListener.Element = null;
             }
             if (e.NewElement is EnhancedListView newElement)
             {
+                /*
                 newElement.RendererScrollBy += ScrollBy;
                 newElement.RendererScrollTo += ScrollTo;
                 newElement.RendererScrollOffset += ScrollOffset;
                 newElement.RendererHeaderHeight += HeaderHeight;
+                */
                 newElement.PropertyChanging += OnElementPropertyChanging;
+                newElement.Renderer = this as IScrollView;
 
                 ScrollListener.IsBuildingLayOut = true;
                 ScrollListener.Element = newElement;
@@ -104,7 +110,7 @@ namespace Forms9Patch.Droid
         }
 
         #region Scrolling
-        bool ScrollBy(double delta, bool animated)
+        public bool ScrollBy(double delta, bool animated)
         {
             if (animated)
             {
@@ -119,7 +125,7 @@ namespace Forms9Patch.Droid
             return true;
         }
 
-        bool ScrollTo(double offset, bool animated)
+        public bool ScrollTo(double offset, bool animated)
         {
             if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
             {
@@ -131,30 +137,61 @@ namespace Forms9Patch.Droid
             return false;
         }
 
-        double ScrollOffset()
+        public double ScrollOffset
         {
-            if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
+            get
             {
-                var cellView = Control.GetChildAt(0);
-                if (cellView == null)
-                    return -1;
-
-                int index = Control.FirstVisiblePosition;
-                if (index == 0)
-                    return -cellView.Top / Forms9Patch.Display.Scale;
-
-                if (Control.HeaderViewsCount > 0)
+                if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
                 {
-                    index--;
-                    if (Control.HeaderViewsCount > 1)
-                        throw new NotSupportedException("EnhancedListViewRenderer only supports 0 or 1 ListView.Header");
-                }
+                    var cellView = Control.GetChildAt(0);
+                    if (cellView == null)
+                        return -1;
 
-                var deepDataSource = groupWrapper.TwoDeepDataSetForFlatIndex(index);
-                return HeaderHeight() + deepDataSource.Offset - cellView.Top / Forms9Patch.Display.Scale;
+                    int index = Control.FirstVisiblePosition;
+                    if (index == 0)
+                        return -cellView.Top / Forms9Patch.Display.Scale;
+
+                    if (Control.HeaderViewsCount > 0)
+                    {
+                        index--;
+                        if (Control.HeaderViewsCount > 1)
+                            throw new NotSupportedException("EnhancedListViewRenderer only supports 0 or 1 ListView.Header");
+                    }
+
+                    var deepDataSource = groupWrapper.TwoDeepDataSetForFlatIndex(index);
+                    return HeaderHeight + deepDataSource.Offset - cellView.Top / Forms9Patch.Display.Scale;
+                }
+                return 0;
             }
-            return 0;
         }
+
+        public bool IsScrollEnabled { get; set; } = true;
+
+        /*
+        public override bool OnInterceptTouchEvent(MotionEvent e) 
+        {
+            if (e.Action == MotionEventActions.Move && !IsScrollEnabled)
+                return true;
+            return base.OnInterceptTouchEvent(e);
+        }
+        */
+
+
+        float downY = 0;
+        public override bool DispatchTouchEvent(MotionEvent ev)
+        {
+            if (ev.Action == MotionEventActions.Down)
+                downY = ev.GetY();
+
+            //if (IsScrollEnabled || ev.Action != MotionEventActions.Move)
+            //    return base.OnInterceptTouchEvent(ev);
+            //return true;
+
+            if (!IsScrollEnabled)
+                ev.SetLocation(ev.GetX(), downY);
+            return base.DispatchTouchEvent(ev);
+        }
+
         #endregion
 
         #region HeaderHeight
@@ -169,7 +206,7 @@ namespace Forms9Patch.Droid
             return 0;
         }
 
-        double HeaderHeight() => NativeHeaderHeight() / Forms9Patch.Display.Scale;
+        public double HeaderHeight => NativeHeaderHeight() / Forms9Patch.Display.Scale;
         #endregion
 
         #region FooterHeight
