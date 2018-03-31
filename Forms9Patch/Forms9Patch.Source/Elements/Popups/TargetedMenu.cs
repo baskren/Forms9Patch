@@ -181,6 +181,18 @@ namespace Forms9Patch
 
 
         #region Constructor / Factory
+        void SegmentsFromHtmlTexts(List<string> htmlTexts)
+        {
+            if (htmlTexts != null)
+            {
+                foreach (var htmlText in htmlTexts)
+                    Segments.Add(new Segment
+                    {
+                        HtmlText = htmlText
+                    });
+            }
+        }
+
         /// <summary>
         /// Instantiates, populates and presents a TargetedMenu
         /// </summary>
@@ -190,23 +202,27 @@ namespace Forms9Patch
         public static TargetedMenu Create(VisualElement target, List<string> htmlTexts = null)
         {
             var targetedMenu = new TargetedMenu(target);
-            if (htmlTexts != null)
-            {
-                foreach (var htmlText in htmlTexts)
-                    targetedMenu.Segments.Add(new Segment
-                    {
-                        HtmlText = htmlText
-                    });
-            }
+            targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
 
         /// <summary>
-        /// Constructor for TargetedToast
+        /// Instantiates, populates and presents a TargetedMenu at a Point
         /// </summary>
         /// <param name="target"></param>
-        public TargetedMenu(VisualElement target) : base(target)
+        /// <param name="point"></param>
+        /// <param name="htmlTexts"></param>
+        /// <returns></returns>
+        public static TargetedMenu Create(VisualElement target, Point point, List<string> htmlTexts = null)
+        {
+            var targetedMenu = new TargetedMenu(target, point);
+            targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
+            targetedMenu.IsVisible = true;
+            return targetedMenu;
+        }
+
+        void Init()
         {
             PointerDirection = PointerDirection.Any;
             PreferredPointerDirection = PointerDirection.Down;
@@ -221,6 +237,19 @@ namespace Forms9Patch
             SizeChanged += OnSizeChanged;
             Content = _stackLayout;
         }
+
+        /// <summary>
+        /// Constructor for TargetedMenu
+        /// </summary>
+        /// <param name="target"></param>
+        public TargetedMenu(VisualElement target) : base(target) => Init();
+
+        /// <summary>
+        /// Constructor for TargetedMenu at a Point
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="point"></param>
+        public TargetedMenu(VisualElement target, Point point) : base(target, point) => Init();
         #endregion
 
 

@@ -2,6 +2,7 @@
 using System;
 using FormsGestures;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Forms9Patch
 {
@@ -479,42 +480,45 @@ namespace Forms9Patch
             var listView = this.Parent<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = true;
-            var parkingX = _endButtons > 0 ? Width : -Width;
-            if (animated)
+            if (_startButtons + _endButtons > 0)
             {
-                TranslateContentViewTo(0, 0, 300, Easing.Linear);
-                _swipeFrame1.TranslateTo(parkingX, 0, 400, Easing.Linear);
-                if (_endButtons + _startButtons > 1)
-                    _swipeFrame2.TranslateTo(parkingX, 0, 400, Easing.Linear);
-                if (_endButtons + _startButtons > 2)
-                    _swipeFrame3.TranslateTo(parkingX, 0, 400, Easing.Linear);
-                //_insetFrame.TranslateTo(parkingX, 0, 400, Easing.Linear);
-                Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
+                var parkingX = _endButtons > 0 ? Width : -Width;
+                if (animated)
                 {
+                    TranslateContentViewTo(0, 0, 300, Easing.Linear);
+                    _swipeFrame1.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                    if (_endButtons + _startButtons > 1)
+                        _swipeFrame2.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                    if (_endButtons + _startButtons > 2)
+                        _swipeFrame3.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                    //_insetFrame.TranslateTo(parkingX, 0, 400, Easing.Linear);
+                    Device.StartTimer(TimeSpan.FromMilliseconds(400), () =>
+                    {
+                        _touchBlocker.IsVisible = false;
+                        _swipeFrame1.HorizontalOptions = LayoutOptions.Fill;
+                        _swipeFrame2.HorizontalOptions = LayoutOptions.Fill;
+                        _swipeFrame3.HorizontalOptions = LayoutOptions.Fill;
+                        _swipeFrame1.IsVisible = false;
+                        _swipeFrame2.IsVisible = false;
+                        _swipeFrame3.IsVisible = false;
+                        return false;
+                    });
+                }
+                else
+                {
+                    ContentViewX = 0;
+                    _swipeFrame1.TranslationX = parkingX;
+                    if (_endButtons + _startButtons > 1)
+                        _swipeFrame2.TranslationX = parkingX;
+                    if (_endButtons + _startButtons > 2)
+                        _swipeFrame3.TranslationX = parkingX;
+                    //_insetFrame.TranslationX = parkingX;
                     _touchBlocker.IsVisible = false;
-                    _swipeFrame1.HorizontalOptions = LayoutOptions.Fill;
-                    _swipeFrame2.HorizontalOptions = LayoutOptions.Fill;
-                    _swipeFrame3.HorizontalOptions = LayoutOptions.Fill;
-                    _swipeFrame1.IsVisible = false;
-                    _swipeFrame2.IsVisible = false;
-                    _swipeFrame3.IsVisible = false;
-                    return false;
-                });
+                }
+                _translateOnUp = 0;
+                _endButtons = 0;
+                _startButtons = 0;
             }
-            else
-            {
-                ContentViewX = 0;
-                _swipeFrame1.TranslationX = parkingX;
-                if (_endButtons + _startButtons > 1)
-                    _swipeFrame2.TranslationX = parkingX;
-                if (_endButtons + _startButtons > 2)
-                    _swipeFrame3.TranslationX = parkingX;
-                //_insetFrame.TranslationX = parkingX;
-                _touchBlocker.IsVisible = false;
-            }
-            _translateOnUp = 0;
-            _endButtons = 0;
-            _startButtons = 0;
         }
 
         void OnSwipeButtonTapped(object sender, EventArgs e)
@@ -531,6 +535,7 @@ namespace Forms9Patch
             if (index == 2 && _endButtons + _startButtons > 2)
             {
                 // show remaining menu items in a modal list
+                PutAwaySwipeButtons(false);
 
                 var segmentedController = new SegmentedControl
                 {
@@ -581,7 +586,7 @@ namespace Forms9Patch
                         Text = menuItem.Text,
                         IconText = menuItem.IconText,
                         //ImageSource = menuItem.ImageSource
-                        IconImage = new Image { Source = menuItem.ImageSource }
+                        IconImage =  menuItem.IconImage
                     };
                     segment.Tapped += (s, arg) =>
                     {
@@ -612,12 +617,14 @@ namespace Forms9Patch
         #region Cell Gestures
         void OnTapped(object sender, TapEventArgs e)
         {
+            PutAwaySwipeButtons(true);
             if (_endButtons + _startButtons == 0)
                 ((ItemWrapper)BindingContext)?.OnTapped(this, new ItemWrapperTapEventArgs((ItemWrapper)BindingContext));
         }
 
         void OnLongPressed(object sender, LongPressEventArgs e)
         {
+            PutAwaySwipeButtons(true);
             if (_endButtons + _startButtons == 0)
                 ((ItemWrapper)BindingContext)?.OnLongPressed(this, new ItemWrapperLongPressEventArgs((ItemWrapper)BindingContext));
         }
@@ -636,7 +643,7 @@ namespace Forms9Patch
 
             }
             */
-
+            /*
             if (e.Center.X < 100)
             {
                 Toast.Create(null, "In the zone.");
@@ -646,7 +653,73 @@ namespace Forms9Patch
             {
                 e.Handled = true;
             }
+            */
 
+            if (_startButtons + _endButtons > 0)
+                PutAwaySwipeButtons(true);
+            else 
+            {
+                //((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
+                var startMenu = ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
+                var endMenu = ((ICellSwipeMenus)ContentView)?.EndSwipeMenu;
+
+                var segments = new List<Segment>();
+
+                if (endMenu!=null)
+                {
+                    foreach (var item in endMenu)
+                    {
+                        var segment = new Segment();
+                        if (item.IconText != null)
+                            segment.IconText = item.IconText;
+                        if (item.IconImage?.Source!=null)
+                            segment.IconImage = item.IconImage;
+                        if (item.Text != null)
+                            segment.Text = item.Text;
+                        if (item.HtmlText != null)
+                            segment.HtmlText = item.HtmlText;
+                        segment.CommandParameter = item;
+                        segments.Add(segment);
+                    }
+                }
+                if (startMenu != null)
+                {
+                    foreach (var item in startMenu)
+                    {
+                        var segment = new Segment();
+                        if (item.IconText != null)
+                            segment.IconText = item.IconText;
+                        if (item.IconImage?.Source != null)
+                            segment.IconImage = item.IconImage;
+                        if (item.Text != null)
+                            segment.Text = item.Text;
+                        if (item.HtmlText != null)
+                            segment.HtmlText = item.HtmlText;
+                        segments.Add(segment);
+                    }
+                }
+                if (segments.Count > 0)
+                {
+
+                    var menu = new Forms9Patch.TargetedMenu(this)
+                    {
+                        Segments = segments
+                    };
+
+                    menu.SegmentTapped += (s, a) =>
+                    {
+                        if (a.Segment.CommandParameter is SwipeMenuItem menuItem)
+                        {
+                            var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
+                            ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                            ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                        }
+                    };
+
+                    menu.IsVisible = true;
+                }
+
+            }
         }
 
         #endregion

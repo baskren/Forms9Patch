@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 [assembly: Xamarin.Forms.Platform.UWP.ExportRenderer(typeof(Forms9Patch.EnhancedListView), typeof(Forms9Patch.UWP.EnhancedListViewRenderer))]
 namespace Forms9Patch.UWP
 {
-    class EnhancedListViewRenderer : Xamarin.Forms.Platform.UWP.ListViewRenderer
+    class EnhancedListViewRenderer : Xamarin.Forms.Platform.UWP.ListViewRenderer, IScrollView
     {
         
         static Windows.UI.Xaml.ResourceDictionary _enhancedListViewResources;
@@ -45,19 +45,24 @@ namespace Forms9Patch.UWP
             base.OnElementChanged(e);
             if (e.OldElement is EnhancedListView oldElement)
             {
+                /*
                 oldElement.RendererScrollBy -= ScrollBy;
                 oldElement.RendererScrollTo -= ScrollTo;
                 oldElement.RendererScrollOffset -= ScrollOffset;
                 oldElement.RendererHeaderHeight -= HeaderHeight;
+                */
+                oldElement.Renderer = null;
                 UnsetViewChangedEvent();
             }
             if (e.NewElement is EnhancedListView newElement)
             {
+                /*
                 newElement.RendererScrollBy += ScrollBy;
                 newElement.RendererScrollTo += ScrollTo;
                 newElement.RendererScrollOffset += ScrollOffset;
                 newElement.RendererHeaderHeight += HeaderHeight;
-
+                */
+                newElement.Renderer = this;
                 SetCellStyle();
                 SetViewChangedEvent();
 
@@ -142,11 +147,14 @@ namespace Forms9Patch.UWP
 
 
         #region Scrolling
-        private double ScrollOffset()
+        public double ScrollOffset
         {
-            if (_scrollViewer != null)
-                return _scrollViewer.VerticalOffset;
-            return 0;
+            get
+            {
+                if (_scrollViewer != null)
+                    return _scrollViewer.VerticalOffset;
+                return 0;
+            }
         }
 
 
@@ -159,30 +167,53 @@ namespace Forms9Patch.UWP
         }
 
 
-        bool ScrollBy(double delta, bool animated)
+        public bool ScrollBy(double delta, bool animated)
         {
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null, !animated);
             return false;
         }
 
-        bool ScrollTo(double offset, bool animated)
+        public bool ScrollTo(double offset, bool animated)
         {
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, offset, null, !animated);
             return false;
         }
 
+
+        public bool IsScrollEnabled
+        {
+            get
+            {
+                if (_scrollViewer != null)
+                    return _scrollViewer.VerticalScrollMode != ScrollMode.Disabled;
+                return true;
+            }
+            set
+            {
+                if (_scrollViewer!=null)
+                {
+                    if (value)
+                        _scrollViewer.VerticalScrollMode = ScrollMode.Enabled;
+                    else
+                        _scrollViewer.VerticalScrollMode = ScrollMode.Disabled;
+                }
+            }
+        }
         #endregion
 
 
         #region Header
 
-        double HeaderHeight()
+        public double HeaderHeight
         {
-            if (HeaderControl != null)
-                return HeaderControl.RenderSize.Height;
-            return 0;
+            get
+            {
+                if (HeaderControl != null)
+                    return HeaderControl.RenderSize.Height;
+                return 0;
+            }
         }
 
         Windows.UI.Xaml.Controls.ContentControl _headerControl;

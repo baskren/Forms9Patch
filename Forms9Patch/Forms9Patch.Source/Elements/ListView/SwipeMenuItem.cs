@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Describes a Swipe action button that appears when a cell is swiped 
     /// </summary>
-    public class SwipeMenuItem : BindableObject
+    public class SwipeMenuItem : BindableObject, IMenuItem
     {
         #region Properties
         /// <summary>
@@ -24,7 +24,7 @@ namespace Forms9Patch
         }
 
 
-
+        /*
         /// <summary>
         /// The icon image source property backing store;
         /// </summary>
@@ -38,6 +38,24 @@ namespace Forms9Patch
             get { return (Forms9Patch.ImageSource)GetValue(IconImageSourceProperty); }
             set { SetValue(IconImageSourceProperty, value); }
         }
+        */
+
+        #region IconImage property
+        /// <summary>
+        /// backing store for IconImage property
+        /// </summary>
+        public static readonly BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(SwipeMenuItem), default(Forms9Patch.Image));
+        /// <summary>
+        /// Gets/Sets the IconImage property
+        /// </summary>
+        public Forms9Patch.Image IconImage
+        {
+            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
+            set { SetValue(IconImageProperty, value); }
+        }
+        #endregion IconImage property
+
+
 
         /// <summary>
         /// The icon text property backing store.
@@ -66,6 +84,24 @@ namespace Forms9Patch
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+
+
+        #region HtmlText property
+        /// <summary>
+        /// backing store for HtmlText property
+        /// </summary>
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(SwipeMenuItem), default(string));
+        /// <summary>
+        /// Gets/Sets the HtmlText property
+        /// </summary>
+        public string HtmlText
+        {
+            get { return (string)GetValue(HtmlTextProperty); }
+            set { SetValue(HtmlTextProperty, value); }
+        }
+        #endregion HtmlText property
+
+
 
         /// <summary>
         /// The text color property.
@@ -138,9 +174,13 @@ namespace Forms9Patch
         {
             base.OnPropertyChanged(propertyName);
             if (propertyName == IconTextProperty.PropertyName && IconTextProperty != null)
-                ImageSource = null;
-            else if (propertyName == IconImageSourceProperty.PropertyName && ImageSource != null)
+                IconImage = null;
+            else if (propertyName == IconImageProperty.PropertyName && IconImage?.Source != null)
                 IconText = null;
+            else if (propertyName == TextProperty.PropertyName && Text != null)
+                HtmlText = null;
+            else if (propertyName == HtmlTextProperty.PropertyName && HtmlText != null)
+                Text = null;
         }
         #endregion
     }

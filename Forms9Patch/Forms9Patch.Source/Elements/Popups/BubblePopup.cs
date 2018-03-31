@@ -139,23 +139,35 @@ namespace Forms9Patch
         }
         #endregion PointerAngle property
 
+        #region Point property
+        /// <summary>
+        /// backing store for Point property
+        /// </summary>
+        public static readonly BindableProperty PointProperty = BindableProperty.Create("Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity,double.PositiveInfinity));
+        /// <summary>
+        /// Gets/Sets the Point property
+        /// </summary>
+        public Point Point
+        {
+            get { return (Point)GetValue(PointProperty); }
+            set { SetValue(PointProperty, value); }
+        }
+        #endregion Point property
+
+
         #endregion
 
         #endregion
 
 
         #region Fields
-        readonly BubbleLayout _bubbleLayout;
+        BubbleLayout _bubbleLayout;
         #endregion
 
 
         #region Constructor / Destructor
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
-        /// </summary>
-        /// <param name="target">Target.</param>
-        /// <param name="retain">If set to <c>true</c> retain.</param>
-        public BubblePopup(VisualElement target, bool retain = false) : base(target, retain)
+
+        void Init()
         {
             _bubbleLayout = new BubbleLayout
             {
@@ -175,8 +187,22 @@ namespace Forms9Patch
 
             Margin = 0;
             Padding = 10;
-
         }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
+        /// </summary>
+        /// <param name="target">Target.</param>
+        /// <param name="retain">If set to <c>true</c> retain.</param>
+        public BubblePopup(VisualElement target, bool retain = false) : base(target, retain) => Init();
+
+        public BubblePopup(VisualElement target, Point point, bool retain = false) : base(target, retain)
+        {
+            Init();
+            Point = point;
+        }
+
         #endregion
 
 
@@ -281,6 +307,11 @@ namespace Forms9Patch
 
 
         #region Layout
+        public bool UsePoint
+        {
+            get => !double.IsNegativeInfinity(Point.X) && !double.IsPositiveInfinity(Point.Y);
+            set => Point = new Point(double.NegativeInfinity, double.PositiveInfinity);
+        }
 
         //Using the below check seems to fail to render correct size on some pop-ups!
         //Rectangle _lastBounds = Rectangle.Zero;  
@@ -356,10 +387,11 @@ namespace Forms9Patch
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
                     //targetBounds = Target.BoundsToEleCoord(targetPage);
 
-                    var reqSpaceToLeft = targetBounds.Left - rboxSize.Width - PointerLength - Margin.Left;
-                    var reqSpaceToRight = width - targetBounds.Right - rboxSize.Width - PointerLength - Margin.Right;
-                    var reqSpaceAbove = targetBounds.Top - rboxSize.Height - PointerLength - Margin.Top;
-                    var reqSpaceBelow = height - targetBounds.Bottom - rboxSize.Height - PointerLength - Margin.Bottom;
+
+                    var reqSpaceToLeft = (UsePoint ? Point.X : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
+                    var reqSpaceToRight = width - (UsePoint? Point.X :targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
+                    var reqSpaceAbove = (UsePoint ? Point.Y : targetBounds.Top) - rboxSize.Height - PointerLength - Margin.Top;
+                    var reqSpaceBelow = height - (UsePoint ? Point.Y : targetBounds.Bottom) - rboxSize.Height - PointerLength - Margin.Bottom;
                     var reqHzSpace = width - rboxSize.Width - Margin.HorizontalThickness;
                     var reqVtSpace = height - rboxSize.Height - Margin.VerticalThickness;
 
@@ -463,23 +495,49 @@ namespace Forms9Patch
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
                     {
-                        tuple = StartAndPointerLocation(rboxSize.Width, targetBounds.Left, targetBounds.Width, width);
-                        bounds = new Rectangle(
-                            new Point(
-                                tuple.Item1 + x,
-                                (pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - rboxSize.Height - PointerLength) + y),
-                            new Size(rboxSize.Width, rboxSize.Height + PointerLength)
-                        );
+                        if (UsePoint)
+                        {
+                            tuple = StartAndPointerLocation(rboxSize.Width, Point.X, 0, width);
+                            bounds = new Rectangle(
+                                new Point(
+                                    tuple.Item1 + x,
+                                    (pointerDir == PointerDirection.Up ? Point.Y : Point.Y - rboxSize.Height - PointerLength) + y),
+                                new Size(rboxSize.Width, rboxSize.Height + PointerLength)
+                            );
+                        }
+                        else
+                        {
+                            tuple = StartAndPointerLocation(rboxSize.Width, targetBounds.Left, targetBounds.Width, width);
+                            bounds = new Rectangle(
+                                new Point(
+                                    tuple.Item1 + x,
+                                    (pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - rboxSize.Height - PointerLength) + y),
+                                new Size(rboxSize.Width, rboxSize.Height + PointerLength)
+                            );
+                        }
                     }
                     else
                     {
-                        tuple = StartAndPointerLocation(rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
-                        bounds = new Rectangle(
-                            new Point(
-                                (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + x,
-                                tuple.Item1 + y),
-                            new Size(rboxSize.Width + PointerLength, rboxSize.Height)
-                        );
+                        if (UsePoint)
+                        {
+                            tuple = StartAndPointerLocation(rboxSize.Height, Point.Y, 0, height);
+                            bounds = new Rectangle(
+                                new Point(
+                                    (pointerDir == PointerDirection.Left ? Point.X : Point.X - rboxSize.Width - PointerLength) + x,
+                                    tuple.Item1 + y),
+                                new Size(rboxSize.Width + PointerLength, rboxSize.Height)
+                            );
+                        }
+                        else
+                        {
+                            tuple = StartAndPointerLocation(rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
+                            bounds = new Rectangle(
+                                new Point(
+                                    (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + x,
+                                    tuple.Item1 + y),
+                                new Size(rboxSize.Width + PointerLength, rboxSize.Height)
+                            );
+                        }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     LayoutChildIntoBoundingRegion(_bubbleLayout, new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height));

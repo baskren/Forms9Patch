@@ -151,6 +151,7 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\ILabel.cs" Link="Interfaces\ILabel.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\ILabelStyle.cs" Link="Interfaces\ILabelStyle.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\ILayout.cs" Link="Interfaces\ILayout.cs" />
+    <Compile Include="..\Forms9Patch.Source\Interfaces\IMenuItem.cs" Link="Interfaces\IMenuItem.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\INativeSettings.cs" Link="Interfaces\INativeSettings.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IOsInformationService.cs" Link="Interfaces\IOsInformationService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IPopup.cs" Link="Interfaces\IPopup.cs" />
