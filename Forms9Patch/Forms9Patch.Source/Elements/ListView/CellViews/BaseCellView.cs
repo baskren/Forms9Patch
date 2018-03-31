@@ -695,13 +695,14 @@ namespace Forms9Patch
                             segment.Text = item.Text;
                         if (item.HtmlText != null)
                             segment.HtmlText = item.HtmlText;
+                        segment.CommandParameter = item;
                         segments.Add(segment);
                     }
                 }
                 if (segments.Count > 0)
                 {
 
-                    var menu = new Forms9Patch.TargetedMenu(this)
+                    var menu = new Forms9Patch.TargetedMenu(this, e.Center)
                     {
                         Segments = segments
                     };

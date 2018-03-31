@@ -133,8 +133,9 @@ namespace Forms9Patch.UWP
         {
             var task = Task<byte[]>.Run(async () =>
             {
-                var reference = await dpv.GetBitmapAsync();
-                var random = (Windows.Storage.Streams.IRandomAccessStream)reference.OpenReadAsync();
+                var reference = await dpv.GetBitmapAsync() as Windows.Storage.Streams.RandomAccessStreamReference;
+                //var random = (Windows.Storage.Streams.IRandomAccessStream)reference.OpenReadAsync();
+                var random = await reference.OpenReadAsync();
                 Windows.Graphics.Imaging.BitmapDecoder decoder = await Windows.Graphics.Imaging.BitmapDecoder.CreateAsync(random);
                 Windows.Graphics.Imaging.PixelDataProvider pixelData = await decoder.GetPixelDataAsync();
                 return pixelData.DetachPixelData();

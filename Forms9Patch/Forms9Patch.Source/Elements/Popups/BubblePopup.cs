@@ -388,10 +388,10 @@ namespace Forms9Patch
                     //targetBounds = Target.BoundsToEleCoord(targetPage);
 
 
-                    var reqSpaceToLeft = (UsePoint ? Point.X : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
-                    var reqSpaceToRight = width - (UsePoint? Point.X :targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
-                    var reqSpaceAbove = (UsePoint ? Point.Y : targetBounds.Top) - rboxSize.Height - PointerLength - Margin.Top;
-                    var reqSpaceBelow = height - (UsePoint ? Point.Y : targetBounds.Bottom) - rboxSize.Height - PointerLength - Margin.Bottom;
+                    var reqSpaceToLeft = (UsePoint ? Point.X + targetBounds.Left : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
+                    var reqSpaceToRight = width - (UsePoint? Point.X + targetBounds.Left :targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
+                    var reqSpaceAbove = (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Top) - rboxSize.Height - PointerLength - Margin.Top;
+                    var reqSpaceBelow = height - (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Bottom) - rboxSize.Height - PointerLength - Margin.Bottom;
                     var reqHzSpace = width - rboxSize.Width - Margin.HorizontalThickness;
                     var reqVtSpace = height - rboxSize.Height - Margin.VerticalThickness;
 
@@ -497,11 +497,11 @@ namespace Forms9Patch
                     {
                         if (UsePoint)
                         {
-                            tuple = StartAndPointerLocation(rboxSize.Width, Point.X, 0, width);
+                            tuple = StartAndPointerLocation(rboxSize.Width, Point.X + targetBounds.Left, 0, width);
                             bounds = new Rectangle(
                                 new Point(
                                     tuple.Item1 + x,
-                                    (pointerDir == PointerDirection.Up ? Point.Y : Point.Y - rboxSize.Height - PointerLength) + y),
+                                    (pointerDir == PointerDirection.Up ? Point.Y + targetBounds.Top : Point.Y + targetBounds.Top - rboxSize.Height - PointerLength) + y),
                                 new Size(rboxSize.Width, rboxSize.Height + PointerLength)
                             );
                         }
@@ -520,10 +520,10 @@ namespace Forms9Patch
                     {
                         if (UsePoint)
                         {
-                            tuple = StartAndPointerLocation(rboxSize.Height, Point.Y, 0, height);
+                            tuple = StartAndPointerLocation(rboxSize.Height, Point.Y + targetBounds.Top, 0, height);
                             bounds = new Rectangle(
                                 new Point(
-                                    (pointerDir == PointerDirection.Left ? Point.X : Point.X - rboxSize.Width - PointerLength) + x,
+                                    (pointerDir == PointerDirection.Left ? Point.X + targetBounds.Left : Point.X + targetBounds.Left - rboxSize.Width - PointerLength) + x,
                                     tuple.Item1 + y),
                                 new Size(rboxSize.Width + PointerLength, rboxSize.Height)
                             );
