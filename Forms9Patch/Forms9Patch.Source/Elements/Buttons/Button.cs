@@ -1077,6 +1077,14 @@ namespace Forms9Patch
         #endregion
 
 
+        public override string ToString()
+        {
+            var result = base.ToString();
+            result += "[" + (Text ?? HtmlText) + "]";
+            return result;
+        }
+
+
         #region Gesture event responders
         /// <summary>
         /// Tap this instance.

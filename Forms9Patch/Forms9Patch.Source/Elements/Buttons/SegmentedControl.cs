@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// DEPRICATED: USE SegmentedControl
     /// </summary>
-    [Obsolete("DEPRICATED: Use SegmentedContorl")]
+    [Obsolete("DEPRICATED: Use SegmentedControl")]
     public class MaterialSegmentedControl : SegmentedControl
     {
     }
@@ -751,6 +751,7 @@ namespace Forms9Patch
                 ((IShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
             UpdateChildrenPadding();
+            InvalidateLayout();
         }
 
         void InsertSegment(int index, Segment s)
