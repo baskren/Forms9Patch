@@ -77,6 +77,9 @@
 		<Compile Include="..\Forms9Patch.Source.iOS\Services\KeyClicksService.cs">
 			<Link>Services\KeyClicksService.cs</Link>
 		</Compile>
+		<Compile Include="..\Forms9Patch.Source.iOS\Services\OsInfoService.cs">
+			<Link>Services\OsInfoService.cs</Link>
+		</Compile>
 		<Compile Include="..\Forms9Patch.Source.iOS\Services\StatusBarService.cs">
 			<Link>Services\StatusBarService.cs</Link>
 		</Compile>
