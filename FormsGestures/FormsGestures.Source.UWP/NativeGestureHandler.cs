@@ -68,8 +68,9 @@ namespace FormsGestures.UWP
                 {
                     _renderer.ElementChanged -= OnRendererElementChanged;
 
-                    FrameworkElement.ManipulationMode = ManipulationModes.None;
+                    //FrameworkElement.ManipulationMode = ManipulationModes.None;  // commented this out because line 112 was commented out
                     //FrameworkElement.ManipulationStarting -= OnManipulationStarting;
+
                     FrameworkElement.ManipulationStarted -= OnManipulationStarted;
                     FrameworkElement.ManipulationDelta -= OnManipulationDelta;
                     FrameworkElement.ManipulationInertiaStarting -= OnManipulationInertiaStarting;
@@ -103,11 +104,12 @@ namespace FormsGestures.UWP
                     _renderer.ElementChanged += OnRendererElementChanged;
 
                     //FrameworkElement.ManipulationStarting += OnManipulationStarting;
+
                     FrameworkElement.ManipulationStarted += OnManipulationStarted;
                     FrameworkElement.ManipulationDelta += OnManipulationDelta;
                     FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
                     FrameworkElement.ManipulationCompleted += OnManipulationComplete;
-                    FrameworkElement.ManipulationMode = ManipulationModes.All;
+                    //FrameworkElement.ManipulationMode = ManipulationModes.All;  // enabling this line causes touch scrolling to stop working
 
 
                     //FrameworkElement.Tapped += _UwpElement_Tapped;
