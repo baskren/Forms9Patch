@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>
@@ -37,7 +37,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <ConsolePause>false</ConsolePause>
-<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,11 +47,11 @@
     <Reference Include="SkiaSharp">
       <HintPath>..\..\..\..\packages\SkiaSharp.1.60.0\lib\XamariniOS\SkiaSharp.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp.Extended.Svg">
-      <HintPath>..\..\..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
-    </Reference>
     <Reference Include="SkiaSharp.Views.iOS">
       <HintPath>..\..\..\..\packages\SkiaSharp.Views.1.60.0\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Extended.Svg">
+      <HintPath>..\..\..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -60,12 +60,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
-
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
       <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
@@ -107,6 +102,9 @@
       <Project>{B2A77150-CF06-40A1-A16B-A11FCA853FEE}</Project>
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <!--Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -143,7 +143,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Point property
         /// </summary>
-        public static readonly BindableProperty PointProperty = BindableProperty.Create("Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity,double.PositiveInfinity));
+        public static readonly BindableProperty PointProperty = BindableProperty.Create("Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity, double.PositiveInfinity));
         /// <summary>
         /// Gets/Sets the Point property
         /// </summary>
@@ -197,6 +197,12 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         public BubblePopup(VisualElement target, bool retain = false) : base(target, retain) => Init();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class that targets a point inside of the target VisualElement
+        /// </summary>
+        /// <param name="target">Target.</param>
+        /// <param name="point">Point.</param>
+        /// <param name="retain">If set to <c>true</c> retain.</param>
         public BubblePopup(VisualElement target, Point point, bool retain = false) : base(target, retain)
         {
             Init();
@@ -307,6 +313,10 @@ namespace Forms9Patch
 
 
         #region Layout
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.BubblePopup"/> will target Point (a point in the target) vs. the border of the target.
+        /// </summary>
+        /// <value><c>true</c> if use point; otherwise, <c>false</c>.</value>
         public bool UsePoint
         {
             get => !double.IsNegativeInfinity(Point.X) && !double.IsPositiveInfinity(Point.Y);
@@ -389,7 +399,7 @@ namespace Forms9Patch
 
 
                     var reqSpaceToLeft = (UsePoint ? Point.X + targetBounds.Left : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
-                    var reqSpaceToRight = width - (UsePoint? Point.X + targetBounds.Left :targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
+                    var reqSpaceToRight = width - (UsePoint ? Point.X + targetBounds.Left : targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
                     var reqSpaceAbove = (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Top) - rboxSize.Height - PointerLength - Margin.Top;
                     var reqSpaceBelow = height - (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Bottom) - rboxSize.Height - PointerLength - Margin.Bottom;
                     var reqHzSpace = width - rboxSize.Width - Margin.HorizontalThickness;
@@ -398,9 +408,9 @@ namespace Forms9Patch
 
                     double space = 0;
 
-                    if (PreferredPointerDirection!=PointerDirection.None)
+                    if (PreferredPointerDirection != PointerDirection.None)
                     {
-                        if (PreferredPointerDirection.DownAllowed() && PointerDirection.DownAllowed()  && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+                        if (PreferredPointerDirection.DownAllowed() && PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
                         {
                             pointerDir = PointerDirection.Down;
                             space = Math.Min(reqSpaceAbove, reqHzSpace);
@@ -545,7 +555,7 @@ namespace Forms9Patch
             }
         }
 
-        
+
 
         #region Layout Support 
         double _pwfStart, _pwfWidth, _pwfTargetStart, _pwfTargetWidth, _pwfAvailableWidth;

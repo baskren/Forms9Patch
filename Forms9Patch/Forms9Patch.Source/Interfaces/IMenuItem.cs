@@ -2,6 +2,9 @@ using System;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Menu item.
+    /// </summary>
 	public interface IMenuItem
     {
         /// <summary>

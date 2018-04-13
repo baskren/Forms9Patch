@@ -50,6 +50,10 @@ namespace FormsGestures
             VelocityY = source.VelocityY;
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:FormsGestures.SwipeEventArgs"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:FormsGestures.SwipeEventArgs"/>.</returns>
         public override string ToString()
         {
             return "[dir:" + Direction + "; VelX:" + VelocityX + "; VelY:" + VelocityY + ";]";

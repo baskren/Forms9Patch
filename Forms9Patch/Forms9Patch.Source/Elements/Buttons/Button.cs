@@ -1077,6 +1077,10 @@ namespace Forms9Patch
         #endregion
 
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.Button"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.Button"/>.</returns>
         public override string ToString()
         {
             var result = base.ToString();
