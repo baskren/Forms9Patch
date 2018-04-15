@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.28.3" />
+    <PackageReference Include="docfx.console" Version="2.33.2" />
   </ItemGroup>
 
   <ItemGroup>

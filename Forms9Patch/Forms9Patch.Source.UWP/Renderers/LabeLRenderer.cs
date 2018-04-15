@@ -16,8 +16,11 @@ namespace Forms9Patch.UWP
             get
             {
                 //return false;
-                if (Element.Parent?.GetType().ToString() != "Bc3.Forms.OperandLabel")
+                //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.OperandLabel")
+                if (Element?.HtmlText == null)
                     return false;
+                return Element.HtmlText.Contains("While every effort");
+                
                 string labelTextStart = "23"; // "Żyłę;^`g ";
                 //return (Element.HtmlText == "Conv" && Element.Parent?.GetType().ToString() == "Bc3.Forms.KeypadButton");
                 //    return false;
@@ -370,8 +373,8 @@ namespace Forms9Patch.UWP
                 return _lastMeasureOverrideResult;
 
             //_lastAvailableSize = availableSize;
-            //if (DebugCondition)
-            //    System.Diagnostics.Debug.WriteLine("");
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
 
             DebugMessage("[" + _measureOverrideInvocation + "] ENTER availableSize=[" + availableSize + "]");
             //Element.IsInNativeLayout = true;

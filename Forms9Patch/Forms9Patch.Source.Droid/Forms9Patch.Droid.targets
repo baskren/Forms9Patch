@@ -112,13 +112,13 @@
 
 	<ItemGroup>
 	    <Reference Include="SkiaSharp">
-	      <HintPath>..\..\packages\SkiaSharp.1.59.2\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+	      <HintPath>..\..\packages\SkiaSharp.1.60.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
 	    </Reference>
 	    <Reference Include="SkiaSharp.Views.Android">
-	      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
+	      <HintPath>..\..\packages\SkiaSharp.Views.1.60.0\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
 	    </Reference>
 	    <Reference Include="SkiaSharp.Svg">
-	      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
+	      <HintPath>..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
 	    </Reference>
 	</ItemGroup>
 
