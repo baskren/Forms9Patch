@@ -101,7 +101,11 @@ namespace Forms9Patch.iOS
         public bool IsScrollEnabled
         {
             get => Control.ScrollEnabled;
-            set => Control.ScrollEnabled = value;
+            set
+            {
+                Control.ScrollEnabled = value;
+                System.Diagnostics.Debug.WriteLine("SCROLL ENABLED SET TO: " + value);
+            }
         }
 
         #endregion
