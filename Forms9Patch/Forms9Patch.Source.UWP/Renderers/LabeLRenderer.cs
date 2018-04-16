@@ -235,7 +235,7 @@ namespace Forms9Patch.UWP
                     break;
                 case LineBreakMode.WordWrap:
                     textBlock.TextTrimming = TextTrimming.None;
-                    textBlock.TextWrapping = TextWrapping.Wrap;
+                    textBlock.TextWrapping = TextWrapping.WrapWholeWords;
                     break;
                 case LineBreakMode.CharacterWrap:
                     textBlock.TextTrimming = TextTrimming.WordEllipsis;
@@ -244,16 +244,16 @@ namespace Forms9Patch.UWP
                 case LineBreakMode.HeadTruncation:
                     // TODO: This truncates at the end.
                     textBlock.TextTrimming = TextTrimming.WordEllipsis;
-                    textBlock.TextWrapping = TextWrapping.NoWrap;
+                    textBlock.TextWrapping = TextWrapping.WrapWholeWords;
                     break;
                 case LineBreakMode.TailTruncation:
                     textBlock.TextTrimming = TextTrimming.CharacterEllipsis;
-                    textBlock.TextWrapping = TextWrapping.NoWrap;
+                    textBlock.TextWrapping = TextWrapping.WrapWholeWords;
                     break;
                 case LineBreakMode.MiddleTruncation:
                     // TODO: This truncates at the end.
                     textBlock.TextTrimming = TextTrimming.WordEllipsis;
-                    textBlock.TextWrapping = TextWrapping.NoWrap;
+                    textBlock.TextWrapping = TextWrapping.WrapWholeWords;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -403,7 +403,8 @@ namespace Forms9Patch.UWP
                 var tmpFontSize = label.DecipheredFontSize();
                 var minFontSize = label.DecipheredMinFontSize();
                 textBlock.MaxLines = int.MaxValue / 3;
-                //textBlock.TextWrapping = TextWrapping.
+                //  textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                UpdateLineBreakMode(textBlock);
 
                 double tmpHt = -1;
 
