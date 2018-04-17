@@ -64,12 +64,20 @@ namespace Forms9Patch
 
 #if __IOS__
 
+        /*
+                public override void Draw(CoreGraphics.CGRect rect)
+                {
 
-        public override void Draw(CoreGraphics.CGRect rect)
-        {
-            SendSubviewToBack(Control);
-            base.Draw(rect);
-        }
+                    SendSubviewToBack(Control);
+                    if (Element?.Content != null)
+                    {
+                        var contentRenderer = Platform.GetRenderer(Element.Content);
+                        BringSubviewToFront(contentRenderer.NativeView);
+                    }
+                    //BringSubviewToFront(Control);
+                    base.Draw(rect);
+                }
+        */
 
 #elif __DROID__
 
@@ -130,7 +138,10 @@ namespace Forms9Patch
             if (e.NewElement != null)
             {
                 if (Control == null)
+                {
                     SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
+                    SendSubviewToBack(Control);
+                }
                 //SizeChanged += OnSizeChanged;
                 if (!string.IsNullOrEmpty(Element.AutomationId))
                     SetAutomationId(Element.AutomationId);
