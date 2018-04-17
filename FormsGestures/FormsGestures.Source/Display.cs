@@ -47,6 +47,12 @@ namespace FormsGestures
         public static float Height => Service.Height;
 
         /// <summary>
+        /// Gets the status bar offset  - the offset needed for MainPage to be in the right place at app start.
+        /// </summary>
+        /// <value>The status bar offset.</value>
+        public static double StatusBarOffset => Service.StatusBarOffset;
+
+        /// <summary>
         /// Gets or sets the safe area inset (I'm looking at you, iPhone X).
         /// </summary>
         /// <value>The safe area inset.</value>

@@ -40,6 +40,12 @@ namespace Forms9Patch
         public static Xamarin.Forms.Thickness SafeAreaInset => FormsGestures.Display.SafeAreaInset;
 
         /// <summary>
+        /// Gets the status bar offset  - the offset needed for MainPage to be in the right place at app start.
+        /// </summary>
+        /// <value>The status bar offset.</value>
+        public static double StatusBarOffset => FormsGestures.Display.StatusBarOffset;
+
+        /// <summary>
         /// Gets the orientation.
         /// </summary>
         /// <value>The orientation.</value>

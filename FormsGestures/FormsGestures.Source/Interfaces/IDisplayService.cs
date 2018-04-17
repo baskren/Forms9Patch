@@ -14,6 +14,8 @@ namespace FormsGestures
 
         float Height { get; }
 
+        double StatusBarOffset { get; }
+
         Thickness SafeAreaInset { get; }
 
         DisplayOrientation Orientation { get; }

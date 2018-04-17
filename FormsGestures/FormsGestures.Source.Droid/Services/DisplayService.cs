@@ -38,6 +38,8 @@ namespace FormsGestures.Droid
 
         public Thickness SafeAreaInset => default(Thickness);
 
+        public double StatusBarOffset => 0.0;
+
         public DisplayOrientation Orientation
         {
             get

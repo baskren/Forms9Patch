@@ -38,6 +38,8 @@ namespace FormsGestures.UWP
 
         public Xamarin.Forms.Thickness SafeAreaInset => default(Xamarin.Forms.Thickness);
 
+        public double StatusBarOffset => 0.0;
+
         public DisplayOrientation Orientation => Windows.Graphics.Display.DisplayInformation.GetForCurrentView().CurrentOrientation.ToF9pDisplayOrientation();
 
     }

@@ -57,6 +57,16 @@ namespace FormsGestures.iOS
             }
         }
 
+        public double StatusBarOffset
+        {
+            get
+            {
+                var statusBarFrame = UIApplication.SharedApplication.StatusBarFrame;
+                var safeAreaInset = SafeAreaInset;
+                return statusBarFrame.Height - safeAreaInset.Top;
+            }
+        }
+
         public DisplayOrientation Orientation
         {
             get
