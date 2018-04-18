@@ -140,7 +140,9 @@ namespace Forms9Patch
                 if (Control == null)
                 {
                     SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
+#if __IOS__
                     SendSubviewToBack(Control);
+#endif
                 }
                 //SizeChanged += OnSizeChanged;
                 if (!string.IsNullOrEmpty(Element.AutomationId))

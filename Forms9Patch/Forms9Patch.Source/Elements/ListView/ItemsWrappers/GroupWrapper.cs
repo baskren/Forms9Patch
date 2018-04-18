@@ -728,13 +728,13 @@ namespace Forms9Patch
         void OnItemWrapperSourcePropertyChanged(object source, PropertyChangedEventArgs e)
         {
             // if the change impacts visibility then remove itemwrapper from groupwrapper
-            if (!VisibilityTest(source))
+            if (VisibilityTest != null && !VisibilityTest(source))
                 RefreshVisibility();
         }
 
         void OnHiddenSourcePropertyChanged(object source, PropertyChangedEventArgs e)
         {
-            if (VisibilityTest(source))
+            if (VisibilityTest != null && VisibilityTest(source))
                 RefreshVisibility();
         }
 
@@ -745,7 +745,7 @@ namespace Forms9Patch
             int sourceIndex = 0;
             foreach (var sourceItem in SourceChildren)
             {
-                if (VisibilityTest(sourceItem))
+                if (VisibilityTest != null && VisibilityTest(sourceItem))
                 {
                     if (index >= _itemWrappers.Count || _itemWrappers[index].Source != sourceItem)
                     {
