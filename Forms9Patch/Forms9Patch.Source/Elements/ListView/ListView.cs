@@ -385,13 +385,13 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for GroupHeaderTemplate property
         /// </summary>
-        public static readonly BindableProperty GroupHeaderTemplateProperty = BindableProperty.Create("GroupHeaderTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), default(Xamarin.Forms.DataTemplate));
+        public static readonly BindableProperty GroupHeaderTemplateProperty = BindableProperty.Create("GroupHeaderTemplate", typeof(Forms9Patch.GroupHeaderTemplate), typeof(ListView), default(Forms9Patch.GroupHeaderTemplate));
         /// <summary>
         /// Gets/Sets the GroupHeaderTemplate property
         /// </summary>
-        public Xamarin.Forms.DataTemplate GroupHeaderTemplate
+        public Forms9Patch.GroupHeaderTemplate GroupHeaderTemplate
         {
-            get { return (Xamarin.Forms.DataTemplate)GetValue(GroupHeaderTemplateProperty); }
+            get { return (Forms9Patch.GroupHeaderTemplate)GetValue(GroupHeaderTemplateProperty); }
             set { SetValue(GroupHeaderTemplateProperty, value); }
         }
         #endregion GroupHeaderTemplate
