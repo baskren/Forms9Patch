@@ -21,12 +21,12 @@ namespace Forms9Patch.UWP
                     return false;
                 return Element.HtmlText.Contains("While every effort");
                 
-                string labelTextStart = "23"; // "Żyłę;^`g ";
+                //string labelTextStart = "23"; // "Żyłę;^`g ";
                 //return (Element.HtmlText == "Conv" && Element.Parent?.GetType().ToString() == "Bc3.Forms.KeypadButton");
                 //    return false;
                 //string labelTextStart = "BACKGROUND";
                 
-                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                //return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
                 
             }
         }

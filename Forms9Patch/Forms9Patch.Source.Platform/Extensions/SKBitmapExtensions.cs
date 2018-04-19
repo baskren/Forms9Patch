@@ -190,7 +190,7 @@ namespace Forms9Patch
 
 
         #region NinePatch parcing
-
+        /*
         static public SKLattice ToSKLattice(this RangeLists rangelists, SKBitmap bitmap)
         {
             if (rangelists == null)
@@ -221,6 +221,7 @@ namespace Forms9Patch
 
             return result;
         }
+        */
 
         static public RangeLists PatchRanges(this SKBitmap bitmap)
         {

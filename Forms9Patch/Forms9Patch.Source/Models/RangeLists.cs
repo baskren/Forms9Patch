@@ -44,8 +44,10 @@ namespace Forms9Patch
                         start = 0;
                     if (end > bitmapWidth - 1)
                         end = bitmapWidth - 1;
+                    if (end < 0)
+                        end = 0;
                     if (start >= end)
-                        start = end - 1;
+                        start = end;
                     if (start > 0)
                         capsX.Add(new Range(0, start - 1, false));
                     capsX.Add(new Range(start, end, true));
@@ -64,8 +66,10 @@ namespace Forms9Patch
                         start = 0;
                     if (end > bitmapHeight - 1)
                         end = bitmapHeight - 1;
+                    if (end < 0)
+                        end = 0;
                     if (start >= end)
-                        start = end - 1;
+                        start = end;
                     if (start > 0)
                         capsY.Add(new Range(0, start - 1, false));
                     capsY.Add(new Range(start, end, true));
