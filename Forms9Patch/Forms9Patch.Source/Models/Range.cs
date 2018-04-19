@@ -6,18 +6,21 @@ namespace Forms9Patch
         /// <summary>
         /// First pixel in stretchable range (the previous pixel will not be stretchable)
         /// </summary>
-		public double Start = -1;
+		public float Start = -1;
         /// <summary>
         /// Last pixel in stretchable range (the next pixel will not be stretchable)
         /// </summary>
-		public double End = double.MaxValue;
+		public float End = float.MaxValue;
 
-        public double Width => End - Start + 1;
+        public bool Stretchable;
 
-        public Range(double start, double end)
+        public float Width => End - Start + 1;
+
+        public Range(float start, float end, bool strechable = false)
         {
             Start = start;
             End = end;
+            Stretchable = strechable;
         }
 
         public Range() { }

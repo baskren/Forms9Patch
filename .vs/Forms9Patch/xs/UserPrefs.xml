@@ -20,7 +20,7 @@
   <MonoDevelop.Ide.ItemProperties.P42.Utils.P42.Utils.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9PatchDemo.Source.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
   <MonoDevelop.Ide.ItemProperties.Forms9Patch.PCL.XfNuget.Forms9Patch.PCL.XfNuget.Droid PreferredExecutionTarget="Android.AS_7.0-a24_x86_Pixel-Nouget_" />
-  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9Patch_220Source.Forms9PatchDemo.F9pSource.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.66FD0FA8-837F-4453-BCD7-3C43F10F963E" />
+  <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Forms9Patch_220Source.Forms9PatchDemo.F9pSource.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.9A118924-14ED-4EEE-BF62-58B432AF1BEA" />
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromSource.Xamarin.Forms_220and_220Forms9Patch_220Source.Forms9PatchDemo.XfSource.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.68EAC5AA-52C0-489E-B103-70696E9535E5" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Forms9PatchDemo.FromNugetPackages.PCL_220Target_220Framework.Forms9PatchDemo.PCL.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />

@@ -86,7 +86,7 @@ namespace Forms9Patch
                         else if (key.StartsWith("uri:", StringComparison.Ordinal))
                         {
                             path = await P42.Utils.DownloadCache.DownloadAsync(key.Substring(4), Forms9Patch.Image.UriImageCacheFolderName);
-                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))  
+                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                                 f9pImageData = F9PImageData.Create(stream, key);
                         }
                         else if (key.StartsWith("file:", StringComparison.Ordinal))  // does this work for Windows or iOS?
@@ -197,6 +197,9 @@ namespace Forms9Patch
                 throw new InvalidDataContractException("ToSKLattice cannot be applied to null RangeLists");
             var result = new SKLattice();
             result.Bounds = bitmap.Info.Rect;
+            result.Flags = new SKLatticeFlags[rangelists.PatchesX.Count * rangelists.PatchesY.Count];
+            for (int i = 0; i < rangelists.PatchesX.Count * rangelists.PatchesY.Count; i++)
+                result.Flags[i] = SKLatticeFlags.Default;
 
             var xdivs = new List<int>();
             for (int i = 0; i < rangelists.PatchesX.Count; i++)
@@ -226,72 +229,123 @@ namespace Forms9Patch
                 System.Diagnostics.Debug.WriteLine("bitmap colortype [" + bitmap.Info.ColorType + "] not Bgra888");
                 return null;
             }
-
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
-            var capsX = new List<Range>();
-            int pos = -1;
-            for (int i = 0; i < bitmap.Width - 2; i++)
-            {
-                var pixel = bitmap.GetPixel(i + 1, 0);
-                if (pixel == SKColors.Black)
-                {
-                    if (pos == -1)
-                        pos = i;
-                }
-                else if (pixel == 0)
-                {
-                    if (pos != -1)
-                    {
-                        var range = new Range(pos, i - 1);
-                        capsX.Add(range);
-                        pos = -1;
-                    }
-                }
-                else
-                    // this is not a nine-patch;
-                    return null;
-            }
-            if (pos != -1)
-            {
-                var range = new Range(pos, bitmap.Width - 3);
-                capsX.Add(range);
-            }
-
-            var capsY = new List<Range>();
-            pos = -1;
-            for (int i = 0; i < bitmap.Height - 2; i++)
-            {
-                var pixel = bitmap.GetPixel(0, i + 1);
-                if (pixel == SKColors.Black)
-                {
-                    if (pos == -1)
-                        pos = i;
-                }
-                else if (pixel == 0)
-                {
-                    if (pos != -1)
-                    {
-                        var range = new Range(pos, i - 1);
-                        capsY.Add(range);
-                        pos = -1;
-                    }
-                }
-                else
-                    return null;
-            }
-            if (pos != -1)
-            {
-                var range = new Range(pos, bitmap.Height - 3);
-                capsY.Add(range);
-            }
-
-            if (capsX.Count < 1 && capsY.Count < 1)
+            if (bitmap.Width < 3 || bitmap.Height < 3)
                 return null;
+
+            int lastPos = 0;
+            SKColor lastPixel = bitmap.GetPixel(lastPos + 1, 0);
+            if (lastPixel != 0 && lastPixel != SKColors.Black)
+                return null;
+            var capsX = new List<Range>();
+            if (bitmap.Width == 3)
+                capsX.Add(new Range(0, 1, lastPixel == SKColors.Black));
+            else
+            {
+                for (int i = 1; i < bitmap.Width - 2; i++)
+                {
+                    var pixel = bitmap.GetPixel(i + 1, 0);
+                    if (pixel != 0 && pixel != SKColors.Black)
+                        return null;
+                    if (pixel != lastPixel)
+                    {
+                        capsX.Add(new Range(lastPos, i - 1, lastPixel == SKColors.Black));
+                        lastPixel = pixel;
+                        lastPos = i;
+                    }
+                }
+                capsX.Add(new Range(lastPos, bitmap.Width - 3, lastPixel == SKColors.Black));
+            }
+
+            lastPos = 0;
+            lastPixel = bitmap.GetPixel(lastPos + 1, 0);
+            if (lastPixel != 0 && lastPixel != SKColors.Black)
+                return null;
+            var capsY = new List<Range>();
+            if (bitmap.Height == 3)
+                capsY.Add(new Range(0, 1, lastPixel == SKColors.Black));
+            else
+            {
+                for (int i = 1; i < bitmap.Height - 2; i++)
+                {
+                    var pixel = bitmap.GetPixel(0, i + 1);
+                    if (pixel != 0 && pixel != SKColors.Black)
+                        return null;
+                    if (pixel != lastPixel)
+                    {
+                        capsY.Add(new Range(lastPos, i - 1, lastPixel == SKColors.Black));
+                        lastPixel = pixel;
+                        lastPos = i;
+                    }
+                }
+                capsY.Add(new Range(lastPos, bitmap.Height - 3, lastPixel == SKColors.Black));
+            }
+            /*
+                        Stopwatch stopwatch = Stopwatch.StartNew();
+
+                        var capsX = new List<Range>();
+                        int pos = -1;
+                        for (int i = 0; i < bitmap.Width - 2; i++)
+                        {
+                            var pixel = bitmap.GetPixel(i + 1, 0);
+                            if (pixel == SKColors.Black)
+                            {
+                                if (pos == -1)
+                                    pos = i;
+                            }
+                            else if (pixel == 0)
+                            {
+                                if (pos != -1)
+                                {
+                                    var range = new Range(pos, i - 1);
+                                    capsX.Add(range);
+                                    pos = -1;
+                                }
+                            }
+                            else
+                                // this is not a nine-patch;
+                                return null;
+                        }
+                        if (pos != -1)
+                        {
+                            var range = new Range(pos, bitmap.Width - 3);
+                            capsX.Add(range);
+                        }
+
+                        var capsY = new List<Range>();
+                        pos = -1;
+                        for (int i = 0; i < bitmap.Height - 2; i++)
+                        {
+                            var pixel = bitmap.GetPixel(0, i + 1);
+                            if (pixel == SKColors.Black)
+                            {
+                                if (pos == -1)
+                                    pos = i;
+                            }
+                            else if (pixel == 0)
+                            {
+                                if (pos != -1)
+                                {
+                                    var range = new Range(pos, i - 1);
+                                    capsY.Add(range);
+                                    pos = -1;
+                                }
+                            }
+                            else
+                                return null;
+                        }
+                        if (pos != -1)
+                        {
+                            var range = new Range(pos, bitmap.Height - 3);
+                            capsY.Add(range);
+                        }
+
+                        if (capsX.Count < 1 && capsY.Count < 1)
+                            return null;
+*/
 
 
             var margX = null as Range;
-            pos = -1;
+            var pos = -1;
             for (int i = 0; i < bitmap.Width - 2; i++)
             {
                 var pixel = bitmap.GetPixel(i + 1, bitmap.Height - 1);
@@ -352,7 +406,7 @@ namespace Forms9Patch
                 MarginX = margX,
                 MarginY = margY
             };
-            stopwatch.Stop();
+            //stopwatch.Stop();
 
             return rangeLists;
         }

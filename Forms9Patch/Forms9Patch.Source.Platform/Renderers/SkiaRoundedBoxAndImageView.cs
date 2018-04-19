@@ -1177,9 +1177,57 @@ protected virtual void Dispose(bool disposing)
                 }
                 else
                 {
-                    var lattice = rangeLists.ToSKLattice(_f9pImageData.SKBitmap);
+                    float xStretchable = 0;
+                    foreach (var xpatch in rangeLists.PatchesX)
+                        if (xpatch.Stretchable)
+                            xStretchable += xpatch.Width;
+                    var xExtra = fillRect.Width - ((float)_f9pImageData.Width - xStretchable);
+                    float xScale = 1;
+                    if (xExtra >= 0)
+                        xScale = xExtra / xStretchable;
+                    else
+                        xScale = fillRect.Width / ((float)_f9pImageData.Width - xStretchable);
+
+                    float yStretchable = 0;
+                    foreach (var ypatch in rangeLists.PatchesY)
+                        if (ypatch.Stretchable)
+                            yStretchable += ypatch.Width;
+                    var yExtra = fillRect.Height - ((float)_f9pImageData.Height - yStretchable);
+                    float yScale = 1;
+                    if (yExtra >= 0)
+                        yScale = yExtra / yStretchable;
+                    else
+                        yScale = fillRect.Height / ((float)_f9pImageData.Height - yStretchable);
+
+                    float patchX = 0, xPatchWidth;
+                    foreach (var xpatch in rangeLists.PatchesX)
+                    {
+                        if (xExtra >= 0)
+                            xPatchWidth = xpatch.Width * (xpatch.Stretchable ? xScale : 1);
+                        else
+                            xPatchWidth = xpatch.Width * (xpatch.Stretchable ? 0 : xScale);
+                        float patchY = 0, yPatchWidth;
+                        foreach (var ypatch in rangeLists.PatchesY)
+                        {
+                            if (yExtra >= 0)
+                                yPatchWidth = ypatch.Width * (ypatch.Stretchable ? yScale : 1);
+                            else
+                                yPatchWidth = ypatch.Width * (ypatch.Stretchable ? 0 : yScale);
+                            if (xPatchWidth > 0 && yPatchWidth > 0)
+                            {
+                                var sourceRect = new SKRect(xpatch.Start, ypatch.Start, xpatch.End, ypatch.End);
+                                var destRect = new SKRect(patchX, patchY, patchX + xPatchWidth, patchY + yPatchWidth);
+                                workingCanvas.DrawBitmap(_f9pImageData.SKBitmap, sourceRect, destRect);
+                            }
+                            patchY += yPatchWidth;
+                        }
+                        patchX += xPatchWidth;
+                    }
+
+                    //var lattice = rangeLists.ToSKLattice(_f9pImageData.SKBitmap);
                     //System.Diagnostics.Debug.WriteLine("lattice.x: ["+lattice.XDivs[0]+","+lattice.XDivs[1]+"] lattice.y: ["+lattice.YDivs[0]+","+lattice.YDivs[1]+"] lattice.Bounds=["+lattice.Bounds+"] lattice.Flags:" + lattice.Flags);
-                    workingCanvas.DrawBitmapLattice(_f9pImageData.SKBitmap, lattice, fillRect);
+                    //workingCanvas.DrawBitmapLattice(_f9pImageData.SKBitmap, lattice, fillRect);
+                    //workingCanvas.DrawBitmapLattice(_f9pImageData.SKBitmap, new Int32[2] { 0, 1 }, new Int32[2] { 0, 1 }, fillRect, new SKPaint());
                 }
 
                 workingCanvas.Restore();
