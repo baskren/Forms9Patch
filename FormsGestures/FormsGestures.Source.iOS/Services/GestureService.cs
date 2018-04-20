@@ -7,10 +7,17 @@ namespace FormsGestures.iOS
 {
     public class GestureService : IGestureService
     {
+        public GestureService()
+        {
+            Settings.Init();
+        }
+
         public void Cancel()
         {
             NativeGestureHandler.Cancel();
         }
+
+
         #region IGestureService implementation
 
         public void For(Listener listener)

@@ -8,27 +8,15 @@ using System.Threading.Tasks;
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.Settings))]
 namespace Forms9Patch.UWP
 {
-    public class Settings : INativeSettings
+    public class Settings : ISettings
     {
-        static bool _valid = false;
+        #region Fields
+        static Windows.UI.Xaml.Application Application;
 
-        public bool IsLicensed
-        {
-            get {
-                if (Xamarin.Forms.Application.Current == null)
-                    return true;
-                return _valid;// && Forms9Patch.UWP.ApplicationInfoService.AppDisplayName().Result==Windows.ApplicationModel.Package.Current.DisplayName;
-            }
-        }
-        internal static bool IsLicenseValid
-        {
-            get {
-                if (Xamarin.Forms.Application.Current == null)
-                    return true;
-                return _valid;// && Forms9Patch.UWP.ApplicationInfoService.AppDisplayName().Result == Windows.ApplicationModel.Package.Current.DisplayName;
-            }
-        }
+        public List<Assembly> IncludedAssemblies => AssembliesToInclude;
+        #endregion
 
+        #region Initialization
         public static void Initialize(Windows.UI.Xaml.Application app, string licenseKey = null)
         {
             Xamarin.Forms.DependencyService.Register<ApplicationInfoService>();
@@ -40,15 +28,28 @@ namespace Forms9Patch.UWP
             Xamarin.Forms.DependencyService.Register<OsInfoService>();
             Xamarin.Forms.DependencyService.Register<WebViewExtensionsService>();
 
-            _app = app;
-            LicenseKey = licenseKey ?? "demo key";
-
+            Application = app;
             FormsGestures.UWP.Settings.Init();
 
             //var forms9PatchResources = GetResources();
             //Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
 
+            if (licenseKey != null)
+                System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
         }
+
+        bool _lazyInitialized;
+        void ISettings.LazyInit()
+        {
+            if (_lazyInitialized)
+                return;
+            _lazyInitialized = true;
+            FormsGestures.UWP.Settings.Init(Application);
+        }
+
+
+        #endregion
+
 
         static Windows.UI.Xaml.ResourceDictionary GetResources()
         {
@@ -58,61 +59,16 @@ namespace Forms9Patch.UWP
             };
         }
 
-
-        static string _licenseKey;
-        static Windows.UI.Xaml.Application _app;
-
-        internal static Assembly ApplicationAssembly;
-        /// <summary>
-        /// Sets the Forms9Patch license key.
-        /// </summary>
-        /// <value>The license key.</value>
-        public static string LicenseKey
-        {
-            private set
-            {
-                ApplicationAssembly = _app.GetType().GetTypeInfo().Assembly;
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _licenseKey = value;
-                    Forms9Patch.Settings.LicenseKey = _licenseKey;
-                    var licenseChecker = new LicenseChecker();
-                    //System.Diagnostics.Debug.WriteLine("[" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] 1");
-                    _valid = licenseChecker.CheckLicenseKey(Settings._licenseKey, Forms9Patch.ApplicationInfoService.Name);
-                    if (!_valid)
-                    {
-                        var errorDialog = new Windows.UI.Xaml.Controls.ContentDialog
-                        {
-                            Title = "Forms9Patch licensing failure",
-                            Content = "The LicenseKey [" + Settings._licenseKey + "] is not for the application [" + Forms9Patch.ApplicationInfoService.Name + "].  You are in trial mode and will be able to render 1 scalable image and 5 formatted strings.",
-                            //CloseButtonText = "Whatever"
-                        };
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                        errorDialog.ShowAsync();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    }
-                    //System.Diagnostics.Debug.WriteLine("[" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] 2");
-
-                }
-            }
-            get
-            {
-                return _licenseKey;
-            }
-        }
-
-        public List<Assembly> IncludedAssemblies => AssembliesToInclude;
-
-
+        #region Xamarin.Forms.UWP Requirements
         static List<Assembly> _forms9PatchAssemblies = null;
         internal static List<Assembly> Forms9PatchAssemblies
         {
             get
             {
-                if (_forms9PatchAssemblies==null)
+                if (_forms9PatchAssemblies == null)
                 {
                     _forms9PatchAssemblies = new List<Assembly>();
-                    try  { _forms9PatchAssemblies.Add(typeof(Forms9Patch.Settings).GetTypeInfo().Assembly);  }
+                    try { _forms9PatchAssemblies.Add(typeof(Forms9Patch.Settings).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load Forms9Patch assembly"); }
 
                     try { _forms9PatchAssemblies.Add(typeof(Settings).GetTypeInfo().Assembly); }
@@ -130,12 +86,6 @@ namespace Forms9Patch.UWP
                     try { _forms9PatchAssemblies.Add(typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load Windows.ApplicationModel.Core assembly"); }
 
-#if NETSTANDARD
-#else
-                    try { _forms9PatchAssemblies.Add(typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly); }
-                    catch (Exception) { throw new Exception("Cannot load PCLStorage assembly"); }
-#endif
-
                     try { _forms9PatchAssemblies.Add(typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load Newtonsoft.Json assembly"); }
 
@@ -152,29 +102,13 @@ namespace Forms9Patch.UWP
                 return _forms9PatchAssemblies;
             }
         }
-        /*= new List<Assembly>
-        {
-            typeof(Forms9Patch.Settings).GetTypeInfo().Assembly,
-            typeof(Settings).GetTypeInfo().Assembly,
-            typeof(FormsGestures.Listener).GetTypeInfo().Assembly,
-            typeof(FormsGestures.UWP.UwpRotateEventArgs).GetTypeInfo().Assembly,
-            typeof(NumericalMethods.Search1D).GetTypeInfo().Assembly,
-            typeof(P42.Utils.DownloadCache).GetTypeInfo().Assembly,
-            typeof(Windows.ApplicationModel.Core.AppListEntry).GetTypeInfo().Assembly,
-            typeof(PCLStorage.FileSystem).GetTypeInfo().Assembly,
-            typeof(Newtonsoft.Json.JsonConvert).GetTypeInfo().Assembly,
-            typeof(SkiaSharp.SKBitmap).GetTypeInfo().Assembly,
-            typeof(SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs).GetTypeInfo().Assembly,
-            typeof(SharpDX.Direct2D1.Factory).GetTypeInfo().Assembly,
-        };
-        */
 
         static List<Assembly> _assembliesToInclude;
         public static List<Assembly> AssembliesToInclude
         {
             get
             {
-                if (_assembliesToInclude==null)
+                if (_assembliesToInclude == null)
                 {
                     _assembliesToInclude = new List<Assembly>();
                     _assembliesToInclude.AddRange(Forms9PatchAssemblies);
@@ -182,6 +116,6 @@ namespace Forms9Patch.UWP
                 return _assembliesToInclude;
             }
         }
-
+        #endregion
     }
 }

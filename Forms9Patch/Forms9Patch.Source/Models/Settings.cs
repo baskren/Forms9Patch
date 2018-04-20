@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Settings (for use by Forms9Patch PCL code).
     /// </summary>
-    public class Settings
+    public static class Settings
     {
         static Settings()
         {
@@ -71,26 +71,6 @@ namespace Forms9Patch
 
         public static KeyClicks KeyClicks = KeyClicks.Default;
 
-        #region Licensing
-        static string _licenseKey;
-
-        /// <summary>
-        /// Gets the license key.
-        /// </summary>
-        /// <value>The license key.</value>
-        public static string LicenseKey
-        {
-            get
-            {
-                return _licenseKey;
-            }
-            internal set
-            {
-                _licenseKey = value;
-            }
-        }
-        #endregion
-
 
         #region Confirm that Forms9Patch has been initialized
         static bool _confirmed;
@@ -98,20 +78,22 @@ namespace Forms9Patch
         {
             if (_confirmed)
                 return;
-            if (string.IsNullOrWhiteSpace(LicenseKey) && Application.Current != null)
-                throw new Exception("Forms9Patch has not been initialized.  See http://http://buildcalc.com/forms9patch/index.html#HowToConfigureTheLicenseKey.  Xamarin.Forms.Application.Current=[" + Xamarin.Forms.Application.Current + "]");
+
+            var platformSettings = DependencyService.Get<ISettings>();
+            platformSettings.LazyInit();
+
             _confirmed = true;
         }
         #endregion
 
 
         #region Native Settings (mostly used for UWP initialization)
-        static INativeSettings _nativeSettings;
-        static INativeSettings NativeSettings
+        static ISettings _nativeSettings;
+        static ISettings NativeSettings
         {
             get
             {
-                _nativeSettings = _nativeSettings ?? Xamarin.Forms.DependencyService.Get<INativeSettings>();
+                _nativeSettings = _nativeSettings ?? Xamarin.Forms.DependencyService.Get<ISettings>();
                 return _nativeSettings;
             }
         }

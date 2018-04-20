@@ -28,6 +28,7 @@ namespace Forms9Patch
 
         static HardwareKeyPage()
         {
+            Settings.ConfirmInitialization();
             FocusMonitor.FocusedElementChanged += OnFocusElementChanged;
         }
 

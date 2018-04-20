@@ -1,4 +1,4 @@
-{
+﻿{
   "Forms9Patch": "Forms9Patch.yml",
   "Forms9Patch.AbsoluteLayout": "Forms9Patch.AbsoluteLayout.yml",
   "Forms9Patch.AbsoluteLayout.#ctor": "Forms9Patch.AbsoluteLayout.yml",
@@ -679,9 +679,9 @@
   "Forms9Patch.IMenuItem.IconImage": "Forms9Patch.IMenuItem.yml",
   "Forms9Patch.IMenuItem.IconText": "Forms9Patch.IMenuItem.yml",
   "Forms9Patch.IMenuItem.Text": "Forms9Patch.IMenuItem.yml",
-  "Forms9Patch.INativeSettings": "Forms9Patch.INativeSettings.yml",
-  "Forms9Patch.INativeSettings.IncludedAssemblies": "Forms9Patch.INativeSettings.yml",
-  "Forms9Patch.INativeSettings.IsLicensed": "Forms9Patch.INativeSettings.yml",
+  "Forms9Patch.ISettings": "Forms9Patch.ISettings.yml",
+  "Forms9Patch.ISettings.IncludedAssemblies": "Forms9Patch.ISettings.yml",
+  "Forms9Patch.ISettings.IsLicensed": "Forms9Patch.ISettings.yml",
   "Forms9Patch.IPopup": "Forms9Patch.IPopup.yml",
   "Forms9Patch.IPopup.CancelOnPageOverlayTouch": "Forms9Patch.IPopup.yml",
   "Forms9Patch.IPopup.HorizontalOptions": "Forms9Patch.IPopup.yml",

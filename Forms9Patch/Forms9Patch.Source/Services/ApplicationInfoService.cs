@@ -15,12 +15,16 @@ namespace Forms9Patch
     /// </summary>
     public static class ApplicationInfoService
     {
+        static ApplicationInfoService()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         static IApplicationInfoService _service;
         static IApplicationInfoService Service
         {
             get
             {
-                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IApplicationInfoService>();
                 if (_service == null)
                 {

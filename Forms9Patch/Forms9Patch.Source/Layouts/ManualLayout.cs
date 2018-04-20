@@ -7,6 +7,11 @@ namespace Forms9Patch
     /// </summary>
     public class ManualLayout : Xamarin.Forms.Layout<View>, ILayout
     {
+        static ManualLayout()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region ILayout Properties
 
         #region IgnoreChildren

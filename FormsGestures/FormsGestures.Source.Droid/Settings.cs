@@ -1,15 +1,32 @@
 ﻿using System;
+using Android.App;
 
 namespace FormsGestures.Droid
 {
-
     public static class Settings
     {
-        public static Android.App.Activity Activity { get; private set; }
-
-        public static Android.Content.Context Context => (Android.Content.Context)Activity;
+        static Android.Content.Context _context;
+        /// <summary>
+        /// An activity is a Context because ???  Android!
+        /// </summary>
+        /// <value>The context.</value>
+        public static Android.Content.Context Context
+        {
+            get
+            {
+                return _context ?? Xamarin.Forms.Forms.Context;
+            }
+            private set
+            {
+                _context = value;
+            }
+        }
 
         static double _msUntilTapped = 200;
+        /// <summary>
+        /// Gets or sets the tapped threshold.
+        /// </summary>
+        /// <value>The tapped threshold.</value>
         public static TimeSpan TappedThreshold
         {
             get { return TimeSpan.FromMilliseconds(_msUntilTapped); }
@@ -17,31 +34,29 @@ namespace FormsGestures.Droid
         }
 
         static float _swipeVelocityThreshold = 0.1f;
+        /// <summary>
+        /// Gets or sets the swipe velocity threshold.
+        /// </summary>
+        /// <value>The swipe velocity threshold.</value>
         public static float SwipeVelocityThreshold
         {
-            get { return Settings._swipeVelocityThreshold; }
-            set { Settings._swipeVelocityThreshold = value; }
+            get { return _swipeVelocityThreshold; }
+            set { _swipeVelocityThreshold = value; }
         }
 
-        public static void Init(Android.App.Activity activity)
+
+        /// <summary>
+        /// Init the specified context.
+        /// </summary>
+        /// <returns>The init.</returns>
+        /// <param name="context">Context.</param>
+        public static void Init(Android.Content.Context context = null)
         {
-            Activity = activity;
-
-            P42.Utils.Environment.Init();
-            P42.Utils.Environment.PlatformPathLoader = PlatformPathLoader;
-            _msUntilTapped = 200;
-            System.Diagnostics.Debug.WriteLine("FormsGestures.Droid.Settings.Init()");
+            if (_context != null)
+                return;
+            Context = context;
+            P42.Utils.Droid.Settings.Init(Context);
         }
-
-        static void PlatformPathLoader()
-        {
-            //P42.Utils.Environment.DocumentsPath = Context.FilesDir.Path;
-            P42.Utils.Environment.ApplicationDataPath = System.IO.Path.Combine(Context.ApplicationInfo.DataDir, "AppData");
-            P42.Utils.Environment.ApplicationCachePath = Context.CacheDir.Path;
-            P42.Utils.Environment.TemporaryStoragePath = System.IO.Path.Combine(Context.CacheDir.Path, "tmp");
-        }
-
-
 
     }
 }

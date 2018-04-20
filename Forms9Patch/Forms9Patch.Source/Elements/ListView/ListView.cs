@@ -544,6 +544,10 @@ namespace Forms9Patch
 
 
         #region Constructor
+        static ListView()
+        {
+            Settings.ConfirmInitialization();
+        }
 
         void Init()
         {

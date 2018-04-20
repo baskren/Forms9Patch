@@ -136,6 +136,11 @@ namespace Forms9Patch
 
 
         #region Constructor
+        static BasePicker()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BasePicker"/> class.
         /// </summary>

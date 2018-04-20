@@ -7,6 +7,11 @@ namespace Forms9Patch
     /// </summary>
     public class ContentView : Forms9Patch.Frame
     {
+        static ContentView()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ContentView"/> class.  Forms9Patch.ContentView is same as Forms9Patch.Frame - but with different default values.
         /// </summary>

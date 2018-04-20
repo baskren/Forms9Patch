@@ -8,6 +8,12 @@ namespace FormsGestures.Droid
     /// </summary>
     public class GestureService : IGestureService
     {
+        public GestureService()
+        {
+            Settings.Init();
+        }
+
+
         #region IGestureService implementation
 
         public void For(Listener listener)

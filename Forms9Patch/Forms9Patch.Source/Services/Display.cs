@@ -6,6 +6,11 @@ namespace Forms9Patch
     /// </summary>
     public static class Display
     {
+        static Display()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region Extension Static Properties
         /*
         /// <summary>

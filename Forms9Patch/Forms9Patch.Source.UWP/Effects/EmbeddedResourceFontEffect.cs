@@ -13,11 +13,11 @@ using Xamarin.Forms.Platform.UWP;
 [assembly: ExportEffect(typeof(Forms9Patch.UWP.EmbeddedResourceFontEffect), "EmbeddedResourceFontEffect")]
 namespace Forms9Patch.UWP
 {
-	/// <summary>
-	/// Custom font effect.
-	/// </summary>
-	public class EmbeddedResourceFontEffect : PlatformEffect
-	{
+    /// <summary>
+    /// Custom font effect.
+    /// </summary>
+    public class EmbeddedResourceFontEffect : PlatformEffect
+    {
         #region Debug support
         bool DebugCondition
         {
@@ -45,28 +45,19 @@ namespace Forms9Patch.UWP
         PropertyInfo _controlFontFamilyProperty = null;
         PropertyInfo _controlTextProperty = null;
 
-		/// <summary>
-		/// Called when the effect is attached.
-		/// </summary>
-		protected override void OnAttached()
-		{
+        /// <summary>
+        /// Called when the effect is attached.
+        /// </summary>
+        protected override void OnAttached()
+        {
             _elementFontFamilyProperty = Element.GetType().GetProperty("FontFamily");
             _controlFontFamilyProperty = Control.GetType().GetProperty("FontFamily");
             _controlTextProperty = Control.GetType().GetProperty("Text");
-            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
+            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty != null)
             {
                 _instance = _instances++;
-                if (_instance > 4 && !Settings.IsLicenseValid)
-                {
-                    Toast.Create("UNLICENSED COPY", "Only 4 instances of Forms9Patch.EmbeddedResourceFontEffect is available without a license.");
-                    _elementFontFamilyProperty = null;
-                    _controlFontFamilyProperty = null;
-                }
-                else
-                {
-                    _embeddedResourceFontEffect = (Forms9Patch.EmbeddedResourceFontEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.EmbeddedResourceFontEffect);
-                    UpdateFont();
-                }
+                _embeddedResourceFontEffect = (Forms9Patch.EmbeddedResourceFontEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.EmbeddedResourceFontEffect);
+                UpdateFont();
             }
         }
 
@@ -80,27 +71,27 @@ namespace Forms9Patch.UWP
         /// Called when the effect is detached
         /// </summary>
         protected override void OnDetached()
-		{
+        {
             _embeddedResourceFontEffect = null;
-		}
+        }
 
-		/// <param name="args">To be added.</param>
-		/// <summary>
-		/// Called when a property is changed
-		/// </summary>
-		/// <remarks>To be added.</remarks>
-		protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
-		{
-			if (args.PropertyName == Xamarin.Forms.Label.FontFamilyProperty.PropertyName ||
-			    args.PropertyName == Xamarin.Forms.Label.FontProperty.PropertyName)
-				UpdateFont();
+        /// <param name="args">To be added.</param>
+        /// <summary>
+        /// Called when a property is changed
+        /// </summary>
+        /// <remarks>To be added.</remarks>
+        protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == Xamarin.Forms.Label.FontFamilyProperty.PropertyName ||
+                args.PropertyName == Xamarin.Forms.Label.FontProperty.PropertyName)
+                UpdateFont();
             else
                 base.OnElementPropertyChanged(args);
         }
 
         void UpdateFont()
-		{
-            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty!=null)
+        {
+            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty != null)
             {
                 var fontFamilyName = _elementFontFamilyProperty.GetValue(Element) as string;
                 var assembly = _embeddedResourceFontEffect?.Assembly;

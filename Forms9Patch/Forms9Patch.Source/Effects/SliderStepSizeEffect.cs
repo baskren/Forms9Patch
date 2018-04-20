@@ -9,6 +9,11 @@ namespace Forms9Patch
     /// </summary>
     public class SliderStepSizeEffect : RoutingEffect, INotifyPropertyChanged
     {
+        static SliderStepSizeEffect()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// PropertyChanged event handler
         /// </summary>

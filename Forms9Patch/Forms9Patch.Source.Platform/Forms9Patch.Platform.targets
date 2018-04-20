@@ -25,9 +25,6 @@
 		<Compile Include="..\Forms9Patch.Source.Platform\Models\F9PImageData.cs">
 			<Link>Models\F9PImageData.cs</Link>
 		</Compile>
-		<Compile Include="..\Forms9Patch.Source.Platform\Models\LicenseChecker.cs">
-			<Link>Models\LicenseChecker.cs</Link>
-		</Compile>
 
 		<!-- PLATORM VIEWS -->
 		<Compile Include="..\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs">

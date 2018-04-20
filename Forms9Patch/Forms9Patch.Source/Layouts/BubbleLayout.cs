@@ -11,6 +11,11 @@ namespace Forms9Patch
     /// </summary>
     internal class BubbleLayout : Xamarin.Forms.ContentView, ILayout
     {
+        static BubbleLayout()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region IBubbleLayout Properties
 
         #region PoinerLength property

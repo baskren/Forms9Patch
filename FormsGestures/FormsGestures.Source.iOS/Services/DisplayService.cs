@@ -62,7 +62,7 @@ namespace FormsGestures.iOS
             get
             {
                 var safeAreaInset = SafeAreaInset;
-                if (safeAreaInset.Top>0)
+                if (safeAreaInset.Top > 0)
                     return 0;
                 var statusBarFrame = UIApplication.SharedApplication.StatusBarFrame;
                 return statusBarFrame.Height - safeAreaInset.Top;
@@ -84,7 +84,10 @@ namespace FormsGestures.iOS
 
         // iPhoneX  34, 44
 
-
+        public DisplayService()
+        {
+            Settings.Init();
+        }
     }
 }
 

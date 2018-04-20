@@ -10,12 +10,16 @@ namespace Forms9Patch
 {
     internal static class StatusBarService
     {
+        static StatusBarService()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         static IStatusBarService _service;
         static IStatusBarService Service
         {
             get
             {
-                Settings.ConfirmInitialization();
                 _service = _service ?? Xamarin.Forms.DependencyService.Get<IStatusBarService>();
                 if (_service == null)
                 {

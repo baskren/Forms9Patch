@@ -8,6 +8,11 @@ namespace Forms9Patch
     /// </summary>
     public class Grid : Xamarin.Forms.Grid, ILayout
     {
+        static Grid()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region ILayout Properties
 
         #region IgnoreChildren

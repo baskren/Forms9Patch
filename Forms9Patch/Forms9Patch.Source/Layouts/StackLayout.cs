@@ -8,6 +8,11 @@ namespace Forms9Patch
     /// </summary>
     public class StackLayout : Xamarin.Forms.StackLayout, ILayout
     {
+        static StackLayout()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region ILayout Properties
 
         #region IgnoreChildren

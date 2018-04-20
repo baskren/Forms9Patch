@@ -44,6 +44,10 @@ namespace FormsGestures.Droid
             return new Rectangle(point, r.Size);
         }
 
+        public CoordTransformService()
+        {
+            Settings.Init();
+        }
         #endregion
     }
 }

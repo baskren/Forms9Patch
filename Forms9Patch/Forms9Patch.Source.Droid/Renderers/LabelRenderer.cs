@@ -583,12 +583,7 @@ namespace Forms9Patch.Droid
         {
 
             if (Element.F9PFormattedString != null)
-            {
-                if (Settings.IsLicenseValid || Element._id < 4)
-                    _currentControlState.TextFormatted = Element.F9PFormattedString.ToSpannableString(noBreakSpace: Element.LineBreakMode == LineBreakMode.CharacterWrap);
-                else
-                    _currentControlState.Text = "UNLICENSED COPY";
-            }
+                _currentControlState.TextFormatted = Element.F9PFormattedString.ToSpannableString(noBreakSpace: Element.LineBreakMode == LineBreakMode.CharacterWrap);
             else
             {
                 var text = Element.Text;

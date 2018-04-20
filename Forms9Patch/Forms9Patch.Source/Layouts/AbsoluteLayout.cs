@@ -8,6 +8,11 @@ namespace Forms9Patch
     /// </summary>
     public class AbsoluteLayout : Xamarin.Forms.AbsoluteLayout, ILayout
     {
+        static AbsoluteLayout()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region ILayout Properties
 
         #region IgnoreChildren

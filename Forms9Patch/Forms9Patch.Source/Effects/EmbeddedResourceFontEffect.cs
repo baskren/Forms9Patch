@@ -13,6 +13,11 @@ namespace Forms9Patch
     /// </summary>
     public class EmbeddedResourceFontEffect : Xamarin.Forms.RoutingEffect
     {
+        static EmbeddedResourceFontEffect()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         internal Assembly Assembly { get; }
 
         /// <summary>

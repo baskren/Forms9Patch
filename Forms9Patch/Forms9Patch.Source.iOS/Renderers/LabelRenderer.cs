@@ -500,12 +500,7 @@ namespace Forms9Patch.iOS
             string text = null;
             NSAttributedString attributedText = null;
             if (Element.F9PFormattedString != null)
-            {
-                if (Settings.IsLicenseValid || Element._id < 4)
-                    attributedText = Element.F9PFormattedString.ToNSAttributedString(ControlFont, ControlTextColor);
-                else
-                    text = "UNLICENSED COPY";
-            }
+                attributedText = Element.F9PFormattedString.ToNSAttributedString(ControlFont, ControlTextColor);
             else
                 text = (string)Element.GetValue(Label.TextProperty);
 

@@ -911,6 +911,11 @@ namespace Forms9Patch
 
 
         #region Constructor
+        static Button()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// The constructing.
         /// </summary>
@@ -921,7 +926,6 @@ namespace Forms9Patch
         /// </summary>
         public Button()
         {
-            Settings.ConfirmInitialization();
             _constructing = true;
             Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;

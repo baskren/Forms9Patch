@@ -9,6 +9,11 @@ namespace Forms9Patch
     /// </summary>
     public static class KeyboardService
     {
+        static KeyboardService()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         static IKeyboardService _service;
 
         /// <summary>
@@ -18,7 +23,6 @@ namespace Forms9Patch
         {
             get
             {
-                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IKeyboardService>();
                 if (_service == null)
                 {

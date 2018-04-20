@@ -413,6 +413,11 @@ namespace Forms9Patch
 
 
         #region Constructor
+        static PopupBase()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.PopupBase"/> class.
         /// </summary>
@@ -420,8 +425,6 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
-            Settings.ConfirmInitialization();
-
             BackgroundColor = Color.White;
             HasShadow = true;
 

@@ -11,68 +11,52 @@ namespace Forms9Patch.Droid
     /// <summary>
     /// Forms9Patch Settings.
     /// </summary>
-    public class Settings : INativeSettings
+    public class Settings : ISettings
     {
+        #region Properties
         public static Android.App.Activity Activity { get; private set; }
 
-        public static Android.Content.Context Context => (Android.Content.Context)Activity;
-
-
-        static bool _valid = false;
+        static Android.Content.Context _context;
         /// <summary>
-        /// Gets a value indicating whether Forms9Patch is licensed.
+        /// An activity is a Context because ???  Android!
         /// </summary>
-        /// <value>true</value>
-        /// <c>false</c>
-        public bool IsLicensed
+        /// <value>The context.</value>
+        public static Android.Content.Context Context
         {
-            get { return _valid || Xamarin.Forms.Application.Current == null; }
-        }
-        internal static bool IsLicenseValid
-        {
-            get { return _valid || Xamarin.Forms.Application.Current == null; }
-        }
-
-        public static void Initialize(Android.App.Activity activity, string licenseKey = null)
-        {
-            Activity = activity;
-            LicenseKey = licenseKey ?? "freebee";
-            FormsGestures.Droid.Settings.Init(activity);
-        }
-
-
-
-        static string _licenseKey;
-
-        internal static Assembly ApplicationAssembly;
-        /// <summary>
-        /// Sets the Forms9Patch license key.
-        /// </summary>
-        /// <value>The license key.</value>
-        public static string LicenseKey
-        {
-            private set
-            {
-                ApplicationAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if (!string.IsNullOrEmpty(value))
-                {
-                    _licenseKey = value;
-                    Forms9Patch.Settings.LicenseKey = _licenseKey;
-                    var licenseChecker = new LicenseChecker();
-                    _valid = licenseChecker.CheckLicenseKey(_licenseKey, ((Activity)Context).Title);
-                    if (!_valid)
-                    {
-                        Console.WriteLine(string.Format("[Forms9Patch] The LicenseKey '{0}' is not for the app '{1}'.", Settings._licenseKey, ((Activity)Context).Title));
-                        Console.WriteLine("[Forms9Patch] You are in trial mode and will be able to render 1 scaleable image and 5 formatted strings");
-                    }
-                }
-            }
             get
             {
-                return _licenseKey;
+                return _context ?? Xamarin.Forms.Forms.Context;
+            }
+            private set
+            {
+                _context = value;
             }
         }
 
         public List<Assembly> IncludedAssemblies => throw new NotImplementedException();
+        #endregion
+
+
+        #region Initialization
+        public static void Initialize(Android.App.Activity activity, string licenseKey = null)
+        {
+            Activity = activity;
+            Context = activity as Android.Content.Context;
+            FormsGestures.Droid.Settings.Init(Context);
+
+            if (licenseKey != null)
+                System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
+        }
+
+        bool _lastInitialized;
+        void ISettings.LazyInit()
+        {
+            if (_lastInitialized)
+                return;
+            _lastInitialized = true;
+            Activity = Context as Android.App.Activity;
+            FormsGestures.Droid.Settings.Init(Context);
+        }
+        #endregion
     }
 }

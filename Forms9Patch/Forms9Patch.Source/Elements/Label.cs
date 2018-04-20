@@ -226,6 +226,11 @@ namespace Forms9Patch
 
 
         #region Constructor & Fields
+        static Label()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         //bool cancelEvents;
         static int instances;
         readonly internal int _id;
@@ -235,9 +240,7 @@ namespace Forms9Patch
         /// </summary>
         public Label()
         {
-            Settings.ConfirmInitialization();
             _id = instances++;
-            //_listener = FormsGestures.Listener.For(this);
         }
 
         /// <summary>
@@ -332,7 +335,7 @@ namespace Forms9Patch
                 {
                     //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure.OnMeasure()");
                     //OnMeasure(Width, Height);
-                    if (HtmlText!=null && HtmlText.StartsWith("A4"))
+                    if (HtmlText != null && HtmlText.StartsWith("A4"))
                         System.Diagnostics.Debug.WriteLine("");
 
                     var layout = this.ParentInheritedFrom<Layout>();

@@ -11,6 +11,11 @@ namespace Forms9Patch
     /// </summary>
     public static class Clipboard
     {
+        static Clipboard()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         static IClipboardService _service;
         static IClipboardService Service
         {
@@ -26,7 +31,7 @@ namespace Forms9Patch
         /// </summary>
         public static ClipboardEntry Entry
         {
-            get => Service.Entry;
+            get => Service.Entry ?? new ClipboardEntry();
 
             set => Service.Entry = value;
         }

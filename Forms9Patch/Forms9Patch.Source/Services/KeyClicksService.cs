@@ -3,17 +3,21 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Haptics service.
-	/// </summary>
-	public static class KeyClicksService 
-	{
-		static IKeyClicksService _service;
+    /// <summary>
+    /// Haptics service.
+    /// </summary>
+    public static class KeyClicksService
+    {
+        static KeyClicksService()
+        {
+            Settings.ConfirmInitialization();
+        }
+
+        static IKeyClicksService _service;
         static IKeyClicksService Service
         {
             get
             {
-                Settings.ConfirmInitialization();
                 _service = _service ?? DependencyService.Get<IKeyClicksService>();
                 if (_service == null)
                 {
@@ -29,12 +33,12 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="effect">Effect.</param>
         /// <param name="mode">Mode.</param>
-        public static void Feedback(HapticEffect effect, KeyClicks mode=KeyClicks.Default)
-		{
-			if (mode == KeyClicks.Off)
-				return;
-			Service?.Feedback(effect,mode);
-		}
+        public static void Feedback(HapticEffect effect, KeyClicks mode = KeyClicks.Default)
+        {
+            if (mode == KeyClicks.Off)
+                return;
+            Service?.Feedback(effect, mode);
+        }
 
-	}
+    }
 }

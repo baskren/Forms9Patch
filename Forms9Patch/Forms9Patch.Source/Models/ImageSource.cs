@@ -15,6 +15,11 @@ namespace Forms9Patch
         internal static readonly BindableProperty AssemblyProperty = BindableProperty.CreateAttached("Assembly", typeof(Assembly), typeof(ImageSource), null);
 
         #region Constructor
+        static ImageSource()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         ImageSource() //: this (1) 
         {
         }
@@ -46,7 +51,6 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly in which the resource can be found</param> 
         public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
-            Settings.ConfirmInitialization();
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly")?.Invoke(null, new object[0]);
@@ -74,7 +78,6 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly.</param>
         public static new Xamarin.Forms.ImageSource FromResource(string resourceId, Assembly assembly = null)
         {
-            Settings.ConfirmInitialization();
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
@@ -139,9 +142,9 @@ namespace Forms9Patch
             var reqResBasePath = pathString;
             //var reqResSplit = pathString.Split(new char[] { '.', '/', '\\' });
             var reqResSplit = pathString.Split('.');
-            if (reqResSplit.Length > 1 && ValidImageExtensions.Contains(reqResSplit[reqResSplit.Length-1].ToLower()))
+            if (reqResSplit.Length > 1 && ValidImageExtensions.Contains(reqResSplit[reqResSplit.Length - 1].ToLower()))
             {
-                reqResExt = reqResSplit[reqResSplit.Length-1];
+                reqResExt = reqResSplit[reqResSplit.Length - 1];
                 reqResBasePath = pathString.Substring(0, pathString.Length - reqResExt.Length - 1);
             }
             if (reqResExt == "png" && reqResSplit.Length > 2 && reqResSplit[reqResSplit.Length - 2] == "9")
@@ -162,14 +165,14 @@ namespace Forms9Patch
             {
                 //var reqResIndex = reqResSplit.IndexOf("Resources");
                 var reqResIndex = -1;
-                for (int i=0; i<reqResSplit.Length;i++)
-                    if (reqResSplit[i]=="Resources")
+                for (int i = 0; i < reqResSplit.Length; i++)
+                    if (reqResSplit[i] == "Resources")
                     {
                         reqResIndex = i;
                         break;
                     }
 
-            
+
                 if (reqResIndex >= 0)
                 {
                     int index = 0;
@@ -230,7 +233,7 @@ namespace Forms9Patch
 
             //resourceNames = resourceNames.Where(arg => arg.Contains(reqResBaseName)).ToArray();
             var matchingResourceNames = new List<string>();
-            for (int i=0; i<resourceNames.Length; i++)
+            for (int i = 0; i < resourceNames.Length; i++)
             {
                 if (resourceNames[i].Contains(reqResBaseName))
                     matchingResourceNames.Add(resourceNames[i]);

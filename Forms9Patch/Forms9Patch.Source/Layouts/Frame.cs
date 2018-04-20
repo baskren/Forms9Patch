@@ -6,11 +6,16 @@ using System;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Forms9Patch Frame layout.
-	/// </summary>
-	public class Frame : Xamarin.Forms.Frame, ILayout
+    /// <summary>
+    /// Forms9Patch Frame layout.
+    /// </summary>
+    public class Frame : Xamarin.Forms.Frame, ILayout
     {
+        static Frame()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         #region ILayout Properties
 
         #region IgnoreChildren
@@ -311,7 +316,7 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-           var result = base.OnMeasure(widthConstraint, heightConstraint);
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
             if (HasShadow)
             {
                 var shadowPadding = ShapeBase.ShadowPadding(this);

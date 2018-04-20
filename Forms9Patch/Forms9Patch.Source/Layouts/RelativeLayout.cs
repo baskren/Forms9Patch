@@ -8,6 +8,11 @@ namespace Forms9Patch
     /// </summary>
     public class RelativeLayout : Xamarin.Forms.RelativeLayout, ILayout
     {
+        static RelativeLayout()
+        {
+            Settings.ConfirmInitialization();
+        }
+
 
         #region ILayout Properties
 

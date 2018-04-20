@@ -330,12 +330,16 @@ namespace Forms9Patch
 
 
         #region Constructors
+        static Image()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// Instantiates a new instance of the <see cref="Image"/> class.
         /// </summary>
         public Image()
         {
-            Settings.ConfirmInitialization();
             _instances = 0;
         }
 
@@ -365,7 +369,6 @@ namespace Forms9Patch
         /// <param name="image">Image.</param>
         public Image(Xamarin.Forms.Image image)
         {
-            Settings.ConfirmInitialization();
             _f9pId = _instances++;
             Fill = image.Aspect.ToF9pFill();
             FillOrLayoutSet = !image.HasDefaultAspectAndLayoutOptions();

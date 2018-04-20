@@ -53,13 +53,17 @@ namespace Forms9Patch
 
 
         #region Constructor
+        static RootPage()
+        {
+            Settings.ConfirmInitialization();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
         /// </summary>
         /// <param name="page">Page.</param>
         public RootPage(Page page = null)
         {
-            Settings.ConfirmInitialization();
 
             // needed to comment out the following because Android was repeating the MainAcitivty.OnCreate during a resume.
             //if (_instance != null)

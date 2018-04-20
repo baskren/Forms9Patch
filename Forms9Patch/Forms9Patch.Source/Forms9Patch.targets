@@ -152,11 +152,11 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\ILabelStyle.cs" Link="Interfaces\ILabelStyle.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\ILayout.cs" Link="Interfaces\ILayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IMenuItem.cs" Link="Interfaces\IMenuItem.cs" />
-    <Compile Include="..\Forms9Patch.Source\Interfaces\INativeSettings.cs" Link="Interfaces\INativeSettings.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IOsInformationService.cs" Link="Interfaces\IOsInformationService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IPopup.cs" Link="Interfaces\IPopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IScrollView.cs" Link="Interfaces\IScrollView.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\ISegment.cs" Link="Interfaces\ISegment.cs" />
+    <Compile Include="..\Forms9Patch.Source\Interfaces\ISettings.cs" Link="Interfaces\ISettings.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IShape.cs" Link="Interfaces\IShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IStatusBarService.cs" Link="Interfaces\IStatusBarService.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IWebViewExtensionService.cs" Link="Interfaces\IWebViewExtensionService.cs" />

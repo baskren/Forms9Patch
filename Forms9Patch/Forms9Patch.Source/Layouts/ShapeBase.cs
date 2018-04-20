@@ -3,11 +3,11 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Rounded box base.
-	/// </summary>
-	public static class ShapeBase 
-	{
+    /// <summary>
+    /// Rounded box base.
+    /// </summary>
+    public static class ShapeBase
+    {
 
         #region IBackground backing stores
 
@@ -83,10 +83,15 @@ namespace Forms9Patch
 
         #endregion IBackground backing stores
 
- 
-		internal static Thickness ShadowPadding(IShape shape, bool hasShadow=true, bool scaleForDisplay=false) {
+        static ShapeBase()
+        {
             Settings.ConfirmInitialization();
-            if (hasShadow) {
+        }
+
+        internal static Thickness ShadowPadding(IShape shape, bool hasShadow = true, bool scaleForDisplay = false)
+        {
+            if (hasShadow)
+            {
                 var shadowX = Settings.ShadowOffset.X;
                 var shadowY = Settings.ShadowOffset.Y;
                 var shadowR = Settings.ShadowRadius;
@@ -118,9 +123,9 @@ namespace Forms9Patch
                 return new Thickness(padL, padT, padR, padB);
             }
             else
-				return new Thickness (0);
-		}
+                return new Thickness(0);
+        }
 
-	}
+    }
 }
 

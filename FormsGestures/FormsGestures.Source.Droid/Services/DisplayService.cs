@@ -67,5 +67,10 @@ namespace FormsGestures.Droid
                 return Width > Height ? DisplayOrientation.LandscapeLeft : DisplayOrientation.Portrait;
             }
         }
+
+        public DisplayService()
+        {
+            Settings.Init();
+        }
     }
 }
