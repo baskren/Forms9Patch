@@ -19,6 +19,7 @@ namespace Forms9Patch.UWP
         #region Initialization
         public static void Initialize(Windows.UI.Xaml.Application app, string licenseKey = null)
         {
+            _initizalized = true;
             Xamarin.Forms.DependencyService.Register<ApplicationInfoService>();
             Xamarin.Forms.DependencyService.Register<DescendentBounds>();
             Xamarin.Forms.DependencyService.Register<InstalledFont>();
@@ -29,7 +30,7 @@ namespace Forms9Patch.UWP
             Xamarin.Forms.DependencyService.Register<WebViewExtensionsService>();
 
             Application = app;
-            FormsGestures.UWP.Settings.Init();
+            FormsGestures.UWP.Settings.Init(app);
 
             //var forms9PatchResources = GetResources();
             //Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
@@ -38,13 +39,13 @@ namespace Forms9Patch.UWP
                 System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
         }
 
-        bool _lazyInitialized;
+        static bool _initizalized;
         void ISettings.LazyInit()
         {
-            if (_lazyInitialized)
+            if (_initizalized)
                 return;
-            _lazyInitialized = true;
-            FormsGestures.UWP.Settings.Init(Application);
+            _initizalized = true;
+            FormsGestures.UWP.Settings.Init(Windows.UI.Xaml.Application.Current);
         }
 
 

@@ -214,11 +214,14 @@ namespace Forms9Patch
         static Dictionary<Assembly, string[]> SortedAppleResources = new Dictionary<Assembly, string[]>();
         static ImageSourceContainer BestGuessF9PResource(string reqResourcePathString, Assembly assembly)
         {
+            if (assembly == null)
+                return null;
             var tuple = GetiOSBasePathAndExt(reqResourcePathString);
             if (tuple == null)
                 return null;
             var reqResBaseName = tuple.Item1;
             var reqResExt = tuple.Item2;
+
 
             string[] resourceNames = null;
             if (SortedAppleResources.ContainsKey(assembly))

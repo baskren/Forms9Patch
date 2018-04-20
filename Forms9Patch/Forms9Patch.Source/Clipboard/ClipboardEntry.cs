@@ -48,6 +48,7 @@ namespace Forms9Patch
             //    return true;
             if (type == typeof(string))
                 return true;
+
             var typeInfo = type.GetTypeInfo();
             //if (item.Value is IList ilist && typeInfo.IsGenericType)
             if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)) && typeInfo.IsGenericType)
@@ -198,6 +199,8 @@ namespace Forms9Patch
         /// <param name="value"></param>
         public void AddValue<T>(string mimeType, T value)
         {
+            if (!ValidItemType(typeof(T)))
+                return;
             _items.Add(new ClipboardEntryItem<T>(mimeType, value));
         }
 

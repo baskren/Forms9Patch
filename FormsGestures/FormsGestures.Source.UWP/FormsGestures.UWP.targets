@@ -70,6 +70,10 @@
       <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.UWP\P42.Utils.UWP.csproj">
+      <Project>{68b96681-ef89-4f47-96c9-65aa37883c0a}</Project>
+      <Name>P42.Utils.UWP</Name>
+    </ProjectReference>
   </ItemGroup>
 
   <!-- PROJECT SETTINGS -->

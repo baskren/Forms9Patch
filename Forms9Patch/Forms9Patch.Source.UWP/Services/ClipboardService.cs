@@ -58,6 +58,8 @@ namespace Forms9Patch.UWP
                     var key = property.Key;
                     var value = property.Value;
                     var type = value.GetType();
+                    if (!ClipboardEntry.ValidItemType(type))
+                        continue;
                     var constructedListType = typeof(ClipboardEntryItem<>).MakeGenericType(type);
                     var item = (IClipboardEntryItem)Activator.CreateInstance(constructedListType, new object[] { key, value });
                     result.AdditionalItems.Add(item);
@@ -122,7 +124,7 @@ namespace Forms9Patch.UWP
                    }
 
                }
-               catch (Exception e)
+               catch (Exception)
                {
                    return null;
                }

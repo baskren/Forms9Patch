@@ -29,18 +29,19 @@ namespace Forms9Patch.iOS
         /// <param name="licenseKey">License key.</param>
         public static void Initialize(UIKit.UIApplicationDelegate appDelegate, string licenseKey = null)
         {
+            _initizalized = true;
             AppDelegate = appDelegate;
             if (licenseKey != null)
                 System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
             FormsGestures.iOS.Settings.Init();
         }
 
-        bool _lazyInitialized;
+        static bool _initizalized;
         void ISettings.LazyInit()
         {
-            if (_lazyInitialized)
+            if (_initizalized)
                 return;
-            _lazyInitialized = true;
+            _initizalized = true;
             FormsGestures.iOS.Settings.Init();
         }
         #endregion

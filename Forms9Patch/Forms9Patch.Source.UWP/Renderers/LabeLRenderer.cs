@@ -350,7 +350,6 @@ namespace Forms9Patch.UWP
             //MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
         }
 
-        bool _walkThrough;
 
         DateTime _lastMeasure = DateTime.MaxValue;
         int _measureOverrideInvocation;
@@ -456,27 +455,13 @@ namespace Forms9Patch.UWP
 
 
                 // we needed the following in Android as well.  Xamarin layout really doesn't like this to be changed in real time.
-                //Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
-                // {
-                     //label.FittedFontSize = tmpFontSize;
-                     //return false;
                      if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                      {
                          if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == FontExtensions.DefaultFontSize()))
-                         {
-                             //DebugMessage("UWP.LabelRenderer Element.FittedFontSize=[-1]");
                              Element.FittedFontSize = -1;
-                         }
                          else
-                         {
-                             //DebugMessage("UWP.LabelRenderer Element.FittedFontSize=["+tmpFontSize+"]");
-                             if (DebugCondition)
-                                 _walkThrough = true;
                              Element.FittedFontSize = tmpFontSize;
-                         }
                      }
-                    // return false;
-                 //});
 
                 var syncFontSize = ((ILabel)label).SynchronizedFontSize;
                 DebugMessage("[" + _measureOverrideInvocation + "] syncFontSize=[" + syncFontSize+"]");

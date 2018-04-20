@@ -14,6 +14,7 @@ namespace Forms9Patch
         /// </summary>
         List<Assembly> IncludedAssemblies { get; }
 
+
         /// <summary>
         /// Lazy initializes the Forms9Patch native code for use by Xamarin Previewer
         /// </summary>

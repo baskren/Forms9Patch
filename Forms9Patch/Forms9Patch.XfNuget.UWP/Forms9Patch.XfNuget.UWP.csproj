@@ -123,14 +123,6 @@
       <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
-      <Name>P42.NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
-      <Name>P42.Utils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
       <Project>{b1ca1e82-65f0-4eed-beb6-e133fbd2c4d9}</Project>
       <Name>Forms9Patch.XfNuget</Name>

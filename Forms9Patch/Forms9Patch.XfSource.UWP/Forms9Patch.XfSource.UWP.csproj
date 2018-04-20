@@ -115,14 +115,6 @@
       <Project>{52e3c505-3123-48ed-afe5-e700f1d5a01a}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
-      <Name>P42.NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{cad932a9-5e8d-415c-8dc2-ce8e553fa6d3}</Project>
-      <Name>P42.Utils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57b8b73d-c3b5-4c42-869e-7b2f17d354ac}</Project>
       <Name>Xamarin.Forms.Core</Name>
