@@ -1103,6 +1103,8 @@ protected virtual void Dispose(bool disposing)
                         ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn)
                     };
                 }
+                //else
+                //    paint = new SKPaint();
 
                 var fillRectAspect = fillRect.Width / fillRect.Height;
                 var bitmapAspect = _f9pImageData.Width / _f9pImageData.Height;
@@ -1215,9 +1217,9 @@ protected virtual void Dispose(bool disposing)
                                 yPatchWidth = ypatch.Width * (ypatch.Stretchable ? 0 : yScale);
                             if (xPatchWidth > 0 && yPatchWidth > 0)
                             {
-                                var sourceRect = new SKRect((float)System.Math.Max(0,xpatch.Start), (float)System.Math.Max(0, ypatch.Start), (float)System.Math.Min(xpatch.Start + xpatch.Width, _f9pImageData.Width), (float)System.Math.Min(ypatch.Start+ypatch.Width, _f9pImageData.Height));
+                                var sourceRect = new SKRect((float)System.Math.Max(0, xpatch.Start), (float)System.Math.Max(0, ypatch.Start), (float)System.Math.Min(xpatch.Start + xpatch.Width, _f9pImageData.Width), (float)System.Math.Min(ypatch.Start + ypatch.Width, _f9pImageData.Height));
                                 var destRect = new SKRect((float)System.Math.Max(0, patchX), (float)System.Math.Max(0, patchY), Math.Min(patchX + xPatchWidth, fillRect.Width), Math.Min(patchY + yPatchWidth, fillRect.Height));
-                                workingCanvas.DrawBitmap(_f9pImageData.SKBitmap, sourceRect, destRect);
+                                workingCanvas.DrawBitmap(_f9pImageData.SKBitmap, sourceRect, destRect, paint);
                             }
                             patchY += yPatchWidth;
                         }
