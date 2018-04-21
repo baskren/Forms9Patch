@@ -1099,7 +1099,7 @@ namespace Forms9Patch
                 _waitingForThingsToCalmDown = true;
                 Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
                  {
-                     if (DateTime.Now - _lastFontSizeResetTime > TimeSpan.FromMilliseconds(150))
+                     if (DateTime.Now - _lastFontSizeResetTime > TimeSpan.FromMilliseconds(350))
                      {
                          int iteration = _iterations++;
                          var maxFittedFontSize = -1.0;

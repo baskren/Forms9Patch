@@ -64,9 +64,9 @@
     <Compile Include="..\Forms9Patch.Source.UWP\Renderers\LabeLRenderer.cs">
       <Link>Renderers\LabeLRenderer.cs</Link>
     </Compile>
-    <!--Compile Include="..\Forms9Patch.Source.UWP\Renderers\EnhancedListViewRenderer.cs">
+    <Compile Include="..\Forms9Patch.Source.UWP\Renderers\EnhancedListViewRenderer.cs">
       <Link>Renderers\EnhancedListViewRenderer.cs</Link>
-    </Compile-->
+    </Compile>
 
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs">
