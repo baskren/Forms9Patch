@@ -153,7 +153,7 @@ namespace Forms9Patch
         #region Event Handles
         internal void OnScrolling(object sender, EventArgs args)
         {
-            Listener.CancelActiveGestures();
+            //Listener.CancelActiveGestures();   // this breaks UWP listview scrolling!!!
             //System.Diagnostics.Debug.WriteLine("scrolling");
             IsScrolling = true;
             Scrolling?.Invoke(this, args);
@@ -162,7 +162,7 @@ namespace Forms9Patch
 
         internal void OnScrolled(object sender, EventArgs args)
         {
-            Listener.CancelActiveGestures();
+            //Listener.CancelActiveGestures();  // this breaks UWP listview scrolling!!!
             //System.Diagnostics.Debug.WriteLine("!!! STOP !!!");
             IsScrolling = false;
             Scrolled?.Invoke(this, args);
