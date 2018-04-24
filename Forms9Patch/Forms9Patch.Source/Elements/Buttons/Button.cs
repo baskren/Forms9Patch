@@ -800,13 +800,19 @@ namespace Forms9Patch
                         childCount++;
                         if (Orientation == StackOrientation.Horizontal)
                         {
-                            width += element.Width;
-                            height = Math.Max(height, element.Height);
+                            var measure = element.Measure(double.PositiveInfinity, Math.Max(height, element.Height));
+                            //width += element.Width;
+                            //height = Math.Max(height, element.Height);
+                            width += measure.Request.Width;
+                            height += measure.Request.Height;
                         }
                         else
                         {
-                            width = Math.Max(width, element.Width);
-                            height += element.Height;
+                            var measure = element.Measure(Math.Max(width, element.Width), double.PositiveInfinity);
+                            //width = Math.Max(width, element.Width);
+                            //height += element.Height;
+                            width += measure.Request.Width;
+                            height += measure.Request.Height;
                         }
                     }
                 }

@@ -26,7 +26,7 @@ namespace Forms9Patch
         /// <value>The buttons.</value>
         public IList<Segment> Segments
         {
-            get => _segments; 
+            get => _segments;
             set
             {
                 _segments.Clear();
@@ -49,8 +49,8 @@ namespace Forms9Patch
         /// </summary>
         public double FontSize
         {
-            get => (double)GetValue(FontSizeProperty); 
-            set => SetValue(FontSizeProperty, value); 
+            get => (double)GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
         }
         #endregion FontSize property
 
@@ -64,8 +64,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.Color TextColor
         {
-            get => (Xamarin.Forms.Color)GetValue(TextColorProperty); 
-            set => SetValue(TextColorProperty, value); 
+            get => (Xamarin.Forms.Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
         #endregion TextColor property
 
@@ -79,8 +79,8 @@ namespace Forms9Patch
         /// </summary>
         public Color SeparatorColor
         {
-            get => (Color)GetValue(SeparatorColorProperty); 
-            set => SetValue(SeparatorColorProperty, value); 
+            get => (Color)GetValue(SeparatorColorProperty);
+            set => SetValue(SeparatorColorProperty, value);
         }
         #endregion SeparatorColor property
 
@@ -94,8 +94,8 @@ namespace Forms9Patch
         /// </summary>
         public double SeparatorWidth
         {
-            get => (double)GetValue(SeparatorWidthProperty); 
-            set => SetValue(SeparatorWidthProperty, value); 
+            get => (double)GetValue(SeparatorWidthProperty);
+            set => SetValue(SeparatorWidthProperty, value);
         }
         #endregion SeparatorWidth property
 
@@ -109,8 +109,8 @@ namespace Forms9Patch
         /// </summary>
         public HapticEffect HapticEffect
         {
-            get => (HapticEffect)GetValue(HapticEffectProperty); 
-            set => SetValue(HapticEffectProperty, value); 
+            get => (HapticEffect)GetValue(HapticEffectProperty);
+            set => SetValue(HapticEffectProperty, value);
         }
         #endregion HapticEffect property
 
@@ -124,8 +124,8 @@ namespace Forms9Patch
         /// </summary>
         public KeyClicks HapticMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty); 
-            set => SetValue(HapticModeProperty, value); 
+            get => (KeyClicks)GetValue(HapticModeProperty);
+            set => SetValue(HapticModeProperty, value);
         }
         #endregion HapticMode property
 
@@ -140,42 +140,48 @@ namespace Forms9Patch
         int _currentPage;
         readonly Button _leftArrowButton = new Button
         {
-            FontFamily = "Forms9Patch.Resources.Fonts.MaterialIcons.ttf",
-            HtmlText = "&#xE314;",
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4),
             TextColor = DefaultTextColor,
+            FontSize = 24,
+            TintIcon = true,
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_before_white_24px.svg"),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
-            HorizontalOptions = LayoutOptions.Start,
-            BackgroundColor = DefaultBackgroundColor,
+            HorizontalOptions = LayoutOptions.Center,
+            BackgroundColor = DefaultBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
+            IsVisible = true
         };
+        readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
         readonly Button _rightArrowButton = new Button
         {
-            FontFamily = "Forms9Patch.Resources.Fonts.MaterialIcons.ttf",
-            HtmlText = "&#xE315;",
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4),
             TextColor = DefaultTextColor,
+            FontSize = 24,
+            TintIcon = true,
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_next_white_24px.svg"),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
-            HorizontalOptions = LayoutOptions.End,
-            BackgroundColor = DefaultBackgroundColor,
+            HorizontalOptions = LayoutOptions.Center,
+            BackgroundColor = DefaultBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
+            IsVisible = true
         };
-        Forms9Patch.StackLayout _stackLayout = new Forms9Patch.StackLayout
+        readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
+        StackLayout _stackLayout = new StackLayout
         {
             Orientation = StackOrientation.Horizontal,
-            Spacing = DefaultSeparatorWidth,
+            Spacing = 0,
             Padding = 0,
             Margin = 0,
-            BackgroundColor = Color.White,
-            OutlineColor = DefaultBackgroundColor,
-            OutlineWidth = 1,
-            OutlineRadius = 4,
+            //BackgroundColor = Color.White,
+            //OutlineColor = DefaultBackgroundColor,
+            //OutlineWidth = 1,
+            //OutlineRadius = 4,
         };
         #endregion
 
@@ -236,6 +242,9 @@ namespace Forms9Patch
             _segments.CollectionChanged += OnSegmentsCollectionChanged;
             SizeChanged += OnSizeChanged;
             Content = _stackLayout;
+
+            _leftArrowButton.Clicked += OnLeftArrowButtonClicked;
+            _rightArrowButton.Clicked += OnRightArrowButtonClicked;
         }
 
         /// <summary>
@@ -263,16 +272,27 @@ namespace Forms9Patch
             base.OnPropertyChanged(propertyName);
             if (propertyName == BackgroundColorProperty.PropertyName)
             {
-                foreach (Button button in _stackLayout.Children)
-                    button.BackgroundColor = BackgroundColor;
-                _stackLayout.OutlineColor = BackgroundColor;
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                {
+                    if (visualElement is Button button)
+                    {
+                        button.BackgroundColor = BackgroundColor;
+                        _stackLayout.OutlineColor = BackgroundColor;
+                    }
+                }
             }
             else if (propertyName == TextColorProperty.PropertyName)
-                foreach (Button button in _stackLayout.Children)
-                    button.TextColor = TextColor;
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.TextColor = TextColor;
+            }
             else if (propertyName == FontSizeProperty.PropertyName)
-                foreach (Button button in _stackLayout.Children)
-                    button.FontSize = FontSize;
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.FontSize = FontSize;
+            }
             else if (propertyName == SeparatorColorProperty.PropertyName)
                 _stackLayout.BackgroundColor = SeparatorColor;
             else if (propertyName == OutlineColorProperty.PropertyName)
@@ -282,11 +302,17 @@ namespace Forms9Patch
             else if (propertyName == SeparatorWidthProperty.PropertyName)
                 _stackLayout.Spacing = SeparatorWidth;
             else if (propertyName == HapticEffectProperty.PropertyName)
-                foreach (Button button in _stackLayout.Children)
-                    button.HapticEffect = HapticEffect;
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.HapticEffect = HapticEffect;
+            }
             else if (propertyName == HapticModeProperty.PropertyName)
-                foreach (Button button in _stackLayout.Children)
-                    button.HapticMode = HapticMode;
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.HapticMode = HapticMode;
+            }
         }
         #endregion
 
@@ -301,13 +327,13 @@ namespace Forms9Patch
             segment._button.Spacing = 4;
             segment._button.TintIcon = true;
             segment._button.HasTightSpacing = true;
-            segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8);
+            segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 0);
             segment._button.TextColor = TextColor;
             segment._button.VerticalTextAlignment = TextAlignment.Center;
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
             segment._button.VerticalOptions = LayoutOptions.Fill;
             segment._button.HorizontalOptions = LayoutOptions.Center;
-            segment._button.BackgroundColor = BackgroundColor;
+            segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.05);
             segment._button.Lines = 1;
             segment._button.AutoFit = AutoFit.None;
 
@@ -327,6 +353,7 @@ namespace Forms9Patch
         #region Collection Management
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            /*
             switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
@@ -334,6 +361,7 @@ namespace Forms9Patch
                         if (item is Segment segment)
                         {
                             ConfigureSegment(segment);
+                            _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = 1 });
                             _stackLayout.Children.Add(segment._button);
                         }
                     break;
@@ -376,7 +404,37 @@ namespace Forms9Patch
                         UnconfiguerButton(button);
                     _stackLayout.Children.Clear();
                     break;
+        }
+                    */
+            if (e.OldItems != null)
+                foreach (var item in e.OldItems)
+                    if (item is Segment segment)
+                        UnconfiguerButton(segment._button);
+            if (e.NewItems != null)
+                foreach (var item in e.NewItems)
+                    if (item is Segment segment)
+                        ConfigureSegment(segment);
+
+
+            _stackLayout.Children.Clear();
+
+            _stackLayout.Children.Add(_leftArrowButton);
+            _leftArrowButton.IsVisible = true;
+            _stackLayout.Children.Add(_leftArrowSeparator);
+
+            bool first = true;
+            foreach (var segment in Segments)
+            {
+                if (!first)
+                    _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = 1 });
+                _stackLayout.Children.Add(segment._button);
+                segment._button.IsVisible = true;
+                first = false;
             }
+
+            _stackLayout.Children.Add(_rightArrowSeparator);
+            _stackLayout.Children.Add(_rightArrowButton);
+
             UpdateButtonVisibilities();
         }
         #endregion
@@ -386,7 +444,7 @@ namespace Forms9Patch
 
         private void OnSizeChanged(object sender, System.EventArgs e)
         {
-            //Cancel();
+            UpdateButtonVisibilities();
         }
 
         private void OnButtonSizeChanged(object sender, System.EventArgs e)
@@ -398,49 +456,61 @@ namespace Forms9Patch
         {
             if (Width < 0)
                 return;
+
+            var leftWidth = _leftArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
+            var rightWidth = _rightArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
+
             // calculate pages
-            bool multiPage = false;
-            var width = 0.0;
-            foreach (Button button in _stackLayout.Children)
+            var pageWidth = 0.0;
+
+            _leftArrowButton.IsVisible = _currentPage > 0;
+            _leftArrowSeparator.IsVisible = _currentPage > 0;
+            _rightArrowButton.IsVisible = true;
+            _rightArrowSeparator.IsVisible = true;
+
+            int segmentIndex = 0;
+            var pageIndex = 0;
+            for (int i = 2; i < _stackLayout.Children.Count - 2; i += 2)
             {
-                width += button.UnexpandedTightSize.Width + SeparatorWidth;
-                if (width >= Width)
+                var button = _stackLayout.Children[i] as Forms9Patch.Button;
+                var separator = _stackLayout.Children[i + 1] as BoxView;
+
+                pageWidth += button.UnexpandedTightSize.Width + button.Padding.HorizontalThickness + SeparatorWidth;
+
+                if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= Width)
                 {
-                    multiPage = true;
-                    break;
+                    pageIndex++;
+                    pageWidth = leftWidth;
                 }
+
+                button.IsVisible = pageIndex == _currentPage;
+                separator.IsVisible = pageIndex == _currentPage;
+
+                if (pageIndex == _currentPage && segmentIndex == Segments.Count - 1)
+                {
+                    _rightArrowButton.IsVisible = false;
+                    _rightArrowSeparator.IsVisible = false;
+                }
+                segmentIndex++;
             }
 
-            if (multiPage)
-            {
-                width = 0.0;
-                foreach (Button button in _stackLayout.Children)
-                {
-                    button.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                    button.IsVisible = true;
-                }
-                var pages = 1;
-                foreach (Button button in _stackLayout.Children)
-                {
-                    width += button.Bounds.Width + SeparatorWidth;
-                    if (width + _rightArrowButton.Width >= Width)
-                    {
-                        pages++;
-                        width = _leftArrowButton.Width;
-                    }
-                    button.IsVisible = _currentPage == pages - 1;
-                }
-            }
-            else
-            {
-                foreach (Button button in _stackLayout.Children)
-                    button.HorizontalOptions = LayoutOptions.Center;
-            }
         }
         #endregion
 
 
         #region Events
+        void OnLeftArrowButtonClicked(object sender, EventArgs e)
+        {
+            _currentPage--;
+            UpdateButtonVisibilities();
+        }
+
+        void OnRightArrowButtonClicked(object sender, EventArgs e)
+        {
+            _currentPage++;
+            UpdateButtonVisibilities();
+        }
+
         /// <summary>
         /// Event fired with a menu item (segment) has been tapped
         /// </summary>
@@ -456,7 +526,8 @@ namespace Forms9Patch
                     break;
                 }
             }
-            IsVisible = false;
+            //IsVisible = false;
+            Cancel();
         }
 
         #endregion

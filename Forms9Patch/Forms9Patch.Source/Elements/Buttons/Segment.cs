@@ -319,9 +319,6 @@ namespace Forms9Patch
         #endregion Fields
 
 
-
-
-
         #region Constuctors
         /// <summary>
         /// Initializes a new instance of the <see cref="Segment"/> class.

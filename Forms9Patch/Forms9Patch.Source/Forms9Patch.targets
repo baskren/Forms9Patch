@@ -239,7 +239,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="..\Forms9Patch.Source\Resources\Fonts\STIXGeneral.otf" Link="Resources\Fonts\STIXGeneral.otf" />
-    <EmbeddedResource Include="..\Forms9Patch.Source\Resources\unlicensedcopy.png" Link="Resources\unlicensedcopy.png"  />
+    <EmbeddedResource Include="..\Forms9Patch.Source\Resources\ic_navigate_before_white_24px.svg" Link="Resources\ic_navigate_before_white_24px.svg"  />
+    <EmbeddedResource Include="..\Forms9Patch.Source\Resources\ic_navigate_next_white_24px.svg" Link="Resources\ic_navigate_next_white_24px.svg"  />
   </ItemGroup>
 
 
