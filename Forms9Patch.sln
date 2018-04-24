@@ -391,6 +391,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.Platform", "Source.P
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs = Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs
 		Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs = Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets = Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{5B624595-F648-4143-9E9A-5C7600ABC90A}"
@@ -417,8 +418,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs
-		Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"

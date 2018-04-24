@@ -409,6 +409,9 @@ namespace Forms9Patch
             };
             //stopwatch.Stop();
 
+            if (rangeLists.PatchesX != null && rangeLists.PatchesX.Count < 2 && rangeLists.PatchesY != null && rangeLists.PatchesY.Count < 2)
+                return null;
+
             return rangeLists;
         }
 
