@@ -36,8 +36,8 @@ namespace Forms9Patch
         [Obsolete("Use SelectedTextColor")]
         public Color SelectedFontColor
         {
-            get => (Color)GetValue(SelectedFontColorProperty); 
-            set => SetValue(SelectedFontColorProperty, value); 
+            get => (Color)GetValue(SelectedFontColorProperty);
+            set => SetValue(SelectedFontColorProperty, value);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Forms9Patch
         [Obsolete("Use IconImage", true)]
         public Xamarin.Forms.ImageSource ImageSource
         {
-            get => (Xamarin.Forms.ImageSource)GetValue(ImageSourceProperty); 
-            set => SetValue(ImageSourceProperty, value); 
+            get => (Xamarin.Forms.ImageSource)GetValue(ImageSourceProperty);
+            set => SetValue(ImageSourceProperty, value);
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Forms9Patch
         [Obsolete("Use TrailingIcon")]
         public bool TrailingImage
         {
-            get => (bool)GetValue(TrailingImageProperty); 
-            set => SetValue(TrailingImageProperty, value); 
+            get => (bool)GetValue(TrailingImageProperty);
+            set => SetValue(TrailingImageProperty, value);
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Forms9Patch
         [Obsolete("Use TintIcon")]
         public bool TintImage
         {
-            get => (bool)GetValue(TintImageProperty); 
-            set => SetValue(TintImageProperty, value); 
+            get => (bool)GetValue(TintImageProperty);
+            set => SetValue(TintImageProperty, value);
         }
 
         #region IsElliptical property
@@ -151,8 +151,8 @@ namespace Forms9Patch
         [Obsolete("Use TextColor")]
         public Color FontColor
         {
-            get => (Color)GetValue(FontColorProperty); 
-            set => SetValue(FontColorProperty, value); 
+            get => (Color)GetValue(FontColorProperty);
+            set => SetValue(FontColorProperty, value);
         }
 
         /// <summary>
@@ -170,8 +170,8 @@ namespace Forms9Patch
         [Obsolete("Alignment is obsolete, see HorizontalTextAlignment and VerticalTextAlignment")]
         public TextAlignment Alignment
         {
-            get => (TextAlignment)GetValue(AlignmentProperty); 
-            set => SetValue(AlignmentProperty, value); 
+            get => (TextAlignment)GetValue(AlignmentProperty);
+            set => SetValue(AlignmentProperty, value);
         }
 
         /// <summary>
@@ -196,8 +196,8 @@ namespace Forms9Patch
         [Obsolete("Fit property is obsolete.  Use AutoFit property instead.")]
         public LabelFit Fit
         {
-            get => (LabelFit)GetValue(FitProperty); 
-            set => SetValue(FitProperty, value); 
+            get => (LabelFit)GetValue(FitProperty);
+            set => SetValue(FitProperty, value);
         }
         #endregion
 
@@ -227,8 +227,8 @@ namespace Forms9Patch
         /// </summary>
         public Color SelectedTextColor
         {
-            get => (Color)GetValue(SelectedTextColorProperty); 
-            set => SetValue(SelectedTextColorProperty, value); 
+            get => (Color)GetValue(SelectedTextColorProperty);
+            set => SetValue(SelectedTextColorProperty, value);
         }
         #endregion SelectedTextColor
 
@@ -243,8 +243,8 @@ namespace Forms9Patch
         /// <value>The selected background.</value>
         public Color SelectedBackgroundColor
         {
-            get => (Color)GetValue(SelectedBackgroundColorProperty); 
-            set => SetValue(SelectedBackgroundColorProperty, value); 
+            get => (Color)GetValue(SelectedBackgroundColorProperty);
+            set => SetValue(SelectedBackgroundColorProperty, value);
         }
 
         #endregion SelectedBackgroundColor
@@ -271,8 +271,8 @@ namespace Forms9Patch
         /// </remarks>
         public ICommand Command
         {
-            get => (ICommand)GetValue(CommandProperty); 
-            set => SetValue(CommandProperty, value); 
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
         #endregion Command
 
@@ -295,8 +295,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get => GetValue(CommandParameterProperty); 
-            set => SetValue(CommandParameterProperty, value); 
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
         #endregion CommandParameter
 
@@ -311,7 +311,7 @@ namespace Forms9Patch
         /// <value><c>true</c> if togglable; otherwise, <c>false</c>.</value>
         public bool ToggleBehavior
         {
-            get => (bool)GetValue(ToggleBehaviorProperty); 
+            get => (bool)GetValue(ToggleBehaviorProperty);
             set => SetValue(ToggleBehaviorProperty, value);
         }
         #endregion ToggleBehavior
@@ -329,8 +329,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
         public bool IsSelected
         {
-            get => (bool)GetValue(IsSelectedProperty); 
-            set => SetValue(IsSelectedProperty, value); 
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
         #endregion IsSelected
 
@@ -345,8 +345,8 @@ namespace Forms9Patch
         /// <value>The haptic effect.</value>
         public HapticEffect HapticEffect
         {
-            get => (HapticEffect)GetValue(HapticEffectProperty); 
-            set => SetValue(HapticEffectProperty, value); 
+            get => (HapticEffect)GetValue(HapticEffectProperty);
+            set => SetValue(HapticEffectProperty, value);
         }
         #endregion HapticEffect
 
@@ -361,8 +361,8 @@ namespace Forms9Patch
         /// <value>The haptic mode.</value>
         public KeyClicks HapticMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty); 
-            set => SetValue(HapticModeProperty, value); 
+            get => (KeyClicks)GetValue(HapticModeProperty);
+            set => SetValue(HapticModeProperty, value);
         }
         #endregion HapticMode
 
@@ -378,8 +378,8 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.Image IconImage
         {
-            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
-            set => SetValue(IconImageProperty, value); 
+            get => (Forms9Patch.Image)GetValue(IconImageProperty);
+            set => SetValue(IconImageProperty, value);
         }
         #endregion IconImage
 
@@ -394,8 +394,8 @@ namespace Forms9Patch
         /// <value>The image text.</value>
         public string IconText
         {
-            get => (string)GetValue(IconTextProperty); 
-            set => SetValue(IconTextProperty, value); 
+            get => (string)GetValue(IconTextProperty);
+            set => SetValue(IconTextProperty, value);
         }
         #endregion IconText
 
@@ -410,8 +410,8 @@ namespace Forms9Patch
         /// <value>default=false</value>
         public bool TrailingIcon
         {
-            get => (bool)GetValue(TrailingIconProperty); 
-            set => SetValue(TrailingIconProperty, value); 
+            get => (bool)GetValue(TrailingIconProperty);
+            set => SetValue(TrailingIconProperty, value);
         }
         #endregion TrailingIcon
 
@@ -426,8 +426,8 @@ namespace Forms9Patch
         /// <value><c>true</c> tint IconImage with TextColor; otherwise, <c>false</c>.</value>
         public bool TintIcon
         {
-            get => (bool)GetValue(TintIconProperty); 
-            set => SetValue(TintIconProperty, value); 
+            get => (bool)GetValue(TintIconProperty);
+            set => SetValue(TintIconProperty, value);
         }
 
         #endregion TintIcon
@@ -443,8 +443,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
         public bool HasTightSpacing
         {
-            get => (bool)GetValue(HasTightSpacingProperty); 
-            set => SetValue(HasTightSpacingProperty, value); 
+            get => (bool)GetValue(HasTightSpacingProperty);
+            set => SetValue(HasTightSpacingProperty, value);
         }
         #endregion HasTightSpacing
 
@@ -459,8 +459,8 @@ namespace Forms9Patch
         /// <value>The spacing.</value>
         public double Spacing
         {
-            get => (double)GetValue(SpacingProperty); 
-            set => SetValue(SpacingProperty, value); 
+            get => (double)GetValue(SpacingProperty);
+            set => SetValue(SpacingProperty, value);
         }
         #endregion Spacing
 
@@ -475,8 +475,8 @@ namespace Forms9Patch
         /// <value>The image and label orientation.</value>
         public StackOrientation Orientation
         {
-            get => (StackOrientation)GetValue(OrientationProperty); 
-            set => SetValue(OrientationProperty, value); 
+            get => (StackOrientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
         #endregion Orientation
 
@@ -497,8 +497,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
         #endregion
 
@@ -513,8 +513,8 @@ namespace Forms9Patch
         /// </summary>
         public new bool HasShadow
         {
-            get => (bool)GetValue(HasShadowProperty); 
-            set => SetValue(HasShadowProperty, value); 
+            get => (bool)GetValue(HasShadowProperty);
+            set => SetValue(HasShadowProperty, value);
         }
         #endregion
 
@@ -530,8 +530,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color OutlineColor
         {
-            get => (Color)GetValue(OutlineColorProperty); 
-            set => SetValue(OutlineColorProperty, value); 
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
         #endregion OutlineColor
 
@@ -548,8 +548,8 @@ namespace Forms9Patch
         /// </summary>
         public new float OutlineWidth
         {
-            get => (float)GetValue(OutlineWidthProperty); 
-            set => SetValue(OutlineWidthProperty, value); 
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
         }
         #endregion OutlineWidth
 
@@ -578,8 +578,8 @@ namespace Forms9Patch
         /// <value>The text.</value>
         public string Text
         {
-            get => (string)GetValue(TextProperty); 
-            set => SetValue(TextProperty, value); 
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
         #endregion Text
 
@@ -594,8 +594,8 @@ namespace Forms9Patch
         /// <value>The formatted text.</value>
         public string HtmlText
         {
-            get => (string)GetValue(HtmlTextProperty); 
-            set => SetValue(HtmlTextProperty, value); 
+            get => (string)GetValue(HtmlTextProperty);
+            set => SetValue(HtmlTextProperty, value);
         }
         #endregion HtmlText
 
@@ -609,8 +609,8 @@ namespace Forms9Patch
         /// </summary>
         public Color TextColor
         {
-            get => (Color)GetValue(TextColorProperty); 
-            set => SetValue(TextColorProperty, value); 
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
         #endregion TextColor
 
@@ -625,8 +625,8 @@ namespace Forms9Patch
         /// <value>The alignment (left, center, right).</value>
         public TextAlignment HorizontalTextAlignment
         {
-            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty); 
-            set => SetValue(HorizontalTextAlignmentProperty, value); 
+            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty);
+            set => SetValue(HorizontalTextAlignmentProperty, value);
         }
         #endregion HorizontalTextAlignment
 
@@ -641,8 +641,8 @@ namespace Forms9Patch
         /// <value>The vertical alignment.</value>
         public TextAlignment VerticalTextAlignment
         {
-            get => (TextAlignment)GetValue(VerticalTextAlignmentProperty); 
-            set => SetValue(VerticalTextAlignmentProperty, value); 
+            get => (TextAlignment)GetValue(VerticalTextAlignmentProperty);
+            set => SetValue(VerticalTextAlignmentProperty, value);
         }
         #endregion VerticalTextAlignment
 
@@ -657,8 +657,8 @@ namespace Forms9Patch
         /// <value>The line break mode.</value>
         public LineBreakMode LineBreakMode
         {
-            get => (LineBreakMode)GetValue(LineBreakModeProperty); 
-            set => SetValue(LineBreakModeProperty, value); 
+            get => (LineBreakMode)GetValue(LineBreakModeProperty);
+            set => SetValue(LineBreakModeProperty, value);
         }
         #endregion LineBreakMode
 
@@ -674,8 +674,8 @@ namespace Forms9Patch
         /// <value>The fit.</value>
         public AutoFit AutoFit
         {
-            get => (AutoFit)GetValue(AutoFitProperty); 
-            set => SetValue(AutoFitProperty, value); 
+            get => (AutoFit)GetValue(AutoFitProperty);
+            set => SetValue(AutoFitProperty, value);
         }
         #endregion AutoFit
 
@@ -690,8 +690,8 @@ namespace Forms9Patch
         /// <value>The lines.</value>
         public int Lines
         {
-            get => (int)GetValue(LinesProperty); 
-            set => SetValue(LinesProperty, value); 
+            get => (int)GetValue(LinesProperty);
+            set => SetValue(LinesProperty, value);
         }
         #endregion Lines
 
@@ -706,8 +706,8 @@ namespace Forms9Patch
         /// <value>The minimum size of the font.  Default=4</value>
         public double MinFontSize
         {
-            get => (double)GetValue(MinFontSizeProperty); 
-            set => SetValue(MinFontSizeProperty, value); 
+            get => (double)GetValue(MinFontSizeProperty);
+            set => SetValue(MinFontSizeProperty, value);
         }
         #endregion MinFontSize
 
@@ -724,8 +724,8 @@ namespace Forms9Patch
                                                                                                                                              /// <value>The size of the font.</value>
         public double FontSize
         {
-            get => (double)GetValue(FontSizeProperty); 
-            set => SetValue(FontSizeProperty, value); 
+            get => (double)GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
         }
         #endregion FontSize
 
@@ -740,8 +740,8 @@ namespace Forms9Patch
                                                                                                                                                  /// <value>The font family.</value>
         public string FontFamily
         {
-            get => (string)GetValue(FontFamilyProperty); 
-            set => SetValue(FontFamilyProperty, value); 
+            get => (string)GetValue(FontFamilyProperty);
+            set => SetValue(FontFamilyProperty, value);
         }
         #endregion FontFamily
 
@@ -756,8 +756,8 @@ namespace Forms9Patch
                                                                                                                                                                                 /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
-            get => (FontAttributes)GetValue(FontAttributesProperty); 
-            set => SetValue(FontAttributesProperty, value); 
+            get => (FontAttributes)GetValue(FontAttributesProperty);
+            set => SetValue(FontAttributesProperty, value);
         }
         #endregion FontAttributes
 
@@ -781,8 +781,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
         public bool DarkTheme
         {
-            get => (bool)GetValue(DarkThemeProperty); 
-            set => SetValue(DarkThemeProperty, value); 
+            get => (bool)GetValue(DarkThemeProperty);
+            set => SetValue(DarkThemeProperty, value);
         }
 
 
@@ -840,21 +840,21 @@ namespace Forms9Patch
         internal static BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("ParentSegmentsOrientation", typeof(StackOrientation), typeof(Button), StackOrientation.Horizontal);
         internal StackOrientation ParentSegmentsOrientation
         {
-            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty); 
-            set => SetValue(ParentSegmentsOrientationProperty, value); 
+            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
+            set => SetValue(ParentSegmentsOrientationProperty, value);
         }
 
         internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(Button), -1f);
         internal float SeparatorWidth
         {
-            get => (float)GetValue(SeparatorWidthProperty); 
-            set => SetValue(SeparatorWidthProperty, value); 
+            get => (float)GetValue(SeparatorWidthProperty);
+            set => SetValue(SeparatorWidthProperty, value);
         }
 
         internal static BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(Button), GroupToggleBehavior.None);
         internal GroupToggleBehavior GroupToggleBehavior
         {
-            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); 
+            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
             set => SetValue(GroupToggleBehaviorProperty, value);
         }
 
@@ -868,7 +868,7 @@ namespace Forms9Patch
         /// </summary>
         public double SynchronizedFontSize
         {
-            get => _label.SynchronizedFontSize; 
+            get => _label.SynchronizedFontSize;
             set => _label.SynchronizedFontSize = value;
         }
 
@@ -1005,18 +1005,11 @@ namespace Forms9Patch
             //if (icon.Contains("<") && icon.Contains("/>"))
             if (match == null)
             {
-                int opens = 0, closes = 0;
-                for (int i = 0; i < icon.Length; i++)
-                {
-                    if (icon[i] == '<')
-                        opens++;
-                    else if (icon[i] == '/' && (i + 2) < icon.Length && icon[i + 1] == '>')
-                    {
-                        closes++;
-                        i++;
-                    }
-                }
-                isIconText = opens > 0 && opens == closes;
+                var sansStarts = icon.Replace("<", "");
+                var starts = icon.Length - sansStarts.Length;
+                var sansEnds = icon.Replace(">", "");
+                var ends = icon.Length - sansEnds.Length;
+                isIconText = starts == ends;
             }
             if (isIconText)
                 IconText = icon;

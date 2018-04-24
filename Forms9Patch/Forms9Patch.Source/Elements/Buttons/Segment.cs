@@ -6,12 +6,12 @@ using System.Reflection;
 
 namespace Forms9Patch
 {
-	/// <summary>
-	/// Model for Segment.
-	/// </summary>
-	[ContentProperty("HtmlText")]
-	public class Segment : BindableObject, ISegment
-	{
+    /// <summary>
+    /// Model for Segment.
+    /// </summary>
+    [ContentProperty("HtmlText")]
+    public class Segment : BindableObject, ISegment
+    {
         #region Obsolete Properties
         /// <summary>
         /// OBSOLETE: Use TextColorProperty
@@ -60,7 +60,7 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.Image IconImage
         {
-            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
+            get => (Forms9Patch.Image)GetValue(IconImageProperty);
             set => SetValue(IconImageProperty, value);
         }
         #endregion IconImage property
@@ -76,8 +76,8 @@ namespace Forms9Patch
         /// <value>The icon text.</value>
         public string IconText
         {
-            get => (string)GetValue(IconTextProperty); 
-            set => SetValue(IconTextProperty, value); 
+            get => (string)GetValue(IconTextProperty);
+            set => SetValue(IconTextProperty, value);
         }
         #endregion IconText property
 
@@ -92,8 +92,8 @@ namespace Forms9Patch
         /// <value>The text.</value>
         public string Text
         {
-            get => (string)GetValue(TextProperty); 
-            set => SetValue(TextProperty, value); 
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
         #endregion
 
@@ -101,8 +101,8 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null, 
-            propertyChanged: (bindable, oldValue, newValue) => 
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null,
+            propertyChanged: (bindable, oldValue, newValue) =>
             {
                 //System.Diagnostics.Debug.WriteLine("");
             });
@@ -112,7 +112,7 @@ namespace Forms9Patch
         /// <value>The formatted text.</value>
         public string HtmlText
         {
-            get => (string)GetValue(HtmlTextProperty); 
+            get => (string)GetValue(HtmlTextProperty);
             set => SetValue(HtmlTextProperty, value);
         }
         #endregion HtmlText property
@@ -128,8 +128,8 @@ namespace Forms9Patch
         /// <value>The color of the font.</value>
         public Color TextColor
         {
-            get => (Color)GetValue(TextColorProperty); 
-            set => SetValue(TextColorProperty, value); 
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
         #endregion
 
@@ -145,7 +145,7 @@ namespace Forms9Patch
         /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
-            get => (FontAttributes)GetValue(FontAttributesProperty); 
+            get => (FontAttributes)GetValue(FontAttributesProperty);
             set
             {
                 FontAttributesSet = true;
@@ -165,7 +165,7 @@ namespace Forms9Patch
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         public bool IsEnabled
         {
-            get => (bool)GetValue(IsEnabledProperty); 
+            get => (bool)GetValue(IsEnabledProperty);
             set => SetValue(IsEnabledProperty, value);
         }
         #endregion IsEnabled property
@@ -181,7 +181,7 @@ namespace Forms9Patch
         /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
         public bool IsSelected
         {
-            get => (bool)GetValue(IsSelectedProperty); 
+            get => (bool)GetValue(IsSelectedProperty);
             set => SetValue(IsSelectedProperty, value);
         }
         #endregion IsSelected property
@@ -197,8 +197,8 @@ namespace Forms9Patch
         /// <value>The iamge/label orientation.</value>
         public StackOrientation Orientation
         {
-            get => (StackOrientation)GetValue(OrientationProperty); 
-            set => SetValue(OrientationProperty, value); 
+            get => (StackOrientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
         #endregion Orientation property
 
@@ -224,8 +224,8 @@ namespace Forms9Patch
         {
             //get { return (ICommand)GetValue (CommandProperty); }
             //set { SetValue (CommandProperty, value); }
-            get => _button.Command; 
-            set => _button.Command = value; 
+            get => _button.Command;
+            set => _button.Command = value;
         }
         #endregion ICommand property
 
@@ -247,8 +247,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get => _button.CommandParameter; 
-            set => _button.CommandParameter = value; 
+            get => _button.CommandParameter;
+            set => _button.CommandParameter = value;
         }
         #endregion ICommandParameter property
 
@@ -257,8 +257,8 @@ namespace Forms9Patch
         /// Gets the visual element used to render the Segment (to support Bubble Popup).
         /// </summary>
         /// <value>The visual element.</value>
-        public VisualElement VisualElement => _button; 
-        
+        public VisualElement VisualElement => _button;
+
         #endregion
 
         #endregion ISegment properties
@@ -372,7 +372,7 @@ namespace Forms9Patch
         public Segment(string text, Forms9Patch.Image image) : this()
         {
             Text = text;
-            if (image!=null)
+            if (image != null)
                 IconImage = image;
         }
 
@@ -381,10 +381,10 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="text"></param>
         /// <param name="imageSource"></param>
-        public Segment(string text, Xamarin.Forms.ImageSource imageSource=null) : this()
+        public Segment(string text, Xamarin.Forms.ImageSource imageSource = null) : this()
         {
             Text = text;
-            if (imageSource!=null)
+            if (imageSource != null)
                 IconImage = new Forms9Patch.Image(imageSource);
         }
 
@@ -394,10 +394,10 @@ namespace Forms9Patch
         /// <param name="text">Segment's text</param>
         /// <param name="icon">Segments's icon (either EmbeddedResourceId or HtmlText)</param>
         /// <param name="assembly">Assembly that has EmbeddedResource used for Icon</param>
-        public Segment(string text, string icon, Assembly assembly=null) : this()
+        public Segment(string text, string icon, Assembly assembly = null) : this()
         {
             Text = text;
-            bool isIconText=false;
+            bool isIconText = false;
 
 
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(icon);
@@ -407,20 +407,13 @@ namespace Forms9Patch
             var match = Forms9Patch.ImageSource.BestEmbeddedMultiResourceMatch(icon, assembly);
 
             //if (icon.Contains("<") && icon.Contains("/>"))
-            if (match==null)
+            if (match == null)
             {
-                int opens=0, closes=0;
-                for(int i=0;i<icon.Length;i++)
-                {
-                    if (icon[i] == '<')
-                        opens++;
-                    else if (icon[i]=='/' && (i+2)<icon.Length && icon[i+1]=='>')
-                    {
-                        closes++;
-                        i++;
-                    }
-                }
-                isIconText = opens > 0 && opens == closes;
+                var sansStarts = icon.Replace("<", "");
+                var starts = icon.Length - sansStarts.Length;
+                var sansEnds = icon.Replace(">", "");
+                var ends = icon.Length - sansEnds.Length;
+                isIconText = starts == ends;
             }
             if (isIconText)
                 IconText = icon;
@@ -439,10 +432,10 @@ namespace Forms9Patch
         /// <returns>The property changed.</returns>
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
-		{
-			base.OnPropertyChanged(propertyName);
-			switch (propertyName)
-			{
+        {
+            base.OnPropertyChanged(propertyName);
+            switch (propertyName)
+            {
                 case "IconImage":
                     _button.IconImage = IconImage;
                     break;
@@ -462,16 +455,16 @@ namespace Forms9Patch
                     _button.FontAttributes = FontAttributes;
                     break;
                 case "IsEnabled":
-					_button.IsEnabled = IsEnabled;
-					break;
-				case "IsSelected":
-					_button.IsSelected = IsSelected;
-					break;
-				case "Orienation":
-					_button.Orientation = Orientation;
-					break;
-			}
-		}
+                    _button.IsEnabled = IsEnabled;
+                    break;
+                case "IsSelected":
+                    _button.IsSelected = IsSelected;
+                    break;
+                case "Orienation":
+                    _button.Orientation = Orientation;
+                    break;
+            }
+        }
         #endregion
 
 
@@ -480,9 +473,9 @@ namespace Forms9Patch
         /// Tap this instance.
         /// </summary>
         public void Tap()
-		{
-			_button.Tap();
-		}
+        {
+            _button.Tap();
+        }
 
         /// <summary>
         /// Programmically click the segement
