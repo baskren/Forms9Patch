@@ -21,8 +21,8 @@ namespace Forms9Patch
 		/// <value>The components.</value>
 		public ObservableCollection<ObservableCollection<object>> Components
 		{
-		    get { return (ObservableCollection<ObservableCollection<object>>)GetValue(ComponentsProperty); }
-		    set { SetValue(ComponentsProperty, value); }
+		    get => (ObservableCollection<ObservableCollection<object>>)GetValue(ComponentsProperty); 
+		    set => SetValue(ComponentsProperty, value); 
 		}
 
 		/// <summary>
@@ -35,8 +35,8 @@ namespace Forms9Patch
 		/// <value>The row sizes.</value>
 		public List<double> RowSizes
 		{
-			get { return (List<double>)GetValue(RowSizesProperty); }
-			set { SetValue(RowSizesProperty, value); }
+			get => (List<double>)GetValue(RowSizesProperty); 
+			set => SetValue(RowSizesProperty, value); 
 		}
 
 		/// <summary>
@@ -49,8 +49,8 @@ namespace Forms9Patch
 		/// <value>The height of the row.</value>
 		public int RowHeight
 		{
-			get { return (int)GetValue(RowHeightProperty); }
-			set { SetValue(RowHeightProperty, value); }
+			get => (int)GetValue(RowHeightProperty); 
+			set => SetValue(RowHeightProperty, value); 
 		}
 
 		#endregion
@@ -85,21 +85,19 @@ namespace Forms9Patch
 				_eventManager?.RemoveEventHandler("SelectionChanged", value);
 			}
 		}
-		#endregion
+        #endregion
 
 
-		#region Fields
-		//List<Xamarin.Forms.ListView> _listViews = new List<ListView>();
-		//ObservableCollection<ObservableCollection<string>> _components = new ObservableCollection<ObservableCollection<string>>();
-		//Grid _grid = new Grid();
-		#endregion
+        #region Fields
+        //List<Xamarin.Forms.ListView> _listViews = new List<ListView>();
+        //ObservableCollection<ObservableCollection<string>> _components = new ObservableCollection<ObservableCollection<string>>();
+        //Grid _grid = new Grid();
+        #endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.MultiComponentPicker"/> class.
-		/// </summary>
-		public MultiComponentPicker()
-		{
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.MultiComponentPicker"/> class.
+        /// </summary>
+        public MultiComponentPicker() { }
 
 
 		#region Change management

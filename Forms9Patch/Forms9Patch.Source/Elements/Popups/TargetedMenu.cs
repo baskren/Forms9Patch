@@ -26,7 +26,7 @@ namespace Forms9Patch
         /// <value>The buttons.</value>
         public IList<Segment> Segments
         {
-            get { return _segments; }
+            get => _segments; 
             set
             {
                 _segments.Clear();
@@ -49,8 +49,8 @@ namespace Forms9Patch
         /// </summary>
         public double FontSize
         {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
+            get => (double)GetValue(FontSizeProperty); 
+            set => SetValue(FontSizeProperty, value); 
         }
         #endregion FontSize property
 
@@ -64,8 +64,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.Color TextColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(TextColorProperty); 
+            set => SetValue(TextColorProperty, value); 
         }
         #endregion TextColor property
 
@@ -79,8 +79,8 @@ namespace Forms9Patch
         /// </summary>
         public Color SeparatorColor
         {
-            get { return (Color)GetValue(SeparatorColorProperty); }
-            set { SetValue(SeparatorColorProperty, value); }
+            get => (Color)GetValue(SeparatorColorProperty); 
+            set => SetValue(SeparatorColorProperty, value); 
         }
         #endregion SeparatorColor property
 
@@ -94,8 +94,8 @@ namespace Forms9Patch
         /// </summary>
         public double SeparatorWidth
         {
-            get { return (double)GetValue(SeparatorWidthProperty); }
-            set { SetValue(SeparatorWidthProperty, value); }
+            get => (double)GetValue(SeparatorWidthProperty); 
+            set => SetValue(SeparatorWidthProperty, value); 
         }
         #endregion SeparatorWidth property
 
@@ -109,8 +109,8 @@ namespace Forms9Patch
         /// </summary>
         public HapticEffect HapticEffect
         {
-            get { return (HapticEffect)GetValue(HapticEffectProperty); }
-            set { SetValue(HapticEffectProperty, value); }
+            get => (HapticEffect)GetValue(HapticEffectProperty); 
+            set => SetValue(HapticEffectProperty, value); 
         }
         #endregion HapticEffect property
 
@@ -124,8 +124,8 @@ namespace Forms9Patch
         /// </summary>
         public KeyClicks HapticMode
         {
-            get { return (KeyClicks)GetValue(HapticModeProperty); }
-            set { SetValue(HapticModeProperty, value); }
+            get => (KeyClicks)GetValue(HapticModeProperty); 
+            set => SetValue(HapticModeProperty, value); 
         }
         #endregion HapticMode property
 

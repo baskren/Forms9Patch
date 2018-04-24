@@ -169,6 +169,7 @@ namespace Forms9Patch.UWP
 
         public bool ScrollBy(double delta, bool animated)
         {
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + delta + ", " + animated + ")");
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null, !animated);
             return false;
@@ -176,6 +177,7 @@ namespace Forms9Patch.UWP
 
         public bool ScrollTo(double offset, bool animated)
         {
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "("+offset+", " + animated + ")");
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, offset, null, !animated);
             return false;

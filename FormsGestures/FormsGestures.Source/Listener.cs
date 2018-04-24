@@ -21,10 +21,8 @@ namespace FormsGestures
         /// <summary>
         /// VisualElement that is the focus of this Listener
         /// </summary>
-        public VisualElement Element
-        {
-            get { return _element; }
-        }
+        public VisualElement Element => _element; 
+        
 
 
         #region Events / Commands
@@ -125,10 +123,27 @@ namespace FormsGestures
         #endregion
 
         #region Down
+        event EventHandler<DownUpEventArgs> _down;
         /// <summary>
         /// Down event handler
         /// </summary>
-        public event EventHandler<DownUpEventArgs> Down;
+        public event EventHandler<DownUpEventArgs> Down
+        {
+            add
+            {
+                bool oldHandlesDownState = HandlesDown;
+                _down += value;
+                if (HandlesDown != oldHandlesDownState)
+                    HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
+            }
+            remove
+            {
+                bool oldHandlesDownState = HandlesDown;
+                _down -= value;
+                if (HandlesDown != oldHandlesDownState)
+                    HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
+            }
+        }
         /// <summary>
         /// backing store for command invoked upon down event
         /// </summary>
@@ -143,15 +158,21 @@ namespace FormsGestures
         public ICommand DownCommand
         {
             get { return (ICommand)GetValue(DownCommandProperty); }
-            set { SetValue(DownCommandProperty, value); }
+            set
+            {
+                bool oldHandlesDownState = HandlesDown;
+                SetValue(DownCommandProperty, value);
+                if (HandlesDown != oldHandlesDownState)
+                    HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
+            }
         }
         /// <summary>
         /// parameter passed with command invoked upon down event
         /// </summary>
         public object DownCommandParameter
         {
-            get { return GetValue(DownCommandParameterProperty); }
-            set { SetValue(DownCommandParameterProperty, value); }
+            get => GetValue(DownCommandParameterProperty); 
+            set => SetValue(DownCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for DownCallback property
@@ -167,29 +188,38 @@ namespace FormsGestures
         public Action<Listener, object> DownCallback
         {
             get { return (Action<Listener, object>)GetValue(DownCallbackProperty); }
-            set { SetValue(DownCallbackProperty, value); }
+            set
+            {
+                bool oldHandlesDownState = HandlesDown;
+                SetValue(DownCallbackProperty, value);
+                if (HandlesDown != oldHandlesDownState)
+                    HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
+            }
         }
         /// <summary>
         /// parameter passed with to Action invoked invoked upon down event
         /// </summary>
         public object DownCallbackParameter
         {
-            get { return GetValue(DownCallbackParameterProperty); }
-            set { SetValue(DownCallbackParameterProperty, value); }
+            get => GetValue(DownCallbackParameterProperty); 
+            set => SetValue(DownCallbackParameterProperty, value); 
         }
         /// <summary>
         /// returns if Listener is configured to handle down touch 
         /// </summary>
-        public bool HandlesDown
-        {
-            get { return Down != null || DownCommand != null || DownCallback != null; }
-        }
+        public bool HandlesDown => _down != null || DownCommand != null || DownCallback != null; 
+        
+        /// <summary>
+        /// Event to notify if the ability to handle down events has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesDownChanged;
+        
         internal bool OnDown(DownUpEventArgs args)
         {
             bool result = false;
             if (HandlesDown)
             {
-                RaiseEvent<DownUpEventArgs>(Down, args);
+                RaiseEvent<DownUpEventArgs>(_down, args);
                 ExecuteCommand(DownCommand, DownCommandParameter, args);
                 result = args.Handled;
             }
@@ -198,10 +228,27 @@ namespace FormsGestures
         #endregion
 
         #region Up
+        event EventHandler<DownUpEventArgs> _up;
         /// <summary>
         /// Up event motion handler
         /// </summary>
-        public event EventHandler<DownUpEventArgs> Up;
+        public event EventHandler<DownUpEventArgs> Up
+        {
+            add
+            {
+                var oldHandlesUp = HandlesUp;
+                _up += value;
+                if (HandlesUp != oldHandlesUp)
+                    HandlesUpChanged?.Invoke(this, !oldHandlesUp);
+            }
+            remove
+            {
+                var oldHandlesUp = HandlesUp;
+                _up -= value;
+                if (HandlesUp != oldHandlesUp)
+                    HandlesUpChanged?.Invoke(this, !oldHandlesUp);
+            }
+        }
         /// <summary>
         /// backing store for UpCommand
         /// </summary>
@@ -216,15 +263,21 @@ namespace FormsGestures
         public ICommand UpCommand
         {
             get { return (ICommand)GetValue(UpCommandProperty); }
-            set { SetValue(UpCommandProperty, value); }
+            set
+            {
+                var oldHandlesUp = HandlesUp;
+                SetValue(UpCommandProperty, value);
+                if (HandlesUp != oldHandlesUp)
+                    HandlesUpChanged?.Invoke(this, !oldHandlesUp);
+            }
         }
         /// <summary>
         /// parameter passed to command invoked upon up touch
         /// </summary>
         public object UpCommandParameter
         {
-            get { return GetValue(UpCommandParameterProperty); }
-            set { SetValue(UpCommandParameterProperty, value); }
+            get => GetValue(UpCommandParameterProperty); 
+            set => SetValue(UpCommandParameterProperty, value); 
         }
         /// <summary>
         /// Backing store for UpCallback
@@ -240,29 +293,39 @@ namespace FormsGestures
         public Action<Listener, object> UpCallback
         {
             get { return (Action<Listener, object>)GetValue(UpCallbackProperty); }
-            set { SetValue(UpCallbackProperty, value); }
+            set
+            {
+                var oldHandlesUp = HandlesUp;
+                SetValue(UpCallbackProperty, value);
+                if (HandlesUp != oldHandlesUp)
+                    HandlesUpChanged?.Invoke(this, !oldHandlesUp);
+            }
         }
         /// <summary>
         /// Parameter passed to Action invoked upon up touch
         /// </summary>
         public object UpCallbackParameter
         {
-            get { return GetValue(UpCallbackParameterProperty); }
-            set { SetValue(UpCallbackParameterProperty, value); }
+            get => GetValue(UpCallbackParameterProperty); 
+            set => SetValue(UpCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does this Listener invoke anything upon an up touch?
         /// </summary>
-        public bool HandlesUp
-        {
-            get { return Up != null || UpCommand != null || UpCallback != null; }
-        }
+        public bool HandlesUp => _up != null || UpCommand != null || UpCallback != null; 
+        
+
+        /// <summary>
+        /// Event triggered when HandlesUp status has changed;
+        /// </summary>
+        public event EventHandler<bool> HandlesUpChanged;
+
         internal bool OnUp(DownUpEventArgs args)
         {
             bool result = false;
             if (HandlesUp)
             {
-                RaiseEvent<DownUpEventArgs>(Up, args);
+                RaiseEvent<DownUpEventArgs>(_up, args);
                 ExecuteCommand(UpCommand, UpCommandParameter, args);
                 result = args.Handled;
             }
@@ -271,10 +334,27 @@ namespace FormsGestures
         #endregion
 
         #region Tapping
+        event EventHandler<TapEventArgs> _tapping;
         /// <summary>
         /// Tapping event handler
         /// </summary>
-        public event EventHandler<TapEventArgs> Tapping;
+        public event EventHandler<TapEventArgs> Tapping
+        {
+            add
+            {
+                var oldHandlesTapping = HandlesTapping;
+                _tapping += value;
+                if (oldHandlesTapping != HandlesTapping)
+                    HandlesTappingChanged?.Invoke(this, !oldHandlesTapping);
+            }
+            remove
+            {
+                var oldHandlesTapping = HandlesTapping;
+                _tapping -= value;
+                if (oldHandlesTapping != HandlesTapping)
+                    HandlesTappingChanged?.Invoke(this, !oldHandlesTapping);
+            }
+        }
         /// <summary>
         /// backing store for the TappingCommand property
         /// </summary>
@@ -289,15 +369,21 @@ namespace FormsGestures
         public ICommand TappingCommand
         {
             get { return (ICommand)GetValue(TappingCommandProperty); }
-            set { SetValue(TappingCommandProperty, value); }
+            set
+            {
+                var oldHandlesTapping = HandlesTapping;
+                SetValue(TappingCommandProperty, value);
+                if (oldHandlesTapping != HandlesTapping)
+                    HandlesTappingChanged?.Invoke(this, !oldHandlesTapping);
+            }
         }
         /// <summary>
         /// Parameter padded to command invoked during tap event
         /// </summary>
         public object TappingCommandParameter
         {
-            get { return GetValue(TappingCommandParameterProperty); }
-            set { SetValue(TappingCommandParameterProperty, value); }
+            get => GetValue(TappingCommandParameterProperty); 
+            set => SetValue(TappingCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the TappingCallback property
@@ -312,30 +398,40 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> TappingCallback
         {
-            get { return (Action<Listener, object>)GetValue(TappingCallbackProperty); }
-            set { SetValue(TappingCallbackProperty, value); }
+            get =>  (Action<Listener, object>)GetValue(TappingCallbackProperty);
+            set
+            {
+                var oldHandlesTapping = HandlesTapping;
+                SetValue(TappingCallbackProperty, value);
+                if (oldHandlesTapping != HandlesTapping)
+                    HandlesTappingChanged?.Invoke(this, !oldHandlesTapping);
+            }
         }
         /// <summary>
         /// Parameter passed to Action invoked during tap event
         /// </summary>
         public object TappingCallbackParameter
         {
-            get { return GetValue(TappingCallbackParameterProperty); }
-            set { SetValue(TappingCallbackParameterProperty, value); }
+            get => GetValue(TappingCallbackParameterProperty); 
+            set => SetValue(TappingCallbackParameterProperty, value); 
         }
         /// <summary>
         /// does this Listner invoke anything during a tap motion?
         /// </summary>
-        public bool HandlesTapping
-        {
-            get { return Tapping != null || TappingCommand != null || TappingCallback != null; }
-        }
+        public bool HandlesTapping => _tapping != null || TappingCommand != null || TappingCallback != null; 
+        
+
+        /// <summary>
+        /// Event triggered when HandlesTapping state has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesTappingChanged;
+
         internal bool OnTapping(TapEventArgs args)
         {
             bool result = false;
             if (HandlesTapping)
             {
-                RaiseEvent<TapEventArgs>(Tapping, args);
+                RaiseEvent<TapEventArgs>(_tapping, args);
                 ExecuteCommand(TappingCommand, TappingCommandParameter, args);
                 result = args.Handled;
             }
@@ -344,10 +440,24 @@ namespace FormsGestures
         #endregion
 
         #region Tapped
+        event EventHandler<TapEventArgs> _tapped;
         /// <summary>
         /// Tapped event handler
         /// </summary>
-        public event EventHandler<TapEventArgs> Tapped;
+        public event EventHandler<TapEventArgs> Tapped
+        {
+            add
+            {
+                var oldHandlesTapped = HandlesTapped;
+                _tapped += value;
+                if (oldHandlesTapped != HandlesTapped)
+                    HandlesTappedChanged?.Invoke(this, !oldHandlesTapped);
+            }
+            remove
+            {
+                _tapped -= value;
+            }
+        }
         /// <summary>
         /// backing store for the TappedCommand property
         /// </summary>
@@ -361,16 +471,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand TappedCommand
         {
-            get { return (ICommand)GetValue(TappedCommandProperty); }
-            set { SetValue(TappedCommandProperty, value); }
+            get => (ICommand)GetValue(TappedCommandProperty); 
+            set
+            {
+                var oldHandlesTapped = HandlesTapped;
+                SetValue(TappedCommandProperty, value);
+                if (oldHandlesTapped != HandlesTapped)
+                    HandlesTappedChanged?.Invoke(this, !oldHandlesTapped);
+            }
         }
         /// <summary>
         /// Parameter passed with Command invoked after a tap motion
         /// </summary>
         public object TappedCommandParameter
         {
-            get { return GetValue(TappedCommandParameterProperty); }
-            set { SetValue(TappedCommandParameterProperty, value); }
+            get => GetValue(TappedCommandParameterProperty); 
+            set => SetValue(TappedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for a TappedCallback property
@@ -385,30 +501,43 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> TappedCallback
         {
-            get { return (Action<Listener, object>)GetValue(TappedCallbackProperty); }
-            set { SetValue(TappedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(TappedCallbackProperty); 
+            set
+            {
+                var oldHandlesTapped = HandlesTapped;
+                SetValue(TappedCallbackProperty, value);
+                if (oldHandlesTapped != HandlesTapped)
+                    HandlesTappedChanged?.Invoke(this, !oldHandlesTapped);
+            }
         }
         /// <summary>
         /// Parameter passed to Action invoked after a tap motion
         /// </summary>
         public object TappedCallbackParameter
         {
-            get { return GetValue(TappedCallbackParameterProperty); }
-            set { SetValue(TappedCallbackParameterProperty, value); }
+            get => GetValue(TappedCallbackParameterProperty); 
+            set
+            {
+                SetValue(TappedCallbackParameterProperty, value);
+            }
         }
         /// <summary>
         /// does this Listener invoke anything after a tap motion?
         /// </summary>
-        public bool HandlesTapped
-        {
-            get { return Tapped != null || TappedCommand != null || TappedCallback != null; }
-        }
+        public bool HandlesTapped => _tapped != null || TappedCommand != null || TappedCallback != null; 
+        
+
+        /// <summary>
+        /// Event triggered when HandlesTapped has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesTappedChanged;
+
         internal bool OnTapped(TapEventArgs args)
         {
             bool result = false;
             if (HandlesTapped)
             {
-                RaiseEvent<TapEventArgs>(Tapped, args);
+                RaiseEvent<TapEventArgs>(_tapped, args);
                 ExecuteCommand(TappedCommand, TappedCommandParameter, args);
                 result = args.Handled;
             }
@@ -417,10 +546,28 @@ namespace FormsGestures
         #endregion
 
         #region DoubleTapped
+        event EventHandler<TapEventArgs> _doubleTapped;
+
         /// <summary>
         /// DoubleTapped event handler
         /// </summary>
-        public event EventHandler<TapEventArgs> DoubleTapped;
+        public event EventHandler<TapEventArgs> DoubleTapped
+        {
+            add
+            {
+                var oldHandlesDoubleTapped = HandlesDoubleTapped;
+                _doubleTapped += value;
+                if (oldHandlesDoubleTapped != HandlesDoubleTapped)
+                    HandlesDoubleTappedChanged?.Invoke(this, !oldHandlesDoubleTapped);
+            }
+            remove
+            {
+                var oldHandlesDoubleTapped = HandlesDoubleTapped;
+                _doubleTapped -= value;
+                if (oldHandlesDoubleTapped != HandlesDoubleTapped)
+                    HandlesDoubleTappedChanged?.Invoke(this, !oldHandlesDoubleTapped);
+            }
+        }
         /// <summary>
         /// backing store for the DoubleTappedCommand property
         /// </summary>
@@ -434,16 +581,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand DoubleTappedCommand
         {
-            get { return (ICommand)GetValue(DoubleTappedCommandProperty); }
-            set { SetValue(DoubleTappedCommandProperty, value); }
+            get => (ICommand)GetValue(DoubleTappedCommandProperty); 
+            set
+            {
+                var oldHandlesDoubleTapped = HandlesDoubleTapped;
+                SetValue(DoubleTappedCommandProperty, value);
+                if (oldHandlesDoubleTapped != HandlesDoubleTapped)
+                    HandlesDoubleTappedChanged?.Invoke(this, !oldHandlesDoubleTapped);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after a double tap motion
         /// </summary>
         public object DoubleTappedCommandParameter
         {
-            get { return GetValue(DoubleTappedCommandParameterProperty); }
-            set { SetValue(DoubleTappedCommandParameterProperty, value); }
+            get => GetValue(DoubleTappedCommandParameterProperty); 
+            set => SetValue(DoubleTappedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for DoubleTappedCallback property
@@ -458,30 +611,36 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> DoubleTappedCallback
         {
-            get { return (Action<Listener, object>)GetValue(DoubleTappedCallbackProperty); }
-            set { SetValue(DoubleTappedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(DoubleTappedCallbackProperty); 
+            set
+            {
+                var oldHandlesDoubleTapped = HandlesDoubleTapped;
+                SetValue(DoubleTappedCallbackProperty, value);
+                if (oldHandlesDoubleTapped != HandlesDoubleTapped)
+                    HandlesDoubleTappedChanged?.Invoke(this, !oldHandlesDoubleTapped);
+            }
         }
         /// <summary>
         /// Parameter sent to Action invoked after a double tap motion
         /// </summary>
         public object DoubleTappedCallbackParameter
         {
-            get { return GetValue(DoubleTappedCallbackParameterProperty); }
-            set { SetValue(DoubleTappedCallbackParameterProperty, value); }
+            get => GetValue(DoubleTappedCallbackParameterProperty); 
+            set => SetValue(DoubleTappedCallbackParameterProperty, value); 
         }
         /// <summary>
         /// does this Listener invoke anything upon double tap motion?
         /// </summary>
-        public bool HandlesDoubleTapped
-        {
-            get { return DoubleTapped != null || DoubleTappedCommand != null || DoubleTappedCallback != null; }
-        }
+        public bool HandlesDoubleTapped => _doubleTapped != null || DoubleTappedCommand != null || DoubleTappedCallback != null;
+
+        public event EventHandler<bool> HandlesDoubleTappedChanged;
+        
         internal bool OnDoubleTapped(TapEventArgs args)
         {
             bool result = false;
             if (HandlesDoubleTapped)
             {
-                RaiseEvent<TapEventArgs>(DoubleTapped, args);
+                RaiseEvent<TapEventArgs>(_doubleTapped, args);
                 ExecuteCommand(DoubleTappedCommand, DoubleTappedCommandParameter, args);
                 result = args.Handled;
             }
@@ -490,10 +649,28 @@ namespace FormsGestures
         #endregion
 
         #region LongPressing
+        event EventHandler<LongPressEventArgs> _longPressing;
+
         /// <summary>
         /// LongPressing event handler
         /// </summary>
-        public event EventHandler<LongPressEventArgs> LongPressing;
+        public event EventHandler<LongPressEventArgs> LongPressing
+        {
+            add
+            {
+                var oldHandlesLongPressing = HandlesLongPressing;
+                _longPressing += value;
+                if (oldHandlesLongPressing != HandlesLongPressing)
+                    HandlesLongPressingChanged?.Invoke(this, !oldHandlesLongPressing);
+            }
+            remove
+            {
+                var oldHandlesLongPressing = HandlesLongPressing;
+                _longPressing -= value;
+                if (oldHandlesLongPressing != HandlesLongPressing)
+                    HandlesLongPressingChanged?.Invoke(this, !oldHandlesLongPressing);
+            }
+        }
         /// <summary>
         /// backing store for LongPressingCommand property
         /// </summary>
@@ -507,16 +684,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand LongPressingCommand
         {
-            get { return (ICommand)GetValue(LongPressingCommandProperty); }
-            set { SetValue(LongPressingCommandProperty, value); }
+            get => (ICommand)GetValue(LongPressingCommandProperty); 
+            set
+            {
+                var oldHandlesLongPressing = HandlesLongPressing;
+                SetValue(LongPressingCommandProperty, value);
+                if (oldHandlesLongPressing != HandlesLongPressing)
+                    HandlesLongPressingChanged?.Invoke(this, !oldHandlesLongPressing);
+            }
         }
         /// <summary>
         /// Parameter sent to Command invoked during long pressing motion
         /// </summary>
         public object LongPressingCommandParameter
         {
-            get { return GetValue(LongPressingCommandParameterProperty); }
-            set { SetValue(LongPressingCommandParameterProperty, value); }
+            get => GetValue(LongPressingCommandParameterProperty); 
+            set => SetValue(LongPressingCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for LongPressingCallback property
@@ -531,31 +714,40 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> LongPressingCallback
         {
-            get { return (Action<Listener, object>)GetValue(LongPressingCallbackProperty); }
-            set { SetValue(LongPressingCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(LongPressingCallbackProperty); 
+            set
+            {
+                var oldHandlesLongPressing = HandlesLongPressing;
+                SetValue(LongPressingCallbackProperty, value);
+                if (oldHandlesLongPressing != HandlesLongPressing)
+                    HandlesLongPressingChanged?.Invoke(this, !oldHandlesLongPressing);
+            }
         }
         /// <summary>
         /// Parameter sent to Action invoked during long pressing motion
         /// </summary>
         public object LongPressingCallbackParameter
         {
-            get { return GetValue(LongPressingCallbackParameterProperty); }
-            set { SetValue(LongPressingCallbackParameterProperty, value); }
+            get => GetValue(LongPressingCallbackParameterProperty); 
+            set => SetValue(LongPressingCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does this Listner invoke anything during long press motion?
         /// </summary>
-        public bool HandlesLongPressing
-        {
-            get { return LongPressing != null || LongPressingCommand != null || LongPressingCallback != null; }
-        }
+        public bool HandlesLongPressing => _longPressing != null || LongPressingCommand != null || LongPressingCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesLongPressing has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesLongPressingChanged;
+
         internal bool OnLongPressing(LongPressEventArgs args)
         {
             bool result = false;
             if (HandlesLongPressing)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<LongPressEventArgs>(LongPressing, args);
+                RaiseEvent<LongPressEventArgs>(_longPressing, args);
                 ExecuteCommand(LongPressingCommand, LongPressingCommandParameter, args);
                 result = args.Handled;
             }
@@ -564,10 +756,28 @@ namespace FormsGestures
         #endregion
 
         #region LongPressed
+        event EventHandler<LongPressEventArgs> _longPressed;
+
         /// <summary>
         /// LongPressed event handler
         /// </summary>
-        public event EventHandler<LongPressEventArgs> LongPressed;
+        public event EventHandler<LongPressEventArgs> LongPressed
+        {
+            add
+            {
+                var oldHandlesLongPressed = HandlesLongPressed;
+                _longPressed += value;
+                if (oldHandlesLongPressed != HandlesLongPressed)
+                    HandlesLongPressedChanged?.Invoke(this, !oldHandlesLongPressed);
+            }
+            remove
+            {
+                var oldHandlesLongPressed = HandlesLongPressed;
+                _longPressed -= value;
+                if (oldHandlesLongPressed != HandlesLongPressed)
+                    HandlesLongPressedChanged?.Invoke(this, !oldHandlesLongPressed);
+            }
+        }
         /// <summary>
         /// backing store for LongPressedCommand property
         /// </summary>
@@ -581,16 +791,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand LongPressedCommand
         {
-            get { return (ICommand)GetValue(LongPressedCommandProperty); }
-            set { SetValue(LongPressedCommandProperty, value); }
+            get => (ICommand)GetValue(LongPressedCommandProperty); 
+            set
+            {
+                var oldHandlesLongPressed = HandlesLongPressed;
+                SetValue(LongPressedCommandProperty, value);
+                if (oldHandlesLongPressed != HandlesLongPressed)
+                    HandlesLongPressedChanged?.Invoke(this, !oldHandlesLongPressed);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after long press motion
         /// </summary>
         public object LongPressedCommandParameter
         {
-            get { return GetValue(LongPressedCommandParameterProperty); }
-            set { SetValue(LongPressedCommandParameterProperty, value); }
+            get => GetValue(LongPressedCommandParameterProperty); 
+            set => SetValue(LongPressedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for LongPressedCallback property
@@ -605,31 +821,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> LongPressedCallback
         {
-            get { return (Action<Listener, object>)GetValue(LongPressedCallbackProperty); }
-            set { SetValue(LongPressedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(LongPressedCallbackProperty); 
+            set
+            {
+                var oldHandlesLongPressed = HandlesLongPressed;
+                SetValue(LongPressedCallbackProperty, value);
+                if (oldHandlesLongPressed != HandlesLongPressed)
+                    HandlesLongPressedChanged?.Invoke(this, !oldHandlesLongPressed);
+            }
         }
         /// <summary>
         /// Parameter sent with Action invoked after long press motion
         /// </summary>
         public object LongPressedCallbackParameter
         {
-            get { return GetValue(LongPressedCallbackParameterProperty); }
-            set { SetValue(LongPressedCallbackParameterProperty, value); }
+            get => GetValue(LongPressedCallbackParameterProperty); 
+            set => SetValue(LongPressedCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does this Listener invoke anything after a long press
         /// </summary>
-        public bool HandlesLongPressed
-        {
-            get { return LongPressed != null || LongPressedCommand != null || LongPressedCallback != null; }
-        }
+        public bool HandlesLongPressed => _longPressed != null || LongPressedCommand != null || LongPressedCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesLongPressed had changed
+        /// </summary>
+        public event EventHandler<bool> HandlesLongPressedChanged;
+
+
         internal bool OnLongPressed(LongPressEventArgs args)
         {
             bool result = false;
             if (HandlesLongPressed)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<LongPressEventArgs>(LongPressed, args);
+                RaiseEvent<LongPressEventArgs>(_longPressed, args);
                 ExecuteCommand(LongPressedCommand, LongPressedCommandParameter, args);
                 result = args.Handled;
             }
@@ -638,10 +864,28 @@ namespace FormsGestures
         #endregion
 
         #region Pinching
+        event EventHandler<PinchEventArgs> _pinching;
+
         /// <summary>
         /// Pinching event listener
         /// </summary>
-        public event EventHandler<PinchEventArgs> Pinching;
+        public event EventHandler<PinchEventArgs> Pinching
+        {
+            add
+            {
+                var oldHandlesPinching = HandlesPinching;
+                _pinching += value;
+                if (oldHandlesPinching != HandlesPinching)
+                    HandlesPinchingChanged?.Invoke(this, !oldHandlesPinching);
+            }
+            remove
+            {
+                var oldHandlesPinching = HandlesPinching;
+                _pinching -= value;
+                if (oldHandlesPinching != HandlesPinching)
+                    HandlesPinchingChanged?.Invoke(this, !oldHandlesPinching);
+            }
+        }
         /// <summary>
         /// backing store for the PinchingCommand property
         /// </summary>
@@ -655,16 +899,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand PinchingCommand
         {
-            get { return (ICommand)GetValue(PinchingCommandProperty); }
-            set { SetValue(PinchingCommandProperty, value); }
+            get => (ICommand)GetValue(PinchingCommandProperty); 
+            set
+            {
+                var oldHandlesPinching = HandlesPinching;
+                SetValue(PinchingCommandProperty, value);
+                if (oldHandlesPinching != HandlesPinching)
+                    HandlesPinchingChanged?.Invoke(this, !oldHandlesPinching);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked during pinch motion
         /// </summary>
         public object PinchingCommandParameter
         {
-            get { return GetValue(PinchingCommandParameterProperty); }
-            set { SetValue(PinchingCommandParameterProperty, value); }
+            get => GetValue(PinchingCommandParameterProperty); 
+            set => SetValue(PinchingCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the PinchingCallback property
@@ -679,31 +929,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PinchingCallback
         {
-            get { return (Action<Listener, object>)GetValue(PinchingCallbackProperty); }
-            set { SetValue(PinchingCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(PinchingCallbackProperty); 
+            set
+            {
+                var oldHandlesPinching = HandlesPinching;
+                SetValue(PinchingCallbackProperty, value);
+                if (oldHandlesPinching != HandlesPinching)
+                    HandlesPinchingChanged?.Invoke(this, !oldHandlesPinching);
+            }
         }
         /// <summary>
         /// Parameter sent to Action invoked during pinch motion
         /// </summary>
         public object PinchingCallbackParameter
         {
-            get { return GetValue(PinchingCallbackParameterProperty); }
-            set { SetValue(PinchingCallbackParameterProperty, value); }
+            get => GetValue(PinchingCallbackParameterProperty); 
+            set => SetValue(PinchingCallbackParameterProperty, value); 
         }
         /// <summary>
         /// does this Listener invoke anything during pinch motion?
         /// </summary>
-        public bool HandlesPinching
-        {
-            get { return Pinching != null || PinchingCommand != null || PinchingCallback != null; }
-        }
+        public bool HandlesPinching => _pinching != null || PinchingCommand != null || PinchingCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesPinching has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesPinchingChanged;
+
+
         internal bool OnPinching(PinchEventArgs args)
         {
             bool result = false;
             if (HandlesPinching)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<PinchEventArgs>(Pinching, args);
+                RaiseEvent<PinchEventArgs>(_pinching, args);
                 ExecuteCommand(PinchingCommand, PinchingCommandParameter, args);
                 result = args.Handled;
             }
@@ -712,10 +972,28 @@ namespace FormsGestures
         #endregion
 
         #region Pinched
+        event EventHandler<PinchEventArgs> _pinched;
+
         /// <summary>
         /// Pinched event handler
         /// </summary>
-        public event EventHandler<PinchEventArgs> Pinched;
+        public event EventHandler<PinchEventArgs> Pinched
+        {
+            add
+            {
+                var oldHandlesPinched = HandlesPinched;
+                _pinched += value;
+                if (oldHandlesPinched != HandlesPinched)
+                    HandlesPinchedChanged?.Invoke(this, !oldHandlesPinched);
+            }
+            remove
+            {
+                var oldHandlesPinched = HandlesPinched;
+                _pinched -= value;
+                if (oldHandlesPinched != HandlesPinched)
+                    HandlesPinchedChanged?.Invoke(this, !oldHandlesPinched);
+            }
+        }
         /// <summary>
         /// backing store for the PinchedCommand property
         /// </summary>
@@ -729,16 +1007,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand PinchedCommand
         {
-            get { return (ICommand)GetValue(PinchedCommandProperty); }
-            set { SetValue(PinchedCommandProperty, value); }
+            get => (ICommand)GetValue(PinchedCommandProperty); 
+            set
+            {
+                var oldHandlesPinched = HandlesPinched;
+                SetValue(PinchedCommandProperty, value);
+                if (oldHandlesPinched != HandlesPinched)
+                    HandlesPinchedChanged?.Invoke(this, !oldHandlesPinched);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after pinch motion
         /// </summary>
         public object PinchedCommandParameter
         {
-            get { return GetValue(PinchedCommandParameterProperty); }
-            set { SetValue(PinchedCommandParameterProperty, value); }
+            get => GetValue(PinchedCommandParameterProperty); 
+            set => SetValue(PinchedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the PinchedCallback property
@@ -753,31 +1037,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PinchedCallback
         {
-            get { return (Action<Listener, object>)GetValue(PinchedCallbackProperty); }
-            set { SetValue(PinchedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(PinchedCallbackProperty); 
+            set
+            {
+                var oldHandlesPinched = HandlesPinched;
+                SetValue(PinchedCallbackProperty, value);
+                if (oldHandlesPinched != HandlesPinched)
+                    HandlesPinchedChanged?.Invoke(this, !oldHandlesPinched);
+            }
         }
         /// <summary>
         /// Parameter passed to Action invoked after pinch motion
         /// </summary>
         public object PinchedCallbackParameter
         {
-            get { return GetValue(PinchedCallbackParameterProperty); }
-            set { SetValue(PinchedCallbackParameterProperty, value); }
+            get => GetValue(PinchedCallbackParameterProperty); 
+            set => SetValue(PinchedCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does this Listener invoke anything after pinch motion
         /// </summary>
-        public bool HandlesPinched
-        {
-            get { return Pinched != null || PinchedCommand != null || PinchedCallback != null; }
-        }
+        public bool HandlesPinched => _pinched != null || PinchedCommand != null || PinchedCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesPinched has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesPinchedChanged;
+
+
         internal bool OnPinched(PinchEventArgs args)
         {
             bool result = false;
             if (HandlesPinched)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<PinchEventArgs>(Pinched, args);
+                RaiseEvent<PinchEventArgs>(_pinched, args);
                 ExecuteCommand(PinchedCommand, PinchedCommandParameter, args);
                 result = args.Handled;
             }
@@ -786,10 +1080,28 @@ namespace FormsGestures
         #endregion
 
         #region Panning
+        event EventHandler<PanEventArgs> _panning;
+
         /// <summary>
         /// Panning event handler
         /// </summary>
-        public event EventHandler<PanEventArgs> Panning;
+        public event EventHandler<PanEventArgs> Panning
+        {
+            add
+            {
+                var oldHandlesPanning = HandlesPanning;
+                _panning += value;
+                if (oldHandlesPanning != HandlesPanning)
+                    HandlesPanningChanged?.Invoke(this, !oldHandlesPanning);
+            }
+            remove
+            {
+                var oldHandlesPanning = HandlesPanning;
+                _panning -= value;
+                if (oldHandlesPanning != HandlesPanning)
+                    HandlesPanningChanged?.Invoke(this, !oldHandlesPanning);
+            }
+        }
         /// <summary>
         /// backing store for the PanningCommand parameter
         /// </summary>
@@ -803,16 +1115,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand PanningCommand
         {
-            get { return (ICommand)GetValue(PanningCommandProperty); }
-            set { SetValue(PanningCommandProperty, value); }
+            get => (ICommand)GetValue(PanningCommandProperty); 
+            set
+            {
+                var oldHandlesPanning = HandlesPanning;
+                SetValue(PanningCommandProperty, value);
+                if (oldHandlesPanning != HandlesPanning)
+                    HandlesPanningChanged?.Invoke(this, !oldHandlesPanning);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked duing pan motion
         /// </summary>
         public object PanningCommandParameter
         {
-            get { return GetValue(PanningCommandParameterProperty); }
-            set { SetValue(PanningCommandParameterProperty, value); }
+            get => GetValue(PanningCommandParameterProperty); 
+            set => SetValue(PanningCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the PanningCallback parameter
@@ -827,31 +1145,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PanningCallback
         {
-            get { return (Action<Listener, object>)GetValue(PanningCallbackProperty); }
-            set { SetValue(PanningCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(PanningCallbackProperty); 
+            set
+            {
+                var oldHandlesPanning = HandlesPanning;
+                SetValue(PanningCallbackProperty, value);
+                if (oldHandlesPanning != HandlesPanning)
+                    HandlesPanningChanged?.Invoke(this, !oldHandlesPanning);
+            }
         }
         /// <summary>
         /// Parameter sent to Action invoked duing pan motion
         /// </summary>
         public object PanningCallbackParameter
         {
-            get { return GetValue(PanningCallbackParameterProperty); }
-            set { SetValue(PanningCallbackParameterProperty, value); }
+            get => GetValue(PanningCallbackParameterProperty); 
+            set => SetValue(PanningCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does Listener invoke anything during pan motion?
         /// </summary>
-        public bool HandlesPanning
-        {
-            get { return Panning != null || PanningCommand != null || PanningCallback != null; }
-        }
+        public bool HandlesPanning => _panning != null || PanningCommand != null || PanningCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesPanning has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesPanningChanged;
+
+
         internal bool OnPanning(PanEventArgs args)
         {
             bool result = false;
             if (HandlesPanning)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<PanEventArgs>(Panning, args);
+                RaiseEvent<PanEventArgs>(_panning, args);
                 ExecuteCommand(PanningCommand, PanningCommandParameter, args);
                 result = args.Handled;
             }
@@ -860,10 +1188,28 @@ namespace FormsGestures
         #endregion
 
         #region Panned
+        event EventHandler<PanEventArgs> _panned;
+
         /// <summary>
         /// Pannded event handler
         /// </summary>
-        public event EventHandler<PanEventArgs> Panned;
+        public event EventHandler<PanEventArgs> Panned
+        {
+            add
+            {
+                var oldHandlesPanned = HandlesPanned;
+                _panned += value;
+                if (oldHandlesPanned != HandlesPanned)
+                    HandlesPannedChanged?.Invoke(this, !oldHandlesPanned);
+            }
+            remove
+            {
+                var oldHandlesPanned = HandlesPanned;
+                _panned -= value;
+                if (oldHandlesPanned != HandlesPanned)
+                    HandlesPannedChanged?.Invoke(this, !oldHandlesPanned);
+            }
+        }
         /// <summary>
         /// backing store for the PannedCommand property
         /// </summary>
@@ -877,19 +1223,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand PannedCommand
         {
-            get { return (ICommand)GetValue(PannedCommandProperty); }
-            set { SetValue(PannedCommandProperty, value); }
+            get => (ICommand)GetValue(PannedCommandProperty); 
+            set
+            {
+                var oldHandlesPanned = HandlesPanned;
+                SetValue(PannedCommandProperty, value);
+                if (oldHandlesPanned != HandlesPanned)
+                    HandlesPannedChanged?.Invoke(this, !oldHandlesPanned);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after pan motion
         /// </summary>
         public object PannedCommandParameter
         {
-            get { return GetValue(PannedCommandParameterProperty); }
-            set
-            {
-                SetValue(PannedCommandParameterProperty, value);
-            }
+            get => GetValue(PannedCommandParameterProperty); 
+            set => SetValue(PannedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the PanndedCallback property
@@ -904,34 +1253,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PannedCallback
         {
-            get { return (Action<Listener, object>)GetValue(PannedCallbackProperty); }
-            set { SetValue(PannedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(PannedCallbackProperty); 
+            set
+            {
+                var oldHandlesPanned = HandlesPanned;
+                SetValue(PannedCallbackProperty, value);
+                if (oldHandlesPanned != HandlesPanned)
+                    HandlesPannedChanged?.Invoke(this, !oldHandlesPanned);
+            }
         }
         /// <summary>
         /// Parameter sent with Action invoked after pan motion
         /// </summary>
         public object PannedCallbackParameter
         {
-            get { return GetValue(PannedCallbackParameterProperty); }
-            set
-            {
-                SetValue(PannedCallbackParameterProperty, value);
-            }
+            get => GetValue(PannedCallbackParameterProperty); 
+            set =>  SetValue(PannedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything after pan motion?
         /// </summary>
-        public bool HandlesPanned
-        {
-            get { return Panned != null || PannedCommand != null || PannedCallback != null; }
-        }
+        public bool HandlesPanned => _panned != null || PannedCommand != null || PannedCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesPanned has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesPannedChanged;
+
+
         internal bool OnPanned(PanEventArgs args)
         {
             bool result = false;
             if (HandlesPanned)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<PanEventArgs>(Panned, args);
+                RaiseEvent<PanEventArgs>(_panned, args);
                 ExecuteCommand(PannedCommand, PannedCommandParameter, args);
                 result = args.Handled;
             }
@@ -940,10 +1296,29 @@ namespace FormsGestures
         #endregion
 
         #region Swiped
+        event EventHandler<SwipeEventArgs> _swiped;
+
         /// <summary>
         /// Swiped event handler
         /// </summary>
-        public event EventHandler<SwipeEventArgs> Swiped;
+        public event EventHandler<SwipeEventArgs> Swiped
+        {
+            add
+            {
+                var oldHandlesSwiped = HandlesSwiped;
+                _swiped += value;
+                if (oldHandlesSwiped != HandlesSwiped)
+                    HandlesSwipedChanged?.Invoke(this, !oldHandlesSwiped);
+            }
+            remove
+            {
+                var oldHandlesSwiped = HandlesSwiped;
+                _swiped -= value;
+                if (oldHandlesSwiped != HandlesSwiped)
+                    HandlesSwipedChanged?.Invoke(this, !oldHandlesSwiped);
+            }
+        }
+
         /// <summary>
         /// backing store for the SwipedCommand property
         /// </summary>
@@ -957,19 +1332,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand SwipedCommand
         {
-            get { return (ICommand)GetValue(SwipedCommandProperty); }
-            set { SetValue(SwipedCommandProperty, value); }
+            get => (ICommand)GetValue(SwipedCommandProperty); 
+            set
+            {
+                var oldHandlesSwiped = HandlesSwiped;
+                SetValue(SwipedCommandProperty, value);
+                if (oldHandlesSwiped != HandlesSwiped)
+                    HandlesSwipedChanged?.Invoke(this, !oldHandlesSwiped);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after swipe motion
         /// </summary>
         public object SwipedCommandParameter
         {
-            get { return GetValue(SwipedCommandParameterProperty); }
-            set
-            {
-                SetValue(SwipedCommandParameterProperty, value);
-            }
+            get => GetValue(SwipedCommandParameterProperty);
+            set => SetValue(SwipedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the SwipedCallback property
@@ -984,34 +1362,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> SwipedCallback
         {
-            get { return (Action<Listener, object>)GetValue(SwipedCallbackProperty); }
-            set { SetValue(SwipedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(SwipedCallbackProperty); 
+            set
+            {
+                var oldHandlesSwiped = HandlesSwiped;
+                SetValue(SwipedCallbackProperty, value);
+                if (oldHandlesSwiped != HandlesSwiped)
+                    HandlesSwipedChanged?.Invoke(this, !oldHandlesSwiped);
+            }
         }
         /// <summary>
         /// Parameter sent with Action invoked after swipe motion
         /// </summary>
         public object SwipedCallbackParameter
         {
-            get { return GetValue(SwipedCallbackParameterProperty); }
-            set
-            {
-                SetValue(SwipedCallbackParameterProperty, value);
-            }
+            get => GetValue(SwipedCallbackParameterProperty); 
+            set => SetValue(SwipedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything after swipe motion
         /// </summary>
-        public bool HandlesSwiped
-        {
-            get { return Swiped != null || SwipedCommand != null || SwipedCallback != null; }
-        }
+        public bool HandlesSwiped => _swiped != null || SwipedCommand != null || SwipedCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesSwiped has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesSwipedChanged;
+
+
         internal bool OnSwiped(SwipeEventArgs args)
         {
             bool result = false;
             if (HandlesSwiped)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<SwipeEventArgs>(Swiped, args);
+                RaiseEvent<SwipeEventArgs>(_swiped, args);
                 ExecuteCommand(SwipedCommand, SwipedCommandParameter, args);
                 result = args.Handled;
             }
@@ -1020,10 +1405,27 @@ namespace FormsGestures
         #endregion
 
         #region Rotating
+        event EventHandler<RotateEventArgs> _rotating;
         /// <summary>
         /// Rotating event handler
         /// </summary>
-        public event EventHandler<RotateEventArgs> Rotating;
+        public event EventHandler<RotateEventArgs> Rotating
+        {
+            add
+            {
+                var oldHandlesRotating = HandlesRotating;
+                _rotating += value;
+                if (oldHandlesRotating != HandlesRotating)
+                    HandlesRotatingChanged?.Invoke(this, !oldHandlesRotating);
+            }
+            remove
+            {
+                var oldHandlesRotating = HandlesRotating;
+                _rotating -= value;
+                if (oldHandlesRotating != HandlesRotating)
+                    HandlesRotatingChanged?.Invoke(this, !oldHandlesRotating);
+            }
+        }
         /// <summary>
         /// backing store for the RotatingCommand property
         /// </summary>
@@ -1037,10 +1439,13 @@ namespace FormsGestures
         /// </summary>
         public ICommand RotatingCommand
         {
-            get { return (ICommand)GetValue(RotatingCommandProperty); }
+            get => (ICommand)GetValue(RotatingCommandProperty); 
             set
             {
+                var oldHandlesRotating = HandlesRotating;
                 SetValue(RotatingCommandProperty, value);
+                if (oldHandlesRotating != HandlesRotating)
+                    HandlesRotatingChanged?.Invoke(this, !oldHandlesRotating);
             }
         }
         /// <summary>
@@ -1048,8 +1453,8 @@ namespace FormsGestures
         /// </summary>
         public object RotatingCommandParameter
         {
-            get { return GetValue(RotatingCommandParameterProperty); }
-            set { SetValue(RotatingCommandParameterProperty, value); }
+            get => GetValue(RotatingCommandParameterProperty); 
+            set => SetValue(RotatingCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the RotatingCallback property
@@ -1064,10 +1469,13 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RotatingCallback
         {
-            get { return (Action<Listener, object>)GetValue(RotatingCallbackProperty); }
+            get => (Action<Listener, object>)GetValue(RotatingCallbackProperty); 
             set
             {
+                var oldHandlesRotating = HandlesRotating;
                 SetValue(RotatingCallbackProperty, value);
+                if (oldHandlesRotating != HandlesRotating)
+                    HandlesRotatingChanged?.Invoke(this, !oldHandlesRotating);
             }
         }
         /// <summary>
@@ -1075,23 +1483,27 @@ namespace FormsGestures
         /// </summary>
         public object RotatingCallbackParameter
         {
-            get { return GetValue(RotatingCallbackParameterProperty); }
-            set { SetValue(RotatingCallbackParameterProperty, value); }
+            get => GetValue(RotatingCallbackParameterProperty); 
+            set => SetValue(RotatingCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does Listener invoke anything during rotation motion?
         /// </summary>
-        public bool HandlesRotating
-        {
-            get { return Rotating != null || RotatingCommand != null || RotatingCallback != null; }
-        }
+        public bool HandlesRotating => _rotating != null || RotatingCommand != null || RotatingCallback != null;
+
+        /// <summary>
+        /// Event trigged when HandlesRotating has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesRotatingChanged;
+
+
         internal bool OnRotating(RotateEventArgs args)
         {
             bool result = false;
             if (HandlesRotating)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<RotateEventArgs>(Rotating, args);
+                RaiseEvent<RotateEventArgs>(_rotating, args);
                 ExecuteCommand(RotatingCommand, RotatingCommandParameter, args);
                 result = args.Handled;
             }
@@ -1100,10 +1512,27 @@ namespace FormsGestures
         #endregion
 
         #region Rotated
+        event EventHandler<RotateEventArgs> _rotated;
         /// <summary>
         /// Rotated event handler
         /// </summary>
-        public event EventHandler<RotateEventArgs> Rotated;
+        public event EventHandler<RotateEventArgs> Rotated
+        {
+            add
+            {
+                var oldHandlesRotated = HandlesRotated;
+                _rotated += value;
+                if (oldHandlesRotated != HandlesRotated)
+                    HandlesRotatedChanged?.Invoke(this, !oldHandlesRotated);
+            }
+            remove
+            {
+                var oldHandlesRotated = HandlesRotated;
+                _rotated -= value;
+                if (oldHandlesRotated != HandlesRotated)
+                    HandlesRotatedChanged?.Invoke(this, !oldHandlesRotated);
+            }
+        }
         /// <summary>
         /// backing store for the RotatedCommand property
         /// </summary>
@@ -1117,16 +1546,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand RotatedCommand
         {
-            get { return (ICommand)GetValue(RotatedCommandProperty); }
-            set { SetValue(RotatedCommandProperty, value); }
+            get => (ICommand)GetValue(RotatedCommandProperty); 
+            set
+            {
+                var oldHandlesRotated = HandlesRotated;
+                SetValue(RotatedCommandProperty, value);
+                if (oldHandlesRotated != HandlesRotated)
+                    HandlesRotatedChanged?.Invoke(this, !oldHandlesRotated);
+            }
         }
         /// <summary>
         /// Parameter sent with Command invoked after rotation motion
         /// </summary>
         public object RotatedCommandParameter
         {
-            get { return GetValue(RotatedCommandParameterProperty); }
-            set { SetValue(RotatedCommandParameterProperty, value); }
+            get => GetValue(RotatedCommandParameterProperty); 
+            set => SetValue(RotatedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for the RotatedCallback property
@@ -1141,31 +1576,41 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RotatedCallback
         {
-            get { return (Action<Listener, object>)GetValue(RotatedCallbackProperty); }
-            set { SetValue(RotatedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(RotatedCallbackProperty); 
+            set
+            {
+                var oldHandlesRotated = HandlesRotated;
+                SetValue(RotatedCallbackProperty, value);
+                if (oldHandlesRotated != HandlesRotated)
+                    HandlesRotatedChanged?.Invoke(this, !oldHandlesRotated);
+            }
         }
         /// <summary>
         /// Parameter sent with Action invoked after rotation motion
         /// </summary>
         public object RotatedCallbackParameter
         {
-            get { return GetValue(RotatedCallbackParameterProperty); }
-            set { SetValue(RotatedCallbackParameterProperty, value); }
+            get => GetValue(RotatedCallbackParameterProperty); 
+            set => SetValue(RotatedCallbackParameterProperty, value); 
         }
         /// <summary>
         /// Does Listener invoke anything after rotation motion?
         /// </summary>
-        public bool HandlesRotated
-        {
-            get { return Rotated != null || RotatedCommand != null || RotatedCallback != null; }
-        }
+        public bool HandlesRotated => _rotated != null || RotatedCommand != null || RotatedCallback != null;
+
+        /// <summary>
+        /// Event trigged when HandlesRotated has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesRotatedChanged;
+
+
         internal bool OnRotated(RotateEventArgs args)
         {
             bool result = false;
             if (HandlesRotated)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
-                RaiseEvent<RotateEventArgs>(Rotated, args);
+                RaiseEvent<RotateEventArgs>(_rotated, args);
                 ExecuteCommand(RotatedCommand, RotatedCommandParameter, args);
                 result = args.Handled;
             }
@@ -1174,10 +1619,27 @@ namespace FormsGestures
         #endregion
 
         #region RightClicked
+        event EventHandler<RightClickEventArgs> _rightClicked;
         /// <summary>
         /// Tapped event handler
         /// </summary>
-        public event EventHandler<RightClickEventArgs> RightClicked;
+        public event EventHandler<RightClickEventArgs> RightClicked
+        {
+            add
+            {
+                var oldHandlesRightClicked = HandlesRightClicked;
+                _rightClicked += value;
+                if (oldHandlesRightClicked != HandlesRightClicked)
+                    HandlesRightClickedChanged?.Invoke(this, !oldHandlesRightClicked);
+            }
+            remove
+            {
+                var oldHandlesRightClicked = HandlesRightClicked;
+                _rightClicked -= value;
+                if (oldHandlesRightClicked != HandlesRightClicked)
+                    HandlesRightClickedChanged?.Invoke(this, !oldHandlesRightClicked);
+            }
+        }
         /// <summary>
         /// backing store for the TappedCommand property
         /// </summary>
@@ -1191,16 +1653,22 @@ namespace FormsGestures
         /// </summary>
         public ICommand RightClickedCommand
         {
-            get { return (ICommand)GetValue(RightClickedCommandProperty); }
-            set { SetValue(RightClickedCommandProperty, value); }
+            get => (ICommand)GetValue(RightClickedCommandProperty); 
+            set
+            {
+                var oldHandlesRightClicked = HandlesRightClicked;
+                SetValue(RightClickedCommandProperty, value);
+                if (oldHandlesRightClicked != HandlesRightClicked)
+                    HandlesRightClickedChanged?.Invoke(this, !oldHandlesRightClicked);
+            }
         }
         /// <summary>
         /// Parameter passed with Command invoked after a tap motion
         /// </summary>
         public object RightClickedCommandParameter
         {
-            get { return GetValue(RightClickedCommandParameterProperty); }
-            set { SetValue(RightClickedCommandParameterProperty, value); }
+            get => GetValue(RightClickedCommandParameterProperty); 
+            set => SetValue(RightClickedCommandParameterProperty, value); 
         }
         /// <summary>
         /// backing store for a TappedCallback property
@@ -1215,30 +1683,40 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RightClickedCallback
         {
-            get { return (Action<Listener, object>)GetValue(RightClickedCallbackProperty); }
-            set { SetValue(RightClickedCallbackProperty, value); }
+            get => (Action<Listener, object>)GetValue(RightClickedCallbackProperty); 
+            set
+            {
+                var oldHandlesRightClicked = HandlesRightClicked;
+                SetValue(RightClickedCallbackProperty, value);
+                if (oldHandlesRightClicked != HandlesRightClicked)
+                    HandlesRightClickedChanged?.Invoke(this, !oldHandlesRightClicked);
+            }
         }
         /// <summary>
         /// Parameter passed to Action invoked after a tap motion
         /// </summary>
         public object RightClickedCallbackParameter
         {
-            get { return GetValue(RightClickedCallbackParameterProperty); }
-            set { SetValue(RightClickedCallbackParameterProperty, value); }
+            get => GetValue(RightClickedCallbackParameterProperty); 
+            set => SetValue(RightClickedCallbackParameterProperty, value); 
         }
         /// <summary>
         /// does this Listener invoke anything after a tap motion?
         /// </summary>
-        public bool HandlesRightClicked
-        {
-            get { return RightClicked != null || RightClickedCommand != null || RightClickedCallback != null; }
-        }
+        public bool HandlesRightClicked => _rightClicked != null || RightClickedCommand != null || RightClickedCallback != null;
+
+        /// <summary>
+        /// Event triggered when HandlesRightClicked has changed
+        /// </summary>
+        public event EventHandler<bool> HandlesRightClickedChanged;
+
+
         internal bool OnRightClicked(RightClickEventArgs args)
         {
             bool result = false;
             if (HandlesRightClicked)
             {
-                RaiseEvent<RightClickEventArgs>(RightClicked, args);
+                RaiseEvent<RightClickEventArgs>(_rightClicked, args);
                 ExecuteCommand(RightClickedCommand, RightClickedCommandParameter, args);
                 result = args.Handled;
             }

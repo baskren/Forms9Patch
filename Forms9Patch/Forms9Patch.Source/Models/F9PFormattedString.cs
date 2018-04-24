@@ -39,7 +39,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The text.</value>
 		public string Text {
-			get { return _string; }
+			get => _string; 
 			set {
 				_string = value;
 				OnPropertyChanged ("String");

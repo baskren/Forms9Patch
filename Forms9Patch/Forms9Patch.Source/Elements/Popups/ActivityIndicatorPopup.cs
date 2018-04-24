@@ -7,44 +7,51 @@ namespace Forms9Patch
 	/// </summary>
 	public class ActivityIndicatorPopup : ModalPopup
 	{
-		/// <summary>
-		/// The color property.
-		/// </summary>
-		public static readonly BindableProperty ColorProperty = BindableProperty.Create("Color", typeof(Color), typeof(ActivityIndicatorPopup), Color.Blue);
+        #region Properties
+        /// <summary>
+        /// The color property.
+        /// </summary>
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create("Color", typeof(Color), typeof(ActivityIndicatorPopup), Color.Blue);
 		/// <summary>
 		/// Gets or sets the color.
 		/// </summary>
 		/// <value>The color.</value>
 		public Color Color
 		{
-			get { return (Color)GetValue(ColorProperty); }
-			set { SetValue(ColorProperty, value); }
+			get => (Color)GetValue(ColorProperty); 
+			set => SetValue(ColorProperty, value); 
 		}
-
-		/// <summary>
-		/// Create this instance.
-		/// </summary>
-		public static ActivityIndicatorPopup Create()
-		{
-			var indicator = new ActivityIndicatorPopup();
-			indicator.IsVisible = true;
-			return indicator;
-		}
+        #endregion
 
 
-		#region Fields
-		ActivityIndicator _indicator = new ActivityIndicator
+        #region Fields
+        ActivityIndicator _indicator = new ActivityIndicator
 		{
 			BackgroundColor = Color.Transparent,
 			Color = Color.Blue,
            
 		};
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
-		/// </summary>
-		public ActivityIndicatorPopup() 
+
+        #region Factory
+        /// <summary>
+        /// Create this instance.
+        /// </summary>
+        public static ActivityIndicatorPopup Create()
+        {
+            var indicator = new ActivityIndicatorPopup();
+            indicator.IsVisible = true;
+            return indicator;
+        }
+        #endregion
+
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
+        /// </summary>
+        public ActivityIndicatorPopup() 
 		{
             if (Device.RuntimePlatform == Device.UWP)
                 _indicator.WidthRequest = 300;
@@ -64,12 +71,15 @@ namespace Forms9Patch
 		{
 			throw new NotSupportedException(P42.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
+        #endregion
 
-		/// <summary>
-		/// Ons the property changed.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged(string propertyName = null)
+
+        #region Property Change Management
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == ColorProperty.PropertyName)
@@ -80,5 +90,6 @@ namespace Forms9Patch
 				_indicator.IsRunning = IsVisible;
 			}
 		}
-	}
+        #endregion
+    }
 }

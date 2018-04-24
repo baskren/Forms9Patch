@@ -35,6 +35,11 @@ namespace FormsGestures
 			}
 		}
 
+        public override string ToString()
+        {
+            return "[d:" + DeltaDistance + " t:" + TotalDistance + " v:" + Velocity + "]";
+        }
+
 
         /// <summary>
         /// calculates the distance traversed since last sample

@@ -17,7 +17,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The start.</value>
 		public int Start {
-			get { return _start; }
+			get => _start; 
 			set { 
 				if (_start == value)
 					return;
@@ -33,7 +33,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The end.</value>
 		public int End {
-			get { return _end; }
+			get => _end; 
 			set {
 				if (_end == value)
 					return;

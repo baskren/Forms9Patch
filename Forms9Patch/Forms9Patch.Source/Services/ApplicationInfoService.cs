@@ -39,7 +39,7 @@ namespace Forms9Patch
         /// Gets the version string.
         /// </summary>
         /// <value>The version.</value>
-        public static string Version { get { return Service?.Version; } }
+        public static string Version => Service?.Version; 
 
         /// <summary>
         /// Gets the application's build number.
@@ -59,31 +59,25 @@ namespace Forms9Patch
         /// Gets the bundle or package identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public static string Identifier { get { return Service?.Identifier; } }
+        public static string Identifier => Service?.Identifier; 
 
         /// <summary>
         /// Gets the applications display name.
         /// </summary>
         /// <value>The name.</value>
-        public static string Name { get { return Service?.Name; } }
+        public static string Name => Service?.Name; 
 
         /// <summary>
         /// Gets the fingerprint (valid on Android only).
         /// </summary>
         /// <value>The fingerprint.</value>
-        public static string Fingerprint { get { return Service?.Fingerprint; } }
+        public static string Fingerprint => Service?.Fingerprint; 
 
         /// <summary>
         /// Gets the application's assembly.
         /// </summary>
         /// <value>The assembly.</value>
-        public static Assembly Assembly
-        {
-            get
-            {
-                return Application.Current.GetType().GetTypeInfo().Assembly;
-            }
-        }
+        public static Assembly Assembly => Application.Current.GetType().GetTypeInfo().Assembly;
 
         /// <summary>
         /// Gets the currently displayed page.

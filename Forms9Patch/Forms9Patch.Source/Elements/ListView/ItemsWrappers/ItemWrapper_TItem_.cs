@@ -5,7 +5,7 @@ namespace Forms9Patch
 
 		#region Properties
 		public new TItem Source {
-			get { return (TItem)GetValue(SourceProperty); }
+			get => (TItem)GetValue(SourceProperty); 
 			set { 
 				if (!Equals(value,Source))
 					SetValue(SourceProperty, value);

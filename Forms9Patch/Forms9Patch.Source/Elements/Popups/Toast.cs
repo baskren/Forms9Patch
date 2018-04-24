@@ -9,17 +9,20 @@ namespace Forms9Patch
 	/// </summary>
 	public class Toast : ModalPopup
 	{
-		/// <summary>
-		/// Create the specified title and text.
-		/// </summary>
-		/// <param name="title">Title.</param>
-		/// <param name="text">Text.</param>
-		public static Toast Create(string title, string text)
+        #region Factory
+        /// <summary>
+        /// Create the specified title and text.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="text">Text.</param>
+        public static Toast Create(string title, string text)
 		{
 			var toast = new Toast() { Title = title, Text = text };
 			toast.IsVisible = true;
 			return toast;
 		}
+        #endregion
+
 
         #region Properties
 
@@ -33,8 +36,8 @@ namespace Forms9Patch
 		/// <value>The title.</value>
 		public string Title
 		{
-			get { return (string)GetValue(TitleProperty); }
-			set { SetValue(TitleProperty, value); }
+			get => (string)GetValue(TitleProperty); 
+			set => SetValue(TitleProperty, value); 
 		}
 
         #region Text Properties
@@ -48,8 +51,8 @@ namespace Forms9Patch
 		/// <value>The text.</value>
 		public string Text
 		{
-			get { return (string)GetValue(TextProperty); }
-			set { SetValue(TextProperty, value); }
+			get => (string)GetValue(TextProperty); 
+			set => SetValue(TextProperty, value); 
 		}
 
 		/// <summary>
@@ -62,8 +65,8 @@ namespace Forms9Patch
 		/// <value>The color of the text.</value>
 		public Color TextColor
 		{
-			get { return (Color)GetValue(TextColorProperty); }
-			set { SetValue(TextColorProperty, value); }
+			get => (Color)GetValue(TextColorProperty); 
+			set => SetValue(TextColorProperty, value); 
 		}
         #endregion
 
@@ -83,8 +86,8 @@ namespace Forms9Patch
         [Obsolete("Use ButtonText property")]
         public string OkText
         {
-            get { return (string)GetValue(ButtonTextProperty); }
-            set { SetValue(ButtonTextProperty, value); }
+            get => (string)GetValue(ButtonTextProperty); 
+            set => SetValue(ButtonTextProperty, value); 
         }
 
         /// <summary>
@@ -96,8 +99,8 @@ namespace Forms9Patch
         /// </summary>
 		public string ButtonText
 		{
-			get { return (string)GetValue(ButtonTextProperty); }
-			set { SetValue(ButtonTextProperty, value); }
+			get => (string)GetValue(ButtonTextProperty); 
+			set => SetValue(ButtonTextProperty, value); 
 		}
         #endregion
 
@@ -113,8 +116,8 @@ namespace Forms9Patch
         [Obsolete("Use ButtonBackgroundColor property")]
         public Color OkButtonColor
         {
-            get { return (Color)GetValue(ButtonBackgroundColorProperty); }
-            set { SetValue(ButtonBackgroundColorProperty, value); }
+            get => (Color)GetValue(ButtonBackgroundColorProperty); 
+            set => SetValue(ButtonBackgroundColorProperty, value); 
         }
         /// <summary>
         /// The ButtongBackgroundColor property backing store
@@ -125,8 +128,8 @@ namespace Forms9Patch
         /// </summary>
 		public Color ButtonBackgroundColor
 		{
-			get { return (Color)GetValue(ButtonBackgroundColorProperty); }
-			set { SetValue(ButtonBackgroundColorProperty, value); }
+			get => (Color)GetValue(ButtonBackgroundColorProperty); 
+			set => SetValue(ButtonBackgroundColorProperty, value); 
 		}
         #endregion
 
@@ -142,8 +145,8 @@ namespace Forms9Patch
         [Obsolete("Use ButtonTextColor")]
         public Color OkTextColor
         {
-            get { return (Color)GetValue(ButtonTextColorColorProperty); }
-            set { SetValue(ButtonTextColorColorProperty, value); }
+            get => (Color)GetValue(ButtonTextColorColorProperty); 
+            set => SetValue(ButtonTextColorColorProperty, value); 
         }
         /// <summary>
         /// ButtonTextColor property backing store
@@ -154,8 +157,8 @@ namespace Forms9Patch
         /// </summary>
 		public Color ButtonTextColor
 		{
-			get { return (Color)GetValue(ButtonTextColorColorProperty); }
-			set { SetValue(ButtonTextColorColorProperty, value); }
+			get => (Color)GetValue(ButtonTextColorColorProperty); 
+			set => SetValue(ButtonTextColorColorProperty, value); 
 		}
         #endregion
 
@@ -182,12 +185,14 @@ namespace Forms9Patch
 		{
 			//HorizontalOptions = LayoutOptions.Fill
 		};
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
-		/// </summary>
-		public Toast() 
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
+        /// </summary>
+        public Toast() 
 		{
 			_okButton.BackgroundColor = ButtonBackgroundColor;
 			_okButton.TextColor = ButtonTextColor;
@@ -226,12 +231,15 @@ namespace Forms9Patch
 		{
 			throw new NotSupportedException(P42.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
 		}
+        #endregion
 
-		/// <summary>
-		/// Ons the property changed.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged(string propertyName = null)
+
+        #region PropertyChange management
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == TitleProperty.PropertyName)
@@ -264,6 +272,7 @@ namespace Forms9Patch
             else if (((StackLayout)Content).Children.Contains(_okButton))
                 ((StackLayout)Content).Children.Remove(_okButton);
         }
-	}
+        #endregion
+    }
 }
 

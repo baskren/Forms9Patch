@@ -18,11 +18,7 @@ namespace Forms9Patch
         /// Gets the item templates.
         /// </summary>
         /// <value>The item templates.</value>
-        public DataTemplateSelector ItemTemplates
-        {
-            get { return _listView.ItemTemplates; }
-            //set { SetValue(ItemTemplateProperty, value); }
-        }
+        public DataTemplateSelector ItemTemplates => _listView.ItemTemplates; 
 
         /// <summary>
         /// The items source property.
@@ -34,11 +30,8 @@ namespace Forms9Patch
         /// <value>The items source.</value>
         public IList ItemsSource
         {
-            get { return (IList)GetValue(ItemsSourceProperty); }
-            set
-            {
-                SetValue(ItemsSourceProperty, value);
-            }
+            get => (IList)GetValue(ItemsSourceProperty); 
+            set => SetValue(ItemsSourceProperty, value);
         }
         #endregion
 
@@ -53,8 +46,8 @@ namespace Forms9Patch
         /// <value>The index.</value>
         public int Index
         {
-            get { return (int)GetValue(IndexProperty); }
-            set { SetValue(IndexProperty, value); }
+            get => (int)GetValue(IndexProperty); 
+            set => SetValue(IndexProperty, value); 
         }
 
         /// <summary>
@@ -67,11 +60,8 @@ namespace Forms9Patch
         /// <value>The selected item.</value>
         public object SelectedItem
         {
-            get { return GetValue(SelectedItemProperty); }
-            set
-            {
-                SetValue(SelectedItemProperty, value);
-            }
+            get => GetValue(SelectedItemProperty); 
+            set => SetValue(SelectedItemProperty, value);
         }
 
         /// <summary>
@@ -84,8 +74,8 @@ namespace Forms9Patch
         /// <value>The selected items.</value>
         public ObservableCollection<object> SelectedItems
         {
-            get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
-            private set { SetValue(SelectedItemsPropertyKey, value); }
+            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); 
+            private set => SetValue(SelectedItemsPropertyKey, value); 
         }
 
 
@@ -99,8 +89,8 @@ namespace Forms9Patch
         /// <value>The Toggle behavior (None, Radio, Multiselect).</value>
         public GroupToggleBehavior GroupToggleBehavior
         {
-            get { return (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); }
-            set { SetValue(GroupToggleBehaviorProperty, value); }
+            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); 
+            set => SetValue(GroupToggleBehaviorProperty, value); 
         }
         #endregion
 
@@ -115,8 +105,8 @@ namespace Forms9Patch
         /// <value>The height of the row.</value>
         public int RowHeight
         {
-            get { return (int)GetValue(RowHeightProperty); }
-            set { SetValue(RowHeightProperty, value); }
+            get => (int)GetValue(RowHeightProperty); 
+            set => SetValue(RowHeightProperty, value); 
         }
 
         #endregion

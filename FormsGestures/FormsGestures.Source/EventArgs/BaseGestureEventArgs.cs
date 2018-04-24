@@ -8,17 +8,12 @@ namespace FormsGestures
 	/// </summary>
 	public class BaseGestureEventArgs : EventArgs
 	{
-		bool _handled = false;
-
 		Point _center;
 
         /// <summary>
         /// gets/sets if the gesture was handled
         /// </summary>
-		public bool Handled {
-			get { return _handled; }
-			set { _handled = value; }
-		}
+		public bool Handled { get; set; }
 
 
         /// <summary>
@@ -44,9 +39,7 @@ namespace FormsGestures
         /// <summary>
         /// Number of touches in touch event
         /// </summary>
-		public virtual int NumberOfTouches {
-			get { return Touches.Length; }
-		}
+		public virtual int NumberOfTouches => Touches.Length; 
 
         /// <summary>
         /// center of touch event
@@ -134,7 +127,7 @@ namespace FormsGestures
         /// <param name="other"></param>
         public void ValueFrom(BaseGestureEventArgs other)
         {
-            _handled = other._handled;
+            Handled = other.Handled;
             _center = other._center;
             Listener = other.Listener;
             Cancelled = other.Cancelled;

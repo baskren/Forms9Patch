@@ -8,18 +8,20 @@ namespace Forms9Patch
 	/// </summary>
 	public class PermissionPopup : BubblePopup
 	{
-		/// <summary>
-		/// Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
-		/// </summary>
-		/// <param name="title">Title.</param>
-		/// <param name="text">Text.</param>
-		/// <param name="okText">Ok text.</param>
-		/// <param name="cancelText">Cancel text.</param>
-		/// <param name="okButtonColor">Ok button color.</param>
-		/// <param name="cancelButtonColor">Cancel button color.</param>
-		/// <param name="okTextColor">Ok text color.</param>
-		/// <param name="cancelTextColor">Cancel text color.</param>
-		public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
+
+        #region Factories
+        /// <summary>
+        /// Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="text">Text.</param>
+        /// <param name="okText">Ok text.</param>
+        /// <param name="cancelText">Cancel text.</param>
+        /// <param name="okButtonColor">Ok button color.</param>
+        /// <param name="cancelButtonColor">Cancel button color.</param>
+        /// <param name="okTextColor">Ok text color.</param>
+        /// <param name="cancelTextColor">Cancel text color.</param>
+        public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
 		{
 			var popup = new PermissionPopup{ Title = title, Text = text, OkText = okText, CancelText = cancelText};
 			if (okTextColor != default(Color))
@@ -61,21 +63,23 @@ namespace Forms9Patch
 			popup.IsVisible = true;
 			return popup;
 		}
+        #endregion
 
-		#region Properties
 
-		/// <summary>
-		/// The title property backing store.
-		/// </summary>
-		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(PermissionPopup), default(string));
+        #region Properties
+
+        /// <summary>
+        /// The title property backing store.
+        /// </summary>
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(PermissionPopup), default(string));
 		/// <summary>
 		/// Gets or sets the title.
 		/// </summary>
 		/// <value>The title.</value>
 		public string Title
 		{
-			get { return (string)GetValue(TitleProperty); }
-			set { SetValue(TitleProperty, value); }
+			get => (string)GetValue(TitleProperty); 
+			set => SetValue(TitleProperty, value); 
 		}
 
 		/// <summary>
@@ -88,8 +92,8 @@ namespace Forms9Patch
 		/// <value>The text.</value>
 		public string Text
 		{
-			get { return (string)GetValue(TextProperty); }
-			set { SetValue(TextProperty, value); }
+			get => (string)GetValue(TextProperty); 
+			set => SetValue(TextProperty, value); 
 		}
 
 		/// <summary>
@@ -102,8 +106,8 @@ namespace Forms9Patch
 		/// <value>The ok text.</value>
 		public string OkText
 		{
-			get { return (string)GetValue(OkTextProperty); }
-			set { SetValue(OkTextProperty, value); }
+			get => (string)GetValue(OkTextProperty); 
+			set => SetValue(OkTextProperty, value); 
 		}
 
 		/// <summary>
@@ -116,8 +120,8 @@ namespace Forms9Patch
 		/// <value>The color of the ok button.</value>
 		public Color OkButtonColor
 		{
-			get { return (Color)GetValue(OkButtonColorProperty); }
-			set { SetValue(OkButtonColorProperty, value); }
+			get => (Color)GetValue(OkButtonColorProperty); 
+			set => SetValue(OkButtonColorProperty, value); 
 		}
 
 		/// <summary>
@@ -130,8 +134,8 @@ namespace Forms9Patch
 		/// <value>The color of the ok text.</value>
 		public Color OkTextColor
 		{
-			get { return (Color)GetValue(OkTextColorProperty); }
-			set { SetValue(OkTextColorProperty, value); }
+			get => (Color)GetValue(OkTextColorProperty); 
+			set => SetValue(OkTextColorProperty, value); 
 		}
 
 		/// <summary>
@@ -144,8 +148,8 @@ namespace Forms9Patch
 		/// <value>The cancel text.</value>
 		public string CancelText
 		{
-			get { return (string)GetValue(CancelTextProperty); }
-			set { SetValue(CancelTextProperty, value); }
+			get => (string)GetValue(CancelTextProperty); 
+			set => SetValue(CancelTextProperty, value); 
 		}
 
 		/// <summary>
@@ -158,8 +162,8 @@ namespace Forms9Patch
 		/// <value>The color of the cancel button.</value>
 		public Color CancelButtonColor
 		{
-			get { return (Color)GetValue(CancelButtonColorProperty); }
-			set { SetValue(CancelButtonColorProperty, value); }
+			get => (Color)GetValue(CancelButtonColorProperty); 
+			set => SetValue(CancelButtonColorProperty, value); 
 		}
 
 		/// <summary>
@@ -172,8 +176,8 @@ namespace Forms9Patch
 		/// <value>The color of the cancel text.</value>
 		public Color CancelTextColor
 		{
-			get { return (Color)GetValue(CancelTextColorProperty); }
-			set { SetValue(CancelTextColorProperty, value); }
+			get => (Color)GetValue(CancelTextColorProperty); 
+			set => SetValue(CancelTextColorProperty, value); 
 		}
 
 		#endregion
@@ -208,12 +212,14 @@ namespace Forms9Patch
 			HorizontalOptions = LayoutOptions.FillAndExpand
 
 		};
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
-		/// </summary>
-		public PermissionPopup(VisualElement target = null) : base(target) 
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.PermissionPopup"/> class.
+        /// </summary>
+        public PermissionPopup(VisualElement target = null) : base(target) 
 		{
 			_cancelButton.BackgroundColor = CancelButtonColor;
 			_cancelButton.TextColor = CancelTextColor;
@@ -252,14 +258,17 @@ namespace Forms9Patch
 					}
 				}
 			};
+
 		}
+        #endregion
 
 
-		/// <summary>
-		/// Ons the property changed.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged(string propertyName = null)
+        #region Property Change Management
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == TitleProperty.PropertyName)
@@ -279,5 +288,6 @@ namespace Forms9Patch
 			else if (propertyName == CancelButtonColorProperty.PropertyName)
 				_cancelButton.BackgroundColor = CancelButtonColor;
 		}
-	}
+        #endregion
+    }
 }

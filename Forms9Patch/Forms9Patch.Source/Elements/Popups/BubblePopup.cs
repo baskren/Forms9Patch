@@ -18,8 +18,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View Content
         {
-            get { return _bubbleLayout.Content; }
-            set { _bubbleLayout.Content = value; }
+            get => _bubbleLayout.Content; 
+            set => _bubbleLayout.Content = value; 
         }
         #endregion
 
@@ -34,11 +34,8 @@ namespace Forms9Patch
         /// <value>The target bias.</value>
         public double TargetBias
         {
-            get { return (double)GetValue(TargetBiasProperty); }
-            set
-            {
-                SetValue(TargetBiasProperty, value);
-            }
+            get => (double)GetValue(TargetBiasProperty); 
+            set => SetValue(TargetBiasProperty, value);
         }
 
         #endregion
@@ -56,8 +53,8 @@ namespace Forms9Patch
         /// <value>The length of the pointer.</value>
         public float PointerLength
         {
-            get { return (float)GetValue(PointerLengthProperty); }
-            set { SetValue(PointerLengthProperty, value); }
+            get => (float)GetValue(PointerLengthProperty); 
+            set => SetValue(PointerLengthProperty, value); 
         }
         #endregion
 
@@ -72,8 +69,8 @@ namespace Forms9Patch
         /// <value>The pointer tip radius.</value>
         public float PointerTipRadius
         {
-            get { return (float)GetValue(PointerTipRadiusProperty); }
-            set { SetValue(PointerTipRadiusProperty, value); }
+            get => (float)GetValue(PointerTipRadiusProperty); 
+            set => SetValue(PointerTipRadiusProperty, value); 
         }
         #endregion
 
@@ -88,8 +85,8 @@ namespace Forms9Patch
         /// <value>The pointer direction.</value>
         public PointerDirection PointerDirection
         {
-            get { return (PointerDirection)GetValue(PointerDirectionProperty); }
-            set { SetValue(PointerDirectionProperty, value); }
+            get => (PointerDirection)GetValue(PointerDirectionProperty); 
+            set => SetValue(PointerDirectionProperty, value); 
         }
         #endregion
 
@@ -103,8 +100,8 @@ namespace Forms9Patch
         /// </summary>
         public PointerDirection PreferredPointerDirection
         {
-            get { return (PointerDirection)GetValue(PreferredPointerDirectionProperty); }
-            set { SetValue(PreferredPointerDirectionProperty, value); }
+            get => (PointerDirection)GetValue(PreferredPointerDirectionProperty); 
+            set => SetValue(PreferredPointerDirectionProperty, value); 
         }
         #endregion PreferredPointerDirection property
 
@@ -119,8 +116,8 @@ namespace Forms9Patch
         /// <value>The pointer corner radius.</value>
         public float PointerCornerRadius
         {
-            get { return (float)GetValue(PointerCornerRadiusProperty); }
-            set { SetValue(PointerCornerRadiusProperty, value); }
+            get => (float)GetValue(PointerCornerRadiusProperty); 
+            set => SetValue(PointerCornerRadiusProperty, value); 
         }
         #endregion
 
@@ -134,8 +131,8 @@ namespace Forms9Patch
         /// </summary>
         internal float PointerAngle
         {
-            get { return (float)GetValue(PointerAngleProperty); }
-            set { SetValue(PointerAngleProperty, value); }
+            get => (float)GetValue(PointerAngleProperty); 
+            set => SetValue(PointerAngleProperty, value); 
         }
         #endregion PointerAngle property
 
@@ -149,8 +146,8 @@ namespace Forms9Patch
         /// </summary>
         public Point Point
         {
-            get { return (Point)GetValue(PointProperty); }
-            set { SetValue(PointProperty, value); }
+            get => (Point)GetValue(PointProperty); 
+            set => SetValue(PointProperty, value); 
         }
         #endregion Point property
 

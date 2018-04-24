@@ -11,9 +11,8 @@ namespace Forms9Patch
 		/// Gets the collection of spans.
 		/// </summary>
 		/// <value>The spans.</value>
-		public ObservableCollection<Span> Spans {
-			get { return _spans; }
-		}
+		public ObservableCollection<Span> Spans => _spans; 
+		
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Forms9Patch.SpanFormattedString"/> class.

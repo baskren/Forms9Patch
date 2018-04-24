@@ -7,32 +7,35 @@ namespace Forms9Patch
 	/// </summary>
 	public class TargetedToast : BubblePopup
 	{
-		/// <summary>
-		/// Create the specified target, title and text.
-		/// </summary>
-		/// <param name="target">Target.</param>
-		/// <param name="title">Title.</param>
-		/// <param name="text">Text.</param>
-		public static TargetedToast Create(VisualElement target, string title, string text)
+        #region Factory
+        /// <summary>
+        /// Create the specified target, title and text.
+        /// </summary>
+        /// <param name="target">Target.</param>
+        /// <param name="title">Title.</param>
+        /// <param name="text">Text.</param>
+        public static TargetedToast Create(VisualElement target, string title, string text)
 		{
 			var toast = new TargetedToast(target) { Title = title, Text = text };
 			toast.IsVisible = true;
 			return toast;
 		}
+        #endregion
 
-		#region Properties
-		/// <summary>
-		/// The title property backing store.
-		/// </summary>
-		public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(TargetedToast), default(string));
+
+        #region Properties
+        /// <summary>
+        /// The title property backing store.
+        /// </summary>
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(TargetedToast), default(string));
 		/// <summary>
 		/// Gets or sets the title.
 		/// </summary>
 		/// <value>The title.</value>
 		public string Title
 		{
-			get { return (string)GetValue(TitleProperty); }
-			set { SetValue(TitleProperty, value); }
+			get => (string)GetValue(TitleProperty); 
+			set => SetValue(TitleProperty, value); 
 		}
 
 		/// <summary>
@@ -45,8 +48,8 @@ namespace Forms9Patch
 		/// <value>The text.</value>
 		public string Text
 		{
-			get { return (string)GetValue(TextProperty); }
-			set { SetValue(TextProperty, value); }
+			get => (string)GetValue(TextProperty); 
+			set => SetValue(TextProperty, value); 
 		}
 
 		/// <summary>
@@ -59,8 +62,8 @@ namespace Forms9Patch
 		/// <value>The color of the text.</value>
 		public Color TextColor
 		{
-			get { return (Color)GetValue(TextColorProperty); }
-			set { SetValue(TextColorProperty, value); }
+			get => (Color)GetValue(TextColorProperty); 
+			set => SetValue(TextColorProperty, value); 
 		}
 
 
@@ -74,8 +77,8 @@ namespace Forms9Patch
 		/// <value>The ok text.</value>
 		public string OkText
 		{
-			get { return (string)GetValue(OkTextProperty); }
-			set { SetValue(OkTextProperty, value); }
+			get => (string)GetValue(OkTextProperty); 
+			set => SetValue(OkTextProperty, value); 
 		}
 
 		/// <summary>
@@ -88,8 +91,8 @@ namespace Forms9Patch
 		/// <value>The color of the ok button.</value>
 		public Color OkButtonColor
 		{
-			get { return (Color)GetValue(OkButtonColorProperty); }
-			set { SetValue(OkButtonColorProperty, value); }
+			get => (Color)GetValue(OkButtonColorProperty); 
+			set => SetValue(OkButtonColorProperty, value); 
 		}
 
 		/// <summary>
@@ -102,8 +105,8 @@ namespace Forms9Patch
 		/// <value>The color of the ok text.</value>
 		public Color OkTextColor
 		{
-			get { return (Color)GetValue(OkTextColorProperty); }
-			set { SetValue(OkTextColorProperty, value); }
+			get => (Color)GetValue(OkTextColorProperty); 
+			set => SetValue(OkTextColorProperty, value); 
 		}
 
 		#endregion
@@ -127,14 +130,15 @@ namespace Forms9Patch
 		{
 			//HorizontalOptions = LayoutOptions.Fill
 		};
-		#endregion
+        #endregion
 
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:Forms9Patch.TargetedToast"/> class.
-		/// </summary>
-		/// <param name="target">Target.</param>
-		public TargetedToast(VisualElement target) : base (target)
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.TargetedToast"/> class.
+        /// </summary>
+        /// <param name="target">Target.</param>
+        public TargetedToast(VisualElement target) : base (target)
 		{
 			_okButton.BackgroundColor = OkButtonColor;
 			_okButton.TextColor = OkTextColor;
@@ -160,12 +164,15 @@ namespace Forms9Patch
 				}
 			};
 		}
+        #endregion
 
-		/// <summary>
-		/// Ons the property changed.
-		/// </summary>
-		/// <param name="propertyName">Property name.</param>
-		protected override void OnPropertyChanged(string propertyName = null)
+
+        #region Property Change Management
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        protected override void OnPropertyChanged(string propertyName = null)
 		{
 			base.OnPropertyChanged(propertyName);
 			if (propertyName == TitleProperty.PropertyName)
@@ -190,5 +197,6 @@ namespace Forms9Patch
 				_textLabel.TextColor = TextColor;
 			}
 		}
-	}
+        #endregion
+    }
 }

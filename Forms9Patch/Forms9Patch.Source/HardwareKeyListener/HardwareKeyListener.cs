@@ -20,8 +20,8 @@ namespace Forms9Patch
         /// <value>The hardware key.</value>
         public HardwareKey HardwareKey
         {
-            get { return (HardwareKey)GetValue(HardwareKeyProperty); }
-            set { SetValue(HardwareKeyProperty, value); }
+            get => (HardwareKey)GetValue(HardwareKeyProperty); 
+            set => SetValue(HardwareKeyProperty, value); 
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Forms9Patch
         /// <value>The command.</value>
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => (ICommand)GetValue(CommandProperty); 
+            set => SetValue(CommandProperty, value); 
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Forms9Patch
         /// <value>The command parameter.</value>
         public object CommandParameter
         {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => GetValue(CommandParameterProperty); 
+            set => SetValue(CommandParameterProperty, value); 
         }
 
         /// <summary>

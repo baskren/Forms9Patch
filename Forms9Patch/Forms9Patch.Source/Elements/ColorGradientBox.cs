@@ -50,10 +50,8 @@ namespace Forms9Patch
             set { SetValue(OrientationProperty, value); }
         }
 
-        static ColorGradientBox()
-        {
-            Settings.ConfirmInitialization();
-        }
+        static ColorGradientBox() => Settings.ConfirmInitialization();
+        
 
     }
 }

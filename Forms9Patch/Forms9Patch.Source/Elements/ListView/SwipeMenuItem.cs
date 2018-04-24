@@ -9,6 +9,8 @@ namespace Forms9Patch
     public class SwipeMenuItem : BindableObject, IMenuItem
     {
         #region Properties
+
+        #region Key property
         /// <summary>
         /// The key property backing store.
         /// </summary>
@@ -19,26 +21,10 @@ namespace Forms9Patch
         /// <value>The key.</value>
         public string Key
         {
-            get { return (string)GetValue(KeyProperty) ?? (string)GetValue(TextProperty); }
-            set { SetValue(KeyProperty, value); }
+            get => (string)GetValue(KeyProperty) ?? (string)GetValue(TextProperty); 
+            set => SetValue(KeyProperty, value); 
         }
-
-
-        /*
-        /// <summary>
-        /// The icon image source property backing store;
-        /// </summary>
-        public static readonly BindableProperty IconImageSourceProperty = BindableProperty.Create("IconImageSource", typeof(Forms9Patch.ImageSource), typeof(SwipeMenuItem), default(Forms9Patch.ImageSource));
-        /// <summary>
-        /// Gets or sets the icon image source - an alternative to IconText.
-        /// </summary>
-        /// <value>The icon image source.</value>
-        public Forms9Patch.ImageSource ImageSource
-        {
-            get { return (Forms9Patch.ImageSource)GetValue(IconImageSourceProperty); }
-            set { SetValue(IconImageSourceProperty, value); }
-        }
-        */
+        #endregion Key property
 
         #region IconImage property
         /// <summary>
@@ -50,13 +36,12 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.Image IconImage
         {
-            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set { SetValue(IconImageProperty, value); }
+            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
+            set => SetValue(IconImageProperty, value); 
         }
         #endregion IconImage property
 
-
-
+        #region IconText Property
         /// <summary>
         /// The icon text property backing store.
         /// </summary>
@@ -67,10 +52,12 @@ namespace Forms9Patch
         /// <value>The icon text.</value>
         public string IconText
         {
-            get { return (string)GetValue(IconTextProperty); }
-            set { SetValue(IconTextProperty, value); }
+            get => (string)GetValue(IconTextProperty); 
+            set => SetValue(IconTextProperty, value); 
         }
+        #endregion IconText property
 
+        #region Text property
         /// <summary>
         /// The text property backing store.
         /// </summary>
@@ -81,10 +68,10 @@ namespace Forms9Patch
         /// <value>The html text.</value>
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty); 
+            set => SetValue(TextProperty, value); 
         }
-
+        #endregion Text Property
 
         #region HtmlText property
         /// <summary>
@@ -96,13 +83,12 @@ namespace Forms9Patch
         /// </summary>
         public string HtmlText
         {
-            get { return (string)GetValue(HtmlTextProperty); }
-            set { SetValue(HtmlTextProperty, value); }
+            get => (string)GetValue(HtmlTextProperty); 
+            set => SetValue(HtmlTextProperty, value); 
         }
         #endregion HtmlText property
 
-
-
+        #region TextColor property
         /// <summary>
         /// The text color property.
         /// </summary>
@@ -113,10 +99,12 @@ namespace Forms9Patch
         /// <value>The color of the text.</value>
         public Color TextColor
         {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color)GetValue(TextColorProperty); 
+            set => SetValue(TextColorProperty, value); 
         }
+        #endregion TextColor property
 
+        #region SwipeExecutable Property
         /// <summary>
         /// The swipe executable property backing store.
         /// </summary>
@@ -128,10 +116,12 @@ namespace Forms9Patch
         /// <value><c>true</c> if swipe executable; otherwise, <c>false</c>.</value>
         public bool IsTriggeredOnFullSwipe
         {
-            get { return (bool)GetValue(SwipeExecutableProperty); }
-            set { SetValue(SwipeExecutableProperty, value); }
+            get => (bool)GetValue(SwipeExecutableProperty); 
+            set => SetValue(SwipeExecutableProperty, value); 
         }
+        #endregion SwipeExecutable region
 
+        #region BackgroundColor property
         /// <summary>
         /// The background color property backing store.
         /// </summary>
@@ -142,9 +132,10 @@ namespace Forms9Patch
         /// <value>The color of the background.</value>
         public Color BackgroundColor
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Color)GetValue(BackgroundColorProperty); 
+            set => SetValue(BackgroundColorProperty, value); 
         }
+        #endregion BackgroundColor property
 
         /*
 		/// <summary>

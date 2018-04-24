@@ -16,7 +16,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The size.</value>
 		public float Size {
-			get { return _size; }
+			get => _size; 
 			set {
 				if (Math.Abs (_size - value) < 0.01)
 					return;

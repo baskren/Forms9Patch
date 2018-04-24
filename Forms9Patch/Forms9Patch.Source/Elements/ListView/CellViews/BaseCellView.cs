@@ -46,8 +46,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View ContentView
         {
-            get { return (View)GetValue(ContentViewProperty); }
-            set { SetValue(ContentViewProperty, value); }
+            get => (View)GetValue(ContentViewProperty); 
+            set => SetValue(ContentViewProperty, value); 
         }
 
         internal bool IsHeader;
@@ -203,6 +203,7 @@ namespace Forms9Patch
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Absolute)}
             };
 
+            
             var thisListener = FormsGestures.Listener.For(this);
             thisListener.Tapped += OnTapped;
             thisListener.LongPressed += OnLongPressed;
@@ -211,6 +212,7 @@ namespace Forms9Patch
             thisListener.Panning += OnPanning;
             thisListener.RightClicked += OnRightClicked;
             //thisListener.Swiped += OnSwipe;
+            
 
             _swipeFrame1.Content = _swipeButton1;
             _swipeFrame2.Content = _swipeButton2;
@@ -264,6 +266,7 @@ namespace Forms9Patch
 
         void OnPanned(object sender, PanEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
             {
@@ -323,6 +326,7 @@ namespace Forms9Patch
         void OnPanning(object sender, PanEventArgs e)
         {
             ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             if (_panVt)
                 return;
             if (!_panVt && !_panHz)

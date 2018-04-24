@@ -60,8 +60,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.ImageSource Source
         {
-            get { return (Xamarin.Forms.ImageSource)GetValue(SourceProperty); }
-            set { SetValue(SourceProperty, value); }
+            get => (Xamarin.Forms.ImageSource)GetValue(SourceProperty); 
+            set => SetValue(SourceProperty, value); 
         }
         #endregion Source property
 
@@ -73,10 +73,8 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the IsLoading property
         /// </summary>
-        public bool IsLoading
-        {
-            get { return (bool)GetValue(IsLoadingProperty); }
-        }
+        public bool IsLoading => (bool)GetValue(IsLoadingProperty); 
+        
         #endregion IsLoading property
 
         #region Fill
@@ -91,8 +89,8 @@ namespace Forms9Patch
         /// <value>The fill method (AspectFill, AspectFit, Fill, Tile)</value>
         public Fill Fill
         {
-            get { return (Fill)GetValue(FillProperty); }
-            set { SetValue(FillProperty, value); }
+            get => (Fill)GetValue(FillProperty); 
+            set => SetValue(FillProperty, value); 
         }
         #endregion Fill
 
@@ -112,14 +110,8 @@ namespace Forms9Patch
         /// <value>The end-cap insets.</value>
         public Thickness CapInsets
         {
-            get
-            {
-                return (Thickness)GetValue(CapInsetsProperty);
-            }
-            set
-            {
-                SetValue(CapInsetsProperty, value);
-            }
+            get => (Thickness)GetValue(CapInsetsProperty);
+            set => SetValue(CapInsetsProperty, value);
         }
         #endregion CapInsets
 
@@ -134,8 +126,8 @@ namespace Forms9Patch
         /// <value>The content padding.</value>
         public Thickness ContentPadding
         {
-            get { return (Thickness)GetValue(ContentPaddingProperty); }
-            internal set { SetValue(ContentPaddingProperty, value); }
+            get => (Thickness)GetValue(ContentPaddingProperty); 
+            internal set => SetValue(ContentPaddingProperty, value); 
         }
         #endregion ContentPadding
 
@@ -150,8 +142,8 @@ namespace Forms9Patch
         /// <value>The tint.  Default is not to tint the image</value>
         public Color TintColor
         {
-            get { return (Color)GetValue(TintColorProperty); }
-            set { SetValue(TintColorProperty, value); }
+            get => (Color)GetValue(TintColorProperty); 
+            set => SetValue(TintColorProperty, value); 
         }
         #endregion TintColor
 
@@ -162,8 +154,8 @@ namespace Forms9Patch
         /// </summary>
         public Size SourceImageSize
         {
-            get { return (Size)GetValue(BaseImageSizeProperty); }
-            internal set { SetValue(BaseImageSizeProperty, value); }
+            get => (Size)GetValue(BaseImageSizeProperty); 
+            internal set => SetValue(BaseImageSizeProperty, value); 
         }
         #endregion SourceImageSize
 
@@ -177,8 +169,8 @@ namespace Forms9Patch
         /// </summary>
         public bool AntiAlias
         {
-            get { return (bool)GetValue(AntiAliasProperty); }
-            set { SetValue(AntiAliasProperty, value); }
+            get => (bool)GetValue(AntiAliasProperty); 
+            set => SetValue(AntiAliasProperty, value); 
         }
         #endregion AntiAlias property
 
@@ -194,8 +186,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Color)GetValue(BackgroundColorProperty); 
+            set => SetValue(BackgroundColorProperty, value); 
         }
         #endregion BackgroundColor property
 
@@ -209,8 +201,8 @@ namespace Forms9Patch
         /// </summary>
         public bool HasShadow
         {
-            get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
+            get => (bool)GetValue(HasShadowProperty); 
+            set => SetValue(HasShadowProperty, value); 
         }
         #endregion HasShadow property
 
@@ -224,8 +216,8 @@ namespace Forms9Patch
         /// </summary>
         public bool ShadowInverted
         {
-            get { return (bool)GetValue(ShadowInvertedProperty); }
-            set { SetValue(ShadowInvertedProperty, value); }
+            get => (bool)GetValue(ShadowInvertedProperty); 
+            set => SetValue(ShadowInvertedProperty, value);
         }
         #endregion ShadowInverted property
 
@@ -239,8 +231,8 @@ namespace Forms9Patch
         /// </summary>
         public Color OutlineColor
         {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
+            get => (Color)GetValue(OutlineColorProperty); 
+            set => SetValue(OutlineColorProperty, value); 
         }
         #endregion OutlineColor property
 
@@ -254,8 +246,8 @@ namespace Forms9Patch
         /// </summary>
         public float OutlineRadius
         {
-            get { return (float)GetValue(OutlineRadiusProperty); }
-            set { SetValue(OutlineRadiusProperty, value); }
+            get => (float)GetValue(OutlineRadiusProperty); 
+            set => SetValue(OutlineRadiusProperty, value); 
         }
         #endregion OutlineRadius property
 
@@ -269,8 +261,8 @@ namespace Forms9Patch
         /// </summary>
         public float OutlineWidth
         {
-            get { return (float)GetValue(OutlineWidthProperty); }
-            set { SetValue(OutlineWidthProperty, value); }
+            get => (float)GetValue(OutlineWidthProperty); 
+            set => SetValue(OutlineWidthProperty, value); 
         }
         #endregion OutlineWidth property
 
@@ -284,8 +276,8 @@ namespace Forms9Patch
         /// </summary>
         public ElementShape ElementShape
         {
-            get { return (ElementShape)GetValue(ElementShapeProperty); }
-            set { SetValue(ElementShapeProperty, value); }
+            get => (ElementShape)GetValue(ElementShapeProperty); 
+            set => SetValue(ElementShapeProperty, value); 
         }
         #endregion ElementShape property
 
@@ -299,8 +291,8 @@ namespace Forms9Patch
         /// </summary>
         ExtendedElementShape IShape.ExtendedElementShape
         {
-            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
-            set { SetValue(ExtendedElementShapeProperty, value); }
+            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
+            set => SetValue(ExtendedElementShapeProperty, value); 
         }
         #endregion ExtendedElementShape property
 

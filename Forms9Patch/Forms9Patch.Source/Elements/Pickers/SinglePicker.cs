@@ -20,8 +20,8 @@ namespace Forms9Patch
         /// <value>The item templates.</value>
         public DataTemplateSelector ItemTemplates
         {
-            get { return (DataTemplateSelector)GetValue(ItemTemplatesProperty); }
-            private set { SetValue(ItemTemplatesProperty, value); }
+            get => (DataTemplateSelector)GetValue(ItemTemplatesProperty); 
+            private set => SetValue(ItemTemplatesProperty, value); 
         }
 
         /// <summary>
@@ -34,11 +34,8 @@ namespace Forms9Patch
         /// <value>The items source.</value>
         public IList ItemsSource
         {
-            get { return (IList)GetValue(ItemsSourceProperty); }
-            set
-            {
-                SetValue(ItemsSourceProperty, value);
-            }
+            get => (IList)GetValue(ItemsSourceProperty); 
+            set=> SetValue(ItemsSourceProperty, value);
         }
 
         /// <summary>
@@ -51,8 +48,8 @@ namespace Forms9Patch
         /// <value>The height of the row.</value>
         public int RowHeight
         {
-            get { return (int)GetValue(RowHeightProperty); }
-            set { SetValue(RowHeightProperty, value); }
+            get => (int)GetValue(RowHeightProperty); 
+            set => SetValue(RowHeightProperty, value); 
         }
 
         /// <summary>
@@ -65,8 +62,8 @@ namespace Forms9Patch
         /// <value>The index.</value>
         public int Index
         {
-            get { return (int)GetValue(IndexProperty); }
-            set { SetValue(IndexProperty, value); }
+            get => (int)GetValue(IndexProperty); 
+            set => SetValue(IndexProperty, value); 
         }
 
         /// <summary>
@@ -79,8 +76,8 @@ namespace Forms9Patch
         /// <value>The selected item.</value>
         public object SelectedItem
         {
-            get { return GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => GetValue(SelectedItemProperty); 
+            set => SetValue(SelectedItemProperty, value); 
         }
 
         #endregion

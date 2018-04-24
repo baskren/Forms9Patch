@@ -30,8 +30,8 @@ namespace Forms9Patch
         /// <value>The text.</value>
         public new string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty); 
+            set => SetValue(TextProperty, value); 
         }
         #endregion Text
 
@@ -46,8 +46,8 @@ namespace Forms9Patch
         /// <value>The formatted text.</value>
         public new string HtmlText
         {
-            get { return (string)GetValue(HtmlTextProperty); }
-            set { SetValue(HtmlTextProperty, value); }
+            get => (string)GetValue(HtmlTextProperty); 
+            set => SetValue(HtmlTextProperty, value); 
         }
         #endregion HtmlText
 
@@ -61,8 +61,8 @@ namespace Forms9Patch
         /// </summary>
         public new Forms9Patch.Image IconImage
         {
-            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set { SetValue(IconImageProperty, value); }
+            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
+            set => SetValue(IconImageProperty, value); 
         }
         #endregion IconImage
 
@@ -77,8 +77,8 @@ namespace Forms9Patch
         /// <value>The image text.</value>
         public new string IconText
         {
-            get { return (string)GetValue(IconTextProperty); }
-            set { SetValue(IconTextProperty, value); }
+            get => (string)GetValue(IconTextProperty); 
+            set => SetValue(IconTextProperty, value); 
         }
         #endregion IconText
 
@@ -96,8 +96,8 @@ namespace Forms9Patch
         /// <value>The ButtonState structure for the default button state.</value>
         public ButtonState DefaultState
         {
-            get { return (ButtonState)GetValue(DefaultStateProperty); }
-            set { SetValue(DefaultStateProperty, value); }
+            get => (ButtonState)GetValue(DefaultStateProperty); 
+            set => SetValue(DefaultStateProperty, value); 
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Forms9Patch
         /// <value>The ButtonState structure for the pressing button state.</value>
         public ButtonState PressingState
         {
-            get { return (ButtonState)GetValue(PressingStateProperty); }
-            set { SetValue(PressingStateProperty, value); }
+            get => (ButtonState)GetValue(PressingStateProperty); 
+            set => SetValue(PressingStateProperty, value); 
         }
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace Forms9Patch
         /// <value>The ButtonState structure for the selected button state.</value>
         public ButtonState SelectedState
         {
-            get { return (ButtonState)GetValue(SelectedStateProperty); }
-            set { SetValue(SelectedStateProperty, value); }
+            get => (ButtonState)GetValue(SelectedStateProperty); 
+            set => SetValue(SelectedStateProperty, value); 
         }
 
         /// <summary>
@@ -138,8 +138,8 @@ namespace Forms9Patch
         /// <value>The ButtonState structure for the disabled button state.</value>
         public ButtonState DisabledState
         {
-            get { return (ButtonState)GetValue(DisabledStateProperty); }
-            set { SetValue(DisabledStateProperty, value); }
+            get => (ButtonState)GetValue(DisabledStateProperty); 
+            set => SetValue(DisabledStateProperty, value); 
         }
 
         /// <summary>
@@ -152,8 +152,8 @@ namespace Forms9Patch
         /// <value>The ButtonState structure for the disabled and selected button state.</value>
         public ButtonState DisabledAndSelectedState
         {
-            get { return (ButtonState)GetValue(DisabledAndSelectedStateProperty); }
-            set { SetValue(DisabledAndSelectedStateProperty, value); }
+            get => (ButtonState)GetValue(DisabledAndSelectedStateProperty); 
+            set => SetValue(DisabledAndSelectedStateProperty, value); 
         }
         #endregion
 

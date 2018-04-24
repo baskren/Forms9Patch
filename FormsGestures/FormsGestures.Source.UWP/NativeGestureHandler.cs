@@ -58,6 +58,79 @@ namespace FormsGestures.UWP
             
         }
 
+        bool HandlesTranslate
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesPanning || listener.HandlesPanned)
+                        return true;
+                return false;
+            }
+        }
+
+        bool HandlesRotate
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesRotating || listener.HandlesRotated)
+                        return true;
+                return false;
+            }
+        }
+
+        bool HandlesPinch
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesPinching || listener.HandlesPinched)
+                        return true;
+                return false;
+            }
+        }
+
+        ManipulationModes CurrentManipulationModes
+        { 
+            get
+            {
+                ManipulationModes modes = ManipulationModes.System;
+
+                // TODO: Look into what happens when using ManipulationModes.System (DirectManipulation)
+
+                if (HandlesTranslate)
+                {
+
+                    // TODO: IMPORTANT:  NEED TO FIGURE THIS ONE OUT ASAP
+                    // Could we disable TranslateY for any element inside of a ScrollView?
+                    // Concept:  If this element has an ancestor that is a ScrollView FrameworkElement, then we are going to assume one or both the pan directions needs to be given the the ScrollView.  
+                    // 1. Find ScrollView
+                    //var scrollView = FrameworkElement.GetClosestAncestor<Windows.UI.Xaml.Controls.ScrollViewer>();
+                    var element = (_listeners != null && _listeners.Count > 0 ? _listeners[0].Element : null);
+                    if (element.GetType().ToString() == "Forms9Patch.BaseCellView")
+                    {
+                        // 2. Find which direction it can scroll
+                        //if (scrollView.HorizontalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
+                            modes |= ManipulationModes.TranslateX;
+                        //if (scrollView.VerticalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
+                            modes |= ManipulationModes.TranslateY;
+                        //FrameworkElement.ManipulationMode = FrameworkElement.ManipulationMode ^ (scrollView.HorizontalScrollMode > 0 ? ManipulationModes.)
+                        // 3. Filter out that/those directions from the ManipulationMode
+                    }
+                    else
+                        modes |= ManipulationModes.TranslateX | ManipulationModes.TranslateY;
+                    if (modes != ManipulationModes.None)
+                        modes |= ManipulationModes.TranslateInertia;
+                }
+                if (HandlesRotate)
+                    modes |= ManipulationModes.Rotate | ManipulationModes.RotateInertia;
+                if (HandlesPinch)
+                    modes |= ManipulationModes.Scale | ManipulationModes.ScaleInertia;
+                return modes;
+            }
+        }
+
         IVisualElementRenderer _renderer;
         void SetRenderer()
         {
@@ -66,6 +139,8 @@ namespace FormsGestures.UWP
             {
                 if (FrameworkElement != null)
                 {
+                    FrameworkElement.ManipulationMode = ManipulationModes.None;
+
                     _renderer.ElementChanged -= OnRendererElementChanged;
 
                     //FrameworkElement.ManipulationMode = ManipulationModes.None;  // commented this out because line 112 was commented out
@@ -105,11 +180,15 @@ namespace FormsGestures.UWP
 
                     //FrameworkElement.ManipulationStarting += OnManipulationStarting;
 
+                    
                     FrameworkElement.ManipulationStarted += OnManipulationStarted;
                     FrameworkElement.ManipulationDelta += OnManipulationDelta;
                     FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
                     FrameworkElement.ManipulationCompleted += OnManipulationComplete;
-                    //FrameworkElement.ManipulationMode = ManipulationModes.All;  // enabling this line causes touch scrolling to stop working
+                    
+                    FrameworkElement.ManipulationMode = CurrentManipulationModes;
+
+
 
 
                     //FrameworkElement.Tapped += _UwpElement_Tapped;
@@ -135,6 +214,11 @@ namespace FormsGestures.UWP
             }
         }
 
+        void OnListenerHandlesManipulationChanged(object sender, bool state)
+        {
+            if (FrameworkElement!=null)
+                FrameworkElement.ManipulationMode = CurrentManipulationModes;
+        }
 
         FrameworkElement FrameworkElement => _renderer as FrameworkElement;
         /*
@@ -248,26 +332,40 @@ namespace FormsGestures.UWP
             if (!(_listeners.Contains(listener)))
             {
                 _listeners.Add(listener);
-                // listener.Disposing += RemoveListener;
+
                 listener.Disposing += OnListenerDisposing;
+                listener.HandlesPannedChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesPanningChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesPinchedChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesPinchingChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesRotatedChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesRotatingChanged += OnListenerHandlesManipulationChanged;
+                listener.HandlesSwipedChanged += OnListenerHandlesManipulationChanged;
             }
         }
 
         private void OnListenerDisposing(object sender, System.EventArgs e)
-//        void RemoveListener(object sender, EventArgs e)
         {
-            var listener = sender as Listener;
-            //if (_listeners!=null) {
-            if (_listeners.Contains(listener))
-                _listeners.Remove(listener);
-            if (_listeners.Count < 1 && _xfElement != null)
+            if (sender is Listener listener && _listeners!=null)
             {
-                // no one is listening so shut down
-                _xfElement.SetValue(GestureHandlerProperty, null);
-                _xfElement.PropertyChanging -= OnElementPropertyChanging;
-                _xfElement.PropertyChanged -= OnElementPropertyChanged;
+                listener.HandlesPannedChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesPanningChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesPinchedChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesPinchingChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesRotatedChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesRotatingChanged -= OnListenerHandlesManipulationChanged;
+                listener.HandlesSwipedChanged -= OnListenerHandlesManipulationChanged;
+
+                if (_listeners.Contains(listener))
+                    _listeners.Remove(listener);
+                if (_listeners.Count < 1 && _xfElement != null)
+                {
+                    // no one is listening so shut down
+                    _xfElement.SetValue(GestureHandlerProperty, null);
+                    _xfElement.PropertyChanging -= OnElementPropertyChanging;
+                    _xfElement.PropertyChanged -= OnElementPropertyChanged;
+                }
             }
-            //}
         }
 
         static NativeGestureHandler GetInstanceForElement(VisualElement element)
@@ -277,9 +375,9 @@ namespace FormsGestures.UWP
 
         static internal NativeGestureHandler GetInstanceForListener(Listener listener)
         {
-            var iOSGestureHandler = GetInstanceForElement(listener.Element) ?? new NativeGestureHandler(listener.Element);
-            iOSGestureHandler.AddListener(listener);
-            return iOSGestureHandler;
+            var uwpGestureHandler = GetInstanceForElement(listener.Element) ?? new NativeGestureHandler(listener.Element);
+            uwpGestureHandler.AddListener(listener);
+            return uwpGestureHandler;
         }
 
 
@@ -550,6 +648,8 @@ namespace FormsGestures.UWP
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() +"("+sender+", [d:{"+e.Delta.Translation.X+","+e.Delta.Translation.Y+"} c:{"+e.Cumulative.Translation.Y+","+e.Cumulative.Translation.Y+"}])");
+
             _longPressing = false;
             _holdTimer?.Stop();
             _holdTimer = null;

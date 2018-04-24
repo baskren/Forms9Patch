@@ -877,10 +877,8 @@ namespace Forms9Patch
                 Remove(itemWrapper);
         }
 
-        public bool IsFixedSize
-        {
-            get { return false; }
-        }
+        public bool IsFixedSize => false; 
+        
 
         public void CopyTo(Array array, int index)
         {

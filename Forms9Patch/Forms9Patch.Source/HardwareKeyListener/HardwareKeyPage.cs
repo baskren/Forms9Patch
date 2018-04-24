@@ -44,7 +44,7 @@ namespace Forms9Patch
         /// <value>The focused element.</value>
         public static VisualElement FocusedElement
         {
-            get { return _element; }
+            get => _element; 
             set
             {
                 if (_element != value)

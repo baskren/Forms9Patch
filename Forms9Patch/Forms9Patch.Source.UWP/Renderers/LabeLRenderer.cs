@@ -26,7 +26,7 @@ namespace Forms9Patch.UWP
                 //    return false;
                 //string labelTextStart = "OBROUND";
                 
-                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                return (Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
                 
             }
         }
@@ -49,7 +49,7 @@ namespace Forms9Patch.UWP
 
         void DebugMeasureOverride(string mark, Windows.Foundation.Size availableSize, Windows.Foundation.Size result, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            DebugMessage(mark + " Elmt.Sz=[" + Element.Bounds.Size + "] AvailSz=[" + availableSize + "] " + DebugControlSizes() + " result=[" + result + "]", callerName);
+            DebugMessage(mark + " Elmt.Sz=[" + Element?.Bounds.Size + "] AvailSz=[" + availableSize + "] " + DebugControlSizes() + " result=[" + result + "]", callerName);
         }
 
         string DebugControlSizes()
@@ -223,7 +223,7 @@ namespace Forms9Patch.UWP
         {
             //_perfectSizeValid = false;
 
-            if (textBlock == null)
+            if (textBlock == null || Element==null)
                 return;
 
             LayoutValid = false;
@@ -266,13 +266,13 @@ namespace Forms9Patch.UWP
             //MeasureOverride(_lastAvailableSize);
             //InvalidateArrange();
             //InvalidateMeasure();
-            ((VisualElement)Element).InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
+            ((VisualElement)Element)?.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
         }
 
         void UpdateMinFontSize(TextBlock textBlock)
         {
             var label = Element;
-            if (label == null)
+            if (label == null || textBlock==null)
                 return;
             if (label.MinFontSize > Control.FontSize || Control.Inlines.ExceedsFontSize(label.MinFontSize))
                 ForceLayout(textBlock);
@@ -286,7 +286,7 @@ namespace Forms9Patch.UWP
         {
             DebugMessage("ENTER(" + widthConstraint + "," + heightConstraint + ")");
             var desiredSize = MeasureOverride(new Windows.Foundation.Size(widthConstraint, heightConstraint));
-            var minSize = new Xamarin.Forms.Size(10, FontExtensions.LineHeightForFontSize(Element.DecipheredMinFontSize()));
+            var minSize = new Xamarin.Forms.Size(10, Element!=null ? FontExtensions.LineHeightForFontSize(Element.DecipheredMinFontSize()):10);
             DebugMessage("EXIT(" + desiredSize + ")");
             return new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
         }

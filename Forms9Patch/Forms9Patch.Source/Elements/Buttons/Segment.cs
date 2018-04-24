@@ -60,11 +60,8 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.Image IconImage
         {
-            get { return (Forms9Patch.Image)GetValue(IconImageProperty); }
-            set
-            {
-                SetValue(IconImageProperty, value);
-            }
+            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
+            set => SetValue(IconImageProperty, value);
         }
         #endregion IconImage property
 
@@ -79,8 +76,8 @@ namespace Forms9Patch
         /// <value>The icon text.</value>
         public string IconText
         {
-            get { return (string)GetValue(IconTextProperty); }
-            set { SetValue(IconTextProperty, value); }
+            get => (string)GetValue(IconTextProperty); 
+            set => SetValue(IconTextProperty, value); 
         }
         #endregion IconText property
 
@@ -95,8 +92,8 @@ namespace Forms9Patch
         /// <value>The text.</value>
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty); 
+            set => SetValue(TextProperty, value); 
         }
         #endregion
 
@@ -115,11 +112,8 @@ namespace Forms9Patch
         /// <value>The formatted text.</value>
         public string HtmlText
         {
-            get { return (string)GetValue(HtmlTextProperty); }
-            set
-            {
-                SetValue(HtmlTextProperty, value);
-            }
+            get => (string)GetValue(HtmlTextProperty); 
+            set => SetValue(HtmlTextProperty, value);
         }
         #endregion HtmlText property
 
@@ -134,8 +128,8 @@ namespace Forms9Patch
         /// <value>The color of the font.</value>
         public Color TextColor
         {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color)GetValue(TextColorProperty); 
+            set => SetValue(TextColorProperty, value); 
         }
         #endregion
 
@@ -151,7 +145,7 @@ namespace Forms9Patch
         /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)GetValue(FontAttributesProperty); }
+            get => (FontAttributes)GetValue(FontAttributesProperty); 
             set
             {
                 FontAttributesSet = true;
@@ -171,11 +165,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         public bool IsEnabled
         {
-            get { return (bool)GetValue(IsEnabledProperty); }
-            set
-            {
-                SetValue(IsEnabledProperty, value);
-            }
+            get => (bool)GetValue(IsEnabledProperty); 
+            set => SetValue(IsEnabledProperty, value);
         }
         #endregion IsEnabled property
 
@@ -190,11 +181,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if selected; otherwise, <c>false</c>.</value>
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set
-            {
-                SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)GetValue(IsSelectedProperty); 
+            set => SetValue(IsSelectedProperty, value);
         }
         #endregion IsSelected property
 
@@ -209,8 +197,8 @@ namespace Forms9Patch
         /// <value>The iamge/label orientation.</value>
         public StackOrientation Orientation
         {
-            get { return (StackOrientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (StackOrientation)GetValue(OrientationProperty); 
+            set => SetValue(OrientationProperty, value); 
         }
         #endregion Orientation property
 
@@ -236,8 +224,8 @@ namespace Forms9Patch
         {
             //get { return (ICommand)GetValue (CommandProperty); }
             //set { SetValue (CommandProperty, value); }
-            get { return _button.Command; }
-            set { _button.Command = value; }
+            get => _button.Command; 
+            set => _button.Command = value; 
         }
         #endregion ICommand property
 
@@ -259,8 +247,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get { return _button.CommandParameter; }
-            set { _button.CommandParameter = value; }
+            get => _button.CommandParameter; 
+            set => _button.CommandParameter = value; 
         }
         #endregion ICommandParameter property
 
@@ -269,10 +257,8 @@ namespace Forms9Patch
         /// Gets the visual element used to render the Segment (to support Bubble Popup).
         /// </summary>
         /// <value>The visual element.</value>
-        public VisualElement VisualElement
-        {
-            get { return _button; }
-        }
+        public VisualElement VisualElement => _button; 
+        
         #endregion
 
         #endregion ISegment properties

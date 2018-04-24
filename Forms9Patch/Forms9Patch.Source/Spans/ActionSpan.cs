@@ -19,7 +19,7 @@ namespace Forms9Patch
 		string _id;
 		public string Id
 		{
-			get { return _id; }
+			get => _id; 
 			set
 			{
 				if (_id == value)
@@ -32,7 +32,7 @@ namespace Forms9Patch
 		string _href;
 		public string Href
 		{
-			get { return _href; }
+			get => _href; 
 			set
 			{
 				if (_href == value)

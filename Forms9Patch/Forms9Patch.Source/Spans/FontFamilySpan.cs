@@ -16,7 +16,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The name of the font family.</value>
 		public string FontFamilyName {
-			get { return _fontName; }
+			get => _fontName; 
 			set { 
 				if (_fontName == value)
 					return;

@@ -29,8 +29,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
         public bool IgnoreChildren
         {
-            get { return (bool)GetValue(IgnoreChildrenProperty); }
-            set { SetValue(IgnoreChildrenProperty, value); }
+            get => (bool)GetValue(IgnoreChildrenProperty); 
+            set => SetValue(IgnoreChildrenProperty, value); 
         }
         #endregion IgnoreChildren
 
@@ -47,8 +47,8 @@ namespace Forms9Patch
         /// <value>The background image.</value>
         public Image BackgroundImage
         {
-            get { return (Image)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
+            get => (Image)GetValue(BackgroundImageProperty); 
+            set => SetValue(BackgroundImageProperty, value); 
         }
         #endregion BackgroundImage
 
@@ -64,8 +64,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Color)GetValue(BackgroundColorProperty); 
+            set => SetValue(BackgroundColorProperty, value); 
         }
         #endregion BackgroundColor property
 
@@ -90,8 +90,8 @@ namespace Forms9Patch
         public bool HasShadow
 #endif
         {
-            get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
+            get => (bool)GetValue(HasShadowProperty); 
+            set => SetValue(HasShadowProperty, value); 
         }
         #endregion HasShadow property
 
@@ -107,8 +107,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
         public bool ShadowInverted
         {
-            get { return (bool)GetValue(ShadowInvertedProperty); }
-            set { SetValue(ShadowInvertedProperty, value); }
+            get => (bool)GetValue(ShadowInvertedProperty); 
+            set => SetValue(ShadowInvertedProperty, value); 
         }
         #endregion ShadowInverted
 
@@ -124,8 +124,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color OutlineColor
         {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
+            get => (Color)GetValue(OutlineColorProperty); 
+            set => SetValue(OutlineColorProperty, value); 
         }
 #else
         /// <summary>
@@ -155,8 +155,8 @@ namespace Forms9Patch
         /// <value>The outline radius.</value>
         public float OutlineRadius
         {
-            get { return (float)GetValue(OutlineRadiusProperty); }
-            set { SetValue(OutlineRadiusProperty, value); }
+            get => (float)GetValue(OutlineRadiusProperty); 
+            set => SetValue(OutlineRadiusProperty, value); 
         }
         #endregion OutlineRadius
 
@@ -171,8 +171,8 @@ namespace Forms9Patch
         /// <value>The width of the outline.</value>
         public float OutlineWidth
         {
-            get { return (float)GetValue(OutlineWidthProperty); }
-            set { SetValue(OutlineWidthProperty, value); }
+            get => (float)GetValue(OutlineWidthProperty); 
+            set => SetValue(OutlineWidthProperty, value); 
         }
         #endregion OutlineWidth
 
@@ -186,8 +186,8 @@ namespace Forms9Patch
         /// </summary>
         public ElementShape ElementShape
         {
-            get { return (ElementShape)GetValue(ElementShapeProperty); }
-            set { SetValue(ElementShapeProperty, value); }
+            get => (ElementShape)GetValue(ElementShapeProperty); 
+            set => SetValue(ElementShapeProperty, value); 
         }
         #endregion ElementShape property
 
@@ -201,8 +201,8 @@ namespace Forms9Patch
         /// </summary>
         ExtendedElementShape IShape.ExtendedElementShape
         {
-            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
-            set { SetValue(ExtendedElementShapeProperty, value); }
+            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
+            set => SetValue(ExtendedElementShapeProperty, value); 
         }
         #endregion ExtendedElementShape property
 

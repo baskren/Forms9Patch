@@ -21,8 +21,8 @@ namespace Forms9Patch
         public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create("RequestedRowHeight", typeof(double), typeof(ItemWrapper), 40.0);
         public double RequestedRowHeight
         {
-            get { return (double)GetValue(RequestedRowHeightProperty); }
-            set { SetValue(RequestedRowHeightProperty, value); }
+            get => (double)GetValue(RequestedRowHeightProperty); 
+            set => SetValue(RequestedRowHeightProperty, value); 
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Forms9Patch
         /// </summary>
         public double RenderedRowHeight
         {
-            get { return (double)GetValue(RenderedRowHeightProperty); }
-            set { SetValue(RenderedRowHeightProperty, value); }
+            get => (double)GetValue(RenderedRowHeightProperty); 
+            set => SetValue(RenderedRowHeightProperty, value); 
         }
         #endregion RowHeight properties
 
@@ -50,8 +50,8 @@ namespace Forms9Patch
         /// <value>The separator visibility.</value>
         public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
         {
-            get { return (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); }
-            internal set { SetValue(SeparatorVisibilityProperty, value); }
+            get => (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); 
+            internal set => SetValue(SeparatorVisibilityProperty, value); 
         }
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Forms9Patch
         /// <value>The color of the separator.</value>
         public Color SeparatorColor
         {
-            get { return (Color)GetValue(SeparatorColorProperty); }
-            internal set { SetValue(SeparatorColorProperty, value); }
+            get => (Color)GetValue(SeparatorColorProperty); 
+            internal set => SetValue(SeparatorColorProperty, value); 
         }
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Forms9Patch
         /// <value>The height of the separator.</value>
         public double RequestedSeparatorHeight
         {
-            get { return (double)GetValue(RequestedSeparatorHeightProperty); }
-            set { SetValue(RequestedSeparatorHeightProperty, value); }
+            get => (double)GetValue(RequestedSeparatorHeightProperty); 
+            set => SetValue(RequestedSeparatorHeightProperty, value); 
         }
 
         /// <summary>
@@ -92,12 +92,8 @@ namespace Forms9Patch
         /// <value>The separator left indent.</value>
         public double SeparatorLeftIndent
         {
-            get { return (double)GetValue(SeparatorLeftIndentProperty); }
-            set
-            {
-                SetValue(SeparatorLeftIndentProperty, value);
-                //System.Diagnostics.Debug.WriteLine("Item.SeparatorLeftIndent=["+value+"]");
-            }
+            get => (double)GetValue(SeparatorLeftIndentProperty); 
+            set => SetValue(SeparatorLeftIndentProperty, value);
         }
 
         /// <summary>
@@ -110,12 +106,8 @@ namespace Forms9Patch
         /// <value>The separator right indent.</value>
         public double SeparatorRightIndent
         {
-            get { return (double)GetValue(SeparatorRightIndentProperty); }
-            set
-            {
-                SetValue(SeparatorRightIndentProperty, value);
-                //System.Diagnostics.Debug.WriteLine("Item.SeparatorRightIndent=["+value+"]");
-            }
+            get => (double)GetValue(SeparatorRightIndentProperty); 
+            set => SetValue(SeparatorRightIndentProperty, value);
         }
         #endregion
 
@@ -123,15 +115,15 @@ namespace Forms9Patch
         public static readonly BindableProperty CellBackgroundColorProperty = BindableProperty.Create("CellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Transparent);
         public Color CellBackgroundColor
         {
-            get { return (Color)GetValue(CellBackgroundColorProperty); }
-            internal set { SetValue(CellBackgroundColorProperty, value); }
+            get => (Color)GetValue(CellBackgroundColorProperty); 
+            internal set => SetValue(CellBackgroundColorProperty, value); 
         }
 
         public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Gray);
         public Color SelectedCellBackgroundColor
         {
-            get { return (Color)GetValue(SelectedCellBackgroundColorProperty); }
-            set { SetValue(SelectedCellBackgroundColorProperty, value); }
+            get => (Color)GetValue(SelectedCellBackgroundColorProperty); 
+            set => SetValue(SelectedCellBackgroundColorProperty, value); 
         }
         #endregion
 
@@ -139,11 +131,8 @@ namespace Forms9Patch
         public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ItemWrapper), false);
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            internal set
-            {
-                SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)GetValue(IsSelectedProperty); 
+            internal set =>SetValue(IsSelectedProperty, value);
         }
         #endregion IsSelected property
 
@@ -151,8 +140,8 @@ namespace Forms9Patch
         public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(ItemWrapper), null);
         public object Source
         {
-            get { return GetValue(SourceProperty); }
-            internal set { SetValue(SourceProperty, value); }
+            get => GetValue(SourceProperty); 
+            internal set => SetValue(SourceProperty, value); 
         }
         #endregion
 
@@ -160,24 +149,21 @@ namespace Forms9Patch
         public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(ItemWrapper), -1);
         public int Index
         {
-            get { return (int)GetValue(IndexProperty); }
-            internal set { SetValue(IndexProperty, value); }
+            get => (int)GetValue(IndexProperty); 
+            internal set => SetValue(IndexProperty, value); 
         }
         #endregion
 
         #region CellView
-        public View CellView
-        {
-            get { return BaseCellView.ContentView; }
-        }
+        public View CellView => BaseCellView.ContentView; 
         #endregion
 
         #region Parent
         public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
         public GroupWrapper Parent
         {
-            get { return (GroupWrapper)GetValue(ParentProperty); }
-            set { SetValue(ParentProperty, value); }
+            get => (GroupWrapper)GetValue(ParentProperty); 
+            set => SetValue(ParentProperty, value); 
         }
         #endregion
 
@@ -289,8 +275,8 @@ namespace Forms9Patch
         internal WeakReference _weakBaseCellView;
         internal BaseCellView BaseCellView
         {
-            get { return (BaseCellView)(_weakBaseCellView != null && _weakBaseCellView.IsAlive ? _weakBaseCellView.Target : null); }
-            set { _weakBaseCellView = (value == null ? null : new WeakReference(value)); }
+            get => (BaseCellView)(_weakBaseCellView != null && _weakBaseCellView.IsAlive ? _weakBaseCellView.Target : null); 
+            set => _weakBaseCellView = (value == null ? null : new WeakReference(value)); 
         }
         #endregion
 

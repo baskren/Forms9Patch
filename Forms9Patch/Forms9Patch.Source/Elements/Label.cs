@@ -79,8 +79,8 @@ namespace Forms9Patch
         internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create("F9PFormattedString", typeof(F9PFormattedString), typeof(Label), null);
         internal F9PFormattedString F9PFormattedString
         {
-            get { return (F9PFormattedString)GetValue(F9PFormattedStringProperty); }
-            set { SetValue(F9PFormattedStringProperty, value); }
+            get => (F9PFormattedString)GetValue(F9PFormattedStringProperty); 
+            set => SetValue(F9PFormattedStringProperty, value); 
         }
         #endregion
 
@@ -95,8 +95,8 @@ namespace Forms9Patch
         /// <value>The fit.</value>
         public AutoFit AutoFit
         {
-            get { return (AutoFit)GetValue(AutoFitProperty); }
-            set { SetValue(AutoFitProperty, value); }
+            get => (AutoFit)GetValue(AutoFitProperty); 
+            set => SetValue(AutoFitProperty, value); 
         }
         #endregion
 
@@ -111,8 +111,8 @@ namespace Forms9Patch
         /// <value>The lines.</value>
         public int Lines
         {
-            get { return (int)GetValue(LinesProperty); }
-            set { SetValue(LinesProperty, value); }
+            get => (int)GetValue(LinesProperty); 
+            set => SetValue(LinesProperty, value); 
         }
         #endregion
 
@@ -127,8 +127,8 @@ namespace Forms9Patch
         /// <value>The minimum size of the font.  Default=4</value>
         public double MinFontSize
         {
-            get { return (double)GetValue(MinFontSizeProperty); }
-            set { SetValue(MinFontSizeProperty, value); }
+            get => (double)GetValue(MinFontSizeProperty); 
+            set => SetValue(MinFontSizeProperty, value); 
         }
         #endregion
 
@@ -143,14 +143,8 @@ namespace Forms9Patch
         /// <value>Is the label fixed in size.</value>
         public bool IsDynamicallySized
         {
-            get
-            {
-                return (bool)GetValue(IsDynamicallySizedProperty);
-            }
-            private set
-            {
-                SetValue(IsDynamicallySizedProperty, value);
-            }
+            get => (bool)GetValue(IsDynamicallySizedProperty);
+            private set => SetValue(IsDynamicallySizedProperty, value);
         }
         #endregion
 
@@ -168,7 +162,7 @@ namespace Forms9Patch
         /// <value>The actual size of the font.</value>
         public double FittedFontSize
         {
-            get { return (double)GetValue(FittedFontSizeProperty); }
+            get => (double)GetValue(FittedFontSizeProperty); 
             internal set
             {
                 if (value != FittedFontSize)
@@ -194,11 +188,8 @@ namespace Forms9Patch
         /// </summary>
         public double SynchronizedFontSize
         {
-            get { return (double)GetValue(SynchronizedFontSizeProperty); }
-            set
-            {
-                SetValue(SynchronizedFontSizeProperty, value);
-            }
+            get => (double)GetValue(SynchronizedFontSizeProperty); 
+            set => SetValue(SynchronizedFontSizeProperty, value);
         }
         #endregion SynchronizedFontSize property
 

@@ -17,8 +17,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View Content
         {
-            get { return _frame.Content; }
-            set { _frame.Content = value; }
+            get => _frame.Content; 
+            set => _frame.Content = value; 
         }
         #endregion
 
@@ -36,8 +36,8 @@ namespace Forms9Patch
         /// <value>The location (default centers it in Host Page).</value>
         public Point Location
         {
-            get { return (Point)GetValue(LocationProperty); }
-            set { SetValue(LocationProperty, value); }
+            get => (Point)GetValue(LocationProperty); 
+            set => SetValue(LocationProperty, value); 
         }
 
         /*

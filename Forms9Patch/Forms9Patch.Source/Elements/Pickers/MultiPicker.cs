@@ -22,8 +22,8 @@ namespace Forms9Patch
         /// <value>The selected items.</value>
         public ObservableCollection<object> SelectedItems
         {
-            get { return (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); }
-            private set { SetValue(SelectedItemsPropertyKey, value); }
+            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); 
+            private set => SetValue(SelectedItemsPropertyKey, value); 
         }
 
         #endregion
@@ -60,14 +60,14 @@ namespace Forms9Patch
     #region Cell Template
     class MultiPickerCellContentView : Grid, ICellHeight, IIsSelectedAble
     {
-
+        #region Properties
         public double CellHeight { get; set; }
 
         public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MultiPickerCellContentView), default(bool));
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)GetValue(IsSelectedProperty); 
+            set => SetValue(IsSelectedProperty, value); 
         }
 
         #endregion
@@ -132,5 +132,6 @@ namespace Forms9Patch
 
         #endregion
     }
+    #endregion
 }
 

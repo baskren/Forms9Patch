@@ -29,8 +29,8 @@ namespace Forms9Patch
         /// <value>The length of the pointer.</value>
         public float PointerLength
         {
-            get { return (float)GetValue(PointerLengthProperty); }
-            set { SetValue(PointerLengthProperty, value); }
+            get => (float)GetValue(PointerLengthProperty); 
+            set => SetValue(PointerLengthProperty, value); 
         }
         #endregion PoinerLength property
 
@@ -45,8 +45,8 @@ namespace Forms9Patch
         /// <value>The pointer tip radius.</value>
         public float PointerTipRadius
         {
-            get { return (float)GetValue(PointerTipRadiusProperty); }
-            set { SetValue(PointerTipRadiusProperty, value); }
+            get => (float)GetValue(PointerTipRadiusProperty); 
+            set => SetValue(PointerTipRadiusProperty, value); 
         }
         #endregion PointerTipRadius property
 
@@ -60,8 +60,8 @@ namespace Forms9Patch
         /// </summary>
         internal float PointerAngle
         {
-            get { return (float)GetValue(PointerAngleProperty); }
-            set { SetValue(PointerAngleProperty, value); }
+            get => (float)GetValue(PointerAngleProperty); 
+            set => SetValue(PointerAngleProperty, value); 
         }
         #endregion PointerAngle property
 
@@ -76,8 +76,8 @@ namespace Forms9Patch
         /// <value>The pointer axial position (left/top is zero).</value>
         public float PointerAxialPosition
         {
-            get { return (float)GetValue(PointerAxialPositionProperty); }
-            set { SetValue(PointerAxialPositionProperty, value); }
+            get => (float)GetValue(PointerAxialPositionProperty); 
+            set => SetValue(PointerAxialPositionProperty, value); 
         }
         #endregion PointerAxialPosition property
 
@@ -92,8 +92,8 @@ namespace Forms9Patch
         /// <value>The pointer direction.</value>
         public PointerDirection PointerDirection
         {
-            get { return (PointerDirection)GetValue(PointerDirectionProperty); }
-            set { SetValue(PointerDirectionProperty, value); }
+            get => (PointerDirection)GetValue(PointerDirectionProperty); 
+            set => SetValue(PointerDirectionProperty, value); 
         }
         #endregion PointerDirection property
 
@@ -108,8 +108,8 @@ namespace Forms9Patch
         /// <value>The pointer corner radius.</value>
         public float PointerCornerRadius
         {
-            get { return (float)GetValue(PointerCornerRadiusProperty); }
-            set { SetValue(PointerCornerRadiusProperty, value); }
+            get => (float)GetValue(PointerCornerRadiusProperty); 
+            set => SetValue(PointerCornerRadiusProperty, value); 
         }
         #endregion PointerCornerRadius property
 
@@ -125,8 +125,8 @@ namespace Forms9Patch
         /// </summary>
         public bool IgnoreChildren
         {
-            get { return (bool)GetValue(IgnoreChildrenProperty); }
-            set { SetValue(IgnoreChildrenProperty, value); }
+            get => (bool)GetValue(IgnoreChildrenProperty); 
+            set => SetValue(IgnoreChildrenProperty, value); 
         }
         #endregion IgnoreChildren properties
 
@@ -143,8 +143,8 @@ namespace Forms9Patch
         /// <value>The background image.</value>
         public Image BackgroundImage
         {
-            get { return (Image)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
+            get => (Image)GetValue(BackgroundImageProperty); 
+            set => SetValue(BackgroundImageProperty, value); 
         }
         #endregion
 
@@ -160,8 +160,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Color)GetValue(BackgroundColorProperty); 
+            set => SetValue(BackgroundColorProperty, value); 
         }
         #endregion BackgroundColor property
 
@@ -186,8 +186,8 @@ namespace Forms9Patch
         public bool HasShadow
 #endif
         {
-            get { return (bool)GetValue(HasShadowProperty); }
-            set { SetValue(HasShadowProperty, value); }
+            get => (bool)GetValue(HasShadowProperty); 
+            set => SetValue(HasShadowProperty, value); 
         }
         #endregion HasShadow property
 
@@ -203,8 +203,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
         public bool ShadowInverted
         {
-            get { return (bool)GetValue(ShadowInvertedProperty); }
-            set { SetValue(ShadowInvertedProperty, value); }
+            get => (bool)GetValue(ShadowInvertedProperty); 
+            set => SetValue(ShadowInvertedProperty, value); 
         }
         #endregion ShadowInverted
 
@@ -233,8 +233,8 @@ namespace Forms9Patch
         /// </summary>
         public Color OutlineColor
         {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
+            get => (Color)GetValue(OutlineColorProperty); 
+            set => SetValue(OutlineColorProperty, value); 
         }
 #endif
 
@@ -251,8 +251,8 @@ namespace Forms9Patch
         /// <value>The outline radius.</value>
         public float OutlineRadius
         {
-            get { return (float)GetValue(OutlineRadiusProperty); }
-            set { SetValue(OutlineRadiusProperty, value); }
+            get => (float)GetValue(OutlineRadiusProperty); 
+            set => SetValue(OutlineRadiusProperty, value); 
         }
         #endregion OutlineRadius
 
@@ -267,8 +267,8 @@ namespace Forms9Patch
         /// <value>The width of the outline.</value>
         public float OutlineWidth
         {
-            get { return (float)GetValue(OutlineWidthProperty); }
-            set { SetValue(OutlineWidthProperty, value); }
+            get => (float)GetValue(OutlineWidthProperty); 
+            set => SetValue(OutlineWidthProperty, value); 
         }
         #endregion OutlineWidth
 
@@ -282,8 +282,8 @@ namespace Forms9Patch
         /// </summary>
         ElementShape IShape.ElementShape
         {
-            get { return (ElementShape)GetValue(ElementShapeProperty); }
-            set { SetValue(ElementShapeProperty, value); }
+            get => (ElementShape)GetValue(ElementShapeProperty); 
+            set => SetValue(ElementShapeProperty, value); 
         }
         #endregion ElementShape property
 
@@ -297,8 +297,8 @@ namespace Forms9Patch
         /// </summary>
         ExtendedElementShape IShape.ExtendedElementShape
         {
-            get { return (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); }
-            set { SetValue(ExtendedElementShapeProperty, value); }
+            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
+            set => SetValue(ExtendedElementShapeProperty, value); 
         }
         #endregion ExtendedElementShape property
 

@@ -26,7 +26,7 @@ namespace Forms9Patch
         /// </summary>
         public double StepSize
         {
-            get { return _stepSize; }
+            get => _stepSize; 
             set
             {
                 if (value != _stepSize)

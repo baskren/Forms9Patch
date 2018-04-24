@@ -16,7 +16,7 @@ namespace Forms9Patch
 		/// </summary>
 		/// <value>The color.</value>
 		public Color Color {
-			get { return _color; }
+			get => _color; 
 			set {
 				if (_color == value)
 					return;
