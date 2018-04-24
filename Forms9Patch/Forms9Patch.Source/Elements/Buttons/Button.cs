@@ -800,15 +800,17 @@ namespace Forms9Patch
                         childCount++;
                         if (Orientation == StackOrientation.Horizontal)
                         {
-                            var measure = element.Measure(double.PositiveInfinity, Math.Max(height, element.Height));
+
+                            var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
                             //width += element.Width;
                             //height = Math.Max(height, element.Height);
                             width += measure.Request.Width;
                             height += measure.Request.Height;
+
                         }
                         else
                         {
-                            var measure = element.Measure(Math.Max(width, element.Width), double.PositiveInfinity);
+                            var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
                             //width = Math.Max(width, element.Width);
                             //height += element.Height;
                             width += measure.Request.Width;
@@ -822,8 +824,9 @@ namespace Forms9Patch
                     height += Orientation == StackOrientation.Vertical ? Spacing : 0;
 
                 }
-                width += Padding.HorizontalThickness;
-                height += Padding.VerticalThickness;
+                width += Padding.HorizontalThickness + Margin.HorizontalThickness;
+                height += Padding.VerticalThickness + Margin.VerticalThickness;
+
                 return new Size(width, height);
             }
         }

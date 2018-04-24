@@ -143,7 +143,8 @@ namespace Forms9Patch
             TextColor = DefaultTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_before_white_24px.svg"),
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_before_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            HasTightSpacing = true,
             Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
@@ -152,7 +153,9 @@ namespace Forms9Patch
             BackgroundColor = DefaultBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true
+            IsVisible = true,
+            WidthRequest = 30,
+            HeightRequest = 30,
         };
         readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
         readonly Button _rightArrowButton = new Button
@@ -160,7 +163,8 @@ namespace Forms9Patch
             TextColor = DefaultTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_next_white_24px.svg"),
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_next_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            HasTightSpacing = true,
             Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
@@ -169,7 +173,9 @@ namespace Forms9Patch
             BackgroundColor = DefaultBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true
+            IsVisible = true,
+            WidthRequest = 30,
+            HeightRequest = 30,
         };
         readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
         StackLayout _stackLayout = new StackLayout
@@ -428,7 +434,7 @@ namespace Forms9Patch
                 if (!first)
                     _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = 1 });
                 _stackLayout.Children.Add(segment._button);
-                segment._button.IsVisible = true;
+                //segment._button.IsVisible = true;
                 first = false;
             }
 
@@ -475,9 +481,9 @@ namespace Forms9Patch
                 var button = _stackLayout.Children[i] as Forms9Patch.Button;
                 var separator = _stackLayout.Children[i + 1] as BoxView;
 
-                pageWidth += button.UnexpandedTightSize.Width + button.Padding.HorizontalThickness + SeparatorWidth;
+                pageWidth += button.UnexpandedTightSize.Width + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
 
-                if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= Width)
+                if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness) * 0.75)
                 {
                     pageIndex++;
                     pageWidth = leftWidth;
