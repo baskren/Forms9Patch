@@ -30,6 +30,16 @@ namespace FormsGestures.Droid
 
         int[] _viewLocationAtOnDown = { 0, 0 };
 
+        bool HandlesTapped
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesTapped)
+                        return true;
+                return false;
+            }
+        }
 
         bool HandlesDoubleTapped
         {
@@ -252,13 +262,18 @@ namespace FormsGestures.Droid
 		}
 		*/
 
-
+        int _numberOfTaps;
+        bool _waitingForTapsToFinish;
+        DateTime _lastTap;
         public bool OnUp(MotionEvent ev)
         {
             if (_cancelled)
+            {
+                _numberOfTaps = 0;
                 return false;
-            //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("onUp [{0}]",_id);
-            //bool handled = false;
+            }
+            _numberOfTaps++;
+            _lastTap = DateTime.Now;
             LongPressTimerStop();
 
             var _view = (Android.Views.View)_weakReferenceView?.Get();
@@ -282,7 +297,7 @@ namespace FormsGestures.Droid
             {
                 if (listener.HandlesTapping)
                 {
-                    TapEventArgs args = new AndroidTapEventArgs(ev, _view, 1, _viewLocationAtOnDown);
+                    TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
                     args.Listener = listener;
                     listener.OnTapping(args);
                     handled |= args.Handled;
@@ -290,6 +305,19 @@ namespace FormsGestures.Droid
                     //	break;
                 }
             }
+            if (_numberOfTaps % 2 == 0)
+                foreach (var listener in _listeners)
+                {
+                    if (listener.HandlesDoubleTapped)
+                    {
+                        TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
+                        args.Listener = listener;
+                        listener.OnDoubleTapped(args);
+                        handled |= args.Handled;
+                        //if (args.Handled)
+                        //  break;
+                    }
+                }
             foreach (var listener in _listeners)
             {
                 if (_panning && listener.HandlesPanned)
@@ -320,10 +348,51 @@ namespace FormsGestures.Droid
             _panning = false;
             _longPressing = false;
 
+            MotionEvent lastMotionEvent = ev;
+
+            if (!_waitingForTapsToFinish && HandlesTapped)
+            {
+                _waitingForTapsToFinish = true;
+                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                {
+                    if (DateTime.Now - _lastTap < Settings.TappedThreshold)
+                        return true;
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    {
+                        if (_cancelled || _listeners == null)
+                        {
+                            _numberOfTaps = 0;
+                            _waitingForTapsToFinish = false;
+                            return;
+                        }
+
+                        bool tappedHandled = false;
+                        foreach (var listener in _listeners)
+                        {
+                            if (listener.HandlesTapped)
+                            {
+                                //var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
+                                //listener.OnTapped(taskArgs);
+                                TapEventArgs taskArgs = new AndroidTapEventArgs(lastMotionEvent, _view, _numberOfTaps, _viewLocationAtOnDown);
+                                taskArgs.Listener = listener;
+                                listener.OnTapped(taskArgs);
+                                tappedHandled = taskArgs.Handled;
+                                if (tappedHandled)
+                                    break;
+                            }
+                        }
+                        _numberOfTaps = 0;
+                        _waitingForTapsToFinish = false;
+                    });
+                    return false;
+                });
+            }
+
+
             return handled;
         }
 
-
+        /*
         public override bool OnSingleTapUp(MotionEvent e)
         {
             if (_cancelled)
@@ -341,7 +410,7 @@ namespace FormsGestures.Droid
             {
                 if (listener.HandlesTapped)
                 {
-                    TapEventArgs args = new AndroidTapEventArgs(e, _view, 1, _viewLocationAtOnDown);
+                    TapEventArgs args = new AndroidTapEventArgs(e, _view, _tapCount, _viewLocationAtOnDown);
                     args.Listener = listener;
                     listener.OnTapped(args);
                     handled |= args.Handled;
@@ -369,7 +438,7 @@ namespace FormsGestures.Droid
             {
                 if (listener.HandlesDoubleTapped)
                 {
-                    TapEventArgs args = new AndroidTapEventArgs(e, _view, 2, _viewLocationAtOnDown);
+                    TapEventArgs args = new AndroidTapEventArgs(e, _view, _tapCount / 2, _viewLocationAtOnDown);
                     args.Listener = listener;
                     listener.OnDoubleTapped(args);
                     handled |= args.Handled;
@@ -379,6 +448,7 @@ namespace FormsGestures.Droid
             }
             return handled;
         }
+        */
 
 
         public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)

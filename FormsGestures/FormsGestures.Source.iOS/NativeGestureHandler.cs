@@ -23,7 +23,7 @@ namespace FormsGestures.iOS
 
         int _numberOfTaps;
 
-        CancellationTokenSource _cancelTappedRaiser;
+        //CancellationTokenSource _cancelTappedRaiser;
 
         bool _longPressing;
 
@@ -240,7 +240,31 @@ namespace FormsGestures.iOS
             }
         }
 
-        bool HandlesDoubleTaps
+        bool HandlesTapping
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesTapping)
+                        return true;
+                return false;
+            }
+        }
+
+        bool HandlesTapped
+        {
+            get
+            {
+                foreach (var listener in _listeners)
+                    if (listener.HandlesTapped)
+                        return true;
+                return false;
+            }
+        }
+
+
+
+        bool HandlesDoubleTapped
         {
             get
             {
@@ -481,6 +505,9 @@ namespace FormsGestures.iOS
             //System.Diagnostics.Debug.WriteLine("\thandled=[" + handled + "]");
         }
 
+        bool _waitingForTapsToFinish;
+        DateTime _lastTap;
+        TapEventArgs _lastTapEventArgs;
         void OnTapped(UITapGestureRecognizer gr)
         {
             if (_cancelled)
@@ -488,82 +515,67 @@ namespace FormsGestures.iOS
 
             if (!_element.IsVisible)
                 return;
+
             if (touchCount == 0)
-            {
-                //System.Diagnostics.Debug.WriteLine("onTapped set _viewLocationAtOnDown");
                 _viewLocationAtOnDown = ViewLocationInWindow(gr.View);
-            }
-            if (_cancelTappedRaiser != null)
-            {
-                try
-                {
-                    _cancelTappedRaiser.Cancel();
-                }
-                catch
-                {
-                    // do nothing!
-                    System.Diagnostics.Debug.WriteLine("Tap cancelled");
-                }
-            }
+
             _numberOfTaps++;
-            TapEventArgs args = new iOSTapEventArgs(gr, _numberOfTaps, _viewLocationAtOnDown);
-            //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.OnTapped args.Handled=[" + args.Handled + "]");
-            bool handled = false;
+            _lastTap = DateTime.Now;
+            _lastTapEventArgs = new iOSTapEventArgs(gr, _numberOfTaps, _viewLocationAtOnDown);
+            bool tappingHandled = false;
+            bool doubleTappedHandled = false;
             foreach (var listener in _listeners)
             {
-                if (listener.HandlesTapping)
+                if (!tappingHandled && listener.HandlesTapping)
                 {
-                    var taskArgs = new TapEventArgs(args);
-                    taskArgs.Listener = listener;
-                    //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnTapped OnTapping taskArgs.Handled=[" + taskArgs.Handled + "]");
+                    var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
                     listener.OnTapping(taskArgs);
-                    //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnTapped OnTapping taskArgs.Handled=[" + taskArgs.Handled + "]");
-                    if (taskArgs.Handled)
-                        break;
+                    tappingHandled = taskArgs.Handled;
                 }
-            }
-            _cancelTappedRaiser = new CancellationTokenSource();
-            Task.Run(async delegate
-            {
-                if (HandlesDoubleTaps)
-                    await Task.Delay(Settings.TappedThreshold, _cancelTappedRaiser.Token);
-                _cancelTappedRaiser = null;
-                _numberOfTaps = 0;
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                if (!doubleTappedHandled && _numberOfTaps % 2 == 0 && listener.HandlesDoubleTapped)
                 {
-                    if (_cancelled || _listeners == null)
-                        return;
+                    var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
+                    listener.OnDoubleTapped(taskArgs);
+                    doubleTappedHandled = taskArgs.Handled;
+                }
+                if (tappingHandled && doubleTappedHandled)
+                    break;
+            }
 
-                    foreach (var listener in _listeners)
+            if (!_waitingForTapsToFinish && HandlesTapped)
+            {
+                _waitingForTapsToFinish = true;
+                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                {
+                    if (DateTime.Now - _lastTap < Settings.TappedThreshold)
+                        return true;
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
-                        //if (handled)
-                        //	break;
-                        if (args.NumberOfTaps == 1 && listener.HandlesTapped)
+                        if (_cancelled || _listeners == null)
                         {
-                            var taskArgs = new TapEventArgs(args);
-                            taskArgs.Listener = listener;
-                            //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnTapped OnTapped taskArgs.Handled=[" + taskArgs.Handled + "]");
-                            listener.OnTapped(taskArgs);
-                            //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnTapped OnTapped taskArgs.Handled=[" + taskArgs.Handled + "]");
-                            handled |= args.Handled;
-                            if (taskArgs.Handled)
-                                break;
+                            _numberOfTaps = 0;
+                            _waitingForTapsToFinish = false;
+                            return;
                         }
-                        else if (args.NumberOfTaps == 2 && listener.HandlesDoubleTapped)
+
+                        bool handled = false;
+                        foreach (var listener in _listeners)
                         {
-                            var taskArgs = new TapEventArgs(args);
-                            taskArgs.Listener = listener;
-                            //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnDoubleTapped OnTapped taskArgs.Handled=[" + taskArgs.Handled + "]");
-                            listener.OnDoubleTapped(taskArgs);
-                            //System.Diagnostics.Debug.WriteLine("\tNativeGestureHandler.OnDoubleTapped OnTapped taskArgs.Handled=[" + taskArgs.Handled + "]");
-                            handled |= args.Handled;
-                            if (taskArgs.Handled)
-                                break;
+                            if (listener.HandlesTapped)
+                            {
+                                var taskArgs = new TapEventArgs(_lastTapEventArgs, listener);
+                                listener.OnTapped(taskArgs);
+                                handled = taskArgs.Handled;
+                                if (handled)
+                                    break;
+                            }
                         }
-                    }
-                    //gr.CancelsTouchesInView = handled;
+                        _numberOfTaps = 0;
+                        _waitingForTapsToFinish = false;
+                    });
+                    return false;
                 });
-            }, _cancelTappedRaiser.Token);
+            }
         }
 
         void OnLongPressed(UILongPressGestureRecognizer gr)
