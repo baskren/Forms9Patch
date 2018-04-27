@@ -18,6 +18,30 @@ namespace Forms9Patch
     /// </summary>
     public class Button : Frame, IDisposable, IButton
     {
+        #region Xamarin.Forms emulation properties
+        public static readonly BindableProperty BorderRadiusProperty = Xamarin.Forms.Button.BorderRadiusProperty;
+        public int BorderRadius
+        {
+            get { return (int)GetValue(BorderRadiusProperty); }
+            set { SetValue(BorderRadiusProperty, value); }
+        }
+
+        public static readonly BindableProperty BorderWidthProperty = Xamarin.Forms.Button.BorderWidthProperty;
+        public double BorderWidth
+        {
+            get { return (double)GetValue(BorderWidthProperty); }
+            set { SetValue(BorderWidthProperty, value); }
+        }
+
+        public static readonly BindableProperty BorderColorProperty = Xamarin.Forms.Button.BorderColorProperty;
+        public Color BorderColor
+        {
+            get { return (Color)GetValue(BorderColorProperty); }
+            set { SetValue(BorderColorProperty, value); }
+        }
+
+        #endregion
+
 
         #region Obsolete Properties
         /// <summary>
@@ -1612,6 +1636,14 @@ namespace Forms9Patch
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
+            if (propertyName == BorderWidthProperty.PropertyName)
+                OutlineWidth = (float)BorderWidth;
+            else if (propertyName == BorderRadiusProperty.PropertyName)
+                OutlineRadius = BorderRadius;
+            else if (propertyName == BorderColorProperty.PropertyName)
+                OutlineColor = BorderColor;
+
             if (_noUpdate)
                 return;
 
