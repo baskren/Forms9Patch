@@ -95,7 +95,7 @@ namespace FormsGestures.UWP
         { 
             get
             {
-                ManipulationModes modes = ManipulationModes.System;
+                ManipulationModes modes = ManipulationModes.None;
 
                 // TODO: Look into what happens when using ManipulationModes.System (DirectManipulation)
 
@@ -110,9 +110,10 @@ namespace FormsGestures.UWP
                     var element = (_listeners != null && _listeners.Count > 0 ? _listeners[0].Element : null);
                     if (element.GetType().ToString() == "Forms9Patch.BaseCellView")
                     {
+                        modes = ManipulationModes.System;
                         // 2. Find which direction it can scroll
                         //if (scrollView.HorizontalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
-                            modes |= ManipulationModes.TranslateX;
+                        modes |= ManipulationModes.TranslateX;
                         //if (scrollView.VerticalScrollMode == Windows.UI.Xaml.Controls.ScrollMode.Disabled)
                             modes |= ManipulationModes.TranslateY;
                         //FrameworkElement.ManipulationMode = FrameworkElement.ManipulationMode ^ (scrollView.HorizontalScrollMode > 0 ? ManipulationModes.)
