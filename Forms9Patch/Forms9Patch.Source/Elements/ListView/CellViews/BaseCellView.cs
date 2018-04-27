@@ -46,8 +46,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View ContentView
         {
-            get => (View)GetValue(ContentViewProperty); 
-            set => SetValue(ContentViewProperty, value); 
+            get => (View)GetValue(ContentViewProperty);
+            set => SetValue(ContentViewProperty, value);
         }
 
         internal bool IsHeader;
@@ -203,7 +203,7 @@ namespace Forms9Patch
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Absolute)}
             };
 
-            
+
             var thisListener = FormsGestures.Listener.For(this);
             thisListener.Tapped += OnTapped;
             thisListener.LongPressed += OnLongPressed;
@@ -212,7 +212,7 @@ namespace Forms9Patch
             thisListener.Panning += OnPanning;
             thisListener.RightClicked += OnRightClicked;
             //thisListener.Swiped += OnSwipe;
-            
+
 
             _swipeFrame1.Content = _swipeButton1;
             _swipeFrame2.Content = _swipeButton2;
@@ -590,7 +590,7 @@ namespace Forms9Patch
                         Text = menuItem.Text,
                         IconText = menuItem.IconText,
                         //ImageSource = menuItem.ImageSource
-                        IconImage =  menuItem.IconImage
+                        IconImage = menuItem.IconImage
                     };
                     segment.Tapped += (s, arg) =>
                     {
@@ -661,7 +661,7 @@ namespace Forms9Patch
 
             if (_startButtons + _endButtons > 0)
                 PutAwaySwipeButtons(true);
-            else 
+            else
             {
                 //((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
                 var startMenu = ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
@@ -669,14 +669,14 @@ namespace Forms9Patch
 
                 var segments = new List<Segment>();
 
-                if (endMenu!=null)
+                if (endMenu != null)
                 {
                     foreach (var item in endMenu)
                     {
                         var segment = new Segment();
                         if (item.IconText != null)
                             segment.IconText = item.IconText;
-                        if (item.IconImage?.Source!=null)
+                        if (item.IconImage?.Source != null)
                             segment.IconImage = item.IconImage;
                         if (item.Text != null)
                             segment.Text = item.Text;
@@ -807,8 +807,9 @@ namespace Forms9Patch
             if (e.PropertyName == ItemWrapper.CellBackgroundColorProperty.PropertyName || e.PropertyName == ItemWrapper.SelectedCellBackgroundColorProperty.PropertyName)
                 UpdateBackground();
 
-            else if (e.PropertyName == ItemWrapper.IndexProperty.PropertyName)
+            else if (e.PropertyName == ItemWrapper.IndexProperty.PropertyName || e.PropertyName == ItemWrapper.ParentProperty.PropertyName)
             {
+                UpdateVisibility();
                 UpdateBackground();
                 UpdateHeights();
                 UpdateSeparator();
@@ -824,7 +825,7 @@ namespace Forms9Patch
             else if (e.PropertyName == ItemWrapper.RequestedRowHeightProperty.PropertyName)
                 UpdateHeights();
 
-            else if (e.PropertyName == ItemWrapper.SeparatorVisibilityProperty.PropertyName || e.PropertyName == ItemWrapper.RequestedSeparatorHeightProperty.PropertyName)
+            else if (e.PropertyName == ItemWrapper.SeparatorVisibilityProperty.PropertyName || e.PropertyName == ItemWrapper.RequestedSeparatorHeightProperty.PropertyName || e.PropertyName == ItemWrapper.IsLastItemProperty.PropertyName)
             {
                 UpdateHeights();
                 UpdateSeparator();
@@ -837,7 +838,13 @@ namespace Forms9Patch
             //UpdateLayout();
         }
 
-
+        void UpdateVisibility()
+        {
+            if (BindingContext is IItemWrapper itemWrapper && itemWrapper.Parent != null)
+                this.FadeTo(1.0);
+            else
+                this.FadeTo(0.0);
+        }
 
         void UpdateBackground()
         {

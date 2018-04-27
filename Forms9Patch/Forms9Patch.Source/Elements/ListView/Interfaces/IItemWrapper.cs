@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Forms9Patch
 {
@@ -8,16 +9,28 @@ namespace Forms9Patch
     internal interface IItemWrapper
     {
         /// <summary>
+        /// Gets the parent.
+        /// </summary>
+        /// <value>The parent.</value>
+        GroupWrapper Parent { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Forms9Patch.IItemWrapper"/> is last item in its parent group.
+        /// </summary>
+        /// <value><c>true</c> if is last item; otherwise, <c>false</c>.</value>
+        bool IsLastItem { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Forms9Patch.IItemWrapper"/> should render separator, de.
+        /// </summary>
+        /// <value><c>true</c> if should render separator; otherwise, <c>false</c>.</value>
+        bool ShouldRenderSeparator { get; }
+
+        /// <summary>
         /// Gets the separator visibilty.
         /// </summary>
         /// <value>The separator visibilty.</value>
         Xamarin.Forms.SeparatorVisibility SeparatorVisibility { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether this cell's separator is visible.
-        /// </summary>
-        /// <value><c>true</c> if separator is visible; otherwise, <c>false</c>.</value>
-        bool ShouldRenderSeparator { get; }
 
         /// <summary>
         /// Gets the color of this cell's separator.

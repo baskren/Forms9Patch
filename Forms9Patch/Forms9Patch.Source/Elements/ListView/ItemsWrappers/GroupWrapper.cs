@@ -473,8 +473,17 @@ namespace Forms9Patch
         {
             for (int i = index; i < _itemWrappers.Count; i++)
             {
-                _itemWrappers[i].Index = i;
-                _itemWrappers[i].SignalPropertyChanged(ItemWrapper.SeparatorVisibilityProperty.PropertyName);
+                var itemWrapper = _itemWrappers[i];
+                itemWrapper.Index = i;
+                var wasLastItem = itemWrapper.IsLastItem;
+                //_itemWrappers[i].SignalPropertyChanged(ItemWrapper.SeparatorVisibilityProperty.PropertyName);
+                //_itemWrappers[i].SetValueCore(ItemWrapper.SeparatorVisibilityProperty, i < _itemWrappers.Count - 1, (Xamarin.Forms.Internals.SetValueFlags)15);
+                var isLastItem = (i >= _itemWrappers.Count - 1);
+                var isLastGroup = Parent != null && this.IsLastItem;
+                itemWrapper.IsLastItem = isLastItem && !isLastGroup;
+
+                if (itemWrapper is GroupWrapper groupWrapper && wasLastItem != itemWrapper.IsLastItem)
+                    groupWrapper.Reindex();
             }
         }
 
@@ -494,9 +503,9 @@ namespace Forms9Patch
                 return;
             if (Contains(itemWrapper))
                 throw new NotSupportedException();
+            CommonInsert(itemWrapper);
             _itemWrappers.Insert(index, itemWrapper);
             //Reindex(index);
-            CommonInsert(itemWrapper);
         }
 
         public void RemoveAt(int index)
@@ -527,10 +536,11 @@ namespace Forms9Patch
                     CommonRemove(_itemWrappers[index]);
                 }
                 //System.Diagnostics.Debug.WriteLine ("\t\tsetting _item start");
-                _itemWrappers[index] = value;
-                _itemWrappers[index].Index = index;
-                //System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
                 CommonAdd(value);
+                value.Index = index;
+                _itemWrappers[index] = value;
+                //_itemWrappers[index].Index = index;
+                //System.Diagnostics.Debug.WriteLine ("\t\tsetting _item finish");
             }
         }
         #endregion
@@ -780,8 +790,8 @@ namespace Forms9Patch
             if (Contains(itemWrapper))
                 throw new NotSupportedException();
             itemWrapper.Index = _itemWrappers.Count;
-            _itemWrappers.Add(itemWrapper);
             CommonAdd(itemWrapper);
+            _itemWrappers.Add(itemWrapper);
         }
 
         public void Clear()
@@ -877,8 +887,8 @@ namespace Forms9Patch
                 Remove(itemWrapper);
         }
 
-        public bool IsFixedSize => false; 
-        
+        public bool IsFixedSize => false;
+
 
         public void CopyTo(Array array, int index)
         {
@@ -909,9 +919,10 @@ namespace Forms9Patch
                         _itemWrappers[index].Index = -1;
                         CommonRemove(_itemWrappers[index]);
                     }
-                    _itemWrappers[index] = itemWrapper;
-                    _itemWrappers[index].Index = index;
                     CommonAdd(itemWrapper);
+                    itemWrapper.Index = index;
+                    _itemWrappers[index] = itemWrapper;
+                    //_itemWrappers[index].Index = index;
                 }
                 else
                     throw new InvalidCastException();
@@ -1424,6 +1435,7 @@ namespace Forms9Patch
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine (GetType ().Name + ".OnCollectionChanged( " + sender + ", " + e);
+            /*
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -1442,6 +1454,8 @@ namespace Forms9Patch
                     Reindex();
                     break;
             }
+            */
+            Reindex();
             _collectionChanged?.Invoke(sender, e);
         }
         #endregion
