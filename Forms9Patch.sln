@@ -483,12 +483,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Code", "Pages.Code", 
 		Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs = Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs
 		Forms9PatchDemo\Source\Pages.Code\ListViewSandbox.cs = Forms9PatchDemo\Source\Pages.Code\ListViewSandbox.cs
 		Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs = Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs
-		Forms9PatchDemo\Source\Pages.Code\PanGesturePage.cs = Forms9PatchDemo\Source\Pages.Code\PanGesturePage.cs
 		Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs = Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs
 		Forms9PatchDemo\Source\Pages.Code\SingleButton.cs = Forms9PatchDemo\Source\Pages.Code\SingleButton.cs
 		Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs = Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs
 		Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs = Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs
 		Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs = Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs
+		Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs = Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs
+		Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs = Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs
+		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs
+		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs
+		Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs = Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs
+		Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs = Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Xaml", "Pages.Xaml", "{F311DBED-FA26-4CE4-90E5-F23BE46352E9}"
