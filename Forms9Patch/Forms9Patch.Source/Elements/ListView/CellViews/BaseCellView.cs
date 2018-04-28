@@ -840,10 +840,13 @@ namespace Forms9Patch
 
         void UpdateVisibility()
         {
-            if (BindingContext is IItemWrapper itemWrapper && itemWrapper.Parent != null)
-                this.FadeTo(1.0);
-            else
-                this.FadeTo(0.0);
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                if (BindingContext is IItemWrapper itemWrapper && itemWrapper.Parent != null)
+                    this.FadeTo(1.0);
+                else
+                    this.FadeTo(0.0);
+            }
         }
 
         void UpdateBackground()
