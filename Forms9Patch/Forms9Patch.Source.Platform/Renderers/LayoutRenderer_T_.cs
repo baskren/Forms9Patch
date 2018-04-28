@@ -82,6 +82,8 @@ namespace Forms9Patch
             {
                 if (Control == null)
                     SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
+                else
+                    Control.ShapeElement = e.NewElement;
 #if __IOS__
 
 #endif

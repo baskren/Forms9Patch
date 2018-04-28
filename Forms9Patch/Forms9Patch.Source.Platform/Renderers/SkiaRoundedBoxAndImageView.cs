@@ -66,27 +66,21 @@ namespace Forms9Patch.UWP
 #endif
         {
             _instanceId = roundedBoxElement.InstanceId;
-            _roundedBoxElement = roundedBoxElement;
+            ShapeElement = roundedBoxElement;
 #if __IOS__ || __DROID__
             PaintSurface += OnPaintSurface;
 #endif
 #if __IOS__
             BackgroundColor = UIColor.Clear;
 #endif
-            if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
-            {
-                element.PropertyChanged += OnShapeElementPropertyChanged;
-                //element.SizeChanged += OnElementSizeChanged;
-            }
-
             SetImageElement();
         }
 
         void SetImageElement()
         {
-            if (_roundedBoxElement is ILayout layout)
+            if (ShapeElement is ILayout layout)
                 ImageElement = layout.BackgroundImage;
-            else if (_roundedBoxElement is Image image)
+            else if (ShapeElement is Image image)
                 ImageElement = image;
         }
         #endregion
@@ -111,7 +105,7 @@ protected virtual void Dispose(bool disposing)
 
                     _xfImageSource?.ReleaseF9PBitmap(this);
                     _f9pImageData = null;
-                    if (_roundedBoxElement is Xamarin.Forms.VisualElement element)
+                    if (ShapeElement is Xamarin.Forms.VisualElement element)
                     {
                         element.PropertyChanged -= OnShapeElementPropertyChanged;
                         //element.SizeChanged -= OnElementSizeChanged;
@@ -139,7 +133,7 @@ protected virtual void Dispose(bool disposing)
         #region Properties
         //Button materialButton => _roundedBoxElement as Button;
 
-        Xamarin.Forms.View View => _roundedBoxElement as Xamarin.Forms.View;
+        Xamarin.Forms.View View => ShapeElement as Xamarin.Forms.View;
 
         internal Forms9Patch.Image ImageElement
         {
@@ -160,11 +154,11 @@ protected virtual void Dispose(bool disposing)
             }
         }
 
-        Xamarin.Forms.BindableObject BindableObject => _roundedBoxElement as Xamarin.Forms.BindableObject;
+        Xamarin.Forms.BindableObject BindableObject => ShapeElement as Xamarin.Forms.BindableObject;
 
-        double HeightRequest => ((Xamarin.Forms.VisualElement)_roundedBoxElement).HeightRequest;
+        double HeightRequest => ((Xamarin.Forms.VisualElement)ShapeElement).HeightRequest;
 
-        double WidthRequest => ((Xamarin.Forms.VisualElement)_roundedBoxElement).WidthRequest;
+        double WidthRequest => ((Xamarin.Forms.VisualElement)ShapeElement).WidthRequest;
 
         Xamarin.Forms.Color ElementBackgroundColor => (Xamarin.Forms.Color)BindableObject.GetValue(ShapeBase.BackgroundColorProperty);
 
@@ -232,7 +226,7 @@ protected virtual void Dispose(bool disposing)
 
         ExtendedElementShape ExtendedElementShape => (ExtendedElementShape)BindableObject.GetValue(ShapeBase.ExtendedElementShapeProperty);
 
-        Xamarin.Forms.Thickness ShadowPadding => _roundedBoxElement.ShadowPadding();
+        Xamarin.Forms.Thickness ShadowPadding => ShapeElement.ShadowPadding();
 
         internal Xamarin.Forms.Size SourceImageSize()
         {
@@ -323,7 +317,7 @@ protected virtual void Dispose(bool disposing)
                 _validLayout = false;
                 InvalidateView();
             }
-            else if (e.PropertyName == Xamarin.Forms.VisualElement.OpacityProperty.PropertyName && _roundedBoxElement != null)
+            else if (e.PropertyName == Xamarin.Forms.VisualElement.OpacityProperty.PropertyName && ShapeElement != null)
                 ViewOpacity = View.Opacity;
 
         }
@@ -438,7 +432,7 @@ protected virtual void Dispose(bool disposing)
 
             if (HasShadow && (DrawFill || DrawImage))
             {
-                var shadowPadding = ShapeBase.ShadowPadding(_roundedBoxElement);
+                var shadowPadding = ShapeBase.ShadowPadding(ShapeElement);
                 reqWidth += shadowPadding.HorizontalThickness;
                 reqHeight += shadowPadding.VerticalThickness;
                 minWidth += shadowPadding.HorizontalThickness;
@@ -446,7 +440,7 @@ protected virtual void Dispose(bool disposing)
             }
             if (DrawOutline)
             {
-                var outlineWidth = _roundedBoxElement.OutlineWidth;
+                var outlineWidth = ShapeElement.OutlineWidth;
                 reqWidth += outlineWidth;
                 reqHeight += outlineWidth;
                 minWidth += outlineWidth;
@@ -460,11 +454,11 @@ protected virtual void Dispose(bool disposing)
             minHeight *= Forms9Patch.Display.Scale;
 #endif
 
-            reqWidth = Math.Max(reqWidth, ((Xamarin.Forms.VisualElement)_roundedBoxElement).WidthRequest);
-            reqHeight = Math.Max(reqHeight, ((Xamarin.Forms.VisualElement)_roundedBoxElement).HeightRequest);
+            reqWidth = Math.Max(reqWidth, ((Xamarin.Forms.VisualElement)ShapeElement).WidthRequest);
+            reqHeight = Math.Max(reqHeight, ((Xamarin.Forms.VisualElement)ShapeElement).HeightRequest);
 
-            minWidth = Math.Max(minWidth, ((Xamarin.Forms.VisualElement)_roundedBoxElement).WidthRequest);
-            minHeight = Math.Max(minHeight, ((Xamarin.Forms.VisualElement)_roundedBoxElement).HeightRequest);
+            minWidth = Math.Max(minWidth, ((Xamarin.Forms.VisualElement)ShapeElement).WidthRequest);
+            minHeight = Math.Max(minHeight, ((Xamarin.Forms.VisualElement)ShapeElement).HeightRequest);
 
 
             var reqSize = new Xamarin.Forms.Size(reqWidth, reqHeight);
@@ -479,7 +473,22 @@ protected virtual void Dispose(bool disposing)
         #region local fields
         int _instanceId;
 
-        Forms9Patch.IShape _roundedBoxElement;
+        Forms9Patch.IShape _shapeElement;
+        internal Forms9Patch.IShape ShapeElement
+        {
+            get => _shapeElement;
+            set
+            {
+                if (_shapeElement != value)
+                {
+                    if (ShapeElement is Xamarin.Forms.VisualElement oldElement)
+                        oldElement.PropertyChanged -= OnShapeElementPropertyChanged;
+                    _shapeElement = value;
+                    if (ShapeElement is Xamarin.Forms.VisualElement newElement)
+                        newElement.PropertyChanged += OnShapeElementPropertyChanged;
+                }
+            }
+        }
 
         Forms9Patch.Image _imageElement;
         Xamarin.Forms.ImageSource _xfImageSource;
@@ -543,7 +552,7 @@ protected virtual void Dispose(bool disposing)
                 return false;
             if (Math.Abs(_lastOutlineWidth - OutlineWidth) > 0.1)
                 return false;
-            if (_roundedBoxElement is ILayout backgroundElement && _lastPadding != ShadowPadding)
+            if (ShapeElement is ILayout backgroundElement && _lastPadding != ShadowPadding)
                 return false;
             if (_lastExtendedElementShape != ExtendedElementShape)
                 return false;
@@ -561,7 +570,7 @@ protected virtual void Dispose(bool disposing)
             _lastOutlineColor = OutlineColor;
             _lastRadius = OutlineRadius;
             _lastOutlineWidth = OutlineWidth;
-            if (_roundedBoxElement is ILayout backgroundElement)
+            if (ShapeElement is ILayout backgroundElement)
                 _lastPadding = ShadowPadding;
             _lastExtendedElementShape = ExtendedElementShape;
             _validLayout = true;
@@ -667,14 +676,14 @@ protected virtual void Dispose(bool disposing)
 
             canvas.Clear();
 
-            if (_roundedBoxElement is SegmentedControl materialSegmentedControl)
+            if (ShapeElement is SegmentedControl materialSegmentedControl)
             {
                 // do nothing
             }
             else
             {
                 var hz = true;
-                var materialButton = _roundedBoxElement as Button;
+                var materialButton = ShapeElement as Button;
                 if (materialButton != null)
                     hz = materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Horizontal;
                 var vt = !hz;
@@ -719,7 +728,7 @@ protected virtual void Dispose(bool disposing)
                     var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
                     var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);
                     var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
-                    var shadowPadding = ShapeBase.ShadowPadding(_roundedBoxElement, hasShadow, true);
+                    var shadowPadding = ShapeBase.ShadowPadding(ShapeElement, hasShadow, true);
 
 
                     var perimeter = rect;
@@ -811,12 +820,12 @@ protected virtual void Dispose(bool disposing)
 
                             if (DrawFill)
                             {
-                                var path = PerimeterPath(_roundedBoxElement, shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
+                                var path = PerimeterPath(ShapeElement, shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
                                 canvas.DrawPath(path, shadowPaint);
                             }
                             else if (DrawImage)
                             {
-                                var path = PerimeterPath(_roundedBoxElement, shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
+                                var path = PerimeterPath(ShapeElement, shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
                                 GenerateImageLayout(canvas, perimeter, path, shadowPaint);
                             }
                         }
@@ -825,7 +834,7 @@ protected virtual void Dispose(bool disposing)
                     if (drawFill)
                     {
                         var fillRect = RectInsetForShape(perimeter, elementShape, outlineWidth, vt);
-                        var path = PerimeterPath(_roundedBoxElement, fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
+                        var path = PerimeterPath(ShapeElement, fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
 
                         if (drawFill)
                         {
@@ -843,7 +852,7 @@ protected virtual void Dispose(bool disposing)
                     if (drawImage)
                     {
                         //var fillRect = RectInsetForShape(perimeter, elementShape, 0, vt);
-                        var clipPath = PerimeterPath(_roundedBoxElement, perimeter, outlineRadius);
+                        var clipPath = PerimeterPath(ShapeElement, perimeter, outlineRadius);
                         GenerateImageLayout(canvas, perimeter, clipPath);
                     }
 
@@ -861,7 +870,7 @@ protected virtual void Dispose(bool disposing)
                         var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
                         //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
                         var outlineRect = RectInsetForShape(intPerimeter, elementShape, outlineWidth / 2, vt);
-                        var path = PerimeterPath(_roundedBoxElement, outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0));
+                        var path = PerimeterPath(ShapeElement, outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0));
                         canvas.DrawPath(path, outlinePaint);
                     }
                     else if (drawSeparators && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
@@ -902,12 +911,12 @@ protected virtual void Dispose(bool disposing)
                         insetShadowPaint.ImageFilter = filter;
 
                         // what is the mask?
-                        var maskPath = PerimeterPath(_roundedBoxElement, perimeter, outlineRadius);
+                        var maskPath = PerimeterPath(ShapeElement, perimeter, outlineRadius);
                         canvas.ClipPath(maskPath);
 
                         // what is the path that will cast the shadow?
                         // a) the button portion (which will be the hole in the larger outline, b)
-                        var path = PerimeterPath(_roundedBoxElement, perimeter, outlineRadius);
+                        var path = PerimeterPath(ShapeElement, perimeter, outlineRadius);
                         // b) add to it the larger outline 
                         path.AddRect(RectInset(rect, -50));
                         canvas.DrawPath(path, insetShadowPaint);
