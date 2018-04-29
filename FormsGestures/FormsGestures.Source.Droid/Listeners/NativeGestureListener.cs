@@ -201,7 +201,7 @@ namespace FormsGestures.Droid
         public override bool OnDown(MotionEvent e)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDown [{0}]",_id);
-            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " Index:" + e)
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " Index:" + e);
 
             _onDownDateTime = DateTime.Now;
             _cancelled = false;
