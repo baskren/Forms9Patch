@@ -47,9 +47,9 @@
     <Compile Include="..\FormsGestures.Source.Droid\Listeners\IMultiTouchGestureListener.cs" >
       <Link>Listeners\IMultiTouchGestureListener.cs</Link>
     </Compile>
-    <Compile Include="..\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs" >
+    <!--Compile Include="..\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs" >
       <Link>Listeners\NativeGestureListener.cs</Link>
-    </Compile>
+    </Compile-->
     <Compile Include="..\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs" >
       <Link>Listeners\OnTouchListener.cs</Link>
     </Compile>
@@ -65,9 +65,9 @@
     <Compile Include="..\FormsGestures.Source.Droid\DIP.cs" >
       <Link>DIP.cs</Link>
     </Compile>
-    <Compile Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs" >
+    <!--Compile Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs" >
       <Link>NativeGestureHandler.cs</Link>
-    </Compile>
+    </Compile-->
     <Compile Include="..\FormsGestures.Source.Droid\Settings.cs" >
       <Link>Settings.cs</Link>
     </Compile>

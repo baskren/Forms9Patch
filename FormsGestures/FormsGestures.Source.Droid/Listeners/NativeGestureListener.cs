@@ -196,10 +196,14 @@ namespace FormsGestures.Droid
         }
 
 
-
+        DateTime _onDownDateTime = DateTime.MinValue;
+        Dictionary<int, MotionEvent> _downEvents = new Dictionary<int, MotionEvent>();
         public override bool OnDown(MotionEvent e)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDown [{0}]",_id);
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " Index:" + e)
+
+            _onDownDateTime = DateTime.Now;
             _cancelled = false;
             Start = e;
             _longPressing = false;
@@ -267,6 +271,7 @@ namespace FormsGestures.Droid
         DateTime _lastTap;
         public bool OnUp(MotionEvent ev)
         {
+            var touchDuration = DateTime.Now - _onDownDateTime;
             if (_cancelled)
             {
                 _numberOfTaps = 0;
@@ -295,31 +300,6 @@ namespace FormsGestures.Droid
             }
             foreach (var listener in _listeners)
             {
-                if (listener.HandlesTapping)
-                {
-                    TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
-                    args.Listener = listener;
-                    listener.OnTapping(args);
-                    handled |= args.Handled;
-                    //if (args.Handled)
-                    //	break;
-                }
-            }
-            if (_numberOfTaps % 2 == 0)
-                foreach (var listener in _listeners)
-                {
-                    if (listener.HandlesDoubleTapped)
-                    {
-                        TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
-                        args.Listener = listener;
-                        listener.OnDoubleTapped(args);
-                        handled |= args.Handled;
-                        //if (args.Handled)
-                        //  break;
-                    }
-                }
-            foreach (var listener in _listeners)
-            {
                 if (_panning && listener.HandlesPanned)
                 {
                     PanEventArgs args = new AndroidPanEventArgs(LastPan ?? Start, ev, LastPanArgs, _view, _viewLocationAtOnDown);
@@ -327,8 +307,38 @@ namespace FormsGestures.Droid
                     listener.OnPanned(args);
                     handled |= args.Handled;
                     //if (args.Handled)
-                    //	break;
+                    //  break;
+
                 }
+            }
+
+            if (touchDuration < Settings.TappedThreshold)
+            {
+                foreach (var listener in _listeners)
+                {
+                    if (listener.HandlesTapping)
+                    {
+                        TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
+                        args.Listener = listener;
+                        listener.OnTapping(args);
+                        handled |= args.Handled;
+                        //if (args.Handled)
+                        //	break;
+                    }
+                }
+                if (_numberOfTaps % 2 == 0)
+                    foreach (var listener in _listeners)
+                    {
+                        if (listener.HandlesDoubleTapped)
+                        {
+                            TapEventArgs args = new AndroidTapEventArgs(ev, _view, _numberOfTaps, _viewLocationAtOnDown);
+                            args.Listener = listener;
+                            listener.OnDoubleTapped(args);
+                            handled |= args.Handled;
+                            //if (args.Handled)
+                            //  break;
+                        }
+                    }
             }
             foreach (var listener in _listeners)
             {

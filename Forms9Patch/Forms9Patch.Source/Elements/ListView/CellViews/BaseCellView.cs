@@ -266,7 +266,7 @@ namespace Forms9Patch
 
         void OnPanned(object sender, PanEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
             {
@@ -326,7 +326,7 @@ namespace Forms9Patch
         void OnPanning(object sender, PanEventArgs e)
         {
             ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
-            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             if (_panVt)
                 return;
             if (!_panVt && !_panHz)
@@ -357,7 +357,7 @@ namespace Forms9Patch
                 if ((side == Side.End && distance <= _homeOffset) || (side == Side.Start && distance >= _homeOffset))
                 {
 
-                    System.Diagnostics.Debug.WriteLine("=S=t=r=e=t=c=h=");
+                    //System.Diagnostics.Debug.WriteLine("=S=t=r=e=t=c=h=");
                     var parkedPosition = -(int)side * 60 * (_endButtons + _startButtons);
                     var panOffset = distance - parkedPosition;
                     ContentViewX = parkedPosition + panOffset / 2;
@@ -372,7 +372,7 @@ namespace Forms9Patch
                     ContentViewX = 0;
                     return;
                 }
-                System.Diagnostics.Debug.WriteLine("slide");
+                //System.Diagnostics.Debug.WriteLine("slide");
                 ContentViewX = distance;
                 _swipeFrame1.TranslationX = (int)side * (Width + (int)side * distance / (_endButtons + _startButtons));
                 _swipeFrame2.TranslationX = (int)side * (Width + (int)side * 2 * distance / (_endButtons + _startButtons));
@@ -621,6 +621,8 @@ namespace Forms9Patch
         #region Cell Gestures
         void OnTapped(object sender, TapEventArgs e)
         {
+            //if (Math.Abs(ContentViewX) > 4)
+            //    return;
             PutAwaySwipeButtons(true);
             if (_endButtons + _startButtons == 0)
                 ((ItemWrapper)BindingContext)?.OnTapped(this, new ItemWrapperTapEventArgs((ItemWrapper)BindingContext));
