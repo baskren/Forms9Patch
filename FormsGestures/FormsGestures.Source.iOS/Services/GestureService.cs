@@ -12,11 +12,6 @@ namespace FormsGestures.iOS
             Settings.Init();
         }
 
-        public void Cancel()
-        {
-            NativeGestureHandler.Cancel();
-        }
-
 
         #region IGestureService implementation
 
