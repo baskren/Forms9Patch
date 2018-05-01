@@ -2,15 +2,16 @@ using Xamarin.Forms;
 
 namespace FormsGestures
 {
-	/// <summary>
-	/// FormsGestures Pan event arguments.
-	/// </summary>
-	public class PanEventArgs : BaseGestureEventArgs {
-		
+    /// <summary>
+    /// FormsGestures Pan event arguments.
+    /// </summary>
+    public class PanEventArgs : BaseGestureEventArgs
+    {
+
         /// <summary>
         /// distance since last sample of pan motion
         /// </summary>
-		public virtual Point DeltaDistance { get; protected set; }
+        public virtual Point DeltaDistance { get; protected set; }
 
         /// <summary>
         /// total distance of pan motion
@@ -27,14 +28,20 @@ namespace FormsGestures
         /// </summary>
         /// <param name="source"></param>
         /// <param name="newListener"></param>
-		public PanEventArgs(PanEventArgs source=null, Listener newListener=null) : base(source,newListener) {
-			if (source != null) {
-				DeltaDistance = source.DeltaDistance;
-				TotalDistance = source.TotalDistance;
-				Velocity = source.Velocity;
-			}
-		}
+		public PanEventArgs(PanEventArgs source = null, Listener newListener = null) : base(source, newListener)
+        {
+            if (source != null)
+            {
+                DeltaDistance = source.DeltaDistance;
+                TotalDistance = source.TotalDistance;
+                Velocity = source.Velocity;
+            }
+        }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:FormsGestures.PanEventArgs"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:FormsGestures.PanEventArgs"/>.</returns>
         public override string ToString()
         {
             return "[d:" + DeltaDistance + " t:" + TotalDistance + " v:" + Velocity + "]";
@@ -45,59 +52,67 @@ namespace FormsGestures
         /// calculates the distance traversed since last sample
         /// </summary>
         /// <param name="previous"></param>
-		protected void CalculateDistances(PanEventArgs previous) {
-			if (previous == null) {
-				DeltaDistance = new Point(0.0, 0.0);
-				TotalDistance = new Point(0.0, 0.0);
-				return;
-			}
-			if (Touches.Length != previous.Touches.Length) {
-				DeltaDistance = new Point(0.0, 0.0);
-				TotalDistance = previous.TotalDistance;
-				return;
-			}
-			DeltaDistance = Center.Subtract(previous.Center);
-			TotalDistance = previous.TotalDistance.Add(DeltaDistance);
-		}
+		protected void CalculateDistances(PanEventArgs previous)
+        {
+            if (previous == null)
+            {
+                DeltaDistance = new Point(0.0, 0.0);
+                TotalDistance = new Point(0.0, 0.0);
+                return;
+            }
+            if (Touches.Length != previous.Touches.Length)
+            {
+                DeltaDistance = new Point(0.0, 0.0);
+                TotalDistance = previous.TotalDistance;
+                return;
+            }
+            DeltaDistance = Center.Subtract(previous.Center);
+            TotalDistance = previous.TotalDistance.Add(DeltaDistance);
+        }
 
-		internal PanEventArgs Diff(PanEventArgs lastArgs) {
-			return new PanEventArgs {
-				Cancelled = Cancelled,
-				Handled = Handled,
-				ViewPosition = ViewPosition,
-				Touches = Touches,
-				Listener = Listener,
-				Velocity = Velocity,
-				TotalDistance = TotalDistance,
-				DeltaDistance = TotalDistance.Subtract(lastArgs.TotalDistance)
-			};
-		}
+        internal PanEventArgs Diff(PanEventArgs lastArgs)
+        {
+            return new PanEventArgs
+            {
+                Cancelled = Cancelled,
+                Handled = Handled,
+                ViewPosition = ViewPosition,
+                Touches = Touches,
+                Listener = Listener,
+                Velocity = Velocity,
+                TotalDistance = TotalDistance,
+                DeltaDistance = TotalDistance.Subtract(lastArgs.TotalDistance)
+            };
+        }
         /// <summary>
         /// Equality test
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-		public override bool Equals(object obj) {
-			if (obj == null)
-				return false;
-			var panEventArgs = obj as PanEventArgs;
-			return panEventArgs != null && Equals(panEventArgs);
-		}
+		public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            var panEventArgs = obj as PanEventArgs;
+            return panEventArgs != null && Equals(panEventArgs);
+        }
 
         /// <summary>
         /// Equality test
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-		public bool Equals(PanEventArgs other) {
-			return other != null && DeltaDistance.Equals(other.DeltaDistance) && TotalDistance.Equals(other.TotalDistance) && Velocity.Equals(other.Velocity) && base.Equals(other);
-		}
+		public bool Equals(PanEventArgs other)
+        {
+            return other != null && DeltaDistance.Equals(other.DeltaDistance) && TotalDistance.Equals(other.TotalDistance) && Velocity.Equals(other.Velocity) && base.Equals(other);
+        }
 
         /// <summary>
         /// returns hash code
         /// </summary>
         /// <returns></returns>
-		public override int GetHashCode() {
+		public override int GetHashCode()
+        {
             //return base.GetHashCode() ^ DeltaDistance.GetHashCode() ^ TotalDistance.GetHashCode() ^ Velocity.GetHashCode();
             int hash = 13;
             hash = hash * 23 + base.GetHashCode();
@@ -118,5 +133,5 @@ namespace FormsGestures
             TotalDistance = source.TotalDistance;
             Velocity = source.Velocity;
         }
-	}
+    }
 }

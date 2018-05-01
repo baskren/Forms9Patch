@@ -19,21 +19,42 @@ namespace Forms9Patch
     public class Button : Frame, IDisposable, IButton
     {
         #region Xamarin.Forms emulation properties
+        /// <summary>
+        /// The border radius property.
+        /// </summary>
         public static readonly BindableProperty BorderRadiusProperty = Xamarin.Forms.Button.BorderRadiusProperty;
+        /// <summary>
+        /// Gets or sets the border radius (Xamarin.Forms.Button compatibility property).
+        /// </summary>
+        /// <value>The border radius.</value>
         public int BorderRadius
         {
             get { return (int)GetValue(BorderRadiusProperty); }
             set { SetValue(BorderRadiusProperty, value); }
         }
 
+        /// <summary>
+        /// The border width property.
+        /// </summary>
         public static readonly BindableProperty BorderWidthProperty = Xamarin.Forms.Button.BorderWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the border (Xamarin.Forms.Button compatibility property).
+        /// </summary>
+        /// <value>The width of the border.</value>
         public double BorderWidth
         {
             get { return (double)GetValue(BorderWidthProperty); }
             set { SetValue(BorderWidthProperty, value); }
         }
 
+        /// <summary>
+        /// The border color property.
+        /// </summary>
         public static readonly BindableProperty BorderColorProperty = Xamarin.Forms.Button.BorderColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the border (Xamarin.Forms.Button compatibility property).
+        /// </summary>
+        /// <value>The color of the border.</value>
         public Color BorderColor
         {
             get { return (Color)GetValue(BorderColorProperty); }

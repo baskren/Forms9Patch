@@ -633,6 +633,9 @@ namespace FormsGestures
         /// </summary>
         public bool HandlesDoubleTapped => _doubleTapped != null || DoubleTappedCommand != null || DoubleTappedCallback != null;
 
+        /// <summary>
+        /// Occurs when handles double tapped changed.
+        /// </summary>
         public event EventHandler<bool> HandlesDoubleTappedChanged;
 
         internal bool OnDoubleTapped(TapEventArgs args)
