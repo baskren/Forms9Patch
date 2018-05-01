@@ -21,10 +21,12 @@ namespace FormsGestures.Droid
             NativeGestureHandler.GetInstanceForListener(listener);
         }
 
+        /*
         public void Cancel()
         {
             NativeGestureListener.Cancel();
         }
+        */
         #endregion
 
     }

@@ -8,7 +8,7 @@ namespace FormsGestures
     interface IGestureService
     {
         void For(Listener handler);
-        void Cancel();
+        //void Cancel();
     }
 }
 

@@ -21,8 +21,8 @@ namespace FormsGestures
         /// <summary>
         /// VisualElement that is the focus of this Listener
         /// </summary>
-        public VisualElement Element => _element; 
-        
+        public VisualElement Element => _element;
+
 
 
         #region Events / Commands
@@ -171,8 +171,8 @@ namespace FormsGestures
         /// </summary>
         public object DownCommandParameter
         {
-            get => GetValue(DownCommandParameterProperty); 
-            set => SetValue(DownCommandParameterProperty, value); 
+            get => GetValue(DownCommandParameterProperty);
+            set => SetValue(DownCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for DownCallback property
@@ -201,19 +201,19 @@ namespace FormsGestures
         /// </summary>
         public object DownCallbackParameter
         {
-            get => GetValue(DownCallbackParameterProperty); 
-            set => SetValue(DownCallbackParameterProperty, value); 
+            get => GetValue(DownCallbackParameterProperty);
+            set => SetValue(DownCallbackParameterProperty, value);
         }
         /// <summary>
         /// returns if Listener is configured to handle down touch 
         /// </summary>
-        public bool HandlesDown => _down != null || DownCommand != null || DownCallback != null; 
-        
+        public bool HandlesDown => _down != null || DownCommand != null || DownCallback != null;
+
         /// <summary>
         /// Event to notify if the ability to handle down events has changed
         /// </summary>
         public event EventHandler<bool> HandlesDownChanged;
-        
+
         internal bool OnDown(DownUpEventArgs args)
         {
             bool result = false;
@@ -276,8 +276,8 @@ namespace FormsGestures
         /// </summary>
         public object UpCommandParameter
         {
-            get => GetValue(UpCommandParameterProperty); 
-            set => SetValue(UpCommandParameterProperty, value); 
+            get => GetValue(UpCommandParameterProperty);
+            set => SetValue(UpCommandParameterProperty, value);
         }
         /// <summary>
         /// Backing store for UpCallback
@@ -306,14 +306,14 @@ namespace FormsGestures
         /// </summary>
         public object UpCallbackParameter
         {
-            get => GetValue(UpCallbackParameterProperty); 
-            set => SetValue(UpCallbackParameterProperty, value); 
+            get => GetValue(UpCallbackParameterProperty);
+            set => SetValue(UpCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything upon an up touch?
         /// </summary>
-        public bool HandlesUp => _up != null || UpCommand != null || UpCallback != null; 
-        
+        public bool HandlesUp => _up != null || UpCommand != null || UpCallback != null;
+
 
         /// <summary>
         /// Event triggered when HandlesUp status has changed;
@@ -382,8 +382,8 @@ namespace FormsGestures
         /// </summary>
         public object TappingCommandParameter
         {
-            get => GetValue(TappingCommandParameterProperty); 
-            set => SetValue(TappingCommandParameterProperty, value); 
+            get => GetValue(TappingCommandParameterProperty);
+            set => SetValue(TappingCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the TappingCallback property
@@ -398,7 +398,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> TappingCallback
         {
-            get =>  (Action<Listener, object>)GetValue(TappingCallbackProperty);
+            get => (Action<Listener, object>)GetValue(TappingCallbackProperty);
             set
             {
                 var oldHandlesTapping = HandlesTapping;
@@ -412,14 +412,14 @@ namespace FormsGestures
         /// </summary>
         public object TappingCallbackParameter
         {
-            get => GetValue(TappingCallbackParameterProperty); 
-            set => SetValue(TappingCallbackParameterProperty, value); 
+            get => GetValue(TappingCallbackParameterProperty);
+            set => SetValue(TappingCallbackParameterProperty, value);
         }
         /// <summary>
         /// does this Listner invoke anything during a tap motion?
         /// </summary>
-        public bool HandlesTapping => _tapping != null || TappingCommand != null || TappingCallback != null; 
-        
+        public bool HandlesTapping => _tapping != null || TappingCommand != null || TappingCallback != null;
+
 
         /// <summary>
         /// Event triggered when HandlesTapping state has changed
@@ -471,7 +471,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand TappedCommand
         {
-            get => (ICommand)GetValue(TappedCommandProperty); 
+            get => (ICommand)GetValue(TappedCommandProperty);
             set
             {
                 var oldHandlesTapped = HandlesTapped;
@@ -485,8 +485,8 @@ namespace FormsGestures
         /// </summary>
         public object TappedCommandParameter
         {
-            get => GetValue(TappedCommandParameterProperty); 
-            set => SetValue(TappedCommandParameterProperty, value); 
+            get => GetValue(TappedCommandParameterProperty);
+            set => SetValue(TappedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for a TappedCallback property
@@ -501,7 +501,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> TappedCallback
         {
-            get => (Action<Listener, object>)GetValue(TappedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(TappedCallbackProperty);
             set
             {
                 var oldHandlesTapped = HandlesTapped;
@@ -515,7 +515,7 @@ namespace FormsGestures
         /// </summary>
         public object TappedCallbackParameter
         {
-            get => GetValue(TappedCallbackParameterProperty); 
+            get => GetValue(TappedCallbackParameterProperty);
             set
             {
                 SetValue(TappedCallbackParameterProperty, value);
@@ -524,8 +524,8 @@ namespace FormsGestures
         /// <summary>
         /// does this Listener invoke anything after a tap motion?
         /// </summary>
-        public bool HandlesTapped => _tapped != null || TappedCommand != null || TappedCallback != null; 
-        
+        public bool HandlesTapped => _tapped != null || TappedCommand != null || TappedCallback != null;
+
 
         /// <summary>
         /// Event triggered when HandlesTapped has changed
@@ -581,7 +581,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand DoubleTappedCommand
         {
-            get => (ICommand)GetValue(DoubleTappedCommandProperty); 
+            get => (ICommand)GetValue(DoubleTappedCommandProperty);
             set
             {
                 var oldHandlesDoubleTapped = HandlesDoubleTapped;
@@ -595,8 +595,8 @@ namespace FormsGestures
         /// </summary>
         public object DoubleTappedCommandParameter
         {
-            get => GetValue(DoubleTappedCommandParameterProperty); 
-            set => SetValue(DoubleTappedCommandParameterProperty, value); 
+            get => GetValue(DoubleTappedCommandParameterProperty);
+            set => SetValue(DoubleTappedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for DoubleTappedCallback property
@@ -611,7 +611,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> DoubleTappedCallback
         {
-            get => (Action<Listener, object>)GetValue(DoubleTappedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(DoubleTappedCallbackProperty);
             set
             {
                 var oldHandlesDoubleTapped = HandlesDoubleTapped;
@@ -625,8 +625,8 @@ namespace FormsGestures
         /// </summary>
         public object DoubleTappedCallbackParameter
         {
-            get => GetValue(DoubleTappedCallbackParameterProperty); 
-            set => SetValue(DoubleTappedCallbackParameterProperty, value); 
+            get => GetValue(DoubleTappedCallbackParameterProperty);
+            set => SetValue(DoubleTappedCallbackParameterProperty, value);
         }
         /// <summary>
         /// does this Listener invoke anything upon double tap motion?
@@ -634,7 +634,7 @@ namespace FormsGestures
         public bool HandlesDoubleTapped => _doubleTapped != null || DoubleTappedCommand != null || DoubleTappedCallback != null;
 
         public event EventHandler<bool> HandlesDoubleTappedChanged;
-        
+
         internal bool OnDoubleTapped(TapEventArgs args)
         {
             bool result = false;
@@ -684,7 +684,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand LongPressingCommand
         {
-            get => (ICommand)GetValue(LongPressingCommandProperty); 
+            get => (ICommand)GetValue(LongPressingCommandProperty);
             set
             {
                 var oldHandlesLongPressing = HandlesLongPressing;
@@ -698,8 +698,8 @@ namespace FormsGestures
         /// </summary>
         public object LongPressingCommandParameter
         {
-            get => GetValue(LongPressingCommandParameterProperty); 
-            set => SetValue(LongPressingCommandParameterProperty, value); 
+            get => GetValue(LongPressingCommandParameterProperty);
+            set => SetValue(LongPressingCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for LongPressingCallback property
@@ -714,7 +714,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> LongPressingCallback
         {
-            get => (Action<Listener, object>)GetValue(LongPressingCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(LongPressingCallbackProperty);
             set
             {
                 var oldHandlesLongPressing = HandlesLongPressing;
@@ -728,8 +728,8 @@ namespace FormsGestures
         /// </summary>
         public object LongPressingCallbackParameter
         {
-            get => GetValue(LongPressingCallbackParameterProperty); 
-            set => SetValue(LongPressingCallbackParameterProperty, value); 
+            get => GetValue(LongPressingCallbackParameterProperty);
+            set => SetValue(LongPressingCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listner invoke anything during long press motion?
@@ -791,7 +791,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand LongPressedCommand
         {
-            get => (ICommand)GetValue(LongPressedCommandProperty); 
+            get => (ICommand)GetValue(LongPressedCommandProperty);
             set
             {
                 var oldHandlesLongPressed = HandlesLongPressed;
@@ -805,8 +805,8 @@ namespace FormsGestures
         /// </summary>
         public object LongPressedCommandParameter
         {
-            get => GetValue(LongPressedCommandParameterProperty); 
-            set => SetValue(LongPressedCommandParameterProperty, value); 
+            get => GetValue(LongPressedCommandParameterProperty);
+            set => SetValue(LongPressedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for LongPressedCallback property
@@ -821,7 +821,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> LongPressedCallback
         {
-            get => (Action<Listener, object>)GetValue(LongPressedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(LongPressedCallbackProperty);
             set
             {
                 var oldHandlesLongPressed = HandlesLongPressed;
@@ -835,8 +835,8 @@ namespace FormsGestures
         /// </summary>
         public object LongPressedCallbackParameter
         {
-            get => GetValue(LongPressedCallbackParameterProperty); 
-            set => SetValue(LongPressedCallbackParameterProperty, value); 
+            get => GetValue(LongPressedCallbackParameterProperty);
+            set => SetValue(LongPressedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything after a long press
@@ -899,7 +899,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand PinchingCommand
         {
-            get => (ICommand)GetValue(PinchingCommandProperty); 
+            get => (ICommand)GetValue(PinchingCommandProperty);
             set
             {
                 var oldHandlesPinching = HandlesPinching;
@@ -913,8 +913,8 @@ namespace FormsGestures
         /// </summary>
         public object PinchingCommandParameter
         {
-            get => GetValue(PinchingCommandParameterProperty); 
-            set => SetValue(PinchingCommandParameterProperty, value); 
+            get => GetValue(PinchingCommandParameterProperty);
+            set => SetValue(PinchingCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the PinchingCallback property
@@ -929,7 +929,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PinchingCallback
         {
-            get => (Action<Listener, object>)GetValue(PinchingCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(PinchingCallbackProperty);
             set
             {
                 var oldHandlesPinching = HandlesPinching;
@@ -943,8 +943,8 @@ namespace FormsGestures
         /// </summary>
         public object PinchingCallbackParameter
         {
-            get => GetValue(PinchingCallbackParameterProperty); 
-            set => SetValue(PinchingCallbackParameterProperty, value); 
+            get => GetValue(PinchingCallbackParameterProperty);
+            set => SetValue(PinchingCallbackParameterProperty, value);
         }
         /// <summary>
         /// does this Listener invoke anything during pinch motion?
@@ -1007,7 +1007,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand PinchedCommand
         {
-            get => (ICommand)GetValue(PinchedCommandProperty); 
+            get => (ICommand)GetValue(PinchedCommandProperty);
             set
             {
                 var oldHandlesPinched = HandlesPinched;
@@ -1021,8 +1021,8 @@ namespace FormsGestures
         /// </summary>
         public object PinchedCommandParameter
         {
-            get => GetValue(PinchedCommandParameterProperty); 
-            set => SetValue(PinchedCommandParameterProperty, value); 
+            get => GetValue(PinchedCommandParameterProperty);
+            set => SetValue(PinchedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the PinchedCallback property
@@ -1037,7 +1037,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PinchedCallback
         {
-            get => (Action<Listener, object>)GetValue(PinchedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(PinchedCallbackProperty);
             set
             {
                 var oldHandlesPinched = HandlesPinched;
@@ -1051,8 +1051,8 @@ namespace FormsGestures
         /// </summary>
         public object PinchedCallbackParameter
         {
-            get => GetValue(PinchedCallbackParameterProperty); 
-            set => SetValue(PinchedCallbackParameterProperty, value); 
+            get => GetValue(PinchedCallbackParameterProperty);
+            set => SetValue(PinchedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything after pinch motion
@@ -1115,7 +1115,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand PanningCommand
         {
-            get => (ICommand)GetValue(PanningCommandProperty); 
+            get => (ICommand)GetValue(PanningCommandProperty);
             set
             {
                 var oldHandlesPanning = HandlesPanning;
@@ -1129,8 +1129,8 @@ namespace FormsGestures
         /// </summary>
         public object PanningCommandParameter
         {
-            get => GetValue(PanningCommandParameterProperty); 
-            set => SetValue(PanningCommandParameterProperty, value); 
+            get => GetValue(PanningCommandParameterProperty);
+            set => SetValue(PanningCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the PanningCallback parameter
@@ -1145,7 +1145,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PanningCallback
         {
-            get => (Action<Listener, object>)GetValue(PanningCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(PanningCallbackProperty);
             set
             {
                 var oldHandlesPanning = HandlesPanning;
@@ -1159,8 +1159,8 @@ namespace FormsGestures
         /// </summary>
         public object PanningCallbackParameter
         {
-            get => GetValue(PanningCallbackParameterProperty); 
-            set => SetValue(PanningCallbackParameterProperty, value); 
+            get => GetValue(PanningCallbackParameterProperty);
+            set => SetValue(PanningCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does Listener invoke anything during pan motion?
@@ -1223,7 +1223,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand PannedCommand
         {
-            get => (ICommand)GetValue(PannedCommandProperty); 
+            get => (ICommand)GetValue(PannedCommandProperty);
             set
             {
                 var oldHandlesPanned = HandlesPanned;
@@ -1237,7 +1237,7 @@ namespace FormsGestures
         /// </summary>
         public object PannedCommandParameter
         {
-            get => GetValue(PannedCommandParameterProperty); 
+            get => GetValue(PannedCommandParameterProperty);
             set => SetValue(PannedCommandParameterProperty, value);
         }
         /// <summary>
@@ -1253,7 +1253,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> PannedCallback
         {
-            get => (Action<Listener, object>)GetValue(PannedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(PannedCallbackProperty);
             set
             {
                 var oldHandlesPanned = HandlesPanned;
@@ -1267,8 +1267,8 @@ namespace FormsGestures
         /// </summary>
         public object PannedCallbackParameter
         {
-            get => GetValue(PannedCallbackParameterProperty); 
-            set =>  SetValue(PannedCallbackParameterProperty, value);
+            get => GetValue(PannedCallbackParameterProperty);
+            set => SetValue(PannedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does this Listener invoke anything after pan motion?
@@ -1332,7 +1332,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand SwipedCommand
         {
-            get => (ICommand)GetValue(SwipedCommandProperty); 
+            get => (ICommand)GetValue(SwipedCommandProperty);
             set
             {
                 var oldHandlesSwiped = HandlesSwiped;
@@ -1362,7 +1362,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> SwipedCallback
         {
-            get => (Action<Listener, object>)GetValue(SwipedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(SwipedCallbackProperty);
             set
             {
                 var oldHandlesSwiped = HandlesSwiped;
@@ -1376,7 +1376,7 @@ namespace FormsGestures
         /// </summary>
         public object SwipedCallbackParameter
         {
-            get => GetValue(SwipedCallbackParameterProperty); 
+            get => GetValue(SwipedCallbackParameterProperty);
             set => SetValue(SwipedCallbackParameterProperty, value);
         }
         /// <summary>
@@ -1439,7 +1439,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand RotatingCommand
         {
-            get => (ICommand)GetValue(RotatingCommandProperty); 
+            get => (ICommand)GetValue(RotatingCommandProperty);
             set
             {
                 var oldHandlesRotating = HandlesRotating;
@@ -1453,8 +1453,8 @@ namespace FormsGestures
         /// </summary>
         public object RotatingCommandParameter
         {
-            get => GetValue(RotatingCommandParameterProperty); 
-            set => SetValue(RotatingCommandParameterProperty, value); 
+            get => GetValue(RotatingCommandParameterProperty);
+            set => SetValue(RotatingCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the RotatingCallback property
@@ -1469,7 +1469,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RotatingCallback
         {
-            get => (Action<Listener, object>)GetValue(RotatingCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(RotatingCallbackProperty);
             set
             {
                 var oldHandlesRotating = HandlesRotating;
@@ -1483,8 +1483,8 @@ namespace FormsGestures
         /// </summary>
         public object RotatingCallbackParameter
         {
-            get => GetValue(RotatingCallbackParameterProperty); 
-            set => SetValue(RotatingCallbackParameterProperty, value); 
+            get => GetValue(RotatingCallbackParameterProperty);
+            set => SetValue(RotatingCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does Listener invoke anything during rotation motion?
@@ -1546,7 +1546,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand RotatedCommand
         {
-            get => (ICommand)GetValue(RotatedCommandProperty); 
+            get => (ICommand)GetValue(RotatedCommandProperty);
             set
             {
                 var oldHandlesRotated = HandlesRotated;
@@ -1560,8 +1560,8 @@ namespace FormsGestures
         /// </summary>
         public object RotatedCommandParameter
         {
-            get => GetValue(RotatedCommandParameterProperty); 
-            set => SetValue(RotatedCommandParameterProperty, value); 
+            get => GetValue(RotatedCommandParameterProperty);
+            set => SetValue(RotatedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for the RotatedCallback property
@@ -1576,7 +1576,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RotatedCallback
         {
-            get => (Action<Listener, object>)GetValue(RotatedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(RotatedCallbackProperty);
             set
             {
                 var oldHandlesRotated = HandlesRotated;
@@ -1590,8 +1590,8 @@ namespace FormsGestures
         /// </summary>
         public object RotatedCallbackParameter
         {
-            get => GetValue(RotatedCallbackParameterProperty); 
-            set => SetValue(RotatedCallbackParameterProperty, value); 
+            get => GetValue(RotatedCallbackParameterProperty);
+            set => SetValue(RotatedCallbackParameterProperty, value);
         }
         /// <summary>
         /// Does Listener invoke anything after rotation motion?
@@ -1653,7 +1653,7 @@ namespace FormsGestures
         /// </summary>
         public ICommand RightClickedCommand
         {
-            get => (ICommand)GetValue(RightClickedCommandProperty); 
+            get => (ICommand)GetValue(RightClickedCommandProperty);
             set
             {
                 var oldHandlesRightClicked = HandlesRightClicked;
@@ -1667,8 +1667,8 @@ namespace FormsGestures
         /// </summary>
         public object RightClickedCommandParameter
         {
-            get => GetValue(RightClickedCommandParameterProperty); 
-            set => SetValue(RightClickedCommandParameterProperty, value); 
+            get => GetValue(RightClickedCommandParameterProperty);
+            set => SetValue(RightClickedCommandParameterProperty, value);
         }
         /// <summary>
         /// backing store for a TappedCallback property
@@ -1683,7 +1683,7 @@ namespace FormsGestures
         /// </summary>
         public Action<Listener, object> RightClickedCallback
         {
-            get => (Action<Listener, object>)GetValue(RightClickedCallbackProperty); 
+            get => (Action<Listener, object>)GetValue(RightClickedCallbackProperty);
             set
             {
                 var oldHandlesRightClicked = HandlesRightClicked;
@@ -1697,8 +1697,8 @@ namespace FormsGestures
         /// </summary>
         public object RightClickedCallbackParameter
         {
-            get => GetValue(RightClickedCallbackParameterProperty); 
-            set => SetValue(RightClickedCallbackParameterProperty, value); 
+            get => GetValue(RightClickedCallbackParameterProperty);
+            set => SetValue(RightClickedCallbackParameterProperty, value);
         }
         /// <summary>
         /// does this Listener invoke anything after a tap motion?
@@ -1794,6 +1794,7 @@ namespace FormsGestures
             GestureService.For(this);
         }
 
+        /*
         /// <summary>
         /// Cancels the active gestures.
         /// </summary>
@@ -1801,6 +1802,7 @@ namespace FormsGestures
         {
             GestureService.Cancel();
         }
+        */
 
         bool disposed;
         /// <summary>

@@ -43,20 +43,23 @@ namespace FormsGestures.Droid
                 // multi point gesture ?
                 bool[] valid = new bool[6];
                 MotionEvent.PointerCoords[] coords = null;
-                coords = new MotionEvent.PointerCoords[2];
+                coords = new MotionEvent.PointerCoords[6];
                 for (int i = 0; i < Math.Min(e.PointerCount, 6); i++)
                 {
                     coords[i] = new MotionEvent.PointerCoords();
                     var index = e.FindPointerIndex(i);
-                    valid[index] = true;
-                    e.GetPointerCoords(index, coords[i]);
-                    if (_lastCoords != null && _lastCoords[i] != null)
+                    if (index > -1 && index < 6)
                     {
-                        _avgCoords[i].X = (float)((coords[i].X + _lastCoords[i].X) / 2.0);
-                        _avgCoords[i].Y = (float)((coords[i].Y + _lastCoords[i].Y) / 2.0);
+                        valid[index] = true;
+                        e.GetPointerCoords(index, coords[i]);
+                        if (_lastCoords != null && _lastCoords[i] != null)
+                        {
+                            _avgCoords[i].X = (float)((coords[i].X + _lastCoords[i].X) / 2.0);
+                            _avgCoords[i].Y = (float)((coords[i].Y + _lastCoords[i].Y) / 2.0);
+                        }
+                        _lastCoords = coords;
                     }
                 }
-                _lastCoords = coords;
 
                 if (e.Action == MotionEventActions.Down || e.Action == MotionEventActions.Pointer1Down || e.Action == MotionEventActions.Pointer2Down)
                 {
@@ -85,7 +88,7 @@ namespace FormsGestures.Droid
         public bool OnTouch(View v, MotionEvent e)
         {
             var handled = OnTouchEvent(e);
-            System.Diagnostics.Debug.WriteLine("\n\nTouch: Action=[" + e.Action + "] Handled=[" + handled + "]");
+            //System.Diagnostics.Debug.WriteLine("\n\nTouch: Action=[" + e.Action + "] Handled=[" + handled + "]");
             if (!handled)
                 v.TouchUpViewHeirarchy(e);
             return handled | e.Action == MotionEventActions.Down;

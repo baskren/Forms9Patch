@@ -12,25 +12,27 @@ namespace FormsGestures.Droid
         /// <value>The context.</value>
         public static Android.Content.Context Context
         {
-            get
-            {
-                return _context ?? Xamarin.Forms.Forms.Context;
-            }
-            private set
-            {
-                _context = value;
-            }
+            get => _context ?? Xamarin.Forms.Forms.Context;
+            private set => _context = value;
+
         }
 
-        static double _msUntilTapped = 200;
+        static double _msUntilTapped = 300;
         /// <summary>
         /// Gets or sets the tapped threshold.
         /// </summary>
         /// <value>The tapped threshold.</value>
         public static TimeSpan TappedThreshold
         {
-            get { return TimeSpan.FromMilliseconds(_msUntilTapped); }
-            set { _msUntilTapped = value.TotalMilliseconds; }
+            get => TimeSpan.FromMilliseconds(_msUntilTapped);
+            set => _msUntilTapped = value.TotalMilliseconds;
+        }
+
+        static double _msUntilLongPressed = 1100;
+        public static TimeSpan LongPressedThreshold
+        {
+            get => TimeSpan.FromMilliseconds(_msUntilLongPressed);
+            set => _msUntilLongPressed = value.TotalMilliseconds;
         }
 
         static float _swipeVelocityThreshold = 0.1f;
@@ -40,8 +42,8 @@ namespace FormsGestures.Droid
         /// <value>The swipe velocity threshold.</value>
         public static float SwipeVelocityThreshold
         {
-            get { return _swipeVelocityThreshold; }
-            set { _swipeVelocityThreshold = value; }
+            get => _swipeVelocityThreshold;
+            set => _swipeVelocityThreshold = value;
         }
 
 
