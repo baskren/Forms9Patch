@@ -425,7 +425,7 @@ namespace Forms9Patch
             _stackLayout.Children.Clear();
 
             _stackLayout.Children.Add(_leftArrowButton);
-            _leftArrowButton.IsVisible = true;
+            //_leftArrowButton.IsVisible = true;
             _stackLayout.Children.Add(_leftArrowSeparator);
 
             bool first = true;
