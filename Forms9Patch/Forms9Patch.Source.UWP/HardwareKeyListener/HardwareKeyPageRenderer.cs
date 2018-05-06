@@ -17,51 +17,197 @@ namespace Forms9Patch.UWP
 {
     public class HardwareKeyPageRenderer : Xamarin.Forms.Platform.UWP.PageRenderer
     {
-        void Connect()
-        {
-            Window.Current.CoreWindow.CharacterReceived += OnCharacterReceived;
-            Window.Current.CoreWindow.KeyDown += OnKeyDown;
-            //Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
-            //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
-            //interceptor.KeyDown += OnInterceptorKeyDown;
-            //interceptor.IsInterceptionEnabledWhenInForeground = true;
+        #region Static Implementation
+        //static List<HardwareKeyPageRenderer> ActiveInstances = new List<HardwareKeyPageRenderer>();
+
+        static HardwareKeyPageRenderer()
+        {
+            Window.Current.Activated += OnActivated;
+            Window.Current.VisibilityChanged += OnVisibilityChanged;
+            HardwareKeyPage.RemoveNativeFocus = OnRemoveNativeFocus;
         }
 
-        void Disconnect()
+        private static void OnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
         {
-            Window.Current.CoreWindow.CharacterReceived -= OnCharacterReceived;
-            Window.Current.CoreWindow.KeyDown -= OnKeyDown;
-            //Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
-
-            //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
-            //interceptor.KeyDown -= OnInterceptorKeyDown;
-            //interceptor.IsInterceptionEnabledWhenInForeground = false;
+            System.Diagnostics.Debug.WriteLine("VISIBILITY: "+e.Visible);
         }
+
+        private static void OnActivated(object sender, WindowActivatedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("ACTIVATED: "+e.WindowActivationState);
+        }
+        #endregion
+    
+
+        #region Fields
+        //Windows.UI.Xaml.Controls.Button _removeFocusControl;
+        #endregion
+
+
+        #region Connect / Disconnect
+        void Connect(HardwareKeyPage element)
+        {
+            //ActiveInstances.Add(this);
+            if (element != null)
+            {
+                Window.Current.CoreWindow.CharacterReceived += OnCharacterReceived;
+                Window.Current.CoreWindow.KeyDown += OnKeyDown;
+                //Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
+
+                //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
+                //interceptor.KeyDown += OnInterceptorKeyDown;
+                //interceptor.IsInterceptionEnabledWhenInForeground = true;
+
+                /*
+                //HardwareKeyPage.SetNativeFocused = OnSetNativeFocused;
+                HardwareKeyPage.GetNativeFocused = OnGetNativeFocused;
+
+                if (_removeFocusControl == null)
+                {
+                    _removeFocusControl = new Windows.UI.Xaml.Controls.Button();
+                    Children.Add((_removeFocusControl));
+                }
+                */
+            }
+        }
+
+        void Disconnect(HardwareKeyPage element)
+        {
+            //ActiveInstances.Remove(this);
+            if (element != null)
+            {
+                /*
+                if (ActiveInstances.Count > 0)
+                    HardwareKeyPage.RemoveNativeFocus = ActiveInstances.Last().OnRemoveNativeFocus;
+                else
+                    HardwareKeyPage.RemoveNativeFocus = null;
+                _removeFocusControl = null;
+                */
+
+                Window.Current.CoreWindow.CharacterReceived -= OnCharacterReceived;
+                Window.Current.CoreWindow.KeyDown -= OnKeyDown;
+                //Window.Current.CoreWindow.KeyUp -= CoreWindow_KeyUp;
+
+                //var interceptor = Windows.UI.Input.KeyboardDeliveryInterceptor.GetForCurrentView();
+                //interceptor.KeyDown -= OnInterceptorKeyDown;
+                //interceptor.IsInterceptionEnabledWhenInForeground = false;
+
+            }
+        }
+        #endregion
+
+        /*
+        private void OnRemoveNativeFocus()
+        {
+            System.Diagnostics.Debug.Write("OnRemoveNativeFocus ");
+
+            if (_removeFocusControl is Windows.UI.Xaml.Controls.ContentControl logicalFocus)
+            {
+                logicalFocus.Focus(FocusState.Programmatic);
+                System.Diagnostics.Debug.Write(" focus set to [" + logicalFocus + "]");
+            }
+            System.Diagnostics.Debug.WriteLine("");
+        }
+
+        static object OnGetNativeFocusedControl()
+        {
+            return FocusManager.GetFocusedElement();
+        }
+
+        */
+
+        /*
+        private static void OnSetNativeFocused(object nativeControl)
+        {
+         
+            if (nativeControl is Windows.UI.Xaml.Controls.ContentControl contentControl)
+            //if (_logicalFocus is Xamarin.Forms.Platform.UWP.PageControl pageControl)
+                contentControl?.Focus(FocusState.Programmatic);
+        //var pageControl = this.GetFurthestAncestor<Xamarin.Forms.Platform.UWP.PageControl>();
+        //pageControl?.Focus(FocusState.Programmatic);
+        }
+        */
+
+        static void OnRemoveNativeFocus()
+        {
+            UnfocusNativeControl(FocusManager.GetFocusedElement());
+        }
+
+        static void UnfocusNativeControl(object obj)
+        {
+            if (obj is Windows.UI.Xaml.Controls.Control control)
+                UnfocusNativeControl(control);
+        }
+
+        static void UnfocusNativeControl(Windows.UI.Xaml.Controls.Control control)
+        {
+            if (control == null)
+                return;
+
+            // "Unfocusing" doesn't really make sense on Windows; for accessibility reasons,
+            // something always has focus. So forcing the unfocusing of a control would normally 
+            // just move focus to the next control, or leave it on the current control if no other
+            // focus targets are available. This is what happens if you use the "disable/enable"
+            // hack. What we *can* do is set the focus to the Page which contains Control;
+            // this will cause Control to lose focus without shifting focus to, say, the next Entry 
+
+            // Work our way up the tree to find the containing Page
+            DependencyObject parent = control as Windows.UI.Xaml.Controls.Control;
+            while (parent != null && !(parent is Windows.UI.Xaml.Controls.Page))
+                parent = Windows.UI.Xaml.Media.VisualTreeHelper.GetParent(parent);
+
+            if (parent is Windows.UI.Xaml.Controls.Page _containingPage)
+            {
+                // Cache the tabstop setting
+               // var wasTabStop = _containingPage.IsTabStop;
+
+                // Controls can only get focus if they're a tabstop
+                _containingPage.IsTabStop = true;
+                _containingPage.Focus(FocusState.Programmatic);
+
+                // Restore the tabstop setting; that may cause the Page to lose focus,
+                // but it won't restore the focus to Control
+                //_containingPage.IsTabStop = wasTabStop;
+            }
+        }
+
+
 
         protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
         {
             base.OnElementChanged(e);
-            if (e.OldElement != null)
-                Disconnect();
-            if (e.NewElement != null)
-                Connect();
+            Disconnect(e.OldElement as HardwareKeyPage);
+            Connect(e.NewElement as HardwareKeyPage);
         }
 
         static bool keyDownCaptured = false;
 
-        private void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
+        void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
         {
+            var logicalFocus = FocusManager.GetFocusedElement();
+            System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
+            if (logicalFocus == this)
+                System.Diagnostics.Debug.WriteLine("    THIS     ");
+
             args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
 
         public void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
+            var logicalFocus = FocusManager.GetFocusedElement();
+            System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
+            if (logicalFocus == this)
+                System.Diagnostics.Debug.WriteLine("    THIS     ");
+
             args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
 
         public static bool ProcessVirualKey(VisualElement element, Windows.System.VirtualKey virtualKey)
         {
+
+          
+
             if (element == null)
                 return false;
             keyDownCaptured = false;
@@ -341,6 +487,7 @@ namespace Forms9Patch.UWP
 
             return result;
         }
+
 
     }
 }

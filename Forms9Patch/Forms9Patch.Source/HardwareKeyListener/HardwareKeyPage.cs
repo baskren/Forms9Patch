@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -29,15 +31,52 @@ namespace Forms9Patch
         static HardwareKeyPage()
         {
             Settings.ConfirmInitialization();
-            FocusMonitor.FocusedElementChanged += OnFocusElementChanged;
+            FocusMonitor.FocusedElementChanged += OnFocusMonitorFocusedElementChanged;
         }
 
-        static void OnFocusElementChanged(object wasElement, VisualElement currentElement)
+        //static Timer _falseFocusTimer=null;
+        static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
+        static void OnFocusMonitorFocusedElementChanged(object wasElement, VisualElement currentElement)
         {
-            FocusedElement = currentElement;
+            System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.OnFocusElementChanged ("+wasElement+", "+currentElement+") ");
+
+            if (currentElement == _expectedFocusedElement)
+            {
+                System.Diagnostics.Debug.WriteLine("\t (currentElement == _expectedFocusedElement) ["+currentElement+"]");
+                // the FocusedElement setter has successfully updated the focus (or the app just regained focus).
+                FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
+            }
+            else if (currentElement is Xamarin.Forms.InputView && DateTime.Now - _lastFocusChangedDateTime > TimeSpan.FromMilliseconds(100))
+            {
+                System.Diagnostics.Debug.WriteLine("\t (currentElement is Xamarin.Forms.InputView) ["+currentElement+"]");
+                // the user has changed the focus  (or the app just regained focus).
+                _element = currentElement;
+                _expectedFocusedElement = currentElement;
+                FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
+            }
+            else
+                System.Diagnostics.Debug.WriteLine("\t n\\a");
+            _lastFocusChangedDateTime = DateTime.Now;
+            System.Diagnostics.Debug.WriteLine("\n");
         }
+
+        #region UWP Workarounds
+        /*
+        static object _nativeFocus;
+        static object _lastNativeElement;
+        static internal Func<object> GetNativeFocused;
+        static internal Action RemoveNativeFocus;
+        static void OnFalseFocusTimeOut(object state)
+        {
+            FocusedElement = null;
+        }
+        */
+        static internal Action RemoveNativeFocus;
+        #endregion
+
 
         internal static VisualElement _element;
+        static VisualElement _expectedFocusedElement;
         /// <summary>
         /// Gets or sets the currently focused element - the element who'sHardwareKeyListeners are currently active
         /// </summary>
@@ -49,14 +88,31 @@ namespace Forms9Patch
             {
                 if (_element != value)
                 {
-                    System.Diagnostics.Debug.WriteLine("==============================================");
-                    System.Diagnostics.Debug.WriteLine("HardwareKeyPage.FocusElement Was=[" + _element + "]");
+                    System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.FocusedElement = [" + value +  "]  was: [" + _element + "]");
+
                     _element = value;
-                    FocusMonitor.FocusedElement = _element;
-                    FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
-                    System.Diagnostics.Debug.WriteLine("HardwareKeyPage.FocusElement  Is=[" + _element + "]");
-                    System.Diagnostics.Debug.WriteLine("==============================================");
-                    System.Diagnostics.Debug.WriteLine("");
+
+                    if (value is Xamarin.Forms.InputView)
+                        _expectedFocusedElement = value;
+                    else
+                    {
+                        _expectedFocusedElement = null;
+                        HardwareKeyPage.RemoveNativeFocus?.Invoke();
+                    }
+
+                    _lastFocusChangedDateTime = DateTime.Now;
+                    if (FocusMonitor.FocusedElement == _expectedFocusedElement)
+                    {
+                        // we are not going to trigger a change in FocusMonitor.FocusedElement (or Xamarin.Forms.VisualElement.CurrentlyFocused) but we are changing HardwareKeyPage.FocusedElement.  
+                        // So we need to signal a HardwareKeyPage.FocusedElementChanged event.
+                        FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
+                        System.Diagnostics.Debug.WriteLine("\t  (FocusMonitor.FocusedElement == _expectedFocusedElement) [" + _expectedFocusedElement + "]");
+                        System.Diagnostics.Debug.WriteLine("\n");
+                    }
+                    else
+                    {
+                        FocusMonitor.FocusedElement = _expectedFocusedElement;
+                    }
                 }
             }
         }

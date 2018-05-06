@@ -131,7 +131,7 @@ protected virtual void Dispose(bool disposing)
 
 
         #region Properties
-        //Button materialButton => _roundedBoxElement as Button;
+        //Button materialButton => ShapeElement as Button;
 
         Xamarin.Forms.View View => ShapeElement as Xamarin.Forms.View;
 
@@ -290,7 +290,7 @@ protected virtual void Dispose(bool disposing)
             if (_disposed)
                 return;
             //if (Button!=null && Button.ParentSegmentsOrientation==Xamarin.Forms.StackOrientation.Vertical)
-            //    System.Diagnostics.Debug.WriteLine("["+_roundedBoxElement.InstanceId+"]["+_roundedBoxElement.InstanceId+"][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
+            //    System.Diagnostics.Debug.WriteLine("["+ShapeElement.InstanceId+"]["+ShapeElement.InstanceId+"][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName()+"] e.PropertyName=["+e.PropertyName+"]");
             //if (e.PropertyName==ShapeBase.IgnoreShapePropertiesChangesProperty.PropertyName)
             //    System.Diagnostics.Debug.WriteLine("            IgnoreChanges=["+IgnoreChanges+"]");
             if (!ValidLayout(CanvasSize))
@@ -589,7 +589,7 @@ protected virtual void Dispose(bool disposing)
                 return new Windows.Foundation.Size();
             var result = base.MeasureOverride(availableSize);
 
-            if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _f9pImageData != null)
+            if (ShapeElement is Forms9Patch.Image && !_actualSizeValid && _f9pImageData != null)
             {
                 bool constrainedWidth = !double.IsInfinity(availableSize.Width) || ImageElement.WidthRequest > -1;
                 bool constrainedHeight = !double.IsInfinity(availableSize.Height) || ImageElement.HeightRequest > -1;
@@ -629,18 +629,18 @@ protected virtual void Dispose(bool disposing)
                             result = new Windows.Foundation.Size(constrainedHeightValue / sourceAspect, constrainedHeightValue);
                     }
                 }
-                //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
+                //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + ShapeElement.InstanceId + "][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] result=[" + result + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "] _sourceBitmap.Size=[" + _sourceBitmap.Width + ", " + _sourceBitmap.Height + "]");
             }
             return result;
         }
 
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
-            //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _roundedBoxElement.InstanceId + "][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
+            //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + ShapeElement.InstanceId + "][" + GetType() + "][" + P42.Utils.ReflectionExtensions.CallerMemberName() + "] availableSize=[" + finalSize + "] ActualSize=[" + ActualWidth + ", " + ActualHeight + "]");
 
             var result = base.ArrangeOverride(finalSize);
 
-            if (_roundedBoxElement is Forms9Patch.Image && !_actualSizeValid && _f9pImageData != null && Children.Count > 0)
+            if (ShapeElement is Forms9Patch.Image && !_actualSizeValid && _f9pImageData != null && Children.Count > 0)
                 Invalidate();
 
             return result;
@@ -723,7 +723,7 @@ protected virtual void Dispose(bool disposing)
             ParentX;
 #endif
 
-                    var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !_roundedBoxElement.ShadowInverted;
+                    var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
                     var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
                     var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
                     var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);

@@ -4,15 +4,15 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "P42.Utils", "P42.Utils", "{68AC6393-E8BD-45AD-860D-4EFE00B466D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils", "P42.Utils\P42.Utils\P42.Utils.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.Utils", "P42.Utils\P42.Utils\P42.Utils.csproj", "{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.Droid", "P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj", "{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.Utils.iOS", "P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj", "{530E21BA-A725-4714-8678-74CCA5CDBB38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P42.NumericalMethods", "P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P42.NumericalMethods", "P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj", "{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget", "FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.XfNuget", "FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj", "{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.Droid", "FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj", "{00E0CDDC-B671-4876-8E78-927C50D2596A}"
 EndProject
@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.iOS",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfNuget.UWP", "FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj", "{2EAA5D09-B436-40F8-A1F3-7E9ACDE2E8C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource", "FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsGestures.XfSource", "FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj", "{52E3C505-3123-48ED-AFE5-E700F1D5A01A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.iOS", "FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj", "{A6D42C80-CDFE-4C4E-B0FB-72A403793B95}"
 EndProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.Droi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormsGestures.XfSource.UWP", "FormsGestures\FormsGestures.XfSource.UWP\FormsGestures.XfSource.UWP.csproj", "{F86AA167-0272-43C7-A783-2847E3624235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource", "Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfSource", "Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj", "{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfSource.Droid", "Forms9Patch\Forms9Patch.XfSource.Droid\Forms9Patch.XfSource.Droid.csproj", "{D394BC61-9B90-4B1C-9771-35F93865AC5C}"
 EndProject
@@ -389,9 +389,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source.Platform", "Source.Platform", "{511C26CC-6004-406F-ADA5-DBE10232DE78}"
 	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets = Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets
 		Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs = Forms9Patch\Forms9Patch.Source.Platform\InvalidDataContractException.cs
 		Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs = Forms9Patch\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs
-		Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets = Forms9Patch\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{5B624595-F648-4143-9E9A-5C7600ABC90A}"
@@ -418,11 +418,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\ManualLayoutRenderer.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\RelativeLayout.cs
-		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
 		Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs
+		Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs = Forms9Patch\Forms9Patch.Source.Platform\Renderers\StackLayoutRenderer.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9PatchDemo", "Forms9PatchDemo", "{B425138C-F6BB-4949-B957-16C9A5807909}"
 EndProject
@@ -442,7 +442,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromNugetPackages", "FromNu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FromSource", "FromSource", "{54E2A1BD-D19F-4F3D-A252-E19FF9DBF930}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.XfSource\Forms9PatchDemo.XfSource.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.XfSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.XfSource\Forms9PatchDemo.XfSource.csproj", "{23E697E4-43E4-4BA2-B681-D136F20422C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource.Droid", "Forms9PatchFromSourceDemo\Forms9PatchDemo.XfSource.Droid\Forms9PatchDemo.XfSource.Droid.csproj", "{CFA91476-BECE-4F45-9F60-334610335117}"
 EndProject
@@ -452,7 +452,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource.UW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Build.Tasks", "Xamarin.Forms\Xamarin.Forms.Build.Tasks\Xamarin.Forms.Build.Tasks.csproj", "{96D89208-4EB9-4451-BE73-8A9DF3D9D7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.NetStandard", "Forms9PatchDemo\Forms9PatchDemo.NetStandard\Forms9PatchDemo.NetStandard.csproj", "{0DF60C1F-EE1B-4112-9E7F-0E098D356C98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.PCL", "Forms9PatchDemo\Forms9PatchDemo.PCL\Forms9PatchDemo.PCL.csproj", "{5F026DB4-CAAE-4DE0-8105-FF133A3655B7}"
 EndProject
@@ -472,9 +472,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Code", "Pages.Code", 
 		Forms9PatchDemo\Source\Pages.Code\BubblePopupTestPage.cs = Forms9PatchDemo\Source\Pages.Code\BubblePopupTestPage.cs
 		Forms9PatchDemo\Source\Pages.Code\ButtonAndSegmentAlignments.cs = Forms9PatchDemo\Source\Pages.Code\ButtonAndSegmentAlignments.cs
 		Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs = Forms9PatchDemo\Source\Pages.Code\ButtonCodePage.cs
+		Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs = Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs
 		Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs = Forms9PatchDemo\Source\Pages.Code\CustomFontEffectPage.cs
 		Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs = Forms9PatchDemo\Source\Pages.Code\ExternalEmbeddedResourceImage.cs
 		Forms9PatchDemo\Source\Pages.Code\FontSizeTest.cs = Forms9PatchDemo\Source\Pages.Code\FontSizeTest.cs
+		Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs = Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs
+		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs
+		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlButtonsPage.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLabelPage.cs
 		Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs = Forms9PatchDemo\Source\Pages.Code\HtmlLink.cs
@@ -483,17 +487,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Code", "Pages.Code", 
 		Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs = Forms9PatchDemo\Source\Pages.Code\LayoutCodePage.cs
 		Forms9PatchDemo\Source\Pages.Code\ListViewSandbox.cs = Forms9PatchDemo\Source\Pages.Code\ListViewSandbox.cs
 		Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs = Forms9PatchDemo\Source\Pages.Code\ModalPopupTestPage.cs
+		Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs = Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs
 		Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs = Forms9PatchDemo\Source\Pages.Code\PopupsPage.cs
+		Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs = Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs
 		Forms9PatchDemo\Source\Pages.Code\SingleButton.cs = Forms9PatchDemo\Source\Pages.Code\SingleButton.cs
 		Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs = Forms9PatchDemo\Source\Pages.Code\SingleSegmentedControl.cs
 		Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs = Forms9PatchDemo\Source\Pages.Code\SVG_ButtonBackgroundImage.cs
 		Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs = Forms9PatchDemo\Source\Pages.Code\UnconstrainedLabelAutoFitPage.cs
-		Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs = Forms9PatchDemo\Source\Pages.Code\GestureTestPage.cs
-		Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs = Forms9PatchDemo\Source\Pages.Code\ClipboardTest.cs
-		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage.cs
-		Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs = Forms9PatchDemo\Source\Pages.Code\HardwareKeyPage1.cs
-		Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs = Forms9PatchDemo\Source\Pages.Code\PickerInPopup.cs
-		Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs = Forms9PatchDemo\Source\Pages.Code\SimpleLabelFitting.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages.Xaml", "Pages.Xaml", "{F311DBED-FA26-4CE4-90E5-F23BE46352E9}"
@@ -683,13 +683,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.NetStandard.UWP", "Forms9PatchDemo\Forms9PatchDemo.NetStandard.UWP\Forms9PatchDemo.NetStandard.UWP.csproj", "{592FEF99-BE8D-4111-909B-D7448835B157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9Patch.DocFX", "Forms9Patch\Forms9Patch.DocFX\Forms9Patch.DocFX.csproj", "{0C775940-0BB6-4FE0-93DD-10AD6CC991D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.DocFX", "Forms9Patch\Forms9Patch.DocFX\Forms9Patch.DocFX.csproj", "{0C775940-0BB6-4FE0-93DD-10AD6CC991D7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms and Forms9Patch Source", "Xamarin.Forms and Forms9Patch Source", "{66863755-C0A5-4695-916C-49DCC4122CDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch Source", "Forms9Patch Source", "{1C338DFE-D29B-49A5-8E70-2947336BB638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{033330E2-8E6D-4C15-A9BF-820B9BCAF75A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{033330E2-8E6D-4C15-A9BF-820B9BCAF75A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource.Droid", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource.Droid\Forms9PatchDemo.F9pSource.Droid.csproj", "{F653783E-527A-4C07-9C07-52964F225729}"
 EndProject
@@ -4758,7 +4758,7 @@ Global
 		{04C2B18F-F2CC-4F08-850F-02874CAE275D} = {4EB08D47-5498-4D62-94DF-C4276FCCB606}
 		{0B4F0B2D-4E18-49AD-854D-A54E4CA986EC} = {4EB08D47-5498-4D62-94DF-C4276FCCB606}
 		{87AA43A3-3D1A-446A-B297-C310B1C35E7F} = {446EB5EB-7582-4522-AF25-DB97A3BAD89F}
-		{626F5170-C69A-430E-9348-B113C9580DD7} = {87AA43A3-3D1A-446A-B297-C310B1C35E7F}
+		{626F5170-C69A-430E-9348-B113C9580DD7} = {25824AD8-FCBE-4182-B573-6A4DABE7289D}
 		{979C95CB-A6B1-4BDD-981C-D0748A95F11C} = {87AA43A3-3D1A-446A-B297-C310B1C35E7F}
 		{92F755F5-DC5B-4F85-A9CB-DE66806E4308} = {6CE42746-AF2D-4B4D-B294-B88867A60D9C}
 		{6190F4A1-8FC4-4DF3-A002-6258CC730AC5} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}

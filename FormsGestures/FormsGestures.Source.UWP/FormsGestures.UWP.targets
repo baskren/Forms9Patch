@@ -44,9 +44,9 @@
     <Compile Include="..\FormsGestures.Source.UWP\GestureService.cs">
       <Link>GestureService.cs</Link>
     </Compile>
-    <Compile Include="..\FormsGestures.Source.UWP\NativeGestureHandler.cs">
+    <!--Compile Include="..\FormsGestures.Source.UWP\NativeGestureHandler.cs">
       <Link>NativeGestureHandler.cs</Link>
-    </Compile>
+    </Compile-->
     <Compile Include="..\FormsGestures.Source.UWP\Settings.cs">
       <Link>Settings.cs</Link>
     </Compile>

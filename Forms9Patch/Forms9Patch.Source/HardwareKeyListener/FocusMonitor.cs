@@ -33,8 +33,24 @@ namespace Forms9Patch
             }
         }
 
+        static VisualElement _lastFromElement;
+        static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
         internal static void OnVisualElementFocusChanged(object fromElement, VisualElement toElement)
         {
+            System.Diagnostics.Debug.WriteLine("Forms9Patch.FocusMonitor.OnVisualElementFocusChanged("+fromElement+","+toElement+")");
+            /*
+            if (DateTime.Now - _lastFocusChangedDateTime < TimeSpan.FromMilliseconds(50) &&  _lastFromElement is Xamarin.Forms.ScrollView && fromElement==null && toElement is Xamarin.Forms.InputView && HardwareKeyPage.RemoveNativeFocus!=null)
+            {
+                System.Diagnostics.Debug.WriteLine("\t (_lastFromElement is Xamarin.Forms.ScrollView && fromElement==null && toElement is Xamarin.Forms.InputView && HardwareKeyPage.RemoveNativeFocus!=null)");
+                // special UWP situation: Xamarin.Forms thinks UWP is giving control back to an InputEntry element BUT that's not what's really happened!
+                _lastFromElement = fromElement as VisualElement;
+                _lastFocusChangedDateTime = DateTime.Now;
+                return;
+            }
+            */
+
+            _lastFromElement = fromElement as VisualElement;
+            _lastFocusChangedDateTime = DateTime.Now;
             FocusedElementChanged?.Invoke(fromElement, toElement);
         }
 
@@ -77,35 +93,66 @@ namespace Forms9Patch
             }
             set
             {
+                System.Diagnostics.Debug.WriteLine("Forms9Patch.FocusMonitor.FocusedElement = [" + value + "]   was: [" + FocusedElement + "]");
                 if (FocusedElement == value)
                     return;
 
-
+                /*
                 if (_currentlyFocusedPropertyInfo != null)
                     _currentlyFocusedPropertyInfo.SetValue(null, value);
                 else
                 {
-                    var wasElement = _element;
+                */
+                System.Diagnostics.Debug.WriteLine("\t A");
+                var wasElement = _element;
 
-                    bool changed = false;
-                    if (_element != null)
+                bool changed = false;
+                System.Diagnostics.Debug.WriteLine("\t B _element=[" + _element + "]");
+                if (_element != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("\t C");
+                    _element = null;
+                    changed = true;
+                }
+                System.Diagnostics.Debug.WriteLine("\t D value=[" + value + "]");
+                if (value != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("\t E value!=null");
+                    var focused = value.Focus();
+                    if (focused)
                     {
-                        _element = null;
+                        System.Diagnostics.Debug.WriteLine("\t F.B value.Focus()==true");
+                        _element = value;
                         changed = true;
                     }
-                    if (value != null)
-                    {
-                        var focused = value.Focus();
-                        if (focused)
-                        {
-                            _element = value;
-                            changed = true;
-                        }
-                    }
-
-                    if (changed)
-                        FocusedElementChanged?.Invoke(wasElement, _element);
+                    else
+                        System.Diagnostics.Debug.WriteLine("\t F.A value.Focus()==false");
                 }
+                else if (wasElement!=null)
+                {
+                    System.Diagnostics.Debug.WriteLine("\t G wasElement!=null   where wasElement=["+wasElement+"]");
+                    wasElement.Unfocus();
+                    if (wasElement.IsFocused)
+                        System.Diagnostics.Debug.WriteLine("\t  G.1  couldn't unfocus wasElement");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("\t H value==null && wasElement==null");
+                    FocusedElement?.Unfocus();
+                    if (FocusedElement != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine("\t I couldn't Unfocus FocusedElement, attempted HardwareKeyPage.RemoveNativeFocus");
+                        HardwareKeyPage.RemoveNativeFocus?.Invoke();
+                    }
+                }
+
+                System.Diagnostics.Debug.WriteLine("\t J");
+                if (changed && _currentlyFocusedPropertyInfo == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("\t K");
+                    FocusedElementChanged?.Invoke(wasElement, _element);
+                }
+                //}
             }
         }
         #endregion
@@ -144,7 +191,7 @@ namespace Forms9Patch
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("AttachTo[" + element + "]");
+                //System.Diagnostics.Debug.WriteLine("AttachTo[" + element + "]");
                 element.Focused += OnVisualElementFocused;
                 element.Unfocused += OnVisualElementUnfocused;
                 element.ChildAdded += OnVisualElementChildAdded;
@@ -174,7 +221,7 @@ namespace Forms9Patch
             if (element == HardwareKeyPage.DefaultFocusedElement)
                 HardwareKeyPage.DefaultFocusedElement = null;
 
-            System.Diagnostics.Debug.WriteLine("DetachFrom[" + element + "]");
+            //System.Diagnostics.Debug.WriteLine("DetachFrom[" + element + "]");
             element.Focused -= OnVisualElementFocused;
             element.Unfocused -= OnVisualElementUnfocused;
             element.ChildAdded -= OnVisualElementChildAdded;
@@ -194,7 +241,14 @@ namespace Forms9Patch
         static void OnVisualElementFocused(object sender, FocusEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("OnVisualElementFocused[" + e.VisualElement + "]");
-            FocusedElement = e.VisualElement;
+            //if (e.VisualElement is Xamarin.Forms.ScrollView)
+            //    //FocusedElement = null;
+            //    return;
+            //else
+                FocusedElement = e.VisualElement;
+            //if (e.VisualElement is Xamarin.Forms.ScrollView && e.VisualElement?.Parent is VisualElement parent)
+            //    parent.Focus();
+                
         }
 
 

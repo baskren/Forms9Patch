@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.Settings))]
 namespace Forms9Patch.UWP
@@ -11,7 +8,7 @@ namespace Forms9Patch.UWP
     public class Settings : ISettings
     {
         #region Fields
-        static Windows.UI.Xaml.Application Application;
+        static internal Windows.UI.Xaml.Application Application;
 
         public List<Assembly> IncludedAssemblies => AssembliesToInclude;
         #endregion
