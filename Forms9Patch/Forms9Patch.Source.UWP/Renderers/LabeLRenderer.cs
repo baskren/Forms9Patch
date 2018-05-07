@@ -20,8 +20,9 @@ namespace Forms9Patch.UWP
                 //if (Element?.HtmlText == null)
                 //    return false;
                 //return Element.HtmlText.Contains("While every effort");
-                
-                string labelTextStart = "Żyłę;^`g ";
+
+                //string labelTextStart = "Żyłę;^`g ";
+                string labelTextStart = "25,000";
                 //return (Element.HtmlText == "Conv" && Element.Parent?.GetType().ToString() == "Bc3.Forms.KeypadButton");
                 //    return false;
                 //string labelTextStart = "OBROUND";
@@ -392,21 +393,24 @@ namespace Forms9Patch.UWP
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
-            double width = Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
-            double height = Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
+            double width = (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            double height = (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
 
             if (Double.IsInfinity(availableSize.Width))
                 width = availableSize.Width;
             if (Double.IsInfinity(availableSize.Height))
                 height = availableSize.Height;
 
-            if (Element.Width > 0 && Element.Height > 0 && !Double.IsInfinity(width) && !Double.IsInfinity(height))
+            if (Element.Width > 0 && Element.Height > 0 && !Double.IsInfinity(width) && !Double.IsInfinity(height))  // This line was causing UWP to fail to correctly update width of BcOperandLabel during editing.
+            //if (Element.Width > width && Element.Height > height && !Double.IsInfinity(width) && !Double.IsInfinity(height))
             {
-                width = Element.Width;
-                height = Element.Height;
+                width = Math.Max(Element.Width,width);
+                height = Math.Max(Element.Height,height);
             }
 
             DebugMessage("[" + _measureOverrideInvocation + "] \t\t width=[" + width+"] height=["+height+"]");
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
 
             //double width = !double.IsInfinity(availableSize.Width) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
             //double height = !double.IsInfinity(availableSize.Height) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
