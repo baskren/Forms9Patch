@@ -3,7 +3,7 @@
 	url = https://baskren@bitbucket.org/baskren/p42.utils.git
 [submodule "Xamarin.Forms"]
 	path = Xamarin.Forms
-	url = https://github.com/xamarin/Xamarin.Forms
+url=https://baskren@bitbucket.org/baskren/xamarin.forms.git
 [submodule "Forms9PatchDemo"]
 	path = Forms9PatchDemo
 	url = https://github.com/baskren/Forms9PatchDemo
