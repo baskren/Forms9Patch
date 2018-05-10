@@ -36,6 +36,8 @@
     </DocumentationFile>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+
+  <!-- Package References -->
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -54,31 +56,28 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <!-- Folders -->
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+
+  <!-- Assembly Info -->
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
+  <!-- Common Project Files -->
   <Import Project="..\FormsGestures.Source.iOS\FormsGestures.iOS.targets" />
+
+  <!-- XF Nuget Project References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
       <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
-      <Name>P42.NumericalMethods</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
-      <Name>P42.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
-      <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
-      <Name>P42.Utils.iOS</Name>
-    </ProjectReference>
   </ItemGroup>
+  
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

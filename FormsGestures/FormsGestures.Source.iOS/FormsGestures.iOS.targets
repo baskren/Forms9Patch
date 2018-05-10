@@ -1,6 +1,7 @@
 <Project DefaultTargets = "Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
+  <!-- Common project files -->
   <ItemGroup>
     <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSDownUpEventArgs.cs">
       <Link>EventArgs\iOSDownUpEventArgs.cs</Link>
@@ -47,6 +48,22 @@
     <Compile Include="..\FormsGestures.Source.iOS\UIInterfaceOrientaitonExtensions.cs">
       <Link>UIInterfaceOrientaitonExtensions.cs</Link>
     </Compile>
+  </ItemGroup>
+
+  <!-- Common Project References -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
+      <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
+      <Name>P42.Utils.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

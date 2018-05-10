@@ -1,6 +1,7 @@
 <Project DefaultTargets = "Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
+  <!-- Common Project Files-->
   <ItemGroup>
     <Compile Include="..\FormsGestures.Source.Droid\Detectors\DownUpGestureDetector.cs" >
       <Link>Detectors\DownUpGestureDetector.cs</Link>

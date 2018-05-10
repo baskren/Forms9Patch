@@ -1,6 +1,7 @@
 <Project DefaultTargets = "Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
  
+  <!-- Common Project Files-->
   <ItemGroup>
     <Compile Include="..\FormsGestures.Source.UWP\EventArgs\UwpDownUpArgs.cs">
       <Link>EventArgs\UWPDownUpArgs.cs</Link>
@@ -51,14 +52,6 @@
       <Link>Settings.cs</Link>
     </Compile>
   </ItemGroup>
-
-  <!-- NUGET PACKAGES >
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
-    </PackageReference>
-  </ItemGroup-->
-
 
   <!-- PROJECT REFERENCES -->
   <ItemGroup>
