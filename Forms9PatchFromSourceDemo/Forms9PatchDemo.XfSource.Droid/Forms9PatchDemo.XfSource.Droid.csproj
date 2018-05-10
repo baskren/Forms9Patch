@@ -48,6 +48,87 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Core\bin\Debug\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Xaml\bin\Debug\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsViewGroup">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\bin\Debug\FormsViewGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\bin\Debug\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.NumericalMethods">
+      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils">
+      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils.Droid">
+      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.NumericalMethods">
+      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils">
+      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Core\bin\Debug\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils.Droid">
+      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Xaml\bin\Debug\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsViewGroup">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\bin\Debug\FormsViewGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsGestures">
+      <HintPath>..\..\FormsGestures\FormsGestures.XfSource\bin\Debug\netstandard1.3\FormsGestures.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsGestures.Droid">
+      <HintPath>..\..\FormsGestures\FormsGestures.XfSource.Droid\bin\Debug\FormsGestures.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\bin\Debug\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.NumericalMethods">
+      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils">
+      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils.Droid">
+      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Core\bin\Debug\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Xaml\bin\Debug\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsViewGroup">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android.FormsViewGroup\bin\Debug\FormsViewGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsGestures">
+      <HintPath>..\..\FormsGestures\FormsGestures.XfSource\bin\Debug\netstandard1.3\FormsGestures.dll</HintPath>
+    </Reference>
+    <Reference Include="Forms9Patch">
+      <HintPath>..\..\Forms9Patch\Forms9Patch.XfSource\bin\Debug\netstandard1.3\Forms9Patch.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\..\Xamarin.Forms\Xamarin.Forms.Platform.Android\bin\Debug\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsGestures.Droid">
+      <HintPath>..\..\FormsGestures\FormsGestures.XfSource.Droid\bin\Debug\FormsGestures.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Forms9Patch.Droid">
+      <HintPath>..\..\Forms9Patch\Forms9Patch.XfSource.Droid\bin\Debug\Forms9Patch.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="25.4.0.2" />
