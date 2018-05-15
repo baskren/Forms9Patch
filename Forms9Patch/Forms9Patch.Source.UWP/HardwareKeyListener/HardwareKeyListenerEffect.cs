@@ -13,8 +13,8 @@ namespace Forms9Patch.UWP
     {
         protected override void OnAttached()
         {
-            if (Device.RuntimePlatform == Device.WinPhone || Device.RuntimePlatform == Device.WinRT)
-                return;
+            //if (Device.RuntimePlatform == Device.WinPhone || Device.RuntimePlatform == Device.WinRT)
+            //    return;
             if (Element is HardwareKeyPage)
                 return;
             if (Control != null)

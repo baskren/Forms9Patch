@@ -17,7 +17,7 @@
 4. Xamarin.Forms.Android:
    1. needs to be built with Android 7.1 (Project Properties / Application / Compile using Android version)
    2. Minimum Android Version needs to be 4.1 (API16) to support HTML copy / paste 
-   3. needs to have ```ROOT_RENDERERS``` symbol defined (Project Properties / Compiler / Define Symbols)
+   3. Properties/AssemblyInfo.cs: comment out ```#if ROOT_RENDERERS``` (and the corresponding ```#endif``` 
    4. Properties/AssemblyInfo.cs: comment out ```[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]```
 5. Set up ```packages``` symbolic links (see below)
 6. Set up symbolic link that links from ```Xamarin.Forms/.nuget``` to ```.nuget``` in the solution's root directory.

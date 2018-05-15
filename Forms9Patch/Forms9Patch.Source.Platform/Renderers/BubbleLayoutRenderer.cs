@@ -142,6 +142,12 @@ namespace Forms9Patch
                     SetNativeControl(new SkiaRoundedBoxAndImageView(e.NewElement as IShape));
 #if __IOS__
                     SendSubviewToBack(Control);
+#elif WINDOWS_UWP
+                    if (Children.Contains(Control) && Children.IndexOf(Control) != 0)
+                    {
+                        Children.Remove(Control);
+                        Children.Insert(0, Control);
+                    }
 #endif
                 }
                 //SizeChanged += OnSizeChanged;

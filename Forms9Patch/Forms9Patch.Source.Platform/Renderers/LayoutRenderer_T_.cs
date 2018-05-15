@@ -86,9 +86,13 @@ namespace Forms9Patch
                     Control.ShapeElement = e.NewElement;
 #if __IOS__
 
-#endif
-#if WINDOWS_UWP
+#elif WINDOWS_UWP
                 SizeChanged += OnSizeChanged;
+                if (Children.Contains(Control) && Children.IndexOf(Control) != 0)
+                {
+                    Children.Remove(Control);
+                    Children.Insert(0, Control);
+                }
 #endif
 
                 if (!string.IsNullOrEmpty(Element.AutomationId))

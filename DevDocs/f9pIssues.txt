@@ -1,11 +1,18 @@
 Forms9Patch Open Issues:
+Forms9Patch Known Issues:
 
 Demos:
+UWP: Listview groups disappear when collapsing
+UWP: Picker scroll gets way out of sync with center position as list is offset 
+UWP: Bc3.Forms unit key labels are much too small
+UWP, Heights and Areas: AdvView in ModalPopup has too much padding and is offset in the x and y
+UWP, Heights and Areas: AdvView in ModelPopup can only be pan-scrolled by group header cells, not item cells
+UWP, Forms9PatchDemo.ImagePage: SegmentedControl labels are too big (auto size not working) in some instances
+UWP, SegmentedControl, Forms9PAtchDemo.HardwareKeyPage: SegmetnedControl fonts shrink over time
 
 - Some pages need to be embedded in a scroll view for smaller screens
 
 TODO:
 
 - Can you detect if the key came from the numpad on iOS?
-
 
