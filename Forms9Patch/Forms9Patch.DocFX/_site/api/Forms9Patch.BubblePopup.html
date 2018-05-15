@@ -1,0 +1,1340 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BubblePopup
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BubblePopup
+   ">
+    <meta name="generator" content="docfx 2.33.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Forms9Patch.BubblePopup">
+  
+  
+  <h1 id="Forms9Patch_BubblePopup" data-uid="Forms9Patch.BubblePopup" class="text-break">Class BubblePopup
+  </h1>
+  <div class="markdown level0 summary"><p>Forms9Patch Bubble pop-up.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Xamarin.Forms.BindableObject</span></div>
+    <div class="level2"><span class="xref">Xamarin.Forms.Element</span></div>
+    <div class="level3"><span class="xref">Xamarin.Forms.VisualElement</span></div>
+    <div class="level4"><span class="xref">Xamarin.Forms.View</span></div>
+    <div class="level5"><span class="xref">Xamarin.Forms.Layout</span></div>
+    <div class="level6"><span class="xref">Xamarin.Forms.Layout</span>&lt;<span class="xref">Xamarin.Forms.View</span>&gt;</div>
+    <div class="level7"><a class="xref" href="Forms9Patch.PopupBase.html">PopupBase</a></div>
+    <div class="level8"><span class="xref">BubblePopup</span></div>
+      <div class="level9"><a class="xref" href="Forms9Patch.PermissionPopup.html">PermissionPopup</a></div>
+      <div class="level9"><a class="xref" href="Forms9Patch.TargetedMenu.html">TargetedMenu</a></div>
+      <div class="level9"><a class="xref" href="Forms9Patch.TargetedToast.html">TargetedToast</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><span class="xref">Xamarin.Forms.IAnimatable</span></div>
+    <div><span class="xref">Xamarin.Forms.IViewController</span></div>
+    <div><span class="xref">Xamarin.Forms.IVisualElementController</span></div>
+    <div><span class="xref">Xamarin.Forms.IElementController</span></div>
+    <div><span class="xref">Xamarin.Forms.ILayout</span></div>
+    <div><span class="xref">Xamarin.Forms.ILayoutController</span></div>
+    <div><span class="xref">Xamarin.Forms.IViewContainer</span>&lt;<span class="xref">Xamarin.Forms.View</span>&gt;</div>
+    <div><span class="xref">System.IDisposable</span></div>
+    <div><a class="xref" href="Forms9Patch.IPopup.html">IPopup</a></div>
+    <div><a class="xref" href="Forms9Patch.IBackground.html">IBackground</a></div>
+    <div><a class="xref" href="Forms9Patch.IShape.html">IShape</a></div>
+    <div><a class="xref" href="Forms9Patch.IElement.html">IElement</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Children">PopupBase.Children</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_PaddingProperty">PopupBase.PaddingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Padding">PopupBase.Padding</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_IsVisibleProperty">PopupBase.IsVisibleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_IsVisible">PopupBase.IsVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_MarginProperty">PopupBase.MarginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Margin">PopupBase.Margin</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_HorizontalOptionsProperty">PopupBase.HorizontalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_HorizontalOptions">PopupBase.HorizontalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_VerticalOptionsProperty">PopupBase.VerticalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_VerticalOptions">PopupBase.VerticalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_TargetProperty">PopupBase.TargetProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Target">PopupBase.Target</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_PageOverlayColorProperty">PopupBase.PageOverlayColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_PageOverlayColor">PopupBase.PageOverlayColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnPageOverlayTouchProperty">PopupBase.CancelOnPageOverlayTouchProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnPageOverlayTouch">PopupBase.CancelOnPageOverlayTouch</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_RetainProperty">PopupBase.RetainProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Retain">PopupBase.Retain</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_BackgroundImageProperty">PopupBase.BackgroundImageProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_BackgroundImage">PopupBase.BackgroundImage</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_BackgroundColorProperty">PopupBase.BackgroundColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_BackgroundColor">PopupBase.BackgroundColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_HasShadowProperty">PopupBase.HasShadowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_HasShadow">PopupBase.HasShadow</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_ShadowInvertedProperty">PopupBase.ShadowInvertedProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_ShadowInverted">PopupBase.ShadowInverted</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineColorProperty">PopupBase.OutlineColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineColor">PopupBase.OutlineColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineRadiusProperty">PopupBase.OutlineRadiusProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineRadius">PopupBase.OutlineRadius</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineWidthProperty">PopupBase.OutlineWidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OutlineWidth">PopupBase.OutlineWidth</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_ElementShapeProperty">PopupBase.ElementShapeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_ElementShape">PopupBase.ElementShape</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Forms9Patch_IShape_ExtendedElementShape">PopupBase.IShape.ExtendedElementShape</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_InstanceId">PopupBase.InstanceId</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_DecorativeContainerView">PopupBase.DecorativeContainerView</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Cancelled">PopupBase.Cancelled</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose_System_Boolean_">PopupBase.Dispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose">PopupBase.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Cancel">PopupBase.Cancel()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Forms9Patch_IShape_ShadowPadding">PopupBase.IShape.ShadowPadding()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnMeasure_System_Double_System_Double_">PopupBase.OnMeasure(Double, Double)</a>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout&lt;Xamarin.Forms.View&gt;.OnAdded(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout&lt;Xamarin.Forms.View&gt;.OnChildAdded(Xamarin.Forms.Element)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout&lt;Xamarin.Forms.View&gt;.OnChildRemoved(Xamarin.Forms.Element)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout&lt;Xamarin.Forms.View&gt;.OnRemoved(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.IsClippedToBoundsProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.ForceLayout()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.GetSizeRequest(System.Double, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.LowerChild(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.RaiseChild(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.InvalidateLayout()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.OnChildMeasureInvalidated(System.Object, System.EventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.OnChildMeasureInvalidated()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.OnSizeAllocated(System.Double, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.UpdateChildrenLayout()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.IsClippedToBounds</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Layout.LayoutChanged</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.View.OnBindingContextChanged()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.View.GestureRecognizers</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.NavigationProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.InputTransparentProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.IsEnabledProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.XProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.YProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.AnchorXProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.AnchorYProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.TranslationXProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.TranslationYProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.WidthProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.HeightProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.RotationProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.RotationXProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.RotationYProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.ScaleProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.OpacityProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.BehaviorsProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.TriggersProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.StyleProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.WidthRequestProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.HeightRequestProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.MinimumWidthRequestProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.MinimumHeightRequestProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.IsFocusedProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.BatchBegin()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.BatchCommit()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Focus()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Layout(Xamarin.Forms.Rectangle)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Measure(System.Double, System.Double, Xamarin.Forms.MeasureFlags)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Unfocus()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.InvalidateMeasure()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.OnChildrenReordered()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.OnParentSet()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.OnSizeRequest(System.Double, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.SizeAllocated(System.Double, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Xamarin.Forms.IVisualElementController.InvalidateMeasure(Xamarin.Forms.Internals.InvalidationTrigger)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.AnchorX</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.AnchorY</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Behaviors</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Bounds</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Height</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.HeightRequest</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.InputTransparent</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.IsEnabled</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.IsFocused</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.MinimumHeightRequest</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.MinimumWidthRequest</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Navigation</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Opacity</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Rotation</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.RotationX</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.RotationY</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Scale</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Style</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.StyleClass</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.TranslationX</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.TranslationY</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Triggers</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Width</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.WidthRequest</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.X</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Y</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Resources</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.ChildrenReordered</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Focused</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.MeasureInvalidated</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.SizeChanged</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.VisualElement.Unfocused</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.ClassIdProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.Xamarin.Forms.IElementController.SetValueFromRenderer(Xamarin.Forms.BindableProperty, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.RemoveDynamicResource(Xamarin.Forms.BindableProperty)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.SetDynamicResource(Xamarin.Forms.BindableProperty, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.AutomationId</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.ClassId</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.Effects</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.Id</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.ParentView</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.StyleId</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.Parent</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.ChildAdded</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.ChildRemoved</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.DescendantAdded</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.Element.DescendantRemoved</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.BindingContextProperty</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.ClearValue(Xamarin.Forms.BindableProperty)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.ClearValue(Xamarin.Forms.BindablePropertyKey)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.GetValue(Xamarin.Forms.BindableProperty)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.RemoveBinding(Xamarin.Forms.BindableProperty)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.SetBinding(Xamarin.Forms.BindableProperty, Xamarin.Forms.BindingBase)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.SetValue(Xamarin.Forms.BindableProperty, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.SetValue(Xamarin.Forms.BindablePropertyKey, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.ApplyBindings()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.OnPropertyChanging(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.UnapplyBindings()</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.BindingContext</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.PropertyChanged</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.BindingContextChanged</span>
+    </div>
+    <div>
+      <span class="xref">Xamarin.Forms.BindableObject.PropertyChanging</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
+  <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
+  <h5 id="Forms9Patch_BubblePopup_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BubblePopup : PopupBase, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IViewController, IVisualElementController, IElementController, ILayout, ILayoutController, IViewContainer&lt;View&gt;, IDisposable, IPopup, IBackground, IShape, IElement</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="Forms9Patch_BubblePopup__ctor_" data-uid="Forms9Patch.BubblePopup.#ctor*"></a>
+  <h4 id="Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_Boolean_" data-uid="Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean)">BubblePopup(VisualElement, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.BubblePopup.html">BubblePopup</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BubblePopup(VisualElement target, bool retain = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.VisualElement</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">retain</span></td>
+        <td><p>If set to <code>true</code> retain.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup__ctor_" data-uid="Forms9Patch.BubblePopup.#ctor*"></a>
+  <h4 id="Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Boolean_" data-uid="Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean)">BubblePopup(VisualElement, Point, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.BubblePopup.html">BubblePopup</a> class that targets a point inside of the target VisualElement</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BubblePopup(VisualElement target, Point point, bool retain = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.VisualElement</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.Point</span></td>
+        <td><span class="parametername">point</span></td>
+        <td><p>Point.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">retain</span></td>
+        <td><p>If set to <code>true</code> retain.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PointerCornerRadiusProperty" data-uid="Forms9Patch.BubblePopup.PointerCornerRadiusProperty">PointerCornerRadiusProperty</h4>
+  <div class="markdown level1 summary"><p>The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerCornerRadiusProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PointerDirectionProperty" data-uid="Forms9Patch.BubblePopup.PointerDirectionProperty">PointerDirectionProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer direction property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerDirectionProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PointerLengthProperty" data-uid="Forms9Patch.BubblePopup.PointerLengthProperty">PointerLengthProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer length property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerLengthProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PointerTipRadiusProperty" data-uid="Forms9Patch.BubblePopup.PointerTipRadiusProperty">PointerTipRadiusProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer tip radius property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerTipRadiusProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PointProperty" data-uid="Forms9Patch.BubblePopup.PointProperty">PointProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for Point property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_PreferredPointerDirectionProperty" data-uid="Forms9Patch.BubblePopup.PreferredPointerDirectionProperty">PreferredPointerDirectionProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for PreferredPointerDirection property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PreferredPointerDirectionProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_BubblePopup_TargetBiasProperty" data-uid="Forms9Patch.BubblePopup.TargetBiasProperty">TargetBiasProperty</h4>
+  <div class="markdown level1 summary"><p>The target bias property backing Store.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TargetBiasProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Forms9Patch_BubblePopup_Content_" data-uid="Forms9Patch.BubblePopup.Content*"></a>
+  <h4 id="Forms9Patch_BubblePopup_Content" data-uid="Forms9Patch.BubblePopup.Content">Content</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the content of the FormsPopup.Modal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public View Content { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.View</span></td>
+        <td><p>The content.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_Point_" data-uid="Forms9Patch.BubblePopup.Point*"></a>
+  <h4 id="Forms9Patch_BubblePopup_Point" data-uid="Forms9Patch.BubblePopup.Point">Point</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the Point property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point Point { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Xamarin.Forms.Point</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_PointerCornerRadius_" data-uid="Forms9Patch.BubblePopup.PointerCornerRadius*"></a>
+  <h4 id="Forms9Patch_BubblePopup_PointerCornerRadius" data-uid="Forms9Patch.BubblePopup.PointerCornerRadius">PointerCornerRadius</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the pointer corner radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PointerCornerRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The pointer corner radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_PointerDirection_" data-uid="Forms9Patch.BubblePopup.PointerDirection*"></a>
+  <h4 id="Forms9Patch_BubblePopup_PointerDirection" data-uid="Forms9Patch.BubblePopup.PointerDirection">PointerDirection</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the direction in which the pointer pointing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PointerDirection PointerDirection { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.PointerDirection.html">PointerDirection</a></td>
+        <td><p>The pointer direction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_PointerLength_" data-uid="Forms9Patch.BubblePopup.PointerLength*"></a>
+  <h4 id="Forms9Patch_BubblePopup_PointerLength" data-uid="Forms9Patch.BubblePopup.PointerLength">PointerLength</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the length of the bubble layout&apos;s pointer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PointerLength { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The length of the pointer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_PointerTipRadius_" data-uid="Forms9Patch.BubblePopup.PointerTipRadius*"></a>
+  <h4 id="Forms9Patch_BubblePopup_PointerTipRadius" data-uid="Forms9Patch.BubblePopup.PointerTipRadius">PointerTipRadius</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the radius of the bubble&apos;s pointer tip.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PointerTipRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The pointer tip radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_PreferredPointerDirection_" data-uid="Forms9Patch.BubblePopup.PreferredPointerDirection*"></a>
+  <h4 id="Forms9Patch_BubblePopup_PreferredPointerDirection" data-uid="Forms9Patch.BubblePopup.PreferredPointerDirection">PreferredPointerDirection</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the PreferredPointerDirection property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PointerDirection PreferredPointerDirection { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.PointerDirection.html">PointerDirection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_TargetBias_" data-uid="Forms9Patch.BubblePopup.TargetBias*"></a>
+  <h4 id="Forms9Patch_BubblePopup_TargetBias" data-uid="Forms9Patch.BubblePopup.TargetBias">TargetBias</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double TargetBias { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>The target bias.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_BubblePopup_UsePoint_" data-uid="Forms9Patch.BubblePopup.UsePoint*"></a>
+  <h4 id="Forms9Patch_BubblePopup_UsePoint" data-uid="Forms9Patch.BubblePopup.UsePoint">UsePoint</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.BubblePopup.html">BubblePopup</a> will target Point (a point in the target) vs. the border of the target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UsePoint { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><code>true</code> if use point; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Forms9Patch_BubblePopup_LayoutChildren_" data-uid="Forms9Patch.BubblePopup.LayoutChildren*"></a>
+  <h4 id="Forms9Patch_BubblePopup_LayoutChildren_System_Double_System_Double_System_Double_System_Double_" data-uid="Forms9Patch.BubblePopup.LayoutChildren(System.Double,System.Double,System.Double,System.Double)">LayoutChildren(Double, Double, Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Positions and sizes the children of a Layout.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void LayoutChildren(double x, double y, double width, double height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>A value representing the x coordinate of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>A value representing the y coordinate of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>A value representing the width of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>A value representing the height of the child region bounding box.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">PopupBase.LayoutChildren(Double, Double, Double, Double)</a></div>
+  <h5 id="Forms9Patch_BubblePopup_LayoutChildren_System_Double_System_Double_System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementors wishing to change the default behavior of a Layout should override this method. It is suggested to
+still call the base method and modify its calculated results.</p>
+</div>
+  
+  
+  <a id="Forms9Patch_BubblePopup_OnPropertyChanged_" data-uid="Forms9Patch.BubblePopup.OnPropertyChanged*"></a>
+  <h4 id="Forms9Patch_BubblePopup_OnPropertyChanged_System_String_" data-uid="Forms9Patch.BubblePopup.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
+  <div class="markdown level1 summary"><p>Call this method from a child class to notify that a change happened on a property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPropertyChanged(string propertyName = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td><p>The name of the property that changed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnPropertyChanged_System_String_">PopupBase.OnPropertyChanged(String)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.IAnimatable</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.IViewController</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.IVisualElementController</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.IElementController</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.ILayout</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.ILayoutController</span>
+  </div>
+  <div>
+      <span class="xref">Xamarin.Forms.IViewContainer&lt;T&gt;</span>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IPopup.html">IPopup</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IBackground.html">IBackground</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IShape.html">IShape</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IElement.html">IElement</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HostingPage_Xamarin_Forms_Element_">ElementExtensions.HostingPage(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_TopPage_Xamarin_Forms_Element_">ElementExtensions.TopPage(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Parent__1_Xamarin_Forms_Element_">ElementExtensions.Parent&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_ParentInheritedFrom__1_Xamarin_Forms_Element_">ElementExtensions.ParentInheritedFrom&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_IsInNativeLayout_Xamarin_Forms_VisualElement_">ElementExtensions.IsInNativeLayout(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, String, HardwareKeyModifierKeys)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Xamarin_Forms_View_">HardwareKeyListenerExtensions.HardwareKeyFocus(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_Xamarin_Forms_VisualElement_">HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started: VisualStudio 2017 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started: VisualStudio 2017 ">
+    <meta name="generator" content="docfx 2.33.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started-visualstudio-2017">Getting Started: VisualStudio 2017</h1>
+
+<p>Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.</p>
+<p>Before you begin, check out the system requirements to be sure your application and development environment is ready.</p>
+<h2 id="system-requirements">System Requirements</h2>
+<p>Forms9Patch is an enhancement to Xamarin.Forms.  As such, first be sure you&#39;ve met the <a href="https://developer.xamarin.com/guides/cross-platform/getting_started/requirements/">Xamarin.Forms system requirements</a>.  </p>
+<p>Additionally:</p>
+<ul>
+<li>Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer. </li>
+<li>To use the <i><code>background-color</code></i> style attribute within markup text in UWP applications, your UWP applications will need to be built with minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).</li>
+</ul>
+<h2 id="build-your-first-forms9patch-app">Build your first Forms9Patch app</h2>
+<p>This walk through demonstrates how to create an application that displays a label which is marked-up to show a phone number and email link.  Tapping on those links will present a pop-up that asks permission to proceed with the phone call or email.</p>
+<p>Create the LinkTest application as follows:</p>
+<ol>
+<li>Launch VisualStudio.  </li>
+<li>Create a new Xamarin Forms project by clicking File / New / Project menu item.</li>
+<li><p>In the New Project dialog, click Cross-Platform, select the Cross Platform App (Xamarin.Forms or Native) template, set the Name and Solution name to <code>LinkTest</code>, choose a suitable location for the project and click the OK button:</p>
+<p><img src="../images/Guides/GettingStarted/NewProjectDialog.png" alt=""></p>
+</li>
+<li><p>In the New Cross Platform App dialog, click &quot;Blank App&quot;, select &quot;Xamarin.Forms&quot; as the UI Technology, select Portable Class Library (PCL) as the Code Sharing Strategy, and click the OK button:</p>
+<p><img src="../images/Guides/GettingStarted/NewCrossPlatformApp.png" alt="Guides Getting Started New Cross Platform App"></p>
+</li>
+<li><p>Add the Forms9Patch Nuget package to each of your solution&#39;s projects:  </p>
+<ol>
+<li><p>In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:</p>
+<p> <img src="../images/Guides/GettingStarted/ManageNugetPackagesForSolution.png" alt="Guides Getting Started Manage Nuget Packages For Solution"></p>
+</li>
+<li><p>... select the Browse tab ...:</p>
+<p><img src="../images/Guides/GettingStarted/SelectTheBrowseTab.png" alt="Guides Getting Started Select The Browse Tab"></p>
+</li>
+<li><p>... and search for &quot;Forms9Patch&quot;:</p>
+<p> <img src="../images/Guides/GettingStarted/SearchForForms9Patch.png" alt="Guides Getting Started Search For Forms9 Patch"></p>
+</li>
+<li><p>Select the Forms9Patch Nuget package:</p>
+<p> <img src="../images/Guides/GettingStarted/SelectTheForms9PatchNugetPackage.png" alt="Guides Getting Started Select The Forms9 Patch Nuget Package"></p>
+</li>
+<li><p>Apply it to all of your solution&#39;s projects by selecting the check box at the top of the project selection column:</p>
+<p> <img src="../images/Guides/GettingStarted/SelectAllProjects.png" alt="Guides Getting Started Select All Projects"></p>
+</li>
+<li><p>Be sure the latest stable package is selected and then click [Install]:</p>
+<p> <img src="../images/Guides/GettingStarted/ClickInstall.png" alt="Guides Getting Started Click Install"></p>
+</li>
+</ol>
+</li>
+<li><p>Initialize Forms9Patch in each of your platform projects:</p>
+<p><strong>Android:</strong> </p>
+<ol>
+<li>Open MainActivity.cs in your solution&#39;s Android platform project.</li>
+<li><p>Between <code>global::Xamarin.Forms.Forms.Init(this, bundle);</code> and <code>LoadApplication(new App());</code>, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look the following:</p>
+<pre><code class="lang-csharp">    global::Xamarin.Forms.Forms.Init(this, bundle);
+    Forms9Patch.Droid.Settings.Initialize(this, &quot;9H8X-28X4-5N8S-8CWB-8YFT-JK6D-TRAP-E9R6-WYPV-9KUS-2DM9-E4T2-XVAR&quot;);
+    LoadApplication(new App());
+</code></pre></li>
+</ol>
+<p><strong>iOS</strong></p>
+<ol>
+<li>Open AppDelegate.cs in your solution&#39;s iOS platform project.</li>
+<li><p>Between <code>global::Xamarin.Forms.Forms.Init();</code> and <code>LoadApplication(new App());</code>, add the Forms9Patch.iOS initialization call using the key for the LinkTest applications.  The result should look like the following:</p>
+<pre><code class="lang-csharp">    global::Xamarin.Forms.Forms.Init();
+    Forms9Patch.iOS.Settings.Initialize(this, &quot;9H8X-28X4-5N8S-8CWB-8YFT-JK6D-TRAP-E9R6-WYPV-9KUS-2DM9-E4T2-XVAR&quot;);
+    LoadApplication(new App());
+</code></pre></li>
+<li><p>Open the iOS platform project&#39;s Info.plist and verify the &quot;Application Name&quot; is set to &quot;LinkTest&quot;.</p>
+</li>
+</ol>
+<p><strong>UWP</strong></p>
+<ol>
+<li><p>Add the Forms9Patch initialization:</p>
+<ol>
+<li>Open App.xaml.cs in your solution&#39;s UWP platform project.</li>
+<li><p>Find the following line</p>
+<pre><code class="lang-csharp">     Xamarin.Forms.Forms.Init(e);
+</code></pre></li>
+<li><p>... and <strong>replace</strong> it with the following lines:</p>
+<pre><code class="lang-csharp">        Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude); 
+        Forms9Patch.UWP.Settings.Initialize(this, &quot;9H8X-28X4-5N8S-8CWB-8YFT-JK6D-TRAP-E9R6-WYPV-9KUS-2DM9-E4T2-XVAR&quot;);
+</code></pre></li>
+</ol>
+</li>
+<li>Set the UWP application&#39;s name to match the Forms9Patch license:<ol>
+<li>Open Package.appxmanifest in your solution&#39;s UWP platform project.</li>
+<li>In the Application tab, be sure the &quot;Display Name:&quot; is set to <code>LinkTest</code>.</li>
+<li>In the Packaging tab, be sure the &quot;Package Display Name:&quot; is set to <code>LinkTest</code>.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Update your application&#39;s MainPage content to use Forms9Patch elements:</p>
+<ol>
+<li>In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it:</li>
+<li><p>In MainPage.xaml, remove all of the template code and replace it with the following code. This code declaratively defines the user interface for the page:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                   xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                   xmlns:Forms9Patch=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+                   x:Class=&quot;LinkTest.MainPage&quot;&gt;
+    &lt;ContentPage.Padding&gt;
+        &lt;OnPlatform x:TypeArguments=&quot;Thickness&quot;&gt;
+            &lt;On Platform=&quot;iOS&quot; Value=&quot;20, 40, 20, 20&quot; /&gt;
+            &lt;On Platform=&quot;Android, WinPhone, Windows&quot; Value=&quot;20&quot; /&gt;
+        &lt;/OnPlatform&gt;
+    &lt;/ContentPage.Padding&gt;
+    &lt;StackLayout&gt;
+      &lt;Forms9Patch:Label Text=&quot;Enter a Phoneword:&quot; /&gt;
+      &lt;Entry x:Name=&quot;phoneNumberText&quot; Text=&quot;1-855-XAMARIN&quot; /&gt;
+      &lt;Button x:Name=&quot;translateButon&quot; Text=&quot;Translate&quot; Clicked=&quot;OnTranslate&quot; /&gt;
+      &lt;Button x:Name=&quot;callButton&quot; Text=&quot;Call&quot; IsEnabled=&quot;false&quot; Clicked=&quot;OnCall&quot; /&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+</code></pre></li>
+</ol>
+</li>
+</ol>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
