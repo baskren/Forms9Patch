@@ -10,8 +10,8 @@ Forms9Patch is an enhancement to Xamarin.Forms.  As such, first be sure you've m
 
 Additionally:
 
-- Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer. 
-- To use the <i>`background-color`</i> style attribute within markup text in UWP applications, your UWP applications will need to be built with minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).
+- Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer.
+- To use the `background-color` style attribute within `Forms9Patch.Label.HtmlText` markup text in UWP applications, your UWP applications will need to be built with minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).
 - To build your Android apps, you will need to add the following to your Android application project's `Resources/values/strings.xml` file:
 
    ```xml
@@ -132,6 +132,7 @@ Create the LinkTest application as follows:
             </StackLayout>
         </ContentPage>
         ```
+
  8. Modify your application's MainPage source code (MainPage.xaml.cs) using the following code so it will respond to clicks / taps on the `Forms9Patch.Label` action links.
 
         ```csharp
@@ -163,6 +164,7 @@ Create the LinkTest application as follows:
             }
         }
         ```
+ 
  9. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
 
     - Go to the Startup Project Selection drop down and sel ect the `LinkTest.UWP (Universal Windows)` project
@@ -179,14 +181,14 @@ Create the LinkTest application as follows:
 
         ![TestLink.UWP Application Window](../images/Guides/GettingStartedWindows/TestLink.UWP.Application.Window.2.png)
 
-10. Try changing the Startup Project to `TestLink.Android` and run it on an Android emulator.  
+ 10. Try changing the Startup Project to `TestLink.Android` and run it on an Android emulator.  
 
- - Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
- 
+- Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
+
    ```xml
    <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
    ```
 
    I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.
 
- - BE SURE YOU DON'T RUN IT ON AN **ARM** EMULATOR.
+- BE SURE YOU DON'T RUN IT ON AN **ARM** EMULATOR.
