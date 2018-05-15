@@ -1,6 +1,6 @@
 # Getting Started: Windows VisualStudio 2017
 
-Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.
+Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.  In this guide, we will build a simple Windows UWP app that has `Forms9Patch.Label` elements with embedded links.  Clicking on those links will dispaly a simple `Forms9Patch.ModelPopup` with information about those links.
 
 Before you begin, check out the system requirements to be sure your application and development environment is ready.
 
@@ -99,28 +99,28 @@ Create the LinkTest application as follows:
      2. In MainPage.xaml, update with the following code. This code declaratively defines the user interface for the page:
 
         ```xml
-        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml version="1.0" encoding="utf-8" ?>
         <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
-                     xmlns:local="clr-namespace:LinkTest"
-                     x:Class="LinkTest.MainPage">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                            xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+                    xmlns:local="clr-namespace:LinkTest"
+                    x:Class="LinkTest.MainPage">
             <ContentPage.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS" Value="20, 40, 20, 20" />
                     <On Platform="Android, WinPhone, Windows" Value="20" />
                 </OnPlatform>
             </ContentPage.Padding>
-            <StackLayout>
-                <Forms9Patch:Label>
+            <StackLayout VerticalOptions="Center">
+                <Forms9Patch:Label HorizontalTextAlignment="Center">
                     Example of Forms9Patch markup text.
                 </Forms9Patch:Label>
                 <BoxView HeightRequest="1" Color="Black"></BoxView>
-                <Forms9Patch:Label x:Name="PhoneLabel" >
+                <Forms9Patch:Label x:Name="PhoneLabel"  HorizontalTextAlignment="Center" TextColor="Black">
                     <![CDATA[This is a phone number link: <a id="link1" href="tel:+353015546889">015546889</a> ]]>
                 </Forms9Patch:Label>
                 <BoxView HeightRequest="1" Color="Black"></BoxView>
-                <Forms9Patch:Label x:Name="EmailLabel">
+                <Forms9Patch:Label x:Name="EmailLabel" HorizontalTextAlignment="Center" TextColor="Black">
                     <![CDATA[This is an email link: <a id="link2" href="mailto:email@hotmail.com">email@hotmail.com</a> ]]>
                 </Forms9Patch:Label>
             </StackLayout>
@@ -159,8 +159,28 @@ Create the LinkTest application as follows:
         ```
  9. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
 
- - Go to the 
+    - Go to the Startup Project Selection drop down and sel ect the `LinkTest.UWP (Universal Windows)` project
 
+        ![Select LinkTest.UWP Project](../images/Guides/GettingStartedWindows/SelectLinkTest.UWP.png)
 
+    - Click the **[> LocalMachine]** button to start the build-run process
 
+    - After the build is complete, the package will deploy to Windows and you will see the following application:
 
+        ![TestLink.UWP Application Window](../images/Guides/GettingStartedWindows/TestLink.UWP.Application.Window.1.png)
+
+    - Click on any of the links and you should see something like the following:
+
+        ![TestLink.UWP Application Window](../images/Guides/GettingStartedWindows/TestLink.UWP.Application.Window.2.png)
+
+10. Try changing the Startup Project to `TestLink.Android` and run it on an Android emulator.  
+
+ - Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
+ 
+   ```xml
+   <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
+   ```
+
+   I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.
+
+ - BE SURE YOU DON'T RUN IT ON AN **ARM** EMULATOR.
