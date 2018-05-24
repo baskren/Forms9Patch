@@ -3,22 +3,14 @@
     {
       "src": [
         {
-          "files": [
-            "**/*.csproj"
-          ],
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**",
-            "_site/**"
-          ],
-          "src": "../Forms9Patch.XfNuget"
+          "files": [ "Forms9Patch.XfNuget/Forms9Patch.XfNuget.csproj" ],
+          "exclude": [ "**/obj/**", "**/bin/**", "_site/**" ],
+          "src": ".."
         }
       ],
       "dest": "api",
       "disableGitFeatures": false,
-      "properties": {
-        "TargetFramework": "netstandard1.3"
-      }
+      "properties": { "TargetFramework": "netstandard1.3" }
     }
   ],
   "build": {
@@ -33,6 +25,8 @@
         "files": [
           "guides/**.md",
           "guides/**/toc.yml",
+          "notes/**.md",
+          "notes/**/toc.yml",
           "toc.yml",
           "*.md"
         ],

@@ -129,6 +129,12 @@
     <Reference Include="Forms9Patch.Droid">
       <HintPath>..\..\Forms9Patch\Forms9Patch.XfSource.Droid\bin\Debug\Forms9Patch.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="P42.NumericalMethods">
+      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
+    </Reference>
+    <Reference Include="P42.Utils">
+      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="25.4.0.2" />

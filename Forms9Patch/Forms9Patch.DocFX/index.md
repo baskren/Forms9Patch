@@ -1,3 +1,8 @@
+---
+uid: index.md
+title: HomePage
+---
+
 # Forms9Patch 
 
 A suite of elements built to simplify image management and text formatting for your NetStandard, PCL, and Shared Library Xamarin.Forms iOS, Android and UWP applications.
@@ -76,7 +81,7 @@ And lastly is Forms9Patch's services:
  
 ## Forms9Patch Guides
 
- - [Getting Started](guides/GettingStarted.md)
+ - [Getting Started for Windows VisualStudio 2017](guides/GettingStartedWindows.md)
  - [Using ```Forms9Patch.ImageSource```](guides/ImageSource.md)
  - [Using ```Forms9Patch.Image```](guides/Image.md)
  - [Using Forms9Patch's layouts](guides/Layouts.md)
@@ -84,6 +89,8 @@ And lastly is Forms9Patch's services:
  - Custom Fonts
  - Using ```Forms9Patch.Label```
  - Putting it all together: Using Forms9Patch's buttons
+
+## API 
 
 
 

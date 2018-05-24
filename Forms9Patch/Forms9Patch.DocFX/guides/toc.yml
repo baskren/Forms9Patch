@@ -1,4 +1,8 @@
-- name: Introduction
-  href: intro.md
-  name: Getting Started
-  href: GettingStarted.md
+- name: Getting Started for Windows VisualStudio 2017
+  href: GettingStartedWindows.md
+- name: Working with the Forms9Patch.Image visual element
+  href: Image.md
+- name: Working with Forms9Patch.ImageSource element
+  href: ImageSource.md
+- name: Working with Forms9Patch layout elements
+  href: Layouts.md
