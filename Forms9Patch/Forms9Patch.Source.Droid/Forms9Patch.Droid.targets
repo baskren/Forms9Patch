@@ -78,11 +78,9 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs">
       <Link>Services\HtmlToPngService.cs</Link>
     </Compile>
-    <!--
     <Compile Include="..\Forms9Patch.Source.Droid\Services\KeyboardService.cs">
       <Link>Services\KeyboardService.cs</Link>
     </Compile>
-    -->
     <Compile Include="..\Forms9Patch.Source.Droid\Services\OsInfoService.cs">
       <Link>Services\OsInfoService.cs</Link>
     </Compile>

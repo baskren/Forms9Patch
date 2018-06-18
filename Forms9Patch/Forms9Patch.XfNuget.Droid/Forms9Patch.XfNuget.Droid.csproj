@@ -47,7 +47,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-
     <Reference Include="Xamarin.Android.Arch.Core.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\lib\MonoAndroid80\Xamarin.Android.Arch.Core.Common.dll</HintPath>
     </Reference>
@@ -114,8 +113,6 @@
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2\lib\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
     </Reference>
-
-
     <Reference Include="FormsViewGroup">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
@@ -131,14 +128,10 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Forms9Patch.Source.Droid\Services\KeyboardService.cs">
-      <Link>KeyboardService.cs</Link>
-    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
   <ItemGroup>
@@ -172,7 +165,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />
-
   <Import Project="..\..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Annotations.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -216,6 +208,4 @@
   <Import Project="..\..\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets')" />
   <Import Project="..\..\packages\Xamarin.Android.Support.v7.CardView.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.v7.CardView.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v7.CardView.targets')" />
   <Import Project="..\..\packages\Xamarin.Android.Support.v4.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v4.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.v4.27.0.2\build\MonoAndroid81\Xamarin.Android.Support.v4.targets')" />
-
-
 </Project>
