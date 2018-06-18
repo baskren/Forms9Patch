@@ -261,3 +261,4 @@ pip-log.txt
 .nuget
 log.txt
 .vs
+api/
