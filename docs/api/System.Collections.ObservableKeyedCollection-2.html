@@ -1,0 +1,620 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ObservableKeyedCollection&lt;TKey, TItem&gt;
+   | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ObservableKeyedCollection&lt;TKey, TItem&gt;
+   | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="System.Collections.ObservableKeyedCollection`2">
+  
+  
+  <h1 id="System_Collections_ObservableKeyedCollection_2" data-uid="System.Collections.ObservableKeyedCollection`2" class="text-break">Class ObservableKeyedCollection&lt;TKey, TItem&gt;
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection</a>&lt;TItem&gt;</div>
+    <div class="level2"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2">KeyedCollection</a>&lt;TKey, TItem&gt;</div>
+    <div class="level3"><span class="xref">ObservableKeyedCollection&lt;TKey, TItem&gt;</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;TItem&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;TItem&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;TItem&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;TItem&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TItem&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ilist">IList</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged">INotifyCollectionChanged</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.changeitemkey#System_Collections_ObjectModel_KeyedCollection_2_ChangeItemKey__1__0_">KeyedCollection&lt;TKey, TItem&gt;.ChangeItemKey(TItem, TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.clearitems#System_Collections_ObjectModel_KeyedCollection_2_ClearItems">KeyedCollection&lt;TKey, TItem&gt;.ClearItems()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.contains#System_Collections_ObjectModel_KeyedCollection_2_Contains__0_">KeyedCollection&lt;TKey, TItem&gt;.Contains(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.getkeyforitem#System_Collections_ObjectModel_KeyedCollection_2_GetKeyForItem__1_">KeyedCollection&lt;TKey, TItem&gt;.GetKeyForItem(TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.insertitem#System_Collections_ObjectModel_KeyedCollection_2_InsertItem_System_Int32__1_">KeyedCollection&lt;TKey, TItem&gt;.InsertItem(Int32, TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.remove#System_Collections_ObjectModel_KeyedCollection_2_Remove__0_">KeyedCollection&lt;TKey, TItem&gt;.Remove(TKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.removeitem#System_Collections_ObjectModel_KeyedCollection_2_RemoveItem_System_Int32_">KeyedCollection&lt;TKey, TItem&gt;.RemoveItem(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.setitem#System_Collections_ObjectModel_KeyedCollection_2_SetItem_System_Int32__1_">KeyedCollection&lt;TKey, TItem&gt;.SetItem(Int32, TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.comparer#System_Collections_ObjectModel_KeyedCollection_2_Comparer">KeyedCollection&lt;TKey, TItem&gt;.Comparer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.dictionary#System_Collections_ObjectModel_KeyedCollection_2_Dictionary">KeyedCollection&lt;TKey, TItem&gt;.Dictionary</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.keyedcollection-2.item#System_Collections_ObjectModel_KeyedCollection_2_Item__0_">KeyedCollection&lt;TKey, TItem&gt;.Item[TKey]</a>
+    </div>
+    <div>
+      <span class="xref">System.Collections.ObjectModel.Collection&lt;TItem&gt;.System.Collections.IList.get_Item(System.Int32)</span>
+    </div>
+    <div>
+      <span class="xref">System.Collections.ObjectModel.Collection&lt;TItem&gt;.System.Collections.IList.set_Item(System.Int32, System.Object)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add#System_Collections_ObjectModel_Collection_1_Add__0_">Collection&lt;TItem&gt;.Add(TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear#System_Collections_ObjectModel_Collection_1_Clear">Collection&lt;TItem&gt;.Clear()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains#System_Collections_ObjectModel_Collection_1_Contains__0_">Collection&lt;TItem&gt;.Contains(TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto#System_Collections_ObjectModel_Collection_1_CopyTo__0___System_Int32_">Collection&lt;TItem&gt;.CopyTo(TItem[], Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator#System_Collections_ObjectModel_Collection_1_GetEnumerator">Collection&lt;TItem&gt;.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof#System_Collections_ObjectModel_Collection_1_IndexOf__0_">Collection&lt;TItem&gt;.IndexOf(TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert#System_Collections_ObjectModel_Collection_1_Insert_System_Int32__0_">Collection&lt;TItem&gt;.Insert(Int32, TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove#System_Collections_ObjectModel_Collection_1_Remove__0_">Collection&lt;TItem&gt;.Remove(TItem)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat#System_Collections_ObjectModel_Collection_1_RemoveAt_System_Int32_">Collection&lt;TItem&gt;.RemoveAt(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-icollection-copyto#System_Collections_ObjectModel_Collection_1_System_Collections_ICollection_CopyTo_System_Array_System_Int32_">Collection&lt;TItem&gt;.ICollection.CopyTo(Array, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ienumerable-getenumerator#System_Collections_ObjectModel_Collection_1_System_Collections_IEnumerable_GetEnumerator">Collection&lt;TItem&gt;.IEnumerable.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-add#System_Collections_ObjectModel_Collection_1_System_Collections_IList_Add_System_Object_">Collection&lt;TItem&gt;.IList.Add(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-contains#System_Collections_ObjectModel_Collection_1_System_Collections_IList_Contains_System_Object_">Collection&lt;TItem&gt;.IList.Contains(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-indexof#System_Collections_ObjectModel_Collection_1_System_Collections_IList_IndexOf_System_Object_">Collection&lt;TItem&gt;.IList.IndexOf(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-insert#System_Collections_ObjectModel_Collection_1_System_Collections_IList_Insert_System_Int32_System_Object_">Collection&lt;TItem&gt;.IList.Insert(Int32, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-remove#System_Collections_ObjectModel_Collection_1_System_Collections_IList_Remove_System_Object_">Collection&lt;TItem&gt;.IList.Remove(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.count#System_Collections_ObjectModel_Collection_1_Count">Collection&lt;TItem&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.item#System_Collections_ObjectModel_Collection_1_Item_System_Int32_">Collection&lt;TItem&gt;.Item[Int32]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.items#System_Collections_ObjectModel_Collection_1_Items">Collection&lt;TItem&gt;.Items</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-generic-icollection-t--isreadonly#System_Collections_ObjectModel_Collection_1_System_Collections_Generic_ICollection_T__IsReadOnly">Collection&lt;TItem&gt;.ICollection&lt;TItem&gt;.IsReadOnly</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-icollection-issynchronized#System_Collections_ObjectModel_Collection_1_System_Collections_ICollection_IsSynchronized">Collection&lt;TItem&gt;.ICollection.IsSynchronized</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-icollection-syncroot#System_Collections_ObjectModel_Collection_1_System_Collections_ICollection_SyncRoot">Collection&lt;TItem&gt;.ICollection.SyncRoot</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-isfixedsize#System_Collections_ObjectModel_Collection_1_System_Collections_IList_IsFixedSize">Collection&lt;TItem&gt;.IList.IsFixedSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-isreadonly#System_Collections_ObjectModel_Collection_1_System_Collections_IList_IsReadOnly">Collection&lt;TItem&gt;.IList.IsReadOnly</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.system-collections-ilist-item#System_Collections_ObjectModel_Collection_1_System_Collections_IList_Item_System_Int32_">Collection&lt;TItem&gt;.IList.Item[Int32]</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="System.Collections.html">System.Collections</a></h6>
+  <h6><strong>Assembly</strong>: P42.Utils.dll</h6>
+  <h5 id="System_Collections_ObservableKeyedCollection_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ObservableKeyedCollection&lt;TKey, TItem&gt; : KeyedCollection&lt;TKey, TItem&gt;, IList&lt;TItem&gt;, ICollection&lt;TItem&gt;, IReadOnlyList&lt;TItem&gt;, IReadOnlyCollection&lt;TItem&gt;, IEnumerable&lt;TItem&gt;, IList, ICollection, IEnumerable, INotifyCollectionChanged</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TKey</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TItem</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_ClearItems_" data-uid="System.Collections.ObservableKeyedCollection`2.ClearItems*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_ClearItems" data-uid="System.Collections.ObservableKeyedCollection`2.ClearItems">ClearItems()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ClearItems()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;.ClearItems()</span></div>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_ContainsKey_" data-uid="System.Collections.ObservableKeyedCollection`2.ContainsKey*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_ContainsKey__0_" data-uid="System.Collections.ObservableKeyedCollection`2.ContainsKey(`0)">ContainsKey(TKey)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ContainsKey(TKey key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TKey</span></td>
+        <td><span class="parametername">key</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_GetKeyForItem_" data-uid="System.Collections.ObservableKeyedCollection`2.GetKeyForItem*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_GetKeyForItem__1_" data-uid="System.Collections.ObservableKeyedCollection`2.GetKeyForItem(`1)">GetKeyForItem(TItem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override TKey GetKeyForItem(TItem item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TItem</span></td>
+        <td><span class="parametername">item</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TKey</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;.GetKeyForItem(TItem)</span></div>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_InsertItem_" data-uid="System.Collections.ObservableKeyedCollection`2.InsertItem*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_InsertItem_System_Int32__1_" data-uid="System.Collections.ObservableKeyedCollection`2.InsertItem(System.Int32,`1)">InsertItem(Int32, TItem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void InsertItem(int index, TItem item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TItem</span></td>
+        <td><span class="parametername">item</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;.InsertItem(System.Int32, TItem)</span></div>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_OnCollectionChanged_" data-uid="System.Collections.ObservableKeyedCollection`2.OnCollectionChanged*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_OnCollectionChanged_System_Collections_Specialized_NotifyCollectionChangedEventArgs_" data-uid="System.Collections.ObservableKeyedCollection`2.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">OnCollectionChanged(NotifyCollectionChangedEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs">NotifyCollectionChangedEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_RemoveItem_" data-uid="System.Collections.ObservableKeyedCollection`2.RemoveItem*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_RemoveItem_System_Int32_" data-uid="System.Collections.ObservableKeyedCollection`2.RemoveItem(System.Int32)">RemoveItem(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void RemoveItem(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;.RemoveItem(System.Int32)</span></div>
+  
+  
+  <a id="System_Collections_ObservableKeyedCollection_2_SetItem_" data-uid="System.Collections.ObservableKeyedCollection`2.SetItem*"></a>
+  <h4 id="System_Collections_ObservableKeyedCollection_2_SetItem_System_Int32__1_" data-uid="System.Collections.ObservableKeyedCollection`2.SetItem(System.Int32,`1)">SetItem(Int32, TItem)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SetItem(int index, TItem item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TItem</span></td>
+        <td><span class="parametername">item</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;.SetItem(System.Int32, TItem)</span></div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="System_Collections_ObservableKeyedCollection_2_CollectionChanged" data-uid="System.Collections.ObservableKeyedCollection`2.CollectionChanged">CollectionChanged</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event NotifyCollectionChangedEventHandler CollectionChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventhandler">NotifyCollectionChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">System.Collections.Generic.IList&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">System.Collections.Generic.ICollection&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">System.Collections.Generic.IReadOnlyList&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">System.Collections.Generic.IReadOnlyCollection&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ilist">System.Collections.IList</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.icollection">System.Collections.ICollection</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged">System.Collections.Specialized.INotifyCollectionChanged</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="P42.Utils.ICollectionExtensions.html#P42_Utils_ICollectionExtensions_IsNullOrEmpty__1_System_Collections_Generic_ICollection___0__">ICollectionExtensions.IsNullOrEmpty&lt;T&gt;(ICollection&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.IEnumerableExtensions.html#P42_Utils_IEnumerableExtensions_Contains_System_Collections_IEnumerable_System_Object_">IEnumerableExtensions.Contains(IEnumerable, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -7,3 +7,6 @@
 [submodule "Forms9PatchDemo"]
 	path = Forms9PatchDemo
 	url = https://github.com/baskren/Forms9PatchDemo
+[submodule "docs"]
+	path = docs
+	url = https://github.com/tomjoht/documentation-theme-jekyll

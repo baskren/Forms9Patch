@@ -1,25 +1,6 @@
-# Getting Started: Windows VisualStudio 2017
+# Getting Started: VisualStudio 2017 for Windows
 
-Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.  In this guide, we will build a simple Windows UWP app that has `Forms9Patch.Label` elements with embedded links.  Clicking on those links will dispaly a simple `Forms9Patch.ModelPopup` with information about those links.
-
-Before you begin, check out the system requirements to be sure your application and development environment is ready.
-
-## System Requirements
-
-Forms9Patch is an enhancement to Xamarin.Forms.  As such, first be sure you've met the [Xamarin.Forms system requirements](https://developer.xamarin.com/guides/cross-platform/getting_started/requirements/).
-
-Additionally:
-
-- Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer.
-- To use the `background-color` style attribute within `Forms9Patch.Label.HtmlText` markup text in UWP applications, your UWP applications will need to be built with minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).
-- To build your Android apps, you will need to add the following to your Android application project's `Resources/values/strings.xml` file:
-
-   ```xml
-   <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
-   ```
-
-
-## Build your first Forms9Patch app
+Before you begin, check out the [system requirements](../notes/SystemRequirements.md) to be sure your application and development environment is ready.
 
 This walk through demonstrates how to create an application that displays a label which is marked-up to show a phone number and email link.  Tapping on those links will present a pop-up that asks permission to proceed with the phone call or email.
 
@@ -29,44 +10,44 @@ Create the LinkTest application as follows:
  2. Create a new Xamarin Forms project by clicking **File | New | Project** menu item.
  3. In the New Project dialog, browse to **Installed | Visual C# | Cross-Platform**, select the **Mobile App (Xamarin.Forms)** template, set the Name and Solution name to `LinkTest`, assure a suitable location for the project and click the **[OK]** button:
 
-    ![New Project Dialog 1](../images/Guides/GettingStartedWindows/NewProjectDialog.png)
+    ![New Project Dialog 1](images/GettingStartedWindows/NewProjectDialog.png)
 
  4. In the New Cross Platform App dialog, select the **Blank App** template, select **.Net Standard** Code Sharing Strategy, and then click the **[OK]** button:
 
-    ![Guides Getting Started New Cross Platform App](../images/Guides/GettingStartedWindows/NewCrossPlatformApp.png)
+    ![Guides Getting Started New Cross Platform App](images/GettingStartedWindows/NewCrossPlatformApp.png)
 
  5. Add the Forms9Patch Nuget package to each of your solution's projects:  
 
     - In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:
 
-      ![Guides Getting Started Manage Nuget Packages For Solution](../images/Guides/GettingStartedWindows/ManageNugetPackagesForSolution.png)
+      ![Guides Getting Started Manage Nuget Packages For Solution](images/GettingStartedWindows/ManageNugetPackagesForSolution.png)
 
     - ... select the Browse tab ...:
 
-      ![Guides Getting Started Select The Browse Tab](../images/Guides/GettingStartedWindows/SelectTheBrowseTab.png)
+      ![Guides Getting Started Select The Browse Tab](images/GettingStartedWindows/SelectTheBrowseTab.png)
 
     - ... and search for "Forms9Patch":
 
-      ![Guides Getting Started Search For Forms9 Patch](../images/Guides/GettingStartedWindows/SearchForForms9Patch.png)
+      ![Guides Getting Started Search For Forms9 Patch](images/GettingStartedWindows/SearchForForms9Patch.png)
 
     - Select the Forms9Patch Nuget package:
 
-      ![Guides Getting Started Select The Forms9 Patch Nuget Package](../images/Guides/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png)
+      ![Guides Getting Started Select The Forms9 Patch Nuget Package](images/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png)
 
     - Apply it to all of your solution's projects by selecting the check box at the top of the project selection column:
 
-      ![Guides Getting Started Select All Projects](../images/Guides/GettingStartedWindows/SelectAllProjects.png)
+      ![Guides Getting Started Select All Projects](images/GettingStartedWindows/SelectAllProjects.png)
 
     - Be sure the latest stable package is selected and then click [Install]:
 
-      ![Guides Getting Started Click Install](../images/Guides/GettingStartedWindows/ClickInstall.png)
+      ![Guides Getting Started Click Install](images/GettingStartedWindows/ClickInstall.png)
 
  6. Initialize Forms9Patch in each of your platform projects:
 
-    **Android:**
+    ### Android:
 
     1. Open MainActivity.cs in your solution's Android platform project.
-    2. Between ```global::Xamarin.Forms.Forms.Init(this, bundle);``` and ```LoadApplication(new App());```, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look the following:
+    2. Between ```global::Xamarin.Forms.Forms.Init(this, bundle);``` and ```LoadApplication(new App());```, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look like the following:
 
         ```csharp
             global::Xamarin.Forms.Forms.Init(this, bundle);
@@ -74,7 +55,7 @@ Create the LinkTest application as follows:
             LoadApplication(new App());
         ```
 
-    **iOS**
+    ### iOS:
 
     1. Open AppDelegate.cs in your solution's iOS platform project.
     2. Between ```global::Xamarin.Forms.Forms.Init();``` and ```LoadApplication(new App());```, add the Forms9Patch.iOS initialization call using the key for the LinkTest applications.  The result should look like the following:
@@ -84,7 +65,7 @@ Create the LinkTest application as follows:
             Forms9Patch.iOS.Settings.Initialize(this);
             LoadApplication(new App());
         ```
-    **UWP**
+    ### UWP
 
     1. Open App.xaml.cs in your solution's UWP platform project.
     2. Find the following line
@@ -96,13 +77,13 @@ Create the LinkTest application as follows:
     3. ... and **replace** it with the following lines:
 
         ```csharp
-                Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude); 
+                Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude);
                 Forms9Patch.UWP.Settings.Initialize(this);
         ```
 
  7. Update your application's MainPage content (MainPage.xaml) to use Forms9Patch elements:
-     1. In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it:
-     2. In MainPage.xaml, update with the following code. This code declaratively defines the user interface for the page:
+     1. In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it.
+     2. Update MainPage.xaml with the following code. This code declaratively defines the user interface for the page.
 
         ```xml
         <?xml version="1.0" encoding="utf-8" ?>
@@ -135,60 +116,111 @@ Create the LinkTest application as follows:
 
  8. Modify your application's MainPage source code (MainPage.xaml.cs) using the following code so it will respond to clicks / taps on the `Forms9Patch.Label` action links.
 
-        ```csharp
-        using System;
-        using System.Collections.Generic;
-        using System.Linq;
-        using System.Text;
-        using System.Threading.Tasks;
+    ```csharp
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-        using Xamarin.Forms;
-        using Xamarin.Forms.Xaml;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
 
-        namespace Forms9PatchDemo
+    namespace LinkTest
+    {
+        //[XamlCompilation(XamlCompilationOptions.Compile)]
+        public partial class MainPage : ContentPage
         {
-            //[XamlCompilation(XamlCompilationOptions.Compile)]
-            public partial class XamlCDATA : ContentPage
+            public MainPage()
             {
-                public XamlCDATA()
-                {
-                    InitializeComponent();
-                    PhoneLabel.ActionTagTapped += ActionTagTapped;
-                    EmailLabel.ActionTagTapped += ActionTagTapped;
-                }
+                InitializeComponent();
+                PhoneLabel.ActionTagTapped += ActionTagTapped;
+                EmailLabel.ActionTagTapped += ActionTagTapped;
+            }
 
-                private void ActionTagTapped(object sender, Forms9Patch.ActionTagEventArgs e)
-                {
-                    Forms9Patch.Toast.Create("Link Activated", "The link (id: " + e.Id + ", href:" + e.Href + ") was activated.");
-                }
+            private void ActionTagTapped(object sender, Forms9Patch.ActionTagEventArgs e)
+            {
+                Forms9Patch.Toast.Create("Link Activated", "The link (id: " + e.Id + ", href:" + e.Href + ") was activated.");
             }
         }
-        ```
+    }
+    ```
  
- 9. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
+ 9. Modify your shared code's App source code (`App.xaml.cs`) using the following code so your app will allow the use of Forms9Patch Popups.
 
-    - Go to the Startup Project Selection drop down and sel ect the `LinkTest.UWP (Universal Windows)` project
+    ```csharp
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
 
-        ![Select LinkTest.UWP Project](../images/Guides/GettingStartedWindows/SelectLinkTest.UWP.png)
+    [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+    namespace LinkTest
+    {
+        public partial class App : Application
+        {
+            public App()
+            {
+                InitializeComponent();
+                MainPage = Forms9Patch.RootPage.Create(new MainPage());
+            }
+        }
+    }
+    ```
+    By wrapping the `new MainPage()` in a `Forms9Patch.RootPage.Create()` method, Forms9Patch establishes the necessary anchor in your app's visual tree to enable it to support pop-ups.
 
-    - Click the **[> LocalMachine]** button to start the build-run process
+ 10. **IMPORTANT ANDROID INSTRUCTION:** In order for the Android platform project to build, you will need to add an Android string resource for Forms9Patch's copy authority.  
 
-    - After the build is complete, the package will deploy to Windows and you will see the following application:
+     - Right click on the **LinkTest.Droid** project in the **Solution Pad** (right) to present the Android project actions.  Click on **Properties** to open the Andriod platform project's **Project Options** dialog.
 
-        ![TestLink.UWP Application Window](../images/Guides/GettingStartedWindows/TestLink.UWP.Application.Window.1.png)
+        ![Android Application Settings](images/GettingStartedWindows/AndroidProjectProperties.png)
 
-    - Click on any of the links and you should see something like the following:
+     - Navigate to the **Android Manifest** section of the **LinkTest.Android** project properties editor.  Copy value in the **Package Name** field.  You'll need that value in one of the steps, below. 
 
-        ![TestLink.UWP Application Window](../images/Guides/GettingStartedWindows/TestLink.UWP.Application.Window.2.png)
+        ![Package Name](images/GettingStartedWindows/PackageName.png)
 
- 10. Try changing the Startup Project to `TestLink.Android` and run it on an Android emulator.  
+     - In the **Solution Explorer Pad** (right), navigate to the **Resource | values** folder in the **LinkTest.Droid** platform project.
 
-- Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
+     - Right click on the **LinkTest.Droid  | Resource | values** folder.  The folder actions pop-up will appear.  Select **Add | New Item ...**.  The **New File** dialog will appear.
 
-   ```xml
-   <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
-   ```
+        ![Create strings.xml resource file 1](images/GettingStartedWindows/ResourcesValuesAddNewItem.png)
 
-   I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.
+        ![Create strings.xml resource file 2](images/GettingStartedWindows/AddNewItemDialog.png)
+    
+     - Navicate to **Visual C# | Data** and select the **XML** file template.  Enter `strings.xml` for the **Name**, and then click **[Add]**.  The `strings.xml` file will be created and shown in the editor.
 
-- BE SURE YOU DON'T RUN IT ON AN **ARM** EMULATOR.
+     - Add the following lines to the `strings.xml` file - replacing `PASTE_PACKAGE_NAME_HERE` with the package name you copied, above.
+
+        ```xml
+        <resources>
+            <string name="forms9patch_copy_paste_authority">PASTE_PACKAGE_NAME_HERE.f9pcopypaste</string>
+        </resources>
+        ```
+     - Save `strings.xml`.
+
+ 11. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
+
+     - Go to the Startup Project Selection drop down and sel ect the `LinkTest.UWP (Universal Windows)` project
+
+        ![Select LinkTest.UWP Project](images/GettingStartedWindows/SelectLinkTest.UWP.png)
+
+     - Click the **[> LocalMachine]** button to start the build-run process
+
+     - After the build is complete, the package will deploy to Windows and you will see the following application:
+
+        ![TestLink.UWP Application Window](images/GettingStartedWindows/TestLink.UWP.Application.Window.1.png)
+
+     - Click on any of the links and you should see something like the following:
+
+        ![TestLink.UWP Application Window](images/GettingStartedWindows/TestLink.UWP.Application.Window.2.png)
+
+ 12. Try changing the Startup Project to `TestLink.Android` and run it on an x86 based Android emulator.  
+
+     - Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
+
+        ```xml
+        <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
+        ```
+
+        I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.
+
+     - BE SURE YOU DON'T RUN IT ON AN **ARM** EMULATOR.

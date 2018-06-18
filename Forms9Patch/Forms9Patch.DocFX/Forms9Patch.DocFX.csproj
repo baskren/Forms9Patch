@@ -1,17 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.33.2" />
+    <Folder Include="guides\images\GettingStartedWindows\" />
+    <Folder Include="guides\images\Image\" />
+    <Folder Include="guides\images\ImageSource\" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="images\Guides\" />
-    <Folder Include="images\Guides\GettingStarted\" />
-    <Folder Include="images\Guides\ImageSource\" />
-    <Folder Include="images\Guides\Image\" />
+    <PackageReference Include="docfx.console" Version="2.36.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="notes\DeveloperNotes.md" />
+    <None Remove="log.txt" />
   </ItemGroup>
 </Project>

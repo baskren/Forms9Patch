@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Home | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Home | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="index.md">
+<h1 id="forms9patch">Forms9Patch</h1>
+
+<p>A suite of elements built to simplify image management and text formatting for your NetStandard, PCL, and Shared Library Xamarin.Forms iOS, Android and UWP applications.</p>
+<h2 id="overview">Overview</h2>
+<p>Xamarin Forms is great for developing cross platform applications (certainly very sane) but it is missing some important features:</p>
+<ul>
+<li>Patch scalable images</li>
+<li>SVG images</li>
+<li>Single point of use, cross platform, multi-screen / multi-resolution image management</li>
+<li>Simple, markup formatted text for labels and buttons</li>
+<li>Single point of use, cross platform, custom font management</li>
+<li>Segmented button control</li>
+<li>Pop-ups as a first class layout element</li>
+</ul>
+<p>Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Custom fonts are a bit more complicated and label layouts take things up another notch.   Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for PCL and Shared Library applications for iOS, Android and UWP.</p>
+<h2 id="so-what-exactly-is-forms9patch">So, what exactly is Forms9Patch?</h2>
+<p>Simply stated, Forms9Patch is three core elements from which five layouts, three buttons, six pop-ups are built upon.  And, to make your life easier, some extensions, effects, and services are added.   The three core elements are:</p>
+<ul>
+<li><code>Forms9Patch.ImageSource</code>: a free to use derivative of <code>Xamarin.Forms.ImageSource</code> to support multi-device / multi-density image management from Embedded Resources.</li>
+<li><code>Forms9Patch.Image</code>: an enhanced implementation of <code>Xamarin.Forms.Image</code> with border (outline) and shadow properties  <strong><em>plus</em></strong> support of SVG vector images.  Raster images (.png, .jpg, .bmp) images also have patch scaling, tiling, and tinting support.</li>
+<li><code>Forms9Patch.Label</code>: an enhanced implementation of <code>Xamarin.Forms.Label</code> for easy access to single-point-of-use custom fonts, auto-fitting, and text formatting via markup tags.</li>
+</ul>
+<p>Forms9Patch's five layouts are derivatives of the five <code>Xamarin.Forms.Layout</code> subclasses - enhanced with the ability to use a <code>Forms9Patch.Image</code> as a background.</p>
+<ul>
+<li><code>Forms9Patch.Frame</code></li>
+<li><code>Forms9Patch.AbsoluteLayout</code></li>
+<li><code>Forms9Patch.Grid</code></li>
+<li><code>Forms9Patch.RelativeLayout</code></li>
+<li><code>Forms9Patch.StackLayout</code></li>
+</ul>
+<p>Forms9Patch's three button elements (<code>Forms9Patch.Button</code>, <code>Forms9Patch.StateButton</code>, and <code>Forms9Patch.SegmentedControl</code>) are all derived from <code>Xamarin.Forms.Button</code> and share the following enhancements:</p>
+<ul>
+<li>A <code>BackgroundImage</code> property: Use a <code>Forms9Patch.Image</code> as a button background.</li>
+<li>An icon:
+<ul>
+<li>Specified either as markup text (<code>IconText</code> property) or as a <code>Forms9Patch.Image</code> (<code>IconImage</code> property).  <code>IconText</code> makes it easy to use custom icon fonts like <a href="https://material.io/icons/">Material Icons</a>.  <code>IconImage</code> makes it easy to tint raster images or use <code>SVG</code> vector images.</li>
+<li>A button's icon can be before (default) or after (<code>TrailingIcon</code> property <code>true</code>) its text and at the edge of the button (default) or next to the button's text (<code>TightSpacing</code> property <code>true</code>).</li>
+<li>A button's icon or text can be arranged horizontally (default) or vertically (<code>Orientation</code> property set to <code>StackOrientation.Vertical</code>).</li>
+</ul>
+</li>
+<li>A label:
+<ul>
+<li>Specified either as plain text (<code>Text</code> property) or markup text (<code>HtmlText</code> property).</li>
+<li>Autofitting algorithms (see <a href="Autofitting">Autofitting</a> )</li>
+</ul>
+</li>
+<li><code>LongPressing</code> and <code>LongPressed</code> touch events.</li>
+</ul>
+<p>The three Forms9Patch button elements are:</p>
+<ul>
+<li><code>Forms9Patch.Button</code></li>
+<li><code>Forms9Patch.StateButton</code>: a further enhanced implementation of <code>Forms9Patch.Button</code> that allow most enhanced properties to be configured by the button's state (Default, Pressing, Selected, Disabled, DisabledAndSelected)</li>
+<li><code>Forms9Patch.SegmentControl</code>: a segmented button control that allows for border, separator, and shadow control.  Note that there is currently no support for background images.</li>
+</ul>
+<p>Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (outline and background image capabilities) that rendere with full page overlay backgrounds and the ability to be canceled by tapping the background.  These popup elements are:</p>
+<ul>
+<li><code>Forms9Patch.ModalPopup</code>: takes the enhancements (borders; patch-scalable, tintable, tile-able background images; shadows) from <code>Forms9Patch.Frame</code> and puts it into a pop-up layout.</li>
+<li><code>Forms9Patch.BubblePopup</code>: goes a step further than <code>Forms9Patch.ModalPopup</code> by pointing to a target <code>Xamarin.Forms.VisualElement</code>.  The pointer has <code>PointerLength</code>, <code>PointerTipRadius</code> and <code>PointerCornerRadius</code> properties.</li>
+<li><code>Forms9Patch.ActivityIndicatorPopup</code>: a convenience element that presents a <code>Xamarin.Forms.ActivityIndicator</code> over a page overlay.</li>
+<li><code>Forms9Patch.Toast</code>: a convenience element that presents a title, a message and an optional confirmation button.</li>
+<li><code>Forms9Patch.PermissionPopup</code>: a convenience element that presents a title, a message, and an accept and a decline button.</li>
+<li><code>Forms9Patch.TargetedToast</code>: similar to <code>Forms9Patch.Toast</code> but enhanced to point to a <code>Xamarin.Forms.VisualElement</code>.</li>
+</ul>
+<p>Then there are Forms9Patch's extensions.  A few noteworthy ones are:</p>
+<ul>
+<li>Color Extensions: Blend two colors, change a color's opacity, convert between Xamarin.Forms.Color and string representations.</li>
+<li>WebView Extensions: Print the contents of a <code>Xamarin.Forms.WebView</code> (currently iOS and Android only).</li>
+<li>HtmlString Extensions: Convert HTML markup to a PNG file.</li>
+</ul>
+<p>And lastly is Forms9Patch's services:</p>
+<ul>
+<li>Keyboard Service: Want to put away the system keyboard?  Want to be notified when the system keyboard appears or disappears?</li>
+<li>Key Clicks Service: Do you want to make a system keyboard sound (and vibration, if available)?</li>
+<li>Application Info Service: Do you want to quickly know your application's Name, Bundle/Package ID, Build number and Version string?</li>
+<li>OS Info Service: What is the version of the device's operating system?</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

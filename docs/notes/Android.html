@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Special notes for Android | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Special notes for Android | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="special-notes-for-android">Special notes for Android</h1>
+
+<p>Any cross platform developer knows that Android is a very special beast.  Unfortunately, Forms9Patch doesn't mitigate this.  In fact, until I get the time to remove some warts, some would argue <code>Forms9Patch.Clipboard</code> isn't doing most developers any favors.  That being said, here are some notes for your Android platform projects:</p>
+<ul>
+<li><p>Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android platform project's <code>Resources/Values/string.xml</code> file, before you can build it:</p>
+<pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
+</code></pre>
+<p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.</p>
+</li>
+<li><p>I've made too many mistakes in building the Forms9Patch Nuget package - and Android seems to bear the brunt of those mistakes.  If, after upgrading Forms9Patch, you see a bunch of errors like the following ...</p>
+<pre><code class="lang-text">/Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/Renderers/BottomBarPageRenderer.cs(42,42): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012) 
+
+/Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/MainActivity.cs(33,33): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012)
+</code></pre>
+<p>... then I'm the one you need to blame.  To fix this you'll need to do the following in any Android platform projects that use Forms9Patch:</p>
+<ul>
+<li>Remove the Forms9Patch NuGet package</li>
+<li>Remove the Xamarin.Forms NuGet package</li>
+<li>If present, remove any SkiaSharp NuGet packages</li>
+<li>If present in the References folder, remove any references to <code>FormsViewGroup</code></li>
+<li>Reinstall the Xamarin.Forms NuGet package</li>
+<li>Reinstall the Forms9Patch NuGet package</li>
+</ul>
+<p>If the above doesn't work, PLEASE LET ME KNOW by emailing me at: forms9patch(AT)buildcalc.com</p>
+</li>
+<li><p>This isn't a Forms9Patch issue but just good advice: Do yourself a favor and never use any Android ARM emulators.  This means you'd be better off just deleting the <code>Android_ARM7a_Nouget (API 25)</code> emulator that comes pre-installed with VisualStudio 2017.</p>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

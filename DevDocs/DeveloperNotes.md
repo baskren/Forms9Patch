@@ -1,8 +1,12 @@
-# Forsm9Patch Source Developer Notes
+# Building with Xamarin.Forms source
 
 ## Project Configuration
 
 #### Notes for those starting from scratch 
+
+Below are notes for Building with Xamarin.Forms 2.4.0-sr2.  These steps are applicable
+for later releases of Xamarin.Forms although some of the details will be slightly different.
+Your build errors will guide you to which details need to be updated.
 
 1. Switch to a Xamarin.Forms commit tagged 2.4.0-sr2
 2. Xamarin.Forms projects used:
@@ -13,7 +17,7 @@
    5. Xamarin.Forms.Android.FormsViewGroup
    6. Xamarin.Forms.Android
    7. Xamarin.Forms.UAP
-3. Xamarin.Forms.Android.FormsViewGroup needs to have Sytem.Xml frame work added (right click on References, add reference / Assemblies / framework)
+3. Xamarin.Forms.Android.FormsViewGroup needs to have the System.Xml framework added (right click on References, add reference / Assemblies / framework)
 4. Xamarin.Forms.Android:
    1. needs to be built with Android 7.1 (Project Properties / Application / Compile using Android version)
    2. Minimum Android Version needs to be 4.1 (API16) to support HTML copy / paste 

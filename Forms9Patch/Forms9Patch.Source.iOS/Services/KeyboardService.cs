@@ -24,8 +24,10 @@ namespace Forms9Patch.iOS
         {
             UIKeyboard.Notifications.ObserveWillHide(OnHidden);
             UIKeyboard.Notifications.ObserveWillShow(OnShown);
+            UIKeyboard.Notifications.ObserveDidChangeFrame(OnFrameChanged);
         }
 
+        bool _hidden = true;
         /// <summary>
         /// Ons the hidden.
         /// </summary>
@@ -34,6 +36,8 @@ namespace Forms9Patch.iOS
         void OnHidden(object sender, UIKeyboardEventArgs e)
         {
             Forms9Patch.KeyboardService.OnVisiblityChange(KeyboardVisibilityChange.Hidden);
+            Height = 0;
+            _hidden = true;
         }
 
         /// <summary>
@@ -44,6 +48,17 @@ namespace Forms9Patch.iOS
         void OnShown(object sender, UIKeyboardEventArgs e)
         {
             Forms9Patch.KeyboardService.OnVisiblityChange(KeyboardVisibilityChange.Shown);
+            Height = e.FrameEnd.Height;
+            _hidden = false;
+        }
+
+        void OnFrameChanged(object sender, UIKeyboardEventArgs e)
+        {
+            //CGSize kbSize = [[info objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+            var kbSize = e.FrameEnd;
+            if (!_hidden)
+                Height = kbSize.Height;
+
         }
 
 
@@ -65,5 +80,19 @@ namespace Forms9Patch.iOS
             }
         }
 
+        double _height;
+        public double Height
+        {
+            get => _height;
+            set
+            {
+                if (System.Math.Abs(_height - value) > 0.1)
+                {
+                    _height = value;
+                    Forms9Patch.KeyboardService.OnHeightChanged(_height);
+                }
+                _height = value;
+            }
+        }
     }
 }

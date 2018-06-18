@@ -1,2 +1,4 @@
 - name: Special notes for Android
   href: Android.md
+- name: Building with Xamarin.Forms source
+  href: BuildingWithXamarin.FormsSource.md

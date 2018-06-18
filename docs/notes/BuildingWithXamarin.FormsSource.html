@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Build with Xamarin.Forms source | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Build with Xamarin.Forms source | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BuildingWithXamarin.FormsSource.md">
+<h1 id="building-with-xamarinforms-source">Building with Xamarin.Forms source</h1>
+
+<h2 id="project-configuration">Project Configuration</h2>
+<h4 id="notes-for-those-starting-from-scratch">Notes for those starting from scratch</h4>
+<ol>
+<li>Switch to a Xamarin.Forms commit tagged 2.4.0-sr2</li>
+<li>Xamarin.Forms projects used:</li>
+<li>Xamarin.Forms.Platform</li>
+<li>Xamarin.Forms.Core</li>
+<li>Xamarin.Forms.Xaml</li>
+<li>Xamarin.Forms.iOS</li>
+<li>Xamarin.Forms.Android.FormsViewGroup</li>
+<li>Xamarin.Forms.Android</li>
+<li>Xamarin.Forms.UAP</li>
+<li>Xamarin.Forms.Android.FormsViewGroup needs to have Sytem.Xml frame work added (right click on References, add reference / Assemblies / framework)</li>
+<li>Xamarin.Forms.Android:</li>
+<li>needs to be built with Android 7.1 (Project Properties / Application / Compile using Android version)</li>
+<li>Minimum Android Version needs to be 4.1 (API16) to support HTML copy / paste</li>
+<li>Properties/AssemblyInfo.cs: comment out <code>#if ROOT_RENDERERS</code> (and the corresponding <code>#endif</code></li>
+<li>Properties/AssemblyInfo.cs: comment out <code>[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]</code></li>
+<li>Set up <code>packages</code> symbolic links (see below)</li>
+<li>Set up symbolic link that links from <code>Xamarin.Forms/.nuget</code> to <code>.nuget</code> in the solution's root directory.</li>
+<li>Be sure there is a copy of the <code>Xamarin.Forms.2.4.0.280</code> nuget package in the solution's <code>packages</code> directory.</li>
+</ol>
+<p>Note that the above may need to be repeated if switching to a different Xamarin.Forms git commit.</p>
+<h4 id="every-submodule-needs-a-packages-folder">Every submodule needs a <code>packages</code> folder</h4>
+<p>Because of the way VisualStudio, Nuget, and Git (don't) work together, relative paths are not valid for Nuget packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the following directories (below) and symbolically link the <code>packages</code> subdirectory to the solution's working Nuget packages directory:</p>
+<ul>
+<li>Forms9Patch/Forms9PatchDemo</li>
+<li>Forms9Patch/P42</li>
+<li>Forms9Patch/Xamarin.Forms</li>
+</ul>
+<p>Below are example commands of how to symbolically link to your VisualStudio solution's (and git root module) Nuget packages folder.  For the case of building Forms9Patch source and demo code using just this git module, the below command lines are meant to be executed in the above directories.</p>
+<ul>
+<li><strong>Windows:</strong> <code>c:&gt; mklink /D packages ..\packages</code></li>
+<li><strong>OSX:</strong> <code>$ ln -s ../packages packages</code></li>
+</ul>
+<p>If you are using Forms9Patch source as a submodule in another git module, modify the above command lines to cause the symbolic links to point to the <code>packages</code> directory in the root directory of the VisualStudio solution associated with that git module.</p>
+<h4 id="address-error--project-xamarinforms--csproj-targets-netstandard20">Address error:  <code>Project '..\Xamarin.Forms ... .csproj' targets 'netstandard2.0'</code></h4>
+<ol>
+<li>You're very likely referencing the latest and greatest Xamarin.Forms <code>master</code> branch commit.  Back up by switching to a <code>2.4.0</code> build.</li>
+<li>Manual clean out the <code>bin</code> and <code>obj</code> folders (SuperClean.exe) and Restore Packages.</li>
+</ol>
+<h4 id="changes-to-forms9patchdemo-forms9patch-or-formsgestures-source-code-isnt-updating">Changes to Forms9PatchDemo, Forms9Patch, or FormsGestures source code isn't updating</h4>
+<p>This may likely not be a problem in the future but currently VisualStudio doesn't always show changes to <code>.target</code> files.  The extreme version of this can be seen in how <code>.target</code> file references are not seen at all in <code>.PCL</code>, <code>.iOS</code>, <code>.Droid</code> and <code>.UWP</code> projects.  Why am I using <code>.target</code> files then?  Because it saves a lot of work in keeping the source code for various permutations of builds in sync.</p>
+<h4 id="forms9patchdemopcldroid-wont-run-when-built-and-deployed-from-visualstudio-2017-windows-to-android-emulator">Forms9PatchDemo.PCL.Droid won't run when built and deployed from VisualStudio 2017 (Windows) to Android Emulator</h4>
+<p>Heck, it might not work when deployed to an actual device.  It <em>does</em> work when deployed from VisualStudio Mac to Android Emulator.  1 point for VisualStudio Mac!  If you know why it doesn't work on Windows, please share!</p>
+<h4 id="why-are-the-xaml-examples-not-in-the-forms9patchdemosource-apps">Why are the Xaml examples not in the Forms9PatchDemo.Source apps?</h4>
+<p>Because I haven't been able to take the time to figure out why Xaml files are not being compiled and embedded properly when using Xamarin.Forms source.  Again, if you know how to do this, please share!</p>
+<h4 id="uwp-unable-to-load-systemruntime-the-located-assemblys-manifest-definition-does-not-match-the-assembly-reference">UWP: Unable to load <code>System.Runtime. The located assembly's manifest definition does not match the assembly reference.</code></h4>
+<p>Change the Windows target version to 14393.</p>
+<h4 id="uwp-getting-exceptions-at-xamarinformsinit">UWP: Getting exceptions at Xamarin.Forms.Init</h4>
+<p>When using <code>Compile with .Net Native tool chain</code> build setting, <code>System.IO.FileNotFoundException</code> execeptions for the following files (maybe more) can occur at Xamarin.Forms.Init when the Common Language Runtime Exceptions are all enabled:</p>
+<ul>
+<li>clrcompression</li>
+<li>libgl</li>
+<li>libglex</li>
+<li>SkiaSharp.Views</li>
+</ul>
+<p>You need to use <code>Compile with .Net Native tool chain</code> for your app to be accepted by Windows Store.  What appears to work is to return the Common Language Runtime Exceptions to its defaults.  As of this writing (2/19/2018), the defaults are:</p>
+<ul>
+<li>System.Reflection.MissingMetaDataException</li>
+<li>System.Reflection.MissingRuntimeArtifactException</li>
+<li>System.Windows.Markup.XamlParseException</li>
+</ul>
+<h4 id="uwp-crashes-when-when-trying-to-open-an-image-using-xamarinformsimagesourcefromresource-but-not-when-using-forms9patchimagesourcefrommultiresource">UWP: Crashes when when trying to open an image using <code>Xamarin.Forms.ImageSource.FromResource</code> but <em>not</em> when using <code>Forms9Patch.ImageSource.FromMultiResource</code></h4>
+<p>Boy, did I loose a lot of time on this one.  Turns out the solution to [UWP: Getting exceptions at Xamarin.Forms.Init](UWP: Getting exceptions at Xamarin.Forms.Init) was the fix.  I have no idea why.</p>
+<h1 id="notes-for-forms9patch-users">Notes for Forms9Patch users</h1>
+<h2 id="android">Android</h2>
+<ul>
+<li>You must add <code>&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;*your_Android_app_package_name_here*.f9pcopypaste&lt;/string&gt;</code> to your Android project's <code>Resources/values/strings.xml</code> file.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

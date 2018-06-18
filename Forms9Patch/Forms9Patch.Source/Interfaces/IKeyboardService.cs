@@ -22,5 +22,7 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The language region.</value>
         string LanguageRegion { get; }
+
+        double Height { get; }
     }
 }

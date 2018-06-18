@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Views.InputMethods;
 using Xamarin.Forms;
 using Java.Util;
+using Android.Views;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyboardService))]
 namespace Forms9Patch.Droid
@@ -36,6 +37,13 @@ namespace Forms9Patch.Droid
 
         public KeyboardService()
         {
+            Android.Views.View root = Forms9Patch.Droid.Settings.Activity.FindViewById(Android.Resource.Id.Content);
+
+
+            var rootLayoutListener = new RootLayoutListener(root);
+            rootLayoutListener.HeightChanged += (sender, height) => Height = height;
+            root.ViewTreeObserver.AddOnGlobalLayoutListener(rootLayoutListener);
+
             Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
             {
                 im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
@@ -70,6 +78,54 @@ namespace Forms9Patch.Droid
                 }
                 return result;
             }
+        }
+
+
+        double _height;
+        public double Height
+        {
+            get => _height;
+            set
+            {
+                if (System.Math.Abs(_height - value) > 0.1)
+                {
+                    _height = value;
+                    Forms9Patch.KeyboardService.OnHeightChanged(_height);
+                }
+                _height = value;
+            }
+        }
+    }
+
+    class RootLayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
+    {
+        int[] _discrepancy = { 0 };
+
+        Android.Graphics.Rect _startRect;
+        readonly Android.Views.View _rootView;
+
+        public event EventHandler<double> HeightChanged;
+
+
+        public RootLayoutListener(Android.Views.View view)
+        {
+            _rootView = view;
+            _startRect = new Android.Graphics.Rect();
+            _rootView.GetWindowVisibleDisplayFrame(_startRect);
+            var expectedHeight = Forms9Patch.Display.Height;
+            var expectedWidth = Forms9Patch.Display.Width;
+            System.Diagnostics.Debug.WriteLine("_startRect=[" + _startRect.Width() + "," + _startRect.Height() + "]");
+            System.Diagnostics.Debug.WriteLine(" expected=[" + expectedWidth + "," + expectedHeight + "]");
+        }
+
+        public void OnGlobalLayout()
+        {
+            Android.Graphics.Rect currentRect = new Android.Graphics.Rect();
+            _rootView.GetWindowVisibleDisplayFrame(currentRect);
+
+            var height = _startRect.Height() - currentRect.Height();
+
+            HeightChanged?.Invoke(this, height / Display.Scale);
         }
     }
 }

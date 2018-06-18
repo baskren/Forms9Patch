@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started: Windows VisualStudio 2017 | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started: Windows VisualStudio 2017 | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started-windows-visualstudio-2017">Getting Started: Windows VisualStudio 2017</h1>
+
+<p>Forms9Patch is meant to make it easier to enhance your Xamarin.Forms app. Below is a guide to how to get started.  In this guide, we will build a simple Windows UWP app that has <code>Forms9Patch.Label</code> elements with embedded links.  Clicking on those links will dispaly a simple <code>Forms9Patch.ModelPopup</code> with information about those links.</p>
+<p>Before you begin, check out the system requirements to be sure your application and development environment is ready.</p>
+<h2 id="system-requirements">System Requirements</h2>
+<p>Forms9Patch is an enhancement to Xamarin.Forms.  As such, first be sure you've met the <a href="https://developer.xamarin.com/guides/cross-platform/getting_started/requirements/">Xamarin.Forms system requirements</a>.</p>
+<p>Additionally:</p>
+<ul>
+<li><p>Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer.</p>
+</li>
+<li><p>To use the <code>background-color</code> style attribute within <code>Forms9Patch.Label.HtmlText</code> markup text in UWP applications, your UWP applications will need to be built with minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).</p>
+</li>
+<li><p>To build your Android apps, you will need to add the following to your Android application project's <code>Resources/values/strings.xml</code> file:</p>
+<pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
+</code></pre>
+</li>
+</ul>
+<h2 id="build-your-first-forms9patch-app">Build your first Forms9Patch app</h2>
+<p>This walk through demonstrates how to create an application that displays a label which is marked-up to show a phone number and email link.  Tapping on those links will present a pop-up that asks permission to proceed with the phone call or email.</p>
+<p>Create the LinkTest application as follows:</p>
+<ol>
+<li><p>Launch VisualStudio.</p>
+</li>
+<li><p>Create a new Xamarin Forms project by clicking <strong>File | New | Project</strong> menu item.</p>
+</li>
+<li><p>In the New Project dialog, browse to <strong>Installed | Visual C# | Cross-Platform</strong>, select the <strong>Mobile App (Xamarin.Forms)</strong> template, set the Name and Solution name to <code>LinkTest</code>, assure a suitable location for the project and click the <strong>[OK]</strong> button:</p>
+<p><img src="images/GettingStartedWindows/NewProjectDialog.png" alt="New Project Dialog 1"></p>
+</li>
+<li><p>In the New Cross Platform App dialog, select the <strong>Blank App</strong> template, select <strong>.Net Standard</strong> Code Sharing Strategy, and then click the <strong>[OK]</strong> button:</p>
+<p><img src="images/GettingStartedWindows/NewCrossPlatformApp.png" alt="Guides Getting Started New Cross Platform App"></p>
+</li>
+<li><p>Add the Forms9Patch Nuget package to each of your solution's projects:</p>
+<ul>
+<li><p>In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:</p>
+<p><img src="images/GettingStartedWindows/ManageNugetPackagesForSolution.png" alt="Guides Getting Started Manage Nuget Packages For Solution"></p>
+</li>
+<li><p>... select the Browse tab ...:</p>
+<p><img src="images/GettingStartedWindows/SelectTheBrowseTab.png" alt="Guides Getting Started Select The Browse Tab"></p>
+</li>
+<li><p>... and search for &quot;Forms9Patch&quot;:</p>
+<p><img src="images/GettingStartedWindows/SearchForForms9Patch.png" alt="Guides Getting Started Search For Forms9 Patch"></p>
+</li>
+<li><p>Select the Forms9Patch Nuget package:</p>
+<p><img src="images/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png" alt="Guides Getting Started Select The Forms9 Patch Nuget Package"></p>
+</li>
+<li><p>Apply it to all of your solution's projects by selecting the check box at the top of the project selection column:</p>
+<p><img src="images/GettingStartedWindows/SelectAllProjects.png" alt="Guides Getting Started Select All Projects"></p>
+</li>
+<li><p>Be sure the latest stable package is selected and then click [Install]:</p>
+<p><img src="images/GettingStartedWindows/ClickInstall.png" alt="Guides Getting Started Click Install"></p>
+</li>
+</ul>
+</li>
+<li><p>Initialize Forms9Patch in each of your platform projects:</p>
+<p><strong>Android:</strong></p>
+<ol>
+<li><p>Open MainActivity.cs in your solution's Android platform project.</p>
+</li>
+<li><p>Between <code>global::Xamarin.Forms.Forms.Init(this, bundle);</code> and <code>LoadApplication(new App());</code>, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look the following:</p>
+<pre><code class="lang-csharp">    global::Xamarin.Forms.Forms.Init(this, bundle);
+    Forms9Patch.Droid.Settings.Initialize(this);
+    LoadApplication(new App());
+</code></pre>
+</li>
+</ol>
+<p><strong>iOS</strong></p>
+<ol>
+<li><p>Open AppDelegate.cs in your solution's iOS platform project.</p>
+</li>
+<li><p>Between <code>global::Xamarin.Forms.Forms.Init();</code> and <code>LoadApplication(new App());</code>, add the Forms9Patch.iOS initialization call using the key for the LinkTest applications.  The result should look like the following:</p>
+<pre><code class="lang-csharp">    global::Xamarin.Forms.Forms.Init();
+    Forms9Patch.iOS.Settings.Initialize(this);
+    LoadApplication(new App());
+</code></pre>
+</li>
+</ol>
+<p><strong>UWP</strong></p>
+<ol>
+<li><p>Open App.xaml.cs in your solution's UWP platform project.</p>
+</li>
+<li><p>Find the following line</p>
+<pre><code class="lang-csharp">        Xamarin.Forms.Forms.Init(e);
+</code></pre>
+</li>
+<li><p>... and <strong>replace</strong> it with the following lines:</p>
+<pre><code class="lang-csharp">        Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude); 
+        Forms9Patch.UWP.Settings.Initialize(this);
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>Update your application's MainPage content (MainPage.xaml) to use Forms9Patch elements:</p>
+<ol>
+<li><p>In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it:</p>
+</li>
+<li><p>In MainPage.xaml, update with the following code. This code declaratively defines the user interface for the page:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+            xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                    xmlns:Forms9Patch=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+            xmlns:local=&quot;clr-namespace:LinkTest&quot;
+            x:Class=&quot;LinkTest.MainPage&quot;&gt;
+    &lt;ContentPage.Padding&gt;
+        &lt;OnPlatform x:TypeArguments=&quot;Thickness&quot;&gt;
+            &lt;On Platform=&quot;iOS&quot; Value=&quot;20, 40, 20, 20&quot; /&gt;
+            &lt;On Platform=&quot;Android, WinPhone, Windows&quot; Value=&quot;20&quot; /&gt;
+        &lt;/OnPlatform&gt;
+    &lt;/ContentPage.Padding&gt;
+    &lt;StackLayout VerticalOptions=&quot;Center&quot;&gt;
+        &lt;Forms9Patch:Label HorizontalTextAlignment=&quot;Center&quot;&gt;
+            Example of Forms9Patch markup text.
+        &lt;/Forms9Patch:Label&gt;
+        &lt;BoxView HeightRequest=&quot;1&quot; Color=&quot;Black&quot;&gt;&lt;/BoxView&gt;
+        &lt;Forms9Patch:Label x:Name=&quot;PhoneLabel&quot;  HorizontalTextAlignment=&quot;Center&quot; TextColor=&quot;Black&quot;&gt;
+            &lt;![CDATA[This is a phone number link: &lt;a id=&quot;link1&quot; href=&quot;tel:+353015546889&quot;&gt;015546889&lt;/a&gt; ]]&gt;
+        &lt;/Forms9Patch:Label&gt;
+        &lt;BoxView HeightRequest=&quot;1&quot; Color=&quot;Black&quot;&gt;&lt;/BoxView&gt;
+        &lt;Forms9Patch:Label x:Name=&quot;EmailLabel&quot; HorizontalTextAlignment=&quot;Center&quot; TextColor=&quot;Black&quot;&gt;
+            &lt;![CDATA[This is an email link: &lt;a id=&quot;link2&quot; href=&quot;mailto:email@hotmail.com&quot;&gt;email@hotmail.com&lt;/a&gt; ]]&gt;
+        &lt;/Forms9Patch:Label&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+</li>
+</ol>
+</li>
+<li><p>Modify your application's MainPage source code (MainPage.xaml.cs) using the following code so it will respond to clicks / taps on the <code>Forms9Patch.Label</code> action links.</p>
+<pre><code>```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Forms9PatchDemo
+{
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class XamlCDATA : ContentPage
+    {
+        public XamlCDATA()
+        {
+            InitializeComponent();
+            PhoneLabel.ActionTagTapped += ActionTagTapped;
+            EmailLabel.ActionTagTapped += ActionTagTapped;
+        }
+
+        private void ActionTagTapped(object sender, Forms9Patch.ActionTagEventArgs e)
+        {
+            Forms9Patch.Toast.Create(&quot;Link Activated&quot;, &quot;The link (id: &quot; + e.Id + &quot;, href:&quot; + e.Href + &quot;) was activated.&quot;);
+        }
+    }
+}
+```
+</code></pre>
+</li>
+<li><p>Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?</p>
+<ul>
+<li><p>Go to the Startup Project Selection drop down and sel ect the <code>LinkTest.UWP (Universal Windows)</code> project</p>
+<p><img src="images/GettingStartedWindows/SelectLinkTest.UWP.png" alt="Select LinkTest.UWP Project"></p>
+</li>
+<li><p>Click the <strong>[&gt; LocalMachine]</strong> button to start the build-run process</p>
+</li>
+<li><p>After the build is complete, the package will deploy to Windows and you will see the following application:</p>
+<p><img src="images/GettingStartedWindows/TestLink.UWP.Application.Window.1.png" alt="TestLink.UWP Application Window"></p>
+</li>
+<li><p>Click on any of the links and you should see something like the following:</p>
+<p><img src="images/GettingStartedWindows/TestLink.UWP.Application.Window.2.png" alt="TestLink.UWP Application Window"></p>
+</li>
+</ul>
+</li>
+<li><p>Try changing the Startup Project to <code>TestLink.Android</code> and run it on an Android emulator.</p>
+</li>
+</ol>
+<ul>
+<li><p>Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android project's <code>Resources/Values/string.xml</code> file,before you can build your Android project.</p>
+<pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
+</code></pre>
+<p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.</p>
+</li>
+<li><p>BE SURE YOU DON'T RUN IT ON AN <strong>ARM</strong> EMULATOR.</p>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -33,6 +33,12 @@ namespace Forms9Patch
             }
         }
 
+        public static void Activate()
+        {
+            if (Service == null)
+                Console.WriteLine("KEYBOARD SERVICE IS NOT AVAILABLE");
+        }
+
         /// <summary>
         /// Forces the device's on screen keyboard to be hidden
         /// </summary>
@@ -55,6 +61,11 @@ namespace Forms9Patch
             }
         }
 
+        public static void OnHeightChanged(double height)
+        {
+            HeightChanged?.Invoke(null, height);
+        }
+
         /// <summary>
         /// Occurs when hidden.
         /// </summary>
@@ -63,6 +74,11 @@ namespace Forms9Patch
         /// Occurs when shown.
         /// </summary>
         public static event EventHandler Shown;
+
+        /// <summary>
+        /// Occurs when virtual keyboard height has changed.
+        /// </summary>
+        public static event EventHandler<double> HeightChanged;
 
         /// <summary>
         /// Gets a value indicating whether the hardware keyboard is active.
@@ -75,6 +91,9 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The language region.</value>
         public static string LanguageRegion => Service.LanguageRegion;
+
+        public static double Height => Service.Height;
+
     }
 
     /// <summary>

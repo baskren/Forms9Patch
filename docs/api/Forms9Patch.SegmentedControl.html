@@ -1,0 +1,2904 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SegmentedControl
+   | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SegmentedControl
+   | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Forms9Patch.SegmentedControl">
+  
+  
+  <h1 id="Forms9Patch_SegmentedControl" data-uid="Forms9Patch.SegmentedControl" class="text-break">Class SegmentedControl
+  </h1>
+  <div class="markdown level0 summary"><p>Forms9Patch Material Segmented Control.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject">BindableObject</a></div>
+    <div class="level2"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element">Element</a></div>
+    <div class="level3"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement">VisualElement</a></div>
+    <div class="level4"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view">View</a></div>
+    <div class="level5"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout">Layout</a></div>
+    <div class="level6"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1">Layout</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view">View</a>&gt;</div>
+    <div class="level7"><a class="xref" href="Forms9Patch.ManualLayout.html">ManualLayout</a></div>
+    <div class="level8"><span class="xref">SegmentedControl</span></div>
+      <div class="level9"><a class="xref" href="Forms9Patch.MaterialSegmentedControl.html">MaterialSegmentedControl</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">IAnimatable</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">IViewController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">ILayout</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayoutcontroller">ILayoutController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontainer-1">IViewContainer</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view">View</a>&gt;</div>
+    <div><a class="xref" href="Forms9Patch.ILayout.html">ILayout</a></div>
+    <div><a class="xref" href="Forms9Patch.IBackground.html">IBackground</a></div>
+    <div><a class="xref" href="Forms9Patch.IShape.html">IShape</a></div>
+    <div><a class="xref" href="Forms9Patch.IElement.html">IElement</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="Forms9Patch.ILabelStyle.html">ILabelStyle</a></div>
+    <div><a class="xref" href="Forms9Patch.IFontElement.html">IFontElement</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_IgnoreChildrenProperty">ManualLayout.IgnoreChildrenProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_IgnoreChildren">ManualLayout.IgnoreChildren</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BackgroundImageProperty">ManualLayout.BackgroundImageProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BackgroundImage">ManualLayout.BackgroundImage</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_HasShadowProperty">ManualLayout.HasShadowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_HasShadow">ManualLayout.HasShadow</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShadowInvertedProperty">ManualLayout.ShadowInvertedProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShadowInverted">ManualLayout.ShadowInverted</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineColorProperty">ManualLayout.OutlineColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineColor">ManualLayout.OutlineColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineRadiusProperty">ManualLayout.OutlineRadiusProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineRadius">ManualLayout.OutlineRadius</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineWidthProperty">ManualLayout.OutlineWidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OutlineWidth">ManualLayout.OutlineWidth</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ElementShapeProperty">ManualLayout.ElementShapeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ElementShape">ManualLayout.ElementShape</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Forms9Patch_IShape_ExtendedElementShape">ManualLayout.IShape.ExtendedElementShape</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_InstanceId">ManualLayout.InstanceId</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Description">ManualLayout.Description()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ToString">ManualLayout.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Forms9Patch_IShape_ShadowPadding">ManualLayout.IShape.ShadowPadding()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_LayoutChildrenEvent">ManualLayout.LayoutChildrenEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_">ManualLayout.ShouldInvalidateOnChildAdded(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_">ManualLayout.ShouldInvalidateOnChildRemoved(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OnChildMeasureInvalidated">ManualLayout.OnChildMeasureInvalidated()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1.onadded#Xamarin_Forms_Layout_1_OnAdded__0_">Layout&lt;View&gt;.OnAdded(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1.onchildadded#Xamarin_Forms_Layout_1_OnChildAdded_Xamarin_Forms_Element_">Layout&lt;View&gt;.OnChildAdded(Element)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1.onchildremoved#Xamarin_Forms_Layout_1_OnChildRemoved_Xamarin_Forms_Element_">Layout&lt;View&gt;.OnChildRemoved(Element)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1.onremoved#Xamarin_Forms_Layout_1_OnRemoved__0_">Layout&lt;View&gt;.OnRemoved(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1.children#Xamarin_Forms_Layout_1_Children">Layout&lt;View&gt;.Children</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.isclippedtoboundsproperty">Layout.IsClippedToBoundsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.forcelayout#Xamarin_Forms_Layout_ForceLayout">Layout.ForceLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.getsizerequest#Xamarin_Forms_Layout_GetSizeRequest_System_Double_System_Double_">Layout.GetSizeRequest(Double, Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.layoutchildintoboundingregion#Xamarin_Forms_Layout_LayoutChildIntoBoundingRegion_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_">Layout.LayoutChildIntoBoundingRegion(VisualElement, Rectangle)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.lowerchild#Xamarin_Forms_Layout_LowerChild_Xamarin_Forms_View_">Layout.LowerChild(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.raisechild#Xamarin_Forms_Layout_RaiseChild_Xamarin_Forms_View_">Layout.RaiseChild(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.invalidatelayout#Xamarin_Forms_Layout_InvalidateLayout">Layout.InvalidateLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.onchildmeasureinvalidated#Xamarin_Forms_Layout_OnChildMeasureInvalidated_System_Object_System_EventArgs_">Layout.OnChildMeasureInvalidated(Object, EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.onsizeallocated#Xamarin_Forms_Layout_OnSizeAllocated_System_Double_System_Double_">Layout.OnSizeAllocated(Double, Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.updatechildrenlayout#Xamarin_Forms_Layout_UpdateChildrenLayout">Layout.UpdateChildrenLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.isclippedtobounds#Xamarin_Forms_Layout_IsClippedToBounds">Layout.IsClippedToBounds</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout.layoutchanged">Layout.LayoutChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.verticaloptionsproperty">View.VerticalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.horizontaloptionsproperty">View.HorizontalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.marginproperty">View.MarginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.onbindingcontextchanged#Xamarin_Forms_View_OnBindingContextChanged">View.OnBindingContextChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.gesturerecognizers#Xamarin_Forms_View_GestureRecognizers">View.GestureRecognizers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.horizontaloptions#Xamarin_Forms_View_HorizontalOptions">View.HorizontalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.margin#Xamarin_Forms_View_Margin">View.Margin</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.verticaloptions#Xamarin_Forms_View_VerticalOptions">View.VerticalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.navigationproperty">VisualElement.NavigationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.inputtransparentproperty">VisualElement.InputTransparentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isenabledproperty">VisualElement.IsEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.xproperty">VisualElement.XProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.yproperty">VisualElement.YProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.anchorxproperty">VisualElement.AnchorXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.anchoryproperty">VisualElement.AnchorYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.translationxproperty">VisualElement.TranslationXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.translationyproperty">VisualElement.TranslationYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.widthproperty">VisualElement.WidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.heightproperty">VisualElement.HeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotationproperty">VisualElement.RotationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotationxproperty">VisualElement.RotationXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotationyproperty">VisualElement.RotationYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleproperty">VisualElement.ScaleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isvisibleproperty">VisualElement.IsVisibleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.opacityproperty">VisualElement.OpacityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.behaviorsproperty">VisualElement.BehaviorsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.triggersproperty">VisualElement.TriggersProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.styleproperty">VisualElement.StyleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.widthrequestproperty">VisualElement.WidthRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.heightrequestproperty">VisualElement.HeightRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.minimumwidthrequestproperty">VisualElement.MinimumWidthRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.minimumheightrequestproperty">VisualElement.MinimumHeightRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isfocusedproperty">VisualElement.IsFocusedProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.batchbegin#Xamarin_Forms_VisualElement_BatchBegin">VisualElement.BatchBegin()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.batchcommit#Xamarin_Forms_VisualElement_BatchCommit">VisualElement.BatchCommit()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.focus#Xamarin_Forms_VisualElement_Focus">VisualElement.Focus()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.layout#Xamarin_Forms_VisualElement_Layout_Xamarin_Forms_Rectangle_">VisualElement.Layout(Rectangle)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.measure#Xamarin_Forms_VisualElement_Measure_System_Double_System_Double_Xamarin_Forms_MeasureFlags_">VisualElement.Measure(Double, Double, MeasureFlags)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.unfocus#Xamarin_Forms_VisualElement_Unfocus">VisualElement.Unfocus()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.invalidatemeasure#Xamarin_Forms_VisualElement_InvalidateMeasure">VisualElement.InvalidateMeasure()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onchildrenreordered#Xamarin_Forms_VisualElement_OnChildrenReordered">VisualElement.OnChildrenReordered()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onparentset#Xamarin_Forms_VisualElement_OnParentSet">VisualElement.OnParentSet()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizerequest#Xamarin_Forms_VisualElement_OnSizeRequest_System_Double_System_Double_">VisualElement.OnSizeRequest(Double, Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.sizeallocated#Xamarin_Forms_VisualElement_SizeAllocated_System_Double_System_Double_">VisualElement.SizeAllocated(Double, Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.xamarin-forms-ivisualelementcontroller-invalidatemeasure#Xamarin_Forms_VisualElement_Xamarin_Forms_IVisualElementController_InvalidateMeasure_Xamarin_Forms_Internals_InvalidationTrigger_">VisualElement.IVisualElementController.InvalidateMeasure(InvalidationTrigger)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.anchorx#Xamarin_Forms_VisualElement_AnchorX">VisualElement.AnchorX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.anchory#Xamarin_Forms_VisualElement_AnchorY">VisualElement.AnchorY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.behaviors#Xamarin_Forms_VisualElement_Behaviors">VisualElement.Behaviors</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.bounds#Xamarin_Forms_VisualElement_Bounds">VisualElement.Bounds</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.height#Xamarin_Forms_VisualElement_Height">VisualElement.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.heightrequest#Xamarin_Forms_VisualElement_HeightRequest">VisualElement.HeightRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.inputtransparent#Xamarin_Forms_VisualElement_InputTransparent">VisualElement.InputTransparent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isenabled#Xamarin_Forms_VisualElement_IsEnabled">VisualElement.IsEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isfocused#Xamarin_Forms_VisualElement_IsFocused">VisualElement.IsFocused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isvisible#Xamarin_Forms_VisualElement_IsVisible">VisualElement.IsVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.minimumheightrequest#Xamarin_Forms_VisualElement_MinimumHeightRequest">VisualElement.MinimumHeightRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.minimumwidthrequest#Xamarin_Forms_VisualElement_MinimumWidthRequest">VisualElement.MinimumWidthRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.navigation#Xamarin_Forms_VisualElement_Navigation">VisualElement.Navigation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.opacity#Xamarin_Forms_VisualElement_Opacity">VisualElement.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotation#Xamarin_Forms_VisualElement_Rotation">VisualElement.Rotation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotationx#Xamarin_Forms_VisualElement_RotationX">VisualElement.RotationX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.rotationy#Xamarin_Forms_VisualElement_RotationY">VisualElement.RotationY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scale#Xamarin_Forms_VisualElement_Scale">VisualElement.Scale</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.style#Xamarin_Forms_VisualElement_Style">VisualElement.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.styleclass#Xamarin_Forms_VisualElement_StyleClass">VisualElement.StyleClass</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.translationx#Xamarin_Forms_VisualElement_TranslationX">VisualElement.TranslationX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.translationy#Xamarin_Forms_VisualElement_TranslationY">VisualElement.TranslationY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.triggers#Xamarin_Forms_VisualElement_Triggers">VisualElement.Triggers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.width#Xamarin_Forms_VisualElement_Width">VisualElement.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.widthrequest#Xamarin_Forms_VisualElement_WidthRequest">VisualElement.WidthRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.x#Xamarin_Forms_VisualElement_X">VisualElement.X</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.y#Xamarin_Forms_VisualElement_Y">VisualElement.Y</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.resources#Xamarin_Forms_VisualElement_Resources">VisualElement.Resources</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.childrenreordered">VisualElement.ChildrenReordered</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.focused">VisualElement.Focused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.measureinvalidated">VisualElement.MeasureInvalidated</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.sizechanged">VisualElement.SizeChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.unfocused">VisualElement.Unfocused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.classidproperty">Element.ClassIdProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.xamarin-forms-ielementcontroller-setvaluefromrenderer#Xamarin_Forms_Element_Xamarin_Forms_IElementController_SetValueFromRenderer_Xamarin_Forms_BindableProperty_System_Object_">Element.IElementController.SetValueFromRenderer(BindableProperty, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.removedynamicresource#Xamarin_Forms_Element_RemoveDynamicResource_Xamarin_Forms_BindableProperty_">Element.RemoveDynamicResource(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.setdynamicresource#Xamarin_Forms_Element_SetDynamicResource_Xamarin_Forms_BindableProperty_System_String_">Element.SetDynamicResource(BindableProperty, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.automationid#Xamarin_Forms_Element_AutomationId">Element.AutomationId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.classid#Xamarin_Forms_Element_ClassId">Element.ClassId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.effects#Xamarin_Forms_Element_Effects">Element.Effects</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.id#Xamarin_Forms_Element_Id">Element.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.parentview#Xamarin_Forms_Element_ParentView">Element.ParentView</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.styleid#Xamarin_Forms_Element_StyleId">Element.StyleId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.parent#Xamarin_Forms_Element_Parent">Element.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.childadded">Element.ChildAdded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.childremoved">Element.ChildRemoved</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.descendantadded">Element.DescendantAdded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.descendantremoved">Element.DescendantRemoved</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.clearvalue#Xamarin_Forms_BindableObject_ClearValue_Xamarin_Forms_BindableProperty_">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.clearvalue#Xamarin_Forms_BindableObject_ClearValue_Xamarin_Forms_BindablePropertyKey_">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.getvalue#Xamarin_Forms_BindableObject_GetValue_Xamarin_Forms_BindableProperty_">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.removebinding#Xamarin_Forms_BindableObject_RemoveBinding_Xamarin_Forms_BindableProperty_">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setbinding#Xamarin_Forms_BindableObject_SetBinding_Xamarin_Forms_BindableProperty_Xamarin_Forms_BindingBase_">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindableProperty_System_Object_">BindableObject.SetValue(BindableProperty, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.setvalue#Xamarin_Forms_BindableObject_SetValue_Xamarin_Forms_BindablePropertyKey_System_Object_">BindableObject.SetValue(BindablePropertyKey, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.applybindings#Xamarin_Forms_BindableObject_ApplyBindings">BindableObject.ApplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.onpropertychanging#Xamarin_Forms_BindableObject_OnPropertyChanging_System_String_">BindableObject.OnPropertyChanging(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.unapplybindings#Xamarin_Forms_BindableObject_UnapplyBindings">BindableObject.UnapplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.bindingcontext#Xamarin_Forms_BindableObject_BindingContext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
+  <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
+  <h5 id="Forms9Patch_SegmentedControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[ContentProperty(&quot;Segments&quot;)]
+public class SegmentedControl : ManualLayout, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IViewController, IVisualElementController, IElementController, ILayout, ILayoutController, IViewContainer&lt;View&gt;, ILayout, IBackground, IShape, IElement, IDisposable, ILabelStyle, IFontElement</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="Forms9Patch_SegmentedControl__ctor_" data-uid="Forms9Patch.SegmentedControl.#ctor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl__ctor" data-uid="Forms9Patch.SegmentedControl.#ctor">SegmentedControl()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.SegmentedControl.html">SegmentedControl</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SegmentedControl()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_AutoFitProperty" data-uid="Forms9Patch.SegmentedControl.AutoFitProperty">AutoFitProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for AutoFit property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty AutoFitProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_BackgroundColorProperty" data-uid="Forms9Patch.SegmentedControl.BackgroundColorProperty">BackgroundColorProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Button.BackgroundColor bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BackgroundColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_DarkThemeProperty" data-uid="Forms9Patch.SegmentedControl.DarkThemeProperty">DarkThemeProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Button.DarkTheme property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DarkThemeProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_FontAttributesProperty" data-uid="Forms9Patch.SegmentedControl.FontAttributesProperty">FontAttributesProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Button.FontAttributes bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FontAttributesProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_FontColorProperty" data-uid="Forms9Patch.SegmentedControl.FontColorProperty">FontColorProperty</h4>
+  <div class="markdown level1 summary"><p>Use TextColorProperty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TextColorProperty&quot;)]
+public static readonly BindableProperty FontColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_FontFamilyProperty" data-uid="Forms9Patch.SegmentedControl.FontFamilyProperty">FontFamilyProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Button.FontFamiily bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FontFamilyProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_FontSizeProperty" data-uid="Forms9Patch.SegmentedControl.FontSizeProperty">FontSizeProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Button.FontSize bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FontSizeProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_GroupToggleBehaviorProperty" data-uid="Forms9Patch.SegmentedControl.GroupToggleBehaviorProperty">GroupToggleBehaviorProperty</h4>
+  <div class="markdown level1 summary"><p>The backing store for the MaterialSegmentControl's ToggleBehavior property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GroupToggleBehaviorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_HapticEffectProperty" data-uid="Forms9Patch.SegmentedControl.HapticEffectProperty">HapticEffectProperty</h4>
+  <div class="markdown level1 summary"><p>The haptic effect property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty HapticEffectProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_HapticModeProperty" data-uid="Forms9Patch.SegmentedControl.HapticModeProperty">HapticModeProperty</h4>
+  <div class="markdown level1 summary"><p>The haptic mode property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty HapticModeProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_HasTightSpacingProperty" data-uid="Forms9Patch.SegmentedControl.HasTightSpacingProperty">HasTightSpacingProperty</h4>
+  <div class="markdown level1 summary"><p>The has tight spacing property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty HasTightSpacingProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_HorizontalTextAlignmentProperty" data-uid="Forms9Patch.SegmentedControl.HorizontalTextAlignmentProperty">HorizontalTextAlignmentProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the horizontal text alignment property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty HorizontalTextAlignmentProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_IntraSegmentOrientationProperty" data-uid="Forms9Patch.SegmentedControl.IntraSegmentOrientationProperty">IntraSegmentOrientationProperty</h4>
+  <div class="markdown level1 summary"><p>The backing store for the segments orientation property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IntraSegmentOrientationProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_IntraSegmentSpacingProperty" data-uid="Forms9Patch.SegmentedControl.IntraSegmentSpacingProperty">IntraSegmentSpacingProperty</h4>
+  <div class="markdown level1 summary"><p>The backing store for the intra segment spacing property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IntraSegmentSpacingProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_LineBreakModeProperty" data-uid="Forms9Patch.SegmentedControl.LineBreakModeProperty">LineBreakModeProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for LineBreakMode property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty LineBreakModeProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_LinesProperty" data-uid="Forms9Patch.SegmentedControl.LinesProperty">LinesProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for Lines property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty LinesProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_MinFontSizeProperty" data-uid="Forms9Patch.SegmentedControl.MinFontSizeProperty">MinFontSizeProperty</h4>
+  <div class="markdown level1 summary"><p>backing store for MinFontSize property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MinFontSizeProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_OrientationProperty" data-uid="Forms9Patch.SegmentedControl.OrientationProperty">OrientationProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Orienation property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty OrientationProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_PaddingProperty" data-uid="Forms9Patch.SegmentedControl.PaddingProperty">PaddingProperty</h4>
+  <div class="markdown level1 summary"><p>Identifies the Padding bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PaddingProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SelectedBackgroundColorProperty" data-uid="Forms9Patch.SegmentedControl.SelectedBackgroundColorProperty">SelectedBackgroundColorProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the Selected.BackgroundColor property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SelectedBackgroundColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SelectedFontColorProperty" data-uid="Forms9Patch.SegmentedControl.SelectedFontColorProperty">SelectedFontColorProperty</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use SelectedTextColorProperty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use SelectedTextColorProperty&quot;)]
+public static readonly BindableProperty SelectedFontColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SelectedTextColorProperty" data-uid="Forms9Patch.SegmentedControl.SelectedTextColorProperty">SelectedTextColorProperty</h4>
+  <div class="markdown level1 summary"><p>The selected text color property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SelectedTextColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SeparatorWidthProperty" data-uid="Forms9Patch.SegmentedControl.SeparatorWidthProperty">SeparatorWidthProperty</h4>
+  <div class="markdown level1 summary"><p>The backing store for the MaterialSegmentControl's SeparatorWidth property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SeparatorWidthProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_StickyBehaviorProperty" data-uid="Forms9Patch.SegmentedControl.StickyBehaviorProperty">StickyBehaviorProperty</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use ToggleBehaviorProperty instead.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;StickyBehavior property is obsolete, use ToggleBehavior instead&quot;, true)]
+public static BindableProperty StickyBehaviorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_TextColorProperty" data-uid="Forms9Patch.SegmentedControl.TextColorProperty">TextColorProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the TextColor bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TextColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_TintIconProperty" data-uid="Forms9Patch.SegmentedControl.TintIconProperty">TintIconProperty</h4>
+  <div class="markdown level1 summary"><p>The tint image property backing store.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TintIconProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_TintImageProperty" data-uid="Forms9Patch.SegmentedControl.TintImageProperty">TintImageProperty</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use TintIconProperty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TintIconProperty&quot;, true)]
+public static readonly BindableProperty TintImageProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_TrailingIconProperty" data-uid="Forms9Patch.SegmentedControl.TrailingIconProperty">TrailingIconProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the trailing image property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TrailingIconProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_TrailingImageProperty" data-uid="Forms9Patch.SegmentedControl.TrailingImageProperty">TrailingImageProperty</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use TrailingIconProperty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TrailingIconProperty&quot;)]
+public static readonly BindableProperty TrailingImageProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_VerticalTextAlignmentProperty" data-uid="Forms9Patch.SegmentedControl.VerticalTextAlignmentProperty">VerticalTextAlignmentProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the vertical text alignment property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty VerticalTextAlignmentProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_AutoFit_" data-uid="Forms9Patch.SegmentedControl.AutoFit*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_AutoFit" data-uid="Forms9Patch.SegmentedControl.AutoFit">AutoFit</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the AutoFit property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AutoFit AutoFit { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.AutoFit.html">AutoFit</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_BackgroundColor_" data-uid="Forms9Patch.SegmentedControl.BackgroundColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_BackgroundColor" data-uid="Forms9Patch.SegmentedControl.BackgroundColor">BackgroundColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the color of the background.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color BackgroundColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the background.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_DarkTheme_" data-uid="Forms9Patch.SegmentedControl.DarkTheme*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_DarkTheme" data-uid="Forms9Patch.SegmentedControl.DarkTheme">DarkTheme</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.Button.html">Button</a> if for a dark theme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DarkTheme { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if dark theme; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_FontAttributes_" data-uid="Forms9Patch.SegmentedControl.FontAttributes*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_FontAttributes" data-uid="Forms9Patch.SegmentedControl.FontAttributes">FontAttributes</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the font attributes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FontAttributes FontAttributes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.fontattributes">FontAttributes</a></td>
+        <td><p>The font attributes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_FontColor_" data-uid="Forms9Patch.SegmentedControl.FontColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_FontColor" data-uid="Forms9Patch.SegmentedControl.FontColor">FontColor</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use TextColor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TextColor&quot;)]
+public Color FontColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_FontFamily_" data-uid="Forms9Patch.SegmentedControl.FontFamily*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_FontFamily" data-uid="Forms9Patch.SegmentedControl.FontFamily">FontFamily</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the font family.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FontFamily { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>The font family.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_FontSize_" data-uid="Forms9Patch.SegmentedControl.FontSize*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_FontSize" data-uid="Forms9Patch.SegmentedControl.FontSize">FontSize</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the size of the font.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double FontSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><p>The size of the font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_GroupToggleBehavior_" data-uid="Forms9Patch.SegmentedControl.GroupToggleBehavior*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_GroupToggleBehavior" data-uid="Forms9Patch.SegmentedControl.GroupToggleBehavior">GroupToggleBehavior</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the MaterialSegmentControl's Toggle behavior.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GroupToggleBehavior GroupToggleBehavior { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.GroupToggleBehavior.html">GroupToggleBehavior</a></td>
+        <td><p>The Toggle behavior (None, Radio, Multiselect).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_HapticEffect_" data-uid="Forms9Patch.SegmentedControl.HapticEffect*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_HapticEffect" data-uid="Forms9Patch.SegmentedControl.HapticEffect">HapticEffect</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the haptic effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HapticEffect HapticEffect { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.HapticEffect.html">HapticEffect</a></td>
+        <td><p>The haptic effect.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_HapticMode_" data-uid="Forms9Patch.SegmentedControl.HapticMode*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_HapticMode" data-uid="Forms9Patch.SegmentedControl.HapticMode">HapticMode</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the haptic mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KeyClicks HapticMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.KeyClicks.html">KeyClicks</a></td>
+        <td><p>The haptic mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_HasTightSpacing_" data-uid="Forms9Patch.SegmentedControl.HasTightSpacing*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_HasTightSpacing" data-uid="Forms9Patch.SegmentedControl.HasTightSpacing">HasTightSpacing</h4>
+  <div class="markdown level1 summary"><p>Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasTightSpacing { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if has tight spacing; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_HorizontalTextAlignment_" data-uid="Forms9Patch.SegmentedControl.HorizontalTextAlignment*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_HorizontalTextAlignment" data-uid="Forms9Patch.SegmentedControl.HorizontalTextAlignment">HorizontalTextAlignment</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the horizontal text alignment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextAlignment HorizontalTextAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.textalignment">TextAlignment</a></td>
+        <td><p>The horizontal text alignment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_IntraSegmentOrientation_" data-uid="Forms9Patch.SegmentedControl.IntraSegmentOrientation*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_IntraSegmentOrientation" data-uid="Forms9Patch.SegmentedControl.IntraSegmentOrientation">IntraSegmentOrientation</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the orientation of elements within the segments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StackOrientation IntraSegmentOrientation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.stackorientation">StackOrientation</a></td>
+        <td><p>The orientation of the elements within the segments.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_IntraSegmentSpacing_" data-uid="Forms9Patch.SegmentedControl.IntraSegmentSpacing*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_IntraSegmentSpacing" data-uid="Forms9Patch.SegmentedControl.IntraSegmentSpacing">IntraSegmentSpacing</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the intra segment spacing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double IntraSegmentSpacing { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><p>The intra segment spacing.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_LineBreakMode_" data-uid="Forms9Patch.SegmentedControl.LineBreakMode*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_LineBreakMode" data-uid="Forms9Patch.SegmentedControl.LineBreakMode">LineBreakMode</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the LineBreakMode property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LineBreakMode LineBreakMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.linebreakmode">LineBreakMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Lines_" data-uid="Forms9Patch.SegmentedControl.Lines*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Lines" data-uid="Forms9Patch.SegmentedControl.Lines">Lines</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the Lines property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Lines { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_MinFontSize_" data-uid="Forms9Patch.SegmentedControl.MinFontSize*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_MinFontSize" data-uid="Forms9Patch.SegmentedControl.MinFontSize">MinFontSize</h4>
+  <div class="markdown level1 summary"><p>Gets/Sets the MinFontSize property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MinFontSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Orientation_" data-uid="Forms9Patch.SegmentedControl.Orientation*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Orientation" data-uid="Forms9Patch.SegmentedControl.Orientation">Orientation</h4>
+  <div class="markdown level1 summary"><p>controls the orientation of the segments relative to eachother</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StackOrientation Orientation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.stackorientation">StackOrientation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Padding_" data-uid="Forms9Patch.SegmentedControl.Padding*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Padding" data-uid="Forms9Patch.SegmentedControl.Padding">Padding</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the padding for SegmentedControl's segments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Thickness Padding { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.thickness">Thickness</a></td>
+        <td><p>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Segments_" data-uid="Forms9Patch.SegmentedControl.Segments*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Segments" data-uid="Forms9Patch.SegmentedControl.Segments">Segments</h4>
+  <div class="markdown level1 summary"><p>The container for the Segmented Control's buttons.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;Segment&gt; Segments { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="Forms9Patch.Segment.html">Segment</a>&gt;</td>
+        <td><p>The buttons.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectedBackgroundColor_" data-uid="Forms9Patch.SegmentedControl.SelectedBackgroundColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectedBackgroundColor" data-uid="Forms9Patch.SegmentedControl.SelectedBackgroundColor">SelectedBackgroundColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the background color used when selected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color SelectedBackgroundColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The selected background.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectedFontColor_" data-uid="Forms9Patch.SegmentedControl.SelectedFontColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectedFontColor" data-uid="Forms9Patch.SegmentedControl.SelectedFontColor">SelectedFontColor</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use SelectedTextColor property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use SelectedTextColor&quot;)]
+public Color SelectedFontColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the selected font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectedIndexes_" data-uid="Forms9Patch.SegmentedControl.SelectedIndexes*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectedIndexes" data-uid="Forms9Patch.SegmentedControl.SelectedIndexes">SelectedIndexes</h4>
+  <div class="markdown level1 summary"><p>Gets the selected index(es).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;int&gt; SelectedIndexes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td><p>The selected index(es).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectedSegments_" data-uid="Forms9Patch.SegmentedControl.SelectedSegments*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectedSegments" data-uid="Forms9Patch.SegmentedControl.SelectedSegments">SelectedSegments</h4>
+  <div class="markdown level1 summary"><p>Gets the selected segments(s).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Segment&gt; SelectedSegments { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.Segment.html">Segment</a>&gt;</td>
+        <td><p>The selected segment(s).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectedTextColor_" data-uid="Forms9Patch.SegmentedControl.SelectedTextColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectedTextColor" data-uid="Forms9Patch.SegmentedControl.SelectedTextColor">SelectedTextColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the color of the selected font.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color SelectedTextColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the selected font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SeparatorWidth_" data-uid="Forms9Patch.SegmentedControl.SeparatorWidth*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SeparatorWidth" data-uid="Forms9Patch.SegmentedControl.SeparatorWidth">SeparatorWidth</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the width of the separator.  Uses OutlineWidth by default (-1).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SeparatorWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The width of the separator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_StickyBehavior_" data-uid="Forms9Patch.SegmentedControl.StickyBehavior*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_StickyBehavior" data-uid="Forms9Patch.SegmentedControl.StickyBehavior">StickyBehavior</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use ToggleBehavior instead.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;StickyBehavior property is obsolete, use ToggleBehavior instead&quot;, true)]
+public bool StickyBehavior { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TextColor_" data-uid="Forms9Patch.SegmentedControl.TextColor*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TextColor" data-uid="Forms9Patch.SegmentedControl.TextColor">TextColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the color of the font.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color TextColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TintIcon_" data-uid="Forms9Patch.SegmentedControl.TintIcon*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TintIcon" data-uid="Forms9Patch.SegmentedControl.TintIcon">TintIcon</h4>
+  <div class="markdown level1 summary"><p>Will the TextColor be applied to the IconImage image?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TintIcon { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> tint IconImage image with TextColor; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TintImage_" data-uid="Forms9Patch.SegmentedControl.TintImage*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TintImage" data-uid="Forms9Patch.SegmentedControl.TintImage">TintImage</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use TintIcon property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TintIcon&quot;, true)]
+public bool TintImage { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TrailingIcon_" data-uid="Forms9Patch.SegmentedControl.TrailingIcon*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TrailingIcon" data-uid="Forms9Patch.SegmentedControl.TrailingIcon">TrailingIcon</h4>
+  <div class="markdown level1 summary"><p>Gets or sets if the image is to be rendered after the text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TrailingIcon { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>default=false</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TrailingImage_" data-uid="Forms9Patch.SegmentedControl.TrailingImage*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TrailingImage" data-uid="Forms9Patch.SegmentedControl.TrailingImage">TrailingImage</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use TrailingIcon</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use TrailingIcon&quot;)]
+public bool TrailingImage { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_VerticalTextAlignment_" data-uid="Forms9Patch.SegmentedControl.VerticalTextAlignment*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_VerticalTextAlignment" data-uid="Forms9Patch.SegmentedControl.VerticalTextAlignment">VerticalTextAlignment</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the vertical text alignment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextAlignment VerticalTextAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.textalignment">TextAlignment</a></td>
+        <td><p>The vertical text alignment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_DeselectAll_" data-uid="Forms9Patch.SegmentedControl.DeselectAll*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_DeselectAll" data-uid="Forms9Patch.SegmentedControl.DeselectAll">DeselectAll()</h4>
+  <div class="markdown level1 summary"><p>Deselects all segments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeselectAll()</code></pre>
+  </div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_DeselectIndex_" data-uid="Forms9Patch.SegmentedControl.DeselectIndex*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_DeselectIndex_System_Int32_" data-uid="Forms9Patch.SegmentedControl.DeselectIndex(System.Int32)">DeselectIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Deselected the segment at index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeselectIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Dispose_" data-uid="Forms9Patch.SegmentedControl.Dispose*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Dispose" data-uid="Forms9Patch.SegmentedControl.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Dispose of Forms9Patch.SegmentedControl element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_Dispose_" data-uid="Forms9Patch.SegmentedControl.Dispose*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_Dispose_System_Boolean_" data-uid="Forms9Patch.SegmentedControl.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Dispose the specified disposing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td><p>Disposing.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_IsIndexSelected_" data-uid="Forms9Patch.SegmentedControl.IsIndexSelected*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_IsIndexSelected_System_Int32_" data-uid="Forms9Patch.SegmentedControl.IsIndexSelected(System.Int32)">IsIndexSelected(Int32)</h4>
+  <div class="markdown level1 summary"><p>Answers the question: Is an index selected?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsIndexSelected(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_LayoutChildren_" data-uid="Forms9Patch.SegmentedControl.LayoutChildren*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_LayoutChildren_System_Double_System_Double_System_Double_System_Double_" data-uid="Forms9Patch.SegmentedControl.LayoutChildren(System.Double,System.Double,System.Double,System.Double)">LayoutChildren(Double, Double, Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Positions and sizes the children of a Layout.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void LayoutChildren(double x, double y, double width, double height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>A value representing the x coordinate of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>A value representing the y coordinate of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>A value representing the width of the child region bounding box.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>A value representing the height of the child region bounding box.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">ManualLayout.LayoutChildren(Double, Double, Double, Double)</a></div>
+  <h5 id="Forms9Patch_SegmentedControl_LayoutChildren_System_Double_System_Double_System_Double_System_Double__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementors wishing to change the default behavior of a Layout should override this method. It is suggested to
+still call the base method and modify its calculated results.</p>
+</div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_OnMeasure_" data-uid="Forms9Patch.SegmentedControl.OnMeasure*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_OnMeasure_System_Double_System_Double_" data-uid="Forms9Patch.SegmentedControl.OnMeasure(System.Double,System.Double)">OnMeasure(Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Processes a measurement request</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">widthConstraint</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">heightConstraint</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.sizerequest">SizeRequest</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OnMeasure_System_Double_System_Double_">ManualLayout.OnMeasure(Double, Double)</a></div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_OnPropertyChanged_" data-uid="Forms9Patch.SegmentedControl.OnPropertyChanged*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_OnPropertyChanged_System_String_" data-uid="Forms9Patch.SegmentedControl.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
+  <div class="markdown level1 summary"><p>Call this method from a child class to notify that a change happened on a property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPropertyChanged(string propertyName = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td><p>The name of the property that changed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_OnPropertyChanged_System_String_">ManualLayout.OnPropertyChanged(String)</a></div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectAll_" data-uid="Forms9Patch.SegmentedControl.SelectAll*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectAll" data-uid="Forms9Patch.SegmentedControl.SelectAll">SelectAll()</h4>
+  <div class="markdown level1 summary"><p>Selects all segments</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SelectAll()</code></pre>
+  </div>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SelectIndex_" data-uid="Forms9Patch.SegmentedControl.SelectIndex*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SelectIndex_System_Int32_" data-uid="Forms9Patch.SegmentedControl.SelectIndex(System.Int32)">SelectIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Selects the segment at index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SelectIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>segment index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_TapIndex_" data-uid="Forms9Patch.SegmentedControl.TapIndex*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_TapIndex_System_Int32_" data-uid="Forms9Patch.SegmentedControl.TapIndex(System.Int32)">TapIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Taps the index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TapIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SegmentLongPressed" data-uid="Forms9Patch.SegmentedControl.SegmentLongPressed">SegmentLongPressed</h4>
+  <div class="markdown level1 summary"><p>Occurs when segment long pressed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SegmentedControlEventHandler SegmentLongPressed</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.SegmentedControlEventHandler.html">SegmentedControlEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SegmentLongPressing" data-uid="Forms9Patch.SegmentedControl.SegmentLongPressing">SegmentLongPressing</h4>
+  <div class="markdown level1 summary"><p>Occurs when segment long pressing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SegmentedControlEventHandler SegmentLongPressing</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.SegmentedControlEventHandler.html">SegmentedControlEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SegmentSelected" data-uid="Forms9Patch.SegmentedControl.SegmentSelected">SegmentSelected</h4>
+  <div class="markdown level1 summary"><p>Occurs when one of the segments is selected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SegmentedControlEventHandler SegmentSelected</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.SegmentedControlEventHandler.html">SegmentedControlEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_SegmentedControl_SegmentTapped" data-uid="Forms9Patch.SegmentedControl.SegmentTapped">SegmentTapped</h4>
+  <div class="markdown level1 summary"><p>Occurs when one of the segments is tapped.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SegmentedControlEventHandler SegmentTapped</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.SegmentedControlEventHandler.html">SegmentedControlEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">System.ComponentModel.INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">Xamarin.Forms.IAnimatable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">Xamarin.Forms.IViewController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">Xamarin.Forms.IVisualElementController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">Xamarin.Forms.IElementController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayout">Xamarin.Forms.ILayout</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ilayoutcontroller">Xamarin.Forms.ILayoutController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontainer-1">Xamarin.Forms.IViewContainer&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ILayout.html">ILayout</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IBackground.html">IBackground</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IShape.html">IShape</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IElement.html">IElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ILabelStyle.html">ILabelStyle</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IFontElement.html">IFontElement</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HostingPage_Xamarin_Forms_Element_">ElementExtensions.HostingPage(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_TopPage_Xamarin_Forms_Element_">ElementExtensions.TopPage(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Parent__1_Xamarin_Forms_Element_">ElementExtensions.Parent&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_ParentInheritedFrom__1_Xamarin_Forms_Element_">ElementExtensions.ParentInheritedFrom&lt;T&gt;(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_IsInNativeLayout_Xamarin_Forms_VisualElement_">ElementExtensions.IsInNativeLayout(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_">ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_">FontExtensions.LineHeight(IFontElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_Forms9Patch_IFontElement_">FontExtensions.LineSpace(IFontElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Xamarin_Forms_View_">HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.AddHardwareKeyListener(View, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, String, HardwareKeyModifierKeys)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Xamarin_Forms_View_">HardwareKeyListenerExtensions.HardwareKeyFocus(View)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_Xamarin_Forms_VisualElement_">HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Xamarin_Forms_Element_Xamarin_Forms_Element_">VisualElementExtensions.IsDescendentOf(Element, Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsAncestorOf_Xamarin_Forms_Element_Xamarin_Forms_Element_">VisualElementExtensions.IsAncestorOf(Element, Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToWinCoord_Xamarin_Forms_VisualElement_">VisualElementExtensions.BoundsToWinCoord(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_">VisualElementExtensions.BoundsToEleCoord(VisualElement, VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToWinCoord_Xamarin_Forms_VisualElement_">VisualElementExtensions.LocationToWinCoord(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_">VisualElementExtensions.LocationToEleCoord(VisualElement, VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_HitTest_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_">VisualElementExtensions.HitTest(VisualElement, Point, VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToWinCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_">VisualElementExtensions.ToWinCoord(VisualElement, Point)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_">VisualElementExtensions.ToEleCoord(VisualElement, Point, VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_">VisualElementExtensions.WinToEleCoord(VisualElement, Point)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_">VisualElementExtensions.WinToEleCoord(VisualElement, Rectangle)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_GestureListener_Xamarin_Forms_VisualElement_">VisualElementExtensions.GestureListener(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithPropertyAndOfType__1_Xamarin_Forms_VisualElement_System_String_System_Collections_Generic_List___0__">VisualElementExtensions.FindChildrenWithPropertyAndOfType&lt;T&gt;(VisualElement, String, List&lt;T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithProperty_Xamarin_Forms_VisualElement_System_String_">VisualElementExtensions.FindChildrenWithProperty(VisualElement, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindVisualElementsOfType__1_Xamarin_Forms_VisualElement_">VisualElementExtensions.FindVisualElementsOfType&lt;T&gt;(VisualElement)</a>
+  </div>
+  <div>
+      <a class="xref" href="FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildWithFocus_Xamarin_Forms_Element_">VisualElementExtensions.FindChildWithFocus(Element)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperty_System_Object_System_String_">ReflectionExtensions.GetProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyNames_System_Object_">ReflectionExtensions.PropertyNames(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_PropertyExists_System_Object_System_String_">ReflectionExtensions.PropertyExists(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_HasProperty_System_Object_System_String_">ReflectionExtensions.HasProperty(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetPropertyValue_System_Object_System_String_">ReflectionExtensions.GetPropertyValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetPropertyValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetPropertyValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetFieldValue_System_Object_System_String_">ReflectionExtensions.GetFieldValue(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_SetFieldValue_System_Object_System_String_System_Object_">ReflectionExtensions.SetFieldValue(Object, String, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_CallMethod_System_Object_System_String_System_Object___">ReflectionExtensions.CallMethod(Object, String, Object[])</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
