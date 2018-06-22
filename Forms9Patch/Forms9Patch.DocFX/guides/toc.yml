@@ -1,6 +1,8 @@
-- name: Getting Started for Windows VisualStudio 2017
+- name: "Getting Started: VisualStudio 2017 for Windows"
   href: GettingStartedWindows.md
-- name: Working with the Forms9Patch.Image visual element
+- name: "Getting Started: VisualStudio 2017 for Mac"
+  href: GettingStartedMac.md
+- name: Working with the Forms9Patch.Image element
   href: Image.md
 - name: Working with Forms9Patch.ImageSource element
   href: ImageSource.md

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Forms9Patch Guides | Forms9Patch </title>
+    <title>System Requirements | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Forms9Patch Guides | Forms9Patch ">
+    <meta name="title" content="System Requirements | Forms9Patch ">
     <meta name="generator" content="docfx 2.36.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -77,12 +77,20 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="forms9patch-guides">Forms9Patch Guides</h1>
+<h1 id="system-requirements">System Requirements</h1>
 
-<p>Using any new framework can be a bit intimidating.  These guides are meant to walk you
-through the basics of Forms9Patch - helping you get started as soon as possible and
-making your experience with Xamarin.Forms just a little bit easier.</p>
-<p>Before you begin, check out the <a href="../notes/SystemRequirements.html">system requirements</a> to be sure your application and development environment is ready.</p>
+<p>Forms9Patch is an enhancement to Xamarin.Forms.  As such, first be sure you've met the <a href="https://developer.xamarin.com/guides/cross-platform/getting_started/requirements/">Xamarin.Forms system requirements</a>.</p>
+<p>Additionally:</p>
+<ul>
+<li><p>Forms9Patch requires Xamarin.Forms version 2.4.0.280 or newer.</p>
+</li>
+<li><p>To use the <code>background-color</code> style attribute within <code>Forms9Patch.Label.HtmlText</code> markup text in UWP applications, your UWP applications will need to be built with a minimum Windows version of 10.0.16299.0 (Windows 10 Fall Creators Update).</p>
+</li>
+<li><p>To build your Android apps, you will need to add the following to your Android application project's <code>Resources/values/strings.xml</code> file:</p>
+<pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
+</code></pre>
+</li>
+</ul>
 </article>
           </div>
           

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Getting Started: VisualStudio 2017 for Windows | Forms9Patch </title>
+    <title>Getting Started: VisualStudio 2017 for Mac | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Getting Started: VisualStudio 2017 for Windows | Forms9Patch ">
+    <meta name="title" content="Getting Started: VisualStudio 2017 for Mac | Forms9Patch ">
     <meta name="generator" content="docfx 2.36.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -77,7 +77,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="getting-started-visualstudio-2017-for-windows">Getting Started: VisualStudio 2017 for Windows</h1>
+<h1 id="getting-started-visualstudio-2017-for-mac">Getting Started: VisualStudio 2017 for Mac</h1>
 
 <p>Before you begin, check out the <a href="../notes/SystemRequirements.html">system requirements</a> to be sure your application and development environment is ready.</p>
 <p>This walk through demonstrates how to create an application that displays a label which is marked-up to show a phone number and email link.  Tapping on those links will present a pop-up that asks permission to proceed with the phone call or email.</p>
@@ -85,33 +85,53 @@
 <ol>
 <li><p>Launch VisualStudio.</p>
 </li>
-<li><p>Create a new Xamarin Forms project by clicking <strong>File | New | Project</strong> menu item.</p>
+<li><p>Create a new Xamarin Forms project by clicking <strong>File | New Solution</strong> menu item.  The <strong>New Project</strong> dialog will appear.</p>
+<p><img src="images/GettingStartedMac/NewProject1.png" alt="New Project Dialog Page 1"></p>
 </li>
-<li><p>In the New Project dialog, browse to <strong>Installed | Visual C# | Cross-Platform</strong>, select the <strong>Mobile App (Xamarin.Forms)</strong> template, set the Name and Solution name to <code>LinkTest</code>, assure a suitable location for the project and click the <strong>[OK]</strong> button:</p>
-<p><img src="images/GettingStartedWindows/NewProjectDialog.png" alt="New Project Dialog 1"></p>
+<li><p>Select <strong>Multiplatform | App</strong> in the left navigation pad.  Select <strong>Xamarin.Forms | Blank Forms App</strong> from the list of templates.  Click <strong>[Next]</strong>.  The second <strong>New Project</strong> dialog will appear.</p>
+<p><img src="images/GettingStartedMac/NewProject2.png" alt="New Project Dialog Page 2"></p>
 </li>
-<li><p>In the New Cross Platform App dialog, select the <strong>Blank App</strong> template, select <strong>.Net Standard</strong> Code Sharing Strategy, and then click the <strong>[OK]</strong> button:</p>
-<p><img src="images/GettingStartedWindows/NewCrossPlatformApp.png" alt="Guides Getting Started New Cross Platform App"></p>
+<li><p>Enter <code>LinkTest</code> for the <strong>App Name:</strong>, select <strong>Use .NET Standard</strong> for the <strong>Shared Code:</strong>, and click <strong>[Next]</strong>.  The third <strong>New Project</strong> dialog will appear.</p>
+<p><img src="images/GettingStartedMac/NewProject3.png" alt="New Project Dialog Page 3"></p>
 </li>
-<li><p>Add the Forms9Patch Nuget package to each of your solution's projects:</p>
+<li><p>Your project settings should be as above.  Click <strong>[Create]</strong> to start the project creation process.  When complete, you will have a new project with the <code>MainPage.xaml</code> file open.</p>
+<p><img src="images/GettingStartedMac/VirginProject.png" alt="Virgin Project"></p>
+</li>
+<li><p>Add the Forms9Patch NuGet package to each of the solution's projects:</p>
+<h3 id="shared-code-project">Shared Code Project</h3>
 <ul>
-<li><p>In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:</p>
-<p><img src="images/GettingStartedWindows/ManageNugetPackagesForSolution.png" alt="Guides Getting Started Manage Nuget Packages For Solution"></p>
+<li><p>Expand the <strong>Dependencies</strong> folder in the <strong>LinkTest</strong> project.</p>
+<p><img src="images/GettingStartedMac/NuGetFolder.png" alt="Dependencies Expanded"></p>
 </li>
-<li><p>... select the Browse tab ...:</p>
-<p><img src="images/GettingStartedWindows/SelectTheBrowseTab.png" alt="Guides Getting Started Select The Browse Tab"></p>
+<li><p>Right click on the <strong>NuGet</strong> folder.  The options pop-up menu will appear.</p>
+<p><img src="images/GettingStartedMac/AddPackages.png" alt="Add Packages pop-up"></p>
 </li>
-<li><p>... and search for &quot;Forms9Patch&quot;:</p>
-<p><img src="images/GettingStartedWindows/SearchForForms9Patch.png" alt="Guides Getting Started Search For Forms9 Patch"></p>
+<li><p>Select <strong>Add Packages...</strong>.  The <strong>Add Packages</strong> dialog will appear.</p>
+<p><img src="images/GettingStartedMac/AddForms9PatchNuget.png" alt="Add Packages dialog"></p>
 </li>
-<li><p>Select the Forms9Patch Nuget package:</p>
-<p><img src="images/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png" alt="Guides Getting Started Select The Forms9 Patch Nuget Package"></p>
+<li><p>Enter <code>Forms9Patch</code> into the search box (top right).  When the <strong>Forms9Patch</strong> package appears, select it and then click <strong>[Add Package]</strong> to add it to the <strong>LinkTest</strong> project.</p>
 </li>
-<li><p>Apply it to all of your solution's projects by selecting the check box at the top of the project selection column:</p>
-<p><img src="images/GettingStartedWindows/SelectAllProjects.png" alt="Guides Getting Started Select All Projects"></p>
+</ul>
+<h3 id="android-platform-project">Android Platform Project</h3>
+<ul>
+<li><p>Expand the <strong>LinkTest.Droid</strong> project.</p>
+<p><img src="images/GettingStartedMac/AndroidProjectExpand1.png" alt="Android Project expanded"></p>
 </li>
-<li><p>Be sure the latest stable package is selected and then click [Install]:</p>
-<p><img src="images/GettingStartedWindows/ClickInstall.png" alt="Guides Getting Started Click Install"></p>
+<li><p>Double click on the <strong>Packages</strong> folder to open the <strong>Add Packages</strong> dialog.</p>
+<p><img src="images/GettingStartedMac/AddPackages2.png" alt="Add Packages dialog 2"></p>
+</li>
+<li><p>If you just completed the <strong>Shared Code Project</strong> instructions, above, then <strong>Forms9Patch</strong> will be shown as the first package (as shown in the above image).  Otherwise, enter <code>Forms9Patch</code> into the search box (top right).  When the <strong>Forms9Patch</strong> package appears, select it and then click <strong>[Add Package]</strong> to add it to the <strong>LinkTest</strong> project.</p>
+</li>
+</ul>
+<h3 id="ios-platform-project">iOS Platform Project</h3>
+<ul>
+<li><p>Expand the <strong>LinkTest.iOS</strong> project.</p>
+<p><img src="images/GettingStartedMac/iOsProjectExpand1.png" alt="Android Project expanded"></p>
+</li>
+<li><p>Double click on the <strong>Packages</strong> folder to open the <strong>Add Packages</strong> dialog.</p>
+<p><img src="images/GettingStartedMac/AddPackages2.png" alt="Add Packages dialog 2"></p>
+</li>
+<li><p>If you just completed the <strong>Shared Code Project</strong> instructions, above, then <strong>Forms9Patch</strong> will be shown as the first package (as shown in the above image).  Otherwise, enter <code>Forms9Patch</code> into the search box (top right).  When the <strong>Forms9Patch</strong> package appears, select it and then click <strong>[Add Package]</strong> to add it to the <strong>LinkTest</strong> project.</p>
 </li>
 </ul>
 </li>
@@ -135,20 +155,6 @@
 <pre><code class="lang-csharp">    global::Xamarin.Forms.Forms.Init();
     Forms9Patch.iOS.Settings.Initialize(this);
     LoadApplication(new App());
-</code></pre>
-</li>
-</ol>
-<h3 id="uwp">UWP</h3>
-<ol>
-<li><p>Open App.xaml.cs in your solution's UWP platform project.</p>
-</li>
-<li><p>Find the following line</p>
-<pre><code class="lang-csharp">        Xamarin.Forms.Forms.Init(e);
-</code></pre>
-</li>
-<li><p>... and <strong>replace</strong> it with the following lines:</p>
-<pre><code class="lang-csharp">        Xamarin.Forms.Forms.Init(e, Forms9Patch.UWP.Settings.AssembliesToInclude);
-        Forms9Patch.UWP.Settings.Initialize(this);
 </code></pre>
 </li>
 </ol>
@@ -188,7 +194,7 @@
 </li>
 </ol>
 </li>
-<li><p>Modify your application's MainPage source code (MainPage.xaml.cs) using the following code so it will respond to clicks / taps on the <code>Forms9Patch.Label</code> action links.</p>
+<li><p>Modify your share code's MainPage source code (<code>MainPage.xaml.cs</code>) using the following code so it will respond to clicks / taps on the <code>Forms9Patch.Label</code> action links.</p>
 <pre><code class="lang-csharp">using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -200,7 +206,6 @@ using Xamarin.Forms.Xaml;
 
 namespace LinkTest
 {
-    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         public MainPage()
@@ -240,23 +245,22 @@ namespace LinkTest
 </li>
 <li><p><strong>IMPORTANT ANDROID INSTRUCTION:</strong> In order for the Android platform project to build, you will need to add an Android string resource for Forms9Patch's copy authority.</p>
 <ul>
-<li><p>Right click on the <strong>LinkTest.Droid</strong> project in the <strong>Solution Pad</strong> (right) to present the Android project actions.  Click on <strong>Properties</strong> to open the Andriod platform project's <strong>Project Options</strong> dialog.</p>
-<p><img src="images/GettingStartedWindows/AndroidProjectProperties.png" alt="Android Application Settings"></p>
+<li><p>Double click on the <strong>LinkTest.Droid</strong> project in the <strong>Solution Pad</strong> (left) to open the Android platform project's <strong>Project Options</strong> dialog.</p>
+<p><img src="images/GettingStartedMac/GetPackageName.png" alt="Android Application Settings"></p>
 </li>
-<li><p>Navigate to the <strong>Android Manifest</strong> section of the <strong>LinkTest.Android</strong> project properties editor.  Copy value in the <strong>Package Name</strong> field.  You'll need that value in one of the steps, below.</p>
-<p><img src="images/GettingStartedWindows/PackageName.png" alt="Package Name"></p>
+<li><p>Navigate to the <strong>Build | Android Application</strong> page and copy value in the <strong>Package Name</strong> field.  You'll need that value in one of the steps, below.  Close the <strong>Project Options</strong> dialog by clicking the <strong>[OK]</strong> button.</p>
 </li>
-<li><p>In the <strong>Solution Explorer Pad</strong> (right), navigate to the <strong>Resource | values</strong> folder in the <strong>LinkTest.Droid</strong> platform project.</p>
+<li><p>In the <strong>Solution Explorer Pad</strong>, navigate to the <strong>Resource | values</strong> folder in the <strong>LinkTest.Droid</strong> platform project.</p>
 </li>
-<li><p>Right click on the <strong>LinkTest.Droid  | Resource | values</strong> folder.  The folder actions pop-up will appear.  Select <strong>Add | New Item ...</strong>.  The <strong>New File</strong> dialog will appear.</p>
-<p><img src="images/GettingStartedWindows/ResourcesValuesAddNewItem.png" alt="Create strings.xml resource file 1"></p>
-<p><img src="images/GettingStartedWindows/AddNewItemDialog.png" alt="Create strings.xml resource file 2"></p>
+<li><p>Right click on the <strong>LinkTest.Droid  | Resource | values</strong> folder.  The folder actions pop-up will appear.  Select <strong>Add | New File ..</strong>.  The <strong>New File</strong> dialog will appear.</p>
+<p><img src="images/GettingStartedMac/CreateStringsXml1.png" alt="Create strings.xml resource file 1"></p>
+<p><img src="images/GettingStartedMac/CreateStringsXml2.png" alt="Create strings.xml resource file 2"></p>
 </li>
-<li><p>Navicate to <strong>Visual C# | Data</strong> and select the <strong>XML</strong> file template.  Enter <code>strings.xml</code> for the <strong>Name</strong>, and then click <strong>[Add]</strong>.  The <code>strings.xml</code> file will be created and shown in the editor.</p>
+<li><p>Select <strong>XML</strong> file template, enter <code>strings.xml</code> for the <strong>Name</strong>, and then click <strong>[New]</strong>.  The <code>strings.xml</code> file will be created and shown in the editor.</p>
 </li>
 <li><p>Add the following lines to the <code>strings.xml</code> file - replacing <code>PASTE_PACKAGE_NAME_HERE</code> with the package name you copied, above.</p>
 <pre><code class="lang-xml">&lt;resources&gt;
-     &lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;PASTE_PACKAGE_NAME_HERE.f9pcopypaste&lt;/string&gt;
+    &lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;PASTE_PACKAGE_NAME_HERE.f9pcopypaste&lt;/string&gt;
 &lt;/resources&gt;
 </code></pre>
 </li>
@@ -264,31 +268,47 @@ namespace LinkTest
 </li>
 </ul>
 </li>
-<li><p>Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?</p>
+<li><p>Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on a Mac, how about running LinkTest.iOS?</p>
 <ul>
-<li><p>Go to the Startup Project Selection drop down and sel ect the <code>LinkTest.UWP (Universal Windows)</code> project</p>
-<p><img src="images/GettingStartedWindows/SelectLinkTest.UWP.png" alt="Select LinkTest.UWP Project"></p>
+<li><p>Go to the Startup Project Selection drop down and select the <code>LinkTest.iOS</code> project</p>
+<p><img src="images/GettingStartedMac/ChangeTarget.png" alt="ChangeProject"></p>
 </li>
-<li><p>Click the <strong>[&gt; LocalMachine]</strong> button to start the build-run process</p>
+<li><p>Click the <strong>[▶]</strong> button to start the build-run process</p>
 </li>
-<li><p>After the build is complete, the package will deploy to Windows and you will see the following application:</p>
-<p><img src="images/GettingStartedWindows/TestLink.UWP.Application.Window.1.png" alt="TestLink.UWP Application Window"></p>
+<li><p>After the build is complete, the iOS Simulator will start and VisualStudio will deploy the app's package.</p>
 </li>
 <li><p>Click on any of the links and you should see something like the following:</p>
-<p><img src="images/GettingStartedWindows/TestLink.UWP.Application.Window.2.png" alt="TestLink.UWP Application Window"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img src="images/GettingStartedMac/iOsScreenShot1.png" alt="TestLink.iOS Application Window"></th>
+<th style="text-align: center;"><img src="images/GettingStartedMac/iOsScreenShot2.png" alt="TestLink.iOS Phone Link"></th>
+<th style="text-align: center;"><img src="images/GettingStartedMac/iOsScreenShot3.png" alt="TestLink.iOS Email Link"></th>
+</tr>
+</thead>
+</table>
 </li>
 </ul>
 </li>
 <li><p>Try changing the Startup Project to <code>TestLink.Android</code> and run it on an x86 based Android emulator.</p>
 <ul>
-<li><p>Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android project's <code>Resources/Values/string.xml</code> file,before you can build your Android project.</p>
-<pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
+<li><p>As mentioned earlier: because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android project's <code>Resources/Values/string.xml</code> file,before you can build your Android project.</p>
+<pre><code class="lang-xml">&lt;string&gt;name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
 </code></pre>
 <p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.</p>
 </li>
-<li><p>BE SURE YOU DON'T RUN IT ON AN <strong>ARM</strong> EMULATOR.</p>
+<li><p>BE SURE YOU DON'T RUN IT ON AN <strong>ARM</strong> BASED EMULATOR.</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img src="images/GettingStartedMac/AndroidScreenShot1.png" alt="Android Screen Shot 1"></th>
+<th style="text-align: center;"><img src="images/GettingStartedMac/AndroidScreenShot2.png" alt="Android Screen Shot 1"></th>
+<th style="text-align: center;"><img src="images/GettingStartedMac/AndroidScreenShot3.png" alt="Android Screen Shot 1"></th>
+</tr>
+</thead>
+</table>
 </li>
 </ol>
 </article>

@@ -6036,6 +6036,19 @@ references:
   commentId: T:Forms9Patch.IKeyboardService
   fullName: Forms9Patch.IKeyboardService
   nameWithType: IKeyboardService
+- uid: Forms9Patch.IKeyboardService.Height
+  name: Height
+  href: api/Forms9Patch.IKeyboardService.html#Forms9Patch_IKeyboardService_Height
+  commentId: P:Forms9Patch.IKeyboardService.Height
+  fullName: Forms9Patch.IKeyboardService.Height
+  nameWithType: IKeyboardService.Height
+- uid: Forms9Patch.IKeyboardService.Height*
+  name: Height
+  href: api/Forms9Patch.IKeyboardService.html#Forms9Patch_IKeyboardService_Height_
+  commentId: Overload:Forms9Patch.IKeyboardService.Height
+  isSpec: "True"
+  fullName: Forms9Patch.IKeyboardService.Height
+  nameWithType: IKeyboardService.Height
 - uid: Forms9Patch.IKeyboardService.Hide
   name: Hide()
   href: api/Forms9Patch.IKeyboardService.html#Forms9Patch_IKeyboardService_Hide
@@ -7297,6 +7310,38 @@ references:
   commentId: T:Forms9Patch.KeyboardService
   fullName: Forms9Patch.KeyboardService
   nameWithType: KeyboardService
+- uid: Forms9Patch.KeyboardService.Activate
+  name: Activate()
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_Activate
+  commentId: M:Forms9Patch.KeyboardService.Activate
+  fullName: Forms9Patch.KeyboardService.Activate()
+  nameWithType: KeyboardService.Activate()
+- uid: Forms9Patch.KeyboardService.Activate*
+  name: Activate
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_Activate_
+  commentId: Overload:Forms9Patch.KeyboardService.Activate
+  isSpec: "True"
+  fullName: Forms9Patch.KeyboardService.Activate
+  nameWithType: KeyboardService.Activate
+- uid: Forms9Patch.KeyboardService.Height
+  name: Height
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_Height
+  commentId: P:Forms9Patch.KeyboardService.Height
+  fullName: Forms9Patch.KeyboardService.Height
+  nameWithType: KeyboardService.Height
+- uid: Forms9Patch.KeyboardService.Height*
+  name: Height
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_Height_
+  commentId: Overload:Forms9Patch.KeyboardService.Height
+  isSpec: "True"
+  fullName: Forms9Patch.KeyboardService.Height
+  nameWithType: KeyboardService.Height
+- uid: Forms9Patch.KeyboardService.HeightChanged
+  name: HeightChanged
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_HeightChanged
+  commentId: E:Forms9Patch.KeyboardService.HeightChanged
+  fullName: Forms9Patch.KeyboardService.HeightChanged
+  nameWithType: KeyboardService.HeightChanged
 - uid: Forms9Patch.KeyboardService.Hidden
   name: Hidden
   href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_Hidden
@@ -7342,6 +7387,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.KeyboardService.LanguageRegion
   nameWithType: KeyboardService.LanguageRegion
+- uid: Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
+  name: OnHeightChanged(Double)
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnHeightChanged_System_Double_
+  commentId: M:Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
+  fullName: Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
+  nameWithType: KeyboardService.OnHeightChanged(Double)
+- uid: Forms9Patch.KeyboardService.OnHeightChanged*
+  name: OnHeightChanged
+  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnHeightChanged_
+  commentId: Overload:Forms9Patch.KeyboardService.OnHeightChanged
+  isSpec: "True"
+  fullName: Forms9Patch.KeyboardService.OnHeightChanged
+  nameWithType: KeyboardService.OnHeightChanged
 - uid: Forms9Patch.KeyboardService.OnVisiblityChange(Forms9Patch.KeyboardVisibilityChange)
   name: OnVisiblityChange(KeyboardVisibilityChange)
   href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnVisiblityChange_Forms9Patch_KeyboardVisibilityChange_

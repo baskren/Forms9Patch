@@ -77,53 +77,40 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="using-forms9patchimage">Using <code>Forms9Patch.Image</code></h1>
+<h1 id="using-forms9patchimage">Using Forms9Patch.Image</h1>
 
-<p><code>Forms9Patch.Image</code> extends <code>Xamarin.Forms.Image</code> to provide Xamarin.Forms with
-a patch scalable image element, the ability to tile an image within its alloted
-bounds, and the rendering of SVG images.  The ImageSource for the
-<code>Forms9Patch.Image</code> element can be specified either as a
-<code>Forms9Patch.ImageSource</code> or a <code>Xamarin.Forms.ImageSource</code>. Supported file
-formats are NinePatch (<code>.9.png</code>), <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code>, <code>.gif</code>, <code>.bmp</code>,
-<code>.bmpf</code>, and <code>.svg</code>.</p>
-<p>iOS's UIKit provides <code>resizableImageWithCapInsets:</code> to make an UIImage a patch scalable
-image.  The <code>capInset</code> argument is used to specify the regions (distance inset
-from the edges) which will not scale (or scale in only one direction) when the
-image is stretched to fill it's parent view.  Similarly, Android provides
-<code>NinePatchDrawable</code> to allow apps to display Nine-patch images as scalable
-drawing elements.  The Nine-patch image format is used to specify the regions
-that are allowed scale when the image is stretched to fill it's parent view.</p>
-<p>Both approaches have their advantages.  Unlike iOS's <code>resizableImageWithCapInsets:</code>,
-Android's and Forms9Patch's use of the Nine-patch image format allows for unscalable
-regions to be anywhere in the image (not just at the edges).  And, because the
-scaled regions are marked within the image file, scaling can be customized to
-each file.  On the other hand, <code>resizableImageWithCapInsets:</code> provides the
-ability to define the scaling regions at runtime - which provides some
-flexibility and convenience.</p>
-<p>Seeing advantages to each approach, <code>Forms9Patch.Image</code> allows for both.  If a
-NinePatch image is provided, <code>Forms9Patch.Image</code> uses it's scalable region marking.<br>
-If the <code>CapsInset</code> property is set, <code>Forms9Patch.Image</code> will use it to set the
-unscalable edges - which means <code>CapsInset</code> will always override NinePatch regions.</p>
-<p><code>Xamarin.Forms.Image</code> provides the Aspect property to indicate how an image will
-fill its bounds.  <code>Forms9Patch.Image</code> does not support the <code>Aspect</code> property.<br>
-Rather, it has the <code>Fill</code> property.  The <code>Fill</code> property supports the <code>Aspect</code> property's
-<code>AspectFill</code>, <code>AspectFit</code>, and <code>Fill</code> values and adds the <code>Tile</code> value for easy
-management of textures.  See the <a href="https://github.com/baskren/Forms9PatchDemo">Forms9PatchDemo app</a>
-for examples of it in action.</p>
-<h2 id="ninepatch-images">NinePatch images</h2>
-<p>Let's describe the use of <code>Forms9Patch.Image</code> for NinePatch images through an example.<br>
-Say you want to display a pop-up message bubble where the tip is centered.<br>
-Because they can have multiple scalable regions, the Nine-patch format works
-great for this.  Starting with a .png of the bubble, use a NinePatch editor,
-like Android's <code>Draw 9-patch</code> to mark the horizontal and vertical stretchable regions.</p>
-<pre><code>| **Before marking** | **After marking** |
-|---|---|
-|![bubble.png](images/Image/bubble.png) | ![bubble.9.png](images/Image/bubble.9.png)|
-|`bubble.png` | `bubble.9.png` |
-|200x122 | 202x124|
-</code></pre>
-<p>After adding <code>bubble.9.png</code> to your cross-platfrom project as an EmbeddedResource,
-you can display it using something like the following:</p>
+<p><code>Forms9Patch.Image</code> extends <code>Xamarin.Forms.Image</code> to provide Xamarin.Forms with a patch scalable image element, the ability to tile an image within its alloted bounds, and the rendering of SVG images.  The ImageSource for the <code>Forms9Patch.Image</code> element can be specified either as a <code>Forms9Patch.ImageSource</code> or a <code>Xamarin.Forms.ImageSource</code>. Supported file formats are NinePatch (<code>.9.png</code>), <code>.png</code>, <code>.jpg</code>, <code>.jpeg</code>, <code>.gif</code>, <code>.bmp</code>, <code>.bmpf</code>, and <code>.svg</code>.</p>
+<h2 id="background">Background</h2>
+<p>iOS's UIKit provides <code>resizableImageWithCapInsets:</code> to make an UIImage a patch scalable image.  The <code>capInset</code> argument is used to specify the regions (distance inset from the edges) which will not scale (or scale in only one direction) when the image is stretched to fill it's parent view.  Similarly, Android provides <code>NinePatchDrawable</code> to allow apps to display Nine-patch images as scalable drawing elements.  The Nine-patch image format is used to specify the regions that are allowed to scale when the image is stretched to fill it's parent view.</p>
+<p>Both approaches have their advantages.  Unlike iOS's <code>resizableImageWithCapInsets:</code>, Android's and Forms9Patch's use of the Nine-patch image format allows for unscalable regions to be anywhere in the image (not just at the edges).  And, because the scaled regions are marked within the image file, scaling can be customized to each file.  On the other hand, <code>resizableImageWithCapInsets:</code> provides the ability to define the scaling regions at runtime - which provides additional flexibility and convenience.</p>
+<p>Seeing advantages to each approach, <code>Forms9Patch.Image</code> allows for both.  If a NinePatch image is provided, <code>Forms9Patch.Image</code> uses it's scalable region marking.  If the <code>CapsInset</code> property is set, <code>Forms9Patch.Image</code> will use it to set the unscalable edges - which means <code>CapsInset</code> will always override NinePatch regions.</p>
+<p>`## Xamarin.Forms.Image.Aspect vs. Forms9Patch.Image.Fill</p>
+<p><code>Xamarin.Forms.Image</code> provides the Aspect property to indicate how an image will fill its bounds.  <code>Forms9Patch.Image</code> does not support the <code>Aspect</code> property.  Rather, it has the <code>Fill</code> property.  The <code>Fill</code> property supports the <code>Aspect</code> property's <code>AspectFill</code>, <code>AspectFit</code>, and <code>Fill</code> values and adds the <code>Tile</code> value for easy management of textures.  See the <a href="https://github.com/baskren/Forms9PatchDemo">Forms9PatchDemo app</a> for examples of it in action.</p>
+<h2 id="ninepatch-image-example">NinePatch image example</h2>
+<p>Let's describe the use of <code>Forms9Patch.Image</code> for NinePatch images through an example.  Say you want to display a pop-up message bubble where the tip is centered.  Because they can have multiple scalable regions, the Nine-patch format works great for this.  Starting with a .png of the bubble, use a NinePatch editor, like Android's <code>Draw 9-patch</code> to mark the horizontal and vertical stretchable regions.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Before marking</strong></th>
+<th style="text-align: center;"><strong>After marking</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img src="images/Image/bubble.png" alt="bubble.png"></td>
+<td style="text-align: center;"><img src="images/Image/bubble.9.png" alt="bubble.9.png"></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>bubble.png</code></td>
+<td style="text-align: center;"><code>bubble.9.png</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">200x122</td>
+<td style="text-align: center;">202x124</td>
+</tr>
+</tbody>
+</table>
+<p>After adding <code>bubble.9.png</code> to your cross-platform project as an EmbeddedResource, you can display it using something like the following:</p>
 <pre><code class="lang-csharp">var bubbleImage = new Forms9Patch.Image ()
 {
     Source = ImageSource.FromResource(&quot;MyDemoApp.Resources.bubble.9.png&quot;),
@@ -139,14 +126,22 @@ var label = new label ()
 <p><img src="images/Image/bubbleScreenshotIOS.png" alt="bubbleScreenshotIOS.png"></p>
 <h2 id="capsinset-property">CapsInset Property</h2>
 <h3 id="coding-the-capsinset-property">Coding the <code>CapsInset</code> Property</h3>
-<p>The <code>CapInset</code> property is used to specify the regions (distance inset from the
-edges) which will not scale when the image is stretched to fill it's parent view.<br>
-For example, let's make the following image a banner by scaling it horizontally.</p>
-<pre><code>| ![redribbon.png](images/Image/redribbon.png) |
-| --- |
-| **ResourceID:** MyDemoApp.Resources.Images.redribbon.png |
-| **Image Size:** 308x80 |
-</code></pre>
+<p>The <code>CapInset</code> property is used to specify the regions (distance inset from the edges) which will not scale when the image is stretched to fill it's parent view.  For example, let's make the following image a banner by scaling it horizontally.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img src="images/Image/redribbon.png" alt="redribbon.png"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>ResourceID:</strong> MyDemoApp.Resources.Images.redribbon.png</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Image Size:</strong> 308x80</td>
+</tr>
+</tbody>
+</table>
 <p>Load it using <code>Xamarin.Forms.ImageSource</code> as the source to <code>Forms9Patch.Image</code> and then, set the <code>CapInsets</code> property:</p>
 <pre><code class="lang-csharp">var label1 = new Label ()
 {
@@ -166,16 +161,22 @@ var image2 = new Forms9Patch.Image ()
     CapInsets = new Thickness(23, 0, 110, 0),
 }
 </code></pre>
-<pre><code>| **iPhone** | **Android** |
-|------------|-------------|
-| ![iPhone screen shot](images/Image/ribbonIOS.png) | ![Android scren shot](images/Image/ribbonAndroid.png) |
-</code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>iPhone</strong></th>
+<th><strong>Android</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="images/Image/ribbonIOS.png" alt="iPhone screen shot"></td>
+<td><img src="images/Image/ribbonAndroid.png" alt="Android scren shot"></td>
+</tr>
+</tbody>
+</table>
 <h3 id="xaml-example-for-capsinset">XAML Example for <code>CapsInset</code></h3>
-<p>To use <code>Forms9Patch.Image</code> in your XAML, you will have to add the <code>Forms9Patch</code>
-namespace (from the <code>Forms9Patch</code> assembly) and then use <code>Forms9Patch.Image</code> where
-desired.  Also note that, if you want to use Embedded Resource images, you will
-need to add an XAML markup extension to the assembly that contains those images
-(see <a href="ImageSource.html">Using <code>Forms9Patch.ImageSource</code></a>).  For example:</p>
+<p>To use <code>Forms9Patch.Image</code> in your XAML, you will have to add the <code>Forms9Patch</code> namespace (from the <code>Forms9Patch</code> assembly) and then use <code>Forms9Patch.Image</code> where desired.  Also note that, if you want to use Embedded Resource images, you will need to add an XAML markup extension to the assembly that contains those images (see <a href="ImageSource.html">Using <code>Forms9Patch.ImageSource</code></a>).  For example:</p>
 <pre><code class="lang-XML">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;ContentPage
     xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
@@ -199,28 +200,18 @@ need to add an XAML markup extension to the assembly that contains those images
 &lt;/ContentPage&gt;
 </code></pre>
 <h2 id="embedded-resource-convenience-constructor">Embedded Resource Convenience Constructor</h2>
-<p>If you do most of your layouts in code (rather than XAML), there are tasks you
-repeat very often.  And because they are repeated so often, a shorter version
-of that task would be convenient.  If you often use <code>Forms9Patch.ImageSource.FromMultiResource</code>,
-<code>Forms9Patch.ImageSource.FromResource</code>, or <code>Xamarin.Forms.ImageSource.FromResource</code>
-as the source for your <code>Forms9Patch.Image</code> or <code>Xamarin.Forms.Image</code>, you will be
-happy to know that you can instead pass the EmbeddedResourceId as an parameter
-to the <code>Forms9Patch.Image</code> constructor.</p>
-<pre><code class="lang-csharp">    var image = new Forms9Patch.Image(&quot;Forms9PatchDemo.Resources.Images.redribbon&quot;);
+<p>If you do most of your layouts in code (rather than XAML), there are tasks you repeat very often.  And because they are repeated so often, a shorter version
+of that task would be convenient.  If you often use <code>Forms9Patch.ImageSource.FromMultiResource</code>, <code>Forms9Patch.ImageSource.FromResource</code>, or <code>Xamarin.Forms.ImageSource.FromResource</code> as the source for your <code>Forms9Patch.Image</code> or <code>Xamarin.Forms.Image</code>, you will be happy to know that you can instead pass the EmbeddedResourceId as an parameter to the <code>Forms9Patch.Image</code> constructor.</p>
+<pre><code class="lang-csharp">var image = new Forms9Patch.Image(&quot;Forms9PatchDemo.Resources.Images.redribbon&quot;);
 </code></pre>
 <h2 id="fill-property">Fill Property</h2>
-<p><code>Forms9Patch.Image.Fill</code> property is almost identical to <code>Xamarin.Forms.Image.Aspect</code>
-property.  It is only different in that it uses <code>Forms9Patch.Fill</code> instead of
-<code>Xamarin.Forms.Aspect</code> - which means it also supports <code>Forms9Patch.Fill.Tile</code>
-to direct <code>Forms9Patch.Image</code> to tile a source image in the image layout.</p>
+<p><code>Forms9Patch.Image.Fill</code> property is almost identical to <code>Xamarin.Forms.Image.Aspect</code> property.  It is only different in that it uses <code>Forms9Patch.Fill</code> instead of <code>Xamarin.Forms.Aspect</code> - which means it also supports <code>Forms9Patch.Fill.Tile</code> to direct <code>Forms9Patch.Image</code> to tile a source image in the image layout.</p>
 <h2 id="tintcolor-property">TintColor Property</h2>
-<p>There are times where it is desireable to theme an app at runtime.  One way of doing
-this is by changing the color of monochrome images (often used as icons).  Forms9Patch
-makes this easy by giving <code>Forms9Patch.Image</code> the <code>TintColor</code> property.</p>
-<pre><code class="lang-csharp">    var image = new Forms9Patch.Image(&quot;MyApp.Resource.Printer.png&quot;)
-    {
-        TintColor = Color.Blue
-    };
+<p>There are times where it is desireable to theme an app at runtime.  One way of doing this is by changing the color of monochrome images (often used as icons). Forms9Patch makes this easy by giving <code>Forms9Patch.Image</code> the <code>TintColor</code> property.</p>
+<pre><code class="lang-csharp">var image = new Forms9Patch.Image(&quot;MyApp.Resource.Printer.png&quot;)
+{
+    TintColor = Color.Blue
+};
 </code></pre>
 <table>
 <thead>
@@ -236,28 +227,14 @@ makes this easy by giving <code>Forms9Patch.Image</code> the <code>TintColor</co
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> The <code>TintColor</code> property is intented for use with <em>raster</em> images that have and
-makes use of the transparent color plane.  Results will likely be undesireable
-for other types of raster images.  This property is ignored for vector (<code>.svg</code>)
-images.</p>
+<p><strong>Note:</strong> The <code>TintColor</code> property is intented for use with <em>raster</em> images that have and makes use of the transparent color plane.  Results will likely be undesireable for other types of raster images.  This property is ignored for vector (<code>.svg</code>) images.</p>
 <h2 id="sourceimagesize-property">SourceImageSize Property</h2>
-<p>Want to be sure you got the image you intended to ask for?  This question can come up
-when you're doing cross platform development.  The SourceImageSize property can help
-with this by giving you the size of the ImageSource being used for the image.</p>
-<p><strong>NOTE:</strong> For NinePatch images (<code>.9.png</code>), the value returned <strong>does not</strong> include
-the two extra pixels in width and height for the NinePatch markup.</p>
+<p>Want to be sure you got the image you intended to ask for?  This question can come up when you're doing cross platform development.  The SourceImageSize property can help with this by giving you the size of the ImageSource being used for the image.</p>
+<p><strong>NOTE:</strong> For NinePatch images (<code>.9.png</code>), the value returned <strong>does not</strong> include the two extra pixels in width and height for the NinePatch markup.</p>
 <h2 id="antialias-property">AntiAlias Property</h2>
-<p><code>Xamarin.Forms</code> relies on the platform image elements to render images.  A small
-performance improvement can be had by not applying an anti-alias algorithm to the
-image during rendering.  Just as <code>Xamarin.Forms</code>, <code>Forms9Patch.Image</code> preforms this
-anti-alias step by default. However, if you're upscaling an image a bit much and you
-don't care about some pixalization, then you want a little more performance by
-settting this property to <code>true</code>.</p>
+<p><code>Xamarin.Forms</code> relies on the platform image elements to render images.  A small performance improvement can be had by not applying an anti-alias algorithm to the image during rendering.  Just as <code>Xamarin.Forms</code>, <code>Forms9Patch.Image</code> preforms this anti-alias step by default. However, if you're upscaling an image a bit much and you don't care about some pixalization, then you want a little more performance by setting this property to <code>true</code>.</p>
 <h2 id="backgroundcolor-property">BackgroundColor Property</h2>
-<p>What?  Why would an image need a background color?  Well, usually it wouldn't <em>but</em>
-images with transparent regions (<code>.png</code> and <code>.svg</code>) create an opportunity.  Just as
-you can use the <code>TintColor</code> to theme a monocrome raster image, you can use <code>BackgroundColor</code>
-to them the transparent regions of such an image.  Cool, huh?</p>
+<p>What?  Why would an image need a background color?  Well, usually it wouldn't <em>but</em> images with transparent regions (<code>.png</code> and <code>.svg</code>) create an opportunity.  Just as you can use the <code>TintColor</code> to theme a monocrome raster image, you can use <code>BackgroundColor</code> to them the transparent regions of such an image.  Cool, huh?</p>
 <table>
 <thead>
 <tr>
@@ -274,86 +251,83 @@ to them the transparent regions of such an image.  Cool, huh?</p>
 </table>
 <p>Note the corners are rounded on this image!</p>
 <h2 id="outline-and-shape-properties">Outline and Shape Properties</h2>
-<p>Taking things a step further than we did with the BackgroundColor property, why not
-be able to continue to dress up the image?  Clipping an image to a shape and/or adding a border
-are two common operations applied to images when they are used as app assets.  Since this is so
-common, Forms9Patch has them built-in.  To set the shape, use the <code>ElementShape</code> property (which
-takes a <code>Forms9Patch.ElementShape</code> value).  Available values are:</p>
-<pre><code>| ElementShape     | Description                           | Full Blead Image Exmaple                                  |
-|------------------|---------------------------------------|-----------------------------------------------------------|
-| Rectangle        | pretty much the same as &quot;don't clip&quot;  | ![Rectangle](images/Image/Shape.Rectangle.png)  |
-|------------------|---------------------------------------|-----------------------------------------------------------|
-| Square           | clip the longest side to be the same  |  ![Square](images/Image/Shape.Square.png)       |
-</code></pre>
+<p>Taking things a step further than we did with the BackgroundColor property, why not be able to continue to dress up the image?  Clipping an image to a shape and/or adding a border are two common operations applied to images when they are used as app assets.  Since this is so common, Forms9Patch has them built-in.  To set the shape, use the <code>ElementShape</code> property (which takes a <code>Forms9Patch.ElementShape</code> value).  Available values are:</p>
 <table>
 <thead>
 <tr>
+<th>ElementShape</th>
+<th>Description</th>
+<th>Full Bleed Image Exmaple</th>
 <th></th>
-<th>length as the shortest side</th>
+<th></th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Rectangle</td>
+<td>pretty much the same as &quot;don't clip&quot;</td>
+<td><img src="images/Image/Shape.Rectangle.png" alt="Rectangle"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Square</td>
+<td>clip the longest side to be the same length as the shortest side</td>
+<td><img src="images/Image/Shape.Square.png" alt="Square"></td>
 <td>Circle</td>
-<td>because, circle clipped head shots</td>
+<td>because, circle clipped head shots are so 2015</td>
 <td><img src="images/Image/Shape.Circle.png" alt="Circle"></td>
-</tr>
-<tr>
-<td></td>
-<td>are so 2015</td>
-<td></td>
-</tr>
-<tr>
-<td>------------------</td>
-<td>---------------------------------------</td>
-<td>-----------------------------------------------------------</td>
 </tr>
 <tr>
 <td>Ellipse</td>
 <td>still waiting for this one to be cool</td>
 <td><img src="images/Image/Shape.Ellipse.png" alt="Ellipse"></td>
-</tr>
-<tr>
-<td>------------------</td>
-<td>---------------------------------------</td>
-<td>-----------------------------------------------------------</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>Obround</td>
-<td>embarrased how long it took me to</td>
+<td>embarrased how long it took me to  find out there was a name for this</td>
 <td><img src="images/Image/Shape.Obround.png" alt="Obround"></td>
-</tr>
-<tr>
 <td></td>
-<td>find out there was a name for this</td>
 <td></td>
-</tr>
-<tr>
-<td>------------------</td>
-<td>---------------------------------------</td>
-<td>-----------------------------------------------------------</td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p>And, if you used <code>Xamarin.Forms.Frame</code> before, Forms9Patch's Outline properties will seem familiar:</p>
-<pre><code>| Property      | Description                                 | Transparent PNG Example                                            |
-</code></pre>
-<p>|---------------|---------------------------------------------|--------------------------------------------------------------------|
-| OutlineColor  | Color of Forms9Patch ElementShape's outline | <img src="images/Image/Printer.OutlineColor.png" alt="OutlineColor">   |
-|---------------|---------------------------------------------|--------------------------------------------------------------------|
-| OutlineWidth  | Width of Forms9Patch ElementShape's outline | <img src="images/Image/Printer.OutlineWidth.png" alt="OutlineWidth">   |
-|---------------|---------------------------------------------|--------------------------------------------------------------------|
-| OutlineRadius | Forms9Patch Element's corner radius. Only   | <img src="images/Image/Printer.OutlineRadius.png" alt="OutlineRadius"> |
-|               | applies to <code>Rectangle</code> and <code>Square</code> shapes  |                                                                    |
-|---------------|---------------------------------------------|--------------------------------------------------------------------|</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Transparent PNG Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OutlineColor</td>
+<td>Color of Forms9Patch ElementShape's outline</td>
+<td><img src="images/Image/Printer.OutlineColor.png" alt="OutlineColor"></td>
+</tr>
+<tr>
+<td>OutlineWidth</td>
+<td>Width of Forms9Patch ElementShape's outline</td>
+<td><img src="images/Image/Printer.OutlineWidth.png" alt="OutlineWidth"></td>
+</tr>
+<tr>
+<td>OutlineRadius</td>
+<td>Forms9Patch Element's corner radius. Only applies to <code>Rectangle</code> and <code>Square</code> shapes</td>
+<td><img src="images/Image/Printer.OutlineRadius.png" alt="OutlineRadius"></td>
+</tr>
+</tbody>
+</table>
 <h2 id="hasshadow-and-shadowinverted-properties">HasShadow and ShadowInverted Properties</h2>
-<p>Let's go out on limb and keep adding embelishments to the image.  Once you have the ability to impose a shape to your image,
-it is common to want a shadow to match the imposed shape.  <code>HasShadow</code> makes that happen.  And, going even further, <code>ShadowInverted</code>
-reverses the shadow to give a recessed effect to the shadow.</p>
-<p>Now, here is where Forms9Patch can do something a bit clever.  If the <code>ImageSource</code> is a *.png image <strong>with</strong> transparency in the image,
-the <code>HasShadow</code> property of Forms9Patch will impose the shadow on the overlap of the <code>ElementShape</code> <em>and</em> the non-transparent parts of
-the image!  NOTE: Setting <code>ShadowInverted</code> to true breaks this functionality.</p>
+<p>Let's go out on limb and keep adding embelishments to the image.  Once you have the ability to impose a shape to your image, it is common to want a shadow to match the imposed shape.  <code>HasShadow</code> makes that happen.  And, going even further, <code>ShadowInverted</code> reverses the shadow to give a recessed effect to the shadow.</p>
+<p>Now, here is where Forms9Patch can do something a bit clever.  If the <code>ImageSource</code> is a *.png image <strong>with</strong> transparency in the image, the <code>HasShadow</code> property of Forms9Patch will impose the shadow on the overlap of the <code>ElementShape</code> <em>and</em> the non-transparent parts of the image!  NOTE: Setting <code>ShadowInverted</code> to true breaks this functionality.</p>
 </article>
           </div>
           

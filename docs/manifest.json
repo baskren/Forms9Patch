@@ -14,11 +14,26 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "guides/GettingStartedMac.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/GettingStartedMac.html",
+          "hash": "y4v5sJz6uQExOl3FhLZdDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
       "source_relative_path": "guides/GettingStartedWindows.md",
       "output": {
         ".html": {
           "relative_path": "guides/GettingStartedWindows.html",
-          "hash": "rMFaWQ96e80nEe20I2kfGw=="
+          "hash": "y3YtwV5O4xq2vXp4vIucSQ=="
         }
       },
       "is_incremental": false,
@@ -30,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/Image.html",
-          "hash": "VKMsh/2ZC1GQj2hWuvihNw=="
+          "hash": "LpvDY78adKTw9EjDWC/q7Q=="
         }
       },
       "is_incremental": false,
@@ -42,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/ImageSource.html",
-          "hash": "NBsvvcs4/rRANqQeV7HeUA=="
+          "hash": "S+Oez+9fBuQ40Tmzmvvjcw=="
         }
       },
       "is_incremental": false,
@@ -55,6 +70,248 @@
         ".html": {
           "relative_path": "guides/Layouts.html",
           "hash": "fzl4YYYvVeLSWOSDPut/lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AddForms9PatchNuget.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AddForms9PatchNuget.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AddPackages.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AddPackages.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AddPackages2.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AddPackages2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AndroidProjectExpand1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AndroidProjectExpand1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AndroidScreenShot1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AndroidScreenShot1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AndroidScreenShot2.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AndroidScreenShot2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/AndroidScreenShot3.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/AndroidScreenShot3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/ChangeTarget.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/ChangeTarget.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/CreateStringsXml1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/CreateStringsXml1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/CreateStringsXml2.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/CreateStringsXml2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/GetPackageName.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/GetPackageName.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/NewProject1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/NewProject1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/NewProject2.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/NewProject2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/NewProject3.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/NewProject3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/NuGetFolder.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/NuGetFolder.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/VirginProject.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/VirginProject.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/iOsProjectExpand1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/iOsProjectExpand1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/iOsScreenShot1.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/iOsScreenShot1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/iOsScreenShot2.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/iOsScreenShot2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedMac/iOsScreenShot3.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedMac/iOsScreenShot3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedWindows/AddNewItemDialog.PNG",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedWindows/AddNewItemDialog.PNG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedWindows/AndroidProjectProperties.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedWindows/AndroidProjectProperties.png"
         }
       },
       "is_incremental": false,
@@ -99,6 +356,28 @@
       "output": {
         "resource": {
           "relative_path": "guides/images/GettingStartedWindows/NewProjectDialog.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedWindows/PackageName.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedWindows/PackageName.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/GettingStartedWindows/ResourcesValuesAddNewItem.PNG",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/GettingStartedWindows/ResourcesValuesAddNewItem.PNG"
         }
       },
       "is_incremental": false,
@@ -644,15 +923,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "guides/index.md",
       "output": {
         ".html": {
           "relative_path": "guides/index.html",
-          "hash": "2iql8SWj+ge5yHGh+iXpyg=="
+          "hash": "ytMd9Hl8gExg9h1BExWohA=="
         }
       },
       "is_incremental": false,
@@ -664,7 +940,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/toc.html",
-          "hash": "WaBRPEsJS+bRW2sXGQ1o1g=="
+          "hash": "/W+aKlTUQXIvU9uouwKIMQ=="
         }
       },
       "is_incremental": false,
@@ -679,19 +955,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "KWl7AJPvzTSyEwCVaSFOog=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "index.sample.md",
-      "output": {
-        ".html": {
-          "relative_path": "index.sample.html",
-          "hash": "GzQVkoDHBvrcLkHvUlgNrw=="
+          "hash": "9O4n5dN1tQOLwnVcs2mlgQ=="
         }
       },
       "is_incremental": false,
@@ -716,6 +980,18 @@
         ".html": {
           "relative_path": "notes/BuildingWithXamarin.FormsSource.html",
           "hash": "fcjnRFiqqmW417i7toR4Mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "notes/SystemRequirements.md",
+      "output": {
+        ".html": {
+          "relative_path": "notes/SystemRequirements.html",
+          "hash": "RiAf41Os4Wh59Bjtv7yZyg=="
         }
       },
       "is_incremental": false,
@@ -1435,7 +1711,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IKeyboardService.html",
-          "hash": "qxfBpynNVucQJSaWckd2Jg=="
+          "hash": "OgJ/940Viesv0+j5KuCdzA=="
         }
       },
       "is_incremental": false,
@@ -1651,7 +1927,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.KeyboardService.html",
-          "hash": "YYOloT2OA4ZCMnlMLK/+yQ=="
+          "hash": "7F1yXeb0dSxw1Y/k5LUZjQ=="
         }
       },
       "is_incremental": false,
@@ -2925,6 +3201,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -2932,11 +3213,6 @@
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
-          "incrementalPhase": "build"
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
