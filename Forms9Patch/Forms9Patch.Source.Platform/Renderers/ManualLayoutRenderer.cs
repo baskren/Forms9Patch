@@ -18,6 +18,11 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Manual layout renderer.
     /// </summary>
-    internal class ManualLayoutRenderer : F9pLayoutRenderer<ManualLayout> { }
+    internal class ManualLayoutRenderer : F9pLayoutRenderer<ManualLayout>
+    {
+#if __DROID__
+        public ManualLayoutRenderer(Android.Content.Context context) : base(context) { }
+#endif
+    }
 }
 

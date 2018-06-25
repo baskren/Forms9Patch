@@ -18,6 +18,11 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Absolute layout renderer.
     /// </summary>
-    internal class AbsoluteLayoutRenderer : F9pLayoutRenderer<AbsoluteLayout> { }
+    internal class AbsoluteLayoutRenderer : F9pLayoutRenderer<AbsoluteLayout>
+    {
+#if __DROID__
+        public AbsoluteLayoutRenderer(Android.Content.Context context) : base(context) { }
+#endif
+    }
 }
 

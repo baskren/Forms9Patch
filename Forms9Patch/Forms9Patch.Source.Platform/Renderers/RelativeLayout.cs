@@ -17,5 +17,10 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Relative layout renderer.
     /// </summary>
-    internal class RelativeLayoutRenderer : F9pLayoutRenderer<RelativeLayout> { }
+    internal class RelativeLayoutRenderer : F9pLayoutRenderer<RelativeLayout>
+    {
+#if __DROID__
+        public RelativeLayoutRenderer(Android.Content.Context context) : base(context) { }
+#endif
+    }
 }

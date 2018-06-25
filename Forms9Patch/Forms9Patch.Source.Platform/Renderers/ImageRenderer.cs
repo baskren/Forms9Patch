@@ -14,6 +14,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace Forms9Patch.iOS
 #elif __DROID__
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration;
 [assembly: ExportRenderer(typeof(Forms9Patch.Image), typeof(Forms9Patch.Droid.ImageRenderer))]
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
@@ -40,6 +41,15 @@ namespace Forms9Patch
 
         #region Constructor / disposal
         public ImageRenderer() => _instance = _instances++;
+
+#if __DROID__
+        public ImageRenderer(Android.Content.Context context) : base(context)
+        {
+            _instance = _instances++;
+        }
+
+#endif
+
         #endregion
 
 

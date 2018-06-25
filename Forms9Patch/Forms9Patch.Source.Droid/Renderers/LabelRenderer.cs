@@ -13,6 +13,7 @@ using Java.Interop;
 using System.Runtime.InteropServices;
 using Android.Drm;
 using Android.OS;
+using Xamarin.Forms.PlatformConfiguration;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.Droid.LabelRenderer))]
 namespace Forms9Patch.Droid
@@ -89,6 +90,14 @@ namespace Forms9Patch.Droid
             _instance = _instances++;
             AutoPackage = false;
         }
+
+#if __DROID__
+        public LabelRenderer(Android.Content.Context context) : base(context)
+        {
+            _instance = _instances++;
+            AutoPackage = false;
+        }
+#endif
 
         bool showDebugMsg
         {

@@ -14,6 +14,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace Forms9Patch.iOS
 #elif __DROID__
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration;
 [assembly: ExportRenderer(typeof(Forms9Patch.BubbleLayout), typeof(Forms9Patch.Droid.BubbleLayoutRenderer))]
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
@@ -46,6 +47,13 @@ namespace Forms9Patch
         {
             _instances = _instance++;
         }
+
+#if __DROID__
+        public BubbleLayoutRenderer(Android.Content.Context context) : base(context)
+        {
+            _instances = _instance++;
+        }
+#endif
 
         protected override void Dispose(bool disposing)
         {

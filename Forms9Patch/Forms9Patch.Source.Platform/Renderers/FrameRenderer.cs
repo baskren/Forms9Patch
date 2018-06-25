@@ -17,5 +17,10 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Frame renderer.
     /// </summary>
-    class FrameRenderer : F9pLayoutRenderer<Frame> { }
+    class FrameRenderer : F9pLayoutRenderer<Frame>
+    {
+#if __DROID__
+        public FrameRenderer(Android.Content.Context context) : base(context) { }
+#endif
+    }
 }

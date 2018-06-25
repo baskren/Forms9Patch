@@ -19,6 +19,7 @@ namespace Forms9Patch.iOS
 using Android.Runtime;
 using Android.Views;
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration;
 namespace Forms9Patch.Droid
 #elif WINDOWS_UWP
 using Windows.UI;
@@ -42,7 +43,11 @@ namespace Forms9Patch
 
 
         #region Constructor / Disposer
+#if __DROID__
+        public F9pLayoutRenderer(Android.Content.Context context) : base(context)
+#else
         public F9pLayoutRenderer()
+#endif
         {
             _instance = _instances++;
 

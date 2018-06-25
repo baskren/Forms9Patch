@@ -19,6 +19,7 @@ namespace Forms9Patch
     public class Button : Frame, IDisposable, IButton
     {
         #region Xamarin.Forms emulation properties
+        /*
         /// <summary>
         /// The border radius property.
         /// </summary>
@@ -32,6 +33,7 @@ namespace Forms9Patch
             get { return (int)GetValue(BorderRadiusProperty); }
             set { SetValue(BorderRadiusProperty, value); }
         }
+        */
 
         /// <summary>
         /// The border width property.
@@ -47,6 +49,7 @@ namespace Forms9Patch
             set { SetValue(BorderWidthProperty, value); }
         }
 
+        /*
         /// <summary>
         /// The border color property.
         /// </summary>
@@ -60,6 +63,7 @@ namespace Forms9Patch
             get { return (Color)GetValue(BorderColorProperty); }
             set { SetValue(BorderColorProperty, value); }
         }
+        */
 
         #endregion
 
@@ -1660,8 +1664,8 @@ namespace Forms9Patch
 
             if (propertyName == BorderWidthProperty.PropertyName)
                 OutlineWidth = (float)BorderWidth;
-            else if (propertyName == BorderRadiusProperty.PropertyName)
-                OutlineRadius = BorderRadius;
+            //else if (propertyName == BorderRadiusProperty.PropertyName)
+            //    OutlineRadius = BorderRadius;
             else if (propertyName == BorderColorProperty.PropertyName)
                 OutlineColor = BorderColor;
 
