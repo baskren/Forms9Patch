@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using FormsGestures;
+using System.Runtime.CompilerServices;
 
 namespace Forms9Patch
 {
@@ -18,8 +19,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View Content
         {
-            get => _bubbleLayout.Content; 
-            set => _bubbleLayout.Content = value; 
+            get => _bubbleLayout.Content;
+            set => _bubbleLayout.Content = value;
         }
         #endregion
 
@@ -34,7 +35,7 @@ namespace Forms9Patch
         /// <value>The target bias.</value>
         public double TargetBias
         {
-            get => (double)GetValue(TargetBiasProperty); 
+            get => (double)GetValue(TargetBiasProperty);
             set => SetValue(TargetBiasProperty, value);
         }
 
@@ -53,8 +54,8 @@ namespace Forms9Patch
         /// <value>The length of the pointer.</value>
         public float PointerLength
         {
-            get => (float)GetValue(PointerLengthProperty); 
-            set => SetValue(PointerLengthProperty, value); 
+            get => (float)GetValue(PointerLengthProperty);
+            set => SetValue(PointerLengthProperty, value);
         }
         #endregion
 
@@ -69,8 +70,8 @@ namespace Forms9Patch
         /// <value>The pointer tip radius.</value>
         public float PointerTipRadius
         {
-            get => (float)GetValue(PointerTipRadiusProperty); 
-            set => SetValue(PointerTipRadiusProperty, value); 
+            get => (float)GetValue(PointerTipRadiusProperty);
+            set => SetValue(PointerTipRadiusProperty, value);
         }
         #endregion
 
@@ -85,8 +86,8 @@ namespace Forms9Patch
         /// <value>The pointer direction.</value>
         public PointerDirection PointerDirection
         {
-            get => (PointerDirection)GetValue(PointerDirectionProperty); 
-            set => SetValue(PointerDirectionProperty, value); 
+            get => (PointerDirection)GetValue(PointerDirectionProperty);
+            set => SetValue(PointerDirectionProperty, value);
         }
         #endregion
 
@@ -100,8 +101,8 @@ namespace Forms9Patch
         /// </summary>
         public PointerDirection PreferredPointerDirection
         {
-            get => (PointerDirection)GetValue(PreferredPointerDirectionProperty); 
-            set => SetValue(PreferredPointerDirectionProperty, value); 
+            get => (PointerDirection)GetValue(PreferredPointerDirectionProperty);
+            set => SetValue(PreferredPointerDirectionProperty, value);
         }
         #endregion PreferredPointerDirection property
 
@@ -116,8 +117,8 @@ namespace Forms9Patch
         /// <value>The pointer corner radius.</value>
         public float PointerCornerRadius
         {
-            get => (float)GetValue(PointerCornerRadiusProperty); 
-            set => SetValue(PointerCornerRadiusProperty, value); 
+            get => (float)GetValue(PointerCornerRadiusProperty);
+            set => SetValue(PointerCornerRadiusProperty, value);
         }
         #endregion
 
@@ -131,8 +132,8 @@ namespace Forms9Patch
         /// </summary>
         internal float PointerAngle
         {
-            get => (float)GetValue(PointerAngleProperty); 
-            set => SetValue(PointerAngleProperty, value); 
+            get => (float)GetValue(PointerAngleProperty);
+            set => SetValue(PointerAngleProperty, value);
         }
         #endregion PointerAngle property
 
@@ -146,8 +147,8 @@ namespace Forms9Patch
         /// </summary>
         public Point Point
         {
-            get => (Point)GetValue(PointProperty); 
-            set => SetValue(PointProperty, value); 
+            get => (Point)GetValue(PointProperty);
+            set => SetValue(PointProperty, value);
         }
         #endregion Point property
 
@@ -210,33 +211,6 @@ namespace Forms9Patch
 
 
         #region Change management
-        /*
-        void OnParentSizeChanged(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("BubblePopup ParentSizeChanged (" + Application.Current.MainPage.Bounds + ")");
-            Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
-            {
-                var b = Application.Current.MainPage.Bounds;
-                LayoutChildren(b.X, b.Y, b.Width, b.Height);
-                return false;
-            });
-        }
-
-        /// <summary>
-        /// Ons the property changing.
-        /// </summary>
-        /// <param name="propertyName">Property name.</param>
-        protected override void OnPropertyChanging(string propertyName = null)
-        {
-            base.OnPropertyChanging(propertyName);
-            if (propertyName == "Parent")
-            {
-                var rootPage = Parent as RootPage;
-                if (rootPage != null)
-                    rootPage.SizeChanged -= OnParentSizeChanged;
-            }
-        }
-        */
 
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
@@ -305,7 +279,31 @@ namespace Forms9Patch
                     rootPage.SizeChanged += OnParentSizeChanged;
             }
             */
+
+            else if (propertyName == TargetProperty.PropertyName)
+            {
+                // we need to determine if the target is inside of a scroll view because the scroll view's ScrollOffset is set to zero on orientation changes.
+                if (Target.Parent<ScrollView>() is ScrollView scrollView)
+                    scrollView.Scrolled += OnScrollWrappingTargetScrolled;
+            }
         }
+
+        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+            if (propertyName == TargetProperty.PropertyName)
+            {
+                if (Target.Parent<ScrollView>() is ScrollView scrollView)
+                    scrollView.Scrolled -= OnScrollWrappingTargetScrolled;
+            }
+        }
+
+        void OnScrollWrappingTargetScrolled(object sender, ScrolledEventArgs e)
+        {
+            if (IsVisible)
+                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
+        }
+
         #endregion
 
 
@@ -334,6 +332,8 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
+
             if (_bubbleLayout?.Content == null)
                 return;
             var bounds = new Rectangle(x, y, width, height);
@@ -387,12 +387,25 @@ namespace Forms9Patch
                     // NOTE: Use of PageDescentBounds is deliberate.  It has different behavior on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
                     //       FormsGestures coordinate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
 
+                    System.Diagnostics.Debug.WriteLine("\t\t Target.Bounds=[" + Target.Bounds + "]");
+                    System.Diagnostics.Debug.WriteLine("\t\t targetPage.Bounds=[" + targetPage.Bounds + "]");
                     if (Target is PopupBase popup)
+                    {
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView);
-                    //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
+                        //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
+                        System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
+                        //targetBounds = targetPage.GetRelativeBounds(popup.DecorativeContainerView);
+                        //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
+                    }
                     else
+                    {
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
-                    //targetBounds = Target.BoundsToEleCoord(targetPage);
+                        //targetBounds = Target.BoundsToEleCoord(targetPage);
+                        System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
+                        //targetBounds = targetPage.GetRelativeBounds(Target);
+                        //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
+                    }
+
 
 
                     var reqSpaceToLeft = (UsePoint ? Point.X + targetBounds.Left : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
@@ -502,6 +515,7 @@ namespace Forms9Patch
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
                     {
+                        System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(rboxSize.Width, Point.X + targetBounds.Left, 0, width);
@@ -525,6 +539,7 @@ namespace Forms9Patch
                     }
                     else
                     {
+                        System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(rboxSize.Height, Point.Y + targetBounds.Top, 0, height);
@@ -547,7 +562,10 @@ namespace Forms9Patch
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
-                    LayoutChildIntoBoundingRegion(_bubbleLayout, new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height));
+                    var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
+                    LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
+                    System.Diagnostics.Debug.WriteLine("\t\t LayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
+                    System.Diagnostics.Debug.WriteLine("");
                 }
             }
         }
