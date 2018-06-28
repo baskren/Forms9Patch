@@ -8,5 +8,7 @@
   href: ImageSource.md
 - name: Forms9Patch layouts
   href: Layouts.md
+- name: Forms9Patch.Label
+  href: Label.md
 - name: Forms9Patch buttons
   href: Buttons.md

@@ -1209,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/toc.html",
-          "hash": "NfsEThQ2nLPKLtyZPbTBrg=="
+          "hash": "9oJ67RyK6CkYc9fZr9DPRQ=="
         }
       },
       "is_incremental": false,
@@ -1548,7 +1548,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ElementExtensions.html",
-          "hash": "tzYhcKmTuJOZvw1NZf1eAg=="
+          "hash": "nK3WA7fDbPGG42AyrK0uOA=="
         }
       },
       "is_incremental": false,
@@ -2940,7 +2940,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.VisualElementExtensions.html",
-          "hash": "aTB+bsF9ynsQ9ZilhxMe/Q=="
+          "hash": "0pH/rhz7/AGKdrEYnv1/WQ=="
         }
       },
       "is_incremental": false,
@@ -3000,7 +3000,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.CopyingExtensions.html",
-          "hash": "g4LfsIh8J0jhhysGn2aMyg=="
+          "hash": "fESF6aZ/TcY6j0040/cXng=="
         }
       },
       "is_incremental": false,
@@ -3252,7 +3252,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.IWeakEventManager.html",
-          "hash": "sS2vW0TKHHUnCErKeN3dHA=="
+          "hash": "zNNsSuoYqqB+PvzRxpnjuA=="
         }
       },
       "is_incremental": false,
@@ -3264,7 +3264,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.JsonExtensions.html",
-          "hash": "uI5xFBnESW7ipL4n/yDN2A=="
+          "hash": "ULDC25X7Pl4bPuva7ULbCA=="
         }
       },
       "is_incremental": false,
@@ -3396,7 +3396,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.WeakEventManager.html",
-          "hash": "7mKZyQSd35UbbjF2ON46+w=="
+          "hash": "iphP7OlIcnkaPdadCeG/5g=="
         }
       },
       "is_incremental": false,
