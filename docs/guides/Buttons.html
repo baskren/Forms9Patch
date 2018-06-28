@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Using Forms9Patch Button Elements | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Using Forms9Patch Button Elements | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="using-forms9patch-button-elements">Using Forms9Patch Button Elements</h1>
+
+<h2 id="background">Background</h2>
+<p>I often say Forms9Patch was originally written for the purpose of having NinePatch images in Xamarin.Forms.  That's not completely true.  I wanted NinePatch images because I had used them in Android as the background image for device independent buttons.  Quite frankly,what I really wanted was SVG backgrounds but all the pieces to do that were not available at that time.  Fortunately, things have changed and now - via Forms9Patch - I have both!</p>
+<p>Another missing element for Android and Xamarin.Forms is a SegmentedControl (like iOS has). Building a SegmentedControl was a bit painful for me in Android and I dreaded what it would take in Xamarin.  However, when I actually rolled up my sleeves and did it, I fell in love with what the Xamarin team had done.  I was sold!</p>
+<h2 id="overview">Overview</h2>
+<p>Forms9Patch has three button elements:</p>
+<ul>
+<li>Button</li>
+<li>StateButton¹</li>
+<li>SegmentedControl</li>
+</ul>
+<p>All three buttons share a number of properties and behaviors for the purpose of giving you more design and functional options without more complexity.</p>
+<h3 id="forms9patchbutton">Forms9Patch.Button</h3>
+<p><code>Forms9Patch.Button</code> is the most basic, adding the following to what <code>Xamarin.Forms.Button</code> provides:</p>
+<ul>
+<li>Horizontal and vertical alignment of button's text</li>
+<li>Text and Background color for the selected state</li>
+<li>Outline and clip shape:
+<ul>
+<li>Rectangle</li>
+<li>Square</li>
+<li>Circle</li>
+<li>Ellipse</li>
+<li>Obround</li>
+</ul>
+</li>
+<li>Toggle behavior</li>
+<li>Background image</li>
+<li>Icon as an image or as HTML text</li>
+<li>Icon to text positioning:
+<ul>
+<li>horizontal vs. vertical orientation</li>
+<li>icon before or after text</li>
+<li>spacing between icon and text</li>
+</ul>
+</li>
+<li>Haptics (when available)</li>
+</ul>
+<h3 id="forms9patchstatebutton">Forms9Patch.StateButton</h3>
+<p><code>Forms9Patch.StateButton</code> further extends <code>Forms9Patch.Button</code> by adding the ability to toggle its properties as a function of its state.  The states are:</p>
+<ul>
+<li>DefaultState</li>
+<li>PressingState</li>
+<li>SelectedState</li>
+<li>DisabledState</li>
+<li>DisabledAndSelectedState</li>
+</ul>
+<p><strong>NOTE</strong> ¹ : As of Xamarin.Forms 3+, I recommend not using <code>Forms9Patch.StateButton</code>.  Rather, use <code>Forms9Patch.Button</code> in combination with Xamarin.Forms' new <a href="https://blog.xamarin.com/xamarin-forms-3-0-released/"><strong>Visual State Manager</strong></a>.  Visual State Manager is a great feature and I'm looking forward to using it!</p>
+<h3 id="forms9patchsegmentedcontrol">Forms9Patch.SegmentedControl</h3>
+<p>iOS has a segmented control that, for the life of me, I don't know why isn't standard in Android, UWP, or Xamarin.Forms.  It's just too useful.  That being said, if I remember correctly, even the iOS segmented control doesn't support a vertical layout (please correct me if I'm wrong).</p>
+<p><img src="images/Buttons/SegmentedControl.png" alt="SegmentedControl"></p>
+<h2 id="using-forms9patchs-buttons">Using Forms9Patch's buttons</h2>
+<h3 id="layout-and-decoration-properties">Layout and Decoration Properties</h3>
+<p>The layout and decoration properties shared by all three Forms9Patch buttons are:</p>
+<ul>
+<li>Outline:
+<ul>
+<li><strong><code>BorderRadius</code></strong>:</li>
+<li><strong><code>BorderWidth</code></strong>:  Alternatively, <code>OutlineWidth</code></li>
+<li><strong><code>BorderColor</code></strong>: Alternatively, <code>OutlineColor</code></li>
+<li><strong><code>HasShadow</code></strong></li>
+</ul>
+</li>
+<li>Text
+<ul>
+<li><strong><code>TextColor</code></strong></li>
+<li><strong><code>SelectedTextColor</code></strong>: the color of the button's text when selected</li>
+<li><strong><code>HorizontalTextAlignment</code></strong></li>
+<li><strong><code>VerticalTextAlignment</code></strong></li>
+</ul>
+</li>
+<li>Background
+<ul>
+<li><strong><code>BackgroundColor</code></strong></li>
+<li><strong><code>BackgroundImage</code></strong></li>
+</ul>
+</li>
+<li>Icon:
+<ul>
+<li><strong><code>TrailingIcon</code></strong>: Is the icon before or after the label?</li>
+<li><strong><code>Orientation</code></strong>: Is the icon and label arranged vertically or horizontally?</li>
+<li><strong><code>TintIcon</code></strong>: If the icon is a raster image, should the color of the non-transparent pixels be set to <code>TextColor</code>?</li>
+<li><strong><code>HasTightSpacing</code></strong>: If <code>false</code>, the icon will be positioned to the outside edge of the button.  If <code>true</code>, the icon will be positioned next to the label (separaded by <code>Spacing</code>).</li>
+<li><strong><code>Spacing</code></strong>: if <code>TightSpacing</code> is true, the icon will be positioned <code>Spacing</code> pixels away from the label</li>
+</ul>
+</li>
+</ul>
+<p>Additionally, the <code>Button</code> and <code>StateButton</code> elements have these properties:</p>
+<ul>
+<li>Outline
+<ul>
+<li><strong><code>Shape</code></strong>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
+</ul>
+</li>
+<li>Text
+<ul>
+<li><strong><code>Text</code></strong>: plain text for the button's label</li>
+<li><strong><code>HtmlText</code></strong>: markup text for the button's label - an alternative to <code>Text</code></li>
+<li><strong><code>LineBreakMode</code></strong>: See <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms">Xamarin.Forms.LineBreakMode</a></li>
+<li><strong><code>AutoFit</code></strong>:</li>
+</ul>
+</li>
+<li>Icon
+<ul>
+<li><strong><code>IconImage</code></strong></li>
+<li><strong><code>IconText</code></strong>: An alternative to <code>IconImage</code>, enabling the use of Unicode characters or special font characters as button icons.</li>
+</ul>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

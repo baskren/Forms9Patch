@@ -131,6 +131,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T Copy&lt;T&gt;(this T source)
+
     where T : ICopiable&lt;T&gt;, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -189,6 +190,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static List&lt;T&gt; DeepReferenceCopy&lt;T&gt;(this List&lt;T&gt; source)
+
     where T : ICopiable&lt;T&gt;, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

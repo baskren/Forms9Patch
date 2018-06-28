@@ -82,17 +82,17 @@
 <p>Xamarin Forms implmentation of resolution specific image sourcing relies upon native APIs and schema for iOS, Android, and Windows UWP multi-screen image management <a href="http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/images/">described here</a>.  This requires storing your iOS images in your iOS platform project using the native iOS schema, storing your Android images in your Android platform project using the Android native schema, and storing your UWP images in your UWP platform project using the UWP native schema.  In other words, duplicative efforts to get the same results on both Android, iOS, and UWP.  Forms9Patch.ImageSource simplifies Xamarin.Forms.ImageSource capabilities by bringing multi-screen image management to your Shared Library, PCL Assemblies, and .NetStandard projects - so you only have to generate and configure your app's image resources once.</p>
 <h2 id="embedded-resource-id-naming-convention">Embedded Resource Id Naming Convention</h2>
 <p>To use Forms9Patch multi-platform image management, you will need to store your image resource files as Embedded Resources.  You can do this by:</p>
-<p><em>VisualStudio Mac</em>: Right clicking on image file and selecting &quot;Build Action / EmbeddedResource&quot;</p>
-<p><em>VisualStudio 2017</em>: Right clicking on the image file and selecting &quot;Properties&quot; and then, in the &quot;Properties&quot; panel, modify the &quot;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&quot; field to &quot;EmbeddedResource&quot;</p>
-<p>Each embedded resources has an EmbeddedResourceId string that is used to reference it at runtime.  An EmbeddedResourceId is a sequence of strings joined by a period (.)as a separator.  This series of strings starts with the assembly name for the project in which the embedded resource is in, appended by the names of each folder in that project's folder structure for the embedded resource file, and ends with the embedded resource's file name.</p>
-<pre><code>project_assembly_name.project_path.base_image_name.extension
+<p><em><strong>VisualStudio Mac</strong></em>: Right clicking on image file and selecting <strong>Build Action / EmbeddedResource</strong></p>
+<p><em><strong>VisualStudio 2017</strong></em>: Right clicking on the image file and selecting <strong>Properties</strong> and then, in the &quot;Properties&quot; panel, modify the <strong>Build Action</strong> field to <strong>EmbeddedResource</strong></p>
+<p>Each embedded resources has an <strong>EmbeddedResourceId</strong> string that is used to reference it at runtime.  An <strong>EmbeddedResourceId</strong> is a sequence of strings joined by a period (.)as a separator.  This series of strings starts with the assembly name for the project in which the embedded resource is in, appended by the names of each folder in that project's folder structure for the embedded resource file, and ends with the embedded resource's file name.</p>
+<pre><code>project_assembly_name.project_path.base_image_file_name.extension
 </code></pre>
-<p>For example, if your project's assembly name is <code>PizzaMaker</code> and has an image file named <code>slice.png</code> in its <code>Resources/Images</code> folder, the EmbeddedResourceId
-of that file would be <code>PizzaMaker.Resources.Images.slice.png</code>.  If you're using VisualStudio Mac, don't worry too much about this because the EmbeddedResourceId is in the &quot;Properties&quot; panel in the &quot;ResourceID&quot; field.   You can find the &quot;Properties&quot; panel by right clicking on a file and selecting &quot;Properties&quot;.</p>
+<p>For example, if your project's assembly name is <code>PizzaMaker</code> and has an image file named <code>slice.png</code> in its <code>Resources/Images</code> folder, the <strong>EmbeddedResourceId</strong>
+of that file would be <code>PizzaMaker.Resources.Images.slice.png</code>.  If you're using VisualStudio Mac, don't worry too much about this because the <strong>EmbeddedResourceId</strong> is in the <strong>Properties</strong> panel in the <strong>ResourceID</strong> field.   You can find the <strong>Properties</strong> panel for a file by, in the <strong>Solution Explorer</strong> pad, right clicking on a file and selecting <strong>Properties</strong>.</p>
 <p>To facilitate runtime selection (for device resolution and type) between multiple renditions of an image, Forms9Patch prescribes how to name each rendition of your image files (and thus their EmbeddedResourceId).</p>
-<p><em>File Name</em>: <code>base_image_name[resolution_modifier][device_modifier].extension</code></p>
-<p><em>EmbeddedResourceId</em>: <code>project_assembly_name.project_path.base_image_name[resolution_modifier][device_modifier].extension</code></p>
-<p>Notice the addition of the optional <code>[resolution_modifier]</code> and <code>[device_modifier]</code> modifiers.  These modifiers will be familiar to iOS developers.  Likewise, Android developers can see analogs in the <code>Resources</code> folder naming conventions.  Valid values for the optional modifiers are:</p>
+<p><em><strong>File Name</strong></em>: <code>base_image_name[resolution_modifier][device_modifier].extension</code></p>
+<p><em><strong>EmbeddedResourceId</strong></em>: <code>project_assembly_name.project_path.base_image_name[resolution_modifier][device_modifier].extension</code></p>
+<p>Notice the addition of the optional <code>[resolution_modifier]</code> and <code>[device_modifier]</code> modifiers.  These modifiers will be familiar to iOS developers.  Likewise, Android developers can see analogs in Android's <code>Resources</code> sub-folder naming conventions.  Valid values for the optional modifiers are:</p>
 <h3 id="resolution-modifiers">Resolution Modifiers</h3>
 <table>
 <thead>
@@ -177,6 +177,24 @@ of that file would be <code>PizzaMaker.Resources.Images.slice.png</code>.  If yo
 <td><code>~iPad</code></td>
 <td><code>sw600dp</code></td>
 </tr>
+<tr>
+<td><code>~desktop</code></td>
+<td><em>maps to Xamarin Forms'</em> <code>TargetIdiom.Desktop</code></td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td><code>~tv</code></td>
+<td><em>maps to Xamarin Forms'</em> <code>TargetIdiom.TV</code></td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td><code>~unsupported</code></td>
+<td><em>maps to Xamarin Forms'</em> <code>TargetIdiom.Unsupported</code></td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
 </tbody>
 </table>
 <h2 id="forms9patchimagesource">Forms9Patch.ImageSource</h2>
@@ -241,7 +259,7 @@ public class ImageMultiResourceExtension : IMarkupExtension
 }
 </code></pre>
 <p>Once you have the above, you can load your embedded resource images as shown in the below example.  Be sure to add a namespace to your XAML for the assembly that contains both the above MarkupExtension and your EmbeddedResources (named <code>local</code> in the below example).</p>
-<pre><code class="lang-XAML">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;ContentPage
     xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
     xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;

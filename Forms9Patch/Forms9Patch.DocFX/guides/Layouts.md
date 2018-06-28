@@ -10,7 +10,72 @@ instances where the updated child will never have an impact upon the rest of the
 with fixed (GridUnitType.Absolute) or proportional (GridUnitType.Star) sized rows and columns then any change to a child will not change the Grid's layout.  So, to keep an update of a child from propogating up the view hierarchy, 
 set the IgnoreChildren property to true.  Please note that this is a "running with sissors" feature that should be used carefully.
 
-## Code Example
+## Background Image
+
+### Code Example
+
+Here we are going to create a `Forms9Patch.ContentView`, set a background image, and have a label for `Content`.
+
+```csharp
+new Forms9Patch.ContentView
+{
+    BackgroundImage = new Forms9Patch.Image
+    {
+        Source = Forms9Patch.ImageSource.FromMultiResource ("Forms9PatchDemo.Resources.redribbon"),
+        Fill = Forms9Patch.Fill.Tile,
+        CapInsets = new Thickness(30,-1,160,-1),
+    },
+    Content = new Xamarin.Forms.Label
+    {
+        Text = "ContentView scalable (CapInsets)",
+        TextColor = Color.White,
+        FontAttributes = FontAttributes.Bold,
+        FontSize = 14,
+        HorizontalOptions = LayoutOptions.Center,
+        VerticalOptions = LayoutOptions.Center,
+    },
+    Padding = new Thickness(30,30,110,20),
+    HeightRequest = 80,
+},
+ ```
+
+| iOS  | Android |
+|---|---|
+| ![Apple ContentView](images/Layouts/ContentViewCodeApple.png) | ![Android ContentView](images/Layouts/ContentViewCodeAndroid.png) |
+
+### XAML Example
+
+[As discussed earlier](ImageSource.md#XAML-Example), using Embedded Resource images in XAML requires the use of a [XAML markup extension](ImageSource.md#XAML-Example) in your view's namespace. Assuming such an extension has been setup, the following demonstrates how to use Forms9Patch.ContentView in XAML.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyXamlDemo;assembly=MyXamlDemo"
+    xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    x:Class="MyXamlDemo.MyPage"
+    Padding="5, 20, 5, 5">
+    <f9p:ContentView Padding="30,30,110,20" HeightRequest="80"/>
+        <f9p:ContentView.BackgroundImage>
+            <f9p:Image
+                Source="{local:ImageMultiResource Forms9PatchDemo.Resources.redribbon}"
+                CapInsets="23,-1,111,-1"
+                />
+        </f9p:ContentView.BackgroundImage>
+        <Label Text="Forms9Patch.Image w/ CapInsets"
+            TextColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            FontSize="14"
+            />
+    </f9p:ContentView>
+</ContentPage>
+```
+
+## Outline & Shadow
+
+### Code Example
 
 ```csharp
 var frame = new Forms9Patch.Frame {
@@ -26,11 +91,13 @@ var frame = new Forms9Patch.Frame {
 }
 ```
 
-////  SHOW ABOVE EXAMPLE HERE FOR ALL THREE PLATFORMS
+| iOS | Android |
+|-----|---------|
+| ![Frame Outline and Shadow, Apple](images/Layouts/frameShadowApple.png) |  ![Frame Outline and Shadow, Android](images/Layouts/frameShadowDroid.png) |
 
-## XAML Exmaple
+### XAML Example
 
-```xaml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -57,5 +124,8 @@ var frame = new Forms9Patch.Frame {
     </StackLayout>
 </ContentPage>
 ```
-////  SHOW ABOVE EXAMPLE HERE FOR ALL THREE PLATFORMS
+
+| iOS | Android |
+|-----|---------|
+| ![Frame Outline and Shadow, Apple](images/Layouts/FrameXamlApple.png) |  ![Frame Outline and Shadow, Android](images/Layouts/FrameXamlAndroid.png) |
 
