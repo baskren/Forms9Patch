@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Forms9Patch Label Element | Forms9Patch </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Forms9Patch Label Element | Forms9Patch ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="forms9patch-label-element">Forms9Patch Label Element</h1>
+
+<h2 id="background">Background</h2>
+<p>I wrote the <code>Forms9Patch.Label</code> element to solve a couple of problems:</p>
+<h3 id="embeddedresource-custom-fonts">EmbeddedResource, Custom Fonts</h3>
+<p>Setting up to use <a href="https://xamarinhelp.com/custom-fonts-xamarin-forms/">custom fonts with Xamarin.Forms</a> is very painful - and not at all cross platform.  I wish Xamarin had made using custom fonts easier because I would rather be making apps than making libraries.  But, alas, that's not (yet) the case.   If you're at Xamarin and are reading this, please don't take it personally - I love Xamarin Forms and wouldn't be putting in this much effort if I didn't.</p>
+<p>As with images, it seems that the idea cross-platform approach to custom fonts would be to embed them (as EmbeddedResources) in the shared, cross platform code.  That wasn't trivial and there were a lot of obstacles to overcome.  Once worked out, I saw it was possible to bring this font management magic back to Xamarin.Forms elements via the <code>Forms9Patch.EmbeddedResourceFontEffect</code>.</p>
+<p>Just to clarify, Forms9Patch text elements (<code>Label</code> and buttons) supports EmbeddedResource custom fonts without modification.  Xamarin.Forms text elements (<code>Label</code> and <code>Button</code>) can also use EmbeddedResource custom fonts by adding the <code>Forms9Patch.EmbeddedResourceFontEffect</code> effect.</p>
+<h3 id="intra-label-text-formatting">Intra-Label Text Formatting</h3>
+<p>Text formating shouldn't be painful.  That's why HTML and MarkDown was invented.  Although Xamarin uses a fairly conventional approach (intermediate <code>Span</code> elements), it certainly isn't an easy approach.  Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard, PCL, or Shared Library approach that is easier and just as fast.</p>
+<p>Forms9Patch avoids the use of intermediate elements. Instead, you to pass HTML directly to the <code>Label</code> or button elements by way of the <code>HtmlText</code> property.  Also, the <code>HtmlText</code> property supports a larger range of formatting than Xamarin provides via the Span element. Additionally, <code>HtmlText</code> integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.</p>
+<h3 id="automatically-resizing-text-auto-fitting">Automatically Resizing Text (Auto-fitting)</h3>
+<p>Something very important to me is the ability to resize a label's <code>FontSize</code> so the label can fit its container without truncation - or having more control over the layout before truncation happens.  At the time of this writing, Xamarin's recommendation for this is &quot;build a custom renderer&quot;.  Which is what I did.</p>
+<p>Before starting, I reviewed what I already knew: Apple and Android has some provisions for auto-fitting.  But neither addressed all the use cases I've faced.  So, Forms9Patch's Label's auto-fitting had to do more.  Oversimplifying things:</p>
+<ul>
+<li>If the bounds (width and height) of the label are imposed upon it then auto-fitting should scale the font to fit those bounds.</li>
+<li>If the width of the label is imposed upon it then auto-fitting should scale the label's height.</li>
+</ul>
+<p>But that is an oversimplification.  The <code>Lines</code>, <code>FontSize</code>, and <code>Fit</code> properties play an important role and determining just how Forms9Patch's auto-fitting works.  To better explain this, lets look at the imposed bounds and imposed width cases separately.</p>
+<h2 id="examples">Examples</h2>
+<h2 id="label-with-embeddedresource-custom-font">Label with EmbeddedResource, Custom Font</h2>
+<p>Below is an example of how to use Forms9Patch's custom font management.  The example uses Google's <a href="https://github.com/google/material-design-icons/blob/master/iconfont/MaterialIcons-Regular.ttf">Material Design Icons font</a>, which they have been nice enough to license under the <a href="http://creativecommons.org/licenses/by/4.0/">Creative Common Attribution 4.0 International License (CC-BY 4.0)</a>!</p>
+<ol>
+<li><p>Follow one of the below <strong>Getting Started</strong> guides to create a <strong>.NetStandard</strong> Xamarin Forms cross-platform app with the <code>MyDemoApp</code> assembly namespace.</p>
+<ul>
+<li><a href="GettingStartedMac.html">Getting Started: VisualStudio 2017 for Mac</a></li>
+<li><a href="GettingStartedWindows.html">Getting Started: VisualStudio 2017 for Windows</a></li>
+</ul>
+</li>
+<li><p>Create a <strong>Resources</strong> folder in the app's shared code (.NetStandard) project:</p>
+<ul>
+<li><p>Right click on your .NetStandard project and select <strong>Add / New Folder</strong>.</p>
+<p><img src="images/Label/MyDemoApp-NewFolder.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>A <strong>New Folder</strong> folder should appear.  Rename it <strong>Resources</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="images/Label/MyDemoApp-NameFolder.png" alt="MyDemoApp-NameFolder"></td>
+<td><img src="images/Label/MyDemoApp-Resources.png" alt="MyDemoApp-NewFolder"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li><p>Create a <strong>Fonts</strong> folder under the <strong>Resources</strong> folder in the app's shared code (.NetStandard) project</p>
+<p><img src="images/Label/MyDemoApp-Resources-Fonts.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>Save the <strong>MaterialIcons-Regular.ttf</strong> custom font file to the <strong>Resources/Fonts</strong> folder.  I prefer to drag it from OSX Finder or Windows File Explorer into the <strong>Resources/Fonts</strong> folder in VisualStudio.</p>
+<p><img src="images/Label/MyDemoApp-Resources-Fonts-MaterialIcons.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>Set the <strong>Build Action</strong> to <strong>EmbeddedResource</strong> for this custom font.</p>
+<p><img src="images/Label/MyDemoApp.SetEmbeddedResource.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>Make note of the Resource ID of this custom font.  See <a href="ImageSource.html#Embedded-Resource-Id-Naming-Convention">Embedded Resource Id Naming Convention</a> for details.</p>
+</li>
+<li><p>Open your shared source (.NetStandard) application source file (<strong>MyDemoApp.cs</strong> in this example)</p>
+</li>
+<li><p>Change the Label element to a Forms9Patch Label:</p>
+<p><img src="images/Label/MyDemoApp.ChangeLabelToF9P.png" alt="MyDemoApp-NewFolder"></p>
+<p>Note: The <code>XAlign</code> and <code>YAlign</code> properties have long ago been deprecated by Xamarin.  As such, I didn't implement them in Forms9Patch.  Use <code>HorizontalTextAlignment</code> and <code>VerticalTextAlignment</code> instead.</p>
+<p><img src="images/Label/MyDemoApp.TextAlign.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>Set the FontFamily property to the font's EmbeddedResource ID</p>
+<p><img src="images/Label/MyDemoApp-LabelFontFamily.png" alt="MyDemoApp-NewFolder"></p>
+<p>If you compile and run now, you should see some very unexpected output.  Why? Because the Material Icons doesn't have support for most standard characters!</p>
+<p><img src="images/Label/MyDemoApp.unexpected.png" alt="MyDemoApp-NewFolder"></p>
+</li>
+<li><p>Because we're using Material Icons (which is great for symbols but terrible for text), we are going to need to non-latin, unicode characters to our string.  With Forms9Patch, we have some options for specifying unicode characters.  Here are three approaches to getting the label in this example to display the following Material-Icon characters:</p>
+<p><img src="images/Label/MyDemoApp.UnicodeResult.png" alt="MyDemoApp-NewFolder"></p>
+<p><strong>Copy and Paste</strong></p>
+<p>A lot of times, you can get a Unicode character by copying it from a web page or from an application (like FontBook on OSX).  Once you copy it, you can then paste it into your string in Visual Studio or Xamarin Studio.  For example, here [    ] (between the brackets) are the unicode characters for the Material Icons Font's sissors, airplane, and umbrella characters.</p>
+<p><img src="images/Label/MyDemoApp.UnicodePaste.png" alt="MyDemoApp-NewFolder"></p>
+<p><strong>C# unicode escape code</strong></p>
+<p>C# makes unicode pretty easy via escape codes ... as long as the character is 16 bit!  For the Material Icons font, you can go to <a href="https://design.google.com/icons">https://design.google.com/icons</a>, select the charactor (icon in this case) you want.  Then, at the bottom right of the page, select <strong>&lt; &gt; ICON FONT</strong>.  There you can find the hexadecimal excape code (see &quot;For IE9 and below&quot;).  For the scissors, it is <code>&amp;#xE14E;</code>.  For the airplane, is be <code>&amp;#xE195;</code>.  And for the umbrella, it is <code>&amp;#xEB3E;</code>.  Since each has 4 hexadecimal characters, they all are 16 bit unicode - and I get to avoid explaining how to deal with 32 bit unicode.  In our example, replace <code>&quot;Welcome to Xamarin Forms&quot;</code> with <code>&quot;\uE14E \uE195 \uEB3E&quot;</code>.  Notice, for each escape code, that the leading <code>&amp;#</code> was replaced with <code>\u</code> and the trailing semicolon was dropped.</p>
+<p><img src="images/Label/MyDemoApp.UnicodeEscape.png" alt="MyDemoApp-NewFolder"></p>
+<p><strong>HtmlText property</strong></p>
+<p>By design, HTML does a great job with Unicode.  The <code>HtmlLabel</code> property wouldn't be useful without that magic.  For this example, remember (above) that the HTML escape codes we found on Google's Material Design Icons page were (Scissors=<code>&amp;#xE14E;</code>.  Airplane=<code>&amp;#xE195;</code>.  Umbrella=<code>&amp;#xEB3E;</code>. ).  Since these are HTML escape codes, we can pass them in a string to the <code>HtmlText</code> property.</p>
+<p><img src="images/Label/MyDemoApp.UnicodeHTML.png" alt="MyDemoApp-NewFolder"></p>
+<p>There is a lot more information about using the <code>HtmlText</code> property below.</p>
+</li>
+</ol>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2018 <strong>42nd Parallel</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

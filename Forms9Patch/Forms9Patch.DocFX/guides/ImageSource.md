@@ -6,24 +6,24 @@ Xamarin Forms implmentation of resolution specific image sourcing relies upon na
 
 To use Forms9Patch multi-platform image management, you will need to store your image resource files as Embedded Resources.  You can do this by:
 
-*VisualStudio Mac*: Right clicking on image file and selecting "Build Action / EmbeddedResource"
+_**VisualStudio Mac**_: Right clicking on image file and selecting **Build Action / EmbeddedResource**
 
-*VisualStudio 2017*: Right clicking on the image file and selecting "Properties" and then, in the "Properties" panel, modify the "&&&&&&&&&" field to "EmbeddedResource"
+_**VisualStudio 2017**_: Right clicking on the image file and selecting **Properties** and then, in the "Properties" panel, modify the **Build Action** field to **EmbeddedResource**
 
-Each embedded resources has an EmbeddedResourceId string that is used to reference it at runtime.  An EmbeddedResourceId is a sequence of strings joined by a period (.)as a separator.  This series of strings starts with the assembly name for the project in which the embedded resource is in, appended by the names of each folder in that project's folder structure for the embedded resource file, and ends with the embedded resource's file name.
+Each embedded resources has an **EmbeddedResourceId** string that is used to reference it at runtime.  An **EmbeddedResourceId** is a sequence of strings joined by a period (.)as a separator.  This series of strings starts with the assembly name for the project in which the embedded resource is in, appended by the names of each folder in that project's folder structure for the embedded resource file, and ends with the embedded resource's file name.
 
-    project_assembly_name.project_path.base_image_name.extension
+    project_assembly_name.project_path.base_image_file_name.extension
 
-For example, if your project's assembly name is `PizzaMaker` and has an image file named `slice.png` in its `Resources/Images` folder, the EmbeddedResourceId
-of that file would be `PizzaMaker.Resources.Images.slice.png`.  If you're using VisualStudio Mac, don't worry too much about this because the EmbeddedResourceId is in the "Properties" panel in the "ResourceID" field.   You can find the "Properties" panel by right clicking on a file and selecting "Properties".
+For example, if your project's assembly name is `PizzaMaker` and has an image file named `slice.png` in its `Resources/Images` folder, the **EmbeddedResourceId**
+of that file would be `PizzaMaker.Resources.Images.slice.png`.  If you're using VisualStudio Mac, don't worry too much about this because the **EmbeddedResourceId** is in the **Properties** panel in the **ResourceID** field.   You can find the **Properties** panel for a file by, in the **Solution Explorer** pad, right clicking on a file and selecting **Properties**.
 
 To facilitate runtime selection (for device resolution and type) between multiple renditions of an image, Forms9Patch prescribes how to name each rendition of your image files (and thus their EmbeddedResourceId).
 
-*File Name*: `base_image_name[resolution_modifier][device_modifier].extension`
+_**File Name**_: `base_image_name[resolution_modifier][device_modifier].extension`
 
-*EmbeddedResourceId*: `project_assembly_name.project_path.base_image_name[resolution_modifier][device_modifier].extension`
+_**EmbeddedResourceId**_: `project_assembly_name.project_path.base_image_name[resolution_modifier][device_modifier].extension`
 
-Notice the addition of the optional `[resolution_modifier]` and `[device_modifier]` modifiers.  These modifiers will be familiar to iOS developers.  Likewise, Android developers can see analogs in the `Resources` folder naming conventions.  Valid values for the optional modifiers are:
+Notice the addition of the optional `[resolution_modifier]` and `[device_modifier]` modifiers.  These modifiers will be familiar to iOS developers.  Likewise, Android developers can see analogs in Android's `Resources` sub-folder naming conventions.  Valid values for the optional modifiers are:
 
 ### Resolution Modifiers
 
@@ -44,6 +44,9 @@ Notice the addition of the optional `[resolution_modifier]` and `[device_modifie
 |*none* | *fallback image if no other is available* | *none (default)* | *none (default)*|
 |`~phone` | *maps to Xamarin Forms'* `TargetIdiom.Phone` | `~iPhone` | *none (default)*|
 |`~tablet` | *maps to Xamarin Forms'* `TargetIdiom.Tablet` |  `~iPad` | `sw600dp`|
+|`~desktop` | *maps to Xamarin Forms'* `TargetIdiom.Desktop` |  n/a | n/a |
+|`~tv` | *maps to Xamarin Forms'* `TargetIdiom.TV` |  n/a | n/a |
+|`~unsupported` | *maps to Xamarin Forms'* `TargetIdiom.Unsupported` |  n/a | n/a |
 
 ## Forms9Patch.ImageSource
 
@@ -82,7 +85,7 @@ Next, we create our app:
 
 In Xamarin.Forms, access to embedded resources from XAML requires some additional work.  Unfortunately, Forms9Patch is no different.  As with Xamarin.Forms, you will need (in the same assembly as your embedded resource images) a simple custom XAML markup extension to load images using their ResourceID.
 
-``` csharp
+```csharp
 [ContentPropert ("Source")]
 public class ImageMultiResourceExtension : IMarkupExtension
 {
@@ -103,7 +106,7 @@ public class ImageMultiResourceExtension : IMarkupExtension
 
 Once you have the above, you can load your embedded resource images as shown in the below example.  Be sure to add a namespace to your XAML for the assembly that contains both the above MarkupExtension and your EmbeddedResources (named `local` in the below example).
 
-``` XAML
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"

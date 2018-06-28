@@ -312,7 +312,8 @@ namespace Forms9Patch
                         density.Distance = Math.Abs(scale - density.Scale);
                     AppleDensities.Sort((x, y) => x.Distance.CompareTo(y.Distance));
                     var withDeviceType = new List<DeviceDensity>(AppleDensities.Count * 2);
-                    var device = (TargetIdiom.Phone == Device.Idiom ? "~phone" : "~tablet");
+                    var device = "~" + Device.Idiom.ToString().ToLower();
+
                     foreach (var density in AppleDensities)
                     {
                         withDeviceType.Add(new DeviceDensity { Name = density.Name + device, Min = density.Min, Max = density.Max, Distance = density.Distance });

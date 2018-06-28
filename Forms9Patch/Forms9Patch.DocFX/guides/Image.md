@@ -154,7 +154,7 @@ What?  Why would an image need a background color?  Well, usually it wouldn't *b
 
 | Source image  |  `BackgroundColor=Color.Orange` |
 |---------------|---------------------------------------------|
-|  ![Background Example](images/Image/printerIcon.png) | ![Background Example](images/Image/Printer.Background.png) |
+|  ![Background Example](images/Image/printer.png) | ![Background Example](images/Image/Printer.Background.png) |
 
 Note the corners are rounded on this image!
 
@@ -165,9 +165,10 @@ Taking things a step further than we did with the BackgroundColor property, why 
 | ElementShape     | Description                           | Full Bleed Image Exmaple                                  |
 |------------------|---------------------------------------|-----------------------------------------------------------|
 | Rectangle        | pretty much the same as "don't clip"  | ![Rectangle](images/Image/Shape.Rectangle.png)            |
-| Square           | clip the longest side to be the same length as the shortest side    |  ![Square](images/Image/Shape.Square.png)        | Circle           | because, circle clipped head shots are so 2015    |  ![Circle](images/Image/Shape.Circle.png)                 |
+| Square           | clip the longest side to be the same length as the shortest side    |  ![Square](images/Image/Shape.Square.png)        | 
+| Circle           | because, circle clipped head shots are so 2015    |  ![Circle](images/Image/Shape.Circle.png)                 |
 | Ellipse          | still waiting for this one to be cool | ![Ellipse](images/Image/Shape.Ellipse.png)                |
-| Obround          | embarrased how long it took me to  find out there was a name for this    | ![Obround](images/Image/Shape.Obround.png)  
+| Obround          | it's embarrassing how long it took me to  find out there was a name for this shape   | ![Obround](images/Image/Shape.Obround.png)  
 
 And, if you used `Xamarin.Forms.Frame` before, Forms9Patch's Outline properties will seem familiar:
 

@@ -14,6 +14,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "guides/Buttons.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/Buttons.html",
+          "hash": "KPJ7LzkrMbZaGFChsf/pJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "guides/GettingStartedMac.md",
       "output": {
         ".html": {
@@ -40,12 +52,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "guides/Image.md",
       "output": {
         ".html": {
           "relative_path": "guides/Image.html",
-          "hash": "LpvDY78adKTw9EjDWC/q7Q=="
+          "hash": "KIepu/mqOraaLttSXejhXQ=="
         }
       },
       "is_incremental": false,
@@ -57,7 +72,19 @@
       "output": {
         ".html": {
           "relative_path": "guides/ImageSource.html",
-          "hash": "S+Oez+9fBuQ40Tmzmvvjcw=="
+          "hash": "ZdcAW2h078Di8xaLyHU9+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/Label.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/Label.html",
+          "hash": "HPNIz9A/zoyvt21FnWx+/g=="
         }
       },
       "is_incremental": false,
@@ -69,7 +96,18 @@
       "output": {
         ".html": {
           "relative_path": "guides/Layouts.html",
-          "hash": "fzl4YYYvVeLSWOSDPut/lw=="
+          "hash": "R/s7fga+a1jxqllRNaXpuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Buttons/SegmentedControl.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Buttons/SegmentedControl.png"
         }
       },
       "is_incremental": false,
@@ -923,6 +961,237 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-LabelFontFamily.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-LabelFontFamily.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-NameFolder.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-NameFolder.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-NewFolder.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-NewFolder.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-Resources-Fonts-MaterialIcons.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-Resources-Fonts-MaterialIcons.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-Resources-Fonts.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-Resources-Fonts.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-Resources.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-Resources.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp-fresh.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp-fresh.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.ChangeLabelToF9P.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.ChangeLabelToF9P.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.SetEmbeddedResource.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.SetEmbeddedResource.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.TextAlign.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.TextAlign.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.UnicodeEscape.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.UnicodeEscape.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.UnicodeHTML.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.UnicodeHTML.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.UnicodePaste.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.UnicodePaste.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.UnicodeResult.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.UnicodeResult.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Label/MyDemoApp.unexpected.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Label/MyDemoApp.unexpected.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/ContentViewCodeAndroid.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/ContentViewCodeAndroid.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/ContentViewCodeApple.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/ContentViewCodeApple.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/FrameXamlAndroid.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/FrameXamlAndroid.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/FrameXamlApple.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/FrameXamlApple.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/frameShadowApple.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/frameShadowApple.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Layouts/frameShadowDroid.png",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Layouts/frameShadowDroid.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "guides/index.md",
       "output": {
@@ -940,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/toc.html",
-          "hash": "/W+aKlTUQXIvU9uouwKIMQ=="
+          "hash": "NfsEThQ2nLPKLtyZPbTBrg=="
         }
       },
       "is_incremental": false,
@@ -3206,17 +3475,17 @@
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
