@@ -12,6 +12,12 @@ As with images, it seems that the idea cross-platform approach to custom fonts w
 
 Just to clarify, Forms9Patch text elements (`Label` and buttons) supports EmbeddedResource custom fonts without modification.  Xamarin.Forms text elements (`Label` and `Button`) can also use EmbeddedResource custom fonts by adding the `Forms9Patch.EmbeddedResourceFontEffect` effect.
 
+#### Detailed Examples:
+
+- [Adding your custom font as an Embedded Resource](CustomFonts.md#Adding-your-custom-font-as-an-Embedded-Resource)
+- [Embedded Resource custom font with Forms9Patch.Label](CustomFonts.md#Embedded-Resource-custom-font-with-Forms9Patch.Label)
+- [Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect](CustomFonts#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-+-EmbeddedResourceFontEffect)
+
 ### Intra-Label Text Formatting
 
 Text formating shouldn't be painful.  That's why HTML and MarkDown was invented.  Although Xamarin uses a fairly conventional approach (intermediate `Span` elements), it certainly isn't an easy approach.  Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard, PCL, or Shared Library approach that is easier and just as fast.  
@@ -31,79 +37,3 @@ But that is an oversimplification.  The `Lines`, `FontSize`, and `Fit` propertie
 
 ## Examples
 
-## Label with EmbeddedResource, Custom Font
-
-Below is an example of how to use Forms9Patch's custom font management.  The example uses Google's [Material Design Icons font](https://github.com/google/material-design-icons/blob/master/iconfont/MaterialIcons-Regular.ttf), which they have been nice enough to license under the [Creative Common Attribution 4.0 International License (CC-BY 4.0)](http://creativecommons.org/licenses/by/4.0/)!
-
-1. Follow one of the below **Getting Started** guides to create a **.NetStandard** Xamarin Forms cross-platform app with the `MyDemoApp` assembly namespace.  
-
-    - [Getting Started: VisualStudio 2017 for Mac](GettingStartedMac.md)
-    - [Getting Started: VisualStudio 2017 for Windows](GettingStartedWindows.md)
-
-2. Create a **Resources** folder in the app's shared code (.NetStandard) project:
-
-    - Right click on your .NetStandard project and select **Add / New Folder**.
-
-      ![MyDemoApp-NewFolder](images/Label/MyDemoApp-NewFolder.png)
-
-    - A **New Folder** folder should appear.  Rename it **Resources**.
-
-      | Before | After |
-      |--------|-------|
-      |![MyDemoApp-NameFolder](images/Label/MyDemoApp-NameFolder.png) | ![MyDemoApp-NewFolder](images/Label/MyDemoApp-Resources.png) |
-
-3. Create a **Fonts** folder under the **Resources** folder in the app's shared code (.NetStandard) project
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp-Resources-Fonts.png)
-
-4. Save the **MaterialIcons-Regular.ttf** custom font file to the **Resources/Fonts** folder.  I prefer to drag it from OSX Finder or Windows File Explorer into the **Resources/Fonts** folder in VisualStudio.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp-Resources-Fonts-MaterialIcons.png)
-
-5. Set the **Build Action** to **EmbeddedResource** for this custom font.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.SetEmbeddedResource.png)
-
-6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#Embedded-Resource-Id-Naming-Convention) for details.
-
-7. Open your shared source (.NetStandard) application source file (**MyDemoApp.cs** in this example)
-
-8. Change the Label element to a Forms9Patch Label:
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.ChangeLabelToF9P.png)
-
-    Note: The `XAlign` and `YAlign` properties have long ago been deprecated by Xamarin.  As such, I didn't implement them in Forms9Patch.  Use `HorizontalTextAlignment` and `VerticalTextAlignment` instead.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.TextAlign.png)
-
-9. Set the FontFamily property to the font's EmbeddedResource ID
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp-LabelFontFamily.png)
-
-    If you compile and run now, you should see some very unexpected output.  Why? Because the Material Icons doesn't have support for most standard characters!
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.unexpected.png)
-
-10. Because we're using Material Icons (which is great for symbols but terrible for text), we are going to need to non-latin, unicode characters to our string.  With Forms9Patch, we have some options for specifying unicode characters.  Here are three approaches to getting the label in this example to display the following Material-Icon characters:
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeResult.png)
-
-    **Copy and Paste**
-
-    A lot of times, you can get a Unicode character by copying it from a web page or from an application (like FontBook on OSX).  Once you copy it, you can then paste it into your string in Visual Studio or Xamarin Studio.  For example, here [    ] (between the brackets) are the unicode characters for the Material Icons Font's sissors, airplane, and umbrella characters.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodePaste.png)
-
-    **C# unicode escape code**
-
-    C# makes unicode pretty easy via escape codes ... as long as the character is 16 bit!  For the Material Icons font, you can go to https://design.google.com/icons, select the charactor (icon in this case) you want.  Then, at the bottom right of the page, select **< > ICON FONT**.  There you can find the hexadecimal excape code (see "For IE9 and below").  For the scissors, it is `&#xE14E;`.  For the airplane, is be `&#xE195;`.  And for the umbrella, it is `&#xEB3E;`.  Since each has 4 hexadecimal characters, they all are 16 bit unicode - and I get to avoid explaining how to deal with 32 bit unicode.  In our example, replace `"Welcome to Xamarin Forms"` with `"\uE14E \uE195 \uEB3E"`.  Notice, for each escape code, that the leading `&#` was replaced with `\u` and the trailing semicolon was dropped.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeEscape.png)
-
-    **HtmlText property**
-
-    By design, HTML does a great job with Unicode.  The `HtmlLabel` property wouldn't be useful without that magic.  For this example, remember (above) that the HTML escape codes we found on Google's Material Design Icons page were (Scissors=`&#xE14E;`.  Airplane=`&#xE195;`.  Umbrella=`&#xEB3E;`. ).  Since these are HTML escape codes, we can pass them in a string to the `HtmlText` property.
-
-    ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeHTML.png)
-
-    There is a lot more information about using the `HtmlText` property below.
