@@ -57,6 +57,11 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
       <Link>Services\ClipboardService.cs</Link>
     </Compile>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
+      <Link>Services\DataTransferService.cs</Link>
+    </Compile>
+  -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>
     </Compile>

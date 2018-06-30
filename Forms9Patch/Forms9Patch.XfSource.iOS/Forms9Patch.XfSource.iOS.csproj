@@ -61,11 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
+      <Link>DataTransferService.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
-      <Project>{C7CB0486-2F2D-4F57-B79D-1C356CA5C366}</Project>
+      <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
       <Name>Xamarin.Forms.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.iOS\Xamarin.Forms.Platform.iOS.csproj">
@@ -73,11 +76,11 @@
       <Name>Xamarin.Forms.Platform.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-      <Project>{92769EC2-B898-496E-BBDE-5A2083763EEF}</Project>
+      <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
       <Name>Xamarin.Forms.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
-      <Project>{B9257976-5C96-4616-A3E7-B62004ED3870}</Project>
+      <Project>{57B8B73D-C3B5-4C42-869E-7B2F17D354AC}</Project>
       <Name>Xamarin.Forms.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
@@ -85,11 +88,11 @@
       <Name>P42.Utils.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{4454A42F-2D39-40AD-AF11-56028F67CAC1}</Project>
+      <Project>{0381ECA9-6959-4A89-B18A-45A01D44D696}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{682775D5-CA70-4482-A69E-1A6ED234A417}</Project>
+      <Project>{067AADEA-34BA-472C-B9AA-0D6E423E272D}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj">
@@ -97,11 +100,11 @@
       <Name>FormsGestures.XfSource.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{86794AF2-D840-4ED0-8B9D-B1185846611C}</Project>
+      <Project>{EF8FFCC7-770B-4C3E-8AC8-EFAD51E30552}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-      <Project>{F01F6298-8ADB-4A41-9B7B-5137CABC2F11}</Project>
+      <Project>{B2A77150-CF06-40A1-A16B-A11FCA853FEE}</Project>
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
   </ItemGroup>

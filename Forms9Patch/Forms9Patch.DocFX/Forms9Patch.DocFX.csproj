@@ -12,7 +12,32 @@
     <PackageReference Include="docfx.console" Version="2.36.1" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="notes\DeveloperNotes.md" />
-    <None Remove="log.txt" />
+    <None Remove="api\Forms9Patch.AccessoryPosition.yml" />
+    <None Remove="api\Forms9Patch.DataTemplateSelector.yml" />
+    <None Remove="api\Forms9Patch.GroupHeaderTemplate.yml" />
+    <None Remove="api\Forms9Patch.GroupHeaderView.yml" />
+    <None Remove="api\Forms9Patch.ICellHeight.yml" />
+    <None Remove="api\Forms9Patch.ICellSwipeMenus.yml" />
+    <None Remove="api\Forms9Patch.IIsSelectedAble.yml" />
+    <None Remove="api\Forms9Patch.ImageButton.yml" />
+    <None Remove="api\Forms9Patch.ItemTappedEventArgs.yml" />
+    <None Remove="api\Forms9Patch.ListView.yml" />
+    <None Remove="api\Forms9Patch.MaterialSegmentedControl.yml" />
+    <None Remove="api\Forms9Patch.ModalPopup.yml" />
+    <None Remove="api\Forms9Patch.MultiComponentPicker.SelectionChangedEventArgs.yml" />
+    <None Remove="api\Forms9Patch.MultiComponentPicker.yml" />
+    <None Remove="api\Forms9Patch.MultiPicker.yml" />
+    <None Remove="api\Forms9Patch.PermissionPopup.yml" />
+    <None Remove="api\Forms9Patch.PopupBase.yml" />
+    <None Remove="api\Forms9Patch.Proximity.yml" />
+    <None Remove="api\Forms9Patch.SegmentedControl.yml" />
+    <None Remove="api\Forms9Patch.SelectedItemChangedEventArgs.yml" />
+    <None Remove="api\Forms9Patch.SinglePicker.yml" />
+    <None Remove="api\Forms9Patch.StateButton.yml" />
+    <None Remove="api\Forms9Patch.SwipeMenuItem.yml" />
+    <None Remove="api\Forms9Patch.SwipeMenuItemTappedArgs.yml" />
+    <None Remove="api\Forms9Patch.TargetedMenu.yml" />
+    <None Remove="api\Forms9Patch.TargetedToast.yml" />
+    <None Remove="api\Forms9Patch.TemplateSelectorBase.yml" />
   </ItemGroup>
 </Project>

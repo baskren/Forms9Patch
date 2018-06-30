@@ -3,13 +3,18 @@
 
   <ItemGroup>
 
-    <!-- CLIPBOARD -->
+    <!-- ClipBoard -->
     <Compile Include="..\Forms9Patch.Source\Clipboard\Clipboard.cs" Link="Clipboard\Clipboard.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntry.cs" Link="Clipboard\ClipboardEntry.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntryItem.cs" Link="Clipboard\ClipboardEntryItem.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntry.cs" Link="Clipboard\IClipboardEntry.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntryItem.cs" Link="Clipboard\IClipboardEntryItem.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardService.cs" Link="Clipboard\IClipboardService.cs" />
+
+    <!-- DataTransfer -->
+    <Compile Include="..\Forms9Patch.Source\DataTransfer\DataTransfer.cs" Link="DataTransfer\DataTransfer.cs" />
+    <Compile Include="..\Forms9Patch.Source\DataTransfer\IDataTransfer.cs" Link="DataTransfer\IDataTransfer.cs" />
+    <Compile Include="..\Forms9Patch.Source\DataTransfer\DataEntry.cs" Link="DataTransfer\DataEntry.cs" />
 
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
