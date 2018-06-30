@@ -16,5 +16,9 @@ namespace Forms9Patch.iOS
 {
     public class DataTransferService : Forms9Patch.IDataTransfer
     {
+        public void Transfer(DataEntry entry)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
