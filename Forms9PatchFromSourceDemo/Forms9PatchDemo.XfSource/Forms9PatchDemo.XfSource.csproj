@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard1.3</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>Forms9PatchDemo</AssemblyName>
 		<RootNamespace>Forms9PatchDemo</RootNamespace>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DefineConstants>TRACE;FROM_SOURCE;DEBUG;NETSTANDARD1_3</DefineConstants>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>
 		</DebugType>
 		<DefineConstants>TRACE;$(UseXaml);FROM_SOURCE;RELEASE;NETSTANDARD1_3;</DefineConstants>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<!-- LOAD PROJECT CONTENT -->
 	<PropertyGroup>

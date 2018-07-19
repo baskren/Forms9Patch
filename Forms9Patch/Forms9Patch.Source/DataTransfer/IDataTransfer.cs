@@ -4,6 +4,6 @@ namespace Forms9Patch
 {
     interface IDataTransfer
     {
-        void Transfer(DataEntry entry);
+        void Transfer<T>(MimeItem<T> mimeItem);
     }
 }

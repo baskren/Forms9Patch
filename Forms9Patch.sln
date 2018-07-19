@@ -656,6 +656,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		Forms9PatchDemo\Source\Resources\tick.png = Forms9PatchDemo\Source\Resources\tick.png
 		Forms9PatchDemo\Source\Resources\tree.png = Forms9PatchDemo\Source\Resources\tree.png
 		Forms9PatchDemo\Source\Resources\water.gif = Forms9PatchDemo\Source\Resources\water.gif
+		Forms9PatchDemo\Source\Resources\ProjectProposal.pdf = Forms9PatchDemo\Source\Resources\ProjectProposal.pdf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fonts", "Fonts", "{0439210D-9837-4E2B-8F69-E377B6A30D0B}"

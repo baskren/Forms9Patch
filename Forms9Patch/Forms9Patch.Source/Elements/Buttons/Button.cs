@@ -1666,8 +1666,8 @@ namespace Forms9Patch
                 OutlineWidth = (float)BorderWidth;
             //else if (propertyName == BorderRadiusProperty.PropertyName)
             //    OutlineRadius = BorderRadius;
-            else if (propertyName == BorderColorProperty.PropertyName)
-                OutlineColor = BorderColor;
+            //else if (propertyName == BorderColorProperty.PropertyName)
+            //    OutlineColor = BorderColor;
 
             if (_noUpdate)
                 return;

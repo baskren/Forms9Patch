@@ -22,7 +22,7 @@ namespace Forms9Patch.Droid
     {
 
         #region Static implementation
-        readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IClipboardEntryItem> UriItems = new Dictionary<Android.Net.Uri, IClipboardEntryItem>();
+        readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();
 
         static ClipboardManager _clipboardManager;
         static ClipboardManager Clipboard
@@ -37,7 +37,7 @@ namespace Forms9Patch.Droid
 
         #region ReturnClipboardEntryItem
 
-        class ReturnClipboardEntryItem<T> : IClipboardEntryItem<T>
+        class ReturnClipboardEntryItem<T> : IMimeItem<T>
         {
             ReturnClipboardEntryItem _source;
 
@@ -45,7 +45,7 @@ namespace Forms9Patch.Droid
             public T Value => (T)_source.Value;
             public Type Type => _source.Type;
 
-            object IClipboardEntryItem.Value => _source.Value;
+            object IMimeItem.Value => _source.Value;
 
             public ReturnClipboardEntryItem(ReturnClipboardEntryItem source)
             {
@@ -53,7 +53,7 @@ namespace Forms9Patch.Droid
             }
         }
 
-        class ReturnClipboardEntryItem : IClipboardEntryItem
+        class ReturnClipboardEntryItem : IMimeItem
         {
             public string MimeType { get; protected set; }
 
@@ -275,8 +275,8 @@ namespace Forms9Patch.Droid
                     {
                         var entryItem = new ReturnClipboardEntryItem(item.Uri);
                         var entryItemType = typeof(ReturnClipboardEntryItem<>).MakeGenericType(entryItem.Type);
-                        var typedEntryItem = (IClipboardEntryItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
-                        entry.AdditionalItems.Add(typedEntryItem);
+                        var typedEntryItem = (IMimeItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
+                        entry._item.Add(typedEntryItem);
                     }
                 }
 
@@ -296,7 +296,7 @@ namespace Forms9Patch.Droid
                     clipData = ClipData.NewHtmlText(value.Description, value.PlainText, value.HtmlText);
 
                 UriItems.Clear();
-                foreach (var item in value.AdditionalItems)
+                foreach (var item in value._item)
                 {
                     // here is where we would detect if the item is a FilePathEntryItem or the item.Type is a System.IO.File and then setup things to use a android.support.v4.content.FileProvider
                     var uri = ClipboardContentProvider.NextItemUri;
@@ -648,7 +648,7 @@ namespace Forms9Patch.Droid
     [ContentProvider(new string[] { "@string/forms9patch_copy_paste_authority" })]
     public class ClipboardContentProvider : ContentProvider
     {
-        static Forms9Patch.IClipboardEntryItem ItemForUri(Android.Net.Uri uri)
+        static Forms9Patch.IMimeItem ItemForUri(Android.Net.Uri uri)
         {
             foreach (var key in ClipboardService.UriItems.Keys)
                 if (key.Equals(uri))

@@ -4,7 +4,7 @@ namespace Forms9Patch
 {
     interface IClipboardService
     {
-        ClipboardEntry Entry { get; set; }
+        IClipboardEntry Entry { get; set; }
 
         bool EntryCaching { get; set; }
 

@@ -29,9 +29,12 @@ namespace Forms9Patch
         /// </summary>
         string HtmlText { get; }
 
-        /// <summary>
-        /// Any additional items (IClipboardEntryItem) in this ClipboardEntry
-        /// </summary>
-        List<IClipboardEntryItem> AdditionalItems { get; }
+        Uri Uri { get; }
+
+        IMimeItem<T> GetItem<T>(string mimeType);
+
+        //        IMimeItem GetUntypedItem(string mimeType);
+
+        List<string> MimeTypes { get; }
     }
 }

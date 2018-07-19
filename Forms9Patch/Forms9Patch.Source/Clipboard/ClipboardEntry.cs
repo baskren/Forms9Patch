@@ -6,6 +6,8 @@ using System.Collections;
 using System.Reflection;
 using Xamarin.Forms.Internals;
 using P42.Utils;
+using System.IO;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -49,6 +51,9 @@ namespace Forms9Patch
             if (type == typeof(string))
                 return true;
 
+            //if (type == typeof(Uri))
+            //    return true;
+
             var typeInfo = type.GetTypeInfo();
             //if (item.Value is IList ilist && typeInfo.IsGenericType)
             if (typeInfo.ImplementedInterfaces.Contains(typeof(IList)) && typeInfo.IsGenericType)
@@ -90,7 +95,7 @@ namespace Forms9Patch
         /// <param name="plainText"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public static ClipboardEntry ForPlainText(string plainText, string description=null)
+        public static ClipboardEntry ForPlainText(string plainText, string description = null)
         {
             return new ClipboardEntry
             {
@@ -110,46 +115,41 @@ namespace Forms9Patch
         /// Gets or sets the plain text representation of this data (if any)
         /// </summary>
         /// <value>The plain text.</value>
-        public string PlainText { get; set; }
+        public string PlainText
+        {
+            get => GetItem<string>("text/plain")?.Value;
+            set => AddValue("text/plain", value);
+        }
 
         /// <summary>
         /// Gets or sets the html text representation of this data (if any)
         /// </summary>
         /// <value>The html text.</value>
-        public string HtmlText { get; set; }
-
-        readonly List<IClipboardEntryItem> _items = new List<IClipboardEntryItem>();
-        /// <summary>
-        /// Any additional items (IClipboardEntryItem) in this ClipboardEntry
-        /// </summary>
-        public List<IClipboardEntryItem> AdditionalItems
+        public string HtmlText
         {
-            get => _items;
-            set
-            {
-                _items.Clear();
-                foreach (var item in value)
-                    _items.Add(item);
-            }
+            get => GetItem<string>("text/html")?.Value;
+            set => AddValue("text/html", value);
         }
+
+        public Uri Uri
+        {
+            get
+            {
+                if (GetItem<string>("text/url")?.Value is string text)
+                    return new Uri(text);
+                return null;
+            }
+            set => AddValue("text/url", value.ToString());
+        }
+
+        // only used when creating / adding to 
+        //readonly List<IMimeItem> _items = new List<IMimeItem>();
+        internal readonly Dictionary<string, IMimeItem> MimeHash = new Dictionary<string, IMimeItem>();
 
         /// <summary>
         /// List of MimeTypes for the items in this ClipboardEntry
         /// </summary>
-        public List<string> MimeTypes
-        {
-            get
-            {
-                var result = new List<string>();
-                if (!string.IsNullOrEmpty(PlainText))
-                    result.Add("text/plain");
-                if (!string.IsNullOrEmpty(HtmlText))
-                    result.Add("text/html");
-                foreach (var item in _items)
-                    result.Add(item.MimeType);
-                return result;
-            }
-        }
+        public List<string> MimeTypes => MimeHash.Keys.ToList();
 
         /// <summary>
         /// Does this ClipboardEntry contain an item of a particular mimeType?
@@ -161,20 +161,10 @@ namespace Forms9Patch
             return MimeTypes.Contains(mimeType);
         }
 
-        /// <summary>
-        /// Get me the item in this ClipboardEntry that has a particular mimeType
-        /// </summary>
-        /// <param name="mimeType"></param>
-        /// <returns></returns>
-        public IClipboardEntryItem GetUntypedItem(string mimeType)
+        IMimeItem GetUntypedItem(string mimeType)
         {
-            if (mimeType == "text/plain" && PlainText != null)
-                return new PlaceholderEntryItem(mimeType, PlainText);
-            if (mimeType == "text/html" && HtmlText != null)
-                return new PlaceholderEntryItem(mimeType, HtmlText);
-            foreach (var item in _items)
-                if (item.MimeType.ToLower() == mimeType.ToLower())
-                    return item;
+            if (MimeHash.ContainsKey(mimeType))
+                return MimeHash[mimeType];
             return null;
         }
 
@@ -184,10 +174,10 @@ namespace Forms9Patch
         /// <returns>The item.</returns>
         /// <param name="mimeType">MIME type.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public IClipboardEntryItem<T> GetItem<T>(string mimeType)
+        public IMimeItem<T> GetItem<T>(string mimeType)
         {
             var untypedItem = GetUntypedItem(mimeType);
-            var typedItem = untypedItem as IClipboardEntryItem<T>;
+            var typedItem = untypedItem as IMimeItem<T>;
             return typedItem;
         }
 
@@ -201,7 +191,57 @@ namespace Forms9Patch
         {
             if (!ValidItemType(typeof(T)))
                 return;
-            _items.Add(new ClipboardEntryItem<T>(mimeType, value));
+            MimeHash[mimeType] = new MimeItem<T>(mimeType, value);
+        }
+
+
+        public byte[] AddContentOfFile(string mimeType, string path)
+        {
+            // we may want to change this to URL!
+            if (ByteArrayFromFile(path) is byte[] byteArray)
+            {
+                MimeHash[mimeType] = new MimeItem<byte[]>(mimeType, byteArray);
+                return byteArray;
+            }
+            return null;
+        }
+
+        static byte[] ByteArrayFromFile(String path)
+        {
+            using (FileStream filestream = new FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+            {
+                if (filestream != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("embedded resource length: " + filestream.Length);
+                    using (BinaryReader br = new BinaryReader(filestream))
+                    {
+                        if (br != null)
+                        {
+                            //using (FileStream fs = new FileStream(path, FileMode.Create))
+                            using (MemoryStream ms = new MemoryStream((int)filestream.Length))
+                            {
+                                if (ms != null)
+                                {
+                                    using (BinaryWriter bw = new BinaryWriter(ms))
+                                    {
+                                        if (bw != null)
+                                        {
+                                            byte[] ba = new byte[filestream.Length];
+                                            filestream.Read(ba, 0, ba.Length);
+                                            bw.Write(ba);
+                                            var fileInfo = new System.IO.FileInfo(path);
+                                            System.Diagnostics.Debug.WriteLine("output length: " + fileInfo.Length);
+                                            System.Diagnostics.Debug.WriteLine("output length: " + ms.Length);
+                                            return ms.ToArray();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         /*
@@ -249,7 +289,7 @@ namespace Forms9Patch
         // - UWP:
         // Would that work with UWP? 
 
-        class PlaceholderEntryItem : ClipboardEntryItem<string>
+        class PlaceholderEntryItem : MimeItem<string>
         {
             public PlaceholderEntryItem(string mimeType, string value) : base(mimeType, value) { }
         }

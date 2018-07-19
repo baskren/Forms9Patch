@@ -193,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\SvgSample2.svg" />
+    <AndroidAsset Include="Assets\five.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">

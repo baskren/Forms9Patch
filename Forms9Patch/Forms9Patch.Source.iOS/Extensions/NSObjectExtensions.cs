@@ -220,6 +220,7 @@ namespace Forms9Patch.iOS
                 }
                 throw new InvalidDataContractException("Cannot reliablity convert NSDictionary to type [" + type + "].");
             }
+
             if (nsO is NSArray nsArray)
             {
                 if (type == null)
@@ -325,6 +326,14 @@ namespace Forms9Patch.iOS
                     return new Tuple<object, Type>((bool)nsNumber.BoolValue, type);
 
             }
+
+            if (nsO is NSUrl nsUrl)
+            {
+                var absolutePath = nsUrl.AbsoluteString;
+                var uri = new Uri(absolutePath);
+                return new Tuple<object, Type>(uri, typeof(Uri));
+            }
+
             return null;
         }
 

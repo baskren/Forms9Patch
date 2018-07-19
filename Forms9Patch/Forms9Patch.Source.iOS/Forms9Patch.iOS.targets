@@ -24,6 +24,11 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
       <Link>Extensions\FormattedStringExtensions.cs</Link>
     </Compile>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.iOS\Extensions\MimeItemExtensions.cs">
+      <Link>Extensions\MimeItemExtensions.cs</Link>
+    </Compile>
+  -->
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs">
       <Link>Extensions\NSObjectExtensions.cs</Link>
     </Compile>
@@ -37,6 +42,17 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </Compile>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.iOS\Models\NSDataItem.cs">
+      <Link>Models\NSDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Models\ReturnMimeItem.cs">
+      <Link>Models\ReturnMimeItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Models\ClipboardEntry.cs">
+      <Link>Models\ClipboardEntry.cs</Link>
+    </Compile>
+  -->
     <!-- RENDERERS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs">
       <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
@@ -54,10 +70,10 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </Compile>
+    <!--
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
       <Link>Services\ClipboardService.cs</Link>
     </Compile>
-    <!--
     <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
       <Link>Services\DataTransferService.cs</Link>
     </Compile>

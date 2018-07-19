@@ -14,7 +14,7 @@ namespace Forms9Patch
     /// ClipboardEntryItem class
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ClipboardEntryItem<T> : ClipboardItemBase, IClipboardEntryItem<T>
+    public class MimeItem<T> : MimeItemBase, IMimeItem<T>
     {
         /// <summary>
         /// Gets or sets the value of this ClipboadEntryItem.
@@ -31,7 +31,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="mimeType"></param>
         /// <param name="value"></param>
-        public ClipboardEntryItem(string mimeType, T value) : base(mimeType)
+        public MimeItem(string mimeType, T value) : base(mimeType)
         {
             Type = typeof(T);
             if (!ClipboardEntry.ValidItemType(Type))
@@ -43,12 +43,20 @@ namespace Forms9Patch
     /// <summary>
     /// Base class for a ClipboardEntryItem
     /// </summary>
-    public abstract class ClipboardItemBase : IClipboardEntryItem //, IPlatformKey
+    public abstract class MimeItemBase : IMimeItem //, IPlatformKey
     {
+        string _mimeType;
         /// <summary>
         /// Get the MimeType of this ClipboardEntryItem
         /// </summary>
-        public string MimeType { get; protected set; }
+        public string MimeType
+        {
+            get => _mimeType;
+            protected set
+            {
+                _mimeType = value?.ToLower();
+            }
+        }
 
         object _item;
         /// <summary>
@@ -71,7 +79,7 @@ namespace Forms9Patch
         /// Constructor for ClipboardItemBase
         /// </summary>
         /// <param name="mimeType"></param>
-        protected ClipboardItemBase(string mimeType)
+        protected MimeItemBase(string mimeType)
         {
             if (string.IsNullOrWhiteSpace(mimeType))
                 throw new InvalidDataContractException("Empty or null mime type is not allowed.");

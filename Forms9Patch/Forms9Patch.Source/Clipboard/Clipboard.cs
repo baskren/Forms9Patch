@@ -29,7 +29,7 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the current Entry on the clipboard
         /// </summary>
-        public static ClipboardEntry Entry
+        public static IClipboardEntry Entry
         {
             get => Service.Entry ?? new ClipboardEntry();
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Forms9Patch
     /// Generic Interface for ClipboardEntryITem
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IClipboardEntryItem<T> : IClipboardEntryItem
+    public interface IDataEntryItem<T> : IDataEntryItem
     {
         /// <summary>
         /// Gets the value of this IClipboardEntryItem
@@ -27,7 +27,7 @@ namespace Forms9Patch
     /// <summary>
     /// Interface for a ClipboardEntryItem
     /// </summary>
-    public interface IClipboardEntryItem
+    public interface IDataEntryItem
     {
         /// <summary>
         /// MimeType for an item
