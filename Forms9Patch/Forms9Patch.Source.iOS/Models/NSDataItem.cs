@@ -17,53 +17,11 @@ namespace Forms9Patch.iOS
 
         private NSDataItem(IMimeItem item)
         {
-            NSUti = item.ToNsUti();
-            var typeInfo = item.Type.GetTypeInfo();
-            if (item.Type == typeof(byte[]))
+            var nsObject = item.Value.ToNSObject();
+            if (nsObject != null)
             {
-                NSObject nsObject = null;
-                var nsData = NSData.FromArray(item.Value as byte[]);
-                if (item.MimeType == "image/png" || item.MimeType == "image/jpeg" || item.MimeType == "image/jpg")
-                {
-                    nsObject = UIImage.LoadFromData(nsData);
-                }
-                else
-                {
-                    nsObject = nsData;
-                }
-                if (nsObject != null)
-                    KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsObject);
-            }
-            else if (item.Value is IList ilist && typeInfo.IsGenericType)
-            {
-                var nsArray = ilist.ToNSArray();
-                KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsArray);
-            }
-            else if (item.Value is IDictionary dictionary && typeInfo.IsGenericType)
-            {
-                var nsDictionary = dictionary.ToNSDictionary();
-                KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsDictionary);
-            }
-            else if (item.Value is Uri uri)
-            {
-                if (uri.IsFile)
-                {
-                    var nsData = NSData.FromUrl(uri);
-                    KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsData);
-                }
-                else
-                {
-                    var nsUri = new NSUrl(uri.AbsoluteUri);
-                    KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsUri);
-                }
-            }
-            else
-            {
-                var nsObject = NSObject.FromObject(item.Value);
-                if (nsObject != null)
-                    KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsObject);
-                else
-                    throw new InvalidDataException("Cannot convert [" + item.Type + "] to NSObject");
+                NSUti = item.ToNsUti();
+                KeyedArchiver = NSKeyedArchiver.ArchivedDataWithRootObject(nsObject);
             }
         }
 

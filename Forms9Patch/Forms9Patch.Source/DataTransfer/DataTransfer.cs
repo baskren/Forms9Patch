@@ -6,6 +6,6 @@ namespace Forms9Patch
     {
         static IDataTransfer Service => Xamarin.Forms.DependencyService.Get<IDataTransfer>();
 
-        public static void TransferEntry<T>(MimeItem<T> mimeItem) => Service?.Transfer(mimeItem);
+        //public static void TransferEntry<T>(MimeItem<T> mimeItem) => Service?.Transfer(mimeItem);
     }
 }

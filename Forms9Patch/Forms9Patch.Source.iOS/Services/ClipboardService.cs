@@ -5,12 +5,17 @@ using Foundation;
 using MobileCoreServices;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms.Platform.iOS;
+using System.IO;
+using System.Diagnostics;
 
 [assembly: Dependency(typeof(Forms9Patch.iOS.ClipboardService))]
 namespace Forms9Patch.iOS
 {
     public class ClipboardService : Forms9Patch.IClipboardService
     {
+        const bool TestPre11 = true;
+
         static internal NSString TypeListUti = new NSString(UTType.CreatePreferredIdentifier(UTType.TagClassMIMEType, "application/f9p-clipboard-typelist", null));
 
         static ClipboardService()
@@ -26,61 +31,143 @@ namespace Forms9Patch.iOS
 
         #region Entry property
         nint _lastEntryChangeCount = int.MinValue;
-        IClipboardEntry _lastEntry = null;
+        IClipboardEntry _lastEntry;
         public IClipboardEntry Entry
         {
             get
             {
-                if (!EntryCaching || _lastEntryChangeCount != UIPasteboard.General.ChangeCount)
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                if (_lastEntryChangeCount != UIPasteboard.General.ChangeCount)
+                {
+                    System.Diagnostics.Debug.WriteLine("NOT CACHED: _lastEntryChangeCount=[" + _lastEntryChangeCount + "] ChangeCount=[" + UIPasteboard.General.ChangeCount + "]");
                     _lastEntry = new ClipboardEntry();
+                }
                 _lastEntryChangeCount = UIPasteboard.General.ChangeCount;
+                stopwatch.Stop();
+                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService get_Entry elapsed: " + stopwatch.ElapsedMilliseconds);
                 return _lastEntry;
             }
             set
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 if (value is Forms9Patch.ClipboardEntry entry)
                 {
-                    var items = new NSMutableDictionary();
-                    var images = new List<NSMutableDictionary>();
-                    var typeDictionary = new NSMutableDictionary();
 
-                    foreach (var item in entry.MimeHash.Values)
+                    if (!TestPre11 && Forms9Patch.OsInfoService.Version >= new Version(11, 0))
                     {
-                        if ((item.MimeType == "image/png" || item.MimeType == "image/jpeg" || item.MimeType == "image/jpg") && item.Value is byte[] byteArray)
+                        var itemProviders = new List<NSItemProvider>();
+                        foreach (var mimeItem in entry.Items)
                         {
-                            var nsData = NSData.FromArray(byteArray);
-                            var nsUti = item.ToNsUti();
-                            items.Add(nsUti, nsData);
-                            typeDictionary.Add(nsUti, new NSString(byteArray.GetType().FullName));
+                            if (mimeItem.MimeType?.ToNsUti() is NSString nsUti)
+                            {
+                                NSItemProvider itemProvider = null;
+                                if (mimeItem.Value is Uri uri)
+                                {
+                                    var nsUri = new NSUrl(uri.AbsoluteUri);
+                                    itemProvider = new NSItemProvider(nsUri);
+                                }
+                                else if (mimeItem.Value is FileInfo fileInfo)
+                                {
+                                    var nsUri = new NSUrl(fileInfo.FullName);
+                                    itemProvider = new NSItemProvider(nsUri);
+                                }
+                                else if (mimeItem.Value.ToNSObject() is NSObject nsObject)
+                                    itemProvider = new NSItemProvider(nsObject, nsUti);
+                                if (itemProvider != null)
+                                    itemProviders.Add(itemProvider);
+                            }
                         }
-                        else if (item.MimeType == "text/url" && item.Value is string urlString)
+                        if (EntryCaching)
                         {
-                            var nsUrl = new NSUrl(urlString);
-                            var nsUti = item.ToNsUti();
-                            items.Add(nsUti, nsUrl);
-                            typeDictionary.Add(nsUti, new NSString(typeof(string).ToString()));
+                            _lastEntry = value;
+                            _lastEntryChangeCount = UIPasteboard.General.ChangeCount + 1;
                         }
-                        else if (NSDataItem.Create(item) is NSDataItem dataItem)
-                        {
-                            items.Add(dataItem.NSUti, dataItem.KeyedArchiver);
-                            typeDictionary.Add(dataItem.NSUti, new NSString(item.Type.FullName));
-                        }
+                        UIPasteboard.General.ItemProviders = itemProviders.ToArray();
                     }
-                    items.Add(TypeListUti, NSKeyedArchiver.ArchivedDataWithRootObject(typeDictionary));
-                    var changeCount = UIPasteboard.General.ChangeCount;
-                    UIPasteboard.General.Items = new NSDictionary[] { items };
+                    else
+                    {
+                        var items = new List<NSMutableDictionary>();
+                        NSMutableDictionary itemRenditions = null;
+                        //NSMutableDictionary itemCSharpTypeMap = null;
+                        foreach (var mimeItem in entry.Items)
+                        {
+                            System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.1 elapsed: " + stopwatch.ElapsedMilliseconds);
+                            if (mimeItem.MimeType?.ToNsUti() is NSString nsUti && mimeItem.Value.ToNSObject() is NSObject nSObject)
+                            {
+                                /*
+                                Type itemCsharpType = null;
+                                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
+                                    itemCsharpType = nSObject is NSData ? typeof(byte[]) : typeof(Uri);
+                                else
+                                {
+                                    //nSObject = dataItem.KeyedArchiver;
+                                    //nsUti = dataItem.NSUti;
+                                    //itemType = item.Type;
+                                    itemCsharpType = mimeItem.Type;
+                                }
+                                */
+                                foreach (var item in items)
+                                {
+                                    if (!item.Any((kvp) => ((NSString)kvp.Key) == nsUti))
+                                    {
+                                        itemRenditions = item;
+                                        break;
+                                    }
+                                }
+                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.2 elapsed: " + stopwatch.ElapsedMilliseconds);
 
-                    _lastEntry = value;
-                    _lastEntryChangeCount = UIPasteboard.General.ChangeCount;
+                                if (itemRenditions == null)
+                                {
+                                    itemRenditions = new NSMutableDictionary();
+                                    items.Add(itemRenditions);
+                                }
+                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.3 elapsed: " + stopwatch.ElapsedMilliseconds);
+
+                                /*
+                                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
+                                    itemRenditions.Add(nsUti, nSObject);
+                                else
+                                {
+                                    var archiver = NSKeyedArchiver.ArchivedDataWithRootObject(nSObject);
+                                    itemRenditions.Add(nsUti, archiver);
+                                }
+                                */
+
+                                var plist = NSPropertyListSerialization.DataWithPropertyList(nSObject, NSPropertyListFormat.Binary, NSPropertyListWriteOptions.Immutable, out NSError nSError);
+                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.4 elapsed: " + stopwatch.ElapsedMilliseconds);
+                                itemRenditions.Add(nsUti, plist);
+                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.5 elapsed: " + stopwatch.ElapsedMilliseconds);
+
+
+                                //itemRenditions.Add(nsUti, nSObject);
+                            }
+                        }
+                        var array = items.ToArray();
+                        System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.1 elapsed: " + stopwatch.ElapsedMilliseconds);
+                        if (EntryCaching)
+                        {
+                            _lastEntry = value;
+                            _lastEntryChangeCount = UIPasteboard.General.ChangeCount + 1;
+                        }
+                        UIPasteboard.General.Items = array;
+                        System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.2 elapsed: " + stopwatch.ElapsedMilliseconds);
+                    }
+
                 }
 
+                stopwatch.Stop();
             }
         }
 
         public bool EntryCaching { get; set; } = false;
 
+
         #endregion
 
     }
+
 
 }

@@ -39,10 +39,17 @@ namespace Forms9Patch
         /// </summary>
         object Value { get; }
 
+        /*
         /// <summary>
         /// Type of the item (to help you with type conversion)
         /// </summary>
         Type Type { get; }
+        */
     }
 
+
+    public interface INativeMimeItem : IMimeItem
+    {
+        object GetValueAs(Type type);
+    }
 }

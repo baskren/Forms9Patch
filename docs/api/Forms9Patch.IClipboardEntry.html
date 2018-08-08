@@ -96,32 +96,6 @@
   </h3>
   
   
-  <a id="Forms9Patch_IClipboardEntry_AdditionalItems_" data-uid="Forms9Patch.IClipboardEntry.AdditionalItems*"></a>
-  <h4 id="Forms9Patch_IClipboardEntry_AdditionalItems" data-uid="Forms9Patch.IClipboardEntry.AdditionalItems">AdditionalItems</h4>
-  <div class="markdown level1 summary"><p>Any additional items (IClipboardEntryItem) in this ClipboardEntry</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;IClipboardEntryItem&gt; AdditionalItems { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.IClipboardEntryItem.html">IClipboardEntryItem</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="Forms9Patch_IClipboardEntry_Description_" data-uid="Forms9Patch.IClipboardEntry.Description*"></a>
   <h4 id="Forms9Patch_IClipboardEntry_Description" data-uid="Forms9Patch.IClipboardEntry.Description">Description</h4>
   <div class="markdown level1 summary"><p>Description of this ClipboardEntry  on clipboard (really only applies to Android)</p>
@@ -174,6 +148,33 @@
   </table>
   
   
+  <a id="Forms9Patch_IClipboardEntry_Items_" data-uid="Forms9Patch.IClipboardEntry.Items*"></a>
+  <h4 id="Forms9Patch_IClipboardEntry_Items" data-uid="Forms9Patch.IClipboardEntry.Items">Items</h4>
+  <div class="markdown level1 summary"><p>Gets the items in this ClipboardEntry</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IMimeItem&gt; Items { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.IMimeItem.html">IMimeItem</a>&gt;</td>
+        <td><p>The items.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_IClipboardEntry_PlainText_" data-uid="Forms9Patch.IClipboardEntry.PlainText*"></a>
   <h4 id="Forms9Patch_IClipboardEntry_PlainText" data-uid="Forms9Patch.IClipboardEntry.PlainText">PlainText</h4>
   <div class="markdown level1 summary"><p>Plain text item in this ClipboardEntry</p>
@@ -199,6 +200,15 @@
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_MimeTypes_Forms9Patch_IClipboardEntry_">IClipboardEntryExtensions.MimeTypes(IClipboardEntry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetFirstMimeItem__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetFirstMimeItem&lt;T&gt;(IClipboardEntry, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetMimeItems__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetMimeItems&lt;T&gt;(IClipboardEntry, String)</a>
+  </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
   </div>

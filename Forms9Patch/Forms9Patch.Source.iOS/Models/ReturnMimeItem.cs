@@ -1,11 +1,123 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Foundation;
 using MobileCoreServices;
 using UIKit;
+using System.Timers;
+using System.Diagnostics;
 
 namespace Forms9Patch.iOS
 {
+
+    class LazyMimeItem : INativeMimeItem
+    {
+        string _mimeType;
+        public string MimeType
+        {
+            get => _mimeType;
+            internal set
+            {
+                _mimeType = value?.ToLower();
+            }
+        }
+
+        object _value;
+        public object Value
+        {
+            get
+            {
+                if (_value != null)
+                    return _value;
+                return _value = GetValueAs(null);
+
+            }
+        }
+
+        public object GetValueAs(Type type)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            NSObject nsObject = null;
+
+            if (MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) && _kvp.Value is UIImage uiImage)
+            {
+                switch (MimeType)
+                {
+                    case "image/jpeg":
+                    case "image/jpg":
+                        nsObject = uiImage.AsJPEG();
+                        break;
+                    case "image/png":
+                        nsObject = uiImage.AsPNG();
+                        break;
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 1 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+            if (nsObject == null && _kvp.Value is NSData nsData)
+            {
+                NSError nsError = new NSError();
+                NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
+                nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out nsError);
+            }
+            else
+                nsData = null;
+            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 2 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+
+            if (nsObject == null && nsData != null)
+                nsObject = NSKeyedUnarchiver.UnarchiveObject(nsData);
+            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+
+            if (nsObject == null)
+                nsObject = _kvp.Value;
+            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 4 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+
+            var result = nsObject?.ToObject(type);
+            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 5 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+            return result;
+        }
+
+        public Type Type { get; internal set; }
+
+        KeyValuePair<NSObject, NSObject> _kvp;
+        string _typeCodeString;
+
+        private LazyMimeItem(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
+        {
+            if (kvp.Key == null)
+                return;
+            var uti = kvp.Key.ToString();
+            if (uti == null)
+                return;
+            //var values = UIPasteboard.General.DataForPasteboardType(uti);
+            MimeType = UTType.GetPreferredTag(uti, UTType.TagClassMIMEType);
+            if (MimeType == null)
+                return;
+
+            _kvp = kvp;
+            _typeCodeString = typeCodeString;
+
+        }
+
+        public static LazyMimeItem Parse(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
+        {
+            var result = new LazyMimeItem(kvp, typeCodeString);
+            return result.MimeType != null ? result : null;
+        }
+    }
+
+    /*
     class ReturnMimeItem<T> : IMimeItem<T>
     {
         ReturnMimeItem _source;
@@ -88,4 +200,5 @@ namespace Forms9Patch.iOS
             return result;
         }
     }
+    */
 }

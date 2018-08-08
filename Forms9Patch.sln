@@ -307,11 +307,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 		Forms9Patch\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\MimeItemExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\MimeItemExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Extensions\UIViewExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Extensions\UIViewExtensions.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{3D4FFDCB-23F5-4C46-96B3-BECC990CF9EE}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.iOS\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.iOS\Models\Settings.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Models\ClipboardEntry.cs = Forms9Patch\Forms9Patch.Source.iOS\Models\ClipboardEntry.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Models\NSDataItem.cs = Forms9Patch\Forms9Patch.Source.iOS\Models\NSDataItem.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Models\ReturnMimeItem.cs = Forms9Patch\Forms9Patch.Source.iOS\Models\ReturnMimeItem.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{511779C7-3ECA-4D69-B04F-346C6DF2C6CF}"

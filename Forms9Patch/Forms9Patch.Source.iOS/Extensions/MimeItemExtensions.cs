@@ -32,7 +32,7 @@ namespace Forms9Patch.iOS
             if (nsUti == UTType.URL || nsUti == UTType.FileURL)
                 return "text/url";
             if (nsUti == UTType.UTF8PlainText)
-                System.Diagnostics.Debug.WriteLine("");
+                System.Diagnostics.Debug.WriteLine(" UTType.UTF8PlainText:  text/plain?");
             var mime = UTType.GetPreferredTag(nsUti.ToString(), UTType.TagClassMIMEType);
             return mime.ToLower();
         }

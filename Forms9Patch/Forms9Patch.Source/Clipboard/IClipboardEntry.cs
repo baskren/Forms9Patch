@@ -29,12 +29,10 @@ namespace Forms9Patch
         /// </summary>
         string HtmlText { get; }
 
-        Uri Uri { get; }
-
-        IMimeItem<T> GetItem<T>(string mimeType);
-
-        //        IMimeItem GetUntypedItem(string mimeType);
-
-        List<string> MimeTypes { get; }
+        /// <summary>
+        /// Gets the items in this ClipboardEntry
+        /// </summary>
+        /// <value>The items.</value>
+        List<IMimeItem> Items { get; }
     }
 }

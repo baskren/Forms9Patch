@@ -888,7 +888,7 @@ namespace FormsGestures.UWP
                 _runningTapCounterResetter = true;
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    if (_releaseTimer==null || _releaseTimer.Elapsed.Milliseconds > 750)
+                    if (_releaseTimer==null || _releaseTimer.ElapsedMilliseconds > 750)
                     {
                         _numberOfTaps = 0;
                         _releaseTimer?.Stop();

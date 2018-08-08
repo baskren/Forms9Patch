@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+
     <!-- CLIPBOARD -->
+    <!--
     <Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
       <Link>Services\ClipboardService.cs</Link>
     </Compile>
+  -->
+
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">
       <Link>Effects\CustomFontEffect.cs</Link>
@@ -12,6 +16,7 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Effects\SliderStepSizeEffect.cs">
       <Link>Effects\SliderStepSizeEffect.cs</Link>
     </Compile>
+
     <!-- EXTENSIONS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs">
       <Link>Extensions\AlignmentExtensions.cs</Link>
@@ -28,9 +33,12 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs">
       <Link>Extensions\MeasureSpecFactory.cs</Link>
     </Compile>
+    <!--
     <Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
       <Link>Extensions\TypeExtensions.cs</Link>
     </Compile>
+  -->
+
     <!-- HARDWARE KEY LISTENER -->
     <Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs">
       <Link>HardwareKeyListener\HardwareKeyListener.cs</Link>
@@ -38,23 +46,36 @@
     <Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListenerEffect.cs">
       <Link>HardwareKeyListener\HardwareKeyListenerEffect.cs</Link>
     </Compile>
+
     <!-- MODELS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Models\BaselineSpan.cs">
       <Link>Models\BaselineSpan.cs</Link>
     </Compile>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs">
+      <Link>Models\ClipboardEntry.cs</Link>
+    </Compile>
+  -->
     <Compile Include="..\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs">
       <Link>Models\CustomTypefaceSpan.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.Droid\Models\FontManagment.cs">
       <Link>Models\FontManagment.cs</Link>
     </Compile>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs">
+      <Link>Models\ReturnMimeItem.cs</Link>
+    </Compile>
+  -->
     <Compile Include="..\Forms9Patch.Source.Droid\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </Compile>
+
     <!-- PLATORM VIEWS -->
     <Compile Include="..\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs">
       <Link>PlatformViews\F9PTextView.cs</Link>
     </Compile>
+
     <!-- RENDERERS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs">
       <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
@@ -65,6 +86,7 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Renderers\EnhancedListViewRenderer.cs">
       <Link>Renderers\EnhancedListViewRenderer.cs</Link>
     </Compile>
+
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
@@ -87,6 +109,7 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Services\WebViewExtensionsService.cs">
       <Link>Services\WebViewExtensionsService.cs</Link>
     </Compile>
+
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.Platform\Forms9Patch.Platform.targets" />
 </Project>

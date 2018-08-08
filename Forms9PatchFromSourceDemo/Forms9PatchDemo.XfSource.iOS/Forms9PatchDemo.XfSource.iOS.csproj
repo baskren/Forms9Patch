@@ -28,6 +28,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>VS: com.p42.testproject Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Benjamin Askren (JP26SCDRCT)</CodesignKey>
+    <MtouchProfiling>true</MtouchProfiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>

@@ -797,6 +797,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.BubblePopup.OnPropertyChanged
   nameWithType: BubblePopup.OnPropertyChanged
+- uid: Forms9Patch.BubblePopup.OnPropertyChanging(System.String)
+  name: OnPropertyChanging(String)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_OnPropertyChanging_System_String_
+  commentId: M:Forms9Patch.BubblePopup.OnPropertyChanging(System.String)
+  fullName: Forms9Patch.BubblePopup.OnPropertyChanging(System.String)
+  nameWithType: BubblePopup.OnPropertyChanging(String)
+- uid: Forms9Patch.BubblePopup.OnPropertyChanging*
+  name: OnPropertyChanging
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_OnPropertyChanging_
+  commentId: Overload:Forms9Patch.BubblePopup.OnPropertyChanging
+  isSpec: "True"
+  fullName: Forms9Patch.BubblePopup.OnPropertyChanging
+  nameWithType: BubblePopup.OnPropertyChanging
 - uid: Forms9Patch.BubblePopup.Point
   name: Point
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup_Point
@@ -1073,44 +1086,6 @@ references:
   commentId: F:Forms9Patch.Button.BackgroundColorProperty
   fullName: Forms9Patch.Button.BackgroundColorProperty
   nameWithType: Button.BackgroundColorProperty
-- uid: Forms9Patch.Button.BorderColor
-  name: BorderColor
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColor
-  commentId: P:Forms9Patch.Button.BorderColor
-  fullName: Forms9Patch.Button.BorderColor
-  nameWithType: Button.BorderColor
-- uid: Forms9Patch.Button.BorderColor*
-  name: BorderColor
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColor_
-  commentId: Overload:Forms9Patch.Button.BorderColor
-  isSpec: "True"
-  fullName: Forms9Patch.Button.BorderColor
-  nameWithType: Button.BorderColor
-- uid: Forms9Patch.Button.BorderColorProperty
-  name: BorderColorProperty
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderColorProperty
-  commentId: F:Forms9Patch.Button.BorderColorProperty
-  fullName: Forms9Patch.Button.BorderColorProperty
-  nameWithType: Button.BorderColorProperty
-- uid: Forms9Patch.Button.BorderRadius
-  name: BorderRadius
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderRadius
-  commentId: P:Forms9Patch.Button.BorderRadius
-  fullName: Forms9Patch.Button.BorderRadius
-  nameWithType: Button.BorderRadius
-- uid: Forms9Patch.Button.BorderRadius*
-  name: BorderRadius
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderRadius_
-  commentId: Overload:Forms9Patch.Button.BorderRadius
-  isSpec: "True"
-  fullName: Forms9Patch.Button.BorderRadius
-  nameWithType: Button.BorderRadius
-- uid: Forms9Patch.Button.BorderRadiusProperty
-  name: BorderRadiusProperty
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderRadiusProperty
-  commentId: F:Forms9Patch.Button.BorderRadiusProperty
-  fullName: Forms9Patch.Button.BorderRadiusProperty
-  nameWithType: Button.BorderRadiusProperty
 - uid: Forms9Patch.Button.BorderWidth
   name: BorderWidth
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidth
@@ -2834,19 +2809,12 @@ references:
   commentId: T:Forms9Patch.ClipboardEntry
   fullName: Forms9Patch.ClipboardEntry
   nameWithType: ClipboardEntry
-- uid: Forms9Patch.ClipboardEntry.AdditionalItems
-  name: AdditionalItems
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_AdditionalItems
-  commentId: P:Forms9Patch.ClipboardEntry.AdditionalItems
-  fullName: Forms9Patch.ClipboardEntry.AdditionalItems
-  nameWithType: ClipboardEntry.AdditionalItems
-- uid: Forms9Patch.ClipboardEntry.AdditionalItems*
-  name: AdditionalItems
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_AdditionalItems_
-  commentId: Overload:Forms9Patch.ClipboardEntry.AdditionalItems
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntry.AdditionalItems
-  nameWithType: ClipboardEntry.AdditionalItems
+- uid: Forms9Patch.ClipboardEntry.AddValue(System.String,System.Object)
+  name: AddValue(String, Object)
+  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_AddValue_System_String_System_Object_
+  commentId: M:Forms9Patch.ClipboardEntry.AddValue(System.String,System.Object)
+  fullName: Forms9Patch.ClipboardEntry.AddValue(System.String, System.Object)
+  nameWithType: ClipboardEntry.AddValue(String, Object)
 - uid: Forms9Patch.ClipboardEntry.AddValue*
   name: AddValue
   href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_AddValue_
@@ -2854,28 +2822,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ClipboardEntry.AddValue
   nameWithType: ClipboardEntry.AddValue
-- uid: Forms9Patch.ClipboardEntry.AddValue``1(System.String,``0)
-  name: AddValue<T>(String, T)
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_AddValue__1_System_String___0_
-  commentId: M:Forms9Patch.ClipboardEntry.AddValue``1(System.String,``0)
-  name.vb: AddValue(Of T)(String, T)
-  fullName: Forms9Patch.ClipboardEntry.AddValue<T>(System.String, T)
-  fullName.vb: Forms9Patch.ClipboardEntry.AddValue(Of T)(System.String, T)
-  nameWithType: ClipboardEntry.AddValue<T>(String, T)
-  nameWithType.vb: ClipboardEntry.AddValue(Of T)(String, T)
-- uid: Forms9Patch.ClipboardEntry.ContainsMimeType(System.String)
-  name: ContainsMimeType(String)
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_ContainsMimeType_System_String_
-  commentId: M:Forms9Patch.ClipboardEntry.ContainsMimeType(System.String)
-  fullName: Forms9Patch.ClipboardEntry.ContainsMimeType(System.String)
-  nameWithType: ClipboardEntry.ContainsMimeType(String)
-- uid: Forms9Patch.ClipboardEntry.ContainsMimeType*
-  name: ContainsMimeType
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_ContainsMimeType_
-  commentId: Overload:Forms9Patch.ClipboardEntry.ContainsMimeType
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntry.ContainsMimeType
-  nameWithType: ClipboardEntry.ContainsMimeType
 - uid: Forms9Patch.ClipboardEntry.Description
   name: Description
   href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_Description
@@ -2902,35 +2848,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ClipboardEntry.ForPlainText
   nameWithType: ClipboardEntry.ForPlainText
-- uid: Forms9Patch.ClipboardEntry.GetItem*
-  name: GetItem
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_GetItem_
-  commentId: Overload:Forms9Patch.ClipboardEntry.GetItem
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntry.GetItem
-  nameWithType: ClipboardEntry.GetItem
-- uid: Forms9Patch.ClipboardEntry.GetItem``1(System.String)
-  name: GetItem<T>(String)
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_GetItem__1_System_String_
-  commentId: M:Forms9Patch.ClipboardEntry.GetItem``1(System.String)
-  name.vb: GetItem(Of T)(String)
-  fullName: Forms9Patch.ClipboardEntry.GetItem<T>(System.String)
-  fullName.vb: Forms9Patch.ClipboardEntry.GetItem(Of T)(System.String)
-  nameWithType: ClipboardEntry.GetItem<T>(String)
-  nameWithType.vb: ClipboardEntry.GetItem(Of T)(String)
-- uid: Forms9Patch.ClipboardEntry.GetUntypedItem(System.String)
-  name: GetUntypedItem(String)
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_GetUntypedItem_System_String_
-  commentId: M:Forms9Patch.ClipboardEntry.GetUntypedItem(System.String)
-  fullName: Forms9Patch.ClipboardEntry.GetUntypedItem(System.String)
-  nameWithType: ClipboardEntry.GetUntypedItem(String)
-- uid: Forms9Patch.ClipboardEntry.GetUntypedItem*
-  name: GetUntypedItem
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_GetUntypedItem_
-  commentId: Overload:Forms9Patch.ClipboardEntry.GetUntypedItem
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntry.GetUntypedItem
-  nameWithType: ClipboardEntry.GetUntypedItem
 - uid: Forms9Patch.ClipboardEntry.HtmlText
   name: HtmlText
   href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_HtmlText
@@ -2944,19 +2861,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ClipboardEntry.HtmlText
   nameWithType: ClipboardEntry.HtmlText
-- uid: Forms9Patch.ClipboardEntry.MimeTypes
-  name: MimeTypes
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_MimeTypes
-  commentId: P:Forms9Patch.ClipboardEntry.MimeTypes
-  fullName: Forms9Patch.ClipboardEntry.MimeTypes
-  nameWithType: ClipboardEntry.MimeTypes
-- uid: Forms9Patch.ClipboardEntry.MimeTypes*
-  name: MimeTypes
-  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_MimeTypes_
-  commentId: Overload:Forms9Patch.ClipboardEntry.MimeTypes
+- uid: Forms9Patch.ClipboardEntry.Items
+  name: Items
+  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_Items
+  commentId: P:Forms9Patch.ClipboardEntry.Items
+  fullName: Forms9Patch.ClipboardEntry.Items
+  nameWithType: ClipboardEntry.Items
+- uid: Forms9Patch.ClipboardEntry.Items*
+  name: Items
+  href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_Items_
+  commentId: Overload:Forms9Patch.ClipboardEntry.Items
   isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntry.MimeTypes
-  nameWithType: ClipboardEntry.MimeTypes
+  fullName: Forms9Patch.ClipboardEntry.Items
+  nameWithType: ClipboardEntry.Items
 - uid: Forms9Patch.ClipboardEntry.PlainText
   name: PlainText
   href: api/Forms9Patch.ClipboardEntry.html#Forms9Patch_ClipboardEntry_PlainText
@@ -2983,107 +2900,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ClipboardEntry.ValidItemType
   nameWithType: ClipboardEntry.ValidItemType
-- uid: Forms9Patch.ClipboardEntryItem`1
-  name: ClipboardEntryItem<T>
-  href: api/Forms9Patch.ClipboardEntryItem-1.html
-  commentId: T:Forms9Patch.ClipboardEntryItem`1
-  name.vb: ClipboardEntryItem(Of T)
-  fullName: Forms9Patch.ClipboardEntryItem<T>
-  fullName.vb: Forms9Patch.ClipboardEntryItem(Of T)
-  nameWithType: ClipboardEntryItem<T>
-  nameWithType.vb: ClipboardEntryItem(Of T)
-- uid: Forms9Patch.ClipboardEntryItem`1.#ctor(System.String,`0)
-  name: ClipboardEntryItem(String, T)
-  href: api/Forms9Patch.ClipboardEntryItem-1.html#Forms9Patch_ClipboardEntryItem_1__ctor_System_String__0_
-  commentId: M:Forms9Patch.ClipboardEntryItem`1.#ctor(System.String,`0)
-  fullName: Forms9Patch.ClipboardEntryItem<T>.ClipboardEntryItem(System.String, T)
-  fullName.vb: Forms9Patch.ClipboardEntryItem(Of T).ClipboardEntryItem(System.String, T)
-  nameWithType: ClipboardEntryItem<T>.ClipboardEntryItem(String, T)
-  nameWithType.vb: ClipboardEntryItem(Of T).ClipboardEntryItem(String, T)
-- uid: Forms9Patch.ClipboardEntryItem`1.#ctor*
-  name: ClipboardEntryItem
-  href: api/Forms9Patch.ClipboardEntryItem-1.html#Forms9Patch_ClipboardEntryItem_1__ctor_
-  commentId: Overload:Forms9Patch.ClipboardEntryItem`1.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntryItem<T>.ClipboardEntryItem
-  fullName.vb: Forms9Patch.ClipboardEntryItem(Of T).ClipboardEntryItem
-  nameWithType: ClipboardEntryItem<T>.ClipboardEntryItem
-  nameWithType.vb: ClipboardEntryItem(Of T).ClipboardEntryItem
-- uid: Forms9Patch.ClipboardEntryItem`1.Value
-  name: Value
-  href: api/Forms9Patch.ClipboardEntryItem-1.html#Forms9Patch_ClipboardEntryItem_1_Value
-  commentId: P:Forms9Patch.ClipboardEntryItem`1.Value
-  fullName: Forms9Patch.ClipboardEntryItem<T>.Value
-  fullName.vb: Forms9Patch.ClipboardEntryItem(Of T).Value
-  nameWithType: ClipboardEntryItem<T>.Value
-  nameWithType.vb: ClipboardEntryItem(Of T).Value
-- uid: Forms9Patch.ClipboardEntryItem`1.Value*
-  name: Value
-  href: api/Forms9Patch.ClipboardEntryItem-1.html#Forms9Patch_ClipboardEntryItem_1_Value_
-  commentId: Overload:Forms9Patch.ClipboardEntryItem`1.Value
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardEntryItem<T>.Value
-  fullName.vb: Forms9Patch.ClipboardEntryItem(Of T).Value
-  nameWithType: ClipboardEntryItem<T>.Value
-  nameWithType.vb: ClipboardEntryItem(Of T).Value
-- uid: Forms9Patch.ClipboardItemBase
-  name: ClipboardItemBase
-  href: api/Forms9Patch.ClipboardItemBase.html
-  commentId: T:Forms9Patch.ClipboardItemBase
-  fullName: Forms9Patch.ClipboardItemBase
-  nameWithType: ClipboardItemBase
-- uid: Forms9Patch.ClipboardItemBase.#ctor(System.String)
-  name: ClipboardItemBase(String)
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase__ctor_System_String_
-  commentId: M:Forms9Patch.ClipboardItemBase.#ctor(System.String)
-  fullName: Forms9Patch.ClipboardItemBase.ClipboardItemBase(System.String)
-  nameWithType: ClipboardItemBase.ClipboardItemBase(String)
-- uid: Forms9Patch.ClipboardItemBase.#ctor*
-  name: ClipboardItemBase
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase__ctor_
-  commentId: Overload:Forms9Patch.ClipboardItemBase.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardItemBase.ClipboardItemBase
-  nameWithType: ClipboardItemBase.ClipboardItemBase
-- uid: Forms9Patch.ClipboardItemBase.MimeType
-  name: MimeType
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_MimeType
-  commentId: P:Forms9Patch.ClipboardItemBase.MimeType
-  fullName: Forms9Patch.ClipboardItemBase.MimeType
-  nameWithType: ClipboardItemBase.MimeType
-- uid: Forms9Patch.ClipboardItemBase.MimeType*
-  name: MimeType
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_MimeType_
-  commentId: Overload:Forms9Patch.ClipboardItemBase.MimeType
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardItemBase.MimeType
-  nameWithType: ClipboardItemBase.MimeType
-- uid: Forms9Patch.ClipboardItemBase.Type
-  name: Type
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_Type
-  commentId: P:Forms9Patch.ClipboardItemBase.Type
-  fullName: Forms9Patch.ClipboardItemBase.Type
-  nameWithType: ClipboardItemBase.Type
-- uid: Forms9Patch.ClipboardItemBase.Type*
-  name: Type
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_Type_
-  commentId: Overload:Forms9Patch.ClipboardItemBase.Type
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardItemBase.Type
-  nameWithType: ClipboardItemBase.Type
-- uid: Forms9Patch.ClipboardItemBase.Value
-  name: Value
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_Value
-  commentId: P:Forms9Patch.ClipboardItemBase.Value
-  fullName: Forms9Patch.ClipboardItemBase.Value
-  nameWithType: ClipboardItemBase.Value
-- uid: Forms9Patch.ClipboardItemBase.Value*
-  name: Value
-  href: api/Forms9Patch.ClipboardItemBase.html#Forms9Patch_ClipboardItemBase_Value_
-  commentId: Overload:Forms9Patch.ClipboardItemBase.Value
-  isSpec: "True"
-  fullName: Forms9Patch.ClipboardItemBase.Value
-  nameWithType: ClipboardItemBase.Value
 - uid: Forms9Patch.ColorExtension
   name: ColorExtension
   href: api/Forms9Patch.ColorExtension.html
@@ -3399,6 +3215,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.DataTemplateSelector.Add
   nameWithType: DataTemplateSelector.Add
+- uid: Forms9Patch.DataTransfer
+  name: DataTransfer
+  href: api/Forms9Patch.DataTransfer.html
+  commentId: T:Forms9Patch.DataTransfer
+  fullName: Forms9Patch.DataTransfer
+  nameWithType: DataTransfer
 - uid: Forms9Patch.Display
   name: Display
   href: api/Forms9Patch.Display.html
@@ -5783,19 +5605,6 @@ references:
   commentId: T:Forms9Patch.IClipboardEntry
   fullName: Forms9Patch.IClipboardEntry
   nameWithType: IClipboardEntry
-- uid: Forms9Patch.IClipboardEntry.AdditionalItems
-  name: AdditionalItems
-  href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_AdditionalItems
-  commentId: P:Forms9Patch.IClipboardEntry.AdditionalItems
-  fullName: Forms9Patch.IClipboardEntry.AdditionalItems
-  nameWithType: IClipboardEntry.AdditionalItems
-- uid: Forms9Patch.IClipboardEntry.AdditionalItems*
-  name: AdditionalItems
-  href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_AdditionalItems_
-  commentId: Overload:Forms9Patch.IClipboardEntry.AdditionalItems
-  isSpec: "True"
-  fullName: Forms9Patch.IClipboardEntry.AdditionalItems
-  nameWithType: IClipboardEntry.AdditionalItems
 - uid: Forms9Patch.IClipboardEntry.Description
   name: Description
   href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_Description
@@ -5822,6 +5631,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IClipboardEntry.HtmlText
   nameWithType: IClipboardEntry.HtmlText
+- uid: Forms9Patch.IClipboardEntry.Items
+  name: Items
+  href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_Items
+  commentId: P:Forms9Patch.IClipboardEntry.Items
+  fullName: Forms9Patch.IClipboardEntry.Items
+  nameWithType: IClipboardEntry.Items
+- uid: Forms9Patch.IClipboardEntry.Items*
+  name: Items
+  href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_Items_
+  commentId: Overload:Forms9Patch.IClipboardEntry.Items
+  isSpec: "True"
+  fullName: Forms9Patch.IClipboardEntry.Items
+  nameWithType: IClipboardEntry.Items
 - uid: Forms9Patch.IClipboardEntry.PlainText
   name: PlainText
   href: api/Forms9Patch.IClipboardEntry.html#Forms9Patch_IClipboardEntry_PlainText
@@ -5835,77 +5657,70 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IClipboardEntry.PlainText
   nameWithType: IClipboardEntry.PlainText
-- uid: Forms9Patch.IClipboardEntryItem
-  name: IClipboardEntryItem
-  href: api/Forms9Patch.IClipboardEntryItem.html
-  commentId: T:Forms9Patch.IClipboardEntryItem
-  fullName: Forms9Patch.IClipboardEntryItem
-  nameWithType: IClipboardEntryItem
-- uid: Forms9Patch.IClipboardEntryItem.MimeType
-  name: MimeType
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_MimeType
-  commentId: P:Forms9Patch.IClipboardEntryItem.MimeType
-  fullName: Forms9Patch.IClipboardEntryItem.MimeType
-  nameWithType: IClipboardEntryItem.MimeType
-- uid: Forms9Patch.IClipboardEntryItem.MimeType*
-  name: MimeType
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_MimeType_
-  commentId: Overload:Forms9Patch.IClipboardEntryItem.MimeType
+- uid: Forms9Patch.IClipboardEntryExtensions
+  name: IClipboardEntryExtensions
+  href: api/Forms9Patch.IClipboardEntryExtensions.html
+  commentId: T:Forms9Patch.IClipboardEntryExtensions
+  fullName: Forms9Patch.IClipboardEntryExtensions
+  nameWithType: IClipboardEntryExtensions
+- uid: Forms9Patch.IClipboardEntryExtensions.AddContentOfFile(Forms9Patch.ClipboardEntry,System.String,System.String)
+  name: AddContentOfFile(ClipboardEntry, String, String)
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_AddContentOfFile_Forms9Patch_ClipboardEntry_System_String_System_String_
+  commentId: M:Forms9Patch.IClipboardEntryExtensions.AddContentOfFile(Forms9Patch.ClipboardEntry,System.String,System.String)
+  fullName: Forms9Patch.IClipboardEntryExtensions.AddContentOfFile(Forms9Patch.ClipboardEntry, System.String, System.String)
+  nameWithType: IClipboardEntryExtensions.AddContentOfFile(ClipboardEntry, String, String)
+- uid: Forms9Patch.IClipboardEntryExtensions.AddContentOfFile*
+  name: AddContentOfFile
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_AddContentOfFile_
+  commentId: Overload:Forms9Patch.IClipboardEntryExtensions.AddContentOfFile
   isSpec: "True"
-  fullName: Forms9Patch.IClipboardEntryItem.MimeType
-  nameWithType: IClipboardEntryItem.MimeType
-- uid: Forms9Patch.IClipboardEntryItem.Type
-  name: Type
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_Type
-  commentId: P:Forms9Patch.IClipboardEntryItem.Type
-  fullName: Forms9Patch.IClipboardEntryItem.Type
-  nameWithType: IClipboardEntryItem.Type
-- uid: Forms9Patch.IClipboardEntryItem.Type*
-  name: Type
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_Type_
-  commentId: Overload:Forms9Patch.IClipboardEntryItem.Type
+  fullName: Forms9Patch.IClipboardEntryExtensions.AddContentOfFile
+  nameWithType: IClipboardEntryExtensions.AddContentOfFile
+- uid: Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem*
+  name: GetFirstMimeItem
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetFirstMimeItem_
+  commentId: Overload:Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem
   isSpec: "True"
-  fullName: Forms9Patch.IClipboardEntryItem.Type
-  nameWithType: IClipboardEntryItem.Type
-- uid: Forms9Patch.IClipboardEntryItem.Value
-  name: Value
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_Value
-  commentId: P:Forms9Patch.IClipboardEntryItem.Value
-  fullName: Forms9Patch.IClipboardEntryItem.Value
-  nameWithType: IClipboardEntryItem.Value
-- uid: Forms9Patch.IClipboardEntryItem.Value*
-  name: Value
-  href: api/Forms9Patch.IClipboardEntryItem.html#Forms9Patch_IClipboardEntryItem_Value_
-  commentId: Overload:Forms9Patch.IClipboardEntryItem.Value
+  fullName: Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem
+  nameWithType: IClipboardEntryExtensions.GetFirstMimeItem
+- uid: Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem``1(Forms9Patch.IClipboardEntry,System.String)
+  name: GetFirstMimeItem<T>(IClipboardEntry, String)
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetFirstMimeItem__1_Forms9Patch_IClipboardEntry_System_String_
+  commentId: M:Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem``1(Forms9Patch.IClipboardEntry,System.String)
+  name.vb: GetFirstMimeItem(Of T)(IClipboardEntry, String)
+  fullName: Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem<T>(Forms9Patch.IClipboardEntry, System.String)
+  fullName.vb: Forms9Patch.IClipboardEntryExtensions.GetFirstMimeItem(Of T)(Forms9Patch.IClipboardEntry, System.String)
+  nameWithType: IClipboardEntryExtensions.GetFirstMimeItem<T>(IClipboardEntry, String)
+  nameWithType.vb: IClipboardEntryExtensions.GetFirstMimeItem(Of T)(IClipboardEntry, String)
+- uid: Forms9Patch.IClipboardEntryExtensions.GetMimeItems*
+  name: GetMimeItems
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetMimeItems_
+  commentId: Overload:Forms9Patch.IClipboardEntryExtensions.GetMimeItems
   isSpec: "True"
-  fullName: Forms9Patch.IClipboardEntryItem.Value
-  nameWithType: IClipboardEntryItem.Value
-- uid: Forms9Patch.IClipboardEntryItem`1
-  name: IClipboardEntryItem<T>
-  href: api/Forms9Patch.IClipboardEntryItem-1.html
-  commentId: T:Forms9Patch.IClipboardEntryItem`1
-  name.vb: IClipboardEntryItem(Of T)
-  fullName: Forms9Patch.IClipboardEntryItem<T>
-  fullName.vb: Forms9Patch.IClipboardEntryItem(Of T)
-  nameWithType: IClipboardEntryItem<T>
-  nameWithType.vb: IClipboardEntryItem(Of T)
-- uid: Forms9Patch.IClipboardEntryItem`1.Value
-  name: Value
-  href: api/Forms9Patch.IClipboardEntryItem-1.html#Forms9Patch_IClipboardEntryItem_1_Value
-  commentId: P:Forms9Patch.IClipboardEntryItem`1.Value
-  fullName: Forms9Patch.IClipboardEntryItem<T>.Value
-  fullName.vb: Forms9Patch.IClipboardEntryItem(Of T).Value
-  nameWithType: IClipboardEntryItem<T>.Value
-  nameWithType.vb: IClipboardEntryItem(Of T).Value
-- uid: Forms9Patch.IClipboardEntryItem`1.Value*
-  name: Value
-  href: api/Forms9Patch.IClipboardEntryItem-1.html#Forms9Patch_IClipboardEntryItem_1_Value_
-  commentId: Overload:Forms9Patch.IClipboardEntryItem`1.Value
+  fullName: Forms9Patch.IClipboardEntryExtensions.GetMimeItems
+  nameWithType: IClipboardEntryExtensions.GetMimeItems
+- uid: Forms9Patch.IClipboardEntryExtensions.GetMimeItems``1(Forms9Patch.IClipboardEntry,System.String)
+  name: GetMimeItems<T>(IClipboardEntry, String)
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetMimeItems__1_Forms9Patch_IClipboardEntry_System_String_
+  commentId: M:Forms9Patch.IClipboardEntryExtensions.GetMimeItems``1(Forms9Patch.IClipboardEntry,System.String)
+  name.vb: GetMimeItems(Of T)(IClipboardEntry, String)
+  fullName: Forms9Patch.IClipboardEntryExtensions.GetMimeItems<T>(Forms9Patch.IClipboardEntry, System.String)
+  fullName.vb: Forms9Patch.IClipboardEntryExtensions.GetMimeItems(Of T)(Forms9Patch.IClipboardEntry, System.String)
+  nameWithType: IClipboardEntryExtensions.GetMimeItems<T>(IClipboardEntry, String)
+  nameWithType.vb: IClipboardEntryExtensions.GetMimeItems(Of T)(IClipboardEntry, String)
+- uid: Forms9Patch.IClipboardEntryExtensions.MimeTypes(Forms9Patch.IClipboardEntry)
+  name: MimeTypes(IClipboardEntry)
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_MimeTypes_Forms9Patch_IClipboardEntry_
+  commentId: M:Forms9Patch.IClipboardEntryExtensions.MimeTypes(Forms9Patch.IClipboardEntry)
+  fullName: Forms9Patch.IClipboardEntryExtensions.MimeTypes(Forms9Patch.IClipboardEntry)
+  nameWithType: IClipboardEntryExtensions.MimeTypes(IClipboardEntry)
+- uid: Forms9Patch.IClipboardEntryExtensions.MimeTypes*
+  name: MimeTypes
+  href: api/Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_MimeTypes_
+  commentId: Overload:Forms9Patch.IClipboardEntryExtensions.MimeTypes
   isSpec: "True"
-  fullName: Forms9Patch.IClipboardEntryItem<T>.Value
-  fullName.vb: Forms9Patch.IClipboardEntryItem(Of T).Value
-  nameWithType: IClipboardEntryItem<T>.Value
-  nameWithType.vb: IClipboardEntryItem(Of T).Value
+  fullName: Forms9Patch.IClipboardEntryExtensions.MimeTypes
+  nameWithType: IClipboardEntryExtensions.MimeTypes
 - uid: Forms9Patch.IElement
   name: IElement
   href: api/Forms9Patch.IElement.html
@@ -6846,6 +6661,77 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IMenuItem.Text
   nameWithType: IMenuItem.Text
+- uid: Forms9Patch.IMimeItem
+  name: IMimeItem
+  href: api/Forms9Patch.IMimeItem.html
+  commentId: T:Forms9Patch.IMimeItem
+  fullName: Forms9Patch.IMimeItem
+  nameWithType: IMimeItem
+- uid: Forms9Patch.IMimeItem.MimeType
+  name: MimeType
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_MimeType
+  commentId: P:Forms9Patch.IMimeItem.MimeType
+  fullName: Forms9Patch.IMimeItem.MimeType
+  nameWithType: IMimeItem.MimeType
+- uid: Forms9Patch.IMimeItem.MimeType*
+  name: MimeType
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_MimeType_
+  commentId: Overload:Forms9Patch.IMimeItem.MimeType
+  isSpec: "True"
+  fullName: Forms9Patch.IMimeItem.MimeType
+  nameWithType: IMimeItem.MimeType
+- uid: Forms9Patch.IMimeItem.Type
+  name: Type
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_Type
+  commentId: P:Forms9Patch.IMimeItem.Type
+  fullName: Forms9Patch.IMimeItem.Type
+  nameWithType: IMimeItem.Type
+- uid: Forms9Patch.IMimeItem.Type*
+  name: Type
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_Type_
+  commentId: Overload:Forms9Patch.IMimeItem.Type
+  isSpec: "True"
+  fullName: Forms9Patch.IMimeItem.Type
+  nameWithType: IMimeItem.Type
+- uid: Forms9Patch.IMimeItem.Value
+  name: Value
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_Value
+  commentId: P:Forms9Patch.IMimeItem.Value
+  fullName: Forms9Patch.IMimeItem.Value
+  nameWithType: IMimeItem.Value
+- uid: Forms9Patch.IMimeItem.Value*
+  name: Value
+  href: api/Forms9Patch.IMimeItem.html#Forms9Patch_IMimeItem_Value_
+  commentId: Overload:Forms9Patch.IMimeItem.Value
+  isSpec: "True"
+  fullName: Forms9Patch.IMimeItem.Value
+  nameWithType: IMimeItem.Value
+- uid: Forms9Patch.IMimeItem`1
+  name: IMimeItem<T>
+  href: api/Forms9Patch.IMimeItem-1.html
+  commentId: T:Forms9Patch.IMimeItem`1
+  name.vb: IMimeItem(Of T)
+  fullName: Forms9Patch.IMimeItem<T>
+  fullName.vb: Forms9Patch.IMimeItem(Of T)
+  nameWithType: IMimeItem<T>
+  nameWithType.vb: IMimeItem(Of T)
+- uid: Forms9Patch.IMimeItem`1.Value
+  name: Value
+  href: api/Forms9Patch.IMimeItem-1.html#Forms9Patch_IMimeItem_1_Value
+  commentId: P:Forms9Patch.IMimeItem`1.Value
+  fullName: Forms9Patch.IMimeItem<T>.Value
+  fullName.vb: Forms9Patch.IMimeItem(Of T).Value
+  nameWithType: IMimeItem<T>.Value
+  nameWithType.vb: IMimeItem(Of T).Value
+- uid: Forms9Patch.IMimeItem`1.Value*
+  name: Value
+  href: api/Forms9Patch.IMimeItem-1.html#Forms9Patch_IMimeItem_1_Value_
+  commentId: Overload:Forms9Patch.IMimeItem`1.Value
+  isSpec: "True"
+  fullName: Forms9Patch.IMimeItem<T>.Value
+  fullName.vb: Forms9Patch.IMimeItem(Of T).Value
+  nameWithType: IMimeItem<T>.Value
+  nameWithType.vb: IMimeItem(Of T).Value
 - uid: Forms9Patch.IPopup
   name: IPopup
   href: api/Forms9Patch.IPopup.html
@@ -9022,6 +8908,124 @@ references:
   commentId: T:Forms9Patch.MaterialSegmentedControl
   fullName: Forms9Patch.MaterialSegmentedControl
   nameWithType: MaterialSegmentedControl
+- uid: Forms9Patch.MimeItem
+  name: MimeItem
+  href: api/Forms9Patch.MimeItem.html
+  commentId: T:Forms9Patch.MimeItem
+  fullName: Forms9Patch.MimeItem
+  nameWithType: MimeItem
+- uid: Forms9Patch.MimeItem.#ctor(System.String,System.Object)
+  name: MimeItem(String, Object)
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem__ctor_System_String_System_Object_
+  commentId: M:Forms9Patch.MimeItem.#ctor(System.String,System.Object)
+  fullName: Forms9Patch.MimeItem.MimeItem(System.String, System.Object)
+  nameWithType: MimeItem.MimeItem(String, Object)
+- uid: Forms9Patch.MimeItem.#ctor*
+  name: MimeItem
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem__ctor_
+  commentId: Overload:Forms9Patch.MimeItem.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem.MimeItem
+  nameWithType: MimeItem.MimeItem
+- uid: Forms9Patch.MimeItem.MimeType
+  name: MimeType
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_MimeType
+  commentId: P:Forms9Patch.MimeItem.MimeType
+  fullName: Forms9Patch.MimeItem.MimeType
+  nameWithType: MimeItem.MimeType
+- uid: Forms9Patch.MimeItem.MimeType*
+  name: MimeType
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_MimeType_
+  commentId: Overload:Forms9Patch.MimeItem.MimeType
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem.MimeType
+  nameWithType: MimeItem.MimeType
+- uid: Forms9Patch.MimeItem.Type
+  name: Type
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_Type
+  commentId: P:Forms9Patch.MimeItem.Type
+  fullName: Forms9Patch.MimeItem.Type
+  nameWithType: MimeItem.Type
+- uid: Forms9Patch.MimeItem.Type*
+  name: Type
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_Type_
+  commentId: Overload:Forms9Patch.MimeItem.Type
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem.Type
+  nameWithType: MimeItem.Type
+- uid: Forms9Patch.MimeItem.Value
+  name: Value
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_Value
+  commentId: P:Forms9Patch.MimeItem.Value
+  fullName: Forms9Patch.MimeItem.Value
+  nameWithType: MimeItem.Value
+- uid: Forms9Patch.MimeItem.Value*
+  name: Value
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_Value_
+  commentId: Overload:Forms9Patch.MimeItem.Value
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem.Value
+  nameWithType: MimeItem.Value
+- uid: Forms9Patch.MimeItem`1
+  name: MimeItem<T>
+  href: api/Forms9Patch.MimeItem-1.html
+  commentId: T:Forms9Patch.MimeItem`1
+  name.vb: MimeItem(Of T)
+  fullName: Forms9Patch.MimeItem<T>
+  fullName.vb: Forms9Patch.MimeItem(Of T)
+  nameWithType: MimeItem<T>
+  nameWithType.vb: MimeItem(Of T)
+- uid: Forms9Patch.MimeItem`1.#ctor(System.String,`0)
+  name: MimeItem(String, T)
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1__ctor_System_String__0_
+  commentId: M:Forms9Patch.MimeItem`1.#ctor(System.String,`0)
+  fullName: Forms9Patch.MimeItem<T>.MimeItem(System.String, T)
+  fullName.vb: Forms9Patch.MimeItem(Of T).MimeItem(System.String, T)
+  nameWithType: MimeItem<T>.MimeItem(String, T)
+  nameWithType.vb: MimeItem(Of T).MimeItem(String, T)
+- uid: Forms9Patch.MimeItem`1.#ctor*
+  name: MimeItem
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1__ctor_
+  commentId: Overload:Forms9Patch.MimeItem`1.#ctor
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem<T>.MimeItem
+  fullName.vb: Forms9Patch.MimeItem(Of T).MimeItem
+  nameWithType: MimeItem<T>.MimeItem
+  nameWithType.vb: MimeItem(Of T).MimeItem
+- uid: Forms9Patch.MimeItem`1.Create(System.String,System.Object)
+  name: Create(String, Object)
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1_Create_System_String_System_Object_
+  commentId: M:Forms9Patch.MimeItem`1.Create(System.String,System.Object)
+  fullName: Forms9Patch.MimeItem<T>.Create(System.String, System.Object)
+  fullName.vb: Forms9Patch.MimeItem(Of T).Create(System.String, System.Object)
+  nameWithType: MimeItem<T>.Create(String, Object)
+  nameWithType.vb: MimeItem(Of T).Create(String, Object)
+- uid: Forms9Patch.MimeItem`1.Create*
+  name: Create
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1_Create_
+  commentId: Overload:Forms9Patch.MimeItem`1.Create
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem<T>.Create
+  fullName.vb: Forms9Patch.MimeItem(Of T).Create
+  nameWithType: MimeItem<T>.Create
+  nameWithType.vb: MimeItem(Of T).Create
+- uid: Forms9Patch.MimeItem`1.Value
+  name: Value
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1_Value
+  commentId: P:Forms9Patch.MimeItem`1.Value
+  fullName: Forms9Patch.MimeItem<T>.Value
+  fullName.vb: Forms9Patch.MimeItem(Of T).Value
+  nameWithType: MimeItem<T>.Value
+  nameWithType.vb: MimeItem(Of T).Value
+- uid: Forms9Patch.MimeItem`1.Value*
+  name: Value
+  href: api/Forms9Patch.MimeItem-1.html#Forms9Patch_MimeItem_1_Value_
+  commentId: Overload:Forms9Patch.MimeItem`1.Value
+  isSpec: "True"
+  fullName: Forms9Patch.MimeItem<T>.Value
+  fullName.vb: Forms9Patch.MimeItem(Of T).Value
+  nameWithType: MimeItem<T>.Value
+  nameWithType.vb: MimeItem(Of T).Value
 - uid: Forms9Patch.ModalPopup
   name: ModalPopup
   href: api/Forms9Patch.ModalPopup.html

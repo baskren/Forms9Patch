@@ -64,20 +64,11 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
       <Link>DataTransferService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Models\NSDataItem.cs">
-      <Link>NSDataItem.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
       <Link>ClipboardService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Extensions\MimeItemExtensions.cs">
-      <Link>MimeItemExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Models\ReturnMimeItem.cs">
       <Link>ReturnMimeItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Models\ClipboardEntry.cs">
-      <Link>ClipboardEntry.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />

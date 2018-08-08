@@ -22,8 +22,6 @@ namespace Forms9Patch.Droid
     {
 
         #region Static implementation
-        readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();
-
         static ClipboardManager _clipboardManager;
         static ClipboardManager Clipboard
         {
@@ -31,197 +29,6 @@ namespace Forms9Patch.Droid
             {
                 _clipboardManager = _clipboardManager ?? (ClipboardManager)Settings.Activity.GetSystemService(Context.ClipboardService);
                 return _clipboardManager;
-            }
-        }
-        #endregion
-
-        #region ReturnClipboardEntryItem
-
-        class ReturnClipboardEntryItem<T> : IMimeItem<T>
-        {
-            ReturnClipboardEntryItem _source;
-
-            public string MimeType => _source.MimeType;
-            public T Value => (T)_source.Value;
-            public Type Type => _source.Type;
-
-            object IMimeItem.Value => _source.Value;
-
-            public ReturnClipboardEntryItem(ReturnClipboardEntryItem source)
-            {
-                _source = source;
-            }
-        }
-
-        class ReturnClipboardEntryItem : IMimeItem
-        {
-            public string MimeType { get; protected set; }
-
-            ICursor _cursor;
-            ICursor Cursor
-            {
-                get
-                {
-                    if (_cursor == null)
-                    {
-                        var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
-                        _cursor = (ICursor)loader.LoadInBackground();
-                    }
-                    return _cursor;
-                }
-            }
-
-            public object Value
-            {
-                get
-                {
-                    if (Cursor.Count == 0 || Cursor.ColumnCount == 0)
-                        return null;
-
-                    var typeString = _entryItemTypeCaching ? Cursor.Extras.GetString("CSharpType") : null;
-                    Type type = null;
-                    if (!string.IsNullOrWhiteSpace(typeString))
-                        type = Type.GetType(typeString);
-                    if (type == null)
-                        type = DetermineType();
-
-                    if (Cursor.Count == 1)
-                    {
-                        if (Cursor.ColumnCount == 1)
-                            return GetCursorItem(0, 0, type);
-                        var dictionary = (IDictionary)Activator.CreateInstance(type);
-                        Type valueType = null;
-                        if (type.IsGenericType)
-                            valueType = type.GetGenericArguments()[1];
-                        var columnNames = Cursor.GetColumnNames();
-                        for (int c = 0; c < Cursor.ColumnCount; c++)
-                        {
-                            var key = columnNames[c];
-                            var value = GetCursorItem(0, c, valueType);
-                            dictionary.Add(key, value);
-                        }
-                        return dictionary;
-                    }
-
-                    var list = (IList)Activator.CreateInstance(type);
-                    if (Cursor.ColumnCount == 1)
-                    {
-                        Type valueType = null;
-                        if (type.IsGenericType)
-                            valueType = type.GetGenericArguments()[0];
-                        for (int i = 0; i < Cursor.Count; i++)
-                            list.Add(GetCursorItem(i, 0, valueType));
-                        return list;
-                    }
-
-                    if (type.IsGenericType)
-                    {
-                        // and it should be because type should be an IList<>
-                        var itemType = type.GetGenericArguments()[0];
-                        var columnNames = Cursor.GetColumnNames();
-                        if (itemType.IsGenericType)
-                        {
-                            var valueType = itemType.GetGenericArguments()[1];
-                            for (int i = 0; i < Cursor.Count; i++)
-                            {
-                                var dictionary = (IDictionary)Activator.CreateInstance(itemType);
-                                for (int c = 0; c < Cursor.ColumnCount; c++)
-                                {
-                                    var key = columnNames[c];
-                                    var value = GetCursorItem(i, c, valueType);
-                                    dictionary.Add(key, value);
-                                }
-                                list.Add(dictionary);
-                            }
-                            return list;
-                        }
-                    }
-                    throw new Exception("[" + type + "] was not parcable.");
-                }
-            }
-
-            Type _type;
-            public Type Type
-            {
-                get
-                {
-                    _type = _type ?? DetermineType();
-                    return _type;
-                }
-            }
-
-            readonly Android.Net.Uri _uri;
-
-            public ReturnClipboardEntryItem(Android.Net.Uri uri)
-            {
-                _uri = uri;
-                MimeType = Settings.Activity.ContentResolver.GetType(uri);
-            }
-
-            Type DetermineType()
-            {
-                var typeString = _entryItemTypeCaching ? Cursor.Extras.GetString("CSharpType") : null;
-                if (!string.IsNullOrWhiteSpace(typeString))
-                    return Type.GetType(typeString);
-
-                if (Cursor.ColumnCount == 0 || Cursor.Count == 0)
-                    return null;
-
-                if (Cursor.ColumnCount == 1)
-                    return Cursor.GetType(0).ToCSharpType();
-
-                Cursor.MoveToPosition(0);
-                var fieldTypes = new List<FieldType>();
-                for (int i = 0; i < Cursor.ColumnCount; i++)
-                    fieldTypes.Add(Cursor.GetType(i));
-                bool allSame = true;
-                FieldType fieldType = fieldTypes[0];
-                for (int i = 1; i < fieldTypes.Count; i++)
-                    if (fieldTypes[i] != fieldType)
-                    {
-                        allSame = false;
-                        break;
-                    }
-                var dictionaryType = typeof(Dictionary<,>);
-                var constructedDictionaryType = dictionaryType.MakeGenericType(new Type[] { typeof(string), (allSame ? fieldType.ToCSharpType() : typeof(object)) });
-                if (Cursor.Count == 1)
-                    return constructedDictionaryType;
-                var listType = typeof(List<>).MakeGenericType(constructedDictionaryType);
-                return listType;
-            }
-
-            object GetCursorItem(int index, int column, Type type = null)
-            {
-                Cursor.MoveToPosition(index);
-                if (type == typeof(bool))
-                    return Cursor.GetInt(column) == 1;
-                if (type == typeof(char))
-                    return (char)Cursor.GetShort(column);
-                if (type == typeof(short))
-                    return Cursor.GetShort(column);
-                if (type == typeof(long))
-                    return (long)Cursor.GetLong(column);
-                switch (Cursor.GetType(column))
-                {
-                    case FieldType.Blob:
-                        var blob = Cursor.GetBlob(column);
-                        if (blob.Length == 1)
-                        {
-                            if (type == typeof(sbyte))
-                                return (sbyte)blob[0];
-                            return blob[0];
-                        }
-                        return blob;
-                    case FieldType.Float:
-                        return Cursor.GetDouble(column);
-                    case FieldType.Integer:
-                        return Cursor.GetInt(column);
-                    case FieldType.Null:
-                        return null;
-                    case FieldType.String:
-                        return Cursor.GetString(column);
-                }
-                return null;
             }
         }
         #endregion
@@ -246,66 +53,32 @@ namespace Forms9Patch.Droid
         }
 
         #region Entry
-        ClipboardEntry _lastEntry;
+        IClipboardEntry _lastEntry;
         bool _lastChangedByThis;
-        public ClipboardEntry Entry
+        public IClipboardEntry Entry
         {
             get
             {
-                if (EntryCaching && _lastEntry != null)
-                    return _lastEntry;
-
                 if (!Clipboard.HasPrimaryClip)
                     return null;
 
-                var entry = new ClipboardEntry();
-                var description = Clipboard.PrimaryClipDescription;
-                var clipData = Clipboard.PrimaryClip;
-
-                entry.Description = description.Label;
-
-                for (int i = 0; i < clipData.ItemCount; i++)
-                {
-                    var item = clipData.GetItemAt(i);
-                    if (!string.IsNullOrEmpty(item.HtmlText))
-                        entry.HtmlText = item.HtmlText;
-                    if (!string.IsNullOrEmpty(item.Text))
-                        entry.PlainText = item.Text;
-                    if (item.Uri != null)
-                    {
-                        var entryItem = new ReturnClipboardEntryItem(item.Uri);
-                        var entryItemType = typeof(ReturnClipboardEntryItem<>).MakeGenericType(entryItem.Type);
-                        var typedEntryItem = (IMimeItem)Activator.CreateInstance(entryItemType, new object[] { entryItem });
-                        entry._item.Add(typedEntryItem);
-                    }
-                }
-
-                _lastEntry = entry;
-                return entry;
+                return new ClipboardEntry();
             }
             set
             {
-                if (value == null)
-                    return;
-
+                ClipboardContentProvider.Clear();
                 ClipData clipData = null;
-
-                if (string.IsNullOrEmpty(value.HtmlText))
-                    clipData = ClipData.NewPlainText(value.Description, value.PlainText);
-                else
-                    clipData = ClipData.NewHtmlText(value.Description, value.PlainText, value.HtmlText);
-
-                UriItems.Clear();
-                foreach (var item in value._item)
+                if (value is Forms9Patch.ClipboardEntry entry)
                 {
-                    // here is where we would detect if the item is a FilePathEntryItem or the item.Type is a System.IO.File and then setup things to use a android.support.v4.content.FileProvider
-                    var uri = ClipboardContentProvider.NextItemUri;
-                    UriItems[uri] = item;
-                    //}
-                    var androidClipItem = new ClipData.Item(uri);
-                    clipData.AddItem(androidClipItem);
+                    foreach (var item in entry.Items)
+                    {
+                        var androidClipItem = ClipboardContentProvider.Add(item.Value);
+                        if (clipData == null)
+                            clipData = new ClipData(value.Description, entry.MimeTypes.ToArray(), androidClipItem);
+                        else
+                            clipData.AddItem(androidClipItem);
+                    }
                 }
-
                 _lastEntry = value;
                 _lastChangedByThis = true;
                 Clipboard.PrimaryClip = clipData;
@@ -315,6 +88,134 @@ namespace Forms9Patch.Droid
     }
 
 
+
+    #region ContentProvider
+
+    [ContentProvider(new string[] { "@string/forms9patch_copy_paste_authority" })]
+    public class ClipboardContentProvider : ContentProvider
+    {
+        // Here is where we hold our items, waiting for someone to retrieve them.
+        readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();
+
+
+        public static void Clear() => UriItems.Clear();
+
+        public static ClipData.Item Add(IMimeItem mimeItem)
+        {
+            var uri = NextItemUri;
+            UriItems[uri] = mimeItem;
+            return new ClipData.Item(uri);
+        }
+
+
+        static Forms9Patch.IMimeItem ItemForUri(Android.Net.Uri uri)
+        {
+            foreach (var key in UriItems.Keys)
+                if (key.Equals(uri))
+                    return UriItems[key];
+            return null;
+        }
+
+        static int _resourceId
+        {
+            get
+            {
+                var result = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+                return result;
+            }
+        } // = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+        public static string AUTHORITY
+        {
+            get
+            {
+                var result = Settings.Activity.Resources.GetString(_resourceId);
+                return result;
+            }
+        }// = Settings.Activity.Resources.GetString(_resourceId);
+        public static Android.Net.Uri CONTENT_URI
+        {
+            get
+            {
+                var result = Android.Net.Uri.Parse("content://" + AUTHORITY);
+                return result;
+            }
+        }
+        //= Android.Net.Uri.Parse("content://" + AUTHORITY);
+
+        static int _index;
+        public static Android.Net.Uri NextItemUri
+        {
+            get
+            {
+                var result = Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
+                return result;
+            }
+        }
+
+        public override int Delete(Android.Net.Uri uri, string selection, string[] selectionArgs)
+        {
+            return -1;
+        }
+
+        public override string GetType(Android.Net.Uri uri)
+        {
+            var item = ItemForUri(uri);
+            return item?.MimeType;
+        }
+
+        public override Android.Net.Uri Insert(Android.Net.Uri uri, ContentValues values)
+        {
+            return null;
+        }
+
+        public override bool OnCreate()
+        {
+            //_resourceId = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
+            //AUTHORITY = Settings.Activity.Resources.GetString(_resourceId);
+            //CONTENT_URI = Android.Net.Uri.Parse("content://" + AUTHORITY);
+            return true;
+        }
+
+        public override ICursor Query(Android.Net.Uri uri, string[] projection, string selection, string[] selectionArgs, string sortOrder)
+        {
+            var item = ItemForUri(uri);
+            if (item == null)
+                return null;
+            if (item.Type.ToAndroidFieldType() != FieldType.Null)
+                return new PrimativeCursor(item.Value);
+            if (item.Value is IList list && item.Type.IsGenericType)
+            {
+                var elementType = item.Type.GenericTypeArguments[0];
+                //var fieldType = elementType.ToAndroidFieldType();
+                //if (fieldType != FieldType.Null)
+                return new IListCursor(item.MimeType, list, elementType);
+            }
+            if (item.Value is IDictionary dictionary && item.Type.IsGenericType)
+                return new PrimativeCursor(item.Value);
+            return null;
+        }
+
+        public override int Update(Android.Net.Uri uri, ContentValues values, string selection, string[] selectionArgs)
+        {
+            return -1;
+        }
+
+
+        static int GetResourceId(String pVariableName, String pResourcename, String pPackageName)
+        {
+            try
+            {
+                var result = Settings.Activity.Resources.GetIdentifier(pVariableName, pResourcename, pPackageName);
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("stack: " + e.StackTrace);
+                return -1;
+            }
+        }
+    }
+    #endregion
 
     #region Cursors
     class IListCursor : AbstractCursor
@@ -644,116 +545,5 @@ namespace Forms9Patch.Droid
     }
     #endregion
 
-    #region ContentProvider
-    [ContentProvider(new string[] { "@string/forms9patch_copy_paste_authority" })]
-    public class ClipboardContentProvider : ContentProvider
-    {
-        static Forms9Patch.IMimeItem ItemForUri(Android.Net.Uri uri)
-        {
-            foreach (var key in ClipboardService.UriItems.Keys)
-                if (key.Equals(uri))
-                    return ClipboardService.UriItems[key];
-            return null;
-        }
 
-        static int _resourceId
-        {
-            get
-            {
-                var result = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-                return result;
-            }
-        } // = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-        public static string AUTHORITY
-        {
-            get
-            {
-                var result = Settings.Activity.Resources.GetString(_resourceId);
-                return result;
-            }
-        }// = Settings.Activity.Resources.GetString(_resourceId);
-        public static Android.Net.Uri CONTENT_URI
-        {
-            get
-            {
-                var result = Android.Net.Uri.Parse("content://" + AUTHORITY);
-                return result;
-            }
-        }
-        //= Android.Net.Uri.Parse("content://" + AUTHORITY);
-
-        static int _index;
-        public static Android.Net.Uri NextItemUri
-        {
-            get
-            {
-                var result = Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
-                return result;
-            }
-        }
-
-        public override int Delete(Android.Net.Uri uri, string selection, string[] selectionArgs)
-        {
-            return -1;
-        }
-
-        public override string GetType(Android.Net.Uri uri)
-        {
-            var item = ItemForUri(uri);
-            return item?.MimeType;
-        }
-
-        public override Android.Net.Uri Insert(Android.Net.Uri uri, ContentValues values)
-        {
-            return null;
-        }
-
-        public override bool OnCreate()
-        {
-            //_resourceId = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-            //AUTHORITY = Settings.Activity.Resources.GetString(_resourceId);
-            //CONTENT_URI = Android.Net.Uri.Parse("content://" + AUTHORITY);
-            return true;
-        }
-
-        public override ICursor Query(Android.Net.Uri uri, string[] projection, string selection, string[] selectionArgs, string sortOrder)
-        {
-            var item = ItemForUri(uri);
-            if (item == null)
-                return null;
-            if (item.Type.ToAndroidFieldType() != FieldType.Null)
-                return new PrimativeCursor(item.Value);
-            if (item.Value is IList list && item.Type.IsGenericType)
-            {
-                var elementType = item.Type.GenericTypeArguments[0];
-                //var fieldType = elementType.ToAndroidFieldType();
-                //if (fieldType != FieldType.Null)
-                return new IListCursor(item.MimeType, list, elementType);
-            }
-            if (item.Value is IDictionary dictionary && item.Type.IsGenericType)
-                return new PrimativeCursor(item.Value);
-            return null;
-        }
-
-        public override int Update(Android.Net.Uri uri, ContentValues values, string selection, string[] selectionArgs)
-        {
-            return -1;
-        }
-
-
-        static int GetResourceId(String pVariableName, String pResourcename, String pPackageName)
-        {
-            try
-            {
-                var result = Settings.Activity.Resources.GetIdentifier(pVariableName, pResourcename, pPackageName);
-                return result;
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("stack: " + e.StackTrace);
-                return -1;
-            }
-        }
-    }
-    #endregion
 }

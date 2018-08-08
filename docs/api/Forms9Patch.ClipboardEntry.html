@@ -129,32 +129,6 @@
   </h3>
   
   
-  <a id="Forms9Patch_ClipboardEntry_AdditionalItems_" data-uid="Forms9Patch.ClipboardEntry.AdditionalItems*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_AdditionalItems" data-uid="Forms9Patch.ClipboardEntry.AdditionalItems">AdditionalItems</h4>
-  <div class="markdown level1 summary"><p>Any additional items (IClipboardEntryItem) in this ClipboardEntry</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;IClipboardEntryItem&gt; AdditionalItems { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.IClipboardEntryItem.html">IClipboardEntryItem</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="Forms9Patch_ClipboardEntry_Description_" data-uid="Forms9Patch.ClipboardEntry.Description*"></a>
   <h4 id="Forms9Patch_ClipboardEntry_Description" data-uid="Forms9Patch.ClipboardEntry.Description">Description</h4>
   <div class="markdown level1 summary"><p>Short, descriptive text that can be used by app to display
@@ -210,14 +184,14 @@ to the user what this data represents.</p>
   </table>
   
   
-  <a id="Forms9Patch_ClipboardEntry_MimeTypes_" data-uid="Forms9Patch.ClipboardEntry.MimeTypes*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_MimeTypes" data-uid="Forms9Patch.ClipboardEntry.MimeTypes">MimeTypes</h4>
-  <div class="markdown level1 summary"><p>List of MimeTypes for the items in this ClipboardEntry</p>
+  <a id="Forms9Patch_ClipboardEntry_Items_" data-uid="Forms9Patch.ClipboardEntry.Items*"></a>
+  <h4 id="Forms9Patch_ClipboardEntry_Items" data-uid="Forms9Patch.ClipboardEntry.Items">Items</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the items for this ClipboardEntry</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;string&gt; MimeTypes { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;IMimeItem&gt; Items { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -229,8 +203,9 @@ to the user what this data represents.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
-        <td></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.IMimeItem.html">IMimeItem</a>&gt;</td>
+        <td><p>The items.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -266,13 +241,13 @@ to the user what this data represents.</p>
   
   
   <a id="Forms9Patch_ClipboardEntry_AddValue_" data-uid="Forms9Patch.ClipboardEntry.AddValue*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_AddValue__1_System_String___0_" data-uid="Forms9Patch.ClipboardEntry.AddValue``1(System.String,``0)">AddValue&lt;T&gt;(String, T)</h4>
+  <h4 id="Forms9Patch_ClipboardEntry_AddValue_System_String_System_Object_" data-uid="Forms9Patch.ClipboardEntry.AddValue(System.String,System.Object)">AddValue(String, Object)</h4>
   <div class="markdown level1 summary"><p>Add an item to the clipboard for value and mimeType</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddValue&lt;T&gt;(string mimeType, T value)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddValue(string mimeType, object value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -290,66 +265,8 @@ to the user what this data represents.</p>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">T</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ClipboardEntry_ContainsMimeType_" data-uid="Forms9Patch.ClipboardEntry.ContainsMimeType*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_ContainsMimeType_System_String_" data-uid="Forms9Patch.ClipboardEntry.ContainsMimeType(System.String)">ContainsMimeType(String)</h4>
-  <div class="markdown level1 summary"><p>Does this ClipboardEntry contain an item of a particular mimeType?</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ContainsMimeType(string mimeType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">mimeType</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -404,110 +321,6 @@ to the user what this data represents.</p>
   </table>
   
   
-  <a id="Forms9Patch_ClipboardEntry_GetItem_" data-uid="Forms9Patch.ClipboardEntry.GetItem*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_GetItem__1_System_String_" data-uid="Forms9Patch.ClipboardEntry.GetItem``1(System.String)">GetItem&lt;T&gt;(String)</h4>
-  <div class="markdown level1 summary"><p>Get me the item in this ClipboardEntry that has a particular mimeType</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IClipboardEntryItem&lt;T&gt; GetItem&lt;T&gt;(string mimeType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">mimeType</span></td>
-        <td><p>MIME type.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Forms9Patch.IClipboardEntryItem-1.html">IClipboardEntryItem</a>&lt;T&gt;</td>
-        <td><p>The item.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The 1st type parameter.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ClipboardEntry_GetUntypedItem_" data-uid="Forms9Patch.ClipboardEntry.GetUntypedItem*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_GetUntypedItem_System_String_" data-uid="Forms9Patch.ClipboardEntry.GetUntypedItem(System.String)">GetUntypedItem(String)</h4>
-  <div class="markdown level1 summary"><p>Get me the item in this ClipboardEntry that has a particular mimeType</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IClipboardEntryItem GetUntypedItem(string mimeType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">mimeType</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Forms9Patch.IClipboardEntryItem.html">IClipboardEntryItem</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="Forms9Patch_ClipboardEntry_ValidItemType_" data-uid="Forms9Patch.ClipboardEntry.ValidItemType*"></a>
   <h4 id="Forms9Patch_ClipboardEntry_ValidItemType_System_Type_" data-uid="Forms9Patch.ClipboardEntry.ValidItemType(System.Type)">ValidItemType(Type)</h4>
   <div class="markdown level1 summary"><p>Test to determine if type can be safely put on clipboard across platforms (without crazy schema gymnastics)</p>
@@ -554,6 +367,18 @@ to the user what this data represents.</p>
       <a class="xref" href="Forms9Patch.IClipboardEntry.html">IClipboardEntry</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_MimeTypes_Forms9Patch_IClipboardEntry_">IClipboardEntryExtensions.MimeTypes(IClipboardEntry)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetFirstMimeItem__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetFirstMimeItem&lt;T&gt;(IClipboardEntry, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetMimeItems__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetMimeItems&lt;T&gt;(IClipboardEntry, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_AddContentOfFile_Forms9Patch_ClipboardEntry_System_String_System_String_">IClipboardEntryExtensions.AddContentOfFile(ClipboardEntry, String, String)</a>
+  </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
   </div>
