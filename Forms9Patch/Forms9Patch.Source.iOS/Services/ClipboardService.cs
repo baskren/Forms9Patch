@@ -90,12 +90,13 @@ namespace Forms9Patch.iOS
                     else
                     {
                         var items = new List<NSMutableDictionary>();
-                        NSMutableDictionary itemRenditions = null;
+                        NSMutableDictionary<NSString, NSObject> itemRenditions = null;
                         //NSMutableDictionary itemCSharpTypeMap = null;
                         foreach (var mimeItem in entry.Items)
                         {
-                            System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.1 elapsed: " + stopwatch.ElapsedMilliseconds);
-                            if (mimeItem.MimeType?.ToNsUti() is NSString nsUti && mimeItem.Value.ToNSObject() is NSObject nSObject)
+                            System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.0 elapsed: " + stopwatch.ElapsedMilliseconds);
+                            //if (mimeItem.MimeType?.ToNsUti() is NSString nsUti && mimeItem.Value.ToNSObject() is NSObject nSObject)
+                            if (mimeItem.ToUiPasteboardItem() is KeyValuePair<NSString, NSObject> itemKvp && itemKvp.Key != null)
                             {
                                 /*
                                 Type itemCsharpType = null;
@@ -109,40 +110,48 @@ namespace Forms9Patch.iOS
                                     itemCsharpType = mimeItem.Type;
                                 }
                                 */
-                                foreach (var item in items)
-                                {
-                                    if (!item.Any((kvp) => ((NSString)kvp.Key) == nsUti))
-                                    {
-                                        itemRenditions = item;
-                                        break;
-                                    }
-                                }
-                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.2 elapsed: " + stopwatch.ElapsedMilliseconds);
 
-                                if (itemRenditions == null)
+
+                                // if no renditions, add one.
+                                // if the current rendition already contains this mimeType, create a new rendition
+                                if (itemRenditions == null || itemRenditions.ContainsKey(itemKvp.Key))
                                 {
-                                    itemRenditions = new NSMutableDictionary();
+                                    itemRenditions = new NSMutableDictionary<NSString, NSObject>();
                                     items.Add(itemRenditions);
                                 }
-                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.3 elapsed: " + stopwatch.ElapsedMilliseconds);
+                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.1 elapsed: " + stopwatch.ElapsedMilliseconds);
+
+
+                                // some notes here:
+                                // when trying to put copy a string to iOS Notes app:
+                                // - itemRenditions.Add(itemKvp.Key, itemKvp.Value) means the ReturnMimeItem.Value is a byte array BUT it **does** paste correctly into Notes
+                                // - itemRenditions.Add(itemKvp.Key, plist) pastes the bplist contents into Notes;
+                                // - itemRenditions.Add(itemKvp.Key, archiver) pastes the archiver + bplist contents into Notes;
 
                                 /*
                                 if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
-                                    itemRenditions.Add(nsUti, nSObject);
+                                    itemRenditions.Add(itemKvp.Key, itemKvp.Value);
                                 else
                                 {
-                                    var archiver = NSKeyedArchiver.ArchivedDataWithRootObject(nSObject);
-                                    itemRenditions.Add(nsUti, archiver);
+                                    var archiver = NSKeyedArchiver.ArchivedDataWithRootObject(itemKvp.Value);
+                                    itemRenditions.Add(itemKvp.Key, archiver);
                                 }
                                 */
 
-                                var plist = NSPropertyListSerialization.DataWithPropertyList(nSObject, NSPropertyListFormat.Binary, NSPropertyListWriteOptions.Immutable, out NSError nSError);
-                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.4 elapsed: " + stopwatch.ElapsedMilliseconds);
-                                itemRenditions.Add(nsUti, plist);
-                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.5 elapsed: " + stopwatch.ElapsedMilliseconds);
 
+                                itemRenditions.Add(itemKvp.Key, itemKvp.Value);
 
-                                //itemRenditions.Add(nsUti, nSObject);
+                                /*
+                                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
+                                    itemRenditions.Add(itemKvp.Key, itemKvp.Value);
+                                else
+                                {
+                                    var plist = NSPropertyListSerialization.DataWithPropertyList(itemKvp.Value, NSPropertyListFormat.Binary, NSPropertyListWriteOptions.Immutable, out NSError nSError);
+                                    System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.4 elapsed: " + stopwatch.ElapsedMilliseconds);
+                                    itemRenditions.Add(itemKvp.Key, plist);
+                                    System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.5 elapsed: " + stopwatch.ElapsedMilliseconds);
+                                }
+                                */
                             }
                         }
                         var array = items.ToArray();

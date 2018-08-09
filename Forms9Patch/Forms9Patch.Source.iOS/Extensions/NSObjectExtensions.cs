@@ -132,6 +132,8 @@ namespace Forms9Patch.iOS
             {
                 if (type.Implements(typeof(Stream)))
                     return new MemoryStream(byteArray);
+                if (type == typeof(string))
+                    return System.Text.Encoding.Default.GetString(byteArray);
                 return byteArray;
             }
 
@@ -321,8 +323,6 @@ namespace Forms9Patch.iOS
             //return new Tuple<object, Type>(itemList, typeof(List<object>));
             return null;
         }
-
-
 
         public static NSObject ToNSObject(this object obj)
         {

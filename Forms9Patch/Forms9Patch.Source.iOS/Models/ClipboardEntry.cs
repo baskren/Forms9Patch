@@ -51,7 +51,8 @@ namespace Forms9Patch.iOS
                     foreach (var kvp in item)
                     {
                         var returnMimeItem = LazyMimeItem.Parse(kvp);
-                        _items.Add(returnMimeItem);
+                        if (returnMimeItem != null)
+                            _items.Add(returnMimeItem);
                     }
                 }
                 return _items;

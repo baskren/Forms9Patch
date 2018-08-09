@@ -57,12 +57,12 @@ namespace Forms9Patch.iOS
             System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 1 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
+            // IMPORTANT:  
+            // Must try NSKeyedUnarchiver.UnarchiveObject() **before** NSPropertyListSerialization.PropertyListWithData()
+            // The reverse will not work reliabily because NSKeyedArchive is a special form of NSPropertyListSerialization
+
             if (nsObject == null && _kvp.Value is NSData nsData)
-            {
-                NSError nsError = new NSError();
-                NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
-                nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out nsError);
-            }
+                nsObject = NSKeyedUnarchiver.UnarchiveObject(nsData);
             else
                 nsData = null;
             System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 2 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
@@ -70,7 +70,11 @@ namespace Forms9Patch.iOS
 
 
             if (nsObject == null && nsData != null)
-                nsObject = NSKeyedUnarchiver.UnarchiveObject(nsData);
+            {
+                NSError nsError = new NSError();
+                NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
+                nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out nsError);
+            }
             System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
@@ -101,9 +105,7 @@ namespace Forms9Patch.iOS
             if (uti == null)
                 return;
             //var values = UIPasteboard.General.DataForPasteboardType(uti);
-            MimeType = UTType.GetPreferredTag(uti, UTType.TagClassMIMEType);
-            if (MimeType == null)
-                return;
+            MimeType = uti.ToMime(); // UTType.GetPreferredTag(uti, UTType.TagClassMIMEType);
 
             _kvp = kvp;
             _typeCodeString = typeCodeString;
