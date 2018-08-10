@@ -91,7 +91,7 @@ namespace Forms9Patch.Droid
             AutoPackage = false;
         }
 
-#if __DROID__
+#if __DROID3__
         public LabelRenderer(Android.Content.Context context) : base(context)
         {
             _instance = _instances++;

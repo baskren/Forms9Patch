@@ -17,6 +17,7 @@ using System.Reflection;
 
 namespace Forms9Patch.Droid
 {
+    /*
     class ReturnMimeItem<T> : IMimeItem<T>
     {
         ReturnMimeItem _source;
@@ -32,9 +33,53 @@ namespace Forms9Patch.Droid
             _source = source;
         }
     }
+    */
 
-    class ReturnMimeItem : IMimeItem
+    static class ReturnMimeItem
     {
+        public static IMimeItem Parse(ClipData.Item item)
+        {
+            if (item.Uri != null && new AndroidUriMimeItem(item.Uri) is IMimeItem result && result.MimeType != null)
+                return result;
+            if (item.HtmlText != null)
+                return new AndroidHtmlMimeItem(item.HtmlText);
+            if (item.TextFormatted != null && item.CoerceToHtmlText(Forms9Patch.Droid.Settings.Context) is string html)
+                return new AndroidHtmlMimeItem(html);
+            if (item.Text != null)
+                return new AndroidTextMimeItem(item.Text);
+            return null;
+        }
+    }
+
+    class AndroidTextMimeItem : IMimeItem
+    {
+        public string MimeType => "text/plain";
+
+        readonly string _value;
+        public object Value => _value;
+
+        public AndroidTextMimeItem(string text)
+        {
+            _value = text;
+        }
+    }
+
+    class AndroidHtmlMimeItem : IMimeItem
+    {
+        public string MimeType => "text/html";
+
+        readonly string _value;
+        public object Value => _value;
+
+        public AndroidHtmlMimeItem(string htmlText)
+        {
+            _value = htmlText;
+        }
+    }
+
+    class AndroidUriMimeItem : IMimeItem
+    {
+
         public string MimeType { get; internal set; }
 
         ICursor _cursor;
@@ -124,6 +169,7 @@ namespace Forms9Patch.Droid
             internal set => _value = value;
         }
 
+        /*
         Type _type;
         public Type Type
         {
@@ -134,12 +180,13 @@ namespace Forms9Patch.Droid
             }
             internal set => _type = value;
         }
+        */
 
         readonly Android.Net.Uri _uri;
 
-        public ReturnMimeItem() { }
+        public AndroidUriMimeItem() { }
 
-        public ReturnMimeItem(Android.Net.Uri uri)
+        public AndroidUriMimeItem(Android.Net.Uri uri)
         {
             _uri = uri;
             MimeType = Settings.Activity.ContentResolver.GetType(uri);

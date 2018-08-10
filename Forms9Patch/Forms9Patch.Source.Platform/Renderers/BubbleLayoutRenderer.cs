@@ -48,7 +48,7 @@ namespace Forms9Patch
             _instances = _instance++;
         }
 
-#if __DROID__
+#if __DROID3__
         public BubbleLayoutRenderer(Android.Content.Context context) : base(context)
         {
             _instances = _instance++;

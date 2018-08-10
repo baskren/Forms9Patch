@@ -17,7 +17,7 @@ using System.Reflection;
 
 namespace Forms9Patch.Droid
 {
-    class ClipboardEntry : IClipboardEntry
+    class ClipboardEntry : BaseClipboardEntry
     {
         #region Static implementation
         readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();
@@ -32,71 +32,31 @@ namespace Forms9Patch.Droid
             }
         }
 
-        public string Description => Clipboard.PrimaryClipDescription.Label;
+        public override string Description => Clipboard.PrimaryClip.Description.Label;
 
-        string _plainText;
-        public string PlainText => _plainText;
-
-        string _htmlText;
-        public string HtmlText => _htmlText;
-
-        public System.Uri Uri => throw new NotImplementedException();
-
-        List<string> _mimeTypes = new List<string>();
-        public List<string> MimeTypes => _mimeTypes;
-
-        //List<IMimeItem> _mimeItems = new List<IMimeItem>();
-        //public List<IMimeItem> MimeItems => _mimeItems;
-
-        public ClipboardEntry()
+        public override List<IMimeItem> Items
         {
-            var clipData = Clipboard.PrimaryClip;
-
-            if (clipData != null)
+            get
             {
-                for (int i = 0; i < clipData.ItemCount; i++)
+                if (_items != null)
+                    return _items;
+                _items = new List<IMimeItem>();
+                if (Clipboard.HasPrimaryClip && Clipboard.PrimaryClip is ClipData clipData && clipData.ItemCount > 0)
                 {
-                    var item = clipData.GetItemAt(i);
-                    if (!string.IsNullOrEmpty(item.HtmlText))
+                    for (int i = 0; i < clipData.ItemCount; i++)
                     {
-                        _htmlText = item.HtmlText;
-                        MimeTypes.Add("text/html");
+                        var item = clipData.GetItemAt(i);
+                        var returnMimeItem = ReturnMimeItem.Parse(item);
+                        if (returnMimeItem != null)
+                            _items.Add(returnMimeItem);
                     }
-                    if (!string.IsNullOrEmpty(item.Text))
-                    {
-                        _plainText = item.Text;
-                        MimeTypes.Add("text/plain");
-                    }
-                    var mimeItem = new ReturnMimeItem(item.Uri);
-                    if (!MimeTypes.Contains(mimeItem.MimeType))
-                        MimeTypes.Add(mimeItem.MimeType);
                 }
+                return _items;
             }
         }
 
-        public IMimeItem<T> GetItem<T>(string mimeType)
-        {
-            if (Clipboard == null || mimeType == null)
-                return null;
-            var untypedItem = GetUntypedItem(mimeType);
-            return new ReturnMimeItem<T>(untypedItem);
-        }
 
-        ReturnMimeItem GetUntypedItem(string mimeType)
-        {
-            if (mimeType == "text/plain")
-                return new ReturnMimeItem { MimeType = "text/plain", Type = typeof(string), Value = PlainText };
-            if (mimeType == "text/url")
-                return new ReturnMimeItem { MimeType = "text/url", Type = typeof(string), Value = Uri.AbsolutePath };
-            for (int i = 0; i < Clipboard.PrimaryClip.ItemCount; i++)
-            {
-                var item = Clipboard.PrimaryClip.GetItemAt(i);
-                var mimeItem = new ReturnMimeItem(item.Uri);
-                if (mimeItem.MimeType == mimeType)
-                    return mimeItem;
-            }
-            return null;
-        }
+
         #endregion
 
 

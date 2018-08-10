@@ -43,7 +43,7 @@ namespace Forms9Patch
 
 
         #region Constructor / Disposer
-#if __DROID__
+#if __DROID3__
         public F9pLayoutRenderer(Android.Content.Context context) : base(context)
 #else
         public F9pLayoutRenderer()

@@ -20,7 +20,7 @@ namespace Forms9Patch
     /// </summary>
     internal class ManualLayoutRenderer : F9pLayoutRenderer<ManualLayout>
     {
-#if __DROID__
+#if __DROID3__
         public ManualLayoutRenderer(Android.Content.Context context) : base(context) { }
 #endif
     }

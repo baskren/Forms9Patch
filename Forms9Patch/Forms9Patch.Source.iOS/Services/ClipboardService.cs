@@ -98,19 +98,6 @@ namespace Forms9Patch.iOS
                             //if (mimeItem.MimeType?.ToNsUti() is NSString nsUti && mimeItem.Value.ToNSObject() is NSObject nSObject)
                             if (mimeItem.ToUiPasteboardItem() is KeyValuePair<NSString, NSObject> itemKvp && itemKvp.Key != null)
                             {
-                                /*
-                                Type itemCsharpType = null;
-                                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
-                                    itemCsharpType = nSObject is NSData ? typeof(byte[]) : typeof(Uri);
-                                else
-                                {
-                                    //nSObject = dataItem.KeyedArchiver;
-                                    //nsUti = dataItem.NSUti;
-                                    //itemType = item.Type;
-                                    itemCsharpType = mimeItem.Type;
-                                }
-                                */
-
 
                                 // if no renditions, add one.
                                 // if the current rendition already contains this mimeType, create a new rendition
@@ -123,8 +110,8 @@ namespace Forms9Patch.iOS
 
 
                                 // some notes here:
-                                // when trying to put copy a string to iOS Notes app:
-                                // - itemRenditions.Add(itemKvp.Key, itemKvp.Value) means the ReturnMimeItem.Value is a byte array BUT it **does** paste correctly into Notes
+                                // when trying to copy a string to iOS Notes app:
+                                // - itemRenditions.Add(itemKvp.Key, itemKvp.Value) means the ReturnMimeItem.Value is a byte array BUT it **does** paste correctly into Notes and Mail app
                                 // - itemRenditions.Add(itemKvp.Key, plist) pastes the bplist contents into Notes;
                                 // - itemRenditions.Add(itemKvp.Key, archiver) pastes the archiver + bplist contents into Notes;
 
@@ -137,7 +124,6 @@ namespace Forms9Patch.iOS
                                     itemRenditions.Add(itemKvp.Key, archiver);
                                 }
                                 */
-
 
                                 itemRenditions.Add(itemKvp.Key, itemKvp.Value);
 

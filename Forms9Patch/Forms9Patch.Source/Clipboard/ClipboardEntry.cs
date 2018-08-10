@@ -11,9 +11,48 @@ namespace Forms9Patch
     /// <summary>
     /// Base class that implements Forms9Patch.IClipboardEntry
     /// </summary>
-    public class ClipboardEntry : IClipboardEntry
+    public class ClipboardEntry : BaseClipboardEntry
     {
         #region IClipboardEntry implemntation
+        /// <summary>
+        /// Short, descriptive text that can be used by app to display
+        /// to the user what this data represents.
+        /// </summary>
+        /// <value>The description.</value>
+        public new string Description { get; set; } = ApplicationInfoService.Name + " Clipboard";
+
+        /// <summary>
+        /// Gets or sets the plain text representation of this data (if any)
+        /// </summary>
+        /// <value>The plain text.</value>
+        public new string PlainText
+        {
+            get => base.PlainText;
+            set => AddValue("text/plain", value);
+        }
+
+        /// <summary>
+        /// Gets or sets the html text representation of this data (if any)
+        /// </summary>
+        /// <value>The html text.</value>
+        public new string HtmlText
+        {
+            get => base.HtmlText;
+            set => AddValue("text/html", value);
+        }
+
+        #endregion
+
+
+        #region Constructor
+        public ClipboardEntry()
+        {
+            _items = new List<IMimeItem>();
+        }
+        #endregion
+
+
+        #region Convenience methods
         /// <summary>
         /// Convenience factory for entry with just PlainText
         /// </summary>
@@ -30,42 +69,6 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Short, descriptive text that can be used by app to display
-        /// to the user what this data represents.
-        /// </summary>
-        /// <value>The description.</value>
-        public string Description { get; set; } = ApplicationInfoService.Name + " Clipboard";
-
-        /// <summary>
-        /// Gets or sets the plain text representation of this data (if any)
-        /// </summary>
-        /// <value>The plain text.</value>
-        public string PlainText
-        {
-            get => Items.FirstOrDefault((mimeItem) => mimeItem.MimeType == "text/plain")?.Value as string;
-            set => AddValue("text/plain", value);
-        }
-
-        /// <summary>
-        /// Gets or sets the html text representation of this data (if any)
-        /// </summary>
-        /// <value>The html text.</value>
-        public string HtmlText
-        {
-            get => Items.FirstOrDefault((mimeItem) => mimeItem.MimeType == "text/html")?.Value as string;
-            set => AddValue("text/html", value);
-        }
-
-        /// <summary>
-        /// Gets or sets the items for this ClipboardEntry
-        /// </summary>
-        /// <value>The items.</value>
-        public List<IMimeItem> Items { get; set; } = new List<IMimeItem>();
-        #endregion
-
-
-        #region Convenience methods
-        /// <summary>
         /// Add an item to the clipboard for value and mimeType
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -73,14 +76,6 @@ namespace Forms9Patch
         /// <param name="value"></param>
         public void AddValue(string mimeType, object value) => Items.Add(new MimeItem(mimeType, value));
         #endregion
-
-
-        /*
-        public void AddOnDemandValue<T>(string mimeType, Func<T> onDemandFunction)
-        {
-            _items.Add(new LazyClipboardEntryItem<T>(mimeType, onDemandFunction));
-        }
-        */
 
 
         // Notes to self: 
@@ -119,6 +114,58 @@ namespace Forms9Patch
         // - Android: save as Android.Net.Uri with mime type (support for multiple instances)
         // - UWP:
         // Would that work with UWP? 
+
+    }
+    #endregion
+
+
+    #region BaseClipboardEntry 
+    public abstract class BaseClipboardEntry : IClipboardEntry
+    {
+        protected string _description;
+        /// <summary>
+        /// Short, descriptive text that can be used by app to display
+        /// to the user what this data represents.
+        /// </summary>
+        /// <value>The description.</value>
+        public virtual string Description => _description;
+
+        /// <summary>
+        /// Gets or sets the plain text representation of this data (if any)
+        /// </summary>
+        /// <value>The plain text.</value>
+        public virtual string PlainText
+        {
+            get
+            {
+                foreach (var item in Items)
+                    if (item.MimeType == "text/plain" && item.Value is string text)
+                        return text;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the html text representation of this data (if any)
+        /// </summary>
+        /// <value>The html text.</value>
+        public virtual string HtmlText
+        {
+            get
+            {
+                foreach (var item in Items)
+                    if (item.MimeType == "text/html" && item.Value is string text)
+                        return text;
+                return null;
+            }
+        }
+
+        protected List<IMimeItem> _items;
+        /// <summary>
+        /// Gets or sets the items for this ClipboardEntry
+        /// </summary>
+        /// <value>The items.</value>
+        public virtual List<IMimeItem> Items => _items;
 
     }
     #endregion

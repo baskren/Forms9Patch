@@ -14,6 +14,11 @@ using System.IO;
 using System.Linq;
 using Android.OS;
 using System.Reflection;
+using Android.Content.Res;
+using Android.Content.PM;
+using Java.IO;
+//using Java.Lang;
+using P42.Utils;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ClipboardService))]
 namespace Forms9Patch.Droid
@@ -37,32 +42,39 @@ namespace Forms9Patch.Droid
         {
             Clipboard.PrimaryClipChanged += (sender, e) =>
             {
-                if (!_lastChangedByThis)
+                if (!_locallyUpdated)
                     _lastEntry = null;
-                _lastChangedByThis = false;
+                _locallyUpdated = false;
                 Forms9Patch.Clipboard.OnContentChanged(this, EventArgs.Empty);
             };
         }
 
-        public bool EntryCaching { get; set; } = true;
+        public bool EntryCaching { get; set; } = false;
+
+        // note: 
+        // There is a HUGE lag between when Clipboard.PrimaryClip is set and when 
+        // Clipboard.PrimaryClipChanged is fired.  Because of this lag, we need to 
+        // know when we've updated locally AND captured the new Clipboard 
+        // (via new Forms9Patch.Droid.ClipboardEntry())
+        // before Clipboard.PrimaryClipChanged is fired so that we don't whipe 
+        // _lastEntry and instantiate another Forms9Patch.Droid.ClipboardEntry.
+        bool _locallyUpdated;
+        /*
         static bool _entryItemTypeCaching = true;
         public bool EntryItemTypeCaching
         {
             get => _entryItemTypeCaching;
             set => _entryItemTypeCaching = value;
         }
+        */
 
         #region Entry
         IClipboardEntry _lastEntry;
-        bool _lastChangedByThis;
         public IClipboardEntry Entry
         {
             get
             {
-                if (!Clipboard.HasPrimaryClip)
-                    return null;
-
-                return new ClipboardEntry();
+                return _lastEntry = _lastEntry ?? new Forms9Patch.Droid.ClipboardEntry();
             }
             set
             {
@@ -72,15 +84,15 @@ namespace Forms9Patch.Droid
                 {
                     foreach (var item in entry.Items)
                     {
-                        var androidClipItem = ClipboardContentProvider.Add(item.Value);
+                        var androidClipItem = ClipboardContentProvider.Add(item);
                         if (clipData == null)
-                            clipData = new ClipData(value.Description, entry.MimeTypes.ToArray(), androidClipItem);
+                            clipData = new ClipData(value.Description, entry.MimeTypes().ToArray(), androidClipItem);
                         else
                             clipData.AddItem(androidClipItem);
                     }
                 }
-                _lastEntry = value;
-                _lastChangedByThis = true;
+                _lastEntry = EntryCaching ? value : null;
+                _locallyUpdated = true;
                 Clipboard.PrimaryClip = clipData;
             }
         }
@@ -91,12 +103,12 @@ namespace Forms9Patch.Droid
 
     #region ContentProvider
 
-    [ContentProvider(new string[] { "@string/forms9patch_copy_paste_authority" })]
+    //[ContentProvider(new string[] { "${applicationId}.f9pclipboardcontentprovider.authority" }, Enabled = true, Exported = true, GrantUriPermissions = true, Label = "F9P Clipboard", Name = "${applicationId}.f9pclipboardcontentprovider", MultiProcess = true)]
+    [ContentProvider(new string[] { "${applicationId}.f9pclipboardcontentprovider.authority" }, Enabled = true, Exported = true, GrantUriPermissions = true)]
     public class ClipboardContentProvider : ContentProvider
     {
         // Here is where we hold our items, waiting for someone to retrieve them.
         readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();
-
 
         public static void Clear() => UriItems.Clear();
 
@@ -116,41 +128,13 @@ namespace Forms9Patch.Droid
             return null;
         }
 
-        static int _resourceId
-        {
-            get
-            {
-                var result = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-                return result;
-            }
-        } // = GetResourceId("forms9patch_copy_paste_authority", "string", Settings.Activity.PackageName);
-        public static string AUTHORITY
-        {
-            get
-            {
-                var result = Settings.Activity.Resources.GetString(_resourceId);
-                return result;
-            }
-        }// = Settings.Activity.Resources.GetString(_resourceId);
-        public static Android.Net.Uri CONTENT_URI
-        {
-            get
-            {
-                var result = Android.Net.Uri.Parse("content://" + AUTHORITY);
-                return result;
-            }
-        }
-        //= Android.Net.Uri.Parse("content://" + AUTHORITY);
+
+        public static string AUTHORITY => Settings.Activity.PackageName + ".f9pclipboardcontentprovider.authority";
+
+        public static Android.Net.Uri CONTENT_URI => Android.Net.Uri.Parse("content://" + AUTHORITY);
 
         static int _index;
-        public static Android.Net.Uri NextItemUri
-        {
-            get
-            {
-                var result = Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
-                return result;
-            }
-        }
+        public static Android.Net.Uri NextItemUri => Android.Net.Uri.Parse("content://" + AUTHORITY + "/" + _index++);
 
         public override int Delete(Android.Net.Uri uri, string selection, string[] selectionArgs)
         {
@@ -181,18 +165,31 @@ namespace Forms9Patch.Droid
             var item = ItemForUri(uri);
             if (item == null)
                 return null;
-            if (item.Type.ToAndroidFieldType() != FieldType.Null)
+            var type = item.Value.GetType();
+            if (type.ToAndroidFieldType() != FieldType.Null)
                 return new PrimativeCursor(item.Value);
-            if (item.Value is IList list && item.Type.IsGenericType)
+            if (item.Value is IList list && type.IsGenericType)
             {
-                var elementType = item.Type.GenericTypeArguments[0];
+                var elementType = type.GenericTypeArguments[0];
                 //var fieldType = elementType.ToAndroidFieldType();
                 //if (fieldType != FieldType.Null)
                 return new IListCursor(item.MimeType, list, elementType);
             }
-            if (item.Value is IDictionary dictionary && item.Type.IsGenericType)
+            if (item.Value is IDictionary dictionary && type.IsGenericType)
                 return new PrimativeCursor(item.Value);
             return null;
+        }
+
+        public override ICursor Query(Android.Net.Uri uri, string[] projection, Bundle queryArgs, CancellationSignal cancellationSignal)
+        {
+            var result = base.Query(uri, projection, queryArgs, cancellationSignal);
+            return result;
+        }
+
+        public override ICursor Query(Android.Net.Uri uri, string[] projection, string selection, string[] selectionArgs, string sortOrder, CancellationSignal cancellationSignal)
+        {
+            var result = base.Query(uri, projection, selection, selectionArgs, sortOrder, cancellationSignal);
+            return result;
         }
 
         public override int Update(Android.Net.Uri uri, ContentValues values, string selection, string[] selectionArgs)
@@ -200,6 +197,152 @@ namespace Forms9Patch.Droid
             return -1;
         }
 
+        public override Android.Net.Uri Canonicalize(Android.Net.Uri url)
+        {
+            return base.Canonicalize(url);
+        }
+
+        public override string[] GetStreamTypes(Android.Net.Uri uri, string mimeTypeFilter)
+        {
+            //var result = base.GetStreamTypes(uri, mimeTypeFilter);
+            var result = new List<string>();
+            foreach (var item in UriItems.Values)
+                if (!result.Contains(item.MimeType))
+                    result.Add(item.MimeType);
+            return result.ToArray();
+        }
+
+        protected override bool IsTemporary => true;
+
+        public override ContentProviderResult[] ApplyBatch(IList<ContentProviderOperation> operations)
+        {
+            return base.ApplyBatch(operations);
+        }
+
+        public override void AttachInfo(Context context, ProviderInfo info)
+        {
+            var appInfo = info.ApplicationInfo;
+            var enabled = info.Enabled;
+            var exported = info.Exported;
+            var uriPermissions = info.GrantUriPermissions;
+            var authority = info.Authority;
+
+            var name = info.Name;
+
+            base.AttachInfo(context, info);
+        }
+
+        public override int BulkInsert(Android.Net.Uri uri, ContentValues[] values)
+        {
+            var result = base.BulkInsert(uri, values);
+            return result;
+        }
+
+        public override Bundle Call(string method, string arg, Bundle extras)
+        {
+            var result = base.Call(method, arg, extras);
+            return result;
+        }
+
+        public override void Dump(FileDescriptor fd, PrintWriter writer, string[] args)
+        {
+            base.Dump(fd, writer, args);
+        }
+
+        public override ParcelFileDescriptor OpenPipeHelper(Android.Net.Uri uri, string mimeType, Bundle opts, Java.Lang.Object args, IPipeDataWriter func)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenPipeHelper");
+            var result = base.OpenPipeHelper(uri, mimeType, opts, args, func);
+            return result;
+        }
+
+        public override void Shutdown()
+        {
+            System.Diagnostics.Debug.WriteLine("Shutdown");
+            base.Shutdown();
+        }
+
+        public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenTypedAssetFile A");
+            var result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts);
+            return result;
+        }
+
+        public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts, CancellationSignal signal)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenTypedAssetFile B");
+            var result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts, signal);
+            return result;
+        }
+
+
+        public override AssetFileDescriptor OpenAssetFile(Android.Net.Uri uri, string mode)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenAssetFile A");
+            var result = base.OpenAssetFile(uri, mode);
+            return result;
+        }
+
+        public override AssetFileDescriptor OpenAssetFile(Android.Net.Uri uri, string mode, CancellationSignal signal)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenAssetFile B");
+            var result = base.OpenAssetFile(uri, mode, signal);
+            return result;
+        }
+
+        public override ParcelFileDescriptor OpenFile(Android.Net.Uri uri, string mode)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenFile A");
+
+            var item = ItemForUri(uri);
+            var parcelFileMode = mode.Equals("rw", StringComparison.InvariantCultureIgnoreCase) ? ParcelFileMode.ReadWrite : ParcelFileMode.ReadOnly;
+            Java.IO.File javaFile = null;
+            if (item.Value is System.Uri itemUri && itemUri.AbsoluteUri.StartsWith("file://", StringComparison.InvariantCultureIgnoreCase))
+                javaFile = new Java.IO.File(itemUri.AbsolutePath);
+            else if (item.Value is FileInfo fileInfo)
+                javaFile = new Java.IO.File(fileInfo.FullName);
+            else
+            {
+                var tempGuid = Guid.NewGuid().ToString();
+                var path = Path.Combine(P42.Utils.Environment.TemporaryStoragePath, tempGuid);
+                var type = item.Value.GetType();
+                if (type == typeof(byte[]))
+                    System.IO.File.WriteAllBytes(path, (byte[])item.Value);
+                else if (type.IsSimple())
+                    System.IO.File.WriteAllText(path, item.Value.ToString());
+                else
+                    System.IO.File.WriteAllText(path, Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
+                javaFile = new Java.IO.File(path);
+            }
+
+            var pfd = ParcelFileDescriptor.Open(javaFile, parcelFileMode);
+            return pfd;
+        }
+
+        public override ParcelFileDescriptor OpenFile(Android.Net.Uri uri, string mode, CancellationSignal signal)
+        {
+            System.Diagnostics.Debug.WriteLine("OpenFile B");
+            var result = base.OpenFile(uri, mode, signal);
+            return result;
+        }
+
+        public override Android.Net.Uri Uncanonicalize(Android.Net.Uri url)
+        {
+            var result = base.Uncanonicalize(url);
+            return result;
+        }
+
+        public override bool Refresh(Android.Net.Uri uri, Bundle args, CancellationSignal cancellationSignal)
+        {
+            var result = base.Refresh(uri, args, cancellationSignal);
+            return result;
+        }
+
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+        }
 
         static int GetResourceId(String pVariableName, String pResourcename, String pPackageName)
         {
@@ -216,6 +359,7 @@ namespace Forms9Patch.Droid
         }
     }
     #endregion
+
 
     #region Cursors
     class IListCursor : AbstractCursor
@@ -412,7 +556,9 @@ namespace Forms9Patch.Droid
                 _keyType = _primativeType.GetGenericArguments()[0];
                 _valueType = _primativeType.GetGenericArguments()[1];
                 if (_valueType.ToAndroidFieldType() == FieldType.Null)
+#pragma warning disable RECS0035 // Possible mistaken call to 'object.GetType()'
                     throw new InvalidDataException("PrimativeCursor does not work with [" + _valueType.GetType() + "]");
+#pragma warning restore RECS0035 // Possible mistaken call to 'object.GetType()'
             }
             else if (primative.GetType().ToAndroidFieldType() == FieldType.Null && primative != null)
                 throw new InvalidDataException("PrimativeCursor does not work with [" + primative.GetType() + "]");

@@ -19,7 +19,7 @@ namespace Forms9Patch
     /// </summary>
     internal class GridRenderer : F9pLayoutRenderer<Grid>
     {
-#if __DROID__
+#if __DROID3__
         public GridRenderer(Android.Content.Context context) : base(context) { }
 #endif
     }

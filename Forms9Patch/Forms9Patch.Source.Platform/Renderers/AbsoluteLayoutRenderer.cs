@@ -20,7 +20,7 @@ namespace Forms9Patch
     /// </summary>
     internal class AbsoluteLayoutRenderer : F9pLayoutRenderer<AbsoluteLayout>
     {
-#if __DROID__
+#if __DROID3__
         public AbsoluteLayoutRenderer(Android.Content.Context context) : base(context) { }
 #endif
     }
