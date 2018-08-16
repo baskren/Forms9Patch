@@ -44,8 +44,8 @@ namespace Forms9Patch
         /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
         public new Thickness Padding
         {
-            get => (Thickness)GetValue(PaddingProperty); 
-            set => SetValue(PaddingProperty, value); 
+            get => (Thickness)GetValue(PaddingProperty);
+            set => SetValue(PaddingProperty, value);
         }
         #endregion Padding
 
@@ -60,8 +60,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if is visible; otherwise, <c>false</c>.</value>
         public new bool IsVisible
         {
-            get => (bool)GetValue(IsVisibleProperty); 
-            set => SetValue(IsVisibleProperty, value); 
+            get => (bool)GetValue(IsVisibleProperty);
+            set => SetValue(IsVisibleProperty, value);
         }
         #endregion IsVisible
 
@@ -76,8 +76,8 @@ namespace Forms9Patch
         /// <value>The margin.</value>
         public new Thickness Margin
         {
-            get => (Thickness)GetValue(MarginProperty); 
-            set => SetValue(MarginProperty, value); 
+            get => (Thickness)GetValue(MarginProperty);
+            set => SetValue(MarginProperty, value);
         }
         #endregion Margin
 
@@ -92,8 +92,8 @@ namespace Forms9Patch
         /// <value>The horizontal options.</value>
         public new LayoutOptions HorizontalOptions
         {
-            get => (LayoutOptions)GetValue(HorizontalOptionsProperty); 
-            set => SetValue(HorizontalOptionsProperty, value); 
+            get => (LayoutOptions)GetValue(HorizontalOptionsProperty);
+            set => SetValue(HorizontalOptionsProperty, value);
         }
 
         #endregion HorizontalOptions
@@ -109,8 +109,8 @@ namespace Forms9Patch
         /// <value>The vertical options.</value>
         public new LayoutOptions VerticalOptions
         {
-            get => (LayoutOptions)GetValue(VerticalOptionsProperty); 
-            set => SetValue(VerticalOptionsProperty, value); 
+            get => (LayoutOptions)GetValue(VerticalOptionsProperty);
+            set => SetValue(VerticalOptionsProperty, value);
         }
         #endregion VerticalOptions
 
@@ -125,8 +125,8 @@ namespace Forms9Patch
         /// <value>The target.</value>
         public VisualElement Target
         {
-            get => (VisualElement)GetValue(TargetProperty); 
-            set => SetValue(TargetProperty, value); 
+            get => (VisualElement)GetValue(TargetProperty);
+            set => SetValue(TargetProperty, value);
         }
         #endregion Target
 
@@ -142,8 +142,8 @@ namespace Forms9Patch
         /// <value>The color of the page overlay.</value>
         public Color PageOverlayColor
         {
-            get => (Color)GetValue(PageOverlayColorProperty); 
-            set => SetValue(PageOverlayColorProperty, value); 
+            get => (Color)GetValue(PageOverlayColorProperty);
+            set => SetValue(PageOverlayColorProperty, value);
         }
         #endregion PageOverlayColor
 
@@ -158,8 +158,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if cancel on page overlay touch; otherwise, <c>false</c>.</value>
         public bool CancelOnPageOverlayTouch
         {
-            get => (bool)GetValue(CancelOnPageOverlayTouchProperty); 
-            set => SetValue(CancelOnPageOverlayTouchProperty, value); 
+            get => (bool)GetValue(CancelOnPageOverlayTouchProperty);
+            set => SetValue(CancelOnPageOverlayTouchProperty, value);
         }
         #endregion CancelOnPageOverlayTouch
 
@@ -174,8 +174,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
         public bool Retain
         {
-            get => (bool)GetValue(RetainProperty); 
-            set => SetValue(RetainProperty, value); 
+            get => (bool)GetValue(RetainProperty);
+            set => SetValue(RetainProperty, value);
         }
         #endregion Retail
 
@@ -192,8 +192,8 @@ namespace Forms9Patch
         /// <value>The background image.</value>
         public Image BackgroundImage
         {
-            get => (Image)GetValue(BackgroundImageProperty); 
-            set => SetValue(BackgroundImageProperty, value); 
+            get => (Image)GetValue(BackgroundImageProperty);
+            set => SetValue(BackgroundImageProperty, value);
         }
         #endregion BackgroundImage
 
@@ -209,8 +209,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
         #endregion BackgroundColor property
 
@@ -235,8 +235,8 @@ namespace Forms9Patch
         public bool HasShadow
 #endif
         {
-            get => (bool)GetValue(HasShadowProperty); 
-            set => SetValue(HasShadowProperty, value); 
+            get => (bool)GetValue(HasShadowProperty);
+            set => SetValue(HasShadowProperty, value);
         }
         #endregion HasShadow property
 
@@ -252,8 +252,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
         public bool ShadowInverted
         {
-            get => (bool)GetValue(ShadowInvertedProperty); 
-            set => SetValue(ShadowInvertedProperty, value); 
+            get => (bool)GetValue(ShadowInvertedProperty);
+            set => SetValue(ShadowInvertedProperty, value);
         }
         #endregion ShadowInverted
 
@@ -271,8 +271,8 @@ namespace Forms9Patch
         /// </summary>
         public Color OutlineColor
         {
-            get => (Color)GetValue(OutlineColorProperty); 
-            set => SetValue(OutlineColorProperty, value); 
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
 #endif
 
@@ -289,8 +289,8 @@ namespace Forms9Patch
         /// <value>The outline radius.</value>
         public float OutlineRadius
         {
-            get => (float)GetValue(OutlineRadiusProperty); 
-            set => SetValue(OutlineRadiusProperty, value); 
+            get => (float)GetValue(OutlineRadiusProperty);
+            set => SetValue(OutlineRadiusProperty, value);
         }
         #endregion OutlineRadius
 
@@ -305,8 +305,8 @@ namespace Forms9Patch
         /// <value>The width of the outline.</value>
         public float OutlineWidth
         {
-            get => (float)GetValue(OutlineWidthProperty); 
-            set => SetValue(OutlineWidthProperty, value); 
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
         }
         #endregion OutlineWidth
 
@@ -320,8 +320,8 @@ namespace Forms9Patch
         /// </summary>
         public ElementShape ElementShape
         {
-            get => (ElementShape)GetValue(ElementShapeProperty); 
-            set => SetValue(ElementShapeProperty, value); 
+            get => (ElementShape)GetValue(ElementShapeProperty);
+            set => SetValue(ElementShapeProperty, value);
         }
         #endregion ElementShape property
 
@@ -335,8 +335,8 @@ namespace Forms9Patch
         /// </summary>
         ExtendedElementShape IShape.ExtendedElementShape
         {
-            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
-            set => SetValue(ExtendedElementShapeProperty, value); 
+            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty);
+            set => SetValue(ExtendedElementShapeProperty, value);
         }
         #endregion ExtendedElementShape property
 
@@ -361,11 +361,11 @@ namespace Forms9Patch
 
         #region Internal Properties
 
-        internal Listener Listener => _listener; 
+        internal Listener Listener => _listener;
 
-        internal RootPage RootPage => Application.Current.MainPage as RootPage; 
+        internal RootPage RootPage => Application.Current?.MainPage as RootPage;
 
-        internal BoxView PageOverlay => _pageOverlay; 
+        internal BoxView PageOverlay => _pageOverlay;
 
         #region ContentView property
         /// <summary>
@@ -373,7 +373,7 @@ namespace Forms9Patch
         /// </summary>
         internal protected View DecorativeContainerView
         {
-            get => (View)_decorativeContainerView; 
+            get => (View)_decorativeContainerView;
             set
             {
                 if (_decorativeContainerView is VisualElement oldLayout)
@@ -480,7 +480,7 @@ namespace Forms9Patch
                     _listener.Panning -= OnPanning;
                     _listener.Dispose();
                     Retain = false;
-                    RootPage.RemovePopup(this);
+                    RootPage?.RemovePopup(this);
                     disposedValue = true;
                 }
             }
@@ -568,8 +568,8 @@ namespace Forms9Patch
                         IsVisible = false;
                         return;
                     }
-                    if (RootPage == null)
-                        throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
+                    //if (RootPage == null)
+                    //    throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
                     RootPage?.AddPopup(this);
                     base.IsVisible = true;
                 }
@@ -633,6 +633,8 @@ namespace Forms9Patch
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             // this is going to be the size of the root page.
+            if (RootPage == null)
+                return new SizeRequest(Size.Zero, Size.Zero);
             var result = new SizeRequest(RootPage.Bounds.Size, RootPage.Bounds.Size);
             return result;
         }

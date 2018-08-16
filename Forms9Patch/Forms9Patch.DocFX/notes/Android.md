@@ -2,7 +2,7 @@
 
 Any cross platform developer knows that Android is a very special beast.  Unfortunately, Forms9Patch doesn't mitigate this.  In fact, until I get the time to remove some warts, some would argue `Forms9Patch.Clipboard` isn't doing most developers any favors.  That being said, here are some notes for your Android platform projects:
 
-- Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android platform project's `Resources/Values/string.xml` file, before you can build it:
+- AS OF VERSION 1.4, THE FOLLOWING IS NO LONGER NECESSARY.  Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android platform project's `Resources/Values/string.xml` file, before you can build it:
 
    ```xml
    <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>

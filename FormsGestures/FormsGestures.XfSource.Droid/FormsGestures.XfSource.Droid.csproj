@@ -77,20 +77,24 @@
       <Name>Xamarin.Forms.Platform.Android.FormsViewGroup</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+      <Project>{844B2DBE-D6FF-4D3A-81C4-A594D86BFB93}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
+      <Project>{F9214F93-5958-4B1E-8B9C-31F2EE4079C1}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Project>{5BA65231-CA2A-4713-92D7-F88DDF66978B}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
       <Project>{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}</Project>
       <Name>P42.Utils.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android %28Forwarders%29.csproj">
+      <Project>{6E53FEB1-1100-46AE-8013-17BBA35CC197}</Project>
+      <Name>Xamarin.Forms.Platform.Android (Forwarders)</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

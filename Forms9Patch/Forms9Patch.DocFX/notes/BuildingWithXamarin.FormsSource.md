@@ -6,35 +6,57 @@ title: Build with Xamarin.Forms source
 
 ## Project Configuration
 
-#### Notes for those starting from scratch 
+#### Notes for those starting from scratch (as a August 16, 2018) 
 
-1.  Switch to a Xamarin.Forms commit tagged 2.4.0-sr2
+1.  Switch to the Xamarin.Forms_Official/3.1.0 branch
 2.  Xamarin.Forms projects used:
-   1.  Xamarin.Forms.Platform
-   2.  Xamarin.Forms.Core
-   3.  Xamarin.Forms.Xaml
-   4.  Xamarin.Forms.iOS
-   5.  Xamarin.Forms.Android.FormsViewGroup
-   6.  Xamarin.Forms.Android
-   7.  Xamarin.Forms.UAP
-3.  Xamarin.Forms.Android.FormsViewGroup needs to have Sytem.Xml frame work added (right click on References, add reference / Assemblies / framework)
-4.  Xamarin.Forms.Android:
-   1.  needs to be built with Android 7.1 (Project Properties / Application / Compile using Android version)
-   2.  Minimum Android Version needs to be 4.1 (API16) to support HTML copy / paste 
-   3.  Properties/AssemblyInfo.cs: comment out ```#if ROOT_RENDERERS``` (and the corresponding ```#endif``` 
-   4.  Properties/AssemblyInfo.cs: comment out ```[assembly: ExportRenderer (typeof (Toolbar), typeof (ToolbarRenderer))]```
-5.  Set up ```packages``` symbolic links (see below)
-6.  Set up symbolic link that links from ```Xamarin.Forms/.nuget``` to ```.nuget``` in the solution's root directory.
-7.  Be sure there is a copy of the ```Xamarin.Forms.2.4.0.280``` nuget package in the solution's ```packages``` directory.
-    
+    -  Xamarin.Flex  
+    -  Xamarin.Forms.Core
+    -  Xamarin.Forms.Platform
+    -  Xamarin.Forms.Platform.Android
+    -  Xamarin.Forms.Platform.Android.FormsViewGroup
+    -  Xamarin.Forms.Platform.iOS
+    -  Xamarin.Forms.Platform.UAP
+    -  Xamarin.Forms.Xaml
+    -  Stubs/Xamarin.Forms.Platform.Android
+    -  Stubs/Xamarin.Forms.Platform.iOS
+3.  Xamarin.Forms.Android:
+    1.  needs to be built with Android 8.1 (Project Properties / Application / Compile using Android version)
+    2.  Minimum Android Version needs to be 4.1 (API16) to support HTML copy / paste 
+4.  Set up ```packages``` symbolic links (see below)
+5.  Use .netstandard 2.0 for all of your cross platform projects
+6.  Reference the following packages in your .netstandard cross platform projects:
+    -  Xamarin.Flex  
+    -  Xamarin.Forms.Core
+    -  Xamarin.Forms.Platform
+    -  Xamarin.Forms.Xaml
+7.  Reference the following packages in your Android projects:
+    -  Xamarin.Flex  
+    -  Xamarin.Forms.Core
+    -  Xamarin.Forms.Platform.Android
+    -  Xamarin.Forms.Platform.Android.FormsViewGroup
+    -  Xamarin.Forms.Xaml
+    -  Stubs/Xamarin.Forms.Platform.Android
+8.  Reference the following packages in your iOS projects:  
+    -  Xamarin.Flex  
+    -  Xamarin.Forms.Core
+    -  Xamarin.Forms.Platform.iOS
+    -  Xamarin.Forms.Platform.UAP
+    -  Xamarin.Forms.Xaml
+    -  Stubs/Xamarin.Forms.Platform.iOS
+9.  Reference the following packages in your UWP projects:
+    -  Xamarin.Flex  
+    -  Xamarin.Forms.Core
+    -  Xamarin.Forms.Platform.UAP
+    -  Xamarin.Forms.Xaml
 
-Note that the above may need to be repeated if switching to a different Xamarin.Forms git commit.
 
 #### Every submodule needs a ```packages``` folder
 
 Because of the way VisualStudio, Nuget, and Git (don't) work together, relative paths are not valid for Nuget packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the following directories (below) and symbolically link the ```packages``` subdirectory to the solution's working Nuget packages directory:
 
  - Forms9Patch/Forms9PatchDemo
+ - Forms9Patch/FormsGestures
  - Forms9Patch/P42
  - Forms9Patch/Xamarin.Forms
 
@@ -47,9 +69,8 @@ If you are using Forms9Patch source as a submodule in another git module, modify
 
 
 #### Address error:  ``` Project '..\Xamarin.Forms ... .csproj' targets 'netstandard2.0' ```
+Be sure all of your shared projects use .netStandard 2.0
 
-1.  You're very likely referencing the latest and greatest Xamarin.Forms ```master``` branch commit.  Back up by switching to a ```2.4.0``` build.   
-2.  Manual clean out the ```bin``` and ```obj``` folders (SuperClean.exe) and Restore Packages.
 
 #### Changes to Forms9PatchDemo, Forms9Patch, or FormsGestures source code isn't updating
 
@@ -90,12 +111,3 @@ You need to use `Compile with .Net Native tool chain` for your app to be accepte
  #### UWP: Crashes when when trying to open an image using `Xamarin.Forms.ImageSource.FromResource` but *not* when using `Forms9Patch.ImageSource.FromMultiResource`
 
  Boy, did I loose a lot of time on this one.  Turns out the solution to [UWP: Getting exceptions at Xamarin.Forms.Init](UWP: Getting exceptions at Xamarin.Forms.Init) was the fix.  I have no idea why.
-
-
- 
-
- # Notes for Forms9Patch users
-
- ## Android
-
- - You must add `<string name="forms9patch_copy_paste_authority">*your_Android_app_package_name_here*.f9pcopypaste</string>` to your Android project's `Resources/values/strings.xml` file.
