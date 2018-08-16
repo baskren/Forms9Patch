@@ -301,7 +301,7 @@ namespace Forms9Patch
         void OnScrollWrappingTargetScrolled(object sender, ScrolledEventArgs e)
         {
             if (IsVisible)
-                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
+                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height - KeyboardService.Height);
         }
 
         #endregion

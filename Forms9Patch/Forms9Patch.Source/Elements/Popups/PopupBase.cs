@@ -442,6 +442,7 @@ namespace Forms9Patch
             Target = target;
             base.Children.Add(_pageOverlay);
 
+            KeyboardService.HeightChanged += OnKeyboardHeightChanged;
         }
         #endregion
 
@@ -509,6 +510,12 @@ namespace Forms9Patch
 
 
         #region PropertyChange managment
+        const string KeyboardServiceHeight = "KeyboardService.Height";
+
+        void OnKeyboardHeightChanged(object sender, double e)
+        {
+            OnContentViewPropertyChanged(sender, new PropertyChangedEventArgs(KeyboardServiceHeight));
+        }
 
         void InitializeILayoutProperties(ILayout layout)
         {
@@ -540,11 +547,11 @@ namespace Forms9Patch
 
         }
 
-        private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
+        void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (RootPage != null && e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName)
+            if (RootPage != null && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
             {
-                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);
+                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height - KeyboardService.Height);
             }
         }
 
