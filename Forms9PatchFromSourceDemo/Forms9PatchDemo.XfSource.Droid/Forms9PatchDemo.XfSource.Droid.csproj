@@ -244,6 +244,10 @@
       <Project>{23e697e4-43e4-4ba2-b681-d136f20422c6}</Project>
       <Name>Forms9PatchDemo.XfSource</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android %28Forwarders%29.csproj">
+      <Project>{6E53FEB1-1100-46AE-8013-17BBA35CC197}</Project>
+      <Name>Xamarin.Forms.Platform.Android (Forwarders)</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

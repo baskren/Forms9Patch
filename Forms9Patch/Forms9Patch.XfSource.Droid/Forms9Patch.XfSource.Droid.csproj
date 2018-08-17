@@ -164,11 +164,11 @@
       <Name>P42.Utils.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{5BA65231-CA2A-4713-92D7-F88DDF66978B}</Project>
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{F9214F93-5958-4B1E-8B9C-31F2EE4079C1}</Project>
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.Droid\FormsGestures.XfSource.Droid.csproj">
@@ -176,11 +176,11 @@
       <Name>FormsGestures.XfSource.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-      <Project>{844B2DBE-D6FF-4D3A-81C4-A594D86BFB93}</Project>
+      <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-      <Project>{EEB853EE-FB58-45CA-8083-162A3B66433F}</Project>
+      <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android %28Forwarders%29.csproj">

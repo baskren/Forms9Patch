@@ -15,6 +15,12 @@ namespace Forms9Patch.Droid
             get
             {
                 var revision = Android.OS.Build.VERSION.Release;
+                int count = revision.Count(f => f == '.');
+                if (count == 0)
+                    revision += ".0.0";
+                if (count == 1)
+                    revision += ".0";
+
                 return new Version(revision);
             }
         }
