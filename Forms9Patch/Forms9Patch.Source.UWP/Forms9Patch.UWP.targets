@@ -3,6 +3,19 @@
 
   <ItemGroup>
 
+    <!-- CLIPBOARD -->
+    <!--
+    <Compile Include="..\Forms9Patch.Source.UWP\Services\ClipboardService.cs">
+      <Link>Services\ClipboardService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Models\ClipboardEntry.cs">
+      <Link>Models\ClipboardEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Models\ReturnMimeItem.cs">
+      <Link>Models\ReturnMimeItem.cs</Link>
+    </Compile>
+    -->
+
 
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.UWP\Effects\EmbeddedResourceFontEffect.cs">
@@ -71,9 +84,6 @@
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.UWP\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.UWP\Services\ClipboardService.cs">
-      <Link>Services\ClipboardService.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.UWP\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>

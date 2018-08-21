@@ -106,7 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <Import Project="..\Forms9Patch.Source.UWP\Forms9Patch.UWP.targets" />
-
   <!-- NUGET PACKAGES -->
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct2D1">
@@ -125,7 +124,6 @@
       <Version>6.1.4</Version>
     </PackageReference>
   </ItemGroup>
-
   <!-- XF Source Project References -->
   <ItemGroup>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.UWP\FormsGestures.XfSource.UWP.csproj">
@@ -157,9 +155,19 @@
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
   </ItemGroup>
-  
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Forms9Patch.Source.UWP\Models\ClipboardEntry.cs">
+      <Link>ClipboardEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Models\ReturnMimeItem.cs">
+      <Link>ReturnMimeItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Services\ClipboardService.cs">
+      <Link>ClipboardService.cs</Link>
+    </Compile>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

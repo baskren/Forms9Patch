@@ -14,7 +14,6 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -39,7 +38,6 @@
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
       <Link>ClipboardService.cs</Link>
@@ -53,9 +51,7 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs">
       <Link>ClipboardEntry.cs</Link>
     </Compile>
-
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />

@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 //using Windows.ApplicationModel.DataTransfer;
@@ -69,6 +72,60 @@ namespace Forms9Patch.UWP
             }
             set
             {
+                if (value == null)
+                    return;
+
+                var images = new List<IMimeItem>();
+                var htmls = new List<IMimeItem>();
+                var rtfs = new List<IMimeItem>();
+                var texts = new List<IMimeItem>();
+                var others = new List<IMimeItem>();
+
+                // categorized into types recognized by UWP DataSharing
+                foreach (var item in value.Items)
+                {
+                    if (item.MimeType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+                        images.Add(item);
+                    else if (item.MimeType.ToLower() == "text/html")
+                        htmls.Add(item);
+                    else if (item.MimeType.ToLower() == "text/rtf" ||
+                        item.MimeType.ToLower() == "text/richtext" ||
+                        item.MimeType.ToLower() == "application/rtf" ||
+                        item.MimeType.ToLower() == "application/x-rtf")
+                        rtfs.Add(item);
+                    else if (item.MimeType.ToLower() == "text/plain")
+                        texts.Add(item);
+                    else
+                        others.Add(item);
+                }
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
+                var properties = dataPackage.Properties;
+                if (value.Description != null)
+                    properties.Description = value.Description ?? Forms9Patch.ApplicationInfoService.Name;
+                if (texts.Count == 1 && texts[0].Value is string text)
+                    dataPackage.SetText(text);
+                if (rtfs.Count == 1 && rtfs[0].Value is string rtf)
+                    dataPackage.SetRtf(rtf);
+                if (htmls.Count == 1 && htmls[0].Value is string html)
+                    dataPackage.SetHtmlFormat(html);
+                if (images.Count == 1)
+                {
+                    var item = images[0];
+                    BitmapImage image = new BitmapImage();
+                    if (item.Value is byte[] byteArray)
+                        //dataPackage.SetBitmap(ToRandomAccessStreamReference(byteArray));
+                        image.SetSource(ToIRandomAccessStream(byteArray));
+                    else if (item.Value is FileInfo fileInfo)
+                    {
+                        var storageFile = await StorageFile.GetFileFromPathAsync(fileInfo.Name);
+                        var stream = await storageFile.OpenAsync(FileAccessMode.Read);
+                        image.SetSource(stream);
+
+                    }
+                }
+
+
                 if (value == null)
                     return;
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
@@ -200,4 +257,9 @@ namespace Forms9Patch.UWP
 
 
     }
+
+    #region Content Provider
+
+    #endregion
 }
+

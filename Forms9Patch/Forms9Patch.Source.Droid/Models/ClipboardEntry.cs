@@ -31,7 +31,10 @@ namespace Forms9Patch.Droid
                 return _clipboardManager;
             }
         }
+        #endregion
 
+
+        #region Properties
         public override string Description => Clipboard.PrimaryClip.Description.Label;
 
         public override List<IMimeItem> Items
