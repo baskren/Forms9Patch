@@ -61,8 +61,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardEntry.cs">
+      <Link>ClipboardEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs">
+      <Link>ClipboardService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransferService.cs">
       <Link>DataTransferService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs">
+      <Link>MimeItemExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs">
+      <Link>NSDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs">
+      <Link>NSObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs">
+      <Link>ReturnMimeItem.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />

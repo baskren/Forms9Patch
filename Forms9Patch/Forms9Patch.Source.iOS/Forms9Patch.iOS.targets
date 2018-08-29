@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <!-- CLIPBOARD / SHARING -->
+    <!--
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs">
+      <Link>Clipboard-Sharing\MimeItemExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardEntry.cs">
+      <Link>Clipboard-Sharing\ClipboardEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs">
+      <Link>Clipboard-Sharing\NSDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs">
+      <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs">
+      <Link>Clipboard-Sharing\ClipboardService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransferService.cs">
+      <Link>Clipboard-Sharing\DataTransferService.cs</Link>
+    </Compile>
+  -->
+
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
       <Link>Effects\CustomFontEffect.cs</Link>
@@ -25,9 +47,6 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
       <Link>Extensions\FormattedStringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Extensions\MimeItemExtensions.cs">
-      <Link>Extensions\MimeItemExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs">
       <Link>Extensions\NSObjectExtensions.cs</Link>
     </Compile>
@@ -39,15 +58,6 @@
     </Compile>
 
     <!-- MODELS -->
-    <Compile Include="..\Forms9Patch.Source.iOS\Models\ClipboardEntry.cs">
-      <Link>Models\ClipboardEntry.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Models\NSDataItem.cs">
-      <Link>Models\NSDataItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Models\ReturnMimeItem.cs">
-      <Link>Models\ReturnMimeItem.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </Compile>
@@ -70,14 +80,6 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Services\ClipboardService.cs">
-      <Link>Services\ClipboardService.cs</Link>
-    </Compile>
-    <!--
-    <Compile Include="..\Forms9Patch.Source.iOS\Services\DataTransferService.cs">
-      <Link>Services\DataTransferService.cs</Link>
-    </Compile>
-  -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>
     </Compile>
