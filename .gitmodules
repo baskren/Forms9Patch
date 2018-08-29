@@ -12,4 +12,4 @@
 	url = https://github.com/tomjoht/documentation-theme-jekyll
 [submodule "MimeSharp"]
 	path = MimeSharp
-	url = https://github.com/Ujjwol/MimeSharp
+url=https://github.com/baskren/MimeSharp.git
