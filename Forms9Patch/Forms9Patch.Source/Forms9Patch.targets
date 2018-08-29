@@ -4,6 +4,7 @@
   <ItemGroup>
 
     <!-- ClipBoard -->
+    <Compile Include="..\Forms9Patch.Source\Clipboard\AsyncHelper.cs" Link="Clipboard\AsyncHelper.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\Clipboard.cs" Link="Clipboard\Clipboard.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntry.cs" Link="Clipboard\ClipboardEntry.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntry.cs" Link="Clipboard\IClipboardEntry.cs" />

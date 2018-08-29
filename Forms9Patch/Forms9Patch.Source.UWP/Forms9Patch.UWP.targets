@@ -44,6 +44,9 @@
     <Compile Include="..\Forms9Patch.Source.UWP\Extensions\InLineExtensions.cs">
       <Link>Extensions\InLineExtensions.cs</Link>
     </Compile>
+    <!--Compile Include="..\Forms9Patch.Source.UWP\Extensions\MimeItemExtensions.cs">
+      <Link>Extensions\MimeItemExtensions.cs</Link>
+    </Compile-->
     <Compile Include="..\Forms9Patch.Source.UWP\Extensions\TextBlockExtensions.cs">
       <Link>Extensions\TextBlockExtensions.cs</Link>
     </Compile>

@@ -106,7 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <Import Project="..\Forms9Patch.Source.UWP\Forms9Patch.UWP.targets" />
-
   <!-- NUGET PACKAGES -->
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct2D1">
@@ -127,9 +126,7 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>2.4.0.280</Version>
     </PackageReference>
-
   </ItemGroup>
-
   <!-- XF Nuget Project references -->
   <ItemGroup>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj">
@@ -140,13 +137,15 @@
       <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{fd75461e-14e4-4f12-ba6b-2aeda6f99db7}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
       <Project>{b1ca1e82-65f0-4eed-beb6-e133fbd2c4d9}</Project>
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
   </ItemGroup>
-
-  
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>

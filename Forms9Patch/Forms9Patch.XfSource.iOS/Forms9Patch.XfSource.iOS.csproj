@@ -41,10 +41,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-
     <Reference Include="SkiaSharp">
       <HintPath>..\..\packages\SkiaSharp.1.60.0\lib\XamariniOS\SkiaSharp.dll</HintPath>
     </Reference>
@@ -54,7 +55,6 @@
     <Reference Include="SkiaSharp.Svg">
       <HintPath>..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
     </Reference>
-    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

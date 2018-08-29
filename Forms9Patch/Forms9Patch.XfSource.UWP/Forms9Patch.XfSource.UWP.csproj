@@ -134,6 +134,10 @@
       <Project>{52e3c505-3123-48ed-afe5-e700f1d5a01a}</Project>
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{fd75461e-14e4-4f12-ba6b-2aeda6f99db7}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
       <Project>{57b8b73d-c3b5-4c42-869e-7b2f17d354ac}</Project>
       <Name>Xamarin.Forms.Core</Name>
@@ -159,6 +163,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Forms9Patch.Source.UWP\Extensions\MimeItemExtensions.cs">
+      <Link>MimeItemExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch.Source.UWP\Models\ClipboardEntry.cs">
       <Link>ClipboardEntry.cs</Link>
     </Compile>

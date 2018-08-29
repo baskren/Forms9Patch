@@ -10,3 +10,6 @@
 [submodule "docs"]
 	path = docs
 	url = https://github.com/tomjoht/documentation-theme-jekyll
+[submodule "MimeSharp"]
+	path = MimeSharp
+	url = https://github.com/Ujjwol/MimeSharp

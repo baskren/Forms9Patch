@@ -9,7 +9,6 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
-//using Windows.ApplicationModel.DataTransfer;
 
 [assembly: Dependency(typeof(Forms9Patch.UWP.ClipboardService))]
 namespace Forms9Patch.UWP
@@ -29,44 +28,16 @@ namespace Forms9Patch.UWP
 
         public Windows.ApplicationModel.DataTransfer.DataPackage DataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
 
-        ClipboardEntry _lastEntry = null;
+        IClipboardEntry _lastEntry = null;
         bool _lastChangedByThis = false;
 
-        public ClipboardEntry Entry
+        public IClipboardEntry Entry
         {
             get
             {
                 if (EntryCaching && _lastEntry != null)
                     return _lastEntry;
                 var result = new ClipboardEntry();
-                var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
-                if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text))
-                    result.PlainText = dataPackageView.GetText();
-                if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Html))
-                    result.HtmlText = dataPackageView.GetHtmlText();
-
-                //result.Description = dataPackageView.D
-                foreach (var formatId in dataPackageView.AvailableFormats)
-                {
-                    if (formatId == Windows.ApplicationModel.DataTransfer.StandardDataFormats.Bitmap)
-                        result.AddValue("image/bmp", GetBitmap(dataPackageView));
-                    else if (formatId == Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf)
-                        result.AddValue("text/richtext", GetRichTextFormat(dataPackageView));
-                    else
-                        result.AddValue(formatId, GetByteArray(dataPackageView, formatId));
-                }
-
-                foreach (var property in dataPackageView.Properties)
-                {
-                    var key = property.Key;
-                    var value = property.Value;
-                    var type = value.GetType();
-                    if (!ClipboardEntry.ValidItemType(type))
-                        continue;
-                    var constructedListType = typeof(ClipboardEntryItem<>).MakeGenericType(type);
-                    var item = (IClipboardEntryItem)Activator.CreateInstance(constructedListType, new object[] { key, value });
-                    result.AdditionalItems.Add(item);
-                }
                 _lastEntry = result;
                 return result;
             }
@@ -75,90 +46,81 @@ namespace Forms9Patch.UWP
                 if (value == null)
                     return;
 
-                var images = new List<IMimeItem>();
-                var htmls = new List<IMimeItem>();
-                var rtfs = new List<IMimeItem>();
-                var texts = new List<IMimeItem>();
-                var others = new List<IMimeItem>();
-
-                // categorized into types recognized by UWP DataSharing
-                foreach (var item in value.Items)
-                {
-                    if (item.MimeType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
-                        images.Add(item);
-                    else if (item.MimeType.ToLower() == "text/html")
-                        htmls.Add(item);
-                    else if (item.MimeType.ToLower() == "text/rtf" ||
-                        item.MimeType.ToLower() == "text/richtext" ||
-                        item.MimeType.ToLower() == "application/rtf" ||
-                        item.MimeType.ToLower() == "application/x-rtf")
-                        rtfs.Add(item);
-                    else if (item.MimeType.ToLower() == "text/plain")
-                        texts.Add(item);
-                    else
-                        others.Add(item);
-                }
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
                 dataPackage.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
                 var properties = dataPackage.Properties;
                 if (value.Description != null)
                     properties.Description = value.Description ?? Forms9Patch.ApplicationInfoService.Name;
-                if (texts.Count == 1 && texts[0].Value is string text)
-                    dataPackage.SetText(text);
-                if (rtfs.Count == 1 && rtfs[0].Value is string rtf)
-                    dataPackage.SetRtf(rtf);
-                if (htmls.Count == 1 && htmls[0].Value is string html)
-                    dataPackage.SetHtmlFormat(html);
-                if (images.Count == 1)
+                properties.ApplicationName = Forms9Patch.ApplicationInfoService.Name;
+
+                List<IStorageItem> storageItems = new List<IStorageItem>();
+
+                bool textSet = false;
+                bool htmlSet = false;
+                bool rtfSet = false;
+
+                foreach (var item in value.Items)
                 {
-                    var item = images[0];
-                    BitmapImage image = new BitmapImage();
-                    if (item.Value is byte[] byteArray)
-                        //dataPackage.SetBitmap(ToRandomAccessStreamReference(byteArray));
-                        image.SetSource(ToIRandomAccessStream(byteArray));
-                    else if (item.Value is FileInfo fileInfo)
+                    var mimeType = item.MimeType.ToLower();
+                    if (mimeType == "text/plain" && !textSet && item.AsString() is string text)
                     {
-                        var storageFile = await StorageFile.GetFileFromPathAsync(fileInfo.Name);
-                        var stream = await storageFile.OpenAsync(FileAccessMode.Read);
-                        image.SetSource(stream);
-
+                        dataPackage.SetText(text);
+                        textSet = true;
                     }
-                }
+                    else if (mimeType == "text/html" && !htmlSet && item.AsString() is string html)
+                    {
+                        var start = html.Substring(0, Math.Min(html.Length, 300));
+                        if (!start.ToLower().Contains("<html>"))
+                        {
+                            // we are going to assume we were given a fragment and need to encapsulate it for other Windows apps to recognize it (argh!)
+                            var fragment = html;
 
+                            var htmlStartIndex = 105;
+                            var fragStartIndex = htmlStartIndex + 36;
+                            var fragEndIndex = fragStartIndex + fragment.Length;
+                            var htmlEndIndex = fragEndIndex + 36;
 
-                if (value == null)
-                    return;
-                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                var properties = dataPackage.Properties;
-                //properties.ApplicationName = Forms9Patch.ApplicationInfoService.Name;
-                if (value.Description!=null)
-                    properties.Description = value.Description;
-                dataPackage.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
-                if (!string.IsNullOrEmpty(value.PlainText))
-                    dataPackage.SetText(value.PlainText);
-                if (!string.IsNullOrEmpty(value.HtmlText))
-                    dataPackage.SetHtmlFormat(value.HtmlText);
-                foreach (var item in value.AdditionalItems)
-                {
-                    var formatId = GetFormatId(item.MimeType);
-                    if (formatId == Windows.ApplicationModel.DataTransfer.StandardDataFormats.Bitmap)
-                        dataPackage.SetBitmap(ToRandomAccessStreamReference(item.Value as byte[]));
-                    else if (formatId == Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf)
-                        dataPackage.SetRtf(item.Value as string);
-                    else if (item.Type == typeof(byte[]))
-                        dataPackage.SetData(formatId, ToIRandomAccessStream(item.Value as byte[]));
-                    //dataPackage.SetData(formatId, item.Value);
+                            html = "Version:0.9";
+                            html += "\r\nStartHTML:" + htmlStartIndex.ToString("D10"); 
+                            html += "\r\nEndHTML:" + htmlEndIndex.ToString("D10");
+                            html += "\r\nStartFragment:" + fragStartIndex.ToString("D10");
+                            html += "\r\nEndFragment:" + fragEndIndex.ToString("D10");
+                            html += "\r\n<html>\r\n<body>\r\n<!--StartFragment-->";
+                            html += fragment;
+                            html += "<!--EndFragment-->\r\n</body>\r\n</html>";
+                        }
+                        dataPackage.SetHtmlFormat(html);
+                        htmlSet = true;
+                    }
+                    else if ((mimeType == "text/rtf" ||
+                            mimeType == "text/richtext" ||
+                            mimeType == "application/rtf" ||
+                            mimeType == "application/x-rtf") &&
+                            !rtfSet && item.AsString() is string rtf)
+                    {
+                        dataPackage.SetRtf(rtf);
+                        rtfSet = true;
+                    }
+                    if (item.ToStorageFile() is StorageFile storageFile)
+                        storageItems.Add(storageFile);
                     else
-                        properties.Add(formatId, item.Value);
+                        properties.Add(GetFormatId(item.MimeType), item.Value);
                 }
+
+                if (storageItems.Count > 1)
+                    dataPackage.SetStorageItems(storageItems);
+
+
                 _lastEntry = value;
                 _lastChangedByThis = true;
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }
 
-        public bool EntryCaching { get; set; } = true;
 
+        public bool EntryCaching { get; set; } = false;
+
+        /*
         static byte[] GetByteArray(DataPackageView dpv, string formatId)
         {
             var task = Task<byte[]>.Run(async () =>
@@ -212,6 +174,7 @@ namespace Forms9Patch.UWP
             });
             return task.Result;
         }
+        */
 
         string GetFormatId(string mime)
         {
@@ -219,9 +182,14 @@ namespace Forms9Patch.UWP
                 return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Bitmap;
             if (mime == "text/richtext")
                 return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf;
+            if (mime == "text/html")
+                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Html;
+            if (mime == "text/plain")
+                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text;
             return mime;
         }
 
+        /*
         internal static IRandomAccessStream ToIRandomAccessStream(byte[] arr)
         {
             return arr.AsBuffer().AsStream().AsRandomAccessStream();
@@ -231,8 +199,11 @@ namespace Forms9Patch.UWP
         {
             return RandomAccessStreamReference.CreateFromStream(ToIRandomAccessStream(arr));
         }
+        */
+
     }
 
+    /*
     static class DataPackageViewExtensions
     {
         public static string GetText(this Windows.ApplicationModel.DataTransfer.DataPackageView dpv)
@@ -257,6 +228,7 @@ namespace Forms9Patch.UWP
 
 
     }
+    */
 
     #region Content Provider
 
