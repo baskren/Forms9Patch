@@ -12,6 +12,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs">
       <Link>Clipboard-Sharing\NSDataItem.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs">
+      <Link>Clipboard-Sharing\NSObjectExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs">
       <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
     </Compile>
@@ -46,9 +49,6 @@
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
       <Link>Extensions\FormattedStringExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Extensions\NSObjectExtensions.cs">
-      <Link>Extensions\NSObjectExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
       <Link>Extensions\UITextViewExtensions.cs</Link>

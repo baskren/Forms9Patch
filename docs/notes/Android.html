@@ -81,7 +81,7 @@
 
 <p>Any cross platform developer knows that Android is a very special beast.  Unfortunately, Forms9Patch doesn't mitigate this.  In fact, until I get the time to remove some warts, some would argue <code>Forms9Patch.Clipboard</code> isn't doing most developers any favors.  That being said, here are some notes for your Android platform projects:</p>
 <ul>
-<li><p>Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android platform project's <code>Resources/Values/string.xml</code> file, before you can build it:</p>
+<li><p>AS OF VERSION 1.4, THE FOLLOWING IS NO LONGER NECESSARY.  Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android platform project's <code>Resources/Values/string.xml</code> file, before you can build it:</p>
 <pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
 </code></pre>
 <p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.</p>

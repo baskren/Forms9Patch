@@ -89,7 +89,8 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">ClipboardEntry</span></div>
+    <div class="level1"><a class="xref" href="Forms9Patch.BaseClipboardEntry.html">BaseClipboardEntry</a></div>
+    <div class="level2"><span class="xref">ClipboardEntry</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -98,32 +99,32 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+      <a class="xref" href="Forms9Patch.BaseClipboardEntry.html#Forms9Patch_BaseClipboardEntry__description">BaseClipboardEntry._description</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+      <a class="xref" href="Forms9Patch.BaseClipboardEntry.html#Forms9Patch_BaseClipboardEntry__items">BaseClipboardEntry._items</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+      <a class="xref" href="Forms9Patch.BaseClipboardEntry.html#Forms9Patch_BaseClipboardEntry_Items">BaseClipboardEntry.Items</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_ClipboardEntry_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ClipboardEntry : IClipboardEntry</code></pre>
+    <pre><code class="lang-csharp hljs">public class ClipboardEntry : BaseClipboardEntry, IClipboardEntry</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="Forms9Patch_ClipboardEntry__ctor_" data-uid="Forms9Patch.ClipboardEntry.#ctor*"></a>
+  <h4 id="Forms9Patch_ClipboardEntry__ctor" data-uid="Forms9Patch.ClipboardEntry.#ctor">ClipboardEntry()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClipboardEntry()</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -178,33 +179,6 @@ to the user what this data represents.</p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><p>The html text.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_ClipboardEntry_Items_" data-uid="Forms9Patch.ClipboardEntry.Items*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_Items" data-uid="Forms9Patch.ClipboardEntry.Items">Items</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the items for this ClipboardEntry</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;IMimeItem&gt; Items { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Forms9Patch.IMimeItem.html">IMimeItem</a>&gt;</td>
-        <td><p>The items.</p>
 </td>
       </tr>
     </tbody>
@@ -319,65 +293,13 @@ to the user what this data represents.</p>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="Forms9Patch_ClipboardEntry_ValidItemType_" data-uid="Forms9Patch.ClipboardEntry.ValidItemType*"></a>
-  <h4 id="Forms9Patch_ClipboardEntry_ValidItemType_System_Type_" data-uid="Forms9Patch.ClipboardEntry.ValidItemType(System.Type)">ValidItemType(Type)</h4>
-  <div class="markdown level1 summary"><p>Test to determine if type can be safely put on clipboard across platforms (without crazy schema gymnastics)</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool ValidItemType(Type type)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Forms9Patch.IClipboardEntry.html">IClipboardEntry</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_MimeTypes_Forms9Patch_IClipboardEntry_">IClipboardEntryExtensions.MimeTypes(IClipboardEntry)</a>
-  </div>
-  <div>
-      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetFirstMimeItem__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetFirstMimeItem&lt;T&gt;(IClipboardEntry, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_GetMimeItems__1_Forms9Patch_IClipboardEntry_System_String_">IClipboardEntryExtensions.GetMimeItems&lt;T&gt;(IClipboardEntry, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_AddContentOfFile_Forms9Patch_ClipboardEntry_System_String_System_String_">IClipboardEntryExtensions.AddContentOfFile(ClipboardEntry, String, String)</a>
+      <a class="xref" href="Forms9Patch.IClipboardEntryExtensions.html#Forms9Patch_IClipboardEntryExtensions_AddBytesFromFile_Forms9Patch_ClipboardEntry_System_String_System_String_">IClipboardEntryExtensions.AddBytesFromFile(ClipboardEntry, String, String)</a>
   </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
