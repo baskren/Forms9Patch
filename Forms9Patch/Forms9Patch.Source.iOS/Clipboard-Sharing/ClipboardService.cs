@@ -16,7 +16,7 @@ namespace Forms9Patch.iOS
 {
     public class ClipboardService : Forms9Patch.IClipboardService
     {
-        const bool TestPre11 = true;
+        const bool TestPre11 = false;
 
         static internal NSString TypeListUti = new NSString(UTType.CreatePreferredIdentifier(UTType.TagClassMIMEType, "application/f9p-clipboard-typelist", null));
 
@@ -75,6 +75,12 @@ namespace Forms9Patch.iOS
                                 {
                                     var nsUri = new NSUrl(fileInfo.FullName);
                                     itemProvider = new NSItemProvider(nsUri);
+                                }
+                                else if (mimeItem.Value is string text)
+                                {
+                                    var nsString = (NSString)text;
+                                    var utf8 = NSData.FromString(text, NSStringEncoding.UTF8);
+                                    itemProvider = new NSItemProvider(utf8, nsUti);
                                 }
                                 else if (mimeItem.Value.ToNSObject() is NSObject nsObject)
                                     itemProvider = new NSItemProvider(nsObject, nsUti);
@@ -166,54 +172,4 @@ namespace Forms9Patch.iOS
         #endregion
 
     }
-
-
-    class ItemProvider : NSItemProvider
-    {
-        Dictionary<string, IMimeItem> _items = new Dictionary<string, IMimeItem>();
-
-        public bool Contains(string mimeType) => _items.ContainsKey(mimeType);
-
-        public void Add(IMimeItem mimeItem) => _items[mimeItem.MimeType] = mimeItem;
-
-        public override bool CanLoadObject(Class aClass)
-        {
-            return base.CanLoadObject(aClass);
-        }
-
-        public override bool HasItemConformingTo(string typeIdentifier)
-        {
-            //return base.HasItemConformingTo(typeIdentifier);
-            foreach (var key in _items.Keys)
-                if (key.ToNsUti() == typeIdentifier)
-                    return true;
-            return false;
-        }
-
-        public override Task<NSObject> LoadItemAsync(string typeIdentifier, NSDictionary options)
-        {
-            return base.LoadItemAsync(typeIdentifier, options);
-        }
-
-        public override void LoadItem(string typeIdentifier, NSDictionary options,/* [BlockProxy(typeof(NIDActionArity2V41))] */Action<NSObject, NSError> completionHandler)
-        {
-            base.LoadItem(typeIdentifier, options, completionHandler);
-        }
-
-        public override Task<NSObject> LoadPreviewImageAsync(NSDictionary options)
-        {
-            return base.LoadPreviewImageAsync(options);
-        }
-
-        public override void LoadPreviewImage(NSDictionary options,/* [BlockProxy(typeof(NIDActionArity2V41))]*/ Action<NSObject, NSError> completionHandler)
-        {
-            base.LoadPreviewImage(options, completionHandler);
-        }
-
-        public override void SetPreviewImageHandler(/*[BlockProxy(typeof(NIDNSItemProviderLoadHandler))]*/ NSItemProviderLoadHandler handler)
-        {
-            base.SetPreviewImageHandler(handler);
-        }
-    }
-
 }
