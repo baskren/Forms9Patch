@@ -7,6 +7,7 @@ using System.Reflection;
 using Xamarin.Forms.Internals;
 using P42.Utils;
 using System.Diagnostics;
+using System.IO;
 
 namespace Forms9Patch
 {
@@ -136,6 +137,8 @@ namespace Forms9Patch
             if (type == typeof(decimal))
                 return true;
             if (type == typeof(string))
+                return true;
+            if (type == typeof(FileInfo))
                 return true;
 
             var typeInfo = type.GetTypeInfo();

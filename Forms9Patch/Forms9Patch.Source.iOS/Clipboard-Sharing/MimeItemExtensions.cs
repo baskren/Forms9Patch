@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Foundation;
 using MobileCoreServices;
 using UIKit;
+using System.IO;
 
 namespace Forms9Patch.iOS
 {
@@ -12,13 +13,23 @@ namespace Forms9Patch.iOS
         {
             if (mimeItem.MimeType?.ToNsUti() is NSString nsUti) // && mimeItem.Value.ToNSObject() is NSObject nSObject)
             {
-                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) && mimeItem.Value is byte[] byteArray)
+                NSData nsData = null;
+                if (mimeItem.Value is byte[] byteArray)
+                    nsData = NSData.FromArray(byteArray);
+                else if (mimeItem.Value is FileInfo fileInfo)
+                    nsData = NSData.FromFile(fileInfo.FullName);
+                else if (mimeItem.Value is Uri uri)
                 {
-                    var nsData = NSData.FromArray(byteArray);
+                    var nsUrl = new NSUrl(uri.AbsoluteUri);
+                    nsData = NSData.FromUrl(nsUrl);
+                }
+                if (mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) && nsData != null && nsData.Length > 0)
+                {
                     var uiImage = UIImage.LoadFromData(nsData);
                     return new KeyValuePair<NSString, NSObject>(nsUti, uiImage);
                 }
-                if (mimeItem.Value.ToNSObject() is NSObject nsObject)
+                NSObject nsObject = nsData ?? mimeItem.Value.ToNSObject();
+                if (nsObject != null)
                     return new KeyValuePair<NSString, NSObject>(nsUti, nsObject);
             }
             return new KeyValuePair<NSString, NSObject>();

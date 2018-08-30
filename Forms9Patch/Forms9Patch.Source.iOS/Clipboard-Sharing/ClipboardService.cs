@@ -16,7 +16,7 @@ namespace Forms9Patch.iOS
 {
     public class ClipboardService : Forms9Patch.IClipboardService
     {
-        const bool TestPre11 = false;
+        //const bool TestPre11 = false;
 
         static internal NSString TypeListUti = new NSString(UTType.CreatePreferredIdentifier(UTType.TagClassMIMEType, "application/f9p-clipboard-typelist", null));
 
@@ -58,7 +58,7 @@ namespace Forms9Patch.iOS
                 if (value is Forms9Patch.ClipboardEntry entry)
                 {
 
-                    if (!TestPre11 && Forms9Patch.OsInfoService.Version >= new Version(11, 0))
+                    if (Forms9Patch.OsInfoService.Version >= new Version(11, 0))
                     {
                         var itemProviders = new List<NSItemProvider>();
                         foreach (var mimeItem in entry.Items)
@@ -66,18 +66,56 @@ namespace Forms9Patch.iOS
                             if (mimeItem.MimeType?.ToNsUti() is NSString nsUti)
                             {
                                 NSItemProvider itemProvider = null;
+                                /*
                                 if (mimeItem.Value is Uri uri)
                                 {
-                                    var nsUri = new NSUrl(uri.AbsoluteUri);
+                                    // from: https://stackoverflow.com/questions/36685160/unicode-url-could-not-initialize-an-instance-of-the-type-foundation-nsurl-t?rq=1
+                                    var idn = new System.Globalization.IdnMapping();
+                                    Console.WriteLine(uri.AbsoluteUri);
+                                    NSUrl nsURL = new NSUrl (uri.Scheme, idn.GetAscii (uri.DnsSafeHost), uri.PathAndQuery);
+                                    Console.WriteLine(nsURL.AbsoluteString);
                                     itemProvider = new NSItemProvider(nsUri);
                                 }
-                                else if (mimeItem.Value is FileInfo fileInfo)
+                                else if (mimeItem.Value is FileInfo fileInfo && !mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    var nsUri = new NSUrl(fileInfo.FullName);
-                                    itemProvider = new NSItemProvider(nsUri);
+                                    // Apple apps don't seem to support this approach 
+                                    // tried with .jpg and .pdf with Notes and Email app without success
+                                    Console.WriteLine(fileInfo.FullName);
+                                    NSUrl nsURL = NSUrl.CreateFileUrl(new string[] { fileInfo.FullName });
+                                    Console.WriteLine(nsURL.AbsoluteString);
+                                    itemProvider = new NSItemProvider(nsURL);
+                                }
+                                else 
+*/
+                                if (mimeItem.Value is FileInfo fileInfo) // && mimeItem.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase))
+                                {
+
+                                    // this works with Email and Notes apps for PDFs and images!!
+
+                                    Console.WriteLine(fileInfo.FullName);
+                                    itemProvider = new NSItemProvider();
+
+                                    itemProvider.RegisterFileRepresentation(nsUti, NSItemProviderFileOptions.OpenInPlace, NSItemProviderRepresentationVisibility.All, (completionHandler) =>
+                                    {
+                                        Console.WriteLine(fileInfo.FullName);
+                                        NSUrl nsURL = NSUrl.CreateFileUrl(new string[] { fileInfo.FullName });
+                                        Console.WriteLine(nsURL.AbsoluteString);
+                                        NSError nsError = null;
+                                        completionHandler.Invoke(nsURL, false, nsError);
+                                        var progress = new NSProgress
+                                        {
+                                            FileTotalCount = 1,
+                                            FileCompletedCount = 1,
+                                            TotalUnitCount = 1,
+                                            CompletedUnitCount = 1
+                                        };
+                                        return progress;
+                                    });
+
                                 }
                                 else if (mimeItem.Value is string text)
                                 {
+                                    // from: https://josephduffy.co.uk/ios-share-sheets-the-proper-way-locations
                                     var nsString = (NSString)text;
                                     var utf8 = NSData.FromString(text, NSStringEncoding.UTF8);
                                     itemProvider = new NSItemProvider(utf8, nsUti);
@@ -166,10 +204,12 @@ namespace Forms9Patch.iOS
             }
         }
 
+
         public bool EntryCaching { get; set; } = false;
 
 
         #endregion
 
     }
+
 }
