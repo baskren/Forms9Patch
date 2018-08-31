@@ -59,6 +59,9 @@ namespace Forms9Patch.UWP
                 bool htmlSet = false;
                 bool rtfSet = false;
 
+                var htmlItems = value.GetMimeItems<string>("text/html");
+
+
                 foreach (var item in value.Items)
                 {
                     var mimeType = item.MimeType.ToLower();
@@ -67,7 +70,8 @@ namespace Forms9Patch.UWP
                         dataPackage.SetText(text);
                         textSet = true;
                     }
-                    else if (mimeType == "text/html" && !htmlSet && item.AsString() is string html)
+                    // else if (mimeType == "text/html" && !htmlSet && item.AsString() is string html)
+                    else if (mimeType == "text/html" && htmlItems.Count<2 && item.AsString() is string html)
                     {
                         var start = html.Substring(0, Math.Min(html.Length, 300));
                         if (!start.ToLower().Contains("<html>"))
@@ -107,7 +111,7 @@ namespace Forms9Patch.UWP
                         properties.Add(GetFormatId(item.MimeType), item.Value);
                 }
 
-                if (storageItems.Count > 1)
+                if (storageItems.Count > 0)
                     dataPackage.SetStorageItems(storageItems);
 
 

@@ -116,6 +116,23 @@ references:
   fullName: Forms9Patch.AbsoluteLayout.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: AbsoluteLayout.IShape.ExtendedElementShape
   nameWithType.vb: AbsoluteLayout.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.AbsoluteLayout.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.AbsoluteLayout.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.AbsoluteLayout.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: AbsoluteLayout.IShape.ShadowPadding()
+  nameWithType.vb: AbsoluteLayout.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.AbsoluteLayout.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.AbsoluteLayout.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.AbsoluteLayout.Forms9Patch.IShape.ShadowPadding
+  nameWithType: AbsoluteLayout.IShape.ShadowPadding
+  nameWithType.vb: AbsoluteLayout.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.AbsoluteLayout.HasShadow
   name: HasShadow
   href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_HasShadow
@@ -295,11 +312,11 @@ references:
   commentId: F:Forms9Patch.AbsoluteLayout.ShadowInvertedProperty
   fullName: Forms9Patch.AbsoluteLayout.ShadowInvertedProperty
   nameWithType: AbsoluteLayout.ShadowInvertedProperty
-- uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: AbsoluteLayout.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -308,11 +325,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildAdded
   nameWithType: AbsoluteLayout.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.AbsoluteLayout.html#Forms9Patch_AbsoluteLayout_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: AbsoluteLayout.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.AbsoluteLayout.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -415,11 +432,11 @@ references:
   commentId: M:Forms9Patch.ActivityIndicatorPopup.#ctor
   fullName: Forms9Patch.ActivityIndicatorPopup.ActivityIndicatorPopup()
   nameWithType: ActivityIndicatorPopup.ActivityIndicatorPopup()
-- uid: Forms9Patch.ActivityIndicatorPopup.#ctor(VisualElement)
+- uid: Forms9Patch.ActivityIndicatorPopup.#ctor(Xamarin.Forms.VisualElement)
   name: ActivityIndicatorPopup(VisualElement)
-  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup__ctor_VisualElement_
-  commentId: M:Forms9Patch.ActivityIndicatorPopup.#ctor(VisualElement)
-  fullName: Forms9Patch.ActivityIndicatorPopup.ActivityIndicatorPopup(VisualElement)
+  href: api/Forms9Patch.ActivityIndicatorPopup.html#Forms9Patch_ActivityIndicatorPopup__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.ActivityIndicatorPopup.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.ActivityIndicatorPopup.ActivityIndicatorPopup(Xamarin.Forms.VisualElement)
   nameWithType: ActivityIndicatorPopup.ActivityIndicatorPopup(VisualElement)
 - uid: Forms9Patch.ActivityIndicatorPopup.#ctor*
   name: ActivityIndicatorPopup
@@ -563,11 +580,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ApplicationInfoService.Identifier
   nameWithType: ApplicationInfoService.Identifier
-- uid: Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Page)
+- uid: Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Xamarin.Forms.Page)
   name: IsPageInNavigationStacks(Page)
-  href: api/Forms9Patch.ApplicationInfoService.html#Forms9Patch_ApplicationInfoService_IsPageInNavigationStacks_Page_
-  commentId: M:Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Page)
-  fullName: Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Page)
+  href: api/Forms9Patch.ApplicationInfoService.html#Forms9Patch_ApplicationInfoService_IsPageInNavigationStacks_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Xamarin.Forms.Page)
+  fullName: Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks(Xamarin.Forms.Page)
   nameWithType: ApplicationInfoService.IsPageInNavigationStacks(Page)
 - uid: Forms9Patch.ApplicationInfoService.IsPageInNavigationStacks*
   name: IsPageInNavigationStacks
@@ -647,11 +664,11 @@ references:
   commentId: T:Forms9Patch.AspectExtension
   fullName: Forms9Patch.AspectExtension
   nameWithType: AspectExtension
-- uid: Forms9Patch.AspectExtension.ToF9pFill(Aspect)
+- uid: Forms9Patch.AspectExtension.ToF9pFill(Xamarin.Forms.Aspect)
   name: ToF9pFill(Aspect)
-  href: api/Forms9Patch.AspectExtension.html#Forms9Patch_AspectExtension_ToF9pFill_Aspect_
-  commentId: M:Forms9Patch.AspectExtension.ToF9pFill(Aspect)
-  fullName: Forms9Patch.AspectExtension.ToF9pFill(Aspect)
+  href: api/Forms9Patch.AspectExtension.html#Forms9Patch_AspectExtension_ToF9pFill_Xamarin_Forms_Aspect_
+  commentId: M:Forms9Patch.AspectExtension.ToF9pFill(Xamarin.Forms.Aspect)
+  fullName: Forms9Patch.AspectExtension.ToF9pFill(Xamarin.Forms.Aspect)
   nameWithType: AspectExtension.ToF9pFill(Aspect)
 - uid: Forms9Patch.AspectExtension.ToF9pFill*
   name: ToF9pFill
@@ -792,18 +809,18 @@ references:
   commentId: T:Forms9Patch.BubblePopup
   fullName: Forms9Patch.BubblePopup
   nameWithType: BubblePopup
-- uid: Forms9Patch.BubblePopup.#ctor(VisualElement,Point,System.Boolean)
-  name: BubblePopup(VisualElement, Point, Boolean)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_VisualElement_Point_System_Boolean_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(VisualElement,Point,System.Boolean)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(VisualElement, Point, System.Boolean)
-  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, Boolean)
-- uid: Forms9Patch.BubblePopup.#ctor(VisualElement,System.Boolean)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean)
   name: BubblePopup(VisualElement, Boolean)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_VisualElement_System_Boolean_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(VisualElement,System.Boolean)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(VisualElement, System.Boolean)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_Boolean_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.Boolean)
   nameWithType: BubblePopup.BubblePopup(VisualElement, Boolean)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean)
+  name: BubblePopup(VisualElement, Point, Boolean)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Boolean_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Boolean)
+  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, Boolean)
 - uid: Forms9Patch.BubblePopup.#ctor*
   name: BubblePopup
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_
@@ -1027,18 +1044,18 @@ references:
   commentId: M:Forms9Patch.Button.#ctor(System.String,Forms9Patch.Image)
   fullName: Forms9Patch.Button.Button(System.String, Forms9Patch.Image)
   nameWithType: Button.Button(String, Image)
-- uid: Forms9Patch.Button.#ctor(System.String,System.String,Assembly)
+- uid: Forms9Patch.Button.#ctor(System.String,System.String,System.Reflection.Assembly)
   name: Button(String, String, Assembly)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button__ctor_System_String_System_String_Assembly_
-  commentId: M:Forms9Patch.Button.#ctor(System.String,System.String,Assembly)
-  fullName: Forms9Patch.Button.Button(System.String, System.String, Assembly)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button__ctor_System_String_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.Button.#ctor(System.String,System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.Button.Button(System.String, System.String, System.Reflection.Assembly)
   nameWithType: Button.Button(String, String, Assembly)
 - uid: Forms9Patch.Button.#ctor(System.String,Xamarin.Forms.ImageSource)
-  name: Button(String, Xamarin.Forms.ImageSource)
+  name: Button(String, ImageSource)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button__ctor_System_String_Xamarin_Forms_ImageSource_
   commentId: M:Forms9Patch.Button.#ctor(System.String,Xamarin.Forms.ImageSource)
   fullName: Forms9Patch.Button.Button(System.String, Xamarin.Forms.ImageSource)
-  nameWithType: Button.Button(String, Xamarin.Forms.ImageSource)
+  nameWithType: Button.Button(String, ImageSource)
 - uid: Forms9Patch.Button.#ctor*
   name: Button
   href: api/Forms9Patch.Button.html#Forms9Patch_Button__ctor_
@@ -1538,11 +1555,11 @@ references:
   commentId: F:Forms9Patch.Button.ImageSourceProperty
   fullName: Forms9Patch.Button.ImageSourceProperty
   nameWithType: Button.ImageSourceProperty
-- uid: Forms9Patch.Button.InvokeLongPressed(System.Object,P42.Utils.EventArgs)
+- uid: Forms9Patch.Button.InvokeLongPressed(System.Object,System.EventArgs)
   name: InvokeLongPressed(Object, EventArgs)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeLongPressed_System_Object_P42_Utils_EventArgs_
-  commentId: M:Forms9Patch.Button.InvokeLongPressed(System.Object,P42.Utils.EventArgs)
-  fullName: Forms9Patch.Button.InvokeLongPressed(System.Object, P42.Utils.EventArgs)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeLongPressed_System_Object_System_EventArgs_
+  commentId: M:Forms9Patch.Button.InvokeLongPressed(System.Object,System.EventArgs)
+  fullName: Forms9Patch.Button.InvokeLongPressed(System.Object, System.EventArgs)
   nameWithType: Button.InvokeLongPressed(Object, EventArgs)
 - uid: Forms9Patch.Button.InvokeLongPressed*
   name: InvokeLongPressed
@@ -1551,11 +1568,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.InvokeLongPressed
   nameWithType: Button.InvokeLongPressed
-- uid: Forms9Patch.Button.InvokeLongPressing(System.Object,P42.Utils.EventArgs)
+- uid: Forms9Patch.Button.InvokeLongPressing(System.Object,System.EventArgs)
   name: InvokeLongPressing(Object, EventArgs)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeLongPressing_System_Object_P42_Utils_EventArgs_
-  commentId: M:Forms9Patch.Button.InvokeLongPressing(System.Object,P42.Utils.EventArgs)
-  fullName: Forms9Patch.Button.InvokeLongPressing(System.Object, P42.Utils.EventArgs)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeLongPressing_System_Object_System_EventArgs_
+  commentId: M:Forms9Patch.Button.InvokeLongPressing(System.Object,System.EventArgs)
+  fullName: Forms9Patch.Button.InvokeLongPressing(System.Object, System.EventArgs)
   nameWithType: Button.InvokeLongPressing(Object, EventArgs)
 - uid: Forms9Patch.Button.InvokeLongPressing*
   name: InvokeLongPressing
@@ -1564,11 +1581,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.InvokeLongPressing
   nameWithType: Button.InvokeLongPressing
-- uid: Forms9Patch.Button.InvokeSelected(System.Object,P42.Utils.EventArgs)
+- uid: Forms9Patch.Button.InvokeSelected(System.Object,System.EventArgs)
   name: InvokeSelected(Object, EventArgs)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeSelected_System_Object_P42_Utils_EventArgs_
-  commentId: M:Forms9Patch.Button.InvokeSelected(System.Object,P42.Utils.EventArgs)
-  fullName: Forms9Patch.Button.InvokeSelected(System.Object, P42.Utils.EventArgs)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeSelected_System_Object_System_EventArgs_
+  commentId: M:Forms9Patch.Button.InvokeSelected(System.Object,System.EventArgs)
+  fullName: Forms9Patch.Button.InvokeSelected(System.Object, System.EventArgs)
   nameWithType: Button.InvokeSelected(Object, EventArgs)
 - uid: Forms9Patch.Button.InvokeSelected*
   name: InvokeSelected
@@ -1577,11 +1594,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.InvokeSelected
   nameWithType: Button.InvokeSelected
-- uid: Forms9Patch.Button.InvokeTapped(System.Object,P42.Utils.EventArgs)
+- uid: Forms9Patch.Button.InvokeTapped(System.Object,System.EventArgs)
   name: InvokeTapped(Object, EventArgs)
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeTapped_System_Object_P42_Utils_EventArgs_
-  commentId: M:Forms9Patch.Button.InvokeTapped(System.Object,P42.Utils.EventArgs)
-  fullName: Forms9Patch.Button.InvokeTapped(System.Object, P42.Utils.EventArgs)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_InvokeTapped_System_Object_System_EventArgs_
+  commentId: M:Forms9Patch.Button.InvokeTapped(System.Object,System.EventArgs)
+  fullName: Forms9Patch.Button.InvokeTapped(System.Object, System.EventArgs)
   nameWithType: Button.InvokeTapped(Object, EventArgs)
 - uid: Forms9Patch.Button.InvokeTapped*
   name: InvokeTapped
@@ -1868,32 +1885,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.SendClicked
   nameWithType: Button.SendClicked
-- uid: Forms9Patch.Button.SendPressed
-  name: SendPressed()
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_SendPressed
-  commentId: M:Forms9Patch.Button.SendPressed
-  fullName: Forms9Patch.Button.SendPressed()
-  nameWithType: Button.SendPressed()
-- uid: Forms9Patch.Button.SendPressed*
-  name: SendPressed
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_SendPressed_
-  commentId: Overload:Forms9Patch.Button.SendPressed
-  isSpec: "True"
-  fullName: Forms9Patch.Button.SendPressed
-  nameWithType: Button.SendPressed
-- uid: Forms9Patch.Button.SendReleased
-  name: SendReleased()
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_SendReleased
-  commentId: M:Forms9Patch.Button.SendReleased
-  fullName: Forms9Patch.Button.SendReleased()
-  nameWithType: Button.SendReleased()
-- uid: Forms9Patch.Button.SendReleased*
-  name: SendReleased
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_SendReleased_
-  commentId: Overload:Forms9Patch.Button.SendReleased
-  isSpec: "True"
-  fullName: Forms9Patch.Button.SendReleased
-  nameWithType: Button.SendReleased
 - uid: Forms9Patch.Button.SendTapped
   name: SendTapped()
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_SendTapped
@@ -2383,6 +2374,23 @@ references:
   fullName: Forms9Patch.ButtonState.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: ButtonState.IShape.ExtendedElementShape
   nameWithType.vb: ButtonState.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.ButtonState.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.ButtonState.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.ButtonState.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: ButtonState.IShape.ShadowPadding()
+  nameWithType.vb: ButtonState.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.ButtonState.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.ButtonState.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.ButtonState.Forms9Patch.IShape.ShadowPadding
+  nameWithType: ButtonState.IShape.ShadowPadding
+  nameWithType.vb: ButtonState.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.ButtonState.HasShadow
   name: HasShadow
   href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_HasShadow
@@ -2955,11 +2963,11 @@ references:
   commentId: T:Forms9Patch.ColorExtension
   fullName: Forms9Patch.ColorExtension
   nameWithType: ColorExtension
-- uid: Forms9Patch.ColorExtension.ByteA(Color)
+- uid: Forms9Patch.ColorExtension.ByteA(Xamarin.Forms.Color)
   name: ByteA(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteA_Color_
-  commentId: M:Forms9Patch.ColorExtension.ByteA(Color)
-  fullName: Forms9Patch.ColorExtension.ByteA(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteA_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ByteA(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ByteA(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ByteA(Color)
 - uid: Forms9Patch.ColorExtension.ByteA*
   name: ByteA
@@ -2968,11 +2976,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ByteA
   nameWithType: ColorExtension.ByteA
-- uid: Forms9Patch.ColorExtension.ByteB(Color)
+- uid: Forms9Patch.ColorExtension.ByteB(Xamarin.Forms.Color)
   name: ByteB(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteB_Color_
-  commentId: M:Forms9Patch.ColorExtension.ByteB(Color)
-  fullName: Forms9Patch.ColorExtension.ByteB(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteB_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ByteB(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ByteB(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ByteB(Color)
 - uid: Forms9Patch.ColorExtension.ByteB*
   name: ByteB
@@ -2981,11 +2989,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ByteB
   nameWithType: ColorExtension.ByteB
-- uid: Forms9Patch.ColorExtension.ByteG(Color)
+- uid: Forms9Patch.ColorExtension.ByteG(Xamarin.Forms.Color)
   name: ByteG(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteG_Color_
-  commentId: M:Forms9Patch.ColorExtension.ByteG(Color)
-  fullName: Forms9Patch.ColorExtension.ByteG(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteG_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ByteG(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ByteG(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ByteG(Color)
 - uid: Forms9Patch.ColorExtension.ByteG*
   name: ByteG
@@ -2994,11 +3002,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ByteG
   nameWithType: ColorExtension.ByteG
-- uid: Forms9Patch.ColorExtension.ByteR(Color)
+- uid: Forms9Patch.ColorExtension.ByteR(Xamarin.Forms.Color)
   name: ByteR(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteR_Color_
-  commentId: M:Forms9Patch.ColorExtension.ByteR(Color)
-  fullName: Forms9Patch.ColorExtension.ByteR(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ByteR_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ByteR(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ByteR(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ByteR(Color)
 - uid: Forms9Patch.ColorExtension.ByteR*
   name: ByteR
@@ -3007,11 +3015,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ByteR
   nameWithType: ColorExtension.ByteR
-- uid: Forms9Patch.ColorExtension.IsDefault(Color)
+- uid: Forms9Patch.ColorExtension.IsDefault(Xamarin.Forms.Color)
   name: IsDefault(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_IsDefault_Color_
-  commentId: M:Forms9Patch.ColorExtension.IsDefault(Color)
-  fullName: Forms9Patch.ColorExtension.IsDefault(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_IsDefault_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.IsDefault(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.IsDefault(Xamarin.Forms.Color)
   nameWithType: ColorExtension.IsDefault(Color)
 - uid: Forms9Patch.ColorExtension.IsDefault*
   name: IsDefault
@@ -3020,11 +3028,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.IsDefault
   nameWithType: ColorExtension.IsDefault
-- uid: Forms9Patch.ColorExtension.IsDefaultOrTransparent(Color)
+- uid: Forms9Patch.ColorExtension.IsDefaultOrTransparent(Xamarin.Forms.Color)
   name: IsDefaultOrTransparent(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_IsDefaultOrTransparent_Color_
-  commentId: M:Forms9Patch.ColorExtension.IsDefaultOrTransparent(Color)
-  fullName: Forms9Patch.ColorExtension.IsDefaultOrTransparent(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_IsDefaultOrTransparent_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.IsDefaultOrTransparent(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.IsDefaultOrTransparent(Xamarin.Forms.Color)
   nameWithType: ColorExtension.IsDefaultOrTransparent(Color)
 - uid: Forms9Patch.ColorExtension.IsDefaultOrTransparent*
   name: IsDefaultOrTransparent
@@ -3033,11 +3041,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.IsDefaultOrTransparent
   nameWithType: ColorExtension.IsDefaultOrTransparent
-- uid: Forms9Patch.ColorExtension.RgbBlend(Color,Color,System.Double)
+- uid: Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
   name: RgbBlend(Color, Color, Double)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbBlend_Color_Color_System_Double_
-  commentId: M:Forms9Patch.ColorExtension.RgbBlend(Color,Color,System.Double)
-  fullName: Forms9Patch.ColorExtension.RgbBlend(Color, Color, System.Double)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_RgbBlend_Xamarin_Forms_Color_Xamarin_Forms_Color_System_Double_
+  commentId: M:Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color,Xamarin.Forms.Color,System.Double)
+  fullName: Forms9Patch.ColorExtension.RgbBlend(Xamarin.Forms.Color, Xamarin.Forms.Color, System.Double)
   nameWithType: ColorExtension.RgbBlend(Color, Color, Double)
 - uid: Forms9Patch.ColorExtension.RgbBlend*
   name: RgbBlend
@@ -3059,11 +3067,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToColor
   nameWithType: ColorExtension.ToColor
-- uid: Forms9Patch.ColorExtension.ToHexArgbColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToHexArgbColorString(Xamarin.Forms.Color)
   name: ToHexArgbColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexArgbColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToHexArgbColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToHexArgbColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexArgbColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToHexArgbColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToHexArgbColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToHexArgbColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToHexArgbColorString*
   name: ToHexArgbColorString
@@ -3072,11 +3080,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToHexArgbColorString
   nameWithType: ColorExtension.ToHexArgbColorString
-- uid: Forms9Patch.ColorExtension.ToHexRgbColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToHexRgbColorString(Xamarin.Forms.Color)
   name: ToHexRgbColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexRgbColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToHexRgbColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToHexRgbColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexRgbColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToHexRgbColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToHexRgbColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToHexRgbColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToHexRgbColorString*
   name: ToHexRgbColorString
@@ -3085,11 +3093,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToHexRgbColorString
   nameWithType: ColorExtension.ToHexRgbColorString
-- uid: Forms9Patch.ColorExtension.ToHexRrggbbColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToHexRrggbbColorString(Xamarin.Forms.Color)
   name: ToHexRrggbbColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexRrggbbColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToHexRrggbbColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToHexRrggbbColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHexRrggbbColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToHexRrggbbColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToHexRrggbbColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToHexRrggbbColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToHexRrggbbColorString*
   name: ToHexRrggbbColorString
@@ -3098,11 +3106,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToHexRrggbbColorString
   nameWithType: ColorExtension.ToHexRrggbbColorString
-- uid: Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Xamarin.Forms.Color)
   name: ToHextAarrggbbColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHextAarrggbbColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToHextAarrggbbColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToHextAarrggbbColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToHextAarrggbbColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToHextAarrggbbColorString*
   name: ToHextAarrggbbColorString
@@ -3111,11 +3119,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToHextAarrggbbColorString
   nameWithType: ColorExtension.ToHextAarrggbbColorString
-- uid: Forms9Patch.ColorExtension.ToIntRgbColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToIntRgbColorString(Xamarin.Forms.Color)
   name: ToIntRgbColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToIntRgbColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToIntRgbColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToIntRgbColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToIntRgbColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToIntRgbColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToIntRgbColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToIntRgbColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToIntRgbColorString*
   name: ToIntRgbColorString
@@ -3124,11 +3132,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToIntRgbColorString
   nameWithType: ColorExtension.ToIntRgbColorString
-- uid: Forms9Patch.ColorExtension.ToRgbaColorString(Color)
+- uid: Forms9Patch.ColorExtension.ToRgbaColorString(Xamarin.Forms.Color)
   name: ToRgbaColorString(Color)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToRgbaColorString_Color_
-  commentId: M:Forms9Patch.ColorExtension.ToRgbaColorString(Color)
-  fullName: Forms9Patch.ColorExtension.ToRgbaColorString(Color)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_ToRgbaColorString_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.ColorExtension.ToRgbaColorString(Xamarin.Forms.Color)
+  fullName: Forms9Patch.ColorExtension.ToRgbaColorString(Xamarin.Forms.Color)
   nameWithType: ColorExtension.ToRgbaColorString(Color)
 - uid: Forms9Patch.ColorExtension.ToRgbaColorString*
   name: ToRgbaColorString
@@ -3137,11 +3145,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ColorExtension.ToRgbaColorString
   nameWithType: ColorExtension.ToRgbaColorString
-- uid: Forms9Patch.ColorExtension.WithAlpha(Color,System.Double)
+- uid: Forms9Patch.ColorExtension.WithAlpha(Xamarin.Forms.Color,System.Double)
   name: WithAlpha(Color, Double)
-  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_WithAlpha_Color_System_Double_
-  commentId: M:Forms9Patch.ColorExtension.WithAlpha(Color,System.Double)
-  fullName: Forms9Patch.ColorExtension.WithAlpha(Color, System.Double)
+  href: api/Forms9Patch.ColorExtension.html#Forms9Patch_ColorExtension_WithAlpha_Xamarin_Forms_Color_System_Double_
+  commentId: M:Forms9Patch.ColorExtension.WithAlpha(Xamarin.Forms.Color,System.Double)
+  fullName: Forms9Patch.ColorExtension.WithAlpha(Xamarin.Forms.Color, System.Double)
   nameWithType: ColorExtension.WithAlpha(Color, Double)
 - uid: Forms9Patch.ColorExtension.WithAlpha*
   name: WithAlpha
@@ -3251,11 +3259,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.DataTemplateSelector.DataTemplateSelector
   nameWithType: DataTemplateSelector.DataTemplateSelector
-- uid: Forms9Patch.DataTemplateSelector.Add(Type,Type)
+- uid: Forms9Patch.DataTemplateSelector.Add(System.Type,System.Type)
   name: Add(Type, Type)
-  href: api/Forms9Patch.DataTemplateSelector.html#Forms9Patch_DataTemplateSelector_Add_Type_Type_
-  commentId: M:Forms9Patch.DataTemplateSelector.Add(Type,Type)
-  fullName: Forms9Patch.DataTemplateSelector.Add(Type, Type)
+  href: api/Forms9Patch.DataTemplateSelector.html#Forms9Patch_DataTemplateSelector_Add_System_Type_System_Type_
+  commentId: M:Forms9Patch.DataTemplateSelector.Add(System.Type,System.Type)
+  fullName: Forms9Patch.DataTemplateSelector.Add(System.Type, System.Type)
   nameWithType: DataTemplateSelector.Add(Type, Type)
 - uid: Forms9Patch.DataTemplateSelector.Add*
   name: Add
@@ -3386,11 +3394,11 @@ references:
   commentId: T:Forms9Patch.ElementExtensions
   fullName: Forms9Patch.ElementExtensions
   nameWithType: ElementExtensions
-- uid: Forms9Patch.ElementExtensions.HostingPage(Element)
+- uid: Forms9Patch.ElementExtensions.HostingPage(Xamarin.Forms.Element)
   name: HostingPage(Element)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HostingPage_Element_
-  commentId: M:Forms9Patch.ElementExtensions.HostingPage(Element)
-  fullName: Forms9Patch.ElementExtensions.HostingPage(Element)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_HostingPage_Xamarin_Forms_Element_
+  commentId: M:Forms9Patch.ElementExtensions.HostingPage(Xamarin.Forms.Element)
+  fullName: Forms9Patch.ElementExtensions.HostingPage(Xamarin.Forms.Element)
   nameWithType: ElementExtensions.HostingPage(Element)
 - uid: Forms9Patch.ElementExtensions.HostingPage*
   name: HostingPage
@@ -3399,11 +3407,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ElementExtensions.HostingPage
   nameWithType: ElementExtensions.HostingPage
-- uid: Forms9Patch.ElementExtensions.IsInNativeLayout(VisualElement)
+- uid: Forms9Patch.ElementExtensions.IsInNativeLayout(Xamarin.Forms.VisualElement)
   name: IsInNativeLayout(VisualElement)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_IsInNativeLayout_VisualElement_
-  commentId: M:Forms9Patch.ElementExtensions.IsInNativeLayout(VisualElement)
-  fullName: Forms9Patch.ElementExtensions.IsInNativeLayout(VisualElement)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_IsInNativeLayout_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.ElementExtensions.IsInNativeLayout(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.ElementExtensions.IsInNativeLayout(Xamarin.Forms.VisualElement)
   nameWithType: ElementExtensions.IsInNativeLayout(VisualElement)
 - uid: Forms9Patch.ElementExtensions.IsInNativeLayout*
   name: IsInNativeLayout
@@ -3419,13 +3427,13 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ElementExtensions.Parent
   nameWithType: ElementExtensions.Parent
-- uid: Forms9Patch.ElementExtensions.Parent``1(Element)
+- uid: Forms9Patch.ElementExtensions.Parent``1(Xamarin.Forms.Element)
   name: Parent<T>(Element)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Parent__1_Element_
-  commentId: M:Forms9Patch.ElementExtensions.Parent``1(Element)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_Parent__1_Xamarin_Forms_Element_
+  commentId: M:Forms9Patch.ElementExtensions.Parent``1(Xamarin.Forms.Element)
   name.vb: Parent(Of T)(Element)
-  fullName: Forms9Patch.ElementExtensions.Parent<T>(Element)
-  fullName.vb: Forms9Patch.ElementExtensions.Parent(Of T)(Element)
+  fullName: Forms9Patch.ElementExtensions.Parent<T>(Xamarin.Forms.Element)
+  fullName.vb: Forms9Patch.ElementExtensions.Parent(Of T)(Xamarin.Forms.Element)
   nameWithType: ElementExtensions.Parent<T>(Element)
   nameWithType.vb: ElementExtensions.Parent(Of T)(Element)
 - uid: Forms9Patch.ElementExtensions.ParentInheritedFrom*
@@ -3435,20 +3443,20 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ElementExtensions.ParentInheritedFrom
   nameWithType: ElementExtensions.ParentInheritedFrom
-- uid: Forms9Patch.ElementExtensions.ParentInheritedFrom``1(Element)
+- uid: Forms9Patch.ElementExtensions.ParentInheritedFrom``1(Xamarin.Forms.Element)
   name: ParentInheritedFrom<T>(Element)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_ParentInheritedFrom__1_Element_
-  commentId: M:Forms9Patch.ElementExtensions.ParentInheritedFrom``1(Element)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_ParentInheritedFrom__1_Xamarin_Forms_Element_
+  commentId: M:Forms9Patch.ElementExtensions.ParentInheritedFrom``1(Xamarin.Forms.Element)
   name.vb: ParentInheritedFrom(Of T)(Element)
-  fullName: Forms9Patch.ElementExtensions.ParentInheritedFrom<T>(Element)
-  fullName.vb: Forms9Patch.ElementExtensions.ParentInheritedFrom(Of T)(Element)
+  fullName: Forms9Patch.ElementExtensions.ParentInheritedFrom<T>(Xamarin.Forms.Element)
+  fullName.vb: Forms9Patch.ElementExtensions.ParentInheritedFrom(Of T)(Xamarin.Forms.Element)
   nameWithType: ElementExtensions.ParentInheritedFrom<T>(Element)
   nameWithType.vb: ElementExtensions.ParentInheritedFrom(Of T)(Element)
-- uid: Forms9Patch.ElementExtensions.SetIsInNativeLayout(VisualElement,System.Boolean)
+- uid: Forms9Patch.ElementExtensions.SetIsInNativeLayout(Xamarin.Forms.VisualElement,System.Boolean)
   name: SetIsInNativeLayout(VisualElement, Boolean)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_VisualElement_System_Boolean_
-  commentId: M:Forms9Patch.ElementExtensions.SetIsInNativeLayout(VisualElement,System.Boolean)
-  fullName: Forms9Patch.ElementExtensions.SetIsInNativeLayout(VisualElement, System.Boolean)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_SetIsInNativeLayout_Xamarin_Forms_VisualElement_System_Boolean_
+  commentId: M:Forms9Patch.ElementExtensions.SetIsInNativeLayout(Xamarin.Forms.VisualElement,System.Boolean)
+  fullName: Forms9Patch.ElementExtensions.SetIsInNativeLayout(Xamarin.Forms.VisualElement, System.Boolean)
   nameWithType: ElementExtensions.SetIsInNativeLayout(VisualElement, Boolean)
 - uid: Forms9Patch.ElementExtensions.SetIsInNativeLayout*
   name: SetIsInNativeLayout
@@ -3457,11 +3465,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ElementExtensions.SetIsInNativeLayout
   nameWithType: ElementExtensions.SetIsInNativeLayout
-- uid: Forms9Patch.ElementExtensions.TopPage(Element)
+- uid: Forms9Patch.ElementExtensions.TopPage(Xamarin.Forms.Element)
   name: TopPage(Element)
-  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_TopPage_Element_
-  commentId: M:Forms9Patch.ElementExtensions.TopPage(Element)
-  fullName: Forms9Patch.ElementExtensions.TopPage(Element)
+  href: api/Forms9Patch.ElementExtensions.html#Forms9Patch_ElementExtensions_TopPage_Xamarin_Forms_Element_
+  commentId: M:Forms9Patch.ElementExtensions.TopPage(Xamarin.Forms.Element)
+  fullName: Forms9Patch.ElementExtensions.TopPage(Xamarin.Forms.Element)
   nameWithType: ElementExtensions.TopPage(Element)
 - uid: Forms9Patch.ElementExtensions.TopPage*
   name: TopPage
@@ -3512,11 +3520,11 @@ references:
   commentId: T:Forms9Patch.EmbeddedResourceFontEffect
   fullName: Forms9Patch.EmbeddedResourceFontEffect
   nameWithType: EmbeddedResourceFontEffect
-- uid: Forms9Patch.EmbeddedResourceFontEffect.#ctor(Assembly)
+- uid: Forms9Patch.EmbeddedResourceFontEffect.#ctor(System.Reflection.Assembly)
   name: EmbeddedResourceFontEffect(Assembly)
-  href: api/Forms9Patch.EmbeddedResourceFontEffect.html#Forms9Patch_EmbeddedResourceFontEffect__ctor_Assembly_
-  commentId: M:Forms9Patch.EmbeddedResourceFontEffect.#ctor(Assembly)
-  fullName: Forms9Patch.EmbeddedResourceFontEffect.EmbeddedResourceFontEffect(Assembly)
+  href: api/Forms9Patch.EmbeddedResourceFontEffect.html#Forms9Patch_EmbeddedResourceFontEffect__ctor_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.EmbeddedResourceFontEffect.#ctor(System.Reflection.Assembly)
+  fullName: Forms9Patch.EmbeddedResourceFontEffect.EmbeddedResourceFontEffect(System.Reflection.Assembly)
   nameWithType: EmbeddedResourceFontEffect.EmbeddedResourceFontEffect(Assembly)
 - uid: Forms9Patch.EmbeddedResourceFontEffect.#ctor*
   name: EmbeddedResourceFontEffect
@@ -3525,11 +3533,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.EmbeddedResourceFontEffect.EmbeddedResourceFontEffect
   nameWithType: EmbeddedResourceFontEffect.EmbeddedResourceFontEffect
-- uid: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(VisualElement,Assembly)
+- uid: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(Xamarin.Forms.VisualElement,System.Reflection.Assembly)
   name: ApplyTo(VisualElement, Assembly)
-  href: api/Forms9Patch.EmbeddedResourceFontEffect.html#Forms9Patch_EmbeddedResourceFontEffect_ApplyTo_VisualElement_Assembly_
-  commentId: M:Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(VisualElement,Assembly)
-  fullName: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(VisualElement, Assembly)
+  href: api/Forms9Patch.EmbeddedResourceFontEffect.html#Forms9Patch_EmbeddedResourceFontEffect_ApplyTo_Xamarin_Forms_VisualElement_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(Xamarin.Forms.VisualElement,System.Reflection.Assembly)
+  fullName: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo(Xamarin.Forms.VisualElement, System.Reflection.Assembly)
   nameWithType: EmbeddedResourceFontEffect.ApplyTo(VisualElement, Assembly)
 - uid: Forms9Patch.EmbeddedResourceFontEffect.ApplyTo*
   name: ApplyTo
@@ -3660,11 +3668,11 @@ references:
   commentId: E:Forms9Patch.FocusMonitor.FocusedElementChanged
   fullName: Forms9Patch.FocusMonitor.FocusedElementChanged
   nameWithType: FocusMonitor.FocusedElementChanged
-- uid: Forms9Patch.FocusMonitor.Start(VisualElement)
+- uid: Forms9Patch.FocusMonitor.Start(Xamarin.Forms.VisualElement)
   name: Start(VisualElement)
-  href: api/Forms9Patch.FocusMonitor.html#Forms9Patch_FocusMonitor_Start_VisualElement_
-  commentId: M:Forms9Patch.FocusMonitor.Start(VisualElement)
-  fullName: Forms9Patch.FocusMonitor.Start(VisualElement)
+  href: api/Forms9Patch.FocusMonitor.html#Forms9Patch_FocusMonitor_Start_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.FocusMonitor.Start(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.FocusMonitor.Start(Xamarin.Forms.VisualElement)
   nameWithType: FocusMonitor.Start(VisualElement)
 - uid: Forms9Patch.FocusMonitor.Start*
   name: Start
@@ -3673,11 +3681,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.FocusMonitor.Start
   nameWithType: FocusMonitor.Start
-- uid: Forms9Patch.FocusMonitor.Stop(VisualElement)
+- uid: Forms9Patch.FocusMonitor.Stop(Xamarin.Forms.VisualElement)
   name: Stop(VisualElement)
-  href: api/Forms9Patch.FocusMonitor.html#Forms9Patch_FocusMonitor_Stop_VisualElement_
-  commentId: M:Forms9Patch.FocusMonitor.Stop(VisualElement)
-  fullName: Forms9Patch.FocusMonitor.Stop(VisualElement)
+  href: api/Forms9Patch.FocusMonitor.html#Forms9Patch_FocusMonitor_Stop_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.FocusMonitor.Stop(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.FocusMonitor.Stop(Xamarin.Forms.VisualElement)
   nameWithType: FocusMonitor.Stop(VisualElement)
 - uid: Forms9Patch.FocusMonitor.Stop*
   name: Stop
@@ -3692,11 +3700,11 @@ references:
   commentId: T:Forms9Patch.FontExtensions
   fullName: Forms9Patch.FontExtensions
   nameWithType: FontExtensions
-- uid: Forms9Patch.FontExtensions.InMathAlphanumericBlock(Int32)
+- uid: Forms9Patch.FontExtensions.InMathAlphanumericBlock(System.Int32)
   name: InMathAlphanumericBlock(Int32)
-  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_InMathAlphanumericBlock_Int32_
-  commentId: M:Forms9Patch.FontExtensions.InMathAlphanumericBlock(Int32)
-  fullName: Forms9Patch.FontExtensions.InMathAlphanumericBlock(Int32)
+  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_InMathAlphanumericBlock_System_Int32_
+  commentId: M:Forms9Patch.FontExtensions.InMathAlphanumericBlock(System.Int32)
+  fullName: Forms9Patch.FontExtensions.InMathAlphanumericBlock(System.Int32)
   nameWithType: FontExtensions.InMathAlphanumericBlock(Int32)
 - uid: Forms9Patch.FontExtensions.InMathAlphanumericBlock*
   name: InMathAlphanumericBlock
@@ -3705,24 +3713,24 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.FontExtensions.InMathAlphanumericBlock
   nameWithType: FontExtensions.InMathAlphanumericBlock
-- uid: Forms9Patch.FontExtensions.LineHeight(Font)
-  name: LineHeight(Font)
-  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Font_
-  commentId: M:Forms9Patch.FontExtensions.LineHeight(Font)
-  fullName: Forms9Patch.FontExtensions.LineHeight(Font)
-  nameWithType: FontExtensions.LineHeight(Font)
 - uid: Forms9Patch.FontExtensions.LineHeight(Forms9Patch.IFontElement)
   name: LineHeight(IFontElement)
   href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_
   commentId: M:Forms9Patch.FontExtensions.LineHeight(Forms9Patch.IFontElement)
   fullName: Forms9Patch.FontExtensions.LineHeight(Forms9Patch.IFontElement)
   nameWithType: FontExtensions.LineHeight(IFontElement)
-- uid: Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,FontAttributes)
+- uid: Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,Xamarin.Forms.FontAttributes)
   name: LineHeight(String, Double, FontAttributes)
-  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_System_String_System_Double_FontAttributes_
-  commentId: M:Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,FontAttributes)
-  fullName: Forms9Patch.FontExtensions.LineHeight(System.String, System.Double, FontAttributes)
+  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_System_String_System_Double_Xamarin_Forms_FontAttributes_
+  commentId: M:Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,Xamarin.Forms.FontAttributes)
+  fullName: Forms9Patch.FontExtensions.LineHeight(System.String, System.Double, Xamarin.Forms.FontAttributes)
   nameWithType: FontExtensions.LineHeight(String, Double, FontAttributes)
+- uid: Forms9Patch.FontExtensions.LineHeight(Xamarin.Forms.Font)
+  name: LineHeight(Font)
+  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_Xamarin_Forms_Font_
+  commentId: M:Forms9Patch.FontExtensions.LineHeight(Xamarin.Forms.Font)
+  fullName: Forms9Patch.FontExtensions.LineHeight(Xamarin.Forms.Font)
+  nameWithType: FontExtensions.LineHeight(Font)
 - uid: Forms9Patch.FontExtensions.LineHeight*
   name: LineHeight
   href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineHeight_
@@ -3730,24 +3738,24 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.FontExtensions.LineHeight
   nameWithType: FontExtensions.LineHeight
-- uid: Forms9Patch.FontExtensions.LineSpace(Font)
-  name: LineSpace(Font)
-  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_Font_
-  commentId: M:Forms9Patch.FontExtensions.LineSpace(Font)
-  fullName: Forms9Patch.FontExtensions.LineSpace(Font)
-  nameWithType: FontExtensions.LineSpace(Font)
 - uid: Forms9Patch.FontExtensions.LineSpace(Forms9Patch.IFontElement)
   name: LineSpace(IFontElement)
   href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_Forms9Patch_IFontElement_
   commentId: M:Forms9Patch.FontExtensions.LineSpace(Forms9Patch.IFontElement)
   fullName: Forms9Patch.FontExtensions.LineSpace(Forms9Patch.IFontElement)
   nameWithType: FontExtensions.LineSpace(IFontElement)
-- uid: Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,FontAttributes)
+- uid: Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,Xamarin.Forms.FontAttributes)
   name: LineSpace(String, Double, FontAttributes)
-  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_System_String_System_Double_FontAttributes_
-  commentId: M:Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,FontAttributes)
-  fullName: Forms9Patch.FontExtensions.LineSpace(System.String, System.Double, FontAttributes)
+  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_System_String_System_Double_Xamarin_Forms_FontAttributes_
+  commentId: M:Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,Xamarin.Forms.FontAttributes)
+  fullName: Forms9Patch.FontExtensions.LineSpace(System.String, System.Double, Xamarin.Forms.FontAttributes)
   nameWithType: FontExtensions.LineSpace(String, Double, FontAttributes)
+- uid: Forms9Patch.FontExtensions.LineSpace(Xamarin.Forms.Font)
+  name: LineSpace(Font)
+  href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_Xamarin_Forms_Font_
+  commentId: M:Forms9Patch.FontExtensions.LineSpace(Xamarin.Forms.Font)
+  fullName: Forms9Patch.FontExtensions.LineSpace(Xamarin.Forms.Font)
+  nameWithType: FontExtensions.LineSpace(Font)
 - uid: Forms9Patch.FontExtensions.LineSpace*
   name: LineSpace
   href: api/Forms9Patch.FontExtensions.html#Forms9Patch_FontExtensions_LineSpace_
@@ -3874,6 +3882,23 @@ references:
   fullName: Forms9Patch.Frame.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: Frame.IShape.ExtendedElementShape
   nameWithType.vb: Frame.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.Frame.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.Frame.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.Frame.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: Frame.IShape.ShadowPadding()
+  nameWithType.vb: Frame.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.Frame.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.Frame.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.Frame.Forms9Patch.IShape.ShadowPadding
+  nameWithType: Frame.IShape.ShadowPadding
+  nameWithType.vb: Frame.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.Frame.HasShadow
   name: HasShadow
   href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_HasShadow
@@ -4053,11 +4078,11 @@ references:
   commentId: F:Forms9Patch.Frame.ShadowInvertedProperty
   fullName: Forms9Patch.Frame.ShadowInvertedProperty
   nameWithType: Frame.ShadowInvertedProperty
-- uid: Forms9Patch.Frame.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.Frame.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.Frame.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.Frame.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.Frame.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.Frame.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: Frame.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.Frame.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -4066,11 +4091,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Frame.ShouldInvalidateOnChildAdded
   nameWithType: Frame.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.Frame.html#Forms9Patch_Frame_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.Frame.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: Frame.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.Frame.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -4198,6 +4223,23 @@ references:
   fullName: Forms9Patch.Grid.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: Grid.IShape.ExtendedElementShape
   nameWithType.vb: Grid.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.Grid.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.Grid.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.Grid.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: Grid.IShape.ShadowPadding()
+  nameWithType.vb: Grid.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.Grid.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.Grid.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.Grid.Forms9Patch.IShape.ShadowPadding
+  nameWithType: Grid.IShape.ShadowPadding
+  nameWithType.vb: Grid.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.Grid.HasShadow
   name: HasShadow
   href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_HasShadow
@@ -4377,11 +4419,11 @@ references:
   commentId: F:Forms9Patch.Grid.ShadowInvertedProperty
   fullName: Forms9Patch.Grid.ShadowInvertedProperty
   nameWithType: Grid.ShadowInvertedProperty
-- uid: Forms9Patch.Grid.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.Grid.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.Grid.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.Grid.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.Grid.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.Grid.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: Grid.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.Grid.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -4390,11 +4432,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Grid.ShouldInvalidateOnChildAdded
   nameWithType: Grid.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.Grid.html#Forms9Patch_Grid_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.Grid.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: Grid.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.Grid.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -4422,12 +4464,12 @@ references:
   commentId: T:Forms9Patch.GridExtension
   fullName: Forms9Patch.GridExtension
   nameWithType: GridExtension
-- uid: Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid,View,System.Int32,System.Int32,System.Int32,System.Int32)
-  name: AddChild(Xamarin.Forms.Grid, View, Int32, Int32, Int32, Int32)
-  href: api/Forms9Patch.GridExtension.html#Forms9Patch_GridExtension_AddChild_Xamarin_Forms_Grid_View_System_Int32_System_Int32_System_Int32_System_Int32_
-  commentId: M:Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid,View,System.Int32,System.Int32,System.Int32,System.Int32)
-  fullName: Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid, View, System.Int32, System.Int32, System.Int32, System.Int32)
-  nameWithType: GridExtension.AddChild(Xamarin.Forms.Grid, View, Int32, Int32, Int32, Int32)
+- uid: Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid,Xamarin.Forms.View,System.Int32,System.Int32,System.Int32,System.Int32)
+  name: AddChild(Grid, View, Int32, Int32, Int32, Int32)
+  href: api/Forms9Patch.GridExtension.html#Forms9Patch_GridExtension_AddChild_Xamarin_Forms_Grid_Xamarin_Forms_View_System_Int32_System_Int32_System_Int32_System_Int32_
+  commentId: M:Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid,Xamarin.Forms.View,System.Int32,System.Int32,System.Int32,System.Int32)
+  fullName: Forms9Patch.GridExtension.AddChild(Xamarin.Forms.Grid, Xamarin.Forms.View, System.Int32, System.Int32, System.Int32, System.Int32)
+  nameWithType: GridExtension.AddChild(Grid, View, Int32, Int32, Int32, Int32)
 - uid: Forms9Patch.GridExtension.AddChild*
   name: AddChild
   href: api/Forms9Patch.GridExtension.html#Forms9Patch_GridExtension_AddChild_
@@ -4441,11 +4483,11 @@ references:
   commentId: T:Forms9Patch.GroupHeaderTemplate
   fullName: Forms9Patch.GroupHeaderTemplate
   nameWithType: GroupHeaderTemplate
-- uid: Forms9Patch.GroupHeaderTemplate.#ctor(Type)
+- uid: Forms9Patch.GroupHeaderTemplate.#ctor(System.Type)
   name: GroupHeaderTemplate(Type)
-  href: api/Forms9Patch.GroupHeaderTemplate.html#Forms9Patch_GroupHeaderTemplate__ctor_Type_
-  commentId: M:Forms9Patch.GroupHeaderTemplate.#ctor(Type)
-  fullName: Forms9Patch.GroupHeaderTemplate.GroupHeaderTemplate(Type)
+  href: api/Forms9Patch.GroupHeaderTemplate.html#Forms9Patch_GroupHeaderTemplate__ctor_System_Type_
+  commentId: M:Forms9Patch.GroupHeaderTemplate.#ctor(System.Type)
+  fullName: Forms9Patch.GroupHeaderTemplate.GroupHeaderTemplate(System.Type)
   nameWithType: GroupHeaderTemplate.GroupHeaderTemplate(Type)
 - uid: Forms9Patch.GroupHeaderTemplate.#ctor*
   name: GroupHeaderTemplate
@@ -4765,11 +4807,11 @@ references:
   commentId: T:Forms9Patch.HardwareKeyEventArgs
   fullName: Forms9Patch.HardwareKeyEventArgs
   nameWithType: HardwareKeyEventArgs
-- uid: Forms9Patch.HardwareKeyEventArgs.#ctor(Forms9Patch.HardwareKey,VisualElement)
+- uid: Forms9Patch.HardwareKeyEventArgs.#ctor(Forms9Patch.HardwareKey,Xamarin.Forms.VisualElement)
   name: HardwareKeyEventArgs(HardwareKey, VisualElement)
-  href: api/Forms9Patch.HardwareKeyEventArgs.html#Forms9Patch_HardwareKeyEventArgs__ctor_Forms9Patch_HardwareKey_VisualElement_
-  commentId: M:Forms9Patch.HardwareKeyEventArgs.#ctor(Forms9Patch.HardwareKey,VisualElement)
-  fullName: Forms9Patch.HardwareKeyEventArgs.HardwareKeyEventArgs(Forms9Patch.HardwareKey, VisualElement)
+  href: api/Forms9Patch.HardwareKeyEventArgs.html#Forms9Patch_HardwareKeyEventArgs__ctor_Forms9Patch_HardwareKey_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.HardwareKeyEventArgs.#ctor(Forms9Patch.HardwareKey,Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.HardwareKeyEventArgs.HardwareKeyEventArgs(Forms9Patch.HardwareKey, Xamarin.Forms.VisualElement)
   nameWithType: HardwareKeyEventArgs.HardwareKeyEventArgs(HardwareKey, VisualElement)
 - uid: Forms9Patch.HardwareKeyEventArgs.#ctor*
   name: HardwareKeyEventArgs
@@ -4810,13 +4852,13 @@ references:
   commentId: T:Forms9Patch.HardwareKeyListener
   fullName: Forms9Patch.HardwareKeyListener
   nameWithType: HardwareKeyListener
-- uid: Forms9Patch.HardwareKeyListener.#ctor(Forms9Patch.HardwareKey,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+- uid: Forms9Patch.HardwareKeyListener.#ctor(Forms9Patch.HardwareKey,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name: HardwareKeyListener(HardwareKey, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListener.html#Forms9Patch_HardwareKeyListener__ctor_Forms9Patch_HardwareKey_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListener.#ctor(Forms9Patch.HardwareKey,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  href: api/Forms9Patch.HardwareKeyListener.html#Forms9Patch_HardwareKeyListener__ctor_Forms9Patch_HardwareKey_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListener.#ctor(Forms9Patch.HardwareKey,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name.vb: HardwareKeyListener(HardwareKey, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListener.HardwareKeyListener(Forms9Patch.HardwareKey, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListener.HardwareKeyListener(Forms9Patch.HardwareKey, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListener.HardwareKeyListener(Forms9Patch.HardwareKey, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListener.HardwareKeyListener(Forms9Patch.HardwareKey, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListener.HardwareKeyListener(HardwareKey, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListener.HardwareKeyListener(HardwareKey, EventHandler(Of HardwareKeyEventArgs))
 - uid: Forms9Patch.HardwareKeyListener.#ctor*
@@ -4907,72 +4949,72 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String)
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
-  name: AddHardwareKeyListener(HardwareKeyPage, String, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
-  name.vb: AddHardwareKeyListener(HardwareKeyPage, String, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
-  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, EventHandler<HardwareKeyEventArgs>)
-  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, EventHandler(Of HardwareKeyEventArgs))
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name: AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_Forms9Patch_HardwareKeyModifierKeys_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_Forms9Patch_HardwareKeyModifierKeys_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name.vb: AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name: AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name.vb: AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,Forms9Patch.HardwareKeyListener)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name: AddHardwareKeyListener(HardwareKeyPage, String, EventHandler<HardwareKeyEventArgs>)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_HardwareKeyPage_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name.vb: AddHardwareKeyListener(HardwareKeyPage, String, EventHandler(Of HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, EventHandler<HardwareKeyEventArgs>)
+  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, EventHandler(Of HardwareKeyEventArgs))
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,Forms9Patch.HardwareKeyListener)
   name: AddHardwareKeyListener(View, HardwareKeyListener)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_View_Forms9Patch_HardwareKeyListener_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,Forms9Patch.HardwareKeyListener)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, Forms9Patch.HardwareKeyListener)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,Forms9Patch.HardwareKeyListener)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, Forms9Patch.HardwareKeyListener)
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, HardwareKeyListener)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String)
   name: AddHardwareKeyListener(View, String)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_View_System_String_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String)
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
-  name: AddHardwareKeyListener(View, String, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_View_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
-  name.vb: AddHardwareKeyListener(View, String, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
-  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler<HardwareKeyEventArgs>)
-  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler(Of HardwareKeyEventArgs))
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name: AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_View_System_String_Forms9Patch_HardwareKeyModifierKeys_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name.vb: AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
-- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name: AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
   name.vb: AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
-  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name: AddHardwareKeyListener(View, String, EventHandler<HardwareKeyEventArgs>)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Xamarin_Forms_View_System_String_System_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View,System.String,System.EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name.vb: AddHardwareKeyListener(View, String, EventHandler(Of HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, System.EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Xamarin.Forms.View, System.String, System.EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler<HardwareKeyEventArgs>)
+  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(View, String, EventHandler(Of HardwareKeyEventArgs))
 - uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener*
   name: AddHardwareKeyListener
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_
@@ -4986,11 +5028,11 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.ClearHardwareKeyListeners(HardwareKeyPage)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Xamarin.Forms.View)
   name: ClearHardwareKeyListeners(View)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_View_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Xamarin.Forms.View)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Xamarin.Forms.View)
   nameWithType: HardwareKeyListenerExtensions.ClearHardwareKeyListeners(View)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners*
   name: ClearHardwareKeyListeners
@@ -5005,11 +5047,11 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.GetHardwareKeyListeners(HardwareKeyPage)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Xamarin.Forms.View)
   name: GetHardwareKeyListeners(View)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_View_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Xamarin.Forms.View)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Xamarin.Forms.View)
   nameWithType: HardwareKeyListenerExtensions.GetHardwareKeyListeners(View)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners*
   name: GetHardwareKeyListeners
@@ -5024,11 +5066,11 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.HardwareKeyFocus(HardwareKeyPage)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(View)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Xamarin.Forms.View)
   name: HardwareKeyFocus(View)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_View_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(View)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(View)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Xamarin.Forms.View)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Xamarin.Forms.View)
   nameWithType: HardwareKeyListenerExtensions.HardwareKeyFocus(View)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus*
   name: HardwareKeyFocus
@@ -5037,11 +5079,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus
   nameWithType: HardwareKeyListenerExtensions.HardwareKeyFocus
-- uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(Xamarin.Forms.VisualElement)
   name: HardwareKeyUnfocus(VisualElement)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_VisualElement_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyUnfocus_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus(Xamarin.Forms.VisualElement)
   nameWithType: HardwareKeyListenerExtensions.HardwareKeyUnfocus(VisualElement)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyUnfocus*
   name: HardwareKeyUnfocus
@@ -5062,17 +5104,17 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys)
   nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View,Forms9Patch.HardwareKeyListener)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View,Forms9Patch.HardwareKeyListener)
   name: RemoveHardwareKeyListener(View, HardwareKeyListener)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_View_Forms9Patch_HardwareKeyListener_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View,Forms9Patch.HardwareKeyListener)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, Forms9Patch.HardwareKeyListener)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_Forms9Patch_HardwareKeyListener_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View,Forms9Patch.HardwareKeyListener)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View, Forms9Patch.HardwareKeyListener)
   nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, HardwareKeyListener)
-- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys)
   name: RemoveHardwareKeyListener(View, String, HardwareKeyModifierKeys)
-  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_View_System_String_Forms9Patch_HardwareKeyModifierKeys_
-  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View,System.String,Forms9Patch.HardwareKeyModifierKeys)
-  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, System.String, Forms9Patch.HardwareKeyModifierKeys)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Xamarin_Forms_View_System_String_Forms9Patch_HardwareKeyModifierKeys_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View,System.String,Forms9Patch.HardwareKeyModifierKeys)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Xamarin.Forms.View, System.String, Forms9Patch.HardwareKeyModifierKeys)
   nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(View, String, HardwareKeyModifierKeys)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener*
   name: RemoveHardwareKeyListener
@@ -5211,13 +5253,13 @@ references:
   commentId: T:Forms9Patch.HtmlStringExtensions
   fullName: Forms9Patch.HtmlStringExtensions
   nameWithType: HtmlStringExtensions
-- uid: Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,Action{System.String})
+- uid: Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,System.Action{System.String})
   name: ToPng(String, String, Action<String>)
-  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPng_System_String_System_String_Action_System_String__
-  commentId: M:Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,Action{System.String})
+  href: api/Forms9Patch.HtmlStringExtensions.html#Forms9Patch_HtmlStringExtensions_ToPng_System_String_System_String_System_Action_System_String__
+  commentId: M:Forms9Patch.HtmlStringExtensions.ToPng(System.String,System.String,System.Action{System.String})
   name.vb: ToPng(String, String, Action(Of String))
-  fullName: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, Action<System.String>)
-  fullName.vb: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, Action(Of System.String))
+  fullName: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, System.Action<System.String>)
+  fullName.vb: Forms9Patch.HtmlStringExtensions.ToPng(System.String, System.String, System.Action(Of System.String))
   nameWithType: HtmlStringExtensions.ToPng(String, String, Action<String>)
   nameWithType.vb: HtmlStringExtensions.ToPng(String, String, Action(Of String))
 - uid: Forms9Patch.HtmlStringExtensions.ToPng*
@@ -5825,13 +5867,13 @@ references:
   commentId: T:Forms9Patch.IHtmlToPngPdfService
   fullName: Forms9Patch.IHtmlToPngPdfService
   nameWithType: IHtmlToPngPdfService
-- uid: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,Action{System.String})
+- uid: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,System.Action{System.String})
   name: ToPng(String, String, Action<String>)
-  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPng_System_String_System_String_Action_System_String__
-  commentId: M:Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,Action{System.String})
+  href: api/Forms9Patch.IHtmlToPngPdfService.html#Forms9Patch_IHtmlToPngPdfService_ToPng_System_String_System_String_System_Action_System_String__
+  commentId: M:Forms9Patch.IHtmlToPngPdfService.ToPng(System.String,System.String,System.Action{System.String})
   name.vb: ToPng(String, String, Action(Of String))
-  fullName: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, Action<System.String>)
-  fullName.vb: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, Action(Of System.String))
+  fullName: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, System.Action<System.String>)
+  fullName.vb: Forms9Patch.IHtmlToPngPdfService.ToPng(System.String, System.String, System.Action(Of System.String))
   nameWithType: IHtmlToPngPdfService.ToPng(String, String, Action<String>)
   nameWithType.vb: IHtmlToPngPdfService.ToPng(String, String, Action(Of String))
 - uid: Forms9Patch.IHtmlToPngPdfService.ToPng*
@@ -6142,24 +6184,24 @@ references:
   commentId: M:Forms9Patch.Image.#ctor(Forms9Patch.Image)
   fullName: Forms9Patch.Image.Image(Forms9Patch.Image)
   nameWithType: Image.Image(Image)
-- uid: Forms9Patch.Image.#ctor(System.String,Assembly)
+- uid: Forms9Patch.Image.#ctor(System.String,System.Reflection.Assembly)
   name: Image(String, Assembly)
-  href: api/Forms9Patch.Image.html#Forms9Patch_Image__ctor_System_String_Assembly_
-  commentId: M:Forms9Patch.Image.#ctor(System.String,Assembly)
-  fullName: Forms9Patch.Image.Image(System.String, Assembly)
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image__ctor_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.Image.#ctor(System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.Image.Image(System.String, System.Reflection.Assembly)
   nameWithType: Image.Image(String, Assembly)
 - uid: Forms9Patch.Image.#ctor(Xamarin.Forms.Image)
-  name: Image(Xamarin.Forms.Image)
+  name: Image(Image)
   href: api/Forms9Patch.Image.html#Forms9Patch_Image__ctor_Xamarin_Forms_Image_
   commentId: M:Forms9Patch.Image.#ctor(Xamarin.Forms.Image)
   fullName: Forms9Patch.Image.Image(Xamarin.Forms.Image)
-  nameWithType: Image.Image(Xamarin.Forms.Image)
+  nameWithType: Image.Image(Image)
 - uid: Forms9Patch.Image.#ctor(Xamarin.Forms.ImageSource)
-  name: Image(Xamarin.Forms.ImageSource)
+  name: Image(ImageSource)
   href: api/Forms9Patch.Image.html#Forms9Patch_Image__ctor_Xamarin_Forms_ImageSource_
   commentId: M:Forms9Patch.Image.#ctor(Xamarin.Forms.ImageSource)
   fullName: Forms9Patch.Image.Image(Xamarin.Forms.ImageSource)
-  nameWithType: Image.Image(Xamarin.Forms.ImageSource)
+  nameWithType: Image.Image(ImageSource)
 - uid: Forms9Patch.Image.#ctor*
   name: Image
   href: api/Forms9Patch.Image.html#Forms9Patch_Image__ctor_
@@ -6330,6 +6372,23 @@ references:
   fullName: Forms9Patch.Image.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: Image.IShape.ExtendedElementShape
   nameWithType.vb: Image.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.Image.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.Image.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.Image.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: Image.IShape.ShadowPadding()
+  nameWithType.vb: Image.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.Image.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.Image.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.Image.Forms9Patch.IShape.ShadowPadding
+  nameWithType: Image.IShape.ShadowPadding
+  nameWithType.vb: Image.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.Image.HasShadow
   name: HasShadow
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_HasShadow
@@ -6521,6 +6580,23 @@ references:
   commentId: F:Forms9Patch.Image.TintColorProperty
   fullName: Forms9Patch.Image.TintColorProperty
   nameWithType: Image.TintColorProperty
+- uid: Forms9Patch.Image.Xamarin#Forms#IImageController#SetIsLoading(System.Boolean)
+  name: IImageController.SetIsLoading(Boolean)
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Xamarin_Forms_IImageController_SetIsLoading_System_Boolean_
+  commentId: M:Forms9Patch.Image.Xamarin#Forms#IImageController#SetIsLoading(System.Boolean)
+  name.vb: Xamarin.Forms.IImageController.SetIsLoading(Boolean)
+  fullName: Forms9Patch.Image.Xamarin.Forms.IImageController.SetIsLoading(System.Boolean)
+  nameWithType: Image.IImageController.SetIsLoading(Boolean)
+  nameWithType.vb: Image.Xamarin.Forms.IImageController.SetIsLoading(Boolean)
+- uid: Forms9Patch.Image.Xamarin#Forms#IImageController#SetIsLoading*
+  name: IImageController.SetIsLoading
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_Xamarin_Forms_IImageController_SetIsLoading_
+  commentId: Overload:Forms9Patch.Image.Xamarin#Forms#IImageController#SetIsLoading
+  isSpec: "True"
+  name.vb: Xamarin.Forms.IImageController.SetIsLoading
+  fullName: Forms9Patch.Image.Xamarin.Forms.IImageController.SetIsLoading
+  nameWithType: Image.IImageController.SetIsLoading
+  nameWithType.vb: Image.Xamarin.Forms.IImageController.SetIsLoading
 - uid: Forms9Patch.ImageButton
   name: ImageButton
   href: api/Forms9Patch.ImageButton.html
@@ -6539,11 +6615,11 @@ references:
   commentId: T:Forms9Patch.ImageSource
   fullName: Forms9Patch.ImageSource
   nameWithType: ImageSource
-- uid: Forms9Patch.ImageSource.FromMultiResource(System.String,Assembly)
+- uid: Forms9Patch.ImageSource.FromMultiResource(System.String,System.Reflection.Assembly)
   name: FromMultiResource(String, Assembly)
-  href: api/Forms9Patch.ImageSource.html#Forms9Patch_ImageSource_FromMultiResource_System_String_Assembly_
-  commentId: M:Forms9Patch.ImageSource.FromMultiResource(System.String,Assembly)
-  fullName: Forms9Patch.ImageSource.FromMultiResource(System.String, Assembly)
+  href: api/Forms9Patch.ImageSource.html#Forms9Patch_ImageSource_FromMultiResource_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.ImageSource.FromMultiResource(System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.ImageSource.FromMultiResource(System.String, System.Reflection.Assembly)
   nameWithType: ImageSource.FromMultiResource(String, Assembly)
 - uid: Forms9Patch.ImageSource.FromMultiResource*
   name: FromMultiResource
@@ -6552,11 +6628,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ImageSource.FromMultiResource
   nameWithType: ImageSource.FromMultiResource
-- uid: Forms9Patch.ImageSource.FromResource(System.String,Assembly)
+- uid: Forms9Patch.ImageSource.FromResource(System.String,System.Reflection.Assembly)
   name: FromResource(String, Assembly)
-  href: api/Forms9Patch.ImageSource.html#Forms9Patch_ImageSource_FromResource_System_String_Assembly_
-  commentId: M:Forms9Patch.ImageSource.FromResource(System.String,Assembly)
-  fullName: Forms9Patch.ImageSource.FromResource(System.String, Assembly)
+  href: api/Forms9Patch.ImageSource.html#Forms9Patch_ImageSource_FromResource_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.ImageSource.FromResource(System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.ImageSource.FromResource(System.String, System.Reflection.Assembly)
   nameWithType: ImageSource.FromResource(String, Assembly)
 - uid: Forms9Patch.ImageSource.FromResource*
   name: FromResource
@@ -6572,11 +6648,11 @@ references:
   fullName: Forms9Patch.ImageSourceExtensions
   nameWithType: ImageSourceExtensions
 - uid: Forms9Patch.ImageSourceExtensions.SameAs(Xamarin.Forms.ImageSource,Xamarin.Forms.ImageSource)
-  name: SameAs(Xamarin.Forms.ImageSource, Xamarin.Forms.ImageSource)
+  name: SameAs(ImageSource, ImageSource)
   href: api/Forms9Patch.ImageSourceExtensions.html#Forms9Patch_ImageSourceExtensions_SameAs_Xamarin_Forms_ImageSource_Xamarin_Forms_ImageSource_
   commentId: M:Forms9Patch.ImageSourceExtensions.SameAs(Xamarin.Forms.ImageSource,Xamarin.Forms.ImageSource)
   fullName: Forms9Patch.ImageSourceExtensions.SameAs(Xamarin.Forms.ImageSource, Xamarin.Forms.ImageSource)
-  nameWithType: ImageSourceExtensions.SameAs(Xamarin.Forms.ImageSource, Xamarin.Forms.ImageSource)
+  nameWithType: ImageSourceExtensions.SameAs(ImageSource, ImageSource)
 - uid: Forms9Patch.ImageSourceExtensions.SameAs*
   name: SameAs
   href: api/Forms9Patch.ImageSourceExtensions.html#Forms9Patch_ImageSourceExtensions_SameAs_
@@ -6706,11 +6782,11 @@ references:
   commentId: T:Forms9Patch.INativeMimeItem
   fullName: Forms9Patch.INativeMimeItem
   nameWithType: INativeMimeItem
-- uid: Forms9Patch.INativeMimeItem.GetValueAs(Type)
+- uid: Forms9Patch.INativeMimeItem.GetValueAs(System.Type)
   name: GetValueAs(Type)
-  href: api/Forms9Patch.INativeMimeItem.html#Forms9Patch_INativeMimeItem_GetValueAs_Type_
-  commentId: M:Forms9Patch.INativeMimeItem.GetValueAs(Type)
-  fullName: Forms9Patch.INativeMimeItem.GetValueAs(Type)
+  href: api/Forms9Patch.INativeMimeItem.html#Forms9Patch_INativeMimeItem_GetValueAs_System_Type_
+  commentId: M:Forms9Patch.INativeMimeItem.GetValueAs(System.Type)
+  fullName: Forms9Patch.INativeMimeItem.GetValueAs(System.Type)
   nameWithType: INativeMimeItem.GetValueAs(Type)
 - uid: Forms9Patch.INativeMimeItem.GetValueAs*
   name: GetValueAs
@@ -7113,11 +7189,11 @@ references:
   commentId: T:Forms9Patch.ItemTappedEventArgs
   fullName: Forms9Patch.ItemTappedEventArgs
   nameWithType: ItemTappedEventArgs
-- uid: Forms9Patch.ItemTappedEventArgs.#ctor(System.Object,System.Object,View)
+- uid: Forms9Patch.ItemTappedEventArgs.#ctor(System.Object,System.Object,Xamarin.Forms.View)
   name: ItemTappedEventArgs(Object, Object, View)
-  href: api/Forms9Patch.ItemTappedEventArgs.html#Forms9Patch_ItemTappedEventArgs__ctor_System_Object_System_Object_View_
-  commentId: M:Forms9Patch.ItemTappedEventArgs.#ctor(System.Object,System.Object,View)
-  fullName: Forms9Patch.ItemTappedEventArgs.ItemTappedEventArgs(System.Object, System.Object, View)
+  href: api/Forms9Patch.ItemTappedEventArgs.html#Forms9Patch_ItemTappedEventArgs__ctor_System_Object_System_Object_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.ItemTappedEventArgs.#ctor(System.Object,System.Object,Xamarin.Forms.View)
+  fullName: Forms9Patch.ItemTappedEventArgs.ItemTappedEventArgs(System.Object, System.Object, Xamarin.Forms.View)
   nameWithType: ItemTappedEventArgs.ItemTappedEventArgs(Object, Object, View)
 - uid: Forms9Patch.ItemTappedEventArgs.#ctor*
   name: ItemTappedEventArgs
@@ -7165,11 +7241,11 @@ references:
   fullName: Forms9Patch.IWebViewExtensionService.CanPrint
   nameWithType: IWebViewExtensionService.CanPrint
 - uid: Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView,System.String)
-  name: Print(Xamarin.Forms.WebView, String)
+  name: Print(WebView, String)
   href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_Print_Xamarin_Forms_WebView_System_String_
   commentId: M:Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView,System.String)
   fullName: Forms9Patch.IWebViewExtensionService.Print(Xamarin.Forms.WebView, System.String)
-  nameWithType: IWebViewExtensionService.Print(Xamarin.Forms.WebView, String)
+  nameWithType: IWebViewExtensionService.Print(WebView, String)
 - uid: Forms9Patch.IWebViewExtensionService.Print*
   name: Print
   href: api/Forms9Patch.IWebViewExtensionService.html#Forms9Patch_IWebViewExtensionService_Print_
@@ -7498,11 +7574,11 @@ references:
   commentId: F:Forms9Patch.Label.HtmlTextProperty
   fullName: Forms9Patch.Label.HtmlTextProperty
   nameWithType: Label.HtmlTextProperty
-- uid: Forms9Patch.Label.IndexAtPoint(Point)
+- uid: Forms9Patch.Label.IndexAtPoint(Xamarin.Forms.Point)
   name: IndexAtPoint(Point)
-  href: api/Forms9Patch.Label.html#Forms9Patch_Label_IndexAtPoint_Point_
-  commentId: M:Forms9Patch.Label.IndexAtPoint(Point)
-  fullName: Forms9Patch.Label.IndexAtPoint(Point)
+  href: api/Forms9Patch.Label.html#Forms9Patch_Label_IndexAtPoint_Xamarin_Forms_Point_
+  commentId: M:Forms9Patch.Label.IndexAtPoint(Xamarin.Forms.Point)
+  fullName: Forms9Patch.Label.IndexAtPoint(Xamarin.Forms.Point)
   nameWithType: Label.IndexAtPoint(Point)
 - uid: Forms9Patch.Label.IndexAtPoint*
   name: IndexAtPoint
@@ -7714,11 +7790,11 @@ references:
   commentId: T:Forms9Patch.LayoutOptionsExtensions
   fullName: Forms9Patch.LayoutOptionsExtensions
   nameWithType: LayoutOptionsExtensions
-- uid: Forms9Patch.LayoutOptionsExtensions.IsEqualTo(LayoutOptions,LayoutOptions)
+- uid: Forms9Patch.LayoutOptionsExtensions.IsEqualTo(Xamarin.Forms.LayoutOptions,Xamarin.Forms.LayoutOptions)
   name: IsEqualTo(LayoutOptions, LayoutOptions)
-  href: api/Forms9Patch.LayoutOptionsExtensions.html#Forms9Patch_LayoutOptionsExtensions_IsEqualTo_LayoutOptions_LayoutOptions_
-  commentId: M:Forms9Patch.LayoutOptionsExtensions.IsEqualTo(LayoutOptions,LayoutOptions)
-  fullName: Forms9Patch.LayoutOptionsExtensions.IsEqualTo(LayoutOptions, LayoutOptions)
+  href: api/Forms9Patch.LayoutOptionsExtensions.html#Forms9Patch_LayoutOptionsExtensions_IsEqualTo_Xamarin_Forms_LayoutOptions_Xamarin_Forms_LayoutOptions_
+  commentId: M:Forms9Patch.LayoutOptionsExtensions.IsEqualTo(Xamarin.Forms.LayoutOptions,Xamarin.Forms.LayoutOptions)
+  fullName: Forms9Patch.LayoutOptionsExtensions.IsEqualTo(Xamarin.Forms.LayoutOptions, Xamarin.Forms.LayoutOptions)
   nameWithType: LayoutOptionsExtensions.IsEqualTo(LayoutOptions, LayoutOptions)
 - uid: Forms9Patch.LayoutOptionsExtensions.IsEqualTo*
   name: IsEqualTo
@@ -7727,11 +7803,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.LayoutOptionsExtensions.IsEqualTo
   nameWithType: LayoutOptionsExtensions.IsEqualTo
-- uid: Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(LayoutOptions)
+- uid: Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(Xamarin.Forms.LayoutOptions)
   name: ToTextAlignment(LayoutOptions)
-  href: api/Forms9Patch.LayoutOptionsExtensions.html#Forms9Patch_LayoutOptionsExtensions_ToTextAlignment_LayoutOptions_
-  commentId: M:Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(LayoutOptions)
-  fullName: Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(LayoutOptions)
+  href: api/Forms9Patch.LayoutOptionsExtensions.html#Forms9Patch_LayoutOptionsExtensions_ToTextAlignment_Xamarin_Forms_LayoutOptions_
+  commentId: M:Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(Xamarin.Forms.LayoutOptions)
+  fullName: Forms9Patch.LayoutOptionsExtensions.ToTextAlignment(Xamarin.Forms.LayoutOptions)
   nameWithType: LayoutOptionsExtensions.ToTextAlignment(LayoutOptions)
 - uid: Forms9Patch.LayoutOptionsExtensions.ToTextAlignment*
   name: ToTextAlignment
@@ -7752,11 +7828,11 @@ references:
   commentId: M:Forms9Patch.ListView.#ctor
   fullName: Forms9Patch.ListView.ListView()
   nameWithType: ListView.ListView()
-- uid: Forms9Patch.ListView.#ctor(ListViewCachingStrategy)
+- uid: Forms9Patch.ListView.#ctor(Xamarin.Forms.ListViewCachingStrategy)
   name: ListView(ListViewCachingStrategy)
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView__ctor_ListViewCachingStrategy_
-  commentId: M:Forms9Patch.ListView.#ctor(ListViewCachingStrategy)
-  fullName: Forms9Patch.ListView.ListView(ListViewCachingStrategy)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView__ctor_Xamarin_Forms_ListViewCachingStrategy_
+  commentId: M:Forms9Patch.ListView.#ctor(Xamarin.Forms.ListViewCachingStrategy)
+  fullName: Forms9Patch.ListView.ListView(Xamarin.Forms.ListViewCachingStrategy)
   nameWithType: ListView.ListView(ListViewCachingStrategy)
 - uid: Forms9Patch.ListView.#ctor*
   name: ListView
@@ -8170,27 +8246,27 @@ references:
   commentId: M:Forms9Patch.ListView.ScrollTo(System.Double,System.Boolean)
   fullName: Forms9Patch.ListView.ScrollTo(System.Double, System.Boolean)
   nameWithType: ListView.ScrollTo(Double, Boolean)
-- uid: Forms9Patch.ListView.ScrollTo(System.Int32[],ScrollToPosition,System.Boolean)
+- uid: Forms9Patch.ListView.ScrollTo(System.Int32[],Xamarin.Forms.ScrollToPosition,System.Boolean)
   name: ScrollTo(Int32[], ScrollToPosition, Boolean)
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Int32___ScrollToPosition_System_Boolean_
-  commentId: M:Forms9Patch.ListView.ScrollTo(System.Int32[],ScrollToPosition,System.Boolean)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Int32___Xamarin_Forms_ScrollToPosition_System_Boolean_
+  commentId: M:Forms9Patch.ListView.ScrollTo(System.Int32[],Xamarin.Forms.ScrollToPosition,System.Boolean)
   name.vb: ScrollTo(Int32(), ScrollToPosition, Boolean)
-  fullName: Forms9Patch.ListView.ScrollTo(System.Int32[], ScrollToPosition, System.Boolean)
-  fullName.vb: Forms9Patch.ListView.ScrollTo(System.Int32(), ScrollToPosition, System.Boolean)
+  fullName: Forms9Patch.ListView.ScrollTo(System.Int32[], Xamarin.Forms.ScrollToPosition, System.Boolean)
+  fullName.vb: Forms9Patch.ListView.ScrollTo(System.Int32(), Xamarin.Forms.ScrollToPosition, System.Boolean)
   nameWithType: ListView.ScrollTo(Int32[], ScrollToPosition, Boolean)
   nameWithType.vb: ListView.ScrollTo(Int32(), ScrollToPosition, Boolean)
-- uid: Forms9Patch.ListView.ScrollTo(System.Object,ScrollToPosition,System.Boolean)
-  name: ScrollTo(Object, ScrollToPosition, Boolean)
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Object_ScrollToPosition_System_Boolean_
-  commentId: M:Forms9Patch.ListView.ScrollTo(System.Object,ScrollToPosition,System.Boolean)
-  fullName: Forms9Patch.ListView.ScrollTo(System.Object, ScrollToPosition, System.Boolean)
-  nameWithType: ListView.ScrollTo(Object, ScrollToPosition, Boolean)
-- uid: Forms9Patch.ListView.ScrollTo(System.Object,System.Object,ScrollToPosition,System.Boolean)
+- uid: Forms9Patch.ListView.ScrollTo(System.Object,System.Object,Xamarin.Forms.ScrollToPosition,System.Boolean)
   name: ScrollTo(Object, Object, ScrollToPosition, Boolean)
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Object_System_Object_ScrollToPosition_System_Boolean_
-  commentId: M:Forms9Patch.ListView.ScrollTo(System.Object,System.Object,ScrollToPosition,System.Boolean)
-  fullName: Forms9Patch.ListView.ScrollTo(System.Object, System.Object, ScrollToPosition, System.Boolean)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Object_System_Object_Xamarin_Forms_ScrollToPosition_System_Boolean_
+  commentId: M:Forms9Patch.ListView.ScrollTo(System.Object,System.Object,Xamarin.Forms.ScrollToPosition,System.Boolean)
+  fullName: Forms9Patch.ListView.ScrollTo(System.Object, System.Object, Xamarin.Forms.ScrollToPosition, System.Boolean)
   nameWithType: ListView.ScrollTo(Object, Object, ScrollToPosition, Boolean)
+- uid: Forms9Patch.ListView.ScrollTo(System.Object,Xamarin.Forms.ScrollToPosition,System.Boolean)
+  name: ScrollTo(Object, ScrollToPosition, Boolean)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_System_Object_Xamarin_Forms_ScrollToPosition_System_Boolean_
+  commentId: M:Forms9Patch.ListView.ScrollTo(System.Object,Xamarin.Forms.ScrollToPosition,System.Boolean)
+  fullName: Forms9Patch.ListView.ScrollTo(System.Object, Xamarin.Forms.ScrollToPosition, System.Boolean)
+  nameWithType: ListView.ScrollTo(Object, ScrollToPosition, Boolean)
 - uid: Forms9Patch.ListView.ScrollTo*
   name: ScrollTo
   href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_ScrollTo_
@@ -8407,11 +8483,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ListView.TapItem
   nameWithType: ListView.TapItem
-- uid: Forms9Patch.ListView.TapItemAtPoint(Point)
+- uid: Forms9Patch.ListView.TapItemAtPoint(Xamarin.Forms.Point)
   name: TapItemAtPoint(Point)
-  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_TapItemAtPoint_Point_
-  commentId: M:Forms9Patch.ListView.TapItemAtPoint(Point)
-  fullName: Forms9Patch.ListView.TapItemAtPoint(Point)
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_TapItemAtPoint_Xamarin_Forms_Point_
+  commentId: M:Forms9Patch.ListView.TapItemAtPoint(Xamarin.Forms.Point)
+  fullName: Forms9Patch.ListView.TapItemAtPoint(Xamarin.Forms.Point)
   nameWithType: ListView.TapItemAtPoint(Point)
 - uid: Forms9Patch.ListView.TapItemAtPoint*
   name: TapItemAtPoint
@@ -8571,6 +8647,23 @@ references:
   fullName: Forms9Patch.ManualLayout.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: ManualLayout.IShape.ExtendedElementShape
   nameWithType.vb: ManualLayout.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.ManualLayout.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.ManualLayout.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.ManualLayout.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: ManualLayout.IShape.ShadowPadding()
+  nameWithType.vb: ManualLayout.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.ManualLayout.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.ManualLayout.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.ManualLayout.Forms9Patch.IShape.ShadowPadding
+  nameWithType: ManualLayout.IShape.ShadowPadding
+  nameWithType.vb: ManualLayout.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.ManualLayout.HasShadow
   name: HasShadow
   href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_HasShadow
@@ -8756,11 +8849,11 @@ references:
   commentId: F:Forms9Patch.ManualLayout.ShadowInvertedProperty
   fullName: Forms9Patch.ManualLayout.ShadowInvertedProperty
   nameWithType: ManualLayout.ShadowInvertedProperty
-- uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: ManualLayout.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -8769,11 +8862,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ManualLayout.ShouldInvalidateOnChildAdded
   nameWithType: ManualLayout.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: ManualLayout.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.ManualLayout.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -8923,11 +9016,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.MimeItem.ValidValue
   nameWithType: MimeItem.ValidValue
-- uid: Forms9Patch.MimeItem.ValidValueType(Type)
+- uid: Forms9Patch.MimeItem.ValidValueType(System.Type)
   name: ValidValueType(Type)
-  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_ValidValueType_Type_
-  commentId: M:Forms9Patch.MimeItem.ValidValueType(Type)
-  fullName: Forms9Patch.MimeItem.ValidValueType(Type)
+  href: api/Forms9Patch.MimeItem.html#Forms9Patch_MimeItem_ValidValueType_System_Type_
+  commentId: M:Forms9Patch.MimeItem.ValidValueType(System.Type)
+  fullName: Forms9Patch.MimeItem.ValidValueType(System.Type)
   nameWithType: MimeItem.ValidValueType(Type)
 - uid: Forms9Patch.MimeItem.ValidValueType*
   name: ValidValueType
@@ -9029,11 +9122,11 @@ references:
   commentId: M:Forms9Patch.ModalPopup.#ctor(System.Boolean)
   fullName: Forms9Patch.ModalPopup.ModalPopup(System.Boolean)
   nameWithType: ModalPopup.ModalPopup(Boolean)
-- uid: Forms9Patch.ModalPopup.#ctor(VisualElement)
+- uid: Forms9Patch.ModalPopup.#ctor(Xamarin.Forms.VisualElement)
   name: ModalPopup(VisualElement)
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_VisualElement_
-  commentId: M:Forms9Patch.ModalPopup.#ctor(VisualElement)
-  fullName: Forms9Patch.ModalPopup.ModalPopup(VisualElement)
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.ModalPopup.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.ModalPopup.ModalPopup(Xamarin.Forms.VisualElement)
   nameWithType: ModalPopup.ModalPopup(VisualElement)
 - uid: Forms9Patch.ModalPopup.#ctor*
   name: ModalPopup
@@ -9281,11 +9374,11 @@ references:
   commentId: T:Forms9Patch.PermissionPopup
   fullName: Forms9Patch.PermissionPopup
   nameWithType: PermissionPopup
-- uid: Forms9Patch.PermissionPopup.#ctor(VisualElement)
+- uid: Forms9Patch.PermissionPopup.#ctor(Xamarin.Forms.VisualElement)
   name: PermissionPopup(VisualElement)
-  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup__ctor_VisualElement_
-  commentId: M:Forms9Patch.PermissionPopup.#ctor(VisualElement)
-  fullName: Forms9Patch.PermissionPopup.PermissionPopup(VisualElement)
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.PermissionPopup.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.PermissionPopup.PermissionPopup(Xamarin.Forms.VisualElement)
   nameWithType: PermissionPopup.PermissionPopup(VisualElement)
 - uid: Forms9Patch.PermissionPopup.#ctor*
   name: PermissionPopup
@@ -9351,17 +9444,17 @@ references:
   commentId: F:Forms9Patch.PermissionPopup.CancelTextProperty
   fullName: Forms9Patch.PermissionPopup.CancelTextProperty
   nameWithType: PermissionPopup.CancelTextProperty
-- uid: Forms9Patch.PermissionPopup.Create(System.String,System.String,System.String,System.String,Color,Color,Color,Color)
+- uid: Forms9Patch.PermissionPopup.Create(System.String,System.String,System.String,System.String,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color)
   name: Create(String, String, String, String, Color, Color, Color, Color)
-  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_Create_System_String_System_String_System_String_System_String_Color_Color_Color_Color_
-  commentId: M:Forms9Patch.PermissionPopup.Create(System.String,System.String,System.String,System.String,Color,Color,Color,Color)
-  fullName: Forms9Patch.PermissionPopup.Create(System.String, System.String, System.String, System.String, Color, Color, Color, Color)
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_Create_System_String_System_String_System_String_System_String_Xamarin_Forms_Color_Xamarin_Forms_Color_Xamarin_Forms_Color_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.PermissionPopup.Create(System.String,System.String,System.String,System.String,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color)
+  fullName: Forms9Patch.PermissionPopup.Create(System.String, System.String, System.String, System.String, Xamarin.Forms.Color, Xamarin.Forms.Color, Xamarin.Forms.Color, Xamarin.Forms.Color)
   nameWithType: PermissionPopup.Create(String, String, String, String, Color, Color, Color, Color)
-- uid: Forms9Patch.PermissionPopup.Create(VisualElement,System.String,System.String,System.String,System.String,Color,Color,Color,Color)
+- uid: Forms9Patch.PermissionPopup.Create(Xamarin.Forms.VisualElement,System.String,System.String,System.String,System.String,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color)
   name: Create(VisualElement, String, String, String, String, Color, Color, Color, Color)
-  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_Create_VisualElement_System_String_System_String_System_String_System_String_Color_Color_Color_Color_
-  commentId: M:Forms9Patch.PermissionPopup.Create(VisualElement,System.String,System.String,System.String,System.String,Color,Color,Color,Color)
-  fullName: Forms9Patch.PermissionPopup.Create(VisualElement, System.String, System.String, System.String, System.String, Color, Color, Color, Color)
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_Create_Xamarin_Forms_VisualElement_System_String_System_String_System_String_System_String_Xamarin_Forms_Color_Xamarin_Forms_Color_Xamarin_Forms_Color_Xamarin_Forms_Color_
+  commentId: M:Forms9Patch.PermissionPopup.Create(Xamarin.Forms.VisualElement,System.String,System.String,System.String,System.String,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color,Xamarin.Forms.Color)
+  fullName: Forms9Patch.PermissionPopup.Create(Xamarin.Forms.VisualElement, System.String, System.String, System.String, System.String, Xamarin.Forms.Color, Xamarin.Forms.Color, Xamarin.Forms.Color, Xamarin.Forms.Color)
   nameWithType: PermissionPopup.Create(VisualElement, String, String, String, String, Color, Color, Color, Color)
 - uid: Forms9Patch.PermissionPopup.Create*
   name: Create
@@ -9785,6 +9878,23 @@ references:
   fullName: Forms9Patch.PopupBase.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: PopupBase.IShape.ExtendedElementShape
   nameWithType.vb: PopupBase.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.PopupBase.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.PopupBase.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.PopupBase.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: PopupBase.IShape.ShadowPadding()
+  nameWithType.vb: PopupBase.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.PopupBase.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.PopupBase.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.PopupBase.Forms9Patch.IShape.ShadowPadding
+  nameWithType: PopupBase.IShape.ShadowPadding
+  nameWithType.vb: PopupBase.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.PopupBase.HasShadow
   name: HasShadow
   href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_HasShadow
@@ -10120,11 +10230,11 @@ references:
   commentId: T:Forms9Patch.RectangleExtensions
   fullName: Forms9Patch.RectangleExtensions
   nameWithType: RectangleExtensions
-- uid: Forms9Patch.RectangleExtensions.ToString(Rectangle)
+- uid: Forms9Patch.RectangleExtensions.ToString(Xamarin.Forms.Rectangle)
   name: ToString(Rectangle)
-  href: api/Forms9Patch.RectangleExtensions.html#Forms9Patch_RectangleExtensions_ToString_Rectangle_
-  commentId: M:Forms9Patch.RectangleExtensions.ToString(Rectangle)
-  fullName: Forms9Patch.RectangleExtensions.ToString(Rectangle)
+  href: api/Forms9Patch.RectangleExtensions.html#Forms9Patch_RectangleExtensions_ToString_Xamarin_Forms_Rectangle_
+  commentId: M:Forms9Patch.RectangleExtensions.ToString(Xamarin.Forms.Rectangle)
+  fullName: Forms9Patch.RectangleExtensions.ToString(Xamarin.Forms.Rectangle)
   nameWithType: RectangleExtensions.ToString(Rectangle)
 - uid: Forms9Patch.RectangleExtensions.ToString*
   name: ToString
@@ -10239,6 +10349,23 @@ references:
   fullName: Forms9Patch.RelativeLayout.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: RelativeLayout.IShape.ExtendedElementShape
   nameWithType.vb: RelativeLayout.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.RelativeLayout.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.RelativeLayout.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.RelativeLayout.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: RelativeLayout.IShape.ShadowPadding()
+  nameWithType.vb: RelativeLayout.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.RelativeLayout.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.RelativeLayout.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.RelativeLayout.Forms9Patch.IShape.ShadowPadding
+  nameWithType: RelativeLayout.IShape.ShadowPadding
+  nameWithType.vb: RelativeLayout.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.RelativeLayout.HasShadow
   name: HasShadow
   href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_HasShadow
@@ -10418,11 +10545,11 @@ references:
   commentId: F:Forms9Patch.RelativeLayout.ShadowInvertedProperty
   fullName: Forms9Patch.RelativeLayout.ShadowInvertedProperty
   nameWithType: RelativeLayout.ShadowInvertedProperty
-- uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: RelativeLayout.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -10431,11 +10558,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildAdded
   nameWithType: RelativeLayout.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.RelativeLayout.html#Forms9Patch_RelativeLayout_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: RelativeLayout.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.RelativeLayout.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -10463,11 +10590,11 @@ references:
   commentId: T:Forms9Patch.RootPage
   fullName: Forms9Patch.RootPage
   nameWithType: RootPage
-- uid: Forms9Patch.RootPage.#ctor(Page)
+- uid: Forms9Patch.RootPage.#ctor(Xamarin.Forms.Page)
   name: RootPage(Page)
-  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage__ctor_Page_
-  commentId: M:Forms9Patch.RootPage.#ctor(Page)
-  fullName: Forms9Patch.RootPage.RootPage(Page)
+  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage__ctor_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.RootPage.#ctor(Xamarin.Forms.Page)
+  fullName: Forms9Patch.RootPage.RootPage(Xamarin.Forms.Page)
   nameWithType: RootPage.RootPage(Page)
 - uid: Forms9Patch.RootPage.#ctor*
   name: RootPage
@@ -10476,11 +10603,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.RootPage.RootPage
   nameWithType: RootPage.RootPage
-- uid: Forms9Patch.RootPage.Create(Page)
+- uid: Forms9Patch.RootPage.Create(Xamarin.Forms.Page)
   name: Create(Page)
-  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage_Create_Page_
-  commentId: M:Forms9Patch.RootPage.Create(Page)
-  fullName: Forms9Patch.RootPage.Create(Page)
+  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage_Create_Xamarin_Forms_Page_
+  commentId: M:Forms9Patch.RootPage.Create(Xamarin.Forms.Page)
+  fullName: Forms9Patch.RootPage.Create(Xamarin.Forms.Page)
   nameWithType: RootPage.Create(Page)
 - uid: Forms9Patch.RootPage.Create*
   name: Create
@@ -10614,18 +10741,18 @@ references:
   commentId: M:Forms9Patch.Segment.#ctor(System.String,Forms9Patch.Image)
   fullName: Forms9Patch.Segment.Segment(System.String, Forms9Patch.Image)
   nameWithType: Segment.Segment(String, Image)
-- uid: Forms9Patch.Segment.#ctor(System.String,System.String,Assembly)
+- uid: Forms9Patch.Segment.#ctor(System.String,System.String,System.Reflection.Assembly)
   name: Segment(String, String, Assembly)
-  href: api/Forms9Patch.Segment.html#Forms9Patch_Segment__ctor_System_String_System_String_Assembly_
-  commentId: M:Forms9Patch.Segment.#ctor(System.String,System.String,Assembly)
-  fullName: Forms9Patch.Segment.Segment(System.String, System.String, Assembly)
+  href: api/Forms9Patch.Segment.html#Forms9Patch_Segment__ctor_System_String_System_String_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.Segment.#ctor(System.String,System.String,System.Reflection.Assembly)
+  fullName: Forms9Patch.Segment.Segment(System.String, System.String, System.Reflection.Assembly)
   nameWithType: Segment.Segment(String, String, Assembly)
 - uid: Forms9Patch.Segment.#ctor(System.String,Xamarin.Forms.ImageSource)
-  name: Segment(String, Xamarin.Forms.ImageSource)
+  name: Segment(String, ImageSource)
   href: api/Forms9Patch.Segment.html#Forms9Patch_Segment__ctor_System_String_Xamarin_Forms_ImageSource_
   commentId: M:Forms9Patch.Segment.#ctor(System.String,Xamarin.Forms.ImageSource)
   fullName: Forms9Patch.Segment.Segment(System.String, Xamarin.Forms.ImageSource)
-  nameWithType: Segment.Segment(String, Xamarin.Forms.ImageSource)
+  nameWithType: Segment.Segment(String, ImageSource)
 - uid: Forms9Patch.Segment.#ctor*
   name: Segment
   href: api/Forms9Patch.Segment.html#Forms9Patch_Segment__ctor_
@@ -11800,11 +11927,11 @@ references:
   commentId: T:Forms9Patch.SelectedItemChangedEventArgs
   fullName: Forms9Patch.SelectedItemChangedEventArgs
   nameWithType: SelectedItemChangedEventArgs
-- uid: Forms9Patch.SelectedItemChangedEventArgs.#ctor(System.Object,System.Object,View)
+- uid: Forms9Patch.SelectedItemChangedEventArgs.#ctor(System.Object,System.Object,Xamarin.Forms.View)
   name: SelectedItemChangedEventArgs(Object, Object, View)
-  href: api/Forms9Patch.SelectedItemChangedEventArgs.html#Forms9Patch_SelectedItemChangedEventArgs__ctor_System_Object_System_Object_View_
-  commentId: M:Forms9Patch.SelectedItemChangedEventArgs.#ctor(System.Object,System.Object,View)
-  fullName: Forms9Patch.SelectedItemChangedEventArgs.SelectedItemChangedEventArgs(System.Object, System.Object, View)
+  href: api/Forms9Patch.SelectedItemChangedEventArgs.html#Forms9Patch_SelectedItemChangedEventArgs__ctor_System_Object_System_Object_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.SelectedItemChangedEventArgs.#ctor(System.Object,System.Object,Xamarin.Forms.View)
+  fullName: Forms9Patch.SelectedItemChangedEventArgs.SelectedItemChangedEventArgs(System.Object, System.Object, Xamarin.Forms.View)
   nameWithType: SelectedItemChangedEventArgs.SelectedItemChangedEventArgs(Object, Object, View)
 - uid: Forms9Patch.SelectedItemChangedEventArgs.#ctor*
   name: SelectedItemChangedEventArgs
@@ -12136,11 +12263,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.SliderStepSizeEffect.SliderStepSizeEffect
   nameWithType: SliderStepSizeEffect.SliderStepSizeEffect
-- uid: Forms9Patch.SliderStepSizeEffect.ApplyTo(Slider,Assembly)
+- uid: Forms9Patch.SliderStepSizeEffect.ApplyTo(Xamarin.Forms.Slider,System.Reflection.Assembly)
   name: ApplyTo(Slider, Assembly)
-  href: api/Forms9Patch.SliderStepSizeEffect.html#Forms9Patch_SliderStepSizeEffect_ApplyTo_Slider_Assembly_
-  commentId: M:Forms9Patch.SliderStepSizeEffect.ApplyTo(Slider,Assembly)
-  fullName: Forms9Patch.SliderStepSizeEffect.ApplyTo(Slider, Assembly)
+  href: api/Forms9Patch.SliderStepSizeEffect.html#Forms9Patch_SliderStepSizeEffect_ApplyTo_Xamarin_Forms_Slider_System_Reflection_Assembly_
+  commentId: M:Forms9Patch.SliderStepSizeEffect.ApplyTo(Xamarin.Forms.Slider,System.Reflection.Assembly)
+  fullName: Forms9Patch.SliderStepSizeEffect.ApplyTo(Xamarin.Forms.Slider, System.Reflection.Assembly)
   nameWithType: SliderStepSizeEffect.ApplyTo(Slider, Assembly)
 - uid: Forms9Patch.SliderStepSizeEffect.ApplyTo*
   name: ApplyTo
@@ -12274,6 +12401,23 @@ references:
   fullName: Forms9Patch.StackLayout.Forms9Patch.IShape.ExtendedElementShape
   nameWithType: StackLayout.IShape.ExtendedElementShape
   nameWithType.vb: StackLayout.Forms9Patch.IShape.ExtendedElementShape
+- uid: Forms9Patch.StackLayout.Forms9Patch#IShape#ShadowPadding
+  name: IShape.ShadowPadding()
+  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_Forms9Patch_IShape_ShadowPadding
+  commentId: M:Forms9Patch.StackLayout.Forms9Patch#IShape#ShadowPadding
+  name.vb: Forms9Patch.IShape.ShadowPadding()
+  fullName: Forms9Patch.StackLayout.Forms9Patch.IShape.ShadowPadding()
+  nameWithType: StackLayout.IShape.ShadowPadding()
+  nameWithType.vb: StackLayout.Forms9Patch.IShape.ShadowPadding()
+- uid: Forms9Patch.StackLayout.Forms9Patch#IShape#ShadowPadding*
+  name: IShape.ShadowPadding
+  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_Forms9Patch_IShape_ShadowPadding_
+  commentId: Overload:Forms9Patch.StackLayout.Forms9Patch#IShape#ShadowPadding
+  isSpec: "True"
+  name.vb: Forms9Patch.IShape.ShadowPadding
+  fullName: Forms9Patch.StackLayout.Forms9Patch.IShape.ShadowPadding
+  nameWithType: StackLayout.IShape.ShadowPadding
+  nameWithType.vb: StackLayout.Forms9Patch.IShape.ShadowPadding
 - uid: Forms9Patch.StackLayout.HasShadow
   name: HasShadow
   href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_HasShadow
@@ -12453,11 +12597,11 @@ references:
   commentId: F:Forms9Patch.StackLayout.ShadowInvertedProperty
   fullName: Forms9Patch.StackLayout.ShadowInvertedProperty
   nameWithType: StackLayout.ShadowInvertedProperty
-- uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(View)
+- uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildAdded(View)
-  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_ShouldInvalidateOnChildAdded_View_
-  commentId: M:Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(View)
-  fullName: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(View)
+  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_ShouldInvalidateOnChildAdded_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
+  fullName: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)
   nameWithType: StackLayout.ShouldInvalidateOnChildAdded(View)
 - uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded*
   name: ShouldInvalidateOnChildAdded
@@ -12466,11 +12610,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.StackLayout.ShouldInvalidateOnChildAdded
   nameWithType: StackLayout.ShouldInvalidateOnChildAdded
-- uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(View)
+- uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   name: ShouldInvalidateOnChildRemoved(View)
-  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_ShouldInvalidateOnChildRemoved_View_
-  commentId: M:Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(View)
-  fullName: Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(View)
+  href: api/Forms9Patch.StackLayout.html#Forms9Patch_StackLayout_ShouldInvalidateOnChildRemoved_Xamarin_Forms_View_
+  commentId: M:Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
+  fullName: Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)
   nameWithType: StackLayout.ShouldInvalidateOnChildRemoved(View)
 - uid: Forms9Patch.StackLayout.ShouldInvalidateOnChildRemoved*
   name: ShouldInvalidateOnChildRemoved
@@ -13020,17 +13164,17 @@ references:
   commentId: T:Forms9Patch.TargetedMenu
   fullName: Forms9Patch.TargetedMenu
   nameWithType: TargetedMenu
-- uid: Forms9Patch.TargetedMenu.#ctor(VisualElement)
+- uid: Forms9Patch.TargetedMenu.#ctor(Xamarin.Forms.VisualElement)
   name: TargetedMenu(VisualElement)
-  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu__ctor_VisualElement_
-  commentId: M:Forms9Patch.TargetedMenu.#ctor(VisualElement)
-  fullName: Forms9Patch.TargetedMenu.TargetedMenu(VisualElement)
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.TargetedMenu.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.TargetedMenu.TargetedMenu(Xamarin.Forms.VisualElement)
   nameWithType: TargetedMenu.TargetedMenu(VisualElement)
-- uid: Forms9Patch.TargetedMenu.#ctor(VisualElement,Point)
+- uid: Forms9Patch.TargetedMenu.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
   name: TargetedMenu(VisualElement, Point)
-  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu__ctor_VisualElement_Point_
-  commentId: M:Forms9Patch.TargetedMenu.#ctor(VisualElement,Point)
-  fullName: Forms9Patch.TargetedMenu.TargetedMenu(VisualElement, Point)
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
+  commentId: M:Forms9Patch.TargetedMenu.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  fullName: Forms9Patch.TargetedMenu.TargetedMenu(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
   nameWithType: TargetedMenu.TargetedMenu(VisualElement, Point)
 - uid: Forms9Patch.TargetedMenu.#ctor*
   name: TargetedMenu
@@ -13039,22 +13183,22 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.TargetedMenu.TargetedMenu
   nameWithType: TargetedMenu.TargetedMenu
-- uid: Forms9Patch.TargetedMenu.Create(VisualElement,List{System.String})
+- uid: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement,System.Collections.Generic.List{System.String})
   name: Create(VisualElement, List<String>)
-  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_Create_VisualElement_List_System_String__
-  commentId: M:Forms9Patch.TargetedMenu.Create(VisualElement,List{System.String})
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_Create_Xamarin_Forms_VisualElement_System_Collections_Generic_List_System_String__
+  commentId: M:Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement,System.Collections.Generic.List{System.String})
   name.vb: Create(VisualElement, List(Of String))
-  fullName: Forms9Patch.TargetedMenu.Create(VisualElement, List<System.String>)
-  fullName.vb: Forms9Patch.TargetedMenu.Create(VisualElement, List(Of System.String))
+  fullName: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement, System.Collections.Generic.List<System.String>)
+  fullName.vb: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement, System.Collections.Generic.List(Of System.String))
   nameWithType: TargetedMenu.Create(VisualElement, List<String>)
   nameWithType.vb: TargetedMenu.Create(VisualElement, List(Of String))
-- uid: Forms9Patch.TargetedMenu.Create(VisualElement,Point,List{System.String})
+- uid: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Collections.Generic.List{System.String})
   name: Create(VisualElement, Point, List<String>)
-  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_Create_VisualElement_Point_List_System_String__
-  commentId: M:Forms9Patch.TargetedMenu.Create(VisualElement,Point,List{System.String})
+  href: api/Forms9Patch.TargetedMenu.html#Forms9Patch_TargetedMenu_Create_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Collections_Generic_List_System_String__
+  commentId: M:Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Collections.Generic.List{System.String})
   name.vb: Create(VisualElement, Point, List(Of String))
-  fullName: Forms9Patch.TargetedMenu.Create(VisualElement, Point, List<System.String>)
-  fullName.vb: Forms9Patch.TargetedMenu.Create(VisualElement, Point, List(Of System.String))
+  fullName: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Collections.Generic.List<System.String>)
+  fullName.vb: Forms9Patch.TargetedMenu.Create(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Collections.Generic.List(Of System.String))
   nameWithType: TargetedMenu.Create(VisualElement, Point, List<String>)
   nameWithType.vb: TargetedMenu.Create(VisualElement, Point, List(Of String))
 - uid: Forms9Patch.TargetedMenu.Create*
@@ -13216,11 +13360,11 @@ references:
   commentId: T:Forms9Patch.TargetedToast
   fullName: Forms9Patch.TargetedToast
   nameWithType: TargetedToast
-- uid: Forms9Patch.TargetedToast.#ctor(VisualElement)
+- uid: Forms9Patch.TargetedToast.#ctor(Xamarin.Forms.VisualElement)
   name: TargetedToast(VisualElement)
-  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast__ctor_VisualElement_
-  commentId: M:Forms9Patch.TargetedToast.#ctor(VisualElement)
-  fullName: Forms9Patch.TargetedToast.TargetedToast(VisualElement)
+  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.TargetedToast.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.TargetedToast.TargetedToast(Xamarin.Forms.VisualElement)
   nameWithType: TargetedToast.TargetedToast(VisualElement)
 - uid: Forms9Patch.TargetedToast.#ctor*
   name: TargetedToast
@@ -13229,11 +13373,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.TargetedToast.TargetedToast
   nameWithType: TargetedToast.TargetedToast
-- uid: Forms9Patch.TargetedToast.Create(VisualElement,System.String,System.String)
+- uid: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String)
   name: Create(VisualElement, String, String)
-  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast_Create_VisualElement_System_String_System_String_
-  commentId: M:Forms9Patch.TargetedToast.Create(VisualElement,System.String,System.String)
-  fullName: Forms9Patch.TargetedToast.Create(VisualElement, System.String, System.String)
+  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast_Create_Xamarin_Forms_VisualElement_System_String_System_String_
+  commentId: M:Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String)
+  fullName: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement, System.String, System.String)
   nameWithType: TargetedToast.Create(VisualElement, String, String)
 - uid: Forms9Patch.TargetedToast.Create*
   name: Create
@@ -13381,11 +13525,11 @@ references:
   commentId: M:Forms9Patch.TemplateSelectorBase.#ctor
   fullName: Forms9Patch.TemplateSelectorBase.TemplateSelectorBase()
   nameWithType: TemplateSelectorBase.TemplateSelectorBase()
-- uid: Forms9Patch.TemplateSelectorBase.#ctor(Type)
+- uid: Forms9Patch.TemplateSelectorBase.#ctor(System.Type)
   name: TemplateSelectorBase(Type)
-  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase__ctor_Type_
-  commentId: M:Forms9Patch.TemplateSelectorBase.#ctor(Type)
-  fullName: Forms9Patch.TemplateSelectorBase.TemplateSelectorBase(Type)
+  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase__ctor_System_Type_
+  commentId: M:Forms9Patch.TemplateSelectorBase.#ctor(System.Type)
+  fullName: Forms9Patch.TemplateSelectorBase.TemplateSelectorBase(System.Type)
   nameWithType: TemplateSelectorBase.TemplateSelectorBase(Type)
 - uid: Forms9Patch.TemplateSelectorBase.#ctor*
   name: TemplateSelectorBase
@@ -13400,11 +13544,11 @@ references:
   commentId: F:Forms9Patch.TemplateSelectorBase._cellTemplates
   fullName: Forms9Patch.TemplateSelectorBase._cellTemplates
   nameWithType: TemplateSelectorBase._cellTemplates
-- uid: Forms9Patch.TemplateSelectorBase.Add(Type,Type)
+- uid: Forms9Patch.TemplateSelectorBase.Add(System.Type,System.Type)
   name: Add(Type, Type)
-  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase_Add_Type_Type_
-  commentId: M:Forms9Patch.TemplateSelectorBase.Add(Type,Type)
-  fullName: Forms9Patch.TemplateSelectorBase.Add(Type, Type)
+  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase_Add_System_Type_System_Type_
+  commentId: M:Forms9Patch.TemplateSelectorBase.Add(System.Type,System.Type)
+  fullName: Forms9Patch.TemplateSelectorBase.Add(System.Type, System.Type)
   nameWithType: TemplateSelectorBase.Add(Type, Type)
 - uid: Forms9Patch.TemplateSelectorBase.Add*
   name: Add
@@ -13413,11 +13557,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.TemplateSelectorBase.Add
   nameWithType: TemplateSelectorBase.Add
-- uid: Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object,BindableObject)
+- uid: Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object,Xamarin.Forms.BindableObject)
   name: OnSelectTemplate(Object, BindableObject)
-  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase_OnSelectTemplate_System_Object_BindableObject_
-  commentId: M:Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object,BindableObject)
-  fullName: Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object, BindableObject)
+  href: api/Forms9Patch.TemplateSelectorBase.html#Forms9Patch_TemplateSelectorBase_OnSelectTemplate_System_Object_Xamarin_Forms_BindableObject_
+  commentId: M:Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object,Xamarin.Forms.BindableObject)
+  fullName: Forms9Patch.TemplateSelectorBase.OnSelectTemplate(System.Object, Xamarin.Forms.BindableObject)
   nameWithType: TemplateSelectorBase.OnSelectTemplate(Object, BindableObject)
 - uid: Forms9Patch.TemplateSelectorBase.OnSelectTemplate*
   name: OnSelectTemplate
@@ -13446,11 +13590,11 @@ references:
   fullName: Forms9Patch.ThicknessExtension
   nameWithType: ThicknessExtension
 - uid: Forms9Patch.ThicknessExtension.Description(Xamarin.Forms.Thickness)
-  name: Description(Xamarin.Forms.Thickness)
+  name: Description(Thickness)
   href: api/Forms9Patch.ThicknessExtension.html#Forms9Patch_ThicknessExtension_Description_Xamarin_Forms_Thickness_
   commentId: M:Forms9Patch.ThicknessExtension.Description(Xamarin.Forms.Thickness)
   fullName: Forms9Patch.ThicknessExtension.Description(Xamarin.Forms.Thickness)
-  nameWithType: ThicknessExtension.Description(Xamarin.Forms.Thickness)
+  nameWithType: ThicknessExtension.Description(Thickness)
 - uid: Forms9Patch.ThicknessExtension.Description*
   name: Description
   href: api/Forms9Patch.ThicknessExtension.html#Forms9Patch_ThicknessExtension_Description_
@@ -13470,11 +13614,11 @@ references:
   commentId: M:Forms9Patch.Toast.#ctor
   fullName: Forms9Patch.Toast.Toast()
   nameWithType: Toast.Toast()
-- uid: Forms9Patch.Toast.#ctor(VisualElement)
+- uid: Forms9Patch.Toast.#ctor(Xamarin.Forms.VisualElement)
   name: Toast(VisualElement)
-  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast__ctor_VisualElement_
-  commentId: M:Forms9Patch.Toast.#ctor(VisualElement)
-  fullName: Forms9Patch.Toast.Toast(VisualElement)
+  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast__ctor_Xamarin_Forms_VisualElement_
+  commentId: M:Forms9Patch.Toast.#ctor(Xamarin.Forms.VisualElement)
+  fullName: Forms9Patch.Toast.Toast(Xamarin.Forms.VisualElement)
   nameWithType: Toast.Toast(VisualElement)
 - uid: Forms9Patch.Toast.#ctor*
   name: Toast
@@ -13699,11 +13843,11 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.WebViewExtensions.CanPrint
   nameWithType: WebViewExtensions.CanPrint
-- uid: Forms9Patch.WebViewExtensions.Print(WebView,System.String)
+- uid: Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView,System.String)
   name: Print(WebView, String)
-  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_Print_WebView_System_String_
-  commentId: M:Forms9Patch.WebViewExtensions.Print(WebView,System.String)
-  fullName: Forms9Patch.WebViewExtensions.Print(WebView, System.String)
+  href: api/Forms9Patch.WebViewExtensions.html#Forms9Patch_WebViewExtensions_Print_Xamarin_Forms_WebView_System_String_
+  commentId: M:Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView,System.String)
+  fullName: Forms9Patch.WebViewExtensions.Print(Xamarin.Forms.WebView, System.String)
   nameWithType: WebViewExtensions.Print(WebView, String)
 - uid: Forms9Patch.WebViewExtensions.Print*
   name: Print
@@ -14156,17 +14300,17 @@ references:
   commentId: T:FormsGestures.ICoordTransform
   fullName: FormsGestures.ICoordTransform
   nameWithType: ICoordTransform
-- uid: FormsGestures.ICoordTransform.CoordTransform(VisualElement,Point,VisualElement)
+- uid: FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Point, VisualElement)
-  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_CoordTransform_VisualElement_Point_VisualElement_
-  commentId: M:FormsGestures.ICoordTransform.CoordTransform(VisualElement,Point,VisualElement)
-  fullName: FormsGestures.ICoordTransform.CoordTransform(VisualElement, Point, VisualElement)
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
   nameWithType: ICoordTransform.CoordTransform(VisualElement, Point, VisualElement)
-- uid: FormsGestures.ICoordTransform.CoordTransform(VisualElement,Rectangle,VisualElement)
+- uid: FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Rectangle, VisualElement)
-  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_CoordTransform_VisualElement_Rectangle_VisualElement_
-  commentId: M:FormsGestures.ICoordTransform.CoordTransform(VisualElement,Rectangle,VisualElement)
-  fullName: FormsGestures.ICoordTransform.CoordTransform(VisualElement, Rectangle, VisualElement)
+  href: api/FormsGestures.ICoordTransform.html#FormsGestures_ICoordTransform_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.ICoordTransform.CoordTransform(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle, Xamarin.Forms.VisualElement)
   nameWithType: ICoordTransform.CoordTransform(VisualElement, Rectangle, VisualElement)
 - uid: FormsGestures.ICoordTransform.CoordTransform*
   name: CoordTransform
@@ -14383,11 +14527,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.Listener.Element
   nameWithType: Listener.Element
-- uid: FormsGestures.Listener.For(VisualElement)
+- uid: FormsGestures.Listener.For(Xamarin.Forms.VisualElement)
   name: For(VisualElement)
-  href: api/FormsGestures.Listener.html#FormsGestures_Listener_For_VisualElement_
-  commentId: M:FormsGestures.Listener.For(VisualElement)
-  fullName: FormsGestures.Listener.For(VisualElement)
+  href: api/FormsGestures.Listener.html#FormsGestures_Listener_For_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.Listener.For(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.Listener.For(Xamarin.Forms.VisualElement)
   nameWithType: Listener.For(VisualElement)
 - uid: FormsGestures.Listener.For*
   name: For
@@ -16273,11 +16417,11 @@ references:
   commentId: T:FormsGestures.VisualElementExtensions
   fullName: FormsGestures.VisualElementExtensions
   nameWithType: VisualElementExtensions
-- uid: FormsGestures.VisualElementExtensions.BoundsToEleCoord(VisualElement,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
   name: BoundsToEleCoord(VisualElement, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToEleCoord_VisualElement_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.BoundsToEleCoord(VisualElement,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.BoundsToEleCoord(VisualElement, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.BoundsToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.BoundsToEleCoord(VisualElement, VisualElement)
 - uid: FormsGestures.VisualElementExtensions.BoundsToEleCoord*
   name: BoundsToEleCoord
@@ -16286,11 +16430,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.BoundsToEleCoord
   nameWithType: VisualElementExtensions.BoundsToEleCoord
-- uid: FormsGestures.VisualElementExtensions.BoundsToWinCoord(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
   name: BoundsToWinCoord(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToWinCoord_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.BoundsToWinCoord(VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.BoundsToWinCoord(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_BoundsToWinCoord_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.BoundsToWinCoord(Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.BoundsToWinCoord(VisualElement)
 - uid: FormsGestures.VisualElementExtensions.BoundsToWinCoord*
   name: BoundsToWinCoord
@@ -16299,17 +16443,17 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.BoundsToWinCoord
   nameWithType: VisualElementExtensions.BoundsToWinCoord
-- uid: FormsGestures.VisualElementExtensions.CoordTransform(VisualElement,Point,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Point, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_CoordTransform_VisualElement_Point_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.CoordTransform(VisualElement,Point,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.CoordTransform(VisualElement, Point, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.CoordTransform(VisualElement, Point, VisualElement)
-- uid: FormsGestures.VisualElementExtensions.CoordTransform(VisualElement,Rectangle,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle,Xamarin.Forms.VisualElement)
   name: CoordTransform(VisualElement, Rectangle, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_CoordTransform_VisualElement_Rectangle_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.CoordTransform(VisualElement,Rectangle,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.CoordTransform(VisualElement, Rectangle, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_CoordTransform_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.CoordTransform(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.CoordTransform(VisualElement, Rectangle, VisualElement)
 - uid: FormsGestures.VisualElementExtensions.CoordTransform*
   name: CoordTransform
@@ -16318,11 +16462,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.CoordTransform
   nameWithType: VisualElementExtensions.CoordTransform
-- uid: FormsGestures.VisualElementExtensions.FindChildrenWithProperty(VisualElement,System.String)
+- uid: FormsGestures.VisualElementExtensions.FindChildrenWithProperty(Xamarin.Forms.VisualElement,System.String)
   name: FindChildrenWithProperty(VisualElement, String)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithProperty_VisualElement_System_String_
-  commentId: M:FormsGestures.VisualElementExtensions.FindChildrenWithProperty(VisualElement,System.String)
-  fullName: FormsGestures.VisualElementExtensions.FindChildrenWithProperty(VisualElement, System.String)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithProperty_Xamarin_Forms_VisualElement_System_String_
+  commentId: M:FormsGestures.VisualElementExtensions.FindChildrenWithProperty(Xamarin.Forms.VisualElement,System.String)
+  fullName: FormsGestures.VisualElementExtensions.FindChildrenWithProperty(Xamarin.Forms.VisualElement, System.String)
   nameWithType: VisualElementExtensions.FindChildrenWithProperty(VisualElement, String)
 - uid: FormsGestures.VisualElementExtensions.FindChildrenWithProperty*
   name: FindChildrenWithProperty
@@ -16338,20 +16482,20 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType
   nameWithType: VisualElementExtensions.FindChildrenWithPropertyAndOfType
-- uid: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType``1(VisualElement,System.String,List{``0})
+- uid: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType``1(Xamarin.Forms.VisualElement,System.String,System.Collections.Generic.List{``0})
   name: FindChildrenWithPropertyAndOfType<T>(VisualElement, String, List<T>)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithPropertyAndOfType__1_VisualElement_System_String_List___0__
-  commentId: M:FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType``1(VisualElement,System.String,List{``0})
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithPropertyAndOfType__1_Xamarin_Forms_VisualElement_System_String_System_Collections_Generic_List___0__
+  commentId: M:FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType``1(Xamarin.Forms.VisualElement,System.String,System.Collections.Generic.List{``0})
   name.vb: FindChildrenWithPropertyAndOfType(Of T)(VisualElement, String, List(Of T))
-  fullName: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType<T>(VisualElement, System.String, List<T>)
-  fullName.vb: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType(Of T)(VisualElement, System.String, List(Of T))
+  fullName: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType<T>(Xamarin.Forms.VisualElement, System.String, System.Collections.Generic.List<T>)
+  fullName.vb: FormsGestures.VisualElementExtensions.FindChildrenWithPropertyAndOfType(Of T)(Xamarin.Forms.VisualElement, System.String, System.Collections.Generic.List(Of T))
   nameWithType: VisualElementExtensions.FindChildrenWithPropertyAndOfType<T>(VisualElement, String, List<T>)
   nameWithType.vb: VisualElementExtensions.FindChildrenWithPropertyAndOfType(Of T)(VisualElement, String, List(Of T))
-- uid: FormsGestures.VisualElementExtensions.FindChildWithFocus(Element)
+- uid: FormsGestures.VisualElementExtensions.FindChildWithFocus(Xamarin.Forms.Element)
   name: FindChildWithFocus(Element)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildWithFocus_Element_
-  commentId: M:FormsGestures.VisualElementExtensions.FindChildWithFocus(Element)
-  fullName: FormsGestures.VisualElementExtensions.FindChildWithFocus(Element)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildWithFocus_Xamarin_Forms_Element_
+  commentId: M:FormsGestures.VisualElementExtensions.FindChildWithFocus(Xamarin.Forms.Element)
+  fullName: FormsGestures.VisualElementExtensions.FindChildWithFocus(Xamarin.Forms.Element)
   nameWithType: VisualElementExtensions.FindChildWithFocus(Element)
 - uid: FormsGestures.VisualElementExtensions.FindChildWithFocus*
   name: FindChildWithFocus
@@ -16389,13 +16533,13 @@ references:
   fullName.vb: FormsGestures.VisualElementExtensions.FindVisualElementsOfType(Of T)()
   nameWithType: VisualElementExtensions.FindVisualElementsOfType<T>()
   nameWithType.vb: VisualElementExtensions.FindVisualElementsOfType(Of T)()
-- uid: FormsGestures.VisualElementExtensions.FindVisualElementsOfType``1(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.FindVisualElementsOfType``1(Xamarin.Forms.VisualElement)
   name: FindVisualElementsOfType<T>(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindVisualElementsOfType__1_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.FindVisualElementsOfType``1(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindVisualElementsOfType__1_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.FindVisualElementsOfType``1(Xamarin.Forms.VisualElement)
   name.vb: FindVisualElementsOfType(Of T)(VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.FindVisualElementsOfType<T>(VisualElement)
-  fullName.vb: FormsGestures.VisualElementExtensions.FindVisualElementsOfType(Of T)(VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.FindVisualElementsOfType<T>(Xamarin.Forms.VisualElement)
+  fullName.vb: FormsGestures.VisualElementExtensions.FindVisualElementsOfType(Of T)(Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.FindVisualElementsOfType<T>(VisualElement)
   nameWithType.vb: VisualElementExtensions.FindVisualElementsOfType(Of T)(VisualElement)
 - uid: FormsGestures.VisualElementExtensions.FindVisualElementsWithProperty(System.String)
@@ -16427,11 +16571,11 @@ references:
   fullName.vb: FormsGestures.VisualElementExtensions.FindVisualElementsWithPropertyAndOfType(Of T)(System.String)
   nameWithType: VisualElementExtensions.FindVisualElementsWithPropertyAndOfType<T>(String)
   nameWithType.vb: VisualElementExtensions.FindVisualElementsWithPropertyAndOfType(Of T)(String)
-- uid: FormsGestures.VisualElementExtensions.GestureListener(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.GestureListener(Xamarin.Forms.VisualElement)
   name: GestureListener(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_GestureListener_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.GestureListener(VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.GestureListener(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_GestureListener_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.GestureListener(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.GestureListener(Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.GestureListener(VisualElement)
 - uid: FormsGestures.VisualElementExtensions.GestureListener*
   name: GestureListener
@@ -16440,11 +16584,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.GestureListener
   nameWithType: VisualElementExtensions.GestureListener
-- uid: FormsGestures.VisualElementExtensions.HitTest(VisualElement,Point,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.HitTest(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: HitTest(VisualElement, Point, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_HitTest_VisualElement_Point_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.HitTest(VisualElement,Point,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.HitTest(VisualElement, Point, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_HitTest_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.HitTest(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.HitTest(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.HitTest(VisualElement, Point, VisualElement)
 - uid: FormsGestures.VisualElementExtensions.HitTest*
   name: HitTest
@@ -16453,11 +16597,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.HitTest
   nameWithType: VisualElementExtensions.HitTest
-- uid: FormsGestures.VisualElementExtensions.IsAncestorOf(Element,Element)
+- uid: FormsGestures.VisualElementExtensions.IsAncestorOf(Xamarin.Forms.Element,Xamarin.Forms.Element)
   name: IsAncestorOf(Element, Element)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsAncestorOf_Element_Element_
-  commentId: M:FormsGestures.VisualElementExtensions.IsAncestorOf(Element,Element)
-  fullName: FormsGestures.VisualElementExtensions.IsAncestorOf(Element, Element)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsAncestorOf_Xamarin_Forms_Element_Xamarin_Forms_Element_
+  commentId: M:FormsGestures.VisualElementExtensions.IsAncestorOf(Xamarin.Forms.Element,Xamarin.Forms.Element)
+  fullName: FormsGestures.VisualElementExtensions.IsAncestorOf(Xamarin.Forms.Element, Xamarin.Forms.Element)
   nameWithType: VisualElementExtensions.IsAncestorOf(Element, Element)
 - uid: FormsGestures.VisualElementExtensions.IsAncestorOf*
   name: IsAncestorOf
@@ -16466,11 +16610,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.IsAncestorOf
   nameWithType: VisualElementExtensions.IsAncestorOf
-- uid: FormsGestures.VisualElementExtensions.IsDescendentOf(Element,Element)
+- uid: FormsGestures.VisualElementExtensions.IsDescendentOf(Xamarin.Forms.Element,Xamarin.Forms.Element)
   name: IsDescendentOf(Element, Element)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Element_Element_
-  commentId: M:FormsGestures.VisualElementExtensions.IsDescendentOf(Element,Element)
-  fullName: FormsGestures.VisualElementExtensions.IsDescendentOf(Element, Element)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_IsDescendentOf_Xamarin_Forms_Element_Xamarin_Forms_Element_
+  commentId: M:FormsGestures.VisualElementExtensions.IsDescendentOf(Xamarin.Forms.Element,Xamarin.Forms.Element)
+  fullName: FormsGestures.VisualElementExtensions.IsDescendentOf(Xamarin.Forms.Element, Xamarin.Forms.Element)
   nameWithType: VisualElementExtensions.IsDescendentOf(Element, Element)
 - uid: FormsGestures.VisualElementExtensions.IsDescendentOf*
   name: IsDescendentOf
@@ -16479,11 +16623,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.IsDescendentOf
   nameWithType: VisualElementExtensions.IsDescendentOf
-- uid: FormsGestures.VisualElementExtensions.LocationToEleCoord(VisualElement,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
   name: LocationToEleCoord(VisualElement, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToEleCoord_VisualElement_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.LocationToEleCoord(VisualElement,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.LocationToEleCoord(VisualElement, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.LocationToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.LocationToEleCoord(VisualElement, VisualElement)
 - uid: FormsGestures.VisualElementExtensions.LocationToEleCoord*
   name: LocationToEleCoord
@@ -16492,11 +16636,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.LocationToEleCoord
   nameWithType: VisualElementExtensions.LocationToEleCoord
-- uid: FormsGestures.VisualElementExtensions.LocationToWinCoord(VisualElement)
+- uid: FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
   name: LocationToWinCoord(VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToWinCoord_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.LocationToWinCoord(VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.LocationToWinCoord(VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_LocationToWinCoord_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.LocationToWinCoord(Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.LocationToWinCoord(VisualElement)
 - uid: FormsGestures.VisualElementExtensions.LocationToWinCoord*
   name: LocationToWinCoord
@@ -16505,11 +16649,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.LocationToWinCoord
   nameWithType: VisualElementExtensions.LocationToWinCoord
-- uid: FormsGestures.VisualElementExtensions.ToEleCoord(VisualElement,Point,VisualElement)
+- uid: FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
   name: ToEleCoord(VisualElement, Point, VisualElement)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToEleCoord_VisualElement_Point_VisualElement_
-  commentId: M:FormsGestures.VisualElementExtensions.ToEleCoord(VisualElement,Point,VisualElement)
-  fullName: FormsGestures.VisualElementExtensions.ToEleCoord(VisualElement, Point, VisualElement)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_Xamarin_Forms_VisualElement_
+  commentId: M:FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,Xamarin.Forms.VisualElement)
+  fullName: FormsGestures.VisualElementExtensions.ToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, Xamarin.Forms.VisualElement)
   nameWithType: VisualElementExtensions.ToEleCoord(VisualElement, Point, VisualElement)
 - uid: FormsGestures.VisualElementExtensions.ToEleCoord*
   name: ToEleCoord
@@ -16518,11 +16662,11 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.ToEleCoord
   nameWithType: VisualElementExtensions.ToEleCoord
-- uid: FormsGestures.VisualElementExtensions.ToWinCoord(VisualElement,Point)
+- uid: FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
   name: ToWinCoord(VisualElement, Point)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToWinCoord_VisualElement_Point_
-  commentId: M:FormsGestures.VisualElementExtensions.ToWinCoord(VisualElement,Point)
-  fullName: FormsGestures.VisualElementExtensions.ToWinCoord(VisualElement, Point)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_ToWinCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  fullName: FormsGestures.VisualElementExtensions.ToWinCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
   nameWithType: VisualElementExtensions.ToWinCoord(VisualElement, Point)
 - uid: FormsGestures.VisualElementExtensions.ToWinCoord*
   name: ToWinCoord
@@ -16531,17 +16675,17 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.ToWinCoord
   nameWithType: VisualElementExtensions.ToWinCoord
-- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement,Point)
+- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
   name: WinToEleCoord(VisualElement, Point)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_VisualElement_Point_
-  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement,Point)
-  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement, Point)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_
+  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Point)
+  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Point)
   nameWithType: VisualElementExtensions.WinToEleCoord(VisualElement, Point)
-- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement,Rectangle)
+- uid: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle)
   name: WinToEleCoord(VisualElement, Rectangle)
-  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_VisualElement_Rectangle_
-  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement,Rectangle)
-  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(VisualElement, Rectangle)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_WinToEleCoord_Xamarin_Forms_VisualElement_Xamarin_Forms_Rectangle_
+  commentId: M:FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement,Xamarin.Forms.Rectangle)
+  fullName: FormsGestures.VisualElementExtensions.WinToEleCoord(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle)
   nameWithType: VisualElementExtensions.WinToEleCoord(VisualElement, Rectangle)
 - uid: FormsGestures.VisualElementExtensions.WinToEleCoord*
   name: WinToEleCoord

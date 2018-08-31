@@ -10,7 +10,8 @@ namespace Forms9Patch.UWP
         public static StorageFile ToStorageFile(this IMimeItem mimeItem)
         {
             StorageFile result = null;
-            if (MimeSharp.Current.Extension(mimeItem.MimeType) is List<string> extensions && extensions.Count>1 && extensions[0] is string ext)
+
+            if (MimeSharp.Current.Extension(mimeItem.MimeType) is List<string> extensions && extensions.Count>0 && extensions[0] is string ext)
             {
                 var value = mimeItem.Value;
                 if (value is string text)
