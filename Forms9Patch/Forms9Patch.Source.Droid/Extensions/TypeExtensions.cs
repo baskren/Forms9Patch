@@ -1,6 +1,7 @@
 using System;
 using Android.Content;
 using Android.Database;
+using System.IO;
 
 namespace Forms9Patch.Droid
 {
@@ -16,6 +17,8 @@ namespace Forms9Patch.Droid
                 return FieldType.Integer;
             if (type == typeof(string))
                 return FieldType.String;
+            if (type == typeof(FileInfo))
+                return FieldType.Blob;
             return FieldType.Null;
         }
 

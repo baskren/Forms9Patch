@@ -40,7 +40,11 @@ namespace Forms9Patch.Droid
         public static IMimeItem Parse(ClipData.Item item)
         {
             if (item.Uri != null && new AndroidUriMimeItem(item.Uri) is IMimeItem result && result.MimeType != null)
+            {
+                var mimeType = result.MimeType;
+                var value = result.Value;
                 return result;
+            }
             if (item.HtmlText != null)
                 return new AndroidHtmlMimeItem(item.HtmlText);
             if (item.TextFormatted != null && item.CoerceToHtmlText(Forms9Patch.Droid.Settings.Context) is string html)
@@ -120,7 +124,15 @@ namespace Forms9Patch.Droid
                 if (_cursor == null)
                 {
                     var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
-                    _cursor = (ICursor)loader.LoadInBackground();
+                    try
+                    {
+                        _cursor = (ICursor)loader.LoadInBackground();
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Exception: " + e.Message);
+                        return null;
+                    }
                 }
                 return _cursor;
             }
@@ -133,7 +145,8 @@ namespace Forms9Patch.Droid
             {
                 if (_value != null)
                     return _value;
-                if (Cursor.Count == 0 || Cursor.ColumnCount == 0)
+
+                if (Cursor == null || Cursor.Count == 0 || Cursor.ColumnCount == 0)
                     return null;
 
                 var typeString = Cursor.Extras.GetString("CSharpType");

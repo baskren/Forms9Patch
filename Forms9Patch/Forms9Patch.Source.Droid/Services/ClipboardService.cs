@@ -88,7 +88,11 @@ namespace Forms9Patch.Droid
                         ClipData.Item androidClipItem = null;
 
 
+                        // The following block was added to support copying images by intent. 
+                        // However, I have yet to see where it actually works with 3rd party apps.
+                        // Maybe I'm not doing it right?
 
+                        // START OF BLOCK
                         if (item.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) || item.Value is FileInfo)
                         {
                             Java.IO.File file = null;
@@ -115,7 +119,8 @@ namespace Forms9Patch.Droid
                                 androidClipItem = new ClipData.Item(intent);
                             }
                         }
-                        else
+                        if (androidClipItem == null)
+                            // END OF BLOCK
                             androidClipItem = ClipboardContentProvider.Add(item);
 
                         if (androidClipItem != null)
@@ -129,7 +134,7 @@ namespace Forms9Patch.Droid
                 }
                 _lastEntry = EntryCaching ? value : null;
                 _locallyUpdated = true;
-                Clipboard.PrimaryClip = clipData;
+                Clipboard.PrimaryClip = clipData ?? ClipData.NewPlainText("", "");
             }
         }
         #endregion
@@ -201,7 +206,10 @@ namespace Forms9Patch.Droid
             var item = ItemForUri(uri);
             if (item == null)
                 return null;
+            if (item.Value is FileInfo fileInfo)
+                return new PrimativeCursor(item.Value);
             var type = item.Value.GetType();
+
             if (type.ToAndroidFieldType() != FieldType.Null)
                 return new PrimativeCursor(item.Value);
             if (item.Value is IList list && type.IsGenericType)
@@ -696,6 +704,8 @@ namespace Forms9Patch.Droid
 
         public override byte[] GetBlob(int column)
         {
+            if (_primative is FileInfo fileInfo)
+                return System.IO.File.ReadAllBytes(fileInfo.FullName);
             if (_primative is byte[] byteArray)
                 return byteArray;
             if (_dictionary == null)
@@ -705,6 +715,8 @@ namespace Forms9Patch.Droid
 
         public override FieldType GetType(int column)
         {
+            if (_primative is FileInfo)
+                return typeof(byte[]).ToAndroidFieldType();
             if (_primative == null)
                 return FieldType.Null;
             if (_dictionary == null)
