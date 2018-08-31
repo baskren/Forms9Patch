@@ -185,6 +185,10 @@
       <Project>{6E53FEB1-1100-46AE-8013-17BBA35CC197}</Project>
       <Name>Xamarin.Forms.Platform.Android (Forwarders)</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

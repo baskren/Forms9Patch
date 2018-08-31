@@ -200,6 +200,10 @@
       <Project>{033330E2-8E6D-4C15-A9BF-820B9BCAF75A}</Project>
       <Name>Forms9PatchDemo.F9pSource</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

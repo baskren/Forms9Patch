@@ -84,11 +84,47 @@ namespace Forms9Patch.Droid
                 {
                     foreach (var item in entry.Items)
                     {
-                        var androidClipItem = ClipboardContentProvider.Add(item);
-                        if (clipData == null)
-                            clipData = new ClipData(value.Description, entry.MimeTypes().ToArray(), androidClipItem);
+
+                        ClipData.Item androidClipItem = null;
+
+
+
+                        if (item.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) || item.Value is FileInfo)
+                        {
+                            Java.IO.File file = null;
+
+                            if (item.Value is FileInfo fileInfo)
+                                file = new Java.IO.File(fileInfo.FullName);
+                            else if (item.Value is byte[] byteArray && MimeSharp.Current.Extension(item.MimeType) is List<string> extensions && extensions.Count > 0)
+                            {
+                                var ext = extensions[0];
+                                var fileName = Guid.NewGuid() + "." + ext;
+                                var dir = P42.Utils.Environment.TemporaryStoragePath;
+                                var path = Path.Combine(dir, fileName);
+                                System.IO.File.WriteAllBytes(path, byteArray);
+                                file = new Java.IO.File(path);
+                            }
+
+                            if (file != null && file.Exists())
+                            {
+                                Android.Net.Uri uri = Android.Net.Uri.FromFile(file);
+                                var intent = new Intent(Intent.ActionSend);
+                                intent.SetType(item.MimeType);
+                                intent.PutExtra(Intent.ExtraStream, uri);
+                                intent.SetFlags(ActivityFlags.GrantReadUriPermission);
+                                androidClipItem = new ClipData.Item(intent);
+                            }
+                        }
                         else
-                            clipData.AddItem(androidClipItem);
+                            androidClipItem = ClipboardContentProvider.Add(item);
+
+                        if (androidClipItem != null)
+                        {
+                            if (clipData == null)
+                                clipData = new ClipData(value.Description, entry.MimeTypes().ToArray(), androidClipItem);
+                            else
+                                clipData.AddItem(androidClipItem);
+                        }
                     }
                 }
                 _lastEntry = EntryCaching ? value : null;

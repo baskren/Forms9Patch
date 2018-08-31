@@ -163,6 +163,10 @@
       <Project>{B1CA1E82-65F0-4EED-BEB6-E133FBD2C4D9}</Project>
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.280\build\netstandard1.0\Xamarin.Forms.targets')" />

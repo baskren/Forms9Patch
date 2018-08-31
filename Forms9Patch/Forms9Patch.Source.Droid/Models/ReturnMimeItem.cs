@@ -47,7 +47,37 @@ namespace Forms9Patch.Droid
                 return new AndroidHtmlMimeItem(html);
             if (item.Text != null)
                 return new AndroidTextMimeItem(item.Text);
+            if (item.Intent != null)
+                return new AndroidIntentMimeItem(item.Intent);
             return null;
+        }
+    }
+
+    class AndroidIntentMimeItem : IMimeItem
+    {
+        Intent _intent;
+
+        public AndroidIntentMimeItem(Intent intent)
+        {
+            _intent = intent;
+            var extas = _intent.Extras;
+        }
+
+        public string MimeType => _intent.Type;
+
+        public object Value
+        {
+            get
+            {
+                if (_intent.Extras.Get(Intent.ExtraStream) is Android.Net.Uri uri)
+                {
+                    if (uri.Scheme == "file")
+                        return File.ReadAllBytes(uri.Path);
+                    return uri.Path;
+                }
+                System.Diagnostics.Debug.WriteLine("_intent.Extras.Get(Itent.ExtraStream)=[" + _intent.Extras.Get(Intent.ExtraStream + "]"));
+                return null;
+            }
         }
     }
 
