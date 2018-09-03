@@ -3,18 +3,26 @@
   <ItemGroup>
 
     <!-- CLIPBOARD -->
-    <Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
-      <Link>Services\ClipboardService.cs</Link>
+    <!--
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs">
+      <Link>Clipboard-Sharing\ClipboardService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\MimeItemCollection.cs">
-      <Link>Models\MimeItemCollection.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollection.cs">
+      <Link>Clipboard-Sharing\MimeItemCollection.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs">
-      <Link>Models\ReturnMimeItem.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollectionExtensions.cs">
+      <Link>Clipboard-Sharing\MimeItemCollectionExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
-      <Link>Extensions\TypeExtensions.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ReturnMimeItem.cs">
+      <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
     </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\SharingService.cs">
+      <Link>Clipboard-Sharing\SharingService.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs">
+      <Link>Clipboard-Sharing\TypeExtensions.cs</Link>
+    </Compile>
+    -->
 
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">

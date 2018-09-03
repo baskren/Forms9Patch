@@ -17,7 +17,6 @@ using System.Reflection;
 using Android.Content.Res;
 using Android.Content.PM;
 using Java.IO;
-//using Java.Lang;
 using P42.Utils;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.ClipboardService))]
@@ -74,64 +73,43 @@ namespace Forms9Patch.Droid
         {
             get
             {
-                return _lastEntry = _lastEntry ?? new Forms9Patch.Droid.ClipboardEntry();
+                return _lastEntry = _lastEntry ?? new Forms9Patch.Droid.MimeItemCollection();
             }
             set
             {
-                ClipboardContentProvider.Clear();
                 ClipData clipData = null;
-                if (value is Forms9Patch.MimeItemCollection entry)
+
+                var items = value.AsClipDataItems();
+                if (items.Count > 0)
                 {
-                    foreach (var item in entry.Items)
+                    clipData = new ClipData(value.Description, value.MimeTypes().ToArray(), items[0]);
+                    if (items.Count > 1)
                     {
+                        for (int i = 1; i < items.Count; i++)
+                            clipData.AddItem(items[i]);
+                    }
 
-                        ClipData.Item androidClipItem = null;
+                    string text = null;
+                    string html = null;
+                    foreach (var item in value.Items)
+                    {
+                        if (text == null && item.MimeType == "text/plain")
+                            text = (string)item.Value;
+                        if (html == null && item.MimeType == "text/html")
+                            html = (string)item.Value;
+                    }
 
-
-                        // The following block was added to support copying images by intent. 
-                        // However, I have yet to see where it actually works with 3rd party apps.
-                        // Maybe I'm not doing it right?
-
-                        // START OF BLOCK
-                        if (item.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) || item.Value is FileInfo)
-                        {
-                            Java.IO.File file = null;
-
-                            if (item.Value is FileInfo fileInfo)
-                                file = new Java.IO.File(fileInfo.FullName);
-                            else if (item.Value is byte[] byteArray && MimeSharp.Current.Extension(item.MimeType) is List<string> extensions && extensions.Count > 0)
-                            {
-                                var ext = extensions[0];
-                                var fileName = Guid.NewGuid() + "." + ext;
-                                var dir = P42.Utils.Environment.TemporaryStoragePath;
-                                var path = Path.Combine(dir, fileName);
-                                System.IO.File.WriteAllBytes(path, byteArray);
-                                file = new Java.IO.File(path);
-                            }
-
-                            if (file != null && file.Exists())
-                            {
-                                Android.Net.Uri uri = Android.Net.Uri.FromFile(file);
-                                var intent = new Intent(Intent.ActionSend);
-                                intent.SetType(item.MimeType);
-                                intent.PutExtra(Intent.ExtraStream, uri);
-                                intent.SetFlags(ActivityFlags.GrantReadUriPermission);
-                                androidClipItem = new ClipData.Item(intent);
-                            }
-                        }
-                        if (androidClipItem == null)
-                            // END OF BLOCK
-                            androidClipItem = ClipboardContentProvider.Add(item);
-
-                        if (androidClipItem != null)
-                        {
-                            if (clipData == null)
-                                clipData = new ClipData(value.Description, entry.MimeTypes().ToArray(), androidClipItem);
-                            else
-                                clipData.AddItem(androidClipItem);
-                        }
+                    if (text != null || html != null)
+                    {
+                        Intent intent = new Intent();
+                        intent.SetAction(Intent.ActionSend);
+                        if (html != null)
+                            intent.PutExtra(Intent.ExtraHtmlText, html);
+                        intent.PutExtra(Intent.ExtraText, text ?? html);
+                        clipData.AddItem(new ClipData.Item(intent));
                     }
                 }
+
                 _lastEntry = EntryCaching ? value : null;
                 _locallyUpdated = true;
                 Clipboard.PrimaryClip = clipData ?? ClipData.NewPlainText("", "");
@@ -139,7 +117,6 @@ namespace Forms9Patch.Droid
         }
         #endregion
     }
-
 
 
     #region ContentProvider
@@ -153,11 +130,18 @@ namespace Forms9Patch.Droid
 
         public static void Clear() => UriItems.Clear();
 
-        public static ClipData.Item Add(IMimeItem mimeItem)
+        public static ClipData.Item AddAsClipDataItem(IMimeItem mimeItem)
         {
             var uri = NextItemUri;
             UriItems[uri] = mimeItem;
             return new ClipData.Item(uri);
+        }
+
+        public static Android.Net.Uri AsAsAndroidUri(IMimeItem mimeItem)
+        {
+            var uri = NextItemUri;
+            UriItems[uri] = mimeItem;
+            return uri;
         }
 
 
@@ -219,9 +203,7 @@ namespace Forms9Patch.Droid
                 //if (fieldType != FieldType.Null)
                 return new IListCursor(item.MimeType, list, elementType);
             }
-            if (item.Value is IDictionary dictionary && type.IsGenericType)
-                return new PrimativeCursor(item.Value);
-            return null;
+            return item.Value is IDictionary dictionary && type.IsGenericType ? new PrimativeCursor(item.Value) : null;
         }
 
         public override ICursor Query(Android.Net.Uri uri, string[] projection, Bundle queryArgs, CancellationSignal cancellationSignal)
@@ -309,8 +291,16 @@ namespace Forms9Patch.Droid
         public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts)
         {
             System.Diagnostics.Debug.WriteLine("OpenTypedAssetFile A");
-            var result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts);
-            return result;
+            try
+            {
+                var result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts);
+                return result;
+            }
+            catch (Exception)
+            {
+
+            }
+            return null;
         }
 
         public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts, CancellationSignal signal)
@@ -337,9 +327,11 @@ namespace Forms9Patch.Droid
 
         public override ParcelFileDescriptor OpenFile(Android.Net.Uri uri, string mode)
         {
+
             System.Diagnostics.Debug.WriteLine("OpenFile A");
 
             var item = ItemForUri(uri);
+
             var parcelFileMode = mode.Equals("rw", StringComparison.InvariantCultureIgnoreCase) ? ParcelFileMode.ReadWrite : ParcelFileMode.ReadOnly;
             Java.IO.File javaFile = null;
             if (item.Value is System.Uri itemUri && itemUri.AbsoluteUri.StartsWith("file://", StringComparison.InvariantCultureIgnoreCase))
@@ -409,8 +401,8 @@ namespace Forms9Patch.Droid
     class IListCursor : AbstractCursor
     {
         readonly IList _list;
-        string _mimeType;
-        FieldType _fieldType;
+        readonly string _mimeType;
+        readonly FieldType _fieldType;
         readonly Type _itemsType;
         readonly Type _keyType;
         readonly Type _valueType;
@@ -527,11 +519,7 @@ namespace Forms9Patch.Droid
         public override string GetString(int column)
         {
             if (_keyType == null)
-            {
-                if (_fieldType == FieldType.String)
-                    return (string)_list[Position];
-                return _list[Position].ToString();
-            }
+                return _fieldType == FieldType.String ? (string)_list[Position] : _list[Position].ToString();
             int index = 0;
             foreach (var value in ((IDictionary)_list[Position]).Values)
                 if (column == index++)
@@ -557,18 +545,14 @@ namespace Forms9Patch.Droid
                 if (_itemsType == null)
                     return FieldType.Null;
                 var fieldType = _itemsType.ToAndroidFieldType();
-                if (fieldType != FieldType.Null)
-                    return fieldType;
-                return FieldType.String;
+                return fieldType != FieldType.Null ? fieldType : FieldType.String;
             }
             int index = 0;
             foreach (var value in ((IDictionary)_list[Position]).Values)
                 if (column == index++)
                 {
                     var fieldType = value.GetType().ToAndroidFieldType();
-                    if (fieldType != FieldType.Null)
-                        return fieldType;
-                    return FieldType.String;
+                    return fieldType != FieldType.Null ? fieldType : FieldType.String;
                 }
             throw new Exception("Invalid column index (" + column + ") for IDictionary at Position (" + Position + ")");
         }

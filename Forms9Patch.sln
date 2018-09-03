@@ -248,22 +248,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", 
 		Forms9Patch\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs
-		Forms9Patch\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{AE5E7CFB-8152-4111-BDE3-F537559AE2FA}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.Droid\Models\BaselineSpan.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\BaselineSpan.cs
-		Forms9Patch\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Models\FontManagment.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\FontManagment.cs
-		Forms9Patch\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.Droid\Models\Settings.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformViews", "PlatformViews", "{7CE43EAC-9930-4FF2-82F2-282074CA2C1D}"
 	ProjectSection(SolutionItems) = preProject
-		Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PRelativeLayout-DELETEME.cs = Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PRelativeLayout-DELETEME.cs
 		Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs = Forms9Patch\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs
 	EndProjectSection
 EndProject
@@ -278,7 +274,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{110D2C00-17C6-466B-B5EF-44501BC3E9FF}"
 	ProjectSection(SolutionItems) = preProject
 		Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs
-		Forms9Patch\Forms9Patch.Source.Droid\Services\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\ClipboardService.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\DescendentBounds.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\FontService.cs
 		Forms9Patch\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs = Forms9Patch\Forms9Patch.Source.Droid\Services\HtmlToPngService.cs
@@ -738,7 +733,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clipboard-Sharing", "Clipbo
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs
 	EndProjectSection
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Xamarin.Flex", "Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.shproj", "{9C846525-E1EB-4250-AC42-5B62A4203943}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clipboard-Sharing", "Clipboard-Sharing", "{3EAF1888-3E91-4153-BD0B-9A546B39C3B9}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollection.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollection.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\ReturnMimeItem.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\ReturnMimeItem.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\SharingService.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\SharingService.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs
+		Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollectionExtensions.cs = Forms9Patch\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollectionExtensions.cs
+	EndProjectSection
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Xamarin.Flex", "Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.shproj", "{FD2337B8-C733-479A-A82F-4A1F439CDB85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5023,7 +5028,8 @@ Global
 		{39B3457F-01D8-43D0-8E84-D8C4F73CF48D} = {DFA7F7E5-DD59-488E-BFD5-7473FFAB0C0D}
 		{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7} = {FC5C9F7C-1E45-47D6-9C7B-A25BB39C32B3}
 		{E615C46E-0A91-461F-9119-F311A63DF2F6} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
-		{9C846525-E1EB-4250-AC42-5B62A4203943} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
+		{3EAF1888-3E91-4153-BD0B-9A546B39C3B9} = {92F755F5-DC5B-4F85-A9CB-DE66806E4308}
+		{FD2337B8-C733-479A-A82F-4A1F439CDB85} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FAAF233-96A8-4005-93A0-A34046BAEFE8}
