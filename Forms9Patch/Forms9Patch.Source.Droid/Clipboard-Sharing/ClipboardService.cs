@@ -69,8 +69,8 @@ namespace Forms9Patch.Droid
         */
 
         #region Entry
-        IClipboardEntry _lastEntry;
-        public IClipboardEntry Entry
+        IMimeItemCollection _lastEntry;
+        public IMimeItemCollection Entry
         {
             get
             {
@@ -80,7 +80,7 @@ namespace Forms9Patch.Droid
             {
                 ClipboardContentProvider.Clear();
                 ClipData clipData = null;
-                if (value is Forms9Patch.ClipboardEntry entry)
+                if (value is Forms9Patch.MimeItemCollection entry)
                 {
                     foreach (var item in entry.Items)
                     {

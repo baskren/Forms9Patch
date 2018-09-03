@@ -3,11 +3,18 @@
   <ItemGroup>
 
     <!-- CLIPBOARD -->
-    <!--
     <Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
       <Link>Services\ClipboardService.cs</Link>
     </Compile>
-  -->
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\MimeItemCollection.cs">
+      <Link>Models\MimeItemCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs">
+      <Link>Models\ReturnMimeItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
+      <Link>Extensions\TypeExtensions.cs</Link>
+    </Compile>
 
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">
@@ -33,11 +40,6 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs">
       <Link>Extensions\MeasureSpecFactory.cs</Link>
     </Compile>
-    <!--
-    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
-      <Link>Extensions\TypeExtensions.cs</Link>
-    </Compile>
-  -->
 
     <!-- HARDWARE KEY LISTENER -->
     <Compile Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs">
@@ -51,22 +53,12 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Models\BaselineSpan.cs">
       <Link>Models\BaselineSpan.cs</Link>
     </Compile>
-    <!--
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs">
-      <Link>Models\ClipboardEntry.cs</Link>
-    </Compile>
-  -->
     <Compile Include="..\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs">
       <Link>Models\CustomTypefaceSpan.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.Droid\Models\FontManagment.cs">
       <Link>Models\FontManagment.cs</Link>
     </Compile>
-    <!--
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs">
-      <Link>Models\ReturnMimeItem.cs</Link>
-    </Compile>
-  -->
     <Compile Include="..\Forms9Patch.Source.Droid\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </Compile>

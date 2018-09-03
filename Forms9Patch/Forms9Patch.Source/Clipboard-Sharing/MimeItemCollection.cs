@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// <summary>
     /// Base class that implements Forms9Patch.IClipboardEntry
     /// </summary>
-    public class ClipboardEntry : BaseClipboardEntry
+    public class MimeItemCollection : BaseMimeItemCollection
     {
         #region IClipboardEntry implemntation
         /// <summary>
@@ -45,7 +45,7 @@ namespace Forms9Patch
 
 
         #region Constructor
-        public ClipboardEntry()
+        public MimeItemCollection()
         {
             _items = new List<IMimeItem>();
         }
@@ -59,9 +59,9 @@ namespace Forms9Patch
         /// <param name="plainText"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public static ClipboardEntry ForPlainText(string plainText, string description = null)
+        public static MimeItemCollection ForPlainText(string plainText, string description = null)
         {
-            return new ClipboardEntry
+            return new MimeItemCollection
             {
                 PlainText = plainText,
                 Description = description
@@ -120,7 +120,7 @@ namespace Forms9Patch
 
 
     #region BaseClipboardEntry 
-    public abstract class BaseClipboardEntry : IClipboardEntry
+    public abstract class BaseMimeItemCollection : IMimeItemCollection
     {
         protected string _description;
         /// <summary>

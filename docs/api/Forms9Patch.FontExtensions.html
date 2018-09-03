@@ -91,53 +91,24 @@
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">FontExtensions</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_FontExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class FontExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class FontExtensions : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_InMathAlphanumericBlock_System_Int32_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.InMathAlphanumericBlock(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L25">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_FontExtensions_InMathAlphanumericBlock_" data-uid="Forms9Patch.FontExtensions.InMathAlphanumericBlock*"></a>
-  <h4 id="Forms9Patch_FontExtensions_InMathAlphanumericBlock_System_Int32_" data-uid="Forms9Patch.FontExtensions.InMathAlphanumericBlock(System.Int32)">InMathAlphanumericBlock(Int32)</h4>
+  <h4 id="Forms9Patch_FontExtensions_InMathAlphanumericBlock_Int32_" data-uid="Forms9Patch.FontExtensions.InMathAlphanumericBlock(Int32)">InMathAlphanumericBlock(Int32)</h4>
   <div class="markdown level1 summary"><p>Is Int32 char in the Unicode math alphanumeric block.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool InMathAlphanumericBlock(this int utf32Char)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool InMathAlphanumericBlock(this Int32 utf32Char)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -150,7 +121,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="xref">Int32</span></td>
         <td><span class="parametername">utf32Char</span></td>
         <td><p>Utf32 char.</p>
 </td>
@@ -173,13 +144,53 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineHeight(Forms9Patch.IFontElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L57">View Source</a>
-  </span>
+  
+  
+  <a id="Forms9Patch_FontExtensions_LineHeight_" data-uid="Forms9Patch.FontExtensions.LineHeight*"></a>
+  <h4 id="Forms9Patch_FontExtensions_LineHeight_Font_" data-uid="Forms9Patch.FontExtensions.LineHeight(Font)">LineHeight(Font)</h4>
+  <div class="markdown level1 summary"><p>Height of a line of text for the given font.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double LineHeight(this Font font)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Font</span></td>
+        <td><span class="parametername">font</span></td>
+        <td><p>Font.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><p>The height.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_FontExtensions_LineHeight_" data-uid="Forms9Patch.FontExtensions.LineHeight*"></a>
   <h4 id="Forms9Patch_FontExtensions_LineHeight_Forms9Patch_IFontElement_" data-uid="Forms9Patch.FontExtensions.LineHeight(Forms9Patch.IFontElement)">LineHeight(IFontElement)</h4>
   <div class="markdown level1 summary"><p>Height of a line of text for the given font.</p>
@@ -223,15 +234,10 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineHeight_System_String_System_Double_Xamarin_Forms_FontAttributes_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineHeight(System.String%2CSystem.Double%2CXamarin.Forms.FontAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L79">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_FontExtensions_LineHeight_" data-uid="Forms9Patch.FontExtensions.LineHeight*"></a>
-  <h4 id="Forms9Patch_FontExtensions_LineHeight_System_String_System_Double_Xamarin_Forms_FontAttributes_" data-uid="Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,Xamarin.Forms.FontAttributes)">LineHeight(String, Double, FontAttributes)</h4>
+  <h4 id="Forms9Patch_FontExtensions_LineHeight_System_String_System_Double_FontAttributes_" data-uid="Forms9Patch.FontExtensions.LineHeight(System.String,System.Double,FontAttributes)">LineHeight(String, Double, FontAttributes)</h4>
   <div class="markdown level1 summary"><p>Height of a line of text for the given font.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -262,7 +268,7 @@
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.fontattributes">FontAttributes</a></td>
+        <td><span class="xref">FontAttributes</span></td>
         <td><span class="parametername">fontAttributes</span></td>
         <td><p>Font attributes.</p>
 </td>
@@ -285,21 +291,16 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineHeight_Xamarin_Forms_Font_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineHeight(Xamarin.Forms.Font)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L67">View Source</a>
-  </span>
-  <a id="Forms9Patch_FontExtensions_LineHeight_" data-uid="Forms9Patch.FontExtensions.LineHeight*"></a>
-  <h4 id="Forms9Patch_FontExtensions_LineHeight_Xamarin_Forms_Font_" data-uid="Forms9Patch.FontExtensions.LineHeight(Xamarin.Forms.Font)">LineHeight(Font)</h4>
-  <div class="markdown level1 summary"><p>Height of a line of text for the given font.</p>
+  
+  
+  <a id="Forms9Patch_FontExtensions_LineSpace_" data-uid="Forms9Patch.FontExtensions.LineSpace*"></a>
+  <h4 id="Forms9Patch_FontExtensions_LineSpace_Font_" data-uid="Forms9Patch.FontExtensions.LineSpace(Font)">LineSpace(Font)</h4>
+  <div class="markdown level1 summary"><p>Lines the space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double LineHeight(this Font font)</code></pre>
+    <pre><code class="lang-csharp hljs">public static double LineSpace(this Font font)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -312,7 +313,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.font">Font</a></td>
+        <td><span class="xref">Font</span></td>
         <td><span class="parametername">font</span></td>
         <td><p>Font.</p>
 </td>
@@ -330,18 +331,13 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The height.</p>
+        <td><p>The space.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineSpace_Forms9Patch_IFontElement_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineSpace(Forms9Patch.IFontElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L89">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_FontExtensions_LineSpace_" data-uid="Forms9Patch.FontExtensions.LineSpace*"></a>
   <h4 id="Forms9Patch_FontExtensions_LineSpace_Forms9Patch_IFontElement_" data-uid="Forms9Patch.FontExtensions.LineSpace(Forms9Patch.IFontElement)">LineSpace(IFontElement)</h4>
   <div class="markdown level1 summary"><p>Lines the space.</p>
@@ -385,15 +381,10 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineSpace_System_String_System_Double_Xamarin_Forms_FontAttributes_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineSpace(System.String%2CSystem.Double%2CXamarin.Forms.FontAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L111">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_FontExtensions_LineSpace_" data-uid="Forms9Patch.FontExtensions.LineSpace*"></a>
-  <h4 id="Forms9Patch_FontExtensions_LineSpace_System_String_System_Double_Xamarin_Forms_FontAttributes_" data-uid="Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,Xamarin.Forms.FontAttributes)">LineSpace(String, Double, FontAttributes)</h4>
+  <h4 id="Forms9Patch_FontExtensions_LineSpace_System_String_System_Double_FontAttributes_" data-uid="Forms9Patch.FontExtensions.LineSpace(System.String,System.Double,FontAttributes)">LineSpace(String, Double, FontAttributes)</h4>
   <div class="markdown level1 summary"><p>Lines the space.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -424,7 +415,7 @@
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.fontattributes">FontAttributes</a></td>
+        <td><span class="xref">FontAttributes</span></td>
         <td><span class="parametername">fontAttributes</span></td>
         <td><p>Font attributes.</p>
 </td>
@@ -447,63 +438,8 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LineSpace_Xamarin_Forms_Font_.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LineSpace(Xamarin.Forms.Font)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L99">View Source</a>
-  </span>
-  <a id="Forms9Patch_FontExtensions_LineSpace_" data-uid="Forms9Patch.FontExtensions.LineSpace*"></a>
-  <h4 id="Forms9Patch_FontExtensions_LineSpace_Xamarin_Forms_Font_" data-uid="Forms9Patch.FontExtensions.LineSpace(Xamarin.Forms.Font)">LineSpace(Font)</h4>
-  <div class="markdown level1 summary"><p>Lines the space.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double LineSpace(this Font font)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.font">Font</a></td>
-        <td><span class="parametername">font</span></td>
-        <td><p>Font.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The space.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions_LoadedFontFamilies.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions.LoadedFontFamilies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L35">View Source</a>
-  </span>
+  
+  
   <a id="Forms9Patch_FontExtensions_LoadedFontFamilies_" data-uid="Forms9Patch.FontExtensions.LoadedFontFamilies*"></a>
   <h4 id="Forms9Patch_FontExtensions_LoadedFontFamilies" data-uid="Forms9Patch.FontExtensions.LoadedFontFamilies">LoadedFontFamilies()</h4>
   <div class="markdown level1 summary"><p>Provides a list of the currently loaded font families (included embedded resources) that are available.</p>
@@ -523,7 +459,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td><p>The font families.</p>
 </td>
       </tr>
@@ -536,12 +472,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/new/release-crash-uwp/apiSpec/new?filename=Forms9Patch_FontExtensions.md&amp;value=---%0Auid%3A%20Forms9Patch.FontExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/baskren/Forms9Patch/blob/release-crash-uwp/Forms9Patch/Forms9Patch.Source/Extensions/FontExtensions.cs/#L13" class="contribution-link">View Source</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

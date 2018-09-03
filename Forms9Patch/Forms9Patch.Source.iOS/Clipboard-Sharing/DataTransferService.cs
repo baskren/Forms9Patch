@@ -16,7 +16,7 @@ namespace Forms9Patch.iOS
 {
     public class DataTransferService : Forms9Patch.IDataTransfer
     {
-        public void Transfer(Forms9Patch.ClipboardEntry clipboardEntry)
+        public void Transfer(Forms9Patch.MimeItemCollection clipboardEntry)
         {
 
         }

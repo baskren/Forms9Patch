@@ -39,20 +39,6 @@
     </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Forms9Patch.Source.Droid\Services\ClipboardService.cs">
-      <Link>ClipboardService.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Extensions\TypeExtensions.cs">
-      <Link>TypeExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\ReturnMimeItem.cs">
-      <Link>ReturnMimeItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Models\ClipboardEntry.cs">
-      <Link>ClipboardEntry.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />

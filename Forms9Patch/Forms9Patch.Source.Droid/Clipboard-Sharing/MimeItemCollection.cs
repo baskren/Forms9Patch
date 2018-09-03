@@ -17,7 +17,7 @@ using System.Reflection;
 
 namespace Forms9Patch.Droid
 {
-    class ClipboardEntry : BaseClipboardEntry
+    class MimeItemCollection : BaseMimeItemCollection
     {
         #region Static implementation
         readonly internal static Dictionary<Android.Net.Uri, Forms9Patch.IMimeItem> UriItems = new Dictionary<Android.Net.Uri, IMimeItem>();

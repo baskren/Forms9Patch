@@ -4,6 +4,6 @@ namespace Forms9Patch
 {
     interface IDataTransfer
     {
-        void Transfer(ClipboardEntry clipboardEntry);
+        void Transfer(MimeItemCollection clipboardEntry);
     }
 }

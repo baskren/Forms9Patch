@@ -4,7 +4,7 @@ namespace Forms9Patch
 {
     interface IClipboardService
     {
-        IClipboardEntry Entry { get; set; }
+        IMimeItemCollection Entry { get; set; }
 
         bool EntryCaching { get; set; }
 

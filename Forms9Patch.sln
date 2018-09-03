@@ -728,17 +728,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeSharp", "MimeSharp\Mime
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clipboard-Sharing", "Clipboard-Sharing", "{E615C46E-0A91-461F-9119-F311A63DF2F6}"
 	ProjectSection(SolutionItems) = preProject
-		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardEntry.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardEntry.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs
-		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransfer.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransfer.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransferService.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransferService.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs
 		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemCollection.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemCollection.cs
+		Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs = Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs
 	EndProjectSection
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Xamarin.Flex", "Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.shproj", "{6995439D-9B30-424A-A742-A0D01C74428A}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Xamarin.Flex", "Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.shproj", "{9C846525-E1EB-4250-AC42-5B62A4203943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5023,7 +5023,7 @@ Global
 		{39B3457F-01D8-43D0-8E84-D8C4F73CF48D} = {DFA7F7E5-DD59-488E-BFD5-7473FFAB0C0D}
 		{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7} = {FC5C9F7C-1E45-47D6-9C7B-A25BB39C32B3}
 		{E615C46E-0A91-461F-9119-F311A63DF2F6} = {5371C977-B4EA-4E3F-A780-2F9B696C716C}
-		{6995439D-9B30-424A-A742-A0D01C74428A} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
+		{9C846525-E1EB-4250-AC42-5B62A4203943} = {0ACF2386-A71B-4A07-AD0C-D0227D3CC680}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4FAAF233-96A8-4005-93A0-A34046BAEFE8}

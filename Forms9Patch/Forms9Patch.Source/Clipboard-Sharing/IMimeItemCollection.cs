@@ -12,7 +12,7 @@ namespace Forms9Patch
     /// <summary>
     /// Interface for a Forms9Patch.ClipboardEntry
     /// </summary>
-    public interface IClipboardEntry
+    public interface IMimeItemCollection
     {
         /// <summary>
         /// Description of this ClipboardEntry  on clipboard (really only applies to Android)

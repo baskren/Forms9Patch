@@ -29,9 +29,9 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the current Entry on the clipboard
         /// </summary>
-        public static IClipboardEntry Entry
+        public static IMimeItemCollection Entry
         {
-            get => Service.Entry ?? new ClipboardEntry();
+            get => Service.Entry ?? new MimeItemCollection();
 
             set => Service.Entry = value;
         }

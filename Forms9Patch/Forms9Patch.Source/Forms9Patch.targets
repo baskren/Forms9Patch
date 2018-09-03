@@ -4,12 +4,14 @@
   <ItemGroup>
 
     <!-- ClipBoard -->
-    <Compile Include="..\Forms9Patch.Source\Clipboard\AsyncHelper.cs" Link="Clipboard\AsyncHelper.cs" />
-    <Compile Include="..\Forms9Patch.Source\Clipboard\Clipboard.cs" Link="Clipboard\Clipboard.cs" />
-    <Compile Include="..\Forms9Patch.Source\Clipboard\ClipboardEntry.cs" Link="Clipboard\ClipboardEntry.cs" />
-    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntry.cs" Link="Clipboard\IClipboardEntry.cs" />
-    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardEntryExtensions.cs" Link="Clipboard\IClipboardEntryExtensions.cs" />
-    <Compile Include="..\Forms9Patch.Source\Clipboard\IClipboardService.cs" Link="Clipboard\IClipboardService.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\AsyncHelper.cs" Link="Clipboard-Sharing\AsyncHelper.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\Clipboard.cs" Link="Clipboard-Sharing\Clipboard.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IClipboardService.cs" Link="Clipboard-Sharing\IClipboardService.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\ISharingService.cs" Link="Clipboard-Sharing\ISharingService.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\MimeItemCollection.cs" Link="Clipboard-Sharing\MimeItemCollection.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IMimeItemCollection.cs" Link="Clipboard-Sharing\IMimeItemCollection.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IMimeItemCollectionExtensions.cs" Link="Clipboard-Sharing\IMimeItemCollectionExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\Sharing.cs" Link="Clipboard-Sharing\Sharing.cs" />
 
     <!-- DataTransfer -->
     <Compile Include="..\Forms9Patch.Source\DataTransfer\DataTransfer.cs" Link="DataTransfer\DataTransfer.cs" />

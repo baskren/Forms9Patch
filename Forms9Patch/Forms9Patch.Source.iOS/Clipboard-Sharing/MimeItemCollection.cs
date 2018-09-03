@@ -8,7 +8,7 @@ using MobileCoreServices;
 
 namespace Forms9Patch.iOS
 {
-    class ClipboardEntry : BaseClipboardEntry
+    class MimeItemCollection : BaseMimeItemCollection
     {
         public override string Description => UIPasteboard.General?.Name;
 

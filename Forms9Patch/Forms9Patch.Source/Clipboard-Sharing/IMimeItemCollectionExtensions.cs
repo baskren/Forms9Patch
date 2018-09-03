@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace Forms9Patch
 {
-    public static class IClipboardEntryExtensions
+    public static class IMimeItemCollectionExtensions
     {
-        public static List<string> MimeTypes(this IClipboardEntry clipboardEntry)
+        public static List<string> MimeTypes(this IMimeItemCollection clipboardEntry)
         {
             return clipboardEntry.Items.Select((mimeItem) => mimeItem.MimeType).ToList();
         }
 
-        public static MimeItem<T> GetFirstMimeItem<T>(this IClipboardEntry clipboardEntry, string mimeType)
+        public static MimeItem<T> GetFirstMimeItem<T>(this IMimeItemCollection clipboardEntry, string mimeType)
         {
             //MimeItem<T> result = null;
 
@@ -32,7 +32,7 @@ namespace Forms9Patch
             return null;
         }
 
-        public static List<MimeItem<T>> GetMimeItems<T>(this IClipboardEntry clipboardEntry, string mimeType)
+        public static List<MimeItem<T>> GetMimeItems<T>(this IMimeItemCollection clipboardEntry, string mimeType)
         {
             mimeType = mimeType.ToLower();
             var mimeItems = new List<MimeItem<T>>();
@@ -49,7 +49,7 @@ namespace Forms9Patch
             return mimeItems;
         }
 
-        public static byte[] AddBytesFromFile(this Forms9Patch.ClipboardEntry clipboardEntry, string mimeType, string path)
+        public static byte[] AddBytesFromFile(this Forms9Patch.MimeItemCollection clipboardEntry, string mimeType, string path)
         {
             if (File.ReadAllBytes(path) is byte[] byteArray)
             {
