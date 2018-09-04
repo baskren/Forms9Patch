@@ -13,7 +13,7 @@ namespace Forms9Patch
     /// </summary>
     public class MimeItemCollection : BaseMimeItemCollection
     {
-        #region IClipboardEntry implemntation
+        #region IMimeItemCollection implemntation
         /// <summary>
         /// Short, descriptive text that can be used by app to display
         /// to the user what this data represents.
@@ -21,6 +21,7 @@ namespace Forms9Patch
         /// <value>The description.</value>
         public new string Description { get; set; } = ApplicationInfoService.Name + " Clipboard";
 
+        bool _plainTextSet;
         /// <summary>
         /// Gets or sets the plain text representation of this data (if any)
         /// </summary>
@@ -28,7 +29,13 @@ namespace Forms9Patch
         public new string PlainText
         {
             get => base.PlainText;
-            set => AddValue("text/plain", value);
+            set
+            {
+                if (_items.Count > 0 && _items[0].MimeType == "text/plain")
+                    _items.RemoveAt(0);
+                _items.Insert(0, new MimeItem("text/plain", value));
+                _plainTextSet = true;
+            }
         }
 
         /// <summary>
@@ -38,7 +45,18 @@ namespace Forms9Patch
         public new string HtmlText
         {
             get => base.HtmlText;
-            set => AddValue("text/html", value);
+            set
+            {
+                if (_items.Count > 1 && _items[0].MimeType == "text/plain" && _items[1].MimeType == "text/html")
+                {
+                    _items.RemoveAt(1);
+                    if (!_plainTextSet)
+                        _items.RemoveAt(0);
+                }
+                if (!_plainTextSet)
+                    _items.Insert(0, new MimeItem("text/plain", value));
+                _items.Insert(1, new MimeItem("text/html", value));
+            }
         }
 
         #endregion
@@ -74,7 +92,10 @@ namespace Forms9Patch
         /// <typeparam name="T"></typeparam>
         /// <param name="mimeType"></param>
         /// <param name="value"></param>
-        public void AddValue(string mimeType, object value) => Items.Add(new MimeItem(mimeType, value));
+        public void AddValue(string mimeType, object value)
+        {
+            Items.Add(new MimeItem(mimeType, value));
+        }
         #endregion
 
 

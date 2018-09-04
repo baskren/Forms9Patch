@@ -294,16 +294,24 @@ namespace Forms9Patch.Droid
         public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts)
         {
             System.Diagnostics.Debug.WriteLine("OpenTypedAssetFile A");
+            AssetFileDescriptor result = null;
             try
             {
-                var result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts);
-                return result;
+                result = base.OpenTypedAssetFile(uri, mimeTypeFilter, opts);
             }
-            catch (Exception)
-            {
+            catch (Exception) { }
 
+            if (result == null && mimeTypeFilter == "text/*")
+            {
+                try
+                {
+                    var item = ItemForUri(uri);
+                    result = base.OpenTypedAssetFile(uri, item.MimeType, opts);
+                }
+                catch (Exception) { }
             }
-            return null;
+
+            return result;
         }
 
         public override AssetFileDescriptor OpenTypedAssetFile(Android.Net.Uri uri, string mimeTypeFilter, Bundle opts, CancellationSignal signal)
