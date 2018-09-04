@@ -80,8 +80,30 @@ namespace Forms9Patch.Droid
                 ClipData clipData = null;
 
                 var items = value.AsClipDataItems();
+
+                /*
+                string text = null;
+                string html = null;
+                foreach (var item in value.Items)
+                {
+                    if (text == null && item.MimeType == "text/plain")
+                        text = (string)item.Value;
+                    if (html == null && item.MimeType == "text/html")
+                        html = (string)item.Value;
+                }
+*/
+
+
                 if (items.Count > 0)
                 {
+                    /*
+                    //clipData = new ClipData(value.Description, value.MimeTypes().ToArray(), items[0]);
+                    if (html != null)
+                        clipData = ClipData.NewHtmlText(value.Description, text ?? html, html);
+                    else if (text != null)
+                        clipData = ClipData.NewPlainText(value.Description, text);
+                    else
+                        */
                     clipData = new ClipData(value.Description, value.MimeTypes().ToArray(), items[0]);
                     if (items.Count > 1)
                     {
@@ -89,25 +111,6 @@ namespace Forms9Patch.Droid
                             clipData.AddItem(items[i]);
                     }
 
-                    string text = null;
-                    string html = null;
-                    foreach (var item in value.Items)
-                    {
-                        if (text == null && item.MimeType == "text/plain")
-                            text = (string)item.Value;
-                        if (html == null && item.MimeType == "text/html")
-                            html = (string)item.Value;
-                    }
-
-                    if (text != null || html != null)
-                    {
-                        Intent intent = new Intent();
-                        intent.SetAction(Intent.ActionSend);
-                        if (html != null)
-                            intent.PutExtra(Intent.ExtraHtmlText, html);
-                        intent.PutExtra(Intent.ExtraText, text ?? html);
-                        clipData.AddItem(new ClipData.Item(intent));
-                    }
                 }
 
                 _lastEntry = EntryCaching ? value : null;

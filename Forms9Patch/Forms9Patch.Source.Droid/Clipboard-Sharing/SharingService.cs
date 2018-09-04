@@ -30,18 +30,6 @@ namespace Forms9Patch.Droid
             if (uris.Count > 0)
             {
                 Intent intent = new Intent();
-                if (uris.Count == 1)
-                {
-                    intent.SetAction(Intent.ActionSend);
-                    intent.PutExtra(Intent.ExtraStream, uris[0]);
-                    intent.SetType(ClipboardContentProvider.UriItems[uris[0]].MimeType);
-                }
-                else
-                {
-                    intent.SetAction(Intent.ActionSendMultiple);
-                    intent.PutParcelableArrayListExtra(Intent.ExtraStream, uris.ToArray());
-                    intent.SetType(mimeItemCollection.LowestCommonMimeType());
-                }
 
                 string html = null;
                 string text = null;
@@ -55,12 +43,28 @@ namespace Forms9Patch.Droid
                     if (text == null && item.Value.MimeType == "text/plain")
                         text = (string)item.Value.Value;
                 }
-                if (text != null)
+                if (html != null)
                 {
-                    intent.PutExtra(Intent.ExtraText, text);
-                    if (html != null)
-                        intent.PutExtra(Intent.ExtraHtmlText, html);
+                    intent.PutExtra(Intent.ExtraText, text ?? html);
+                    intent.PutExtra(Intent.ExtraHtmlText, html);
                 }
+                else if (text != null)
+                    intent.PutExtra(Intent.ExtraText, text);
+
+
+                if (uris.Count == 1)
+                {
+                    intent.SetAction(Intent.ActionSend);
+                    intent.PutExtra(Intent.ExtraStream, uris[0]);
+                    intent.SetType(ClipboardContentProvider.UriItems[uris[0]].MimeType);
+                }
+                else
+                {
+                    intent.SetAction(Intent.ActionSendMultiple);
+                    intent.PutParcelableArrayListExtra(Intent.ExtraStream, uris.ToArray());
+                    intent.SetType(mimeItemCollection.LowestCommonMimeType());
+                }
+
 
                 Forms9Patch.Droid.Settings.Activity.StartActivity(Intent.CreateChooser(intent, "Share ..."));
             }

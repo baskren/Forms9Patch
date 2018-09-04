@@ -29,6 +29,22 @@ namespace Forms9Patch.Droid
             ClipboardContentProvider.Clear();
             var result = new List<ClipData.Item>();
 
+            string text = null;
+            string html = null;
+
+            // this has to happen because GMAIL will only paste the first "text/html" AND it won't parse correctly unless it is supplied as ClipData.Item(string,string)
+            foreach (var item in mimeItemCollection.Items)
+            {
+                if (text == null && item.MimeType == "text/plain")
+                    text = item.Value as string;
+                else if (html == null && item.MimeType == "text/html")
+                    html = item.Value as string;
+            }
+            if (html != null)
+                result.Add(new ClipData.Item(text ?? html, html));
+            else if (text != null)
+                result.Add(new ClipData.Item(text));
+
             foreach (var item in mimeItemCollection.Items)
             {
                 ClipData.Item androidClipItem = null;
@@ -37,7 +53,7 @@ namespace Forms9Patch.Droid
                 // The following block was added to support copying images by intent. 
                 // However, I have yet to see where it actually works with 3rd party apps.
                 // Maybe I'm not doing it right?
-                /*
+
                 // START OF BLOCK
                 if (item.MimeType.StartsWith("image/", StringComparison.InvariantCultureIgnoreCase) || item.Value is FileInfo)
                 {
@@ -67,13 +83,12 @@ namespace Forms9Patch.Droid
                 }
                 if (androidClipItem == null)
                     // END OF BLOCK
-                    */
-
-
-                androidClipItem = ClipboardContentProvider.AddAsClipDataItem(item);
+                    androidClipItem = ClipboardContentProvider.AddAsClipDataItem(item);
 
                 result.Add(androidClipItem);
             }
+
+
             return result;
         }
 
