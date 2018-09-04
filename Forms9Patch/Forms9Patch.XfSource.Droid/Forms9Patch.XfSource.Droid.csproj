@@ -124,24 +124,6 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs">
-      <Link>ClipboardService.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollection.cs">
-      <Link>MimeItemCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollectionExtensions.cs">
-      <Link>MimeItemCollectionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ReturnMimeItem.cs">
-      <Link>ReturnMimeItem.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\SharingService.cs">
-      <Link>SharingService.cs</Link>
-    </Compile>
-    <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs">
-      <Link>TypeExtensions.cs</Link>
-    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
   <ItemGroup>

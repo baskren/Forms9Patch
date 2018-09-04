@@ -4,17 +4,23 @@
   <ItemGroup>
 
     <!-- CLIPBOARD -->
-    <!--
-    <Compile Include="..\Forms9Patch.Source.UWP\Services\ClipboardService.cs">
-      <Link>Services\ClipboardService.cs</Link>
+    
+    <Compile Include="..\Forms9Patch.Source.UWP\Clipboard-Sharing\ClipboardService.cs">
+      <Link>Clipboard-Sharing\ClipboardService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.UWP\Models\ClipboardEntry.cs">
-      <Link>Models\ClipboardEntry.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.UWP\Clipboard-Sharing\MimeItemCollection.cs">
+      <Link>Clipboard-Sharing\MimeItemCollection.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.UWP\Models\ReturnMimeItem.cs">
-      <Link>Models\ReturnMimeItem.cs</Link>
+    <Compile Include="..\Forms9Patch.Source.UWP\Clipboard-Sharing\MimeItemExtensions.cs">
+      <Link>Clipboard-Sharing\MimeItemExtensions.cs</Link>
     </Compile>
-    -->
+    <Compile Include="..\Forms9Patch.Source.UWP\Clipboard-Sharing\ReturnMimeItem.cs">
+      <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.UWP\Clipboard-Sharing\SharingService.cs">
+      <Link>Clipboard-Sharing\SharingService.cs</Link>
+    </Compile>
+  
 
 
     <!-- EFFECTS -->
@@ -44,9 +50,6 @@
     <Compile Include="..\Forms9Patch.Source.UWP\Extensions\InLineExtensions.cs">
       <Link>Extensions\InLineExtensions.cs</Link>
     </Compile>
-    <!--Compile Include="..\Forms9Patch.Source.UWP\Extensions\MimeItemExtensions.cs">
-      <Link>Extensions\MimeItemExtensions.cs</Link>
-    </Compile-->
     <Compile Include="..\Forms9Patch.Source.UWP\Extensions\TextBlockExtensions.cs">
       <Link>Extensions\TextBlockExtensions.cs</Link>
     </Compile>

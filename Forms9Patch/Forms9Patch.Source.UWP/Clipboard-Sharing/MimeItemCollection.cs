@@ -10,7 +10,7 @@ using Windows.Storage;
 
 namespace Forms9Patch.UWP
 {
-    class ClipboardEntry : BaseClipboardEntry
+    class MimeItemCollection : BaseMimeItemCollection
     {
         #region Static Implementation
         #endregion
@@ -84,7 +84,7 @@ namespace Forms9Patch.UWP
         #endregion
 
         #region Constructor
-        public ClipboardEntry()
+        public MimeItemCollection()
         {
             var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
             if (dataPackageView.Contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text))

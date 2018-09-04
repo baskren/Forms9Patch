@@ -3,7 +3,6 @@
   <ItemGroup>
 
     <!-- CLIPBOARD -->
-    <!--
     <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs">
       <Link>Clipboard-Sharing\ClipboardService.cs</Link>
     </Compile>
@@ -22,7 +21,6 @@
     <Compile Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs">
       <Link>Clipboard-Sharing\TypeExtensions.cs</Link>
     </Compile>
-    -->
 
     <!-- EFFECTS -->
     <Compile Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">

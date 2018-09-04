@@ -49,6 +49,11 @@ namespace Forms9Patch
                     }
                     stopwatch.Stop();
                     System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value C elapsed: " + stopwatch.ElapsedMilliseconds);
+                    if (_mimeItem.Value is byte[] byteArray && typeof(T) == typeof(string))
+                    {
+                        object result = System.Text.Encoding.UTF8.GetString(byteArray);
+                        return (T)result;
+                    }
                     return (T)_mimeItem.Value;
                 }
                 stopwatch.Stop();

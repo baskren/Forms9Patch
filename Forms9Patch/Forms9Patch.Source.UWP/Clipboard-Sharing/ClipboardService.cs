@@ -28,16 +28,16 @@ namespace Forms9Patch.UWP
 
         public Windows.ApplicationModel.DataTransfer.DataPackage DataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
 
-        IClipboardEntry _lastEntry = null;
+        IMimeItemCollection _lastEntry = null;
         bool _lastChangedByThis = false;
 
-        public IClipboardEntry Entry
+        public IMimeItemCollection Entry
         {
             get
             {
                 if (EntryCaching && _lastEntry != null)
                     return _lastEntry;
-                var result = new ClipboardEntry();
+                var result = new MimeItemCollection();
                 _lastEntry = result;
                 return result;
             }
@@ -47,73 +47,9 @@ namespace Forms9Patch.UWP
                     return;
 
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                dataPackage.RequestedOperation = Windows.ApplicationModel.DataTransfer.DataPackageOperation.Copy;
-                var properties = dataPackage.Properties;
-                if (value.Description != null)
-                    properties.Description = value.Description ?? Forms9Patch.ApplicationInfoService.Name;
-                properties.ApplicationName = Forms9Patch.ApplicationInfoService.Name;
+                
 
-                List<IStorageItem> storageItems = new List<IStorageItem>();
-
-                bool textSet = false;
-                bool htmlSet = false;
-                bool rtfSet = false;
-
-                var htmlItems = value.GetMimeItems<string>("text/html");
-
-
-                foreach (var item in value.Items)
-                {
-                    var mimeType = item.MimeType.ToLower();
-                    if (mimeType == "text/plain" && !textSet && item.AsString() is string text)
-                    {
-                        dataPackage.SetText(text);
-                        textSet = true;
-                    }
-                    // else if (mimeType == "text/html" && !htmlSet && item.AsString() is string html)
-                    else if (mimeType == "text/html" && htmlItems.Count<2 && item.AsString() is string html)
-                    {
-                        var start = html.Substring(0, Math.Min(html.Length, 300));
-                        if (!start.ToLower().Contains("<html>"))
-                        {
-                            // we are going to assume we were given a fragment and need to encapsulate it for other Windows apps to recognize it (argh!)
-                            var fragment = html;
-
-                            var htmlStartIndex = 105;
-                            var fragStartIndex = htmlStartIndex + 36;
-                            var fragEndIndex = fragStartIndex + fragment.Length;
-                            var htmlEndIndex = fragEndIndex + 36;
-
-                            html = "Version:0.9";
-                            html += "\r\nStartHTML:" + htmlStartIndex.ToString("D10"); 
-                            html += "\r\nEndHTML:" + htmlEndIndex.ToString("D10");
-                            html += "\r\nStartFragment:" + fragStartIndex.ToString("D10");
-                            html += "\r\nEndFragment:" + fragEndIndex.ToString("D10");
-                            html += "\r\n<html>\r\n<body>\r\n<!--StartFragment-->";
-                            html += fragment;
-                            html += "<!--EndFragment-->\r\n</body>\r\n</html>";
-                        }
-                        dataPackage.SetHtmlFormat(html);
-                        htmlSet = true;
-                    }
-                    else if ((mimeType == "text/rtf" ||
-                            mimeType == "text/richtext" ||
-                            mimeType == "application/rtf" ||
-                            mimeType == "application/x-rtf") &&
-                            !rtfSet && item.AsString() is string rtf)
-                    {
-                        dataPackage.SetRtf(rtf);
-                        rtfSet = true;
-                    }
-                    if (item.ToStorageFile() is StorageFile storageFile)
-                        storageItems.Add(storageFile);
-                    else
-                        properties.Add(GetFormatId(item.MimeType), item.Value);
-                }
-
-                if (storageItems.Count > 0)
-                    dataPackage.SetStorageItems(storageItems);
-
+                dataPackage.Source(value);
 
                 _lastEntry = value;
                 _lastChangedByThis = true;
@@ -180,18 +116,6 @@ namespace Forms9Patch.UWP
         }
         */
 
-        string GetFormatId(string mime)
-        {
-            if (mime == "image/bmp")
-                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Bitmap;
-            if (mime == "text/richtext")
-                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Rtf;
-            if (mime == "text/html")
-                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Html;
-            if (mime == "text/plain")
-                return Windows.ApplicationModel.DataTransfer.StandardDataFormats.Text;
-            return mime;
-        }
 
         /*
         internal static IRandomAccessStream ToIRandomAccessStream(byte[] arr)
