@@ -24,7 +24,7 @@ namespace Forms9Patch.UWP
             }
             else if (Container != null)
             {
-                Control.PreviewKeyDown += OnKeyDown;
+                Container.PreviewKeyDown += OnKeyDown;
                 Container.CharacterReceived += OnCharacterReceived;
             }
         }
@@ -38,7 +38,7 @@ namespace Forms9Patch.UWP
             }
             else if (Container != null)
             {
-                Control.PreviewKeyDown -= OnKeyDown;
+                Container.PreviewKeyDown -= OnKeyDown;
                 Container.CharacterReceived -= OnCharacterReceived;
             }
         }
