@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
+using P42.Utils;
 
 [assembly: ExportEffect(typeof(Forms9Patch.UWP.HardwareKeyListenerEffect), "HardwareKeyListenerEffect")]
 namespace Forms9Patch.UWP
@@ -17,12 +18,13 @@ namespace Forms9Patch.UWP
             //    return;
             if (Element is HardwareKeyPage)
                 return;
-            if (Control != null)
+            var type = Control.GetType(); 
+            if (Control.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
             {
                 Control.PreviewKeyDown += OnKeyDown;
                 Control.CharacterReceived += OnCharacterReceived;
             }
-            else if (Container != null)
+            else if (Container.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
             {
                 Container.PreviewKeyDown += OnKeyDown;
                 Container.CharacterReceived += OnCharacterReceived;
@@ -31,12 +33,12 @@ namespace Forms9Patch.UWP
 
         protected override void OnDetached()
         {
-            if (Control != null)
+            if (Control.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
             {
                 Control.PreviewKeyDown -= OnKeyDown;
                 Control.CharacterReceived -= OnCharacterReceived;
             }
-            else if (Container != null)
+            else if (Container.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
             {
                 Container.PreviewKeyDown -= OnKeyDown;
                 Container.CharacterReceived -= OnCharacterReceived;
