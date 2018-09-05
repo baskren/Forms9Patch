@@ -9,7 +9,7 @@ namespace Forms9Patch
 {
     #region Clipboard Entry
     /// <summary>
-    /// Base class that implements Forms9Patch.IClipboardEntry
+    /// Class used to supply data to Clipboard and Interapp Sharing
     /// </summary>
     public class MimeItemCollection : BaseMimeItemCollection
     {
@@ -63,6 +63,9 @@ namespace Forms9Patch
 
 
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.MimeItemCollection"/> class.
+        /// </summary>
         public MimeItemCollection()
         {
             _items = new List<IMimeItem>();
@@ -87,11 +90,10 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Add an item to the clipboard for value and mimeType
+        /// Adds a new item to the MimeItemCollection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="mimeType"></param>
-        /// <param name="value"></param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <param name="value">Value.</param>
         public void AddValue(string mimeType, object value)
         {
             Items.Add(new MimeItem(mimeType, value));
@@ -141,12 +143,19 @@ namespace Forms9Patch
 
 
     #region BaseClipboardEntry 
+    /// <summary>
+    /// Do not use! Use MimeItemCollection instead!
+    /// </summary>
     public abstract class BaseMimeItemCollection : IMimeItemCollection
     {
+        /// <summary>
+        /// The backing store for the MimeItemCollection's description
+        /// </summary>
         protected string _description;
+
         /// <summary>
         /// Short, descriptive text that can be used by app to display
-        /// to the user what this data represents.
+        /// to the user what this collection represents.
         /// </summary>
         /// <value>The description.</value>
         public virtual string Description => _description;
@@ -181,9 +190,12 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// The backing store for the collection's items.
+        /// </summary>
         protected List<IMimeItem> _items;
         /// <summary>
-        /// Gets or sets the items for this ClipboardEntry
+        /// Gets or sets the items for this MimeItemCollection
         /// </summary>
         /// <value>The items.</value>
         public virtual List<IMimeItem> Items => _items;

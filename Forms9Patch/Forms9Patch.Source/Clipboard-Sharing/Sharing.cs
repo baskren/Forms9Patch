@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,11 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Share the specified MimeItemCollection.  iPad: sharing popup points at target.
+        /// </summary>
+        /// <param name="collection">Collection.</param>
+        /// <param name="target">Target.</param>
         public static void Share(MimeItemCollection collection, VisualElement target) => Service?.Share(collection, target);
 
     }

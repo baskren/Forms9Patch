@@ -33,6 +33,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Activates the Keyboard Service (required to monitor software keyboard height)
+        /// </summary>
         public static void Activate()
         {
             if (Service == null)
@@ -61,7 +64,7 @@ namespace Forms9Patch
             }
         }
 
-        public static void OnHeightChanged(double height)
+        internal static void OnHeightChanged(double height)
         {
             HeightChanged?.Invoke(null, height);
         }
@@ -92,6 +95,10 @@ namespace Forms9Patch
         /// <value>The language region.</value>
         public static string LanguageRegion => Service.LanguageRegion;
 
+        /// <summary>
+        /// Gets the current height of the on-screen software keyboard
+        /// </summary>
+        /// <value>The height.</value>
         public static double Height => Service.Height;
 
     }

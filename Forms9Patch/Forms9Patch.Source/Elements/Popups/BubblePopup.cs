@@ -288,6 +288,10 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Event handler for when Bindable Property has changed
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);

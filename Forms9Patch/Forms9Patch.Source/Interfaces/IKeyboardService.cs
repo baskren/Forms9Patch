@@ -23,6 +23,10 @@ namespace Forms9Patch
         /// <value>The language region.</value>
         string LanguageRegion { get; }
 
+        /// <summary>
+        /// Gets the current height of the on-screen keyboard
+        /// </summary>
+        /// <value>The height.</value>
         double Height { get; }
     }
 }

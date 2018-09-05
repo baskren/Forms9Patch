@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
@@ -13,13 +13,13 @@ namespace Forms9Patch
 {
 
     /// <summary>
-    /// ClipboardEntryItem class
+    /// MimeItem class
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class MimeItem<T> : MimeItem, IMimeItem<T>
     {
         /// <summary>
-        /// Gets or sets the value of this ClipboadEntryItem.
+        /// Gets or sets the value of this MimeItemn.
         /// </summary>
         /// <value>The value.</value>
         new public T Value
@@ -66,18 +66,27 @@ namespace Forms9Patch
         IMimeItem _mimeItem;
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.MimeItem`1"/> class.
         /// </summary>
-        /// <param name="mimeType"></param>
-        /// <param name="value"></param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <param name="value">Value.</param>
         public MimeItem(string mimeType, T value) : base(mimeType, value) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.MimeItem`1"/> class.
+        /// </summary>
+        /// <param name="mimeItem">MIME item.</param>
         public MimeItem(IMimeItem mimeItem) : base(mimeItem.MimeType, null)
         {
             _mimeItem = mimeItem;
         }
 
-
+        /// <summary>
+        /// Create a new MimeItem with the specified mimeType and value.
+        /// </summary>
+        /// <returns>The create.</returns>
+        /// <param name="mimeType">MIME type.</param>
+        /// <param name="value">Value.</param>
         public static MimeItem<T> Create(string mimeType, object value)
         {
             if (value != null)
@@ -101,12 +110,16 @@ namespace Forms9Patch
 
 
     /// <summary>
-    /// Base class for a ClipboardEntryItem
+    /// Base class for a MimeItem
     /// </summary>
     public class MimeItem : IMimeItem //, IPlatformKey
     {
         #region object validity check
-
+        /// <summary>
+        /// Checks if an object can be used as a valid MimeItem.Value
+        /// </summary>
+        /// <returns><c>true</c>, if value was valided, <c>false</c> otherwise.</returns>
+        /// <param name="value">Value.</param>
         public static bool ValidValue(object value) => ValidValueType(value.GetType());
 
 
@@ -186,7 +199,7 @@ namespace Forms9Patch
 
         string _mimeType;
         /// <summary>
-        /// Get the MimeType of this ClipboardEntryItem
+        /// Get the MimeType of this MimeItem
         /// </summary>
         public string MimeType
         {
@@ -199,7 +212,7 @@ namespace Forms9Patch
 
         object _item;
         /// <summary>
-        /// Get the Value of thie ClipboardEntryItem
+        /// Get the Value of thie MimeItem
         /// </summary>
         public object Value
         {
@@ -207,19 +220,11 @@ namespace Forms9Patch
             protected set => _item = value;
         }
 
-        /*
         /// <summary>
-        /// Get the Type of the Value of this ClipboardEntryItem (less than perfect but it's better than nothing)
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.MimeItem"/> class.
         /// </summary>
-        public Type Type { get; protected set; }
-        */
-
-        //string IPlatformKey.PlatformKey { get; set; }
-
-        /// <summary>
-        /// Constructor for ClipboardItemBase
-        /// </summary>
-        /// <param name="mimeType"></param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <param name="value">Value.</param>
         public MimeItem(string mimeType, object value)
         {
             if (string.IsNullOrWhiteSpace(mimeType))
@@ -238,27 +243,6 @@ namespace Forms9Patch
 
 
     }
-
-
-    /*
-    public class LazyClipboardEntryItem<T> : ClipboardItemBase<T>
-    {
-        readonly Func<T> _onDemandFunction;
-        public override object Value => _onDemandFunction.Invoke();
-
-        public LazyClipboardEntryItem(string mimeType, Func<T> onDemandFunction) : base(mimeType)
-        {
-            _onDemandFunction = onDemandFunction ?? throw new Exception("Must set a valid Func<T> for onDemandFunction");
-        }
-    }
-    */
-
-    /*
-    public class FilePathEntryItem : ClipboardEntryItem<string>
-    {
-        public FilePathEntryItem(string mimeType, string path) : base(mimeType, path) { }
-    }
-    */
 
 }
 

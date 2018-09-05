@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -6,14 +6,29 @@ using System.Runtime.InteropServices;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Interface for MimeItemCollections
+    /// </summary>
     public static class IMimeItemCollectionExtensions
     {
-        public static List<string> MimeTypes(this IMimeItemCollection clipboardEntry)
+        /// <summary>
+        /// MIME types in the collection
+        /// </summary>
+        /// <returns>The MIME types.</returns>
+        /// <param name="mimeItemCollection">MIME item collection.</param>
+        public static List<string> MimeTypes(this IMimeItemCollection mimeItemCollection)
         {
-            return clipboardEntry.Items.Select((mimeItem) => mimeItem.MimeType).ToList();
+            return mimeItemCollection.Items.Select((mimeItem) => mimeItem.MimeType).ToList();
         }
 
-        public static MimeItem<T> GetFirstMimeItem<T>(this IMimeItemCollection clipboardEntry, string mimeType)
+        /// <summary>
+        /// Gets the first MimeItem of a given MIME type.
+        /// </summary>
+        /// <returns>The first MIME item.</returns>
+        /// <param name="mimeItemCollection">MimeItemCollection.</param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static MimeItem<T> GetFirstMimeItem<T>(this IMimeItemCollection mimeItemCollection, string mimeType)
         {
             //MimeItem<T> result = null;
 
@@ -21,7 +36,7 @@ namespace Forms9Patch
             stopwatch.Start();
 
             mimeType = mimeType.ToLower();
-            foreach (var item in clipboardEntry.Items)
+            foreach (var item in mimeItemCollection.Items)
                 if (item.MimeType == mimeType)
                 {
                     stopwatch.Stop();
@@ -32,7 +47,14 @@ namespace Forms9Patch
             return null;
         }
 
-        public static List<MimeItem<T>> GetMimeItems<T>(this IMimeItemCollection clipboardEntry, string mimeType)
+        /// <summary>
+        /// Gets the all MimeItems of a given MIME type
+        /// </summary>
+        /// <returns>The MimeItems.</returns>
+        /// <param name="mimeItemCollection">MIME item collection.</param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static List<MimeItem<T>> GetMimeItems<T>(this IMimeItemCollection mimeItemCollection, string mimeType)
         {
             mimeType = mimeType.ToLower();
             var mimeItems = new List<MimeItem<T>>();
@@ -43,17 +65,24 @@ namespace Forms9Patch
                     if (MimeItem<T>.Create(untypedMimeItem) is MimeItem<T> item)
                         mimeItems.Add(item);
                         */
-            foreach (var item in clipboardEntry.Items)
+            foreach (var item in mimeItemCollection.Items)
                 if (item.MimeType == mimeType)
                     mimeItems.Add(MimeItem<T>.Create(item));
             return mimeItems;
         }
 
-        public static byte[] AddBytesFromFile(this Forms9Patch.MimeItemCollection clipboardEntry, string mimeType, string path)
+        /// <summary>
+        /// Adds the content from file (as byte[]) to collection.  Alternative to adding file as FileInfo as the Value of a MimeItem.
+        /// </summary>
+        /// <returns>The bytes from file.</returns>
+        /// <param name="mimeItemCollection">MIME item collection.</param>
+        /// <param name="mimeType">MIME type.</param>
+        /// <param name="path">File Path.</param>
+        public static byte[] AddBytesFromFile(this Forms9Patch.MimeItemCollection mimeItemCollection, string mimeType, string path)
         {
             if (File.ReadAllBytes(path) is byte[] byteArray)
             {
-                clipboardEntry.Items.Add(new MimeItem<byte[]>(mimeType, byteArray));
+                mimeItemCollection.Items.Add(new MimeItem<byte[]>(mimeType, byteArray));
                 return byteArray;
             }
             return null;

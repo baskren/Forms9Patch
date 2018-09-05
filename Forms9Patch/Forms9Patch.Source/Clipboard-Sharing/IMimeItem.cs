@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Forms9Patch
 
 
     /// <summary>
-    /// Interface for a ClipboardEntryItem
+    /// Interface for a MimeItem
     /// </summary>
     public interface IMimeItem
     {
@@ -48,7 +48,7 @@ namespace Forms9Patch
     }
 
 
-    public interface INativeMimeItem : IMimeItem
+    internal interface INativeMimeItem : IMimeItem
     {
         object GetValueAs(Type type);
     }

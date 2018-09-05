@@ -6,9 +6,6 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs">
       <Link>Clipboard-Sharing\ClipboardService.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\DataTransferService.cs">
-      <Link>Clipboard-Sharing\DataTransferService.cs</Link>
-    </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemCollection.cs">
       <Link>Clipboard-Sharing\MimeItemCollection.cs</Link>
     </Compile>

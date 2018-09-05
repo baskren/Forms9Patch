@@ -12,12 +12,8 @@
     <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IMimeItemCollection.cs" Link="Clipboard-Sharing\IMimeItemCollection.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IMimeItemCollectionExtensions.cs" Link="Clipboard-Sharing\IMimeItemCollectionExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\Sharing.cs" Link="Clipboard-Sharing\Sharing.cs" />
-
-    <!-- DataTransfer -->
-    <Compile Include="..\Forms9Patch.Source\DataTransfer\DataTransfer.cs" Link="DataTransfer\DataTransfer.cs" />
-    <Compile Include="..\Forms9Patch.Source\DataTransfer\IDataTransfer.cs" Link="DataTransfer\IDataTransfer.cs" />
-    <Compile Include="..\Forms9Patch.Source\DataTransfer\IMimeItem.cs" Link="DataTransfer\IMimeItem.cs" />
-    <Compile Include="..\Forms9Patch.Source\DataTransfer\MimeItem.cs" Link="DataTransfer\MimeItem.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\IMimeItem.cs" Link="Clipboard-Sharing\IMimeItem.cs" />
+    <Compile Include="..\Forms9Patch.Source\Clipboard-Sharing\MimeItem.cs" Link="Clipboard-Sharing\MimeItem.cs" />
 
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
