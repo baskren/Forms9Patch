@@ -152,7 +152,7 @@
 <li>Background
 <ul>
 <li><strong><code>BackgroundColor</code></strong></li>
-<li><strong><code>BackgroundImage</code></strong></li>
+<li><strong><code>BackgroundImage</code></strong>: A <code>Forms9Patch.Image</code> that will be used as the button's background.</li>
 </ul>
 </li>
 <li>Icon:
@@ -177,13 +177,13 @@
 <li><strong><code>Text</code></strong>: plain text for the button's label</li>
 <li><strong><code>HtmlText</code></strong>: markup text for the button's label - an alternative to <code>Text</code></li>
 <li><strong><code>LineBreakMode</code></strong>: See <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms">Xamarin.Forms.LineBreakMode</a></li>
-<li><strong><code>AutoFit</code></strong>:</li>
+<li><strong><code>AutoFit</code></strong>: Autofitting algorithm to be applied to button's label's text.  See <a href="Label#utomatically-Resizing-Text-(Auto-fitting)">Label.Autofitting</a>.</li>
 </ul>
 </li>
 <li>Icon
 <ul>
-<li><strong><code>IconImage</code></strong></li>
-<li><strong><code>IconText</code></strong>: An alternative to <code>IconImage</code>, enabling the use of Unicode characters or special font characters as button icons.</li>
+<li><strong><code>IconImage</code></strong>: A <code>Forms9Patch.Image</code> element to be used as the button's icon image.</li>
+<li><strong><code>IconText</code></strong>: An alternative to <code>IconImage</code>, enabling the use of Unicode characters or special font characters as button icons.  Just like the <code>HtmlText</code> property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.</li>
 </ul>
 </li>
 </ul>

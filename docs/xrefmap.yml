@@ -3180,12 +3180,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.DataTemplateSelector.Add
   nameWithType: DataTemplateSelector.Add
-- uid: Forms9Patch.DataTransfer
-  name: DataTransfer
-  href: api/Forms9Patch.DataTransfer.html
-  commentId: T:Forms9Patch.DataTransfer
-  fullName: Forms9Patch.DataTransfer
-  nameWithType: DataTransfer
 - uid: Forms9Patch.Display
   name: Display
   href: api/Forms9Patch.Display.html
@@ -6616,25 +6610,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IMimeItemCollectionExtensions.MimeTypes
   nameWithType: IMimeItemCollectionExtensions.MimeTypes
-- uid: Forms9Patch.INativeMimeItem
-  name: INativeMimeItem
-  href: api/Forms9Patch.INativeMimeItem.html
-  commentId: T:Forms9Patch.INativeMimeItem
-  fullName: Forms9Patch.INativeMimeItem
-  nameWithType: INativeMimeItem
-- uid: Forms9Patch.INativeMimeItem.GetValueAs(Type)
-  name: GetValueAs(Type)
-  href: api/Forms9Patch.INativeMimeItem.html#Forms9Patch_INativeMimeItem_GetValueAs_Type_
-  commentId: M:Forms9Patch.INativeMimeItem.GetValueAs(Type)
-  fullName: Forms9Patch.INativeMimeItem.GetValueAs(Type)
-  nameWithType: INativeMimeItem.GetValueAs(Type)
-- uid: Forms9Patch.INativeMimeItem.GetValueAs*
-  name: GetValueAs
-  href: api/Forms9Patch.INativeMimeItem.html#Forms9Patch_INativeMimeItem_GetValueAs_
-  commentId: Overload:Forms9Patch.INativeMimeItem.GetValueAs
-  isSpec: "True"
-  fullName: Forms9Patch.INativeMimeItem.GetValueAs
-  nameWithType: INativeMimeItem.GetValueAs
 - uid: Forms9Patch.IPopup
   name: IPopup
   href: api/Forms9Patch.IPopup.html
@@ -7176,19 +7151,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.KeyboardService.LanguageRegion
   nameWithType: KeyboardService.LanguageRegion
-- uid: Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
-  name: OnHeightChanged(Double)
-  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnHeightChanged_System_Double_
-  commentId: M:Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
-  fullName: Forms9Patch.KeyboardService.OnHeightChanged(System.Double)
-  nameWithType: KeyboardService.OnHeightChanged(Double)
-- uid: Forms9Patch.KeyboardService.OnHeightChanged*
-  name: OnHeightChanged
-  href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnHeightChanged_
-  commentId: Overload:Forms9Patch.KeyboardService.OnHeightChanged
-  isSpec: "True"
-  fullName: Forms9Patch.KeyboardService.OnHeightChanged
-  nameWithType: KeyboardService.OnHeightChanged
 - uid: Forms9Patch.KeyboardService.OnVisiblityChange(Forms9Patch.KeyboardVisibilityChange)
   name: OnVisiblityChange(KeyboardVisibilityChange)
   href: api/Forms9Patch.KeyboardService.html#Forms9Patch_KeyboardService_OnVisiblityChange_Forms9Patch_KeyboardVisibilityChange_
@@ -11977,12 +11939,12 @@ references:
   commentId: T:Forms9Patch.Sharing
   fullName: Forms9Patch.Sharing
   nameWithType: Sharing
-- uid: Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection)
-  name: Share(MimeItemCollection)
-  href: api/Forms9Patch.Sharing.html#Forms9Patch_Sharing_Share_Forms9Patch_MimeItemCollection_
-  commentId: M:Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection)
-  fullName: Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection)
-  nameWithType: Sharing.Share(MimeItemCollection)
+- uid: Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection,VisualElement)
+  name: Share(MimeItemCollection, VisualElement)
+  href: api/Forms9Patch.Sharing.html#Forms9Patch_Sharing_Share_Forms9Patch_MimeItemCollection_VisualElement_
+  commentId: M:Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection,VisualElement)
+  fullName: Forms9Patch.Sharing.Share(Forms9Patch.MimeItemCollection, VisualElement)
+  nameWithType: Sharing.Share(MimeItemCollection, VisualElement)
 - uid: Forms9Patch.Sharing.Share*
   name: Share
   href: api/Forms9Patch.Sharing.html#Forms9Patch_Sharing_Share_

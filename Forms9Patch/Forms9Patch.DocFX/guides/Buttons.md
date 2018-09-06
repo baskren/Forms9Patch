@@ -72,7 +72,7 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
   - **`VerticalTextAlignment`**
 - Background
   - **`BackgroundColor`**
-  - **`BackgroundImage`**
+  - **`BackgroundImage`**: A `Forms9Patch.Image` that will be used as the button's background.
 - Icon:
   - **`TrailingIcon`**: Is the icon before or after the label?
   - **`Orientation`**: Is the icon and label arranged vertically or horizontally?
@@ -90,10 +90,10 @@ Additionally, the `Button` and `StateButton` elements have these properties:
   - **`Text`**: plain text for the button's label
   - **`HtmlText`**: markup text for the button's label - an alternative to `Text`
   - **`LineBreakMode`**: See [Xamarin.Forms.LineBreakMode](https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms)
-  - **`AutoFit`**: 
+  - **`AutoFit`**: Autofitting algorithm to be applied to button's label's text.  See [Label.Autofitting](Label#utomatically-Resizing-Text-(Auto-fitting)).
 - Icon  
-  - **`IconImage`**
-  - **`IconText`**: An alternative to `IconImage`, enabling the use of Unicode characters or special font characters as button icons.
+  - **`IconImage`**: A `Forms9Patch.Image` element to be used as the button's icon image.
+  - **`IconText`**: An alternative to `IconImage`, enabling the use of Unicode characters or special font characters as button icons.  Just like the `HtmlText` property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.
 
 
 
