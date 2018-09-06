@@ -18,6 +18,7 @@ Xamarin Forms is great for developing cross platform applications (certainly ver
 - Single point of use, cross platform, custom font management
 - Segmented button control
 - Pop-ups as a first class layout element
+- Multi-object Clipboard and Inter-app Data Sharing
 
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Custom fonts are a bit more complicated and label layouts take things up another notch.   Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL and Shared Library applications for iOS, Android and UWP.
 
@@ -77,3 +78,5 @@ And lastly is Forms9Patch's services:
 - Key Clicks Service: Do you want to make a system keyboard sound (and vibration, if available)?
 - Application Info Service: Do you want to quickly know your application's Name, Bundle/Package ID, Build number and Version string?
 - OS Info Service: What is the version of the device's operating system?
+- Clipboard: Copy/paste text, HTML text, and multiple objects (they can be of the same or different MIME types) within your app or to other apps.
+- Inter-app Data Sharing: Notice how some apps have a **Share** icon that presents a list of applications (and, on iOS services - like **Print**) to share data?  

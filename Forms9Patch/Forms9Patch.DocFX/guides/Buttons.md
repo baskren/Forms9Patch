@@ -85,7 +85,7 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
 Additionally, the `Button` and `StateButton` elements have these properties:
 
 - Outline
-  - **`Shape`**: `ElementShape.Rectangle`, `ElementShape.Square`, `ElementShape.Circle`, `ElementShape.Ellipse`, and `ElementShape.Obround`.  Controls the shape of both the border and the background clipping region.
+  - **`ElementShape`**: `ElementShape.Rectangle`, `ElementShape.Square`, `ElementShape.Circle`, `ElementShape.Ellipse`, and `ElementShape.Obround`.  Controls the shape of both the border and the background clipping region.
 - Text  
   - **`Text`**: plain text for the button's label
   - **`HtmlText`**: markup text for the button's label - an alternative to `Text`
