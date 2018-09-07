@@ -30,6 +30,7 @@ namespace FormsGestures.UWP
             P42.Utils.UWP.Settings.Init(Application);
             Xamarin.Forms.DependencyService.Register<DisplayService>();
             Xamarin.Forms.DependencyService.Register<GestureService>();
+            Xamarin.Forms.DependencyService.Register<CoordinateTransformService>();
         }
     }
 }

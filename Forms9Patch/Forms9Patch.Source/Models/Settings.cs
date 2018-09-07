@@ -80,9 +80,11 @@ namespace Forms9Patch
                 return;
 
             var platformSettings = DependencyService.Get<ISettings>();
-            platformSettings.LazyInit();
-
-            _confirmed = true;
+            if (platformSettings != null)
+            {
+                platformSettings.LazyInit();
+                _confirmed = true;
+            }
         }
         #endregion
 

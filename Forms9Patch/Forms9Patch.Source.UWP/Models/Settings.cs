@@ -25,6 +25,9 @@ namespace Forms9Patch.UWP
             Xamarin.Forms.DependencyService.Register<KeyboardService>();
             Xamarin.Forms.DependencyService.Register<OsInfoService>();
             Xamarin.Forms.DependencyService.Register<WebViewExtensionsService>();
+            Xamarin.Forms.DependencyService.Register<Settings>();
+            Xamarin.Forms.DependencyService.Register<SharingService>();
+            Xamarin.Forms.DependencyService.Register<ClipboardService>();
 
             Application = app;
             FormsGestures.UWP.Settings.Init(app);
