@@ -18,30 +18,61 @@ namespace Forms9Patch.UWP
             //    return;
             if (Element is HardwareKeyPage)
                 return;
-            var type = Control.GetType(); 
-            if (Control.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            //var type = Control?.GetType(); 
+
+            bool success = false;
+            //if (Control?.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            try
             {
                 Control.PreviewKeyDown += OnKeyDown;
                 Control.CharacterReceived += OnCharacterReceived;
+                success = true;
             }
-            else if (Container.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            catch (Exception) { }
+            //else if (Control?.GetType().GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+            if (!success) try
+                {
+
+                    Control.KeyDown += OnKeyDown;
+                    Control.CharacterReceived += OnCharacterReceived;
+                    success = true;
+                }
+                catch (Exception) { }
+            //else if (Container?.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            if (!success) try
             {
                 Container.PreviewKeyDown += OnKeyDown;
                 Container.CharacterReceived += OnCharacterReceived;
+                    success = true;
             }
+                catch (Exception) { }
+            //else if (Container?.GetType().GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+            if (!success) try
+                {
+                    Container.KeyDown += OnKeyDown;
+                    Container.CharacterReceived += OnCharacterReceived;
+                }
+                catch (Exception) { }
         }
 
         protected override void OnDetached()
         {
-            if (Control.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            if (Control?.GetType() is Type controlType)
             {
-                Control.PreviewKeyDown -= OnKeyDown;
+                if (controlType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+                    Control.PreviewKeyDown -= OnKeyDown;
+                else if (controlType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+                    Control.KeyDown -= OnKeyDown;
                 Control.CharacterReceived -= OnCharacterReceived;
             }
-            else if (Container.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+            else if (Container?.GetType() is Type containerType)
             {
-                Container.PreviewKeyDown -= OnKeyDown;
+                if (containerType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+                    Container.PreviewKeyDown -= OnKeyDown;
+                else if (containerType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+                    Container.KeyDown -= OnKeyDown;
                 Container.CharacterReceived -= OnCharacterReceived;
+
             }
         }
 
