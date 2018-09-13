@@ -77,15 +77,19 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Popups\Toast.cs" Link="Elements\Popups\Toast.cs" />
 
     <!-- Elements Misc -->
+    <!--
     <Compile Include="..\Forms9Patch.Source\Elements\Image.cs" Link="Elements\Image.cs" />
+-->
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\RootPage.cs" Link="Elements\RootPage.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\ExtendedShapeAndImageView.cs" Link="Elements\ExtendedShapeAndImageView.cs" />
 
     <!-- Enums -->
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ElementShape.cs" Link="Enums\ElementShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ExtendedElementShape.cs" Link="Enums\ExtendedElementShape.cs" />
+    <Compile Include="..\Forms9Patch.Source\Enums\ExtendedElementShapeOrientation.cs" Link="Enums\ExtendedElementShapeOrientation.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\Fill.cs" Link="Enums\Fill.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\FontBaseline.cs" Link="Enums\FontBaseline.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\GroupToggleBehavior.cs" Link="Enums\GroupToggleBehavior.cs" />
@@ -119,6 +123,10 @@
     <Compile Include="..\Forms9Patch.Source\Extensions\PointerDirectionExtensions.cs" Link="Extensions\PointerDirectionExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\RectangleExtensions.cs" Link="Extensions\RectangleExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\SKBitmapExtensions.cs" Link="Extensions\SKBitmapExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\SkiaColorExtensions.cs" Link="Extensions\SkiaColorExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\SKPathExtensions.cs" Link="Extensions\SKPathExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\SKRectExtensions.cs" Link="Extensions\SKRectExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\StringExtensions.cs" Link="Extensions\StringExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\TextAlignmentExtension.cs" Link="Extensions\TextAlignmentExtension.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\ThicknessExtension.cs" Link="Extensions\ThicknessExtension.cs" />
@@ -145,6 +153,7 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\IButtonState.cs" Link="Interfaces\IButtonState.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IDescendentBounds.cs" Link="Interfaces\IDescendentBounds.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IElement.cs" Link="Interfaces\IElement.cs" />
+    <Compile Include="..\Forms9Patch.Source\Interfaces\IExtendedShape.cs" Link="Interfaces\IExtendedShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IFontElement.cs" Link="Interfaces\IFontElement.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IFontFamilies.cs" Link="Interfaces\IFontFamilies.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IFontService.cs" Link="Interfaces\IFontService.cs" />
@@ -171,6 +180,7 @@
     <Compile Include="..\Forms9Patch.Source\Layouts\ContentView.cs" Link="Layouts\ContentView.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\Frame.cs" Link="Layouts\Frame.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\Grid.cs" Link="Layouts\Grid.cs" />
+    <Compile Include="..\Forms9Patch.Source\Layouts\Layout.cs" Link="Layouts\Layout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\ManualLayout.cs" Link="Layouts\ManualLayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\RelativeLayout.cs" Link="Layouts\RelativeLayout.cs" />
     <Compile Include="..\Forms9Patch.Source\Layouts\ShapeBase.cs" Link="Layouts\ShapeBase.cs" />
@@ -179,6 +189,7 @@
     <!-- Models -->
     <Compile Include="..\Forms9Patch.Source\Models\ButtonState.cs" Link="Models\ButtonState.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\F9PFormattedString.cs" Link="Models\F9PFormattedString.cs" />
+    <Compile Include="..\Forms9Patch.Source\Models\F9PImageData.cs" Link="Models\F9PImageData.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\HTMLMarkupString.cs" Link="Models\HTMLMarkupString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\ImageSource.cs" Link="Models\ImageSource.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\MetaFont.cs" Link="Models\MetaFont.cs" />

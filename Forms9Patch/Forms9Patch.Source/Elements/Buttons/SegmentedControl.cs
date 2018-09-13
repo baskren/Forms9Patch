@@ -154,8 +154,8 @@ namespace Forms9Patch
         /// <value>The Thickness values for the layout. The default value is a Thickness with all values set to 0.</value>
         public new Thickness Padding
         {
-            get => (Thickness)GetValue(PaddingProperty); 
-            set => SetValue(PaddingProperty, value); 
+            get => (Thickness)GetValue(PaddingProperty);
+            set => SetValue(PaddingProperty, value);
         }
         #endregion
 
@@ -170,8 +170,8 @@ namespace Forms9Patch
         /// <value>The color of the selected font.</value>
         public Color SelectedTextColor
         {
-            get => (Color)GetValue(SelectedTextColorProperty); 
-            set => SetValue(SelectedTextColorProperty, value); 
+            get => (Color)GetValue(SelectedTextColorProperty);
+            set => SetValue(SelectedTextColorProperty, value);
         }
         #endregion
 
@@ -187,8 +187,8 @@ namespace Forms9Patch
         /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
-            get => (FontAttributes)GetValue(FontAttributesProperty); 
-            set => SetValue(FontAttributesProperty, value); 
+            get => (FontAttributes)GetValue(FontAttributesProperty);
+            set => SetValue(FontAttributesProperty, value);
         }
         #endregion
 
@@ -204,8 +204,8 @@ namespace Forms9Patch
         /// <value>The size of the font.</value>
         public double FontSize
         {
-            get => (double)GetValue(FontSizeProperty); 
-            set => SetValue(FontSizeProperty, value); 
+            get => (double)GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
         }
         #endregion
 
@@ -221,8 +221,8 @@ namespace Forms9Patch
         /// <value>The font family.</value>
         public string FontFamily
         {
-            get => (string)GetValue(FontFamilyProperty); 
-            set => SetValue(FontFamilyProperty, value); 
+            get => (string)GetValue(FontFamilyProperty);
+            set => SetValue(FontFamilyProperty, value);
         }
         #endregion
 
@@ -237,8 +237,8 @@ namespace Forms9Patch
         /// <value>The color of the background.</value>
         public new Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
         #endregion
 
@@ -253,8 +253,8 @@ namespace Forms9Patch
         /// <value>The selected background.</value>
         public Color SelectedBackgroundColor
         {
-            get => (Color)GetValue(SelectedBackgroundColorProperty); 
-            set => SetValue(SelectedBackgroundColorProperty, value); 
+            get => (Color)GetValue(SelectedBackgroundColorProperty);
+            set => SetValue(SelectedBackgroundColorProperty, value);
         }
         #endregion
 
@@ -269,8 +269,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if dark theme; otherwise, <c>false</c>.</value>
         public bool DarkTheme
         {
-            get => (bool)GetValue(DarkThemeProperty); 
-            set => SetValue(DarkThemeProperty, value); 
+            get => (bool)GetValue(DarkThemeProperty);
+            set => SetValue(DarkThemeProperty, value);
         }
         #endregion
 
@@ -335,8 +335,8 @@ namespace Forms9Patch
         /// <value>The Toggle behavior (None, Radio, Multiselect).</value>
         public GroupToggleBehavior GroupToggleBehavior
         {
-            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); 
-            set => SetValue(GroupToggleBehaviorProperty, value); 
+            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
+            set => SetValue(GroupToggleBehaviorProperty, value);
         }
         #endregion
 
@@ -351,8 +351,8 @@ namespace Forms9Patch
         /// <value>The width of the separator.</value>
         public float SeparatorWidth
         {
-            get => (float)GetValue(SeparatorWidthProperty); 
-            set => SetValue(SeparatorWidthProperty, value); 
+            get => (float)GetValue(SeparatorWidthProperty);
+            set => SetValue(SeparatorWidthProperty, value);
         }
         #endregion
 
@@ -367,8 +367,8 @@ namespace Forms9Patch
         /// <value>default=false</value>
         public bool TrailingIcon
         {
-            get => (bool)GetValue(TrailingIconProperty); 
-            set => SetValue(TrailingIconProperty, value); 
+            get => (bool)GetValue(TrailingIconProperty);
+            set => SetValue(TrailingIconProperty, value);
         }
         #endregion
 
@@ -383,8 +383,8 @@ namespace Forms9Patch
         /// <value>The haptic effect.</value>
         public HapticEffect HapticEffect
         {
-            get => (HapticEffect)GetValue(HapticEffectProperty); 
-            set => SetValue(HapticEffectProperty, value); 
+            get => (HapticEffect)GetValue(HapticEffectProperty);
+            set => SetValue(HapticEffectProperty, value);
         }
         #endregion
 
@@ -399,8 +399,8 @@ namespace Forms9Patch
         /// <value>The haptic mode.</value>
         public KeyClicks HapticMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty); 
-            set => SetValue(HapticModeProperty, value); 
+            get => (KeyClicks)GetValue(HapticModeProperty);
+            set => SetValue(HapticModeProperty, value);
         }
         #endregion
 
@@ -415,8 +415,8 @@ namespace Forms9Patch
         /// <value><c>true</c> tint IconImage image with TextColor; otherwise, <c>false</c>.</value>
         public bool TintIcon
         {
-            get => (bool)GetValue(TintIconProperty); 
-            set => SetValue(TintIconProperty, value); 
+            get => (bool)GetValue(TintIconProperty);
+            set => SetValue(TintIconProperty, value);
         }
         #endregion
 
@@ -431,8 +431,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if has tight spacing; otherwise, <c>false</c>.</value>
         public bool HasTightSpacing
         {
-            get => (bool)GetValue(HasTightSpacingProperty); 
-            set => SetValue(HasTightSpacingProperty, value); 
+            get => (bool)GetValue(HasTightSpacingProperty);
+            set => SetValue(HasTightSpacingProperty, value);
         }
         #endregion
 
@@ -447,8 +447,8 @@ namespace Forms9Patch
         /// <value>The orientation of the elements within the segments.</value>
         public StackOrientation IntraSegmentOrientation
         {
-            get => (StackOrientation)GetValue(IntraSegmentOrientationProperty); 
-            set => SetValue(IntraSegmentOrientationProperty, value); 
+            get => (StackOrientation)GetValue(IntraSegmentOrientationProperty);
+            set => SetValue(IntraSegmentOrientationProperty, value);
         }
         #endregion
 
@@ -463,8 +463,8 @@ namespace Forms9Patch
         /// <value>The intra segment spacing.</value>
         public double IntraSegmentSpacing
         {
-            get => (double)GetValue(IntraSegmentSpacingProperty); 
-            set => SetValue(IntraSegmentSpacingProperty, value); 
+            get => (double)GetValue(IntraSegmentSpacingProperty);
+            set => SetValue(IntraSegmentSpacingProperty, value);
         }
         #endregion
 
@@ -478,8 +478,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.StackOrientation Orientation
         {
-            get => (Xamarin.Forms.StackOrientation)GetValue(OrientationProperty); 
-            set => SetValue(OrientationProperty, value); 
+            get => (Xamarin.Forms.StackOrientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
         #endregion
 
@@ -496,8 +496,8 @@ namespace Forms9Patch
         /// <value>The color of the font.</value>
         public Color TextColor
         {
-            get => (Color)GetValue(TextColorProperty); 
-            set => SetValue(TextColorProperty, value); 
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
         #endregion
 
@@ -512,8 +512,8 @@ namespace Forms9Patch
         /// <value>The horizontal text alignment.</value>
         public TextAlignment HorizontalTextAlignment
         {
-            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty); 
-            set => SetValue(HorizontalTextAlignmentProperty, value); 
+            get => (TextAlignment)GetValue(HorizontalTextAlignmentProperty);
+            set => SetValue(HorizontalTextAlignmentProperty, value);
         }
         #endregion
 
@@ -528,8 +528,8 @@ namespace Forms9Patch
         /// <value>The vertical text alignment.</value>
         public TextAlignment VerticalTextAlignment
         {
-            get => (TextAlignment)GetValue(VerticalTextAlignmentProperty); 
-            set => SetValue(VerticalTextAlignmentProperty, value); 
+            get => (TextAlignment)GetValue(VerticalTextAlignmentProperty);
+            set => SetValue(VerticalTextAlignmentProperty, value);
         }
         #endregion
 
@@ -543,8 +543,8 @@ namespace Forms9Patch
         /// </summary>
         public LineBreakMode LineBreakMode
         {
-            get => (LineBreakMode)GetValue(LineBreakModeProperty); 
-            set => SetValue(LineBreakModeProperty, value); 
+            get => (LineBreakMode)GetValue(LineBreakModeProperty);
+            set => SetValue(LineBreakModeProperty, value);
         }
         #endregion LineBreakMode property
 
@@ -558,8 +558,8 @@ namespace Forms9Patch
         /// </summary>
         public AutoFit AutoFit
         {
-            get => (AutoFit)GetValue(AutoFitProperty); 
-            set => SetValue(AutoFitProperty, value); 
+            get => (AutoFit)GetValue(AutoFitProperty);
+            set => SetValue(AutoFitProperty, value);
         }
         #endregion AutoFit property
 
@@ -573,8 +573,8 @@ namespace Forms9Patch
         /// </summary>
         public int Lines
         {
-            get => (int)GetValue(LinesProperty); 
-            set => SetValue(LinesProperty, value); 
+            get => (int)GetValue(LinesProperty);
+            set => SetValue(LinesProperty, value);
         }
         #endregion Lines property
 
@@ -588,8 +588,8 @@ namespace Forms9Patch
         /// </summary>
         public double MinFontSize
         {
-            get => (double)GetValue(MinFontSizeProperty); 
-            set => SetValue(MinFontSizeProperty, value); 
+            get => (double)GetValue(MinFontSizeProperty);
+            set => SetValue(MinFontSizeProperty, value);
         }
         #endregion MinFontSize property
 
@@ -741,14 +741,14 @@ namespace Forms9Patch
             int count = Children.Count;
             if (count > 1)
             {
-                ((IShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
+                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
                 for (int i = 1; i < count - 1; i++)
-                    ((IShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
-                ((IShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
+                    ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
+                ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
             }
             else if (count == 1)
             {
-                ((IShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
+                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
             UpdateChildrenPadding();
             InvalidateLayout();

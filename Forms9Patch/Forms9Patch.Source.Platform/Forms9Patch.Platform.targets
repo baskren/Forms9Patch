@@ -6,7 +6,8 @@
       <Link>Exceptions\InvalidDataContractException.cs</Link>
     </Compile>
 
-    <!-- EXTENSIONS -->
+    <!-- EXTENSIONS --><!--
+
     <Compile Include="..\Forms9Patch.Source.Platform\Extensions\SKBitmapExtensions.cs">
       <Link>Extensions\SKBitmapExtensions.cs</Link>
     </Compile>
@@ -19,18 +20,24 @@
     <Compile Include="..\Forms9Patch.Source.Platform\Extensions\SKRectExtensions.cs">
       <Link>Extensions\SKRectExtensions.cs</Link>
     </Compile>
+  -->
 
     <!-- MODELS -->
+    <!--
     <Compile Include="..\Forms9Patch.Source.Platform\Models\F9PImageData.cs">
       <Link>Models\F9PImageData.cs</Link>
     </Compile>
+  -->
 
     <!-- PLATORM VIEWS -->
+    <!--
     <Compile Include="..\Forms9Patch.Source.Platform\Renderers\SkiaRoundedBoxAndImageView.cs">
       <Link>PlatformViews\SkiaRoundedBoxAndImageView.cs</Link>
     </Compile>
+  -->
 
     <!-- RENDERERS -->
+    <!--
     <Compile Include="..\Forms9Patch.Source.Platform\Renderers\AbsoluteLayoutRenderer.cs">
       <Link>Renderers\AbsoluteLayoutRenderer.cs</Link>
     </Compile>
@@ -61,11 +68,14 @@
     <Compile Include="..\Forms9Patch.Source.Platform\Renderers\LayoutRenderer_T_.cs">
       <Link>Renderers\LayoutRenderer_T_.cs</Link>
     </Compile>
+  -->
 
     <!-- Assembly Info -->
+    <!--
     <Compile Include="..\Forms9Patch.Source.Platform\PlatformAssemblyInfo.cs">
       <Link>PlatformAssemblyInfo.cs</Link>
     </Compile>
+  -->
     
   </ItemGroup>
 </Project>

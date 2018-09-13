@@ -23,5 +23,6 @@ namespace Forms9Patch
         Xamarin.Forms.Size SourceImageSize { get; }
 
         bool AntiAlias { get; set; }
+
     }
 }

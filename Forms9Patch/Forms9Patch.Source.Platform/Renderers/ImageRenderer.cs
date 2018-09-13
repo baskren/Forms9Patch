@@ -31,7 +31,7 @@ namespace Forms9Patch.UWP
 namespace Forms9Patch
 #endif
 {
-    public class ImageRenderer : ViewRenderer<Image, SkiaRoundedBoxAndImageView>
+    public class ImageRenderer : ViewRenderer<Xamarin.Forms.Image, SkiaRoundedBoxAndImageView>
     {
         #region Fields
         static int _instances;
@@ -82,7 +82,7 @@ namespace Forms9Patch
 
 
         #region Change managements
-        protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Image> e)
         {
             base.OnElementChanged(e);
 

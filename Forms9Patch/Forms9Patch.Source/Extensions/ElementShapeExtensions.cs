@@ -3,9 +3,9 @@ namespace Forms9Patch
 {
     static class ExtendedElementShapeExtensions
     {
-        public static bool IsSegment(this IShape element)
+        public static bool IsSegment(this IExtendedShape element)
         {
-            switch(element.ExtendedElementShape)
+            switch (element.ExtendedElementShape)
             {
                 case ExtendedElementShape.SegmentEnd:
                 case ExtendedElementShape.SegmentMid:

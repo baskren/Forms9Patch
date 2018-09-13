@@ -11,7 +11,7 @@ namespace Forms9Patch
     /// Forms9Patch Popup base.
     /// </summary>
     [ContentProperty("ContentView")]
-    public abstract class PopupBase : Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
+    public abstract class PopupBase : Xamarin.Forms.Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
     {
         #region Invalid Parent Properties
@@ -192,7 +192,7 @@ namespace Forms9Patch
         /// <value>The background image.</value>
         public Image BackgroundImage
         {
-            get => (Image)GetValue(BackgroundImageProperty);
+            get => (Forms9Patch.Image)GetValue(BackgroundImageProperty);
             set => SetValue(BackgroundImageProperty, value);
         }
         #endregion BackgroundImage
@@ -325,6 +325,7 @@ namespace Forms9Patch
         }
         #endregion ElementShape property
 
+        /*
         #region ExtendedElementShape property
         /// <summary>
         /// backing store for ExtendedElementShape property
@@ -339,6 +340,7 @@ namespace Forms9Patch
             set => SetValue(ExtendedElementShapeProperty, value);
         }
         #endregion ExtendedElementShape property
+        */
 
         #region IElement
 
@@ -532,7 +534,7 @@ namespace Forms9Patch
             layout.OutlineRadius = OutlineRadius;
             layout.OutlineWidth = OutlineWidth;
             layout.ElementShape = ElementShape;
-            layout.ExtendedElementShape = ((ILayout)this).ExtendedElementShape;
+            //layout.ExtendedElementShape = ((ILayout)this).ExtendedElementShape;
 
             #endregion IShape
 
@@ -616,8 +618,8 @@ namespace Forms9Patch
                     _decorativeContainerView.OutlineRadius = OutlineRadius;
                 else if (propertyName == ElementShapeProperty.PropertyName)
                     _decorativeContainerView.ElementShape = ElementShape;
-                else if (propertyName == ExtendedElementShapeProperty.PropertyName)
-                    _decorativeContainerView.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
+                //else if (propertyName == ExtendedElementShapeProperty.PropertyName)
+                //    _decorativeContainerView.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
                 #endregion IShape
 
                 #endregion IBackground

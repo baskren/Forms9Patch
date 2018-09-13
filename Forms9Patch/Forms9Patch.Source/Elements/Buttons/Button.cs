@@ -16,7 +16,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
-    public class Button : Frame, IDisposable, IButton
+    public class Button : Frame, IDisposable, IButton, IExtendedShape
     {
         #region Xamarin.Forms emulation properties
         /*
@@ -533,6 +533,59 @@ namespace Forms9Patch
 
         // BackgroundImage inherited
 
+        #region IExtendedShape
+
+        #region ExtendedElementShapeOrientation property
+        /// <summary>
+        /// Backing store for the extended element shape orientation property.
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementShapeOrientationProperty = ShapeBase.ExtendedElementShapeOrientationProperty;
+        /// <summary>
+        /// Gets or sets the orientation of the shape if it's an extended element shape
+        /// </summary>
+        /// <value>The forms9 patch. IS hape. extended element shape orientation.</value>
+        ExtendedElementShapeOrientation IExtendedShape.ExtendedElementShapeOrientation
+        {
+            get => (ExtendedElementShapeOrientation)GetValue(ExtendedElementShapeOrientationProperty);
+            set => SetValue(ExtendedElementShapeOrientationProperty, value);
+        }
+        #endregion
+
+        #region ExtendedElementShape property
+        /// <summary>
+        /// backing store for ExtendedElementShape property
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;// = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(ShapeAndImageView), default(ExtendedElementShape));
+        /// <summary>
+        /// Gets/Sets the ExtendedElementShape property
+        /// </summary>
+        ExtendedElementShape IExtendedShape.ExtendedElementShape
+        {
+            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty);
+            set => SetValue(ExtendedElementShapeProperty, value);
+        }
+        #endregion ExtendedElementShape property
+
+        #region ExtendedElementSeparatorWidth
+        public static readonly BindableProperty ExtendedElementSeparatorWidthProperty = ShapeBase.ExtendedElementSeparatorWidthProperty;
+        float IExtendedShape.ExtendedElementSeparatorWidth
+        {
+            get => (float)GetValue(ExtendedElementSeparatorWidthProperty);
+            set => SetValue(ExtendedElementSeparatorWidthProperty, value);
+        }
+        #endregion ExtendedElementSeparatorWidth
+
+        #region ParentSegmentsOrientation
+        public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
+        public StackOrientation ParentSegmentsOrientation
+        {
+            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
+            set => SetValue(ParentSegmentsOrientationProperty, value);
+        }
+        #endregion ParentSegmentsOrientation
+
+
+
         #region IShape
 
 
@@ -611,6 +664,8 @@ namespace Forms9Patch
 
 
         #endregion IShape
+
+        #endregion IExtendedShape
 
         #endregion Superceding IBackground
 
@@ -894,13 +949,14 @@ namespace Forms9Patch
             set { SetValue(SegmentTypeProperty, value); }
         }
         */
-
+        /*
         internal static BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("ParentSegmentsOrientation", typeof(StackOrientation), typeof(Button), StackOrientation.Horizontal);
         internal StackOrientation ParentSegmentsOrientation
         {
             get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
             set => SetValue(ParentSegmentsOrientationProperty, value);
         }
+                */
 
         internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(Button), -1f);
         internal float SeparatorWidth
@@ -943,7 +999,7 @@ namespace Forms9Patch
         /// <summary>
         /// The image.
         /// </summary>
-        internal protected Image _iconImage;
+        internal protected Forms9Patch.Image _iconImage;
         /// <summary>
         /// The label.
         /// </summary>
@@ -1674,7 +1730,8 @@ namespace Forms9Patch
 
             if (propertyName == OutlineWidthProperty.PropertyName
                 || propertyName == ParentSegmentsOrientationProperty.PropertyName
-                || propertyName == ExtendedElementShapeProperty.PropertyName)
+                || propertyName == ExtendedElementShapeProperty.PropertyName
+               )
                 SetStackLayoutPadding();
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
@@ -1761,7 +1818,8 @@ namespace Forms9Patch
                 || propertyName == IsSelectedProperty.PropertyName
                 || propertyName == IsEnabledProperty.PropertyName
                 || propertyName == DarkThemeProperty.PropertyName
-                || propertyName == ExtendedElementShapeProperty.PropertyName)
+                || propertyName == ExtendedElementShapeProperty.PropertyName
+                    )
             {
                 //System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
                 UpdateElements();

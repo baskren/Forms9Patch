@@ -64,13 +64,28 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for ExtendedElementShape property
         /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(AbsoluteLayout), default(ElementShape),
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ShapeBase), default(ElementShape),
             propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
             {
-                ((IShape)bindable).ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
+                if (bindable is IExtendedShape extendedShape)
+                    extendedShape.ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
             })
             );
         #endregion ElementShape property
+
+        #region ExtendedElementShapeOrientationProperty
+        /// <summary>
+        /// Backing store for ExtendedElementShapeOrientaiton property
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementShapeOrientationProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementShapeOrientation", typeof(ExtendedElementShapeOrientation), typeof(ShapeBase), default(ExtendedElementShapeOrientation));
+        #endregion
+
+        #region ExtendedElementSeparatorWidth
+        /// <summary>
+        /// Backind store for the extended element separator width property.
+        /// </summary>
+        public static readonly BindableProperty ExtendedElementSeparatorWidthProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementSeparatorWidth", typeof(float), typeof(ShapeBase), 1.0f);
+        #endregion
 
         #region ExtendedElementShape property
         /// <summary>
@@ -78,6 +93,13 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty ExtendedElementShapeProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementShape", typeof(ExtendedElementShape), typeof(ShapeBase), default(ExtendedElementShape));
         #endregion ExtendedElementShape property
+
+        #region ParentSegmentsOrientation property
+        /// <summary>
+        /// Backing store for the SegmentOrientation of the ExtendedShape's Parent
+        /// </summary>
+        public static readonly BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ParentSegmentsOrientation", typeof(StackOrientation), typeof(ShapeBase), default(StackOrientation));
+        #endregion ParentSegmentsOrientation property
 
         #endregion IShape backing stores
 
@@ -101,16 +123,16 @@ namespace Forms9Patch
                 var padT = Math.Max(0, shadowR - shadowY);
                 var padB = Math.Max(0, shadowR + shadowY);
 
-                if (shape is Button materialButton)
+                if (shape is IExtendedShape extendedShape)
                 {
-                    var orientation = materialButton.ParentSegmentsOrientation;
-                    if (orientation == StackOrientation.Horizontal && (shape.ExtendedElementShape == ExtendedElementShape.SegmentMid || shape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
+                    var orientation = extendedShape.ParentSegmentsOrientation;
+                    if (orientation == StackOrientation.Horizontal && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
                         padL = 0;
-                    if (orientation == StackOrientation.Horizontal && (shape.ExtendedElementShape == ExtendedElementShape.SegmentStart || shape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
+                    if (orientation == StackOrientation.Horizontal && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentStart || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padR = 0;
-                    if (orientation == StackOrientation.Vertical && (shape.ExtendedElementShape == ExtendedElementShape.SegmentMid || shape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
+                    if (orientation == StackOrientation.Vertical && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
                         padT = 0;
-                    if (orientation == StackOrientation.Vertical && (shape.ExtendedElementShape == ExtendedElementShape.SegmentStart || shape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
+                    if (orientation == StackOrientation.Vertical && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentStart || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padB = 0;
                 }
                 if (scaleForDisplay)

@@ -80,8 +80,8 @@ void SetImageElement()
 {
     if (ShapeElement is ILayout layout)
         ImageElement = layout.BackgroundImage;
-    else if (ShapeElement is Image image)
-        ImageElement = image;
+    else if (ShapeElement is Xamarin.Forms.Image image)
+                ImageElement = image;
 }
 #endregion
 
@@ -1250,9 +1250,8 @@ void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath, SKPa
         }
     }
 }
-
-
 #endregion
+
 
 
 #region layout support 
@@ -1821,7 +1820,8 @@ internal static SKPath BubblePerimeterPath(BubbleLayout bubble, SKRect rect, flo
     }
     return result;
 }
-        #endregion
+       
+#endregion
     }
 }
 

@@ -10,6 +10,8 @@ namespace Forms9Patch
         /// Gets or Sets the Background Image
         /// </summary>
         Forms9Patch.Image BackgroundImage { get; set; }
+
+        //bool LimitMinSizeToBackgroundImageSize { get; set; }
     }
 
 

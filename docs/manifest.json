@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/Buttons.html",
-          "hash": "LzGVTSIy1EvpGTjtY9WQfQ=="
+          "hash": "QhrpalcRAUPsHW8ahw5E5w=="
         }
       },
       "is_incremental": false,
@@ -115,6 +115,21 @@
         ".html": {
           "relative_path": "guides/Layouts.html",
           "hash": "R/s7fga+a1jxqllRNaXpuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "guides/Popups.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/Popups.html",
+          "hash": "Sh7rycymY8xvbvF3kmGA/g=="
         }
       },
       "is_incremental": false,
@@ -1342,6 +1357,39 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Popups/Bubble-droid.gif",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Popups/Bubble-droid.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Popups/Bubble-iOS.gif",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Popups/Bubble-iOS.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "guides/images/Popups/Modal-iOS.gif",
+      "output": {
+        "resource": {
+          "relative_path": "guides/images/Popups/Modal-iOS.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "guides/index.md",
       "output": {
@@ -1359,7 +1407,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/toc.html",
-          "hash": "9oJ67RyK6CkYc9fZr9DPRQ=="
+          "hash": "XZ3qeuK5tsy3l49XOGl0Vw=="
         }
       },
       "is_incremental": false,
@@ -1374,7 +1422,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "9O4n5dN1tQOLwnVcs2mlgQ=="
+          "hash": "xrH6Z2k5zQvIGXpuQz/Sfg=="
         }
       },
       "is_incremental": false,
@@ -1718,6 +1766,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.ExtendedElementShapeOrientation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.ExtendedElementShapeOrientation.html",
+          "hash": "C6luG5ovVVgiWGfCCAFlyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.Fill.yml",
       "output": {
         ".html": {
@@ -1938,7 +1998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IBackground.html",
-          "hash": "IumzYkleBWZHrYCAJrTfhQ=="
+          "hash": "FJyW4/T/yJKgC7PEzu+D0w=="
         }
       },
       "is_incremental": false,
@@ -1950,7 +2010,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IButton.html",
-          "hash": "COS6UQIS3iYEtGgTZNVXiw=="
+          "hash": "fMYV9A0vFSpjqiYn+4FbIg=="
         }
       },
       "is_incremental": false,
@@ -1962,7 +2022,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IButtonState.html",
-          "hash": "vr2S151+0eJIKeGsjQOyCQ=="
+          "hash": "/h+CC4NVj1513MZ2kRb3iw=="
         }
       },
       "is_incremental": false,
@@ -2106,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ILayout.html",
-          "hash": "az97im2Im9v5PO1e/CylvQ=="
+          "hash": "h+e2nQ1n9/KoDYp0BrgBUQ=="
         }
       },
       "is_incremental": false,
@@ -2178,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IPopup.html",
-          "hash": "gGPe96uziY0WmETEC3/MCQ=="
+          "hash": "w2Gb4We/cYIt6+/11Wec9A=="
         }
       },
       "is_incremental": false,
@@ -2214,7 +2274,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.IShape.html",
-          "hash": "Hyw/rm1p2PP+5SeDPgRQKQ=="
+          "hash": "fUj35ezVznRjtbgBEUovyw=="
         }
       },
       "is_incremental": false,
@@ -2654,6 +2714,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.SKRectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.SKRectExtensions.html",
+          "hash": "Zzo1RQd6QlIPysOeiYAkQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.Segment.yml",
       "output": {
         ".html": {
@@ -2726,11 +2798,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.ShapeAndImageView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.ShapeAndImageView.html",
+          "hash": "AaiEKVygmUkqArv3QeVUkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Forms9Patch.ShapeBase.yml",
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.ShapeBase.html",
-          "hash": "ibQOsklCz5Tlvj/cvgSRRA=="
+          "hash": "ercCjpyyG0mM/AOAyML2zw=="
         }
       },
       "is_incremental": false,
@@ -2755,6 +2839,18 @@
         ".html": {
           "relative_path": "api/Forms9Patch.SinglePicker.html",
           "hash": "Bg314WgkOQFNpb30Lzpbwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Forms9Patch.SkiaColorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Forms9Patch.SkiaColorExtensions.html",
+          "hash": "Cj0YQUsZgmqu+HY7qHMkqQ=="
         }
       },
       "is_incremental": false,
@@ -2910,7 +3006,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Forms9Patch.html",
-          "hash": "MdsPx0B8Rqf9OkdzJXLl5A=="
+          "hash": "GQPIinWtgB9/mNt68IH/5w=="
         }
       },
       "is_incremental": false,
@@ -3126,7 +3222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FormsGestures.VisualElementExtensions.html",
-          "hash": "1UVE7cQkKQLSQKwQwtWjTw=="
+          "hash": "rtofQByhhNbhB7eRglW4Ng=="
         }
       },
       "is_incremental": false,
@@ -3186,7 +3282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.CopyingExtensions.html",
-          "hash": "wrvButwp7IopMPKbSb+1mQ=="
+          "hash": "WRYolSl3ie3Eapz56ZpxoQ=="
         }
       },
       "is_incremental": false,
@@ -3438,7 +3534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.IWeakEventManager.html",
-          "hash": "RoFtACB5Or3Yk2XQUDat8A=="
+          "hash": "mdkZDi+CSaeqRd4is3Z3IA=="
         }
       },
       "is_incremental": false,
@@ -3450,7 +3546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.JsonExtensions.html",
-          "hash": "ajmtMORcw+rW2h1PfzSc7w=="
+          "hash": "DN96OwpwYLVUi/1wsYg3dw=="
         }
       },
       "is_incremental": false,
@@ -3582,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/P42.Utils.WeakEventManager.html",
-          "hash": "yphSNRN/nt01wNivapO7Mg=="
+          "hash": "HI7ckK/Dvdpy5O7/QS2uPw=="
         }
       },
       "is_incremental": false,
@@ -3630,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "KtHLvgQbh0GncNF4cz9cyw=="
+          "hash": "22xVqegCwadLqHLdQWhb3Q=="
         }
       },
       "is_incremental": false,

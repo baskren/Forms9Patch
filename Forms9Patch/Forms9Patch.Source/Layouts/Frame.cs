@@ -9,251 +9,21 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Frame layout.
     /// </summary>
-    public class Frame : Xamarin.Forms.Frame, ILayout
+    public class Frame : Forms9Patch.ContentView
     {
+        #region Constructor
         static Frame()
         {
             Settings.ConfirmInitialization();
         }
 
-        #region ILayout Properties
-
-        #region IgnoreChildren
-        /// <summary>
-        /// The ignore children property.
-        /// </summary>
-        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(Frame), default(bool));
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> ignore children.
-        /// </summary>
-        /// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
-        public bool IgnoreChildren
-        {
-            get => (bool)GetValue(IgnoreChildrenProperty); 
-            set => SetValue(IgnoreChildrenProperty, value); 
-        }
-        #endregion IgnoreChildren
-
-        #region IBackground
-
-        #region BackgroundImage
-        /// <summary>
-        /// BackgroundImage backing store
-        /// </summary>
-        public static BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
-        /// <summary>
-        /// Gets or sets the background image.
-        /// </summary>
-        /// <value>The background image.</value>
-        public Image BackgroundImage
-        {
-            get => (Image)GetValue(BackgroundImageProperty); 
-            set => SetValue(BackgroundImageProperty, value); 
-        }
-        #endregion BackgroundImage
-
-        #region IShape
-
-        #region BackgroundColor property
-        /// <summary>
-        /// backing store for BackgroundColor property
-        /// </summary>
-        public static new readonly BindableProperty BackgroundColorProperty = ShapeBase.BackgroundColorProperty;
-        /// <summary>
-        /// Gets/Sets the BackgroundColor property
-        /// </summary>
-        public new Color BackgroundColor
-        {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
-        }
-        #endregion BackgroundColor property
-
-        #region HasShadow property
-#if _Forms9Patch_Frame_
-        /// <summary>
-        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute and store shadow padding
-        /// </summary>
-        public static new BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-        /// <summary>
-        /// Gets/Sets the HasShadow property
-        /// </summary>
-        public new bool HasShadow
-#else
-        /// <summary>
-        /// HasShadow property backing store
-        /// </summary>
-        public static BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-        /// <summary>
-        /// Gets/Sets the HasShadow property
-        /// </summary>
-        public bool HasShadow
-#endif
-        {
-            get => (bool)GetValue(HasShadowProperty); 
-            set => SetValue(HasShadowProperty, value); 
-        }
-        #endregion HasShadow property
-
-        #region ShadowInverted
-        /// <summary>
-        /// Backing store for the ShadowInverted bindable property.
-        /// </summary>
-        /// <remarks></remarks>
-        public static readonly BindableProperty ShadowInvertedProperty = ShapeBase.ShadowInvertedProperty;
-        /// <summary>
-        /// Gets or sets a flag indicating if the layout's shadow is inverted. This is a bindable property.
-        /// </summary>
-        /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
-        public bool ShadowInverted
-        {
-            get => (bool)GetValue(ShadowInvertedProperty); 
-            set => SetValue(ShadowInvertedProperty, value); 
-        }
-        #endregion ShadowInverted
-
-        #region OutlineColor property
-
-#if _Forms9Patch_Frame_
-        /// <summary>
-        /// backing store for OutlineColor property
-        /// </summary>
-        public static new readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
-        /// <summary>
-        /// Gets/Sets the OutlineColor property
-        /// </summary>
-        public new Color OutlineColor
-        {
-            get => (Color)GetValue(OutlineColorProperty); 
-            set => SetValue(OutlineColorProperty, value); 
-        }
-#else
-        /// <summary>
-        /// backing store for OutlineColor property
-        /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
-        /// <summary>
-        /// Gets/Sets the OutlineColor property
-        /// </summary>
-        public Color OutlineColor
-        {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
-        }
-#endif
-
-        #endregion OutlineColor property
-
-        #region OutlineRadius
-        /// <summary>
-        /// Backing store for the OutlineRadius bindable property.
-        /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
-        /// <summary>
-        /// Gets or sets the outline radius.
-        /// </summary>
-        /// <value>The outline radius.</value>
-        public float OutlineRadius
-        {
-            get => (float)GetValue(OutlineRadiusProperty); 
-            set => SetValue(OutlineRadiusProperty, value); 
-        }
-        #endregion OutlineRadius
-
-        #region OutlineWidth
-        /// <summary>
-        /// Backing store for the OutlineWidth bindable property.
-        /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
-        /// <summary>
-        /// Gets or sets the width of the outline.
-        /// </summary>
-        /// <value>The width of the outline.</value>
-        public float OutlineWidth
-        {
-            get => (float)GetValue(OutlineWidthProperty); 
-            set => SetValue(OutlineWidthProperty, value); 
-        }
-        #endregion OutlineWidth
-
-        #region ElementShape property
-        /// <summary>
-        /// Backing store for the ElementShape property
-        /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
-        /// <summary>
-        /// Gets/sets the geometry of the element
-        /// </summary>
-        public ElementShape ElementShape
-        {
-            get => (ElementShape)GetValue(ElementShapeProperty); 
-            set => SetValue(ElementShapeProperty, value); 
-        }
-        #endregion ElementShape property
-
-        #region ExtendedElementShape property
-        /// <summary>
-        /// backing store for ExtendedElementShape property
-        /// </summary>
-        internal static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;
-        /// <summary>
-        /// Gets/Sets the ExtendedElementShape property
-        /// </summary>
-        ExtendedElementShape IShape.ExtendedElementShape
-        {
-            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
-            set => SetValue(ExtendedElementShapeProperty, value); 
-        }
-        #endregion ExtendedElementShape property
-
-        #region IElement
-
-        #region InstanceId
-        /// <summary>
-        /// The Instance Id (for debugging purposes)
-        /// </summary>
-        public int InstanceId => _id;
-        #endregion InstanceId
-
-        #endregion IElement
-
-        #endregion IShape
-
-        #endregion IBackground
-
-        #endregion ILayout
-
-
-        #region Fields
-        static int _instances = 0;
-        int _id;
-        #endregion
-
-
-        #region Constructor
         /// <summary>
         /// Initializes an instance of the <see cref="Forms9Patch.Frame"/> class.
         /// </summary>
         public Frame()
         {
-            _id = _instances++;
             Padding = new Thickness(20);
         }
-        #endregion
-
-
-        #region Description
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
-        /// </summary>
-        /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.</returns>
-        public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
-
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => Description();
         #endregion
 
 
@@ -306,7 +76,7 @@ namespace Forms9Patch
 
 
         #region Layout
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+        //Thickness IExtendedShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
         /// <summary>
         /// processes measurement of layout

@@ -60,8 +60,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.ImageSource Source
         {
-            get => (Xamarin.Forms.ImageSource)GetValue(SourceProperty); 
-            set => SetValue(SourceProperty, value); 
+            get => (Xamarin.Forms.ImageSource)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
         }
         #endregion Source property
 
@@ -73,8 +73,8 @@ namespace Forms9Patch
         /// <summary>
         /// Gets/Sets the IsLoading property
         /// </summary>
-        public bool IsLoading => (bool)GetValue(IsLoadingProperty); 
-        
+        public bool IsLoading => (bool)GetValue(IsLoadingProperty);
+
         #endregion IsLoading property
 
         #region Fill
@@ -89,8 +89,8 @@ namespace Forms9Patch
         /// <value>The fill method (AspectFill, AspectFit, Fill, Tile)</value>
         public Fill Fill
         {
-            get => (Fill)GetValue(FillProperty); 
-            set => SetValue(FillProperty, value); 
+            get => (Fill)GetValue(FillProperty);
+            set => SetValue(FillProperty, value);
         }
         #endregion Fill
 
@@ -126,8 +126,8 @@ namespace Forms9Patch
         /// <value>The content padding.</value>
         public Thickness ContentPadding
         {
-            get => (Thickness)GetValue(ContentPaddingProperty); 
-            internal set => SetValue(ContentPaddingProperty, value); 
+            get => (Thickness)GetValue(ContentPaddingProperty);
+            internal set => SetValue(ContentPaddingProperty, value);
         }
         #endregion ContentPadding
 
@@ -142,8 +142,8 @@ namespace Forms9Patch
         /// <value>The tint.  Default is not to tint the image</value>
         public Color TintColor
         {
-            get => (Color)GetValue(TintColorProperty); 
-            set => SetValue(TintColorProperty, value); 
+            get => (Color)GetValue(TintColorProperty);
+            set => SetValue(TintColorProperty, value);
         }
         #endregion TintColor
 
@@ -154,8 +154,8 @@ namespace Forms9Patch
         /// </summary>
         public Size SourceImageSize
         {
-            get => (Size)GetValue(BaseImageSizeProperty); 
-            internal set => SetValue(BaseImageSizeProperty, value); 
+            get => (Size)GetValue(BaseImageSizeProperty);
+            internal set => SetValue(BaseImageSizeProperty, value);
         }
         #endregion SourceImageSize
 
@@ -169,8 +169,8 @@ namespace Forms9Patch
         /// </summary>
         public bool AntiAlias
         {
-            get => (bool)GetValue(AntiAliasProperty); 
-            set => SetValue(AntiAliasProperty, value); 
+            get => (bool)GetValue(AntiAliasProperty);
+            set => SetValue(AntiAliasProperty, value);
         }
         #endregion AntiAlias property
 
@@ -186,8 +186,8 @@ namespace Forms9Patch
         /// </summary>
         public new Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
         #endregion BackgroundColor property
 
@@ -201,8 +201,8 @@ namespace Forms9Patch
         /// </summary>
         public bool HasShadow
         {
-            get => (bool)GetValue(HasShadowProperty); 
-            set => SetValue(HasShadowProperty, value); 
+            get => (bool)GetValue(HasShadowProperty);
+            set => SetValue(HasShadowProperty, value);
         }
         #endregion HasShadow property
 
@@ -216,7 +216,7 @@ namespace Forms9Patch
         /// </summary>
         public bool ShadowInverted
         {
-            get => (bool)GetValue(ShadowInvertedProperty); 
+            get => (bool)GetValue(ShadowInvertedProperty);
             set => SetValue(ShadowInvertedProperty, value);
         }
         #endregion ShadowInverted property
@@ -231,8 +231,8 @@ namespace Forms9Patch
         /// </summary>
         public Color OutlineColor
         {
-            get => (Color)GetValue(OutlineColorProperty); 
-            set => SetValue(OutlineColorProperty, value); 
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
         #endregion OutlineColor property
 
@@ -246,8 +246,8 @@ namespace Forms9Patch
         /// </summary>
         public float OutlineRadius
         {
-            get => (float)GetValue(OutlineRadiusProperty); 
-            set => SetValue(OutlineRadiusProperty, value); 
+            get => (float)GetValue(OutlineRadiusProperty);
+            set => SetValue(OutlineRadiusProperty, value);
         }
         #endregion OutlineRadius property
 
@@ -261,8 +261,8 @@ namespace Forms9Patch
         /// </summary>
         public float OutlineWidth
         {
-            get => (float)GetValue(OutlineWidthProperty); 
-            set => SetValue(OutlineWidthProperty, value); 
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
         }
         #endregion OutlineWidth property
 
@@ -276,11 +276,12 @@ namespace Forms9Patch
         /// </summary>
         public ElementShape ElementShape
         {
-            get => (ElementShape)GetValue(ElementShapeProperty); 
-            set => SetValue(ElementShapeProperty, value); 
+            get => (ElementShape)GetValue(ElementShapeProperty);
+            set => SetValue(ElementShapeProperty, value);
         }
         #endregion ElementShape property
 
+        /*
         #region ExtendedElementShape property
         /// <summary>
         /// backing store for ExtendedElementShape property
@@ -295,6 +296,7 @@ namespace Forms9Patch
             set => SetValue(ExtendedElementShapeProperty, value); 
         }
         #endregion ExtendedElementShape property
+        */
 
         #region IElement
 
@@ -421,7 +423,7 @@ namespace Forms9Patch
                 TranslationY = image.TranslationY;
                 WidthRequest = image.WidthRequest;
 
-                ((IShape)this).ExtendedElementShape = ((IShape)image).ExtendedElementShape;
+                //((IShape)this).ExtendedElementShape = ((IShape)image).ExtendedElementShape;
                 ElementShape = image.ElementShape;
                 OutlineWidth = image.OutlineWidth;
                 OutlineRadius = image.OutlineRadius;

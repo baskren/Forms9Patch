@@ -7,7 +7,7 @@ namespace Forms9Patch
 
         float PointerTipRadius { get; set; }
 
-        float PointerAxialPostition { get; set; }
+        float PointerAxialPosition { get; set; }
 
         PointerDirection PointerDirection { get; set; }
 
