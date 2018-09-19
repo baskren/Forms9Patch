@@ -4,10 +4,11 @@ using Xamarin.Forms;
 
 namespace F9PRebuild
 {
-    public class MainPage : ContentPage
+    public class ImageInStack : ContentPage
     {
-        public MainPage()
+        public ImageInStack()
         {
+
             Content = new StackLayout
             {
                 Spacing = 0,

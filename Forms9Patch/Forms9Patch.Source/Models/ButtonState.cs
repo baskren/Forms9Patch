@@ -65,7 +65,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Image bindable property.
         /// </summary>
-        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Xamarin.Forms.Image), typeof(ButtonState), null);
+        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the companion image.
         /// </summary>
@@ -228,7 +228,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundImage bindable property.
         /// </summary>
-        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Xamarin.Forms.Image), typeof(ButtonState), null);
+        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the background image.
         /// </summary>

@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MainPage.xaml.cs" />
+    <Compile Remove="ImageInStack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -48,5 +49,74 @@
     <EmbeddedResource Include="Resources\SvgSample2.svg" />
     <EmbeddedResource Include="Resources\SvgSample.svg" />
     <EmbeddedResource Include="Resources\shareIcon.png" />
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button.9.png">
+      <Link>Resources\button.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button%40¾x.9.png">
+      <Link>Resources\button%40¾x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button%401½x.9.png">
+      <Link>Resources\button%401½x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button%402x.9.png">
+      <Link>Resources\button%402x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button%403x.9.png">
+      <Link>Resources\button%403x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\button%404x.9.png">
+      <Link>Resources\button%404x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\Info.png">
+      <Link>Resources\Info.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\Info%40¾x.png">
+      <Link>Resources\Info%40¾x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\Info%401½x.png">
+      <Link>Resources\Info%401½x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\Info%402x.png">
+      <Link>Resources\Info%402x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\Info%403x.png">
+      <Link>Resources\Info%403x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image.png">
+      <Link>Resources\image.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image.9.png">
+      <Link>Resources\image.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%40¾x.png">
+      <Link>Resources\image%40¾x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%40¾x.9.png">
+      <Link>Resources\image%40¾x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%401½x.png">
+      <Link>Resources\image%401½x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%401½x.9.png">
+      <Link>Resources\image%401½x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%402x.png">
+      <Link>Resources\image%402x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%402x.9.png">
+      <Link>Resources\image%402x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%403x.png">
+      <Link>Resources\image%403x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%403x.9.png">
+      <Link>Resources\image%403x.9.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%404x.png">
+      <Link>Resources\image%404x.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Forms9PatchDemo\Source\Resources\image%404x.9.png">
+      <Link>Resources\image%404x.9.png</Link>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

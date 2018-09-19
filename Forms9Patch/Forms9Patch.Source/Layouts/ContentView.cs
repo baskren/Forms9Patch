@@ -280,6 +280,9 @@ namespace Forms9Patch
 
 
         #region Layout overrides
+
+
+
 #pragma warning disable CS0672 // Member overrides obsolete member
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member

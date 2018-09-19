@@ -5,9 +5,16 @@ using SkiaSharp;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Collections.Specialized;
+using Xamarin.Forms.Internals;
 
 namespace Forms9Patch
 {
+
     public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape
     {
         #region Static Implementation
@@ -354,8 +361,6 @@ namespace Forms9Patch
         #endregion Properties
 
 
-
-
         #region Fields
         internal bool FillOrLayoutSet;
         static int _instances;
@@ -489,6 +494,20 @@ namespace Forms9Patch
                 FillOrLayoutSet = image.FillOrLayoutSet;
                 Source = image.Source;
             }
+        }
+        #endregion
+
+
+        #region Conversion Operators
+        public static implicit operator Image(Xamarin.Forms.Image xamarinFormsImage)
+        {
+            return new Image(xamarinFormsImage);
+        }
+
+        public static implicit operator Image(string embeddedResourceId)
+        {
+            var assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            return new Image(embeddedResourceId, assembly);
         }
         #endregion
 
@@ -935,7 +954,7 @@ namespace Forms9Patch
                 var scaledWidth = SourceImageWidth * scaleX;
                 var scaledHeight = SourceImageHeight * scaleY;
 
-                System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout scaleX:" + scaleX + " scaleY:" + scaleY + " scaledWidth:" + scaledWidth + " scaledHeight:" + scaledHeight);
+                //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout scaleX:" + scaleX + " scaleY:" + scaleY + " scaledWidth:" + scaledWidth + " scaledHeight:" + scaledHeight);
 
                 float left;
                 switch (HorizontalOptions.Alignment)
@@ -1716,4 +1735,5 @@ namespace Forms9Patch
         #endregion
 
     }
+
 }

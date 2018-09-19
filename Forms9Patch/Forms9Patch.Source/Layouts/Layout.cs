@@ -49,6 +49,7 @@ namespace Forms9Patch
         // Frame already correctly handles IsClippedToBounds, Padding, ForceLayout, GetSizeRequest,
         public new IList<View> Children => _xfLayout.Children;
 
+        /*
         ObservableCollection<Element> _internalChildren;
         internal ObservableCollection<Element> InternalChildren
         {
@@ -58,6 +59,7 @@ namespace Forms9Patch
                 return _internalChildren;
             }
         }
+        */
 
         public new event EventHandler LayoutChanged
         {
@@ -128,10 +130,10 @@ namespace Forms9Patch
 
     public abstract class Element<T> : BindableObject<T> where T : Xamarin.Forms.Layout<View>, new()
     {
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public new ReadOnlyCollection<Element> LogicalChildren => _xfLayout.LogicalChildren;
+        //[EditorBrowsable(EditorBrowsableState.Never)]
+        //public new ReadOnlyCollection<Element> LogicalChildren => _xfLayout.LogicalChildren;
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        //[EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("USE CHILDREN INSTEAD", true)]
         public new View Content
         {
@@ -142,7 +144,7 @@ namespace Forms9Patch
 
         protected Element()
         {
-            base.Content = _xfLayout;
+            //base.Content = _xfLayout;
         }
 
 

@@ -34,8 +34,6 @@ namespace Forms9Patch
             _layout = _xfLayout as Xamarin.Forms.StackLayout;
         }
 
-
-
     }
 }
 
