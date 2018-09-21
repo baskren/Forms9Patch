@@ -225,17 +225,6 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementSeparatorWidth
 
-        /*
-        #region ParentSegmentsOrientation
-        public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
-        public StackOrientation ParentSegmentsOrientation
-        {
-            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
-            set => SetValue(ParentSegmentsOrientationProperty, value);
-        }
-        #endregion ParentSegmentsOrientation
-        */
-
         #region IShape
 
         #region BackgroundColor property
@@ -363,7 +352,7 @@ namespace Forms9Patch
         #endregion Properties
 
 
-        #region Fields
+        #region Fields and Private Properties
         internal bool FillOrLayoutSet;
         static int _instances;
         readonly int _f9pId;
@@ -379,8 +368,6 @@ namespace Forms9Patch
         bool DrawFill => BackgroundColor.A > 0.01;
 
         bool IsSegment => ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentMid || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentStart;
-
-
         #endregion
 
 
@@ -636,22 +623,46 @@ namespace Forms9Patch
         }
         */
 
-        /*
+
+
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
             System.Diagnostics.Debug.WriteLine("GetSizeRequest ENTER");
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            System.Diagnostics.Debug.WriteLine("GetSizeRequest EXIT");
+
+            var reqW = result.Request.Width;
+            var reqH = result.Request.Height;
+            if (_f9pImageData != null && _f9pImageData.Height > 0 && _f9pImageData.Width > 0 && (!HorizontalOptions.Expands || !VerticalOptions.Expands))
+            {
+
+                if (!HorizontalOptions.Expands)
+                    reqW = _f9pImageData.Width / Display.Scale;
+                if (!VerticalOptions.Expands)
+                    reqH = _f9pImageData.Height / Display.Scale;
+            }
+            result = new SizeRequest(new Size(reqW, reqH), new Size(10, 10));
+            System.Diagnostics.Debug.WriteLine("GetSizeRequest EXIT: " + result);
             return result;
         }
 
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            System.Diagnostics.Debug.WriteLine("OnMeasure ENTER: ");
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            System.Diagnostics.Debug.WriteLine("OnMeasure EXIT: " + result);
+            return result;
+        }
+
+        /* Called after measurement cycle
         protected override void OnSizeAllocated(double width, double height)
         {
             System.Diagnostics.Debug.WriteLine("OnSizeAllocated ENTER");
             base.OnSizeAllocated(width, height);
             System.Diagnostics.Debug.WriteLine("OnSizeAllocated EXIT");
         }
+        */
 
+        /* Never called
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
             System.Diagnostics.Debug.WriteLine("OnSizeRequest ENTER");
@@ -659,7 +670,8 @@ namespace Forms9Patch
             System.Diagnostics.Debug.WriteLine("OnSizeRequest EXIT");
             return result;
         }
-*/
+        */
+
         #endregion
 
 
