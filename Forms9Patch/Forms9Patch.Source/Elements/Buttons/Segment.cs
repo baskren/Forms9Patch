@@ -315,7 +315,7 @@ namespace Forms9Patch
 
         #region Fields
         internal GroupToggleBehavior _toggleBehavior;
-        internal readonly Button _button;
+        internal readonly SegmentButton _button;
         #endregion Fields
 
 
@@ -325,7 +325,7 @@ namespace Forms9Patch
         /// </summary>
         public Segment()
         {
-            _button = new Button();
+            _button = new SegmentButton();
             _button.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
             {
                 switch (e.PropertyName)

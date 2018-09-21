@@ -79,8 +79,8 @@ namespace Forms9Patch
         internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create("F9PFormattedString", typeof(F9PFormattedString), typeof(Label), null);
         internal F9PFormattedString F9PFormattedString
         {
-            get => (F9PFormattedString)GetValue(F9PFormattedStringProperty); 
-            set => SetValue(F9PFormattedStringProperty, value); 
+            get => (F9PFormattedString)GetValue(F9PFormattedStringProperty);
+            set => SetValue(F9PFormattedStringProperty, value);
         }
         #endregion
 
@@ -95,8 +95,8 @@ namespace Forms9Patch
         /// <value>The fit.</value>
         public AutoFit AutoFit
         {
-            get => (AutoFit)GetValue(AutoFitProperty); 
-            set => SetValue(AutoFitProperty, value); 
+            get => (AutoFit)GetValue(AutoFitProperty);
+            set => SetValue(AutoFitProperty, value);
         }
         #endregion
 
@@ -111,8 +111,8 @@ namespace Forms9Patch
         /// <value>The lines.</value>
         public int Lines
         {
-            get => (int)GetValue(LinesProperty); 
-            set => SetValue(LinesProperty, value); 
+            get => (int)GetValue(LinesProperty);
+            set => SetValue(LinesProperty, value);
         }
         #endregion
 
@@ -127,8 +127,8 @@ namespace Forms9Patch
         /// <value>The minimum size of the font.  Default=4</value>
         public double MinFontSize
         {
-            get => (double)GetValue(MinFontSizeProperty); 
-            set => SetValue(MinFontSizeProperty, value); 
+            get => (double)GetValue(MinFontSizeProperty);
+            set => SetValue(MinFontSizeProperty, value);
         }
         #endregion
 
@@ -162,10 +162,10 @@ namespace Forms9Patch
         /// <value>The actual size of the font.</value>
         public double FittedFontSize
         {
-            get => (double)GetValue(FittedFontSizeProperty); 
+            get => (double)GetValue(FittedFontSizeProperty);
             internal set
             {
-                if (value != FittedFontSize)
+                if (Math.Abs(value - FittedFontSize) > 0.0001)
                 {
                     if (value < 0 && DateTime.Now - _lastTimeFittedFontSizeSet < TimeSpan.FromMilliseconds(250))
                         return;
@@ -188,7 +188,7 @@ namespace Forms9Patch
         /// </summary>
         public double SynchronizedFontSize
         {
-            get => (double)GetValue(SynchronizedFontSizeProperty); 
+            get => (double)GetValue(SynchronizedFontSizeProperty);
             set => SetValue(SynchronizedFontSizeProperty, value);
         }
         #endregion SynchronizedFontSize property
@@ -324,11 +324,6 @@ namespace Forms9Patch
             {
                 if (HtmlText != null || Text != null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure.OnMeasure()");
-                    //OnMeasure(Width, Height);
-                    if (HtmlText != null && HtmlText.StartsWith("A4"))
-                        System.Diagnostics.Debug.WriteLine("");
-
                     var layout = this.ParentInheritedFrom<Layout>();
                     layout.ForceLayout();
                 }
@@ -369,9 +364,7 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
-            if (RendererSizeForWidthAndFontSize != null)
-                return RendererSizeForWidthAndFontSize.Invoke(width, fontSize);
-            return Size.Zero;
+            return RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
         }
 
         /// <summary>

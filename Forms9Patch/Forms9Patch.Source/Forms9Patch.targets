@@ -22,6 +22,7 @@
     <!-- Buttons -->
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Button.cs" Link="Elements\Buttons\Button.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Segment.cs" Link="Elements\Buttons\Segment.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentButton.cs" Link="Elements\Buttons\SegmentButton.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentedControl.cs" Link="Elements\Buttons\SegmentedControl.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\StateButton.cs" Link="Elements\Buttons\StateButton.cs" />
 

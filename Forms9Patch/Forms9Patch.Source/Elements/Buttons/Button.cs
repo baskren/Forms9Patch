@@ -16,7 +16,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
-    public class Button : Frame, IDisposable, IButton, IExtendedShape
+    public class Button : Frame, IDisposable, IButton
     {
         #region Xamarin.Forms emulation properties
         /*
@@ -534,57 +534,6 @@ namespace Forms9Patch
         // BackgroundImage inherited
 
         #region IExtendedShape
-
-        #region ExtendedElementShapeOrientation property
-        /// <summary>
-        /// Backing store for the extended element shape orientation property.
-        /// </summary>
-        public static readonly BindableProperty ExtendedElementShapeOrientationProperty = ShapeBase.ExtendedElementShapeOrientationProperty;
-        /// <summary>
-        /// Gets or sets the orientation of the shape if it's an extended element shape
-        /// </summary>
-        /// <value>The forms9 patch. IS hape. extended element shape orientation.</value>
-        ExtendedElementShapeOrientation IExtendedShape.ExtendedElementShapeOrientation
-        {
-            get => (ExtendedElementShapeOrientation)GetValue(ExtendedElementShapeOrientationProperty);
-            set => SetValue(ExtendedElementShapeOrientationProperty, value);
-        }
-        #endregion
-
-        #region ExtendedElementShape property
-        /// <summary>
-        /// backing store for ExtendedElementShape property
-        /// </summary>
-        public static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;// = BindableProperty.Create("ExtendedElementShape", typeof(ExtendedElementShape), typeof(ShapeAndImageView), default(ExtendedElementShape));
-        /// <summary>
-        /// Gets/Sets the ExtendedElementShape property
-        /// </summary>
-        ExtendedElementShape IExtendedShape.ExtendedElementShape
-        {
-            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty);
-            set => SetValue(ExtendedElementShapeProperty, value);
-        }
-        #endregion ExtendedElementShape property
-
-        #region ExtendedElementSeparatorWidth
-        public static readonly BindableProperty ExtendedElementSeparatorWidthProperty = ShapeBase.ExtendedElementSeparatorWidthProperty;
-        float IExtendedShape.ExtendedElementSeparatorWidth
-        {
-            get => (float)GetValue(ExtendedElementSeparatorWidthProperty);
-            set => SetValue(ExtendedElementSeparatorWidthProperty, value);
-        }
-        #endregion ExtendedElementSeparatorWidth
-
-        #region ParentSegmentsOrientation
-        public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
-        public StackOrientation ParentSegmentsOrientation
-        {
-            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
-            set => SetValue(ParentSegmentsOrientationProperty, value);
-        }
-        #endregion ParentSegmentsOrientation
-
-
 
         #region IShape
 
@@ -1248,7 +1197,7 @@ namespace Forms9Patch
         /// <summary>
         /// Redraws the button to the current state: Default, Selected, Disabled or DisabledAndSelected.
         /// </summary>
-        public void UpdateElements()
+        protected virtual void UpdateElements(bool isSegment = false)
         {
             if (this is StateButton)
                 return;
@@ -1286,47 +1235,17 @@ namespace Forms9Patch
                 base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
                 //var hasShadow = base.BackgroundColor.A > 0 && HasShadow;
                 //SetValue(ShapeBase.HasShadowProperty, hasShadow);
-                ShadowInverted = IsSelected && !this.IsSegment();
+                ShadowInverted = IsSelected && !isSegment;
             }
             else
             {
-                Color opaque, transp;
-                if (IsSelected)
-                {
-                    if (DarkTheme)
-                    {
-                        opaque = Color.FromHex("#FFF").WithAlpha(0.2);
-                        transp = Color.FromHex("#FFF").WithAlpha(0.1);
-                        _label.TextColor = Color.FromHex("#FFF").WithAlpha(0.30);
-                    }
-                    else
-                    {
-                        opaque = Color.FromHex("#000").WithAlpha(0.2);
-                        transp = Color.FromHex("#000").WithAlpha(0.1);
-                        _label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
-                    }
-                }
-                else
-                {
-                    transp = Color.Transparent;
-                    if (DarkTheme)
-                    {
-                        opaque = Color.FromHex("#FFF").WithAlpha(0.1);
-                        _label.TextColor = Color.FromHex("#FFF").WithAlpha(0.30);
-                    }
-                    else
-                    {
-                        opaque = Color.FromHex("#000").WithAlpha(0.1);
-                        _label.TextColor = Color.FromHex("#000").WithAlpha(0.26);
-                    }
-                }
-                //if (ElementShape == ExtendedElementShape.Rectangle)
-                if (!this.IsSegment())
+                _label.TextColor = DarkTheme ? Color.FromHex("#FFF").WithAlpha(0.30) : Color.FromHex("#000").WithAlpha(0.26);
+                if (!isSegment)
                 {
                     base.HasShadow = false;
-                    base.BackgroundColor = BackgroundColor.A > 0 ? opaque : transp;
+                    base.BackgroundColor = BackgroundColor.A > 0 ? OpaqueColor : TransparentColor;
                     //base.OutlineColor = OutlineColor.A > 0 ? opaque : base.BackgroundColor;
-                    base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? opaque : BackgroundColor;
+                    base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? OpaqueColor : BackgroundColor;
                 }
                 else
                 {
@@ -1351,13 +1270,37 @@ namespace Forms9Patch
                         //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                         base.OutlineColor = enabledLabelColor; //_label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
                 }
-                //base.OutlineColor = _label.TextColor;
-                //base.OutlineColor = OutlineColor.A > 0 ? opaque : _label.TextColor;//base.BackgroundColor;
-                //base.OutlineWidth = base.OutlineWidth > 0
             }
             UpdateIconTint();
             _noUpdate = false;
         }
+
+        protected Color OpaqueColor
+        {
+            get
+            {
+                return IsSelected
+                    ? DarkTheme
+                        ? Color.FromHex("#FFF").WithAlpha(0.2)
+                        : Color.FromHex("#000").WithAlpha(0.2)
+                    : DarkTheme
+                       ? Color.FromHex("#FFF").WithAlpha(0.1)
+                       : Color.FromHex("#000").WithAlpha(0.1);
+            }
+        }
+
+        protected Color TransparentColor
+        {
+            get
+            {
+                return IsSelected
+                    ? DarkTheme
+                        ? Color.FromHex("#FFF").WithAlpha(0.1)
+                        : Color.FromHex("#000").WithAlpha(0.1)
+                    : Color.Transparent;
+            }
+        }
+
 
         internal void UpdateIconTint()
         {
@@ -1500,7 +1443,7 @@ namespace Forms9Patch
         void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var propertyName = e.PropertyName;
-            if (propertyName == Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
+            if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
             {
                 if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
                     _stackLayout.Children.Remove(_label);
@@ -1513,7 +1456,7 @@ namespace Forms9Patch
                 }
                 SetOrienations();
             }
-            else if (propertyName == Label.TextColorProperty.PropertyName)
+            else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
             {
                 UpdateIconTint();
             }
@@ -1545,25 +1488,6 @@ namespace Forms9Patch
                     //	PressingState.PropertyChanged -= OnStatePropertyChanged;
                 }
             }
-        }
-
-        void SetStackLayoutPadding()
-        {
-            // this causes the text to shift ... it would have worked if the size of the frame increased proportionally.
-            /*
-            var padding = OutlineWidth / Display.Scale;
-            if (!this.IsSegment() || ((IShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd)
-                _stackLayout.Padding = padding;
-            else
-            {
-                if (ParentSegmentsOrientation == StackOrientation.Horizontal)
-                    _stackLayout.Padding = new Thickness(padding, padding, 0, padding);
-                else
-                    _stackLayout.Padding = new Thickness(padding, padding, padding, 0);
-
-            }
-            //_stackLayout.BackgroundColor = Color.Pink;
-            */
         }
 
         void SetOrienations()
@@ -1728,11 +1652,13 @@ namespace Forms9Patch
             if (_noUpdate)
                 return;
 
+            /*
             if (propertyName == OutlineWidthProperty.PropertyName
                 || propertyName == ParentSegmentsOrientationProperty.PropertyName
                 || propertyName == ExtendedElementShapeProperty.PropertyName
                )
                 SetStackLayoutPadding();
+                */
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
             {
                 //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
@@ -1818,7 +1744,6 @@ namespace Forms9Patch
                 || propertyName == IsSelectedProperty.PropertyName
                 || propertyName == IsEnabledProperty.PropertyName
                 || propertyName == DarkThemeProperty.PropertyName
-                || propertyName == ExtendedElementShapeProperty.PropertyName
                     )
             {
                 //System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);

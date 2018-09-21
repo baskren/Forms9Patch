@@ -65,7 +65,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use ToggleBehaviorProperty instead.
         /// </summary>
         [Obsolete("StickyBehavior property is obsolete, use ToggleBehavior instead", true)]
-        public static BindableProperty StickyBehaviorProperty = null;
+        public static BindableProperty StickyBehaviorProperty;
 
         /// <summary>
         /// OBSOLETE: Use ToggleBehavior instead.
@@ -318,9 +318,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public bool IsIndexSelected(int index)
         {
-            if (index < 0 || index >= _segments.Count)
-                return false;
-            return _segments[index].IsSelected;
+            return index >= 0 && index < _segments.Count && _segments[index].IsSelected;
         }
 
 
@@ -424,7 +422,7 @@ namespace Forms9Patch
         /// <summary>
         /// The has tight spacing property.
         /// </summary>
-        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(Button), default(bool));
+        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(SegmentedControl), default(bool));
         /// <summary>
         /// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
         /// </summary>
@@ -618,7 +616,7 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        bool disposedValue; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -643,29 +641,16 @@ namespace Forms9Patch
                     _segments.CollectionChanged -= OnCollectionChanged;
                     _segments.Clear();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
                 disposedValue = true;
             }
         }
-
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~SegmentedControl() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
 
         /// <summary>
         /// Dispose of Forms9Patch.SegmentedControl element.
         /// </summary>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
         #endregion
 
@@ -728,14 +713,9 @@ namespace Forms9Patch
                         foreach (Segment oldItem in e.OldItems)
                             RemoveSegment(oldItem);
                     break;
-                case NotifyCollectionChangedAction.Replace:
-                    // not used?
-                    throw new NotImplementedException();
-                case NotifyCollectionChangedAction.Move:
-                    throw new NotImplementedException();
                 case NotifyCollectionChangedAction.Reset:
                     for (int i = Children.Count - 1; i >= 0; i--)
-                        RemoveButton(Children[i] as Button);
+                        RemoveButton(Children[i] as SegmentButton);
                     break;
             }
             int count = Children.Count;
@@ -779,7 +759,7 @@ namespace Forms9Patch
             RemoveButton(button);
         }
 
-        void RemoveButton(Button button)
+        void RemoveButton(SegmentButton button)
         {
             if (button == null)
                 return;
@@ -795,47 +775,8 @@ namespace Forms9Patch
 
         void UpdateChildrenPadding()
         {
-            //if (Orientation == StackOrientation.Horizontal)
-            //{
-            foreach (Button child in Children)
+            foreach (SegmentButton child in Children)
                 child.Padding = Padding;
-            /*
-        }
-        else
-        {
-
-            foreach (ILayout child in Children)
-            {
-                double plaformTweek = 0;
-                //switch (Device.OS)
-                switch (Device.RuntimePlatform)
-                {
-                    //case Device.iOS:
-                    case TargetPlatform.iOS:
-                        plaformTweek = 0.1;
-                        break;
-                    //case Device.Android:
-                    case TargetPlatform.Android:
-                        plaformTweek = -1;
-                        break;
-                }
-                //TODO: Can we elimenate "platformTweek"?
-                switch (child.ExtendedElementShape)
-                {
-                    case ExtendedElementShape.SegmentStart:
-                        child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
-                        break;
-                    case ExtendedElementShape.SegmentMid:
-                        child.Padding = new Thickness(Padding.Left, Padding.Top + plaformTweek, Padding.Right, Padding.Bottom - plaformTweek);
-                        break;
-                    default:
-                        child.Padding = Padding;
-                        break;
-                }
-            }
-
-        }
-        */
         }
         #endregion
 
@@ -902,7 +843,7 @@ namespace Forms9Patch
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == GroupToggleBehaviorProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                 {
                     button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
                     button.GroupToggleBehavior = GroupToggleBehavior;
@@ -978,34 +919,34 @@ namespace Forms9Patch
                             segment._button.FontAttributes = FontAttributes;
             }
             else if (propertyName == DarkThemeProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.DarkTheme = DarkTheme;
             else if (propertyName == BackgroundColorProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.BackgroundColor = BackgroundColor;
             else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.SelectedBackgroundColor = SelectedBackgroundColor;
             else if (propertyName == OutlineColorProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.OutlineColor = OutlineColor;
             else if (propertyName == OutlineRadiusProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.OutlineRadius = OutlineRadius;
             else if (propertyName == OutlineWidthProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.OutlineWidth = OutlineWidth;
             else if (propertyName == FontFamilyProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.FontFamily = FontFamily;
             else if (propertyName == FontSizeProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.FontSize = FontSize;
             else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
             {
                 //var ignore = IgnoreShapePropertiesChanges;
                 //IgnoreShapePropertiesChanges = true;
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                 {
                     //var buttonIgnore = button.IgnoreShapePropertiesChanges;
                     //button.IgnoreShapePropertiesChanges = true;
@@ -1016,22 +957,22 @@ namespace Forms9Patch
                 InvalidateLayout();
             }
             else if (propertyName == OrientationProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.ParentSegmentsOrientation = Orientation;
             else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.Orientation = IntraSegmentOrientation;
             else if (propertyName == SeparatorWidthProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.SeparatorWidth = SeparatorWidth;
             else if (propertyName == TrailingIconProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.TrailingIcon = TrailingIcon;
             else if (propertyName == HapticEffectProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.HapticEffect = HapticEffect;
             else if (propertyName == HapticModeProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.HapticMode = HapticMode;
             else if (propertyName == IsEnabledProperty.PropertyName)
             {
@@ -1041,7 +982,7 @@ namespace Forms9Patch
                     Opacity /= 2;
             }
             else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
-                foreach (Button button in Children)
+                foreach (SegmentButton button in Children)
                     button.Spacing = IntraSegmentSpacing;
         }
 
@@ -1049,8 +990,8 @@ namespace Forms9Patch
 
         internal void OnButtonPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var button = sender as Button;
-            if (e.PropertyName == Button.IsSelectedProperty.PropertyName)
+            var button = sender as SegmentButton;
+            if (e.PropertyName == Forms9Patch.Button.IsSelectedProperty.PropertyName)
             {
                 if (GroupToggleBehavior == GroupToggleBehavior.Radio)
                 {

@@ -627,8 +627,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            base.OnPropertyChanged(propertyName);
+
             if (_noUpdate)
                 return;
+
 
             #region State changes
             if (propertyName == StateButton.DefaultStateProperty.PropertyName && IsEnabled && !IsSelected)
@@ -646,7 +649,6 @@ namespace Forms9Patch
                 UpdateState();
             #endregion
 
-            base.OnPropertyChanged(propertyName);
 
             #region IButtonState
 

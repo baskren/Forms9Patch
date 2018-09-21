@@ -59,7 +59,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Source property
         /// </summary>
-        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Forms9Patch.Image.Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
         /// <summary>
         /// Gets/Sets the Source property
         /// </summary>
@@ -87,7 +87,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Fill bindable property.
         /// </summary>
-        public static readonly BindableProperty FillProperty = BindableProperty.Create("Fill", typeof(Fill), typeof(Image), Fill.Fill);
+        public static readonly BindableProperty FillProperty = BindableProperty.Create("Forms9Patch.Image.Fill", typeof(Fill), typeof(Image), Fill.Fill);
         /// <summary>
         /// Fill behavior for nonscalable (not NinePatch or CapInsets not set) image. 
         /// </summary>
@@ -108,7 +108,7 @@ namespace Forms9Patch
         /// When a button with end caps is resized, the resizing occurs only in the middle of the button, in the region between the end caps. The end caps themselves keep their original size and appearance.
         /// </remarks>
         /// <value>The end-cap insets (double or int)</value>
-        public static readonly BindableProperty CapInsetsProperty = BindableProperty.Create("CapInsets", typeof(Thickness), typeof(Image), new Thickness(-1));
+        public static readonly BindableProperty CapInsetsProperty = BindableProperty.Create("Forms9Patch.Image.CapInsets", typeof(Thickness), typeof(Image), new Thickness(-1));
         /// <summary>
         /// Gets or sets the end-cap insets.  This is a bindable property.
         /// </summary>
@@ -124,7 +124,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ContentPadding bindable property.
         /// </summary>
-        public static readonly BindableProperty ContentPaddingProperty = BindableProperty.Create("ContentPadding", typeof(Thickness), typeof(Image), new Thickness(-1));
+        public static readonly BindableProperty ContentPaddingProperty = BindableProperty.Create("Forms9Patch.Image.ContentPadding", typeof(Thickness), typeof(Image), new Thickness(-1));
         /// <summary>
         /// Gets content padding if Source is NinePatch image.
         /// </summary>
@@ -140,7 +140,7 @@ namespace Forms9Patch
         /// <summary>
         /// The tint property.
         /// </summary>
-        public static readonly BindableProperty TintColorProperty = BindableProperty.Create("TintColor", typeof(Color), typeof(Image), Color.Default);
+        public static readonly BindableProperty TintColorProperty = BindableProperty.Create("Forms9Patch.Image.TintColor", typeof(Color), typeof(Image), Color.Default);
         /// <summary>
         /// Gets or sets the image's tint.
         /// </summary>
@@ -172,7 +172,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for AntiAlias property
         /// </summary>
-        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("AntiAlias", typeof(bool), typeof(Image), true);
+        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("Forms9Patch.Image.AntiAlias", typeof(bool), typeof(Image), true);
         /// <summary>
         /// Gets/Sets the AntiAlias property
         /// </summary>
@@ -539,6 +539,8 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            base.OnPropertyChanged(propertyName);
+
             if (propertyName == ElementShapeProperty.PropertyName)
                 ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();
             if (propertyName == SourceProperty.PropertyName)
