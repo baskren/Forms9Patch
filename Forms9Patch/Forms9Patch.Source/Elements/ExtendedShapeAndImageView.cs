@@ -194,9 +194,9 @@ namespace Forms9Patch
         /// Gets or sets the orientation of the shape if it's an extended element shape
         /// </summary>
         /// <value>The forms9 patch. IS hape. extended element shape orientation.</value>
-        ExtendedElementShapeOrientation IExtendedShape.ExtendedElementShapeOrientation
+        Xamarin.Forms.StackOrientation IExtendedShape.ExtendedElementShapeOrientation
         {
-            get => (ExtendedElementShapeOrientation)GetValue(ExtendedElementShapeOrientationProperty);
+            get => (Xamarin.Forms.StackOrientation)GetValue(ExtendedElementShapeOrientationProperty);
             set => SetValue(ExtendedElementShapeOrientationProperty, value);
         }
         #endregion
@@ -225,6 +225,7 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementSeparatorWidth
 
+        /*
         #region ParentSegmentsOrientation
         public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
         public StackOrientation ParentSegmentsOrientation
@@ -233,6 +234,7 @@ namespace Forms9Patch
             set => SetValue(ParentSegmentsOrientationProperty, value);
         }
         #endregion ParentSegmentsOrientation
+        */
 
         #region IShape
 
@@ -376,7 +378,7 @@ namespace Forms9Patch
 
         bool DrawFill => BackgroundColor.A > 0.01;
 
-        bool IsSegment => ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentStart;
+        bool IsSegment => ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentEnd || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentMid || ((IExtendedShape)this).ExtendedElementShape == ExtendedElementShape.SegmentStart;
 
 
         #endregion
@@ -566,16 +568,18 @@ namespace Forms9Patch
                 propertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName ||
                 propertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName ||
 
-                // Button
-                propertyName == Forms9Patch.Button.SeparatorWidthProperty.PropertyName ||
 
                 // Image
                 //propertyName == SourceProperty.PropertyName ||  // Handled by SetImageSource()
                 propertyName == TintColorProperty.PropertyName ||
                 propertyName == FillProperty.PropertyName ||
                 propertyName == CapInsetsProperty.PropertyName ||
-                propertyName == AntiAliasProperty.PropertyName
+                propertyName == AntiAliasProperty.PropertyName ||
 
+                // IExtendedElementShape
+                propertyName == ExtendedElementShapeProperty.PropertyName ||
+                propertyName == ExtendedElementShapeOrientationProperty.PropertyName ||
+                propertyName == ExtendedElementSeparatorWidthProperty.PropertyName
                )
 
                 InvalidateSurface();
@@ -672,7 +676,7 @@ namespace Forms9Patch
 
             canvas.Clear();
 
-            var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == ExtendedElementShapeOrientation.Horizontal;
+            var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == Xamarin.Forms.StackOrientation.Horizontal;
             var vt = !hz;
 
             var backgroundColor = BackgroundColor;
@@ -683,20 +687,25 @@ namespace Forms9Patch
             var outlineColor = OutlineColor;
             var elementShape = ((IExtendedShape)this).ExtendedElementShape;
 
-            float separatorWidth = FormsGestures.Display.Scale * (IsSegment || elementShape == ExtendedElementShape.Rectangle ? 0 : ((IExtendedShape)this).ExtendedElementSeparatorWidth < 0 ? outlineWidth : Math.Max(0, ((IExtendedShape)this).ExtendedElementSeparatorWidth));
+            //float separatorWidth =  (IsSegment || elementShape == ExtendedElementShape.Rectangle ? 0 : ((IExtendedShape)this).ExtendedElementSeparatorWidth < 0 ? outlineWidth : Math.Max(0, ((IExtendedShape)this).ExtendedElementSeparatorWidth));
+            float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth : 0;
+            if (separatorWidth < 0)
+                separatorWidth = outlineWidth;
+            if (outlineColor.A <= 0.01)
+                separatorWidth = 0;
 
             bool drawOutline = DrawOutline;
             bool drawImage = DrawImage;
-            bool drawSeparators = outlineColor.A > 0.01 && IsSegment && separatorWidth > 0.01;
+            //bool drawSeparators = outlineColor.A > 0.01 && IsSegment && separatorWidth > 0.01;
             bool drawFill = DrawFill;
 
-            if ((drawFill || drawOutline || drawSeparators || drawImage) && CanvasSize != default(SKSize))
+            if ((drawFill || drawOutline || separatorWidth > 0 || drawImage) && CanvasSize != default(SKSize))
             {
 
                 //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + "," + ((FrameworkElement)Parent).ActualHeight + "]");
 
                 SKRect rect = new SKRect(0, 0, info.Width, info.Height);
-                System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
+                //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
 
                 var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
                 var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
@@ -774,42 +783,27 @@ namespace Forms9Patch
                         //shadowPaint.MaskFilter = filter;
 
                         if (DrawFill)
-                        {
-                            var path = PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
-                            canvas.DrawPath(path, shadowPaint);
-                        }
+                            canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
                         else if (DrawImage)
-                        {
-                            var path = PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0));
-                            GenerateImageLayout(canvas, perimeter, path, shadowPaint);
-                        }
+                            GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
                     }
                 }
 
                 if (drawFill)
                 {
-                    var fillRect = RectInsetForShape(perimeter, elementShape, outlineWidth, vt);
+                    var fillRect = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
                     var path = PerimeterPath(fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
-
-                    if (drawFill)
+                    var fillPaint = new SKPaint
                     {
-                        var fillPaint = new SKPaint
-                        {
-                            Style = SKPaintStyle.Fill,
-                            //Color = backgroundColor.ToWindowsColor().ToSKColor(),
-                            Color = backgroundColor.ToSKColor(),
-                            IsAntialias = true,
-                        };
-                        canvas.DrawPath(path, fillPaint);
-                    }
+                        Style = SKPaintStyle.Fill,
+                        Color = backgroundColor.ToSKColor(),
+                        IsAntialias = true,
+                    };
+                    canvas.DrawPath(path, fillPaint);
                 }
 
                 if (drawImage)
-                {
-                    //var fillRect = RectInsetForShape(perimeter, elementShape, 0, vt);
-                    var clipPath = PerimeterPath(perimeter, outlineRadius);
-                    GenerateImageLayout(canvas, perimeter, clipPath);
-                }
+                    GenerateImageLayout(canvas, perimeter, PerimeterPath(perimeter, outlineRadius));
 
                 if (drawOutline)// && !drawImage)
                 {
@@ -824,33 +818,38 @@ namespace Forms9Patch
                     };
                     var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
                     //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
-                    var outlineRect = RectInsetForShape(intPerimeter, elementShape, outlineWidth / 2, vt);
-                    var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0));
+                    var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
+                    var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true);
                     canvas.DrawPath(path, outlinePaint);
                 }
-                else if (drawSeparators && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
+
+
+                if (separatorWidth > 0 && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
                 {
+                    //System.Diagnostics.Debug.WriteLine("SeparatorColor: " + outlineColor.R + ", " + outlineColor.G + ", " + outlineColor.B + ", " + outlineColor.A);
+                    //System.Diagnostics.Debug.WriteLine("SeparatorWidth: " + separatorWidth);
                     var separatorPaint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
                         Color = outlineColor.ToSKColor(),
                         StrokeWidth = separatorWidth,
-                        IsAntialias = true,
+                        IsAntialias = false,
                         //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
                     };
                     var path = new SKPath();
                     if (vt)
                     {
-                        path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2.0f);
-                        path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2.0f);
+                        path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2);
+                        path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2);
                     }
                     else
                     {
-                        path.MoveTo(perimeter.Left + outlineWidth, perimeter.Top);
-                        path.LineTo(perimeter.Left + outlineWidth, perimeter.Bottom);
+                        path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
+                        path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
                     }
                     canvas.DrawPath(path, separatorPaint);
                 }
+
 
                 if (makeRoomForShadow && shadowInverted)
                 {
@@ -871,7 +870,8 @@ namespace Forms9Patch
 
                     // what is the path that will cast the shadow?
                     // a) the button portion (which will be the hole in the larger outline, b)
-                    var path = PerimeterPath(perimeter, outlineRadius);
+                    var shadowRect = InverseShadowInsetForShape(perimeter, vt);
+                    var path = PerimeterPath(shadowRect, outlineRadius);
                     // b) add to it the larger outline 
                     path.AddRect(RectInset(rect, -50));
                     canvas.DrawPath(path, insetShadowPaint);
@@ -1180,22 +1180,49 @@ namespace Forms9Patch
 
         #region layout support 
 
-        static SKRect RectInsetForShape(SKRect perimeter, ExtendedElementShape buttonShape, float inset, bool vt)
+        SKRect InverseShadowInsetForShape(SKRect perimeter, bool vt)
+        {
+            var inset = -20.0f;
+            var result = perimeter;
+            var hz = !vt;
+            switch (((IExtendedShape)this).ExtendedElementShape)
+            {
+                case ExtendedElementShape.SegmentStart:
+                    result = RectInset(perimeter, 0, 0, (vt ? 0 : inset), (hz ? 0 : inset));
+                    break;
+                case ExtendedElementShape.SegmentMid:
+                    result = RectInset(perimeter, (vt ? 0 : inset), (hz ? 0 : inset), (vt ? 0 : inset), (hz ? 0 : inset));
+                    break;
+                case ExtendedElementShape.SegmentEnd:
+                    result = RectInset(perimeter, (vt ? 0 : inset), (hz ? 0 : inset), 0, 0);
+                    break;
+                default:
+                    result = perimeter;
+                    break;
+            }
+            return result;
+        }
+
+
+        SKRect RectInsetForShape(SKRect perimeter, float inset, bool vt, float separatorWidth)
         {
             if (inset < 0)
                 inset = 0;
             var result = perimeter;
             var hz = !vt;
-            switch (buttonShape)
+
+
+
+            switch (((IExtendedShape)this).ExtendedElementShape)
             {
                 case ExtendedElementShape.SegmentStart:
-                    result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
+                    result = RectInset(perimeter, inset, inset, (hz ? 0 : inset), (vt ? 0 : inset));
                     break;
                 case ExtendedElementShape.SegmentMid:
-                    result = RectInset(perimeter, inset, inset, vt ? inset : 0, hz ? inset : 0);
+                    result = RectInset(perimeter, (hz ? separatorWidth : inset), (vt ? separatorWidth : inset), (hz ? 0 : inset), (vt ? 0 : inset));
                     break;
                 case ExtendedElementShape.SegmentEnd:
-                    result = RectInset(perimeter, inset);
+                    result = RectInset(perimeter, (hz ? separatorWidth : inset), (vt ? separatorWidth : inset), inset, inset);
                     break;
                 default:
                     result = RectInset(perimeter, inset);
@@ -1237,14 +1264,15 @@ namespace Forms9Patch
 
         static SKRect RectInset(SKRect rect, float left, float top, float right, float bottom) => new SKRect(rect.Left + left, rect.Top + top, rect.Right - right, rect.Bottom - bottom);
 
-        protected virtual SKPath PerimeterPath(SKRect rect, float radius)
+
+        protected SKPath PerimeterPath(SKRect rect, float radius, bool isOutline = false)
         {
             radius = Math.Max(radius, 0);
 
             //if (element is BubbleLayout bubble && bubble.PointerDirection != PointerDirection.None)
             //    return BubblePerimeterPath(bubble, rect, radius);
 
-            Xamarin.Forms.StackOrientation orientation = !IsSegment ? Xamarin.Forms.StackOrientation.Horizontal : ((IExtendedShape)this).ParentSegmentsOrientation;
+            Xamarin.Forms.StackOrientation orientation = !IsSegment ? Xamarin.Forms.StackOrientation.Horizontal : ((IExtendedShape)this).ExtendedElementShapeOrientation;
 
             var path = new SKPath();
 
@@ -1305,6 +1333,8 @@ namespace Forms9Patch
                             if (radius > 0)
                                 path.ArcTo(bottomLeft, 180, -90, false);
                             path.LineTo(rect.Right, rect.Bottom);
+                            if (isOutline)
+                                path.MoveTo(rect.Right, rect.Top);
                         }
                         else
                         {
@@ -1316,6 +1346,9 @@ namespace Forms9Patch
                             if (radius > 0)
                                 path.ArcTo(topLeft, 270, -90, false);
                             path.LineTo(rect.Left, rect.Bottom);
+                            if (isOutline)
+                                path.MoveTo(rect.Right, rect.Bottom);
+
                         }
                     }
                     break;
@@ -1325,15 +1358,25 @@ namespace Forms9Patch
                         {
                             path.MoveTo(rect.Right, rect.Top);
                             path.LineTo(rect.Left, rect.Top);
-                            path.LineTo(rect.Left, rect.Bottom);
+                            if (isOutline)
+                                path.MoveTo(rect.Left, rect.Bottom);
+                            else
+                                path.LineTo(rect.Left, rect.Bottom);
                             path.LineTo(rect.Right, rect.Bottom);
+                            if (isOutline)
+                                path.MoveTo(rect.Right, rect.Top);
                         }
                         else
                         {
                             path.MoveTo(rect.Right, rect.Bottom);
                             path.LineTo(rect.Right, rect.Top);
-                            path.LineTo(rect.Left, rect.Top);
+                            if (isOutline)
+                                path.MoveTo(rect.Left, rect.Top);
+                            else
+                                path.LineTo(rect.Left, rect.Top);
                             path.LineTo(rect.Left, rect.Bottom);
+                            if (isOutline)
+                                path.MoveTo(rect.Right, rect.Bottom);
                         }
                     }
                     break;
@@ -1341,21 +1384,24 @@ namespace Forms9Patch
                     {
                         if (orientation == Xamarin.Forms.StackOrientation.Horizontal)
                         {
-                            path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
-                            path.LineTo(rect.Left, rect.Top);
-                            path.LineTo(rect.Left, rect.Bottom);
+                            //path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
+                            //path.LineTo(rect.Left, rect.Top);
+                            path.MoveTo(rect.Left, rect.Bottom);
                             path.LineTo(rect.Right - radius, rect.Bottom);
                             if (radius > 0)
                                 path.ArcTo(bottomRight, 90, -90, false);
                             path.LineTo(rect.Right, rect.Top + radius);
                             if (radius > 0)
                                 path.ArcTo(topRight, 0, -90, false);
-                            path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                            //path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                            path.LineTo(rect.Left, rect.Top);
+                            if (isOutline)
+                                path.MoveTo(rect.Left, rect.Bottom);
                         }
                         else
                         {
-                            path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
-                            path.LineTo(rect.Left, rect.Top);
+                            //path.MoveTo((rect.Left + rect.Right) / 2, rect.Top);
+                            path.MoveTo(rect.Left, rect.Top);
                             path.LineTo(rect.Left, rect.Bottom - radius);
                             if (radius > 0)
                                 path.ArcTo(bottomLeft, 180, -90, false);
@@ -1363,13 +1409,14 @@ namespace Forms9Patch
                             if (radius > 0)
                                 path.ArcTo(bottomRight, 90, -90, false);
                             path.LineTo(rect.Right, rect.Top);
-                            path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                            //path.LineTo((rect.Left + rect.Right) / 2, rect.Top);
+                            if (isOutline)
+                                path.MoveTo(rect.Left, rect.Top);
                         }
                     }
                     break;
                 default:
-                    throw new NotSupportedException("ExtendedElementShape [" + ((IExtendedShape)this).ExtendedElementShape + "] is not supported")
-        ;
+                    throw new NotSupportedException("ExtendedElementShape [" + ((IExtendedShape)this).ExtendedElementShape + "] is not supported");
             }
             return path;
         }

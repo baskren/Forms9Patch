@@ -563,7 +563,6 @@ namespace Forms9Patch
                     TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
                     OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
                     OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
-                    SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
                     OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
                     Padding = 5,
                     WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest

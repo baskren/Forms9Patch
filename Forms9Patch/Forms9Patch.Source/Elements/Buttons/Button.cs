@@ -905,7 +905,6 @@ namespace Forms9Patch
             get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
             set => SetValue(ParentSegmentsOrientationProperty, value);
         }
-                */
 
         internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(Button), -1f);
         internal float SeparatorWidth
@@ -913,6 +912,7 @@ namespace Forms9Patch
             get => (float)GetValue(SeparatorWidthProperty);
             set => SetValue(SeparatorWidthProperty, value);
         }
+                */
 
         internal static BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(Button), GroupToggleBehavior.None);
         internal GroupToggleBehavior GroupToggleBehavior

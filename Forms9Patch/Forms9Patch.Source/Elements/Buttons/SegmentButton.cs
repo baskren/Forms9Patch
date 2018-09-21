@@ -14,9 +14,9 @@ namespace Forms9Patch
         /// Gets or sets the orientation of the shape if it's an extended element shape
         /// </summary>
         /// <value>The forms9 patch. IS hape. extended element shape orientation.</value>
-        ExtendedElementShapeOrientation IExtendedShape.ExtendedElementShapeOrientation
+        public Xamarin.Forms.StackOrientation ExtendedElementShapeOrientation
         {
-            get => (ExtendedElementShapeOrientation)GetValue(ExtendedElementShapeOrientationProperty);
+            get => (Xamarin.Forms.StackOrientation)GetValue(ExtendedElementShapeOrientationProperty);
             set => SetValue(ExtendedElementShapeOrientationProperty, value);
         }
         #endregion
@@ -45,6 +45,7 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementSeparatorWidth
 
+        /*
         #region ParentSegmentsOrientation
         public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
         public StackOrientation ParentSegmentsOrientation
@@ -53,7 +54,7 @@ namespace Forms9Patch
             set => SetValue(ParentSegmentsOrientationProperty, value);
         }
         #endregion ParentSegmentsOrientation
-
+*/
 
 
 
@@ -72,8 +73,8 @@ namespace Forms9Patch
             }
             else if (propertyName == ExtendedElementSeparatorWidthProperty.PropertyName)
                 ((IExtendedShape)CurrentBackgroundImage).ExtendedElementSeparatorWidth = ((IExtendedShape)_fallbackBackgroundImage).ExtendedElementSeparatorWidth = ExtendedElementSeparatorWidth;
-            else if (propertyName == ParentSegmentsOrientationProperty.PropertyName)
-                ((IExtendedShape)CurrentBackgroundImage).ParentSegmentsOrientation = ((IExtendedShape)_fallbackBackgroundImage).ParentSegmentsOrientation = ParentSegmentsOrientation;
+            else if (propertyName == ExtendedElementShapeOrientationProperty.PropertyName)
+                ((IExtendedShape)CurrentBackgroundImage).ExtendedElementShapeOrientation = ((IExtendedShape)_fallbackBackgroundImage).ExtendedElementShapeOrientation = ExtendedElementShapeOrientation;
         }
 
 

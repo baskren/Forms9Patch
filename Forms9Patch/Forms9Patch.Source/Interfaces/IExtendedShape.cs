@@ -13,11 +13,11 @@ namespace Forms9Patch
         /// Gets or sets the orientation of the elments outline shape.
         /// </summary>
         /// <value>The shape orientation.</value>
-        ExtendedElementShapeOrientation ExtendedElementShapeOrientation { get; set; }
+        Xamarin.Forms.StackOrientation ExtendedElementShapeOrientation { get; set; }
 
         float ExtendedElementSeparatorWidth { get; set; }
 
-        StackOrientation ParentSegmentsOrientation { get; set; }
+        //StackOrientation ParentSegmentsOrientation { get; set; }
 
     }
 }

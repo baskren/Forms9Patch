@@ -77,7 +77,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for ExtendedElementShapeOrientaiton property
         /// </summary>
-        public static readonly BindableProperty ExtendedElementShapeOrientationProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementShapeOrientation", typeof(ExtendedElementShapeOrientation), typeof(ShapeBase), default(ExtendedElementShapeOrientation));
+        public static readonly BindableProperty ExtendedElementShapeOrientationProperty = BindableProperty.Create("Forms9Patch.ShapeBase.ExtendedElementShapeOrientation", typeof(Xamarin.Forms.StackOrientation), typeof(ShapeBase), default(Xamarin.Forms.StackOrientation));
         #endregion
 
         #region ExtendedElementSeparatorWidth
@@ -125,7 +125,7 @@ namespace Forms9Patch
 
                 if (shape is IExtendedShape extendedShape)
                 {
-                    var orientation = extendedShape.ParentSegmentsOrientation;
+                    var orientation = extendedShape.ExtendedElementShapeOrientation;
                     if (orientation == StackOrientation.Horizontal && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentEnd))
                         padL = 0;
                     if (orientation == StackOrientation.Horizontal && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentStart || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid))

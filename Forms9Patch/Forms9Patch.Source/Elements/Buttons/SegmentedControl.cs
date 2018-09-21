@@ -668,9 +668,9 @@ namespace Forms9Patch
             button.FontFamily = FontFamily;
             button.FontSize = FontSize;
             button.HasShadow = HasShadow;
-            button.ParentSegmentsOrientation = Orientation;
+            button.ExtendedElementShapeOrientation = Orientation;
             button.Orientation = IntraSegmentOrientation;
-            button.SeparatorWidth = SeparatorWidth;
+            button.ExtendedElementSeparatorWidth = SeparatorWidth;
             button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
             button.GroupToggleBehavior = GroupToggleBehavior;
             button.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -958,13 +958,13 @@ namespace Forms9Patch
             }
             else if (propertyName == OrientationProperty.PropertyName)
                 foreach (SegmentButton button in Children)
-                    button.ParentSegmentsOrientation = Orientation;
+                    button.ExtendedElementShapeOrientation = Orientation;
             else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
                 foreach (SegmentButton button in Children)
                     button.Orientation = IntraSegmentOrientation;
             else if (propertyName == SeparatorWidthProperty.PropertyName)
                 foreach (SegmentButton button in Children)
-                    button.SeparatorWidth = SeparatorWidth;
+                    button.ExtendedElementSeparatorWidth = SeparatorWidth;
             else if (propertyName == TrailingIconProperty.PropertyName)
                 foreach (SegmentButton button in Children)
                     button.TrailingIcon = TrailingIcon;

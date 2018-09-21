@@ -90,7 +90,6 @@
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ElementShape.cs" Link="Enums\ElementShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\ExtendedElementShape.cs" Link="Enums\ExtendedElementShape.cs" />
-    <Compile Include="..\Forms9Patch.Source\Enums\ExtendedElementShapeOrientation.cs" Link="Enums\ExtendedElementShapeOrientation.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\Fill.cs" Link="Enums\Fill.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\FontBaseline.cs" Link="Enums\FontBaseline.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\GroupToggleBehavior.cs" Link="Enums\GroupToggleBehavior.cs" />
