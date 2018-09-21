@@ -13,12 +13,21 @@ namespace Forms9Patch
         #region Properties
 
         #region Xamarin.Forms.ContentView property override
-        public static readonly new BindableProperty ContentProperty = BindableProperty.Create("Forms9Patch.ContentView.Content", typeof(View), typeof(ContentView), null);
+        public static readonly new BindableProperty ContentProperty = BindableProperty.Create("Forms9Patch.ContentView.Content", typeof(View), typeof(ContentView), null,
+                                                                                            propertyChanging: (bindable, oldValue, newValue) =>
+                                                                                            {
+                                                                                                if (oldValue is View element)
+                                                                                                    ((ContentView)bindable).BaseInternalChildren.Remove(element);
+                                                                                            }, propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                            {
+                                                                                                if (newValue is View element)
+                                                                                                    ((ContentView)bindable).BaseInternalChildren.Add(element);
+                                                                                            });
 
         public new View Content
         {
-            get { return (View)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get => (View)GetValue(Forms9Patch.ContentView.ContentProperty);
+            set => SetValue(Forms9Patch.ContentView.ContentProperty, value);
         }
         #endregion
 
@@ -43,7 +52,17 @@ namespace Forms9Patch
         #region IBackground
 
         #region BackgroundImage property
-        public static readonly BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
+        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("Forms9Patch.ContentView.BackgroundImage", typeof(Image), typeof(ContentView), null,
+                                                                                              propertyChanging: (bindable, oldValue, newValue) =>
+                                                                                              {
+                                                                                                  if (bindable is ContentView contentView)
+                                                                                                      contentView.BaseInternalChildren.Remove(contentView.CurrentBackgroundImage);
+                                                                                              }, propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                              {
+                                                                                                  if (bindable is ContentView contentView)
+                                                                                                      contentView.BaseInternalChildren.Insert(0, contentView.CurrentBackgroundImage);
+                                                                                              });
+
         public Image BackgroundImage
         {
             get => (Image)GetValue(BackgroundImageProperty);
@@ -63,7 +82,12 @@ namespace Forms9Patch
         #region IShape
 
         #region BackgroundColor property
-        public static readonly new BindableProperty BackgroundColorProperty = BindableProperty.Create("Forms9Patch.ContentView.BackgroundColor", typeof(Color), typeof(ContentView), default(Color));
+        public static readonly new BindableProperty BackgroundColorProperty = BindableProperty.Create("Forms9Patch.ContentView.BackgroundColor", typeof(Color), typeof(ContentView), default(Color),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.BackgroundColor = contentView._fallbackBackgroundImage.BackgroundColor = contentView.BackgroundColor;
+                                                                                                    });
 
         public new Color BackgroundColor
         {
@@ -73,7 +97,13 @@ namespace Forms9Patch
         #endregion BackgroundColor property
 
         #region HasShadow property
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("Forms9Patch.ContentView.HasShadow", typeof(bool), typeof(ContentView), default(bool));
+        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("Forms9Patch.ContentView.HasShadow", typeof(bool), typeof(ContentView), default(bool),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.HasShadow = contentView._fallbackBackgroundImage.HasShadow = contentView.HasShadow;
+                                                                                                    });
+
 
         public bool HasShadow
         {
@@ -83,7 +113,12 @@ namespace Forms9Patch
         #endregion HasShadow property
 
         #region ShadowInverted property
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("Forms9Patch.ContentView.ShadowInverted", typeof(bool), typeof(ContentView), default(bool));
+        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("Forms9Patch.ContentView.ShadowInverted", typeof(bool), typeof(ContentView), default(bool),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.ShadowInverted = contentView._fallbackBackgroundImage.ShadowInverted = contentView.ShadowInverted;
+                                                                                                    });
         public bool ShadowInverted
         {
             get => (bool)GetValue(ShadowInvertedProperty);
@@ -92,7 +127,12 @@ namespace Forms9Patch
         #endregion ShadowInverted property
 
         #region OutlineColor property
-        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineColor", typeof(Color), typeof(ContentView), default(Color));
+        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineColor", typeof(Color), typeof(ContentView), default(Color),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.OutlineColor = contentView._fallbackBackgroundImage.OutlineColor = contentView.OutlineColor;
+                                                                                                    });
         public Color OutlineColor
         {
             get => (Color)GetValue(OutlineColorProperty);
@@ -101,7 +141,12 @@ namespace Forms9Patch
         #endregion OutlineColor property
 
         #region OutlineRadius property
-        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineRadius", typeof(float), typeof(ContentView), default(float));
+        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineRadius", typeof(float), typeof(ContentView), default(float),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.OutlineRadius = contentView._fallbackBackgroundImage.OutlineRadius = contentView.OutlineRadius;
+                                                                                                    });
         public float OutlineRadius
         {
             get => (float)GetValue(OutlineRadiusProperty);
@@ -110,7 +155,12 @@ namespace Forms9Patch
         #endregion OutlineRadius property
 
         #region OutlineWidth property
-        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineWidth", typeof(float), typeof(ContentView), default(float));
+        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("Forms9Patch.ContentView.OutlineWidth", typeof(float), typeof(ContentView), default(float),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.OutlineWidth = contentView._fallbackBackgroundImage.OutlineWidth = contentView.OutlineWidth;
+                                                                                                    });
         public float OutlineWidth
         {
             get => (float)GetValue(OutlineWidthProperty);
@@ -119,7 +169,12 @@ namespace Forms9Patch
         #endregion OutlineWidth property
 
         #region ElementShape property
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("Forms9Patch.ContentView.ElementShape", typeof(ElementShape), typeof(ContentView), default(ElementShape));
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("Forms9Patch.ContentView.ElementShape", typeof(ElementShape), typeof(ContentView), default(ElementShape),
+                                                                                                    propertyChanged: (bindable, oldValue, newValue) =>
+                                                                                                    {
+                                                                                                        if (bindable is ContentView contentView)
+                                                                                                            contentView.CurrentBackgroundImage.ElementShape = contentView._fallbackBackgroundImage.ElementShape = contentView.ElementShape;
+                                                                                                    });
         public ElementShape ElementShape
         {
             get => (ElementShape)GetValue(ElementShapeProperty);
@@ -153,7 +208,7 @@ namespace Forms9Patch
         Image CurrentBackgroundImage => BackgroundImage ?? _fallbackBackgroundImage;
 
         ObservableCollection<Element> _baseInternalChildren;
-        ObservableCollection<Element> BaseInternalChildren
+        public ObservableCollection<Element> BaseInternalChildren
         {
             get
             {
@@ -205,44 +260,6 @@ namespace Forms9Patch
         Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
         #endregion
 
-
-        #region Property Change Handlers
-        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanging(propertyName);
-            if (propertyName == ContentProperty.PropertyName && Content != null && BaseInternalChildren.Contains(Content))
-                BaseInternalChildren.Remove(Content);
-            else if (propertyName == BackgroundImageProperty.PropertyName)
-            {
-                BaseInternalChildren.Remove(BackgroundImage);
-                BaseInternalChildren.Remove(_fallbackBackgroundImage);
-            }
-
-        }
-
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-            if (propertyName == ContentProperty.PropertyName && Content != null && !BaseInternalChildren.Contains(Content))
-                BaseInternalChildren.Add(Content);
-            else if (propertyName == BackgroundImageProperty.PropertyName)
-                BaseInternalChildren.Insert(0, CurrentBackgroundImage);
-            else if (propertyName == BackgroundColorProperty.PropertyName)
-                CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
-            else if (propertyName == HasShadowProperty.PropertyName)
-                CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
-            else if (propertyName == ShadowInvertedProperty.PropertyName)
-                CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
-            else if (propertyName == OutlineRadiusProperty.PropertyName)
-                CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
-            else if (propertyName == ElementShapeProperty.PropertyName)
-                CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
-        }
-        #endregion
 
 
         #region IgnoreChildren handlers

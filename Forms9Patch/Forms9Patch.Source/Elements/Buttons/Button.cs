@@ -897,7 +897,7 @@ namespace Forms9Patch
                 var width = 0.0;
                 var height = 0.0;
                 int childCount = 0;
-                foreach (var child in Children)
+                foreach (var child in _stackLayout.Children)
                 {
                     if (child is VisualElement element && element.IsVisible)
                     {

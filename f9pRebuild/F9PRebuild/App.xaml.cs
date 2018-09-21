@@ -11,7 +11,7 @@ namespace F9PRebuild
         {
             InitializeComponent();
 
-            MainPage = new SingleButton();
+            MainPage = new SingleStateButton();
         }
 
         protected override void OnStart()

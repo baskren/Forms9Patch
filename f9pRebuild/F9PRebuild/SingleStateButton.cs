@@ -10,6 +10,7 @@ namespace F9PRebuild
         {
             Content = new StackLayout
             {
+                Margin = 40,
                 Children = {
                     new Forms9Patch.StateButton
                     {

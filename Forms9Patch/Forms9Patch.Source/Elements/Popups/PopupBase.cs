@@ -37,7 +37,7 @@ namespace Forms9Patch
         /// <summary>
         /// override Xamarin.Forms.Layout.Padding property backing store in order to correctly compute and store shadow padding
         /// </summary>
-        public static new BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(PopupBase), default(Thickness));
+        public static new BindableProperty PaddingProperty = BindableProperty.Create("Forms9Patch.PopupBase.Padding", typeof(Thickness), typeof(PopupBase), default(Thickness));
         /// <summary>
         /// Gets or sets the inner padding of the Layout.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Forms9Patch
         /// <summary>
         /// The is visible property.
         /// </summary>
-        public static new readonly BindableProperty IsVisibleProperty = BindableProperty.Create("PobIsVisible", typeof(bool), typeof(PopupBase), default(bool));
+        public static new readonly BindableProperty IsVisibleProperty = BindableProperty.Create("Forms9Patch.PopupBase.IsVisible", typeof(bool), typeof(PopupBase), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is visible.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Forms9Patch
         /// <summary>
         /// The margin property.
         /// </summary>
-        public static readonly new BindableProperty MarginProperty = BindableProperty.Create("PobMargin", typeof(Thickness), typeof(PopupBase), default(Thickness));
+        public static readonly new BindableProperty MarginProperty = BindableProperty.Create("Forms9Patch.PopupBase.Margin", typeof(Thickness), typeof(PopupBase), default(Thickness));
         /// <summary>
         /// Gets or sets the margin.
         /// </summary>
@@ -85,7 +85,7 @@ namespace Forms9Patch
         /// <summary>
         /// The horizontal options property backing store.
         /// </summary>
-        public static readonly new BindableProperty HorizontalOptionsProperty = BindableProperty.Create("PobHorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+        public static readonly new BindableProperty HorizontalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.HorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
         /// <summary>
         /// Gets or sets the horizontal options.
         /// </summary>
@@ -102,7 +102,7 @@ namespace Forms9Patch
         /// <summary>
         /// The vertical options property.
         /// </summary>
-        public static readonly new BindableProperty VerticalOptionsProperty = BindableProperty.Create("PobVerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+        public static readonly new BindableProperty VerticalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.VerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
         /// <summary>
         /// Gets or sets the vertical options.
         /// </summary>
@@ -118,7 +118,7 @@ namespace Forms9Patch
         /// <summary>
         /// The target property.
         /// </summary>
-        public static readonly BindableProperty TargetProperty = BindableProperty.Create("PobTarget", typeof(VisualElement), typeof(PopupBase), default(Element));
+        public static readonly BindableProperty TargetProperty = BindableProperty.Create("Forms9Patch.PopupBase.Target", typeof(VisualElement), typeof(PopupBase), default(Element));
         /// <summary>
         /// Gets or sets the popup target (could be a Page or a VisualElement on a Page).
         /// </summary>
@@ -135,7 +135,7 @@ namespace Forms9Patch
         /// Identifies the PageOverlayColor bindable property.
         /// </summary>
         /// <remarks>To be added.</remarks>
-        public static readonly BindableProperty PageOverlayColorProperty = BindableProperty.Create("PobPageOverlayColor", typeof(Color), typeof(PopupBase), Color.FromRgba(128, 128, 128, 128));
+        public static readonly BindableProperty PageOverlayColorProperty = BindableProperty.Create("Forms9Patch.PopupBase.PageOverlayColor", typeof(Color), typeof(PopupBase), Color.FromRgba(128, 128, 128, 128));
         /// <summary>
         /// Gets or sets the color of the page overlay.
         /// </summary>
@@ -151,7 +151,7 @@ namespace Forms9Patch
         /// <summary>
         /// Cancel the Popup when the PageOverlay is touched
         /// </summary>
-        public static readonly BindableProperty CancelOnPageOverlayTouchProperty = BindableProperty.Create("PobCancelOnPageOverlayTouch", typeof(bool), typeof(PopupBase), true);
+        public static readonly BindableProperty CancelOnPageOverlayTouchProperty = BindableProperty.Create("Forms9Patch.PopupBase.CancelOnPageOverlayTouch", typeof(bool), typeof(PopupBase), true);
         /// <summary>
         /// Gets or sets a value indicating whether Popup <see cref="T:Forms9Patch.PopupBase"/> will cancel on page overlay touch.
         /// </summary>
@@ -167,7 +167,7 @@ namespace Forms9Patch
         /// <summary>
         /// The retain property.
         /// </summary>
-        public static readonly BindableProperty RetainProperty = BindableProperty.Create("Retain", typeof(bool), typeof(PopupBase), default(bool));
+        public static readonly BindableProperty RetainProperty = BindableProperty.Create("Forms9Patch.PopupBase.Retain", typeof(bool), typeof(PopupBase), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is retained after it is hidden.
         /// </summary>

@@ -163,21 +163,6 @@ namespace Forms9Patch
 
         Image CurrentBackgroundImage => BackgroundImage ?? _fallbackBackgroundImage;
 
-        /*
-        ObservableCollection<Element> _baseInternalChildren;
-        ObservableCollection<Element> BaseInternalChildren
-        {
-            get
-            {
-                if (_baseInternalChildren == null)
-                {
-                    _baseInternalChildren = (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(this, "InternalChildren");
-                    _baseInternalChildren?.Insert(0, CurrentBackgroundImage);
-                }
-                return _baseInternalChildren;
-            }
-        }
-        */
         #endregion
 
 
@@ -188,7 +173,7 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.ContentView"/> class.  Forms9Patch.ContentView is same as Forms9Patch.Frame - but with different default values.
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.AbsoluteLayout"/> class.  
         /// </summary>
         public AbsoluteLayout()
         {

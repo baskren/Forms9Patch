@@ -20,6 +20,11 @@ namespace F9PRebuild
             TintColor = Color.Blue
         };
 
+        Label _baseInternalCountLabel = new Label
+        {
+
+        };
+
         public SingleButton()
         {
             Padding = 40;
@@ -27,7 +32,8 @@ namespace F9PRebuild
             {
                 Children = {
                     _button,
-                    _image
+                    _image,
+                    _baseInternalCountLabel
                 }
             };
 
@@ -38,6 +44,15 @@ namespace F9PRebuild
                 else
                     _button.BackgroundImage = "F9PRebuild.Resources.button";
             };
+
+            _button.BaseInternalChildren.CollectionChanged += (sender, e) => UpdateLabel();
+
+            UpdateLabel();
+        }
+
+        void UpdateLabel()
+        {
+            _baseInternalCountLabel.Text = "COUNT: " + _button.BaseInternalChildren.Count;
         }
     }
 }
