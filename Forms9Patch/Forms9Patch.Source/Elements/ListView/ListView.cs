@@ -29,8 +29,8 @@ namespace Forms9Patch
         [Obsolete("Invalid property", true)]
         public new View Content
         {
-            get => (View)GetValue(ContentProperty); 
-            set => SetValue(ContentProperty, value); 
+            get => (View)GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
         #endregion
 
@@ -46,8 +46,8 @@ namespace Forms9Patch
         /// </summary>
         public double GroupHeaderRowHeight
         {
-            get => (double)GetValue(GroupHeaderRowHeightProperty); 
-            set => SetValue(GroupHeaderRowHeightProperty, value); 
+            get => (double)GetValue(GroupHeaderRowHeightProperty);
+            set => SetValue(GroupHeaderRowHeightProperty, value);
         }
         #endregion GroupHeaderRowHeight property
 
@@ -64,7 +64,7 @@ namespace Forms9Patch
         /// <value>The color of the selected cell background.</value>
         public Color SelectedCellBackgroundColor
         {
-            get => (Color)GetValue(SelectedCellBackgroundColorProperty); 
+            get => (Color)GetValue(SelectedCellBackgroundColorProperty);
             set => SetValue(SelectedCellBackgroundColorProperty, value);
         }
         #endregion SelectedCellBackgroundColor property
@@ -80,8 +80,8 @@ namespace Forms9Patch
         /// <value>The color of the group header background.</value>
         public Color GroupHeaderBackgroundColor
         {
-            get => (Color)GetValue(GroupHeaderBackgroundColorProperty); 
-            set => SetValue(GroupHeaderBackgroundColorProperty, value); 
+            get => (Color)GetValue(GroupHeaderBackgroundColorProperty);
+            set => SetValue(GroupHeaderBackgroundColorProperty, value);
         }
         #endregion GroupHeaderBackgroundColor property
 
@@ -99,8 +99,8 @@ namespace Forms9Patch
         /// </summary>
         public Xamarin.Forms.SeparatorVisibility SeparatorVisibility
         {
-            get => (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty); 
-            set => SetValue(SeparatorVisibilityProperty, value); 
+            get => (Xamarin.Forms.SeparatorVisibility)GetValue(SeparatorVisibilityProperty);
+            set => SetValue(SeparatorVisibilityProperty, value);
         }
         #endregion SeparatorVisibility property
 
@@ -114,8 +114,8 @@ namespace Forms9Patch
         /// </summary>
         public Color SeparatorColor
         {
-            get => (Color)GetValue(SeparatorColorProperty); 
-            set => SetValue(SeparatorColorProperty, value); 
+            get => (Color)GetValue(SeparatorColorProperty);
+            set => SetValue(SeparatorColorProperty, value);
         }
         #endregion SeparatorColor property
 
@@ -129,8 +129,8 @@ namespace Forms9Patch
         /// </summary>
         public double SeparatorLeftIndent
         {
-            get => (double)GetValue(SeparatorLeftIndentProperty); 
-            set => SetValue(SeparatorLeftIndentProperty, value); 
+            get => (double)GetValue(SeparatorLeftIndentProperty);
+            set => SetValue(SeparatorLeftIndentProperty, value);
         }
         #endregion SeparatorLeftIndent property
 
@@ -144,8 +144,8 @@ namespace Forms9Patch
         /// </summary>
         public double SeparatorRightIndent
         {
-            get => (double)GetValue(SeparatorRightIndentProperty); 
-            set => SetValue(SeparatorRightIndentProperty, value); 
+            get => (double)GetValue(SeparatorRightIndentProperty);
+            set => SetValue(SeparatorRightIndentProperty, value);
         }
         #endregion SeparatorRightIndent property
 
@@ -159,8 +159,8 @@ namespace Forms9Patch
         /// </summary>
         public double SeparatorHeight
         {
-            get => (double)GetValue(SeparatorHeightProperty); 
-            set => SetValue(SeparatorHeightProperty, value); 
+            get => (double)GetValue(SeparatorHeightProperty);
+            set => SetValue(SeparatorHeightProperty, value);
         }
         #endregion SeparatorHeight property
 
@@ -182,8 +182,8 @@ namespace Forms9Patch
         /// <value>The source property map.</value>
         public List<string> SourcePropertyMap
         {
-            get => (List<string>)GetValue(SourcePropertyMapProperty); 
-            set => SetValue(SourcePropertyMapProperty, value); 
+            get => (List<string>)GetValue(SourcePropertyMapProperty);
+            set => SetValue(SourcePropertyMapProperty, value);
         }
         #endregion SourcePropertyMap
 
@@ -198,8 +198,8 @@ namespace Forms9Patch
         /// <value>The visibility test.</value>
         public Func<object, bool> VisibilityTest
         {
-            get => (Func<object, bool>)GetValue(VisibilityTestProperty); 
-            set => SetValue(VisibilityTestProperty, value); 
+            get => (Func<object, bool>)GetValue(VisibilityTestProperty);
+            set => SetValue(VisibilityTestProperty, value);
         }
         #endregion VisiblilityTest
 
@@ -214,8 +214,8 @@ namespace Forms9Patch
         /// <value>The type of the sub group.</value>
         public Type SubGroupType
         {
-            get => (Type)GetValue(SubGroupTypeProperty); 
-            set => SetValue(SubGroupTypeProperty, value); 
+            get => (Type)GetValue(SubGroupTypeProperty);
+            set => SetValue(SubGroupTypeProperty, value);
         }
         #endregion
 
@@ -234,8 +234,8 @@ namespace Forms9Patch
         /// <value>The Toggle behavior (None, Radio, Multiselect).</value>
         public GroupToggleBehavior GroupToggleBehavior
         {
-            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); 
-            set => SetValue(GroupToggleBehaviorProperty, value); 
+            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
+            set => SetValue(GroupToggleBehaviorProperty, value);
         }
         #endregion GroupToggleBehavior property
 
@@ -250,8 +250,8 @@ namespace Forms9Patch
         /// <value>The selected items.</value>
         public ObservableCollection<object> SelectedItems
         {
-            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); 
-            private set => SetValue(SelectedItemsPropertyKey, value); 
+            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty);
+            private set => SetValue(SelectedItemsPropertyKey, value);
         }
         #endregion SelectdItems property
 
@@ -268,8 +268,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if editable; otherwise, <c>false</c>.</value>
         public bool Editable
         {
-            get => (bool)GetValue(EditableProperty); 
-            set => SetValue(EditableProperty, value); 
+            get => (bool)GetValue(EditableProperty);
+            set => SetValue(EditableProperty, value);
         }
         #endregion Editable
 
@@ -287,8 +287,8 @@ namespace Forms9Patch
         /// </summary>
         public object Header
         {
-            get => GetValue(HeaderProperty); 
-            set => SetValue(HeaderProperty, value); 
+            get => GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
         }
         #endregion Header
 
@@ -303,8 +303,8 @@ namespace Forms9Patch
         /// <value>The header template.</value>
         public Xamarin.Forms.DataTemplate HeaderTemplate
         {
-            get => (Xamarin.Forms.DataTemplate)GetValue(HeaderTemplateProperty); 
-            set => SetValue(HeaderTemplateProperty, value); 
+            get => (Xamarin.Forms.DataTemplate)GetValue(HeaderTemplateProperty);
+            set => SetValue(HeaderTemplateProperty, value);
         }
         #endregion HeaderTemplate 
 
@@ -318,8 +318,8 @@ namespace Forms9Patch
         /// </summary>
         public object Footer
         {
-            get => GetValue(FooterProperty); 
-            set => SetValue(FooterProperty, value); 
+            get => GetValue(FooterProperty);
+            set => SetValue(FooterProperty, value);
         }
         #endregion Footer
 
@@ -333,8 +333,8 @@ namespace Forms9Patch
         /// </summary>
         public DataTemplate FooterTemplate
         {
-            get => (DataTemplate)GetValue(FooterTemplateProperty); 
-            set => SetValue(FooterTemplateProperty, value); 
+            get => (DataTemplate)GetValue(FooterTemplateProperty);
+            set => SetValue(FooterTemplateProperty, value);
         }
         #endregion FooterTemplate
 
@@ -350,8 +350,8 @@ namespace Forms9Patch
         /// </summary>
         public object SelectedItem
         {
-            get => GetValue(SelectedItemProperty); 
-            set => SetValue(SelectedItemProperty, value); 
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
         #endregion SelectedItem
 
@@ -369,8 +369,8 @@ namespace Forms9Patch
         /// </summary>
         public int RowHeight
         {
-            get => (int)GetValue(RowHeightProperty); 
-            set => SetValue(RowHeightProperty, value); 
+            get => (int)GetValue(RowHeightProperty);
+            set => SetValue(RowHeightProperty, value);
         }
         #endregion RowHeight
 
@@ -388,8 +388,8 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.GroupHeaderTemplate GroupHeaderTemplate
         {
-            get => (Forms9Patch.GroupHeaderTemplate)GetValue(GroupHeaderTemplateProperty); 
-            set => SetValue(GroupHeaderTemplateProperty, value); 
+            get => (Forms9Patch.GroupHeaderTemplate)GetValue(GroupHeaderTemplateProperty);
+            set => SetValue(GroupHeaderTemplateProperty, value);
         }
         #endregion GroupHeaderTemplate
 
@@ -403,8 +403,8 @@ namespace Forms9Patch
         /// </summary>
         public bool IsGroupingEnabled
         {
-            get => (bool)GetValue(IsGroupingEnabledProperty); 
-            set => SetValue(IsGroupingEnabledProperty, value); 
+            get => (bool)GetValue(IsGroupingEnabledProperty);
+            set => SetValue(IsGroupingEnabledProperty, value);
         }
         #endregion IsGroupingEnabled
 
@@ -422,8 +422,8 @@ namespace Forms9Patch
         /// </summary>
         public IEnumerable ItemsSource
         {
-            get => (IEnumerable)GetValue(ItemsSourceProperty); 
-            set => SetValue(ItemsSourceProperty, value); 
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
         #endregion ItemsSource
 
@@ -437,8 +437,8 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.DataTemplateSelector ItemTemplates
         {
-            get => (Forms9Patch.DataTemplateSelector)GetValue(ItemTemplatesProperty); 
-            set => SetValue(ItemTemplatesProperty, value); 
+            get => (Forms9Patch.DataTemplateSelector)GetValue(ItemTemplatesProperty);
+            set => SetValue(ItemTemplatesProperty, value);
         }
 
         #endregion ItemTemplates
@@ -1163,10 +1163,7 @@ namespace Forms9Patch
         {
             _listView.SelectedItem = null;  // why is base.SelectedItem getting selected?  I don't know.  But let's stop this!
             _listView.ItemsSource = BaseItemsSource;
-            if (BaseItemsSource != null)
-                IsGroupingEnabled = BaseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
-            else
-                IsGroupingEnabled = false;
+            IsGroupingEnabled = BaseItemsSource != null && BaseItemsSource.ContentType == GroupWrapper.GroupContentType.Lists;
             ItemsSourceSet?.Invoke(this, EventArgs.Empty);
         }
         #endregion
@@ -1274,8 +1271,8 @@ namespace Forms9Patch
         internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled", typeof(bool), typeof(ListView), true);
         internal bool ScrollEnabled
         {
-            get => (bool)GetValue(ScrollEnabledProperty); 
-            set => SetValue(ScrollEnabledProperty, value); 
+            get => (bool)GetValue(ScrollEnabledProperty);
+            set => SetValue(ScrollEnabledProperty, value);
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace Forms9Patch
         /// <summary>
         /// The target bias property backing Store.
         /// </summary>
-        public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("TargetBias", typeof(double), typeof(BubblePopup), 0.5);
+        public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("Forms9Patch.BubblePopup.TargetBias", typeof(double), typeof(BubblePopup), 0.5);
         /// <summary>
         /// Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.
         /// </summary>
@@ -47,7 +47,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue);
+        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("Forms9Patch.BubblePopup.PointerLength", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue,
+        propertyChanged: (b, o, n) =>
+         {
+             if (b is BubblePopup bubblePopup)
+                 bubblePopup._bubbleLayout.PointerLength = bubblePopup.PointerLength;
+         });
         /// <summary>
         /// Gets or sets the length of the bubble layout's pointer.
         /// </summary>
@@ -63,7 +68,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer tip radius property.
         /// </summary>
-        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue);
+        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubblePopup bubblePopup)
+                bubblePopup._bubbleLayout.PointerTipRadius = bubblePopup.PointerTipRadius;
+        });
         /// <summary>
         /// Gets or sets the radius of the bubble's pointer tip.
         /// </summary>
@@ -79,7 +89,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer direction property.
         /// </summary>
-        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
+        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubblePopup bubblePopup)
+                bubblePopup._bubbleLayout.PointerDirection = bubblePopup.PointerDirection;
+        });
         /// <summary>
         /// Gets or sets the direction in which the pointer pointing.
         /// </summary>
@@ -95,7 +110,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for PreferredPointerDirection property
         /// </summary>
-        public static readonly BindableProperty PreferredPointerDirectionProperty = BindableProperty.Create("PreferredPointerDirection", typeof(PointerDirection), typeof(BubblePopup), PointerDirection.None);
+        public static readonly BindableProperty PreferredPointerDirectionProperty = BindableProperty.Create("Forms9Patch.BubblePopup.PreferredPointerDirection", typeof(PointerDirection), typeof(BubblePopup), PointerDirection.None);
         /// <summary>
         /// Gets/Sets the PreferredPointerDirection property
         /// </summary>
@@ -110,7 +125,12 @@ namespace Forms9Patch
         /// <summary>
         /// The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.
         /// </summary>
-        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue);
+        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubblePopup bubblePopup)
+                bubblePopup._bubbleLayout.PointerCornerRadius = bubblePopup.PointerCornerRadius;
+        });
         /// <summary>
         /// Gets or sets the pointer corner radius.
         /// </summary>
@@ -122,26 +142,11 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region PointerAngle property
-        /// <summary>
-        /// backing store for PointerAngle property
-        /// </summary>
-        internal static readonly BindableProperty PointerAngleProperty = BindableProperty.Create("PointerAngle", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerAngleProperty.DefaultValue);
-        /// <summary>
-        /// Gets/Sets the PointerAngle property
-        /// </summary>
-        internal float PointerAngle
-        {
-            get => (float)GetValue(PointerAngleProperty);
-            set => SetValue(PointerAngleProperty, value);
-        }
-        #endregion PointerAngle property
-
         #region Point property
         /// <summary>
         /// backing store for Point property
         /// </summary>
-        public static readonly BindableProperty PointProperty = BindableProperty.Create("Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity, double.PositiveInfinity));
+        public static readonly BindableProperty PointProperty = BindableProperty.Create("Forms9Patch.BubblePopup.Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity, double.PositiveInfinity));
         /// <summary>
         /// Gets/Sets the Point property
         /// </summary>
@@ -177,14 +182,11 @@ namespace Forms9Patch
                 BackgroundColor = BackgroundColor,
 
                 PointerLength = PointerLength,
-                PointerAngle = PointerAngle,
                 PointerTipRadius = PointerTipRadius,
                 PointerCornerRadius = PointerCornerRadius
             };
             DecorativeContainerView = _bubbleLayout;
 
-            Margin = 0;
-            Padding = 10;
         }
 
 
@@ -249,29 +251,6 @@ namespace Forms9Patch
             if (_bubbleLayout == null)
                 return;
 
-            if (propertyName == PointerLengthProperty.PropertyName)
-                _bubbleLayout.PointerLength = PointerLength;
-            else if (propertyName == PointerAngleProperty.PropertyName)
-            {
-                if (propertyName == PointerAngleProperty.PropertyName)
-                {
-                    if (PointerAngle < 1)
-                    {
-                        PointerAngle = 1;
-                        return;
-                    }
-                    if (PointerAngle > 89)
-                    {
-                        PointerAngle = 89;
-                        return;
-                    }
-                }
-                _bubbleLayout.PointerAngle = PointerAngle;
-            }
-            else if (propertyName == PointerTipRadiusProperty.PropertyName)
-                _bubbleLayout.PointerTipRadius = PointerTipRadius;
-            else if (propertyName == PointerCornerRadiusProperty.PropertyName)
-                _bubbleLayout.PointerCornerRadius = PointerCornerRadius;
             /*
             else if (propertyName == "Parent")
             {
@@ -336,13 +315,13 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
+            System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
 
             if (_bubbleLayout?.Content == null)
                 return;
             var bounds = new Rectangle(x, y, width, height);
 
-            // layout the background
+            // layout the page overlay
             base.LayoutChildren(x, y, width, height);
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
@@ -358,17 +337,17 @@ namespace Forms9Patch
                     availHeight = _bubbleLayout.Content.HeightRequest;
                 var request = _bubbleLayout.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
-                var decoration = ShapeBase.ShadowPadding(_bubbleLayout, HasShadow);// _bubbleLayout.DecorativePadding();
+                var shadowPadding = ShapeBase.ShadowPadding(_bubbleLayout, HasShadow);// _bubbleLayout.DecorativePadding();
 
                 var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
                 rBoxWidth += _bubbleLayout.Padding.HorizontalThickness;
-                rBoxWidth += decoration.HorizontalThickness;
+                rBoxWidth += shadowPadding.HorizontalThickness;
                 var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
                 rBoxHeight += _bubbleLayout.Padding.VerticalThickness;
-                rBoxHeight += decoration.VerticalThickness;
+                rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
-                //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren _bubbleLayout size=[{0}, {1}]",rboxSize.Width, rboxSize.Height);
+                System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren rBoxSize size=[{0}, {1}]", rboxSize.Width, rboxSize.Height);
                 PointerDirection pointerDir = PointerDirection.None;
 
 
@@ -405,7 +384,7 @@ namespace Forms9Patch
                     {
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
                         //targetBounds = Target.BoundsToEleCoord(targetPage);
-                        //System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
+                        System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
                         //targetBounds = targetPage.GetRelativeBounds(Target);
                         //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
                     }
@@ -543,7 +522,7 @@ namespace Forms9Patch
                     }
                     else
                     {
-                        //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
+                        System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(rboxSize.Height, Point.Y + targetBounds.Top, 0, height);
@@ -567,9 +546,9 @@ namespace Forms9Patch
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
+                    System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
-                    //System.Diagnostics.Debug.WriteLine("\t\t LayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
-                    //System.Diagnostics.Debug.WriteLine("");
+                    System.Diagnostics.Debug.WriteLine("");
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Bubble layout.
     /// </summary>
-    internal class BubbleLayout : Xamarin.Forms.ContentView, IBubbleLayout
+    class BubbleLayout : Forms9Patch.ContentView, IBubbleLayout
     {
         static BubbleLayout()
         {
@@ -22,7 +22,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength", typeof(float), typeof(BubbleLayout), 4.0f);//, propertyChanged: UpdateBasePadding);
+        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerLength", typeof(float), typeof(BubbleLayout), 4.0f,
+        propertyChanged: (b, o, n) =>
+         {
+             if (b is BubbleLayout layout)
+                 ((IBubbleShape)layout.CurrentBackgroundImage).PointerLength = ((IBubbleShape)layout._fallbackBackgroundImage).PointerLength = layout.PointerLength;
+         });//, propertyChanged: UpdateBasePadding);
         /// <summary>
         /// Gets or sets the length of the bubble layout's pointer.
         /// </summary>
@@ -38,7 +43,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer tip radius property.
         /// </summary>
-        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubbleLayout), 2.0f);//, propertyChanged: UpdateBasePadding);
+        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerTipRadius", typeof(float), typeof(BubbleLayout), 2.0f,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubbleLayout layout)
+                ((IBubbleShape)layout.CurrentBackgroundImage).PointerTipRadius = ((IBubbleShape)layout._fallbackBackgroundImage).PointerTipRadius = layout.PointerTipRadius;
+        });//, propertyChanged: UpdateBasePadding);
         /// <summary>
         /// Gets or sets the radius of the bubble's pointer tip.
         /// </summary>
@@ -50,26 +60,16 @@ namespace Forms9Patch
         }
         #endregion PointerTipRadius property
 
-        #region PointerAngle property
-        /// <summary>
-        /// backing store for PointerAngle property
-        /// </summary>
-        internal static readonly BindableProperty PointerAngleProperty = BindableProperty.Create("PointerAngle", typeof(float), typeof(BubbleLayout), 60f);
-        /// <summary>
-        /// Gets/Sets the PointerAngle property
-        /// </summary>
-        internal float PointerAngle
-        {
-            get => (float)GetValue(PointerAngleProperty);
-            set => SetValue(PointerAngleProperty, value);
-        }
-        #endregion PointerAngle property
-
         #region PointerAxialPosition property
         /// <summary>
         /// Backing store for pointer axial position property.
         /// </summary>
-        public static readonly BindableProperty PointerAxialPositionProperty = BindableProperty.Create("PointerAxialPosition", typeof(float), typeof(BubbleLayout), 0.5f);
+        public static readonly BindableProperty PointerAxialPositionProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerAxialPosition", typeof(float), typeof(BubbleLayout), 0.5f,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubbleLayout layout)
+                ((IBubbleShape)layout.CurrentBackgroundImage).PointerAxialPosition = ((IBubbleShape)layout._fallbackBackgroundImage).PointerAxialPosition = layout.PointerAxialPosition;
+        });
         /// <summary>
         /// Gets or sets the position of the bubble's pointer along the face it's on.
         /// </summary>
@@ -85,7 +85,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer direction property.
         /// </summary>
-        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubbleLayout), PointerDirection.Any);//, propertyChanged: UpdateBasePadding);
+        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerDirection", typeof(PointerDirection), typeof(BubbleLayout), PointerDirection.Any,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubbleLayout layout)
+                ((IBubbleShape)layout.CurrentBackgroundImage).PointerDirection = ((IBubbleShape)layout._fallbackBackgroundImage).PointerDirection = layout.PointerDirection;
+        });
         /// <summary>
         /// Gets or sets the direction in which the pointer pointing.
         /// </summary>
@@ -101,7 +106,13 @@ namespace Forms9Patch
         /// <summary>
         /// The pointer corner radius property.
         /// </summary>
-        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubbleLayout), 0f);
+        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerCornerRadius", typeof(float), typeof(BubbleLayout), 0f,
+        propertyChanged: (b, o, n) =>
+        {
+            if (b is BubbleLayout layout)
+                ((IBubbleShape)layout.CurrentBackgroundImage).PointerCornerRadius = ((IBubbleShape)layout._fallbackBackgroundImage).PointerCornerRadius = layout.PointerCornerRadius;
+        });
+
         /// <summary>
         /// Gets or sets the pointer corner radius.
         /// </summary>
@@ -113,221 +124,7 @@ namespace Forms9Patch
         }
         #endregion PointerCornerRadius property
 
-        #region ILayout properties
-
-        #region IgnoreChildren property
-        /// <summary>
-        /// backing store for IgnoreChildren property
-        /// </summary>
-        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(BubbleLayout), default(bool));
-        /// <summary>
-        /// Gets/Sets the IgnoreChildren property
-        /// </summary>
-        public bool IgnoreChildren
-        {
-            get => (bool)GetValue(IgnoreChildrenProperty);
-            set => SetValue(IgnoreChildrenProperty, value);
-        }
-        #endregion IgnoreChildren properties
-
-        #region IBackground properties
-
-        #region BackgroundImage
-        /// <summary>
-        /// BackgroundImage backing store
-        /// </summary>
-        public static BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
-        /// <summary>
-        /// Gets or sets the background image.
-        /// </summary>
-        /// <value>The background image.</value>
-        public Image BackgroundImage
-        {
-            get => (Image)GetValue(BackgroundImageProperty);
-            set => SetValue(BackgroundImageProperty, value);
-        }
-        #endregion
-
-        #region IShape
-
-        #region BackgroundColor property
-        /// <summary>
-        /// backing store for BackgroundColor property
-        /// </summary>
-        public static new readonly BindableProperty BackgroundColorProperty = ShapeBase.BackgroundColorProperty;
-        /// <summary>
-        /// Gets/Sets the BackgroundColor property
-        /// </summary>
-        public new Color BackgroundColor
-        {
-            get => (Color)GetValue(BackgroundColorProperty);
-            set => SetValue(BackgroundColorProperty, value);
-        }
-        #endregion BackgroundColor property
-
-        #region HasShadow property
-#if _Forms9Patch_Frame_
-        /// <summary>
-        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute & store shadow padding
-        /// </summary>
-        public static new BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-        /// <summary>
-        /// Gets/Sets the HasShadow property
-        /// </summary>
-        public new bool HasShadow
-#else
-        /// <summary>
-        /// HasShadow property backing store
-        /// </summary>
-        public static BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-        /// <summary>
-        /// Gets/Sets the HasShadow property
-        /// </summary>
-        public bool HasShadow
-#endif
-        {
-            get => (bool)GetValue(HasShadowProperty);
-            set => SetValue(HasShadowProperty, value);
-        }
-        #endregion HasShadow property
-
-        #region ShadowInverted
-        /// <summary>
-        /// Backing store for the ShadowInverted bindable property.
-        /// </summary>
-        /// <remarks></remarks>
-        public static readonly BindableProperty ShadowInvertedProperty = ShapeBase.ShadowInvertedProperty;
-        /// <summary>
-        /// Gets or sets a flag indicating if the layout's shadow is inverted. This is a bindable property.
-        /// </summary>
-        /// <value><c>true</c> if this instance's shadow is inverted; otherwise, <c>false</c>.</value>
-        public bool ShadowInverted
-        {
-            get => (bool)GetValue(ShadowInvertedProperty);
-            set => SetValue(ShadowInvertedProperty, value);
-        }
-        #endregion ShadowInverted
-
-        #region OutlineColor property
-
-#if _Forms9Patch_Frame_
-        /// <summary>
-        /// backing store for OutlineColor property
-        /// </summary>
-        public static new readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
-        /// <summary>
-        /// Gets/Sets the OutlineColor property
-        /// </summary>
-        public new Color OutlineColor
-        {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
-        }
-#else
-        /// <summary>
-        /// backing store for OutlineColor property
-        /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
-        /// <summary>
-        /// Gets/Sets the OutlineColor property
-        /// </summary>
-        public Color OutlineColor
-        {
-            get => (Color)GetValue(OutlineColorProperty);
-            set => SetValue(OutlineColorProperty, value);
-        }
-#endif
-
-        #endregion OutlineColor property
-
-        #region OutlineRadius
-        /// <summary>
-        /// Backing store for the OutlineRadius bindable property.
-        /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
-        /// <summary>
-        /// Gets or sets the outline radius.
-        /// </summary>
-        /// <value>The outline radius.</value>
-        public float OutlineRadius
-        {
-            get => (float)GetValue(OutlineRadiusProperty);
-            set => SetValue(OutlineRadiusProperty, value);
-        }
-        #endregion OutlineRadius
-
-        #region OutlineWidth
-        /// <summary>
-        /// Backing store for the OutlineWidth bindable property.
-        /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
-        /// <summary>
-        /// Gets or sets the width of the outline.
-        /// </summary>
-        /// <value>The width of the outline.</value>
-        public float OutlineWidth
-        {
-            get => (float)GetValue(OutlineWidthProperty);
-            set => SetValue(OutlineWidthProperty, value);
-        }
-        #endregion OutlineWidth
-
-        #region ElementShape property
-        /// <summary>
-        /// Backing store for the ElementShape property
-        /// </summary>
-        internal static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
-        /// <summary>
-        /// Gets/sets the geometry of the element
-        /// </summary>
-        ElementShape IShape.ElementShape
-        {
-            get => (ElementShape)GetValue(ElementShapeProperty);
-            set => SetValue(ElementShapeProperty, value);
-        }
-        #endregion ElementShape property
-
-        /*
-        #region ExtendedElementShape property
-        /// <summary>
-        /// backing store for ExtendedElementShape property
-        /// </summary>
-        internal static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;
-        /// <summary>
-        /// Gets/Sets the ExtendedElementShape property
-        /// </summary>
-        ExtendedElementShape IExtendedShape.ExtendedElementShape
-        {
-            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty);
-            set => SetValue(ExtendedElementShapeProperty, value);
-        }
-        #endregion ExtendedElementShape property
-        */
-
-        #region IElement
-
-        #region InstanceId
-        /// <summary>
-        /// The Instance Id (for debugging purposes)
-        /// </summary>
-        public int InstanceId => _id;
-        #endregion InstanceId
-
-        #endregion IElement
-
-        #endregion IShape
-
-        #endregion IBackground properties
-
-        #endregion ILayout properties
-
         #endregion IBubbleLayout properties
-
-
-        #region Fields
-        static int _instances = 0;
-        int _id;
-        #endregion Fields
 
 
         #region Constructor
@@ -336,16 +133,12 @@ namespace Forms9Patch
         /// </summary>
         public BubbleLayout()
         {
-            Padding = 10;
-            _id = _instances++;
-            //BackgroundColor = Color.White;
+            _fallbackBackgroundImage.IsBubble = true;
         }
         #endregion Constructor
 
 
         #region Description
-        public string Description() { return string.Format("[{0}.{1}]", GetType(), _id); }
-
         public override string ToString() => Description();
         #endregion
 
@@ -357,24 +150,16 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (propertyName == PointerAngleProperty.PropertyName)
-            {
-                if (PointerAngle < 1)
-                {
-                    PointerAngle = 1;
-                    return;
-                }
-                if (PointerAngle > 89)
-                {
-                    PointerAngle = 89;
-                    return;
-                }
-            }
+            if (propertyName == BackgroundImageProperty.PropertyName && BackgroundImage != null)
+                BackgroundImage.IsBubble = true;
 
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == PointerLengthProperty.PropertyName
-                || propertyName == HasShadowProperty.PropertyName)
+                || propertyName == HasShadowProperty.PropertyName
+                || propertyName == IsVisibleProperty.PropertyName)
                 InvalidateMeasure();
+
         }
         #endregion PropertyChange management
 
@@ -427,7 +212,7 @@ namespace Forms9Patch
             return result = new Thickness(padL, padT, padR, padB);
         }
 
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+        //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
@@ -450,16 +235,20 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //System.Diagnostics.Debug.WriteLine ("\t\tBubbleLayout.LayoutChildren({0},{1},{2},{3})", x, y, width, height);
-            //System.Diagnostics.Debug.WriteLine ("\t\tBubbleLayout.Padding=[{0}, {1}, {2}, {3}]",Padding.Left, Padding.Top, Padding.Right, Padding.Bottom);
-            //System.Diagnostics.Debug.WriteLine ($"\t\tBubbleLayout.base.Padding=[{base.Padding.Left}, {base.Padding.Top}, {base.Padding.Right}, {base.Padding.Bottom}]");
-            //System.Diagnostics.Debug.WriteLine ("\t\tBubbleLayout.Content.Padding=[{0}, {1}, {2}, {3}]",((StackLayout)Content).Padding.Left, ((StackLayout)Content).Padding.Top, ((StackLayout)Content).Padding.Right, ((StackLayout)Content).Padding.Bottom);
+            System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.LayoutChildren({0},{1},{2},{3})", x, y, width, height);
+            System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.Padding=[{0}, {1}, {2}, {3}]", Padding.Left, Padding.Top, Padding.Right, Padding.Bottom);
+            System.Diagnostics.Debug.WriteLine($"\t\tBubbleLayout.base.Padding=[{base.Padding.Left}, {base.Padding.Top}, {base.Padding.Right}, {base.Padding.Bottom}]");
+            //System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.Content.Padding=[{0}, {1}, {2}, {3}]", ((StackLayout)Content).Padding.Left, ((StackLayout)Content).Padding.Top, ((StackLayout)Content).Padding.Right, ((StackLayout)Content).Padding.Bottom);
+
+            LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(x - Padding.Left, y - Padding.Top, width + Padding.HorizontalThickness, height + Padding.VerticalThickness));
+
             var decorativePadding = DecorativePadding();
             x += decorativePadding.Left;
             y += decorativePadding.Top;
             width -= decorativePadding.HorizontalThickness;
             height -= decorativePadding.VerticalThickness;
             LayoutChildIntoBoundingRegion(base.Content, new Rectangle(x, y, width, height));
+
         }
         #endregion Layout management
 

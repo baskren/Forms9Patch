@@ -54,7 +54,7 @@ namespace Forms9Patch
         /// What is the shadow and pointer padding?
         /// </summary>
         /// <returns></returns>
-        Xamarin.Forms.Thickness ShadowPadding();
+        //Xamarin.Forms.Thickness ShadowPadding();
 
     }
 }

@@ -15,7 +15,7 @@ using Xamarin.Forms.Internals;
 namespace Forms9Patch
 {
 
-    public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape
+    public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape
     {
         #region Static Implementation
 
@@ -332,7 +332,6 @@ namespace Forms9Patch
         }
         #endregion ElementShape property
 
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow, true);
 
         #region IElement
 
@@ -348,6 +347,92 @@ namespace Forms9Patch
         #endregion IExtendedShape
 
         #endregion IImage
+
+        #region IBubbleShape Properties
+
+        internal bool IsBubble { get; set; }
+
+        #region PoinerLength property
+        /// <summary>
+        /// Backing store for pointer length property.
+        /// </summary>
+        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength", typeof(float), typeof(BubbleLayout), 4.0f);//, propertyChanged: UpdateBasePadding);
+        /// <summary>
+        /// Gets or sets the length of the bubble layout's pointer.
+        /// </summary>
+        /// <value>The length of the pointer.</value>
+        float IBubbleShape.PointerLength
+        {
+            get => (float)GetValue(PointerLengthProperty);
+            set => SetValue(PointerLengthProperty, value);
+        }
+        #endregion PoinerLength property
+
+        #region PointerTipRadius property
+        /// <summary>
+        /// Backing store for pointer tip radius property.
+        /// </summary>
+        public static readonly BindableProperty PointerTipRadiusProperty = BubbleLayout.PointerTipRadiusProperty;
+        /// <summary>
+        /// Gets or sets the radius of the bubble's pointer tip.
+        /// </summary>
+        /// <value>The pointer tip radius.</value>
+        float IBubbleShape.PointerTipRadius
+        {
+            get => (float)GetValue(PointerTipRadiusProperty);
+            set => SetValue(PointerTipRadiusProperty, value);
+        }
+        #endregion PointerTipRadius property
+
+        #region PointerAxialPosition property
+        /// <summary>
+        /// Backing store for pointer axial position property.
+        /// </summary>
+        public static readonly BindableProperty PointerAxialPositionProperty = BubbleLayout.PointerAxialPositionProperty;
+        /// <summary>
+        /// Gets or sets the position of the bubble's pointer along the face it's on.
+        /// </summary>
+        /// <value>The pointer axial position (left/top is zero).</value>
+        float IBubbleShape.PointerAxialPosition
+        {
+            get => (float)GetValue(PointerAxialPositionProperty);
+            set => SetValue(PointerAxialPositionProperty, value);
+        }
+        #endregion PointerAxialPosition property
+
+        #region PointerDirection property
+        /// <summary>
+        /// Backing store for pointer direction property.
+        /// </summary>
+        public static readonly BindableProperty PointerDirectionProperty = BubbleLayout.PointerDirectionProperty;
+        /// <summary>
+        /// Gets or sets the direction in which the pointer pointing.
+        /// </summary>
+        /// <value>The pointer direction.</value>
+        PointerDirection IBubbleShape.PointerDirection
+        {
+            get => (PointerDirection)GetValue(PointerDirectionProperty);
+            set => SetValue(PointerDirectionProperty, value);
+        }
+        #endregion PointerDirection property
+
+        #region PointerCornerRadius property
+        /// <summary>
+        /// The pointer corner radius property.
+        /// </summary>
+        public static readonly BindableProperty PointerCornerRadiusProperty = BubbleLayout.PointerCornerRadiusProperty;
+        /// <summary>
+        /// Gets or sets the pointer corner radius.
+        /// </summary>
+        /// <value>The pointer corner radius.</value>
+        float IBubbleShape.PointerCornerRadius
+        {
+            get => (float)GetValue(PointerCornerRadiusProperty);
+            set => SetValue(PointerCornerRadiusProperty, value);
+        }
+        #endregion PointerCornerRadius property
+
+        #endregion IBubbleShape properties
 
         #endregion Properties
 
@@ -548,12 +633,11 @@ namespace Forms9Patch
                 propertyName == ShadowInvertedProperty.PropertyName ||
 
                 // BubbleLayout
-                propertyName == Forms9Patch.BubbleLayout.PointerAngleProperty.PropertyName ||
-                propertyName == Forms9Patch.BubbleLayout.PointerAxialPositionProperty.PropertyName ||
-                propertyName == Forms9Patch.BubbleLayout.PointerCornerRadiusProperty.PropertyName ||
-                propertyName == Forms9Patch.BubbleLayout.PointerDirectionProperty.PropertyName ||
-                propertyName == Forms9Patch.BubbleLayout.PointerLengthProperty.PropertyName ||
-                propertyName == Forms9Patch.BubbleLayout.PointerTipRadiusProperty.PropertyName ||
+                propertyName == PointerAxialPositionProperty.PropertyName ||
+                propertyName == PointerCornerRadiusProperty.PropertyName ||
+                propertyName == PointerDirectionProperty.PropertyName ||
+                propertyName == PointerLengthProperty.PropertyName ||
+                propertyName == PointerTipRadiusProperty.PropertyName ||
 
 
                 // Image
@@ -575,60 +659,12 @@ namespace Forms9Patch
 
 
         #region Measurement
-        /*
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            System.Diagnostics.Debug.WriteLine("OnSizeRequest ENTER :" + widthConstraint + ", " + heightConstraint);
-
-            // What do we have to deal with?
-            // 1) LayoutOptions.Expand?
-            // 2) Height/Width Request?
-            // 3) Bitmap pixel size
-            // 4) Available Space vs. ImageFill?
-
-            // added this an now everything is working!?
-            var platformSize = base.OnSizeRequest(widthConstraint, heightConstraint);
-
-            System.Diagnostics.Debug.WriteLine("base.OnSizeRequest=" + platformSize);
-
-            var width = double.IsNaN(widthConstraint) || double.IsInfinity(widthConstraint) ? Display.Width : widthConstraint;
-            var height = double.IsNaN(heightConstraint) || double.IsInfinity(heightConstraint) ? Display.Height : heightConstraint;
-
-            SizeRequest result = new SizeRequest();
-
-            if (_f9pImageData != null)
-            {
-                if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
-                    width = SourceImageWidth;
-                if (VerticalOptions.Alignment != LayoutAlignment.Fill)
-                    height = SourceImageHeight;
-
-
-                //var result = base.OnMeasure(widthConstraint, heightConstraint);
-                System.Diagnostics.Debug.WriteLine("");
-                result = new SizeRequest(new Size(width, height), new Size(SourceImageWidth, SourceImageHeight));
-            }
-            else
-            {
-
-                if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
-                    width = 40;
-                if (VerticalOptions.Alignment != LayoutAlignment.Fill)
-                    height = 40;
-
-                result = new SizeRequest(new Size(width, height), new Size(5, 5));
-            }
-            System.Diagnostics.Debug.WriteLine("OnMeasure EXIT: " + result);
-            return result;
-        }
-        */
-
-
-
+        [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            System.Diagnostics.Debug.WriteLine("GetSizeRequest ENTER");
+#pragma warning disable CS0618 // Type or member is obsolete
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
+#pragma warning restore CS0618 // Type or member is obsolete
 
             var reqW = result.Request.Width;
             var reqH = result.Request.Height;
@@ -641,37 +677,24 @@ namespace Forms9Patch
                     reqH = _f9pImageData.Height / Display.Scale;
             }
             result = new SizeRequest(new Size(reqW, reqH), new Size(10, 10));
-            System.Diagnostics.Debug.WriteLine("GetSizeRequest EXIT: " + result);
             return result;
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
         }
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            System.Diagnostics.Debug.WriteLine("OnMeasure ENTER: ");
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            System.Diagnostics.Debug.WriteLine("OnMeasure EXIT: " + result);
-            return result;
+            return base.OnMeasure(widthConstraint, heightConstraint);
         }
 
-        /* Called after measurement cycle
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            System.Diagnostics.Debug.WriteLine("OnSizeAllocated ENTER");
-            base.OnSizeAllocated(width, height);
-            System.Diagnostics.Debug.WriteLine("OnSizeAllocated EXIT");
-        }
-        */
 
-        /* Never called
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
-            System.Diagnostics.Debug.WriteLine("OnSizeRequest ENTER");
-            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            System.Diagnostics.Debug.WriteLine("OnSizeRequest EXIT");
-            return result;
+            return base.OnSizeRequest(widthConstraint, heightConstraint);
         }
-        */
-
         #endregion
 
 
@@ -694,13 +717,12 @@ namespace Forms9Patch
             var backgroundColor = BackgroundColor;
             var hasShadow = HasShadow;
             var shadowInverted = ShadowInverted;
-            var outlineWidth = OutlineWidth;
-            var outlineRadius = OutlineRadius;
+            var outlineWidth = OutlineWidth * Display.Scale;
+            var outlineRadius = OutlineRadius * Display.Scale;
             var outlineColor = OutlineColor;
             var elementShape = ((IExtendedShape)this).ExtendedElementShape;
 
-            //float separatorWidth =  (IsSegment || elementShape == ExtendedElementShape.Rectangle ? 0 : ((IExtendedShape)this).ExtendedElementSeparatorWidth < 0 ? outlineWidth : Math.Max(0, ((IExtendedShape)this).ExtendedElementSeparatorWidth));
-            float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth : 0;
+            float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth * Display.Scale : 0;
             if (separatorWidth < 0)
                 separatorWidth = outlineWidth;
             if (outlineColor.A <= 0.01)
@@ -708,23 +730,20 @@ namespace Forms9Patch
 
             bool drawOutline = DrawOutline;
             bool drawImage = DrawImage;
-            //bool drawSeparators = outlineColor.A > 0.01 && IsSegment && separatorWidth > 0.01;
             bool drawFill = DrawFill;
 
             if ((drawFill || drawOutline || separatorWidth > 0 || drawImage) && CanvasSize != default(SKSize))
             {
 
-                //if (materialButton != null && materialButton.ParentSegmentsOrientation == Xamarin.Forms.StackOrientation.Vertical) if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "][" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + "]  Parent.Size=[" + ((FrameworkElement)Parent).ActualWidth + "," + ((FrameworkElement)Parent).ActualHeight + "]");
-
                 SKRect rect = new SKRect(0, 0, info.Width, info.Height);
                 //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
 
                 var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
-                var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
-                var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
-                var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);
+                var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X);// * FormsGestures.Display.Scale);
+                var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y);// * FormsGestures.Display.Scale);
+                var shadowR = (float)(Forms9Patch.Settings.ShadowRadius);// * FormsGestures.Display.Scale);
                 var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
-                var shadowPadding = ShapeBase.ShadowPadding(this, hasShadow, true);
+                var shadowPadding = ShapeBase.ShadowPadding(this, hasShadow, false);
 
 
                 var perimeter = rect;
@@ -767,21 +786,6 @@ namespace Forms9Patch
                                 shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right, perimeter.Bottom);
                                 break;
                         }
-
-#if __IOS__
-                            ClipsToBounds = true;
-#elif __DROIDv15__
-#elif __DROID__
-                            if (Forms9Patch.OsInfoService.Version >= new Version(4, 3))
-                                ClipBounds = new Android.Graphics.Rect(0, 0, Width, Height);
-#elif WINDOWS_UWP
-
-                            var w = double.IsNaN(Width) ? e.Info.Width+1 : Width;
-                            var h = double.IsNaN(Height) ? e.Info.Height+1 : Height;
-                            Clip = new Windows.UI.Xaml.Media.RectangleGeometry { Rect = new Rect(0, 0, w - 1, h - 1) };
-#else
-                        //Clips;
-#endif
 
                         var shadowPaint = new SKPaint
                         {
@@ -1281,8 +1285,8 @@ namespace Forms9Patch
         {
             radius = Math.Max(radius, 0);
 
-            //if (element is BubbleLayout bubble && bubble.PointerDirection != PointerDirection.None)
-            //    return BubblePerimeterPath(bubble, rect, radius);
+            if (IsBubble && this is IBubbleShape bubble && bubble.PointerDirection != PointerDirection.None)
+                return BubblePerimeterPath(bubble, rect, radius);
 
             Xamarin.Forms.StackOrientation orientation = !IsSegment ? Xamarin.Forms.StackOrientation.Horizontal : ((IExtendedShape)this).ExtendedElementShapeOrientation;
 
@@ -1433,7 +1437,7 @@ namespace Forms9Patch
             return path;
         }
 
-        internal static SKPath BubblePerimeterPath(BubbleLayout bubble, SKRect rect, float radius)
+        internal SKPath BubblePerimeterPath(IBubbleShape bubble, SKRect rect, float radius)
         {
             var length = bubble.PointerLength * FormsGestures.Display.Scale;
 

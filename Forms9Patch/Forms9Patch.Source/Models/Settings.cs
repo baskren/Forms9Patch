@@ -24,7 +24,7 @@ namespace Forms9Patch
         /// <summary>
         /// The shadow radius.
         /// </summary>
-        public static double ShadowRadius = 3;
+        public static double ShadowRadius = 5;
         #endregion
 
         internal static TimeSpan MsUntilTapped = TimeSpan.FromMilliseconds(210);

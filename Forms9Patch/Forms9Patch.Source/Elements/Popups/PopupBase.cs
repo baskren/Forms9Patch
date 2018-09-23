@@ -69,7 +69,7 @@ namespace Forms9Patch
         /// <summary>
         /// The margin property.
         /// </summary>
-        public static readonly new BindableProperty MarginProperty = BindableProperty.Create("Forms9Patch.PopupBase.Margin", typeof(Thickness), typeof(PopupBase), default(Thickness));
+        public static readonly new BindableProperty MarginProperty = BindableProperty.Create("Forms9Patch.PopupBase.Margin", typeof(Thickness), typeof(PopupBase), new Thickness(30));
         /// <summary>
         /// Gets or sets the margin.
         /// </summary>
@@ -430,6 +430,10 @@ namespace Forms9Patch
             BackgroundColor = Color.White;
             HasShadow = true;
 
+            Padding = 10;
+            HasShadow = true;
+            OutlineRadius = 5;
+
             _id = _instances++;
             Retain = retain;
             IsVisible = false;
@@ -618,8 +622,6 @@ namespace Forms9Patch
                     _decorativeContainerView.OutlineRadius = OutlineRadius;
                 else if (propertyName == ElementShapeProperty.PropertyName)
                     _decorativeContainerView.ElementShape = ElementShape;
-                //else if (propertyName == ExtendedElementShapeProperty.PropertyName)
-                //    _decorativeContainerView.ExtendedElementShape = ((IShape)this).ExtendedElementShape;
                 #endregion IShape
 
                 #endregion IBackground
@@ -631,7 +633,7 @@ namespace Forms9Patch
 
 
         #region Layout
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+        //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
         /// <summary>
         /// processes measurement requests

@@ -18,7 +18,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ignore children property.
         /// </summary>
-        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(ManualLayout), default(bool));
+        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("Forms9Patch.ManualLayout.IgnoreChildren", typeof(bool), typeof(ManualLayout), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> ignore children.
         /// </summary>
@@ -255,7 +255,7 @@ namespace Forms9Patch
 
 
         #region Layout
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
+        //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
         /// <summary>
         /// Occurs when layout children event is triggered.

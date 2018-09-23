@@ -151,6 +151,7 @@
     <Compile Include="..\Forms9Patch.Source\Interfaces\IBubblePopup.cs" Link="Interfaces\IBubblePopup.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IButton.cs" Link="Interfaces\IButton.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IButtonState.cs" Link="Interfaces\IButtonState.cs" />
+    <Compile Include="..\Forms9Patch.Source\Interfaces\IBubbleShape.cs" Link="Interfaces\IBubbleShape.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IDescendentBounds.cs" Link="Interfaces\IDescendentBounds.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IElement.cs" Link="Interfaces\IElement.cs" />
     <Compile Include="..\Forms9Patch.Source\Interfaces\IExtendedShape.cs" Link="Interfaces\IExtendedShape.cs" />

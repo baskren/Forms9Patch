@@ -200,7 +200,7 @@ namespace Forms9Patch
 
 
         #region IShape Methods
-        Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
+        //Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
         #endregion
 
 

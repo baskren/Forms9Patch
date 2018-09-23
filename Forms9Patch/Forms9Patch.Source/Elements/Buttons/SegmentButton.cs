@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Forms9Patch
 {
-    public class SegmentButton : Forms9Patch.Button, IExtendedShape
+    class SegmentButton : Forms9Patch.Button, IExtendedShape
     {
         #region ExtendedElementShapeOrientation property
         /// <summary>

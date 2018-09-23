@@ -222,7 +222,7 @@ namespace Forms9Patch
 
 
         #region IShape Methods
-        Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
+        //Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
         #endregion
 
 
@@ -272,6 +272,7 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var contentSizeRequest = Content.Measure(widthConstraint, heightConstraint, MeasureFlags.IncludeMargins);
+            //System.Diagnostics.Debug.WriteLine("\t\t contentSizeRequest: " + contentSizeRequest);
 
             if (LimitMinSizeToBackgroundImageSize && BackgroundImage != null && BackgroundImage.SourceImageSize != Size.Zero)
             {
@@ -290,6 +291,22 @@ namespace Forms9Patch
             return contentSizeRequest;
         }
 
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            //System.Diagnostics.Debug.WriteLine("OnSizeAllocated(" + width + ", " + height + ")");
+            base.OnSizeAllocated(width, height);
+            //System.Diagnostics.Debug.WriteLine("OnSizeAllocated");
+        }
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            //System.Diagnostics.Debug.WriteLine("ContentView.OnMeasure(" + widthConstraint + ", " + heightConstraint + ")");
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            //System.Diagnostics.Debug.WriteLine("ContentView.OnMeasure: result = " + result);
+            return result;
+        }
+
+
         /// <summary>
         /// processes child layout
         /// </summary>
@@ -299,19 +316,35 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            var shadowPadding = ShapeBase.ShadowPadding(this);
+            System.Diagnostics.Debug.WriteLine(GetType() + "ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
+
+            LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
+
+            var rect = new Rectangle(x, y, width, height);
+            if (HasShadow)
+            {
+                var shadowPadding = ShapeBase.ShadowPadding(this);
+                //System.Diagnostics.Debug.WriteLine("\t\t shadowPadding: " + shadowPadding);
+                rect = new Rectangle(x + shadowPadding.Left, y + shadowPadding.Top, width - shadowPadding.HorizontalThickness, height - shadowPadding.VerticalThickness);
+            }
+
+            System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
+            LayoutChildIntoBoundingRegion(Content, rect);
+            /*
             Rectangle border = new Rectangle(0, 0, Width, Height);
             if (HasShadow)
             {
-                border.X += shadowPadding.Left;
-                border.Y += shadowPadding.Top;
-                border.Width -= shadowPadding.HorizontalThickness;
-                border.Height -= shadowPadding.VerticalThickness;
+                //border.X += shadowPadding.Left;
+                //border.Y += shadowPadding.Top;
+                //border.Width -= shadowPadding.HorizontalThickness;
+                //border.Height -= shadowPadding.VerticalThickness;
                 x += shadowPadding.Left;
                 y += shadowPadding.Top;
                 width -= shadowPadding.HorizontalThickness;
                 height -= shadowPadding.VerticalThickness;
             }
+            System.Diagnostics.Debug.WriteLine("\t\t update: " + x + ", " + y + ", " + width + ", " + height);
+            System.Diagnostics.Debug.WriteLine("\t\t border: " + border);
             //base.LayoutChildren(x, y, width, height);
             for (var i = 0; i < BaseInternalChildren.Count; i++)
             {
@@ -321,6 +354,8 @@ namespace Forms9Patch
                 else if (element is View child)
                     LayoutChildIntoBoundingRegion(child, new Rectangle(x, y, width, height));
             }
+            */
+
         }
 
 

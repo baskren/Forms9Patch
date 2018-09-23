@@ -147,7 +147,7 @@ namespace Forms9Patch
         /// Identifies the Padding bindable property.
         /// </summary>
         /// <remarks></remarks>
-        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Padding", typeof(Thickness), typeof(SegmentedControl), new Thickness(4));
+        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.Padding", typeof(Thickness), typeof(SegmentedControl), new Thickness(4));
         /// <summary>
         /// Gets or sets the padding for SegmentedControl's segments.
         /// </summary>
@@ -163,7 +163,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected text color property.
         /// </summary>
-        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create("SelectedTextColor", typeof(Color), typeof(SegmentedControl), Color.Default);
+        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SelectedTextColor", typeof(Color), typeof(SegmentedControl), Color.Default);
         /// <summary>
         /// Gets or sets the color of the selected font.
         /// </summary>
@@ -179,7 +179,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(SegmentedControl), FontAttributes.None);
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.FontAttributes", typeof(FontAttributes), typeof(SegmentedControl), FontAttributes.None);
 
         /// <summary>
         /// Gets or sets the font attributes.
@@ -196,7 +196,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(SegmentedControl), -1.0);
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.FontSize", typeof(double), typeof(SegmentedControl), -1.0);
 
         /// <summary>
         /// Gets or sets the size of the font.
@@ -213,7 +213,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.FontFamiily bindable property.
         /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(SegmentedControl), null);
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.FontFamily", typeof(string), typeof(SegmentedControl), null);
 
         /// <summary>
         /// Gets or sets the font family.
@@ -230,7 +230,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.BackgroundColor bindable property.
         /// </summary>
-        public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(SegmentedControl), Color.Transparent);
+        public static new readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.BackgroundColor", typeof(Color), typeof(SegmentedControl), Color.Transparent);
         /// <summary>
         /// Gets or sets the color of the background.
         /// </summary>
@@ -246,7 +246,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Selected.BackgroundColor property.
         /// </summary>
-        public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("SelectedBackgroundColor", typeof(Color), typeof(SegmentedControl), Color.Transparent);
+        public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SelectedBackgroundColor", typeof(Color), typeof(SegmentedControl), Color.Transparent);
         /// <summary>
         /// Gets or sets the background color used when selected.
         /// </summary>
@@ -262,7 +262,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.DarkTheme property.
         /// </summary>
-        public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("DarkTheme", typeof(bool), typeof(SegmentedControl), false);
+        public static readonly BindableProperty DarkThemeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.DarkTheme", typeof(bool), typeof(SegmentedControl), false);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Button"/> if for a dark theme.
         /// </summary>
@@ -326,7 +326,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the MaterialSegmentControl's ToggleBehavior property.
         /// </summary>
-        public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(SegmentedControl), GroupToggleBehavior.Radio);
+        public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(SegmentedControl), GroupToggleBehavior.Radio);
         /// <summary>
         /// Gets or sets the MaterialSegmentControl's Toggle behavior.
         /// </summary>
@@ -342,7 +342,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the MaterialSegmentControl's SeparatorWidth property.
         /// </summary>
-        public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(SegmentedControl), -1f);
+        public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SeparatorWidth", typeof(float), typeof(SegmentedControl), -1f);
         /// <summary>
         /// Gets or sets the width of the separator.  Uses OutlineWidth by default (-1).
         /// </summary>
@@ -374,7 +374,7 @@ namespace Forms9Patch
         /// <summary>
         /// The haptic effect property.
         /// </summary>
-        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(SegmentedControl), default(HapticEffect));
+        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HapticEffect", typeof(HapticEffect), typeof(SegmentedControl), default(HapticEffect));
         /// <summary>
         /// Gets or sets the haptic effect.
         /// </summary>
@@ -390,7 +390,7 @@ namespace Forms9Patch
         /// <summary>
         /// The haptic mode property.
         /// </summary>
-        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(SegmentedControl), default(KeyClicks));
+        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HapticMode", typeof(KeyClicks), typeof(SegmentedControl), default(KeyClicks));
         /// <summary>
         /// Gets or sets the haptic mode.
         /// </summary>
@@ -406,7 +406,7 @@ namespace Forms9Patch
         /// <summary>
         /// The tint image property backing store.
         /// </summary>
-        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(SegmentedControl), true);
+        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.TintIcon", typeof(bool), typeof(SegmentedControl), true);
         /// <summary>
         /// Will the TextColor be applied to the IconImage image?
         /// </summary>
@@ -422,7 +422,7 @@ namespace Forms9Patch
         /// <summary>
         /// The has tight spacing property.
         /// </summary>
-        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(SegmentedControl), default(bool));
+        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HasTightSpacing", typeof(bool), typeof(SegmentedControl), default(bool));
         /// <summary>
         /// Gets or sets if the Icon/Image is close (TightSpacing) to text or at edge (not TightSpacing) of button.
         /// </summary>
@@ -438,7 +438,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the segments orientation property.
         /// </summary>
-        public static readonly BindableProperty IntraSegmentOrientationProperty = BindableProperty.Create("IntraSegmentOrientation", typeof(StackOrientation), typeof(SegmentedControl), StackOrientation.Horizontal);
+        public static readonly BindableProperty IntraSegmentOrientationProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.IntraSegmentOrientation", typeof(StackOrientation), typeof(SegmentedControl), StackOrientation.Horizontal);
         /// <summary>
         /// Gets or sets the orientation of elements within the segments.
         /// </summary>
@@ -454,7 +454,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the intra segment spacing property.
         /// </summary>
-        public static readonly BindableProperty IntraSegmentSpacingProperty = BindableProperty.Create("IntraSegmentSpacing", typeof(double), typeof(SegmentedControl), default(double));
+        public static readonly BindableProperty IntraSegmentSpacingProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.IntraSegmentSpacing", typeof(double), typeof(SegmentedControl), default(double));
         /// <summary>
         /// Gets or sets the intra segment spacing.
         /// </summary>
@@ -470,7 +470,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Orienation property
         /// </summary>
-        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(Xamarin.Forms.StackOrientation), typeof(SegmentedControl), StackOrientation.Horizontal);
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.Orientation", typeof(Xamarin.Forms.StackOrientation), typeof(SegmentedControl), StackOrientation.Horizontal);
         /// <summary>
         /// controls the orientation of the segments relative to eachother
         /// </summary>
@@ -487,7 +487,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the TextColor bindable property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SegmentedControl), Color.Default);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.TextColor", typeof(Color), typeof(SegmentedControl), Color.Default);
         /// <summary>
         /// Gets or sets the color of the font.
         /// </summary>
@@ -503,7 +503,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the horizontal text alignment property.
         /// </summary>
-        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(SegmentedControl), TextAlignment.Center);
+        public static readonly BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HorizontalTextAlignment", typeof(TextAlignment), typeof(SegmentedControl), TextAlignment.Center);
         /// <summary>
         /// Gets or sets the horizontal text alignment.
         /// </summary>
@@ -519,7 +519,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the vertical text alignment property.
         /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(SegmentedControl), TextAlignment.Center);
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.VerticalTextAlignment", typeof(TextAlignment), typeof(SegmentedControl), TextAlignment.Center);
         /// <summary>
         /// Gets or sets the vertical text alignment.
         /// </summary>
@@ -535,7 +535,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for LineBreakMode property
         /// </summary>
-        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(SegmentedControl), LineBreakMode.WordWrap);
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.LineBreakMode", typeof(LineBreakMode), typeof(SegmentedControl), LineBreakMode.WordWrap);
         /// <summary>
         /// Gets/Sets the LineBreakMode property
         /// </summary>
@@ -550,7 +550,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for AutoFit property
         /// </summary>
-        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(SegmentedControl), AutoFit.Width);
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.AutoFit", typeof(AutoFit), typeof(SegmentedControl), AutoFit.Width);
         /// <summary>
         /// Gets/Sets the AutoFit property
         /// </summary>
@@ -565,7 +565,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Lines property
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(SegmentedControl), 1);
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.Lines", typeof(int), typeof(SegmentedControl), 1);
         /// <summary>
         /// Gets/Sets the Lines property
         /// </summary>
@@ -580,7 +580,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for MinFontSize property
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(SegmentedControl), -1.0);
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.MinFontSize", typeof(double), typeof(SegmentedControl), -1.0);
         /// <summary>
         /// Gets/Sets the MinFontSize property
         /// </summary>
@@ -1102,7 +1102,7 @@ namespace Forms9Patch
 
             var shadowPadding = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0 && Children.Count > 0)
-                shadowPadding = ShapeBase.ShadowPadding(this, HasShadow);
+                shadowPadding = ShapeBase.ShadowPadding(this);
 
             double requestHeight = shadowPadding.VerticalThickness;
             double requestWidth = shadowPadding.HorizontalThickness;
@@ -1153,13 +1153,14 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            System.Diagnostics.Debug.WriteLine("SegmentedControl.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
             //if ((bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty))
             //    return;
 
 
             var shadowPadding = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0)
-                shadowPadding = ShapeBase.ShadowPadding(this, HasShadow);
+                shadowPadding = ShapeBase.ShadowPadding(this);
 
             var hz = Orientation == StackOrientation.Horizontal;
             var vt = !hz;
@@ -1187,7 +1188,7 @@ namespace Forms9Patch
                 x = Math.Round(x);
                 y = Math.Round(y);
 
-                var outlineWidth = OutlineWidth / Display.Scale;
+                var outlineWidth = OutlineWidth;// / Display.Scale;
                 double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
                 double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
                 double segmentWidth = hz ? xOffset : width;
@@ -1217,29 +1218,33 @@ namespace Forms9Patch
                             thisH = segmentHeight;
                         }
 
+
                         // Math.Round with Display.Scale fixes UWP layout gaps but not UWP SkiaRoundedBoxView gaps
 
                         //thisW = Math.Round(thisW);
                         //thisH = Math.Round(thisH);
-                        thisW = Math.Round(thisW * Display.Scale) / Display.Scale;
-                        thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
+                        //thisW = Math.Round(thisW * Display.Scale) / Display.Scale;
+                        //thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
                         if (x + thisW > width)
-                            //thisW = width - x;
-                            //thisW = Math.Floor(width - x);
-                            thisW = Math.Floor((width - x) * Display.Scale) / Display.Scale;
+                            thisW = width - x;
+                        //thisW = Math.Floor(width - x);
+                        //thisW = Math.Floor((width - x) * Display.Scale) / Display.Scale;
                         if (y + thisH > height)
-                            //thisH = height - y;
-                            //thisH = Math.Floor(height - y);
-                            thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
-                        LayoutChildIntoBoundingRegion(view, new Rectangle(x, y, thisW, thisH));
+                            thisH = height - y;
+                        //thisH = Math.Floor(height - y);
+                        //thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
+                        var segmentRect = new Rectangle(x, y, thisW, thisH);
+                        System.Diagnostics.Debug.WriteLine("\t\t segmentRect: " + segmentRect);
+                        LayoutChildIntoBoundingRegion(view, segmentRect);
                         //if (vt)
                         //    System.Diagnostics.Debug.WriteLine("["+GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
-                        x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
-                        y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
+                        //x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
+                        //y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
                         //x = Math.Round(x + (hz ? thisW : 0));
                         //y = Math.Round(y + (vt ? thisH : 0));
-                        //x = (x + (hz ? thisW : 0));
-                        //y = (y + (vt ? thisH : 0));
+                        x = (x + (hz ? thisW : 0));
+                        y = (y + (vt ? thisH : 0));
+
                     }
                 }
                 //var lastView = Children.Last();

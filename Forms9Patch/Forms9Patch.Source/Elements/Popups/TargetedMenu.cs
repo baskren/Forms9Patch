@@ -184,6 +184,7 @@ namespace Forms9Patch
             Spacing = 0,
             Padding = 0,
             Margin = 0,
+            BackgroundColor = Color.Transparent,
             //BackgroundColor = Color.White,
             //OutlineColor = DefaultBackgroundColor,
             //OutlineWidth = 1,
@@ -242,8 +243,8 @@ namespace Forms9Patch
             BackgroundColor = DefaultBackgroundColor;
             HasShadow = false;
             Padding = 0;
-            Margin = 10;
-            OutlineRadius = 4;
+            //Margin = 10;
+            OutlineRadius = 5;
             PageOverlayColor = Color.Black.WithAlpha(0.1);
             _segments.CollectionChanged += OnSegmentsCollectionChanged;
             SizeChanged += OnSizeChanged;
@@ -283,7 +284,8 @@ namespace Forms9Patch
                     if (visualElement is Button button)
                     {
                         button.BackgroundColor = BackgroundColor;
-                        _stackLayout.OutlineColor = BackgroundColor;
+                        //_stackLayout.OutlineColor = BackgroundColor;
+                        //_stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
                     }
                 }
             }
@@ -299,14 +301,15 @@ namespace Forms9Patch
                     if (visualElement is Button button)
                         button.FontSize = FontSize;
             }
-            else if (propertyName == SeparatorColorProperty.PropertyName)
-                _stackLayout.BackgroundColor = SeparatorColor;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                _stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
-            else if (propertyName == OutlineRadiusProperty.PropertyName)
-                _stackLayout.OutlineRadius = OutlineRadius + 1;
-            else if (propertyName == SeparatorWidthProperty.PropertyName)
-                _stackLayout.Spacing = SeparatorWidth;
+            //else if (propertyName == SeparatorColorProperty.PropertyName)
+            //     _stackLayout.BackgroundColor = SeparatorColor;
+            //else if (propertyName == OutlineColorProperty.PropertyName)
+            //    _stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
+
+            //else if (propertyName == OutlineRadiusProperty.PropertyName)
+            //    _stackLayout.OutlineRadius = OutlineRadius + 1;
+            //else if (propertyName == SeparatorWidthProperty.PropertyName)
+            //    _stackLayout.Spacing = SeparatorWidth;
             else if (propertyName == HapticEffectProperty.PropertyName)
             {
                 foreach (VisualElement visualElement in _stackLayout.Children)
@@ -339,7 +342,8 @@ namespace Forms9Patch
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
             segment._button.VerticalOptions = LayoutOptions.Fill;
             segment._button.HorizontalOptions = LayoutOptions.Center;
-            segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.05);
+            segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
+            //segment.
             segment._button.Lines = 1;
             segment._button.AutoFit = AutoFit.None;
 

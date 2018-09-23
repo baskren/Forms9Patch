@@ -74,7 +74,7 @@ namespace Forms9Patch
         }
         #endregion IgnoreChildren handlers
 
-
+        /*
         #region Layout
         //Thickness IExtendedShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
@@ -94,6 +94,7 @@ namespace Forms9Patch
             }
             return result;
         }
+
 
         /// <summary>
         /// processes child layout
@@ -115,6 +116,6 @@ namespace Forms9Patch
             base.LayoutChildren(x, y, width, height);
         }
         #endregion
-
+*/
     }
 }

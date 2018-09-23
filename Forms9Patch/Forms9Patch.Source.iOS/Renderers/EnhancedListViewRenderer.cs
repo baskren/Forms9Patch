@@ -146,7 +146,7 @@ namespace Forms9Patch.iOS
             if (Element?.ItemsSource != null)
                 Element?.OnScrolling(this, EventArgs.Empty);
             _scrolling = true;
-            Source.DraggingStarted(scrollView);
+            Source?.DraggingStarted(scrollView);
         }
 
         //Xamarin.Forms.ListViewDataSource
@@ -159,7 +159,7 @@ namespace Forms9Patch.iOS
             //    if (Element?.ItemsSource != null)
             //        Element?.OnScrolled(this, EventArgs.Empty);
             //}
-            Source.DraggingEnded(scrollView, willDecelerate);
+            Source?.DraggingEnded(scrollView, willDecelerate);
         }
 
         public override void DecelerationEnded(UIScrollView scrollView)
@@ -180,7 +180,7 @@ namespace Forms9Patch.iOS
             //System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
             if (_scrolling && Element?.ItemsSource != null)
                 Element?.OnScrolling(this, EventArgs.Empty);
-            Source.Scrolled(scrollView);
+            Source?.Scrolled(scrollView);
         }
         #endregion
 

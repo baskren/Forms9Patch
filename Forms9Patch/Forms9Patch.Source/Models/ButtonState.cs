@@ -801,7 +801,7 @@ namespace Forms9Patch
 
 
         #region Layout (IShape.ShadowPadding)
-        Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(null, HasShadow);
+        //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(null, HasShadow);
         #endregion
     }
 }

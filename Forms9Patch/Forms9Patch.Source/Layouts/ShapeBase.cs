@@ -135,6 +135,7 @@ namespace Forms9Patch
                     if (orientation == StackOrientation.Vertical && (extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentStart || extendedShape.ExtendedElementShape == ExtendedElementShape.SegmentMid))
                         padB = 0;
                 }
+
                 if (scaleForDisplay)
                 {
                     padL *= Display.Scale;
@@ -142,6 +143,7 @@ namespace Forms9Patch
                     padT *= Display.Scale;
                     padB *= Display.Scale;
                 }
+
                 return new Thickness(padL, padT, padR, padB);
             }
             else

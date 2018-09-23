@@ -184,6 +184,8 @@ namespace Forms9Patch
         protected BindableObject()
         {
             base.Content = _xfLayout;
+            Padding = 0;
+            Margin = 0;
         }
 
         /* this may already be coverd by Element.OnBindingContextChanged

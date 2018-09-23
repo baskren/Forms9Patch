@@ -17,8 +17,8 @@ namespace Forms9Patch
         /// <value>The content.</value>
         public View Content
         {
-            get => _frame.Content; 
-            set => _frame.Content = value; 
+            get => _frame.Content;
+            set => _frame.Content = value;
         }
         #endregion
 
@@ -36,8 +36,8 @@ namespace Forms9Patch
         /// <value>The location (default centers it in Host Page).</value>
         public Point Location
         {
-            get => (Point)GetValue(LocationProperty); 
-            set => SetValue(LocationProperty, value); 
+            get => (Point)GetValue(LocationProperty);
+            set => SetValue(LocationProperty, value);
         }
 
         /*
@@ -67,7 +67,7 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         public ModalPopup(bool retain = false) : base(retain: retain)
         {
-            _frame = new Frame
+            _frame = new Forms9Patch.Frame
             {
                 Padding = Padding,
                 HasShadow = HasShadow,
@@ -77,9 +77,6 @@ namespace Forms9Patch
                 BackgroundColor = BackgroundColor
             };
             DecorativeContainerView = _frame;
-
-            Margin = 0;
-            Padding = 10;
 
         }
 
@@ -174,8 +171,8 @@ namespace Forms9Patch
                 //ShapeBase.UpdateBasePadding(_frame, true);
                 //var shadow = ShadowPadding();
 
-                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness ); // + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness ); // + shadow.VerticalThickness);
+                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
                 if (_frame.Content.WidthRequest > 0)
                     availWidth = _frame.Content.WidthRequest;
                 if (_frame.Content.HeightRequest > 0)

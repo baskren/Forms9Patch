@@ -45,14 +45,14 @@ namespace F9PRebuild
                     _button.BackgroundImage = "F9PRebuild.Resources.button";
             };
 
-            _button.BaseInternalChildren.CollectionChanged += (sender, e) => UpdateLabel();
+            //_button.BaseInternalChildren.CollectionChanged += (sender, e) => UpdateLabel();
 
             UpdateLabel();
         }
 
         void UpdateLabel()
         {
-            _baseInternalCountLabel.Text = "COUNT: " + _button.BaseInternalChildren.Count;
+            //_baseInternalCountLabel.Text = "COUNT: " + _button.BaseInternalChildren.Count;
         }
     }
 }
