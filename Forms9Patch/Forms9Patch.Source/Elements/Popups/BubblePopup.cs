@@ -319,10 +319,14 @@ namespace Forms9Patch
 
             if (_bubbleLayout?.Content == null)
                 return;
-            var bounds = new Rectangle(x, y, width, height);
 
             // layout the page overlay
             base.LayoutChildren(x, y, width, height);
+
+            height -= KeyboardService.Height;
+            var bounds = new Rectangle(x, y, width, height);
+
+
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
             {

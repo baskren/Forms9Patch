@@ -163,6 +163,8 @@ namespace Forms9Patch
             // layout the page overlay
             base.LayoutChildren(x, y, width, height);
 
+            height -= KeyboardService.Height;
+
             // layout the content
             if (width > 0 && height > 0)
             {

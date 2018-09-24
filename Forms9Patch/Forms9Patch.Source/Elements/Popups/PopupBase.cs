@@ -557,7 +557,7 @@ namespace Forms9Patch
         {
             if (RootPage != null && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
             {
-                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height - KeyboardService.Height);
+                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);// - KeyboardService.Height);
             }
         }
 
