@@ -112,7 +112,7 @@ namespace Forms9Patch
 
         internal static Thickness ShadowPadding(IShape shape, bool scaleForDisplay = false)
         {
-            if (shape.HasShadow)
+            if (shape.HasShadow || (shape is StateButton && shape is ContentView contentView && contentView.HasShadow))
             {
                 var shadowX = Settings.ShadowOffset.X;
                 var shadowY = Settings.ShadowOffset.Y;
