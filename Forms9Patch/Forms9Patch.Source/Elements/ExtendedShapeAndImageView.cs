@@ -652,8 +652,10 @@ namespace Forms9Patch
                 propertyName == ExtendedElementShapeOrientationProperty.PropertyName ||
                 propertyName == ExtendedElementSeparatorWidthProperty.PropertyName
                )
-
+            {
+                InvalidateMeasure();
                 InvalidateSurface();
+            }
         }
         #endregion
 
@@ -676,7 +678,15 @@ namespace Forms9Patch
                 if (!VerticalOptions.Expands)
                     reqH = _f9pImageData.Height / Display.Scale;
             }
-            result = new SizeRequest(new Size(reqW, reqH), new Size(10, 10));
+            var shadowPaddingHz = 0.0;
+            var shadowPaddingVt = 0.0;
+            if (HasShadow)
+            {
+                var shadow = ShapeBase.ShadowPadding(this);
+                shadowPaddingHz = shadow.HorizontalThickness;
+                shadowPaddingVt = shadow.VerticalThickness;
+            }
+            result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
             return result;
         }
 
@@ -739,11 +749,11 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
 
                 var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
-                var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X);// * FormsGestures.Display.Scale);
-                var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y);// * FormsGestures.Display.Scale);
-                var shadowR = (float)(Forms9Patch.Settings.ShadowRadius);// * FormsGestures.Display.Scale);
+                var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
+                var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
+                var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);
                 var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
-                var shadowPadding = ShapeBase.ShadowPadding(this, hasShadow, false);
+                var shadowPadding = ShapeBase.ShadowPadding(this, true);
 
 
                 var perimeter = rect;
@@ -819,7 +829,13 @@ namespace Forms9Patch
                 }
 
                 if (drawImage)
-                    GenerateImageLayout(canvas, perimeter, PerimeterPath(perimeter, outlineRadius));
+                {
+                    var imagePerimeter = perimeter;
+                    if (drawFill)
+                        imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
+                    var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0));
+                    GenerateImageLayout(canvas, perimeter, path);
+                }
 
                 if (drawOutline)// && !drawImage)
                 {
@@ -1000,7 +1016,8 @@ namespace Forms9Patch
                         top = (float)(fillRect.Height - scaledHeight) / 2.0f;
                         break;
                 }
-                workingCanvas.Translate(left, top);
+                var shadowPadding = ShapeBase.ShadowPadding(this, true);
+                workingCanvas.Translate(left + (float)shadowPadding.Left, top + (float)shadowPadding.Top);
                 workingCanvas.Scale((float)scaleX, (float)scaleY);
                 workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
                 workingCanvas.Restore();
@@ -1060,6 +1077,8 @@ namespace Forms9Patch
 
                 var fillRectAspect = fillRect.Width / fillRect.Height;
                 var bitmapAspect = SourceImageAspect;
+
+                var shadowPadding = ShapeBase.ShadowPadding(this, true);
 
                 if (Fill == Fill.Tile)
                 {
@@ -1131,19 +1150,15 @@ namespace Forms9Patch
                 }
                 else
                 {
-#if __IOS__
-                    //System.Diagnostics.Debug.WriteLine("fillRect=[" + fillRect + "] size=[" + this.Frame.Width + ", " + this.Frame.Height + " ]");
-#elif __DROID__
-                    //System.Diagnostics.Debug.WriteLine("fillRect=[" + fillRect + "] size=[" + this.Width + ", " + this.Height + " ]");
-#else
-#endif
                     float xStretchable = 0;
                     foreach (var xpatch in rangeLists.PatchesX)
                         if (xpatch.Stretchable)
                             xStretchable += xpatch.Width;
                     var xExtra = fillRect.Width - ((float)SourceImageWidth - xStretchable);
                     float xScale = xExtra >= 0
-                        ? xStretchable > 0 ? xExtra / xStretchable : fillRect.Width / (float)SourceImageWidth
+                        ? xStretchable > 0
+                            ? xExtra / xStretchable
+                            : fillRect.Width / (float)SourceImageWidth
                         : fillRect.Width / ((float)SourceImageWidth - xStretchable);
                     float yStretchable = 0;
                     foreach (var ypatch in rangeLists.PatchesY)
@@ -1151,15 +1166,19 @@ namespace Forms9Patch
                             yStretchable += ypatch.Width;
                     var yExtra = fillRect.Height - ((float)SourceImageHeight - yStretchable);
                     float yScale = yExtra >= 0
-                        ? yStretchable > 0 ? yExtra / yStretchable : fillRect.Height / (float)SourceImageHeight
+                        ? yStretchable > 0
+                            ? yExtra / yStretchable
+                            : fillRect.Height / (float)SourceImageHeight
                         : fillRect.Height / ((float)SourceImageHeight - yStretchable);
-                    float patchX = 0, xPatchWidth;
+                    float patchX = (float)shadowPadding.Left, xPatchWidth;
                     foreach (var xpatch in rangeLists.PatchesX)
                     {
                         xPatchWidth = xExtra >= 0
-                            ? xStretchable > 0 ? xpatch.Width * (xpatch.Stretchable ? xScale : 1) : xpatch.Width * xScale
+                            ? xStretchable > 0
+                                ? xpatch.Width * (xpatch.Stretchable ? xScale : 1)
+                                : xpatch.Width * xScale
                             : xpatch.Width * (xpatch.Stretchable ? 0 : xScale);
-                        float patchY = 0, yPatchWidth;
+                        float patchY = (float)shadowPadding.Top, yPatchWidth;
                         foreach (var ypatch in rangeLists.PatchesY)
                         {
                             yPatchWidth = yExtra >= 0
@@ -1168,7 +1187,7 @@ namespace Forms9Patch
                             if (xPatchWidth > 0 && yPatchWidth > 0)
                             {
                                 var sourceRect = new SKRect((float)System.Math.Max(0, xpatch.Start), (float)System.Math.Max(0, ypatch.Start), (float)System.Math.Min(xpatch.Start + xpatch.Width, SourceImageWidth), (float)System.Math.Min(ypatch.Start + ypatch.Width, SourceImageHeight));
-                                var destRect = new SKRect((float)System.Math.Max(0, patchX), (float)System.Math.Max(0, patchY), Math.Min(patchX + xPatchWidth, fillRect.Width), Math.Min(patchY + yPatchWidth, fillRect.Height));
+                                var destRect = new SKRect((float)System.Math.Max(0, patchX), (float)System.Math.Max(0, patchY), Math.Min(patchX + xPatchWidth, fillRect.Width + (float)shadowPadding.Left), Math.Min(patchY + yPatchWidth, fillRect.Height + (float)shadowPadding.Top));
                                 workingCanvas.DrawBitmap(_f9pImageData.SKBitmap, sourceRect, destRect, paint);
                             }
                             patchY += yPatchWidth;
