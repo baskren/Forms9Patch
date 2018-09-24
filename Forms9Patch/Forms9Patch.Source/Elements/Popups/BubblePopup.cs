@@ -341,7 +341,7 @@ namespace Forms9Patch
                     availHeight = _bubbleLayout.Content.HeightRequest;
                 var request = _bubbleLayout.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
-                var shadowPadding = ShapeBase.ShadowPadding(_bubbleLayout, HasShadow);// _bubbleLayout.DecorativePadding();
+                var shadowPadding = ShapeBase.ShadowPadding(_bubbleLayout);//, HasShadow);// _bubbleLayout.DecorativePadding();
 
                 var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
                 rBoxWidth += _bubbleLayout.Padding.HorizontalThickness;
@@ -478,23 +478,13 @@ namespace Forms9Patch
                         }
                     }
                 }
-                else
-                {
-                    //if (_lastBounds == bounds &&  _lastTargetBounds == Rectangle.Zero)
-                    //	return;
-                    //_lastBounds = bounds;
-                    //_lastTargetBounds = Rectangle.Zero;
 
-                }
                 _bubbleLayout.PointerDirection = pointerDir;
-                //_bubbleLayout.IsVisible = true;
                 if (pointerDir == PointerDirection.None)
                 {
                     var contentX = width / 2.0 - rboxSize.Width / 2.0;
                     var contentY = height / 2.0 - rboxSize.Height / 2.0;
-
                     bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
-                    //var rect = new Rectangle(Margin.Left + width / 2.0 - rboxSize.Width / 2.0, Margin.Top + height / 2.0 - rboxSize.Height / 2.0, rboxSize.Width, rboxSize.Height);
                     LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
                 }
                 else

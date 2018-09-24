@@ -428,7 +428,6 @@ namespace Forms9Patch
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
             BackgroundColor = Color.White;
-            HasShadow = true;
 
             Padding = 10;
             HasShadow = true;

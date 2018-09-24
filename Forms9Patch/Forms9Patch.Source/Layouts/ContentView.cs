@@ -291,21 +291,6 @@ namespace Forms9Patch
             return contentSizeRequest;
         }
 
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            //System.Diagnostics.Debug.WriteLine("OnSizeAllocated(" + width + ", " + height + ")");
-            base.OnSizeAllocated(width, height);
-            //System.Diagnostics.Debug.WriteLine("OnSizeAllocated");
-        }
-
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            //System.Diagnostics.Debug.WriteLine("ContentView.OnMeasure(" + widthConstraint + ", " + heightConstraint + ")");
-            var result = base.OnMeasure(widthConstraint, heightConstraint);
-            //System.Diagnostics.Debug.WriteLine("ContentView.OnMeasure: result = " + result);
-            return result;
-        }
-
 
         /// <summary>
         /// processes child layout
@@ -316,7 +301,7 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
+            System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
 
             LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
 
@@ -324,8 +309,10 @@ namespace Forms9Patch
             if (HasShadow)
             {
                 var shadowPadding = ShapeBase.ShadowPadding(this);
-                //System.Diagnostics.Debug.WriteLine("\t\t shadowPadding: " + shadowPadding);
-                rect = new Rectangle(x + shadowPadding.Left, y + shadowPadding.Top, width - shadowPadding.HorizontalThickness, height - shadowPadding.VerticalThickness);
+                rect.X += shadowPadding.Left;
+                rect.Y += shadowPadding.Top;
+                rect.Width -= shadowPadding.HorizontalThickness;
+                rect.Height -= shadowPadding.VerticalThickness;
             }
 
             System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
@@ -387,6 +374,15 @@ namespace Forms9Patch
                 CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
             else if (propertyName == ElementShapeProperty.PropertyName)
                 CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
+
+            if (propertyName == BackgroundColorProperty.PropertyName ||
+                propertyName == HasShadowProperty.PropertyName ||
+                propertyName == ShadowInvertedProperty.PropertyName ||
+                propertyName == OutlineColorProperty.PropertyName ||
+                propertyName == OutlineWidthProperty.PropertyName ||
+                propertyName == ElementShapeProperty.PropertyName)
+                InvalidateMeasure();
+
         }
         #endregion
     }

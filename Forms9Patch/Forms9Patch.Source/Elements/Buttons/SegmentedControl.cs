@@ -1153,7 +1153,7 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine("SegmentedControl.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
+            //System.Diagnostics.Debug.WriteLine("SegmentedControl.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
             //if ((bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty))
             //    return;
 
@@ -1234,7 +1234,7 @@ namespace Forms9Patch
                         //thisH = Math.Floor(height - y);
                         //thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
                         var segmentRect = new Rectangle(x, y, thisW, thisH);
-                        System.Diagnostics.Debug.WriteLine("\t\t segmentRect: " + segmentRect);
+                        //System.Diagnostics.Debug.WriteLine("\t\t segmentRect: " + segmentRect);
                         LayoutChildIntoBoundingRegion(view, segmentRect);
                         //if (vt)
                         //    System.Diagnostics.Debug.WriteLine("["+GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");

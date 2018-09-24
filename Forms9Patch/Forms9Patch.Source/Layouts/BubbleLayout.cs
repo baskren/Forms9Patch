@@ -202,7 +202,8 @@ namespace Forms9Patch
         #region Layout management
         internal Thickness DecorativePadding()
         {
-            var result = ShapeBase.ShadowPadding(this, HasShadow);
+            //var result = ShapeBase.ShadowPadding(this);
+            var result = new Thickness();
 
             var padL = result.Left + (PointerDirection == PointerDirection.Left ? PointerLength : 0);
             var padT = result.Top + (PointerDirection == PointerDirection.Up ? PointerLength : 0);
@@ -212,10 +213,13 @@ namespace Forms9Patch
             return result = new Thickness(padL, padT, padR, padB);
         }
 
+
         //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
 
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+#pragma warning disable CS0672 // Member overrides obsolete member
+        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
+#pragma warning restore CS0672 // Member overrides obsolete member
         {
             var result = base.OnMeasure(widthConstraint, heightConstraint);
             var decorativePadding = DecorativePadding();
@@ -235,20 +239,12 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.LayoutChildren({0},{1},{2},{3})", x, y, width, height);
-            System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.Padding=[{0}, {1}, {2}, {3}]", Padding.Left, Padding.Top, Padding.Right, Padding.Bottom);
-            System.Diagnostics.Debug.WriteLine($"\t\tBubbleLayout.base.Padding=[{base.Padding.Left}, {base.Padding.Top}, {base.Padding.Right}, {base.Padding.Bottom}]");
-            //System.Diagnostics.Debug.WriteLine("\t\tBubbleLayout.Content.Padding=[{0}, {1}, {2}, {3}]", ((StackLayout)Content).Padding.Left, ((StackLayout)Content).Padding.Top, ((StackLayout)Content).Padding.Right, ((StackLayout)Content).Padding.Bottom);
-
-            LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(x - Padding.Left, y - Padding.Top, width + Padding.HorizontalThickness, height + Padding.VerticalThickness));
-
             var decorativePadding = DecorativePadding();
             x += decorativePadding.Left;
             y += decorativePadding.Top;
             width -= decorativePadding.HorizontalThickness;
             height -= decorativePadding.VerticalThickness;
-            LayoutChildIntoBoundingRegion(base.Content, new Rectangle(x, y, width, height));
-
+            base.LayoutChildren(x, y, width, height);
         }
         #endregion Layout management
 

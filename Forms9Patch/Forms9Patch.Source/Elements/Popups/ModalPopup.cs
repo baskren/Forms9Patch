@@ -181,7 +181,7 @@ namespace Forms9Patch
                     availHeight = _frame.Content.HeightRequest;
                 var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
-                var shadowPadding = ShapeBase.ShadowPadding(_frame, HasShadow);
+                var shadowPadding = ShapeBase.ShadowPadding(_frame);
 
                 var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth);// + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
                 rBoxWidth += _frame.Padding.HorizontalThickness;
