@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
+
 
 namespace Forms9Patch
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty("Children")]
     public abstract class Layout<T> : BaseLayout<T>, Xamarin.Forms.IViewContainer<View> where T : Xamarin.Forms.Layout<View>, new()
     {
-
         protected Layout()
         {
             _xfLayout.ChildAdded += (sender, e) => OnChildAdded(e.Element);
@@ -44,22 +46,11 @@ namespace Forms9Patch
 
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class BaseLayout<T> : View<T>, ILayout where T : Xamarin.Forms.Layout<View>, new()
     {
         // Frame already correctly handles IsClippedToBounds, Padding, ForceLayout, GetSizeRequest,
         public new IList<View> Children => _xfLayout.Children;
-
-        /*
-        ObservableCollection<Element> _internalChildren;
-        internal ObservableCollection<Element> InternalChildren
-        {
-            get
-            {
-                _internalChildren = _internalChildren ?? (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(_xfLayout, "InternalChildren");
-                return _internalChildren;
-            }
-        }
-        */
 
         public new event EventHandler LayoutChanged
         {
@@ -72,6 +63,7 @@ namespace Forms9Patch
         public new void RaiseChild(View view) => _xfLayout.RaiseChild(view);
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class View<T> : VisualElement<T> where T : Xamarin.Forms.Layout<View>, new()
     {
         // Handled by frame:
@@ -80,6 +72,7 @@ namespace Forms9Patch
         // - GestureRecognizers
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class VisualElement<T> : Element<T> where T : Xamarin.Forms.Layout<View>, new()
     {
         // Handled by frame:
@@ -124,16 +117,12 @@ namespace Forms9Patch
             add { _xfLayout.Unfocused += value; }
             remove { _xfLayout.Unfocused -= value; }
         }
-
-
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class Element<T> : BindableObject<T> where T : Xamarin.Forms.Layout<View>, new()
     {
-        //[EditorBrowsable(EditorBrowsableState.Never)]
-        //public new ReadOnlyCollection<Element> LogicalChildren => _xfLayout.LogicalChildren;
-
-        //[EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("USE CHILDREN INSTEAD", true)]
         public new View Content
         {
@@ -175,10 +164,9 @@ namespace Forms9Patch
         public new IEnumerable<Element> Descendants() => _xfLayout.Descendants();
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class BindableObject<T> : Frame where T : Xamarin.Forms.Layout<View>, new()
     {
-
-        // Bindings and PropertyChange handling will be managed by OnPropertyChanged;
         protected Xamarin.Forms.Layout<View> _xfLayout { get; private set; } = new T();
 
         protected BindableObject()
@@ -188,10 +176,11 @@ namespace Forms9Patch
             Margin = 0;
         }
 
-        /* this may already be coverd by Element.OnBindingContextChanged
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);
+            if (propertyName == BindingContextProperty.PropertyName)
+                _xfLayout.BindingContext = null;
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
@@ -200,6 +189,5 @@ namespace Forms9Patch
             if (propertyName == BindingContextProperty.PropertyName)
                 _xfLayout.BindingContext = BindingContext;
         }
-        */
     }
 }

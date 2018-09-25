@@ -35,7 +35,7 @@ namespace Forms9Patch
 
         #region IgnoreChildren
         /// <summary>
-        /// The ignore children property.
+        /// Backing store for the ignore children property.
         /// </summary>
         public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(ContentView), default(bool));
         /// <summary>
@@ -52,6 +52,9 @@ namespace Forms9Patch
         #region IBackground
 
         #region BackgroundImage property
+        /// <summary>
+        /// Backing store for the background image property.
+        /// </summary>
         public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("Forms9Patch.ContentView.BackgroundImage", typeof(Image), typeof(ContentView), null,
                                                                                               propertyChanging: (bindable, oldValue, newValue) =>
                                                                                               {
@@ -62,7 +65,10 @@ namespace Forms9Patch
                                                                                                   if (bindable is ContentView contentView)
                                                                                                       contentView.BaseInternalChildren.Insert(0, contentView.CurrentBackgroundImage);
                                                                                               });
-
+        /// <summary>
+        /// Gets or sets the background image.
+        /// </summary>
+        /// <value>The background image.</value>
         public Image BackgroundImage
         {
             get => (Image)GetValue(BackgroundImageProperty);
@@ -71,7 +77,15 @@ namespace Forms9Patch
         #endregion BackgroundImage property
 
         #region LimitMinSizeToBackgroundImageSize property
+        /// <summary>
+        /// Backing store for the limit minimum size to background image size property.
+        /// </summary>
         public static readonly BindableProperty LimitMinSizeToBackgroundImageSizeProperty = BindableProperty.Create("Forms9Patch.ContentView.LimitMinSizeToBackgroundImageSize", typeof(bool), typeof(ContentView), default(bool));
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> will limit its minimum size to
+        /// background image size.
+        /// </summary>
+        /// <value><c>true</c> if limit minimum size to background image size; otherwise, <c>false</c>.</value>
         public bool LimitMinSizeToBackgroundImageSize
         {
             get => (bool)GetValue(LimitMinSizeToBackgroundImageSizeProperty);
@@ -82,8 +96,14 @@ namespace Forms9Patch
         #region IShape
 
         #region BackgroundColor property
+        /// <summary>
+        /// Backing store for the background color property.
+        /// </summary>
         public static readonly new BindableProperty BackgroundColorProperty = ShapeBase.BackgroundColorProperty;
-
+        /// <summary>
+        /// Gets or sets the color of the background.
+        /// </summary>
+        /// <value>The color of the background.</value>
         public new Color BackgroundColor
         {
             get => (Color)GetValue(BackgroundColorProperty);
@@ -92,9 +112,14 @@ namespace Forms9Patch
         #endregion BackgroundColor property
 
         #region HasShadow property
+        /// <summary>
+        /// Backing store for the has shadow property.
+        /// </summary>
         public static readonly BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> has a shadow.
+        /// </summary>
+        /// <value><c>true</c> if has shadow; otherwise, <c>false</c>.</value>
         public bool HasShadow
         {
             get => (bool)GetValue(HasShadowProperty);
@@ -103,7 +128,14 @@ namespace Forms9Patch
         #endregion HasShadow property
 
         #region ShadowInverted property
+        /// <summary>
+        /// Backing store for the shadow inverted property.
+        /// </summary>
         public static readonly BindableProperty ShadowInvertedProperty = ShapeBase.ShadowInvertedProperty;
+        /// <summary>
+        /// Gets or sets a value indicating whether the shadow is inverted for this <see cref="T:Forms9Patch.ContentView"/>.
+        /// </summary>
+        /// <value><c>true</c> if shadow inverted; otherwise, <c>false</c>.</value>
         public bool ShadowInverted
         {
             get => (bool)GetValue(ShadowInvertedProperty);
@@ -112,7 +144,14 @@ namespace Forms9Patch
         #endregion ShadowInverted property
 
         #region OutlineColor property
+        /// <summary>
+        /// Backing store for the outline color property.
+        /// </summary>
         public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the outline.
+        /// </summary>
+        /// <value>The color of the outline.</value>
         public Color OutlineColor
         {
             get => (Color)GetValue(OutlineColorProperty);
@@ -121,7 +160,14 @@ namespace Forms9Patch
         #endregion OutlineColor property
 
         #region OutlineRadius property
+        /// <summary>
+        /// Backing store for the outline radius property.
+        /// </summary>
         public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
+        /// <summary>
+        /// Gets or sets the outline radius.
+        /// </summary>
+        /// <value>The outline radius.</value>
         public float OutlineRadius
         {
             get => (float)GetValue(OutlineRadiusProperty);
@@ -130,7 +176,14 @@ namespace Forms9Patch
         #endregion OutlineRadius property
 
         #region OutlineWidth property
+        /// <summary>
+        /// Backing store for the outline width property.
+        /// </summary>
         public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the outline.
+        /// </summary>
+        /// <value>The width of the outline.</value>
         public float OutlineWidth
         {
             get => (float)GetValue(OutlineWidthProperty);
@@ -139,7 +192,14 @@ namespace Forms9Patch
         #endregion OutlineWidth property
 
         #region ElementShape property
+        /// <summary>
+        /// Backing store for the element shape property.
+        /// </summary>
         public static readonly BindableProperty ElementShapeProperty = ShapeBase.ElementShapeProperty;
+        /// <summary>
+        /// Gets or sets the element shape.
+        /// </summary>
+        /// <value>The element shape.</value>
         public ElementShape ElementShape
         {
             get => (ElementShape)GetValue(ElementShapeProperty);
@@ -206,6 +266,42 @@ namespace Forms9Patch
 
         #region Methods
 
+        #region Property Change Handlers
+        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == BackgroundColorProperty.PropertyName)
+                CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
+            else if (propertyName == HasShadowProperty.PropertyName)
+                CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
+            else if (propertyName == ShadowInvertedProperty.PropertyName)
+                CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
+            else if (propertyName == OutlineColorProperty.PropertyName)
+                CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
+            if (propertyName == OutlineRadiusProperty.PropertyName)
+                CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
+            else if (propertyName == OutlineWidthProperty.PropertyName)
+                CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
+            else if (propertyName == ElementShapeProperty.PropertyName)
+                CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
+
+            if (propertyName == BackgroundColorProperty.PropertyName ||
+                propertyName == HasShadowProperty.PropertyName ||
+                propertyName == ShadowInvertedProperty.PropertyName ||
+                propertyName == OutlineColorProperty.PropertyName ||
+                propertyName == OutlineWidthProperty.PropertyName ||
+                propertyName == ElementShapeProperty.PropertyName)
+                InvalidateMeasure();
+
+        }
+        #endregion
+
+
         #region Description
         /// <summary>
         /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
@@ -219,12 +315,6 @@ namespace Forms9Patch
         /// <returns></returns>
         public override string ToString() => Description();
         #endregion
-
-
-        #region IShape Methods
-        //Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
-        #endregion
-
 
 
         #region IgnoreChildren handlers
@@ -263,8 +353,6 @@ namespace Forms9Patch
 
         #region Layout overrides
 
-
-
 #pragma warning disable CS0672 // Member overrides obsolete member
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member
@@ -291,14 +379,6 @@ namespace Forms9Patch
             return contentSizeRequest;
         }
 
-
-        /// <summary>
-        /// processes child layout
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
@@ -317,32 +397,6 @@ namespace Forms9Patch
 
             System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
             LayoutChildIntoBoundingRegion(Content, rect);
-            /*
-            Rectangle border = new Rectangle(0, 0, Width, Height);
-            if (HasShadow)
-            {
-                //border.X += shadowPadding.Left;
-                //border.Y += shadowPadding.Top;
-                //border.Width -= shadowPadding.HorizontalThickness;
-                //border.Height -= shadowPadding.VerticalThickness;
-                x += shadowPadding.Left;
-                y += shadowPadding.Top;
-                width -= shadowPadding.HorizontalThickness;
-                height -= shadowPadding.VerticalThickness;
-            }
-            System.Diagnostics.Debug.WriteLine("\t\t update: " + x + ", " + y + ", " + width + ", " + height);
-            System.Diagnostics.Debug.WriteLine("\t\t border: " + border);
-            //base.LayoutChildren(x, y, width, height);
-            for (var i = 0; i < BaseInternalChildren.Count; i++)
-            {
-                Element element = BaseInternalChildren[i];
-                if (element == CurrentBackgroundImage)
-                    LayoutChildIntoBoundingRegion(CurrentBackgroundImage, border);
-                else if (element is View child)
-                    LayoutChildIntoBoundingRegion(child, new Rectangle(x, y, width, height));
-            }
-            */
-
         }
 
 
@@ -351,39 +405,5 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Property Change Handlers
-        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanging(propertyName);
-        }
-
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-            if (propertyName == BackgroundColorProperty.PropertyName)
-                CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
-            else if (propertyName == HasShadowProperty.PropertyName)
-                CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
-            else if (propertyName == ShadowInvertedProperty.PropertyName)
-                CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
-            if (propertyName == OutlineRadiusProperty.PropertyName)
-                CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
-            else if (propertyName == ElementShapeProperty.PropertyName)
-                CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
-
-            if (propertyName == BackgroundColorProperty.PropertyName ||
-                propertyName == HasShadowProperty.PropertyName ||
-                propertyName == ShadowInvertedProperty.PropertyName ||
-                propertyName == OutlineColorProperty.PropertyName ||
-                propertyName == OutlineWidthProperty.PropertyName ||
-                propertyName == ElementShapeProperty.PropertyName)
-                InvalidateMeasure();
-
-        }
-        #endregion
     }
 }
