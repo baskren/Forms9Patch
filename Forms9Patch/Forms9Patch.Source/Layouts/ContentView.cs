@@ -381,7 +381,7 @@ namespace Forms9Patch
 
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
+            //System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
 
             LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
 
@@ -395,7 +395,7 @@ namespace Forms9Patch
                 rect.Height -= shadowPadding.VerticalThickness;
             }
 
-            System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
+            //System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
             LayoutChildIntoBoundingRegion(Content, rect);
         }
 

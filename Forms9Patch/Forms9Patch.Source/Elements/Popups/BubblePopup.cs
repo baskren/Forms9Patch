@@ -315,7 +315,7 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
+            //System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
 
             if (_bubbleLayout?.Content == null)
                 return;
@@ -351,7 +351,7 @@ namespace Forms9Patch
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
-                System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren rBoxSize size=[{0}, {1}]", rboxSize.Width, rboxSize.Height);
+                //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren rBoxSize size=[{0}, {1}]", rboxSize.Width, rboxSize.Height);
                 PointerDirection pointerDir = PointerDirection.None;
 
 
@@ -388,7 +388,7 @@ namespace Forms9Patch
                     {
                         targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
                         //targetBounds = Target.BoundsToEleCoord(targetPage);
-                        System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
+                        //System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
                         //targetBounds = targetPage.GetRelativeBounds(Target);
                         //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
                     }
@@ -516,7 +516,7 @@ namespace Forms9Patch
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
+                        //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(rboxSize.Height, Point.Y + targetBounds.Top, 0, height);
@@ -540,7 +540,7 @@ namespace Forms9Patch
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
-                    System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
+                    //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     System.Diagnostics.Debug.WriteLine("");
                 }

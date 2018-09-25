@@ -6,6 +6,8 @@ using CoreGraphics;
 using System.ComponentModel;
 using Foundation;
 using CoreMotion;
+using System.Runtime.CompilerServices;
+
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.iOS.LabelRenderer))]
 namespace Forms9Patch.iOS
@@ -32,7 +34,16 @@ namespace Forms9Patch.iOS
         double LastHeightContraint = -1;
 
 
+        void Debug(string message, [CallerMemberName] string method = null, [CallerLineNumber] int lineNumber = 0)
+        {
+            //var text = Element.Text ?? Element.HtmlText;
+            //if (text == "Segment C")
+            //    System.Diagnostics.Debug.WriteLine(GetType() + "." + method + "[" + lineNumber + "]: " + message);
+        }
+
+
         #region Xamarin layout cycle
+
         /// <summary>
         /// Gets the size of the desired.
         /// </summary>
@@ -142,6 +153,7 @@ namespace Forms9Patch.iOS
                             else
                                 Element.FittedFontSize = tmpFontSize;
                         }
+                        Debug("SETTING FITTED FONT SIZE: " + Element.FittedFontSize);
                         return false;
                     });
                 }
@@ -154,7 +166,7 @@ namespace Forms9Patch.iOS
                 ControlFont = ControlFont.WithSize(tmpFontSize);
 
                 CGSize cgSize = LabelSize(widthConstraint, tmpFontSize);
-
+                Debug("cgSize: " + cgSize);
 
                 //if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
                 {
@@ -181,13 +193,14 @@ namespace Forms9Patch.iOS
                 double reqHeight = cgSize.Height + 0.05;
                 var textHeight = cgSize.Height;
                 var textLines = Lines(textHeight, Control.Font);
-                //string alg = "--";
+                string alg = "--";
                 //string cnstLinesStr = "CL: n/a    ";
                 //string lineHeight = "LH: " + Control.Font.LineHeight.ToString("00.000");
                 //string cnstLinesHeight = "CLH: n/a   ";
 
                 if (double.IsPositiveInfinity(heightConstraint))
                 {
+                    Debug("A");
                     if (Element.Lines > 0)
                     {
                         if (Element.AutoFit == AutoFit.Lines)// && Element.Lines <= textLines)
@@ -199,40 +212,46 @@ namespace Forms9Patch.iOS
                     //    alg = "∞A";
                     //}
                     Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
-
+                    Debug("Control.Center: " + Control.Center);
                 }
                 else
                 {
+                    Debug("B");
                     var constraintLines = Lines(heightConstraint, Control.Font);
+                    Debug("\t constraintLines: " + constraintLines);
                     var constraintLinesHeight = Math.Floor(constraintLines) * Control.Font.LineHeight;
+                    Debug("\t constraintLinesHeight: " + constraintLinesHeight);
                     //cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
 
-
                     if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
-                        //{
+                    {
                         reqHeight = Element.Lines * Control.Font.LineHeight;
-                    //alg = "A";
-                    //}
+                        alg = "A";
+                    }
                     else if (textLines <= constraintLines)
-                        //{
+                    {
                         reqHeight = textHeight;
-                    //alg = "B";
-                    //}
+                        alg = "B";
+                    }
                     else if (constraintLines >= 1)
-                        //{
+                    {
                         reqHeight = constraintLinesHeight;
-                    //alg = "C";
-                    //}
+                        alg = "C";
+                    }
                     else
-                        //{
+                    {
                         reqHeight = heightConstraint;
-                    //alg = "D";
-                    //}
+                        alg = "D";
+                    }
+                    Debug("\t alg: " + alg);
+                    Debug("\t reqHeight: " + reqHeight);
 
+                    Debug("\t Element.VerticalTextAlignment: " + Element.VerticalTextAlignment);
                     if (Element.VerticalTextAlignment == TextAlignment.Start)
                         Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
                     else if (Element.VerticalTextAlignment == TextAlignment.End)
                         Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
+                    Debug("Control.Center: " + Control.Center);
                 }
                 LastDesiredSize = new SizeRequest(new Size(reqWidth, reqHeight), new Size(10, ControlFont.LineHeight));
             }

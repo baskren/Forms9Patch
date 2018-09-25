@@ -851,6 +851,7 @@ namespace Forms9Patch
                     if (child is VisualElement element && element.IsVisible)
                     {
                         childCount++;
+                        /*
                         if (Orientation == StackOrientation.Horizontal)
                         {
 
@@ -869,6 +870,10 @@ namespace Forms9Patch
                             width += measure.Request.Width;
                             height += measure.Request.Height;
                         }
+                        */
+                        var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
+                        width += measure.Request.Width;
+                        height += measure.Request.Height;
                     }
                 }
                 if (childCount > 1)

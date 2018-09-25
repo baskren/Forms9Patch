@@ -931,7 +931,7 @@ namespace Forms9Patch
         #region Image Layout
         void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath, SKPaint shadowPaint = null)
         {
-            System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
+            //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
 
             SKBitmap shadowBitmap = null;
             SKCanvas workingCanvas = canvas;

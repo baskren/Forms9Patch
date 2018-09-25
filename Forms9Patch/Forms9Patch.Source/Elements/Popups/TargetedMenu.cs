@@ -340,7 +340,7 @@ namespace Forms9Patch
             segment._button.TextColor = TextColor;
             segment._button.VerticalTextAlignment = TextAlignment.Center;
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
-            segment._button.VerticalOptions = LayoutOptions.Fill;
+            segment._button.VerticalOptions = LayoutOptions.Center;
             segment._button.HorizontalOptions = LayoutOptions.Center;
             segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
             //segment.
