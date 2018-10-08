@@ -18,7 +18,7 @@ namespace FormsGestures.Droid
 
         public void For(Listener listener)
         {
-            NativeGestureHandler.GetInstanceForListener(listener);
+            NativeGestureHandler.ActivateInstanceForListener(listener);
         }
 
         /*

@@ -1,8 +1,8 @@
 <Project DefaultTargets = "Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
 
-  <!-- Common Project Files-->
   <ItemGroup>
+  <!-- ANDROID DETECTORS -->
     <Compile Include="..\FormsGestures.Source.Droid\Detectors\DownUpGestureDetector.cs" >
       <Link>Detectors\DownUpGestureDetector.cs</Link>
     </Compile>
@@ -12,6 +12,8 @@
     <Compile Include="..\FormsGestures.Source.Droid\Detectors\NativeGestureDetector.cs" >
       <Link>Detectors\NativeGestureDetector.cs</Link>
     </Compile>
+
+    <!-- EVENT ARGUMENTS -->
     <Compile Include="..\FormsGestures.Source.Droid\EventArgs\AndroidDownUpEventArgs.cs" >
       <Link>EventArgs\AndroidDownUpEventArgs.cs</Link>
     </Compile>
@@ -36,12 +38,19 @@
     <Compile Include="..\FormsGestures.Source.Droid\EventArgs\AndroidTapEventArgs.cs" >
       <Link>EventArgs\AndroidTapEventArgs.cs</Link>
     </Compile>
+
+    <!-- EXTENSIONS -->
     <Compile Include="..\FormsGestures.Source.Droid\Exensions\AndroidViewExtensions.cs" >
       <Link>Exensions\AndroidViewExtensions.cs</Link>
     </Compile>
     <Compile Include="..\FormsGestures.Source.Droid\Exensions\PointExtensions.cs" >
       <Link>Exensions\PointExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\FormsGestures.Source.Droid\DIP.cs" >
+      <Link>DIP.cs</Link>
+    </Compile>
+
+    <!-- ANDROID LISTENERS -->
     <Compile Include="..\FormsGestures.Source.Droid\Listeners\DownUpGestureListener.cs" >
       <Link>Listeners\DownUpGestureListener.cs</Link>
     </Compile>
@@ -54,6 +63,8 @@
     <Compile Include="..\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs" >
       <Link>Listeners\OnTouchListener.cs</Link>
     </Compile>
+
+    <!-- SERVICES -->
     <Compile Include="..\FormsGestures.Source.Droid\Services\CoordTransformService.cs" >
       <Link>Services\CoordTransformService.cs</Link>
     </Compile>
@@ -63,9 +74,8 @@
     <Compile Include="..\FormsGestures.Source.Droid\Services\GestureService.cs" >
       <Link>Services\GestureService.cs</Link>
     </Compile>
-    <Compile Include="..\FormsGestures.Source.Droid\DIP.cs" >
-      <Link>DIP.cs</Link>
-    </Compile>
+
+
     <Compile Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs" >
       <Link>NativeGestureHandler.cs</Link>
     </Compile>
