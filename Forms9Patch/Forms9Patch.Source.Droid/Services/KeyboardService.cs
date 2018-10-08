@@ -6,6 +6,7 @@ using Android.Views.InputMethods;
 using Xamarin.Forms;
 using Java.Util;
 using Android.Views;
+using Xamarin.Forms.PlatformConfiguration;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.Droid.KeyboardService))]
 namespace Forms9Patch.Droid
@@ -62,8 +63,12 @@ namespace Forms9Patch.Droid
             {
                 var imm = (InputMethodManager)Forms9Patch.Droid.Settings.Context.GetSystemService(Context.InputMethodService);
                 var ims = imm.CurrentInputMethodSubtype;
-                var result = ims?.LanguageTag.Replace('_', '-');
-                //var result = ims?.Locale.Replace('_', '-');
+                string result;
+                //if (Android.OS.Build.VERSION.SDK_INT > 24)
+                if (Android.OS.Build.VERSION.SdkInt > Android.OS.BuildVersionCodes.M)
+                    result = ims?.LanguageTag.Replace('_', '-');
+                else
+                    result = ims?.Locale.Replace('_', '-');
 
                 if (string.IsNullOrWhiteSpace(result))
                 {
