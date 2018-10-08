@@ -72,11 +72,7 @@ namespace Forms9Patch
         public Image BackgroundImage
         {
             get => (Image)GetValue(BackgroundImageProperty);
-            set
-            {
-                System.Diagnostics.Debug.WriteLine("ContentView.set_BackgroundImage");
-                SetValue(BackgroundImageProperty, value);
-            }
+            set => SetValue(BackgroundImageProperty, value);
         }
         #endregion BackgroundImage property
 
@@ -320,21 +316,6 @@ namespace Forms9Patch
         #endregion
 
 
-        protected override void OnChildAdded(Element child)
-        {
-            System.Diagnostics.Debug.WriteLine("OnChildAdded ENTER: " + child);
-            base.OnChildAdded(child);
-            System.Diagnostics.Debug.WriteLine("OnChildAdded EXIT: " + child);
-        }
-
-        protected override void OnChildRemoved(Element child)
-        {
-            System.Diagnostics.Debug.WriteLine("OnChildRemoved ENTER: " + child);
-            base.OnChildRemoved(child);
-            System.Diagnostics.Debug.WriteLine("OnChildRemoved EXIT: " + child);
-        }
-
-
         #region IgnoreChildren handlers
         /// <summary>
         /// Shoulds the invalidate on child added.
@@ -377,10 +358,10 @@ namespace Forms9Patch
         {
             if (Content == null)
                 return new SizeRequest(Size.Zero, Size.Zero);
-            System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
+            //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var contentSizeRequest = Content.Measure(widthConstraint, heightConstraint, MeasureFlags.IncludeMargins);
-            System.Diagnostics.Debug.WriteLine("\t\t contentSizeRequest: " + contentSizeRequest);
+            //System.Diagnostics.Debug.WriteLine("\t\t contentSizeRequest: " + contentSizeRequest);
 
             if (LimitMinSizeToBackgroundImageSize && BackgroundImage != null && BackgroundImage.SourceImageSize != Size.Zero)
             {
@@ -395,13 +376,13 @@ namespace Forms9Patch
                 var shadowPadding = ShapeBase.ShadowPadding(this);
                 contentSizeRequest = new SizeRequest(new Size(contentSizeRequest.Request.Width + shadowPadding.HorizontalThickness, contentSizeRequest.Request.Height + shadowPadding.VerticalThickness), new Size(contentSizeRequest.Minimum.Width + shadowPadding.HorizontalThickness, contentSizeRequest.Minimum.Height + shadowPadding.VerticalThickness));
             }
-            System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest: result=" + contentSizeRequest);
+            //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest: result=" + contentSizeRequest);
             return contentSizeRequest;
         }
 
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
+            //System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
 
             LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
 
@@ -415,7 +396,7 @@ namespace Forms9Patch
                 rect.Height -= shadowPadding.VerticalThickness;
             }
 
-            System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
+            //System.Diagnostics.Debug.WriteLine("\t\t contentRect: " + rect);
             LayoutChildIntoBoundingRegion(Content, rect);
         }
 
