@@ -284,7 +284,7 @@ namespace Forms9Patch
         void OnScrollWrappingTargetScrolled(object sender, ScrolledEventArgs e)
         {
             if (IsVisible)
-                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height - KeyboardService.Height);
+                LayoutChildren(PopupPage.X, PopupPage.Y, PopupPage.Bounds.Size.Width, PopupPage.Bounds.Height - KeyboardService.Height);
         }
 
         #endregion
@@ -355,7 +355,8 @@ namespace Forms9Patch
                 PointerDirection pointerDir = PointerDirection.None;
 
 
-                var targetPage = Application.Current.MainPage;
+                var targetPage = PopupPage as Page; // Application.Current.MainPage;
+                /*
                 var hostingPage = this.HostingPage();
                 foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
                 {
@@ -365,6 +366,7 @@ namespace Forms9Patch
                         break;
                     }
                 }
+                */
 
                 //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;

@@ -6,18 +6,53 @@
 using System;
 using Xamarin.Forms;
 using System.Collections.Generic;
+//using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+//using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Forms9Patch
 {
+    [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+    public class RootPage : PopupPage
+    {
+        #region Properties
+        //protected override IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count - 1] : this) as IPageController;
+        #endregion
+
+
+        #region Fields
+        //static internal RootPage _instance;
+        #endregion
+
+
+        #region Constructor
+        [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+        public RootPage(Page page) : base(page) { }
+
+        /// <summary>
+        /// Create the specified page.
+        /// </summary>
+        /// <returns>The create.</returns>
+        /// <param name="page">Page.</param>
+        [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+        public static new RootPage Create(Page page)
+        {
+            //_instance = _instance ?? new RootPage(page);
+            var _instance = new RootPage(page);
+            return _instance;
+        }
+        #endregion
+
+
+
+    }
+
     /// <summary>
     /// Page that supports popups
     /// </summary>
-    public class RootPage : Page
+    public class PopupPage : Xamarin.Forms.Page
     {
 
-
         #region Events
-
         /// <summary>
         /// Occurs when modal popped.
         /// </summary>
@@ -42,67 +77,109 @@ namespace Forms9Patch
         /// Occurs when navigation pushed.
         /// </summary>
         public static event EventHandler<Page> NavigationPushed;
+
+
+        public static event EventHandler StatusBarPaddingChanged;
+        #endregion
+
+        #region Properties
+        protected virtual IPageController PageController => this as IPageController;
+        //static readonly List<Page> _modals = new List<Page>();
         #endregion
 
 
         #region Fields
-        static internal RootPage _instance;
-        static List<Page> _modals = new List<Page>();
         static internal NavigationPage _navPage;
         #endregion
 
 
         #region Constructor
-        static RootPage()
+        static PopupPage()
         {
             Settings.ConfirmInitialization();
+
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RootPage"/> class.
         /// </summary>
         /// <param name="page">Page.</param>
-        public RootPage(Page page = null)
+        public PopupPage(Page page = null)
         {
 
             // needed to comment out the following because Android was repeating the MainAcitivty.OnCreate during a resume.
             //if (_instance != null)
             //    throw new Exception("A second instance of RootPage is not allowed.  Try using RootPage.Create(Page page) instead");
-            _instance = this;
+            //_instance = this;
             Page = page;
             Application.Current.ModalPopping += OnModalPopping;
             Application.Current.ModalPushing += OnModalPushing;
             Application.Current.ModalPushed += OnModalPushed;
             Application.Current.ModalPopped += OnModalPopped;
-
-            /*
-            Application.Current.ChildRemoved += (s, e) =>
-                {
-                    System.Diagnostics.Debug.WriteLine("ChildRemoved");
-                };
-
-            Application.Current.DescendantRemoved += (s, e) =>
-            {
-                System.Diagnostics.Debug.WriteLine("ChildAdded");
-            };
-            */
-
-            //HardwareKeyHandlerEffect.ApplyTo(this);
         }
-        #endregion
 
-
-        #region Factory
         /// <summary>
         /// Create the specified page.
         /// </summary>
         /// <returns>The create.</returns>
         /// <param name="page">Page.</param>
-        public static RootPage Create(Page page)
+        public static PopupPage Create(Page page)
         {
             //_instance = _instance ?? new RootPage(page);
-            _instance = new RootPage(page);
+            var _instance = new PopupPage(page);
             return _instance;
+        }
+
+        #endregion
+
+
+        #region Static Methods
+
+
+        #endregion
+
+
+        #region Navigation Event Handlers
+        void OnNavigationPagePushed(object sender, NavigationEventArgs e)
+        {
+            RemovePopups(false);
+            NavigationPushed?.Invoke(sender, e.Page);
+        }
+
+        void OnNavigationPagePopped(object sender, NavigationEventArgs e)
+        {
+            RemovePopups(true);
+            NavigationPopped?.Invoke(sender, e.Page);
+        }
+
+        void OnModalPushing(object sender, ModalPushingEventArgs e)
+        {
+            ModalPushing?.Invoke(sender, e.Modal);
+            RemovePopups(false);
+        }
+
+        void OnModalPopping(object sender, ModalPoppingEventArgs e)
+        {
+            RemovePopups(true);
+            ModalPopping?.Invoke(sender, e.Modal);
+        }
+
+        void OnModalPushed(object sender, ModalPushedEventArgs e)
+        {
+            ModalPushed?.Invoke(sender, e.Modal);
+            //_modals.Add(e.Modal);
+        }
+
+
+        void OnModalPopped(object sender, ModalPoppedEventArgs e)
+        {
+            ModalPopped?.Invoke(sender, e.Modal);
+            //_modals.Remove(e.Modal);
+            //var current = _modals.Count > 0 ? _modals[_modals.Count - 1] : null;
+            //current = current ?? (_navPage.Navigation.NavigationStack.Count > 0 ? _navPage.Navigation.NavigationStack[_navPage.Navigation.NavigationStack.Count - 1] : null);
+            var current = PageExtensions.FindCurrentPage(Application.Current.MainPage);
+            if (current is HardwareKeyPage hkPage)
+                hkPage.OnReappearing();
         }
         #endregion
 
@@ -112,22 +189,22 @@ namespace Forms9Patch
         /// Gets or sets the apps content page.
         /// </summary>
         /// <value>The page.</value>
-        public static Page Page
+        public Page Page
         {
             get
             {
-                var result = _instance.PageController.InternalChildren[0] as Page;
+                var result = PageController.InternalChildren[0] as Page;
                 return result;
             }
             set
             {
-                _instance = _instance ?? new RootPage();
+                //_instance = _instance ?? new RootPage();
 
                 //NavigationPage navPage;
-                if (_instance.PageController.InternalChildren.Count > 0)
+                if (PageController.InternalChildren.Count > 0)
                 {
-                    var oldPage = _instance.PageController.InternalChildren[0] as Page;
-                    _navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+                    var oldPage = PageController.InternalChildren[0] as Page;
+                    _navPage = PageController.InternalChildren[0] as NavigationPage;
                     if (_navPage != null)
                     {
                         _navPage.Pushed -= OnNavigationPagePushed;
@@ -135,20 +212,20 @@ namespace Forms9Patch
                         _navPage.PoppedToRoot -= OnNavigationPagePopped;
                     }
                     if (oldPage != null)
-                        _instance.PageController.InternalChildren.Remove(oldPage);
+                        PageController.InternalChildren.Remove(oldPage);
                 }
 
                 if (value != null)
                 {
-                    _instance.PageController.InternalChildren.Insert(0, value);
-                    _navPage = _instance.PageController.InternalChildren[0] as NavigationPage;
+                    PageController.InternalChildren.Insert(0, value);
+                    _navPage = PageController.InternalChildren[0] as NavigationPage;
                     if (_navPage != null)
                     {
                         _navPage.Pushed += OnNavigationPagePushed;
                         _navPage.Popped += OnNavigationPagePopped;
                         _navPage.PoppedToRoot += OnNavigationPagePopped;
                     }
-                    var masterDetailPage = _instance.PageController.InternalChildren[0] as MasterDetailPage;
+                    var masterDetailPage = PageController.InternalChildren[0] as MasterDetailPage;
                     if (masterDetailPage != null)
                     {
                         masterDetailPage.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
@@ -164,66 +241,18 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Navigation Event Handlers
-
-
-
-        static void OnNavigationPagePushed(object sender, NavigationEventArgs e)
-        {
-            _instance?.RemovePopups(false);
-            NavigationPushed?.Invoke(sender, e.Page);
-        }
-
-        static void OnNavigationPagePopped(object sender, NavigationEventArgs e)
-        {
-            _instance?.RemovePopups(true);
-            NavigationPopped?.Invoke(sender, e.Page);
-        }
-
-        void OnModalPushing(object sender, ModalPushingEventArgs e)
-        {
-            ModalPushing?.Invoke(sender, e.Modal);
-            //System.Diagnostics.Debug.WriteLine("ModalPushing");
-        }
-
-        void OnModalPopping(object sender, ModalPoppingEventArgs e)
-        {
-            ModalPopping?.Invoke(sender, e.Modal);
-            //System.Diagnostics.Debug.WriteLine("ModalPopping");
-            RemovePopups(true);
-        }
-
-        void OnModalPushed(object sender, ModalPushedEventArgs e)
-        {
-            ModalPushed?.Invoke(sender, e.Modal);
-            _modals.Add(e.Modal);
-            System.Diagnostics.Debug.WriteLine("Modal Pushed");
-        }
-
-        void OnModalPopped(object sender, ModalPoppedEventArgs e)
-        {
-            ModalPopped?.Invoke(sender, e.Modal);
-            _modals.Remove(e.Modal);
-            System.Diagnostics.Debug.WriteLine("ModalPopped");
-            var current = _modals.Count > 0 ? _modals[_modals.Count - 1] : null;
-            current = current ?? (_navPage.Navigation.NavigationStack.Count > 0 ? _navPage.Navigation.NavigationStack[_navPage.Navigation.NavigationStack.Count - 1] : null);
-            if (current is HardwareKeyPage hkPage)
-                hkPage.OnReappearing();
-        }
-        #endregion
-
 
         #region Popup stack
-        IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count - 1] : this) as IPageController;
-
         internal void AddPopup(PopupBase popup)
         {
             //Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, Bounds);
             popup.ManualLayout(Bounds);
             if (!PageController.InternalChildren.Contains(popup))
+            {
                 PageController.InternalChildren.Add(popup);
-            popup.PresentedAt = DateTime.Now;
-            popup.MeasureInvalidated -= OnChildMeasureInvalidated;
+                popup.PresentedAt = DateTime.Now;
+                popup.MeasureInvalidated += OnChildMeasureInvalidated;
+            }
         }
 
         internal void RemovePopup(PopupBase popup)
@@ -237,6 +266,8 @@ namespace Forms9Patch
 				//Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(popup, new Rectangle(0, 0, -1, -1));
 			}
 			*/
+            popup.MeasureInvalidated -= OnChildMeasureInvalidated;
+
             if (PageController.InternalChildren.Contains(popup))
                 PageController.InternalChildren.Remove(popup);
         }
@@ -247,7 +278,10 @@ namespace Forms9Patch
             {
                 var popup = PageController.InternalChildren[i] as PopupBase;
                 if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
-                    PageController.InternalChildren.RemoveAt(i);
+                {
+                    popup.MeasureInvalidated += OnChildMeasureInvalidated;
+                    PageController.InternalChildren.Remove(popup);
+                }
             }
         }
         #endregion
@@ -288,12 +322,12 @@ namespace Forms9Patch
 
 
         #region Layout
-        static bool _ignoreChildren;
+        bool _ignoreChildren;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.StackLayout"/> will not invalidate itself when a child changes.
         /// </summary>
         /// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
-        public static bool IgnoreChildren
+        public bool IgnoreChildren
         {
             get
             {
@@ -305,25 +339,25 @@ namespace Forms9Patch
                 {
                     _ignoreChildren = value;
                     if (_ignoreChildren)
-                        foreach (var child in _instance.PageController.InternalChildren)
+                        foreach (var child in PageController.InternalChildren)
                         {
                             var view = child as View;
                             if (view != null)
-                                view.MeasureInvalidated -= _instance.OnChildMeasureInvalidated;
+                                view.MeasureInvalidated -= OnChildMeasureInvalidated;
                         }
                     else
-                        foreach (var child in _instance.PageController.InternalChildren)
+                        foreach (var child in PageController.InternalChildren)
                         {
                             var view = child as View;
                             if (view != null)
-                                view.MeasureInvalidated += _instance.OnChildMeasureInvalidated;
+                                view.MeasureInvalidated += OnChildMeasureInvalidated;
                         }
                 }
             }
         }
 
         static double _startingHeight = -1;
-        static double _oldStatusBarPadding = -1;
+        static Thickness _oldStatusBarPadding = new Thickness();
 
         /// <summary>
         /// Layouts the children.
@@ -336,17 +370,19 @@ namespace Forms9Patch
         {
             if (_startingHeight < 0)
                 _startingHeight = StatusBarService.Height;
-            var newStatusBarPadding = StatusBarPadding;
-            if (Math.Abs(newStatusBarPadding - _oldStatusBarPadding) > 0.1)
+            //var newStatusBarPadding = StatusBarPadding;
+            var platformConfiguration = On<Xamarin.Forms.PlatformConfiguration.iOS>();//.SafeAreaInsets();
+            var safeAreaInsets = Xamarin.Forms.PlatformConfiguration.iOSSpecific.Page.SafeAreaInsets(platformConfiguration);
+            if (safeAreaInsets != _oldStatusBarPadding)
             {
-                _oldStatusBarPadding = newStatusBarPadding;
+                _oldStatusBarPadding = safeAreaInsets;
                 StatusBarPaddingChanged?.Invoke(this, EventArgs.Empty);
             }
             base.LayoutChildren(x, y, width, height);
         }
         #endregion
 
-
+        /*
         #region iPhone X
         /// <summary>
         /// Returns the amount of padding you'll need to keep your views from overlapping the status bar.
@@ -375,8 +411,8 @@ namespace Forms9Patch
         /// <summary>
         /// Occurs when status bar padding changed.
         /// </summary>
-        public static event EventHandler StatusBarPaddingChanged;
         #endregion
+        */
 
     }
 }

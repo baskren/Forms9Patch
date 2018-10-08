@@ -120,6 +120,7 @@
     <Compile Include="..\Forms9Patch.Source\Extensions\ImageSourceExtensions.cs" Link="Extensions\ImageSourceExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\InternalStringExtensions.cs" Link="Extensions\InternalStringExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\LayoutOptionsExtensions.cs" Link="Extensions\LayoutOptionsExtensions.cs" />
+    <Compile Include="..\Forms9Patch.Source\Extensions\PageExtensions.cs" Link="Extensions\PageExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\PointerDirectionExtensions.cs" Link="Extensions\PointerDirectionExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
     <Compile Include="..\Forms9Patch.Source\Extensions\RectangleExtensions.cs" Link="Extensions\RectangleExtensions.cs" />

@@ -365,7 +365,22 @@ namespace Forms9Patch
 
         internal Listener Listener => _listener;
 
-        internal RootPage RootPage => Application.Current?.MainPage as RootPage;
+        //internal RootPage RootPage => Application.Current?.MainPage as RootPage;
+        internal PopupPage PopupPage
+        {
+            get
+            {
+                var currentPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
+                var parent = currentPage;
+                while (parent != null)
+                {
+                    if (parent is PopupPage popupPage)
+                        return popupPage;
+                    parent = parent.Parent as Page;
+                }
+                return null;
+            }
+        }
 
         internal BoxView PageOverlay => _pageOverlay;
 
@@ -486,7 +501,7 @@ namespace Forms9Patch
                     _listener.Panning -= OnPanning;
                     _listener.Dispose();
                     Retain = false;
-                    RootPage?.RemovePopup(this);
+                    PopupPage?.RemovePopup(this);
                     disposedValue = true;
                 }
             }
@@ -554,10 +569,16 @@ namespace Forms9Patch
 
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (RootPage != null && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
+            if (PopupPage != null && IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
             {
-                LayoutChildren(RootPage.X, RootPage.Y, RootPage.Bounds.Size.Width, RootPage.Bounds.Height);// - KeyboardService.Height);
+                LayoutChildren(PopupPage.X, PopupPage.Y, PopupPage.Bounds.Size.Width, PopupPage.Bounds.Height);// - KeyboardService.Height);
             }
+        }
+
+        protected override void OnParentSet()
+        {
+            base.OnParentSet();
+            OnPropertyChanged(IsVisibleProperty.PropertyName);
         }
 
         /// <param name="propertyName">The name of the property that changed.</param>
@@ -567,11 +588,14 @@ namespace Forms9Patch
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
+
+
             if (propertyName == PageOverlayColorProperty.PropertyName)
                 _pageOverlay.BackgroundColor = PageOverlayColor;
             else if (propertyName == IsVisibleProperty.PropertyName)
             {
-                if (IsVisible)
+                if (IsVisible && PopupPage != null)
                 {
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
@@ -582,13 +606,13 @@ namespace Forms9Patch
                     }
                     //if (RootPage == null)
                     //    throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
-                    RootPage?.AddPopup(this);
+                    PopupPage?.AddPopup(this);
                     base.IsVisible = true;
                 }
                 else
                 {
                     base.IsVisible = false;
-                    RootPage?.RemovePopup(this);
+                    PopupPage?.RemovePopup(this);
                 }
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
@@ -643,9 +667,9 @@ namespace Forms9Patch
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             // this is going to be the size of the root page.
-            if (RootPage == null)
+            if (PopupPage == null)
                 return new SizeRequest(Size.Zero, Size.Zero);
-            var result = new SizeRequest(RootPage.Bounds.Size, RootPage.Bounds.Size);
+            var result = new SizeRequest(PopupPage.Bounds.Size, PopupPage.Bounds.Size);
             return result;
         }
 
@@ -665,7 +689,8 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
 
-            var targetPage = Application.Current.MainPage;
+            var targetPage = PopupPage as Page;// Application.Current.MainPage;
+            /*
             var hostingPage = this.HostingPage();
             foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
             {
@@ -675,6 +700,7 @@ namespace Forms9Patch
                     break;
                 }
             }
+            */
 
 
 
