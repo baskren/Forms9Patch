@@ -1026,7 +1026,6 @@ namespace Forms9Patch
             return TwoDeepDataSet(groupSelector, itemSelector, subItemSelector);
         }
 
-        static double _uwpSeparatorThicknessError = 0.4;
         DeepDataSet TwoDeepDataSet(Func<double, int, int, GroupWrapper, bool> groupSelector, Func<double, int, int, ItemWrapper, bool> itemSelector, Func<double, int, int, int, GroupWrapper, ItemWrapper, bool> subItemSelector)
         {
             var calcOffset = 0.0;
@@ -1050,7 +1049,7 @@ namespace Forms9Patch
                         calcOffset += cellHeight;
                         flatIndex++;
                         if (j < groupWrapper.Count - 1)
-                            calcOffset += subItemWrapper.RenderedSeparatorHeight + (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
+                            calcOffset += subItemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
                     }
                 }
                 else
@@ -1061,12 +1060,22 @@ namespace Forms9Patch
                     calcOffset += cellHeight;
                     flatIndex++;
                     if (i < Count - 1)
-                        calcOffset += itemWrapper.RenderedSeparatorHeight + (Device.RuntimePlatform == Device.UWP ? _uwpSeparatorThicknessError : 0.0);
+                    {
+                        calcOffset += itemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
+                    }
                 }
             }
             return null;
         }
 
+        double SeparatorThicknessError()
+        {
+            return Device.RuntimePlatform == Device.UWP
+                    ? 0.4
+                    : Device.RuntimePlatform == Device.Android
+                            ? 0.07
+                            : 0;
+        }
         #endregion
 
 

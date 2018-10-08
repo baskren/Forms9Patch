@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard1.3</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>Forms9PatchDemo</AssemblyName>
 		<RootNamespace>Forms9PatchDemo</RootNamespace>
 	</PropertyGroup>
@@ -30,4 +30,7 @@
 		<ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj" />
 	</ItemGroup>
 	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
+	<ItemGroup>
+	  <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.0" />
+	</ItemGroup>
 </Project>

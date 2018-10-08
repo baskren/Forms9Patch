@@ -85,9 +85,12 @@ namespace FormsGestures.Droid
                 ngh.Deactivate(force);
         }
 
-
+        bool _deactivated;
         void Deactivate(bool force = false)
         {
+            if (_deactivated)
+                return;
+            _deactivated = true;
             DeactivateInstancesForChildren(force);
             DisconnectRenderer();
             Element.Behaviors.Remove(this);

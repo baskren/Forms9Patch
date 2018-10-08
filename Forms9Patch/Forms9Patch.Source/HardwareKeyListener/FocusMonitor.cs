@@ -37,7 +37,7 @@ namespace Forms9Patch
         static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
         internal static void OnVisualElementFocusChanged(object fromElement, VisualElement toElement)
         {
-            System.Diagnostics.Debug.WriteLine("Forms9Patch.FocusMonitor.OnVisualElementFocusChanged("+fromElement+","+toElement+")");
+            System.Diagnostics.Debug.WriteLine("Forms9Patch.FocusMonitor.OnVisualElementFocusChanged(" + fromElement + "," + toElement + ")");
             /*
             if (DateTime.Now - _lastFocusChangedDateTime < TimeSpan.FromMilliseconds(50) &&  _lastFromElement is Xamarin.Forms.ScrollView && fromElement==null && toElement is Xamarin.Forms.InputView && HardwareKeyPage.RemoveNativeFocus!=null)
             {
@@ -128,9 +128,9 @@ namespace Forms9Patch
                     else
                         System.Diagnostics.Debug.WriteLine("\t F.A value.Focus()==false");
                 }
-                else if (wasElement!=null)
+                else if (wasElement != null)
                 {
-                    System.Diagnostics.Debug.WriteLine("\t G wasElement!=null   where wasElement=["+wasElement+"]");
+                    System.Diagnostics.Debug.WriteLine("\t G wasElement!=null   where wasElement=[" + wasElement + "]");
                     wasElement.Unfocus();
                     if (wasElement.IsFocused)
                         System.Diagnostics.Debug.WriteLine("\t  G.1  couldn't unfocus wasElement");
@@ -174,6 +174,7 @@ namespace Forms9Patch
         {
             if (!_enabled || element == null || element.IsFocusMonitoring())
                 return;
+            System.Diagnostics.Debug.WriteLine("FocusMonitor.Start(" + element + ") ENTER");
 
             element.IsFocusMonitoring(true);
 
@@ -191,7 +192,6 @@ namespace Forms9Patch
             }
             else
             {
-                //System.Diagnostics.Debug.WriteLine("AttachTo[" + element + "]");
                 element.Focused += OnVisualElementFocused;
                 element.Unfocused += OnVisualElementUnfocused;
                 element.ChildAdded += OnVisualElementChildAdded;
@@ -200,6 +200,7 @@ namespace Forms9Patch
                     if (child is VisualElement childElement)
                         Start(childElement);
             }
+            System.Diagnostics.Debug.WriteLine("FocusMonitor.Start(" + element + ") EXIT");
         }
 
         /// <summary>
@@ -245,22 +246,27 @@ namespace Forms9Patch
             //    //FocusedElement = null;
             //    return;
             //else
-                FocusedElement = e.VisualElement;
+            FocusedElement = e.VisualElement;
             //if (e.VisualElement is Xamarin.Forms.ScrollView && e.VisualElement?.Parent is VisualElement parent)
             //    parent.Focus();
-                
+
         }
 
 
         static void OnVisualElementChildRemoved(object sender, ElementEventArgs e)
         {
-            if (sender is VisualElement visualElement)
+            System.Diagnostics.Debug.WriteLine("OnVisualElementChildRemoved.OnVisualElementChildRemoved(" + sender + "," + e.Element + ") ENTER");
+
+            //if (sender is VisualElement visualElement)
+            if (e.Element is VisualElement visualElement)
                 Stop(visualElement);
+            System.Diagnostics.Debug.WriteLine("OnVisualElementChildRemoved.OnVisualElementChildRemoved(" + sender + "," + e.Element + ") EXIT");
         }
 
         static void OnVisualElementChildAdded(object sender, ElementEventArgs e)
         {
-            if (sender is VisualElement visualElement)
+            //if (sender is VisualElement visualElement)
+            if (e.Element is VisualElement visualElement)
                 Start(visualElement);
         }
         #endregion
