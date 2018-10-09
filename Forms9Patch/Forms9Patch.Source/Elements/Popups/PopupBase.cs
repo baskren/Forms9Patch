@@ -465,6 +465,8 @@ namespace Forms9Patch
             base.Children.Add(_pageOverlay);
 
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
+
+            OverContextEffect.ApplyTo(this);
         }
         #endregion
 
