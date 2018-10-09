@@ -26,6 +26,10 @@ namespace Forms9Patch
 
 
         #region OnPropertyChanged
+        /// <summary>
+        /// Called when a property has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
             if (propertyName == HasShadowProperty.PropertyName)

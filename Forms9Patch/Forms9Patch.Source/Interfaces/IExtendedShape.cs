@@ -2,6 +2,9 @@
 using Xamarin.Forms;
 namespace Forms9Patch
 {
+    /// <summary>
+    /// INTERNAL USE ONLY
+    /// </summary>
     public interface IExtendedShape : IShape
     {
         /// <summary>
@@ -15,9 +18,10 @@ namespace Forms9Patch
         /// <value>The shape orientation.</value>
         Xamarin.Forms.StackOrientation ExtendedElementShapeOrientation { get; set; }
 
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         float ExtendedElementSeparatorWidth { get; set; }
-
-        //StackOrientation ParentSegmentsOrientation { get; set; }
 
     }
 }

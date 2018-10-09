@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Forms9Patch
 {
-    public static class PageExtensions
+    internal static class PageExtensions
     {
-        internal static Page FindCurrentPage(Page parent)
+        public static Page FindCurrentPage(Page parent)
         {
             if (parent is MasterDetailPage)
                 return parent;

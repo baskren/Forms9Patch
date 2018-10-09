@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms;
 
@@ -9,6 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// Base picker.
     /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
     class BasePicker : Xamarin.Forms.ContentView
     {
         #region Properties
@@ -134,7 +136,7 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BasePicker"/> class.
         /// </summary>
-        public BasePicker()
+        internal BasePicker()
         {
             BackgroundColor = Color.Transparent;
             _listView.RowHeight = RowHeight;

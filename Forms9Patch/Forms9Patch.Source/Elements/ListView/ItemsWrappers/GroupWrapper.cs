@@ -1071,7 +1071,7 @@ namespace Forms9Patch
         double SeparatorThicknessError()
         {
             return Device.RuntimePlatform == Device.UWP
-                    ? 0.4
+                    ? 0 // 0.4 / Display.Scale
                     : Device.RuntimePlatform == Device.Android
                             ? 0.07
                             : 0;

@@ -119,4 +119,9 @@
       <Link>Resources\image%404x.9.png</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
 </Project>

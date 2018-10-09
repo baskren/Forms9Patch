@@ -15,6 +15,7 @@
 		</DebugType>
 		<DefineConstants>TRACE;USE_XAML;FROM_SOURCE;RELEASE;NETSTANDARD1_3</DefineConstants>
 		<Optimize>true</Optimize>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<!-- LOAD PROJECT CONTENT -->
 	<PropertyGroup>
@@ -33,5 +34,10 @@
 	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
 	<ItemGroup>
 		<Folder Include="Non-Public Pages\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Non-Public Pages\MainPageX.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 </Project>

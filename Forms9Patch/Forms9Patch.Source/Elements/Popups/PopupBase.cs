@@ -7,9 +7,11 @@ using System.ComponentModel;
 
 namespace Forms9Patch
 {
+
     /// <summary>
     /// Forms9Patch Popup base.
     /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty("ContentView")]
     public abstract class PopupBase : Xamarin.Forms.Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
@@ -575,6 +577,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Internal Use Only
+        /// </summary>
         protected override void OnParentSet()
         {
             base.OnParentSet();

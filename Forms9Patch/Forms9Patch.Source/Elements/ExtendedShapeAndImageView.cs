@@ -14,7 +14,9 @@ using Xamarin.Forms.Internals;
 
 namespace Forms9Patch
 {
-
+    /// <summary>
+    /// Forms9Patch.Image element
+    /// </summary>
     public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape
     {
         #region Static Implementation
@@ -153,6 +155,9 @@ namespace Forms9Patch
         #endregion TintColor
 
         #region SourceImageSize
+        /// <summary>
+        /// Size of source image
+        /// </summary>
         public Size SourceImageSize
         {
             get
@@ -163,7 +168,13 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Width of source image
+        /// </summary>
         public double SourceImageWidth => _f9pImageData != null ? _f9pImageData.Width /* / FormsGestures.Display.Scale */: 0;
+        /// <summary>
+        /// Height of source Image
+        /// </summary>
         public double SourceImageHeight => _f9pImageData != null ? _f9pImageData.Height /* / FormsGestures.Display.Scale */: 0;
         double SourceImageAspect => SourceImageHeight > 0 ? SourceImageWidth / SourceImageHeight : 1;
         #endregion SourceImageSize
@@ -217,6 +228,9 @@ namespace Forms9Patch
         #endregion ExtendedElementShape property
 
         #region ExtendedElementSeparatorWidth
+        /// <summary>
+        /// Backing store key for INTERNAL ExtendedElementSeparatorWidth property
+        /// </summary>
         public static readonly BindableProperty ExtendedElementSeparatorWidthProperty = ShapeBase.ExtendedElementSeparatorWidthProperty;
         float IExtendedShape.ExtendedElementSeparatorWidth
         {
@@ -462,6 +476,9 @@ namespace Forms9Patch
             Settings.ConfirmInitialization();
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Image()
         {
             _f9pId = _instances++;
@@ -573,11 +590,19 @@ namespace Forms9Patch
 
 
         #region Conversion Operators
+        /// <summary>
+        /// Converts Xamarin.Forms.Image to Forms9Patch.Image
+        /// </summary>
+        /// <param name="xamarinFormsImage"></param>
         public static implicit operator Image(Xamarin.Forms.Image xamarinFormsImage)
         {
             return new Image(xamarinFormsImage);
         }
 
+        /// <summary>
+        /// Converts string (embedded resource id) into a Forms9Patch.Image
+        /// </summary>
+        /// <param name="embeddedResourceId"></param>
         public static implicit operator Image(string embeddedResourceId)
         {
             var assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
@@ -611,6 +636,10 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Called when a property has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -661,6 +690,12 @@ namespace Forms9Patch
 
 
         #region Measurement
+        /// <summary>
+        /// Internal use only
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
@@ -690,25 +725,14 @@ namespace Forms9Patch
             return result;
         }
 
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-        }
-
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            return base.OnMeasure(widthConstraint, heightConstraint);
-        }
-
-
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            return base.OnSizeRequest(widthConstraint, heightConstraint);
-        }
         #endregion
 
 
         #region Painting
+        /// <summary>
+        /// Internal use only
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
             //base.OnPaintSurface(e);
@@ -1300,7 +1324,7 @@ namespace Forms9Patch
         static SKRect RectInset(SKRect rect, float left, float top, float right, float bottom) => new SKRect(rect.Left + left, rect.Top + top, rect.Right - right, rect.Bottom - bottom);
 
 
-        protected SKPath PerimeterPath(SKRect rect, float radius, bool isOutline = false)
+        SKPath PerimeterPath(SKRect rect, float radius, bool isOutline = false)
         {
             radius = Math.Max(radius, 0);
 

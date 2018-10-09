@@ -42,6 +42,9 @@ namespace Forms9Patch
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowDefinitionsProperty, newvalue);
             });
 
+        /// <summary>
+        /// Children of Grid
+        /// </summary>
         public new IGridList<View> Children => _grid.Children;
 
         /// <summary>
@@ -85,56 +88,56 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Gets the column of the <param name="bindable">bindable</param>.
+        /// Gets the column of element in Grid
         /// </summary>
         /// <returns>The column.</returns>
         /// <param name="bindable">Bindable.</param>
         public static int GetColumn(BindableObject bindable) => Xamarin.Forms.Grid.GetColumn(bindable);
 
         /// <summary>
-        /// Gets the column span of the <param name="bindable">bindable</param>.
+        /// Gets the column span of element in Grid
         /// </summary>
         /// <returns>The column span.</returns>
         /// <param name="bindable">Bindable.</param>
         public static int GetColumnSpan(BindableObject bindable) => Xamarin.Forms.Grid.GetColumnSpan(bindable);
 
         /// <summary>
-        /// Gets the row of the <param name="bindable">bindable</param>.
+        /// Gets the row of element in Grid
         /// </summary>
         /// <returns>The row.</returns>
         /// <param name="bindable">Bindable.</param>
         public static int GetRow(BindableObject bindable) => Xamarin.Forms.Grid.GetRow(bindable);
 
         /// <summary>
-        /// Gets the row span of the <param name="bindable">bindable</param>.
+        /// Gets the row span of element in Grid
         /// </summary>
         /// <returns>The row span.</returns>
         /// <param name="bindable">Bindable.</param>
         public static int GetRowSpan(BindableObject bindable) => Xamarin.Forms.Grid.GetRowSpan(bindable);
 
         /// <summary>
-        /// Sets the column of the <param name="bindable">bindable</param>.
+        /// Sets the column of element in Grid
         /// </summary>
         /// <param name="bindable">Bindable.</param>
         /// <param name="value">Value.</param>
         public static void SetColumn(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetColumn(bindable, value);
 
         /// <summary>
-        /// Sets the column span of the <param name="bindable">bindable</param>.
+        /// Sets the column span of element in Grid
         /// </summary>
         /// <param name="bindable">Bindable.</param>
         /// <param name="value">Value.</param>
         public static void SetColumnSpan(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetColumnSpan(bindable, value);
 
         /// <summary>
-        /// Sets the row of the <param name="bindable">bindable</param>.
+        /// Sets the row of element in Grid
         /// </summary>
         /// <param name="bindable">Bindable.</param>
         /// <param name="value">Value.</param>
         public static void SetRow(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetRow(bindable, value);
 
         /// <summary>
-        /// Sets the row span of the <param name="bindable">bindable</param>.
+        /// Sets the row span of element in Grid
         /// </summary>
         /// <param name="bindable">Bindable.</param>
         /// <param name="value">Value.</param>

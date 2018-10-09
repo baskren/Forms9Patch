@@ -1280,7 +1280,7 @@ namespace Forms9Patch
             _noUpdate = false;
         }
 
-        protected Color OpaqueColor
+        Color OpaqueColor
         {
             get
             {
@@ -1294,7 +1294,7 @@ namespace Forms9Patch
             }
         }
 
-        protected Color TransparentColor
+        Color TransparentColor
         {
             get
             {

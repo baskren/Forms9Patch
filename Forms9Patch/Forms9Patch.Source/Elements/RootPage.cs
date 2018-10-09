@@ -6,33 +6,32 @@
 using System;
 using Xamarin.Forms;
 using System.Collections.Generic;
-//using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
-//using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
+    /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
     [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
     public class RootPage : PopupPage
     {
-        #region Properties
-        //protected override IPageController PageController => (_modals.Count > 0 ? _modals[_modals.Count - 1] : this) as IPageController;
-        #endregion
-
-
-        #region Fields
-        //static internal RootPage _instance;
-        #endregion
-
-
         #region Constructor
+        /// <summary>
+        /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
+        /// </summary>
+        /// <param name="page"></param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
         public RootPage(Page page) : base(page) { }
 
         /// <summary>
-        /// Create the specified page.
+        /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
         /// </summary>
-        /// <returns>The create.</returns>
-        /// <param name="page">Page.</param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
         public static new RootPage Create(Page page)
         {
@@ -78,12 +77,15 @@ namespace Forms9Patch
         /// </summary>
         public static event EventHandler<Page> NavigationPushed;
 
-
+        /// <summary>
+        /// Occurs when the padding for the status bar (or iPhoneX bezel) has changed
+        /// </summary>
         public static event EventHandler StatusBarPaddingChanged;
         #endregion
 
+
         #region Properties
-        protected virtual IPageController PageController => this as IPageController;
+        IPageController PageController => this as IPageController;
         //static readonly List<Page> _modals = new List<Page>();
         #endregion
 

@@ -41,7 +41,8 @@ namespace Forms9Patch.UWP
         /// <param name="onComplete">On complete.</param>
         public async void ToPng(string html, string fileName, Action<string> onComplete)
         {
-            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer) Platform.GetRenderer(Forms9Patch.RootPage._instance);
+            var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
+            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer) Platform.GetRenderer(currentPage);
 
             var size = new Size(8.5, 11);
             var webView = new Windows.UI.Xaml.Controls.WebView

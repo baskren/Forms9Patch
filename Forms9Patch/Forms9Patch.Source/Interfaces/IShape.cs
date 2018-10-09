@@ -50,12 +50,6 @@ namespace Forms9Patch
         ElementShape ElementShape { get; set; }
 
 
-        /// <summary>
-        /// What is the shadow and pointer padding?
-        /// </summary>
-        /// <returns></returns>
-        //Xamarin.Forms.Thickness ShadowPadding();
-
     }
 }
 

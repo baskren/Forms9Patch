@@ -13,6 +13,9 @@ namespace Forms9Patch
         #region Properties
 
         #region Xamarin.Forms.ContentView property override
+        /// <summary>
+        /// Backing store key for Content
+        /// </summary>
         public static readonly new BindableProperty ContentProperty = BindableProperty.Create("Forms9Patch.ContentView.Content", typeof(View), typeof(ContentView), null,
                                                                                             propertyChanging: (bindable, oldValue, newValue) =>
                                                                                             {
@@ -24,6 +27,9 @@ namespace Forms9Patch
                                                                                                     ((ContentView)bindable).BaseInternalChildren.Add(element);
                                                                                             });
 
+        /// <summary>
+        /// Content of Layout
+        /// </summary>
         public new View Content
         {
             get => (View)GetValue(Forms9Patch.ContentView.ContentProperty);
@@ -208,6 +214,9 @@ namespace Forms9Patch
         #endregion ElementShape property
 
         #region IElement properties
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         public int InstanceId => _f9pId;
         #endregion IElement properties
 
@@ -222,17 +231,29 @@ namespace Forms9Patch
 
         #region Private Fields and Properties
         static int _instances;
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         protected readonly int _f9pId;
 
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         internal protected readonly Image _fallbackBackgroundImage = new Image
         {
             HorizontalOptions = LayoutOptions.Fill,
             VerticalOptions = LayoutOptions.Fill,
         };
 
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         internal protected Image CurrentBackgroundImage => BackgroundImage ?? _fallbackBackgroundImage;
 
         ObservableCollection<Element> _baseInternalChildren;
+        /// <summary>
+        /// INTERNAL USE ONLY
+        /// </summary>
         internal protected ObservableCollection<Element> BaseInternalChildren
         {
             get
@@ -267,11 +288,19 @@ namespace Forms9Patch
         #region Methods
 
         #region Property Change Handlers
+        /// <summary>
+        /// Called when a property will change
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);
         }
 
+        /// <summary>
+        /// Called when a property has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -353,6 +382,12 @@ namespace Forms9Patch
         #region Layout overrides
 
 #pragma warning disable CS0672 // Member overrides obsolete member
+        /// <summary>
+        /// Called when Xamarin.Forms requests size of this element
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member
         {
@@ -380,6 +415,13 @@ namespace Forms9Patch
             return contentSizeRequest;
         }
 
+        /// <summary>
+        /// Layout out children of this element
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
