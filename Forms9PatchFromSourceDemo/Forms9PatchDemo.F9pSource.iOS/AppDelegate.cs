@@ -14,7 +14,6 @@ namespace Forms9PatchDemo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
             Forms9Patch.iOS.Settings.Initialize(this, "NZPK-RMP4-PJVV-Z7LP-78JF-GNXB-CDJZ-SRYA-BLR2-WBZC-G64K-QJZW-65DB");
 
             LoadApplication(new App());
