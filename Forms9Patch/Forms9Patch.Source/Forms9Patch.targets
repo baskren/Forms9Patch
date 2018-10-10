@@ -84,7 +84,6 @@
 -->
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\RootPage.cs" Link="Elements\RootPage.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ExtendedShapeAndImageView.cs" Link="Elements\ExtendedShapeAndImageView.cs" />
 
     <!-- Enums -->
@@ -201,6 +200,12 @@
     <Compile Include="..\Forms9Patch.Source\Models\Settings.cs" Link="Models\Settings.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\SpanFormattedString.cs" Link="Models\SpanFormattedString.cs" />
     <Compile Include="..\Forms9Patch.Source\Models\VersionString.cs" Link="Models\VersionString.cs" />
+
+
+    <!-- Pages -->
+    <Compile Include="..\Forms9Patch.Source\Elements\Pages\PopupPage.cs" Link="Elements\Pages\PopupPage.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\Pages\RootPage.cs" Link="Elements\Pages\RootPage.cs" />
+
 
     <!-- Services -->
     <Compile Include="..\Forms9Patch.Source\Services\ApplicationInfoService.cs" Link="Services\ApplicationInfoService.cs" />
