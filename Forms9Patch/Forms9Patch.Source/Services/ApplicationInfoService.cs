@@ -39,7 +39,7 @@ namespace Forms9Patch
         /// Gets the version string.
         /// </summary>
         /// <value>The version.</value>
-        public static string Version => Service?.Version; 
+        public static string Version => Service?.Version;
 
         /// <summary>
         /// Gets the application's build number.
@@ -59,19 +59,19 @@ namespace Forms9Patch
         /// Gets the bundle or package identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public static string Identifier => Service?.Identifier; 
+        public static string Identifier => Service?.Identifier;
 
         /// <summary>
         /// Gets the applications display name.
         /// </summary>
         /// <value>The name.</value>
-        public static string Name => Service?.Name; 
+        public static string Name => Service?.Name;
 
         /// <summary>
         /// Gets the fingerprint (valid on Android only).
         /// </summary>
         /// <value>The fingerprint.</value>
-        public static string Fingerprint => Service?.Fingerprint; 
+        public static string Fingerprint => Service?.Fingerprint;
 
         /// <summary>
         /// Gets the application's assembly.
@@ -83,15 +83,7 @@ namespace Forms9Patch
         /// Gets the currently displayed page.
         /// </summary>
         /// <value>The current page.</value>
-        public static Page CurrentPage
-        {
-            get
-            {
-                if (Application.Current.MainPage == null)
-                    return null;
-                return NavigationPage?.CurrentPage ?? Application.Current.MainPage;
-            }
-        }
+        public static Page CurrentPage => Application.Current.MainPage == null ? null : NavigationPage?.CurrentPage ?? Application.Current.MainPage;
 
         /// <summary>
         /// Gets the current state of network connectivity.
@@ -115,20 +107,13 @@ namespace Forms9Patch
         {
             get
             {
-                if (Application.Current.MainPage == null)
-                    return null;
-                NavigationPage navPage = Application.Current.MainPage as NavigationPage;
-                if (navPage == null)
-                {
-                    IPageController rootController = Application.Current.MainPage;
+                if (Application.Current.MainPage is NavigationPage navPage)
+                    return navPage;
+                if (Application.Current.MainPage is IPageController rootController)
                     foreach (var child in rootController.InternalChildren)
-                    {
-                        navPage = child as NavigationPage;
-                        if (navPage != null)
-                            break;
-                    }
-                }
-                return navPage;
+                        if (child is NavigationPage result)
+                            return result;
+                return null;
             }
         }
 
