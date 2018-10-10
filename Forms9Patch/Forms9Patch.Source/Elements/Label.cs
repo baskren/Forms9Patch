@@ -428,9 +428,10 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") enter");
-            // result is from Platform.GetNativeSize(Element, widthConstraint, heightConstraint)
+            if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
+                heightConstraint = Forms9Patch.Display.Height;
+            if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
+                widthConstraint = Forms9Patch.Display.Width;
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
 #if __IOS__
 			if (MinimizeHeight) {

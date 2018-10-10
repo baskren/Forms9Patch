@@ -221,6 +221,11 @@ namespace Forms9Patch
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member
         {
+            if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
+                heightConstraint = Forms9Patch.Display.Height;
+            if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
+                widthConstraint = Forms9Patch.Display.Width;
+
             var result = base.OnMeasure(widthConstraint, heightConstraint);
             var decorativePadding = DecorativePadding();
             result = new SizeRequest(new Size(result.Request.Width + decorativePadding.HorizontalThickness, result.Request.Height + decorativePadding.VerticalThickness), new Size(result.Minimum.Width + decorativePadding.HorizontalThickness, result.Minimum.Height + decorativePadding.VerticalThickness));

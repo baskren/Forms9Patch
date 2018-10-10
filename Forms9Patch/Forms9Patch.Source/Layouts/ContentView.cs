@@ -393,6 +393,12 @@ namespace Forms9Patch
         {
             if (Content == null)
                 return new SizeRequest(Size.Zero, Size.Zero);
+
+            if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
+                heightConstraint = Forms9Patch.Display.Height;
+            if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
+                widthConstraint = Forms9Patch.Display.Width;
+
             //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             var contentSizeRequest = Content.Measure(widthConstraint, heightConstraint, MeasureFlags.IncludeMargins);

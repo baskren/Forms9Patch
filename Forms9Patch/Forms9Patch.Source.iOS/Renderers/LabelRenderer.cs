@@ -150,12 +150,11 @@ namespace Forms9Patch.iOS
                     {
                         if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                         {
-                            if (tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize))
-                                Element.FittedFontSize = -1;
-                            else
-                                Element.FittedFontSize = tmpFontSize;
+#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
+                            Element.FittedFontSize = tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize) ? -1 : (double)tmpFontSize;
+#pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
+                            Debug("SETTING FITTED FONT SIZE: " + Element?.FittedFontSize);
                         }
-                        Debug("SETTING FITTED FONT SIZE: " + Element.FittedFontSize);
                         return false;
                     });
                 }

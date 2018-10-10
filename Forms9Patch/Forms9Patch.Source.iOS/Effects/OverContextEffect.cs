@@ -12,7 +12,7 @@ namespace Forms9Patch.iOS
     {
         protected override void OnAttached()
         {
-            if (Element is Forms9Patch.PopupBase popup && popup.IsVisible && Container != null &&  )
+            if (Element is Forms9Patch.PopupBase popup && popup.IsVisible && Container != null)
                 // we are not going to get a "IsVisible call and, in release builds, the render cycle is going to overwrite the above
                 DelayedBringToFront();
         }
