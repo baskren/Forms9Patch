@@ -55,11 +55,13 @@ namespace Forms9Patch.iOS
             if (widthConstraint < 0 || heightConstraint < 0)
                 return new SizeRequest(Size.Zero);
 
-            if (Control == null)
+            if (Control == null || Element == null)
                 return new SizeRequest(Size.Zero);
 
             if (string.IsNullOrEmpty((ControlText ?? ControlAttributedText?.ToString())))
                 return new SizeRequest(Size.Zero);
+
+            UpdateFont();
 
             //if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
             {

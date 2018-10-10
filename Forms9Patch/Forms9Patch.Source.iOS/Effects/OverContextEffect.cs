@@ -12,18 +12,22 @@ namespace Forms9Patch.iOS
     {
         protected override void OnAttached()
         {
-            if (Element is Forms9Patch.PopupBase popup && popup.IsVisible)
+            if (Element is Forms9Patch.PopupBase popup && popup.IsVisible && Container != null &&  )
                 // we are not going to get a "IsVisible call and, in release builds, the render cycle is going to overwrite the above
                 DelayedBringToFront();
         }
 
         async Task DelayedBringToFront()
         {
-            await Task.Delay(50);
+            while (Container == null || UIApplication.SharedApplication?.KeyWindow == null)
+            {
+                await Task.Delay(50);
+            }
             UIApplication.SharedApplication.KeyWindow.Add(Container);
             UIApplication.SharedApplication.KeyWindow.BringSubviewToFront(Container);
         }
 
+        /*
         void ShowResponderTree(UIResponder responder, int iter = 0, UIView subview = null)
         {
             if (responder == null)
@@ -40,6 +44,7 @@ namespace Forms9Patch.iOS
             Console.WriteLine(responder.ToString());
             ShowResponderTree(responder.NextResponder, iter + 1, subview);
         }
+        */
 
         protected override void OnDetached() { }
 
