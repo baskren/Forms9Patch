@@ -88,7 +88,7 @@
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">Layout</span>&lt;<span class="xref">View</span>&gt;</div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1">Xamarin.Forms.Layout</a>&lt;<span class="xref">Forms9Patch.View</span>&gt;</div>
     <div class="level1"><a class="xref" href="Forms9Patch.PopupBase.html">PopupBase</a></div>
     <div class="level2"><a class="xref" href="Forms9Patch.BubblePopup.html">BubblePopup</a></div>
     <div class="level3"><span class="xref">PermissionPopup</span></div>
@@ -263,9 +263,6 @@
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_ElementShape">PopupBase.ElementShape</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Forms9Patch_IShape_ExtendedElementShape">PopupBase.IShape.ExtendedElementShape</a>
-    </div>
-    <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_InstanceId">PopupBase.InstanceId</a>
     </div>
     <div>
@@ -284,6 +281,9 @@
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Cancel">PopupBase.Cancel()</a>
     </div>
     <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnParentSet">PopupBase.OnParentSet()</a>
+    </div>
+    <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnMeasure_System_Double_System_Double_">PopupBase.OnMeasure(Double, Double)</a>
     </div>
   </div>
@@ -298,7 +298,7 @@
   
   
   <a id="Forms9Patch_PermissionPopup__ctor_" data-uid="Forms9Patch.PermissionPopup.#ctor*"></a>
-  <h4 id="Forms9Patch_PermissionPopup__ctor_VisualElement_" data-uid="Forms9Patch.PermissionPopup.#ctor(VisualElement)">PermissionPopup(VisualElement)</h4>
+  <h4 id="Forms9Patch_PermissionPopup__ctor_Forms9Patch_VisualElement_" data-uid="Forms9Patch.PermissionPopup.#ctor(Forms9Patch.VisualElement)">PermissionPopup(VisualElement)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.PermissionPopup.html">PermissionPopup</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -317,7 +317,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">VisualElement</span></td>
+        <td><span class="xref">Forms9Patch.VisualElement</span></td>
         <td><span class="parametername">target</span></td>
         <td></td>
       </tr>
@@ -748,6 +748,99 @@
   
   
   <a id="Forms9Patch_PermissionPopup_Create_" data-uid="Forms9Patch.PermissionPopup.Create*"></a>
+  <h4 id="Forms9Patch_PermissionPopup_Create_Forms9Patch_VisualElement_System_String_System_String_System_String_System_String_Color_Color_Color_Color_" data-uid="Forms9Patch.PermissionPopup.Create(Forms9Patch.VisualElement,System.String,System.String,System.String,System.String,Color,Color,Color,Color)">Create(VisualElement, String, String, String, String, Color, Color, Color, Color)</h4>
+  <div class="markdown level1 summary"><p>Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PermissionPopup Create(VisualElement target, string title, string text, string okText = &quot;OK&quot;, string cancelText = &quot;Cancel&quot;, Color okButtonColor = null, Color cancelButtonColor = null, Color okTextColor = null, Color cancelTextColor = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Forms9Patch.VisualElement</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>Title.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>Text.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">okText</span></td>
+        <td><p>Ok text.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">cancelText</span></td>
+        <td><p>Cancel text.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td><span class="parametername">okButtonColor</span></td>
+        <td><p>Ok button color.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td><span class="parametername">cancelButtonColor</span></td>
+        <td><p>Cancel button color.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td><span class="parametername">okTextColor</span></td>
+        <td><p>Ok text color.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td><span class="parametername">cancelTextColor</span></td>
+        <td><p>Cancel text color.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.PermissionPopup.html">PermissionPopup</a></td>
+        <td><p>The create.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_PermissionPopup_Create_" data-uid="Forms9Patch.PermissionPopup.Create*"></a>
   <h4 id="Forms9Patch_PermissionPopup_Create_System_String_System_String_System_String_System_String_Color_Color_Color_Color_" data-uid="Forms9Patch.PermissionPopup.Create(System.String,System.String,System.String,System.String,Color,Color,Color,Color)">Create(String, String, String, String, Color, Color, Color, Color)</h4>
   <div class="markdown level1 summary"><p>Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.</p>
 </div>
@@ -828,99 +921,6 @@
       <tr>
         <td><a class="xref" href="Forms9Patch.PermissionPopup.html">PermissionPopup</a></td>
         <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_PermissionPopup_Create_" data-uid="Forms9Patch.PermissionPopup.Create*"></a>
-  <h4 id="Forms9Patch_PermissionPopup_Create_VisualElement_System_String_System_String_System_String_System_String_Color_Color_Color_Color_" data-uid="Forms9Patch.PermissionPopup.Create(VisualElement,System.String,System.String,System.String,System.String,Color,Color,Color,Color)">Create(VisualElement, String, String, String, String, Color, Color, Color, Color)</h4>
-  <div class="markdown level1 summary"><p>Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static PermissionPopup Create(VisualElement target, string title, string text, string okText = &quot;OK&quot;, string cancelText = &quot;Cancel&quot;, Color okButtonColor = null, Color cancelButtonColor = null, Color okTextColor = null, Color cancelTextColor = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">VisualElement</span></td>
-        <td><span class="parametername">target</span></td>
-        <td><p>Target.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">title</span></td>
-        <td><p>Title.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">text</span></td>
-        <td><p>Text.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">okText</span></td>
-        <td><p>Ok text.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">cancelText</span></td>
-        <td><p>Cancel text.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Color</span></td>
-        <td><span class="parametername">okButtonColor</span></td>
-        <td><p>Ok button color.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Color</span></td>
-        <td><span class="parametername">cancelButtonColor</span></td>
-        <td><p>Cancel button color.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Color</span></td>
-        <td><span class="parametername">okTextColor</span></td>
-        <td><p>Ok text color.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Color</span></td>
-        <td><span class="parametername">cancelTextColor</span></td>
-        <td><p>Cancel text color.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Forms9Patch.PermissionPopup.html">PermissionPopup</a></td>
-        <td><p>The create.</p>
-</td>
       </tr>
     </tbody>
   </table>

@@ -83,25 +83,26 @@
   
   <h1 id="Forms9Patch_Image" data-uid="Forms9Patch.Image" class="text-break">Class Image
   </h1>
-  <div class="markdown level0 summary"><p>Forms9Patch Image element.</p>
+  <div class="markdown level0 summary"><p>Forms9Patch.Image element</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">View</span></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/skiasharp.views.forms.skcanvasview">SkiaSharp.Views.Forms.SKCanvasView</a></div>
     <div class="level1"><span class="xref">Image</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
+    <div><span class="xref">IImageController</span></div>
+    <div><a class="xref" href="Forms9Patch.IExtendedShape.html">IExtendedShape</a></div>
     <div><a class="xref" href="Forms9Patch.IShape.html">IShape</a></div>
     <div><a class="xref" href="Forms9Patch.IElement.html">IElement</a></div>
-    <div><span class="xref">IImageController</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_Image_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Image : View, IImage, IShape, IElement, IImageController</code></pre>
+    <pre><code class="lang-csharp hljs">public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape, IShape, IElement</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -109,7 +110,7 @@
   
   <a id="Forms9Patch_Image__ctor_" data-uid="Forms9Patch.Image.#ctor*"></a>
   <h4 id="Forms9Patch_Image__ctor" data-uid="Forms9Patch.Image.#ctor">Image()</h4>
-  <div class="markdown level1 summary"><p>Instantiates a new instance of the <a class="xref" href="Forms9Patch.Image.html">Image</a> class.</p>
+  <div class="markdown level1 summary"><p>Constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -370,6 +371,56 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   </table>
   
   
+  <h4 id="Forms9Patch_Image_ExtendedElementSeparatorWidthProperty" data-uid="Forms9Patch.Image.ExtendedElementSeparatorWidthProperty">ExtendedElementSeparatorWidthProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store key for INTERNAL ExtendedElementSeparatorWidth property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ExtendedElementSeparatorWidthProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_ExtendedElementShapeOrientationProperty" data-uid="Forms9Patch.Image.ExtendedElementShapeOrientationProperty">ExtendedElementShapeOrientationProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the extended element shape orientation property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ExtendedElementShapeOrientationProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <h4 id="Forms9Patch_Image_ExtendedElementShapeProperty" data-uid="Forms9Patch.Image.ExtendedElementShapeProperty">ExtendedElementShapeProperty</h4>
   <div class="markdown level1 summary"><p>backing store for ExtendedElementShape property</p>
 </div>
@@ -527,6 +578,131 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly BindableProperty OutlineWidthProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_PointerAxialPositionProperty" data-uid="Forms9Patch.Image.PointerAxialPositionProperty">PointerAxialPositionProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer axial position property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerAxialPositionProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_PointerCornerRadiusProperty" data-uid="Forms9Patch.Image.PointerCornerRadiusProperty">PointerCornerRadiusProperty</h4>
+  <div class="markdown level1 summary"><p>The pointer corner radius property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerCornerRadiusProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_PointerDirectionProperty" data-uid="Forms9Patch.Image.PointerDirectionProperty">PointerDirectionProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer direction property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerDirectionProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_PointerLengthProperty" data-uid="Forms9Patch.Image.PointerLengthProperty">PointerLengthProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer length property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerLengthProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">BindableProperty</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_PointerTipRadiusProperty" data-uid="Forms9Patch.Image.PointerTipRadiusProperty">PointerTipRadiusProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for pointer tip radius property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PointerTipRadiusProperty</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -989,9 +1165,35 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   </table>
   
   
+  <a id="Forms9Patch_Image_SourceImageHeight_" data-uid="Forms9Patch.Image.SourceImageHeight*"></a>
+  <h4 id="Forms9Patch_Image_SourceImageHeight" data-uid="Forms9Patch.Image.SourceImageHeight">SourceImageHeight</h4>
+  <div class="markdown level1 summary"><p>Height of source Image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double SourceImageHeight { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Image_SourceImageSize_" data-uid="Forms9Patch.Image.SourceImageSize*"></a>
   <h4 id="Forms9Patch_Image_SourceImageSize" data-uid="Forms9Patch.Image.SourceImageSize">SourceImageSize</h4>
-  <div class="markdown level1 summary"><p>The size of the source image</p>
+  <div class="markdown level1 summary"><p>Size of source image</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1009,6 +1211,32 @@ When a button with end caps is resized, the resizing occurs only in the middle o
     <tbody>
       <tr>
         <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_SourceImageWidth_" data-uid="Forms9Patch.Image.SourceImageWidth*"></a>
+  <h4 id="Forms9Patch_Image_SourceImageWidth" data-uid="Forms9Patch.Image.SourceImageWidth">SourceImageWidth</h4>
+  <div class="markdown level1 summary"><p>Width of source image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double SourceImageWidth { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1102,9 +1330,85 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   </table>
   
   
+  <a id="Forms9Patch_Image_GetSizeRequest_" data-uid="Forms9Patch.Image.GetSizeRequest*"></a>
+  <h4 id="Forms9Patch_Image_GetSizeRequest_System_Double_System_Double_" data-uid="Forms9Patch.Image.GetSizeRequest(System.Double,System.Double)">GetSizeRequest(Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Internal use only</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">widthConstraint</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">heightConstraint</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SizeRequest</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_OnPaintSurface_" data-uid="Forms9Patch.Image.OnPaintSurface*"></a>
+  <h4 id="Forms9Patch_Image_OnPaintSurface_SKPaintSurfaceEventArgs_" data-uid="Forms9Patch.Image.OnPaintSurface(SKPaintSurfaceEventArgs)">OnPaintSurface(SKPaintSurfaceEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Internal use only</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SKPaintSurfaceEventArgs</span></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Image_OnPropertyChanged_" data-uid="Forms9Patch.Image.OnPropertyChanged*"></a>
   <h4 id="Forms9Patch_Image_OnPropertyChanged_System_String_" data-uid="Forms9Patch.Image.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
-  <div class="markdown level1 summary"><p>PropertyChanged event handler</p>
+  <div class="markdown level1 summary"><p>Called when a property has changed</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1128,18 +1432,131 @@ When a button with end caps is resized, the resizing occurs only in the middle o
       </tr>
     </tbody>
   </table>
+  <h3 id="operators">Operators
+  </h3>
+  
+  
+  <a id="Forms9Patch_Image_op_Implicit_" data-uid="Forms9Patch.Image.op_Implicit*"></a>
+  <h4 id="Forms9Patch_Image_op_Implicit_System_String__Forms9Patch_Image" data-uid="Forms9Patch.Image.op_Implicit(System.String)~Forms9Patch.Image">Implicit(String to Image)</h4>
+  <div class="markdown level1 summary"><p>Converts string (embedded resource id) into a Forms9Patch.Image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Image(string embeddedResourceId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">embeddedResourceId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.Image.html">Image</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_op_Implicit_" data-uid="Forms9Patch.Image.op_Implicit*"></a>
+  <h4 id="Forms9Patch_Image_op_Implicit_Xamarin_Forms_Image__Forms9Patch_Image" data-uid="Forms9Patch.Image.op_Implicit(Xamarin.Forms.Image)~Forms9Patch.Image">Implicit(Xamarin.Forms.Image to Image)</h4>
+  <div class="markdown level1 summary"><p>Converts Xamarin.Forms.Image to Forms9Patch.Image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Image(Xamarin.Forms.Image xamarinFormsImage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.image">Xamarin.Forms.Image</a></td>
+        <td><span class="parametername">xamarinFormsImage</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Forms9Patch.Image.html">Image</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="eii">Explicit Interface Implementations
   </h3>
   
   
-  <a id="Forms9Patch_Image_Forms9Patch_IShape_ExtendedElementShape_" data-uid="Forms9Patch.Image.Forms9Patch#IShape#ExtendedElementShape*"></a>
-  <h4 id="Forms9Patch_Image_Forms9Patch_IShape_ExtendedElementShape" data-uid="Forms9Patch.Image.Forms9Patch#IShape#ExtendedElementShape">IShape.ExtendedElementShape</h4>
+  <a id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementSeparatorWidth_" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementSeparatorWidth*"></a>
+  <h4 id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementSeparatorWidth" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementSeparatorWidth">IExtendedShape.ExtendedElementSeparatorWidth</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">float IExtendedShape.ExtendedElementSeparatorWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementShape_" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementShape*"></a>
+  <h4 id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementShape" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementShape">IExtendedShape.ExtendedElementShape</h4>
   <div class="markdown level1 summary"><p>Gets/Sets the ExtendedElementShape property</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ExtendedElementShape IShape.ExtendedElementShape { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">ExtendedElementShape IExtendedShape.ExtendedElementShape { get; set; }</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1156,15 +1573,45 @@ When a button with end caps is resized, the resizing occurs only in the middle o
       </tr>
     </tbody>
   </table>
+  
+  
+  <a id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementShapeOrientation_" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementShapeOrientation*"></a>
+  <h4 id="Forms9Patch_Image_Forms9Patch_IExtendedShape_ExtendedElementShapeOrientation" data-uid="Forms9Patch.Image.Forms9Patch#IExtendedShape#ExtendedElementShapeOrientation">IExtendedShape.ExtendedElementShapeOrientation</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the orientation of the shape if it's an extended element shape</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Xamarin.Forms.StackOrientation IExtendedShape.ExtendedElementShapeOrientation { get; set; }</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.stackorientation">Xamarin.Forms.StackOrientation</a></td>
+        <td><p>The forms9 patch. IS hape. extended element shape orientation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">IImageController</span>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.IExtendedShape.html">IExtendedShape</a>
+  </div>
   <div>
       <a class="xref" href="Forms9Patch.IShape.html">IShape</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.IElement.html">IElement</a>
-  </div>
-  <div>
-      <span class="xref">IImageController</span>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

@@ -83,19 +83,56 @@
   
   <h1 id="Forms9Patch_RootPage" data-uid="Forms9Patch.RootPage" class="text-break">Class RootPage
   </h1>
-  <div class="markdown level0 summary"><p>Page that supports popups</p>
+  <div class="markdown level0 summary"><p>Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">Page</span></div>
-    <div class="level1"><span class="xref">RootPage</span></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.page">Xamarin.Forms.Page</a></div>
+    <div class="level1"><a class="xref" href="Forms9Patch.PopupPage.html">PopupPage</a></div>
+    <div class="level2"><span class="xref">RootPage</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPopped">PopupPage.ModalPopped</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPopping">PopupPage.ModalPopping</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPushed">PopupPage.ModalPushed</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPushing">PopupPage.ModalPushing</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_NavigationPopped">PopupPage.NavigationPopped</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_NavigationPushed">PopupPage.NavigationPushed</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_StatusBarPaddingChanged">PopupPage.StatusBarPaddingChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_Page">PopupPage.Page</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_OnBackButtonPressed">PopupPage.OnBackButtonPressed()</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_IgnoreChildren">PopupPage.IgnoreChildren</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">PopupPage.LayoutChildren(Double, Double, Double, Double)</a>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_RootPage_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class RootPage : Page</code></pre>
+    <pre><code class="lang-csharp hljs">public class RootPage : PopupPage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -103,12 +140,12 @@
   
   <a id="Forms9Patch_RootPage__ctor_" data-uid="Forms9Patch.RootPage.#ctor*"></a>
   <h4 id="Forms9Patch_RootPage__ctor_Page_" data-uid="Forms9Patch.RootPage.#ctor(Page)">RootPage(Page)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Forms9Patch.RootPage.html">RootPage</a> class.</p>
+  <div class="markdown level1 summary"><p>Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RootPage(Page page = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public RootPage(Page page)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -123,91 +160,7 @@
       <tr>
         <td><span class="xref">Page</span></td>
         <td><span class="parametername">page</span></td>
-        <td><p>Page.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="Forms9Patch_RootPage_IgnoreChildren_" data-uid="Forms9Patch.RootPage.IgnoreChildren*"></a>
-  <h4 id="Forms9Patch_RootPage_IgnoreChildren" data-uid="Forms9Patch.RootPage.IgnoreChildren">IgnoreChildren</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.StackLayout.html">StackLayout</a> will not invalidate itself when a child changes.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool IgnoreChildren { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p><code>true</code> if ignore children; otherwise, <code>false</code>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_RootPage_Page_" data-uid="Forms9Patch.RootPage.Page*"></a>
-  <h4 id="Forms9Patch_RootPage_Page" data-uid="Forms9Patch.RootPage.Page">Page</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the apps content page.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Page Page { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Page</span></td>
-        <td><p>The page.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_RootPage_StatusBarPadding_" data-uid="Forms9Patch.RootPage.StatusBarPadding*"></a>
-  <h4 id="Forms9Patch_RootPage_StatusBarPadding" data-uid="Forms9Patch.RootPage.StatusBarPadding">StatusBarPadding</h4>
-  <div class="markdown level1 summary"><p>Returns the amount of padding you'll need to keep your views from overlapping the status bar.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double StatusBarPadding { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><p>The status bar padding.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -217,7 +170,7 @@
   
   <a id="Forms9Patch_RootPage_Create_" data-uid="Forms9Patch.RootPage.Create*"></a>
   <h4 id="Forms9Patch_RootPage_Create_Page_" data-uid="Forms9Patch.RootPage.Create(Page)">Create(Page)</h4>
-  <div class="markdown level1 summary"><p>Create the specified page.</p>
+  <div class="markdown level1 summary"><p>Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -237,8 +190,7 @@
       <tr>
         <td><span class="xref">Page</span></td>
         <td><span class="parametername">page</span></td>
-        <td><p>Page.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -253,258 +205,6 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Forms9Patch.RootPage.html">RootPage</a></td>
-        <td><p>The create.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_RootPage_LayoutChildren_" data-uid="Forms9Patch.RootPage.LayoutChildren*"></a>
-  <h4 id="Forms9Patch_RootPage_LayoutChildren_System_Double_System_Double_System_Double_System_Double_" data-uid="Forms9Patch.RootPage.LayoutChildren(System.Double,System.Double,System.Double,System.Double)">LayoutChildren(Double, Double, Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Layouts the children.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void LayoutChildren(double x, double y, double width, double height)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">x</span></td>
-        <td><p>The x coordinate.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">y</span></td>
-        <td><p>The y coordinate.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">width</span></td>
-        <td><p>Width.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">height</span></td>
-        <td><p>Height.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Forms9Patch_RootPage_OnBackButtonPressed_" data-uid="Forms9Patch.RootPage.OnBackButtonPressed*"></a>
-  <h4 id="Forms9Patch_RootPage_OnBackButtonPressed" data-uid="Forms9Patch.RootPage.OnBackButtonPressed">OnBackButtonPressed()</h4>
-  <div class="markdown level1 summary"><p>Ons the back button pressed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override bool OnBackButtonPressed()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p><code>true</code>, if back button pressed was oned, <code>false</code> otherwise.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="events">Events
-  </h3>
-  
-  
-  <h4 id="Forms9Patch_RootPage_ModalPopped" data-uid="Forms9Patch.RootPage.ModalPopped">ModalPopped</h4>
-  <div class="markdown level1 summary"><p>Occurs when modal popped.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; ModalPopped</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_ModalPopping" data-uid="Forms9Patch.RootPage.ModalPopping">ModalPopping</h4>
-  <div class="markdown level1 summary"><p>Occurs when modal popping.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; ModalPopping</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_ModalPushed" data-uid="Forms9Patch.RootPage.ModalPushed">ModalPushed</h4>
-  <div class="markdown level1 summary"><p>Occurs when modal pushed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; ModalPushed</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_ModalPushing" data-uid="Forms9Patch.RootPage.ModalPushing">ModalPushing</h4>
-  <div class="markdown level1 summary"><p>Occurs when modal pushing.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; ModalPushing</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_NavigationPopped" data-uid="Forms9Patch.RootPage.NavigationPopped">NavigationPopped</h4>
-  <div class="markdown level1 summary"><p>Occurs when navigation popped.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; NavigationPopped</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_NavigationPushed" data-uid="Forms9Patch.RootPage.NavigationPushed">NavigationPushed</h4>
-  <div class="markdown level1 summary"><p>Occurs when navigation pushed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler&lt;Page&gt; NavigationPushed</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">Page</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <h4 id="Forms9Patch_RootPage_StatusBarPaddingChanged" data-uid="Forms9Patch.RootPage.StatusBarPaddingChanged">StatusBarPaddingChanged</h4>
-  <div class="markdown level1 summary"><p>Occurs when status bar padding changed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static event EventHandler StatusBarPaddingChanged</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">EventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
