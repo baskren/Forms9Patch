@@ -167,7 +167,7 @@
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7}</Project>
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>

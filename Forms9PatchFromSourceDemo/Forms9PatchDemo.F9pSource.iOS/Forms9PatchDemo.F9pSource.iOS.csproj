@@ -232,7 +232,7 @@
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj">
-      <Project>{033330e2-8e6d-4c15-a9bf-820b9bcaf75a}</Project>
+      <Project>{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}</Project>
       <Name>Forms9PatchDemo.F9pSource</Name>
     </ProjectReference>
   </ItemGroup>
