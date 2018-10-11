@@ -149,7 +149,7 @@ namespace Forms9Patch
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
-            HorizontalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Start,
             BackgroundColor = DefaultBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
@@ -177,14 +177,18 @@ namespace Forms9Patch
             WidthRequest = 30,
             HeightRequest = 30,
         };
-        readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
-        StackLayout _stackLayout = new StackLayout
+
+        // this is crazy but the stack layout doesn't give the children the correct space if it isn't included.
+        readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = 0.05 };
+
+        Xamarin.Forms.StackLayout _stackLayout = new Xamarin.Forms.StackLayout
         {
             Orientation = StackOrientation.Horizontal,
             Spacing = 0,
             Padding = 0,
             Margin = 0,
             BackgroundColor = Color.Transparent,
+            HorizontalOptions = LayoutOptions.Center,
             //BackgroundColor = Color.White,
             //OutlineColor = DefaultBackgroundColor,
             //OutlineWidth = 1,
@@ -252,6 +256,10 @@ namespace Forms9Patch
 
             _leftArrowButton.Clicked += OnLeftArrowButtonClicked;
             _rightArrowButton.Clicked += OnRightArrowButtonClicked;
+
+
+            _leftArrowButton.AutomationId = "Forms9Patch.TargetedMenu.LeftButton";
+            _rightArrowButton.AutomationId = "Forms9Patch.TargetedMenu.RightButton";
         }
 
         /// <summary>
@@ -282,11 +290,7 @@ namespace Forms9Patch
                 foreach (VisualElement visualElement in _stackLayout.Children)
                 {
                     if (visualElement is Button button)
-                    {
                         button.BackgroundColor = BackgroundColor;
-                        //_stackLayout.OutlineColor = BackgroundColor;
-                        //_stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
-                    }
                 }
             }
             else if (propertyName == TextColorProperty.PropertyName)
@@ -363,59 +367,7 @@ namespace Forms9Patch
         #region Collection Management
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            /*
-            switch (e.Action)
-            {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    foreach (var item in e.NewItems)
-                        if (item is Segment segment)
-                        {
-                            ConfigureSegment(segment);
-                            _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = 1 });
-                            _stackLayout.Children.Add(segment._button);
-                        }
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-                    if (e.OldItems.Count < e.NewItems.Count)
-                        throw new System.Exception("e.OldItems.Count < e.NewItems.Count.  That's not expected.");
-                    if (e.OldStartingIndex + e.OldItems.Count >= _stackLayout.Children.Count)
-                        throw new System.Exception("(e.OldStartingIndex + e.OldItems.Count >= _buttons.Count.  That's not expected.");
 
-                    var tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    _stackLayout.Children.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
-                    _stackLayout.Children.InsertRange(e.NewStartingIndex, tmpButtons);
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    foreach (Button button in tmpButtons)
-                        UnconfiguerButton(button);
-                    _stackLayout.Children.RemoveRange(e.OldStartingIndex, e.OldItems.Count);
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-                    if (e.OldItems.Count < e.NewItems.Count)
-                        throw new System.Exception("e.OldItems.Count < e.NewItems.Count.  That's not expected.");
-                    if (e.OldStartingIndex + e.OldItems.Count >= _stackLayout.Children.Count)
-                        throw new System.Exception("(e.OldStartingIndex + e.OldItems.Count >= _buttons.Count.  That's not expected.");
-                    tmpButtons = _stackLayout.Children.GetRange(e.OldStartingIndex, e.OldItems.Count);
-                    foreach (Button button in tmpButtons)
-                        UnconfiguerButton(button);
-                    tmpButtons.Clear();
-                    foreach (var item in e.NewItems)
-                        if (item is Segment segment)
-                        {
-                            ConfigureSegment(segment);
-                            tmpButtons.Add(segment._button);
-                        };
-                    if (tmpButtons != null && tmpButtons.Count > 0)
-                        _stackLayout.Children.InsertRange(e.NewStartingIndex, tmpButtons);
-                    break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-                    foreach (Button button in _stackLayout.Children)
-                        UnconfiguerButton(button);
-                    _stackLayout.Children.Clear();
-                    break;
-        }
-                    */
             if (e.OldItems != null)
                 foreach (var item in e.OldItems)
                     if (item is Segment segment)
@@ -429,16 +381,14 @@ namespace Forms9Patch
             _stackLayout.Children.Clear();
 
             _stackLayout.Children.Add(_leftArrowButton);
-            //_leftArrowButton.IsVisible = true;
             _stackLayout.Children.Add(_leftArrowSeparator);
 
             bool first = true;
             foreach (var segment in Segments)
             {
                 if (!first)
-                    _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = 1 });
+                    _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = DefaultSeparatorWidth });
                 _stackLayout.Children.Add(segment._button);
-                //segment._button.IsVisible = true;
                 first = false;
             }
 
@@ -467,6 +417,8 @@ namespace Forms9Patch
             if (Width < 0)
                 return;
 
+            bool rightArrowShouldBeVisible = true;
+
             var leftWidth = _leftArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
             var rightWidth = _rightArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
 
@@ -475,8 +427,6 @@ namespace Forms9Patch
 
             _leftArrowButton.IsVisible = _currentPage > 0;
             _leftArrowSeparator.IsVisible = _currentPage > 0;
-            _rightArrowButton.IsVisible = true;
-            _rightArrowSeparator.IsVisible = true;
 
             int segmentIndex = 0;
             var pageIndex = 0;
@@ -496,14 +446,12 @@ namespace Forms9Patch
                 button.IsVisible = pageIndex == _currentPage;
                 separator.IsVisible = pageIndex == _currentPage;
 
-                if (pageIndex == _currentPage && segmentIndex == Segments.Count - 1)
-                {
-                    _rightArrowButton.IsVisible = false;
-                    _rightArrowSeparator.IsVisible = false;
-                }
+                rightArrowShouldBeVisible &= (pageIndex != _currentPage || segmentIndex != Segments.Count - 1);
                 segmentIndex++;
             }
 
+            _rightArrowSeparator.IsVisible = rightArrowShouldBeVisible;
+            _rightArrowButton.IsVisible = rightArrowShouldBeVisible;
         }
         #endregion
 
