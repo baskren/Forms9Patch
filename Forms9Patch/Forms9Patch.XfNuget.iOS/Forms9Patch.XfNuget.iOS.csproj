@@ -76,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs">
+      <Link>PopupBaseRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
+      <Link>HardwareKeyPageRenderer.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
   <ItemGroup>
