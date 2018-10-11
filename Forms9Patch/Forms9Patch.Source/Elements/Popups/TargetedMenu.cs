@@ -143,9 +143,9 @@ namespace Forms9Patch
             TextColor = DefaultTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_before_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_before_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 16 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -154,8 +154,8 @@ namespace Forms9Patch
             Lines = 1,
             AutoFit = AutoFit.None,
             IsVisible = true,
-            WidthRequest = 30,
-            HeightRequest = 30,
+            //WidthRequest = 30,
+            //HeightRequest = 30,
         };
         readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultSeparatorColor, WidthRequest = DefaultSeparatorWidth };
         readonly Button _rightArrowButton = new Button
@@ -163,9 +163,9 @@ namespace Forms9Patch
             TextColor = DefaultTextColor,
             FontSize = 24,
             TintIcon = true,
-            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_next_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
+            IconImage = new Forms9Patch.Image("Forms9Patch.Resources.ic_navigate_next_white_24px.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 16 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(4, 0),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -174,8 +174,8 @@ namespace Forms9Patch
             Lines = 1,
             AutoFit = AutoFit.None,
             IsVisible = true,
-            WidthRequest = 30,
-            HeightRequest = 30,
+            //WidthRequest = 30,
+            //HeightRequest = 30,
         };
 
         // this is crazy but the stack layout doesn't give the children the correct space if it isn't included.
@@ -247,7 +247,7 @@ namespace Forms9Patch
             BackgroundColor = DefaultBackgroundColor;
             HasShadow = false;
             Padding = 0;
-            //Margin = 10;
+            //Margin = 0;
             OutlineRadius = 5;
             PageOverlayColor = Color.Black.WithAlpha(0.1);
             _segments.CollectionChanged += OnSegmentsCollectionChanged;
@@ -260,6 +260,9 @@ namespace Forms9Patch
 
             _leftArrowButton.AutomationId = "Forms9Patch.TargetedMenu.LeftButton";
             _rightArrowButton.AutomationId = "Forms9Patch.TargetedMenu.RightButton";
+
+            if (Device.RuntimePlatform != Device.UWP)
+                _stackLayout.HeightRequest = 28;
         }
 
         /// <summary>
@@ -347,6 +350,8 @@ namespace Forms9Patch
             segment._button.VerticalOptions = LayoutOptions.Center;
             segment._button.HorizontalOptions = LayoutOptions.Center;
             segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
+            if (Device.RuntimePlatform != Device.UWP)
+                segment._button.FontSize = 12;
             //segment.
             segment._button.Lines = 1;
             segment._button.AutoFit = AutoFit.None;
@@ -435,7 +440,7 @@ namespace Forms9Patch
                 var button = _stackLayout.Children[i] as Forms9Patch.Button;
                 var separator = _stackLayout.Children[i + 1] as BoxView;
 
-                pageWidth += button.UnexpandedTightSize.Width + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
+                pageWidth += button.UnexpandedTightSize.Width + 10 + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
 
                 if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness) * 0.75)
                 {
