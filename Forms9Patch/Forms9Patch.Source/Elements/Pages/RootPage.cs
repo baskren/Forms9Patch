@@ -15,7 +15,7 @@ namespace Forms9Patch
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
-    public class RootPage : PopupPage
+    public class RootPage : Page
     {
         #region Constructor
         /// <summary>
@@ -24,7 +24,8 @@ namespace Forms9Patch
         /// <param name="page"></param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
-        public RootPage(Page page) : base(page) { }
+        //public RootPage(Page page) : base(page) { }
+        private RootPage() { }
 
         /// <summary>
         /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
@@ -33,11 +34,11 @@ namespace Forms9Patch
         /// <returns></returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
-        public static new RootPage Create(Page page)
+        public static Page Create(Page page)
         {
             //_instance = _instance ?? new RootPage(page);
-            var _instance = new RootPage(page);
-            return _instance;
+            //var _instance = new RootPage(page);
+            return page;
         }
         #endregion
 

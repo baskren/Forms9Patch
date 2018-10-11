@@ -167,7 +167,7 @@
       <Name>FormsGestures.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-      <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
+      <Project>{FC40FB46-CA35-4D9C-A4B1-30657A697F1A}</Project>
       <Name>Forms9Patch.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android %28Forwarders%29.csproj">
@@ -175,7 +175,7 @@
       <Name>Xamarin.Forms.Platform.Android (Forwarders)</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{FD75461E-14E4-4F12-BA6B-2AEDA6F99DB7}</Project>
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>

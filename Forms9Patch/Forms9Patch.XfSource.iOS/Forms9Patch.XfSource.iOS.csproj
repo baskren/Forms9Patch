@@ -87,11 +87,11 @@
             <Name>P42.Utils.iOS</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-            <Project>{BD34E7CC-575F-4989-A7AA-D77EF5081017}</Project>
+            <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
             <Name>P42.Utils</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-            <Project>{BF96886F-5689-4E4B-8610-2FF9DA92C4E7}</Project>
+            <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
             <Name>P42.NumericalMethods</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj">
@@ -103,7 +103,7 @@
             <Name>FormsGestures.XfSource</Name>
         </ProjectReference>
         <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-            <Project>{BC3F43DE-5EB6-4B08-BB0C-F813D809EAC0}</Project>
+            <Project>{FC40FB46-CA35-4D9C-A4B1-30657A697F1A}</Project>
             <Name>Forms9Patch.XfSource</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.iOS\Xamarin.Forms.Platform.iOS %28Forwarders%29.csproj">

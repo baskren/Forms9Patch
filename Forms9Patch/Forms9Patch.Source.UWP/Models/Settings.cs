@@ -31,6 +31,7 @@ namespace Forms9Patch.UWP
 
             Application = app;
             FormsGestures.UWP.Settings.Init(app);
+            Rg.Plugins.Popup.Popup.Init();
 
             //var forms9PatchResources = GetResources();
             //Windows.UI.Xaml.Application.Current.Resources.MergedDictionaries.Add(forms9PatchResources);
@@ -46,6 +47,7 @@ namespace Forms9Patch.UWP
                 return;
             _initizalized = true;
             FormsGestures.UWP.Settings.Init(Windows.UI.Xaml.Application.Current);
+            Rg.Plugins.Popup.Popup.Init();
         }
 
 

@@ -203,9 +203,10 @@
 
 
     <!-- Pages -->
+    <!--
     <Compile Include="..\Forms9Patch.Source\Elements\Pages\PopupPage.cs" Link="Elements\Pages\PopupPage.cs" />
+    -->
     <Compile Include="..\Forms9Patch.Source\Elements\Pages\RootPage.cs" Link="Elements\Pages\RootPage.cs" />
-
 
     <!-- Services -->
     <Compile Include="..\Forms9Patch.Source\Services\ApplicationInfoService.cs" Link="Services\ApplicationInfoService.cs" />

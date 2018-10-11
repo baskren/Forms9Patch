@@ -64,6 +64,12 @@
         <Reference Include="Xamarin.Forms.Xaml">
             <HintPath>..\..\..\packages\Xamarin.Forms.3.1.0.697729\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
         </Reference>
+        <Reference Include="Rg.Plugins.Popup">
+          <HintPath>..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.dll</HintPath>
+        </Reference>
+        <Reference Include="Rg.Plugins.Popup.IOS">
+          <HintPath>..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Resources\" />
@@ -81,11 +87,11 @@
             <Name>P42.Utils.iOS</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-            <Project>{97EAC70A-C936-4F30-9DE9-8AF69740EFF9}</Project>
+            <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
             <Name>P42.Utils</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-            <Project>{F055322D-0E2A-411C-B411-26FB8C883559}</Project>
+            <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
             <Name>P42.NumericalMethods</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.iOS\FormsGestures.XfNuget.iOS.csproj">
@@ -93,11 +99,11 @@
             <Name>FormsGestures.XfNuget.iOS</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-            <Project>{705BF256-854E-493E-8DE4-959708705AC6}</Project>
+            <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
             <Name>FormsGestures.XfNuget</Name>
         </ProjectReference>
         <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-            <Project>{686CA4C1-E77D-45CB-98F4-2B0D1A4BA0FD}</Project>
+            <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
             <Name>Forms9Patch.XfNuget</Name>
         </ProjectReference>
     </ItemGroup>

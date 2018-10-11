@@ -15,7 +15,7 @@ namespace Forms9Patch
         /// Gets or sets the content of the FormsPopup.Modal.
         /// </summary>
         /// <value>The content.</value>
-        public View Content
+        public new View Content
         {
             get => _frame.Content;
             set => _frame.Content = value;
@@ -77,7 +77,6 @@ namespace Forms9Patch
                 BackgroundColor = BackgroundColor
             };
             DecorativeContainerView = _frame;
-
         }
 
         /// <summary>
@@ -161,7 +160,7 @@ namespace Forms9Patch
                 return;
 
             // layout the page overlay
-            base.LayoutChildren(x, y, width, height);
+            //base.LayoutChildren(x, y, width, height);
 
             height -= KeyboardService.Height;
 
@@ -197,7 +196,7 @@ namespace Forms9Patch
                 var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
                 //System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
 
-                LayoutChildIntoBoundingRegion(_frame, bounds);
+                Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_frame, bounds);
             }
         }
         #endregion

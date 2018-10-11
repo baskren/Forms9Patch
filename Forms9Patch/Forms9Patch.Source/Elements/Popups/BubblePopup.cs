@@ -17,7 +17,7 @@ namespace Forms9Patch
         /// Gets or sets the content of the FormsPopup.Modal.
         /// </summary>
         /// <value>The content.</value>
-        public View Content
+        public new View Content
         {
             get => _bubbleLayout.Content;
             set => _bubbleLayout.Content = value;
@@ -284,7 +284,7 @@ namespace Forms9Patch
         void OnScrollWrappingTargetScrolled(object sender, ScrolledEventArgs e)
         {
             if (IsVisible)
-                LayoutChildren(PopupPage.X, PopupPage.Y, PopupPage.Bounds.Size.Width, PopupPage.Bounds.Height - KeyboardService.Height);
+                LayoutChildren(X, Y, Width, Height - KeyboardService.Height);
         }
 
         #endregion
@@ -321,7 +321,7 @@ namespace Forms9Patch
                 return;
 
             // layout the page overlay
-            base.LayoutChildren(x, y, width, height);
+            //base.LayoutChildren(x, y, width, height);
 
             height -= KeyboardService.Height;
             var bounds = new Rectangle(x, y, width, height);
@@ -355,7 +355,8 @@ namespace Forms9Patch
                 PointerDirection pointerDir = PointerDirection.None;
 
 
-                var targetPage = PopupPage as Page; // Application.Current.MainPage;
+                //var targetPage = PopupPage as Page; // Application.Current.MainPage;
+                var targetPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
                 /*
                 var hostingPage = this.HostingPage();
                 foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
@@ -378,22 +379,9 @@ namespace Forms9Patch
 
                     //System.Diagnostics.Debug.WriteLine("\t\t Target.Bounds=[" + Target.Bounds + "]");
                     //System.Diagnostics.Debug.WriteLine("\t\t targetPage.Bounds=[" + targetPage.Bounds + "]");
-                    if (Target is PopupBase popup)
-                    {
-                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView);
-                        //targetBounds = popup.ContentView.BoundsToEleCoord(targetPage);
-                        //System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
-                        //targetBounds = targetPage.GetRelativeBounds(popup.DecorativeContainerView);
-                        //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
-                    }
-                    else
-                    {
-                        targetBounds = DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
-                        //targetBounds = Target.BoundsToEleCoord(targetPage);
-                        //System.Diagnostics.Debug.WriteLine("\t\t targetBounds=[" + targetBounds + "]");
-                        //targetBounds = targetPage.GetRelativeBounds(Target);
-                        //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
-                    }
+                    targetBounds = Target is PopupBase popup
+                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
+                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
 
 
@@ -487,7 +475,7 @@ namespace Forms9Patch
                     var contentX = width / 2.0 - rboxSize.Width / 2.0;
                     var contentY = height / 2.0 - rboxSize.Height / 2.0;
                     bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
-                    LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
+                    Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
                 }
                 else
                 {
@@ -543,7 +531,7 @@ namespace Forms9Patch
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
                     //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
-                    LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
+                    Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     System.Diagnostics.Debug.WriteLine("");
                 }
             }

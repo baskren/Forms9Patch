@@ -34,6 +34,7 @@ namespace Forms9Patch.iOS
             if (licenseKey != null)
                 System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
             FormsGestures.iOS.Settings.Init();
+            Rg.Plugins.Popup.Popup.Init();
         }
 
         static bool _initizalized;
@@ -43,6 +44,7 @@ namespace Forms9Patch.iOS
                 return;
             _initizalized = true;
             FormsGestures.iOS.Settings.Init();
+            Rg.Plugins.Popup.Popup.Init();
         }
         #endregion
 

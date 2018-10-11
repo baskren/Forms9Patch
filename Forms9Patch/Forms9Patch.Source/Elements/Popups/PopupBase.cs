@@ -4,6 +4,8 @@ using FormsGestures;
 using System.Collections.Generic;
 using Forms9Patch;
 using System.ComponentModel;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Extensions;
 
 namespace Forms9Patch
 {
@@ -13,9 +15,10 @@ namespace Forms9Patch
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty("ContentView")]
-    public abstract class PopupBase : Xamarin.Forms.Layout<View>, IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
+    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage,  /* Xamarin.Forms.Layout<View>,*/ IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
     {
+        /*
         #region Invalid Parent Properties
         /// <summary>
         /// Invalid Property, do not use
@@ -31,6 +34,7 @@ namespace Forms9Patch
             }
         }
         #endregion
+        */
 
 
         #region IPopup
@@ -71,12 +75,12 @@ namespace Forms9Patch
         /// <summary>
         /// The margin property.
         /// </summary>
-        public static readonly new BindableProperty MarginProperty = BindableProperty.Create("Forms9Patch.PopupBase.Margin", typeof(Thickness), typeof(PopupBase), new Thickness(30));
+        public static readonly BindableProperty MarginProperty = BindableProperty.Create("Forms9Patch.PopupBase.Margin", typeof(Thickness), typeof(PopupBase), new Thickness(30));
         /// <summary>
         /// Gets or sets the margin.
         /// </summary>
         /// <value>The margin.</value>
-        public new Thickness Margin
+        public Thickness Margin
         {
             get => (Thickness)GetValue(MarginProperty);
             set => SetValue(MarginProperty, value);
@@ -87,12 +91,12 @@ namespace Forms9Patch
         /// <summary>
         /// The horizontal options property backing store.
         /// </summary>
-        public static readonly new BindableProperty HorizontalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.HorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+        public static readonly BindableProperty HorizontalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.HorizontalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
         /// <summary>
         /// Gets or sets the horizontal options.
         /// </summary>
         /// <value>The horizontal options.</value>
-        public new LayoutOptions HorizontalOptions
+        public LayoutOptions HorizontalOptions
         {
             get => (LayoutOptions)GetValue(HorizontalOptionsProperty);
             set => SetValue(HorizontalOptionsProperty, value);
@@ -104,12 +108,12 @@ namespace Forms9Patch
         /// <summary>
         /// The vertical options property.
         /// </summary>
-        public static readonly new BindableProperty VerticalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.VerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
+        public static readonly BindableProperty VerticalOptionsProperty = BindableProperty.Create("Forms9Patch.PopupBase.VerticalOptions", typeof(LayoutOptions), typeof(PopupBase), default(LayoutOptions));
         /// <summary>
         /// Gets or sets the vertical options.
         /// </summary>
         /// <value>The vertical options.</value>
-        public new LayoutOptions VerticalOptions
+        public LayoutOptions VerticalOptions
         {
             get => (LayoutOptions)GetValue(VerticalOptionsProperty);
             set => SetValue(VerticalOptionsProperty, value);
@@ -187,12 +191,12 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundImage bindable property.
         /// </summary>
-        public static BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
+        public static new BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
         /// <summary>
         /// Gets or sets the background image.
         /// </summary>
         /// <value>The background image.</value>
-        public Image BackgroundImage
+        public new Image BackgroundImage
         {
             get => (Forms9Patch.Image)GetValue(BackgroundImageProperty);
             set => SetValue(BackgroundImageProperty, value);
@@ -217,16 +221,6 @@ namespace Forms9Patch
         #endregion BackgroundColor property
 
         #region HasShadow property
-#if _Forms9Patch_Frame_
-        /// <summary>
-        /// override Xamarin.Forms.Frame.HasShadow property backing store in order to correctly compute & store shadow padding
-        /// </summary>
-        public static new BindableProperty HasShadowProperty = ShapeBase.HasShadowProperty;
-        /// <summary>
-        /// Gets/Sets the HasShadow property
-        /// </summary>
-        public new bool HasShadow
-#else
         /// <summary>
         /// HasShadow property backing store
         /// </summary>
@@ -235,7 +229,6 @@ namespace Forms9Patch
         /// Gets/Sets the HasShadow property
         /// </summary>
         public bool HasShadow
-#endif
         {
             get => (bool)GetValue(HasShadowProperty);
             set => SetValue(HasShadowProperty, value);
@@ -261,9 +254,6 @@ namespace Forms9Patch
 
         #region OutlineColor property
 
-#if _Forms9Patch_Frame_
-        // OutlineColor inherited from Xamarin.Forms.AbsoluteLayout
-#else
         /// <summary>
         /// backing store for OutlineColor property
         /// </summary>
@@ -276,7 +266,6 @@ namespace Forms9Patch
             get => (Color)GetValue(OutlineColorProperty);
             set => SetValue(OutlineColorProperty, value);
         }
-#endif
 
         #endregion OutlineColor property
 
@@ -365,6 +354,7 @@ namespace Forms9Patch
 
         #region Internal Properties
 
+        /*
         internal Listener Listener => _listener;
 
         //internal RootPage RootPage => Application.Current?.MainPage as RootPage;
@@ -385,6 +375,7 @@ namespace Forms9Patch
         }
 
         internal BoxView PageOverlay => _pageOverlay;
+        */
 
         #region ContentView property
         /// <summary>
@@ -400,10 +391,7 @@ namespace Forms9Patch
                 _decorativeContainerView = (ILayout)value;
                 if (_decorativeContainerView is VisualElement newLayout)
                     newLayout.PropertyChanged += OnContentViewPropertyChanged;
-                if (base.Children.Count < 2)
-                    base.Children.Add((View)_decorativeContainerView);
-                else
-                    base.Children[1] = (View)_decorativeContainerView;
+                base.Content = _decorativeContainerView as View;
                 _decorativeContainerView.IgnoreChildren = false;
 
             }
@@ -423,11 +411,11 @@ namespace Forms9Patch
 
         #region Fields
         internal ILayout _decorativeContainerView;
-        internal BoxView _pageOverlay;
-        readonly Listener _listener;
+        //internal BoxView _pageOverlay;
+        //readonly Listener _listener;
         internal DateTime PresentedAt;
         static int _instances;
-        int _id;
+        readonly int _id;
         #endregion
 
 
@@ -453,6 +441,7 @@ namespace Forms9Patch
             _id = _instances++;
             Retain = retain;
             IsVisible = false;
+            /*
             _pageOverlay = new BoxView
             {
                 BackgroundColor = PageOverlayColor,
@@ -461,8 +450,9 @@ namespace Forms9Patch
             _listener.Tapped += OnTapped;
             _listener.Panning += OnPanning;
             //HostPage = host ?? Application.Current.MainPage;
+            */
             Target = target;
-            base.Children.Add(_pageOverlay);
+            //base.Children.Add(_pageOverlay);
 
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
 
@@ -470,7 +460,7 @@ namespace Forms9Patch
         }
         #endregion
 
-
+        /*
         #region Gesture event responders
 
         void OnTapped(object sender, TapEventArgs e)
@@ -486,6 +476,19 @@ namespace Forms9Patch
         }
 
         #endregion
+        */
+
+        protected override bool OnBackButtonPressed()
+        {
+            Cancel();
+            return base.OnBackButtonPressed();
+        }
+
+        protected override bool OnBackgroundClicked()
+        {
+            Cancel();
+            return base.OnBackgroundClicked();
+        }
 
 
         #region IDisposable Support
@@ -501,11 +504,15 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
-                    _listener.Tapped -= OnTapped;
+                    /*
+                    if (IsVisible)
+
+                        _listener.Tapped -= OnTapped;
                     _listener.Panning -= OnPanning;
                     _listener.Dispose();
+                    */
                     Retain = false;
-                    PopupPage?.RemovePopup(this);
+                    //PopupPage?.RemovePopup(this);
                     disposedValue = true;
                 }
             }
@@ -573,19 +580,10 @@ namespace Forms9Patch
 
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (PopupPage != null && IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
+            if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
             {
-                LayoutChildren(PopupPage.X, PopupPage.Y, PopupPage.Bounds.Size.Width, PopupPage.Bounds.Height);// - KeyboardService.Height);
+                LayoutChildren(X, Y, Width, Height);
             }
-        }
-
-        /// <summary>
-        /// Internal Use Only
-        /// </summary>
-        protected override void OnParentSet()
-        {
-            base.OnParentSet();
-            OnPropertyChanged(IsVisibleProperty.PropertyName);
         }
 
         /// <param name="propertyName">The name of the property that changed.</param>
@@ -596,13 +594,11 @@ namespace Forms9Patch
         {
             base.OnPropertyChanged(propertyName);
 
-
-
             if (propertyName == PageOverlayColorProperty.PropertyName)
-                _pageOverlay.BackgroundColor = PageOverlayColor;
+                base.BackgroundColor = PageOverlayColor;
             else if (propertyName == IsVisibleProperty.PropertyName)
             {
-                if (IsVisible && PopupPage != null)
+                if (IsVisible)// && PopupPage != null)
                 {
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
@@ -613,13 +609,15 @@ namespace Forms9Patch
                     }
                     //if (RootPage == null)
                     //    throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
-                    PopupPage?.AddPopup(this);
+                    //PopupPage?.AddPopup(this);
+                    Navigation.PushPopupAsync(this);
                     base.IsVisible = true;
                 }
                 else
                 {
                     base.IsVisible = false;
-                    PopupPage?.RemovePopup(this);
+                    //PopupPage?.RemovePopup(this);
+                    Navigation.RemovePopupPageAsync(this);
                 }
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
@@ -663,6 +661,7 @@ namespace Forms9Patch
 
 
         #region Layout
+        /*
         //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
 
         /// <summary>
@@ -697,25 +696,14 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
 
             var targetPage = PopupPage as Page;// Application.Current.MainPage;
-            /*
-            var hostingPage = this.HostingPage();
-            foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
-            {
-                if (page == hostingPage)
-                {
-                    targetPage = hostingPage;
-                    break;
-                }
-            }
-            */
-
-
 
             if (width > 0 && height > 0)
                 LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(-targetPage.Padding.Left, -targetPage.Padding.Top, targetPage.Width, targetPage.Height));
             else
                 DecorativeContainerView.IsVisible = false;
         }
+                */
+
         #endregion
     }
 }
