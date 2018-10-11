@@ -459,6 +459,9 @@ namespace Forms9Patch
 
         F9PImageData _f9pImageData;
         RangeLists _sourceRangeLists;
+        DateTime _lastPaint = DateTime.MaxValue;
+        bool _repainting;
+
 
         bool DrawImage => (Opacity > 0 && _f9pImageData != null && _f9pImageData.ValidImage);
 
@@ -482,26 +485,19 @@ namespace Forms9Patch
         public Image()
         {
             _f9pId = _instances++;
-            SizeChanged += OnSizeChanged;
-
             if (Device.RuntimePlatform == Device.UWP)
             {
                 Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
                 {
-                    if ((DateTime.Now - _lastSizeChanged) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(100))
+                    if ((DateTime.Now - _lastPaint) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(100))
                     {
-                        _lastSizeChanged = DateTime.MaxValue;
+                        _repainting = true;
+                        _lastPaint = DateTime.MaxValue;
                         InvalidateSurface();
                     }
                     return true;
                 });
             }
-        }
-
-        DateTime _lastSizeChanged = DateTime.MaxValue;
-        private void OnSizeChanged(object sender, EventArgs e)
-        {
-            _lastSizeChanged = DateTime.Now;
         }
 
         /// <summary>
@@ -970,6 +966,9 @@ namespace Forms9Patch
                 //StoreLayoutProperties();
             }
 
+            if (!_repainting)
+                _lastPaint = DateTime.Now;
+            _repainting = false;
         }
         #endregion
 

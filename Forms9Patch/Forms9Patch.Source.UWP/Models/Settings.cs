@@ -101,6 +101,12 @@ namespace Forms9Patch.UWP
                     try { _forms9PatchAssemblies.Add(typeof(SharpDX.Direct2D1.Factory).GetTypeInfo().Assembly); }
                     catch (Exception) { throw new Exception("Cannot load SharpDX.Direct2D1 assembly"); }
 
+                    var rgPluginsAsms = Rg.Plugins.Popup.Popup.GetExtraAssemblies();
+                    foreach (var asm in rgPluginsAsms)
+                    {
+                        try { _forms9PatchAssemblies.Add(asm); }
+                        catch (Exception) { throw new Exception("Cannot load assembly ["+asm.FullName+"]"); }
+                    }
                 }
                 return _forms9PatchAssemblies;
             }

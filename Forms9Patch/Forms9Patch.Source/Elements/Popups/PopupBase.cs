@@ -610,14 +610,20 @@ namespace Forms9Patch
                     //if (RootPage == null)
                     //    throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
                     //PopupPage?.AddPopup(this);
-                    Navigation.PushPopupAsync(this);
+                    if (P42.Utils.Environment.IsOnMainThread)
+                        Navigation.PushPopupAsync(this);
+                    else
+                        Device.BeginInvokeOnMainThread(() => Navigation.PushPopupAsync(this));
                     base.IsVisible = true;
                 }
                 else
                 {
                     base.IsVisible = false;
                     //PopupPage?.RemovePopup(this);
-                    Navigation.RemovePopupPageAsync(this);
+                    if (P42.Utils.Environment.IsOnMainThread)
+                        Navigation.RemovePopupPageAsync(this);
+                    else
+                        Device.BeginInvokeOnMainThread(() => Navigation.RemovePopupPageAsync(this));
                 }
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
