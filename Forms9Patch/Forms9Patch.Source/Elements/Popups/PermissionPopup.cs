@@ -71,12 +71,12 @@ namespace Forms9Patch
         /// <summary>
         /// The title property backing store.
         /// </summary>
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(PermissionPopup), default(string));
+        public static readonly new BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(PermissionPopup), default(string));
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public string Title
+        public new string Title
         {
             get => (string)GetValue(TitleProperty);
             set => SetValue(TitleProperty, value);

@@ -11,29 +11,29 @@ using System.ComponentModel;
 namespace Forms9Patch
 {
     /// <summary>
-    /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
+    /// Forms9Patch.RootPage is no longer needed for display of Popups!
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+    [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
     public class RootPage : Page
     {
         #region Constructor
         /// <summary>
-        /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
+        /// Forms9Patch.RootPage is no longer needed for display of Popups!
         /// </summary>
         /// <param name="page"></param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+        [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
         //public RootPage(Page page) : base(page) { }
         private RootPage() { }
 
         /// <summary>
-        /// Forms9Patch.RootPage: OBSOLETE, use Forms9Patch.PopupPage
+        /// Forms9Patch.RootPage is no longer needed for display of Popups!
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Forms9Patch.RootPage does not work with iOS Modal Pages.  User Forms9Patch.PopupPage instead.", false)]
+        [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
         public static Page Create(Page page)
         {
             //_instance = _instance ?? new RootPage(page);
