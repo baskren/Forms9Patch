@@ -355,21 +355,6 @@ namespace Forms9Patch
                 PointerDirection pointerDir = PointerDirection.None;
 
 
-                //var targetPage = PopupPage as Page; // Application.Current.MainPage;
-                //var targetPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
-                var targetPage = Application.Current.MainPage;
-                /*
-                var hostingPage = this.HostingPage();
-                foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
-                {
-                    if (page == hostingPage)
-                    {
-                        targetPage = hostingPage;
-                        break;
-                    }
-                }
-                */
-
                 //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;
                 if (Target != null)
@@ -378,11 +363,9 @@ namespace Forms9Patch
                     // NOTE: Use of PageDescentBounds is deliberate.  It has different behavior on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
                     //       FormsGestures coordinate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
 
-                    //System.Diagnostics.Debug.WriteLine("\t\t Target.Bounds=[" + Target.Bounds + "]");
-                    //System.Diagnostics.Debug.WriteLine("\t\t targetPage.Bounds=[" + targetPage.Bounds + "]");
                     targetBounds = Target is PopupBase popup
-                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
-                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
+                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, popup.DecorativeContainerView)
+                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, Target);
 
 
 
@@ -530,7 +513,7 @@ namespace Forms9Patch
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
-                    var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
+                    var newBounds = new Rectangle(bounds.X - Padding.Left, bounds.Y - Padding.Top, bounds.Width, bounds.Height);
                     //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     System.Diagnostics.Debug.WriteLine("");
