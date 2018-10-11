@@ -356,7 +356,8 @@ namespace Forms9Patch
 
 
                 //var targetPage = PopupPage as Page; // Application.Current.MainPage;
-                var targetPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
+                //var targetPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
+                var targetPage = Application.Current.MainPage;
                 /*
                 var hostingPage = this.HostingPage();
                 foreach (var page in Application.Current.MainPage.Navigation.ModalStack)
