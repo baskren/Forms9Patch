@@ -87,10 +87,18 @@ namespace Forms9Patch
         {
             base.OnPropertyChanged(propertyName);
             if (propertyName == IsVisibleProperty.PropertyName)
+                Activate();
+        }
+
+        void Activate()
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
             {
                 _indicator.IsVisible = IsVisible;
                 _indicator.IsRunning = IsVisible;
             }
+            else
+                Device.BeginInvokeOnMainThread(() => Activate());
         }
         #endregion
     }

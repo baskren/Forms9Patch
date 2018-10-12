@@ -6,6 +6,7 @@ using Forms9Patch;
 using System.ComponentModel;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Extensions;
+using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -578,6 +579,42 @@ namespace Forms9Patch
             }
         }
 
+        bool _isPushing;
+        async Task Push()
+        {
+            if (_isPushing)
+                return;
+            _isPushing = true;
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                while (_isPoping) await Task.Delay(100);
+                if (IsVisible)
+                    await Navigation.PushPopupAsync(this);
+                _isPushing = false;
+            }
+            else
+                Device.BeginInvokeOnMainThread(async () => await Push());
+        }
+
+        bool _isPoping;
+        async Task Pop()
+        {
+            if (_isPoping)
+                return;
+            _isPoping = true;
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                while (_isPushing) await Task.Delay(100);
+                if (!IsVisible)
+                    await Navigation.RemovePopupPageAsync(this);
+                _isPoping = false;
+            }
+            else
+                Device.BeginInvokeOnMainThread(async () => await Pop());
+        }
+
+
+
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
         /// Call this method from a child class to notify that a change happened on a property.
@@ -599,23 +636,11 @@ namespace Forms9Patch
                         IsVisible = false;
                         return;
                     }
-                    //if (RootPage == null)
-                    //    throw new NotSupportedException("Forms9Patch popup elements require the Application's MainPage property to be set to a Forms9Patch.RootPage instance");
-                    //PopupPage?.AddPopup(this);
-                    if (P42.Utils.Environment.IsOnMainThread)
-                        Navigation.PushPopupAsync(this);
-                    else
-                        Device.BeginInvokeOnMainThread(() => Navigation.PushPopupAsync(this));
-                    base.IsVisible = true;
+                    Push();
                 }
                 else
                 {
-                    base.IsVisible = false;
-                    //PopupPage?.RemovePopup(this);
-                    if (P42.Utils.Environment.IsOnMainThread)
-                        Navigation.RemovePopupPageAsync(this);
-                    else
-                        Device.BeginInvokeOnMainThread(() => Navigation.RemovePopupPageAsync(this));
+                    Pop();
                 }
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
