@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using FormsGestures;
 using System.Runtime.CompilerServices;
 
 namespace Forms9Patch
@@ -220,6 +219,9 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (propertyName == "Renderer")
+                ForceLayout();
+
             if (propertyName == TranslationXProperty.PropertyName)
             {
                 Content.TranslationX = TranslationX;
@@ -316,6 +318,7 @@ namespace Forms9Patch
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
+            //System.Diagnostics.Debug.WriteLine("this.Bounds: " + Bounds);
 
             if (_bubbleLayout?.Content == null)
                 return;
@@ -355,6 +358,13 @@ namespace Forms9Patch
                 PointerDirection pointerDir = PointerDirection.None;
 
 
+                Page targetPage = this;
+                // iOS doesn't work with targetPage = this;
+                if (Device.RuntimePlatform == Device.iOS)
+                    targetPage = Application.Current.MainPage;
+                //System.Diagnostics.Debug.WriteLine("TargetPage.Bounds: " + targetPage.Bounds);
+
+
                 //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;
                 if (Target != null)
@@ -363,9 +373,11 @@ namespace Forms9Patch
                     // NOTE: Use of PageDescentBounds is deliberate.  It has different behavior on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
                     //       FormsGestures coordinate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
 
+                    //System.Diagnostics.Debug.WriteLine("\t\t Target.Bounds=[" + Target.Bounds + "]");
+                    //System.Diagnostics.Debug.WriteLine("\t\t targetPage.Bounds=[" + targetPage.Bounds + "]");
                     targetBounds = Target is PopupBase popup
-                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, popup.DecorativeContainerView)
-                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, Target);
+                        ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
+                        : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
 
 
@@ -513,7 +525,7 @@ namespace Forms9Patch
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
-                    var newBounds = new Rectangle(bounds.X - Padding.Left, bounds.Y - Padding.Top, bounds.Width, bounds.Height);
+                    var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
                     //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     System.Diagnostics.Debug.WriteLine("");
