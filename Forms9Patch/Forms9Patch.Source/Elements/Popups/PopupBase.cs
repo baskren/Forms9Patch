@@ -352,28 +352,6 @@ namespace Forms9Patch
 
         #region Internal Properties
 
-        /*
-        internal Listener Listener => _listener;
-
-        //internal RootPage RootPage => Application.Current?.MainPage as RootPage;
-        internal PopupPage PopupPage
-        {
-            get
-            {
-                var currentPage = PageExtensions.FindCurrentPage(Application.Current.MainPage);
-                var parent = currentPage;
-                while (parent != null)
-                {
-                    if (parent is PopupPage popupPage)
-                        return popupPage;
-                    parent = parent.Parent as Page;
-                }
-                return null;
-            }
-        }
-
-        internal BoxView PageOverlay => _pageOverlay;
-        */
 
         #region ContentView property
         /// <summary>

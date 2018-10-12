@@ -8,7 +8,7 @@
     <title>Getting Started: VisualStudio 2017 for Mac | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Getting Started: VisualStudio 2017 for Mac | Forms9Patch ">
-    <meta name="generator" content="docfx 2.36.1.0">
+    <meta name="generator" content="docfx 2.40.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -222,51 +222,6 @@ namespace LinkTest
     }
 }
 </code></pre>
-</li>
-<li><p>Modify your shared code's App source code (<code>App.xaml.cs</code>) using the following code so your app will allow the use of Forms9Patch Popups.</p>
-<pre><code class="lang-csharp">using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace LinkTest
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-            MainPage = Forms9Patch.RootPage.Create(new MainPage());
-        }
-    }
-}
-</code></pre>
-<p>By wrapping the <code>new MainPage()</code> in a <code>Forms9Patch.RootPage.Create()</code> method, Forms9Patch establishes the necessary anchor in your app's visual tree to enable it to support pop-ups.</p>
-</li>
-<li><p><strong>IMPORTANT ANDROID INSTRUCTION:</strong> In order for the Android platform project to build, you will need to add an Android string resource for Forms9Patch's copy authority.</p>
-<ul>
-<li><p>Double click on the <strong>LinkTest.Droid</strong> project in the <strong>Solution Pad</strong> (left) to open the Android platform project's <strong>Project Options</strong> dialog.</p>
-<p><img src="images/GettingStartedMac/GetPackageName.png" alt="Android Application Settings"></p>
-</li>
-<li><p>Navigate to the <strong>Build | Android Application</strong> page and copy value in the <strong>Package Name</strong> field.  You'll need that value in one of the steps, below.  Close the <strong>Project Options</strong> dialog by clicking the <strong>[OK]</strong> button.</p>
-</li>
-<li><p>In the <strong>Solution Explorer Pad</strong>, navigate to the <strong>Resource | values</strong> folder in the <strong>LinkTest.Droid</strong> platform project.</p>
-</li>
-<li><p>Right click on the <strong>LinkTest.Droid  | Resource | values</strong> folder.  The folder actions pop-up will appear.  Select <strong>Add | New File ..</strong>.  The <strong>New File</strong> dialog will appear.</p>
-<p><img src="images/GettingStartedMac/CreateStringsXml1.png" alt="Create strings.xml resource file 1"></p>
-<p><img src="images/GettingStartedMac/CreateStringsXml2.png" alt="Create strings.xml resource file 2"></p>
-</li>
-<li><p>Select <strong>XML</strong> file template, enter <code>strings.xml</code> for the <strong>Name</strong>, and then click <strong>[New]</strong>.  The <code>strings.xml</code> file will be created and shown in the editor.</p>
-</li>
-<li><p>Add the following lines to the <code>strings.xml</code> file - replacing <code>PASTE_PACKAGE_NAME_HERE</code> with the package name you copied, above.</p>
-<pre><code class="lang-xml">&lt;resources&gt;
-    &lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;PASTE_PACKAGE_NAME_HERE.f9pcopypaste&lt;/string&gt;
-&lt;/resources&gt;
-</code></pre>
-</li>
-<li><p>Save <code>strings.xml</code>.</p>
-</li>
-</ul>
 </li>
 <li><p>Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on a Mac, how about running LinkTest.iOS?</p>
 <ul>

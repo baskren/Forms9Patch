@@ -23,7 +23,6 @@ namespace Forms9Patch
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
-        //public RootPage(Page page) : base(page) { }
         private RootPage() { }
 
         /// <summary>
@@ -33,10 +32,8 @@ namespace Forms9Patch
         /// <returns></returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
-        public static Page Create(Page page)
+        public static Page Create(Page page) 
         {
-            //_instance = _instance ?? new RootPage(page);
-            //var _instance = new RootPage(page);
             return page;
         }
         #endregion

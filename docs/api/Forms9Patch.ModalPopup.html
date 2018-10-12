@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ModalPopup
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.36.1.0">
+    <meta name="generator" content="docfx 2.40.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -88,7 +88,7 @@
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.layout-1">Xamarin.Forms.Layout</a>&lt;<span class="xref">Forms9Patch.View</span>&gt;</div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="Forms9Patch.PopupBase.html">PopupBase</a></div>
     <div class="level2"><span class="xref">ModalPopup</span></div>
       <div class="level3"><a class="xref" href="Forms9Patch.ActivityIndicatorPopup.html">ActivityIndicatorPopup</a></div>
@@ -104,9 +104,6 @@
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Children">PopupBase.Children</a>
-    </div>
     <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_PaddingProperty">PopupBase.PaddingProperty</a>
     </div>
@@ -154,6 +151,12 @@
     </div>
     <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnPageOverlayTouch">PopupBase.CancelOnPageOverlayTouch</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnBackButtonClickProperty">PopupBase.CancelOnBackButtonClickProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnBackButtonClick">PopupBase.CancelOnBackButtonClick</a>
     </div>
     <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_RetainProperty">PopupBase.RetainProperty</a>
@@ -219,19 +222,19 @@
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Cancelled">PopupBase.Cancelled</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose_System_Boolean_">PopupBase.Dispose(Boolean)</a>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackButtonPressed">PopupBase.OnBackButtonPressed()</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose">PopupBase.Dispose()</a>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackgroundClicked">PopupBase.OnBackgroundClicked()</a>
     </div>
     <div>
       <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Cancel">PopupBase.Cancel()</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnParentSet">PopupBase.OnParentSet()</a>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose_System_Boolean_">PopupBase.Dispose(Boolean)</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnMeasure_System_Double_System_Double_">PopupBase.OnMeasure(Double, Double)</a>
+      <a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Dispose">PopupBase.Dispose()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Forms9Patch.html">Forms9Patch</a></h6>
@@ -432,8 +435,6 @@
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">PopupBase.LayoutChildren(Double, Double, Double, Double)</a></div>
   <h5 id="Forms9Patch_ModalPopup_LayoutChildren_System_Double_System_Double_System_Double_System_Double__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Implementors wishing to change the default behavior of a Layout should override this method. It is suggested to
 still call the base method and modify its calculated results.</p>
@@ -486,6 +487,36 @@ still call the base method and modify its calculated results.</p>
       <a class="xref" href="Forms9Patch.IElement.html">IElement</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Forms9Patch_PopupBase_">HardwareKeyListenerExtensions.GetHardwareKeyListeners(PopupBase)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Forms9Patch_PopupBase_">HardwareKeyListenerExtensions.ClearHardwareKeyListeners(PopupBase)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__">HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, EventHandler&lt;HardwareKeyEventArgs&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_">HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Forms9Patch_PopupBase_Forms9Patch_HardwareKeyListener_">HardwareKeyListenerExtensions.RemoveHardwareKeyListener(PopupBase, HardwareKeyListener)</a>
+  </div>
+  <div>
+      <a class="xref" href="Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Forms9Patch_PopupBase_">HardwareKeyListenerExtensions.HardwareKeyFocus(PopupBase)</a>
+  </div>
   <div>
       <a class="xref" href="P42.Utils.ReflectionExtensions.html#P42_Utils_ReflectionExtensions_GetProperties_System_Object_">ReflectionExtensions.GetProperties(Object)</a>
   </div>

@@ -2,73 +2,9 @@
 
 Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityInditorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the `Xamarin.Forms.MasterDetailPage`. 
 
-So, this part is **IMPORTANT!**  Forms9Patch popups only work if your apps `MainPage` is a `Forms9Patch.RootPage`.  Wait, DON'T PANIC!  `Forms9Patch.RootPage` is just a wrapper for your app's pages.  In other words, wrap page content you normally would set as its `MainPage` in an instance of `Forms9Patch.RootPage`. For example, if your app's instance of App is as follows (pay attention to line 25):
+As of Forms9Patch version 1.5.0.5,  `Forms9Patch.RootPage` is no longer needed to enable popups **AND** Forms9Patch popups work with pages that have been presented modally.
 
-**NOTE:**  This is also important.  Forms9Patch popups really don't work consistantly when presented in a descendent of a Page that has been pushed modally.  I'm not sure why this is and just haven't had the time to look into this.  One day!
 
-```csharp
-using Xamarin.Forms;
-
-namespace ExampleApp
-{
-	public class App : Application
-	{
-		public App()
-		{
-			// The root page of your application
-			var content = new ContentPage
-			{
-				Title = "ExampleApp",
-				Content = new StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
-
-			MainPage = new NavigationPage(content);  // before adding Forms9Patch popup support
-		}
-	}
-}
-```
-
-You are going to want to change line 25 to:
-
-```csharp
-using Xamarin.Forms;
-
-namespace ExampleApp
-{
-	public class App : Application
-	{
-		public App()
-		{
-			// The root page of your application
-			var content = new ContentPage
-			{
-				Title = "ExampleApp",
-				Content = new StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
-
-			MainPage = Forms9Patch.RootPage.Create(new NavigationPage(content)); // after adding Forms9Patch popup support
-		}
-	}
-}
-```
 
 ## Common Properties, Methods and Events
 
@@ -86,6 +22,7 @@ The following properties and methods are common to all Forms9Patch popups, excep
 ### Page Overlay (between the popup and the page the popup sets upon) Properties:
 - `PageOverlayColor`: The Color of the page overlay upon which the ModalPopup sets.  Default value is `Color.Rgba(0.5, 0.5, 0.5, 0.5)`.
 - `CancelOnBackgroundTouch`: Controls is the popup is cancelled if the background is touched.  Default value is true.
+- `CancelOnBackButtonTouch`: Controls is the popup is cancelled if the back button (Android only) is touched.  Default value is true.
 
 ### Memory Management Properties:
 - `Retain`: a boolean (default: `false`) used to indicate if the popup and its contents should be removed from the view hierarchy as soon as the view is hidden.  Why would I bother to have this? *ANDROID!* If you have a heavy layout that will be shown multiple times, you may not want to re-render each time it is made visible. Seeing `Retain=true` will keep your popup and its content in the view hierarchy so it won't have to be re-rendered the next time you want to present it.

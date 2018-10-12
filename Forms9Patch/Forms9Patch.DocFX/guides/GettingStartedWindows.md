@@ -146,58 +146,7 @@ Create the LinkTest application as follows:
     }
     ```
  
- 9. Modify your shared code's App source code (`App.xaml.cs`) using the following code so your app will allow the use of Forms9Patch Popups.
-
-    ```csharp
-    using System;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
-
-    [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-    namespace LinkTest
-    {
-        public partial class App : Application
-        {
-            public App()
-            {
-                InitializeComponent();
-                MainPage = Forms9Patch.RootPage.Create(new MainPage());
-            }
-        }
-    }
-    ```
-    By wrapping the `new MainPage()` in a `Forms9Patch.RootPage.Create()` method, Forms9Patch establishes the necessary anchor in your app's visual tree to enable it to support pop-ups.
-
- 10. **IMPORTANT ANDROID INSTRUCTION:** In order for the Android platform project to build, you will need to add an Android string resource for Forms9Patch's copy authority.  
-
-     - Right click on the **LinkTest.Droid** project in the **Solution Pad** (right) to present the Android project actions.  Click on **Properties** to open the Andriod platform project's **Project Options** dialog.
-
-        ![Android Application Settings](images/GettingStartedWindows/AndroidProjectProperties.png)
-
-     - Navigate to the **Android Manifest** section of the **LinkTest.Android** project properties editor.  Copy value in the **Package Name** field.  You'll need that value in one of the steps, below. 
-
-        ![Package Name](images/GettingStartedWindows/PackageName.png)
-
-     - In the **Solution Explorer Pad** (right), navigate to the **Resource | values** folder in the **LinkTest.Droid** platform project.
-
-     - Right click on the **LinkTest.Droid  | Resource | values** folder.  The folder actions pop-up will appear.  Select **Add | New Item ...**.  The **New File** dialog will appear.
-
-        ![Create strings.xml resource file 1](images/GettingStartedWindows/ResourcesValuesAddNewItem.png)
-
-        ![Create strings.xml resource file 2](images/GettingStartedWindows/AddNewItemDialog.png)
-    
-     - Navicate to **Visual C# | Data** and select the **XML** file template.  Enter `strings.xml` for the **Name**, and then click **[Add]**.  The `strings.xml` file will be created and shown in the editor.
-
-     - Add the following lines to the `strings.xml` file - replacing `PASTE_PACKAGE_NAME_HERE` with the package name you copied, above.
-
-        ```xml
-        <resources>
-            <string name="forms9patch_copy_paste_authority">PASTE_PACKAGE_NAME_HERE.f9pcopypaste</string>
-        </resources>
-        ```
-     - Save `strings.xml`.
-
- 11. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
+ 9. Now, you're ready to build and run the LinkTest app on a platform.  Since you're developing this app on Windows, how about running LinkTest.UWP?
 
      - Go to the Startup Project Selection drop down and sel ect the `LinkTest.UWP (Universal Windows)` project
 
@@ -213,7 +162,7 @@ Create the LinkTest application as follows:
 
         ![TestLink.UWP Application Window](images/GettingStartedWindows/TestLink.UWP.Application.Window.2.png)
 
- 12. Try changing the Startup Project to `TestLink.Android` and run it on an x86 based Android emulator.  
+ 10. Try changing the Startup Project to `TestLink.Android` and run it on an x86 based Android emulator.  
 
      - Because of Forms9Patch's more comprehensive `Forms9Patch.Clipboard` functionality, you will have to add the following code to your Android project's `Resources/Values/string.xml` file,before you can build your Android project.  
 

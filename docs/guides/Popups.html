@@ -8,7 +8,7 @@
     <title>Forms9Patch Popups | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Popups | Forms9Patch ">
-    <meta name="generator" content="docfx 2.36.1.0">
+    <meta name="generator" content="docfx 2.40.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -80,67 +80,7 @@
 <h1 id="forms9patch-popups">Forms9Patch Popups</h1>
 
 <p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityInditorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
-<p>So, this part is <strong>IMPORTANT!</strong>  Forms9Patch popups only work if your apps <code>MainPage</code> is a <code>Forms9Patch.RootPage</code>.  Wait, DON'T PANIC!  <code>Forms9Patch.RootPage</code> is just a wrapper for your app's pages.  In other words, wrap page content you normally would set as its <code>MainPage</code> in an instance of <code>Forms9Patch.RootPage</code>. For example, if your app's instance of App is as follows (pay attention to line 25):</p>
-<p><strong>NOTE:</strong>  This is also important.  Forms9Patch popups really don't work consistantly when presented in a descendent of a Page that has been pushed modally.  I'm not sure why this is and just haven't had the time to look into this.  One day!</p>
-<pre><code class="lang-csharp">using Xamarin.Forms;
-
-namespace ExampleApp
-{
-	public class App : Application
-	{
-		public App()
-		{
-			// The root page of your application
-			var content = new ContentPage
-			{
-				Title = &quot;ExampleApp&quot;,
-				Content = new StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = &quot;Welcome to Xamarin Forms!&quot;
-						}
-					}
-				}
-			};
-
-			MainPage = new NavigationPage(content);  // before adding Forms9Patch popup support
-		}
-	}
-}
-</code></pre>
-<p>You are going to want to change line 25 to:</p>
-<pre><code class="lang-csharp">using Xamarin.Forms;
-
-namespace ExampleApp
-{
-	public class App : Application
-	{
-		public App()
-		{
-			// The root page of your application
-			var content = new ContentPage
-			{
-				Title = &quot;ExampleApp&quot;,
-				Content = new StackLayout
-				{
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = &quot;Welcome to Xamarin Forms!&quot;
-						}
-					}
-				}
-			};
-
-			MainPage = Forms9Patch.RootPage.Create(new NavigationPage(content)); // after adding Forms9Patch popup support
-		}
-	}
-}
-</code></pre>
+<p>As of Forms9Patch version 1.5.0.5,  <code>Forms9Patch.RootPage</code> is no longer needed to enable popups <strong>AND</strong> Forms9Patch popups work with pages that have been presented modally.</p>
 <h2 id="common-properties-methods-and-events">Common Properties, Methods and Events</h2>
 <p>The following properties and methods are common to all Forms9Patch popups, except <code>ActivityIndicatorPopup</code>:</p>
 <h3 id="appearance-properties">Appearance Properties</h3>
@@ -157,6 +97,7 @@ namespace ExampleApp
 <ul>
 <li><code>PageOverlayColor</code>: The Color of the page overlay upon which the ModalPopup sets.  Default value is <code>Color.Rgba(0.5, 0.5, 0.5, 0.5)</code>.</li>
 <li><code>CancelOnBackgroundTouch</code>: Controls is the popup is cancelled if the background is touched.  Default value is true.</li>
+<li><code>CancelOnBackButtonTouch</code>: Controls is the popup is cancelled if the back button (Android only) is touched.  Default value is true.</li>
 </ul>
 <h3 id="memory-management-properties">Memory Management Properties:</h3>
 <ul>

@@ -253,14 +253,6 @@ namespace Forms9Patch
             if (_bubbleLayout == null)
                 return;
 
-            /*
-            else if (propertyName == "Parent")
-            {
-                if (Parent is RootPage rootPage)
-                    rootPage.SizeChanged += OnParentSizeChanged;
-            }
-            */
-
             else if (propertyName == TargetProperty.PropertyName)
             {
                 // we need to determine if the target is inside of a scroll view because the scroll view's ScrollOffset is set to zero on orientation changes.

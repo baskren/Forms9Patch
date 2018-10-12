@@ -4797,6 +4797,45 @@ references:
   fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
   nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
   nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,Forms9Patch.HardwareKeyListener)
+  name: AddHardwareKeyListener(PopupBase, HardwareKeyListener)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_Forms9Patch_HardwareKeyListener_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,Forms9Patch.HardwareKeyListener)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, Forms9Patch.HardwareKeyListener)
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, HardwareKeyListener)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String)
+  name: AddHardwareKeyListener(PopupBase, String)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String)
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name: AddHardwareKeyListener(PopupBase, String, EventHandler<HardwareKeyEventArgs>)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name.vb: AddHardwareKeyListener(PopupBase, String, EventHandler(Of HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, EventHandler<HardwareKeyEventArgs>)
+  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, EventHandler(Of HardwareKeyEventArgs))
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name: AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name.vb: AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, Forms9Patch.HardwareKeyModifierKeys, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, EventHandler<HardwareKeyEventArgs>)
+  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, EventHandler(Of HardwareKeyEventArgs))
+- uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name: AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_System_String_EventHandler_Forms9Patch_HardwareKeyEventArgs__
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys,System.String,EventHandler{Forms9Patch.HardwareKeyEventArgs})
+  name.vb: AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler<Forms9Patch.HardwareKeyEventArgs>)
+  fullName.vb: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.PopupBase, System.String, Forms9Patch.HardwareKeyModifierKeys, System.String, EventHandler(Of Forms9Patch.HardwareKeyEventArgs))
+  nameWithType: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, String, EventHandler<HardwareKeyEventArgs>)
+  nameWithType.vb: HardwareKeyListenerExtensions.AddHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys, String, EventHandler(Of HardwareKeyEventArgs))
 - uid: Forms9Patch.HardwareKeyListenerExtensions.AddHardwareKeyListener(Forms9Patch.View,Forms9Patch.HardwareKeyListener)
   name: AddHardwareKeyListener(View, HardwareKeyListener)
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_AddHardwareKeyListener_Forms9Patch_View_Forms9Patch_HardwareKeyListener_
@@ -4849,6 +4888,12 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.ClearHardwareKeyListeners(HardwareKeyPage)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.PopupBase)
+  name: ClearHardwareKeyListeners(PopupBase)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Forms9Patch_PopupBase_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.PopupBase)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.PopupBase)
+  nameWithType: HardwareKeyListenerExtensions.ClearHardwareKeyListeners(PopupBase)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.ClearHardwareKeyListeners(Forms9Patch.View)
   name: ClearHardwareKeyListeners(View)
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_ClearHardwareKeyListeners_Forms9Patch_View_
@@ -4868,6 +4913,12 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.GetHardwareKeyListeners(HardwareKeyPage)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.PopupBase)
+  name: GetHardwareKeyListeners(PopupBase)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Forms9Patch_PopupBase_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.PopupBase)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.PopupBase)
+  nameWithType: HardwareKeyListenerExtensions.GetHardwareKeyListeners(PopupBase)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.GetHardwareKeyListeners(Forms9Patch.View)
   name: GetHardwareKeyListeners(View)
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_GetHardwareKeyListeners_Forms9Patch_View_
@@ -4887,6 +4938,12 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.HardwareKeyPage)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.HardwareKeyPage)
   nameWithType: HardwareKeyListenerExtensions.HardwareKeyFocus(HardwareKeyPage)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.PopupBase)
+  name: HardwareKeyFocus(PopupBase)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Forms9Patch_PopupBase_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.PopupBase)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.PopupBase)
+  nameWithType: HardwareKeyListenerExtensions.HardwareKeyFocus(PopupBase)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.HardwareKeyFocus(Forms9Patch.View)
   name: HardwareKeyFocus(View)
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_HardwareKeyFocus_Forms9Patch_View_
@@ -4925,6 +4982,18 @@ references:
   commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.HardwareKeyPage,System.String,Forms9Patch.HardwareKeyModifierKeys)
   fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.HardwareKeyPage, System.String, Forms9Patch.HardwareKeyModifierKeys)
   nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(HardwareKeyPage, String, HardwareKeyModifierKeys)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase,Forms9Patch.HardwareKeyListener)
+  name: RemoveHardwareKeyListener(PopupBase, HardwareKeyListener)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Forms9Patch_PopupBase_Forms9Patch_HardwareKeyListener_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase,Forms9Patch.HardwareKeyListener)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase, Forms9Patch.HardwareKeyListener)
+  nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(PopupBase, HardwareKeyListener)
+- uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys)
+  name: RemoveHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys)
+  href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Forms9Patch_PopupBase_System_String_Forms9Patch_HardwareKeyModifierKeys_
+  commentId: M:Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase,System.String,Forms9Patch.HardwareKeyModifierKeys)
+  fullName: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.PopupBase, System.String, Forms9Patch.HardwareKeyModifierKeys)
+  nameWithType: HardwareKeyListenerExtensions.RemoveHardwareKeyListener(PopupBase, String, HardwareKeyModifierKeys)
 - uid: Forms9Patch.HardwareKeyListenerExtensions.RemoveHardwareKeyListener(Forms9Patch.View,Forms9Patch.HardwareKeyListener)
   name: RemoveHardwareKeyListener(View, HardwareKeyListener)
   href: api/Forms9Patch.HardwareKeyListenerExtensions.html#Forms9Patch_HardwareKeyListenerExtensions_RemoveHardwareKeyListener_Forms9Patch_View_Forms9Patch_HardwareKeyListener_
@@ -6770,6 +6839,19 @@ references:
   commentId: T:Forms9Patch.IPopup
   fullName: Forms9Patch.IPopup
   nameWithType: IPopup
+- uid: Forms9Patch.IPopup.CancelOnBackButtonClick
+  name: CancelOnBackButtonClick
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_CancelOnBackButtonClick
+  commentId: P:Forms9Patch.IPopup.CancelOnBackButtonClick
+  fullName: Forms9Patch.IPopup.CancelOnBackButtonClick
+  nameWithType: IPopup.CancelOnBackButtonClick
+- uid: Forms9Patch.IPopup.CancelOnBackButtonClick*
+  name: CancelOnBackButtonClick
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_CancelOnBackButtonClick_
+  commentId: Overload:Forms9Patch.IPopup.CancelOnBackButtonClick
+  isSpec: "True"
+  fullName: Forms9Patch.IPopup.CancelOnBackButtonClick
+  nameWithType: IPopup.CancelOnBackButtonClick
 - uid: Forms9Patch.IPopup.CancelOnPageOverlayTouch
   name: CancelOnPageOverlayTouch
   href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_CancelOnPageOverlayTouch
@@ -9852,6 +9934,25 @@ references:
   commentId: E:Forms9Patch.PopupBase.Cancelled
   fullName: Forms9Patch.PopupBase.Cancelled
   nameWithType: PopupBase.Cancelled
+- uid: Forms9Patch.PopupBase.CancelOnBackButtonClick
+  name: CancelOnBackButtonClick
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnBackButtonClick
+  commentId: P:Forms9Patch.PopupBase.CancelOnBackButtonClick
+  fullName: Forms9Patch.PopupBase.CancelOnBackButtonClick
+  nameWithType: PopupBase.CancelOnBackButtonClick
+- uid: Forms9Patch.PopupBase.CancelOnBackButtonClick*
+  name: CancelOnBackButtonClick
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnBackButtonClick_
+  commentId: Overload:Forms9Patch.PopupBase.CancelOnBackButtonClick
+  isSpec: "True"
+  fullName: Forms9Patch.PopupBase.CancelOnBackButtonClick
+  nameWithType: PopupBase.CancelOnBackButtonClick
+- uid: Forms9Patch.PopupBase.CancelOnBackButtonClickProperty
+  name: CancelOnBackButtonClickProperty
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnBackButtonClickProperty
+  commentId: F:Forms9Patch.PopupBase.CancelOnBackButtonClickProperty
+  fullName: Forms9Patch.PopupBase.CancelOnBackButtonClickProperty
+  nameWithType: PopupBase.CancelOnBackButtonClickProperty
 - uid: Forms9Patch.PopupBase.CancelOnPageOverlayTouch
   name: CancelOnPageOverlayTouch
   href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_CancelOnPageOverlayTouch
@@ -9871,19 +9972,6 @@ references:
   commentId: F:Forms9Patch.PopupBase.CancelOnPageOverlayTouchProperty
   fullName: Forms9Patch.PopupBase.CancelOnPageOverlayTouchProperty
   nameWithType: PopupBase.CancelOnPageOverlayTouchProperty
-- uid: Forms9Patch.PopupBase.Children
-  name: Children
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Children
-  commentId: P:Forms9Patch.PopupBase.Children
-  fullName: Forms9Patch.PopupBase.Children
-  nameWithType: PopupBase.Children
-- uid: Forms9Patch.PopupBase.Children*
-  name: Children
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Children_
-  commentId: Overload:Forms9Patch.PopupBase.Children
-  isSpec: "True"
-  fullName: Forms9Patch.PopupBase.Children
-  nameWithType: PopupBase.Children
 - uid: Forms9Patch.PopupBase.DecorativeContainerView
   name: DecorativeContainerView
   href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_DecorativeContainerView
@@ -10005,19 +10093,6 @@ references:
   commentId: F:Forms9Patch.PopupBase.IsVisibleProperty
   fullName: Forms9Patch.PopupBase.IsVisibleProperty
   nameWithType: PopupBase.IsVisibleProperty
-- uid: Forms9Patch.PopupBase.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  name: LayoutChildren(Double, Double, Double, Double)
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Forms9Patch.PopupBase.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  fullName: Forms9Patch.PopupBase.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
-  nameWithType: PopupBase.LayoutChildren(Double, Double, Double, Double)
-- uid: Forms9Patch.PopupBase.LayoutChildren*
-  name: LayoutChildren
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_LayoutChildren_
-  commentId: Overload:Forms9Patch.PopupBase.LayoutChildren
-  isSpec: "True"
-  fullName: Forms9Patch.PopupBase.LayoutChildren
-  nameWithType: PopupBase.LayoutChildren
 - uid: Forms9Patch.PopupBase.Margin
   name: Margin
   href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_Margin
@@ -10037,32 +10112,32 @@ references:
   commentId: F:Forms9Patch.PopupBase.MarginProperty
   fullName: Forms9Patch.PopupBase.MarginProperty
   nameWithType: PopupBase.MarginProperty
-- uid: Forms9Patch.PopupBase.OnMeasure(System.Double,System.Double)
-  name: OnMeasure(Double, Double)
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnMeasure_System_Double_System_Double_
-  commentId: M:Forms9Patch.PopupBase.OnMeasure(System.Double,System.Double)
-  fullName: Forms9Patch.PopupBase.OnMeasure(System.Double, System.Double)
-  nameWithType: PopupBase.OnMeasure(Double, Double)
-- uid: Forms9Patch.PopupBase.OnMeasure*
-  name: OnMeasure
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnMeasure_
-  commentId: Overload:Forms9Patch.PopupBase.OnMeasure
+- uid: Forms9Patch.PopupBase.OnBackButtonPressed
+  name: OnBackButtonPressed()
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackButtonPressed
+  commentId: M:Forms9Patch.PopupBase.OnBackButtonPressed
+  fullName: Forms9Patch.PopupBase.OnBackButtonPressed()
+  nameWithType: PopupBase.OnBackButtonPressed()
+- uid: Forms9Patch.PopupBase.OnBackButtonPressed*
+  name: OnBackButtonPressed
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackButtonPressed_
+  commentId: Overload:Forms9Patch.PopupBase.OnBackButtonPressed
   isSpec: "True"
-  fullName: Forms9Patch.PopupBase.OnMeasure
-  nameWithType: PopupBase.OnMeasure
-- uid: Forms9Patch.PopupBase.OnParentSet
-  name: OnParentSet()
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnParentSet
-  commentId: M:Forms9Patch.PopupBase.OnParentSet
-  fullName: Forms9Patch.PopupBase.OnParentSet()
-  nameWithType: PopupBase.OnParentSet()
-- uid: Forms9Patch.PopupBase.OnParentSet*
-  name: OnParentSet
-  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnParentSet_
-  commentId: Overload:Forms9Patch.PopupBase.OnParentSet
+  fullName: Forms9Patch.PopupBase.OnBackButtonPressed
+  nameWithType: PopupBase.OnBackButtonPressed
+- uid: Forms9Patch.PopupBase.OnBackgroundClicked
+  name: OnBackgroundClicked()
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackgroundClicked
+  commentId: M:Forms9Patch.PopupBase.OnBackgroundClicked
+  fullName: Forms9Patch.PopupBase.OnBackgroundClicked()
+  nameWithType: PopupBase.OnBackgroundClicked()
+- uid: Forms9Patch.PopupBase.OnBackgroundClicked*
+  name: OnBackgroundClicked
+  href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnBackgroundClicked_
+  commentId: Overload:Forms9Patch.PopupBase.OnBackgroundClicked
   isSpec: "True"
-  fullName: Forms9Patch.PopupBase.OnParentSet
-  nameWithType: PopupBase.OnParentSet
+  fullName: Forms9Patch.PopupBase.OnBackgroundClicked
+  nameWithType: PopupBase.OnBackgroundClicked
 - uid: Forms9Patch.PopupBase.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Forms9Patch.PopupBase.html#Forms9Patch_PopupBase_OnPropertyChanged_System_String_
@@ -10247,132 +10322,6 @@ references:
   commentId: F:Forms9Patch.PopupBase.VerticalOptionsProperty
   fullName: Forms9Patch.PopupBase.VerticalOptionsProperty
   nameWithType: PopupBase.VerticalOptionsProperty
-- uid: Forms9Patch.PopupPage
-  name: PopupPage
-  href: api/Forms9Patch.PopupPage.html
-  commentId: T:Forms9Patch.PopupPage
-  fullName: Forms9Patch.PopupPage
-  nameWithType: PopupPage
-- uid: Forms9Patch.PopupPage.#ctor(Page)
-  name: PopupPage(Page)
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage__ctor_Page_
-  commentId: M:Forms9Patch.PopupPage.#ctor(Page)
-  fullName: Forms9Patch.PopupPage.PopupPage(Page)
-  nameWithType: PopupPage.PopupPage(Page)
-- uid: Forms9Patch.PopupPage.#ctor*
-  name: PopupPage
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage__ctor_
-  commentId: Overload:Forms9Patch.PopupPage.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.PopupPage
-  nameWithType: PopupPage.PopupPage
-- uid: Forms9Patch.PopupPage.Create(Page)
-  name: Create(Page)
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_Create_Page_
-  commentId: M:Forms9Patch.PopupPage.Create(Page)
-  fullName: Forms9Patch.PopupPage.Create(Page)
-  nameWithType: PopupPage.Create(Page)
-- uid: Forms9Patch.PopupPage.Create*
-  name: Create
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_Create_
-  commentId: Overload:Forms9Patch.PopupPage.Create
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.Create
-  nameWithType: PopupPage.Create
-- uid: Forms9Patch.PopupPage.IgnoreChildren
-  name: IgnoreChildren
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_IgnoreChildren
-  commentId: P:Forms9Patch.PopupPage.IgnoreChildren
-  fullName: Forms9Patch.PopupPage.IgnoreChildren
-  nameWithType: PopupPage.IgnoreChildren
-- uid: Forms9Patch.PopupPage.IgnoreChildren*
-  name: IgnoreChildren
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_IgnoreChildren_
-  commentId: Overload:Forms9Patch.PopupPage.IgnoreChildren
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.IgnoreChildren
-  nameWithType: PopupPage.IgnoreChildren
-- uid: Forms9Patch.PopupPage.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  name: LayoutChildren(Double, Double, Double, Double)
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Forms9Patch.PopupPage.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
-  fullName: Forms9Patch.PopupPage.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
-  nameWithType: PopupPage.LayoutChildren(Double, Double, Double, Double)
-- uid: Forms9Patch.PopupPage.LayoutChildren*
-  name: LayoutChildren
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_LayoutChildren_
-  commentId: Overload:Forms9Patch.PopupPage.LayoutChildren
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.LayoutChildren
-  nameWithType: PopupPage.LayoutChildren
-- uid: Forms9Patch.PopupPage.ModalPopped
-  name: ModalPopped
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPopped
-  commentId: E:Forms9Patch.PopupPage.ModalPopped
-  fullName: Forms9Patch.PopupPage.ModalPopped
-  nameWithType: PopupPage.ModalPopped
-- uid: Forms9Patch.PopupPage.ModalPopping
-  name: ModalPopping
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPopping
-  commentId: E:Forms9Patch.PopupPage.ModalPopping
-  fullName: Forms9Patch.PopupPage.ModalPopping
-  nameWithType: PopupPage.ModalPopping
-- uid: Forms9Patch.PopupPage.ModalPushed
-  name: ModalPushed
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPushed
-  commentId: E:Forms9Patch.PopupPage.ModalPushed
-  fullName: Forms9Patch.PopupPage.ModalPushed
-  nameWithType: PopupPage.ModalPushed
-- uid: Forms9Patch.PopupPage.ModalPushing
-  name: ModalPushing
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_ModalPushing
-  commentId: E:Forms9Patch.PopupPage.ModalPushing
-  fullName: Forms9Patch.PopupPage.ModalPushing
-  nameWithType: PopupPage.ModalPushing
-- uid: Forms9Patch.PopupPage.NavigationPopped
-  name: NavigationPopped
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_NavigationPopped
-  commentId: E:Forms9Patch.PopupPage.NavigationPopped
-  fullName: Forms9Patch.PopupPage.NavigationPopped
-  nameWithType: PopupPage.NavigationPopped
-- uid: Forms9Patch.PopupPage.NavigationPushed
-  name: NavigationPushed
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_NavigationPushed
-  commentId: E:Forms9Patch.PopupPage.NavigationPushed
-  fullName: Forms9Patch.PopupPage.NavigationPushed
-  nameWithType: PopupPage.NavigationPushed
-- uid: Forms9Patch.PopupPage.OnBackButtonPressed
-  name: OnBackButtonPressed()
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_OnBackButtonPressed
-  commentId: M:Forms9Patch.PopupPage.OnBackButtonPressed
-  fullName: Forms9Patch.PopupPage.OnBackButtonPressed()
-  nameWithType: PopupPage.OnBackButtonPressed()
-- uid: Forms9Patch.PopupPage.OnBackButtonPressed*
-  name: OnBackButtonPressed
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_OnBackButtonPressed_
-  commentId: Overload:Forms9Patch.PopupPage.OnBackButtonPressed
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.OnBackButtonPressed
-  nameWithType: PopupPage.OnBackButtonPressed
-- uid: Forms9Patch.PopupPage.Page
-  name: Page
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_Page
-  commentId: P:Forms9Patch.PopupPage.Page
-  fullName: Forms9Patch.PopupPage.Page
-  nameWithType: PopupPage.Page
-- uid: Forms9Patch.PopupPage.Page*
-  name: Page
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_Page_
-  commentId: Overload:Forms9Patch.PopupPage.Page
-  isSpec: "True"
-  fullName: Forms9Patch.PopupPage.Page
-  nameWithType: PopupPage.Page
-- uid: Forms9Patch.PopupPage.StatusBarPaddingChanged
-  name: StatusBarPaddingChanged
-  href: api/Forms9Patch.PopupPage.html#Forms9Patch_PopupPage_StatusBarPaddingChanged
-  commentId: E:Forms9Patch.PopupPage.StatusBarPaddingChanged
-  fullName: Forms9Patch.PopupPage.StatusBarPaddingChanged
-  nameWithType: PopupPage.StatusBarPaddingChanged
 - uid: Forms9Patch.Proximity
   name: Proximity
   href: api/Forms9Patch.Proximity.html
@@ -10590,19 +10539,6 @@ references:
   commentId: T:Forms9Patch.RootPage
   fullName: Forms9Patch.RootPage
   nameWithType: RootPage
-- uid: Forms9Patch.RootPage.#ctor(Page)
-  name: RootPage(Page)
-  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage__ctor_Page_
-  commentId: M:Forms9Patch.RootPage.#ctor(Page)
-  fullName: Forms9Patch.RootPage.RootPage(Page)
-  nameWithType: RootPage.RootPage(Page)
-- uid: Forms9Patch.RootPage.#ctor*
-  name: RootPage
-  href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage__ctor_
-  commentId: Overload:Forms9Patch.RootPage.#ctor
-  isSpec: "True"
-  fullName: Forms9Patch.RootPage.RootPage
-  nameWithType: RootPage.RootPage
 - uid: Forms9Patch.RootPage.Create(Page)
   name: Create(Page)
   href: api/Forms9Patch.RootPage.html#Forms9Patch_RootPage_Create_Page_
