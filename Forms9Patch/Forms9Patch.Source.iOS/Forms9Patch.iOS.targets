@@ -74,14 +74,12 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
       <Link>Renderers\EnhancedListViewRenderer.cs</Link>
     </Compile>
-    <!--
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
       <Link>Renderers\HardwareKeyPageRenderer.cs</Link>
     </Compile>
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PopupPageRenderer.cs">
       <Link>Renderers\PopupBaseRenderer.cs</Link>
     </Compile>
-  -->
 
     <!-- SERVICES -->
     <Compile Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
