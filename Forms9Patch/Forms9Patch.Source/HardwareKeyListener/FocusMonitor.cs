@@ -125,7 +125,7 @@ namespace Forms9Patch
                         _element = value;
                         changed = true;
                     }
-                    else
+                    //else
                         //System.Diagnostics.Debug.WriteLine("\t F.A value.Focus()==false");
                 }
                 else if (wasElement != null)
