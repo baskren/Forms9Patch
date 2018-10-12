@@ -38,17 +38,17 @@ namespace Forms9Patch
         static DateTime _lastFocusChangedDateTime = DateTime.MinValue;
         static void OnFocusMonitorFocusedElementChanged(object wasElement, VisualElement currentElement)
         {
-            System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.OnFocusElementChanged ("+wasElement+", "+currentElement+") ");
+            System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.OnFocusElementChanged (" + wasElement + ", " + currentElement + ") ");
 
             if (currentElement == _expectedFocusedElement)
             {
-                System.Diagnostics.Debug.WriteLine("\t (currentElement == _expectedFocusedElement) ["+currentElement+"]");
+                System.Diagnostics.Debug.WriteLine("\t (currentElement == _expectedFocusedElement) [" + currentElement + "]");
                 // the FocusedElement setter has successfully updated the focus (or the app just regained focus).
                 FocusedElementChanged?.Invoke(_element, EventArgs.Empty);
             }
             else if (currentElement is Xamarin.Forms.InputView && DateTime.Now - _lastFocusChangedDateTime > TimeSpan.FromMilliseconds(100))
             {
-                System.Diagnostics.Debug.WriteLine("\t (currentElement is Xamarin.Forms.InputView) ["+currentElement+"]");
+                System.Diagnostics.Debug.WriteLine("\t (currentElement is Xamarin.Forms.InputView) [" + currentElement + "]");
                 // the user has changed the focus  (or the app just regained focus).
                 _element = currentElement;
                 _expectedFocusedElement = currentElement;
@@ -83,12 +83,12 @@ namespace Forms9Patch
         /// <value>The focused element.</value>
         public static VisualElement FocusedElement
         {
-            get => _element; 
+            get => _element;
             set
             {
                 if (_element != value)
                 {
-                    System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.FocusedElement = [" + value +  "]  was: [" + _element + "]");
+                    System.Diagnostics.Debug.WriteLine("Forms9Patch.HardwareKeyPage.FocusedElement = [" + value + "]  was: [" + _element + "]");
 
                     _element = value;
 
@@ -129,7 +129,7 @@ namespace Forms9Patch
             {
                 if (value != _defaultElement)
                 {
-                    if (value is View || value is Forms9Patch.HardwareKeyPage)
+                    if (value is View || value is Forms9Patch.HardwareKeyPage || value is Forms9Patch.PopupBase)
                         _defaultElement = value;
                     else if (value != null)
                         throw new Exception("DefaultElement can only be a Xamarin.Forms.View or Forms9Patch.HardwareKeyPage. [" + value + "]");
