@@ -18,25 +18,6 @@ namespace Forms9Patch
     public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage,  /* Xamarin.Forms.Layout<View>,*/ IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
     {
-        /*
-        #region Invalid Parent Properties
-        /// <summary>
-        /// Invalid Property, do not use
-        /// </summary>
-        /// <value>Invalid</value>
-        /// <remarks>Do not use</remarks>
-        [Obsolete("Use ContentView")]
-        public new IList<View> Children
-        {
-            get
-            {
-                throw new InvalidOperationException("Children property is not valid for Forms9Patch popups. Use Content property instead.");
-            }
-        }
-        #endregion
-        */
-
-
         #region IPopup
 
         #region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
@@ -168,6 +149,22 @@ namespace Forms9Patch
             set => SetValue(CancelOnPageOverlayTouchProperty, value);
         }
         #endregion CancelOnPageOverlayTouch
+
+        #region CancelOnBackButtonClick
+        /// <summary>
+        /// Cancel the Popup when the back button is touched
+        /// </summary>
+        public static readonly BindableProperty CancelOnBackButtonClickProperty = BindableProperty.Create("Forms9Patch.PopupBase.CancelOnBackButtonClick", typeof(bool), typeof(PopupBase), true);
+        /// <summary>
+        /// Gets or sets a value indicating whether Popup <see cref="T:Forms9Patch.PopupBase"/> will cancel on the back button touch.
+        /// </summary>
+        /// <value><c>true</c> if cancel on back button touch; otherwise, <c>false</c>.</value>
+        public bool CancelOnBackButtonClick
+        {
+            get => (bool)GetValue(CancelOnBackButtonClickProperty);
+            set => SetValue(CancelOnBackButtonClickProperty, value);
+        }
+        #endregion CancelOnBackButtonClick
 
         #region Retain
         /// <summary>
@@ -432,6 +429,7 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
+            CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
             BackgroundColor = Color.White;
 
             Padding = 10;
@@ -460,35 +458,41 @@ namespace Forms9Patch
         }
         #endregion
 
-        /*
-        #region Gesture event responders
 
-        void OnTapped(object sender, TapEventArgs e)
-        {
-            if (CancelOnPageOverlayTouch)
-                Cancel();
-        }
-
-        void OnPanning(object sender, PanEventArgs e)
-        {
-            if (CancelOnPageOverlayTouch)
-                Cancel();
-        }
-
-        #endregion
-        */
-
+        #region Cancelation
+        /// <summary>
+        /// Called when back button is pressed
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
-            Cancel();
-            return base.OnBackButtonPressed();
+            //return base.OnBackButtonPressed();
+            if (CancelOnBackButtonClick)
+                Cancel();
+            return CancelOnBackButtonClick;
         }
 
+        /// <summary>
+        /// Called when background is clicked;
+        /// </summary>
+        /// <returns></returns>
         protected override bool OnBackgroundClicked()
         {
-            Cancel();
-            return base.OnBackgroundClicked();
+            var isClose = base.OnBackgroundClicked();
+            if (isClose)
+                Cancel();
+            return isClose;
         }
+
+        /// <summary>
+        /// Cancel the display of this Popup (will fire Cancelled event);
+        /// </summary>
+        public void Cancel()
+        {
+            IsVisible = false;
+            Cancelled?.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
 
 
         #region IDisposable Support
@@ -524,18 +528,6 @@ namespace Forms9Patch
         public void Dispose()
         {
             Dispose(true);
-        }
-        #endregion
-
-
-        #region Public Methods
-        /// <summary>
-        /// Cancel the display of this Popup (will fire Cancelled event);
-        /// </summary>
-        public void Cancel()
-        {
-            IsVisible = false;
-            Cancelled?.Invoke(this, EventArgs.Empty);
         }
         #endregion
 
@@ -628,6 +620,8 @@ namespace Forms9Patch
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
+            else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
+                CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
 
 
             if (_decorativeContainerView != null)

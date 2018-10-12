@@ -21,7 +21,6 @@ namespace Forms9Patch
         /// <summary>
         /// Forms9Patch.RootPage is no longer needed for display of Popups!
         /// </summary>
-        /// <param name="page"></param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Forms9Patch.RootPage is no longer necessary!", false)]
         //public RootPage(Page page) : base(page) { }

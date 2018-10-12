@@ -55,6 +55,11 @@ namespace Forms9Patch
         bool CancelOnPageOverlayTouch { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IPopup"/> will cancel on a back button touch.
+        /// </summary>
+        bool CancelOnBackButtonClick { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.IPopup"/> is retained after its IsVisible property is set to false.
         /// </summary>
         /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>

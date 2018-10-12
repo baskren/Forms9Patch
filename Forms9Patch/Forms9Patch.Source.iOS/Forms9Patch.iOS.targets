@@ -77,7 +77,7 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
       <Link>Renderers\HardwareKeyPageRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PopupPageRenderer.cs">
+    <Compile Include="..\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs">
       <Link>Renderers\PopupBaseRenderer.cs</Link>
     </Compile>
 
