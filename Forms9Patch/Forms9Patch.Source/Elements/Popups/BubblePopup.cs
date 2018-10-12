@@ -359,11 +359,6 @@ namespace Forms9Patch
 
 
                 Page targetPage = this;
-                // iOS doesn't work with targetPage = this;
-                //if (Device.RuntimePlatform == Device.iOS)
-                //    targetPage = Application.Current.MainPage;
-                //System.Diagnostics.Debug.WriteLine("TargetPage.Bounds: " + targetPage.Bounds);
-
 
                 //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;
