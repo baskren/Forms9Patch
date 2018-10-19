@@ -266,7 +266,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
             if (propertyName == TitleProperty.PropertyName)
                 _titleLabel.HtmlText = Title;
             else if (propertyName == TextProperty.PropertyName)

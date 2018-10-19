@@ -123,9 +123,10 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
-            if (_frame == null)
-                return;
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
         }
         #endregion
 

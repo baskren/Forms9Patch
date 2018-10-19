@@ -64,8 +64,10 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
             if (propertyName == ExtendedElementShapeProperty.PropertyName)
             {
                 UpdateElements();

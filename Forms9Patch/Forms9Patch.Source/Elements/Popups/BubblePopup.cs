@@ -248,7 +248,10 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
             if (_bubbleLayout == null)
                 return;
@@ -267,7 +270,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
-            base.OnPropertyChanging(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanging(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+
             if (propertyName == TargetProperty.PropertyName)
             {
                 if (Target.Parent<ScrollView>() is ScrollView scrollView)
@@ -285,6 +292,8 @@ namespace Forms9Patch
 
 
         #region Layout
+
+
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.BubblePopup"/> will target Point (a point in the target) vs. the border of the target.
         /// </summary>
@@ -309,6 +318,11 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => LayoutChildren(x, y, width, height));
+                return;
+            }
             //System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
             //System.Diagnostics.Debug.WriteLine("this.Bounds: " + Bounds);
 
@@ -600,28 +614,6 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region Sizing
-        /*
-		protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-		{
-		//	System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + widthConstraint + "] h=[" + heightConstraint + "]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-			return base.OnMeasure(widthConstraint, heightConstraint);
-		}
-		*/
-
-        /*
-		//double _lastWidthAllocated, _lastHeightAllocated;
-		protected override void OnSizeAllocated(double width, double height)
-		{
-		//	if (Math.Abs(_lastWidthAllocated - width) < 0.001 && Math.Abs(_lastHeightAllocated - height) < 0.001)
-		//		return;
-		//	_lastWidthAllocated = width;
-		//	_lastHeightAllocated = height;
-		//	System.Diagnostics.Debug.WriteLine("{0}[{1}] w=[" + width + "] h=[" + height + "]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-			base.OnSizeAllocated(width, height);
-		}
-		*/
-        #endregion
 
         #endregion
 

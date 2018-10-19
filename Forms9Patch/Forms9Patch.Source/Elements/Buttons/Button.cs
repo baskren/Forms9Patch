@@ -1204,6 +1204,12 @@ namespace Forms9Patch
         /// </summary>
         protected virtual void UpdateElements(bool isSegment = false)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => UpdateElements(isSegment));
+                return;
+            }
+
             if (this is StateButton)
                 return;
             _noUpdate = true;
@@ -1447,24 +1453,29 @@ namespace Forms9Patch
 
         void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var propertyName = e.PropertyName;
-            if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
-                    _stackLayout.Children.Remove(_label);
-                else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
+                var propertyName = e.PropertyName;
+                if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
                 {
-                    if (TrailingIcon)
-                        _stackLayout.Children.Insert(0, _label);
-                    else
-                        _stackLayout.Children.Add(_label);
+                    if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
+                        _stackLayout.Children.Remove(_label);
+                    else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
+                    {
+                        if (TrailingIcon)
+                            _stackLayout.Children.Insert(0, _label);
+                        else
+                            _stackLayout.Children.Add(_label);
+                    }
+                    SetOrienations();
                 }
-                SetOrienations();
+                else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
+                {
+                    UpdateIconTint();
+                }
             }
-            else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
-            {
-                UpdateIconTint();
-            }
+            else
+                Device.BeginInvokeOnMainThread(() => OnLabelPropertyChanged(sender, e));
 
             //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
             //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
@@ -1480,7 +1491,11 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            base.OnPropertyChanging(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanging(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+
             if (_noUpdate)
                 return;
             if (propertyName == CommandProperty.PropertyName)
@@ -1497,6 +1512,12 @@ namespace Forms9Patch
 
         void SetOrienations()
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(SetOrienations);
+                return;
+            }
+
             var horzOption = HorizontalTextAlignment.ToLayoutOptions();
             var vertOption = VerticalTextAlignment.ToLayoutOptions();
             if (Orientation == StackOrientation.Horizontal)
@@ -1645,7 +1666,10 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
             if (propertyName == BorderWidthProperty.PropertyName)
                 OutlineWidth = (float)BorderWidth;

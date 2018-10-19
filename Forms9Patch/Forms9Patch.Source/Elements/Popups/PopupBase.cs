@@ -418,22 +418,9 @@ namespace Forms9Patch
             _id = _instances++;
             Retain = retain;
             IsVisible = false;
-            /*
-            _pageOverlay = new BoxView
-            {
-                BackgroundColor = PageOverlayColor,
-            };
-            _listener = Listener.For(_pageOverlay);
-            _listener.Tapped += OnTapped;
-            _listener.Panning += OnPanning;
-            //HostPage = host ?? Application.Current.MainPage;
-            */
             Target = target;
-            //base.Children.Add(_pageOverlay);
 
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
-
-            OverContextEffect.ApplyTo(this);
         }
         #endregion
 
@@ -552,13 +539,19 @@ namespace Forms9Patch
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
-            {
                 LayoutChildren(X, Y, Width, Height);
-            }
+        }
+
+        new void LayoutChildren(double x, double y, double width, double height)
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.LayoutChildren(x, y, width, height);
+            else
+                Device.BeginInvokeOnMainThread(() => base.LayoutChildren(x, y, width, height));
         }
 
         bool _isPushing;
-        async Task Push()
+        public async Task Push()
         {
             if (_isPushing)
                 return;
@@ -575,7 +568,7 @@ namespace Forms9Patch
         }
 
         bool _isPoping;
-        async Task Pop()
+        public async Task Pop()
         {
             if (_isPoping)
                 return;
@@ -599,7 +592,10 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
             if (propertyName == PageOverlayColorProperty.PropertyName)
                 base.BackgroundColor = PageOverlayColor;
@@ -663,51 +659,6 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Layout
-        /*
-        //Thickness IShape.ShadowPadding() => ShapeBase.ShadowPadding(this, HasShadow);
-
-        /// <summary>
-        /// processes measurement requests
-        /// </summary>
-        /// <param name="widthConstraint"></param>
-        /// <param name="heightConstraint"></param>
-        /// <returns></returns>
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            // this is going to be the size of the root page.
-            if (PopupPage == null)
-                return new SizeRequest(Size.Zero, Size.Zero);
-            var result = new SizeRequest(PopupPage.Bounds.Size, PopupPage.Bounds.Size);
-            return result;
-        }
-
-        internal void ManualLayout(Rectangle bounds)
-        {
-            LayoutChildren(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-        }
-
-        /// <summary>
-        /// Layouts the children.
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-        /// <param name="width">Width.</param>
-        /// <param name="height">Height.</param>
-        protected override void LayoutChildren(double x, double y, double width, double height)
-        {
-            //System.Diagnostics.Debug.WriteLine("{0}[{1}] x,y,w,h=[" + x + "," + y + "," + width + "," + height + "]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
-
-            var targetPage = PopupPage as Page;// Application.Current.MainPage;
-
-            if (width > 0 && height > 0)
-                LayoutChildIntoBoundingRegion(PageOverlay, new Rectangle(-targetPage.Padding.Left, -targetPage.Padding.Top, targetPage.Width, targetPage.Height));
-            else
-                DecorativeContainerView.IsVisible = false;
-        }
-                */
-
-        #endregion
     }
 }
 

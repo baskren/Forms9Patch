@@ -296,7 +296,10 @@ namespace Forms9Patch
                 }
             }
 
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
             if (propertyName == LinesProperty.PropertyName
                 || propertyName == AutoFitProperty.PropertyName
@@ -314,20 +317,25 @@ namespace Forms9Patch
         /// <returns>The measure.</returns>
         protected override void InvalidateMeasure()
         {
-            //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]>>InvalidateMeasure");
-            IsDynamicallySized = false;
-            //Sized = false;
-            base.InvalidateMeasure();
-
-
-            if (!IsDynamicallySized && Width > 0 && Height > 0)// || !Sized )
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (HtmlText != null || Text != null)
+                //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]>>InvalidateMeasure");
+                IsDynamicallySized = false;
+                //Sized = false;
+                base.InvalidateMeasure();
+
+
+                if (!IsDynamicallySized && Width > 0 && Height > 0)// || !Sized )
                 {
-                    var layout = this.ParentInheritedFrom<Layout>();
-                    layout.ForceLayout();
+                    if (HtmlText != null || Text != null)
+                    {
+                        var layout = this.ParentInheritedFrom<Layout>();
+                        layout.ForceLayout();
+                    }
                 }
             }
+            else
+                Device.BeginInvokeOnMainThread(InvalidateMeasure);
 
             //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure>>");
 

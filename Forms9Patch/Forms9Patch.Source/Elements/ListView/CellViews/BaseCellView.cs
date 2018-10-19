@@ -261,11 +261,18 @@ namespace Forms9Patch
 
         void TranslateContentViewTo(double x, double y, uint milliseconds, Easing easing)
         {
+
             ContentView.TranslateTo(x, y, milliseconds, easing);
         }
 
         void OnPanned(object sender, PanEventArgs e)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPanned(sender, e));
+                return;
+            }
+
             System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
@@ -325,6 +332,12 @@ namespace Forms9Patch
         double _homeOffset;
         void OnPanning(object sender, PanEventArgs e)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPanning(sender, e));
+                return;
+            }
+
             ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             if (_panVt)
@@ -527,6 +540,13 @@ namespace Forms9Patch
 
         void OnSwipeButtonTapped(object sender, EventArgs e)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnSwipeButtonTapped(sender, e));
+                return;
+            }
+
+
             var listView = this.Parent<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = true;
@@ -738,6 +758,12 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
             DebugMessage("Enter BindingContext=[" + BindingContext + "]");
             if (BindingContext == null)
                 return;
@@ -767,7 +793,11 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            base.OnPropertyChanging(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanging(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+
             if (propertyName == BindingContextProperty.PropertyName)
             {
                 if (BindingContext is ItemWrapper itemWrapper)
@@ -788,7 +818,11 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
             if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
             {
                 FocusMonitor.Start(ContentView);
@@ -841,54 +875,77 @@ namespace Forms9Patch
 
         void UpdateVisibility()
         {
-            if (Device.RuntimePlatform == Device.iOS)
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (BindingContext is IItemWrapper itemWrapper && itemWrapper.Parent != null)
-                    this.FadeTo(1.0);
-                else
-                    this.FadeTo(0.0);
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    if (BindingContext is IItemWrapper itemWrapper && itemWrapper.Parent != null)
+                        this.FadeTo(1.0);
+                    else
+                        this.FadeTo(0.0);
+                }
             }
+            else
+                Device.BeginInvokeOnMainThread(UpdateVisibility);
         }
 
         void UpdateBackground()
         {
-            if (BindingContext is IItemWrapper item && item.IsSelected)
-                BackgroundColor = item.SelectedCellBackgroundColor;
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                if (BindingContext is IItemWrapper item && item.IsSelected)
+                    BackgroundColor = item.SelectedCellBackgroundColor;
+                else
+                    BackgroundColor = Color.Transparent;
+                //BackgroundColor = Color.Orange;
+            }
             else
-                BackgroundColor = Color.Transparent;
-            //BackgroundColor = Color.Orange;
+                Device.BeginInvokeOnMainThread(UpdateBackground);
         }
 
         void UpdateHeights()
         {
-            if (IsHeader)
-                System.Diagnostics.Debug.WriteLine("");
-            var rowHeight = RowHeight;
-            if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
-                RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
-            HeightRequest = rowHeight + SeparatorHeight;
-            if (Parent is ICell_T_Height cell)
-                cell.Height = HeightRequest;
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                if (IsHeader)
+                    System.Diagnostics.Debug.WriteLine("");
+                var rowHeight = RowHeight;
+                if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
+                    RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
+                HeightRequest = rowHeight + SeparatorHeight;
+                if (Parent is ICell_T_Height cell)
+                    cell.Height = HeightRequest;
+            }
+            else
+                Device.BeginInvokeOnMainThread(UpdateBackground);
         }
 
         void UpdateSeparator()
         {
-            if (BindingContext is IItemWrapper itemWrapper)
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                var separatorHeight = SeparatorHeight;
-                if (Math.Abs(RowDefinitions[1].Height.Value - separatorHeight) > 0.1)
-                    RowDefinitions[1] = new RowDefinition { Height = new GridLength(separatorHeight, GridUnitType.Absolute) };
-                HeightRequest = RowHeight + separatorHeight;
-                _separator.Color = itemWrapper.SeparatorColor;
-                _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
-                _separator.HeightRequest = separatorHeight;
+                if (BindingContext is IItemWrapper itemWrapper)
+                {
+                    var separatorHeight = SeparatorHeight;
+                    if (Math.Abs(RowDefinitions[1].Height.Value - separatorHeight) > 0.1)
+                        RowDefinitions[1] = new RowDefinition { Height = new GridLength(separatorHeight, GridUnitType.Absolute) };
+                    HeightRequest = RowHeight + separatorHeight;
+                    _separator.Color = itemWrapper.SeparatorColor;
+                    _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);
+                    _separator.HeightRequest = separatorHeight;
+                }
             }
+            else
+                Device.BeginInvokeOnMainThread(UpdateBackground);
         }
 
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine("BaseCellView.LayoutChildren");
-            base.LayoutChildren(x, y, width, height);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.LayoutChildren(x, y, width, height);
+            else
+                Device.BeginInvokeOnMainThread(() => base.LayoutChildren(x, y, width, height));
         }
         #endregion
     }

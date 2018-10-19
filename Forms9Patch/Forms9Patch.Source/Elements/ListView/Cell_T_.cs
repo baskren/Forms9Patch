@@ -85,6 +85,12 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnBindingContextChanged()
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
             if (View != null)
                 View.BindingContext = BindingContext;
 

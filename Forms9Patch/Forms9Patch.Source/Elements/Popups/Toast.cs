@@ -234,7 +234,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
             if (propertyName == TitleProperty.PropertyName)
                 _titleLabel.HtmlText = Title;
             else if (propertyName == TextProperty.PropertyName)
@@ -255,15 +259,20 @@ namespace Forms9Patch
 
         void UpdateOKButton()
         {
-            if (ButtonText != null || (ButtonBackgroundColor != default(Color) && ButtonBackgroundColor != Color.Default) || (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default))
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (!((StackLayout)Content).Children.Contains(_okButton))
-                    ((StackLayout)Content).Children.Add(_okButton);
-                if (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default)
-                    _okButton.TextColor = Color.Blue;
+                if (ButtonText != null || (ButtonBackgroundColor != default(Color) && ButtonBackgroundColor != Color.Default) || (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default))
+                {
+                    if (!((StackLayout)Content).Children.Contains(_okButton))
+                        ((StackLayout)Content).Children.Add(_okButton);
+                    if (ButtonTextColor != default(Color) && ButtonTextColor != Color.Default)
+                        _okButton.TextColor = Color.Blue;
+                }
+                else if (((StackLayout)Content).Children.Contains(_okButton))
+                    ((StackLayout)Content).Children.Remove(_okButton);
             }
-            else if (((StackLayout)Content).Children.Contains(_okButton))
-                ((StackLayout)Content).Children.Remove(_okButton);
+            else
+                Device.BeginInvokeOnMainThread(UpdateOKButton);
         }
         #endregion
     }

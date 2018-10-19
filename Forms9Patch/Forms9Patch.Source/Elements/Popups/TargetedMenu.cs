@@ -287,7 +287,11 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
             if (propertyName == BackgroundColorProperty.PropertyName)
             {
                 foreach (VisualElement visualElement in _stackLayout.Children)
@@ -419,45 +423,51 @@ namespace Forms9Patch
 
         void UpdateButtonVisibilities()
         {
-            if (Width < 0)
-                return;
-
-            bool rightArrowShouldBeVisible = true;
-
-            var leftWidth = _leftArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
-            var rightWidth = _rightArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
-
-            // calculate pages
-            var pageWidth = 0.0;
-
-            _leftArrowButton.IsVisible = _currentPage > 0;
-            _leftArrowSeparator.IsVisible = _currentPage > 0;
-
-            int segmentIndex = 0;
-            var pageIndex = 0;
-            for (int i = 2; i < _stackLayout.Children.Count - 2; i += 2)
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                var button = _stackLayout.Children[i] as Forms9Patch.Button;
-                var separator = _stackLayout.Children[i + 1] as BoxView;
+                if (Width < 0)
+                    return;
 
-                pageWidth += button.UnexpandedTightSize.Width + 10 + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
+                bool rightArrowShouldBeVisible = true;
 
-                if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness) * 0.75)
+                var leftWidth = _leftArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
+                var rightWidth = _rightArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
+
+                // calculate pages
+                var pageWidth = 0.0;
+
+                _leftArrowButton.IsVisible = _currentPage > 0;
+                _leftArrowSeparator.IsVisible = _currentPage > 0;
+
+                int segmentIndex = 0;
+                var pageIndex = 0;
+                for (int i = 2; i < _stackLayout.Children.Count - 2; i += 2)
                 {
-                    pageIndex++;
-                    pageWidth = leftWidth;
+                    var button = _stackLayout.Children[i] as Forms9Patch.Button;
+                    var separator = _stackLayout.Children[i + 1] as BoxView;
+
+                    pageWidth += button.UnexpandedTightSize.Width + 10 + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
+
+                    if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness) * 0.75)
+                    {
+                        pageIndex++;
+                        pageWidth = leftWidth;
+                    }
+
+                    button.IsVisible = pageIndex == _currentPage;
+                    separator.IsVisible = pageIndex == _currentPage;
+
+                    rightArrowShouldBeVisible &= (pageIndex != _currentPage || segmentIndex != Segments.Count - 1);
+                    segmentIndex++;
                 }
 
-                button.IsVisible = pageIndex == _currentPage;
-                separator.IsVisible = pageIndex == _currentPage;
-
-                rightArrowShouldBeVisible &= (pageIndex != _currentPage || segmentIndex != Segments.Count - 1);
-                segmentIndex++;
+                _rightArrowSeparator.IsVisible = rightArrowShouldBeVisible;
+                _rightArrowButton.IsVisible = rightArrowShouldBeVisible;
             }
-
-            _rightArrowSeparator.IsVisible = rightArrowShouldBeVisible;
-            _rightArrowButton.IsVisible = rightArrowShouldBeVisible;
+            else
+                Device.BeginInvokeOnMainThread(UpdateButtonVisibilities);
         }
+
         #endregion
 
 

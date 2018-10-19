@@ -21,8 +21,8 @@ namespace Forms9Patch
         /// <value>The key.</value>
         public string Key
         {
-            get => (string)GetValue(KeyProperty) ?? (string)GetValue(TextProperty); 
-            set => SetValue(KeyProperty, value); 
+            get => (string)GetValue(KeyProperty) ?? (string)GetValue(TextProperty);
+            set => SetValue(KeyProperty, value);
         }
         #endregion Key property
 
@@ -36,8 +36,8 @@ namespace Forms9Patch
         /// </summary>
         public Forms9Patch.Image IconImage
         {
-            get => (Forms9Patch.Image)GetValue(IconImageProperty); 
-            set => SetValue(IconImageProperty, value); 
+            get => (Forms9Patch.Image)GetValue(IconImageProperty);
+            set => SetValue(IconImageProperty, value);
         }
         #endregion IconImage property
 
@@ -52,8 +52,8 @@ namespace Forms9Patch
         /// <value>The icon text.</value>
         public string IconText
         {
-            get => (string)GetValue(IconTextProperty); 
-            set => SetValue(IconTextProperty, value); 
+            get => (string)GetValue(IconTextProperty);
+            set => SetValue(IconTextProperty, value);
         }
         #endregion IconText property
 
@@ -68,8 +68,8 @@ namespace Forms9Patch
         /// <value>The html text.</value>
         public string Text
         {
-            get => (string)GetValue(TextProperty); 
-            set => SetValue(TextProperty, value); 
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
         #endregion Text Property
 
@@ -83,8 +83,8 @@ namespace Forms9Patch
         /// </summary>
         public string HtmlText
         {
-            get => (string)GetValue(HtmlTextProperty); 
-            set => SetValue(HtmlTextProperty, value); 
+            get => (string)GetValue(HtmlTextProperty);
+            set => SetValue(HtmlTextProperty, value);
         }
         #endregion HtmlText property
 
@@ -99,8 +99,8 @@ namespace Forms9Patch
         /// <value>The color of the text.</value>
         public Color TextColor
         {
-            get => (Color)GetValue(TextColorProperty); 
-            set => SetValue(TextColorProperty, value); 
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
         #endregion TextColor property
 
@@ -116,8 +116,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if swipe executable; otherwise, <c>false</c>.</value>
         public bool IsTriggeredOnFullSwipe
         {
-            get => (bool)GetValue(SwipeExecutableProperty); 
-            set => SetValue(SwipeExecutableProperty, value); 
+            get => (bool)GetValue(SwipeExecutableProperty);
+            set => SetValue(SwipeExecutableProperty, value);
         }
         #endregion SwipeExecutable region
 
@@ -132,8 +132,8 @@ namespace Forms9Patch
         /// <value>The color of the background.</value>
         public Color BackgroundColor
         {
-            get => (Color)GetValue(BackgroundColorProperty); 
-            set => SetValue(BackgroundColorProperty, value); 
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
         #endregion BackgroundColor property
 
@@ -163,7 +163,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
             if (propertyName == IconTextProperty.PropertyName && IconTextProperty != null)
                 IconImage = null;
             else if (propertyName == IconImageProperty.PropertyName && IconImage?.Source != null)

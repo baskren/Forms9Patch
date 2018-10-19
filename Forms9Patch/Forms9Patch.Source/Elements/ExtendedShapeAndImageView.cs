@@ -493,7 +493,7 @@ namespace Forms9Patch
                     {
                         _repainting = true;
                         _lastPaint = DateTime.MaxValue;
-                        InvalidateSurface();
+                        Invalidate();
                     }
                     return true;
                 });
@@ -628,7 +628,32 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
+        new void InvalidateMeasure()
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.InvalidateMeasure();
+            else
+                Device.BeginInvokeOnMainThread(InvalidateMeasure);
+        }
 
+        new void InvalidateSurface()
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.InvalidateSurface();
+            else
+                Device.BeginInvokeOnMainThread(InvalidateSurface);
+        }
+
+        void Invalidate()
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                base.InvalidateMeasure();
+                base.InvalidateSurface();
+            }
+            else
+                Device.BeginInvokeOnMainThread(Invalidate);
+        }
 
         async Task SetImageSourceAsync()
         {
@@ -649,8 +674,7 @@ namespace Forms9Patch
                 }
 
                 ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
-                InvalidateMeasure();
-                InvalidateSurface();
+                Invalidate();
             }
         }
 
@@ -660,7 +684,10 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
             if (propertyName == ElementShapeProperty.PropertyName)
                 ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();
@@ -700,8 +727,7 @@ namespace Forms9Patch
                 propertyName == ExtendedElementSeparatorWidthProperty.PropertyName
                )
             {
-                InvalidateMeasure();
-                InvalidateSurface();
+                Invalidate();
             }
         }
         #endregion

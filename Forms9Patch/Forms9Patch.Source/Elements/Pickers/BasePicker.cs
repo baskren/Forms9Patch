@@ -20,7 +20,7 @@ namespace Forms9Patch
         /// Gets the item templates.
         /// </summary>
         /// <value>The item templates.</value>
-        public DataTemplateSelector ItemTemplates => _listView.ItemTemplates; 
+        public DataTemplateSelector ItemTemplates => _listView.ItemTemplates;
 
         /// <summary>
         /// The items source property.
@@ -32,7 +32,7 @@ namespace Forms9Patch
         /// <value>The items source.</value>
         public IList ItemsSource
         {
-            get => (IList)GetValue(ItemsSourceProperty); 
+            get => (IList)GetValue(ItemsSourceProperty);
             set => SetValue(ItemsSourceProperty, value);
         }
         #endregion
@@ -48,8 +48,8 @@ namespace Forms9Patch
         /// <value>The index.</value>
         public int Index
         {
-            get => (int)GetValue(IndexProperty); 
-            set => SetValue(IndexProperty, value); 
+            get => (int)GetValue(IndexProperty);
+            set => SetValue(IndexProperty, value);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Forms9Patch
         /// <value>The selected item.</value>
         public object SelectedItem
         {
-            get => GetValue(SelectedItemProperty); 
+            get => GetValue(SelectedItemProperty);
             set => SetValue(SelectedItemProperty, value);
         }
 
@@ -76,8 +76,8 @@ namespace Forms9Patch
         /// <value>The selected items.</value>
         public ObservableCollection<object> SelectedItems
         {
-            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); 
-            private set => SetValue(SelectedItemsPropertyKey, value); 
+            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty);
+            private set => SetValue(SelectedItemsPropertyKey, value);
         }
 
 
@@ -91,8 +91,8 @@ namespace Forms9Patch
         /// <value>The Toggle behavior (None, Radio, Multiselect).</value>
         public GroupToggleBehavior GroupToggleBehavior
         {
-            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty); 
-            set => SetValue(GroupToggleBehaviorProperty, value); 
+            get => (GroupToggleBehavior)GetValue(GroupToggleBehaviorProperty);
+            set => SetValue(GroupToggleBehaviorProperty, value);
         }
         #endregion
 
@@ -107,8 +107,8 @@ namespace Forms9Patch
         /// <value>The height of the row.</value>
         public int RowHeight
         {
-            get => (int)GetValue(RowHeightProperty); 
-            set => SetValue(RowHeightProperty, value); 
+            get => (int)GetValue(RowHeightProperty);
+            set => SetValue(RowHeightProperty, value);
         }
 
         #endregion
@@ -202,7 +202,11 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            if (P42.Utils.Environment.IsOnMainThread)
+                base.OnPropertyChanged(propertyName);
+            else
+                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+
 
             if (propertyName == ItemsSourceProperty.PropertyName)
             {
@@ -241,6 +245,12 @@ namespace Forms9Patch
         /// <param name="force">If set to <c>true</c> scroll to index even if already scrolling.</param>
         public virtual void ScrollToIndex(int index, bool force = false)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => ScrollToIndex(index, force));
+                return;
+            }
+
             if (ItemsSource == null)
                 return;
 

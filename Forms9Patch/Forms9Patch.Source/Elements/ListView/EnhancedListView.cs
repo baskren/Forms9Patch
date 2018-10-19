@@ -115,9 +115,7 @@ namespace Forms9Patch
 
         public bool ScrollTo(double offset, bool animated = true)
         {
-            if (Renderer != null)
-                return Renderer.ScrollTo(offset, animated);
-            return false;
+            return Renderer != null && Renderer.ScrollTo(offset, animated);
         }
 
         double _scrollSpeed;

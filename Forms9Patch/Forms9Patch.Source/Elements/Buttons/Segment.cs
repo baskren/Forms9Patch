@@ -485,16 +485,6 @@ namespace Forms9Patch
 
 
         #region Property Change management
-        /// <summary>
-        /// Ons the property changing.
-        /// </summary>
-        /// <returns>The property changing.</returns>
-        /// <param name="propertyName">Property name.</param>
-        protected override void OnPropertyChanging(string propertyName = null)
-        {
-            base.OnPropertyChanging(propertyName);
-        }
-
         void OnCommandChanged()
         {
             if (Command != null)
