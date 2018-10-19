@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems" Label="Shared" Condition="Exists('..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems')" />
+  <Import Project="..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -57,6 +59,24 @@
         <Reference Include="SkiaSharp.Views.Forms">
             <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.60.0\lib\XamariniOS\SkiaSharp.Views.Forms.dll</HintPath>
         </Reference>
+        <Reference Include="Xamarin.Forms.Core">
+          <HintPath>..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Xamarin.Forms.Platform">
+          <HintPath>..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+        </Reference>
+        <Reference Include="Xamarin.Forms.Platform.iOS">
+          <HintPath>..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+        </Reference>
+        <Reference Include="Xamarin.Forms.Xaml">
+          <HintPath>..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+        </Reference>
+        <Reference Include="Rg.Plugins.Popup">
+          <HintPath>..\..\..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.dll</HintPath>
+        </Reference>
+        <Reference Include="Rg.Plugins.Popup.IOS">
+          <HintPath>..\..\..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Resources\" />
@@ -66,32 +86,16 @@
     </ItemGroup>
     <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
     <ItemGroup>
-        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
-            <Project>{9DB2F292-8034-4E06-89AD-98BBDA4306B9}</Project>
-            <Name>Xamarin.Forms.Xaml</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.iOS\Xamarin.Forms.Platform.iOS.csproj">
-            <Project>{271193C1-6E7C-429C-A36D-3F1BE5267231}</Project>
-            <Name>Xamarin.Forms.Platform.iOS</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj">
-            <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
-            <Name>Xamarin.Forms.Platform</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
-            <Project>{B1E1A395-C842-45F7-BA80-6C9276EA3072}</Project>
-            <Name>Xamarin.Forms.Core</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
             <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
             <Name>P42.Utils.iOS</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-            <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+            <Project>{758D988F-25C1-46E8-9726-17A794EE460E}</Project>
             <Name>P42.Utils</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-            <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
+            <Project>{8FFD2331-AF6B-4554-9276-4821E59AEFD5}</Project>
             <Name>P42.NumericalMethods</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource.iOS\FormsGestures.XfSource.iOS.csproj">
@@ -99,20 +103,33 @@
             <Name>FormsGestures.XfSource.iOS</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj">
-            <Project>{52E3C505-3123-48ED-AFE5-E700F1D5A01A}</Project>
+            <Project>{B88FF483-3AD6-491C-8876-3E4D7E5DF4B3}</Project>
             <Name>FormsGestures.XfSource</Name>
         </ProjectReference>
         <ProjectReference Include="..\Forms9Patch.XfSource\Forms9Patch.XfSource.csproj">
-            <Project>{FC40FB46-CA35-4D9C-A4B1-30657A697F1A}</Project>
+            <Project>{26778BB2-8A83-4DD3-BF7B-2B1831690410}</Project>
             <Name>Forms9Patch.XfSource</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.iOS\Xamarin.Forms.Platform.iOS %28Forwarders%29.csproj">
             <Project>{39B3457F-01D8-43D0-8E84-D8C4F73CF48D}</Project>
             <Name>Xamarin.Forms.Platform.iOS (Forwarders)</Name>
         </ProjectReference>
+        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj">
+          <Project>{340D8B87-5CA8-46B9-B05E-D71E4AE672D0}</Project>
+          <Name>Xamarin.Forms.Xaml</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform.iOS\Xamarin.Forms.Platform.iOS.csproj">
+          <Project>{271193C1-6E7C-429C-A36D-3F1BE5267231}</Project>
+          <Name>Xamarin.Forms.Platform.iOS</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj">
+          <Project>{F4BD2EA9-A1BF-4819-9FE7-A44C68194F31}</Project>
+          <Name>Xamarin.Forms.Core</Name>
+        </ProjectReference>
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+    <Import Project="..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

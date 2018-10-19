@@ -32,11 +32,21 @@ namespace Forms9Patch.iOS
             {
                 var targetUIView = Xamarin.Forms.Platform.iOS.Platform.GetRenderer(target).NativeView;
                 activityController.PopoverPresentationController.SourceView = targetUIView;
-                activityController.PopoverPresentationController.SourceRect = targetUIView.Frame;
+                activityController.PopoverPresentationController.SourceRect = new CGRect(new CGPoint(0, 0), targetUIView.Frame.Size); // targetUIView.Frame;
+                //activityController.PopoverPresentationController.BackgroundColor = UIColor.DarkGray;  // sets the popup's background color
+                activityController.PopoverPresentationController.PageOverlayView().BackgroundColor = UIColor.Black.ColorWithAlpha(0.4f);
             }
 
             vc.PresentViewController(activityController, true, null);
 
+        }
+    }
+
+    public static class UIPopoverPresentationControllerExtensions
+    {
+        public static UIView PageOverlayView(this UIPopoverPresentationController controller)
+        {
+            return controller.ValueForKey((Foundation.NSString)"_dimmingView") as UIView;
         }
     }
 }

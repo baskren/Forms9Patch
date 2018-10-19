@@ -628,7 +628,7 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
-        
+
 
         async Task SetImageSourceAsync()
         {
@@ -725,11 +725,11 @@ namespace Forms9Patch
             var reqH = result.Request.Height;
             if (_f9pImageData != null && _f9pImageData.Height > 0 && _f9pImageData.Width > 0 && (!HorizontalOptions.Expands || !VerticalOptions.Expands))
             {
-
+                System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest ImageData.Size=[" + _f9pImageData.Width + ", " + _f9pImageData.Height + "]");
                 if (!HorizontalOptions.Expands)
-                    reqW = _f9pImageData.Width / Display.Scale;
+                    reqW = _f9pImageData.Width;// / Display.Scale;
                 if (!VerticalOptions.Expands)
-                    reqH = _f9pImageData.Height / Display.Scale;
+                    reqH = _f9pImageData.Height;// / Display.Scale;
             }
             var shadowPaddingHz = 0.0;
             var shadowPaddingVt = 0.0;
@@ -740,6 +740,7 @@ namespace Forms9Patch
                 shadowPaddingVt = shadow.VerticalThickness;
             }
             result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
+            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest result=[" + result + "]");
             return result;
         }
 

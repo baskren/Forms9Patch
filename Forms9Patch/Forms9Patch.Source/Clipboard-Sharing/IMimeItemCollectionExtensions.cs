@@ -88,5 +88,14 @@ namespace Forms9Patch
             return null;
         }
 
+        public static bool ContainsMimeType(this IMimeItemCollection mimeItemCollection, string mimeType)
+        {
+            mimeType = mimeType.ToLower();
+            foreach (var item in mimeItemCollection.Items)
+                if (item.MimeType == mimeType)
+                    return true;
+            return false;
+        }
+
     }
 }
