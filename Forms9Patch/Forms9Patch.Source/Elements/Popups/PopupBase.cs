@@ -549,7 +549,8 @@ namespace Forms9Patch
         bool _isPushing;
         public async Task Push()
         {
-            if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+            // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
+            //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
                 if (_isPushing)
                     return;
@@ -569,7 +570,8 @@ namespace Forms9Patch
         bool _isPoping;
         public async Task Pop()
         {
-            if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+            // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
+            //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
                 if (_isPoping)
                     return;
