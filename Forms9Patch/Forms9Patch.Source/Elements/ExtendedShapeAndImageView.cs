@@ -753,9 +753,9 @@ namespace Forms9Patch
             {
                 System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest ImageData.Size=[" + _f9pImageData.Width + ", " + _f9pImageData.Height + "]");
                 if (!HorizontalOptions.Expands)
-                    reqW = _f9pImageData.Width;// / Display.Scale;
+                    reqW = _f9pImageData.Width / Display.Scale;
                 if (!VerticalOptions.Expands)
-                    reqH = _f9pImageData.Height;// / Display.Scale;
+                    reqH = _f9pImageData.Height / Display.Scale;
             }
             var shadowPaddingHz = 0.0;
             var shadowPaddingVt = 0.0;
