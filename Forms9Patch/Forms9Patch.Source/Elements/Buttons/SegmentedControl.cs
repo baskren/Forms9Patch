@@ -699,68 +699,70 @@ namespace Forms9Patch
         #region Collection management
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (!P42.Utils.Environment.IsOnMainThread)
             {
-                int index;
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        index = e.NewStartingIndex;
-                        if (e.NewItems != null)
-                            foreach (Segment newItem in e.NewItems)
-                                InsertSegment(index++, newItem);
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        if (e.OldItems != null)
-                            foreach (Segment oldItem in e.OldItems)
-                                RemoveSegment(oldItem);
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        for (int i = Children.Count - 1; i >= 0; i--)
-                            RemoveButton(Children[i] as SegmentButton);
-                        break;
-                }
-                int count = Children.Count;
-                if (count > 1)
-                {
-                    ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
-                    for (int i = 1; i < count - 1; i++)
-                        ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
-                    ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
-                }
-                else if (count == 1)
-                {
-                    ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
-                }
-                UpdateChildrenPadding();
-                InvalidateLayout();
-            }
-            else
                 Device.BeginInvokeOnMainThread(() => OnCollectionChanged(sender, e));
+                return;
+            }
+
+            int index;
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    index = e.NewStartingIndex;
+                    if (e.NewItems != null)
+                        foreach (Segment newItem in e.NewItems)
+                            InsertSegment(index++, newItem);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                        foreach (Segment oldItem in e.OldItems)
+                            RemoveSegment(oldItem);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    for (int i = Children.Count - 1; i >= 0; i--)
+                        RemoveButton(Children[i] as SegmentButton);
+                    break;
+            }
+            int count = Children.Count;
+            if (count > 1)
+            {
+                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
+                for (int i = 1; i < count - 1; i++)
+                    ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
+                ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
+            }
+            else if (count == 1)
+            {
+                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
+            }
+            UpdateChildrenPadding();
+            InvalidateLayout();
         }
 
         void InsertSegment(int index, Segment s)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (!P42.Utils.Environment.IsOnMainThread)
             {
-                var button = s._button;
-                UpdateSegment(s);
-                button.PropertyChanged += OnButtonPropertyChanged;
-                button.Tapped += OnSegmentTapped;
-                button.Selected += OnSegmentSelected;
-                button.LongPressing += OnSegmentLongPressing;
-                button.LongPressed += OnSegmentLongPressed;
-                button.FittedFontSizeChanged += Button_FittedFontSizeChanged;
-                Children.Insert(index, button);
-                if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
-                {
-                    foreach (var segment in _segments)
-                        if (segment != s)
-                            segment.IsSelected = false;
-                }
-            }
-            else
                 Device.BeginInvokeOnMainThread(() => InsertSegment(index, s));
+                return;
+            }
+
+            var button = s._button;
+            UpdateSegment(s);
+            button.PropertyChanged += OnButtonPropertyChanged;
+            button.Tapped += OnSegmentTapped;
+            button.Selected += OnSegmentSelected;
+            button.LongPressing += OnSegmentLongPressing;
+            button.LongPressed += OnSegmentLongPressed;
+            button.FittedFontSizeChanged += Button_FittedFontSizeChanged;
+            Children.Insert(index, button);
+            if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
+            {
+                foreach (var segment in _segments)
+                    if (segment != s)
+                        segment.IsSelected = false;
+            }
         }
 
         void RemoveSegment(Segment s)
@@ -785,13 +787,14 @@ namespace Forms9Patch
 
         void UpdateChildrenPadding()
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (!P42.Utils.Environment.IsOnMainThread)
             {
-                foreach (SegmentButton child in Children)
-                    child.Padding = Padding;
-            }
-            else
                 Device.BeginInvokeOnMainThread(UpdateChildrenPadding);
+                return;
+            }
+
+            foreach (SegmentButton child in Children)
+                child.Padding = Padding;
         }
         #endregion
 
@@ -853,8 +856,12 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            //if (Orientation == StackOrientation.Vertical)
-            //    System.Diagnostics.Debug.WriteLine("["+GetType()+"]["+P42.Utils.ReflectionExtensions.CallerMemberName()+"] propertyName=["+propertyName+"]");
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == GroupToggleBehaviorProperty.PropertyName)

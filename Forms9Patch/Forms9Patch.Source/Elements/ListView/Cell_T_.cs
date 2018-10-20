@@ -75,7 +75,14 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
+                return;
+            }
+
             base.OnPropertyChanging(propertyName);
+
             if (propertyName == BindingContextProperty.PropertyName && View != null)
                 View.BindingContext = null;
         }

@@ -628,28 +628,12 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
-        new void InvalidateMeasure()
-        {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.InvalidateMeasure();
-            else
-                Device.BeginInvokeOnMainThread(InvalidateMeasure);
-        }
-
-        new void InvalidateSurface()
-        {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.InvalidateSurface();
-            else
-                Device.BeginInvokeOnMainThread(InvalidateSurface);
-        }
-
         void Invalidate()
         {
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                base.InvalidateMeasure();
-                base.InvalidateSurface();
+                InvalidateMeasure();
+                InvalidateSurface();
             }
             else
                 Device.BeginInvokeOnMainThread(Invalidate);
@@ -684,10 +668,13 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanged(propertyName);
 
             if (propertyName == ElementShapeProperty.PropertyName)
                 ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();

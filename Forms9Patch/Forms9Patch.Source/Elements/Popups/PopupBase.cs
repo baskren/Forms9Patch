@@ -502,10 +502,7 @@ namespace Forms9Patch
         #region PropertyChange managment
         const string KeyboardServiceHeight = "KeyboardService.Height";
 
-        void OnKeyboardHeightChanged(object sender, double e)
-        {
-            OnContentViewPropertyChanged(sender, new PropertyChangedEventArgs(KeyboardServiceHeight));
-        }
+        void OnKeyboardHeightChanged(object sender, double e) => OnContentViewPropertyChanged(sender, new PropertyChangedEventArgs(KeyboardServiceHeight));
 
         void InitializeILayoutProperties(ILayout layout)
         {
@@ -539,17 +536,15 @@ namespace Forms9Patch
 
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnContentViewPropertyChanged(sender, e));
+                return;
+            }
             if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
                 LayoutChildren(X, Y, Width, Height);
         }
 
-        new void LayoutChildren(double x, double y, double width, double height)
-        {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.LayoutChildren(x, y, width, height);
-            else
-                Device.BeginInvokeOnMainThread(() => base.LayoutChildren(x, y, width, height));
-        }
 
         bool _isPushing;
         public async Task Push()
@@ -558,9 +553,9 @@ namespace Forms9Patch
             {
                 if (_isPushing)
                     return;
-                _isPushing = true;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
+                    _isPushing = true;
                     while (_isPoping) await Task.Delay(100);
                     if (IsVisible)
                         await Navigation.PushPopupAsync(this);
@@ -578,9 +573,9 @@ namespace Forms9Patch
             {
                 if (_isPoping)
                     return;
-                _isPoping = true;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
+                    _isPoping = true;
                     while (_isPushing) await Task.Delay(100);
                     if (!IsVisible)
                         await Navigation.RemovePopupPageAsync(this);
@@ -599,10 +594,13 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanged(propertyName);
 
             if (propertyName == PageOverlayColorProperty.PropertyName)
                 base.BackgroundColor = PageOverlayColor;

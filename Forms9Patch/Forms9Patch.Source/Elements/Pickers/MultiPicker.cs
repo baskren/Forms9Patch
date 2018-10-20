@@ -22,8 +22,8 @@ namespace Forms9Patch
         /// <value>The selected items.</value>
         public ObservableCollection<object> SelectedItems
         {
-            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty); 
-            private set => SetValue(SelectedItemsPropertyKey, value); 
+            get => (ObservableCollection<object>)GetValue(SelectedItemsPropertyKey.BindableProperty);
+            private set => SetValue(SelectedItemsPropertyKey, value);
         }
 
         #endregion
@@ -66,8 +66,8 @@ namespace Forms9Patch
         public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MultiPickerCellContentView), default(bool));
         public bool IsSelected
         {
-            get => (bool)GetValue(IsSelectedProperty); 
-            set => SetValue(IsSelectedProperty, value); 
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         #endregion
@@ -116,6 +116,12 @@ namespace Forms9Patch
         #region Change management
         protected override void OnBindingContextChanged()
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(OnBindingContextChanged);
+                return;
+            }
+
             base.OnBindingContextChanged();
             if (BindingContext != null)
                 itemLabel.Text = BindingContext.ToString();
@@ -125,7 +131,14 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == IsSelectedProperty.PropertyName)
                 checkLabel.IsVisible = IsSelected;
         }

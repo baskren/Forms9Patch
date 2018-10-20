@@ -1453,29 +1453,30 @@ namespace Forms9Patch
 
         void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (!P42.Utils.Environment.IsOnMainThread)
             {
-                var propertyName = e.PropertyName;
-                if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
-                {
-                    if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
-                        _stackLayout.Children.Remove(_label);
-                    else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
-                    {
-                        if (TrailingIcon)
-                            _stackLayout.Children.Insert(0, _label);
-                        else
-                            _stackLayout.Children.Add(_label);
-                    }
-                    SetOrienations();
-                }
-                else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
-                {
-                    UpdateIconTint();
-                }
-            }
-            else
                 Device.BeginInvokeOnMainThread(() => OnLabelPropertyChanged(sender, e));
+                return;
+            }
+
+            var propertyName = e.PropertyName;
+            if (propertyName == Xamarin.Forms.Label.TextProperty.PropertyName || propertyName == Label.HtmlTextProperty.PropertyName)
+            {
+                if (string.IsNullOrEmpty((string)_label) && _stackLayout.Children.Contains(_label))
+                    _stackLayout.Children.Remove(_label);
+                else if (!string.IsNullOrEmpty((string)_label) && !_stackLayout.Children.Contains(_label))
+                {
+                    if (TrailingIcon)
+                        _stackLayout.Children.Insert(0, _label);
+                    else
+                        _stackLayout.Children.Add(_label);
+                }
+                SetOrienations();
+            }
+            else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
+            {
+                UpdateIconTint();
+            }
 
             //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
             //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
@@ -1491,10 +1492,13 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanging(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanging(propertyName);
 
             if (_noUpdate)
                 return;
@@ -1666,10 +1670,13 @@ namespace Forms9Patch
         /// </remarks>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanged(propertyName);
 
             if (propertyName == BorderWidthProperty.PropertyName)
                 OutlineWidth = (float)BorderWidth;

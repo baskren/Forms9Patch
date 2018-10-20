@@ -793,10 +793,13 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanging(string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanging(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanging(propertyName);
 
             if (propertyName == BindingContextProperty.PropertyName)
             {
@@ -818,10 +821,13 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanged(propertyName);
 
             if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
             {

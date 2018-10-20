@@ -140,9 +140,9 @@ namespace Forms9Patch
         // - Bounds
         // - InputTransparent
 
-            /// <summary>
-            /// Triggered when children are reordered
-            /// </summary>
+        /// <summary>
+        /// Triggered when children are reordered
+        /// </summary>
         public new event EventHandler ChildrenReordered
         {
             add => _xfLayout.ChildrenReordered += value;
@@ -200,9 +200,9 @@ namespace Forms9Patch
             set => throw new NotSupportedException();
         }
 
-/// <summary>
-/// Forms9Patch.Element
-/// </summary>
+        /// <summary>
+        /// Forms9Patch.Element
+        /// </summary>
         protected Element()
         {
             //base.Content = _xfLayout;
@@ -279,7 +279,14 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
+                return;
+            }
+
             base.OnPropertyChanging(propertyName);
+
             if (propertyName == BindingContextProperty.PropertyName)
                 _xfLayout.BindingContext = null;
         }
@@ -290,7 +297,14 @@ namespace Forms9Patch
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == BindingContextProperty.PropertyName)
                 _xfLayout.BindingContext = BindingContext;
         }

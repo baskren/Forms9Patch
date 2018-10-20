@@ -95,6 +95,12 @@ namespace Forms9Patch
         /// <param name="propertyName">The name of the property that changed.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             //System.Diagnostics.Debug.WriteLine ($"{this.GetType().FullName}.OnPropertyChanged property={propertyName}");
             //if (propertyName == IsPresentedProperty.PropertyName) {
             if (propertyName == TranslationXProperty.PropertyName)
@@ -123,10 +129,7 @@ namespace Forms9Patch
                 return;
             }
 
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            base.OnPropertyChanged(propertyName);
         }
         #endregion
 

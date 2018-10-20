@@ -219,6 +219,12 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             if (propertyName == "Renderer")
                 ForceLayout();
 
@@ -248,10 +254,7 @@ namespace Forms9Patch
                 return;
             }
 
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanged(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
+            base.OnPropertyChanged(propertyName);
 
             if (_bubbleLayout == null)
                 return;
@@ -270,10 +273,13 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.OnPropertyChanging(propertyName);
-            else
-                Device.BeginInvokeOnMainThread(() => base.OnPropertyChanging(propertyName));
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanging(propertyName);
 
             if (propertyName == TargetProperty.PropertyName)
             {

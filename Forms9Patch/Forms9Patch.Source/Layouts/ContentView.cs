@@ -289,20 +289,17 @@ namespace Forms9Patch
 
         #region Property Change Handlers
         /// <summary>
-        /// Called when a property will change
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanging(propertyName);
-        }
-
-        /// <summary>
         /// Called when a property has changed
         /// </summary>
         /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
             if (propertyName == BackgroundColorProperty.PropertyName)
                 CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;

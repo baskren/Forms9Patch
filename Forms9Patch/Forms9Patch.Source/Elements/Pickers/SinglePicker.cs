@@ -20,8 +20,8 @@ namespace Forms9Patch
         /// <value>The item templates.</value>
         public DataTemplateSelector ItemTemplates
         {
-            get => (DataTemplateSelector)GetValue(ItemTemplatesProperty); 
-            private set => SetValue(ItemTemplatesProperty, value); 
+            get => (DataTemplateSelector)GetValue(ItemTemplatesProperty);
+            private set => SetValue(ItemTemplatesProperty, value);
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Forms9Patch
         /// <value>The items source.</value>
         public IList ItemsSource
         {
-            get => (IList)GetValue(ItemsSourceProperty); 
-            set=> SetValue(ItemsSourceProperty, value);
+            get => (IList)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Forms9Patch
         /// <value>The height of the row.</value>
         public int RowHeight
         {
-            get => (int)GetValue(RowHeightProperty); 
-            set => SetValue(RowHeightProperty, value); 
+            get => (int)GetValue(RowHeightProperty);
+            set => SetValue(RowHeightProperty, value);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace Forms9Patch
         /// <value>The index.</value>
         public int Index
         {
-            get => (int)GetValue(IndexProperty); 
-            set => SetValue(IndexProperty, value); 
+            get => (int)GetValue(IndexProperty);
+            set => SetValue(IndexProperty, value);
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace Forms9Patch
         /// <value>The selected item.</value>
         public object SelectedItem
         {
-            get => GetValue(SelectedItemProperty); 
-            set => SetValue(SelectedItemProperty, value); 
+            get => GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
 
         #endregion
@@ -153,7 +153,14 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == RowHeightProperty.PropertyName)
                 OnManualLayoutChildren(this, new ManualLayoutEventArgs(X, Y, Width, Height));
             else if (propertyName == ItemsSourceProperty.PropertyName)

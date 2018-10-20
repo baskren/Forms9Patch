@@ -310,9 +310,16 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
+            base.OnPropertyChanged(propertyName);
+
             if (propertyName == HasShadowProperty.PropertyName)
                 InvalidateMeasure();
-            base.OnPropertyChanged(propertyName);
         }
         #endregion
 

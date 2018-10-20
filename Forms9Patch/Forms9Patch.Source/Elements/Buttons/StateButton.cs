@@ -248,6 +248,13 @@ namespace Forms9Patch
         /// </summary>
         public void UpdateState()
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(UpdateState);
+                return;
+            }
+
+
             if (IsEnabled)
             {
                 if (IsSelected)
@@ -300,6 +307,13 @@ namespace Forms9Patch
         /// <param name="newState">Custom ButtonState.</param>
         public void ShowState(ButtonState newState)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => ShowState(newState));
+                return;
+            }
+
+
             _showingState = true;
 
 
@@ -627,6 +641,12 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
+                return;
+            }
+
             base.OnPropertyChanged(propertyName);
 
             if (_noUpdate)
