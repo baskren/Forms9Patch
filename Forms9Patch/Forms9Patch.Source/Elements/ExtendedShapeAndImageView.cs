@@ -743,6 +743,7 @@ namespace Forms9Patch
         [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
 #pragma warning disable CS0618 // Type or member is obsolete
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -765,6 +766,11 @@ namespace Forms9Patch
                 shadowPaddingHz = shadow.HorizontalThickness;
                 shadowPaddingVt = shadow.VerticalThickness;
             }
+
+            if (WidthRequest > 0)
+                reqW = WidthRequest;
+            if (HeightRequest > 0)
+                reqH = HeightRequest;
             result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
             System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest result=[" + result + "]");
             return result;
