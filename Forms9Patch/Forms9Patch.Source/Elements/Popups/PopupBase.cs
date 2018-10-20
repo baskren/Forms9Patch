@@ -7,6 +7,7 @@ using System.ComponentModel;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -553,35 +554,41 @@ namespace Forms9Patch
         bool _isPushing;
         public async Task Push()
         {
-            if (_isPushing)
-                return;
-            _isPushing = true;
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                while (_isPoping) await Task.Delay(100);
-                if (IsVisible)
-                    await Navigation.PushPopupAsync(this);
-                _isPushing = false;
+                if (_isPushing)
+                    return;
+                _isPushing = true;
+                if (P42.Utils.Environment.IsOnMainThread)
+                {
+                    while (_isPoping) await Task.Delay(100);
+                    if (IsVisible)
+                        await Navigation.PushPopupAsync(this);
+                    _isPushing = false;
+                }
+                else
+                    Device.BeginInvokeOnMainThread(async () => await Push());
             }
-            else
-                Device.BeginInvokeOnMainThread(async () => await Push());
         }
 
         bool _isPoping;
         public async Task Pop()
         {
-            if (_isPoping)
-                return;
-            _isPoping = true;
-            if (P42.Utils.Environment.IsOnMainThread)
+            if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                while (_isPushing) await Task.Delay(100);
-                if (!IsVisible)
-                    await Navigation.RemovePopupPageAsync(this);
-                _isPoping = false;
+                if (_isPoping)
+                    return;
+                _isPoping = true;
+                if (P42.Utils.Environment.IsOnMainThread)
+                {
+                    while (_isPushing) await Task.Delay(100);
+                    if (!IsVisible)
+                        await Navigation.RemovePopupPageAsync(this);
+                    _isPoping = false;
+                }
+                else
+                    Device.BeginInvokeOnMainThread(async () => await Pop());
             }
-            else
-                Device.BeginInvokeOnMainThread(async () => await Pop());
         }
 
 
