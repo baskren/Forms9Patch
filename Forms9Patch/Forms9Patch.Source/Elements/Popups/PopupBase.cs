@@ -551,6 +551,10 @@ namespace Forms9Patch
         }
 
         bool _isPushing;
+        /// <summary>
+        /// Push the popup asynchronously
+        /// </summary>
+        /// <returns></returns>
         public async Task Push()
         {
             if (_isPushing)
@@ -568,6 +572,10 @@ namespace Forms9Patch
         }
 
         bool _isPoping;
+        /// <summary>
+        /// Pop the popup asynchronously
+        /// </summary>
+        /// <returns></returns>
         public async Task Pop()
         {
             if (_isPoping)

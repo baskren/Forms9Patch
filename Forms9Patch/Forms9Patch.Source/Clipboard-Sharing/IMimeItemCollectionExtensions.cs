@@ -88,6 +88,12 @@ namespace Forms9Patch
             return null;
         }
 
+        /// <summary>
+        /// Does the MimeItemCollection contain at least one item of a given mimeType?
+        /// </summary>
+        /// <param name="mimeItemCollection"></param>
+        /// <param name="mimeType"></param>
+        /// <returns></returns>
         public static bool ContainsMimeType(this IMimeItemCollection mimeItemCollection, string mimeType)
         {
             mimeType = mimeType.ToLower();
