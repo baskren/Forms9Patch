@@ -483,7 +483,7 @@ namespace Forms9Patch
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("===============================");
+                    //System.Diagnostics.Debug.WriteLine("===============================");
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
                     {
@@ -526,7 +526,7 @@ namespace Forms9Patch
                         {
                             //System.Diagnostics.Debug.WriteLine("========================================");
                             tuple = StartAndPointerLocation(rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
-                            System.Diagnostics.Debug.WriteLine("PointerDir=[" + pointerDir + "]");
+                            //System.Diagnostics.Debug.WriteLine("PointerDir=[" + pointerDir + "]");
                             //System.Diagnostics.Debug.WriteLine("tuple=[" + tuple + "]");
                             bounds = new Rectangle(
                                 new Point(
@@ -534,14 +534,14 @@ namespace Forms9Patch
                                     tuple.Item1 + y),
                                 new Size(rboxSize.Width + PointerLength, rboxSize.Height)
                             );
-                            System.Diagnostics.Debug.WriteLine("bounds=[" + bounds + "]");
+                            //System.Diagnostics.Debug.WriteLine("bounds=[" + bounds + "]");
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
-                    System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
+                    //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
-                    System.Diagnostics.Debug.WriteLine("===============================");
+                    //System.Diagnostics.Debug.WriteLine("===============================");
                 }
             }
         }
