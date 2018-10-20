@@ -730,7 +730,7 @@ namespace Forms9Patch
         [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
 #pragma warning disable CS0618 // Type or member is obsolete
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -739,7 +739,7 @@ namespace Forms9Patch
             var reqH = result.Request.Height;
             if (_f9pImageData != null && _f9pImageData.Height > 0 && _f9pImageData.Width > 0 && (!HorizontalOptions.Expands || !VerticalOptions.Expands))
             {
-                System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest ImageData.Size=[" + _f9pImageData.Width + ", " + _f9pImageData.Height + "]");
+                //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest ImageData.Size=[" + _f9pImageData.Width + ", " + _f9pImageData.Height + "]");
                 if (!HorizontalOptions.Expands)
                     reqW = _f9pImageData.Width / Display.Scale;
                 if (!VerticalOptions.Expands)
@@ -759,7 +759,7 @@ namespace Forms9Patch
             if (HeightRequest > 0)
                 reqH = HeightRequest;
             result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
-            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest result=[" + result + "]");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest result=[" + result + "]");
             return result;
         }
 

@@ -386,7 +386,8 @@ namespace Forms9Patch
                         ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
-
+                    if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
+                        return;
 
                     var reqSpaceToLeft = (UsePoint ? Point.X + targetBounds.Left : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
                     var reqSpaceToRight = width - (UsePoint ? Point.X + targetBounds.Left : targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
@@ -482,6 +483,7 @@ namespace Forms9Patch
                 }
                 else
                 {
+                    System.Diagnostics.Debug.WriteLine("===============================");
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
                     {
@@ -522,20 +524,24 @@ namespace Forms9Patch
                         }
                         else
                         {
+                            //System.Diagnostics.Debug.WriteLine("========================================");
                             tuple = StartAndPointerLocation(rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
+                            System.Diagnostics.Debug.WriteLine("PointerDir=[" + pointerDir + "]");
+                            //System.Diagnostics.Debug.WriteLine("tuple=[" + tuple + "]");
                             bounds = new Rectangle(
                                 new Point(
                                     (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + x,
                                     tuple.Item1 + y),
                                 new Size(rboxSize.Width + PointerLength, rboxSize.Height)
                             );
+                            System.Diagnostics.Debug.WriteLine("bounds=[" + bounds + "]");
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
-                    //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
+                    System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
-                    System.Diagnostics.Debug.WriteLine("");
+                    System.Diagnostics.Debug.WriteLine("===============================");
                 }
             }
         }
