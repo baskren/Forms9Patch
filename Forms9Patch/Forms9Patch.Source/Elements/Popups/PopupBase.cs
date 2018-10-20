@@ -547,6 +547,10 @@ namespace Forms9Patch
 
 
         bool _isPushing;
+        /// <summary>
+        /// Push the popup asynchronously
+        /// </summary>
+        /// <returns></returns>
         public async Task Push()
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
@@ -568,6 +572,10 @@ namespace Forms9Patch
         }
 
         bool _isPoping;
+        /// <summary>
+        /// Pop the popup asynchronously
+        /// </summary>
+        /// <returns></returns>
         public async Task Pop()
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
