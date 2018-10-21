@@ -23,11 +23,11 @@
   <Import Project="..\FormsGestures.Source\FormsGestures.targets" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
     <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
   </ItemGroup>
 
 </Project>

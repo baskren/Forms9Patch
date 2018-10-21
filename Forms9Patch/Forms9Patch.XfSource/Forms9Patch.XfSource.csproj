@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,25 +16,22 @@
     <DocumentationFile>bin\Release\netstandard1.3\Forms9Patch.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Import Project="..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems" Label="Shared" Condition="Exists('..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems')" />
+  <!--Import Project="..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems" Label="Shared" Condition="Exists('..\..\Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems')" /-->
   <Import Project="..\Forms9Patch.Source\Forms9Patch.targets" />
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj" />
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
-    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Elements\ListView\Extensions\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfSource\FormsGestures.XfSource.csproj" />
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Core\Xamarin.Forms.Core.csproj" />
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Platform\Xamarin.Forms.Platform.csproj" />
+    <ProjectReference Include="..\..\Xamarin.Forms\Xamarin.Forms.Xaml\Xamarin.Forms.Xaml.csproj" />
   </ItemGroup>
 </Project>

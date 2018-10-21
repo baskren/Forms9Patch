@@ -714,6 +714,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource.UWP", "Forms9PatchFromSourceDemo\Forms9PatchDemo.XfSource.UWP\Forms9PatchDemo.XfSource.UWP.csproj", "{C2C9B778-07F5-4955-B413-299A66D14FEA}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems*{740c3dff-e410-4632-bdd9-82594f3e21b4}*SharedItemsImports = 4
+		Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems*{a6703c7d-d362-452a-a7a5-73771194d38c}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM
