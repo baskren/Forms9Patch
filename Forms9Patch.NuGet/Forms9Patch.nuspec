@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <id>Forms9Patch</id>
+        <version>1.5.0.7-rc2</version>
+        <title>Forms9Patch</title>
+        <authors>Ben Askren</authors>
+        <owners>baskren</owners>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/baskren/Forms9Patch</projectUrl>
+        <iconUrl>http://buildcalc.com/forms9patch/Icons/favicon-128.png</iconUrl>
+        <description>Xamarin Forms is great for developing apps on Android, iOS, and Universal Windows Platform (UWP) but it is missing some important features: 
+?Scalable images
+?NetStandard, PCL and Shared Library, multi-screen / multi-resolution image management
+?HTML formatted text for labels and buttons
+?NetStandard, PCL and Shared Library custom font management
+?Hardware keyboard key detection
+?On-Screen software keyboard height change events
+?Support for multiple items of the same MIME type on the clipboard
+?Support for inter-app Data Sharing
+
+Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
+        <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
+        <releaseNotes>1.5.0: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
+1.4.1: Fixed: Clipboard, DataSharing and HardwareKeyListener UWP dependencies not registered.
+1.4.0: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.</releaseNotes>
+        <copyright>2019, 42nd Parallel</copyright>
+        <language>en-US</language>
+        <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
+        <dependencies>
+            <group>
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
+                <dependency id="Newtonsoft.Json" version="11.0.2" />
+                <dependency id="Rg.Plugins.Popup" version="1.1.4.168" />
+                <dependency id="SkiaSharp.Views.Forms" version="1.60.0" />
+                <dependency id="SkiaSharp.Svg" version="1.60.0" />
+            </group>
+            <group targetFramework="UAP10.0">
+                <dependency id="Xamarin.Forms" version="2.5.0.280555" />
+                <dependency id="Newtonsoft.Json" version="11.0.2" />
+                <dependency id="Rg.Plugins.Popup" version="1.1.4.168" />
+                <dependency id="SkiaSharp.Views.Forms" version="1.60.0" />
+                <dependency id="SkiaSharp.Svg" version="1.60.0" />
+                <dependency id="SharpDX.Direct2D1" version="4.0.1" />
+                <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.0.1" />
+            </group>
+        </dependencies>
+        <references>
+            <group targetFramework="netstandard1.0">
+                <reference file="Forms9Patch.dll" />
+                <reference file="Forms9Patch.pdb" />
+                <reference file="Forms9Patch.xml" />
+                <reference file="FormsGestures.dll" />
+                <reference file="FormsGestures.pdb" />
+                <reference file="FormsGestures.xml" />
+                <reference file="P42.NumbericalMethods.dll" />
+                <reference file="P42.NumbericalMethods.pdb" />
+                <reference file="P42.Utils.dll" />
+                <reference file="P42.Utils.pdb" />
+            </group>
+            <group targetFramework="MonoAndroid10">
+                <reference file="Forms9Patch.Droid.dll" />
+                <reference file="Forms9Patch.Droid.pdb" />
+                <reference file="Forms9Patch.dll" />
+                <reference file="Forms9Patch.pdb" />
+                <reference file="Forms9Patch.xml" />
+                <reference file="FormsGestures.Droid.dll" />
+                <reference file="FormsGestures.Droid.pdb" />
+                <reference file="FormsGestures.dll" />
+                <reference file="FormsGestures.pdb" />
+                <reference file="FormsGestures.xml" />
+                <reference file="MimeSharp.dll" />
+                <reference file="MimeSharp.pdb" />
+                <reference file="P42.NumbericalMethods.dll" />
+                <reference file="P42.NumbericalMethods.pdb" />
+                <reference file="P42.Utils.Droid.dll" />
+                <reference file="P42.Utils.Droid.pdb" />
+                <reference file="P42.Utils.dll" />
+                <reference file="P42.Utils.pdb" />
+            </group>
+            <group targetFramework="Xamarin.iOS10">
+                <reference file="Forms9Patch.iOS.dll" />
+                <reference file="Forms9Patch.iOS.pdb" />
+                <reference file="Forms9Patch.dll" />
+                <reference file="Forms9Patch.pdb" />
+                <reference file="Forms9Patch.xml" />
+                <reference file="FormsGestures.iOS.dll" />
+                <reference file="FormsGestures.iOS.pdb" />
+                <reference file="FormsGestures.dll" />
+                <reference file="FormsGestures.pdb" />
+                <reference file="FormsGestures.xml" />
+                <reference file="P42.NumbericalMethods.dll" />
+                <reference file="P42.NumbericalMethods.pdb" />
+                <reference file="P42.Utils.iOS.dll" />
+                <reference file="P42.Utils.iOS.pdb" />
+                <reference file="P42.Utils.dll" />
+                <reference file="P42.Utils.pdb" />
+            </group>
+            <group targetFramework="uap10.0">
+                <reference file="Forms9Patch\EnhancedListView.Resources.xbf" />
+                <reference file="Forms9Patch\Properties\Forms9Patch.UWP.rd.xml" />
+                <reference file="Forms9Patch.UWP.dll" />
+                <reference file="Forms9Patch.UWP.pdb" />
+                <reference file="Forms9Patch.UWP.pri" />
+                <reference file="Forms9Patch.dll" />
+                <reference file="Forms9Patch.pdb" />
+                <reference file="Forms9Patch.xml" />
+                <reference file="FormsGestures.UWP.dll" />
+                <reference file="FormsGestures.UWP.pdb" />
+                <reference file="FormsGestures.UWP.pri" />
+                <reference file="FormsGestures.dll" />
+                <reference file="FormsGestures.pdb" />
+                <reference file="FormsGestures.xml" />
+                <reference file="MimeSharp.dll" />
+                <reference file="MimeSharp.pdb" />
+                <reference file="P42.NumbericalMethods.dll" />
+                <reference file="P42.NumbericalMethods.pdb" />
+                <reference file="P42.Utils.UWP.dll" />
+                <reference file="P42.Utils.UWP.pdb" />
+                <reference file="P42.Utils.UWP.pri" />
+                <reference file="P42.Utils.dll" />
+                <reference file="P42.Utils.pdb" />
+            </group>
+        </references>
+        <files>
+            <!--NetStandard-->
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget\bin\Release\netstandard1.3\Forms9Patch.*" target="lib\netstandard1.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget\bin\Release\netstandard1.3\FormsGestures.*" target="lib\netstandard1.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget\bin\Release\netstandard1.3\P42.NumbericalMethods.*" target="lib\netstandard1.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget\bin\Release\netstandard1.3\P42.Utils.*" target="lib\netstandard1.0" />
+            <!--Android-->
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Release\Forms9Patch.*" target="lib\MonoAndroid10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Release\FormsGestures.*" target="lib\MonoAndroid10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Release\MimeSharp.*" target="lib\MonoAndroid10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Release\P42.NumbericalMethods.*" target="lib\MonoAndroid10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Release\P42.Utils.*" target="lib\MonoAndroid10" />
+            <!--iOS-->
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.iOS\bin\Release\Forms9Patch.*" target="lib\Xamarin.iOS10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.iOS\bin\Release\FormsGestures.*" target="lib\Xamarin.iOS10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.iOS\bin\Release\P42.NumbericalMethods.*" target="lib\Xamarin.iOS10" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.iOS\bin\Release\P42.Utils.*" target="lib\Xamarin.iOS10" />
+            <!--UWP-->
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\obj\Release\Forms9Patch.UWP.xr.xml" target="lib\uap10.0\Forms9Patch.UWP" />
+            <file src="..\Forms9Patch\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd" target="lib\uap10.0\Forms9Patch.UWP\Properties" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.dll" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.pdb" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.xml" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.UWP.dll" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.UWP.pdb" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\Forms9Patch.UWP.pri" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\FormsGestures.*" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\MimeSharp.*" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\P42.NumbericalMethods.*" target="lib\uap10.0" />
+            <file src="..\Forms9Patch\Forms9Patch.XfNuget.UWP\bin\Release\P42.Utils.*" target="lib\uap10.0" />
+        </files>
+    </metadata>
+</package>
