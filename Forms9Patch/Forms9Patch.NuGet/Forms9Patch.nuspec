@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.5.0.7-rc2</version>
+        <version>1.5.0.7</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -10,21 +10,24 @@
         <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>https://github.com/baskren/Forms9Patch</projectUrl>
         <iconUrl>http://buildcalc.com/forms9patch/Icons/favicon-128.png</iconUrl>
-        <description>Xamarin Forms is great for developing apps on Android, iOS, and Universal Windows Platform (UWP) but it is missing some important features: 
-?Scalable images
-?NetStandard, PCL and Shared Library, multi-screen / multi-resolution image management
-?HTML formatted text for labels and buttons
-?NetStandard, PCL and Shared Library custom font management
-?Hardware keyboard key detection
-?On-Screen software keyboard height change events
-?Support for multiple items of the same MIME type on the clipboard
-?Support for inter-app Data Sharing
+	<description>
+Xamarin Forms is great for developing apps on Android, iOS, and Universal Windows Platform (UWP) but it is missing some important features: 
+- Scalable images
+- NetStandard, PCL and Shared Library, multi-screen / multi-resolution image management
+- HTML formatted text for labels and buttons
+- NetStandard, PCL and Shared Library custom font management
+- Hardware keyboard key detection
+- On-Screen software keyboard height change events
+- Support for multiple items of the same MIME type on the clipboard
+- Support for inter-app Data Sharing
 
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
-        <releaseNotes>1.5.0: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
-1.4.1: Fixed: Clipboard, DataSharing and HardwareKeyListener UWP dependencies not registered.
-1.4.0: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.</releaseNotes>
+	<releaseNotes>i
+**1.5.0.7**: Fixed: Animation of popups not smooth; Fixed: Too much effort to assure actions are on the UI Thread; 
+**1.5.0**: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
+**1.4.1**: Fixed: Clipboard, DataSharing and HardwareKeyListener UWP dependencies not registered.
+**1.4.0**: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.</releaseNotes>
         <copyright>2019, 42nd Parallel</copyright>
         <language>en-US</language>
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>

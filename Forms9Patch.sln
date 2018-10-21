@@ -647,7 +647,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms and Forms9Pat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch Source", "Forms9Patch Source", "{1C338DFE-D29B-49A5-8E70-2947336BB638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource.iOS", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource.iOS\Forms9PatchDemo.F9pSource.iOS.csproj", "{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}"
 EndProject
