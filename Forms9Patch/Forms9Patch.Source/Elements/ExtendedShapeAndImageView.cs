@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Collections.Specialized;
 using Xamarin.Forms.Internals;
+using Newtonsoft.Json;
 
 namespace Forms9Patch
 {
@@ -870,10 +871,21 @@ namespace Forms9Patch
                         //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
                         //shadowPaint.MaskFilter = filter;
 
-                        if (DrawFill)
-                            canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
-                        else if (DrawImage)
-                            GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
+                        try
+                        {
+                            if (DrawFill)
+                                canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
+                            else if (DrawImage)
+                                GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
+                        }
+                        catch (Exception exception)
+                        {
+                            var properties = new Dictionary<string, string>
+                            {
+                                { "shadowRect", JsonConvert.SerializeObject(shadowRect) },
+                            };
+                            Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        }
                     }
                 }
 
