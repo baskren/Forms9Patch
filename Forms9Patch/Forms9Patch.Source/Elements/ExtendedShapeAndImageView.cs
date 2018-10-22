@@ -485,12 +485,11 @@ namespace Forms9Patch
         public Image()
         {
             _f9pId = _instances++;
-            
             if (Device.RuntimePlatform == Device.UWP)
             {
                 Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
                 {
-                    if (!_painting && !_repainting && (DateTime.Now - _lastPaint) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(200))
+                    if ((DateTime.Now - _lastPaint) is TimeSpan elapsed && elapsed > TimeSpan.FromMilliseconds(100))
                     {
                         _repainting = true;
                         _lastPaint = DateTime.MaxValue;
@@ -499,7 +498,6 @@ namespace Forms9Patch
                     return true;
                 });
             }
-            
         }
 
         /// <summary>
@@ -630,19 +628,16 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
-        async Task Invalidate()
+        void Invalidate()
         {
-            if (Device.RuntimePlatform == Device.UWP)
+            if (P42.Utils.Environment.IsOnMainThread)
             {
-                while (_painting)
-                    await Task.Delay(50);
                 InvalidateMeasure();
                 InvalidateSurface();
             }
             else
-                Device.BeginInvokeOnMainThread(async () => await Invalidate());
+                Device.BeginInvokeOnMainThread(Invalidate);
         }
-
 
         async Task SetImageSourceAsync()
         {
@@ -663,7 +658,7 @@ namespace Forms9Patch
                 }
 
                 ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
-                await Invalidate();
+                Invalidate();
             }
         }
 
@@ -772,9 +767,6 @@ namespace Forms9Patch
 
 
         #region Painting
-        bool _painting;
-        object _lock = new object();
-
         /// <summary>
         /// Internal use only
         /// </summary>
@@ -789,221 +781,214 @@ namespace Forms9Patch
             if (canvas == null)
                 return;
 
-            lock (_lock)
+            canvas.Clear();
+
+            var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == Xamarin.Forms.StackOrientation.Horizontal;
+            var vt = !hz;
+
+            var backgroundColor = BackgroundColor;
+            var hasShadow = HasShadow;
+            var shadowInverted = ShadowInverted;
+            var outlineWidth = OutlineWidth * Display.Scale;
+            var outlineRadius = OutlineRadius * Display.Scale;
+            var outlineColor = OutlineColor;
+            var elementShape = ((IExtendedShape)this).ExtendedElementShape;
+
+            float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth * Display.Scale : 0;
+            if (separatorWidth < 0)
+                separatorWidth = outlineWidth;
+            if (outlineColor.A <= 0.01)
+                separatorWidth = 0;
+
+            bool drawOutline = DrawOutline;
+            bool drawImage = DrawImage;
+            bool drawFill = DrawFill;
+
+            if ((drawFill || drawOutline || separatorWidth > 0 || drawImage) && CanvasSize != default(SKSize))
             {
-                _painting = true;
 
-                canvas.Clear();
+                SKRect rect = new SKRect(0, 0, info.Width, info.Height);
+                //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
 
-                var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == Xamarin.Forms.StackOrientation.Horizontal;
-                var vt = !hz;
+                var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
+                var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
+                var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
+                var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);
+                var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
+                var shadowPadding = ShapeBase.ShadowPadding(this, true);
 
-                var backgroundColor = BackgroundColor;
-                var hasShadow = HasShadow;
-                var shadowInverted = ShadowInverted;
-                var outlineWidth = OutlineWidth * Display.Scale;
-                var outlineRadius = OutlineRadius * Display.Scale;
-                var outlineColor = OutlineColor;
-                var elementShape = ((IExtendedShape)this).ExtendedElementShape;
 
-                float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth * Display.Scale : 0;
-                if (separatorWidth < 0)
-                    separatorWidth = outlineWidth;
-                if (outlineColor.A <= 0.01)
-                    separatorWidth = 0;
+                var perimeter = rect;
 
-                bool drawOutline = DrawOutline;
-                bool drawImage = DrawImage;
-                bool drawFill = DrawFill;
 
-                if ((drawFill || drawOutline || separatorWidth > 0 || drawImage) && CanvasSize != default(SKSize))
+                if (makeRoomForShadow)
                 {
-
-                    SKRect rect = new SKRect(0, 0, info.Width, info.Height);
-                    //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
-
-                    var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
-                    var shadowX = (float)(Forms9Patch.Settings.ShadowOffset.X * FormsGestures.Display.Scale);
-                    var shadowY = (float)(Forms9Patch.Settings.ShadowOffset.Y * FormsGestures.Display.Scale);
-                    var shadowR = (float)(Forms9Patch.Settings.ShadowRadius * FormsGestures.Display.Scale);
-                    var shadowColor = Xamarin.Forms.Color.FromRgba(0.0, 0.0, 0.0, 0.75).ToSKColor(); //  .ToWindowsColor().ToSKColor();
-                    var shadowPadding = ShapeBase.ShadowPadding(this, true);
-
-
-                    var perimeter = rect;
-
-
-                    if (makeRoomForShadow)
+                    // what additional padding was allocated to cast the button's shadow?
+                    switch (elementShape)
                     {
-                        // what additional padding was allocated to cast the button's shadow?
+                        case ExtendedElementShape.SegmentStart:
+                            perimeter = new SKRect(rect.Left + (float)shadowPadding.Left, rect.Top + (float)shadowPadding.Top, rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
+                            break;
+                        case ExtendedElementShape.SegmentMid:
+                            perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
+                            break;
+                        case ExtendedElementShape.SegmentEnd:
+                            perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (float)shadowPadding.Right, rect.Bottom - (float)shadowPadding.Bottom);
+                            break;
+                        default:
+                            perimeter = new SKRect(rect.Left + (float)shadowPadding.Left, rect.Top + (float)shadowPadding.Top, rect.Right - (float)shadowPadding.Right, rect.Bottom - (float)shadowPadding.Bottom);
+                            break;
+                    }
+
+                    if (!shadowInverted)
+                    {
+                        // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
+                        float allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
+                        SKRect shadowRect = perimeter;
+
                         switch (elementShape)
                         {
                             case ExtendedElementShape.SegmentStart:
-                                perimeter = new SKRect(rect.Left + (float)shadowPadding.Left, rect.Top + (float)shadowPadding.Top, rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
+                                shadowRect = new SKRect(perimeter.Left, perimeter.Top, perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
                                 break;
                             case ExtendedElementShape.SegmentMid:
-                                perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (hz ? 0 : (float)shadowPadding.Right), rect.Bottom - (vt ? 0 : (float)shadowPadding.Bottom));
+                                shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
                                 break;
                             case ExtendedElementShape.SegmentEnd:
-                                perimeter = new SKRect(rect.Left + (hz ? 0 : (float)shadowPadding.Left), rect.Top + (vt ? 0 : (float)shadowPadding.Top), rect.Right - (float)shadowPadding.Right, rect.Bottom - (float)shadowPadding.Bottom);
-                                break;
-                            default:
-                                perimeter = new SKRect(rect.Left + (float)shadowPadding.Left, rect.Top + (float)shadowPadding.Top, rect.Right - (float)shadowPadding.Right, rect.Bottom - (float)shadowPadding.Bottom);
+                                shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right, perimeter.Bottom);
                                 break;
                         }
 
-                        if (!shadowInverted)
-                        {
-                            // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
-                            float allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
-                            SKRect shadowRect = perimeter;
-
-                            switch (elementShape)
-                            {
-                                case ExtendedElementShape.SegmentStart:
-                                    shadowRect = new SKRect(perimeter.Left, perimeter.Top, perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
-                                    break;
-                                case ExtendedElementShape.SegmentMid:
-                                    shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right + allowance * (vt ? 0 : 1), perimeter.Bottom + allowance * (hz ? 0 : 1));
-                                    break;
-                                case ExtendedElementShape.SegmentEnd:
-                                    shadowRect = new SKRect(perimeter.Left - allowance * (vt ? 0 : 1), perimeter.Top - allowance * (hz ? 0 : 1), perimeter.Right, perimeter.Bottom);
-                                    break;
-                            }
-
-                            var shadowPaint = new SKPaint
-                            {
-                                Style = SKPaintStyle.Fill,
-                                Color = shadowColor,
-                            };
-
-                            var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
-                            shadowPaint.ImageFilter = filter;
-                            //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
-                            //shadowPaint.MaskFilter = filter;
-
-                            if (DrawFill)
-                                canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
-                            else if (DrawImage)
-                                GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
-                        }
-                    }
-
-                    if (drawFill)
-                    {
-                        var fillRect = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
-                        var path = PerimeterPath(fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
-                        var fillPaint = new SKPaint
-                        {
-                            Style = SKPaintStyle.Fill,
-                            Color = backgroundColor.ToSKColor(),
-                            IsAntialias = true,
-                        };
-                        canvas.DrawPath(path, fillPaint);
-                    }
-
-                    if (drawImage)
-                    {
-                        var imagePerimeter = perimeter;
-                        if (drawFill)
-                            imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
-                        var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0));
-                        GenerateImageLayout(canvas, perimeter, path);
-                    }
-
-                    if (drawOutline)// && !drawImage)
-                    {
-                        var outlinePaint = new SKPaint
-                        {
-                            Style = SKPaintStyle.Stroke,
-                            Color = outlineColor.ToSKColor(),
-                            StrokeWidth = outlineWidth,
-                            IsAntialias = true,
-                            //StrokeJoin = SKStrokeJoin.Bevel
-                            //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
-                        };
-                        var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
-                        //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
-                        var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
-                        var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true);
-                        canvas.DrawPath(path, outlinePaint);
-                    }
-
-
-                    if (separatorWidth > 0 && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
-                    {
-                        //System.Diagnostics.Debug.WriteLine("SeparatorColor: " + outlineColor.R + ", " + outlineColor.G + ", " + outlineColor.B + ", " + outlineColor.A);
-                        //System.Diagnostics.Debug.WriteLine("SeparatorWidth: " + separatorWidth);
-                        var separatorPaint = new SKPaint
-                        {
-                            Style = SKPaintStyle.Stroke,
-                            Color = outlineColor.ToSKColor(),
-                            StrokeWidth = separatorWidth,
-                            IsAntialias = false,
-                            //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
-                        };
-                        var path = new SKPath();
-                        if (vt)
-                        {
-                            path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2);
-                            path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2);
-                        }
-                        else
-                        {
-                            path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
-                            path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
-                        }
-                        canvas.DrawPath(path, separatorPaint);
-                    }
-
-
-                    if (makeRoomForShadow && shadowInverted)
-                    {
-                        canvas.Save();
-
-                        // setup the paint
-                        var insetShadowPaint = new SKPaint
+                        var shadowPaint = new SKPaint
                         {
                             Style = SKPaintStyle.Fill,
                             Color = shadowColor,
                         };
+
                         var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
-                        insetShadowPaint.ImageFilter = filter;
+                        shadowPaint.ImageFilter = filter;
+                        //var filter = SkiaSharp.SKMaskFilter.CreateBlur(SKBlurStyle.Outer, 0.5f);
+                        //shadowPaint.MaskFilter = filter;
 
-                        // what is the mask?
-                        var maskPath = PerimeterPath(perimeter, outlineRadius);
-                        canvas.ClipPath(maskPath);
-
-                        // what is the path that will cast the shadow?
-                        // a) the button portion (which will be the hole in the larger outline, b)
-                        var shadowRect = InverseShadowInsetForShape(perimeter, vt);
-                        var path = PerimeterPath(shadowRect, outlineRadius);
-                        // b) add to it the larger outline 
-                        path.AddRect(RectInset(rect, -50));
-                        canvas.DrawPath(path, insetShadowPaint);
-
-                        /*
-                        // let's display this just to see if I got it right
-                        SKPaint fillPaint = new SKPaint
-                        {
-                            Style = SKPaintStyle.Fill,
-                            Color = Xamarin.Forms.Color.Green.ToWindowsColor().ToSKColor(),
-                            IsAntialias = true,
-                        };
-                        canvas.DrawPath(path, fillPaint);
-                        */
-                        canvas.Restore();
+                        if (DrawFill)
+                            canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
+                        else if (DrawImage)
+                            GenerateImageLayout(canvas, perimeter, PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
                     }
-
-                    //StoreLayoutProperties();
                 }
 
-                if (!_repainting)
-                    _lastPaint = DateTime.Now;
-                _repainting = false;
+                if (drawFill)
+                {
+                    var fillRect = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
+                    var path = PerimeterPath(fillRect, outlineRadius - (drawOutline ? outlineWidth : 0));
+                    var fillPaint = new SKPaint
+                    {
+                        Style = SKPaintStyle.Fill,
+                        Color = backgroundColor.ToSKColor(),
+                        IsAntialias = true,
+                    };
+                    canvas.DrawPath(path, fillPaint);
+                }
 
-                _painting = false;
+                if (drawImage)
+                {
+                    var imagePerimeter = perimeter;
+                    if (drawFill)
+                        imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
+                    var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0));
+                    GenerateImageLayout(canvas, perimeter, path);
+                }
+
+                if (drawOutline)// && !drawImage)
+                {
+                    var outlinePaint = new SKPaint
+                    {
+                        Style = SKPaintStyle.Stroke,
+                        Color = outlineColor.ToSKColor(),
+                        StrokeWidth = outlineWidth,
+                        IsAntialias = true,
+                        //StrokeJoin = SKStrokeJoin.Bevel
+                        //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
+                    };
+                    var intPerimeter = new SKRect((int)perimeter.Left, (int)perimeter.Top, (int)perimeter.Right, (int)perimeter.Bottom);
+                    //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
+                    var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
+                    var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true);
+                    canvas.DrawPath(path, outlinePaint);
+                }
+
+
+                if (separatorWidth > 0 && (elementShape == ExtendedElementShape.SegmentMid || elementShape == ExtendedElementShape.SegmentEnd))
+                {
+                    //System.Diagnostics.Debug.WriteLine("SeparatorColor: " + outlineColor.R + ", " + outlineColor.G + ", " + outlineColor.B + ", " + outlineColor.A);
+                    //System.Diagnostics.Debug.WriteLine("SeparatorWidth: " + separatorWidth);
+                    var separatorPaint = new SKPaint
+                    {
+                        Style = SKPaintStyle.Stroke,
+                        Color = outlineColor.ToSKColor(),
+                        StrokeWidth = separatorWidth,
+                        IsAntialias = false,
+                        //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
+                    };
+                    var path = new SKPath();
+                    if (vt)
+                    {
+                        path.MoveTo(perimeter.Left, perimeter.Top + outlineWidth / 2);
+                        path.LineTo(perimeter.Right, perimeter.Top + outlineWidth / 2);
+                    }
+                    else
+                    {
+                        path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
+                        path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
+                    }
+                    canvas.DrawPath(path, separatorPaint);
+                }
+
+
+                if (makeRoomForShadow && shadowInverted)
+                {
+                    canvas.Save();
+
+                    // setup the paint
+                    var insetShadowPaint = new SKPaint
+                    {
+                        Style = SKPaintStyle.Fill,
+                        Color = shadowColor,
+                    };
+                    var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
+                    insetShadowPaint.ImageFilter = filter;
+
+                    // what is the mask?
+                    var maskPath = PerimeterPath(perimeter, outlineRadius);
+                    canvas.ClipPath(maskPath);
+
+                    // what is the path that will cast the shadow?
+                    // a) the button portion (which will be the hole in the larger outline, b)
+                    var shadowRect = InverseShadowInsetForShape(perimeter, vt);
+                    var path = PerimeterPath(shadowRect, outlineRadius);
+                    // b) add to it the larger outline 
+                    path.AddRect(RectInset(rect, -50));
+                    canvas.DrawPath(path, insetShadowPaint);
+
+                    /*
+                    // let's display this just to see if I got it right
+                    SKPaint fillPaint = new SKPaint
+                    {
+                        Style = SKPaintStyle.Fill,
+                        Color = Xamarin.Forms.Color.Green.ToWindowsColor().ToSKColor(),
+                        IsAntialias = true,
+                    };
+                    canvas.DrawPath(path, fillPaint);
+                    */
+                    canvas.Restore();
+                }
+
+                //StoreLayoutProperties();
             }
+
+            if (!_repainting)
+                _lastPaint = DateTime.Now;
+            _repainting = false;
         }
         #endregion
 

@@ -713,6 +713,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource.iO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.XfSource.UWP", "Forms9PatchFromSourceDemo\Forms9PatchDemo.XfSource.UWP\Forms9PatchDemo.XfSource.UWP.csproj", "{C2C9B778-07F5-4955-B413-299A66D14FEA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{09C8DFF7-1BE7-456E-B423-4D55F662E626}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.NuGet\Forms9Patch.nuspec = Forms9Patch\Forms9Patch.NuGet\Forms9Patch.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Xamarin.Forms\Xamarin.Flex\Xamarin.Flex.projitems*{740c3dff-e410-4632-bdd9-82594f3e21b4}*SharedItemsImports = 4
@@ -4643,6 +4648,7 @@ Global
 		{CFA91476-BECE-4F45-9F60-334610335117} = {66863755-C0A5-4695-916C-49DCC4122CDA}
 		{773C755A-1265-414D-968F-B8DC5CA73A87} = {66863755-C0A5-4695-916C-49DCC4122CDA}
 		{C2C9B778-07F5-4955-B413-299A66D14FEA} = {66863755-C0A5-4695-916C-49DCC4122CDA}
+		{09C8DFF7-1BE7-456E-B423-4D55F662E626} = {194A67C8-8923-492D-98FE-3EC10FC435BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EE7AA98-ADA3-41A6-AEA5-B39CCC35650A}
