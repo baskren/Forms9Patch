@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.5.0.8</version>
+        <version>1.5.0.9-beta1</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -36,15 +36,19 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
                 <dependency id="Xamarin.Forms" version="2.5.0.280555" />
                 <dependency id="Newtonsoft.Json" version="11.0.2" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.4.168" />
-                <dependency id="SkiaSharp.Views.Forms" version="1.60.0" />
-                <dependency id="SkiaSharp.Svg" version="1.60.0" />
+                <dependency id="SkiaSharp.Views.Forms" version="1.59.3" />
+                <dependency id="SkiaSharp.Views" version="1.59.3" />
+                <dependency id="SkiaSharp.Svg" version="1.59.1" />
+                <dependency id="SkiaSharp" version="1.59.3" />
             </group>
             <group targetFramework="UAP10.0">
                 <dependency id="Xamarin.Forms" version="2.5.0.280555" />
                 <dependency id="Newtonsoft.Json" version="11.0.2" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.4.168" />
-                <dependency id="SkiaSharp.Views.Forms" version="1.60.0" />
-                <dependency id="SkiaSharp.Svg" version="1.60.0" />
+                <dependency id="SkiaSharp.Views.Forms" version="1.59.3" />
+                <dependency id="SkiaSharp.Views" version="1.59.3" />
+                <dependency id="SkiaSharp.Svg" version="1.59.1" />
+                <dependency id="SkiaSharp" version="1.59.3" />
                 <dependency id="SharpDX.Direct2D1" version="4.0.1" />
                 <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.0.1" />
             </group>
