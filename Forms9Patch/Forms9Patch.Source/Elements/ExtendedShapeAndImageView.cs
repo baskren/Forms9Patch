@@ -883,8 +883,14 @@ namespace Forms9Patch
                             var properties = new Dictionary<string, string>
                             {
                                 { "shadowRect", JsonConvert.SerializeObject(shadowRect) },
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "888" }
                             };
-                            Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                            //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                            Analytics.TrackException?.Invoke(exception, properties);
+                            _repainting = false;
+                            return;
                         }
                     }
                 }
@@ -899,7 +905,23 @@ namespace Forms9Patch
                         Color = backgroundColor.ToSKColor(),
                         IsAntialias = true,
                     };
-                    canvas.DrawPath(path, fillPaint);
+                    try
+                    {
+                        canvas.DrawPath(path, fillPaint);
+                    }
+                    catch (Exception exception)
+                    {
+                        var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "917" }
+                            };
+                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        Analytics.TrackException?.Invoke(exception, properties);
+                        _repainting = false;
+                        return;
+                    }
                 }
 
                 if (drawImage)
@@ -908,7 +930,23 @@ namespace Forms9Patch
                     if (drawFill)
                         imagePerimeter = RectInsetForShape(perimeter, outlineWidth, vt, separatorWidth);
                     var path = PerimeterPath(imagePerimeter, outlineRadius - (drawOutline ? outlineWidth : 0));
-                    GenerateImageLayout(canvas, perimeter, path);
+                    try
+                    {
+                        GenerateImageLayout(canvas, perimeter, path);
+                    }
+                    catch (Exception exception)
+                    {
+                        var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "941" }
+                            };
+                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        Analytics.TrackException?.Invoke(exception, properties);
+                        _repainting = false;
+                        return;
+                    }
                 }
 
                 if (drawOutline)// && !drawImage)
@@ -926,7 +964,24 @@ namespace Forms9Patch
                     //System.Diagnostics.Debug.WriteLine("perimeter=[" + perimeter + "] [" + intPerimeter + "]");
                     var outlineRect = RectInsetForShape(intPerimeter, outlineWidth / 2, vt, separatorWidth);
                     var path = PerimeterPath(outlineRect, outlineRadius - (drawOutline ? outlineWidth / 2 : 0), true);
-                    canvas.DrawPath(path, outlinePaint);
+                    try
+                    {
+                        canvas.DrawPath(path, outlinePaint);
+                    }
+                    catch (Exception exception)
+                    {
+                        var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "974" }
+                            };
+                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        Analytics.TrackException?.Invoke(exception, properties);
+                        _repainting = false;
+                        return;
+                    }
+
                 }
 
 
@@ -953,7 +1008,23 @@ namespace Forms9Patch
                         path.MoveTo(perimeter.Left + outlineWidth / 2, perimeter.Top);
                         path.LineTo(perimeter.Left + outlineWidth / 2, perimeter.Bottom);
                     }
-                    canvas.DrawPath(path, separatorPaint);
+                    try
+                    {
+                        canvas.DrawPath(path, separatorPaint);
+                    }
+                    catch (Exception exception)
+                    {
+                        var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "1017" }
+                            };
+                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        Analytics.TrackException?.Invoke(exception, properties);
+                        _repainting = false;
+                        return;
+                    }
                 }
 
 
@@ -980,22 +1051,24 @@ namespace Forms9Patch
                     var path = PerimeterPath(shadowRect, outlineRadius);
                     // b) add to it the larger outline 
                     path.AddRect(RectInset(rect, -50));
-                    canvas.DrawPath(path, insetShadowPaint);
-
-                    /*
-                    // let's display this just to see if I got it right
-                    SKPaint fillPaint = new SKPaint
+                    try
                     {
-                        Style = SKPaintStyle.Fill,
-                        Color = Xamarin.Forms.Color.Green.ToWindowsColor().ToSKColor(),
-                        IsAntialias = true,
-                    };
-                    canvas.DrawPath(path, fillPaint);
-                    */
+                        canvas.DrawPath(path, insetShadowPaint);
+                    }
+                    catch (Exception exception)
+                    {
+                        var properties = new Dictionary<string, string>
+                            {
+                                { "class", "Forms9Patch.ExtendedShapeAndImageView" },
+                                { "method", "Paint" },
+                                { "line", "917" }
+                            };
+                        //Microsoft.AppCenter.Crashes.Crashes.TrackError(exception, properties);
+                        Analytics.TrackException?.Invoke(exception, properties);
+                    }
+
                     canvas.Restore();
                 }
-
-                //StoreLayoutProperties();
             }
 
             if (!_repainting)
