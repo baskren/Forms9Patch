@@ -157,7 +157,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP"  /Y
+    <PostBuildEvent Condition=" '$(SolutionName)'=='Forms9Patch' ">xcopy "$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP"  /Y
 xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.Source.UWP\Properties\Forms9Patch.UWP.rd.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Properties"  /Y
 xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0"  /Y
 xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0"  /Y
