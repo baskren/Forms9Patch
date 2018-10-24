@@ -9,6 +9,7 @@ namespace Forms9Patch.Droid
 {
     class ColorGradientBoxRenderer : VisualElementRenderer<ColorGradientBox>
     {
+        public ColorGradientBoxRenderer(Android.Content.Context context) : base(context) { }
 
         protected override void OnElementChanged(ElementChangedEventArgs<ColorGradientBox> e)
         {

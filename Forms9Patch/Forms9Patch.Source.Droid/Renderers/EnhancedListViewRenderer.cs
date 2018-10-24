@@ -23,6 +23,8 @@ namespace Forms9Patch.Droid
         }
         #endregion
 
+        public EnhancedListViewRenderer(Android.Content.Context context) : base(context) { }
+
 
         #region ElementChanged
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
@@ -71,6 +73,7 @@ namespace Forms9Patch.Droid
             //Control.Clickable = false;  // this will disable Click (tap) gesture
         }
         #endregion
+
 
         #region Element Property Change Responders
         void OnElementPropertyChanging(object sender, PropertyChangingEventArgs e)

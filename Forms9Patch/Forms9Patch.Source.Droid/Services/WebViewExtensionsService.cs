@@ -12,7 +12,8 @@ namespace Forms9Patch.Droid
         {
             //var droidViewToPrint = Platform.CreateRenderer(viewToPrint).ViewGroup.GetChildAt(0) as Android.Webkit.WebView;
 
-            if (Platform.CreateRenderer(viewToPrint).View is Android.Webkit.WebView droidViewToPrint)
+            //if (Platform.CreateRenderer(viewToPrint).View is Android.Webkit.WebView droidViewToPrint)
+            if (Platform.CreateRendererWithContext(viewToPrint, Settings.Context).View is Android.Webkit.WebView droidViewToPrint)
             {
                 // Only valid for API 19+
                 var version = Android.OS.Build.VERSION.SdkInt;
