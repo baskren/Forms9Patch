@@ -61,24 +61,6 @@
     <Reference Include="Rg.Plugins.Popup.IOS">
       <HintPath>..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AppCenter">
-      <HintPath>..\..\packages\Microsoft.AppCenter.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.iOS.Bindings">
-      <HintPath>..\..\packages\Microsoft.AppCenter.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.iOS.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.Crashes">
-      <HintPath>..\..\packages\Microsoft.AppCenter.Crashes.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.Crashes.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.Crashes.iOS.Bindings">
-      <HintPath>..\..\packages\Microsoft.AppCenter.Crashes.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.Crashes.iOS.Bindings.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.Analytics">
-      <HintPath>..\..\packages\Microsoft.AppCenter.Analytics.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AppCenter.Analytics.iOS.Bindings">
-      <HintPath>..\..\packages\Microsoft.AppCenter.Analytics.1.10.0\lib\Xamarin.iOS10\Microsoft.AppCenter.Analytics.iOS.Bindings.dll</HintPath>
-    </Reference>
     <Reference Include="SkiaSharp">
       <HintPath>..\..\packages\SkiaSharp.1.59.3\lib\XamariniOS\SkiaSharp.dll</HintPath>
     </Reference>
@@ -102,11 +84,11 @@
       <Name>P42.Utils.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+      <Project>{758D988F-25C1-46E8-9726-17A794EE460E}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
+      <Project>{8FFD2331-AF6B-4554-9276-4821E59AEFD5}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.iOS\FormsGestures.XfNuget.iOS.csproj">
@@ -114,18 +96,18 @@
       <Name>FormsGestures.XfNuget.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
+      <Project>{4A0213D7-4CF4-43A9-B506-50208AA996F8}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
+      <Project>{B1F50F67-2DED-419F-9B6B-9F581EED17C7}</Project>
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.3.1.0.697729\build\netstandard2.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.3.1.0.697729\build\netstandard2.0\Xamarin.Forms.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y
+    <PostBuildEvent Condition=" '$(OS)'=='Windows_NT' ">xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y
 xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y
 xcopy "$(TargetDir)P42.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y
 xcopy "$(TargetDir)MimeSharp.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y
