@@ -139,8 +139,8 @@
     <Reference Include="Rg.Plugins.Popup.IOS">
       <HintPath>..\..\packages\Rg.Plugins.Popup.1.1.4.168\lib\Xamarin.IOS\Rg.Plugins.Popup.IOS.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp.Svg">
-      <HintPath>..\..\packages\SkiaSharp.Svg.1.59.1\lib\netstandard1.3\SkiaSharp.Svg.dll</HintPath>
+    <Reference Include="SkiaSharp.Extended.Svg">
+      <HintPath>..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

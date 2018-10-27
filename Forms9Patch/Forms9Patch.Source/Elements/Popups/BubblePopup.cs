@@ -470,6 +470,7 @@ namespace Forms9Patch
                                 vtAvail = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
 
                         }
+                        /*
                         else
                         {
                             hzExtra = (hzAvail > 0 ? hzAvail : hzModal) - sizeRequest.Minimum.Width;
@@ -494,6 +495,7 @@ namespace Forms9Patch
 
                             }
                         }
+                        */
                     }
 
                 }
@@ -506,13 +508,34 @@ namespace Forms9Patch
                     sizeRequest = _bubbleLayout.Content.Measure(hzModal - Padding.HorizontalThickness - shadowPadding.HorizontalThickness,
                                                 vtModal - Padding.VerticalThickness - shadowPadding.VerticalThickness,
                                                 MeasureFlags.None);
+
                     if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
                         hzModal = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
                     if (VerticalOptions.Alignment != LayoutAlignment.Fill)
                         vtModal = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
 
-                    var contentX = width / 2.0 - hzModal / 2.0;
-                    var contentY = height / 2.0 - vtModal / 2.0;
+
+                    double contentX = 0;
+                    switch (HorizontalOptions.Alignment)
+                    {
+                        case LayoutAlignment.Center: contentX = width / 2.0 - hzModal / 2.0; break;
+                        case LayoutAlignment.Start: contentX = Margin.Left + shadowPadding.Left; break;
+                        case LayoutAlignment.End: contentX = width - Margin.Right - shadowPadding.HorizontalThickness - hzModal; break;
+                        case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
+                    }
+                    //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
+                    double contentY = 0;
+                    switch (VerticalOptions.Alignment)
+                    {
+                        case LayoutAlignment.Center: contentY = height / 2.0 - vtModal / 2.0; break;
+                        case LayoutAlignment.Start: contentY = Margin.Top + shadowPadding.Top; break;
+                        case LayoutAlignment.End: contentY = height - Margin.Bottom - shadowPadding.VerticalThickness - vtModal; break;
+                        case LayoutAlignment.Fill: contentY = height / 2.0 - vtModal / 2.0; break;
+                    }
+
+
+                    //var contentX = width / 2.0 - hzModal / 2.0;
+                    //var contentY = height / 2.0 - vtModal / 2.0;
                     bounds = new Rectangle(contentX, contentY, hzModal, vtModal);
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
                 }

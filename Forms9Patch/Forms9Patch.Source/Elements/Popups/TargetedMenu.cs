@@ -449,9 +449,9 @@ namespace Forms9Patch
                     var button = _stackLayout.Children[i] as Forms9Patch.Button;
                     var separator = _stackLayout.Children[i + 1] as BoxView;
 
-                    pageWidth += button.UnexpandedTightSize.Width + 10 + (SeparatorWidth * 3) + (2 * _stackLayout.Spacing);
+                    pageWidth += button.UnexpandedTightSize.Width + (SeparatorWidth) + (_stackLayout.Spacing) + 10;
 
-                    if (segmentIndex < Segments.Count - 1 && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness) * 0.75)
+                    if (segmentIndex < Segments.Count && pageWidth + rightWidth >= (Width - Padding.HorizontalThickness - Margin.HorizontalThickness))//* 0.75)
                     {
                         pageIndex++;
                         pageWidth = leftWidth;
@@ -466,6 +466,7 @@ namespace Forms9Patch
 
                 _rightArrowSeparator.IsVisible = rightArrowShouldBeVisible;
                 _rightArrowButton.IsVisible = rightArrowShouldBeVisible;
+                _rightArrowButton.TextColor = TextColor;
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateButtonVisibilities);

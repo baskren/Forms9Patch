@@ -1169,7 +1169,35 @@ namespace Forms9Patch
                 var shadowPadding = ShapeBase.ShadowPadding(this, true);
                 workingCanvas.Translate(left + (float)shadowPadding.Left, top + (float)shadowPadding.Top);
                 workingCanvas.Scale((float)scaleX, (float)scaleY);
-                workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
+                SKPaint paint = null;
+                if (shadowPaint == null && TintColor != Xamarin.Forms.Color.Default && TintColor != Xamarin.Forms.Color.Transparent)
+                {
+                    var mx = new Single[]
+                    {
+                        0, 0, 0, 0, TintColor.ByteR(),
+                        0, 0, 0, 0, TintColor.ByteG(),
+                        0, 0, 0, 0, TintColor.ByteB(),
+                        0, 0, 0, (float)(TintColor.A * Opacity), 0
+                    };
+                    var cf = SKColorFilter.CreateColorMatrix(mx);
+
+
+                    paint = new SKPaint()
+                    {
+                        ColorFilter = cf,
+                        IsAntialias = true,
+                    };
+                }
+                else if (Opacity < 1.0)
+                {
+                    var transparency = SKColors.White.WithAlpha((byte)(Opacity * 255)); // 127 => 50%
+                    paint = new SKPaint
+                    {
+                        ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn)
+                    };
+                }
+                workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture, paint);
+                //workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
                 workingCanvas.Restore();
             }
             else if (_f9pImageData.ValidBitmap)
@@ -1200,10 +1228,10 @@ namespace Forms9Patch
                 {
                     var mx = new Single[]
                     {
-                    0, 0, 0, 0, TintColor.ByteR(),
-                    0, 0, 0, 0, TintColor.ByteG(),
-                    0, 0, 0, 0, TintColor.ByteB(),
-                    0, 0, 0, (float)TintColor.A, 0
+                        0, 0, 0, 0, TintColor.ByteR(),
+                        0, 0, 0, 0, TintColor.ByteG(),
+                        0, 0, 0, 0, TintColor.ByteB(),
+                        0, 0, 0, (float)(TintColor.A * Opacity), 0
                     };
                     var cf = SKColorFilter.CreateColorMatrix(mx);
 
