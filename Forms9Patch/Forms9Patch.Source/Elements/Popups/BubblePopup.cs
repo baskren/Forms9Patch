@@ -219,14 +219,15 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            System.Diagnostics.Debug.WriteLine("propertyNmae=[" + propertyName + "]");
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
                 return;
             }
 
-            if (propertyName == "Renderer")
-                ForceLayout();
+            //if (propertyName == "Renderer")
+            //    ForceLayout();
 
             if (propertyName == TranslationXProperty.PropertyName)
             {
@@ -252,54 +253,32 @@ namespace Forms9Patch
             {
                 Content.RotationY = RotationY;
                 return;
+
             }
 
             base.OnPropertyChanged(propertyName);
 
             if (_bubbleLayout == null)
                 return;
+            /*
+            else if (propertyName == VerticalOptionsProperty.PropertyName)
+                _bubbleLayout.VerticalOptions = VerticalOptions;
+            else if (propertyName == HorizontalOptionsProperty.PropertyName)
+                _bubbleLayout.HorizontalOptions = HorizontalOptions;
+            */
+            /*
+            else if (propertyName == IsVisibleProperty.PropertyName ||
+                     propertyName == PointerDirectionProperty.PropertyName ||
+                     propertyName == OpacityProperty.PropertyName)
+                     */
 
-            else if (propertyName == TargetProperty.PropertyName)
-            {
-                // we need to determine if the target is inside of a scroll view because the scroll view's ScrollOffset is set to zero on orientation changes.
-                if (Target.Parent<ScrollView>() is ScrollView scrollView)
-                    scrollView.Scrolled += OnScrollWrappingTargetScrolled;
-            }
         }
 
-        /// <summary>
-        /// Event handler for when Bindable Property has changed
-        /// </summary>
-        /// <param name="propertyName">Property name.</param>
-        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
-        {
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => OnPropertyChanging(propertyName));
-                return;
-            }
-
-            base.OnPropertyChanging(propertyName);
-
-            if (propertyName == TargetProperty.PropertyName)
-            {
-                if (Target.Parent<ScrollView>() is ScrollView scrollView)
-                    scrollView.Scrolled -= OnScrollWrappingTargetScrolled;
-            }
-        }
-
-        void OnScrollWrappingTargetScrolled(object sender, ScrolledEventArgs e)
-        {
-            if (IsVisible)
-                LayoutChildren(X, Y, Width, Height - KeyboardService.Height);
-        }
 
         #endregion
 
 
         #region Layout
-
-
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.BubblePopup"/> will target Point (a point in the target) vs. the border of the target.
         /// </summary>
@@ -341,6 +320,10 @@ namespace Forms9Patch
             height -= KeyboardService.Height;
             var bounds = new Rectangle(x, y, width, height);
 
+            var hzModal = width - Margin.HorizontalThickness;
+            var vtModal = height - Margin.VerticalThickness;
+            double hzAvail = 0, vtAvail = 0;
+            SizeRequest sizeRequest = new SizeRequest(); ;
 
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
@@ -348,40 +331,17 @@ namespace Forms9Patch
                 _bubbleLayout.IsVisible = true;
                 _bubbleLayout.Content.IsVisible = true;
 
-                var availWidth = width - (Margin.HorizontalThickness + _bubbleLayout.Padding.HorizontalThickness); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                var availHeight = height - (Margin.VerticalThickness + _bubbleLayout.Padding.VerticalThickness); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
-                if (_bubbleLayout.Content.WidthRequest > 0)
-                    availWidth = _bubbleLayout.Content.WidthRequest;
-                if (_bubbleLayout.Content.HeightRequest > 0)
-                    availHeight = _bubbleLayout.Content.HeightRequest;
-                var request = _bubbleLayout.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
-
                 var shadowPadding = ShapeBase.ShadowPadding(_bubbleLayout);//, HasShadow);// _bubbleLayout.DecorativePadding();
 
-                var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth); // _bubbleLayout.Padding.HorizontalThickness + shadow.HorizontalThickness);
-                rBoxWidth += _bubbleLayout.Padding.HorizontalThickness;
-                rBoxWidth += shadowPadding.HorizontalThickness;
-                var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight); // _bubbleLayout.Padding.VerticalThickness + shadow.VerticalThickness);
-                rBoxHeight += _bubbleLayout.Padding.VerticalThickness;
-                rBoxHeight += shadowPadding.VerticalThickness;
-                var rboxSize = new Size(rBoxWidth, rBoxHeight);
-
-                //System.Diagnostics.Debug.WriteLine("\tBubblePopup.LayoutChildren rBoxSize size=[{0}, {1}]", rboxSize.Width, rboxSize.Height);
                 PointerDirection pointerDir = PointerDirection.None;
-
-
                 Page targetPage = this;
-
-                //Rectangle bounds;
                 Rectangle targetBounds = Rectangle.Zero;
-                if (Target != null)
+
+                if (Target != null && PointerDirection != PointerDirection.None)
                 {
 
-                    // NOTE: Use of PageDescentBounds is deliberate.  It has different behavior on UWP in that it ignores the target's location (assumes 0,0) for the transformation.
-                    //       FormsGestures coordinate transform methods can't be used because popup.ContentView will most likely have a non-zero X and Y value.
+                    // STEP 1 : WHERE DOES THE CONTENT BEST FIT?
 
-                    //System.Diagnostics.Debug.WriteLine("\t\t Target.Bounds=[" + Target.Bounds + "]");
-                    //System.Diagnostics.Debug.WriteLine("\t\t targetPage.Bounds=[" + targetPage.Bounds + "]");
                     targetBounds = Target is PopupBase popup
                         ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
@@ -389,100 +349,185 @@ namespace Forms9Patch
                     if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
                         return;
 
-                    var reqSpaceToLeft = (UsePoint ? Point.X + targetBounds.Left : targetBounds.Left) - rboxSize.Width - PointerLength - Margin.Left;
-                    var reqSpaceToRight = width - (UsePoint ? Point.X + targetBounds.Left : targetBounds.Right) - rboxSize.Width - PointerLength - Margin.Right;
-                    var reqSpaceAbove = (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Top) - rboxSize.Height - PointerLength - Margin.Top;
-                    var reqSpaceBelow = height - (UsePoint ? Point.Y + targetBounds.Top : targetBounds.Bottom) - rboxSize.Height - PointerLength - Margin.Bottom;
-                    var reqHzSpace = width - rboxSize.Width - Margin.HorizontalThickness;
-                    var reqVtSpace = height - rboxSize.Height - Margin.VerticalThickness;
+                    var availL = targetBounds.Left - Margin.Left - PointerLength;
+                    var availR = width - targetBounds.Right - Margin.Right - PointerLength;
+                    var availT = targetBounds.Top - Margin.Top - PointerLength;
+                    var availB = height - targetBounds.Bottom - Margin.Bottom - PointerLength;
 
+                    if (WidthRequest > 0 && HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                    {
+                        availL = Math.Min(availL, WidthRequest);
+                        availR = Math.Min(availR, WidthRequest);
+                        hzModal = Math.Min(hzModal, WidthRequest);
+                    }
+                    if (HeightRequest > 0 && VerticalOptions.Alignment != LayoutAlignment.Fill)
+                    {
+                        availT = Math.Min(availT, HeightRequest);
+                        availB = Math.Min(availB, HeightRequest);
+                        vtModal = Math.Min(vtModal, HeightRequest);
+                    }
 
-                    double space = 0;
-
+                    double hzExtra = 0, vtExtra = 0;
+                    PointerDirection hzPointerDir = PointerDirection.None;
+                    PointerDirection vtPointerDir = PointerDirection.None;
                     if (PreferredPointerDirection != PointerDirection.None)
                     {
-                        if (PreferredPointerDirection.DownAllowed() && PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
+                        if (PreferredPointerDirection.DownAllowed() && PointerDirection.DownAllowed() && availT > vtAvail)
                         {
-                            pointerDir = PointerDirection.Down;
-                            space = Math.Min(reqSpaceAbove, reqHzSpace);
+                            vtPointerDir = PointerDirection.Down;
+                            vtAvail = availT;
                         }
-                        if (PreferredPointerDirection.UpAllowed() && PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
+                        if (PreferredPointerDirection.UpAllowed() && PointerDirection.UpAllowed() && availB > vtAvail)
                         {
-                            pointerDir = PointerDirection.Up;
-                            space = Math.Min(reqSpaceBelow, reqHzSpace);
+                            vtPointerDir = PointerDirection.Up;
+                            vtAvail = availB;
                         }
-                        if (PreferredPointerDirection.LeftAllowed() && PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
+                        if (PreferredPointerDirection.LeftAllowed() && PointerDirection.LeftAllowed() && availR > hzAvail)
                         {
-                            pointerDir = PointerDirection.Left;
-                            space = Math.Min(reqSpaceToRight, reqVtSpace);
+                            hzPointerDir = PointerDirection.Left;
+                            hzAvail = availR;
                         }
-                        if (PreferredPointerDirection.RightAllowed() && PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
+                        if (PreferredPointerDirection.RightAllowed() && PointerDirection.RightAllowed() && availL > hzAvail)
                         {
-                            pointerDir = PointerDirection.Right;
-                            space = Math.Min(reqSpaceToLeft, reqVtSpace);
+                            hzPointerDir = PointerDirection.Right;
+                            hzAvail = availL;
+                        }
+                        sizeRequest = _bubbleLayout.Content.Measure((hzAvail > 0 ? hzAvail : hzModal) - Padding.HorizontalThickness - shadowPadding.HorizontalThickness,
+                                                                        (vtAvail > 0 ? vtAvail : vtModal) - Padding.VerticalThickness - shadowPadding.VerticalThickness,
+                                                                        MeasureFlags.None);
+
+                        hzExtra = (hzAvail > 0 ? hzAvail : hzModal) - sizeRequest.Request.Width;
+                        vtExtra = (vtAvail > 0 ? vtAvail : vtModal) - sizeRequest.Request.Height;
+                    }
+
+                    if (hzExtra > 0 && vtExtra > 0)
+                    {
+                        if (hzAvail > vtAvail)
+                        {
+                            pointerDir = hzPointerDir;
+                            vtAvail = vtModal;
+                        }
+                        else
+                        {
+                            pointerDir = vtPointerDir;
+                            hzAvail = hzModal;
+                        }
+                        if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                            hzAvail = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
+                        if (VerticalOptions.Alignment != LayoutAlignment.Fill)
+                            vtAvail = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
+
+                    }
+                    else
+                    {
+                        //failed
+                        hzAvail = 0; vtAvail = 0;
+                        hzPointerDir = PointerDirection.None;
+                        vtPointerDir = PointerDirection.None;
+                        if (PointerDirection.DownAllowed() && availT > vtAvail)
+                        {
+                            vtPointerDir = PointerDirection.Down;
+                            vtAvail = availT;
+                        }
+                        if (PointerDirection.UpAllowed() && availB > vtAvail)
+                        {
+                            vtPointerDir = PointerDirection.Up;
+                            vtAvail = availB;
+                        }
+                        if (PointerDirection.LeftAllowed() && availR > hzAvail)
+                        {
+                            hzPointerDir = PointerDirection.Left;
+                            hzAvail = availR;
+                        }
+                        if (PointerDirection.RightAllowed() && availL > hzAvail)
+                        {
+                            hzPointerDir = PointerDirection.Right;
+                            hzAvail = availL;
+                        }
+
+                        sizeRequest = _bubbleLayout.Content.Measure((hzAvail > 0 ? hzAvail : hzModal) - Padding.HorizontalThickness - shadowPadding.HorizontalThickness,
+                                                                    (vtAvail > 0 ? vtAvail : vtModal) - Padding.VerticalThickness - shadowPadding.VerticalThickness,
+                                                                    MeasureFlags.None);
+
+                        hzExtra = (hzAvail > 0 ? hzAvail : hzModal) - sizeRequest.Request.Width;
+                        vtExtra = (vtAvail > 0 ? vtAvail : vtModal) - sizeRequest.Request.Height;
+
+                        if (hzExtra > 0 && vtExtra > 0)
+                        {
+                            if (hzAvail > vtAvail)
+                            {
+                                pointerDir = hzPointerDir;
+                                vtAvail = vtModal;
+                            }
+                            else
+                            {
+                                pointerDir = vtPointerDir;
+                                hzAvail = hzModal;
+                            }
+                            if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                                hzAvail = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
+                            if (VerticalOptions.Alignment != LayoutAlignment.Fill)
+                                vtAvail = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
+
+                        }
+                        else
+                        {
+                            hzExtra = (hzAvail > 0 ? hzAvail : hzModal) - sizeRequest.Minimum.Width;
+                            vtExtra = (vtAvail > 0 ? vtAvail : vtModal) - sizeRequest.Minimum.Height;
+
+                            if (hzExtra > 0 && vtExtra > 0)
+                            {
+                                if (hzAvail > vtAvail)
+                                {
+                                    pointerDir = hzPointerDir;
+                                    vtAvail = vtModal;
+                                }
+                                else
+                                {
+                                    pointerDir = vtPointerDir;
+                                    hzAvail = hzModal;
+                                }
+                                if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                                    hzAvail = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
+                                if (VerticalOptions.Alignment != LayoutAlignment.Fill)
+                                    vtAvail = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
+
+                            }
                         }
                     }
 
-                    if (space < 1)
-                    {
-                        if (PointerDirection.DownAllowed() && Math.Min(reqSpaceAbove, reqHzSpace) > space)
-                        {
-                            pointerDir = PointerDirection.Down;
-                            space = Math.Min(reqSpaceAbove, reqHzSpace);
-                        }
-                        if (PointerDirection.UpAllowed() && Math.Min(reqSpaceBelow, reqHzSpace) > space)
-                        {
-                            pointerDir = PointerDirection.Up;
-                            space = Math.Min(reqSpaceBelow, reqHzSpace);
-                        }
-                        if (PointerDirection.LeftAllowed() && Math.Min(reqSpaceToRight, reqVtSpace) > space)
-                        {
-                            pointerDir = PointerDirection.Left;
-                            space = Math.Min(reqSpaceToRight, reqVtSpace);
-                        }
-                        if (PointerDirection.RightAllowed() && Math.Min(reqSpaceToLeft, reqVtSpace) > space)
-                        {
-                            pointerDir = PointerDirection.Right;
-                            space = Math.Min(reqSpaceToLeft, reqVtSpace);
-                        }
-                    }
-
-                    if (space < 1)
-                    {
-                        // it doesn't fit ... what's the closest fit?
-                        space = int.MaxValue;
-                        if (PointerDirection.UpAllowed() && Math.Abs(Math.Min(reqSpaceBelow, reqHzSpace)) < space)
-                        {
-                            pointerDir = PointerDirection.Up;
-                            space = Math.Abs(Math.Min(reqSpaceBelow, reqHzSpace));
-                        }
-                        if (PointerDirection.DownAllowed() && Math.Abs(Math.Min(reqSpaceAbove, reqHzSpace)) < space)
-                        {
-                            pointerDir = PointerDirection.Down;
-                            space = Math.Abs(Math.Min(reqSpaceAbove, reqHzSpace));
-                        }
-                        if (PointerDirection.LeftAllowed() && Math.Abs(Math.Min(reqSpaceToRight, reqVtSpace)) < space)
-                        {
-                            pointerDir = PointerDirection.Left;
-                            space = Math.Abs(Math.Min(reqSpaceToRight, reqVtSpace));
-                        }
-                        if (PointerDirection.RightAllowed() && Math.Abs(Math.Min(reqSpaceToLeft, reqVtSpace)) < space)
-                        {
-                            pointerDir = PointerDirection.Right;
-                        }
-                    }
                 }
+
+                // IF WE GOT HERE AND THERE ISN"T A pointerDir, THEN THERE WASN"T A BEST FIT
 
                 _bubbleLayout.PointerDirection = pointerDir;
                 if (pointerDir == PointerDirection.None)
                 {
-                    var contentX = width / 2.0 - rboxSize.Width / 2.0;
-                    var contentY = height / 2.0 - rboxSize.Height / 2.0;
-                    bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
+                    sizeRequest = _bubbleLayout.Content.Measure(hzModal - Padding.HorizontalThickness - shadowPadding.HorizontalThickness,
+                                                vtModal - Padding.VerticalThickness - shadowPadding.VerticalThickness,
+                                                MeasureFlags.None);
+                    if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
+                        hzModal = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
+                    if (VerticalOptions.Alignment != LayoutAlignment.Fill)
+                        vtModal = HeightRequest > 0 ? Math.Min(vtModal, HeightRequest) : sizeRequest.Request.Height + Padding.VerticalThickness + shadowPadding.VerticalThickness;
+
+                    var contentX = width / 2.0 - hzModal / 2.0;
+                    var contentY = height / 2.0 - vtModal / 2.0;
+                    bounds = new Rectangle(contentX, contentY, hzModal, vtModal);
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
                 }
                 else
                 {
+                    if (HorizontalOptions.Alignment == LayoutAlignment.Fill)
+                    {
+                        if (pointerDir.IsVertical())
+                            hzAvail = width - Margin.HorizontalThickness;
+                    }
+                    if (VerticalOptions.Alignment == LayoutAlignment.Fill)
+                    {
+                        if (pointerDir.IsHorizontal())
+                            vtAvail = height - Margin.VerticalThickness;
+                    }
                     //System.Diagnostics.Debug.WriteLine("===============================");
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
@@ -490,22 +535,22 @@ namespace Forms9Patch
                         //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
-                            tuple = StartAndPointerLocation(rboxSize.Width, Point.X + targetBounds.Left, 0, width);
+                            tuple = StartAndPointerLocation(hzAvail, Point.X + targetBounds.Left, 0, width);
                             bounds = new Rectangle(
                                 new Point(
                                     tuple.Item1 + x,
-                                    (pointerDir == PointerDirection.Up ? Point.Y + targetBounds.Top : Point.Y + targetBounds.Top - rboxSize.Height - PointerLength) + y),
-                                new Size(rboxSize.Width, rboxSize.Height + PointerLength)
+                                    (pointerDir == PointerDirection.Up ? Point.Y + targetBounds.Top : Point.Y + targetBounds.Top - vtAvail - PointerLength) + y),
+                                new Size(hzAvail, vtAvail + PointerLength)
                             );
                         }
                         else
                         {
-                            tuple = StartAndPointerLocation(rboxSize.Width, targetBounds.Left, targetBounds.Width, width);
+                            tuple = StartAndPointerLocation(hzAvail, targetBounds.Left, targetBounds.Width, width);
                             bounds = new Rectangle(
                                 new Point(
                                     tuple.Item1 + x,
-                                    (pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - rboxSize.Height - PointerLength) + y),
-                                new Size(rboxSize.Width, rboxSize.Height + PointerLength)
+                                    (pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - vtAvail - PointerLength) + y),
+                                new Size(hzAvail, vtAvail + PointerLength)
                             );
                         }
                     }
@@ -514,25 +559,25 @@ namespace Forms9Patch
                         //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
-                            tuple = StartAndPointerLocation(rboxSize.Height, Point.Y + targetBounds.Top, 0, height);
+                            tuple = StartAndPointerLocation(vtAvail, Point.Y + targetBounds.Top, 0, height);
                             bounds = new Rectangle(
                                 new Point(
-                                    (pointerDir == PointerDirection.Left ? Point.X + targetBounds.Left : Point.X + targetBounds.Left - rboxSize.Width - PointerLength) + x,
+                                    (pointerDir == PointerDirection.Left ? Point.X + targetBounds.Left : Point.X + targetBounds.Left - hzAvail - PointerLength) + x,
                                     tuple.Item1 + y),
-                                new Size(rboxSize.Width + PointerLength, rboxSize.Height)
+                                new Size(hzAvail + PointerLength, vtAvail)
                             );
                         }
                         else
                         {
                             //System.Diagnostics.Debug.WriteLine("========================================");
-                            tuple = StartAndPointerLocation(rboxSize.Height, targetBounds.Top, targetBounds.Height, height);
+                            tuple = StartAndPointerLocation(vtAvail, targetBounds.Top, targetBounds.Height, height);
                             //System.Diagnostics.Debug.WriteLine("PointerDir=[" + pointerDir + "]");
                             //System.Diagnostics.Debug.WriteLine("tuple=[" + tuple + "]");
                             bounds = new Rectangle(
                                 new Point(
-                                    (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - rboxSize.Width - PointerLength) + x,
+                                    (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - hzAvail - PointerLength) + x,
                                     tuple.Item1 + y),
-                                new Size(rboxSize.Width + PointerLength, rboxSize.Height)
+                                new Size(hzAvail + PointerLength, vtAvail)
                             );
                             //System.Diagnostics.Debug.WriteLine("bounds=[" + bounds + "]");
                         }
@@ -542,7 +587,9 @@ namespace Forms9Patch
                     //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     //System.Diagnostics.Debug.WriteLine("===============================");
+                    _lastLayout = DateTime.Now;
                 }
+
             }
         }
 

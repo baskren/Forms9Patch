@@ -194,13 +194,37 @@ namespace Forms9Patch
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
-                var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
-                var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
+                double contentX = Location.X;
+                if (double.IsInfinity(contentX) || double.IsNaN(contentX))
+                {
+                    switch (HorizontalOptions.Alignment)
+                    {
+                        case LayoutAlignment.Center: contentX = width / 2.0 - rboxSize.Width / 2.0; break;
+                        case LayoutAlignment.Start: contentX = Margin.Left + shadowPadding.Left; break;
+                        case LayoutAlignment.End: contentX = width - Margin.Right - shadowPadding.HorizontalThickness - rboxSize.Width; break;
+                        case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
+                    }
+                }
+                //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
+                double contentY = Location.Y;
+                if (double.IsInfinity(contentY) || double.IsNaN(contentY))
+                {
+                    switch (VerticalOptions.Alignment)
+                    {
+                        case LayoutAlignment.Center: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
+                        case LayoutAlignment.Start: contentY = Margin.Top + shadowPadding.Top; break;
+                        case LayoutAlignment.End: contentY = height - Margin.Bottom - shadowPadding.VerticalThickness - rboxSize.Height; break;
+                        case LayoutAlignment.Fill: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
+                    }
+                }
+                //var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
 
                 var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
                 //System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
 
                 Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_frame, bounds);
+
+                _lastLayout = DateTime.Now;
             }
         }
         #endregion

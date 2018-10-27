@@ -393,6 +393,8 @@ namespace Forms9Patch
         internal DateTime PresentedAt;
         static int _instances;
         readonly int _id;
+        protected DateTime _lastLayout = DateTime.MinValue;
+
         #endregion
 
 
@@ -423,6 +425,18 @@ namespace Forms9Patch
 
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
         }
+
+        /*
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _disposed = true;
+            }
+        }
+*/
         #endregion
 
 
@@ -463,7 +477,7 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-        bool disposedValue; // To detect redundant calls
+        bool _disposed; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -471,7 +485,7 @@ namespace Forms9Patch
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposed)
             {
                 if (disposing)
                 {
@@ -484,7 +498,7 @@ namespace Forms9Patch
                     */
                     Retain = false;
                     //PopupPage?.RemovePopup(this);
-                    disposedValue = true;
+                    _disposed = true;
                 }
             }
         }
@@ -669,8 +683,30 @@ namespace Forms9Patch
                 #endregion IBackground
             }
 
+            if (IsVisible)
+                HardForceLayout();
+
+
+            if (propertyName == IsVisibleProperty.PropertyName && IsVisible)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                {
+                    Update();
+                    return IsVisible && !_disposed;
+                });
+            }
 
         }
+
+        protected void Update()
+        {
+            if (IsVisible && Target != null && DateTime.Now - _lastLayout > TimeSpan.FromMilliseconds(100))
+                HardForceLayout();
+        }
+
+        protected void HardForceLayout() => LayoutChildren(0, 0, Width, Height - KeyboardService.Height);
+
+
         #endregion
 
 
