@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.5.0.9</version>
+        <version>1.6.0-rc1</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -23,11 +23,99 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
-	<releaseNotes>1.5.0.9: Reverted to SkiaSharp 1.59.3 to reduce likelihood of crashes related to rendering shadows with SkiaSharp 1.60 (https://github.com/mono/SkiaSharp/issues/569); Added Forms9Patch.Analytics delegates to all Forms9Patch users to keep tabs on if this was effective;
+	<releaseNotes>
+1.6.0: Enhancements: Popups now respond to LayoutAlignents; Popups respond to size and position changes in Target; Forms9Patch.Image with SVG ImageSource now responds to Opacity and TintColor; AcivityIndicatorPopup now responds to Scale property;
+1.5.0.9: Reverted to SkiaSharp 1.59.3 to reduce likelihood of crashes related to rendering shadows with SkiaSharp 1.60 (https://github.com/mono/SkiaSharp/issues/569); Added Forms9Patch.Analytics delegates to all Forms9Patch users to keep tabs on if this was effective;
 1.5.0.8: Fixed: Animation of popups not smooth; Fixed: Too much effort to assure actions are on the UI Thread; 
 1.5.0: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
 1.4.1: Fixed: Clipboard, DataSharing and HardwareKeyListener UWP dependencies not registered.
-1.4.0: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.</releaseNotes>
+1.4.0: New: Clipboard supports multiple objects of same Mime type, Inter-app Data Sharing; Fixed: HardwareKeyboardListener crashes in some UWP implementations, Popups crashes in Android implementations when instantiated before Forms9Patch.RootPage is instantiated;  Eliminated need for Android "forms9patch_copy_paste_authority" string.
+1.3.3: Fixed: targeted popups (Bubble, TargetedToast, TargetedMenu) will, after the device orientation has changed, render in wrong location when pointing at an element inside of a ScrollView.
+1.3.2: New: KeyboardService.Height and KeyboardService.HeightChanged allow you to resize your layout views in response to changes in the software keyboard.
+1.3.1: Fixed: Xamarin.Forms 3.0 UWP: Popups, Buttons, and Layouts are rendering blank.
+1.3.0.0: New: Forms9Patch is open source!  Get it at https://1drv.ms/u/s!AkPAsLOJX3DChFJLwyOMwJgpVXfQ  Fixed: failure to build because of orphaned references to SkiaSharp.Extended.Svg; 
+1.2.1.0: Fixed: Clipboard entry reading fails on iOS; Work around for SkiaSharp 1.60 Lattice bug;
+1.2.0.0: Fixed: Android crash if using custom font and app cache is cleared.  New: Clipboard and HardwareKey classes (documentation is coming!).  NOTE: You must add `<string name="forms9patch_copy_paste_authority">*your_Android_app_package_name_here*.f9pcopypaste</string>` to your Android project's `Resources/values/strings.xml` file.  See the GitHub Forms9PatchDemo app for an example.
+1.1.1.0: Fixed: iOS Label renders at MinFontSize when Lines=0 and AutoFit=None; Android Label truncates last character when Lines=0 and AutoFit=Width; SinglePicker View working on UWP desktop.  Faster SegmentedControl rendering.  Improved Android reliability.
+1.1.0.0: New: SVGs are now valid image sources!  Fixed: Shape outlines are not always full thickness; Button.Clicked event requires double click to fire on Andriod.
+1.0.1.3: Fix: Android renderers use Android SDK calls not supported by Gingerbread; PCL.Utils.ApplicationStorageExtensions not using correct directory; 
+1.0.1.2: Fix: Instantiation of popup, before App.MainPage set to Forms9Patch.RootPage, causes crash; iOS button text not always appearing; Fixed: Default padding not zero for Forms9Patch layouts (other than Frame); Changed: Forms9Patch.Frame is not longer obsolete; IPopup is public; 
+1.0.1.1: Fix: Crash on older versions of Windows; Change: IPopup is public;
+1.0.0.0: Full UWP Support;
+0.10.3.10: UWP Release;
+0.10.3.5: Fixed: Android implementation of FormsGestures failing in Xamarin.Forms 2.4; Android implementation of popups not re-rendering correctly upon 3rd or 4th display;  Added: pre-alpha of the UWP implmentation of the following Forms9Patch elements: Image, ImageSource, AbsoluteLayout, ContentView, Frame, Grid, ManualLayout, RelativeLayout, StackLayout, ImageButton, MaterialButton, MaterialSegmentedControl, Segment, RootPage, ActivityIndicatorPopup, ModalPopup, PermissionPopup, Toast;  
+0.10.3.4: Fixed: Size of last segment of MaterialSegmentedController does not always match other segments; iOS intermittantcrash when Image is disposed;
+0.10.3.3: Fixed: IconImage dissappears after pressing Android rendering of ImageButton; Some MultiResourceImages are not fitted properly on Android;
+0.10.3.2: Fixed: ImageButton does not return to default state after selected; ImageButton triggers Tapped event twice;
+0.10.3.1: Fixed: ImageButton crashes when ImageButtonState properties (DefaultState, PressedState, etc) are not set.
+0.10.3.0: ImageButton, MaterialButton and MaterialSegmentedControl has been enhanced with HorizontalTextAlignment and VerticalTextAlignment properties.  MaterialSegmentedControl also has IntraSegmentSpacing and IntraSegmentOrientation properties; Obsolete: ImageButton, MaterialButton and MaterialSegmentedControl Alignment property; Fix: Potential crash when deconstructing Image elements. 
+0.10.2.16: Fixed: iOS rendering of images and fonts in XAML Previewers; Presentation of popups with modal pages.
+0.10.2.13: Fixed multiple edge case rendering issues with Label. 
+0.10.2.12: Changed: PCL Profile from 259 to 111.  Fixed: ImageSource does not open Embedded Resource image when used in a library.
+0.10.2.11: Fixed: (Android) Back button causes app to exit.
+0.10.2.10: Fixed: Android Label not rendering in Xamarin.Studio's XAML Previewer;
+0.10.2.9: Fixed: Fit=LabelFit.Lines not working when truncating on iOS; Modified: Buttons now default to Fit=LabelFit.Width and Padding=4;
+0.10.2.8: Added the SelectedBackgroundColor and SelectedFontColor properties to MaterialButton and MaterialSegmentedControl
+0.10.2.7: Fixed: Failure to dynamically resize Label when text changes.
+0.10.2.6: Fixed: ImageButton not returned to full opacity when IsEnabled is programically set to true;
+0.10.2.5: Fixed: bound values of ImageButtonState properties are not used on initialization.
+0.10.2.4: Added: TintImage property to MaterialButton and MaterialSegmentedController to control if ImageSource image is tinted with FontColor;
+0.10.2.3: Fixed: Unable to select portion of Xamarin.Forms.ListView cell that is covered by Forms9Patch.Label; Android Forms9Patch.Label not always updating correctly when BindingContext has changed; Added: ApplicationInfoService to get application's Name, Bundle/Package Identifier, Build number, and Version name;
+0.10.2.2: Fix: ability to listen to gestures on Forms9Patch elements; Fix: RootPage responds correctly to changes in iOS status bar; Added: ColorGradientBox element;
+0.10.2.1: Fix: Intermittant crash on Android when releasing layouts.
+0.10.2.0: Now fully supports Shared Library apps.  Apparently, it did all along *except* for Embedded Resource fonts.  Now that has been fixed.
+0.10.1.0: Added support for <a> tag to HtmlText property of Label; Added HapticsMode and HapticsEffect properties to buttons;
+0.10.0.1: Fix: failure to use some Forms9Patch properties in XAML ResourceDictionary
+0.10.0.0: Optimized for rendering speed; fix: Bubble popup not appearing with MasterDetailPage; fix: BubblePopup not responding to Margin property; Added Toast, BubbleToast;
+0.9.13.5: Fix: Crash from Label object being instantiated and held a period without being rendered.
+0.9.13.4: Fix: iOS FormsGestures library Panning event proides erratic results. 
+0.9.13.3: Fix: Android Label's Lines property does not truncate when LineBreakMode is not Start, Mid, or Center; Added: ActualFontSize readonly property to Label to give access to fit adjusted font size.
+0.9.13.2: New: Added IsElliptical property to MaterialButton and the layout elements; Enabled the Opacity property of Image element.
+0.9.13.1: New: Added CancelOnBackgroundTouch Property (default: true) to ModalPopup and BubblePopup
+0.9.13.0: New: CustomFontEffect platform effect can be applied to Xamarin.Forms Label, Button, Entry, and Editor elements to allow the EmbeddedResourceID of PCL Embedded Resource fonts as value for FontFamily property.
+0.9.12.5: Fixed: ImageButton in ContentView fails to correctly render state changes in BackgroundImage (Android).
+0.9.12.4: Fixed: resizing of button labels when text is changed. 
+Enhanced: Forms9Patch.ImageSource.FromMultiResource uses first portion of path of Embedded Resource to determine which assembly to search.
+Changed: Lines property of Label sets the max number of lines when Fit=LabelFit.None.
+0.9.12.2: Fixed: (1) crash when render Label in Horizontal Orientation in StackLayout; (2) Failure to render Label in some layouts; (3) Failure to autofit some one-character labels correctly; (4) Failure to resize label when bounds changes; Enhanced: Can refer to iOS system fonts by using their name as value for FontFamily property.
+0.9.12.2: Fixed: (1) crash when instantiating buttons on iOS release builds; (2) iOS HtmlText <tt> tag combined with <b>, <u>, or <i> fails to render font correctly; (3) Image button touch intermittantly fails.
+Enhanced: Width and Height values of LabelFit are now supported for labels with unimposed Height.
+0.9.12.1: Fixed: (1) failure to get bold and/or italic version of some iOS system fonts; (2) Multi-line labels not appearing so on iOS; (3) 9Patch images market to edge failing to render on iOS;
+0.9.12.0: New: Width and Lines Autofit for Labels.  TrailingImage property for ImageButton, MaterialButton and MaterialSegmentedController. Forms9Patch.FontExtensions.LoadedFontFamilies() lists all currently loaded fonts.
+Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image button label missing for some states.  Unable to bind to Segment.  Able to unselect Segment when in Radio mode.
+0.9.11.2: Fixed: in iOS, Images will have height or width of 1 (instead defaulting to source image height or width) when HeightRequest or WidthRequest is not set. 
+0.9.11.1: Fixed: Issue where Forms9Patch.iOS.Settings.LicenseKey throws System.NullRefernceException. 
+0.9.11.0: Added HTML markup to Label, MaterialButton, Segment, and ImageButtonState elements.
+0.9.10.7: Built for Xamain Forms 2.2
+0.9.10.6: Fixed crash when no Target is given for BubblePopup.  Fixed failure to present popups when used w/ PushModalAsync().
+0.9.10.4: Added Cancel method to Popups; Auto-cancel Popups when Android [back] button is pressed.
+0.9.10.3: Improved reliabilty of rendering of 9patch backgrounds when used in ListView in Android.
+0.9.10.2: Fixed AOT issue that caused BubblePopup not to work on iOS devices.
+0.9.10.1: Fixed layout of NinePatch backgrounds when used in a ListView on Android.
+0.9.10.0: Added ModalPopup and BubblePopup elements.  See demo app for example.
+0.9.9.3: 25x Improved tap response on all buttons; Fixed ImageButton.Background rendering issue.
+0.9.9.2: 3x Improved iOS image loading time.  Known issue: ImageButton Fails to present anything but DefaultState.BackgroundImage - will be fixed very soon.
+0.9.9.1: Fixed issue with comping for iOS devices.
+0.9.9.0: Added:
+(1) PressingState to ImageButton to enable customization of the button for when it is in the pressed state.
+(2) LongPressing and LongPressed events have been added to the ImageButton, MaterialButton, and Segment element.
+(3) SegmentLongPressing and SegmentLongPressed events have been added to the MaterialSegmentedControl element.
+(4) Renamed ImageButton's Clicked event to Tapped.
+0.9.8.2: Fixed not all XAML attributes working for ImageButtonState.
+0.9.8.1: Fixed:  XAML Segments Attribute for MaterialSegmentButton; Added FontColor and FontAttributes properties to Segment
+0.9.8.0+ Added MaterialSegmentControl, Added Orientation property to MaterialButton
+0.9.7.1 Fixed: MaterialButton render when image but no text present.
+0.9.7.0 Added ImageButton and MaterialButton elements, Added HasShadow property to Android and iOS AbsoluteLayout, Frame, Grid, RelativeLayout, and StackLayout layouts.
+0.9.6.0 Fixed intermittant iOS UIImage.ImageWithData double free, Added RelativeLayout, Grid, and AbsoluteLayout Elements
+0.9.5.2 Fixed ContentView background scalable image rendered as non-scalable image if CapsInset has a one or two -1 values
+0.9.5.1 Fixed scaling of ContentView BackgroundImage
+0.9.5 1) Added Fill (AspectFill, AspectFit, Fill and Tile) property to Image; 2) Added ContentView and Frame elements with BackgroundView and (for Frame) OutlineWidth and OutlineRadius properties
+0.9.4 Bug fix Correct resizing when iOS screen orientation changes
+0.9.3 fix race condition during debug where iOS Renderer releases Element before releasing renderer.
+0.9.2 Bug fix for not properly scaling when parent space is smaller than base image but larger than base image less complaint portion.
+0.9.1 beta release
+0.9.1 fix: scaling of scalable images larger than parent space
+</releaseNotes>
         <copyright>2019, 42nd Parallel</copyright>
         <language>en-US</language>
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
