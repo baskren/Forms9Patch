@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.0-rc1</version>
+        <version>1.6.0-rc2</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -24,7 +24,7 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
-1.6.0: Enhancements: Popups now respond to LayoutAlignents; Popups respond to size and position changes in Target; Forms9Patch.Image with SVG ImageSource now responds to Opacity and TintColor; AcivityIndicatorPopup now responds to Scale property;
+1.6.0: Enhancements: Popups now respond to LayoutAlignents; Popups respond to size and position changes in Target; Forms9Patch.Image with SVG ImageSource now responds to Opacity and TintColor; AcivityIndicatorPopup now responds to Scale property; Fixed: BubblePopup not responding to PointerLength; 
 1.5.0.9: Reverted to SkiaSharp 1.59.3 to reduce likelihood of crashes related to rendering shadows with SkiaSharp 1.60 (https://github.com/mono/SkiaSharp/issues/569); Added Forms9Patch.Analytics delegates to all Forms9Patch users to keep tabs on if this was effective;
 1.5.0.8: Fixed: Animation of popups not smooth; Fixed: Too much effort to assure actions are on the UI Thread; 
 1.5.0: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
@@ -35,7 +35,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
 1.3.1: Fixed: Xamarin.Forms 3.0 UWP: Popups, Buttons, and Layouts are rendering blank.
 1.3.0.0: New: Forms9Patch is open source!  Get it at https://1drv.ms/u/s!AkPAsLOJX3DChFJLwyOMwJgpVXfQ  Fixed: failure to build because of orphaned references to SkiaSharp.Extended.Svg; 
 1.2.1.0: Fixed: Clipboard entry reading fails on iOS; Work around for SkiaSharp 1.60 Lattice bug;
-1.2.0.0: Fixed: Android crash if using custom font and app cache is cleared.  New: Clipboard and HardwareKey classes (documentation is coming!).  NOTE: You must add `<string name="forms9patch_copy_paste_authority">*your_Android_app_package_name_here*.f9pcopypaste</string>` to your Android project's `Resources/values/strings.xml` file.  See the GitHub Forms9PatchDemo app for an example.
+1.2.0.0: Fixed: Android crash if using custom font and app cache is cleared.  New: Clipboard and HardwareKey classes (documentation is coming!).  NOTE: You must add `&lt;string name="forms9patch_copy_paste_authority"&gt;*your_Android_app_package_name_here*.f9pcopypaste&lt;/string&gt;` to your Android project's `Resources/values/strings.xml` file.  See the GitHub Forms9PatchDemo app for an example.
 1.1.1.0: Fixed: iOS Label renders at MinFontSize when Lines=0 and AutoFit=None; Android Label truncates last character when Lines=0 and AutoFit=Width; SinglePicker View working on UWP desktop.  Faster SegmentedControl rendering.  Improved Android reliability.
 1.1.0.0: New: SVGs are now valid image sources!  Fixed: Shape outlines are not always full thickness; Button.Clicked event requires double click to fire on Andriod.
 1.0.1.3: Fix: Android renderers use Android SDK calls not supported by Gingerbread; PCL.Utils.ApplicationStorageExtensions not using correct directory; 
@@ -64,7 +64,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
 0.10.2.2: Fix: ability to listen to gestures on Forms9Patch elements; Fix: RootPage responds correctly to changes in iOS status bar; Added: ColorGradientBox element;
 0.10.2.1: Fix: Intermittant crash on Android when releasing layouts.
 0.10.2.0: Now fully supports Shared Library apps.  Apparently, it did all along *except* for Embedded Resource fonts.  Now that has been fixed.
-0.10.1.0: Added support for <a> tag to HtmlText property of Label; Added HapticsMode and HapticsEffect properties to buttons;
+0.10.1.0: Added support for &lt;a&gt; tag to HtmlText property of Label; Added HapticsMode and HapticsEffect properties to buttons;
 0.10.0.1: Fix: failure to use some Forms9Patch properties in XAML ResourceDictionary
 0.10.0.0: Optimized for rendering speed; fix: Bubble popup not appearing with MasterDetailPage; fix: BubblePopup not responding to Margin property; Added Toast, BubbleToast;
 0.9.13.5: Fix: Crash from Label object being instantiated and held a period without being rendered.
@@ -78,7 +78,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
 Enhanced: Forms9Patch.ImageSource.FromMultiResource uses first portion of path of Embedded Resource to determine which assembly to search.
 Changed: Lines property of Label sets the max number of lines when Fit=LabelFit.None.
 0.9.12.2: Fixed: (1) crash when render Label in Horizontal Orientation in StackLayout; (2) Failure to render Label in some layouts; (3) Failure to autofit some one-character labels correctly; (4) Failure to resize label when bounds changes; Enhanced: Can refer to iOS system fonts by using their name as value for FontFamily property.
-0.9.12.2: Fixed: (1) crash when instantiating buttons on iOS release builds; (2) iOS HtmlText <tt> tag combined with <b>, <u>, or <i> fails to render font correctly; (3) Image button touch intermittantly fails.
+0.9.12.2: Fixed: (1) crash when instantiating buttons on iOS release builds; (2) iOS HtmlText &lt;tt&gt; tag combined with &lt;b&gt;, &lt;u&gt;, or &lt;i&gt; fails to render font correctly; (3) Image button touch intermittantly fails.
 Enhanced: Width and Height values of LabelFit are now supported for labels with unimposed Height.
 0.9.12.1: Fixed: (1) failure to get bold and/or italic version of some iOS system fonts; (2) Multi-line labels not appearing so on iOS; (3) 9Patch images market to edge failing to render on iOS;
 0.9.12.0: New: Width and Lines Autofit for Labels.  TrailingImage property for ImageButton, MaterialButton and MaterialSegmentedController. Forms9Patch.FontExtensions.LoadedFontFamilies() lists all currently loaded fonts.
