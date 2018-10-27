@@ -411,6 +411,9 @@ namespace Forms9Patch
         /// <param name="retain">If set to <c>true</c> retain.</param>
         internal PopupBase(VisualElement target = null, bool retain = false)
         {
+            HorizontalOptions = LayoutOptions.Center;
+            VerticalOptions = LayoutOptions.Center;
+
             CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
             BackgroundColor = Color.White;
 
@@ -426,17 +429,6 @@ namespace Forms9Patch
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
         }
 
-        /*
-        bool _disposed;
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            if (disposing)
-            {
-                _disposed = true;
-            }
-        }
-*/
         #endregion
 
 

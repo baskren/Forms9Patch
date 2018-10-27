@@ -22,7 +22,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerLength", typeof(float), typeof(BubbleLayout), 4.0f,
+        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerLength", typeof(float), typeof(BubbleLayout), 10.0f,
         propertyChanged: (b, o, n) =>
          {
              if (b is BubbleLayout layout)
@@ -43,7 +43,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer tip radius property.
         /// </summary>
-        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerTipRadius", typeof(float), typeof(BubbleLayout), 2.0f,
+        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("Forms9Patch.BubbleLayout.PointerTipRadius", typeof(float), typeof(BubbleLayout), 1.0f,
         propertyChanged: (b, o, n) =>
         {
             if (b is BubbleLayout layout)

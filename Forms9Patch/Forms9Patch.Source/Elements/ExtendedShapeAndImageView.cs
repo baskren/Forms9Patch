@@ -371,7 +371,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("PointerLength", typeof(float), typeof(BubbleLayout), 4.0f);//, propertyChanged: UpdateBasePadding);
+        public static readonly BindableProperty PointerLengthProperty = BubbleLayout.PointerLengthProperty; //  BindableProperty.Create("PointerLength", typeof(float), typeof(BubbleLayout), 4.0f);//, propertyChanged: UpdateBasePadding);
         /// <summary>
         /// Gets or sets the length of the bubble layout's pointer.
         /// </summary>
