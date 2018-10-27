@@ -26,14 +26,6 @@ namespace Forms9Patch
             set => SetValue(ColorProperty, value);
         }
 
-        #region Scale property
-        public static readonly new BindableProperty ScaleProperty = BindableProperty.Create("Forms9Patch.ActivityIndicatorPopup.Scale", typeof(double), typeof(ActivityIndicatorPopup), 1.0);
-        public new double Scale
-        {
-            get => (double)GetValue(ScaleProperty);
-            set => SetValue(ScaleProperty, value);
-        }
-        #endregion Scale property
         #endregion
 
 
@@ -69,8 +61,6 @@ namespace Forms9Patch
             if (Device.RuntimePlatform == Device.UWP)
                 _indicator.WidthRequest = 300;
             Content = _indicator;
-            if (Device.RuntimePlatform == Device.iOS)
-                Scale = 1.5;
 
             CancelOnPageOverlayTouch = false;
             BackgroundColor = Color.FromRgba(0, 0, 0, 1);
