@@ -681,22 +681,48 @@ namespace Forms9Patch
 
             if (propertyName == IsVisibleProperty.PropertyName && IsVisible)
             {
-                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                Device.StartTimer(TimeSpan.FromMilliseconds(refreshPeriod), () =>
                 {
                     Update();
+                    //System.Diagnostics.Debug.WriteLine("A");
                     return IsVisible && !_disposed;
                 });
             }
 
         }
 
+        static int refreshPeriod = 100;
+
+
+        public Rectangle _lastTargetBounds = new Rectangle();
+
         protected void Update()
         {
-            if (IsVisible && Target != null && DateTime.Now - _lastLayout > TimeSpan.FromMilliseconds(100))
-                HardForceLayout();
+            if (IsVisible && Target != null)
+            {
+                var targetBounds = Target is PopupBase popup
+                    ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, popup.DecorativeContainerView)
+                    : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, Target);
+
+                if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
+                    return;
+
+                //System.Diagnostics.Debug.WriteLine("Target.Bounds=[" + targetBounds + "]");
+
+                if (_lastTargetBounds != targetBounds) //&& DateTime.Now - _lastLayout > TimeSpan.FromMilliseconds(refreshPeriod))
+                {
+                    _lastTargetBounds = targetBounds;
+                    //System.Diagnostics.Debug.WriteLine("B");
+                    HardForceLayout();
+                }
+            }
         }
 
-        protected void HardForceLayout() => LayoutChildren(0, 0, Width, Height - KeyboardService.Height);
+        protected void HardForceLayout()
+        {
+            //System.Diagnostics.Debug.WriteLine("C");
+            LayoutChildren(0, 0, Width, Height);// - KeyboardService.Height);
+        }
 
 
         #endregion

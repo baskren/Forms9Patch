@@ -349,6 +349,11 @@ namespace Forms9Patch
                     if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
                         return;
 
+                    //System.Diagnostics.Debug.WriteLine("Available=[" + x + ", " + y + "," + width + "," + height + "]");
+                    //System.Diagnostics.Debug.WriteLine("Target.Bounds=[" + targetBounds + "]");
+                    //if (Math.Abs(targetBounds.X - 468) < 0.001 && Math.Abs(targetBounds.Y - 675.5) < 0.001)
+                    //    System.Diagnostics.Debug.WriteLine("");
+
                     var availL = targetBounds.Left - Margin.Left - PointerLength;
                     var availR = width - targetBounds.Right - Margin.Right - PointerLength;
                     var availT = targetBounds.Top - Margin.Top - PointerLength;
