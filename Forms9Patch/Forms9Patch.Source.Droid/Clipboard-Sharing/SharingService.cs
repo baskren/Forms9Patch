@@ -24,7 +24,6 @@ namespace Forms9Patch.Droid
 {
     public class SharingService : Forms9Patch.ISharingService
     {
-        public bool CanShare => Forms9Patch.OsInfoService.Version >= Version.Parse("27.0.0");
 
         public void Share(Forms9Patch.MimeItemCollection mimeItemCollection, VisualElement target)
         {

@@ -691,7 +691,7 @@ namespace Forms9Patch
 
         }
 
-        static int refreshPeriod = 100;
+        static int refreshPeriod = 50;
 
 
         public Rectangle _lastTargetBounds = new Rectangle();

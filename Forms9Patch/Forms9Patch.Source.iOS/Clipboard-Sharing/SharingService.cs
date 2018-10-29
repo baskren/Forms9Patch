@@ -17,6 +17,7 @@ namespace Forms9Patch.iOS
 {
     public class SharingService : Forms9Patch.ISharingService
     {
+
         public void Share(Forms9Patch.MimeItemCollection mimeItemCollection, VisualElement target)
         {
             var nsItemProviders = mimeItemCollection.AsNSItemProviders();
