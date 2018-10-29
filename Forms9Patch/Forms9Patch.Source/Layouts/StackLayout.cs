@@ -6,7 +6,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch StackLayout.
     /// </summary>
-    public class StackLayout : Layout<Xamarin.Forms.StackLayout>
+    public class StackLayout : Layout<Xamarin.Forms.StackLayout>, IElementConfiguration<Xamarin.Forms.StackLayout>
     {
         /// <summary>
         /// Backing store for the Orientation property
@@ -41,16 +41,19 @@ namespace Forms9Patch
         }
 
 
-        readonly Xamarin.Forms.StackLayout _layout;
+        Xamarin.Forms.StackLayout _layout => _xfLayout as Xamarin.Forms.StackLayout;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.StackLayout"/> class.
         /// </summary>
         public StackLayout()
         {
-            _layout = _xfLayout as Xamarin.Forms.StackLayout;
         }
 
+        public IPlatformElementConfiguration<T, Xamarin.Forms.StackLayout> On<T>() where T : IConfigPlatform
+        {
+            return ((IElementConfiguration<Xamarin.Forms.StackLayout>)_xfLayout).On<T>();
+        }
     }
 }
 

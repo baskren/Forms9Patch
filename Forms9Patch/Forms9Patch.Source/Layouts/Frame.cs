@@ -22,6 +22,7 @@ namespace Forms9Patch
         {
             Padding = new Thickness(20);
         }
+
         #endregion
 
 

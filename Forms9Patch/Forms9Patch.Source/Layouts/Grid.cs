@@ -10,7 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Grid layout.
     /// </summary>
-    public class Grid : Layout<Xamarin.Forms.Grid>
+    public class Grid : Layout<Xamarin.Forms.Grid>, IGridController, IElementConfiguration<Xamarin.Forms.Grid>//, IElementConfiguration<Forms9Patch.Grid>
     {
         /// <summary>
         /// Backing store for the row spacing property.
@@ -31,6 +31,11 @@ namespace Forms9Patch
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.ColumnDefinitionsProperty, newvalue);
+            }, defaultValueCreator: bindable =>
+            {
+                var colDef = new ColumnDefinitionCollection();
+                //colDef.ItemSizeChanged += ((Grid)bindable).OnDefinitionChanged;
+                return colDef;
             });
 
         /// <summary>
@@ -40,6 +45,11 @@ namespace Forms9Patch
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowDefinitionsProperty, newvalue);
+            }, defaultValueCreator: bindable =>
+            {
+                var rowDef = new RowDefinitionCollection();
+                //rowDef.ItemSizeChanged += ((Grid)bindable).OnDefinitionChanged;
+                return rowDef;
             });
 
         /// <summary>
@@ -149,14 +159,27 @@ namespace Forms9Patch
         /// <param name="trigger">Trigger.</param>
         public void InvalidateMeasureInernalNonVirtual(InvalidationTrigger trigger) => _grid.InvalidateMeasureInernalNonVirtual(trigger);
 
-        readonly Xamarin.Forms.Grid _grid;
+
+        public IPlatformElementConfiguration<T, Xamarin.Forms.Grid> On<T>() where T : IConfigPlatform
+        {
+            return ((IElementConfiguration<Xamarin.Forms.Grid>)_grid).On<T>();
+        }
+        /*
+        IPlatformElementConfiguration<T, Grid> IElementConfiguration<Grid>.On<T>()
+        {
+            return ((IElementConfiguration<Forms9Patch.Grid>)_grid).On<T>();
+            //return null;
+        }
+        */
+
+
+        Xamarin.Forms.Grid _grid => _xfLayout as Xamarin.Forms.Grid;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Grid"/> class.
         /// </summary>
         public Grid()
         {
-            _grid = _xfLayout as Xamarin.Forms.Grid;
         }
     }
 }

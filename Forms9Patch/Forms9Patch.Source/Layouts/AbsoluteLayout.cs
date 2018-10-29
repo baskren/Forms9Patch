@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.AbsoluteLayout
     /// </summary>
-    public class AbsoluteLayout : Layout<Xamarin.Forms.AbsoluteLayout>
+    public class AbsoluteLayout : Layout<Xamarin.Forms.AbsoluteLayout>, IElementConfiguration<Xamarin.Forms.AbsoluteLayout>
     {
         /// <summary>
         /// Children of AbsoluteLayout
@@ -45,6 +45,10 @@ namespace Forms9Patch
         /// <param name="flags">Flags.</param>
         public static void SetLayoutFlags(BindableObject bindable, AbsoluteLayoutFlags flags) => Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(bindable, flags);
 
+        public IPlatformElementConfiguration<T, Xamarin.Forms.AbsoluteLayout> On<T>() where T : IConfigPlatform
+        {
+            return ((IElementConfiguration<Xamarin.Forms.AbsoluteLayout>)_xfLayout).On<T>();
+        }
     }
 }
 

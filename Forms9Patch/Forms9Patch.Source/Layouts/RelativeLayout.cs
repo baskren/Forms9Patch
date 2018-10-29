@@ -9,10 +9,10 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch RelativeLayout.
     /// </summary>
-    public class RelativeLayout : Layout<Xamarin.Forms.RelativeLayout>, ILayout
+    public class RelativeLayout : Layout<Xamarin.Forms.RelativeLayout>, ILayout, IElementConfiguration<Xamarin.Forms.RelativeLayout>
     {
 
-        Xamarin.Forms.RelativeLayout _layout;
+        Xamarin.Forms.RelativeLayout _layout => _xfLayout as Xamarin.Forms.RelativeLayout;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.RelativeLayout"/> class.
@@ -20,7 +20,6 @@ namespace Forms9Patch
         public RelativeLayout()
         {
             VerticalOptions = HorizontalOptions = LayoutOptions.FillAndExpand;
-            _layout = _xfLayout as Xamarin.Forms.RelativeLayout;
         }
 
         /// <summary>
@@ -99,6 +98,11 @@ namespace Forms9Patch
         /// <param name="value">Value.</param>
         public static void SetYConstraint(BindableObject bindable, Constraint value) => Xamarin.Forms.RelativeLayout.SetYConstraint(bindable, value);
 
+        public IPlatformElementConfiguration<T, Xamarin.Forms.RelativeLayout> On<T>() where T : IConfigPlatform
+        {
+            return ((IElementConfiguration<Xamarin.Forms.RelativeLayout>)_xfLayout).On<T>();
+
+        }
     }
 }
 
