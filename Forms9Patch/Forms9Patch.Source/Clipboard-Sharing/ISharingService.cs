@@ -6,5 +6,7 @@ namespace Forms9Patch
     interface ISharingService
     {
         void Share(MimeItemCollection mimeItemCollection, VisualElement target);
+
+        bool CanShare { get; }
     }
 }

@@ -24,6 +24,8 @@ namespace Forms9Patch.Droid
 {
     public class SharingService : Forms9Patch.ISharingService
     {
+        public bool CanShare => Forms9Patch.OsInfoService.Version >= Version.Parse("27.0.0");
+
         public void Share(Forms9Patch.MimeItemCollection mimeItemCollection, VisualElement target)
         {
             var uris = mimeItemCollection.AsContentUris();
@@ -56,14 +58,17 @@ namespace Forms9Patch.Droid
                 {
                     intent.SetAction(Intent.ActionSend);
                     intent.PutExtra(Intent.ExtraStream, uris[0]);
+                    intent.AddFlags(ActivityFlags.GrantReadUriPermission);
                     intent.SetType(ClipboardContentProvider.UriItems[uris[0]].MimeType);
                 }
                 else
                 {
                     intent.SetAction(Intent.ActionSendMultiple);
                     intent.PutParcelableArrayListExtra(Intent.ExtraStream, uris.ToArray());
+                    intent.AddFlags(ActivityFlags.GrantReadUriPermission);
                     intent.SetType(mimeItemCollection.LowestCommonMimeType());
                 }
+
 
 
                 Forms9Patch.Droid.Settings.Activity.StartActivity(Intent.CreateChooser(intent, "Share ..."));
