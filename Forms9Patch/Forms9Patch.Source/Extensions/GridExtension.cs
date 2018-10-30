@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
+/*
 namespace Forms9Patch
 {
     /// <summary>
@@ -40,4 +41,5 @@ namespace Forms9Patch
         }
     }
 }
+*/
 

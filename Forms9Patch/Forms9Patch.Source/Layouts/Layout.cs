@@ -121,7 +121,7 @@ namespace Forms9Patch
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class VisualElement<T> : Element<T> where T : Xamarin.Forms.Layout<View>, Xamarin.Forms.IAnimatable, Xamarin.Forms.IVisualElementController new()
+    public abstract class VisualElement<T> : Element<T> where T : Xamarin.Forms.Layout<View>, Xamarin.Forms.IAnimatable, Xamarin.Forms.IVisualElementController, new()
     {
         // Handled by frame:
         // - Navigation

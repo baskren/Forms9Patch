@@ -3,14 +3,19 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using static Xamarin.Forms.Grid;
+//using static Xamarin.Forms.Grid;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Forms9Patch Grid layout.
     /// </summary>
-    public class Grid : Xamarin.Forms.Grid, ILayout
+    public class Grid : GridX { }
+
+    /// <summary>
+    /// Forms9Patch Grid layout.
+    /// </summary>
+    public class GridX : Xamarin.Forms.Grid, ILayout
     {
         /* NG
         public static readonly BindableProperty RowProperty = Xamarin.Forms.Grid.RowProperty;
@@ -114,7 +119,13 @@ namespace Forms9Patch
         #region IBackground
 
         #region BackgroundImage property
+        /// <summary>
+        /// Backing store for the BackgroundImage property
+        /// </summary>
         public static readonly BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
+        /// <summary>
+        /// Image in the background
+        /// </summary>
         public Image BackgroundImage
         {
             get => (Image)GetValue(BackgroundImageProperty);
@@ -123,7 +134,13 @@ namespace Forms9Patch
         #endregion BackgroundImage property
 
         #region LimitMinSizeToBackgroundImageSize property
+        /// <summary>
+        /// Backing store for the LimitMinSizeToBackgroundImageSize property
+        /// </summary>
         public static readonly BindableProperty LimitMinSizeToBackgroundImageSizeProperty = BindableProperty.Create("Forms9Patch.Grid.LimitMinSizeToBackgroundImageSize", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Makes the view no smaller than the background image size
+        /// </summary>
         public bool LimitMinSizeToBackgroundImageSize
         {
             get => (bool)GetValue(LimitMinSizeToBackgroundImageSizeProperty);
@@ -134,8 +151,13 @@ namespace Forms9Patch
         #region IShape
 
         #region BackgroundColor property
+        /// <summary>
+        /// Backing store for BackgroundColor property
+        /// </summary>
         public static readonly new BindableProperty BackgroundColorProperty = BindableProperty.Create("Forms9Patch.Grid.BackgroundColor", typeof(Color), typeof(Grid), default(Color));
-
+        /// <summary>
+        /// Color of background
+        /// </summary>
         public new Color BackgroundColor
         {
             get => (Color)GetValue(BackgroundColorProperty);
@@ -144,8 +166,13 @@ namespace Forms9Patch
         #endregion BackgroundColor property
 
         #region HasShadow property
+        /// <summary>
+        /// Backing store for HasShadow property
+        /// </summary>
         public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("Forms9Patch.Grid.HasShadow", typeof(bool), typeof(Grid), default(bool));
-
+        /// <summary>
+        /// Has shadow?
+        /// </summary>
         public bool HasShadow
         {
             get => (bool)GetValue(HasShadowProperty);
@@ -154,7 +181,13 @@ namespace Forms9Patch
         #endregion HasShadow property
 
         #region ShadowInverted property
+        /// <summary>
+        /// Backing store for ShadowInverted property
+        /// </summary>
         public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("Forms9Patch.Grid.ShadowInverted", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Is the shadow inverted?
+        /// </summary>
         public bool ShadowInverted
         {
             get => (bool)GetValue(ShadowInvertedProperty);
@@ -163,7 +196,13 @@ namespace Forms9Patch
         #endregion ShadowInverted property
 
         #region OutlineColor property
+        /// <summary>
+        /// Backing store for OutlineColor property
+        /// </summary>
         public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineColor", typeof(Color), typeof(Grid), default(Color));
+        /// <summary>
+        /// Color of outline
+        /// </summary>
         public Color OutlineColor
         {
             get => (Color)GetValue(OutlineColorProperty);
@@ -172,7 +211,13 @@ namespace Forms9Patch
         #endregion OutlineColor property
 
         #region OutlineRadius property
+        /// <summary>
+        /// Backing store for OutlineRadius property
+        /// </summary>
         public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineRadius", typeof(float), typeof(Grid), default(float));
+        /// <summary>
+        /// Radius of outline
+        /// </summary>
         public float OutlineRadius
         {
             get => (float)GetValue(OutlineRadiusProperty);
@@ -181,7 +226,13 @@ namespace Forms9Patch
         #endregion OutlineRadius property
 
         #region OutlineWidth property
+        /// <summary>
+        /// Backing store for OutlineWidth property
+        /// </summary>
         public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineWidth", typeof(float), typeof(Grid), default(float));
+        /// <summary>
+        /// Outline Width
+        /// </summary>
         public float OutlineWidth
         {
             get => (float)GetValue(OutlineWidthProperty);
@@ -190,7 +241,13 @@ namespace Forms9Patch
         #endregion OutlineWidth property
 
         #region ElementShape property
+        /// <summary>
+        /// Backing store for the ElementShape property
+        /// </summary>
         public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("Forms9Patch.Grid.ElementShape", typeof(ElementShape), typeof(Grid), default(ElementShape));
+        /// <summary>
+        /// The shape of the background
+        /// </summary>
         public ElementShape ElementShape
         {
             get => (ElementShape)GetValue(ElementShapeProperty);
@@ -199,6 +256,9 @@ namespace Forms9Patch
         #endregion ElementShape property
 
         #region IElement properties
+        /// <summary>
+        /// Internal use only
+        /// </summary>
         public int InstanceId => _f9pId;
         #endregion IElement properties
 
@@ -214,6 +274,9 @@ namespace Forms9Patch
 
         #region Private Fields and Properties
         static int _instances;
+        /// <summary>
+        /// Internal use only
+        /// </summary>
         protected readonly int _f9pId;
 
         readonly Image _fallbackBackgroundImage = new Image
@@ -243,7 +306,7 @@ namespace Forms9Patch
 
 
         #region Constructors
-        static Grid()
+        static GridX()
         {
             Settings.ConfirmInitialization();
 
@@ -252,7 +315,7 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ContentView"/> class.  Forms9Patch.ContentView is same as Forms9Patch.Frame - but with different default values.
         /// </summary>
-        public Grid()
+        public GridX()
         {
             _f9pId = _instances++;
             RowDefinitions.ItemSizeChanged += (sender, e) => SetRowSpan(CurrentBackgroundImage, RowDefinitions.Count);
@@ -282,6 +345,10 @@ namespace Forms9Patch
 
 
         #region Property Change Handlers
+            /// <summary>
+            /// Called when a property is about to be changed
+            /// </summary>
+            /// <param name="propertyName"></param>
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);
@@ -295,6 +362,10 @@ namespace Forms9Patch
 
         }
 
+        /// <summary>
+        /// Called when a property has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
