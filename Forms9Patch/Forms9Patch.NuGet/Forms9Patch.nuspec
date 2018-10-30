@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.0-rc4</version>
+        <version>1.6.0-rc5</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -24,7 +24,7 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
-    1.6.0: Fixed: Unable to create Forms9Patch.Grid in XAML; Fixed: BubblePopup not responding to PointerLength.  Enhancements: Popups now respond to LayoutAlignents; Popups respond to size and position changes in Target; Forms9Patch.Image with SVG ImageSource now responds to Opacity and TintColor; AcivityIndicatorPopup now responds to Scale property.
+    1.6.0: Fixed: Unable to create Forms9Patch.Grid in XAML; BubblePopup not responding to PointerLength; Image HeightRequest/WidthRequest too easily overpowered by other members of StackLayout.  Enhancements: Popups now respond to LayoutAlignents; Popups respond to size and position changes in Target; Forms9Patch.Image with SVG ImageSource now responds to Opacity and TintColor; AcivityIndicatorPopup now responds to Scale property.
     1.5.0.9: Reverted to SkiaSharp 1.59.3 to reduce likelihood of crashes related to rendering shadows with SkiaSharp 1.60 (https://github.com/mono/SkiaSharp/issues/569); Added Forms9Patch.Analytics delegates to all Forms9Patch users to keep tabs on if this was effective;
     1.5.0.8: Fixed: Animation of popups not smooth; Fixed: Too much effort to assure actions are on the UI Thread;
     1.5.0: Refactored layout engine to SkiaSharp.Views.Forms to eliminate device specific issues; Refactored popups to use Rg.Plugins.Popup to eliminate the need for RootPage and addresse failure to render popups in modal pages in iOS; Fixed issues with Label vertical alignment in iOS; Fixed: (Android) failure to detect gestures when element is embedded inside of another element that is monitoring gestures;
