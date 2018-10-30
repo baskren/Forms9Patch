@@ -731,7 +731,7 @@ namespace Forms9Patch
         [Obsolete("Ugh")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
+            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ") ENTER");
 #pragma warning disable CS0618 // Type or member is obsolete
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -746,6 +746,7 @@ namespace Forms9Patch
                 if (!VerticalOptions.Expands)
                     reqH = _f9pImageData.Height / Display.Scale;
             }
+
             var shadowPaddingHz = 0.0;
             var shadowPaddingVt = 0.0;
             if (HasShadow)
@@ -755,15 +756,29 @@ namespace Forms9Patch
                 shadowPaddingVt = shadow.VerticalThickness;
             }
 
+
             if (WidthRequest > 0)
                 reqW = WidthRequest;
             if (HeightRequest > 0)
                 reqH = HeightRequest;
-            result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
-            //System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest result=[" + result + "]");
+            //result = new SizeRequest(new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt), new Size(10 + shadowPaddingHz, 10 + shadowPaddingVt));
+            var reqSize = new Size(reqW + shadowPaddingHz, reqH + shadowPaddingVt);
+            var minSize = new Size(WidthRequest > 0 ? reqSize.Width : 10 + shadowPaddingHz, HeightRequest > 0 ? reqSize.Height : 10 + shadowPaddingVt);
+            result = new SizeRequest(reqSize, minSize);
+            System.Diagnostics.Debug.WriteLine(GetType() + "GetSizeRequest(" + widthConstraint + ", " + heightConstraint + ") = [" + result + "]");
             return result;
         }
 
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            if (Math.Abs(widthConstraint - 768) < 0.00001 && Math.Abs(heightConstraint - 74.9624060150376) < 0.00001)
+                System.Diagnostics.Debug.WriteLine("");
+
+            System.Diagnostics.Debug.WriteLine(GetType() + ".OnMeasure(" + widthConstraint + ", " + heightConstraint + ") ENTER");
+            var result = base.OnMeasure(widthConstraint, heightConstraint);
+            System.Diagnostics.Debug.WriteLine(GetType() + ".OnMeasure(" + widthConstraint + ", " + heightConstraint + ") = [" + result + "]");
+            return result;
+        }
         #endregion
 
 
@@ -778,6 +793,8 @@ namespace Forms9Patch
             SKImageInfo info = e.Info;
             SKSurface surface = e.Surface;
             SKCanvas canvas = surface?.Canvas;
+
+            System.Diagnostics.Debug.WriteLine(GetType() + ".OnPaintSurface(" + e.Info.Width + "," + e.Info.Height + ")");
 
             if (canvas == null)
                 return;
@@ -1081,7 +1098,7 @@ namespace Forms9Patch
         #region Image Layout
         void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath, SKPaint shadowPaint = null)
         {
-            //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
+            System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
 
             SKBitmap shadowBitmap = null;
             SKCanvas workingCanvas = canvas;
