@@ -45,6 +45,11 @@ namespace Forms9Patch
         /// <param name="flags">Flags.</param>
         public static void SetLayoutFlags(BindableObject bindable, AbsoluteLayoutFlags flags) => Xamarin.Forms.AbsoluteLayout.SetLayoutFlags(bindable, flags);
 
+        /// <summary>
+        /// Marker interface for returning platform-specific configuration elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IPlatformElementConfiguration<T, Xamarin.Forms.AbsoluteLayout> On<T>() where T : IConfigPlatform
         {
             return ((IElementConfiguration<Xamarin.Forms.AbsoluteLayout>)_xfLayout).On<T>();

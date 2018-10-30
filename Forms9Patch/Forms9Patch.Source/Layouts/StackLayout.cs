@@ -50,6 +50,11 @@ namespace Forms9Patch
         {
         }
 
+        /// <summary>
+        /// Marker interface for returning platform-specific configuration elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IPlatformElementConfiguration<T, Xamarin.Forms.StackLayout> On<T>() where T : IConfigPlatform
         {
             return ((IElementConfiguration<Xamarin.Forms.StackLayout>)_xfLayout).On<T>();

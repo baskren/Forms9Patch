@@ -159,7 +159,11 @@ namespace Forms9Patch
         /// <param name="trigger">Trigger.</param>
         public void InvalidateMeasureInernalNonVirtual(InvalidationTrigger trigger) => _grid.InvalidateMeasureInernalNonVirtual(trigger);
 
-
+        /// <summary>
+        /// Marker interface for returning platform-specific configuration elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IPlatformElementConfiguration<T, Xamarin.Forms.Grid> On<T>() where T : IConfigPlatform
         {
             return ((IElementConfiguration<Xamarin.Forms.Grid>)_grid).On<T>();

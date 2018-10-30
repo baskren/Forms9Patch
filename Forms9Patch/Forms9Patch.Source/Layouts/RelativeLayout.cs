@@ -98,6 +98,11 @@ namespace Forms9Patch
         /// <param name="value">Value.</param>
         public static void SetYConstraint(BindableObject bindable, Constraint value) => Xamarin.Forms.RelativeLayout.SetYConstraint(bindable, value);
 
+        /// <summary>
+        /// Marker interface for returning platform-specific configuration elements.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IPlatformElementConfiguration<T, Xamarin.Forms.RelativeLayout> On<T>() where T : IConfigPlatform
         {
             return ((IElementConfiguration<Xamarin.Forms.RelativeLayout>)_xfLayout).On<T>();

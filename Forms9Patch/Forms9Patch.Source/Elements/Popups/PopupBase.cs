@@ -393,6 +393,9 @@ namespace Forms9Patch
         internal DateTime PresentedAt;
         static int _instances;
         readonly int _id;
+        /// <summary>
+        /// Say, when was the last time I ...
+        /// </summary>
         protected DateTime _lastLayout = DateTime.MinValue;
 
         #endregion
@@ -694,8 +697,11 @@ namespace Forms9Patch
         static int refreshPeriod = 50;
 
 
-        public Rectangle _lastTargetBounds = new Rectangle();
+        Rectangle _lastTargetBounds = new Rectangle();
 
+        /// <summary>
+        /// For internal use only!
+        /// </summary>
         protected void Update()
         {
             if (IsVisible && Target != null)
@@ -718,6 +724,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// I really mean it this time!
+        /// </summary>
         protected void HardForceLayout()
         {
             //System.Diagnostics.Debug.WriteLine("C");
