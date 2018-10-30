@@ -73,7 +73,7 @@ namespace Forms9Patch
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class BaseLayout<T> : View<T>, ILayout where T : Xamarin.Forms.Layout<View>, new()
+    public abstract class BaseLayout<T> : View<T>, ILayout, Xamarin.Forms.ILayout, Xamarin.Forms.ILayoutController where T : Xamarin.Forms.Layout<View>, new()
     {
         // Frame already correctly handles IsClippedToBounds, Padding, ForceLayout, GetSizeRequest,
         /// <summary>
@@ -108,7 +108,7 @@ namespace Forms9Patch
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class View<T> : VisualElement<T> where T : Xamarin.Forms.Layout<View>, new()
+    public abstract class View<T> : VisualElement<T>, Xamarin.Forms.IViewController where T : Xamarin.Forms.Layout<View>, new()
     {
         // Handled by frame:
         // - VerticalOptions, HorizontalOptions
@@ -121,7 +121,7 @@ namespace Forms9Patch
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class VisualElement<T> : Element<T> where T : Xamarin.Forms.Layout<View>, new()
+    public abstract class VisualElement<T> : Element<T> where T : Xamarin.Forms.Layout<View>, Xamarin.Forms.IAnimatable, Xamarin.Forms.IVisualElementController new()
     {
         // Handled by frame:
         // - Navigation
@@ -187,7 +187,7 @@ namespace Forms9Patch
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class Element<T> : BindableObject<T> where T : Xamarin.Forms.Layout<View>, new()
+    public abstract class Element<T> : BindableObject<T>, Xamarin.Forms.IElementController where T : Xamarin.Forms.Layout<View>, new()
     {
         /// <summary>
         /// Obsolete Content Property
