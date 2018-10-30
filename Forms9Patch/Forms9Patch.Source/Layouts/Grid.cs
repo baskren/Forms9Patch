@@ -3,188 +3,429 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-//using Xamarin.Forms.Grid;
+//using static Xamarin.Forms.Grid;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Forms9Patch Grid layout.
     /// </summary>
-    public class Grid : Layout<Xamarin.Forms.Grid>, IGridController, IElementConfiguration<Xamarin.Forms.Grid>, IElementConfiguration<Forms9Patch.Grid>
+    public class Grid : GridX { }
+
+    /// <summary>
+    /// Forms9Patch Grid layout.
+    /// </summary>
+    public class GridX : Xamarin.Forms.Grid, ILayout
     {
-        /// <summary>
-        /// Backing store for the row spacing property.
-        /// </summary>
+        /* NG
+        public static readonly BindableProperty RowProperty = Xamarin.Forms.Grid.RowProperty;
+
+        public static readonly BindableProperty RowSpanProperty = Xamarin.Forms.Grid.RowSpanProperty;
+
+        public static readonly BindableProperty ColumnProperty = Xamarin.Forms.Grid.ColumnProperty;
+
+        public static readonly BindableProperty ColumnSpanProperty = Xamarin.Forms.Grid.ColumnSpanProperty;
+
         public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create("RowSpacing", typeof(double), typeof(Grid), 6d,
                                                                                              propertyChanged: (bindable, oldValue, newValue) => ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowSpacingProperty, newValue));
 
-        /// <summary>
-        /// Backing store for the column spacing property.
-        /// </summary>
         public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create("ColumnSpacing", typeof(double), typeof(Grid), 6d,
                                                                                                 propertyChanged: (bindable, oldValue, newValue) => ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.ColumnSpacingProperty, newValue));
 
-        /// <summary>
-        /// Backing store for the column definitions property.
-        /// </summary>
         public static readonly BindableProperty ColumnDefinitionsProperty = BindableProperty.Create("ColumnDefinitions", typeof(ColumnDefinitionCollection), typeof(Grid), null,
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.ColumnDefinitionsProperty, newvalue);
-            }, defaultValueCreator: bindable =>
-            {
-                var colDef = new ColumnDefinitionCollection();
-                //colDef.ItemSizeChanged += ((Grid)bindable).OnDefinitionChanged;
-                return colDef;
             });
 
-        /// <summary>
-        /// Backing store for the row definitions property.
-        /// </summary>
         public static readonly BindableProperty RowDefinitionsProperty = BindableProperty.Create("RowDefinitions", typeof(RowDefinitionCollection), typeof(Grid), null,
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowDefinitionsProperty, newvalue);
-            }, defaultValueCreator: bindable =>
-            {
-                var rowDef = new RowDefinitionCollection();
-                //rowDef.ItemSizeChanged += ((Grid)bindable).OnDefinitionChanged;
-                return rowDef;
             });
 
-        /// <summary>
-        /// Children of Grid
-        /// </summary>
-        public new Xamarin.Forms.Grid.IGridList<View> Children => _grid.Children;
+        public new IGridList<View> Children => _grid.Children;
 
-        /// <summary>
-        /// Gets or sets the column definitions.
-        /// </summary>
-        /// <value>The column definitions.</value>
         public ColumnDefinitionCollection ColumnDefinitions
         {
             get => _grid.ColumnDefinitions;
             set => _grid.ColumnDefinitions = value;
         }
 
-        /// <summary>
-        /// Gets or sets the column spacing.
-        /// </summary>
-        /// <value>The column spacing.</value>
         public double ColumnSpacing
         {
             get => _grid.ColumnSpacing;
             set => _grid.ColumnSpacing = value;
         }
 
-        /// <summary>
-        /// Gets or sets the row definitions.
-        /// </summary>
-        /// <value>The row definitions.</value>
         public RowDefinitionCollection RowDefinitions
         {
             get => _grid.RowDefinitions;
             set => _grid.RowDefinitions = value;
         }
 
-        /// <summary>
-        /// Gets or sets the row spacing.
-        /// </summary>
-        /// <value>The row spacing.</value>
         public double RowSpacing
         {
             get => _grid.RowSpacing;
             set => _grid.RowSpacing = value;
         }
 
-        /// <summary>
-        /// Gets the column of element in Grid
-        /// </summary>
-        /// <returns>The column.</returns>
-        /// <param name="bindable">Bindable.</param>
         public static int GetColumn(BindableObject bindable) => Xamarin.Forms.Grid.GetColumn(bindable);
 
-        /// <summary>
-        /// Gets the column span of element in Grid
-        /// </summary>
-        /// <returns>The column span.</returns>
-        /// <param name="bindable">Bindable.</param>
         public static int GetColumnSpan(BindableObject bindable) => Xamarin.Forms.Grid.GetColumnSpan(bindable);
 
-        /// <summary>
-        /// Gets the row of element in Grid
-        /// </summary>
-        /// <returns>The row.</returns>
-        /// <param name="bindable">Bindable.</param>
         public static int GetRow(BindableObject bindable) => Xamarin.Forms.Grid.GetRow(bindable);
 
-        /// <summary>
-        /// Gets the row span of element in Grid
-        /// </summary>
-        /// <returns>The row span.</returns>
-        /// <param name="bindable">Bindable.</param>
         public static int GetRowSpan(BindableObject bindable) => Xamarin.Forms.Grid.GetRowSpan(bindable);
 
-        /// <summary>
-        /// Sets the column of element in Grid
-        /// </summary>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="value">Value.</param>
         public static void SetColumn(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetColumn(bindable, value);
 
-        /// <summary>
-        /// Sets the column span of element in Grid
-        /// </summary>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="value">Value.</param>
         public static void SetColumnSpan(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetColumnSpan(bindable, value);
 
-        /// <summary>
-        /// Sets the row of element in Grid
-        /// </summary>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="value">Value.</param>
         public static void SetRow(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetRow(bindable, value);
 
-        /// <summary>
-        /// Sets the row span of element in Grid
-        /// </summary>
-        /// <param name="bindable">Bindable.</param>
-        /// <param name="value">Value.</param>
         public static void SetRowSpan(BindableObject bindable, int value) => Xamarin.Forms.Grid.SetRowSpan(bindable, value);
 
-        /// <summary>
-        /// Invalidates the measure inernal non virtual.
-        /// </summary>
-        /// <param name="trigger">Trigger.</param>
         public void InvalidateMeasureInernalNonVirtual(InvalidationTrigger trigger) => _grid.InvalidateMeasureInernalNonVirtual(trigger);
 
-        /// <summary>
-        /// Marker interface for returning platform-specific configuration elements.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public IPlatformElementConfiguration<T, Xamarin.Forms.Grid> On<T>() where T : IConfigPlatform
-        {
-            return ((IElementConfiguration<Xamarin.Forms.Grid>)_grid).On<T>();
-        }
+        readonly Xamarin.Forms.Grid _grid;
 
-        IPlatformElementConfiguration<T, Grid> IElementConfiguration<Grid>.On<T>()
-        {
-            return ((IElementConfiguration<Forms9Patch.Grid>)_grid).On<T>();
-            //return null;
-        }
-
-
-
-        Xamarin.Forms.Grid _grid => _xfLayout as Xamarin.Forms.Grid;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.Grid"/> class.
-        /// </summary>
         public Grid()
         {
+            _grid = _xfLayout as Xamarin.Forms.Grid;
         }
+        */
+
+        #region Properties
+
+        #region ILayout Properties
+
+        #region IgnoreChildren
+        /// <summary>
+        /// The ignore children property.
+        /// </summary>
+        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.Grid"/> ignore children.
+        /// </summary>
+        /// <value><c>true</c> if ignore children; otherwise, <c>false</c>.</value>
+        public bool IgnoreChildren
+        {
+            get => (bool)GetValue(IgnoreChildrenProperty);
+            set => SetValue(IgnoreChildrenProperty, value);
+        }
+        #endregion IgnoreChildren
+
+        #region IBackground
+
+        #region BackgroundImage property
+        /// <summary>
+        /// Backing store for the BackgroundImage property
+        /// </summary>
+        public static readonly BindableProperty BackgroundImageProperty = ShapeBase.BackgroundImageProperty;
+        /// <summary>
+        /// Image in the background
+        /// </summary>
+        public Image BackgroundImage
+        {
+            get => (Image)GetValue(BackgroundImageProperty);
+            set => SetValue(BackgroundImageProperty, value);
+        }
+        #endregion BackgroundImage property
+
+        #region LimitMinSizeToBackgroundImageSize property
+        /// <summary>
+        /// Backing store for the LimitMinSizeToBackgroundImageSize property
+        /// </summary>
+        public static readonly BindableProperty LimitMinSizeToBackgroundImageSizeProperty = BindableProperty.Create("Forms9Patch.Grid.LimitMinSizeToBackgroundImageSize", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Makes the view no smaller than the background image size
+        /// </summary>
+        public bool LimitMinSizeToBackgroundImageSize
+        {
+            get => (bool)GetValue(LimitMinSizeToBackgroundImageSizeProperty);
+            set => SetValue(LimitMinSizeToBackgroundImageSizeProperty, value);
+        }
+        #endregion LimitMinSizeToBackgroundImageSize property
+
+        #region IShape
+
+        #region BackgroundColor property
+        /// <summary>
+        /// Backing store for BackgroundColor property
+        /// </summary>
+        public static readonly new BindableProperty BackgroundColorProperty = BindableProperty.Create("Forms9Patch.Grid.BackgroundColor", typeof(Color), typeof(Grid), default(Color));
+        /// <summary>
+        /// Color of background
+        /// </summary>
+        public new Color BackgroundColor
+        {
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
+        }
+        #endregion BackgroundColor property
+
+        #region HasShadow property
+        /// <summary>
+        /// Backing store for HasShadow property
+        /// </summary>
+        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("Forms9Patch.Grid.HasShadow", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Has shadow?
+        /// </summary>
+        public bool HasShadow
+        {
+            get => (bool)GetValue(HasShadowProperty);
+            set => SetValue(HasShadowProperty, value);
+        }
+        #endregion HasShadow property
+
+        #region ShadowInverted property
+        /// <summary>
+        /// Backing store for ShadowInverted property
+        /// </summary>
+        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("Forms9Patch.Grid.ShadowInverted", typeof(bool), typeof(Grid), default(bool));
+        /// <summary>
+        /// Is the shadow inverted?
+        /// </summary>
+        public bool ShadowInverted
+        {
+            get => (bool)GetValue(ShadowInvertedProperty);
+            set => SetValue(ShadowInvertedProperty, value);
+        }
+        #endregion ShadowInverted property
+
+        #region OutlineColor property
+        /// <summary>
+        /// Backing store for OutlineColor property
+        /// </summary>
+        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineColor", typeof(Color), typeof(Grid), default(Color));
+        /// <summary>
+        /// Color of outline
+        /// </summary>
+        public Color OutlineColor
+        {
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
+        }
+        #endregion OutlineColor property
+
+        #region OutlineRadius property
+        /// <summary>
+        /// Backing store for OutlineRadius property
+        /// </summary>
+        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineRadius", typeof(float), typeof(Grid), default(float));
+        /// <summary>
+        /// Radius of outline
+        /// </summary>
+        public float OutlineRadius
+        {
+            get => (float)GetValue(OutlineRadiusProperty);
+            set => SetValue(OutlineRadiusProperty, value);
+        }
+        #endregion OutlineRadius property
+
+        #region OutlineWidth property
+        /// <summary>
+        /// Backing store for OutlineWidth property
+        /// </summary>
+        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("Forms9Patch.Grid.OutlineWidth", typeof(float), typeof(Grid), default(float));
+        /// <summary>
+        /// Outline Width
+        /// </summary>
+        public float OutlineWidth
+        {
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
+        }
+        #endregion OutlineWidth property
+
+        #region ElementShape property
+        /// <summary>
+        /// Backing store for the ElementShape property
+        /// </summary>
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("Forms9Patch.Grid.ElementShape", typeof(ElementShape), typeof(Grid), default(ElementShape));
+        /// <summary>
+        /// The shape of the background
+        /// </summary>
+        public ElementShape ElementShape
+        {
+            get => (ElementShape)GetValue(ElementShapeProperty);
+            set => SetValue(ElementShapeProperty, value);
+        }
+        #endregion ElementShape property
+
+        #region IElement properties
+        /// <summary>
+        /// Internal use only
+        /// </summary>
+        public int InstanceId => _f9pId;
+        #endregion IElement properties
+
+        #endregion IShape properties
+
+        #endregion IBackground properties
+
+        #endregion ILayout properties
+
+
+        #endregion
+
+
+        #region Private Fields and Properties
+        static int _instances;
+        /// <summary>
+        /// Internal use only
+        /// </summary>
+        protected readonly int _f9pId;
+
+        readonly Image _fallbackBackgroundImage = new Image
+        {
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.Fill,
+        };
+
+        Image CurrentBackgroundImage => BackgroundImage ?? _fallbackBackgroundImage;
+
+        /*
+        ObservableCollection<Element> _baseInternalChildren;
+        ObservableCollection<Element> BaseInternalChildren
+        {
+            get
+            {
+                if (_baseInternalChildren == null)
+                {
+                    _baseInternalChildren = (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(this, "InternalChildren");
+                    _baseInternalChildren?.Insert(0, CurrentBackgroundImage);
+                }
+                return _baseInternalChildren;
+            }
+        }
+        */
+        #endregion
+
+
+        #region Constructors
+        static GridX()
+        {
+            Settings.ConfirmInitialization();
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.ContentView"/> class.  Forms9Patch.ContentView is same as Forms9Patch.Frame - but with different default values.
+        /// </summary>
+        public GridX()
+        {
+            _f9pId = _instances++;
+            RowDefinitions.ItemSizeChanged += (sender, e) => SetRowSpan(CurrentBackgroundImage, RowDefinitions.Count);
+            ColumnDefinitions.ItemSizeChanged += (sender, e) => SetColumnSpan(CurrentBackgroundImage, ColumnDefinitions.Count);
+        }
+        #endregion
+
+
+        #region Description
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
+        /// </summary>
+        /// <returns>A <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.</returns>
+        public string Description() { return string.Format("[{0}.{1}]", GetType(), _f9pId); }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that describes the current <see cref="Forms9Patch.Frame"/>.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => Description();
+        #endregion
+
+
+        #region IShape Methods
+        //Xamarin.Forms.Thickness IShape.ShadowPadding() => ((IShape)CurrentBackgroundImage).ShadowPadding();
+        #endregion
+
+
+        #region Property Change Handlers
+            /// <summary>
+            /// Called when a property is about to be changed
+            /// </summary>
+            /// <param name="propertyName"></param>
+        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+            if (propertyName == BackgroundImageProperty.PropertyName)
+            {
+                if (BackgroundImage != null && Children.Contains(BackgroundImage))
+                    Children.Remove(BackgroundImage);
+                if (_fallbackBackgroundImage != null && Children.Contains(_fallbackBackgroundImage))
+                    Children.Remove(_fallbackBackgroundImage);
+            }
+
+        }
+
+        /// <summary>
+        /// Called when a property has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == BackgroundImageProperty.PropertyName)
+            {
+                SetRowSpan(CurrentBackgroundImage, RowDefinitions.Count);
+                SetColumnSpan(CurrentBackgroundImage, ColumnDefinitions.Count);
+                Children.Insert(0, CurrentBackgroundImage);
+            }
+            else if (propertyName == BackgroundColorProperty.PropertyName)
+                CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
+            else if (propertyName == HasShadowProperty.PropertyName)
+                CurrentBackgroundImage.HasShadow = _fallbackBackgroundImage.HasShadow = HasShadow;
+            else if (propertyName == ShadowInvertedProperty.PropertyName)
+                CurrentBackgroundImage.ShadowInverted = _fallbackBackgroundImage.ShadowInverted = ShadowInverted;
+            else if (propertyName == OutlineColorProperty.PropertyName)
+                CurrentBackgroundImage.OutlineColor = _fallbackBackgroundImage.OutlineColor = OutlineColor;
+            else if (propertyName == OutlineRadiusProperty.PropertyName)
+                CurrentBackgroundImage.OutlineRadius = _fallbackBackgroundImage.OutlineRadius = OutlineRadius;
+            else if (propertyName == OutlineWidthProperty.PropertyName)
+                CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
+            else if (propertyName == ElementShapeProperty.PropertyName)
+                CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
+        }
+        #endregion
+
+
+        #region IgnoreChildren handlers
+        /// <summary>
+        /// Shoulds the invalidate on child added.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child added was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
+        protected override bool ShouldInvalidateOnChildAdded(View child)
+        {
+            return !IgnoreChildren; // stop pestering me
+        }
+
+        /// <summary>
+        /// Shoulds the invalidate on child removed.
+        /// </summary>
+        /// <returns><c>true</c>, if invalidate on child removed was shoulded, <c>false</c> otherwise.</returns>
+        /// <param name="child">Child.</param>
+        protected override bool ShouldInvalidateOnChildRemoved(View child)
+        {
+            return !IgnoreChildren; // go away and leave me alone
+        }
+
+        /// <summary>
+        /// Ons the child measure invalidated.
+        /// </summary>
+        protected override void OnChildMeasureInvalidated()
+        {
+            // I'm ignoring you.  You'll take whatever size I want to give
+            // you.  And you'll like it.
+            if (!IgnoreChildren)
+                base.OnChildMeasureInvalidated();
+        }
+        #endregion IgnoreChildren handlers
+
     }
 }
 
