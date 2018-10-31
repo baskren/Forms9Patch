@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using System;
+using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -229,11 +230,13 @@ namespace Forms9Patch
             _okButton.HtmlText = OkText;
 
 
-            _cancelButton.Tapped += (s, args) => Cancel();
-            _okButton.Tapped += (s, args) =>
+            _cancelButton.Tapped += async (s, args) => await CancelAsync();
+            _okButton.Tapped += async (s, args) =>
             {
+                await Pop();
+                while (_isPushed)
+                    await Task.Delay(50);
                 OkTapped?.Invoke(this, EventArgs.Empty);
-                IsVisible = false;
             };
             Content = new StackLayout
             {

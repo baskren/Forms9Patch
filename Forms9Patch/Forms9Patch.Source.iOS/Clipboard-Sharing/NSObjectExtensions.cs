@@ -326,6 +326,8 @@ namespace Forms9Patch.iOS
 
         public static NSObject ToNSObject(this object obj)
         {
+            if (obj == null)
+                return null;
             NSObject nsObject = null;
             var type = obj.GetType();
             var typeInfo = type.GetTypeInfo();

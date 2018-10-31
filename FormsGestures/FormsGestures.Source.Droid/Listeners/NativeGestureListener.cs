@@ -494,7 +494,7 @@ namespace FormsGestures.Droid
                     while (handler != null)
                     {
                         var listener = handler.Listener;
-                        if (listener != null && listener.HandlesPanning || listener.HandlesPanned)
+                        if (listener != null && (listener.HandlesPanning || listener.HandlesPanned))
                         {
                             args.Listener = listener;
                             listener.OnPanning(args);

@@ -460,14 +460,28 @@ namespace Forms9Patch
             return isClose;
         }
 
+
+        public async Task CancelAsync()
+        {
+            if (P42.Utils.Environment.IsOnMainThread)
+            {
+                await Pop();
+                //await Navigation.RemovePopupPageAsync(this);
+                //IsVisible = false;
+                while (_isPushed)
+                    await Task.Delay(50);
+                Cancelled?.Invoke(this, EventArgs.Empty);
+            }
+            else
+                Device.BeginInvokeOnMainThread(async () => await CancelAsync());
+        }
+
         /// <summary>
         /// Cancel the display of this Popup (will fire Cancelled event);
         /// </summary>
-        public void Cancel()
-        {
-            IsVisible = false;
-            Cancelled?.Invoke(this, EventArgs.Empty);
-        }
+        [Obsolete("Use CancelAsync instead")]
+        public void Cancel() => Task.Run(async () => await CancelAsync());
+
         #endregion
 
 
@@ -555,6 +569,19 @@ namespace Forms9Patch
         }
 
 
+        internal protected bool _isPushed;
+        protected override void OnAppearingAnimationBegin()
+        {
+            _isPushed = true;
+            base.OnAppearingAnimationBegin();
+        }
+
+        protected override void OnDisappearingAnimationEnd()
+        {
+            base.OnDisappearingAnimationEnd();
+            _isPushed = false;
+        }
+
         bool _isPushing;
         /// <summary>
         /// Push the popup asynchronously
@@ -565,14 +592,15 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPushing)
+                if (_isPushing || _isPushed)
                     return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     _isPushing = true;
                     while (_isPoping) await Task.Delay(100);
-                    if (IsVisible)
-                        await Navigation.PushPopupAsync(this);
+                    //if (IsVisible)
+                    IsVisible = true;
+                    await Navigation.PushPopupAsync(this);
                     _isPushing = false;
                 }
                 else
@@ -590,14 +618,15 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPoping)
+                if (_isPoping || !_isPushed)
                     return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     _isPoping = true;
                     while (_isPushing) await Task.Delay(100);
-                    if (!IsVisible)
-                        await Navigation.RemovePopupPageAsync(this);
+                    //if (!IsVisible)
+                    IsVisible = false;
+                    await Navigation.RemovePopupPageAsync(this);
                     _isPoping = false;
                 }
                 else
@@ -687,14 +716,13 @@ namespace Forms9Patch
                 Device.StartTimer(TimeSpan.FromMilliseconds(refreshPeriod), () =>
                 {
                     Update();
-                    //System.Diagnostics.Debug.WriteLine("A");
                     return IsVisible && !_disposed;
                 });
             }
 
         }
 
-        static int refreshPeriod = 50;
+        const int refreshPeriod = 50;
 
 
         Rectangle _lastTargetBounds = new Rectangle();

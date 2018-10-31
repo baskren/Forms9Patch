@@ -113,10 +113,13 @@ namespace Forms9Patch
         /// <param name="color">Color.</param>
         public static string ToHexRgbColorString(this Color color)
         {
-            var r = color.ByteR() >> 1;
-            var b = color.ByteB() >> 1;
-            var g = color.ByteG() >> 1;
-            return r.ToString("x1") + g.ToString("x1") + b.ToString("x1");
+            var r = color.ByteR() >> 4;
+            var g = color.ByteG() >> 4;
+            var b = color.ByteB() >> 4;
+            var R = r.ToString("x1");
+            var G = g.ToString("x1");
+            var B = b.ToString("x1");
+            return R + G + B;
         }
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace Forms9Patch
         /// <param name="color">Color.</param>
         public static string ToHexArgbColorString(this Color color)
         {
-            var a = color.ByteA() >> 1;
+            var a = color.ByteA() >> 4;
             return a.ToString("x1") + color.ToHexRgbColorString();
         }
 
@@ -166,7 +169,7 @@ namespace Forms9Patch
                 var r = int.Parse(components[0]);
                 var g = int.Parse(components[1]);
                 var b = int.Parse(components[2]);
-                return Color.FromRgb(r,g,b);
+                return Color.FromRgb(r, g, b);
             }
             if (s.ToLower().StartsWith("rgba(", StringComparison.Ordinal))
             {
@@ -178,11 +181,12 @@ namespace Forms9Patch
                 var g = int.Parse(components[1]);
                 var b = int.Parse(components[2]);
                 var a = int.Parse(components[3]);
-                return Color.FromRgba(r,g,b,a);
+                return Color.FromRgba(r, g, b, a);
             }
             if (s.StartsWith("#", StringComparison.Ordinal))
             {
-                return Color.FromHex(s.Substring(1));
+                var color = Color.FromHex(s);
+                return color;
             }
             var colorName = s.ToLower();
             switch (colorName)

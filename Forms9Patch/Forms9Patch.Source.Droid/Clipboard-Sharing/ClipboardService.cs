@@ -142,8 +142,12 @@ namespace Forms9Patch.Droid
 
         public static Android.Net.Uri AsAsAndroidUri(IMimeItem mimeItem)
         {
-            var uri = NextItemUri;
-            UriItems[uri] = mimeItem;
+            Android.Net.Uri uri = null;
+            if (mimeItem.Value != null)
+            {
+                uri = NextItemUri;
+                UriItems[uri] = mimeItem;
+            }
             return uri;
         }
 
@@ -191,7 +195,7 @@ namespace Forms9Patch.Droid
         public override ICursor Query(Android.Net.Uri uri, string[] projection, string selection, string[] selectionArgs, string sortOrder)
         {
             var item = ItemForUri(uri);
-            if (item == null)
+            if (item == null || item.Value == null)
                 return null;
             if (item.Value is FileInfo fileInfo)
                 return new PrimativeCursor(item.Value);
@@ -342,6 +346,8 @@ namespace Forms9Patch.Droid
             System.Diagnostics.Debug.WriteLine("OpenFile A");
 
             var item = ItemForUri(uri);
+            if (item == null || item.Value == null)
+                return null;
 
             var parcelFileMode = mode.Equals("rw", StringComparison.InvariantCultureIgnoreCase) ? ParcelFileMode.ReadWrite : ParcelFileMode.ReadOnly;
             Java.IO.File javaFile = null;

@@ -219,7 +219,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            System.Diagnostics.Debug.WriteLine("propertyNmae=[" + propertyName + "]");
+            //System.Diagnostics.Debug.WriteLine("propertyNmae=[" + propertyName + "]");
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
