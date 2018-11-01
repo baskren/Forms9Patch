@@ -77,6 +77,7 @@ namespace Forms9Patch
                 BackgroundColor = BackgroundColor
             };
             DecorativeContainerView = _frame;
+
         }
 
         /// <summary>

@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Forms9Patch.Source.iOS\Effects\PopupLayerEffect.cs">
+      <Link>PopupLayerEffect.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
   <ItemGroup>

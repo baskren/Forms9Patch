@@ -602,6 +602,7 @@ namespace Forms9Patch
                     IsVisible = true;
                     await Navigation.PushPopupAsync(this);
                     _isPushing = false;
+                    PopupLayerEffect.ApplyTo(this);
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await Push());
@@ -626,6 +627,7 @@ namespace Forms9Patch
                     while (_isPushing) await Task.Delay(100);
                     //if (!IsVisible)
                     IsVisible = false;
+                    PopupLayerEffect.RemoveFrom(this);
                     await Navigation.RemovePopupPageAsync(this);
                     _isPoping = false;
                 }

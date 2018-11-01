@@ -17,6 +17,7 @@
 
     <!-- Effects -->
     <Compile Include="..\Forms9Patch.Source\Effects\EmbeddedResourceFontEffect.cs" Link="Effects\EmbeddedResourceFontEffect.cs" />
+    <Compile Include="..\Forms9Patch.Source\Effects\PopupLayerEffect.cs" Link="Effects\PopupLayerEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\OverContextEffect.cs" Link="Effects\OverContextEffect.cs" />
     <Compile Include="..\Forms9Patch.Source\Effects\SliderStepSizeEffect.cs" Link="Effects\SliderStepSizeEffect.cs" />
 
