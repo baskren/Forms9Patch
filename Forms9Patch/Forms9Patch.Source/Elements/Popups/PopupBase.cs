@@ -8,6 +8,7 @@ using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Threading;
 
 namespace Forms9Patch
 {
@@ -573,16 +574,20 @@ namespace Forms9Patch
         protected override void OnAppearingAnimationBegin()
         {
             _isPushed = true;
+            IsVisible = true;
             base.OnAppearingAnimationBegin();
         }
 
         protected override void OnDisappearingAnimationEnd()
         {
             base.OnDisappearingAnimationEnd();
+            IsVisible = false;
             _isPushed = false;
         }
 
-        bool _isPushing;
+        SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
+
+        //bool _isPushing;
         /// <summary>
         /// Push the popup asynchronously
         /// </summary>
@@ -592,22 +597,25 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPushing)
-                    return;
+                //if (_isPushing || _isPushed)
+                //    return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
-                    _isPushing = true;
-                    while (_isPoping) await Task.Delay(100);
-                    if (IsVisible)
-                        await Navigation.PushPopupAsync(this);
-                    _isPushing = false;
+                    //_isPushing = true;
+                    //while (_isPoping) await Task.Delay(100);
+                    //if (IsVisible)
+                    await _lock.WaitAsync();
+                    await Navigation.PushPopupAsync(this);
+                    //_isPushing = false;
+                    PopupLayerEffect.ApplyTo(this);
+                    _lock.Release();
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await Push());
             }
         }
 
-        bool _isPoping;
+        //bool _isPoping;
         /// <summary>
         /// Pop the popup asynchronously
         /// </summary>
@@ -617,15 +625,18 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPoping)
-                    return;
+                //if (_isPoping || !_isPushed)
+                //    return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
-                    _isPoping = true;
-                    while (_isPushing) await Task.Delay(100);
-                    if (!IsVisible)
-                        await Navigation.RemovePopupPageAsync(this);
-                    _isPoping = false;
+                    //_isPoping = true;
+                    //while (_isPushing) await Task.Delay(100);
+                    //if (!IsVisible)
+                    await _lock.WaitAsync();
+                    PopupLayerEffect.RemoveFrom(this);
+                    await Navigation.RemovePopupPageAsync(this);
+                    //_isPoping = false;
+                    _lock.Release();
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await Pop());
