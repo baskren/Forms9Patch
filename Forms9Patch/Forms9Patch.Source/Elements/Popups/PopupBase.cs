@@ -592,17 +592,15 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPushing || _isPushed)
+                if (_isPushing)
                     return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     _isPushing = true;
                     while (_isPoping) await Task.Delay(100);
-                    //if (IsVisible)
-                    IsVisible = true;
-                    await Navigation.PushPopupAsync(this);
+                    if (IsVisible)
+                        await Navigation.PushPopupAsync(this);
                     _isPushing = false;
-                    //PopupLayerEffect.ApplyTo(this);
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await Push());
@@ -619,16 +617,14 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                if (_isPoping || !_isPushed)
+                if (_isPoping)
                     return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     _isPoping = true;
                     while (_isPushing) await Task.Delay(100);
-                    //if (!IsVisible)
-                    IsVisible = false;
-                    //PopupLayerEffect.RemoveFrom(this);
-                    await Navigation.RemovePopupPageAsync(this);
+                    if (!IsVisible)
+                        await Navigation.RemovePopupPageAsync(this);
                     _isPoping = false;
                 }
                 else
