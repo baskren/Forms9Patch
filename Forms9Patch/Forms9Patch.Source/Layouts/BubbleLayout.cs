@@ -211,6 +211,7 @@ namespace Forms9Patch
             //var result = ShapeBase.ShadowPadding(this);
             var result = new Thickness();
 
+            //System.Diagnostics.Debug.WriteLine("DecorativePadding: PointerDir=" + PointerDirection);
             var padL = result.Left + (PointerDirection == PointerDirection.Left ? PointerLength : 0);
             var padT = result.Top + (PointerDirection == PointerDirection.Up ? PointerLength : 0);
             var padR = result.Right + (PointerDirection == PointerDirection.Right ? PointerLength : 0);
