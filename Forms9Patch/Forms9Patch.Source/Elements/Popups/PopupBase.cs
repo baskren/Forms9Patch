@@ -570,19 +570,42 @@ namespace Forms9Patch
         }
 
 
+        internal protected bool _isPushing;
         internal protected bool _isPushed;
+        internal protected bool _isPopping;
         protected override void OnAppearingAnimationBegin()
         {
-            _isPushed = true;
-            IsVisible = true;
+            _isPushing = true;
+            //IsVisible = true;
             base.OnAppearingAnimationBegin();
+        }
+
+        protected override void OnAppearingAnimationEnd()
+        {
+            base.OnAppearingAnimationEnd();
+            _isPushed = true;
+            _isPushing = false;
+
+            if (!IsVisible && !_isPopping)
+                Pop();
+        }
+
+        protected override void OnDisappearingAnimationBegin()
+        {
+            _isPopping = true;
+            _isPushed = false;
+            base.OnDisappearingAnimationBegin();
         }
 
         protected override void OnDisappearingAnimationEnd()
         {
+
             base.OnDisappearingAnimationEnd();
-            IsVisible = false;
-            _isPushed = false;
+            //IsVisible = false;
+            _isPopping = false;
+
+            if (IsVisible && !_isPushing)
+                Push();
         }
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
@@ -597,6 +620,8 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
+                System.Diagnostics.Debug.WriteLine("PUSH");
+                IsVisible = true;
                 //if (_isPushing || _isPushed)
                 //    return;
                 if (P42.Utils.Environment.IsOnMainThread)
@@ -605,9 +630,14 @@ namespace Forms9Patch
                     //while (_isPoping) await Task.Delay(100);
                     //if (IsVisible)
                     await _lock.WaitAsync();
-                    await Navigation.PushPopupAsync(this);
+
+                    if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+                    {
+                        _isPushing = true;
+                        await Navigation.PushPopupAsync(this);
+                        PopupLayerEffect.ApplyTo(this);
+                    }
                     //_isPushing = false;
-                    PopupLayerEffect.ApplyTo(this);
                     _lock.Release();
                 }
                 else
@@ -625,6 +655,8 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
+                System.Diagnostics.Debug.WriteLine("POP");
+                IsVisible = false;
                 //if (_isPoping || !_isPushed)
                 //    return;
                 if (P42.Utils.Environment.IsOnMainThread)
@@ -633,8 +665,12 @@ namespace Forms9Patch
                     //while (_isPushing) await Task.Delay(100);
                     //if (!IsVisible)
                     await _lock.WaitAsync();
-                    PopupLayerEffect.RemoveFrom(this);
-                    await Navigation.RemovePopupPageAsync(this);
+                    if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+                    {
+                        _isPopping = true;
+                        PopupLayerEffect.RemoveFrom(this);
+                        await Navigation.RemovePopupPageAsync(this);
+                    }
                     //_isPoping = false;
                     _lock.Release();
                 }
@@ -663,7 +699,7 @@ namespace Forms9Patch
                 base.BackgroundColor = PageOverlayColor;
             else if (propertyName == IsVisibleProperty.PropertyName)
             {
-                if (IsVisible)// && PopupPage != null)
+                if (IsVisible && !_isPushed)// && PopupPage != null)
                 {
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
@@ -674,10 +710,12 @@ namespace Forms9Patch
                     }
                     Push();
                 }
-                else
+                else if (!IsVisible && _isPushed)
                 {
                     Pop();
                 }
+                else
+                    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();
