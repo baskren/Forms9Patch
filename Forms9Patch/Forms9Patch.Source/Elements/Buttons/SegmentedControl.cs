@@ -121,6 +121,22 @@ namespace Forms9Patch
 
         #region Properties
 
+        #region FontScaling property
+        /// <summary>
+        /// The size segment fonts equally property.
+        /// </summary>
+        public static readonly BindableProperty SizeSegmentFontsEquallyProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SizeSegmentFontsEqually", typeof(bool), typeof(SegmentedControl), default(bool));
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SegmentedControl"/> size segment fonts equally.
+        /// </summary>
+        /// <value><c>true</c> if size segment fonts equally; otherwise, <c>false</c>.</value>
+        public bool SizeSegmentFontsEqually
+        {
+            get => (bool)GetValue(SizeSegmentFontsEquallyProperty);
+            set => SetValue(SizeSegmentFontsEquallyProperty, value);
+        }
+        #endregion FontScaling property
+
         #region Segments
         readonly ObservableCollection<Segment> _segments;
         /// <summary>
@@ -1056,7 +1072,8 @@ namespace Forms9Patch
         bool _waitingForThingsToCalmDown;
         private void Button_FittedFontSizeChanged(object sender, double e)
         {
-
+            if (!SizeSegmentFontsEqually)
+                return;
             _lastFontSizeResetTime = DateTime.Now;
             if (!_waitingForThingsToCalmDown)
             {
