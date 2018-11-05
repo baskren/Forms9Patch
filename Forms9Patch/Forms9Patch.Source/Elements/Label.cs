@@ -439,10 +439,12 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
+            /* The following will disable Renderer logic for setting font size when AutoFit=Lines || Lines=0
             if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
                 heightConstraint = Forms9Patch.Display.Height;
             if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
                 widthConstraint = Forms9Patch.Display.Width;
+                */
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
 #if __IOS__
 			if (MinimizeHeight) {
