@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 namespace Forms9Patch
 {
-    internal class TextCellViewContent : Label //, ICellHeight
+    internal class TextCellViewContent : Xamarin.Forms.Label //, ICellHeight
     {
 
         public TextCellViewContent()
@@ -26,10 +26,7 @@ namespace Forms9Patch
             }
 
             base.OnBindingContextChanged();
-            if (BindingContext != null)
-                Text = BindingContext.ToString();
-            else
-                Text = null;
+            Text = BindingContext?.ToString();
         }
     }
 }

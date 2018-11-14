@@ -7,7 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Single picker.
     /// </summary>
-    public class SinglePicker : Frame
+    public class SinglePicker : Grid
     {
         #region Properties
         /// <summary>
@@ -87,9 +87,6 @@ namespace Forms9Patch
         {
             BackgroundColor = Color.Transparent
         };
-        //readonly internal Xamarin.Forms.AbsoluteLayout _absLayout = new Xamarin.Forms.AbsoluteLayout();
-        //readonly internal Xamarin.Forms.RelativeLayout _relLayout = new Xamarin.Forms.RelativeLayout();
-        readonly internal ManualLayout _manLayout = new ManualLayout();
 
         readonly internal Color _overlayColor = Color.FromRgb(0.85, 0.85, 0.85);
 
@@ -105,11 +102,15 @@ namespace Forms9Patch
 
         readonly internal BoxView _upperEdge = new BoxView
         {
-            BackgroundColor = Color.Gray
+            BackgroundColor = Color.Gray,
+            HeightRequest = 1,
+            VerticalOptions = LayoutOptions.End,
         };
         readonly internal BoxView _lowerEdge = new BoxView
         {
-            BackgroundColor = Color.Gray
+            BackgroundColor = Color.Gray,
+            HeightRequest = 1,
+            VerticalOptions = LayoutOptions.Start,
         };
 
         #endregion
@@ -119,6 +120,13 @@ namespace Forms9Patch
         /// </summary>
         public SinglePicker()
         {
+            RowDefinitions = new RowDefinitionCollection
+            {
+                new RowDefinition{ Height = GridLength.Star },
+                new RowDefinition{ Height = RowHeight },
+                new RowDefinition{ Height = GridLength.Star }
+            };
+
             Padding = new Thickness(0, 0, 0, 0);
 
             _basePicker._listView.SelectedCellBackgroundColor = Color.Transparent;
@@ -128,20 +136,18 @@ namespace Forms9Patch
             _lowerGradient.StartColor = _overlayColor.WithAlpha(0.5);
             _lowerGradient.EndColor = _overlayColor;
 
-            _manLayout.Children.Add(_upperEdge);
-            _manLayout.Children.Add(_lowerEdge);
-            _manLayout.Children.Add(_basePicker);
-            _manLayout.Children.Add(_upperGradient);
-            _manLayout.Children.Add(_lowerGradient);
-            _manLayout.LayoutChildrenEvent += OnManualLayoutChildren;
+            Children.Add(_upperEdge);
+            Children.Add(_lowerEdge, 0, 2);
+            Children.Add(_basePicker);
+            Grid.SetRowSpan(_basePicker, 3);
+            Children.Add(_upperGradient);
+            Children.Add(_lowerGradient, 0, 2);
 
             _basePicker.SelectBy = SelectBy.Position;
 
             _basePicker.RowHeight = RowHeight;
 
             VerticalOptions = LayoutOptions.FillAndExpand;
-
-            Content = _manLayout;
 
             _basePicker.PropertyChanged += BasePickerPropertyChanged;
         }
@@ -162,31 +168,16 @@ namespace Forms9Patch
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == RowHeightProperty.PropertyName)
-                OnManualLayoutChildren(this, new ManualLayoutEventArgs(X, Y, Width, Height));
+            {
+                _basePicker.RowHeight = RowHeight;
+                RowDefinitions[1].Height = RowHeight;
+            }
             else if (propertyName == ItemsSourceProperty.PropertyName)
                 _basePicker.ItemsSource = ItemsSource;
-            else if (propertyName == RowHeightProperty.PropertyName)
-                _basePicker.RowHeight = RowHeight;
             else if (propertyName == IndexProperty.PropertyName)
                 _basePicker.Index = Index;
             else if (propertyName == SelectedItemProperty.PropertyName)
                 _basePicker.SelectedItem = SelectedItem;
-        }
-
-        void OnManualLayoutChildren(object sender, ManualLayoutEventArgs e)
-        {
-            if (Height > 0 && Width > 0)
-            {
-                //System.Diagnostics.Debug.WriteLine("SinglePicker.OnManualLayoutChildren");
-                double overlayHeight = (Height - RowHeight) / 2.0;
-                LayoutChildIntoBoundingRegion(_basePicker, new Rectangle(e.X, e.Y, e.Width, e.Height));
-                LayoutChildIntoBoundingRegion(_upperGradient, new Rectangle(e.X, e.Y, e.Width, overlayHeight));
-                LayoutChildIntoBoundingRegion(_lowerGradient, new Rectangle(e.X, e.Height - overlayHeight, e.Width, overlayHeight));
-                if (_manLayout.Children.Contains(_lowerEdge))
-                    LayoutChildIntoBoundingRegion(_lowerEdge, new Rectangle(e.X, overlayHeight, e.Width, 1.0));
-                if (_manLayout.Children.Contains(_upperEdge))
-                    LayoutChildIntoBoundingRegion(_upperEdge, new Rectangle(e.X, e.Height - overlayHeight, e.Width, 1.0));
-            }
         }
         #endregion
 

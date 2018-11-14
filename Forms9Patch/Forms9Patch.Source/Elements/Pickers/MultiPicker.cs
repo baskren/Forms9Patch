@@ -39,8 +39,8 @@ namespace Forms9Patch
             _lowerGradient.StartColor = _overlayColor.WithAlpha(0);
             _upperGradient.EndColor = _overlayColor.WithAlpha(0);
             _basePicker.SelectBy = SelectBy.Default;
-            _manLayout.Children.Remove(_lowerEdge);
-            _manLayout.Children.Remove(_upperEdge);
+            Children.Remove(_lowerEdge);
+            Children.Remove(_upperEdge);
             _basePicker.GroupToggleBehavior = GroupToggleBehavior.Multiselect;
 
             _basePicker.ItemTemplates.RemoveFactoryDefaults();
