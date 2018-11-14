@@ -455,9 +455,7 @@ namespace Forms9Patch.Droid
                 var lineHeightRatio = fontLineHeight / fontPixelSize;
                 var leadingRatio = fontLeading / fontPixelSize;
                 float ans = ((availHeight / (lines + leadingRatio * (lines - 1))) / lineHeightRatio - 0.1f);
-                if (ans > max)
-                    ans = max;
-                return ans;
+                return System.Math.Min(ans, max);
             }
             var result = ZeroLinesFit(text, paint, min, max, availWidth, availHeight);
 
@@ -500,7 +498,8 @@ namespace Forms9Patch.Droid
                 var lineHeightRatio = fontLineHeight / fontPixelSize;
                 //var leadingRatio = fontLeading / fontPixelSize;
 
-                return (availHeight / lineHeightRatio - 0.1f);
+                var result = (availHeight / lineHeightRatio - 0.1f);
+                return System.Math.Min(result, max);
             }
 
             if (max - min < Precision)
