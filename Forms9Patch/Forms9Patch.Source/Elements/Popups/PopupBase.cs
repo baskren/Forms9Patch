@@ -461,7 +461,10 @@ namespace Forms9Patch
             return isClose;
         }
 
-
+        /// <summary>
+        /// Cancel the popup
+        /// </summary>
+        /// <returns></returns>
         public async Task CancelAsync()
         {
             if (P42.Utils.Environment.IsOnMainThread)
@@ -569,10 +572,22 @@ namespace Forms9Patch
                 LayoutChildren(X, Y, Width, Height);
         }
 
-
+        /// <summary>
+        /// Is true when the popup is being pushed
+        /// </summary>
         internal protected bool _isPushing;
+        /// <summary>
+        /// Is true when the popup has been pushed
+        /// </summary>
         internal protected bool _isPushed;
+        /// <summary>
+        /// Is true when the popup is being popped
+        /// </summary>
         internal protected bool _isPopping;
+
+        /// <summary>
+        /// Called when the popup is starting to appear
+        /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
             _isPushing = true;
@@ -580,6 +595,9 @@ namespace Forms9Patch
             base.OnAppearingAnimationBegin();
         }
 
+        /// <summary>
+        /// Called when the popup has appeared
+        /// </summary>
         protected override void OnAppearingAnimationEnd()
         {
             base.OnAppearingAnimationEnd();
@@ -590,6 +608,9 @@ namespace Forms9Patch
                 Pop();
         }
 
+        /// <summary>
+        /// Called when the popup is starting to disappear
+        /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
             _isPopping = true;
@@ -597,6 +618,9 @@ namespace Forms9Patch
             base.OnDisappearingAnimationBegin();
         }
 
+        /// <summary>
+        /// Called when the popup has disappeared
+        /// </summary>
         protected override void OnDisappearingAnimationEnd()
         {
 

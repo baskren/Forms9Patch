@@ -333,7 +333,7 @@ namespace Forms9Patch
                     {
                         //System.Diagnostics.Debug.WriteLine("Available=[" + x + ", " + y + "," + width + "," + height + "]");
                         //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
-                        /// System.Diagnostics.Debug.WriteLine("targetPage.Bounds=[" + targetPage.Bounds + "]");
+                        // System.Diagnostics.Debug.WriteLine("targetPage.Bounds=[" + targetPage.Bounds + "]");
                         //if (Math.Abs(targetBounds.X - 468) < 0.001 && Math.Abs(targetBounds.Y - 675.5) < 0.001)
                         //    System.Diagnostics.Debug.WriteLine("");
 
