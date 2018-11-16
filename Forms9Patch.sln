@@ -21,6 +21,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch", "Forms9Patch", "{6CE42746-AF2D-4B4D-B294-B88867A60D9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{194A67C8-8923-492D-98FE-3EC10FC435BB}"
+	ProjectSection(SolutionItems) = preProject
+		Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{44CB54AE-3453-42F1-B927-4B6F24BC4994}"
 EndProject

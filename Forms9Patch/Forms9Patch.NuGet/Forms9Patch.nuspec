@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.2</version>
+        <version>1.6.2.1</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -24,6 +24,7 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.6.2.1: Fixed: UWP throws "System.IO.FileLoadException: ... SharpDX.Direct2D1, Version=4.2.0" because SharpDX.Direct2D1 NuGet upgraded in Forms9Patch.UWP build but not in the Forms9Patch.nuspec.
     1.6.2: Enhanced: Make P42.Utils.Environment.MainThreadId settable; Fixed: UWP: P42.Utils.DownloadCache not working;  Android: Pickers are blank; Forms9Patch.ListView not responding to ScrollTo in some edge cases; Forms9Patch.Label not rendering correctly when Lines=0;
     1.6.1.1: Fixed: Label.AutoFit=Lines not sizing correctly when unconstrained; 
     1.6.1: Fixed: Android: Nulled out item in MimeItemCollection causes crash when accessed; Android: HtmlToPng causes crash; Removing multiple popups in series causes removal animation to fail; 3 digit hex colors are not interpreted correctly in HtmlLabel; Android: crash from NativeGestureListener failure; Magnifying glass (iOS) not showing contents of popups; BubblePopup not rendering full size in some orientations.
@@ -136,7 +137,7 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Rg.Plugins.Popup" version="1.1.4.168" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.59.3" />
                 <dependency id="SkiaSharp.Svg" version="1.59.1" />
-                <dependency id="SharpDX.Direct2D1" version="4.0.1" />
+                <dependency id="SharpDX.Direct2D1" version="4.2.0" />
                 <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.0.1" />
             </group>
         </dependencies>
