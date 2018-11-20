@@ -20,8 +20,8 @@
   <Import Project="..\Forms9Patch.Source\Forms9Patch.targets" />
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.0" />
-    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.3" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.59.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
   </ItemGroup>
 

@@ -31,6 +31,6 @@
 	</ItemGroup>
 	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
 	<ItemGroup>
-	  <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.0" />
+	  <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.3" />
 	</ItemGroup>
 </Project>

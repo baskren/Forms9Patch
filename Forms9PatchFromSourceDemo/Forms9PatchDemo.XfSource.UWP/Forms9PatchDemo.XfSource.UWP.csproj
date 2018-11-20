@@ -193,13 +193,13 @@
       <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.60.0</Version>
+      <Version>1.59.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Svg">
-      <Version>1.60.0</Version>
+      <Version>1.59.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.60.0</Version>
+      <Version>1.59.3</Version>
     </PackageReference>
   </ItemGroup>
 
