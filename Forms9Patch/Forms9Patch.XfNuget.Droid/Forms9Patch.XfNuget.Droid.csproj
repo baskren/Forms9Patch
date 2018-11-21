@@ -143,6 +143,21 @@
   <Import Project="..\Forms9Patch.Source.Droid\Forms9Patch.Droid.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\Forms9Patch.Source.Droid\Renderers\ColorGradientBoxRenderer.cs">
+      <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Renderers\EnhancedListViewRenderer.cs">
+      <Link>Renderers\EnhancedListViewRenderer.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Renderers\HardwareKeyPageRenderer.cs">
+      <Link>Renderers\HardwareKeyPageRenderer.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Renderers\LabelRenderer.cs">
+      <Link>Renderers\LabelRenderer.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Renderers\PageRenderer.cs">
+      <Link>Renderers\PageRenderer.cs</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
@@ -173,6 +188,9 @@
       <Project>{0B3A6A8C-AE14-4663-9A86-7D66375F0267}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
