@@ -21,38 +21,41 @@ namespace Forms9Patch.UWP
             //var type = Control?.GetType(); 
 
             bool success = false;
-            //if (Control?.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
-            try
+            if (Control != null)
             {
-                Control.PreviewKeyDown += OnKeyDown;
-                Control.CharacterReceived += OnCharacterReceived;
-                success = true;
-            }
-            catch (Exception) { }
-            //else if (Control?.GetType().GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
-            if (!success) try
+                try
                 {
-
-                    Control.KeyDown += OnKeyDown;
+                    Control.PreviewKeyDown += OnKeyDown;
                     Control.CharacterReceived += OnCharacterReceived;
                     success = true;
                 }
                 catch (Exception) { }
-            //else if (Container?.GetType().GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
-            if (!success) try
-            {
-                Container.PreviewKeyDown += OnKeyDown;
-                Container.CharacterReceived += OnCharacterReceived;
-                    success = true;
+                if (!success) try
+                    {
+
+                        Control.KeyDown += OnKeyDown;
+                        Control.CharacterReceived += OnCharacterReceived;
+                        success = true;
+                    }
+                    catch (Exception) { }
             }
-                catch (Exception) { }
-            //else if (Container?.GetType().GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
-            if (!success) try
+            if (!success && Container!=null)
+            {
+                try
                 {
-                    Container.KeyDown += OnKeyDown;
+                    Container.PreviewKeyDown += OnKeyDown;
                     Container.CharacterReceived += OnCharacterReceived;
+                    success = true;
                 }
                 catch (Exception) { }
+                //else if (Container?.GetType().GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+                if (!success) try
+                    {
+                        Container.KeyDown += OnKeyDown;
+                        Container.CharacterReceived += OnCharacterReceived;
+                    }
+                    catch (Exception) { }
+            }
         }
 
         protected override void OnDetached()
