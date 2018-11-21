@@ -2,6 +2,7 @@
 using System;
 using P42.Utils;
 using Xamarin.Forms.Internals;
+using FormsGestures;
 
 namespace Forms9Patch
 {
@@ -165,13 +166,17 @@ namespace Forms9Patch
             get => (double)GetValue(FittedFontSizeProperty);
             internal set
             {
-                if (Math.Abs(value - FittedFontSize) > 0.0001)
+                if (Math.Abs(value - FittedFontSize) > 0.01)
                 {
-                    if (value < 0 && DateTime.Now - _lastTimeFittedFontSizeSet < TimeSpan.FromMilliseconds(250))
-                        return;
                     SetValue(FittedFontSizePropertyKey, value);
                     _lastTimeFittedFontSizeSet = DateTime.Now;
-                    FittedFontSizeChanged?.Invoke(this, value);
+                    Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
+                    {
+                        if (DateTime.Now - _lastTimeFittedFontSizeSet < TimeSpan.FromMilliseconds(50))
+                            return true;
+                        FittedFontSizeChanged?.Invoke(this, value);
+                        return false;
+                    });
                 }
             }
         }
@@ -279,11 +284,13 @@ namespace Forms9Patch
                     {
                         _listener = FormsGestures.Listener.For(this);
                         _listener.Tapped += OnTapped;
+                        _listener.Down += OnDown;
                     }
                 }
                 else if (_listener != null)
                 {
                     _listener.Tapped -= OnTapped;
+                    _listener.Down -= OnDown;
                     _listener.Dispose();
                     _listener = null;
                 }
@@ -297,6 +304,7 @@ namespace Forms9Patch
                 if (_listener != null)
                 {
                     _listener.Tapped -= OnTapped;
+                    _listener.Down -= OnDown;
                     _listener.Dispose();
                     _listener = null;
                 }
@@ -324,11 +332,8 @@ namespace Forms9Patch
             {
                 //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]>>InvalidateMeasure");
                 IsDynamicallySized = false;
-                //Sized = false;
                 base.InvalidateMeasure();
-
-
-                if (!IsDynamicallySized && Width > 0 && Height > 0)// || !Sized )
+                if (!IsDynamicallySized && Width > 0 && Height > 0)
                 {
                     if (HtmlText != null || Text != null)
                     {
@@ -378,21 +383,6 @@ namespace Forms9Patch
             return RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
         }
 
-        /// <summary>
-        /// Ons the size allocated.
-        /// </summary>
-        /// <returns>The size allocated.</returns>
-        /// <param name="width">Width.</param>
-        /// <param name="height">Height.</param>
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //	System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.OnSizeAllocated("+width+","+height+") enter");
-            base.OnSizeAllocated(width, height);
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeAllocated(" + width + "," + height + ") exit");
-        }
-
 
         /// <param name="widthConstraint">The available width that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <param name="heightConstraint">The available height that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
@@ -403,58 +393,8 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"] Label.GetSizeRequest("+widthConstraint+","+heightConstraint+") enter");
             IsDynamicallySized = true;
-            // this is not called if the parent sets this element's size (ex: putting it into a frame)
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            //IsDynamicallySized = double.IsPositiveInfinity(widthConstraint) || heightConstraint > result.Request.Height;
-            //_widthImposedByParent = !double.IsPositiveInfinity(widthConstraint);
-            //_heightImposedByParent = !double.IsPositiveInfinity(heightConstraint);
-            //_widthImposedByParent = widthConstraint <= result.Request.Width;
-            //var _heightImposedByParent = heightConstraint <= result.Request.Height;
-            //HasImposedSize = HasImposedWidth && HasImposedHeight;
-            //System.Diagnostics.Debug.WriteLine("\tText=["+Text+"]");
-            //System.Diagnostics.Debug.WriteLine("\timposedWidth=["+_widthImposedByParent+"] imposedHeight=["+_heightImposedByParent+"]");
-            //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]GetSizeRequest req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
-            ////System.Diagnostics.Debug.WriteLine("["+_id+"]HasImposedSize["+HasImposedSize+"]");
-#if __IOS__
-			if (MinimizeHeight) {
-			var size = new Size (result.Request.Width, Math.Min(result.Minimum.Height, FontSize));
-			result = new SizeRequest (size, size);
-			}
-#endif
-            ////System.Diagnostics.Debug.WriteLine("\t\tVtC=["+VerticallyConstrained+"] HzC=["+HorizontallyConstrained+"]");
-            //System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.GetSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
-            return result;
-        }
-
-        /// <param name="widthConstraint">The available width for the element to use.</param>
-        /// <param name="heightConstraint">The available height for the element to use.</param>
-        /// <summary>
-        /// This method is called during the measure pass of a layout cycle to get the desired size of an element.
-        /// </summary>
-        [Obsolete("Use OnMeasure")]
-        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-        {
-            /* The following will disable Renderer logic for setting font size when AutoFit=Lines || Lines=0
-            if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
-                heightConstraint = Forms9Patch.Display.Height;
-            if (double.IsInfinity(widthConstraint) || double.IsNaN(widthConstraint))
-                widthConstraint = Forms9Patch.Display.Width;
-                */
-            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-#if __IOS__
-			if (MinimizeHeight) {
-			var size = new Size (result.Request.Width, Math.Min(result.Minimum.Height, FontSize));
-			result = new SizeRequest (size, size);
-			}
-#endif
-            //System.Diagnostics.Debug.WriteLine("[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint + ") exit");
-            //if (Text == "HEIGHTS AND AREAS CALCULATOR")
-            //System.Diagnostics.Debug.WriteLine("\t[" + (HtmlText ?? Text) + "] Label.OnSizeRequest(" + widthConstraint + "," + heightConstraint +") exit req=[" + result.Request.Width + "," + result.Request.Height + "] min=[" + result.Minimum.Width + "," + result.Minimum.Height + "]");
             return result;
         }
 
@@ -472,6 +412,32 @@ namespace Forms9Patch
         {
             return RendererIndexAtPoint != null ? RendererIndexAtPoint(point) : -1;
         }
+
+        private void OnDown(object sender, DownUpEventArgs e)
+        {
+            if (Device.RuntimePlatform == Device.Android && e.NumberOfTouches == 1)
+            {
+                var index = IndexAtPoint(e.Touches[0]);
+                //System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
+                foreach (var span in F9PFormattedString._spans)
+                {
+                    var actionSpan = span as ActionSpan;
+                    if (actionSpan != null)
+                    {
+                        //System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", P42.Utils.ReflectionExtensions.CallerString(), GetType());
+                        if (index >= actionSpan.Start && index <= actionSpan.End)
+                        {
+                            //System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
+                            //Tap(actionSpan);
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+                }
+                e.Handled = false;
+            }
+        }
+
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
@@ -499,7 +465,7 @@ namespace Forms9Patch
                     }
                 }
             }
-            e.Handled = false;
+            //e.Handled = false;
         }
 
         internal void Tap(string id, string href)
@@ -514,6 +480,8 @@ namespace Forms9Patch
             Tap(actionSpan?.Id, actionSpan?.Href);
         }
         #endregion
+
+
 
     }
 

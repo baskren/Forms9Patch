@@ -59,6 +59,8 @@
   <!-- Folders -->
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="EventArgs\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <!-- Assembly Info -->
   <ItemGroup>
@@ -69,11 +71,11 @@
   <!-- XF Nuget Project References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{4A0213D7-4CF4-43A9-B506-50208AA996F8}</Project>
+      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{758D988F-25C1-46E8-9726-17A794EE460E}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
@@ -83,6 +85,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSDownUpEventArgs.cs">
+      <Link>EventArgs\iOSDownUpEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSEventArgsHelper.cs">
+      <Link>EventArgs\iOSEventArgsHelper.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSLongPressEventArgs.cs">
+      <Link>EventArgs\iOSLongPressEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSPanEventArgs.cs">
+      <Link>EventArgs\iOSPanEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSPinchEventArgs.cs">
+      <Link>EventArgs\iOSPinchEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSRotateEventArgs.cs">
+      <Link>EventArgs\iOSRotateEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSSwipeEventArgs.cs">
+      <Link>EventArgs\iOSSwipeEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\EventArgs\iOSTapEventArgs.cs">
+      <Link>EventArgs\iOSTapEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\Services\DisplayService.cs">
+      <Link>Services\DisplayService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\Services\GestureService.cs">
+      <Link>Services\GestureService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\Services\LocationService.cs">
+      <Link>Services\LocationService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\FormsGestures.iOS.targets">
+      <Link>FormsGestures.iOS.targets</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\DownUpGestureRecognizer.cs">
+      <Link>DownUpGestureRecognizer.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\NativeGestureHandler.cs">
+      <Link>NativeGestureHandler.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\Settings.cs">
+      <Link>Settings.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.iOS\UIInterfaceOrientaitonExtensions.cs">
+      <Link>UIInterfaceOrientaitonExtensions.cs</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

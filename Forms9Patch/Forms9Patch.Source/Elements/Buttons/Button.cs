@@ -263,6 +263,22 @@ namespace Forms9Patch
             set { throw new NotSupportedException("[Forms9Patch.Button] Content property is not supported"); }
         }
 
+        #region IsClipped property
+        internal static readonly BindablePropertyKey IsClippedPropertyKey = BindableProperty.CreateReadOnly("Forms9Patch.Button.IsClipped", typeof(bool), typeof(Button), default(bool));
+        /// <summary>
+        /// Backing store for the IsClipped property.
+        /// </summary>
+        public static readonly BindableProperty IsClippedProperty = IsClippedPropertyKey.BindableProperty;
+        /// <summary>
+        /// Gets or sets a value indicating whether the contents of this <see cref="T:Forms9Patch.Button"/> is clipped.
+        /// </summary>
+        /// <value><c>true</c> if is clipped; otherwise, <c>false</c>.</value>
+        public bool IsClipped
+        {
+            get => (bool)GetValue(IsClippedProperty);
+            internal set => SetValue(IsClippedPropertyKey, value);
+        }
+        #endregion IsClipped property
 
         #region IButton
 
@@ -892,33 +908,6 @@ namespace Forms9Patch
 
 
         #region Internal, SegmentedButton Properties
-        /*
-        /// <summary>
-        /// 
-        /// </summary>
-        internal static BindableProperty SegmentTypeProperty = BindableProperty.Create("SegmentType", typeof(ExtendedElementShape), typeof(Button), ExtendedElementShape.Rectangle);
-        internal ExtendedElementShape SegmentType
-        {
-            get { return (ExtendedElementShape)GetValue(SegmentTypeProperty); }
-            set { SetValue(SegmentTypeProperty, value); }
-        }
-        */
-        /*
-        internal static BindableProperty ParentSegmentsOrientationProperty = BindableProperty.Create("ParentSegmentsOrientation", typeof(StackOrientation), typeof(Button), StackOrientation.Horizontal);
-        internal StackOrientation ParentSegmentsOrientation
-        {
-            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
-            set => SetValue(ParentSegmentsOrientationProperty, value);
-        }
-
-        internal static BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(float), typeof(Button), -1f);
-        internal float SeparatorWidth
-        {
-            get => (float)GetValue(SeparatorWidthProperty);
-            set => SetValue(SeparatorWidthProperty, value);
-        }
-                */
-
         internal static BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(Button), GroupToggleBehavior.None);
         internal GroupToggleBehavior GroupToggleBehavior
         {
@@ -966,6 +955,7 @@ namespace Forms9Patch
         /// The gesture listener.
         /// </summary>
         internal protected FormsGestures.Listener _gestureListener;
+
         #endregion
 
 
@@ -1024,6 +1014,7 @@ namespace Forms9Patch
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
 
+            _label.SizeChanged += OnLabelSizeChanged;
 
             UpdateElements();
 
@@ -1327,6 +1318,10 @@ namespace Forms9Patch
 
 
         #region Events
+        /// <summary>
+        /// Occurs when LayoutChildren is completed.
+        /// </summary>
+        public event EventHandler<bool> LayoutComplete;
 
         bool IsEnabledCore
         {
@@ -1365,9 +1360,6 @@ namespace Forms9Patch
             add { _released += value; }
             remove { _released -= value; }
         }
-
-
-
 
         event EventHandler _tapped;
         /// <summary>
@@ -1450,6 +1442,71 @@ namespace Forms9Patch
 
 
         #region Change Handlers
+        private void OnIconLabelSizeChanged(object sender, EventArgs e)
+        {
+            CheckFit();
+        }
+
+        private void OnIconImageSizeChanged(object sender, EventArgs e)
+        {
+            CheckFit();
+        }
+
+        private void OnLabelSizeChanged(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            CheckFit();
+        }
+
+        void CheckFit()
+        {
+            if (Width < 1 || Height < 1)
+                return;
+
+            var elementWidths = Padding.HorizontalThickness;
+            var elementHeights = Padding.VerticalThickness;
+            bool notFirst = false;
+            foreach (var child in _stackLayout.Children)
+            {
+                if (child.IsVisible)
+                {
+                    //if (child == _label && _label.Text == "BACKGROUND" && FittedFontSize < 7)
+                    //    System.Diagnostics.Debug.WriteLine("");
+
+                    if (child is Forms9Patch.Label label)
+                    {
+                        var fontSize = label.FittedFontSize < 0 ? label.FontSize : label.FittedFontSize;
+                        var size = label.SizeForWidthAndFontSize(Width, fontSize);
+                        //if (child == _label && _label.Text == "BACKGROUND")
+                        //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] fontSize=" + fontSize + " size=" + size);
+                        elementWidths += size.Width;
+                        elementHeights += size.Height;
+                    }
+                    else
+                    {
+                        elementWidths += child.Width;
+                        elementHeights += child.Height;
+                    }
+                    if (notFirst)
+                    {
+                        if (Orientation == StackOrientation.Horizontal)
+                            elementWidths += Spacing;
+                        else
+                            elementHeights += Spacing;
+                    }
+                    notFirst = true;
+                }
+                IsClipped = elementWidths - Width > 0.01 || elementHeights - Height > 0.01;
+                if (IsClipped)
+                {
+                    //if (child == _label && _label.Text == "BACKGROUND")
+                    //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] IsClipped by child: " + child.GetType());
+                    break;
+                }
+            }
+
+        }
+
 
         void OnLabelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -1560,11 +1617,6 @@ namespace Forms9Patch
                     }
                     if (_iconLabel != null)
                     {
-                        /*
-                        _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
-                        _iconLabel.HorizontalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
-                        _iconLabel.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;*/
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
@@ -1572,14 +1624,6 @@ namespace Forms9Patch
                     }
                     if (_label != null)
                     {
-                        /*
-                        _label.HorizontalTextAlignment = HorizontalTextAlignment;
-                        _label.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        _label.VerticalTextAlignment = VerticalTextAlignment;
-                        _label.VerticalOptions = vertOption; // LayoutOptions.FillAndExpand;
-                        _label.MinimizeHeight = false;
-                        //_label.BackgroundColor = Color.Green;
-                        */
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -1589,8 +1633,6 @@ namespace Forms9Patch
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 _stackLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-                //_label.BackgroundColor = Color.Orange.WithAlpha(0.5);
-                //_stackLayout.BackgroundColor = Color.Green;
             }
             else
             {
@@ -1617,7 +1659,6 @@ namespace Forms9Patch
                         _label.VerticalOptions = LayoutOptions.Center;
                         _label.MinimizeHeight = true;
                     }
-                    //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
                     _stackLayout.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                 }
@@ -1706,7 +1747,10 @@ namespace Forms9Patch
                     return;
                 _changingIconImage = true;
                 if (_iconImage != null)
+                {
+                    _iconImage.SizeChanged -= OnIconImageSizeChanged;
                     _stackLayout.Children.Remove(_iconImage);
+                }
                 if (IconImage != null)
                 {
                     if (!IconImage.FillOrLayoutSet)
@@ -1717,6 +1761,7 @@ namespace Forms9Patch
                     }
                     if (_iconLabel != null)
                     {
+                        _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
                         _stackLayout.Children.Remove(_iconLabel);
                         _iconLabel.HtmlText = null;
                         _iconLabel.Text = null;
@@ -1728,6 +1773,7 @@ namespace Forms9Patch
                     UpdateIconTint();
                     if (_iconImage != null)
                     {
+                        _iconImage.SizeChanged += OnIconImageSizeChanged;
                         if (TrailingIcon)
                             _stackLayout.Children.Add(_iconImage);
                         else
@@ -1743,11 +1789,17 @@ namespace Forms9Patch
                     return;
                 _changingIconText = true;
                 if (_iconLabel != null)
+                {
+                    _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
                     _stackLayout.Children.Remove(_iconLabel);
+                }
                 if (IconText != null)
                 {
                     if (_iconImage != null)
+                    {
+                        _iconImage.SizeChanged -= OnIconImageSizeChanged;
                         _stackLayout.Children.Remove(_iconImage);
+                    }
                     _iconLabel = new Label
                     {
                         HtmlText = IconText,
@@ -1760,6 +1812,7 @@ namespace Forms9Patch
                     };
                     if (_iconLabel != null)
                     {
+                        _iconLabel.SizeChanged += OnIconLabelSizeChanged;
                         if (TrailingIcon)
                             _stackLayout.Children.Add(_iconLabel);
                         else
@@ -1913,6 +1966,18 @@ namespace Forms9Patch
         }
 
 
+        #endregion
+
+
+        #region Sizing and Layout
+        protected override void LayoutChildren(double x, double y, double width, double height)
+        {
+            base.LayoutChildren(x, y, width, height);
+
+
+
+            LayoutComplete?.Invoke(this, IsClipped);
+        }
         #endregion
     }
 

@@ -269,7 +269,8 @@ namespace FormsGestures.Droid
             var handled = HandleMotionEvent(e.Event);
             if (e.Event.Action == MotionEventActions.Down)
             {
-                e.Handled = true;
+                //e.Handled = true;
+                e.Handled = handled;
                 XamarinForms_2_4_WorkAround();
             }
         }
@@ -339,7 +340,8 @@ namespace FormsGestures.Droid
                 }
             }
             //}
-            return true;  // we want to be sure we get the updates to this element's events
+            // return true;
+            return lastEventHandled;  // we want to be sure we get the updates to this element's events
         }
 
 

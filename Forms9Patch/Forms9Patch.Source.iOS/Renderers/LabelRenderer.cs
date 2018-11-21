@@ -37,7 +37,7 @@ namespace Forms9Patch.iOS
         void Debug(string message, [CallerMemberName] string method = null, [CallerLineNumber] int lineNumber = 0)
         {
             //var text = Element.Text ?? Element.HtmlText;
-            //if (text == "Segment C")
+            //if (text == "BACKGROUND")
             //    System.Diagnostics.Debug.WriteLine(GetType() + "." + method + "[" + lineNumber + "]: " + message);
         }
 
@@ -146,17 +146,17 @@ namespace Forms9Patch.iOS
 
                 if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.05)
                 {
-                    Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                    //Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                    //{
+                    if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
                     {
-                        if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                        {
 #pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
-                            Element.FittedFontSize = tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize) ? -1 : (double)tmpFontSize;
+                        Element.FittedFontSize = tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize) ? -1 : (double)tmpFontSize;
 #pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
-                            Debug("SETTING FITTED FONT SIZE: " + Element?.FittedFontSize);
-                        }
-                        return false;
-                    });
+                        Debug("SETTING FITTED FONT SIZE: " + Element?.FittedFontSize);
+                    }
+                    //return false;
+                    //});
                 }
 
 
