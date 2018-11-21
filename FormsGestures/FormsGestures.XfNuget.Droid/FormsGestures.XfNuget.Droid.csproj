@@ -147,53 +147,8 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="..\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs">
-      <Link>NativeGestureListener.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs">
-      <Link>OnTouchListener.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Listeners\DownUpGestureListener.cs">
-      <Link>DownUpGestureListener.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Listeners\IMultiTouchGestureListener.cs">
-      <Link>IMultiTouchGestureListener.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Services\GestureService.cs">
-      <Link>GestureService.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Services\DisplayService.cs">
-      <Link>DisplayService.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\Services\CoordTransformService.cs">
-      <Link>CoordTransformService.cs</Link>
-    </None>
     <None Include="..\FormsGestures.Source.Droid\NativeGestureHandler.cs">
       <Link>NativeGestureHandler.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidDownUpEventArgs.cs">
-      <Link>AndroidDownUpEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidEventArgsHelper.cs">
-      <Link>AndroidEventArgsHelper.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidLongPressEventArgs.cs">
-      <Link>AndroidLongPressEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidPanEventArgs.cs">
-      <Link>AndroidPanEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidPinchEventArgs.cs">
-      <Link>AndroidPinchEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidRotateEventArgs.cs">
-      <Link>AndroidRotateEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidSwipeEventArgs.cs">
-      <Link>AndroidSwipeEventArgs.cs</Link>
-    </None>
-    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidTapEventArgs.cs">
-      <Link>AndroidTapEventArgs.cs</Link>
     </None>
     <None Include="..\FormsGestures.Source.Droid\Settings.cs">
       <Link>Settings.cs</Link>
@@ -201,21 +156,73 @@
     <None Include="..\FormsGestures.Source.Droid\DIP.cs">
       <Link>DIP.cs</Link>
     </None>
-    <None Include="..\FormsGestures.Source.Droid\Detectors\NativeGestureDetector.cs">
-      <Link>NativeGestureDetector.cs</Link>
-    </None>
     <None Include="..\FormsGestures.Source.Droid\Detectors\DownUpGestureDetector.cs">
-      <Link>DownUpGestureDetector.cs</Link>
+      <Link>Detectors\DownUpGestureDetector.cs</Link>
     </None>
     <None Include="..\FormsGestures.Source.Droid\Detectors\MultiTouchGestureDetector.cs">
-      <Link>MultiTouchGestureDetector.cs</Link>
+      <Link>Detectors\MultiTouchGestureDetector.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Detectors\NativeGestureDetector.cs">
+      <Link>Detectors\NativeGestureDetector.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidDownUpEventArgs.cs">
+      <Link>EventArgs\AndroidDownUpEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidLongPressEventArgs.cs">
+      <Link>EventArgs\AndroidLongPressEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidPanEventArgs.cs">
+      <Link>EventArgs\AndroidPanEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidPinchEventArgs.cs">
+      <Link>EventArgs\AndroidPinchEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidRotateEventArgs.cs">
+      <Link>EventArgs\AndroidRotateEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidSwipeEventArgs.cs">
+      <Link>EventArgs\AndroidSwipeEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidTapEventArgs.cs">
+      <Link>EventArgs\AndroidTapEventArgs.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\EventArgs\AndroidEventArgsHelper.cs">
+      <Link>EventArgs\AndroidEventArgsHelper.cs</Link>
     </None>
     <None Include="..\FormsGestures.Source.Droid\Exensions\AndroidViewExtensions.cs">
-      <Link>AndroidViewExtensions.cs</Link>
+      <Link>Extensions\AndroidViewExtensions.cs</Link>
     </None>
     <None Include="..\FormsGestures.Source.Droid\Exensions\PointExtensions.cs">
-      <Link>PointExtensions.cs</Link>
+      <Link>Extensions\PointExtensions.cs</Link>
     </None>
+    <None Include="..\FormsGestures.Source.Droid\Listeners\DownUpGestureListener.cs">
+      <Link>Listeners\DownUpGestureListener.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Listeners\IMultiTouchGestureListener.cs">
+      <Link>Listeners\IMultiTouchGestureListener.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Listeners\NativeGestureListener.cs">
+      <Link>Listeners\NativeGestureListener.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Listeners\OnTouchListener.cs">
+      <Link>Listeners\OnTouchListener.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Services\CoordTransformService.cs">
+      <Link>Services\CoordTransformService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Services\DisplayService.cs">
+      <Link>Services\DisplayService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.Droid\Services\GestureService.cs">
+      <Link>Services\GestureService.cs</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Detectors\" />
+    <Folder Include="EventArgs\" />
+    <Folder Include="Services\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Listeners\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
