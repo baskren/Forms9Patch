@@ -29,11 +29,9 @@
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
       <Link>Effects\CustomFontEffect.cs</Link>
     </Compile>
-    <!--
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\PopupLayerEffect.cs">
       <Link>Effects\PopupLayerEffect.cs</Link>
     </Compile>
-  -->
     <Compile Include="..\Forms9Patch.Source.iOS\Effects\SliderStepSizeEffect.cs">
       <Link>Effects\SliderStepSizeEffect.cs</Link>
     </Compile>

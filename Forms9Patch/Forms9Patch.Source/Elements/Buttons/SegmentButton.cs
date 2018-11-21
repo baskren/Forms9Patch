@@ -45,18 +45,6 @@ namespace Forms9Patch
         }
         #endregion ExtendedElementSeparatorWidth
 
-        /*
-        #region ParentSegmentsOrientation
-        public static readonly BindableProperty ParentSegmentsOrientationProperty = ShapeBase.ParentSegmentsOrientationProperty;
-        public StackOrientation ParentSegmentsOrientation
-        {
-            get => (StackOrientation)GetValue(ParentSegmentsOrientationProperty);
-            set => SetValue(ParentSegmentsOrientationProperty, value);
-        }
-        #endregion ParentSegmentsOrientation
-*/
-
-
 
         /// <summary>
         /// Ons the property changed.

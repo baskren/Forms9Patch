@@ -121,19 +121,37 @@ namespace Forms9Patch
 
         #region Properties
 
+
+        #region IsClipped property
+        internal static readonly BindablePropertyKey IsClippedPropertyKey = BindableProperty.CreateReadOnly("Forms9Patch.SegmentedControl.IsClipped", typeof(bool), typeof(SegmentedControl), default(bool));
+        /// <summary>
+        /// Backing store for the IsClipped property
+        /// </summary>
+        public static readonly BindableProperty IsClippedProperty = IsClippedPropertyKey.BindableProperty;
+        /// <summary>
+        /// Gets or sets a value indicating whether any of the contents of this <see cref="T:Forms9Patch.SegmentedControl"/> is clipped.
+        /// </summary>
+        /// <value><c>true</c> if is clipped; otherwise, <c>false</c>.</value>
+        public bool IsClipped
+        {
+            get => (bool)GetValue(IsClippedProperty);
+            internal set => SetValue(IsClippedPropertyKey, value);
+        }
+        #endregion IsClipped property
+
         #region FontScaling property
         /// <summary>
         /// The size segment fonts equally property.
         /// </summary>
-        public static readonly BindableProperty SizeSegmentFontsEquallyProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SizeSegmentFontsEqually", typeof(bool), typeof(SegmentedControl), default(bool));
+        public static readonly BindableProperty SyncSegmentFontSizesProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.SyncSegmentFontSizes", typeof(bool), typeof(SegmentedControl), true);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SegmentedControl"/> size segment fonts equally.
         /// </summary>
         /// <value><c>true</c> if size segment fonts equally; otherwise, <c>false</c>.</value>
-        public bool SizeSegmentFontsEqually
+        public bool SyncSegmentFontSizes
         {
-            get => (bool)GetValue(SizeSegmentFontsEquallyProperty);
-            set => SetValue(SizeSegmentFontsEquallyProperty, value);
+            get => (bool)GetValue(SyncSegmentFontSizesProperty);
+            set => SetValue(SyncSegmentFontSizesProperty, value);
         }
         #endregion FontScaling property
 
@@ -771,7 +789,7 @@ namespace Forms9Patch
             button.Selected += OnSegmentSelected;
             button.LongPressing += OnSegmentLongPressing;
             button.LongPressed += OnSegmentLongPressed;
-            button.FittedFontSizeChanged += Button_FittedFontSizeChanged;
+            button.FittedFontSizeChanged += OnButtonFittedFontSizeChanged;
             Children.Insert(index, button);
             if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
             {
@@ -797,7 +815,7 @@ namespace Forms9Patch
             button.Selected -= OnSegmentSelected;
             button.LongPressing -= OnSegmentLongPressing;
             button.LongPressed -= OnSegmentLongPressed;
-            button.FittedFontSizeChanged -= Button_FittedFontSizeChanged;
+            button.FittedFontSizeChanged -= OnButtonFittedFontSizeChanged;
         }
 
 
@@ -1062,6 +1080,21 @@ namespace Forms9Patch
 				}
 				*/
             }
+            else if (e.PropertyName == Forms9Patch.Button.IsClippedProperty.PropertyName)
+            {
+                foreach (var segment in Segments)
+                {
+                    if (segment._button.IsClipped)
+                    {
+                        IsClipped = true;
+                        //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=true");
+                        return;
+                    }
+                }
+                IsClipped = false;
+                //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=false");
+                return;
+            }
         }
         #endregion
 
@@ -1070,9 +1103,9 @@ namespace Forms9Patch
         DateTime _lastFontSizeResetTime = DateTime.MinValue;
         static int _iterations;
         bool _waitingForThingsToCalmDown;
-        private void Button_FittedFontSizeChanged(object sender, double e)
+        private void OnButtonFittedFontSizeChanged(object sender, double e)
         {
-            if (!SizeSegmentFontsEqually)
+            if (!SyncSegmentFontSizes)
                 return;
             _lastFontSizeResetTime = DateTime.Now;
             if (!_waitingForThingsToCalmDown)
@@ -1080,7 +1113,7 @@ namespace Forms9Patch
                 _waitingForThingsToCalmDown = true;
                 Device.StartTimer(TimeSpan.FromMilliseconds(30), () =>
                  {
-                     if (DateTime.Now - _lastFontSizeResetTime > TimeSpan.FromMilliseconds(350))
+                     if (DateTime.Now - _lastFontSizeResetTime > TimeSpan.FromMilliseconds(100))
                      {
                          int iteration = _iterations++;
                          var maxFittedFontSize = -1.0;
@@ -1193,9 +1226,6 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            //System.Diagnostics.Debug.WriteLine("SegmentedControl.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
-            //if ((bool)GetValue(ShapeBase.IgnoreShapePropertiesChangesProperty))
-            //    return;
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => LayoutChildren(x, y, width, height));
@@ -1211,20 +1241,8 @@ namespace Forms9Patch
             var newWidth = width - shadowPadding.HorizontalThickness;
             var newHeight = height - shadowPadding.VerticalThickness;
 
-            /*
-            if (vt)
-            {
-                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + "] width[" + width + "] height[" + height + "]");
-                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + "] shadowPadding=" + shadowPadding.Description());
-                System.Diagnostics.Debug.WriteLine("[" + GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + "] newWidth[" + newWidth + "] newHeight[" + newHeight + "]");
-            }
-            */
-
-            //var topPage = this.TopPage();
-
 
             int count = Children.Count;
-            //System.Diagnostics.Debug.WriteLine("count=[" + count + "]");
 
             if (count > 0)
             {
@@ -1237,8 +1255,6 @@ namespace Forms9Patch
                 double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
                 double segmentWidth = hz ? xOffset : width;
                 double segmentHeight = vt ? yOffset : height;
-
-                //System.Diagnostics.Debug.WriteLine("sWidth=[" + sWidth + "] sHeight=[" + sHeight + "]");
 
                 for (int i = 0; i < count; i++)
                 {
@@ -1262,42 +1278,20 @@ namespace Forms9Patch
                             thisH = segmentHeight;
                         }
 
-
-                        // Math.Round with Display.Scale fixes UWP layout gaps but not UWP SkiaRoundedBoxView gaps
-
-                        //thisW = Math.Round(thisW);
-                        //thisH = Math.Round(thisH);
-                        //thisW = Math.Round(thisW * Display.Scale) / Display.Scale;
-                        //thisH = Math.Round(thisH * Display.Scale) / Display.Scale;
                         if (x + thisW > width)
                             thisW = width - x;
-                        //thisW = Math.Floor(width - x);
-                        //thisW = Math.Floor((width - x) * Display.Scale) / Display.Scale;
                         if (y + thisH > height)
                             thisH = height - y;
-                        //thisH = Math.Floor(height - y);
-                        //thisH = Math.Floor((height - y) * Display.Scale) / Display.Scale;
                         var segmentRect = new Rectangle(x, y, thisW, thisH);
-                        //System.Diagnostics.Debug.WriteLine("\t\t segmentRect: " + segmentRect);
                         LayoutChildIntoBoundingRegion(view, segmentRect);
-                        //if (vt)
-                        //    System.Diagnostics.Debug.WriteLine("["+GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName()+"] LayoutChildIntoBoundingRegion("+view.Id+","+x+","+y+","+thisW+","+thisH+")");
-                        //x = Math.Round((x + (hz ? thisW : 0)) * Display.Scale) / Display.Scale;
-                        //y = Math.Round((y + (vt ? thisH : 0)) * Display.Scale) / Display.Scale;
-                        //x = Math.Round(x + (hz ? thisW : 0));
-                        //y = Math.Round(y + (vt ? thisH : 0));
                         x = (x + (hz ? thisW : 0));
                         y = (y + (vt ? thisH : 0));
-
                     }
                 }
-                //var lastView = Children.Last();
-                //if (lastView.IsVisible)
-                //{
-                //    LayoutChildIntoBoundingRegion(lastView, new Rectangle(x, y,  Math.Round(width - p.Right - x), Math.Round(height - p.Bottom - y)));
-                //}
             }
         }
+
+
         #endregion
 
 
