@@ -428,12 +428,13 @@ namespace Forms9Patch
                         if (index >= actionSpan.Start && index <= actionSpan.End)
                         {
                             //System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
-                            Tap(actionSpan);
+                            //Tap(actionSpan);
                             e.Handled = true;
                             return;
                         }
                     }
                 }
+                e.Handled = false;
             }
         }
 

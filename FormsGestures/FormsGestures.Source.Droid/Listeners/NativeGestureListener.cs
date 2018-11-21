@@ -345,9 +345,12 @@ namespace FormsGestures.Droid
                     if (listener != null && listener.HandlesDown)
                     {
                         args.Listener = listener;
+                        args.Handled = true;
                         listener.OnDown(args);
-                        if (args.Handled)
-                            return true;
+                        //if (args.Handled)
+                        //    return true;
+                        if (!args.Handled)
+                            return false;
                     }
                     handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
                 }
