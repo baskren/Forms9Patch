@@ -15,20 +15,8 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                //return false;
-                //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.OperandLabel")
-                //if (Element?.HtmlText == null)
-                //    return false;
-                //return Element.HtmlText.Contains("While every effort");
-
-                //string labelTextStart = "Żyłę;^`g ";
-                string labelTextStart = "25,000";
-                //return (Element.HtmlText == "Conv" && Element.Parent?.GetType().ToString() == "Bc3.Forms.KeypadButton");
-                //    return false;
-                //string labelTextStart = "OBROUND";
-                
+                string labelTextStart = "Yards";
                 return (Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
-                
             }
         }
 
@@ -105,9 +93,9 @@ namespace Forms9Patch.UWP
             if (e.OldElement != null)
             {
                 e.OldElement.RendererSizeForWidthAndFontSize -= LabelXamarinSize;
-                e.OldElement.SizeChanged -= Label_SizeChanged;
+                e.OldElement.SizeChanged -= OnElementSizeChanged;
                 if (Control != null)
-                    Control.SizeChanged -= Control_SizeChanged;
+                    Control.SizeChanged -= OnControlSizeChanged;
                     
             }
             if (e.NewElement != null)
@@ -122,9 +110,9 @@ namespace Forms9Patch.UWP
                     SetNativeControl(nativeControl);
                 }
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
-                e.NewElement.SizeChanged += Label_SizeChanged;
+                e.NewElement.SizeChanged += OnElementSizeChanged;
                 if (Control != null)
-                    Control.SizeChanged += Control_SizeChanged;
+                    Control.SizeChanged += OnControlSizeChanged;
 
 
                 UpdateColor(Control);
@@ -285,10 +273,10 @@ namespace Forms9Patch.UWP
 
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
-            DebugMessage("ENTER(" + widthConstraint + "," + heightConstraint + ")");
+            DebugMessage("GetDesiredSize ENTER(" + widthConstraint + "," + heightConstraint + ")");
             var desiredSize = MeasureOverride(new Windows.Foundation.Size(widthConstraint, heightConstraint));
             var minSize = new Xamarin.Forms.Size(10, Element!=null ? FontExtensions.LineHeightForFontSize(Element.DecipheredMinFontSize()):10);
-            DebugMessage("EXIT(" + desiredSize + ")");
+            DebugMessage("GetDesiredSize EXIT(" + desiredSize + ")");
             return new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
         }
         #endregion
@@ -304,7 +292,7 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return finalSize;
 
-            DebugMessage("ENTER FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
+            DebugMessage("ArrangeOverride ENTER FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
             DebugArrangeOverride(finalSize);
 
             if (DebugCondition && (finalSize.Width > Element.Width || finalSize.Height > Element.Height) && Element.FittedFontSize > Element.MinFontSize)
@@ -332,11 +320,11 @@ namespace Forms9Patch.UWP
             Control.Arrange(rect);
 
             DebugArrangeOverride(finalSize);
-            DebugMessage("EXIT");
+            DebugMessage("ArrangeOverride EXIT");
             return finalSize;
         }
 
-        private void Control_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
+        private void OnControlSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
         {
             DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
             DebugMessage("e.NewSize=["+e.NewSize+"]");
@@ -344,11 +332,13 @@ namespace Forms9Patch.UWP
             MeasureOverride(e.NewSize);
         }
 
-        private void Label_SizeChanged(object sender, EventArgs e)
+        private void OnElementSizeChanged(object sender, EventArgs e)
         {
-            DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
+            DebugMessage("OnElementSizeChanged  Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
             //Element.Layout(Element.Bounds);
-            //MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
+
+            // the below line made a big difference in Heights & Areas keypad button labels.  
+            MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
         }
 
         /*
@@ -372,12 +362,20 @@ namespace Forms9Patch.UWP
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
 
-            DebugMessage("["+_measureOverrideInvocation+"] pre-Enter availableSize=["+availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]  PageSize=["+Xamarin.Forms.Application.Current.MainPage.Bounds.Size+"]");
+            DebugMessage("["+_measureOverrideInvocation+ "] MeasureOverride pre-Enter availableSize=[" + availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]  PageSize=["+Xamarin.Forms.Application.Current.MainPage.Bounds.Size+"]");
             DebugMessage("[" + _measureOverrideInvocation + "] \t\t availWidth>=Page.Width=[" + (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) + "]");
             DebugMessage("[" + _measureOverrideInvocation + "] \t\t availHeight>=Page.Height=[" + (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) + "]");
             DebugMessage("[" + _measureOverrideInvocation + "] \t\t Element.Parent=["+ Element.Parent + "]");
+
             var label = Element;
             var textBlock = Control;
+
+            DebugMessage("MeasureOverride FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
+
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
+
+
 
             if (label == null || textBlock == null || availableSize.Width == 0 || availableSize.Height == 0)
                 return new Windows.Foundation.Size(0, 0);
@@ -389,7 +387,7 @@ namespace Forms9Patch.UWP
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
 
-            DebugMessage("[" + _measureOverrideInvocation + "] ENTER availableSize=[" + availableSize + "]");
+            DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride ENTER availableSize=[" + availableSize + "]");
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
@@ -512,7 +510,7 @@ namespace Forms9Patch.UWP
                         Element.FittedFontSize = tmpFontSize;
                     }
                 }
-                DebugMessage("[" + _measureOverrideInvocation + "] Element.FittedFontSize=[" + Element.FittedFontSize + "]");
+                DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride Element.FittedFontSize=[" + Element.FittedFontSize + "]");
 
                 /*
                 var syncFontSize = ((ILabel)label).SynchronizedFontSize;
@@ -533,7 +531,8 @@ namespace Forms9Patch.UWP
 
                 if (DebugCondition && label.Width>0 && label.Height > 0 &&(textBlock.DesiredSize.Width > label.Width || textBlock.DesiredSize.Height > label.Height))
                     System.Diagnostics.Debug.WriteLine("");
-                DebugMessage("[" + _measureOverrideInvocation + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "]");
+                DebugMessage("[" + _measureOverrideInvocation + "] availableSize=[" + availableSize + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "] ");
+                //System.Diagnostics.Debug.WriteLine("[" + _measureOverrideInvocation + "] MeasureOverride [" + (Element.Text ?? Element.HtmlText)+"] availableSize=[" + availableSize + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "] ");
 
                 textBlock.MaxLines = label.Lines;
 
@@ -541,7 +540,7 @@ namespace Forms9Patch.UWP
 
             label.SetIsInNativeLayout(false);
 
-            DebugMessage("[" + _measureOverrideInvocation + "] EXIT");
+            DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride EXIT");
 
             LayoutValid = true;
             _lastAvailableSize = availableSize;
@@ -558,6 +557,22 @@ namespace Forms9Patch.UWP
         }
         #endregion
 
+
+        #region Keypad issue
+        /*
+        void Layout()
+        {
+            if (Element.IsVisible)
+            {
+                if (Element.Width > -1 && Element.Height > -1 && (Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight))
+                    LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
+                else
+                    RequestLayout();
+            }
+        }
+        */
+
+        #endregion
 
         #region Fitting
 
