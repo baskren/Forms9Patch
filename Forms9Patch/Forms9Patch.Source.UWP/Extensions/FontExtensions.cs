@@ -9,6 +9,11 @@ using Windows.UI.Xaml.Media;
 using WApplication = Windows.UI.Xaml.Application;
 using Xamarin.Forms;
 using Windows.UI.Text;
+using SharpDX;
+using SharpDX.DirectWrite;
+using System.Diagnostics;
+using Windows.Storage;
+using System.IO;
 
 namespace Forms9Patch.UWP
 {
@@ -17,20 +22,237 @@ namespace Forms9Patch.UWP
         const double lineHeightToFontSizeRatio = 1.4;
         const double roundToNearest = 1;
 
-        internal static double LineHeightForFontSize(double fontSize)
+        public static SharpDX.DirectWrite.FontWeight ToDxFontWeight(this Windows.UI.Text.FontWeight fontWeight)
         {
-            //return Math.Ceiling(1.25 * fontSize / 4) * 4;
-            //return Math.Ceiling(lineHeightToFontSizeRatio * fontSize / roundToNearest) * roundToNearest;
-            return lineHeightToFontSizeRatio * fontSize;
+            return DxFontWeight(fontWeight.Weight);
         }
 
-        internal static double FontSizeFromLineHeight(double lineHeight)
+        static SharpDX.DirectWrite.FontWeight DxFontWeight(int fontWeight)
         {
-            //var uwpLineHeight = Math.Floor(lineHeight / 4) * 4;
-            //var uwpLineHeight = Math.Floor(lineHeight / roundToNearest) * roundToNearest - 1;
-            var uwpLineHeight = lineHeight;
-            var fontSize = uwpLineHeight / lineHeightToFontSizeRatio;
-            return fontSize;
+            var weights = Enum.GetValues(typeof(SharpDX.DirectWrite.FontWeight)).Cast<SharpDX.DirectWrite.FontWeight>().ToList();
+            int lowIndex = -1;
+            var lowError = int.MaxValue;
+            for (int i = 0; i < weights.Count; i++)
+            {
+                var error = Math.Abs((int)weights[i] - fontWeight);
+                if (error < lowError)
+                {
+                    lowError = error;
+                    lowIndex = i;
+                }
+            }
+            return lowIndex > -1 ? weights[lowIndex] : SharpDX.DirectWrite.FontWeight.Normal;
+        }
+
+
+        public static SharpDX.DirectWrite.FontStyle ToDxFontStyle(this Windows.UI.Text.FontStyle fontStyle)
+        {
+            var result = SharpDX.DirectWrite.FontStyle.Normal;
+            if ((fontStyle & Windows.UI.Text.FontStyle.Oblique) > 0)
+                result = SharpDX.DirectWrite.FontStyle.Oblique;
+            if ((fontStyle & Windows.UI.Text.FontStyle.Italic) > 0)
+                result |= SharpDX.DirectWrite.FontStyle.Italic;
+            return result;
+        }
+
+        public static SharpDX.DirectWrite.FontStyle ToDxFontStyle(string fontStyle)
+        {
+            fontStyle = fontStyle.ToLower();
+            var result = SharpDX.DirectWrite.FontStyle.Normal;
+            if (fontStyle.Contains("bold") || fontStyle.Contains("oblique"))
+                result = SharpDX.DirectWrite.FontStyle.Oblique;
+            if (fontStyle.Contains("italic"))
+                result |= SharpDX.DirectWrite.FontStyle.Italic;
+            return result;
+        }
+
+        public static SharpDX.DirectWrite.FontStyle ToDxFontStyle(this Xamarin.Forms.FontAttributes fontAttributes)
+        {
+            var result = SharpDX.DirectWrite.FontStyle.Normal;
+            if ((fontAttributes & Xamarin.Forms.FontAttributes.Bold) > 0)
+                result = SharpDX.DirectWrite.FontStyle.Oblique;
+            if ((fontAttributes & Xamarin.Forms.FontAttributes.Italic) > 0)
+                result |= SharpDX.DirectWrite.FontStyle.Italic;
+            return result;
+        }
+
+
+        public static SharpDX.DirectWrite.FontStretch ToDxFontStretch(this Windows.UI.Text.FontStretch fontStretch)
+        {
+            foreach (var stretch in Enum.GetValues(typeof(SharpDX.DirectWrite.FontStretch)).Cast<SharpDX.DirectWrite.FontStretch>())
+            {
+                if (((uint)stretch) == ((uint)fontStretch))
+                    return stretch;
+            }
+            return SharpDX.DirectWrite.FontStretch.Undefined;
+        }
+
+        public static SharpDX.DirectWrite.FontMetrics GetFontMetrics(this TextBlock textBlock)
+        {
+            if (textBlock.GetDxFont() is SharpDX.DirectWrite.Font font)
+                return font.Metrics;
+            return new FontMetrics();
+        }
+
+        public static SharpDX.DirectWrite.Font GetDxFont(this Xamarin.Forms.Label label)
+        {
+            return GetDxFont(label.FontFamily, SharpDX.DirectWrite.FontWeight.Normal, SharpDX.DirectWrite.FontStretch.Normal, label.FontAttributes.ToDxFontStyle());
+        }
+
+        public static SharpDX.DirectWrite.Font GetDxFont(this TextBlock textBlock)
+        {
+            return GetDxFont(textBlock.FontFamily.Source, textBlock.FontWeight.ToDxFontWeight(), textBlock.FontStretch.ToDxFontStretch(), textBlock.FontStyle.ToDxFontStyle());
+        }
+
+        static Dictionary<string, SharpDX.DirectWrite.Font> _loadedFonts = new Dictionary<string, SharpDX.DirectWrite.Font>();
+
+        public static SharpDX.DirectWrite.Font GetDxFont(string fontFamily, SharpDX.DirectWrite.FontWeight weight , SharpDX.DirectWrite.FontStretch stretch, SharpDX.DirectWrite.FontStyle style)
+        {
+            //Windows.UI.Xaml.Media.FontFamily fontFamily = textBlock.FontFamily;
+
+            if (fontFamily == null)
+                fontFamily = LabeLRenderer._defaultTextBlock.FontFamily.Source;
+
+            var fontKey = fontFamily + "-" + weight + "-" + stretch + "-" + style;
+
+            if (_loadedFonts.TryGetValue(fontKey, out SharpDX.DirectWrite.Font font))
+                return font;
+
+            using (var factory = new Factory())
+            {
+                if (fontFamily.StartsWith("ms-appdata:///"))
+                {
+                    var fontFamilyFilePath = fontFamily.Substring(14);
+                    string dir = null;
+                    if (fontFamilyFilePath.StartsWith("local/"))
+                    {
+                        dir = ApplicationData.Current.LocalFolder.Path;
+                        fontFamilyFilePath = fontFamilyFilePath.Substring(6);
+                    }
+                    else if (fontFamilyFilePath.StartsWith("localcache/"))
+                    {
+                        dir = ApplicationData.Current.LocalCacheFolder.Path;
+                        fontFamilyFilePath = fontFamilyFilePath.Substring(11);
+                    }
+                    else if (fontFamilyFilePath.StartsWith("roaming/"))
+                    {
+                        dir = ApplicationData.Current.RoamingFolder.Path;
+                        fontFamilyFilePath = fontFamilyFilePath.Substring(8);
+                    }
+                    else if (fontFamilyFilePath.StartsWith("temp/"))
+                    {
+                        dir = ApplicationData.Current.TemporaryFolder.Path;
+                        fontFamilyFilePath = fontFamilyFilePath.Substring(5);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Unknown StorageFolder for " + fontFamily);
+                        return null;
+                    }
+                    var path = System.IO.Path.Combine(dir, fontFamilyFilePath.Split('#')[0]);
+
+                    var fontFile = new SharpDX.DirectWrite.FontFile(factory, path );
+
+                    var loader = fontFile.Loader;
+
+                    var key = fontFile.GetReferenceKey();
+
+                    var fontCollectionLoader = new FontCollectionLoader(fontFile);
+
+                    factory.RegisterFontCollectionLoader(fontCollectionLoader);
+
+                    var fontCollection = new FontCollection(factory, fontCollectionLoader, key);
+
+
+                    var family = fontCollection.GetFontFamily(0);
+
+                    var familyNames = family.FamilyNames;
+
+                    font = family.GetFirstMatchingFont(weight, stretch, style);
+
+                    _loadedFonts[fontKey] = font;
+
+                    return font;
+    
+                }
+                using (var fontCollection = factory.GetSystemFontCollection(false))
+                {
+                    var familyCount = fontCollection.FontFamilyCount;
+                    for (int i = 0; i < familyCount; i++)
+                    {
+                        try
+                        {
+                            using (var dxFontFamily = fontCollection.GetFontFamily(i))
+                            {
+                                var familyNames = dxFontFamily.FamilyNames;
+
+                                if (!familyNames.FindLocaleName(System.Globalization.CultureInfo.CurrentCulture.Name, out int index))
+                                    familyNames.FindLocaleName("en-us", out index);
+
+                                string name = familyNames.GetString(index);
+                                
+                                string display = name;
+                                using (var dxFont = dxFontFamily.GetFont(index))
+                                {
+                                    if (dxFont.IsSymbolFont)
+                                        display = "Segoe UI";
+                                }
+
+                                //fontList.Add(new InstalledFont { Name = name, DisplayFont = display });
+                                if ((fontFamily == name || fontFamily == display) && dxFontFamily.GetFirstMatchingFont(weight, stretch, style) is SharpDX.DirectWrite.Font systemFont)
+                                {
+                                    _loadedFonts[fontKey] = systemFont;
+                                    return systemFont;
+                                }
+                            }
+                        }
+                        catch { }       // Corrupted font files throw an exception - ignore them
+
+                    }
+                }
+            }
+            return null;
+
+        }
+
+
+        internal static double AscentForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.Ascent) / metric.DesignUnitsPerEm;
+
+        internal static double DescentForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.Descent) / metric.DesignUnitsPerEm;
+
+        internal static double CapHeightForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.CapHeight) / metric.DesignUnitsPerEm;
+
+        internal static double XHeightForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.XHeight) / metric.DesignUnitsPerEm;
+
+        internal static double LineGapForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.LineGap) / metric.DesignUnitsPerEm;
+
+        internal static double LineHeightForFontSize(this FontMetrics metric, double fontSize)
+        {
+            //return lineHeightToFontSizeRatio * fontSize;
+            var result = metric.CapHeightForFontSize(fontSize) + metric.DescentForFontSize(fontSize);
+            if (Double.IsNaN(result))
+                System.Diagnostics.Debug.WriteLine("");
+            return result;
+        }
+
+        internal static double HeightForLinesAtFontSize(this FontMetrics metric, int lines, double fontSize)
+        {
+            var designUnitsHeight = lines * (metric.CapHeight + metric.Descent) + (lines - 1) * ((metric.Ascent - metric.CapHeight) + metric.LineGap);
+            return fontSize * designUnitsHeight / metric.DesignUnitsPerEm;
+        }
+
+        internal static double FontSizeFromLineHeight(this FontMetrics metric, double lineHeight)
+        {
+            //var uwpLineHeight = lineHeight;
+            //var fontSize = uwpLineHeight / lineHeightToFontSizeRatio;
+            //return fontSize;
+            return lineHeight * metric.DesignUnitsPerEm / (metric.CapHeight + metric.Descent);
+        }
+
+        internal static double FontSizeFromLinesInHeight(this FontMetrics metric, int lines, double height)
+        {
+            var designUnitsHeight = lines * (metric.CapHeight + metric.Descent) + (lines - 1) * ((metric.Ascent - metric.CapHeight) + metric.LineGap);
+            return (height * metric.DesignUnitsPerEm / designUnitsHeight) / 1.4;
         }
 
         internal static double ClipFontSize(double size, Forms9Patch.Label label)
@@ -100,27 +322,27 @@ namespace Forms9Patch.UWP
             }
         }
 
-        public static void ApplyFont(this Control self, Font font)
+        public static void ApplyFont(this Control self, Xamarin.Forms.Font font)
         {
             self.FontSize = font.UseNamedSize ? font.NamedSize.GetFontSize() : font.FontSize;
             self.FontFamily = FontService.GetWinFontFamily(font.FontFamily);
-            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? FontStyle.Italic : FontStyle.Normal;
+            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
             self.FontWeight = font.FontAttributes.HasFlag(FontAttributes.Bold) ? FontWeights.Bold : FontWeights.Normal;
         }
 
-        public static void ApplyFont(this TextBlock self, Font font)
+        public static void ApplyFont(this TextBlock self, Xamarin.Forms.Font font)
         {
             self.FontSize = font.UseNamedSize ? font.NamedSize.GetFontSize() : font.FontSize;
             self.FontFamily = FontService.GetWinFontFamily(font.FontFamily);
-            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? FontStyle.Italic : FontStyle.Normal;
+            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
             self.FontWeight = font.FontAttributes.HasFlag(FontAttributes.Bold) ? FontWeights.Bold : FontWeights.Normal;
         }
 
-        public static void ApplyFont(this TextElement self, Font font)
+        public static void ApplyFont(this TextElement self, Xamarin.Forms.Font font)
         {
             self.FontSize = font.UseNamedSize ? font.NamedSize.GetFontSize() : font.FontSize;
             self.FontFamily = FontService.GetWinFontFamily(font.FontFamily);
-            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? FontStyle.Italic : FontStyle.Normal;
+            self.FontStyle = font.FontAttributes.HasFlag(FontAttributes.Italic) ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
             self.FontWeight = font.FontAttributes.HasFlag(FontAttributes.Bold) ? FontWeights.Bold : FontWeights.Normal;
         }
 
@@ -128,10 +350,120 @@ namespace Forms9Patch.UWP
         {
             self.FontSize = element.FontSize;
             self.FontFamily = FontService.GetWinFontFamily(element.FontFamily);
-            self.FontStyle = element.FontAttributes.HasFlag(FontAttributes.Italic) ? FontStyle.Italic : FontStyle.Normal;
+            self.FontStyle = element.FontAttributes.HasFlag(FontAttributes.Italic) ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
             self.FontWeight = element.FontAttributes.HasFlag(FontAttributes.Bold) ? FontWeights.Bold : FontWeights.Normal;
         }
 
 
+    }
+
+    class FontCollectionLoader : CallbackBase, SharpDX.DirectWrite.FontCollectionLoader
+    {
+        FontFileEnumerator _fontFileEnumerator;
+
+        public FontCollectionLoader(FontFile fontFile)
+        {
+            _fontFileEnumerator = new FontFileEnumerator(fontFile);
+        }
+
+        public SharpDX.DirectWrite.FontFileEnumerator CreateEnumeratorFromKey(Factory factory, DataPointer collectionKey)
+        {
+            return _fontFileEnumerator;
+        }
+    }
+
+    class FontFileEnumerator : CallbackBase, SharpDX.DirectWrite.FontFileEnumerator
+    {
+        FontFile _fontFile;
+
+        public FontFileEnumerator(FontFile fontFile)
+        {
+            _fontFile = fontFile;
+            //CurrentFontFile = _fontFile;
+        }
+
+        public FontFile CurrentFontFile
+        {
+            get;
+            private set;
+        }
+
+        public bool MoveNext()
+        {
+            if (CurrentFontFile == null)
+            {
+                CurrentFontFile = _fontFile;
+                return true;
+            }
+            CurrentFontFile = null;
+            return false;
+        }
+    }
+
+    class FontFileLoader : CallbackBase, SharpDX.DirectWrite.FontFileLoader
+    {
+        private readonly Factory _factory;
+        private FontFileStream _fontStream;
+
+        public FontFileLoader(Factory factory)
+        {
+            _factory = factory;
+        }
+
+        public async Task Init(string fontFamily)
+        {
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(fontFamily));
+            using (var fileStream = await file.OpenStreamForReadAsync())
+            {
+                var fontBytes = new byte[(int)fileStream.Length];
+                fileStream.Read(fontBytes, 0, (int)fileStream.Length);
+                var stream = new DataStream(fontBytes.Length, true, true);
+                stream.Write(fontBytes, 0, fontBytes.Length);
+                stream.Position = 0;
+
+                _fontStream = new FontFileStream(stream);
+            }
+            // Register the 
+            _factory.RegisterFontFileLoader(this);
+        }
+
+        public SharpDX.DirectWrite.FontFileStream CreateStreamFromKey(DataPointer fontFileReferenceKey)
+        {
+            return _fontStream;
+        }
+    }
+
+    class FontFileStream : SharpDX.CallbackBase, SharpDX.DirectWrite.FontFileStream
+    {
+        private readonly DataStream _stream;
+
+        public FontFileStream(DataStream stream) => _stream = stream;
+
+        //public IDisposable Shadow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public long GetFileSize()
+        {
+            return _stream.Length;
+        }
+
+        public long GetLastWriteTime()
+        {
+            return 0;
+        }
+        
+        public void ReadFileFragment(out IntPtr fragmentStart, long fileOffset, long fragmentSize, out IntPtr fragmentContext)
+        {
+            lock (this)
+            {
+                fragmentContext = IntPtr.Zero;
+                _stream.Position = fileOffset;
+                fragmentStart = _stream.PositionPointer;
+            }
+        }
+
+        public void ReleaseFileFragment(IntPtr fragmentContext)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

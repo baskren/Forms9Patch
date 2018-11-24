@@ -25,6 +25,7 @@ namespace Forms9Patch.UWP
             return null;
         }
 
+
         // Code taken straight from SharpDX\Samples\DirectWrite\FontEnumeration\Program.cs
         public static List<InstalledFont> GetFonts()
         {
