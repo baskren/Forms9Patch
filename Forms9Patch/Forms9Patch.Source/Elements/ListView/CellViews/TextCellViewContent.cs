@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 namespace Forms9Patch
 {
-    internal class TextCellViewContent : Xamarin.Forms.Label //, ICellHeight
+    internal class TextCellViewContent : Forms9Patch.Label // Xamarin.Forms.Label //, ICellHeight
     {
 
         public TextCellViewContent()
@@ -10,6 +10,9 @@ namespace Forms9Patch
             Margin = new Thickness(5, 1, 5, 1);
             VerticalTextAlignment = TextAlignment.Center;
             HorizontalTextAlignment = TextAlignment.Start;
+            LineBreakMode = LineBreakMode.TailTruncation;
+            Lines = 1;
+            AutoFit = AutoFit.Width;
         }
 
         //public int CellHeight => (int) System.Math.Ceiling(Bounds.Height);

@@ -15,8 +15,16 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                string labelTextStart = "7";
+                return (Element?.Parent?.ToString() is string str && str.StartsWith("[Bc3.Forms.BcItemTextValueLabel."));
+                /*
+                //if (Element.Parent.ToString() == "Bc3.Forms.BcItemTextValueLabel")
+                string labelTextStart = "I4";
+                if ((Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart)) )
+                {
+                    var parent = Element.Parent;
+                }
                 return (Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                */
             }
         }
 
@@ -75,7 +83,11 @@ namespace Forms9Patch.UWP
         bool _defaultNativeFontIsItalics;
         #endregion
 
-        bool LayoutValid { get; set; }
+        bool LayoutValid
+        {
+            get; 
+            set;
+        }
 
         Windows.Foundation.Size _lastAvailableSize = new Windows.Foundation.Size(0, 0);
         Xamarin.Forms.Size _lastElementSize = Xamarin.Forms.Size.Zero;
@@ -84,6 +96,7 @@ namespace Forms9Patch.UWP
         int _lastLines = (int)Forms9Patch.Label.LinesProperty.DefaultValue;
         internal static TextBlock _defaultTextBlock = new TextBlock();
         SharpDX.DirectWrite.FontMetrics _fontMetrics  = _defaultTextBlock.GetFontMetrics() ;
+        bool newElement;
         #endregion
 
 
@@ -104,6 +117,7 @@ namespace Forms9Patch.UWP
             }
             if (e.NewElement != null)
             {
+                newElement = true;
                 if (Control == null)
                 {
                     var nativeControl = new TextBlock();
@@ -211,10 +225,8 @@ namespace Forms9Patch.UWP
 
         void UpdateSynchrnoizedFontSize(TextBlock textBlock)
         {
-            var label = Element as ILabel;
-            if (label == null)
-                return;
-            if (label.SynchronizedFontSize != textBlock.FontSize)
+            if (Element is ILabel label && label.SynchronizedFontSize != textBlock.FontSize)
+                if (label.SynchronizedFontSize!=-1 && textBlock.FontSize!=_defaultNativeFontSize)
                 ForceLayout(textBlock);
         }
 
@@ -420,11 +432,13 @@ namespace Forms9Patch.UWP
             double height = (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
 
             
-            if (Double.IsInfinity(availableSize.Width) && label.Width < 0)
+            if (Double.IsInfinity(availableSize.Width) && (label.Width < 0 || !newElement) )
                 width = availableSize.Width;
-            if (Double.IsInfinity(availableSize.Height) && label.Height < 0)
+            if (Double.IsInfinity(availableSize.Height) && (label.Height < 0 || !newElement))
                 height = availableSize.Height;
-               
+
+            newElement = false;
+
 
             if (Element.Width > 0 && Element.Height > 0 && !Double.IsInfinity(width) && !Double.IsInfinity(height))  // This line was causing UWP to fail to correctly update width of BcOperandLabel during editing.
             //if (Element.Width > width && Element.Height > height && !Double.IsInfinity(width) && !Double.IsInfinity(height))
