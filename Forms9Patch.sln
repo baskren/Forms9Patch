@@ -21,9 +21,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch", "Forms9Patch", "{6CE42746-AF2D-4B4D-B294-B88867A60D9C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XfNuget", "XfNuget", "{194A67C8-8923-492D-98FE-3EC10FC435BB}"
-	ProjectSection(SolutionItems) = preProject
-		Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs = Forms9Patch\Forms9Patch.Source.UWP\Models\Settings.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9Patch.XfNuget", "Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj", "{44CB54AE-3453-42F1-B927-4B6F24BC4994}"
 EndProject
@@ -645,7 +642,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms and Forms9Pat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms9Patch Source", "Forms9Patch Source", "{1C338DFE-D29B-49A5-8E70-2947336BB638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms9PatchDemo.F9pSource", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj", "{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms9PatchDemo.F9pSource.iOS", "Forms9PatchFromSourceDemo\Forms9PatchDemo.F9pSource.iOS\Forms9PatchDemo.F9pSource.iOS.csproj", "{3DF2DDF6-175F-4E04-B6D2-AF07307A8906}"
 EndProject
