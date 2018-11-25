@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using P42.Utils;
+using SharpDX.DirectWrite;
+using Windows.UI.Xaml.Controls;
 #if NETSTANDARD
 #else
 using PCLStorage;
@@ -153,7 +155,9 @@ namespace Forms9Patch.UWP
 
         public double LineHeight(string fontFamily, double fontSize, FontAttributes fontAttributes)
         {
-            return FontExtensions.LineHeightForFontSize(fontSize);
+            var dxFont = FontExtensions.GetDxFont(fontFamily, FontWeight.Normal, FontStretch.Normal, fontAttributes.ToDxFontStyle());
+            //return FontExtensions.LineHeightForFontSize(fontSize);
+            return dxFont.Metrics.HeightForLinesAtFontSize(1, fontSize);
         }
 
         public double LineSpace(string fontFamily, double fontSize, FontAttributes fontAttributes)
