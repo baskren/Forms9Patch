@@ -990,6 +990,31 @@ public static readonly BindableProperty FontColorProperty</code></pre>
   </table>
   
   
+  <h4 id="Forms9Patch_SegmentedControl_IsClippedProperty" data-uid="Forms9Patch.SegmentedControl.IsClippedProperty">IsClippedProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the IsClipped property</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IsClippedProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <h4 id="Forms9Patch_SegmentedControl_LineBreakModeProperty" data-uid="Forms9Patch.SegmentedControl.LineBreakModeProperty">LineBreakModeProperty</h4>
   <div class="markdown level1 summary"><p>backing store for LineBreakMode property</p>
 </div>
@@ -1216,13 +1241,14 @@ public static readonly BindableProperty SelectedFontColorProperty</code></pre>
   </table>
   
   
-  <h4 id="Forms9Patch_SegmentedControl_SizeSegmentFontsEquallyProperty" data-uid="Forms9Patch.SegmentedControl.SizeSegmentFontsEquallyProperty">SizeSegmentFontsEquallyProperty</h4>
-  <div class="markdown level1 summary"><p>The size segment fonts equally property.</p>
+  <h4 id="Forms9Patch_SegmentedControl_StickyBehaviorProperty" data-uid="Forms9Patch.SegmentedControl.StickyBehaviorProperty">StickyBehaviorProperty</h4>
+  <div class="markdown level1 summary"><p>OBSOLETE: Use ToggleBehaviorProperty instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SizeSegmentFontsEquallyProperty</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;StickyBehavior property is obsolete, use ToggleBehavior instead&quot;, true)]
+public static BindableProperty StickyBehaviorProperty</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1241,14 +1267,13 @@ public static readonly BindableProperty SelectedFontColorProperty</code></pre>
   </table>
   
   
-  <h4 id="Forms9Patch_SegmentedControl_StickyBehaviorProperty" data-uid="Forms9Patch.SegmentedControl.StickyBehaviorProperty">StickyBehaviorProperty</h4>
-  <div class="markdown level1 summary"><p>OBSOLETE: Use ToggleBehaviorProperty instead.</p>
+  <h4 id="Forms9Patch_SegmentedControl_SyncSegmentFontSizesProperty" data-uid="Forms9Patch.SegmentedControl.SyncSegmentFontSizesProperty">SyncSegmentFontSizesProperty</h4>
+  <div class="markdown level1 summary"><p>The size segment fonts equally property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;StickyBehavior property is obsolete, use ToggleBehavior instead&quot;, true)]
-public static BindableProperty StickyBehaviorProperty</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SyncSegmentFontSizesProperty</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1799,6 +1824,33 @@ public Color FontColor { get; set; }</code></pre>
   </table>
   
   
+  <a id="Forms9Patch_SegmentedControl_IsClipped_" data-uid="Forms9Patch.SegmentedControl.IsClipped*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_IsClipped" data-uid="Forms9Patch.SegmentedControl.IsClipped">IsClipped</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether any of the contents of this <a class="xref" href="Forms9Patch.SegmentedControl.html">SegmentedControl</a> is clipped.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsClipped { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if is clipped; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_SegmentedControl_LineBreakMode_" data-uid="Forms9Patch.SegmentedControl.LineBreakMode*"></a>
   <h4 id="Forms9Patch_SegmentedControl_LineBreakMode" data-uid="Forms9Patch.SegmentedControl.LineBreakMode">LineBreakMode</h4>
   <div class="markdown level1 summary"><p>Gets/Sets the LineBreakMode property</p>
@@ -2120,33 +2172,6 @@ public Color SelectedFontColor { get; set; }</code></pre>
   </table>
   
   
-  <a id="Forms9Patch_SegmentedControl_SizeSegmentFontsEqually_" data-uid="Forms9Patch.SegmentedControl.SizeSegmentFontsEqually*"></a>
-  <h4 id="Forms9Patch_SegmentedControl_SizeSegmentFontsEqually" data-uid="Forms9Patch.SegmentedControl.SizeSegmentFontsEqually">SizeSegmentFontsEqually</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.SegmentedControl.html">SegmentedControl</a> size segment fonts equally.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SizeSegmentFontsEqually { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p><code>true</code> if size segment fonts equally; otherwise, <code>false</code>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
   <a id="Forms9Patch_SegmentedControl_StickyBehavior_" data-uid="Forms9Patch.SegmentedControl.StickyBehavior*"></a>
   <h4 id="Forms9Patch_SegmentedControl_StickyBehavior" data-uid="Forms9Patch.SegmentedControl.StickyBehavior">StickyBehavior</h4>
   <div class="markdown level1 summary"><p>OBSOLETE: Use ToggleBehavior instead.</p>
@@ -2169,6 +2194,33 @@ public bool StickyBehavior { get; set; }</code></pre>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_SegmentedControl_SyncSegmentFontSizes_" data-uid="Forms9Patch.SegmentedControl.SyncSegmentFontSizes*"></a>
+  <h4 id="Forms9Patch_SegmentedControl_SyncSegmentFontSizes" data-uid="Forms9Patch.SegmentedControl.SyncSegmentFontSizes">SyncSegmentFontSizes</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="Forms9Patch.SegmentedControl.html">SegmentedControl</a> size segment fonts equally.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SyncSegmentFontSizes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if size segment fonts equally; otherwise, <code>false</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>

@@ -325,6 +325,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onparentset#Xamarin_Forms_VisualElement_OnParentSet">VisualElement.OnParentSet()</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizeallocated#Xamarin_Forms_VisualElement_OnSizeAllocated_System_Double_System_Double_">VisualElement.OnSizeAllocated(Double, Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizerequest#Xamarin_Forms_VisualElement_OnSizeRequest_System_Double_System_Double_">VisualElement.OnSizeRequest(Double, Double)</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.sizeallocated#Xamarin_Forms_VisualElement_SizeAllocated_System_Double_System_Double_">VisualElement.SizeAllocated(Double, Double)</a>
     </div>
     <div>
@@ -903,6 +909,31 @@ public double ActualFontSize { get; set; }</code></pre>
   </table>
   
   
+  <a id="Forms9Patch_Label_DefaultFontSize_" data-uid="Forms9Patch.Label.DefaultFontSize*"></a>
+  <h4 id="Forms9Patch_Label_DefaultFontSize" data-uid="Forms9Patch.Label.DefaultFontSize">DefaultFontSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double DefaultFontSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Label_Fit_" data-uid="Forms9Patch.Label.Fit*"></a>
   <h4 id="Forms9Patch_Label_Fit" data-uid="Forms9Patch.Label.Fit">Fit</h4>
   <div class="markdown level1 summary"><p>Gets/Sets the Fit property</p>
@@ -1260,96 +1291,6 @@ public override SizeRequest GetSizeRequest(double widthConstraint, double height
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.onpropertychanged#Xamarin_Forms_Element_OnPropertyChanged_System_String_">Element.OnPropertyChanged(String)</a></div>
-  
-  
-  <a id="Forms9Patch_Label_OnSizeAllocated_" data-uid="Forms9Patch.Label.OnSizeAllocated*"></a>
-  <h4 id="Forms9Patch_Label_OnSizeAllocated_System_Double_System_Double_" data-uid="Forms9Patch.Label.OnSizeAllocated(System.Double,System.Double)">OnSizeAllocated(Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Ons the size allocated.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnSizeAllocated(double width, double height)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">width</span></td>
-        <td><p>Width.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">height</span></td>
-        <td><p>Height.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizeallocated#Xamarin_Forms_VisualElement_OnSizeAllocated_System_Double_System_Double_">VisualElement.OnSizeAllocated(Double, Double)</a></div>
-  
-  
-  <a id="Forms9Patch_Label_OnSizeRequest_" data-uid="Forms9Patch.Label.OnSizeRequest*"></a>
-  <h4 id="Forms9Patch_Label_OnSizeRequest_System_Double_System_Double_" data-uid="Forms9Patch.Label.OnSizeRequest(System.Double,System.Double)">OnSizeRequest(Double, Double)</h4>
-  <div class="markdown level1 summary"><p>This method is called during the measure pass of a layout cycle to get the desired size of an element.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use OnMeasure&quot;)]
-protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">widthConstraint</span></td>
-        <td><p>The available width for the element to use.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
-        <td><span class="parametername">heightConstraint</span></td>
-        <td><p>The available height for the element to use.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.sizerequest">SizeRequest</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizerequest#Xamarin_Forms_VisualElement_OnSizeRequest_System_Double_System_Double_">VisualElement.OnSizeRequest(Double, Double)</a></div>
   
   
   <a id="Forms9Patch_Label_SizeForWidthAndFontSize_" data-uid="Forms9Patch.Label.SizeForWidthAndFontSize*"></a>

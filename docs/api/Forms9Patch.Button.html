@@ -195,9 +195,6 @@
       <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_OnSizeRequest_System_Double_System_Double_">ContentView.OnSizeRequest(Double, Double)</a>
     </div>
     <div>
-      <a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">ContentView.LayoutChildren(Double, Double, Double, Double)</a>
-    </div>
-    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.contentview.onbindingcontextchanged#Xamarin_Forms_ContentView_OnBindingContextChanged">ContentView.OnBindingContextChanged()</a>
     </div>
     <div>
@@ -1457,6 +1454,31 @@ public static BindableProperty ImageSourceProperty</code></pre>
   </table>
   
   
+  <h4 id="Forms9Patch_Button_IsClippedProperty" data-uid="Forms9Patch.Button.IsClippedProperty">IsClippedProperty</h4>
+  <div class="markdown level1 summary"><p>Backing store for the IsClipped property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IsClippedProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <h4 id="Forms9Patch_Button_IsEllipticalProperty" data-uid="Forms9Patch.Button.IsEllipticalProperty">IsEllipticalProperty</h4>
   <div class="markdown level1 summary"><p>backing store for IsEliptical property</p>
 </div>
@@ -2613,6 +2635,33 @@ public ImageSource ImageSource { get; set; }</code></pre>
   </table>
   
   
+  <a id="Forms9Patch_Button_IsClipped_" data-uid="Forms9Patch.Button.IsClipped*"></a>
+  <h4 id="Forms9Patch_Button_IsClipped" data-uid="Forms9Patch.Button.IsClipped">IsClipped</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the contents of this <a class="xref" href="Forms9Patch.Button.html">Button</a> is clipped.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsClipped { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if is clipped; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Button_IsElliptical_" data-uid="Forms9Patch.Button.IsElliptical*"></a>
   <h4 id="Forms9Patch_Button_IsElliptical" data-uid="Forms9Patch.Button.IsElliptical">IsElliptical</h4>
   <div class="markdown level1 summary"><p>Gets/Sets the IsEliptical property</p>
@@ -3385,6 +3434,50 @@ public bool TrailingImage { get; set; }</code></pre>
   </table>
   
   
+  <a id="Forms9Patch_Button_LayoutChildren_" data-uid="Forms9Patch.Button.LayoutChildren*"></a>
+  <h4 id="Forms9Patch_Button_LayoutChildren_System_Double_System_Double_System_Double_System_Double_" data-uid="Forms9Patch.Button.LayoutChildren(System.Double,System.Double,System.Double,System.Double)">LayoutChildren(Double, Double, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void LayoutChildren(double x, double y, double width, double height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Forms9Patch.ContentView.html#Forms9Patch_ContentView_LayoutChildren_System_Double_System_Double_System_Double_System_Double_">ContentView.LayoutChildren(Double, Double, Double, Double)</a></div>
+  
+  
   <a id="Forms9Patch_Button_OnPropertyChanged_" data-uid="Forms9Patch.Button.OnPropertyChanged*"></a>
   <h4 id="Forms9Patch_Button_OnPropertyChanged_System_String_" data-uid="Forms9Patch.Button.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
   <div class="markdown level1 summary"><p>Call this method from a child class to notify that a change happened on a property.</p>
@@ -3564,6 +3657,31 @@ public bool TrailingImage { get; set; }</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler">EventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Button_LayoutComplete" data-uid="Forms9Patch.Button.LayoutComplete">LayoutComplete</h4>
+  <div class="markdown level1 summary"><p>Occurs when LayoutChildren is completed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;bool&gt; LayoutComplete</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

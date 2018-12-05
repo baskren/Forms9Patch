@@ -1384,6 +1384,25 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Button.InvokeTapped
   nameWithType: Button.InvokeTapped
+- uid: Forms9Patch.Button.IsClipped
+  name: IsClipped
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsClipped
+  commentId: P:Forms9Patch.Button.IsClipped
+  fullName: Forms9Patch.Button.IsClipped
+  nameWithType: Button.IsClipped
+- uid: Forms9Patch.Button.IsClipped*
+  name: IsClipped
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsClipped_
+  commentId: Overload:Forms9Patch.Button.IsClipped
+  isSpec: "True"
+  fullName: Forms9Patch.Button.IsClipped
+  nameWithType: Button.IsClipped
+- uid: Forms9Patch.Button.IsClippedProperty
+  name: IsClippedProperty
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsClippedProperty
+  commentId: F:Forms9Patch.Button.IsClippedProperty
+  fullName: Forms9Patch.Button.IsClippedProperty
+  nameWithType: Button.IsClippedProperty
 - uid: Forms9Patch.Button.IsElliptical
   name: IsElliptical
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsElliptical
@@ -1422,6 +1441,25 @@ references:
   commentId: F:Forms9Patch.Button.IsSelectedProperty
   fullName: Forms9Patch.Button.IsSelectedProperty
   nameWithType: Button.IsSelectedProperty
+- uid: Forms9Patch.Button.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  name: LayoutChildren(Double, Double, Double, Double)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_LayoutChildren_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Forms9Patch.Button.LayoutChildren(System.Double,System.Double,System.Double,System.Double)
+  fullName: Forms9Patch.Button.LayoutChildren(System.Double, System.Double, System.Double, System.Double)
+  nameWithType: Button.LayoutChildren(Double, Double, Double, Double)
+- uid: Forms9Patch.Button.LayoutChildren*
+  name: LayoutChildren
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_LayoutChildren_
+  commentId: Overload:Forms9Patch.Button.LayoutChildren
+  isSpec: "True"
+  fullName: Forms9Patch.Button.LayoutChildren
+  nameWithType: Button.LayoutChildren
+- uid: Forms9Patch.Button.LayoutComplete
+  name: LayoutComplete
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_LayoutComplete
+  commentId: E:Forms9Patch.Button.LayoutComplete
+  fullName: Forms9Patch.Button.LayoutComplete
+  nameWithType: Button.LayoutComplete
 - uid: Forms9Patch.Button.LineBreakMode
   name: LineBreakMode
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_LineBreakMode
@@ -7326,6 +7364,19 @@ references:
   commentId: F:Forms9Patch.Label.AutoFitProperty
   fullName: Forms9Patch.Label.AutoFitProperty
   nameWithType: Label.AutoFitProperty
+- uid: Forms9Patch.Label.DefaultFontSize
+  name: DefaultFontSize
+  href: api/Forms9Patch.Label.html#Forms9Patch_Label_DefaultFontSize
+  commentId: P:Forms9Patch.Label.DefaultFontSize
+  fullName: Forms9Patch.Label.DefaultFontSize
+  nameWithType: Label.DefaultFontSize
+- uid: Forms9Patch.Label.DefaultFontSize*
+  name: DefaultFontSize
+  href: api/Forms9Patch.Label.html#Forms9Patch_Label_DefaultFontSize_
+  commentId: Overload:Forms9Patch.Label.DefaultFontSize
+  isSpec: "True"
+  fullName: Forms9Patch.Label.DefaultFontSize
+  nameWithType: Label.DefaultFontSize
 - uid: Forms9Patch.Label.Fit
   name: Fit
   href: api/Forms9Patch.Label.html#Forms9Patch_Label_Fit
@@ -7511,32 +7562,6 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Label.OnPropertyChanged
   nameWithType: Label.OnPropertyChanged
-- uid: Forms9Patch.Label.OnSizeAllocated(System.Double,System.Double)
-  name: OnSizeAllocated(Double, Double)
-  href: api/Forms9Patch.Label.html#Forms9Patch_Label_OnSizeAllocated_System_Double_System_Double_
-  commentId: M:Forms9Patch.Label.OnSizeAllocated(System.Double,System.Double)
-  fullName: Forms9Patch.Label.OnSizeAllocated(System.Double, System.Double)
-  nameWithType: Label.OnSizeAllocated(Double, Double)
-- uid: Forms9Patch.Label.OnSizeAllocated*
-  name: OnSizeAllocated
-  href: api/Forms9Patch.Label.html#Forms9Patch_Label_OnSizeAllocated_
-  commentId: Overload:Forms9Patch.Label.OnSizeAllocated
-  isSpec: "True"
-  fullName: Forms9Patch.Label.OnSizeAllocated
-  nameWithType: Label.OnSizeAllocated
-- uid: Forms9Patch.Label.OnSizeRequest(System.Double,System.Double)
-  name: OnSizeRequest(Double, Double)
-  href: api/Forms9Patch.Label.html#Forms9Patch_Label_OnSizeRequest_System_Double_System_Double_
-  commentId: M:Forms9Patch.Label.OnSizeRequest(System.Double,System.Double)
-  fullName: Forms9Patch.Label.OnSizeRequest(System.Double, System.Double)
-  nameWithType: Label.OnSizeRequest(Double, Double)
-- uid: Forms9Patch.Label.OnSizeRequest*
-  name: OnSizeRequest
-  href: api/Forms9Patch.Label.html#Forms9Patch_Label_OnSizeRequest_
-  commentId: Overload:Forms9Patch.Label.OnSizeRequest
-  isSpec: "True"
-  fullName: Forms9Patch.Label.OnSizeRequest
-  nameWithType: Label.OnSizeRequest
 - uid: Forms9Patch.Label.op_Explicit(Forms9Patch.Label)~System.String
   name: Explicit(Label to String)
   href: api/Forms9Patch.Label.html#Forms9Patch_Label_op_Explicit_Forms9Patch_Label__System_String
@@ -10510,6 +10535,25 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.IntraSegmentSpacingProperty
   fullName: Forms9Patch.SegmentedControl.IntraSegmentSpacingProperty
   nameWithType: SegmentedControl.IntraSegmentSpacingProperty
+- uid: Forms9Patch.SegmentedControl.IsClipped
+  name: IsClipped
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IsClipped
+  commentId: P:Forms9Patch.SegmentedControl.IsClipped
+  fullName: Forms9Patch.SegmentedControl.IsClipped
+  nameWithType: SegmentedControl.IsClipped
+- uid: Forms9Patch.SegmentedControl.IsClipped*
+  name: IsClipped
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IsClipped_
+  commentId: Overload:Forms9Patch.SegmentedControl.IsClipped
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.IsClipped
+  nameWithType: SegmentedControl.IsClipped
+- uid: Forms9Patch.SegmentedControl.IsClippedProperty
+  name: IsClippedProperty
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IsClippedProperty
+  commentId: F:Forms9Patch.SegmentedControl.IsClippedProperty
+  fullName: Forms9Patch.SegmentedControl.IsClippedProperty
+  nameWithType: SegmentedControl.IsClippedProperty
 - uid: Forms9Patch.SegmentedControl.IsIndexSelected(System.Int32)
   name: IsIndexSelected(Int32)
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IsIndexSelected_System_Int32_
@@ -10822,25 +10866,6 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.SeparatorWidthProperty
   fullName: Forms9Patch.SegmentedControl.SeparatorWidthProperty
   nameWithType: SegmentedControl.SeparatorWidthProperty
-- uid: Forms9Patch.SegmentedControl.SizeSegmentFontsEqually
-  name: SizeSegmentFontsEqually
-  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SizeSegmentFontsEqually
-  commentId: P:Forms9Patch.SegmentedControl.SizeSegmentFontsEqually
-  fullName: Forms9Patch.SegmentedControl.SizeSegmentFontsEqually
-  nameWithType: SegmentedControl.SizeSegmentFontsEqually
-- uid: Forms9Patch.SegmentedControl.SizeSegmentFontsEqually*
-  name: SizeSegmentFontsEqually
-  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SizeSegmentFontsEqually_
-  commentId: Overload:Forms9Patch.SegmentedControl.SizeSegmentFontsEqually
-  isSpec: "True"
-  fullName: Forms9Patch.SegmentedControl.SizeSegmentFontsEqually
-  nameWithType: SegmentedControl.SizeSegmentFontsEqually
-- uid: Forms9Patch.SegmentedControl.SizeSegmentFontsEquallyProperty
-  name: SizeSegmentFontsEquallyProperty
-  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SizeSegmentFontsEquallyProperty
-  commentId: F:Forms9Patch.SegmentedControl.SizeSegmentFontsEquallyProperty
-  fullName: Forms9Patch.SegmentedControl.SizeSegmentFontsEquallyProperty
-  nameWithType: SegmentedControl.SizeSegmentFontsEquallyProperty
 - uid: Forms9Patch.SegmentedControl.StickyBehavior
   name: StickyBehavior
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_StickyBehavior
@@ -10860,6 +10885,25 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.StickyBehaviorProperty
   fullName: Forms9Patch.SegmentedControl.StickyBehaviorProperty
   nameWithType: SegmentedControl.StickyBehaviorProperty
+- uid: Forms9Patch.SegmentedControl.SyncSegmentFontSizes
+  name: SyncSegmentFontSizes
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SyncSegmentFontSizes
+  commentId: P:Forms9Patch.SegmentedControl.SyncSegmentFontSizes
+  fullName: Forms9Patch.SegmentedControl.SyncSegmentFontSizes
+  nameWithType: SegmentedControl.SyncSegmentFontSizes
+- uid: Forms9Patch.SegmentedControl.SyncSegmentFontSizes*
+  name: SyncSegmentFontSizes
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SyncSegmentFontSizes_
+  commentId: Overload:Forms9Patch.SegmentedControl.SyncSegmentFontSizes
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.SyncSegmentFontSizes
+  nameWithType: SegmentedControl.SyncSegmentFontSizes
+- uid: Forms9Patch.SegmentedControl.SyncSegmentFontSizesProperty
+  name: SyncSegmentFontSizesProperty
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_SyncSegmentFontSizesProperty
+  commentId: F:Forms9Patch.SegmentedControl.SyncSegmentFontSizesProperty
+  fullName: Forms9Patch.SegmentedControl.SyncSegmentFontSizesProperty
+  nameWithType: SegmentedControl.SyncSegmentFontSizesProperty
 - uid: Forms9Patch.SegmentedControl.TapIndex(System.Int32)
   name: TapIndex(Int32)
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_TapIndex_System_Int32_
@@ -15652,38 +15696,6 @@ references:
   commentId: N:P42.Utils
   fullName: P42.Utils
   nameWithType: P42.Utils
-- uid: P42.Utils.AnalyticsStringExtensions
-  name: AnalyticsStringExtensions
-  href: api/P42.Utils.AnalyticsStringExtensions.html
-  commentId: T:P42.Utils.AnalyticsStringExtensions
-  fullName: P42.Utils.AnalyticsStringExtensions
-  nameWithType: AnalyticsStringExtensions
-- uid: P42.Utils.AnalyticsStringExtensions.ParameterPrepend(System.String,System.String)
-  name: ParameterPrepend(String, String)
-  href: api/P42.Utils.AnalyticsStringExtensions.html#P42_Utils_AnalyticsStringExtensions_ParameterPrepend_System_String_System_String_
-  commentId: M:P42.Utils.AnalyticsStringExtensions.ParameterPrepend(System.String,System.String)
-  fullName: P42.Utils.AnalyticsStringExtensions.ParameterPrepend(System.String, System.String)
-  nameWithType: AnalyticsStringExtensions.ParameterPrepend(String, String)
-- uid: P42.Utils.AnalyticsStringExtensions.ParameterPrepend*
-  name: ParameterPrepend
-  href: api/P42.Utils.AnalyticsStringExtensions.html#P42_Utils_AnalyticsStringExtensions_ParameterPrepend_
-  commentId: Overload:P42.Utils.AnalyticsStringExtensions.ParameterPrepend
-  isSpec: "True"
-  fullName: P42.Utils.AnalyticsStringExtensions.ParameterPrepend
-  nameWithType: AnalyticsStringExtensions.ParameterPrepend
-- uid: P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter(System.String)
-  name: ToAnalyticsEventOrParameter(String)
-  href: api/P42.Utils.AnalyticsStringExtensions.html#P42_Utils_AnalyticsStringExtensions_ToAnalyticsEventOrParameter_System_String_
-  commentId: M:P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter(System.String)
-  fullName: P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter(System.String)
-  nameWithType: AnalyticsStringExtensions.ToAnalyticsEventOrParameter(String)
-- uid: P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter*
-  name: ToAnalyticsEventOrParameter
-  href: api/P42.Utils.AnalyticsStringExtensions.html#P42_Utils_AnalyticsStringExtensions_ToAnalyticsEventOrParameter_
-  commentId: Overload:P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter
-  isSpec: "True"
-  fullName: P42.Utils.AnalyticsStringExtensions.ToAnalyticsEventOrParameter
-  nameWithType: AnalyticsStringExtensions.ToAnalyticsEventOrParameter
 - uid: P42.Utils.ApplicationStorageExtensions
   name: ApplicationStorageExtensions
   href: api/P42.Utils.ApplicationStorageExtensions.html
@@ -16358,6 +16370,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.Environment.Init
   nameWithType: Environment.Init
+- uid: P42.Utils.Environment.IsHeadlessTest
+  name: IsHeadlessTest
+  href: api/P42.Utils.Environment.html#P42_Utils_Environment_IsHeadlessTest
+  commentId: P:P42.Utils.Environment.IsHeadlessTest
+  fullName: P42.Utils.Environment.IsHeadlessTest
+  nameWithType: Environment.IsHeadlessTest
+- uid: P42.Utils.Environment.IsHeadlessTest*
+  name: IsHeadlessTest
+  href: api/P42.Utils.Environment.html#P42_Utils_Environment_IsHeadlessTest_
+  commentId: Overload:P42.Utils.Environment.IsHeadlessTest
+  isSpec: "True"
+  fullName: P42.Utils.Environment.IsHeadlessTest
+  nameWithType: Environment.IsHeadlessTest
 - uid: P42.Utils.Environment.IsOnMainThread
   name: IsOnMainThread
   href: api/P42.Utils.Environment.html#P42_Utils_Environment_IsOnMainThread
@@ -16446,58 +16471,6 @@ references:
   fullName.vb: P42.Utils.EventArgs(Of T).Value
   nameWithType: EventArgs<T>.Value
   nameWithType.vb: EventArgs(Of T).Value
-- uid: P42.Utils.EventLogEntry
-  name: EventLogEntry
-  href: api/P42.Utils.EventLogEntry.html
-  commentId: T:P42.Utils.EventLogEntry
-  fullName: P42.Utils.EventLogEntry
-  nameWithType: EventLogEntry
-- uid: P42.Utils.EventLogEntry.#ctor(System.String,P42.Utils.LogEventParameterValue)
-  name: EventLogEntry(String, LogEventParameterValue)
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry__ctor_System_String_P42_Utils_LogEventParameterValue_
-  commentId: M:P42.Utils.EventLogEntry.#ctor(System.String,P42.Utils.LogEventParameterValue)
-  fullName: P42.Utils.EventLogEntry.EventLogEntry(System.String, P42.Utils.LogEventParameterValue)
-  nameWithType: EventLogEntry.EventLogEntry(String, LogEventParameterValue)
-- uid: P42.Utils.EventLogEntry.#ctor(System.String,System.Collections.Generic.List{P42.Utils.EventLogEntry})
-  name: EventLogEntry(String, List<EventLogEntry>)
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry__ctor_System_String_System_Collections_Generic_List_P42_Utils_EventLogEntry__
-  commentId: M:P42.Utils.EventLogEntry.#ctor(System.String,System.Collections.Generic.List{P42.Utils.EventLogEntry})
-  name.vb: EventLogEntry(String, List(Of EventLogEntry))
-  fullName: P42.Utils.EventLogEntry.EventLogEntry(System.String, System.Collections.Generic.List<P42.Utils.EventLogEntry>)
-  fullName.vb: P42.Utils.EventLogEntry.EventLogEntry(System.String, System.Collections.Generic.List(Of P42.Utils.EventLogEntry))
-  nameWithType: EventLogEntry.EventLogEntry(String, List<EventLogEntry>)
-  nameWithType.vb: EventLogEntry.EventLogEntry(String, List(Of EventLogEntry))
-- uid: P42.Utils.EventLogEntry.#ctor*
-  name: EventLogEntry
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry__ctor_
-  commentId: Overload:P42.Utils.EventLogEntry.#ctor
-  isSpec: "True"
-  fullName: P42.Utils.EventLogEntry.EventLogEntry
-  nameWithType: EventLogEntry.EventLogEntry
-- uid: P42.Utils.EventLogEntry.Entries
-  name: Entries
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry_Entries
-  commentId: F:P42.Utils.EventLogEntry.Entries
-  fullName: P42.Utils.EventLogEntry.Entries
-  nameWithType: EventLogEntry.Entries
-- uid: P42.Utils.EventLogEntry.EntryType
-  name: EntryType
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry_EntryType
-  commentId: F:P42.Utils.EventLogEntry.EntryType
-  fullName: P42.Utils.EventLogEntry.EntryType
-  nameWithType: EventLogEntry.EntryType
-- uid: P42.Utils.EventLogEntry.EventName
-  name: EventName
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry_EventName
-  commentId: F:P42.Utils.EventLogEntry.EventName
-  fullName: P42.Utils.EventLogEntry.EventName
-  nameWithType: EventLogEntry.EventName
-- uid: P42.Utils.EventLogEntry.Parameter
-  name: Parameter
-  href: api/P42.Utils.EventLogEntry.html#P42_Utils_EventLogEntry_Parameter
-  commentId: F:P42.Utils.EventLogEntry.Parameter
-  fullName: P42.Utils.EventLogEntry.Parameter
-  nameWithType: EventLogEntry.Parameter
 - uid: P42.Utils.FileCache
   name: FileCache
   href: api/P42.Utils.FileCache.html
@@ -17817,225 +17790,6 @@ references:
   fullName.vb: P42.Utils.KeyedStack(Of K, V).Push
   nameWithType: KeyedStack<K, V>.Push
   nameWithType.vb: KeyedStack(Of K, V).Push
-- uid: P42.Utils.LogEventParameterValue
-  name: LogEventParameterValue
-  href: api/P42.Utils.LogEventParameterValue.html
-  commentId: T:P42.Utils.LogEventParameterValue
-  fullName: P42.Utils.LogEventParameterValue
-  nameWithType: LogEventParameterValue
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Boolean)
-  name: LogEventParameterValue(Boolean)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Boolean_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Boolean)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Boolean)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Boolean)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Char)
-  name: LogEventParameterValue(Char)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Char_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Char)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Char)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Char)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Double)
-  name: LogEventParameterValue(Double)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Double_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Double)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Double)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Double)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Int16)
-  name: LogEventParameterValue(Int16)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Int16_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Int16)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Int16)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Int16)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Int32)
-  name: LogEventParameterValue(Int32)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Int32_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Int32)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Int32)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Int32)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Int64)
-  name: LogEventParameterValue(Int64)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Int64_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Int64)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Int64)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Int64)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.Single)
-  name: LogEventParameterValue(Single)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_Single_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.Single)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.Single)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(Single)
-- uid: P42.Utils.LogEventParameterValue.#ctor(System.String)
-  name: LogEventParameterValue(String)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_System_String_
-  commentId: M:P42.Utils.LogEventParameterValue.#ctor(System.String)
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue(System.String)
-  nameWithType: LogEventParameterValue.LogEventParameterValue(String)
-- uid: P42.Utils.LogEventParameterValue.#ctor*
-  name: LogEventParameterValue
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue__ctor_
-  commentId: Overload:P42.Utils.LogEventParameterValue.#ctor
-  isSpec: "True"
-  fullName: P42.Utils.LogEventParameterValue.LogEventParameterValue
-  nameWithType: LogEventParameterValue.LogEventParameterValue
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Boolean
-  name: Implicit(LogEventParameterValue to Boolean)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Boolean
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Boolean
-  name.vb: Widening(LogEventParameterValue to Boolean)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Boolean)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Boolean)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Boolean)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Boolean)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Char
-  name: Implicit(LogEventParameterValue to Char)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Char
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Char
-  name.vb: Widening(LogEventParameterValue to Char)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Char)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Char)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Char)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Char)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Double
-  name: Implicit(LogEventParameterValue to Double)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Double
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Double
-  name.vb: Widening(LogEventParameterValue to Double)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Double)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Double)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Double)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Double)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int16
-  name: Implicit(LogEventParameterValue to Int16)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Int16
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int16
-  name.vb: Widening(LogEventParameterValue to Int16)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Int16)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Int16)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Int16)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Int16)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int32
-  name: Implicit(LogEventParameterValue to Int32)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Int32
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int32
-  name.vb: Widening(LogEventParameterValue to Int32)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Int32)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Int32)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Int32)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Int32)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int64
-  name: Implicit(LogEventParameterValue to Int64)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Int64
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Int64
-  name.vb: Widening(LogEventParameterValue to Int64)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Int64)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Int64)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Int64)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Int64)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Single
-  name: Implicit(LogEventParameterValue to Single)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_P42_Utils_LogEventParameterValue__System_Single
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(P42.Utils.LogEventParameterValue)~System.Single
-  name.vb: Widening(LogEventParameterValue to Single)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(P42.Utils.LogEventParameterValue to System.Single)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(P42.Utils.LogEventParameterValue to System.Single)
-  nameWithType: LogEventParameterValue.Implicit(LogEventParameterValue to Single)
-  nameWithType.vb: LogEventParameterValue.Widening(LogEventParameterValue to Single)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Boolean)~P42.Utils.LogEventParameterValue
-  name: Implicit(Boolean to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Boolean__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Boolean)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Boolean to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Boolean to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Boolean to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Boolean to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Boolean to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Char)~P42.Utils.LogEventParameterValue
-  name: Implicit(Char to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Char__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Char)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Char to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Char to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Char to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Char to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Char to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Double)~P42.Utils.LogEventParameterValue
-  name: Implicit(Double to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Double__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Double)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Double to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Double to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Double to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Double to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Double to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Int16)~P42.Utils.LogEventParameterValue
-  name: Implicit(Int16 to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Int16__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Int16)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Int16 to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Int16 to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Int16 to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Int16 to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Int16 to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Int32)~P42.Utils.LogEventParameterValue
-  name: Implicit(Int32 to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Int32__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Int32)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Int32 to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Int32 to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Int32 to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Int32 to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Int32 to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Int64)~P42.Utils.LogEventParameterValue
-  name: Implicit(Int64 to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Int64__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Int64)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Int64 to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Int64 to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Int64 to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Int64 to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Int64 to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.Single)~P42.Utils.LogEventParameterValue
-  name: Implicit(Single to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_Single__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.Single)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(Single to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.Single to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.Single to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(Single to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(Single to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit(System.String)~P42.Utils.LogEventParameterValue
-  name: Implicit(String to LogEventParameterValue)
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_System_String__P42_Utils_LogEventParameterValue
-  commentId: M:P42.Utils.LogEventParameterValue.op_Implicit(System.String)~P42.Utils.LogEventParameterValue
-  name.vb: Widening(String to LogEventParameterValue)
-  fullName: P42.Utils.LogEventParameterValue.Implicit(System.String to P42.Utils.LogEventParameterValue)
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening(System.String to P42.Utils.LogEventParameterValue)
-  nameWithType: LogEventParameterValue.Implicit(String to LogEventParameterValue)
-  nameWithType.vb: LogEventParameterValue.Widening(String to LogEventParameterValue)
-- uid: P42.Utils.LogEventParameterValue.op_Implicit*
-  name: Implicit
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_op_Implicit_
-  commentId: Overload:P42.Utils.LogEventParameterValue.op_Implicit
-  isSpec: "True"
-  name.vb: Widening
-  fullName: P42.Utils.LogEventParameterValue.Implicit
-  fullName.vb: P42.Utils.LogEventParameterValue.Widening
-  nameWithType: LogEventParameterValue.Implicit
-  nameWithType.vb: LogEventParameterValue.Widening
-- uid: P42.Utils.LogEventParameterValue.ToString
-  name: ToString()
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_ToString
-  commentId: M:P42.Utils.LogEventParameterValue.ToString
-  fullName: P42.Utils.LogEventParameterValue.ToString()
-  nameWithType: LogEventParameterValue.ToString()
-- uid: P42.Utils.LogEventParameterValue.ToString*
-  name: ToString
-  href: api/P42.Utils.LogEventParameterValue.html#P42_Utils_LogEventParameterValue_ToString_
-  commentId: Overload:P42.Utils.LogEventParameterValue.ToString
-  isSpec: "True"
-  fullName: P42.Utils.LogEventParameterValue.ToString
-  nameWithType: LogEventParameterValue.ToString
 - uid: P42.Utils.ReflectionExtensions
   name: ReflectionExtensions
   href: api/P42.Utils.ReflectionExtensions.html
