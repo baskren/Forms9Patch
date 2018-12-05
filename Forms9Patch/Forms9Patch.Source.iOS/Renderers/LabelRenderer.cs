@@ -18,6 +18,11 @@ namespace Forms9Patch.iOS
     public class LabelRenderer : ViewRenderer<Label, UILabel>
     {
 
+        static LabelRenderer()
+        {
+            Forms9Patch.Label.DefaultFontSize = UIFont.LabelFontSize;
+        }
+
         NSString ControlText;
         NSAttributedString ControlAttributedText;
         UIColor ControlTextColor;

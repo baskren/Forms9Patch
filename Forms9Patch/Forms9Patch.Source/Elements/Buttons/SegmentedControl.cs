@@ -644,6 +644,7 @@ namespace Forms9Patch
             Orientation = StackOrientation.Horizontal;
             _segments = new ObservableCollection<Segment>();
             _segments.CollectionChanged += OnCollectionChanged;
+            SizeChanged += (sender, e) => CheckForClippedSegments();
         }
 
         #endregion
@@ -1082,17 +1083,7 @@ namespace Forms9Patch
             }
             else if (e.PropertyName == Forms9Patch.Button.IsClippedProperty.PropertyName)
             {
-                foreach (var segment in Segments)
-                {
-                    if (segment._button.IsClipped)
-                    {
-                        IsClipped = true;
-                        //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=true");
-                        return;
-                    }
-                }
-                IsClipped = false;
-                //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=false");
+                CheckForClippedSegments();
                 return;
             }
         }
@@ -1296,6 +1287,22 @@ namespace Forms9Patch
 
 
         #region Event management
+        void CheckForClippedSegments()
+        {
+            foreach (var segment in Segments)
+            {
+                if (segment._button.IsClipped)
+                {
+                    IsClipped = true;
+                    //System.Diagnostics.Debug.WriteLine("CLIPPED: " + (segment._button.Text ?? segment._button.HtmlText));
+                    //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=true");
+                    return;
+                }
+            }
+            IsClipped = false;
+            //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=false");
+        }
+
         /// <summary>
         /// Occurs when one of the segments is tapped.
         /// </summary>

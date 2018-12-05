@@ -1014,11 +1014,15 @@ namespace Forms9Patch
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
 
-            _label.SizeChanged += OnLabelSizeChanged;
+            //_label.SizeChanged += OnLabelSizeChanged;
+
+            SizeChanged += OnSizeChanged;
 
             UpdateElements();
 
             _constructing = false;
+
+            //_label.PropertyChanged += OnLabelPropertyChanged;
         }
 
         /// <summary>
@@ -1442,21 +1446,13 @@ namespace Forms9Patch
 
 
         #region Change Handlers
-        private void OnIconLabelSizeChanged(object sender, EventArgs e)
-        {
-            CheckFit();
-        }
+        private void OnSizeChanged(object sender, EventArgs e) => CheckFit();
 
-        private void OnIconImageSizeChanged(object sender, EventArgs e)
-        {
-            CheckFit();
-        }
+        private void OnIconLabelSizeChanged(object sender, EventArgs e) => CheckFit();
 
-        private void OnLabelSizeChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            CheckFit();
-        }
+        private void OnIconImageSizeChanged(object sender, EventArgs e) => CheckFit();
+
+        private void OnLabelSizeChanged(object sender, EventArgs e) => CheckFit();
 
         void CheckFit()
         {
@@ -1475,8 +1471,16 @@ namespace Forms9Patch
 
                     if (child is Forms9Patch.Label label)
                     {
-                        var fontSize = label.FittedFontSize < 0 ? label.FontSize : label.FittedFontSize;
+                        var fontSize = label.SynchronizedFontSize;
+                        if (fontSize < 0)
+                            fontSize = label.FittedFontSize < 0
+                            ? label.FontSize < 0
+                                ? Label.DefaultFontSize
+                                : label.FontSize
+                            : label.FittedFontSize;
                         var size = label.SizeForWidthAndFontSize(Width, fontSize);
+                        if (_label.Text == "alpha")
+                            System.Diagnostics.Debug.WriteLine("\nWidth=[" + Width + "] fontSize=[" + fontSize + "]");
                         //if (child == _label && _label.Text == "BACKGROUND")
                         //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] fontSize=" + fontSize + " size=" + size);
                         elementWidths += size.Width;
@@ -1496,12 +1500,19 @@ namespace Forms9Patch
                     }
                     notFirst = true;
                 }
-                IsClipped = elementWidths - Width > 0.01 || elementHeights - Height > 0.01;
+                IsClipped = Orientation == StackOrientation.Horizontal ? elementWidths - Width > 0.01 : elementHeights - Height > 0.01;
                 if (IsClipped)
                 {
+                    if (child == _label && _label.Text == "alpha")
+                        System.Diagnostics.Debug.WriteLine("Clipped: [" + (Text ?? HtmlText) + "] elementWidths=[" + elementWidths + "] Width=[" + Width + "]");
                     //if (child == _label && _label.Text == "BACKGROUND")
                     //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] IsClipped by child: " + child.GetType());
                     break;
+                }
+                else
+                {
+                    if (child == _label && _label.Text == "alpha")
+                        System.Diagnostics.Debug.WriteLine("Not Clipped: [" + (Text ?? HtmlText) + "] elementWidths=[" + elementWidths + "] Width=[" + Width + "]");
                 }
             }
 
@@ -1534,7 +1545,10 @@ namespace Forms9Patch
             {
                 UpdateIconTint();
             }
-
+            else if (propertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName || propertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
+            {
+                CheckFit();
+            }
             //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
             //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
         }

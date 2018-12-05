@@ -56,6 +56,10 @@ namespace Forms9Patch
         }
         #endregion
 
+        #region Static Properties
+        public static double DefaultFontSize { get; internal set; }
+        #endregion
+
 
         #region Properties
 
