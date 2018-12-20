@@ -29,7 +29,7 @@ namespace Forms9Patch
             }
 
             base.OnBindingContextChanged();
-            Text = BindingContext?.ToString();
+            HtmlText = BindingContext?.ToString();
         }
     }
 }
