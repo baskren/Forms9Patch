@@ -510,11 +510,12 @@ namespace Forms9Patch
 
         public void RemoveAt(int index)
         {
-            var itemWrapper = _itemWrappers[index];
-            CommonRemove(_itemWrappers[index]);
-            itemWrapper.Index = -1;
-            _itemWrappers.RemoveAt(index);
-            //Reindex(index);
+            if (_itemWrappers[index] is ItemWrapper itemWrapper)
+            {
+                CommonRemove(itemWrapper);
+                itemWrapper.Index = -1;
+                _itemWrappers.RemoveAt(index);
+            }
         }
 
         public ItemWrapper this[int index]
@@ -616,10 +617,11 @@ namespace Forms9Patch
         {
             if (VisibilityTest == null || VisibilityTest(sourceObject))
             {
+                bool before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var itemWrapper = CreateItemWrapper(sourceObject);
                 Add(itemWrapper);
-                NotifySourceOfChanges = true;
+                NotifySourceOfChanges = before;
             }
             else
                 SubscribeToHiddenSourcePropertyChanged(sourceObject);
@@ -657,6 +659,7 @@ namespace Forms9Patch
         {
             if (VisibilityTest == null || VisibilityTest(sourceObject))
             {
+                bool before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var index = IndexFromSourceIndex(sourceIndex);
                 var itemWrapper = CreateItemWrapper(sourceObject);
@@ -664,7 +667,7 @@ namespace Forms9Patch
                     Insert(index, itemWrapper);
                 else
                     Add(itemWrapper);
-                NotifySourceOfChanges = true;
+                NotifySourceOfChanges = before;
             }
             else
                 SubscribeToHiddenSourcePropertyChanged(sourceObject);
@@ -675,9 +678,10 @@ namespace Forms9Patch
             var index = IndexFromSourceIndex(sourceIndex);
             if (index > -1)
             {
+                bool before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 RemoveAt(index);
-                NotifySourceOfChanges = true;
+                NotifySourceOfChanges = before;
             }
         }
 
@@ -687,10 +691,11 @@ namespace Forms9Patch
             if (VisibilityTest == null || VisibilityTest(newSourceObject) && VisibilityTest(oldSourceObject))
             {
                 // replace object
+                bool before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var itemWrapper = CreateItemWrapper(newSourceObject);
                 this[index] = itemWrapper;
-                NotifySourceOfChanges = true;
+                NotifySourceOfChanges = before;
             }
             else if (VisibilityTest(oldSourceObject))
             {
@@ -750,33 +755,37 @@ namespace Forms9Patch
 
         void RefreshVisibility()
         {
-            NotifySourceOfChanges = false;
-            int index = 0;
-            int sourceIndex = 0;
-            foreach (var sourceItem in SourceChildren)
+            if (VisibilityTest != null)
             {
-                if (VisibilityTest != null && VisibilityTest(sourceItem))
+                bool before = NotifySourceOfChanges;
+                NotifySourceOfChanges = false;
+                int index = 0;
+                int sourceIndex = 0;
+                foreach (var sourceItem in SourceChildren)
                 {
-                    if (index >= _itemWrappers.Count || _itemWrappers[index].Source != sourceItem)
+                    if (VisibilityTest(sourceItem))
                     {
-                        UnsubscribeToHiddenSourcePropertyChanged(sourceItem);
-                        InsertSourceObject(sourceIndex, sourceItem);
+                        if (index >= _itemWrappers.Count || _itemWrappers[index].Source != sourceItem)
+                        {
+                            UnsubscribeToHiddenSourcePropertyChanged(sourceItem);
+                            InsertSourceObject(sourceIndex, sourceItem);
+                        }
+                        index++;
                     }
-                    index++;
-                }
-                else
-                {
-                    if (index < _itemWrappers.Count && _itemWrappers[index].Source == sourceItem)
+                    else
                     {
-                        RemoveAt(index);
-                        SubscribeToHiddenSourcePropertyChanged(sourceItem);
+                        if (index < _itemWrappers.Count && _itemWrappers[index].Source == sourceItem)
+                        {
+                            RemoveAt(index);
+                            SubscribeToHiddenSourcePropertyChanged(sourceItem);
+                        }
                     }
+                    sourceIndex++;
                 }
-                sourceIndex++;
+                if (index != _itemWrappers.Count)
+                    throw new InvalidDataContractException("should have iterated through all visible sourceItems and itemWrappers");
+                NotifySourceOfChanges = before;
             }
-            NotifySourceOfChanges = true;
-            if (index != _itemWrappers.Count)
-                throw new InvalidDataContractException("should have iterated through all visible sourceItems and itemWrappers");
         }
 
         #endregion
@@ -1366,6 +1375,7 @@ namespace Forms9Patch
         {
             if (IgnoreSourceChanges)
                 return;
+            bool before = NotifySourceOfChanges;
             NotifySourceOfChanges = false;
             switch (e.Action)
             {
@@ -1415,7 +1425,6 @@ namespace Forms9Patch
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
-                    NotifySourceOfChanges = false;
                     Clear();
                     Source = sender;
                     SourceChildren = string.IsNullOrWhiteSpace(childrenPropertyName) ? sender as IEnumerable : sender.GetPropertyValue(childrenPropertyName) as IEnumerable;
@@ -1425,10 +1434,9 @@ namespace Forms9Patch
                     }
                     foreach (var obj in SourceChildren)
                         AddSourceObject(obj);
-                    NotifySourceOfChanges = true;
                     break;
             }
-            NotifySourceOfChanges = true;
+            NotifySourceOfChanges = before;
         }
         #endregion
 
