@@ -38,7 +38,7 @@ namespace Forms9Patch.UWP
 
         private void OnEffectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "StepSize" && _stepSizeEffect!=null && Control is Windows.UI.Xaml.Controls.Slider slider)
+            if (e.PropertyName == nameof(Forms9Patch.SliderStepSizeEffect.StepSize) /*"StepSize"*/ && _stepSizeEffect != null && Control is Windows.UI.Xaml.Controls.Slider slider)
                 slider.StepFrequency = _stepSizeEffect.StepSize;
         }
 

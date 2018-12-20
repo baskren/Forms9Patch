@@ -135,7 +135,7 @@ namespace Forms9Patch
 
         static void OnApplicationPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "MainPage" && Application.Current.MainPage != null)
+            if (e.PropertyName == nameof(Xamarin.Forms.Application.MainPage) && Application.Current.MainPage != null)
                 _asyncAwaitForMainPageSet?.Set(true);
         }
 

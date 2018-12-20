@@ -38,7 +38,7 @@ namespace Forms9Patch.Droid
 
         private void OnEffectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "StepSize" && _listener != null && _stepSizeEffect != null)
+            if (e.PropertyName == nameof(Forms9Patch.SliderStepSizeEffect.StepSize) /*"StepSize"*/ && _listener != null && _stepSizeEffect != null)
                 _listener.StepSize = _stepSizeEffect.StepSize;
         }
 

@@ -63,7 +63,7 @@ namespace Forms9Patch.UWP
 
         private void OnEffectPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Assembly")
+            if (e.PropertyName == nameof(Forms9Patch.EmbeddedResourceFontEffect.Assembly))// "Assembly")
                 UpdateFont();
         }
 
