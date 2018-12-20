@@ -839,7 +839,7 @@ namespace Forms9Patch
 
         private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == HeightRequestProperty.PropertyName || e.PropertyName == "CellHeight")
+            if (e.PropertyName == HeightRequestProperty.PropertyName || e.PropertyName == nameof(ICellHeight.CellHeight))
                 UpdateHeights();
         }
 
