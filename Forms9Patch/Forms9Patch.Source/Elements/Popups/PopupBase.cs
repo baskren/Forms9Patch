@@ -644,7 +644,7 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                System.Diagnostics.Debug.WriteLine("PUSH");
+                //System.Diagnostics.Debug.WriteLine("PUSH");
                 IsVisible = true;
                 //if (_isPushing || _isPushed)
                 //    return;
@@ -679,7 +679,7 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                System.Diagnostics.Debug.WriteLine("POP");
+                //System.Diagnostics.Debug.WriteLine("POP");
                 IsVisible = false;
                 //if (_isPoping || !_isPushed)
                 //    return;
@@ -738,8 +738,8 @@ namespace Forms9Patch
                 {
                     Pop();
                 }
-                else
-                    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
+                //else
+                //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
             }
             else if (propertyName == RetainProperty.PropertyName && !Retain)
                 Dispose();

@@ -58,8 +58,8 @@ namespace Forms9Patch
         {
             get
             {
-                if (IsHeader)
-                    System.Diagnostics.Debug.WriteLine("");
+                //if (IsHeader)
+                //    System.Diagnostics.Debug.WriteLine("");
                 if (BindingContext is IItemWrapper wrapper)
                 {
                     if (ContentView is ICellHeight contentView && contentView.CellHeight > -1)
@@ -231,7 +231,7 @@ namespace Forms9Patch
         #region Swipe Menu
         private void OnSwipe(object sender, SwipeEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Swiped:" + e);
+            //System.Diagnostics.Debug.WriteLine("Swiped:" + e);
         }
 
 
@@ -273,7 +273,8 @@ namespace Forms9Patch
                 return;
             }
 
-            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            if (Debug)
+                System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
             {
@@ -339,7 +340,8 @@ namespace Forms9Patch
             }
 
             ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
-            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            if (Debug)
+                System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             if (_panVt)
                 return;
             if (!_panVt && !_panHz)
@@ -768,9 +770,6 @@ namespace Forms9Patch
             if (BindingContext == null)
                 return;
 
-            //if (((IItemWrapper)BindingContext)?.Source.GetType().ToString() == "HeightsAndAreas.FrontageSegment")
-            //    System.Diagnostics.Debug.WriteLine("");
-
             if (BindingContext is ItemWrapper itemWrapper)
             {
                 itemWrapper.BaseCellView = this;
@@ -913,8 +912,8 @@ namespace Forms9Patch
         {
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (IsHeader)
-                    System.Diagnostics.Debug.WriteLine("");
+                //if (IsHeader)
+                //    System.Diagnostics.Debug.WriteLine("");
                 var rowHeight = RowHeight;
                 if (Math.Abs(RowDefinitions[0].Height.Value - rowHeight) > 0.1)
                     RowDefinitions[0] = new RowDefinition { Height = new GridLength(rowHeight, GridUnitType.Absolute) };
