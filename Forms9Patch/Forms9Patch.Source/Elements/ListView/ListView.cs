@@ -469,7 +469,7 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler ItemsSourceSet;
 
-
+        public event EventHandler Appeared;
         #endregion
 
         #region VisibilityEvents
@@ -536,7 +536,8 @@ namespace Forms9Patch
 
         readonly EnhancedListView _listView;
         //readonly Listener _listener;
-
+        bool _resetScrollToSelected;
+        DateTime _scrollResetAt;
         #endregion
 
 
@@ -652,6 +653,12 @@ namespace Forms9Patch
             }
 
             base.OnPropertyChanged(propertyName);
+
+            if (propertyName == "Renderer")
+            {
+                _resetScrollToSelected = true;
+                _scrollResetAt = DateTime.Now;
+            }
 
             if (BaseItemsSource != null)
             {
@@ -881,17 +888,33 @@ namespace Forms9Patch
         {
             if (e?.Item is ItemWrapper itemWrapper)
             {
+                //System.Diagnostics.Debug.WriteLine("APPEARING: " + itemWrapper.Source);
                 if (!_visibleItemWrappers.Contains(itemWrapper))
                     _visibleItemWrappers.Add(itemWrapper);
                 if (itemWrapper.Source != null)
                     ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(itemWrapper.Source));
             }
+            if (_resetScrollToSelected)
+            {
+                _resetScrollToSelected = false;
+                Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
+                {
+                    if (DateTime.Now - _scrollResetAt > TimeSpan.FromMilliseconds(100))
+                    {
+                        Appeared?.Invoke(this, EventArgs.Empty);
+                        return false;
+                    }
+                    return true;
+                });
+            }
+            _scrollResetAt = DateTime.Now;
         }
 
         void OnItemDisappearing(object sender, ItemVisibilityEventArgs e)
         {
             if (e?.Item is ItemWrapper itemWrapper)
             {
+                //System.Diagnostics.Debug.WriteLine("DISAPPEARING: " + itemWrapper.Source);
                 if (_visibleItemWrappers.Contains(itemWrapper))
                     _visibleItemWrappers.Remove(itemWrapper);
                 if (itemWrapper.Source != null)
@@ -1025,8 +1048,8 @@ namespace Forms9Patch
         {
             if (item == null)
                 return;
-            var f9pItem = BaseItemsSource.ItemWrapperForSource(item);
-            RemoveSelection(f9pItem, item);
+            if (BaseItemsSource?.ItemWrapperForSource(item) is ItemWrapper itemWrapper)
+                RemoveSelection(itemWrapper, item);
         }
 
         void AddSelectedItems(IList items)
@@ -1170,7 +1193,8 @@ namespace Forms9Patch
                 Update_listViewItemsSourceAction();
             else
                 Device.BeginInvokeOnMainThread(Update_listViewItemsSourceAction);
-
+            _resetScrollToSelected = true;
+            _scrollResetAt = DateTime.Now;
         }
 
         void Update_listViewItemsSourceAction()

@@ -159,6 +159,8 @@ namespace Forms9Patch
 
             SelectedItems = _listView.SelectedItems;
             Content = _listView;
+
+            _listView.Appeared += OnAppeared;
         }
         #endregion
 
@@ -188,14 +190,27 @@ namespace Forms9Patch
             e.Handled = true;
         }
 
-        public void TapItemAtPoint(Point p)
-        {
-            _listView.TapItemAtPoint(p);
-        }
+        /// <summary>
+        /// Programmatically Taps the item at point.
+        /// </summary>
+        /// <param name="p">P.</param>
+        public void TapItemAtPoint(Point p) => _listView.TapItemAtPoint(p);
+
         #endregion
 
 
         #region Property Change management
+
+        void OnAppeared(object sender, EventArgs e)
+        {
+            if (SelectedItem != null)
+                ScrollTo(SelectedItem);
+            else if (SelectedItems.Count > 0)
+                ScrollTo(SelectedItems[0]);
+        }
+
+
+
         /// <summary>
         /// Ons the property changed.
         /// </summary>
@@ -215,29 +230,46 @@ namespace Forms9Patch
                 _listView.ItemsSource = ItemsSource;
                 if (ItemsSource != null)
                     ScrollToIndex(Index);
+                else
+                {
+                    SelectedItem = null;
+                    SelectedItems.Clear();
+                    _listView.SelectedItem = null;
+                    _listView.SelectedItems.Clear();
+                }
             }
             else if (propertyName == HeightProperty.PropertyName || propertyName == RowHeightProperty.PropertyName)
             {
                 _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
                 _upperPadding.HeightRequest = (Height - RowHeight) / 2.0;
             }
-            else if (propertyName == IndexProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
+            else if (propertyName == IndexProperty.PropertyName && !_scrolling && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
                 ScrollToIndex(Index);
-            else if (propertyName == SelectedItemProperty.PropertyName && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
+            else if (propertyName == SelectedItemProperty.PropertyName && !_scrolling)
             {
-                var index = 0;
-                foreach (var item in ItemsSource)
-                {
-                    if (item == SelectedItem)
-                        ScrollToIndex(index);
-                    index++;
-                }
-
+                //System.Diagnostics.Debug.WriteLine("BasePicker SELECTED ITEM: " + SelectedItem);
+                if ((GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping) && ItemsSource != null)
+                    ScrollTo(SelectedItem);
             }
             else if (propertyName == RowHeightProperty.PropertyName)
                 _listView.RowHeight = RowHeight;
             else if (propertyName == GroupToggleBehaviorProperty.PropertyName)
                 _listView.GroupToggleBehavior = GroupToggleBehavior;
+        }
+
+        public virtual void ScrollTo(object item)
+        {
+            if (!P42.Utils.Environment.IsOnMainThread)
+            {
+                Device.BeginInvokeOnMainThread(() => ScrollTo(item));
+                return;
+            }
+
+            if (ItemsSource == null || item == null)
+                return;
+
+            _listView.SelectedItem = item;
+            _listView.ScrollTo(item, ScrollToPosition.Center);
         }
 
         /// <summary>
@@ -286,20 +318,9 @@ namespace Forms9Patch
                     indexItem = firstItem;
                 if (index > count - 1)
                     indexItem = lastItem;
-                if (indexItem != null)
-                {
-                    if (!_scrolling || force)
-                        _listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
-                    if (SelectBy == SelectBy.Position)
-                    {
-                        Index = index;
-                        var selectedF9PItem = _listView.BaseItemsSource[index] as ItemWrapper;
-                        if (selectedF9PItem != null)
-                            SelectedItem = selectedF9PItem.Source;
-                    }
-                }
+                if (indexItem != null && (!_scrolling || force))
+                    _listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
             }
-
         }
         #endregion
 
@@ -310,18 +331,26 @@ namespace Forms9Patch
             _scrolling = true;
             var deepDataSet = _listView.TwoDeepDataSetAtPoint(Bounds.Center);
             if (deepDataSet?.Index != null && deepDataSet.Index.Length == 1)
+            {
                 Index = deepDataSet.Index[0];
+                SelectedItem = ItemsSource[Index];
+            }
         }
 
         bool _scrollCompleting;
         void OnScrolled(object sender, EventArgs e)
         {
-            if (SelectBy == SelectBy.Position)
+            if (SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
+            {
+                SelectedItem = ItemsSource[Index];
                 ScrollToIndex(Index, true);
+            }
             _scrolling = false;
         }
 
         #endregion
+
+
 
     }
 
