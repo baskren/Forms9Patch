@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -268,8 +269,13 @@ namespace Forms9Patch
             if (ItemsSource == null || item == null)
                 return;
 
-            _listView.SelectedItem = item;
-            _listView.ScrollTo(item, ScrollToPosition.Center);
+            foreach (var i in _listView.ItemsSource)
+                if (i.Equals(item))
+                {
+                    _listView.SelectedItem = item;
+                    _listView.ScrollTo(item, ScrollToPosition.Center);
+                    break;
+                }
         }
 
         /// <summary>
