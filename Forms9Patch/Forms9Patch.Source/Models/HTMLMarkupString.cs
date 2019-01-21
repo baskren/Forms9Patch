@@ -133,7 +133,7 @@ namespace Forms9Patch
                                 tag.Attributes.Add(attribute);
                             }
                             tags.Add(tag);
-                            inPreSpan |= tagName == "pre";
+                            inPreSpan = inPreSpan || tagName == "pre";
                         }
                     }
                     i = j;

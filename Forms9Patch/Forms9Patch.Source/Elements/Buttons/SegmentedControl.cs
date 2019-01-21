@@ -166,11 +166,29 @@ namespace Forms9Patch
             get { return _segments; }
             set
             {
+                _updatingSegments = true;
                 _segments.Clear();
                 if (value != null)
                 {
                     foreach (var segment in value)
                         _segments.Add(segment);
+                }
+                _updatingSegments = false;
+            }
+        }
+
+        int _updatingCount;
+        bool _updatingSegments
+        {
+            get => _updatingCount > 0;
+            set
+            {
+                _updatingCount += value ? 1 : -1;
+                if (_updatingCount <= 0)
+                {
+                    _updatingCount = 0;
+                    UpdateChildrenPadding();
+                    InvalidateLayout();
                 }
             }
         }
@@ -259,6 +277,15 @@ namespace Forms9Patch
             set => SetValue(FontFamilyProperty, value);
         }
         #endregion
+
+        #region IconFontFamiliy property
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.IconFontFamiliy", typeof(string), typeof(SegmentedControl), default(string));
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion IconFontFamiliy property
 
         #region BackgroundColor
         /// <summary>
@@ -644,7 +671,14 @@ namespace Forms9Patch
             Orientation = StackOrientation.Horizontal;
             _segments = new ObservableCollection<Segment>();
             _segments.CollectionChanged += OnCollectionChanged;
-            SizeChanged += (sender, e) => CheckForClippedSegments();
+            SizeChanged += (sender, e) =>
+            {
+                // This should not be necessary because the segments will have already been layed out again, driving any IsClipped setting;
+                //System.Diagnostics.Debug.WriteLine("SegmentedControl.SizeChanged ENTER");
+                //IsClipped = CheckIsClipped();
+                //System.Diagnostics.Debug.WriteLine("SegmentedControl.SizeChanged EXIT");
+                // rather ...
+            };
         }
 
         #endregion
@@ -701,6 +735,7 @@ namespace Forms9Patch
             button.OutlineRadius = OutlineRadius;
             button.OutlineWidth = OutlineWidth;
             button.FontFamily = FontFamily;
+            button.IconFontFamily = IconFontFamily;
             button.FontSize = FontSize;
             button.HasShadow = HasShadow;
             button.ExtendedElementShapeOrientation = Orientation;
@@ -771,8 +806,11 @@ namespace Forms9Patch
             {
                 ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
-            UpdateChildrenPadding();
-            InvalidateLayout();
+            if (!_updatingSegments)
+            {
+                UpdateChildrenPadding();
+                InvalidateLayout();
+            }
         }
 
         void InsertSegment(int index, Segment s)
@@ -996,6 +1034,9 @@ namespace Forms9Patch
             else if (propertyName == FontFamilyProperty.PropertyName)
                 foreach (SegmentButton button in Children)
                     button.FontFamily = FontFamily;
+            else if (propertyName == IconFontFamilyProperty.PropertyName)
+                foreach (SegmentButton button in Children)
+                    button.IconFontFamily = FontFamily;
             else if (propertyName == FontSizeProperty.PropertyName)
                 foreach (SegmentButton button in Children)
                     button.FontSize = FontSize;
@@ -1069,7 +1110,7 @@ namespace Forms9Patch
                                 eseg = seg;
                             }
                         }
-                        eseg.IsSelected |= enabled == 1;
+                        eseg.IsSelected = eseg.IsSelected || enabled == 1;
                     }
                 }
                 /*
@@ -1083,7 +1124,10 @@ namespace Forms9Patch
             }
             else if (e.PropertyName == Forms9Patch.Button.IsClippedProperty.PropertyName)
             {
-                CheckForClippedSegments();
+                if (button.IsClipped)
+                    IsClipped = true;
+                else
+                    IsClipped = CheckIsClipped();
                 return;
             }
         }
@@ -1111,12 +1155,12 @@ namespace Forms9Patch
                          var minFittedFontSize = double.MaxValue;
                          var maxSyncFontSize = double.MinValue;
                          var minSyncFontSize = double.MaxValue;
-                         bool debug = false; // (_segments[0]._button.Text == "BACKGROUND" || _segments[0]._button.Text == "H1");
+                         //bool debug = false; // (_segments[0]._button.Text == "BACKGROUND" || _segments[0]._button.Text == "H1");
                          foreach (var segment in _segments)
                          {
                              var segmentFittedFontSize = segment._button.FittedFontSize;
-                             if (debug)
-                                 System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment._button.LabelInstanceId + "] segmentFittedFontSize=[" + segmentFittedFontSize + "] segmentSyncFontSize=[" + segment._button.SynchronizedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
+                             //if (debug)
+                             //    System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment._button.LabelInstanceId + "] segmentFittedFontSize=[" + segmentFittedFontSize + "] segmentSyncFontSize=[" + segment._button.SynchronizedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
 
                              if (segmentFittedFontSize < minFittedFontSize && segmentFittedFontSize > 0)
                                  minFittedFontSize = segment._button.FittedFontSize;
@@ -1129,8 +1173,8 @@ namespace Forms9Patch
                              if (segmentSyncFontSize > maxSyncFontSize)
                                  maxSyncFontSize = segmentSyncFontSize;
                          }
-                         if (debug)
-                             System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "] maxSync=[" + maxSyncFontSize + "] minSync=[" + minSyncFontSize + "] maxOpt=[" + maxFittedFontSize + "] minOpt=[" + minFittedFontSize + "]");
+                         //if (debug)
+                         //    System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "] maxSync=[" + maxSyncFontSize + "] minSync=[" + minSyncFontSize + "] maxOpt=[" + maxFittedFontSize + "] minOpt=[" + minFittedFontSize + "]");
 
                          if (minFittedFontSize >= double.MaxValue / 3)
                              minFittedFontSize = -1;
@@ -1138,8 +1182,8 @@ namespace Forms9Patch
                          foreach (var segment in _segments)
                          {
                              ((ILabel)segment._button).SynchronizedFontSize = minFittedFontSize;
-                             if (debug)
-                                 System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment._button.LabelInstanceId + "] SynchronizedFontSize=[" + minFittedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
+                             // if (debug)
+                             //     System.Diagnostics.Debug.WriteLine("\t[" + iteration + "][" + InstanceId + "][" + segment._button.LabelInstanceId + "] SynchronizedFontSize=[" + minFittedFontSize + "] txt=[" + (segment.Text ?? segment.HtmlText) + "]");
                          }
                          _waitingForThingsToCalmDown = false;
                          return false;
@@ -1217,6 +1261,15 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            if (!_updatingSegments)
+            {
+                LayoutFunction(x, y, width, height, (view, segmentRect) =>
+                {
+                    LayoutChildIntoBoundingRegion(view, segmentRect);
+                    return false;
+                });
+            }
+            /*
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => LayoutChildren(x, y, width, height));
@@ -1280,27 +1333,121 @@ namespace Forms9Patch
                     }
                 }
             }
+            */
         }
 
+        internal bool LayoutFunction(double x, double y, double width, double height, Func<View, Rectangle, bool> layoutAction)
+        {
+            var shadowPadding = new Thickness(0);
+            if (HasShadow && BackgroundColor.A > 0)
+                shadowPadding = ShapeBase.ShadowPadding(this);
 
+            var hz = Orientation == StackOrientation.Horizontal;
+            var vt = !hz;
+            var newWidth = width - shadowPadding.HorizontalThickness;
+            var newHeight = height - shadowPadding.VerticalThickness;
+
+
+            int count = Children.Count;
+
+            if (count > 0)
+            {
+
+                x = Math.Round(x);
+                y = Math.Round(y);
+
+                var outlineWidth = OutlineWidth;// / Display.Scale;
+                double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
+                double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
+                double segmentWidth = hz ? xOffset : width;
+                double segmentHeight = vt ? yOffset : height;
+
+                for (int i = 0; i < count; i++)
+                {
+                    var view = Children[i];
+                    if (view.IsVisible)
+                    {
+                        double thisW, thisH;
+                        if (i == 0)
+                        {
+                            thisW = segmentWidth + (hz ? shadowPadding.Left : 0);
+                            thisH = segmentHeight + (vt ? shadowPadding.Top : 0);
+                        }
+                        else if (i == count - 1)
+                        {
+                            thisW = hz ? width - x : segmentWidth;
+                            thisH = vt ? height - y : segmentHeight;
+                        }
+                        else
+                        {
+                            thisW = segmentWidth;
+                            thisH = segmentHeight;
+                        }
+
+                        if (x + thisW > width)
+                            thisW = width - x;
+                        if (y + thisH > height)
+                            thisH = height - y;
+                        var segmentRect = new Rectangle(x, y, thisW, thisH);
+                        //LayoutChildIntoBoundingRegion(view, segmentRect);
+                        //layoutAction.Invoke(segmentRect);
+
+                        //if (!P42.Utils.Environment.IsOnMainThread)
+                        //    Device.BeginInvokeOnMainThread(() => layoutAction.Invoke(view, segmentRect));
+                        //else
+                        if (layoutAction.Invoke(view, segmentRect))
+                            return true;
+
+                        x = (x + (hz ? thisW : 0));
+                        y = (y + (vt ? thisH : 0));
+                    }
+                }
+            }
+            return false;
+        }
         #endregion
 
 
         #region Event management
-        void CheckForClippedSegments()
+        /// <summary>
+        /// On demand, checks if any content of the control is clipped.
+        /// </summary>
+        /// <returns><c>true</c>, if is clipped, <c>false</c> otherwise.</returns>
+        public bool CheckIsClipped(double width = -1, double height = -1)
         {
+            var isClipped = false;
+
+            if (width < 1) width = Width;
+            if (height < 1) height = Height;
+
+            if (width < 1 || height < 1)
+                return isClipped;
+
+            /*
             foreach (var segment in Segments)
             {
-                if (segment._button.IsClipped)
+
+                //if (segment._button.IsClipped)
+                if (segment._button.CheckIsClipped())
                 {
                     IsClipped = true;
                     //System.Diagnostics.Debug.WriteLine("CLIPPED: " + (segment._button.Text ?? segment._button.HtmlText));
                     //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=true");
-                    return;
+                    return IsClipped;
                 }
             }
             IsClipped = false;
             //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=false");
+            return IsClipped;
+            */
+
+            var result = LayoutFunction(0, 0, width, height, (view, segmentRect) =>
+            {
+                if (view is Button button)
+                    return button.CheckIsClipped(segmentRect.Width, segmentRect.Height);
+                return false;
+            });
+            return result;
         }
 
         /// <summary>

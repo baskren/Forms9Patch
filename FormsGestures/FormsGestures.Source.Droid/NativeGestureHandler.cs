@@ -322,7 +322,7 @@ namespace FormsGestures.Droid
                 return false;
             lastEventHandled &= e.Action != MotionEventActions.Down;
             if (nativeDetector != null)
-                lastEventHandled |= nativeDetector.OnTouchEvent(e);
+                lastEventHandled = lastEventHandled || nativeDetector.OnTouchEvent(e);
             //if (!lastEventHandled) 
             //if (!lastEventHandled) {
             object scrollEnabled = Element.GetPropertyValue("ScrollEnabled");

@@ -860,7 +860,7 @@ namespace Forms9Patch
         void OnItemPanning(object sender, ItemWrapperPanEventArgs e)
         {
             _itemPanning = true;
-            _itemVerticalPanning |= Math.Abs(e.TotalDistance.Y) > 10;
+            _itemVerticalPanning = _itemVerticalPanning || Math.Abs(e.TotalDistance.Y) > 10;
             ScrollBy(-e.DeltaDistance.Y, false);
             if (_itemVerticalPanning)
                 Scrolling?.Invoke(this, EventArgs.Empty);
@@ -988,7 +988,7 @@ namespace Forms9Patch
         void AddSelection(ItemWrapper itemWrapper, object item)
         {
             _internalAddRemove = true;
-            if (itemWrapper == null || item == null)
+            if (itemWrapper is null || item is null)
                 throw new InvalidOperationException("Cannot select null item");
             itemWrapper.IsSelected = true;
             if (!_selectedItemWrappers.Contains(itemWrapper))
@@ -1003,7 +1003,7 @@ namespace Forms9Patch
 
         void AddSelectedItemWrapper(ItemWrapper itemWrapper)
         {
-            if (itemWrapper == null)
+            if (itemWrapper is null)
                 return;
             var sourceItem = itemWrapper.Source;
             AddSelection(itemWrapper, sourceItem);
@@ -1011,7 +1011,7 @@ namespace Forms9Patch
 
         void AddSelectedItem(object item)
         {
-            if (item == null)
+            if (item is null)
                 return;
             var itemWrapper = BaseItemsSource.ItemWrapperForSource(item);
             AddSelection(itemWrapper, item);
@@ -1026,7 +1026,8 @@ namespace Forms9Patch
                 if (_selectedItemWrappers.Contains(itemWrapper))
                     _selectedItemWrappers.Remove(itemWrapper);
             }
-            if (SelectedItem == item)
+            //if (SelectedItem == item)
+            if (SelectedItem.Equals(item))
             {
                 SelectedItem = null;
                 _selectedItemWrapper = null;
@@ -1038,7 +1039,7 @@ namespace Forms9Patch
 
         void RemoveSelectedItemWrapper(ItemWrapper itemWrapper)
         {
-            if (itemWrapper == null)
+            if (itemWrapper is null)
                 return;
             var sourceItem = itemWrapper.Source;
             RemoveSelection(itemWrapper, sourceItem);
@@ -1046,7 +1047,7 @@ namespace Forms9Patch
 
         void RemoveSelectedItem(object item)
         {
-            if (item == null)
+            if (item is null)
                 return;
             if (BaseItemsSource?.ItemWrapperForSource(item) is ItemWrapper itemWrapper)
                 RemoveSelection(itemWrapper, item);
@@ -1054,7 +1055,7 @@ namespace Forms9Patch
 
         void AddSelectedItems(IList items)
         {
-            if (items == null)
+            if (items is null)
                 return;
             foreach (var item in items)
                 AddSelectedItem(item);
@@ -1062,7 +1063,7 @@ namespace Forms9Patch
 
         void RemoveSelectedItems(IList items)
         {
-            if (items == null)
+            if (items is null)
                 return;
             for (int i = items.Count - 1; i >= 0; i--)
             {
@@ -1381,7 +1382,8 @@ namespace Forms9Patch
             itemWrapper = null;
             foreach (var item in sourceGroup)
             {
-                if (item == sourceItem)
+                //if (item == sourceItem)
+                if (item.Equals(sourceItem))
                 {
                     itemWrapper = BaseItemsSource.ItemWrapperForSource(item);
                     // we are in this function because item isn't in BaseItemsSource so we will now return so the recursion can find the item's parent that is in BaseItemsSource

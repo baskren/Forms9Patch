@@ -92,6 +92,15 @@ namespace Forms9Patch
         }
         #endregion IconText
 
+        #region IconFontFamily property
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.ButtonState.IconFontFamily", typeof(string), typeof(ButtonState), default(string));
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion IconFontFamily property
+
         #region TrailingIcon
         internal bool TrailingIconSet;
         /// <summary>

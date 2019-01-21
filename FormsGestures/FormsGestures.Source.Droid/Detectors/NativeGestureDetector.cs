@@ -63,15 +63,15 @@ namespace FormsGestures.Droid
 
                 if (e.Action == MotionEventActions.Down || e.Action == MotionEventActions.Pointer1Down || e.Action == MotionEventActions.Pointer2Down)
                 {
-                    handled |= _listener.OnMultiDown(e, _lastCoords);
+                    handled = handled || _listener.OnMultiDown(e, _lastCoords);
                 }
                 else if (e.Action == MotionEventActions.Move)
                 {
-                    handled |= _listener.OnMultiMove(e, _avgCoords);
+                    handled = handled || _listener.OnMultiMove(e, _avgCoords);
                 }
                 else if (e.Action == MotionEventActions.Cancel || e.Action == MotionEventActions.Up || e.Action == MotionEventActions.Pointer1Up || e.Action == MotionEventActions.Pointer2Up)
                 {
-                    handled |= _listener.OnMultiUp(e, _avgCoords);
+                    handled = handled || _listener.OnMultiUp(e, _avgCoords);
                     _lastCoords = null;
                 }
             }

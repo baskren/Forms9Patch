@@ -431,6 +431,15 @@ namespace Forms9Patch
         }
         #endregion HapticMode
 
+        #region IsLongPressEnabled property
+        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create("Forms9Patch.Button.IsLongPressEnabled", typeof(bool), typeof(Button), default(bool));
+        public bool IsLongPressEnabled
+        {
+            get => (bool)GetValue(IsLongPressEnabledProperty);
+            set => SetValue(IsLongPressEnabledProperty, value);
+        }
+        #endregion IsLongPressEnabled property
+
         #region IButtonState
 
         #region IconImage
@@ -463,6 +472,22 @@ namespace Forms9Patch
             set => SetValue(IconTextProperty, value);
         }
         #endregion IconText
+
+        #region IconFontFamily property
+        /// <summary>
+        /// Backing store for the icon font family property.
+        /// </summary>
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.Button.IconFontFamily", typeof(string), typeof(Button), default(string));
+        /// <summary>
+        /// Gets or sets the font family for the IconText
+        /// </summary>
+        /// <value>The icon font family.</value>
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion IconFontFamily property
 
         #region TrailingIcon
         /// <summary>
@@ -1010,7 +1035,9 @@ namespace Forms9Patch
             _noUpdate = false;
 
             _gestureListener = FormsGestures.Listener.For(this);
+            //UpdateGestureListeners();
             _gestureListener.Tapped += OnTapped;
+            _gestureListener.Down += OnDown;
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
 
@@ -1149,11 +1176,10 @@ namespace Forms9Patch
             OnTapped(this, new FormsGestures.TapEventArgs(null, null));
         }
 
-        void OnTapped(object sender, FormsGestures.TapEventArgs e)
+        void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            if (IsEnabled)
+            if (IsEnabled && IsVisible && !IsLongPressEnabled)
             {
-                KeyClicksService.Feedback(HapticEffect, HapticMode);
 
                 //Debug.WriteLine("tapped");
                 if (!(this is StateButton))
@@ -1173,19 +1199,48 @@ namespace Forms9Patch
                     }
                 }
                 SendTapped();
+                KeyClicksService.Feedback(HapticEffect, HapticMode);
+                e.Handled = true;
+            }
+        }
+
+        void OnTapped(object sender, FormsGestures.TapEventArgs e)
+        {
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            {
+
+                //Debug.WriteLine("tapped");
+                if (!(this is StateButton))
+                {
+                    if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
+                        || GroupToggleBehavior == GroupToggleBehavior.Multiselect
+                        || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
+                        IsSelected = !IsSelected;
+                    else
+                    {
+                        Opacity = 0.5;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                        {
+                            Opacity += 0.1;
+                            return Opacity < 1.0;
+                        });
+                    }
+                }
+                SendTapped();
+                KeyClicksService.Feedback(HapticEffect, HapticMode);
                 e.Handled = true;
             }
         }
 
         void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled)
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressed?.Invoke(this, EventArgs.Empty);
         }
 
         void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled)
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressing?.Invoke(this, EventArgs.Empty);
         }
 
@@ -1307,6 +1362,9 @@ namespace Forms9Patch
             }
         }
 
+        void UpdateGestureListeners()
+        {
+        }
 
         internal void UpdateIconTint()
         {
@@ -1446,24 +1504,65 @@ namespace Forms9Patch
 
 
         #region Change Handlers
-        private void OnSizeChanged(object sender, EventArgs e) => CheckFit();
-
-        private void OnIconLabelSizeChanged(object sender, EventArgs e) => CheckFit();
-
-        private void OnIconImageSizeChanged(object sender, EventArgs e) => CheckFit();
-
-        private void OnLabelSizeChanged(object sender, EventArgs e) => CheckFit();
-
-        void CheckFit()
+        private void OnSizeChanged(object sender, EventArgs e)
         {
-            if (Width < 1 || Height < 1)
-                return;
+            //System.Diagnostics.Debug.WriteLine("Button.OnSizeChanged ENTER");
+            IsClipped = CheckIsClipped();
+            //System.Diagnostics.Debug.WriteLine("Button.OnSizeChanged EXIT");
+        }
 
-            var elementWidths = Padding.HorizontalThickness;
-            var elementHeights = Padding.VerticalThickness;
+        private void OnIconLabelSizeChanged(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("Button.OnIconLabelSizeChanged ENTER");
+            IsClipped = CheckIsClipped();
+            //System.Diagnostics.Debug.WriteLine("Button.OnIconLabelSizeChanged EXIT");
+        }
+
+        private void OnIconImageSizeChanged(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("Button.OnIconImageSizeChanged ENTER");
+            IsClipped = CheckIsClipped();
+            //System.Diagnostics.Debug.WriteLine("Button.OnIconImageSizeChanged EXIT");
+        }
+
+        private void OnLabelSizeChanged(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("Button.OnLabelSizeChanged ENTER");
+            IsClipped = CheckIsClipped();
+            //System.Diagnostics.Debug.WriteLine("Button.OnLabelSizeChanged EXIT");
+        }
+
+        /// <summary>
+        /// On-demand, checks if the contents of the button is clipped.
+        /// </summary>
+        /// <returns><c>true</c>, if is clipped, <c>false</c> otherwise.</returns>
+        public bool CheckIsClipped(double width = -1, double height = -1)
+        {
+            var isClipped = false;
+
+            if (width < 1) width = Width;
+            if (height < 1) height = Height;
+
+            if (width < 1 || height < 1)
+                return isClipped;
+
+            var elementWidths = Padding.HorizontalThickness + Margin.HorizontalThickness;
+            var elementHeights = Padding.VerticalThickness + Margin.VerticalThickness;
             bool notFirst = false;
             foreach (var child in _stackLayout.Children)
             {
+                var hzFree = width - elementWidths;
+                var vtFree = height - elementHeights;
+
+                isClipped = Orientation == StackOrientation.Horizontal
+                    ? hzFree < 0.01
+                    : vtFree < 0.01;
+                if (isClipped)
+                {
+                    //System.Diagnostics.Debug.WriteLine("\tClipped:     [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "] QUICK");
+                    return isClipped;
+                }
+
                 if (child.IsVisible)
                 {
                     //if (child == _label && _label.Text == "BACKGROUND" && FittedFontSize < 7)
@@ -1478,13 +1577,14 @@ namespace Forms9Patch
                                 ? Label.DefaultFontSize
                                 : label.FontSize
                             : label.FittedFontSize;
-                        var size = label.SizeForWidthAndFontSize(Width, fontSize);
-                        if (_label.Text == "alpha")
-                            System.Diagnostics.Debug.WriteLine("\nWidth=[" + Width + "] fontSize=[" + fontSize + "]");
+                        var hzSize = label.SizeForWidthAndFontSize(double.MaxValue, fontSize);
+                        var vtSize = label.SizeForWidthAndFontSize(width, fontSize);
+                        //if (!string.IsNullOrWhiteSpace(_label.Text) && _label.Text.Contains("Screw"))
+                        //    System.Diagnostics.Debug.WriteLine("\nWidth=[" + width + "] fontSize=[" + fontSize + "]");
                         //if (child == _label && _label.Text == "BACKGROUND")
                         //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] fontSize=" + fontSize + " size=" + size);
-                        elementWidths += size.Width;
-                        elementHeights += size.Height;
+                        elementWidths += hzSize.Width;
+                        elementHeights += vtSize.Height;
                     }
                     else
                     {
@@ -1500,22 +1600,30 @@ namespace Forms9Patch
                     }
                     notFirst = true;
                 }
-                IsClipped = Orientation == StackOrientation.Horizontal ? elementWidths - Width > 0.01 : elementHeights - Height > 0.01;
-                if (IsClipped)
+
+                hzFree = width - elementWidths;
+                vtFree = height - elementHeights;
+
+                isClipped = Orientation == StackOrientation.Horizontal
+                    ? hzFree < 0.01
+                    : vtFree < 0.01;
+                if (isClipped)
                 {
-                    if (child == _label && _label.Text == "alpha")
-                        System.Diagnostics.Debug.WriteLine("Clipped: [" + (Text ?? HtmlText) + "] elementWidths=[" + elementWidths + "] Width=[" + Width + "]");
+                    //if (HtmlText == "Single Shear - Wood Main Member")
+                    //    System.Diagnostics.Debug.WriteLine("");
+                    //if (child == _label && !string.IsNullOrEmpty(_label.HtmlText) && _label.HtmlText.Contains("Screw")) // == "Wood Screw")
+                    //System.Diagnostics.Debug.WriteLine("\tClipped:     [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "]");
                     //if (child == _label && _label.Text == "BACKGROUND")
                     //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] IsClipped by child: " + child.GetType());
-                    break;
+                    return isClipped;
                 }
-                else
-                {
-                    if (child == _label && _label.Text == "alpha")
-                        System.Diagnostics.Debug.WriteLine("Not Clipped: [" + (Text ?? HtmlText) + "] elementWidths=[" + elementWidths + "] Width=[" + Width + "]");
-                }
+                //else
+                //{
+                //if (child == _label && !string.IsNullOrEmpty(_label.HtmlText) && _label.HtmlText.Contains("Screw"))// == "Wood Screw")
+                //    System.Diagnostics.Debug.WriteLine("\tNot Clipped: [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "]");
+                //}
             }
-
+            return isClipped;
         }
 
 
@@ -1547,7 +1655,7 @@ namespace Forms9Patch
             }
             else if (propertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName || propertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
             {
-                CheckFit();
+                CheckIsClipped();
             }
             //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
             //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
@@ -1900,6 +2008,8 @@ namespace Forms9Patch
                 _label.FontAttributes = FontAttributes;
             else if (propertyName == FontFamilyProperty.PropertyName)
                 _label.FontFamily = FontFamily;
+            else if (propertyName == IconFontFamilyProperty.PropertyName)
+                _iconLabel.FontFamily = IconFontFamily;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {
                 if (_label != null && _stackLayout.Children.Contains(_label))
@@ -1916,7 +2026,8 @@ namespace Forms9Patch
                 _stackLayout.Spacing = Spacing;
             else if (propertyName == TintIconProperty.PropertyName)
                 UpdateIconTint();
-
+            else if (propertyName == IsLongPressEnabledProperty.PropertyName)
+                UpdateGestureListeners();
         }
 
         void OnCommandChanged()

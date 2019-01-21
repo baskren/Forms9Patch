@@ -19,12 +19,12 @@ namespace FormsGestures.UWP
     {
         #region debug helpers
         static int DebugVerbosity = 2;  // "1" (instantiation method names), "2" (usage method names), "3" (manipulation method details)
-        void DebugMethodName(int verbosity=0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        void DebugMethodName(int verbosity = 0, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
             if (DebugVerbosity >= verbosity && DebugCondition)
             {
                 System.Diagnostics.Debug.WriteLine("⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽");
-                System.Diagnostics.Debug.WriteLine(callerName + " Element=["+_xfElement+"] id=["+_xfElement.Id+"]");
+                System.Diagnostics.Debug.WriteLine(callerName + " Element=[" + _xfElement + "] id=[" + _xfElement.Id + "]");
                 System.Diagnostics.Debug.WriteLine("⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺");
             }
         }
@@ -34,7 +34,7 @@ namespace FormsGestures.UWP
         void DebugMessage(string message, int verbosity = 3)
         {
             if (DebugVerbosity >= verbosity && DebugCondition)
-                System.Diagnostics.Debug.WriteLine("\t"+message);
+                System.Diagnostics.Debug.WriteLine("\t" + message);
         }
 
 
@@ -174,7 +174,7 @@ namespace FormsGestures.UWP
 
         #region CurrentManipulationModes
         ManipulationModes CurrentManipulationModes
-        { 
+        {
             get
             {
                 ManipulationModes modes = ManipulationModes.None;
@@ -195,7 +195,7 @@ namespace FormsGestures.UWP
                     }
                     else
                     */
-                        modes |= ManipulationModes.TranslateX | ManipulationModes.TranslateY;
+                    modes |= ManipulationModes.TranslateX | ManipulationModes.TranslateY;
                     if (modes != ManipulationModes.None)
                         modes |= ManipulationModes.TranslateInertia;
                 }
@@ -259,12 +259,12 @@ namespace FormsGestures.UWP
 
                     //FrameworkElement.ManipulationStarting += OnManipulationStarting;
 
-                    
+
                     FrameworkElement.ManipulationStarted += OnManipulationStarted;
                     FrameworkElement.ManipulationDelta += OnManipulationDelta;
                     FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
                     FrameworkElement.ManipulationCompleted += OnManipulationComplete;
-                    
+
                     FrameworkElement.ManipulationMode = CurrentManipulationModes;
 
 
@@ -320,7 +320,7 @@ namespace FormsGestures.UWP
 
         private void OnListenerDisposing(object sender, System.EventArgs e)
         {
-            if (sender is Listener listener && _listeners!=null)
+            if (sender is Listener listener && _listeners != null)
             {
                 listener.HandlesPannedChanged -= OnListenerHandlesManipulationChanged;
                 listener.HandlesPanningChanged -= OnListenerHandlesManipulationChanged;
@@ -362,7 +362,7 @@ namespace FormsGestures.UWP
 
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            
+
             if (sender is VisualElement element)
             {
                 if (e.PropertyName == "Renderer")
@@ -497,7 +497,7 @@ namespace FormsGestures.UWP
 
 
         #region UWP Manipulations (multi-touch)
-        
+
         void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
             DebugMethodName(2);
@@ -505,15 +505,15 @@ namespace FormsGestures.UWP
             PivotDebugMessage(e.Pivot);
             ContainerDebugMessage(e.Container);
         }
-        
+
 
         void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
             DebugMethodName(2);
-            DebugMessage("Element=["+_xfElement+"]");
+            DebugMessage("Element=[" + _xfElement + "]");
             PointerDeviceTypeDebugMessage(e.PointerDeviceType);
             PositionDebugMessage(e.Position);
-            ManipulationDeltaDebugMessage(e.Cumulative,"Cumul");
+            ManipulationDeltaDebugMessage(e.Cumulative, "Cumul");
             ContainerDebugMessage(e.Container);
             HandledDebugString(e.Handled);
 
@@ -527,7 +527,7 @@ namespace FormsGestures.UWP
                 _holdTimer?.Stop();
                 _holdTimer = null;
             }
-            DebugMessage("elapse=["+elapsed+"]");
+            DebugMessage("elapse=[" + elapsed + "]");
             if (!_panning || !_pinching || !_rotating)
             {
                 _longPressing = elapsed > 750;
@@ -587,7 +587,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPanEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPanning(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Panning Handled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
@@ -595,7 +595,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPinchEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPinching(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Pinching Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
@@ -603,7 +603,7 @@ namespace FormsGestures.UWP
                     var args = new UwpRotateEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnRotating(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Rotating Handled=[" + e.Handled + "]");
                 }
                 if (e.Handled)
@@ -649,7 +649,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPanEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPanned(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Panned tHandled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
@@ -657,7 +657,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPinchEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPinched(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Pinched Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
@@ -665,11 +665,11 @@ namespace FormsGestures.UWP
                     var args = new UwpRotateEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnRotated(args);
-                    e.Handled |= args.Handled;
+                    e.handled = handled || args.Handled;
                     DebugMessage("Rotated Handled=[" + e.Handled + "]");
                 }
 
-                DebugMessage("Handled=[" + e.Handled + "] Element=["+_xfElement+"]");
+                DebugMessage("Handled=[" + e.Handled + "] Element=[" + _xfElement + "]");
                 if (e.Handled)
                     break;
             }
@@ -831,13 +831,13 @@ namespace FormsGestures.UWP
             DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=[" + e.Handled + "] type=[" + e.PointerDeviceType + "]");
 
             foreach (var listener in _listeners)
-                if (listener.HandlesRightClicked && UwpRightClickEventArgs.Fire(FrameworkElement,e, listener))
-                     return;
+                if (listener.HandlesRightClicked && UwpRightClickEventArgs.Fire(FrameworkElement, e, listener))
+                    return;
         }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (!_xfElement.IsVisible || FrameworkElement==null)
+            if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
             DebugMethodName(2);
 
@@ -888,7 +888,7 @@ namespace FormsGestures.UWP
                 _runningTapCounterResetter = true;
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    if (_releaseTimer==null || _releaseTimer.ElapsedMilliseconds > 750)
+                    if (_releaseTimer == null || _releaseTimer.ElapsedMilliseconds > 750)
                     {
                         _numberOfTaps = 0;
                         _releaseTimer?.Stop();
@@ -907,12 +907,12 @@ namespace FormsGestures.UWP
                 if (_longPressing && listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
                     break;
 
-            
+
             foreach (var listener in _listeners)
                 if (listener.HandlesDown && UwpDownUpArgs.FireUp(FrameworkElement, e, listener))
                     break;
-                    
-             
+
+
             _longPressing = false;
 
         }

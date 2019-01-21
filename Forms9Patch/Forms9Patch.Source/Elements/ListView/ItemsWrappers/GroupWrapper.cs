@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using P42.Utils;
 using Xamarin.Forms;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 namespace Forms9Patch
 {
@@ -1485,7 +1486,8 @@ namespace Forms9Patch
                 return this;
             foreach (var item in this)
             {
-                if (item.Source == source)
+                //if (item.Source == source)
+                if (item.Source.Equals(source))
                     return item;
                 var groupWrapper = item as GroupWrapper;
                 var subItem = groupWrapper?.ItemWrapperForSource(source);

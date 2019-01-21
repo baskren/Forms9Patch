@@ -49,12 +49,12 @@ namespace Forms9Patch.UWP
             }
         }
 
-        internal static void SetAndFormatText(this TextBlock winTextBlock, Forms9Patch.Label f9pLabel, double altFontSize=-1)
+        internal static void SetAndFormatText(this TextBlock winTextBlock, Forms9Patch.Label f9pLabel, double altFontSize = -1)
         {
             var label = f9pLabel;
             var textBlock = winTextBlock;
 
-            if (f9pLabel == null || textBlock==null)
+            if (f9pLabel == null || textBlock == null)
                 return;
 
             textBlock.Text = "";
@@ -69,7 +69,7 @@ namespace Forms9Patch.UWP
                 textBlock.Text = label.Text;
                 return;
             }
-            if (label.FormattedText!=null)
+            if (label.FormattedText != null)
             {
                 var formattedText = label.FormattedText;
                 for (var i = 0; i < formattedText.Spans.Count; i++)
@@ -96,7 +96,7 @@ namespace Forms9Patch.UWP
                 (label.FontAttributes & Xamarin.Forms.FontAttributes.Bold) > 0,//textBlock.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight,
                 (label.FontAttributes & Xamarin.Forms.FontAttributes.Italic) > 0,// (textBlock.FontStyle & Windows.UI.Text.FontStyle.Italic) > 0,
                 textColor: label.TextColor//,
-                //backgroundColor: label.BackgroundColor
+                                          //backgroundColor: label.BackgroundColor
                 );
 
             var MathMetaFont = new MetaFont(baseMetaFont)
@@ -151,7 +151,7 @@ namespace Forms9Patch.UWP
                             break;
                         case UnderlineSpan.SpanKey: // Underline span  // TextElement.TextDecorations = None, Strikethought, Underline
                             metaFonts[i].Underline = true;
-                        break;
+                            break;
                         case StrikethroughSpan.SpanKey: // TextElement.TextDecorations = None, Strikethought, Underline
                             metaFonts[i].Strikethrough = true;
                             break;
@@ -213,7 +213,7 @@ namespace Forms9Patch.UWP
         {
             try
             {
-                switch(decoration)
+                switch (decoration)
                 {
                     case Decoration.Strikethrough:
                         run.TextDecorations |= Windows.UI.Text.TextDecorations.Strikethrough;
@@ -223,7 +223,8 @@ namespace Forms9Patch.UWP
                         break;
 
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 // o
             }
@@ -261,7 +262,7 @@ namespace Forms9Patch.UWP
                     Typography.SetVariants(run, Windows.UI.Xaml.FontVariants.Subscript);
                     break;
                 default:
-                    if (metaFont.Family!=null)
+                    if (metaFont.Family != null)
                         run.FontFamily = new Windows.UI.Xaml.Media.FontFamily(FontService.ReconcileFontFamily(metaFont.Family));
                     break;
             }

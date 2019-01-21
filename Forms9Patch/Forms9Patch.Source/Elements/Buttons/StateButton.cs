@@ -814,6 +814,11 @@ namespace Forms9Patch
                 DefaultState.FontFamily = FontFamily;
                 UpdateState();
             }
+            else if (propertyName == IconFontFamilyProperty.PropertyName && !_showingState)
+            {
+                DefaultState.IconFontFamily = IconFontFamily;
+                UpdateState();
+            }
             #endregion IFontElement
 
             #endregion ILabel

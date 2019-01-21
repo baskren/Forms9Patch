@@ -52,7 +52,7 @@ namespace Forms9Patch
         /// </summary>
         KeyClicks HapticMode { get; set; }
 
-
+        bool IsLongPressEnabled { get; set; }
 
 
     }

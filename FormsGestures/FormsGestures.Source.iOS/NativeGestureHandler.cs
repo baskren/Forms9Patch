@@ -467,7 +467,7 @@ namespace FormsGestures.iOS
                     DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesBegan, _viewLocationAtOnDown);
                     args.Listener = listener;
                     listener.OnDown(args);
-                    handled |= args.Handled;
+                    handled = handled || args.Handled;
                     if (handled)
                         break;
                 }
@@ -496,7 +496,7 @@ namespace FormsGestures.iOS
                     DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesEnded, _viewLocationAtOnDown);
                     args.Listener = listener;
                     listener.OnUp(args);
-                    handled |= args.Handled;
+                    handled = handled || args.Handled;
                     if (handled)
                         break;
                 }
@@ -605,7 +605,7 @@ namespace FormsGestures.iOS
                             LongPressEventArgs args = new iOSLongPressEventArgs(gr, _startPressing.ElapsedMilliseconds, _viewLocationAtOnDown);
                             args.Listener = listener;
                             listener.OnLongPressed(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (handled)
                                 break;
                         }
@@ -633,7 +633,7 @@ namespace FormsGestures.iOS
                         LongPressEventArgs args = new iOSLongPressEventArgs(gr, 0L, _viewLocationAtOnDown);
                         args.Listener = listener;
                         listener.OnLongPressing(args);
-                        handled |= args.Handled;
+                        handled = handled || args.Handled;
                         if (handled)
                             break;
                     }
@@ -691,7 +691,7 @@ namespace FormsGestures.iOS
                             listener.OnSwiped(args);
                             //gr.CancelsTouchesInView = swipeEventArgs.Handled;
                             //return;
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (handled)
                                 break;
                         }
@@ -711,7 +711,7 @@ namespace FormsGestures.iOS
                         listener.OnPanned(taskArgs);
                         //gr.CancelsTouchesInView = panEventArgs.Handled;
                         //return;
-                        handled |= taskArgs.Handled;
+                        handled = handled || taskArgs.Handled;
                         if (handled)
                             break;
                     }
@@ -735,7 +735,7 @@ namespace FormsGestures.iOS
                         var taskArgs = new PanEventArgs(panEventArgs);
                         taskArgs.Listener = listener;
                         listener.OnPanning(taskArgs);
-                        handled |= taskArgs.Handled;
+                        handled = handled || taskArgs.Handled;
                         if (handled)
                             break;
                     }
@@ -827,7 +827,7 @@ namespace FormsGestures.iOS
                         var taskArgs = new PinchEventArgs(pinchEventArgs);
                         taskArgs.Listener = listener;
                         listener.OnPinching(taskArgs);
-                        handled |= pinchEventArgs.Handled;
+                        handled = handled || pinchEventArgs.Handled;
                         if (taskArgs.Handled)
                             break;
                     }
@@ -839,7 +839,7 @@ namespace FormsGestures.iOS
                         var taskArgs = new RotateEventArgs(rotateEventArgs);
                         taskArgs.Listener = listener;
                         listener.OnRotating(taskArgs);
-                        handled |= rotateEventArgs.Handled;
+                        handled = handled || rotateEventArgs.Handled;
                         if (taskArgs.Handled)
                             break;
                     }
@@ -860,7 +860,7 @@ namespace FormsGestures.iOS
                         var taskArgs = new PinchEventArgs(pinchEventArgs);
                         taskArgs.Listener = listener;
                         listener.OnPinching(taskArgs);
-                        handled |= pinchEventArgs.Handled;
+                        handled = handled ||  pinchEventArgs.Handled;
                         if (taskArgs.Handled)
                             break;
                     }
@@ -877,7 +877,7 @@ namespace FormsGestures.iOS
                         var taskArgs = new RotateEventArgs(rotateEventArgs);
                         taskArgs.Listener = listener;
                         listener.OnRotating(taskArgs);
-                        handled |= rotateEventArgs.Handled;
+                        handled = handled ||  rotateEventArgs.Handled;
                         if (taskArgs.Handled)
                             break;
                     }

@@ -387,7 +387,7 @@ namespace FormsGestures.Droid
                         {
                             args.Listener = listener;
                             listener.OnUp(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (args.Handled)
                                 break;
                         }
@@ -407,7 +407,7 @@ namespace FormsGestures.Droid
                         {
                             args.Listener = listener;
                             listener.OnPanned(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (args.Handled)
                                 break;
                         }
@@ -425,7 +425,7 @@ namespace FormsGestures.Droid
                         {
                             args.Listener = listener;
                             listener.OnLongPressed(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (args.Handled)
                                 break;
                         }
@@ -444,7 +444,7 @@ namespace FormsGestures.Droid
                             {
                                 args.Listener = listener;
                                 listener.OnTapping(args);
-                                handled |= args.Handled;
+                                handled = handled || args.Handled;
                                 if (args.Handled)
                                     break;
                             }
@@ -462,7 +462,7 @@ namespace FormsGestures.Droid
                             {
                                 args.Listener = listener;
                                 listener.OnDoubleTapped(args);
-                                handled |= args.Handled;
+                                handled = handled || args.Handled;
                                 if (args.Handled)
                                     break;
                             }
@@ -503,7 +503,7 @@ namespace FormsGestures.Droid
                             listener.OnPanning(args);
                             LastPanArgs = args;
                             LastPan = e2;
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             if (args.Handled)
                                 return true;
                         }
@@ -538,7 +538,7 @@ namespace FormsGestures.Droid
                     {
                         args.Listener = listener;
                         listener.OnSwiped(args);
-                        handled |= args.Handled;
+                        handled = handled || args.Handled;
                         if (args.Handled)
                             return true;
                     }
@@ -598,7 +598,7 @@ namespace FormsGestures.Droid
                     {
                         float xDist = Math.Abs(_startCoords[i].X - pX);
                         float yDist = Math.Abs(_startCoords[i].Y - pY);
-                        _multiMoving |= (xDist > _touchSlop || yDist > _touchSlop);
+                        _multiMoving = _multiMoving || (xDist > _touchSlop || yDist > _touchSlop);
                     }
                     else
                         _multiInBounds = false;
@@ -607,8 +607,8 @@ namespace FormsGestures.Droid
             bool handled = false;
             if (_multiMoving && _multiInBounds)
             {
-                handled |= OnPinching(ev, coords);
-                handled |= OnRotating(ev, coords);
+                handled = handled || OnPinching(ev, coords);
+                handled = handled || OnRotating(ev, coords);
             }
             return handled;
         }
@@ -619,8 +619,8 @@ namespace FormsGestures.Droid
             if (_multiMoving)
             {
                 StopTapLongPress();
-                handled |= OnPinched(ev, coords);
-                handled |= OnRotated(ev, coords);
+                handled = handled || OnPinched(ev, coords);
+                handled = handled || OnRotated(ev, coords);
                 MultiStart = null;
                 _multiMoving = false;
             }
@@ -660,7 +660,7 @@ namespace FormsGestures.Droid
                     {
                         args.Listener = listener;
                         listener.OnPinching(args);
-                        handled |= args.Handled;
+                        handled = handled || args.Handled;
                         //if (args.Handled)
                         //	break;
                     }
@@ -689,7 +689,7 @@ namespace FormsGestures.Droid
                     {
                         args.Listener = listener;
                         listener.OnRotating(args);
-                        handled |= args.Handled;
+                        handled = handled || args.Handled;
                         //if (args.Handled)
                         //	break;
                     }
@@ -720,7 +720,7 @@ namespace FormsGestures.Droid
                         {
                             args.Listener = listener;
                             listener.OnPinched(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             //if (args.Handled)
                             //	break;
                         }
@@ -751,7 +751,7 @@ namespace FormsGestures.Droid
                         {
                             args.Listener = listener;
                             listener.OnRotated(args);
-                            handled |= args.Handled;
+                            handled = handled || args.Handled;
                             //if (args.Handled)
                             //	break;
                         }
