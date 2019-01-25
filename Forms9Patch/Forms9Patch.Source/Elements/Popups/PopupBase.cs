@@ -431,6 +431,8 @@ namespace Forms9Patch
             Target = target;
 
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
+
+            IsAnimationEnabled = false;
         }
 
         #endregion
