@@ -587,7 +587,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPanEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPanning(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Panning Handled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
@@ -595,7 +595,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPinchEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPinching(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Pinching Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
@@ -603,7 +603,7 @@ namespace FormsGestures.UWP
                     var args = new UwpRotateEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnRotating(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Rotating Handled=[" + e.Handled + "]");
                 }
                 if (e.Handled)
@@ -649,7 +649,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPanEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPanned(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Panned tHandled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
@@ -657,7 +657,7 @@ namespace FormsGestures.UWP
                     var args = new UwpPinchEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnPinched(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Pinched Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
@@ -665,7 +665,7 @@ namespace FormsGestures.UWP
                     var args = new UwpRotateEventArgs(FrameworkElement, e);
                     args.Listener = listener;
                     listener?.OnRotated(args);
-                    e.handled = handled || args.Handled;
+                    e.Handled = e.Handled || args.Handled;
                     DebugMessage("Rotated Handled=[" + e.Handled + "]");
                 }
 

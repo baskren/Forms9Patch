@@ -469,6 +469,9 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler ItemsSourceSet;
 
+        /// <summary>
+        /// Occures when the ListView has appeared
+        /// </summary>
         public event EventHandler Appeared;
         #endregion
 

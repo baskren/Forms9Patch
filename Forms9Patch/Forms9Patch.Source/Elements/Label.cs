@@ -57,6 +57,9 @@ namespace Forms9Patch
         #endregion
 
         #region Static Properties
+        /// <summary>
+        /// The default size of labels rendered on the current platform
+        /// </summary>
         public static double DefaultFontSize { get; internal set; }
         #endregion
 

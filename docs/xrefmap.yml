@@ -952,6 +952,19 @@ references:
   commentId: F:Forms9Patch.Button.BorderWidthProperty
   fullName: Forms9Patch.Button.BorderWidthProperty
   nameWithType: Button.BorderWidthProperty
+- uid: Forms9Patch.Button.CheckIsClipped(System.Double,System.Double)
+  name: CheckIsClipped(Double, Double)
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_CheckIsClipped_System_Double_System_Double_
+  commentId: M:Forms9Patch.Button.CheckIsClipped(System.Double,System.Double)
+  fullName: Forms9Patch.Button.CheckIsClipped(System.Double, System.Double)
+  nameWithType: Button.CheckIsClipped(Double, Double)
+- uid: Forms9Patch.Button.CheckIsClipped*
+  name: CheckIsClipped
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_CheckIsClipped_
+  commentId: Overload:Forms9Patch.Button.CheckIsClipped
+  isSpec: "True"
+  fullName: Forms9Patch.Button.CheckIsClipped
+  nameWithType: Button.CheckIsClipped
 - uid: Forms9Patch.Button.Clicked
   name: Clicked
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_Clicked
@@ -1275,6 +1288,25 @@ references:
   commentId: F:Forms9Patch.Button.HtmlTextProperty
   fullName: Forms9Patch.Button.HtmlTextProperty
   nameWithType: Button.HtmlTextProperty
+- uid: Forms9Patch.Button.IconFontFamily
+  name: IconFontFamily
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IconFontFamily
+  commentId: P:Forms9Patch.Button.IconFontFamily
+  fullName: Forms9Patch.Button.IconFontFamily
+  nameWithType: Button.IconFontFamily
+- uid: Forms9Patch.Button.IconFontFamily*
+  name: IconFontFamily
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IconFontFamily_
+  commentId: Overload:Forms9Patch.Button.IconFontFamily
+  isSpec: "True"
+  fullName: Forms9Patch.Button.IconFontFamily
+  nameWithType: Button.IconFontFamily
+- uid: Forms9Patch.Button.IconFontFamilyProperty
+  name: IconFontFamilyProperty
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IconFontFamilyProperty
+  commentId: F:Forms9Patch.Button.IconFontFamilyProperty
+  fullName: Forms9Patch.Button.IconFontFamilyProperty
+  nameWithType: Button.IconFontFamilyProperty
 - uid: Forms9Patch.Button.IconImage
   name: IconImage
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_IconImage
@@ -1422,6 +1454,25 @@ references:
   commentId: F:Forms9Patch.Button.IsEllipticalProperty
   fullName: Forms9Patch.Button.IsEllipticalProperty
   nameWithType: Button.IsEllipticalProperty
+- uid: Forms9Patch.Button.IsLongPressEnabled
+  name: IsLongPressEnabled
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsLongPressEnabled
+  commentId: P:Forms9Patch.Button.IsLongPressEnabled
+  fullName: Forms9Patch.Button.IsLongPressEnabled
+  nameWithType: Button.IsLongPressEnabled
+- uid: Forms9Patch.Button.IsLongPressEnabled*
+  name: IsLongPressEnabled
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsLongPressEnabled_
+  commentId: Overload:Forms9Patch.Button.IsLongPressEnabled
+  isSpec: "True"
+  fullName: Forms9Patch.Button.IsLongPressEnabled
+  nameWithType: Button.IsLongPressEnabled
+- uid: Forms9Patch.Button.IsLongPressEnabledProperty
+  name: IsLongPressEnabledProperty
+  href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsLongPressEnabledProperty
+  commentId: F:Forms9Patch.Button.IsLongPressEnabledProperty
+  fullName: Forms9Patch.Button.IsLongPressEnabledProperty
+  nameWithType: Button.IsLongPressEnabledProperty
 - uid: Forms9Patch.Button.IsSelected
   name: IsSelected
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_IsSelected
@@ -2248,6 +2299,25 @@ references:
   commentId: F:Forms9Patch.ButtonState.HtmlTextProperty
   fullName: Forms9Patch.ButtonState.HtmlTextProperty
   nameWithType: ButtonState.HtmlTextProperty
+- uid: Forms9Patch.ButtonState.IconFontFamily
+  name: IconFontFamily
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_IconFontFamily
+  commentId: P:Forms9Patch.ButtonState.IconFontFamily
+  fullName: Forms9Patch.ButtonState.IconFontFamily
+  nameWithType: ButtonState.IconFontFamily
+- uid: Forms9Patch.ButtonState.IconFontFamily*
+  name: IconFontFamily
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_IconFontFamily_
+  commentId: Overload:Forms9Patch.ButtonState.IconFontFamily
+  isSpec: "True"
+  fullName: Forms9Patch.ButtonState.IconFontFamily
+  nameWithType: ButtonState.IconFontFamily
+- uid: Forms9Patch.ButtonState.IconFontFamilyProperty
+  name: IconFontFamilyProperty
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_IconFontFamilyProperty
+  commentId: F:Forms9Patch.ButtonState.IconFontFamilyProperty
+  fullName: Forms9Patch.ButtonState.IconFontFamilyProperty
+  nameWithType: ButtonState.IconFontFamilyProperty
 - uid: Forms9Patch.ButtonState.IconImage
   name: IconImage
   href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_IconImage
@@ -5157,6 +5227,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IButton.IsEnabled
   nameWithType: IButton.IsEnabled
+- uid: Forms9Patch.IButton.IsLongPressEnabled
+  name: IsLongPressEnabled
+  href: api/Forms9Patch.IButton.html#Forms9Patch_IButton_IsLongPressEnabled
+  commentId: P:Forms9Patch.IButton.IsLongPressEnabled
+  fullName: Forms9Patch.IButton.IsLongPressEnabled
+  nameWithType: IButton.IsLongPressEnabled
+- uid: Forms9Patch.IButton.IsLongPressEnabled*
+  name: IsLongPressEnabled
+  href: api/Forms9Patch.IButton.html#Forms9Patch_IButton_IsLongPressEnabled_
+  commentId: Overload:Forms9Patch.IButton.IsLongPressEnabled
+  isSpec: "True"
+  fullName: Forms9Patch.IButton.IsLongPressEnabled
+  nameWithType: IButton.IsLongPressEnabled
 - uid: Forms9Patch.IButton.IsSelected
   name: IsSelected
   href: api/Forms9Patch.IButton.html#Forms9Patch_IButton_IsSelected
@@ -7694,6 +7777,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ListView.ListView
   nameWithType: ListView.ListView
+- uid: Forms9Patch.ListView.Appeared
+  name: Appeared
+  href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_Appeared
+  commentId: E:Forms9Patch.ListView.Appeared
+  fullName: Forms9Patch.ListView.Appeared
+  nameWithType: ListView.Appeared
 - uid: Forms9Patch.ListView.Content
   name: Content
   href: api/Forms9Patch.ListView.html#Forms9Patch_ListView_Content
@@ -10262,6 +10351,19 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.BackgroundColorProperty
   fullName: Forms9Patch.SegmentedControl.BackgroundColorProperty
   nameWithType: SegmentedControl.BackgroundColorProperty
+- uid: Forms9Patch.SegmentedControl.CheckIsClipped(System.Double,System.Double)
+  name: CheckIsClipped(Double, Double)
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_CheckIsClipped_System_Double_System_Double_
+  commentId: M:Forms9Patch.SegmentedControl.CheckIsClipped(System.Double,System.Double)
+  fullName: Forms9Patch.SegmentedControl.CheckIsClipped(System.Double, System.Double)
+  nameWithType: SegmentedControl.CheckIsClipped(Double, Double)
+- uid: Forms9Patch.SegmentedControl.CheckIsClipped*
+  name: CheckIsClipped
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_CheckIsClipped_
+  commentId: Overload:Forms9Patch.SegmentedControl.CheckIsClipped
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.CheckIsClipped
+  nameWithType: SegmentedControl.CheckIsClipped
 - uid: Forms9Patch.SegmentedControl.DarkTheme
   name: DarkTheme
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_DarkTheme
@@ -10497,6 +10599,25 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.HorizontalTextAlignmentProperty
   fullName: Forms9Patch.SegmentedControl.HorizontalTextAlignmentProperty
   nameWithType: SegmentedControl.HorizontalTextAlignmentProperty
+- uid: Forms9Patch.SegmentedControl.IconFontFamily
+  name: IconFontFamily
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IconFontFamily
+  commentId: P:Forms9Patch.SegmentedControl.IconFontFamily
+  fullName: Forms9Patch.SegmentedControl.IconFontFamily
+  nameWithType: SegmentedControl.IconFontFamily
+- uid: Forms9Patch.SegmentedControl.IconFontFamily*
+  name: IconFontFamily
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IconFontFamily_
+  commentId: Overload:Forms9Patch.SegmentedControl.IconFontFamily
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.IconFontFamily
+  nameWithType: SegmentedControl.IconFontFamily
+- uid: Forms9Patch.SegmentedControl.IconFontFamilyProperty
+  name: IconFontFamilyProperty
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IconFontFamilyProperty
+  commentId: F:Forms9Patch.SegmentedControl.IconFontFamilyProperty
+  fullName: Forms9Patch.SegmentedControl.IconFontFamilyProperty
+  nameWithType: SegmentedControl.IconFontFamilyProperty
 - uid: Forms9Patch.SegmentedControl.IntraSegmentOrientation
   name: IntraSegmentOrientation
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_IntraSegmentOrientation
@@ -17281,22 +17402,6 @@ references:
   fullName.vb: P42.Utils.JsonExtensions.ReadEnum(Of T)(Newtonsoft.Json.JsonReader)
   nameWithType: JsonExtensions.ReadEnum<T>(JsonReader)
   nameWithType.vb: JsonExtensions.ReadEnum(Of T)(JsonReader)
-- uid: P42.Utils.JsonExtensions.ReadIJsonReadable*
-  name: ReadIJsonReadable
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadIJsonReadable_
-  commentId: Overload:P42.Utils.JsonExtensions.ReadIJsonReadable
-  isSpec: "True"
-  fullName: P42.Utils.JsonExtensions.ReadIJsonReadable
-  nameWithType: JsonExtensions.ReadIJsonReadable
-- uid: P42.Utils.JsonExtensions.ReadIJsonReadable``1(Newtonsoft.Json.JsonReader)
-  name: ReadIJsonReadable<T>(JsonReader)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadIJsonReadable__1_Newtonsoft_Json_JsonReader_
-  commentId: M:P42.Utils.JsonExtensions.ReadIJsonReadable``1(Newtonsoft.Json.JsonReader)
-  name.vb: ReadIJsonReadable(Of T)(JsonReader)
-  fullName: P42.Utils.JsonExtensions.ReadIJsonReadable<T>(Newtonsoft.Json.JsonReader)
-  fullName.vb: P42.Utils.JsonExtensions.ReadIJsonReadable(Of T)(Newtonsoft.Json.JsonReader)
-  nameWithType: JsonExtensions.ReadIJsonReadable<T>(JsonReader)
-  nameWithType.vb: JsonExtensions.ReadIJsonReadable(Of T)(JsonReader)
 - uid: P42.Utils.JsonExtensions.ReadIJsonReadableList*
   name: ReadIJsonReadableList
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadIJsonReadableList_
@@ -17326,22 +17431,6 @@ references:
   isSpec: "True"
   fullName: P42.Utils.JsonExtensions.ReadInt
   nameWithType: JsonExtensions.ReadInt
-- uid: P42.Utils.JsonExtensions.ReadSimple*
-  name: ReadSimple
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadSimple_
-  commentId: Overload:P42.Utils.JsonExtensions.ReadSimple
-  isSpec: "True"
-  fullName: P42.Utils.JsonExtensions.ReadSimple
-  nameWithType: JsonExtensions.ReadSimple
-- uid: P42.Utils.JsonExtensions.ReadSimple``1(Newtonsoft.Json.JsonReader)
-  name: ReadSimple<T>(JsonReader)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadSimple__1_Newtonsoft_Json_JsonReader_
-  commentId: M:P42.Utils.JsonExtensions.ReadSimple``1(Newtonsoft.Json.JsonReader)
-  name.vb: ReadSimple(Of T)(JsonReader)
-  fullName: P42.Utils.JsonExtensions.ReadSimple<T>(Newtonsoft.Json.JsonReader)
-  fullName.vb: P42.Utils.JsonExtensions.ReadSimple(Of T)(Newtonsoft.Json.JsonReader)
-  nameWithType: JsonExtensions.ReadSimple<T>(JsonReader)
-  nameWithType.vb: JsonExtensions.ReadSimple(Of T)(JsonReader)
 - uid: P42.Utils.JsonExtensions.ReadSimpleList*
   name: ReadSimpleList
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_ReadSimpleList_

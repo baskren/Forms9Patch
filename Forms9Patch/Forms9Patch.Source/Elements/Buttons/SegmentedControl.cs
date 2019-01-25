@@ -279,7 +279,13 @@ namespace Forms9Patch
         #endregion
 
         #region IconFontFamiliy property
+        /// <summary>
+        /// Backing store for IconFontFamily property
+        /// </summary>
         public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.IconFontFamiliy", typeof(string), typeof(SegmentedControl), default(string));
+        /// <summary>
+        /// Sets the font used for rendering the IconText 
+        /// </summary>
         public string IconFontFamily
         {
             get => (string)GetValue(IconFontFamilyProperty);

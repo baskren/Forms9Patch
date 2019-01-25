@@ -93,7 +93,13 @@ namespace Forms9Patch
         #endregion IconText
 
         #region IconFontFamily property
+        /// <summary>
+        /// backing store for the IconFontFamily property
+        /// </summary>
         public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.ButtonState.IconFontFamily", typeof(string), typeof(ButtonState), default(string));
+        /// <summary>
+        /// The font used to render the IconText
+        /// </summary>
         public string IconFontFamily
         {
             get => (string)GetValue(IconFontFamilyProperty);

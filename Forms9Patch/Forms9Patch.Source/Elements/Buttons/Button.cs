@@ -432,7 +432,13 @@ namespace Forms9Patch
         #endregion HapticMode
 
         #region IsLongPressEnabled property
+        /// <summary>
+        /// Backing store for IsLongPressedEnabled property
+        /// </summary>
         public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create("Forms9Patch.Button.IsLongPressEnabled", typeof(bool), typeof(Button), default(bool));
+        /// <summary>
+        /// Enables the detection of long press gestures.  
+        /// </summary>
         public bool IsLongPressEnabled
         {
             get => (bool)GetValue(IsLongPressEnabledProperty);
@@ -2095,12 +2101,16 @@ namespace Forms9Patch
 
 
         #region Sizing and Layout
+        /// <summary>
+        /// Layout the view
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             base.LayoutChildren(x, y, width, height);
-
-
-
             LayoutComplete?.Invoke(this, IsClipped);
         }
         #endregion

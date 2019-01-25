@@ -112,6 +112,7 @@
     <h5>Implements</h5>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">IAnimatable</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">IViewController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
@@ -357,7 +358,16 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.marginproperty">View.MarginProperty</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.getchildelements#Xamarin_Forms_View_GetChildElements_Xamarin_Forms_Point_">View.GetChildElements(Point)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.gesturecontroller#Xamarin_Forms_View_GestureController">View.GestureController</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.gesturerecognizers#Xamarin_Forms_View_GestureRecognizers">View.GestureRecognizers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.xamarin-forms-internals-igesturecontroller-compositegesturerecognizers#Xamarin_Forms_View_Xamarin_Forms_Internals_IGestureController_CompositeGestureRecognizers">View.IGestureController.CompositeGestureRecognizers</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.horizontaloptions#Xamarin_Forms_View_HorizontalOptions">View.HorizontalOptions</a>
@@ -414,6 +424,12 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleproperty">VisualElement.ScaleProperty</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scalexproperty">VisualElement.ScaleXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.isvisibleproperty">VisualElement.IsVisibleProperty</a>
     </div>
     <div>
@@ -445,6 +461,24 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.flowdirectionproperty">VisualElement.FlowDirectionProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.tabindexproperty">VisualElement.TabIndexProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.istabstopproperty">VisualElement.IsTabStopProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.ontabindexpropertychanged#Xamarin_Forms_VisualElement_OnTabIndexPropertyChanged_System_Int32_System_Int32_">VisualElement.OnTabIndexPropertyChanged(Int32, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.tabindexdefaultvaluecreator#Xamarin_Forms_VisualElement_TabIndexDefaultValueCreator">VisualElement.TabIndexDefaultValueCreator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.ontabstoppropertychanged#Xamarin_Forms_VisualElement_OnTabStopPropertyChanged_System_Boolean_System_Boolean_">VisualElement.OnTabStopPropertyChanged(Boolean, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.tabstopdefaultvaluecreator#Xamarin_Forms_VisualElement_TabStopDefaultValueCreator">VisualElement.TabStopDefaultValueCreator()</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.batchbegin#Xamarin_Forms_VisualElement_BatchBegin">VisualElement.BatchBegin()</a>
@@ -552,7 +586,19 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scale#Xamarin_Forms_VisualElement_Scale">VisualElement.Scale</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scalex#Xamarin_Forms_VisualElement_ScaleX">VisualElement.ScaleX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.scaley#Xamarin_Forms_VisualElement_ScaleY">VisualElement.ScaleY</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.style#Xamarin_Forms_VisualElement_Style">VisualElement.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.tabindex#Xamarin_Forms_VisualElement_TabIndex">VisualElement.TabIndex</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.istabstop#Xamarin_Forms_VisualElement_IsTabStop">VisualElement.IsTabStop</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.styleclass#Xamarin_Forms_VisualElement_StyleClass">VisualElement.StyleClass</a>
@@ -613,6 +659,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.xamarin-forms-ielementcontroller-setvaluefromrenderer#Xamarin_Forms_Element_Xamarin_Forms_IElementController_SetValueFromRenderer_Xamarin_Forms_BindableProperty_System_Object_">Element.IElementController.SetValueFromRenderer(BindableProperty, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.findbyname#Xamarin_Forms_Element_FindByName_System_String_">Element.FindByName(String)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.removedynamicresource#Xamarin_Forms_Element_RemoveDynamicResource_Xamarin_Forms_BindableProperty_">Element.RemoveDynamicResource(BindableProperty)</a>
@@ -724,7 +773,7 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_SinglePicker_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SinglePicker : Grid, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IFlowDirectionController, IStyleSelectable, IStylable, IPaddingElement, IControlTemplated, IViewController, IVisualElementController, IElementController, ILayout, IBackground, IShape, IElement, ILayout, ILayoutController, IViewContainer&lt;View&gt;, IGridController, IElementConfiguration&lt;Grid&gt;, IElementConfiguration&lt;Grid&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class SinglePicker : Grid, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IStyleSelectable, IStylable, IGestureController, IPaddingElement, IControlTemplated, IViewController, IVisualElementController, IElementController, ILayout, IBackground, IShape, IElement, ILayout, ILayoutController, IViewContainer&lt;View&gt;, IGridController, IElementConfiguration&lt;Grid&gt;, IElementConfiguration&lt;Grid&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -1053,6 +1102,9 @@
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">Xamarin.Forms.IAnimatable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">Xamarin.Forms.IViewController</a>
