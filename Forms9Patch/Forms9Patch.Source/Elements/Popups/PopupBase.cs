@@ -21,6 +21,19 @@ namespace Forms9Patch
     public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage,  /* Xamarin.Forms.Layout<View>,*/ IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
 
     {
+        /// <summary>
+        /// backing store for IsAnimationEnabled property
+        /// </summary>
+        public static new readonly BindableProperty IsAnimationEnabledProperty = BindableProperty.Create("Forms9Patch.PopupBase.IsAnimationEnabled", typeof(bool), typeof(PopupBase), default(bool));
+        /// <summary>
+        /// Determines if popup Pop and Push events are animated
+        /// </summary>
+        public new bool IsAnimationEnabled
+        {
+            get => (bool)GetValue(PopupBase.IsAnimationEnabledProperty);
+            set => SetValue(PopupBase.IsAnimationEnabledProperty, value);
+        }
+
         #region IPopup
 
         #region Padding  // IMPORTANT: Need to override Xamarin.Forms.Layout.Padding property in order to correctly compute & store shadow padding
@@ -660,6 +673,7 @@ namespace Forms9Patch
                     if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
                     {
                         _isPushing = true;
+                        base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.PushPopupAsync(this);
                         PopupLayerEffect.ApplyTo(this);
                     }
@@ -695,6 +709,7 @@ namespace Forms9Patch
                     {
                         _isPopping = true;
                         PopupLayerEffect.RemoveFrom(this);
+                        base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
                     }
                     //_isPoping = false;
@@ -723,6 +738,8 @@ namespace Forms9Patch
 
             if (propertyName == PageOverlayColorProperty.PropertyName)
                 base.BackgroundColor = PageOverlayColor;
+            else if (propertyName == IsAnimationEnabledProperty.PropertyName)
+                base.IsAnimationEnabled = IsAnimationEnabled;
             else if (propertyName == IsVisibleProperty.PropertyName)
             {
                 if (IsVisible && !_isPushed)// && PopupPage != null)

@@ -23,8 +23,8 @@
 	</PropertyGroup>
 	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
 	<ItemGroup>
-		<PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-		<PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
+		<PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+		<PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj" />
