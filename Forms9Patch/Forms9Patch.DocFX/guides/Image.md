@@ -136,7 +136,7 @@ var image = new Forms9Patch.Image("MyApp.Resource.Printer.png")
  |-----------------------------------------------------|----------------------------------------------------------|
  | ![Source Image](images/Image/Printer.png) | ![Tinted Image](images/Image/Printer.Tint.png) |
 
-**Note:** The `TintColor` property is intented for use with *raster* images that have and makes use of the transparent color plane.  Results will likely be undesireable for other types of raster images.  This property is ignored for vector (`.svg`) images.  
+**Note:** The `TintColor` property is intented for use with *raster* images that have and makes use of the transparent color plane.  Results will likely be undesirable for other types of raster images.  This property is ignored for vector (`.svg`) images.  
 
 ## SourceImageSize Property
 
@@ -154,7 +154,7 @@ What?  Why would an image need a background color?  Well, usually it wouldn't *b
 
 | Source image  |  `BackgroundColor=Color.Orange` |
 |---------------|---------------------------------------------|
-|  ![Background Example](images/Image/printer.png) | ![Background Example](images/Image/Printer.Background.png) |
+|  ![Background Example](images/Image/Printer.png) | ![Background Example](images/Image/Printer.Background.png) |
 
 Note the corners are rounded on this image!
 
@@ -183,5 +183,3 @@ And, if you used `Xamarin.Forms.Frame` before, Forms9Patch's Outline properties 
 Let's go out on limb and keep adding embelishments to the image.  Once you have the ability to impose a shape to your image, it is common to want a shadow to match the imposed shape.  `HasShadow` makes that happen.  And, going even further, `ShadowInverted` reverses the shadow to give a recessed effect to the shadow.  
 
 Now, here is where Forms9Patch can do something a bit clever.  If the `ImageSource` is a *.png image **with** transparency in the image, the `HasShadow` property of Forms9Patch will impose the shadow on the overlap of the `ElementShape` *and* the non-transparent parts of the image!  NOTE: Setting `ShadowInverted` to true breaks this functionality.
-
-

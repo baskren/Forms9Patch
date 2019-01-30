@@ -8,7 +8,7 @@
     <title>Forms9Patch Popups | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Popups | Forms9Patch ">
-    <meta name="generator" content="docfx 2.40.0.0">
+    <meta name="generator" content="docfx 2.40.8.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -79,11 +79,11 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="forms9patch-popups">Forms9Patch Popups</h1>
 
-<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityInditorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
+<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
 <p>As of Forms9Patch version 1.5.0.5,  <code>Forms9Patch.RootPage</code> is no longer needed to enable popups <strong>AND</strong> Forms9Patch popups work with pages that have been presented modally.</p>
 <h2 id="common-properties-methods-and-events">Common Properties, Methods and Events</h2>
 <p>The following properties and methods are common to all Forms9Patch popups, except <code>ActivityIndicatorPopup</code>:</p>
-<h3 id="appearance-properties">Appearance Properties</h3>
+<h3 id="common-appearance-properties">Common Appearance Properties</h3>
 <ul>
 <li><code>BackgroundImage</code>: The <code>Forms9Patch.Image</code> displayed as the popup's background.</li>
 <li><code>BackgroundColor</code>: popup's optional background color.</li>
@@ -93,27 +93,27 @@
 <li><code>HasShadow</code>: one more time ... that actually works on Android.  Has no effect when BackgroundColor has not been set.</li>
 <li><code>ShadowInverted</code>: to apply a recessed effect to the layout (if HasShadow is enabled).</li>
 </ul>
-<h3 id="page-overlay-between-the-popup-and-the-page-the-popup-sets-upon-properties">Page Overlay (between the popup and the page the popup sets upon) Properties:</h3>
+<h3 id="page-overlay-between-the-popup-and-the-page-the-popup-sets-upon-properties">Page Overlay (between the popup and the page the popup sets upon) Properties</h3>
 <ul>
 <li><code>PageOverlayColor</code>: The Color of the page overlay upon which the ModalPopup sets.  Default value is <code>Color.Rgba(0.5, 0.5, 0.5, 0.5)</code>.</li>
 <li><code>CancelOnBackgroundTouch</code>: Controls is the popup is cancelled if the background is touched.  Default value is true.</li>
 <li><code>CancelOnBackButtonTouch</code>: Controls is the popup is cancelled if the back button (Android only) is touched.  Default value is true.</li>
 </ul>
-<h3 id="memory-management-properties">Memory Management Properties:</h3>
+<h3 id="common-memory-management-properties">Common Memory Management Properties</h3>
 <ul>
 <li><code>Retain</code>: a boolean (default: <code>false</code>) used to indicate if the popup and its contents should be removed from the view hierarchy as soon as the view is hidden.  Why would I bother to have this? <em>ANDROID!</em> If you have a heavy layout that will be shown multiple times, you may not want to re-render each time it is made visible. Seeing <code>Retain=true</code> will keep your popup and its content in the view hierarchy so it won't have to be re-rendered the next time you want to present it.</li>
 </ul>
-<h3 id="methods">Methods</h3>
+<h3 id="common-methods">Common Methods</h3>
 <ul>
-<li><code>void Cancel()</code>: Programically cancels the Popup.</li>
+<li><code>void Cancel()</code>: Programmatically cancels the Popup.</li>
 </ul>
-<h3 id="events">Events</h3>
+<h3 id="common-events">Common Events</h3>
 <ul>
 <li><code>Cancelled</code>: Called when the popup has been canceled by the user tapping outside its bounds.</li>
 </ul>
 <h2 id="forms9patchmodelpopup">Forms9Patch.ModelPopup</h2>
 <p>The most needed missing component: a simple content popup that is a content container which centers its contents on the main page.  Since you may want a popup container with a background image, Forms9Patch provides the ModalPopup element for this purpose.  Once you have initialized a Forms9Patch popup view, set the IsVisible property to true to present it.</p>
-<h3 id="unique-properties">Unique Properties</h3>
+<h3 id="forms9patchmodelpopup-unique-properties">Forms9Patch.ModelPopup Unique Properties</h3>
 <ul>
 <li><code>Content</code>: The <code>Xamarin.Forms.VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
 <li><code>ElementShape</code>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
@@ -127,7 +127,7 @@
 </table>
 <h2 id="forms9patchbubblepopup">Forms9Patch.BubblePopup</h2>
 <p>The popup that is missing from both Xamarin.Forms and Android is a pointer bubble popup - a popup that points to another element.  Given a <code>Target</code> element, some <code>Content</code> to display, and an allowed <code>PointerDirection</code>, <code>Forms9Patch.BubblePopup</code> will best fit a popup bubble pointing the the <code>Target</code>.  Note that, unlike the <code>ModalPopup</code> element, <code>BubblePopup</code> does not support the <code>BackgroundImage</code> nor <code>ElementShape</code> properties.  If you do not specify the <code>Target</code>, <code>BubblePopup</code> will present its content in a <code>ModalPopup</code>.  As with <code>ModalPopup</code>, once you have initialized a <code>BubblePopup</code> you will need to set the <code>IsVisible</code> property to <code>true</code> to present it.</p>
-<h3 id="unique-properties-1">Unique Properties</h3>
+<h3 id="forms9patchbubblepopup-unique-properties">Forms9Patch.BubblePopup Unique Properties</h3>
 <ul>
 <li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
 <li><code>Target</code>: The <code>Xamarin.Forms.VisualElement</code> to which the bubble popup will point.</li>
@@ -146,37 +146,37 @@
 </table>
 <h2 id="forms9patchtoast">Forms9Patch.Toast</h2>
 <p>Sometimes you simply need to put a message up on the screen.  Given some HTML formatted text and an HTML formatted title <code>Toast</code> will display them in a popup with an (optional but enabled by default) <strong>[OK]</strong> button.  <code>Toast</code> is inherited from the <code>ModalPopup</code> element so it does support background images.  Unlike <code>ModalPopup</code>, <code>Toast</code> has the <code>Create(string title, string text)</code> static method that will generate and present the toast.  You can still manually construct and present a <code>Toast</code> by using its constructor and setting its <code>IsVisible</code> property to true.</p>
-<h3 id="unique-properties-2">Unique Properties:</h3>
+<h3 id="forms9patchtoast-unique-properties">Forms9Patch.Toast Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>ElementShape</code>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
 </ul>
-<h3 id="unique-methods">Unique Methods:</h3>
+<h3 id="forms9patchtoast-unique-methods">Forms9Patch.Toast Unique Methods</h3>
 <ul>
 <li><code>static Toast Create(string title, string text)</code>: instantiates and presents a <code>Toast</code>.</li>
 </ul>
 <h2 id="forms9patchtargetedtoast">Forms9Patch.TargetedToast</h2>
 <p>Just as <code>Toast</code> is a convenience version of <code>ModalPopup</code>, <code>TargetedToast</code> is a convenience version of <code>BubblePopup</code>.  Given a <code>Target</code> as a <code>Xamarin.Forms.VisualElement</code>, a <code>Title</code>, some <code>Text</code> to display, and an allowed <code>PointerDirection</code>, <code>Forms9Patch.TargetedToast</code> will best fit a popup bubble pointing the the <code>Target</code>.  Like <code>BubblePopup</code> element, <code>BubblePopup</code> does not support background images.  If you do not specify the <code>Target</code>, it will present itself as a <code>Toast</code>.  As with <code>Toast</code>, you can use the <code>Create</code> static method to instantiate and present a <code>TargetedToast</code>.</p>
-<h3 id="unique-properties-3">Unique Properties:</h3>
+<h3 id="forms9patchtargetedtoast-unique-properties">Forms9Patch.TargetedToast Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>Target</code>: The <code>Xamarin.Forms.VisualElement</code> to which the bubble popup will point.</li>
 <li><code>OkButtonColor</code>: Background color for <strong>[OK]</strong> button.</li>
 <li><code>OkTextColor</code>: Text color for <strong>[OK]</strong> button.</li>
 <li><code>OKText</code>: Text for <strong>[OK]</strong> button.  Set to null to remove the <strong>[OK]</strong> button from the popup.  As noted above, you don't want this set to null when <code>CancelOnBackgroundTouch</code> is set to <code>false</code>.</li>
 </ul>
-<h3 id="unique-methods-1">Unique Methods</h3>
+<h3 id="forms9patchtargetedtoast-unique-methods">Forms9Patch.TargetedToast Unique Methods</h3>
 <ul>
 <li><code>static TargetedToast Create(VisualElement target, string title, string text)</code>: instantiates and presents a <code>TargetedToast</code>.</li>
 </ul>
 <h2 id="forms9patchpermissionpopup">Forms9Patch.PermissionPopup</h2>
 <p>Sometimes you simply need to ask a yes/no question.  Given some HTML formatted text and an HTML formatted title, <code>PermissionPopup</code> will display them in a popup with <strong>[OK]</strong> and <strong>[Cancel]</strong> buttons.  <code>PermissionPopup</code> is inherited from the <code>ModalPopup</code> element so it does support background images.  Unlike <code>ModalPopup</code>, <code>PermissionPopup</code> has the <code>Create(string title, string text)</code> static method that will generate and present the toast.  You can still manually construct and present a <code>PermissionPopup</code> by using its constructor and setting its <code>IsVisible</code> property to <code>true</code>.  Unlike <code>Toast</code>, the <strong>[OK]</strong> and <strong>[Cancel]</strong> buttons cannot be removed from the layout by setting their text to null.</p>
-<h3 id="unique-properties-4">Unique Properties</h3>
+<h3 id="forms9patchpermissionpopup-unique-properties">Forms9Patch.PermissionPopup Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label#HTML-Markup:-How-it-works">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>OkButtonColor</code>: Background color for <strong>[OK]</strong> button.</li>
 <li><code>OkTextColor</code>: Text color for <strong>[OK]</strong> button.</li>
 <li><code>OKText</code>: Text for <strong>[OK]</strong> button.</li>
@@ -184,45 +184,45 @@
 <li><code>CancelTextColor</code>: Text color for <strong>[Cancel]</strong> button.</li>
 <li><code>CancelText</code>: Text for <strong>[Cancel]</strong> button.</li>
 </ul>
-<h3 id="unique-methods-2">Unique Methods:</h3>
+<h3 id="forms9patchpermissionpopup-unique-methods">Forms9Patch.PermissionPopup Unique Methods</h3>
 <ul>
 <li><code>static PermissionPopup Create(string title, string text, string okText = &quot;OK&quot;, string cancelText = &quot;Cancel&quot;)</code>: instantiates and presents a <code>PermissionPopup</code>.</li>
 </ul>
-<h3 id="unique-events">Unique Events:</h3>
+<h3 id="forms9patchpermissionpopup-unique-events">Forms9Patch.PermissionPopup Unique Events</h3>
 <ul>
 <li><code>OkTapped</code>: Called when the <strong>[OK]</strong> button has been tapped.</li>
 </ul>
 <h2 id="forms9patchtargetedmenu">Forms9Patch.TargetedMenu</h2>
-<p>Sometimes you need a popup menu with a list of menu items.  And, if there are more menu items than available room, the menu needs to have pagination.  <code>Forms9Patch.TargetedMenu</code> combines <code>SegmentedController</code>'s use of a <code>List&lt;Segement&gt;</code> to define the menu items with features of <code>TargetedToast</code> to give this functionality.</p>
-<h3 id="unique-properties-5">Unique Properties:</h3>
+<p>Sometimes you need a popup menu with a list of menu items.  And, if there are more menu items than available room, the menu needs to have pagination.  <code>Forms9Patch.TargetedMenu</code> combines <code>SegmentedController</code>'s use of a <code>List&lt;Segment&gt;</code> to define the menu items with features of <code>TargetedToast</code> to give this functionality.</p>
+<h3 id="forms9patchtargetedmenu-unique-properties">Forms9Patch.TargetedMenu Unique Properties</h3>
 <ul>
-<li><code>Segments</code>: a <code>List</code> of <code>Forms9Patch.Segement</code> elements that define the menu items.  See <a class="xref" href="../api/Forms9Patch.Segment.html">Forms9Patch.Segment</a> for how to set a segment's text and icons.</li>
+<li><code>Segments</code>: a <code>List</code> of <code>Forms9Patch.Segment</code> elements that define the menu items.  See <a class="xref" href="../api/Forms9Patch.Segment.html">Forms9Patch.Segment</a> for how to set a segment's text and icons.</li>
 <li><code>FontSize</code>: size of font to be used.</li>
 <li><code>TextColor</code>: color of text for each menu item.</li>
 <li><code>SeparatorColor</code>: color of separator line between menu items</li>
-<li><code>SeparatorWidth</code>: thickess of separator line between menu items</li>
+<li><code>SeparatorWidth</code>: thickness of separator line between menu items</li>
 <li><code>HapticEffect</code>: if available on platform and enabled via <code>HapticMode</code>, what will be the haptic effect: <code>None</code>, platform's <code>KeyClick</code> effect, platform's <code>Return</code> key effect, or platforms <code>Delete</code> key effect?</li>
-<li><code>HapticMode</code>: if available on platform, enable, disable, or use default behaviour for the haptic effect.</li>
+<li><code>HapticMode</code>: if available on platform, enable, disable, or use default behavior for the haptic effect.</li>
 </ul>
-<h3 id="unique-events-1">Unique Events:</h3>
+<h3 id="forms9patchtargetedmenu-unique-events">Forms9Patch.TargetedMenu Unique Events</h3>
 <ul>
 <li><code>public event SegmentedControlEventHandler SegmentTapped</code>: fired when a menu item (segment) has been tapped.</li>
 </ul>
 <h2 id="forms9patchactivityindicatorpopup">Forms9Patch.ActivityIndicatorPopup</h2>
-<p>This popup is propably misnamed. Its purpose is to present an activity indicator and block interaction with the app.   Because <code>ModalPopup</code> had everything I needed to build this, I named it a popup.  Probably should have thought about that more.  Also, because this is something you typically just want to fire and forget, like <code>Toast</code> and <code>TargetedToast</code>, <code>ActivityIndicatorPopup</code> has a <code>Create</code> static method to instantiate and present an instance in one call.</p>
+<p>This popup is probably misnamed. Its purpose is to present an activity indicator and block interaction with the app.   Because <code>ModalPopup</code> had everything I needed to build this, I named it a popup.  Probably should have thought about that more.  Also, because this is something you typically just want to fire and forget, like <code>Toast</code> and <code>TargetedToast</code>, <code>ActivityIndicatorPopup</code> has a <code>Create</code> static method to instantiate and present an instance in one call.</p>
 <p>Note that</p>
-<h3 id="properties">Properties:</h3>
+<h3 id="forms9patchactivityindicatorpopup-properties">Forms9Patch.ActivityIndicatorPopup Properties</h3>
 <ul>
 <li><code>PageOverlayColor</code>: The <code>Color</code> of the page overlay upon which the <code>ModalPopup</code> sets.  Default value is <code>Color.Rgba(0.5, 0.5, 0.5, 0.5)</code>.</li>
 <li><code>Color</code>: <code>Color</code> of the activity indicator.</li>
 <li><code>CancelOnBackgroundTouch</code>: Controls is the popup is cancelled if the background is touched.  Default value is true.</li>
 </ul>
-<h3 id="methods-1">Methods</h3>
+<h3 id="forms9patchactivityindicatorpopup-methods">Forms9Patch.ActivityIndicatorPopup Methods</h3>
 <ul>
 <li><code>static ActivityIndicatorPopup Create()</code></li>
-<li><code>void Cancel()</code>: Programically cancels the popup.</li>
+<li><code>void Cancel()</code>: Programmatically cancels the popup.</li>
 </ul>
-<h3 id="events-1">Events</h3>
+<h3 id="forms9patchactivityindicatorpopup-events">Forms9Patch.ActivityIndicatorPopup Events</h3>
 <ul>
 <li><code>Cancelled</code>: Called when the popup has been canceled by the user tapping outside its bounds.</li>
 </ul>

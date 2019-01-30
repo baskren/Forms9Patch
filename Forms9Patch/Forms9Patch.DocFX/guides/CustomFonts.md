@@ -83,7 +83,7 @@ This section assumes you've added your custom font to your Shared Code project, 
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeHTML.png)
 
-## Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect
+## Embedded Resource custom fonts with Xamarin.Forms text elements and EmbeddedResourceFontEffect
 
 This section assumes you've added your custom font to your Shared Code project, as described in [Adding your custom font as an Embedded Resource](#Adding-your-custom-font-as-an-embedded-Resource), above.
 

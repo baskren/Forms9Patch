@@ -8,7 +8,7 @@
     <title>Using Forms9Patch Button Elements | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Using Forms9Patch Button Elements | Forms9Patch ">
-    <meta name="generator" content="docfx 2.40.0.0">
+    <meta name="generator" content="docfx 2.40.8.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -177,13 +177,19 @@
 <li><strong><code>Text</code></strong>: plain text for the button's label</li>
 <li><strong><code>HtmlText</code></strong>: markup text for the button's label - an alternative to <code>Text</code></li>
 <li><strong><code>LineBreakMode</code></strong>: See <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms">Xamarin.Forms.LineBreakMode</a></li>
-<li><strong><code>AutoFit</code></strong>: Autofitting algorithm to be applied to button's label's text.  See <a href="Label#utomatically-Resizing-Text-(Auto-fitting)">Label.Autofitting</a>.</li>
+<li><strong><code>AutoFit</code></strong>: Autofitting algorithm to be applied to button's label's text.  See <a href="Label.html#Autofit-How-it-works">Label.Autofitting</a>.</li>
 </ul>
 </li>
 <li>Icon
 <ul>
 <li><strong><code>IconImage</code></strong>: A <code>Forms9Patch.Image</code> element to be used as the button's icon image.</li>
 <li><strong><code>IconText</code></strong>: An alternative to <code>IconImage</code>, enabling the use of Unicode characters or special font characters as button icons.  Just like the <code>HtmlText</code> property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.</li>
+<li><strong><code>IconFontFamily</code></strong>: Used to specify the font family used for the <code>IconText</code> property.</li>
+</ul>
+</li>
+<li>Behavior:
+<ul>
+<li><strong><code>IsLongPressEnabled</code></strong>: By default, <code>false</code>.  Used to toggle long press gesture observation.  Note that the button will be less responsive when the property is enabled.</li>
 </ul>
 </li>
 </ul>
@@ -194,19 +200,21 @@
 <li><strong>IconImage</strong>: <code>Forms9Patch.Image</code> as the segment's optional image.  It will be tinted either to <code>FontColor</code> when enabled and grey when disabled <em>if</em> the parent <code>SegmentControl</code>'s <code>TintImage=true</code> and the image is a PNG with transparency.</li>
 <li><strong>IconText</strong>: alternative to the ImageSource property. Used to specify HTML formatted text for button's icon. Great when used with Google's Material Font.</li>
 <li><strong>Text</strong>: the segment's optional text.</li>
-<li><strong>HtmlText</strong>: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.
-FontColor: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.
-FontAttributes: is the text bold or italics?
-IsSelected: Is the segment in the selected state?  Note: Segment's parent's StickyBehvior property must be Radio or MultiSelect for this to change in response to the segment being tapped.
-IsEnabled: Is the segment enabled?
-Orientation: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?
-Events
-Command: The ICommand to execute when the segment is pressed.  NOTE: If the segment's parent's StickyBehvior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.
-CommandParameterThe parameter used in ICommand calls.
-Tapped: EventHandler be called anytime a segment is tapped.
-Selected: EventHandler be called when a segment transitions from unselected to selected.
-LongPressing: EventHandler be called when a segment is being held down long enough to be considered a long press.
-LongPressed: EventHandler be called when a segment's long press has ended.</li>
+<li><strong>HtmlText</strong>: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.</li>
+<li><strong>FontColor</strong>: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.</li>
+<li><strong>FontAttributes</strong>: is the text bold or italics?</li>
+<li><strong>IsSelected</strong>: Is the segment in the selected state?  Note: Segment's parent's StickyBehvior property must be Radio or MultiSelect for this to change in response to the segment being tapped.</li>
+<li><strong>IsEnabled</strong>: Is the segment enabled?</li>
+<li><strong>Orientation</strong>: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?</li>
+</ul>
+<h3 id="events">Events</h3>
+<ul>
+<li><strong>Command</strong>: The ICommand to execute when the segment is pressed.  NOTE: If the segment's parent's StickyBehvior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.</li>
+<li><strong>CommandParameter</strong>: The parameter used in ICommand calls.</li>
+<li><strong>Tapped</strong>: EventHandler be called anytime a segment is tapped.</li>
+<li><strong>Selected</strong>: EventHandler be called when a segment transitions from unselected to selected.</li>
+<li><strong>LongPressing</strong>: EventHandler be called when a segment is being held down long enough to be considered a long press.</li>
+<li><strong>LongPressed</strong>: EventHandler be called when a segment's long press has ended.</li>
 </ul>
 </article>
           </div>

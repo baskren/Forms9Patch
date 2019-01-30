@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IWeakEventManager
    | Forms9Patch ">
-    <meta name="generator" content="docfx 2.40.0.0">
+    <meta name="generator" content="docfx 2.40.8.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -149,6 +149,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void AddEventHandler&lt;TEventArgs&gt;(object source, string eventName, EventHandler&lt;TEventArgs&gt; value)
+
     where TEventArgs : EventArgs</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -207,6 +208,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void HandleEvent&lt;TEventArgs&gt;(object sender, TEventArgs args, string eventName)
+
     where TEventArgs : EventArgs</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -302,6 +304,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void RemoveEventHandler&lt;TEventArgs&gt;(string eventName, EventHandler&lt;TEventArgs&gt; value)
+
     where TEventArgs : EventArgs</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

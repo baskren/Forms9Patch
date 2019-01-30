@@ -8,7 +8,7 @@
     <title>Forms9Patch Label Element | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Label Element | Forms9Patch ">
-    <meta name="generator" content="docfx 2.40.0.0">
+    <meta name="generator" content="docfx 2.40.8.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -85,11 +85,11 @@
 <p>Setting up to use <a href="https://xamarinhelp.com/custom-fonts-xamarin-forms/">custom fonts with Xamarin.Forms</a> is very painful - and not at all in the spirit of cross platform.  I wish Xamarin had made using custom fonts easier because I would rather be making apps than making libraries.  But, alas, that's not (yet) the case.   If you're at Xamarin and are reading this, please don't take it personally - I love Xamarin Forms and wouldn't be putting in this much effort if I didn't.</p>
 <p>As with images, it seems that the idea cross-platform approach to custom fonts would be to embed them (as EmbeddedResources) in the shared, cross platform code.  That wasn't trivial and there were a lot of obstacles to overcome.  Once worked out, I saw it was possible to bring this font management magic back to Xamarin.Forms elements via the <code>Forms9Patch.EmbeddedResourceFontEffect</code>.</p>
 <p>Just to clarify, Forms9Patch text elements (<code>Label</code> and buttons) supports EmbeddedResource custom fonts without modification.  Xamarin.Forms text elements (<code>Label</code> and <code>Button</code>) can also use EmbeddedResource custom fonts by adding the <code>Forms9Patch.EmbeddedResourceFontEffect</code> effect.</p>
-<h4 id="detailed-examples">Detailed Examples:</h4>
+<h4 id="detailed-examples">Detailed Examples</h4>
 <ul>
 <li><a href="CustomFonts.html#Adding-your-custom-font-as-an-Embedded-Resource">Adding your custom font as an Embedded Resource</a></li>
 <li><a href="CustomFonts.html#Embedded-Resource-custom-font-with-Forms9Patch.Label">Embedded Resource custom font with Forms9Patch.Label</a></li>
-<li><a href="CustomFonts#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-+-EmbeddedResourceFontEffect">Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect</a></li>
+<li><a href="CustomFonts.html#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-and-EmbeddedResourceFontEffect">Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect</a></li>
 </ul>
 <h3 id="intra-label-text-formatting">Intra-Label Text Formatting</h3>
 <p>Text formating shouldn't be painful.  That's why HTML and MarkDown were invented.  Although Xamarin uses a fairly conventional approach (intermediate <code>Span</code> elements), it certainly isn't an easy approach.  Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard, PCL, or Shared Library approach that is easier and just as fast.</p>
@@ -171,8 +171,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="html-markup-how-it-works">HTML Markup: How it works</h2>
-<p>Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard approach that is easier and just as fast.  Forms9Patch does this by avoiding the use of intermediate classes and, instead, allows you to pass HTML directly to its <code>Label</code>, <code>Segment</code>, and <code>Button</code> elements by way of the <code>HtmlText</code> property.  Also, <code>HtmlText</code> property supports a larger range of formatting than Xamarin provides via the <code>Span</code> element. Additionaly, <code>HtmlText</code> integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.</p>
+<h2 id="how-does-forms9patch-html-markup-work">How does Forms9Patch HTML Markup work</h2>
+<p>Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard approach that is easier and just as fast.  Forms9Patch does this by avoiding the use of intermediate classes and, instead, allows you to pass HTML directly to its <code>Label</code>, <code>Segment</code>, and <code>Button</code> elements by way of the <code>HtmlText</code> property.  Also, <code>HtmlText</code> property supports a larger range of formatting than Xamarin provides via the <code>Span</code> element. Additionally, <code>HtmlText</code> integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.</p>
 <h3 id="supported-tags">Supported Tags</h3>
 <ul>
 <li><code>&lt;a&gt;</code> Anchor (Action), formatted as a hyperlink.  The text surrounded by this tag will look like a hyperlink.  When this text is tapped on, it will trigger Label's event <code>EventHandler&lt;ActionTagEventArgs&gt;&gt; ActionTagTapped</code> event.  The <code>ActionTagTapped</code> event will pass object sender (the <code>Label</code> element) and <code>ActionTagEventArgs</code> e (with, you guessed it, two parameters: <code>Id</code> and <code>Href</code>).  Attributes:
@@ -185,21 +185,21 @@
 <li><code>&lt;b&gt;</code> Bold</li>
 <li><code>&lt;del&gt;</code> Delete</li>
 <li><code>&lt;den&gt;</code> Denominator</li>
-<li><code>&lt;em&gt;</code> Emphesis</li>
+<li><code>&lt;em&gt;</code> Emphasis</li>
 <li><code>&lt;font&gt;</code> Font. Attributes:
 <ul>
 <li><code>face</code>: font family (supports native, &quot;Monospace&quot;, &quot;San-serif&quot;, &quot;Serif&quot;, and Embedded Resource custom fonts)</li>
-<li><code>size</code>: font size (in &quot;px&quot;, &quot;em&quot;, and &quot;%&quot; units, HTML 1-7 unitless, HTML relative, and HTML named sizes )</li>
-<li><code>color</code>: font color (in rgb, rgba, hex, and HTML named colors)</li>
+<li><code>size</code>: font size (in &quot;px&quot;, &quot;em&quot;, and &quot;%&quot; units, HTML 1-7 unit-less, HTML relative, and HTML named sizes )</li>
+<li><code>color</code>: font color (in RGB, RGBA, HEX, and HTML named colors)</li>
 </ul>
 </li>
 <li><code>&lt;ins&gt;</code> Insert</li>
 <li><code>&lt;i&gt;</code> Italic</li>
 <li><code>&lt;num&gt;</code> Numerator</li>
-<li><code>&lt;pre&gt;</code> Prefomatted (Monospace font with white space preserved)</li>
-<li><code>&lt;s&gt;</code> Stikethrough</li>
+<li><code>&lt;pre&gt;</code> Preformatted (Mono-space font with white space preserved)</li>
+<li><code>&lt;s&gt;</code> Strike-through</li>
 <li><code>&lt;small&gt;</code> Small</li>
-<li><code>&lt;strike&gt;</code> Strikethrough</li>
+<li><code>&lt;strike&gt;</code> Strike-through</li>
 <li><code>&lt;strong&gt;</code> Strong</li>
 <li><code>&lt;sub&gt;</code> Subscript</li>
 <li><code>&lt;sup&gt;</code> Superscript</li>
@@ -217,7 +217,7 @@
 <li><code>font-weight</code>: Set to bold to apply bold to the text.  Only bold is supported at this time and only on fonts there a bold subset is available.  It is recommended to use the <code>&lt;b&gt;</code> tag instead.</li>
 <li><code>font-style</code>: Set to italic to apply italics formatting to the text. Only italic is supported at this time and only on fonts where an italic subset is available.  It is recommended to use the <code>&lt;i&gt;</code> tag instead.</li>
 </ul>
-<h3 id="xaml-exmaple-html-markup">XAML Exmaple: HTML Markup</h3>
+<h3 id="xaml-example-for-html-markup">XAML Example for HTML Markup</h3>
 <ol>
 <li><p>Follow one of the below <strong>Getting Started</strong> guides to create a <strong>.NetStandard</strong> Xamarin Forms cross-platform app with the <code>MyDemoApp</code> assembly namespace.</p>
 <ul>
@@ -258,10 +258,8 @@
 <p><img src="images/Label/MyDemoApp.SetEmbeddedResource.png" alt="MyDemoApp-NewFolder"></p>
 </li>
 <li><p>Make note of the Resource ID of this custom font.  See <a href="ImageSource.html#Embedded-Resource-Id-Naming-Convention">Embedded Resource Id Naming Convention</a> for details.</p>
-</li>
-</ol>
 <p>Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the <code>FontFamily</code> property.</p>
-<ol start="7">
+</li>
 <li><p>Add a &quot;Forms ContentPage Xaml&quot; file to your .NetStandard project:</p>
 <ul>
 <li><p>Right click on your PCL project (MyDemoApp)</p>
@@ -287,11 +285,11 @@
 </li>
 <li><p>Add the XAML Layout</p>
 <ul>
-<li><p>Add the <code>Padding=&quot;40</code> and <code>BackgroundColor=&quot;Silver&quot;</code> attributes to the<code>&lt;ContentPage&gt;</code>tag.</p>
+<li><p>Add the <code>Padding=&quot;40</code> and <code>BackgroundColor=&quot;Silver&quot;</code> attributes to the <code>&lt;ContentPage&gt;</code> tag.</p>
 </li>
 <li><p>Add the following <code>Forms9Patch.Label</code> and <code>Forms9Patch.SegmentedControl</code> elements to a <code>Xamarin.Forms.StackLayout</code> as the <code>ContentPage</code>'s content:</p>
 <pre><code class="lang-xml">&lt;StackLayout&gt;
-    &lt;Label Text=&quot;HTML Markuped Label Examples&quot; TextColor=&quot;Black&quot; FontAttributes=&quot;Bold&quot;	/&gt;
+    &lt;Label Text=&quot;HTML Markup Label Examples&quot; TextColor=&quot;Black&quot; FontAttributes=&quot;Bold&quot;/&gt;
 
     &lt;f9p:Label TextColor=&quot;Black&quot;&gt;
         &lt;![CDATA[plain &lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&lt;/i&gt;]]]&gt;
@@ -314,16 +312,12 @@
 </ul>
 </li>
 <li><p>Make <code>HtmlTestPage</code> your apps MainPage.</p>
-</li>
-</ol>
 <ul>
-<li><p>Open your .NetStandard project's Application subclass (<code>MyDemoApp.cs</code> in this example).</p>
-</li>
-<li><p>Set the <code>MainPage</code> property to <code>new HtmlTestPage()</code></p>
+<li>Open your .NetStandard project's Application subclass (<code>MyDemoApp.cs</code> in this example).</li>
+<li>Set the <code>MainPage</code> property to <code>new HtmlTestPage()</code></li>
+</ul>
 <p><img src="images/Label/MyDemoApp.SetMainPage.png" alt="MyDemoApp.SetMainPage.png"></p>
 </li>
-</ul>
-<ol start="11">
 <li><p>Build and start your app</p>
 <p><img src="images/Label/MyDemoApp.XamlRunning.png" alt="MyDemoApp.XamlRunning.png"></p>
 </li>

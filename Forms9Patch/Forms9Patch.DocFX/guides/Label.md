@@ -12,11 +12,11 @@ As with images, it seems that the idea cross-platform approach to custom fonts w
 
 Just to clarify, Forms9Patch text elements (`Label` and buttons) supports EmbeddedResource custom fonts without modification.  Xamarin.Forms text elements (`Label` and `Button`) can also use EmbeddedResource custom fonts by adding the `Forms9Patch.EmbeddedResourceFontEffect` effect.
 
-#### Detailed Examples:
+#### Detailed Examples
 
 - [Adding your custom font as an Embedded Resource](CustomFonts.md#Adding-your-custom-font-as-an-Embedded-Resource)
 - [Embedded Resource custom font with Forms9Patch.Label](CustomFonts.md#Embedded-Resource-custom-font-with-Forms9Patch.Label)
-- [Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect](CustomFonts#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-+-EmbeddedResourceFontEffect)
+- [Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect](CustomFonts.md#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-and-EmbeddedResourceFontEffect)
 
 ### Intra-Label Text Formatting
 
@@ -36,8 +36,6 @@ Before starting, I reviewed what I already knew: Apple and Android has some prov
 But that is an oversimplification.  The `Lines`, `FontSize`, and `AutoFit` properties play an important role and determining just how Forms9Patch's auto-fitting works.  To better explain this, lets look at the imposed bounds and imposed width cases separately.
 
 Once the autofitting is completed, Forms9Patch updates `Label`'s read only `ActualFontSize` property with the resulting font size.  And, in case you were wondering: Why is there no autofitting when the width is not imposed?  Because then the text should all fit on one line.
-
-
 
 ## Autofit: How it works
 
@@ -65,31 +63,31 @@ Autofitting works differently if the `Label`'s width has been imposed but the he
 | `Lines>0` `AutoFit=AutoFit.Width` | Scale the height of the `Label` and the font size of the text until it all fits within `Lines` lines, limiting the font size between `FontSize` and `MinFontSize`.  If limited to `MinFontSize`, apply the `LineBreakMode` truncation. | ![ImposedWidthWidth](images/Label/ImposedWidthWidth.gif) |
 | `Lines>0` `Fit=LabelFit.Lines` | Scale the height of the `Label` so that it is as tall as `Lines` lines at `FontSiz`e.  If the text cannot fit within `Lines` lines, apply the `LineBreakMode` truncation. | ![ImposedWidthLines](images/Label/ImposedWidthLines.gif) |
 
-## HTML Markup: How it works
+## How does Forms9Patch HTML Markup work
 
-Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard approach that is easier and just as fast.  Forms9Patch does this by avoiding the use of intermediate classes and, instead, allows you to pass HTML directly to its `Label`, `Segment`, and `Button` elements by way of the `HtmlText` property.  Also, `HtmlText` property supports a larger range of formatting than Xamarin provides via the `Span` element. Additionaly, `HtmlText` integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.
+Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard approach that is easier and just as fast.  Forms9Patch does this by avoiding the use of intermediate classes and, instead, allows you to pass HTML directly to its `Label`, `Segment`, and `Button` elements by way of the `HtmlText` property.  Also, `HtmlText` property supports a larger range of formatting than Xamarin provides via the `Span` element. Additionally, `HtmlText` integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.
 
 ### Supported Tags
 
 - `<a>` Anchor (Action), formatted as a hyperlink.  The text surrounded by this tag will look like a hyperlink.  When this text is tapped on, it will trigger Label's event `EventHandler<ActionTagEventArgs>> ActionTagTapped` event.  The `ActionTagTapped` event will pass object sender (the `Label` element) and `ActionTagEventArgs` e (with, you guessed it, two parameters: `Id` and `Href`).  Attributes:
-  - `id` a first string to identify the action 
+  - `id` a first string to identify the action
   - `href` a second string to further identify the action
 - `<big>` Big
 - `<b>` Bold
 - `<del>` Delete
 - `<den>` Denominator
-- `<em>` Emphesis
+- `<em>` Emphasis
 - `<font>` Font. Attributes:
-   - `face`: font family (supports native, "Monospace", "San-serif", "Serif", and Embedded Resource custom fonts)
-   - `size`: font size (in "px", "em", and "%" units, HTML 1-7 unitless, HTML relative, and HTML named sizes )
-   - `color`: font color (in rgb, rgba, hex, and HTML named colors)
+  - `face`: font family (supports native, "Monospace", "San-serif", "Serif", and Embedded Resource custom fonts)
+  - `size`: font size (in "px", "em", and "%" units, HTML 1-7 unit-less, HTML relative, and HTML named sizes )
+  - `color`: font color (in RGB, RGBA, HEX, and HTML named colors)
 - `<ins>` Insert
 - `<i>` Italic
 - `<num>` Numerator
-- `<pre>` Prefomatted (Monospace font with white space preserved)
-- `<s>` Stikethrough
+- `<pre>` Preformatted (Mono-space font with white space preserved)
+- `<s>` Strike-through
 - `<small>` Small
-- `<strike>` Strikethrough
+- `<strike>` Strike-through
 - `<strong>` Strong
 - `<sub>` Subscript
 - `<sup>` Superscript
@@ -108,7 +106,7 @@ Only the style attribute is supported at this time.
 - `font-weight`: Set to bold to apply bold to the text.  Only bold is supported at this time and only on fonts there a bold subset is available.  It is recommended to use the `<b>` tag instead.
 - `font-style`: Set to italic to apply italics formatting to the text. Only italic is supported at this time and only on fonts where an italic subset is available.  It is recommended to use the `<i>` tag instead.
 
-### XAML Exmaple: HTML Markup
+### XAML Example for HTML Markup
 
 1. Follow one of the below **Getting Started** guides to create a **.NetStandard** Xamarin Forms cross-platform app with the `MyDemoApp` assembly namespace.  
 
@@ -141,7 +139,7 @@ Only the style attribute is supported at this time.
 
 6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#Embedded-Resource-Id-Naming-Convention) for details.
 
-Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the `FontFamily` property.
+    Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the `FontFamily` property.
 
 7. Add a "Forms ContentPage Xaml" file to your .NetStandard project:
 
@@ -158,21 +156,21 @@ Your Embedded Resource custom font is now ready for use by Forms9Patch label and
 
       You should now have two new files open in Xamarin Studio: `HtmlTextPage.xaml` (a skeleton Xaml page) and its code behind, `HtmlTextPage.xaml.cs`.
 
-8. Add the `Forms9Patch` namespace to your XAML 
+8. Add the `Forms9Patch` namespace to your XAML
 
    - Open the `HtmlTestPage.xaml` file.
    - Add the `xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"` attribute to the `<ContentPage>` tag.
 
      ![MyDemoApp.AddF9PNamespace.png](images/Label/MyDemoApp.AddF9PNamespace.png)
 
-9. Add the XAML Layout 
+9. Add the XAML Layout
 
-   - Add the `Padding="40` and `BackgroundColor="Silver"` attributes to the` <ContentPage>`tag.
+   - Add the `Padding="40` and `BackgroundColor="Silver"` attributes to the `<ContentPage>` tag.
    - Add the following `Forms9Patch.Label` and `Forms9Patch.SegmentedControl` elements to a `Xamarin.Forms.StackLayout` as the `ContentPage`'s content:
 
         ```xml
         <StackLayout>
-            <Label Text="HTML Markuped Label Examples" TextColor="Black" FontAttributes="Bold"	/>
+            <Label Text="HTML Markup Label Examples" TextColor="Black" FontAttributes="Bold"/>
 
             <f9p:Label TextColor="Black">
                 <![CDATA[plain <b>bold</b> <i>italic</i>]]]>
@@ -192,10 +190,10 @@ Your Embedded Resource custom font is now ready for use by Forms9Patch label and
         </StackLayout>
         ```
 
-10. Make `HtmlTestPage` your apps MainPage. 
+10. Make `HtmlTestPage` your apps MainPage.
 
-   - Open your .NetStandard project's Application subclass (`MyDemoApp.cs` in this example).
-   - Set the `MainPage` property to `new HtmlTestPage()`
+    - Open your .NetStandard project's Application subclass (`MyDemoApp.cs` in this example).
+    - Set the `MainPage` property to `new HtmlTestPage()`
 
      ![MyDemoApp.SetMainPage.png](images/Label/MyDemoApp.SetMainPage.png)
 

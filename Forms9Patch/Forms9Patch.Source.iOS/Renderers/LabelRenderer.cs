@@ -525,7 +525,11 @@ namespace Forms9Patch.iOS
             string text = null;
             NSAttributedString attributedText = null;
             if (Element.F9PFormattedString != null)
+            {
+                var color = (Color)Element.GetValue(Label.TextColorProperty);
+                ControlTextColor = color.ToUIColor(UIColor.Black);
                 attributedText = Element.F9PFormattedString.ToNSAttributedString(ControlFont, ControlTextColor);
+            }
             else
                 text = (string)Element.GetValue(Label.TextProperty);
 
@@ -555,10 +559,10 @@ namespace Forms9Patch.iOS
 
         void UpdateTextColor()
         {
-            var color = (Color)Element.GetValue(Label.TextColorProperty);
-            ControlTextColor = color.ToUIColor(UIColor.Black);
             InvokeOnMainThread(() =>
             {
+                var color = (Color)Element.GetValue(Label.TextColorProperty);
+                ControlTextColor = color.ToUIColor(UIColor.Black);
                 if (Control != null)
                     Control.TextColor = ControlTextColor;
             });
