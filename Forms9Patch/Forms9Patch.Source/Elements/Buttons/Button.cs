@@ -1184,7 +1184,7 @@ namespace Forms9Patch
 
         void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            if (IsEnabled && IsVisible && !IsLongPressEnabled)
+            if (IsEnabled && IsVisible)// && !IsLongPressEnabled)
             {
 
                 //Debug.WriteLine("tapped");
@@ -1212,7 +1212,7 @@ namespace Forms9Patch
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
             {
 
                 //Debug.WriteLine("tapped");
