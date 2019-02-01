@@ -1041,11 +1041,9 @@ namespace Forms9Patch
             _noUpdate = false;
 
             _gestureListener = FormsGestures.Listener.For(this);
-            //UpdateGestureListeners();
             _gestureListener.Tapped += OnTapped;
             _gestureListener.Down += OnDown;
-            _gestureListener.LongPressed += OnLongPressed;
-            _gestureListener.LongPressing += OnLongPressing;
+            UpdateLongPressListeners(IsLongPressEnabled);
 
             //_label.SizeChanged += OnLabelSizeChanged;
 
@@ -1182,9 +1180,11 @@ namespace Forms9Patch
             OnTapped(this, new FormsGestures.TapEventArgs(null, null));
         }
 
+
         void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            if (IsEnabled && IsVisible)// && !IsLongPressEnabled)
+            System.Diagnostics.Debug.WriteLine("Button.OnDown ENTER");
+            if (IsEnabled && IsVisible && !IsLongPressEnabled)
             {
 
                 //Debug.WriteLine("tapped");
@@ -1210,9 +1210,11 @@ namespace Forms9Patch
             }
         }
 
+
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
+            System.Diagnostics.Debug.WriteLine("Button.OnTapped ENTER");
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
             {
 
                 //Debug.WriteLine("tapped");
@@ -1368,8 +1370,18 @@ namespace Forms9Patch
             }
         }
 
-        void UpdateGestureListeners()
+        void UpdateLongPressListeners(bool isLongPressEnabled)
         {
+            if (isLongPressEnabled)
+            {
+                _gestureListener.LongPressed += OnLongPressed;
+                _gestureListener.LongPressing += OnLongPressing;
+            }
+            else
+            {
+                _gestureListener.LongPressed -= OnLongPressed;
+                _gestureListener.LongPressing -= OnLongPressing;
+            }
         }
 
         internal void UpdateIconTint()
@@ -2033,7 +2045,7 @@ namespace Forms9Patch
             else if (propertyName == TintIconProperty.PropertyName)
                 UpdateIconTint();
             else if (propertyName == IsLongPressEnabledProperty.PropertyName)
-                UpdateGestureListeners();
+                UpdateLongPressListeners(IsLongPressEnabled);
         }
 
         void OnCommandChanged()

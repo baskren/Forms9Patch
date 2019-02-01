@@ -70,7 +70,7 @@ namespace Forms9Patch
         }
         #endregion
 
-
+        /*
         #region Button Properties
 
         #region Button Text Property
@@ -163,7 +163,7 @@ namespace Forms9Patch
         #endregion
 
         #endregion
-
+        */
         #endregion
 
 
@@ -181,10 +181,12 @@ namespace Forms9Patch
             TextColor = (Color)TextColorProperty.DefaultValue,
             //HorizontalOptions = LayoutOptions.Fill,
         };
+        /*
         readonly Button _okButton = new Button
         {
             //HorizontalOptions = LayoutOptions.Fill
         };
+        */
         #endregion
 
 
@@ -194,14 +196,15 @@ namespace Forms9Patch
         /// </summary>
         public Toast()
         {
+            /*
             _okButton.BackgroundColor = ButtonBackgroundColor;
             _okButton.TextColor = ButtonTextColor;
             _okButton.HtmlText = ButtonText;
-
+            */
             WidthRequest = 200;
             HeightRequest = 200;
 
-            _okButton.Tapped += (s, args) => Cancel();
+            //_okButton.Tapped += (s, args) => Cancel();
             Content = new StackLayout
             {
                 Children =
@@ -246,12 +249,14 @@ namespace Forms9Patch
                 _titleLabel.HtmlText = Title;
             else if (propertyName == TextProperty.PropertyName)
                 _textLabel.HtmlText = Text;
+            /*
             else if (propertyName == ButtonTextProperty.PropertyName)
                 _okButton.HtmlText = ButtonText;
             else if (propertyName == ButtonBackgroundColorProperty.PropertyName)
                 _okButton.BackgroundColor = ButtonBackgroundColor;
             else if (propertyName == ButtonTextColorColorProperty.PropertyName)
                 _okButton.TextColor = ButtonTextColor;
+                */
             else if (propertyName == TextColorProperty.PropertyName)
             {
                 _textLabel.TextColor = TextColor;
@@ -259,7 +264,7 @@ namespace Forms9Patch
             }
 
         }
-
+        /*
         void UpdateOKButton()
         {
             if (P42.Utils.Environment.IsOnMainThread)
@@ -277,6 +282,7 @@ namespace Forms9Patch
             else
                 Device.BeginInvokeOnMainThread(UpdateOKButton);
         }
+        */
         #endregion
     }
 }

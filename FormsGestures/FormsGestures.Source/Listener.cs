@@ -737,7 +737,15 @@ namespace FormsGestures
         /// <summary>
         /// Does this Listner invoke anything during long press motion?
         /// </summary>
-        public bool HandlesLongPressing => _longPressing != null || LongPressingCommand != null || LongPressingCallback != null;
+        public bool HandlesLongPressing
+        {
+            get
+            {
+                var result = _longPressing != null || LongPressingCommand != null || LongPressingCallback != null;
+                //if (_debugEvents) System.Diagnostics.Debug.WriteLine("Listener[" + Element + "].HandlesLongPressing=[" + result + "]");
+                return result;
+            }
+        }
 
         /// <summary>
         /// Event triggered when HandlesLongPressing has changed
@@ -844,7 +852,17 @@ namespace FormsGestures
         /// <summary>
         /// Does this Listener invoke anything after a long press
         /// </summary>
-        public bool HandlesLongPressed => _longPressed != null || LongPressedCommand != null || LongPressedCallback != null;
+        public bool HandlesLongPressed
+        {
+            get
+            {
+                var result = _longPressed != null || LongPressedCommand != null || LongPressedCallback != null;
+                //System.Diagnostics.Debug.WriteLine("Listener[" + Element + "].HandlesLongPressed=[" + result + "]");
+                return result;
+            }
+
+        }
+
 
         /// <summary>
         /// Event triggered when HandlesLongPressed had changed
@@ -1168,7 +1186,15 @@ namespace FormsGestures
         /// <summary>
         /// Does Listener invoke anything during pan motion?
         /// </summary>
-        public bool HandlesPanning => _panning != null || PanningCommand != null || PanningCallback != null;
+        public bool HandlesPanning
+        {
+            get
+            {
+                var result = _panning != null || PanningCommand != null || PanningCallback != null;
+                //if (_debugEvents) System.Diagnostics.Debug.WriteLine("Listener[" + Element + "].HandlesPanning=[" + result + "]");
+                return result;
+            }
+        }
 
         /// <summary>
         /// Event triggered when HandlesPanning has changed

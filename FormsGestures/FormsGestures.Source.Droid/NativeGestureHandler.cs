@@ -17,15 +17,15 @@ namespace FormsGestures.Droid
         //global::Android.Views.View _view;
         //Java.Lang.Ref.WeakReference _weakReferenceView;
 
-        NativeGestureListener nativeListener;
+        //NativeGestureListener nativeListener;
 
-        NativeGestureDetector nativeDetector;
+        //NativeGestureDetector nativeDetector;
 
-        MotionEventActions lastAction = MotionEventActions.Up;
+        //MotionEventActions lastAction = MotionEventActions.Up;
 
-        long lastEventTime;
+        //long lastEventTime;
 
-        int lastPointerCount;
+        //int lastPointerCount;
 
         // When we setup a NativeGestureHandler (NGH) for an element, there is a pretty good chance
         // that children of this element may be blocking touches.  To work around this, have to setup
@@ -49,7 +49,7 @@ namespace FormsGestures.Droid
         /// <summary>
         /// The renderer for _element
         /// </summary>
-        IVisualElementRenderer _renderer = null;
+        internal IVisualElementRenderer Renderer = null;
 
         /// <summary>
         /// Any children of the _element (if it's a Xamarin.Forms.Layout)
@@ -172,44 +172,59 @@ namespace FormsGestures.Droid
         void RendererReset()
         {
             var currentRenderer = Platform.GetRenderer(Element);
-            if (currentRenderer != _renderer)
+            if (currentRenderer != Renderer)
             {
-                if (_renderer != null)
+                if (Renderer != null)
                     DisconnectRenderer();
-                _renderer = currentRenderer;
-                if (_renderer != null)
+                Renderer = currentRenderer;
+                if (Renderer != null)
                 {
                     //var view = renderer.GetPropertyValue("Control") as Android.Views.View ?? renderer.ViewGroup;
                     //var view = currentRenderer.GetPropertyValue("Control") as Android.Views.View ?? currentRenderer.View;
                     // will be needed for 2.3.5
                     //var _view = renderer.View;
-                    if (_renderer.View == null)
+                    if (Renderer.View == null)
                         //{
                         //System.Diagnostics.Debug.WriteLine("");
                         return;
                     //}
                     //ResetGestureRecognizers(_renderer.View);
-                    nativeListener = new NativeGestureListener(_renderer.View, Element);
-                    nativeDetector = new NativeGestureDetector(Droid.Settings.Context, nativeListener);
-                    _renderer.View.Touch += HandleTouch;
+                    //nativeListener = new NativeGestureListener(_renderer.View, Element);
+                    //nativeDetector = new NativeGestureDetector(Droid.Settings.Context, nativeListener);
+
+
+                    // approaches:
+                    // _renderer.View.Touch += OnTouchEventHandler
+                    // _renderer.View.TouchDelegate = OnTouchDelegate;
+                    //  _renderer.View.SetOnTouchListener(Android.Views.View.IOnTouchListener l);
+
+                    //var t = _renderer.View.TouchDelegate;  // null
+                    // DONT FORGET DISPOSE
+                    //var l = new OnTouchListener(this);
+
+                    Renderer.View.SetOnTouchListener(new OnTouchListener(this));
+
+                    //_renderer.View.Touch += HandleTouch;
+                    //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.RendererReset() _renderer.View.Touch += HandleTouch Element[" + Element + "]");
                 }
             }
         }
 
         internal void DisconnectRenderer()
         {
+            /*
             nativeDetector?.Dispose();
             nativeDetector = null;
             nativeListener?.Dispose();
             nativeListener = null;
-
-            if (_renderer?.View is Android.Views.View view)
+            */
+            if (Renderer?.View is Android.Views.View view)
             {
                 try
                 {
 
-                    view.Touch -= HandleTouch;
-                    //_view.SetOnTouchListener(null);
+                    //view.Touch -= HandleTouch;
+                    view.SetOnTouchListener(null);
                 }
 #pragma warning disable 0168
                 catch (ArgumentException e)
@@ -227,7 +242,7 @@ namespace FormsGestures.Droid
                 }
             }
 
-            _renderer = null;
+            Renderer = null;
 
         }
 
@@ -262,17 +277,18 @@ namespace FormsGestures.Droid
 
 
 
-
+        /*
         void HandleTouch(object sender, global::Android.Views.View.TouchEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.HandlTouch");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.HandleTouch(" + sender + "," + e.Event.Action + ")");
             var handled = HandleMotionEvent(e.Event);
             if (e.Event.Action == MotionEventActions.Down)
             {
                 //e.Handled = true;
-                e.Handled = handled;
-                XamarinForms_2_4_WorkAround();
+                //e.Handled = handled;
+                //XamarinForms_2_4_WorkAround();
             }
+            //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.HandleTouch(" + sender + "," + e.Event.Action + ") e.Handled = " + e.Handled);
         }
 
         void XamarinForms_2_4_WorkAround()
@@ -315,16 +331,22 @@ namespace FormsGestures.Droid
         bool HandleMotionEvent(MotionEvent e)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine("[{0}.{1}] [{2}] [{3}]", GetType().Name, Debug.CurrentMethod(), _id, _element);
+            //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.HandleMotionEvent: " + e.Action);
             //ShareMotionEvent (_element, e, _element);
             if (!Element.IsVisible)
                 return false;
             if (MatchesLastMotionEvent(e))
                 return false;
             lastEventHandled &= e.Action != MotionEventActions.Down;
+
+
+            // the following has me confused.  It is preventing an OnUp event from being delivered to NativeGestureDetector
+            //if (nativeDetector != null)
+            //    lastEventHandled = lastEventHandled || nativeDetector.OnTouchEvent(e);
+
             if (nativeDetector != null)
-                lastEventHandled = lastEventHandled || nativeDetector.OnTouchEvent(e);
-            //if (!lastEventHandled) 
-            //if (!lastEventHandled) {
+                lastEventHandled = nativeDetector.OnTouchEvent(e) || lastEventHandled;
+
             object scrollEnabled = Element.GetPropertyValue("ScrollEnabled");
             if (scrollEnabled == null || ((bool)scrollEnabled) || e.Action != MotionEventActions.Move)
             {
@@ -339,8 +361,6 @@ namespace FormsGestures.Droid
                         view.OnTouchEvent(e);
                 }
             }
-            //}
-            // return true;
             return lastEventHandled;  // we want to be sure we get the updates to this element's events
         }
 
@@ -354,5 +374,6 @@ namespace FormsGestures.Droid
             lastPointerCount = e.PointerCount;
             return false;
         }
+        */
     }
 }

@@ -35,8 +35,9 @@ namespace FormsGestures.Droid
         readonly MotionEvent.PointerCoords[] _avgCoords;
         public override bool OnTouchEvent(MotionEvent e)
         {
+            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
             bool handled = base.OnTouchEvent(e);
-            //System.Diagnostics.Debug.WriteLine ("handled="+handled);
+            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent handled=" + handled);
 
             if (e.PointerCount > 1 && _listener != null)
             {
@@ -87,6 +88,7 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(View v, MotionEvent e)
         {
+            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouch(" + v + ", " + e.Action + ")");
             var handled = OnTouchEvent(e);
             //System.Diagnostics.Debug.WriteLine("\n\nTouch: Action=[" + e.Action + "] Handled=[" + handled + "]");
             if (!handled)
