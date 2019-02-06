@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.5.0</version>
+        <version>1.6.5.1</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -24,6 +24,7 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
         <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.6.5.1: Removed: IsLongPressEnabled from buttons (a very stupid idea on my part).  If you want faster buttons, set FormsGestures.Droid.Settings.TapThreshold.
     1.6.5.0: Fixed: ListView items are deleted when they are hidden; &lt;br/&gt; tag is intermittantly ignored; Pickers not scrolling to SelectedItem when appearing; Enhancements: Default ListView cell will parse HTML; Added IconFontFamily to buttons (for IconText); Added IsLongPressEnabled to buttons (to allow faster click response as default behavior);  Changes: Update to Xamarin.Forms 3.3.0.967583; Update to Rg.Plugins.Popup v1.1.5.188; Popup's IsAnimationEnabled property is set to false to mitigate Rg.Plugins.Popup issue #122;
     1.6.4.0: Fixed: SegmentedControl not correctly reporting IsClipped; P42.Utils.TextCache is corrupted if writing when app crashes;
     1.6.3.0: New: Added IsHeadlessTest property to P42.Utils.Enviroment to address uncertainty of MainThreadId property in headless tests; Fixed:  Android: Label with &lt;a&gt; tag in cell won't click through to cell when clicked in non &lt;a&gt; tag text; Null exception in Forms9Patch.UWP.HardwareKeyListenerEffect.cs; Android and UWP, failure to re-render label with AutoFit!=None when Parent container is unhidden;
