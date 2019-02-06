@@ -326,12 +326,23 @@ namespace FormsGestures.Droid
         #endregion
 
 
+        #region Cancelation
+        public void Cancel()
+        {
+            StopTapLongPress();
+            _panning = false;
+            _pinching = false;
+            _rotating = false;
+            _multiMoving = false;
+        }
+
         void StopTapLongPress()
         {
             TappedTimerStop();
             LongPressingTimerStop();
             _numberOfTaps = 0;
         }
+        #endregion
 
 
         #region Down / Up / 'ed events
@@ -343,7 +354,10 @@ namespace FormsGestures.Droid
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown ENTER  Element[" + Element + "]");
 
             if (e.Action != MotionEventActions.Down)
+            {
+                System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown invalid e.Action [" + e.Action + "]");
                 return false;
+            }
 
             _onDownDateTime = DateTime.Now;
             Start = e;
@@ -387,7 +401,10 @@ namespace FormsGestures.Droid
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
 
             if (ev.Action != MotionEventActions.Up)
+            {
+                System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp invalid e.Action [" + ev.Action + "]");
                 return false;
+            }
 
             var touchDuration = DateTime.Now - _onDownDateTime;
 
@@ -505,7 +522,7 @@ namespace FormsGestures.Droid
         public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnScroll ["+eN.Action+"]["+_id+"] e1=["+e0+"] e2=["+eN+"]");
-            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnScroll ENTER  Element[" + Element + "]");
+            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnScroll ENTER  Element[" + Element + "]");
             bool handled = false;
             StopTapLongPress();
             if (!_multiMoving)
@@ -537,7 +554,7 @@ namespace FormsGestures.Droid
 
         public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
         {
-            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnFling ENTER Element[" + Element + "]");
+            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnFling ENTER Element[" + Element + "]");
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnFling [{0}]",_id);
             StopTapLongPress();
 

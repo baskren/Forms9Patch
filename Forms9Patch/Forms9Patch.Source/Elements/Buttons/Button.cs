@@ -431,6 +431,7 @@ namespace Forms9Patch
         }
         #endregion HapticMode
 
+        /*
         #region IsLongPressEnabled property
         /// <summary>
         /// Backing store for IsLongPressedEnabled property
@@ -445,6 +446,7 @@ namespace Forms9Patch
             set => SetValue(IsLongPressEnabledProperty, value);
         }
         #endregion IsLongPressEnabled property
+*/
 
         #region IButtonState
 
@@ -1042,8 +1044,10 @@ namespace Forms9Patch
 
             _gestureListener = FormsGestures.Listener.For(this);
             _gestureListener.Tapped += OnTapped;
-            _gestureListener.Down += OnDown;
-            UpdateLongPressListeners(IsLongPressEnabled);
+            //_gestureListener.Down += OnDown;
+            //UpdateLongPressListeners(IsLongPressEnabled);
+            _gestureListener.LongPressed += OnLongPressed;
+            _gestureListener.LongPressing += OnLongPressing;
 
             //_label.SizeChanged += OnLabelSizeChanged;
 
@@ -1180,7 +1184,7 @@ namespace Forms9Patch
             OnTapped(this, new FormsGestures.TapEventArgs(null, null));
         }
 
-
+        /*
         void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Button.OnDown ENTER");
@@ -1209,12 +1213,12 @@ namespace Forms9Patch
                 e.Handled = true;
             }
         }
-
+        */
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Button.OnTapped ENTER");
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
             {
 
                 //Debug.WriteLine("tapped");
@@ -1242,13 +1246,13 @@ namespace Forms9Patch
 
         void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
                 _longPressed?.Invoke(this, EventArgs.Empty);
         }
 
         void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible && IsLongPressEnabled)
+            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
                 _longPressing?.Invoke(this, EventArgs.Empty);
         }
 
@@ -1370,6 +1374,7 @@ namespace Forms9Patch
             }
         }
 
+        /*
         void UpdateLongPressListeners(bool isLongPressEnabled)
         {
             if (isLongPressEnabled)
@@ -1383,6 +1388,7 @@ namespace Forms9Patch
                 _gestureListener.LongPressing -= OnLongPressing;
             }
         }
+        */
 
         internal void UpdateIconTint()
         {
@@ -2044,8 +2050,10 @@ namespace Forms9Patch
                 _stackLayout.Spacing = Spacing;
             else if (propertyName == TintIconProperty.PropertyName)
                 UpdateIconTint();
+            /*
             else if (propertyName == IsLongPressEnabledProperty.PropertyName)
                 UpdateLongPressListeners(IsLongPressEnabled);
+                */
         }
 
         void OnCommandChanged()

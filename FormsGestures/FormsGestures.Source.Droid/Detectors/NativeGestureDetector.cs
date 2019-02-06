@@ -35,8 +35,10 @@ namespace FormsGestures.Droid
         readonly MotionEvent.PointerCoords[] _avgCoords;
         public override bool OnTouchEvent(MotionEvent e)
         {
-            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
+            System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
             bool handled = base.OnTouchEvent(e);
+
+
             //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent handled=" + handled);
 
             if (e.PointerCount > 1 && _listener != null)
@@ -76,13 +78,11 @@ namespace FormsGestures.Droid
                     _lastCoords = null;
                 }
             }
-            //else if (_lastEventPointerCount > 1 && e.PointerCount < 2)
-            //	_listener.OnMultiUp (e);
-
-
-            // complete single touch actions (other than tap & doubletap)
-            if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up)
+            else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up)
                 _listener?.OnUp(e);
+            else if (e.Action == MotionEventActions.Cancel)
+                _listener?.Cancel();
+
             return handled;
         }
 

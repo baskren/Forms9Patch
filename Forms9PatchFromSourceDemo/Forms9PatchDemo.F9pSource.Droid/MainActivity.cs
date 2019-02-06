@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.Views;
 using Android.OS;
 using Xamarin.Forms.Platform.Android;
+using System;
 
 namespace Forms9PatchDemo.Droid
 {
@@ -25,7 +26,7 @@ namespace Forms9PatchDemo.Droid
             ActionBar.SetDisplayShowHomeEnabled(false);
             ActionBar.SetHomeButtonEnabled(false);
 
-
+            FormsGestures.Droid.Settings.TappedThreshold = TimeSpan.FromMilliseconds(100);
         }
 
         public override bool OnKeyDown(Android.Views.Keycode keyCode, Android.Views.KeyEvent e)

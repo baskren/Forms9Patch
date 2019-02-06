@@ -94,8 +94,6 @@ Additionally, the `Button` and `StateButton` elements have these properties:
   - **`IconImage`**: A `Forms9Patch.Image` element to be used as the button's icon image.
   - **`IconText`**: An alternative to `IconImage`, enabling the use of Unicode characters or special font characters as button icons.  Just like the `HtmlText` property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.
   - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.
-- Behavior:
-  - **`IsLongPressEnabled`**: By default, `false`.  Used to toggle long press gesture observation.  Note that the button will be less responsive when the property is enabled.
 
 ## Forms9Patch.Segment
 

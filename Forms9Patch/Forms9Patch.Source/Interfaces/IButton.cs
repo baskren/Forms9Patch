@@ -52,11 +52,12 @@ namespace Forms9Patch
         /// </summary>
         KeyClicks HapticMode { get; set; }
 
+        /*
         /// <summary>
         /// Enables the detection of long press events
         /// </summary>
         bool IsLongPressEnabled { get; set; }
-
+        */
 
     }
 }
