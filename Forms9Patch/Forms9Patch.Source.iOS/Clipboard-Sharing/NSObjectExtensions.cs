@@ -128,7 +128,8 @@ namespace Forms9Patch.iOS
                 //return new Tuple<object, Type>(nsString.ToString(), typeof(string));
                 return nsString.ToString();
 
-            if (nsO is NSData nsData && nsData.ToArray() is byte[] byteArray)
+
+            if (nsO is NSData nsData && nsData.ToByteArray() is byte[] byteArray)
             {
                 if (type.Implements(typeof(Stream)))
                     return new MemoryStream(byteArray);
@@ -402,6 +403,11 @@ namespace Forms9Patch.iOS
             return nsArray;
         }
 
-
+        public static byte[] ToByteArray(this NSData data)
+        {
+            var dataBytes = new byte[data.Length];
+            System.Runtime.InteropServices.Marshal.Copy(data.Bytes, dataBytes, 0, Convert.ToInt32(data.Length));
+            return dataBytes;
+        }
     }
 }
