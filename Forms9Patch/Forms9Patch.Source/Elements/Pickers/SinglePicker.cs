@@ -194,12 +194,26 @@ namespace Forms9Patch
             if (e.PropertyName == BasePicker.SelectedItemProperty.PropertyName)
             {
                 SelectedItem = _basePicker.SelectedItem;
-                //_basePicker.SelectedItem = null;
-                //_basePicker._listView.SelectedItem = null;
+                if (ItemsSource != null && ItemsSource.Count > 0)
+                {
+                    for (int i = 0; i < ItemsSource.Count; i++)
+                    {
+                        if (ItemsSource[i].Equals(SelectedItem))
+                        {
+                            Index = i;
+                            break;
+                        }
+                    }
+                    //_basePicker.SelectedItem = null;
+                    //_basePicker._listView.SelectedItem = null;
+                }
+                else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
+                {
+                    Index = _basePicker.Index;
+                    if (ItemsSource != null && ItemsSource.Count > Index)
+                        SelectedItem = ItemsSource[Index];
+                }
             }
-            else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
-                Index = _basePicker.Index;
         }
     }
 }
-

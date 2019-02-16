@@ -1002,11 +1002,16 @@ namespace Forms9Patch
             if (item is int[] index)
                 return TwoDeepDataSetForIndex(index);
 
-            bool groupSelector(double calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => (groupWrapper == item || groupWrapper.Source == item);
-            bool itemSelector(double calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (itemWrapper == item || itemWrapper.Source == item);
+            bool groupSelector(double calcOffset, int flatIndex, int i, GroupWrapper groupWrapper)
+                //=> (groupWrapper == item || groupWrapper.Source == item);
+                => (groupWrapper.Equals(item) || groupWrapper.Source.Equals(item));
+            bool itemSelector(double calcOffset, int flatIndex, int i, ItemWrapper itemWrapper)
+                //=> (itemWrapper == item || itemWrapper.Source == item);
+                => (itemWrapper.Equals(item) || itemWrapper.Source.Equals(item));
             bool subItemSelector(double calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
             {
-                if (subItemWrapper == item || subItemWrapper.Source == item)
+                //if (subItemWrapper == item || subItemWrapper.Source == item)
+                if (subItemWrapper.Equals(item) || subItemWrapper.Source.Equals(item))
                     return true;
                 if (subItemWrapper is GroupWrapper subGroupWrapper && subGroupWrapper.DeepContains(item))
                     return true;
@@ -1019,16 +1024,21 @@ namespace Forms9Patch
         public DeepDataSet TwoDeepDataSet(object group, object item)
         {
 
-            bool groupSelector(double calcOffset, int flatIndex, int i, GroupWrapper groupWrapper) => ((group == groupWrapper || group == groupWrapper.Source) && item == null);
-            bool itemSelector(double calcOffset, int flatIndex, int i, ItemWrapper itemWrapper) => (group == null && (item == itemWrapper || item == itemWrapper.Source));
+            bool groupSelector(double calcOffset, int flatIndex, int i, GroupWrapper groupWrapper)
+                //=> ((group == groupWrapper || group == groupWrapper.Source) && item == null);
+                => ((group.Equals(groupWrapper) || group.Equals(groupWrapper.Source)) && item == null);
+            bool itemSelector(double calcOffset, int flatIndex, int i, ItemWrapper itemWrapper)
+                //=> (group == null && (item == itemWrapper || item == itemWrapper.Source));
+                => (group == null && (item.Equals(itemWrapper) || item.Equals(itemWrapper.Source)));
             bool subItemSelector(double calcOffset, int flatIndex, int i, int j, GroupWrapper groupWrapper, ItemWrapper subItemWrapper)
             {
-                if ((group == groupWrapper || group == groupWrapper.Source) && (item == subItemWrapper || item == subItemWrapper.Source))
+                //if ((group == groupWrapper || group == groupWrapper.Source) && (item == subItemWrapper || item == subItemWrapper.Source))
+                if ((group.Equals(groupWrapper) || group.Equals(groupWrapper.Source)) && (item.Equals(subItemWrapper) || item.Equals(subItemWrapper.Source)))
                     return true;
                 if (subItemWrapper is GroupWrapper subGroupWrapper && subGroupWrapper.DeepContains(item))
                 {
                     var itemWrapper = DeepItemWrapperForItem(item);
-                    return (itemWrapper.Parent is GroupWrapper gr && (gr == group || gr.Source == group));
+                    return (itemWrapper.Parent is GroupWrapper gr && (gr.Equals(group) || gr.Source.Equals(group)));
                 }
                 return false;
             }
