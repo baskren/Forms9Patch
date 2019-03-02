@@ -18,14 +18,14 @@ namespace FormsGestures.Droid
                 _avgCoords[i] = new MotionEvent.PointerCoords();
         }
 
-        bool _disposedValue;
+        bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            if (!_disposedValue)
+            if (!_disposed)
             {
                 _listener = null;
-                IsLongpressEnabled = false;
-                _disposedValue = true;
+                //IsLongpressEnabled = false;
+                _disposed = true;
             }
             base.Dispose(disposing);
         }

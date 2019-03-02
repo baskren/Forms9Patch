@@ -198,6 +198,15 @@ namespace Forms9Patch
         }
         #endregion Retail
 
+        #region PopAfter property
+        public static readonly BindableProperty PopAfterProperty = BindableProperty.Create("Forms9Patch.PopupBase.PopAfter", typeof(TimeSpan), typeof(PopupBase), default(TimeSpan));
+        public TimeSpan PopAfter
+        {
+            get => (TimeSpan)GetValue(PopAfterProperty);
+            set => SetValue(PopAfterProperty, value);
+        }
+        #endregion PopAfter property
+
         #region IBackground
 
         #region BackgroundImage
@@ -426,7 +435,8 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="target">Target.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
-        internal PopupBase(VisualElement target = null, bool retain = false)
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        internal PopupBase(VisualElement target = null, bool retain = false, TimeSpan popAfter = default(TimeSpan))
         {
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
@@ -446,6 +456,8 @@ namespace Forms9Patch
             KeyboardService.HeightChanged += OnKeyboardHeightChanged;
 
             IsAnimationEnabled = false;
+
+            PopAfter = popAfter;
         }
 
         #endregion
@@ -613,14 +625,16 @@ namespace Forms9Patch
         /// <summary>
         /// Called when the popup has appeared
         /// </summary>
-        protected override void OnAppearingAnimationEnd()
+        protected override async void OnAppearingAnimationEnd()
         {
             base.OnAppearingAnimationEnd();
             _isPushed = true;
             _isPushing = false;
 
             if (!IsVisible && !_isPopping)
-                Pop();
+                await Pop();
+            else if (PopAfter > default(TimeSpan))
+                Device.StartTimer(PopAfter, () => IsVisible = false);
         }
 
         /// <summary>

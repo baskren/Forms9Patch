@@ -183,26 +183,45 @@ namespace Forms9Patch
 
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
         /// </summary>
         /// <param name="target">Target.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
-        public BubblePopup(VisualElement target, bool retain = false) : base(target, retain) => Init();
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        public BubblePopup(VisualElement target, bool retain = false, TimeSpan popAfter = default(TimeSpan)) : base(target, retain, popAfter) => Init();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class that targets a point inside of the target VisualElement
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
         /// </summary>
         /// <param name="target">Target.</param>
         /// <param name="point">Point.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
-        public BubblePopup(VisualElement target, Point point, bool retain = false) : base(target, retain)
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        public BubblePopup(VisualElement target, Point point, bool retain = false, TimeSpan popAfter = default(TimeSpan)) : base(target, retain, popAfter)
         {
             Init();
             Point = point;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
+        /// </summary>
+        /// <param name="target">Target.</param>
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        public BubblePopup(VisualElement target, TimeSpan popAfter) : base(target, popAfter: popAfter) => Init();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
+        /// </summary>
+        /// <param name="target">Target.</param>
+        /// <param name="point">Point.</param>
+        /// <param name="popAfter">Pop after TimeSpan.</param>
+        public BubblePopup(VisualElement target, Point point, TimeSpan popAfter) : base(target, popAfter: popAfter)
+        {
+            Init();
+            Point = point;
+        }
         #endregion
 
 

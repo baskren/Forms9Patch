@@ -15,9 +15,9 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="title">Title.</param>
         /// <param name="text">Text.</param>
-        public static Toast Create(string title, string text)
+        public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
         {
-            var toast = new Toast() { Title = title, Text = text };
+            var toast = new Toast() { Title = title, Text = text, PopAfter = popAfter };
             toast.IsVisible = true;
             return toast;
         }
@@ -70,100 +70,6 @@ namespace Forms9Patch
         }
         #endregion
 
-        /*
-        #region Button Properties
-
-        #region Button Text Property
-
-        /// <summary>
-        /// OBSOLETE: USE ButtonTextProperty
-        /// </summary>
-        [Obsolete("Use ButtonTextProperty")]
-        public static readonly BindableProperty OkTextProperty = ButtonTextProperty;
-        /// <summary>
-        /// OBSOLETE: Use ButtonText property
-        /// </summary>
-        [Obsolete("Use ButtonText property")]
-        public string OkText
-        {
-            get => (string)GetValue(ButtonTextProperty);
-            set => SetValue(ButtonTextProperty, value);
-        }
-
-        /// <summary>
-        /// The ButtonText property backing store
-        /// </summary>
-        public static readonly BindableProperty ButtonTextProperty = BindableProperty.Create("ButtonText", typeof(string), typeof(Toast), null);
-        /// <summary>
-        /// The ButtonText property
-        /// </summary>
-		public string ButtonText
-        {
-            get => (string)GetValue(ButtonTextProperty);
-            set => SetValue(ButtonTextProperty, value);
-        }
-        #endregion
-
-        #region Button BackgroundColor Property
-        /// <summary>
-        /// OBSOLETE: Use ButtonBackgroundColorProperty instead
-        /// </summary>
-        [Obsolete("Use ButtonBackgroundColorProperty")]
-        public static readonly BindableProperty OkButtonColorProperty = ButtonBackgroundColorProperty;
-        /// <summary>
-        /// OBSOLETE: Use ButtonBackgroundColor property instead
-        /// </summary>
-        [Obsolete("Use ButtonBackgroundColor property")]
-        public Color OkButtonColor
-        {
-            get => (Color)GetValue(ButtonBackgroundColorProperty);
-            set => SetValue(ButtonBackgroundColorProperty, value);
-        }
-        /// <summary>
-        /// The ButtongBackgroundColor property backing store
-        /// </summary>
-        public static readonly BindableProperty ButtonBackgroundColorProperty = BindableProperty.Create("ButtonColor", typeof(Color), typeof(Toast), default(Color));
-        /// <summary>
-        /// The ButtonBackgroundColor property
-        /// </summary>
-		public Color ButtonBackgroundColor
-        {
-            get => (Color)GetValue(ButtonBackgroundColorProperty);
-            set => SetValue(ButtonBackgroundColorProperty, value);
-        }
-        #endregion
-
-        #region ButtonTextColor property
-        /// <summary>
-        /// OBSOLETE: Use ButtonTextColorColorProperty instead
-        /// </summary>
-        [Obsolete("Use ButtonTextColorProperty")]
-        public static readonly BindableProperty OkTextColorColorProperty = ButtonTextColorColorProperty;
-        /// <summary>
-        /// OBSOLETE: Use ButtonTextColor instead
-        /// </summary>
-        [Obsolete("Use ButtonTextColor")]
-        public Color OkTextColor
-        {
-            get => (Color)GetValue(ButtonTextColorColorProperty);
-            set => SetValue(ButtonTextColorColorProperty, value);
-        }
-        /// <summary>
-        /// ButtonTextColor property backing store
-        /// </summary>
-        public static readonly BindableProperty ButtonTextColorColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(Toast), default(Color));
-        /// <summary>
-        /// ButtonTextColor property
-        /// </summary>
-		public Color ButtonTextColor
-        {
-            get => (Color)GetValue(ButtonTextColorColorProperty);
-            set => SetValue(ButtonTextColorColorProperty, value);
-        }
-        #endregion
-
-        #endregion
-        */
         #endregion
 
 

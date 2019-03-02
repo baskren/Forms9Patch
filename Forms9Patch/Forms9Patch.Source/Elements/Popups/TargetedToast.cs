@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using System;
 
 namespace Forms9Patch
 {
@@ -14,9 +15,9 @@ namespace Forms9Patch
         /// <param name="target">Target.</param>
         /// <param name="title">Title.</param>
         /// <param name="text">Text.</param>
-        public static TargetedToast Create(VisualElement target, string title, string text)
+        public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default(TimeSpan))
         {
-            var toast = new TargetedToast(target) { Title = title, Text = text };
+            var toast = new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter };
             toast.IsVisible = true;
             return toast;
         }

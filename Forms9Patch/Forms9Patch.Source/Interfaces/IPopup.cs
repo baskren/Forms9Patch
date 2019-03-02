@@ -65,5 +65,11 @@ namespace Forms9Patch
         /// <value><c>true</c> if retain; otherwise, <c>false</c>.</value>
         bool Retain { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the TimeSpan before 
+        /// </summary>
+        /// <value>The fade at.</value>
+        TimeSpan PopAfter { get; set; }
     }
 }
