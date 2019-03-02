@@ -68,6 +68,7 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
   - **`HasShadow`**
 - Text
   - **`TextColor`**
+  - **`FontFamily`**: the button's label's font family.  Note: You can use the ResourceID of Embedded Resource fonts here!
   - **`SelectedTextColor`**: the color of the button's text when selected
   - **`HorizontalTextAlignment`**
   - **`VerticalTextAlignment`**
@@ -93,7 +94,7 @@ Additionally, the `Button` and `StateButton` elements have these properties:
 - Icon  
   - **`IconImage`**: A `Forms9Patch.Image` element to be used as the button's icon image.
   - **`IconText`**: An alternative to `IconImage`, enabling the use of Unicode characters or special font characters as button icons.  Just like the `HtmlText` property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.
-  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.
+  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: You can use the ResourceID of Embedded Resource fonts here!
 
 ## Forms9Patch.Segment
 
@@ -101,21 +102,22 @@ The `Segment` element is used primarily to populate the `SegmentedController` an
 
 ### Properties
 
-- **IconImage**: `Forms9Patch.Image` as the segment's optional image.  It will be tinted either to `FontColor` when enabled and grey when disabled *if* the parent `SegmentControl`'s `TintImage=true` and the image is a PNG with transparency.
-- **IconText**: alternative to the ImageSource property. Used to specify HTML formatted text for button's icon. Great when used with Google's Material Font.
-- **Text**: the segment's optional text.
-- **HtmlText**: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.
-- **FontColor**: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.
-- **FontAttributes**: is the text bold or italics?
-- **IsSelected**: Is the segment in the selected state?  Note: Segment's parent's StickyBehvior property must be Radio or MultiSelect for this to change in response to the segment being tapped.
-- **IsEnabled**: Is the segment enabled?
-- **Orientation**: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?
+- **`IconImage`**: `Forms9Patch.Image` as the segment's optional image.  It will be tinted either to `FontColor` when enabled and grey when disabled *if* the parent `SegmentControl`'s `TintImage=true` and the image is a PNG with transparency.
+- **`IconText`**: alternative to the ImageSource property. Used to specify HTML formatted text for button's icon. Great when used with Google's Material Font.
+- **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: You can use the ResourceID of Embedded Resource fonts here!
+- **`Text`**: the segment's optional text.
+- **`HtmlText`**: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.
+- **`FontColor`**: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.
+- **`FontAttributes`**: is the text bold or italics?
+- **`IsSelected`**: Is the segment in the selected state?  Note: Segment's parent's StickyBehvior property must be Radio or MultiSelect for this to change in response to the segment being tapped.
+- **`IsEnabled`**: Is the segment enabled?
+- **`Orientation`**: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?
 
 ### Events
 
-- **Command**: The ICommand to execute when the segment is pressed.  NOTE: If the segment's parent's StickyBehvior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.
-- **CommandParameter**: The parameter used in ICommand calls.
-- **Tapped**: EventHandler be called anytime a segment is tapped.
-- **Selected**: EventHandler be called when a segment transitions from unselected to selected.
-- **LongPressing**: EventHandler be called when a segment is being held down long enough to be considered a long press.
-- **LongPressed**: EventHandler be called when a segment's long press has ended.
+- **`Command`**: The ICommand to execute when the segment is pressed.  NOTE: If the segment's parent's StickyBehvior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.
+- **`CommandParameter`**: The parameter used in ICommand calls.
+- **`Tapped`**: EventHandler be called anytime a segment is tapped.
+- **`Selected`**: EventHandler be called when a segment transitions from unselected to selected.
+- **`LongPressing`**: EventHandler be called when a segment is being held down long enough to be considered a long press.
+- **`LongPressed`**: EventHandler be called when a segment's long press has ended.

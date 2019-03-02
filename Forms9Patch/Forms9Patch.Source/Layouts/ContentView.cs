@@ -163,6 +163,19 @@ namespace Forms9Patch
             get => (Color)GetValue(OutlineColorProperty);
             set => SetValue(OutlineColorProperty, value);
         }
+        /// <summary>
+        /// The boarder color property.
+        /// </summary>
+        public static readonly BindableProperty BorderColorProperty = ShapeBase.OutlineColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the boarder.
+        /// </summary>
+        /// <value>The color of the boarder.</value>
+        public Color BorderColor
+        {
+            get => (Color)GetValue(BorderColorProperty);
+            set => SetValue(BorderColorProperty, value);
+        }
         #endregion OutlineColor property
 
         #region OutlineRadius property
@@ -178,6 +191,19 @@ namespace Forms9Patch
         {
             get => (float)GetValue(OutlineRadiusProperty);
             set => SetValue(OutlineRadiusProperty, value);
+        }
+        /// <summary>
+        /// The boarder radius property.
+        /// </summary>
+        public static readonly BindableProperty BorderRadiusProperty = ShapeBase.OutlineRadiusProperty;
+        /// <summary>
+        /// Gets or sets the boarder radius.
+        /// </summary>
+        /// <value>The boarder radius.</value>
+        public float BorderRadius
+        {
+            get => (float)GetValue(BorderRadiusProperty);
+            set => SetValue(BorderRadiusProperty, value);
         }
         #endregion OutlineRadius property
 
@@ -195,7 +221,21 @@ namespace Forms9Patch
             get => (float)GetValue(OutlineWidthProperty);
             set => SetValue(OutlineWidthProperty, value);
         }
+        /// <summary>
+        /// The boarder width property.
+        /// </summary>
+        public static readonly BindableProperty BorderWidthProperty = ShapeBase.OutlineWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the boarder.
+        /// </summary>
+        /// <value>The width of the boarder.</value>
+        public float BorderWidth
+        {
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
+        }
         #endregion OutlineWidth property
+
 
         #region ElementShape property
         /// <summary>

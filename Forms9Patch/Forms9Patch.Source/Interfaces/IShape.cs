@@ -45,6 +45,24 @@ namespace Forms9Patch
         float OutlineWidth { get; set; }
 
         /// <summary>
+        /// Gets or sets the color of the border.
+        /// </summary>
+        /// <value>The color of the border.</value>
+        Color BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the boarder radius.
+        /// </summary>
+        /// <value>The boarder radius.</value>
+        float BorderRadius { get; set; }
+
+        /// <summary>
+        /// Gets or sets the width of the boarder.
+        /// </summary>
+        /// <value>The width of the boarder.</value>
+        float BorderWidth { get; set; }
+
+        /// <summary>
         /// Gets or sets the geometry of the shape
         /// </summary>
         ElementShape ElementShape { get; set; }

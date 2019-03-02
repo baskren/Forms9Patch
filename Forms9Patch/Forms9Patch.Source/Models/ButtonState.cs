@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -342,6 +342,20 @@ namespace Forms9Patch
             get => (Color)GetValue(OutlineColorProperty);
             set => SetValue(OutlineColorProperty, value);
         }
+
+        /// <summary>
+        /// The border color property.
+        /// </summary>
+        public static readonly BindableProperty BorderColorProperty = OutlineColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the border.
+        /// </summary>
+        /// <value>The color of the border.</value>
+        public Color BorderColor
+        {
+            get => (Color)GetValue(BorderColorProperty);
+            set => SetValue(BorderColorProperty, value);
+        }
         #endregion
 
         #region OutlineRadius
@@ -364,6 +378,20 @@ namespace Forms9Patch
             get => (float)GetValue(OutlineRadiusProperty);
             set => SetValue(OutlineRadiusProperty, value);
         }
+
+        /// <summary>
+        /// The border radius property.
+        /// </summary>
+        public static readonly BindableProperty BorderRadiusProperty = OutlineRadiusProperty;
+        /// <summary>
+        /// Gets or sets the border radius.
+        /// </summary>
+        /// <value>The border radius.</value>
+        public float BorderRadius
+        {
+            get => (float)GetValue(BorderRadiusProperty);
+            set => SetValue(BorderRadiusProperty, value);
+        }
         #endregion OutlineRadius
 
         #region OutlineWidth
@@ -385,6 +413,19 @@ namespace Forms9Patch
         {
             get => (float)GetValue(OutlineWidthProperty);
             set => SetValue(OutlineWidthProperty, value);
+        }
+        /// <summary>
+        /// The border width property.
+        /// </summary>
+        public static readonly BindableProperty BorderWidthProperty = OutlineWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
+        /// <value>The width of the border.</value>
+        public float BorderWidth
+        {
+            get => (float)GetValue(BorderWidthProperty);
+            set => SetValue(BorderWidthProperty, value);
         }
         #endregion OutlineWidth
 

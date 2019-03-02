@@ -41,8 +41,9 @@ namespace Forms9Patch
         {
             base.OnChildAdded(child);
 
-            var typedChild = child as T;
-            if (typedChild != null)
+            //var typedChild = child as T;
+            //if (typedChild != null)
+            if (child is T typedChild)
                 OnAdded(typedChild);
         }
 
@@ -54,8 +55,9 @@ namespace Forms9Patch
         {
             base.OnChildRemoved(child);
 
-            var typedChild = child as T;
-            if (typedChild != null)
+            //var typedChild = child as T;
+            //if (typedChild != null)
+            if (child is T typedChild)
                 OnRemoved(typedChild);
         }
 

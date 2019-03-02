@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using SkiaSharp;
@@ -289,43 +289,85 @@ namespace Forms9Patch
 
         #region OutlineColor property
         /// <summary>
-        /// backing store for OutlineColor property
+        /// Backing store for the outline color property.
         /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty; // = BindableProperty.Create("OutlineColor", typeof(Color), typeof(ShapeAndImageView), default(Color));
+        public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
         /// <summary>
-        /// Gets/Sets the OutlineColor property
+        /// Gets or sets the color of the outline.
         /// </summary>
+        /// <value>The color of the outline.</value>
         public Color OutlineColor
         {
             get => (Color)GetValue(OutlineColorProperty);
             set => SetValue(OutlineColorProperty, value);
         }
+        /// <summary>
+        /// The boarder color property.
+        /// </summary>
+        public static readonly BindableProperty BorderColorProperty = ShapeBase.OutlineColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the boarder.
+        /// </summary>
+        /// <value>The color of the boarder.</value>
+        public Color BorderColor
+        {
+            get => (Color)GetValue(BorderColorProperty);
+            set => SetValue(BorderColorProperty, value);
+        }
         #endregion OutlineColor property
 
         #region OutlineRadius property
         /// <summary>
-        /// backing store for OutlineRadius property
+        /// Backing store for the outline radius property.
         /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty; // = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ShapeAndImageView), default(float));
+        public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
         /// <summary>
-        /// Gets/Sets the OutlineRadius property
+        /// Gets or sets the outline radius.
         /// </summary>
+        /// <value>The outline radius.</value>
         public float OutlineRadius
         {
             get => (float)GetValue(OutlineRadiusProperty);
             set => SetValue(OutlineRadiusProperty, value);
         }
+        /// <summary>
+        /// The boarder radius property.
+        /// </summary>
+        public static readonly BindableProperty BorderRadiusProperty = ShapeBase.OutlineRadiusProperty;
+        /// <summary>
+        /// Gets or sets the boarder radius.
+        /// </summary>
+        /// <value>The boarder radius.</value>
+        public float BorderRadius
+        {
+            get => (float)GetValue(BorderRadiusProperty);
+            set => SetValue(BorderRadiusProperty, value);
+        }
         #endregion OutlineRadius property
 
         #region OutlineWidth property
         /// <summary>
-        /// backing store for OutlineWidth property
+        /// Backing store for the outline width property.
         /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;// = BindableProperty.Create("OutlineWidth", typeof(float), typeof(ShapeAndImageView), -1f);
+        public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
         /// <summary>
-        /// Gets/Sets the OutlineWidth property
+        /// Gets or sets the width of the outline.
         /// </summary>
+        /// <value>The width of the outline.</value>
         public float OutlineWidth
+        {
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
+        }
+        /// <summary>
+        /// The boarder width property.
+        /// </summary>
+        public static readonly BindableProperty BorderWidthProperty = ShapeBase.OutlineWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the boarder.
+        /// </summary>
+        /// <value>The width of the boarder.</value>
+        public float BorderWidth
         {
             get => (float)GetValue(OutlineWidthProperty);
             set => SetValue(OutlineWidthProperty, value);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 namespace Forms9Patch
 {
@@ -109,40 +109,37 @@ namespace Forms9Patch
         #endregion ShadowInverted
 
         #region OutlineColor property
-
-#if _Forms9Patch_Frame_
         /// <summary>
-        /// backing store for OutlineColor property
-        /// </summary>
-        public static new readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
-        /// <summary>
-        /// Gets/Sets the OutlineColor property
-        /// </summary>
-        public new Color OutlineColor
-        {
-            get { return (Color)GetValue(OutlineColorProperty); }
-            set { SetValue(OutlineColorProperty, value); }
-        }
-#else
-        /// <summary>
-        /// backing store for OutlineColor property
+        /// Backing store for the outline color property.
         /// </summary>
         public static readonly BindableProperty OutlineColorProperty = ShapeBase.OutlineColorProperty;
         /// <summary>
-        /// Gets/Sets the OutlineColor property
+        /// Gets or sets the color of the outline.
         /// </summary>
+        /// <value>The color of the outline.</value>
         public Color OutlineColor
         {
             get => (Color)GetValue(OutlineColorProperty);
             set => SetValue(OutlineColorProperty, value);
         }
-#endif
-
+        /// <summary>
+        /// The boarder color property.
+        /// </summary>
+        public static readonly BindableProperty BorderColorProperty = ShapeBase.OutlineColorProperty;
+        /// <summary>
+        /// Gets or sets the color of the boarder.
+        /// </summary>
+        /// <value>The color of the boarder.</value>
+        public Color BorderColor
+        {
+            get => (Color)GetValue(BorderColorProperty);
+            set => SetValue(BorderColorProperty, value);
+        }
         #endregion OutlineColor property
 
-        #region OutlineRadius
+        #region OutlineRadius property
         /// <summary>
-        /// Backing store for the OutlineRadius bindable property.
+        /// Backing store for the outline radius property.
         /// </summary>
         public static readonly BindableProperty OutlineRadiusProperty = ShapeBase.OutlineRadiusProperty;
         /// <summary>
@@ -154,11 +151,24 @@ namespace Forms9Patch
             get => (float)GetValue(OutlineRadiusProperty);
             set => SetValue(OutlineRadiusProperty, value);
         }
-        #endregion OutlineRadius
-
-        #region OutlineWidth
         /// <summary>
-        /// Backing store for the OutlineWidth bindable property.
+        /// The boarder radius property.
+        /// </summary>
+        public static readonly BindableProperty BorderRadiusProperty = ShapeBase.OutlineRadiusProperty;
+        /// <summary>
+        /// Gets or sets the boarder radius.
+        /// </summary>
+        /// <value>The boarder radius.</value>
+        public float BorderRadius
+        {
+            get => (float)GetValue(BorderRadiusProperty);
+            set => SetValue(BorderRadiusProperty, value);
+        }
+        #endregion OutlineRadius property
+
+        #region OutlineWidth property
+        /// <summary>
+        /// Backing store for the outline width property.
         /// </summary>
         public static readonly BindableProperty OutlineWidthProperty = ShapeBase.OutlineWidthProperty;
         /// <summary>
@@ -170,7 +180,20 @@ namespace Forms9Patch
             get => (float)GetValue(OutlineWidthProperty);
             set => SetValue(OutlineWidthProperty, value);
         }
-        #endregion OutlineWidth
+        /// <summary>
+        /// The boarder width property.
+        /// </summary>
+        public static readonly BindableProperty BorderWidthProperty = ShapeBase.OutlineWidthProperty;
+        /// <summary>
+        /// Gets or sets the width of the boarder.
+        /// </summary>
+        /// <value>The width of the boarder.</value>
+        public float BorderWidth
+        {
+            get => (float)GetValue(OutlineWidthProperty);
+            set => SetValue(OutlineWidthProperty, value);
+        }
+        #endregion OutlineWidth property
 
         #region ElementShape property
         /// <summary>
@@ -186,23 +209,6 @@ namespace Forms9Patch
             set => SetValue(ElementShapeProperty, value);
         }
         #endregion ElementShape property
-
-        /*
-        #region ExtendedElementShape property
-        /// <summary>
-        /// backing store for ExtendedElementShape property
-        /// </summary>
-        internal static readonly BindableProperty ExtendedElementShapeProperty = ShapeBase.ExtendedElementShapeProperty;
-        /// <summary>
-        /// Gets/Sets the ExtendedElementShape property
-        /// </summary>
-        ExtendedElementShape IShape.ExtendedElementShape
-        {
-            get => (ExtendedElementShape)GetValue(ExtendedElementShapeProperty); 
-            set => SetValue(ExtendedElementShapeProperty, value); 
-        }
-        #endregion ExtendedElementShape property
-        */
 
         #region IElement
 
