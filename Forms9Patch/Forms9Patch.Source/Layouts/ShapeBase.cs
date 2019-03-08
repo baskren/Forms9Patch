@@ -44,6 +44,11 @@ namespace Forms9Patch
         /// backing store for OutlineColor property
         /// </summary>
         public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("Forms9Patch.ShapeBase.OutlineColor", typeof(Color), typeof(ShapeBase), default(Color));
+        public static readonly BindableProperty BorderColorProperty = BindableProperty.Create("Forms9Patch.ShapeBase.BorderColor", typeof(Color), typeof(ShapeBase), default(Color), propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is IShape shape)
+                shape.OutlineColor = (Color)newValue;
+        });
         #endregion OutlineColor property
 
         #region OutlineRadius property
@@ -51,6 +56,11 @@ namespace Forms9Patch
         /// backing store for OutlineRadius property
         /// </summary>
         public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("Forms9Patch.ShapeBase.OutlineRadius", typeof(float), typeof(ShapeBase), -1f);
+        public static readonly BindableProperty BorderRadiusProperty = BindableProperty.Create("Forms9Patch.ShapeBase.BorderRadius", typeof(float), typeof(ShapeBase), -1f, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is IShape shape)
+                shape.OutlineRadius = (float)newValue;
+        });
         #endregion OutlineRadius property
 
         #region OutlineWidth property
@@ -58,6 +68,11 @@ namespace Forms9Patch
         /// backing store for OutlineWidth property
         /// </summary>
         public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("Forms9Patch.ShapeBase.OutlineWidth", typeof(float), typeof(ShapeBase), -1f);
+        public static readonly BindableProperty BorderWidthProperty = BindableProperty.Create("Forms9Patch.ShapeBase.BorderWidth", typeof(float), typeof(ShapeBase), -1f, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is IShape shape)
+                shape.OutlineWidth = (float)newValue;
+        });
         #endregion OutlineWidth property
 
         #region ElementShape property
