@@ -165,11 +165,11 @@
       <Name>P42.Utils.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+      <Project>{281890A8-05D0-49E3-A603-27BC0B3592CE}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
+      <Project>{DBD60A59-3F4A-43E0-B53D-631295141EB6}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj">
@@ -177,15 +177,15 @@
       <Name>FormsGestures.XfNuget.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
+      <Project>{143CB605-B712-4778-B1A6-EB9366696E87}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
+      <Project>{F956744C-8BDB-4400-A98C-16790A940211}</Project>
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
+      <Project>{DCFFFAD2-A49A-452A-83B6-4B1CAC2C34AE}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>

@@ -69,11 +69,11 @@
   <!-- XF Nuget Project References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
+      <Project>{143CB605-B712-4778-B1A6-EB9366696E87}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+      <Project>{281890A8-05D0-49E3-A603-27BC0B3592CE}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
