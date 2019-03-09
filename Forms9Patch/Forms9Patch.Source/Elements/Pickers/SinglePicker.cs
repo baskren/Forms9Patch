@@ -207,13 +207,14 @@ namespace Forms9Patch
                     //_basePicker.SelectedItem = null;
                     //_basePicker._listView.SelectedItem = null;
                 }
-                else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
-                {
-                    Index = _basePicker.Index;
-                    if (ItemsSource != null && ItemsSource.Count > Index)
-                        SelectedItem = ItemsSource[Index];
-                }
             }
+            else if (e.PropertyName == BasePicker.IndexProperty.PropertyName)
+            {
+                Index = _basePicker.Index;
+                if (ItemsSource != null && ItemsSource.Count > Index)
+                    SelectedItem = ItemsSource[Index];
+            }
+
         }
     }
 }

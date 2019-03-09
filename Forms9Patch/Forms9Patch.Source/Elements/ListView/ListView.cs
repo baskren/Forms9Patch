@@ -541,6 +541,7 @@ namespace Forms9Patch
         //readonly Listener _listener;
         bool _resetScrollToSelected;
         DateTime _scrollResetAt;
+        DateTime _scrollCompletedAt = DateTime.MinValue;
         #endregion
 
 
@@ -799,7 +800,9 @@ namespace Forms9Patch
 
         void OnItemTapped(object sender, ItemWrapperTapEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("ITEM TAPPED");
+            //System.Diagnostics.Debug.WriteLine("ITEM TAPPED _scrolling " + _itemPanning + " " + (DateTime.Now - _scrollCompletedAt).Milliseconds);
+            if (DateTime.Now - _scrollCompletedAt < TimeSpan.FromMilliseconds(400))
+                return;
             if (!_processingItemTapped)
             {
                 _processingItemTapped = true;
@@ -871,9 +874,13 @@ namespace Forms9Patch
 
         void OnItemPanned(object sender, ItemWrapperPanEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine("ListView.OnItemPanned " + DateTime.Now);
             ScrollBy(-e.DeltaDistance.Y, false);
             if (_itemVerticalPanning)
+            {
                 Scrolled?.Invoke(this, EventArgs.Empty);
+                _scrollCompletedAt = DateTime.Now;
+            }
             _itemVerticalPanning = false;
             Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
              {
@@ -1030,7 +1037,7 @@ namespace Forms9Patch
                     _selectedItemWrappers.Remove(itemWrapper);
             }
             //if (SelectedItem == item)
-            if (SelectedItem.Equals(item))
+            if (SelectedItem != null && SelectedItem.Equals(item))
             {
                 SelectedItem = null;
                 _selectedItemWrapper = null;
@@ -1269,14 +1276,16 @@ namespace Forms9Patch
             }
         }
 
+
         internal void OnScrolled(object sender, EventArgs e)
         {
-
+            //System.Diagnostics.Debug.WriteLine("ListView.OnScrolled: _itemPanning=" + _itemPanning + " " + DateTime.Now);
             if (!_itemPanning)
             {
                 //System.Diagnostics.Debug.WriteLine("~~SCROLLED~~");
                 // let OnPanned handle this
                 Scrolled?.Invoke(this, EventArgs.Empty);
+                _scrollCompletedAt = DateTime.Now;
             }
         }
 

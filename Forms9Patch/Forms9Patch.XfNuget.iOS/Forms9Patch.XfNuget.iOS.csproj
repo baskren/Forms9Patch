@@ -80,109 +80,109 @@
   <Import Project="..\Forms9Patch.Source.iOS\Forms9Patch.iOS.targets" />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ClipboardService.cs">
       <Link>Clipboard-Sharing\ClipboardService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemCollection.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemCollection.cs">
       <Link>Clipboard-Sharing\MimeItemCollection.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\MimeItemExtensions.cs">
       <Link>Clipboard-Sharing\MimeItemExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSDataItem.cs">
       <Link>Clipboard-Sharing\NSDataItem.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\NSObjectExtensions.cs">
       <Link>Clipboard-Sharing\NSObjectExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\ReturnMimeItem.cs">
       <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Clipboard-Sharing\SharingService.cs">
       <Link>Clipboard-Sharing\SharingService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Effects\CustomFontEffect.cs">
       <Link>Effects\CustomFontEffect.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Effects\PopupLayerEffect.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Effects\PopupLayerEffect.cs">
       <Link>Effects\PopupLayerEffect.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Effects\SliderStepSizeEffect.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Effects\SliderStepSizeEffect.cs">
       <Link>Effects\SliderStepSizeEffect.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Effects\WebViewFixEffect.cs">
       <Link>Effects\WebViewFixEffect.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\AlignmentExtensions.cs">
       <Link>Extensions\AlignmentExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\Debug.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\Debug.cs">
       <Link>Extensions\Debug.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\FontExtensions.cs">
       <Link>Extensions\FontExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\FormattedStringExtensions.cs">
       <Link>Extensions\FormattedStringExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\UITextViewExtensions.cs">
       <Link>Extensions\UITextViewExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Extensions\UIViewExtensions.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Extensions\UIViewExtensions.cs">
       <Link>Extensions\UIViewExtensions.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Models\Settings.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Models\Settings.cs">
       <Link>Models\Settings.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Renderers\ColorGradientBoxRenderer.cs">
       <Link>Renderers\ColorGradientBoxRenderer.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Renderers\EnhancedListViewRenderer.cs">
       <Link>Renderers\EnhancedListViewRenderer.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Renderers\HardwareKeyPageRenderer.cs">
       <Link>Renderers\HardwareKeyPageRenderer.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Renderers\LabelRenderer.cs">
       <Link>Renderers\LabelRenderer.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Renderers\PopupBaseRenderer.cs">
       <Link>Renderers\PopupBaseRenderer.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\DescendentBounds.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\DescendentBounds.cs">
       <Link>Services\DescendentBounds.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\FontService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\FontService.cs">
       <Link>Services\FontService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\HtmlToPngService.cs">
       <Link>Services\HtmlToPngService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\KeyboardService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\KeyboardService.cs">
       <Link>Services\KeyboardService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\KeyClicksService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\KeyClicksService.cs">
       <Link>Services\KeyClicksService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\ListViewExtensionService_iOS.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\ListViewExtensionService_iOS.cs">
       <Link>Services\ListViewExtensionService_iOS.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\OsInfoService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\OsInfoService.cs">
       <Link>Services\OsInfoService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\StatusBarService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\StatusBarService.cs">
       <Link>Services\StatusBarService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Services\WebViewExtensionsService.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Services\WebViewExtensionsService.cs">
       <Link>Services\WebViewExtensionsService.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\Reachability.cs">
+    <None Include="..\Forms9Patch.Source.iOS\Reachability.cs">
       <Link>Reachability.cs</Link>
     </None>
-    <None Include="..\..\..\..\..\..\Forms9Patch2\Forms9Patch\Forms9Patch.Source.iOS\UIViewContentMode.cs">
+    <None Include="..\Forms9Patch.Source.iOS\UIViewContentMode.cs">
       <Link>UIViewContentMode.cs</Link>
     </None>
   </ItemGroup>

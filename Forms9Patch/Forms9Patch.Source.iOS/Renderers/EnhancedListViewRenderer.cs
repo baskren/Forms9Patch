@@ -152,19 +152,19 @@ namespace Forms9Patch.iOS
         //Xamarin.Forms.ListViewDataSource
         public override void DraggingEnded(UIScrollView scrollView, bool willDecelerate)
         {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate DraggingEnded");
-            //if (!willDecelerate)
-            //{
-            //    _scrolling = false;
-            //    if (Element?.ItemsSource != null)
-            //        Element?.OnScrolled(this, EventArgs.Empty);
-            //}
+            //System.Diagnostics.Debug.WriteLine("ScrollDelegate.DraggingEnded: willDecelerate=[" + willDecelerate + "]");
+            if (!willDecelerate)
+            {
+                _scrolling = false;
+                if (Element?.ItemsSource != null)
+                    Element?.OnScrolled(this, EventArgs.Empty);
+            }
             Source?.DraggingEnded(scrollView, willDecelerate);
         }
 
         public override void DecelerationEnded(UIScrollView scrollView)
         {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate DecelerationEnded");
+            //System.Diagnostics.Debug.WriteLine("ScrollDelegate.DecelerationEnded");
             Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
             {
                 _scrolling = false;
@@ -177,7 +177,7 @@ namespace Forms9Patch.iOS
         //Xamarin.Forms.ListViewDataSource
         public override void Scrolled(UIScrollView scrollView)
         {
-            //System.Diagnostics.Debug.WriteLine("ScrollDelegate Scrolled");
+            //System.Diagnostics.Debug.WriteLine("ScrollDelegate.Scrolled");
             if (_scrolling && Element?.ItemsSource != null)
                 Element?.OnScrolling(this, EventArgs.Empty);
             Source?.Scrolled(scrollView);

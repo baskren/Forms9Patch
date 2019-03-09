@@ -244,8 +244,12 @@ namespace Forms9Patch
                 _lowerPadding.HeightRequest = (Height - RowHeight) / 2.0;
                 _upperPadding.HeightRequest = (Height - RowHeight) / 2.0;
             }
-            else if (propertyName == IndexProperty.PropertyName && !_scrolling && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
-                ScrollToIndex(Index);
+            else if (propertyName == IndexProperty.PropertyName)
+            {
+                //System.Diagnostics.Debug.WriteLine("BasePicker.OnPropertyChanged(Index)  scrolling=[" + _scrolling + "] _tapping=[" + _tapping + "]");
+                if (!_scrolling && (GroupToggleBehavior != GroupToggleBehavior.Multiselect || !_tapping))
+                    ScrollToIndex(Index);
+            }
             else if (propertyName == SelectedItemProperty.PropertyName && !_scrolling)
             {
                 //System.Diagnostics.Debug.WriteLine("BasePicker SELECTED ITEM: " + SelectedItem);
@@ -272,7 +276,7 @@ namespace Forms9Patch
             foreach (var i in _listView.ItemsSource)
                 if (i.Equals(item))
                 {
-                    _listView.SelectedItem = item;
+                    //_listView.SelectedItem = item;
                     _listView.ScrollTo(item, ScrollToPosition.Center);
                     break;
                 }
@@ -325,7 +329,10 @@ namespace Forms9Patch
                 if (index > count - 1)
                     indexItem = lastItem;
                 if (indexItem != null && (!_scrolling || force))
+                {
+                    //System.Diagnostics.Debug.WriteLine("BasePicker.ScrollToIndex(" + index + "): indexItemn=[" + indexItem + "]");
                     _listView.ScrollTo(indexItem, ScrollToPosition.Center, true);
+                }
             }
         }
         #endregion
@@ -340,6 +347,7 @@ namespace Forms9Patch
             {
                 Index = deepDataSet.Index[0];
                 SelectedItem = ItemsSource[Index];
+                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
             }
         }
 
@@ -348,7 +356,9 @@ namespace Forms9Patch
         {
             if (SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
             {
+                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
                 SelectedItem = ItemsSource[Index];
+                //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: SelectedItem=[" + SelectedItem + "]");
                 ScrollToIndex(Index, true);
             }
             _scrolling = false;
