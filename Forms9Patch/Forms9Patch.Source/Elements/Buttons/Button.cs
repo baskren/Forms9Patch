@@ -1350,6 +1350,7 @@ namespace Forms9Patch
             {
                 _iconLabel.TextColor = _label.TextColor;
                 _iconLabel.FontSize = _label.FontSize;
+                _iconLabel.FontFamily = IconFontFamily;
             }
         }
         #endregion
@@ -1694,6 +1695,7 @@ namespace Forms9Patch
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
                         _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
+                        _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
@@ -1719,6 +1721,7 @@ namespace Forms9Patch
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
                         _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
+                        _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
@@ -1747,6 +1750,7 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                         _iconLabel.VerticalOptions = LayoutOptions.Center;
+                        _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
@@ -1773,6 +1777,7 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
                         _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
@@ -1890,6 +1895,7 @@ namespace Forms9Patch
                 {
                     _iconLabel.SizeChanged -= OnIconLabelSizeChanged;
                     _stackLayout.Children.Remove(_iconLabel);
+                    _iconLabel.FontFamily = IconFontFamily;
                 }
                 if (IconText != null)
                 {
@@ -1907,6 +1913,7 @@ namespace Forms9Patch
                         Lines = 1,
                         FontSize = FontSize,
                         AutoFit = AutoFit.None,
+                        FontFamily = IconFontFamily
                     };
                     if (_iconLabel != null)
                     {
@@ -1916,6 +1923,7 @@ namespace Forms9Patch
                         else
                             _stackLayout.Children.Insert(0, _iconLabel);
                         SetOrienations();
+                        _iconLabel.FontFamily = IconFontFamily;
                     }
                     UpdateIconTint();
                 }
@@ -1984,7 +1992,7 @@ namespace Forms9Patch
                 _label.FontAttributes = FontAttributes;
             else if (propertyName == FontFamilyProperty.PropertyName)
                 _label.FontFamily = FontFamily;
-            else if (propertyName == IconFontFamilyProperty.PropertyName)
+            else if (propertyName == IconFontFamilyProperty.PropertyName && _iconLabel!=null)
                 _iconLabel.FontFamily = IconFontFamily;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {

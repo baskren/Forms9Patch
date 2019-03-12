@@ -215,17 +215,44 @@ namespace Forms9Patch.UWP
 
         }
 
+        internal static void DebugMetricsForLabel(this TextBlock textBlock)
+        {
+            Debug.WriteLine("TextBlock: " + textBlock.Text);
+            textBlock.GetFontMetrics().DebugMetricsForFontSize(textBlock.FontSize);
+            Debug.WriteLine("\t LineHeight: " + textBlock.LineHeight);
+            Debug.WriteLine("");
+        }
 
+        internal static void DebugMetricsForFontSize(this FontMetrics metric, double fontSize)
+        {
+            Debug.WriteLine("Metrics for FontSize: " + fontSize);
+            Debug.WriteLine("\t Ascent: " + metric.AscentForFontSize(fontSize));
+            Debug.WriteLine("\t Descent: " + metric.DescentForFontSize(fontSize));
+            Debug.WriteLine("\t CapHeight: " + metric.CapHeightForFontSize(fontSize));
+            Debug.WriteLine("\t XHeight: " + metric.XHeightForFontSize(fontSize));
+            Debug.WriteLine("\t LineGap: " + metric.LineGapForFontSize(fontSize));
+            Debug.WriteLine("\t LineHeight: " + metric.LineHeightForFontSize(fontSize));
+
+
+
+        }
+
+        internal static double Ascent(this TextBlock textBlock) => textBlock.GetFontMetrics().AscentForFontSize(textBlock.FontSize);
         internal static double AscentForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.Ascent) / metric.DesignUnitsPerEm;
 
+        internal static double Descent(this TextBlock textBlock) => textBlock.GetFontMetrics().DescentForFontSize(textBlock.FontSize);
         internal static double DescentForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.Descent) / metric.DesignUnitsPerEm;
 
+        internal static double CapHeight(this TextBlock textBlock) => textBlock.GetFontMetrics().CapHeightForFontSize(textBlock.FontSize);
         internal static double CapHeightForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.CapHeight) / metric.DesignUnitsPerEm;
 
+        internal static double XHeight(this TextBlock textBlock) => textBlock.GetFontMetrics().XHeightForFontSize(textBlock.FontSize);
         internal static double XHeightForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.XHeight) / metric.DesignUnitsPerEm;
 
+        internal static double LineGap(this TextBlock textBlock) => textBlock.GetFontMetrics().LineGapForFontSize(textBlock.FontSize);
         internal static double LineGapForFontSize(this FontMetrics metric, double fontSize) => fontSize * Math.Abs(metric.LineGap) / metric.DesignUnitsPerEm;
 
+        internal static double LineHeight(this TextBlock textBlock) => textBlock.GetFontMetrics().LineHeightForFontSize(textBlock.FontSize);
         internal static double LineHeightForFontSize(this FontMetrics metric, double fontSize)
         {
             //return lineHeightToFontSizeRatio * fontSize;

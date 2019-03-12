@@ -330,6 +330,18 @@ namespace FormsGestures
             }
             return null;
         }
+
+        public static Element FindAncestorOfType(this Element element, Type type)
+        {
+            var parent = element.Parent;
+            while (parent!=null)
+            {
+                if (parent.GetType() == type)
+                    return parent;
+                parent = parent.Parent;
+            }
+            return null;
+        }
     }
 }
 

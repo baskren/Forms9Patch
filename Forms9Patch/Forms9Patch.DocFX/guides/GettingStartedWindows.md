@@ -82,14 +82,14 @@ Create the LinkTest application as follows:
         ```
 
  7. Update your application's MainPage content (MainPage.xaml) to use Forms9Patch elements:
-     1. In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it.
-     2. Update MainPage.xaml with the following code. This code declaratively defines the user interface for the page.
+     1. In Solution Explorer, in the LinkTest shared .NetStandard project (*not* the LinkTest.UWP platform project), double-click MainPage.xaml to open it.
+     2. Update MainPage.xaml with the following changes. This code declaratively defines the user interface for the page.
 
         ```xml
         <?xml version="1.0" encoding="utf-8" ?>
         <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                            xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+                    xmlns:Forms9Patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
                     xmlns:local="clr-namespace:LinkTest"
                     x:Class="LinkTest.MainPage">
             <ContentPage.Padding>

@@ -325,7 +325,45 @@ namespace Forms9Patch.UWP
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
 
+            /*
+            double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
+            var rect = new Windows.Foundation.Rect();
 
+            //var yOffset = _fontMetrics.AscentForFontSize(textBlock.FontSize) - _fontMetrics.CapHeightForFontSize(textBlock.FontSize);
+
+            switch (Element.VerticalTextAlignment)
+            {
+                case Xamarin.Forms.TextAlignment.Start:
+                    break;
+                default:
+                case Xamarin.Forms.TextAlignment.Center:
+                    rect.Y = (int)((finalSize.Height - childHeight) / 2);
+                    break;
+                case Xamarin.Forms.TextAlignment.End:
+                    rect.Y = finalSize.Height - childHeight;
+                    break;
+            }
+
+
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
+
+            //rect.Y += yOffset;
+
+            rect.Height = childHeight;
+            rect.Width = finalSize.Width;
+
+            Control.Arrange(rect);
+            */
+            PrivateArrange(finalSize);
+
+            DebugArrangeOverride(finalSize);
+            DebugMessage("ArrangeOverride EXIT");
+            return finalSize;
+        }
+
+        void PrivateArrange(Windows.Foundation.Size finalSize)
+        {
             double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var rect = new Windows.Foundation.Rect();
 
@@ -347,15 +385,30 @@ namespace Forms9Patch.UWP
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
 
-            //rect.Y += yOffset;
+            //var offset = _fontMetrics.LineGapForFontSize(Control.FontSize); //_fontMetrics.AscentForFontSize(Control.FontSize) - _fontMetrics.CapHeightForFontSize(Control.FontSize);
+            //System.Diagnostics.Debug.WriteLine("Control.FontSize: ["+Control.FontSize+"] offset: " + offset);
+            //rect.Y -= offset;
+
+            //_fontMetrics.DebugMetricsForFontSize(Control.FontSize);
+            //Control.DebugMetricsForLabel();
+            if (FormsGestures.VisualElementExtensions.FindAncestorOfType(Element,typeof(SegmentButton))!=null)
+            if (Element.VerticalTextAlignment==Xamarin.Forms.TextAlignment.Center && Control.LineGap() == 0 && Control.Descent()==0 && Control.LineHeight==0)
+            {
+                var capHeight = Control.CapHeight();
+                if (Control.Ascent()==capHeight)
+                {
+                    var delta = capHeight - Control.XHeight();
+                    rect.Y -= delta/3;
+                }
+            }
+            
+            //Control.LineHeight = Control.LineHeight();
 
             rect.Height = childHeight;
             rect.Width = finalSize.Width;
+
             Control.Arrange(rect);
 
-            DebugArrangeOverride(finalSize);
-            DebugMessage("ArrangeOverride EXIT");
-            return finalSize;
         }
 
         private void OnControlSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
@@ -583,6 +636,8 @@ namespace Forms9Patch.UWP
 
                 textBlock.MaxLines = label.Lines;
 
+                // No need for this here, it is overridden by ArrangeOverride
+                //PrivateArrange(textBlock.DesiredSize, -20);
             }
 
             label.SetIsInNativeLayout(false);
