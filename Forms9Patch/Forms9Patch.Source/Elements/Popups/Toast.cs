@@ -13,8 +13,10 @@ namespace Forms9Patch
         /// <summary>
         /// Create the specified title and text.
         /// </summary>
-        /// <param name="title">Title.</param>
-        /// <param name="text">Text.</param>
+        /// <param name="title"></param>
+        /// <param name="text"></param>
+        /// <param name="popAfter">Will dissappear after popAfter TimeSpan</param>
+        /// <returns></returns>
         public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
         {
             var toast = new Toast() { Title = title, Text = text, PopAfter = popAfter };

@@ -199,7 +199,13 @@ namespace Forms9Patch
         #endregion Retail
 
         #region PopAfter property
+        /// <summary>
+        /// Backing store for PopAfter property
+        /// </summary>
         public static readonly BindableProperty PopAfterProperty = BindableProperty.Create("Forms9Patch.PopupBase.PopAfter", typeof(TimeSpan), typeof(PopupBase), default(TimeSpan));
+        /// <summary>
+        /// Will cause the popup to cancel (disappear) after Popafter TimeSpan
+        /// </summary>
         public TimeSpan PopAfter
         {
             get => (TimeSpan)GetValue(PopAfterProperty);

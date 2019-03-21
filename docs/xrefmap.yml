@@ -599,18 +599,30 @@ references:
   commentId: T:Forms9Patch.BubblePopup
   fullName: Forms9Patch.BubblePopup
   nameWithType: BubblePopup
-- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean)
-  name: BubblePopup(VisualElement, Boolean)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_Boolean_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.Boolean)
-  nameWithType: BubblePopup.BubblePopup(VisualElement, Boolean)
-- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean)
-  name: BubblePopup(VisualElement, Point, Boolean)
-  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Boolean_
-  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean)
-  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Boolean)
-  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, Boolean)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean,System.TimeSpan)
+  name: BubblePopup(VisualElement, Boolean, TimeSpan)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_Boolean_System_TimeSpan_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.Boolean,System.TimeSpan)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.Boolean, System.TimeSpan)
+  nameWithType: BubblePopup.BubblePopup(VisualElement, Boolean, TimeSpan)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.TimeSpan)
+  name: BubblePopup(VisualElement, TimeSpan)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_System_TimeSpan_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,System.TimeSpan)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, System.TimeSpan)
+  nameWithType: BubblePopup.BubblePopup(VisualElement, TimeSpan)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean,System.TimeSpan)
+  name: BubblePopup(VisualElement, Point, Boolean, TimeSpan)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_Boolean_System_TimeSpan_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.Boolean,System.TimeSpan)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.Boolean, System.TimeSpan)
+  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, Boolean, TimeSpan)
+- uid: Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.TimeSpan)
+  name: BubblePopup(VisualElement, Point, TimeSpan)
+  href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_Xamarin_Forms_VisualElement_Xamarin_Forms_Point_System_TimeSpan_
+  commentId: M:Forms9Patch.BubblePopup.#ctor(Xamarin.Forms.VisualElement,Xamarin.Forms.Point,System.TimeSpan)
+  fullName: Forms9Patch.BubblePopup.BubblePopup(Xamarin.Forms.VisualElement, Xamarin.Forms.Point, System.TimeSpan)
+  nameWithType: BubblePopup.BubblePopup(VisualElement, Point, TimeSpan)
 - uid: Forms9Patch.BubblePopup.#ctor*
   name: BubblePopup
   href: api/Forms9Patch.BubblePopup.html#Forms9Patch_BubblePopup__ctor_
@@ -933,25 +945,6 @@ references:
   commentId: F:Forms9Patch.Button.BackgroundColorProperty
   fullName: Forms9Patch.Button.BackgroundColorProperty
   nameWithType: Button.BackgroundColorProperty
-- uid: Forms9Patch.Button.BorderWidth
-  name: BorderWidth
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidth
-  commentId: P:Forms9Patch.Button.BorderWidth
-  fullName: Forms9Patch.Button.BorderWidth
-  nameWithType: Button.BorderWidth
-- uid: Forms9Patch.Button.BorderWidth*
-  name: BorderWidth
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidth_
-  commentId: Overload:Forms9Patch.Button.BorderWidth
-  isSpec: "True"
-  fullName: Forms9Patch.Button.BorderWidth
-  nameWithType: Button.BorderWidth
-- uid: Forms9Patch.Button.BorderWidthProperty
-  name: BorderWidthProperty
-  href: api/Forms9Patch.Button.html#Forms9Patch_Button_BorderWidthProperty
-  commentId: F:Forms9Patch.Button.BorderWidthProperty
-  fullName: Forms9Patch.Button.BorderWidthProperty
-  nameWithType: Button.BorderWidthProperty
 - uid: Forms9Patch.Button.CheckIsClipped(System.Double,System.Double)
   name: CheckIsClipped(Double, Double)
   href: api/Forms9Patch.Button.html#Forms9Patch_Button_CheckIsClipped_System_Double_System_Double_
@@ -2075,6 +2068,63 @@ references:
   commentId: F:Forms9Patch.ButtonState.BackgroundImageProperty
   fullName: Forms9Patch.ButtonState.BackgroundImageProperty
   nameWithType: ButtonState.BackgroundImageProperty
+- uid: Forms9Patch.ButtonState.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderColor
+  commentId: P:Forms9Patch.ButtonState.BorderColor
+  fullName: Forms9Patch.ButtonState.BorderColor
+  nameWithType: ButtonState.BorderColor
+- uid: Forms9Patch.ButtonState.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderColor_
+  commentId: Overload:Forms9Patch.ButtonState.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.ButtonState.BorderColor
+  nameWithType: ButtonState.BorderColor
+- uid: Forms9Patch.ButtonState.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderColorProperty
+  commentId: F:Forms9Patch.ButtonState.BorderColorProperty
+  fullName: Forms9Patch.ButtonState.BorderColorProperty
+  nameWithType: ButtonState.BorderColorProperty
+- uid: Forms9Patch.ButtonState.BorderRadius
+  name: BorderRadius
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderRadius
+  commentId: P:Forms9Patch.ButtonState.BorderRadius
+  fullName: Forms9Patch.ButtonState.BorderRadius
+  nameWithType: ButtonState.BorderRadius
+- uid: Forms9Patch.ButtonState.BorderRadius*
+  name: BorderRadius
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderRadius_
+  commentId: Overload:Forms9Patch.ButtonState.BorderRadius
+  isSpec: "True"
+  fullName: Forms9Patch.ButtonState.BorderRadius
+  nameWithType: ButtonState.BorderRadius
+- uid: Forms9Patch.ButtonState.BorderRadiusProperty
+  name: BorderRadiusProperty
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderRadiusProperty
+  commentId: F:Forms9Patch.ButtonState.BorderRadiusProperty
+  fullName: Forms9Patch.ButtonState.BorderRadiusProperty
+  nameWithType: ButtonState.BorderRadiusProperty
+- uid: Forms9Patch.ButtonState.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderWidth
+  commentId: P:Forms9Patch.ButtonState.BorderWidth
+  fullName: Forms9Patch.ButtonState.BorderWidth
+  nameWithType: ButtonState.BorderWidth
+- uid: Forms9Patch.ButtonState.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderWidth_
+  commentId: Overload:Forms9Patch.ButtonState.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.ButtonState.BorderWidth
+  nameWithType: ButtonState.BorderWidth
+- uid: Forms9Patch.ButtonState.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_BorderWidthProperty
+  commentId: F:Forms9Patch.ButtonState.BorderWidthProperty
+  fullName: Forms9Patch.ButtonState.BorderWidthProperty
+  nameWithType: ButtonState.BorderWidthProperty
 - uid: Forms9Patch.ButtonState.ElementShape
   name: ElementShape
   href: api/Forms9Patch.ButtonState.html#Forms9Patch_ButtonState_ElementShape
@@ -3051,6 +3101,63 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.ContentView.BaseInternalChildren
   nameWithType: ContentView.BaseInternalChildren
+- uid: Forms9Patch.ContentView.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderColor
+  commentId: P:Forms9Patch.ContentView.BorderColor
+  fullName: Forms9Patch.ContentView.BorderColor
+  nameWithType: ContentView.BorderColor
+- uid: Forms9Patch.ContentView.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderColor_
+  commentId: Overload:Forms9Patch.ContentView.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.ContentView.BorderColor
+  nameWithType: ContentView.BorderColor
+- uid: Forms9Patch.ContentView.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderColorProperty
+  commentId: F:Forms9Patch.ContentView.BorderColorProperty
+  fullName: Forms9Patch.ContentView.BorderColorProperty
+  nameWithType: ContentView.BorderColorProperty
+- uid: Forms9Patch.ContentView.BorderRadius
+  name: BorderRadius
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderRadius
+  commentId: P:Forms9Patch.ContentView.BorderRadius
+  fullName: Forms9Patch.ContentView.BorderRadius
+  nameWithType: ContentView.BorderRadius
+- uid: Forms9Patch.ContentView.BorderRadius*
+  name: BorderRadius
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderRadius_
+  commentId: Overload:Forms9Patch.ContentView.BorderRadius
+  isSpec: "True"
+  fullName: Forms9Patch.ContentView.BorderRadius
+  nameWithType: ContentView.BorderRadius
+- uid: Forms9Patch.ContentView.BorderRadiusProperty
+  name: BorderRadiusProperty
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderRadiusProperty
+  commentId: F:Forms9Patch.ContentView.BorderRadiusProperty
+  fullName: Forms9Patch.ContentView.BorderRadiusProperty
+  nameWithType: ContentView.BorderRadiusProperty
+- uid: Forms9Patch.ContentView.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderWidth
+  commentId: P:Forms9Patch.ContentView.BorderWidth
+  fullName: Forms9Patch.ContentView.BorderWidth
+  nameWithType: ContentView.BorderWidth
+- uid: Forms9Patch.ContentView.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderWidth_
+  commentId: Overload:Forms9Patch.ContentView.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.ContentView.BorderWidth
+  nameWithType: ContentView.BorderWidth
+- uid: Forms9Patch.ContentView.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_BorderWidthProperty
+  commentId: F:Forms9Patch.ContentView.BorderWidthProperty
+  fullName: Forms9Patch.ContentView.BorderWidthProperty
+  nameWithType: ContentView.BorderWidthProperty
 - uid: Forms9Patch.ContentView.Content
   name: Content
   href: api/Forms9Patch.ContentView.html#Forms9Patch_ContentView_Content
@@ -5935,6 +6042,63 @@ references:
   commentId: F:Forms9Patch.Image.BackgroundColorProperty
   fullName: Forms9Patch.Image.BackgroundColorProperty
   nameWithType: Image.BackgroundColorProperty
+- uid: Forms9Patch.Image.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderColor
+  commentId: P:Forms9Patch.Image.BorderColor
+  fullName: Forms9Patch.Image.BorderColor
+  nameWithType: Image.BorderColor
+- uid: Forms9Patch.Image.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderColor_
+  commentId: Overload:Forms9Patch.Image.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.Image.BorderColor
+  nameWithType: Image.BorderColor
+- uid: Forms9Patch.Image.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderColorProperty
+  commentId: F:Forms9Patch.Image.BorderColorProperty
+  fullName: Forms9Patch.Image.BorderColorProperty
+  nameWithType: Image.BorderColorProperty
+- uid: Forms9Patch.Image.BorderRadius
+  name: BorderRadius
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderRadius
+  commentId: P:Forms9Patch.Image.BorderRadius
+  fullName: Forms9Patch.Image.BorderRadius
+  nameWithType: Image.BorderRadius
+- uid: Forms9Patch.Image.BorderRadius*
+  name: BorderRadius
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderRadius_
+  commentId: Overload:Forms9Patch.Image.BorderRadius
+  isSpec: "True"
+  fullName: Forms9Patch.Image.BorderRadius
+  nameWithType: Image.BorderRadius
+- uid: Forms9Patch.Image.BorderRadiusProperty
+  name: BorderRadiusProperty
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderRadiusProperty
+  commentId: F:Forms9Patch.Image.BorderRadiusProperty
+  fullName: Forms9Patch.Image.BorderRadiusProperty
+  nameWithType: Image.BorderRadiusProperty
+- uid: Forms9Patch.Image.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderWidth
+  commentId: P:Forms9Patch.Image.BorderWidth
+  fullName: Forms9Patch.Image.BorderWidth
+  nameWithType: Image.BorderWidth
+- uid: Forms9Patch.Image.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderWidth_
+  commentId: Overload:Forms9Patch.Image.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.Image.BorderWidth
+  nameWithType: Image.BorderWidth
+- uid: Forms9Patch.Image.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.Image.html#Forms9Patch_Image_BorderWidthProperty
+  commentId: F:Forms9Patch.Image.BorderWidthProperty
+  fullName: Forms9Patch.Image.BorderWidthProperty
+  nameWithType: Image.BorderWidthProperty
 - uid: Forms9Patch.Image.CapInsets
   name: CapInsets
   href: api/Forms9Patch.Image.html#Forms9Patch_Image_CapInsets
@@ -6835,6 +6999,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IPopup.PageOverlayColor
   nameWithType: IPopup.PageOverlayColor
+- uid: Forms9Patch.IPopup.PopAfter
+  name: PopAfter
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_PopAfter
+  commentId: P:Forms9Patch.IPopup.PopAfter
+  fullName: Forms9Patch.IPopup.PopAfter
+  nameWithType: IPopup.PopAfter
+- uid: Forms9Patch.IPopup.PopAfter*
+  name: PopAfter
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_PopAfter_
+  commentId: Overload:Forms9Patch.IPopup.PopAfter
+  isSpec: "True"
+  fullName: Forms9Patch.IPopup.PopAfter
+  nameWithType: IPopup.PopAfter
 - uid: Forms9Patch.IPopup.Retain
   name: Retain
   href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Retain
@@ -7035,6 +7212,45 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IShape.BackgroundColor
   nameWithType: IShape.BackgroundColor
+- uid: Forms9Patch.IShape.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderColor
+  commentId: P:Forms9Patch.IShape.BorderColor
+  fullName: Forms9Patch.IShape.BorderColor
+  nameWithType: IShape.BorderColor
+- uid: Forms9Patch.IShape.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderColor_
+  commentId: Overload:Forms9Patch.IShape.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.IShape.BorderColor
+  nameWithType: IShape.BorderColor
+- uid: Forms9Patch.IShape.BorderRadius
+  name: BorderRadius
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderRadius
+  commentId: P:Forms9Patch.IShape.BorderRadius
+  fullName: Forms9Patch.IShape.BorderRadius
+  nameWithType: IShape.BorderRadius
+- uid: Forms9Patch.IShape.BorderRadius*
+  name: BorderRadius
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderRadius_
+  commentId: Overload:Forms9Patch.IShape.BorderRadius
+  isSpec: "True"
+  fullName: Forms9Patch.IShape.BorderRadius
+  nameWithType: IShape.BorderRadius
+- uid: Forms9Patch.IShape.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderWidth
+  commentId: P:Forms9Patch.IShape.BorderWidth
+  fullName: Forms9Patch.IShape.BorderWidth
+  nameWithType: IShape.BorderWidth
+- uid: Forms9Patch.IShape.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_BorderWidth_
+  commentId: Overload:Forms9Patch.IShape.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.IShape.BorderWidth
+  nameWithType: IShape.BorderWidth
 - uid: Forms9Patch.IShape.ElementShape
   name: ElementShape
   href: api/Forms9Patch.IShape.html#Forms9Patch_IShape_ElementShape
@@ -8508,6 +8724,63 @@ references:
   commentId: F:Forms9Patch.ManualLayout.BackgroundImageProperty
   fullName: Forms9Patch.ManualLayout.BackgroundImageProperty
   nameWithType: ManualLayout.BackgroundImageProperty
+- uid: Forms9Patch.ManualLayout.BorderColor
+  name: BorderColor
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderColor
+  commentId: P:Forms9Patch.ManualLayout.BorderColor
+  fullName: Forms9Patch.ManualLayout.BorderColor
+  nameWithType: ManualLayout.BorderColor
+- uid: Forms9Patch.ManualLayout.BorderColor*
+  name: BorderColor
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderColor_
+  commentId: Overload:Forms9Patch.ManualLayout.BorderColor
+  isSpec: "True"
+  fullName: Forms9Patch.ManualLayout.BorderColor
+  nameWithType: ManualLayout.BorderColor
+- uid: Forms9Patch.ManualLayout.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderColorProperty
+  commentId: F:Forms9Patch.ManualLayout.BorderColorProperty
+  fullName: Forms9Patch.ManualLayout.BorderColorProperty
+  nameWithType: ManualLayout.BorderColorProperty
+- uid: Forms9Patch.ManualLayout.BorderRadius
+  name: BorderRadius
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderRadius
+  commentId: P:Forms9Patch.ManualLayout.BorderRadius
+  fullName: Forms9Patch.ManualLayout.BorderRadius
+  nameWithType: ManualLayout.BorderRadius
+- uid: Forms9Patch.ManualLayout.BorderRadius*
+  name: BorderRadius
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderRadius_
+  commentId: Overload:Forms9Patch.ManualLayout.BorderRadius
+  isSpec: "True"
+  fullName: Forms9Patch.ManualLayout.BorderRadius
+  nameWithType: ManualLayout.BorderRadius
+- uid: Forms9Patch.ManualLayout.BorderRadiusProperty
+  name: BorderRadiusProperty
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderRadiusProperty
+  commentId: F:Forms9Patch.ManualLayout.BorderRadiusProperty
+  fullName: Forms9Patch.ManualLayout.BorderRadiusProperty
+  nameWithType: ManualLayout.BorderRadiusProperty
+- uid: Forms9Patch.ManualLayout.BorderWidth
+  name: BorderWidth
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderWidth
+  commentId: P:Forms9Patch.ManualLayout.BorderWidth
+  fullName: Forms9Patch.ManualLayout.BorderWidth
+  nameWithType: ManualLayout.BorderWidth
+- uid: Forms9Patch.ManualLayout.BorderWidth*
+  name: BorderWidth
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderWidth_
+  commentId: Overload:Forms9Patch.ManualLayout.BorderWidth
+  isSpec: "True"
+  fullName: Forms9Patch.ManualLayout.BorderWidth
+  nameWithType: ManualLayout.BorderWidth
+- uid: Forms9Patch.ManualLayout.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_BorderWidthProperty
+  commentId: F:Forms9Patch.ManualLayout.BorderWidthProperty
+  fullName: Forms9Patch.ManualLayout.BorderWidthProperty
+  nameWithType: ManualLayout.BorderWidthProperty
 - uid: Forms9Patch.ManualLayout.Description
   name: Description()
   href: api/Forms9Patch.ManualLayout.html#Forms9Patch_ManualLayout_Description
@@ -9076,12 +9349,18 @@ references:
   commentId: T:Forms9Patch.ModalPopup
   fullName: Forms9Patch.ModalPopup
   nameWithType: ModalPopup
-- uid: Forms9Patch.ModalPopup.#ctor(System.Boolean)
-  name: ModalPopup(Boolean)
-  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_System_Boolean_
-  commentId: M:Forms9Patch.ModalPopup.#ctor(System.Boolean)
-  fullName: Forms9Patch.ModalPopup.ModalPopup(System.Boolean)
-  nameWithType: ModalPopup.ModalPopup(Boolean)
+- uid: Forms9Patch.ModalPopup.#ctor(System.Boolean,System.TimeSpan)
+  name: ModalPopup(Boolean, TimeSpan)
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_System_Boolean_System_TimeSpan_
+  commentId: M:Forms9Patch.ModalPopup.#ctor(System.Boolean,System.TimeSpan)
+  fullName: Forms9Patch.ModalPopup.ModalPopup(System.Boolean, System.TimeSpan)
+  nameWithType: ModalPopup.ModalPopup(Boolean, TimeSpan)
+- uid: Forms9Patch.ModalPopup.#ctor(System.TimeSpan)
+  name: ModalPopup(TimeSpan)
+  href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_System_TimeSpan_
+  commentId: M:Forms9Patch.ModalPopup.#ctor(System.TimeSpan)
+  fullName: Forms9Patch.ModalPopup.ModalPopup(System.TimeSpan)
+  nameWithType: ModalPopup.ModalPopup(TimeSpan)
 - uid: Forms9Patch.ModalPopup.#ctor(Xamarin.Forms.VisualElement)
   name: ModalPopup(VisualElement)
   href: api/Forms9Patch.ModalPopup.html#Forms9Patch_ModalPopup__ctor_Xamarin_Forms_VisualElement_
@@ -11292,6 +11571,24 @@ references:
   commentId: F:Forms9Patch.ShapeBase.BackgroundImageProperty
   fullName: Forms9Patch.ShapeBase.BackgroundImageProperty
   nameWithType: ShapeBase.BackgroundImageProperty
+- uid: Forms9Patch.ShapeBase.BorderColorProperty
+  name: BorderColorProperty
+  href: api/Forms9Patch.ShapeBase.html#Forms9Patch_ShapeBase_BorderColorProperty
+  commentId: F:Forms9Patch.ShapeBase.BorderColorProperty
+  fullName: Forms9Patch.ShapeBase.BorderColorProperty
+  nameWithType: ShapeBase.BorderColorProperty
+- uid: Forms9Patch.ShapeBase.BorderRadiusProperty
+  name: BorderRadiusProperty
+  href: api/Forms9Patch.ShapeBase.html#Forms9Patch_ShapeBase_BorderRadiusProperty
+  commentId: F:Forms9Patch.ShapeBase.BorderRadiusProperty
+  fullName: Forms9Patch.ShapeBase.BorderRadiusProperty
+  nameWithType: ShapeBase.BorderRadiusProperty
+- uid: Forms9Patch.ShapeBase.BorderWidthProperty
+  name: BorderWidthProperty
+  href: api/Forms9Patch.ShapeBase.html#Forms9Patch_ShapeBase_BorderWidthProperty
+  commentId: F:Forms9Patch.ShapeBase.BorderWidthProperty
+  fullName: Forms9Patch.ShapeBase.BorderWidthProperty
+  nameWithType: ShapeBase.BorderWidthProperty
 - uid: Forms9Patch.ShapeBase.ElementShapeProperty
   name: ElementShapeProperty
   href: api/Forms9Patch.ShapeBase.html#Forms9Patch_ShapeBase_ElementShapeProperty
@@ -12455,12 +12752,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.TargetedToast.TargetedToast
   nameWithType: TargetedToast.TargetedToast
-- uid: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String)
-  name: Create(VisualElement, String, String)
-  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast_Create_Xamarin_Forms_VisualElement_System_String_System_String_
-  commentId: M:Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String)
-  fullName: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement, System.String, System.String)
-  nameWithType: TargetedToast.Create(VisualElement, String, String)
+- uid: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String,System.TimeSpan)
+  name: Create(VisualElement, String, String, TimeSpan)
+  href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast_Create_Xamarin_Forms_VisualElement_System_String_System_String_System_TimeSpan_
+  commentId: M:Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement,System.String,System.String,System.TimeSpan)
+  fullName: Forms9Patch.TargetedToast.Create(Xamarin.Forms.VisualElement, System.String, System.String, System.TimeSpan)
+  nameWithType: TargetedToast.Create(VisualElement, String, String, TimeSpan)
 - uid: Forms9Patch.TargetedToast.Create*
   name: Create
   href: api/Forms9Patch.TargetedToast.html#Forms9Patch_TargetedToast_Create_
@@ -12709,12 +13006,12 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.Toast.Toast
   nameWithType: Toast.Toast
-- uid: Forms9Patch.Toast.Create(System.String,System.String)
-  name: Create(String, String)
-  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Create_System_String_System_String_
-  commentId: M:Forms9Patch.Toast.Create(System.String,System.String)
-  fullName: Forms9Patch.Toast.Create(System.String, System.String)
-  nameWithType: Toast.Create(String, String)
+- uid: Forms9Patch.Toast.Create(System.String,System.String,System.TimeSpan)
+  name: Create(String, String, TimeSpan)
+  href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Create_System_String_System_String_System_TimeSpan_
+  commentId: M:Forms9Patch.Toast.Create(System.String,System.String,System.TimeSpan)
+  fullName: Forms9Patch.Toast.Create(System.String, System.String, System.TimeSpan)
+  nameWithType: Toast.Create(String, String, TimeSpan)
 - uid: Forms9Patch.Toast.Create*
   name: Create
   href: api/Forms9Patch.Toast.html#Forms9Patch_Toast_Create_
@@ -15430,6 +15727,19 @@ references:
   isSpec: "True"
   fullName: FormsGestures.VisualElementExtensions.CoordTransform
   nameWithType: VisualElementExtensions.CoordTransform
+- uid: FormsGestures.VisualElementExtensions.FindAncestorOfType(Xamarin.Forms.Element,System.Type)
+  name: FindAncestorOfType(Element, Type)
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindAncestorOfType_Xamarin_Forms_Element_System_Type_
+  commentId: M:FormsGestures.VisualElementExtensions.FindAncestorOfType(Xamarin.Forms.Element,System.Type)
+  fullName: FormsGestures.VisualElementExtensions.FindAncestorOfType(Xamarin.Forms.Element, System.Type)
+  nameWithType: VisualElementExtensions.FindAncestorOfType(Element, Type)
+- uid: FormsGestures.VisualElementExtensions.FindAncestorOfType*
+  name: FindAncestorOfType
+  href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindAncestorOfType_
+  commentId: Overload:FormsGestures.VisualElementExtensions.FindAncestorOfType
+  isSpec: "True"
+  fullName: FormsGestures.VisualElementExtensions.FindAncestorOfType
+  nameWithType: VisualElementExtensions.FindAncestorOfType
 - uid: FormsGestures.VisualElementExtensions.FindChildrenWithProperty(Xamarin.Forms.VisualElement,System.String)
   name: FindChildrenWithProperty(VisualElement, String)
   href: api/FormsGestures.VisualElementExtensions.html#FormsGestures_VisualElementExtensions_FindChildrenWithProperty_Xamarin_Forms_VisualElement_System_String_
@@ -16255,6 +16565,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.GetStreamAsync
   nameWithType: EmbeddedResourceCache.GetStreamAsync
+- uid: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(System.String,System.Reflection.Assembly,System.String)
+  name: LocalStorageFullPathForEmbeddedResource(String, Assembly, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageFullPathForEmbeddedResource_System_String_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(System.String,System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(System.String, System.Reflection.Assembly, System.String)
+  nameWithType: EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(String, Assembly, String)
+- uid: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource*
+  name: LocalStorageFullPathForEmbeddedResource
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageFullPathForEmbeddedResource_
+  commentId: Overload:P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource
+  isSpec: "True"
+  fullName: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource
+  nameWithType: EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource
 - uid: P42.Utils.EmbeddedResourceCache.LocalStorageSubPathForEmbeddedResource(System.String,System.Reflection.Assembly,System.String)
   name: LocalStorageSubPathForEmbeddedResource(String, Assembly, String)
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageSubPathForEmbeddedResource_System_String_System_Reflection_Assembly_System_String_
@@ -16446,6 +16769,31 @@ references:
   fullName.vb: P42.Utils.EventArgs(Of T).Value
   nameWithType: EventArgs<T>.Value
   nameWithType.vb: EventArgs(Of T).Value
+- uid: P42.Utils.Extensions
+  name: P42.Utils.Extensions
+  href: api/P42.Utils.Extensions.html
+  commentId: N:P42.Utils.Extensions
+  fullName: P42.Utils.Extensions
+  nameWithType: P42.Utils.Extensions
+- uid: P42.Utils.Extensions.AssemblyExtensions
+  name: AssemblyExtensions
+  href: api/P42.Utils.Extensions.AssemblyExtensions.html
+  commentId: T:P42.Utils.Extensions.AssemblyExtensions
+  fullName: P42.Utils.Extensions.AssemblyExtensions
+  nameWithType: AssemblyExtensions
+- uid: P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists(System.Reflection.Assembly,System.String)
+  name: EmbeddedResourceExists(Assembly, String)
+  href: api/P42.Utils.Extensions.AssemblyExtensions.html#P42_Utils_Extensions_AssemblyExtensions_EmbeddedResourceExists_System_Reflection_Assembly_System_String_
+  commentId: M:P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists(System.Reflection.Assembly,System.String)
+  fullName: P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists(System.Reflection.Assembly, System.String)
+  nameWithType: AssemblyExtensions.EmbeddedResourceExists(Assembly, String)
+- uid: P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists*
+  name: EmbeddedResourceExists
+  href: api/P42.Utils.Extensions.AssemblyExtensions.html#P42_Utils_Extensions_AssemblyExtensions_EmbeddedResourceExists_
+  commentId: Overload:P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists
+  isSpec: "True"
+  fullName: P42.Utils.Extensions.AssemblyExtensions.EmbeddedResourceExists
+  nameWithType: AssemblyExtensions.EmbeddedResourceExists
 - uid: P42.Utils.FileCache
   name: FileCache
   href: api/P42.Utils.FileCache.html
@@ -16990,12 +17338,12 @@ references:
   commentId: T:P42.Utils.IJsonWriteable
   fullName: P42.Utils.IJsonWriteable
   nameWithType: IJsonWriteable
-- uid: P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter)
-  name: WriteValue(JsonWriter)
-  href: api/P42.Utils.IJsonWriteable.html#P42_Utils_IJsonWriteable_WriteValue_Newtonsoft_Json_JsonWriter_
-  commentId: M:P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter)
-  fullName: P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter)
-  nameWithType: IJsonWriteable.WriteValue(JsonWriter)
+- uid: P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter,System.Boolean)
+  name: WriteValue(JsonWriter, Boolean)
+  href: api/P42.Utils.IJsonWriteable.html#P42_Utils_IJsonWriteable_WriteValue_Newtonsoft_Json_JsonWriter_System_Boolean_
+  commentId: M:P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter,System.Boolean)
+  fullName: P42.Utils.IJsonWriteable.WriteValue(Newtonsoft.Json.JsonWriter, System.Boolean)
+  nameWithType: IJsonWriteable.WriteValue(JsonWriter, Boolean)
 - uid: P42.Utils.IJsonWriteable.WriteValue*
   name: WriteValue
   href: api/P42.Utils.IJsonWriteable.html#P42_Utils_IJsonWriteable_WriteValue_
@@ -17321,312 +17669,312 @@ references:
   isSpec: "True"
   fullName: P42.Utils.JsonExtensions.WriteList
   nameWithType: JsonExtensions.WriteList
-- uid: P42.Utils.JsonExtensions.WriteList``1(Newtonsoft.Json.JsonWriter,System.Collections.Generic.IEnumerable{``0})
-  name: WriteList<T>(JsonWriter, IEnumerable<T>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WriteList__1_Newtonsoft_Json_JsonWriter_System_Collections_Generic_IEnumerable___0__
-  commentId: M:P42.Utils.JsonExtensions.WriteList``1(Newtonsoft.Json.JsonWriter,System.Collections.Generic.IEnumerable{``0})
-  name.vb: WriteList(Of T)(JsonWriter, IEnumerable(Of T))
-  fullName: P42.Utils.JsonExtensions.WriteList<T>(Newtonsoft.Json.JsonWriter, System.Collections.Generic.IEnumerable<T>)
-  fullName.vb: P42.Utils.JsonExtensions.WriteList(Of T)(Newtonsoft.Json.JsonWriter, System.Collections.Generic.IEnumerable(Of T))
-  nameWithType: JsonExtensions.WriteList<T>(JsonWriter, IEnumerable<T>)
-  nameWithType.vb: JsonExtensions.WriteList(Of T)(JsonWriter, IEnumerable(Of T))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,P42.Utils.IJsonWriteable)
-  name: WritePvPair(JsonWriter, String, IJsonWriteable)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_P42_Utils_IJsonWriteable_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,P42.Utils.IJsonWriteable)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, P42.Utils.IJsonWriteable)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, IJsonWriteable)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Boolean)
-  name: WritePvPair(JsonWriter, String, Boolean)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Boolean_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Boolean)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Boolean)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Boolean)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte)
-  name: WritePvPair(JsonWriter, String, Byte)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Byte_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Byte)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte[])
-  name: WritePvPair(JsonWriter, String, Byte[])
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Byte___
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte[])
-  name.vb: WritePvPair(JsonWriter, String, Byte())
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte[])
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte())
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Byte[])
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Byte())
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Char)
-  name: WritePvPair(JsonWriter, String, Char)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Char_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Char)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Char)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Char)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTime)
-  name: WritePvPair(JsonWriter, String, DateTime)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_DateTime_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTime)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.DateTime)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, DateTime)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTimeOffset)
-  name: WritePvPair(JsonWriter, String, DateTimeOffset)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_DateTimeOffset_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTimeOffset)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.DateTimeOffset)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, DateTimeOffset)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Decimal)
-  name: WritePvPair(JsonWriter, String, Decimal)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Decimal_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Decimal)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Decimal)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Decimal)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Double)
-  name: WritePvPair(JsonWriter, String, Double)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Double_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Double)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Double)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Double)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Guid)
-  name: WritePvPair(JsonWriter, String, Guid)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Guid_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Guid)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Guid)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Guid)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int16)
-  name: WritePvPair(JsonWriter, String, Int16)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int16_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int16)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int16)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int16)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int32)
-  name: WritePvPair(JsonWriter, String, Int32)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int32_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int32)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int32)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int32)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int64)
-  name: WritePvPair(JsonWriter, String, Int64)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int64_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int64)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int64)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int64)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Boolean})
-  name: WritePvPair(JsonWriter, String, Nullable<Boolean>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Boolean__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Boolean})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Boolean))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Boolean>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Boolean))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Boolean>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Boolean))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Byte})
-  name: WritePvPair(JsonWriter, String, Nullable<Byte>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Byte__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Byte})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Byte))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Byte>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Byte))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Byte>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Byte))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Char})
-  name: WritePvPair(JsonWriter, String, Nullable<Char>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Char__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Char})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Char))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Char>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Char))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Char>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Char))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTime})
-  name: WritePvPair(JsonWriter, String, Nullable<DateTime>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_DateTime__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTime})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of DateTime))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.DateTime>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.DateTime))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<DateTime>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of DateTime))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTimeOffset})
-  name: WritePvPair(JsonWriter, String, Nullable<DateTimeOffset>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_DateTimeOffset__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTimeOffset})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of DateTimeOffset))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.DateTimeOffset>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.DateTimeOffset))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<DateTimeOffset>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of DateTimeOffset))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Decimal})
-  name: WritePvPair(JsonWriter, String, Nullable<Decimal>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Decimal__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Decimal})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Decimal))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Decimal>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Decimal))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Decimal>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Decimal))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Double})
-  name: WritePvPair(JsonWriter, String, Nullable<Double>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Double__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Double})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Double))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Double>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Double))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Double>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Double))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Guid})
-  name: WritePvPair(JsonWriter, String, Nullable<Guid>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Guid__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Guid})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Guid))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Guid>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Guid))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Guid>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Guid))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int16})
-  name: WritePvPair(JsonWriter, String, Nullable<Int16>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int16__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int16})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int16))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int16>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int16))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int16>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int16))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int32})
-  name: WritePvPair(JsonWriter, String, Nullable<Int32>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int32__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int32})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int32))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int32>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int32))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int32>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int32))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int64})
-  name: WritePvPair(JsonWriter, String, Nullable<Int64>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int64__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int64})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int64))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int64>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int64))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int64>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int64))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Numerics.BigInteger})
-  name: WritePvPair(JsonWriter, String, Nullable<BigInteger>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Numerics_BigInteger__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Numerics.BigInteger})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of BigInteger))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Numerics.BigInteger>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Numerics.BigInteger))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<BigInteger>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of BigInteger))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.SByte})
-  name: WritePvPair(JsonWriter, String, Nullable<SByte>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_SByte__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.SByte})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of SByte))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.SByte>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.SByte))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<SByte>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of SByte))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Single})
-  name: WritePvPair(JsonWriter, String, Nullable<Single>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Single__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Single})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Single))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Single>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Single))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Single>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Single))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.TimeSpan})
-  name: WritePvPair(JsonWriter, String, Nullable<TimeSpan>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_TimeSpan__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.TimeSpan})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of TimeSpan))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.TimeSpan>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.TimeSpan))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<TimeSpan>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of TimeSpan))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt16})
-  name: WritePvPair(JsonWriter, String, Nullable<UInt16>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt16__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt16})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt16))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt16>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt16))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt16>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt16))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt32})
-  name: WritePvPair(JsonWriter, String, Nullable<UInt32>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt32__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt32})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt32))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt32>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt32))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt32>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt32))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt64})
-  name: WritePvPair(JsonWriter, String, Nullable<UInt64>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt64__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt64})
-  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt64))
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt64>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt64))
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt64>)
-  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt64))
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Numerics.BigInteger)
-  name: WritePvPair(JsonWriter, String, BigInteger)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Numerics_BigInteger_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Numerics.BigInteger)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Numerics.BigInteger)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, BigInteger)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.SByte)
-  name: WritePvPair(JsonWriter, String, SByte)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_SByte_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.SByte)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.SByte)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, SByte)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Single)
-  name: WritePvPair(JsonWriter, String, Single)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Single_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Single)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Single)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Single)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.String)
-  name: WritePvPair(JsonWriter, String, String)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_String_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.String)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.String)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, String)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.TimeSpan)
-  name: WritePvPair(JsonWriter, String, TimeSpan)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_TimeSpan_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.TimeSpan)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.TimeSpan)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, TimeSpan)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt16)
-  name: WritePvPair(JsonWriter, String, UInt16)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt16_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt16)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt16)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt16)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt32)
-  name: WritePvPair(JsonWriter, String, UInt32)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt32_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt32)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt32)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt32)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt64)
-  name: WritePvPair(JsonWriter, String, UInt64)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt64_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt64)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt64)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt64)
-- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Uri)
-  name: WritePvPair(JsonWriter, String, Uri)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Uri_
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Uri)
-  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Uri)
-  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Uri)
+- uid: P42.Utils.JsonExtensions.WriteList``1(Newtonsoft.Json.JsonWriter,System.Collections.Generic.IEnumerable{``0},System.Boolean)
+  name: WriteList<T>(JsonWriter, IEnumerable<T>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WriteList__1_Newtonsoft_Json_JsonWriter_System_Collections_Generic_IEnumerable___0__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WriteList``1(Newtonsoft.Json.JsonWriter,System.Collections.Generic.IEnumerable{``0},System.Boolean)
+  name.vb: WriteList(Of T)(JsonWriter, IEnumerable(Of T), Boolean)
+  fullName: P42.Utils.JsonExtensions.WriteList<T>(Newtonsoft.Json.JsonWriter, System.Collections.Generic.IEnumerable<T>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WriteList(Of T)(Newtonsoft.Json.JsonWriter, System.Collections.Generic.IEnumerable(Of T), System.Boolean)
+  nameWithType: JsonExtensions.WriteList<T>(JsonWriter, IEnumerable<T>, Boolean)
+  nameWithType.vb: JsonExtensions.WriteList(Of T)(JsonWriter, IEnumerable(Of T), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,P42.Utils.IJsonWriteable,System.Boolean)
+  name: WritePvPair(JsonWriter, String, IJsonWriteable, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_P42_Utils_IJsonWriteable_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,P42.Utils.IJsonWriteable,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, P42.Utils.IJsonWriteable, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, IJsonWriteable, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Boolean,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Boolean, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Boolean_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Boolean,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Boolean, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Boolean, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Byte, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Byte_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Byte, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte[],System.Boolean)
+  name: WritePvPair(JsonWriter, String, Byte[], Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Byte___System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Byte[],System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Byte(), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte[], System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Byte(), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Byte[], Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Byte(), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Char,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Char, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Char_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Char,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Char, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Char, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTime,System.Boolean)
+  name: WritePvPair(JsonWriter, String, DateTime, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_DateTime_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTime,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.DateTime, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, DateTime, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTimeOffset,System.Boolean)
+  name: WritePvPair(JsonWriter, String, DateTimeOffset, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_DateTimeOffset_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.DateTimeOffset,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.DateTimeOffset, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, DateTimeOffset, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Decimal,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Decimal, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Decimal_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Decimal,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Decimal, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Decimal, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Double,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Double, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Double_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Double,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Double, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Double, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Guid,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Guid, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Guid_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Guid,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Guid, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Guid, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int16,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Int16, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int16_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int16,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int16, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int16, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int32,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Int32, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int32_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int32,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int32, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int32, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int64,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Int64, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Int64_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Int64,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Int64, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Int64, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Boolean},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Boolean>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Boolean__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Boolean},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Boolean), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Boolean>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Boolean), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Boolean>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Boolean), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Byte},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Byte>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Byte__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Byte},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Byte), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Byte>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Byte), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Byte>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Byte), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Char},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Char>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Char__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Char},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Char), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Char>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Char), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Char>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Char), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTime},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<DateTime>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_DateTime__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTime},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of DateTime), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.DateTime>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.DateTime), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<DateTime>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of DateTime), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTimeOffset},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<DateTimeOffset>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_DateTimeOffset__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.DateTimeOffset},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of DateTimeOffset), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.DateTimeOffset>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.DateTimeOffset), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<DateTimeOffset>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of DateTimeOffset), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Decimal},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Decimal>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Decimal__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Decimal},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Decimal), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Decimal>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Decimal), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Decimal>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Decimal), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Double},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Double>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Double__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Double},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Double), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Double>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Double), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Double>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Double), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Guid},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Guid>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Guid__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Guid},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Guid), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Guid>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Guid), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Guid>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Guid), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int16},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Int16>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int16__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int16},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int16), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int16>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int16), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int16>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int16), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int32},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Int32>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int32__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int32},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int32), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int32>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int32), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int32>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int32), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int64},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Int64>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Int64__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Int64},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Int64), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Int64>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Int64), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Int64>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Int64), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Numerics.BigInteger},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<BigInteger>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Numerics_BigInteger__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Numerics.BigInteger},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of BigInteger), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Numerics.BigInteger>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Numerics.BigInteger), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<BigInteger>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of BigInteger), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.SByte},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<SByte>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_SByte__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.SByte},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of SByte), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.SByte>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.SByte), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<SByte>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of SByte), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Single},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<Single>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_Single__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.Single},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of Single), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.Single>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.Single), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<Single>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of Single), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.TimeSpan},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<TimeSpan>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_TimeSpan__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.TimeSpan},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of TimeSpan), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.TimeSpan>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.TimeSpan), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<TimeSpan>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of TimeSpan), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt16},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<UInt16>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt16__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt16},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt16), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt16>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt16), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt16>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt16), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt32},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<UInt32>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt32__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt32},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt32), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt32>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt32), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt32>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt32), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt64},System.Boolean)
+  name: WritePvPair(JsonWriter, String, Nullable<UInt64>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Nullable_System_UInt64__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Nullable{System.UInt64},System.Boolean)
+  name.vb: WritePvPair(JsonWriter, String, Nullable(Of UInt64), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable<System.UInt64>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Nullable(Of System.UInt64), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Nullable<UInt64>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(JsonWriter, String, Nullable(Of UInt64), Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Numerics.BigInteger,System.Boolean)
+  name: WritePvPair(JsonWriter, String, BigInteger, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Numerics_BigInteger_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Numerics.BigInteger,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Numerics.BigInteger, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, BigInteger, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.SByte,System.Boolean)
+  name: WritePvPair(JsonWriter, String, SByte, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_SByte_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.SByte,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.SByte, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, SByte, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Single,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Single, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Single_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Single,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Single, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Single, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.String,System.Boolean)
+  name: WritePvPair(JsonWriter, String, String, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_String_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.String,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.String, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, String, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.TimeSpan,System.Boolean)
+  name: WritePvPair(JsonWriter, String, TimeSpan, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_TimeSpan_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.TimeSpan,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.TimeSpan, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, TimeSpan, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt16,System.Boolean)
+  name: WritePvPair(JsonWriter, String, UInt16, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt16_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt16,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt16, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt16, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt32,System.Boolean)
+  name: WritePvPair(JsonWriter, String, UInt32, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt32_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt32,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt32, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt32, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt64,System.Boolean)
+  name: WritePvPair(JsonWriter, String, UInt64, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_UInt64_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.UInt64,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.UInt64, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, UInt64, Boolean)
+- uid: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Uri,System.Boolean)
+  name: WritePvPair(JsonWriter, String, Uri, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_Newtonsoft_Json_JsonWriter_System_String_System_Uri_System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter,System.String,System.Uri,System.Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair(Newtonsoft.Json.JsonWriter, System.String, System.Uri, System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair(JsonWriter, String, Uri, Boolean)
 - uid: P42.Utils.JsonExtensions.WritePvPair*
   name: WritePvPair
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair_
@@ -17634,15 +17982,15 @@ references:
   isSpec: "True"
   fullName: P42.Utils.JsonExtensions.WritePvPair
   nameWithType: JsonExtensions.WritePvPair
-- uid: P42.Utils.JsonExtensions.WritePvPair``1(Newtonsoft.Json.JsonWriter,System.String,System.Collections.Generic.IEnumerable{``0})
-  name: WritePvPair<T>(JsonWriter, String, IEnumerable<T>)
-  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair__1_Newtonsoft_Json_JsonWriter_System_String_System_Collections_Generic_IEnumerable___0__
-  commentId: M:P42.Utils.JsonExtensions.WritePvPair``1(Newtonsoft.Json.JsonWriter,System.String,System.Collections.Generic.IEnumerable{``0})
-  name.vb: WritePvPair(Of T)(JsonWriter, String, IEnumerable(Of T))
-  fullName: P42.Utils.JsonExtensions.WritePvPair<T>(Newtonsoft.Json.JsonWriter, System.String, System.Collections.Generic.IEnumerable<T>)
-  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Of T)(Newtonsoft.Json.JsonWriter, System.String, System.Collections.Generic.IEnumerable(Of T))
-  nameWithType: JsonExtensions.WritePvPair<T>(JsonWriter, String, IEnumerable<T>)
-  nameWithType.vb: JsonExtensions.WritePvPair(Of T)(JsonWriter, String, IEnumerable(Of T))
+- uid: P42.Utils.JsonExtensions.WritePvPair``1(Newtonsoft.Json.JsonWriter,System.String,System.Collections.Generic.IEnumerable{``0},System.Boolean)
+  name: WritePvPair<T>(JsonWriter, String, IEnumerable<T>, Boolean)
+  href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WritePvPair__1_Newtonsoft_Json_JsonWriter_System_String_System_Collections_Generic_IEnumerable___0__System_Boolean_
+  commentId: M:P42.Utils.JsonExtensions.WritePvPair``1(Newtonsoft.Json.JsonWriter,System.String,System.Collections.Generic.IEnumerable{``0},System.Boolean)
+  name.vb: WritePvPair(Of T)(JsonWriter, String, IEnumerable(Of T), Boolean)
+  fullName: P42.Utils.JsonExtensions.WritePvPair<T>(Newtonsoft.Json.JsonWriter, System.String, System.Collections.Generic.IEnumerable<T>, System.Boolean)
+  fullName.vb: P42.Utils.JsonExtensions.WritePvPair(Of T)(Newtonsoft.Json.JsonWriter, System.String, System.Collections.Generic.IEnumerable(Of T), System.Boolean)
+  nameWithType: JsonExtensions.WritePvPair<T>(JsonWriter, String, IEnumerable<T>, Boolean)
+  nameWithType.vb: JsonExtensions.WritePvPair(Of T)(JsonWriter, String, IEnumerable(Of T), Boolean)
 - uid: P42.Utils.JsonExtensions.WriteSafePropertyName(Newtonsoft.Json.JsonWriter,System.String)
   name: WriteSafePropertyName(JsonWriter, String)
   href: api/P42.Utils.JsonExtensions.html#P42_Utils_JsonExtensions_WriteSafePropertyName_Newtonsoft_Json_JsonWriter_System_String_

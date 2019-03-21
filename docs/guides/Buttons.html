@@ -129,88 +129,272 @@
 <h3 id="forms9patchsegmentedcontrol">Forms9Patch.SegmentedControl</h3>
 <p>iOS has a segmented control that, for the life of me, I don't know why isn't standard in Android, UWP, or Xamarin.Forms.  It's just too useful.  That being said, if I remember correctly, even the iOS segmented control doesn't support a vertical layout (please correct me if I'm wrong).</p>
 <p><img src="images/Buttons/SegmentedControl.png" alt="SegmentedControl"></p>
+<p>Forms9Patch.SegmentedControl provides for the following features:</p>
+<ul>
+<li>Orientation of the button list</li>
+<li>Toggle behavior</li>
+<li>Separator Width</li>
+<li>Horizontal and vertical alignment of button's text</li>
+<li>Text and Background color for the selected state</li>
+<li>Icon to text positioning:
+<ul>
+<li>horizontal vs. vertical orientation</li>
+<li>icon before or after text</li>
+<li>spacing between icon and text</li>
+</ul>
+</li>
+</ul>
 <h2 id="using-forms9patchs-buttons">Using Forms9Patch's buttons</h2>
-<h3 id="layout-and-decoration-properties">Layout and Decoration Properties</h3>
+<h3 id="shared-layout-and-decoration-properties">Shared Layout and Decoration Properties</h3>
 <p>The layout and decoration properties shared by all three Forms9Patch buttons are:</p>
 <ul>
-<li>Outline:
+<li>Outline/Background:
 <ul>
-<li><strong><code>BorderRadius</code></strong>:</li>
+<li><strong><code>BackgroundColor</code></strong></li>
+<li><strong><code>SelectedBackgroundColor</code></strong>:</li>
+<li><strong><code>BorderRadius</code></strong>: Alternatively, <code>OutlineRadius</code></li>
 <li><strong><code>BorderWidth</code></strong>:  Alternatively, <code>OutlineWidth</code></li>
 <li><strong><code>BorderColor</code></strong>: Alternatively, <code>OutlineColor</code></li>
 <li><strong><code>HasShadow</code></strong></li>
+<li><strong><code>Padding</code></strong>: The padding between the outline and the button's content (the icon and label)</li>
+<li></li>
 </ul>
 </li>
 <li>Text
 <ul>
 <li><strong><code>TextColor</code></strong></li>
+<li><strong><code>FontAttributes</code></strong></li>
+<li><strong><code>FontSize</code></strong></li>
+<li><strong><code>FontFamily</code></strong>: the button's label's font family.  Note: You can use the ResourceID of Embedded Resource fonts here!</li>
 <li><strong><code>SelectedTextColor</code></strong>: the color of the button's text when selected</li>
 <li><strong><code>HorizontalTextAlignment</code></strong></li>
 <li><strong><code>VerticalTextAlignment</code></strong></li>
-</ul>
-</li>
-<li>Background
-<ul>
+<li><strong><code>LineBreakMode</code></strong>: See <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms">Xamarin.Forms.LineBreakMode</a></li>
+<li><strong><code>AutoFit</code></strong>: Autofitting algorithm to be applied to button's label's text.  See <a href="Label.html#Autofit-How-it-works">Label.Autofitting</a>.</li>
+<li><strong><code>Lines</code></strong>: The number of lines used for the label's text fitting.  Again, see <a href="Label.html#Autofit-How-it-works">Label.Autofitting</a>.- Background</li>
 <li><strong><code>BackgroundColor</code></strong></li>
 <li><strong><code>BackgroundImage</code></strong>: A <code>Forms9Patch.Image</code> that will be used as the button's background.</li>
 </ul>
 </li>
 <li>Icon:
 <ul>
-<li><strong><code>TrailingIcon</code></strong>: Is the icon before or after the label?</li>
-<li><strong><code>Orientation</code></strong>: Is the icon and label arranged vertically or horizontally?</li>
+<li><strong><code>IconFontFamily</code></strong>: Used to specify the font family used for the <code>IconText</code> property.  Note: You can use the ResourceID of Embedded Resource fonts here!  - <strong><code>TrailingIcon</code></strong>: Is the icon before or after the label?</li>
+<li><strong><code>TrailingIcon</code></strong>: Is the icon placed before or after the label?</li>
 <li><strong><code>TintIcon</code></strong>: If the icon is a raster image, should the color of the non-transparent pixels be set to <code>TextColor</code>?</li>
-<li><strong><code>HasTightSpacing</code></strong>: If <code>false</code>, the icon will be positioned to the outside edge of the button.  If <code>true</code>, the icon will be positioned next to the label (separaded by <code>Spacing</code>).</li>
-<li><strong><code>Spacing</code></strong>: if <code>TightSpacing</code> is true, the icon will be positioned <code>Spacing</code> pixels away from the label</li>
+<li><strong><code>HasTightSpacing</code></strong>: If <code>false</code>, the icon will be positioned to the outside edge of the button.  If <code>true</code>, the icon will be positioned next to the label (separated by <code>Spacing</code>).</li>
 </ul>
 </li>
 </ul>
+<h3 id="button-and-statebutton-unique-properties">Button and StateButton unique properties</h3>
 <p>Additionally, the <code>Button</code> and <code>StateButton</code> elements have these properties:</p>
 <ul>
-<li>Outline
+<li><p>Outline</p>
 <ul>
 <li><strong><code>Shape</code></strong>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
 </ul>
 </li>
-<li>Text
+<li><p>Text</p>
 <ul>
 <li><strong><code>Text</code></strong>: plain text for the button's label</li>
 <li><strong><code>HtmlText</code></strong>: markup text for the button's label - an alternative to <code>Text</code></li>
-<li><strong><code>LineBreakMode</code></strong>: See <a href="https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms">Xamarin.Forms.LineBreakMode</a></li>
-<li><strong><code>AutoFit</code></strong>: Autofitting algorithm to be applied to button's label's text.  See <a href="Label.html#Autofit-How-it-works">Label.Autofitting</a>.</li>
 </ul>
 </li>
-<li>Icon
+<li><p>Icon</p>
 <ul>
 <li><strong><code>IconImage</code></strong>: A <code>Forms9Patch.Image</code> element to be used as the button's icon image.</li>
 <li><strong><code>IconText</code></strong>: An alternative to <code>IconImage</code>, enabling the use of Unicode characters or special font characters as button icons.  Just like the <code>HtmlText</code> property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.</li>
-<li><strong><code>IconFontFamily</code></strong>: Used to specify the font family used for the <code>IconText</code> property.</li>
+<li><strong><code>Orientation</code></strong>: Is the icon and label arranged vertically or horizontally?</li>
+<li><strong><code>Spacing</code></strong>: if <code>TightSpacing</code> is true, the icon will be positioned <code>Spacing</code> pixels away from the label</li>
 </ul>
 </li>
 </ul>
-<h2 id="forms9patchsegment">Forms9Patch.Segment</h2>
+<h3 id="segmentedcontrol-unique-properties">SegmentedControl unique properties</h3>
+<p>The <code>SegmentedControl</code> has the following unique properties:</p>
+<ul>
+<li>Outline:
+<ul>
+<li><strong><code>SeparatorWidth</code></strong>: Width of the separator between segments</li>
+</ul>
+</li>
+<li>Text
+<ul>
+<li><strong><code>SyncSegmentFontSizes</code></strong>: After autofitting the text in each segment to fit the available space, if this property is set to <code>true</code>, then the SegmentedControl will set the FontSize of all the segments to be the same as the smallest fitted font size.</li>
+</ul>
+</li>
+<li>Selection:
+<ul>
+<li><strong><code>SelectedSegments</code></strong>: List of the selected segments</li>
+<li><strong><code>SelectedIndexes</code></strong>: List of the indexes of the selected segments</li>
+<li><strong><code>GroupToggleBehavior</code></strong>: How the buttons will behave after being selected.  States: None, Radio, Multiselect;</li>
+</ul>
+</li>
+<li>Layout:
+<ul>
+<li><strong><code>IntraSegmentOrientation</code></strong>: Is the icon arranged Horizontally or Vertically relative to the label?</li>
+<li><strong><code>IntraSegmentSpacing</code></strong>: When <code>HasTightSpacing</code>, how much space should be between segments?</li>
+<li><strong><code>Orientation</code></strong>: Are the Segments arranged Horizontally or Vertically?</li>
+</ul>
+</li>
+</ul>
+<h3 id="segment-properties">Segment Properties</h3>
 <p>The <code>Segment</code> element is used primarily to populate the <code>SegmentedController</code> and secondarily, to customize individual segments beyond the default values provided by the parent <code>SegmentedController</code>.</p>
-<h3 id="properties">Properties</h3>
 <ul>
-<li><strong>IconImage</strong>: <code>Forms9Patch.Image</code> as the segment's optional image.  It will be tinted either to <code>FontColor</code> when enabled and grey when disabled <em>if</em> the parent <code>SegmentControl</code>'s <code>TintImage=true</code> and the image is a PNG with transparency.</li>
-<li><strong>IconText</strong>: alternative to the ImageSource property. Used to specify HTML formatted text for button's icon. Great when used with Google's Material Font.</li>
-<li><strong>Text</strong>: the segment's optional text.</li>
-<li><strong>HtmlText</strong>: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.</li>
-<li><strong>FontColor</strong>: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.</li>
-<li><strong>FontAttributes</strong>: is the text bold or italics?</li>
-<li><strong>IsSelected</strong>: Is the segment in the selected state?  Note: Segment's parent's StickyBehvior property must be Radio or MultiSelect for this to change in response to the segment being tapped.</li>
-<li><strong>IsEnabled</strong>: Is the segment enabled?</li>
-<li><strong>Orientation</strong>: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?</li>
+<li><strong><code>IconImage</code></strong>: <code>Forms9Patch.Image</code> as the segment's optional image.  It will be tinted either to <code>FontColor</code> when enabled and grey when disabled <em>if</em> the parent <code>SegmentControl</code>'s <code>TintImage=true</code> and the image is a PNG with transparency.</li>
+<li><strong><code>IconText</code></strong>: alternative to the ImageSource property. Used to specify HTML formatted text for button's icon. Great when used with Google's Material Font.</li>
+<li><strong><code>IconFontFamily</code></strong>: Used to specify the font family used for the <code>IconText</code> property.  Note: You can use the ResourceID of Embedded Resource fonts here!</li>
+<li><strong><code>Text</code></strong>: the segment's optional text.</li>
+<li><strong><code>HtmlText</code></strong>: text formatted via subset of HTML tags.  See the Using the HtmlLabel property section below for more information.</li>
+<li><strong><code>FontColor</code></strong>: the color of the text when enabled.  Disabled segmentS use a shade of grey determined by the DarkTheme property.</li>
+<li><strong><code>FontAttributes</code></strong>: is the text bold or italics?</li>
+<li><strong><code>IsSelected</code></strong>: Is the segment in the selected state?  Note: Segment's parent's GroupToggleBehavior property must be Radio or MultiSelect for this to change in response to the segment being tapped.</li>
+<li><strong><code>IsEnabled</code></strong>: Is the segment enabled?</li>
+<li><strong><code>Orientation</code></strong>: Do you want the text and image placed image on top of text (vertical) or image to the left of text (horizontal)?</li>
 </ul>
-<h3 id="events">Events</h3>
+<h2 id="events">Events</h2>
+<h3 id="button-statebutton-and-segment-events">Button, StateButton, and Segment events</h3>
 <ul>
-<li><strong>Command</strong>: The ICommand to execute when the segment is pressed.  NOTE: If the segment's parent's StickyBehvior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.</li>
-<li><strong>CommandParameter</strong>: The parameter used in ICommand calls.</li>
-<li><strong>Tapped</strong>: EventHandler be called anytime a segment is tapped.</li>
-<li><strong>Selected</strong>: EventHandler be called when a segment transitions from unselected to selected.</li>
-<li><strong>LongPressing</strong>: EventHandler be called when a segment is being held down long enough to be considered a long press.</li>
-<li><strong>LongPressed</strong>: EventHandler be called when a segment's long press has ended.</li>
+<li><strong><code>Command</code></strong>: The ICommand to execute when the button/segment is pressed.  NOTE: If a segment's parent's GroupToggleBehavior property is set to None, then this will fire anytime the segment is tapped.  Otherwise, it will fire only when the segment transitions from unselected to selected.</li>
+<li><strong><code>CommandParameter</code></strong>: The parameter used in ICommand calls.</li>
+<li><strong><code>Tapped</code></strong>: EventHandler be called anytime a button/segment is tapped.</li>
+<li><strong><code>Selected</code></strong>: EventHandler be called when a button/segment transitions from unselected to selected.</li>
+<li><strong><code>LongPressing</code></strong>: EventHandler be called when a button/segment is being held down long enough to be considered a long press.</li>
+<li><strong><code>LongPressed</code></strong>: EventHandler be called when a button/segment's long press has ended.</li>
 </ul>
+<h3 id="segmentedcontrol-events">SegmentedControl events</h3>
+<ul>
+<li><strong><code>SegmentTapped</code></strong>: Fired when one of the SegmentedControl's segments is tapped;</li>
+<li><strong><code>SegmentSelected</code></strong>: Fired when one of the SegmentedControl's segments transitions to the Selected state</li>
+<li><strong><code>SegmentLongPressing</code></strong>: Fired when one of the SegmentedControl's segments is being held down long enough to be considered a long press.</li>
+<li><strong><code>SegmentLongPressed</code></strong>:: Fired when one of the SegmentedControl's segments long press has ended.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="forms9patch-button-example">Forms9Patch Button Example</h3>
+<pre><code class="lang-csharp">var button = new Forms9Patch.Button
+                            {
+                                Text = &quot;Click me&quot;,
+                                ToggleBehavior = true,
+                                BackgroundColor = Color.NavajoWhite, OutlineRadius = 5,
+                                HasShadow=true,
+                            };
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unselected</td>
+<td><img src="images/Buttons/ShadowButton.png" alt="Forms9Patch.Button with shadow"></td>
+</tr>
+<tr>
+<td>Selected</td>
+<td><img src="images/Buttons/ShadowButton-Selected.png" alt="Forms9Patch.Button selected with shadow"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="forms9patch-statebutton-example">Forms9Patch StateButton example</h3>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ContentPage 
+	xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot; 
+	xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot; 
+	xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+	xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
+	x:Class=&quot;Forms9PatchDemo.XamlSingleStateButtonPage&quot;
+	Padding=&quot;5, 20, 5, 5&quot;&gt;
+	&lt;StackLayout&gt;
+
+
+		&lt;f9p:StateButton ToggleBehavior=&quot;true&quot; HeightRequest=&quot;80&quot; Alignment=&quot;Start&quot;&gt;
+
+			&lt;f9p:StateButton.DefaultState&gt;
+				&lt;f9p:ButtonState Text=&quot;Toggle Default State&quot; TextColor=&quot;Blue&quot;&gt;
+					&lt;f9p:ButtonState.BackgroundImage&gt;
+						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.button}&quot;/&gt;
+					&lt;/f9p:ButtonState.BackgroundImage&gt; 
+					&lt;f9p:ButtonState.IconImage&gt;
+						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.Info}&quot;/&gt;
+					&lt;/f9p:ButtonState.IconImage&gt;
+				&lt;/f9p:ButtonState&gt;
+			&lt;/f9p:StateButton.DefaultState&gt;
+
+			&lt;f9p:StateButton.SelectedState&gt;
+				&lt;f9p:ButtonState TextColor=&quot;Red&quot; Text=&quot;Selected&quot; &gt;
+					&lt;f9p:ButtonState.BackgroundImage&gt;
+						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.image}&quot;/&gt;
+					&lt;/f9p:ButtonState.BackgroundImage&gt; 
+				&lt;/f9p:ButtonState&gt;
+			&lt;/f9p:StateButton.SelectedState&gt;
+
+		&lt;/f9p:StateButton&gt;
+
+
+        &lt;Label x:Name=&quot;label&quot;/&gt;
+
+		
+	&lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unselected</td>
+<td><img src="images/Buttons/StateButton.png" alt="Forms9Patch.StateButton "></td>
+</tr>
+<tr>
+<td>Selected</td>
+<td><img src="images/Buttons/StateButton-Selected.png" alt="Forms9Patch.StateButton selected "></td>
+</tr>
+</tbody>
+</table>
+<h3 id="forms9patch-segementedcontrol-example">Forms9Patch SegementedControl example</h3>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ContentPage 
+xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot; 
+xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot; 
+x:Class=&quot;Forms9PatchDemo.XamlSegmentedControlPage&quot;
+xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
+BackgroundColor = &quot;Gray&quot;
+Padding = &quot;40&quot;
+&gt;
+	&lt;ContentPage.Content&gt;
+		&lt;StackLayout&gt;
+			&lt;Label Text=&quot;SegmentedControl Example&quot; TextColor=&quot;Black&quot;/&gt;
+			&lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; Orientation=&quot;Vertical&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; Padding=&quot;5&quot; GroupToggleBehavior=&quot;Multiselect&quot;&gt;
+				&lt;f9p:Segment Text=&quot;Pause 5&quot;/&gt;
+				&lt;f9p:Segment Text=&quot;Pause 10&quot;/&gt;
+				&lt;f9p:Segment Text=&quot;Pause 15&quot;/&gt;
+				&lt;f9p:Segment Text=&quot;Cancel&quot; TextColor=&quot;Red&quot;/&gt;
+				&lt;f9p:Segment Text=&quot;Launch&quot; FontAttributes=&quot;Bold&quot;/&gt;
+			&lt;/f9p:SegmentedControl&gt;
+			&lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; Padding=&quot;5&quot;	FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; &gt;
+                &lt;f9p:Segment Text=&quot;A&quot; Orientation=&quot;Vertical&quot;&gt;
+                    &lt;f9p:Segment.IconImage&gt;
+                        &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}&quot;/&gt;
+                    &lt;/f9p:Segment.IconImage&gt;
+                   
+                &lt;/f9p:Segment&gt;
+                &lt;f9p:Segment Text=&quot;B&quot; Orientation=&quot;Vertical&quot;&gt;
+                    &lt;f9p:Segment.IconImage&gt;
+                        &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.Info}&quot;/&gt;
+                    &lt;/f9p:Segment.IconImage&gt;
+                &lt;/f9p:Segment&gt;
+                &lt;f9p:Segment Text=&quot;PIZZA&quot;/&gt;
+			&lt;/f9p:SegmentedControl&gt;
+		&lt;/StackLayout&gt;
+	&lt;/ContentPage.Content&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+<p><img src="images/Buttons/SegmentedControl.png" alt="SegmentedControl"></p>
 </article>
           </div>
           

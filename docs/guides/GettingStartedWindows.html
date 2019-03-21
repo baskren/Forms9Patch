@@ -155,13 +155,13 @@
 </li>
 <li><p>Update your application's MainPage content (MainPage.xaml) to use Forms9Patch elements:</p>
 <ol>
-<li><p>In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it.</p>
+<li><p>In Solution Explorer, in the LinkTest shared .NetStandard project (<em>not</em> the LinkTest.UWP platform project), double-click MainPage.xaml to open it.</p>
 </li>
-<li><p>Update MainPage.xaml with the following code. This code declaratively defines the user interface for the page.</p>
+<li><p>Update MainPage.xaml with the following changes. This code declaratively defines the user interface for the page.</p>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
 &lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
-                    xmlns:Forms9Patch=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+            xmlns:Forms9Patch=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
             xmlns:local=&quot;clr-namespace:LinkTest&quot;
             x:Class=&quot;LinkTest.MainPage&quot;&gt;
     &lt;ContentPage.Padding&gt;

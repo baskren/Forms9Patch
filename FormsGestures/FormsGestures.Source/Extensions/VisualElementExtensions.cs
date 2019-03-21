@@ -331,6 +331,12 @@ namespace FormsGestures
             return null;
         }
 
+        /// <summary>
+        /// returns first ancestor element of given type
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static Element FindAncestorOfType(this Element element, Type type)
         {
             var parent = element.Parent;

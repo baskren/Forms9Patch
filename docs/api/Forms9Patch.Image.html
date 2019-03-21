@@ -101,10 +101,10 @@
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ianimatable">IAnimatable</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iimagecontroller">IImageController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">IViewController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ivisualelementcontroller">IVisualElementController</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">IElementController</a></div>
-    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iimagecontroller">IImageController</a></div>
     <div><a class="xref" href="Forms9Patch.IExtendedShape.html">IExtendedShape</a></div>
     <div><a class="xref" href="Forms9Patch.IShape.html">IShape</a></div>
     <div><a class="xref" href="Forms9Patch.IElement.html">IElement</a></div>
@@ -175,7 +175,7 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.view.verticaloptions#Xamarin_Forms_View_VerticalOptions">View.VerticalOptions</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.navigationproperty">VisualElement.NavigationProperty</a>
+      <span class="xref">Xamarin.Forms.VisualElement.NavigationProperty</span>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.inputtransparentproperty">VisualElement.InputTransparentProperty</a>
@@ -238,7 +238,7 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.triggersproperty">VisualElement.TriggersProperty</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.styleproperty">VisualElement.StyleProperty</a>
+      <span class="xref">Xamarin.Forms.VisualElement.StyleProperty</span>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.widthrequestproperty">VisualElement.WidthRequestProperty</a>
@@ -307,7 +307,7 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onchildrenreordered#Xamarin_Forms_VisualElement_OnChildrenReordered">VisualElement.OnChildrenReordered()</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onparentset#Xamarin_Forms_VisualElement_OnParentSet">VisualElement.OnParentSet()</a>
+      <span class="xref">Xamarin.Forms.VisualElement.OnParentSet()</span>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.onsizeallocated#Xamarin_Forms_VisualElement_OnSizeAllocated_System_Double_System_Double_">VisualElement.OnSizeAllocated(Double, Double)</a>
@@ -367,7 +367,7 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.minimumwidthrequest#Xamarin_Forms_VisualElement_MinimumWidthRequest">VisualElement.MinimumWidthRequest</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.navigation#Xamarin_Forms_VisualElement_Navigation">VisualElement.Navigation</a>
+      <span class="xref">Xamarin.Forms.VisualElement.Navigation</span>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.visualelement.opacity#Xamarin_Forms_VisualElement_Opacity">VisualElement.Opacity</a>
@@ -446,6 +446,9 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.menuproperty">Element.MenuProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.automationidproperty">Element.AutomationIdProperty</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.element.classidproperty">Element.ClassIdProperty</a>
@@ -575,7 +578,7 @@
   <h6><strong>Assembly</strong>: Forms9Patch.dll</h6>
   <h5 id="Forms9Patch_Image_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Image : SKCanvasView, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IStyleSelectable, IStylable, IGestureController, ISKCanvasViewController, IViewController, IVisualElementController, IElementController, IImage, IImageController, IExtendedShape, IBubbleShape, IShape, IElement</code></pre>
+    <pre><code class="lang-csharp hljs">public class Image : SKCanvasView, INotifyPropertyChanged, IDynamicResourceHandler, IElement, INameScope, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IStyleSelectable, IStylable, IGestureController, ISKCanvasViewController, IImage, IImageController, IViewController, IVisualElementController, IElementController, IExtendedShape, IBubbleShape, IShape, IElement</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -746,6 +749,81 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly BindableProperty BackgroundColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_BorderColorProperty" data-uid="Forms9Patch.Image.BorderColorProperty">BorderColorProperty</h4>
+  <div class="markdown level1 summary"><p>The boarder color property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BorderColorProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_BorderRadiusProperty" data-uid="Forms9Patch.Image.BorderRadiusProperty">BorderRadiusProperty</h4>
+  <div class="markdown level1 summary"><p>The boarder radius property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BorderRadiusProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Forms9Patch_Image_BorderWidthProperty" data-uid="Forms9Patch.Image.BorderWidthProperty">BorderWidthProperty</h4>
+  <div class="markdown level1 summary"><p>The boarder width property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BorderWidthProperty</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -995,7 +1073,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   
   <h4 id="Forms9Patch_Image_OutlineColorProperty" data-uid="Forms9Patch.Image.OutlineColorProperty">OutlineColorProperty</h4>
-  <div class="markdown level1 summary"><p>backing store for OutlineColor property</p>
+  <div class="markdown level1 summary"><p>Backing store for the outline color property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1020,7 +1098,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   
   <h4 id="Forms9Patch_Image_OutlineRadiusProperty" data-uid="Forms9Patch.Image.OutlineRadiusProperty">OutlineRadiusProperty</h4>
-  <div class="markdown level1 summary"><p>backing store for OutlineRadius property</p>
+  <div class="markdown level1 summary"><p>Backing store for the outline radius property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1045,7 +1123,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   
   <h4 id="Forms9Patch_Image_OutlineWidthProperty" data-uid="Forms9Patch.Image.OutlineWidthProperty">OutlineWidthProperty</h4>
-  <div class="markdown level1 summary"><p>backing store for OutlineWidth property</p>
+  <div class="markdown level1 summary"><p>Backing store for the outline width property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1323,6 +1401,87 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   </table>
   
   
+  <a id="Forms9Patch_Image_BorderColor_" data-uid="Forms9Patch.Image.BorderColor*"></a>
+  <h4 id="Forms9Patch_Image_BorderColor" data-uid="Forms9Patch.Image.BorderColor">BorderColor</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the color of the boarder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color BorderColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
+        <td><p>The color of the boarder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_BorderRadius_" data-uid="Forms9Patch.Image.BorderRadius*"></a>
+  <h4 id="Forms9Patch_Image_BorderRadius" data-uid="Forms9Patch.Image.BorderRadius">BorderRadius</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the boarder radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BorderRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The boarder radius.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Forms9Patch_Image_BorderWidth_" data-uid="Forms9Patch.Image.BorderWidth*"></a>
+  <h4 id="Forms9Patch_Image_BorderWidth" data-uid="Forms9Patch.Image.BorderWidth">BorderWidth</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the width of the boarder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BorderWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The width of the boarder.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Forms9Patch_Image_CapInsets_" data-uid="Forms9Patch.Image.CapInsets*"></a>
   <h4 id="Forms9Patch_Image_CapInsets" data-uid="Forms9Patch.Image.CapInsets">CapInsets</h4>
   <div class="markdown level1 summary"><p>Gets or sets the end-cap insets.  This is a bindable property.</p>
@@ -1510,7 +1669,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   <a id="Forms9Patch_Image_OutlineColor_" data-uid="Forms9Patch.Image.OutlineColor*"></a>
   <h4 id="Forms9Patch_Image_OutlineColor" data-uid="Forms9Patch.Image.OutlineColor">OutlineColor</h4>
-  <div class="markdown level1 summary"><p>Gets/Sets the OutlineColor property</p>
+  <div class="markdown level1 summary"><p>Gets or sets the color of the outline.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1528,7 +1687,8 @@ When a button with end caps is resized, the resizing occurs only in the middle o
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.color">Color</a></td>
-        <td></td>
+        <td><p>The color of the outline.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1536,7 +1696,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   <a id="Forms9Patch_Image_OutlineRadius_" data-uid="Forms9Patch.Image.OutlineRadius*"></a>
   <h4 id="Forms9Patch_Image_OutlineRadius" data-uid="Forms9Patch.Image.OutlineRadius">OutlineRadius</h4>
-  <div class="markdown level1 summary"><p>Gets/Sets the OutlineRadius property</p>
+  <div class="markdown level1 summary"><p>Gets or sets the outline radius.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1554,7 +1714,8 @@ When a button with end caps is resized, the resizing occurs only in the middle o
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td></td>
+        <td><p>The outline radius.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1562,7 +1723,7 @@ When a button with end caps is resized, the resizing occurs only in the middle o
   
   <a id="Forms9Patch_Image_OutlineWidth_" data-uid="Forms9Patch.Image.OutlineWidth*"></a>
   <h4 id="Forms9Patch_Image_OutlineWidth" data-uid="Forms9Patch.Image.OutlineWidth">OutlineWidth</h4>
-  <div class="markdown level1 summary"><p>Gets/Sets the OutlineWidth property</p>
+  <div class="markdown level1 summary"><p>Gets or sets the width of the outline.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1580,7 +1741,8 @@ When a button with end caps is resized, the resizing occurs only in the middle o
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
-        <td></td>
+        <td><p>The width of the outline.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2118,6 +2280,9 @@ public override SizeRequest GetSizeRequest(double widthConstraint, double height
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.internals.igesturecontroller">Xamarin.Forms.Internals.IGestureController</a>
   </div>
   <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iimagecontroller">Xamarin.Forms.IImageController</a>
+  </div>
+  <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iviewcontroller">Xamarin.Forms.IViewController</a>
   </div>
   <div>
@@ -2125,9 +2290,6 @@ public override SizeRequest GetSizeRequest(double widthConstraint, double height
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.ielementcontroller">Xamarin.Forms.IElementController</a>
-  </div>
-  <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/xamarin.forms.iimagecontroller">Xamarin.Forms.IImageController</a>
   </div>
   <div>
       <a class="xref" href="Forms9Patch.IExtendedShape.html">IExtendedShape</a>
