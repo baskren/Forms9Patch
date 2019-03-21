@@ -511,7 +511,9 @@ namespace Forms9Patch
         {
             //return base.OnBackButtonPressed();
             if (CancelOnBackButtonClick)
+#pragma warning disable CS0618 // Type or member is obsolete
                 Cancel();
+#pragma warning restore CS0618 // Type or member is obsolete
             return CancelOnBackButtonClick;
         }
 
@@ -523,7 +525,9 @@ namespace Forms9Patch
         {
             var isClose = base.OnBackgroundClicked();
             if (isClose)
+#pragma warning disable CS0618 // Type or member is obsolete
                 Cancel();
+#pragma warning restore CS0618 // Type or member is obsolete
             return isClose;
         }
 
@@ -697,7 +701,9 @@ namespace Forms9Patch
             _isPopping = false;
 
             if (IsVisible && !_isPushing)
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 Push();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
@@ -804,11 +810,15 @@ namespace Forms9Patch
                         IsVisible = false;
                         return;
                     }
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     Push();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 else if (!IsVisible && _isPushed)
                 {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     Pop();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 //else
                 //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");

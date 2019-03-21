@@ -1165,22 +1165,30 @@ namespace Forms9Patch
 
                 if (Fill == Fill.Tile)
                 {
-                    for (float x = 0; x < fillRect.Width; x += (float)SourceImageWidth)
-                        for (float y = 0; y < fillRect.Height; y += (float)SourceImageHeight)
-                        {
-                            workingCanvas.ResetMatrix();
-                            workingCanvas.Translate(x, y);
-                            workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
-                        }
-                    workingCanvas.Restore();
-                    return;
+                    if (SourceImageWidth > 0 && SourceImageHeight > 0)
+                    {
+                        for (float x = 0; x < fillRect.Width; x += (float)SourceImageWidth)
+                            for (float y = 0; y < fillRect.Height; y += (float)SourceImageHeight)
+                            {
+                                workingCanvas.ResetMatrix();
+                                workingCanvas.Translate(x, y);
+                                workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
+                            }
+                        workingCanvas.Restore();
+                        return;
+                    }
                 }
 
                 var fillRectAspect = fillRect.Width / fillRect.Height;
-                var imageAspect = SourceImageWidth / SourceImageHeight;
+                var imageAspect = (SourceImageWidth == 0 || SourceImageHeight == 0) ? 1 : SourceImageWidth / SourceImageHeight;
                 double scaleX = 1;
                 double scaleY = 1;
-                if (Fill == Fill.AspectFill)
+                if (SourceImageWidth <= 0 || SourceImageHeight <= 0)
+                {
+                    scaleX = scaleY = 1;
+                    Console.WriteLine("Cannot tile, scale or justify an SVG image with zero or negative Width or Height. Verify, in the SVG source, that the x, y, width, height, and viewBox attributes of the <SVG> tag are present and set correctly.");
+                }
+                else if (Fill == Fill.AspectFill)
                 {
                     scaleX = imageAspect > fillRectAspect ? fillRect.Height / SourceImageHeight : fillRect.Width / SourceImageWidth;
                     scaleY = scaleX;
@@ -1201,31 +1209,34 @@ namespace Forms9Patch
 
                 //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout scaleX:" + scaleX + " scaleY:" + scaleY + " scaledWidth:" + scaledWidth + " scaledHeight:" + scaledHeight);
 
-                float left;
-                switch (HorizontalOptions.Alignment)
+                float left = 0;
+                float top = 0;
+                if (SourceImageWidth > 0 && SourceImageHeight > 0)
                 {
-                    case Xamarin.Forms.LayoutAlignment.Start:
-                        left = 0;
-                        break;
-                    case Xamarin.Forms.LayoutAlignment.End:
-                        left = (float)(fillRect.Width - scaledWidth);
-                        break;
-                    default:
-                        left = (float)(fillRect.Width - scaledWidth) / 2.0f;
-                        break;
-                }
-                float top;
-                switch (VerticalOptions.Alignment)
-                {
-                    case Xamarin.Forms.LayoutAlignment.Start:
-                        top = 0;
-                        break;
-                    case Xamarin.Forms.LayoutAlignment.End:
-                        top = (float)(fillRect.Height - scaledHeight);
-                        break;
-                    default:
-                        top = (float)(fillRect.Height - scaledHeight) / 2.0f;
-                        break;
+                    switch (HorizontalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            left = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            left = (float)(fillRect.Width - scaledWidth);
+                            break;
+                        default:
+                            left = (float)(fillRect.Width - scaledWidth) / 2.0f;
+                            break;
+                    }
+                    switch (VerticalOptions.Alignment)
+                    {
+                        case Xamarin.Forms.LayoutAlignment.Start:
+                            top = 0;
+                            break;
+                        case Xamarin.Forms.LayoutAlignment.End:
+                            top = (float)(fillRect.Height - scaledHeight);
+                            break;
+                        default:
+                            top = (float)(fillRect.Height - scaledHeight) / 2.0f;
+                            break;
+                    }
                 }
                 var shadowPadding = ShapeBase.ShadowPadding(this, true);
                 workingCanvas.Translate(left + (float)shadowPadding.Left, top + (float)shadowPadding.Top);
@@ -1252,10 +1263,7 @@ namespace Forms9Patch
                 else if (Opacity < 1.0)
                 {
                     var transparency = SKColors.White.WithAlpha((byte)(Opacity * 255)); // 127 => 50%
-                    paint = new SKPaint
-                    {
-                        ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn)
-                    };
+                    paint = new SKPaint { ColorFilter = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn) };
                 }
                 workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture, paint);
                 //workingCanvas.DrawPicture(_f9pImageData.SKSvg.Picture);
@@ -1447,6 +1455,10 @@ namespace Forms9Patch
                     paint = shadowPaint;
                     canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect, paint);
                 }
+            }
+            else
+            {
+                Console.WriteLine("Image [" + _f9pImageData.Key + "] is neither a valid SVG or valid Bitmap.");
             }
         }
         #endregion

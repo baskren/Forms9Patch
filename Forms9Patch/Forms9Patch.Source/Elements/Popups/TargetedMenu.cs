@@ -492,7 +492,7 @@ namespace Forms9Patch
         /// Event fired with a menu item (segment) has been tapped
         /// </summary>
         public event SegmentedControlEventHandler SegmentTapped;
-        void OnButtonTapped(object sender, System.EventArgs e)
+        async void OnButtonTapped(object sender, System.EventArgs e)
         {
             for (int i = 0; i < _segments.Count; i++)
             {
@@ -504,7 +504,7 @@ namespace Forms9Patch
                 }
             }
             //IsVisible = false;
-            Cancel();
+            await CancelAsync();
         }
 
         #endregion
