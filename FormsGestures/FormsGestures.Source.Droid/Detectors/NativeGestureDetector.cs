@@ -33,6 +33,7 @@ namespace FormsGestures.Droid
 
         MotionEvent.PointerCoords[] _lastCoords = null;
         readonly MotionEvent.PointerCoords[] _avgCoords;
+        MotionEvent _lastMotionEvent;
         public override bool OnTouchEvent(MotionEvent e)
         {
             System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
@@ -78,11 +79,12 @@ namespace FormsGestures.Droid
                     _lastCoords = null;
                 }
             }
-            else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up)
+            else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up || (e.Action == MotionEventActions.Down && _lastMotionEvent != null && _lastMotionEvent.Action == MotionEventActions.Down))
                 _listener?.OnUp(e);
             else if (e.Action == MotionEventActions.Cancel)
                 _listener?.Cancel();
 
+            _lastMotionEvent = e;
             return handled;
         }
 

@@ -400,7 +400,7 @@ namespace FormsGestures.Droid
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener." + P42.Utils.ReflectionExtensions.CallerMemberName() + " action:" + ev.Action + " index" + ev.ActionIndex + " e:" + ev);
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
 
-            if (ev.Action != MotionEventActions.Up)
+            if (ev.Action != MotionEventActions.Up && ev.Action != MotionEventActions.Down)
             {
                 System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp invalid e.Action [" + ev.Action + "]");
                 return false;
