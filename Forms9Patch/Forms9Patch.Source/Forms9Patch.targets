@@ -95,11 +95,15 @@
     <Compile Include="..\Forms9Patch.Source\Enums\KeyClicks.cs" Link="Enums\KeyClicks.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\NetworkConnectivity.cs" Link="Enums\NetworkConnectivity.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\PointerDirection.cs" Link="Enums\PointerDirection.cs" />
+    <Compile Include="..\Forms9Patch.Source\Enums\PopupPoppedCause.cs" Link="Enums\PopupPoppedCause.cs" />
     <Compile Include="..\Forms9Patch.Source\Enums\RoundRectPath.cs" Link="Enums\RoundRectPath.cs" />
 
     <!-- Events -->
+    <Compile Include="..\Forms9Patch.Source\Events\PopupPoppedEventArgs.cs" Link="Events\PopupPoppedEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Events\SegmentedControlEventArgs.cs" Link="Events\SegmentedControlEventArgs.cs" />
     <Compile Include="..\Forms9Patch.Source\Events\SegmentedControlEventHandler.cs" Link="Events\SegmentedControlEventHandler.cs" />
+
+
 
     <!-- Extensions -->
     <Compile Include="..\Forms9Patch.Source\Extensions\ApplicationExtensions.cs" Link="Extensions\ApplicationExtensions.cs" />

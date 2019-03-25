@@ -9,6 +9,7 @@ using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace Forms9Patch
 {
@@ -465,7 +466,7 @@ namespace Forms9Patch
         /// Say, when was the last time I ...
         /// </summary>
         protected DateTime _lastLayout = DateTime.MinValue;
-
+        PopupPoppedEventArgs PopupPoppedEventArgs;
         #endregion
 
 
@@ -515,11 +516,11 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
-            //return base.OnBackButtonPressed();
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (CancelOnBackButtonClick)
-#pragma warning disable CS0618 // Type or member is obsolete
-                Cancel();
-#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                CancelAsync(PopupPoppedCause.HardwareBackButtonPressed);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             return CancelOnBackButtonClick;
         }
 
@@ -529,38 +530,42 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override bool OnBackgroundClicked()
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             var isClose = base.OnBackgroundClicked();
             if (isClose)
-#pragma warning disable CS0618 // Type or member is obsolete
-                Cancel();
-#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                CancelAsync(PopupPoppedCause.BackgroundTouch);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             return isClose;
         }
 
         /// <summary>
-        /// Cancel the popup
+        /// Cancels the async.
         /// </summary>
-        /// <returns></returns>
-        public async Task CancelAsync()
+        /// <returns>Task</returns>
+        /// <param name="trigger">Optional, object or PopupEventCause that triggered cancelation.</param>
+        public async Task CancelAsync(object trigger = null)
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                await Pop();
-                //await Navigation.RemovePopupPageAsync(this);
-                //IsVisible = false;
+                if (trigger == null)
+                    await PopAsync(PopupPoppedCause.MethodCalled, P42.Utils.ReflectionExtensions.CallerMemberName());
+                else
+                    await PopAsync(trigger);
                 while (_isPushed)
                     await Task.Delay(50);
                 Cancelled?.Invoke(this, EventArgs.Empty);
             }
             else
-                Device.BeginInvokeOnMainThread(async () => await CancelAsync());
+                Device.BeginInvokeOnMainThread(async () => await CancelAsync(trigger));
         }
 
         /// <summary>
         /// Cancel the display of this Popup (will fire Cancelled event);
         /// </summary>
         [Obsolete("Use CancelAsync instead")]
-        public void Cancel() => Task.Run(async () => await CancelAsync());
+        public void Cancel(object trigger = null) => Task.Run(async () => await CancelAsync(trigger ?? P42.Utils.ReflectionExtensions.CallerMemberName()));
 
         #endregion
 
@@ -578,15 +583,7 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
-                    /*
-                    if (IsVisible)
-
-                        _listener.Tapped -= OnTapped;
-                    _listener.Panning -= OnPanning;
-                    _listener.Dispose();
-                    */
                     Retain = false;
-                    //PopupPage?.RemovePopup(this);
                     _disposed = true;
                 }
             }
@@ -596,9 +593,7 @@ namespace Forms9Patch
         /// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
         /// </summary>
         public void Dispose()
-        {
-            Dispose(true);
-        }
+            => Dispose(true);
         #endregion
 
 
@@ -640,11 +635,8 @@ namespace Forms9Patch
         void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (!P42.Utils.Environment.IsOnMainThread)
-            {
                 Device.BeginInvokeOnMainThread(() => OnContentViewPropertyChanged(sender, e));
-                return;
-            }
-            if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
+            else if (IsVisible && (e.PropertyName == Xamarin.Forms.Layout.PaddingProperty.PropertyName || e.PropertyName == KeyboardServiceHeight))
                 LayoutChildren(X, Y, Width, Height);
         }
 
@@ -666,6 +658,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPushing = true;
             //IsVisible = true;
             base.OnAppearingAnimationBegin();
@@ -676,14 +669,21 @@ namespace Forms9Patch
         /// </summary>
         protected override async void OnAppearingAnimationEnd()
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             base.OnAppearingAnimationEnd();
             _isPushed = true;
             _isPushing = false;
 
             if (!IsVisible && !_isPopping)
-                await Pop();
+                await PopAsync(PopupPoppedCause.IsVisiblePropertySet);
             else if (PopAfter > default(TimeSpan))
-                Device.StartTimer(PopAfter, () => IsVisible = false);
+                Device.StartTimer(PopAfter, () =>
+                {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    PopAsync(PopupPoppedCause.Timeout);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    return false;
+                });
         }
 
         /// <summary>
@@ -691,6 +691,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPopping = true;
             _isPushed = false;
             base.OnDisappearingAnimationBegin();
@@ -702,25 +703,38 @@ namespace Forms9Patch
         protected override void OnDisappearingAnimationEnd()
         {
 
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             base.OnDisappearingAnimationEnd();
             //IsVisible = false;
             _isPopping = false;
 
             if (IsVisible && !_isPushing)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                Push();
+                PushAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
+
+        [Obsolete("Use PushAsync instead")]
+        /// <summary>
+        /// Obsolete.  Use PushAsync instaed
+        /// </summary>
+        /// <returns>The push.</returns>
+        public async Task Push()
+        {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            await PushAsync();
+        }
 
         //bool _isPushing;
         /// <summary>
         /// Push the popup asynchronously
         /// </summary>
         /// <returns></returns>
-        public async Task Push()
+        public async Task PushAsync()
         {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
@@ -737,6 +751,7 @@ namespace Forms9Patch
 
                     if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
                     {
+                        PopupPoppedEventArgs = null;
                         _isPushing = true;
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.PushPopupAsync(this);
@@ -746,46 +761,81 @@ namespace Forms9Patch
                     _lock.Release();
                 }
                 else
-                    Device.BeginInvokeOnMainThread(async () => await Push());
+                    Device.BeginInvokeOnMainThread(async () => await PushAsync());
             }
         }
+
+        [Obsolete("Use PopAsync instead")]
+        /// <summary>
+        /// Obsolete.  USe PopAsync instead
+        /// </summary>
+        /// <returns>The pop.</returns>
+        public async Task Pop(object trigger = null)
+        {
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            if (trigger == null)
+                await PopAsync(PopupPoppedCause.MethodCalled, P42.Utils.ReflectionExtensions.CallerMemberName());
+            else
+                await PopAsync(trigger);
+        }
+
 
         //bool _isPoping;
         /// <summary>
         /// Pop the popup asynchronously
         /// </summary>
         /// <returns></returns>
-        public async Task Pop()
+        public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "")
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                //System.Diagnostics.Debug.WriteLine("POP");
-                IsVisible = false;
-                //if (_isPoping || !_isPushed)
-                //    return;
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
-                    //_isPoping = true;
-                    //while (_isPushing) await Task.Delay(100);
-                    //if (!IsVisible)
+                    _isPopping = true;
+                    IsVisible = false;
                     await _lock.WaitAsync();
-                    if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+                    if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                     {
                         _isPopping = true;
+                        if (trigger is PopupPoppedCause cause)
+                        {
+                            if (cause == PopupPoppedCause.MethodCalled)
+                                PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.MethodCalled, callerName);
+                            else
+                                PopupPoppedEventArgs = new PopupPoppedEventArgs(cause, null);
+                        }
+                        else if (trigger is Button)
+                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.ButtonTapped, trigger);
+                        else if (trigger is Segment)
+                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.SegmentTapped, trigger);
+                        else
+                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.Custom, trigger);
                         PopupLayerEffect.RemoveFrom(this);
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
                     }
-                    //_isPoping = false;
                     _lock.Release();
                 }
                 else
-                    Device.BeginInvokeOnMainThread(async () => await Pop());
+                    Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
             }
         }
 
 
+        /// <summary>
+        /// Delay until the popup is popped.
+        /// </summary>
+        /// <returns>Why the popup was popped and, if appropriate, what triggered it.</returns>
+        public virtual async Task<PopupPoppedEventArgs> DelayUntilPoppedAsyc()
+        {
+            while (PopupPoppedEventArgs == null)
+                await Task.Delay(50);
+            var args = PopupPoppedEventArgs;
+            PopupPoppedEventArgs = null;
+            return args;
+        }
 
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>
@@ -809,6 +859,7 @@ namespace Forms9Patch
             {
                 if (IsVisible && !_isPushed)// && PopupPage != null)
                 {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " IsVisible");
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
                     if (Application.Current.MainPage == null)
@@ -817,13 +868,14 @@ namespace Forms9Patch
                         return;
                     }
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    Push();
+                    PushAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
-                else if (!IsVisible && _isPushed)
+                else if (!IsVisible && _isPushed && !_isPopping)
                 {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " !IsVisible");
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    Pop();
+                    PopAsync(PopupPoppedCause.IsVisiblePropertySet);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 //else

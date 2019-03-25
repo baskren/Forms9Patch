@@ -602,7 +602,7 @@ namespace Forms9Patch
                     WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
                     Content = stack
                 };
-                cancelButton.Tapped += async (s, arg) => await modal.CancelAsync();
+                cancelButton.Tapped += async (s, arg) => await modal.CancelAsync(cancelButton);
                 for (int i = 2; i < swipeMenu.Count; i++)
                 {
                     var menuItem = swipeMenu[i];
@@ -615,7 +615,7 @@ namespace Forms9Patch
                     };
                     segment.Tapped += async (s, arg) =>
                     {
-                        await modal.CancelAsync();
+                        await modal.CancelAsync(segment);
                         var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
                         ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this, args);
                         ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);

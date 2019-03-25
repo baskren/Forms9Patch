@@ -230,10 +230,10 @@ namespace Forms9Patch
             _okButton.HtmlText = OkText;
 
 
-            _cancelButton.Tapped += async (s, args) => await CancelAsync();
+            _cancelButton.Tapped += async (s, args) => await CancelAsync(_cancelButton);
             _okButton.Tapped += async (s, args) =>
             {
-                await Pop();
+                await PopAsync(_okButton);
                 while (_isPushed)
                     await Task.Delay(50);
                 OkTapped?.Invoke(this, EventArgs.Empty);

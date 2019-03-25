@@ -145,7 +145,7 @@ namespace Forms9Patch
             _okButton.TextColor = OkTextColor;
             _okButton.HtmlText = OkText;
 
-            _okButton.Tapped += async (s, args) => await CancelAsync();
+            _okButton.Tapped += async (s, args) => await CancelAsync(_okButton);
             Content = new StackLayout
             {
                 Children =

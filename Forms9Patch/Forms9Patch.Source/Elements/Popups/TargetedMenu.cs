@@ -504,7 +504,7 @@ namespace Forms9Patch
                 }
             }
             //IsVisible = false;
-            await CancelAsync();
+            await CancelAsync(sender);
         }
 
         #endregion
