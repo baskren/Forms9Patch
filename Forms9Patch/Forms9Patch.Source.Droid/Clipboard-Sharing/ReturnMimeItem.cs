@@ -79,7 +79,7 @@ namespace Forms9Patch.Droid
                         return File.ReadAllBytes(uri.Path);
                     return uri.Path;
                 }
-                System.Diagnostics.Debug.WriteLine("_intent.Extras.Get(Itent.ExtraStream)=[" + _intent.Extras.Get(Intent.ExtraStream + "]"));
+                //System.Diagnostics.Debug.WriteLine("_intent.Extras.Get(Itent.ExtraStream)=[" + _intent.Extras.Get(Intent.ExtraStream + "]"));
                 return null;
             }
         }

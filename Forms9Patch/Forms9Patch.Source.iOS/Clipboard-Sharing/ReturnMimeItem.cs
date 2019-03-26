@@ -54,7 +54,7 @@ namespace Forms9Patch.iOS
                 }
             }
 
-            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 1 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 1 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
             // IMPORTANT:  
@@ -65,7 +65,7 @@ namespace Forms9Patch.iOS
                 nsObject = NSKeyedUnarchiver.UnarchiveObject(nsData);
             else
                 nsData = null;
-            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 2 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 2 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
 
@@ -75,18 +75,18 @@ namespace Forms9Patch.iOS
                 NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
                 nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out nsError);
             }
-            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
 
             if (nsObject == null)
                 nsObject = _kvp.Value;
-            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 4 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 4 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
 
             var result = nsObject?.ToObject(type);
-            System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 5 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
+            //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 5 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
             return result;

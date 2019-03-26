@@ -36,7 +36,7 @@ namespace FormsGestures.Droid
         MotionEvent _lastMotionEvent;
         public override bool OnTouchEvent(MotionEvent e)
         {
-            System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
             bool handled = base.OnTouchEvent(e);
 
 

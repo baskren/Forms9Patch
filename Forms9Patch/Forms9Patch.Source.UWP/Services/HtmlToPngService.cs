@@ -20,7 +20,7 @@ using PCLStorage;
 [assembly: Dependency(typeof(Forms9Patch.UWP.HtmlToPngService))]
 namespace Forms9Patch.UWP
 {
-   
+
 
     /// <summary>
     /// HTML to PDF service.
@@ -42,7 +42,7 @@ namespace Forms9Patch.UWP
         public async void ToPng(string html, string fileName, Action<string> onComplete)
         {
             var currentPage = Forms9Patch.PageExtensions.FindCurrentPage(Xamarin.Forms.Application.Current.MainPage);
-            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer) Platform.GetRenderer(currentPage);
+            var rootPageRenderer = (Xamarin.Forms.Platform.UWP.PageRenderer)Platform.GetRenderer(currentPage);
 
             var size = new Size(8.5, 11);
             var webView = new Windows.UI.Xaml.Controls.WebView
@@ -50,7 +50,7 @@ namespace Forms9Patch.UWP
                 DefaultBackgroundColor = Windows.UI.Colors.White,
                 Width = (size.Width - 0.5) * 72 / 2,
                 Height = 10, // (size.Height - 0.5) * 72,
-                
+
             };
             /*
             var transform = new TranslateTransform();

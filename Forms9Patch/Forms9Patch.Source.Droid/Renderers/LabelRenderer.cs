@@ -25,21 +25,23 @@ namespace Forms9Patch.Droid
     {
 
         #region Debug support
-        bool DebugCondition
+        bool DebugCondition => false;
+        /*
         {
             get
             {
                 //return false;
 
-                string labelTextStart = "3/14/201"; // "Żyłę;^`g ";
-                                                    //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
-                                                    //    return false;
-                                                    //string labelTextStart = "BACKGROUND";
+                string labelTextStart = "3"; // "Żyłę;^`g ";
+                                             //if (Element.Parent?.GetType().ToString() != "Bc3.Forms.KeypadButton")
+                                             //    return false;
+                                             //string labelTextStart = "BACKGROUND";
 
-                return (Element.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
+                return Element != null && (Element.Text == labelTextStart || Element.HtmlText == labelTextStart) && Element.Parent.GetType().ToString().Contains("BcItemTextValueLabel");
 
             }
         }
+        */
 
         void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
@@ -202,7 +204,9 @@ namespace Forms9Patch.Droid
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
 
             if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("");
+            {
+                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            }
 
             if (_currentControlState.Lines == 0)
             {
@@ -247,7 +251,15 @@ namespace Forms9Patch.Droid
                 tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
                 */
 
+            if (DebugCondition)
+            {
+                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            }
             tmpFontSize = BoundTextSize(tmpFontSize);
+            if (DebugCondition)
+            {
+                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            }
 
             // this is the optimal font size.  Let it be known!
             if (tmpFontSize != Element.FittedFontSize)
@@ -302,6 +314,8 @@ namespace Forms9Patch.Droid
             {
                 tmpHt = layout.GetLineBottom(i);
                 var width = layout.GetLineWidth(i);
+                if (DebugCondition)
+                    System.Diagnostics.Debug.WriteLine("Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "]");
                 //System.Diagnostics.Debug.WriteLine("\t\tright=["+right+"]");
                 if (width > tmpWd)
                     tmpWd = (int)System.Math.Ceiling(width);
@@ -326,26 +340,26 @@ namespace Forms9Patch.Droid
                 Control.TextFormatted = text;
 
             _lastSizeRequest = new SizeRequest(new Xamarin.Forms.Size(tmpWd, tmpHt), new Xamarin.Forms.Size(10, tmpHt));
-            if (showDebugMsg)
+            if (DebugCondition)
             {
-                Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
-                Control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
+                //Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
+                //Control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
 
                 System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize(" + (_currentControlState.AvailWidth > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailWidth.ToString()) + "," + (_currentControlState.AvailHeight > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailHeight.ToString()) + ") exit (" + _lastSizeRequest.Value + ")");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Visibility=[" + Control.Visibility + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.TextFormatted=[" + Control.TextFormatted + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.TextSize=[" + Control.TextSize + "]");
-                //System.Diagnostics.Debug.WriteLine("\t\tControl.ClipBounds=["+Control.ClipBounds.Width()+","+Control.ClipBounds.Height()+"]");
+                System.Diagnostics.Debug.WriteLine("\t\tControl.ClipBounds=[" + Control.ClipBounds?.Width() + "," + Control.ClipBounds?.Height() + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Width[" + Control.Width + "]  .Height=[" + Control.Height + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.GetX[" + Control.GetX() + "]  .GetY[" + Control.GetY() + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Alpha[" + Control.Alpha + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Background[" + Control.Background + "]");
-                //System.Diagnostics.Debug.WriteLine("\t\tControl.Elevation["+Control.Elevation+"]");
+                System.Diagnostics.Debug.WriteLine("\t\tControl.Elevation[" + Control.Elevation + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Enabled[" + Control.Enabled + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.Error[" + Control.Error + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.IsOpaque[" + Control.IsOpaque + "]");
                 System.Diagnostics.Debug.WriteLine("\t\tControl.IsShown[" + Control.IsShown + "]");
-                //Control.BringToFront();
+                Control.BringToFront();
                 System.Diagnostics.Debug.WriteLine("\t\t");
 
             }
@@ -399,6 +413,9 @@ namespace Forms9Patch.Droid
                     {
                         Control.SetTextColor(_labelTextColorDefault);
                         Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+                        UpdateText();
+                        UpdateColor();
+                        UpdateFont();
                     }
                     else
                     {
@@ -407,12 +424,12 @@ namespace Forms9Patch.Droid
                         {
                             Control.SetTextColor(_labelTextColorDefault);
                             Control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
+                            UpdateText();
+                            UpdateColor();
+                            UpdateFont();
                         });
                     }
                 }
-                UpdateText();
-                UpdateColor();
-                UpdateFont();
                 //Control.SkipNextInvalidate();
             }
         }
@@ -527,7 +544,8 @@ namespace Forms9Patch.Droid
         //void UpdateColor([System.Runtime.CompilerServices.CallerMemberName] string callerName = null, [System.Runtime.CompilerServices.CallerLineNumber] int lineNumber = 0)
         void UpdateColor()
         {
-            //System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "]");
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
             if (_currentControlState.TextColor == Element.TextColor)
                 return;
             _currentControlState.TextColor = Element.TextColor;
@@ -546,7 +564,6 @@ namespace Forms9Patch.Droid
                     else
                         Control.SetTextColor(_currentControlState.TextColor.ToAndroid());
                 });
-            //System.Diagnostics.Debug.WriteLine("Color [" + Element.TextColor + "]");
         }
 
         void UpdateFont()
@@ -576,6 +593,8 @@ namespace Forms9Patch.Droid
 #pragma warning disable CS0618 // Type or member is obsolete
                 textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
 #pragma warning restore CS0618 // Type or member is obsolete
+            if (textSize > Element.FontSize)
+                return (float)Element.FontSize;
             if (textSize < ModelMinFontSize)
                 textSize = ModelMinFontSize;
             return textSize;

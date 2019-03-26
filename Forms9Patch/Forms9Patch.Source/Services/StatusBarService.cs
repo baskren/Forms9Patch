@@ -24,6 +24,7 @@ namespace Forms9Patch
                 if (_service == null)
                 {
                     System.Diagnostics.Debug.WriteLine("StatusBarService is not available");
+                    System.Console.WriteLine("StatusBarService is not available");
                     //throw new ServiceNotAvailableException("StatusBarService is not available");
                 }
                 return _service;

@@ -102,10 +102,6 @@ namespace Forms9Patch
                 View.BindingContext = BindingContext;
 
             base.OnBindingContextChanged();
-
-            if (BaseCellView.IsHeader)
-                System.Diagnostics.Debug.WriteLine("");
-
         }
 
     }

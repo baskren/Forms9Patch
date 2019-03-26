@@ -28,7 +28,7 @@ namespace Forms9Patch
                 _service = _service ?? DependencyService.Get<IApplicationInfoService>();
                 if (_service == null)
                 {
-                    System.Diagnostics.Debug.WriteLine("ApplicationInfoService is not available");
+                    //System.Diagnostics.Debug.WriteLine("ApplicationInfoService is not available");
                     throw new ServiceNotAvailableException("ApplicationInfoService not available");
                 }
                 return _service;

@@ -207,7 +207,10 @@ namespace Forms9Patch
             ImageSourceContainer result;
             result = BestGuessF9PResource(pathString, assembly);
             if (result == null)
+            {
                 System.Diagnostics.Debug.WriteLine("[Forms9Patch.ImageSource.FromMultiResource] alternative resource not found for: " + pathString);
+                System.Console.WriteLine("[Forms9Patch.ImageSource.FromMultiResource] alternative resource not found for: " + pathString);
+            }
             return result;
         }
 
@@ -268,6 +271,7 @@ namespace Forms9Patch
                 }
             } while (attempt < AppleDensities.Count);
             System.Diagnostics.Debug.WriteLine("No matches found for resource name:" + reqResourcePathString);
+            System.Console.WriteLine("No matches found for resource name:" + reqResourcePathString);
             return null;
         }
         #endregion

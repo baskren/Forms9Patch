@@ -27,7 +27,7 @@ namespace Forms9Patch.UWP
             Window.Current.VisibilityChanged += OnVisibilityChanged;
             HardwareKeyPage.RemoveNativeFocus = OnRemoveNativeFocus;
         }
-
+        /*
         private static void OnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("VISIBILITY: "+e.Visible);
@@ -37,8 +37,9 @@ namespace Forms9Patch.UWP
         {
             System.Diagnostics.Debug.WriteLine("ACTIVATED: "+e.WindowActivationState);
         }
+        */
         #endregion
-    
+
 
         #region Fields
         //Windows.UI.Xaml.Controls.Button _removeFocusControl;
@@ -160,7 +161,7 @@ namespace Forms9Patch.UWP
             if (parent is Windows.UI.Xaml.Controls.Page _containingPage)
             {
                 // Cache the tabstop setting
-               // var wasTabStop = _containingPage.IsTabStop;
+                // var wasTabStop = _containingPage.IsTabStop;
 
                 // Controls can only get focus if they're a tabstop
                 _containingPage.IsTabStop = true;
@@ -186,9 +187,9 @@ namespace Forms9Patch.UWP
         void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
         {
             var logicalFocus = FocusManager.GetFocusedElement();
-            System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
-            if (logicalFocus == this)
-                System.Diagnostics.Debug.WriteLine("    THIS     ");
+            //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
+            //if (logicalFocus == this)
+            //    System.Diagnostics.Debug.WriteLine("    THIS     ");
 
             args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
@@ -196,9 +197,9 @@ namespace Forms9Patch.UWP
         public void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
             var logicalFocus = FocusManager.GetFocusedElement();
-            System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
-            if (logicalFocus == this)
-                System.Diagnostics.Debug.WriteLine("    THIS     ");
+            //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
+            //if (logicalFocus == this)
+            //    System.Diagnostics.Debug.WriteLine("    THIS     ");
 
             args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
@@ -206,7 +207,7 @@ namespace Forms9Patch.UWP
         public static bool ProcessVirualKey(VisualElement element, Windows.System.VirtualKey virtualKey)
         {
 
-          
+
 
             if (element == null)
                 return false;
@@ -406,7 +407,7 @@ namespace Forms9Patch.UWP
 
         public void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("HardwareKeyPageRenderer.OnCharacterReceived");
+            //System.Diagnostics.Debug.WriteLine("HardwareKeyPageRenderer.OnCharacterReceived");
             ProcessCharacter(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, (char)args.KeyCode);
         }
 
@@ -421,7 +422,7 @@ namespace Forms9Patch.UWP
             }
 
             var keyInput = ("" + keyCode).ToUpper();
-            System.Diagnostics.Debug.WriteLine("ProcessCharacter keyInput=[" + keyInput + "]");
+            //System.Diagnostics.Debug.WriteLine("ProcessCharacter keyInput=[" + keyInput + "]");
 
             var modifiers = GetModifierKeys(char.IsLetter(keyCode));
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());

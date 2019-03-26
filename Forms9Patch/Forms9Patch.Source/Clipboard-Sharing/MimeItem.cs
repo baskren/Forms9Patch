@@ -37,18 +37,18 @@ namespace Forms9Patch
                         try
                         {
                             stopwatch.Stop();
-                            System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value A elapsed: " + stopwatch.ElapsedMilliseconds);
+                            //System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value A elapsed: " + stopwatch.ElapsedMilliseconds);
                             return (T)result;
                         }
                         catch (Exception)
                         {
                             stopwatch.Stop();
-                            System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value B elapsed: " + stopwatch.ElapsedMilliseconds);
+                            //System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value B elapsed: " + stopwatch.ElapsedMilliseconds);
                             return default(T);
                         }
                     }
                     stopwatch.Stop();
-                    System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value C elapsed: " + stopwatch.ElapsedMilliseconds);
+                    //System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value C elapsed: " + stopwatch.ElapsedMilliseconds);
                     if (_mimeItem.Value is byte[] byteArray && typeof(T) == typeof(string))
                     {
                         object result = System.Text.Encoding.UTF8.GetString(byteArray);
@@ -57,7 +57,7 @@ namespace Forms9Patch
                     return (T)_mimeItem.Value;
                 }
                 stopwatch.Stop();
-                System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value D elapsed: " + stopwatch.ElapsedMilliseconds);
+                //System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value D elapsed: " + stopwatch.ElapsedMilliseconds);
                 return (T)base.Value;
             }
             set => base.Value = value;

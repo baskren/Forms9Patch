@@ -39,7 +39,7 @@ namespace Forms9Patch.UWP
                     }
                     catch (Exception) { }
             }
-            if (!success && Container!=null)
+            if (!success && Container != null)
             {
                 try
                 {
@@ -81,17 +81,17 @@ namespace Forms9Patch.UWP
 
         private void OnCharacterReceived(UIElement sender, CharacterReceivedRoutedEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("HardwareKeyListenerEffect.OnCharacterReceived("+Element+")");
+            //System.Diagnostics.Debug.WriteLine("HardwareKeyListenerEffect.OnCharacterReceived("+Element+")");
             if (Element is VisualElement element)
-            args.Handled = HardwareKeyPageRenderer.ProcessCharacter(element, args.Character);
-            
+                args.Handled = HardwareKeyPageRenderer.ProcessCharacter(element, args.Character);
+
         }
 
         private void OnKeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (Element is VisualElement element)
-            e.Handled = HardwareKeyPageRenderer.ProcessVirualKey(element, e.Key);
-            
+                e.Handled = HardwareKeyPageRenderer.ProcessVirualKey(element, e.Key);
+
             //System.Diagnostics.Debug.WriteLine("HardwareKeyListenerEffect.OnControlKeyPress [" + e.Event + "][" + e.Handled + "][" + e.KeyCode + "]");
         }
 

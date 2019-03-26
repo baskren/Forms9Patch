@@ -27,6 +27,7 @@ namespace Forms9Patch
                 if (_service == null)
                 {
                     System.Diagnostics.Debug.WriteLine("KeyboardService is not available");
+                    System.Console.WriteLine("KeyboardService is not available");
                     //throw new ServiceNotAvailableException("KeyboardService is not available");
                 }
                 return _service;

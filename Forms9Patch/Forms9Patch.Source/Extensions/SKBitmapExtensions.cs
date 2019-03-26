@@ -139,7 +139,10 @@ namespace Forms9Patch
             }
 
             if (f9pImageData == null)
+            {
                 System.Diagnostics.Debug.WriteLine("NO BITMAP FOUND FOR IMAGE SOURCE [" + imageSource + "]");
+                System.Console.WriteLine("FORMS9PATCH: NO BITMAP FOUND FOR IMAGE SOURCE [" + imageSource + "]");
+            }
             return f9pImageData;
         }
 
@@ -211,6 +214,7 @@ namespace Forms9Patch
             if (bitmap.Info.ColorType != SKColorType.Bgra8888 && bitmap.Info.ColorType != SKColorType.Rgba8888)
             {
                 System.Diagnostics.Debug.WriteLine("bitmap colortype [" + bitmap.Info.ColorType + "] not Bgra888");
+                System.Console.WriteLine("bitmap colortype [" + bitmap.Info.ColorType + "] not Bgra888.  Just can't deal with it for 9Patch Images.");
                 return null;
             }
             if (bitmap.Width < 3 || bitmap.Height < 3)

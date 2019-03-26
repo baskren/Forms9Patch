@@ -42,12 +42,12 @@ namespace Forms9Patch.iOS
                 stopwatch.Start();
                 if (_lastEntryChangeCount != UIPasteboard.General.ChangeCount)
                 {
-                    System.Diagnostics.Debug.WriteLine("NOT CACHED: _lastEntryChangeCount=[" + _lastEntryChangeCount + "] ChangeCount=[" + UIPasteboard.General.ChangeCount + "]");
+                    //System.Diagnostics.Debug.WriteLine("NOT CACHED: _lastEntryChangeCount=[" + _lastEntryChangeCount + "] ChangeCount=[" + UIPasteboard.General.ChangeCount + "]");
                     _lastEntry = new MimeItemCollection();
                 }
                 _lastEntryChangeCount = UIPasteboard.General.ChangeCount;
                 stopwatch.Stop();
-                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService get_Entry elapsed: " + stopwatch.ElapsedMilliseconds);
+                //System.Diagnostics.Debug.WriteLine("\t\t ClipboardService get_Entry elapsed: " + stopwatch.ElapsedMilliseconds);
                 return _lastEntry;
             }
             set
@@ -75,7 +75,7 @@ namespace Forms9Patch.iOS
                         //NSMutableDictionary itemCSharpTypeMap = null;
                         foreach (var mimeItem in entry.Items)
                         {
-                            System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.0 elapsed: " + stopwatch.ElapsedMilliseconds);
+                            //System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.0 elapsed: " + stopwatch.ElapsedMilliseconds);
                             //if (mimeItem.MimeType?.ToNsUti() is NSString nsUti && mimeItem.Value.ToNSObject() is NSObject nSObject)
                             if (mimeItem.ToUiPasteboardItem() is KeyValuePair<NSString, NSObject> itemKvp && itemKvp.Key != null)
                             {
@@ -87,7 +87,7 @@ namespace Forms9Patch.iOS
                                     itemRenditions = new NSMutableDictionary<NSString, NSObject>();
                                     items.Add(itemRenditions);
                                 }
-                                System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.1 elapsed: " + stopwatch.ElapsedMilliseconds);
+                                //System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 1.1 elapsed: " + stopwatch.ElapsedMilliseconds);
 
 
                                 // some notes here:
@@ -122,14 +122,14 @@ namespace Forms9Patch.iOS
                             }
                         }
                         var array = items.ToArray();
-                        System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.1 elapsed: " + stopwatch.ElapsedMilliseconds);
+                        //System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.1 elapsed: " + stopwatch.ElapsedMilliseconds);
                         if (EntryCaching)
                         {
                             _lastEntry = value;
                             _lastEntryChangeCount = UIPasteboard.General.ChangeCount + 1;
                         }
                         UIPasteboard.General.Items = array;
-                        System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.2 elapsed: " + stopwatch.ElapsedMilliseconds);
+                        //System.Diagnostics.Debug.WriteLine("\t\t ClipboardService set_Entry 2.2 elapsed: " + stopwatch.ElapsedMilliseconds);
                     }
 
                 }

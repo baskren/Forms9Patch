@@ -273,8 +273,8 @@ namespace Forms9Patch
                 return;
             }
 
-            if (Debug)
-                System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            //if (Debug)
+            //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             ((ItemWrapper)BindingContext)?.OnPanned(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
             if (_panVt)
             {
@@ -340,8 +340,8 @@ namespace Forms9Patch
             }
 
             ((ItemWrapper)BindingContext)?.OnPanning(this, new ItemWrapperPanEventArgs((ItemWrapper)BindingContext, e));
-            if (Debug)
-                System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
+            //if (Debug)
+            //    System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + sender + ", " + e + ")");
             if (_panVt)
                 return;
             if (!_panVt && !_panHz)

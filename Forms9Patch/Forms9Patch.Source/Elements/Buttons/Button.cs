@@ -1169,7 +1169,7 @@ namespace Forms9Patch
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Button.OnTapped ENTER");
+            //System.Diagnostics.Debug.WriteLine("Button.OnTapped ENTER");
             if (IsEnabled && IsVisible)// && IsLongPressEnabled)
             {
 
@@ -1992,7 +1992,7 @@ namespace Forms9Patch
                 _label.FontAttributes = FontAttributes;
             else if (propertyName == FontFamilyProperty.PropertyName)
                 _label.FontFamily = FontFamily;
-            else if (propertyName == IconFontFamilyProperty.PropertyName && _iconLabel!=null)
+            else if (propertyName == IconFontFamilyProperty.PropertyName && _iconLabel != null)
                 _iconLabel.FontFamily = IconFontFamily;
             else if (propertyName == TrailingIconProperty.PropertyName && _stackLayout.Children.Contains(_label))
             {

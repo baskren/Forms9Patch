@@ -516,7 +516,7 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override bool OnBackButtonPressed()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //wSystem.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (CancelOnBackButtonClick)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 CancelAsync(PopupPoppedCause.HardwareBackButtonPressed);
@@ -530,7 +530,7 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override bool OnBackgroundClicked()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             var isClose = base.OnBackgroundClicked();
             if (isClose)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -546,7 +546,7 @@ namespace Forms9Patch
         /// <param name="trigger">Optional, object or PopupEventCause that triggered cancelation.</param>
         public async Task CancelAsync(object trigger = null)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (P42.Utils.Environment.IsOnMainThread)
             {
                 if (trigger == null)
@@ -658,7 +658,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPushing = true;
             //IsVisible = true;
             base.OnAppearingAnimationBegin();
@@ -669,7 +669,7 @@ namespace Forms9Patch
         /// </summary>
         protected override async void OnAppearingAnimationEnd()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             base.OnAppearingAnimationEnd();
             _isPushed = true;
             _isPushing = false;
@@ -691,7 +691,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPopping = true;
             _isPushed = false;
             base.OnDisappearingAnimationBegin();
@@ -703,7 +703,7 @@ namespace Forms9Patch
         protected override void OnDisappearingAnimationEnd()
         {
 
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             base.OnDisappearingAnimationEnd();
             //IsVisible = false;
             _isPopping = false;
@@ -723,7 +723,7 @@ namespace Forms9Patch
         /// <returns>The push.</returns>
         public async Task Push()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             await PushAsync();
         }
 
@@ -734,7 +734,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public async Task PushAsync()
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
@@ -772,7 +772,7 @@ namespace Forms9Patch
         /// <returns>The pop.</returns>
         public async Task Pop(object trigger = null)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (trigger == null)
                 await PopAsync(PopupPoppedCause.MethodCalled, P42.Utils.ReflectionExtensions.CallerMemberName());
             else
@@ -790,7 +790,7 @@ namespace Forms9Patch
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
             {
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+                //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     _isPopping = true;
@@ -859,7 +859,7 @@ namespace Forms9Patch
             {
                 if (IsVisible && !_isPushed)// && PopupPage != null)
                 {
-                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " IsVisible");
+                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " IsVisible");
                     DecorativeContainerView.TranslationX = 0;
                     DecorativeContainerView.TranslationY = 0;
                     if (Application.Current.MainPage == null)
@@ -873,7 +873,7 @@ namespace Forms9Patch
                 }
                 else if (!IsVisible && _isPushed && !_isPopping)
                 {
-                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " !IsVisible");
+                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " !IsVisible");
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     PopAsync(PopupPoppedCause.IsVisiblePropertySet);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed

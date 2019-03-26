@@ -40,7 +40,7 @@ namespace Forms9Patch
                 if (item.MimeType == mimeType)
                 {
                     stopwatch.Stop();
-                    System.Diagnostics.Debug.WriteLine("\t\t GetFirstMimeItem<T> elapsed: " + stopwatch.ElapsedMilliseconds);
+                    //System.Diagnostics.Debug.WriteLine("\t\t GetFirstMimeItem<T> elapsed: " + stopwatch.ElapsedMilliseconds);
                     return MimeItem<T>.Create(item);
                 }
             //var untypedMimeItem = clipboardEntry.Items.FirstOrDefault((mi) => mi.MimeType == mimeType);

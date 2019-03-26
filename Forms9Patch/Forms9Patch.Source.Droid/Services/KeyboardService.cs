@@ -119,8 +119,8 @@ namespace Forms9Patch.Droid
             _rootView.GetWindowVisibleDisplayFrame(_startRect);
             var expectedHeight = Forms9Patch.Display.Height;
             var expectedWidth = Forms9Patch.Display.Width;
-            System.Diagnostics.Debug.WriteLine("_startRect=[" + _startRect.Width() + "," + _startRect.Height() + "]");
-            System.Diagnostics.Debug.WriteLine(" expected=[" + expectedWidth + "," + expectedHeight + "]");
+            //System.Diagnostics.Debug.WriteLine("_startRect=[" + _startRect.Width() + "," + _startRect.Height() + "]");
+            //System.Diagnostics.Debug.WriteLine(" expected=[" + expectedWidth + "," + expectedHeight + "]");
         }
 
         public void OnGlobalLayout()

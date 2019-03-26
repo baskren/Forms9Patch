@@ -22,6 +22,7 @@ namespace Forms9Patch
                 if (_service == null)
                 {
                     System.Diagnostics.Debug.WriteLine("KeyClicksService is not available");
+                    System.Console.WriteLine("KeyClicksService is not available");
                     //    throw new ServiceNotAvailableException("KeyClicksService is not available");
                 }
                 return _service;

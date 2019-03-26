@@ -29,7 +29,7 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action);
+            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action);
 
             if (!_nativeGestureHandler.Element.IsVisible)
                 return false;
