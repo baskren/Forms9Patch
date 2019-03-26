@@ -452,6 +452,11 @@ namespace Forms9Patch
         /// Occurs when popup has been cancelled.
         /// </summary>
         public event EventHandler Cancelled;
+
+        /// <summary>
+        /// Occurs when popup has popped;
+        /// </summary>
+        public event EventHandler<PopupPoppedEventArgs> Popped;
         #endregion
 
 
@@ -716,11 +721,11 @@ namespace Forms9Patch
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
-        [Obsolete("Use PushAsync instead")]
         /// <summary>
-        /// Obsolete.  Use PushAsync instaed
+        /// Obsolete.  Use PushAsync instead
         /// </summary>
         /// <returns>The push.</returns>
+        [Obsolete("Use PushAsync instead")]
         public async Task Push()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
@@ -765,11 +770,11 @@ namespace Forms9Patch
             }
         }
 
-        [Obsolete("Use PopAsync instead")]
         /// <summary>
         /// Obsolete.  USe PopAsync instead
         /// </summary>
         /// <returns>The pop.</returns>
+        [Obsolete("Use PopAsync instead")]
         public async Task Pop(object trigger = null)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
@@ -815,6 +820,7 @@ namespace Forms9Patch
                         PopupLayerEffect.RemoveFrom(this);
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
+                        Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
                     _lock.Release();
                 }

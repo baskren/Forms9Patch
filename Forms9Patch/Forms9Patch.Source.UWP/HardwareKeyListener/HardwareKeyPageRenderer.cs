@@ -23,8 +23,8 @@ namespace Forms9Patch.UWP
 
         static HardwareKeyPageRenderer()
         {
-            Window.Current.Activated += OnActivated;
-            Window.Current.VisibilityChanged += OnVisibilityChanged;
+            //Window.Current.Activated += OnActivated;
+            //Window.Current.VisibilityChanged += OnVisibilityChanged;
             HardwareKeyPage.RemoveNativeFocus = OnRemoveNativeFocus;
         }
         /*

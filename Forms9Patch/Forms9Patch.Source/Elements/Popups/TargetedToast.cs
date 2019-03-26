@@ -10,11 +10,13 @@ namespace Forms9Patch
     {
         #region Factory
         /// <summary>
-        /// Create the specified target, title and text.
+        /// Create a toast, pointing at the specified target, with title, text, and optional timeout (popAfter)
         /// </summary>
-        /// <param name="target">Target.</param>
-        /// <param name="title">Title.</param>
-        /// <param name="text">Text.</param>
+        /// <param name="target"></param>
+        /// <param name="title"></param>
+        /// <param name="text"></param>
+        /// <param name="popAfter"></param>
+        /// <returns></returns>
         public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default(TimeSpan))
         {
             var toast = new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter };
