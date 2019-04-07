@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.6.1</version>
+        <version>1.6.6.2</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -21,9 +21,11 @@ Xamarin Forms is great for developing apps on Android, iOS, and Universal Window
 - Support for multiple items of the same MIME type on the clipboard
 - Support for inter-app Data Sharing
 
-Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP</description>
-        <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
+Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL, and Shared Libary apps for iOS,  Android and UWP
+  </description>
+  <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.6.6.2: Fixed: Label on Android upsizing the font beyond FontSize causing text to be truncated or not appear; Up gestures are not being triggered on Android (not a FormsGestures issue) causing button taps not to fire; New: Added async Task&lt;PopupPoppedEventArgs&gt; DelayUntilPoppedAsync() to allow inline wait until popup has been popped; Refactored: CancelAsync and PopAsync to accept a "trigger" that is the cause of the action; Added Console.WriteLines to better message when an ImageResource is not found;
     1.6.6.1: Fixed: SVG image files without viewBox attribute fail to render; Updated Package Requirements: Xamarin.Forms 3.4.0.1008975, Newtonsoft.Json 12.0.0.0
     1.6.6.0: New: Added PopAfter property (and Create argument) to Popups to indicate the TimeSpan at which a Popup will disappear after appearing; Added BorderColor, BorderWidth, and BorderRadius properties (redundant with OutlineColor, OutlineWidth, and OutlineRadius properties) to make it easier to switch between Forms9Patch and Xamarin.Forms elements.
     1.6.5.1: Removed: IsLongPressEnabled from buttons (a very stupid idea on my part).  If you want faster buttons, set FormsGestures.Droid.Settings.TapThreshold.
