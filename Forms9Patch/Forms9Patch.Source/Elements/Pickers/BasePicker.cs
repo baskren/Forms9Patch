@@ -354,7 +354,7 @@ namespace Forms9Patch
         bool _scrollCompleting;
         void OnScrolled(object sender, EventArgs e)
         {
-            if (SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
+            if (ItemsSource!=null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
             {
                 //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
                 SelectedItem = ItemsSource[Index];

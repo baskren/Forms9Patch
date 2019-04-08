@@ -120,6 +120,31 @@
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\FormsGestures.Source.UWP\CoordinateTransformService.cs">
+      <Link>CoordinateTransformService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.UWP\DisplayService.cs">
+      <Link>DisplayService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.UWP\GestureService.cs">
+      <Link>GestureService.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.UWP\NativeGestureHandler.cs">
+      <Link>NativeGestureHandler.cs</Link>
+    </None>
+    <None Include="..\FormsGestures.Source.UWP\Settings.cs">
+      <Link>Settings.cs</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\FormsGestures.Source.UWP\FormsGestures.UWP.targets">
+      <Link>FormsGestures.UWP.targets</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

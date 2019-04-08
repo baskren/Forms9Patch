@@ -502,9 +502,9 @@ namespace Forms9Patch
             if (_startButtons + _endButtons > 0)
             {
                 var parkingX = _endButtons > 0 ? Width : -Width;
+                TranslateContentViewTo(0, 0, 300, Easing.Linear);
                 if (animated)
                 {
-                    TranslateContentViewTo(0, 0, 300, Easing.Linear);
                     _swipeFrame1.TranslateTo(parkingX, 0, 400, Easing.Linear);
                     if (_endButtons + _startButtons > 1)
                         _swipeFrame2.TranslateTo(parkingX, 0, 400, Easing.Linear);
