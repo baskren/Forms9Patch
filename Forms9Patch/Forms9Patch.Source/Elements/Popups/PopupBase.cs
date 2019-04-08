@@ -451,7 +451,7 @@ namespace Forms9Patch
         /// <summary>
         /// Occurs when popup has been cancelled.
         /// </summary>
-        public event EventHandler Cancelled;
+        public event EventHandler<PopupPoppedEventArgs> Cancelled;
 
         /// <summary>
         /// Occurs when popup has popped;
@@ -560,7 +560,7 @@ namespace Forms9Patch
                     await PopAsync(trigger);
                 while (_isPushed)
                     await Task.Delay(50);
-                Cancelled?.Invoke(this, EventArgs.Empty);
+                Cancelled?.Invoke(this, PopupPoppedEventArgs);
             }
             else
                 Device.BeginInvokeOnMainThread(async () => await CancelAsync(trigger));
@@ -804,19 +804,7 @@ namespace Forms9Patch
                     if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                     {
                         _isPopping = true;
-                        if (trigger is PopupPoppedCause cause)
-                        {
-                            if (cause == PopupPoppedCause.MethodCalled)
-                                PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.MethodCalled, callerName);
-                            else
-                                PopupPoppedEventArgs = new PopupPoppedEventArgs(cause, null);
-                        }
-                        else if (trigger is Button)
-                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.ButtonTapped, trigger);
-                        else if (trigger is Segment)
-                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.SegmentTapped, trigger);
-                        else
-                            PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.Custom, trigger);
+                        SetPopupPoppedEventArgs(trigger, callerName);
                         PopupLayerEffect.RemoveFrom(this);
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
@@ -829,6 +817,23 @@ namespace Forms9Patch
             }
         }
 
+
+        void SetPopupPoppedEventArgs(object trigger, string callerName)
+        {
+            if (trigger is PopupPoppedCause cause)
+            {
+                if (cause == PopupPoppedCause.MethodCalled)
+                    PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.MethodCalled, callerName);
+                else
+                    PopupPoppedEventArgs = new PopupPoppedEventArgs(cause, null);
+            }
+            else if (trigger is Button)
+                PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.ButtonTapped, trigger);
+            else if (trigger is Segment)
+                PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.SegmentTapped, trigger);
+            else
+                PopupPoppedEventArgs = new PopupPoppedEventArgs(PopupPoppedCause.Custom, trigger);
+        }
 
         /// <summary>
         /// Delay until the popup is popped.
