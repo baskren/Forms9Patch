@@ -203,6 +203,10 @@ namespace FormsGestures.UWP
                     modes |= ManipulationModes.Rotate | ManipulationModes.RotateInertia;
                 if (HandlesPinches)
                     modes |= ManipulationModes.Scale | ManipulationModes.ScaleInertia;
+                //System.Diagnostics.Debug.WriteLine("CurrentManipulationModes[" + _xfElement + "]["+modes+"]");
+                // NOTE: Scrolling on UWP touch screens doesn't work without the following two lines;
+                if (modes == ManipulationModes.None)
+                    modes = ManipulationModes.System;
                 return modes;
             }
         }
@@ -945,8 +949,11 @@ namespace FormsGestures.UWP
         void OnPointerMoved(object sender, PointerRoutedEventArgs e)
         {
             // USE OnManipulationDelta INSTEAD
-            if (!_xfElement.IsVisible || _UwpElement == null)
+            if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
+            DebugMethodName(2);
+
+
             var currentPoint = e.GetCurrentPoint(null);
             if (!currentPoint.IsInContact)
                 return;
