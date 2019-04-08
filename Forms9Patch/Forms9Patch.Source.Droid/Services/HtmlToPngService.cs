@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Webkit;
 using Android.Graphics;
 using Android.Views;
+using System.Threading.Tasks;
 
 [assembly: Dependency(typeof(Forms9Patch.Droid.HtmlToPngService))]
 namespace Forms9Patch.Droid
@@ -64,6 +65,12 @@ namespace Forms9Patch.Droid
         public WebViewCallBack(string fileName, Action<string> onComplete)
         {
             _dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments);
+            //_dir = Android.OS.Environment.DownloadCacheDirectory;
+            //_dir = Settings.Context.ExternalCacheDir;
+            //var cacheDirPath = Settings.Context.CacheDir.AbsolutePath;
+            //var cacheDirPath = Settings.Context.ExternalCacheDir.AbsolutePath;
+            //_dir = new Java.IO.File(cacheDirPath);
+            //_dir = Settings.Context.DataDir;
             // the below doesn't work woith Xam.Plugins.Messaging for email attachments
             //_dir = new Java.IO.File(P42.Utils.Environment.TemporaryStoragePath);
             _fileName = fileName;
@@ -72,6 +79,7 @@ namespace Forms9Patch.Droid
 
         public void OnReceiveValue(Java.Lang.Object value)
         {
+
             System.Diagnostics.Debug.WriteLine("value=[" + value + "]");
             var height = Convert.ToInt32(value.ToString());
 
@@ -79,20 +87,62 @@ namespace Forms9Patch.Droid
             int specHeight = MeasureSpecFactory.MakeMeasureSpec(height + 36, MeasureSpecMode.Exactly);
             webView.Measure(specWidth, specHeight);
             webView.Layout(0, 0, webView.MeasuredWidth, webView.MeasuredHeight);
+            System.Diagnostics.Debug.WriteLine("spec [" + specWidth + ", " + specHeight + "]");
+            System.Diagnostics.Debug.WriteLine("webView.Measured [" + webView.MeasuredWidth + ", " + webView.MeasuredHeight + "]");
+            System.Diagnostics.Debug.WriteLine("webView.Layout [" + webView.Left + ", " + webView.Top + ", " + webView.Width + ", " + webView.Height + "]");
 
+            Complete();
+        }
+
+        async Task Complete()
+        {
+            await Task.Delay(1000);
             var bitmap = Bitmap.CreateBitmap(webView.DrawingCache);
+
+
 
             if (!_dir.Exists())
                 _dir.Mkdir();
+
+            //Java.IO.File tempFile = Java.IO.File.CreateTempFile(_fileName, ".png", Settings.Context.ExternalCacheDir);
+
+
             var path = _dir.Path + "/" + _fileName + ".png";
+            //var path = System.IO.Path.Combine(Settings.Context.CacheDir.AbsolutePath, "pizza.png");
             var file = new Java.IO.File(path);
             if (!file.Exists())
                 file.CreateNewFile();
             var stream = new FileStream(file.Path, FileMode.Create, System.IO.FileAccess.Write);
+
+            //var stream = new FileStream(tempFile.Path, FileMode.Create, System.IO.FileAccess.Write);
+
             bitmap.Compress(Bitmap.CompressFormat.Png, 80, stream);
             stream.Flush();
             stream.Close();
+            /*
+             * The below is left here because it was a pain to find a bug.  Turns out that 
+             * (1) it's way to easy to put the provider Tags outside of the Application tags in the Android manifest ... and there will be no feedback that you screwed up.
+             * (2) capitalization really matters in the provider tag!
+            var uri = Android.Support.V4.Content.FileProvider.GetUriForFile(Settings.Context,
+                                    Settings.Context.PackageName + ".fileprovider",
+                                    file);
+
+            var intentAction = Intent.ActionSend;
+            var emailIntent = new Intent(intentAction);
+            emailIntent.SetType("message/rfc822");
+            emailIntent.PutExtra(Intent.ExtraSubject, "ATTACHMENT TEST");
+            emailIntent.PutExtra(Intent.ExtraText, "test for attachment success");
+            //emailIntent.PutExtra(Intent.ExtraText, html);
+            emailIntent.PutExtra(Intent.ExtraStream, uri);
+            emailIntent.AddFlags(ActivityFlags.GrantReadUriPermission);
+            emailIntent.SetFlags(ActivityFlags.ClearTop);
+            emailIntent.SetFlags(ActivityFlags.NewTask);
+
+            Android.App.Application.Context.StartActivity(emailIntent);
+            */
             _onComplete?.Invoke(path);
+            //_onComplete?.Invoke(tempFile.Path);
+
         }
 
         /*
