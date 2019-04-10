@@ -187,6 +187,69 @@
     <None Include="..\Forms9Patch.Source.Droid\Services\ApplicationInfoService.cs">
       <Link>Services\ApplicationInfoService.cs</Link>
     </None>
+    <None Include="..\Forms9Patch.Source.Droid\Models\BaselineSpan.cs">
+      <Link>Models\BaselineSpan.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Models\CustomTypefaceSpan.cs">
+      <Link>Models\CustomTypefaceSpan.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Models\FontManagment.cs">
+      <Link>Models\FontManagment.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Models\Settings.cs">
+      <Link>Models\Settings.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ClipboardService.cs">
+      <Link>Clipboard-Sharing\ClipboardService.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollection.cs">
+      <Link>Clipboard-Sharing\MimeItemCollection.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\MimeItemCollectionExtensions.cs">
+      <Link>Clipboard-Sharing\MimeItemCollectionExtensions.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\ReturnMimeItem.cs">
+      <Link>Clipboard-Sharing\ReturnMimeItem.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\SharingService.cs">
+      <Link>Clipboard-Sharing\SharingService.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Clipboard-Sharing\TypeExtensions.cs">
+      <Link>Clipboard-Sharing\TypeExtensions.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Effects\CustomFontEffect.cs">
+      <Link>Effects\CustomFontEffect.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Effects\ListViewSelectionDisabledEffect.cs">
+      <Link>Effects\ListViewSelectionDisabledEffect.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Effects\SliderStepSizeEffect.cs">
+      <Link>Effects\SliderStepSizeEffect.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Extensions\AlignmentExtensions.cs">
+      <Link>Extensions\AlignmentExtensions.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Extensions\AndroidViewExtensions.cs">
+      <Link>Extensions\AndroidViewExtensions.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Extensions\FormattedStringExtensions.cs">
+      <Link>Extensions\FormattedStringExtensions.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Extensions\LineBreakModeExtension.cs">
+      <Link>Extensions\LineBreakModeExtension.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\Extensions\MeasureSpecFactory.cs">
+      <Link>Extensions\MeasureSpecFactory.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListener.cs">
+      <Link>HardwareKeyListener\HardwareKeyListener.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\HardwareKeyListener\HardwareKeyListenerEffect.cs">
+      <Link>HardwareKeyListener\HardwareKeyListenerEffect.cs</Link>
+    </None>
+    <None Include="..\Forms9Patch.Source.Droid\PlatformViews\F9PTextView.cs">
+      <Link>PlatformViews\F9PTextView.cs</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
@@ -194,11 +257,11 @@
       <Name>P42.Utils.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{281890A8-05D0-49E3-A603-27BC0B3592CE}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{DBD60A59-3F4A-43E0-B53D-631295141EB6}</Project>
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj">
@@ -206,21 +269,28 @@
       <Name>FormsGestures.XfNuget.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{143CB605-B712-4778-B1A6-EB9366696E87}</Project>
+      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{F956744C-8BDB-4400-A98C-16790A940211}</Project>
+      <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
       <Name>Forms9Patch.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{DCFFFAD2-A49A-452A-83B6-4B1CAC2C34AE}</Project>
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Clipboard-Sharing\" />
+    <Folder Include="Effects\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="HardwareKeyListener\" />
+    <Folder Include="ListView\" />
+    <Folder Include="PlatformViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Annotations.28.0.0.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Annotations.28.0.0.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />

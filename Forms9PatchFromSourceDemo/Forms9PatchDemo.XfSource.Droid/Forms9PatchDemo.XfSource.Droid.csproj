@@ -192,6 +192,8 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\fivePlus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\image.png" />
+    <AndroidResource Include="Resources\drawable\blkbox_small.jpg" />
+    <AndroidResource Include="Resources\drawable\blkbox_large.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\SvgSample2.svg" />
@@ -243,7 +245,7 @@
       <Name>Forms9Patch.XfSource.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo.XfSource\Forms9PatchDemo.XfSource.csproj">
-      <Project>{CF23E2D5-A663-4E77-AC03-1BBACED582D4}</Project>
+      <Project>{99E0AF73-ABE9-4C3C-848D-A97FDC796F22}</Project>
       <Name>Forms9PatchDemo.XfSource</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xamarin.Forms\Stubs\Xamarin.Forms.Platform.Android\Xamarin.Forms.Platform.Android %28Forwarders%29.csproj">

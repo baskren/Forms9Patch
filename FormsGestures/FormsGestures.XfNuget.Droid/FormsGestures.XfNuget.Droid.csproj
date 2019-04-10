@@ -132,15 +132,15 @@
   <Import Project="..\FormsGestures.Source.Droid\FormsGestures.Droid.targets" />
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{143CB605-B712-4778-B1A6-EB9366696E87}</Project>
+      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
       <Name>FormsGestures.XfNuget</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{DBD60A59-3F4A-43E0-B53D-631295141EB6}</Project>
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{281890A8-05D0-49E3-A603-27BC0B3592CE}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">

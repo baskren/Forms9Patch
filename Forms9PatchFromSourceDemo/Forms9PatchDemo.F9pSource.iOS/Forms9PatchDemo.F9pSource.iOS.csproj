@@ -203,6 +203,8 @@
     <BundleResource Include="Resources\SvgSample2.svg" />
     <BundleResource Include="Resources\MaterialIcons-Regular.ttf" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\blkbox_small.jpg" />
+    <BundleResource Include="Resources\blkbox_large.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

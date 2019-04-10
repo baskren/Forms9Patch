@@ -168,6 +168,8 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\fivePlus.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\image.png" />
+    <AndroidResource Include="Resources\drawable\blkbox_small.jpg" />
+    <AndroidResource Include="Resources\drawable\blkbox_large.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\SvgSample2.svg" />

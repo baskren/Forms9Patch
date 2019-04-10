@@ -23,6 +23,8 @@ namespace Forms9Patch.Droid
         internal static float DefaultTextSize = -1f;
         internal static float Scale = -1f;
 
+        internal static float FontScale => Settings.Context.Resources.Configuration.FontScale;
+
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
@@ -76,7 +78,6 @@ namespace Forms9Patch.Droid
                 Scale = Settings.Context.Resources.DisplayMetrics.Density;
             if (DefaultTextSize <= 0)
                 DefaultTextSize = (new TextView(context)).TextSize / Scale;
-            //_context = context;
         }
 
         #endregion
@@ -449,9 +450,9 @@ namespace Forms9Patch.Droid
                 if (availHeight > int.MaxValue / 3)
                     return max;
                 var fontMetrics = paint.GetFontMetrics();
-                var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
-                var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
-                var fontPixelSize = paint.TextSize;
+                var fontLineHeight = fontMetrics.Descent * FontScale - fontMetrics.Ascent * FontScale;
+                var fontLeading = System.Math.Abs(fontMetrics.Bottom * FontScale - fontMetrics.Descent * FontScale);
+                var fontPixelSize = paint.TextSize * FontScale;
                 var lineHeightRatio = fontLineHeight / fontPixelSize;
                 var leadingRatio = fontLeading / fontPixelSize;
                 float ans = ((availHeight / (lines + leadingRatio * (lines - 1))) / lineHeightRatio - 0.1f);
@@ -477,7 +478,7 @@ namespace Forms9Patch.Droid
             float result;
             for (result = max; result > min; result -= step)
             {
-                paint.TextSize = result * Scale;
+                paint.TextSize = result * Scale * FontScale;
                 var layout = new StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
                 if (layout.LineCount <= lines)
                     return result;
@@ -492,9 +493,9 @@ namespace Forms9Patch.Droid
             if (availWidth > int.MaxValue / 3)
             {
                 var fontMetrics = paint.GetFontMetrics();
-                var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
+                var fontLineHeight = fontMetrics.Descent * FontScale - fontMetrics.Ascent * FontScale;
                 //var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
-                var fontPixelSize = paint.TextSize;
+                var fontPixelSize = paint.TextSize * FontScale;
                 var lineHeightRatio = fontLineHeight / fontPixelSize;
                 //var leadingRatio = fontLeading / fontPixelSize;
 
