@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using SkiaSharp;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -37,6 +38,24 @@ namespace Forms9Patch
         private void OnSegmentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             Invalidate();
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    {
+                        foreach (var item in e.NewItems)
+                            if (item is Segment segment)
+                                segment._button.PropertyChanged += OnButtonPropertyChanged;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        foreach (var item in e.OldItems)
+                            if (item is Segment segment)
+                                segment._button.PropertyChanged -= OnButtonPropertyChanged;
+                    }
+                    break;
+            }
         }
 
         private void OnButtonPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -58,9 +77,11 @@ namespace Forms9Patch
                     || propertyName == Button.WidthProperty.PropertyName
                     || propertyName == Button.HeightProperty.PropertyName
                     || propertyName == Button.OrientationProperty.PropertyName
+                    || propertyName == SegmentButton.ExtendedElementSeparatorWidthProperty.PropertyName
+                    || propertyName == SegmentButton.ExtendedElementShapeProperty.PropertyName
+                    || propertyName == SegmentButton.ExtendedElementShapeOrientationProperty.PropertyName
                         )
                 {
-                    //System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
                     Invalidate();
                 }
             }
@@ -99,7 +120,7 @@ namespace Forms9Patch
         {
             if (view is SegmentButton button && obj is SKPaintSurfaceEventArgs e)
             {
-                System.Diagnostics.Debug.WriteLine("PaintSegmentButtonBackground[" + button.InstanceId + "]: bounds=" + bounds);
+                //System.Diagnostics.Debug.WriteLine("PaintSegmentButtonBackground[" + button.InstanceId + "]: bounds=" + bounds);
                 SKRect rect = new SKRect((float)Math.Round(bounds.Left * Display.Scale), (float)Math.Round(bounds.Top * Display.Scale), (float)Math.Round(bounds.Right * Display.Scale), (float)Math.Round(bounds.Bottom * Display.Scale));
                 button.CurrentBackgroundImage.SharedOnPaintSurface(e, rect);
             }

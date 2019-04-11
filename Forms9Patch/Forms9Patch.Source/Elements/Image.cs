@@ -842,14 +842,12 @@ namespace Forms9Patch
 
         internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
         {
-            //base.OnPaintSurface(e);
-            SKImageInfo info = e.Info;
-            SKSurface surface = e.Surface;
-            SKCanvas canvas = surface?.Canvas;
+            SKCanvas canvas = e.Surface?.Canvas;
+            //canvas.ClipRect(rect, SKClipOperation.Intersect, false);
 
+            var clipBounds = canvas.LocalClipBounds;
 
-            System.Diagnostics.Debug.WriteLine("SharedOnPaintImage[" + InstanceId + "] rect=" + rect);
-            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnPaintSurface(" + e.Info.Width + "," + e.Info.Height + ")");
+            System.Diagnostics.Debug.WriteLine("SharedOnPaintImage[" + InstanceId + "] rect=[" + rect + "]\t clipBounds=[" + clipBounds + "]");
 
             if (canvas == null)
                 return;
@@ -894,9 +892,11 @@ namespace Forms9Patch
                 var perimeter = rect;
 
 
+
                 if (makeRoomForShadow)
                 {
                     // what additional padding was allocated to cast the button's shadow?
+
                     switch (elementShape)
                     {
                         case ExtendedElementShape.SegmentStart:
@@ -916,6 +916,8 @@ namespace Forms9Patch
                     if (!shadowInverted)
                     {
                         // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
+                        canvas.Save();
+
                         float allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
                         SKRect shadowRect = perimeter;
 
@@ -945,6 +947,10 @@ namespace Forms9Patch
 
                         try
                         {
+                            SKRegion region = new SKRegion();
+                            region.SetRect(new SKRectI((int)rect.Left, (int)rect.Top, (int)rect.Right, (int)rect.Bottom));
+                            canvas.ClipRegion(region);
+
                             if (DrawFill)
                                 canvas.DrawPath(PerimeterPath(shadowRect, outlineRadius - (drawOutline ? outlineWidth : 0)), shadowPaint);
                             else if (DrawImage)
@@ -964,6 +970,7 @@ namespace Forms9Patch
                             _repainting = false;
                             return;
                         }
+                        canvas.Restore();
                     }
                 }
 
