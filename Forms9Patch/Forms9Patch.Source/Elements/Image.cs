@@ -1523,10 +1523,10 @@ namespace Forms9Patch
                     result = RectInset(perimeter, inset, inset, (hz ? 0 : inset), (vt ? 0 : inset));
                     break;
                 case ExtendedElementShape.SegmentMid:
-                    result = RectInset(perimeter, (hz ? separatorWidth : inset), (vt ? separatorWidth : inset), (hz ? 0 : inset), (vt ? 0 : inset));
+                    result = RectInset(perimeter, (hz ? separatorWidth / 2 : inset), (vt ? separatorWidth / 2 : inset), (hz ? 0 : inset), (vt ? 0 : inset));
                     break;
                 case ExtendedElementShape.SegmentEnd:
-                    result = RectInset(perimeter, (hz ? separatorWidth : inset), (vt ? separatorWidth : inset), inset, inset);
+                    result = RectInset(perimeter, (hz ? separatorWidth / 2 : inset), (vt ? separatorWidth / 2 : inset), inset, inset);
                     break;
                 default:
                     result = RectInset(perimeter, inset);
