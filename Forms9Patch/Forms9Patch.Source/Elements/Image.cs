@@ -1073,7 +1073,7 @@ namespace Forms9Patch
                         Style = SKPaintStyle.Stroke,
                         Color = outlineColor.ToSKColor(),
                         StrokeWidth = separatorWidth,
-                        IsAntialias = false,
+                        IsAntialias = true,
                         //PathEffect = SKPathEffect.CreateDash(new float[] { 20,20 }, 0)
                     };
                     var path = new SKPath();
@@ -1116,6 +1116,7 @@ namespace Forms9Patch
                     {
                         Style = SKPaintStyle.Fill,
                         Color = shadowColor,
+                        IsAntialias = true,
                     };
                     var filter = SkiaSharp.SKImageFilter.CreateDropShadow(shadowX, shadowY, shadowR / 2, shadowR / 2, shadowColor, SKDropShadowImageFilterShadowMode.DrawShadowOnly);
                     insetShadowPaint.ImageFilter = filter;
