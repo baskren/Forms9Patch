@@ -603,7 +603,7 @@ namespace Forms9Patch.UWP
                         //    System.Diagnostics.Debug.WriteLine("");
                         Element.FittedFontSize = -1;
                     }
-                    else
+                    else if (Math.Abs(Element.FittedFontSize - tmpFontSize) > 1)
                     {
                         //if (DebugCondition)
                         //    System.Diagnostics.Debug.WriteLine("");
@@ -675,6 +675,7 @@ namespace Forms9Patch.UWP
         */
 
         #endregion
+
 
         #region Fitting
 

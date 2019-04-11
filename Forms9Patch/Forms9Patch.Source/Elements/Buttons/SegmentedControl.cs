@@ -1152,9 +1152,9 @@ namespace Forms9Patch
                                  maxFittedFontSize = segmentFittedFontSize;
 
                              var segmentSyncFontSize = segment._button.SynchronizedFontSize;
-                             if (segmentSyncFontSize < minSyncFontSize)
+                             if (minSyncFontSize - segmentSyncFontSize > 1)
                                  minSyncFontSize = segmentSyncFontSize;
-                             if (segmentSyncFontSize > maxSyncFontSize)
+                             if (segmentSyncFontSize - maxSyncFontSize> 1)
                                  maxSyncFontSize = segmentSyncFontSize;
                          }
                          //if (debug)
