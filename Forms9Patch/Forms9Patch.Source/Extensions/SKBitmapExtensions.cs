@@ -68,9 +68,18 @@ namespace Forms9Patch
                         }
                         else if (key.StartsWith("uri:", StringComparison.Ordinal))
                         {
-                            path = await P42.Utils.DownloadCache.DownloadAsync(key.Substring(4), Forms9Patch.Image.UriImageCacheFolderName);
-                            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                                f9pImageData = F9PImageData.Create(stream, key);
+                            Uri uri = null;
+                            if (imageSource is Xamarin.Forms.UriImageSource uriSource)
+                                uri = uriSource.Uri;
+                            else if (new Uri(key.Substring(4)) is Uri newUri)
+                                uri = newUri;
+
+                            if (uri != null && uri.IsAbsoluteUri)
+                            {
+                                path = await P42.Utils.DownloadCache.DownloadAsync(uri.AbsoluteUri, Forms9Patch.Image.UriImageCacheFolderName);
+                                using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                                    f9pImageData = F9PImageData.Create(stream, key);
+                            }
                         }
                         else if (key.StartsWith("file:", StringComparison.Ordinal))  // does this work for Windows or iOS?
                         {
@@ -90,7 +99,9 @@ namespace Forms9Patch
                             f9pImageData = F9PImageData.Create(filePath, key);
                         }
                         else
-                            throw new InvalidDataContractException();
+                        {
+                            Console.WriteLine("UNABLE TO ACCESS IMAGESOURCE: " + key);
+                        }
                         /*
                         if (skBitmap != null)
                         {

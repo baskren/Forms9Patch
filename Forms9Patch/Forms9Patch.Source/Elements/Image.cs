@@ -62,7 +62,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Source property
         /// </summary>
-        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Forms9Patch.Image.Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
         /// <summary>
         /// Gets/Sets the Source property
         /// </summary>
@@ -687,7 +687,12 @@ namespace Forms9Patch
             if (Source != _xfImageSource)
             {
                 // release the previous
-                _xfImageSource?.ReleaseF9PBitmap(this);
+                if (_xfImageSource != null)
+                {
+                    _xfImageSource.ReleaseF9PBitmap(this);
+                    _xfImageSource.PropertyChanged -= OnImageSourcePropertyChanged;
+                }
+
                 _f9pImageData = null;
                 _sourceRangeLists = null;
 
@@ -696,6 +701,7 @@ namespace Forms9Patch
 
                 if (_xfImageSource != null)
                 {
+                    _xfImageSource.PropertyChanged += OnImageSourcePropertyChanged;
                     _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
                     _sourceRangeLists = _f9pImageData?.RangeLists;
                 }
@@ -703,6 +709,26 @@ namespace Forms9Patch
                 ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
                 Invalidate();
             }
+        }
+
+        private async void OnImageSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Xamarin.Forms.UriImageSource.UriProperty.PropertyName)
+            {
+                ((Xamarin.Forms.IImageController)this)?.SetIsLoading(true);
+
+                _f9pImageData = await _xfImageSource.FetchF9pImageData(this);
+                _sourceRangeLists = _f9pImageData?.RangeLists;
+                ((Xamarin.Forms.IImageController)this)?.SetIsLoading(false);
+                Invalidate();
+            }
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            if (_xfImageSource != null)
+                _xfImageSource.BindingContext = BindingContext;
         }
 
         /// <summary>
