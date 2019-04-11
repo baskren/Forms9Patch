@@ -119,7 +119,8 @@ namespace Forms9Patch
                         {
                             // openning
                             //var contents = tagString.Split(' ');
-                            const string pattern = @" ([^>=]*)=""([^""]*)""";
+
+                            string pattern = @" ([^>=]*)=[""']([^""']*)[""']";
 
                             var tagName = tagString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLower();
                             var tag = new Tag { Name = tagName, Start = index };
