@@ -96,7 +96,7 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
   - **`BackgroundColor`**
   - **`BackgroundImage`**: A `Forms9Patch.Image` that will be used as the button's background.
 - Icon:
-  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: You can use the ResourceID of Embedded Resource fonts here!  - **`TrailingIcon`**: Is the icon before or after the label?
+  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: See [Custom Fonts](CustomFonts.md) to see how to use an Embedded Resource font! 
   - **`TrailingIcon`**: Is the icon placed before or after the label?
   - **`TintIcon`**: If the icon is a raster image, should the color of the non-transparent pixels be set to `TextColor`?
   - **`HasTightSpacing`**: If `false`, the icon will be positioned to the outside edge of the button.  If `true`, the icon will be positioned next to the label (separated by `Spacing`).
