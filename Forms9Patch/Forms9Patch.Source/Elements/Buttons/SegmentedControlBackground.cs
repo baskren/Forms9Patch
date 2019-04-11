@@ -112,7 +112,6 @@ namespace Forms9Patch
                 return;
 
             canvas.Clear();
-            System.Diagnostics.Debug.WriteLine("======================================================");
             Control.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
         }
 

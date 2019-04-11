@@ -847,7 +847,7 @@ namespace Forms9Patch
 
             var clipBounds = canvas.LocalClipBounds;
 
-            System.Diagnostics.Debug.WriteLine("SharedOnPaintImage[" + InstanceId + "] rect=[" + rect + "]\t clipBounds=[" + clipBounds + "]");
+            //System.Diagnostics.Debug.WriteLine("SharedOnPaintImage[" + InstanceId + "] rect=[" + rect + "]\t clipBounds=[" + clipBounds + "]");
 
             if (canvas == null)
                 return;

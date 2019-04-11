@@ -1346,24 +1346,6 @@ namespace Forms9Patch
             if (width < 1 || height < 1)
                 return isClipped;
 
-            /*
-            foreach (var segment in Segments)
-            {
-
-                //if (segment._button.IsClipped)
-                if (segment._button.CheckIsClipped())
-                {
-                    IsClipped = true;
-                    //System.Diagnostics.Debug.WriteLine("CLIPPED: " + (segment._button.Text ?? segment._button.HtmlText));
-                    //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=true");
-                    return IsClipped;
-                }
-            }
-            IsClipped = false;
-            //System.Diagnostics.Debug.WriteLine("[" + Id + "] IsClipped=false");
-            return IsClipped;
-            */
-
             var result = LayoutFunction(0, 0, width, height, CheckSegmentIsClipped);
             return result;
         }
