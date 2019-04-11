@@ -11,7 +11,7 @@ namespace Forms9Patch.UWP
     class LabeLRenderer : ViewRenderer<Label, TextBlock>
     {
         #region Debug support
-        bool DebugCondition => false; /*
+        bool DebugCondition => Element?.HtmlText == "Bolt Parameters:" || Element?.HtmlText == "Lag Screw Parameters:" || Element?.HtmlText == "Wood Screw Parameters:" || Element?.HtmlText == "Nail/Spike Parameters:" || Element?.HtmlText == "Ring Shank Nail Parameters:"; /*
         {
             get
             {
@@ -273,11 +273,17 @@ namespace Forms9Patch.UWP
 
         void ForceLayout(TextBlock textBlock)
         {
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("");
+
             LayoutValid = false;
-            //MeasureOverride(_lastAvailableSize);
+            //MeasureOverride(_lastAvailableSize);  // don't do this.  It will not render label correctly (it will make it tiny).
             //InvalidateArrange();
-            //InvalidateMeasure();
-            ((VisualElement)Element)?.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
+            InvalidateMeasure();  // this is needed to update header labels when BcItem.Title changes;
+            //MeasureOverride(new Windows.Foundation.Size(Element.Width, Element.Height));
+            ((Forms9Patch.Label)Element).InternalInvalidateMeasure();  // if this isn't here, app crashes when BcItem.Title changes;
+            //((VisualElement)Element)?.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
+            //System.Diagnostics.Debug.WriteLine("ForceLayout [" + Element.HtmlText + "]");
         }
 
         void UpdateMinFontSize(TextBlock textBlock)
@@ -446,8 +452,8 @@ namespace Forms9Patch.UWP
         int _measureOverrideInvocation;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
-            //if (DebugCondition)
-            //    System.Diagnostics.Debug.WriteLine("");
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine("MeasureOverride =" + Element.HtmlText);
 
 
             var label = Element;
