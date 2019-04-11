@@ -26,6 +26,7 @@
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\Segment.cs" Link="Elements\Buttons\Segment.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentButton.cs" Link="Elements\Buttons\SegmentButton.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentedControl.cs" Link="Elements\Buttons\SegmentedControl.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\Buttons\SegmentedControlBackground.cs" Link="Elements\Buttons\SegmentedControlBackground.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\Buttons\StateButton.cs" Link="Elements\Buttons\StateButton.cs" />
 
     <!-- Elements ListView -->
@@ -82,7 +83,7 @@
     <!-- Elements Misc -->
     <Compile Include="..\Forms9Patch.Source\Elements\Label.cs" Link="Elements\Label.cs" />
     <Compile Include="..\Forms9Patch.Source\Elements\ColorGradientBox.cs" Link="Elements\ColorGradientBox.cs" />
-    <Compile Include="..\Forms9Patch.Source\Elements\ExtendedShapeAndImageView.cs" Link="Elements\ExtendedShapeAndImageView.cs" />
+    <Compile Include="..\Forms9Patch.Source\Elements\Image.cs" Link="Elements\Image.cs" />
 
     <!-- Enums -->
     <Compile Include="..\Forms9Patch.Source\Enums\AutoFit.cs" Link="Enums\AutoFit.cs" />

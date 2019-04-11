@@ -833,17 +833,28 @@ namespace Forms9Patch
         /// <param name="e"></param>
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
+            if (e.Surface?.Canvas == null)
+                return;
+
+            e.Surface.Canvas.Clear();
+            SharedOnPaintSurface(e, e.Info.Rect);
+        }
+
+        internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
+        {
             //base.OnPaintSurface(e);
             SKImageInfo info = e.Info;
             SKSurface surface = e.Surface;
             SKCanvas canvas = surface?.Canvas;
 
+
+            System.Diagnostics.Debug.WriteLine("SharedOnPaintImage[" + InstanceId + "] rect=" + rect);
             //System.Diagnostics.Debug.WriteLine(GetType() + ".OnPaintSurface(" + e.Info.Width + "," + e.Info.Height + ")");
 
             if (canvas == null)
                 return;
 
-            canvas.Clear();
+            //canvas.Clear();
 
             var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == Xamarin.Forms.StackOrientation.Horizontal;
             var vt = !hz;
@@ -866,10 +877,10 @@ namespace Forms9Patch
             bool drawImage = DrawImage;
             bool drawFill = DrawFill;
 
-            if ((drawFill || drawOutline || separatorWidth > 0 || drawImage) && CanvasSize != default(SKSize))
+            if ((drawFill || drawOutline || separatorWidth > 0 || drawImage))// && CanvasSize != default)
             {
 
-                SKRect rect = new SKRect(0, 0, info.Width, info.Height);
+                //SKRect rect = new SKRect(0, 0, info.Width, info.Height);
                 //System.Diagnostics.Debug.WriteLine("Image.OnPaintSurface rect=" + rect);
 
                 var makeRoomForShadow = hasShadow && (backgroundColor.A > 0.01 || drawImage); // && !ShapeElement.ShadowInverted;
@@ -1180,9 +1191,9 @@ namespace Forms9Patch
                 }
 
                 var fillRectAspect = fillRect.Width / fillRect.Height;
-                var imageAspect = (SourceImageWidth == 0 || SourceImageHeight == 0) ? 1 : SourceImageWidth / SourceImageHeight;
-                double scaleX = 1;
-                double scaleY = 1;
+                var imageAspect = (SourceImageWidth < 1 || SourceImageHeight < 1) ? 1 : SourceImageWidth / SourceImageHeight;
+                double scaleX;
+                double scaleY;
                 if (SourceImageWidth <= 0 || SourceImageHeight <= 0)
                 {
                     scaleX = scaleY = 1;
@@ -1291,7 +1302,7 @@ namespace Forms9Patch
                 }
                 */
 
-                var bitmap = _f9pImageData;
+                //var bitmap = _f9pImageData;
                 SKPaint paint = null;
                 if (shadowPaint == null && TintColor != Xamarin.Forms.Color.Default && TintColor != Xamarin.Forms.Color.Transparent)
                 {
@@ -1469,7 +1480,7 @@ namespace Forms9Patch
         SKRect InverseShadowInsetForShape(SKRect perimeter, bool vt)
         {
             var inset = -20.0f;
-            var result = perimeter;
+            SKRect result;
             var hz = !vt;
             switch (((IExtendedShape)this).ExtendedElementShape)
             {
@@ -1494,7 +1505,7 @@ namespace Forms9Patch
         {
             if (inset < 0)
                 inset = 0;
-            var result = perimeter;
+            SKRect result;
             var hz = !vt;
 
 
@@ -1517,6 +1528,7 @@ namespace Forms9Patch
             return result;
         }
 
+        /*
         static SKRect SegmentAllowanceRect(SKRect rect, float allowance, Xamarin.Forms.StackOrientation orientation, Forms9Patch.ExtendedElementShape type)
         {
             SKRect result;
@@ -1541,12 +1553,13 @@ namespace Forms9Patch
             //if (_debugMessages) System.Diagnostics.Debug.WriteLine("ImageView.SegmentAllowanceRect result=[" + result + "]");
             return result;
         }
+        */
 
-        static SKRect RectInset(SKRect rect, double inset) => RectInset(rect, (float)inset);
+        //static SKRect RectInset(SKRect rect, double inset) => RectInset(rect, (float)inset);
 
         static SKRect RectInset(SKRect rect, float inset) => RectInset(rect, inset, inset, inset, inset);
 
-        static SKRect RectInset(SKRect rect, double left, double top, double right, double bottom) => RectInset(rect, (float)left, (float)top, (float)right, (float)bottom);
+        //static SKRect RectInset(SKRect rect, double left, double top, double right, double bottom) => RectInset(rect, (float)left, (float)top, (float)right, (float)bottom);
 
         static SKRect RectInset(SKRect rect, float left, float top, float right, float bottom) => new SKRect(rect.Left + left, rect.Top + top, rect.Right - right, rect.Bottom - bottom);
 

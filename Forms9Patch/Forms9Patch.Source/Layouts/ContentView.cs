@@ -64,11 +64,11 @@ namespace Forms9Patch
         public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("Forms9Patch.ContentView.BackgroundImage", typeof(Image), typeof(ContentView), null,
                                                                                               propertyChanging: (bindable, oldValue, newValue) =>
                                                                                               {
-                                                                                                  if (bindable is ContentView contentView)
+                                                                                                  if (bindable is ContentView contentView && !(bindable is SegmentButton))
                                                                                                       contentView.BaseInternalChildren.Remove(contentView.CurrentBackgroundImage);
                                                                                               }, propertyChanged: (bindable, oldValue, newValue) =>
                                                                                               {
-                                                                                                  if (bindable is ContentView contentView)
+                                                                                                  if (bindable is ContentView contentView && !(bindable is SegmentButton))
                                                                                                       contentView.BaseInternalChildren.Insert(0, contentView.CurrentBackgroundImage);
                                                                                               });
         /// <summary>
@@ -301,7 +301,8 @@ namespace Forms9Patch
                 if (_baseInternalChildren == null)
                 {
                     _baseInternalChildren = (ObservableCollection<Element>)P42.Utils.ReflectionExtensions.GetPropertyValue(this, "InternalChildren");
-                    _baseInternalChildren?.Insert(0, CurrentBackgroundImage);
+                    if (!(this is SegmentButton))
+                        _baseInternalChildren?.Insert(0, CurrentBackgroundImage);
                 }
                 return _baseInternalChildren;
             }
@@ -468,8 +469,8 @@ namespace Forms9Patch
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + " : ContentView.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")   WIDTH: " + Width + "   HEIGHT: " + Height);
-
-            LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
+            if (!(this is SegmentButton))
+                LayoutChildIntoBoundingRegion(CurrentBackgroundImage, new Rectangle(0, 0, Width, Height));
 
             var rect = new Rectangle(x, y, width, height);
             if (HasShadow)

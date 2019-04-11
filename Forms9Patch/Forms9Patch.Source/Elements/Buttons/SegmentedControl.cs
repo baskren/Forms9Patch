@@ -156,7 +156,7 @@ namespace Forms9Patch
         #endregion FontScaling property
 
         #region Segments
-        readonly ObservableCollection<Segment> _segments;
+        internal readonly ObservableCollection<Segment> _segments;
         /// <summary>
         /// The container for the Segmented Control's buttons.
         /// </summary>
@@ -662,6 +662,9 @@ namespace Forms9Patch
 
         #endregion
 
+        #region Fields
+        readonly SegmentedControlBackground _background = new SegmentedControlBackground();
+        #endregion
 
         #region Constructor
 
@@ -685,6 +688,7 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("SegmentedControl.SizeChanged EXIT");
                 // rather ...
             };
+            Children.Add(_background);
         }
 
         #endregion
@@ -703,6 +707,7 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
+                    Children.Remove(_background);
                     foreach (var segment in _segments)
                     {
                         var button = segment._button;
@@ -797,20 +802,23 @@ namespace Forms9Patch
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     for (int i = Children.Count - 1; i >= 0; i--)
-                        RemoveButton(Children[i] as SegmentButton);
+                    {
+                        if (Children[i] is SegmentButton button)
+                            RemoveButton(button);
+                    }
                     break;
             }
             int count = Children.Count;
-            if (count > 1)
+            if (count > 2)
             {
-                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
-                for (int i = 1; i < count - 1; i++)
+                ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.SegmentStart;
+                for (int i = 2; i < count - 1; i++)
                     ((IExtendedShape)Children[i]).ExtendedElementShape = ExtendedElementShape.SegmentMid;
                 ((IExtendedShape)Children[count - 1]).ExtendedElementShape = ExtendedElementShape.SegmentEnd;
             }
-            else if (count == 1)
+            else if (count == 2)
             {
-                ((IExtendedShape)Children[0]).ExtendedElementShape = ExtendedElementShape.Rectangle;
+                ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
             if (!_updatingSegments)
             {
@@ -835,7 +843,7 @@ namespace Forms9Patch
             button.LongPressing += OnSegmentLongPressing;
             button.LongPressed += OnSegmentLongPressed;
             button.FittedFontSizeChanged += OnButtonFittedFontSizeChanged;
-            Children.Insert(index, button);
+            Children.Insert(index + 1, button);
             if (button.IsSelected && GroupToggleBehavior == GroupToggleBehavior.Radio)
             {
                 foreach (var segment in _segments)
@@ -872,8 +880,9 @@ namespace Forms9Patch
                 return;
             }
 
-            foreach (SegmentButton child in Children)
-                child.Padding = Padding;
+            foreach (var child in Children)
+                if (child is SegmentButton button)
+                    button.Padding = Padding;
         }
         #endregion
 
@@ -943,198 +952,167 @@ namespace Forms9Patch
 
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == GroupToggleBehaviorProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                {
-                    button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
-                    button.GroupToggleBehavior = GroupToggleBehavior;
-                }
-            else if (propertyName == PaddingProperty.PropertyName)
-                UpdateChildrenPadding();
-            else if (propertyName == TextColorProperty.PropertyName)
+            if (Segments != null)
             {
-                if (Segments != null)
+                if (propertyName == GroupToggleBehaviorProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                    {
+                        segment._button.ToggleBehavior = (GroupToggleBehavior != GroupToggleBehavior.None);
+                        segment._button.GroupToggleBehavior = GroupToggleBehavior;
+                    }
+                else if (propertyName == PaddingProperty.PropertyName)
+                    UpdateChildrenPadding();
+                else if (propertyName == TextColorProperty.PropertyName)
+                {
                     foreach (Segment segment in Segments)
                         if (segment.TextColor == Color.Default)
                             segment._button.TextColor = TextColor;
-            }
-            else if (propertyName == SelectedTextColorProperty.PropertyName)
-            {
-                if (Segments != null)
+                }
+                else if (propertyName == SelectedTextColorProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.SelectedTextColor = SelectedTextColor;
-            }
-            else if (propertyName == TintIconProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == TintIconProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.TintIcon = TintIcon;
-            }
-            else if (propertyName == HasTightSpacingProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == HasTightSpacingProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.HasTightSpacing = HasTightSpacing;
-            }
-            else if (propertyName == HorizontalTextAlignmentProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == HorizontalTextAlignmentProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.HorizontalTextAlignment = HorizontalTextAlignment;
-            }
-            else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.VerticalTextAlignment = VerticalTextAlignment;
-            }
-            else if (propertyName == LineBreakModeProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == LineBreakModeProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.LineBreakMode = LineBreakMode;
-            }
-            else if (propertyName == AutoFitProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == AutoFitProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.AutoFit = AutoFit;
-            }
-            else if (propertyName == LinesProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == LinesProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.Lines = Lines;
-            }
-            else if (propertyName == MinFontSizeProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == MinFontSizeProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.MinFontSize = MinFontSize;
-            }
-            else if (propertyName == FontAttributesProperty.PropertyName)
-            {
-                if (Segments != null)
+                else if (propertyName == FontAttributesProperty.PropertyName)
+                {
                     foreach (Segment segment in Segments)
                         if (!segment.FontAttributesSet)
                             segment._button.FontAttributes = FontAttributes;
-            }
-            else if (propertyName == DarkThemeProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.DarkTheme = DarkTheme;
-            else if (propertyName == BackgroundColorProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.BackgroundColor = BackgroundColor;
-            else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.SelectedBackgroundColor = SelectedBackgroundColor;
-            else if (propertyName == OutlineColorProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.OutlineColor = OutlineColor;
-            else if (propertyName == OutlineRadiusProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.OutlineRadius = OutlineRadius;
-            else if (propertyName == OutlineWidthProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.OutlineWidth = OutlineWidth;
-            else if (propertyName == FontFamilyProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.FontFamily = FontFamily;
-            else if (propertyName == IconFontFamilyProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.IconFontFamily = FontFamily;
-            else if (propertyName == FontSizeProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.FontSize = FontSize;
-            else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
-            {
-                //var ignore = IgnoreShapePropertiesChanges;
-                //IgnoreShapePropertiesChanges = true;
-                foreach (SegmentButton button in Children)
-                {
-                    //var buttonIgnore = button.IgnoreShapePropertiesChanges;
-                    //button.IgnoreShapePropertiesChanges = true;
-                    button.HasShadow = HasShadow;
-                    //button.IgnoreShapePropertiesChanges = button.IgnoreShapePropertiesChanges;
+
                 }
-                //IgnoreShapePropertiesChanges = ignore;
-                InvalidateLayout();
+                else if (propertyName == DarkThemeProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.DarkTheme = DarkTheme;
+                else if (propertyName == BackgroundColorProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.BackgroundColor = BackgroundColor;
+                else if (propertyName == SelectedBackgroundColorProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.SelectedBackgroundColor = SelectedBackgroundColor;
+                else if (propertyName == OutlineColorProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.OutlineColor = OutlineColor;
+                else if (propertyName == OutlineRadiusProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.OutlineRadius = OutlineRadius;
+                else if (propertyName == OutlineWidthProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.OutlineWidth = OutlineWidth;
+                else if (propertyName == FontFamilyProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.FontFamily = FontFamily;
+                else if (propertyName == IconFontFamilyProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.IconFontFamily = FontFamily;
+                else if (propertyName == FontSizeProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.FontSize = FontSize;
+                else if (propertyName == HasShadowProperty.PropertyName || propertyName == Xamarin.Forms.Frame.HasShadowProperty.PropertyName)
+                {
+                    foreach (Segment segment in Segments)
+                        segment._button.HasShadow = HasShadow;
+                    InvalidateLayout();
+                }
+                else if (propertyName == OrientationProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.ExtendedElementShapeOrientation = Orientation;
+                else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.Orientation = IntraSegmentOrientation;
+                else if (propertyName == SeparatorWidthProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.ExtendedElementSeparatorWidth = SeparatorWidth;
+                else if (propertyName == TrailingIconProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.TrailingIcon = TrailingIcon;
+                else if (propertyName == HapticEffectProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.HapticEffect = HapticEffect;
+                else if (propertyName == HapticModeProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.HapticMode = HapticMode;
+                else if (propertyName == IsEnabledProperty.PropertyName)
+                {
+                    if (IsEnabled)
+                        Opacity *= 2;
+                    else
+                        Opacity /= 2;
+                }
+                else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.Spacing = IntraSegmentSpacing;
             }
-            else if (propertyName == OrientationProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.ExtendedElementShapeOrientation = Orientation;
-            else if (propertyName == IntraSegmentOrientationProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.Orientation = IntraSegmentOrientation;
-            else if (propertyName == SeparatorWidthProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.ExtendedElementSeparatorWidth = SeparatorWidth;
-            else if (propertyName == TrailingIconProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.TrailingIcon = TrailingIcon;
-            else if (propertyName == HapticEffectProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.HapticEffect = HapticEffect;
-            else if (propertyName == HapticModeProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.HapticMode = HapticMode;
-            else if (propertyName == IsEnabledProperty.PropertyName)
-            {
-                if (IsEnabled)
-                    Opacity *= 2;
-                else
-                    Opacity /= 2;
-            }
-            else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
-                foreach (SegmentButton button in Children)
-                    button.Spacing = IntraSegmentSpacing;
         }
 
         //Segment _lastSelectedSegment;
 
         internal void OnButtonPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var button = sender as SegmentButton;
-            if (e.PropertyName == Forms9Patch.Button.IsSelectedProperty.PropertyName)
+            if (sender is SegmentButton button)
             {
-                if (GroupToggleBehavior == GroupToggleBehavior.Radio)
+                if (e.PropertyName == Forms9Patch.Button.IsSelectedProperty.PropertyName)
                 {
-                    if (button.IsSelected)
+                    if (GroupToggleBehavior == GroupToggleBehavior.Radio)
                     {
-                        foreach (var seg in _segments)
-                            seg.IsSelected = seg._button == button;
-                    }
-                    else if (button.IsEnabled)
-                    {
-                        int enabled = 0;
-                        Segment eseg = null;
-                        foreach (var seg in _segments)
+                        if (button.IsSelected)
                         {
-                            if (seg.IsEnabled)
-                            {
-                                enabled++;
-                                eseg = seg;
-                            }
+                            foreach (var seg in _segments)
+                                seg.IsSelected = seg._button == button;
                         }
-                        eseg.IsSelected = eseg.IsSelected || enabled == 1;
+                        else if (button.IsEnabled)
+                        {
+                            int enabled = 0;
+                            Segment eseg = null;
+                            foreach (var seg in _segments)
+                            {
+                                if (seg.IsEnabled)
+                                {
+                                    enabled++;
+                                    eseg = seg;
+                                }
+                            }
+                            eseg.IsSelected = eseg.IsSelected || enabled == 1;
+                        }
                     }
+                    /*
+                    else if (GroupToggleBehavior == GroupToggleBehavior.Multiselect)
+                    {
+                        foreach (var seg in _segments)
+                            if (seg.Button == button)
+                                seg.IsSelected = !seg.IsSelected;
+                    }
+                    */
                 }
-                /*
-				else if (GroupToggleBehavior == GroupToggleBehavior.Multiselect)
-				{
-					foreach (var seg in _segments)
-						if (seg.Button == button)
-							seg.IsSelected = !seg.IsSelected;
-				}
-				*/
-            }
-            else if (e.PropertyName == Forms9Patch.Button.IsClippedProperty.PropertyName)
-            {
-                if (button.IsClipped)
-                    IsClipped = true;
-                else
-                    IsClipped = CheckIsClipped();
-                return;
+                else if (e.PropertyName == Forms9Patch.Button.IsClippedProperty.PropertyName)
+                {
+                    if (button.IsClipped)
+                        IsClipped = true;
+                    else
+                        IsClipped = CheckIsClipped();
+                    return;
+                }
             }
         }
         #endregion
@@ -1215,7 +1193,7 @@ namespace Forms9Patch
             var vt = !hz;
 
             var shadowPadding = new Thickness(0);
-            if (HasShadow && BackgroundColor.A > 0 && Children.Count > 0)
+            if (HasShadow && BackgroundColor.A > 0 && Children.Count > 1)
                 shadowPadding = ShapeBase.ShadowPadding(this);
 
             double requestHeight = shadowPadding.VerticalThickness;
@@ -1227,31 +1205,33 @@ namespace Forms9Patch
             {
                 // we have all the width in the world ... but what's the height?
                 foreach (var child in Children)
-                {
-                    var childSizeRequest = child.Measure(double.PositiveInfinity, heightConstraint, MeasureFlags.None);
-                    //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest["+child.Id+"]=["+childSizeRequest+"]");
-                    if (childSizeRequest.Request.Height > requestHeight)
-                        requestHeight = childSizeRequest.Request.Height;
-                    if (childSizeRequest.Minimum.Height > minHeight)
-                        minHeight = childSizeRequest.Minimum.Height;
-                    requestWidth += childSizeRequest.Request.Width;
-                    minWidth += childSizeRequest.Minimum.Width;
-                }
+                    if (child is SegmentButton button)
+                    {
+                        var childSizeRequest = button.Measure(double.PositiveInfinity, heightConstraint, MeasureFlags.None);
+                        //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest["+child.Id+"]=["+childSizeRequest+"]");
+                        if (childSizeRequest.Request.Height > requestHeight)
+                            requestHeight = childSizeRequest.Request.Height;
+                        if (childSizeRequest.Minimum.Height > minHeight)
+                            minHeight = childSizeRequest.Minimum.Height;
+                        requestWidth += childSizeRequest.Request.Width;
+                        minWidth += childSizeRequest.Minimum.Width;
+                    }
             }
             else // if (vt)// && (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint)))
             {
                 // we have all the height in the world ... but what's the width?
                 foreach (var child in Children)
-                {
-                    var childSizeRequest = child.Measure(widthConstraint, double.PositiveInfinity, MeasureFlags.None);
-                    //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest[" + child.Id + "]=[" + childSizeRequest + "]");
-                    if (childSizeRequest.Request.Width > requestWidth)
-                        requestWidth = childSizeRequest.Request.Width;
-                    if (childSizeRequest.Minimum.Width > minWidth)
-                        minWidth = childSizeRequest.Minimum.Width;
-                    requestHeight += childSizeRequest.Request.Height;
-                    minHeight += childSizeRequest.Minimum.Height;
-                }
+                    if (child is SegmentButton button)
+                    {
+                        var childSizeRequest = button.Measure(widthConstraint, double.PositiveInfinity, MeasureFlags.None);
+                        //System.Diagnostics.Debug.WriteLine("\tOnMeasure childSizeRequest[" + child.Id + "]=[" + childSizeRequest + "]");
+                        if (childSizeRequest.Request.Width > requestWidth)
+                            requestWidth = childSizeRequest.Request.Width;
+                        if (childSizeRequest.Minimum.Width > minWidth)
+                            minWidth = childSizeRequest.Minimum.Width;
+                        requestHeight += childSizeRequest.Request.Height;
+                        minHeight += childSizeRequest.Minimum.Height;
+                    }
             }
             return new SizeRequest(new Size(requestWidth, requestHeight), new Size(minWidth, minHeight));
         }
@@ -1269,80 +1249,18 @@ namespace Forms9Patch
         {
             if (!_updatingSegments)
             {
-                LayoutFunction(x, y, width, height, (view, segmentRect) =>
-                {
-                    LayoutChildIntoBoundingRegion(view, segmentRect);
-                    return false;
-                });
+                LayoutChildIntoBoundingRegion(_background, new Rectangle(x, y, width, height));
+                LayoutFunction(x, y, width, height, LayoutSegment);
             }
-            /*
-            if (!P42.Utils.Environment.IsOnMainThread)
-            {
-                Device.BeginInvokeOnMainThread(() => LayoutChildren(x, y, width, height));
-                return;
-            }
-
-            var shadowPadding = new Thickness(0);
-            if (HasShadow && BackgroundColor.A > 0)
-                shadowPadding = ShapeBase.ShadowPadding(this);
-
-            var hz = Orientation == StackOrientation.Horizontal;
-            var vt = !hz;
-            var newWidth = width - shadowPadding.HorizontalThickness;
-            var newHeight = height - shadowPadding.VerticalThickness;
-
-
-            int count = Children.Count;
-
-            if (count > 0)
-            {
-
-                x = Math.Round(x);
-                y = Math.Round(y);
-
-                var outlineWidth = OutlineWidth;// / Display.Scale;
-                double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
-                double yOffset = vt ? outlineWidth + (newHeight - outlineWidth * (count + 1)) / count : 0;
-                double segmentWidth = hz ? xOffset : width;
-                double segmentHeight = vt ? yOffset : height;
-
-                for (int i = 0; i < count; i++)
-                {
-                    var view = Children[i];
-                    if (view.IsVisible)
-                    {
-                        double thisW, thisH;
-                        if (i == 0)
-                        {
-                            thisW = segmentWidth + (hz ? shadowPadding.Left : 0);
-                            thisH = segmentHeight + (vt ? shadowPadding.Top : 0);
-                        }
-                        else if (i == count - 1)
-                        {
-                            thisW = hz ? width - x : segmentWidth;
-                            thisH = vt ? height - y : segmentHeight;
-                        }
-                        else
-                        {
-                            thisW = segmentWidth;
-                            thisH = segmentHeight;
-                        }
-
-                        if (x + thisW > width)
-                            thisW = width - x;
-                        if (y + thisH > height)
-                            thisH = height - y;
-                        var segmentRect = new Rectangle(x, y, thisW, thisH);
-                        LayoutChildIntoBoundingRegion(view, segmentRect);
-                        x = (x + (hz ? thisW : 0));
-                        y = (y + (vt ? thisH : 0));
-                    }
-                }
-            }
-            */
         }
 
-        internal bool LayoutFunction(double x, double y, double width, double height, Func<View, Rectangle, bool> layoutAction)
+        private bool LayoutSegment(View view, Rectangle segmentRect, object arg3)
+        {
+            LayoutChildIntoBoundingRegion(view, segmentRect);
+            return false;
+        }
+
+        internal bool LayoutFunction(double x, double y, double width, double height, Func<View, Rectangle, object, bool> layoutAction, object parameter = null)
         {
             var shadowPadding = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0)
@@ -1354,13 +1272,13 @@ namespace Forms9Patch
             var newHeight = height - shadowPadding.VerticalThickness;
 
 
-            int count = Children.Count;
+            int count = Children.Count - 1;
 
             if (count > 0)
             {
 
-                x = Math.Round(x);
-                y = Math.Round(y);
+                //x = Math.Round(x);
+                //y = Math.Round(y);
 
                 var outlineWidth = OutlineWidth;// / Display.Scale;
                 double xOffset = hz ? outlineWidth + (newWidth - outlineWidth * (count + 1)) / count : 0;
@@ -1368,18 +1286,17 @@ namespace Forms9Patch
                 double segmentWidth = hz ? xOffset : width;
                 double segmentHeight = vt ? yOffset : height;
 
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i <= count; i++)
                 {
-                    var view = Children[i];
-                    if (view.IsVisible)
+                    if (Children[i] is SegmentButton button && button.IsVisible)
                     {
                         double thisW, thisH;
-                        if (i == 0)
+                        if (i == 1)
                         {
                             thisW = segmentWidth + (hz ? shadowPadding.Left : 0);
                             thisH = segmentHeight + (vt ? shadowPadding.Top : 0);
                         }
-                        else if (i == count - 1)
+                        else if (i == count)
                         {
                             thisW = hz ? width - x : segmentWidth;
                             thisH = vt ? height - y : segmentHeight;
@@ -1401,7 +1318,7 @@ namespace Forms9Patch
                         //if (!P42.Utils.Environment.IsOnMainThread)
                         //    Device.BeginInvokeOnMainThread(() => layoutAction.Invoke(view, segmentRect));
                         //else
-                        if (layoutAction.Invoke(view, segmentRect))
+                        if (layoutAction.Invoke(button, segmentRect, parameter))
                             return true;
 
                         x = (x + (hz ? thisW : 0));
@@ -1447,14 +1364,19 @@ namespace Forms9Patch
             return IsClipped;
             */
 
-            var result = LayoutFunction(0, 0, width, height, (view, segmentRect) =>
-            {
-                if (view is Button button)
-                    return button.CheckIsClipped(segmentRect.Width, segmentRect.Height);
-                return false;
-            });
+            var result = LayoutFunction(0, 0, width, height, CheckSegmentIsClipped);
             return result;
         }
+
+        private bool CheckSegmentIsClipped(View view, Rectangle segmentRect, object arg3)
+        {
+            if (view is Button button)
+                return button.CheckIsClipped(segmentRect.Width, segmentRect.Height);
+            return false;
+        }
+
+
+
 
         /// <summary>
         /// Occurs when one of the segments is tapped.

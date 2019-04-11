@@ -6,12 +6,15 @@
     <RootNamespace>Forms9Patch</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3;NETSTANDARD</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD1_3</DefineConstants>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <!--DebugType>full</DebugType-->
     <DefineConstants>TRACE;NETSTANDARD;RELEASE;</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.3\Forms9Patch.xml</DocumentationFile>
+    <!--DebugType>full</DebugType-->
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <Import Project="..\Forms9Patch.Source\Forms9Patch.targets" />
   <ItemGroup>
