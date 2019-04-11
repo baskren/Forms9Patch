@@ -42,17 +42,19 @@ namespace Forms9Patch
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        foreach (var item in e.NewItems)
-                            if (item is Segment segment)
-                                segment._button.PropertyChanged += OnButtonPropertyChanged;
+                        if (e.NewItems != null)
+                            foreach (var item in e.NewItems)
+                                if (item is Segment segment)
+                                    segment._button.PropertyChanged += OnButtonPropertyChanged;
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        foreach (var item in e.OldItems)
-                            if (item is Segment segment)
-                                segment._button.PropertyChanged -= OnButtonPropertyChanged;
+                        if (e.OldItems != null)
+                            foreach (var item in e.OldItems)
+                                if (item is Segment segment)
+                                    segment._button.PropertyChanged -= OnButtonPropertyChanged;
                     }
                     break;
             }
