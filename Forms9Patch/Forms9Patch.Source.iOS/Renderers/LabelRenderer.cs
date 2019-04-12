@@ -613,7 +613,8 @@ namespace Forms9Patch.iOS
             //layoutManager.EnsureLayoutForCharacterRange(new NSRange(0,Control.AttributedText.Length));
             //layoutManager.EnsureLayoutForTextContainer(textContainer);
             nfloat partialFraction = 0;
-            var characterIndex = layoutManager.CharacterIndexForPoint(cgPoint, textContainer, ref partialFraction);
+            //var characterIndex = layoutManager.CharacterIndexForPoint(cgPoint, textContainer, ref partialFraction);
+            var characterIndex = layoutManager.GetCharacterIndex(cgPoint, textContainer);
 
             //[self.layoutManager drawGlyphsForGlyphRange:NSMakeRange(0, self.textStorage.length) atPoint:CGPointMake(0, 0)];
             //layoutManager.DrawGlyphs(new NSRange(0,Control.AttributedText.Length),Control.Frame.Location);
