@@ -208,10 +208,11 @@ namespace Forms9Patch
                 {
                     switch (HorizontalOptions.Alignment)
                     {
+                        case LayoutAlignment.Fill:
                         case LayoutAlignment.Center: contentX = width / 2.0 - rboxSize.Width / 2.0; break;
                         case LayoutAlignment.Start: contentX = Margin.Left + shadowPadding.Left; break;
                         case LayoutAlignment.End: contentX = width - Margin.Right - shadowPadding.HorizontalThickness - rboxSize.Width; break;
-                        case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
+                            //case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
                     }
                 }
                 //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
@@ -220,10 +221,11 @@ namespace Forms9Patch
                 {
                     switch (VerticalOptions.Alignment)
                     {
+                        case LayoutAlignment.Fill:
                         case LayoutAlignment.Center: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
                         case LayoutAlignment.Start: contentY = Margin.Top + shadowPadding.Top; break;
                         case LayoutAlignment.End: contentY = height - Margin.Bottom - shadowPadding.VerticalThickness - rboxSize.Height; break;
-                        case LayoutAlignment.Fill: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
+                            //case LayoutAlignment.Fill: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
                     }
                 }
                 //var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
