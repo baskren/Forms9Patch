@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -104,5 +105,11 @@ namespace Forms9Patch
             base.OnBindingContextChanged();
         }
 
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == nameof (Height) && Device.RuntimePlatform == Device.UWP)
+                    ForceUpdateSize();
+        }
     }
 }

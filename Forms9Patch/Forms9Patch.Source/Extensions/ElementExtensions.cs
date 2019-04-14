@@ -89,6 +89,24 @@ namespace Forms9Patch
             return null;
         }
 
+        /// <summary>
+        /// Finds Ancestor element of the given type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static T FindAncestorOfType<T>(this Element element) where T : Xamarin.Forms.Element
+        {
+            var parent = element.Parent;
+            while (parent != null)
+            {
+                if (parent.GetType() == typeof(T))
+                    return (T)parent;
+                parent = parent.Parent;
+            }
+            return null;
+        }
+
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static bool IsInNativeLayout(this VisualElement e)
