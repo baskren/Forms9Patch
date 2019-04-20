@@ -724,6 +724,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Called when the binding contex has changed.
+        /// </summary>
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();

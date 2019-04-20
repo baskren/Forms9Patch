@@ -556,6 +556,7 @@ namespace Forms9Patch
             Padding = 0;
             Margin = 0;
 
+            //Xamarin.Forms.PlatformConfiguration.AndroidSpecific.ListView.SetIsFastScrollEnabled(_listView, true);
             _listView.HasUnevenRows = true;
             _listView.ItemAppearing += OnItemAppearing;
             _listView.ItemDisappearing += OnItemDisappearing;

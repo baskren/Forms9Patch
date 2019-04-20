@@ -12,7 +12,9 @@ namespace FormsGestures.Droid
         /// <value>The context.</value>
         public static Android.Content.Context Context
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             get => _context ?? Xamarin.Forms.Forms.Context;
+#pragma warning restore CS0618 // Type or member is obsolete
             private set => _context = value;
 
         }

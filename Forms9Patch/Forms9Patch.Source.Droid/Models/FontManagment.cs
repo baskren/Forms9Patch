@@ -41,105 +41,160 @@ namespace Forms9Patch.Droid
             return null;
         }
 
-        public static Typeface TypefaceForFontFamily(string fontFamily, Assembly assembly = null)
+        //static Typeface _droidSans;
+        static Typeface DroidSans => Typeface.SansSerif;
+        /*
+    {
+        get
         {
-            //string fontFilePath;
-            if (fontFamily == null)
-                //return Typeface.Default;
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = Typeface.SansSerif;
+            if (_droidSans!=null)
+                return _droidSans;
+            _droidSans = TrySystemFont("Roboto");
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = TrySystemFont("Droid Sans");
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = TrySystemFont("DroidSans");
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = TrySystemFont("Roboto");
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = TrySystemFont("sans-serif");
+            if (_droidSans != null)
+                return _droidSans;
+            _droidSans = TrySystemFont("normal");
+            if (_droidSans != null)
+                return _droidSans;
+            return _droidSans;
+        }
+    }
+    */
+
+        //static Typeface _monoSpace;
+        static Typeface MonoSpace => Typeface.Monospace;
+        /*
+        {
+            get
+            {
+                if (_monoSpace != null)
+                    return _monoSpace;
+                _monoSpace = TrySystemFont("monospace");
+                if (_monoSpace != null)
+                    return _monoSpace;
+                _monoSpace = TrySystemFont("Droid Sans Mono");
+                if (_monoSpace != null)
+                    return _monoSpace;
+                return _monoSpace;
+            }
+        }
+        */
+
+        //static Typeface _serif;
+        static Typeface Serif => Typeface.Serif;
+        /*
+        {
+            get
+            {
+                if (_serif != null)
+                    return _serif;
+                _serif = TrySystemFont("serif");
+                if (_serif != null)
+                    return _serif;
+                _serif = TrySystemFont("Droid Serif");
+                if (_serif != null)
+                    return _serif;
+                return _serif;
+            }
+        }
+        */
+
+        public static Typeface TypefaceForFontFamily(string fontFamilys, Assembly assembly = null)
+        {
+            if (string.IsNullOrWhiteSpace(fontFamilys))
                 return null;
-
-            Typeface result;
-
-            if (fontFamily.ToLower() == "monospace")
+            var fontFamiliesList = fontFamilys.Split(',');
+            if (fontFamiliesList != null && fontFamiliesList.Count() > 0)
             {
-                result = TrySystemFont("monospace");
-                if (result != null)
-                    return result;
-                result = TrySystemFont("Droid Sans Mono");
-                if (result != null)
-                    return result;
-
-            }
-            if (fontFamily.ToLower() == "serif")
-            {
-                result = TrySystemFont("serif");
-                if (result != null)
-                    return result;
-                result = TrySystemFont("Droid Serif");
-                if (result != null)
-                    return result;
-            }
-            if (fontFamily.ToLower() == "sans-serif")
-            {
-                result = TrySystemFont("sans-serif");
-                if (result != null)
-                    return result;
-                result = TrySystemFont("normal");
-                if (result != null)
-                    return result;
-                result = TrySystemFont("Roboto");
-                if (result != null)
-                    return result;
-                result = TrySystemFont("Droid Sans");
-                if (result != null)
-                    return result;
-            }
-
-            result = TrySystemFont(fontFamily);
-            if (result != null)
-                return result;
-
-            if (fontFamily.Contains(".Resources.Fonts."))
-            {
-
-                // it's an Embedded Resource
-                if (!fontFamily.ToLower().EndsWith(".ttf") && !fontFamily.ToLower().EndsWith(".otf"))
-                    throw new InvalidObjectException("Embedded Font file names must end with \".ttf\" or \".otf\".");
-                // what is the assembly?
-                /*
-                var assemblyName = fontFamily.Substring(0, fontFamily.IndexOf(".Resources.Fonts."));
-
-                //var assembly = System.Reflection.Assembly.Load (assemblyName);
-                var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName) ?? Forms9Patch.Droid.Settings.ApplicationAssembly;
-
-                if (assembly == null)
+                foreach (var fontFamilyString in fontFamiliesList)
                 {
-                    // try using the current application assembly instead (as is the case with Shared Applications)
-                    assembly = ReflectionExtensions.GetAssemblyByName(assemblyName + ".Droid");
-                    ///System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
-                    //return null;
-                }
-                */
-                // move it to the Application's CustomFontDirRoot
-                using (var inputStream = EmbeddedResourceCache.GetStream(fontFamily, assembly))
-                {
-                    if (inputStream == null)
-                    {
-                        System.Console.WriteLine("Embedded Resource for FontFamily \"" + fontFamily + "\" not found.");
-                        return null;
-                    }
+                    var fontFamily = fontFamilyString?.Trim().Trim(';');
+                    if (string.IsNullOrWhiteSpace(fontFamily))
+                        continue;
 
-                    var cachedFontDir = new File(CustomFontDirRoot + "/ResourceFonts");
-                    if (!cachedFontDir.Exists())
-                        cachedFontDir.Mkdir();
+                    Typeface result;
 
-                    var cachedFontFile = new File(cachedFontDir, fontFamily);
-                    using (var outputStream = new FileOutputStream(cachedFontFile))
+                    if (fontFamily.ToLower() == "monospace" && MonoSpace != null)
+                        return MonoSpace;
+                    if (fontFamily.ToLower() == "serif" && Serif != null)
+                        return Serif;
+                    if (fontFamily.ToLower() == "sans-serif" && DroidSans != null)
+                        return DroidSans;
+
+                    result = TrySystemFont(fontFamily);
+                    if (result != null)
+                        return result;
+
+                    if (DroidSans != null && (fontFamily.ToLower() == "arial" || fontFamily.ToLower() == "helvetica"))
+                        return DroidSans;
+
+                    if (fontFamily.Contains(".Resources."))
                     {
-                        const int bufferSize = 1024;
-                        var buffer = new byte[bufferSize];
-                        int length = -1;
-                        while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
-                            outputStream.Write(buffer, 0, length);
+
+                        // it's an Embedded Resource
+                        if (!fontFamily.ToLower().EndsWith(".ttf") && !fontFamily.ToLower().EndsWith(".otf"))
+                            throw new InvalidObjectException("Embedded Font file names must end with \".ttf\" or \".otf\".");
+                        // what is the assembly?
+                        /*
+                        var assemblyName = fontFamily.Substring(0, fontFamily.IndexOf(".Resources.Fonts."));
+
+                        //var assembly = System.Reflection.Assembly.Load (assemblyName);
+                        var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName) ?? Forms9Patch.Droid.Settings.ApplicationAssembly;
+
+                        if (assembly == null)
+                        {
+                            // try using the current application assembly instead (as is the case with Shared Applications)
+                            assembly = ReflectionExtensions.GetAssemblyByName(assemblyName + ".Droid");
+                            ///System.Console.WriteLine ("Assembly for FontFamily \"" + fontFamily + "\" not found.");
+                            //return null;
+                        }
+                        */
+                        // move it to the Application's CustomFontDirRoot
+                        using (var inputStream = EmbeddedResourceCache.GetStream(fontFamily, assembly))
+                        {
+                            if (inputStream == null)
+                            {
+                                System.Console.WriteLine("Embedded Resource for FontFamily \"" + fontFamily + "\" not found.");
+                                return null;
+                            }
+
+                            var cachedFontDir = new File(CustomFontDirRoot + "/ResourceFonts");
+                            if (!cachedFontDir.Exists())
+                                cachedFontDir.Mkdir();
+
+                            var cachedFontFile = new File(cachedFontDir, fontFamily);
+                            using (var outputStream = new FileOutputStream(cachedFontFile))
+                            {
+                                const int bufferSize = 1024;
+                                var buffer = new byte[bufferSize];
+                                int length = -1;
+                                while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                                    outputStream.Write(buffer, 0, length);
+                            }
+                            Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
+                            if (typeface == null)
+                            {
+                                System.Console.WriteLine("Embedded Resource font file (" + fontFamily + ") could not be loaded as an Android Typeface.");
+                                return null;
+                            }
+                            _fontFiles.Add(fontFamily, cachedFontFile.AbsolutePath);
+                            return typeface;
+                        }
                     }
-                    Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
-                    if (typeface == null)
-                    {
-                        System.Console.WriteLine("Embedded Resource font file (" + fontFamily + ") could not be loaded as an Android Typeface.");
-                        return null;
-                    }
-                    _fontFiles.Add(fontFamily, cachedFontFile.AbsolutePath);
-                    return typeface;
                 }
             }
             return null;
@@ -337,13 +392,13 @@ namespace Forms9Patch.Droid
                                     //return new String( table, name_offset, name_length );
                                     //char[] chars = new char[name_length];
                                     /*
-									System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
-									*/
+                                    System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
+                                    */
                                     /*
-									for(int nameI=0;nameI<name_length;nameI++) {
-										chars [nameI] = (char)table [name_offset + nameI];
-									}
-									*/
+                                    for(int nameI=0;nameI<name_length;nameI++) {
+                                        chars [nameI] = (char)table [name_offset + nameI];
+                                    }
+                                    */
                                     byte[] chars = new byte[name_length];
                                     System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
                                     //var str = new string(chars);
@@ -447,13 +502,13 @@ namespace Forms9Patch.Droid
                                     //return new String( table, name_offset, name_length );
                                     //char[] chars = new char[name_length];
                                     /*
-									System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
-									*/
+                                    System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
+                                    */
                                     /*
-									for(int nameI=0;nameI<name_length;nameI++) {
-										chars [nameI] = (char)table [name_offset + nameI];
-									}
-									*/
+                                    for(int nameI=0;nameI<name_length;nameI++) {
+                                        chars [nameI] = (char)table [name_offset + nameI];
+                                    }
+                                    */
                                     byte[] chars = new byte[name_length];
                                     System.Buffer.BlockCopy(table, name_offset, chars, 0, name_length);
                                     //var str = new string(chars);

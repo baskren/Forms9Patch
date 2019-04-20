@@ -23,8 +23,10 @@ namespace Forms9Patch.Droid
         /// <value>The context.</value>
         public static Android.Content.Context Context
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             get => _context ?? Xamarin.Forms.Forms.Context;
-            private set =>_context = value;
+#pragma warning restore CS0618 // Type or member is obsolete
+            private set => _context = value;
         }
 
         public static Android.OS.Bundle Bundle { get; private set; }
@@ -57,5 +59,35 @@ namespace Forms9Patch.Droid
             Rg.Plugins.Popup.Popup.Init(Activity, null);
         }
         #endregion
+    }
+}
+
+namespace Forms9Patch
+{
+    internal class LinkerInclude
+    {
+        public BaseCellView Include(BaseCellView view)
+            => new BaseCellView();
+
+        public GroupHeaderView Include(GroupHeaderView view)
+            => new GroupHeaderView();
+
+        public BlankCellView Include(BlankCellView view)
+            => new BlankCellView();
+
+        public NullItemCellView Include(NullItemCellView view)
+            => new NullItemCellView();
+
+        public TextCellViewContent Include(TextCellViewContent view)
+            => new TextCellViewContent();
+
+        public HeaderCell<Label> Include(HeaderCell<Label> cell)
+            => new HeaderCell<Label>();
+
+        public ItemCell<Label> Include(ItemCell<Label> cell)
+            => new ItemCell<Label>();
+
+        public Cell<Label> Include(Cell<Label> cell)
+            => new Cell<Label>();
     }
 }
