@@ -13,7 +13,7 @@ The following properties and methods are common to all Forms9Patch popups, excep
 - `BackgroundImage`: The `Forms9Patch.Image` displayed as the popup's background.
 - `BackgroundColor`: popup's optional background color.
 - `PopAfter`: the `TimeSpan`, after appearing, at which the popup will pop (disappear) without user interaction.  Popup will not pop itself when `PopAfter` is zero (default) or negative.
-- `HasShadow`: one more time ... that actually works on Android.  Has no effect when BackgroundColor has not been set.
+- `HasShadow`: one more time ... this actually works on Android.  Has no effect when BackgroundColor has not been set.
 - `OutlineColor`: optional outline color.
 - `OutlineWidth`: width of optional outline.
 - `OutlineRadius`: outline's corner radius.

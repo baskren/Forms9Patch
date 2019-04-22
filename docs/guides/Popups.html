@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="forms9patch-popups">Forms9Patch Popups</h1>
 
-<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
+<p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a eight (ModalPopup, BubblePopup, FlyoutPopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
 <p>As of Forms9Patch version 1.5.0.5,  <code>Forms9Patch.RootPage</code> is no longer needed to enable popups <strong>AND</strong> Forms9Patch popups work with pages that have been presented modally.</p>
 <h2 id="common-properties-methods-and-events">Common Properties, Methods and Events</h2>
 <p>The following properties and methods are common to all Forms9Patch popups, except <code>ActivityIndicatorPopup</code>:</p>
@@ -142,6 +142,22 @@
 <tr>
 <th><img src="images/Popups/Bubble-iOS.gif" alt="Bubble-iOS.gif"></th>
 <th><img src="images/Popups/Bubble-droid.gif" alt="Bubble-droid.gif"></th>
+</tr>
+</thead>
+</table>
+<h2 id="forms9patchflyoutpopup">Forms9Patch.FlyoutPopup</h2>
+<p>Another popup missing is a flyout - to present content such as menus or master control views.  Give <code>Forms9Patch.FlyoutPopup</code> some content to display, set <code>IsVisible=true</code> and it will by default have it flyout from the left edge of the current Page.  Change the <code>Orientation</code> property to have the flyout come from left/right (<code>Horizontal</code>) or top/bottom (<code>Vertical</code>).  Change the <code>Alignment</code> property to switch between left or right (<code>Start</code> or <code>End</code>) for <code>Horizontal</code> orientation and between top or bottom (<code>Start</code> or <code>End</code>) for <code>Vertical</code> orientation.  Want to be sure the width (for <code>Horizontal</code> orientation) is fixed?  Set the <code>WidthRequest</code> of your <code>Content</code> and it will use that to determine the flyout's width.  Likewise, set the <code>Content's</code> <code>HeightRequest</code> for <code>Vertical</code> flyouts.</p>
+<p>Note that FlyoutPopup also does the hard work of figuring out where the SafeArea is for your content.  You can see that in action in the below GIF.</p>
+<h3 id="forms9patchflyoutpopup-unique-properties">Forms9Patch.FlyoutPopup Unique Properties</h3>
+<ul>
+<li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
+<li><code>Orientation</code>: Is the popup going to be flyin horizontally or verically?</li>
+<li><code>Alignment</code>: Is the popup going to be at the left\top (<code>Start</code>) or right\bottom (<code>End</code>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><img src="images/Popups/Flyout-iOS.gif" alt="Flyout-iOS.gif"></th>
 </tr>
 </thead>
 </table>

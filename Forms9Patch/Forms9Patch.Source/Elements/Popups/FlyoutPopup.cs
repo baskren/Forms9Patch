@@ -72,6 +72,7 @@ namespace Forms9Patch
                 OutlineRadius = 0,
                 BackgroundColor = BackgroundColor
             };
+            Margin = 0;
             DecorativeContainerView = _frame;
             UpdateBaseLayoutProperties();
         }
@@ -131,26 +132,18 @@ namespace Forms9Patch
                         ? LayoutOptions.Start
                         : LayoutOptions.End;
 
-                var left = Orientation == StackOrientation.Horizontal
-                    ? Alignment == FlyoutAlignment.Start
-                        ? Padding.Left + SystemPadding.Left
-                        : Padding.Left
+                var left = Orientation == StackOrientation.Horizontal && Alignment == FlyoutAlignment.Start
+                    ? Padding.Left + Math.Max(SystemPadding.Left - Margin.Left, 0)
                     : Padding.Left;
-                var right = Orientation == StackOrientation.Horizontal
-                    ? Alignment == FlyoutAlignment.Start
-                        ? Padding.Right
-                        : Padding.Right + SystemPadding.Right
+                var right = Orientation == StackOrientation.Horizontal && Alignment == FlyoutAlignment.End
+                    ? Padding.Right + Math.Max(SystemPadding.Right - Margin.Right, 0)
                     : Padding.Right;
-                var top = Orientation == StackOrientation.Vertical
-                    ? Alignment == FlyoutAlignment.Start
-                        ? Padding.Top + SystemPadding.Top
-                        : Padding.Top
-                    : Padding.Top + SystemPadding.Top;
-                var bottom = Orientation == StackOrientation.Vertical
-                    ? Alignment == FlyoutAlignment.Start
-                        ? Padding.Bottom
-                        : Padding.Bottom + SystemPadding.Bottom
-                    : Padding.Bottom + SystemPadding.Bottom;
+                var top = Orientation == StackOrientation.Vertical && Alignment == FlyoutAlignment.End
+                    ? Padding.Top
+                    : Padding.Top + Math.Max(SystemPadding.Top - Margin.Top, 0);
+                var bottom = Orientation == StackOrientation.Vertical && Alignment == FlyoutAlignment.Start
+                    ? Padding.Bottom
+                    : Padding.Bottom + Math.Max(SystemPadding.Bottom - Margin.Bottom, 0);
                 _frame.Padding = new Thickness(left, top, right, bottom);
 
                 _frame.IsVisible = true;
@@ -160,18 +153,8 @@ namespace Forms9Patch
 
 
 
-                //var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
-                //var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
-                var availWidth = Orientation == StackOrientation.Horizontal
-                    ? Alignment == FlyoutAlignment.Start
-                        ? width - (Margin.Right - _frame.Padding.HorizontalThickness)
-                        : width - (Margin.Left - _frame.Padding.HorizontalThickness)
-                    : width - _frame.Padding.HorizontalThickness;
-                var availHeight = Orientation == StackOrientation.Vertical
-                    ? Alignment == FlyoutAlignment.Start
-                        ? height - (Margin.Bottom - _frame.Padding.VerticalThickness)
-                        : height - (Margin.Top - _frame.Padding.VerticalThickness)
-                    : height - _frame.Padding.VerticalThickness;
+                var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
+                var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
 
                 if (Orientation == StackOrientation.Horizontal)
                     availWidth = _frame.Content.WidthRequest > 0 ? _frame.Content.WidthRequest : 200;
@@ -195,15 +178,15 @@ namespace Forms9Patch
 
                 double contentX = Orientation == StackOrientation.Horizontal
                     ? Alignment == FlyoutAlignment.Start
-                        ? -shadowPadding.Left
-                        : width + shadowPadding.Right - rboxSize.Width
-                    : -shadowPadding.Left;
+                        ? -shadowPadding.Left + Margin.Left
+                        : width + shadowPadding.Right - rboxSize.Width - Margin.Right
+                    : -shadowPadding.Left + Margin.Left;
 
                 double contentY = Orientation == StackOrientation.Vertical
                     ? Alignment == FlyoutAlignment.Start
-                        ? -shadowPadding.Top
-                        : height + shadowPadding.Bottom - rboxSize.Height
-                    : -shadowPadding.Top;
+                        ? -shadowPadding.Top + Margin.Top
+                        : height + shadowPadding.Bottom - rboxSize.Height - Margin.Bottom
+                    : -shadowPadding.Top + Margin.Top;
 
                 var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
                 //System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
