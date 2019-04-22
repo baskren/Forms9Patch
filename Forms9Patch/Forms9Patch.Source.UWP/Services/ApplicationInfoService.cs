@@ -11,7 +11,7 @@ namespace Forms9Patch.UWP
 {
     public class ApplicationInfoService : IApplicationInfoService
     {
-        public string Version => Package.Current.Id.Version.Major + "." + Package.Current.Id.Version.Minor + "." + Package.Current.Id.Version.Revision;
+        public string Version => Package.Current.Id.Version.Major + "." + Package.Current.Id.Version.Minor; // + "." + Package.Current.Id.Version.Revision;
 
         public int Build => Package.Current.Id.Version.Build;
 
