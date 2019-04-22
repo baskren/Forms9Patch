@@ -56,10 +56,11 @@ The three Forms9Patch button elements are:
 - `Forms9Patch.StateButton`: a further enhanced implementation of `Forms9Patch.Button` that allow most enhanced properties to be configured by the button's state (Default, Pressing, Selected, Disabled, DisabledAndSelected) 
 - `Forms9Patch.SegmentControl`: a segmented button control that allows for border, separator, and shadow control.  Note that there is currently no support for background images.
 
-Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (outline and background image capabilities) that rendere with full page overlay backgrounds and the ability to be canceled by tapping the background.  These popup elements are:
+Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (outline and background image capabilities) that renders with full page overlay backgrounds and the ability to be canceled by tapping the background.  These popup elements are:
 
 - `Forms9Patch.ModalPopup`: takes the enhancements (borders; patch-scalable, tintable, tile-able background images; shadows) from `Forms9Patch.Frame` and puts it into a pop-up layout.
 - `Forms9Patch.BubblePopup`: goes a step further than `Forms9Patch.ModalPopup` by pointing to a target `Xamarin.Forms.VisualElement`.  The pointer has `PointerLength`, `PointerTipRadius` and `PointerCornerRadius` properties.
+- `Forms9Patch.FlyoutPopup`: a popup that "flies out" from a side of the display.  Great for custom menus!
 - `Forms9Patch.ActivityIndicatorPopup`: a convenience element that presents a `Xamarin.Forms.ActivityIndicator` over a page overlay.
 - `Forms9Patch.Toast`: a convenience element that presents a title, a message and an optional confirmation button.
 - `Forms9Patch.PermissionPopup`: a convenience element that presents a title, a message, and an accept and a decline button.

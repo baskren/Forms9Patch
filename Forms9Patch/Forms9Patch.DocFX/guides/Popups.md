@@ -1,6 +1,6 @@
 # Forms9Patch Popups
 
-Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a seven (ModalPopup, BubblePopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the `Xamarin.Forms.MasterDetailPage`.
+Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a eight (ModalPopup, BubblePopup, FlyoutPopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the `Xamarin.Forms.MasterDetailPage`.
 
 As of Forms9Patch version 1.5.0.5,  `Forms9Patch.RootPage` is no longer needed to enable popups **AND** Forms9Patch popups work with pages that have been presented modally.
 
@@ -64,6 +64,21 @@ The popup that is missing from both Xamarin.Forms and Android is a pointer bubbl
 
 | ![Bubble-iOS.gif](images/Popups/Bubble-iOS.gif) | ![Bubble-droid.gif](images/Popups/Bubble-droid.gif) |
 | --- | --- |
+
+## Forms9Patch.FlyoutPopup
+
+Another popup missing is a flyout - to present content such as menus or master control views.  Give `Forms9Patch.FlyoutPopup` some content to display, set `IsVisible=true` and it will by default have it flyout from the left edge of the current Page.  Change the `Orientation` property to have the flyout come from left/right (`Horizontal`) or top/bottom (`Vertical`).  Change the `Alignment` property to switch between left or right (`Start` or `End`) for `Horizontal` orientation and between top or bottom (`Start` or `End`) for `Vertical` orientation.  Want to be sure the width (for `Horizontal` orientation) is fixed?  Set the `WidthRequest` of your `Content` and it will use that to determine the flyout's width.  Likewise, set the `Content's` `HeightRequest` for `Vertical` flyouts.  
+
+Note that FlyoutPopup also does the hard work of figuring out where the SafeArea is for your content.  You can see that in action in the below GIF.
+
+### Forms9Patch.FlyoutPopup Unique Properties
+
+- `Content`: The `VisualElement` that will be the content for the popview.  Layouts and Views are fair game.
+- `Orientation`: Is the popup going to be flyin horizontally or verically?
+- `Alignment`: Is the popup going to be at the left\top (`Start`) or right\bottom (`End`)
+
+| ![Flyout-iOS.gif](images/Popups/Flyout-iOS.gif) |
+| --- |
 
 ## Forms9Patch.Toast
 
