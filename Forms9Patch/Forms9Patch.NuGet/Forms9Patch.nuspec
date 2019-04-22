@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.6.7.1</version>
+        <version>1.7.0.0</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,9 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.7.0.0: New: FlyoutPopup makes it easy to create flyout views that dock on the left, right, top or bottom sides of the screen.
+    1.6.7.3: Fixed: ModalPopup not centered set to LayoutOption.Fill; Updates: replaced iOS deprecated methods layoutManager.LineFragmentRectForGlyphAtIndex and layou;tManager.CharacterIndexForPoint; Xamarin.Android.Arch.Core packages from 1.0.3.1 to 1.1.1.1;
+    1.6.7.2: Doh! Forgot to merge enhancement meant for 1.6.7.1;
     1.6.7.1: Fixed: Intermittant failure of UWP Label to update when Text or HtmlText changes; Crash when SegmentControl.Segments.Clear() is called on empty Segments collection; Forms9Patch.Image does not update BindingContext of active ImageSource; Enhanced: HtmlText now accepts [ ' ] character as quotation mark for tag attributes;
     1.6.7: Fixed: Label Autofit in Android fails if the system font size has been changed (via device's settings);  SegmentedControl randomly has spaces between segments; Segmented labels in UWP may slowly shrink to MinFontSize when SyncSegmentFontSizes is enabled;
     1.6.6.2: Fixed: Label on Android upsizing the font beyond FontSize causing text to be truncated or not appear; Up gestures are not being triggered on Android (not a FormsGestures issue) causing button taps not to fire; New: Added async Task&lt;PopupPoppedEventArgs&gt; DelayUntilPoppedAsync() to allow inline wait until popup has been popped; Refactored: CancelAsync and PopAsync to accept a "trigger" that is the cause of the action; Added Console.WriteLines to better message when an ImageResource is not found;

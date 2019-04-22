@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// A popup that enters from the side of the screen and stops at the same side.  Great for notificaitons or menus.
+    /// </summary>
     public class FlyoutPopup : PopupBase
     {
         #region Properties
@@ -77,14 +80,25 @@ namespace Forms9Patch
             UpdateBaseLayoutProperties();
         }
 
+        /// <summary>
+        /// Construct new FlyoutPopup
+        /// </summary>
+        /// <param name="retain">Do not Dispose for faster re-rendering of complex content</param>
+        /// <param name="popAfter">Flyout will dissappear after popAfter</param>
         public FlyoutPopup(bool retain = false, TimeSpan popAfter = default) : base(retain: retain, popAfter: popAfter) => Init();
 
+        /// <summary>
+        /// Construct new FlyoutPopup
+        /// </summary>
+        /// <param name="popAfter">Flyout will dissappear after popAfter</param>
         public FlyoutPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
         #endregion
 
 
         #region Property change management
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         protected override void OnPropertyChanged(string propertyName = null)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             base.OnPropertyChanged(propertyName);
             if (propertyName == OrientationProperty.PropertyName || propertyName == AlignmentProperty.PropertyName)
@@ -107,7 +121,9 @@ namespace Forms9Patch
 
 
         #region Layout
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         protected override void LayoutChildren(double x, double y, double width, double height)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             if (_frame?.Content == null)
                 return;
@@ -200,27 +216,5 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Animation
-        protected override void OnAppearingAnimationBegin()
-        {
-
-            base.OnAppearingAnimationBegin();
-        }
-
-        protected override void OnAppearingAnimationEnd()
-        {
-            base.OnAppearingAnimationEnd();
-        }
-
-        protected override void OnDisappearingAnimationBegin()
-        {
-            base.OnDisappearingAnimationBegin();
-        }
-
-        protected override Task OnAppearingAnimationEndAsync()
-        {
-            return base.OnAppearingAnimationEndAsync();
-        }
-        #endregion
     }
 }
