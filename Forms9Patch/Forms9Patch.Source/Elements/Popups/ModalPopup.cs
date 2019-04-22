@@ -144,20 +144,6 @@ namespace Forms9Patch
 
 
         #region Layout
-        /*
-        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            var result =  base.OnMeasure(widthConstraint, heightConstraint);
-            if (Parent is PopupBase popupBase)
-            {
-                var request = new Size(result.Request.Width + popupBase.Padding.HorizontalThickness, result.Request.Height + popupBase.Padding.VerticalThickness);
-                var min = new Size(result.Minimum.Width + popupBase.Padding.HorizontalThickness, result.Minimum.Height + popupBase.Padding.VerticalThickness);
-                result = new SizeRequest(request, min);
-            }
-            return result;
-        }
-        */
-
         /// <param name="x">A value representing the x coordinate of the child region bounding box.</param>
         /// <param name="y">A value representing the y coordinate of the child region bounding box.</param>
         /// <param name="width">A value representing the width of the child region bounding box.</param>
