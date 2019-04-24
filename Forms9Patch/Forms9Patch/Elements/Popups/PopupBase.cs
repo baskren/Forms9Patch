@@ -19,7 +19,7 @@ namespace Forms9Patch
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty("ContentView")]
-    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage,  /* Xamarin.Forms.Layout<View>,*/ IDisposable, IPopup //Xamarin.Forms.Layout<View>, IShape
+    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage, IDisposable, IPopup
 
     {
         /// <summary>
@@ -509,12 +509,15 @@ namespace Forms9Patch
             IsAnimationEnabled = false;
 
             PopAfter = popAfter;
+
+
         }
 
         #endregion
 
 
         #region Cancelation
+
         /// <summary>
         /// Called when back button is pressed
         /// </summary>
@@ -527,6 +530,7 @@ namespace Forms9Patch
                 CancelAsync(PopupPoppedCause.HardwareBackButtonPressed);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             return CancelOnBackButtonClick;
+
         }
 
         /// <summary>
@@ -624,6 +628,7 @@ namespace Forms9Patch
             layout.ElementShape = ElementShape;
             //layout.ExtendedElementShape = ((ILayout)this).ExtendedElementShape;
 
+
             #endregion IShape
 
             #endregion IBackground
@@ -663,9 +668,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPushing = true;
-            //IsVisible = true;
             base.OnAppearingAnimationBegin();
         }
 

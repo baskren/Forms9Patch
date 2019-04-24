@@ -28,4 +28,20 @@
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\rocket.png" />
+    <None Remove="Resources\rocket%401½x.png" />
+    <None Remove="Resources\rocket%402x.png" />
+    <None Remove="Resources\rocket%403x.png" />
+    <None Remove="Resources\rocket%404x.png" />
+    <None Remove="Resources\rocket%40¾x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\rocket.png" />
+    <EmbeddedResource Include="Resources\rocket%401½x.png" />
+    <EmbeddedResource Include="Resources\rocket%402x.png" />
+    <EmbeddedResource Include="Resources\rocket%403x.png" />
+    <EmbeddedResource Include="Resources\rocket%404x.png" />
+    <EmbeddedResource Include="Resources\rocket%40¾x.png" />
+  </ItemGroup>
 </Project>

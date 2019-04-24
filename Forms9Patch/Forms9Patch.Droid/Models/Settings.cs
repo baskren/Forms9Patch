@@ -42,11 +42,23 @@ namespace Forms9Patch.Droid
             _initizalized = true;
             Activity = activity;
             Context = activity as Android.Content.Context;
+            // these don't work because we get the notification AFTER Xamarin did ... and it runs through all of the subscribers anyway.
+            //Xamarin.Forms.Platform.Android.FormsAppCompatActivity.BackPressed += OnBackPressed;
+            //Xamarin.Forms.Platform.Android.FormsApplicationActivity.BackPressed += OnBackPressed;
             FormsGestures.Droid.Settings.Init(Context);
             Rg.Plugins.Popup.Popup.Init(Activity, null);
             if (licenseKey != null)
                 System.Console.WriteLine("Forms9Patch is now open source using the MIT license ... so it's free, including for commercial use.  Why?  The more people who use it, the faster bugs will be found and fixed - which helps me and you.  So, please help get the word out - tell your friends, post on social media, write about it on the bathroom walls at work!  If you have purchased a license from me, please don't get mad - you did a good deed.  They really were not that expensive and you did a great service in encouraging me keep working on Forms9Patch.");
         }
+
+        private static bool OnBackPressed(object sender, EventArgs e)
+        {
+
+            var result = Rg.Plugins.Popup.Popup.SendBackPressed();
+            System.Diagnostics.Debug.WriteLine("result=[" + result + "]");
+            return result;
+        }
+
 
         static bool _initizalized;
         void ISettings.LazyInit()

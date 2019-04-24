@@ -4,6 +4,31 @@ Yet another thing missing from Xamarin Forms is a comprehensive set of popup vie
 
 As of Forms9Patch version 1.5.0.5,  `Forms9Patch.RootPage` is no longer needed to enable popups **AND** Forms9Patch popups work with pages that have been presented modally.
 
+## Android Note
+
+You will need to add the following `OnBackButtonPressed` code to your Android application's `MainActivity` in order to have popups respond to the Android hardware backbutton.
+
+```
+    public class MainActivity : FormsApplicationActivity
+    {
+        ... 
+        
+        public override void OnBackPressed()
+        {
+            if (Forms9Patch.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // do something here if there are some popups in the popup stack
+            }
+            else
+            {
+                // do something else if there are not any popups in the popup stack
+            }
+        }
+        
+        ...
+    }
+```
+
 ## Common Properties, Methods and Events
 
 The following properties and methods are common to all Forms9Patch popups, except `ActivityIndicatorPopup`:

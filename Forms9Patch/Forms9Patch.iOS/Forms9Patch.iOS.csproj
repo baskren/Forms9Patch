@@ -131,7 +131,6 @@
     <Compile Include="Services\HtmlToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
     <Compile Include="Services\KeyClicksService.cs" />
-    <Compile Include="Services\ListViewExtensionService_iOS.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Services\WebViewExtensionsService.cs" />

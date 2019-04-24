@@ -39,6 +39,18 @@ namespace Forms9PatchDemo.Droid
             return base.OnKeyDown(keyCode, e);
         }
 
+
+        public override void OnBackPressed()
+        {
+            if (Forms9Patch.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // do something here if there are some popups in the popup stack
+            }
+            else
+            {
+                // do something else if there are not any popups in the popup stack
+            }
+        }
     }
 }
 

@@ -144,6 +144,40 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\BaselineSpan.cs" />
+    <Compile Include="Models\CustomTypefaceSpan.cs" />
+    <Compile Include="Models\FontManagment.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Clipboard-Sharing\ClipboardService.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemCollection.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemCollectionExtensions.cs" />
+    <Compile Include="Clipboard-Sharing\ReturnMimeItem.cs" />
+    <Compile Include="Clipboard-Sharing\SharingService.cs" />
+    <Compile Include="Clipboard-Sharing\TypeExtensions.cs" />
+    <Compile Include="Effects\CustomFontEffect.cs" />
+    <Compile Include="Effects\SliderStepSizeEffect.cs" />
+    <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Extensions\AndroidViewExtensions.cs" />
+    <Compile Include="Extensions\FormattedStringExtensions.cs" />
+    <Compile Include="Extensions\LineBreakModeExtension.cs" />
+    <Compile Include="Extensions\MeasureSpecFactory.cs" />
+    <Compile Include="HardwareKeyListener\HardwareKeyListener.cs" />
+    <Compile Include="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
+    <Compile Include="PlatformViews\F9PTextView.cs" />
+    <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
+    <Compile Include="Renderers\EnhancedListViewRenderer.cs" />
+    <Compile Include="Renderers\HardwareKeyPageRenderer.cs" />
+    <Compile Include="Renderers\LabelRenderer.cs" />
+    <Compile Include="Renderers\PageRenderer.cs" />
+    <Compile Include="Services\ApplicationInfoService.cs" />
+    <Compile Include="Services\DescendentBounds.cs" />
+    <Compile Include="Services\FontService.cs" />
+    <Compile Include="Services\HtmlToPngService.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
+    <Compile Include="Services\KeyClicksService.cs" />
+    <Compile Include="Services\OsInfoService.cs" />
+    <Compile Include="Services\WebViewExtensionsService.cs" />
+    <Compile Include="Models\Popup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">

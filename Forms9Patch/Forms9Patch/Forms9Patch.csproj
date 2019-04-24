@@ -27,6 +27,16 @@
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Fonts\STIXGeneral.otf" />
+    <None Remove="Resources\ic_navigate_before_white_24px.svg" />
+    <None Remove="Resources\ic_navigate_next_white_24px.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
+    <EmbeddedResource Include="Resources\ic_navigate_before_white_24px.svg" />
+    <EmbeddedResource Include="Resources\ic_navigate_next_white_24px.svg" />
+  </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  
     <Message Text="SolutionName = $(SolutionName)" Importance="High" />
