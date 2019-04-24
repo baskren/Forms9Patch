@@ -668,6 +668,10 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
+            if (Device.RuntimePlatform==Device.UWP)
+            {
+                //var mainPage = 
+            }
             _isPushing = true;
             base.OnAppearingAnimationBegin();
         }

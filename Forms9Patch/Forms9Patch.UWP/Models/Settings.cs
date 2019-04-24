@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Forms9Patch.UWP.Settings))]
@@ -16,6 +18,8 @@ namespace Forms9Patch.UWP
         #region Initialization
         public static void Initialize(Windows.UI.Xaml.Application app, string licenseKey = null)
         {
+            //Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+
             _initizalized = true;
             Xamarin.Forms.DependencyService.Register<ApplicationInfoService>();
             Xamarin.Forms.DependencyService.Register<DescendentBounds>();
@@ -52,6 +56,48 @@ namespace Forms9Patch.UWP
 
 
         #endregion
+
+        public static void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            var popupNavigationInstance = Rg.Plugins.Popup.Services.PopupNavigation.Instance;
+            //e.Handled = false;
+            if (popupNavigationInstance.PopupStack.Count > 0)
+            {
+                var lastPage = popupNavigationInstance.PopupStack.Last();
+
+                var isPreventClose = // lastPage.IsBeingDismissed || 
+                    lastPage.SendBackButtonPressed();
+
+                if (!isPreventClose)
+                {
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await popupNavigationInstance.PopAsync();
+                    });
+                }
+
+                e.Handled = true;
+                /*
+                //Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+                var b = Windows.UI.Core.SystemNavigationManager.GetForCurrentView();
+                var fields = typeof(Windows.UI.Core.SystemNavigationManager).GetFields();
+                var events = typeof(Windows.UI.Core.SystemNavigationManager).GetRuntimeEvents();
+                //EventInfo f1 = typeof(Windows.UI.Core.SystemNavigationManager).GetEvent("BackRequested", BindingFlags.Static | BindingFlags.NonPublic);
+                EventInfo f1 = null;
+                foreach (var evnt in events)
+                    if (evnt.Name == "BackRequested")
+                        f1 = evnt;
+                var remove = f1.GetRemoveMethod();
+                var methods = f1.GetOtherMethods();
+
+                //foreach (var method in methods)
+                //    f1.RemoveEventHandler(b, method);
+                */
+            }
+
+        }
+
+
 
 
         static Windows.UI.Xaml.ResourceDictionary GetResources()
@@ -121,6 +167,7 @@ namespace Forms9Patch.UWP
                 {
                     _assembliesToInclude = new List<Assembly>();
                     _assembliesToInclude.AddRange(Forms9PatchAssemblies);
+                    //_assembliesToInclude.AddRange(Rg.Plugins.Popup.Popup.GetExtraAssemblies());
                 }
                 return _assembliesToInclude;
             }

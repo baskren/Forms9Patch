@@ -136,56 +136,72 @@
       <Name>FormsGestures.UWP</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
+      <Project>{f103c9ce-8aa6-4a80-b69c-3abc8f063869}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
       <Project>{fd75461e-14e4-4f12-ba6b-2aeda6f99db7}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{ecc74f4c-8fb0-42c7-849a-43cdb3662608}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.UWP\P42.Utils.UWP.csproj">
+      <Project>{68b96681-ef89-4f47-96c9-65aa37883c0a}</Project>
+      <Name>P42.Utils.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{e609378f-e791-42c7-8c18-e99aee780ba3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
-      <Project>{b1ca1e82-65f0-4eed-beb6-e133fbd2c4d9}</Project>
+      <Project>{d5d3fd62-2b11-4c03-be94-776c79dd92c9}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Clipboard-Sharing\ClipboardService.cs" />
-    <None Include="Clipboard-Sharing\MimeItemCollection.cs" />
-    <None Include="Clipboard-Sharing\MimeItemExtensions.cs" />
-    <None Include="Clipboard-Sharing\ReturnMimeItem.cs" />
-    <None Include="Clipboard-Sharing\SharingService.cs" />
-    <None Include="Effects\EmbeddedResourceFontEffect.cs" />
-    <None Include="Effects\SliderStepSizeEffect.cs" />
-    <None Include="Extensions\AlignmentExtensions.cs" />
-    <None Include="Extensions\ColorExtensions.cs" />
-    <None Include="Extensions\FontExtensions.cs" />
-    <None Include="Extensions\FormattedStringExtensions.cs" />
-    <None Include="Extensions\FrameworkElementExtensions.cs" />
-    <None Include="Extensions\InLineExtensions.cs" />
-    <None Include="Extensions\OldFontExtensions-DELETEME.cs" />
-    <None Include="Extensions\TextBlockExtensions.cs" />
-    <None Include="Extensions\UwpWebViewExtensions.cs" />
-    <None Include="Extensions\XamarinSpanExtentions.cs" />
-    <None Include="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
-    <None Include="HardwareKeyListener\HardwareKeyListenerEffect.old.cs" />
-    <None Include="HardwareKeyListener\HardwareKeyPageRenderer.cs" />
-    <None Include="Models\MetaFont.cs" />
-    <None Include="Models\Settings.cs" />
-    <None Include="Models\SizeI.cs" />
-    <None Include="Properties\AssemblyInfo.cs" />
-    <None Include="Properties\Forms9Patch.UWP.rd.xml" />
-    <None Include="Renderers\EnhancedListViewRenderer.cs" />
-    <None Include="Renderers\LabeLRenderer.cs" />
-    <None Include="Services\ApplicationInfoService.cs" />
-    <None Include="Services\DescendentBounds.cs" />
-    <None Include="Services\DisplayService.cs" />
-    <None Include="Services\FontFamilies.cs" />
-    <None Include="Services\FontService.cs" />
-    <None Include="Services\HtmlToPngService.cs" />
-    <None Include="Services\KeyboardService.cs" />
-    <None Include="Services\OsInfoService.cs" />
-    <None Include="Services\WebViewExtensionService.cs" />
-    <None Include="EnhancedListView.Resources.xaml" />
+    <Compile Include="Clipboard-Sharing\ClipboardService.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemCollection.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemExtensions.cs" />
+    <Compile Include="Clipboard-Sharing\ReturnMimeItem.cs" />
+    <Compile Include="Clipboard-Sharing\SharingService.cs" />
+    <Compile Include="Effects\EmbeddedResourceFontEffect.cs" />
+    <Compile Include="Effects\SliderStepSizeEffect.cs" />
+    <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Extensions\FormattedStringExtensions.cs" />
+    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Extensions\InLineExtensions.cs" />
+    <Compile Include="Extensions\TextBlockExtensions.cs" />
+    <Compile Include="Extensions\UwpWebViewExtensions.cs" />
+    <Compile Include="Extensions\XamarinSpanExtentions.cs" />
+    <Compile Include="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
+    <Compile Include="HardwareKeyListener\HardwareKeyPageRenderer.cs" />
+    <Compile Include="Models\MetaFont.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\SizeI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\EnhancedListViewRenderer.cs" />
+    <Compile Include="Renderers\LabeLRenderer.cs" />
+    <Compile Include="Services\ApplicationInfoService.cs" />
+    <Compile Include="Services\DescendentBounds.cs" />
+    <Compile Include="Services\FontFamilies.cs" />
+    <Compile Include="Services\FontService.cs" />
+    <Compile Include="Services\HtmlToPngService.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
+    <Compile Include="Services\OsInfoService.cs" />
+    <Compile Include="Services\WebViewExtensionService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Forms9Patch.UWP.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="EnhancedListView.Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

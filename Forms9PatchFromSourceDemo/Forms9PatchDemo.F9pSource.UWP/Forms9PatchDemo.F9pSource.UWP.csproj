@@ -201,21 +201,25 @@
   </ItemGroup>
   <!-- Project References -->
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{b1ca1e82-65f0-4eed-beb6-e133fbd2c4d9}</Project>
-      <Name>Forms9Patch.XfNuget</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget.UWP\Forms9Patch.XfNuget.UWP.csproj">
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.UWP\Forms9Patch.UWP.csproj">
       <Project>{fc0ae786-b0f2-4f62-b898-e591b65014f0}</Project>
-      <Name>Forms9Patch.XfNuget.UWP</Name>
+      <Name>Forms9Patch.UWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{df8ffd84-30b8-40d4-ad7d-835b9a1f3d89}</Project>
-      <Name>FormsGestures.XfNuget</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{d5d3fd62-2b11-4c03-be94-776c79dd92c9}</Project>
+      <Name>Forms9Patch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.UWP\FormsGestures.XfNuget.UWP.csproj">
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.UWP\FormsGestures.UWP.csproj">
       <Project>{2eaa5d09-b436-40f8-a1f3-7e9acde2e8c0}</Project>
-      <Name>FormsGestures.XfNuget.UWP</Name>
+      <Name>FormsGestures.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{f103c9ce-8aa6-4a80-b69c-3abc8f063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{fbbb35d6-b52d-482b-98f7-53bb0548d2de}</Project>
+      <Name>MimeSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
       <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
@@ -230,7 +234,7 @@
       <Name>P42.Utils.UWP</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj">
-      <Project>{033330e2-8e6d-4c15-a9bf-820b9bcaf75a}</Project>
+      <Project>{e2e2c5c2-9fd5-4ee2-8df6-cb62ec01461f}</Project>
       <Name>Forms9PatchDemo.F9pSource</Name>
     </ProjectReference>
   </ItemGroup>

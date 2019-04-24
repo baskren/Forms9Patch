@@ -114,10 +114,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{DF8FFD84-30B8-40D4-AD7D-835B9A1F3D89}</Project>
-      <Name>FormsGestures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
       <Project>{e4c8c8ec-945a-4baf-b716-5ffe1d96fd49}</Project>
       <Name>P42.NumericalMethods</Name>
@@ -130,25 +126,32 @@
       <Project>{68b96681-ef89-4f47-96c9-65aa37883c0a}</Project>
       <Name>P42.Utils.UWP</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
+      <Project>{f103c9ce-8aa6-4a80-b69c-3abc8f063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
+    <Compile Include="EventArgs\UwpDownUpArgs.cs" />
+    <Compile Include="EventArgs\UwpLongPressEventArgs.cs" />
+    <Compile Include="EventArgs\UwpPanEventArgs.cs" />
+    <Compile Include="EventArgs\UwpPinchEventArgs.cs" />
+    <Compile Include="EventArgs\UwpRightClickEventArgs.cs" />
+    <Compile Include="EventArgs\UwpRotateEventArgs.cs" />
+    <Compile Include="EventArgs\UwpTapEventArgs.cs" />
+    <Compile Include="Extensions\DisplayOrientationExtensions.cs" />
+    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
+    <Compile Include="NativeGestureHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CoordinateTransformService.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Services\GestureService.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EventArgs\UwpDownUpArgs.cs" />
-    <None Include="EventArgs\UwpLongPressEventArgs.cs" />
-    <None Include="EventArgs\UwpPanEventArgs.cs" />
-    <None Include="EventArgs\UwpPinchEventArgs.cs" />
-    <None Include="EventArgs\UwpRightClickEventArgs.cs" />
-    <None Include="EventArgs\UwpRotateEventArgs.cs" />
-    <None Include="EventArgs\UwpTapEventArgs.cs" />
-    <None Include="Properties\AssemblyInfo.cs" />
-    <None Include="Properties\FormsGestures.UWP.rd.xml" />
-    <None Include="Services\CoordinateTransformService.cs" />
-    <None Include="Services\DisplayService.cs" />
-    <None Include="Services\GestureService.cs" />
-    <None Include="Settings.cs" />
-    <None Include="NativeGestureHandler.cs" />
+    <Content Include="Properties\FormsGestures.UWP.rd.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
