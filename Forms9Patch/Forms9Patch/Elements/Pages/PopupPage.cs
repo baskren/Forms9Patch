@@ -244,8 +244,7 @@ namespace Forms9Patch
         {
             for (int i = PageController.InternalChildren.Count - 1; i > 0; i--)
             {
-                var popup = PageController.InternalChildren[i] as PopupBase;
-                if (popup != null && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
+                if (PageController.InternalChildren[i] is PopupBase popup && (popup.PresentedAt.AddSeconds(2) < DateTime.Now || popping))
                 {
                     popup.MeasureInvalidated += OnChildMeasureInvalidated;
                     PageController.InternalChildren.Remove(popup);

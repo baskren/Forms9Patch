@@ -28,10 +28,10 @@
 		<PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj" />
-		<ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj" />
 		<ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
 		<ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+		<ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj" />
+		<ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
 	</ItemGroup>
 	<!--Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemoXaml.targets" /-->
 	<ItemGroup>

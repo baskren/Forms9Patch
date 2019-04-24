@@ -67,15 +67,30 @@
   <!-- Assembly Info -->
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EventArgs\iOSDownUpEventArgs.cs" />
+    <Compile Include="EventArgs\iOSEventArgsHelper.cs" />
+    <Compile Include="EventArgs\iOSLongPressEventArgs.cs" />
+    <Compile Include="EventArgs\iOSPanEventArgs.cs" />
+    <Compile Include="EventArgs\iOSPinchEventArgs.cs" />
+    <Compile Include="EventArgs\iOSRotateEventArgs.cs" />
+    <Compile Include="EventArgs\iOSSwipeEventArgs.cs" />
+    <Compile Include="EventArgs\iOSTapEventArgs.cs" />
+    <Compile Include="Extensions\UIInterfaceOrientaitonExtensions.cs" />
+    <Compile Include="Handlers\DownUpGestureRecognizer.cs" />
+    <Compile Include="Handlers\NativeGestureHandler.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Services\GestureService.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <!-- XF Nuget Project References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{384BDDFE-0BB6-4A2F-8139-AB6CCB651FD6}</Project>
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{D59ED98C-7263-4292-96AF-5F39F09ABF95}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">

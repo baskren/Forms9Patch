@@ -1,6 +1,6 @@
 # Using Forms9Patch.ImageSource
 
-Xamarin Forms implmentation of resolution specific image sourcing relies upon native APIs and schema for iOS, Android, and Windows UWP multi-screen image management [described here](http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/images/).  This requires storing your iOS images in your iOS platform project using the native iOS schema, storing your Android images in your Android platform project using the Android native schema, and storing your UWP images in your UWP platform project using the UWP native schema.  In other words, duplicative efforts to get the same results on both Android, iOS, and UWP.  Forms9Patch.ImageSource simplifies Xamarin.Forms.ImageSource capabilities by bringing multi-screen image management to your Shared Library, PCL Assemblies, and .NetStandard projects - so you only have to generate and configure your app's image resources once.
+Xamarin Forms implementation of resolution specific image sourcing relies upon native APIs and schema for iOS, Android, and Windows UWP multi-screen image management [described here](http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/images/).  This requires storing your iOS images in your iOS platform project using the native iOS schema, storing your Android images in your Android platform project using the Android native schema, and storing your UWP images in your UWP platform project using the UWP native schema.  In other words, duplicative efforts to get the same results on both Android, iOS, and UWP.  Forms9Patch.ImageSource simplifies Xamarin.Forms.ImageSource capabilities by bringing multi-screen image management to your Shared Library, PCL Assemblies, and .NetStandard projects - so you only have to generate and configure your app's image resources once.
 
 ## Embedded Resource Id Naming Convention
 
@@ -124,4 +124,3 @@ Once you have the above, you can load your embedded resource images as shown in 
     </ScrollView>
 </ContentPage>
 ```
-

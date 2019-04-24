@@ -47,63 +47,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="P42.NumericalMethods">
-      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils">
-      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils.Droid">
-      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.NumericalMethods">
-      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils">
-      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsGestures">
-      <HintPath>..\..\FormsGestures\FormsGestures.XfNuget\bin\Debug\netstandard1.3\FormsGestures.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils.Droid">
-      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsGestures.Droid">
-      <HintPath>..\..\FormsGestures\FormsGestures.XfNuget.Droid\bin\Debug\FormsGestures.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.NumericalMethods">
-      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils">
-      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsGestures">
-      <HintPath>..\..\FormsGestures\FormsGestures.XfNuget\bin\Debug\netstandard1.3\FormsGestures.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils.Droid">
-      <HintPath>..\..\P42.Utils\P42.Utils.Droid\bin\Debug\P42.Utils.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="Forms9Patch">
-      <HintPath>..\..\Forms9Patch\Forms9Patch.XfNuget\bin\Debug\netstandard1.3\Forms9Patch.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsGestures.Droid">
-      <HintPath>..\..\FormsGestures\FormsGestures.XfNuget.Droid\bin\Debug\FormsGestures.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="Forms9Patch.Droid">
-      <HintPath>..\..\Forms9Patch\Forms9Patch.XfNuget.Droid\bin\Debug\Forms9Patch.Droid.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.NumericalMethods">
-      <HintPath>..\..\P42.Utils\P42.NumericalMethods\bin\Debug\netstandard1.3\P42.NumericalMethods.dll</HintPath>
-    </Reference>
-    <Reference Include="P42.Utils">
-      <HintPath>..\..\P42.Utils\P42.Utils\bin\Debug\netstandard1.3\P42.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Forms9Patch">
-      <HintPath>..\..\Forms9Patch\Forms9Patch.XfNuget\bin\Debug\netstandard1.3\Forms9Patch.dll</HintPath>
-    </Reference>
-    <Reference Include="FormsGestures">
-      <HintPath>..\..\FormsGestures\FormsGestures.XfNuget\bin\Debug\netstandard1.3\FormsGestures.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
@@ -175,41 +118,41 @@
     <AndroidAsset Include="Assets\SvgSample2.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget.Droid\Forms9Patch.XfNuget.Droid.csproj">
-      <Project>{2d408cf4-7360-44d2-be5f-e6b02dfb62db}</Project>
-      <Name>Forms9Patch.XfNuget.Droid</Name>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
+      <Name>MimeSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
-      <Name>Forms9Patch.XfNuget</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{D5D3FD62-2B11-4C03-BE94-776C79DD92C9}</Project>
+      <Name>Forms9Patch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.Droid\FormsGestures.XfNuget.Droid.csproj">
-      <Project>{00e0cddc-b671-4876-8e78-927c50d2596a}</Project>
-      <Name>FormsGestures.XfNuget.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
-      <Name>FormsGestures.XfNuget</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
-      <Project>{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}</Project>
-      <Name>P42.Utils.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
-      <Name>P42.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
-      <Name>P42.NumericalMethods</Name>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.Droid\Forms9Patch.Droid.csproj">
+      <Project>{2D408CF4-7360-44D2-BE5F-E6B02DFB62DB}</Project>
+      <Name>Forms9Patch.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj">
       <Project>{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}</Project>
       <Name>Forms9PatchDemo.F9pSource</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
-      <Name>MimeSharp</Name>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.Droid\FormsGestures.Droid.csproj">
+      <Project>{00E0CDDC-B671-4876-8E78-927C50D2596A}</Project>
+      <Name>FormsGestures.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
+      <Project>{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}</Project>
+      <Name>P42.Utils.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -134,6 +134,22 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="EventArgs\UwpDownUpArgs.cs" />
+    <None Include="EventArgs\UwpLongPressEventArgs.cs" />
+    <None Include="EventArgs\UwpPanEventArgs.cs" />
+    <None Include="EventArgs\UwpPinchEventArgs.cs" />
+    <None Include="EventArgs\UwpRightClickEventArgs.cs" />
+    <None Include="EventArgs\UwpRotateEventArgs.cs" />
+    <None Include="EventArgs\UwpTapEventArgs.cs" />
+    <None Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\FormsGestures.UWP.rd.xml" />
+    <None Include="Services\CoordinateTransformService.cs" />
+    <None Include="Services\DisplayService.cs" />
+    <None Include="Services\GestureService.cs" />
+    <None Include="Settings.cs" />
+    <None Include="NativeGestureHandler.cs" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

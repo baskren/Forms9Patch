@@ -81,25 +81,62 @@
       <Name>P42.Utils.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{D59ED98C-7263-4292-96AF-5F39F09ABF95}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{AB3526FD-AB5E-4F2F-B745-4A2AEC331AEF}</Project>
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
       <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
       <Name>FormsGestures.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{384BDDFE-0BB6-4A2F-8139-AB6CCB651FD6}</Project>
-      <Name>FormsGestures.Xfget</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
-      <Project>{75961371-27E6-4D88-86DC-EA9426113523}</Project>
+      <Project>{D5D3FD62-2B11-4C03-BE94-776C79DD92C9}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clipboard-Sharing\ClipboardService.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemCollection.cs" />
+    <Compile Include="Clipboard-Sharing\MimeItemExtensions.cs" />
+    <Compile Include="Clipboard-Sharing\NSDataItem.cs" />
+    <Compile Include="Clipboard-Sharing\NSObjectExtensions.cs" />
+    <Compile Include="Clipboard-Sharing\ReturnMimeItem.cs" />
+    <Compile Include="Clipboard-Sharing\SharingService.cs" />
+    <Compile Include="Effects\CustomFontEffect.cs" />
+    <Compile Include="Effects\PopupLayerEffect.cs" />
+    <Compile Include="Effects\SliderStepSizeEffect.cs" />
+    <Compile Include="Effects\WebViewFixEffect.cs" />
+    <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Extensions\Debug.cs" />
+    <Compile Include="Extensions\FontExtensions.cs" />
+    <Compile Include="Extensions\FormattedStringExtensions.cs" />
+    <Compile Include="Extensions\UITextViewExtensions.cs" />
+    <Compile Include="Extensions\UIViewExtensions.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Renderers\ColorGradientBoxRenderer.cs" />
+    <Compile Include="Renderers\EnhancedListViewRenderer.cs" />
+    <Compile Include="Renderers\HardwareKeyPageRenderer.cs" />
+    <Compile Include="Renderers\LabelRenderer.cs" />
+    <Compile Include="Renderers\PopupBaseRenderer.cs" />
+    <Compile Include="Services\ApplicationInfoService.cs" />
+    <Compile Include="Services\DescendentBounds.cs" />
+    <Compile Include="Services\FontService.cs" />
+    <Compile Include="Services\HtmlToPngService.cs" />
+    <Compile Include="Services\KeyboardService.cs" />
+    <Compile Include="Services\KeyClicksService.cs" />
+    <Compile Include="Services\ListViewExtensionService_iOS.cs" />
+    <Compile Include="Services\OsInfoService.cs" />
+    <Compile Include="Services\StatusBarService.cs" />
+    <Compile Include="Services\WebViewExtensionsService.cs" />
+    <Compile Include="Reachability.cs" />
+    <Compile Include="UIViewContentMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>

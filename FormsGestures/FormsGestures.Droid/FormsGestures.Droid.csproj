@@ -129,19 +129,42 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Detectors\DownUpGestureDetector.cs" />
+    <Compile Include="Detectors\MultiTouchGestureDetector.cs" />
+    <Compile Include="Detectors\NativeGestureDetector.cs" />
+    <Compile Include="EventArgs\AndroidDownUpEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidEventArgsHelper.cs" />
+    <Compile Include="EventArgs\AndroidLongPressEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidPanEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidPinchEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidRotateEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidSwipeEventArgs.cs" />
+    <Compile Include="EventArgs\AndroidTapEventArgs.cs" />
+    <Compile Include="Exensions\AndroidViewExtensions.cs" />
+    <Compile Include="Exensions\DIP.cs" />
+    <Compile Include="Exensions\PointExtensions.cs" />
+    <Compile Include="Handlers\DownUpGestureListener.cs" />
+    <Compile Include="Handlers\IMultiTouchGestureListener.cs" />
+    <Compile Include="Handlers\NativeGestureHandler.cs" />
+    <Compile Include="Handlers\NativeGestureListener.cs" />
+    <Compile Include="Handlers\OnTouchListener.cs" />
+    <Compile Include="Services\CoordTransformService.cs" />
+    <Compile Include="Services\DisplayService.cs" />
+    <Compile Include="Services\GestureService.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <!-- FormsGestures References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{384BDDFE-0BB6-4A2F-8139-AB6CCB651FD6}</Project>
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{AB3526FD-AB5E-4F2F-B745-4A2AEC331AEF}</Project>
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{D59ED98C-7263-4292-96AF-5F39F09ABF95}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">

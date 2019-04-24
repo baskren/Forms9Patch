@@ -148,6 +148,45 @@
       <Name>Forms9Patch</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Clipboard-Sharing\ClipboardService.cs" />
+    <None Include="Clipboard-Sharing\MimeItemCollection.cs" />
+    <None Include="Clipboard-Sharing\MimeItemExtensions.cs" />
+    <None Include="Clipboard-Sharing\ReturnMimeItem.cs" />
+    <None Include="Clipboard-Sharing\SharingService.cs" />
+    <None Include="Effects\EmbeddedResourceFontEffect.cs" />
+    <None Include="Effects\SliderStepSizeEffect.cs" />
+    <None Include="Extensions\AlignmentExtensions.cs" />
+    <None Include="Extensions\ColorExtensions.cs" />
+    <None Include="Extensions\FontExtensions.cs" />
+    <None Include="Extensions\FormattedStringExtensions.cs" />
+    <None Include="Extensions\FrameworkElementExtensions.cs" />
+    <None Include="Extensions\InLineExtensions.cs" />
+    <None Include="Extensions\OldFontExtensions-DELETEME.cs" />
+    <None Include="Extensions\TextBlockExtensions.cs" />
+    <None Include="Extensions\UwpWebViewExtensions.cs" />
+    <None Include="Extensions\XamarinSpanExtentions.cs" />
+    <None Include="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
+    <None Include="HardwareKeyListener\HardwareKeyListenerEffect.old.cs" />
+    <None Include="HardwareKeyListener\HardwareKeyPageRenderer.cs" />
+    <None Include="Models\MetaFont.cs" />
+    <None Include="Models\Settings.cs" />
+    <None Include="Models\SizeI.cs" />
+    <None Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\Forms9Patch.UWP.rd.xml" />
+    <None Include="Renderers\EnhancedListViewRenderer.cs" />
+    <None Include="Renderers\LabeLRenderer.cs" />
+    <None Include="Services\ApplicationInfoService.cs" />
+    <None Include="Services\DescendentBounds.cs" />
+    <None Include="Services\DisplayService.cs" />
+    <None Include="Services\FontFamilies.cs" />
+    <None Include="Services\FontService.cs" />
+    <None Include="Services\HtmlToPngService.cs" />
+    <None Include="Services\KeyboardService.cs" />
+    <None Include="Services\OsInfoService.cs" />
+    <None Include="Services\WebViewExtensionService.cs" />
+    <None Include="EnhancedListView.Resources.xaml" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

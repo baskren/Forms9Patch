@@ -220,26 +220,6 @@
     <ITunesArtwork Include="ITunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget.iOS\Forms9Patch.XfNuget.iOS.csproj">
-      <Project>{1d9dac1b-92f4-4efe-b915-5a998435b02f}</Project>
-      <Name>Forms9Patch.XfNuget.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.XfNuget\Forms9Patch.XfNuget.csproj">
-      <Project>{44CB54AE-3453-42F1-B927-4B6F24BC4994}</Project>
-      <Name>Forms9Patch.XfNuget</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget.iOS\FormsGestures.XfNuget.iOS.csproj">
-      <Project>{48adfbe6-0cba-4317-8371-250a7f0647ae}</Project>
-      <Name>FormsGestures.XfNuget.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
-    <ProjectReference Include="..\..\FormsGestures\FormsGestures.XfNuget\FormsGestures.XfNuget.csproj">
-      <Project>{8F5F74EB-00D5-4B5A-9C20-107DA8A1F0C2}</Project>
-      <Name>FormsGestures.XfNuget</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
       <Name>P42.Utils.iOS</Name>
@@ -255,6 +235,26 @@
     <ProjectReference Include="..\Forms9PatchDemo.F9pSource\Forms9PatchDemo.F9pSource.csproj">
       <Project>{E2E2C5C2-9FD5-4EE2-8DF6-CB62EC01461F}</Project>
       <Name>Forms9PatchDemo.F9pSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{D5D3FD62-2B11-4C03-BE94-776C79DD92C9}</Project>
+      <Name>Forms9Patch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
+      <Project>{1D9DAC1B-92F4-4EFE-B915-5A998435B02F}</Project>
+      <Name>Forms9Patch.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
+      <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
+      <Name>FormsGestures.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
+      <Name>MimeSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
