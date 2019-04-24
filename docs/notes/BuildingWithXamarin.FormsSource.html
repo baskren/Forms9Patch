@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Build with Xamarin.Forms source | Forms9Patch </title>
+    <title>Building with Xamarin.Forms source | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Build with Xamarin.Forms source | Forms9Patch ">
+    <meta name="title" content="Building with Xamarin.Forms source | Forms9Patch ">
     <meta name="generator" content="docfx 2.40.8.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -76,11 +76,11 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="BuildingWithXamarin.FormsSource.md">
+            <article class="content wrap" id="_content" data-uid="">
 <h1 id="building-with-xamarinforms-source">Building with Xamarin.Forms source</h1>
 
 <h2 id="project-configuration">Project Configuration</h2>
-<h4 id="notes-for-those-starting-from-scratch-as-a-august-16-2018">Notes for those starting from scratch (as a August 16, 2018)</h4>
+<h3 id="notes-for-those-starting-from-scratch-as-a-august-16-2018">Notes for those starting from scratch (as a August 16, 2018)</h3>
 <ol>
 <li>Switch to the Xamarin.Forms_Official/3.1.0 branch</li>
 <li>Xamarin.Forms projects used:
@@ -143,14 +143,14 @@
 </li>
 </ol>
 <h4 id="every-submodule-needs-a-packages-folder">Every submodule needs a <code>packages</code> folder</h4>
-<p>Because of the way VisualStudio, Nuget, and Git (don't) work together, relative paths are not valid for Nuget packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the following directories (below) and symbolically link the <code>packages</code> subdirectory to the solution's working Nuget packages directory:</p>
+<p>Because of the way VisualStudio, NuGet, and Git (don't) work together, relative paths are not valid for NuGet packages referenced in project files (that are from VisualStudio solutions) that have been added as git submodules.  To work around for this, go to the following directories (below) and symbolically link the <code>packages</code> subdirectory to the solution's working NuGet packages directory:</p>
 <ul>
 <li>Forms9Patch/Forms9PatchDemo</li>
 <li>Forms9Patch/FormsGestures</li>
 <li>Forms9Patch/P42</li>
 <li>Forms9Patch/Xamarin.Forms</li>
 </ul>
-<p>Below are example commands of how to symbolically link to your VisualStudio solution's (and git root module) Nuget packages folder.  For the case of building Forms9Patch source and demo code using just this git module, the below command lines are meant to be executed in the above directories.</p>
+<p>Below are example commands of how to symbolically link to your VisualStudio solution's (and git root module) NuGet packages folder.  For the case of building Forms9Patch source and demo code using just this git module, the below command lines are meant to be executed in the above directories.</p>
 <ul>
 <li><strong>Windows:</strong> <code>c:&gt; mklink /D packages ..\packages</code></li>
 <li><strong>OSX:</strong> <code>$ ln -s ../packages packages</code></li>
@@ -162,12 +162,12 @@
 <p>This may likely not be a problem in the future but currently VisualStudio doesn't always show changes to <code>.target</code> files.  The extreme version of this can be seen in how <code>.target</code> file references are not seen at all in <code>.PCL</code>, <code>.iOS</code>, <code>.Droid</code> and <code>.UWP</code> projects.  Why am I using <code>.target</code> files then?  Because it saves a lot of work in keeping the source code for various permutations of builds in sync.</p>
 <h4 id="forms9patchdemopcldroid-wont-run-when-built-and-deployed-from-visualstudio-2017-windows-to-android-emulator">Forms9PatchDemo.PCL.Droid won't run when built and deployed from VisualStudio 2017 (Windows) to Android Emulator</h4>
 <p>Heck, it might not work when deployed to an actual device.  It <em>does</em> work when deployed from VisualStudio Mac to Android Emulator.  1 point for VisualStudio Mac!  If you know why it doesn't work on Windows, please share!</p>
-<h4 id="why-are-the-xaml-examples-not-in-the-forms9patchdemosource-apps">Why are the Xaml examples not in the Forms9PatchDemo.Source apps?</h4>
+<h4 id="why-are-the-xaml-examples-not-in-the-forms9patchdemosource-apps">Why are the Xaml examples not in the Forms9PatchDemo.Source apps</h4>
 <p>Because I haven't been able to take the time to figure out why Xaml files are not being compiled and embedded properly when using Xamarin.Forms source.  Again, if you know how to do this, please share!</p>
 <h4 id="uwp-unable-to-load-systemruntime-the-located-assemblys-manifest-definition-does-not-match-the-assembly-reference">UWP: Unable to load <code>System.Runtime. The located assembly's manifest definition does not match the assembly reference.</code></h4>
 <p>Change the Windows target version to 14393.</p>
 <h4 id="uwp-getting-exceptions-at-xamarinformsinit">UWP: Getting exceptions at Xamarin.Forms.Init</h4>
-<p>When using <code>Compile with .Net Native tool chain</code> build setting, <code>System.IO.FileNotFoundException</code> execeptions for the following files (maybe more) can occur at Xamarin.Forms.Init when the Common Language Runtime Exceptions are all enabled:</p>
+<p>When using <code>Compile with .Net Native tool chain</code> build setting, <code>System.IO.FileNotFoundException</code> exceptions for the following files (maybe more) can occur at Xamarin.Forms.Init when the Common Language Runtime Exceptions are all enabled:</p>
 <ul>
 <li>clrcompression</li>
 <li>libgl</li>

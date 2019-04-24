@@ -8,12 +8,12 @@ Any cross platform developer knows that Android is a very special beast.  Unfort
    <string name="forms9patch_copy_paste_authority">your_Android_app_package_name_here.f9pcopypaste</string>
    ```
 
-   I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.
+   I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook NuGet Package to get rid of this requirement.
 
-- I've made too many mistakes in building the Forms9Patch Nuget package - and Android seems to bear the brunt of those mistakes.  If, after upgrading Forms9Patch, you see a bunch of errors like the following ...
+- I've made too many mistakes in building the Forms9Patch NuGet package - and Android seems to bear the brunt of those mistakes.  If, after upgrading Forms9Patch, you see a bunch of errors like the following ...
 
     ```text
-    /Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/Renderers/BottomBarPageRenderer.cs(42,42): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012) 
+    /Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/Renderers/BottomBarPageRenderer.cs(42,42): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012)
 
     /Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/MainActivity.cs(33,33): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012)
     ```

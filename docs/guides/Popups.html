@@ -116,7 +116,7 @@
 <p>The most needed missing component: a simple content popup that is a content container which centers its contents on the main page.  Since you may want a popup container with a background image, Forms9Patch provides the ModalPopup element for this purpose.  Once you have initialized a Forms9Patch popup view, set the IsVisible property to true to present it.</p>
 <h3 id="forms9patchmodelpopup-unique-properties">Forms9Patch.ModelPopup Unique Properties</h3>
 <ul>
-<li><code>Content</code>: The <code>Xamarin.Forms.VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
+<li><code>Content</code>: The <code>Xamarin.Forms.VisualElement</code> that will be the content for the popup view.  Layouts and Views are fair game.</li>
 <li><code>ElementShape</code>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
 </ul>
 <table>
@@ -130,7 +130,7 @@
 <p>The popup that is missing from both Xamarin.Forms and Android is a pointer bubble popup - a popup that points to another element.  Given a <code>Target</code> element, some <code>Content</code> to display, and an allowed <code>PointerDirection</code>, <code>Forms9Patch.BubblePopup</code> will best fit a popup bubble pointing the the <code>Target</code>.  Note that, unlike the <code>ModalPopup</code> element, <code>BubblePopup</code> does not support the <code>BackgroundImage</code> nor <code>ElementShape</code> properties.  If you do not specify the <code>Target</code>, <code>BubblePopup</code> will present its content in a <code>ModalPopup</code>.  As with <code>ModalPopup</code>, once you have initialized a <code>BubblePopup</code> you will need to set the <code>IsVisible</code> property to <code>true</code> to present it.</p>
 <h3 id="forms9patchbubblepopup-unique-properties">Forms9Patch.BubblePopup Unique Properties</h3>
 <ul>
-<li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
+<li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popup view.  Layouts and Views are fair game.</li>
 <li><code>Target</code>: The <code>Xamarin.Forms.VisualElement</code> to which the bubble popup will point.</li>
 <li><code>PointerLength</code>: how long is the pointer.</li>
 <li><code>PointerTipRadius</code>: what is the radius of the pointer's tip?</li>
@@ -150,8 +150,8 @@
 <p>Note that FlyoutPopup also does the hard work of figuring out where the SafeArea is for your content.  You can see that in action in the below GIF.</p>
 <h3 id="forms9patchflyoutpopup-unique-properties">Forms9Patch.FlyoutPopup Unique Properties</h3>
 <ul>
-<li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popview.  Layouts and Views are fair game.</li>
-<li><code>Orientation</code>: Is the popup going to be flyin horizontally or verically?</li>
+<li><code>Content</code>: The <code>VisualElement</code> that will be the content for the popup view.  Layouts and Views are fair game.</li>
+<li><code>Orientation</code>: Is the popup going to fly in horizontally or vertically?</li>
 <li><code>Alignment</code>: Is the popup going to be at the left\top (<code>Start</code>) or right\bottom (<code>End</code>)</li>
 </ul>
 <table>

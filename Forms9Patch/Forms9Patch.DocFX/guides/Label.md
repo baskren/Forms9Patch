@@ -47,7 +47,7 @@ So what is meant by **Imposed Bounds**?   If the bounds of the `Label` is either
 
 | Property Setting(s) | Result | GIF |
 | ------------------- | ------ | ----|
-| `Lines=0` | Scale the font size of the text until it either fits within the bounds, limiting the font size between `MinFontSizeand` and `FontSize`. This is the default setting. | ![Imposed Bounds, Lines=0](images/Label/ImposedBoundsLines0.gif) |
+| `Lines=0` | Scale the font size of the text until it either fits within the bounds, limiting the font size between `MinFontSize` and `FontSize`. This is the default setting. | ![Imposed Bounds, Lines=0](images/Label/ImposedBoundsLines0.gif) |
 | `Lines>0` `AutoFit=AutoFit.None` | Scale the font size of the text until `Lines` lines fits the Label's `Height`, limiting the font size between `FontSize` and `MinFontSize`.  If the text cannot fit within `Lines` lines or the imposed height, apply the `LineBreakMode` truncation. | |
 | `Lines>0` `AutoFit=AutoFit.Width` | Scale the font size of the text until it all fits within `Lines` lines, limiting the font size between `FontSize` and `MinFontSize`.  If limited to `MinFontSize`, apply the `LineBreakMode` truncation. | ![ImposedBoundsWidth](images/Label/ImposedBoundsWidth.gif) |
 | `Lines>0` `AutoFit=AutoFit.Lines` | Scale the font size of the text until `Lines` lines fits the Label's Height, limiting the font size between `FontSize` and `MinFontSize`.  If the text cannot fit within `Lines` lines, apply the `LineBreakMode` truncation. | ![ImposedBoundsLines](images/Label/ImposedBoundsLines.gif) |
@@ -144,7 +144,7 @@ Only the style attribute is supported at this time.
 7. Add a "Forms ContentPage Xaml" file to your .NetStandard project:
 
    - Right click on your PCL project (MyDemoApp)
-   - Select **Add / "New File **
+   - Select **Add** **/** **New** **File...**
 
       ![MyDemoApp.NewFile.png](images/Label/MyDemoApp.NewFile.png)
 

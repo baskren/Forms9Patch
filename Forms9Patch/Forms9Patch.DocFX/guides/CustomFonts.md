@@ -67,13 +67,13 @@ This section assumes you've added your custom font to your Shared Code project, 
 
     **Copy and Paste**
 
-    A lot of times, you can get a Unicode character by copying it from a web page or from an application (like FontBook on OSX).  Once you copy it, you can then paste it into your string in Visual Studio or Xamarin Studio.  For your convenience, here [    ] (between the brackets) are the unicode characters for the Material Icons Font's sissors, airplane, and umbrella characters.  When you copy them and paste into a string in VisualStudio, they will appear as shown below.  If you use that string as the text for Forms9Patch.Label using the MaterialIcons-Regular.ttf font, it will render as shown, above.
+    A lot of times, you can get a Unicode character by copying it from a web page or from an application (like FontBook on OSX).  Once you copy it, you can then paste it into your string in Visual Studio or Xamarin Studio.  For your convenience, here [    ] (between the brackets) are the unicode characters for the Material Icons Font's scissors, airplane, and umbrella characters.  When you copy them and paste into a string in VisualStudio, they will appear as shown below.  If you use that string as the text for Forms9Patch.Label using the MaterialIcons-Regular.ttf font, it will render as shown, above.
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodePaste.png)
 
     **C# unicode escape code**
 
-    C# makes unicode pretty easy via escape codes ... as long as the character is 16 bit!  For the Material Icons font, you can go to https://design.google.com/icons, select the charactor (icon in this case) you want.  Then, at the bottom right of the page, select **< > ICON FONT**.  There you can find the hexadecimal excape code (see "For IE9 and below").  For the scissors, it is `&#xE14E;`.  For the airplane, is be `&#xE195;`.  And for the umbrella, it is `&#xEB3E;`.  Since each has 4 hexadecimal characters, they all are 16 bit unicode - and I get to avoid explaining how to deal with 32 bit unicode.  In our example, replace `"Welcome to Xamarin Forms"` with `"\uE14E \uE195 \uEB3E"`.  Notice, for each escape code, that the leading `&#` was replaced with `\u` and the trailing semicolon was dropped.
+    C# makes unicode pretty easy via escape codes ... as long as the character is 16 bit!  For the Material Icons font, you can go [here](https://design.google.com/icons), select the character (icon in this case) you want.  Then, at the bottom right of the page, select **< > ICON FONT**.  There you can find the hexadecimal escape code (see "For IE9 and below").  For the scissors, it is `&#xE14E;`.  For the airplane, is be `&#xE195;`.  And for the umbrella, it is `&#xEB3E;`.  Since each has 4 hexadecimal characters, they all are 16 bit unicode - and I get to avoid explaining how to deal with 32 bit unicode.  In our example, replace `"Welcome to Xamarin Forms"` with `"\uE14E \uE195 \uEB3E"`.  Notice, for each escape code, that the leading `&#` was replaced with `\u` and the trailing semicolon was dropped.
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeEscape.png)
 

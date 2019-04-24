@@ -84,10 +84,10 @@
 <li><p>AS OF VERSION 1.4, THE FOLLOWING IS NO LONGER NECESSARY.  Because of Forms9Patch's more comprehensive <code>Forms9Patch.Clipboard</code> functionality, you will have to add the following code to your Android platform project's <code>Resources/Values/string.xml</code> file, before you can build it:</p>
 <pre><code class="lang-xml">&lt;string name=&quot;forms9patch_copy_paste_authority&quot;&gt;your_Android_app_package_name_here.f9pcopypaste&lt;/string&gt;
 </code></pre>
-<p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook Nuget Package to get rid of this requirement.</p>
+<p>I know - it's a pain.  At some point of time, I'll have to see if I can use some of the trickery used by the Xamarin.Facebook NuGet Package to get rid of this requirement.</p>
 </li>
-<li><p>I've made too many mistakes in building the Forms9Patch Nuget package - and Android seems to bear the brunt of those mistakes.  If, after upgrading Forms9Patch, you see a bunch of errors like the following ...</p>
-<pre><code class="lang-text">/Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/Renderers/BottomBarPageRenderer.cs(42,42): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012) 
+<li><p>I've made too many mistakes in building the Forms9Patch NuGet package - and Android seems to bear the brunt of those mistakes.  If, after upgrading Forms9Patch, you see a bunch of errors like the following ...</p>
+<pre><code class="lang-text">/Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/Renderers/BottomBarPageRenderer.cs(42,42): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012)
 
 /Users/ben/Projects/PizzaTruck/PizzaTruck.Mobile/Droid/MainActivity.cs(33,33): Error CS0012: The type 'FormsViewGroup' is defined in an assembly that is not referenced. You must add a reference to assembly 'FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null'. (CS0012)
 </code></pre>

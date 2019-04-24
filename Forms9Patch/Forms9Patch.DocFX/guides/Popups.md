@@ -43,7 +43,7 @@ The most needed missing component: a simple content popup that is a content cont
 
 ### Forms9Patch.ModelPopup Unique Properties
 
-- `Content`: The `Xamarin.Forms.VisualElement` that will be the content for the popview.  Layouts and Views are fair game.
+- `Content`: The `Xamarin.Forms.VisualElement` that will be the content for the popup view.  Layouts and Views are fair game.
 - `ElementShape`: `ElementShape.Rectangle`, `ElementShape.Square`, `ElementShape.Circle`, `ElementShape.Ellipse`, and `ElementShape.Obround`.  Controls the shape of both the border and the background clipping region.
 
 | ![Modal-iOS.gif](images/Popups/Modal-iOS.gif) |
@@ -55,7 +55,7 @@ The popup that is missing from both Xamarin.Forms and Android is a pointer bubbl
 
 ### Forms9Patch.BubblePopup Unique Properties
 
-- `Content`: The `VisualElement` that will be the content for the popview.  Layouts and Views are fair game.
+- `Content`: The `VisualElement` that will be the content for the popup view.  Layouts and Views are fair game.
 - `Target`: The `Xamarin.Forms.VisualElement` to which the bubble popup will point.
 - `PointerLength`: how long is the pointer.
 - `PointerTipRadius`: what is the radius of the pointer's tip?
@@ -73,8 +73,8 @@ Note that FlyoutPopup also does the hard work of figuring out where the SafeArea
 
 ### Forms9Patch.FlyoutPopup Unique Properties
 
-- `Content`: The `VisualElement` that will be the content for the popview.  Layouts and Views are fair game.
-- `Orientation`: Is the popup going to be flyin horizontally or verically?
+- `Content`: The `VisualElement` that will be the content for the popup view.  Layouts and Views are fair game.
+- `Orientation`: Is the popup going to fly in horizontally or vertically?
 - `Alignment`: Is the popup going to be at the left\top (`Start`) or right\bottom (`End`)
 
 | ![Flyout-iOS.gif](images/Popups/Flyout-iOS.gif) |

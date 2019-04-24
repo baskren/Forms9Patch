@@ -16,11 +16,11 @@ Create the LinkTest application as follows:
 
     ![Guides Getting Started New Cross Platform App](images/GettingStartedWindows/NewCrossPlatformApp.png)
 
- 5. Add the Forms9Patch Nuget package to each of your solution's projects:  
+ 5. Add the Forms9Patch NuGet package to each of your solution's projects:  
 
     - In Solution Explorer, right-click on the LinkTest solution and select Manage NuGet Packages for Solution...:
 
-      ![Guides Getting Started Manage Nuget Packages For Solution](images/GettingStartedWindows/ManageNugetPackagesForSolution.png)
+      ![Guides Getting Started Manage NuGet Packages For Solution](images/GettingStartedWindows/ManageNugetPackagesForSolution.png)
 
     - ... select the Browse tab ...:
 
@@ -32,7 +32,7 @@ Create the LinkTest application as follows:
 
     - Select the Forms9Patch Nuget package:
 
-      ![Guides Getting Started Select The Forms9 Patch Nuget Package](images/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png)
+      ![Guides Getting Started Select The Forms9 Patch NuGet Package](images/GettingStartedWindows/SelectTheForms9PatchNugetPackage.png)
 
     - Apply it to all of your solution's projects by selecting the check box at the top of the project selection column:
 
@@ -44,7 +44,7 @@ Create the LinkTest application as follows:
 
  6. Initialize Forms9Patch in each of your platform projects:
 
-    ### Android:
+    ### Android
 
     1. Open MainActivity.cs in your solution's Android platform project.
     2. Between ```global::Xamarin.Forms.Forms.Init(this, bundle);``` and ```LoadApplication(new App());```, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look like the following:
@@ -55,7 +55,7 @@ Create the LinkTest application as follows:
             LoadApplication(new App());
         ```
 
-    ### iOS:
+    ### iOS
 
     1. Open AppDelegate.cs in your solution's iOS platform project.
     2. Between ```global::Xamarin.Forms.Forms.Init();``` and ```LoadApplication(new App());```, add the Forms9Patch.iOS initialization call using the key for the LinkTest applications.  The result should look like the following:
@@ -65,6 +65,7 @@ Create the LinkTest application as follows:
             Forms9Patch.iOS.Settings.Initialize(this);
             LoadApplication(new App());
         ```
+
     ### UWP
 
     1. Open App.xaml.cs in your solution's UWP platform project.

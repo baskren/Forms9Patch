@@ -68,7 +68,7 @@ Create the LinkTest application as follows:
 
 7. Initialize Forms9Patch in each of your platform projects:
 
-    ### Android:
+    ### Android
 
     1. Open MainActivity.cs in your solution's Android platform project.
     2. Between ```global::Xamarin.Forms.Forms.Init(this, bundle);``` and ```LoadApplication(new App());```, add the Forms9Patch.Droid initialization call using the key for the LinkTest applications.  The result should look like the following:
@@ -79,7 +79,7 @@ Create the LinkTest application as follows:
             LoadApplication(new App());
         ```
 
-    ### iOS:
+    ### iOS
 
     1. Open AppDelegate.cs in your solution's iOS platform project.
     2. Between ```global::Xamarin.Forms.Forms.Init();``` and ```LoadApplication(new App());```, add the Forms9Patch.iOS initialization call using the key for the LinkTest applications.  The result should look like the following:
@@ -89,6 +89,7 @@ Create the LinkTest application as follows:
             Forms9Patch.iOS.Settings.Initialize(this);
             LoadApplication(new App());
         ```
+
 8. Update your application's MainPage content (MainPage.xaml) to use Forms9Patch elements:
      1. In Solution Explorer, in the LinkTest project, double-click MainPage.xaml to open it.
      2. Update MainPage.xaml with the following code. This code declaratively defines the user interface for the page.

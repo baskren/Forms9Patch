@@ -75,13 +75,13 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
 
 - Outline/Background:
   - **`BackgroundColor`**
-  - **`SelectedBackgroundColor`**: 
+  - **`SelectedBackgroundColor`**:
   - **`BorderRadius`**: Alternatively, `OutlineRadius`
   - **`BorderWidth`**:  Alternatively, `OutlineWidth`
   - **`BorderColor`**: Alternatively, `OutlineColor`
   - **`HasShadow`**
   - **`Padding`**: The padding between the outline and the button's content (the icon and label)
-  - 
+
 - Text
   - **`TextColor`**
   - **`FontAttributes`**
@@ -96,7 +96,7 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
   - **`BackgroundColor`**
   - **`BackgroundImage`**: A `Forms9Patch.Image` that will be used as the button's background.
 - Icon:
-  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: See [Custom Fonts](CustomFonts.md) to see how to use an Embedded Resource font! 
+  - **`IconFontFamily`**: Used to specify the font family used for the `IconText` property.  Note: See [Custom Fonts](CustomFonts.md) to see how to use an Embedded Resource font!
   - **`TrailingIcon`**: Is the icon placed before or after the label?
   - **`TintIcon`**: If the icon is a raster image, should the color of the non-transparent pixels be set to `TextColor`?
   - **`HasTightSpacing`**: If `false`, the icon will be positioned to the outside edge of the button.  If `true`, the icon will be positioned next to the label (separated by `Spacing`).
@@ -116,8 +116,6 @@ Additionally, the `Button` and `StateButton` elements have these properties:
   - **`IconText`**: An alternative to `IconImage`, enabling the use of Unicode characters or special font characters as button icons.  Just like the `HtmlText` property, this property will decode HTML markup, allowing you to specify colors, fonts and other attributes.
   - **`Orientation`**: Is the icon and label arranged vertically or horizontally?
   - **`Spacing`**: if `TightSpacing` is true, the icon will be positioned `Spacing` pixels away from the label
-
-
 
 ### SegmentedControl unique properties
 
@@ -169,7 +167,6 @@ The `Segment` element is used primarily to populate the `SegmentedController` an
 - **`SegmentLongPressing`**: Fired when one of the SegmentedControl's segments is being held down long enough to be considered a long press.
 - **`SegmentLongPressed`**:: Fired when one of the SegmentedControl's segments long press has ended.
 
-
 ## Examples
 
 ### Forms9Patch Button Example
@@ -193,44 +190,39 @@ var button = new Forms9Patch.Button
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
-	xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
-	x:Class="Forms9PatchDemo.XamlSingleStateButtonPage"
-	Padding="5, 20, 5, 5">
-	<StackLayout>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+    x:Class="Forms9PatchDemo.XamlSingleStateButtonPage"
+    Padding="5, 20, 5, 5">
+    <StackLayout>
 
 
-		<f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
+        <f9p:StateButton ToggleBehavior="true" HeightRequest="80" Alignment="Start">
 
-			<f9p:StateButton.DefaultState>
-				<f9p:ButtonState Text="Toggle Default State" TextColor="Blue">
-					<f9p:ButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
-					</f9p:ButtonState.BackgroundImage> 
-					<f9p:ButtonState.IconImage>
-						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.Info}"/>
-					</f9p:ButtonState.IconImage>
-				</f9p:ButtonState>
-			</f9p:StateButton.DefaultState>
+            <f9p:StateButton.DefaultState>
+                <f9p:ButtonState Text="Toggle Default State" TextColor="Blue">
+                    <f9p:ButtonState.BackgroundImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.button}"/>
+                    </f9p:ButtonState.BackgroundImage>
+                    <f9p:ButtonState.IconImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.Info}"/>
+                    </f9p:ButtonState.IconImage>
+                </f9p:ButtonState>
+            </f9p:StateButton.DefaultState>
 
-			<f9p:StateButton.SelectedState>
-				<f9p:ButtonState TextColor="Red" Text="Selected" >
-					<f9p:ButtonState.BackgroundImage>
-						<f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
-					</f9p:ButtonState.BackgroundImage> 
-				</f9p:ButtonState>
-			</f9p:StateButton.SelectedState>
-
-		</f9p:StateButton>
-
-
+            <f9p:StateButton.SelectedState>
+                <f9p:ButtonState TextColor="Red" Text="Selected" >
+                    <f9p:ButtonState.BackgroundImage>
+                        <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.image}"/>
+                    </f9p:ButtonState.BackgroundImage>
+                </f9p:ButtonState>
+            </f9p:StateButton.SelectedState>
+        </f9p:StateButton>
         <Label x:Name="label"/>
-
-		
-	</StackLayout>
+    </StackLayout>
 </ContentPage>
 ```
 
@@ -239,35 +231,34 @@ var button = new Forms9Patch.Button
 | Unselected |![Forms9Patch.StateButton ](images/Buttons/StateButton.png)|
 | Selected |![Forms9Patch.StateButton selected ](images/Buttons/StateButton-Selected.png)|
 
-### Forms9Patch SegementedControl example
+### Forms9Patch SegmentedControl example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-xmlns="http://xamarin.com/schemas/2014/forms" 
-xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-x:Class="Forms9PatchDemo.XamlSegmentedControlPage"
-xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
-xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
-BackgroundColor = "Gray"
-Padding = "40"
->
-	<ContentPage.Content>
-		<StackLayout>
-			<Label Text="SegmentedControl Example" TextColor="Black"/>
-			<f9p:SegmentedControl BackgroundColor="White" FontSize="16" TextColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5" GroupToggleBehavior="Multiselect">
-				<f9p:Segment Text="Pause 5"/>
-				<f9p:Segment Text="Pause 10"/>
-				<f9p:Segment Text="Pause 15"/>
-				<f9p:Segment Text="Cancel" TextColor="Red"/>
-				<f9p:Segment Text="Launch" FontAttributes="Bold"/>
-			</f9p:SegmentedControl>
-			<f9p:SegmentedControl BackgroundColor="White" Padding="5"	FontSize="16" TextColor="#0076FF" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" >
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Forms9PatchDemo.XamlSegmentedControlPage"
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
+    xmlns:local="clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo"
+    BackgroundColor = "Gray"
+    Padding = "40"
+    >
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="SegmentedControl Example" TextColor="Black"/>
+            <f9p:SegmentedControl BackgroundColor="White" FontSize="16" TextColor="#0076FF" Orientation="Vertical" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" Padding="5" GroupToggleBehavior="Multiselect">
+                <f9p:Segment Text="Pause 5"/>
+                <f9p:Segment Text="Pause 10"/>
+                <f9p:Segment Text="Pause 15"/>
+                <f9p:Segment Text="Cancel" TextColor="Red"/>
+                <f9p:Segment Text="Launch" FontAttributes="Bold"/>
+            </f9p:SegmentedControl>
+            <f9p:SegmentedControl BackgroundColor="White" Padding="5" FontSize="16" TextColor="#0076FF" OutlineColor="#CCC" OutlineWidth="0" SeparatorWidth="1" OutlineRadius="6" >
                 <f9p:Segment Text="A" Orientation="Vertical">
                     <f9p:Segment.IconImage>
                         <f9p:Image Source="{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}"/>
                     </f9p:Segment.IconImage>
-                   
                 </f9p:Segment>
                 <f9p:Segment Text="B" Orientation="Vertical">
                     <f9p:Segment.IconImage>
@@ -275,9 +266,9 @@ Padding = "40"
                     </f9p:Segment.IconImage>
                 </f9p:Segment>
                 <f9p:Segment Text="PIZZA"/>
-			</f9p:SegmentedControl>
-		</StackLayout>
-	</ContentPage.Content>
+            </f9p:SegmentedControl>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
 ```
 

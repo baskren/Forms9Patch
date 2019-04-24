@@ -79,14 +79,8 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="using-forms9patchs-layouts">Using Forms9Patch's Layouts</h1>
 
-<p>Just as <code>Xamarin.Forms.Frame</code> extends <code>Xamarin.Forms.ContentView</code> by adding the <code>OutlineColor</code> and <code>HasShadow</code> properties, <code>Forms9Patch.AbsoluteLayout</code>, <code>Forms9Patch.Frame</code>, <code>Forms9Patch.Grid</code>, <code>Forms9Patch.RelativeLayout</code>
-and <code>Forms9Patch.Stacklayout</code> extends their Xamarin.Forms counterparts with those two properties and adds the <code>BackgroundImage</code>, <code>ElementShape</code>, <code>OutlineWidth</code>, <code>OutlineRadius</code>, <code>OutlineColor</code> and <code>ShadowInverted</code> properties.<br>
-In otherwords, everything you can do to decorate a <code>Forms9Patch.Image</code>, you can do to decorate Forms9Patch's layouts.</p>
-<p>Additionally, the Forms9Patch layouts have the IgnoreChildren property as a way to improve app responsiveness.  When a child element is updated, it kicks off a measurement and layout cycle that can propogate up through the
-view hierarchy - potentially consuming a lot of CPU.  I'm looking at you, Xamarin.Forms.Android!  Sometimes this is necessary in order to make room for or reclaim room from the updated child element.  However, there a lot of
-instances where the updated child will never have an impact upon the rest of the view hierarchy - other than slowing everything down while Xamarin Forms goes through the measure-layout cycle.  For example, if you have a Grid
-with fixed (GridUnitType.Absolute) or proportional (GridUnitType.Star) sized rows and columns then any change to a child will not change the Grid's layout.  So, to keep an update of a child from propogating up the view hierarchy,
-set the IgnoreChildren property to true.  Please note that this is a &quot;running with sissors&quot; feature that should be used carefully.</p>
+<p>Just as <code>Xamarin.Forms.Frame</code> extends <code>Xamarin.Forms.ContentView</code> by adding the <code>OutlineColor</code> and <code>HasShadow</code> properties, <code>Forms9Patch.AbsoluteLayout</code>, <code>Forms9Patch.Frame</code>, <code>Forms9Patch.Grid</code>, <code>Forms9Patch.RelativeLayout</code> and <code>Forms9Patch.StackLayout</code> extends their Xamarin.Forms counterparts with those two properties and adds the <code>BackgroundImage</code>, <code>ElementShape</code>, <code>OutlineWidth</code>, <code>OutlineRadius</code>, <code>OutlineColor</code> and <code>ShadowInverted</code> properties.  In other words, everything you can do to decorate a <code>Forms9Patch.Image</code>, you can do to decorate Forms9Patch's layouts.</p>
+<p>Additionally, the Forms9Patch layouts have the IgnoreChildren property as a way to improve app responsiveness.  When a child element is updated, it kicks off a measurement and layout cycle that can propagate up through the view hierarchy - potentially consuming a lot of CPU.  I'm looking at you, Xamarin.Forms.Android!  Sometimes this is necessary in order to make room for or reclaim room from the updated child element.  However, there a lot of instances where the updated child will never have an impact upon the rest of the view hierarchy - other than slowing everything down while Xamarin Forms goes through the measure-layout cycle.  For example, if you have a Grid with fixed (GridUnitType.Absolute) or proportional (GridUnitType.Star) sized rows and columns then any change to a child will not change the Grid's layout.  So, to keep an update of a child from propagating up the view hierarchy, set the IgnoreChildren property to true.  Please note that this is a &quot;running with scissors&quot; feature that should be used carefully.</p>
 <h2 id="background-image">Background Image</h2>
 <h3 id="code-example">Code Example</h3>
 <p>Here we are going to create a <code>Forms9Patch.ContentView</code>, set a background image, and have a label for <code>Content</code>.</p>
@@ -152,7 +146,7 @@ set the IgnoreChildren property to true.  Please note that this is a &quot;runni
 &lt;/ContentPage&gt;
 </code></pre>
 <h2 id="outline--shadow">Outline &amp; Shadow</h2>
-<h3 id="code-example-1">Code Example</h3>
+<h3 id="outline--shadow-code-example">Outline &amp; Shadow Code Example</h3>
 <pre><code class="lang-csharp">var frame = new Forms9Patch.Frame {
     Content = new Xamarin.Forms.Label {
         Text = &quot;Frame OutlineRadius &amp; Shadow&quot;,
@@ -179,7 +173,7 @@ set the IgnoreChildren property to true.  Please note that this is a &quot;runni
 </tr>
 </tbody>
 </table>
-<h3 id="xaml-example-1">XAML Example</h3>
+<h3 id="outline--shadow-xaml-example">Outline &amp; Shadow XAML Example</h3>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;ContentPage
     xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;

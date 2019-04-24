@@ -162,10 +162,10 @@ Note the corners are rounded on this image!
 
 Taking things a step further than we did with the BackgroundColor property, why not be able to continue to dress up the image?  Clipping an image to a shape and/or adding a border are two common operations applied to images when they are used as app assets.  Since this is so common, Forms9Patch has them built-in.  To set the shape, use the `ElementShape` property (which takes a `Forms9Patch.ElementShape` value).  Available values are:
 
-| ElementShape     | Description                           | Full Bleed Image Exmaple                                  |
+| ElementShape     | Description                           | Full Bleed Image Example                                  |
 |------------------|---------------------------------------|-----------------------------------------------------------|
 | Rectangle        | pretty much the same as "don't clip"  | ![Rectangle](images/Image/Shape.Rectangle.png)            |
-| Square           | clip the longest side to be the same length as the shortest side    |  ![Square](images/Image/Shape.Square.png)        | 
+| Square           | clip the longest side to be the same length as the shortest side    |  ![Square](images/Image/Shape.Square.png)        |
 | Circle           | because, circle clipped head shots are so 2015    |  ![Circle](images/Image/Shape.Circle.png)                 |
 | Ellipse          | still waiting for this one to be cool | ![Ellipse](images/Image/Shape.Ellipse.png)                |
 | Obround          | it's embarrassing how long it took me to  find out there was a name for this shape   | ![Obround](images/Image/Shape.Obround.png)  

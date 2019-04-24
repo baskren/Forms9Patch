@@ -1,9 +1,4 @@
----
-uid: index.md
-title: Home
----
-
-# Forms9Patch 
+# Forms9Patch
 
 A suite of elements built to simplify image management and text formatting for your NetStandard, PCL, and Shared Library Xamarin.Forms iOS, Android and UWP applications.
 
@@ -22,7 +17,7 @@ Xamarin Forms is great for developing cross platform applications (certainly ver
 
 Android developers can use NinePatch bitmaps, the drawable directory naming convention, Html.FromHtml, and a bunch of complex file manipulations to address the image issue.  Likewise, iOS developers can use ResizeableImageWithCapInsets, the @2x, @3x, @4x file naming convention, and some 3rd party libraries for this purpose.  Custom fonts are a bit more complicated and label layouts take things up another notch.   Forms9Patch enhances Xamarin Forms to make multi-resolution / multi-screen image management, custom fonts, and HTML text formatting easy for NetStandard, PCL and Shared Library applications for iOS, Android and UWP.
 
-## So, what exactly is Forms9Patch?
+## So, what exactly is Forms9Patch
 
 Simply stated, Forms9Patch is three core elements from which five layouts, three buttons, six pop-ups are built upon.  And, to make your life easier, some extensions, effects, and services are added.   The three core elements are:
 
@@ -53,7 +48,7 @@ Forms9Patch's three button elements (`Forms9Patch.Button`, `Forms9Patch.StateBut
 The three Forms9Patch button elements are:
 
 - `Forms9Patch.Button`
-- `Forms9Patch.StateButton`: a further enhanced implementation of `Forms9Patch.Button` that allow most enhanced properties to be configured by the button's state (Default, Pressing, Selected, Disabled, DisabledAndSelected) 
+- `Forms9Patch.StateButton`: a further enhanced implementation of `Forms9Patch.Button` that allow most enhanced properties to be configured by the button's state (Default, Pressing, Selected, Disabled, DisabledAndSelected)
 - `Forms9Patch.SegmentControl`: a segmented button control that allows for border, separator, and shadow control.  Note that there is currently no support for background images.
 
 Forms9Patch's pop-up elements can be thought of as Forms9Patch layout elements (outline and background image capabilities) that renders with full page overlay backgrounds and the ability to be canceled by tapping the background.  These popup elements are:
@@ -74,7 +69,7 @@ Then there are Forms9Patch's extensions.  A few noteworthy ones are:
 
 And lastly is Forms9Patch's services:
 
-- Keyboard Service: Want to put away the system keyboard?  Want to be notified when the system keyboard appears or disappears? 
+- Keyboard Service: Want to put away the system keyboard?  Want to be notified when the system keyboard appears or disappears?
 - Keyboard Key Listener: What to know when a shortcut key is pressed?  What about matching a shortcut key to a VisualElement so you only get the event when that VisualElement is in focus?  
 - Key Clicks Service: Do you want to make a system keyboard sound (and vibration, if available)?
 - Application Info Service: Do you want to quickly know your application's Name, Bundle/Package ID, Build number and Version string?

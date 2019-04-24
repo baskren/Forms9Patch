@@ -148,7 +148,7 @@
 <h3 id="shared-layout-and-decoration-properties">Shared Layout and Decoration Properties</h3>
 <p>The layout and decoration properties shared by all three Forms9Patch buttons are:</p>
 <ul>
-<li>Outline/Background:
+<li><p>Outline/Background:</p>
 <ul>
 <li><strong><code>BackgroundColor</code></strong></li>
 <li><strong><code>SelectedBackgroundColor</code></strong>:</li>
@@ -157,10 +157,9 @@
 <li><strong><code>BorderColor</code></strong>: Alternatively, <code>OutlineColor</code></li>
 <li><strong><code>HasShadow</code></strong></li>
 <li><strong><code>Padding</code></strong>: The padding between the outline and the button's content (the icon and label)</li>
-<li></li>
 </ul>
 </li>
-<li>Text
+<li><p>Text</p>
 <ul>
 <li><strong><code>TextColor</code></strong></li>
 <li><strong><code>FontAttributes</code></strong></li>
@@ -176,7 +175,7 @@
 <li><strong><code>BackgroundImage</code></strong>: A <code>Forms9Patch.Image</code> that will be used as the button's background.</li>
 </ul>
 </li>
-<li>Icon:
+<li><p>Icon:</p>
 <ul>
 <li><strong><code>IconFontFamily</code></strong>: Used to specify the font family used for the <code>IconText</code> property.  Note: See <a href="CustomFonts.html">Custom Fonts</a> to see how to use an Embedded Resource font!</li>
 <li><strong><code>TrailingIcon</code></strong>: Is the icon placed before or after the label?</li>
@@ -297,44 +296,39 @@
 </table>
 <h3 id="forms9patch-statebutton-example">Forms9Patch StateButton example</h3>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;ContentPage 
-	xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot; 
-	xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot; 
-	xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
-	xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
-	x:Class=&quot;Forms9PatchDemo.XamlSingleStateButtonPage&quot;
-	Padding=&quot;5, 20, 5, 5&quot;&gt;
-	&lt;StackLayout&gt;
+&lt;ContentPage
+    xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+    xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+    xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
+    x:Class=&quot;Forms9PatchDemo.XamlSingleStateButtonPage&quot;
+    Padding=&quot;5, 20, 5, 5&quot;&gt;
+    &lt;StackLayout&gt;
 
 
-		&lt;f9p:StateButton ToggleBehavior=&quot;true&quot; HeightRequest=&quot;80&quot; Alignment=&quot;Start&quot;&gt;
+        &lt;f9p:StateButton ToggleBehavior=&quot;true&quot; HeightRequest=&quot;80&quot; Alignment=&quot;Start&quot;&gt;
 
-			&lt;f9p:StateButton.DefaultState&gt;
-				&lt;f9p:ButtonState Text=&quot;Toggle Default State&quot; TextColor=&quot;Blue&quot;&gt;
-					&lt;f9p:ButtonState.BackgroundImage&gt;
-						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.button}&quot;/&gt;
-					&lt;/f9p:ButtonState.BackgroundImage&gt; 
-					&lt;f9p:ButtonState.IconImage&gt;
-						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.Info}&quot;/&gt;
-					&lt;/f9p:ButtonState.IconImage&gt;
-				&lt;/f9p:ButtonState&gt;
-			&lt;/f9p:StateButton.DefaultState&gt;
+            &lt;f9p:StateButton.DefaultState&gt;
+                &lt;f9p:ButtonState Text=&quot;Toggle Default State&quot; TextColor=&quot;Blue&quot;&gt;
+                    &lt;f9p:ButtonState.BackgroundImage&gt;
+                        &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.button}&quot;/&gt;
+                    &lt;/f9p:ButtonState.BackgroundImage&gt;
+                    &lt;f9p:ButtonState.IconImage&gt;
+                        &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.Info}&quot;/&gt;
+                    &lt;/f9p:ButtonState.IconImage&gt;
+                &lt;/f9p:ButtonState&gt;
+            &lt;/f9p:StateButton.DefaultState&gt;
 
-			&lt;f9p:StateButton.SelectedState&gt;
-				&lt;f9p:ButtonState TextColor=&quot;Red&quot; Text=&quot;Selected&quot; &gt;
-					&lt;f9p:ButtonState.BackgroundImage&gt;
-						&lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.image}&quot;/&gt;
-					&lt;/f9p:ButtonState.BackgroundImage&gt; 
-				&lt;/f9p:ButtonState&gt;
-			&lt;/f9p:StateButton.SelectedState&gt;
-
-		&lt;/f9p:StateButton&gt;
-
-
+            &lt;f9p:StateButton.SelectedState&gt;
+                &lt;f9p:ButtonState TextColor=&quot;Red&quot; Text=&quot;Selected&quot; &gt;
+                    &lt;f9p:ButtonState.BackgroundImage&gt;
+                        &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.image}&quot;/&gt;
+                    &lt;/f9p:ButtonState.BackgroundImage&gt;
+                &lt;/f9p:ButtonState&gt;
+            &lt;/f9p:StateButton.SelectedState&gt;
+        &lt;/f9p:StateButton&gt;
         &lt;Label x:Name=&quot;label&quot;/&gt;
-
-		
-	&lt;/StackLayout&gt;
+    &lt;/StackLayout&gt;
 &lt;/ContentPage&gt;
 </code></pre>
 <table>
@@ -355,33 +349,32 @@
 </tr>
 </tbody>
 </table>
-<h3 id="forms9patch-segementedcontrol-example">Forms9Patch SegementedControl example</h3>
+<h3 id="forms9patch-segmentedcontrol-example">Forms9Patch SegmentedControl example</h3>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;ContentPage 
-xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot; 
-xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot; 
-x:Class=&quot;Forms9PatchDemo.XamlSegmentedControlPage&quot;
-xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
-xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
-BackgroundColor = &quot;Gray&quot;
-Padding = &quot;40&quot;
-&gt;
-	&lt;ContentPage.Content&gt;
-		&lt;StackLayout&gt;
-			&lt;Label Text=&quot;SegmentedControl Example&quot; TextColor=&quot;Black&quot;/&gt;
-			&lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; Orientation=&quot;Vertical&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; Padding=&quot;5&quot; GroupToggleBehavior=&quot;Multiselect&quot;&gt;
-				&lt;f9p:Segment Text=&quot;Pause 5&quot;/&gt;
-				&lt;f9p:Segment Text=&quot;Pause 10&quot;/&gt;
-				&lt;f9p:Segment Text=&quot;Pause 15&quot;/&gt;
-				&lt;f9p:Segment Text=&quot;Cancel&quot; TextColor=&quot;Red&quot;/&gt;
-				&lt;f9p:Segment Text=&quot;Launch&quot; FontAttributes=&quot;Bold&quot;/&gt;
-			&lt;/f9p:SegmentedControl&gt;
-			&lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; Padding=&quot;5&quot;	FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; &gt;
+&lt;ContentPage
+    xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+    x:Class=&quot;Forms9PatchDemo.XamlSegmentedControlPage&quot;
+    xmlns:f9p=&quot;clr-namespace:Forms9Patch;assembly=Forms9Patch&quot;
+    xmlns:local=&quot;clr-namespace:Forms9PatchDemo;assembly=Forms9PatchDemo&quot;
+    BackgroundColor = &quot;Gray&quot;
+    Padding = &quot;40&quot;
+    &gt;
+    &lt;ContentPage.Content&gt;
+        &lt;StackLayout&gt;
+            &lt;Label Text=&quot;SegmentedControl Example&quot; TextColor=&quot;Black&quot;/&gt;
+            &lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; Orientation=&quot;Vertical&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; Padding=&quot;5&quot; GroupToggleBehavior=&quot;Multiselect&quot;&gt;
+                &lt;f9p:Segment Text=&quot;Pause 5&quot;/&gt;
+                &lt;f9p:Segment Text=&quot;Pause 10&quot;/&gt;
+                &lt;f9p:Segment Text=&quot;Pause 15&quot;/&gt;
+                &lt;f9p:Segment Text=&quot;Cancel&quot; TextColor=&quot;Red&quot;/&gt;
+                &lt;f9p:Segment Text=&quot;Launch&quot; FontAttributes=&quot;Bold&quot;/&gt;
+            &lt;/f9p:SegmentedControl&gt;
+            &lt;f9p:SegmentedControl BackgroundColor=&quot;White&quot; Padding=&quot;5&quot; FontSize=&quot;16&quot; TextColor=&quot;#0076FF&quot; OutlineColor=&quot;#CCC&quot; OutlineWidth=&quot;0&quot; SeparatorWidth=&quot;1&quot; OutlineRadius=&quot;6&quot; &gt;
                 &lt;f9p:Segment Text=&quot;A&quot; Orientation=&quot;Vertical&quot;&gt;
                     &lt;f9p:Segment.IconImage&gt;
                         &lt;f9p:Image Source=&quot;{local:ImageMultiResource Forms9PatchDemo.Resources.ArrowR}&quot;/&gt;
                     &lt;/f9p:Segment.IconImage&gt;
-                   
                 &lt;/f9p:Segment&gt;
                 &lt;f9p:Segment Text=&quot;B&quot; Orientation=&quot;Vertical&quot;&gt;
                     &lt;f9p:Segment.IconImage&gt;
@@ -389,9 +382,9 @@ Padding = &quot;40&quot;
                     &lt;/f9p:Segment.IconImage&gt;
                 &lt;/f9p:Segment&gt;
                 &lt;f9p:Segment Text=&quot;PIZZA&quot;/&gt;
-			&lt;/f9p:SegmentedControl&gt;
-		&lt;/StackLayout&gt;
-	&lt;/ContentPage.Content&gt;
+            &lt;/f9p:SegmentedControl&gt;
+        &lt;/StackLayout&gt;
+    &lt;/ContentPage.Content&gt;
 &lt;/ContentPage&gt;
 </code></pre>
 <p><img src="images/Buttons/SegmentedControl.png" alt="SegmentedControl"></p>
