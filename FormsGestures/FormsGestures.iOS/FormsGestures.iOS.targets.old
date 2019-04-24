@@ -1,0 +1,71 @@
+<Project DefaultTargets = "Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+
+  <!-- Common project files -->
+  <ItemGroup>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSDownUpEventArgs.cs">
+      <Link>EventArgs\iOSDownUpEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSEventArgsHelper.cs">
+      <Link>EventArgs\iOSEventArgsHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSLongPressEventArgs.cs">
+      <Link>EventArgs\iOSLongPressEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSPanEventArgs.cs">
+      <Link>EventArgs\iOSPanEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSPinchEventArgs.cs">
+      <Link>EventArgs\iOSPinchEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSRotateEventArgs.cs">
+      <Link>EventArgs\iOSRotateEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSSwipeEventArgs.cs">
+      <Link>EventArgs\iOSSwipeEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\EventArgs\iOSTapEventArgs.cs">
+      <Link>EventArgs\iOSTapEventArgs.cs</Link>
+    </Compile>
+
+    <Compile Include="..\FormsGestures.Source.iOS\Services\DisplayService.cs">
+      <Link>Services\DisplayService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\Services\GestureService.cs">
+      <Link>Services\GestureService.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\Services\LocationService.cs">
+      <Link>Services\LocationService.cs</Link>
+    </Compile>
+
+    <Compile Include="..\FormsGestures.Source.iOS\DownUpGestureRecognizer.cs">
+      <Link>DownUpGestureRecognizer.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\NativeGestureHandler.cs">
+      <Link>NativeGestureHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\Settings.cs">
+      <Link>Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\FormsGestures.Source.iOS\UIInterfaceOrientaitonExtensions.cs">
+      <Link>UIInterfaceOrientaitonExtensions.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Common Project References -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{E4C8C8EC-945A-4BAF-B716-5FFE1D96FD49}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{CAD932A9-5E8D-415C-8DC2-CE8E553FA6D3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
+      <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
+      <Name>P42.Utils.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
