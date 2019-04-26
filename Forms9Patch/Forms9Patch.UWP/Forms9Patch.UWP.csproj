@@ -198,10 +198,10 @@
     <Content Include="Properties\Forms9Patch.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EnhancedListView.Resources.xaml">
+    <EmbeddedResource Include="EnhancedListView.Resources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
