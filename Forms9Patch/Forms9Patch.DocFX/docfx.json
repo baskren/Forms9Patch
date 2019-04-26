@@ -5,12 +5,12 @@
         {
           "files": [ "**/*.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "../Forms9Patch.XfNuget"
+          "src": "../Forms9Patch"
         },
         {
           "files": [ "**/*.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "../../FormsGestures/FormsGestures.XfNuget"
+          "src": "../../FormsGestures/FormsGestures"
         },
         {
           "files": [ "**/*.csproj" ],
