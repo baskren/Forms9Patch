@@ -108,8 +108,9 @@ namespace Forms9Patch
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
-            if (propertyName == nameof (Height) && Device.RuntimePlatform == Device.UWP)
-                    ForceUpdateSize();
+            // don't know why the below "&& UWP" was added.  A really bone headed move.
+            if (propertyName == nameof(Height))// && Device.RuntimePlatform == Device.UWP)
+                ForceUpdateSize();
         }
     }
 }
