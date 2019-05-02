@@ -116,6 +116,13 @@ namespace Forms9Patch
             get { return (bool)GetValue(TintImageProperty); }
             set { SetValue(TintImageProperty, value); }
         }
+
+        [Obsolete("Use Segments", true)]
+        public VisualElement Content
+        {
+            get => throw new NotSupportedException("Forms9Patch.SegmentControl: Content is not a supported property.  Use Segments property instead");
+            set => throw new NotSupportedException("Forms9Patch.SegmentControl: Content is not a supported property.  Use Segments property instead");
+        }
         #endregion
 
 
@@ -1154,7 +1161,7 @@ namespace Forms9Patch
                              var segmentSyncFontSize = segment._button.SynchronizedFontSize;
                              if (minSyncFontSize - segmentSyncFontSize > 1)
                                  minSyncFontSize = segmentSyncFontSize;
-                             if (segmentSyncFontSize - maxSyncFontSize> 1)
+                             if (segmentSyncFontSize - maxSyncFontSize > 1)
                                  maxSyncFontSize = segmentSyncFontSize;
                          }
                          //if (debug)

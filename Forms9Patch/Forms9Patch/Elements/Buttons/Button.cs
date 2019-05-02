@@ -200,6 +200,14 @@ namespace Forms9Patch
             get => (LabelFit)GetValue(FitProperty);
             set => SetValue(FitProperty, value);
         }
+
+        [Obsolete("Content property is not supported", true)]
+        public new VisualElement Content
+        {
+            get => throw new NotSupportedException("Forms9Patch.Button: Content is not a supported property.");
+            set => throw new NotSupportedException("Forms9Patch.Button: Content is not a supported property.");
+        }
+
         #endregion
 
 

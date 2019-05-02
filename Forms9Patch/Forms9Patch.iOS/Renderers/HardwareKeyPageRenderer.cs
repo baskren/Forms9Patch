@@ -19,6 +19,12 @@ namespace Forms9Patch.iOS
 
         public override UIKeyCommand[] KeyCommands => GetKeyCommands();
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            BecomeFirstResponder();
+        }
+
         #region static methods
         internal static void ProcessKeyPress(UIKeyCommand cmd)
         {

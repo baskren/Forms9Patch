@@ -100,6 +100,11 @@ namespace Forms9Patch
         public const string ForwardDeleteKeyInput = "⌦";
 
         /// <summary>
+        /// The clear key HardwareKey.KeyInput.
+        /// </summary>
+        public const string ClearKeyInput = "⌧";
+
+        /// <summary>
         /// The insert key HardwareKey.KeyInput.
         /// </summary>
         public const string InsertKeyInput = "⤹";
