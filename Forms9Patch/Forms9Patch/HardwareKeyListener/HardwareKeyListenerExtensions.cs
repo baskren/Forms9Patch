@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -72,6 +73,11 @@ namespace Forms9Patch
         {
             var hardwareKeyListener = new HardwareKeyListener(new HardwareKey(keyInput, hardwareKeyModifierKeys, discoverableTitle), onPressed);
             var listeners = visualElement.GetHardwareKeyListeners();
+            if (listeners.FirstOrDefault(l => l.HardwareKey == hardwareKeyListener.HardwareKey) is HardwareKeyListener redundantListener)
+            {
+                listeners.Remove(redundantListener);
+                Console.WriteLine("Forms9Patch.HardwareKeyListener: Replacing [" + redundantListener + "] with [" + hardwareKeyListener + "]");
+            }
             listeners.Add(hardwareKeyListener);
             return hardwareKeyListener;
         }
@@ -193,7 +199,13 @@ namespace Forms9Patch
 
         internal static HardwareKeyListener AddHardwareKeyListener(this VisualElement visualElement, HardwareKeyListener hardwareKeyListener)
         {
-            visualElement.GetHardwareKeyListeners().Add(hardwareKeyListener);
+            var listeners = visualElement.GetHardwareKeyListeners();
+            if (listeners.FirstOrDefault(l => l.HardwareKey == hardwareKeyListener.HardwareKey) is HardwareKeyListener redundantListener)
+            {
+                listeners.Remove(redundantListener);
+                Console.WriteLine("Forms9Patch.HardwareKeyListener: Replacing [" + redundantListener + "] with [" + hardwareKeyListener + "]");
+            }
+            listeners.Add(hardwareKeyListener);
             return hardwareKeyListener;
         }
 

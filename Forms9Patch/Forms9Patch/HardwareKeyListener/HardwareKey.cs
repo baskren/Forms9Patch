@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -6,7 +7,7 @@ namespace Forms9Patch
     /// <summary>
     /// Hardware key: Defines a key stroke for which to be listened
     /// </summary>
-    public class HardwareKey : BindableObject
+    public class HardwareKey : BindableObject, IEquatable<HardwareKey>
     {
         #region properties
         /// <summary>
@@ -65,9 +66,15 @@ namespace Forms9Patch
             DiscoverableTitle = discoverableTitle;
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.HardwareKey"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.HardwareKey"/>.</returns>
+        public override string ToString()
+            => "{KeyInput[" + KeyInput + "] ModifierKeys[" + ModifierKeys + "] DiscoverableTitle[" + DiscoverableTitle + "]}";
+
 
         #region Constants
-
         /// <summary>
         /// Up arrow key HardwareKey.KeyInput
         /// </summary>
@@ -193,5 +200,71 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Equality Operators
+        /// <summary>
+        /// Determines whether a specified instance of <see cref="Forms9Patch.HardwareKey"/> is equal to another
+        /// specified <see cref="Forms9Patch.HardwareKey"/>.
+        /// </summary>
+        /// <param name="a">The first <see cref="Forms9Patch.HardwareKey"/> to compare.</param>
+        /// <param name="b">The second <see cref="Forms9Patch.HardwareKey"/> to compare.</param>
+        /// <returns><c>true</c> if <c>a</c> and <c>b</c> are equal; otherwise, <c>false</c>.</returns>
+        public static bool operator ==(HardwareKey a, HardwareKey b)
+        {
+            if (ReferenceEquals(a, b))
+                return true;
+            if ((a is null) != (b is null))
+                return false;
+            if (a.KeyInput != b.KeyInput)
+                return false;
+            if (a.ModifierKeys != b.ModifierKeys)
+                return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Determines whether a specified instance of <see cref="Forms9Patch.HardwareKey"/> is not equal to another
+        /// specified <see cref="Forms9Patch.HardwareKey"/>.
+        /// </summary>
+        /// <param name="a">The first <see cref="Forms9Patch.HardwareKey"/> to compare.</param>
+        /// <param name="b">The second <see cref="Forms9Patch.HardwareKey"/> to compare.</param>
+        /// <returns><c>true</c> if <c>a</c> and <c>b</c> are not equal; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(HardwareKey a, HardwareKey b)
+            => !(a == b);
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Forms9Patch.HardwareKey"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Forms9Patch.HardwareKey"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+        /// <see cref="T:Forms9Patch.HardwareKey"/>; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+            => Equals(obj as HardwareKey);
+
+        /// <summary>
+        /// Determines whether the specified <see cref="Forms9Patch.HardwareKey"/> is equal to the current <see cref="T:Forms9Patch.HardwareKey"/>.
+        /// </summary>
+        /// <param name="other">The <see cref="Forms9Patch.HardwareKey"/> to compare with the current <see cref="T:Forms9Patch.HardwareKey"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="Forms9Patch.HardwareKey"/> is equal to the current
+        /// <see cref="T:Forms9Patch.HardwareKey"/>; otherwise, <c>false</c>.</returns>
+        public bool Equals(HardwareKey other)
+        {
+            return other != null &&
+                   KeyInput == other.KeyInput &&
+                   ModifierKeys == other.ModifierKeys;
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a <see cref="T:Forms9Patch.HardwareKey"/> object.
+        /// </summary>
+        /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+        /// hash table.</returns>
+        public override int GetHashCode()
+        {
+            var hashCode = 1819452472;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(KeyInput);
+            hashCode = hashCode * -1521134295 + ModifierKeys.GetHashCode();
+            return hashCode;
+        }
+        #endregion
     }
 }

@@ -20,8 +20,8 @@ namespace Forms9Patch
         /// <value>The hardware key.</value>
         public HardwareKey HardwareKey
         {
-            get => (HardwareKey)GetValue(HardwareKeyProperty); 
-            set => SetValue(HardwareKeyProperty, value); 
+            get => (HardwareKey)GetValue(HardwareKeyProperty);
+            set => SetValue(HardwareKeyProperty, value);
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Forms9Patch
         /// <value>The command.</value>
         public ICommand Command
         {
-            get => (ICommand)GetValue(CommandProperty); 
-            set => SetValue(CommandProperty, value); 
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Forms9Patch
         /// <value>The command parameter.</value>
         public object CommandParameter
         {
-            get => GetValue(CommandParameterProperty); 
-            set => SetValue(CommandParameterProperty, value); 
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
 
         /// <summary>
@@ -71,5 +71,13 @@ namespace Forms9Patch
                 Pressed += onPressed;
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.HardwareKeyListener"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.HardwareKeyListener"/>.</returns>
+        public override string ToString()
+        {
+            return "{Key:[" + HardwareKey + "]}";
+        }
     }
 }

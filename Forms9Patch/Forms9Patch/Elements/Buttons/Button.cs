@@ -212,16 +212,6 @@ namespace Forms9Patch
 
 
         #region Properties
-        /// <summary>
-        /// UNSUPPORTED INHERITED PROPERTY.
-        /// </summary>
-        /// <value>The content.</value>
-        [Obsolete("Unsupported Property", true)]
-        public new View Content
-        {
-            get { throw new NotSupportedException("[Forms9Patch.Button] Content property is not supported"); }
-            set { throw new NotSupportedException("[Forms9Patch.Button] Content property is not supported"); }
-        }
 
         #region IsClipped property
         internal static readonly BindablePropertyKey IsClippedPropertyKey = BindableProperty.CreateReadOnly("Forms9Patch.Button.IsClipped", typeof(bool), typeof(Button), default(bool));
