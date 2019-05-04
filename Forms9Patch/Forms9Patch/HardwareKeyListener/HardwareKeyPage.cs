@@ -145,12 +145,18 @@ namespace Forms9Patch
         public static event EventHandler FocusedElementChanged;
         #endregion
 
+        #region Fields
+        VisualElement _elementFocusedBeforeDisappearing;
+        #endregion
+
         /// <summary>
         /// Called when the HardwareKeyPage appears
         /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (_elementFocusedBeforeDisappearing != null)
+                DefaultFocusedElement = _elementFocusedBeforeDisappearing;
             _VisibleInstances++;
             FocusMonitor.Start(this);
         }
@@ -167,6 +173,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearing()
         {
+            _elementFocusedBeforeDisappearing = DefaultFocusedElement;
             base.OnDisappearing();
             _VisibleInstances--;
             FocusMonitor.Stop(this);
