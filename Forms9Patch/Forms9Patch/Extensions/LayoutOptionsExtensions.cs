@@ -37,5 +37,10 @@ namespace Forms9Patch
         {
             return o1.Alignment == o2.Alignment && o1.Expands == o2.Expands;
         }
+
+        public static string ToString(this LayoutOptions layoutOptions)
+        {
+            return layoutOptions.Alignment + (layoutOptions.Expands ? "AndExpands" : null);
+        }
     }
 }

@@ -77,6 +77,12 @@ namespace Forms9Patch
             _contentTypes.Remove(typeof(ItemWrapper<string>));
         }
 
+        public void Clear()
+        {
+            _cellTemplates.Clear();
+            _contentTypes.Clear();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.GroupTemplate"/> class.
         /// </summary>
@@ -98,7 +104,7 @@ namespace Forms9Patch
 
         protected void Add(Type dataType, Type viewType)
         {
-           // Type itemType = dataType;
+            // Type itemType = dataType;
             //itemType = itemBaseType;
             //itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
             if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(dataType))
