@@ -35,6 +35,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <ConsolePause>false</ConsolePause>
+    <!--DebugType>full</DebugType-->
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -804,14 +804,17 @@ namespace Forms9Patch
             _itemWrappers.Add(itemWrapper);
         }
 
+        bool _clearing;
         public void Clear()
         {
+            _clearing = true;
             for (int i = _itemWrappers.Count - 1; i >= 0; i--)
             {
                 var subGroup = _itemWrappers[i] as GroupWrapper;
                 subGroup?.Clear();
                 RemoveAt(i);
             }
+            _clearing = false;
         }
 
         public bool Contains(ItemWrapper itemWrapper)
@@ -1483,7 +1486,8 @@ namespace Forms9Patch
                     break;
             }
             */
-            Reindex();
+            if (!_clearing || Count == 0)
+                Reindex();
             _collectionChanged?.Invoke(sender, e);
         }
         #endregion
