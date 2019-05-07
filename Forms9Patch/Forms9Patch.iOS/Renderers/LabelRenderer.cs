@@ -259,7 +259,7 @@ namespace Forms9Patch.iOS
                         Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
                     Debug("Control.Center: " + Control.Center);
                 }
-                LastDesiredSize = new SizeRequest(new Size(reqWidth, reqHeight), new Size(10, ControlFont.LineHeight));
+                LastDesiredSize = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(ControlFont.LineHeight)));
             }
             return LastDesiredSize;
         }
