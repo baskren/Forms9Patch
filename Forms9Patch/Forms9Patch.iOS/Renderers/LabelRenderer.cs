@@ -304,7 +304,8 @@ namespace Forms9Patch.iOS
             if (Element?.F9PFormattedString != null)
             {
                 ControlAttributedText = Element.F9PFormattedString.ToNSAttributedString(font, ControlTextColor);//, twice: twice);
-                labelSize = ControlAttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
+                if (ControlAttributedText != null)
+                    labelSize = ControlAttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
                 ControlText = null;
             }
             else if (ControlText != null)
