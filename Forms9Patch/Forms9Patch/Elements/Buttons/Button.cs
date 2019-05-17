@@ -353,7 +353,7 @@ namespace Forms9Patch
         /// <summary>
         /// The haptic effect property.
         /// </summary>
-        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(Button), HapticEffect.KeyClick);
+        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(Button), default(HapticEffect));
         /// <summary>
         /// Gets or sets the haptic effect.
         /// </summary>
@@ -365,22 +365,53 @@ namespace Forms9Patch
         }
         #endregion HapticEffect
 
-        #region HapticMode
+        #region HapticEffectMode
         /// <summary>
         /// The haptic mode property.
         /// </summary>
-        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(Button), default(KeyClicks));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create("HapticEffectMode", typeof(EffectMode), typeof(Button), default(EffectMode));
         /// <summary>
         /// Gets or sets the haptic mode.
         /// </summary>
         /// <value>The haptic mode.</value>
-        public KeyClicks HapticMode
+        public EffectMode HapticEffectMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty);
-            set => SetValue(HapticModeProperty, value);
+            get => (EffectMode)GetValue(HapticEffectModeProperty);
+            set => SetValue(HapticEffectModeProperty, value);
         }
-        #endregion HapticMode
+        #endregion HapticEffectMode
 
+        #region SoundEffect property
+        /// <summary>
+        /// The sound effect property backing store
+        /// </summary>
+        public static readonly BindableProperty SoundEffectProperty = BindableProperty.Create("SoundEffect", typeof(SoundEffect), typeof(Button), default(SoundEffect));
+        /// <summary>
+        /// Gets or sets the sound effect.
+        /// </summary>
+        /// <value>The sound effect.</value>
+        public SoundEffect SoundEffect
+        {
+            get => (SoundEffect)GetValue(SoundEffectProperty);
+            set => SetValue(SoundEffectProperty, value);
+        }
+        #endregion SoundEffect property
+
+        #region SoundEffectMode property
+        /// <summary>
+        /// The backing store for the sound effect mode property.
+        /// </summary>
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create("SoundEffectMode", typeof(EffectMode), typeof(Button), default(EffectMode));
+        /// <summary>
+        /// Gets or sets the sound effect mode.
+        /// </summary>
+        /// <value>The sound effect mode.</value>
+        public EffectMode SoundEffectMode
+        {
+            get => (EffectMode)GetValue(SoundEffectModeProperty);
+            set => SetValue(SoundEffectModeProperty, value);
+        }
+        #endregion SoundEffectMode property
         /*
         #region IsLongPressEnabled property
         /// <summary>
@@ -1159,7 +1190,7 @@ namespace Forms9Patch
                     }
                 }
                 SendTapped();
-                KeyClicksService.Feedback(HapticEffect, HapticMode);
+                KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
                 e.Handled = true;
             }
         }
@@ -1189,7 +1220,9 @@ namespace Forms9Patch
                     }
                 }
                 SendTapped();
-                KeyClicksService.Feedback(HapticEffect, HapticMode);
+                //KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
+                Haptics.Feedback(HapticEffect, HapticEffectMode);
+                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
                 e.Handled = true;
             }
         }

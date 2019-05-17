@@ -125,7 +125,6 @@ namespace Forms9Patch
         }
         #endregion
 
-
         #region Properties
 
 
@@ -173,19 +172,19 @@ namespace Forms9Patch
             get { return _segments; }
             set
             {
-                _updatingSegments = true;
+                UpdatingSegments = true;
                 _segments.Clear();
                 if (value != null)
                 {
                     foreach (var segment in value)
                         _segments.Add(segment);
                 }
-                _updatingSegments = false;
+                UpdatingSegments = false;
             }
         }
 
         int _updatingCount;
-        bool _updatingSegments
+        bool UpdatingSegments
         {
             get => _updatingCount > 0;
             set
@@ -448,7 +447,7 @@ namespace Forms9Patch
         /// <summary>
         /// The haptic effect property.
         /// </summary>
-        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HapticEffect", typeof(HapticEffect), typeof(SegmentedControl), default(HapticEffect));
+        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(SegmentedControl), default(HapticEffect));
         /// <summary>
         /// Gets or sets the haptic effect.
         /// </summary>
@@ -460,21 +459,53 @@ namespace Forms9Patch
         }
         #endregion
 
-        #region HapticMode
+        #region HapticEffectMode
         /// <summary>
         /// The haptic mode property.
         /// </summary>
-        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("Forms9Patch.SegmentedControl.HapticMode", typeof(KeyClicks), typeof(SegmentedControl), default(KeyClicks));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create("HapticEffectMode", typeof(EffectMode), typeof(SegmentedControl), default(EffectMode));
         /// <summary>
         /// Gets or sets the haptic mode.
         /// </summary>
         /// <value>The haptic mode.</value>
-        public KeyClicks HapticMode
+        public EffectMode HapticEffectMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty);
-            set => SetValue(HapticModeProperty, value);
+            get => (EffectMode)GetValue(HapticEffectModeProperty);
+            set => SetValue(HapticEffectModeProperty, value);
         }
         #endregion
+
+        #region SoundEffect property
+        /// <summary>
+        /// The backing store for the sound effect property.
+        /// </summary>
+        public static readonly BindableProperty SoundEffectProperty = BindableProperty.Create("SoundEffect", typeof(SoundEffect), typeof(SegmentedControl), default(SoundEffect));
+        /// <summary>
+        /// Gets or sets the sound effect played when a segment is tapped
+        /// </summary>
+        /// <value>The sound effect.</value>
+        public SoundEffect SoundEffect
+        {
+            get => (SoundEffect)GetValue(SoundEffectProperty);
+            set => SetValue(SoundEffectProperty, value);
+        }
+        #endregion SoundEffect property
+
+        #region SoundEffectMode property
+        /// <summary>
+        /// Backing store for the sound effect mode property.
+        /// </summary>
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create("SoundEffectMode", typeof(EffectMode), typeof(SegmentedControl), default(EffectMode));
+        /// <summary>
+        /// Gets or sets the sound effect is perfomed when a segment is tapped
+        /// </summary>
+        /// <value>The sound effect mode.</value>
+        public EffectMode SoundEffectMode
+        {
+            get => (EffectMode)GetValue(SoundEffectModeProperty);
+            set => SetValue(SoundEffectModeProperty, value);
+        }
+        #endregion SoundEffectMode property
 
         #region TintIcon
         /// <summary>
@@ -777,8 +808,10 @@ namespace Forms9Patch
             if (!segment.FontAttributesSet)
                 segment._button.FontAttributes = FontAttributes;
             button.TrailingIcon = TrailingIcon;
-            button.HapticMode = HapticMode;
+            button.HapticEffectMode = HapticEffectMode;
             button.HapticEffect = HapticEffect;
+            button.SoundEffect = SoundEffect;
+            button.SoundEffectMode = SoundEffectMode;
             button.Spacing = IntraSegmentSpacing;
         }
         #endregion
@@ -827,7 +860,7 @@ namespace Forms9Patch
             {
                 ((IExtendedShape)Children[1]).ExtendedElementShape = ExtendedElementShape.Rectangle;
             }
-            if (!_updatingSegments)
+            if (!UpdatingSegments)
             {
                 UpdateChildrenPadding();
                 InvalidateLayout();
@@ -1057,9 +1090,15 @@ namespace Forms9Patch
                 else if (propertyName == HapticEffectProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.HapticEffect = HapticEffect;
-                else if (propertyName == HapticModeProperty.PropertyName)
+                else if (propertyName == HapticEffectModeProperty.PropertyName)
                     foreach (Segment segment in Segments)
-                        segment._button.HapticMode = HapticMode;
+                        segment._button.HapticEffectMode = HapticEffectMode;
+                else if (propertyName == SoundEffectProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.SoundEffect = SoundEffect;
+                else if (propertyName == SoundEffectModeProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.SoundEffectMode = SoundEffectMode;
                 else if (propertyName == IsEnabledProperty.PropertyName)
                 {
                     if (IsEnabled)
@@ -1197,7 +1236,6 @@ namespace Forms9Patch
         {
             //return base.OnMeasure(widthConstraint, heightConstraint);
             var hz = Orientation == StackOrientation.Horizontal;
-            var vt = !hz;
 
             var shadowPadding = new Thickness(0);
             if (HasShadow && BackgroundColor.A > 0 && Children.Count > 1)
@@ -1254,7 +1292,7 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            if (!_updatingSegments)
+            if (!UpdatingSegments)
             {
                 LayoutChildIntoBoundingRegion(_background, new Rectangle(x, y, width, height));
                 LayoutFunction(x, y, width, height, LayoutSegment);

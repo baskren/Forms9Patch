@@ -131,12 +131,13 @@
     <Compile Include="Services\FontService.cs" />
     <Compile Include="Services\HtmlToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
-    <Compile Include="Services\KeyClicksService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Reachability.cs" />
     <Compile Include="UIViewContentMode.cs" />
+    <Compile Include="Services\HapticService.cs" />
+    <Compile Include="Services\AudioService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>

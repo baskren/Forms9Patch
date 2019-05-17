@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -55,6 +56,7 @@ namespace Forms9Patch
 
         static int _instances;
         internal BaseCellView BaseCellView = new BaseCellView();
+        bool _freshHeight;
         #endregion
 
 
@@ -102,6 +104,8 @@ namespace Forms9Patch
             if (View != null)
                 View.BindingContext = BindingContext;
 
+            _freshHeight = true;
+
             base.OnBindingContextChanged();
         }
 
@@ -111,11 +115,22 @@ namespace Forms9Patch
             // don't know why the below "&& UWP" was added.  A really bone headed move.
             if (propertyName == nameof(Height))// && Device.RuntimePlatform == Device.UWP)
             {
-                if (this.Parent != null)
-                    ForceUpdateSize();
+                UpdateSize();
+                _freshHeight = false;
             }
         }
 
+        bool _updatingSize;
+        async Task UpdateSize()
+        {
+            if (_updatingSize && _freshHeight)
+                return;
+            _updatingSize = true;
+            await Task.Delay(200);
+            if (this.RealParent != null)
+                ForceUpdateSize();
+            _updatingSize = false;
+        }
 
     }
 }

@@ -71,6 +71,11 @@ namespace Forms9Patch
 
         public static KeyClicks KeyClicks = KeyClicks.Default;
 
+        public static EffectMode HapticEffectMode = EffectMode.Default;
+
+        public static EffectMode SoundEffectMode = EffectMode.Default;
+
+
 
         #region Confirm that Forms9Patch has been initialized
         static bool _confirmed;

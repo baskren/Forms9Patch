@@ -346,6 +346,7 @@ namespace FormsGestures.Droid
 
 
         #region Down / Up / 'ed events
+        //int _downFires;
         DateTime _onDownDateTime = DateTime.MinValue;
         public override bool OnDown(MotionEvent e)
         {
@@ -358,6 +359,9 @@ namespace FormsGestures.Droid
                 System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown invalid e.Action [" + e.Action + "]");
                 return false;
             }
+
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnDown fires=" + _downFires);
+            //_downFires++;
 
             _onDownDateTime = DateTime.Now;
             Start = e;
@@ -393,14 +397,15 @@ namespace FormsGestures.Droid
             return true;
         }
 
-
+        //int _upFires;
         int _numberOfTaps;
         public bool OnUp(MotionEvent ev)
         {
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener." + P42.Utils.ReflectionExtensions.CallerMemberName() + " action:" + ev.Action + " index" + ev.ActionIndex + " e:" + ev);
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
-
-            if (ev.Action != MotionEventActions.Up && ev.Action != MotionEventActions.Down)
+            //if (ev.Action == MotionEventActions.Down)
+            //    System.Diagnostics.Debug.WriteLine("");
+            if (ev.Action != MotionEventActions.Up)
             {
                 System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp invalid e.Action [" + ev.Action + "]");
                 return false;
@@ -411,6 +416,10 @@ namespace FormsGestures.Droid
             _numberOfTaps++;
             LongPressingTimerStop();
             TappedTimerStart(ev, _numberOfTaps);
+
+            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp e.Action [" + ev.Action + "]");
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnUp fires=" + _upFires);
+            //_upFires++;
 
             bool handled = false;
             //if (_weakReferenceView?.Get() is Android.Views.View _view)
@@ -584,6 +593,7 @@ namespace FormsGestures.Droid
                     handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
                 }
                 // OnFling overrides OnUp??
+                System.Diagnostics.Debug.WriteLine(GetType() + ".OnFling calling OnUp");
                 OnUp(e2);
             }
             return handled;

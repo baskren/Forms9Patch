@@ -16,9 +16,8 @@ namespace Forms9Patch
     public static class ApplicationInfoService
     {
         static ApplicationInfoService()
-        {
-            Settings.ConfirmInitialization();
-        }
+            => Settings.ConfirmInitialization();
+
 
         static IApplicationInfoService _service;
         static IApplicationInfoService Service

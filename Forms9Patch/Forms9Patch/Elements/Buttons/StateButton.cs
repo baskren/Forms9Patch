@@ -550,7 +550,9 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("Up");
             if (IsEnabled)
             {
-                KeyClicksService.Feedback(HapticEffect, HapticMode);
+                //KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
+                Haptics.Feedback(HapticEffect, HapticEffectMode);
+                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
 
                 //System.Diagnostics.Debug.WriteLine("tapped");
                 if (ToggleBehavior)

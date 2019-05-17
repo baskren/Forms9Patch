@@ -175,10 +175,11 @@
     <Compile Include="Services\FontService.cs" />
     <Compile Include="Services\HtmlToPngService.cs" />
     <Compile Include="Services\KeyboardService.cs" />
-    <Compile Include="Services\KeyClicksService.cs" />
     <Compile Include="Services\OsInfoService.cs" />
     <Compile Include="Services\WebViewExtensionsService.cs" />
     <Compile Include="Models\Popup.cs" />
+    <Compile Include="Services\AudioService.cs" />
+    <Compile Include="Services\HapticsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">

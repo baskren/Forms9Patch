@@ -79,7 +79,9 @@ namespace FormsGestures.Droid
                     _lastCoords = null;
                 }
             }
-            else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up || (e.Action == MotionEventActions.Down && _lastMotionEvent != null && _lastMotionEvent.Action == MotionEventActions.Down))
+            // the following line was once needed but now it seems to cause double "UPS" to be called when used with Bc3.Forms.KeypadButton;
+            //else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up || (e.Action == MotionEventActions.Down && _lastMotionEvent != null && _lastMotionEvent.Action == MotionEventActions.Down))
+            else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up)
                 _listener?.OnUp(e);
             else if (e.Action == MotionEventActions.Cancel)
                 _listener?.Cancel();

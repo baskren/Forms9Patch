@@ -43,14 +43,25 @@ namespace Forms9Patch
         bool IsSelected { get; set; }
 
         /// <summary>
-        /// Get/Sets the haptic effect performed when button is clicked
+        /// Get/Sets the haptic effect to be performed when button is clicked
         /// </summary>
         HapticEffect HapticEffect { get; set; }
 
         /// <summary>
         /// Gets/Sets the haptic mode used to determine if a HapticEffect will occur when button is clicked
         /// </summary>
-        KeyClicks HapticMode { get; set; }
+        EffectMode HapticEffectMode { get; set; }
+
+
+        /// <summary>
+        /// Get/Sets the sound effect to be performed when button is clicked
+        /// </summary>
+        SoundEffect SoundEffect { get; set; }
+
+        /// <summary>
+        /// Gets/Sets the sound mode used to determine if a SoundEffect  will occur when button is clicked
+        /// </summary>
+        EffectMode SoundEffectMode { get; set; }
 
         /*
         /// <summary>

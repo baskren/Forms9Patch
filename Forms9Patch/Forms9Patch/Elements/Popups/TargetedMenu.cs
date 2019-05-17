@@ -114,20 +114,52 @@ namespace Forms9Patch
         }
         #endregion HapticEffect property
 
-        #region HapticMode property
+        #region HapticEffectMode property
         /// <summary>
-        /// backing store for HapticMode property
+        /// backing store for HapticEffectMode property
         /// </summary>
-        public static readonly BindableProperty HapticModeProperty = BindableProperty.Create("HapticMode", typeof(KeyClicks), typeof(TargetedMenu), default(KeyClicks));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create("HapticEffectMode", typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
         /// <summary>
-        /// Gets/Sets the HapticMode property
+        /// Gets/Sets the HapticEffectMode property
         /// </summary>
-        public KeyClicks HapticMode
+        public EffectMode HapticEffectMode
         {
-            get => (KeyClicks)GetValue(HapticModeProperty);
-            set => SetValue(HapticModeProperty, value);
+            get => (EffectMode)GetValue(HapticEffectModeProperty);
+            set => SetValue(HapticEffectModeProperty, value);
         }
-        #endregion HapticMode property
+        #endregion HapticEffectMode property
+
+        #region SoundEffect property
+        /// <summary>
+        /// The backing store for the sound effect property.
+        /// </summary>
+        public static readonly BindableProperty SoundEffectProperty = BindableProperty.Create("SoundEffect", typeof(SoundEffect), typeof(TargetedMenu), default(SoundEffect));
+        /// <summary>
+        /// Gets or sets the sound effect played when a menu item is tapped.
+        /// </summary>
+        /// <value>The sound effect.</value>
+        public SoundEffect SoundEffect
+        {
+            get => (SoundEffect)GetValue(SoundEffectProperty);
+            set => SetValue(SoundEffectProperty, value);
+        }
+        #endregion SoundEffect property
+
+        #region SoundEffectMode property
+        /// <summary>
+        /// The backing store for the sound effect mode property.
+        /// </summary>
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create("SoundEffectMode", typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
+        /// <summary>
+        /// Gets or sets if the sound effect is played when a menu item is tapped
+        /// </summary>
+        /// <value>The sound effect mode.</value>
+        public EffectMode SoundEffectMode
+        {
+            get => (EffectMode)GetValue(SoundEffectModeProperty);
+            set => SetValue(SoundEffectModeProperty, value);
+        }
+        #endregion SoundEffectMode property
 
         #endregion
 
@@ -330,11 +362,23 @@ namespace Forms9Patch
                     if (visualElement is Button button)
                         button.HapticEffect = HapticEffect;
             }
-            else if (propertyName == HapticModeProperty.PropertyName)
+            else if (propertyName == HapticEffectModeProperty.PropertyName)
             {
                 foreach (VisualElement visualElement in _stackLayout.Children)
                     if (visualElement is Button button)
-                        button.HapticMode = HapticMode;
+                        button.HapticEffectMode = HapticEffectMode;
+            }
+            else if (propertyName == SoundEffectProperty.PropertyName)
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.SoundEffect = SoundEffect;
+            }
+            else if (propertyName == SoundEffectModeProperty.PropertyName)
+            {
+                foreach (VisualElement visualElement in _stackLayout.Children)
+                    if (visualElement is Button button)
+                        button.SoundEffectMode = SoundEffectMode;
             }
         }
         #endregion
