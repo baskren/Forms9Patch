@@ -36,11 +36,10 @@ namespace FormsGestures.Droid
         MotionEvent _lastMotionEvent;
         public override bool OnTouchEvent(MotionEvent e)
         {
-            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
+            System.Diagnostics.Debug.WriteLine("=============================================================");
+            System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent e.Action=[" + e.Action + "]");
             bool handled = base.OnTouchEvent(e);
-
-
-            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent handled=" + handled);
+            System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent handled=" + handled);
 
             if (e.PointerCount > 1 && _listener != null)
             {
@@ -84,7 +83,7 @@ namespace FormsGestures.Droid
             else if (e.ActionMasked == MotionEventActions.Up || e.ActionMasked == MotionEventActions.Pointer1Up)
                 _listener?.OnUp(e);
             else if (e.Action == MotionEventActions.Cancel)
-                _listener?.Cancel();
+                _listener?.Cancel(e);
 
             _lastMotionEvent = e;
             return handled;
