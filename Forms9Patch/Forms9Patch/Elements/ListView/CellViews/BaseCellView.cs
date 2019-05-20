@@ -946,7 +946,7 @@ namespace Forms9Patch
             else
                 Device.BeginInvokeOnMainThread(UpdateBackground);
         }
-
+        /*
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             //System.Diagnostics.Debug.WriteLine("BaseCellView.LayoutChildren");
@@ -955,6 +955,7 @@ namespace Forms9Patch
             else
                 Device.BeginInvokeOnMainThread(() => base.LayoutChildren(x, y, width, height));
         }
+        */
         #endregion
     }
 }

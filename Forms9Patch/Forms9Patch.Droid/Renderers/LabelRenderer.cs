@@ -84,6 +84,7 @@ namespace Forms9Patch.Droid
         SizeRequest? _lastSizeRequest;
         ControlState _lastControlState;
 
+#pragma warning disable CS0618 // Type or member is obsolete
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>
@@ -92,6 +93,7 @@ namespace Forms9Patch.Droid
             _instance = _instances++;
             AutoPackage = false;
         }
+#pragma warning restore CS0618 // Type or member is obsolete
 
         public LabelRenderer(Android.Content.Context context) : base(context)
         {
@@ -140,7 +142,8 @@ namespace Forms9Patch.Droid
                     height = blockHeight;
             }
 
-            return new Xamarin.Forms.Size(width, height);
+
+            return new Xamarin.Forms.Size(System.Math.Ceiling(width), System.Math.Ceiling(height));
         }
 
         StaticLayout LabelLayout(int widthConstraint, float fontSize)
@@ -339,7 +342,7 @@ namespace Forms9Patch.Droid
             else
                 Control.TextFormatted = text;
 
-            _lastSizeRequest = new SizeRequest(new Xamarin.Forms.Size(tmpWd, tmpHt), new Xamarin.Forms.Size(10, tmpHt));
+            _lastSizeRequest = new SizeRequest(new Xamarin.Forms.Size(System.Math.Ceiling((double)tmpWd), System.Math.Ceiling((double)tmpHt)), new Xamarin.Forms.Size(10, System.Math.Ceiling((double)tmpHt)));
             if (DebugCondition)
             {
                 //Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);

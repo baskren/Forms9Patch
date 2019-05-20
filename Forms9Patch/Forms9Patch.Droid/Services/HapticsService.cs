@@ -19,7 +19,10 @@ namespace Forms9Patch.Droid
             get
             {
                 if (!_appEnabledTested)
+                {
                     _appEnabled = Android.App.Application.Context.CheckCallingOrSelfPermission("android.permission.VIBRATE") == Android.Content.PM.Permission.Granted;
+                    _appEnabledTested = true;
+                }
                 return _appEnabled;
             }
         }
@@ -80,6 +83,7 @@ namespace Forms9Patch.Droid
                 }
                 else
                 {
+#pragma warning disable CS0618 // Type or member is obsolete
                     long[] pattern = null;
                     switch (effect)
                     {
@@ -106,6 +110,7 @@ namespace Forms9Patch.Droid
                     {
                         _vibrator.Vibrate(pattern, -1, Attributes);
                     }
+#pragma warning restore CS0618 // Type or member is obsolete
                 }
             }
         }

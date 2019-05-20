@@ -68,7 +68,9 @@ namespace Forms9Patch.Droid
                 if (Android.OS.Build.VERSION.SdkInt > Android.OS.BuildVersionCodes.M)
                     result = ims?.LanguageTag.Replace('_', '-');
                 else
+#pragma warning disable CS0618 // Type or member is obsolete
                     result = ims?.Locale.Replace('_', '-');
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 if (string.IsNullOrWhiteSpace(result))
                 {
