@@ -72,6 +72,8 @@ namespace Forms9Patch
                 Height = contentView.CellHeight;
         }
 
+        double _oldHeight;
+
         /// <summary>
         /// Triggered before a property is changed.
         /// </summary>
@@ -88,6 +90,8 @@ namespace Forms9Patch
 
             if (propertyName == BindingContextProperty.PropertyName && View != null)
                 View.BindingContext = null;
+            else if (propertyName == nameof(Height))
+                _oldHeight = Height;
         }
 
         /// <summary>
@@ -101,10 +105,10 @@ namespace Forms9Patch
                 return;
             }
 
+            _freshHeight = true;
+            _oldHeight = -1;
             if (View != null)
                 View.BindingContext = BindingContext;
-
-            _freshHeight = true;
 
             base.OnBindingContextChanged();
         }
@@ -122,8 +126,9 @@ namespace Forms9Patch
 
         bool _updatingSize;
         async Task UpdateSize()
+        //void UpdateSize()
         {
-            if (_updatingSize && _freshHeight)
+            if (_updatingSize || _freshHeight || _oldHeight < 1)
                 return;
             _updatingSize = true;
             await Task.Delay(200);

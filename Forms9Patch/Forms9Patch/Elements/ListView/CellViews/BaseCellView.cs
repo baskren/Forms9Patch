@@ -81,7 +81,8 @@ namespace Forms9Patch
                 if (IsHeader)
                     return 0;
                 if (BindingContext is IItemWrapper itemWrapper)
-                    return itemWrapper.RenderedSeparatorHeight;
+                    //return itemWrapper.RenderedSeparatorHeight;
+                    return itemWrapper.RequestedSeparatorHeight;
                 return 1;
             }
         }
@@ -934,6 +935,8 @@ namespace Forms9Patch
                     var separatorHeight = SeparatorHeight;
                     if (Math.Abs(RowDefinitions[1].Height.Value - separatorHeight) > 0.1)
                         RowDefinitions[1] = new RowDefinition { Height = new GridLength(separatorHeight, GridUnitType.Absolute) };
+                    _separator.IsVisible = !itemWrapper.IsLastItem;
+                    // yes, we are keeping the height the same because, if not, the time to  refresh after ForceCellHeight on iOS gets longer and longer
                     HeightRequest = RowHeight + separatorHeight;
                     _separator.Color = itemWrapper.SeparatorColor;
                     _separator.Margin = new Thickness(itemWrapper.SeparatorLeftIndent, 0, itemWrapper.SeparatorRightIndent, 0);

@@ -1072,7 +1072,8 @@ namespace Forms9Patch
                         calcOffset += cellHeight;
                         flatIndex++;
                         if (j < groupWrapper.Count - 1)
-                            calcOffset += subItemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
+                            //calcOffset += subItemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
+                            calcOffset += subItemWrapper.RequestedSeparatorHeight + SeparatorThicknessError();
                     }
                 }
                 else
@@ -1083,9 +1084,8 @@ namespace Forms9Patch
                     calcOffset += cellHeight;
                     flatIndex++;
                     if (i < Count - 1)
-                    {
-                        calcOffset += itemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
-                    }
+                        //calcOffset += itemWrapper.RenderedSeparatorHeight + SeparatorThicknessError();
+                        calcOffset += itemWrapper.RequestedSeparatorHeight + SeparatorThicknessError();
                 }
             }
             return null;

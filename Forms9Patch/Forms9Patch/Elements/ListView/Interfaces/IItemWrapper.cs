@@ -24,7 +24,7 @@ namespace Forms9Patch
         /// Gets a value indicating whether this <see cref="T:Forms9Patch.IItemWrapper"/> should render separator, de.
         /// </summary>
         /// <value><c>true</c> if should render separator; otherwise, <c>false</c>.</value>
-        bool ShouldRenderSeparator { get; }
+        //bool ShouldRenderSeparator { get; }
 
         /// <summary>
         /// Gets the separator visibilty.
@@ -47,7 +47,7 @@ namespace Forms9Patch
         /// <summary>
         /// Answers the question, "Should a separator be rendered after the cell for this item?"
         /// </summary>
-        double RenderedSeparatorHeight { get; }
+        //double RenderedSeparatorHeight { get; }
 
         /// <summary>
         /// Gets the separator left indent for this cell.

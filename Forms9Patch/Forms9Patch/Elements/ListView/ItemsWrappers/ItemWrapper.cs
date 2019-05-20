@@ -241,8 +241,9 @@ namespace Forms9Patch
             set { SetValue(IsLastItemProperty, value); }
         }
 
+        /*
         public bool ShouldRenderSeparator => SeparatorVisibility != SeparatorVisibility.None && !IsLastItem;
-
+               
         public double RenderedSeparatorHeight
         {
             get
@@ -252,6 +253,7 @@ namespace Forms9Patch
                 return result;
             }
         }
+        */
 
         public double BestGuessItemRowHeight()
         {
