@@ -20,10 +20,10 @@ namespace Forms9Patch
             var c1 = new Color(c.R, c.G, c.B, c.A);
             if (c1 == Color.Transparent)
                 c1 = new Color(1.0, 1.0, 1.0, 0.0);
-            double A = c1.A;
-            double R = c1.R + (c2.R - c1.R) * percent;
-            double G = c1.G + (c2.G - c1.G) * percent;
-            double B = c1.B + (c2.B - c1.B) * percent;
+            var A = c1.A;
+            var R = c1.R + (c2.R - c1.R) * percent;
+            var G = c1.G + (c2.G - c1.G) * percent;
+            var B = c1.B + (c2.B - c1.B) * percent;
             return new Color(R, G, B, A);
         }
 

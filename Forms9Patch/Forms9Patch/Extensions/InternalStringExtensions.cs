@@ -14,7 +14,7 @@ namespace Forms9Patch
         {
             for (int i = 0; i < s.Length; i++)
             {
-                int unicodeCodePoint = char.ConvertToUtf32(s, i);
+                var unicodeCodePoint = char.ConvertToUtf32(s, i);
                 if (unicodeCodePoint > 0xffff)
                     i++;
                 yield return unicodeCodePoint;

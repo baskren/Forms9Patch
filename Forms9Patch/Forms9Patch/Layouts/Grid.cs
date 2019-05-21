@@ -15,19 +15,19 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the row spacing property.
         /// </summary>
-        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create("RowSpacing", typeof(double), typeof(Grid), 6d,
+        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(nameof(RowSpacing), typeof(double), typeof(Grid), 6d,
                                                                                              propertyChanged: (bindable, oldValue, newValue) => ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowSpacingProperty, newValue));
 
         /// <summary>
         /// Backing store for the column spacing property.
         /// </summary>
-        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create("ColumnSpacing", typeof(double), typeof(Grid), 6d,
+        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(nameof(ColumnSpacing), typeof(double), typeof(Grid), 6d,
                                                                                                 propertyChanged: (bindable, oldValue, newValue) => ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.ColumnSpacingProperty, newValue));
 
         /// <summary>
         /// Backing store for the column definitions property.
         /// </summary>
-        public static readonly BindableProperty ColumnDefinitionsProperty = BindableProperty.Create("ColumnDefinitions", typeof(ColumnDefinitionCollection), typeof(Grid), null,
+        public static readonly BindableProperty ColumnDefinitionsProperty = BindableProperty.Create(nameof(ColumnDefinitions), typeof(ColumnDefinitionCollection), typeof(Grid), null,
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.ColumnDefinitionsProperty, newvalue);
@@ -43,7 +43,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the row definitions property.
         /// </summary>
-        public static readonly BindableProperty RowDefinitionsProperty = BindableProperty.Create("RowDefinitions", typeof(RowDefinitionCollection), typeof(Grid), null,
+        public static readonly BindableProperty RowDefinitionsProperty = BindableProperty.Create(nameof(RowDefinitions), typeof(RowDefinitionCollection), typeof(Grid), null,
             validateValue: (bindable, value) => value != null, propertyChanged: (bindable, oldvalue, newvalue) =>
             {
                 ((Grid)bindable)._grid.SetValue(Xamarin.Forms.Grid.RowDefinitionsProperty, newvalue);

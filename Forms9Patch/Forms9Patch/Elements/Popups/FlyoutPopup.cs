@@ -16,7 +16,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the orientation property.
         /// </summary>
-        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(FlyoutPopup), StackOrientation.Horizontal);
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(FlyoutPopup), StackOrientation.Horizontal);
         /// <summary>
         /// Gets or sets the orientation of the flyout (along which axis does the fly out action occur?).
         /// </summary>
@@ -32,7 +32,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the alignment property.
         /// </summary>
-        public static readonly BindableProperty AlignmentProperty = BindableProperty.Create("Alignment", typeof(FlyoutAlignment), typeof(FlyoutPopup), FlyoutAlignment.Start);
+        public static readonly BindableProperty AlignmentProperty = BindableProperty.Create(nameof(Alignment), typeof(FlyoutAlignment), typeof(FlyoutPopup), FlyoutAlignment.Start);
         /// <summary>
         /// Gets or sets the alignment of the flyout along the Orientation axis
         /// </summary>
@@ -192,13 +192,13 @@ namespace Forms9Patch
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
-                double contentX = Orientation == StackOrientation.Horizontal
+                var contentX = Orientation == StackOrientation.Horizontal
                     ? Alignment == FlyoutAlignment.Start
                         ? -shadowPadding.Left + Margin.Left
                         : width + shadowPadding.Right - rboxSize.Width - Margin.Right
                     : -shadowPadding.Left + Margin.Left;
 
-                double contentY = Orientation == StackOrientation.Vertical
+                var contentY = Orientation == StackOrientation.Vertical
                     ? Alignment == FlyoutAlignment.Start
                         ? -shadowPadding.Top + Margin.Top
                         : height + shadowPadding.Bottom - rboxSize.Height - Margin.Bottom

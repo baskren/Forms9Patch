@@ -21,7 +21,7 @@ namespace Forms9Patch
             {
                 var eventInfo = visualElementType.GetRuntimeEvent("FocusChanged");
                 var focusMonitorType = typeof(FocusMonitor);
-                var methodInfo = focusMonitorType.GetMethodInfo("OnVisualElementFocusChanged");
+                var methodInfo = focusMonitorType.GetMethodInfo(nameof(OnVisualElementFocusChanged));
                 if (methodInfo != null)
                 {
                     //Delegate handler = Delegate.CreateDelegate(eventInfo.EventHandlerType, null, methodInfo);
@@ -106,7 +106,7 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("\t A");
                 var wasElement = _element;
 
-                bool changed = false;
+                var changed = false;
                 //System.Diagnostics.Debug.WriteLine("\t B _element=[" + _element + "]");
                 if (_element != null)
                 {

@@ -44,11 +44,7 @@ namespace Forms9Patch
         /// Create this instance.
         /// </summary>
         public static ActivityIndicatorPopup Create()
-        {
-            var indicator = new ActivityIndicatorPopup();
-            indicator.IsVisible = true;
-            return indicator;
-        }
+         => new ActivityIndicatorPopup { IsVisible = true };
         #endregion
 
 

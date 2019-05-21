@@ -26,7 +26,7 @@ namespace Forms9Patch
         {
             get
             {
-                Stopwatch stopwatch = new Stopwatch();
+                var stopwatch = new Stopwatch();
                 stopwatch.Start();
 
                 if (_mimeItem != null)

@@ -22,8 +22,10 @@ namespace FormsGestures.UWP
 
         public static bool FireDown(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e);
-            args.Listener = listener;
+            var args = new UwpDownUpArgs(element, e)
+            {
+                Listener = listener
+            };
             listener.OnDown(args);
             e.Handled = args.Handled;
             return e.Handled;
@@ -31,8 +33,10 @@ namespace FormsGestures.UWP
 
         public static bool FireUp(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e);
-            args.Listener = listener;
+            var args = new UwpDownUpArgs(element, e)
+            {
+                Listener = listener
+            };
             listener.OnUp(args);
             e.Handled = args.Handled;
             return e.Handled;
@@ -50,8 +54,10 @@ namespace FormsGestures.UWP
 
         public static bool FireDown(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e);
-            args.Listener = listener;
+            var args = new UwpDownUpArgs(element, e)
+            {
+                Listener = listener
+            };
             listener.OnDown(args);
             e.Handled = args.Handled;
             return e.Handled;
@@ -59,8 +65,10 @@ namespace FormsGestures.UWP
 
         public static bool FireUp(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e);
-            args.Listener = listener;
+            var args = new UwpDownUpArgs(element, e)
+            {
+                Listener = listener
+            };
             listener.OnUp(args);
             e.Handled = args.Handled;
             return e.Handled;

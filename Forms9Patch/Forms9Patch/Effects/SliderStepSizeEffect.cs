@@ -32,7 +32,7 @@ namespace Forms9Patch
                 if (value != _stepSize)
                 {
                     _stepSize = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("StepSize"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StepSize)));
                 }
             }
         }

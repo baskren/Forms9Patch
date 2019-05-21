@@ -9,7 +9,7 @@ namespace Forms9Patch
 	/// <summary>
 	/// MarkdownLabel Formatted string.
 	/// </summary>
-	[Xamarin.Forms.ContentProperty ("Text")]
+	[Xamarin.Forms.ContentProperty (nameof(Text))]
 	abstract class F9PFormattedString : INotifyPropertyChanged
 	{
 		internal ObservableCollection<Span> _spans; 
@@ -93,7 +93,7 @@ namespace Forms9Patch
 
 		void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e) {
 			if (e.OldItems != null) {
-				IEnumerator enumerator = e.OldItems.GetEnumerator ();
+                var enumerator = e.OldItems.GetEnumerator ();
 				try {
 					while (enumerator.MoveNext ()) {
 						var span = enumerator.Current as Span;
@@ -108,7 +108,7 @@ namespace Forms9Patch
 				}
 			}
 			if (e.NewItems != null) {
-				IEnumerator enumerator = e.NewItems.GetEnumerator ();
+                var enumerator = e.NewItems.GetEnumerator ();
 				try {
 					while (enumerator.MoveNext ()) {
 						var span2 = enumerator.Current as Span;

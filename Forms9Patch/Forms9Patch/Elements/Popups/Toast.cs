@@ -18,11 +18,8 @@ namespace Forms9Patch
         /// <param name="popAfter">Will dissappear after popAfter TimeSpan</param>
         /// <returns></returns>
         public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
-        {
-            var toast = new Toast() { Title = title, Text = text, PopAfter = popAfter };
-            toast.IsVisible = true;
-            return toast;
-        }
+            => new Toast() { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
+        
         #endregion
 
 
@@ -31,7 +28,7 @@ namespace Forms9Patch
         /// <summary>
         /// The title property backing store.
         /// </summary>
-        public static readonly new BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(Toast), default(string));
+        public static readonly new BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(Toast), default(string));
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -46,7 +43,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text property backing store.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Toast), default(string));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Toast), default(string));
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -60,7 +57,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text color property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(Toast), Color.Black);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Toast), Color.Black);
         /// <summary>
         /// Gets or sets the color of the text.
         /// </summary>

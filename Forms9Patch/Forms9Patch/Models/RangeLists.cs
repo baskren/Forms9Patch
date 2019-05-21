@@ -32,8 +32,8 @@ namespace Forms9Patch
         {
             if (capInsets.Left > 0 || capInsets.Right > 0 || capInsets.Top > 0 || capInsets.Bottom > 0)
             {
-                int offset = 0;
-                bool normalized = (capInsets.Left < 1 && capInsets.Right < 1);
+                var offset = 0;
+                var normalized = (capInsets.Left < 1 && capInsets.Right < 1);
                 var scale = (float)imageSource.GetValue(ImageSource.ImageScaleProperty);
                 var capsX = new List<Range>();
                 if (capInsets.Left > 0 || capInsets.Right > 0)

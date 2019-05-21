@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.TargetedMenu class 
     /// </summary>
-    [ContentProperty("Segments")]
+    [ContentProperty(nameof(Segments))]
     public class TargetedMenu : BubblePopup
     {
         static Color DefaultBackgroundColor = Color.FromRgb(51, 51, 51);
@@ -43,7 +43,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for FontSize property
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(TargetedMenu), -1.0);
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(TargetedMenu), -1.0);
         /// <summary>
         /// Gets/Sets the FontSize property
         /// </summary>
@@ -58,7 +58,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for FontColor property
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Xamarin.Forms.Color), typeof(TargetedMenu), DefaultTextColor);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Xamarin.Forms.Color), typeof(TargetedMenu), DefaultTextColor);
         /// <summary>
         /// Gets/Sets the FontColor property
         /// </summary>
@@ -73,7 +73,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SeparatorColor property
         /// </summary>
-        public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("SeparatorColor", typeof(Color), typeof(TargetedMenu), DefaultSeparatorColor);
+        public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create(nameof(SeparatorColor), typeof(Color), typeof(TargetedMenu), DefaultSeparatorColor);
         /// <summary>
         /// Gets/Sets the SeparatorColor property
         /// </summary>
@@ -88,7 +88,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SeparatorWidth property
         /// </summary>
-        public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create("SeparatorWidth", typeof(double), typeof(TargetedMenu), DefaultSeparatorWidth);
+        public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create(nameof(SeparatorWidth), typeof(double), typeof(TargetedMenu), DefaultSeparatorWidth);
         /// <summary>
         /// Gets/Sets the SeparatorWidth property
         /// </summary>
@@ -103,7 +103,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for HapticEffect property
         /// </summary>
-        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create("HapticEffect", typeof(HapticEffect), typeof(TargetedMenu), default(HapticEffect));
+        public static readonly BindableProperty HapticEffectProperty = BindableProperty.Create(nameof(HapticEffect), typeof(HapticEffect), typeof(TargetedMenu), default(HapticEffect));
         /// <summary>
         /// Gets/Sets the HapticEffect property
         /// </summary>
@@ -118,7 +118,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for HapticEffectMode property
         /// </summary>
-        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create("HapticEffectMode", typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
+        public static readonly BindableProperty HapticEffectModeProperty = BindableProperty.Create(nameof(HapticEffectMode), typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
         /// <summary>
         /// Gets/Sets the HapticEffectMode property
         /// </summary>
@@ -133,7 +133,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the sound effect property.
         /// </summary>
-        public static readonly BindableProperty SoundEffectProperty = BindableProperty.Create("SoundEffect", typeof(SoundEffect), typeof(TargetedMenu), default(SoundEffect));
+        public static readonly BindableProperty SoundEffectProperty = BindableProperty.Create(nameof(SoundEffect), typeof(SoundEffect), typeof(TargetedMenu), default(SoundEffect));
         /// <summary>
         /// Gets or sets the sound effect played when a menu item is tapped.
         /// </summary>
@@ -149,7 +149,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the sound effect mode property.
         /// </summary>
-        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create("SoundEffectMode", typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
+        public static readonly BindableProperty SoundEffectModeProperty = BindableProperty.Create(nameof(SoundEffectMode), typeof(EffectMode), typeof(TargetedMenu), default(EffectMode));
         /// <summary>
         /// Gets or sets if the sound effect is played when a menu item is tapped
         /// </summary>
@@ -439,7 +439,7 @@ namespace Forms9Patch
             _stackLayout.Children.Add(_leftArrowButton);
             _stackLayout.Children.Add(_leftArrowSeparator);
 
-            bool first = true;
+            var first = true;
             foreach (var segment in Segments)
             {
                 if (!first)
@@ -475,7 +475,7 @@ namespace Forms9Patch
                 if (Width < 0)
                     return;
 
-                bool rightArrowShouldBeVisible = true;
+                var rightArrowShouldBeVisible = true;
 
                 var leftWidth = _leftArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
                 var rightWidth = _rightArrowButton.UnexpandedTightSize.Width + SeparatorWidth;
@@ -486,7 +486,7 @@ namespace Forms9Patch
                 _leftArrowButton.IsVisible = _currentPage > 0;
                 _leftArrowSeparator.IsVisible = _currentPage > 0;
 
-                int segmentIndex = 0;
+                var segmentIndex = 0;
                 var pageIndex = 0;
                 for (int i = 2; i < _stackLayout.Children.Count - 2; i += 2)
                 {

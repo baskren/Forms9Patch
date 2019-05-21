@@ -50,8 +50,8 @@ namespace Forms9Patch.UWP
                                 if (!familyNames.FindLocaleName(System.Globalization.CultureInfo.CurrentCulture.Name, out index))
                                     familyNames.FindLocaleName("en-us", out index);
 
-                                string name = familyNames.GetString(index);
-                                string display = name;
+                                var name = familyNames.GetString(index);
+                                var display = name;
                                 using (var font = fontFamily.GetFont(index))
                                 {
                                     if (font.IsSymbolFont)

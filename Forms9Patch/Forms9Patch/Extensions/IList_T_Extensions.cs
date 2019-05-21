@@ -8,8 +8,8 @@ namespace Forms9Patch
         public static IList<T> GetRange<T>(this IList<T> list, int startIndex, int count)
         {
             var result = new List<T>();
-            int index = 0;
-            int itemsCollected = 0;
+            var index = 0;
+            var itemsCollected = 0;
             foreach (var item in list)
             {
                 if (index >= startIndex)

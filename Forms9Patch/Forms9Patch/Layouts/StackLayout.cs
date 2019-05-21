@@ -11,13 +11,13 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Orientation property
         /// </summary>
-        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(StackLayout), StackOrientation.Vertical,
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(StackLayout), StackOrientation.Vertical,
                                                                                               propertyChanged: (bindable, oldvalue, newvalue) => ((StackLayout)bindable)._layout.SetValue(Xamarin.Forms.StackLayout.OrientationProperty, newvalue));
 
         /// <summary>
         /// Backing store for the Spacing property
         /// </summary>
-        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(StackLayout), 6d,
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(StackLayout), 6d,
                                                                                           propertyChanged: (bindable, oldvalue, newvalue) => ((StackLayout)bindable)._layout.SetValue(Xamarin.Forms.StackLayout.SpacingProperty, newvalue));
 
         /// <summary>

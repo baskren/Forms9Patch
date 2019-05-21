@@ -11,7 +11,7 @@ namespace Forms9Patch
         /// <summary>
         /// The start color property.
         /// </summary>
-        public static readonly BindableProperty StartColorProperty = BindableProperty.Create("StartColor", typeof(Color), typeof(ColorGradientBox), default(Color));
+        public static readonly BindableProperty StartColorProperty = BindableProperty.Create(nameof(StartColor), typeof(Color), typeof(ColorGradientBox), default(Color));
         /// <summary>
         /// Gets or sets the start color.
         /// </summary>
@@ -25,7 +25,7 @@ namespace Forms9Patch
         /// <summary>
         /// The end color property.
         /// </summary>
-        public static readonly BindableProperty EndColorProperty = BindableProperty.Create("EndColor", typeof(Color), typeof(ColorGradientBox), default(Color));
+        public static readonly BindableProperty EndColorProperty = BindableProperty.Create(nameof(EndColor), typeof(Color), typeof(ColorGradientBox), default(Color));
         /// <summary>
         /// Gets or sets the end color.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Forms9Patch
         /// <summary>
         /// The orientation property.
         /// </summary>
-        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(ColorGradientBox), default(StackOrientation));
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(ColorGradientBox), default(StackOrientation));
         /// <summary>
         /// Gets or sets the orientation.
         /// </summary>

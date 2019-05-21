@@ -474,7 +474,7 @@ namespace Forms9Patch.UWP
             var capsState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.CapitalLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
             var numLock = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.NumberKeyLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
 
-            Forms9Patch.HardwareKeyModifierKeys result = HardwareKeyModifierKeys.None;
+            var result = HardwareKeyModifierKeys.None;
             if (shiftState && includeShift)
                 result |= HardwareKeyModifierKeys.Shift;
             if (ctrlState)

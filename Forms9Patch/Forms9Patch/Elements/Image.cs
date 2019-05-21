@@ -48,7 +48,7 @@ namespace Forms9Patch
         #region Properties
 
         #region IImageController
-        internal static readonly BindablePropertyKey IsLoadingPropertyKey = BindableProperty.CreateReadOnly("IsLoading", typeof(bool), typeof(Image), default(bool));
+        internal static readonly BindablePropertyKey IsLoadingPropertyKey = BindableProperty.CreateReadOnly(nameof(IsLoading), typeof(bool), typeof(Image), default(bool));
 
         void IImageController.SetIsLoading(bool isLoading)
         {
@@ -62,7 +62,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Source property
         /// </summary>
-        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(Xamarin.Forms.ImageSource), typeof(Image), default(Xamarin.Forms.ImageSource));
         /// <summary>
         /// Gets/Sets the Source property
         /// </summary>
@@ -90,7 +90,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Fill bindable property.
         /// </summary>
-        public static readonly BindableProperty FillProperty = BindableProperty.Create("Forms9Patch.Image.Fill", typeof(Fill), typeof(Image), Fill.Fill);
+        public static readonly BindableProperty FillProperty = BindableProperty.Create(nameof(Fill), typeof(Fill), typeof(Image), Fill.Fill);
         /// <summary>
         /// Fill behavior for nonscalable (not NinePatch or CapInsets not set) image. 
         /// </summary>
@@ -111,7 +111,7 @@ namespace Forms9Patch
         /// When a button with end caps is resized, the resizing occurs only in the middle of the button, in the region between the end caps. The end caps themselves keep their original size and appearance.
         /// </remarks>
         /// <value>The end-cap insets (double or int)</value>
-        public static readonly BindableProperty CapInsetsProperty = BindableProperty.Create("Forms9Patch.Image.CapInsets", typeof(Thickness), typeof(Image), new Thickness(-1));
+        public static readonly BindableProperty CapInsetsProperty = BindableProperty.Create(nameof(CapInsets), typeof(Thickness), typeof(Image), new Thickness(-1));
         /// <summary>
         /// Gets or sets the end-cap insets.  This is a bindable property.
         /// </summary>
@@ -127,7 +127,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ContentPadding bindable property.
         /// </summary>
-        public static readonly BindableProperty ContentPaddingProperty = BindableProperty.Create("Forms9Patch.Image.ContentPadding", typeof(Thickness), typeof(Image), new Thickness(-1));
+        public static readonly BindableProperty ContentPaddingProperty = BindableProperty.Create(nameof(ContentPadding), typeof(Thickness), typeof(Image), new Thickness(-1));
         /// <summary>
         /// Gets content padding if Source is NinePatch image.
         /// </summary>
@@ -143,7 +143,7 @@ namespace Forms9Patch
         /// <summary>
         /// The tint property.
         /// </summary>
-        public static readonly BindableProperty TintColorProperty = BindableProperty.Create("Forms9Patch.Image.TintColor", typeof(Color), typeof(Image), Color.Default);
+        public static readonly BindableProperty TintColorProperty = BindableProperty.Create(nameof(TintColor), typeof(Color), typeof(Image), Color.Default);
         /// <summary>
         /// Gets or sets the image's tint.
         /// </summary>
@@ -184,7 +184,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for AntiAlias property
         /// </summary>
-        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create("Forms9Patch.Image.AntiAlias", typeof(bool), typeof(Image), true);
+        public static readonly BindableProperty AntiAliasProperty = BindableProperty.Create(nameof(AntiAlias), typeof(bool), typeof(Image), true);
         /// <summary>
         /// Gets/Sets the AntiAlias property
         /// </summary>
@@ -871,7 +871,7 @@ namespace Forms9Patch
 
         internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
         {
-            SKCanvas canvas = e.Surface?.Canvas;
+            var canvas = e.Surface?.Canvas;
             //canvas.ClipRect(rect, SKClipOperation.Intersect, false);
 
             var clipBounds = canvas.LocalClipBounds;
@@ -894,15 +894,15 @@ namespace Forms9Patch
             var outlineColor = OutlineColor;
             var elementShape = ((IExtendedShape)this).ExtendedElementShape;
 
-            float separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth * Display.Scale : 0;
+            var separatorWidth = IsSegment ? ((IExtendedShape)this).ExtendedElementSeparatorWidth * Display.Scale : 0;
             if (separatorWidth < 0)
                 separatorWidth = outlineWidth;
             if (outlineColor.A <= 0.01)
                 separatorWidth = 0;
 
-            bool drawOutline = DrawOutline;
-            bool drawImage = DrawImage;
-            bool drawFill = DrawFill;
+            var drawOutline = DrawOutline;
+            var drawImage = DrawImage;
+            var drawFill = DrawFill;
 
             if ((drawFill || drawOutline || separatorWidth > 0 || drawImage))// && CanvasSize != default)
             {
@@ -947,8 +947,8 @@ namespace Forms9Patch
                         // if it is a segment, cast the shadow beyond the button's parimeter and clip it (so no overlaps or gaps)
                         canvas.Save();
 
-                        float allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
-                        SKRect shadowRect = perimeter;
+                        var allowance = Math.Abs(shadowX) + Math.Abs(shadowY) + Math.Abs(shadowR);
+                        var shadowRect = perimeter;
 
                         switch (elementShape)
                         {
@@ -976,7 +976,7 @@ namespace Forms9Patch
 
                         try
                         {
-                            SKRegion region = new SKRegion();
+                            var region = new SKRegion();
                             region.SetRect(new SKRectI((int)rect.Left, (int)rect.Top, (int)rect.Right, (int)rect.Bottom));
                             canvas.ClipRegion(region);
 
@@ -989,7 +989,7 @@ namespace Forms9Patch
                         {
                             var properties = new Dictionary<string, string>
                             {
-                                { "shadowRect", JsonConvert.SerializeObject(shadowRect) },
+                                { nameof(shadowRect), JsonConvert.SerializeObject(shadowRect) },
                                 { "class", "Forms9Patch.ExtendedShapeAndImageView" },
                                 { "method", "Paint" },
                                 { "line", "888" }
@@ -1193,7 +1193,7 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
 
             SKBitmap shadowBitmap = null;
-            SKCanvas workingCanvas = canvas;
+            var workingCanvas = canvas;
 
             if (shadowPaint != null)
             {
@@ -1425,7 +1425,8 @@ namespace Forms9Patch
                         //var destHeight = _imageElement.VerticalOptions.Alignment != Xamarin.Forms.LayoutAlignment.Fill ? (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height) : fillRect.Height;
                         var destHeight = (bitmapAspect > fillRectAspect ? fillRect.Width / bitmapAspect : fillRect.Height);
 
-                        float left = fillRect.MidX - (float)destWidth / 2f, top = fillRect.MidY - (float)destHeight / 2f;
+                        var left = fillRect.MidX - (float)destWidth / 2f;
+                        var top = fillRect.MidY - (float)destHeight / 2f;
                         destRect = SKRect.Create(left, top, (float)destWidth, (float)destHeight);
                     }
                     //else Fill==Fill.Fill
@@ -1450,7 +1451,7 @@ namespace Forms9Patch
                         if (xpatch.Stretchable)
                             xStretchable += xpatch.Width;
                     var xExtra = fillRect.Width - ((float)SourceImageWidth - xStretchable);
-                    float xScale = xExtra >= 0
+                    var xScale = xExtra >= 0
                         ? xStretchable > 0
                             ? xExtra / xStretchable
                             : fillRect.Width / (float)SourceImageWidth
@@ -1460,7 +1461,7 @@ namespace Forms9Patch
                         if (ypatch.Stretchable)
                             yStretchable += ypatch.Width;
                     var yExtra = fillRect.Height - ((float)SourceImageHeight - yStretchable);
-                    float yScale = yExtra >= 0
+                    var yScale = yExtra >= 0
                         ? yStretchable > 0
                             ? yExtra / yStretchable
                             : fillRect.Height / (float)SourceImageHeight
@@ -1608,7 +1609,7 @@ namespace Forms9Patch
             if (IsBubble && this is IBubbleShape bubble && bubble.PointerDirection != PointerDirection.None)
                 return BubblePerimeterPath(bubble, rect, radius);
 
-            Xamarin.Forms.StackOrientation orientation = !IsSegment ? Xamarin.Forms.StackOrientation.Horizontal : ((IExtendedShape)this).ExtendedElementShapeOrientation;
+            var orientation = !IsSegment ? Xamarin.Forms.StackOrientation.Horizontal : ((IExtendedShape)this).ExtendedElementShapeOrientation;
 
             var path = new SKPath();
 
@@ -1812,31 +1813,31 @@ namespace Forms9Patch
              var tipProjection = tipC0 * Math.Tan(pointerAngle / 2);
              */
 
-            float tipCornerHalfWidth = tipRadius * sqrt3d2;
-            float pointerToCornerIntercept = (float)Math.Sqrt((2 * radius * Math.Sin(Math.PI / 12.0)) * (2 * radius * Math.Sin(Math.PI / 12.0)) - (radius * radius / 4.0));
+            var tipCornerHalfWidth = tipRadius * sqrt3d2;
+            var pointerToCornerIntercept = (float)Math.Sqrt((2 * radius * Math.Sin(Math.PI / 12.0)) * (2 * radius * Math.Sin(Math.PI / 12.0)) - (radius * radius / 4.0));
 
-            float pointerAtLimitSansTipHalfWidth = (float)(pointerToCornerIntercept + radius / (2.0 * sqrt3) + (length - tipRadius / 2.0) / sqrt3);
-            float pointerAtLimitHalfWidth = pointerAtLimitSansTipHalfWidth + tipRadius * sqrt3d2;
+            var pointerAtLimitSansTipHalfWidth = (float)(pointerToCornerIntercept + radius / (2.0 * sqrt3) + (length - tipRadius / 2.0) / sqrt3);
+            var pointerAtLimitHalfWidth = pointerAtLimitSansTipHalfWidth + tipRadius * sqrt3d2;
 
-            float pointerSansFiletHalfWidth = (float)(tipCornerHalfWidth + (length - filetRadius / 2.0 - tipRadius / 2.0) / sqrt3);
-            float pointerFiletWidth = filetRadius * sqrt3d2;
-            float pointerAndFiletHalfWidth = pointerSansFiletHalfWidth + pointerFiletWidth;
+            var pointerSansFiletHalfWidth = (float)(tipCornerHalfWidth + (length - filetRadius / 2.0 - tipRadius / 2.0) / sqrt3);
+            var pointerFiletWidth = filetRadius * sqrt3d2;
+            var pointerAndFiletHalfWidth = pointerSansFiletHalfWidth + pointerFiletWidth;
 
-            int dir = 1;
+            var dir = 1;
 
             if (bubble.PointerDirection.IsHorizontal())
             {
-                float start = left;
-                float end = right;
+                var start = left;
+                var end = right;
                 if (bubble.PointerDirection == PointerDirection.Right)
                 {
                     dir = -1;
                     start = right;
                     end = left;
                 }
-                float baseX = start + dir * length;
+                var baseX = start + dir * length;
 
-                float tipY = position;
+                var tipY = position;
                 if (tipY > rect.Height - pointerAtLimitHalfWidth)
                     tipY = rect.Height - pointerAtLimitHalfWidth;
                 if (tipY < pointerAtLimitHalfWidth)
@@ -1852,7 +1853,7 @@ namespace Forms9Patch
                 if (tipY >= rect.Height - pointerAndFiletHalfWidth - radius)
                 {
                     result.LineTo(start + dir * (length + radius), bottom);
-                    float endRatio = (rect.Height - tipY) / (pointerAndFiletHalfWidth + radius);
+                    var endRatio = (rect.Height - tipY) / (pointerAndFiletHalfWidth + radius);
                     //System.Diagnostics.Debug.WriteLineIf (element.PointerDirection == PointerDirection.Left, "A endRatio=[" + endRatio + "]");
                     result.CubicTo(
                         start + dir * (length + radius - endRatio * 4 * radius / 3.0f), bottom,
@@ -1946,15 +1947,15 @@ namespace Forms9Patch
             }
             else
             {
-                float start = top;
-                float end = bottom;
+                var start = top;
+                var end = bottom;
                 if (bubble.PointerDirection == PointerDirection.Down)
                 {
                     dir = -1;
                     start = bottom;
                     end = top;
                 }
-                float tip = position;
+                var tip = position;
                 if (tip > rect.Width - pointerAtLimitHalfWidth)
                     tip = rect.Width - pointerAtLimitHalfWidth;
                 if (tip < pointerAtLimitHalfWidth)

@@ -25,8 +25,10 @@ namespace FormsGestures.UWP
 
         public static bool FireLongPressed(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.TappedRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
         {
-            var args = new UwpLongPressEventArgs(element, e, elapsedMilliseconds);
-            args.Listener = listener;
+            var args = new UwpLongPressEventArgs(element, e, elapsedMilliseconds)
+            {
+                Listener = listener
+            };
             listener?.OnLongPressed(args);
             e.Handled = args.Handled;
             return e.Handled;

@@ -26,7 +26,7 @@ namespace Forms9Patch
         /// <summary>
         /// The items source property.
         /// </summary>
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(BasePicker), null);
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(BasePicker), null);
         /// <summary>
         /// Gets or sets the items source.
         /// </summary>
@@ -42,7 +42,7 @@ namespace Forms9Patch
         /// <summary>
         /// The index property.
         /// </summary>
-        public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(BasePicker), -1, BindingMode.TwoWay);
+        public static readonly BindableProperty IndexProperty = BindableProperty.Create(nameof(Index), typeof(int), typeof(BasePicker), -1, BindingMode.TwoWay);
         /// <summary>
         /// Gets or sets the index.
         /// </summary>
@@ -56,7 +56,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected item property.
         /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(BasePicker), null, BindingMode.TwoWay);
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(BasePicker), null, BindingMode.TwoWay);
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
@@ -70,7 +70,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected items property key.
         /// </summary>
-        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(BasePicker), null);
+        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedItems), typeof(ObservableCollection<object>), typeof(BasePicker), null);
         /// <summary>
         /// Gets the selected items.
         /// </summary>
@@ -101,7 +101,7 @@ namespace Forms9Patch
         /// <summary>
         /// The row height property.
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(BasePicker), 30);
+        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(BasePicker), 30);
         /// <summary>
         /// Gets or sets the height of the row.
         /// </summary>
@@ -177,7 +177,7 @@ namespace Forms9Patch
                 return;
             }
             _tapping = true;
-            int index = 0;
+            var index = 0;
             foreach (var item in ItemsSource)
             {
                 if (item == e.Item)
@@ -298,7 +298,7 @@ namespace Forms9Patch
             if (ItemsSource == null)
                 return;
 
-            int count = 0;
+            var count = 0;
             object firstItem = null;
             object indexItem = null;
             object lastItem = null;

@@ -23,7 +23,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.Text bindable property.
         /// </summary>
-        public static new readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Button), null);
+        public static new readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Button), null);
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static new readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Button), null);
+        public static new readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Button), null);
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -55,7 +55,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the IconImage property
         /// </summary>
-        public static new BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(Button), null);
+        public static new BindableProperty IconImageProperty = BindableProperty.Create(nameof(IconImage), typeof(Forms9Patch.Image), typeof(Button), null);
         /// <summary>
         /// Gets or sets the icon image.  Alternatively, use IconText
         /// </summary>
@@ -70,7 +70,7 @@ namespace Forms9Patch
         /// <summary>
         /// The image text property backing store
         /// </summary>
-        public static new readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(Button), default(string));
+        public static new readonly BindableProperty IconTextProperty = BindableProperty.Create(nameof(IconText), typeof(string), typeof(Button), default(string));
         /// <summary>
         /// Gets or sets the image text - use this to specify the image as an HTML markup string.
         /// </summary>
@@ -89,7 +89,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the DefaultState bindable property.
         /// </summary>
-        public static BindableProperty DefaultStateProperty = BindableProperty.Create("DefaultState", typeof(ButtonState), typeof(StateButton), null);
+        public static BindableProperty DefaultStateProperty = BindableProperty.Create(nameof(DefaultState), typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the default button state.
         /// </summary>
@@ -103,7 +103,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the PressingState bindable property.
         /// </summary>
-        public static BindableProperty PressingStateProperty = BindableProperty.Create("PressingState", typeof(ButtonState), typeof(Button), null);
+        public static BindableProperty PressingStateProperty = BindableProperty.Create(nameof(PressingState), typeof(ButtonState), typeof(Button), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the pressing button state.
         /// </summary>
@@ -117,7 +117,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the SelectedState bindable property.
         /// </summary>
-        public static BindableProperty SelectedStateProperty = BindableProperty.Create("SelectedState", typeof(ButtonState), typeof(StateButton), null);
+        public static BindableProperty SelectedStateProperty = BindableProperty.Create(nameof(SelectedState), typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the selected button state.
         /// </summary>
@@ -131,7 +131,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the DisabledState bindable property.
         /// </summary>
-        public static BindableProperty DisabledStateProperty = BindableProperty.Create("DisabledState", typeof(ButtonState), typeof(StateButton), null);
+        public static BindableProperty DisabledStateProperty = BindableProperty.Create(nameof(DisabledState), typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the disabled button state.
         /// </summary>
@@ -145,7 +145,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the DisabledAndSelectedState bindable property.
         /// </summary>
-        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create("DisabledAndSelectedState", typeof(ButtonState), typeof(StateButton), null);
+        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create(@"DisabledAndSelectedState", typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the disabled and selected button state.
         /// </summary>

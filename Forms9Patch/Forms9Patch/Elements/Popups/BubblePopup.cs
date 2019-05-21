@@ -27,7 +27,7 @@ namespace Forms9Patch
         /// <summary>
         /// The target bias property backing Store.
         /// </summary>
-        public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create("Forms9Patch.BubblePopup.TargetBias", typeof(double), typeof(BubblePopup), 0.5);
+        public static readonly BindableProperty TargetBiasProperty = BindableProperty.Create(nameof(TargetBias), typeof(double), typeof(BubblePopup), 0.5);
         /// <summary>
         /// Gets or sets the bias (0.0 is start; 0.5 is center;  1.0 is end; greater than 1.0 is pixels from start; less than 0.0 is pixels from end)of the pointer relative to the chosen face on the target.
         /// </summary>
@@ -46,7 +46,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer length property.
         /// </summary>
-        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create("Forms9Patch.BubblePopup.PointerLength", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue,
+        public static readonly BindableProperty PointerLengthProperty = BindableProperty.Create(nameof(PointerLength), typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerLengthProperty.DefaultValue,
         propertyChanged: (b, o, n) =>
          {
              if (b is BubblePopup bubblePopup)
@@ -67,7 +67,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer tip radius property.
         /// </summary>
-        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create("PointerTipRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue,
+        public static readonly BindableProperty PointerTipRadiusProperty = BindableProperty.Create(nameof(PointerTipRadius), typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerTipRadiusProperty.DefaultValue,
         propertyChanged: (b, o, n) =>
         {
             if (b is BubblePopup bubblePopup)
@@ -88,7 +88,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for pointer direction property.
         /// </summary>
-        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create("PointerDirection", typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
+        public static readonly BindableProperty PointerDirectionProperty = BindableProperty.Create(nameof(PointerDirection), typeof(PointerDirection), typeof(BubblePopup), (PointerDirection)BubbleLayout.PointerDirectionProperty.DefaultValue);
         /// <summary>
         /// Gets or sets the direction in which the pointer pointing.
         /// </summary>
@@ -104,7 +104,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for PreferredPointerDirection property
         /// </summary>
-        public static readonly BindableProperty PreferredPointerDirectionProperty = BindableProperty.Create("Forms9Patch.BubblePopup.PreferredPointerDirection", typeof(PointerDirection), typeof(BubblePopup), PointerDirection.None);
+        public static readonly BindableProperty PreferredPointerDirectionProperty = BindableProperty.Create(nameof(PreferredPointerDirection), typeof(PointerDirection), typeof(BubblePopup), PointerDirection.None);
         /// <summary>
         /// Gets/Sets the PreferredPointerDirection property
         /// </summary>
@@ -119,7 +119,7 @@ namespace Forms9Patch
         /// <summary>
         /// The pointer corner radius property.  Defaults to OutlineCornerRadius if not set.
         /// </summary>
-        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create("PointerCornerRadius", typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue,
+        public static readonly BindableProperty PointerCornerRadiusProperty = BindableProperty.Create(nameof(PointerCornerRadius), typeof(float), typeof(BubblePopup), (float)BubbleLayout.PointerCornerRadiusProperty.DefaultValue,
         propertyChanged: (b, o, n) =>
         {
             if (b is BubblePopup bubblePopup)
@@ -140,7 +140,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Point property
         /// </summary>
-        public static readonly BindableProperty PointProperty = BindableProperty.Create("Forms9Patch.BubblePopup.Point", typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity, double.PositiveInfinity));
+        public static readonly BindableProperty PointProperty = BindableProperty.Create(nameof(Point), typeof(Point), typeof(BubblePopup), new Point(double.NegativeInfinity, double.PositiveInfinity));
         /// <summary>
         /// Gets/Sets the Point property
         /// </summary>
@@ -322,7 +322,7 @@ namespace Forms9Patch
             var hzModal = width - Margin.HorizontalThickness;
             var vtModal = height - Margin.VerticalThickness;
             double hzAvail = 0, vtAvail = 0;
-            SizeRequest sizeRequest = new SizeRequest();
+            var sizeRequest = new SizeRequest();
 
             //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
@@ -332,9 +332,9 @@ namespace Forms9Patch
 
                 var shadowPadding = ShapeBase.ShadowPadding(_bubbleLayout);
 
-                PointerDirection pointerDir = PointerDirection.None;
+                var pointerDir = PointerDirection.None;
                 Page targetPage = this;
-                Rectangle targetBounds = Rectangle.Zero;
+                var targetBounds = Rectangle.Zero;
 
                 if (Target != null && PointerDirection != PointerDirection.None)
                 {
@@ -376,10 +376,10 @@ namespace Forms9Patch
 
                         //double hzExtra = 0, vtExtra = 0;
                         double hzExtra = -1, vtExtra = -1;
-                        PointerDirection hzPointerDir = PointerDirection.None;
-                        PointerDirection vtPointerDir = PointerDirection.None;
-                        SizeRequest vtSizeRequest = new SizeRequest();
-                        SizeRequest hzSizeRequest = new SizeRequest();
+                        var hzPointerDir = PointerDirection.None;
+                        var vtPointerDir = PointerDirection.None;
+                        var vtSizeRequest = new SizeRequest();
+                        var hzSizeRequest = new SizeRequest();
                         if (PreferredPointerDirection != PointerDirection.None)
                         {
                             if (PreferredPointerDirection.DownAllowed() && availT > vtAvail)

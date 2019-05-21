@@ -108,13 +108,15 @@ namespace Forms9Patch.UWP
             {
                 await webView.CapturePreviewToStreamAsync(ms);
 
-                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(ms);
+                var decoder = await BitmapDecoder.CreateAsync(ms);
 
-                BitmapTransform transform = new BitmapTransform();
-                transform.ScaledHeight = (uint)decoder.PixelHeight;
-                transform.ScaledWidth = (uint)decoder.PixelWidth;
+                var transform = new BitmapTransform
+                {
+                    ScaledHeight = (uint)decoder.PixelHeight,
+                    ScaledWidth = (uint)decoder.PixelWidth
+                };
 
-                PixelDataProvider pixelData = await decoder.GetPixelDataAsync(
+                var pixelData = await decoder.GetPixelDataAsync(
                     BitmapPixelFormat.Bgra8,
                     BitmapAlphaMode.Straight,
                     transform,
@@ -128,7 +130,7 @@ namespace Forms9Patch.UWP
                 var file = await piclib.CreateFileAsync(fileName, Windows.Storage.CreationCollisionOption.GenerateUniqueName);
                 using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
-                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
                     encoder.SetPixelData(BitmapPixelFormat.Bgra8,
                                      BitmapAlphaMode.Ignore,
                                      (uint)decoder.PixelWidth, (uint)decoder.PixelHeight,
@@ -138,7 +140,6 @@ namespace Forms9Patch.UWP
 
                 var onComplete = (Action<string>)webView.GetValue(OnCompleteProperty);
                 onComplete?.Invoke(file.Path);
-
             }
         }
     }

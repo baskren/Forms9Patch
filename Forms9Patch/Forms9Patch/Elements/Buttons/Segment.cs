@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Model for Segment.
     /// </summary>
-    [ContentProperty("HtmlText")]
+    [ContentProperty(nameof(HtmlText))]
     public class Segment : BindableObject, ISegment
     {
         #region Obsolete Properties
@@ -54,7 +54,7 @@ namespace Forms9Patch
         /// <summary>
         /// Bindable Property for the IconImage property
         /// </summary>
-        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(Segment), null);
+        public static BindableProperty IconImageProperty = BindableProperty.Create(nameof(IconImage), typeof(Forms9Patch.Image), typeof(Segment), null);
         /// <summary>
         /// Gets or sets the icon image for this <see cref="Segment"/>.  Alternative to IconText prop
         /// </summary>
@@ -69,7 +69,7 @@ namespace Forms9Patch
         /// <summary>
         /// The icon text property backing store.
         /// </summary>
-        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(Segment), default(string));
+        public static readonly BindableProperty IconTextProperty = BindableProperty.Create(nameof(IconText), typeof(string), typeof(Segment), default(string));
         /// <summary>
         /// Gets or sets the icon text - alternative to ImageSource.
         /// </summary>
@@ -85,7 +85,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Text bindable property.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(Segment), null);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(Segment), null);
         /// <summary>
         /// Gets or sets the text for this <see cref="Segment"/>.
         /// </summary>
@@ -101,7 +101,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Segment), null,
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Segment), null,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 //System.Diagnostics.Debug.WriteLine("");
@@ -121,7 +121,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Segment.TextColor bindable property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(Segment), Color.Default);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(Segment), Color.Default);
         /// <summary>
         /// Gets or sets the color of the font.
         /// </summary>
@@ -138,7 +138,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Segment.FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(Segment), FontAttributes.None);
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(Segment), FontAttributes.None);
         /// <summary>
         /// Gets or sets the font attributes.
         /// </summary>
@@ -158,7 +158,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the is enabled property.
         /// </summary>
-        public static readonly BindableProperty IsEnabledProperty = BindableProperty.Create("IsEnabled", typeof(bool), typeof(Segment), true);
+        public static readonly BindableProperty IsEnabledProperty = BindableProperty.Create(nameof(IsEnabled), typeof(bool), typeof(Segment), true);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Segment"/> is enabled.
         /// </summary>
@@ -174,7 +174,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the is selected property.
         /// </summary>
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(Segment), false, BindingMode.TwoWay);
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(Segment), false, BindingMode.TwoWay);
         /// <summary>
         /// 
         /// </summary>
@@ -190,7 +190,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the orientation property.
         /// </summary>
-        public static readonly BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(Segment), StackOrientation.Horizontal);
+        public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(Segment), StackOrientation.Horizontal);
         /// <summary>
         /// Gets or sets the image/lable orientation.
         /// </summary>
@@ -206,7 +206,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Segment.Command bindable property.
         /// </summary>
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(Segment), null, BindingMode.OneWay, null,
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(Segment), null, BindingMode.OneWay, null,
             new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
                 ((Segment)bo).OnCommandChanged()));
         /// <summary>
@@ -233,7 +233,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Segment.CommandParameter bindable property.
         /// </summary>
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(Segment), null, BindingMode.OneWay, null,
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(Segment), null, BindingMode.OneWay, null,
             new BindableProperty.BindingPropertyChangedDelegate((bo, o, n) =>
                 ((Segment)bo).CommandCanExecuteChanged(bo, EventArgs.Empty)));
         /// <summary>
@@ -330,32 +330,34 @@ namespace Forms9Patch
             {
                 switch (e.PropertyName)
                 {
-                    case "ImageImage":
+                    case nameof(IconImage):
                         IconImage = _button.IconImage;
                         break;
-                    case "IconText":
+                    case nameof(IconText):
                         IconText = _button.IconText;
                         break;
-                    case "Text":
+                    case nameof(Text):
                         Text = _button.Text;
                         break;
-                    case "HtmlText":
+                    case nameof(HtmlText):
                         HtmlText = _button.HtmlText;
                         break;
-                    case "TextColor":
+                    case nameof(TextColor):
                         TextColor = _button.TextColor;
                         break;
-                    case "FontAttributes":
+                    case nameof(FontAttributes):
                         FontAttributes = _button.FontAttributes;
                         break;
-                    case "IsEnabled":
+                    case nameof(IsEnabled):
                         IsEnabled = _button.IsEnabled;
                         break;
-                    case "IsSelected":
+                    case nameof(IsSelected):
                         IsSelected = _button.IsSelected;
                         break;
-                    case "Orienation":
+                    case nameof(Orientation):
                         Orientation = _button.Orientation;
+                        break;
+                    default:
                         break;
                 }
             };
@@ -394,7 +396,7 @@ namespace Forms9Patch
         public Segment(string text, string icon, Assembly assembly = null) : this()
         {
             Text = text;
-            bool isIconText = false;
+            var isIconText = false;
 
 
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(icon);
@@ -440,32 +442,34 @@ namespace Forms9Patch
 
             switch (propertyName)
             {
-                case "IconImage":
+                case nameof(IconImage):
                     _button.IconImage = IconImage;
                     break;
-                case "IconText":
+                case nameof(IconText):
                     _button.IconText = IconText;
                     break;
-                case "Text":
+                case nameof(Text):
                     _button.Text = Text;
                     break;
-                case "HtmlText":
+                case nameof(HtmlText):
                     _button.HtmlText = HtmlText;
                     break;
-                case "TextColor":
+                case nameof(TextColor):
                     _button.TextColor = TextColor;
                     break;
-                case "FontAttributes":
+                case nameof(FontAttributes):
                     _button.FontAttributes = FontAttributes;
                     break;
-                case "IsEnabled":
+                case nameof(IsEnabled):
                     _button.IsEnabled = IsEnabled;
                     break;
-                case "IsSelected":
+                case nameof(IsSelected):
                     _button.IsSelected = IsSelected;
                     break;
-                case "Orienation":
+                case nameof(Orientation):
                     _button.Orientation = Orientation;
+                    break;
+                default:
                     break;
             }
         }
@@ -505,7 +509,7 @@ namespace Forms9Patch
 
         void CommandCanExecuteChanged(object sender, EventArgs eventArgs)
         {
-            ICommand command = Command;
+            var command = Command;
             if (command == null)
                 return;
             //IsEnabledCore = command.CanExecute(CommandParameter);

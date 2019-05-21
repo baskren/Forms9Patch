@@ -175,7 +175,7 @@ namespace Forms9Patch
 
                 if (reqResIndex >= 0)
                 {
-                    int index = 0;
+                    var index = 0;
                     for (int i = 0; i <= reqResIndex; i++)
                         index += reqResSplit[i].Length + 1;
                     if (index < pathString.Length)
@@ -246,7 +246,7 @@ namespace Forms9Patch
             }
 
             string resMultiple;
-            int attempt = 0;
+            var attempt = 0;
             do
             {
                 var scale = AppleDensities[attempt].Scale;

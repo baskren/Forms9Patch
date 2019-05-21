@@ -42,7 +42,7 @@ namespace Forms9Patch
         {
             //Add (typeof(NullItem), typeof (NullCellView));
             var viewType = typeof(NullItemCellView);
-            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
+            var cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             var template = new DataTemplate(cellType);
             var itemType = typeof(NullItemWrapper);
             _cellTemplates[itemType] = template;
@@ -90,7 +90,7 @@ namespace Forms9Patch
         public TemplateSelectorBase(Type groupContentViewType) : this()
         {
             var itemType = typeof(GroupWrapper);
-            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { groupContentViewType });
+            var cellType = typeof(ItemCell<>).MakeGenericType(new[] { groupContentViewType });
             var template = new DataTemplate(cellType);
             _cellTemplates[itemType] = template;
             _contentTypes[itemType] = groupContentViewType;
@@ -109,7 +109,7 @@ namespace Forms9Patch
             //itemType = typeof(ItemWrapper<>).MakeGenericType(new Type[] { itemBaseType });
             if (_cellTemplates.Count > 20 && !_contentTypes.ContainsKey(dataType))
                 throw new IndexOutOfRangeException("Xamarin.Forms.Platforms.Android does not permit more than 20 DataTemplates per ListView");
-            Type cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
+            var cellType = typeof(ItemCell<>).MakeGenericType(new[] { viewType });
             var template = new DataTemplate(cellType);
             _cellTemplates[dataType] = template;
             _contentTypes[dataType] = viewType;
@@ -130,7 +130,7 @@ namespace Forms9Patch
             //Type itemType = ((item as Item)?.Source ?? item).GetType();
             if (item is ItemWrapper itemWrapper)
             {
-                Type itemType = itemWrapper.GetType();
+                var itemType = itemWrapper.GetType();
                 if (_cellTemplates.ContainsKey(itemType))
                     return _cellTemplates[itemType];
                 var source = itemWrapper.Source;
@@ -172,25 +172,14 @@ namespace Forms9Patch
         }
 
         internal BaseCellView MakeContentView(ItemWrapper item)
-        {
-            Type itemType = item.GetType();
-            if (_contentTypes.ContainsKey(itemType))
-            {
-                Type contentType = _contentTypes[itemType];
-                //var cellType = typeof(Cell<>).MakeGenericType (new[] { contentType });
-                //var cellView = (BaseCellView)Activator.CreateInstance (cellType);
-                //cellView.BindingContext = item;
-                //return cellView;
-                //System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) enter",item);
-                var baseCellView = new BaseCellView();
-                //var baseCellView = (BaseCellView)Activator.CreateInstance(BaseCellViewType);
-                baseCellView.ContentView = (View)Activator.CreateInstance(contentType);
-                baseCellView.BindingContext = item;
-                //System.Diagnostics.Debug.WriteLine("\t\tMakeContentView({0}) exit",item);
-                return baseCellView;
-            }
-            return null;
-        }
+            => (item.GetType() is Type itemType &&  _contentTypes.ContainsKey(itemType))
+                ? new BaseCellView
+                {
+                    ContentView = (View)Activator.CreateInstance(_contentTypes[itemType]),
+                    BindingContext = item
+                }
+                : null;
+       
     }
 }
 

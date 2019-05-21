@@ -14,7 +14,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The components property.
 		/// </summary>
-		public static readonly BindableProperty ComponentsProperty = BindableProperty.Create("Components", typeof(ObservableCollection<ObservableCollection<object>>), typeof(MultiComponentPicker), null);
+		public static readonly BindableProperty ComponentsProperty = BindableProperty.Create(nameof(Components), typeof(ObservableCollection<ObservableCollection<object>>), typeof(MultiComponentPicker), null);
 		/// <summary>
 		/// Gets or sets the components.
 		/// </summary>
@@ -28,7 +28,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The row sizes property.
 		/// </summary>
-		public static readonly BindableProperty RowSizesProperty = BindableProperty.Create("RowSizes", typeof(List<double>), typeof(MultiComponentPicker), null);
+		public static readonly BindableProperty RowSizesProperty = BindableProperty.Create(nameof(RowSizes), typeof(List<double>), typeof(MultiComponentPicker), null);
 		/// <summary>
 		/// Gets or sets the row sizes.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace Forms9Patch
 		/// <summary>
 		/// The row height property.
 		/// </summary>
-		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(MultiComponentPicker), -1);
+		public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(MultiComponentPicker), -1);
 		/// <summary>
 		/// Gets or sets the height of the row.
 		/// </summary>
@@ -78,11 +78,11 @@ namespace Forms9Patch
 			{
 				if (_eventManager == null)
 					_eventManager = WeakEventManager.GetWeakEventManager(this);
-				_eventManager.AddEventHandler("SelectionChanged", value);
+				_eventManager.AddEventHandler(nameof(SelectionChanged), value);
 			}
 			remove
 			{
-				_eventManager?.RemoveEventHandler("SelectionChanged", value);
+				_eventManager?.RemoveEventHandler(nameof(SelectionChanged), value);
 			}
 		}
         #endregion

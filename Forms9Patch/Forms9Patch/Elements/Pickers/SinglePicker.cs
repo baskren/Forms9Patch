@@ -13,7 +13,7 @@ namespace Forms9Patch
         /// <summary>
         /// The item templates property.
         /// </summary>
-        public static readonly BindableProperty ItemTemplatesProperty = BindableProperty.Create("ItemTemplates", typeof(DataTemplateSelector), typeof(SinglePicker), null);
+        public static readonly BindableProperty ItemTemplatesProperty = BindableProperty.Create(nameof(ItemTemplates), typeof(DataTemplateSelector), typeof(SinglePicker), null);
         /// <summary>
         /// Gets the item templates.
         /// </summary>
@@ -27,7 +27,7 @@ namespace Forms9Patch
         /// <summary>
         /// The items source property.
         /// </summary>
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(SinglePicker), null);
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(SinglePicker), null);
         /// <summary>
         /// Gets or sets the items source.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Forms9Patch
         /// <summary>
         /// The row height property.
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(SinglePicker), 30);
+        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(SinglePicker), 30);
         /// <summary>
         /// Gets or sets the height of the row.
         /// </summary>
@@ -55,7 +55,7 @@ namespace Forms9Patch
         /// <summary>
         /// The index property.
         /// </summary>
-        public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(SinglePicker), 0);
+        public static readonly BindableProperty IndexProperty = BindableProperty.Create(nameof(Index), typeof(int), typeof(SinglePicker), 0);
         /// <summary>
         /// Gets or sets the index.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected item property.
         /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(SinglePicker), null);
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(SinglePicker), null);
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>

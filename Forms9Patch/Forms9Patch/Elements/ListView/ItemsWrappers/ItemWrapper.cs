@@ -18,7 +18,7 @@ namespace Forms9Patch
         #region Properties
 
         #region RowHeight Properties
-        public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create("RequestedRowHeight", typeof(double), typeof(ItemWrapper), 40.0);
+        public static readonly BindableProperty RequestedRowHeightProperty = BindableProperty.Create(nameof(RequestedRowHeight), typeof(double), typeof(ItemWrapper), 40.0);
         public double RequestedRowHeight
         {
             get => (double)GetValue(RequestedRowHeightProperty);
@@ -28,7 +28,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for RenderedRowHeight property
         /// </summary>
-        public static readonly BindableProperty RenderedRowHeightProperty = BindableProperty.Create("RenderedRowHeight", typeof(double), typeof(ItemWrapper), -1.0);
+        public static readonly BindableProperty RenderedRowHeightProperty = BindableProperty.Create(nameof(RenderedRowHeight), typeof(double), typeof(ItemWrapper), -1.0);
         /// <summary>
         /// Gets/Sets the RenderedRowHeight property
         /// </summary>
@@ -57,7 +57,7 @@ namespace Forms9Patch
         /// <summary>
         /// The separator color property.
         /// </summary>
-        public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create("SeparatorColor", typeof(Color), typeof(ItemWrapper), Color.FromRgba(0, 0, 0, 0.12));
+        public static readonly BindableProperty SeparatorColorProperty = BindableProperty.Create(nameof(SeparatorColor), typeof(Color), typeof(ItemWrapper), Color.FromRgba(0, 0, 0, 0.12));
         /// <summary>
         /// Gets or sets the color of the separator.
         /// </summary>
@@ -71,7 +71,7 @@ namespace Forms9Patch
         /// <summary>
         /// The separator height property.
         /// </summary>
-        public static readonly BindableProperty RequestedSeparatorHeightProperty = BindableProperty.Create("RequestedSeparatorHeight", typeof(double), typeof(ItemWrapper), 1.0);
+        public static readonly BindableProperty RequestedSeparatorHeightProperty = BindableProperty.Create(nameof(RequestedSeparatorHeight), typeof(double), typeof(ItemWrapper), 1.0);
         /// <summary>
         /// Gets or sets the height of the separator.
         /// </summary>
@@ -85,7 +85,7 @@ namespace Forms9Patch
         /// <summary>
         /// The separator left indent property.
         /// </summary>
-        public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create("SeparatorLeftIndent", typeof(double), typeof(ItemWrapper), 20.0);
+        public static readonly BindableProperty SeparatorLeftIndentProperty = BindableProperty.Create(nameof(SeparatorLeftIndent), typeof(double), typeof(ItemWrapper), 20.0);
         /// <summary>
         /// Gets or sets the separator left indent.
         /// </summary>
@@ -99,7 +99,7 @@ namespace Forms9Patch
         /// <summary>
         /// The separator right indent property.
         /// </summary>
-        public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create("SeparatorRightIndent", typeof(double), typeof(ItemWrapper), 0.0);
+        public static readonly BindableProperty SeparatorRightIndentProperty = BindableProperty.Create(nameof(SeparatorRightIndent), typeof(double), typeof(ItemWrapper), 0.0);
         /// <summary>
         /// Gets or sets the separator right indent.
         /// </summary>
@@ -112,14 +112,14 @@ namespace Forms9Patch
         #endregion
 
         #region Background properties
-        public static readonly BindableProperty CellBackgroundColorProperty = BindableProperty.Create("CellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Transparent);
+        public static readonly BindableProperty CellBackgroundColorProperty = BindableProperty.Create(nameof(CellBackgroundColor), typeof(Color), typeof(ItemWrapper), Color.Transparent);
         public Color CellBackgroundColor
         {
             get => (Color)GetValue(CellBackgroundColorProperty);
             internal set => SetValue(CellBackgroundColorProperty, value);
         }
 
-        public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create("SelectedCellBackgroundColor", typeof(Color), typeof(ItemWrapper), Color.Gray);
+        public static readonly BindableProperty SelectedCellBackgroundColorProperty = BindableProperty.Create(nameof(SelectedCellBackgroundColor), typeof(Color), typeof(ItemWrapper), Color.Gray);
         public Color SelectedCellBackgroundColor
         {
             get => (Color)GetValue(SelectedCellBackgroundColorProperty);
@@ -128,7 +128,7 @@ namespace Forms9Patch
         #endregion
 
         #region IsSelected
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(ItemWrapper), false);
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(ItemWrapper), false);
         public bool IsSelected
         {
             get => (bool)GetValue(IsSelectedProperty);
@@ -137,7 +137,7 @@ namespace Forms9Patch
         #endregion IsSelected property
 
         #region Source
-        public static readonly BindableProperty SourceProperty = BindableProperty.Create("Source", typeof(object), typeof(ItemWrapper), null);
+        public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(object), typeof(ItemWrapper), null);
         public object Source
         {
             get => GetValue(SourceProperty);
@@ -146,7 +146,7 @@ namespace Forms9Patch
         #endregion
 
         #region Index
-        public static readonly BindableProperty IndexProperty = BindableProperty.Create("Index", typeof(int), typeof(ItemWrapper), -1);
+        public static readonly BindableProperty IndexProperty = BindableProperty.Create(nameof(Index), typeof(int), typeof(ItemWrapper), -1);
         public int Index
         {
             get => (int)GetValue(IndexProperty);
@@ -159,7 +159,7 @@ namespace Forms9Patch
         #endregion
 
         #region Parent
-        public static readonly BindableProperty ParentProperty = BindableProperty.Create("Parent", typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
+        public static readonly BindableProperty ParentProperty = BindableProperty.Create(nameof(Parent), typeof(GroupWrapper), typeof(ItemWrapper), default(GroupWrapper));
         public GroupWrapper Parent
         {
             get => (GroupWrapper)GetValue(ParentProperty);

@@ -62,13 +62,13 @@ namespace Forms9Patch
             _spans.Clear();
 
             var tags = new List<Tag>();
-            int index = 0;
+            var index = 0;
             for (int i = 0; i < _string.Length; i++)
             {
                 if (_string[i] == '<')
                 {
-                    int j = i + 1;
-                    bool closing = false;
+                    var j = i + 1;
+                    var closing = false;
                     if (j < _string.Length && _string[j] == '/')
                     {
                         closing = true;
@@ -120,7 +120,7 @@ namespace Forms9Patch
                             // openning
                             //var contents = tagString.Split(' ');
 
-                            string pattern = @" ([^>=]*)=[""']([^""']*)[""']";
+                            var pattern = @" ([^>=]*)=[""']([^""']*)[""']";
 
                             var tagName = tagString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0].ToLower();
                             var tag = new Tag { Name = tagName, Start = index };
@@ -144,18 +144,18 @@ namespace Forms9Patch
                     // escape character
                     var escapeCode = "";
                     //var stringBuilder = new StringBuilder();
-                    int j = i + 1;
+                    var j = i + 1;
                     while (j < _string.Length && _string[j] != ';')
                     {
                         escapeCode += _string[j++];
                     }
                     if (escapeCode.Length > 1)
                     {
-                        int unicodeInt = 0;
+                        var unicodeInt = 0;
                         if (escapeCode[0] == '#')
                         {
-                            int start = 1;
-                            int numBase = 10;
+                            var start = 1;
+                            var numBase = 10;
                             if (escapeCode[1] == 'x' || escapeCode[1] == 'X')
                             {
                                 start = 2;
@@ -420,12 +420,14 @@ namespace Forms9Patch
                                 case "clubs": unicodeInt = 0x2663; break;
                                 case "hearts": unicodeInt = 0x2665; break;
                                 case "diams": unicodeInt = 0x2666; break;
+                                default:
+                                    break;
                             }
                         }
                         i = j;
                         if (unicodeInt != 0)
                         {
-                            string unicodeString = char.ConvertFromUtf32(unicodeInt);
+                            var unicodeString = char.ConvertFromUtf32(unicodeInt);
                             index += unicodeString.Length;
                             //UnmarkedText += unicodeString;
                             _unmarkedText.Append(unicodeString);
@@ -505,6 +507,8 @@ namespace Forms9Patch
                                 span = new FontFamilySpan(tag.Start, index - 1, attr.Value);
                                 _spans.Add(span);
                                 break;
+                            default:
+                                break;
                         }
                     }
                     break;
@@ -536,16 +540,20 @@ namespace Forms9Patch
                     {
                         switch (attr.Name)
                         {
-                            case "href":
+                            case nameof(href):
                                 href = attr.Value;
                                 break;
-                            case "id":
+                            case nameof(id):
                                 id = attr.Value;
+                                break;
+                            default:
                                 break;
                         }
                     }
                     span = new ActionSpan(tag.Start, index - 1, id, href);
                     _spans.Add(span);
+                    break;
+                default:
                     break;
             }
             // process  attributes
@@ -599,6 +607,8 @@ namespace Forms9Patch
                                     {
                                         throw new FormatException("style=\"font-style: " + strs[1] + ";\" not supported");
                                     }
+                                    break;
+                                default:
                                     break;
                             }
                         }

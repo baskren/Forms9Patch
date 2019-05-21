@@ -121,8 +121,8 @@ namespace Forms9Patch.UWP
             #region Apply non-font Spans
             foreach (var span in label.F9PFormattedString._spans)
             {
-                int spanStart = span.Start;
-                int spanEnd = span.End;
+                var spanStart = span.Start;
+                var spanEnd = span.End;
 
                 //spanEnd++;
                 if (spanEnd >= text.Length)
@@ -137,7 +137,7 @@ namespace Forms9Patch.UWP
                             metaFonts[i].Family = fontFamily;
                             break;
                         case FontSizeSpan.SpanKey:  // TextElement.FontSize
-                            float size = ((FontSizeSpan)span).Size;
+                            var size = ((FontSizeSpan)span).Size;
                             metaFonts[i].Size = (size < 0 ? metaFonts[i].Size * (-size) : size);
                             break;
                         case BoldSpan.SpanKey: // Bold span // TextElement.FontWeight (Thin, ExtraLight, Light, SemiLight, Normal, Medium, SemiBold, Bold, ExtraBold, Black, ExtraBlack)
@@ -173,6 +173,8 @@ namespace Forms9Patch.UWP
                         case BackgroundColorSpan.SpanKey: // if Win10 fall creator's update, there is a solution: create TextHighlighter, set its BackgroundColor and add the Range (Start/End) to it's Ranges, and add to TextBlock.Highlighters
                             metaFonts[i].BackgroundColor = ((BackgroundColorSpan)span).Color;
                             break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -184,7 +186,7 @@ namespace Forms9Patch.UWP
 
             // run through MetaFonts to see if we need to set new Font attributes
             var lastMetaFont = baseMetaFont;
-            int startIndex = 0;
+            var startIndex = 0;
             for (int i = 0; i < metaFonts.Count; i++)
             {
                 var metaFont = metaFonts[i];
@@ -221,7 +223,8 @@ namespace Forms9Patch.UWP
                     case Decoration.Underline:
                         run.TextDecorations |= Windows.UI.Text.TextDecorations.Underline;
                         break;
-
+                    default:
+                        break;
                 }
             }
             catch (Exception)
@@ -232,12 +235,13 @@ namespace Forms9Patch.UWP
 
         static void AddInline(TextBlock textBlock, Forms9Patch.Label label, MetaFont metaFont, string text, int startIndex, int length)
         {
-            var run = new Run();
-
-            run.Text = text.Substring(startIndex, length);
-            run.FontSize = metaFont.Size;
-            run.FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;
-            run.FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal;
+            var run = new Run
+            {
+                Text = text.Substring(startIndex, length),
+                FontSize = metaFont.Size,
+                FontWeight = metaFont.Bold ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal,
+                FontStyle = metaFont.Italic ? Windows.UI.Text.FontStyle.Italic : Windows.UI.Text.FontStyle.Normal
+            };
 
 
             if (TextDecorationsPresent && metaFont.Strikethrough)

@@ -114,7 +114,7 @@ namespace FormsGestures
 		public override int GetHashCode()
         {
             //return base.GetHashCode() ^ DeltaDistance.GetHashCode() ^ TotalDistance.GetHashCode() ^ Velocity.GetHashCode();
-            int hash = 13;
+            var hash = 13;
             hash = hash * 23 + base.GetHashCode();
             hash = hash * 23 + DeltaDistance.GetHashCode();
             hash = hash * 23 + TotalDistance.GetHashCode();

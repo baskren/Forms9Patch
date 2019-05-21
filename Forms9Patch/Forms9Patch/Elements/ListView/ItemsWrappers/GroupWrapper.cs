@@ -20,7 +20,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SourceSubPropertyMap property
         /// </summary>
-        public static readonly BindableProperty SourceSubPropertyMapProperty = BindableProperty.Create("SourceSubPropertyMap", typeof(List<string>), typeof(GroupWrapper), default(List<string>));
+        public static readonly BindableProperty SourceSubPropertyMapProperty = BindableProperty.Create(nameof(SourceSubPropertyMap), typeof(List<string>), typeof(GroupWrapper), default(List<string>));
         /// <summary>
         /// Gets/Sets the SourceSubPropertyMap property
         /// </summary>
@@ -35,7 +35,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SubGroupType property
         /// </summary>
-        public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create("SubGroupType", typeof(Type), typeof(GroupWrapper), default(Type));
+        public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create(nameof(SubGroupType), typeof(Type), typeof(GroupWrapper), default(Type));
         /// <summary>
         /// Gets/Sets the SubGroupType property
         /// </summary>
@@ -50,7 +50,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for GroupHeaderCellHeight property
         /// </summary>
-        public static readonly BindableProperty RequestedGroupHeaderRowHeightProperty = BindableProperty.Create("RequestedGroupHeaderRowHeight", typeof(double), typeof(GroupWrapper), 40.0);
+        public static readonly BindableProperty RequestedGroupHeaderRowHeightProperty = BindableProperty.Create(nameof(RequestedGroupHeaderRowHeight), typeof(double), typeof(GroupWrapper), 40.0);
         /// <summary>
         /// Gets/Sets the GroupHeaderCellHeight property
         /// </summary>
@@ -63,7 +63,7 @@ namespace Forms9Patch
         /// <summary>
         /// The group header background color property.
         /// </summary>
-        public static readonly BindableProperty GroupHeaderBackgroundColorProperty = BindableProperty.Create("GroupHeaderBackgroundColor", typeof(Color), typeof(GroupWrapper), Color.DarkGray);
+        public static readonly BindableProperty GroupHeaderBackgroundColorProperty = BindableProperty.Create(nameof(GroupHeaderBackgroundColor), typeof(Color), typeof(GroupWrapper), Color.DarkGray);
         public Color GroupHeaderBackgroundColor
         {
             get { return (Color)GetValue(GroupHeaderBackgroundColorProperty); }
@@ -264,7 +264,7 @@ namespace Forms9Patch
         /// <summary>
         /// The visibility test property backing store.
         /// </summary>
-        public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object, bool>), typeof(GroupWrapper), default(Func<object, bool>));
+        public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create(nameof(VisibilityTest), typeof(Func<object, bool>), typeof(GroupWrapper), default(Func<object, bool>));
         /// <summary>
         /// Gets or sets the test used to determine if a source item or group will be visible.
         /// </summary>
@@ -280,7 +280,7 @@ namespace Forms9Patch
 
         int SourceCount()
         {
-            int sourceCount = -1;
+            var sourceCount = -1;
             if (SourceChildren is ICollection<IEnumerable> iCollectionIenumerble)
                 sourceCount = iCollectionIenumerble.Count;
             else
@@ -309,7 +309,7 @@ namespace Forms9Patch
             if (SourceChildren is IList iList)
                 return iList.IndexOf(itemWrapper.Source);
 
-            int index = 0;
+            var index = 0;
             foreach (var obj in SourceChildren)
             {
                 if (obj == itemWrapper.Source)
@@ -618,7 +618,7 @@ namespace Forms9Patch
         {
             if (VisibilityTest == null || VisibilityTest(sourceObject))
             {
-                bool before = NotifySourceOfChanges;
+                var before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var itemWrapper = CreateItemWrapper(sourceObject);
                 Add(itemWrapper);
@@ -632,7 +632,7 @@ namespace Forms9Patch
         {
             if (SourceChildren == null)
                 throw new MissingMemberException("Cannot get an index of an ItemWrapper in a null SourceChildren");
-            int localIndex = -1;
+            var localIndex = -1;
             /*
 			int sourceCount = SourceCount ();
 			for (int sourceIndex = 0; sourceIndex < sourceCount; sourceIndex++) {
@@ -642,7 +642,7 @@ namespace Forms9Patch
 						return localIndex;
 				}
 			}*/
-            int sourceIndex = 0;
+            var sourceIndex = 0;
             foreach (var sourceItem in SourceChildren)
             {
                 if (VisibilityTest == null || VisibilityTest(sourceItem))
@@ -660,7 +660,7 @@ namespace Forms9Patch
         {
             if (VisibilityTest == null || VisibilityTest(sourceObject))
             {
-                bool before = NotifySourceOfChanges;
+                var before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var index = IndexFromSourceIndex(sourceIndex);
                 var itemWrapper = CreateItemWrapper(sourceObject);
@@ -679,7 +679,7 @@ namespace Forms9Patch
             var index = IndexFromSourceIndex(sourceIndex);
             if (index > -1)
             {
-                bool before = NotifySourceOfChanges;
+                var before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 RemoveAt(index);
                 NotifySourceOfChanges = before;
@@ -689,22 +689,22 @@ namespace Forms9Patch
         void ReplaceItemAtSourceIndex(int sourceIndex, object oldSourceObject, object newSourceObject)
         {
             var index = IndexFromSourceIndex(sourceIndex);
-            if (VisibilityTest == null || VisibilityTest(newSourceObject) && VisibilityTest(oldSourceObject))
+            if (VisibilityTest == null || (VisibilityTest(newSourceObject) && VisibilityTest(oldSourceObject)))
             {
                 // replace object
-                bool before = NotifySourceOfChanges;
+                var before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
                 var itemWrapper = CreateItemWrapper(newSourceObject);
                 this[index] = itemWrapper;
                 NotifySourceOfChanges = before;
             }
-            else if (VisibilityTest(oldSourceObject))
+            else if (VisibilityTest?.Invoke(oldSourceObject) ?? default)
             {
                 // remove object
                 RemoveItemWithSourceIndex(sourceIndex);
                 SubscribeToHiddenSourcePropertyChanged(newSourceObject);
             }
-            else if (VisibilityTest(newSourceObject))
+            else if (VisibilityTest?.Invoke(newSourceObject) ?? default(bool))
             {
                 // insert object
                 InsertSourceObject(sourceIndex, newSourceObject);
@@ -758,10 +758,10 @@ namespace Forms9Patch
         {
             if (VisibilityTest != null)
             {
-                bool before = NotifySourceOfChanges;
+                var before = NotifySourceOfChanges;
                 NotifySourceOfChanges = false;
-                int index = 0;
-                int sourceIndex = 0;
+                var index = 0;
+                var sourceIndex = 0;
                 foreach (var sourceItem in SourceChildren)
                 {
                     if (VisibilityTest(sourceItem))
@@ -827,7 +827,7 @@ namespace Forms9Patch
         {
             if (array == null)
                 return;
-            int offset = 0;
+            var offset = 0;
             foreach (var itemWrapper in array)
                 Insert(arrayIndex + offset++, itemWrapper);
         }
@@ -1059,7 +1059,7 @@ namespace Forms9Patch
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     var groupCellHeight = groupWrapper.BestGuessGroupHeaderHeight();
-                    if (groupSelector(calcOffset + groupCellHeight, flatIndex, i, groupWrapper))
+                    if (groupSelector?.Invoke(calcOffset + groupCellHeight, flatIndex, i, groupWrapper) ?? default(bool))
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, groupCellHeight);
                     calcOffset += groupCellHeight;
                     flatIndex++;
@@ -1067,7 +1067,7 @@ namespace Forms9Patch
                     {
                         var subItemWrapper = groupWrapper[j];
                         var cellHeight = subItemWrapper.BestGuessItemRowHeight();
-                        if (subItemSelector(calcOffset + cellHeight, flatIndex, i, j, groupWrapper, subItemWrapper))
+                        if (subItemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, j, groupWrapper, subItemWrapper) ?? default(bool))
                             return new DeepDataSet(subItemWrapper, calcOffset, new int[] { i, j }, flatIndex, cellHeight);
                         calcOffset += cellHeight;
                         flatIndex++;
@@ -1079,7 +1079,7 @@ namespace Forms9Patch
                 else
                 {
                     var cellHeight = itemWrapper.BestGuessItemRowHeight();
-                    if (itemSelector(calcOffset + cellHeight, flatIndex, i, itemWrapper))
+                    if (itemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, itemWrapper) ?? default(bool))
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, cellHeight);
                     calcOffset += cellHeight;
                     flatIndex++;
@@ -1164,7 +1164,7 @@ namespace Forms9Patch
         #region IndexOf
         public int[] DeepSourceIndexOf(ItemWrapper itemWrapper)
         {
-            int pos = SourceIndexOf(itemWrapper);
+            var pos = SourceIndexOf(itemWrapper);
             if (pos > -1)
             {
                 return new[] { pos };
@@ -1175,7 +1175,7 @@ namespace Forms9Patch
                 {
                     if (this[pos] is GroupWrapper subGroup)
                     {
-                        int[] subGroupDeepIndex = subGroup.DeepSourceIndexOf(itemWrapper);
+                        var subGroupDeepIndex = subGroup.DeepSourceIndexOf(itemWrapper);
                         if (subGroupDeepIndex != null)
                         {
                             var deepIndex = new int[subGroupDeepIndex.Length + 1];
@@ -1191,7 +1191,7 @@ namespace Forms9Patch
 
         public int[] DeepIndexOf(ItemWrapper itemWrapper)
         {
-            int pos = IndexOf(itemWrapper);
+            var pos = IndexOf(itemWrapper);
             if (pos > -1)
             {
                 return new[] { pos };
@@ -1202,7 +1202,7 @@ namespace Forms9Patch
                 {
                     if (this[pos] is GroupWrapper subGroup)
                     {
-                        int[] subGroupDeepIndex = subGroup.DeepIndexOf(itemWrapper);
+                        var subGroupDeepIndex = subGroup.DeepIndexOf(itemWrapper);
                         if (subGroupDeepIndex != null)
                         {
                             var deepIndex = new int[subGroupDeepIndex.Length + 1];
@@ -1276,7 +1276,7 @@ namespace Forms9Patch
         {
             if (deepIndex == null || deepIndex.Length == 0)
                 return;
-            int index = deepIndex[0];
+            var index = deepIndex[0];
             if (deepIndex.Length == 1)
             {// && deepIndex[0] >=0 && deepIndex[0] <= items.Count) {
                 if (index < 0 || index > Count)
@@ -1298,7 +1298,7 @@ namespace Forms9Patch
 
         public void DeepRemoveItemsWithSource(object source)
         {
-            List<ItemWrapper> itemWrappers = new List<ItemWrapper>();
+            var itemWrappers = new List<ItemWrapper>();
             foreach (var itemWrapper in this)
                 if (itemWrapper.Source == source)
                     itemWrappers.Add(itemWrapper);
@@ -1319,7 +1319,7 @@ namespace Forms9Patch
         {
             if (item == null)
                 return -1;
-            int pos = 0;
+            var pos = 0;
             foreach (var itemWrapper in this)
             {
                 // count this header/cell
@@ -1344,7 +1344,7 @@ namespace Forms9Patch
         {
             if (item == null || group == null)
                 return -1;
-            int pos = 0;
+            var pos = 0;
             foreach (var itemWrapper in this)
             {
                 // count this header/cell
@@ -1389,7 +1389,7 @@ namespace Forms9Patch
         {
             if (IgnoreSourceChanges)
                 return;
-            bool before = NotifySourceOfChanges;
+            var before = NotifySourceOfChanges;
             NotifySourceOfChanges = false;
             switch (e.Action)
             {

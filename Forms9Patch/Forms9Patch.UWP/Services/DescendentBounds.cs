@@ -18,8 +18,8 @@ namespace Forms9Patch.UWP
 
         Rectangle IDescendentBounds.PageDescendentBounds(Page page, VisualElement element)
         {
-            IVisualElementRenderer pageRenderer = Platform.GetRenderer(page);
-            IVisualElementRenderer elementRenderer = Platform.GetRenderer(element);
+            var pageRenderer = Platform.GetRenderer(page);
+            var elementRenderer = Platform.GetRenderer(element);
             if (elementRenderer?.ContainerElement is FrameworkElement elementNativeView && pageRenderer?.ContainerElement is FrameworkElement pageNativeView)
             {
                 //var elementBounds = elementNativeView;

@@ -571,8 +571,9 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Cancel the display of this Popup (will fire Cancelled event);
+        /// Cancels the popup
         /// </summary>
+        /// <param name="trigger"></param>
         [Obsolete("Use CancelAsync instead")]
         public void Cancel(object trigger = null) => Task.Run(async () => await CancelAsync(trigger ?? P42.Utils.ReflectionExtensions.CallerMemberName()));
 
@@ -602,7 +603,12 @@ namespace Forms9Patch
         /// Releases all resource used by the <see cref="T:Forms9Patch.PopupBase"/> object.
         /// </summary>
         public void Dispose()
-            => Dispose(true);
+        {
+            if (IsVisible || _isPushing  || _isPushed || _isPopping)
+                return;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
 
 
@@ -724,6 +730,13 @@ namespace Forms9Patch
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 PushAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            else if (!Retain)
+                Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+                {
+                    if (!Retain)
+                        Dispose();
+                    return false;
+                });
         }
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
@@ -778,9 +791,10 @@ namespace Forms9Patch
         }
 
         /// <summary>
-        /// Obsolete.  USe PopAsync instead
+        /// Pops the popup
         /// </summary>
-        /// <returns>The pop.</returns>
+        /// <param name="trigger"></param>
+        /// <returns></returns>
         [Obsolete("Use PopAsync instead")]
         public async Task Pop(object trigger = null)
         {
@@ -792,10 +806,11 @@ namespace Forms9Patch
         }
 
 
-        //bool _isPoping;
         /// <summary>
-        /// Pop the popup asynchronously
+        /// Called to Pop a popup
         /// </summary>
+        /// <param name="trigger"></param>
+        /// <param name="callerName"></param>
         /// <returns></returns>
         public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "")
         {
@@ -846,7 +861,7 @@ namespace Forms9Patch
         /// Delay until the popup is popped.
         /// </summary>
         /// <returns>Why the popup was popped and, if appropriate, what triggered it.</returns>
-        public virtual async Task<PopupPoppedEventArgs> DelayUntilPoppedAsyc()
+        public virtual async Task<PopupPoppedEventArgs> DelayUntilPoppedAsync()
         {
             while (PopupPoppedEventArgs == null)
                 await Task.Delay(50);

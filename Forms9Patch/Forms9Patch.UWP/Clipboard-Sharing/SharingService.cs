@@ -19,7 +19,7 @@ namespace Forms9Patch.UWP
 
         public SharingService()
         {
-            DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
+            var dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
         }
 
@@ -29,7 +29,7 @@ namespace Forms9Patch.UWP
             {
 
 
-                DataRequest request = args.Request;
+                var request = args.Request;
 
                 request.Data.Source(_mimeItemCollection);
                 //request.Data.SetText("pizza");

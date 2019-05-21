@@ -45,7 +45,7 @@ namespace Forms9Patch.UWP
 
                 var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
 
-                List<string> availableFormats = new List<string>(dataPackageView?.AvailableFormats);
+                var availableFormats = new List<string>(dataPackageView?.AvailableFormats);
 
                 for (int i = availableFormats.Count - 1; i >= 0; i--)
                 {

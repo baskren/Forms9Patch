@@ -93,7 +93,7 @@ namespace Forms9Patch.UWP
                 // we've got to go hunting for this ... and UWP doesn't give us much help
                 // first, try the main assembly!
                 var targetParts = f9pFontFamily.Split('.');
-                string targetAsmNameA = "invalid_assembly_name";
+                var targetAsmNameA = "invalid_assembly_name";
                 if (targetParts.Contains("Resources"))
                 {
                     targetAsmNameA = "";

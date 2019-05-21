@@ -60,7 +60,7 @@ namespace FormsGestures.UWP
 
         void ModesDebugMessage(ManipulationModes modes)
         {
-            string modesString = "";
+            var modesString = "";
             foreach (ManipulationModes mode in Enum.GetValues(typeof(ManipulationModes)))
             {
                 if ((mode & modes) != 0)
@@ -89,7 +89,7 @@ namespace FormsGestures.UWP
 
         void PointerDeviceTypeDebugMessage(Windows.Devices.Input.PointerDeviceType types)
         {
-            string deviceString = "";
+            var deviceString = "";
             foreach (Windows.Devices.Input.PointerDeviceType type in Enum.GetValues(typeof(Windows.Devices.Input.PointerDeviceType)))
             {
                 if ((type & types) != 0)
@@ -177,7 +177,7 @@ namespace FormsGestures.UWP
         {
             get
             {
-                ManipulationModes modes = ManipulationModes.None;
+                var modes = ManipulationModes.None;
                 if (HandlesPans)
                 {
                     /*
@@ -541,8 +541,10 @@ namespace FormsGestures.UWP
                     {
                         if (listener.HandlesLongPressing)
                         {
-                            var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed);
-                            args.Listener = listener;
+                            var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed)
+                            {
+                                Listener = listener
+                            };
                             listener?.OnLongPressing(args);
                             e.Handled = args.Handled;
                             DebugMessage("LongPressing Handled=[" + e.Handled + "]");
@@ -588,24 +590,30 @@ namespace FormsGestures.UWP
             {
                 if (_panning && listener.HandlesPanning)
                 {
-                    var args = new UwpPanEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpPanEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnPanning(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Panning Handled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
                 {
-                    var args = new UwpPinchEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpPinchEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnPinching(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Pinching Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
                 {
-                    var args = new UwpRotateEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpRotateEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnRotating(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Rotating Handled=[" + e.Handled + "]");
@@ -650,24 +658,30 @@ namespace FormsGestures.UWP
             {
                 if (_panning && listener.HandlesPanning)
                 {
-                    var args = new UwpPanEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpPanEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnPanned(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Panned tHandled=[" + e.Handled + "]");
                 }
                 if (_pinching && listener.HandlesPinching)
                 {
-                    var args = new UwpPinchEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpPinchEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnPinched(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Pinched Handled=[" + e.Handled + "]");
                 }
                 if (_rotating && listener.HandlesRotating)
                 {
-                    var args = new UwpRotateEventArgs(FrameworkElement, e);
-                    args.Listener = listener;
+                    var args = new UwpRotateEventArgs(FrameworkElement, e)
+                    {
+                        Listener = listener
+                    };
                     listener?.OnRotated(args);
                     e.Handled = e.Handled || args.Handled;
                     DebugMessage("Rotated Handled=[" + e.Handled + "]");
@@ -708,25 +722,31 @@ namespace FormsGestures.UWP
             {
                 if (listener.HandlesTapped)
                 {
-                    var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps);
-                    args.Listener = listener;
-                    args.Cancelled = true;
+                    var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps)
+                    {
+                        Listener = listener,
+                        Cancelled = true
+                    };
                     listener?.OnTapped(args);
                     e.Handled = args.Handled;
                 }
                 if (_longPressing && listener.HandlesLongPressed)
                 {
-                    var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed);
-                    args.Listener = listener;
-                    args.Cancelled = true;
+                    var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed)
+                    {
+                        Listener = listener,
+                        Cancelled = true
+                    };
                     listener?.OnLongPressed(args);
                     e.Handled = args.Handled;
                 }
                 if (listener.HandlesDown)
                 {
-                    var args = new UwpDownUpArgs(FrameworkElement, e);
-                    args.Listener = listener;
-                    args.Cancelled = true;
+                    var args = new UwpDownUpArgs(FrameworkElement, e)
+                    {
+                        Listener = listener,
+                        Cancelled = true
+                    };
                     listener.OnUp(args);
                     e.Handled = args.Handled;
                     if (e.Handled)

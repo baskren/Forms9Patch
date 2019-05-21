@@ -22,7 +22,7 @@ namespace Forms9Patch
 				if (_start == value)
 					return;
 				_start = value;
-				OnPropertyChanged ("Start");
+				OnPropertyChanged (nameof(Start));
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Forms9Patch
 				if (_end == value)
 					return;
 				_end = value;
-				OnPropertyChanged ("End");
+				OnPropertyChanged (nameof(End));
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace Forms9Patch
 					_end = int.MaxValue;
 				else				
 					_end = _start + value - 1;
-				OnPropertyChanged ("End");
+				OnPropertyChanged (nameof(End));
 			}
 		}
 

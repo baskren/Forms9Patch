@@ -189,7 +189,7 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return;
 
-            Label label = Element;
+            var label = Element;
             if (label == null)
                 return;
 
@@ -201,7 +201,7 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return;
 
-            Label label = Element;
+            var label = Element;
             if (label == null)
                 return;
 
@@ -216,7 +216,7 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return;
 
-            Label label = Element;
+            var label = Element;
             if (label != null && label.TextColor != Color.Default)
                 textBlock.Foreground = label.TextColor.ToBrush();
             else
@@ -370,7 +370,7 @@ namespace Forms9Patch.UWP
 
         void PrivateArrange(Windows.Foundation.Size finalSize)
         {
-            double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
+            var childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var rect = new Windows.Foundation.Rect();
 
             //var yOffset = _fontMetrics.AscentForFontSize(textBlock.FontSize) - _fontMetrics.CapHeightForFontSize(textBlock.FontSize);
@@ -487,8 +487,8 @@ namespace Forms9Patch.UWP
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
-            double width = (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
-            double height = (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
+            var width = (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) && label.Width > 0 ? Math.Min(label.Width, availableSize.Width) : availableSize.Width;
+            var height = (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) && label.Height > 0 ? Math.Min(label.Height, availableSize.Height) : availableSize.Height;
 
             
             if (Double.IsInfinity(availableSize.Width) && (label.Width < 0 || !newElement) )

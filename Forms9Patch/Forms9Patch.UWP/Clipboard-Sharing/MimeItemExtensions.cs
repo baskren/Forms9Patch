@@ -103,12 +103,12 @@ namespace Forms9Patch.UWP
             properties.Title = mimeItemCollection.Description ?? "Share " + Forms9Patch.ApplicationInfoService.Name + " data ...";
 
 
-            List<IStorageItem> storageItems = new List<IStorageItem>();
+            var storageItems = new List<IStorageItem>();
 
-            bool textSet = false;
-            bool htmlSet = false;
-            bool rtfSet = false;
-            bool uriSet = false;
+            var textSet = false;
+            var htmlSet = false;
+            var rtfSet = false;
+            var uriSet = false;
 
             var htmlItems = mimeItemCollection.GetMimeItems<string>("text/html");
 

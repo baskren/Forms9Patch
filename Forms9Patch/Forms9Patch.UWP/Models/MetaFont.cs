@@ -125,7 +125,7 @@ namespace Forms9Patch.UWP
 
         public override int GetHashCode()
         {
-            int hash = 7;
+            var hash = 7;
             hash = hash * 17 + Id.GetHashCode();
             hash = hash * 17 + Href.GetHashCode();
             return hash;

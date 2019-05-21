@@ -18,7 +18,7 @@ namespace Forms9Patch.UWP
         {
             get
             {
-                KeyboardCapabilities keyboardCapabilities = new Windows.Devices.Input.KeyboardCapabilities();
+                var keyboardCapabilities = new Windows.Devices.Input.KeyboardCapabilities();
                 return keyboardCapabilities.KeyboardPresent != 0;
             }
         }
@@ -119,6 +119,7 @@ namespace Forms9Patch.UWP
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+            GC.SuppressFinalize(this);
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }

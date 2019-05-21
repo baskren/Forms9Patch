@@ -20,8 +20,10 @@ namespace FormsGestures.UWP
 
         public static bool FireTapped(FrameworkElement element, TappedRoutedEventArgs e, int numberOfTaps, Listener listener)
         {
-            var args = new UwpTapEventArgs(element, e, numberOfTaps);
-            args.Listener = listener;
+            var args = new UwpTapEventArgs(element, e, numberOfTaps)
+            {
+                Listener = listener
+            };
             listener.OnTapped(args);
             e.Handled = args.Handled;
             return e.Handled;
@@ -48,8 +50,10 @@ namespace FormsGestures.UWP
 
         public static bool FireDoubleTapped(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e, int numberOfTaps, Listener listener)
         {
-            var args = new UwpTapEventArgs(element, e, numberOfTaps);
-            args.Listener = listener;
+            var args = new UwpTapEventArgs(element, e, numberOfTaps)
+            {
+                Listener = listener
+            };
             listener.OnDoubleTapped(args);
             e.Handled = args.Handled;
             return e.Handled;

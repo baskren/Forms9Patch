@@ -103,9 +103,9 @@ namespace Forms9Patch
 
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
-            SKImageInfo info = e.Info;
-            SKSurface surface = e.Surface;
-            SKCanvas canvas = surface?.Canvas;
+            var info = e.Info;
+            var surface = e.Surface;
+            var canvas = surface?.Canvas;
             var rect = e.Info.Rect;
 
             //System.Diagnostics.Debug.WriteLine(GetType() + ".OnPaintSurface(" + e.Info.Width + "," + e.Info.Height + ")");
@@ -122,7 +122,7 @@ namespace Forms9Patch
             if (view is SegmentButton button && obj is SKPaintSurfaceEventArgs e)
             {
                 //System.Diagnostics.Debug.WriteLine("PaintSegmentButtonBackground[" + button.InstanceId + "]: bounds=" + bounds);
-                SKRect rect = new SKRect((float)Math.Round(bounds.Left * Display.Scale), (float)Math.Round(bounds.Top * Display.Scale), (float)Math.Round(bounds.Right * Display.Scale), (float)Math.Round(bounds.Bottom * Display.Scale));
+                var rect = new SKRect((float)Math.Round(bounds.Left * Display.Scale), (float)Math.Round(bounds.Top * Display.Scale), (float)Math.Round(bounds.Right * Display.Scale), (float)Math.Round(bounds.Bottom * Display.Scale));
                 button.CurrentBackgroundImage.SharedOnPaintSurface(e, rect);
             }
             return false;

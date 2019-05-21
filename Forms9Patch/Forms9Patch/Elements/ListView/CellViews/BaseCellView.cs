@@ -39,7 +39,7 @@ namespace Forms9Patch
         /// <summary>
         /// The content property.
         /// </summary>
-        public static readonly BindableProperty ContentViewProperty = BindableProperty.Create("ContentView", typeof(View), typeof(BaseCellView), default(View));
+        public static readonly BindableProperty ContentViewProperty = BindableProperty.Create(nameof(ContentView), typeof(View), typeof(BaseCellView), default(View));
         /// <summary>
         /// Gets or sets the content.
         /// </summary>
@@ -285,7 +285,7 @@ namespace Forms9Patch
             _panHz = false;
             if (ContentView is ICellSwipeMenus iCellSwipeMenus)
             {
-                double distance = e.TotalDistance.X + _translateOnUp;
+                var distance = e.TotalDistance.X + _translateOnUp;
                 if (_endButtons + _startButtons > 0)
                 {
                     var side = _startButtons > 0 ? Side.Start : Side.End;
@@ -363,7 +363,7 @@ namespace Forms9Patch
             if (listView != null)
                 listView.IsScrollEnabled = false;
 
-            double distance = e.TotalDistance.X + _translateOnUp;
+            var distance = e.TotalDistance.X + _translateOnUp;
             if (_settingup)
                 return;
             if (_endButtons + _startButtons > 0)
@@ -553,7 +553,7 @@ namespace Forms9Patch
             var listView = this.Parent<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = true;
-            int index = 0;
+            var index = 0;
             if (sender == _swipeButton2)
                 index = 1;
             else if (sender == _swipeButton3)

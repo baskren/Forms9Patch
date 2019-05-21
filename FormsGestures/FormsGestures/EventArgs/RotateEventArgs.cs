@@ -62,9 +62,9 @@ namespace FormsGestures
 		}
 
 		double GetAngle() {
-			double x = Touches[1].X - Touches[0].X;
-			double y = Touches[1].Y - Touches[0].Y;
-			double num = Math.Atan2(y, x);
+            var x = Touches[1].X - Touches[0].X;
+            var y = Touches[1].Y - Touches[0].Y;
+            var num = Math.Atan2(y, x);
 			return num * 180.0 / 3.1415926535897931;
 		}
 

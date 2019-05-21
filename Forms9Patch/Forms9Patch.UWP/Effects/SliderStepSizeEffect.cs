@@ -42,11 +42,10 @@ namespace Forms9Patch.UWP
                 slider.StepFrequency = _stepSizeEffect.StepSize;
         }
 
-        /// <param name="args">To be added.</param>
         /// <summary>
         /// Called when a property is changed
         /// </summary>
-        /// <remarks>To be added.</remarks>
+        /// <param name="e"></param>
         protected override void OnElementPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             /*

@@ -64,15 +64,15 @@ namespace FormsGestures
 		}
 
 		double GetDistance(PinchEventArgs previous) {
-			double deltaX = (previous.Touches[1].X + Touches[1].X)/2.0 - (previous.Touches[0].X+Touches[0].X)/2.0;
-			double deltaY = (previous.Touches[1].Y + Touches[1].Y)/2.0 - (previous.Touches[0].Y+Touches[0].Y)/2.0;
+            var deltaX = (previous.Touches[1].X + Touches[1].X)/2.0 - (previous.Touches[0].X+Touches[0].X)/2.0;
+            var deltaY = (previous.Touches[1].Y + Touches[1].Y)/2.0 - (previous.Touches[0].Y+Touches[0].Y)/2.0;
 			var distance = Math.Sqrt (deltaX * deltaX + deltaY * deltaY);
 			return distance;
 		}
 
 		double GetDistance() {
-			double deltaX = Touches[1].X - Touches[0].X;
-			double deltaY = Touches[1].Y - Touches[0].Y;
+            var deltaX = Touches[1].X - Touches[0].X;
+            var deltaY = Touches[1].Y - Touches[0].Y;
 			var distance = Math.Sqrt (deltaX * deltaX + deltaY * deltaY);
 			//System.Diagnostics.Debug.WriteLine ("x1=["+ Touches[1].X +"] x0=["+ Touches[0].X +"] y1=["+ Touches[1].Y +"] y0=["+ Touches[0].Y +"]");
 			//System.Diagnostics.Debug.WriteLine ("dx="+deltaX+" dy="+deltaY+" Dist="+distance);

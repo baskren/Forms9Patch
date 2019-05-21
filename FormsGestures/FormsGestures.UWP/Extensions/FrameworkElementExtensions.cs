@@ -34,11 +34,10 @@ namespace FormsGestures.UWP
 
         public static T GetFurthestAncestor<T>(this FrameworkElement uwpElement) where T : class
         {
-            T root = uwpElement?.Parent as T;
+            var root = uwpElement?.Parent as T;
             while (uwpElement?.Parent != null)
             {
-                var parent = uwpElement.Parent as T;
-                if (parent != null)
+                if (uwpElement.Parent is T parent)
                     root = parent;
                 uwpElement = uwpElement.Parent as FrameworkElement;
             }
@@ -47,8 +46,8 @@ namespace FormsGestures.UWP
 
         public static T GetChild<T>(this DependencyObject parent) where T : Windows.UI.Xaml.DependencyObject
         {
-            T child = default(T);
-            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            var child = default(T);
+            var numVisuals = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < numVisuals; i++)
             {
                 var v = VisualTreeHelper.GetChild(parent, i);
@@ -83,8 +82,8 @@ namespace FormsGestures.UWP
         public static List<T> GetChildren<T>(this DependencyObject parent) where T : Windows.UI.Xaml.DependencyObject
         {
             var results = new List<T>();
-            T child = default(T);
-            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
+            var child = default(T);
+            var numVisuals = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < numVisuals; i++)
             {
                 var v = VisualTreeHelper.GetChild(parent, i);

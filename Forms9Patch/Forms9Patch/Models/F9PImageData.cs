@@ -42,7 +42,7 @@ namespace Forms9Patch
             RangeLists = skBitamp.PatchRanges();
             if (RangeLists?.PatchesX != null && RangeLists.PatchesX.Count > 0 && RangeLists.PatchesY != null && RangeLists.PatchesY.Count > 0)
             {
-                SKBitmap unmarkedBitmap = new SKBitmap(skBitamp.Width - 1, skBitamp.Height - 1, SKColorType.Rgba8888, SKAlphaType.Unpremul);
+                var unmarkedBitmap = new SKBitmap(skBitamp.Width - 1, skBitamp.Height - 1, SKColorType.Rgba8888, SKAlphaType.Unpremul);
                 skBitamp.ExtractSubset(unmarkedBitmap, SKRectI.Create(1, 1, skBitamp.Width - 2, skBitamp.Height - 2));
                 skBitamp.Dispose();
                 skBitamp = unmarkedBitmap.Copy();
@@ -89,7 +89,7 @@ namespace Forms9Patch
         static bool IsSvg(StreamReader sr)
         {
             sr.BaseStream.Position = 0;
-            string str = "";
+            var str = "";
             while (!sr.EndOfStream)
             {
                 str = sr.ReadLine();

@@ -18,11 +18,8 @@ namespace Forms9Patch
         /// <param name="popAfter"></param>
         /// <returns></returns>
         public static TargetedToast Create(VisualElement target, string title, string text, TimeSpan popAfter = default(TimeSpan))
-        {
-            var toast = new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter };
-            toast.IsVisible = true;
-            return toast;
-        }
+            => new TargetedToast(target) { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
+        
         #endregion
 
 
@@ -30,7 +27,7 @@ namespace Forms9Patch
         /// <summary>
         /// The title property backing store.
         /// </summary>
-        public static readonly new BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(TargetedToast), default(string));
+        public static readonly new BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(TargetedToast), default(string));
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -44,7 +41,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text property backing store.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(TargetedToast), default(string));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TargetedToast), default(string));
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -58,7 +55,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text color property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(TargetedToast), Color.Black);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(TargetedToast), Color.Black);
         /// <summary>
         /// Gets or sets the color of the text.
         /// </summary>
@@ -73,7 +70,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok text property.
         /// </summary>
-        public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(TargetedToast), "OK");
+        public static readonly BindableProperty OkTextProperty = BindableProperty.Create(nameof(OkText), typeof(string), typeof(TargetedToast), "OK");
         /// <summary>
         /// Gets or sets the ok text.
         /// </summary>
@@ -87,7 +84,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok button color property.
         /// </summary>
-        public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create("OkButtonColor", typeof(Color), typeof(TargetedToast), default(Color));
+        public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create(nameof(OkButtonColor), typeof(Color), typeof(TargetedToast), default(Color));
         /// <summary>
         /// Gets or sets the color of the ok button.
         /// </summary>
@@ -101,7 +98,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok text color property.
         /// </summary>
-        public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create("OkTextColor", typeof(Color), typeof(TargetedToast), Color.Blue);
+        public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create(nameof(OkTextColor), typeof(Color), typeof(TargetedToast), Color.Blue);
         /// <summary>
         /// Gets or sets the color of the ok text.
         /// </summary>

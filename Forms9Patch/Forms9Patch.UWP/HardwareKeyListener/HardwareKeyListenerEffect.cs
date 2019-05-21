@@ -20,7 +20,7 @@ namespace Forms9Patch.UWP
                 return;
             //var type = Control?.GetType(); 
 
-            bool success = false;
+            var success = false;
             if (Control != null)
             {
                 try

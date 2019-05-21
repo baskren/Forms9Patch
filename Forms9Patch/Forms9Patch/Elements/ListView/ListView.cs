@@ -21,7 +21,7 @@ namespace Forms9Patch
         /// There is nothing to see here.  Move on.
         /// </summary>
         [Obsolete("Invalid property", true)]
-        public static new readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ListView), default(View));
+        public static new readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(View), typeof(ListView), default(View));
         /// <summary>
         /// There is nothing to see here.  Move on.
         /// </summary>
@@ -175,7 +175,7 @@ namespace Forms9Patch
         /// <summary>
         /// The source property map property.
         /// </summary>
-        public static readonly BindableProperty SourcePropertyMapProperty = BindableProperty.Create("SourcePropertyMap", typeof(List<string>), typeof(ListView), default(List<string>));
+        public static readonly BindableProperty SourcePropertyMapProperty = BindableProperty.Create(nameof(SourcePropertyMap), typeof(List<string>), typeof(ListView), default(List<string>));
         /// <summary>
         /// Gets or sets the source property map.  Used to map the properties in a hierarchical ItemsSource used to make the hierarchy and bind (as items) to the CellViews
         /// </summary>
@@ -191,7 +191,7 @@ namespace Forms9Patch
         /// <summary>
         /// The cell visibility test property.
         /// </summary>
-        public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create("VisibilityTest", typeof(Func<object, bool>), typeof(ListView), null);
+        public static readonly BindableProperty VisibilityTestProperty = BindableProperty.Create(nameof(VisibilityTest), typeof(Func<object, bool>), typeof(ListView), null);
         /// <summary>
         /// Gets or sets the cell visibility test.
         /// </summary>
@@ -207,7 +207,7 @@ namespace Forms9Patch
         /// <summary>
         /// The sub group type property backing store.
         /// </summary>
-        public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create("SubGroupType", typeof(Type), typeof(ListView), null);
+        public static readonly BindableProperty SubGroupTypeProperty = BindableProperty.Create(nameof(SubGroupType), typeof(Type), typeof(ListView), null);
         /// <summary>
         /// Gets or sets the type for list subgroups.  If set, allows non-SubGroupType IEnumerables to be items rather than SubGroups.
         /// </summary>
@@ -227,7 +227,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the ListViews's GroupToggleBehavior property.
         /// </summary>
-        public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create("GroupToggleBehavior", typeof(GroupToggleBehavior), typeof(ListView), GroupToggleBehavior.Radio);
+        public static readonly BindableProperty GroupToggleBehaviorProperty = BindableProperty.Create(nameof(GroupToggleBehavior), typeof(GroupToggleBehavior), typeof(ListView), GroupToggleBehavior.Radio);
         /// <summary>
         /// Gets or sets the ListViews's GroupToggle behavior.
         /// </summary>
@@ -243,7 +243,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected items property.
         /// </summary>
-        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(ListView), null);
+        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedItems), typeof(ObservableCollection<object>), typeof(ListView), null);
         /// <summary>
         /// Gets the selected items.
         /// </summary>
@@ -261,7 +261,7 @@ namespace Forms9Patch
         /// <summary>
         /// The editable property backing store.
         /// </summary>
-        public static readonly BindableProperty EditableProperty = BindableProperty.Create("Editable", typeof(bool), typeof(ListView), false);
+        public static readonly BindableProperty EditableProperty = BindableProperty.Create(nameof(Editable), typeof(bool), typeof(ListView), false);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ListView"/> is editable - cells may be moved or deleted based upon the response from the CanDrag CanDrop CanDelete delegate methods.
         /// </summary>
@@ -281,7 +281,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Header property
         /// </summary>
-        public static readonly BindableProperty HeaderProperty = BindableProperty.Create("Header", typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(object), typeof(ListView), default(object));
         /// <summary>
         /// Gets/Sets the Header property
         /// </summary>
@@ -296,7 +296,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for HeaderTemplate property
         /// </summary>
-        public static readonly BindableProperty HeaderTemplateProperty = BindableProperty.Create("HeaderTemplate", typeof(Xamarin.Forms.DataTemplate), typeof(ListView), default(Xamarin.Forms.DataTemplate));
+        public static readonly BindableProperty HeaderTemplateProperty = BindableProperty.Create(nameof(HeaderTemplate), typeof(Xamarin.Forms.DataTemplate), typeof(ListView), default(Xamarin.Forms.DataTemplate));
         /// <summary>
         /// Gets or sets the header template.
         /// </summary>
@@ -312,7 +312,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Footer property
         /// </summary>
-        public static readonly BindableProperty FooterProperty = BindableProperty.Create("Footer", typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty FooterProperty = BindableProperty.Create(nameof(Footer), typeof(object), typeof(ListView), default(object));
         /// <summary>
         /// Gets/Sets the Footer property
         /// </summary>
@@ -327,7 +327,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for FooterTemplate property
         /// </summary>
-        public static readonly BindableProperty FooterTemplateProperty = BindableProperty.Create("FooterTemplate", typeof(DataTemplate), typeof(ListView), default(DataTemplate));
+        public static readonly BindableProperty FooterTemplateProperty = BindableProperty.Create(nameof(FooterTemplate), typeof(DataTemplate), typeof(ListView), default(DataTemplate));
         /// <summary>
         /// Gets/Sets the FooterTemplate property
         /// </summary>
@@ -344,7 +344,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SelectedItem property
         /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(ListView), default(object));
         /// <summary>
         /// Gets/Sets the SelectedItem property
         /// </summary>
@@ -363,7 +363,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for RowHeight property
         /// </summary>
-        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create("RowHeight", typeof(int), typeof(ListView), 40);
+        public static readonly BindableProperty RowHeightProperty = BindableProperty.Create(nameof(RowHeight), typeof(int), typeof(ListView), 40);
         /// <summary>
         /// Gets/Sets the RowHeight property
         /// </summary>
@@ -382,7 +382,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for GroupHeaderTemplate property
         /// </summary>
-        public static readonly BindableProperty GroupHeaderTemplateProperty = BindableProperty.Create("GroupHeaderTemplate", typeof(Forms9Patch.GroupHeaderTemplate), typeof(ListView), default(Forms9Patch.GroupHeaderTemplate));
+        public static readonly BindableProperty GroupHeaderTemplateProperty = BindableProperty.Create(nameof(GroupHeaderTemplate), typeof(Forms9Patch.GroupHeaderTemplate), typeof(ListView), default(Forms9Patch.GroupHeaderTemplate));
         /// <summary>
         /// Gets/Sets the GroupHeaderTemplate property
         /// </summary>
@@ -397,7 +397,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for IsGroupingEnabled property
         /// </summary>
-        public static readonly BindableProperty IsGroupingEnabledProperty = BindableProperty.Create("IsGroupingEnabled", typeof(bool), typeof(ListView), default(bool));
+        public static readonly BindableProperty IsGroupingEnabledProperty = BindableProperty.Create(nameof(IsGroupingEnabled), typeof(bool), typeof(ListView), default(bool));
         /// <summary>
         /// Gets/Sets the IsGroupingEnabled property
         /// </summary>
@@ -416,7 +416,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for ItemsSource property
         /// </summary>
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(ListView), default(IEnumerable));
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(ListView), default(IEnumerable));
         /// <summary>
         /// Gets/Sets the ItemsSource property
         /// </summary>
@@ -431,7 +431,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for ItemTemplates property
         /// </summary>
-        public static readonly BindableProperty ItemTemplatesProperty = BindableProperty.Create("ItemTemplates", typeof(Forms9Patch.DataTemplateSelector), typeof(ListView), default(Forms9Patch.DataTemplateSelector));
+        public static readonly BindableProperty ItemTemplatesProperty = BindableProperty.Create(nameof(ItemTemplates), typeof(Forms9Patch.DataTemplateSelector), typeof(ListView), default(Forms9Patch.DataTemplateSelector));
         /// <summary>
         /// Gets/Sets the ItemTemplates property
         /// </summary>
@@ -1320,7 +1320,7 @@ namespace Forms9Patch
         /// <param name="animiated">If set to <c>true</c> animiated.</param>
         public bool ScrollTo(double offset, bool animiated = true) => _listView.ScrollTo(offset, animiated);
 
-        internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create("ScrollEnabled", typeof(bool), typeof(ListView), true);
+        internal static readonly BindableProperty ScrollEnabledProperty = BindableProperty.Create(nameof(ScrollEnabled), typeof(bool), typeof(ListView), true);
         internal bool ScrollEnabled
         {
             get => (bool)GetValue(ScrollEnabledProperty);

@@ -65,7 +65,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Image bindable property.
         /// </summary>
-        public static BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(ButtonState), null);
+        public static BindableProperty IconImageProperty = BindableProperty.Create(nameof(IconImage), typeof(Forms9Patch.Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the companion image.
         /// </summary>
@@ -81,7 +81,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for IconText property
         /// </summary>
-        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(ButtonState), null);
+        public static readonly BindableProperty IconTextProperty = BindableProperty.Create(nameof(IconText), typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets/Sets the IconText (Alternative to IconImage).
         /// </summary>
@@ -96,7 +96,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for the IconFontFamily property
         /// </summary>
-        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create("Forms9Patch.ButtonState.IconFontFamily", typeof(string), typeof(ButtonState), default(string));
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(ButtonState), default(string));
         /// <summary>
         /// The font used to render the IconText
         /// </summary>
@@ -112,7 +112,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the TrailiingImage property
         /// </summary>
-        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create("TrailingIcon", typeof(bool), typeof(ButtonState), false,
+        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create(nameof(TrailingIcon), typeof(bool), typeof(ButtonState), false,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).TrailingIconSet = true;
@@ -133,7 +133,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the TintIcon property
         /// </summary>
-        public static readonly BindableProperty TintIconProperty = BindableProperty.Create("TintIcon", typeof(bool), typeof(ButtonState), true,
+        public static readonly BindableProperty TintIconProperty = BindableProperty.Create(nameof(TintIcon), typeof(bool), typeof(ButtonState), true,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).TintIconSet = true;
@@ -154,7 +154,7 @@ namespace Forms9Patch
         /// <summary>
         /// The has tight spacing property.
         /// </summary>
-        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create("HasTightSpacing", typeof(bool), typeof(ButtonState), default(bool),
+        public static readonly BindableProperty HasTightSpacingProperty = BindableProperty.Create(nameof(HasTightSpacing), typeof(bool), typeof(ButtonState), default(bool),
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).HasTightSpacingSet = true;
@@ -176,7 +176,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the spacing property.
         /// </summary>
-        public static readonly BindableProperty SpacingProperty = BindableProperty.Create("Spacing", typeof(double), typeof(ButtonState), -1.0,
+        public static readonly BindableProperty SpacingProperty = BindableProperty.Create(nameof(Spacing), typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).SpacingSet = true;
@@ -198,7 +198,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button's orientation property.
         /// </summary>
-        public static BindableProperty OrientationProperty = BindableProperty.Create("Orientation", typeof(StackOrientation), typeof(ButtonState), StackOrientation.Horizontal,
+        public static BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(ButtonState), StackOrientation.Horizontal,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).OrientationSet = true;
@@ -220,7 +220,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ElementShape property
         /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ButtonState), default(ElementShape),
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create(nameof(ElementShape), typeof(ElementShape), typeof(ButtonState), default(ElementShape),
             propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
             {
                 //((IShape)bindable).ExtendedElementShape = ((ElementShape)newValue).ToExtendedElementShape();
@@ -243,7 +243,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundImage bindable property.
         /// </summary>
-        public static BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(ButtonState), null);
+        public static BindableProperty BackgroundImageProperty = BindableProperty.Create(nameof(BackgroundImage), typeof(Forms9Patch.Image), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the background image.
         /// </summary>
@@ -262,7 +262,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundColor bindable property.
         /// </summary>
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(ButtonState), (object)Color.Transparent,
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(ButtonState), (object)Color.Transparent,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).BackgroundColorSet = true;
@@ -284,7 +284,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the HasShadow property
         /// </summary>
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(ButtonState), false,
+        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create(nameof(HasShadow), typeof(bool), typeof(ButtonState), false,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).HasShadowSet = true;
@@ -306,7 +306,7 @@ namespace Forms9Patch
         /// Backing store for the ShadowInverted bindable property.
         /// </summary>
         /// <remarks></remarks>
-        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create("ShadowInverted", typeof(bool), typeof(ButtonState), false,
+        public static readonly BindableProperty ShadowInvertedProperty = BindableProperty.Create(nameof(ShadowInverted), typeof(bool), typeof(ButtonState), false,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).ShadowInvertedSet = true;
@@ -328,7 +328,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backging store for the OutlineColor property
         /// </summary>
-        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create("OutlineColor", typeof(Color), typeof(ButtonState), Color.Default,
+        public static readonly BindableProperty OutlineColorProperty = BindableProperty.Create(nameof(OutlineColor), typeof(Color), typeof(ButtonState), Color.Default,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).OutlineColorSet = true;
@@ -363,7 +363,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the OutlineRadius bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ButtonState), -1f,
+        public static readonly BindableProperty OutlineRadiusProperty = BindableProperty.Create(nameof(OutlineRadius), typeof(float), typeof(ButtonState), -1f,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).OutlineRadiusSet = true;
@@ -399,7 +399,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the OutlineWidth bindable property.
         /// </summary>
-        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create("OutlineRadius", typeof(float), typeof(ButtonState), -1f,
+        public static readonly BindableProperty OutlineWidthProperty = BindableProperty.Create(nameof(OutlineRadius), typeof(float), typeof(ButtonState), -1f,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).OutlineWidthSet = true;
@@ -475,7 +475,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Text bindable property.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(ButtonState), null);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -491,7 +491,7 @@ namespace Forms9Patch
         /// <summary>
         /// The formatted text property backing store.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(ButtonState), null);
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(ButtonState), null);
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -510,7 +510,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontColor bindable property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(ButtonState), Color.Default,
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ButtonState), Color.Default,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).TextColorSet = (((Color)newValue) != Color.Default);
@@ -532,7 +532,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Button.Alignment bindable property
         /// </summary>
-        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create("HorizontalTextAlignment", typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
+        public static BindableProperty HorizontalTextAlignmentProperty = BindableProperty.Create(nameof(HorizontalTextAlignment), typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).HorizontalTextAlignmentSet = true;
@@ -554,7 +554,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the vertical alignment property.
         /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create("VerticalTextAlignment", typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
+        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create(nameof(VerticalTextAlignment), typeof(TextAlignment), typeof(ButtonState), TextAlignment.Center,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).VerticalTextAlignmentSet = true;
@@ -576,7 +576,7 @@ namespace Forms9Patch
         /// <summary>
         /// The line break mode property.
         /// </summary>
-        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create("LineBreakMode", typeof(LineBreakMode), typeof(ButtonState), LineBreakMode.TailTruncation,
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create(nameof(LineBreakMode), typeof(LineBreakMode), typeof(ButtonState), LineBreakMode.TailTruncation,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).LineBreakModeSet = true;
@@ -598,7 +598,7 @@ namespace Forms9Patch
         /// <summary>
         /// The fit property.
         /// </summary>
-        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(ButtonState), AutoFit.Width,
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create(nameof(AutoFit), typeof(AutoFit), typeof(ButtonState), AutoFit.Width,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).AutoFitSet = true;
@@ -620,7 +620,7 @@ namespace Forms9Patch
         /// <summary>
         /// The lines property.
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(ButtonState), 1,
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(ButtonState), 1,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).LinesSet = true;
@@ -642,7 +642,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the minimum font size property.
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(ButtonState), -1.0,
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create(nameof(MinFontSize), typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: ((bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).MinFontSizeSet = true;

@@ -13,7 +13,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the KeyInput property 
         /// </summary>
-        public static readonly BindableProperty KeyInputProperty = BindableProperty.Create("KeyInput", typeof(string), typeof(HardwareKey), default(string));
+        public static readonly BindableProperty KeyInputProperty = BindableProperty.Create(nameof(KeyInput), typeof(string), typeof(HardwareKey), default(string));
         /// <summary>
         /// A case sensitive string representing the key pressed.  
         /// </summary>
@@ -27,7 +27,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ModifierKeys property
         /// </summary>
-        public static readonly BindableProperty ModifierKeysProperty = BindableProperty.Create("ModifierKeys", typeof(HardwareKeyModifierKeys), typeof(HardwareKey), default(HardwareKeyModifierKeys));
+        public static readonly BindableProperty ModifierKeysProperty = BindableProperty.Create(nameof(ModifierKeys), typeof(HardwareKeyModifierKeys), typeof(HardwareKey), default(HardwareKeyModifierKeys));
         /// <summary>
         /// Flags representing which (if any) modifier keys occompany the pressed key
         /// </summary>
@@ -41,7 +41,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the DiscoverableTitle property
         /// </summary>
-        public static readonly BindableProperty DiscoverableTitleProperty = BindableProperty.Create("DiscoverableTitle", typeof(string), typeof(HardwareKey), default(string));
+        public static readonly BindableProperty DiscoverableTitleProperty = BindableProperty.Create(nameof(DiscoverableTitle), typeof(string), typeof(HardwareKey), default(string));
         /// <summary>
         /// The text shown, during a modifier key long press, indicating that this key is one that is available with this key press
         /// </summary>

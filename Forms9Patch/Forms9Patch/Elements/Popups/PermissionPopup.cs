@@ -72,7 +72,7 @@ namespace Forms9Patch
         /// <summary>
         /// The title property backing store.
         /// </summary>
-        public static readonly new BindableProperty TitleProperty = BindableProperty.Create("Title", typeof(string), typeof(PermissionPopup), default(string));
+        public static readonly new BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(PermissionPopup), default(string));
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -86,7 +86,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text property backing store.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(PermissionPopup), default(string));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(PermissionPopup), default(string));
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
@@ -100,7 +100,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok text property.
         /// </summary>
-        public static readonly BindableProperty OkTextProperty = BindableProperty.Create("OkText", typeof(string), typeof(PermissionPopup), "OK");
+        public static readonly BindableProperty OkTextProperty = BindableProperty.Create(nameof(OkText), typeof(string), typeof(PermissionPopup), "OK");
         /// <summary>
         /// Gets or sets the ok text.
         /// </summary>
@@ -114,7 +114,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok button color property.
         /// </summary>
-        public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create("OkButtonColor", typeof(Color), typeof(PermissionPopup), Color.Blue);
+        public static readonly BindableProperty OkButtonColorProperty = BindableProperty.Create(nameof(OkButtonColor), typeof(Color), typeof(PermissionPopup), Color.Blue);
         /// <summary>
         /// Gets or sets the color of the ok button.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Forms9Patch
         /// <summary>
         /// The ok text color property.
         /// </summary>
-        public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create("OkTextColor", typeof(Color), typeof(PermissionPopup), Color.White);
+        public static readonly BindableProperty OkTextColorProperty = BindableProperty.Create(nameof(OkTextColor), typeof(Color), typeof(PermissionPopup), Color.White);
         /// <summary>
         /// Gets or sets the color of the ok text.
         /// </summary>
@@ -142,7 +142,7 @@ namespace Forms9Patch
         /// <summary>
         /// The cancel text property.
         /// </summary>
-        public static readonly BindableProperty CancelTextProperty = BindableProperty.Create("CancelText", typeof(string), typeof(PermissionPopup), default(string));
+        public static readonly BindableProperty CancelTextProperty = BindableProperty.Create(nameof(CancelText), typeof(string), typeof(PermissionPopup), default(string));
         /// <summary>
         /// Gets or sets the cancel text.
         /// </summary>
@@ -156,7 +156,7 @@ namespace Forms9Patch
         /// <summary>
         /// The cancel button color property.
         /// </summary>
-        public static readonly BindableProperty CancelButtonColorProperty = BindableProperty.Create("CancelButtonColor", typeof(Color), typeof(PermissionPopup), default(Color));
+        public static readonly BindableProperty CancelButtonColorProperty = BindableProperty.Create(nameof(CancelButtonColor), typeof(Color), typeof(PermissionPopup), default(Color));
         /// <summary>
         /// Gets or sets the color of the cancel button.
         /// </summary>
@@ -170,7 +170,7 @@ namespace Forms9Patch
         /// <summary>
         /// The cancel text color property.
         /// </summary>
-        public static readonly BindableProperty CancelTextColorProperty = BindableProperty.Create("CancelTextColor", typeof(Color), typeof(PermissionPopup), default(Color));
+        public static readonly BindableProperty CancelTextColorProperty = BindableProperty.Create(nameof(CancelTextColor), typeof(Color), typeof(PermissionPopup), default(Color));
         /// <summary>
         /// Gets or sets the color of the cancel text.
         /// </summary>

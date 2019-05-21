@@ -15,7 +15,7 @@ namespace Forms9Patch
         /// <summary>
         /// The selected items property.
         /// </summary>
-        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly("SelectedItems", typeof(ObservableCollection<object>), typeof(MultiPicker), null);
+        public static readonly BindablePropertyKey SelectedItemsPropertyKey = BindableProperty.CreateReadOnly(nameof(SelectedItems), typeof(ObservableCollection<object>), typeof(MultiPicker), null);
         /// <summary>
         /// Gets or sets the selected items.
         /// </summary>

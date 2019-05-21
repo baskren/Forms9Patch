@@ -24,7 +24,7 @@ namespace Forms9Patch
 				element = element.Parent;
 				page = element as Page;
 			}
-			Page lastSoloPage = page;
+            var lastSoloPage = page;
 			/*
 			if (page != null)
 			{

@@ -15,8 +15,8 @@ namespace FormsGestures.UWP
 		#region ILocation implementation
 
 		public Point CoordTransform (VisualElement fromElement, Point p, VisualElement toElement) {
-			IVisualElementRenderer toRenderer = Platform.GetRenderer (toElement);
-			IVisualElementRenderer fromRenderer = Platform.GetRenderer (fromElement);
+            var toRenderer = Platform.GetRenderer (toElement);
+            var fromRenderer = Platform.GetRenderer (fromElement);
 			if (toRenderer != null && fromRenderer != null) {
                 if (fromRenderer.ContainerElement != null && toRenderer.ContainerElement != null)
                 {
@@ -31,8 +31,8 @@ namespace FormsGestures.UWP
 		}
 
 		public Rectangle CoordTransform (VisualElement fromElement, Rectangle r, VisualElement toElement) {
-            IVisualElementRenderer toRenderer = Platform.GetRenderer(toElement);
-            IVisualElementRenderer fromRenderer = Platform.GetRenderer(fromElement);
+            var toRenderer = Platform.GetRenderer(toElement);
+            var fromRenderer = Platform.GetRenderer(fromElement);
             if (fromRenderer?.ContainerElement is FrameworkElement fromNativeView && toRenderer?.ContainerElement is FrameworkElement toNativeView)
             {
                 var transform = fromNativeView.TransformToVisual(toNativeView);

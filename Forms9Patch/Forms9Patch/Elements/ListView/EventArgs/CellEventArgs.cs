@@ -68,7 +68,7 @@ namespace Forms9Patch
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.CellProximityEventArgs"/>.</returns>
         public override string ToString()
         {
-            string indexPath = "";
+            var indexPath = "";
             foreach (int index in DeepIndex)
                 indexPath += index + ".";
             indexPath = indexPath.Substring(0, indexPath.Length - 1);
@@ -80,7 +80,7 @@ namespace Forms9Patch
         /// </summary>
         public virtual string Description()
         {
-            string indexPath = "";
+            var indexPath = "";
             foreach (int index in DeepIndex)
                 indexPath += index + ".";
             indexPath = indexPath.Substring(0, indexPath.Length - 1);

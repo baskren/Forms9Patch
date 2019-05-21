@@ -30,7 +30,7 @@ namespace Forms9Patch.UWP
         static SharpDX.DirectWrite.FontWeight DxFontWeight(int fontWeight)
         {
             var weights = Enum.GetValues(typeof(SharpDX.DirectWrite.FontWeight)).Cast<SharpDX.DirectWrite.FontWeight>().ToList();
-            int lowIndex = -1;
+            var lowIndex = -1;
             var lowError = int.MaxValue;
             for (int i = 0; i < weights.Count; i++)
             {
@@ -189,9 +189,9 @@ namespace Forms9Patch.UWP
                                 if (!familyNames.FindLocaleName(System.Globalization.CultureInfo.CurrentCulture.Name, out int index))
                                     familyNames.FindLocaleName("en-us", out index);
 
-                                string name = familyNames.GetString(index);
-                                
-                                string display = name;
+                                var name = familyNames.GetString(index);
+
+                                var display = name;
                                 using (var dxFont = dxFontFamily.GetFont(index))
                                 {
                                     if (dxFont.IsSymbolFont)
@@ -345,7 +345,7 @@ namespace Forms9Patch.UWP
                 case NamedSize.Large:
                     return 32;
                 default:
-                    throw new ArgumentOutOfRangeException("size");
+                    throw new ArgumentOutOfRangeException(nameof(size));
             }
         }
 

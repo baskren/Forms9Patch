@@ -50,9 +50,9 @@ namespace FormsGestures
             {
                 if (_center.IsEmpty)
                 {
-                    int num = Touches.Length;
-                    double num2 = 0.0;
-                    double num3 = 0.0;
+                    var num = Touches.Length;
+                    var num2 = 0.0;
+                    var num3 = 0.0;
                     for (int i = 0; i < num; i++)
                     {
                         num2 += Touches[i].X;

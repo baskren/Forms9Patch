@@ -84,7 +84,7 @@ namespace Forms9Patch
                         else if (key.StartsWith("file:", StringComparison.Ordinal))  // does this work for Windows or iOS?
                         {
                             //path = key.Substring(5);
-                            string filePath = ((FileImageSource)imageSource).File;
+                            var filePath = ((FileImageSource)imageSource).File;
                             /*
                             if (File.Exists(filePath))
                                 skBitmap = SKBitmap.Decode(filePath);
@@ -231,8 +231,8 @@ namespace Forms9Patch
             if (bitmap.Width < 3 || bitmap.Height < 3)
                 return null;
 
-            int lastPos = 0;
-            SKColor lastPixel = bitmap.GetPixel(lastPos + 1, 0);
+            var lastPos = 0;
+            var lastPixel = bitmap.GetPixel(lastPos + 1, 0);
             if (lastPixel != 0 && lastPixel != SKColors.Black)
                 return null;
             var capsX = new List<Range>();

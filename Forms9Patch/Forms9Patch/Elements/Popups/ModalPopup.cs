@@ -29,7 +29,7 @@ namespace Forms9Patch
         /// <summary>
         /// The location property backing store.
         /// </summary>
-        public static readonly BindableProperty LocationProperty = BindableProperty.Create("Location", typeof(Point), typeof(ModalPopup), new Point(double.NegativeInfinity, double.NegativeInfinity));
+        public static readonly BindableProperty LocationProperty = BindableProperty.Create(nameof(Location), typeof(Point), typeof(ModalPopup), new Point(double.NegativeInfinity, double.NegativeInfinity));
         /// <summary>
         /// Gets or sets the Modal Popup's location.
         /// </summary>
@@ -189,7 +189,7 @@ namespace Forms9Patch
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
 
-                double contentX = Location.X;
+                var contentX = Location.X;
                 if (double.IsInfinity(contentX) || double.IsNaN(contentX))
                 {
                     switch (HorizontalOptions.Alignment)
@@ -202,7 +202,7 @@ namespace Forms9Patch
                     }
                 }
                 //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
-                double contentY = Location.Y;
+                var contentY = Location.Y;
                 if (double.IsInfinity(contentY) || double.IsNaN(contentY))
                 {
                     switch (VerticalOptions.Alignment)

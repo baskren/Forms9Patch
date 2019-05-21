@@ -9,7 +9,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.Label
     /// </summary>
-    [ContentProperty("HtmlText")]
+    [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
     {
         #region Obsolete Properties
@@ -44,7 +44,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use FittedFontSizeProperty instead
         /// </summary>
         [Obsolete("Use FittedFontSizeProperty instead.", true)]
-        public static readonly BindableProperty ActualFontSizeProperty = BindableProperty.Create("ActualFontSize", typeof(double), typeof(Label), default(double));
+        public static readonly BindableProperty ActualFontSizeProperty = BindableProperty.Create(nameof(ActualFontSize), typeof(double), typeof(Label), default(double));
         /// <summary>
         /// OBSOLETE: Use FittedFontSize property instead
         /// </summary>
@@ -70,7 +70,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(Label));
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label));
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -84,7 +84,7 @@ namespace Forms9Patch
 
         #region F9PFormattedString
         // not public, so not bindable!
-        internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create("F9PFormattedString", typeof(F9PFormattedString), typeof(Label), null);
+        internal static readonly BindableProperty F9PFormattedStringProperty = BindableProperty.Create(nameof(F9PFormattedString), typeof(F9PFormattedString), typeof(Label), null);
         internal F9PFormattedString F9PFormattedString
         {
             get => (F9PFormattedString)GetValue(F9PFormattedStringProperty);
@@ -96,7 +96,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the AutoFit property.
         /// </summary>
-        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create("AutoFit", typeof(AutoFit), typeof(Label), AutoFit.None);
+        public static readonly BindableProperty AutoFitProperty = BindableProperty.Create(nameof(AutoFit), typeof(AutoFit), typeof(Label), AutoFit.None);
         /// <summary>
         /// Gets or sets the fit method.  Ignored if the Width and Height is not fixed by a parent, HeightRequest, and/or WidthRequest.
         /// </summary>
@@ -112,7 +112,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the lines property.
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create("Lines", typeof(int), typeof(Label), 0);
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(Label), 0);
         /// <summary>
         /// Gets or sets the number of lines used in a fit.  If zero and fit is not AutoFit.None or ignored, will maximize the font size to best width and height with minimum number of lines.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for the minimum font size property.
         /// </summary>
-        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create("MinFontSize", typeof(double), typeof(Label), -1.0);
+        public static readonly BindableProperty MinFontSizeProperty = BindableProperty.Create(nameof(MinFontSize), typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Gets or sets the minimum size of the font allowed during an autofit. 
         /// </summary>
@@ -144,7 +144,7 @@ namespace Forms9Patch
         /// <summary>
         /// The backing store for fixed size property.
         /// </summary>
-        public static readonly BindableProperty IsDynamicallySizedProperty = BindableProperty.Create("IsDynamicallySized", typeof(bool), typeof(Label), true, BindingMode.TwoWay);
+        public static readonly BindableProperty IsDynamicallySizedProperty = BindableProperty.Create(nameof(IsDynamicallySized), typeof(bool), typeof(Label), true, BindingMode.TwoWay);
         /// <summary>
         /// Gets if the size of the label has been fixed by a parent element, the HeightRequest and/or the WidthRequest properties.
         /// </summary>
@@ -159,7 +159,7 @@ namespace Forms9Patch
         #region FittedFontSize property
         DateTime _lastTimeFittedFontSizeSet = DateTime.MinValue;
 
-        internal static readonly BindablePropertyKey FittedFontSizePropertyKey = BindableProperty.CreateReadOnly("FittedFontSize", typeof(double), typeof(Label), -1.0);
+        internal static readonly BindablePropertyKey FittedFontSizePropertyKey = BindableProperty.CreateReadOnly(nameof(FittedFontSize), typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Backing store for the actual font size property after fitting.
         /// </summary>
@@ -194,7 +194,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SynchronizedFontSize property
         /// </summary>
-        public static readonly BindableProperty SynchronizedFontSizeProperty = BindableProperty.Create("SynchronizedFontSize", typeof(double), typeof(Label), -1.0);
+        public static readonly BindableProperty SynchronizedFontSizeProperty = BindableProperty.Create(nameof(SynchronizedFontSize), typeof(double), typeof(Label), -1.0);
         /// <summary>
         /// Gets/Sets the SynchronizedFontSize property
         /// </summary>

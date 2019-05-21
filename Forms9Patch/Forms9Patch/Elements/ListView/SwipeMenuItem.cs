@@ -14,7 +14,7 @@ namespace Forms9Patch
         /// <summary>
         /// The key property backing store.
         /// </summary>
-        public static readonly BindableProperty KeyProperty = BindableProperty.Create("Key", typeof(string), typeof(SwipeMenuItem), default(string));
+        public static readonly BindableProperty KeyProperty = BindableProperty.Create(nameof(Key), typeof(string), typeof(SwipeMenuItem), default(string));
         /// <summary>
         /// Gets or sets the key - used to identify a SwipeMenuEvent.  Will return Text if set to null.
         /// </summary>
@@ -30,7 +30,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for IconImage property
         /// </summary>
-        public static readonly BindableProperty IconImageProperty = BindableProperty.Create("IconImage", typeof(Forms9Patch.Image), typeof(SwipeMenuItem), default(Forms9Patch.Image));
+        public static readonly BindableProperty IconImageProperty = BindableProperty.Create(nameof(IconImage), typeof(Forms9Patch.Image), typeof(SwipeMenuItem), default(Forms9Patch.Image));
         /// <summary>
         /// Gets/Sets the IconImage property
         /// </summary>
@@ -45,7 +45,7 @@ namespace Forms9Patch
         /// <summary>
         /// The icon text property backing store.
         /// </summary>
-        public static readonly BindableProperty IconTextProperty = BindableProperty.Create("IconText", typeof(string), typeof(SwipeMenuItem), default(string));
+        public static readonly BindableProperty IconTextProperty = BindableProperty.Create(nameof(IconText), typeof(string), typeof(SwipeMenuItem), default(string));
         /// <summary>
         /// Gets or sets the icon text - an alternative to IconImageSource.
         /// </summary>
@@ -61,7 +61,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text property backing store.
         /// </summary>
-        public static readonly BindableProperty TextProperty = BindableProperty.Create("Text", typeof(string), typeof(SwipeMenuItem), default(string));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(SwipeMenuItem), default(string));
         /// <summary>
         /// Gets or sets the text (can be in HTML format.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for HtmlText property
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create("HtmlText", typeof(string), typeof(SwipeMenuItem), default(string));
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(SwipeMenuItem), default(string));
         /// <summary>
         /// Gets/Sets the HtmlText property
         /// </summary>
@@ -92,7 +92,7 @@ namespace Forms9Patch
         /// <summary>
         /// The text color property.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create("TextColor", typeof(Color), typeof(SwipeMenuItem), Color.White);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(SwipeMenuItem), Color.White);
         /// <summary>
         /// Gets or sets the color of the text and icon (image).
         /// </summary>
@@ -108,7 +108,7 @@ namespace Forms9Patch
         /// <summary>
         /// The swipe executable property backing store.
         /// </summary>
-        public static readonly BindableProperty SwipeExecutableProperty = BindableProperty.Create("SwipeExecutable", typeof(bool), typeof(SwipeMenuItem), default(bool));
+        public static readonly BindableProperty IsTriggeredOnFullSwipeProperty = BindableProperty.Create(nameof(IsTriggeredOnFullSwipe), typeof(bool), typeof(SwipeMenuItem), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SwipeAction"/> swipe executable.
         /// Only used if this SwipeAction is at the top of the stack of SwipeActions.
@@ -116,8 +116,8 @@ namespace Forms9Patch
         /// <value><c>true</c> if swipe executable; otherwise, <c>false</c>.</value>
         public bool IsTriggeredOnFullSwipe
         {
-            get => (bool)GetValue(SwipeExecutableProperty);
-            set => SetValue(SwipeExecutableProperty, value);
+            get => (bool)GetValue(IsTriggeredOnFullSwipeProperty);
+            set => SetValue(IsTriggeredOnFullSwipeProperty, value);
         }
         #endregion SwipeExecutable region
 
@@ -125,7 +125,7 @@ namespace Forms9Patch
         /// <summary>
         /// The background color property backing store.
         /// </summary>
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create("BackgroundColor", typeof(Color), typeof(SwipeMenuItem), default(Color));
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(SwipeMenuItem), default(Color));
         /// <summary>
         /// Gets or sets the color of the background.
         /// </summary>

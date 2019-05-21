@@ -32,7 +32,7 @@ namespace Forms9Patch
         {
             //MimeItem<T> result = null;
 
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
 
             mimeType = mimeType.ToLower();

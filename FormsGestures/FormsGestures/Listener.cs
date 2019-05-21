@@ -29,95 +29,95 @@ namespace FormsGestures
 
         #region Event / Command Property List
         internal static readonly string[] AllEventsAndCommands = {
-            "Down",
-            "DownCommand",
-            "DownCommandParameter",
-            "DownCallback",
-            "DownCallbackParameter",
+            nameof(Down),
+            nameof(DownCommand),
+            nameof(DownCommandParameter),
+            nameof(DownCallback),
+            nameof(DownCallbackParameter),
 
-            "Up",
-            "UpCommand",
-            "UpCommandParameter",
-            "UpCallback",
-            "UpCallbackParameter",
+            nameof(Up),
+            nameof(UpCommand),
+            nameof(UpCommandParameter),
+            nameof(UpCallback),
+            nameof(UpCallbackParameter),
 
-            "Tapping",
-            "TappingCommand",
-            "TappingCommandParameter",
-            "TappingCallback",
-            "TappingCallbackParameter",
+            nameof(Tapping),
+            nameof(TappingCommand),
+            nameof(TappingCommandParameter),
+            nameof(TappingCallback),
+            nameof(TappingCallbackParameter),
 
-            "Tapped",
-            "TappedCommand",
-            "TappedCommandParameter",
-            "TappedCallback",
-            "TappedCallbackParameter",
+            nameof(Tapped),
+            nameof(TappedCommand),
+            nameof(TappedCommandParameter),
+            nameof(TappedCallback),
+            nameof(TappedCallbackParameter),
 
-            "DoubleTapped",
-            "DoubleTappedCommand",
-            "DoubleTappedCommandParameter",
-            "DoubleTappedCallback",
-            "DoubleTappedCallbackParameter",
+            nameof(DoubleTapped),
+            nameof(DoubleTappedCommand),
+            nameof(DoubleTappedCommandParameter),
+            nameof(DoubleTappedCallback),
+            nameof(DoubleTappedCallbackParameter),
 
-            "LongPressing",
-            "LongPressingCommand",
-            "LongPressingCommandParameter",
-            "LongPressingCallback",
-            "LongPressingCallbackParameter",
+            nameof(LongPressing),
+            nameof(LongPressingCommand),
+            nameof(LongPressingCommandParameter),
+            nameof(LongPressingCallback),
+            nameof(LongPressingCallbackParameter),
 
-            "LongPressed",
-            "LongPressedCommand",
-            "LongPressedCommandParameter",
-            "LongPressedCallback",
-            "LongPressedCallbackParameter",
+            nameof(LongPressed),
+            nameof(LongPressedCommand),
+            nameof(LongPressedCommandParameter),
+            nameof(LongPressedCallback),
+            nameof(LongPressedCallbackParameter),
 
-            "Pinching",
-            "PinchingCommand",
-            "PinchingCommandParameter",
-            "PinchingCallback",
-            "PinchingCallbackParameter",
+            nameof(Pinching),
+            nameof(PinchingCommand),
+            nameof(PinchingCommandParameter),
+            nameof(PinchingCallback),
+            nameof(PinchingCallbackParameter),
 
-            "Pinched",
-            "PinchedCommand",
-            "PinchedCommandParameter",
-            "PinchedCallback",
-            "PinchedCallbackParameter",
+            nameof(Pinched),
+            nameof(PinchedCommand),
+            nameof(PinchedCommandParameter),
+            nameof(PinchedCallback),
+            nameof(PinchedCallbackParameter),
 
-            "Panning",
-            "PanningCommand",
-            "PanningCommandParameter",
-            "PanningCallback",
-            "PanningCallbackParameter",
+            nameof(Panning),
+            nameof(PanningCommand),
+            nameof(PanningCommandParameter),
+            nameof(PanningCallback),
+            nameof(PanningCallbackParameter),
 
-            "Panned",
-            "PannedCommand",
-            "PannedCommandParameter",
-            "PannedCallback",
-            "PannedCallbackParameter",
+            nameof(Panned),
+            nameof(PannedCommand),
+            nameof(PannedCommandParameter),
+            nameof(PannedCallback),
+            nameof(PannedCallbackParameter),
 
-            "Swiped",
-            "SwipedCommand",
-            "SwipedCommandParameter",
-            "SwipedCallback",
-            "SwipedCallbackParameter",
+            nameof(Swiped),
+            nameof(SwipedCommand),
+            nameof(SwipedCommandParameter),
+            nameof(SwipedCallback),
+            nameof(SwipedCallbackParameter),
 
-            "Rotating",
-            "RotatingCommand",
-            "RotatingCommandParameter",
-            "RotatingCallback",
-            "RotatingCallbackParameter",
+            nameof(Rotating),
+            nameof(RotatingCommand),
+            nameof(RotatingCommandParameter),
+            nameof(RotatingCallback),
+            nameof(RotatingCallbackParameter),
 
-            "Rotated",
-            "RotatedCommand",
-            "RotatedCommandParameter",
-            "RotatedCallback",
-            "RotatedCallbackParameter",
+            nameof(Rotated),
+            nameof(RotatedCommand),
+            nameof(RotatedCommandParameter),
+            nameof(RotatedCallback),
+            nameof(RotatedCallbackParameter),
 
-            "RightClicked",
-            "RightClickedCommand",
-            "RightClickedCommandParameter",
-            "RightClickedCallback",
-            "RightClickedCallbackParameter",
+            nameof(RightClicked),
+            nameof(RightClickedCommand),
+            nameof(RightClickedCommandParameter),
+            nameof(RightClickedCallback),
+            nameof(RightClickedCallbackParameter),
 
         };
         #endregion
@@ -131,14 +131,14 @@ namespace FormsGestures
         {
             add
             {
-                bool oldHandlesDownState = HandlesDown;
+                var oldHandlesDownState = HandlesDown;
                 _down += value;
                 if (HandlesDown != oldHandlesDownState)
                     HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
             }
             remove
             {
-                bool oldHandlesDownState = HandlesDown;
+                var oldHandlesDownState = HandlesDown;
                 _down -= value;
                 if (HandlesDown != oldHandlesDownState)
                     HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
@@ -147,11 +147,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for command invoked upon down event
         /// </summary>
-        public static readonly BindableProperty DownCommandProperty = BindableProperty.Create("DownCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty DownCommandProperty = BindableProperty.Create(nameof(DownCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for down command parameter
         /// </summary>
-        public static readonly BindableProperty DownCommandParameterProperty = BindableProperty.Create("DownCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty DownCommandParameterProperty = BindableProperty.Create(nameof(DownCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// command invoked upon down event
         /// </summary>
@@ -160,7 +160,7 @@ namespace FormsGestures
             get { return (ICommand)GetValue(DownCommandProperty); }
             set
             {
-                bool oldHandlesDownState = HandlesDown;
+                var oldHandlesDownState = HandlesDown;
                 SetValue(DownCommandProperty, value);
                 if (HandlesDown != oldHandlesDownState)
                     HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
@@ -177,11 +177,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for DownCallback property
         /// </summary>
-        public static readonly BindableProperty DownCallbackProperty = BindableProperty.Create("DownCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty DownCallbackProperty = BindableProperty.Create(nameof(DownCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for DownCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty DownCallbackParameterProperty = BindableProperty.Create("DownCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty DownCallbackParameterProperty = BindableProperty.Create(nameof(DownCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked invoked upon down event
         /// </summary>
@@ -190,7 +190,7 @@ namespace FormsGestures
             get { return (Action<Listener, object>)GetValue(DownCallbackProperty); }
             set
             {
-                bool oldHandlesDownState = HandlesDown;
+                var oldHandlesDownState = HandlesDown;
                 SetValue(DownCallbackProperty, value);
                 if (HandlesDown != oldHandlesDownState)
                     HandlesDownChanged?.Invoke(this, !oldHandlesDownState);
@@ -216,7 +216,7 @@ namespace FormsGestures
 
         internal bool OnDown(DownUpEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesDown)
             {
                 RaiseEvent<DownUpEventArgs>(_down, args);
@@ -252,11 +252,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for UpCommand
         /// </summary>
-        public static readonly BindableProperty UpCommandProperty = BindableProperty.Create("UpCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty UpCommandProperty = BindableProperty.Create(nameof(UpCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for UpCommandParameter
         /// </summary>
-        public static readonly BindableProperty UpCommandParameterProperty = BindableProperty.Create("UpCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty UpCommandParameterProperty = BindableProperty.Create(nameof(UpCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// command invoked upon up touch
         /// </summary>
@@ -282,11 +282,11 @@ namespace FormsGestures
         /// <summary>
         /// Backing store for UpCallback
         /// </summary>
-        public static readonly BindableProperty UpCallbackProperty = BindableProperty.Create("UpCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty UpCallbackProperty = BindableProperty.Create(nameof(UpCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// Backing store for UpCallbackParameter
         /// </summary>
-        public static readonly BindableProperty UpCallbackParameterProperty = BindableProperty.Create("UpCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty UpCallbackParameterProperty = BindableProperty.Create(nameof(UpCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked upon up touch
         /// </summary>
@@ -322,7 +322,7 @@ namespace FormsGestures
 
         internal bool OnUp(DownUpEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesUp)
             {
                 RaiseEvent<DownUpEventArgs>(_up, args);
@@ -358,11 +358,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the TappingCommand property
         /// </summary>
-        public static readonly BindableProperty TappingCommandProperty = BindableProperty.Create("TappingCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty TappingCommandProperty = BindableProperty.Create(nameof(TappingCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the TappingCommandParameter property
         /// </summary>
-        public static readonly BindableProperty TappingCommandParameterProperty = BindableProperty.Create("TappingCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty TappingCommandParameterProperty = BindableProperty.Create(nameof(TappingCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked during tap event
         /// </summary>
@@ -388,11 +388,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the TappingCallback property
         /// </summary>
-        public static readonly BindableProperty TappingCallbackProperty = BindableProperty.Create("TappingCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty TappingCallbackProperty = BindableProperty.Create(nameof(TappingCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the TappingCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty TappingCallbackParameterProperty = BindableProperty.Create("TappingCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty TappingCallbackParameterProperty = BindableProperty.Create(nameof(TappingCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked upon tap event
         /// </summary>
@@ -428,7 +428,7 @@ namespace FormsGestures
 
         internal bool OnTapping(TapEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesTapping)
             {
                 RaiseEvent<TapEventArgs>(_tapping, args);
@@ -461,11 +461,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the TappedCommand property
         /// </summary>
-        public static readonly BindableProperty TappedCommandProperty = BindableProperty.Create("TappedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty TappedCommandProperty = BindableProperty.Create(nameof(TappedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the TappedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty TappedCommandParameterProperty = BindableProperty.Create("TappedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty TappedCommandParameterProperty = BindableProperty.Create(nameof(TappedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after a tap motion
         /// </summary>
@@ -491,11 +491,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for a TappedCallback property
         /// </summary>
-        public static readonly BindableProperty TappedCallbackProperty = BindableProperty.Create("TappedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty TappedCallbackProperty = BindableProperty.Create(nameof(TappedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for a TappedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty TappedCallbackParameterProperty = BindableProperty.Create("TappedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty TappedCallbackParameterProperty = BindableProperty.Create(nameof(TappedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after a tap motion
         /// </summary>
@@ -534,7 +534,7 @@ namespace FormsGestures
 
         internal bool OnTapped(TapEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesTapped)
             {
                 RaiseEvent<TapEventArgs>(_tapped, args);
@@ -571,11 +571,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the DoubleTappedCommand property
         /// </summary>
-        public static readonly BindableProperty DoubleTappedCommandProperty = BindableProperty.Create("DoubleTappedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty DoubleTappedCommandProperty = BindableProperty.Create(nameof(DoubleTappedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the DoubleTappedCommmandParameter property
         /// </summary>
-        public static readonly BindableProperty DoubleTappedCommandParameterProperty = BindableProperty.Create("DoubleTappedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty DoubleTappedCommandParameterProperty = BindableProperty.Create(nameof(DoubleTappedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after a double tap motion
         /// </summary>
@@ -601,11 +601,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for DoubleTappedCallback property
         /// </summary>
-        public static readonly BindableProperty DoubleTappedCallbackProperty = BindableProperty.Create("DoubleTappedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty DoubleTappedCallbackProperty = BindableProperty.Create(nameof(DoubleTappedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for DoubleTappedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty DoubleTappedCallbackParameterProperty = BindableProperty.Create("DoubleTappedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty DoubleTappedCallbackParameterProperty = BindableProperty.Create(nameof(DoubleTappedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after a double tap motion
         /// </summary>
@@ -640,7 +640,7 @@ namespace FormsGestures
 
         internal bool OnDoubleTapped(TapEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesDoubleTapped)
             {
                 RaiseEvent<TapEventArgs>(_doubleTapped, args);
@@ -677,11 +677,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for LongPressingCommand property
         /// </summary>
-        public static readonly BindableProperty LongPressingCommandProperty = BindableProperty.Create("LongPressingCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty LongPressingCommandProperty = BindableProperty.Create(nameof(LongPressingCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for LongPressingCommandParameter property
         /// </summary>
-        public static readonly BindableProperty LongPressingCommandParameterProperty = BindableProperty.Create("LongPressingCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty LongPressingCommandParameterProperty = BindableProperty.Create(nameof(LongPressingCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked during long pressing motion
         /// </summary>
@@ -707,11 +707,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for LongPressingCallback property
         /// </summary>
-        public static readonly BindableProperty LongPressingCallbackProperty = BindableProperty.Create("LongPressingCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty LongPressingCallbackProperty = BindableProperty.Create(nameof(LongPressingCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for LongPressingCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty LongPressingCallbackParameterProperty = BindableProperty.Create("LongPressingCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty LongPressingCallbackParameterProperty = BindableProperty.Create(nameof(LongPressingCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked during long pressing motion
         /// </summary>
@@ -754,7 +754,7 @@ namespace FormsGestures
 
         internal bool OnLongPressing(LongPressEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesLongPressing)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -792,11 +792,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for LongPressedCommand property
         /// </summary>
-        public static readonly BindableProperty LongPressedCommandProperty = BindableProperty.Create("LongPressedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty LongPressedCommandProperty = BindableProperty.Create(nameof(LongPressedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for LongPressedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty LongPressedCommandParameterProperty = BindableProperty.Create("LongPressedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty LongPressedCommandParameterProperty = BindableProperty.Create(nameof(LongPressedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after long press motion
         /// </summary>
@@ -822,11 +822,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for LongPressedCallback property
         /// </summary>
-        public static readonly BindableProperty LongPressedCallbackProperty = BindableProperty.Create("LongPressedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty LongPressedCallbackProperty = BindableProperty.Create(nameof(LongPressedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for LongPressedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty LongPressedCallbackParameterProperty = BindableProperty.Create("LongPressedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty LongPressedCallbackParameterProperty = BindableProperty.Create(nameof(LongPressedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after long press motion
         /// </summary>
@@ -872,7 +872,7 @@ namespace FormsGestures
 
         internal bool OnLongPressed(LongPressEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesLongPressed)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -910,11 +910,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PinchingCommand property
         /// </summary>
-        public static readonly BindableProperty PinchingCommandProperty = BindableProperty.Create("PinchingCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty PinchingCommandProperty = BindableProperty.Create(nameof(PinchingCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the PinchingCommandParameter property
         /// </summary>
-        public static readonly BindableProperty PinchingCommandParameterProperty = BindableProperty.Create("PinchingCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PinchingCommandParameterProperty = BindableProperty.Create(nameof(PinchingCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked during pinch motion
         /// </summary>
@@ -940,11 +940,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PinchingCallback property
         /// </summary>
-        public static readonly BindableProperty PinchingCallbackProperty = BindableProperty.Create("PinchingCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty PinchingCallbackProperty = BindableProperty.Create(nameof(PinchingCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the PinchingCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty PinchingCallbackParameterProperty = BindableProperty.Create("PinchingCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PinchingCallbackParameterProperty = BindableProperty.Create(nameof(PinchingCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked during pinch motion
         /// </summary>
@@ -980,7 +980,7 @@ namespace FormsGestures
 
         internal bool OnPinching(PinchEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesPinching)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1018,11 +1018,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PinchedCommand property
         /// </summary>
-        public static readonly BindableProperty PinchedCommandProperty = BindableProperty.Create("PinchedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty PinchedCommandProperty = BindableProperty.Create(nameof(PinchedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the PinchedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty PinchedCommandParameterProperty = BindableProperty.Create("PinchedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PinchedCommandParameterProperty = BindableProperty.Create(nameof(PinchedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after pinch motion
         /// </summary>
@@ -1048,11 +1048,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PinchedCallback property
         /// </summary>
-        public static readonly BindableProperty PinchedCallbackProperty = BindableProperty.Create("PinchedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty PinchedCallbackProperty = BindableProperty.Create(nameof(PinchedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the PinchedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty PinchedCallbackParameterProperty = BindableProperty.Create("PinchedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PinchedCallbackParameterProperty = BindableProperty.Create(nameof(PinchedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after pinch motion
         /// </summary>
@@ -1088,7 +1088,7 @@ namespace FormsGestures
 
         internal bool OnPinched(PinchEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesPinched)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1126,11 +1126,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PanningCommand parameter
         /// </summary>
-        public static readonly BindableProperty PanningCommandProperty = BindableProperty.Create("PanningCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty PanningCommandProperty = BindableProperty.Create(nameof(PanningCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the PanningCommandParameter parameter
         /// </summary>
-        public static readonly BindableProperty PanningCommandParameterProperty = BindableProperty.Create("PanningCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PanningCommandParameterProperty = BindableProperty.Create(nameof(PanningCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked duing pan motion
         /// </summary>
@@ -1156,11 +1156,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PanningCallback parameter
         /// </summary>
-        public static readonly BindableProperty PanningCallbackProperty = BindableProperty.Create("PanningCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty PanningCallbackProperty = BindableProperty.Create(nameof(PanningCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the PanningCallbackParameter parameter
         /// </summary>
-        public static readonly BindableProperty PanningCallbackParameterProperty = BindableProperty.Create("PanningCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PanningCallbackParameterProperty = BindableProperty.Create(nameof(PanningCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked duing pan motion
         /// </summary>
@@ -1204,7 +1204,7 @@ namespace FormsGestures
 
         internal bool OnPanning(PanEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesPanning)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1242,11 +1242,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PannedCommand property
         /// </summary>
-        public static readonly BindableProperty PannedCommandProperty = BindableProperty.Create("PannedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty PannedCommandProperty = BindableProperty.Create(nameof(PannedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the PannedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty PannedCommandParameterProperty = BindableProperty.Create("PannedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PannedCommandParameterProperty = BindableProperty.Create(nameof(PannedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after pan motion
         /// </summary>
@@ -1272,11 +1272,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the PanndedCallback property
         /// </summary>
-        public static readonly BindableProperty PannedCallbackProperty = BindableProperty.Create("PannedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty PannedCallbackProperty = BindableProperty.Create(nameof(PannedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the PanndedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty PannedCallbackParameterProperty = BindableProperty.Create("PannedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty PannedCallbackParameterProperty = BindableProperty.Create(nameof(PannedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after pan motion
         /// </summary>
@@ -1312,7 +1312,7 @@ namespace FormsGestures
 
         internal bool OnPanned(PanEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesPanned)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1351,11 +1351,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the SwipedCommand property
         /// </summary>
-        public static readonly BindableProperty SwipedCommandProperty = BindableProperty.Create("SwipedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty SwipedCommandProperty = BindableProperty.Create(nameof(SwipedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the SwipedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty SwipedCommandParameterProperty = BindableProperty.Create("SwipedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty SwipedCommandParameterProperty = BindableProperty.Create(nameof(SwipedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after swipe motion
         /// </summary>
@@ -1381,11 +1381,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the SwipedCallback property
         /// </summary>
-        public static readonly BindableProperty SwipedCallbackProperty = BindableProperty.Create("SwipedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty SwipedCallbackProperty = BindableProperty.Create(nameof(SwipedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the SwipedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty SwipedCallbackParameterProperty = BindableProperty.Create("SwipedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty SwipedCallbackParameterProperty = BindableProperty.Create(nameof(SwipedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after swipe motion
         /// </summary>
@@ -1421,7 +1421,7 @@ namespace FormsGestures
 
         internal bool OnSwiped(SwipeEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesSwiped)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1458,11 +1458,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the RotatingCommand property
         /// </summary>
-        public static readonly BindableProperty RotatingCommandProperty = BindableProperty.Create("RotatingCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty RotatingCommandProperty = BindableProperty.Create(nameof(RotatingCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the RotatingCommandParameter property
         /// </summary>
-        public static readonly BindableProperty RotatingCommandParameterProperty = BindableProperty.Create("RotatingCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RotatingCommandParameterProperty = BindableProperty.Create(nameof(RotatingCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked during rotation motion
         /// </summary>
@@ -1488,11 +1488,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the RotatingCallback property
         /// </summary>
-        public static readonly BindableProperty RotatingCallbackProperty = BindableProperty.Create("RotatingCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty RotatingCallbackProperty = BindableProperty.Create(nameof(RotatingCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the RotatingCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty RotatingCallbackParameterProperty = BindableProperty.Create("RotatingCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RotatingCallbackParameterProperty = BindableProperty.Create(nameof(RotatingCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked during rotation motion
         /// </summary>
@@ -1528,7 +1528,7 @@ namespace FormsGestures
 
         internal bool OnRotating(RotateEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesRotating)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1565,11 +1565,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the RotatedCommand property
         /// </summary>
-        public static readonly BindableProperty RotatedCommandProperty = BindableProperty.Create("RotatedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty RotatedCommandProperty = BindableProperty.Create(nameof(RotatedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the RotatedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty RotatedCommandParameterProperty = BindableProperty.Create("RotatedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RotatedCommandParameterProperty = BindableProperty.Create(nameof(RotatedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after rotation motion
         /// </summary>
@@ -1595,11 +1595,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the RotatedCallback property
         /// </summary>
-        public static readonly BindableProperty RotatedCallbackProperty = BindableProperty.Create("RotatedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty RotatedCallbackProperty = BindableProperty.Create(nameof(RotatedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for the RotatedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty RotatedCallbackParameterProperty = BindableProperty.Create("RotatedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RotatedCallbackParameterProperty = BindableProperty.Create(nameof(RotatedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after rotation motion
         /// </summary>
@@ -1635,7 +1635,7 @@ namespace FormsGestures
 
         internal bool OnRotated(RotateEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesRotated)
             {
                 //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("[{0}.{1}] [{2}] [{3}]",this.GetType().Name, FormsGestures.Debug.CurrentMethod() ,_id,_element);
@@ -1672,11 +1672,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for the TappedCommand property
         /// </summary>
-        public static readonly BindableProperty RightClickedCommandProperty = BindableProperty.Create("RightClickedCommand", typeof(ICommand), typeof(Listener), null);
+        public static readonly BindableProperty RightClickedCommandProperty = BindableProperty.Create(nameof(RightClickedCommand), typeof(ICommand), typeof(Listener), null);
         /// <summary>
         /// backing store for the TappedCommandParameter property
         /// </summary>
-        public static readonly BindableProperty RightClickedCommandParameterProperty = BindableProperty.Create("RightClickedCommandParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RightClickedCommandParameterProperty = BindableProperty.Create(nameof(RightClickedCommandParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Command invoked after a tap motion
         /// </summary>
@@ -1702,11 +1702,11 @@ namespace FormsGestures
         /// <summary>
         /// backing store for a TappedCallback property
         /// </summary>
-        public static readonly BindableProperty RightClickedCallbackProperty = BindableProperty.Create("RightClickedCallback", typeof(Action<Listener, object>), typeof(Listener), null);
+        public static readonly BindableProperty RightClickedCallbackProperty = BindableProperty.Create(nameof(RightClickedCallback), typeof(Action<Listener, object>), typeof(Listener), null);
         /// <summary>
         /// backing store for a TappedCallbackParameter property
         /// </summary>
-        public static readonly BindableProperty RightClickedCallbackParameterProperty = BindableProperty.Create("RightClickedCallbackParameter", typeof(object), typeof(Listener), null);
+        public static readonly BindableProperty RightClickedCallbackParameterProperty = BindableProperty.Create(nameof(RightClickedCallbackParameter), typeof(object), typeof(Listener), null);
         /// <summary>
         /// Action invoked after a tap motion
         /// </summary>
@@ -1742,7 +1742,7 @@ namespace FormsGestures
 
         internal bool OnRightClicked(RightClickEventArgs args)
         {
-            bool result = false;
+            var result = false;
             if (HandlesRightClicked)
             {
                 RaiseEvent<RightClickEventArgs>(_rightClicked, args);
@@ -1808,7 +1808,7 @@ namespace FormsGestures
         {
             //_id = instances++;
             _element = element;
-            bool inserted = false;
+            var inserted = false;
             for (int i = Listeners.Count - 1; i >= 0; i--)
             {
                 if (element.IsDescendentOf(Listeners[i].Element))
