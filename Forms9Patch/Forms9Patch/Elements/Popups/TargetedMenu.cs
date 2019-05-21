@@ -22,7 +22,7 @@ namespace Forms9Patch
         static readonly Color DefaultVerticalSeparatorColor = DefaultVerticalTextColor;
 
 
-        static readonly double DefaultSeparatorThickness = 1.0;
+        static readonly double DefaultSeparatorThickness = 1 / Forms9Patch.Display.Scale;
 
 
 
@@ -180,6 +180,15 @@ namespace Forms9Patch
         }
         #endregion SoundEffectMode property
 
+
+        #region IcontFontFamiliy property
+        public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(TargetedMenu), default(string));
+        public string IconFontFamily
+        {
+            get => (string)GetValue(IconFontFamilyProperty);
+            set => SetValue(IconFontFamilyProperty, value);
+        }
+        #endregion IcontFontFamiliy property
 
         #endregion
 
@@ -501,6 +510,10 @@ namespace Forms9Patch
             }
             else if (propertyName == OrientationProperty.PropertyName)
                 UpdateOrientation();
+            else if (propertyName == IconFontFamilyProperty.PropertyName)
+                foreach (var child in _stackLayout.Children)
+                    if (child is Button button)
+                        button.IconFontFamily = IconFontFamily;
         }
         #endregion
 
@@ -522,6 +535,7 @@ namespace Forms9Patch
             segment._button.HorizontalOptions = LayoutOptions.Fill;
             segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
             segment._button.Margin = 0;
+            segment._button.IconFontFamily = IconFontFamily;
 
             //if (Device.RuntimePlatform != Device.UWP)
             if (FontSize < 0)
@@ -602,7 +616,7 @@ namespace Forms9Patch
             if (Orientation == StackOrientation.Horizontal)
                 segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 0);
             else
-                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 8);
+                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 8);
         }
 
         void UpdateOrientation()

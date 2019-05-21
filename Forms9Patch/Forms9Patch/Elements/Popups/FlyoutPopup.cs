@@ -58,6 +58,7 @@ namespace Forms9Patch
 
         #endregion
 
+
         #region Fields
         Frame _frame;
         #endregion
