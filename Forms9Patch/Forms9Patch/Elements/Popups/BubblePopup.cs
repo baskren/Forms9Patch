@@ -158,7 +158,7 @@ namespace Forms9Patch
 
 
         #region Fields
-        BubbleLayout _bubbleLayout;
+        internal BubbleLayout _bubbleLayout;
         #endregion
 
 

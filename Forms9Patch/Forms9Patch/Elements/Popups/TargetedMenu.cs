@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -17,10 +19,10 @@ namespace Forms9Patch
 
         static readonly Color DefaultVerticalBackgroundColor = Color.White;
         static readonly Color DefaultVerticalTextColor = Color.FromHex("0076FF");
-        static readonly Color DefaultVerticalSeparatorColor = DefaultHorizontalTextColor;
+        static readonly Color DefaultVerticalSeparatorColor = DefaultVerticalTextColor;
 
 
-        static readonly double DefaultSeparatorWidth = 1.0;
+        static readonly double DefaultSeparatorThickness = 1.0;
 
 
 
@@ -105,14 +107,14 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SeparatorWidth property
         /// </summary>
-        public static readonly BindableProperty SeparatorWidthProperty = BindableProperty.Create(nameof(SeparatorWidth), typeof(double), typeof(TargetedMenu), -1.0);
+        public static readonly BindableProperty SeparatorThicknessProperty = BindableProperty.Create(nameof(SeparatorThickness), typeof(double), typeof(TargetedMenu), -1.0);
         /// <summary>
         /// Gets/Sets the SeparatorWidth property
         /// </summary>
-        public double SeparatorWidth
+        public double SeparatorThickness
         {
-            get => (double)GetValue(SeparatorWidthProperty);
-            set => SetValue(SeparatorWidthProperty, value);
+            get => (double)GetValue(SeparatorThicknessProperty);
+            set => SetValue(SeparatorThicknessProperty, value);
         }
         #endregion SeparatorWidth property
 
@@ -185,6 +187,7 @@ namespace Forms9Patch
         #region VisualElements
         readonly Button _leftArrowButton = new Button
         {
+            IsVisible = false,
             TextColor = DefaultHorizontalTextColor,
             FontSize = 24,
             TintIcon = true,
@@ -198,12 +201,12 @@ namespace Forms9Patch
             BackgroundColor = DefaultHorizontalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true,
         };
-        readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = DefaultSeparatorWidth };
+        readonly BoxView _leftArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = DefaultSeparatorThickness, Margin = 0 };
 
         readonly Button _rightArrowButton = new Button
         {
+            IsVisible = false,
             TextColor = DefaultHorizontalTextColor,
             FontSize = 24,
             TintIcon = true,
@@ -217,14 +220,14 @@ namespace Forms9Patch
             BackgroundColor = DefaultHorizontalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true,
         };
         // this is crazy but the stack layout doesn't give the children the correct space if it isn't included.
-        readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = 0.05 };
+        readonly BoxView _rightArrowSeparator = new BoxView { Color = DefaultHorizontalSeparatorColor, WidthRequest = 0.05, Margin = 0 };
 
 
         readonly Button _upArrowButton = new Button
         {
+            IsVisible = false,
             TextColor = DefaultVerticalTextColor,
             FontSize = 24,
             TintIcon = true,
@@ -239,12 +242,12 @@ namespace Forms9Patch
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true,
         };
-        readonly BoxView _upArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorWidth };
+        readonly BoxView _upArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorThickness, Margin = 0 };
 
         readonly Button _downArrowButton = new Button
         {
+            IsVisible = false,
             TextColor = DefaultVerticalTextColor,
             FontSize = 24,
             TintIcon = true,
@@ -259,9 +262,8 @@ namespace Forms9Patch
             BackgroundColor = DefaultVerticalBackgroundColor.WithAlpha(0.05),
             Lines = 1,
             AutoFit = AutoFit.None,
-            IsVisible = true,
         };
-        readonly BoxView _downArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorWidth };
+        readonly BoxView _downArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorThickness, Margin = 0 };
 
 
         readonly Xamarin.Forms.StackLayout _stackLayout = new Xamarin.Forms.StackLayout
@@ -271,7 +273,8 @@ namespace Forms9Patch
             Padding = 0,
             Margin = 0,
             BackgroundColor = Color.Transparent,
-            HorizontalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.Fill
         };
 
         #endregion
@@ -305,7 +308,8 @@ namespace Forms9Patch
         {
             var targetedMenu = new TargetedMenu(target);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
-            targetedMenu.BackgroundColor = DefaultHorizontalBackgroundColor;
+            targetedMenu.OutlineColor = Color.Gray;
+            targetedMenu.OutlineWidth = 1;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -321,7 +325,8 @@ namespace Forms9Patch
         {
             var targetedMenu = new TargetedMenu(target, point);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
-            targetedMenu.BackgroundColor = DefaultHorizontalBackgroundColor;
+            targetedMenu.OutlineColor = Color.Gray;
+            targetedMenu.OutlineWidth = 1;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -337,7 +342,6 @@ namespace Forms9Patch
             var targetedMenu = new TargetedMenu(target);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.Orientation = StackOrientation.Vertical;
-            targetedMenu.BackgroundColor = DefaultVerticalBackgroundColor;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -354,7 +358,6 @@ namespace Forms9Patch
             var targetedMenu = new TargetedMenu(target, point);
             targetedMenu.SegmentsFromHtmlTexts(htmlTexts);
             targetedMenu.Orientation = StackOrientation.Vertical;
-            targetedMenu.BackgroundColor = DefaultVerticalBackgroundColor;
             targetedMenu.IsVisible = true;
             return targetedMenu;
         }
@@ -362,10 +365,14 @@ namespace Forms9Patch
 
         void Init()
         {
+            HorizontalOptions = LayoutOptions.Fill;
+            VerticalOptions = LayoutOptions.Fill;
+
+
             PointerDirection = PointerDirection.Any;
             PreferredPointerDirection = PointerDirection.Down;
             PointerLength = 10;
-            BackgroundColor = DefaultHorizontalBackgroundColor;
+            BackgroundColor = default(Color);
             HasShadow = false;
             Padding = 0;
             //Margin = 0;
@@ -383,6 +390,12 @@ namespace Forms9Patch
 
             if (Device.RuntimePlatform != Device.UWP)
                 _stackLayout.HeightRequest = 28;
+
+            _upArrowButton.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == Forms9Patch.Button.IsVisibleProperty.PropertyName)
+                    System.Diagnostics.Debug.WriteLine(GetType() + ".");
+            };
         }
 
         /// <summary>
@@ -431,6 +444,13 @@ namespace Forms9Patch
 
 
         #region PropertyChange handlers
+        protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanging(propertyName);
+            if (propertyName == IsVisibleProperty.PropertyName)
+                _currentPage = 0;
+        }
+
         /// <summary>
         /// A property changed.  Let's deal with it.
         /// </summary>
@@ -453,13 +473,8 @@ namespace Forms9Patch
                 UpdateLayout();
             else if (propertyName == SeparatorColorProperty.PropertyName)
                 UpdateLayout();
-            else if (propertyName == SeparatorWidthProperty.PropertyName)
+            else if (propertyName == SeparatorThicknessProperty.PropertyName)
                 UpdateLayout();
-            //else if (propertyName == OutlineColorProperty.PropertyName)
-            //    _stackLayout.OutlineColor = OutlineColor == Color.Default || OutlineColor == Color.Transparent ? BackgroundColor : OutlineColor;
-
-            //else if (propertyName == OutlineRadiusProperty.PropertyName)
-            //    _stackLayout.OutlineRadius = OutlineRadius + 1;
             else if (propertyName == HapticEffectProperty.PropertyName)
             {
                 foreach (VisualElement visualElement in _stackLayout.Children)
@@ -506,6 +521,7 @@ namespace Forms9Patch
             segment._button.VerticalOptions = LayoutOptions.Fill;
             segment._button.HorizontalOptions = LayoutOptions.Fill;
             segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
+            segment._button.Margin = 0;
 
             //if (Device.RuntimePlatform != Device.UWP)
             if (FontSize < 0)
@@ -554,7 +570,7 @@ namespace Forms9Patch
             foreach (var segment in Segments)
             {
                 if (!first)
-                    _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = DefaultSeparatorWidth });
+                    _stackLayout.Children.Add(new BoxView { Color = SeparatorColor, WidthRequest = DefaultSeparatorThickness });
                 _stackLayout.Children.Add(segment._button);
                 first = false;
             }
@@ -582,10 +598,11 @@ namespace Forms9Patch
         #region Layout
         void UpdateOrientation(Segment segment)
         {
+
             if (Orientation == StackOrientation.Horizontal)
                 segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 0);
             else
-                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(0, 8);
+                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 8);
         }
 
         void UpdateOrientation()
@@ -597,17 +614,44 @@ namespace Forms9Patch
         }
 
         double ButtonLength(Forms9Patch.Button button)
-            => (Orientation == StackOrientation.Horizontal ? button.UnexpandedTightSize.Width : button.UnexpandedTightSize.Height);
+        {
+            var size = button.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.IncludeMargins);
+            return Math.Ceiling(Orientation == StackOrientation.Horizontal ? size.Request.Width : size.Request.Height);
+        }
 
         double AvailableSpace()
-            => (Orientation == StackOrientation.Horizontal ? Width - Padding.HorizontalThickness - Margin.HorizontalThickness : Height - Padding.VerticalThickness - Margin.VerticalThickness);
+            => Math.Floor(Orientation == StackOrientation.Horizontal
+            ? Width - _bubbleLayout.Padding.HorizontalThickness - _bubbleLayout.Margin.HorizontalThickness - Padding.HorizontalThickness - Margin.HorizontalThickness - 2 * OutlineWidth - _stackLayout.Padding.HorizontalThickness - _stackLayout.Margin.HorizontalThickness
+            : Height - _upArrowButton.Padding.VerticalThickness - _upArrowButton.Margin.VerticalThickness - Padding.VerticalThickness - Margin.VerticalThickness - 2 * OutlineWidth - _stackLayout.Padding.VerticalThickness - _stackLayout.Margin.VerticalThickness);
+
+        void SetSeparatorThickness(BoxView separator)
+        {
+            separator.HorizontalOptions = LayoutOptions.Fill;
+            separator.VerticalOptions = LayoutOptions.Fill;
+            if (Orientation == StackOrientation.Horizontal)
+            {
+                separator.WidthRequest = SeparatorThickness > 0 ? SeparatorThickness : DefaultSeparatorThickness;
+                separator.HeightRequest = -1;
+            }
+            else
+            {
+                separator.WidthRequest = -1;
+                separator.HeightRequest = SeparatorThickness > 0 ? SeparatorThickness : DefaultSeparatorThickness;
+            }
+        }
 
         void UpdateLayout()
         {
             if (P42.Utils.Environment.IsOnMainThread)
             {
-                if (Width < 0)
+                if (Width < 0 || !IsVisible || Segments.Count < 1)
                     return;
+
+                HorizontalOptions = LayoutOptions.Center;
+                VerticalOptions = LayoutOptions.Center;
+
+                _stackLayout.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Center : LayoutOptions.Fill;
+                _stackLayout.VerticalOptions = LayoutOptions.Center;
 
                 var textColor = TextColor == default
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
@@ -615,32 +659,42 @@ namespace Forms9Patch
                 var separatorColor = SeparatorColor == default
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalSeparatorColor : DefaultVerticalSeparatorColor)
                     : SeparatorColor;
-                base.BackgroundColor = BackgroundColor == default
+                _bubbleLayout.BackgroundColor = BackgroundColor == default
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalBackgroundColor : DefaultVerticalBackgroundColor)
                     : BackgroundColor;
-
 
                 _leftArrowButton.IsVisible = false;
                 _leftArrowSeparator.IsVisible = false;
                 _rightArrowButton.IsVisible = false;
                 _rightArrowSeparator.IsVisible = false;
+                _upArrowButton.IsVisible = false;
+                _upArrowSeparator.IsVisible = false;
+                _downArrowButton.IsVisible = false;
+                _downArrowSeparator.IsVisible = false;
+
+                _leftArrowButton.IconImage.HeightRequest = _leftArrowButton.IconImage.WidthRequest = FontSize;
+                _rightArrowButton.IconImage.HeightRequest = _rightArrowButton.IconImage.WidthRequest = FontSize;
+                _upArrowButton.IconImage.HeightRequest = _upArrowButton.IconImage.WidthRequest = 2 * FontSize;
+                _downArrowButton.IconImage.HeightRequest = _downArrowButton.IconImage.WidthRequest = 2 * FontSize;
 
                 var backwardButton = Orientation == StackOrientation.Horizontal ? _leftArrowButton : _upArrowButton;
                 var backwardSeparator = Orientation == StackOrientation.Horizontal ? _leftArrowSeparator : _upArrowSeparator;
                 var forewardButton = Orientation == StackOrientation.Horizontal ? _rightArrowButton : _downArrowButton;
                 var forewardSeparator = Orientation == StackOrientation.Horizontal ? _rightArrowSeparator : _downArrowSeparator;
 
-                backwardButton.BackgroundColor = base.BackgroundColor.MultiplyAlpha(0.02);
                 backwardButton.TextColor = textColor;
                 backwardSeparator.Color = separatorColor;
-                forewardButton.BackgroundColor = base.BackgroundColor.MultiplyAlpha(0.02);
+                backwardButton.BackgroundColor = _bubbleLayout.BackgroundColor.MultiplyAlpha(0.02);
+                SetSeparatorThickness(backwardSeparator);
                 forewardButton.TextColor = textColor;
                 forewardSeparator.Color = separatorColor;
+                forewardButton.BackgroundColor = _bubbleLayout.BackgroundColor.MultiplyAlpha(0.02);
+                SetSeparatorThickness(forewardSeparator);
 
                 var forewardArrowShouldBeVisible = true;
 
-                var backwardLength = (Orientation == StackOrientation.Horizontal ? _leftArrowButton.UnexpandedTightSize.Width : _upArrowButton.UnexpandedTightSize.Height) + SeparatorWidth;
-                var forewardLength = (Orientation == StackOrientation.Horizontal ? _rightArrowButton.UnexpandedTightSize.Width : _downArrowButton.UnexpandedTightSize.Height) + SeparatorWidth;
+                var backwardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal ? _leftArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width : _upArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height) + SeparatorThickness;
+                var forewardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal ? _rightArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width : _downArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height);
 
                 // calculate pages
                 var pageLength = 0.0;
@@ -650,36 +704,52 @@ namespace Forms9Patch
 
                 var segmentIndex = 0;
                 var pageIndex = 0;
-                for (int i = 2; i < _stackLayout.Children.Count - 2; i += 2)
+
+                var calculatedLength = 0.0;
+                for (int i = 4; i < _stackLayout.Children.Count - 4; i += 2)
                 {
                     var button = _stackLayout.Children[i] as Forms9Patch.Button;
                     var separator = _stackLayout.Children[i + 1] as BoxView;
-                    button.FontSize = FontSize > 0 ? FontSize : 12;
+                    button.FontSize = FontSize > 0 ? FontSize : 20;
 
-                    pageLength += ButtonLength(button) + SeparatorWidth + _stackLayout.Spacing + 10;
-
-                    if (segmentIndex < Segments.Count && pageLength + forewardLength >= AvailableSpace())//* 0.75)
+                    var thisButtonAdds = ButtonLength(button) + _stackLayout.Spacing + SeparatorThickness + 2 + _stackLayout.Spacing;
+                    if (segmentIndex < Segments.Count && pageLength + thisButtonAdds + forewardLength >= AvailableSpace())
                     {
+                        if (pageIndex == _currentPage)
+                            calculatedLength = pageLength + forewardLength;
                         pageIndex++;
                         pageLength = backwardLength;
                     }
+                    pageLength += thisButtonAdds;
 
-                    button.BackgroundColor = base.BackgroundColor.MultiplyAlpha(0.02);
                     button.TextColor = textColor;
                     separator.Color = separatorColor;
+                    button.BackgroundColor = _bubbleLayout.BackgroundColor.MultiplyAlpha(0.02);
+                    SetSeparatorThickness(separator);
 
                     button.IsVisible = pageIndex == _currentPage;
                     separator.IsVisible = pageIndex == _currentPage;
 
                     forewardArrowShouldBeVisible &= (pageIndex != _currentPage || segmentIndex != Segments.Count - 1);
                     segmentIndex++;
+
                 }
 
-                forewardSeparator.IsVisible = forewardArrowShouldBeVisible;
+
+                forewardSeparator.IsVisible = false;
                 forewardButton.IsVisible = forewardArrowShouldBeVisible;
+
+                if (Orientation == StackOrientation.Vertical)
+                {
+                    if (_stackLayout.Children.LastOrDefault((arg) => arg.IsVisible && arg is BoxView) is BoxView lastSeparator)
+                        lastSeparator.IsVisible = false;
+                    _stackLayout.HeightRequest = -1;
+                }
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateLayout);
+
+
         }
 
         #endregion

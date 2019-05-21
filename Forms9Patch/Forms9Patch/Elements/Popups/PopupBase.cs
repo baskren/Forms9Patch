@@ -593,7 +593,7 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
-                    /*
+                    /*  Don't want to do this.  Will cause popups to not be reusable by default.
                     try
                     {
                         if (Content is IDisposable disposable)
