@@ -593,6 +593,14 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
+                    /*
+                    try
+                    {
+                        if (Content is IDisposable disposable)
+                            disposable.Dispose();
+                    }
+                    catch (Exception) { }
+                    */
                     Retain = false;
                     _disposed = true;
                 }
@@ -604,7 +612,7 @@ namespace Forms9Patch
         /// </summary>
         public void Dispose()
         {
-            if (IsVisible || _isPushing  || _isPushed || _isPopping)
+            if (IsVisible || _isPushing || _isPushed || _isPopping)
                 return;
             Dispose(true);
             GC.SuppressFinalize(this);
@@ -674,7 +682,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
-            if (Device.RuntimePlatform==Device.UWP)
+            if (Device.RuntimePlatform == Device.UWP)
             {
                 //var mainPage = 
             }

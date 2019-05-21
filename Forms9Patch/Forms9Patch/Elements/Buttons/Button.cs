@@ -803,10 +803,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontSize bindable property.
         /// </summary>
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(Button), -1.0);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontSizePropertyChanged));
-                                                                                                                                             /// <summary>
-                                                                                                                                             /// Gets or sets the size of the font.
-                                                                                                                                             /// </summary>
-                                                                                                                                             /// <value>The size of the font.</value>
+                                                                                                                                                   /// <summary>
+                                                                                                                                                   /// Gets or sets the size of the font.
+                                                                                                                                                   /// </summary>
+                                                                                                                                                   /// <value>The size of the font.</value>
         public double FontSize
         {
             get => (double)GetValue(FontSizeProperty);
@@ -819,10 +819,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontFamiily bindable property.
         /// </summary>
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(Button), null);//, BindingMode.OneWay), null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontFamilyPropertyChanged)); 
-                                                                                                                                                 /// <summary>
-                                                                                                                                                 /// Gets or sets the font family.
-                                                                                                                                                 /// </summary>
-                                                                                                                                                 /// <value>The font family.</value>
+                                                                                                                                                       /// <summary>
+                                                                                                                                                       /// Gets or sets the font family.
+                                                                                                                                                       /// </summary>
+                                                                                                                                                       /// <value>The font family.</value>
         public string FontFamily
         {
             get => (string)GetValue(FontFamilyProperty);
@@ -835,10 +835,10 @@ namespace Forms9Patch
         /// Backing store for the Button.FontAttributes bindable property.
         /// </summary>
         public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(Button), FontAttributes.None);//, BindingMode.OneWay, null, new BindableProperty.BindingPropertyChangedDelegate (ButtonState.FontAttributesPropertyChanged));
-                                                                                                                                                                                /// <summary>
-                                                                                                                                                                                /// Gets or sets the font attributes.
-                                                                                                                                                                                /// </summary>
-                                                                                                                                                                                /// <value>The font attributes.</value>
+                                                                                                                                                                                      /// <summary>
+                                                                                                                                                                                      /// Gets or sets the font attributes.
+                                                                                                                                                                                      /// </summary>
+                                                                                                                                                                                      /// <value>The font attributes.</value>
         public FontAttributes FontAttributes
         {
             get => (FontAttributes)GetValue(FontAttributesProperty);
@@ -904,18 +904,18 @@ namespace Forms9Patch
                         }
                         */
                         var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
-                        width += measure.Request.Width;
-                        height += measure.Request.Height;
+                        width += Math.Ceiling(measure.Request.Width);
+                        height += Math.Ceiling(measure.Request.Height);
                     }
                 }
                 if (childCount > 1)
                 {
-                    width += Orientation == StackOrientation.Horizontal ? Spacing : 0;
-                    height += Orientation == StackOrientation.Vertical ? Spacing : 0;
+                    width += Orientation == StackOrientation.Horizontal ? Math.Ceiling(Spacing) : 0;
+                    height += Orientation == StackOrientation.Vertical ? Math.Ceiling(Spacing) : 0;
 
                 }
-                width += Padding.HorizontalThickness + Margin.HorizontalThickness;
-                height += Padding.VerticalThickness + Margin.VerticalThickness;
+                width += Math.Ceiling(Padding.HorizontalThickness) + Math.Ceiling(Margin.HorizontalThickness);
+                height += Math.Ceiling(Padding.VerticalThickness) + Math.Ceiling(Margin.VerticalThickness);
 
                 return new Size(width, height);
             }

@@ -192,7 +192,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Fields 
+        #region Visual Elements 
         readonly Label _titleLabel = new Label
         {
             FontSize = 22,
@@ -238,16 +238,16 @@ namespace Forms9Patch
                     await Task.Delay(50);
                 OkTapped?.Invoke(this, EventArgs.Empty);
             };
-            Content = new StackLayout
+            Content = new Xamarin.Forms.StackLayout
             {
                 Children =
                 {
                     _titleLabel,
-                    new ScrollView
+                    new Xamarin.Forms.ScrollView
                     {
                         Content = _textLabel
                     },
-                    new StackLayout
+                    new Xamarin.Forms.StackLayout
                     {
                         Orientation = StackOrientation.Horizontal,
                         Children =
@@ -258,6 +258,21 @@ namespace Forms9Patch
                 }
             };
 
+        }
+        #endregion
+
+
+        #region Disposal
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing && !_disposed)
+            {
+                _okButton.Dispose();
+                _cancelButton.Dispose();
+                _disposed = true;
+            }
         }
         #endregion
 

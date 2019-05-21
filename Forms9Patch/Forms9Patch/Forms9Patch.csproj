@@ -32,11 +32,15 @@
     <None Remove="Resources\Fonts\STIXGeneral.otf" />
     <None Remove="Resources\ic_navigate_before_white_24px.svg" />
     <None Remove="Resources\ic_navigate_next_white_24px.svg" />
+    <None Remove="Resources\menu_up.svg" />
+    <None Remove="Resources\menu_down.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\STIXGeneral.otf" />
-    <EmbeddedResource Include="Resources\ic_navigate_before_white_24px.svg" />
-    <EmbeddedResource Include="Resources\ic_navigate_next_white_24px.svg" />
+    <EmbeddedResource Include="Resources\menu_left.svg" />
+    <EmbeddedResource Include="Resources\menu_right.svg" />
+    <EmbeddedResource Include="Resources\menu_up.svg" />
+    <EmbeddedResource Include="Resources\menu_down.svg" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  
