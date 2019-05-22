@@ -173,18 +173,27 @@ namespace Forms9Patch
 
                 var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
                 var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
-                if (_frame.Content.WidthRequest > 0)
-                    availWidth = _frame.Content.WidthRequest;
-                if (_frame.Content.HeightRequest > 0)
-                    availHeight = _frame.Content.HeightRequest;
+                //if (_frame.Content.WidthRequest > 0)
+                //    availWidth = Math.Min(_frame.Content.WidthRequest, availWidth);
+                //if (_frame.Content.HeightRequest > 0)
+                //    availHeight = Math.Min(_frame.Content.HeightRequest, availHeight);
+                if (WidthRequest > 0)
+                    availWidth = Math.Min(WidthRequest, availWidth);
+                if (HeightRequest > 0)
+                    availHeight = Math.Min(HeightRequest, availHeight);
+
                 var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
 
                 var shadowPadding = ShapeBase.ShadowPadding(_frame);
 
-                var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill ? availWidth : Math.Min(request.Request.Width, availWidth);// + _frame.Padding.HorizontalThickness);// + shadow.HorizontalThickness);
+                var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill || WidthRequest > 0
+                    ? availWidth
+                    : Math.Min(request.Request.Width, availWidth);
                 rBoxWidth += _frame.Padding.HorizontalThickness;
                 rBoxWidth += shadowPadding.HorizontalThickness;
-                var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill ? availHeight : Math.Min(request.Request.Height, availHeight);// + _frame.Padding.VerticalThickness);// + shadow.VerticalThickness);
+                var rBoxHeight = VerticalOptions.Alignment == LayoutAlignment.Fill || HeightRequest > 0
+                    ? availHeight
+                    : Math.Min(request.Request.Height, availHeight);
                 rBoxHeight += _frame.Padding.VerticalThickness;
                 rBoxHeight += shadowPadding.VerticalThickness;
                 var rboxSize = new Size(rBoxWidth, rBoxHeight);
