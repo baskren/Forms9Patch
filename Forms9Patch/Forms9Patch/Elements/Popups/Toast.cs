@@ -19,7 +19,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
             => new Toast() { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
-        
+
         #endregion
 
 
@@ -107,7 +107,7 @@ namespace Forms9Patch
             _okButton.HtmlText = ButtonText;
             */
             WidthRequest = 200;
-            HeightRequest = 200;
+            //HeightRequest = 200;
 
             //_okButton.Tapped += (s, args) => Cancel();
             Content = new StackLayout
