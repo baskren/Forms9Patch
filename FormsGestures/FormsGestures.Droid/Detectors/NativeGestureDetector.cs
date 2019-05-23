@@ -23,9 +23,9 @@ namespace FormsGestures.Droid
         {
             if (!_disposed)
             {
+                _disposed = true;
                 _listener = null;
                 //IsLongpressEnabled = false;
-                _disposed = true;
             }
             base.Dispose(disposing);
         }

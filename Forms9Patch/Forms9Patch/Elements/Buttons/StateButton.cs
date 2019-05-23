@@ -194,50 +194,32 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-
+        bool _disposed;
         /// <summary>
         /// Dispose the specified disposing.
         /// </summary>
         /// <param name="disposing">Disposing.</param>
         protected override void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposed && disposing)
             {
-                if (disposing)
-                {
-                    _gestureListener.Up -= OnUp;
-                    _gestureListener.Down -= OnDown;
-                    _gestureListener.LongPressed -= OnLongPressed;
-                    _gestureListener.LongPressing -= OnLongPressing;
-                    //_gestureListener.Dispose();
-                    //_gestureListener = null;
-                    _currentState.PropertyChanged -= OnStatePropertyChanged;
-                    _currentState = null;
-                    disposedValue = true;
-                }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
+                _disposed = true;
+                _gestureListener.Up -= OnUp;
+                _gestureListener.Down -= OnDown;
+                _gestureListener.LongPressed -= OnLongPressed;
+                _gestureListener.LongPressing -= OnLongPressing;
+                //_gestureListener.Dispose();
+                //_gestureListener = null;
+                _currentState.PropertyChanged -= OnStatePropertyChanged;
+                _currentState = null;
             }
             base.Dispose(disposing);
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~StateButton() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        /// <summary>
-        /// Dispose of Forms9Patch.StateButton element.
-        /// </summary>
         public new void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
 

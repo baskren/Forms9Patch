@@ -93,11 +93,12 @@ namespace FormsGestures.Droid
             return false;
         }
 
-
+        bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (!_disposed && disposing)
             {
+                _disposed = true;
                 _nativeDetector?.Dispose();
                 _nativeDetector = null;
                 _nativeListener?.Dispose();

@@ -118,7 +118,10 @@ namespace Forms9Patch
 
 
         #region Fields
-        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView();
+        internal readonly Forms9Patch.ListView _listView = new Forms9Patch.ListView
+        {
+            SeparatorHeight = 0
+        };
         readonly BoxView _upperPadding = new BoxView { Color = Color.Transparent };
         readonly BoxView _lowerPadding = new BoxView { Color = Color.Transparent };
 
@@ -354,7 +357,7 @@ namespace Forms9Patch
         bool _scrollCompleting;
         void OnScrolled(object sender, EventArgs e)
         {
-            if (ItemsSource!=null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
+            if (ItemsSource != null && SelectBy == SelectBy.Position && Index >= 0 && Index < ItemsSource.Count)
             {
                 //System.Diagnostics.Debug.WriteLine("BasePicker.OnScrolled: Index=[" + Index + "]");
                 SelectedItem = ItemsSource[Index];

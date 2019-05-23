@@ -430,6 +430,7 @@ namespace Forms9Patch
             base.Dispose(disposing);
             if (disposing && !_disposed)
             {
+                _disposed = true;
                 foreach (var segment in Segments)
                     UnconfiguerButton(segment._button);
 
@@ -445,8 +446,6 @@ namespace Forms9Patch
                 _rightArrowButton.Dispose();
                 _upArrowButton.Dispose();
                 _downArrowButton.Dispose();
-
-                _disposed = true;
             }
         }
         #endregion

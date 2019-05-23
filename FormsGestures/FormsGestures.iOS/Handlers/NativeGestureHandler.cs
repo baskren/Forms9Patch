@@ -90,6 +90,7 @@ namespace FormsGestures.iOS
                 return;
             if (!_disposed && disposing)
             {
+                _disposed = true;
                 if (_gestureRecognizers != null)
                 {
                     UIGestureRecognizer[] array = _gestureRecognizers;
@@ -103,7 +104,6 @@ namespace FormsGestures.iOS
                         listener.PropertyChanged -= OnListenerPropertyChanged;
                     _listeners = null;
                 }
-                _disposed = true;
             }
         }
 
@@ -113,6 +113,7 @@ namespace FormsGestures.iOS
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
 
         internal void AttachNativeGestureHandler(Listener listener)
         {

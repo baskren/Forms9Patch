@@ -23,10 +23,14 @@ namespace Forms9Patch.Droid
 
         protected override void OnDetached()
         {
-            if (Control != null)
-                Control.KeyPress -= OnControlKeyPress;
-            else if (Container != null)
-                Container.KeyPress -= OnControlKeyPress;
+            try
+            {
+                if (Control != null)
+                    Control.KeyPress -= OnControlKeyPress;
+                else if (Container != null)
+                    Container.KeyPress -= OnControlKeyPress;
+            }
+            catch (Exception) { }
         }
 
         private void OnControlKeyPress(object sender, Android.Views.View.KeyEventArgs e)

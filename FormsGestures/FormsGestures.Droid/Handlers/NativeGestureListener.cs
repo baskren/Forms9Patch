@@ -180,11 +180,11 @@ namespace FormsGestures.Droid
         {
             if (!_disposed)
             {
+                _disposed = true;
                 StopTapLongPress();
                 //_weakReferenceView?.Clear();
                 //_weakReferenceView = null;
                 _view = null;
-                _disposed = true;
             }
             base.Dispose(disposing);
         }

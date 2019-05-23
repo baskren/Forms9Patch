@@ -340,13 +340,27 @@ namespace FormsGestures
         public static Element FindAncestorOfType(this Element element, Type type)
         {
             var parent = element.Parent;
-            while (parent!=null)
+            while (parent != null)
             {
                 if (parent.GetType() == type)
                     return parent;
                 parent = parent.Parent;
             }
             return null;
+        }
+
+        public static bool IsInVisibleViewTree(this VisualElement visualElement)
+        {
+            Element parent = visualElement;
+            while (parent is Element element)
+            {
+                if (element is Page)
+                    return true;
+                if (element is VisualElement ve && !ve.IsVisible)
+                    return false;
+                parent = element.Parent;
+            }
+            return false;
         }
     }
 }

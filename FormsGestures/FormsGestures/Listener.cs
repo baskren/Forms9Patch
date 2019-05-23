@@ -1833,7 +1833,7 @@ namespace FormsGestures
         }
         */
 
-        bool disposed;
+        bool _disposed;
         /// <summary>
         /// Disposer
         /// </summary>
@@ -1853,15 +1853,14 @@ namespace FormsGestures
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
-                return;
-            if (disposing)
+            if (!_disposed && disposing)
             {
+                _disposed = true;
                 Listeners.Remove(this);
                 Disposing?.Invoke(this, EventArgs.Empty);
             }
-            disposed = true;
         }
+
         #endregion
 
 

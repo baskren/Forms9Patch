@@ -259,21 +259,19 @@ namespace Forms9Patch
             };
 
         }
-        #endregion
 
-
-        #region Disposal
         bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
             if (disposing && !_disposed)
             {
+                _disposed = true;
                 _okButton.Dispose();
                 _cancelButton.Dispose();
-                _disposed = true;
             }
+            base.Dispose(disposing);
         }
+
         #endregion
 
 

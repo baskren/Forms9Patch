@@ -151,6 +151,7 @@ namespace FormsGestures.UWP
                 return;
             if (!_disposed && disposing)
             {
+                _disposed = true;
                 if (_xfElement != null)
                 {
                     _xfElement.PropertyChanging -= OnElementPropertyChanging;
@@ -166,7 +167,6 @@ namespace FormsGestures.UWP
                 }
                 */
                 _listeners = null;
-                _disposed = true;
             }
         }
         #endregion

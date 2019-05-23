@@ -165,18 +165,15 @@ namespace Forms9Patch
         #endregion
 
         #region IDisposable Support
-        private bool disposedValue; // To detect redundant calls
+        private bool _disposed; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposed && disposing)
             {
-                if (disposing)
-                {
-                    SKBitmap?.Dispose();
-                    SKBitmap = null;
-                }
-                disposedValue = true;
+                _disposed = true;
+                SKBitmap?.Dispose();
+                SKBitmap = null;
             }
         }
 

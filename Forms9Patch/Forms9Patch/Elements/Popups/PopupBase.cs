@@ -19,7 +19,7 @@ namespace Forms9Patch
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty("ContentView")]
-    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage, IDisposable, IPopup
+    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage, IPopup, IDisposable
 
     {
         /// <summary>
@@ -589,21 +589,18 @@ namespace Forms9Patch
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if (!_disposed && disposing)
             {
-                if (disposing)
-                {
-                    /*  Don't want to do this.  Will cause popups to not be reusable by default.
-                    try
-                    {
-                        if (Content is IDisposable disposable)
-                            disposable.Dispose();
-                    }
-                    catch (Exception) { }
-                    */
-                    Retain = false;
-                    _disposed = true;
-                }
+                _disposed = true;
+                //  Don't want to do this.  Will cause popups to not be reusable by default.
+                //try
+                //{
+                //    if (Content is IDisposable disposable)
+                //        disposable.Dispose();
+                //}
+                //catch (Exception) { }
+
+                Retain = false;
             }
         }
 
@@ -618,6 +615,7 @@ namespace Forms9Patch
             GC.SuppressFinalize(this);
         }
         #endregion
+
 
 
         #region PropertyChange managment
@@ -738,13 +736,13 @@ namespace Forms9Patch
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 PushAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            else if (!Retain)
-                Device.StartTimer(TimeSpan.FromSeconds(10), () =>
-                {
-                    if (!Retain)
-                        Dispose();
-                    return false;
-                });
+            //else if (!Retain)
+            //    Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            //    {
+            //        if (!Retain)
+            //            Dispose();
+            //        return false;
+            //    });
         }
 
         SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
@@ -922,8 +920,8 @@ namespace Forms9Patch
                 //else
                 //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
             }
-            else if (propertyName == RetainProperty.PropertyName && !Retain)
-                Dispose();
+            //else if (propertyName == RetainProperty.PropertyName && !Retain)
+            //    Dispose();
             else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
                 CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
 
@@ -968,7 +966,7 @@ namespace Forms9Patch
                 Device.StartTimer(TimeSpan.FromMilliseconds(refreshPeriod), () =>
                 {
                     Update();
-                    return IsVisible && !_disposed;
+                    return IsVisible;// && !_disposed;
                 });
             }
 

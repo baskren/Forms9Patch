@@ -32,24 +32,12 @@ namespace Forms9Patch.Droid
             base.OnElementChanged(e);
             if (e.OldElement is EnhancedListView oldElement)
             {
-                /*
-                oldElement.RendererScrollBy -= ScrollBy;
-                oldElement.RendererScrollTo -= ScrollTo;
-                oldElement.RendererScrollOffset -= ScrollOffset;
-                oldElement.RendererHeaderHeight -= HeaderHeight;
-                */
                 oldElement.PropertyChanging -= OnElementPropertyChanging;
                 oldElement.Renderer = null;
                 ScrollListener.Element = null;
             }
             if (e.NewElement is EnhancedListView newElement)
             {
-                /*
-                newElement.RendererScrollBy += ScrollBy;
-                newElement.RendererScrollTo += ScrollTo;
-                newElement.RendererScrollOffset += ScrollOffset;
-                newElement.RendererHeaderHeight += HeaderHeight;
-                */
                 newElement.PropertyChanging += OnElementPropertyChanging;
                 newElement.Renderer = this as IScrollView;
 
@@ -78,20 +66,20 @@ namespace Forms9Patch.Droid
         #region Element Property Change Responders
         void OnElementPropertyChanging(object sender, PropertyChangingEventArgs e)
         {
-            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element.FooterElement is VisualElement footer)
+            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element?.FooterElement is VisualElement footer)
                 footer.PropertyChanged -= Footer_PropertyChanged;
         }
 
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
-            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element.FooterElement is VisualElement footer)
+            if ((e.PropertyName == Xamarin.Forms.ListView.FooterProperty.PropertyName || e.PropertyName == Xamarin.Forms.ListView.FooterTemplateProperty.PropertyName) && Element?.FooterElement is VisualElement footer)
                 footer.PropertyChanged += Footer_PropertyChanged;
         }
 
         void Footer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName && Element.FooterElement is VisualElement footer)
+            if (e.PropertyName == VisualElement.HeightRequestProperty.PropertyName && Element?.FooterElement is VisualElement footer)
             {
                 footer.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
                 var sizeRequest = footer.Measure(Element.Width, double.PositiveInfinity);
@@ -218,7 +206,7 @@ namespace Forms9Patch.Droid
         #region HeaderHeight
         double NativeHeaderHeight()
         {
-            if (Element.HeaderElement is VisualElement headerElement)
+            if (Element?.HeaderElement is VisualElement headerElement)
             {
                 if (Platform.GetRenderer(headerElement) is IVisualElementRenderer headerRenderer)
                     return headerRenderer.View.Height;
@@ -233,7 +221,7 @@ namespace Forms9Patch.Droid
         #region FooterHeight
         double NativeFooterHeight()
         {
-            if (Element.FooterElement is VisualElement footerElement)
+            if (Element?.FooterElement is VisualElement footerElement)
             {
                 if (Platform.GetRenderer(footerElement) is IVisualElementRenderer footerRenderer)
                     return footerRenderer.View.Height;

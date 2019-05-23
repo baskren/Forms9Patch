@@ -128,10 +128,10 @@ namespace FormsGestures.Droid
         bool _disposed;
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if (!_disposed && disposing)
             {
-                Deactivate();
                 _disposed = true;
+                Deactivate();
             }
         }
         #endregion
@@ -218,7 +218,7 @@ namespace FormsGestures.Droid
             nativeListener?.Dispose();
             nativeListener = null;
             */
-            if (Renderer?.View is Android.Views.View view)
+            if (Renderer?.View is Android.Views.View view && !(Renderer?.View is ScrollViewRenderer))
             {
                 try
                 {

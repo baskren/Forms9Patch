@@ -16,7 +16,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch Button.
     /// </summary>
-    public class Button : Frame, IDisposable, IButton
+    public class Button : Frame, IButton, IDisposable
     {
 
 
@@ -1106,7 +1106,7 @@ namespace Forms9Patch
         /// <summary>
         /// The disposed value.
         /// </summary>
-        internal protected bool disposedValue; // To detect redundant calls
+        bool _disposed; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -1114,21 +1114,18 @@ namespace Forms9Patch
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposed && disposing)
             {
-                if (disposing)
-                {
-                    _gestureListener.Tapped -= OnTapped;
-                    _gestureListener.LongPressed -= OnLongPressed;
-                    _gestureListener.LongPressing -= OnLongPressing;
-                    _gestureListener.Dispose();
-                    _gestureListener = null;
-                    _label.PropertyChanged -= OnLabelPropertyChanged;
-                    _label = null;
-                    if (Command != null)
-                        Command.CanExecuteChanged -= CommandCanExecuteChanged;
-                    disposedValue = true;
-                }
+                _disposed = true;
+                _gestureListener.Tapped -= OnTapped;
+                _gestureListener.LongPressed -= OnLongPressed;
+                _gestureListener.LongPressing -= OnLongPressing;
+                _gestureListener.Dispose();
+                _gestureListener = null;
+                _label.PropertyChanged -= OnLabelPropertyChanged;
+                _label = null;
+                if (Command != null)
+                    Command.CanExecuteChanged -= CommandCanExecuteChanged;
                 _tapped = null;
                 _selected = null;
                 _longPressed = null;

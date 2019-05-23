@@ -18,7 +18,7 @@ namespace Forms9Patch
     /// Forms9Patch Material Segmented Control.
     /// </summary>
     [ContentProperty(nameof(Segments))]
-    public class SegmentedControl : Forms9Patch.ManualLayout, IDisposable, ILabelStyle
+    public class SegmentedControl : Forms9Patch.ManualLayout, ILabelStyle, IDisposable
     {
         #region Obsolete Properties
         /// <summary>
@@ -733,7 +733,7 @@ namespace Forms9Patch
 
 
         #region IDisposable Support
-        bool disposedValue; // To detect redundant calls
+        bool _disposed; // To detect redundant calls
 
         /// <summary>
         /// Dispose the specified disposing.
@@ -741,25 +741,22 @@ namespace Forms9Patch
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposed && disposing)
             {
-                if (disposing)
+                _disposed = true;
+                Children.Remove(_background);
+                foreach (var segment in _segments)
                 {
-                    Children.Remove(_background);
-                    foreach (var segment in _segments)
-                    {
-                        var button = segment._button;
-                        button.PropertyChanged -= OnButtonPropertyChanged;
-                        Children.Remove(button);
-                        button.Tapped -= OnSegmentTapped;
-                        button.Selected -= OnSegmentSelected;
-                        button.LongPressing -= OnSegmentLongPressing;
-                        button.LongPressed -= OnSegmentLongPressed;
-                    }
-                    _segments.CollectionChanged -= OnCollectionChanged;
-                    _segments.Clear();
+                    var button = segment._button;
+                    button.PropertyChanged -= OnButtonPropertyChanged;
+                    Children.Remove(button);
+                    button.Tapped -= OnSegmentTapped;
+                    button.Selected -= OnSegmentSelected;
+                    button.LongPressing -= OnSegmentLongPressing;
+                    button.LongPressed -= OnSegmentLongPressed;
                 }
-                disposedValue = true;
+                _segments.CollectionChanged -= OnCollectionChanged;
+                _segments.Clear();
             }
         }
 
