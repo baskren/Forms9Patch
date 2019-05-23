@@ -21,6 +21,7 @@ namespace Forms9Patch.Droid
         internal delegate bool BoolDelegate();
 
         internal static float DefaultTextSize = -1f;
+        //internal static float DefaultTextSize = 20f;
         internal static float Scale = -1f;
 
         internal static float FontScale => Settings.Context.Resources.Configuration.FontScale;
@@ -77,7 +78,11 @@ namespace Forms9Patch.Droid
             if (Scale <= 0)
                 Scale = Settings.Context.Resources.DisplayMetrics.Density;
             if (DefaultTextSize <= 0)
-                DefaultTextSize = (new TextView(context)).TextSize / Scale;
+            {
+                var systemFontSize = (new TextView(context)).TextSize;
+                DefaultTextSize = systemFontSize / Scale;
+                //System.Diagnostics.Debug.WriteLine(GetType() + ".init systemFontSize=[" + systemFontSize + "] scale=[" + Scale + "] defaultTextSize=[" + DefaultTextSize + "]");
+            }
         }
 
         #endregion

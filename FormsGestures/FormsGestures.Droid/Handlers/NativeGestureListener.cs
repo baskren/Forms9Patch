@@ -358,15 +358,15 @@ namespace FormsGestures.Droid
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnDown [{0}]",_id);
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener." + P42.Utils.ReflectionExtensions.CallerMemberName() + " Index:" + e);
-            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown ENTER  Element[" + Element + "]");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown ENTER  Element[" + Element + "]");
 
             if (e.Action != MotionEventActions.Down)
             {
-                System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown invalid e.Action [" + e.Action + "]");
+                //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnDown invalid e.Action [" + e.Action + "]");
                 return false;
             }
 
-            System.Diagnostics.Debug.WriteLine(GetType() + ".OnDown fires=" + _downFires);
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnDown fires=" + _downFires);
             _downFires++;
 
             _onDownDateTime = DateTime.Now;
@@ -408,12 +408,12 @@ namespace FormsGestures.Droid
         public bool OnUp(MotionEvent ev)
         {
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener." + P42.Utils.ReflectionExtensions.CallerMemberName() + " action:" + ev.Action + " index" + ev.ActionIndex + " e:" + ev);
-            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
             //if (ev.Action == MotionEventActions.Down)
             //    System.Diagnostics.Debug.WriteLine("");
             if (ev.Action != MotionEventActions.Up)
             {
-                System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp invalid e.Action [" + ev.Action + "]");
+                //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp invalid e.Action [" + ev.Action + "]");
                 return false;
             }
 
@@ -424,7 +424,7 @@ namespace FormsGestures.Droid
             TappedTimerStart(ev, _numberOfTaps);
 
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp e.Action [" + ev.Action + "]");
-            System.Diagnostics.Debug.WriteLine(GetType() + ".OnUp fires=" + _upFires);
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnUp fires=" + _upFires);
             _upFires++;
 
             bool handled = false;
@@ -539,7 +539,7 @@ namespace FormsGestures.Droid
 
         bool CallOnUp(MotionEvent ev)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + ".CallOnUp");
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".CallOnUp");
             var handled = false;
             DownUpEventArgs args = new AndroidDownUpEventArgs(ev, _view, _viewLocationAtOnDown);
             var handler = NativeGestureHandler.InstanceForElement(Element);
@@ -561,7 +561,7 @@ namespace FormsGestures.Droid
 
         bool CallOnPanned(MotionEvent ev)
         {
-            System.Diagnostics.Debug.WriteLine(GetType() + ".CallOnPanned");
+            //System.Diagnostics.Debug.WriteLine(GetType() + ".CallOnPanned");
             var handled = false;
             _numberOfTaps = 0;
             PanEventArgs args = new AndroidPanEventArgs(LastPan ?? Start, ev, LastPanArgs, _view, _viewLocationAtOnDown);
@@ -588,7 +588,7 @@ namespace FormsGestures.Droid
         public override bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
         {
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnScroll ["+eN.Action+"]["+_id+"] e1=["+e0+"] e2=["+eN+"]");
-            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnScroll ENTER  Element[" + Element + "]");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnScroll ENTER  Element[" + Element + "]");
             bool handled = false;
             StopTapLongPress();
             if (!_multiMoving)
@@ -604,7 +604,7 @@ namespace FormsGestures.Droid
                         if (listener != null && (listener.HandlesPanning || listener.HandlesPanned))
                         {
                             args.Listener = listener;
-                            System.Diagnostics.Debug.WriteLine("~~~ listener.Element=[" + listener.Element + "]");
+                            //System.Diagnostics.Debug.WriteLine("~~~ listener.Element=[" + listener.Element + "]");
                             listener.OnPanning(args);
                             LastPanArgs = args;
                             LastPan = e2;
@@ -621,7 +621,7 @@ namespace FormsGestures.Droid
 
         public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
         {
-            System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnFling ENTER Element[" + Element + "]");
+            //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnFling ENTER Element[" + Element + "]");
             //if (_debugEvents) System.Diagnostics.Debug.WriteLine ("OnFling [{0}]",_id);
             StopTapLongPress();
 

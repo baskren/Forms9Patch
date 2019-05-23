@@ -25,7 +25,7 @@ namespace Forms9Patch.Droid
     {
 
         #region Debug support
-        bool DebugCondition => false;
+        bool DebugCondition => Element?.HtmlText?.StartsWith("While") ?? false;
         /*
         {
             get
@@ -141,8 +141,8 @@ namespace Forms9Patch.Droid
                 if (height < blockHeight)
                     height = blockHeight;
             }
-
-
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine(GetType() + ".LabelXamarinSize size=[" + width + ", " + height + "]");
             return new Xamarin.Forms.Size(System.Math.Ceiling(width), System.Math.Ceiling(height));
         }
 
@@ -152,9 +152,14 @@ namespace Forms9Patch.Droid
                 return null;
             if (_currentControlState.JavaText == null)
                 return null;
+            if (fontSize < 0.001)
+                fontSize = F9PTextView.DefaultTextSize;
             var paint = new TextPaint(Control.Paint);
             paint.TextSize = fontSize;
-            return new StaticLayout(_currentControlState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = new StaticLayout(_currentControlState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            if (DebugCondition)
+                System.Diagnostics.Debug.WriteLine(GetType() + ".LabelLayout fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
+            return layout;
         }
 
         void LayoutForSize(int width, int height)
@@ -208,7 +213,8 @@ namespace Forms9Patch.Droid
 
             if (DebugCondition)
             {
-                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
             }
 
             if (_currentControlState.Lines == 0)
@@ -256,12 +262,12 @@ namespace Forms9Patch.Droid
 
             if (DebugCondition)
             {
-                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
             }
             tmpFontSize = BoundTextSize(tmpFontSize);
             if (DebugCondition)
             {
-                System.Diagnostics.Debug.WriteLine("Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
             }
 
             // this is the optimal font size.  Let it be known!
@@ -318,7 +324,7 @@ namespace Forms9Patch.Droid
                 tmpHt = layout.GetLineBottom(i);
                 var width = layout.GetLineWidth(i);
                 if (DebugCondition)
-                    System.Diagnostics.Debug.WriteLine("Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "]");
+                    System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "]");
                 //System.Diagnostics.Debug.WriteLine("\t\tright=["+right+"]");
                 if (width > tmpWd)
                     tmpWd = (int)System.Math.Ceiling(width);
@@ -348,20 +354,21 @@ namespace Forms9Patch.Droid
                 //Control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
                 //Control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
 
-                System.Diagnostics.Debug.WriteLine("\t[" + elementText + "] LabelRenderer.GetDesiredSize(" + (_currentControlState.AvailWidth > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailWidth.ToString()) + "," + (_currentControlState.AvailHeight > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailHeight.ToString()) + ") exit (" + _lastSizeRequest.Value + ")");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Visibility=[" + Control.Visibility + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.TextFormatted=[" + Control.TextFormatted + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.TextSize=[" + Control.TextSize + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.ClipBounds=[" + Control.ClipBounds?.Width() + "," + Control.ClipBounds?.Height() + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Width[" + Control.Width + "]  .Height=[" + Control.Height + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.GetX[" + Control.GetX() + "]  .GetY[" + Control.GetY() + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Alpha[" + Control.Alpha + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Background[" + Control.Background + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Elevation[" + Control.Elevation + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Enabled[" + Control.Enabled + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.Error[" + Control.Error + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.IsOpaque[" + Control.IsOpaque + "]");
-                System.Diagnostics.Debug.WriteLine("\t\tControl.IsShown[" + Control.IsShown + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t[" + elementText + "] ");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize(" + (_currentControlState.AvailWidth > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailWidth.ToString()) + "," + (_currentControlState.AvailHeight > int.MaxValue / 3 ? "infinity" : _currentControlState.AvailHeight.ToString()) + ") exit (" + _lastSizeRequest.Value + ")");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Visibility=[" + Control.Visibility + "]");
+                //System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextFormatted=[" + Control.TextFormatted + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextSize=[" + Control.TextSize + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.ClipBounds=[" + Control.ClipBounds?.Width() + "," + Control.ClipBounds?.Height() + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Width[" + Control.Width + "]  .Height=[" + Control.Height + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.GetX[" + Control.GetX() + "]  .GetY[" + Control.GetY() + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Alpha[" + Control.Alpha + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Background[" + Control.Background + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Elevation[" + Control.Elevation + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Enabled[" + Control.Enabled + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Error[" + Control.Error + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.IsOpaque[" + Control.IsOpaque + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.IsShown[" + Control.IsShown + "]");
                 Control.BringToFront();
                 System.Diagnostics.Debug.WriteLine("\t\t");
 
