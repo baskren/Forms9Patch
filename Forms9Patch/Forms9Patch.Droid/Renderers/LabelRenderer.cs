@@ -25,7 +25,7 @@ namespace Forms9Patch.Droid
     {
 
         #region Debug support
-        bool DebugCondition => Element?.HtmlText?.StartsWith("While") ?? false;
+        bool DebugCondition => false;// Element?.HtmlText?.StartsWith("Żyłę;") ?? false;
         /*
         {
             get
@@ -83,6 +83,7 @@ namespace Forms9Patch.Droid
 
         SizeRequest? _lastSizeRequest;
         ControlState _lastControlState;
+        static float _aStupidWayToImplementFontScaling = 1.0f;
 
 #pragma warning disable CS0618 // Type or member is obsolete
         /// <summary>
@@ -155,10 +156,10 @@ namespace Forms9Patch.Droid
             if (fontSize < 0.001)
                 fontSize = F9PTextView.DefaultTextSize;
             var paint = new TextPaint(Control.Paint);
-            paint.TextSize = fontSize;
+            paint.TextSize = fontSize * _aStupidWayToImplementFontScaling;
             var layout = new StaticLayout(_currentControlState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine(GetType() + ".LabelLayout fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".LabelLayout paint.TextSize=[" + paint.TextSize + "] fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
             return layout;
         }
 
@@ -194,11 +195,23 @@ namespace Forms9Patch.Droid
                 return _lastSizeRequest.Value;
 
 
+            if (DebugCondition)
+            {
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            }
 
 
             ICharSequence text = _currentControlState.JavaText;
             var tmpFontSize = BoundTextSize(Element.FontSize);
             Control.TextSize = tmpFontSize;
+            _aStupidWayToImplementFontScaling = Control.TextSize / tmpFontSize;
+            if (DebugCondition)
+            {
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] BoundTextSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "]");
+            }
+
             Control.SetSingleLine(false);
             Control.SetMaxLines(int.MaxValue / 2);
             Control.SetIncludeFontPadding(false);
