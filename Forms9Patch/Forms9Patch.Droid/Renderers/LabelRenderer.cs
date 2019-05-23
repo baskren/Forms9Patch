@@ -25,7 +25,7 @@ namespace Forms9Patch.Droid
     {
 
         #region Debug support
-        bool DebugCondition => false;// Element?.HtmlText?.StartsWith("Żyłę;") ?? false;
+        bool DebugCondition => false;// (Element?.HtmlText ?? Element?.Text)?.Equals("5") ?? false;
         /*
         {
             get
@@ -206,10 +206,16 @@ namespace Forms9Patch.Droid
             var tmpFontSize = BoundTextSize(Element.FontSize);
             Control.TextSize = tmpFontSize;
             _aStupidWayToImplementFontScaling = Control.TextSize / tmpFontSize;
+            //Control.TextSize = tmpFontSize / _aStupidWayToImplementFontScaling;
+
             if (DebugCondition)
             {
+                var metrics = Resources.DisplayMetrics;
+                var density = metrics.DensityDpi;
+                var displayScale = (float)density / (float)DisplayMetrics.DensityDefault;
+
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] BoundTextSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] BoundTextSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "] displayScale=[" + displayScale + "]");
             }
 
             Control.SetSingleLine(false);
@@ -226,8 +232,8 @@ namespace Forms9Patch.Droid
 
             if (DebugCondition)
             {
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================  _currentControlState.AvailHeight=[" + _currentControlState.AvailHeight + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "] Element.Line=[" + Element.Lines + "] _currentControlState.Linst=[" + _currentControlState.Lines + "]");
             }
 
             if (_currentControlState.Lines == 0)
@@ -253,35 +259,13 @@ namespace Forms9Patch.Droid
                     tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
             }
 
-            /*
-            if (_currentControlState.Lines == 0) // && _currentControlState.AutoFit != AutoFit.None)
-                tmpFontSize = F9PTextView.ZeroLinesFit(_currentControlState.JavaText, new TextPaint(Control.Paint), ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
-            else if (_currentControlState.AutoFit == AutoFit.Lines)
-            {
-
-                if (_currentControlState.AvailHeight > int.MaxValue / 3)
-                    tmpHt = (int)System.Math.Round(_currentControlState.Lines * fontLineHeight + (_currentControlState.Lines - 1) * fontLeading);
-                else
-                {
-                    var fontPointSize = tmpFontSize;
-                    var lineHeightRatio = fontLineHeight / fontPointSize;
-                    var leadingRatio = fontLeading / fontPointSize;
-                    tmpFontSize = ((_currentControlState.AvailHeight / (_currentControlState.Lines + leadingRatio * (_currentControlState.Lines - 1))) / lineHeightRatio - 0.1f);
-                }
-            }
-            else if (_currentControlState.AutoFit == AutoFit.Width)
-                tmpFontSize = F9PTextView.WidthFit(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.Lines, ModelMinFontSize, tmpFontSize, _currentControlState.AvailWidth, _currentControlState.AvailHeight);
-                */
-
             if (DebugCondition)
-            {
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
-            }
+
             tmpFontSize = BoundTextSize(tmpFontSize);
+
             if (DebugCondition)
-            {
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
-            }
 
             // this is the optimal font size.  Let it be known!
             if (tmpFontSize != Element.FittedFontSize)
