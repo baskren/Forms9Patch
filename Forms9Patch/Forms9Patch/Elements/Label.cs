@@ -344,7 +344,7 @@ namespace Forms9Patch
                 {
                     if (HtmlText != null || Text != null)
                     {
-                        if (this.ParentInheritedFrom<Layout>() is Layout layout)
+                        if (this.AncestorOfBaseType<Layout>() is Layout layout)
                             layout.ForceLayout();
                     }
                 }

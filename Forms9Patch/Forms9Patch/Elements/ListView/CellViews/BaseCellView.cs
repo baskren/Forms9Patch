@@ -428,7 +428,7 @@ namespace Forms9Patch
             }
 
             e.Handled = _panHz;
-            var listView = this.Parent<ListView>();
+            var listView = this.Ancestor<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = false;
 
@@ -566,7 +566,7 @@ namespace Forms9Patch
 
         void PutAwaySwipeButtons(bool animated)
         {
-            var listView = this.Parent<ListView>();
+            var listView = this.Ancestor<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = true;
             if (_startButtons + _endButtons > 0)
@@ -619,7 +619,7 @@ namespace Forms9Patch
             }
 
 
-            var listView = this.Parent<ListView>();
+            var listView = this.Ancestor<ListView>();
             if (listView != null)
                 listView.IsScrollEnabled = true;
             var index = 0;
