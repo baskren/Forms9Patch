@@ -11,7 +11,8 @@ namespace Forms9Patch.UWP
     class LabeLRenderer : ViewRenderer<Label, TextBlock>
     {
         #region Debug support
-        bool DebugCondition => Element?.HtmlText == "Bolt Parameters:" || Element?.HtmlText == "Lag Screw Parameters:" || Element?.HtmlText == "Wood Screw Parameters:" || Element?.HtmlText == "Nail/Spike Parameters:" || Element?.HtmlText == "Ring Shank Nail Parameters:"; /*
+        bool DebugCondition => false; // (Element.Text ?? Element.HtmlText)?.StartsWith("While") ?? false; // Element?.HtmlText == "Bolt Parameters:" || Element?.HtmlText == "Lag Screw Parameters:" || Element?.HtmlText == "Wood Screw Parameters:" || Element?.HtmlText == "Nail/Spike Parameters:" || Element?.HtmlText == "Ring Shank Nail Parameters:"; 
+            /*
         {
             get
             {
@@ -321,50 +322,8 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return finalSize;
 
-            //DebugMessage("ArrangeOverride ENTER FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "] VerticalAlignment=["+Element.VerticalTextAlignment+"] VerticalOptions=["+Element.VerticalOptions+"]");
-            //DebugArrangeOverride(finalSize);
-
-            //if (DebugCondition && (finalSize.Width > Element.Width || finalSize.Height > Element.Height) && Element.FittedFontSize > Element.MinFontSize)
-            //    System.Diagnostics.Debug.WriteLine("finalSize a bit big!");
-            //    MeasureOverride(finalSize);
-
-            //if (DebugCondition)
-            //    System.Diagnostics.Debug.WriteLine("");
-
-            /*
-            double childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
-            var rect = new Windows.Foundation.Rect();
-
-            //var yOffset = _fontMetrics.AscentForFontSize(textBlock.FontSize) - _fontMetrics.CapHeightForFontSize(textBlock.FontSize);
-
-            switch (Element.VerticalTextAlignment)
-            {
-                case Xamarin.Forms.TextAlignment.Start:
-                    break;
-                default:
-                case Xamarin.Forms.TextAlignment.Center:
-                    rect.Y = (int)((finalSize.Height - childHeight) / 2);
-                    break;
-                case Xamarin.Forms.TextAlignment.End:
-                    rect.Y = finalSize.Height - childHeight;
-                    break;
-            }
-
-
-            if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("");
-
-            //rect.Y += yOffset;
-
-            rect.Height = childHeight;
-            rect.Width = finalSize.Width;
-
-            Control.Arrange(rect);
-            */
             PrivateArrange(finalSize);
 
-            //DebugArrangeOverride(finalSize);
-            //DebugMessage("ArrangeOverride EXIT");
             return finalSize;
         }
 
@@ -373,8 +332,6 @@ namespace Forms9Patch.UWP
             var childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var rect = new Windows.Foundation.Rect();
 
-            //var yOffset = _fontMetrics.AscentForFontSize(textBlock.FontSize) - _fontMetrics.CapHeightForFontSize(textBlock.FontSize);
-
             switch (Element.VerticalTextAlignment)
             {
                 case Xamarin.Forms.TextAlignment.Start:
@@ -388,15 +345,6 @@ namespace Forms9Patch.UWP
                     break;
             }
 
-            //if (DebugCondition)
-            //    System.Diagnostics.Debug.WriteLine("");
-
-            //var offset = _fontMetrics.LineGapForFontSize(Control.FontSize); //_fontMetrics.AscentForFontSize(Control.FontSize) - _fontMetrics.CapHeightForFontSize(Control.FontSize);
-            //System.Diagnostics.Debug.WriteLine("Control.FontSize: ["+Control.FontSize+"] offset: " + offset);
-            //rect.Y -= offset;
-
-            //_fontMetrics.DebugMetricsForFontSize(Control.FontSize);
-            //Control.DebugMetricsForLabel();
             if (FormsGestures.VisualElementExtensions.FindAncestorOfType(Element,typeof(SegmentButton))!=null)
             if (Element.VerticalTextAlignment==Xamarin.Forms.TextAlignment.Center && Control.LineGap() == 0 && Control.Descent()==0 && Control.LineHeight==0)
             {
@@ -408,13 +356,11 @@ namespace Forms9Patch.UWP
                 }
             }
             
-            //Control.LineHeight = Control.LineHeight();
 
             rect.Height = childHeight;
             rect.Width = finalSize.Width;
 
             Control.Arrange(rect);
-
         }
 
         private static void OnControlSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
@@ -452,8 +398,9 @@ namespace Forms9Patch.UWP
         int _measureOverrideInvocation;
         protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
         {
-            if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine("MeasureOverride =" + Element.HtmlText);
+            //if (DebugCondition)
+            //    System.Diagnostics.Debug.WriteLine("MeasureOverride =" + Element.HtmlText);
+            DebugMessage("ENTER");
 
 
             var label = Element;
@@ -476,8 +423,12 @@ namespace Forms9Patch.UWP
             //if (Double.IsInfinity(availableSize.Height) && Double.IsInfinity(availableSize.Width))
             //    LayoutValid = false;
 
-            if (LayoutValid &&  _lastAvailableSize.Width<=availableSize.Width && _lastAvailableSize.Height<=availableSize.Height && _lastElementSize == Element.Bounds.Size && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
-                return _lastMeasureOverrideResult;
+            // Next block was commented out because of failure to render BcNotes in Heights and Areas (in notes popup and on Disclaimer)
+            //if (LayoutValid && _lastAvailableSize.Width <= availableSize.Width && _lastAvailableSize.Height <= availableSize.Height && _lastElementSize == Element.Bounds.Size && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
+            //{
+            //    DebugMessage("USE LAST SIZE");
+            //    return _lastMeasureOverrideResult;
+            //}
 
             //_lastAvailableSize = availableSize;
             //if (DebugCondition)
@@ -585,8 +536,8 @@ namespace Forms9Patch.UWP
                 // autofit is off!  
                 // No need to do anything at the moment.  Will textBlock.SetAndFormat and textBlock.Measure at the end
                 //{
-                //    textBlock.SetAndFormatText(label, tmpFontSize);
-                //    textBlock?.Measure(new Windows.Foundation.Size(w, double.PositiveInfinity));
+                //    textBlock?.SetAndFormatText(label, tmpFontSize);
+                //    textBlock?.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                 //}
 
                 // none of these should happen so let's keep an eye out for it to be sure everything upstream is working
@@ -644,6 +595,12 @@ namespace Forms9Patch.UWP
 
                 // No need for this here, it is overridden by ArrangeOverride
                 //PrivateArrange(textBlock.DesiredSize, -20);
+
+                //textBlock.InvalidateArrange();
+                var trimmed = textBlock.Margin;
+                DebugMessage("trimmed[" + textBlock.IsTextTrimmed + "] margin["+textBlock.Margin+"] maxHeight["+textBlock.MaxHeight+"] maxLines["+textBlock.MaxLines+"] renderSize=["+textBlock.RenderSize+"] ");
+                DebugMessage(" textLineBounds[" + textBlock.TextLineBounds + "] TextTrimming[" + textBlock.TextTrimming + "] XHeight[" + textBlock.XHeight() + "]");
+
             }
 
             label.SetIsInNativeLayout(false);
@@ -661,6 +618,9 @@ namespace Forms9Patch.UWP
             if (DebugCondition)
                 _measureOverrideInvocation++;
 
+
+
+            DebugMessage("EXIT result=["+result+"]");
             return result;
         }
         #endregion
@@ -699,6 +659,8 @@ namespace Forms9Patch.UWP
             {
                 textBlock.SetAndFormatText(label, fontSize);
                 textBlock.Measure(new Windows.Foundation.Size(widthConstraint, double.PositiveInfinity));
+                DebugMessage(" widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+                DebugMessage(" size=[" + textBlock.DesiredSize.Width + ", " + textBlock.DesiredSize.Height + "]");
                 return new Windows.Foundation.Size(textBlock.DesiredSize.Width, textBlock.DesiredSize.Height);
             }
             return Windows.Foundation.Size.Empty;
