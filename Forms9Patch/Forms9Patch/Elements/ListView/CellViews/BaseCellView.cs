@@ -765,11 +765,12 @@ namespace Forms9Patch
                             ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
                             ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
                         }
+                        menu.Dispose();
                     };
+                    menu.Cancelled += (s, a) => menu.Dispose();
 
                     menu.IsVisible = true;
 
-                    menu.Cancelled += (s, a) => menu.Dispose();
                 }
 
             }
