@@ -417,7 +417,7 @@ namespace Forms9Patch.UWP
 
         }
 
-        private void OnControlSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
+        private static void OnControlSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
         {
             //DebugMessage("Element.Size=[" + Element.Width + "," + Element.Height + "] ActualSize=[" + ActualWidth + "," + ActualHeight + "] Control.Size=[" + Control?.Width + "," + Control?.Height + "] Control.ActualSize=[" + Control?.ActualWidth + "," + Control?.ActualHeight + "] ");
             //DebugMessage("e.NewSize=["+e.NewSize+"]");

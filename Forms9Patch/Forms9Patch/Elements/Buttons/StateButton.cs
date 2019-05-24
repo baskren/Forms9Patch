@@ -145,7 +145,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the DisabledAndSelectedState bindable property.
         /// </summary>
-        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create(@"DisabledAndSelectedState", typeof(ButtonState), typeof(StateButton), null);
+        public static BindableProperty DisabledAndSelectedStateProperty = BindableProperty.Create(nameof(DisabledAndSelectedState), typeof(ButtonState), typeof(StateButton), null);
         /// <summary>
         /// Gets or sets the StateButton's properties for the disabled and selected button state.
         /// </summary>

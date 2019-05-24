@@ -234,7 +234,7 @@ namespace Forms9Patch
             return string.Format("{0}[{1}]", GetType().Name, ID);
         }
 
-        internal static readonly BindableProperty IsLastItemProperty = BindableProperty.Create("IsLastItem", typeof(bool), typeof(ItemWrapper), false);
+        internal static readonly BindableProperty IsLastItemProperty = BindableProperty.Create(nameof(IsLastItem), typeof(bool), typeof(ItemWrapper), false);
         public bool IsLastItem
         {
             get { return (bool)GetValue(IsLastItemProperty); }

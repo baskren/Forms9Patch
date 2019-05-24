@@ -63,7 +63,7 @@ namespace Forms9Patch
         #region Properties
         public double CellHeight { get; set; }
 
-        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create("IsSelected", typeof(bool), typeof(MultiPickerCellContentView), default(bool));
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected), typeof(bool), typeof(MultiPickerCellContentView), default(bool));
         public bool IsSelected
         {
             get => (bool)GetValue(IsSelectedProperty);

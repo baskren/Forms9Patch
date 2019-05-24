@@ -3,13 +3,14 @@ using System;
 using FormsGestures;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
     /// </summary>
-    class BaseCellView : Xamarin.Forms.Grid  // why grid?  because you can put more than one view in the same place at the same time
+    class BaseCellView : Xamarin.Forms.Grid, IDisposable  // why grid?  because you can put more than one view in the same place at the same time
     {
 
         #region debug convenience
@@ -92,7 +93,10 @@ namespace Forms9Patch
         #region Fields
         static int _instances;
         internal int InstanceId;
+        #endregion
 
+
+        #region VisualElements
         readonly BoxView _separator = new BoxView
         {
             Color = Color.Black,
@@ -102,18 +106,6 @@ namespace Forms9Patch
         };
 
         #region Swipe Menu
-        /*
-        readonly Frame _insetFrame = new Frame
-        {
-            HasShadow = true,
-            ShadowInverted = true,
-            BackgroundColor = Color.FromRgb(200, 200, 200),
-            Padding = 0,
-            Margin = 0,
-            OutlineWidth = 0,
-            VerticalOptions = LayoutOptions.FillAndExpand,
-        };
-        */
         readonly Frame _touchBlocker = new Frame
         {
             VerticalOptions = LayoutOptions.FillAndExpand,
@@ -175,8 +167,47 @@ namespace Forms9Patch
             HasTightSpacing = true,
             Spacing = 5,
         };
+        readonly SegmentedControl _swipeSegmentedController = new SegmentedControl
+        {
+            Orientation = StackOrientation.Vertical,
+            BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
+            FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
+            TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
+            OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
+            OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
+            SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
+            OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
+            Padding = 5,
+            WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
+        };
+        readonly Button _swipePopupCancelButton = new Button
+        {
+            Text = "Cancel",
+            FontAttributes = FontAttributes.Bold,
+            BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
+            FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
+            TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
+            OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
+            OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
+            OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
+            Padding = 5,
+            WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
+        };
+        readonly StackLayout _swipePopupStackLayout = new StackLayout
+        {
+            Orientation = StackOrientation.Vertical,
+            WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
+        };
+        readonly ModalPopup _swipePopup = new ModalPopup
+        {
+            BackgroundColor = Color.Transparent,
+            OutlineWidth = 0,
+            WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
+        };
 
         #endregion
+
+        readonly FormsGestures.Listener _thisListener;
 
         #endregion
 
@@ -204,14 +235,13 @@ namespace Forms9Patch
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Absolute)}
             };
 
-
-            var thisListener = FormsGestures.Listener.For(this);
-            thisListener.Tapped += OnTapped;
-            thisListener.LongPressed += OnLongPressed;
-            thisListener.LongPressing += OnLongPressing;
-            thisListener.Panned += OnPanned;
-            thisListener.Panning += OnPanning;
-            thisListener.RightClicked += OnRightClicked;
+            _thisListener = FormsGestures.Listener.For(this);
+            _thisListener.Tapped += OnTapped;
+            _thisListener.LongPressed += OnLongPressed;
+            _thisListener.LongPressing += OnLongPressing;
+            _thisListener.Panned += OnPanned;
+            _thisListener.Panning += OnPanning;
+            _thisListener.RightClicked += OnRightClicked;
             //thisListener.Swiped += OnSwipe;
 
 
@@ -224,17 +254,56 @@ namespace Forms9Patch
             _swipeButton3.Tapped += OnSwipeButtonTapped;
 
             Children.Add(_separator, 0, 1);
+
+            _swipePopupStackLayout.Children.Add(_swipeSegmentedController);
+            _swipePopupStackLayout.Children.Add(_swipePopupCancelButton);
+            _swipePopup.Content = _swipePopupStackLayout;
         }
 
+        bool _disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _thisListener.Tapped -= OnTapped;
+                _thisListener.LongPressed -= OnLongPressed;
+                _thisListener.LongPressing -= OnLongPressing;
+                _thisListener.Panned -= OnPanned;
+                _thisListener.Panning -= OnPanning;
+                _thisListener.RightClicked -= OnRightClicked;
+
+                _swipeButton1.Tapped -= OnSwipeButtonTapped;
+                _swipeButton2.Tapped -= OnSwipeButtonTapped;
+                _swipeButton3.Tapped -= OnSwipeButtonTapped;
+
+                _swipePopupCancelButton.Tapped -= OnSwipePopupCancelButtonTapped;
+
+                _swipeButton1.Dispose();
+                _swipeButton2.Dispose();
+                _swipeButton3.Dispose();
+                _swipeSegmentedController.Dispose();
+                _swipePopupCancelButton.Dispose();
+                _swipePopup.Dispose();
+
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
 
 
         #region Swipe Menu
-        private void OnSwipe(object sender, SwipeEventArgs e)
+        
+        private static void OnSwipe(object sender, SwipeEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("Swiped:" + e);
         }
-
+        
 
 
 
@@ -563,47 +632,7 @@ namespace Forms9Patch
             {
                 // show remaining menu items in a modal list
                 PutAwaySwipeButtons(false);
-
-                var segmentedController = new SegmentedControl
-                {
-                    Orientation = StackOrientation.Vertical,
-                    BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
-                    FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
-                    TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
-                    OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
-                    OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
-                    SeparatorWidth = Settings.ListViewCellSwipePopupMenuButtonSeparatorWidth,
-                    OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
-                    Padding = 5,
-                    WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
-                };
-                var cancelButton = new Button
-                {
-                    Text = "Cancel",
-                    FontAttributes = FontAttributes.Bold,
-                    BackgroundColor = Settings.ListViewCellSwipePopupMenuButtonColor,
-                    FontSize = Settings.ListViewCellSwipePopupMenuFontSize,
-                    TextColor = Settings.ListViewCellSwipePopupMenuTextColor,
-                    OutlineColor = Settings.ListViewCellSwipePopupMenuButtonOutlineColor,
-                    OutlineWidth = Settings.ListViewCellSwipePopupMenuButtonOutlineWidth,
-                    OutlineRadius = Settings.ListViewCellSwipePopupMenuButtonOutlineRadius,
-                    Padding = 5,
-                    WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest
-                };
-                var stack = new StackLayout
-                {
-                    Orientation = StackOrientation.Vertical,
-                    WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
-                    Children = { segmentedController, cancelButton }
-                };
-                var modal = new ModalPopup()
-                {
-                    BackgroundColor = Color.Transparent,
-                    OutlineWidth = 0,
-                    WidthRequest = Settings.ListViewCellSwipePopupMenuWidthRequest,
-                    Content = stack
-                };
-                cancelButton.Tapped += async (s, arg) => await modal.CancelAsync(cancelButton);
+                _swipePopupCancelButton.Tapped += OnSwipePopupCancelButtonTapped;
                 for (int i = 2; i < swipeMenu.Count; i++)
                 {
                     var menuItem = swipeMenu[i];
@@ -611,20 +640,12 @@ namespace Forms9Patch
                     {
                         Text = menuItem.Text,
                         IconText = menuItem.IconText,
-                        //ImageSource = menuItem.ImageSource
                         IconImage = menuItem.IconImage
                     };
-                    segment.Tapped += async (s, arg) =>
-                    {
-                        await modal.CancelAsync(segment);
-                        var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
-                        ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this, args);
-                        ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
-                        //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + menuItem.Key + "]");
-                    };
-                    segmentedController.Segments.Add(segment);
+                    segment.Tapped += OnSwipeSegmentTapped;
+                    _swipeSegmentedController.Segments.Add(segment);
                 }
-                modal.IsVisible = true;
+                _swipePopup.IsVisible = true;
                 //System.Diagnostics.Debug.WriteLine("SwipeMenu[More]");
             }
             else
@@ -637,6 +658,26 @@ namespace Forms9Patch
             }
         }
 
+        async void OnSwipeSegmentTapped(object sender, EventArgs e)
+        {
+            if (sender is Segment segment)
+            {
+                await _swipePopup.CancelAsync(segment);
+                var swipeMenu = _endButtons > 0 ? ((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
+                if (swipeMenu?.FirstOrDefault((m) => m.Text == segment.Text) is SwipeMenuItem menuItem)
+                {
+                    var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
+                    ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this, args);
+                    ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                    //System.Diagnostics.Debug.WriteLine("SwipeMenu[" + menuItem.Key + "]");
+                }
+                foreach (var seg in _swipeSegmentedController.Segments)
+                    seg.Tapped -= OnSwipeSegmentTapped;
+            }
+        }
+
+        async void OnSwipePopupCancelButtonTapped(object sender, EventArgs e)
+            => await _swipePopup.CancelAsync(_swipePopupCancelButton);
         #endregion
 
 
@@ -665,29 +706,10 @@ namespace Forms9Patch
 
         void OnRightClicked(object sender, RightClickEventArgs e)
         {
-            /*
-            if (ContentView is ICellSwipeMenus iCellSwipeMenus && (iCellSwipeMenus.StartSwipeMenu.Count>0 || iCellSwipeMenus.EndSwipeMenu.Count>0))
-            {
-
-            }
-            */
-            /*
-            if (e.Center.X < 100)
-            {
-                Toast.Create(null, "In the zone.");
-                e.Handled = true;
-            }
-            else if (e.Center.X > Width - 100)
-            {
-                e.Handled = true;
-            }
-            */
-
             if (_startButtons + _endButtons > 0)
                 PutAwaySwipeButtons(true);
             else
             {
-                //((ICellSwipeMenus)ContentView)?.EndSwipeMenu : ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
                 var startMenu = ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
                 var endMenu = ((ICellSwipeMenus)ContentView)?.EndSwipeMenu;
 
@@ -746,6 +768,8 @@ namespace Forms9Patch
                     };
 
                     menu.IsVisible = true;
+
+                    menu.Cancelled += (s, a) => menu.Dispose();
                 }
 
             }

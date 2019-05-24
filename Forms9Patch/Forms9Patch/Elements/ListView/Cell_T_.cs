@@ -30,7 +30,7 @@ namespace Forms9Patch
     // - capture and manage the height of Forms9Patch.ListView cells
     // - set proper BindingContext to a cell's content view 
     // In the future, it may be also to manage cell separators.
-    internal class Cell<TContent> : ViewCell, ICell_T_Height where TContent : View, new()
+    internal class Cell<TContent> : ViewCell, ICell_T_Height, IDisposable where TContent : View, new()
     {
         #region debug convenience
         protected bool Debug
@@ -57,6 +57,8 @@ namespace Forms9Patch
         static int _instances;
         internal BaseCellView BaseCellView = new BaseCellView();
         bool _freshHeight;
+        double _oldHeight;
+
         #endregion
 
 
@@ -72,7 +74,21 @@ namespace Forms9Patch
                 Height = contentView.CellHeight;
         }
 
-        double _oldHeight;
+        bool _disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                BaseCellView.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         /// <summary>
         /// Triggered before a property is changed.
@@ -119,13 +135,15 @@ namespace Forms9Patch
             // don't know why the below "&& UWP" was added.  A really bone headed move.
             if (propertyName == nameof(Height))// && Device.RuntimePlatform == Device.UWP)
             {
-                UpdateSize();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                UpdateSizeAsync();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 _freshHeight = false;
             }
         }
 
         bool _updatingSize;
-        async Task UpdateSize()
+        async Task UpdateSizeAsync()
         //void UpdateSize()
         {
             if (_updatingSize || _freshHeight || _oldHeight < 1)

@@ -14,7 +14,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the BackgroundImage property
         /// </summary>
-        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("Forms9Patch.ShapeBase.BackgroundImage", typeof(Forms9Patch.Image), typeof(ShapeBase), null);
+        public static readonly BindableProperty BackgroundImageProperty = BindableProperty.Create("BackgroundImage", typeof(Forms9Patch.Image), typeof(ShapeBase), null);
 
         #region IShape BindableProperties backing stores
 
@@ -88,7 +88,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for ExtendedElementShape property
         /// </summary>
-        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create("ElementShape", typeof(ElementShape), typeof(ShapeBase), default(ElementShape),
+        public static readonly BindableProperty ElementShapeProperty = BindableProperty.Create(nameof(ElementShape), typeof(ElementShape), typeof(ShapeBase), default(ElementShape),
             propertyChanged: ((BindableObject bindable, object oldValue, object newValue) =>
             {
                 if (bindable is IExtendedShape extendedShape)

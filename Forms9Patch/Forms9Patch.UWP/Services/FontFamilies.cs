@@ -61,7 +61,9 @@ namespace Forms9Patch.UWP
                                 fontList.Add(new InstalledFont { Name = name, DisplayFont = display });
                             }
                         }
+#pragma warning disable CC0004 // Catch block cannot be empty
                         catch { }       // Corrupted font files throw an exception - ignore them
+#pragma warning restore CC0004 // Catch block cannot be empty
                     }
                 }
             }
@@ -94,7 +96,7 @@ namespace Forms9Patch.UWP
             return results;
         }
 
-        bool IsFont(string resourceId)
+        static bool IsFont(string resourceId)
         {
             var lower = resourceId.ToLower();
             return lower.EndsWith(".ttf") || lower.EndsWith(".otf");

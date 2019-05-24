@@ -17,7 +17,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use TextColorProperty
         /// </summary>
         [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(Segment), Color.Default);
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(Segment), Color.Default);
         /// <summary>
         /// OBSOLETE: Use TextColor
         /// </summary>
@@ -33,7 +33,7 @@ namespace Forms9Patch
         /// Backing store for the Image bindable property.
         /// </summary>
         [Obsolete("Use IconImageProperty instead")]
-        public static BindableProperty ImageSourceProperty = BindableProperty.Create("ImageSource", typeof(Xamarin.Forms.ImageSource), typeof(Segment), null);
+        public static BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(Xamarin.Forms.ImageSource), typeof(Segment), null);
         /// <summary>
         /// Gets or sets the companion image for this this <see cref="Segment"/> - alternative to IconText.
         /// </summary>

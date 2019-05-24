@@ -1757,7 +1757,7 @@ namespace FormsGestures
         #region Command / Event executors
         void RaiseEvent<T>(EventHandler<T> handler, T args) where T : BaseGestureEventArgs => handler?.Invoke(this, args);
 
-        void ExecuteCommand(ICommand command, object parameter, BaseGestureEventArgs args)
+        static void ExecuteCommand(ICommand command, object parameter, BaseGestureEventArgs args)
         {
             parameter = (parameter ?? args);
             if (command != null && command.CanExecute(parameter))

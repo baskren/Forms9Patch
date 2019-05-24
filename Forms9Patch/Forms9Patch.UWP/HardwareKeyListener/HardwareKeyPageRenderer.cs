@@ -184,7 +184,9 @@ namespace Forms9Patch.UWP
 
         static bool keyDownCaptured = false;
 
-        void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
+#pragma warning disable CC0057 // Unused parameters
+        static void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
+#pragma warning restore CC0057 // Unused parameters
         {
             var logicalFocus = FocusManager.GetFocusedElement();
             //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
@@ -194,7 +196,9 @@ namespace Forms9Patch.UWP
             args.Handled = ProcessVirualKey(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, args.VirtualKey);
         }
 
-        public void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+#pragma warning disable CC0057 // Unused parameters
+        public static void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+#pragma warning restore CC0057 // Unused parameters
         {
             var logicalFocus = FocusManager.GetFocusedElement();
             //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
@@ -384,7 +388,9 @@ namespace Forms9Patch.UWP
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = element.GetHardwareKeyListeners();
+#pragma warning disable CC0006 // Use foreach
             for (int i = 0; i < listeners.Count; i++)
+#pragma warning restore CC0006 // Use foreach
             {
                 var listener = listeners[i];
                 if (string.IsNullOrEmpty(listener?.HardwareKey?.KeyInput))
@@ -405,7 +411,11 @@ namespace Forms9Patch.UWP
             return false;
         }
 
+#pragma warning disable CC0091 // Use static method
+#pragma warning disable CC0057 // Unused parameters
         public void OnCharacterReceived(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.CharacterReceivedEventArgs args)
+#pragma warning restore CC0057 // Unused parameters
+#pragma warning restore CC0091 // Use static method
         {
             //System.Diagnostics.Debug.WriteLine("HardwareKeyPageRenderer.OnCharacterReceived");
             ProcessCharacter(HardwareKeyPage.FocusedElement ?? HardwareKeyPage.DefaultFocusedElement, (char)args.KeyCode);
@@ -428,7 +438,9 @@ namespace Forms9Patch.UWP
             //var result = new Forms9Patch.HardwareKey(keyInput, GetModifierKeys());
 
             var listeners = element.GetHardwareKeyListeners();
+#pragma warning disable CC0006 // Use foreach
             for (int i = 0; i < listeners.Count; i++)
+#pragma warning restore CC0006 // Use foreach
             {
                 var listener = listeners[i];
                 if (string.IsNullOrEmpty(listener?.HardwareKey?.KeyInput))
@@ -445,7 +457,7 @@ namespace Forms9Patch.UWP
             return false;
         }
 
-        string KeyStatusString(Windows.UI.Core.CorePhysicalKeyStatus KeyStatus)
+        static string KeyStatusString(Windows.UI.Core.CorePhysicalKeyStatus KeyStatus)
         {
             //var shiftState = Window.Current.CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Shift);
             //var ctrlState = Window.Current.CoreWindow.GetForCurrentThread().GetKeyState(VirtualKey.Control);

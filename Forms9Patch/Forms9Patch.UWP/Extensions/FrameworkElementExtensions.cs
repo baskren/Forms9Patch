@@ -90,7 +90,7 @@ namespace Forms9Patch.UWP
 
         public static string GenerateHeirachry(this FrameworkElement element, string leader = "", bool last = true)
         {
-            var result = leader + (leader.Length > 0 && last ? " └─" : " ├─") + element + "\n";
+            var result = new StringBuilder( leader + (leader.Length > 0 && last ? " └─" : " ├─") + element + "\n");
 
             leader = leader + (last ? "   " : " │ ");
 
@@ -99,10 +99,10 @@ namespace Forms9Patch.UWP
                 for (int i = 0; i < children.Count; i++)
                 {
                     var lastChild = i == children.Count - 1;
-                    result += children[i].GenerateHeirachry(leader, lastChild);
+                    result.Append(children[i].GenerateHeirachry(leader, lastChild));
                 }
 
-            return result;
+            return result.ToString();
         }
     }
 }

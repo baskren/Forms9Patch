@@ -13,7 +13,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the HardwareKey property.
         /// </summary>
-        public static readonly BindableProperty HardwareKeyProperty = BindableProperty.Create("HardwareKey", typeof(HardwareKey), typeof(HardwareKeyListener), default(HardwareKey));
+        public static readonly BindableProperty HardwareKeyProperty = BindableProperty.Create(nameof(HardwareKey), typeof(HardwareKey), typeof(HardwareKeyListener), default(HardwareKey));
         /// <summary>
         /// Gets or sets the hardware key for which to be listened.
         /// </summary>
@@ -27,7 +27,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the Command property
         /// </summary>
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(HardwareKeyListener), null);
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(HardwareKeyListener), null);
         /// <summary>
         /// Gets or sets the command to be invoked when the HardwareKey is pressed
         /// </summary>
@@ -41,7 +41,7 @@ namespace Forms9Patch
         /// <summary>
         /// The CommandParameter backing store
         /// </summary>
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(HardwareKeyListener), null);
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(HardwareKeyListener), null);
         /// <summary>
         /// Gets or sets the command parameter  sent with the command that is invoked when the key is pressed.
         /// </summary>

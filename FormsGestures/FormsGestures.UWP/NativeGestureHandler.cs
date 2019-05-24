@@ -60,11 +60,11 @@ namespace FormsGestures.UWP
 
         void ModesDebugMessage(ManipulationModes modes)
         {
-            var modesString = "";
+            var modesString = new StringBuilder();
             foreach (ManipulationModes mode in Enum.GetValues(typeof(ManipulationModes)))
             {
                 if ((mode & modes) != 0)
-                    modesString += "[" + mode + "]";
+                    modesString.Append("[" + mode + "]");
             }
             DebugMessage("Modes=" + modesString);
         }
@@ -93,7 +93,9 @@ namespace FormsGestures.UWP
             foreach (Windows.Devices.Input.PointerDeviceType type in Enum.GetValues(typeof(Windows.Devices.Input.PointerDeviceType)))
             {
                 if ((type & types) != 0)
+#pragma warning disable CC0039 // Don't concatenate strings in loops
                     deviceString += "[" + type + "]";
+#pragma warning restore CC0039 // Don't concatenate strings in loops
             }
             DebugMessage("Device: " + deviceString);
         }
@@ -502,7 +504,9 @@ namespace FormsGestures.UWP
 
         #region UWP Manipulations (multi-touch)
 
+#pragma warning disable CC0057 // Unused parameters
         void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
+#pragma warning restore CC0057 // Unused parameters
         {
             DebugMethodName(2);
             ModesDebugMessage(e.Mode);

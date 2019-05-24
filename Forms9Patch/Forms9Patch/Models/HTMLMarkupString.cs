@@ -142,15 +142,15 @@ namespace Forms9Patch
                 else if (_string[i] == '&')
                 {
                     // escape character
-                    var escapeCode = "";
+                    var escapeCodeBuilder = new StringBuilder();
                     //var stringBuilder = new StringBuilder();
                     var j = i + 1;
                     while (j < _string.Length && _string[j] != ';')
+                        escapeCodeBuilder.Append( _string[j++]);
+
+                    if (escapeCodeBuilder.Length > 1)
                     {
-                        escapeCode += _string[j++];
-                    }
-                    if (escapeCode.Length > 1)
-                    {
+                        var escapeCode = escapeCodeBuilder.ToString();
                         var unicodeInt = 0;
                         if (escapeCode[0] == '#')
                         {
@@ -429,7 +429,6 @@ namespace Forms9Patch
                         {
                             var unicodeString = char.ConvertFromUtf32(unicodeInt);
                             index += unicodeString.Length;
-                            //UnmarkedText += unicodeString;
                             _unmarkedText.Append(unicodeString);
                         }
                     }
@@ -439,7 +438,6 @@ namespace Forms9Patch
                     if (inPreSpan || !(char.IsWhiteSpace(_string, i) && i > 0 && char.IsWhiteSpace(_string, i - 1)))
                     {
                         index++;
-                        //UnmarkedText += _string [i];
                         _unmarkedText.Append(_string[i]);
                     }
                 }
@@ -498,7 +496,9 @@ namespace Forms9Patch
                                 span = new FontColorSpan(tag.Start, index - 1, attr.Value.ToColor());
                                 _spans.Add(span);
                                 break;
+#pragma warning disable CC0021 // Use nameof
                             case "size":
+#pragma warning restore CC0021 // Use nameof
                                 size = (float)attr.Value.ToFontSize();
                                 span = new FontSizeSpan(tag.Start, index - 1, size);
                                 _spans.Add(span);

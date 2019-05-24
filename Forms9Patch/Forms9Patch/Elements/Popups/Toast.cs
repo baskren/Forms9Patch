@@ -18,7 +18,7 @@ namespace Forms9Patch
         /// <param name="popAfter">Will dissappear after popAfter TimeSpan</param>
         /// <returns></returns>
         public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
-            => new Toast() { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
+            => new Toast { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
 
         #endregion
 
@@ -123,15 +123,6 @@ namespace Forms9Patch
             };
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.Toast"/> class.
-        /// </summary>
-        /// <param name="target">Target.</param>
-        [Obsolete]
-        public Toast(VisualElement target = null) : base(target)
-        {
-            throw new NotSupportedException(P42.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
-        }
         #endregion
 
 

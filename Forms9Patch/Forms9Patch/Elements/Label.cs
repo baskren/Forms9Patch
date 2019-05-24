@@ -17,7 +17,7 @@ namespace Forms9Patch
         /// backing store for Fit property
         /// </summary>
         [Obsolete("FitProperty is obsolete.  Use AutoFitProperty instead.")]
-        public static readonly BindableProperty FitProperty = BindableProperty.Create("Fit", typeof(LabelFit), typeof(Label), LabelFit.None, propertyChanged: (bindable, oldValue, newValue) =>
+        public static readonly BindableProperty FitProperty = BindableProperty.Create(nameof(Fit), typeof(LabelFit), typeof(Label), LabelFit.None, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is Label label && newValue is LabelFit fit)
             {

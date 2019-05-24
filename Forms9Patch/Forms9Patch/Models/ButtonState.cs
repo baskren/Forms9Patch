@@ -12,7 +12,7 @@ namespace Forms9Patch
     /// <summary>
     /// Describes the properties of a <see cref="StateButton"/> for a given state.
     /// </summary>
-    [ContentProperty("HtmlText")]
+    [ContentProperty(nameof(HtmlText))]
     public class ButtonState : BindableObject, IButtonState
     {
 
@@ -21,7 +21,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use IconImageProperty
         /// </summary>
         [Obsolete("Use IconImageProperty")]
-        public static BindableProperty ImageProperty = BindableProperty.Create("Image", typeof(Forms9Patch.Image), typeof(ImageButtonState), null, propertyChanged: (bindable, oldValue, newValue) =>
+        public static BindableProperty ImageProperty = BindableProperty.Create(nameof(Image), typeof(Forms9Patch.Image), typeof(ImageButtonState), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is ImageButtonState state && newValue is Image image)
                 state.IconImage = image;
@@ -40,7 +40,7 @@ namespace Forms9Patch
         /// OBSOLETE: Use TextColorProperty
         /// </summary>
         [Obsolete("Use TextColorProperty")]
-        public static readonly BindableProperty FontColorProperty = BindableProperty.Create("FontColor", typeof(Color), typeof(ImageButtonState), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
+        public static readonly BindableProperty FontColorProperty = BindableProperty.Create(nameof(FontColor), typeof(Color), typeof(ImageButtonState), Color.Default, propertyChanged: (bindable, oldValue, newValue) =>
         {
             if (bindable is ImageButtonState state && newValue is Color color)
                 state.TextColor = color;
@@ -670,7 +670,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontAttributes bindable property.
         /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create("FontAttributes", typeof(FontAttributes), typeof(ButtonState), Xamarin.Forms.FontAttributes.None,
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(ButtonState), Xamarin.Forms.FontAttributes.None,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).FontAttributesSet = true;
@@ -692,7 +692,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontSize bindable property.
         /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create("FontSize", typeof(double), typeof(ButtonState), -1.0,
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(ButtonState), -1.0,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).FontSizeSet = ((double)newValue) >= 0;
@@ -714,7 +714,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the FontFamiily bindable property.
         /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create("FontFamily", typeof(string), typeof(ButtonState), null,
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(ButtonState), null,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 ((ButtonState)bindable).FontFamilySet = newValue != null;

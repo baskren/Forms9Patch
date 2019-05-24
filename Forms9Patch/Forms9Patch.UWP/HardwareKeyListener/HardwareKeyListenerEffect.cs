@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 using P42.Utils;
 
+#pragma warning disable CC0004 // Catch block cannot be empty
 [assembly: ExportEffect(typeof(Forms9Patch.UWP.HardwareKeyListenerEffect), "HardwareKeyListenerEffect")]
 namespace Forms9Patch.UWP
 {
@@ -60,23 +61,26 @@ namespace Forms9Patch.UWP
 
         protected override void OnDetached()
         {
-            if (Control?.GetType() is Type controlType)
+            try
             {
-                if (controlType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
-                    Control.PreviewKeyDown -= OnKeyDown;
-                else if (controlType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
-                    Control.KeyDown -= OnKeyDown;
-                Control.CharacterReceived -= OnCharacterReceived;
+                if (Control?.GetType() is Type controlType)
+                {
+                    if (controlType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+                        Control.PreviewKeyDown -= OnKeyDown;
+                    else if (controlType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+                        Control.KeyDown -= OnKeyDown;
+                    Control.CharacterReceived -= OnCharacterReceived;
+                }
+                else if (Container?.GetType() is Type containerType)
+                {
+                    if (containerType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
+                        Container.PreviewKeyDown -= OnKeyDown;
+                    else if (containerType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
+                        Container.KeyDown -= OnKeyDown;
+                    Container.CharacterReceived -= OnCharacterReceived;
+                }
             }
-            else if (Container?.GetType() is Type containerType)
-            {
-                if (containerType.GetMethodInfo("PreviewKeyDown") is System.Reflection.MethodInfo)
-                    Container.PreviewKeyDown -= OnKeyDown;
-                else if (containerType.GetMethodInfo("KeyDown") is System.Reflection.MethodInfo)
-                    Container.KeyDown -= OnKeyDown;
-                Container.CharacterReceived -= OnCharacterReceived;
-
-            }
+            catch (Exception) { }
         }
 
         private void OnCharacterReceived(UIElement sender, CharacterReceivedRoutedEventArgs args)
@@ -98,3 +102,4 @@ namespace Forms9Patch.UWP
 
     }
 }
+#pragma warning restore CC0004 // Catch block cannot be empty

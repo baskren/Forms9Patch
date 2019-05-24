@@ -10,6 +10,7 @@ namespace Forms9Patch
     public class PermissionPopup : BubblePopup
     {
 
+#pragma warning disable CC0021 // Use nameof
         #region Factories
         /// <summary>
         /// Create the specified title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
@@ -22,49 +23,50 @@ namespace Forms9Patch
         /// <param name="cancelButtonColor">Cancel button color.</param>
         /// <param name="okTextColor">Ok text color.</param>
         /// <param name="cancelTextColor">Cancel text color.</param>
-        public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
+        public static PermissionPopup Create(string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default)
         {
             var popup = new PermissionPopup { Title = title, Text = text, OkText = okText, CancelText = cancelText };
-            if (okTextColor != default(Color))
+            if (okTextColor != default)
                 popup.OkTextColor = okTextColor;
-            if (okButtonColor != default(Color))
+            if (okButtonColor != default)
                 popup.OkButtonColor = okButtonColor;
-            if (cancelTextColor != default(Color))
+            if (cancelTextColor != default)
                 popup.CancelTextColor = cancelTextColor;
-            if (cancelButtonColor != default(Color))
+            if (cancelButtonColor != default)
                 popup.CancelButtonColor = cancelButtonColor;
             popup.IsVisible = true;
             return popup;
         }
 
-        /// <summary>
-        /// Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
-        /// </summary>
-        /// <returns>The create.</returns>
-        /// <param name="target">Target.</param>
-        /// <param name="title">Title.</param>
-        /// <param name="text">Text.</param>
-        /// <param name="okText">Ok text.</param>
-        /// <param name="cancelText">Cancel text.</param>
-        /// <param name="okButtonColor">Ok button color.</param>
-        /// <param name="cancelButtonColor">Cancel button color.</param>
-        /// <param name="okTextColor">Ok text color.</param>
-        /// <param name="cancelTextColor">Cancel text color.</param>
-        public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default(Color), Color cancelButtonColor = default(Color), Color okTextColor = default(Color), Color cancelTextColor = default(Color))
+                              /// <summary>
+                              /// Create the specified target, title, text, okText, cancelText, okButtonColor, cancelButtonColor, okTextColor and cancelTextColor.
+                              /// </summary>
+                              /// <returns>The create.</returns>
+                              /// <param name="target">Target.</param>
+                              /// <param name="title">Title.</param>
+                              /// <param name="text">Text.</param>
+                              /// <param name="okText">Ok text.</param>
+                              /// <param name="cancelText">Cancel text.</param>
+                              /// <param name="okButtonColor">Ok button color.</param>
+                              /// <param name="cancelButtonColor">Cancel button color.</param>
+                              /// <param name="okTextColor">Ok text color.</param>
+                              /// <param name="cancelTextColor">Cancel text color.</param>
+        public static PermissionPopup Create(VisualElement target, string title, string text, string okText = "OK", string cancelText = "Cancel", Color okButtonColor = default, Color cancelButtonColor = default, Color okTextColor = default, Color cancelTextColor = default)
         {
             var popup = new PermissionPopup(target) { Title = title, Text = text, OkText = okText, CancelText = cancelText };
-            if (okTextColor != default(Color))
+            if (okTextColor != default)
                 popup.OkTextColor = okTextColor;
-            if (okButtonColor != default(Color))
+            if (okButtonColor != default)
                 popup.OkButtonColor = okButtonColor;
-            if (cancelTextColor != default(Color))
+            if (cancelTextColor != default)
                 popup.CancelTextColor = cancelTextColor;
-            if (cancelButtonColor != default(Color))
+            if (cancelButtonColor != default)
                 popup.CancelButtonColor = cancelButtonColor;
             popup.IsVisible = true;
             return popup;
         }
         #endregion
+#pragma warning restore CC0021 // Use nameof
 
 
         #region Properties
@@ -192,27 +194,32 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Visual Elements 
+        #region Visual Elements
         readonly Label _titleLabel = new Label
         {
             FontSize = 22,
             FontAttributes = FontAttributes.Bold,
             TextColor = Color.Black
         };
+
         readonly Label _textLabel = new Label
         {
             FontSize = 16,
             TextColor = Color.Black
         };
+
+#pragma warning disable CC0033 // Dispose Fields Properly
         readonly Button _okButton = new Button
         {
             HorizontalOptions = LayoutOptions.FillAndExpand
         };
+
         readonly Button _cancelButton = new Button
         {
             HorizontalOptions = LayoutOptions.FillAndExpand
-
         };
+#pragma warning restore CC0033 // Dispose Fields Properly
+
         #endregion
 
 
@@ -229,15 +236,8 @@ namespace Forms9Patch
             _okButton.TextColor = OkTextColor;
             _okButton.HtmlText = OkText;
 
-
-            _cancelButton.Tapped += async (s, args) => await CancelAsync(_cancelButton);
-            _okButton.Tapped += async (s, args) =>
-            {
-                await PopAsync(_okButton);
-                while (_isPushed)
-                    await Task.Delay(50);
-                OkTapped?.Invoke(this, EventArgs.Empty);
-            };
+            _cancelButton.Tapped += OnCancelButtonTappedAsync;
+            _okButton.Tapped += OnOkButtonTappedAsync;
             Content = new Xamarin.Forms.StackLayout
             {
                 Children =
@@ -266,11 +266,28 @@ namespace Forms9Patch
             if (disposing && !_disposed)
             {
                 _disposed = true;
+                _cancelButton.Tapped -= OnCancelButtonTappedAsync;
+                _okButton.Tapped -= OnOkButtonTappedAsync;
                 _okButton.Dispose();
                 _cancelButton.Dispose();
             }
             base.Dispose(disposing);
         }
+
+        #endregion
+
+
+        #region Event Handlers
+        async void OnOkButtonTappedAsync(object sender, EventArgs e)
+        {
+            await PopAsync(_okButton);
+            while (_isPushed)
+                await Task.Delay(50);
+            OkTapped?.Invoke(this, EventArgs.Empty);
+        }
+
+        async void OnCancelButtonTappedAsync(object sender, EventArgs e)
+            => await CancelAsync(_cancelButton);
 
         #endregion
 

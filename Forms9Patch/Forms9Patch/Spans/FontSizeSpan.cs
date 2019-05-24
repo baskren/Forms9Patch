@@ -8,9 +8,11 @@ namespace Forms9Patch
 	/// </summary>
 	class FontSizeSpan : Span, ICopiable<FontSizeSpan>
 	{
-		internal const string SpanKey = "Size";
+#pragma warning disable CC0021 // Use nameof
+        internal const string SpanKey = "Size";
+#pragma warning restore CC0021 // Use nameof
 
-		float _size=-1;
+        float _size=-1;
 		/// <summary>
 		/// Gets or sets the size.
 		/// </summary>

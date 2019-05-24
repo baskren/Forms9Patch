@@ -157,21 +157,23 @@ namespace Forms9Patch.UWP
 
                     var key = fontFile.GetReferenceKey();
 
-                    var fontCollectionLoader = new FontCollectionLoader(fontFile);
+                    using (var fontCollectionLoader = new FontCollectionLoader(fontFile))
+                    {
+                        factory.RegisterFontCollectionLoader(fontCollectionLoader);
 
-                    factory.RegisterFontCollectionLoader(fontCollectionLoader);
+                        using (var fontCollection = new FontCollection(factory, fontCollectionLoader, key))
+                        {
 
-                    var fontCollection = new FontCollection(factory, fontCollectionLoader, key);
+                            var family = fontCollection.GetFontFamily(0);
 
 
-                    var family = fontCollection.GetFontFamily(0);
+                            var familyNames = family.FamilyNames;
 
-                    var familyNames = family.FamilyNames;
+                            font = family.GetFirstMatchingFont(weight, stretch, style);
 
-                    font = family.GetFirstMatchingFont(weight, stretch, style);
-
-                    _loadedFonts[fontKey] = font;
-
+                            _loadedFonts[fontKey] = font;
+                        }
+                    }
                     return font;
     
                 }
@@ -206,7 +208,9 @@ namespace Forms9Patch.UWP
                                 }
                             }
                         }
+#pragma warning disable CC0004 // Catch block cannot be empty
                         catch { }       // Corrupted font files throw an exception - ignore them
+#pragma warning restore CC0004 // Catch block cannot be empty
 
                     }
                 }
@@ -464,7 +468,9 @@ namespace Forms9Patch.UWP
     {
         private readonly DataStream _stream;
 
+#pragma warning disable CC0057 // Unused parameters
         public FontFileStream(DataStream stream) => _stream = stream;
+#pragma warning restore CC0057 // Unused parameters
 
         //public IDisposable Shadow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

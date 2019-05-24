@@ -11,7 +11,7 @@ namespace Forms9Patch
         /// <summary>
         /// The color property.
         /// </summary>
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create("Color", typeof(Color), typeof(ActivityIndicatorPopup), Color.Blue, propertyChanged: (b, o, n) =>
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(ActivityIndicatorPopup), Color.Blue, propertyChanged: (b, o, n) =>
         {
             if (b is ActivityIndicatorPopup indicatorPopup)
                 indicatorPopup._indicator.Color = indicatorPopup.Color;
@@ -66,15 +66,6 @@ namespace Forms9Patch
 
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.ActivityIndicatorPopup"/> class.
-        /// </summary>
-        /// <param name="target">Target.</param>
-        [Obsolete]
-        public ActivityIndicatorPopup(VisualElement target) : base(target)
-        {
-            throw new NotSupportedException(P42.Utils.ReflectionExtensions.CallerMemberName() + " is obsolete.");
-        }
         #endregion
 
 

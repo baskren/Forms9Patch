@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Forms9Patch
 {
@@ -25,7 +26,7 @@ namespace Forms9Patch
 
         public CellEventArgs(GroupWrapper gr, ItemWrapper itemWrapper)
         {
-            Clear();
+            //Clear();
             ItemWrapper = itemWrapper;
             DeepIndex = gr.DeepSourceIndexOf(itemWrapper);
         }
@@ -35,7 +36,7 @@ namespace Forms9Patch
         /// </summary>
         public CellEventArgs(ItemWrapper itemWrapper, int[] deepIndex)
         {
-            Clear();
+            //Clear();
             ItemWrapper = itemWrapper;
             DeepIndex = deepIndex;
         }
@@ -68,11 +69,11 @@ namespace Forms9Patch
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Forms9Patch.CellProximityEventArgs"/>.</returns>
         public override string ToString()
         {
-            var indexPath = "";
+            var indexBuilder = new StringBuilder();
             foreach (int index in DeepIndex)
-                indexPath += index + ".";
-            indexPath = indexPath.Substring(0, indexPath.Length - 1);
-            return "["+GetType()+":" + ItemWrapper + "," + indexPath + "]";
+                indexBuilder.Append(index + ".");
+            var indexPath = indexBuilder.ToString().Substring(0, indexBuilder.Length - 1);
+            return "["+GetType()+":" + ItemWrapper + "," + indexBuilder + "]";
         }
 
         /// <summary>
@@ -80,11 +81,11 @@ namespace Forms9Patch
         /// </summary>
         public virtual string Description()
         {
-            var indexPath = "";
+            var indexBuilder = new StringBuilder();
             foreach (int index in DeepIndex)
-                indexPath += index + ".";
-            indexPath = indexPath.Substring(0, indexPath.Length - 1);
-            return "["+GetType()+" ItemWrapper:" + ItemWrapper + ", DeepIndex:" + indexPath + "]";
+                indexBuilder.Append(index + ".");
+            var indexPath = indexBuilder.ToString().Substring(0, indexBuilder.Length - 1);
+            return "["+GetType()+" ItemWrapper:" + ItemWrapper + ", DeepIndex:" + indexBuilder + "]";
         }
 
     }

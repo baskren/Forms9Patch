@@ -18,14 +18,14 @@ namespace Forms9Patch
     /// Forms9Patch Popup base.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [ContentProperty("ContentView")]
+    [ContentProperty(nameof(ContentView))]
     public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage, IPopup, IDisposable
 
     {
         /// <summary>
         /// backing store for IsAnimationEnabled property
         /// </summary>
-        public static new readonly BindableProperty IsAnimationEnabledProperty = BindableProperty.Create("Forms9Patch.PopupBase.IsAnimationEnabled", typeof(bool), typeof(PopupBase), default(bool));
+        public static new readonly BindableProperty IsAnimationEnabledProperty = BindableProperty.Create(nameof(IsAnimationEnabled), typeof(bool), typeof(PopupBase), default(bool));
         /// <summary>
         /// Determines if popup Pop and Push events are animated
         /// </summary>
@@ -599,7 +599,12 @@ namespace Forms9Patch
                 //        disposable.Dispose();
                 //}
                 //catch (Exception) { }
+                if (_decorativeContainerView is VisualElement oldLayout)
+                    oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
+                KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
 
+
+                _lock.Dispose();
                 Retain = false;
             }
         }

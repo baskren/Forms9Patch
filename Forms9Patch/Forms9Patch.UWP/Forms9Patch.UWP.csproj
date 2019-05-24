@@ -178,6 +178,7 @@
     <Compile Include="Extensions\TextBlockExtensions.cs" />
     <Compile Include="Extensions\UwpWebViewExtensions.cs" />
     <Compile Include="Extensions\XamarinSpanExtentions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HardwareKeyListener\HardwareKeyListenerEffect.cs" />
     <Compile Include="HardwareKeyListener\HardwareKeyPageRenderer.cs" />
     <Compile Include="Models\MetaFont.cs" />

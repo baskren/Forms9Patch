@@ -88,12 +88,6 @@ namespace Forms9Patch
         /// <param name="popAfter">Pop after TimeSpan.</param>
         public ModalPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModalPopup"/> class.
-        /// </summary>
-        /// <param name="target">Element or Page pointed to by Popup.</param>
-        [Obsolete]
-        public ModalPopup(VisualElement target) : this() { }
         #endregion
 
 

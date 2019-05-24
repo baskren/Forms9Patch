@@ -1302,7 +1302,7 @@ namespace Forms9Patch
                     var cf = SKColorFilter.CreateColorMatrix(mx);
 
 
-                    paint = new SKPaint()
+                    paint = new SKPaint
                     {
                         ColorFilter = cf,
                         IsAntialias = true,
@@ -1353,7 +1353,7 @@ namespace Forms9Patch
                     var cf = SKColorFilter.CreateColorMatrix(mx);
 
 
-                    paint = new SKPaint()
+                    paint = new SKPaint
                     {
                         ColorFilter = cf,
                         IsAntialias = true,
@@ -1503,12 +1503,11 @@ namespace Forms9Patch
                 {
                     paint = shadowPaint;
                     canvas.DrawBitmap(shadowBitmap, shadowBitmap.Info.Rect, paint);
+                    workingCanvas.Dispose();
                 }
             }
             else
-            {
                 Console.WriteLine("Image [" + _f9pImageData.Key + "] is neither a valid SVG or valid Bitmap.");
-            }
         }
         #endregion
 
@@ -1758,7 +1757,7 @@ namespace Forms9Patch
             return path;
         }
 
-        internal SKPath BubblePerimeterPath(IBubbleShape bubble, SKRect rect, float radius)
+        internal static SKPath BubblePerimeterPath(IBubbleShape bubble, SKRect rect, float radius)
         {
             var length = bubble.PointerLength * FormsGestures.Display.Scale;
 

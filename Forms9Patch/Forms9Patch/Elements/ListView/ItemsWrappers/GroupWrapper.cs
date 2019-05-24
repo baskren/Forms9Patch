@@ -1091,7 +1091,7 @@ namespace Forms9Patch
             return null;
         }
 
-        double SeparatorThicknessError()
+        static double SeparatorThicknessError()
         {
             return Device.RuntimePlatform == Device.UWP
                     ? 0 // 0.4 / Display.Scale

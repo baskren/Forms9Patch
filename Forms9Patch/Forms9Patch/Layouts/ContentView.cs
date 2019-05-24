@@ -43,7 +43,7 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the ignore children property.
         /// </summary>
-        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create("IgnoreChildren", typeof(bool), typeof(ContentView), default(bool));
+        public static readonly BindableProperty IgnoreChildrenProperty = BindableProperty.Create(nameof(IgnoreChildren), typeof(bool), typeof(ContentView), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.ContentView"/> ignore children.
         /// </summary>

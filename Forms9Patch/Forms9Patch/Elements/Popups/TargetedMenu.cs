@@ -194,6 +194,7 @@ namespace Forms9Patch
 
 
         #region VisualElements
+#pragma warning disable CC0033 // Dispose Fields Properly
         readonly Button _leftArrowButton = new Button
         {
             IsVisible = false,
@@ -273,6 +274,7 @@ namespace Forms9Patch
             AutoFit = AutoFit.None,
         };
         readonly BoxView _downArrowSeparator = new BoxView { Color = DefaultVerticalSeparatorColor, HeightRequest = DefaultSeparatorThickness, Margin = 0 };
+#pragma warning restore CC0033 // Dispose Fields Properly
 
 
         readonly Xamarin.Forms.StackLayout _stackLayout = new Xamarin.Forms.StackLayout
@@ -427,8 +429,7 @@ namespace Forms9Patch
         bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-            if (disposing && !_disposed)
+            if (!_disposed && disposing)
             {
                 _disposed = true;
                 foreach (var segment in Segments)
@@ -447,6 +448,7 @@ namespace Forms9Patch
                 _upArrowButton.Dispose();
                 _downArrowButton.Dispose();
             }
+            base.Dispose(disposing);
         }
         #endregion
 

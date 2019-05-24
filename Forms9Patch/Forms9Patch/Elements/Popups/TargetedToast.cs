@@ -123,17 +123,14 @@ namespace Forms9Patch
         {
             FontSize = 16,
             TextColor = Color.Black
-            //Lines = 0,
-            //VerticalOptions = LayoutOptions.Fill,
         };
-        readonly Button _okButton = new Button
-        {
-            //HorizontalOptions = LayoutOptions.Fill
-        };
+#pragma warning disable CC0033 // Dispose Fields Properly
+        readonly Button _okButton = new Button();
+#pragma warning restore CC0033 // Dispose Fields Properly
         #endregion
 
 
-        #region Constructor
+        #region Constructor / Disposer
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.TargetedToast"/> class.
         /// </summary>
@@ -144,7 +141,7 @@ namespace Forms9Patch
             _okButton.TextColor = OkTextColor;
             _okButton.HtmlText = OkText;
 
-            _okButton.Tapped += async (s, args) => await CancelAsync(_okButton);
+            _okButton.Tapped += OnOkButtonTappedAsync;
             Content = new StackLayout
             {
                 Children =
@@ -157,6 +154,23 @@ namespace Forms9Patch
                 }
             };
         }
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _okButton.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        #endregion
+
+
+        #region Events
+        async void OnOkButtonTappedAsync(object sender, EventArgs e)
+            => await CancelAsync(_okButton);
         #endregion
 
 

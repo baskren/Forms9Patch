@@ -101,7 +101,9 @@ namespace Forms9Patch.UWP
                     {
                         if (part == "Resources")
                             break;
+#pragma warning disable CC0039 // Don't concatenate strings in loops
                         targetAsmNameA += part + ".";
+#pragma warning restore CC0039 // Don't concatenate strings in loops
                     }
                     if (targetAsmNameA.Length > 0)
                         targetAsmNameA = targetAsmNameA.Substring(0, targetAsmNameA.Length - 1);

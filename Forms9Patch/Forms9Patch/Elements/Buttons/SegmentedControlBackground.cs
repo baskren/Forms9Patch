@@ -117,7 +117,7 @@ namespace Forms9Patch
             Control.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
         }
 
-        private bool PaintSegmentButtonBackground(View view, Rectangle bounds, object obj)
+        private static bool PaintSegmentButtonBackground(View view, Rectangle bounds, object obj)
         {
             if (view is SegmentButton button && obj is SKPaintSurfaceEventArgs e)
             {

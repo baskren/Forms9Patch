@@ -1297,7 +1297,7 @@ namespace Forms9Patch
             }
         }
 
-        private bool LayoutSegment(View view, Rectangle segmentRect, object arg3)
+        private static bool LayoutSegment(View view, Rectangle segmentRect, object arg3)
         {
             LayoutChildIntoBoundingRegion(view, segmentRect);
             return false;
@@ -1395,7 +1395,7 @@ namespace Forms9Patch
             return result;
         }
 
-        private bool CheckSegmentIsClipped(View view, Rectangle segmentRect, object arg3)
+        private static bool CheckSegmentIsClipped(View view, Rectangle segmentRect, object arg3)
         {
             if (view is Button button)
                 return button.CheckIsClipped(segmentRect.Width, segmentRect.Height);

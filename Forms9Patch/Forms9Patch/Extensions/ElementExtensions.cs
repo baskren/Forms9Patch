@@ -111,13 +111,13 @@ namespace Forms9Patch
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static bool IsInNativeLayout(this VisualElement e)
         {
-            var isInNativeLayout = (bool)e.GetPropertyValue("IsInNativeLayout");
+            var isInNativeLayout = (bool)e.GetPropertyValue(nameof(IsInNativeLayout));
             return isInNativeLayout;
         }
 
         public static void SetIsInNativeLayout(this VisualElement e, bool value)
         {
-            e.SetPropertyValue("IsInNativeLayout", value);
+            e.SetPropertyValue(nameof(IsInNativeLayout), value);
         }
 	}
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

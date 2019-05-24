@@ -227,10 +227,12 @@ namespace Forms9Patch.UWP
                         break;
                 }
             }
+#pragma warning disable CC0004 // Catch block cannot be empty
             catch (Exception)
             {
                 // o
             }
+#pragma warning restore CC0004 // Catch block cannot be empty
         }
 
         static void AddInline(TextBlock textBlock, Forms9Patch.Label label, MetaFont metaFont, string text, int startIndex, int length)
@@ -277,10 +279,12 @@ namespace Forms9Patch.UWP
                 {
                     textBlock.ApplyBackgroundColor(metaFont.BackgroundColor, startIndex, length);
                 }
+#pragma warning disable CC0004 // Catch block cannot be empty
                 catch (Exception)
                 {
                     //throw new Exception("It appears that this Xamarin.Forms.UWP app was built with a Windows TargetVersion < 10.0.16299.0 (Windows 10 Fall Creators Update).  10.0.16299.0 is needed to support Forms9Patch.Label.HtmlText background color attributes.", e);
                 }
+#pragma warning restore CC0004 // Catch block cannot be empty
             }
 
             if (metaFont.IsActionEmpty())
