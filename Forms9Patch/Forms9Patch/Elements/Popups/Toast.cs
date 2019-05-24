@@ -106,7 +106,8 @@ namespace Forms9Patch
             _okButton.TextColor = ButtonTextColor;
             _okButton.HtmlText = ButtonText;
             */
-            WidthRequest = 200;
+            //WidthRequest = 200;
+
             //HeightRequest = 200;
 
             //_okButton.Tapped += (s, args) => Cancel();
