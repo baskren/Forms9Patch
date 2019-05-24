@@ -52,8 +52,17 @@ namespace Forms9Patch
 			return HostingPage(element);
 		}
 
+        /// <summary>
+        /// Find a ancestor of a specific type for the specified element. (same as Parent extension method)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static T Ancestor<T>(this Element element) where T : Element
+            => Parent<T>(element);
+
 		/// <summary>
-		/// Fine a ancestor of a specific type for the specified element.
+		/// Find a ancestor of a specific type for the specified element.
 		/// </summary>
 		/// <param name="element">Element.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
