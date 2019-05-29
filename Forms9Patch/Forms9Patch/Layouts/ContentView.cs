@@ -429,8 +429,14 @@ namespace Forms9Patch
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member
         {
+
             if (Content == null)
                 return new SizeRequest(Size.Zero, Size.Zero);
+
+            //var condition = false;// (this is Forms9Patch.Button button && button.HtmlText == "cancel");
+
+            //if (!HasShadow && (BackgroundImage == null || !LimitMinSizeToBackgroundImageSize))
+            //   return base.OnSizeRequest(widthConstraint, heightConstraint);
 
             if (double.IsInfinity(heightConstraint) || double.IsNaN(heightConstraint))
                 heightConstraint = Forms9Patch.Display.Height;
@@ -439,22 +445,67 @@ namespace Forms9Patch
 
             //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest(" + widthConstraint + ", " + heightConstraint + ")");
             //var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            var contentSizeRequest = Content.Measure(widthConstraint, heightConstraint, MeasureFlags.IncludeMargins);
+            var availWidth = widthConstraint;
+            var availHeight = heightConstraint;
+            if (HasShadow)
+            {
+                var shadowPadding = ShapeBase.ShadowPadding(this);
+                availWidth -= shadowPadding.HorizontalThickness;
+                availHeight -= shadowPadding.VerticalThickness;
+            }
+
+            var baseRequest = base.OnSizeRequest(availWidth, availHeight);
+
+            availWidth -= (Margin.HorizontalThickness + Padding.HorizontalThickness);
+            availHeight -= (Margin.VerticalThickness + Padding.VerticalThickness);
+
+            //if (condition)
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".OnSizeRequest widthConstraint=["+widthConstraint+"] heightConstraint=["+heightConstraint+"] availWidth=["+availWidth+"] availHeight=["+availHeight+"]");
+
+            var contentSizeRequest = Content.Measure(availWidth, availHeight, MeasureFlags.IncludeMargins);
+
+            //if (condition)
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".OnSizeRequest Content.Measure=["+contentSizeRequest+"]");
             //System.Diagnostics.Debug.WriteLine("\t\t contentSizeRequest: " + contentSizeRequest);
+
+            // this causes Toast and some buttons to be too small
+            //var contentSizeRequest = base.OnSizeRequest(availWidth, availHeight);
+
+            var reqWidth = Math.Max(contentSizeRequest.Request.Width, baseRequest.Request.Width);
+            var reqHeight = Math.Max(contentSizeRequest.Request.Height, baseRequest.Request.Height);
+            var minWidth = Math.Max(contentSizeRequest.Minimum.Width, baseRequest.Minimum.Width);
+            var minHeight = Math.Max(contentSizeRequest.Minimum.Height, baseRequest.Minimum.Height);
+
+            var result = new SizeRequest(new Size(reqWidth,reqHeight), new Size(minWidth,minHeight));
 
             if (LimitMinSizeToBackgroundImageSize && BackgroundImage != null && BackgroundImage.SourceImageSize != Size.Zero)
             {
-                var reqW = Math.Max(contentSizeRequest.Request.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
-                var reqH = Math.Max(contentSizeRequest.Request.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
-                var minW = Math.Max(contentSizeRequest.Minimum.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
-                var minH = Math.Max(contentSizeRequest.Minimum.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
-                contentSizeRequest = new SizeRequest(new Size(reqW, reqH), new Size(minW, minH));
+                var reqW = Math.Max(result.Request.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
+                var reqH = Math.Max(result.Request.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
+                var minW = Math.Max(result.Minimum.Width, BackgroundImage.SourceImageSize.Width) + BackgroundImage.Margin.HorizontalThickness;
+                var minH = Math.Max(result.Minimum.Height, BackgroundImage.SourceImageSize.Height) + BackgroundImage.Margin.VerticalThickness;
+                result = new SizeRequest(new Size(reqW, reqH), new Size(minW, minH));
             }
             if (HasShadow)
             {
                 var shadowPadding = ShapeBase.ShadowPadding(this);
-                contentSizeRequest = new SizeRequest(new Size(contentSizeRequest.Request.Width + shadowPadding.HorizontalThickness, contentSizeRequest.Request.Height + shadowPadding.VerticalThickness), new Size(contentSizeRequest.Minimum.Width + shadowPadding.HorizontalThickness, contentSizeRequest.Minimum.Height + shadowPadding.VerticalThickness));
+                result = new SizeRequest(
+                    new Size(result.Request.Width + shadowPadding.HorizontalThickness,
+                             result.Request.Height + shadowPadding.VerticalThickness), 
+                    new Size(result.Minimum.Width + shadowPadding.HorizontalThickness,
+                             result.Minimum.Height + shadowPadding.VerticalThickness));
             }
+
+            
+            contentSizeRequest = new SizeRequest(
+                new Size(result.Request.Width  + (contentSizeRequest.Request.Width  >= baseRequest.Request.Width  ? Margin.HorizontalThickness + Padding.HorizontalThickness : 0),
+                         result.Request.Height + (contentSizeRequest.Request.Height >= baseRequest.Request.Height ? Margin.VerticalThickness  + Padding.VerticalThickness   : 0)),
+                new Size(result.Minimum.Width  + (contentSizeRequest.Minimum.Width  >= baseRequest.Minimum.Width  ? Margin.HorizontalThickness + Padding.HorizontalThickness : 0),
+                         result.Minimum.Height + (contentSizeRequest.Minimum.Height >= baseRequest.Minimum.Height ? Margin.VerticalThickness + Padding.VerticalThickness : 0)));
+                                     
+            //if (condition)
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".OnSizeRequest result=[" + contentSizeRequest + "]");
+
             //System.Diagnostics.Debug.WriteLine("ContentView.OnSizeRequest: result=" + contentSizeRequest);
             return contentSizeRequest;
         }

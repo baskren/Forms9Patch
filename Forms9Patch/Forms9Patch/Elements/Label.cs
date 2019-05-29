@@ -56,6 +56,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Static Properties
         /// <summary>
         /// The default size of labels rendered on the current platform
@@ -329,6 +330,7 @@ namespace Forms9Patch
             }
         }
 
+        /*
         /// <summary>
         /// Invalidates the measure.
         /// </summary>
@@ -355,6 +357,7 @@ namespace Forms9Patch
             //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure>>");
 
         }
+        */
 
         internal void InternalInvalidateMeasure()
         {
@@ -378,6 +381,8 @@ namespace Forms9Patch
 
         //internal Action SizeAndAlign;
         internal Func<double, double, Size> RendererSizeForWidthAndFontSize;
+        internal Action<string,string> DebugMessageAction;
+        internal Func<bool> DebugCriteriaFunc;
 
         /// <summary>
         /// Sizes the size of the for width and font.
@@ -390,7 +395,7 @@ namespace Forms9Patch
             return RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
         }
 
-
+        /*
         /// <param name="widthConstraint">The available width that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <param name="heightConstraint">The available height that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <summary>
@@ -400,11 +405,34 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
+            //if ((HtmlText ?? Text)=="done")
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".GetSizeRequest ("+widthConstraint+", "+heightConstraint+")");
+
+            //if ((DebugCriteriaFunc?.Invoke() ?? false) &&  heightConstraint == 799 && widthConstraint == double.PositiveInfinity)
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".");
+
+            //DebugMessageAction?.Invoke("ENTER  args(" + widthConstraint + ", " + heightConstraint + ")",GetType()+".GetSizeRequest");
             IsDynamicallySized = true;
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
+            //if ((HtmlText ?? Text) == "done")
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".GetSizeRequest result=["+result+"]");
+            //DebugMessageAction?.Invoke("EXIT  result=["+result+"]", GetType() + ".GetSizeRequest");
             return result;
         }
 
+
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            //if ((HtmlText ?? Text) == "done")
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".OnMeasure (" + widthConstraint + ", " + heightConstraint + ")");
+            //DebugMessageAction?.Invoke("ENTER  args(" + widthConstraint + ", " + heightConstraint + ")", GetType() + ".OnMeasure");
+            var result =  base.OnMeasure(widthConstraint, heightConstraint);
+            //if ((HtmlText ?? Text) == "done")
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".OnMeasure result=[" + result + "]");
+            //DebugMessageAction?.Invoke("EXIT  result=[" + result + "]", GetType() + ".OnMeasure");
+            return result;
+        }
+        */
         #endregion
 
 
