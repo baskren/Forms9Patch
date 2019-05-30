@@ -164,27 +164,20 @@ namespace FormsGestures.iOS
 
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            var element = sender as VisualElement;
-            if (element != null)
+            if (sender is VisualElement element)
             {
                 if (e.PropertyName == "Renderer")
                     RendererDisconnect();
                 else if (e.PropertyName == GestureHandlerProperty.PropertyName)
-                {
                     _element.Behaviors.Remove(this);
-                }
-
             }
         }
 
         void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var element = sender as VisualElement;
-            if (element != null)
-            {
+            if (sender is VisualElement element)
                 if (e.PropertyName == "Renderer")
                     RendererConnect();
-            }
         }
         #endregion
 
