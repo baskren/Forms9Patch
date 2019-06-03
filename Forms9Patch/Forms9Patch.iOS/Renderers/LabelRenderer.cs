@@ -41,9 +41,10 @@ namespace Forms9Patch.iOS
 
         void Debug(string message, [CallerMemberName] string method = null, [CallerLineNumber] int lineNumber = 0)
         {
-            //var text = Element.Text ?? Element.HtmlText;
+            var text = Element.Text ?? Element.HtmlText;
             //if (text == "BACKGROUND")
-            //    System.Diagnostics.Debug.WriteLine(GetType() + "." + method + "[" + lineNumber + "]: " + message);
+            if (text?.ToLower().StartsWith("heights") ?? false)
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + method + "[" + lineNumber + "]: " + message);
         }
 
 

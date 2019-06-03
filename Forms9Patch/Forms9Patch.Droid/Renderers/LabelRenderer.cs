@@ -25,7 +25,8 @@ namespace Forms9Patch.Droid
     {
 
         #region Debug support
-        bool DebugCondition => false;// (Element?.HtmlText ?? Element?.Text)?.Equals("5") ?? false;
+        bool DebugCondition //=> false;// (Element?.HtmlText ?? Element?.Text)?.Equals("5") ?? false;
+        => (Element?.HtmlText ?? Element?.Text)?.ToLower().StartsWith("heights") ?? false;
         /*
         {
             get
@@ -178,7 +179,7 @@ namespace Forms9Patch.Droid
         /// <param name="heightConstraint">Height constraint.</param>
         public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
         {
-            if (_currentControlState.IsNullOrEmpty || Control == null)
+            if (_currentControlState.IsNullOrEmpty || Control == null || Element == null)
                 return new SizeRequest(Xamarin.Forms.Size.Zero);
 
             _currentControlState.AvailWidth = MeasureSpec.GetSize(widthConstraint);
@@ -197,9 +198,11 @@ namespace Forms9Patch.Droid
 
             if (DebugCondition)
             {
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ================== availWidth=[" + _currentControlState.AvailWidth + "] availHeight=[" + _currentControlState.AvailHeight + "]");
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
             }
+
+
 
 
             ICharSequence text = _currentControlState.JavaText;
