@@ -200,6 +200,7 @@ namespace Forms9Patch.iOS
             return NetworkStatus.NotReachable;
         }
 
+        /*
         /// <summary>
         /// Tos the network connectivity.
         /// </summary>
@@ -213,5 +214,6 @@ namespace Forms9Patch.iOS
                 return NetworkConnectivity.LAN;
             return NetworkConnectivity.None;
         }
+        */
     }
 }

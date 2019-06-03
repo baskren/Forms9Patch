@@ -31,7 +31,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
     1.6.7.1: Fixed: Intermittant failure of UWP Label to update when Text or HtmlText changes; Crash when SegmentControl.Segments.Clear() is called on empty Segments collection; Forms9Patch.Image does not update BindingContext of active ImageSource; Enhanced: HtmlText now accepts [ ' ] character as quotation mark for tag attributes;
     1.6.7: Fixed: Label Autofit in Android fails if the system font size has been changed (via device's settings);  SegmentedControl randomly has spaces between segments; Segmented labels in UWP may slowly shrink to MinFontSize when SyncSegmentFontSizes is enabled;
     1.6.6.2: Fixed: Label on Android upsizing the font beyond FontSize causing text to be truncated or not appear; Up gestures are not being triggered on Android (not a FormsGestures issue) causing button taps not to fire; New: Added async Task&lt;PopupPoppedEventArgs&gt; DelayUntilPoppedAsync() to allow inline wait until popup has been popped; Refactored: CancelAsync and PopAsync to accept a "trigger" that is the cause of the action; Added Console.WriteLines to better message when an ImageResource is not found;
-    1.6.6.1: Fixed: SVG image files without viewBox attribute fail to render; Updated Package Requirements: Xamarin.Forms 3.4.0.1008975, Newtonsoft.Json 12.0.0.0
+    1.6.6.1: Fixed: SVG image files without viewBox attribute fail to render; Updated Package Requirements: Xamarin.Forms 4.0.0.425677, Newtonsoft.Json 12.0.0.0
     1.6.6.0: New: Added PopAfter property (and Create argument) to Popups to indicate the TimeSpan at which a Popup will disappear after appearing; Added BorderColor, BorderWidth, and BorderRadius properties (redundant with OutlineColor, OutlineWidth, and OutlineRadius properties) to make it easier to switch between Forms9Patch and Xamarin.Forms elements.
     1.6.5.1: Removed: IsLongPressEnabled from buttons (a very stupid idea on my part).  If you want faster buttons, set FormsGestures.Droid.Settings.TapThreshold.
     1.6.5.0: Fixed: ListView items are deleted when they are hidden; &lt;br/&gt; tag is intermittantly ignored; Pickers not scrolling to SelectedItem when appearing; Enhancements: Default ListView cell will parse HTML; Added IconFontFamily to buttons (for IconText); Added IsLongPressEnabled to buttons (to allow faster click response as default behavior);  Changes: Update to Xamarin.Forms 3.3.0.967583; Update to Rg.Plugins.Popup v1.1.5.188; Popup's IsAnimationEnabled property is set to false to mitigate Rg.Plugins.Popup issue #122;
@@ -138,14 +138,14 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
         <dependencies>
             <group>
-                <dependency id="Xamarin.Forms" version="3.4.0.1008975" />
+                <dependency id="Xamarin.Forms" version="4.0.0.425677" />
                 <dependency id="Newtonsoft.Json" version="12.0.0.0" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.59.3" />
                 <dependency id="SkiaSharp.Svg" version="1.59.1" />
             </group>
             <group targetFramework="UAP10.0">
-                <dependency id="Xamarin.Forms" version="3.4.0.1008975" />
+                <dependency id="Xamarin.Forms" version="4.0.0.425677" />
                 <dependency id="Newtonsoft.Json" version="12.0.0.0" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.59.3" />

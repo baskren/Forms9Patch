@@ -1,6 +1,7 @@
 ﻿using System;
 namespace Forms9Patch
 {
+    /*
     /// <summary>
     /// What type of network connectivity is available?
     /// </summary>
@@ -19,4 +20,5 @@ namespace Forms9Patch
         /// </summary>
         LAN,
     }
+    */
 }

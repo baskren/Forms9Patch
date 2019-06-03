@@ -78,11 +78,12 @@ namespace Forms9Patch.iOS
             }
         }
 
+        /*
         /// <summary>
         /// Gets the network connectivity.
         /// </summary>
         /// <value>The network connectivity.</value>
         public NetworkConnectivity NetworkConnectivity => Reachability.InternetConnectionStatus().ToNetworkConnectivity();
-
+        */
     }
 }

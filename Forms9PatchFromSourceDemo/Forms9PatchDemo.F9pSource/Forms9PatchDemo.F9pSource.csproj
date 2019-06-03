@@ -13,7 +13,7 @@
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
 		<DebugType>
 		</DebugType>
-		<DefineConstants>TRACE;USE_XAML;FROM_SOURCE;RELEASE;NETSTANDARD1_3</DefineConstants>
+		<DefineConstants>TRACE;USE_XAML;FROM_SOURCE;RELEASE;</DefineConstants>
 		<Optimize>true</Optimize>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />
 	<ItemGroup>
-		<PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+		<PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
 		<PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
 		<PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
 	</ItemGroup>

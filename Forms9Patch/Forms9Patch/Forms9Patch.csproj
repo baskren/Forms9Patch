@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Forms9Patch</AssemblyName>
     <RootNamespace>Forms9Patch</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD1_3</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <!--DebugType>full</DebugType-->
-    <DefineConstants>TRACE;NETSTANDARD;RELEASE;</DefineConstants>
+    <DefineConstants>TRACE;RELEASE;</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.3\Forms9Patch.xml</DocumentationFile>
     <!--DebugType>full</DebugType-->
     <LangVersion>7.1</LangVersion>
     <!--DebugType>full</DebugType-->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.3" />
-    <PackageReference Include="SkiaSharp.Svg" Version="1.59.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
   </ItemGroup>
   <ItemGroup>

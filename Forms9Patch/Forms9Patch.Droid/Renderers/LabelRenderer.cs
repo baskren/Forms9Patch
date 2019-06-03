@@ -157,7 +157,7 @@ namespace Forms9Patch.Droid
                 fontSize = F9PTextView.DefaultTextSize;
             var paint = new TextPaint(Control.Paint);
             paint.TextSize = fontSize * _aStupidWayToImplementFontScaling;
-            var layout = new StaticLayout(_currentControlState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(_currentControlState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine(GetType() + ".LabelLayout paint.TextSize=[" + paint.TextSize + "] fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
             return layout;
@@ -212,7 +212,7 @@ namespace Forms9Patch.Droid
             {
                 var metrics = Resources.DisplayMetrics;
                 var density = metrics.DensityDpi;
-                var displayScale = (float)density / (float)DisplayMetrics.DensityDefault;
+                var displayScale = (float)density / (float)Android.Util.DisplayMetricsDensity.Default;// DisplayMetrics.DensityDefault;
 
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize ==================");
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize Control.TextSize=[" + Control.TextSize + "] BoundTextSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "] displayScale=[" + displayScale + "]");
@@ -291,7 +291,7 @@ namespace Forms9Patch.Droid
 
             Control.TextSize = tmpFontSize;
 
-            var layout = new StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(_currentControlState.JavaText, new TextPaint(Control.Paint), _currentControlState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
             int lines = _currentControlState.Lines;
             if (lines == 0 && _currentControlState.AutoFit == AutoFit.None)

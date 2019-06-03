@@ -2,10 +2,6 @@
 using System.IO;
 using CoreGraphics;
 using Foundation;
-#if NETSTANDARD
-#else
-using PCLStorage;
-#endif
 using UIKit;
 using Xamarin.Forms;
 
@@ -49,12 +45,7 @@ namespace Forms9Patch.iOS
 
     class WebViewCallBack : UIWebViewDelegate
     {
-#if NETSTANDARD
         readonly string _folderPath = P42.Utils.Environment.TemporaryStoragePath;
-#else
-        //readonly IFolder _folder = FileSystem.Current.LocalStorage;
-        readonly string _folderPath = FileSystem.Current.LocalStorage.Path;
-#endif
         readonly string _fileName;
         readonly Action<string> _onComplete;
         Size _size;

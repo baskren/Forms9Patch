@@ -84,6 +84,7 @@ namespace Forms9Patch
         /// <value>The current page.</value>
         public static Page CurrentPage => Application.Current.MainPage == null ? null : NavigationPage?.CurrentPage ?? Application.Current.MainPage;
 
+        /*
         /// <summary>
         /// Gets the current state of network connectivity.
         /// </summary>
@@ -97,6 +98,7 @@ namespace Forms9Patch
                 return Service.NetworkConnectivity;
             }
         }
+        */
 
         /// <summary>
         /// Gets the application's navigation page.

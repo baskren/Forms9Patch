@@ -21,6 +21,7 @@ namespace Forms9Patch.UWP
 
         public string Fingerprint => throw new NotImplementedException();
 
+/*
         public NetworkConnectivity NetworkConnectivity
         {
             get
@@ -33,7 +34,7 @@ namespace Forms9Patch.UWP
                 return NetworkConnectivity.LAN;
             }
         }
-
+*/
 
     }
 }

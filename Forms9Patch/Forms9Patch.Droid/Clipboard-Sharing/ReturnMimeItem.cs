@@ -123,10 +123,20 @@ namespace Forms9Patch.Droid
             {
                 if (_cursor == null)
                 {
-                    var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
                     try
                     {
+                        /*
+                        if (Android.OS.Build.VERSION.SdkInt < BuildVersionCodes.P)
+                        {
+                            var loader = new CursorLoader(Settings.Activity, _uri, null, null, null, null);
+                            _cursor = (ICursor)loader.LoadInBackground();
+                        }
+                        else
+                        {
+                        */
+                        var loader = new Android.Support.V4.Content.CursorLoader(Settings.Context, _uri, null, null, null, null);
                         _cursor = (ICursor)loader.LoadInBackground();
+                        //}
                     }
                     catch (Exception e)
                     {

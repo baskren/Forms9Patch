@@ -244,7 +244,8 @@ namespace Forms9Patch.Droid
             {
                 if (baseFormattedString != null)
                 {
-                    layout = new StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+                    layout = TextExtensions.StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+
                     if (layout.Height > availHeight)
                     {
                         var visibleLines = (int)((fontLeading + availHeight) / (fontLineHeight + fontLeading));
@@ -276,7 +277,7 @@ namespace Forms9Patch.Droid
                 }
                 else
                 {
-                    layout = new StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+                    layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
                     if (layout.Height > availHeight)
                     {
                         var visibleLines = (int)((fontLeading + availHeight) / (fontLineHeight + fontLeading));
@@ -306,7 +307,8 @@ namespace Forms9Patch.Droid
                     }
                 }
             }
-            return new StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var result = TextExtensions.StaticLayout(textFormatted, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            return result;
         }
 
         static ICharSequence TruncatedFormatted(F9PFormattedString baseFormattedString, TextPaint paint, int secondToLastEnd, int start, int end, float availWidth)
@@ -322,7 +324,7 @@ namespace Forms9Patch.Droid
             }
             int mid = (endLow + endHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Char, 0, start, mid);
-            var layout = new StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
             return TruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -339,7 +341,7 @@ namespace Forms9Patch.Droid
                 return baseFormattedString.ToSpannableString(EllipsePlacement.Start, secondToLastEnd, startHigh, end);
             int mid = (startLow + startHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Start, 0, mid, end);
-            var layout = new StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, mid, startHigh, end, availWidth);
             return StartTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLow, mid, end, availWidth);
@@ -356,7 +358,7 @@ namespace Forms9Patch.Droid
                 return baseFormattedString.ToSpannableString(EllipsePlacement.Mid, secondToLastEnd, startHigh, end, startLastVisible, midLastVisible);
             int mid = (startLow + startHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.Mid, 0, mid, end, startLastVisible, midLastVisible);
-            var layout = new StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
             return MidTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
@@ -375,7 +377,7 @@ namespace Forms9Patch.Droid
             }
             int mid = (endLow + endHigh) / 2;
             var formattedText = baseFormattedString.ToSpannableString(EllipsePlacement.End, 0, start, mid);
-            var layout = new StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(formattedText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, endLow, mid, availWidth);
             return EndTruncatedFormattedIter(baseFormattedString, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -395,7 +397,8 @@ namespace Forms9Patch.Droid
             //var truncBounds = new Android.Graphics.Rect();
             //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
             //if (truncBounds.Width() > availWidth)
-            var layout = new StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+
+            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return StartTruncatedIter(text, paint, secondToLastEnd, mid, startHigh, end, availWidth);
             return StartTruncatedIter(text, paint, secondToLastEnd, startLow, mid, end, availWidth);
@@ -415,7 +418,8 @@ namespace Forms9Patch.Droid
             //var truncBounds = new Android.Graphics.Rect();
             //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
             //if (truncBounds.Width() > availWidth)
-            var layout = new StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+
+            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
             return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, startLow, mid, end, availWidth);
@@ -435,7 +439,9 @@ namespace Forms9Patch.Droid
             //var truncBounds = new Android.Graphics.Rect();
             //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
             //if (truncBounds.Width() > availWidth-Scale)
-            var layout = new StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+
+            var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+
             if (layout.GetLineWidth(0) > availWidth)
                 return EndTruncatedIter(text, paint, secondToLastEnd, start, endLow, mid, availWidth);
             return EndTruncatedIter(text, paint, secondToLastEnd, start, mid, endHigh, availWidth);
@@ -484,7 +490,7 @@ namespace Forms9Patch.Droid
             for (result = max; result > min; result -= step)
             {
                 paint.TextSize = result * Scale * FontScale;
-                var layout = new StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+                var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
                 if (layout.LineCount <= lines)
                     return result;
             }
@@ -513,7 +519,7 @@ namespace Forms9Patch.Droid
 
             float mid = (max + min) / 2.0f;
             paint.TextSize = mid * Scale;
-            var layout = new StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(text, paint, availWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             var lineCount = layout.LineCount;
             var height = layout.Height - layout.BottomPadding + layout.TopPadding;
             if (height > availHeight)

@@ -105,6 +105,7 @@ namespace Forms9Patch.Droid
             }
         }
 
+        /*
         public NetworkConnectivity NetworkConnectivity
         {
             get
@@ -117,6 +118,7 @@ namespace Forms9Patch.Droid
                 return NetworkConnectivity.Mobile;
             }
         }
+        */
 
         public static string byte2HexFormatted(byte[] arr)
         {

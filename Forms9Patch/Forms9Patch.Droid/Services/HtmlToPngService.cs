@@ -100,7 +100,6 @@ namespace Forms9Patch.Droid
             var bitmap = Bitmap.CreateBitmap(webView.DrawingCache);
 
 
-
             if (!_dir.Exists())
                 _dir.Mkdir();
 

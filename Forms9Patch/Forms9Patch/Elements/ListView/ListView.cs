@@ -815,7 +815,7 @@ namespace Forms9Patch
                 if (tappedItemWrapper?.Source != null)
                 {
                     // null source items are not tappable or selectable
-                    var itemTappedArgs = new ItemTappedEventArgs(group.Source, tappedItemWrapper.Source, tappedItemWrapper.CellView);
+                    var itemTappedArgs = new ItemTappedEventArgs(tappedItemWrapper);
                     ItemTapped?.Invoke(this, itemTappedArgs);
                     e.Handled = itemTappedArgs.Handled;
                     switch (GroupToggleBehavior)
@@ -840,7 +840,7 @@ namespace Forms9Patch
                             {
                                 RemoveSelectedItemWrapper(_selectedItemWrapper);
                                 AddSelectedItemWrapper(tappedItemWrapper);
-                                ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group.Source, tappedItemWrapper.Source, tappedItemWrapper.CellView));
+                                ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(tappedItemWrapper));
                             }
                             break;
                         case GroupToggleBehavior.Multiselect:
@@ -853,7 +853,7 @@ namespace Forms9Patch
                             else
                             {
                                 AddSelectedItemWrapper(tappedItemWrapper);
-                                ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(group.Source, tappedItemWrapper.Source, tappedItemWrapper.CellView));
+                                ItemSelected?.Invoke(this, new SelectedItemChangedEventArgs(tappedItemWrapper));
                             }
                             break;
                     }
@@ -903,7 +903,7 @@ namespace Forms9Patch
                 if (!_visibleItemWrappers.Contains(itemWrapper))
                     _visibleItemWrappers.Add(itemWrapper);
                 if (itemWrapper.Source != null)
-                    ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(itemWrapper.Source));
+                    ItemAppearing?.Invoke(this, new ItemVisibilityEventArgs(itemWrapper.Source, itemWrapper.Index));
             }
             if (_resetScrollToSelected)
             {
@@ -930,7 +930,7 @@ namespace Forms9Patch
                     _visibleItemWrappers.Remove(itemWrapper);
                 if (itemWrapper.Source != null)
                 {
-                    ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(itemWrapper.Source));
+                    ItemDisappearing?.Invoke(this, new ItemVisibilityEventArgs(itemWrapper.Source, itemWrapper.Index));
                     if (itemWrapper.Source == SelectedItem)
                         _listView.SelectedItem = null;
                 }

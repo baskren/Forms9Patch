@@ -42,12 +42,13 @@ namespace Forms9Patch
         /// <value>The fingerprint.</value>
         string Fingerprint { get; }
 
+        /*
         /// <summary>
         /// Gets the current network connectivity.
         /// </summary>
         /// <value>The network availability.</value>
         NetworkConnectivity NetworkConnectivity { get; }
-
+        */
 
     }
 }

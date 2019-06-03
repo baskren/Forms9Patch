@@ -12,10 +12,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
-#if NETSTANDARD
-#else
-using PCLStorage;
-#endif
 
 [assembly: Dependency(typeof(Forms9Patch.UWP.HtmlToPngService))]
 namespace Forms9Patch.UWP

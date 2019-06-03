@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Android.Views;
 
 namespace Forms9Patch.Droid
@@ -48,5 +50,40 @@ namespace Forms9Patch.Droid
             return child;
         }
 
+        public static void GetBitmap(this Android.Views.View view, System.Action<Android.Graphics.Bitmap> callback)
+        {
+            var window = Settings.Activity.Window;
+            var bitmap = Android.Graphics.Bitmap.CreateBitmap(view.Width, view.Height, Android.Graphics.Bitmap.Config.Argb8888);
+            var locationInWindow = new int[2];
+            view.GetLocationInWindow(locationInWindow);
+            try
+            {
+                var rect = new Android.Graphics.Rect(locationInWindow[0], locationInWindow[1], locationInWindow[0] + view.Width, locationInWindow[1] + view.Height);
+                PixelCopy.Request(window, rect, bitmap, new PixelCopyListener(callback, bitmap), null);
+            }
+            catch (Java.Lang.IllegalArgumentException e)
+            {
+                e.PrintStackTrace();
+            }
+        }
+
+    }
+
+    internal class PixelCopyListener : Java.Lang.Object, PixelCopy.IOnPixelCopyFinishedListener
+    {
+        System.Action<Android.Graphics.Bitmap> _callback;
+        Android.Graphics.Bitmap _bitmap;
+
+        public PixelCopyListener(System.Action<Android.Graphics.Bitmap> callback, Android.Graphics.Bitmap bitmap)
+        {
+            _callback = callback;
+            _bitmap = bitmap;
+        }
+
+        public void OnPixelCopyFinished(int copyResult)
+        {
+            if (copyResult == (int)PixelCopyResult.Success)
+                _callback?.Invoke(_bitmap);
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Forms9Patch.Droid
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>
         public HardwareKeyPageRenderer(Context context) : base(context) { }
-#pragma warning enable CS0618w
+#pragma warning restore CS0618
 
         [Obsolete("This constructor is obsolete as of version 2.5. Please use PageRenderer(Context) instead.")]
         public HardwareKeyPageRenderer() { }

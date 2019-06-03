@@ -8,10 +8,6 @@ using Xamarin.Forms;
 using P42.Utils;
 using SharpDX.DirectWrite;
 using Windows.UI.Xaml.Controls;
-#if NETSTANDARD
-#else
-using PCLStorage;
-#endif
 
 [assembly: Dependency(typeof(Forms9Patch.UWP.FontService))]
 namespace Forms9Patch.UWP
