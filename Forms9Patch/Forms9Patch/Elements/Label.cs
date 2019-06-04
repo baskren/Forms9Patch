@@ -426,8 +426,7 @@ namespace Forms9Patch
 
         //internal Action SizeAndAlign;
         internal Func<double, double, Size> RendererSizeForWidthAndFontSize;
-        internal Action<string, string> DebugMessageAction;
-        internal Func<bool> DebugCriteriaFunc;
+        internal Func<double, double, SizeRequest> Draw;
 
         /// <summary>
         /// Sizes the size of the for width and font.
@@ -474,6 +473,7 @@ namespace Forms9Patch
         {
             P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
             base.OnSizeAllocated(width, height);
+            Draw?.Invoke(width, height);
             P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
         }
 
