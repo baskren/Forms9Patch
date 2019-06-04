@@ -33,5 +33,19 @@ namespace Forms9Patch.iOS
             return numberOfLines;
         }
 
+
+        public static void PropertiesFromControlState(this UILabel label, TextControlState state)
+        {
+            if (state.AttributedString != null)
+                label.AttributedText = state.AttributedString;
+            else
+                label.Text = state.Text;
+
+            label.Font = state.Font;
+            label.TextAlignment = state.HorizontalTextAlignment;
+            label.LineBreakMode = state.LineBreakMode;
+        }
+
+
     }
 }

@@ -56,35 +56,35 @@ namespace Forms9Patch.Droid
         */
 
 
+        /*
+    void DebugGetDesiredRequest(string mark, double widthConstraint, double heightConstraint, SizeRequest request, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+    {
+        //P42.Utils.Debug.Message(mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
+    }
 
-        void DebugGetDesiredRequest(string mark, double widthConstraint, double heightConstraint, SizeRequest request, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+    string DebugControlSizes()
+    {
+        if (Control != null)
         {
-            P42.Utils.Debug.Message(mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
+            var result = "Ctrl.MaxLines=[" + Control.MaxLines + "] .Width=[" + Control?.Width + "] .Height=[" + Control?.Height + "] ";
+            if (!double.IsInfinity(Control.MaxWidth) || !double.IsInfinity(Control.MaxHeight))
+                result += ".MaxSz=[" + Control?.MaxWidth + "," + Control?.MaxHeight + "] ";
+            if (Control.MinWidth != 0 || Control.MinHeight != 0)
+                result += ".MinSz=[" + Control?.MinWidth + "," + Control?.MinHeight + "] ";
+            if (Control.LineHeight != 0)
+                result += ".LineHt=[" + Control.LineHeight + "] ";
+
+            return result;
         }
-
-        string DebugControlSizes()
-        {
-            if (Control != null)
-            {
-                var result = "Ctrl.MaxLines=[" + Control.MaxLines + "] .Width=[" + Control?.Width + "] .Height=[" + Control?.Height + "] ";
-                if (!double.IsInfinity(Control.MaxWidth) || !double.IsInfinity(Control.MaxHeight))
-                    result += ".MaxSz=[" + Control?.MaxWidth + "," + Control?.MaxHeight + "] ";
-                if (Control.MinWidth != 0 || Control.MinHeight != 0)
-                    result += ".MinSz=[" + Control?.MinWidth + "," + Control?.MinHeight + "] ";
-                if (Control.LineHeight != 0)
-                    result += ".LineHt=[" + Control.LineHeight + "] ";
-
-                return result;
-            }
-            return null;
-        }
-
+        return null;
+    }
+    */
         #endregion
 
 
 
-        static int _instances = 0;
-        int _instance;
+        static int _instances;
+        public int _instance;
         //double _fittedFontSize = -1;
 
         ColorStateList _labelTextColorDefault;
@@ -108,7 +108,7 @@ namespace Forms9Patch.Droid
             AutoPackage = false;
         }
 
-
+        /*
         bool showDebugMsg
         {
             get
@@ -124,13 +124,14 @@ namespace Forms9Patch.Droid
                 return (Element.HtmlText ?? Element.Text ?? "");
             }
         }
+        */
 
         Xamarin.Forms.Size LabelXamarinSize(double widthConstraint, double fontSize)
         {
             var layout = LabelLayout((widthConstraint > double.MaxValue / 3 ? int.MaxValue / 2 : (int)widthConstraint), (float)fontSize);
             if (layout == null)
                 return Xamarin.Forms.Size.Zero;
-            P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
             float width = 0;
             float height = 0;
             for (int i = 0; i < layout.LineCount; i++)
@@ -143,7 +144,7 @@ namespace Forms9Patch.Droid
                     height = blockHeight;
             }
             var result = new Xamarin.Forms.Size(System.Math.Ceiling(width), System.Math.Ceiling(height));
-            P42.Utils.Debug.Message(Element, "EXIT result=[" + result + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT result=[" + result + "]");
             return result;
         }
 
@@ -153,33 +154,35 @@ namespace Forms9Patch.Droid
                 return null;
             if (_currentDrawState?.JavaText == null)
                 return null;
-            P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
             if (fontSize < 0.001)
                 fontSize = F9PTextView.DefaultTextSize;
-            var paint = new TextPaint(Control.Paint);
-            paint.TextSize = fontSize * _aStupidWayToImplementFontScaling;
+            var paint = new TextPaint(Control.Paint)
+            {
+                TextSize = fontSize * _aStupidWayToImplementFontScaling
+            };
             var layout = TextExtensions.StaticLayout(_currentDrawState.JavaText, paint, widthConstraint, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            P42.Utils.Debug.Message(Element, "EXIT paint.TextSize=[" + paint.TextSize + "] fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT paint.TextSize=[" + paint.TextSize + "] fontSize=[" + fontSize + "] size=[" + layout.Width + ", " + layout.Height + "]");
             return layout;
         }
 
         /*
         void LayoutForSize(int width, int height)
         {
-            P42.Utils.Debug.Message(Element, "ENTER width=[" + width + "] height=[" + height + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER width=[" + width + "] height=[" + height + "]");
             //var widthConstraint = MeasureSpec.MakeMeasureSpec(width, MeasureSpecMode.AtMost);
             //var heightConstraint = MeasureSpec.MakeMeasureSpec(height, MeasureSpecMode.AtMost);
             //var result = GetDesiredSize(widthConstraint, heightConstraint);
             var result = DrawLabel(width, height);
-            P42.Utils.Debug.Message(Element, "EXIT result=[" + result + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT result=[" + result + "]");
         }
         */
 
 
         F9PTextView _measureControl;
-        TextControlState _currentDesiredSizeState;
-        SizeRequest? _lastDesiredSizeResult;
-        TextControlState _lastDesiredSizeState;
+        TextControlState _currentMeasureState;
+        SizeRequest? _lastMeasureResult;
+        TextControlState _lastMeasureState;
 
         TextControlState _currentDrawState;
         SizeRequest? _lastDrawResult;
@@ -200,19 +203,19 @@ namespace Forms9Patch.Droid
             _currentDrawState.AvailWidth = (int)System.Math.Floor(width * displayScale);
             _currentDrawState.AvailHeight = (int)System.Math.Floor(height * displayScale);
 
-            P42.Utils.Debug.Message(Element, "ENTER  _currentDrawState.AvailWidth=[" + _currentDrawState.AvailWidth + "]  _currentDrawState.AvailHeight=[" + _currentDrawState.AvailHeight + "]");
-            P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentDrawState.AvailWidth=[" + _currentDrawState.AvailWidth + "]  _currentDrawState.AvailHeight=[" + _currentDrawState.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
             if (_currentDrawState == _lastDrawState && _lastDrawResult.HasValue)
             {
-                P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDesiredSizeResult.Value + "]");
-                return _lastDesiredSizeResult.Value;
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastMeasureResult.Value + "]");
+                return _lastMeasureResult.Value;
             }
 
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
             _lastDrawState = new TextControlState(_currentDrawState);
 
-            P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]");
             return _lastDrawResult.Value;
         }
 
@@ -237,53 +240,55 @@ namespace Forms9Patch.Droid
             if (width <= 0 || height <= 0)
                 return new SizeRequest(Xamarin.Forms.Size.Zero);
 
-            _currentDesiredSizeState = new TextControlState(_currentDrawState)
+            _currentMeasureState = new TextControlState(_currentDrawState)
             {
                 AvailWidth = width,
                 AvailHeight = height
             };
 
-            P42.Utils.Debug.Message(Element, "ENTER  _currentControlState.AvailWidth=[" + _currentDesiredSizeState.AvailWidth + "]  _currentControlState.AvailHeight=[" + _currentDesiredSizeState.AvailHeight + "]");
-            //P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentControlState.AvailWidth=[" + _currentMeasureState.AvailWidth + "]  _currentControlState.AvailHeight=[" + _currentMeasureState.AvailHeight + "]");
+            ////P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
-            if (_currentDesiredSizeState == _lastDesiredSizeState && _lastDesiredSizeResult.HasValue)
+            if (_currentMeasureState == _lastMeasureState && _lastMeasureResult.HasValue)
             {
-                P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDesiredSizeResult.Value + "]");
-                return _lastDesiredSizeResult.Value;
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastMeasureResult.Value + "]");
+                return _lastMeasureResult.Value;
             }
 
             _measureControl = _measureControl ?? new F9PTextView(Settings.Context);
 
-            _lastDesiredSizeResult = InternalLayout(_measureControl, _currentDesiredSizeState);
-            _lastDesiredSizeState = new TextControlState(_currentDesiredSizeState);
+            _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
+            _lastMeasureState = new TextControlState(_currentMeasureState);
 
-            P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDesiredSizeResult + "]");
-            return _lastDesiredSizeResult.Value;
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastMeasureResult + "]");
+            return _lastMeasureResult.Value;
         }
 
-        SizeRequest InternalLayout(F9PTextView control, TextControlState currentState)
+        SizeRequest InternalLayout(F9PTextView control, TextControlState state)
         {
 
-            P42.Utils.Debug.Message(Element, "ENTER  _currentControlState.AvailWidth=[" + currentState.AvailWidth + "]  _currentControlState.AvailHeight=[" + currentState.AvailHeight + "]");
-            P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  state.AvailWidth=[" + state.AvailWidth + "]  state.AvailHeight=[" + state.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "control.TextSize=[" + control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
 
-            ICharSequence text = currentState.JavaText;
+            ICharSequence text = state.JavaText;
             var tmpFontSize = BoundTextSize(Element.FontSize);
-            control.Typeface = currentState.Typeface;
-            control.SetTextColor(currentState.TextColor.ToAndroid());
+            control.Typeface = state.Typeface;
+            control.SetTextColor(state.TextColor.ToAndroid());
             control.TextSize = tmpFontSize;
             _aStupidWayToImplementFontScaling = control.TextSize / tmpFontSize;
             //control.TextSize = tmpFontSize / _aStupidWayToImplementFontScaling;
 
+            /*
             if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
             {
                 var metrics = Resources.DisplayMetrics;
                 var density = metrics.DensityDpi;
                 var displayScale = (float)density / (float)Android.Util.DisplayMetricsDensity.Default;// DisplayMetrics.DensityDefault;
 
-                P42.Utils.Debug.Message(Element, "control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "] displayScale=[" + displayScale + "]");
+                //P42.Utils.Debug.Message(Element, "control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "] fontScale=[" + _aStupidWayToImplementFontScaling + "] displayScale=[" + displayScale + "]");
             }
+            */
 
             control.SetSingleLine(false);
             control.SetMaxLines(int.MaxValue / 2);
@@ -297,44 +302,44 @@ namespace Forms9Patch.Droid
             var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
 
-            P42.Utils.Debug.Message(Element, "Element.Line=[" + Element.Lines + "] _currentControlState.Linst=[" + currentState.Lines + "]");
+            //P42.Utils.Debug.Message(Element, "Element.Line=[" + Element.Lines + "] _currentControlState.Linst=[" + state.Lines + "]");
 
-            if (currentState.Lines == 0)
+            if (state.Lines == 0)
             {
-                if (currentState.AvailHeight < int.MaxValue / 3)
+                if (state.AvailHeight < int.MaxValue / 3)
                 {
-                    tmpFontSize = F9PTextView.ZeroLinesFit(currentState.JavaText, new TextPaint(control.Paint), ModelMinFontSize, tmpFontSize, currentState.AvailWidth, currentState.AvailHeight);
-                    P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
+                    tmpFontSize = F9PTextView.ZeroLinesFit(state.JavaText, new TextPaint(control.Paint), ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    //P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
             else
             {
-                if (currentState.AutoFit == AutoFit.Lines)
+                if (state.AutoFit == AutoFit.Lines)
                 {
-                    if (currentState.AvailHeight > int.MaxValue / 3)
+                    if (state.AvailHeight > int.MaxValue / 3)
                     {
-                        tmpHt = (int)System.Math.Round(currentState.Lines * fontLineHeight + (currentState.Lines - 1) * fontLeading);
-                        P42.Utils.Debug.Message(Element, "AutoFit.Lines A (MAX HEIGHT) tmpHt=[" + tmpHt + "]");
+                        tmpHt = (int)System.Math.Round(state.Lines * fontLineHeight + (state.Lines - 1) * fontLeading);
+                        //P42.Utils.Debug.Message(Element, "AutoFit.Lines A (MAX HEIGHT) tmpHt=[" + tmpHt + "]");
                     }
                     else
                     {
                         var fontPointSize = tmpFontSize;
                         var lineHeightRatio = fontLineHeight / fontPointSize;
                         var leadingRatio = fontLeading / fontPointSize;
-                        tmpFontSize = ((currentState.AvailHeight / (currentState.Lines + leadingRatio * (currentState.Lines - 1))) / lineHeightRatio - 0.1f);
-                        P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
+                        tmpFontSize = ((state.AvailHeight / (state.Lines + leadingRatio * (state.Lines - 1))) / lineHeightRatio - 0.1f);
+                        //P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
                     }
                 }
-                else if (currentState.AutoFit == AutoFit.Width)
+                else if (state.AutoFit == AutoFit.Width)
                 {
-                    tmpFontSize = F9PTextView.WidthFit(currentState.JavaText, new TextPaint(control.Paint), currentState.Lines, ModelMinFontSize, tmpFontSize, currentState.AvailWidth, currentState.AvailHeight);
-                    P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
+                    tmpFontSize = F9PTextView.WidthFit(state.JavaText, new TextPaint(control.Paint), state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    //P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
 
-            P42.Utils.Debug.Message(Element, "Fit Complete: control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            //P42.Utils.Debug.Message(Element, "Fit Complete: control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
             tmpFontSize = BoundTextSize(tmpFontSize);
-            P42.Utils.Debug.Message(Element, "Bound Complete: control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            //P42.Utils.Debug.Message(Element, "Bound Complete: control.TextSize=[" + control.TextSize + "] tmpFontSize=[" + tmpFontSize + "]");
 
             // this is the optimal font size.  Let it be known!
             if (System.Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.1)
@@ -346,45 +351,45 @@ namespace Forms9Patch.Droid
                     else
                         Element.FittedFontSize = tmpFontSize;
                 }
-                P42.Utils.Debug.Message(Element, "Element.FittedFontSize=[" + tmpFontSize + "]");
+                //P42.Utils.Debug.Message(Element, "Element.FittedFontSize=[" + tmpFontSize + "]");
             }
 
             var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
             if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
             {
                 tmpFontSize = syncFontSize;
-                P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
+                //P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
             }
 
             control.TextSize = tmpFontSize;
 
-            var layout = TextExtensions.StaticLayout(currentState.JavaText, new TextPaint(control.Paint), currentState.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
+            var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
-            int lines = currentState.Lines;
-            if (lines == 0 && currentState.AutoFit == AutoFit.None)
+            int lines = state.Lines;
+            if (lines == 0 && state.AutoFit == AutoFit.None)
             {
                 for (int i = 0; i < layout.LineCount; i++)
                 {
-                    if (layout.GetLineBottom(i) <= currentState.AvailHeight - layout.TopPadding - layout.BottomPadding)
+                    if (layout.GetLineBottom(i) <= state.AvailHeight - layout.TopPadding - layout.BottomPadding)
                         lines++;
                     else
                         break;
                 }
-                P42.Utils.Debug.Message(Element, "lines=[" + lines + "]");
+                //P42.Utils.Debug.Message(Element, "lines=[" + lines + "]");
             }
-            if (layout.Height > currentState.AvailHeight || (lines > 0 && layout.LineCount > lines))
+            if (layout.Height > state.AvailHeight || (lines > 0 && layout.LineCount > lines))
             {
-                if (currentState.Lines == 1)
+                if (state.Lines == 1)
                 {
                     control.SetSingleLine(true);
                     control.SetMaxLines(1);
-                    control.Ellipsize = currentState.LineBreakMode.ToEllipsize();
-                    P42.Utils.Debug.Message(Element, "Ellipsize");
+                    control.Ellipsize = state.LineBreakMode.ToEllipsize();
+                    //P42.Utils.Debug.Message(Element, "Ellipsize");
                 }
                 else
                 {
-                    layout = F9PTextView.Truncate(currentState.Text, Element.F9PFormattedString, new TextPaint(control.Paint), currentState.AvailWidth, currentState.AvailHeight, Element.AutoFit, Element.LineBreakMode, ref lines, ref text);
-                    P42.Utils.Debug.Message(Element, "Truncate");
+                    layout = F9PTextView.Truncate(state.Text, Element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, Element.AutoFit, Element.LineBreakMode, ref lines, ref text);
+                    //P42.Utils.Debug.Message(Element, "Truncate");
                 }
             }
             lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
@@ -392,23 +397,23 @@ namespace Forms9Patch.Droid
             {
                 tmpHt = layout.GetLineBottom(i);
                 var width = layout.GetLineWidth(i);
-                P42.Utils.Debug.Message(Element, "Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "]");
+                //P42.Utils.Debug.Message(Element, "Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "]");
                 //System.Diagnostics.Debug.WriteLine("\t\tright=["+right+"]");
                 if (width > tmpWd)
                     tmpWd = (int)System.Math.Ceiling(width);
             }
-            P42.Utils.Debug.Message(Element, "tmpWd=[" + tmpWd + "] layout.Width=[" + layout.Width + "]");
-            if (currentState.AutoFit == AutoFit.None && currentState.Lines > 0)
-                control.SetMaxLines(currentState.Lines);
+            //P42.Utils.Debug.Message(Element, "tmpWd=[" + tmpWd + "] layout.Width=[" + layout.Width + "]");
+            if (state.AutoFit == AutoFit.None && state.Lines > 0)
+                control.SetMaxLines(state.Lines);
 
             //System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\ttmp.size=[" + tmpWd + ", " + tmpHt + "]");
-            if (Element.IsDynamicallySized && currentState.Lines > 0 && currentState.AutoFit == AutoFit.Lines)
+            if (Element.IsDynamicallySized && state.Lines > 0 && state.AutoFit == AutoFit.Lines)
             {
                 fontMetrics = control.Paint.GetFontMetrics();
                 fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
                 fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
-                tmpHt = (int)(fontLineHeight * currentState.Lines + fontLeading * (currentState.Lines - 1));
-                P42.Utils.Debug.Message(Element, "DynamicallySized: tmpHt=[" + tmpHt + "]");
+                tmpHt = (int)(fontLineHeight * state.Lines + fontLeading * (state.Lines - 1));
+                //P42.Utils.Debug.Message(Element, "DynamicallySized: tmpHt=[" + tmpHt + "]");
             }
 
             control.Gravity = Element.HorizontalTextAlignment.ToHorizontalGravityFlags() | Element.VerticalTextAlignment.ToVerticalGravityFlags();
@@ -419,13 +424,14 @@ namespace Forms9Patch.Droid
                 control.TextFormatted = text;
 
             var result = new SizeRequest(new Xamarin.Forms.Size(System.Math.Ceiling((double)tmpWd), System.Math.Ceiling((double)tmpHt)), new Xamarin.Forms.Size(10, System.Math.Ceiling((double)tmpHt)));
+            /*
             if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
             {
                 //control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
                 //control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
 
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t[" + elementText + "] ");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize(" + (currentState.AvailWidth > int.MaxValue / 3 ? "infinity" : currentState.AvailWidth.ToString()) + "," + (currentState.AvailHeight > int.MaxValue / 3 ? "infinity" : currentState.AvailHeight.ToString()) + ") exit (" + result + ")");
+                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize(" + (state.AvailWidth > int.MaxValue / 3 ? "infinity" : state.AvailWidth.ToString()) + "," + (state.AvailHeight > int.MaxValue / 3 ? "infinity" : state.AvailHeight.ToString()) + ") exit (" + result + ")");
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Visibility=[" + control.Visibility + "]");
                 //System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextFormatted=[" + control.TextFormatted + "]");
                 System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextSize=[" + control.TextSize + "]");
@@ -442,11 +448,12 @@ namespace Forms9Patch.Droid
                 //control.BringToFront();
                 //System.Diagnostics.Debug.WriteLine("\t\t");
             }
+            */
 
             if (Element.LineBreakMode == LineBreakMode.NoWrap)
                 control.SetSingleLine(true);
 
-            P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]");
             return result;
         }
 
@@ -487,7 +494,7 @@ namespace Forms9Patch.Droid
                     LineBreakMode = Element.LineBreakMode,
                     SyncFontSize = (float)Element.SynchronizedFontSize,
                 };
-                _lastDesiredSizeState = null;
+                _lastMeasureState = null;
 
                 if (Control != null)
                 {
@@ -583,17 +590,17 @@ namespace Forms9Patch.Droid
 
         void Layout()
         {
-            P42.Utils.Debug.Message(Element, "ENTER");
+            //P42.Utils.Debug.Message(Element, "ENTER");
             if (Element.IsVisible)
             {
-                if (Element.Width > -1 && Element.Height > -1 && (_lastDesiredSizeState == null || System.Math.Abs(Element.Width - _lastDesiredSizeState.AvailWidth) > 1 || System.Math.Abs(Element.Height - _lastDesiredSizeState.AvailHeight) > 1))
+                if (Element.Width > -1 && Element.Height > -1 && (_lastMeasureState == null || System.Math.Abs(Element.Width - _lastMeasureState.AvailWidth) > 1 || System.Math.Abs(Element.Height - _lastMeasureState.AvailHeight) > 1))
                     //LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
                     //LayoutForSize(Element.Width, Element.Height);
                     DrawLabel(Element.Width, Element.Height);
                 else
                     RequestLayout();
             }
-            P42.Utils.Debug.Message(Element, "EXIT");
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateLineBreakMode()

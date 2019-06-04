@@ -266,15 +266,17 @@ namespace Forms9Patch
         static Label()
         {
             Settings.ConfirmInitialization();
-            P42.Utils.Debug.ConditionFunc = (obj) =>
+            /*P42.Utils.Debug.ConditionFunc = (obj) =>
             {
                 if (obj is Label label)
                 {
-                    var result = ((label.HtmlText ?? label.Text)?.ToLower().StartsWith("heights") ?? false);
+                    //var result = ((label.HtmlText ?? label.Text)?.ToLower().StartsWith("heights") ?? false);
+                    var result = ((label.HtmlText ?? label.Text)?.Contains("\uE872") ?? false);
                     return result;
                 }
                 return false;
             };
+            */
         }
 
 
@@ -289,7 +291,7 @@ namespace Forms9Patch
         public Label()
         {
             _id = instances++;
-            SizeChanged += OnSizeChanged;
+            //SizeChanged += OnSizeChanged;
         }
 
         /// <summary>
@@ -326,8 +328,8 @@ namespace Forms9Patch
             {
                 if (HtmlText != null)
                 {
-                    F9PFormattedString = new HTMLMarkupString(HtmlText);
                     Text = null;
+                    F9PFormattedString = new HTMLMarkupString(HtmlText);
                 }
                 else
                     F9PFormattedString = null;
@@ -350,18 +352,7 @@ namespace Forms9Patch
 
             }
             else if (propertyName == TextProperty.PropertyName && Text != null)
-            {
-                F9PFormattedString = null;
                 HtmlText = null;
-                //_listener.Tapped -= OnTapped;
-                if (_listener != null)
-                {
-                    _listener.Tapped -= OnTapped;
-                    _listener.Down -= OnDown;
-                    _listener.Dispose();
-                    _listener = null;
-                }
-            }
 
             base.OnPropertyChanged(propertyName);
 
@@ -436,13 +427,13 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
-            P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
+            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
             var result = RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
-            P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
+            //P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
             return result;
         }
 
-
+        /*
         /// <param name="widthConstraint">The available width that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <param name="heightConstraint">The available height that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <summary>
@@ -452,45 +443,46 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
+            //P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
 
             IsDynamicallySized = true;
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
+            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
 
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
+            //P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnMeasure(widthConstraint, heightConstraint);
-            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
+            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
-
+        */
         protected override void OnSizeAllocated(double width, double height)
         {
-            P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
+            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
             base.OnSizeAllocated(width, height);
             Draw?.Invoke(width, height);
-            P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
+            //P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
         }
 
+        /*
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
-            P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
+            //P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
+            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
+            //P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
 
         }
-
+        */
 
         #endregion
 
@@ -515,8 +507,7 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                 foreach (var span in F9PFormattedString._spans)
                 {
-                    var actionSpan = span as ActionSpan;
-                    if (actionSpan != null)
+                    if (span is ActionSpan actionSpan)
                     {
                         //System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                         if (index >= actionSpan.Start && index <= actionSpan.End)
@@ -545,8 +536,7 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                 foreach (var span in F9PFormattedString._spans)
                 {
-                    var actionSpan = span as ActionSpan;
-                    if (actionSpan != null)
+                    if (span is ActionSpan actionSpan)
                     {
                         //System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                         if (index >= actionSpan.Start && index <= actionSpan.End)

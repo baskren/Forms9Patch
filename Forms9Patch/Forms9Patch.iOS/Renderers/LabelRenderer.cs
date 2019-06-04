@@ -23,32 +23,47 @@ namespace Forms9Patch.iOS
             Forms9Patch.Label.DefaultFontSize = UIFont.LabelFontSize;
         }
 
-        NSString ControlText;
-        NSAttributedString ControlAttributedText;
-        UIColor ControlTextColor;
-        UIFont ControlFont;
-        nfloat ControlFontPointSize;
-        UIFontDescriptor FontDescriptor;
-        UILineBreakMode ControlLineBreakMode = UILineBreakMode.CharacterWrap;
-        int ControlLines = -1;
 
-        SizeRequest LastDesiredSize = new SizeRequest(Size.Zero, Size.Zero);
-        double LastMinFontSize = (double)Label.MinFontSizeProperty.DefaultValue;
+        TextControlState _currentDrawState;
+        TextControlState _lastDrawState;
+        SizeRequest? _lastDrawResult;
 
-        double LastWidthConstraint = -1;
-        double LastHeightContraint = -1;
-
-
-        void Debug(string message, [CallerMemberName] string method = null, [CallerLineNumber] int lineNumber = 0)
-        {
-            var text = Element.Text ?? Element.HtmlText;
-            //if (text == "BACKGROUND")
-            if (text?.ToLower().StartsWith("heights") ?? false)
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + method + "[" + lineNumber + "]: " + message);
-        }
+        UILabel _measureControl;
+        UILabel MeasureControl => _measureControl = _measureControl ?? new UILabel();
+        TextControlState _currentMeasureState;
+        SizeRequest? _lastMeasureResult;
+        TextControlState _lastMeasureState;
 
 
         #region Xamarin layout cycle
+        SizeRequest DrawLabel(double width, double height)
+        {
+            if (_currentDrawState.IsNullOrEmpty || Control == null || Element == null)
+                return new SizeRequest(Xamarin.Forms.Size.Zero);
+
+            if (width < 0 || height < 0)
+                return new SizeRequest(Xamarin.Forms.Size.Zero);
+
+            //_currentDrawState = _currentDrawState ?? new TextControlState(_currentDesiredSizeState);
+            //var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
+            _currentDrawState.AvailWidth = width; // (int)System.Math.Floor(width * displayScale);
+            _currentDrawState.AvailHeight = height; // (int)System.Math.Floor(height * displayScale);
+
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentDrawState.AvailWidth=[" + _currentDrawState.AvailWidth + "]  _currentDrawState.AvailHeight=[" + _currentDrawState.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "Control.Font.PointSize=[" + Control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
+
+            if (_currentDrawState == _lastDrawState && _lastDrawResult.HasValue)
+            {
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDrawResult.Value + "]");
+                return _lastDrawResult.Value;
+            }
+
+            _lastDrawResult = InternalLayout(Control, _currentDrawState);
+            _lastDrawState = new TextControlState(_currentDrawState);
+
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]");
+            return _lastDrawResult.Value;
+        }
 
         /// <summary>
         /// Gets the size of the desired.
@@ -61,217 +76,195 @@ namespace Forms9Patch.iOS
             if (widthConstraint < 0 || heightConstraint < 0)
                 return new SizeRequest(Size.Zero);
 
-            if (Control == null || Element == null)
+            if (_currentDrawState.IsNullOrEmpty || Control == null || Element == null)
                 return new SizeRequest(Size.Zero);
 
-            if (string.IsNullOrEmpty((ControlText ?? ControlAttributedText?.ToString())))
+            if (string.IsNullOrEmpty(_currentDrawState.Text) && (_currentDrawState.AttributedString == null || _currentDrawState.AttributedString.Length < 1))
                 return new SizeRequest(Size.Zero);
 
-            UpdateFont();
-
-            //if (Invalid || Math.Abs(widthConstraint - LastWidthConstraint) > 0.01 || Math.Abs(heightConstraint - LastHeightContraint) > 0.01 || Math.Abs(Element.MinFontSize - LastMinFontSize) > 0.01)
+            _currentMeasureState = new TextControlState(_currentDrawState)
             {
-
-                LastWidthConstraint = widthConstraint;
-                LastHeightContraint = heightConstraint;
-                LastMinFontSize = Element.MinFontSize;
-
-                switch (Element.LineBreakMode)
-                {
-                    case LineBreakMode.HeadTruncation:
-                        ControlLineBreakMode = UILineBreakMode.HeadTruncation;
-                        break;
-                    case LineBreakMode.TailTruncation:
-                        ControlLineBreakMode = UILineBreakMode.TailTruncation;
-                        break;
-                    case LineBreakMode.MiddleTruncation:
-                        ControlLineBreakMode = UILineBreakMode.MiddleTruncation;
-                        break;
-                    case LineBreakMode.NoWrap:
-                        ControlLineBreakMode = UILineBreakMode.Clip;
-                        ControlLines = 1;
-                        break;
-                    case LineBreakMode.CharacterWrap:
-                        ControlLineBreakMode = UILineBreakMode.CharacterWrap;
-                        break;
-                    case LineBreakMode.WordWrap:
-                    default:
-                        ControlLineBreakMode = UILineBreakMode.WordWrap;
-                        break;
-                }
+                AvailWidth = widthConstraint,
+                AvailHeight = heightConstraint
+            };
 
 
-                var tmpFontSize = (nfloat)Element.FontSize;
-                if (tmpFontSize < 0)
-                    tmpFontSize = (nfloat)(UIFont.LabelFontSize * Math.Abs(tmpFontSize));
-                if (Math.Abs(tmpFontSize) <= double.Epsilon * 10)
-                    tmpFontSize = UIFont.LabelFontSize;
-                var minFontSize = (nfloat)LastMinFontSize;
-                if (minFontSize < 0)
-                    minFontSize = 4;
-                if (tmpFontSize < minFontSize)
-                    tmpFontSize = minFontSize;
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentMeasureState.AvailWidth=[" + _currentMeasureState.AvailWidth + "]  _currentMeasureState.AvailHeight=[" + _currentMeasureState.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "MeasureControl.Font.PointSize=[" + MeasureControl.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
-                ControlLines = int.MaxValue;
-
-                double linesHeight = -1;
-                double desiredWidth = widthConstraint;
-
-                if (Element.Lines == 0)
-                {
-                    if (!double.IsInfinity(heightConstraint))
-                    {
-                        ControlLines = 0;
-                        tmpFontSize = ZeroLinesFit(widthConstraint, heightConstraint, tmpFontSize);
-                    }
-                }
-                else
-                {
-                    if (Element.AutoFit == AutoFit.Lines)
-                    {
-                        if (double.IsPositiveInfinity(heightConstraint))
-                            linesHeight = Element.Lines * (ControlFont.LineHeight + ControlFont.Leading);
-                        else
-                        {
-                            var lineHeightRatio = ControlFont.LineHeight / ControlFont.PointSize;
-                            var leadingRatio = ControlFont.Leading / ControlFont.PointSize;
-
-                            //tmpFontSize = (nfloat)(((heightConstraint) / ((1 + leadingRatio) * Element.Lines)) / lineHeightRatio - 0.1f);
-                            var tmpLineSize = (nfloat)(heightConstraint - 0.05f) / Element.Lines;
-                            tmpFontSize = tmpLineSize / lineHeightRatio;
-
-                        }
-                    }
-                    else if (Element.AutoFit == AutoFit.Width)
-                        tmpFontSize = WidthFit(widthConstraint, tmpFontSize);
-                }
-
-                if (tmpFontSize < minFontSize)
-                    tmpFontSize = minFontSize;
-
-
-                if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.05)
-                {
-                    //Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                    //{
-                    if (Element != null && Control != null)  // multipicker test was getting here with Element and Control both null
-                    {
-#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
-                        Element.FittedFontSize = tmpFontSize == Element.FontSize || (Element.FontSize == -1 && tmpFontSize == UIFont.LabelFontSize) ? -1 : (double)tmpFontSize;
-#pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
-                        Debug("SETTING FITTED FONT SIZE: " + Element?.FittedFontSize);
-                    }
-                    //return false;
-                    //});
-                }
-
-
-                var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
-                if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
-                    tmpFontSize = syncFontSize;
-
-                ControlFont = ControlFont.WithSize(tmpFontSize);
-
-                CGSize cgSize = LabelSize(widthConstraint, tmpFontSize);
-                Debug("cgSize: " + cgSize);
-
-                //if (Control.Font != ControlFont || Control.AttributedText != ControlAttributedText || Control.Text != ControlText || Control.LineBreakMode != ControlLineBreakMode || Control.Lines != ControlLines)
-                {
-                    Control.Hidden = true;
-                    Control.Lines = Element.Lines;
-                    Control.LineBreakMode = ControlLineBreakMode;
-
-                    Control.AdjustsFontSizeToFitWidth = false;
-                    Control.ClearsContextBeforeDrawing = true;
-                    Control.ContentMode = UIViewContentMode.Redraw;
-
-                    Control.Font = ControlFont;
-
-                    if (ControlAttributedText != null)
-                        Control.AttributedText = ControlAttributedText;
-                    else
-                        Control.Text = ControlText;
-
-                    Control.Hidden = false;
-                }
-
-
-                double reqWidth = cgSize.Width;
-                double reqHeight = cgSize.Height + 0.05;
-                var textHeight = cgSize.Height;
-                var textLines = Lines(textHeight, Control.Font);
-                string alg = "--";
-                //string cnstLinesStr = "CL: n/a    ";
-                //string lineHeight = "LH: " + Control.Font.LineHeight.ToString("00.000");
-                //string cnstLinesHeight = "CLH: n/a   ";
-
-                if (double.IsPositiveInfinity(heightConstraint))
-                {
-                    Debug("A");
-                    if (Element.Lines > 0)
-                    {
-                        if (Element.AutoFit == AutoFit.Lines)// && Element.Lines <= textLines)
-                            reqHeight = Element.Lines * Control.Font.LineHeight;
-                        else if (Element.AutoFit == AutoFit.None && Element.Lines <= textLines)
-                            reqHeight = Element.Lines * Control.Font.LineHeight;
-                    }
-
-                    //    alg = "∞A";
-                    //}
-                    Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
-                    Debug("Control.Center: " + Control.Center);
-                }
-                else
-                {
-                    Debug("B");
-                    var constraintLines = Lines(heightConstraint, Control.Font);
-                    Debug("\t constraintLines: " + constraintLines);
-                    var constraintLinesHeight = Math.Floor(constraintLines) * Control.Font.LineHeight;
-                    Debug("\t constraintLinesHeight: " + constraintLinesHeight);
-                    //cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
-
-                    if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
-                    {
-                        reqHeight = Element.Lines * Control.Font.LineHeight;
-                        alg = "A";
-                    }
-                    else if (textLines <= constraintLines)
-                    {
-                        reqHeight = textHeight;
-                        alg = "B";
-                    }
-                    else if (constraintLines >= 1)
-                    {
-                        reqHeight = constraintLinesHeight;
-                        alg = "C";
-                    }
-                    else
-                    {
-                        reqHeight = heightConstraint;
-                        alg = "D";
-                    }
-                    Debug("\t alg: " + alg);
-                    Debug("\t reqHeight: " + reqHeight);
-
-                    Debug("\t Element.VerticalTextAlignment: " + Element.VerticalTextAlignment);
-                    if (Element.VerticalTextAlignment == TextAlignment.Start)
-                        Control.Center = new CGPoint(Control.Center.X, reqHeight / 2);
-                    else if (Element.VerticalTextAlignment == TextAlignment.End)
-                        Control.Center = new CGPoint(Control.Center.X, heightConstraint - reqHeight / 2);
-                    Debug("Control.Center: " + Control.Center);
-                }
-                LastDesiredSize = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(ControlFont.LineHeight)));
+            if (_currentMeasureState == _lastMeasureState && _lastMeasureResult.HasValue)
+            {
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastMeasureResult.Value + "]");
+                return _lastMeasureResult.Value;
             }
-            return LastDesiredSize;
+
+            _lastMeasureResult = InternalLayout(MeasureControl, _currentMeasureState);
+            _lastMeasureState = new TextControlState(_currentMeasureState);
+
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastMeasureResult + "]");
+            return _lastMeasureResult.Value;
+        }
+
+        SizeRequest InternalLayout(UILabel control, TextControlState state)
+        {
+            var tmpFontSize = BoundTextSize(Element.FontSize);
+            control.PropertiesFromControlState(state);
+            control.Lines = 0;
+
+            //P42.Utils.Debug.Message(Element, "ENTER  state.AvailWidth=[" + state.AvailWidth + "]  state.AvailHeight=[" + state.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "control.Font.PointSize=[" + control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "control.LineBreakMode=[" + control.LineBreakMode + "] Element.LineBreakMode=[" + Element.LineBreakMode + "]");
+            //P42.Utils.Debug.Message(Element, "Element.Lines=[" + Element.Lines + "] _currentControlState.Lines=[" + state.Lines + "]");
+
+            if (Element.Lines == 0)
+            {
+                if (state.AvailHeight < int.MaxValue / 3)
+                {
+                    tmpFontSize = ZeroLinesFit(control, state.AvailWidth, state.AvailHeight, tmpFontSize);
+                    //P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
+                }
+            }
+            else
+            {
+                if (Element.AutoFit == AutoFit.Lines)
+                {
+                    if (state.AvailHeight < int.MaxValue / 3)
+                    {
+                        var font = control.Font = UIFont.FromDescriptor(_currentDrawState.FontDescriptor, tmpFontSize);
+                        var lineHeightRatio = font.LineHeight / font.PointSize;
+                        var tmpLineSize = (nfloat)(state.AvailHeight - 0.05f) / Element.Lines;
+                        tmpFontSize = tmpLineSize / lineHeightRatio;
+                        //P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
+                    }
+                }
+                else if (Element.AutoFit == AutoFit.Width)
+                {
+                    tmpFontSize = WidthFit(control, state.AvailWidth, tmpFontSize);
+                    //P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
+                }
+            }
+
+            //P42.Utils.Debug.Message(Element, "Fit Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            tmpFontSize = BoundFontSize(tmpFontSize);
+            //P42.Utils.Debug.Message(Element, "Bound Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
+
+            if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.1)
+            {
+                if (Element != null && control != null)  // multipicker test was getting here with Element and control both null
+                {
+                    if (System.Math.Abs(tmpFontSize - Element.FontSize) < 0.1 || (Element.FontSize < 0 && System.Math.Abs(tmpFontSize - UIFont.LabelFontSize) < 0.1))
+                        Element.FittedFontSize = -1;
+                    else
+                        Element.FittedFontSize = tmpFontSize;
+                    //P42.Utils.Debug.Message(Element, "Element.FittedFontSize=[" + tmpFontSize + "]");
+                }
+            }
+
+
+            var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
+            if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
+            {
+                tmpFontSize = syncFontSize;
+                //P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
+            }
+
+            state.FontPointSize = tmpFontSize;
+            control.Font = state.Font;
+            control.Lines = 0;
+            control.AdjustsFontSizeToFitWidth = false;
+            control.ClearsContextBeforeDrawing = true;
+            control.ContentMode = UIViewContentMode.Redraw;
+
+            CGSize cgSize = LabelSize(control, state.AvailWidth, tmpFontSize);
+            //P42.Utils.Debug.Message(Element, "cgSize: " + cgSize);
+
+            control.Lines = state.Lines;
+
+            /*
+            if (state.AttributedString != null)
+                control.AttributedText = state.AttributedString;
+            else
+                control.Text = state.Text;
+
+            control.Hidden = false;
+            */
+
+            double reqWidth = cgSize.Width;
+            double reqHeight = cgSize.Height + 0.05;
+            var textHeight = cgSize.Height;
+            var textLines = Lines(textHeight, control.Font);
+            //string alg = "--";
+            //string cnstLinesStr = "CL: n/a    ";
+            //string lineHeight = "LH: " + control.Font.LineHeight.ToString("00.000");
+            //string cnstLinesHeight = "CLH: n/a   ";
+
+            if (double.IsPositiveInfinity(state.AvailHeight))
+            {
+                //P42.Utils.Debug.Message(Element, "A");
+                if (Element.Lines > 0)
+                {
+                    if (Element.AutoFit == AutoFit.Lines)// && Element.Lines <= textLines)
+                        reqHeight = Element.Lines * control.Font.LineHeight;
+                    else if (Element.AutoFit == AutoFit.None && Element.Lines <= textLines)
+                        reqHeight = Element.Lines * control.Font.LineHeight;
+                }
+
+                //    alg = "∞A";
+                //}
+                control.Center = new CGPoint(control.Center.X, reqHeight / 2);
+                //P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
+            }
+            else
+            {
+                //P42.Utils.Debug.Message(Element, "B");
+                var constraintLines = Lines(state.AvailHeight, control.Font);
+                //P42.Utils.Debug.Message(Element, "\t constraintLines: " + constraintLines);
+                var constraintLinesHeight = Math.Floor(constraintLines) * control.Font.LineHeight;
+                //P42.Utils.Debug.Message(Element, "\t constraintLinesHeight: " + constraintLinesHeight);
+                //cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
+
+                if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
+                {
+                    reqHeight = Element.Lines * control.Font.LineHeight;
+                    //alg = "A";
+                }
+                else if (textLines <= constraintLines)
+                {
+                    reqHeight = textHeight;
+                    //alg = "B";
+                }
+                else if (constraintLines >= 1)
+                {
+                    reqHeight = constraintLinesHeight;
+                    //alg = "C";
+                }
+                else
+                {
+                    reqHeight = state.AvailHeight;
+                    //alg = "D";
+                }
+                //P42.Utils.Debug.Message(Element, "\t alg: " + alg);
+                //P42.Utils.Debug.Message(Element, "\t reqHeight: " + reqHeight);
+
+                //P42.Utils.Debug.Message(Element, "\t Element.VerticalTextAlignment: " + Element.VerticalTextAlignment);
+                if (Element.VerticalTextAlignment == TextAlignment.Start)
+                    control.Center = new CGPoint(control.Center.X, reqHeight / 2);
+                else if (Element.VerticalTextAlignment == TextAlignment.End)
+                    control.Center = new CGPoint(control.Center.X, state.AvailHeight - reqHeight / 2);
+                //P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
+            }
+            var result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
+            //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]");
+            return result;
         }
 
         void UpdateSynchronizedFontSize()
         {
             var syncFontSize = (nfloat)((ILabel)Element).SynchronizedFontSize;
-            var syncFont = ControlFont.WithSize(syncFontSize);
-            if (syncFont != ControlFont)
+            if (syncFontSize > 0 && syncFontSize < _currentDrawState.FontPointSize)
             {
-                GetDesiredSize(LastWidthConstraint, LastHeightContraint);
+                _currentDrawState.FontPointSize = syncFontSize;
+                LayoutSubviews();
             }
         }
         #endregion
@@ -285,39 +278,50 @@ namespace Forms9Patch.iOS
         {
             base.LayoutSubviews();
             if (Element != null)
-                GetDesiredSize(Element.Width, Element.Height);
+                //GetDesiredSize(Element.Width, Element.Height);
+                DrawLabel(Element.Width, Element.Height);
         }
         #endregion
 
 
-        #region Fitting
-        Size LabelXamarinSize(double widthConstraint, double fontSize)
+        #region Measuring
+        Size LabelF9PSize(double widthConstraint, double fontSize)
         {
-            var cgsize = LabelSize(widthConstraint, (nfloat)fontSize);
+            MeasureControl.PropertiesFromControlState(_currentDrawState);
+            var cgsize = LabelSize(MeasureControl, widthConstraint, (nfloat)fontSize);
             return new Size(cgsize.Width, cgsize.Height);
         }
 
-        CGSize LabelSize(double widthConstraint, nfloat fontSize)
+        CGSize LabelSize(UILabel label, double widthConstraint, nfloat fontSize)
         {
-            var font = UIFont.FromDescriptor(FontDescriptor, fontSize);
+            //P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+            var font = label.Font.WithSize(fontSize);
+            //P42.Utils.Debug.Message(Element, "font=[" + font + "] Element.FontFamily=[" + Element.FontFamily + "]");
+            //if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".");
             CGSize labelSize = CGSize.Empty;
             var constraintSize = new CGSize(widthConstraint, double.PositiveInfinity);
-            if (Element?.F9PFormattedString != null)
+            if (Element.Text != null)
             {
-                ControlAttributedText = Element.F9PFormattedString.ToNSAttributedString(font, ControlTextColor);//, twice: twice);
-                if (ControlAttributedText != null)
-                    labelSize = ControlAttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
-                ControlText = null;
+                labelSize = label.Text.StringSize(font, constraintSize,// _currentDrawState.LineBreakMode);
+                Element.LineBreakMode == LineBreakMode.CharacterWrap
+                    ? UILineBreakMode.CharacterWrap
+                    : UILineBreakMode.WordWrap);
             }
-            else if (ControlText != null)
+            else if (Element.HtmlText != null)
             {
-                labelSize = ControlText.StringSize(font, constraintSize, (Element.LineBreakMode == LineBreakMode.CharacterWrap ? UILineBreakMode.CharacterWrap : UILineBreakMode.WordWrap));
-                ControlAttributedText = null;
+                var color = Element.TextColor;
+                label.AttributedText = Element.F9PFormattedString.ToNSAttributedString(font, color.ToUIColor(Color.Black));
+                labelSize = label.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
             }
+            //P42.Utils.Debug.Message(Element, "EXIT labelSize=[" + labelSize + "]");
             return labelSize;
         }
+        #endregion
 
-        nfloat WidthFit(double widthConstraint, nfloat startFontSize)
+
+        #region Fit Calculations
+        nfloat WidthFit(UILabel label, double widthConstraint, nfloat startFontSize)
         {
             if (Math.Abs(widthConstraint) < 0.01)
                 return 0;
@@ -331,7 +335,7 @@ namespace Forms9Patch.iOS
 
             if (Element.Lines == 1)
             {
-                var size = LabelSize(double.MaxValue, startFontSize);
+                var size = LabelSize(label, double.MaxValue, startFontSize);
                 if (size.Width > widthConstraint)
                     result = (nfloat)(startFontSize * widthConstraint / size.Width);
             }
@@ -340,39 +344,36 @@ namespace Forms9Patch.iOS
                 nfloat step = (result - minFontSize) / 5;
                 if (step > 0.05f)
                 {
-                    result = DescendingWidthFit(widthConstraint, result, minFontSize, step);
+                    result = DescendingWidthFit(label, widthConstraint, result, minFontSize, step);
                     while (step > 0.25f)
                     {
                         step /= 5;
-                        result = DescendingWidthFit(widthConstraint, result + step * 5, result, step);
+                        result = DescendingWidthFit(label, widthConstraint, result + step * 5, result, step);
                     }
                 }
             }
             return result;
         }
 
-        nfloat DescendingWidthFit(double widthConstraint, nfloat start, nfloat min, nfloat step)
+        nfloat DescendingWidthFit(UILabel label, double widthConstraint, nfloat start, nfloat min, nfloat step)
         {
             nfloat result;
             for (result = start; result > min; result -= step)
             {
                 var font = Control.Font.WithSize(result);
-                CGSize labelSize = LabelSize(widthConstraint, result);
+                CGSize labelSize = LabelSize(label, widthConstraint, result);
                 if ((labelSize.Height / font.LineHeight) <= Element.Lines + .005f)
                 {
                     // the backspace character is tripping up this algorithm.  So we need to do a second check
-                    labelSize = Control.IntrinsicContentSize;
-
+                    //labelSize = Control.IntrinsicContentSize;
                     return result;
                 }
             }
             return result;
         }
 
-        nfloat ZeroLinesFit(double widthConstraint, double heightConstraint, nfloat startingFontSize)
+        nfloat ZeroLinesFit(UILabel label, double widthConstraint, double heightConstraint, nfloat startingFontSize)
         {
-            //UIFont font = Control.Font.WithSize((nfloat)startSize);
-            //var startingFontSize = font.PointSize;
             if (double.IsPositiveInfinity(heightConstraint) || double.IsPositiveInfinity(widthConstraint))
                 return startingFontSize;
 
@@ -380,38 +381,38 @@ namespace Forms9Patch.iOS
             if (minFontSize < 0)
                 minFontSize = 4;
 
-            nfloat result = DescendingZeroLinesFit(widthConstraint, heightConstraint, startingFontSize, minFontSize, 5);
-            result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 5f), result, 1);
-            result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 1f), result, 0.2f);
-            result = DescendingZeroLinesFit(widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 0.2f), result, 0.04f);
+            nfloat result = DescendingZeroLinesFit(label, widthConstraint, heightConstraint, startingFontSize, minFontSize, 5);
+            result = DescendingZeroLinesFit(label, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 5f), result, 1);
+            result = DescendingZeroLinesFit(label, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 1f), result, 0.2f);
+            result = DescendingZeroLinesFit(label, widthConstraint, heightConstraint, (nfloat)Math.Min(startingFontSize, result + 0.2f), result, 0.04f);
             return result;
         }
 
-        nfloat DescendingZeroLinesFit(double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
+        nfloat DescendingZeroLinesFit(UILabel label, double widthConstraint, double heightConstraint, nfloat start, nfloat min, nfloat step)
         {
             nfloat result;
             for (result = start; result > min; result -= step)
             {
-                CGSize labelSize = LabelSize(widthConstraint, result);
+                CGSize labelSize = LabelSize(label, widthConstraint, result);
                 if (labelSize.Height <= heightConstraint)
                 {
-                    labelSize = Control.IntrinsicContentSize;
+                    //labelSize = Control.IntrinsicContentSize;
                     break;
                 }
             }
             return result;
         }
-
-
-
         #endregion
 
 
+        #region Helper methods
         double Lines(double height, UIFont font)
         {
             //return (height + font.Leading) / (font.LineHeight + font.Leading);
             return (height) / (font.LineHeight);
         }
+        #endregion
+
 
         #region Change management
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
@@ -419,11 +420,13 @@ namespace Forms9Patch.iOS
             if (e.OldElement != null)
             {
                 e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
-                e.OldElement.RendererSizeForWidthAndFontSize -= LabelXamarinSize;
+                e.OldElement.RendererSizeForWidthAndFontSize -= LabelF9PSize;
+                e.OldElement.Draw -= DrawLabel;
             }
 
             if (e.NewElement != null)
             {
+                _currentDrawState = new TextControlState();
                 if (Control == null)
                 {
                     SetNativeControl(new UILabel(CGRect.Empty)
@@ -435,8 +438,14 @@ namespace Forms9Patch.iOS
                 UpdateFont();
                 UpdateText();
                 UpdateHorizontalAlignment();
+                UpdateLineBreakMode();
+                if (Element.HtmlText != null)
+                    UpdateAttributedText();
+                else
+                    UpdateText();
                 e.NewElement.RendererIndexAtPoint += IndexAtPoint;
-                e.NewElement.RendererSizeForWidthAndFontSize += LabelXamarinSize;
+                e.NewElement.RendererSizeForWidthAndFontSize += LabelF9PSize;
+                e.NewElement.Draw += DrawLabel;
             }
             base.OnElementChanged(e);
 
@@ -454,15 +463,15 @@ namespace Forms9Patch.iOS
                 UpdateHorizontalAlignment();
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
             {
-                UpdateTextColor();
-                if (ControlAttributedText != null)
-                    UpdateText();
+                UpdateText();
+                LayoutSubviews();
             }
-            else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontSizeProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
+            else if (e.PropertyName == Label.FontProperty.PropertyName
+                || e.PropertyName == Label.FontFamilyProperty.PropertyName
+                || e.PropertyName == Label.FontSizeProperty.PropertyName
+                || e.PropertyName == Label.FontAttributesProperty.PropertyName)
             {
                 UpdateFont();
-                if (ControlAttributedText != null)
-                    UpdateText();
                 LayoutSubviews();
             }
             else if (e.PropertyName == Label.TextProperty.PropertyName)
@@ -472,31 +481,64 @@ namespace Forms9Patch.iOS
             }
             else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
             {
-                UpdateText();
+                UpdateAttributedText();
                 LayoutSubviews();
             }
-            else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName ||
-                     e.PropertyName == Label.AutoFitProperty.PropertyName ||
-                     e.PropertyName == Label.LinesProperty.PropertyName ||
-                     e.PropertyName == Label.LineBreakModeProperty.PropertyName
-                    )
+            else if (e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
             {
+                LayoutSubviews();
+            }
+            else if (e.PropertyName == Label.AutoFitProperty.PropertyName)
+            {
+                _currentDrawState.AutoFit = Element.AutoFit;
+                LayoutSubviews();
+            }
+            else if (e.PropertyName == Label.LinesProperty.PropertyName)
+            {
+                _currentDrawState.Lines = Element.Lines;
+                LayoutSubviews();
+            }
+            else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
+            {
+                UpdateLineBreakMode();
                 LayoutSubviews();
             }
             else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
                 UpdateSynchronizedFontSize();
+            else if (e.PropertyName == Label.MinFontSizeProperty.PropertyName)
+                UpdateMinFontSize();
+        }
+
+
+        void UpdateMinFontSize()
+        {
+            if (Element != null && Control != null)
+            {
+                var minFontSize = Element.FontSize > 0 ? Element.MinFontSize : 4;
+                if (_currentDrawState.FontPointSize < minFontSize)
+                {
+                    _currentDrawState.FontPointSize = -1;
+                    LayoutSubviews();
+                }
+            }
         }
 
         void UpdateFont()
         {
-            ControlFont = Element.ToUIFont();
+            /*ControlFont = Element.ToUIFont();
             InvokeOnMainThread(() =>
             {
                 if (Control != null)
                     Control.Font = ControlFont;
             });
-            ControlFontPointSize = Control.Font.PointSize;
-            FontDescriptor = ControlFont.FontDescriptor;
+            */
+            var font = Element.ToUIFont();
+            _currentDrawState.FontPointSize = font.PointSize;
+            _currentDrawState.FontDescriptor = font.FontDescriptor;
+            if (!string.IsNullOrEmpty(Element.HtmlText))
+                UpdateAttributedText();
+            else
+                UpdateText();
         }
 
         /// <summary>
@@ -515,13 +557,15 @@ namespace Forms9Patch.iOS
 
         void UpdateHorizontalAlignment()
         {
+            _currentDrawState.HorizontalTextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
             InvokeOnMainThread(() =>
             {
                 if (Control != null)
-                    Control.TextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
+                    Control.TextAlignment = _currentDrawState.HorizontalTextAlignment;
             });
         }
 
+        /*
         void UpdateText()
         {
             string text = null;
@@ -529,8 +573,8 @@ namespace Forms9Patch.iOS
             if (Element.F9PFormattedString != null)
             {
                 var color = (Color)Element.GetValue(Label.TextColorProperty);
-                ControlTextColor = color.ToUIColor(UIColor.Black);
-                attributedText = Element.F9PFormattedString.ToNSAttributedString(ControlFont, ControlTextColor);
+                _currentDrawState.TextColor = color.ToUIColor(UIColor.Black);
+                attributedText = Element.F9PFormattedString.ToNSAttributedString(ControlFont, _currentDrawState.TextColor);
             }
             else
                 text = (string)Element.GetValue(Label.TextProperty);
@@ -558,17 +602,97 @@ namespace Forms9Patch.iOS
                 });
             }
         }
+        */
+
+        void UpdateText()
+        {
+            _currentDrawState.Text = Element?.Text is null
+                ? null
+                : new NSString(Element.Text);
+            Control.Text = _currentDrawState.Text;
+        }
+
+        void UpdateAttributedText()
+        {
+            var color = Element.TextColor;
+            _currentDrawState.AttributedString = Element?.HtmlText is null
+                ? null
+                : Element.F9PFormattedString.ToNSAttributedString(_currentDrawState.Font, color.ToUIColor(Color.Black));
+            Control.AttributedText = _currentDrawState.AttributedString;
+        }
 
         void UpdateTextColor()
         {
             InvokeOnMainThread(() =>
             {
-                var color = (Color)Element.GetValue(Label.TextColorProperty);
-                ControlTextColor = color.ToUIColor(UIColor.Black);
+                var color = Element.TextColor;
                 if (Control != null)
-                    Control.TextColor = ControlTextColor;
+                {
+                    Control.TextColor = color.ToUIColor();
+                    if (Control.AttributedText != null)
+                        UpdateAttributedText();
+                }
             });
         }
+
+        void UpdateLineBreakMode()
+        {
+            //P42.Utils.Debug.Message(Element, "ENTER Element.LineBreakMode-[" + Element.LineBreakMode + "]");
+            switch (Element.LineBreakMode)
+            {
+                case LineBreakMode.HeadTruncation:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.HeadTruncation;
+                    break;
+                case LineBreakMode.TailTruncation:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.TailTruncation;
+                    break;
+                case LineBreakMode.MiddleTruncation:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.MiddleTruncation;
+                    break;
+                case LineBreakMode.NoWrap:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.Clip;
+                    _currentDrawState.Lines = 1;
+                    break;
+                case LineBreakMode.CharacterWrap:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.CharacterWrap;
+                    break;
+                case LineBreakMode.WordWrap:
+                default:
+                    _currentDrawState.LineBreakMode = UILineBreakMode.WordWrap;
+                    break;
+            }
+            //P42.Utils.Debug.Message(Element, "ENTER _currentDrawState.LineBreakMode-[" + _currentDrawState.LineBreakMode + "]");
+        }
+        #endregion
+
+
+        #region FontSize helpers
+        nfloat BoundTextSize(double textSize) => BoundFontSize((nfloat)textSize);
+
+        nfloat BoundFontSize(nfloat textSize)
+        {
+            if (textSize < 0.0001)
+#pragma warning disable CS0618 // Type or member is obsolete
+                textSize = (System.nfloat)(UIFont.LabelFontSize * System.Math.Abs(Element.FontSize));
+#pragma warning restore CS0618 // Type or member is obsolete
+            if (textSize > Element.FontSize)
+                return (nfloat)Element.FontSize;
+            if (textSize < ModelMinFontSize)
+                textSize = ModelMinFontSize;
+            return textSize;
+        }
+
+        nfloat ModelMinFontSize
+        {
+            get
+            {
+                var minFontSize = (nfloat)Element.MinFontSize;
+                if (minFontSize < 0)
+                    minFontSize = 4;
+                return minFontSize;
+            }
+        }
+
         #endregion
 
 
@@ -579,18 +703,8 @@ namespace Forms9Patch.iOS
 
             // init text storage
             var textStorage = new NSTextStorage();
-            //if (Control.AttributedText != null)
             var attrText = new NSAttributedString(Control.AttributedText);
             textStorage.SetString(attrText);
-
-            /*
-			else
-			{
-				var attrString = new NSMutableAttributedString(Control.Text);
-				attrString.AddAttribute(UIStringAttributeKey.Font, Control.Font, new NSRange(0, Control.Text.Length));
-				textStorage.SetString(attrString);
-			}
-			*/
 
             // init layout manager
             var layoutManager = new NSLayoutManager();
@@ -599,28 +713,14 @@ namespace Forms9Patch.iOS
             // init text container
             var textContainer = new NSTextContainer(new CGSize(Control.Frame.Width, Control.Frame.Height * 2));
             textContainer.LineFragmentPadding = 0;
-            textContainer.MaximumNumberOfLines = (nuint)ControlLines;
-            textContainer.LineBreakMode = UILineBreakMode.WordWrap;//Control.LineBreakMode;
-
-            //if (Control.LineBreakMode == UILineBreakMode.TailTruncation || Control.LineBreakMode == UILineBreakMode.HeadTruncation || Control.LineBreakMode == UILineBreakMode.MiddleTruncation)
-            //	textContainer.LineBreakMode = UILineBreakMode.WordWrap;
+            textContainer.MaximumNumberOfLines = (nuint)_currentDrawState.Lines;
+            textContainer.LineBreakMode = UILineBreakMode.WordWrap;
 
             textContainer.Size = new CGSize(Control.Frame.Width, Control.Frame.Height * 2);
             layoutManager.AddTextContainer(textContainer);
             layoutManager.AllowsNonContiguousLayout = true;
 
-            //layoutManager.SetTextContainer(textContainer,new NSRange(0,Control.AttributedText.Length));
-
-            //layoutManager.UsesFontLeading = true;
-            //layoutManager.EnsureLayoutForCharacterRange(new NSRange(0,Control.AttributedText.Length));
-            //layoutManager.EnsureLayoutForTextContainer(textContainer);
-            nfloat partialFraction = 0;
-            //var characterIndex = layoutManager.CharacterIndexForPoint(cgPoint, textContainer, ref partialFraction);
             var characterIndex = layoutManager.GetCharacterIndex(cgPoint, textContainer);
-
-            //[self.layoutManager drawGlyphsForGlyphRange:NSMakeRange(0, self.textStorage.length) atPoint:CGPointMake(0, 0)];
-            //layoutManager.DrawGlyphs(new NSRange(0,Control.AttributedText.Length),Control.Frame.Location);
-
             return (int)characterIndex;
         }
         #endregion

@@ -104,6 +104,7 @@
     <Compile Include="UIViewContentMode.cs" />
     <Compile Include="Services\HapticService.cs" />
     <Compile Include="Services\AudioService.cs" />
+    <Compile Include="Models\TextControlState.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->
