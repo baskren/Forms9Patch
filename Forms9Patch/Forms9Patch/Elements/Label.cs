@@ -11,17 +11,38 @@ namespace Forms9Patch
     /// </summary>
     [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
-    {
+    {/*
         #region Debug support
         bool DebugCondition
         => (HtmlText ?? Text)?.ToLower().StartsWith("heights") ?? false;
 
-        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
+        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string methodName = null)
         {
             if (DebugCondition)
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + callerName + ": " + message);
+            {
+                System.Diagnostics.Debug.IndentSize = 4;
+                if (message?.Contains("ENTER") ?? false)
+                {
+                    if (System.Diagnostics.Debug.IndentLevel == 0)
+                        System.Diagnostics.Debug.WriteLine("=========================================================");
+                }
+                if (message?.Contains("EXIT") ?? false)
+                {
+                    System.Diagnostics.Debug.Unindent();
+                }
+                System.Diagnostics.Debug.WriteLine(methodName + ": " + message);
+                if (message?.Contains("ENTER") ?? false)
+                    System.Diagnostics.Debug.Indent();
+                if (message?.Contains("EXIT") ?? false)
+                {
+                    if (System.Diagnostics.Debug.IndentLevel == 0)
+                        System.Diagnostics.Debug.WriteLine("=========================================================");
+                }
+            }
         }
         #endregion
+        */
+
 
 
         #region Obsolete Properties
@@ -245,7 +266,18 @@ namespace Forms9Patch
         static Label()
         {
             Settings.ConfirmInitialization();
+            P42.Utils.Debug.ConditionFunc = (obj) =>
+            {
+                if (obj is Label label)
+                {
+                    var result = ((label.HtmlText ?? label.Text)?.ToLower().StartsWith("heights") ?? false);
+                    return result;
+                }
+                return false;
+            };
         }
+
+
 
         //bool cancelEvents;
         static int instances;
@@ -257,6 +289,7 @@ namespace Forms9Patch
         public Label()
         {
             _id = instances++;
+            SizeChanged += OnSizeChanged;
         }
 
         /// <summary>
@@ -404,7 +437,10 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
-            return RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
+            P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
+            var result = RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
+            P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
+            return result;
         }
 
 
@@ -417,22 +453,44 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            DebugMessage("ENTER (" + widthConstraint + ", " + heightConstraint + ")");
+            P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
 
             IsDynamicallySized = true;
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            DebugMessage("EXIT  result=[" + result + "]", GetType() + ".GetSizeRequest");
+            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
 
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            DebugMessage("ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
+            P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnMeasure(widthConstraint, heightConstraint);
-            DebugMessage("EXIT  result=[" + result + "]", GetType() + ".OnMeasure");
+            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
+            base.OnSizeAllocated(width, height);
+            P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
+        }
+
+        protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
+        {
+            P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
+            var result = base.OnSizeRequest(widthConstraint, heightConstraint);
+            P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
+            return result;
+        }
+
+        private void OnSizeChanged(object sender, EventArgs e)
+        {
+            P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
+
+        }
+
 
         #endregion
 
