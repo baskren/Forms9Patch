@@ -645,13 +645,16 @@ namespace Forms9Patch
             separator.VerticalOptions = LayoutOptions.Fill;
             if (Orientation == StackOrientation.Horizontal)
             {
+                separator.HorizontalOptions = LayoutOptions.Start;
                 separator.WidthRequest = SeparatorThickness > 0 ? SeparatorThickness : DefaultSeparatorThickness;
                 separator.HeightRequest = -1;
             }
             else
             {
+                separator.VerticalOptions = LayoutOptions.Start;
                 separator.WidthRequest = -1;
                 separator.HeightRequest = SeparatorThickness > 0 ? SeparatorThickness : DefaultSeparatorThickness;
+                System.Diagnostics.Debug.WriteLine(GetType() + ".SetSeparatorThickness separator.HeightRequest=[" + separator.HeightRequest + "]");
             }
         }
 
@@ -801,7 +804,6 @@ namespace Forms9Patch
             //IsVisible = false;
             await CancelAsync(sender);
         }
-
         #endregion
     }
 }
