@@ -15,10 +15,14 @@ namespace Forms9Patch.Droid
         {
             if (Element is HardwareKeyPage)
                 return;
-            if (Control != null)
-                Control.KeyPress += OnControlKeyPress;
-            else if (Container != null)
-                Container.KeyPress += OnControlKeyPress;
+            try
+            {
+                if (Control != null)
+                    Control.KeyPress += OnControlKeyPress;
+                else if (Container != null)
+                    Container.KeyPress += OnControlKeyPress;
+            }
+            catch (Exception) { }
         }
 
         protected override void OnDetached()
