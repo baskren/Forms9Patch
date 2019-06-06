@@ -10,13 +10,21 @@ namespace Forms9Patch.iOS
     {
         #region Properties
 
-        public UIFont Font => UIFont.FromDescriptor(FontDescriptor, FontPointSize);
+        public UIFont Font
+        {
+            get
+            {
+                //System.Diagnostics.Debug.WriteLine(GetType() + ".Font  FontDescriptor=[" + FontDescriptor?.DebugDescription + "] FontPointSize=[" + FontPointSize + "]");
+                var result = UIFont.FromDescriptor(FontDescriptor, FontPointSize);
+                //System.Diagnostics.Debug.WriteLine(GetType() + ".Font=[" + result + "] ");
+                return result;
+            }
+        }
 
-        public nfloat FontPointSize { get; set; } = UIFont.LabelFontSize;
-        public UIFontDescriptor FontDescriptor { get; set; } = UIFont.SystemFontOfSize(UIFont.LabelFontSize).FontDescriptor;
+        public nfloat FontPointSize { get; set; }
+        public UIFontDescriptor FontDescriptor { get; set; }
         public UITextAlignment HorizontalTextAlignment { get; set; }
         public Xamarin.Forms.TextAlignment VerticalTextAlignment { get; set; }
-        //public UIColor TextColor { get; set; }
 
         public AutoFit AutoFit { get; set; }
         public int Lines { get; set; }
@@ -57,7 +65,16 @@ namespace Forms9Patch.iOS
 
         #endregion
 
-        public TextControlState() { }
+        public TextControlState()
+        {
+            FontPointSize = UIFont.LabelFontSize;
+            FontDescriptor = UIFont.SystemFontOfSize(UIFont.LabelFontSize).FontDescriptor;
+            HorizontalTextAlignment = UITextAlignment.Left;
+            VerticalTextAlignment = TextAlignment.Start;
+            AutoFit = AutoFit.None;
+            Lines = 0;
+            LineBreakMode = UILineBreakMode.WordWrap;
+        }
 
         public TextControlState(TextControlState other)
         {

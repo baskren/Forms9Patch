@@ -962,6 +962,7 @@ namespace Forms9Patch
                 #endregion IBackground
             }
 
+            /*
             if (IsVisible)
                 HardForceLayout();
 
@@ -974,7 +975,7 @@ namespace Forms9Patch
                     return IsVisible;// && !_disposed;
                 });
             }
-
+            */
         }
 
         const int refreshPeriod = 50;

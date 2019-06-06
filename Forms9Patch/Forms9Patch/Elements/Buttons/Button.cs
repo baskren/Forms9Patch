@@ -215,6 +215,22 @@ namespace Forms9Patch
 
         #region Properties
 
+        #region IsLongPressEnabled property
+        /// <summary>
+        /// The is long press enabled property.
+        /// </summary>
+        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(Button), default(bool));
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.Button"/> has long press enabled.
+        /// </summary>
+        /// <value><c>true</c> if is long press enabled; otherwise, <c>false</c>.</value>
+        public bool IsLongPressEnabled
+        {
+            get => (bool)GetValue(IsLongPressEnabledProperty);
+            set => SetValue(IsLongPressEnabledProperty, value);
+        }
+        #endregion IsLongPressEnabled property
+
         #region IsClipped property
         internal static readonly BindablePropertyKey IsClippedPropertyKey = BindableProperty.CreateReadOnly("Forms9Patch.Button.IsClipped", typeof(bool), typeof(Button), default(bool));
         /// <summary>
@@ -414,22 +430,6 @@ namespace Forms9Patch
             set => SetValue(SoundEffectModeProperty, value);
         }
         #endregion SoundEffectMode property
-        /*
-        #region IsLongPressEnabled property
-        /// <summary>
-        /// Backing store for IsLongPressedEnabled property
-        /// </summary>
-        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create("Forms9Patch.Button.IsLongPressEnabled", typeof(bool), typeof(Button), default(bool));
-        /// <summary>
-        /// Enables the detection of long press gestures.  
-        /// </summary>
-        public bool IsLongPressEnabled
-        {
-            get => (bool)GetValue(IsLongPressEnabledProperty);
-            set => SetValue(IsLongPressEnabledProperty, value);
-        }
-        #endregion IsLongPressEnabled property
-*/
 
         #region IButtonState
 
@@ -883,26 +883,6 @@ namespace Forms9Patch
                     if (child is VisualElement element && element.IsVisible)
                     {
                         childCount++;
-                        /*
-                        if (Orientation == StackOrientation.Horizontal)
-                        {
-
-                            var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
-                            //width += element.Width;
-                            //height = Math.Max(height, element.Height);
-                            width += measure.Request.Width;
-                            height += measure.Request.Height;
-
-                        }
-                        else
-                        {
-                            var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
-                            //width = Math.Max(width, element.Width);
-                            //height += element.Height;
-                            width += measure.Request.Width;
-                            height += measure.Request.Height;
-                        }
-                        */
                         var measure = element.Measure(double.PositiveInfinity, double.PositiveInfinity);
                         width += Math.Ceiling(measure.Request.Width);
                         height += Math.Ceiling(measure.Request.Height);
@@ -1027,7 +1007,7 @@ namespace Forms9Patch
 
             _gestureListener = FormsGestures.Listener.For(this);
             _gestureListener.Tapped += OnTapped;
-            //_gestureListener.Down += OnDown;
+            _gestureListener.Down += OnDown;
             //UpdateLongPressListeners(IsLongPressEnabled);
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
@@ -1118,6 +1098,7 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 _gestureListener.Tapped -= OnTapped;
+                _gestureListener.Down -= OnDown;
                 _gestureListener.LongPressed -= OnLongPressed;
                 _gestureListener.LongPressing -= OnLongPressing;
                 _gestureListener.Dispose();
@@ -1157,85 +1138,61 @@ namespace Forms9Patch
 
 
         #region Gesture event responders
+        bool HandleTap()
+        {
+            if (IsEnabled && IsVisible)
+            {
+                if (!(this is StateButton))
+                {
+                    if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
+                        || GroupToggleBehavior == GroupToggleBehavior.Multiselect
+                        || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
+                        IsSelected = !IsSelected;
+                    else
+                    {
+                        Opacity = 0.5;
+                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                        {
+                            Opacity += 0.1;
+                            return Opacity < 1.0;
+                        });
+                    }
+                }
+                SendTapped();
+                Haptics.Feedback(HapticEffect, HapticEffectMode);
+                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Tap this instance.
         /// </summary>
         public void Tap()
-        {
-            OnTapped(this, new FormsGestures.TapEventArgs(null, null));
-        }
+            => HandleTap();
 
-        /*
         void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Button.OnDown ENTER");
-            if (IsEnabled && IsVisible && !IsLongPressEnabled)
-            {
-
-                //Debug.WriteLine("tapped");
-                if (!(this is StateButton))
-                {
-                    if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
-                        || GroupToggleBehavior == GroupToggleBehavior.Multiselect
-                        || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
-                        IsSelected = !IsSelected;
-                    else
-                    {
-                        Opacity = 0.5;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                        {
-                            Opacity += 0.1;
-                            return Opacity < 1.0;
-                        });
-                    }
-                }
-                SendTapped();
-                KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
-                e.Handled = true;
-            }
+            if (!IsLongPressEnabled)
+                e.Handled = HandleTap();
         }
-        */
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("Button.OnTapped ENTER");
-            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
-            {
-
-                //Debug.WriteLine("tapped");
-                if (!(this is StateButton))
-                {
-                    if (ToggleBehavior && GroupToggleBehavior == GroupToggleBehavior.None
-                        || GroupToggleBehavior == GroupToggleBehavior.Multiselect
-                        || GroupToggleBehavior == GroupToggleBehavior.Radio && !IsSelected)
-                        IsSelected = !IsSelected;
-                    else
-                    {
-                        Opacity = 0.5;
-                        Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
-                        {
-                            Opacity += 0.1;
-                            return Opacity < 1.0;
-                        });
-                    }
-                }
-                SendTapped();
-                //KeyClicksService.Feedback(HapticEffect, HapticEffectMode);
-                Haptics.Feedback(HapticEffect, HapticEffectMode);
-                Audio.PlaySoundEffect(SoundEffect, SoundEffectMode);
-                e.Handled = true;
-            }
+            if (IsLongPressEnabled)
+                e.Handled = HandleTap();
         }
 
         void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressed?.Invoke(this, EventArgs.Empty);
         }
 
         void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
-            if (IsEnabled && IsVisible)// && IsLongPressEnabled)
+            if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressing?.Invoke(this, EventArgs.Empty);
         }
 
@@ -1267,8 +1224,6 @@ namespace Forms9Patch
 
             if (IsEnabled)
             {
-                //System.Diagnostics.Debug.WriteLine("Caller: [" + callerName + "." + lineNumber + "] _label.TextColor=[" + enabledLabelColor + "]");
-
                 _label.TextColor = enabledLabelColor;
 
                 if (IsSelected)
@@ -1285,12 +1240,9 @@ namespace Forms9Patch
                     base.OutlineColor = OutlineColor;
                 }
                 if (OutlineColor == Color.Default)
-                    //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
-                    base.OutlineColor = enabledLabelColor; // _label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
+                    base.OutlineColor = enabledLabelColor;
 
                 base.HasShadow = (base.BackgroundColor.A > 0 || BackgroundImage?.Source != null) && HasShadow;
-                //var hasShadow = base.BackgroundColor.A > 0 && HasShadow;
-                //SetValue(ShapeBase.HasShadowProperty, hasShadow);
                 ShadowInverted = IsSelected && !isSegment;
             }
             else
@@ -1300,13 +1252,11 @@ namespace Forms9Patch
                 {
                     base.HasShadow = false;
                     base.BackgroundColor = BackgroundColor.A > 0 ? OpaqueColor : TransparentColor;
-                    //base.OutlineColor = OutlineColor.A > 0 ? opaque : base.BackgroundColor;
                     base.OutlineColor = OutlineColor == Color.Default || OutlineColor.A > 0 ? OpaqueColor : BackgroundColor;
                 }
                 else
                 {
                     // the next line is already covered above
-                    //base.OutlineWidth = OutlineWidth < 0 ? (BackgroundColor.A > 0 ? 0 : 1) : OutlineColor == Color.Transparent ? 0 : OutlineWidth;
                     base.HasShadow = BackgroundColor.A > 0 && HasShadow;
                     if (IsSelected)
                     {
@@ -1321,10 +1271,8 @@ namespace Forms9Patch
                         base.BackgroundColor = BackgroundColor.A > 0 ? BackgroundColor : _label.BackgroundColor;
                         base.OutlineColor = OutlineColor;
                     }
-                    //base.OutlineColor = TextColor == Color.Default ? (DarkTheme ? Color.White : Color.FromHex("#000").WithAlpha(0.5)) : TextColor;
                     if (OutlineColor == Color.Default)
-                        //base.OutlineColor = BackgroundColor.A > 0 ? base.BackgroundColor : Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
-                        base.OutlineColor = enabledLabelColor; //_label.TextColor;//Color.FromHex (DarkTheme? "#FFF" : "#000").WithAlpha (0.5);
+                        base.OutlineColor = enabledLabelColor;
                 }
             }
             UpdateIconTint();
@@ -1357,21 +1305,6 @@ namespace Forms9Patch
             }
         }
 
-        /*
-        void UpdateLongPressListeners(bool isLongPressEnabled)
-        {
-            if (isLongPressEnabled)
-            {
-                _gestureListener.LongPressed += OnLongPressed;
-                _gestureListener.LongPressing += OnLongPressing;
-            }
-            else
-            {
-                _gestureListener.LongPressed -= OnLongPressed;
-                _gestureListener.LongPressing -= OnLongPressing;
-            }
-        }
-        */
 
         internal void UpdateIconTint()
         {
@@ -1395,11 +1328,7 @@ namespace Forms9Patch
 
         bool IsEnabledCore
         {
-            set
-            {
-                //this.SetValueCore(VisualElement.IsEnabledProperty, (object) (bool) (value ? true : false), Xamarin.Forms.BindableObject.SetValueFlags.None);
-                SetValue(IsEnabledProperty, value);
-            }
+            set => SetValue(IsEnabledProperty, value);
         }
 
         /// <summary>
@@ -1513,32 +1442,16 @@ namespace Forms9Patch
 
         #region Change Handlers
         private void OnSizeChanged(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Button.OnSizeChanged ENTER");
-            IsClipped = CheckIsClipped();
-            //System.Diagnostics.Debug.WriteLine("Button.OnSizeChanged EXIT");
-        }
+            => IsClipped = CheckIsClipped();
 
         private void OnIconLabelSizeChanged(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Button.OnIconLabelSizeChanged ENTER");
-            IsClipped = CheckIsClipped();
-            //System.Diagnostics.Debug.WriteLine("Button.OnIconLabelSizeChanged EXIT");
-        }
+            => IsClipped = CheckIsClipped();
 
         private void OnIconImageSizeChanged(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Button.OnIconImageSizeChanged ENTER");
-            IsClipped = CheckIsClipped();
-            //System.Diagnostics.Debug.WriteLine("Button.OnIconImageSizeChanged EXIT");
-        }
+            => IsClipped = CheckIsClipped();
 
         private void OnLabelSizeChanged(object sender, EventArgs e)
-        {
-            //System.Diagnostics.Debug.WriteLine("Button.OnLabelSizeChanged ENTER");
-            IsClipped = CheckIsClipped();
-            //System.Diagnostics.Debug.WriteLine("Button.OnLabelSizeChanged EXIT");
-        }
+            => IsClipped = CheckIsClipped();
 
         /// <summary>
         /// Test if the segment contents are clipped
@@ -1567,71 +1480,47 @@ namespace Forms9Patch
                 isClipped = Orientation == StackOrientation.Horizontal
                     ? hzFree < 0.01
                     : vtFree < 0.01;
-                if (isClipped)
-                {
-                    //System.Diagnostics.Debug.WriteLine("\tClipped:     [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "] QUICK");
-                    return isClipped;
-                }
 
-                if (child.IsVisible)
+                if (!isClipped)
                 {
-                    //if (child == _label && _label.Text == "BACKGROUND" && FittedFontSize < 7)
-                    //    System.Diagnostics.Debug.WriteLine("");
-
-                    if (child is Forms9Patch.Label label)
+                    if (child.IsVisible)
                     {
-                        var fontSize = label.SynchronizedFontSize;
-                        if (fontSize < 0)
-                            fontSize = label.FittedFontSize < 0
-                            ? label.FontSize < 0
-                                ? Label.DefaultFontSize
-                                : label.FontSize
-                            : label.FittedFontSize;
-                        var hzSize = label.SizeForWidthAndFontSize(double.MaxValue, fontSize);
-                        var vtSize = label.SizeForWidthAndFontSize(width, fontSize);
-                        //if (!string.IsNullOrWhiteSpace(_label.Text) && _label.Text.Contains("Screw"))
-                        //    System.Diagnostics.Debug.WriteLine("\nWidth=[" + width + "] fontSize=[" + fontSize + "]");
-                        //if (child == _label && _label.Text == "BACKGROUND")
-                        //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] fontSize=" + fontSize + " size=" + size);
-                        elementWidths += hzSize.Width;
-                        elementHeights += vtSize.Height;
-                    }
-                    else
-                    {
-                        elementWidths += child.Width;
-                        elementHeights += child.Height;
-                    }
-                    if (notFirst)
-                    {
-                        if (Orientation == StackOrientation.Horizontal)
-                            elementWidths += Spacing;
+                        if (child is Forms9Patch.Label label)
+                        {
+                            var fontSize = label.SynchronizedFontSize;
+                            if (fontSize < 0)
+                                fontSize = label.FittedFontSize < 0
+                                ? label.FontSize < 0
+                                    ? Label.DefaultFontSize
+                                    : label.FontSize
+                                : label.FittedFontSize;
+                            var hzSize = label.SizeForWidthAndFontSize(double.MaxValue, fontSize);
+                            var vtSize = label.SizeForWidthAndFontSize(width, fontSize);
+                            elementWidths += hzSize.Width;
+                            elementHeights += vtSize.Height;
+                        }
                         else
-                            elementHeights += Spacing;
+                        {
+                            elementWidths += child.Width;
+                            elementHeights += child.Height;
+                        }
+                        if (notFirst)
+                        {
+                            if (Orientation == StackOrientation.Horizontal)
+                                elementWidths += Spacing;
+                            else
+                                elementHeights += Spacing;
+                        }
+                        notFirst = true;
                     }
-                    notFirst = true;
-                }
 
-                hzFree = width - elementWidths;
-                vtFree = height - elementHeights;
+                    hzFree = width - elementWidths;
+                    vtFree = height - elementHeights;
 
-                isClipped = Orientation == StackOrientation.Horizontal
-                    ? hzFree < 0.01
-                    : vtFree < 0.01;
-                if (isClipped)
-                {
-                    //if (HtmlText == "Single Shear - Wood Main Member")
-                    //    System.Diagnostics.Debug.WriteLine("");
-                    //if (child == _label && !string.IsNullOrEmpty(_label.HtmlText) && _label.HtmlText.Contains("Screw")) // == "Wood Screw")
-                    //System.Diagnostics.Debug.WriteLine("\tClipped:     [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "]");
-                    //if (child == _label && _label.Text == "BACKGROUND")
-                    //    System.Diagnostics.Debug.WriteLine("[" + (Text ?? HtmlText) + "] IsClipped by child: " + child.GetType());
-                    return isClipped;
+                    isClipped = Orientation == StackOrientation.Horizontal
+                        ? hzFree < 0.01
+                        : vtFree < 0.01;
                 }
-                //else
-                //{
-                //if (child == _label && !string.IsNullOrEmpty(_label.HtmlText) && _label.HtmlText.Contains("Screw"))// == "Wood Screw")
-                //    System.Diagnostics.Debug.WriteLine("\tNot Clipped: [" + (Text ?? HtmlText) + "] hzFree=[" + hzFree + "] elementWidths=[" + elementWidths + "] Width=[" + width + "] HzPadding=[" + Padding.HorizontalThickness + "] HzMargin=[" + Margin.HorizontalThickness + "]");
-                //}
             }
             return isClipped;
         }
@@ -1660,15 +1549,9 @@ namespace Forms9Patch
                 SetOrienations();
             }
             else if (propertyName == Xamarin.Forms.Label.TextColorProperty.PropertyName)
-            {
                 UpdateIconTint();
-            }
             else if (propertyName == Forms9Patch.Label.FittedFontSizeProperty.PropertyName || propertyName == Forms9Patch.Label.SynchronizedFontSizeProperty.PropertyName)
-            {
                 CheckIsClipped();
-            }
-            //else if (propertyName == Label.FittedFontSizeProperty.PropertyName)
-            //    _actualFontSizeChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <param name="propertyName">The name of the changed property.</param>
@@ -1695,11 +1578,7 @@ namespace Forms9Patch
             {
                 var command = Command;
                 if (command != null)
-                {
                     command.CanExecuteChanged -= CommandCanExecuteChanged;
-                    //} else if (propertyName == Button.PressingStateProperty.PropertyName && PressingState != null) {
-                    //	PressingState.PropertyChanged -= OnStatePropertyChanged;
-                }
             }
         }
 
@@ -1727,7 +1606,7 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
-                        _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
+                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
                         _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
@@ -1735,17 +1614,16 @@ namespace Forms9Patch
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.Start;
-                        _label.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = LayoutOptions.Fill;
                         _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = horzOption;
-                    //_stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
                 }
                 else
                 {
                     if (_iconImage != null)
                     {
-                        _iconImage.HorizontalOptions = LayoutOptions.Center; // (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
+                        _iconImage.HorizontalOptions = LayoutOptions.Center;
                         _iconImage.VerticalOptions = vertOption;
                     }
                     if (_iconLabel != null)
@@ -1753,7 +1631,7 @@ namespace Forms9Patch
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
                         _iconLabel.VerticalTextAlignment = VerticalTextAlignment;
                         _iconLabel.HorizontalOptions = LayoutOptions.Center;
-                        _iconLabel.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill;// LayoutOptions.FillAndExpand;
+                        _iconLabel.VerticalOptions = LayoutOptions.Fill;
                         _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
@@ -1761,7 +1639,7 @@ namespace Forms9Patch
                         _label.HorizontalTextAlignment = HorizontalTextAlignment;
                         _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.HorizontalOptions = LayoutOptions.FillAndExpand;
-                        _label.VerticalOptions = LayoutOptions.Fill; // vertOption; // LayoutOptions.Fill; // LayoutOptions.FillAndExpand;
+                        _label.VerticalOptions = LayoutOptions.Fill;
                         _label.MinimizeHeight = false;
                     }
                     _stackLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
@@ -1774,23 +1652,22 @@ namespace Forms9Patch
                 {
                     if (_iconImage != null)
                     {
-                        _iconImage.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _iconImage.HorizontalOptions = horzOption;
                         _iconImage.VerticalOptions = LayoutOptions.Center;
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                        _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalOptions = LayoutOptions.Center;
                         _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = VerticalTextAlignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = VerticalTextAlignment;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
-                                                               //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
+                        _label.HorizontalOptions = horzOption;
                         _label.VerticalOptions = LayoutOptions.Center;
                         _label.MinimizeHeight = true;
                     }
@@ -1801,27 +1678,25 @@ namespace Forms9Patch
                 {
                     if (_iconImage != null)
                     {
-                        _iconImage.HorizontalOptions = horzOption;// LayoutOptions.CenterAndExpand;
+                        _iconImage.HorizontalOptions = horzOption;
                         _iconImage.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                     }
                     if (_iconLabel != null)
                     {
                         _iconLabel.VerticalTextAlignment = TextAlignment.Center;
                         _iconLabel.HorizontalTextAlignment = TextAlignment.Center;
-                        _iconLabel.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
+                        _iconLabel.HorizontalOptions = horzOption;
                         _iconLabel.VerticalOptions = (TrailingIcon ? LayoutOptions.End : LayoutOptions.Start);
                         _iconLabel.FontFamily = IconFontFamily;
                     }
                     if (_label != null)
                     {
-                        _label.VerticalTextAlignment = HorizontalTextAlignment; //TextAlignment.Center;
+                        _label.VerticalTextAlignment = HorizontalTextAlignment;
                         _label.HorizontalTextAlignment = TextAlignment.Center;
-                        _label.HorizontalOptions = horzOption; // LayoutOptions.CenterAndExpand;
-                                                               //_label.VerticalOptions = HasTightSpacing ? LayoutOptions.Center : LayoutOptions.CenterAndExpand;
+                        _label.HorizontalOptions = horzOption;
                         _label.VerticalOptions = VerticalTextAlignment.ToLayoutOptions(true);
                         _label.MinimizeHeight = true;
                     }
-                    //_stackLayout.Spacing = 0;// _label.FontSize< 0 ? -6 : -_label.FontSize/2.0;
                     _stackLayout.HorizontalOptions = LayoutOptions.Fill;
                     _stackLayout.VerticalOptions = LayoutOptions.Fill;
                 }
@@ -1830,8 +1705,6 @@ namespace Forms9Patch
         }
 
 
-
-        // WORKING ON:  NEED TO ADD VERTICAL ALIGNMENT PROPERTY!!!!
 
         bool _changingIconImage;
         bool _changingIconText;
@@ -1855,28 +1728,11 @@ namespace Forms9Patch
 
             base.OnPropertyChanged(propertyName);
 
-            //if (propertyName == BorderWidthProperty.PropertyName)
-            //    OutlineWidth = (float)BorderWidth;
-            //else if (propertyName == BorderRadiusProperty.PropertyName)
-            //    OutlineRadius = BorderRadius;
-            //else if (propertyName == BorderColorProperty.PropertyName)
-            //    OutlineColor = BorderColor;
-
             if (_noUpdate)
                 return;
 
-            /*
-            if (propertyName == OutlineWidthProperty.PropertyName
-                || propertyName == ParentSegmentsOrientationProperty.PropertyName
-                || propertyName == ExtendedElementShapeProperty.PropertyName
-               )
-                SetStackLayoutPadding();
-                */
             if (propertyName == HorizontalTextAlignmentProperty.PropertyName || propertyName == VerticalTextAlignmentProperty.PropertyName)
-            {
-                //_stackLayout.HorizontalOptions = Alignment.ToLayoutOptions();
                 SetOrienations();
-            }
             else if (propertyName == IconImageProperty.PropertyName)
             {
                 if (_changingIconText)
@@ -1904,8 +1760,6 @@ namespace Forms9Patch
                         IconText = null;
                     }
                     _iconImage = IconImage;
-                    //_iconImage.Fill = Fill.AspectFit;
-                    //_image.TintColor = TintIcon ? _label.TextColor : Color.Default;
                     UpdateIconTint();
                     if (_iconImage != null)
                     {
@@ -1973,10 +1827,7 @@ namespace Forms9Patch
                 || propertyName == IsEnabledProperty.PropertyName
                 || propertyName == DarkThemeProperty.PropertyName
                     )
-            {
-                //System.Diagnostics.Debug.WriteLine("PropertyName: " + propertyName);
                 UpdateElements();
-            }
             else if (propertyName == OrientationProperty.PropertyName)
                 SetOrienations();
             else if (propertyName == TextColorProperty.PropertyName && !IsSelected)
@@ -2002,13 +1853,9 @@ namespace Forms9Patch
             {
                 if (IsSelected)
                 {
-                    var command = Command;
-                    if (command != null && GroupToggleBehavior != GroupToggleBehavior.None)
-                        command.Execute(CommandParameter);
-
-                    var eventHandler = _selected;
-                    if (eventHandler != null)
-                        eventHandler(this, EventArgs.Empty);
+                    if (GroupToggleBehavior != GroupToggleBehavior.None)
+                        Command?.Execute(CommandParameter);
+                    _selected?.Invoke(this, EventArgs.Empty);
                 }
             }
             else if (propertyName == LinesProperty.PropertyName)
@@ -2043,10 +1890,6 @@ namespace Forms9Patch
                 _stackLayout.Spacing = Spacing;
             else if (propertyName == TintIconProperty.PropertyName)
                 UpdateIconTint();
-            /*
-            else if (propertyName == IsLongPressEnabledProperty.PropertyName)
-                UpdateLongPressListeners(IsLongPressEnabled);
-                */
         }
 
         void OnCommandChanged()
@@ -2061,21 +1904,16 @@ namespace Forms9Patch
         }
 
         void CommandCanExecuteChanged(object sender, EventArgs eventArgs)
-        {
-            var command = Command;
-            if (command == null)
-                return;
-            IsEnabledCore = command.CanExecute(CommandParameter);
-        }
+            => IsEnabledCore = (Command?.CanExecute(CommandParameter) ?? IsEnabled);
+
 
         /// <summary>
         /// Sends the tapped.
         /// </summary>
         internal protected void SendTapped()
         {
-            var command = Command;
-            if (command != null && GroupToggleBehavior == GroupToggleBehavior.None)
-                command.Execute(CommandParameter);
+            if (GroupToggleBehavior == GroupToggleBehavior.None)
+                Command?.Execute(CommandParameter);
             _tapped?.Invoke(this, EventArgs.Empty);
         }
 

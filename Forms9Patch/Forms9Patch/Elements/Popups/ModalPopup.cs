@@ -152,9 +152,6 @@ namespace Forms9Patch
             if (_frame?.Content == null)
                 return;
 
-            // layout the page overlay
-            //base.LayoutChildren(x, y, width, height);
-
             height -= KeyboardService.Height;
 
             // layout the content
@@ -162,22 +159,15 @@ namespace Forms9Patch
             {
                 _frame.IsVisible = true;
                 _frame.Content.IsVisible = true;
-                //ShapeBase.UpdateBasePadding(_frame, true);
-                //var shadow = ShadowPadding();
 
                 var availWidth = width - (Margin.HorizontalThickness + _frame.Padding.HorizontalThickness); // + shadow.HorizontalThickness);
                 var availHeight = height - (Margin.VerticalThickness + _frame.Padding.VerticalThickness); // + shadow.VerticalThickness);
-                //if (_frame.Content.WidthRequest > 0)
-                //    availWidth = Math.Min(_frame.Content.WidthRequest, availWidth);
-                //if (_frame.Content.HeightRequest > 0)
-                //    availHeight = Math.Min(_frame.Content.HeightRequest, availHeight);
                 if (WidthRequest > 0)
                     availWidth = Math.Min(WidthRequest, availWidth);
                 if (HeightRequest > 0)
                     availHeight = Math.Min(HeightRequest, availHeight);
 
                 var request = _frame.Content.Measure(availWidth, availHeight, MeasureFlags.None);  //
-
                 var shadowPadding = ShapeBase.ShadowPadding(_frame);
 
                 var rBoxWidth = HorizontalOptions.Alignment == LayoutAlignment.Fill || WidthRequest > 0
@@ -201,10 +191,8 @@ namespace Forms9Patch
                         case LayoutAlignment.Center: contentX = width / 2.0 - rboxSize.Width / 2.0; break;
                         case LayoutAlignment.Start: contentX = Margin.Left + shadowPadding.Left; break;
                         case LayoutAlignment.End: contentX = width - Margin.Right - shadowPadding.HorizontalThickness - rboxSize.Width; break;
-                            //case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
                     }
                 }
-                //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
                 var contentY = Location.Y;
                 if (double.IsInfinity(contentY) || double.IsNaN(contentY))
                 {
@@ -214,16 +202,11 @@ namespace Forms9Patch
                         case LayoutAlignment.Center: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
                         case LayoutAlignment.Start: contentY = Margin.Top + shadowPadding.Top; break;
                         case LayoutAlignment.End: contentY = height - Margin.Bottom - shadowPadding.VerticalThickness - rboxSize.Height; break;
-                            //case LayoutAlignment.Fill: contentY = height / 2.0 - rboxSize.Height / 2.0; break;
                     }
                 }
-                //var contentY = double.IsNegativeInfinity(Location.Y) || VerticalOptions.Alignment == LayoutAlignment.Fill ? height / 2.0 - rboxSize.Height / 2.0 : Location.Y;
-
                 var bounds = new Rectangle(contentX, contentY, rboxSize.Width, rboxSize.Height);
-                //System.Diagnostics.Debug.WriteLine("LayoutChildIntoBoundingRegion("+contentX+","+contentY+","+rboxSize.Width+","+rboxSize.Height+")");
 
                 Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_frame, bounds);
-
                 _lastLayout = DateTime.Now;
             }
         }

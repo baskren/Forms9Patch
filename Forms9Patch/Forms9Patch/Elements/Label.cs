@@ -11,38 +11,7 @@ namespace Forms9Patch
     /// </summary>
     [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
-    {/*
-        #region Debug support
-        bool DebugCondition
-        => (HtmlText ?? Text)?.ToLower().StartsWith("heights") ?? false;
-
-        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string methodName = null)
-        {
-            if (DebugCondition)
-            {
-                System.Diagnostics.Debug.IndentSize = 4;
-                if (message?.Contains("ENTER") ?? false)
-                {
-                    if (System.Diagnostics.Debug.IndentLevel == 0)
-                        System.Diagnostics.Debug.WriteLine("=========================================================");
-                }
-                if (message?.Contains("EXIT") ?? false)
-                {
-                    System.Diagnostics.Debug.Unindent();
-                }
-                System.Diagnostics.Debug.WriteLine(methodName + ": " + message);
-                if (message?.Contains("ENTER") ?? false)
-                    System.Diagnostics.Debug.Indent();
-                if (message?.Contains("EXIT") ?? false)
-                {
-                    if (System.Diagnostics.Debug.IndentLevel == 0)
-                        System.Diagnostics.Debug.WriteLine("=========================================================");
-                }
-            }
-        }
-        #endregion
-        */
-
+    {
 
 
         #region Obsolete Properties
@@ -291,7 +260,6 @@ namespace Forms9Patch
         public Label()
         {
             _id = instances++;
-            //SizeChanged += OnSizeChanged;
         }
 
         /// <summary>
@@ -361,44 +329,12 @@ namespace Forms9Patch
                 || propertyName == HtmlTextProperty.PropertyName
                 || propertyName == TextProperty.PropertyName
                )
-            {
                 InvalidateMeasure();
-            }
         }
 
-        /*
-        /// <summary>
-        /// Invalidates the measure.
-        /// </summary>
-        /// <returns>The measure.</returns>
-        protected override void InvalidateMeasure()
-        {
-            if (P42.Utils.Environment.IsOnMainThread)
-            {
-                //System.Diagnostics.Debug.WriteLine("["+(HtmlText ?? Text)+"]>>InvalidateMeasure");
-                IsDynamicallySized = false;
-                base.InvalidateMeasure();
-                if (!IsDynamicallySized && Width > 0 && Height > 0)
-                {
-                    if (HtmlText != null || Text != null)
-                    {
-                        if (this.AncestorOfBaseType<Layout>() is Layout layout)
-                            layout.ForceLayout();
-                    }
-                }
-            }
-            else
-                Device.BeginInvokeOnMainThread(InvalidateMeasure);
-
-            //System.Diagnostics.Debug.WriteLine("\t["+(HtmlText ?? Text)+"]InvalidateMeasure>>");
-
-        }
-        */
 
         internal void InternalInvalidateMeasure()
-        {
-            InvalidateMeasure();
-        }
+            => InvalidateMeasure();
 
         #endregion
 
@@ -406,9 +342,8 @@ namespace Forms9Patch
         #region Operators
         /// <param name="label">Label.</param>
         public static explicit operator string(Label label)
-        {
-            return label?.HtmlText ?? label?.Text;
-        }
+            => label?.HtmlText ?? label?.Text;
+
         #endregion
 
 
@@ -448,6 +383,8 @@ namespace Forms9Patch
             IsDynamicallySized = true;
             var result = base.GetSizeRequest(widthConstraint, heightConstraint);
             //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
+            if (!_sizeAllocated)
+                Draw?.Invoke(widthConstraint, heightConstraint);
             return result;
         }
 
@@ -460,10 +397,14 @@ namespace Forms9Patch
             return result;
         }
         */
+
+
+        //bool _sizeAllocated;
         protected override void OnSizeAllocated(double width, double height)
         {
             //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
             base.OnSizeAllocated(width, height);
+            //_sizeAllocated = true;
             Draw?.Invoke(width, height);
             //P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
         }
@@ -504,16 +445,12 @@ namespace Forms9Patch
             if (Device.RuntimePlatform == Device.Android && e.NumberOfTouches == 1)
             {
                 var index = IndexAtPoint(e.Touches[0]);
-                //System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                 foreach (var span in F9PFormattedString._spans)
                 {
                     if (span is ActionSpan actionSpan)
                     {
-                        //System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                         if (index >= actionSpan.Start && index <= actionSpan.End)
                         {
-                            //System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
-                            //Tap(actionSpan);
                             e.Handled = true;
                             return;
                         }
@@ -527,21 +464,17 @@ namespace Forms9Patch
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
             // we're going to handle windows via the Window's Hyperlink Span element
-            //if (Device.OS != TargetPlatform.Windows)
             if (Device.RuntimePlatform == Device.UWP)
                 return;
             if (e.NumberOfTouches == 1)
             {
                 var index = IndexAtPoint(e.Touches[0]);
-                //System.Diagnostics.Debug.WriteLine("{0}[{1}] index=["+index+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                 foreach (var span in F9PFormattedString._spans)
                 {
                     if (span is ActionSpan actionSpan)
                     {
-                        //System.Diagnostics.Debug.WriteLine("{0}[{1}] ActionSpan("+actionSpan.Start+","+actionSpan.End+","+actionSpan.Id+","+actionSpan.Href+")", P42.Utils.ReflectionExtensions.CallerString(), GetType());
                         if (index >= actionSpan.Start && index <= actionSpan.End)
                         {
-                            //System.Diagnostics.Debug.WriteLine("!!!!!HIT!!!!");
                             Tap(actionSpan);
                             e.Handled = true;
                             return;
@@ -549,7 +482,6 @@ namespace Forms9Patch
                     }
                 }
             }
-            //e.Handled = false;
         }
 
         internal void Tap(string id, string href)
@@ -560,9 +492,8 @@ namespace Forms9Patch
         }
 
         internal void Tap(ActionSpan actionSpan)
-        {
-            Tap(actionSpan?.Id, actionSpan?.Href);
-        }
+            => Tap(actionSpan?.Id, actionSpan?.Href);
+
         #endregion
 
 

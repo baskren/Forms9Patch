@@ -307,14 +307,9 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread(() => LayoutChildren(x, y, width, height));
                 return;
             }
-            //System.Diagnostics.Debug.WriteLine("BubblePopup.LayoutChildren(" + x + ", " + y + ", " + width + ", " + height + ")");
-            //System.Diagnostics.Debug.WriteLine("this.Bounds: " + Bounds);
 
             if (_bubbleLayout?.Content == null)
                 return;
-
-            // layout the page overlay
-            //base.LayoutChildren(x, y, width, height);
 
             height -= KeyboardService.Height;
             var bounds = new Rectangle(x, y, width, height);
@@ -324,7 +319,6 @@ namespace Forms9Patch
             double hzAvail = 0, vtAvail = 0;
             var sizeRequest = new SizeRequest();
 
-            //System.Diagnostics.Debug.WriteLine("{0}[{1}] bounds=["+RectangleExtensions.ToString(bounds)+"]", P42.Utils.ReflectionExtensions.CallerString(), GetType());
             if (width > 0 && height > 0)
             {
                 _bubbleLayout.IsVisible = true;
@@ -350,12 +344,6 @@ namespace Forms9Patch
 
                     if (targetBounds.Right > targetPage.Bounds.Left && targetBounds.Left < targetPage.Bounds.Right && targetBounds.Bottom > targetPage.Bounds.Top && targetBounds.Top < targetPage.Bounds.Bottom)
                     {
-                        //System.Diagnostics.Debug.WriteLine("Available=[" + x + ", " + y + "," + width + "," + height + "]");
-                        //System.Diagnostics.Debug.WriteLine("targetBounds=[" + targetBounds + "]");
-                        // System.Diagnostics.Debug.WriteLine("targetPage.Bounds=[" + targetPage.Bounds + "]");
-                        //if (Math.Abs(targetBounds.X - 468) < 0.001 && Math.Abs(targetBounds.Y - 675.5) < 0.001)
-                        //    System.Diagnostics.Debug.WriteLine("");
-
                         var availL = targetBounds.Left - Margin.Left - PointerLength;
                         var availR = width - targetBounds.Right - Margin.Right - PointerLength;
                         var availT = targetBounds.Top - Margin.Top - PointerLength;
@@ -374,7 +362,6 @@ namespace Forms9Patch
                             vtModal = Math.Min(vtModal, HeightRequest);
                         }
 
-                        //double hzExtra = 0, vtExtra = 0;
                         double hzExtra = -1, vtExtra = -1;
                         var hzPointerDir = PointerDirection.None;
                         var vtPointerDir = PointerDirection.None;
@@ -522,13 +509,10 @@ namespace Forms9Patch
                 _bubbleLayout.PointerDirection = pointerDir;
                 if (pointerDir == PointerDirection.None)
                 {
-                    //System.Diagnostics.Debug.WriteLine("hzModal: " + hzModal + "  vtModal: " + vtModal);
 
                     sizeRequest = _bubbleLayout.Content.Measure(hzModal - Padding.HorizontalThickness - shadowPadding.HorizontalThickness,
                                                 vtModal - Padding.VerticalThickness - shadowPadding.VerticalThickness,
                                                 MeasureFlags.None);
-
-                    //System.Diagnostics.Debug.WriteLine("szReq: " + sizeRequest);
 
                     if (HorizontalOptions.Alignment != LayoutAlignment.Fill)
                         hzModal = WidthRequest > 0 ? Math.Min(hzModal, WidthRequest) : sizeRequest.Request.Width + Padding.HorizontalThickness + shadowPadding.HorizontalThickness;
@@ -544,7 +528,6 @@ namespace Forms9Patch
                         case LayoutAlignment.End: contentX = width - Margin.Right - shadowPadding.HorizontalThickness - hzModal; break;
                         case LayoutAlignment.Fill: contentX = Margin.Left + shadowPadding.Left; break;
                     }
-                    //var contentX = double.IsNegativeInfinity(Location.X) || HorizontalOptions.Alignment == LayoutAlignment.Fill ? width / 2.0 - rboxSize.Width / 2.0 : Location.X;
                     double contentY = 0;
                     switch (VerticalOptions.Alignment)
                     {
@@ -554,12 +537,8 @@ namespace Forms9Patch
                         case LayoutAlignment.Fill: contentY = height / 2.0 - vtModal / 2.0; break;
                     }
 
-
-                    //var contentX = width / 2.0 - hzModal / 2.0;
-                    //var contentY = height / 2.0 - vtModal / 2.0;
                     bounds = new Rectangle(contentX, contentY, hzModal, vtModal);
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, bounds);
-                    //System.Diagnostics.Debug.WriteLine("bounds=" + bounds);
                 }
                 else
                 {
@@ -573,11 +552,9 @@ namespace Forms9Patch
                         if (pointerDir.IsHorizontal())
                             vtAvail = height - Margin.VerticalThickness;
                     }
-                    //System.Diagnostics.Debug.WriteLine("===============================");
                     Tuple<double, float> tuple;
                     if (pointerDir.IsVertical())
                     {
-                        //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(hzAvail, Point.X + targetBounds.Left, 0, width);
@@ -601,7 +578,6 @@ namespace Forms9Patch
                     }
                     else
                     {
-                        //System.Diagnostics.Debug.WriteLine("\t\t rboxSize=[" + rboxSize + "] targetBounds=[" + targetBounds + "]");
                         if (UsePoint)
                         {
                             tuple = StartAndPointerLocation(vtAvail, Point.Y + targetBounds.Top, 0, height);
@@ -614,24 +590,18 @@ namespace Forms9Patch
                         }
                         else
                         {
-                            //System.Diagnostics.Debug.WriteLine("========================================");
                             tuple = StartAndPointerLocation(vtAvail, targetBounds.Top, targetBounds.Height, height);
-                            //System.Diagnostics.Debug.WriteLine("PointerDir=[" + pointerDir + "]");
-                            //System.Diagnostics.Debug.WriteLine("tuple=[" + tuple + "]");
                             bounds = new Rectangle(
                                 new Point(
                                     (pointerDir == PointerDirection.Left ? targetBounds.Right : targetBounds.Left - hzAvail - PointerLength) + x,
                                     tuple.Item1 + y),
                                 new Size(hzAvail + PointerLength, vtAvail)
                             );
-                            //System.Diagnostics.Debug.WriteLine("bounds=[" + bounds + "]");
                         }
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
-                    //System.Diagnostics.Debug.WriteLine("\t\t BubblePopupLayoutChildIntoBoundingRegtion(_bubbleLayout, " + newBounds + ")");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
-                    //System.Diagnostics.Debug.WriteLine("===============================");
                     _lastLayout = DateTime.Now;
                 }
 
@@ -645,14 +615,13 @@ namespace Forms9Patch
         double PositionWeightingFunction(double start)
         {
             // how far apart is the pop-up center from the target?
-            double err = 0;
+            double err;
             if (TargetBias < 0)
                 err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
             else if (TargetBias > 1)
                 err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + TargetBias));
             else
                 err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
-            //double err = Math.Abs((start + _pwfWidth / 2.0) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
 
             // does the pop-up and the target overlap?
             err += (start + _pwfWidth >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - start - _pwfWidth);
@@ -672,7 +641,7 @@ namespace Forms9Patch
         double PointerWeightingFunction(double offset)
         {
             // how far is the offset from the center of the target?
-            double err = 0;
+            double err;
             if (TargetBias < -1)
                 err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth + TargetBias));
             else if (TargetBias < 0)
@@ -681,7 +650,6 @@ namespace Forms9Patch
                 err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + TargetBias));
             else
                 err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth * TargetBias));
-            //double err = Math.Abs((_pwfStart + offset) - (_pwfTargetStart + _pwfTargetWidth / 2.0));
 
             // does the pointer overlap the target?
             err += (_pwfStart + offset >= _pwfTargetStart ? 0 : 100 * _pwfTargetStart - _pwfStart - offset);
@@ -692,26 +660,22 @@ namespace Forms9Patch
 
         Tuple<double, float> StartAndPointerLocation(double width, double targetStart, double targetWidth, double availableWidth)
         {
-            //System.Diagnostics.Debug.WriteLine("StartAndPointerLocation("+width+","+targetStart+","+targetWidth+","+availableWidth+")");
             _pwfWidth = width;
             _pwfTargetStart = targetStart;
             _pwfTargetWidth = targetWidth;
             _pwfAvailableWidth = availableWidth;
-            double optimalStart;
             P42.NumericalMethods.Search1D.BrentMin(
                 0,
                 targetStart + targetWidth / 2.0,
                 availableWidth - width,
-                PositionWeightingFunction, 0.0001, out optimalStart);
-
+                PositionWeightingFunction, 0.0001, out double optimalStart);
             _pwfStart = optimalStart;
 
-            double optimalPointerLoc;
             P42.NumericalMethods.Search1D.BrentMin(
                 0,
                 width / 2.0,
                 width,
-                PointerWeightingFunction, 0.0001, out optimalPointerLoc);
+                PointerWeightingFunction, 0.0001, out double optimalPointerLoc);
 
             var pointerOffset = (float)(optimalPointerLoc / width);
             return new Tuple<double, float>(optimalStart, pointerOffset);

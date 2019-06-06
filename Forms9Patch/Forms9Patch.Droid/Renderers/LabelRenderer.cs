@@ -519,8 +519,19 @@ namespace Forms9Patch.Droid
                         });
                     }
                 }
-                //Control.SkipNextInvalidate();
             }
+        }
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _measureControl?.Dispose();
+                _measureControl = null;
+            }
+            base.Dispose(disposing);
         }
 
 
@@ -561,30 +572,11 @@ namespace Forms9Patch.Droid
             else if (e.PropertyName == Label.MinFontSizeProperty.PropertyName)
                 UpdateMinFontSize();
             else if (e.PropertyName == VisualElement.HeightProperty.PropertyName || e.PropertyName == VisualElement.WidthProperty.PropertyName)
-            {
-                /*
-				//TODO: EVALUATE THE NECESSITY AND EFFICACY OF THIS BLOCK
-				if (Element.Width > -1 && Element.Height > -1 && Element.IsVisible)
-					if (Element.Width != _lastControlState.AvailWidth || Element.Height != _lastControlState.AvailHeight)
-					{
-						_lastSizeRequest = null;
-						LayoutForSize((int)(Element.Width * Forms9Patch.Display.Scale), (int)(Element.Height * Forms9Patch.Display.Scale));
-					}
-				*/
                 Layout();
-            }
             else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
             {
-                //if (_currentControlState.TextSize > 0)
-                //{
-                //    var syncFontSize = ((ILabel)Element).SynchronizedFontSize;
-                //    if (syncFontSize >= 0 && _currentControlState.TextSize != syncFontSize)
-                //    {
-                //        _currentControlState.TextSize = -200;
                 _currentDrawState.SyncFontSize = (float)Element.SynchronizedFontSize;
                 Layout();
-                //    }
-                //}
             }
         }
 
@@ -722,8 +714,7 @@ namespace Forms9Patch.Droid
         }
 
         int IndexAtPoint(Xamarin.Forms.Point p)
-        {
-            return Control.IndexForPoint(p.ToNativePoint());
-        }
+            => Control.IndexForPoint(p.ToNativePoint());
+
     }
 }

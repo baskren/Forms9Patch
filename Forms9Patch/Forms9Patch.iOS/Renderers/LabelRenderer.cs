@@ -448,7 +448,18 @@ namespace Forms9Patch.iOS
                 e.NewElement.Draw += DrawLabel;
             }
             base.OnElementChanged(e);
+        }
 
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _measureControl?.Dispose();
+                _measureControl = null;
+            }
+            base.Dispose(disposing);
         }
 
         /// <summary>
@@ -606,6 +617,7 @@ namespace Forms9Patch.iOS
 
         void UpdateText()
         {
+            _currentDrawState.AttributedString = null;
             _currentDrawState.Text = Element?.Text is null
                 ? null
                 : new NSString(Element.Text);
@@ -615,6 +627,7 @@ namespace Forms9Patch.iOS
         void UpdateAttributedText()
         {
             var color = Element.TextColor;
+            _currentDrawState.Text = null;
             _currentDrawState.AttributedString = Element?.HtmlText is null
                 ? null
                 : Element.F9PFormattedString.ToNSAttributedString(_currentDrawState.Font, color.ToUIColor(Color.Black));

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Forms9Patch
 {
@@ -189,6 +190,15 @@ namespace Forms9Patch
             set => SetValue(IconFontFamilyProperty, value);
         }
         #endregion IcontFontFamiliy property
+
+        #region FontFamily property
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TargetedMenu), default(string));
+        public string FontFamily
+        {
+            get => (string)GetValue(FontFamilyProperty);
+            set => SetValue(FontFamilyProperty, value);
+        }
+        #endregion FontFamily property
 
         #endregion
 
@@ -522,6 +532,11 @@ namespace Forms9Patch
         #region ButtonFactory
         void ConfigureSegment(Segment segment)
         {
+            segment._button.TextColor = TextColor == default
+                    ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
+                    : TextColor;
+            segment._button.IconFontFamily = IconFontFamily;
+            segment._button.FontFamily = FontFamily;
             segment._button.Text = segment.Text;
             segment._button.HtmlText = segment.HtmlText;
             segment._button.IconImage = segment.IconImage;
@@ -529,14 +544,12 @@ namespace Forms9Patch
             segment._button.Spacing = 4;
             segment._button.TintIcon = true;
             segment._button.HasTightSpacing = true;
-            segment._button.TextColor = TextColor;
             segment._button.VerticalTextAlignment = TextAlignment.Center;
             segment._button.HorizontalTextAlignment = TextAlignment.Center;
             segment._button.VerticalOptions = LayoutOptions.Fill;
             segment._button.HorizontalOptions = LayoutOptions.Fill;
             segment._button.BackgroundColor = BackgroundColor.WithAlpha(0.02);
             segment._button.Margin = 0;
-            segment._button.IconFontFamily = IconFontFamily;
 
             //if (Device.RuntimePlatform != Device.UWP)
             if (FontSize < 0)
@@ -613,18 +626,32 @@ namespace Forms9Patch
         #region Layout
         void UpdateOrientation(Segment segment)
         {
-
             if (Orientation == StackOrientation.Horizontal)
                 segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 0);
             else
                 segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 8);
+            segment._button.TextColor = TextColor == default
+                    ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
+                    : TextColor;
         }
 
         void UpdateOrientation()
         {
+            _stackLayout.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Center : LayoutOptions.Fill;
             _stackLayout.Orientation = Orientation;
             foreach (var segment in Segments)
                 UpdateOrientation(segment);
+            foreach (var child in _stackLayout.Children)
+                if (child is BoxView separator)
+                {
+                    separator.WidthRequest = Orientation == StackOrientation.Horizontal ? 1 : -1;
+                    separator.HeightRequest = Orientation == StackOrientation.Vertical ? 1 : -1;
+                    separator.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Start : LayoutOptions.Fill;
+                    separator.VerticalOptions = Orientation == StackOrientation.Vertical ? LayoutOptions.Start : LayoutOptions.Fill;
+                }
+            _bubbleLayout.BackgroundColor = BackgroundColor == default
+                ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalBackgroundColor : DefaultVerticalBackgroundColor)
+                : BackgroundColor;
             UpdateLayout();
         }
 
@@ -804,6 +831,10 @@ namespace Forms9Patch
             //IsVisible = false;
             await CancelAsync(sender);
         }
+
+        protected override void OnAppearing()
+            => UpdateLayout();
+
         #endregion
     }
 }

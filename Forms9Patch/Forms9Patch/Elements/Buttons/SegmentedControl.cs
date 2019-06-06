@@ -125,6 +125,7 @@ namespace Forms9Patch
         }
         #endregion
 
+
         #region Properties
 
 
@@ -394,6 +395,21 @@ namespace Forms9Patch
             return index >= 0 && index < _segments.Count && _segments[index].IsSelected;
         }
 
+        #region IsLongPressEnabled property
+        /// <summary>
+        /// The is long press enabled property.
+        /// </summary>
+        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(SegmentedControl), default(bool));
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SegmentedControl"/> has long press enabled.
+        /// </summary>
+        /// <value><c>true</c> if is long press enabled; otherwise, <c>false</c>.</value>
+        public bool IsLongPressEnabled
+        {
+            get => (bool)GetValue(IsLongPressEnabledProperty);
+            set => SetValue(IsLongPressEnabledProperty, value);
+        }
+        #endregion IsLongPressEnabled property
 
         #region GroupToggleBehavior
         /// <summary>
@@ -700,9 +716,11 @@ namespace Forms9Patch
 
         #endregion
 
+
         #region Fields
         readonly SegmentedControlBackground _background = new SegmentedControlBackground();
         #endregion
+
 
         #region Constructor
 
@@ -811,6 +829,7 @@ namespace Forms9Patch
             button.SoundEffect = SoundEffect;
             button.SoundEffectMode = SoundEffectMode;
             button.Spacing = IntraSegmentSpacing;
+            button.IsLongPressEnabled = IsLongPressEnabled;
         }
         #endregion
 
@@ -1107,6 +1126,9 @@ namespace Forms9Patch
                 else if (propertyName == IntraSegmentSpacingProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.Spacing = IntraSegmentSpacing;
+                else if (propertyName == IsLongPressEnabledProperty.PropertyName)
+                    foreach (Segment segment in Segments)
+                        segment._button.IsLongPressEnabled = IsLongPressEnabled;
             }
         }
 
@@ -1434,7 +1456,6 @@ namespace Forms9Patch
                 if (button.Equals(sender) && button.IsSelected)
                 {
                     SegmentSelected?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
-                    //Debug.WriteLine ("Selected ["+i+"]");
                     return;
                 }
             }
@@ -1452,7 +1473,6 @@ namespace Forms9Patch
                 if (button.Equals(sender))
                 {
                     SegmentLongPressing?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
-                    //Debug.WriteLine ("Tapped ["+i+"]");
                     return;
                 }
             }
@@ -1470,7 +1490,6 @@ namespace Forms9Patch
                 if (button.Equals(sender))
                 {
                     SegmentLongPressed?.Invoke(this, new SegmentedControlEventArgs(i, _segments[i]));
-                    //Debug.WriteLine ("Tapped ["+i+"]");
                     return;
                 }
             }
