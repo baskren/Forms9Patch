@@ -155,7 +155,7 @@ namespace Forms9Patch
         #endregion
 
         #region CellView
-        public View CellView => BaseCellView.ContentView;
+        public View CellView => BaseCellView?.ContentView;
         #endregion
 
         #region Parent

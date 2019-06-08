@@ -63,7 +63,7 @@ namespace Forms9Patch
                 //    System.Diagnostics.Debug.WriteLine("");
                 if (BindingContext is IItemWrapper wrapper)
                 {
-                    if (ContentView is ICellHeight contentView && contentView.CellHeight > -1)
+                    if (ContentView is ICellContentView contentView && contentView.CellHeight > -1)
                         wrapper.RenderedRowHeight = contentView.CellHeight;
                     else if (IsHeader && BindingContext is GroupWrapper groupWrapper)
                         wrapper.RenderedRowHeight = groupWrapper.RequestedGroupHeaderRowHeight;
@@ -298,12 +298,12 @@ namespace Forms9Patch
 
 
         #region Swipe Menu
-        
+
         private static void OnSwipe(object sender, SwipeEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("Swiped:" + e);
         }
-        
+
 
 
 
@@ -864,7 +864,7 @@ namespace Forms9Patch
 
         private void OnContentViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == HeightRequestProperty.PropertyName || e.PropertyName == nameof(ICellHeight.CellHeight))
+            if (e.PropertyName == HeightRequestProperty.PropertyName || e.PropertyName == nameof(ICellContentView.CellHeight))
                 UpdateHeights();
         }
 

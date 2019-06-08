@@ -11,19 +11,16 @@ using Android.Text;
 using Xamarin.Forms;
 using System;
 using Android.Runtime;
+using Android.Graphics;
+using Android.Views;
 
 namespace Forms9Patch.Droid
 {
-    public class F9PTextView : TextView
+    public class F9PTextView : TextView, Forms9Patch.IText
     {
-        //Context _context;
-
         internal delegate bool BoolDelegate();
-
         internal static float DefaultTextSize = -1f;
-        //internal static float DefaultTextSize = 20f;
         internal static float Scale = -1f;
-
         internal static float FontScale => Settings.Context.Resources.Configuration.FontScale;
 
         #region Constructors
@@ -34,7 +31,7 @@ namespace Forms9Patch.Droid
         /// <param name="attrs">Attrs.</param>
         public F9PTextView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            init(context, attrs, 0);
+            Init(context, attrs, 0);
         }
 
         /// <summary>
@@ -58,9 +55,8 @@ namespace Forms9Patch.Droid
         /// </summary>
         /// <param name="context">Context.</param>
         public F9PTextView(Context context) : base(context)
-        {
-            init(context, null, 0);
-        }
+            => Init(context, null, 0);
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
@@ -69,11 +65,10 @@ namespace Forms9Patch.Droid
         /// <param name="attrs">Attrs.</param>
         /// <param name="defStyle">Def style.</param>
         public F9PTextView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
-        {
-            init(context, attrs, defStyle);
-        }
+            => Init(context, attrs, defStyle);
 
-        void init(Context context, IAttributeSet attrs, int defStyle)
+
+        void Init(Context context, IAttributeSet attrs, int defStyle)
         {
             if (Scale <= 0)
                 Scale = Settings.Context.Resources.DisplayMetrics.Density;
@@ -89,150 +84,31 @@ namespace Forms9Patch.Droid
 
 
         #region Properties
-        /*
-		float _minTextSize=4;
-		internal float MinTextSize
-		{
-			get { return _minTextSize; }
-			set
-			{
-				if (System.Math.Abs(value - _minTextSize) > float.Epsilon*5)
-				{
-					_minTextSize = value;
-					if (_minTextSize < 0)
-						_minTextSize = 4;
-					//Autofit();
-				}
-			}
-		}
-
-		float _maxTextSize= 256;
-		internal float MaxTextSize
-		{
-			get { return _maxTextSize; }
-			set
-			{
-				if (System.Math.Abs(value - _maxTextSize) > float.Epsilon * 5)
-				{
-					_maxTextSize = value;
-					if (_maxTextSize < 4)
-						_maxTextSize = 256;
-					//Autofit();
-				}
-			}
-		}
-
-
-		string _text;
-		internal new string Text
-		{
-			get { return _text; }
-			set
-			{
-				if (value != _text)
-				{
-					_text = value;
-					if (_text != null)
-					{
-						_baseFormattedString = null;
-						base.Text = _text;
-					}
-				}
-			}
-		}
-
-		internal string BaseText
-		{
-			get { return base.Text; }
-		}
-
-		BaseFormattedString _baseFormattedString;
-		internal BaseFormattedString BaseFormattedString
-		{
-			get { return _baseFormattedString; }
-			set
-			{
-				if (value != _baseFormattedString)
-				{
-					_baseFormattedString = value;
-					if (_baseFormattedString != null)
-					{
-						_text = null;
-						TextFormatted = _baseFormattedString.ToSpannableString();
-					}
-				}
-			}
-		}
-*/
         internal new float TextSize
         {
-            get
-            {
-                return base.TextSize / Scale;
-            }
+            get => base.TextSize / Scale;
+
             set
             {
                 if (System.Math.Abs(base.TextSize - value) < float.Epsilon * 5)
                     return;
-                /*
-				if (value > MaxTextSize)
-					base.TextSize = MaxTextSize;
-				else if (value < MinTextSize)
-					base.TextSize = MinTextSize;
-				else
-				*/
                 base.TextSize = value;
-
-                //System.Diagnostics.Debug.WriteLine("\tTextSize=["+value+"] base.TextSize=["+TextSize+"]");
             }
-        }
-
-
-
-        static float Precision = 0.05f;
-
-        /// <summary>
-        /// Ons the text changed.
-        /// </summary>
-        /// <returns>The text changed.</returns>
-        /// <param name="text">Text.</param>
-        /// <param name="start">Start.</param>
-        /// <param name="lengthBefore">Length before.</param>
-        /// <param name="lengthAfter">Length after.</param>
-        protected override void OnTextChanged(ICharSequence text, int start, int lengthBefore, int lengthAfter)
-        {
-            //if (_truncating)
-            //	return;
-            base.OnTextChanged(text, start, lengthBefore, lengthAfter);
         }
         #endregion
 
-        /// <summary>
-        /// Ons the size changed.
-        /// </summary>
-        /// <returns>The size changed.</returns>
-        /// <param name="w">The width.</param>
-        /// <param name="h">The height.</param>
-        /// <param name="oldw">Oldw.</param>
-        /// <param name="oldh">Oldh.</param>
-        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
-        {
-            //System.Diagnostics.Debug.WriteLine("\tF9PTextView.OnSizeChanged("+w+","+h+","+oldw+","+oldh+")");
-            base.OnSizeChanged(w, h, oldw, oldh);
-        }
 
-
+        #region Touch to Index
         internal int IndexForPoint(Android.Graphics.Point p)
         {
             var line = Layout.GetLineForVertical(p.Y);
             var offset = Layout.GetOffsetForHorizontal(line, p.X);
             return offset;
         }
+        #endregion
 
 
         #region Truncation
-
-        //bool _truncating;
         internal static StaticLayout Truncate(string text, F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, AutoFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
         {
             StaticLayout layout = null;
@@ -269,7 +145,6 @@ namespace Forms9Patch.Droid
                                 textFormatted = EndTruncatedFormatted(baseFormattedString, paint, secondToLastEnd, layout.GetLineStart(lines - 1), layout.GetLineEnd(layout.LineCount - 1), availWidth);
                                 break;
                             default:
-                                //textFormatted = baseFormattedString.ToSpannableString(EllipsePlacement.None, 0, 0, layout.GetLineEnd(lines - 1));
                                 textFormatted = TruncatedFormatted(baseFormattedString, paint, secondToLastEnd, layout.GetLineStart(lines - 1), layout.GetLineEnd(layout.LineCount - 1), availWidth);
                                 break;
                         }
@@ -394,10 +269,6 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
             int mid = (startLow + startHigh) / 2;
             var lastLineText = new Java.Lang.String("…" + text.Substring(mid, end - mid).TrimStart());
-            //var truncBounds = new Android.Graphics.Rect();
-            //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
-            //if (truncBounds.Width() > availWidth)
-
             var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return StartTruncatedIter(text, paint, secondToLastEnd, mid, startHigh, end, availWidth);
@@ -415,10 +286,6 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(startHigh, end - startHigh).TrimStart();
             int mid = (startLow + startHigh) / 2;
             var lastLineText = new Java.Lang.String(text.Substring(startLastVisible, midLastVisible - startLastVisible).TrimEnd() + "…" + text.Substring(mid, end - mid).TrimStart());
-            //var truncBounds = new Android.Graphics.Rect();
-            //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
-            //if (truncBounds.Width() > availWidth)
-
             var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             if (layout.GetLineWidth(0) > availWidth)
                 return MidTruncatedIter(text, paint, secondToLastEnd, startLastVisible, midLastVisible, mid, startHigh, end, availWidth);
@@ -436,10 +303,6 @@ namespace Forms9Patch.Droid
                 return (secondToLastEnd > 0 ? text.Substring(0, secondToLastEnd).TrimEnd() + "\n" : "") + text.Substring(start, endLow - start) + "…";
             int mid = (endLow + endHigh) / 2;
             var lastLineText = new Java.Lang.String(text.Substring(start, mid - start) + "…");
-            //var truncBounds = new Android.Graphics.Rect();
-            //paint.GetTextBounds(lastLineText, 0, lastLineText.Length, truncBounds);
-            //if (truncBounds.Width() > availWidth-Scale)
-
             var layout = TextExtensions.StaticLayout(lastLineText, paint, int.MaxValue - 10000, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
 
             if (layout.GetLineWidth(0) > availWidth)
@@ -450,12 +313,9 @@ namespace Forms9Patch.Droid
         #endregion
 
 
-
         #region Fitting
         internal static float WidthFit(ICharSequence text, TextPaint paint, int lines, float min, float max, int availWidth, int availHeight)
         {
-            //System.Diagnostics.Debug.WriteLine("F9PTextView.WidthFit: availWidth=["+availWidth+"] availHeight=["+availHeight+"]");
-
             if (availWidth > int.MaxValue / 3)
             {
                 if (availHeight > int.MaxValue / 3)
@@ -497,6 +357,7 @@ namespace Forms9Patch.Droid
             return result;
         }
 
+        const float Precision = 0.05f;
         internal static float ZeroLinesFit(ICharSequence text, TextPaint paint, float min, float max, int availWidth, int availHeight)
         {
             if (availHeight > int.MaxValue / 3)
@@ -505,10 +366,8 @@ namespace Forms9Patch.Droid
             {
                 var fontMetrics = paint.GetFontMetrics();
                 var fontLineHeight = fontMetrics.Descent * FontScale - fontMetrics.Ascent * FontScale;
-                //var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
                 var fontPixelSize = paint.TextSize * FontScale;
                 var lineHeightRatio = fontLineHeight / fontPixelSize;
-                //var leadingRatio = fontLeading / fontPixelSize;
 
                 var result = (availHeight / lineHeightRatio - 0.1f);
                 return System.Math.Min(result, max);
@@ -536,28 +395,6 @@ namespace Forms9Patch.Droid
                 return ZeroLinesFit(text, paint, mid, max, availWidth, availHeight);
             return mid;
         }
-        #endregion
-
-
-
-        #region Invalidation Skip
-        //bool _skip;
-
-        /// <summary>
-        /// Invalidate this instance.
-        /// </summary>
-        public override void Invalidate()
-        {
-            //	if (!_skip)
-            base.Invalidate();
-            //	_skip = false;
-        }
-
-        internal void SkipNextInvalidate()
-        {
-            //	_skip = true;
-        }
-
         #endregion
     }
 }

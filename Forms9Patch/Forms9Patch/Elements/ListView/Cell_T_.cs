@@ -58,10 +58,10 @@ namespace Forms9Patch
         internal BaseCellView BaseCellView = new BaseCellView();
         bool _freshHeight;
         double _oldHeight;
-
         #endregion
 
 
+        #region Construction / Disposal
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.DataTemplateSelector.Cell`1"/> class.
         /// </summary>
@@ -70,7 +70,7 @@ namespace Forms9Patch
             InstanceId = _instances++;
             View = BaseCellView;
             BaseCellView.ContentView = new TContent();
-            if (BaseCellView.ContentView is ICellHeight contentView)
+            if (BaseCellView.ContentView is ICellContentView contentView)
                 Height = contentView.CellHeight;
         }
 
@@ -89,7 +89,10 @@ namespace Forms9Patch
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
 
+
+        #region Property Change Handlers
         /// <summary>
         /// Triggered before a property is changed.
         /// </summary>
@@ -154,6 +157,39 @@ namespace Forms9Patch
                 ForceUpdateSize();
             _updatingSize = false;
         }
+        #endregion
 
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BaseCellView.ContentView is Layout layout && layout.Width > 0 && layout.Height > 0)
+            {
+                /*
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                {
+                    layout.ForceLayout();
+                    return false;
+                });
+                */
+                //var bounds = layout.Bounds;
+                //layout.Layout(Rectangle.Zero);
+                //layout.Layout(bounds);
+            }
+            if (BaseCellView.ContentView is ICellContentView contentView)
+                contentView.OnAppearing();
+
+
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            if (BaseCellView.ContentView is ICellContentView contentView)
+                contentView.OnDisappearing();
+
+        }
     }
 }

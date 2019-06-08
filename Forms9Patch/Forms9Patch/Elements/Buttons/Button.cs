@@ -1950,7 +1950,7 @@ namespace Forms9Patch
 
         #endregion
 
-
+        /*
         #region Sizing and Layout
         /// <summary>
         /// Layout the view
@@ -1961,10 +1961,18 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            if (HtmlText?.StartsWith("Lateral") ?? false)
+                System.Diagnostics.Debug.WriteLine(GetType() + ".");
             base.LayoutChildren(x, y, width, height);
             LayoutComplete?.Invoke(this, IsClipped);
         }
+
+        public void HardForceLayout()
+            => LayoutChildren(Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height);
+
+
         #endregion
+        */
     }
 
 }

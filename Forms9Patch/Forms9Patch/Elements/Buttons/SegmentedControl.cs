@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace Forms9Patch
 {
@@ -1312,6 +1313,8 @@ namespace Forms9Patch
         /// still call the base method and modify its calculated results.</remarks>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            //if (Segments.Any(s => s.HtmlText.StartsWith("Lateral")))
+            //    System.Diagnostics.Debug.WriteLine(GetType() + ".");
             if (!UpdatingSegments)
             {
                 LayoutChildIntoBoundingRegion(_background, new Rectangle(x, y, width, height));
@@ -1321,6 +1324,8 @@ namespace Forms9Patch
 
         private static bool LayoutSegment(View view, Rectangle segmentRect, object arg3)
         {
+            //if (view is Button button && (button.HtmlText?.StartsWith("Lateral") ?? false))
+            //    System.Diagnostics.Debug.WriteLine(".");
             LayoutChildIntoBoundingRegion(view, segmentRect);
             return false;
         }
@@ -1496,6 +1501,13 @@ namespace Forms9Patch
         }
 
         #endregion
+
+        /*
+        public void HardForceLayout()
+        {
+            LayoutChildren(Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height);
+        }
+        */
 
     }
 

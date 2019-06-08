@@ -235,14 +235,15 @@ namespace Forms9Patch
         static Label()
         {
             Settings.ConfirmInitialization();
-            /*P42.Utils.Debug.ConditionFunc = (obj) =>
+            /*
+            P42.Utils.Debug.ConditionFunc = (obj) =>
             {
+                if (obj is string str && str.ToLower().Trim().StartsWith("lateral"))
+                    return true;
                 if (obj is Label label)
-                {
-                    //var result = ((label.HtmlText ?? label.Text)?.ToLower().StartsWith("heights") ?? false);
-                    var result = ((label.HtmlText ?? label.Text)?.Contains("\uE872") ?? false);
-                    return result;
-                }
+                    return P42.Utils.Debug.ConditionFunc(label.HtmlText ?? label.Text);
+                if (obj is IText textObj)
+                    return P42.Utils.Debug.ConditionFunc(textObj.Text);
                 return false;
             };
             */
@@ -363,7 +364,7 @@ namespace Forms9Patch
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
             //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
-            var result = RendererSizeForWidthAndFontSize != null ? RendererSizeForWidthAndFontSize.Invoke(width, fontSize) : Size.Zero;
+            var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
             //P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
             return result;
         }
@@ -381,10 +382,12 @@ namespace Forms9Patch
             //P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
 
             IsDynamicallySized = true;
-            var result = base.GetSizeRequest(widthConstraint, heightConstraint);
+            SizeRequest result;
+            //if (!_sizeAllocated && Draw != null)
+            //    result = Draw.Invoke(widthConstraint, heightConstraint);
+            //else
+            result = base.GetSizeRequest(widthConstraint, heightConstraint);
             //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
-            if (!_sizeAllocated)
-                Draw?.Invoke(widthConstraint, heightConstraint);
             return result;
         }
 
@@ -410,7 +413,9 @@ namespace Forms9Patch
         }
 
         /*
+#pragma warning disable CS0672 // Member overrides obsolete member
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
+#pragma warning restore CS0672 // Member overrides obsolete member
         {
             //P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
@@ -420,11 +425,15 @@ namespace Forms9Patch
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
+            if (Width < 0 || Height < 0)
+                _sizeAllocated = false;
             //P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
 
         }
-        */
 
+        public void HardForceLayout()
+            => Draw?.Invoke(Width, Height);
+        */
         #endregion
 
 

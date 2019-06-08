@@ -58,7 +58,7 @@ namespace Forms9Patch
 
 
     #region Cell Template
-    class MultiPickerCellContentView : Grid, ICellHeight, IIsSelectedAble
+    class MultiPickerCellContentView : Grid, ICellContentView, IIsSelectedAble
     {
         #region Properties
         public double CellHeight { get; set; }
@@ -71,6 +71,7 @@ namespace Forms9Patch
         }
 
         #endregion
+
 
         #region Fields
         readonly Label checkLabel = new Label
@@ -89,6 +90,7 @@ namespace Forms9Patch
         };
 
         #endregion
+
 
         #region Constructors
         public MultiPickerCellContentView()
@@ -144,6 +146,16 @@ namespace Forms9Patch
         }
 
         #endregion
+
+
+        #region Appearing / Disappearing Event Handlers
+        public virtual void OnAppearing() { }
+
+        public virtual void OnDisappearing() { }
+        #endregion
+
+
+
     }
     #endregion
 }

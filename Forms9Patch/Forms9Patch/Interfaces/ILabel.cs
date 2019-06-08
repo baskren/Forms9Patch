@@ -10,6 +10,7 @@ namespace Forms9Patch
         /// Plain text
         /// </summary>
         string Text { get; set; }
+
         /// <summary>
         /// Alternative Markup text
         /// </summary>

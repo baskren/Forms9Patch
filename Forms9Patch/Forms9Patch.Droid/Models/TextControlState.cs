@@ -45,7 +45,7 @@ namespace Forms9Patch.Droid
         ICharSequence _javaText;
         public ICharSequence JavaText => _javaText;
 
-        public bool IsNullOrEmpty => (_textFormatted == null || _textFormatted.Length() == 0) && string.IsNullOrEmpty(_text);
+        public bool IsEmpty => (_textFormatted == null || _textFormatted.Length() == 0) && string.IsNullOrEmpty(_text);
         #endregion
 
 
@@ -108,30 +108,57 @@ namespace Forms9Patch.Droid
 
         public static bool operator ==(TextControlState a, TextControlState b)
         {
+
             if (a is null && b is null)
                 return true;
             if (a is null || b is null)
                 return false;
-            if (a.AvailWidth != b.AvailWidth)
-                return false;
-            if (a.AvailHeight != b.AvailHeight)
-                return false;
-            if (System.Math.Abs(a.TextSize - b.TextSize) > 0.1)
-                return false;
-            if (a.Lines != b.Lines)
-                return false;
-            if (a.AutoFit != b.AutoFit)
-                return false;
-            if (a.LineBreakMode != b.LineBreakMode)
-                return false;
-            if (a._javaText != b._javaText)
-                return false;
-            if (a.Typeface != b.Typeface)
-                return false;
-            if (System.Math.Abs(a.SyncFontSize - b.SyncFontSize) > 0.1)
-                return false;
 
+            return (System.Math.Abs(a.TextSize - b.TextSize) < 0.1)
+                && a.Lines == b.Lines
+                && a.AutoFit == b.AutoFit
+                && a.LineBreakMode == b.LineBreakMode
+                && a._javaText == b._javaText
+                && a.Typeface == b.Typeface;
+            /*
+            if (System.Math.Abs(a.TextSize - b.TextSize) > 0.1)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== TextSize a.[" + a.TextSize + "] b.[" + b.TextSize + "]");
+                return false;
+            }
+            if (a.Lines != b.Lines)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== Lines a.[" + a.Lines + "] b.[" + b.Lines + "]");
+                return false;
+            }
+            if (a.AutoFit != b.AutoFit)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== AutoFit a.[" + a.AutoFit + "] b.[" + b.AutoFit + "]");
+                return false;
+            }
+            if (a.LineBreakMode != b.LineBreakMode)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== LineBreakMode a.[" + a.LineBreakMode + "] b.[" + b.LineBreakMode + "]");
+                return false;
+            }
+            if (a._javaText != b._javaText)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== _javaText a.[" + a._javaText + "] b.[" + b._javaText + "]");
+                return false;
+            }
+            if (a.Typeface != b.Typeface)
+            {
+                if (a._javaText.ToString().StartsWith("Lateral"))
+                    System.Diagnostics.Debug.WriteLine("TextControlState" + ".== Typeface a.[" + a.Typeface + "] b.[" + b.Typeface + "]");
+                return false;
+            }
             return true;
+            */
         }
 
         public static bool operator !=(TextControlState a, TextControlState b)
