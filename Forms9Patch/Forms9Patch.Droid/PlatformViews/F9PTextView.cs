@@ -396,6 +396,23 @@ namespace Forms9Patch.Droid
             return mid;
         }
         #endregion
+
+
+        // I don't know why, but this #region seems to help mitigate a "using JNI after critical get in call to DeleteGlobalRef"
+        // crash in ConnectionCalc results, when scrolling up/down multiple times
+        //
+        // don't remove without extensive testing
+        #region Android Layout
+        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        {
+            base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+
+        protected override void OnLayout(bool changed, int left, int top, int right, int bottom)
+        {
+            base.OnLayout(changed, left, top, right, bottom);
+        }
+        #endregion
     }
 }
 

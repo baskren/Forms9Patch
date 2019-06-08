@@ -55,9 +55,10 @@ namespace Forms9Patch.Droid
             if (_currentDrawState == null || _currentDrawState.IsEmpty || Control == null || Element == null || _disposed)
                 return Xamarin.Forms.Size.Zero;
 
+            var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
-                AvailWidth = (int)System.Math.Floor(System.Math.Min(widthConstraint, int.MaxValue / 3)),
+                AvailWidth = (int)System.Math.Floor(System.Math.Min(widthConstraint * displayScale, int.MaxValue / 3)),
                 AvailHeight = int.MaxValue / 3,
                 TextSize = (float)fontSize,
             };
@@ -99,7 +100,6 @@ namespace Forms9Patch.Droid
 
             //RequestLayout();
 
-            var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
             var result = new Xamarin.Forms.Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
             //P42.Utils.Debug.Message(Element, "EXIT result = [" + result + "]  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             return result;
@@ -731,5 +731,20 @@ namespace Forms9Patch.Droid
         #endregion
 
 
+        // I don't know why, but this #region seems to help mitigate a "using JNI after critical get in call to DeleteGlobalRef"
+        // crash in ConnectionCalc results, when scrolling up/down multiple times
+        //
+        // don't remove without extensive testing
+        #region Android Layout
+        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        {
+            base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        {
+            base.OnLayout(changed, l, t, r, b);
+        }
+        #endregion
     }
 }
