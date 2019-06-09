@@ -275,6 +275,7 @@ namespace Forms9Patch.Droid
             }
             */
 
+            control.IsNativeDrawEnabled = false;
             control.SetSingleLine(false);
             control.SetMaxLines(int.MaxValue / 2);
             control.SetIncludeFontPadding(false);
@@ -347,7 +348,6 @@ namespace Forms9Patch.Droid
             }
 
             control.TextSize = tmpFontSize;
-
             var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             //P42.Utils.Debug.Message(Element, "Post STATIC LAYOUT element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
 
@@ -453,7 +453,9 @@ namespace Forms9Patch.Droid
             }
             */
             //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]  element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
-
+            control.IsNativeDrawEnabled = true;
+            if (control == Control)
+                control.RequestLayout();
 
             return result;
         }
