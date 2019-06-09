@@ -1182,6 +1182,8 @@ namespace Forms9Patch
         {
             if (IsLongPressEnabled)
                 e.Handled = HandleTap();
+            else
+                e.Handled |= (IsEnabled && IsVisible);
         }
 
         void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)

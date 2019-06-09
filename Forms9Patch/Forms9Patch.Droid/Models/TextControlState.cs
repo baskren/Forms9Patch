@@ -57,11 +57,11 @@ namespace Forms9Patch.Droid
         public int AvailWidth;
         public int AvailHeight;
 
-        public float TextSize;
+        public float TextSize = -1;
         public int Lines = (int)Label.LinesProperty.DefaultValue;
         public AutoFit AutoFit = (AutoFit)Label.AutoFitProperty.DefaultValue;
         public LineBreakMode LineBreakMode = (LineBreakMode)Label.LineBreakModeProperty.DefaultValue;
-        public float SyncFontSize;
+        public float SyncFontSize = -1;
         #endregion
 
 

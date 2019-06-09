@@ -1,19 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Threading;
 using Android.Content.Res;
-using Android.Graphics;
+using Android.OS;
 using Android.Text;
+using FormsGestures.Droid;
+using Java.Lang;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Java.Lang;
-using Android.Views;
-using Android.Util;
-using System;
-using FormsGestures.Droid;
-using Java.Interop;
-using System.Runtime.InteropServices;
-using Android.Drm;
-using Android.OS;
-using Xamarin.Forms.PlatformConfiguration;
 
 [assembly: ExportRenderer(typeof(Forms9Patch.Label), typeof(Forms9Patch.Droid.LabelRenderer))]
 namespace Forms9Patch.Droid
@@ -32,22 +26,63 @@ namespace Forms9Patch.Droid
 
         static float _aStupidWayToImplementFontScaling = 1.0f;
 
+        #region Constructor / Disposer
 #pragma warning disable CS0618 // Type or member is obsolete
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>
         public LabelRenderer()
-        {
-            _instance = _instances++;
-            AutoPackage = false;
-        }
+            => InstanceInit();
 #pragma warning restore CS0618 // Type or member is obsolete
 
         public LabelRenderer(Android.Content.Context context) : base(context)
+            => InstanceInit();
+
+        void InstanceInit()
         {
             _instance = _instances++;
-            AutoPackage = false;
+            AutoPackage = true;
         }
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                if (Element is Forms9Patch.Label element)
+                {
+                    try // incase it has been garbage collected
+                    {
+                        element.RendererIndexAtPoint -= IndexAtPoint;
+                        element.RendererSizeForWidthAndFontSize -= LabelF9pSize;
+                        element.Draw -= DrawLabel;
+                    }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    catch (System.Exception) { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                }
+                _currentDrawState = null;
+                _measureControl?.Dispose();
+                _measureControl = null;
+            }
+            base.Dispose(disposing);
+        }
+
+
+
+        #endregion
+
+
+        #region Xamarin & Forms9Patch Measurement / Layout 
+        F9PTextView _measureControl;
+        TextControlState _currentMeasureState;
+        SizeRequest? _lastMeasureResult;
+        TextControlState _lastMeasureState;
+
+        TextControlState _currentDrawState;
+        SizeRequest? _lastDrawResult;
+        TextControlState _lastDrawState;
 
 
         Xamarin.Forms.Size LabelF9pSize(double widthConstraint, double fontSize)
@@ -98,25 +133,10 @@ namespace Forms9Patch.Droid
             _lastMeasureResult = InternalLayout(_measureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
 
-            //RequestLayout();
-
             var result = new Xamarin.Forms.Size(_lastMeasureResult.Value.Request.Width / displayScale, _lastMeasureResult.Value.Request.Height / displayScale);
             //P42.Utils.Debug.Message(Element, "EXIT result = [" + result + "]  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             return result;
         }
-
-
-
-        F9PTextView _measureControl;
-        TextControlState _currentMeasureState;
-        SizeRequest? _lastMeasureResult;
-        TextControlState _lastMeasureState;
-
-        TextControlState _currentDrawState;
-        SizeRequest? _lastDrawResult;
-        TextControlState _lastDrawState;
-
-
 
         SizeRequest DrawLabel(double width, double height)
         {
@@ -155,10 +175,6 @@ namespace Forms9Patch.Droid
 
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
             _lastDrawState = new TextControlState(_currentDrawState);
-
-            //RequestLayout();
-            //if (P42.Utils.Debug.ConditionFunc(Element))
-            //    RequestLayout(0, 0, (int)width, (int)height);
 
             //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             return _lastDrawResult.Value;
@@ -226,7 +242,6 @@ namespace Forms9Patch.Droid
             return _lastMeasureResult.Value;
         }
 
-
         SizeRequest InternalLayout(F9PTextView control, TextControlState state)
         {
             var element = Element;
@@ -278,7 +293,7 @@ namespace Forms9Patch.Droid
             {
                 if (state.AvailHeight < int.MaxValue / 3)
                 {
-                    tmpFontSize = F9PTextView.ZeroLinesFit(state.JavaText, new TextPaint(control.Paint), ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    tmpFontSize = TextPaintExtensions.ZeroLinesFit(state.JavaText, new TextPaint(control.Paint), ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
                     //P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
@@ -302,7 +317,7 @@ namespace Forms9Patch.Droid
                 }
                 else if (state.AutoFit == AutoFit.Width)
                 {
-                    tmpFontSize = F9PTextView.WidthFit(state.JavaText, new TextPaint(control.Paint), state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
+                    tmpFontSize = TextPaintExtensions.WidthFit(state.JavaText, new TextPaint(control.Paint), state.Lines, ModelMinFontSize, tmpFontSize, state.AvailWidth, state.AvailHeight);
                     //P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
@@ -359,7 +374,7 @@ namespace Forms9Patch.Droid
                 }
                 else
                 {
-                    layout = F9PTextView.Truncate(state.Text, element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
+                    layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
                     //P42.Utils.Debug.Message(Element, "Truncate");
                 }
             }
@@ -442,9 +457,12 @@ namespace Forms9Patch.Droid
 
             return result;
         }
+        #endregion
 
 
+        #region Element Change Handler
 
+        readonly object _lock = new object();
 
         /// <summary>
         /// Raises the element changed event.
@@ -452,89 +470,59 @@ namespace Forms9Patch.Droid
         /// <param name="e">E.</param>
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
-            //P42.Utils.Debug.Message(Element, "ENTER e.OldElement=[" + e.OldElement + "] Bounds=[" + e.OldElement?.Bounds + "] e.NewElement=[" + e.NewElement + "] e.NewElement.Bounds=[" + e.NewElement?.Bounds + "] Width=[" + Width + "] Height=[" + Height + "]");
-            base.OnElementChanged(e);
-
-            if (Control == null)
+            //lock (_lock)
             {
-                var view = new F9PTextView(Context);
-                _labelTextColorDefault = view.TextColors;
-                SetNativeControl(view);
-            }
 
-            if (e.OldElement != null)
-            {
-                e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
-                e.OldElement.RendererSizeForWidthAndFontSize -= LabelF9pSize;
-                e.OldElement.Draw -= DrawLabel;
-            }
+                //P42.Utils.Debug.Message(Element, "ENTER e.OldElement=[" + e.OldElement + "] Bounds=[" + e.OldElement?.Bounds + "] e.NewElement=[" + e.NewElement + "] e.NewElement.Bounds=[" + e.NewElement?.Bounds + "] Width=[" + Width + "] Height=[" + Height + "]");
+                base.OnElementChanged(e);
 
-            if (e.NewElement != null)
-            {
-                e.NewElement.RendererIndexAtPoint += IndexAtPoint;
-                e.NewElement.RendererSizeForWidthAndFontSize += LabelF9pSize;
-                e.NewElement.Draw += DrawLabel;
-                _currentDrawState = new TextControlState
+                if (Control == null)
                 {
-                    Lines = Element.Lines,
-                    AutoFit = Element.AutoFit,
-                    LineBreakMode = Element.LineBreakMode,
-                    SyncFontSize = (float)Element.SynchronizedFontSize,
-                };
-                _lastMeasureState = null;
-                _lastDrawResult = null;
-                _lastMeasureResult = null;
-                _measureControl?.Dispose();
-                _measureControl = null;
-
-                if (Control != null)
-                    InitializeNewElement();
-            }
-            //P42.Utils.Debug.Message(Element, "EXIT  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
-        }
-
-
-        void InitializeNewElement()
-        {
-            //P42.Utils.Debug.Message(Element, "ENTER  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
-            if (Looper.MyLooper() == Looper.MainLooper)
-            {
-                UpdateAlignment();
-                UpdateColor();
-                UpdateFont();
-                UpdateFontSize();
-                UpdateText();
-                RequestLayout();
-            }
-            else
-                ((Android.App.Activity)Settings.Context).RunOnUiThread(() => { InitializeNewElement(); });
-            //P42.Utils.Debug.Message(Element, "EXIT");
-        }
-
-        bool _disposed;
-        protected override void Dispose(bool disposing)
-        {
-            if (!_disposed && disposing)
-            {
-                _disposed = true;
-                if (Element is Forms9Patch.Label element)
-                {
-                    try // incase it has been garbage collected
-                    {
-                        element.RendererIndexAtPoint -= IndexAtPoint;
-                        element.RendererSizeForWidthAndFontSize -= LabelF9pSize;
-                        element.Draw -= DrawLabel;
-                    }
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-                    catch (System.Exception) { }
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+                    var view = new F9PTextView(Context);
+                    _labelTextColorDefault = view.TextColors;
+                    SetNativeControl(view);
                 }
-                _currentDrawState = null;
-                _measureControl?.Dispose();
-                _measureControl = null;
+                Control.IsNativeDrawEnabled = false;
+
+                if (e.OldElement != null)
+                {
+                    e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
+                    e.OldElement.RendererSizeForWidthAndFontSize -= LabelF9pSize;
+                    e.OldElement.Draw -= DrawLabel;
+
+                    Control.SkipNextInvalidate();
+                }
+                if (e.NewElement != null)
+                {
+                    e.NewElement.RendererIndexAtPoint += IndexAtPoint;
+                    e.NewElement.RendererSizeForWidthAndFontSize += LabelF9pSize;
+                    e.NewElement.Draw += DrawLabel;
+                    _currentDrawState = new TextControlState
+                    {
+                        Lines = Element.Lines,
+                        AutoFit = Element.AutoFit,
+                        LineBreakMode = Element.LineBreakMode,
+                        SyncFontSize = (float)Element.SynchronizedFontSize,
+                    };
+                    _lastMeasureState = null;
+                    _lastDrawResult = null;
+                    _lastMeasureResult = null;
+                    _measureControl?.Dispose();
+                    _measureControl = null;
+
+                    UpdateColor(Control);
+                    UpdateFont(Control);
+                    UpdateFontSize(Control);
+                    UpdateAlignment(Control);
+                    UpdateText(Control);
+
+                }
+                Control.IsNativeDrawEnabled = true;
+                //P42.Utils.Debug.Message(Element, "EXIT  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             }
-            base.Dispose(disposing);
         }
+
+        #endregion
 
 
         #region Element Property Change Handlers
@@ -550,18 +538,15 @@ namespace Forms9Patch.Droid
 
             if (e.PropertyName == Label.HorizontalTextAlignmentProperty.PropertyName || e.PropertyName == Label.VerticalTextAlignmentProperty.PropertyName)
             {
-                UpdateAlignment();
-                //RequestLayout();
+                UpdateAlignment(Control);
             }
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
             {
-                UpdateColor();
-                //RequestLayout();
+                UpdateColor(Control);
             }
             else if (e.PropertyName == Label.FontSizeProperty.PropertyName)
             {
-                UpdateFontSize();
-                RequestLayout();
+                UpdateFontSize(Control);
             }
             else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
             {
@@ -570,8 +555,7 @@ namespace Forms9Patch.Droid
             }
             else if (e.PropertyName == Label.FontProperty.PropertyName || e.PropertyName == Label.FontFamilyProperty.PropertyName || e.PropertyName == Label.FontAttributesProperty.PropertyName)
             {
-                UpdateFont();
-                RequestLayout();
+                UpdateFont(Control);
             }
             else if (e.PropertyName == Label.LineBreakModeProperty.PropertyName)
             {
@@ -580,8 +564,7 @@ namespace Forms9Patch.Droid
             }
             else if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == Label.HtmlTextProperty.PropertyName)
             {
-                UpdateText();
-                RequestLayout();
+                UpdateText(Control);
             }
             else if (e.PropertyName == Label.AutoFitProperty.PropertyName)
             {
@@ -593,18 +576,6 @@ namespace Forms9Patch.Droid
                 UpdateLines();
                 RequestLayout();
             }
-            /*
-            else if (e.PropertyName == VisualElement.HeightProperty.PropertyName)
-            {
-                //P42.Utils.Debug.Message(Element, "Element.Height=[" + Element.Height + "] Height=[" + Height + "]");
-                RequestLayout();
-            }
-            else if (e.PropertyName == VisualElement.WidthProperty.PropertyName)
-            {
-                //P42.Utils.Debug.Message(Element, "Element.Width=[" + Element.Width + "] Width=[" + Width + "]");
-                RequestLayout();
-            }
-            */
             else if (e.PropertyName == Label.SynchronizedFontSizeProperty.PropertyName)
             {
                 _currentDrawState.SyncFontSize = (float)Element.SynchronizedFontSize;
@@ -613,9 +584,10 @@ namespace Forms9Patch.Droid
             //P42.Utils.Debug.Message(Element, "EXIT [" + e.PropertyName + "]  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
         }
 
-        void UpdateAlignment()
+        void UpdateAlignment(F9PTextView control)
         {
-            if (Control is F9PTextView control && Element is Forms9Patch.Label element)
+            if (Element is Forms9Patch.Label element)
+                //lock (_lock)
                 control.Gravity = element.HorizontalTextAlignment.ToHorizontalGravityFlags() | element.VerticalTextAlignment.ToVerticalGravityFlags();
         }
 
@@ -626,11 +598,12 @@ namespace Forms9Patch.Droid
             //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
-        void UpdateFontSize()
+        void UpdateFontSize(F9PTextView control)
         {
             //P42.Utils.Debug.Message(Element, "ENTER");
             _currentDrawState.TextSize = (float)Element.FontSize;
-            Control.TextSize = _currentDrawState.TextSize;
+            //lock (_lock)
+            control.TextSize = _currentDrawState.TextSize;
             //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
@@ -648,38 +621,35 @@ namespace Forms9Patch.Droid
             //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
-        void UpdateColor()
+        void UpdateColor(F9PTextView control)
         {
             if (_currentDrawState.TextColor == Element.TextColor)
                 return;
             _currentDrawState.TextColor = Element.TextColor;
             if (_currentDrawState.TextColor == Xamarin.Forms.Color.Default)
-                Control?.SetTextColor(_labelTextColorDefault);
+                control?.SetTextColor(_labelTextColorDefault);
             else
-                Control?.SetTextColor(_currentDrawState.TextColor.ToAndroid());
+                control?.SetTextColor(_currentDrawState.TextColor.ToAndroid());
         }
 
-        bool UpdateFont()
+        bool _updateFontPending;
+        void UpdateFont(F9PTextView control)
         {
-
+            _updateFontPending = false;
 #pragma warning disable CS0618 // Type or member is obsolete
             _currentDrawState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
 #pragma warning restore CS0618 // Type or member is obsolete
-            if (_currentDrawState.Typeface == Control.Typeface)
-                return false;
-            //P42.Utils.Debug.Message(Element, "ENTER");
-            Control.Typeface = _currentDrawState.Typeface;
-            //P42.Utils.Debug.Message(Element, "EXIT");
-            return true;
+            control.Typeface = _currentDrawState.Typeface;
+            return;
         }
 
-        bool UpdateText()
+        bool UpdateText(F9PTextView control)
         {
             //P42.Utils.Debug.Message(Element, "ENTER");
             if (Element.F9PFormattedString != null)
             {
                 _currentDrawState.TextFormatted = Element.F9PFormattedString.ToSpannableString(noBreakSpace: Element.LineBreakMode == LineBreakMode.CharacterWrap);
-                Control.TextFormatted = _currentDrawState.TextFormatted;
+                control.TextFormatted = _currentDrawState.TextFormatted;
             }
             else
             {
@@ -687,7 +657,7 @@ namespace Forms9Patch.Droid
                 if (Element.LineBreakMode == LineBreakMode.CharacterWrap)
                     text = Element.Text.Replace(' ', '\u00A0');
                 _currentDrawState.Text = text;
-                Control.Text = _currentDrawState.Text;
+                control.Text = _currentDrawState.Text;
             }
             //P42.Utils.Debug.Message(Element, "EXIT");
             return true;
@@ -731,20 +701,5 @@ namespace Forms9Patch.Droid
         #endregion
 
 
-        // I don't know why, but this #region seems to help mitigate a "using JNI after critical get in call to DeleteGlobalRef"
-        // crash in ConnectionCalc results, when scrolling up/down multiple times
-        //
-        // don't remove without extensive testing
-        #region Android Layout
-        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
-        {
-            base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
-        }
-
-        protected override void OnLayout(bool changed, int l, int t, int r, int b)
-        {
-            base.OnLayout(changed, l, t, r, b);
-        }
-        #endregion
     }
 }

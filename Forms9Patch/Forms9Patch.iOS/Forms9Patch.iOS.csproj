@@ -110,7 +110,7 @@
   <!-- NuGet Packages-->
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.0.0.425677</Version>
+      <Version>4.0.0.482894</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
