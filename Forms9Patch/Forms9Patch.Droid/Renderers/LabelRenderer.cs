@@ -164,8 +164,11 @@ namespace Forms9Patch.Droid
                 && _lastDrawState == _currentDrawState
                 && _lastDrawResult.Value.Request.Width > 0
                 && _lastDrawResult.Value.Request.Height > 0
+                && _lastDrawState.RenderedFontSize >= _currentDrawState.TextSize
                 && _lastDrawResult.Value.Request.Width <= _currentDrawState.AvailWidth
+                //&& System.Math.Abs(_lastDrawResult.Value.Request.Width - _currentDrawState.AvailWidth) < 5
                 && _lastDrawResult.Value.Request.Height <= _currentDrawState.AvailHeight
+                //&& System.Math.Abs(_lastDrawResult.Value.Request.Height - _currentDrawState.AvailHeight) < 5
                 )
             {
                 //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDrawResult.Value + "]");
@@ -214,6 +217,7 @@ namespace Forms9Patch.Droid
                 && _lastMeasureState == _currentMeasureState
                 && _lastMeasureResult.Value.Request.Width > 0
                 && _lastMeasureResult.Value.Request.Height > 0
+                && _lastMeasureState.RenderedFontSize >= _currentMeasureState.TextSize
                 && _lastMeasureResult.Value.Request.Width <= _currentMeasureState.AvailWidth
                 && _lastMeasureResult.Value.Request.Height <= _currentMeasureState.AvailHeight
                 )
@@ -226,6 +230,7 @@ namespace Forms9Patch.Droid
                 && _lastDrawState == _currentMeasureState
                 && _lastDrawResult.Value.Request.Width > 0
                 && _lastDrawResult.Value.Request.Height > 0
+                && _lastDrawState.RenderedFontSize >= _currentDrawState.TextSize
                 && _lastDrawResult.Value.Request.Width <= _currentMeasureState.AvailWidth
                 && _lastDrawResult.Value.Request.Height <= _currentMeasureState.AvailWidth)
             {
@@ -313,6 +318,8 @@ namespace Forms9Patch.Droid
                         var lineHeightRatio = fontLineHeight / fontPointSize;
                         var leadingRatio = fontLeading / fontPointSize;
                         tmpFontSize = ((state.AvailHeight / (state.Lines + leadingRatio * (state.Lines - 1))) / lineHeightRatio - 0.1f);
+                        if ((Element?.HtmlText ?? Element?.Text ?? "") == "7")
+                            System.Diagnostics.Debug.WriteLine(GetType() + ".InternalLayout AvailHeight[" + state.AvailHeight + "] lines=[" + state.Lines + "] leadingRatio=[" + leadingRatio + "] lineHeighRatio=[" + lineHeightRatio + "]");
                         //P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
                     }
                 }
@@ -348,6 +355,7 @@ namespace Forms9Patch.Droid
             }
 
             control.TextSize = tmpFontSize;
+            state.RenderedFontSize = tmpFontSize;
             var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             //P42.Utils.Debug.Message(Element, "Post STATIC LAYOUT element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
 
@@ -701,7 +709,7 @@ namespace Forms9Patch.Droid
             {
                 var minFontSize = (float)Element.MinFontSize;
                 if (minFontSize < 0)
-                    minFontSize = 4;
+                    minFontSize = 4;// Element.FontSize > 0 ? (float)Element.FontSize : (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
                 return minFontSize;
             }
         }

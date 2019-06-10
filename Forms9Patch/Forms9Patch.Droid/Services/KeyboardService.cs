@@ -42,19 +42,32 @@ namespace Forms9Patch.Droid
 
 
             var rootLayoutListener = new RootLayoutListener(root);
-            rootLayoutListener.HeightChanged += (sender, height) => Height = height;
+            rootLayoutListener.HeightChanged += OnHeightChanged;
             root.ViewTreeObserver.AddOnGlobalLayoutListener(rootLayoutListener);
-
+            /*
             Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
             {
                 im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
                 if (im.IsAcceptingText != _lastAcceptingText)
                 {
-                    Forms9Patch.KeyboardService.OnVisiblityChange(im.IsAcceptingText ? KeyboardVisibilityChange.Shown : KeyboardVisibilityChange.Hidden);
+                    Forms9Patch.KeyboardService.OnVisiblityChange(im.IsAcceptingText ? KeyboardVisibilityChange.Hidden : KeyboardVisibilityChange.Shown);
                     _lastAcceptingText = im.IsAcceptingText;
                 }
                 return true;
             });
+            */
+        }
+
+
+        double _lastHeight;
+        private void OnHeightChanged(object sender, double e)
+        {
+            Height = e;
+            if (Height > 0 && _lastHeight <= 0)
+                Forms9Patch.KeyboardService.OnVisiblityChange(KeyboardVisibilityChange.Shown);
+            else if (_lastHeight > 0 && Height <= 0)
+                Forms9Patch.KeyboardService.OnVisiblityChange(KeyboardVisibilityChange.Hidden);
+            _lastHeight = Height;
         }
 
         public string LanguageRegion

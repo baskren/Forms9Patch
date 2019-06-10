@@ -40,7 +40,7 @@ namespace Forms9Patch.Droid
         #region Initialization
         public static void Initialize(Android.App.Activity activity, string licenseKey = null)
         {
-
+            /*
             int minSdkVersion = 0;
             PackageManager manager = activity.PackageManager; //AppGlobals.getPackageManager();
             try
@@ -57,6 +57,7 @@ namespace Forms9Patch.Droid
             //if (Android.OS.Build.VERSION.SdkInt <= Android.OS.BuildVersionCodes.M)
             if (minSdkVersion <= (int)Android.OS.BuildVersionCodes.M)
                 throw new Exception("Forms9Patch requires a minSdkVersion of Android API 24 or higher.  If this is an issue, please fix the Android LabelRenderer and submit a pull request.  Note that there are edge cases that took weeks to address.");
+                */
             _initizalized = true;
             Activity = activity;
             Context = activity as Android.Content.Context;

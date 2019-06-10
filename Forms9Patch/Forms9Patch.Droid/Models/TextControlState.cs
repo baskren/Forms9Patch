@@ -62,6 +62,7 @@ namespace Forms9Patch.Droid
         public AutoFit AutoFit = (AutoFit)Label.AutoFitProperty.DefaultValue;
         public LineBreakMode LineBreakMode = (LineBreakMode)Label.LineBreakModeProperty.DefaultValue;
         public float SyncFontSize = -1;
+        public float RenderedFontSize = -1;
         #endregion
 
 
@@ -82,6 +83,7 @@ namespace Forms9Patch.Droid
             AutoFit = source.AutoFit;
             LineBreakMode = source.LineBreakMode;
             SyncFontSize = source.SyncFontSize;
+            RenderedFontSize = source.RenderedFontSize;
         }
         #endregion
 

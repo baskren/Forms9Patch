@@ -265,6 +265,7 @@ namespace Forms9Patch.Droid
         const float Precision = 0.05f;
         internal static float ZeroLinesFit(ICharSequence text, TextPaint paint, float min, float max, int availWidth, int availHeight)
         {
+
             if (availHeight > int.MaxValue / 3)
                 return max;
             if (availWidth > int.MaxValue / 3)
