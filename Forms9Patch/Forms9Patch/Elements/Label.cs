@@ -238,7 +238,7 @@ namespace Forms9Patch
             /*
             P42.Utils.Debug.ConditionFunc = (obj) =>
             {
-                if (obj is string str && str.ToLower().Trim().StartsWith("lateral"))
+                if (obj is string str && str.ToLower().Trim().StartsWith("load to grain angle"))
                     return true;
                 if (obj is Label label)
                     return P42.Utils.Debug.ConditionFunc(label.HtmlText ?? label.Text);

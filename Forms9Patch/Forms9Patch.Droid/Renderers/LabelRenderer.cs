@@ -518,8 +518,14 @@ namespace Forms9Patch.Droid
                     UpdateAlignment(Control);
                     UpdateText(Control);
 
+                    if (Element.Width > 0 && Element.Height > 0)
+                    {
+                        var displayScale = (float)Resources.DisplayMetrics.DensityDpi / (float)Android.Util.DisplayMetricsDensity.Default;
+                        DrawLabel(Element.Width * displayScale, Element.Height * displayScale);
+                    }
                 }
                 Control.IsNativeDrawEnabled = true;
+
                 //P42.Utils.Debug.Message(Element, "EXIT  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             }
         }

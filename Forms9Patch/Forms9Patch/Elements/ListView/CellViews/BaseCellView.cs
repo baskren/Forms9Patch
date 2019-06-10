@@ -10,7 +10,7 @@ namespace Forms9Patch
     /// <summary>
     /// DO NOT USE: Used by Forms9Patch.ListView as a foundation for cells.
     /// </summary>
-    class BaseCellView : Xamarin.Forms.Grid, IDisposable  // why grid?  because you can put more than one view in the same place at the same time
+    class BaseCellView : Xamarin.Forms.Grid, IDisposable, ICellContentView  // why grid?  because you can put more than one view in the same place at the same time
     {
 
         #region debug convenience
@@ -928,7 +928,6 @@ namespace Forms9Patch
                     BackgroundColor = item.SelectedCellBackgroundColor;
                 else
                     BackgroundColor = Color.Transparent;
-                //BackgroundColor = Color.Orange;
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateBackground);
@@ -971,16 +970,45 @@ namespace Forms9Patch
             else
                 Device.BeginInvokeOnMainThread(UpdateBackground);
         }
-        /*
-        protected override void LayoutChildren(double x, double y, double width, double height)
+
+        public double CellHeight
         {
-            //System.Diagnostics.Debug.WriteLine("BaseCellView.LayoutChildren");
-            if (P42.Utils.Environment.IsOnMainThread)
-                base.LayoutChildren(x, y, width, height);
-            else
-                Device.BeginInvokeOnMainThread(() => base.LayoutChildren(x, y, width, height));
+            get
+            {
+                if (ContentView is ICellContentView contentView)
+                    return contentView.CellHeight;
+                else
+                    return 90;
+            }
         }
-        */
+        #endregion
+
+
+        #region Appearing / Dissapearing Handlers
+        public void OnAppearing()
+        {
+            if (ContentView is ICellContentView contentView)
+                contentView.OnAppearing();
+            if (Device.RuntimePlatform != Device.iOS)
+            {
+                Device.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+                {
+                    if (ContentView != null)
+                    {
+                        ContentView.IsVisible = false;
+                        ContentView.IsVisible = true;
+
+                    }
+                    return false;
+                });
+            }
+        }
+
+        public void OnDisappearing()
+        {
+            if (ContentView is ICellContentView contentView)
+                contentView.OnDisappearing();
+        }
         #endregion
     }
 }

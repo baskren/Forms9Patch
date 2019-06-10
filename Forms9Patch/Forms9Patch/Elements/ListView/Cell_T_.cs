@@ -163,33 +163,13 @@ namespace Forms9Patch
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (BaseCellView.ContentView is Layout layout && layout.Width > 0 && layout.Height > 0)
-            {
-                /*
-                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                {
-                    layout.ForceLayout();
-                    return false;
-                });
-                */
-                //var bounds = layout.Bounds;
-                //layout.Layout(Rectangle.Zero);
-                //layout.Layout(bounds);
-            }
-            if (BaseCellView.ContentView is ICellContentView contentView)
-                contentView.OnAppearing();
-
-
+            BaseCellView?.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
-            if (BaseCellView.ContentView is ICellContentView contentView)
-                contentView.OnDisappearing();
-
+            BaseCellView?.OnDisappearing();
         }
     }
 }
