@@ -1436,8 +1436,8 @@ namespace Forms9Patch
                         var croppedBitmap = new SKBitmap((int)sourceRect.Width, (int)sourceRect.Height);
                         var destBitmap = new SKBitmap((int)destRect.Width, (int)destRect.Height);
                         _f9pImageData.SKBitmap.ExtractSubset(croppedBitmap, new SKRectI((int)sourceRect.Left, (int)sourceRect.Top, (int)sourceRect.Right, (int)sourceRect.Bottom));
-                        SKBitmap.Resize(destBitmap, croppedBitmap, SKBitmapResizeMethod.Lanczos3);
-                        //croppedBitmap.ScalePixels(destBitmap, SKFilterQuality.Medium);
+                        //SKBitmap.Resize(destBitmap, croppedBitmap, SKBitmapResizeMethod.Lanczos3);
+                        croppedBitmap.ScalePixels(destBitmap, SKFilterQuality.Medium);
                         workingCanvas.DrawBitmap(destBitmap, destBitmap.Info.Rect, destRect, paint);
                     }
                     else
