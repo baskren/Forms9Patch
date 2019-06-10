@@ -264,7 +264,6 @@ namespace Forms9Patch
             {
                 Content.RotationY = RotationY;
                 return;
-
             }
 
             base.OnPropertyChanged(propertyName);
@@ -273,7 +272,12 @@ namespace Forms9Patch
                 return;
         }
 
-
+        protected override void OnAppearingAnimationBegin()
+        {
+            base.OnAppearingAnimationBegin();
+            //Needed to address the fact that, during Animated layout, the pointer direction hasn't yet been calcuated before _bubbleLayout.OnSizeAllocated has been called
+            _bubbleLayout.ForceLayout();
+        }
         #endregion
 
 
@@ -568,12 +572,14 @@ namespace Forms9Patch
                         else
                         {
                             tuple = StartAndPointerLocation(hzAvail, targetBounds.Left, targetBounds.Width, width);
+                            //System.Diagnostics.Debug.WriteLine(GetType() + ".LayoutChildren tuple=[" + tuple + "] target.Bounds=[" + targetBounds + "] PointerLength=[" + PointerLength + "]");
                             bounds = new Rectangle(
                                 new Point(
                                     tuple.Item1 + x,
                                     (pointerDir == PointerDirection.Up ? targetBounds.Bottom : targetBounds.Top - vtAvail - PointerLength) + y),
                                 new Size(hzAvail, vtAvail + PointerLength)
                             );
+                            System.Diagnostics.Debug.WriteLine(GetType() + ".LayoutChildren bounds=[" + bounds + "] pointerDir=[" + pointerDir + "] _bubbleLayout.pointerDir=[" + _bubbleLayout.PointerDirection + "]");
                         }
                     }
                     else
@@ -601,6 +607,7 @@ namespace Forms9Patch
                     }
                     _bubbleLayout.PointerAxialPosition = tuple.Item2;
                     var newBounds = new Rectangle(bounds.X - targetPage.Padding.Left, bounds.Y - targetPage.Padding.Top, bounds.Width, bounds.Height);
+                    System.Diagnostics.Debug.WriteLine(GetType() + ".LayoutChildren newBounds=[" + newBounds + "] targetPage.Padding[" + targetPage.Padding.Description() + "] ");
                     Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_bubbleLayout, newBounds);
                     _lastLayout = DateTime.Now;
                 }
