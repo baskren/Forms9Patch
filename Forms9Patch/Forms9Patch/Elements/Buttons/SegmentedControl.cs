@@ -1130,6 +1130,8 @@ namespace Forms9Patch
                 else if (propertyName == IsLongPressEnabledProperty.PropertyName)
                     foreach (Segment segment in Segments)
                         segment._button.IsLongPressEnabled = IsLongPressEnabled;
+                else if (propertyName == WidthProperty.PropertyName || propertyName == HeightProperty.PropertyName)
+                    CheckIsClipped();
             }
         }
 

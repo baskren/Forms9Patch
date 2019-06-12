@@ -239,7 +239,8 @@ namespace Forms9Patch
             P42.Utils.Debug.ConditionFunc = (obj) =>
             {
                 //if (obj is string str && str.ToLower().Trim().StartsWith("load to grain angle"))
-                if (obj is string str && str.StartsWith("H3")) return true;
+                //if (obj is string str && str.StartsWith("H3")) return true;
+                if (obj is string str && str == "6‐⁷/₈\u2006in") return true;
                 if (obj is Label label)
                     return P42.Utils.Debug.ConditionFunc(label.HtmlText ?? label.Text);
                 if (obj is IText textObj)
@@ -379,7 +380,7 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            //P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ")");
+            //P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ") this.Id=[" + Id + "]");
 
             IsDynamicallySized = true;
             SizeRequest result;
@@ -405,7 +406,7 @@ namespace Forms9Patch
         //bool _sizeAllocated;
         protected override void OnSizeAllocated(double width, double height)
         {
-            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "]");
+            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "] this.Id=[" + Id + "]");
             base.OnSizeAllocated(width, height);
             //_sizeAllocated = true;
             Draw?.Invoke(width, height);
@@ -425,15 +426,15 @@ namespace Forms9Patch
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            if (Width < 0 || Height < 0)
-                _sizeAllocated = false;
+            //if (Width < 0 || Height < 0)
+            //    _sizeAllocated = false;
             //P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
 
         }
 
         public void HardForceLayout()
             => Draw?.Invoke(Width, Height);
-        */
+            */
         #endregion
 
 

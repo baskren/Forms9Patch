@@ -61,12 +61,19 @@ namespace Forms9Patch.iOS
             }
         }
 
-        public bool IsNullOrEmpty => (AttributedString == null || AttributedString.Length == 0) && string.IsNullOrEmpty(_text);
+        public bool IsBlank => (AttributedString == null || AttributedString.Length == 0) && string.IsNullOrEmpty(_text);
 
+        #endregion
+
+
+        #region Fields
+        public int _id;
+        public static int _instances;
         #endregion
 
         public TextControlState()
         {
+            _id = _instances++;
             FontPointSize = UIFont.LabelFontSize;
             FontDescriptor = UIFont.SystemFontOfSize(UIFont.LabelFontSize).FontDescriptor;
             HorizontalTextAlignment = UITextAlignment.Left;
@@ -78,6 +85,7 @@ namespace Forms9Patch.iOS
 
         public TextControlState(TextControlState other)
         {
+            _id = _instances++;
             //Font = other.Font;
             FontPointSize = other.FontPointSize;
             FontDescriptor = other.FontDescriptor;

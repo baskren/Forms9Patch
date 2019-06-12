@@ -38,7 +38,7 @@ namespace Forms9Patch.iOS
         #region Xamarin layout cycle
         SizeRequest DrawLabel(double width, double height)
         {
-            if (_currentDrawState.IsNullOrEmpty || Control == null || Element == null)
+            if (_currentDrawState.IsBlank || Control == null || Element == null)
                 return new SizeRequest(Xamarin.Forms.Size.Zero);
 
             if (width < 0 || height < 0)
@@ -49,19 +49,20 @@ namespace Forms9Patch.iOS
             _currentDrawState.AvailWidth = width; // (int)System.Math.Floor(width * displayScale);
             _currentDrawState.AvailHeight = height; // (int)System.Math.Floor(height * displayScale);
 
-            P42.Utils.Debug.Message(Element, "ENTER  _currentDrawState.AvailWidth=[" + _currentDrawState.AvailWidth + "]  _currentDrawState.AvailHeight=[" + _currentDrawState.AvailHeight + "]");
-            P42.Utils.Debug.Message(Element, "Control.Font.PointSize=[" + Control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentDrawState.AvailWidth=[" + _currentDrawState.AvailWidth + "]  _currentDrawState.AvailHeight=[" + _currentDrawState.AvailHeight + "] Element.Id=" + Element?.Id);
+            //P42.Utils.Debug.Message(Element, "_currentDrawState._id=[" + _currentDrawState._id + "]");
+            //P42.Utils.Debug.Message(Element, "Control.Font.PointSize=[" + Control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
             if (_currentDrawState == _lastDrawState && _lastDrawResult.HasValue)
             {
-                P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDrawResult.Value + "]");
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDrawResult.Value + "]");
                 return _lastDrawResult.Value;
             }
 
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
             _lastDrawState = new TextControlState(_currentDrawState);
 
-            P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastDrawResult + "]");
             return _lastDrawResult.Value;
         }
 
@@ -74,13 +75,16 @@ namespace Forms9Patch.iOS
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
             if (widthConstraint < 0 || heightConstraint < 0)
+            {
+                //P42.Utils.Debug.Message(Element, "skip A");
                 return new SizeRequest(Size.Zero);
+            }
 
-            if (_currentDrawState.IsNullOrEmpty || Control == null || Element == null)
+            if (_currentDrawState == null || _currentDrawState.IsBlank || Control == null || Element == null)
+            {
+                //P42.Utils.Debug.Message(Element, "skip B Element?.Id=" + Element?.Id);
                 return new SizeRequest(Size.Zero);
-
-            if (string.IsNullOrEmpty(_currentDrawState.Text) && (_currentDrawState.AttributedString == null || _currentDrawState.AttributedString.Length < 1))
-                return new SizeRequest(Size.Zero);
+            }
 
             _currentMeasureState = new TextControlState(_currentDrawState)
             {
@@ -89,19 +93,19 @@ namespace Forms9Patch.iOS
             };
 
 
-            P42.Utils.Debug.Message(Element, "ENTER  _currentMeasureState.AvailWidth=[" + _currentMeasureState.AvailWidth + "]  _currentMeasureState.AvailHeight=[" + _currentMeasureState.AvailHeight + "]");
-            P42.Utils.Debug.Message(Element, "MeasureControl.Font.PointSize=[" + MeasureControl.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  _currentMeasureState.AvailWidth=[" + _currentMeasureState.AvailWidth + "]  _currentMeasureState.AvailHeight=[" + _currentMeasureState.AvailHeight + "] Element?.Id=" + Element?.Id);
+            //P42.Utils.Debug.Message(Element, "MeasureControl.Font.PointSize=[" + MeasureControl.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
             if (_currentMeasureState == _lastMeasureState && _lastMeasureResult.HasValue)
             {
-                P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastMeasureResult.Value + "]");
+                //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastMeasureResult.Value + "]");
                 return _lastMeasureResult.Value;
             }
 
             _lastMeasureResult = InternalLayout(MeasureControl, _currentMeasureState);
             _lastMeasureState = new TextControlState(_currentMeasureState);
 
-            P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastMeasureResult + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT result = [" + _lastMeasureResult + "]");
             return _lastMeasureResult.Value;
         }
 
@@ -111,17 +115,17 @@ namespace Forms9Patch.iOS
             control.PropertiesFromControlState(state);
             control.Lines = 0;
 
-            P42.Utils.Debug.Message(Element, "ENTER  state.AvailWidth=[" + state.AvailWidth + "]  state.AvailHeight=[" + state.AvailHeight + "]");
-            P42.Utils.Debug.Message(Element, "control.Font.PointSize=[" + control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
-            P42.Utils.Debug.Message(Element, "control.LineBreakMode=[" + control.LineBreakMode + "] Element.LineBreakMode=[" + Element.LineBreakMode + "]");
-            P42.Utils.Debug.Message(Element, "Element.Lines=[" + Element.Lines + "] _currentControlState.Lines=[" + state.Lines + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER  state.AvailWidth=[" + state.AvailWidth + "]  state.AvailHeight=[" + state.AvailHeight + "]");
+            //P42.Utils.Debug.Message(Element, "control.Font.PointSize=[" + control.Font.PointSize + "] Element.FontSize=[" + Element.FontSize + "]");
+            //P42.Utils.Debug.Message(Element, "control.LineBreakMode=[" + control.LineBreakMode + "] Element.LineBreakMode=[" + Element.LineBreakMode + "]");
+            //P42.Utils.Debug.Message(Element, "Element.Lines=[" + Element.Lines + "] _currentControlState.Lines=[" + state.Lines + "]");
 
             if (Element.Lines == 0)
             {
                 if (state.AvailHeight < int.MaxValue / 3)
                 {
                     tmpFontSize = ZeroLinesFit(control, state.AvailWidth, state.AvailHeight, tmpFontSize);
-                    P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
+                    //P42.Utils.Debug.Message(Element, "ZeroLinesFit tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
             else
@@ -134,21 +138,19 @@ namespace Forms9Patch.iOS
                         var lineHeightRatio = font.LineHeight / font.PointSize;
                         var tmpLineSize = (nfloat)(state.AvailHeight - 0.05f) / Element.Lines;
                         tmpFontSize = tmpLineSize / lineHeightRatio;
-                        P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
+                        //P42.Utils.Debug.Message(Element, "AutoFit.Lines B (FIXED HT) tmpFontSize=[" + tmpFontSize + "]");
                     }
                 }
                 else if (Element.AutoFit == AutoFit.Width)
                 {
-                    if ((Element?.HtmlText ?? " ").StartsWith("H3 High"))
-                        System.Diagnostics.Debug.WriteLine(GetType() + ".");
                     tmpFontSize = WidthFit(control, state.AvailWidth, tmpFontSize);
-                    P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
+                    //P42.Utils.Debug.Message(Element, "AutoFit.Width tmpFontSize=[" + tmpFontSize + "]");
                 }
             }
 
-            P42.Utils.Debug.Message(Element, "Fit Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            //P42.Utils.Debug.Message(Element, "Fit Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
             tmpFontSize = BoundFontSize(tmpFontSize);
-            P42.Utils.Debug.Message(Element, "Bound Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
+            //P42.Utils.Debug.Message(Element, "Bound Complete: control.Font.PointSize=[" + control.Font.PointSize + "] tmpFontSize=[" + tmpFontSize + "]");
 
             if (Math.Abs(tmpFontSize - Element.FittedFontSize) > 0.1)
             {
@@ -158,7 +160,7 @@ namespace Forms9Patch.iOS
                         Element.FittedFontSize = -1;
                     else
                         Element.FittedFontSize = tmpFontSize;
-                    P42.Utils.Debug.Message(Element, "Element.FittedFontSize=[" + tmpFontSize + "]");
+                    //P42.Utils.Debug.Message(Element, "Element.FittedFontSize=[" + tmpFontSize + "]");
                 }
             }
 
@@ -167,7 +169,7 @@ namespace Forms9Patch.iOS
             if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
             {
                 tmpFontSize = syncFontSize;
-                P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
+                //P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
             }
 
             state.FontPointSize = tmpFontSize;
@@ -178,7 +180,7 @@ namespace Forms9Patch.iOS
             control.ContentMode = UIViewContentMode.Redraw;
 
             CGSize cgSize = LabelSize(control, state.AvailWidth, tmpFontSize);
-            P42.Utils.Debug.Message(Element, "cgSize: " + cgSize);
+            //P42.Utils.Debug.Message(Element, "cgSize: " + cgSize);
 
             control.Lines = state.Lines;
 
@@ -202,7 +204,7 @@ namespace Forms9Patch.iOS
 
             if (double.IsPositiveInfinity(state.AvailHeight))
             {
-                P42.Utils.Debug.Message(Element, "A");
+                //P42.Utils.Debug.Message(Element, "A");
                 if (Element.Lines > 0)
                 {
                     if (Element.AutoFit == AutoFit.Lines)// && Element.Lines <= textLines)
@@ -214,15 +216,15 @@ namespace Forms9Patch.iOS
                 alg = "∞A";
                 //}
                 control.Center = new CGPoint(control.Center.X, reqHeight / 2);
-                P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
+                //P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
             }
             else
             {
-                P42.Utils.Debug.Message(Element, "B");
+                //P42.Utils.Debug.Message(Element, "B");
                 var constraintLines = Lines(state.AvailHeight, control.Font);
-                P42.Utils.Debug.Message(Element, "\t constraintLines: " + constraintLines);
+                //P42.Utils.Debug.Message(Element, "\t constraintLines: " + constraintLines);
                 var constraintLinesHeight = Math.Floor(constraintLines) * control.Font.LineHeight;
-                P42.Utils.Debug.Message(Element, "\t constraintLinesHeight: " + constraintLinesHeight);
+                //P42.Utils.Debug.Message(Element, "\t constraintLinesHeight: " + constraintLinesHeight);
                 //cnstLinesStr = "CL: " + constraintLines.ToString("0.000");
 
                 if (Element.Lines > 0 && Element.Lines <= Math.Min(textLines, constraintLines))
@@ -245,18 +247,18 @@ namespace Forms9Patch.iOS
                     reqHeight = state.AvailHeight;
                     alg = "D";
                 }
-                P42.Utils.Debug.Message(Element, "\t alg: " + alg);
-                P42.Utils.Debug.Message(Element, "\t reqHeight: " + reqHeight);
+                //P42.Utils.Debug.Message(Element, "\t alg: " + alg);
+                //P42.Utils.Debug.Message(Element, "\t reqHeight: " + reqHeight);
 
-                P42.Utils.Debug.Message(Element, "\t Element.VerticalTextAlignment: " + Element.VerticalTextAlignment);
+                //P42.Utils.Debug.Message(Element, "\t Element.VerticalTextAlignment: " + Element.VerticalTextAlignment);
                 if (Element.VerticalTextAlignment == TextAlignment.Start)
                     control.Center = new CGPoint(control.Center.X, reqHeight / 2);
                 else if (Element.VerticalTextAlignment == TextAlignment.End)
                     control.Center = new CGPoint(control.Center.X, state.AvailHeight - reqHeight / 2);
-                P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
+                //P42.Utils.Debug.Message(Element, "control.Center: " + control.Center);
             }
             var result = new SizeRequest(new Size(Math.Ceiling(reqWidth), Math.Ceiling(reqHeight)), new Size(10, Math.Ceiling(state.Font.LineHeight)));
-            P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]");
             return result;
         }
 
@@ -296,11 +298,9 @@ namespace Forms9Patch.iOS
 
         CGSize LabelSize(UILabel label, double widthConstraint, nfloat fontSize)
         {
-            P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
             var font = label.Font.WithSize(fontSize);
-            P42.Utils.Debug.Message(Element, "font=[" + font + "] Element.FontFamily=[" + Element.FontFamily + "]");
-            //if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
-            //    System.Diagnostics.Debug.WriteLine(GetType() + ".");
+            //P42.Utils.Debug.Message(Element, "font=[" + font + "] Element.FontFamily=[" + Element.FontFamily + "]");
             CGSize labelSize = CGSize.Empty;
             var constraintSize = new CGSize(widthConstraint, double.PositiveInfinity);
             if (Element.Text != null)
@@ -316,7 +316,7 @@ namespace Forms9Patch.iOS
                 label.AttributedText = Element.F9PFormattedString.ToNSAttributedString(font, color.ToUIColor(Color.Black));
                 labelSize = label.AttributedText.GetBoundingRect(constraintSize, NSStringDrawingOptions.UsesLineFragmentOrigin, null).Size;
             }
-            P42.Utils.Debug.Message(Element, "EXIT labelSize=[" + labelSize + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT labelSize=[" + labelSize + "]");
             return labelSize;
         }
         #endregion
@@ -411,6 +411,7 @@ namespace Forms9Patch.iOS
         #region Change management
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
+            //P42.Utils.Debug.Message(Element, "ENTER Element?.Id=" + Element?.Id);
             if (e.OldElement != null)
             {
                 e.OldElement.RendererIndexAtPoint -= IndexAtPoint;
@@ -430,7 +431,6 @@ namespace Forms9Patch.iOS
                 }
                 UpdateTextColor();
                 UpdateFont();
-                UpdateText();
                 UpdateHorizontalAlignment();
                 UpdateLineBreakMode();
                 if (Element.HtmlText != null)
@@ -442,6 +442,7 @@ namespace Forms9Patch.iOS
                 e.NewElement.Draw += DrawLabel;
             }
             base.OnElementChanged(e);
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         bool _disposed;
@@ -468,8 +469,7 @@ namespace Forms9Patch.iOS
                 UpdateHorizontalAlignment();
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
             {
-                UpdateText();
-                LayoutSubviews();
+                UpdateTextColor();
             }
             else if (e.PropertyName == Label.FontProperty.PropertyName
                 || e.PropertyName == Label.FontFamilyProperty.PropertyName
@@ -517,6 +517,7 @@ namespace Forms9Patch.iOS
 
         void UpdateMinFontSize()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER");
             if (Element != null && Control != null)
             {
                 var minFontSize = Element.FontSize > 0 ? Element.MinFontSize : 4;
@@ -526,10 +527,12 @@ namespace Forms9Patch.iOS
                     LayoutSubviews();
                 }
             }
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateFont()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER");
             /*ControlFont = Element.ToUIFont();
             InvokeOnMainThread(() =>
             {
@@ -544,6 +547,7 @@ namespace Forms9Patch.iOS
                 UpdateAttributedText();
             else
                 UpdateText();
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         /// <summary>
@@ -552,22 +556,26 @@ namespace Forms9Patch.iOS
         /// <param name="color">Color.</param>
         protected override void SetBackgroundColor(Color color)
         {
+            //P42.Utils.Debug.Message(Element, "ENTER");
             if (color == Color.Default)
             {
                 BackgroundColor = UIColor.Clear;
                 return;
             }
             BackgroundColor = color.ToUIColor();
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateHorizontalAlignment()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER");
             _currentDrawState.HorizontalTextAlignment = Element.HorizontalTextAlignment.ToNativeTextAlignment();
             InvokeOnMainThread(() =>
             {
                 if (Control != null)
                     Control.TextAlignment = _currentDrawState.HorizontalTextAlignment;
             });
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         /*
@@ -611,25 +619,30 @@ namespace Forms9Patch.iOS
 
         void UpdateText()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER Element?.Id=" + Element?.Id);
             _currentDrawState.AttributedString = null;
             _currentDrawState.Text = Element?.Text is null
                 ? null
                 : new NSString(Element.Text);
             Control.Text = _currentDrawState.Text;
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateAttributedText()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER Element?.Id=" + Element?.Id);
             var color = Element.TextColor;
             _currentDrawState.Text = null;
             _currentDrawState.AttributedString = Element?.HtmlText is null
                 ? null
                 : Element.F9PFormattedString.ToNSAttributedString(_currentDrawState.Font, color.ToUIColor(Color.Black));
             Control.AttributedText = _currentDrawState.AttributedString;
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateTextColor()
         {
+            //P42.Utils.Debug.Message(Element, "ENTER");
             InvokeOnMainThread(() =>
             {
                 var color = Element.TextColor;
@@ -640,11 +653,12 @@ namespace Forms9Patch.iOS
                         UpdateAttributedText();
                 }
             });
+            //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateLineBreakMode()
         {
-            P42.Utils.Debug.Message(Element, "ENTER Element.LineBreakMode-[" + Element.LineBreakMode + "]");
+            //P42.Utils.Debug.Message(Element, "ENTER Element.LineBreakMode-[" + Element.LineBreakMode + "]");
             switch (Element.LineBreakMode)
             {
                 case LineBreakMode.HeadTruncation:
@@ -668,7 +682,7 @@ namespace Forms9Patch.iOS
                     _currentDrawState.LineBreakMode = UILineBreakMode.WordWrap;
                     break;
             }
-            P42.Utils.Debug.Message(Element, "ENTER _currentDrawState.LineBreakMode-[" + _currentDrawState.LineBreakMode + "]");
+            //P42.Utils.Debug.Message(Element, "EXIT _currentDrawState.LineBreakMode-[" + _currentDrawState.LineBreakMode + "]");
         }
         #endregion
 
