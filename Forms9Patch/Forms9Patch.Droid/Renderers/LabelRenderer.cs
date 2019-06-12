@@ -453,13 +453,6 @@ namespace Forms9Patch.Droid
 
             if (element.LineBreakMode == LineBreakMode.NoWrap)
                 control.SetSingleLine(true);
-            /*
-            if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
-            {
-                Control.SetBackgroundColor(Android.Graphics.Color.Pink);
-                //P42.Utils.Debug.Message(Element, "Visibility = " + Control.Visibility);
-            }
-            */
             //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]  element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             control.IsNativeDrawEnabled = true;
             if (control == Control)
