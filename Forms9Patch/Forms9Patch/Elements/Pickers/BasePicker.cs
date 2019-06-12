@@ -207,6 +207,8 @@ namespace Forms9Patch
 
         void OnAppeared(object sender, EventArgs e)
         {
+            if (ItemsSource == null || ItemsSource.Count < 1 || !ItemsSource.Contains(SelectedItem))
+                _listView.ScrollTo(0);
             if (SelectedItem != null)
                 ScrollTo(SelectedItem);
             else if (SelectedItems.Count > 0)

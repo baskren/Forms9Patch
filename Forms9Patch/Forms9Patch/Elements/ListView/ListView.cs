@@ -1376,6 +1376,9 @@ namespace Forms9Patch
 
             var cellHeight = dataSet.CellHeight;
 
+            if (_listView.Height < 0)
+                return false
+                    ;
             if (position == ScrollToPosition.Center)
             {
                 offset += -_listView.Height / 2 + cellHeight / 2;
