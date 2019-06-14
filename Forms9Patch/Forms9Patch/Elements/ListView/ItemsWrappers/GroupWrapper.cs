@@ -704,7 +704,7 @@ namespace Forms9Patch
                 RemoveItemWithSourceIndex(sourceIndex);
                 SubscribeToHiddenSourcePropertyChanged(newSourceObject);
             }
-            else if (VisibilityTest?.Invoke(newSourceObject) ?? default(bool))
+            else if (VisibilityTest?.Invoke(newSourceObject) ?? default)
             {
                 // insert object
                 InsertSourceObject(sourceIndex, newSourceObject);
@@ -949,8 +949,7 @@ namespace Forms9Patch
         {
             if (indexPath == null)
                 return null;
-            var subGroup = this[indexPath.Item1] as GroupWrapper;
-            if (subGroup == null)
+            if (!(this[indexPath.Item1] is GroupWrapper subGroup))
             {
                 if (indexPath.Item1 > 0)
                     throw new NotSupportedException("ItemAtIndexPath: indexPath.Item1 > 0 but ItemWrapper at Item1 is not a Group");
@@ -1059,7 +1058,7 @@ namespace Forms9Patch
                 if (itemWrapper is GroupWrapper groupWrapper)
                 {
                     var groupCellHeight = groupWrapper.BestGuessGroupHeaderHeight();
-                    if (groupSelector?.Invoke(calcOffset + groupCellHeight, flatIndex, i, groupWrapper) ?? default(bool))
+                    if (groupSelector?.Invoke(calcOffset + groupCellHeight, flatIndex, i, groupWrapper) ?? default)
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, groupCellHeight);
                     calcOffset += groupCellHeight;
                     flatIndex++;
@@ -1067,7 +1066,7 @@ namespace Forms9Patch
                     {
                         var subItemWrapper = groupWrapper[j];
                         var cellHeight = subItemWrapper.BestGuessItemRowHeight();
-                        if (subItemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, j, groupWrapper, subItemWrapper) ?? default(bool))
+                        if (subItemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, j, groupWrapper, subItemWrapper) ?? default)
                             return new DeepDataSet(subItemWrapper, calcOffset, new int[] { i, j }, flatIndex, cellHeight);
                         calcOffset += cellHeight;
                         flatIndex++;
@@ -1079,7 +1078,7 @@ namespace Forms9Patch
                 else
                 {
                     var cellHeight = itemWrapper.BestGuessItemRowHeight();
-                    if (itemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, itemWrapper) ?? default(bool))
+                    if (itemSelector?.Invoke(calcOffset + cellHeight, flatIndex, i, itemWrapper) ?? default)
                         return new DeepDataSet(itemWrapper, calcOffset, new int[] { i }, flatIndex, cellHeight);
                     calcOffset += cellHeight;
                     flatIndex++;
@@ -1111,8 +1110,7 @@ namespace Forms9Patch
             var itemWrapper = this[deepIndex[0]];
             if (deepIndex.Length == 1)
                 return itemWrapper;
-            var subGroup = itemWrapper as GroupWrapper;
-            if (subGroup == null)
+            if (!(itemWrapper is GroupWrapper subGroup))
                 throw new NotSupportedException("ItemAtDeepIndex: deepIndex.Length > 1 but item at index is not Group");
             var subGroupDeepIndex = new int[deepIndex.Length - 1];
             Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
@@ -1229,8 +1227,7 @@ namespace Forms9Patch
                 Insert(deepIndex[0], itemWrapper);
                 return;
             }
-            var subGroup = this[deepIndex[0]] as GroupWrapper;
-            if (subGroup == null)
+            if (!(this[deepIndex[0]] is GroupWrapper subGroup))
                 throw new NotSupportedException("DeepInsert: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
             var subGroupDeepIndex = new int[deepIndex.Length - 1];
             Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
@@ -1254,8 +1251,7 @@ namespace Forms9Patch
                 RemoveAt(deepIndex[0]);
                 return;
             }
-            var subGroup = this[deepIndex[0]] as GroupWrapper;
-            if (subGroup == null)
+            if (!(this[deepIndex[0]] is GroupWrapper subGroup))
                 throw new NotSupportedException("DeepRemove: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
             var subGroupDeepIndex = new int[deepIndex.Length - 1];
             Array.Copy(deepIndex, 1, subGroupDeepIndex, 0, deepIndex.Length - 1);
@@ -1286,8 +1282,7 @@ namespace Forms9Patch
             }
             else
             {
-                var subGroup = this[index] as GroupWrapper;
-                if (subGroup == null)
+                if (!(this[index] is GroupWrapper subGroup))
                     throw new NotSupportedException("DeepSet: deepIndex.Length > 1 but itemWrapper at index is not a GroupWrapper");
                 // create a new index (subGroupDeepIndex) that contains everything except the [0] index of deepIndex.
                 var subGroupDeepIndex = new int[deepIndex.Length - 1];
