@@ -10,8 +10,8 @@ namespace Forms9Patch
 	/// MarkdownLabel Formatted string.
 	/// </summary>
 	[Xamarin.Forms.ContentProperty (nameof(Text))]
-	abstract class F9PFormattedString : INotifyPropertyChanged
-	{
+	class F9PFormattedString : INotifyPropertyChanged, IEquatable<F9PFormattedString>
+    {
 		internal ObservableCollection<Span> _spans; 
 
 		/// <summary>
@@ -64,9 +64,21 @@ namespace Forms9Patch
 			Text = s;
 		}
 
-		#region Operators
-		/// <param name="formatted">Formatted.</param>
-		public static explicit operator string (F9PFormattedString formatted) {
+        
+        public F9PFormattedString(F9PFormattedString other)
+        {
+            Text = other.Text;
+            if (other._spans != null && other._spans.Count > 0)
+            {
+                _spans = new ObservableCollection<Span>(other._spans);
+                _spans.CollectionChanged += OnCollectionChanged;
+            }
+        }
+        
+
+        #region Operators
+        /// <param name="formatted">Formatted.</param>
+        public static explicit operator string (F9PFormattedString formatted) {
 			return formatted?.Text;
 		}
 
@@ -96,11 +108,9 @@ namespace Forms9Patch
                 var enumerator = e.OldItems.GetEnumerator ();
 				try {
 					while (enumerator.MoveNext ()) {
-						var span = enumerator.Current as Span;
-						if (span != null) {
-							span.PropertyChanged -= OnItemPropertyChanged;
-						}
-					}
+                        if (enumerator.Current is Span span)
+                            span.PropertyChanged -= OnItemPropertyChanged;
+                    }
 				}
 				finally {
 					var disposable = enumerator as IDisposable;
@@ -111,11 +121,9 @@ namespace Forms9Patch
                 var enumerator = e.NewItems.GetEnumerator ();
 				try {
 					while (enumerator.MoveNext ()) {
-						var span2 = enumerator.Current as Span;
-						if (span2 != null) {
-							span2.PropertyChanged += OnItemPropertyChanged;
-						}
-					}
+                        if (enumerator.Current is Span span2)
+                            span2.PropertyChanged += OnItemPropertyChanged;
+                    }
 				}
 				finally {
 					var disposable = enumerator as IDisposable;
@@ -137,13 +145,49 @@ namespace Forms9Patch
 			PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (propertyName));
 		}
 
-
-		#endregion
-
+        #endregion
 
 
+        #region IEquality
+        public bool Equals(F9PFormattedString other)
+        {
+            if (other is null)
+                return false;
+            if (_spans is null != other._spans is null)
+                return false;
+            if (_spans is null && other._spans is null)
+                return Text == other.Text;
+            if (_spans.Count != other._spans.Count)
+                return false;
+            for (int i = 0; i < _spans.Count; i++)
+                if (_spans[i] != other._spans[i])
+                    return false;
+            return true;
+        }
 
-	}
+        public override bool Equals(object obj)
+            => obj is F9PFormattedString other ? Equals(other) : false;
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = GetType().GetHashCode();
+                foreach (var span in _spans)
+                    hashCode += span.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(F9PFormattedString a, F9PFormattedString b)
+            => a.Equals(b);
+
+        public static bool operator !=(F9PFormattedString a, F9PFormattedString b)
+            => !a.Equals(b);
+
+        #endregion
+
+    }
 
 }
 
