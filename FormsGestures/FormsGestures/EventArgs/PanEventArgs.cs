@@ -93,8 +93,7 @@ namespace FormsGestures
         {
             if (obj == null)
                 return false;
-            var panEventArgs = obj as PanEventArgs;
-            return panEventArgs != null && Equals(panEventArgs);
+            return obj is PanEventArgs panEventArgs && Equals(panEventArgs);
         }
 
         /// <summary>

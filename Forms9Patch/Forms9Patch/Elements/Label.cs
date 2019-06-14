@@ -12,8 +12,6 @@ namespace Forms9Patch
     [ContentProperty(nameof(HtmlText))]
     public class Label : Xamarin.Forms.Label, ILabel, IElement //View, IFontElement
     {
-
-
         #region Obsolete Properties
         /// <summary>
         /// backing store for Fit property
@@ -404,6 +402,11 @@ namespace Forms9Patch
 
 
         //bool _sizeAllocated;
+        /// <summary>
+        /// Called when the size of the label has been allocate by Xamarin layout system
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         protected override void OnSizeAllocated(double width, double height)
         {
             //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "] this.Id=[" + Id + "]");

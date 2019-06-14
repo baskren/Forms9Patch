@@ -487,7 +487,7 @@ namespace Forms9Patch
         /// <param name="target">Target.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        internal PopupBase(VisualElement target = null, bool retain = false, TimeSpan popAfter = default(TimeSpan))
+        internal PopupBase(VisualElement target = null, bool retain = false, TimeSpan popAfter = default)
         {
             HorizontalOptions = LayoutOptions.Center;
             VerticalOptions = LayoutOptions.Center;
@@ -636,7 +636,7 @@ namespace Forms9Patch
 
             #region IShape
 
-            layout.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
+            layout.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default ? Color.White : BackgroundColor);
             layout.HasShadow = HasShadow;
             layout.ShadowInverted = ShadowInverted;
             layout.OutlineColor = OutlineColor;
@@ -750,7 +750,7 @@ namespace Forms9Patch
             //    });
         }
 
-        SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
+        readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
         /// <summary>
         /// Obsolete.  Use PushAsync instead
@@ -944,7 +944,7 @@ namespace Forms9Patch
 
                 #region IShape
                 else if (propertyName == BackgroundColorProperty.PropertyName)
-                    _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default(Color) ? Color.White : BackgroundColor);
+                    _decorativeContainerView.BackgroundColor = (BackgroundColor == Color.Default || BackgroundColor == default ? Color.White : BackgroundColor);
                 else if (propertyName == HasShadowProperty.PropertyName)
                     _decorativeContainerView.HasShadow = HasShadow;
                 else if (propertyName == ShadowInvertedProperty.PropertyName)

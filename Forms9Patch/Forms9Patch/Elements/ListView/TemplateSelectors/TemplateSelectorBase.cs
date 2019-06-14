@@ -77,6 +77,9 @@ namespace Forms9Patch
             _contentTypes.Remove(typeof(ItemWrapper<string>));
         }
 
+        /// <summary>
+        /// Clear all cell templates
+        /// </summary>
         public void Clear()
         {
             _cellTemplates.Clear();

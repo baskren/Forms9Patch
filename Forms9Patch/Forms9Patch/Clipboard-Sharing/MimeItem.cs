@@ -63,7 +63,7 @@ namespace Forms9Patch
             set => base.Value = value;
         }
 
-        IMimeItem _mimeItem;
+        readonly IMimeItem _mimeItem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.MimeItem`1"/> class.

@@ -230,7 +230,7 @@ namespace Forms9Patch
 
         #region Fields
         static int _instances = 0;
-        int _id;
+        readonly int _id;
         #endregion
 
 

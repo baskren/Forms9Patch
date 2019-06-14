@@ -85,41 +85,34 @@ namespace Forms9Patch.UWP
             public Windows.UI.Xaml.Controls.GroupStyle GroupStyle { get; private set; }
 
             public GroupStyleSelector(Windows.UI.Xaml.Controls.GroupStyle style)
-            {
-                GroupStyle = style;
-            }
+                => GroupStyle = style;
 
             protected override GroupStyle SelectGroupStyleCore(object group, uint level) => GroupStyle;
         }
 
         void SetCellStyle()
         {
-            var listView = Control as Windows.UI.Xaml.Controls.ListView;
-            if (listView == null)
-                return;
+            if (Control is Windows.UI.Xaml.Controls.ListView listView)
+            {
+                listView.ShowsScrollingPlaceholders = true;
 
-            listView.ShowsScrollingPlaceholders = true;
+                var itemStyle = (Windows.UI.Xaml.Style)EnhancedListViewResources["Forms9PatchListViewItem"];
+                listView.ItemContainerStyle = itemStyle;
 
-            
-            //var itemStyle = (Windows.UI.Xaml.Style)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewItem"];
-            var itemStyle = (Windows.UI.Xaml.Style)EnhancedListViewResources["Forms9PatchListViewItem"];
-            listView.ItemContainerStyle = itemStyle;
-
-            //var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)Windows.UI.Xaml.Application.Current.Resources["Forms9PatchListViewGroupStyle"];
-            var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)EnhancedListViewResources["Forms9PatchListViewGroupStyle"];
-            listView.GroupStyleSelector = new GroupStyleSelector(forms9PatchListViewGroupStyle);
-
+                var forms9PatchListViewGroupStyle = (Windows.UI.Xaml.Controls.GroupStyle)EnhancedListViewResources["Forms9PatchListViewGroupStyle"];
+                listView.GroupStyleSelector = new GroupStyleSelector(forms9PatchListViewGroupStyle);
+            }
         }
 
         bool _viewChangeEventSet;
         void UnsetViewChangedEvent()
         {
-            if (!_viewChangeEventSet)
-                return;
-
-            if (_scrollViewer != null)
-                _scrollViewer.ViewChanged -= ScrollViewer_ViewChanged;
-            _viewChangeEventSet = false;
+            if (_viewChangeEventSet)
+            {
+                if (_scrollViewer != null)
+                    _scrollViewer.ViewChanged -= ScrollViewer_ViewChanged;
+                _viewChangeEventSet = false;
+            }
         }
 
         void SetViewChangedEvent()

@@ -17,7 +17,7 @@ namespace Forms9Patch.UWP
         public bool Underline { get; set; }
         public bool Strikethrough { get; set; }
 
-        public MetaFont(string family, double size, bool bold = false, bool italic = false, string id = null, string href = null, Xamarin.Forms.Color textColor = default(Xamarin.Forms.Color), Xamarin.Forms.Color backgroundColor = default(Xamarin.Forms.Color), bool underline = false, bool strikethrough=false) : base(family, size, bold, italic)
+        public MetaFont(string family, double size, bool bold = false, bool italic = false, string id = null, string href = null, Xamarin.Forms.Color textColor = default, Xamarin.Forms.Color backgroundColor = default, bool underline = false, bool strikethrough=false) : base(family, size, bold, italic)
         {
             if (!string.IsNullOrEmpty(id) || !string.IsNullOrEmpty(href))
                 Action = new MetaFontAction(id, href);

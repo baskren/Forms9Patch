@@ -51,7 +51,13 @@ namespace Forms9Patch
         #endregion Segments property
 
         #region Orientation property
+        /// <summary>
+        /// Key for Orientaton of menu
+        /// </summary>
         public static readonly BindableProperty OrientationProperty = BindableProperty.Create(nameof(Orientation), typeof(StackOrientation), typeof(TargetedMenu), StackOrientation.Horizontal);
+        /// <summary>
+        /// Orienation of menu
+        /// </summary>
         public StackOrientation Orientation
         {
             get => (StackOrientation)GetValue(OrientationProperty);
@@ -183,7 +189,13 @@ namespace Forms9Patch
 
 
         #region IcontFontFamiliy property
+        /// <summary>
+        /// Key for Icon Font Family property
+        /// </summary>
         public static readonly BindableProperty IconFontFamilyProperty = BindableProperty.Create(nameof(IconFontFamily), typeof(string), typeof(TargetedMenu), default(string));
+        /// <summary>
+        /// Icon Font Familiy property
+        /// </summary>
         public string IconFontFamily
         {
             get => (string)GetValue(IconFontFamilyProperty);
@@ -192,7 +204,13 @@ namespace Forms9Patch
         #endregion IcontFontFamiliy property
 
         #region FontFamily property
+        /// <summary>
+        /// Key for FontFamily property
+        /// </summary>
         public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TargetedMenu), default(string));
+        /// <summary>
+        /// Font Family property
+        /// </summary>
         public string FontFamily
         {
             get => (string)GetValue(FontFamilyProperty);
@@ -393,7 +411,7 @@ namespace Forms9Patch
             PointerDirection = PointerDirection.Any;
             PreferredPointerDirection = PointerDirection.Down;
             PointerLength = 10;
-            BackgroundColor = default(Color);
+            BackgroundColor = default;
             HasShadow = false;
             Padding = 0;
             //Margin = 0;
@@ -437,6 +455,10 @@ namespace Forms9Patch
 
         #region Disposal
         bool _disposed;
+        /// <summary>
+        /// Instance is being disposed
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)
@@ -464,6 +486,11 @@ namespace Forms9Patch
 
 
         #region PropertyChange handlers
+        /// <summary>
+        /// Invoked when property will be changed
+        /// </summary>
+        /// <param name="propertyName"></param>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
         protected override void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanging(propertyName);
@@ -832,6 +859,9 @@ namespace Forms9Patch
             await CancelAsync(sender);
         }
 
+        /// <summary>
+        /// Invoked when appearing
+        /// </summary>
         protected override void OnAppearing()
             => UpdateLayout();
 

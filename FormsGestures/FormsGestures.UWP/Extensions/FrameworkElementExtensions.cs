@@ -24,8 +24,7 @@ namespace FormsGestures.UWP
         {
             while (uwpElement?.Parent != null)
             {
-                var parent = uwpElement.Parent as T;
-                if (parent != null)
+                if (uwpElement.Parent is T parent)
                     return parent;
                 uwpElement = uwpElement.Parent as FrameworkElement;
             }

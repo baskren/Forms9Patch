@@ -45,7 +45,7 @@ namespace Forms9Patch
         /// <returns></returns>
         public static bool IsDefault(this Color c)
         {
-            return c == default(Color) || c == Color.Default;
+            return c == default || c == Color.Default;
         }
 
         /// <summary>

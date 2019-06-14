@@ -281,7 +281,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Header property
         /// </summary>
-        public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty HeaderProperty = BindableProperty.Create(nameof(Header), typeof(object), typeof(ListView), default);
         /// <summary>
         /// Gets/Sets the Header property
         /// </summary>
@@ -312,7 +312,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for Footer property
         /// </summary>
-        public static readonly BindableProperty FooterProperty = BindableProperty.Create(nameof(Footer), typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty FooterProperty = BindableProperty.Create(nameof(Footer), typeof(object), typeof(ListView), default);
         /// <summary>
         /// Gets/Sets the Footer property
         /// </summary>
@@ -344,7 +344,7 @@ namespace Forms9Patch
         /// <summary>
         /// backing store for SelectedItem property
         /// </summary>
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(ListView), default(object));
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(ListView), default);
         /// <summary>
         /// Gets/Sets the SelectedItem property
         /// </summary>
@@ -796,7 +796,7 @@ namespace Forms9Patch
         #region Gesture Handlers
 
         ItemWrapper _selectedItemWrapper;
-        List<ItemWrapper> _selectedItemWrappers = new List<ItemWrapper>();
+        readonly List<ItemWrapper> _selectedItemWrappers = new List<ItemWrapper>();
         bool _processingItemTapped;
 
         void OnItemTapped(object sender, ItemWrapperTapEventArgs e)
@@ -938,7 +938,7 @@ namespace Forms9Patch
 
         }
 
-        List<ItemWrapper> _visibleItemWrappers = new List<ItemWrapper>();
+        readonly List<ItemWrapper> _visibleItemWrappers = new List<ItemWrapper>();
 
         internal List<ItemWrapper> VisibleItemWrappers => new List<ItemWrapper>(_visibleItemWrappers);
 

@@ -16,7 +16,7 @@ namespace FormsGestures
         // ancestors will procede descendents in this list so that interuptions can found quickly and fired in an orderly fashion
         internal static readonly List<Listener> Listeners = new List<Listener>();
 
-        VisualElement _element;
+        readonly VisualElement _element;
 
         /// <summary>
         /// VisualElement that is the focus of this Listener

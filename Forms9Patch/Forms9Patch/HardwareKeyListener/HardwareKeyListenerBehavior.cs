@@ -7,7 +7,7 @@ namespace Forms9Patch
     internal class HardwareKeyListenerBehavior : Behavior<VisualElement>
     {
 
-        ObservableCollection<HardwareKeyListener> _hardwareKeyListeners = new ObservableCollection<HardwareKeyListener>();
+        readonly ObservableCollection<HardwareKeyListener> _hardwareKeyListeners = new ObservableCollection<HardwareKeyListener>();
         public ObservableCollection<HardwareKeyListener> HardwareKeyListeners
         {
             get => _hardwareKeyListeners;

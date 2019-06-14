@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// </summary>
     public static class StringExtensions
     {
-        static string EmailRegexString = @"(?:(?:\r\n)?[ \t])*(?:(?:(?:[^()<>@,;:\\"".\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t]
+        static readonly string EmailRegexString = @"(?:(?:\r\n)?[ \t])*(?:(?:(?:[^()<>@,;:\\"".\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t]
 )+|\Z|(?=[\[""()<>@,;:\\"".\[\]]))|""(?:[^\""\r\\]|\\.|(?:(?:\r\n)?[ \t]))*""(?:(?:
 \r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\"".\[\] \000-\031]+(?:(?:(
 ?:\r\n)?[ \t])+|\Z|(?=[\[""()<>@,;:\\"".\[\]]))|""(?:[^\""\r\\]|\\.|(?:(?:\r\n)?[ 
@@ -91,7 +91,7 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\"".\[\]
 |(?=[\[""()<>@,;:\\"".\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*\>(?:(
 ?:\r\n)?[ \t])*))*)?;\s*)".Replace(Environment.NewLine, "");
 
-        static Regex EmailRegex = new Regex(EmailRegexString);
+        static readonly Regex EmailRegex = new Regex(EmailRegexString);
 
         /// <summary>
         /// Tests if string is a valid email address

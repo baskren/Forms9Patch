@@ -159,7 +159,7 @@ namespace Forms9Patch
 
 
         #region Fields
-        bool _noUpdate = true;
+        readonly bool _noUpdate = true;
         ButtonState _currentState;
         //Xamarin.Forms.StackLayout _stackLayout;
         //Xamarin.Forms.Image _image;
@@ -216,6 +216,9 @@ namespace Forms9Patch
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Called when the button is disposed
+        /// </summary>
         public new void Dispose()
         {
             Dispose(true);

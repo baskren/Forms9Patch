@@ -203,6 +203,9 @@ namespace Forms9Patch
             set => SetValue(FitProperty, value);
         }
 
+        /// <summary>
+        /// Do not use
+        /// </summary>
         [Obsolete("Content property is not supported", true)]
         public new VisualElement Content
         {

@@ -80,7 +80,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="retain">If set to <c>true</c> retain.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        public ModalPopup(bool retain = false, TimeSpan popAfter = default(TimeSpan)) : base(retain: retain, popAfter: popAfter) => Init();
+        public ModalPopup(bool retain = false, TimeSpan popAfter = default) : base(retain: retain, popAfter: popAfter) => Init();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.ModalPopup"/> class.

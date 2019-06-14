@@ -261,6 +261,10 @@ namespace Forms9Patch
         }
 
         bool _disposed;
+        /// <summary>
+        /// Dispose instance
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && !_disposed)

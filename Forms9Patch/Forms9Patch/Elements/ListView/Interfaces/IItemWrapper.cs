@@ -21,12 +21,6 @@ namespace Forms9Patch
         bool IsLastItem { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:Forms9Patch.IItemWrapper"/> should render separator, de.
-        /// </summary>
-        /// <value><c>true</c> if should render separator; otherwise, <c>false</c>.</value>
-        //bool ShouldRenderSeparator { get; }
-
-        /// <summary>
         /// Gets the separator visibilty.
         /// </summary>
         /// <value>The separator visibilty.</value>
@@ -43,11 +37,6 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The height of the separator.</value>
         double RequestedSeparatorHeight { get; }
-
-        /// <summary>
-        /// Answers the question, "Should a separator be rendered after the cell for this item?"
-        /// </summary>
-        //double RenderedSeparatorHeight { get; }
 
         /// <summary>
         /// Gets the separator left indent for this cell.

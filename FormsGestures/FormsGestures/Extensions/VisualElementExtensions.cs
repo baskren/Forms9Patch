@@ -208,27 +208,19 @@ namespace FormsGestures
         public static List<T> FindChildrenWithPropertyAndOfType<T>(this VisualElement parentElement, string propertyName, List<T> result = null) where T : VisualElement
         {
             result = result ?? new List<T>();
-
-            var content = parentElement.GetPropertyValue("Content") as VisualElement;
-            var children = parentElement.GetPropertyValue("Children") as IEnumerable;
-
-            if (children == null)
+            if (parentElement.GetPropertyValue("Children") is IEnumerable children)
             {
-                if (content != null)
-                    FindChildrenWithPropertyAndOfType<T>(content, propertyName, result);
+                foreach (var child in children)
+                    if (child is VisualElement visualElement)
+                        FindChildrenWithPropertyAndOfType<T>(visualElement, propertyName, result);
             }
             else
             {
-                foreach (var child in children)
-                {
-                    if (child is VisualElement visualElement)
-                        FindChildrenWithPropertyAndOfType<T>(visualElement, propertyName, result);
-                }
+                if (parentElement.GetPropertyValue("Content") is VisualElement content)
+                    FindChildrenWithPropertyAndOfType<T>(content, propertyName, result);
             }
-
             if (parentElement is T && propertyName == null || parentElement.HasProperty(propertyName))
                 result.Add(parentElement as T);
-
             return result;
         }
 
@@ -349,6 +341,11 @@ namespace FormsGestures
             return null;
         }
 
+        /// <summary>
+        /// Is the element in the current visible view tree?
+        /// </summary>
+        /// <param name="visualElement"></param>
+        /// <returns></returns>
         public static bool IsInVisibleViewTree(this VisualElement visualElement)
         {
             Element parent = visualElement;

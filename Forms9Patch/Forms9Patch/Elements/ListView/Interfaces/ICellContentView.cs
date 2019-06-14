@@ -14,8 +14,14 @@ namespace Forms9Patch
         /// <value>The height of the cell.</value>
         double CellHeight { get; }
 
+        /// <summary>
+        /// Called when cell is appearing
+        /// </summary>
         void OnAppearing();
 
+        /// <summary>
+        /// Called when cell is disappearing
+        /// </summary>
         void OnDisappearing();
     }
 

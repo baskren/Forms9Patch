@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Forms9Patch
 {
+    /// <summary>
+    /// System Sound Effects
+    /// </summary>
     public enum SoundEffect
     {
         /// <summary>

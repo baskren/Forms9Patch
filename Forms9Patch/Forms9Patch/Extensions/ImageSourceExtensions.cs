@@ -16,17 +16,13 @@ namespace Forms9Patch
         {
             if (thisSource == otherSource)
                 return true;
-            var thisStreamSource = thisSource as Xamarin.Forms.StreamImageSource;
-            var otherStreamSource = otherSource as Xamarin.Forms.StreamImageSource;
-            if (thisStreamSource != null && otherStreamSource != null)
+            if (thisSource is Xamarin.Forms.StreamImageSource thisStreamSource && otherSource is Xamarin.Forms.StreamImageSource otherStreamSource)
             {
                 if (thisStreamSource.GetValue(ImageSource.AssemblyProperty) != otherStreamSource.GetValue(ImageSource.AssemblyProperty))
                     return false;
                 return thisStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) != otherStreamSource.GetValue(ImageSource.EmbeddedResourceIdProperty) ? false : true;
             }
-            var thisFileSource = thisSource as Xamarin.Forms.FileImageSource;
-            var otherFileSource = otherSource as Xamarin.Forms.FileImageSource;
-            return thisFileSource != null && otherFileSource != null && thisFileSource.File == otherFileSource.File;
+            return thisSource is Xamarin.Forms.FileImageSource thisFileSource && otherSource is Xamarin.Forms.FileImageSource otherFileSource && thisFileSource.File == otherFileSource.File;
         }
 
         internal static string ImageSourceKey(this Xamarin.Forms.ImageSource imageSource)

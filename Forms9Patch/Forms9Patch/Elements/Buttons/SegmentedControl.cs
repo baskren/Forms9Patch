@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.ComponentModel;
 
 namespace Forms9Patch
 {
@@ -118,6 +119,10 @@ namespace Forms9Patch
             set { SetValue(TintImageProperty, value); }
         }
 
+        /// <summary>
+        /// Do not sue!
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Use Segments", true)]
         public VisualElement Content
         {

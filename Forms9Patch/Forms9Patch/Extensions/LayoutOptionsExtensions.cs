@@ -38,6 +38,11 @@ namespace Forms9Patch
             return o1.Alignment == o2.Alignment && o1.Expands == o2.Expands;
         }
 
+        /// <summary>
+        /// Because this should have been done by Xamarin
+        /// </summary>
+        /// <param name="layoutOptions"></param>
+        /// <returns></returns>
         public static string ToString(this LayoutOptions layoutOptions)
         {
             return layoutOptions.Alignment + (layoutOptions.Expands ? "AndExpands" : null);

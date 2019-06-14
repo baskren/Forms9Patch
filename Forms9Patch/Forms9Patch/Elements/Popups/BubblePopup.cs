@@ -189,7 +189,7 @@ namespace Forms9Patch
         /// <param name="target">Target.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, bool retain = false, TimeSpan popAfter = default(TimeSpan)) : base(target, retain, popAfter) => Init();
+        public BubblePopup(VisualElement target, bool retain = false, TimeSpan popAfter = default) : base(target, retain, popAfter) => Init();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.BubblePopup"/> class.
@@ -198,7 +198,7 @@ namespace Forms9Patch
         /// <param name="point">Point.</param>
         /// <param name="retain">If set to <c>true</c> retain.</param>
         /// <param name="popAfter">Pop after TimeSpan.</param>
-        public BubblePopup(VisualElement target, Point point, bool retain = false, TimeSpan popAfter = default(TimeSpan)) : base(target, retain, popAfter)
+        public BubblePopup(VisualElement target, Point point, bool retain = false, TimeSpan popAfter = default) : base(target, retain, popAfter)
         {
             Init();
             Point = point;
@@ -272,6 +272,9 @@ namespace Forms9Patch
                 return;
         }
 
+        /// <summary>
+        /// Called when popup is starting to appear
+        /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
             base.OnAppearingAnimationBegin();

@@ -30,7 +30,7 @@ namespace Forms9Patch
 
 
         #region Fields
-        ActivityIndicator _indicator = new ActivityIndicator
+        readonly ActivityIndicator _indicator = new ActivityIndicator
         {
             BackgroundColor = Color.Transparent,
             Color = Color.Blue,
