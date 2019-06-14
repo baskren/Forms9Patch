@@ -45,9 +45,8 @@ namespace Forms9Patch.UWP
                             using (var fontFamily = fontCollection.GetFontFamily(i))
                             {
                                 var familyNames = fontFamily.FamilyNames;
-                                int index;
 
-                                if (!familyNames.FindLocaleName(System.Globalization.CultureInfo.CurrentCulture.Name, out index))
+                                if (!familyNames.FindLocaleName(System.Globalization.CultureInfo.CurrentCulture.Name, out int index))
                                     familyNames.FindLocaleName("en-us", out index);
 
                                 var name = familyNames.GetString(index);

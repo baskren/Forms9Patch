@@ -17,7 +17,7 @@ namespace Forms9Patch
         /// <param name="text"></param>
         /// <param name="popAfter">Will dissappear after popAfter TimeSpan</param>
         /// <returns></returns>
-        public static Toast Create(string title, string text, TimeSpan popAfter = default(TimeSpan))
+        public static Toast Create(string title, string text, TimeSpan popAfter = default)
             => new Toast { Title = title, Text = text, PopAfter = popAfter, IsVisible = true };
 
         #endregion

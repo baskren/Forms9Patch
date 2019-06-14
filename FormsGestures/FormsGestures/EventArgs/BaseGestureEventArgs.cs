@@ -101,8 +101,7 @@ namespace FormsGestures
         {
             if (obj == null)
                 return false;
-            var baseGestureEventArgs = obj as BaseGestureEventArgs;
-            return baseGestureEventArgs != null && Equals(baseGestureEventArgs);
+            return obj is BaseGestureEventArgs baseGestureEventArgs && Equals(baseGestureEventArgs);
         }
 
         /// <summary>
