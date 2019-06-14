@@ -13,81 +13,22 @@ namespace Forms9Patch.UWP
     class LabeLRenderer : ViewRenderer<Label, TextBlock>
     {
         #region Debug support
-        bool DebugCriteria()
-            => DebugCondition;
-
         bool DebugCondition
-            //=> (Element.Text ?? Element.HtmlText) == "Analysis Mode:";
-            //=> (Element.Text ?? Element.HtmlText) == "5";
-            //=> (Element.Text ?? Element.HtmlText) == "cancel";
-            //=> (Element.Text ?? Element.HtmlText)?.StartsWith("HEIGHTS") ?? false;
-            => false;
-            //=>  (Element.Text ?? Element.HtmlText)?.StartsWith("While") ?? false;
-            // Element?.HtmlText == "Bolt Parameters:" || Element?.HtmlText == "Lag Screw Parameters:" || Element?.HtmlText == "Wood Screw Parameters:" || Element?.HtmlText == "Nail/Spike Parameters:" || Element?.HtmlText == "Ring Shank Nail Parameters:"; 
-            /*
-        {
-            get
-            {
-                return (Element?.Parent?.ToString() is string str && str.StartsWith("[Bc3.Forms.BcItemTextValueLabel."));
-
-                //if (Element.Parent.ToString() == "Bc3.Forms.BcItemTextValueLabel")
-                //string labelTextStart = "I4";
-                //if ((Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart)) )
-               // {
-                 //   var parent = Element.Parent;
-                //}
-                //return (Element?.Text != null && Element.Text.StartsWith(labelTextStart)) || (Element?.HtmlText != null && Element.HtmlText.StartsWith(labelTextStart));
-
-            }
-        } */
-
-        int _debugDepth;
-        //List<ConsoleColor> _debugColors;
-
-        void DebugMessage(string message, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
-        {
-            InnerDebugMessage(message, GetType() + "." + callerName);
-        }
-
-        void InnerDebugMessage(string message, string methodName)
-        {
-            if (DebugCondition)
-            {
-                if (message?.Contains("ENTER") ?? false)
-                {
-                    if (_debugDepth == 0)
-                        System.Diagnostics.Debug.WriteLine("=========================================================");
-                    _debugDepth++;
-                }
-                if (message?.Contains("EXIT") ?? false)
-                {
-                    System.Diagnostics.Debug.Unindent();
-                }
-                System.Diagnostics.Debug.WriteLine(methodName + ": " + message);
-                if (message?.Contains("ENTER") ?? false)
-                    System.Diagnostics.Debug.Indent();
-                if (message?.Contains("EXIT") ?? false)
-                {
-                    if (_debugDepth == 0)
-                        System.Diagnostics.Debug.WriteLine("=========================================================");
-                    _debugDepth--;
-                }
-            }
-        }
+            => P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false;
 
         void DebugGetDesiredRequest(string mark, double widthConstraint, double heightConstraint, SizeRequest request, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            DebugMessage(mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
+            P42.Utils.Debug.Message(Element,mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
         }
 
         void DebugArrangeOverride(Windows.Foundation.Size finalSize, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            DebugMessage("FinSize=[" + finalSize + "] " + DebugControlSizes(), callerName);
+            P42.Utils.Debug.Message(Element,"FinSize=[" + finalSize + "] " + DebugControlSizes(), callerName);
         }
 
         void DebugMeasureOverride(string mark, Windows.Foundation.Size availableSize, Windows.Foundation.Size result, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
-            DebugMessage(mark + " Elmt.Sz=[" + Element?.Bounds.Size + "] AvailSz=[" + availableSize + "] " + DebugControlSizes() + " result=[" + result + "]", callerName);
+            P42.Utils.Debug.Message(Element,mark + " Elmt.Sz=[" + Element?.Bounds.Size + "] AvailSz=[" + availableSize + "] " + DebugControlSizes() + " result=[" + result + "]", callerName);
         }
 
         string DebugControlSizes()
@@ -165,18 +106,6 @@ namespace Forms9Patch.UWP
             }
         }
 
-        void DebugIndent()
-        {
-            if (DebugCondition)
-                System.Diagnostics.Debug.Indent();
-        }
-
-        void DebugUnindent()
-        {
-            if (DebugCondition)
-                System.Diagnostics.Debug.Unindent();
-        }
-
         #endregion
 
 
@@ -240,10 +169,10 @@ namespace Forms9Patch.UWP
                 //e.NewElement.DebugCriteriaFunc += DebugCriteria;
                 //e.NewElement.SizeChanged += OnElementSizeChanged;
 
-                //Control.LayoutUpdated += (s, ex) => DebugMessage("Control.LayoutUpdated");
-                //Control.Loading += (s, ex) => DebugMessage("Control.Loading");
-                //Control.Loaded += (s, ex) => DebugMessage("Contorl.Loaded");
-                //Control.Unloaded += (s, ex) => DebugMessage("Control.Unloaded");
+                //Control.LayoutUpdated += (s, ex) => P42.Utils.Debug.Message(Element,"Control.LayoutUpdated");
+                //Control.Loading += (s, ex) => P42.Utils.Debug.Message(Element,"Control.Loading");
+                //Control.Loaded += (s, ex) => P42.Utils.Debug.Message(Element,"Contorl.Loaded");
+                //Control.Unloaded += (s, ex) => P42.Utils.Debug.Message(Element,"Control.Unloaded");
 
                 UpdateColor(Control);
                 UpdateHorizontalAlign(Control);
@@ -254,8 +183,8 @@ namespace Forms9Patch.UWP
 
         private void OnElementSizeChanged(object sender, EventArgs e)
         {
-            DebugMessage("ENTER size=["+Element.Bounds.Size+"]");
-            DebugMessage("EXIT");
+            P42.Utils.Debug.Message(Element,"ENTER size=["+Element.Bounds.Size+"]");
+            P42.Utils.Debug.Message(Element,"EXIT");
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -263,9 +192,9 @@ namespace Forms9Patch.UWP
             #region Forms9Patch.Label Properties
             if (e.PropertyName == Forms9Patch.Label.TextProperty.PropertyName || e.PropertyName == Forms9Patch.Label.HtmlTextProperty.PropertyName)
             {
-                DebugMessage("ENTER");
+                P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout(Control);
-                DebugMessage("EXIT");
+                P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.AutoFitProperty.PropertyName
                 //|| e.PropertyName == Forms9Patch.Label.WidthProperty.PropertyName
@@ -274,15 +203,15 @@ namespace Forms9Patch.UWP
                 //||e.PropertyName == Forms9Patch.Label.HeightRequestProperty.PropertyName
                 )
             {
-                DebugMessage("ENTER");
+                P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout(Control);
-                DebugMessage("EXIT");
+                P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.LinesProperty.PropertyName)
             {
-                DebugMessage("ENTER");
+                P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout(Control);
-                DebugMessage("EXIT");
+                P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
                 UpdateMinFontSize(Control);
@@ -299,17 +228,17 @@ namespace Forms9Patch.UWP
                 || e.PropertyName == Xamarin.Forms.Label.FontAttributesProperty.PropertyName)
             //UpdateTextAndFont(Control);
             {
-                DebugMessage("ENTER");
+                P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout(Control);
-                DebugMessage("EXIT");
+                P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.TextColorProperty.PropertyName)
                 UpdateColor(Control);
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
             {
-                DebugMessage("ENTER");
+                P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout(Control);
-                DebugMessage("EXIT");
+                P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
                 UpdateHorizontalAlign(Control);
@@ -360,18 +289,18 @@ namespace Forms9Patch.UWP
 
         void UpdateSynchrnoizedFontSize(TextBlock textBlock)
         {
-            DebugMessage("ENTER");
+            P42.Utils.Debug.Message(Element,"ENTER");
             _perfectSizeValid = false;
             if (Element is ILabel label && label.SynchronizedFontSize != textBlock.FontSize)
                 if (label.SynchronizedFontSize!=-1 && textBlock.FontSize!=_defaultNativeFontSize)
                 ForceLayout(textBlock);
-            DebugMessage("EXIT");
+            P42.Utils.Debug.Message(Element,"EXIT");
         }
 
 
         void UpdateLineBreakMode(TextBlock textBlock)
         {
-            DebugMessage("ENTER");
+            P42.Utils.Debug.Message(Element,"ENTER");
             _perfectSizeValid = false;
 
             if (textBlock == null || Element==null)
@@ -408,13 +337,13 @@ namespace Forms9Patch.UWP
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            DebugMessage("EXIT");
+            P42.Utils.Debug.Message(Element,"EXIT");
         }
 
 
         void ForceLayout(TextBlock textBlock)
         {
-            DebugMessage("ENTER");
+            P42.Utils.Debug.Message(Element,"ENTER");
             _perfectSizeValid = false;
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
@@ -427,19 +356,19 @@ namespace Forms9Patch.UWP
             ((Forms9Patch.Label)Element).InternalInvalidateMeasure();  // if this isn't here, app crashes when BcItem.Title changes;
             //((VisualElement)Element)?.InvalidateMeasureNonVirtual(Xamarin.Forms.Internals.InvalidationTrigger.MeasureChanged);
             //System.Diagnostics.Debug.WriteLine("ForceLayout [" + Element.HtmlText + "]");
-            DebugMessage("EXIT");
+            P42.Utils.Debug.Message(Element,"EXIT");
         }
 
 
         void UpdateMinFontSize(TextBlock textBlock)
         {
-            DebugMessage("ENTER");
+            P42.Utils.Debug.Message(Element,"ENTER");
             var label = Element;
             if (label == null || textBlock==null)
                 return;
             if (label.MinFontSize > Control.FontSize || Control.Inlines.ExceedsFontSize(label.MinFontSize))
                 ForceLayout(textBlock);
-            DebugMessage("EXIT");
+            P42.Utils.Debug.Message(Element,"EXIT");
         }
         #endregion
 
@@ -448,8 +377,8 @@ namespace Forms9Patch.UWP
 
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
-            //DebugMessage("------------------------------------------------------------------------------------------------");
-            DebugMessage("ENTER widthConstrain=[" + widthConstraint + "] heightConstrain=[" + heightConstraint + "]");
+            //P42.Utils.Debug.Message(Element,"------------------------------------------------------------------------------------------------");
+            P42.Utils.Debug.Message(Element,"ENTER widthConstrain=[" + widthConstraint + "] heightConstrain=[" + heightConstraint + "]");
             /*
             if (!_perfectSizeValid)
             {
@@ -463,7 +392,7 @@ namespace Forms9Patch.UWP
 
             if (widthFits && heightFits)
             {
-                DebugMessage("EXIT perfect fits ["+_perfectSize+"]");
+                P42.Utils.Debug.Message(Element,"EXIT perfect fits ["+_perfectSize+"]");
                 return _perfectSize;
             }
             /*
@@ -495,7 +424,7 @@ namespace Forms9Patch.UWP
             var desiredSize = InternalMeasure(new Windows.Foundation.Size(widthConstraint, heightConstraint));
             var minSize = new Xamarin.Forms.Size(10, Element != null ? _fontMetrics.LineHeightForFontSize(Element.DecipheredMinFontSize()) : 10);
             var result = new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
-            DebugMessage("EXIT result=["+result+"]");
+            P42.Utils.Debug.Message(Element,"EXIT result=["+result+"]");
             return result;
         }
         #endregion
@@ -510,7 +439,7 @@ namespace Forms9Patch.UWP
             if (textBlock == null)
                 return finalSize;
 
-            DebugMessage("ENTER finalSize=[" + finalSize + "]");
+            P42.Utils.Debug.Message(Element,"ENTER finalSize=[" + finalSize + "]");
 
 
             //InternalMeasure(finalSize);
@@ -521,17 +450,19 @@ namespace Forms9Patch.UWP
                 textBlock.Measure(finalSize);
                 
             PrivateArrange(finalSize);
-            DebugMessage("EXIT finalSize=[" + finalSize + "]");
+            P42.Utils.Debug.Message(Element,"EXIT finalSize=[" + finalSize + "]");
             return finalSize;
         }
 
         void PrivateArrange(Windows.Foundation.Size finalSize)
         {
-            DebugMessage("ENTER finalSize=[" + finalSize + "] ");
+            P42.Utils.Debug.Message(Element,"ENTER finalSize=[" + finalSize + "] ");
             //var childHeight = Math.Max(0, Math.Min(Element.Height, Control.DesiredSize.Height));
             var childHeight = finalSize.Height;
-            DebugMessage(" childHeight=["+childHeight+"]");
+            P42.Utils.Debug.Message(Element," childHeight=["+childHeight+"]");
 
+            if (double.IsInfinity(finalSize.Width) || double.IsInfinity(finalSize.Height))
+                return;
             //DebugTextBlockProperties(Control);
 
             var rect = new Windows.Foundation.Rect();
@@ -562,9 +493,9 @@ namespace Forms9Patch.UWP
             */
             rect.Height = childHeight;
             rect.Width = finalSize.Width;
-            DebugMessage(" rect=[" + rect + "]");
+            P42.Utils.Debug.Message(Element," rect=[" + rect + "]");
             Control.Arrange(rect);
-            DebugMessage("EXIT finalSize=[" + finalSize + "]");
+            P42.Utils.Debug.Message(Element,"EXIT finalSize=[" + finalSize + "]");
         }
 
 
@@ -573,30 +504,30 @@ namespace Forms9Patch.UWP
         {
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine(GetType() + ".");
-            //DebugMessage("~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~");
-            DebugMessage("ENTER availableSize=[" + availableSize + "]");
+            //P42.Utils.Debug.Message(Element,"~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~");
+            P42.Utils.Debug.Message(Element,"ENTER availableSize=[" + availableSize + "]");
             //var result = InternalMeasure(availableSize);
 
             Windows.Foundation.Size result = _lastInternalMeasure;
             if (Element.Width > 0 && Element.Height > 0)
             {
-                if (LayoutValid && (Element.Width < _lastInternalMeasure.Width || Element.Height < _lastInternalMeasure.Height))
+                if (!LayoutValid || Element.Width != _lastInternalMeasure.Width || Element.Height != _lastInternalMeasure.Height)
                 {
                     InternalMeasure(new Windows.Foundation.Size(Element.Width, Element.Height));
                     result = _lastInternalMeasure;
                 }
-                else if (Element.Width < _lastInternalMeasure.Width || Element.Height < _lastInternalMeasure.Height)
-                {
-                    InternalMeasure(new Windows.Foundation.Size(Element.Width, Element.Height));
-                    result = _lastInternalMeasure;
-                }
+                //else if (Element.Width < _lastInternalMeasure.Width || Element.Height < _lastInternalMeasure.Height)
+                //{
+                //    InternalMeasure(new Windows.Foundation.Size(Element.Width, Element.Height));
+                //    result = _lastInternalMeasure;
+                //}
             }
             else if (!LayoutValid)
                 result = InternalMeasure(availableSize);
 
 
 
-            DebugMessage("EXIT result=[" + result + "]");
+            P42.Utils.Debug.Message(Element,"EXIT result=[" + result + "]");
             return result;
         }
 
@@ -612,11 +543,11 @@ namespace Forms9Patch.UWP
             var label = Element;
             textBlock = textBlock ?? Control;
             /*
-            DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride pre-Enter availableSize=[" + availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]  PageSize=["+Xamarin.Forms.Application.Current.MainPage.Bounds.Size+"]");
-            DebugMessage("[" + _measureOverrideInvocation + "] \t\t availWidth>=Page.Width=[" + (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) + "]");
-            DebugMessage("[" + _measureOverrideInvocation + "] \t\t availHeight>=Page.Height=[" + (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) + "]");
-            DebugMessage("[" + _measureOverrideInvocation + "] \t\t Element.Parent=["+ Element.Parent + "]");
-            DebugMessage("[" + _measureOverrideInvocation + "] \t\t MeasureOverride FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
+            P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] MeasureOverride pre-Enter availableSize=[" + availableSize+"] ElemmentSize=["+Element.Bounds.Size+"]  PageSize=["+Xamarin.Forms.Application.Current.MainPage.Bounds.Size+"]");
+            P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] \t\t availWidth>=Page.Width=[" + (Math.Round(availableSize.Width) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Width)) + "]");
+            P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] \t\t availHeight>=Page.Height=[" + (Math.Round(availableSize.Height) >= Math.Round(Xamarin.Forms.Application.Current.MainPage.Height)) + "]");
+            P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] \t\t Element.Parent=["+ Element.Parent + "]");
+            P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] \t\t MeasureOverride FontSize=[" + textBlock.FontSize + "] BaseLineOffset=[" + textBlock.BaselineOffset + "] LineHeight=[" + textBlock.LineHeight + "]");
 */
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
@@ -629,7 +560,7 @@ namespace Forms9Patch.UWP
                 _lastElementSize = Element.Bounds.Size;
                 return new Windows.Foundation.Size(0, 0);
             }
-            DebugMessage("ENTER availableSize=[" + availableSize + "]");
+            P42.Utils.Debug.Message(Element,"ENTER availableSize=[" + availableSize + "]");
             //if (Double.IsInfinity(availableSize.Height) && Double.IsInfinity(availableSize.Width))
             //    LayoutValid = false;
 
@@ -643,7 +574,7 @@ namespace Forms9Patch.UWP
                 && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
             //    if (LayoutValid && _lastAvailableSize.Width == availableSize.Width && _lastAvailableSize.Height <= availableSize.Height && _lastElementSize.Width == Element.Bounds.Size.Width && _lastElementSize.Height <= Element.Bounds.Size.Height && DateTime.Now - _lastMeasure < TimeSpan.FromSeconds(1))
             {
-                DebugMessage("EXIT USE LAST SIZE  ["+_lastInternalMeasure+"]");
+                P42.Utils.Debug.Message(Element,"EXIT USE LAST SIZE  ["+_lastInternalMeasure+"]");
                 return _lastInternalMeasure;
             }
 
@@ -652,7 +583,7 @@ namespace Forms9Patch.UWP
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
 
-            //DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride ENTER availableSize=[" + availableSize + "]");
+            //P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] MeasureOverride ENTER availableSize=[" + availableSize + "]");
             //Element.IsInNativeLayout = true;
             label.SetIsInNativeLayout(true);
 
@@ -687,7 +618,7 @@ namespace Forms9Patch.UWP
             }
             */
 
-            //DebugMessage("[" + _measureOverrideInvocation + "] \t\t width=[" + width+"] height=["+height+"]");
+            //P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] \t\t width=[" + width+"] height=["+height+"]");
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
 
@@ -724,11 +655,11 @@ namespace Forms9Patch.UWP
 
                 textBlock.SetAndFormatText(label, tmpFontSize);
                 textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
-                DebugMessage("ENTER AUTOFIT label.Lines==0 tmpFontSize=["+tmpFontSize+"] textBlock.DesiredSize=[" + textBlock.DesiredSize + "] width=[" + width + "] height=[" + height + "]");
+                P42.Utils.Debug.Message(Element,"ENTER AUTOFIT label.Lines==0 tmpFontSize=["+tmpFontSize+"] textBlock.DesiredSize=[" + textBlock.DesiredSize + "] width=[" + width + "] height=[" + height + "]");
                 _fontMetrics = textBlock.GetFontMetrics();
                 if (label.Lines == 0)
                 {
-                    DebugMessage("A label.Lines==0");
+                    P42.Utils.Debug.Message(Element,"A label.Lines==0");
                     // do our best job to fit the existing space.
                     if (textBlock.DesiredSize.Width - width > -Precision || textBlock.DesiredSize.Height - height > -Precision)
                     {
@@ -739,18 +670,18 @@ namespace Forms9Patch.UWP
                             System.Diagnostics.Debug.WriteLine(GetType() + ".");
                         textBlock.SetAndFormatText(label, tmpFontSize);
                         textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
-                        DebugMessage("A tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                        P42.Utils.Debug.Message(Element,"A tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                 }
                 else if (label.AutoFit == AutoFit.Lines)
                 {
-                    DebugMessage("B label.AutoFit==Lines");
+                    P42.Utils.Debug.Message(Element,"B label.AutoFit==Lines");
                     tmpHt = height;
                     if (height > int.MaxValue / 3)
                     {
                         //tmpHt = height = label.Lines * (_fontMetrics.LineHeightForFontSize(tmpFontSize) + ;
                         tmpHt = height = _fontMetrics.HeightForLinesAtFontSize(label.Lines, tmpFontSize);
-                        DebugMessage("B.1 tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                        P42.Utils.Debug.Message(Element,"B.1 tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                     else
                     {// set the font size to fit Label.Lines into the available height
@@ -770,26 +701,26 @@ namespace Forms9Patch.UWP
                                 var bestWidth = FindBestWidthForLineFit(label, textBlock, tmpFontSize, tmpHt, constrainedSize.Width, unconstrainedSize.Width);
                                 textBlock.SetAndFormatText(label, tmpFontSize);
                                 textBlock.Measure(new Windows.Foundation.Size(bestWidth, double.PositiveInfinity));
-                                DebugMessage("B.2 bestWidth=[" + bestWidth + "]");
+                                P42.Utils.Debug.Message(Element,"B.2 bestWidth=[" + bestWidth + "]");
                             }
                         }
-                        DebugMessage("B.3 tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                        P42.Utils.Debug.Message(Element,"B.3 tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                 }
                 else if (label.AutoFit == AutoFit.Width)
                 {
-                    DebugMessage("C textBlock.ActualWidth=[" + textBlock.ActualWidth + "]  textBlock.LineHeight=["+ textBlock.LineHeight + "] textBlock.DesiredSize.Height / textBlock.LineHeight=[" + textBlock.DesiredSize.Height / textBlock.LineHeight + "]  label.Lines=[" + label.Lines + "]");
+                    P42.Utils.Debug.Message(Element,"C textBlock.ActualWidth=[" + textBlock.ActualWidth + "]  textBlock.LineHeight=["+ textBlock.LineHeight + "] textBlock.DesiredSize.Height / textBlock.LineHeight=[" + textBlock.DesiredSize.Height / textBlock.LineHeight + "]  label.Lines=[" + label.Lines + "]");
                     //if (textBlock.DesiredSize.Height / textBlock.LineHeight > label.Lines)
                     if (textBlock.ActualWidth > textBlock.DesiredSize.Width || textBlock.DesiredSize.Height / textBlock.LineHeight > label.Lines)
                     {
                         tmpFontSize = WidthAndLinesFit(label, textBlock, label.Lines, minFontSize, tmpFontSize, width);
                         textBlock.SetAndFormatText(label, tmpFontSize);
                         textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
-                        DebugMessage("C tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                        P42.Utils.Debug.Message(Element,"C tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                 }
 
-                DebugMessage("EXIT AUTOFIT");
+                P42.Utils.Debug.Message(Element,"EXIT AUTOFIT");
                 // autofit is off!  
                 // No need to do anything at the moment.  Will textBlock.SetAndFormat and textBlock.Measure at the end
                 //{
@@ -824,11 +755,11 @@ namespace Forms9Patch.UWP
                         Element.FittedFontSize = tmpFontSize;
                     }
                 }
-                //DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride Element.FittedFontSize=[" + Element.FittedFontSize + "]");
+                //P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] MeasureOverride Element.FittedFontSize=[" + Element.FittedFontSize + "]");
 
                 /*
                 var syncFontSize = ((ILabel)label).SynchronizedFontSize;
-                DebugMessage("[" + _measureOverrideInvocation + "] syncFontSize=[" + syncFontSize+"]");
+                P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] syncFontSize=[" + syncFontSize+"]");
                 if (syncFontSize >= 0 && tmpFontSize != syncFontSize)
                 {
                     tmpHt = -1;
@@ -846,16 +777,18 @@ namespace Forms9Patch.UWP
 
                 //if (DebugCondition && label.Width>0 && label.Height > 0 &&(textBlock.DesiredSize.Width > label.Width || textBlock.DesiredSize.Height > label.Height))
                 //    System.Diagnostics.Debug.WriteLine("");
-                //DebugMessage("[" + _measureOverrideInvocation + "] availableSize=[" + availableSize + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "] ");
+                //P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] availableSize=[" + availableSize + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "] ");
                 //System.Diagnostics.Debug.WriteLine("[" + _measureOverrideInvocation + "] MeasureOverride [" + (Element.Text ?? Element.HtmlText)+"] availableSize=[" + availableSize + "] result=[" + result + "] FontSize=[" + textBlock.FontSize + "] LineHeight=[" + textBlock.LineHeight + "] ");
 
                 textBlock.MaxLines = label.Lines;
+
+
 
             }
 
             label.SetIsInNativeLayout(false);
 
-            //DebugMessage("[" + _measureOverrideInvocation + "] MeasureOverride EXIT");
+            //P42.Utils.Debug.Message(Element,"[" + _measureOverrideInvocation + "] MeasureOverride EXIT");
 
             if (textBlock == Control)
             {
@@ -866,12 +799,14 @@ namespace Forms9Patch.UWP
                 _lastLines = label.Lines;
                 _lastMeasure = DateTime.Now;
                 _lastInternalMeasure = result;
+
+                PrivateArrange(availableSize);
             }
             if (DebugCondition)
                 _measureOverrideInvocation++;
 
             _measuring = false;
-            DebugMessage("EXIT result=["+result+"]");
+            P42.Utils.Debug.Message(Element,"EXIT result=["+result+"]");
             return result;
         }
         #endregion
@@ -900,7 +835,7 @@ namespace Forms9Patch.UWP
         {
             if (Element!=null && Control?.Copy() is TextBlock textBlock)
             {
-                DebugMessage("ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
+                P42.Utils.Debug.Message(Element,"ENTER widthConstraint=[" + widthConstraint + "] fontSize=[" + fontSize + "]");
 
                 textBlock.SetAndFormatText(Element, fontSize);
                 textBlock.Measure(new Windows.Foundation.Size(widthConstraint, double.PositiveInfinity));
@@ -908,7 +843,7 @@ namespace Forms9Patch.UWP
                 var size = new Windows.Foundation.Size(textBlock.DesiredSize.Width, textBlock.DesiredSize.Height);
 
                 var result = new Size(size.Width, size.Height);
-                DebugMessage("EXIT result=[" + result + "]");
+                P42.Utils.Debug.Message(Element,"EXIT result=[" + result + "]");
                 return result;
             }
             return new Size(10, 10);
@@ -930,18 +865,18 @@ namespace Forms9Patch.UWP
 
             if (textBlock.FontSize == max && availHeight >= textBlock.DesiredSize.Height)
             {
-                DebugMessage("textBlock.FontSize==[" + textBlock.FontSize + "] max=[" + max + "] availHeight=[" + availHeight + "] textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                P42.Utils.Debug.Message(Element,"textBlock.FontSize==[" + textBlock.FontSize + "] max=[" + max + "] availHeight=[" + availHeight + "] textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                 return max;
             }
             if (textBlock.FontSize == min && availHeight <= textBlock.DesiredSize.Height)
             {
-                DebugMessage("textBlock.FontSize==[" + textBlock.FontSize + "] min=[" + min + "] availHeight=[" + availHeight + "] textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
+                P42.Utils.Debug.Message(Element,"textBlock.FontSize==[" + textBlock.FontSize + "] min=[" + min + "] availHeight=[" + availHeight + "] textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                 return min;
             }
 
             if (max - min < Precision)
             {
-                DebugMessage("min=[" + min + "] max=[" + max + "]");
+                P42.Utils.Debug.Message(Element,"min=[" + min + "] max=[" + max + "]");
                 return min;
             }
 
@@ -957,7 +892,7 @@ namespace Forms9Patch.UWP
                 return ZeroLinesFit(label, textBlock, min, mid, availWidth, availHeight);
             if (height < availHeight)
                 return ZeroLinesFit(label, textBlock, mid, max, availWidth, availHeight);
-            DebugMessage("mid=["+mid+"] height=[" + height + "] availHeight=[" + availHeight + "]");
+            P42.Utils.Debug.Message(Element,"mid=["+mid+"] height=[" + height + "] availHeight=[" + availHeight + "]");
             return mid;
         }
 
@@ -965,7 +900,7 @@ namespace Forms9Patch.UWP
         {
             if (max - min < Precision)
             {
-                //DebugMessage("Precision reached: result=[" + min + "]");
+                //P42.Utils.Debug.Message(Element,"Precision reached: result=[" + min + "]");
                 if (textBlock.FontSize != min)
                 {
                     textBlock?.SetAndFormatText(label, min);
@@ -980,7 +915,7 @@ namespace Forms9Patch.UWP
             textBlock?.Measure(new Windows.Foundation.Size(availWidth, double.PositiveInfinity));
 
             var renderedLines = textBlock.DesiredSize.Height / _fontMetrics.LineHeightForFontSize(mid); // textBlock.LineHeight;
-            //DebugMessage("mid=["+mid+"] renderedLines=[" + renderedLines + "] DesiredSize=[" + textBlock.DesiredSize.Height + "] LineHeight=[" + textBlock.LineHeight + "]");
+            //P42.Utils.Debug.Message(Element,"mid=["+mid+"] renderedLines=[" + renderedLines + "] DesiredSize=[" + textBlock.DesiredSize.Height + "] LineHeight=[" + textBlock.LineHeight + "]");
 
             if (Math.Round(renderedLines) > lines || textBlock.ActualWidth > textBlock.DesiredSize.Width)
                 return WidthAndLinesFit(label, textBlock, lines, min, mid, availWidth);
@@ -991,7 +926,7 @@ namespace Forms9Patch.UWP
         {
             if (max - min < Precision)
             {
-                DebugMessage("min=[" + min + "] max=[" + max + "]");
+                P42.Utils.Debug.Message(Element,"min=[" + min + "] max=[" + max + "]");
                 return min;
             }
             var mid = (max + min) / 2.0;
