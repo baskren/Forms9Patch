@@ -222,7 +222,7 @@ namespace Forms9Patch
         /// <summary>
         /// The is long press enabled property.
         /// </summary>
-        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(Button), default(bool));
+        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(Button), true);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.Button"/> has long press enabled.
         /// </summary>

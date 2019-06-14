@@ -405,7 +405,7 @@ namespace Forms9Patch
         /// <summary>
         /// The is long press enabled property.
         /// </summary>
-        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(SegmentedControl), default(bool));
+        public static readonly BindableProperty IsLongPressEnabledProperty = BindableProperty.Create(nameof(IsLongPressEnabled), typeof(bool), typeof(SegmentedControl), true);
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.SegmentedControl"/> has long press enabled.
         /// </summary>
