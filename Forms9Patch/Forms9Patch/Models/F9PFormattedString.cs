@@ -10,7 +10,7 @@ namespace Forms9Patch
 	/// MarkdownLabel Formatted string.
 	/// </summary>
 	[Xamarin.Forms.ContentProperty (nameof(Text))]
-	class F9PFormattedString : INotifyPropertyChanged, IEquatable<F9PFormattedString>
+	abstract class F9PFormattedString : INotifyPropertyChanged //, IEquatable<F9PFormattedString>
     {
 		internal ObservableCollection<Span> _spans; 
 
@@ -147,7 +147,7 @@ namespace Forms9Patch
 
         #endregion
 
-
+        /*  This is not yet working.  ConnectionCalc, change CLT layers does not update MmThick;
         #region IEquality
         public bool Equals(F9PFormattedString other)
         {
@@ -186,7 +186,7 @@ namespace Forms9Patch
             => !a.Equals(b);
 
         #endregion
-
+        */
     }
 
 }
