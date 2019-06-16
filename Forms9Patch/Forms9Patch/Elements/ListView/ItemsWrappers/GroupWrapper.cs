@@ -280,7 +280,7 @@ namespace Forms9Patch
 
         int SourceCount()
         {
-            var sourceCount = -1;
+            int sourceCount;
             if (SourceChildren is ICollection<IEnumerable> iCollectionIenumerble)
                 sourceCount = iCollectionIenumerble.Count;
             else
@@ -834,7 +834,7 @@ namespace Forms9Patch
 
         public bool Remove(ItemWrapper itemWrapper)
         {
-            var index = itemWrapper.Index;
+            //var index = itemWrapper.Index;
             CommonRemove(itemWrapper);
             var result = _itemWrappers.Remove(itemWrapper);
             //Reindex(index);

@@ -73,7 +73,7 @@ namespace Forms9Patch
             foreach (int index in DeepIndex)
                 indexBuilder.Append(index + ".");
             var indexPath = indexBuilder.ToString().Substring(0, indexBuilder.Length - 1);
-            return "["+GetType()+":" + ItemWrapper + "," + indexBuilder + "]";
+            return "["+GetType()+":" + ItemWrapper + "," + indexPath + "]";
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Forms9Patch
             foreach (int index in DeepIndex)
                 indexBuilder.Append(index + ".");
             var indexPath = indexBuilder.ToString().Substring(0, indexBuilder.Length - 1);
-            return "["+GetType()+" ItemWrapper:" + ItemWrapper + ", DeepIndex:" + indexBuilder + "]";
+            return "["+GetType()+" ItemWrapper:" + ItemWrapper + ", DeepIndex:" + indexPath + "]";
         }
 
     }

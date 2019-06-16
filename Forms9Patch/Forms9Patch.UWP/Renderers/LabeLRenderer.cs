@@ -15,7 +15,7 @@ namespace Forms9Patch.UWP
         #region Debug support
         bool DebugCondition
             => P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false;
-
+        /*
         void DebugGetDesiredRequest(string mark, double widthConstraint, double heightConstraint, SizeRequest request, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null)
         {
             //P42.Utils.Debug.Message(Element,mark + " Constr=[" + widthConstraint + "," + heightConstraint + "] " + DebugControlSizes() + " result=[" + request + "]", callerName);
@@ -30,7 +30,6 @@ namespace Forms9Patch.UWP
         {
             //P42.Utils.Debug.Message(Element,mark + " Elmt.Sz=[" + Element?.Bounds.Size + "] AvailSz=[" + availableSize + "] " + DebugControlSizes() + " result=[" + result + "]", callerName);
         }
-
         string DebugControlSizes()
         {
             if (Control != null)
@@ -105,7 +104,7 @@ namespace Forms9Patch.UWP
                 System.Diagnostics.Debug.Unindent();
             }
         }
-
+        */
         #endregion
 
 
@@ -115,10 +114,10 @@ namespace Forms9Patch.UWP
         //bool _perfectSizeValid;
 
         #region Windows TextBlock label defaults
-        Windows.UI.Xaml.Media.FontFamily _defaultNativeFontFamily;
+        //Windows.UI.Xaml.Media.FontFamily _defaultNativeFontFamily;
         double _defaultNativeFontSize;
-        bool _defaultNativeFontIsBold;
-        bool _defaultNativeFontIsItalics;
+        //bool _defaultNativeFontIsBold;
+        //bool _defaultNativeFontIsItalics;
         #endregion
 
         bool LayoutValid
@@ -130,14 +129,14 @@ namespace Forms9Patch.UWP
         Windows.Foundation.Size _lastAvailableSize = new Windows.Foundation.Size(0, 0);
         Xamarin.Forms.Size _lastElementSize = Xamarin.Forms.Size.Zero;
         Windows.Foundation.Size _lastInternalMeasure = new Windows.Foundation.Size(0, 0);
-        AutoFit _lastAutoFit = (AutoFit)Forms9Patch.Label.AutoFitProperty.DefaultValue;
-        int _lastLines = (int)Forms9Patch.Label.LinesProperty.DefaultValue;
+        //AutoFit  _lastAutoFit = (AutoFit)Forms9Patch.Label.AutoFitProperty.DefaultValue;
+        //int _lastLines = (int)Forms9Patch.Label.LinesProperty.DefaultValue;
         internal static TextBlock _defaultTextBlock = new TextBlock();
         SharpDX.DirectWrite.FontMetrics _fontMetrics  = _defaultTextBlock.GetFontMetrics() ;
         //bool isNewElement;
 
-        SizeRequest _perfectSize;
-        bool _perfectSizeValid;
+        //SizeRequest _perfectSize;
+        //bool _perfectSizeValid;
         #endregion
 
 
@@ -158,10 +157,10 @@ namespace Forms9Patch.UWP
                 if (Control == null)
                 {
                     var nativeControl = new TextBlock();
-                    _defaultNativeFontFamily = nativeControl.FontFamily;
+                    //_defaultNativeFontFamily = nativeControl.FontFamily;
                     _defaultNativeFontSize = nativeControl.FontSize;
-                    _defaultNativeFontIsBold = nativeControl.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight;
-                    _defaultNativeFontIsItalics = nativeControl.FontStyle != Windows.UI.Text.FontStyle.Normal;
+                    //_defaultNativeFontIsBold = nativeControl.FontWeight.Weight >= Windows.UI.Text.FontWeights.Bold.Weight;
+                    //_defaultNativeFontIsItalics = nativeControl.FontStyle != Windows.UI.Text.FontStyle.Normal;
                     SetNativeControl(nativeControl);
                 }
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelF9PSize;
@@ -193,7 +192,7 @@ namespace Forms9Patch.UWP
             if (e.PropertyName == Forms9Patch.Label.TextProperty.PropertyName || e.PropertyName == Forms9Patch.Label.HtmlTextProperty.PropertyName)
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout(Control);
+                ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.AutoFitProperty.PropertyName
@@ -204,13 +203,13 @@ namespace Forms9Patch.UWP
                 )
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout(Control);
+                ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.LinesProperty.PropertyName)
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout(Control);
+                ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.MinFontSizeProperty.PropertyName)
@@ -229,7 +228,7 @@ namespace Forms9Patch.UWP
             //UpdateTextAndFont(Control);
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout(Control);
+                ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.TextColorProperty.PropertyName)
@@ -237,7 +236,7 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout(Control);
+                ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
@@ -250,7 +249,7 @@ namespace Forms9Patch.UWP
 
         void UpdateHorizontalAlign(TextBlock textBlock)
         {
-            _perfectSizeValid = false;
+            //_perfectSizeValid = false;
             if (textBlock == null)
                 return;
             var label = Element;
@@ -263,7 +262,7 @@ namespace Forms9Patch.UWP
 
         void UpdateVerticalAlign(TextBlock textBlock)
         {
-            _perfectSizeValid = false;
+            //_perfectSizeValid = false;
             if (textBlock == null)
                 return;
             var label = Element;
@@ -290,10 +289,10 @@ namespace Forms9Patch.UWP
         void UpdateSynchrnoizedFontSize(TextBlock textBlock)
         {
             //P42.Utils.Debug.Message(Element,"ENTER");
-            _perfectSizeValid = false;
+            //_perfectSizeValid = false;
             if (Element is ILabel label && label.SynchronizedFontSize != textBlock.FontSize)
                 if (label.SynchronizedFontSize!=-1 && textBlock.FontSize!=_defaultNativeFontSize)
-                ForceLayout(textBlock);
+                ForceLayout();
             //P42.Utils.Debug.Message(Element,"EXIT");
         }
 
@@ -301,7 +300,7 @@ namespace Forms9Patch.UWP
         void UpdateLineBreakMode(TextBlock textBlock)
         {
             //P42.Utils.Debug.Message(Element,"ENTER");
-            _perfectSizeValid = false;
+            //_perfectSizeValid = false;
 
             if (textBlock == null || Element==null)
                 return;
@@ -341,10 +340,10 @@ namespace Forms9Patch.UWP
         }
 
 
-        void ForceLayout(TextBlock textBlock)
+        void ForceLayout()
         {
             //P42.Utils.Debug.Message(Element,"ENTER");
-            _perfectSizeValid = false;
+            //_perfectSizeValid = false;
             if (DebugCondition)
                 System.Diagnostics.Debug.WriteLine("");
 
@@ -367,7 +366,7 @@ namespace Forms9Patch.UWP
             if (label == null || textBlock==null)
                 return;
             if (label.MinFontSize > Control.FontSize || Control.Inlines.ExceedsFontSize(label.MinFontSize))
-                ForceLayout(textBlock);
+                ForceLayout();
             //P42.Utils.Debug.Message(Element,"EXIT");
         }
         #endregion
@@ -533,8 +532,8 @@ namespace Forms9Patch.UWP
         }
 
         DateTime _lastMeasure = DateTime.MaxValue;
-        int _measureOverrideInvocation;
-        bool _measuring;
+        //int _measureOverrideInvocation;
+        //bool _measuring;
         protected Windows.Foundation.Size InternalMeasure(Windows.Foundation.Size availableSize, TextBlock textBlock = null)
         {
             //if (DebugCondition)
@@ -579,7 +578,7 @@ namespace Forms9Patch.UWP
                 return _lastInternalMeasure;
             }
 
-            _measuring = true;
+            //_measuring = true;
             //_lastAvailableSize = availableSize;
             //if (DebugCondition)
             //    System.Diagnostics.Debug.WriteLine("");
@@ -652,7 +651,7 @@ namespace Forms9Patch.UWP
 
                 UpdateLineBreakMode(textBlock);
 
-                double tmpHt = -1;
+                double tmpHt;
 
                 textBlock.SetAndFormatText(label, tmpFontSize);
                 textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
@@ -796,17 +795,17 @@ namespace Forms9Patch.UWP
                 LayoutValid = true;
                 _lastAvailableSize = availableSize;
                 _lastElementSize = Element.Bounds.Size;
-                _lastAutoFit = label.AutoFit;
-                _lastLines = label.Lines;
+                //_lastAutoFit = label.AutoFit;
+                //_lastLines = label.Lines;
                 _lastMeasure = DateTime.Now;
                 _lastInternalMeasure = result;
 
                 PrivateArrange(availableSize);
             }
-            if (DebugCondition)
-                _measureOverrideInvocation++;
+            //if (DebugCondition)
+            //    _measureOverrideInvocation++;
 
-            _measuring = false;
+            //_measuring = false;
             //P42.Utils.Debug.Message(Element,"EXIT result=["+result+"]");
             return result;
         }

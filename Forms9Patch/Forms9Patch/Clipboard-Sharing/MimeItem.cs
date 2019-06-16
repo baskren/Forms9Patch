@@ -44,7 +44,7 @@ namespace Forms9Patch
                         {
                             stopwatch.Stop();
                             //System.Diagnostics.Debug.WriteLine("\t\t MimeItem<T> get_Value B elapsed: " + stopwatch.ElapsedMilliseconds);
-                            return default(T);
+                            return default;
                         }
                     }
                     stopwatch.Stop();

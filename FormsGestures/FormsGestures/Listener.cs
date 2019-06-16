@@ -10,8 +10,9 @@ namespace FormsGestures
     /// </summary>
     public class Listener : BindableObject, IDisposable
     {
+#pragma warning disable IDE1006 // Naming Styles
 
-        const bool _debugEvents = false;
+        //const bool _debugEvents = false;
 
         // ancestors will procede descendents in this list so that interuptions can found quickly and fired in an orderly fashion
         internal static readonly List<Listener> Listeners = new List<Listener>();
@@ -1865,6 +1866,7 @@ namespace FormsGestures
 
 
 
+#pragma warning restore IDE1006 // Naming Styles
     }
 
 

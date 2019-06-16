@@ -92,7 +92,7 @@ namespace Forms9Patch.UWP
         {
             var result = new StringBuilder( leader + (leader.Length > 0 && last ? " └─" : " ├─") + element + "\n");
 
-            leader = leader + (last ? "   " : " │ ");
+            leader += (last ? "   " : " │ ");
 
             var children = element.GetChildren<FrameworkElement>();
             if (children != null)
