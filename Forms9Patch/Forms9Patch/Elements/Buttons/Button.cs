@@ -975,7 +975,10 @@ namespace Forms9Patch
         public Button()
         {
             _constructing = true;
-            Padding = new Thickness(8, 6, 8, 6);
+            if (Device.RuntimePlatform == Device.UWP)
+                Padding = new Thickness(8, 0, 8, 0);
+            else
+                Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;
             _label = new Label
             {
