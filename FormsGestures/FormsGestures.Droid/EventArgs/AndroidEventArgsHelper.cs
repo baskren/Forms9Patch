@@ -8,7 +8,10 @@ namespace FormsGestures.Droid
 		public static Rectangle GetViewPosition(this global::Android.Views.View view)
         {
             int[] viewLocation = { 0, 0 };
-            view?.GetLocationInWindow(viewLocation);
+            try
+            {
+                view?.GetLocationInWindow(viewLocation);
+            } catch (System.Exception) { return Rectangle.Zero; }
             //var scale = P42.Utils.ReflectionExtensions.GetPropertyValue()
             //var scale = Display.Scale;
             //int left = view.Left;
@@ -22,7 +25,11 @@ namespace FormsGestures.Droid
             //int left = viewGroup.Left;
             //int top = viewGroup.Top;
             int[] viewLocation = { 0, 0 };
-            viewGroup?.GetLocationInWindow(viewLocation);
+            try
+            {
+                viewGroup?.GetLocationInWindow(viewLocation);
+            }
+            catch (System.Exception) { return Rectangle.Zero; }
 
             int width = viewGroup.Width;
 			int height = viewGroup.Height;
@@ -34,8 +41,12 @@ namespace FormsGestures.Droid
 			//System.Diagnostics.Debug.WriteLine("c0=["+current.GetX()+","+current.GetY()+"]");
 
 			int[] viewLocation = { 0,0 };
+            try
+            { 
 			view?.GetLocationInWindow (viewLocation);
-			var pointerCoords = new MotionEvent.PointerCoords();
+            }
+            catch (System.Exception) { return new Point[] { }; }
+            var pointerCoords = new MotionEvent.PointerCoords();
 			int pointerCount = current.PointerCount;
 			var array = new Point[pointerCount];
 			for (int i = 0; i < pointerCount; i++) {
@@ -60,9 +71,13 @@ namespace FormsGestures.Droid
 			//System.Diagnostics.Debug.WriteLine("c0=["+current.GetX()+","+current.GetY()+"]");
 
 			int[] viewLocation = { 0,0 };
+            try
+            { 
 			view?.GetLocationInWindow (viewLocation);
+            }
+            catch (System.Exception) { return new Point[] { }; }
 
-			int pointerCount = coords.Length;
+            int pointerCount = coords.Length;
 			var array = new Point[pointerCount];
 			for (int i = 0; i < pointerCount; i++) {
 				array[i] = DIP.ToPoint((double)(coords[i].X+viewLocation[0]-startLocation[0]), (double)(coords[i].Y+viewLocation[1]-startLocation[1]));
