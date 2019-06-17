@@ -74,21 +74,21 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.0.0.482894</Version>
+      <Version>4.0.0.497661</Version>
     </PackageReference>
   </ItemGroup>
   <!-- FormsGestures References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{4A0213D7-4CF4-43A9-B506-50208AA996F8}</Project>
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{8FFD2331-AF6B-4554-9276-4821E59AEFD5}</Project>
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{758D988F-25C1-46E8-9726-17A794EE460E}</Project>
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
