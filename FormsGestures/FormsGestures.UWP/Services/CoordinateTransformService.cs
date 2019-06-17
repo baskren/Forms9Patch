@@ -31,6 +31,8 @@ namespace FormsGestures.UWP
 		}
 
 		public Rectangle CoordTransform (VisualElement fromElement, Rectangle r, VisualElement toElement) {
+            if (r.Width < 0 || r.Height < 0)
+                return new Rectangle(-1, -1, -1, -1);
             var toRenderer = Platform.GetRenderer(toElement);
             var fromRenderer = Platform.GetRenderer(fromElement);
             if (fromRenderer?.ContainerElement is FrameworkElement fromNativeView && toRenderer?.ContainerElement is FrameworkElement toNativeView)
