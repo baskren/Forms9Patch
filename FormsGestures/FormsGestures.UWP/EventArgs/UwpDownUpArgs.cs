@@ -20,26 +20,34 @@ namespace FormsGestures.UWP
             TriggeringTouches = new[] { 0 };
         }
 
-        public static bool FireDown(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
+        public static bool FireDown(FrameworkElement frameworkElement, PointerRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e)
+            if (frameworkElement is FrameworkElement element)
             {
-                Listener = listener
-            };
-            listener.OnDown(args);
-            e.Handled = args.Handled;
-            return e.Handled;
+                var args = new UwpDownUpArgs(element, e)
+                {
+                    Listener = listener
+                };
+                listener.OnDown(args);
+                e.Handled = args.Handled;
+                return e.Handled;
+            }
+            return false;
         }
 
-        public static bool FireUp(FrameworkElement element, PointerRoutedEventArgs e, Listener listener)
+        public static bool FireUp(FrameworkElement frameworkElement, PointerRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e)
+            if (frameworkElement is FrameworkElement element)
             {
-                Listener = listener
-            };
-            listener.OnUp(args);
-            e.Handled = args.Handled;
-            return e.Handled;
+                var args = new UwpDownUpArgs(element, e)
+                {
+                    Listener = listener
+                };
+                listener.OnUp(args);
+                e.Handled = args.Handled;
+                return e.Handled;
+            }
+            return false;
         }
 
         public UwpDownUpArgs(FrameworkElement element, TappedRoutedEventArgs args)
@@ -52,26 +60,34 @@ namespace FormsGestures.UWP
             TriggeringTouches = new[] { 0 };
         }
 
-        public static bool FireDown(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
+        public static bool FireDown(FrameworkElement frameworkElement, TappedRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e)
+            if (frameworkElement is FrameworkElement element)
             {
-                Listener = listener
-            };
-            listener.OnDown(args);
-            e.Handled = args.Handled;
-            return e.Handled;
+                var args = new UwpDownUpArgs(element, e)
+                {
+                    Listener = listener
+                };
+                listener.OnDown(args);
+                e.Handled = args.Handled;
+                return e.Handled;
+            }
+            return false;
         }
 
-        public static bool FireUp(FrameworkElement element, TappedRoutedEventArgs e, Listener listener)
+        public static bool FireUp(FrameworkElement frameworkElement, TappedRoutedEventArgs e, Listener listener)
         {
-            var args = new UwpDownUpArgs(element, e)
+            if (frameworkElement is FrameworkElement element)
             {
-                Listener = listener
-            };
-            listener.OnUp(args);
-            e.Handled = args.Handled;
-            return e.Handled;
+                var args = new UwpDownUpArgs(element, e)
+                {
+                    Listener = listener
+                };
+                listener.OnUp(args);
+                e.Handled = args.Handled;
+                return e.Handled;
+            }
+            return false;
         }
 
 
