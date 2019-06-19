@@ -11,11 +11,13 @@ namespace Forms9Patch
         {
             if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
                 return assembly;
-            var assemblyName = resourceId.Substring(0, resourceId.IndexOf(".Resources.", StringComparison.Ordinal));
-            assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
-            var names = assembly?.GetManifestResourceNames();
-            if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
-                return assembly;
+            if (resourceId.IndexOf(".Resources.", StringComparison.Ordinal) is int index && index > 0)
+            {
+                var assemblyName = resourceId.Substring(0, index);
+                assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
+                if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
+                    return assembly;
+            }
             assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
             if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
                 return assembly;
@@ -31,11 +33,13 @@ namespace Forms9Patch
         {
             if (assembly?.GetManifestResourceNames().Any(id=> id.StartsWith(resourceId, StringComparison.Ordinal)) ?? false)
                 return assembly;
-            var assemblyName = resourceId.Substring(0, resourceId.IndexOf(".Resources.", StringComparison.Ordinal));
-            assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
-            var names = assembly?.GetManifestResourceNames();
-            if (assembly?.GetManifestResourceNames().Any(id => id.StartsWith(resourceId, StringComparison.Ordinal)) ?? false)
-                return assembly;
+            if (resourceId.IndexOf(".Resources.", StringComparison.Ordinal) is int index && index > 0)
+            {
+                var assemblyName = resourceId.Substring(0, index);
+                assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
+                if (assembly?.GetManifestResourceNames().Any(id => id.StartsWith(resourceId, StringComparison.Ordinal)) ?? false)
+                    return assembly;
+            }
             assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
             if (assembly?.GetManifestResourceNames().Any(id => id.StartsWith(resourceId, StringComparison.Ordinal)) ?? false)
                 return assembly;
