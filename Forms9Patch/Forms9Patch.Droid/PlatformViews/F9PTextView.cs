@@ -77,7 +77,7 @@ namespace Forms9Patch.Droid
         }
 
 
-        /*
+        
         bool _disposePending;
         private void OnInNativeLayoutComplete(object sender, EventArgs e)
         {
@@ -100,7 +100,7 @@ namespace Forms9Patch.Droid
             }
             base.Dispose(disposing);
         }
-        */
+        
         #endregion
 
 
@@ -158,7 +158,7 @@ namespace Forms9Patch.Droid
         }
         #endregion
 
-        /*
+        
         // I don't know why, but this #region seems to help mitigate a "using JNI after critical get in call to DeleteGlobalRef"
         // crash in ConnectionCalc results, when scrolling up/down multiple times
         //
@@ -206,7 +206,7 @@ namespace Forms9Patch.Droid
             InNativeLayout = false;
         }
         #endregion
-        */
+        
     }
 }
 
