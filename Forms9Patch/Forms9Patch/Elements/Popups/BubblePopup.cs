@@ -348,15 +348,20 @@ namespace Forms9Patch
                         ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, popup.DecorativeContainerView)
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": targetBounds=["+targetBounds+"] targetPage.Bounds=["+targetPage.Bounds+"]");
+
                     if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
                         return;
 
-                    if (targetBounds.Right > targetPage.Bounds.Left && targetBounds.Left < targetPage.Bounds.Right && targetBounds.Bottom > targetPage.Bounds.Top && targetBounds.Top < targetPage.Bounds.Bottom)
+                    //if (targetBounds.Right > targetPage.Bounds.Left && targetBounds.Left < targetPage.Bounds.Right && targetBounds.Bottom > targetPage.Bounds.Top && targetBounds.Top < targetPage.Bounds.Bottom)
+                    if (targetBounds.Right > 0 && targetBounds.Left < targetPage.Bounds.Width && targetBounds.Bottom > 0 && targetBounds.Top < targetPage.Bounds.Height)
                     {
                         var availL = targetBounds.Left - Margin.Left - PointerLength;
                         var availR = width - targetBounds.Right - Margin.Right - PointerLength;
                         var availT = targetBounds.Top - Margin.Top - PointerLength;
                         var availB = height - targetBounds.Bottom - Margin.Bottom - PointerLength;
+
+                        System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": availL[" + availL + "] availR[" + availR + "] availT[" + availT + "] availB[" + availB + "]");
 
                         if (WidthRequest > 0 && HorizontalOptions.Alignment != LayoutAlignment.Fill)
                         {
@@ -419,6 +424,8 @@ namespace Forms9Patch
                                     hzExtra = hzx + vtx;
                             }
                         }
+
+                        System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": hzExtra [" + hzExtra + "] vtExtra [" + vtExtra + "]");
 
                         if (hzExtra >= 0 || vtExtra >= 0)
                         {
@@ -490,6 +497,9 @@ namespace Forms9Patch
                                 if (hzx > 0 && vtx >= 0)
                                     hzExtra = hzx + vtx;
                             }
+
+                            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": hzExtra [" + hzExtra + "] vtExtra [" + vtExtra + "]");
+
                             if (hzExtra >= 0 || vtExtra >= 0)
                             {
                                 if (hzExtra > vtExtra)
@@ -513,6 +523,8 @@ namespace Forms9Patch
                         }
                     }
                 }
+
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": pointerDir[" + pointerDir + "]");
 
                 // IF WE GOT HERE AND THERE ISN"T A pointerDir, THEN THERE WASN"T A BEST FIT
 
