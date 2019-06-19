@@ -430,11 +430,6 @@ namespace Forms9Patch
             if (Device.RuntimePlatform != Device.UWP)
                 _stackLayout.HeightRequest = 28;
 
-            _upArrowButton.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == Forms9Patch.Button.IsVisibleProperty.PropertyName)
-                    System.Diagnostics.Debug.WriteLine(GetType() + ".");
-            };
         }
 
         /// <summary>
@@ -708,7 +703,6 @@ namespace Forms9Patch
                 separator.VerticalOptions = LayoutOptions.Start;
                 separator.WidthRequest = -1;
                 separator.HeightRequest = SeparatorThickness > 0 ? SeparatorThickness : DefaultSeparatorThickness;
-                System.Diagnostics.Debug.WriteLine(GetType() + ".SetSeparatorThickness separator.HeightRequest=[" + separator.HeightRequest + "]");
             }
         }
 
