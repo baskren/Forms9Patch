@@ -31,6 +31,14 @@
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
   <!-- LOAD PROJECT CONTENT -->
 	<PropertyGroup>
 		<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>

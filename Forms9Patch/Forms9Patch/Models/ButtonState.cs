@@ -57,7 +57,9 @@ namespace Forms9Patch
 
         #endregion
 
+#pragma warning disable IDE0044 // Add readonly modifier
         int _instances;
+#pragma warning restore IDE0044 // Add readonly modifier
 
         #region IButtonState
 
