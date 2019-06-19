@@ -731,7 +731,12 @@ namespace Forms9Patch
         {
             base.OnBindingContextChanged();
             if (_xfImageSource != null)
+            {
                 _xfImageSource.BindingContext = BindingContext;
+                if (Device.RuntimePlatform == Device.Android)
+                    Invalidate();
+            }
+
         }
 
         /// <summary>

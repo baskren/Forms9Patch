@@ -87,8 +87,16 @@ namespace Forms9Patch.iOS
                 }
                 if (Math.Abs(fontSize) <= double.Epsilon * 10)
                     fontSize = UIFont.LabelFontSize;
-                var newFont = FontExtensions.BestFont(fontFamily, (float)fontSize, (fontAttributes & FontAttributes.Bold) != 0, (fontAttributes & FontAttributes.Italic) != 0);
-                fontProperty.SetValue(Control, newFont, null);
+
+                foreach (var effect in Element.Effects)
+                {
+                    if (effect is Forms9Patch.EmbeddedResourceFontEffect fontEffect)
+                    {
+                        var newFont = FontExtensions.BestFont(fontFamily, (float)fontSize, (fontAttributes & FontAttributes.Bold) != 0, (fontAttributes & FontAttributes.Italic) != 0, fontEffect.Assembly);
+                        fontProperty.SetValue(Control, newFont, null);
+                        return;
+                    }
+                }
             }
         }
     }

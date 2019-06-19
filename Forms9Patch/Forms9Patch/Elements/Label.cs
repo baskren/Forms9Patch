@@ -239,7 +239,7 @@ namespace Forms9Patch
                 //if (obj is string str && str.ToLower().Trim().StartsWith("load to grain angle"))
                 //if (obj is string str && str.StartsWith("H3")) return true;
                 //if (obj is string str && str == "6‐⁷/₈\u2006in") return true;
-                if (obj is string str && str == "Reset") return true; 
+                if (obj is string str && str == "Blue") return true; 
                 if (obj is Label label)
                     return P42.Utils.Debug.ConditionFunc(label.HtmlText ?? label.Text);
                 if (obj is IText textObj)

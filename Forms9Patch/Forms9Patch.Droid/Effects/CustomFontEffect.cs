@@ -4,6 +4,7 @@
 //  *
 //  *******************************************************************/
 using System;
+using System.Reflection;
 using Android.Graphics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -25,7 +26,19 @@ namespace Forms9Patch.Droid
         {
             instances++;
             if (Element != null)
-                UpdateFont();
+            {
+                if (Element is Xamarin.Forms.Label)
+                    Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
+                    {
+                        UpdateFont();
+                        Control.Invalidate();
+                        //Control.RequestLayout();
+                        //((Layout)((VisualElement)Element).Parent)?.ForceLayout();
+                        return false;
+                    });
+                else
+                    UpdateFont();
+            }
         }
 
         /// <summary>
@@ -46,7 +59,9 @@ namespace Forms9Patch.Droid
                 //args.PropertyName == Xamarin.Forms.Label.FontSizeProperty.PropertyName ||
                 args.PropertyName == Xamarin.Forms.Label.FontAttributesProperty.PropertyName ||
                 args.PropertyName == Xamarin.Forms.Label.FontProperty.PropertyName)
-                UpdateFont();
+                    UpdateFont();
+            else if (args.PropertyName == Xamarin.Forms.Label.TextProperty.PropertyName)
+                    UpdateFont();
         }
 
         void UpdateFont()
@@ -67,8 +82,16 @@ namespace Forms9Patch.Droid
                 //var fontAttributes = (FontAttributes)attrProperty.GetValue(Element);
 
                 // from Forms9Patch.LabelRenderer
-
-                Typeface newTypeface = FontManagment.TypefaceForFontFamily(fontFamily);
+                Assembly assembly = null;
+                foreach (var effect in Element.Effects)
+                {
+                    if (effect is Forms9Patch.EmbeddedResourceFontEffect fontEffect)
+                    {
+                        assembly = fontEffect.Assembly;
+                        break;
+                    }
+                }
+                        Typeface newTypeface = FontManagment.TypefaceForFontFamily(fontFamily, assembly);
                 if (newTypeface == null)
                 {
                     var elementFontProperty = elementType.GetProperty(Xamarin.Forms.Label.FontProperty.PropertyName);

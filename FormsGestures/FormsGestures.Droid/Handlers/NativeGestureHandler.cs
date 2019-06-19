@@ -56,6 +56,9 @@ namespace FormsGestures.Droid
         /// </summary>
         //List<Xamarin.Forms.VisualElement> _children = new List<Xamarin.Forms.VisualElement>();
 
+
+        OnTouchListener _onTouchListener;
+
         static int instances;
         int _id;
 
@@ -90,6 +93,10 @@ namespace FormsGestures.Droid
         {
             if (_deactivated)
                 return;
+            _onTouchListener?.Dispose();
+            _onTouchListener = null;
+            if (Renderer?.View!=null)
+                Renderer.View.Touch -= View_Touch;
             _deactivated = true;
             DeactivateInstancesForChildren(force);
             DisconnectRenderer();
@@ -97,6 +104,7 @@ namespace FormsGestures.Droid
             Element.SetValue(GestureHandlerProperty, null);
             Element = null;
             Listener = null;
+            
         }
         #endregion
 
@@ -203,11 +211,24 @@ namespace FormsGestures.Droid
                     //var l = new OnTouchListener(this);
 
                     Renderer.View.SetOnTouchListener(new OnTouchListener(this));
+                    //_onTouchListener = _onTouchListener ?? new OnTouchListener(this);
+                    //Renderer.View.Touch += View_Touch;
+
 
                     //_renderer.View.Touch += HandleTouch;
                     //System.Diagnostics.Debug.WriteLine("NativeGestureHandler.RendererReset() _renderer.View.Touch += HandleTouch Element[" + Element + "]");
                 }
             }
+        }
+
+        private void View_Touch(object sender, Android.Views.View.TouchEventArgs e)
+        {
+            var action = e.Event.Action;
+            if (action!= MotionEventActions.Down
+                && action != MotionEventActions.Up)
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " Event=["+e.Event+"]");
+            //if (sender is Android.Views.View view)
+            //    _onTouchListener?.OnTouch(view, e.Event);
         }
 
         internal void DisconnectRenderer()
@@ -224,7 +245,8 @@ namespace FormsGestures.Droid
                 {
 
                     //view.Touch -= HandleTouch;
-                    view.SetOnTouchListener(null);
+                    view.Touch -= View_Touch;
+                    //view.SetOnTouchListener(null);
                 }
 #pragma warning disable 0168
                 catch (ArgumentException e)

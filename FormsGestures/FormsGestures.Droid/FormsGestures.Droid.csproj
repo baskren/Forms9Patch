@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Detectors\DownUpGestureDetector.cs" />
     <Compile Include="Detectors\MultiTouchGestureDetector.cs" />
     <Compile Include="Detectors\NativeGestureDetector.cs" />
     <Compile Include="EventArgs\AndroidDownUpEventArgs.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="Exensions\AndroidViewExtensions.cs" />
     <Compile Include="Exensions\DIP.cs" />
     <Compile Include="Exensions\PointExtensions.cs" />
-    <Compile Include="Handlers\DownUpGestureListener.cs" />
     <Compile Include="Handlers\IMultiTouchGestureListener.cs" />
     <Compile Include="Handlers\NativeGestureHandler.cs" />
     <Compile Include="Handlers\NativeGestureListener.cs" />

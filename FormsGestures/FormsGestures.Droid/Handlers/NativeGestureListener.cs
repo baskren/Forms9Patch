@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using System.Globalization;
 
 namespace FormsGestures.Droid
 {
@@ -302,6 +303,7 @@ namespace FormsGestures.Droid
                             if (listener != null && listener.HandlesTapped)
                             {
                                 args.Listener = listener;
+                                //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
                                 listener.OnTapped(args);
                                 if (args.Handled)
                                     break;
@@ -396,6 +398,7 @@ namespace FormsGestures.Droid
         int _numberOfTaps;
         public bool OnUp(MotionEvent ev)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture) );
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener." + P42.Utils.ReflectionExtensions.CallerMemberName() + " action:" + ev.Action + " index" + ev.ActionIndex + " e:" + ev);
             //System.Diagnostics.Debug.WriteLine("NativeGestureListener.OnUp ENTER Element[" + Element + "]");
             //if (ev.Action == MotionEventActions.Down)
@@ -488,6 +491,7 @@ namespace FormsGestures.Droid
 
         bool CallOnUp(MotionEvent ev)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
             //System.Diagnostics.Debug.WriteLine(GetType() + ".CallOnUp");
             var handled = false;
             DownUpEventArgs args = new AndroidDownUpEventArgs(ev, _view, _viewLocationAtOnDown);

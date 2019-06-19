@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Xamarin.Forms;
 
 namespace Forms9Patch
@@ -161,10 +162,6 @@ namespace Forms9Patch
         #region Fields
         readonly bool _noUpdate = true;
         ButtonState _currentState;
-        //Xamarin.Forms.StackLayout _stackLayout;
-        //Xamarin.Forms.Image _image;
-        //Label _label;
-        //FormsGestures.Listener _gestureListener;
         #endregion
 
 
@@ -172,20 +169,12 @@ namespace Forms9Patch
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.StateButton"/> class.
         /// </summary>
-        public StateButton() : base()
+        public StateButton() 
         {
             _constructing = true;
             DefaultState = new ButtonState();
-
             _noUpdate = false;
             ShowState(DefaultState);
-
-            _gestureListener.Up += OnUp;
-            _gestureListener.Down += OnDown;
-
-            _gestureListener.LongPressed += OnLongPressed;
-            _gestureListener.LongPressing += OnLongPressing;
-
             _constructing = false;
 
 
@@ -204,12 +193,6 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                _gestureListener.Up -= OnUp;
-                _gestureListener.Down -= OnDown;
-                _gestureListener.LongPressed -= OnLongPressed;
-                _gestureListener.LongPressing -= OnLongPressing;
-                //_gestureListener.Dispose();
-                //_gestureListener = null;
                 _currentState.PropertyChanged -= OnStatePropertyChanged;
                 _currentState = null;
             }
@@ -239,16 +222,13 @@ namespace Forms9Patch
                 return;
             }
 
-
             if (IsEnabled)
             {
                 if (IsSelected)
                 {
                     ShowState(SelectedState ?? DefaultState);
                     if (SelectedState == null)
-                    {
                         _label.FontAttributes = FontAttributes.Bold;
-                    }
                 }
                 else
                     ShowState(DefaultState);
@@ -262,13 +242,9 @@ namespace Forms9Patch
                     if (DisabledAndSelectedState == null)
                     {
                         if (SelectedState != null)
-                        {
                             Opacity = 0.75;
-                        }
                         else if (DisabledState != null)
-                        {
                             _label.FontAttributes = FontAttributes.Bold;
-                        }
                         else
                         {
                             Opacity = 0.75;
@@ -298,14 +274,8 @@ namespace Forms9Patch
                 return;
             }
 
-
             _showingState = true;
 
-
-            // IconImage
-            // IconText
-            // BackgroundImage
-            // BackgroundColor
             newState = newState ?? DefaultState;
             if (_currentState != null)
                 _currentState.PropertyChanged -= OnStatePropertyChanged;
@@ -318,6 +288,8 @@ namespace Forms9Patch
                     newBackgroundImage.Opacity = 1.0;
                 BackgroundImage = newBackgroundImage;
             }
+            else if (_currentState == DefaultState && DefaultState.BackgroundImage == null && BackgroundImage != null)
+                DefaultState.BackgroundImage = BackgroundImage;
             //else if (!_constructing && Device.OS == TargetPlatform.Android)
             /*  NOTE: Commented out on 12/18/17 because was causing flicker upon button press in Android.  Tested on XamlStateButtonsPage and did not see failure to resize.
             else if (!_constructing && Device.RuntimePlatform == Device.Android)
@@ -359,81 +331,10 @@ namespace Forms9Patch
                 }
             }
 
-
-            //base.IconImage = newIconImage;
-            //base.IconText = iconText;
             base.HtmlText = htmlText;
             if (base.HtmlText == null)
                 base.Text = text;
 
-            /*
-            if (newIconImage == null)
-            {
-                // label only
-                if (_iconImage != null)
-                {
-                    var toDispose = _iconImage;
-                    if (toDispose != null)
-                        Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
-                        {
-                            toDispose.Opacity -= 0.25;
-                            if (toDispose.Opacity > 0)
-                                return true;
-                            _stackLayout.Children.Remove(toDispose);
-                            toDispose.Opacity = 1.0;
-                            return false;
-                        });
-                }
-                _iconImage = null;
-                IconText = iconText;
-                if (!string.IsNullOrEmpty(text) && !_stackLayout.Children.Contains(_label))
-                {
-                    if (TrailingIcon)
-                        _stackLayout.Children.Insert(0, _label);
-                    else
-                        _stackLayout.Children.Add(_label);
-                }
-            }
-            else
-            {
-                IconText = null;
-                // there is an image
-                newIconImage.Opacity = 1.0;
-                if (_iconImage != newIconImage)
-                {
-                    // if it is a new image
-                    if (_iconImage != null)
-                        _stackLayout.Children.Remove(_iconImage);
-                    _iconImage = newIconImage;
-                    if (TrailingIcon)
-                        _stackLayout.Children.Add(_iconImage);
-                    else
-                        _stackLayout.Children.Insert(0, _iconImage);
-                }
-                if (string.IsNullOrEmpty(text))
-                {
-                    // no Label, just an image
-                    if (_stackLayout.Children.Contains(_label))
-                        _stackLayout.Children.Remove(_label);
-                }
-                else
-                {
-                    // image and label
-                    if (!_stackLayout.Children.Contains(_label))
-                    {
-                        if (TrailingIcon)
-                            _stackLayout.Children.Insert(0, _label);
-                        else
-                            _stackLayout.Children.Add(_label);
-                    }
-                }
-            }
-            if (string.IsNullOrEmpty(htmlText))
-                _label.Text = _currentState.Text ?? DefaultState.Text;
-            else
-                _label.HtmlText = htmlText;
-            //InvalidateMeasure ();
-*/
             #region IButtonState
 
             TrailingIcon = _currentState.TrailingIconSet ? _currentState.TrailingIcon : DefaultState.TrailingIcon;
@@ -481,7 +382,6 @@ namespace Forms9Patch
 
             // HtmlText handled above
 
-            //_label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.OS == TargetPlatform.iOS ? Color.Blue : Color.White)));
             _label.TextColor = (_currentState.TextColorSet || _currentState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? _currentState.TextColor : (DefaultState.TextColorSet || DefaultState.TextColor != (Color)ButtonState.TextColorProperty.DefaultValue ? DefaultState.TextColor : (Device.RuntimePlatform == Device.iOS ? Color.Blue : Color.White)));
 
             HorizontalTextAlignment = _currentState.HorizontalTextAlignmentSet ? _currentState.HorizontalTextAlignment : DefaultState.HorizontalTextAlignment;
@@ -530,8 +430,10 @@ namespace Forms9Patch
             OnUp(this, new FormsGestures.DownUpEventArgs(null, null));
         }
 
-        void OnUp(object sender, FormsGestures.DownUpEventArgs e)
+        protected override void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+            //base.OnUp(sender, e);
             //System.Diagnostics.Debug.WriteLine("Up");
             if (IsEnabled)
             {
@@ -579,25 +481,28 @@ namespace Forms9Patch
             }
         }
 
-        void OnDown(object sender, FormsGestures.DownUpEventArgs e)
+        protected override void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
+            base.OnDown(sender, e);
             //System.Diagnostics.Debug.WriteLine("Down");
             if (IsEnabled)
                 ShowState(PressingState);
         }
 
-        void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
+        protected override void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
+            base.OnLongPressing(sender, e);
             //System.Diagnostics.Debug.WriteLine("LongPressing");
-            if (IsEnabled)
+            if (IsEnabled && IsLongPressEnabled)
                 //LongPressing?.Invoke(this, EventArgs.Empty);
                 InvokeLongPressing(this, EventArgs.Empty);
         }
 
-        void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
+        protected override void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
+            base.OnLongPressed(sender, e);
             //System.Diagnostics.Debug.WriteLine("LongPressed");
-            if (IsEnabled)
+            if (IsEnabled && IsLongPressEnabled)
             {
                 //LongPressed?.Invoke(this, EventArgs.Empty);
                 InvokeLongPressed(this, EventArgs.Empty);
@@ -628,11 +533,13 @@ namespace Forms9Patch
         /// <param name="propertyName">Property name.</param>
         protected override void OnPropertyChanged(string propertyName = null)
         {
+            /*
             if (!P42.Utils.Environment.IsOnMainThread)
             {
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
                 return;
             }
+            */
 
             base.OnPropertyChanged(propertyName);
 

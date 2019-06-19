@@ -163,40 +163,46 @@ namespace Forms9Patch.Droid
                         }
                         */
                         // move it to the Application's CustomFontDirRoot
-                        using (var inputStream = EmbeddedResourceCache.GetStream(fontFamily, assembly))
-                        {
-                            if (inputStream == null)
-                            {
-                                System.Console.WriteLine("Embedded Resource for FontFamily \"" + fontFamily + "\" not found.");
-                                return null;
-                            }
-
-                            var cachedFontDir = new File(CustomFontDirRoot + "/ResourceFonts");
-                            if (!cachedFontDir.Exists())
-                                cachedFontDir.Mkdir();
-
-                            var cachedFontFile = new File(cachedFontDir, fontFamily);
-                            using (var outputStream = new FileOutputStream(cachedFontFile))
-                            {
-                                const int bufferSize = 1024;
-                                var buffer = new byte[bufferSize];
-                                int length = -1;
-                                while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
-                                    outputStream.Write(buffer, 0, length);
-                            }
-                            Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
-                            if (typeface == null)
-                            {
-                                System.Console.WriteLine("Embedded Resource font file (" + fontFamily + ") could not be loaded as an Android Typeface.");
-                                return null;
-                            }
-                            _fontFiles.Add(fontFamily, cachedFontFile.AbsolutePath);
-                            return typeface;
-                        }
+                        if (EmbeddedResourceExtensions.FindAssemblyForResource(fontFamily, assembly) is Assembly asm)
+                            return LoadAndRegisterEmbeddedFont(fontFamily, asm);
                     }
                 }
             }
             return null;
+        }
+
+        static Typeface LoadAndRegisterEmbeddedFont(string resouceId, Assembly assembly)
+        {
+            using (var inputStream = EmbeddedResourceCache.GetStream(resouceId, assembly))
+            {
+                if (inputStream == null)
+                {
+                    System.Console.WriteLine("Embedded Resource for FontFamily \"" + resouceId + "\" not found.");
+                    return null;
+                }
+
+                var cachedFontDir = new File(CustomFontDirRoot + "/ResourceFonts");
+                if (!cachedFontDir.Exists())
+                    cachedFontDir.Mkdir();
+
+                var cachedFontFile = new File(cachedFontDir, resouceId);
+                using (var outputStream = new FileOutputStream(cachedFontFile))
+                {
+                    const int bufferSize = 1024;
+                    var buffer = new byte[bufferSize];
+                    int length = -1;
+                    while ((length = inputStream.Read(buffer, 0, bufferSize)) > 0)
+                        outputStream.Write(buffer, 0, length);
+                }
+                Typeface typeface = Typeface.CreateFromFile(cachedFontFile);
+                if (typeface == null)
+                {
+                    System.Console.WriteLine("Embedded Resource font file (" + resouceId + ") could not be loaded as an Android Typeface.");
+                    return null;
+                }
+                _fontFiles.Add(resouceId, cachedFontFile.AbsolutePath);
+                return typeface;
+            }
         }
 
         public List<string> FontFamilies()

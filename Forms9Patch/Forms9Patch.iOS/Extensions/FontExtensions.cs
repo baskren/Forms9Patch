@@ -210,62 +210,49 @@ namespace Forms9Patch.iOS
             if (resourceId == "STIXGeneral")
                 resourceId = "Forms9Patch.Resources.Fonts.STIXGeneral.otf";
 
-            if (_embeddedResourceFonts.ContainsKey(resourceId))
+            lock (_loadFontLock)
             {
-                string family = _embeddedResourceFonts[resourceId];
-                return UIFont.FromName(family, size);
-            }
-            if (resourceId.Contains(".Resources.Fonts."))
-            {
-                // it's an Embedded Resource
-                if (!resourceId.ToLower().EndsWith(".ttf") && !resourceId.ToLower().EndsWith(".otf"))
-                    throw new MissingMemberException("Embedded Font file names must end with \".ttf\" or \".otf\".");
-                lock (_loadFontLock)
+                if (_embeddedResourceFonts.ContainsKey(resourceId))
                 {
-                    // what is the assembly?
-                    /*
-                    var assemblyName = resourceId.Substring(0, resourceId.IndexOf(".Resources.Fonts."));
-                    //var assembly = System.Reflection.Assembly.Load (assemblyName);
-                    var assembly = ReflectionExtensions.GetAssemblyByName(assemblyName);
-                    if (assembly == null)
-                    {
-                        // try using the current application assembly instead (as is the case with Shared Applications)
-                        assembly = ReflectionExtensions.GetAssemblyByName(assemblyName + ".Droid");
-                        //Console.WriteLine ("Assembly for Resource ID \"" + resourceID + "\" not found.");
-                        //return null;
-                    }
-                    */
-                    // load it!
-                    using (var stream = EmbeddedResourceCache.GetStream(resourceId, assembly))
-                    {
-                        if (stream == null)
-                        {
-                            Console.WriteLine("Could not open Embedded Resource [" + resourceId + "]");
-                            return null;
-                        }
-                        var data = NSData.FromStream(stream);
-                        if (data == null)
-                        {
-                            Console.WriteLine("Could not retrieve data from Embedded Resource [" + resourceId + "].");
-                            return null;
-                        }
-                        var provider = new CGDataProvider(data);
-                        var font = CGFont.CreateFromProvider(provider);
-                        if (!CTFontManager.RegisterGraphicsFont(font, out NSError error))
-                        {
-                            if (error.Code != 105)
-                            {
-                                Console.WriteLine("Could load but failed to register [" + resourceId + "] font.  Error messages:");
-                                Console.WriteLine("\tdescription: " + error.Description);
-                                throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
-                            }
-                        }
-                        _embeddedResourceFonts.Add(resourceId, font.PostScriptName);
-                        return UIFont.FromName(font.PostScriptName, size);
-                    }
+                    string family = _embeddedResourceFonts[resourceId];
+                    return UIFont.FromName(family, size);
                 }
+                if (EmbeddedResourceExtensions.FindAssemblyForResource(resourceId, assembly) is Assembly resourceAssembly
+                    && LoadAndRegisterEmbeddedFont(resourceId, size, resourceAssembly) is UIFont uIFont)
+                    return uIFont;
             }
             return null;
+        }
+
+        static UIFont LoadAndRegisterEmbeddedFont(string resourceId, nfloat size, Assembly assembly)
+        {
+            using (var stream = EmbeddedResourceCache.GetStream(resourceId, assembly))
+            {
+                if (stream == null)
+                {
+                    Console.WriteLine("Could not open Embedded Resource [" + resourceId + "]");
+                    return null;
+                }
+                var data = NSData.FromStream(stream);
+                if (data == null)
+                {
+                    Console.WriteLine("Could not retrieve data from Embedded Resource [" + resourceId + "].");
+                    return null;
+                }
+                var provider = new CGDataProvider(data);
+                var font = CGFont.CreateFromProvider(provider);
+                if (!CTFontManager.RegisterGraphicsFont(font, out NSError error))
+                {
+                    if (error.Code != 105)
+                    {
+                        Console.WriteLine("Could load but failed to register [" + resourceId + "] font.  Error messages:");
+                        Console.WriteLine("\tdescription: " + error.Description);
+                        throw new MissingMemberException("Failed to register [" + resourceId + "] font.  Error messages in console.");
+                    }
+                }
+                _embeddedResourceFonts.Add(resourceId, font.PostScriptName);
+                return UIFont.FromName(font.PostScriptName, size);
+            }
         }
 
         internal static UIFont BestFont(MetaFont metaFont, UIFont baseFont)
@@ -275,7 +262,7 @@ namespace Forms9Patch.iOS
             return BestFont(metaFont.Family, size, metaFont.Bold, metaFont.Italic);
         }
 
-        internal static UIFont BestFont(string family, nfloat size, bool bold = false, bool italic = false)
+        internal static UIFont BestFont(string family, nfloat size, bool bold = false, bool italic = false, Assembly assembly=null)
         {
 
             if (family == null)
@@ -366,7 +353,7 @@ namespace Forms9Patch.iOS
             else
             {
                 //  an embedded font or a explicitly named system font?
-                bestAttemptFont = EmbeddedFont(family, size);
+                bestAttemptFont = EmbeddedFont(family, size, assembly);
 
                 if (bestAttemptFont == null)
                     bestAttemptFont = UIFont.FromName(family, size);

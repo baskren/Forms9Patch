@@ -74,7 +74,15 @@ namespace Forms9Patch
                     if (IsSvg(sr))
                     {
                         var skSvg = new SkiaSharp.Extended.Svg.SKSvg();
-                        skSvg.Load(memoryStream);
+                        try
+                        {
+                            skSvg.Load(memoryStream);
+                        }
+                        catch(Exception)
+                        {
+                            Console.WriteLine("Failed to load SkiaSvg memory stream.  Key=[" + key + "]");
+                            return null;
+                        }
                         return new F9PImageData(skSvg, key);
                     }
                     var skBitmap = SKBitmap.Decode(memoryStream);

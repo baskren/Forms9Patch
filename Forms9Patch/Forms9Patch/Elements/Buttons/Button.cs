@@ -975,10 +975,10 @@ namespace Forms9Patch
         public Button()
         {
             _constructing = true;
-            if (Device.RuntimePlatform == Device.UWP)
+            //if (Device.RuntimePlatform == Device.UWP)
                 Padding = new Thickness(8, 0, 8, 0);
-            else
-                Padding = new Thickness(8, 6, 8, 6);
+            //else
+            //    Padding = new Thickness(8, 6, 8, 6);
             OutlineRadius = 2;
             _label = new Label
             {
@@ -997,7 +997,6 @@ namespace Forms9Patch
             };
             _label.PropertyChanged += OnLabelPropertyChanged;
 
-
             _stackLayout = new Xamarin.Forms.StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -1013,20 +1012,16 @@ namespace Forms9Patch
 
             _gestureListener = FormsGestures.Listener.For(this);
             _gestureListener.Tapped += OnTapped;
+            _gestureListener.Up += OnUp;
             _gestureListener.Down += OnDown;
-            //UpdateLongPressListeners(IsLongPressEnabled);
             _gestureListener.LongPressed += OnLongPressed;
             _gestureListener.LongPressing += OnLongPressing;
-
-            //_label.SizeChanged += OnLabelSizeChanged;
 
             SizeChanged += OnSizeChanged;
 
             UpdateElements();
 
             _constructing = false;
-
-            //_label.PropertyChanged += OnLabelPropertyChanged;
         }
 
         /// <summary>
@@ -1104,13 +1099,13 @@ namespace Forms9Patch
             {
                 _disposed = true;
                 _gestureListener.Tapped -= OnTapped;
+                _gestureListener.Up -= OnUp;
                 _gestureListener.Down -= OnDown;
                 _gestureListener.LongPressed -= OnLongPressed;
                 _gestureListener.LongPressing -= OnLongPressing;
                 _gestureListener.Dispose();
                 _gestureListener = null;
                 _label.PropertyChanged -= OnLabelPropertyChanged;
-                _label = null;
                 if (Command != null)
                     Command.CanExecuteChanged -= CommandCanExecuteChanged;
                 _tapped = null;
@@ -1178,28 +1173,38 @@ namespace Forms9Patch
         public void Tap()
             => HandleTap();
 
-        void OnDown(object sender, FormsGestures.DownUpEventArgs e)
+        protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "OnDown");
+        }
+
+
+        protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "OnUp");
             if (!IsLongPressEnabled)
                 e.Handled = HandleTap();
         }
 
-        void OnTapped(object sender, FormsGestures.TapEventArgs e)
+        protected virtual void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "OnTapped");
             if (IsLongPressEnabled)
                 e.Handled = HandleTap();
             else
                 e.Handled |= (IsEnabled && IsVisible);
         }
 
-        void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
+        protected virtual void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressed");
             if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressed?.Invoke(this, EventArgs.Empty);
         }
 
-        void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
+        protected virtual void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
+            //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressing");
             if (IsEnabled && IsVisible && IsLongPressEnabled)
                 _longPressing?.Invoke(this, EventArgs.Empty);
         }

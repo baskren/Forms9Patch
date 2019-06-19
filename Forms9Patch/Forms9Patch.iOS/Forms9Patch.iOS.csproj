@@ -105,6 +105,7 @@
     <Compile Include="Services\HapticService.cs" />
     <Compile Include="Services\AudioService.cs" />
     <Compile Include="Models\TextControlState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
 
   <!-- NuGet Packages-->
@@ -123,6 +124,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch'  ">xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"  /Y

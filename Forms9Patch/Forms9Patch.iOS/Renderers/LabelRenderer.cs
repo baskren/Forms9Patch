@@ -470,6 +470,7 @@ namespace Forms9Patch.iOS
             else if (e.PropertyName == Label.TextColorProperty.PropertyName)
             {
                 UpdateTextColor();
+                LayoutSubviews();
             }
             else if (e.PropertyName == Label.FontProperty.PropertyName
                 || e.PropertyName == Label.FontFamilyProperty.PropertyName
@@ -648,9 +649,12 @@ namespace Forms9Patch.iOS
                 var color = Element.TextColor;
                 if (Control != null)
                 {
+                    //P42.Utils.Debug.Message(Element, "color=[" + color + "]");
                     Control.TextColor = color.ToUIColor();
-                    if (Control.AttributedText != null)
+                    if (Element?.HtmlText != null)
                         UpdateAttributedText();
+                    else
+                        UpdateText();
                 }
             });
             //P42.Utils.Debug.Message(Element, "EXIT");

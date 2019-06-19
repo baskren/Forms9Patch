@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Android.Views;
 using P42.Utils;
 using Xamarin.Forms.Platform.Android;
+using System.Globalization;
 
 namespace FormsGestures.Droid
 {
@@ -29,7 +30,8 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action);
+            //System.Diagnostics.Debug.WriteLine(GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action);
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
 
             if (!_nativeGestureHandler.Element.IsVisible)
                 return false;
@@ -45,6 +47,7 @@ namespace FormsGestures.Droid
             if (_nativeDetector != null)
                 _lastEventHandled = _nativeDetector.OnTouchEvent(e) || _lastEventHandled;
 
+            /*
             object scrollEnabled = _nativeGestureHandler.Element.GetPropertyValue("ScrollEnabled");
             if (scrollEnabled == null || ((bool)scrollEnabled) || e.Action != MotionEventActions.Move)
             {
@@ -59,6 +62,18 @@ namespace FormsGestures.Droid
                         view.OnTouchEvent(e);
                 }
             }
+            */
+
+            if (_nativeGestureHandler.Element is Xamarin.Forms.Button && _nativeGestureHandler.Renderer?.View is Android.Views.View view)
+            {
+                var renderer = Platform.GetRenderer(_nativeGestureHandler.Element);
+                //var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.ViewGroup;
+                var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.View;
+                if (currentView != null && view == currentView)
+                    view.OnTouchEvent(e);
+            }
+
+            //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=["+_lastEventHandled+"]");
             return _lastEventHandled;  // we want to be sure we get the updates to this element's events
 
 

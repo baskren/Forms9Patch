@@ -280,6 +280,8 @@ namespace Forms9Patch
             base.OnAppearingAnimationBegin();
             //Needed to address the fact that, during Animated layout, the pointer direction hasn't yet been calcuated before _bubbleLayout.OnSizeAllocated has been called
             _bubbleLayout.ForceLayout();
+            // the following line was required to pass User Pages / ModalPopupWithNavigationPages, failure to show BubblePopup pointer.  Which means, the above line may not be necessary.
+            ForceLayout();
         }
         #endregion
 
@@ -467,6 +469,7 @@ namespace Forms9Patch
                                 hzPointerDir = PointerDirection.Right;
                                 hzAvail = availL;
                             }
+
                             if (vtAvail > 0)
                             {
                                 var hz = hzModal - Padding.HorizontalThickness - shadowPadding.HorizontalThickness;

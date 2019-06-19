@@ -51,10 +51,12 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly in which the resource can be found</param> 
         public static Xamarin.Forms.ImageSource FromMultiResource(string resourceId, Assembly assembly = null)
         {
+            assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
+            /*
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly")?.Invoke(null, new object[0]);
-
+                */
 
             if (assembly == null)
                 return null;
@@ -78,11 +80,37 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly.</param>
         public static new Xamarin.Forms.ImageSource FromResource(string resourceId, Assembly assembly = null)
         {
+            assembly = EmbeddedResourceExtensions.FindAssemblyForResource(resourceId, assembly);
+            /*
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
-
+                */
             var imageSource = Xamarin.Forms.ImageSource.FromResource(resourceId, assembly);
+            if (imageSource != null)
+            {
+                imageSource.SetValue(ImageScaleProperty, 1.0f);
+                imageSource.SetValue(EmbeddedResourceIdProperty, resourceId);
+                imageSource.SetValue(AssemblyProperty, assembly);
+            }
+            return imageSource;
+        }
+
+        public static Xamarin.Forms.FileImageSource FromResourceAsFile(string resourceId, Assembly assembly = null)
+        {
+            assembly = EmbeddedResourceExtensions.FindAssemblyForResource(resourceId, assembly);
+            /*
+            assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
+            if (assembly == null && Device.RuntimePlatform != Device.UWP)
+                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly")?.Invoke(null, new object[0]);
+                */
+            if (assembly == null)
+                return null;
+            var r = BestGuessResource(resourceId, assembly);
+            var path = r == null ? resourceId : r.Path;
+
+            var localPath = P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(path, assembly);
+            var imageSource = new FileImageSource { File = localPath };
             if (imageSource != null)
             {
                 imageSource.SetValue(ImageScaleProperty, 1.0f);
@@ -130,11 +158,11 @@ namespace Forms9Patch
 			return imageSource;
 		}
 		*/
-        #endregion
+            #endregion
 
 
-        #region Path Parsing 
-        static Tuple<string, string> GetiOSBasePathAndExt(string pathString)
+            #region Path Parsing 
+            static Tuple<string, string> GetiOSBasePathAndExt(string pathString)
         {
             if (pathString == null)
                 return null;
@@ -195,9 +223,12 @@ namespace Forms9Patch
 
         internal static string BestEmbeddedMultiResourceMatch(string resourceId, Assembly assembly)
         {
+            assembly = EmbeddedResourceExtensions.FindAssemblyForMultiResource(resourceId, assembly);
+            /*
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(resourceId);
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
                 assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+                */
             var r = BestGuessResource(resourceId, assembly);
             return r?.Path;
         }
