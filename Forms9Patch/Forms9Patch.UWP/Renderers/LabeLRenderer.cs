@@ -21,7 +21,8 @@ namespace Forms9Patch.UWP
         #region Fields
 
         #region Windows TextBlock label defaults
-        double _defaultNativeFontSize;
+        internal static double _defaultNativeFontSize;
+        internal static Windows.UI.Xaml.Media.Brush _defaultForeground;
         #endregion
 
         bool LayoutValid
@@ -52,6 +53,7 @@ namespace Forms9Patch.UWP
                 {
                     var nativeControl = new TextBlock();
                     _defaultNativeFontSize = nativeControl.FontSize;
+                    _defaultForeground = nativeControl.Foreground;
                     SetNativeControl(nativeControl);
                 }
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelF9PSize;

@@ -289,7 +289,10 @@ namespace Forms9Patch.UWP
 
             if (metaFont.IsActionEmpty())
             {
-                run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
+                if (metaFont.TextColor != Xamarin.Forms.Color.Default)
+                    run.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(metaFont.TextColor.ToWindowsColor());
+                else
+                    run.Foreground = LabeLRenderer._defaultForeground;
                 if (TextDecorationsPresent && metaFont.Underline)
                     ApplyTextDecorations(run, Decoration.Underline);
                 textBlock.Inlines.Add(run);
