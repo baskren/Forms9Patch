@@ -1739,6 +1739,9 @@ namespace Forms9Patch
                 return;
             }
 
+            if (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
+                UpdateElements();
+
             base.OnPropertyChanged(propertyName);
 
             if (_noUpdate)
@@ -1835,7 +1838,8 @@ namespace Forms9Patch
                 || propertyName == ShadowInvertedProperty.PropertyName
                 || propertyName == OutlineColorProperty.PropertyName
                 || propertyName == OutlineWidthProperty.PropertyName
-                || (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
+                // below line moved before base.OnPropertyChanged to fix rendering issue on UWP.
+                //|| (propertyName == SelectedBackgroundColorProperty.PropertyName && IsSelected)
                 || propertyName == IsSelectedProperty.PropertyName
                 || propertyName == IsEnabledProperty.PropertyName
                 || propertyName == DarkThemeProperty.PropertyName

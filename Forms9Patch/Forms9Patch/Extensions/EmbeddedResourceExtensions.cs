@@ -23,7 +23,7 @@ namespace Forms9Patch
                 return assembly;
             foreach (var assm in ReflectionExtensions.GetAssemblies())
             {
-                if (assm.GetManifestResourceNames().Contains(resourceId))
+                if (!assm.IsDynamic && assm.GetManifestResourceNames().Contains(resourceId))
                     return assm;
             }
             return null;
@@ -45,7 +45,7 @@ namespace Forms9Patch
                 return assembly;
             foreach (var assm in ReflectionExtensions.GetAssemblies())
             {
-                if (assm.GetManifestResourceNames().Any(id => id.StartsWith(resourceId, StringComparison.Ordinal)))
+                if (!assm.IsDynamic && assm.GetManifestResourceNames().Any(id => id.StartsWith(resourceId, StringComparison.Ordinal)))
                     return assm;
             }
             return null;

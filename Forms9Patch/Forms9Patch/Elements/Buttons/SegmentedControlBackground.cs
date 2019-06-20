@@ -103,25 +103,17 @@ namespace Forms9Patch
 
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
-            var info = e.Info;
-            var surface = e.Surface;
-            var canvas = surface?.Canvas;
-            var rect = e.Info.Rect;
-
-            //System.Diagnostics.Debug.WriteLine(GetType() + ".OnPaintSurface(" + e.Info.Width + "," + e.Info.Height + ")");
-
-            if (canvas == null)
-                return;
-
-            canvas.Clear();
-            Control.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
+            if (e.Surface?.Canvas is SKCanvas canvas && e.Info.Rect is SKRectI rect)
+            {
+                canvas.Clear();
+                Control.LayoutFunction(rect.Left / Display.Scale, rect.Top / Display.Scale, rect.Width / Display.Scale, rect.Height / Display.Scale, PaintSegmentButtonBackground, e);
+            }
         }
 
         private static bool PaintSegmentButtonBackground(View view, Rectangle bounds, object obj)
         {
             if (view is SegmentButton button && obj is SKPaintSurfaceEventArgs e)
             {
-                //System.Diagnostics.Debug.WriteLine("PaintSegmentButtonBackground[" + button.InstanceId + "]: bounds=" + bounds);
                 var rect = new SKRect((float)Math.Round(bounds.Left * Display.Scale), (float)Math.Round(bounds.Top * Display.Scale), (float)Math.Round(bounds.Right * Display.Scale), (float)Math.Round(bounds.Bottom * Display.Scale));
                 button.CurrentBackgroundImage.SharedOnPaintSurface(e, rect);
             }

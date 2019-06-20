@@ -551,7 +551,7 @@ namespace Forms9Patch
         public Image(string embeddedResourceId, Assembly assembly = null) : this()
         {
             if (assembly == null && Device.RuntimePlatform != Device.UWP)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+                assembly = assembly ?? Assembly.GetCallingAssembly();
             Source = Forms9Patch.ImageSource.FromMultiResource(embeddedResourceId, assembly);
         }
 
@@ -876,6 +876,7 @@ namespace Forms9Patch
 
         internal void SharedOnPaintSurface(SKPaintSurfaceEventArgs e, SKRect rect)
         {
+
             var canvas = e.Surface?.Canvas;
             //canvas.ClipRect(rect, SKClipOperation.Intersect, false);
 
@@ -885,7 +886,6 @@ namespace Forms9Patch
 
             if (canvas == null)
                 return;
-
             //canvas.Clear();
 
             var hz = ((IExtendedShape)this).ExtendedElementShapeOrientation == Xamarin.Forms.StackOrientation.Horizontal;
@@ -1195,8 +1195,6 @@ namespace Forms9Patch
         #region Image Layout
         void GenerateImageLayout(SKCanvas canvas, SKRect fillRect, SKPath clipPath, SKPaint shadowPaint = null)
         {
-            //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout fillRect:" + fillRect);
-
             SKBitmap shadowBitmap = null;
             var workingCanvas = canvas;
 
@@ -1260,8 +1258,6 @@ namespace Forms9Patch
                 var scaledWidth = SourceImageWidth * scaleX;
                 var scaledHeight = SourceImageHeight * scaleY;
 
-                //System.Diagnostics.Debug.WriteLine("Image.GenerateImageLayout scaleX:" + scaleX + " scaleY:" + scaleY + " scaledWidth:" + scaledWidth + " scaledHeight:" + scaledHeight);
-
                 float left = 0;
                 float top = 0;
                 if (SourceImageWidth > 0 && SourceImageHeight > 0)
@@ -1324,7 +1320,6 @@ namespace Forms9Patch
             }
             else if (_f9pImageData.ValidBitmap)
             {
-                //if (_debugMessages) System.Diagnostics.Debug.WriteLine("[" + _instanceId + "]["+GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName()+"]  Fill=[" + _imageElement.Fill + "] W,H=[" + Width + "," + Height + "] ActualWH=[" + ActualWidth + "," + ActualHeight + "] ");
                 workingCanvas.Save();
                 if (clipPath != null)
                     workingCanvas.ClipPath(clipPath);
@@ -1498,7 +1493,6 @@ namespace Forms9Patch
                     }
 
                     //var lattice = rangeLists.ToSKLattice(_f9pImageData.SKBitmap);
-                    //System.Diagnostics.Debug.WriteLine("lattice.x: ["+lattice.XDivs[0]+","+lattice.XDivs[1]+"] lattice.y: ["+lattice.YDivs[0]+","+lattice.YDivs[1]+"] lattice.Bounds=["+lattice.Bounds+"] lattice.Flags:" + lattice.Flags);
                     //workingCanvas.DrawBitmapLattice(_f9pImageData.SKBitmap, lattice, fillRect);
                     //workingCanvas.DrawBitmapLattice(_f9pImageData.SKBitmap, new Int32[2] { 0, 1 }, new Int32[2] { 0, 1 }, fillRect, new SKPaint());
                 }
