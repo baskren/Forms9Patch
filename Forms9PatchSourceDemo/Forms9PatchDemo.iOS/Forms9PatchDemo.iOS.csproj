@@ -138,9 +138,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\com.42p.Forms9PatchDemo\Forms9PatchSourceDemo.csproj">
-      <Project>{5AD8709C-5F6A-4EB7-9336-71CCDF3579B0}</Project>
-      <Name>Forms9PatchSourceDemo</Name>
+    <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
+      <Project>{5ad8709c-5f6a-4eb7-9336-71ccdf3579b0}</Project>
+      <Name>Forms9PatchDemo</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
       <Project>{D5D3FD62-2B11-4C03-BE94-776C79DD92C9}</Project>

@@ -67,6 +67,10 @@ namespace Forms9Patch.Droid
         }
 
 
+        #region Fields
+        static int _instances;
+        internal int _instanceId;
+        #endregion
 
         #region Construction / Disposal
         /// <summary>
@@ -75,7 +79,7 @@ namespace Forms9Patch.Droid
         /// <param name="context">Context.</param>
         public F9PTextView(Context context) : base(context)
         //=> Init(context, null, 0);
-        { }
+        { _instanceId = _instances++; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
@@ -84,7 +88,7 @@ namespace Forms9Patch.Droid
         /// <param name="attrs">Attrs.</param>
         public F9PTextView(Context context, IAttributeSet attrs) : base(context, attrs)
         //=> Init(context, attrs, 0);
-        { }
+        { _instanceId = _instances++; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
@@ -94,7 +98,7 @@ namespace Forms9Patch.Droid
         /// <param name="defStyle">Def style.</param>
         public F9PTextView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle)
         //=> Init(context, attrs, defStyle);
-        { }
+        { _instanceId = _instances++; }
 
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace Forms9Patch.Droid
         /// </summary>
         /// <param name="javaReference">Java reference.</param>
         /// <param name="transfer">Transfer.</param>
-        public F9PTextView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
+        public F9PTextView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { _instanceId = _instances++; }
 
         /*
         /// <summary>
@@ -163,9 +167,16 @@ namespace Forms9Patch.Droid
             get => base.TextSize / Settings.Context.Resources.DisplayMetrics.Density;
             set
             {
-                if (System.Math.Abs(base.TextSize - value) < float.Epsilon * 5)
+                if (System.Math.Abs(TextSize - value) < 0.001)
                     return;
-                base.TextSize = value;
+                if (value < 0)
+                {
+                    if (System.Math.Abs(TextSize - DefaultTextSize) < 0.001)
+                        return;
+                    base.TextSize = DefaultTextSize;
+                }
+                else
+                    base.TextSize = value;
             }
         }
         #endregion
@@ -219,7 +230,7 @@ namespace Forms9Patch.Droid
         #region Android Layout
         event EventHandler InNativeLayoutComplete;
         int _inNativeLayout;
-        bool InNativeLayout
+        internal bool InNativeLayout
         {
             get => _inNativeLayout > 0;
             set
@@ -238,6 +249,8 @@ namespace Forms9Patch.Droid
         {
             if (_disposed)
                 return;
+
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": _instanceId [" + _instanceId + "]");
             /*
             var width = MeasureSpec.GetSize(widthMeasureSpec);
             if (MeasureSpec.GetMode(widthMeasureSpec) == Android.Views.MeasureSpecMode.Unspecified)

@@ -23,6 +23,7 @@ namespace Forms9Patch.iOS
             Forms9Patch.Label.DefaultFontSize = UIFont.LabelFontSize;
         }
 
+        UIColor _defaultTextColor;
 
         TextControlState _currentDrawState;
         TextControlState _lastDrawState;
@@ -33,6 +34,8 @@ namespace Forms9Patch.iOS
         TextControlState _currentMeasureState;
         SizeRequest? _lastMeasureResult;
         TextControlState _lastMeasureState;
+
+        
 
 
         #region Xamarin layout cycle
@@ -424,10 +427,12 @@ namespace Forms9Patch.iOS
                 _currentDrawState = new TextControlState();
                 if (Control == null)
                 {
-                    SetNativeControl(new UILabel(CGRect.Empty)
+                    var view = new UILabel(CGRect.Empty)
                     {
                         BackgroundColor = UIColor.Clear
-                    });
+                    };
+                    _defaultTextColor = view.TextColor;
+                    SetNativeControl(view);
                 }
                 UpdateTextColor();
                 UpdateFont();
@@ -647,10 +652,14 @@ namespace Forms9Patch.iOS
             InvokeOnMainThread(() =>
             {
                 var color = Element.TextColor;
+                
                 if (Control != null)
                 {
                     //P42.Utils.Debug.Message(Element, "color=[" + color + "]");
-                    Control.TextColor = color.ToUIColor();
+                    if (color == Xamarin.Forms.Color.Default || color == default || color.IsDefault)
+                        Control.TextColor = _defaultTextColor;
+                    else
+                        Control.TextColor = color.ToUIColor();
                     if (Element?.HtmlText != null)
                         UpdateAttributedText();
                     else
