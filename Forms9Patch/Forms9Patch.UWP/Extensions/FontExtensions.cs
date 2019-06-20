@@ -23,9 +23,8 @@ namespace Forms9Patch.UWP
         const double roundToNearest = 1;
 
         public static SharpDX.DirectWrite.FontWeight ToDxFontWeight(this Windows.UI.Text.FontWeight fontWeight)
-        {
-            return DxFontWeight(fontWeight.Weight);
-        }
+            => DxFontWeight(fontWeight.Weight);
+        
 
         static SharpDX.DirectWrite.FontWeight DxFontWeight(int fontWeight)
         {
@@ -95,14 +94,12 @@ namespace Forms9Patch.UWP
         }
 
         public static SharpDX.DirectWrite.Font GetDxFont(this Xamarin.Forms.Label label)
-        {
-            return GetDxFont(label.FontFamily, SharpDX.DirectWrite.FontWeight.Normal, SharpDX.DirectWrite.FontStretch.Normal, label.FontAttributes.ToDxFontStyle());
-        }
+            => GetDxFont(label.FontFamily, SharpDX.DirectWrite.FontWeight.Normal, SharpDX.DirectWrite.FontStretch.Normal, label.FontAttributes.ToDxFontStyle());
+        
 
         public static SharpDX.DirectWrite.Font GetDxFont(this TextBlock textBlock)
-        {
-            return GetDxFont(textBlock.FontFamily.Source, textBlock.FontWeight.ToDxFontWeight(), textBlock.FontStretch.ToDxFontStretch(), textBlock.FontStyle.ToDxFontStyle());
-        }
+            => GetDxFont(textBlock.FontFamily.Source, textBlock.FontWeight.ToDxFontWeight(), textBlock.FontStretch.ToDxFontStretch(), textBlock.FontStyle.ToDxFontStyle());
+        
 
         static Dictionary<string, SharpDX.DirectWrite.Font> _loadedFonts = new Dictionary<string, SharpDX.DirectWrite.Font>();
 
@@ -267,29 +264,28 @@ namespace Forms9Patch.UWP
         }
 
         internal static double HeightForLinesAtFontSize(this FontMetrics metric, int lines, double fontSize)
-        {
-            var designUnitsHeight = lines * (metric.CapHeight + metric.Descent) + (lines - 1) * ((metric.Ascent - metric.CapHeight) + metric.LineGap);
-            return fontSize * designUnitsHeight / metric.DesignUnitsPerEm;
-        }
+            => fontSize * DesignUnitsHeightForLines(metric, lines) / metric.DesignUnitsPerEm;
+        
 
         internal static double FontSizeFromLineHeight(this FontMetrics metric, double lineHeight)
+            => FontSizeFromLinesInHeight(metric, 1, lineHeight);
+        
+
+        static int DesignUnitsHeightForLines(this FontMetrics metric, int lines)
         {
-            //var uwpLineHeight = lineHeight;
-            //var fontSize = uwpLineHeight / lineHeightToFontSizeRatio;
-            //return fontSize;
-            return lineHeight * metric.DesignUnitsPerEm / (metric.CapHeight + metric.Descent);
+            var designUnitsHeight = lines * (Math.Max(metric.Ascent, metric.CapHeight) + metric.Descent) + (lines - 1) * metric.LineGap;
+            if (metric.CapHeight == metric.Ascent && metric.Descent + metric.LineGap == 0 && lines > 0)
+                designUnitsHeight = lines * (Math.Max(2210, 1434) + 514) + (lines - 1) * 0;
+            return designUnitsHeight;
         }
 
         internal static double FontSizeFromLinesInHeight(this FontMetrics metric, int lines, double height)
-        {
-            var designUnitsHeight = lines * (metric.CapHeight + metric.Descent) + (lines - 1) * ((metric.Ascent - metric.CapHeight) + metric.LineGap);
-            return (height * metric.DesignUnitsPerEm / designUnitsHeight) / 1.4;
-        }
+            => height * metric.DesignUnitsPerEm / DesignUnitsHeightForLines(metric,lines);
+        
 
         internal static double ClipFontSize(double size, Forms9Patch.Label label)
-        {
-            return ClipFontSize(size, label.MinFontSize, label.FontSize);
-        }
+            => ClipFontSize(size, label.MinFontSize, label.FontSize);
+        
 
         internal static double ClipFontSize(double size, double min, double max)
         {
@@ -303,9 +299,8 @@ namespace Forms9Patch.UWP
         }
 
         internal static double DefaultFontSize()
-        {
-            return (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"];
-        }
+            => (double)Windows.UI.Xaml.Application.Current.Resources["ControlContentThemeFontSize"];
+        
 
         internal static double ClipFontSize(double size, double min)
         {

@@ -508,7 +508,8 @@ namespace Forms9Patch.UWP
                         //P42.Utils.Debug.Message(Element,"B.1 tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                     else
-                    {// set the font size to fit Label.Lines into the available height
+                    {
+                        // set the font size to fit Label.Lines into the available height
                         //tmpFontSize = _fontMetrics.FontSizeFromLineHeight(height / label.Lines);
                         var constrainedSize = textBlock.DesiredSize;
 
