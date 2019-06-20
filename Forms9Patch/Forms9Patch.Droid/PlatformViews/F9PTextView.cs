@@ -36,6 +36,38 @@ namespace Forms9Patch.Droid
             }
         }
 
+        static bool _defaultTextColorArgbIntSet;
+        static int _defaultTextColorArgbInt;
+        internal static int DefaultTextColorArgbInt
+        {
+            get
+            {
+                if (!_defaultTextColorArgbIntSet)
+                {
+                    _defaultTextColorArgbInt = (new TextView(Forms9Patch.Droid.Settings.Context)).CurrentTextColor;
+                    _defaultTextColorArgbIntSet = true;
+                }
+                return _defaultTextColorArgbInt;
+            }
+        }
+
+        static bool _defaultTextColorSet;
+        static Android.Graphics.Color _defaultTextColor;
+        internal static Android.Graphics.Color DefaultTextColor
+        {
+            get
+            {
+                if (!_defaultTextColorSet)
+                {
+                    _defaultTextColor = new Android.Graphics.Color(DefaultTextColorArgbInt);
+                    _defaultTextColorSet = true;
+                }
+                return _defaultTextColor;
+            }
+        }
+
+
+
         #region Construction / Disposal
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.

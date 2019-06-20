@@ -22,8 +22,6 @@ namespace Forms9Patch.Droid
         static int _instances;
         public int _instance;
 
-        ColorStateList _labelTextColorDefault;
-
         static float _aStupidWayToImplementFontScaling = 1.0f;
 
         #region Constructor / Disposer
@@ -259,7 +257,8 @@ namespace Forms9Patch.Droid
             ICharSequence text = state.JavaText;
             var tmpFontSize = BoundTextSize(element.FontSize);
             control.Typeface = state.Typeface;
-            control.SetTextColor(state.TextColor.ToAndroid());
+            //control.SetTextColor(state.TextColor.ToAndroid());
+            UpdateColor(control);
             control.TextSize = tmpFontSize;
 
             //P42.Utils.Debug.Message(Element, "control.TypeFace=[" + control.Typeface + "] ");
@@ -482,7 +481,6 @@ namespace Forms9Patch.Droid
                 if (Control == null)
                 {
                     var view = new F9PTextView(Context);
-                    _labelTextColorDefault = view.TextColors;
                     SetNativeControl(view);
                 }
                 Control.IsNativeDrawEnabled = false;
@@ -632,11 +630,11 @@ namespace Forms9Patch.Droid
 
         void UpdateColor(F9PTextView control)
         {
-            if (_currentDrawState.TextColor == Element.TextColor)
-                return;
+            //if (_currentDrawState.TextColor == Element.TextColor)
+            //    return;
             _currentDrawState.TextColor = Element.TextColor;
-            if (_currentDrawState.TextColor == Xamarin.Forms.Color.Default)
-                control?.SetTextColor(_labelTextColorDefault);
+            if (_currentDrawState.TextColor == Xamarin.Forms.Color.Default || _currentDrawState.TextColor.IsDefault || _currentDrawState.TextColor == default)
+                control?.SetTextColor(F9PTextView.DefaultTextColor);
             else
                 control?.SetTextColor(_currentDrawState.TextColor.ToAndroid());
         }
@@ -644,29 +642,34 @@ namespace Forms9Patch.Droid
         bool _updateFontPending;
         void UpdateFont(F9PTextView control)
         {
-            _updateFontPending = false;
+            if (control != null)
+            {
+                _updateFontPending = false;
 #pragma warning disable CS0618 // Type or member is obsolete
-            _currentDrawState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
+                _currentDrawState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
 #pragma warning restore CS0618 // Type or member is obsolete
-            control.Typeface = _currentDrawState.Typeface;
-            return;
+                control.Typeface = _currentDrawState.Typeface;
+            }
         }
 
         bool UpdateText(F9PTextView control)
         {
-            //P42.Utils.Debug.Message(Element, "ENTER");
-            if (Element.F9PFormattedString != null)
+            if (control != null)
             {
-                _currentDrawState.TextFormatted = Element.F9PFormattedString.ToSpannableString(noBreakSpace: Element.LineBreakMode == LineBreakMode.CharacterWrap);
-                control.TextFormatted = _currentDrawState.TextFormatted;
-            }
-            else
-            {
-                var text = Element.Text;
-                if (Element.LineBreakMode == LineBreakMode.CharacterWrap)
-                    text = Element.Text.Replace(' ', '\u00A0');
-                _currentDrawState.Text = text;
-                control.Text = _currentDrawState.Text;
+                //P42.Utils.Debug.Message(Element, "ENTER");
+                if (Element.F9PFormattedString != null)
+                {
+                    _currentDrawState.TextFormatted = Element.F9PFormattedString.ToSpannableString(noBreakSpace: Element.LineBreakMode == LineBreakMode.CharacterWrap);
+                    control.TextFormatted = _currentDrawState.TextFormatted;
+                }
+                else
+                {
+                    var text = Element.Text;
+                    if (Element.LineBreakMode == LineBreakMode.CharacterWrap)
+                        text = Element.Text.Replace(' ', '\u00A0');
+                    _currentDrawState.Text = text;
+                    control.Text = _currentDrawState.Text;
+                }
             }
             //P42.Utils.Debug.Message(Element, "EXIT");
             return true;

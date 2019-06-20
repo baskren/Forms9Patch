@@ -14,8 +14,7 @@ namespace Forms9Patch.Droid
             if (formattedString == null || formattedString.Text == null || formattedString.Text.Length < 1)
                 return null;
             var text = formattedString.Text;
-            var hTMLMarkupString = formattedString as HTMLMarkupString;
-            if (hTMLMarkupString != null)
+            if (formattedString is HTMLMarkupString hTMLMarkupString)
                 text = hTMLMarkupString.UnmarkedText;
             if (noBreakSpace)
                 text = text.Replace(' ', '\u00A0');
@@ -66,13 +65,9 @@ namespace Forms9Patch.Droid
                 result = new SpannableStringBuilder(ellipsesText);
             }
 
-
-
-            //Typeface mathFont = Typeface.CreateFromAsset(Settings.Context.Assets,"Fonts/STIXGeneral.otf");
             Typeface mathFont = FontManagment.TypefaceForFontFamily("Forms9Patch.Resources.Fonts.STIXGeneral.otf");
             if (mathFont == null)
                 throw new MissingMemberException("Failed to load STIXGeneral font.");
-
 
 
             // process Spans
@@ -169,6 +164,7 @@ namespace Forms9Patch.Droid
                 spanEnd++;
                 if (spanEnd > result.Length())
                     spanEnd = result.Length();
+
                 switch (span.Key)
                 {
                     case FontFamilySpan.SpanKey:

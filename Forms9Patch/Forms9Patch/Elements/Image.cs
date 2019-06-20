@@ -528,7 +528,7 @@ namespace Forms9Patch
         public Image()
         {
             _f9pId = _instances++;
-            if (Device.RuntimePlatform == Device.UWP)
+            if (Device.RuntimePlatform != Device.iOS)
             {
                 Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
                 {

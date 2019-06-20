@@ -1,10 +1,6 @@
 using Xamarin.Forms;
 using System;
-using FormsGestures;
-using System.Collections.Generic;
-using Forms9Patch;
 using System.ComponentModel;
-using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
@@ -462,8 +458,6 @@ namespace Forms9Patch
 
         #region Fields
         internal ILayout _decorativeContainerView;
-        //internal BoxView _pageOverlay;
-        //readonly Listener _listener;
         internal DateTime PresentedAt;
         static int _instances;
         readonly int _id;

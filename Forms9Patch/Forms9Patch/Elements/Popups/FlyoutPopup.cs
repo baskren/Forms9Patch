@@ -2,6 +2,7 @@ using System;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using FormsGestures;
 
 namespace Forms9Patch
 {
@@ -61,6 +62,7 @@ namespace Forms9Patch
 
         #region Fields
         Frame _frame;
+        FormsGestures.Listener _listener;
         #endregion
 
 
@@ -79,6 +81,8 @@ namespace Forms9Patch
             Margin = 0;
             DecorativeContainerView = _frame;
             UpdateBaseLayoutProperties();
+            _listener = FormsGestures.Listener.For(this);
+            _listener.Swiped += OnSwiped;
         }
 
         /// <summary>
@@ -93,6 +97,21 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="popAfter">Flyout will dissappear after popAfter</param>
         public FlyoutPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                if (_listener!=null)
+                _listener.Swiped -= OnSwiped;
+                _listener?.Dispose();
+                _listener = null;
+            }
+            base.Dispose(disposing);
+        }
+
         #endregion
 
 
@@ -217,5 +236,22 @@ namespace Forms9Patch
         #endregion
 
 
+        #region Event handlers
+        async void OnSwiped(object sender, SwipeEventArgs e)
+        {
+            if (Orientation == StackOrientation.Horizontal)
+            {
+                if ((e.Direction == Direction.Left && Alignment == FlyoutAlignment.Start)
+                    || (e.Direction == Direction.Right && Alignment == FlyoutAlignment.End))
+                    await PopAsync();
+            }
+            else
+            {
+                if ((e.Direction == Direction.Up && Alignment == FlyoutAlignment.Start)
+                    || (e.Direction == Direction.Down && Alignment == FlyoutAlignment.End))
+                    await PopAsync();
+            }
+        }
+        #endregion
     }
 }
