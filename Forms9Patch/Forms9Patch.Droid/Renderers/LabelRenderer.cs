@@ -158,6 +158,7 @@ namespace Forms9Patch.Droid
             //P42.Utils.Debug.Message(Element, "Control.TextSize=[" + Control.TextSize + "] Element.FontSize=[" + Element.FontSize + "]");
 
             /* This seems to work */
+            /*
             if (_lastDrawResult != null && _lastDrawResult.HasValue
                 && _lastDrawState == _currentDrawState
                 && _lastDrawResult.Value.Request.Width > 0
@@ -172,6 +173,7 @@ namespace Forms9Patch.Droid
                 //P42.Utils.Debug.Message(Element, "EXIT reuse _lastSizeRequest=[" + _lastDrawResult.Value + "]");
                 return _lastDrawResult.Value;
             }
+            */
 
 
             _lastDrawResult = InternalLayout(Control, _currentDrawState);
@@ -354,9 +356,13 @@ namespace Forms9Patch.Droid
             }
 
             control.TextSize = tmpFontSize;
+            //DANGER!!!
+            Control.TextSize = tmpFontSize;
+            //DANGER!!!
             state.RenderedFontSize = tmpFontSize;
             var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
             //P42.Utils.Debug.Message(Element, "Post STATIC LAYOUT element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Post STATIC LAYOUT tmpFontSize=["+tmpFontSize+"] element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
 
             int lines = state.Lines;
             if (lines == 0 && state.AutoFit == AutoFit.None)
@@ -382,7 +388,7 @@ namespace Forms9Patch.Droid
                 else
                 {
                     layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
-                    //P42.Utils.Debug.Message(Element, "Truncate");
+                    P42.Utils.Debug.Message(Element, "Truncate");
                 }
             }
             lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
@@ -455,7 +461,7 @@ namespace Forms9Patch.Droid
             //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]  element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             control.IsNativeDrawEnabled = true;
             if (control == Control)
-                control.RequestLayout();
+                Control.RequestLayout();
 
             return result;
         }
@@ -692,7 +698,7 @@ namespace Forms9Patch.Droid
 #pragma warning disable CS0618 // Type or member is obsolete
                 textSize = (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
 #pragma warning restore CS0618 // Type or member is obsolete
-            if (textSize > Element.FontSize)
+            if (textSize > Element.FontSize && Element.FontSize > 0)
                 return (float)Element.FontSize;
             if (textSize < ModelMinFontSize)
                 textSize = ModelMinFontSize;
