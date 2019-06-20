@@ -364,6 +364,8 @@ namespace Forms9Patch
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
             //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
+            if (width <= 0)
+                return Size.Zero;
             var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
             //P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
             return result;
