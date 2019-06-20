@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Controls;
-
+using Windows.UI.Xaml;
 
 namespace Forms9Patch.UWP
 {
@@ -49,6 +49,9 @@ namespace Forms9Patch.UWP
             }
         }
 
+
+
+
         internal static void SetAndFormatText(this TextBlock winTextBlock, Forms9Patch.Label f9pLabel, double altFontSize = -1)
         {
             var label = f9pLabel;
@@ -63,6 +66,8 @@ namespace Forms9Patch.UWP
             //textBlock.LineHeight = FontExtensions.LineHeightForFontSize(textBlock.FontSize);
             textBlock.LineStackingStrategy = Windows.UI.Xaml.LineStackingStrategy.BaselineToBaseline;
             textBlock.FontFamily = FontService.GetWinFontFamily(label.FontFamily);
+
+            textBlock.UpdateLineBreakMode(f9pLabel);
 
             if (label.Text != null)
             {

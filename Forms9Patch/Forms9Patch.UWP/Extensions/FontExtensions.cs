@@ -275,7 +275,7 @@ namespace Forms9Patch.UWP
         {
             var designUnitsHeight = lines * (Math.Max(metric.Ascent, metric.CapHeight) + metric.Descent) + (lines - 1) * metric.LineGap;
             if (metric.CapHeight == metric.Ascent && metric.Descent + metric.LineGap == 0 && lines > 0)
-                designUnitsHeight = lines * (Math.Max(2210, 1434) + 514) + (lines - 1) * 0;
+                designUnitsHeight = lines * (Math.Max(2210, 1434) + 514);
             return designUnitsHeight;
         }
 

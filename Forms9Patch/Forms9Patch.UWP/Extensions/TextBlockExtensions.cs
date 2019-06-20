@@ -26,6 +26,48 @@ namespace Forms9Patch.UWP
             }
         }
 
+        public static void UpdateLineBreakMode(this TextBlock textBlock, Forms9Patch.Label label)
+        {
+            //P42.Utils.Debug.Message(Element,"ENTER");
+            //_perfectSizeValid = false;
+
+            if (textBlock != null && label != null)
+            {
+                switch (label.LineBreakMode)
+                {
+                    case Xamarin.Forms.LineBreakMode.NoWrap:
+                        textBlock.TextTrimming = TextTrimming.None;
+                        textBlock.TextWrapping = TextWrapping.NoWrap;
+                        break;
+                    case Xamarin.Forms.LineBreakMode.WordWrap:
+                        textBlock.TextTrimming = TextTrimming.None;
+                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                        break;
+                    case Xamarin.Forms.LineBreakMode.CharacterWrap:
+                        textBlock.TextTrimming = TextTrimming.None;
+                        textBlock.TextWrapping = TextWrapping.Wrap;
+                        break;
+                    case Xamarin.Forms.LineBreakMode.HeadTruncation:
+                        // TODO: This truncates at the end.
+                        textBlock.TextTrimming = TextTrimming.WordEllipsis;
+                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                        break;
+                    case Xamarin.Forms.LineBreakMode.TailTruncation:
+                        textBlock.TextTrimming = TextTrimming.CharacterEllipsis;
+                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                        break;
+                    case Xamarin.Forms.LineBreakMode.MiddleTruncation:
+                        // TODO: This truncates at the end.
+                        textBlock.TextTrimming = TextTrimming.WordEllipsis;
+                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            //P42.Utils.Debug.Message(Element,"EXIT");
+        }
+
 
         /// <summary>
         /// WARNING!  Calling this will cause a crash IF target version of APP is not set to Windows10 FallCreatorsUpdate (10.0.16299.0) or greater

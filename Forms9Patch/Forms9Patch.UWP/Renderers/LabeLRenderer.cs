@@ -60,7 +60,7 @@ namespace Forms9Patch.UWP
 
                 UpdateColor(Control);
                 UpdateHorizontalAlign(Control);
-                UpdateLineBreakMode(Control);
+                Control.UpdateLineBreakMode(e.NewElement);
             }
         }
 
@@ -114,7 +114,8 @@ namespace Forms9Patch.UWP
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
             {
                 //P42.Utils.Debug.Message(Element,"ENTER");
-                ForceLayout();
+                Control?.UpdateLineBreakMode(Element);
+                //ForceLayout();
                 //P42.Utils.Debug.Message(Element,"EXIT");
             }
             else if (e.PropertyName == Forms9Patch.Label.HorizontalTextAlignmentProperty.PropertyName)
@@ -164,49 +165,6 @@ namespace Forms9Patch.UWP
             //P42.Utils.Debug.Message(Element,"EXIT");
         }
 
-
-        void UpdateLineBreakMode(TextBlock textBlock)
-        {
-            //P42.Utils.Debug.Message(Element,"ENTER");
-            //_perfectSizeValid = false;
-
-            if (textBlock != null && Element is Forms9Patch.Label label)
-            {
-                LayoutValid = false;
-                switch (label.LineBreakMode)
-                {
-                    case LineBreakMode.NoWrap:
-                        textBlock.TextTrimming = TextTrimming.None;
-                        textBlock.TextWrapping = TextWrapping.NoWrap;
-                        break;
-                    case LineBreakMode.WordWrap:
-                        textBlock.TextTrimming = TextTrimming.None;
-                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-                        break;
-                    case LineBreakMode.CharacterWrap:
-                        textBlock.TextTrimming = TextTrimming.None;
-                        textBlock.TextWrapping = TextWrapping.Wrap;
-                        break;
-                    case LineBreakMode.HeadTruncation:
-                        // TODO: This truncates at the end.
-                        textBlock.TextTrimming = TextTrimming.WordEllipsis;
-                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-                        break;
-                    case LineBreakMode.TailTruncation:
-                        textBlock.TextTrimming = TextTrimming.CharacterEllipsis;
-                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-                        break;
-                    case LineBreakMode.MiddleTruncation:
-                        // TODO: This truncates at the end.
-                        textBlock.TextTrimming = TextTrimming.WordEllipsis;
-                        textBlock.TextWrapping = TextWrapping.WrapWholeWords;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-            //P42.Utils.Debug.Message(Element,"EXIT");
-        }
 
 
         void ForceLayout()
@@ -473,12 +431,12 @@ namespace Forms9Patch.UWP
                 textBlock.FontStyle = Element.FontAttributes.HasFlag(FontAttributes.Italic) ? FontStyle.Italic : FontStyle.Normal;
                 textBlock.FontWeight = Element.FontAttributes.HasFlag(FontAttributes.Bold) ? FontWeights.Bold : FontWeights.Normal;
 
-                UpdateLineBreakMode(textBlock);
+                textBlock.UpdateLineBreakMode(Element);
 
-                double tmpHt;
 
                 textBlock.SetAndFormatText(label, tmpFontSize);
                 textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                double tmpHt = textBlock.DesiredSize.Height;
                 //P42.Utils.Debug.Message(Element,"ENTER AUTOFIT label.Lines==0 tmpFontSize=["+tmpFontSize+"] textBlock.DesiredSize=[" + textBlock.DesiredSize + "] width=[" + width + "] height=[" + height + "]");
                 _fontMetrics = textBlock.GetFontMetrics();
                 if (label.Lines == 0)
@@ -494,6 +452,7 @@ namespace Forms9Patch.UWP
                             System.Diagnostics.Debug.WriteLine(GetType() + ".");
                         textBlock.SetAndFormatText(label, tmpFontSize);
                         textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                        tmpHt = textBlock.DesiredSize.Height;
                         //P42.Utils.Debug.Message(Element,"A tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                 }
@@ -523,9 +482,8 @@ namespace Forms9Patch.UWP
                             var unconstrainedSize = textBlock.DesiredSize;
                             if (unconstrainedSize.Width > constrainedSize.Width)
                             {
-                                var bestWidth = FindBestWidthForLineFit(label, textBlock, tmpFontSize, tmpHt, constrainedSize.Width, unconstrainedSize.Width);
                                 textBlock.SetAndFormatText(label, tmpFontSize);
-                                textBlock.Measure(new Windows.Foundation.Size(bestWidth, double.PositiveInfinity));
+                                textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
                                 //P42.Utils.Debug.Message(Element,"B.2 bestWidth=[" + bestWidth + "]");
                             }
                         }
@@ -538,9 +496,10 @@ namespace Forms9Patch.UWP
                     //if (textBlock.DesiredSize.Height / textBlock.LineHeight > label.Lines)
                     if (textBlock.ActualWidth > textBlock.DesiredSize.Width || textBlock.DesiredSize.Height / textBlock.LineHeight > label.Lines)
                     {
-                        tmpFontSize = WidthAndLinesFit(label, textBlock, label.Lines, minFontSize, tmpFontSize, width);
+                        tmpFontSize = WidthAndLinesFit(label, textBlock, label.Lines+1, minFontSize, tmpFontSize, width);
                         textBlock.SetAndFormatText(label, tmpFontSize);
                         textBlock.Measure(new Windows.Foundation.Size(width, double.PositiveInfinity));
+                        tmpHt = textBlock.DesiredSize.Height;
                         //P42.Utils.Debug.Message(Element,"C tmpFontSize=[" + tmpFontSize + "]  textBlock.DesiredSize=[" + textBlock.DesiredSize + "]");
                     }
                 }
@@ -598,7 +557,7 @@ namespace Forms9Patch.UWP
                 }
                 */
                 //result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width), Math.Ceiling(tmpHt > -1 ? tmpHt : textBlock.DesiredSize.Height));
-                result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width), Math.Ceiling(textBlock.DesiredSize.Height));
+                result = new Windows.Foundation.Size(Math.Ceiling(textBlock.DesiredSize.Width), Math.Ceiling(tmpHt));
 
                 //if (DebugCondition && label.Width>0 && label.Height > 0 &&(textBlock.DesiredSize.Width > label.Width || textBlock.DesiredSize.Height > label.Height))
                 //    System.Diagnostics.Debug.WriteLine("");
@@ -739,10 +698,14 @@ namespace Forms9Patch.UWP
             textBlock?.SetAndFormatText(label, mid);
             textBlock?.Measure(new Windows.Foundation.Size(availWidth, double.PositiveInfinity));
 
-            var renderedLines = textBlock.DesiredSize.Height / _fontMetrics.LineHeightForFontSize(mid); // textBlock.LineHeight;
+            //var lineHeight = _fontMetrics.LineHeightForFontSize(mid);
+            //var renderedLines = textBlock.DesiredSize.Height / lineHeight; // textBlock.LineHeight;
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": mid[" + mid + "] lineHeight=["+lineHeight+"] desired=["+ textBlock.DesiredSize.Height + "]");
+            var midHeight = _fontMetrics.HeightForLinesAtFontSize(lines, mid);
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": mid["+mid+"]  midHeight[" + midHeight + "] textBlock.DesiredSize.Height["+ textBlock.DesiredSize.Height + "]");
             //P42.Utils.Debug.Message(Element,"mid=["+mid+"] renderedLines=[" + renderedLines + "] DesiredSize=[" + textBlock.DesiredSize.Height + "] LineHeight=[" + textBlock.LineHeight + "]");
 
-            if (Math.Round(renderedLines) > lines || textBlock.ActualWidth > textBlock.DesiredSize.Width)
+            if (textBlock.DesiredSize.Height > midHeight || textBlock.DesiredSize.Width > availWidth)
                 return WidthAndLinesFit(label, textBlock, lines, min, mid, availWidth);
             return WidthAndLinesFit(label, textBlock, lines, mid, max, availWidth);
         }
