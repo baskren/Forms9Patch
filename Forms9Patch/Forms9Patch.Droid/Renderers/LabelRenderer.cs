@@ -18,11 +18,19 @@ namespace Forms9Patch.Droid
     public class LabelRenderer : ViewRenderer<Label, F9PTextView>
     {
 
-
+        #region Fields
         static int _instances;
         public int _instance;
+        F9PTextView _measureControl;
+        TextControlState _currentMeasureState;
+        SizeRequest? _lastMeasureResult;
+        TextControlState _lastMeasureState;
 
-        static float _aStupidWayToImplementFontScaling = 1.0f;
+        TextControlState _currentDrawState;
+        SizeRequest? _lastDrawResult;
+        TextControlState _lastDrawState;
+        #endregion
+
 
         #region Constructor / Disposer
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -66,23 +74,10 @@ namespace Forms9Patch.Droid
             }
             base.Dispose(disposing);
         }
-
-
-
         #endregion
 
 
         #region Xamarin & Forms9Patch Measurement / Layout 
-        F9PTextView _measureControl;
-        TextControlState _currentMeasureState;
-        SizeRequest? _lastMeasureResult;
-        TextControlState _lastMeasureState;
-
-        TextControlState _currentDrawState;
-        SizeRequest? _lastDrawResult;
-        TextControlState _lastDrawState;
-
-
         Size LabelF9pSize(double widthConstraint, double fontSize)
         {
             if (_currentDrawState == null
@@ -208,8 +203,6 @@ namespace Forms9Patch.Droid
             UpdateColor(control);
             control.TextSize = tmpFontSize;
 
-            _aStupidWayToImplementFontScaling = control.TextSize / tmpFontSize;
-
             control.IsNativeDrawEnabled = false;
             control.SetSingleLine(false);
             control.SetMaxLines(int.MaxValue / 2);
@@ -279,19 +272,11 @@ namespace Forms9Patch.Droid
 
             var syncFontSize = (float)((ILabel)Element).SynchronizedFontSize;
             if (syncFontSize >= 0 && System.Math.Abs(tmpFontSize - syncFontSize) > 0.1)
-            {
                 tmpFontSize = syncFontSize;
-                //P42.Utils.Debug.Message(Element, "syncFontSize=[" + syncFontSize + "]");
-            }
 
             control.TextSize = tmpFontSize;
-            //DANGER!!!
-            //Control.TextSize = tmpFontSize;
-            //DANGER!!!
             state.RenderedFontSize = tmpFontSize;
             var layout = TextExtensions.StaticLayout(state.JavaText, new TextPaint(control.Paint), state.AvailWidth, Android.Text.Layout.Alignment.AlignNormal, 1.0f, 0.0f, true);
-            //P42.Utils.Debug.Message(Element, "Post STATIC LAYOUT element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Post STATIC LAYOUT tmpFontSize=["+tmpFontSize+"] element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
 
             int lines = state.Lines;
             if (lines == 0 && state.AutoFit == AutoFit.None)
@@ -303,7 +288,6 @@ namespace Forms9Patch.Droid
                     else
                         break;
                 }
-                //P42.Utils.Debug.Message(Element, "lines=[" + lines + "]");
             }
             if (layout.Height > state.AvailHeight || (lines > 0 && layout.LineCount > lines))
             {
@@ -312,82 +296,41 @@ namespace Forms9Patch.Droid
                     control.SetSingleLine(true);
                     control.SetMaxLines(1);
                     control.Ellipsize = state.LineBreakMode.ToEllipsize();
-                    //P42.Utils.Debug.Message(Element, "Ellipsize");
                 }
                 else
-                {
                     layout = TextPaintExtensions.Truncate(state.Text, element.F9PFormattedString, new TextPaint(control.Paint), state.AvailWidth, state.AvailHeight, element.AutoFit, element.LineBreakMode, ref lines, ref text);
-                    P42.Utils.Debug.Message(Element, "Truncate");
-                }
             }
             lines = lines > 0 ? System.Math.Min(lines, layout.LineCount) : layout.LineCount;
             for (int i = 0; i < lines; i++)
             {
                 tmpHt = layout.GetLineBottom(i);
                 var width = layout.GetLineWidth(i);
-                //P42.Utils.Debug.Message(Element, "Line[" + i + "] w:[" + width + "] h:[" + layout.GetLineBottom(i) + "] layout.LineMax[" + layout.GetLineMax(i) + "] layout.Height[" + layout.Height + "]");
-                //System.Diagnostics.Debug.WriteLine("\t\tright=["+right+"]");
                 if (width > tmpWd)
                     tmpWd = (int)System.Math.Ceiling(width);
             }
-            //P42.Utils.Debug.Message(Element, "tmpWd=[" + tmpWd + "] layout.Width=[" + layout.Width + "]");
             if (state.AutoFit == AutoFit.None && state.Lines > 0)
                 control.SetMaxLines(state.Lines);
 
-            //System.Diagnostics.Debug.WriteLine("\tLabelRenderer.GetDesiredSize\ttmp.size=[" + tmpWd + ", " + tmpHt + "]");
             if (element.IsDynamicallySized && state.Lines > 0 && state.AutoFit == AutoFit.Lines)
             {
                 fontMetrics = control.Paint.GetFontMetrics();
                 fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
                 fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
                 tmpHt = (int)(fontLineHeight * state.Lines + fontLeading * (state.Lines - 1));
-                //P42.Utils.Debug.Message(Element, "DynamicallySized: tmpHt=[" + tmpHt + "]");
             }
 
             control.Gravity = element.HorizontalTextAlignment.ToHorizontalGravityFlags() | element.VerticalTextAlignment.ToVerticalGravityFlags();
 
             if (element.Text != null)
-            {
                 control.Text = text.ToString();
-                //P42.Utils.Debug.Message(Element, "control.Text=" + control.Text);
-            }
             else
-            {
                 control.TextFormatted = text;
-                //P42.Utils.Debug.Message(Element, "control.TextFormatted=" + control.TextFormatted);
-            }
-
 
             var result = new SizeRequest(new Xamarin.Forms.Size(System.Math.Ceiling((double)tmpWd), System.Math.Ceiling((double)tmpHt)), new Xamarin.Forms.Size(10, System.Math.Ceiling((double)tmpHt)));
-            /*
-            if (P42.Utils.Debug.ConditionFunc?.Invoke(Element) ?? false)
-            {
-                //control.SetWidth((int)_lastSizeRequest.Value.Request.Width);
-                //control.SetHeight((int)_lastSizeRequest.Value.Request.Height);
-
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t[" + elementText + "] ");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize(" + (state.AvailWidth > int.MaxValue / 3 ? "infinity" : state.AvailWidth.ToString()) + "," + (state.AvailHeight > int.MaxValue / 3 ? "infinity" : state.AvailHeight.ToString()) + ") exit (" + result + ")");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Visibility=[" + control.Visibility + "]");
-                //System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextFormatted=[" + control.TextFormatted + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.TextSize=[" + control.TextSize + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.ClipBounds=[" + control.ClipBounds?.Width() + "," + control.ClipBounds?.Height() + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Width[" + control.Width + "]  .Height=[" + control.Height + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.GetX[" + control.GetX() + "]  .GetY[" + control.GetY() + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Alpha[" + control.Alpha + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Background[" + control.Background + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Elevation[" + control.Elevation + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Enabled[" + control.Enabled + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.Error[" + control.Error + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.IsOpaque[" + control.IsOpaque + "]");
-                System.Diagnostics.Debug.WriteLine(GetType() + ".GetDesiredSize \t\tControl.IsShown[" + control.IsShown + "]");
-                //control.BringToFront();
-                //System.Diagnostics.Debug.WriteLine("\t\t");
-            }
-            */
 
             if (element.LineBreakMode == LineBreakMode.NoWrap)
                 control.SetSingleLine(true);
-            //P42.Utils.Debug.Message(Element, "EXIT _lastSizeRequest=[" + result + "]  element.Size=[" + element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
+
             control.IsNativeDrawEnabled = true;
             if (control == Control)
                 Control.RequestLayout();
@@ -398,19 +341,13 @@ namespace Forms9Patch.Droid
 
 
         #region Element Change Handler
-
-        readonly object _lock = new object();
-
         /// <summary>
         /// Raises the element changed event.
         /// </summary>
         /// <param name="e">E.</param>
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e)
         {
-            //lock (_lock)
             {
-
-                //P42.Utils.Debug.Message(Element, "ENTER e.OldElement=[" + e.OldElement + "] Bounds=[" + e.OldElement?.Bounds + "] e.NewElement=[" + e.NewElement + "] e.NewElement.Bounds=[" + e.NewElement?.Bounds + "] Width=[" + Width + "] Height=[" + Height + "]");
                 base.OnElementChanged(e);
 
                 if (Control == null)
@@ -459,11 +396,8 @@ namespace Forms9Patch.Droid
                     }
                 }
                 Control.IsNativeDrawEnabled = true;
-
-                //P42.Utils.Debug.Message(Element, "EXIT  Element.Size=[" + Element.Bounds.Size + "] Width=[" + Width + "] Height=[" + Height + "]");
             }
         }
-
         #endregion
 
 
@@ -538,44 +472,29 @@ namespace Forms9Patch.Droid
         void UpdateAlignment(F9PTextView control)
         {
             if (Element is Forms9Patch.Label element)
-                //lock (_lock)
                 control.Gravity = element.HorizontalTextAlignment.ToHorizontalGravityFlags() | element.VerticalTextAlignment.ToVerticalGravityFlags();
         }
 
         void UpdateLineBreakMode()
-        {
-            //P42.Utils.Debug.Message(Element, "ENTER");
-            _currentDrawState.LineBreakMode = Element.LineBreakMode;
-            //P42.Utils.Debug.Message(Element, "EXIT");
-        }
+            =>_currentDrawState.LineBreakMode = Element.LineBreakMode;
+        
 
         void UpdateFontSize(F9PTextView control)
         {
             //P42.Utils.Debug.Message(Element, "ENTER");
             _currentDrawState.TextSize = (float)Element.FontSize;
-            //lock (_lock)
             control.TextSize = _currentDrawState.TextSize;
             //P42.Utils.Debug.Message(Element, "EXIT");
         }
 
         void UpdateFit()
-        {
-            //P42.Utils.Debug.Message(Element, "ENTER");
-            _currentDrawState.AutoFit = Element.AutoFit;
-            //P42.Utils.Debug.Message(Element, "EXIT");
-        }
+            => _currentDrawState.AutoFit = Element.AutoFit;
 
         void UpdateLines()
-        {
-            //P42.Utils.Debug.Message(Element, "ENTER");
-            _currentDrawState.Lines = Element.Lines;
-            //P42.Utils.Debug.Message(Element, "EXIT");
-        }
+            => _currentDrawState.Lines = Element.Lines;
 
         void UpdateColor(F9PTextView control)
         {
-            //if (_currentDrawState.TextColor == Element.TextColor)
-            //    return;
             _currentDrawState.TextColor = Element.TextColor;
             if (_currentDrawState.TextColor == Xamarin.Forms.Color.Default || _currentDrawState.TextColor.IsDefault || _currentDrawState.TextColor == default)
                 control?.SetTextColor(F9PTextView.DefaultTextColor);
@@ -583,12 +502,10 @@ namespace Forms9Patch.Droid
                 control?.SetTextColor(_currentDrawState.TextColor.ToAndroid());
         }
 
-        bool _updateFontPending;
         void UpdateFont(F9PTextView control)
         {
             if (control != null)
             {
-                _updateFontPending = false;
 #pragma warning disable CS0618 // Type or member is obsolete
                 _currentDrawState.Typeface = FontManagment.TypefaceForFontFamily(Element.FontFamily) ?? Element.Font.ToTypeface();
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -649,11 +566,10 @@ namespace Forms9Patch.Droid
             {
                 var minFontSize = (float)Element.MinFontSize;
                 if (minFontSize < 0)
-                    minFontSize = 4;// Element.FontSize > 0 ? (float)Element.FontSize : (float)(F9PTextView.DefaultTextSize * System.Math.Abs(Element.FontSize));
+                    minFontSize = 4;
                 return minFontSize;
             }
         }
-
         #endregion
 
 
