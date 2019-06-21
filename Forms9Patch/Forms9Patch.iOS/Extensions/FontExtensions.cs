@@ -36,108 +36,8 @@ namespace Forms9Patch.iOS
         //
         static Dictionary<FontKey, UIFont> UiFontCache = new Dictionary<FontKey, UIFont>();
 
-        /*
-		//
-		// Static Methods
-		//
-		static UIFont _ToUIFont (string family, float size, FontAttributes attributes)
-		{
-			bool isBold = (attributes & FontAttributes.Bold) > FontAttributes.None;
-			bool isItalic = (attributes & FontAttributes.Italic) > FontAttributes.None;
-			if (family != null) {
-				try {
-					UIFont uIFont;
-					if (family.ToLower()=="monospace")
-						family="Menlo";
-					if (family.ToLower()=="serif")
-						family="Times New Roman";
-					if (family.ToLower()=="sans-serif")
-						family="Arial";
-					
-					if (UIFont.FamilyNames.Contains (family)) {
-						UIFontDescriptor uIFontDescriptor = new UIFontDescriptor ().CreateWithFamily (family);
-						if (isBold | isItalic) {
-							UIFontDescriptorSymbolicTraits uIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits.ClassUnknown;
-							if (isBold) 
-								uIFontDescriptorSymbolicTraits |= UIFontDescriptorSymbolicTraits.Bold;
-							if (isItalic) 
-								uIFontDescriptorSymbolicTraits |= UIFontDescriptorSymbolicTraits.Italic;
-							uIFontDescriptor = uIFontDescriptor.CreateWithTraits (uIFontDescriptorSymbolicTraits);
-							uIFont = UIFont.FromDescriptor (uIFontDescriptor, size);
-							if (uIFont != null) 
-								return uIFont;
-						}
-					}
-					//uIFont = UIFont.FromName (family, size);
-					uIFont = UIFont.FromName(family, size) ?? EmbeddedFont(family,size);
-					if (uIFont != null) 
-						return uIFont;
-				}
-				catch {
-				}
-			}
-			if (isBold & isItalic) {
-				UIFont uIFont2 = UIFont.SystemFontOfSize (size);
-				return UIFont.FromDescriptor (uIFont2.FontDescriptor.CreateWithTraits (UIFontDescriptorSymbolicTraits.Italic | UIFontDescriptorSymbolicTraits.Bold), 0);
-			} else {
-				if (isBold) 
-					return UIFont.BoldSystemFontOfSize (size);
-				return isItalic ? UIFont.ItalicSystemFontOfSize (size) : UIFont.SystemFontOfSize (size);
-			}
-		}
-		*/
-
-        /*
-		internal static bool IsDefault (this Span self)
-		{
-			return self.FontFamily == null && self.FontSize == Device.GetNamedSize (NamedSize.Default, typeof(Label), true) && self.FontAttributes == FontAttributes.None;
-		}
-		*/
-
-        /*
-		static UIFont ToUIFont (string family, float size, FontAttributes attributes) {
-			var key = new FontExtensions.FontKey (family, size, attributes);
-			Dictionary<FontExtensions.FontKey, UIFont> dictionary = FontExtensions.UiFontCache;
-			UIFont result;
-			lock (dictionary) {
-				UIFont storedUiFont;
-				if (dictionary.TryGetValue (key, out storedUiFont)) {
-					result = storedUiFont;
-					return result;
-				}
-			}
-			UIFont newUiFont = FontExtensions._ToUIFont (family, size, attributes);
-			dictionary = FontExtensions.UiFontCache;
-			lock (dictionary) {
-				UIFont uIFont3;
-				if (!dictionary.TryGetValue (key, out uIFont3)) {
-					// only add if we're really sure it's no there!
-					dictionary.Add (key, uIFont3 = newUiFont);
-				}
-				result = uIFont3;
-			}
-			return result;
-		}
-		*/
-
-        /*
-		internal static UIFont ToUIFont (this IFontElement element)
-		{
-			return FontExtensions.ToUIFont (element.FontFamily, (float)element.FontSize, element.FontAttributes);
-		}
-		*/
-
         internal static UIFont ToUIFont(this IFontElement element)
-        {
-            //object[] values = label.GetValues (Label.FontFamilyProperty, Label.FontSizeProperty, Label.FontAttributesProperty);
-            //var family = (string)label.GetValue (Label.FontFamilyProperty);
-            //var size = (double)label.GetValue (Label.FontSizeProperty);
-            //if (size < 0)
-            //	size = UIFont.LabelFontSize;
-            //var attr = (FontAttributes)label.GetValue (Label.FontAttributesProperty);
-            //return FontExtensions.ToUIFont (family, (float)size, attr) ?? UIFont.SystemFontOfSize (UIFont.LabelFontSize);
-            return BestFont(element.FontFamily, (nfloat)element.FontSize, (element.FontAttributes & FontAttributes.Bold) != 0, (element.FontAttributes & FontAttributes.Italic) != 0);
-        }
+            => BestFont(element.FontFamily, (nfloat)element.FontSize, (element.FontAttributes & FontAttributes.Bold) != 0, (element.FontAttributes & FontAttributes.Italic) != 0);
 
         public static UIFont ToUIFont(this Font font)
         {
@@ -166,44 +66,8 @@ namespace Forms9Patch.iOS
             bool isBold = font.FontAttributes.HasFlag(FontAttributes.Bold);
             bool isItalic = font.FontAttributes.HasFlag(FontAttributes.Italic);
 
-            /*
-			if (font.FontFamily != null) {
-				try {
-					UIFont result;
-					if (UIFont.FamilyNames.Contains (font.FontFamily)) {
-						UIFontDescriptor uIFontDescriptor = new UIFontDescriptor ().CreateWithFamily (font.FontFamily);
-						if (isBold | isItalic) {
-							UIFontDescriptorSymbolicTraits uIFontDescriptorSymbolicTraits = UIFontDescriptorSymbolicTraits.ClassUnknown;
-							if (isBold) {
-								uIFontDescriptorSymbolicTraits |= UIFontDescriptorSymbolicTraits.Bold;
-							}
-							if (isItalic) {
-								uIFontDescriptorSymbolicTraits |= UIFontDescriptorSymbolicTraits.Italic;
-							}
-							uIFontDescriptor = uIFontDescriptor.CreateWithTraits (uIFontDescriptorSymbolicTraits);
-							result = UIFont.FromDescriptor (uIFontDescriptor, size);
-							return result;
-						}
-					}
-					result = UIFont.FromName (font.FontFamily, size);
-					return result;
-				}
-				catch {
-				}
-			}
-			if (isBold & isItalic) {
-				return UIFont.FromDescriptor (UIFont.SystemFontOfSize (size).FontDescriptor.CreateWithTraits (UIFontDescriptorSymbolicTraits.Italic | UIFontDescriptorSymbolicTraits.Bold), 0);
-			} else {
-				if (isBold) 
-					return UIFont.BoldSystemFontOfSize (size);
-				return isItalic ? UIFont.ItalicSystemFontOfSize (size) : UIFont.SystemFontOfSize (size);
-			}
-			*/
-
             return BestFont(font.FontFamily, size, isBold, isItalic);
         }
-
-
 
         internal static UIFont EmbeddedFont(string resourceId, nfloat size, Assembly assembly = null)
         {
