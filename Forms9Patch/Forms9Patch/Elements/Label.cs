@@ -79,7 +79,17 @@ namespace Forms9Patch
         public string HtmlText
         {
             get => (string)GetValue(HtmlTextProperty);
-            set => SetValue(HtmlTextProperty, value);
+            set
+            {
+                if (value != null)
+                {
+                    F9PFormattedString = new HTMLMarkupString(value);
+                    Text = null;
+                }
+                else
+                    F9PFormattedString = null;
+                SetValue(HtmlTextProperty, value);
+            }
         }
         #endregion
 
@@ -295,13 +305,6 @@ namespace Forms9Patch
 
             if (propertyName == HtmlTextProperty.PropertyName)
             {
-                if (HtmlText != null)
-                {
-                    Text = null;
-                    F9PFormattedString = new HTMLMarkupString(HtmlText);
-                }
-                else
-                    F9PFormattedString = null;
                 if (F9PFormattedString != null && F9PFormattedString.ContainsActionSpan)
                 {
                     if (_listener == null)
@@ -318,7 +321,6 @@ namespace Forms9Patch
                     _listener.Dispose();
                     _listener = null;
                 }
-
             }
             else if (propertyName == TextProperty.PropertyName && Text != null)
                 HtmlText = null;
