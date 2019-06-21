@@ -146,14 +146,15 @@ namespace Forms9Patch.UWP
 
         void UpdateColor(TextBlock textBlock)
         {
-            if (textBlock != null && Element is Forms9Patch.Label label)
+            if (textBlock != null && Element?.TextColor is Xamarin.Forms.Color color)
             {
-                if (label.TextColor != Color.Default)
-                    textBlock.Foreground = label.TextColor.ToBrush();
-                else
-                    textBlock.ClearValue(TextBlock.ForegroundProperty);
-            }
-        }
+				//if (label.TextColor != Color.Default)
+				if (color == Xamarin.Forms.Color.Default || color == default || color.IsDefault)
+					textBlock.ClearValue(TextBlock.ForegroundProperty);
+				else
+					textBlock.Foreground = color.ToBrush();
+			}
+		}
 
 
         void UpdateSynchrnoizedFontSize(TextBlock textBlock)

@@ -250,20 +250,23 @@ namespace Forms9Patch.Droid
             if (_disposed)
                 return;
 
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": _instanceId [" + _instanceId + "]");
-            /*
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": _instanceId [" + _instanceId + "]");
+            
             var width = MeasureSpec.GetSize(widthMeasureSpec);
+            var widthMode = MeasureSpec.GetMode(widthMeasureSpec);
             if (MeasureSpec.GetMode(widthMeasureSpec) == Android.Views.MeasureSpecMode.Unspecified)
                 width = int.MaxValue / 2;
-
             if (width <= 0)
-                return;
+                width = 10;
             var height = MeasureSpec.GetSize(heightMeasureSpec);
+            var heightMode = MeasureSpec.GetMode(widthMeasureSpec);
             if (MeasureSpec.GetMode(heightMeasureSpec) == Android.Views.MeasureSpecMode.Unspecified)
                 height = int.MaxValue / 2;
             if (height <= 0)
-                return;
-                */
+                height = 10;
+
+            widthMeasureSpec = MeasureSpec.MakeMeasureSpec(width, widthMode);
+            heightMeasureSpec = MeasureSpec.MakeMeasureSpec(height, heightMode);
 
             InNativeLayout = true;
             try
