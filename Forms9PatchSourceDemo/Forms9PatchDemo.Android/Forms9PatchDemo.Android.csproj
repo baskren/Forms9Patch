@@ -107,7 +107,6 @@
     <AndroidResource Include="Resources\drawable\cat.jpg" />
     <AndroidResource Include="Resources\drawable\five.png" />
     <AndroidResource Include="Resources\drawable\fivePlus.png" />
-    <AndroidResource Include="Resources\drawable\icon.png" />
     <AndroidResource Include="Resources\drawable\image.png" />
     <AndroidResource Include="Resources\drawable\Info.png" />
     <AndroidResource Include="Resources\drawable\redGridBox.png" />
@@ -130,6 +129,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\image.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Info.png" />
+    <AndroidResource Include="Resources\drawable\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
