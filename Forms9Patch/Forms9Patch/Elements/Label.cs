@@ -71,7 +71,19 @@ namespace Forms9Patch
         /// <summary>
         /// Backing store for the formatted text property.
         /// </summary>
-        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label));
+        public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label), propertyChanging: (bindable, oldValue, newValue) =>
+        {
+            if (bindable is Label label && newValue is string value)
+            {
+                if (value != null)
+                {
+                    label.F9PFormattedString = new HTMLMarkupString(value);
+                    label.Text = null;
+                }
+                else
+                    label.F9PFormattedString = null;
+            }
+        });
         /// <summary>
         /// Gets or sets the formatted text.
         /// </summary>
@@ -79,17 +91,7 @@ namespace Forms9Patch
         public string HtmlText
         {
             get => (string)GetValue(HtmlTextProperty);
-            set
-            {
-                if (value != null)
-                {
-                    F9PFormattedString = new HTMLMarkupString(value);
-                    Text = null;
-                }
-                else
-                    F9PFormattedString = null;
-                SetValue(HtmlTextProperty, value);
-            }
+            set => SetValue(HtmlTextProperty, value);
         }
         #endregion
 
