@@ -49,7 +49,13 @@ namespace Forms9Patch.UWP
             }
             if (e.NewElement != null)
             {
-                AssureControlIsAvailable();
+                if (Control == null)
+                {
+                    var nativeControl = new TextBlock();
+                    _defaultNativeFontSize = nativeControl.FontSize;
+                    _defaultForeground = nativeControl.Foreground;
+                    SetNativeControl(nativeControl);
+                }
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelF9PSize;
 
                 UpdateColor(Control);
@@ -57,18 +63,6 @@ namespace Forms9Patch.UWP
                 Control.UpdateLineBreakMode(e.NewElement);
             }
         }
-
-        void AssureControlIsAvailable()
-        {
-            if (Control == null)
-            {
-                var nativeControl = new TextBlock();
-                _defaultNativeFontSize = nativeControl.FontSize;
-                _defaultForeground = nativeControl.Foreground;
-                SetNativeControl(nativeControl);
-            }
-        }
-
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -97,11 +91,7 @@ namespace Forms9Patch.UWP
                 || e.PropertyName == Xamarin.Forms.Label.FontProperty.PropertyName
                 || e.PropertyName == Xamarin.Forms.Label.FontSizeProperty.PropertyName
                 || e.PropertyName == Xamarin.Forms.Label.FontAttributesProperty.PropertyName)
-            {
-                //P42.Utils.Debug.Message(Element,"ENTER");
                 ForceLayout();
-                //P42.Utils.Debug.Message(Element,"EXIT");
-            }
             else if (e.PropertyName == Forms9Patch.Label.TextColorProperty.PropertyName)
                 UpdateColor(Control);
             else if (e.PropertyName == Forms9Patch.Label.LineBreakModeProperty.PropertyName)
