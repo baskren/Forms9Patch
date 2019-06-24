@@ -248,8 +248,9 @@ namespace Forms9Patch
             {
                 //if (obj is string str && str.ToLower().Trim().StartsWith("load to grain angle"))
                 //if (obj is string str && str.StartsWith("H3")) return true;
-                //if (obj is string str && str == "6‐⁷/₈\u2006in") return true;
-                if (obj is string str && str == "Blue") return true; 
+                //if (obj is string str && str == "1‐¹/₂\u2006in") return true;
+                if (obj is string str && str == "6‐⁷/₈\u2006in") return true;
+                //if (obj is string str && str == "Blue") return true; 
                 if (obj is Label label)
                     return P42.Utils.Debug.ConditionFunc(label.HtmlText ?? label.Text);
                 if (obj is IText textObj)
@@ -335,10 +336,8 @@ namespace Forms9Patch
                 InvalidateMeasure();
         }
 
-
         internal void InternalInvalidateMeasure()
             => InvalidateMeasure();
-
         #endregion
 
 
@@ -346,7 +345,6 @@ namespace Forms9Patch
         /// <param name="label">Label.</param>
         public static explicit operator string(Label label)
             => label?.HtmlText ?? label?.Text;
-
         #endregion
 
 
@@ -365,15 +363,13 @@ namespace Forms9Patch
         /// <param name="fontSize">Font size.</param>
         public Size SizeForWidthAndFontSize(double width, double fontSize)
         {
-            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] fontSize=[" + fontSize + "]");
             if (width <= 0)
                 return Size.Zero;
             var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
-            //P42.Utils.Debug.Message(this, "EXIT result=[" + result + "]");
             return result;
         }
 
-        /*
+
         /// <param name="widthConstraint">The available width that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <param name="heightConstraint">The available height that a parent element can allocated to a child. Value will be between 0 and double.PositiveInfinity.</param>
         /// <summary>
@@ -383,27 +379,22 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
-            //P42.Utils.Debug.Message(this, "ENTER (" + widthConstraint + ", " + heightConstraint + ") this.Id=[" + Id + "]");
-
             IsDynamicallySized = true;
             SizeRequest result;
-            //if (!_sizeAllocated && Draw != null)
+            //if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.UWP)
             //    result = Draw.Invoke(widthConstraint, heightConstraint);
             //else
             result = base.GetSizeRequest(widthConstraint, heightConstraint);
-            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
 
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            //P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnMeasure(widthConstraint, heightConstraint);
-            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
-        */
+
 
 
         //bool _sizeAllocated;
@@ -414,35 +405,27 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void OnSizeAllocated(double width, double height)
         {
-            //P42.Utils.Debug.Message(this, "ENTER width=[" + width + "] height=[" + height + "] this.Id=[" + Id + "]");
             base.OnSizeAllocated(width, height);
             //_sizeAllocated = true;
             Draw?.Invoke(width, height);
-            //P42.Utils.Debug.Message(this, "EXIT Width=[" + Width + "] Height=[" + Height + "]");
         }
 
-        /*
+
 #pragma warning disable CS0672 // Member overrides obsolete member
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
 #pragma warning restore CS0672 // Member overrides obsolete member
         {
-            //P42.Utils.Debug.Message(this, "ENTER  args(" + widthConstraint + ", " + heightConstraint + ")");
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
-            //P42.Utils.Debug.Message(this, "EXIT  result=[" + result + "]");
             return result;
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            //if (Width < 0 || Height < 0)
-            //    _sizeAllocated = false;
-            //P42.Utils.Debug.Message(this, "Width=[" + Width + "] Height=[" + Height + "]");
-
         }
 
         public void HardForceLayout()
             => Draw?.Invoke(Width, Height);
-            */
+
         #endregion
 
 
@@ -481,7 +464,6 @@ namespace Forms9Patch
 
         void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
-            // we're going to handle windows via the Window's Hyperlink Span element
             if (Device.RuntimePlatform == Device.UWP)
                 return;
             if (e.NumberOfTouches == 1)
@@ -511,11 +493,7 @@ namespace Forms9Patch
 
         internal void Tap(ActionSpan actionSpan)
             => Tap(actionSpan?.Id, actionSpan?.Href);
-
         #endregion
-
-
-
     }
 
     /// <summary>

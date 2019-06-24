@@ -977,8 +977,7 @@ namespace Forms9Patch
             {
                 if (ContentView is ICellContentView contentView)
                     return contentView.CellHeight;
-                else
-                    return 90;
+                return 90;
             }
         }
         #endregion
@@ -989,7 +988,7 @@ namespace Forms9Patch
         {
             if (ContentView is ICellContentView contentView)
                 contentView.OnAppearing();
-            if (Device.RuntimePlatform != Device.iOS)
+            if (Device.RuntimePlatform == Device.UWP)
             {
                 Device.StartTimer(TimeSpan.FromSeconds(0.5), () =>
                 {
@@ -997,7 +996,6 @@ namespace Forms9Patch
                     {
                         ContentView.IsVisible = false;
                         ContentView.IsVisible = true;
-
                     }
                     return false;
                 });

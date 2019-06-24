@@ -108,33 +108,8 @@ namespace Forms9Patch.Droid
         /// <param name="transfer">Transfer.</param>
         public F9PTextView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { _instanceId = _instances++; }
 
-        /*
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Forms9Patch.Droid.F9PTextView"/> class.
-        /// </summary>
-        /// <param name="context">Context.</param>
-        /// <param name="attrs">Attrs.</param>
-        /// <param name="defStyleAttr">Def style attr.</param>
-        /// <param name="defStyleRes">Def style res.</param>
-        public F9PTextView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes)
-            => Init(context, attrs, 0);
-            */
 
 
-
-            /*
-        void Init(Context context, IAttributeSet attrs, int defStyle)
-        {
-            if (DefaultTextSize <= 0)
-            {
-                var systemFontSize = (new TextView(context)).TextSize;
-                DefaultTextSize = systemFontSize / Settings.Context.Resources.DisplayMetrics.Density;
-            }
-            //InNativeLayoutComplete += OnInNativeLayoutComplete;
-        }
-        */
-
-        
         bool _disposePending;
         private void OnInNativeLayoutComplete(object sender, EventArgs e)
         {
@@ -157,7 +132,7 @@ namespace Forms9Patch.Droid
             }
             base.Dispose(disposing);
         }
-        
+
         #endregion
 
 
@@ -185,8 +160,8 @@ namespace Forms9Patch.Droid
         #region Touch to Index
         internal int IndexForPoint(Android.Graphics.Point p)
         {
-            //if (_disposed)
-            //    return -1;
+            if (_disposed)
+                return -1;
             var line = Layout.GetLineForVertical(p.Y);
             var offset = Layout.GetOffsetForHorizontal(line, p.X);
             return offset;
@@ -217,12 +192,11 @@ namespace Forms9Patch.Droid
         }
 
         public void SkipNextInvalidate()
-        {
-            _skip = true;
-        }
+            => _skip = true;
+
         #endregion
 
-        
+
         // I don't know why, but this #region seems to help mitigate a "using JNI after critical get in call to DeleteGlobalRef"
         // crash in ConnectionCalc results, when scrolling up/down multiple times
         //
@@ -250,8 +224,6 @@ namespace Forms9Patch.Droid
             if (_disposed)
                 return;
 
-            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": _instanceId [" + _instanceId + "]");
-            
             var width = MeasureSpec.GetSize(widthMeasureSpec);
             var widthMode = MeasureSpec.GetMode(widthMeasureSpec);
             if (MeasureSpec.GetMode(widthMeasureSpec) == Android.Views.MeasureSpecMode.Unspecified)
@@ -275,7 +247,7 @@ namespace Forms9Patch.Droid
             }
             catch (Java.Lang.Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName()," exception: "+e);
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName(), " exception: " + e);
             }
             catch (System.Exception e)
             {
@@ -292,7 +264,22 @@ namespace Forms9Patch.Droid
             InNativeLayout = false;
         }
         #endregion
-        
+
+
+        #region  get better crash diagnostics!
+        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        => base.OnSizeChanged(w, h, oldw, oldh);
+
+        public override void OnDrawForeground(Canvas canvas)
+            => base.OnDrawForeground(canvas);
+
+        protected override void OnDraw(Canvas canvas)
+            => base.OnDraw(canvas);
+
+        public override bool OnPreDraw()
+            => base.OnPreDraw();
+        #endregion
+
     }
 }
 
