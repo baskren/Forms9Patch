@@ -73,16 +73,8 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label), propertyChanging: (bindable, oldValue, newValue) =>
         {
-            if (bindable is Label label && newValue is string value)
-            {
-                if (value != null)
-                {
-                    label.F9PFormattedString = new HTMLMarkupString(value);
-                    label.Text = null;
-                }
-                else
-                    label.F9PFormattedString = null;
-            }
+            if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
+                label.UpdateHtmlText(value);
         });
         /// <summary>
         /// Gets or sets the formatted text.
@@ -91,7 +83,23 @@ namespace Forms9Patch
         public string HtmlText
         {
             get => (string)GetValue(HtmlTextProperty);
-            set => SetValue(HtmlTextProperty, value);
+            set
+            {
+                if (Device.RuntimePlatform == Device.UWP)
+                    UpdateHtmlText(value);
+                SetValue(HtmlTextProperty, value);
+            }
+        }
+
+        void UpdateHtmlText(string value)
+        {
+            if (value != null)
+            {
+                F9PFormattedString = new HTMLMarkupString(value);
+                Text = null;
+            }
+            else
+                F9PFormattedString = null;
         }
         #endregion
 
@@ -328,7 +336,12 @@ namespace Forms9Patch
             else if (propertyName == TextProperty.PropertyName && Text != null)
                 HtmlText = null;
 
-            base.OnPropertyChanged(propertyName);
+            // This is crazy!  It appears that UWP is disposing the VisualElementTracker but not unsubscribing to  VisualElementTracker.OnPropertyChanged event handler;
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
 
             if (propertyName == LinesProperty.PropertyName
                 || propertyName == AutoFitProperty.PropertyName
