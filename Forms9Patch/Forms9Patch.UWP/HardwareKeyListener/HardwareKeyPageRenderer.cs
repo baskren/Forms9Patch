@@ -395,7 +395,7 @@ namespace Forms9Patch.UWP
                 var listener = listeners[i];
                 if (string.IsNullOrEmpty(listener?.HardwareKey?.KeyInput))
                     continue;
-                if (listener.HardwareKey.KeyInput == keyInput && listener.HardwareKey.ModifierKeys == modifiers)
+                if (listener.HardwareKey.KeyInput == keyInput && (listener.HardwareKey.ModifierKeys == modifiers || listener.HardwareKey.ModifierKeys == HardwareKeyModifierKeys.Any))
                 {
                     if (listener.Command != null && listener.Command.CanExecute(listener.CommandParameter))
                         listener.Command.Execute(listener.CommandParameter);

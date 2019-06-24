@@ -522,6 +522,8 @@ namespace Forms9Patch
             if (CancelOnBackButtonClick)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 CancelAsync(PopupPoppedCause.HardwareBackButtonPressed);
+            if (Device.RuntimePlatform == Device.UWP)
+                Navigation.PopAllPopupAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             return CancelOnBackButtonClick;
 
