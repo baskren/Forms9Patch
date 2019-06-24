@@ -112,6 +112,7 @@ namespace Forms9Patch.UWP
                 if (_scrollViewer != null)
                     _scrollViewer.ViewChanged -= ScrollViewer_ViewChanged;
                 _viewChangeEventSet = false;
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + null + "]");
             }
         }
 
@@ -128,6 +129,7 @@ namespace Forms9Patch.UWP
                          {
                              _scrollViewer.ViewChanged += ScrollViewer_ViewChanged;
                              _scrollViewer.AllowFocusOnInteraction = false;
+                             System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + null + "]");
                              return false;
                          }
                      }
@@ -157,12 +159,13 @@ namespace Forms9Patch.UWP
                 ((EnhancedListView)Element).OnScrolling(this, EventArgs.Empty);
             else
                 ((EnhancedListView)Element).OnScrolled(this, EventArgs.Empty);
+            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + (e.IsIntermediate?"Scrolled":"Scrolling") + "]");
         }
 
 
         public bool ScrollBy(double delta, bool animated)
         {
-            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + delta + ", " + animated + ")");
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "(" + delta + ", " + animated + ")");
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, _scrollViewer.VerticalOffset + delta, null, !animated);
             return false;
@@ -170,7 +173,7 @@ namespace Forms9Patch.UWP
 
         public bool ScrollTo(double offset, bool animated)
         {
-            //System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "("+offset+", " + animated + ")");
+            System.Diagnostics.Debug.WriteLine(P42.Utils.ReflectionExtensions.CallerMemberName() + "("+offset+", " + animated + ")");
             if (_scrollViewer != null)
                 return _scrollViewer.ChangeView(null, offset, null, !animated);
             return false;

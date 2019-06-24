@@ -5,8 +5,17 @@ using P42.Utils;
 
 namespace Forms9Patch
 {
+    /// <summary>
+    /// Embedded Resource extension methods
+    /// </summary>
     public static class EmbeddedResourceExtensions
     {
+        /// <summary>
+        /// Finds the assembly that contains an embedded resource matching the resourceId
+        /// </summary>
+        /// <param name="resourceId"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
         public static Assembly FindAssemblyForResource(string resourceId, Assembly assembly=null)
         {
             if (assembly?.GetManifestResourceNames().Contains(resourceId) ?? false)
@@ -29,6 +38,12 @@ namespace Forms9Patch
             return null;
         }
 
+        /// <summary>
+        /// Finds a Forms9Patch 
+        /// </summary>
+        /// <param name="resourceId"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
         public static Assembly FindAssemblyForMultiResource(string resourceId, Assembly assembly = null)
         {
             if (assembly?.GetManifestResourceNames().Any(id=> id.StartsWith(resourceId, StringComparison.Ordinal)) ?? false)

@@ -430,6 +430,11 @@ namespace Forms9Patch
             OnUp(this, new FormsGestures.DownUpEventArgs(null, null));
         }
 
+        /// <summary>
+        /// Called when the button is released
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
@@ -481,6 +486,11 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Called when the button is pressed down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
             base.OnDown(sender, e);
@@ -489,6 +499,11 @@ namespace Forms9Patch
                 ShowState(PressingState);
         }
 
+        /// <summary>
+        /// Called when the button is in long press state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
             base.OnLongPressing(sender, e);
@@ -498,6 +513,11 @@ namespace Forms9Patch
                 InvokeLongPressing(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Called when the button is released from a long press state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
             base.OnLongPressed(sender, e);

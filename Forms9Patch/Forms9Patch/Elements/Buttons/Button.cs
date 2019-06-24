@@ -1173,12 +1173,21 @@ namespace Forms9Patch
         public void Tap()
             => HandleTap();
 
+        /// <summary>
+        /// Called when button is pressed down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnDown");
         }
 
-
+        /// <summary>
+        /// Called when button is released
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void OnUp(object sender, FormsGestures.DownUpEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnUp");
@@ -1186,6 +1195,11 @@ namespace Forms9Patch
                 e.Handled = HandleTap();
         }
 
+        /// <summary>
+        /// Called when button is tapped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void OnTapped(object sender, FormsGestures.TapEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnTapped");
@@ -1195,6 +1209,11 @@ namespace Forms9Patch
                 e.Handled |= (IsEnabled && IsVisible);
         }
 
+        /// <summary>
+        /// Called whe button is released after long press
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void OnLongPressed(object sender, FormsGestures.LongPressEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressed");
@@ -1202,6 +1221,11 @@ namespace Forms9Patch
                 _longPressed?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Called whe button has been long pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void OnLongPressing(object sender, FormsGestures.LongPressEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressing");

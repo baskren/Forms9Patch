@@ -99,6 +99,10 @@ namespace Forms9Patch
         public FlyoutPopup(TimeSpan popAfter) : base(popAfter: popAfter) => Init();
 
         bool _disposed;
+        /// <summary>
+        /// Dispose FlyoutPopup
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)

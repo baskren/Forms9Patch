@@ -96,6 +96,12 @@ namespace Forms9Patch
             return imageSource;
         }
 
+        /// <summary>
+        /// Load an EmbeddedResource as a Xamarin.Forms.FileImageSource
+        /// </summary>
+        /// <param name="resourceId"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
         public static Xamarin.Forms.FileImageSource FromResourceAsFile(string resourceId, Assembly assembly = null)
         {
             assembly = EmbeddedResourceExtensions.FindAssemblyForResource(resourceId, assembly);
