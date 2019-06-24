@@ -341,7 +341,7 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            // This is BEFORE base.OnPropertyChanged to assure that SegmentedControlBackground is not invoked before the BackgroundImage has been updated - an issue on UWP;
             if (propertyName == BackgroundColorProperty.PropertyName)
                 CurrentBackgroundImage.BackgroundColor = _fallbackBackgroundImage.BackgroundColor = BackgroundColor;
             else if (propertyName == HasShadowProperty.PropertyName)
@@ -356,6 +356,8 @@ namespace Forms9Patch
                 CurrentBackgroundImage.OutlineWidth = _fallbackBackgroundImage.OutlineWidth = OutlineWidth;
             else if (propertyName == ElementShapeProperty.PropertyName)
                 CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
+
+            base.OnPropertyChanged(propertyName);
 
             if (propertyName == BackgroundColorProperty.PropertyName ||
                 propertyName == HasShadowProperty.PropertyName ||
