@@ -231,7 +231,7 @@ namespace Forms9Patch
             TintIcon = true,
             IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_left.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -250,7 +250,7 @@ namespace Forms9Patch
             TintIcon = true,
             IconImage = new Forms9Patch.Image("Forms9Patch.Resources.menu_right.svg") { Fill = Fill.AspectFill, WidthRequest = 24, HeightRequest = 24 },
             HasTightSpacing = true,
-            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(10, 0),
+            Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(4, 0, 4, 4) : new Thickness(0, 0),
             VerticalTextAlignment = TextAlignment.Center,
             HorizontalTextAlignment = TextAlignment.Center,
             VerticalOptions = LayoutOptions.Fill,
@@ -427,8 +427,6 @@ namespace Forms9Patch
             _upArrowButton.Clicked += OnBackwardArrowButtonClicked;
             _downArrowButton.Clicked += OnForewardArrowButtonClicked;
 
-            if (Device.RuntimePlatform != Device.UWP)
-                _stackLayout.HeightRequest = 28;
 
         }
 
@@ -450,6 +448,12 @@ namespace Forms9Patch
 
         #region Disposal
         bool _disposed;
+        static Thickness _hzSegmentPadding = Device.RuntimePlatform == Device.UWP
+                    ? new Thickness(8, 4, 8, 8)
+                    : Device.RuntimePlatform == Device.Android
+                        ? new Thickness(8, 0)
+                        : new Thickness(4, 0);
+        static Thickness _vtSegmentPadding = Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 4);
         /// <summary>
         /// Instance is being disposed
         /// </summary>
@@ -649,31 +653,46 @@ namespace Forms9Patch
         void UpdateOrientation(Segment segment)
         {
             if (Orientation == StackOrientation.Horizontal)
-                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(8, 4, 8, 8) : new Thickness(8, 0);
+            {
+                segment._button.Padding = _hzSegmentPadding;
+                segment._button.TextColor = TextColor == default ? DefaultHorizontalTextColor : TextColor;
+            }
             else
-                segment._button.Padding = Device.RuntimePlatform == Device.UWP ? new Thickness(28, 4, 28, 8) : new Thickness(28, 8);
-            segment._button.TextColor = TextColor == default
-                    ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
-                    : TextColor;
+            {
+                segment._button.Padding = _vtSegmentPadding;
+                segment._button.TextColor = TextColor == default ? DefaultVerticalTextColor : TextColor;
+            }
         }
 
         void UpdateOrientation()
         {
-            _stackLayout.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Center : LayoutOptions.Fill;
             _stackLayout.Orientation = Orientation;
             foreach (var segment in Segments)
                 UpdateOrientation(segment);
-            foreach (var child in _stackLayout.Children)
-                if (child is BoxView separator)
-                {
-                    separator.WidthRequest = Orientation == StackOrientation.Horizontal ? 1 : -1;
-                    separator.HeightRequest = Orientation == StackOrientation.Vertical ? 1 : -1;
-                    separator.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Start : LayoutOptions.Fill;
-                    separator.VerticalOptions = Orientation == StackOrientation.Vertical ? LayoutOptions.Start : LayoutOptions.Fill;
-                }
-            _bubbleLayout.BackgroundColor = BackgroundColor == default
-                ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalBackgroundColor : DefaultVerticalBackgroundColor)
-                : BackgroundColor;
+            if (Orientation == StackOrientation.Horizontal)
+            {
+                foreach (var child in _stackLayout.Children)
+                    if (child is BoxView separator)
+                    {
+                        separator.WidthRequest = 1;
+                        separator.HeightRequest = 1;
+                        separator.HorizontalOptions = LayoutOptions.Start;
+                        separator.VerticalOptions = LayoutOptions.Start;
+                    }
+                _stackLayout.HorizontalOptions = LayoutOptions.Center;
+            }
+            else
+            {
+                foreach (var child in _stackLayout.Children)
+                    if (child is BoxView separator)
+                    {
+                        separator.WidthRequest = -1;
+                        separator.HeightRequest = -1;
+                        separator.HorizontalOptions = LayoutOptions.Fill;
+                        separator.VerticalOptions = LayoutOptions.Fill;
+                    }
+                _stackLayout.HorizontalOptions = LayoutOptions.Fill;
+            }
             UpdateLayout();
         }
 
@@ -716,8 +735,11 @@ namespace Forms9Patch
                 HorizontalOptions = LayoutOptions.Center;
                 VerticalOptions = LayoutOptions.Center;
 
-                _stackLayout.HorizontalOptions = Orientation == StackOrientation.Horizontal ? LayoutOptions.Center : LayoutOptions.Fill;
                 _stackLayout.VerticalOptions = LayoutOptions.Center;
+
+                _bubbleLayout.BackgroundColor = BackgroundColor == default
+                    ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalBackgroundColor : DefaultVerticalBackgroundColor)
+                    : BackgroundColor;
 
                 var textColor = TextColor == default
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalTextColor : DefaultVerticalTextColor)
@@ -725,9 +747,6 @@ namespace Forms9Patch
                 var separatorColor = SeparatorColor == default
                     ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalSeparatorColor : DefaultVerticalSeparatorColor)
                     : SeparatorColor;
-                _bubbleLayout.BackgroundColor = BackgroundColor == default
-                    ? (Orientation == StackOrientation.Horizontal ? DefaultHorizontalBackgroundColor : DefaultVerticalBackgroundColor)
-                    : BackgroundColor;
 
                 _leftArrowButton.IsVisible = false;
                 _leftArrowSeparator.IsVisible = false;
@@ -798,9 +817,7 @@ namespace Forms9Patch
 
                     forewardArrowShouldBeVisible &= (pageIndex != _currentPage || segmentIndex != Segments.Count - 1);
                     segmentIndex++;
-
                 }
-
 
                 forewardSeparator.IsVisible = false;
                 forewardButton.IsVisible = forewardArrowShouldBeVisible;
@@ -811,11 +828,14 @@ namespace Forms9Patch
                         lastSeparator.IsVisible = false;
                     _stackLayout.HeightRequest = -1;
                 }
+                else if (Device.RuntimePlatform == Device.iOS)
+                    _stackLayout.HeightRequest = 34;
+                else if (Device.RuntimePlatform != Device.UWP)
+                    _stackLayout.HeightRequest = 28;
+
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateLayout);
-
-
         }
 
         #endregion
