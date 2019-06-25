@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D0CE227-36B2-472B-B4C1-BD366598171E}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Forms9PatchDemo.Droid</RootNamespace>
+    <AssemblyName>com._42p.Forms9PatchDemo.Android</AssemblyName>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Tabbar.axml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
+    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\drawable\ArrowR.png" />
+    <AndroidResource Include="Resources\drawable\balloons.jpg" />
+    <AndroidResource Include="Resources\drawable\blkbox_large.jpg" />
+    <AndroidResource Include="Resources\drawable\blkbox_small.jpg" />
+    <AndroidResource Include="Resources\drawable\bubble.9.png" />
+    <AndroidResource Include="Resources\drawable\cat.jpg" />
+    <AndroidResource Include="Resources\drawable\five.png" />
+    <AndroidResource Include="Resources\drawable\fivePlus.png" />
+    <AndroidResource Include="Resources\drawable\image.png" />
+    <AndroidResource Include="Resources\drawable\Info.png" />
+    <AndroidResource Include="Resources\drawable\redGridBox.png" />
+    <AndroidResource Include="Resources\drawable\sampleFile.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ArrowR.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\five.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\fivePlus.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\image.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Info.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ArrowR.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\five.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\fivePlus.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\image.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Info.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ArrowR.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\five.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\fivePlus.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\image.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Info.png" />
+    <AndroidResource Include="Resources\drawable\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\drawable-xxxhdpi\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
+      <Project>{5ad8709c-5f6a-4eb7-9336-71ccdf3579b0}</Project>
+      <Name>Forms9PatchDemo.Source</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
+      <Project>{D5D3FD62-2B11-4C03-BE94-776C79DD92C9}</Project>
+      <Name>Forms9Patch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.Droid\Forms9Patch.Droid.csproj">
+      <Project>{2D408CF4-7360-44D2-BE5F-E6B02DFB62DB}</Project>
+      <Name>Forms9Patch.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
+      <Project>{F103C9CE-8AA6-4A80-B69C-3ABC8F063869}</Project>
+      <Name>FormsGestures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures.Droid\FormsGestures.Droid.csproj">
+      <Project>{00E0CDDC-B671-4876-8E78-927C50D2596A}</Project>
+      <Name>FormsGestures.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{FBBB35D6-B52D-482B-98F7-53BB0548D2DE}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
+      <Project>{ECC74F4C-8FB0-42C7-849A-43CDB3662608}</Project>
+      <Name>P42.NumericalMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
+      <Project>{E609378F-E791-42C7-8C18-E99AEE780BA3}</Project>
+      <Name>P42.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
+      <Project>{25F52C0B-8C1B-4245-AFF1-2EEB263C49E9}</Project>
+      <Name>P42.Utils.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+
+</Project>
