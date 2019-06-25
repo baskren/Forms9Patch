@@ -42,9 +42,9 @@
     <EmbeddedResource Include="Resources\menu_up.svg" />
     <EmbeddedResource Include="Resources\menu_down.svg" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  
     <Message Text="SolutionName = $(SolutionName)" Importance="High" />
-    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard1.0&quot;  /Y&#xD;&#xA;del &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard1.0\Forms9Patch.deps.json&quot;&#xD;&#xA;" />
+    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0&quot;  /Y&#xD;&#xA;del &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0\Forms9Patch.deps.json&quot;&#xD;&#xA;" />
   </Target>
 </Project>

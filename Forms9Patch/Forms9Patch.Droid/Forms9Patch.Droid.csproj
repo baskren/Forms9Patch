@@ -147,7 +147,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <PropertyGroup>
     <NugetOutputDir>C:\Users\ben\Development\Forms9Patch2\Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10</NugetOutputDir>
-    <PostBuildEvent Condition=" '$(OS)'=='Windows_NT'  And '$(SolutionName)'=='Forms9Patch' ">xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10"  /Y
+    <PostBuildEvent Condition=" '$(Configuration)'=='Release' And  '$(OS)'=='Windows_NT'  And '$(SolutionName)'=='Forms9Patch' ">xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10"  /Y
 xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10"  /Y
 xcopy "$(TargetDir)P42.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10"  /Y
 xcopy "$(TargetDir)MimeSharp.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10"  /Y
