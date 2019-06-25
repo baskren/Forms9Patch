@@ -15,6 +15,7 @@
     <AssemblyName>com._42p.Forms9PatchDemo.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -121,7 +122,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
+    <ProjectReference Include="..\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj">
       <Project>{5ad8709c-5f6a-4eb7-9336-71ccdf3579b0}</Project>
       <Name>Forms9PatchDemo.Source</Name>
     </ProjectReference>

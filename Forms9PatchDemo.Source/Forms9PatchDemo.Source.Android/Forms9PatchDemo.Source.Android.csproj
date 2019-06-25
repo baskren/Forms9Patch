@@ -143,8 +143,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Forms9PatchDemo\Forms9PatchDemo.csproj">
-      <Project>{5ad8709c-5f6a-4eb7-9336-71ccdf3579b0}</Project>
+    <ProjectReference Include="..\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj">
+      <Project>{B904E411-F834-48ED-A428-3A4122B456B7}</Project>
       <Name>Forms9PatchDemo.Source</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
