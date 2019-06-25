@@ -79,7 +79,7 @@ namespace Forms9Patch.Droid
     {
         public double StepSize;
         bool _progressChangedOnce;
-        Slider Slider;
+        readonly Slider Slider;
 
         double GetValue(SeekBar seekBar)
         {

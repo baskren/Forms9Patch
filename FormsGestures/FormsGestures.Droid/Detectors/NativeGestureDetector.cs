@@ -45,8 +45,7 @@ namespace FormsGestures.Droid
             {
                 // multi point gesture ?
                 bool[] valid = new bool[6];
-                MotionEvent.PointerCoords[] coords = null;
-                coords = new MotionEvent.PointerCoords[6];
+                MotionEvent.PointerCoords[] coords = new MotionEvent.PointerCoords[6];
                 for (int i = 0; i < Math.Min(e.PointerCount, 6); i++)
                 {
                     coords[i] = new MotionEvent.PointerCoords();

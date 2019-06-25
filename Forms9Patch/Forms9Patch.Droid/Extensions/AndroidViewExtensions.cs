@@ -10,8 +10,7 @@ namespace Forms9Patch.Droid
         {
             while (view?.Parent != null)
             {
-                var parent = view.Parent as T;
-                if (parent != null)
+                if (view.Parent is T parent)
                     return parent;
                 view = view.Parent as View;
             }
@@ -23,8 +22,7 @@ namespace Forms9Patch.Droid
             T root = view?.Parent as T;
             while (view?.Parent != null)
             {
-                var parent = view.Parent as T;
-                if (parent != null)
+                if (view.Parent is T parent)
                     root = parent;
                 view = view.Parent as View;
             }
@@ -71,8 +69,8 @@ namespace Forms9Patch.Droid
 
     internal class PixelCopyListener : Java.Lang.Object, PixelCopy.IOnPixelCopyFinishedListener
     {
-        System.Action<Android.Graphics.Bitmap> _callback;
-        Android.Graphics.Bitmap _bitmap;
+        readonly System.Action<Android.Graphics.Bitmap> _callback;
+        readonly Android.Graphics.Bitmap _bitmap;
 
         public PixelCopyListener(System.Action<Android.Graphics.Bitmap> callback, Android.Graphics.Bitmap bitmap)
         {

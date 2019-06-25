@@ -7,7 +7,7 @@ namespace Forms9Patch.Droid
 {
 	class BaselineSpan : MetricAffectingSpan
 	{
-		float _ratio;
+        readonly float _ratio;
 
 		public BaselineSpan (float ratio)
 		{

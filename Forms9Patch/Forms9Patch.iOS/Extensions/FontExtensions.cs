@@ -34,7 +34,7 @@ namespace Forms9Patch.iOS
         //
         // Static Fields
         //
-        static Dictionary<FontKey, UIFont> UiFontCache = new Dictionary<FontKey, UIFont>();
+        readonly static Dictionary<FontKey, UIFont> UiFontCache = new Dictionary<FontKey, UIFont>();
 
         internal static UIFont ToUIFont(this IFontElement element)
             => BestFont(element.FontFamily, (nfloat)element.FontSize, (element.FontAttributes & FontAttributes.Bold) != 0, (element.FontAttributes & FontAttributes.Italic) != 0);
@@ -119,7 +119,9 @@ namespace Forms9Patch.iOS
             }
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         internal static UIFont BestFont(MetaFont metaFont, UIFont baseFont)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             nfloat size = (nfloat)metaFont.Size / (metaFont.Baseline == FontBaseline.Normal ? 1f : 1.6f);
 
@@ -147,8 +149,7 @@ namespace Forms9Patch.iOS
             Dictionary<FontKey, UIFont> dictionary = UiFontCache;
             lock (dictionary)
             {
-                UIFont storedUiFont;
-                if (dictionary.TryGetValue(key, out storedUiFont))
+                if (dictionary.TryGetValue(key, out UIFont storedUiFont))
                     return storedUiFont;
             }
 
@@ -228,8 +229,7 @@ namespace Forms9Patch.iOS
                 // we have a match but is wasn't cached - so let's cache it for future reference
                 lock (dictionary)
                 {
-                    UIFont storedUiFont;
-                    if (!dictionary.TryGetValue(key, out storedUiFont))
+                    if (!dictionary.TryGetValue(key, out UIFont storedUiFont))
                         // It could have been added by another thread so only add if we're really sure it's no there!
                         dictionary.Add(key, bestAttemptFont);
                 }
@@ -262,10 +262,10 @@ namespace Forms9Patch.iOS
         struct FontKey
         {
 #pragma warning disable 0414
-            string Family;
-            nfloat Size;
-            bool Bold;
-            bool Italic;
+            readonly string Family;
+            readonly nfloat Size;
+            readonly bool Bold;
+            readonly bool Italic;
 #pragma warning restore 0414
 
             internal FontKey(string family, nfloat size, bool bold, bool italic)

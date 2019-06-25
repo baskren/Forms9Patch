@@ -40,11 +40,7 @@ namespace Forms9Patch.Droid
         public static IMimeItem Parse(ClipData.Item item)
         {
             if (item.Uri != null && new AndroidUriMimeItem(item.Uri) is IMimeItem result && result.MimeType != null)
-            {
-                var mimeType = result.MimeType;
-                var value = result.Value;
                 return result;
-            }
             if (item.HtmlText != null)
                 return new AndroidHtmlMimeItem(item.HtmlText);
             if (item.TextFormatted != null && item.CoerceToHtmlText(Forms9Patch.Droid.Settings.Context) is string html)
@@ -59,12 +55,12 @@ namespace Forms9Patch.Droid
 
     class AndroidIntentMimeItem : IMimeItem
     {
-        Intent _intent;
+        readonly Intent _intent;
 
         public AndroidIntentMimeItem(Intent intent)
         {
             _intent = intent;
-            var extas = _intent.Extras;
+            //var extas = _intent.Extras;
         }
 
         public string MimeType => _intent.Type;

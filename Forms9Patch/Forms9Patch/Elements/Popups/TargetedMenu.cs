@@ -449,7 +449,7 @@ namespace Forms9Patch
         #region Disposal
         bool _disposed;
         static Thickness _hzSegmentPadding = Device.RuntimePlatform == Device.UWP
-                    ? new Thickness(8, 4, 8, 8)
+                    ? new Thickness(8, 4, 8, 0)
                     : Device.RuntimePlatform == Device.Android
                         ? new Thickness(8, 0)
                         : new Thickness(4, 0);

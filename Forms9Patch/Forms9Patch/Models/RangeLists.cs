@@ -28,7 +28,9 @@ namespace Forms9Patch
         /// <param name="imageSource"></param>
         /// <param name="ninePatchSource"></param>
         /// <returns></returns>
+#pragma warning disable IDE0060 // Remove unused parameter
         public static RangeLists ToRangeLists(this Xamarin.Forms.Thickness capInsets, int bitmapWidth, int bitmapHeight, Xamarin.Forms.ImageSource imageSource, bool ninePatchSource)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             if (capInsets.Left > 0 || capInsets.Right > 0 || capInsets.Top > 0 || capInsets.Bottom > 0)
             {

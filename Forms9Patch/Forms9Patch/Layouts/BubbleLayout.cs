@@ -208,16 +208,12 @@ namespace Forms9Patch
         #region Layout management
         internal Thickness DecorativePadding()
         {
-            //var result = ShapeBase.ShadowPadding(this);
-            var result = new Thickness();
+            var padL = (PointerDirection == PointerDirection.Left ? PointerLength : 0);
+            var padT = (PointerDirection == PointerDirection.Up ? PointerLength : 0);
+            var padR = (PointerDirection == PointerDirection.Right ? PointerLength : 0);
+            var padB = (PointerDirection == PointerDirection.Down ? PointerLength : 0);
 
-            //System.Diagnostics.Debug.WriteLine("DecorativePadding: PointerDir=" + PointerDirection);
-            var padL = result.Left + (PointerDirection == PointerDirection.Left ? PointerLength : 0);
-            var padT = result.Top + (PointerDirection == PointerDirection.Up ? PointerLength : 0);
-            var padR = result.Right + (PointerDirection == PointerDirection.Right ? PointerLength : 0);
-            var padB = result.Bottom + (PointerDirection == PointerDirection.Down ? PointerLength : 0);
-
-            return result = new Thickness(padL, padT, padR, padB);
+            return new Thickness(padL, padT, padR, padB);
         }
 
 

@@ -367,7 +367,7 @@ namespace FormsGestures.UWP
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
 
-            if (sender is VisualElement element)
+            if (sender is VisualElement)
             {
                 if (e.PropertyName == "Renderer")
                     SetRenderer();
@@ -378,7 +378,7 @@ namespace FormsGestures.UWP
 
         void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is VisualElement element)
+            if (sender is VisualElement)
             {
                 if (e.PropertyName == "Renderer")
                     SetRenderer();
@@ -503,7 +503,9 @@ namespace FormsGestures.UWP
         #region UWP Manipulations (multi-touch)
 
 #pragma warning disable CC0057 // Unused parameters
+#pragma warning disable IDE0060 // Remove unused parameter
         void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
+#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CC0057 // Unused parameters
         {
             DebugMethodName(2);

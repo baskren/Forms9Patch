@@ -17,9 +17,11 @@ namespace FormsGestures.iOS
 			TriggeringTouches = GetTriggeringTouches(gr, triggeringTouches, viewLocationAtStart);
 		}
 
-		private int[] GetTriggeringTouches(DownUpGestureRecognizer gr, UITouch[] triggeringTouches, CoreGraphics.CGPoint locationAtStart)
-		{
-			Point[] array = Enumerable.ToArray<Point>(Enumerable.Select<UITouch, Point>(triggeringTouches, delegate(UITouch t) {
+#pragma warning disable IDE0060 // Remove unused parameter
+        private int[] GetTriggeringTouches(DownUpGestureRecognizer gr, UITouch[] triggeringTouches, CoreGraphics.CGPoint locationAtStart)
+#pragma warning restore IDE0060 // Remove unused parameter
+        {
+            Point[] array = Enumerable.ToArray<Point>(Enumerable.Select<UITouch, Point>(triggeringTouches, delegate(UITouch t) {
 				CGPoint cGPoint = t.LocationInView(null);
 				return new Point(cGPoint.X-locationAtStart.X, cGPoint.Y-locationAtStart.Y);
 			}));

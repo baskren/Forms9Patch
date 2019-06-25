@@ -125,7 +125,7 @@ namespace FormsGestures.iOS
         #region Renderer connections
         void RendererDisconnect()
         {
-            clearGestureRecognizers();
+            ClearGestureRecognizers();
             IVisualElementRenderer renderer = Platform.GetRenderer(_element);
             if (renderer != null)
                 renderer.ElementChanged -= OnRendererElementChanged;
@@ -137,7 +137,7 @@ namespace FormsGestures.iOS
             if (renderer != null)
             {
                 renderer.ElementChanged += OnRendererElementChanged;
-                resetGestureRecognizers(renderer?.NativeView);
+                ResetGestureRecognizers(renderer?.NativeView);
             }
         }
         #endregion
@@ -156,13 +156,13 @@ namespace FormsGestures.iOS
             if (listener?.Element != null && Listener.AllEventsAndCommands.Contains(e.PropertyName))
             {
                 NativeGestureHandler instance = NativeGestureHandler.GetInstanceForListener(listener);
-                instance?.resetGestureRecognizers(Platform.GetRenderer(listener.Element)?.NativeView);
+                instance?.ResetGestureRecognizers(Platform.GetRenderer(listener.Element)?.NativeView);
             }
         }
 
         void OnElementPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
         {
-            if (sender is VisualElement element)
+            if (sender is VisualElement)
             {
                 if (e.PropertyName == "Renderer")
                     RendererDisconnect();
@@ -173,7 +173,7 @@ namespace FormsGestures.iOS
 
         void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is VisualElement element)
+            if (sender is VisualElement)
                 if (e.PropertyName == "Renderer")
                     RendererConnect();
         }
@@ -211,7 +211,7 @@ namespace FormsGestures.iOS
 
 
         #region iOS Gesture Recognizers
-        void clearGestureRecognizers()
+        void ClearGestureRecognizers()
         {
             if (_gestureRecognizers != null)
             {
@@ -222,12 +222,10 @@ namespace FormsGestures.iOS
             }
         }
 
-        void resetGestureRecognizers(UIView view)
+        void ResetGestureRecognizers(UIView view)
         {
             if (_view != view)
-            {
-                clearGestureRecognizers();
-            }
+                ClearGestureRecognizers();
             _view = view;
             if (_view != null)
             {
@@ -244,9 +242,11 @@ namespace FormsGestures.iOS
             //if (HandlesDownUps)  WE NEED TO ALWAYS MONITOR FOR DOWN TO BE ABLE TO UNDO A CANCEL 
             {  // commenting out if (HanglesDownUps) causes FormsDragNDrop listview to not recognize cell selections after a scroll.  Why?  I have no clue.
                // Let's always trigger the down gesture recognizer so we can get the starting location
-                var downUpGestureRecognizer = new DownUpGestureRecognizer(new Action<DownUpGestureRecognizer, UITouch[]>(OnDown), new Action<DownUpGestureRecognizer, UITouch[]>(OnUp));
-                downUpGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false);
-                downUpGestureRecognizer.ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) => !(touch.View is UIControl));
+                var downUpGestureRecognizer = new DownUpGestureRecognizer(new Action<DownUpGestureRecognizer, UITouch[]>(OnDown), new Action<DownUpGestureRecognizer, UITouch[]>(OnUp))
+                {
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false),
+                    ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) => !(touch.View is UIControl))
+                };
                 list.Add(downUpGestureRecognizer);
                 //downUpGestureRecognizer.ShouldReceiveTouch = (recognizer, touch) => {
                 //	return _element.get_IgnoreChildrenTouches() ? touch.View==_view : true;
@@ -255,8 +255,10 @@ namespace FormsGestures.iOS
             UILongPressGestureRecognizer uILongPressGestureRecognizer = null;
             if (HandlesLongs)
             {
-                uILongPressGestureRecognizer = new UILongPressGestureRecognizer(new Action<UILongPressGestureRecognizer>(OnLongPressed));
-                uILongPressGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false);
+                uILongPressGestureRecognizer = new UILongPressGestureRecognizer(new Action<UILongPressGestureRecognizer>(OnLongPressed))
+                {
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => false)
+                };
                 list.Add(uILongPressGestureRecognizer);
                 //uILongPressGestureRecognizer.ShouldReceiveTouch = (recognizer, touch) => {
                 //	return _element.get_IgnoreChildrenTouches() ? touch.View==_view : true;
@@ -264,17 +266,19 @@ namespace FormsGestures.iOS
             }
             if (HandlesTaps)
             {
-                var uITapGestureRecognizer = new UITapGestureRecognizer(new Action<UITapGestureRecognizer>(OnTapped));
-                uITapGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) =>
+                var uITapGestureRecognizer = new UITapGestureRecognizer(new Action<UITapGestureRecognizer>(OnTapped))
                 {
-                    return thisGr.GetType() != otherGr.GetType();
-                });
-                uITapGestureRecognizer.ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) =>
-                {
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) =>
+                    {
+                        return thisGr.GetType() != otherGr.GetType();
+                    }),
+                    ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) =>
+                    {
                     // these are handled BEFORE the touch call is passed to the listener.
                     return !(touch.View is UIControl);
                     //return touch.View == gr.View;
-                });
+                })
+                };
                 if (uILongPressGestureRecognizer != null)
                     uITapGestureRecognizer.RequireGestureRecognizerToFail(uILongPressGestureRecognizer);
                 list.Add(uITapGestureRecognizer);
@@ -284,9 +288,11 @@ namespace FormsGestures.iOS
             }
             if (HandlesPans)
             {
-                var uIPanGestureRecognizer = new UIPanGestureRecognizer(new Action<UIPanGestureRecognizer>(OnPanned));
-                uIPanGestureRecognizer.MinimumNumberOfTouches = 1;
-                uIPanGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true);
+                var uIPanGestureRecognizer = new UIPanGestureRecognizer(new Action<UIPanGestureRecognizer>(OnPanned))
+                {
+                    MinimumNumberOfTouches = 1,
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
+                };
                 list.Add(uIPanGestureRecognizer);
                 //uIPanGestureRecognizer.ShouldReceiveTouch = (recognizer, touch) => {
                 //	return _element.get_IgnoreChildrenTouches() ? touch.View==_view : true;
@@ -294,8 +300,10 @@ namespace FormsGestures.iOS
             }
             if (HandlesPinches)
             {
-                var uIPinchGestureRecognizer = new UIPinchGestureRecognizer(new Action<UIPinchGestureRecognizer>(OnPinched));
-                uIPinchGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true);
+                var uIPinchGestureRecognizer = new UIPinchGestureRecognizer(new Action<UIPinchGestureRecognizer>(OnPinched))
+                {
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
+                };
                 list.Add(uIPinchGestureRecognizer);
                 //uIPinchGestureRecognizer.ShouldReceiveTouch = (recognizer, touch) => {
                 //	return _element.get_IgnoreChildrenTouches() ? touch.View==_view : true;
@@ -303,8 +311,10 @@ namespace FormsGestures.iOS
             }
             if (HandlesRotates)
             {
-                var uIRotationGestureRecognizer = new UIRotationGestureRecognizer(new Action<UIRotationGestureRecognizer>(OnRotated));
-                uIRotationGestureRecognizer.ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true);
+                var uIRotationGestureRecognizer = new UIRotationGestureRecognizer(new Action<UIRotationGestureRecognizer>(OnRotated))
+                {
+                    ShouldRecognizeSimultaneously = ((thisGr, otherGr) => true)
+                };
                 list.Add(uIRotationGestureRecognizer);
                 //uIRotationGestureRecognizer.ShouldReceiveTouch = (recognizer, touch) => {
                 //	return _element.get_IgnoreChildrenTouches() ? touch.View==_view : true;
@@ -456,8 +466,10 @@ namespace FormsGestures.iOS
                 //	break;
                 if (listener.HandlesDown)
                 {
-                    DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesBegan, _viewLocationAtOnDown);
-                    args.Listener = listener;
+                    DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesBegan, _viewLocationAtOnDown)
+                    {
+                        Listener = listener
+                    };
                     listener.OnDown(args);
                     handled = handled || args.Handled;
                     if (handled)
@@ -485,8 +497,10 @@ namespace FormsGestures.iOS
                 //	break;
                 if (listener.HandlesUp)
                 {
-                    DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesEnded, _viewLocationAtOnDown);
-                    args.Listener = listener;
+                    DownUpEventArgs args = new iOSDownUpEventArgs(gr, touchesEnded, _viewLocationAtOnDown)
+                    {
+                        Listener = listener
+                    };
                     listener.OnUp(args);
                     handled = handled || args.Handled;
                     if (handled)
@@ -594,8 +608,10 @@ namespace FormsGestures.iOS
                         //	break;
                         if (listener.HandlesLongPressed)
                         {
-                            LongPressEventArgs args = new iOSLongPressEventArgs(gr, _startPressing.ElapsedMilliseconds, _viewLocationAtOnDown);
-                            args.Listener = listener;
+                            LongPressEventArgs args = new iOSLongPressEventArgs(gr, _startPressing.ElapsedMilliseconds, _viewLocationAtOnDown)
+                            {
+                                Listener = listener
+                            };
                             listener.OnLongPressed(args);
                             handled = handled || args.Handled;
                             if (handled)
@@ -622,8 +638,10 @@ namespace FormsGestures.iOS
                     //	break;
                     if (listener.HandlesLongPressing)
                     {
-                        LongPressEventArgs args = new iOSLongPressEventArgs(gr, 0L, _viewLocationAtOnDown);
-                        args.Listener = listener;
+                        LongPressEventArgs args = new iOSLongPressEventArgs(gr, 0L, _viewLocationAtOnDown)
+                        {
+                            Listener = listener
+                        };
                         listener.OnLongPressing(args);
                         handled = handled || args.Handled;
                         if (handled)
@@ -676,10 +694,12 @@ namespace FormsGestures.iOS
                                 direction = ((velocity.X > 0.0) ? Direction.Right : Direction.Left);
                             else if (!xTriggered)
                                 direction = ((velocity.Y > 0.0) ? Direction.Down : Direction.Up);
-                            SwipeEventArgs args = new iOSSwipeEventArgs(gr, direction, _viewLocationAtOnDown);
-                            args.Listener = listener;
-                            args.VelocityX = velocity.X;
-                            args.VelocityY = velocity.Y;
+                            SwipeEventArgs args = new iOSSwipeEventArgs(gr, direction, _viewLocationAtOnDown)
+                            {
+                                Listener = listener,
+                                VelocityX = velocity.X,
+                                VelocityY = velocity.Y
+                            };
                             listener.OnSwiped(args);
                             //gr.CancelsTouchesInView = swipeEventArgs.Handled;
                             //return;
@@ -698,8 +718,10 @@ namespace FormsGestures.iOS
                     //	break;
                     if (listener.HandlesPanning || listener.HandlesPanned)
                     {
-                        var taskArgs = new PanEventArgs(panEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new PanEventArgs(panEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnPanned(taskArgs);
                         //gr.CancelsTouchesInView = panEventArgs.Handled;
                         //return;
@@ -724,8 +746,10 @@ namespace FormsGestures.iOS
                     //	break;
                     if (!panEventArgs.Equals(_lastPanArgs) && listener.HandlesPanning)
                     {
-                        var taskArgs = new PanEventArgs(panEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new PanEventArgs(panEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnPanning(taskArgs);
                         handled = handled || taskArgs.Handled;
                         if (handled)
@@ -782,8 +806,10 @@ namespace FormsGestures.iOS
                     //  break;
                     if (listener.HandlesPinching || listener.HandlesPinched)
                     {
-                        var taskArgs = new PinchEventArgs(pinchEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new PinchEventArgs(pinchEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnPinched(taskArgs);
                         if (taskArgs.Handled)
                             break;
@@ -795,8 +821,10 @@ namespace FormsGestures.iOS
                     //  break;
                     if (listener.HandlesRotating || listener.HandlesRotated)
                     {
-                        var taskArgs = new RotateEventArgs(rotateEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new RotateEventArgs(rotateEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnRotated(taskArgs);
                         if (taskArgs.Handled)
                             break;
@@ -816,8 +844,10 @@ namespace FormsGestures.iOS
                 {
                     if (listener.HandlesPinching)
                     {
-                        var taskArgs = new PinchEventArgs(pinchEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new PinchEventArgs(pinchEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnPinching(taskArgs);
                         handled = handled || pinchEventArgs.Handled;
                         if (taskArgs.Handled)
@@ -828,8 +858,10 @@ namespace FormsGestures.iOS
                 {
                     if (listener.HandlesRotating)
                     {
-                        var taskArgs = new RotateEventArgs(rotateEventArgs);
-                        taskArgs.Listener = listener;
+                        var taskArgs = new RotateEventArgs(rotateEventArgs)
+                        {
+                            Listener = listener
+                        };
                         listener.OnRotating(taskArgs);
                         handled = handled || rotateEventArgs.Handled;
                         if (taskArgs.Handled)

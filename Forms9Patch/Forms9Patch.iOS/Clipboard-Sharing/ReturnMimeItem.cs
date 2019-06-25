@@ -71,9 +71,8 @@ namespace Forms9Patch.iOS
 
             if (nsObject == null && nsData != null)
             {
-                NSError nsError = new NSError();
                 NSPropertyListFormat propertyListFormat = new NSPropertyListFormat();
-                nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out nsError);
+                nsObject = NSPropertyListSerialization.PropertyListWithData(nsData, NSPropertyListReadOptions.Immutable, ref propertyListFormat, out NSError nsError);
             }
             //System.Diagnostics.Debug.WriteLine("\t\t\t GetValueAs 3 stopwatch.Elapsed: " + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
@@ -94,8 +93,8 @@ namespace Forms9Patch.iOS
 
         public Type Type { get; internal set; }
 
-        KeyValuePair<NSObject, NSObject> _kvp;
-        string _typeCodeString;
+        readonly KeyValuePair<NSObject, NSObject> _kvp;
+        readonly string _typeCodeString;
 
         private LazyMimeItem(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
         {

@@ -99,10 +99,12 @@ namespace Forms9Patch.iOS
                             metaFonts[i].Baseline = FontBaseline.Denominator;
                         break;
                     case ActionSpan.SpanKey:
-                        attr = new NSMutableDictionary();
-                        attr[UIStringAttributeKey.ForegroundColor] = Xamarin.Forms.Color.Blue.ToUIColor();
-                        attr[UIStringAttributeKey.UnderlineColor] = Xamarin.Forms.Color.Blue.ToUIColor();
-                        attr[UIStringAttributeKey.StrikethroughColor] = Xamarin.Forms.Color.Blue.ToUIColor();
+                        attr = new NSMutableDictionary
+                        {
+                            [UIStringAttributeKey.ForegroundColor] = Xamarin.Forms.Color.Blue.ToUIColor(),
+                            [UIStringAttributeKey.UnderlineColor] = Xamarin.Forms.Color.Blue.ToUIColor(),
+                            [UIStringAttributeKey.StrikethroughColor] = Xamarin.Forms.Color.Blue.ToUIColor()
+                        };
                         var uAttr = new NSDictionary(UIStringAttributeKey.UnderlineStyle, NSUnderlineStyle.Single);
                         attr[UIStringAttributeKey.UnderlineStyle] = uAttr[UIStringAttributeKey.UnderlineStyle];
                         result.AddAttributes(attr, new NSRange(spanStart, spanEnd - spanStart));
@@ -111,10 +113,12 @@ namespace Forms9Patch.iOS
                     #region Font Color
                     case FontColorSpan.SpanKey:
                         var fontColorSpan = span as FontColorSpan;
-                        attr = new NSMutableDictionary();
-                        attr[UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor();
-                        attr[UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor();
-                        attr[UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor();
+                        attr = new NSMutableDictionary
+                        {
+                            [UIStringAttributeKey.ForegroundColor] = fontColorSpan.Color.ToUIColor(),
+                            [UIStringAttributeKey.UnderlineColor] = fontColorSpan.Color.ToUIColor(),
+                            [UIStringAttributeKey.StrikethroughColor] = fontColorSpan.Color.ToUIColor()
+                        };
                         result.AddAttributes(attr, new NSRange(spanStart, spanEnd - spanStart));
                         break;
                     #endregion

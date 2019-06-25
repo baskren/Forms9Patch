@@ -11,7 +11,9 @@ namespace Forms9Patch
     /// </summary>
     public static class FocusMonitor
     {
+#pragma warning disable IDE0044 // Add readonly modifier
         static PropertyInfo _currentlyFocusedPropertyInfo;
+#pragma warning restore IDE0044 // Add readonly modifier
         static FocusMonitor()
         {
 

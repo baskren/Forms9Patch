@@ -16,7 +16,7 @@ namespace Forms9Patch.iOS
 			get
 			{
 				var result = UIApplication.SharedApplication.StatusBarFrame;
-				var orientation = UIApplication.SharedApplication.StatusBarOrientation;
+				//var orientation = UIApplication.SharedApplication.StatusBarOrientation;
 				return result.Height;
 			}
 		}

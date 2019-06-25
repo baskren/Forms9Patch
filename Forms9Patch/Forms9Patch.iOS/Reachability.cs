@@ -65,9 +65,7 @@ namespace Forms9Patch.iOS
 
             using (var r = new NetworkReachability(host))
             {
-                NetworkReachabilityFlags flags;
-
-                if (r.TryGetFlags(out flags))
+                if (r.TryGetFlags(out NetworkReachabilityFlags flags))
                     return IsReachableWithoutRequiringConnection(flags);
             }
             return false;
@@ -171,8 +169,7 @@ namespace Forms9Patch.iOS
         /// <returns>The connection status.</returns>
         public static NetworkStatus InternetConnectionStatus()
         {
-            NetworkReachabilityFlags flags;
-            bool defaultNetworkAvailable = IsNetworkAvailable(out flags);
+            bool defaultNetworkAvailable = IsNetworkAvailable(out NetworkReachabilityFlags flags);
 
             if (defaultNetworkAvailable && ((flags & NetworkReachabilityFlags.IsDirect) != 0))
                 return NetworkStatus.NotReachable;
@@ -192,8 +189,7 @@ namespace Forms9Patch.iOS
         /// <returns>The wifi connection status.</returns>
         public static NetworkStatus LocalWifiConnectionStatus()
         {
-            NetworkReachabilityFlags flags;
-            if (IsAdHocWiFiNetworkAvailable(out flags))
+            if (IsAdHocWiFiNetworkAvailable(out NetworkReachabilityFlags flags))
                 if ((flags & NetworkReachabilityFlags.IsDirect) != 0)
                     return NetworkStatus.ReachableViaWiFiNetwork;
 

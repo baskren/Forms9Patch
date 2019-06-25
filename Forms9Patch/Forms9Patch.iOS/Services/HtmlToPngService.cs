@@ -245,7 +245,7 @@ namespace Forms9Patch.iOS
 
             renderer.PrepareForDrawingPages(new NSRange(0, renderer.NumberOfPages));
 
-            var bounds = UIGraphics.PDFContextBounds;
+            //var bounds = UIGraphics.PDFContextBounds;
 
             for (int i = 0; i < renderer.NumberOfPages; i++)
             {

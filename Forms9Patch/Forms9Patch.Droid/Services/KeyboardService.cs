@@ -13,9 +13,6 @@ namespace Forms9Patch.Droid
 {
     public class KeyboardService : IKeyboardService
     {
-        InputMethodManager im;
-        bool _lastAcceptingText;
-
         public bool IsHardwareKeyboardActive
         {
             get
@@ -27,11 +24,10 @@ namespace Forms9Patch.Droid
 
         public void Hide()
         {
-            im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
-            var activity = Settings.Context as Activity;
-            if (im != null && activity != null)
+            if (Android.App.Application.Context.GetSystemService(Context.InputMethodService) is InputMethodManager im
+                && Settings.Context is Activity activity)
             {
-                var token = activity.CurrentFocus == null ? null : activity.CurrentFocus.WindowToken;
+                var token = activity.CurrentFocus?.WindowToken;
                 im.HideSoftInputFromWindow(token, HideSoftInputFlags.NotAlways);
             }
         }
@@ -44,18 +40,6 @@ namespace Forms9Patch.Droid
             var rootLayoutListener = new RootLayoutListener(root);
             rootLayoutListener.HeightChanged += OnHeightChanged;
             root.ViewTreeObserver.AddOnGlobalLayoutListener(rootLayoutListener);
-            /*
-            Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
-            {
-                im = Android.App.Application.Context.GetSystemService(Context.InputMethodService) as InputMethodManager;
-                if (im.IsAcceptingText != _lastAcceptingText)
-                {
-                    Forms9Patch.KeyboardService.OnVisiblityChange(im.IsAcceptingText ? KeyboardVisibilityChange.Hidden : KeyboardVisibilityChange.Shown);
-                    _lastAcceptingText = im.IsAcceptingText;
-                }
-                return true;
-            });
-            */
         }
 
 
@@ -119,9 +103,9 @@ namespace Forms9Patch.Droid
 
     class RootLayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
     {
-        int[] _discrepancy = { 0 };
+        //int[] _discrepancy = { 0 };
 
-        Android.Graphics.Rect _startRect;
+        readonly Android.Graphics.Rect _startRect;
         readonly Android.Views.View _rootView;
 
         public event EventHandler<double> HeightChanged;
@@ -132,8 +116,8 @@ namespace Forms9Patch.Droid
             _rootView = view;
             _startRect = new Android.Graphics.Rect();
             _rootView.GetWindowVisibleDisplayFrame(_startRect);
-            var expectedHeight = Forms9Patch.Display.Height;
-            var expectedWidth = Forms9Patch.Display.Width;
+            //var expectedHeight = Forms9Patch.Display.Height;
+            //var expectedWidth = Forms9Patch.Display.Width;
             //System.Diagnostics.Debug.WriteLine("_startRect=[" + _startRect.Width() + "," + _startRect.Height() + "]");
             //System.Diagnostics.Debug.WriteLine(" expected=[" + expectedWidth + "," + expectedHeight + "]");
         }

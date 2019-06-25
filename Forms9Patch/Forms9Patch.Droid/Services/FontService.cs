@@ -25,7 +25,9 @@ namespace Forms9Patch.Droid
             return fontLeading;
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         Android.Graphics.Paint.FontMetrics FontMetrics(string fontFamily, double fontSize, FontAttributes fontAttributes)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             var typeface = FontManagment.TypefaceForFontFamily(fontFamily);
             var label = new Android.Widget.TextView(Settings.Context);

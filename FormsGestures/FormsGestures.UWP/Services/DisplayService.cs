@@ -36,7 +36,7 @@ namespace FormsGestures.UWP
 
         public float Height => _applicationView == null ? (float)Xamarin.Forms.Application.Current.MainPage.Bounds.Height : (float)_applicationView.VisibleBounds.Height;
 
-        public Xamarin.Forms.Thickness SafeAreaInset => default(Xamarin.Forms.Thickness);
+        public Xamarin.Forms.Thickness SafeAreaInset => default;
 
         public double StatusBarOffset => 0.0;
 

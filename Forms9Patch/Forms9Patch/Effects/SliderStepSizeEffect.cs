@@ -54,13 +54,15 @@ namespace Forms9Patch
         }
 
 #pragma warning disable CC0057 // Unused parameters
-                              /// <summary>
-                              /// Applies SliderStepSizeEffect to a Xamarin.Forms.Slider
-                              /// </summary>
-                              /// <returns><c>true</c>, if to was applyed, <c>false</c> otherwise.</returns>
-                              /// <param name="slider">Slider.</param>
-                              /// <param name="assembly">Assembly.</param>
+#pragma warning disable IDE0060 // Remove unused parameter
+        /// <summary>
+        /// Applies SliderStepSizeEffect to a Xamarin.Forms.Slider
+        /// </summary>
+        /// <returns><c>true</c>, if to was applyed, <c>false</c> otherwise.</returns>
+        /// <param name="slider">Slider.</param>
+        /// <param name="assembly">Assembly.</param>
         public static bool ApplyTo(Slider slider, Assembly assembly = null)
+#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CC0057 // Unused parameters
         {
             var effect = new SliderStepSizeEffect();

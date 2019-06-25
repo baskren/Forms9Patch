@@ -453,7 +453,7 @@ namespace Forms9Patch
                 return;
             float size;
             inPreSpan &= tag.Name != "pre";
-            Span span = null;
+            Span span;
             switch (tag.Name)
             {
                 case "strong":

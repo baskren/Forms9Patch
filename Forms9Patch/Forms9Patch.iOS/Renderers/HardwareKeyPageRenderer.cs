@@ -125,7 +125,7 @@ namespace Forms9Patch.iOS
                 var keyInput = listener?.HardwareKey?.KeyInput;
                 if (string.IsNullOrEmpty(keyInput))
                     continue;
-                NSString nsInput = null;
+                NSString nsInput;
                 switch (keyInput)
                 {
                     case HardwareKey.UpArrowKeyInput:

@@ -97,6 +97,7 @@ namespace Forms9Patch
 {
     internal class LinkerInclude
     {
+#pragma warning disable IDE0060 // Remove unused parameter
         public BaseCellView Include(BaseCellView view)
             => new BaseCellView();
 
@@ -120,5 +121,6 @@ namespace Forms9Patch
 
         public Cell<Label> Include(Cell<Label> cell)
             => new Cell<Label>();
+#pragma warning restore IDE0060 // Remove unused parameter
     }
 }

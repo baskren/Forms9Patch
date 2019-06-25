@@ -120,7 +120,7 @@ namespace Forms9Patch.Droid
         int _lastScrollToOffset = 0;
         public bool ScrollTo(double offset, bool animated)
         {
-            if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper groupWrapper)
+            if (Element is EnhancedListView listView && listView.ItemsSource is GroupWrapper)
             {
                 // Animation not supported on Android because SmoothScrollToTop fires a bunch of ScrollListener.OnScrolledStateChanged(ScrolledState.Idle) calls during animation.
                 // There appears to be no way of knowing when the animation is on going without overriding the native Android.ListView's LinearLayoutManager.  Too tall of an order.

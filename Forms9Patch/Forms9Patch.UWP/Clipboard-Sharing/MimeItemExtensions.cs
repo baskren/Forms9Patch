@@ -110,7 +110,7 @@ namespace Forms9Patch.UWP
             var rtfSet = false;
             var uriSet = false;
 
-            var htmlItems = mimeItemCollection.GetMimeItems<string>("text/html");
+            //var htmlItems = mimeItemCollection.GetMimeItems<string>("text/html");
 
 
             foreach (var item in mimeItemCollection.Items)

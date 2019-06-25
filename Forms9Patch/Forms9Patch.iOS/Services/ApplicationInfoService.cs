@@ -24,9 +24,9 @@ namespace Forms9Patch.iOS
             get
             {
                 var resultAsString = NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
-                int result = -1;
-                int.TryParse(resultAsString, out result);
-                return result;
+                if (int.TryParse(resultAsString, out int result))
+                    return result;
+                return -1;
             }
         }
 

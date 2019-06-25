@@ -187,7 +187,7 @@ namespace Forms9Patch.UWP
 
 
             #region Convert MetaFonts to InLines
-            var inlineColection = new List<Inline>();
+            //var inlineColection = new List<Inline>();
 
             // run through MetaFonts to see if we need to set new Font attributes
             var lastMetaFont = baseMetaFont;

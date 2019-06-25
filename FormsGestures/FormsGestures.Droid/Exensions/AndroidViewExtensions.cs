@@ -13,8 +13,7 @@ namespace FormsGestures.Droid
         {
             if (view == null)
                 return true;
-            var parent = view.Parent as View;
-            if (parent == null)
+            if (!(view.Parent is View parent))
                 return true;
 
             // If the number of pointers is the same and we don't need to perform any fancy

@@ -59,7 +59,7 @@ namespace Forms9Patch.Droid
         readonly Action<string> _onComplete;
         CustomWebView webView;
 
-        Java.IO.File _dir;
+        readonly Java.IO.File _dir;
 
 
         public WebViewCallBack(string fileName, Action<string> onComplete)

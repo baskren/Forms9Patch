@@ -48,16 +48,16 @@ namespace Forms9Patch.iOS
                 if (type.Implements(typeof(IDictionary)))
                 {
                     IDictionary result;
-                    Type genericType;
+                    //Type genericType;
                     if (type.IsGenericType)
                     {
                         result = Activator.CreateInstance(type) as IDictionary;
-                        genericType = type.GetTypeInfo().GenericTypeArguments[1];
+                        //genericType = type.GetTypeInfo().GenericTypeArguments[1];
                     }
                     else
                     {
                         result = new Dictionary<string, object>();
-                        genericType = typeof(object);
+                        //genericType = typeof(object);
                     }
                     foreach (var key in nsDictionary.Keys)
                     {

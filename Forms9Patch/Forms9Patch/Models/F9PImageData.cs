@@ -97,7 +97,7 @@ namespace Forms9Patch
         static bool IsSvg(StreamReader sr)
         {
             sr.BaseStream.Position = 0;
-            var str = "";
+            string str;
             while (!sr.EndOfStream)
             {
                 str = sr.ReadLine();

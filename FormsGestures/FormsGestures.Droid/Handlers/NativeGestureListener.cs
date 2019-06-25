@@ -409,7 +409,7 @@ namespace FormsGestures.Droid
                 return false;
             }
 
-            var touchDuration = DateTime.Now - _onDownDateTime;
+            //var touchDuration = DateTime.Now - _onDownDateTime;
 
             _numberOfTaps++;
             LongPressingTimerStop();

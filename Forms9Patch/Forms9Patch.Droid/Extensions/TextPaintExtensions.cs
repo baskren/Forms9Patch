@@ -14,9 +14,11 @@ namespace Forms9Patch.Droid
 
 
         #region Truncation
+#pragma warning disable IDE0060 // Remove unused parameter
         internal static StaticLayout Truncate(string text, Forms9Patch.F9PFormattedString baseFormattedString, TextPaint paint, int availWidth, int availHeight, AutoFit fit, LineBreakMode lineBreakMode, ref int lines, ref ICharSequence textFormatted)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
-            StaticLayout layout = null;
+            StaticLayout layout;
             var fontMetrics = paint.GetFontMetrics();
             var fontLineHeight = fontMetrics.Descent - fontMetrics.Ascent;
             var fontLeading = System.Math.Abs(fontMetrics.Bottom - fontMetrics.Descent);
@@ -249,7 +251,9 @@ namespace Forms9Patch.Droid
             return result;
         }
 
+#pragma warning disable IDE0060 // Remove unused parameter
         static float DescendingWidthFit(ICharSequence text, TextPaint paint, int lines, float min, float max, int availWidth, int availHeight, float step)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             float result;
             for (result = max; result > min; result -= step)

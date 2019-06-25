@@ -24,9 +24,7 @@ namespace Forms9Patch.iOS
 
             while (index < numberOfGlyphs)
             {
-                //layoutManager.LineFragmentRectForGlyphAtIndex(index, ref lineRange);
-                var rect = layoutManager.GetLineFragmentRect(index, out NSRange range);
-                //index = (nuint)(lineRange.Location + lineRange.Length);
+                layoutManager.GetLineFragmentRect(index, out NSRange range);
                 index = (nuint)(range.Location + range.Length);
                 numberOfLines++;
             }

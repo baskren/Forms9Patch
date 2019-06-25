@@ -36,7 +36,7 @@ namespace FormsGestures.Droid
 
         public float Height => (float)(Math.Max(DisplayMetrics.WidthPixels, DisplayMetrics.HeightPixels));
 
-        public Thickness SafeAreaInset => default(Thickness);
+        public Thickness SafeAreaInset => default;
 
         public double StatusBarOffset => 0.0;
 

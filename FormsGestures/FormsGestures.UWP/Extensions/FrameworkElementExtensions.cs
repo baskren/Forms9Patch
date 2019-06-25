@@ -85,7 +85,7 @@ namespace FormsGestures.UWP
         public static List<T> GetChildren<T>(this DependencyObject parent) where T : Windows.UI.Xaml.DependencyObject
         {
             var results = new List<T>();
-            var child = default(T);
+            T child;
             var numVisuals = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < numVisuals; i++)
             {

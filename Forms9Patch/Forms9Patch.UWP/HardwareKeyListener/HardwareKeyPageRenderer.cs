@@ -185,10 +185,12 @@ namespace Forms9Patch.UWP
         static bool keyDownCaptured = false;
 
 #pragma warning disable CC0057 // Unused parameters
+#pragma warning disable IDE0060 // Remove unused parameter
         static void OnInterceptorKeyDown(KeyboardDeliveryInterceptor sender, KeyEventArgs args)
+#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CC0057 // Unused parameters
         {
-            var logicalFocus = FocusManager.GetFocusedElement();
+            //var logicalFocus = FocusManager.GetFocusedElement();
             //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
             //if (logicalFocus == this)
             //    System.Diagnostics.Debug.WriteLine("    THIS     ");
@@ -200,7 +202,7 @@ namespace Forms9Patch.UWP
         public static void OnKeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
 #pragma warning restore CC0057 // Unused parameters
         {
-            var logicalFocus = FocusManager.GetFocusedElement();
+            //var logicalFocus = FocusManager.GetFocusedElement();
             //System.Diagnostics.Debug.WriteLine("=========== Windows.UI.Xaml.Input.FocusManager.FocusedElement=" + logicalFocus);
             //if (logicalFocus == this)
             //    System.Diagnostics.Debug.WriteLine("    THIS     ");
@@ -216,7 +218,7 @@ namespace Forms9Patch.UWP
             if (element == null)
                 return false;
             keyDownCaptured = false;
-            var keyInput = "";
+            string keyInput;
             switch (virtualKey)
             {
                 case Windows.System.VirtualKey.Back:
@@ -484,7 +486,7 @@ namespace Forms9Patch.UWP
             var platformState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.LeftWindows).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
             platformState |= Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.RightWindows).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
             var capsState = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.CapitalLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
-            var numLock = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.NumberKeyLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
+            //var numLock = Window.Current.CoreWindow.GetKeyState(Windows.System.VirtualKey.NumberKeyLock).HasFlag(Windows.UI.Core.CoreVirtualKeyStates.Down);
 
             var result = HardwareKeyModifierKeys.None;
             if (shiftState && includeShift)

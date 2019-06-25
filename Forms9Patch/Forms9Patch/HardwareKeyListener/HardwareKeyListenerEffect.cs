@@ -24,7 +24,7 @@ namespace Forms9Patch
         public static void DetachFrom(VisualElement visualElement)
         {
             for (int i = visualElement.Effects.Count - 1; i <= 0; i--)
-                if (visualElement.Effects[i] is HardwareKeyListenerEffect hklEffect)
+                if (visualElement.Effects[i] is HardwareKeyListenerEffect)
                     visualElement.Effects.RemoveAt(i);
         }
     }

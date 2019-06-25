@@ -60,7 +60,7 @@ namespace FormsGestures.Droid
         OnTouchListener _onTouchListener;
 
         static int instances;
-        int _id;
+        readonly int _id;
 
 
         #region Activate/Deactivate NativeGestureDetector

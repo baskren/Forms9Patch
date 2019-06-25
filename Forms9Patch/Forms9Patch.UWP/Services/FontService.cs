@@ -62,7 +62,7 @@ namespace Forms9Patch.UWP
 
             string localStorageFileName = null;
             string uri = null;
-            string resourceId = null;
+            string resourceId;
 
             switch (f9pFontFamily.ToLower())
             {
@@ -133,7 +133,7 @@ namespace Forms9Patch.UWP
             if (localStorageFileName == null)
                 return f9pFontFamily;
 
-            string fontName = null;
+            string fontName;
             if (idParts.Count() > 1)
                 fontName = idParts.Last();
             else

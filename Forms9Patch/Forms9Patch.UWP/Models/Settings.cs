@@ -58,7 +58,9 @@ namespace Forms9Patch.UWP
         #endregion
 
 #pragma warning disable CC0057 // Unused parameters
+#pragma warning disable IDE0060 // Remove unused parameter
         public static void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CC0057 // Unused parameters
         {
             var popupNavigationInstance = Rg.Plugins.Popup.Services.PopupNavigation.Instance;

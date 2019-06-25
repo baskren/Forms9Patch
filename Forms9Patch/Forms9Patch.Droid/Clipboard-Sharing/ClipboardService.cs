@@ -197,7 +197,7 @@ namespace Forms9Patch.Droid
             var item = ItemForUri(uri);
             if (item == null || item.Value == null)
                 return null;
-            if (item.Value is FileInfo fileInfo)
+            if (item.Value is FileInfo)
                 return new PrimativeCursor(item.Value);
             var type = item.Value.GetType();
 
@@ -210,7 +210,7 @@ namespace Forms9Patch.Droid
                 //if (fieldType != FieldType.Null)
                 return new IListCursor(item.MimeType, list, elementType);
             }
-            return item.Value is IDictionary dictionary && type.IsGenericType ? new PrimativeCursor(item.Value) : null;
+            return item.Value is IDictionary && type.IsGenericType ? new PrimativeCursor(item.Value) : null;
         }
 
         public override ICursor Query(Android.Net.Uri uri, string[] projection, Bundle queryArgs, CancellationSignal cancellationSignal)
@@ -254,14 +254,14 @@ namespace Forms9Patch.Droid
 
         public override void AttachInfo(Context context, ProviderInfo info)
         {
+            /*
             var appInfo = info.ApplicationInfo;
             var enabled = info.Enabled;
             var exported = info.Exported;
             var uriPermissions = info.GrantUriPermissions;
             var authority = info.Authority;
-
             var name = info.Name;
-
+            */
             base.AttachInfo(context, info);
         }
 
@@ -350,7 +350,7 @@ namespace Forms9Patch.Droid
                 return null;
 
             var parcelFileMode = mode.Equals("rw", StringComparison.InvariantCultureIgnoreCase) ? ParcelFileMode.ReadWrite : ParcelFileMode.ReadOnly;
-            Java.IO.File javaFile = null;
+            Java.IO.File javaFile;
             if (item.Value is System.Uri itemUri && itemUri.AbsoluteUri.StartsWith("file://", StringComparison.InvariantCultureIgnoreCase))
                 javaFile = new Java.IO.File(itemUri.AbsolutePath);
             else if (item.Value is FileInfo fileInfo)
@@ -396,7 +396,7 @@ namespace Forms9Patch.Droid
         {
             base.OnConfigurationChanged(newConfig);
         }
-
+        /*
         static int GetResourceId(String pVariableName, String pResourcename, String pPackageName)
         {
             try
@@ -410,6 +410,7 @@ namespace Forms9Patch.Droid
                 return -1;
             }
         }
+        */
     }
     #endregion
 
@@ -592,7 +593,7 @@ namespace Forms9Patch.Droid
             Extras = bundle;
             if (_primativeType == typeof(byte) || _primativeType == typeof(sbyte))
             {
-                var byteValue = (byte)primative;
+                //var byteValue = (byte)primative;
                 _primative = new byte[] { (byte)primative };
             }
             if (_primative is IDictionary dictionary && _primativeType.IsGenericType)
