@@ -213,12 +213,12 @@
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(Configuration)'=='Release' And '$(SolutionName)'=='Forms9Patch' ">
       <MakeDir Directories="$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP" Condition="!Exists('$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP')"/>
-      <Exec Command="xcopy &quot;$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf&quot; &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP&quot;  /Y"/>
-      <Exec Command="xcopy &quot;$(SolutionDir)Forms9Patch\Forms9Patch.UWP\Properties\Forms9Patch.UWP.rd.xml&quot; &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Properties&quot;  /Y"/>
-      <Exec Command="xcopy &quot;$(TargetDir)Forms9Patch.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0&quot;  /Y"/>
-      <Exec Command="xcopy &quot;$(TargetDir)FormsGestures.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0&quot;  /Y"/>
-      <Exec Command="xcopy &quot;$(TargetDir)P42.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0&quot;  /Y"/>
-      <Exec Command="xcopy &quot;$(TargetDir)MimeSharp.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0&quot;  /Y"/>
+      <Exec Command="xcopy '$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf' '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP'"/>
+      <Exec Command="xcopy '$(SolutionDir)Forms9Patch\Forms9Patch.UWP\Properties\Forms9Patch.UWP.rd.xml' '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Properties'"/>
+      <Exec Command="xcopy '$(TargetDir)Forms9Patch.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0'"/>
+      <Exec Command="xcopy '$(TargetDir)FormsGestures.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0'"/>
+      <Exec Command="xcopy '$(TargetDir)P42.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0'"/>
+      <Exec Command="xcopy '$(TargetDir)MimeSharp.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0'"/>
     </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

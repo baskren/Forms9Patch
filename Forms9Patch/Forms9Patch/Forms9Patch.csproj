@@ -46,6 +46,7 @@
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  
     <Message Text="SolutionName = $(SolutionName)" Importance="High" />
     <MakeDir Directories="$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0" Condition="!Exists('$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0')"/>
-    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot;  &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0&quot;  /Y&#xD;&#xA;del &quot;$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0\Forms9Patch.deps.json&quot;&#xD;&#xA;" />
+    <Exec Command="xcopy '$(TargetDir)*.*''  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0'" />
+    <Exec Command="del '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0\Forms9Patch.deps.json'" />
   </Target>
 </Project>
