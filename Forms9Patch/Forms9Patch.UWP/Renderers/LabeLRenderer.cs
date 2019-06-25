@@ -215,6 +215,7 @@ namespace Forms9Patch.UWP
                         rect.Y = finalSize.Height - childHeight;
                         break;
                 }
+                /*
                 if (FormsGestures.VisualElementExtensions.FindAncestorOfType(element, typeof(SegmentButton)) != null)
                     if (element.VerticalTextAlignment == Xamarin.Forms.TextAlignment.Center && control.LineGap() == 0 && control.Descent() == 0 && control.LineHeight == 0)
                     {
@@ -225,6 +226,7 @@ namespace Forms9Patch.UWP
                             rect.Y -= delta / 3;
                         }
                     }
+                    */
                 rect.Height = childHeight;
                 rect.Width = finalSize.Width;
                 control.Arrange(rect);
