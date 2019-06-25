@@ -426,8 +426,6 @@ namespace Forms9Patch
 
             _upArrowButton.Clicked += OnBackwardArrowButtonClicked;
             _downArrowButton.Clicked += OnForewardArrowButtonClicked;
-
-
         }
 
         /// <summary>
@@ -508,7 +506,6 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread(() => OnPropertyChanged(propertyName));
                 return;
             }
-
             base.OnPropertyChanged(propertyName);
 
             if (propertyName == BackgroundColorProperty.PropertyName)
@@ -546,7 +543,11 @@ namespace Forms9Patch
                         button.SoundEffectMode = SoundEffectMode;
             }
             else if (propertyName == OrientationProperty.PropertyName)
+            {
+                _forewardLength = -1;
+                _backwardLength = -1;
                 UpdateOrientation();
+            }
             else if (propertyName == IconFontFamilyProperty.PropertyName)
                 foreach (var child in _stackLayout.Children)
                     if (child is Button button)
@@ -595,13 +596,30 @@ namespace Forms9Patch
             button.SizeChanged -= OnButtonSizeChanged;
             button.Tapped -= OnButtonTapped;
         }
-
         #endregion
 
 
         #region Collection Management
+
+        bool _updatingCollection;
+        DateTime _lastUpdateComplete = DateTime.MinValue;
         void OnSegmentsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            _lastUpdateComplete = DateTime.MaxValue;
+            if (!_updatingCollection)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
+                {
+                    if (DateTime.Now - _lastUpdateComplete > TimeSpan.FromMilliseconds(75))
+                    {
+                        _updatingCollection = false;
+                        UpdateLayout();
+                        return false;
+                    }
+                    return true;
+                });
+            }
+            _updatingCollection = true;
 
             if (e.OldItems != null)
                 foreach (var item in e.OldItems)
@@ -611,7 +629,6 @@ namespace Forms9Patch
                 foreach (var item in e.NewItems)
                     if (item is Segment segment)
                         ConfigureSegment(segment);
-
 
             _stackLayout.Children.Clear();
 
@@ -634,7 +651,7 @@ namespace Forms9Patch
             _stackLayout.Children.Add(_downArrowSeparator);
             _stackLayout.Children.Add(_downArrowButton);
 
-            UpdateLayout();
+            _lastUpdateComplete = DateTime.Now;
         }
         #endregion
 
@@ -644,8 +661,27 @@ namespace Forms9Patch
             => UpdateLayout();
 
 
+        bool _updatingButtonSize;
+        DateTime _lastButtonSizeChangeComplete = DateTime.MinValue;
         private void OnButtonSizeChanged(object sender, System.EventArgs e)
-            => UpdateLayout();
+        {
+            _lastButtonSizeChangeComplete = DateTime.MaxValue;
+            if (!_updatingButtonSize)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(25), () =>
+                {
+                    if (DateTime.Now - _lastButtonSizeChangeComplete > TimeSpan.FromMilliseconds(75))
+                    {
+                        _updatingButtonSize = false;
+                        UpdateLayout();
+                        return false;
+                    }
+                    return true;
+                });
+            }
+            _updatingButtonSize = true;
+            _lastButtonSizeChangeComplete = DateTime.Now;
+        }
         #endregion
 
 
@@ -696,10 +732,18 @@ namespace Forms9Patch
             UpdateLayout();
         }
 
+        static BindableProperty _buttonLengthProperty = BindableProperty.Create("ButtonLength", typeof(double), typeof(TargetedMenu), -1.0);
         double ButtonLength(Forms9Patch.Button button)
         {
+            if (button.GetValue(_buttonLengthProperty) is double length && length > 11)
+                return length;
             var size = button.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.IncludeMargins);
-            return Math.Ceiling(Orientation == StackOrientation.Horizontal ? size.Request.Width : size.Request.Height);
+            var result = Math.Ceiling(Orientation == StackOrientation.Horizontal
+                ? size.Request.Width
+                : size.Request.Height);
+            if (result > 11)
+                button.SetValue(_buttonLengthProperty, result);
+            return result;
         }
 
         double AvailableSpace()
@@ -725,8 +769,14 @@ namespace Forms9Patch
             }
         }
 
+        double _forewardLength;
+        double _backwardLength;
+
+
         void UpdateLayout()
         {
+            if (_updatingCollection)
+                return;
             if (P42.Utils.Environment.IsOnMainThread)
             {
                 if (Width < 0 || !IsVisible || Segments.Count < 1)
@@ -778,8 +828,14 @@ namespace Forms9Patch
 
                 var forewardArrowShouldBeVisible = true;
 
-                var backwardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal ? _leftArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width : _upArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height) + SeparatorThickness;
-                var forewardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal ? _rightArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width : _downArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height);
+                if (_backwardLength < 11)
+                    _backwardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal
+                        ? _leftArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width
+                        : _upArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height) + SeparatorThickness;
+                if (_forewardLength < 11)
+                    _forewardLength = Math.Ceiling(Orientation == StackOrientation.Horizontal
+                        ? _rightArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width
+                        : _downArrowButton.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Height);
 
                 // calculate pages
                 var pageLength = 0.0;
@@ -798,12 +854,12 @@ namespace Forms9Patch
                     button.FontSize = FontSize > 0 ? FontSize : 20;
 
                     var thisButtonAdds = ButtonLength(button) + _stackLayout.Spacing + SeparatorThickness + 2 + _stackLayout.Spacing;
-                    if (segmentIndex < Segments.Count && pageLength + thisButtonAdds + forewardLength >= AvailableSpace())
+                    if (segmentIndex < Segments.Count && pageLength + thisButtonAdds + _forewardLength >= AvailableSpace())
                     {
                         if (pageIndex == _currentPage)
-                            calculatedLength = pageLength + forewardLength;
+                            calculatedLength = pageLength + _forewardLength;
                         pageIndex++;
-                        pageLength = backwardLength;
+                        pageLength = _backwardLength;
                     }
                     pageLength += thisButtonAdds;
 
@@ -832,7 +888,6 @@ namespace Forms9Patch
                     _stackLayout.HeightRequest = 34;
                 else if (Device.RuntimePlatform != Device.UWP)
                     _stackLayout.HeightRequest = 28;
-
             }
             else
                 Device.BeginInvokeOnMainThread(UpdateLayout);
