@@ -45,7 +45,7 @@
 
   <!-- LOAD PROJECT CONTENT -->
 	<PropertyGroup>
-		<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo\Source</Forms9PatchDemoSourceDir>
+		<Forms9PatchDemoSourceDir>..\..\Forms9PatchDemo.NuGet\Source</Forms9PatchDemoSourceDir>
 	</PropertyGroup>
 
 	<Import Project="$(Forms9PatchDemoSourceDir)\Forms9PatchDemo.targets" />

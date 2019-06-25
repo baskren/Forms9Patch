@@ -1,12 +1,12 @@
 [submodule "P42.Utils"]
 	path = P42.Utils
 	url = https://github.com/baskren/P42.Utils
-[submodule "Forms9PatchDemo"]
-	path = Forms9PatchDemo
-	url = https://github.com/baskren/Forms9PatchDemo
 [submodule "docs"]
 	path = docs
 	url = https://github.com/tomjoht/documentation-theme-jekyll
 [submodule "MimeSharp"]
 	path = MimeSharp
 url=https://github.com/baskren/MimeSharp.git
+[submodule "Forms9PatchDemo.NuGet"]
+	path = Forms9PatchDemo.NuGet
+	url = git@github.com:baskren/Forms9PatchDemo.git
