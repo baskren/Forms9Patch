@@ -213,13 +213,16 @@
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(Configuration)'=='Release' And '$(SolutionName)'=='Forms9Patch' ">
       mkdir "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP"
-      xcopy "$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\" /Y
+      xcopy "$(SolutionDir)FormsGestures\FormsGestures.UWP\Properties\FormsGestures.UWP.rd.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\FormsGestures.UWP\Properties\" /Y
       xcopy "$(SolutionDir)Forms9Patch\Forms9Patch.UWP\Properties\Forms9Patch.UWP.rd.xml" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\Properties\" /Y
       xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
       xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
       xcopy "$(TargetDir)P42.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
       xcopy "$(TargetDir)MimeSharp.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\" /Y
     </PostBuildEvent>
+    <!-->
+      xcopy "$(ProjectDir)obj\Release\EnhancedListView.Resources.xbf" "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\uap10.0\Forms9Patch.UWP\" /Y
+    <!-->
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
