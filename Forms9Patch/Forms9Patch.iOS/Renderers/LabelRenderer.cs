@@ -35,14 +35,14 @@ namespace Forms9Patch.iOS
         SizeRequest? _lastMeasureResult;
         TextControlState _lastMeasureState;
 
-        
+
 
 
         #region Xamarin layout cycle
         SizeRequest DrawLabel(double width, double height)
         {
-            if (width >=0
-                && height >=0
+            if (width >= 0
+                && height >= 0
                 && !_currentDrawState.IsBlank
                 && Control is UILabel control
                 && Element != null)
@@ -323,7 +323,7 @@ namespace Forms9Patch.iOS
         #region Helper methods
         double Lines(double height, UIFont font)
             => (height) / (font.LineHeight);
-        
+
         #endregion
 
 
@@ -404,7 +404,7 @@ namespace Forms9Patch.iOS
                 UpdateText();
                 LayoutSubviews();
             }
-            else if (e.PropertyName == Label.F9PFormattedStringProperty.PropertyName)
+            else if (e.PropertyName == Label.HtmlTextProperty.PropertyName)
             {
                 UpdateAttributedText();
                 LayoutSubviews();
@@ -454,7 +454,7 @@ namespace Forms9Patch.iOS
                 var font = label.ToUIFont();
                 _currentDrawState.FontPointSize = font.PointSize;
                 _currentDrawState.FontDescriptor = font.FontDescriptor;
-                if (label.HtmlText!=null)
+                if (label.HtmlText != null)
                     UpdateAttributedText();
                 else
                     UpdateText();
