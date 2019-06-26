@@ -73,8 +73,9 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label), propertyChanging: (bindable, oldValue, newValue) =>
         {
-            if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
-                label.UpdateHtmlText(value);
+            if ( bindable is Label label && newValue is string value)
+            //if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
+                    label.UpdateHtmlText(value);
         });
         /// <summary>
         /// Gets or sets the formatted text.
@@ -85,8 +86,8 @@ namespace Forms9Patch
             get => (string)GetValue(HtmlTextProperty);
             set
             {
-                if (Device.RuntimePlatform == Device.UWP)
-                    UpdateHtmlText(value);
+                //if (Device.RuntimePlatform == Device.UWP)
+                //    UpdateHtmlText(value);
                 SetValue(HtmlTextProperty, value);
             }
         }
