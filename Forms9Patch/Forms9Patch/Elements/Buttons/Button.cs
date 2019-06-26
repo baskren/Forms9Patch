@@ -1056,8 +1056,8 @@ namespace Forms9Patch
             var isIconText = false;
 
             assembly = assembly ?? AssemblyExtensions.AssemblyFromResourceId(icon);
-            if (assembly == null && Device.RuntimePlatform != Device.UWP)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            //if (assembly == null && Device.RuntimePlatform != Device.UWP)
+            //    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
             var match = Forms9Patch.ImageSource.BestEmbeddedMultiResourceMatch(icon, assembly);
 
             //if (icon.Contains("<") && icon.Contains("/>"))

@@ -45,15 +45,17 @@ namespace Forms9Patch.UWP
         PropertyInfo _controlFontFamilyProperty = null;
         PropertyInfo _controlTextProperty = null;
 
+        
+
         /// <summary>
         /// Called when the effect is attached.
         /// </summary>
         protected override void OnAttached()
         {
-            _elementFontFamilyProperty = Element.GetType().GetProperty("FontFamily");
-            _controlFontFamilyProperty = Control.GetType().GetProperty("FontFamily");
+            _elementFontFamilyProperty = Element?.GetType().GetProperty("FontFamily");
+            _controlFontFamilyProperty = Control?.GetType().GetProperty("FontFamily");
             _controlTextProperty = Control.GetType().GetProperty("Text");
-            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty != null)
+            if (_elementFontFamilyProperty != null)
             {
                 _instance = _instances++;
                 _embeddedResourceFontEffect = (Forms9Patch.EmbeddedResourceFontEffect)Element.Effects.FirstOrDefault(e => e is Forms9Patch.EmbeddedResourceFontEffect);
@@ -91,18 +93,38 @@ namespace Forms9Patch.UWP
 
         void UpdateFont()
         {
-            if (_elementFontFamilyProperty != null && _controlFontFamilyProperty != null)
+            if (_elementFontFamilyProperty != null)
             {
                 var fontFamilyName = _elementFontFamilyProperty.GetValue(Element) as string;
                 var assembly = _embeddedResourceFontEffect?.Assembly;
+                if (assembly == null && fontFamilyName != null)
+                    assembly = AssemblyExtensions.AssemblyFromResourceId(fontFamilyName);
                 if (assembly != null && !Settings.AssembliesToInclude.Contains(assembly))
                     Settings.AssembliesToInclude.Add(assembly);
                 var uwpFontFamilyName = FontService.ReconcileFontFamily(fontFamilyName);
-                DebugMessage("uwpFontFamily=[" + uwpFontFamilyName + "] Length=[" + uwpFontFamilyName.Length + "]");
+                if (uwpFontFamilyName == null)
+                    Console.WriteLine("WARNING EmbeddedResourceFontEffect: Could not find ResourceId [" + fontFamilyName + "] in visible assemblies.");
+                //DebugMessage("uwpFontFamily=[" + uwpFontFamilyName + "] Length=[" + uwpFontFamilyName.Length + "]");
 
                 var fontFamily = new FontFamily(uwpFontFamilyName);
-                _controlFontFamilyProperty.SetValue(Control, fontFamily);
-
+                if (_controlFontFamilyProperty != null)
+                    _controlFontFamilyProperty.SetValue(Control, fontFamily);
+                else if (Control is Windows.UI.Xaml.Controls.TextBlock textBlock)
+                    textBlock.FontFamily = fontFamily;
+                else if (Control is Windows.UI.Xaml.Controls.TextBox textBox)
+                    textBox.FontFamily = fontFamily;
+                else if (Control is Windows.UI.Xaml.Controls.Button button)
+                    button.FontFamily = fontFamily;
+                else if (Control is Windows.UI.Xaml.Controls.ComboBox comboBox)
+                    comboBox.FontFamily = fontFamily;
+                else if (Control is Xamarin.Forms.Platform.UWP.FormsComboBox formsComboBox)
+                    formsComboBox.FontFamily = fontFamily;
+                else if (Control is Windows.UI.Xaml.Controls.DatePicker datePicker)
+                    datePicker.FontFamily = fontFamily;
+                else if (Control is Xamarin.Forms.Platform.UWP.FormsTextBox formsTextBox)
+                    formsTextBox.FontFamily = fontFamily;
+                else
+                    Console.WriteLine("WARNING EmbeddedResourceFontEffect: Could not find FontFamily property for native element of type [" + Control.GetType() + "]");
             }
 
         }

@@ -26,8 +26,8 @@ namespace Forms9Patch
         /// <param name="assembly"></param>
         public EmbeddedResourceFontEffect(Assembly assembly = null) : base("Forms9Patch.EmbeddedResourceFontEffect")
         {
-            if (assembly == null && Device.RuntimePlatform != Device.UWP)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            //if (assembly == null && Device.RuntimePlatform != Device.UWP)
+            //    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
 
             Assembly = assembly;
         }
@@ -40,8 +40,9 @@ namespace Forms9Patch
         /// <param name="assembly">Assembly.</param>
         public static bool ApplyTo(VisualElement element, Assembly assembly = null)
         {
-            if (assembly == null && Device.RuntimePlatform != Device.UWP)
-                assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            //if (assembly == null && Device.RuntimePlatform != Device.UWP)
+            //    assembly = (Assembly)typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly").Invoke(null, new object[0]);
+            //assembly = assembly ?? Assembly.GetCallingAssembly();
             var effect = new EmbeddedResourceFontEffect(assembly);
             if (effect != null)
             {
