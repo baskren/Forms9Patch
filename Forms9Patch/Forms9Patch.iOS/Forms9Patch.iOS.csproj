@@ -44,9 +44,15 @@
   </ItemGroup>
   <!-- Project References-->
   <ItemGroup>
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
+      <Project>{221e9c51-c967-404f-ac16-5dbdb9919bee}</Project>
+      <Name>MimeSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
       <Name>P42.Utils.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
       <Project>{A8249CC7-A5DB-43D7-AD2C-3AB049DE5688}</Project>
@@ -59,6 +65,8 @@
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
       <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
       <Name>FormsGestures.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
       <Project>{9688DDF3-F230-42FC-9F1A-668722F397D6}</Project>
@@ -125,18 +133,14 @@
       <Version>1.68.0</Version>
     </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch'  ">
-      <MakeDir Directories="$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10" Condition="!Exists('$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10')"/>
-      <Exec Command="xcopy '$(TargetDir)Forms9Patch.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10'"/>
-      <Exec Command="xcopy '$(TargetDir)FormsGestures.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10'"/>
-      <Exec Command="xcopy '$(TargetDir)P42.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10'"/>
-      <Exec Command="xcopy '$(TargetDir)MimeSharp.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10'"/>
+      mkdir "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10"
+      xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10" /Y
+      xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10" /Y
+      xcopy "$(TargetDir)P42.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10" /Y
+      xcopy "$(TargetDir)MimeSharp.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\Xamarin.iOS10" /Y
     </PostBuildEvent>
   </PropertyGroup>
 </Project>

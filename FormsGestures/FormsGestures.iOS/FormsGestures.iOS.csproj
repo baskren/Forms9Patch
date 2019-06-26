@@ -77,6 +77,8 @@
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
       <Name>P42.Utils.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
 

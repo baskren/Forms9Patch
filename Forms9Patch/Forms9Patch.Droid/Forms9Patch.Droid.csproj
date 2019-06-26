@@ -148,11 +148,11 @@
   <PropertyGroup>
     <NugetOutputDir>C:\Users\ben\Development\Forms9Patch2\Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10</NugetOutputDir>
     <PostBuildEvent Condition=" '$(Configuration)'=='Release' And  '$(OS)'=='Windows_NT'  And '$(SolutionName)'=='Forms9Patch' ">
-      <MakeDir Directories="$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" Condition="!Exists('$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10')"/>
-      <Exec Command="xcopy '$(TargetDir)Forms9Patch.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10'"/>
-      <Exec Command="xcopy '$(TargetDir)FormsGestures.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10'"/>
-      <Exec Command="xcopy '$(TargetDir)P42.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10'"/>
-      <Exec Command="xcopy '$(TargetDir)MimeSharp.*'  '$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10'"/>
+      mkdir "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" 
+      xcopy "$(TargetDir)Forms9Patch.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" /Y
+      xcopy "$(TargetDir)FormsGestures.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" /Y
+      xcopy "$(TargetDir)P42.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" /Y
+      xcopy "$(TargetDir)MimeSharp.*"  "$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10" /Y
     </PostBuildEvent>
   </PropertyGroup>
 </Project>
