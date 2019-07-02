@@ -97,7 +97,7 @@
       <Version>12.0.2</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
-      <Version>1.1.5.209</Version>
+      <Version>1.1.5.188</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.0</Version>
