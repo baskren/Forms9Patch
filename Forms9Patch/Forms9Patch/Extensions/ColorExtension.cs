@@ -160,7 +160,7 @@ namespace Forms9Patch
         /// <param name="s">the color string</param>
         public static Color ToColor(this string s)
         {
-            if (s.ToLower().StartsWith("rgb(", StringComparison.Ordinal))
+            if (s.ToLower().StartsWith("rgb(", StringComparison.OrdinalIgnoreCase))
             {
                 //var values = s.Substring(4, s.Length - 5).Split(',').Select(int.Parse).ToArray();
                 var components = s.Substring(4, s.Length - 5).Split(',');
@@ -171,7 +171,7 @@ namespace Forms9Patch
                 var b = int.Parse(components[2]);
                 return Color.FromRgb(r, g, b);
             }
-            if (s.ToLower().StartsWith("rgba(", StringComparison.Ordinal))
+            if (s.ToLower().StartsWith("rgba(", StringComparison.OrdinalIgnoreCase))
             {
                 //var values = s.Substring(5, s.Length - 6).Split(',').Select(int.Parse).ToArray();
                 var components = s.Substring(5, s.Length - 6).Split(',');
@@ -183,7 +183,7 @@ namespace Forms9Patch
                 var a = int.Parse(components[3]);
                 return Color.FromRgba(r, g, b, a);
             }
-            if (s.StartsWith("#", StringComparison.Ordinal))
+            if (s.StartsWith("#", StringComparison.OrdinalIgnoreCase))
             {
                 var color = Color.FromHex(s);
                 return color;
