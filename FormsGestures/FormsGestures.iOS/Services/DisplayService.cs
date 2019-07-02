@@ -13,11 +13,21 @@ namespace FormsGestures.iOS
     {
         //public float Density => 163 * Scale;
 
+        static float _scale = 1;
+
         /// <summary>
         /// Gets the scale.
         /// </summary>
         /// <value>The scale.</value>
-        public float Scale => (float)UIScreen.MainScreen.Scale;
+        public float Scale
+        {
+            get
+            {
+                if (P42.Utils.Environment.IsOnMainThread)
+                    _scale = (float)UIScreen.MainScreen.Scale;
+                return _scale;
+            }
+        }
 
         /// <summary>
         /// Gets the width.
@@ -78,15 +88,42 @@ namespace FormsGestures.iOS
             }
         }
 
-        float Min => (float)Math.Min(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
+        static float _min;
+        float Min
+        {
+            get
+            {
+                if (P42.Utils.Environment.IsOnMainThread)
+                    _min = (float)Math.Min(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
+                return _min;
+            }
+        }
 
-        float Max => (float)Math.Max(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
+
+
+        static float _max;
+        float Max
+        {
+            get
+            {
+                if (P42.Utils.Environment.IsOnMainThread)
+                    _max = (float)Math.Max(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
+                return _max;
+            }
+        }
 
         // iPhoneX  34, 44
 
         public DisplayService()
         {
             Settings.Init();
+        }
+
+        public static void Init()
+        {
+            _scale = (float)UIScreen.MainScreen.Scale;
+            _min = (float)Math.Min(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
+            _max = (float)Math.Max(UIScreen.MainScreen.NativeBounds.Width, UIScreen.MainScreen.NativeBounds.Height);
         }
     }
 }

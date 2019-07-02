@@ -37,6 +37,7 @@ namespace FormsGestures.iOS
         public static void Init()
         {
             P42.Utils.iOS.Settings.Init();
+            DisplayService.Init();
         }
 
     }
