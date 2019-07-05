@@ -80,15 +80,15 @@
   <!-- FormsGestures References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{2079B099-964B-4CFF-8EF6-9443B462258A}</Project>
+      <Project>{54FC07A5-6551-4E68-BFEC-F4269D434894}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{8A7065F6-5428-457F-8C5B-1DE69A7E0C12}</Project>
+      <Project>{49530852-B9F8-4DFB-A34E-1231F7D63F1F}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{A519F4E6-541B-4E7B-A700-6C2BB2019FE6}</Project>
+      <Project>{5CC54B98-53B8-47FB-B381-1C909DA0F9CD}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">
