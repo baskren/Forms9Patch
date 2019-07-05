@@ -170,10 +170,15 @@ namespace Forms9Patch.UWP
 
         public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
         {
-            var desiredSize = InternalMeasure(new Windows.Foundation.Size(widthConstraint, heightConstraint));
-            var minSize = new Xamarin.Forms.Size(10, Element != null ? _fontMetrics.LineHeightForFontSize(Element.DecipheredMinFontSize()) : 10);
-            var result = new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
-            return result;
+            if (Control is TextBlock control)
+            {
+                _fontMetrics = control.GetFontMetrics();
+                var desiredSize = InternalMeasure(new Windows.Foundation.Size(widthConstraint, heightConstraint));
+                var minSize = new Xamarin.Forms.Size(10, Element != null ? _fontMetrics.LineHeightForFontSize(Element.DecipheredMinFontSize()) : 10);
+                var result = new SizeRequest(new Xamarin.Forms.Size(desiredSize.Width, desiredSize.Height), minSize);
+                return result;
+            }
+            return new SizeRequest(Size.Zero);
         }
         #endregion
 
@@ -403,7 +408,6 @@ namespace Forms9Patch.UWP
             return Windows.Foundation.Size.Empty;
         }
         #endregion
-
 
 
         #region Fitting
