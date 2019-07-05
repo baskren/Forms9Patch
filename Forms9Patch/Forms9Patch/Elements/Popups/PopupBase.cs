@@ -453,6 +453,15 @@ namespace Forms9Patch
         /// Occurs when popup has popped;
         /// </summary>
         public event EventHandler<PopupPoppedEventArgs> Popped;
+
+        public event EventHandler AppearingAnimationBegin;
+
+        public event EventHandler AppearingAnimationEnd;
+
+        public event EventHandler DisappearingAnimationBegin;
+
+        public event EventHandler DisappearingAnimationEnd;
+
         #endregion
 
 
@@ -618,7 +627,6 @@ namespace Forms9Patch
         #endregion
 
 
-
         #region PropertyChange managment
         const string KeyboardServiceHeight = "KeyboardService.Height";
 
@@ -681,6 +689,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
+            AppearingAnimationBegin?.Invoke(this, EventArgs.Empty);
             if (Device.RuntimePlatform == Device.UWP)
             {
                 //var mainPage = 
@@ -709,6 +718,8 @@ namespace Forms9Patch
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     return false;
                 });
+
+            AppearingAnimationEnd?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -716,6 +727,7 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
+            DisappearingAnimationBegin?.Invoke(this, EventArgs.Empty);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPopping = true;
             _isPushed = false;
@@ -744,6 +756,8 @@ namespace Forms9Patch
             //            Dispose();
             //        return false;
             //    });
+
+            DisappearingAnimationEnd?.Invoke(this, EventArgs.Empty);
         }
 
         readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
