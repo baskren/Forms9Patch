@@ -454,12 +454,24 @@ namespace Forms9Patch
         /// </summary>
         public event EventHandler<PopupPoppedEventArgs> Popped;
 
+        /// <summary>
+        /// Occurs when popup appearing animation has started
+        /// </summary>
         public event EventHandler AppearingAnimationBegin;
 
+        /// <summary>
+        /// Occurs when popup appearing animation has ended
+        /// </summary>
         public event EventHandler AppearingAnimationEnd;
 
+        /// <summary>
+        /// occurs when popup disappearing animation has started
+        /// </summary>
         public event EventHandler DisappearingAnimationBegin;
 
+        /// <summary>
+        /// Occurs when popup disappearing animation has ended
+        /// </summary>
         public event EventHandler DisappearingAnimationEnd;
 
         #endregion

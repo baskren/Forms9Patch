@@ -7,7 +7,6 @@
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
         <license type="file">license\LICENSE</license>
         <projectUrl>https://github.com/baskren/Forms9Patch</projectUrl>
         <iconUrl>http://buildcalc.com/forms9patch/Icons/favicon-128.png</iconUrl>

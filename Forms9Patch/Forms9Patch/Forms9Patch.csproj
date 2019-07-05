@@ -49,6 +49,6 @@
     <MakeDir Directories="$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0" Condition="!Exists('$(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0')" />
     <Exec Command="xcopy $(TargetDir)*.*  $(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0\ /Y" />
     <Exec Command="del $(SolutionDir)Forms9Patch\Forms9Patch.NuGet\lib\netstandard2.0\Forms9Patch.deps.json" />
-    <Exec Command="xcopy $(SolutionDir)LICENSE  $(SolutionDir)Forms9Patch\Forms9Patch.NuGet\license\LICENSE /Y" />
+    <Exec Command="xcopy $(SolutionDir)LICENSE  $(SolutionDir)Forms9Patch\Forms9Patch.NuGet\license\ /Y" />
   </Target>
 </Project>
