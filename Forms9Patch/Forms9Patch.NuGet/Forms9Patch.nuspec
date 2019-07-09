@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.8.0.1</version>
+        <version>1.8.0.2</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.8.0.2: Fixed: Label causes crash on older versions of iOS when default FontSize is used;
     1.8.0.1: Added Xamarin.Android.Support.Core.Utils dependency to NuSpec; Added XF4.0 Android dependencies to NuSpec;
     1.8.0.0: New: Built for Xamarin.Forms 4; FlyoutPopup can be cancelled with Swipe gesture; TargetedMenu now supports Vertical Orientation; Buttons, by default, have IsLongPressEnabled=false (for faster response); Added IconFontFamily to TargetedMenu;  Fixed: Intermittant failure to render labels when in ListView; HardwareKeyPage not working in Xamarin.Forms.Shell; Empty Label.Text causes crash; Not all FormsGestures working on all Xamarin.Forms elements; Rendering of ListView becomes slower and slower when cell content is changed; Label is truncated in some edge cases (Android); ModalPopup does not respond to WidthRequest or HeightRequest; ListView crash because Xamarin.Forms.ScrollView is disposed pre-maturely (thanks Xamarin!); SegmentedControl returning IsTruncated when it isn't; First display of picker may have scroll position in wrong place; Crash because LabelRenderer.Control or LabelRenderer.Element is null; Crash when trying to get the location of a view that has not yet been rendered; Crash when FormsGestures is called on a disposed Android view; Crash when trying to use a custom font that doesn't have ".Resources" in its EmbeddedResourceId; BubblePopup appearing as ModalPopup on UWP when window is small or not near top left of screen; UWP back button only clears top most popup; UWP, SegmentedControl has shadow not showing state correctly; TargetedMenu rendering is too slow;
     1.7.0.0: New: FlyoutPopup makes it easy to create flyout views that dock on the left, right, top or bottom sides of the screen.
