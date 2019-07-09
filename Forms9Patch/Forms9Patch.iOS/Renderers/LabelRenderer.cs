@@ -94,6 +94,10 @@ namespace Forms9Patch.iOS
             if (Element is Forms9Patch.Label element)
             {
                 var tmpFontSize = BoundTextSize(element.FontSize);
+
+                if (tmpFontSize < 0)
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + null + "]");
+
                 control.PropertiesFromControlState(state);
                 control.Lines = 0;
 
@@ -119,6 +123,10 @@ namespace Forms9Patch.iOS
                 }
 
                 tmpFontSize = BoundFontSize(tmpFontSize);
+
+                if (tmpFontSize < 0)
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + null + "]");
+
 
                 if (Math.Abs(tmpFontSize - element.FittedFontSize) > 0.1)
                 {
@@ -577,7 +585,7 @@ namespace Forms9Patch.iOS
 #pragma warning disable CS0618 // Type or member is obsolete
                     textSize = (System.nfloat)(UIFont.LabelFontSize * System.Math.Abs(element.FontSize));
 #pragma warning restore CS0618 // Type or member is obsolete
-                if (textSize > element.FontSize)
+                if (element.FontSize > 0 && textSize > element.FontSize)
                     return (nfloat)element.FontSize;
                 if (textSize < ModelMinFontSize)
                     textSize = ModelMinFontSize;
