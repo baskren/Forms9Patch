@@ -771,7 +771,7 @@ namespace Forms9Patch
         /// <summary>
         /// The lines property.
         /// </summary>
-        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(Button), 1);
+        public static readonly BindableProperty LinesProperty = BindableProperty.Create(nameof(Lines), typeof(int), typeof(Button), 0);
         /// <summary>
         /// Gets or sets the lines.
         /// </summary>
