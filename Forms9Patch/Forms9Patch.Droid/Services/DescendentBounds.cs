@@ -17,29 +17,24 @@ namespace Forms9Patch.Droid
         {
             IVisualElementRenderer pageRenderer = Platform.GetRenderer(page);
             IVisualElementRenderer elementRenderer = Platform.GetRenderer(element);
-            if (pageRenderer != null && elementRenderer != null)
+            if (elementRenderer?.View is Android.Views.View elementNativeView && pageRenderer?.View is Android.Views.View pageNativeView)
             {
+                var elementLocation = new int[2];
+                var pageLocation = new int[2];
+
+                pageNativeView.GetLocationInWindow(pageLocation);
+                elementNativeView.GetLocationInWindow(elementLocation);
                 /*
-                var elementNativeView = elementRenderer.ViewGroup;
-                var pageNativeView = pageRenderer.ViewGroup;
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Orientation[" + ((Android.Views.IWindowManager)Droid.Settings.Context.GetSystemService(Android.Content.Context.WindowService)).DefaultDisplay.Rotation + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": pageLocation[" + string.Join(",", pageLocation) + "]");
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": elementLocation[" + string.Join(",", elementLocation) + "]");
                 */
-                var elementNativeView = elementRenderer.View;
-                var pageNativeView = pageRenderer.View;
-                if (elementNativeView != null && pageNativeView != null)
-                {
-                    var elementLocation = new int[2];
-                    var pageLocation = new int[2];
-
-                    pageNativeView.GetLocationInWindow(pageLocation);
-                    elementNativeView.GetLocationInWindow(elementLocation);
-
-                    var rect = new Rectangle(
-                        (elementLocation[0] - pageLocation[0]) / Display.Scale,
-                        (elementLocation[1] - pageLocation[1]) / Display.Scale,
-                        (elementNativeView.Width) / Display.Scale,
-                        (elementNativeView.Height) / Display.Scale);
-                    return rect;
-                }
+                var rect = new Rectangle(
+                    (elementLocation[0] - pageLocation[0]) / Display.Scale,
+                    (elementLocation[1] - pageLocation[1]) / Display.Scale,
+                    (elementNativeView.Width) / Display.Scale,
+                    (elementNativeView.Height) / Display.Scale);
+                return rect;
             }
             return new Rectangle(-1, -1, -1, -1);
         }
