@@ -83,8 +83,12 @@ namespace FormsGestures.Droid
                 _listener?.OnUp(e);
             else if (e.Action == MotionEventActions.Cancel)
                 _listener?.Cancel(e);
+            else if (e.Action == MotionEventActions.Move)
+                handled = handled || _listener.HandlesMove;
+
 
             _lastMotionEvent = e;
+            //System.Diagnostics.Debug.WriteLine("NativeGestureDetector.OnTouchEvent handled=" + handled);
             return handled;
         }
 

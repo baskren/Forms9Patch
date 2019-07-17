@@ -32,7 +32,7 @@ namespace FormsGestures.Droid
 
 
         #region Properties
-        bool HandlesTapped
+        public bool HandlesTapped
         {
             get
             {
@@ -48,7 +48,7 @@ namespace FormsGestures.Droid
             }
         }
 
-        bool HandlesDoubleTapped
+        public bool HandlesDoubleTapped
         {
             get
             {
@@ -64,7 +64,23 @@ namespace FormsGestures.Droid
             }
         }
 
-        bool HandlesSwiped
+        public bool HandlesMove
+        {
+            get
+            {
+                var handler = NativeGestureHandler.InstanceForElement(Element);
+                while (handler != null)
+                {
+                    var listener = handler.Listener;
+                    if (listener != null && (listener.HandlesPanned || listener.HandlesPanning || listener.HandlesPinched || listener.HandlesPinching || listener.HandlesSwiped || listener.HandlesRotated || listener.HandlesRotating))
+                        return true;
+                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
+                }
+                return false;
+            }
+        }
+
+        public bool HandlesSwiped
         {
             get
             {
@@ -80,7 +96,7 @@ namespace FormsGestures.Droid
             }
         }
 
-        bool HandlesLongPresses
+        public bool HandlesLongPresses
         {
             get
             {

@@ -30,7 +30,8 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            //System.Diagnostics.Debug.WriteLine(GetType()+"."+P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action);
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] y:" + e.RawY + "  y:" + e.GetY() + " count:" + e.PointerCount);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
 
             if (!_nativeGestureHandler.Element.IsVisible)
@@ -64,16 +65,46 @@ namespace FormsGestures.Droid
             }
             */
 
-            if (_nativeGestureHandler.Element is Xamarin.Forms.Button && _nativeGestureHandler.Renderer?.View is Android.Views.View view)
+            if (_nativeGestureHandler.Renderer?.View is Android.Views.View view)
             {
-                var renderer = Platform.GetRenderer(_nativeGestureHandler.Element);
-                //var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.ViewGroup;
-                var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.View;
-                if (currentView != null && view == currentView)
-                    view.OnTouchEvent(e);
+                if (_nativeGestureHandler.Element is Xamarin.Forms.Button)
+                {
+                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Action:[" + e.Action + "] Element [" + _nativeGestureHandler.Element + "]");
+                    var renderer = Platform.GetRenderer(_nativeGestureHandler.Element);
+                    //var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.ViewGroup;
+                    var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.View;
+                    if (currentView != null && view == currentView)
+                        view.OnTouchEvent(e);
+                }
+
+
+                view.Parent?.RequestDisallowInterceptTouchEvent(true);
+
+
+                bool handled = false;
+                var parent = view.Parent;
+                while (parent != null)
+                {
+                    Android.Views.View scrollable = null;
+                    if (parent is Android.Widget.ListView listView)
+                        scrollable = listView;
+                    else if (parent is Android.Widget.ScrollView scrollView)
+                        scrollable = scrollView;
+                    if (scrollable != null)
+                    {
+                        int[] location = new int[2];
+                        scrollable.GetLocationOnScreen(location);
+                        var x = MotionEvent.Obtain(e.DownTime, e.EventTime, e.Action, e.RawX - location[0], e.RawY - location[1], e.MetaState);
+                        handled = scrollable.OnTouchEvent(x);
+                        x.Recycle();
+                        if (handled)
+                            break;
+                    }
+                    parent = parent.Parent;
+                }
             }
 
-            //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=["+_lastEventHandled+"]");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=[" + _lastEventHandled + "]");
             return _lastEventHandled;  // we want to be sure we get the updates to this element's events
 
 
