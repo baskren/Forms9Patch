@@ -28,6 +28,8 @@ namespace FormsGestures.Droid
             _nativeDetector = new NativeGestureDetector(Droid.Settings.Context, _nativeListener);
         }
 
+        MotionEvent _downEvent;
+        MotionEvent _secondEvent;
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -80,28 +82,35 @@ namespace FormsGestures.Droid
 
                 view.Parent?.RequestDisallowInterceptTouchEvent(true);
 
-
-                bool handled = false;
-                var parent = view.Parent;
-                while (parent != null)
+                if (e.Action == MotionEventActions.Down)
                 {
-                    Android.Views.View scrollable = null;
-                    if (parent is Android.Widget.ListView listView)
-                        scrollable = listView;
-                    else if (parent is Android.Widget.ScrollView scrollView)
-                        scrollable = scrollView;
-                    if (scrollable != null)
-                    {
-                        int[] location = new int[2];
-                        scrollable.GetLocationOnScreen(location);
-                        var x = MotionEvent.Obtain(e.DownTime, e.EventTime, e.Action, e.RawX - location[0], e.RawY - location[1], e.MetaState);
-                        handled = scrollable.OnTouchEvent(x);
-                        x.Recycle();
-                        if (handled)
-                            break;
-                    }
-                    parent = parent.Parent;
+                    _secondEvent = null;
+                    _downEvent = MotionEvent.Obtain(e);
                 }
+                else
+                {
+                    _secondEvent = _secondEvent ?? MotionEvent.Obtain(e);
+                    // ignore a move that happens immediately after a down
+                    if (_secondEvent.Action != MotionEventActions.Move || _downEvent == null || _secondEvent.EventTime - _downEvent.EventTime > 20)
+                    {
+                        // if FormsGestures.Listener doesn't handle tap events -or- this isn't a tap event
+                        if ((_secondEvent.Action != MotionEventActions.Up && _secondEvent.Action != MotionEventActions.Cancel)
+                            || !_nativeListener.HandlesPressTapEvents)
+                        {
+                            if (_downEvent != null)
+                            {
+                                if (e.Action == MotionEventActions.Move)
+                                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": [" + null + "]");
+                                DispatchEventToScrollableAncestor(view, _downEvent);
+                                _downEvent = null;
+                            }
+                            DispatchEventToScrollableAncestor(view, e);
+                        }
+
+                    }
+                }
+
+
             }
 
             //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=[" + _lastEventHandled + "]");
@@ -127,6 +136,35 @@ namespace FormsGestures.Droid
 
             return false;
             */
+        }
+
+        void DispatchEventToScrollableAncestor(Android.Views.View view, MotionEvent e)
+        {
+            if (e != null)
+            {
+                bool handled;
+                var parent = view.Parent;
+                while (parent != null)
+                {
+                    Android.Views.View scrollable = null;
+                    if (parent is Android.Widget.ListView listView)
+                        scrollable = listView;
+                    else if (parent is Android.Widget.ScrollView scrollView)
+                        scrollable = scrollView;
+                    if (scrollable != null)
+                    {
+                        int[] location = new int[2];
+                        scrollable.GetLocationOnScreen(location);
+                        var x = MotionEvent.Obtain(e.DownTime, e.EventTime, e.Action, e.RawX - location[0], e.RawY - location[1], e.MetaState);
+                        handled = scrollable.OnTouchEvent(x);
+                        System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ":SCROLLABLE ACTION[" + x.Action + "] [" + x.EventTime + "]");
+                        x.Recycle();
+                        if (handled)
+                            break;
+                    }
+                    parent = parent.Parent;
+                }
+            }
         }
 
         bool MatchesLastMotionEvent(MotionEvent e)

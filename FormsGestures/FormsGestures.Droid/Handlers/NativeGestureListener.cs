@@ -32,6 +32,8 @@ namespace FormsGestures.Droid
 
 
         #region Properties
+        public bool HandlesPressTapEvents => HandlesTapped || HandlesDoubleTapped || HandlesLongPresses;
+
         public bool HandlesTapped
         {
             get
@@ -63,6 +65,23 @@ namespace FormsGestures.Droid
                 return false;
             }
         }
+
+        public bool HandlesPan
+        {
+            get
+            {
+                var handler = NativeGestureHandler.InstanceForElement(Element);
+                while (handler != null)
+                {
+                    var listener = handler.Listener;
+                    if (listener != null && (listener.HandlesPanned || listener.HandlesPanning))
+                        return true;
+                    handler = NativeGestureHandler.InstanceForElement(handler.Element?.Parent);
+                }
+                return false;
+            }
+        }
+
 
         public bool HandlesMove
         {
