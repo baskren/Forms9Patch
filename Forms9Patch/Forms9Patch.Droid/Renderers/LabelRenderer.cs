@@ -50,6 +50,10 @@ namespace Forms9Patch.Droid
 
         #region Constructor / Disposer
 #pragma warning disable CS0618 // Type or member is obsolete
+        public LabelRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner)
+        => InstanceInit();
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>

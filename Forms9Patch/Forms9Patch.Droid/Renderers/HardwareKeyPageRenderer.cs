@@ -16,6 +16,8 @@ namespace Forms9Patch.Droid
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
+        public HardwareKeyPageRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>

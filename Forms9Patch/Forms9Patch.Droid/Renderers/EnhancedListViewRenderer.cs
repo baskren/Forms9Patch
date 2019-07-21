@@ -25,6 +25,8 @@ namespace Forms9Patch.Droid
 
         public EnhancedListViewRenderer(Android.Content.Context context) : base(context) { }
 
+        public EnhancedListViewRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner) { }
+
 
         #region ElementChanged
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.ListView> e)
