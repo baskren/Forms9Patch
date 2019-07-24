@@ -928,12 +928,19 @@ namespace Forms9Patch
             await CancelAsync(sender);
         }
 
-        /// <summary>
-        /// Invoked when appearing
-        /// </summary>
-        protected override void OnAppearing()
-            => UpdateLayout();
-
+        bool _firstAppearance = true;
+        protected override void OnAppearingAnimationEnd()
+        {
+            base.OnAppearingAnimationEnd();
+            if (_firstAppearance && Device.RuntimePlatform == Device.Android && Orientation == StackOrientation.Vertical)
+            {
+                foreach (var child in _stackLayout.Children)
+                    if (child is Button button)
+                        button.Padding = new Thickness(29, 5);
+                UpdateLayout();
+            }
+            _firstAppearance = false;
+        }
         #endregion
     }
 }

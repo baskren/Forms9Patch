@@ -21,8 +21,9 @@ namespace Forms9Patch
         /// </summary>
         protected Layout()
         {
-            _xfLayout.ChildAdded += (sender, e) => OnChildAdded(e.Element);
-            _xfLayout.ChildRemoved += (sender, e) => OnChildRemoved(e.Element);
+            // 190723 was getting double set_Parent in Android.
+            //_xfLayout.ChildAdded += (sender, e) => OnChildAdded(e.Element);
+            //_xfLayout.ChildRemoved += (sender, e) => OnChildRemoved(e.Element);
         }
 
         /// <summary>
