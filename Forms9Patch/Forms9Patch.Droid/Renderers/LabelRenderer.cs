@@ -333,7 +333,12 @@ namespace Forms9Patch.Droid
                 if (control == Control)
                 {
                     LastDrawState = new TextControlState(state);
-                    Control.Invalidate();
+                    LastDrawState.ElementHtmlText = Element.HtmlText;
+                    LastDrawState.ElementText = Element.Text;
+                    if (Element.HtmlText?.StartsWith("Floor") ?? false)
+                        System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": HtmlText[" + Element.HtmlText + "]");
+                    //Control.Invalidate();
+                    Control.ForceLayout();
                 }
                 return result;
             }
@@ -380,7 +385,7 @@ namespace Forms9Patch.Droid
                     InitControl(view);
                     SetNativeControl(view);
                 }
-                else if (LastDrawState != null)
+                else if (LastDrawState != null && LastDrawState.ElementHtmlText == e.NewElement.HtmlText && LastDrawState.ElementText == e.NewElement.Text)
                 {
                     _currentDrawState = new TextControlState(LastDrawState);
                     DrawLabel(LastDrawState.AvailWidth, LastDrawState.AvailHeight);

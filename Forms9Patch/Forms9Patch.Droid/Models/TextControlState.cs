@@ -63,6 +63,8 @@ namespace Forms9Patch.Droid
         public LineBreakMode LineBreakMode = (LineBreakMode)Label.LineBreakModeProperty.DefaultValue;
         public float SyncFontSize = -1;
         public float RenderedFontSize = -1;
+        public string ElementHtmlText;
+        public string ElementText;
         #endregion
 
 
@@ -84,6 +86,8 @@ namespace Forms9Patch.Droid
             LineBreakMode = source.LineBreakMode;
             SyncFontSize = source.SyncFontSize;
             RenderedFontSize = source.RenderedFontSize;
+            ElementHtmlText = source.ElementHtmlText;
+            ElementText = source.ElementText;
         }
         #endregion
 
@@ -117,6 +121,8 @@ namespace Forms9Patch.Droid
                 return false;
 
             return (System.Math.Abs(a.TextSize - b.TextSize) < 0.1)
+                && a.ElementText == b.ElementText
+                && a.ElementHtmlText == b.ElementHtmlText
                 && a.Lines == b.Lines
                 && a.AutoFit == b.AutoFit
                 && a.LineBreakMode == b.LineBreakMode
