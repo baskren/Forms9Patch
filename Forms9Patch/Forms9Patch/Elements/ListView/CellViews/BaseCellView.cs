@@ -988,9 +988,9 @@ namespace Forms9Patch
         {
             if (ContentView is ICellContentView contentView)
                 contentView.OnAppearing();
-            if (Device.RuntimePlatform == Device.UWP)
+            if (Device.RuntimePlatform != Device.iOS)
             {
-                Device.StartTimer(TimeSpan.FromSeconds(0.5), () =>
+                Device.StartTimer(TimeSpan.FromSeconds(0.25), () =>
                 {
                     if (ContentView != null)
                     {
