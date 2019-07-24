@@ -36,10 +36,10 @@ namespace FormsGestures.Droid
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-            P42.Utils.Debug.Message("ENTER Action[" + e.Action + "] [" + e.EventTime + "]");
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
-            System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
+            //P42.Utils.Debug.Message("ENTER Action[" + e.Action + "] [" + e.EventTime + "]");
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " Element:[" + _nativeGestureHandler.Element.Id + "] x:[" + e.RawX + "," + e.GetX() + "," + e.GetAxisValue(Axis.X) + "] y:[" + e.RawY + "," + e.GetY() + "," + e.GetAxisValue(Axis.Y) + "] count:" + e.PointerCount);
+            //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " e:" + e.Action + " " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
 
             if (!_nativeGestureHandler.Element.IsVisible)
                 return false;
@@ -72,7 +72,7 @@ namespace FormsGestures.Droid
             {
                 if (_nativeGestureHandler.Element is Xamarin.Forms.Button)
                 {
-                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Action:[" + e.Action + "] Element [" + _nativeGestureHandler.Element + "]");
+                    //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": Action:[" + e.Action + "] Element [" + _nativeGestureHandler.Element + "]");
                     var renderer = Platform.GetRenderer(_nativeGestureHandler.Element);
                     //var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.ViewGroup;
                     var currentView = (renderer?.GetPropertyValue("Control") as Android.Views.View) ?? renderer?.View;
@@ -119,7 +119,7 @@ namespace FormsGestures.Droid
 
             }
             //System.Diagnostics.Debug.WriteLine(GetType() + "\t _lastEventHandled=[" + _lastEventHandled + "]");
-            P42.Utils.Debug.Message("EXIT [" + null + "]");
+            //P42.Utils.Debug.Message("EXIT [" + null + "]");
             //_lastEventTime = e.EventTime;
             return _lastEventHandled;  // we want to be sure we get the updates to this element's events
         }

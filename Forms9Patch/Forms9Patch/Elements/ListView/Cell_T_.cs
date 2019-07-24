@@ -10,20 +10,18 @@ namespace Forms9Patch
 
     internal class HeaderCell<TContent> : Cell<TContent> where TContent : View, new()
     {
-        public HeaderCell() : base()
-        {
-            BaseCellView.IsHeader = true;
-        }
+        public HeaderCell()
+            => BaseCellView.IsHeader = true;
+
     }
 
 
     // the non-group header version of Cell
     internal class ItemCell<TContent> : Cell<TContent> where TContent : View, new()
     {
-        public ItemCell() : base()
-        {
-            BaseCellView.IsHeader = false;
-        }
+        public ItemCell()
+            => BaseCellView.IsHeader = false;
+
     }
 
     // The purpose of this class it to:

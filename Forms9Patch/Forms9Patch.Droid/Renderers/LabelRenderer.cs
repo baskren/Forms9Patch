@@ -331,7 +331,10 @@ namespace Forms9Patch.Droid
 
                 control.IsNativeDrawEnabled = true;
                 if (control == Control)
+                {
                     LastDrawState = new TextControlState(state);
+                    Control.Invalidate();
+                }
                 return result;
             }
             return new SizeRequest(Size.Zero);
@@ -383,8 +386,10 @@ namespace Forms9Patch.Droid
                     DrawLabel(LastDrawState.AvailWidth, LastDrawState.AvailHeight);
                 }
                 else
+                {
                     InitControl(Control);
-                Control.IsNativeDrawEnabled = false;
+                }
+                //Control.IsNativeDrawEnabled = false;
 
                 e.NewElement.RendererIndexAtPoint += IndexAtPoint;
                 e.NewElement.RendererSizeForWidthAndFontSize += LabelF9pSize;
