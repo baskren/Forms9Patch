@@ -121,6 +121,18 @@ namespace Forms9Patch
 
         public Cell<Label> Include(Cell<Label> cell)
             => new Cell<Label>();
+
+        static Activity Activity;
+        static bool _falseflag;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
+        static void FalseFlag()
+        {
+            if (_falseflag)
+            {
+                var ignore = new Android.Support.V7.Widget.FitWindowsFrameLayout(Activity);
+            }
+        }
+
 #pragma warning restore IDE0060 // Remove unused parameter
     }
 }
