@@ -9,11 +9,11 @@
     <Folder Include="guides\images\ImageSource\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.42.0">
+    <PackageReference Include="docfx.console" Version="2.43.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SQLitePCLRaw.core" Version="1.1.13" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="1.1.14" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="api\Forms9Patch.AccessoryPosition.yml" />

@@ -8,7 +8,7 @@
     <title>Forms9Patch Popups | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Popups | Forms9Patch ">
-    <meta name="generator" content="docfx 2.40.8.0">
+    <meta name="generator" content="docfx 2.43.2.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -81,6 +81,27 @@
 
 <p>Yet another thing missing from Xamarin Forms is a comprehensive set of popup views.  Forms9Patch has a eight (ModalPopup, BubblePopup, FlyoutPopup, Toast, TargetedToast, PermissionPopup, ActivityIndicatorPopup and TargetedMenu) popups to simplify the most common tasks.  However, this comes at a price!  In previous releases of Forms9Patch, I tried to implement the popups in a way that would require the least amount of prep work on your part.  Unfortunately, this meant a lot very ugly code, performance penalties, and (to add insult to injury) the Android implementation of version 2.3 of Xamarin.Forms broke it for the <code>Xamarin.Forms.MasterDetailPage</code>.</p>
 <p>As of Forms9Patch version 1.5.0.5,  <code>Forms9Patch.RootPage</code> is no longer needed to enable popups <strong>AND</strong> Forms9Patch popups work with pages that have been presented modally.</p>
+<h2 id="android-note">Android Note</h2>
+<p>You will need to add the following <code>OnBackButtonPressed</code> code to your Android application's <code>MainActivity</code> in order to have popups respond to the Android hardware backbutton.</p>
+<pre><code>    public class MainActivity : FormsApplicationActivity
+    {
+        ... 
+        
+        public override void OnBackPressed()
+        {
+            if (Forms9Patch.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // do something here if there are some popups in the popup stack
+            }
+            else
+            {
+                // do something else if there are not any popups in the popup stack
+            }
+        }
+        
+        ...
+    }
+</code></pre>
 <h2 id="common-properties-methods-and-events">Common Properties, Methods and Events</h2>
 <p>The following properties and methods are common to all Forms9Patch popups, except <code>ActivityIndicatorPopup</code>:</p>
 <h3 id="common-appearance-properties">Common Appearance Properties</h3>

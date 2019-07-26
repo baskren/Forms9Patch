@@ -144,11 +144,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Forms9PatchDemo.Source\Forms9PatchDemo.Source.csproj">
-      <Project>{EF7A3700-B935-4447-8C78-6E3A7BCEC5E5}</Project>
+      <Project>{CEE51904-6AEF-4452-A8B2-C21BB82C94E2}</Project>
       <Name>Forms9PatchDemo.Source</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj">
-      <Project>{BA919846-E80C-47CE-AB40-312EA50227B6}</Project>
+      <Project>{61094D3D-545E-46EE-85F9-463A7507A1F8}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.Droid\Forms9Patch.Droid.csproj">
@@ -156,7 +156,7 @@
       <Name>Forms9Patch.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{54FC07A5-6551-4E68-BFEC-F4269D434894}</Project>
+      <Project>{0B50BF77-6D06-448F-8048-D52FC1D6C940}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.Droid\FormsGestures.Droid.csproj">
@@ -164,15 +164,15 @@
       <Name>FormsGestures.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{289BDCFA-4DD9-44B3-89F3-8D8B17D0F048}</Project>
+      <Project>{49621984-BABA-4864-9065-D9C8B645828F}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{49530852-B9F8-4DFB-A34E-1231F7D63F1F}</Project>
+      <Project>{8DB8EF34-ACBC-472B-A91E-86EAD0333C46}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{5CC54B98-53B8-47FB-B381-1C909DA0F9CD}</Project>
+      <Project>{0BCBCD07-F38D-4B3E-B9C5-22EE4FBC27BC}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.Droid\P42.Utils.Droid.csproj">

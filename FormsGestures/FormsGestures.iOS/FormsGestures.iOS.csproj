@@ -67,11 +67,11 @@
   <!-- XF Nuget Project References -->
   <ItemGroup>
     <ProjectReference Include="..\FormsGestures\FormsGestures.csproj">
-      <Project>{2079B099-964B-4CFF-8EF6-9443B462258A}</Project>
+      <Project>{0B50BF77-6D06-448F-8048-D52FC1D6C940}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{A519F4E6-541B-4E7B-A700-6C2BB2019FE6}</Project>
+      <Project>{0BCBCD07-F38D-4B3E-B9C5-22EE4FBC27BC}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">

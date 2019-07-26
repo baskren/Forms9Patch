@@ -45,7 +45,7 @@
   <!-- Project References-->
   <ItemGroup>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
-      <Project>{FDDCCA71-9A68-43BC-97F1-73A55F551061}</Project>
+      <Project>{49621984-BABA-4864-9065-D9C8B645828F}</Project>
       <Name>MimeSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
@@ -55,11 +55,11 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj">
-      <Project>{A519F4E6-541B-4E7B-A700-6C2BB2019FE6}</Project>
+      <Project>{0BCBCD07-F38D-4B3E-B9C5-22EE4FBC27BC}</Project>
       <Name>P42.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj">
-      <Project>{8A7065F6-5428-457F-8C5B-1DE69A7E0C12}</Project>
+      <Project>{8DB8EF34-ACBC-472B-A91E-86EAD0333C46}</Project>
       <Name>P42.NumericalMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
@@ -69,11 +69,11 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Forms9Patch\Forms9Patch.csproj">
-      <Project>{82CD4E7C-872D-4A18-A368-652594BAAA49}</Project>
+      <Project>{61094D3D-545E-46EE-85F9-463A7507A1F8}</Project>
       <Name>Forms9Patch</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
-      <Project>{2079B099-964B-4CFF-8EF6-9443B462258A}</Project>
+      <Project>{0B50BF77-6D06-448F-8048-D52FC1D6C940}</Project>
       <Name>FormsGestures</Name>
     </ProjectReference>
   </ItemGroup>
