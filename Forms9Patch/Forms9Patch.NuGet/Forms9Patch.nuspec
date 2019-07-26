@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.8.0.3</version>
+        <version>1.8.0.4</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,7 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.8.0.4: Android Fixes: Children of Forms9Patch layout elements are assigned Parent property twice; 1.8.0.3 solution to Android cell swipe issue doesn't work on hardware; Forms9Patch.ListView group header labels are not updating with correct text when BindingContext is changed; Inserted cells in Forms9Patch.ListView is not rendering content at first rendering; App crashes when compiled with Link SDK;
     1.8.0.3: Android Fixes: BubblePopup Content not positioned correctly after screen orientation change; Labels not rendered correctly upon re-rerendering (extreme edge case); ListViewRenderer and ScrollViewRenderer are intercepting FormsGestures touches causing all but tap gesture to fail; BubblePopup not positioned correctly after orientation change.  Change: Button.Lines default changed to 0. 
     1.8.0.2: Fixed: Label causes crash on older versions of iOS when default FontSize is used;
     1.8.0.1: Added Xamarin.Android.Support.Core.Utils dependency to NuSpec; Added XF4.0 Android dependencies to NuSpec;
