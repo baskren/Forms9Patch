@@ -71,5 +71,11 @@ namespace Forms9Patch
         /// </summary>
         /// <value>The fade at.</value>
         TimeSpan PopAfter { get; set; }
+
+
+        /// <summary>
+        /// Object you can set for processing, typically after popup has been acted upon.
+        /// </summary>
+        object Parameter { get; set; }
     }
 }

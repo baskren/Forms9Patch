@@ -118,7 +118,7 @@ namespace Forms9Patch
         /// <summary>
         /// The target property.
         /// </summary>
-        public static readonly BindableProperty TargetProperty = BindableProperty.Create("Forms9Patch.PopupBase.Target", typeof(VisualElement), typeof(PopupBase), default(Element));
+        public static readonly BindableProperty TargetProperty = BindableProperty.Create(nameof(Target), typeof(VisualElement), typeof(PopupBase), default(Element));
         /// <summary>
         /// Gets or sets the popup target (could be a Page or a VisualElement on a Page).
         /// </summary>
@@ -135,7 +135,7 @@ namespace Forms9Patch
         /// Identifies the PageOverlayColor bindable property.
         /// </summary>
         /// <remarks>To be added.</remarks>
-        public static readonly BindableProperty PageOverlayColorProperty = BindableProperty.Create("Forms9Patch.PopupBase.PageOverlayColor", typeof(Color), typeof(PopupBase), Color.FromRgba(128, 128, 128, 128));
+        public static readonly BindableProperty PageOverlayColorProperty = BindableProperty.Create(nameof(PageOverlayColor), typeof(Color), typeof(PopupBase), Color.FromRgba(128, 128, 128, 128));
         /// <summary>
         /// Gets or sets the color of the page overlay.
         /// </summary>
@@ -151,7 +151,7 @@ namespace Forms9Patch
         /// <summary>
         /// Cancel the Popup when the PageOverlay is touched
         /// </summary>
-        public static readonly BindableProperty CancelOnPageOverlayTouchProperty = BindableProperty.Create("Forms9Patch.PopupBase.CancelOnPageOverlayTouch", typeof(bool), typeof(PopupBase), true);
+        public static readonly BindableProperty CancelOnPageOverlayTouchProperty = BindableProperty.Create(nameof(CancelOnPageOverlayTouch), typeof(bool), typeof(PopupBase), true);
         /// <summary>
         /// Gets or sets a value indicating whether Popup <see cref="T:Forms9Patch.PopupBase"/> will cancel on page overlay touch.
         /// </summary>
@@ -167,7 +167,7 @@ namespace Forms9Patch
         /// <summary>
         /// Cancel the Popup when the back button is touched
         /// </summary>
-        public static readonly BindableProperty CancelOnBackButtonClickProperty = BindableProperty.Create("Forms9Patch.PopupBase.CancelOnBackButtonClick", typeof(bool), typeof(PopupBase), true);
+        public static readonly BindableProperty CancelOnBackButtonClickProperty = BindableProperty.Create(nameof(CancelOnBackButtonClick), typeof(bool), typeof(PopupBase), true);
         /// <summary>
         /// Gets or sets a value indicating whether Popup <see cref="T:Forms9Patch.PopupBase"/> will cancel on the back button touch.
         /// </summary>
@@ -183,7 +183,7 @@ namespace Forms9Patch
         /// <summary>
         /// The retain property.
         /// </summary>
-        public static readonly BindableProperty RetainProperty = BindableProperty.Create("Forms9Patch.PopupBase.Retain", typeof(bool), typeof(PopupBase), default(bool));
+        public static readonly BindableProperty RetainProperty = BindableProperty.Create(nameof(Retain), typeof(bool), typeof(PopupBase), default(bool));
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:Forms9Patch.PopupBase"/> is retained after it is hidden.
         /// </summary>
@@ -197,18 +197,32 @@ namespace Forms9Patch
 
         #region PopAfter property
         /// <summary>
-        /// Backing store for PopAfter property
+        /// BindableProperty key for PopAfter property
         /// </summary>
-        public static readonly BindableProperty PopAfterProperty = BindableProperty.Create("Forms9Patch.PopupBase.PopAfter", typeof(TimeSpan), typeof(PopupBase), default(TimeSpan));
-        /// <summary>
-        /// Will cause the popup to cancel (disappear) after Popafter TimeSpan
-        /// </summary>
+        public static readonly BindableProperty PopAfterProperty = BindableProperty.Create(nameof(PopAfter), typeof(TimeSpan), typeof(PopupBase), default(TimeSpan));
         public TimeSpan PopAfter
         {
             get => (TimeSpan)GetValue(PopAfterProperty);
             set => SetValue(PopAfterProperty, value);
         }
         #endregion PopAfter property
+
+
+        #region Parameter property
+        /// <summary>
+        /// BindableProperty key for Parameter property
+        /// </summary>
+        public static readonly BindableProperty ParameterProperty = BindableProperty.Create(nameof(Parameter), typeof(object), typeof(PopupBase), default(object));
+        /// <summary>
+        /// Object that can be set prior to appearance of Popup for the purpose of application to processing after the popup is disappeared;
+        /// </summary>
+        public object Parameter
+        {
+            get => (object)GetValue(ParameterProperty);
+            set => SetValue(ParameterProperty, value);
+        }
+        #endregion Parameter property
+
 
         #region IBackground
 
@@ -619,7 +633,7 @@ namespace Forms9Patch
                 if (_decorativeContainerView is VisualElement oldLayout)
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
                 KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
-
+                Parameter = null;
 
                 _lock.Dispose();
                 Retain = false;
