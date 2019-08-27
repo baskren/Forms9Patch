@@ -10,7 +10,7 @@ namespace Forms9Patch
     /// Model for Segment.
     /// </summary>
     [ContentProperty(nameof(HtmlText))]
-    public class Segment : BindableObject, ISegment
+    public class Segment : Element, ISegment
     {
         #region Obsolete Properties
         /// <summary>
@@ -222,10 +222,8 @@ namespace Forms9Patch
         /// </remarks>
         public ICommand Command
         {
-            //get { return (ICommand)GetValue (CommandProperty); }
-            //set { SetValue (CommandProperty, value); }
-            get => _button.Command;
-            set => _button.Command = value;
+            get => (ICommand)GetValue (CommandProperty); 
+            set => SetValue (CommandProperty, value); 
         }
         #endregion ICommand property
 
@@ -247,8 +245,8 @@ namespace Forms9Patch
         /// <remarks/>
         public object CommandParameter
         {
-            get => _button.CommandParameter;
-            set => _button.CommandParameter = value;
+            get => GetValue(CommandParameterProperty); 
+            set => SetValue(CommandParameterProperty, value); 
         }
         #endregion ICommandParameter property
 
@@ -469,6 +467,9 @@ namespace Forms9Patch
                 case nameof(Orientation):
                     _button.Orientation = Orientation;
                     break;
+                case nameof(Command):
+                    System.Diagnostics.Debug.WriteLine("COMMAND PROPERTY CHANGED");
+                break;
                 default:
                     break;
             }
@@ -498,6 +499,7 @@ namespace Forms9Patch
         #region Property Change management
         void OnCommandChanged()
         {
+            _button.Command = Command;
             if (Command != null)
             {
                 Command.CanExecuteChanged += CommandCanExecuteChanged;
@@ -509,16 +511,13 @@ namespace Forms9Patch
 
         void CommandCanExecuteChanged(object sender, EventArgs eventArgs)
         {
+            _button.CommandParameter = CommandParameter;
             var command = Command;
             if (command == null)
                 return;
             //IsEnabledCore = command.CanExecute(CommandParameter);
         }
         #endregion Property Change management
-
-
-
-
     }
 }
 

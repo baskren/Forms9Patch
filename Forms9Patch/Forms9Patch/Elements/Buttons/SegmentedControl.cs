@@ -836,6 +836,8 @@ namespace Forms9Patch
             button.SoundEffectMode = SoundEffectMode;
             button.Spacing = IntraSegmentSpacing;
             button.IsLongPressEnabled = IsLongPressEnabled;
+            segment.Parent = this;
+            segment.BindingContext = BindingContext;
         }
         #endregion
 
@@ -1000,6 +1002,13 @@ namespace Forms9Patch
                 segment.IsSelected = false;
         }
 
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            foreach (var segment in _segments)
+                segment.BindingContext = BindingContext;
+        }
 
         /// <param name="propertyName">The name of the property that changed.</param>
         /// <summary>

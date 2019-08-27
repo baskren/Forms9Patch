@@ -1949,7 +1949,7 @@ namespace Forms9Patch
         /// </summary>
         internal protected void SendTapped()
         {
-            if (GroupToggleBehavior == GroupToggleBehavior.None)
+            if (GroupToggleBehavior == GroupToggleBehavior.None || IsSelected)
                 Command?.Execute(CommandParameter);
             _tapped?.Invoke(this, EventArgs.Empty);
         }
