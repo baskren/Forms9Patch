@@ -929,6 +929,9 @@ namespace Forms9Patch
         }
 
         bool _firstAppearance = true;
+        /// <summary>
+        /// Called when appearing animation has ended
+        /// </summary>
         protected override void OnAppearingAnimationEnd()
         {
             base.OnAppearingAnimationEnd();

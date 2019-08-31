@@ -405,6 +405,12 @@ namespace Forms9Patch
         }
 
 
+        /// <summary>
+        /// Funny you asked!
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             var result = base.OnMeasure(widthConstraint, heightConstraint);
@@ -428,17 +434,28 @@ namespace Forms9Patch
 
 
 #pragma warning disable CS0672 // Member overrides obsolete member
+#pragma warning disable CS0618 // Type or member is obsolete
+        /// <summary>
+        /// Just how big is this going to be?
+        /// </summary>
+        /// <param name="widthConstraint"></param>
+        /// <param name="heightConstraint"></param>
+        /// <returns></returns>
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
-#pragma warning restore CS0672 // Member overrides obsolete member
         {
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
             return result;
         }
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore CS0672 // Member overrides obsolete member
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Because InvalidateMeasure doesn't always work
+        /// </summary>
         public void HardForceLayout()
             => Draw?.Invoke(Width, Height);
 

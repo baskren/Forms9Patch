@@ -1002,7 +1002,9 @@ namespace Forms9Patch
                 segment.IsSelected = false;
         }
 
-
+        /// <summary>
+        /// Called when BindingContext is changed
+        /// </summary>
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();

@@ -200,6 +200,9 @@ namespace Forms9Patch
         /// BindableProperty key for PopAfter property
         /// </summary>
         public static readonly BindableProperty PopAfterProperty = BindableProperty.Create(nameof(PopAfter), typeof(TimeSpan), typeof(PopupBase), default(TimeSpan));
+        /// <summary>
+        /// Duration of popup appearance before it is automatically cancelled
+        /// </summary>
         public TimeSpan PopAfter
         {
             get => (TimeSpan)GetValue(PopAfterProperty);

@@ -282,6 +282,10 @@ namespace Forms9Patch
 
 
         #region Methods
+        /// <summary>
+        /// Asynchronous implementation, returns if permission was granted
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> AffirmedAsync()
         {
             _okTapped = false;

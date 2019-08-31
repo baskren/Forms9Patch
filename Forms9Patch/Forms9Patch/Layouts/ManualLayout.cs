@@ -410,6 +410,10 @@ namespace Forms9Patch
             Height = height;
         }
 
+        /// <summary>
+        /// Formats content for display
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "[" + X + "," + Y + "," + Width + "," + Height + "]";

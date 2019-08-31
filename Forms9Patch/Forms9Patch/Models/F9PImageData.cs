@@ -186,7 +186,11 @@ namespace Forms9Patch
         }
 
         // This code added to correctly implement the disposable pattern.
-        public void Dispose() => Dispose(true);
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
 
 
