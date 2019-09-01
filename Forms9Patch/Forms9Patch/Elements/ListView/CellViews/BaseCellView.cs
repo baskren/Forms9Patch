@@ -792,7 +792,7 @@ namespace Forms9Patch
                 return;
             }
 
-            DebugMessage("Enter BindingContext=[" + BindingContext + "]");
+            //DebugMessage("Enter BindingContext=[" + BindingContext + "]");
             if (BindingContext == null)
                 return;
 
@@ -813,7 +813,7 @@ namespace Forms9Patch
 
             base.OnBindingContextChanged();
 
-            DebugMessage("Exit");
+            //DebugMessage("Exit");
         }
 
         protected override void OnPropertyChanging(string propertyName = null)
@@ -984,22 +984,26 @@ namespace Forms9Patch
 
 
         #region Appearing / Dissapearing Handlers
+        int _appearances;
         public void OnAppearing()
         {
             if (ContentView is ICellContentView contentView)
                 contentView.OnAppearing();
+            /*
             if (Device.RuntimePlatform != Device.iOS)
             {
-                Device.StartTimer(TimeSpan.FromSeconds(0.25), () =>
+                if (ContentView != null)
+                    ContentView.IsVisible = false;
+                Device.StartTimer(TimeSpan.FromMilliseconds(50), () =>
                 {
                     if (ContentView != null)
-                    {
-                        ContentView.IsVisible = false;
                         ContentView.IsVisible = true;
-                    }
                     return false;
                 });
             }
+            */
+            //System.Diagnostics.Debug.WriteLine("BaseCellView.OnAppearing _appearances=[" + (_appearances++) + "] BindingContext[" + BindingContext + "] ContentView.IsVisible[" + ContentView.IsVisible + "]");
+
         }
 
         public void OnDisappearing()

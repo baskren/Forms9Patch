@@ -21,7 +21,13 @@ namespace Forms9Patch
 			SelectedCellBackgroundColor = other.SelectedCellBackgroundColor;
 			Source = other.Source;
 		}
-		#endregion
+        #endregion
 
-	}
+
+        public override string ToString()
+        {
+            //return base.ToString();
+            return "ItemWrapper["+Source.ToString()+"]";
+        }
+    }
 }

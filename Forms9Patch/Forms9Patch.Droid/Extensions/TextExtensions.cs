@@ -5,8 +5,9 @@ namespace Forms9Patch.Droid
 {
     public static class TextExtensions
     {
-        public static Android.Text.StaticLayout StaticLayout(ICharSequence source, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
+        public static Android.Text.StaticLayout StaticLayout(ICharSequence charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
+            var source = charSequence ?? new Java.Lang.String("");
             //P42.Utils.Debug.Message(source.ToString(), "ENTER");
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
@@ -18,8 +19,9 @@ namespace Forms9Patch.Droid
             return new Android.Text.StaticLayout(source, paint, width, align, spacingmult, spacingadd, includepad);
         }
 
-        public static Android.Text.StaticLayout StaticLayout(string source, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
+        public static Android.Text.StaticLayout StaticLayout(string charSequence, Android.Text.TextPaint paint, int width, Android.Text.Layout.Alignment align, float spacingmult, float spacingadd, bool includepad)
         {
+            var source = charSequence ?? "";
             //P42.Utils.Debug.Message(source, "ENTER");
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {

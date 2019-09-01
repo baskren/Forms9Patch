@@ -121,12 +121,10 @@ namespace Forms9Patch
                 Device.BeginInvokeOnMainThread(OnBindingContextChanged);
                 return;
             }
-
             _freshHeight = true;
             _oldHeight = -1;
             if (View != null)
                 View.BindingContext = BindingContext;
-
             base.OnBindingContextChanged();
         }
 
@@ -145,7 +143,6 @@ namespace Forms9Patch
 
         bool _updatingSize;
         async Task UpdateSizeAsync()
-        //void UpdateSize()
         {
             if (_updatingSize || _freshHeight || _oldHeight < 1)
                 return;
@@ -157,11 +154,27 @@ namespace Forms9Patch
         }
         #endregion
 
-
+        int _appearances;
         protected override void OnAppearing()
         {
             base.OnAppearing();
             BaseCellView?.OnAppearing();
+
+            _appearances++;
+            if (View.Width < 0 || View.Height < 0)
+            {
+                Device.StartTimer(TimeSpan.FromMilliseconds(200), () =>
+                {
+                    if (View.Width < 0 || View.Height < 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Cell.OnAppearing _appearances=[" + (_appearances) + "] BindingContext[" + BindingContext + "] View.IsVisible[" + View.IsVisible + "] View.Opacity[" + View.Opacity + "] View.Bounds[" + View.Bounds + "]");
+                        View.IsVisible = !View.IsVisible;
+                        return true;
+                    }
+                    View.IsVisible = true;
+                    return false;
+                });
+            }
         }
 
         protected override void OnDisappearing()
