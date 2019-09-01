@@ -496,12 +496,14 @@ namespace Forms9Patch
                         _swipeButton1.IconText = swipeMenu[0].IconText;
                         _swipeButton1.TextColor = swipeMenu[0].TextColor;
 
-                        _swipeFrame2.IsVisible = false;
-                        _swipeFrame3.IsVisible = false;
+                        //_swipeFrame2.IsVisible = false;
+                        //_swipeFrame3.IsVisible = false;
 
+                        System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning swipeMenu.Count=["+swipeMenu.Count+"]");
                         if (swipeMenu.Count > 1)
                         {
-                            _homeOffset -= _swipeButton2.Width;
+                            _homeOffset -= _swipeButton2.Width * (int)side;
+                            System.Diagnostics.Debug.WriteLine("BaseCellView.OnPanning _swipeButton2.Width=[" + _swipeButton2.Width + "]");
                             if (side == Side.End)
                             {
                                 _endButtons = 2;
@@ -518,7 +520,7 @@ namespace Forms9Patch
                             _swipeButton2.TextColor = swipeMenu[1].TextColor;
                             if (swipeMenu.Count > 2)
                             {
-                                _homeOffset -= _swipeButton3.Width;
+                                _homeOffset -= _swipeButton3.Width * (int)side;
                                 if (side == Side.End)
                                 {
                                     _endButtons = 3;
@@ -547,16 +549,27 @@ namespace Forms9Patch
                                 RaiseChild(_swipeFrame3);
                                 _swipeFrame3.TranslationX = (int)side * Width;
                                 _swipeFrame3.IsVisible = true;
+                                _swipeButton3.IsVisible = true;
                             }
+                            else
+                                _swipeFrame3.IsVisible = false;
+
                             Children.Add(_swipeFrame2, 0, 0);
                             RaiseChild(_swipeFrame2);
                             _swipeFrame2.TranslationX = (int)side * (Width - distance / 3.0);
                             _swipeFrame2.IsVisible = true;
+                            _swipeButton2.IsVisible = true;
+                        }
+                        else
+                        {
+                            _swipeFrame2.IsVisible = false;
+                            _swipeFrame3.IsVisible = false;
                         }
                         Children.Add(_swipeFrame1, 0, 0);
                         RaiseChild(_swipeFrame1);
                         _swipeFrame1.TranslationX = (int)side * (Width - 2 * distance / 3.0);
                         _swipeFrame1.IsVisible = true;
+                        _swipeButton1.IsVisible = true;
                         _settingup = false;
                     }
 

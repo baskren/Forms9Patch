@@ -618,7 +618,7 @@ namespace Forms9Patch
         bool _disposed; // To detect redundant calls
 
         /// <summary>
-        /// Dispose the specified disposing.
+        /// Clean up unmanaged objects
         /// </summary>
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
@@ -626,19 +626,11 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
-                //  Don't want to do this.  Will cause popups to not be reusable by default.
-                //try
-                //{
-                //    if (Content is IDisposable disposable)
-                //        disposable.Dispose();
-                //}
-                //catch (Exception) { }
                 if (_decorativeContainerView is VisualElement oldLayout)
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
                 KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
                 Parameter = null;
-
-                _lock.Dispose();
+                //_lock.Dispose();  // a potential leak?  Saw a crash on Android where _lock was disposed and then called.
                 Retain = false;
             }
         }
@@ -778,13 +770,6 @@ namespace Forms9Patch
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 PushAsync();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            //else if (!Retain)
-            //    Device.StartTimer(TimeSpan.FromSeconds(10), () =>
-            //    {
-            //        if (!Retain)
-            //            Dispose();
-            //        return false;
-            //    });
 
             DisappearingAnimationEnd?.Invoke(this, EventArgs.Empty);
         }
@@ -964,8 +949,6 @@ namespace Forms9Patch
                 //else
                 //    System.Diagnostics.Debug.WriteLine("IsVisible=[" + IsVisible + "] _isPushed=[" + _isPushed + "]");
             }
-            //else if (propertyName == RetainProperty.PropertyName && !Retain)
-            //    Dispose();
             else if (propertyName == CancelOnPageOverlayTouchProperty.PropertyName)
                 CloseWhenBackgroundIsClicked = CancelOnPageOverlayTouch;
 
