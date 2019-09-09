@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using P42.Utils;
 
 namespace Forms9Patch
 {
@@ -498,7 +499,7 @@ namespace Forms9Patch
         internal ILayout _decorativeContainerView;
         internal DateTime PresentedAt;
         static int _instances;
-        readonly int _id;
+        protected readonly int _id;
         /// <summary>
         /// Say, when was the last time I ...
         /// </summary>
@@ -574,6 +575,7 @@ namespace Forms9Patch
         protected override bool OnBackgroundClicked()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            P42.Utils.BreadCrumbs.Add(GetType(), null);
             var isClose = base.OnBackgroundClicked();
             if (isClose)
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -625,6 +627,7 @@ namespace Forms9Patch
         {
             if (!_disposed && disposing)
             {
+                P42.Utils.BreadCrumbs.Add(GetType(), null);
                 _disposed = true;
                 if (_decorativeContainerView is VisualElement oldLayout)
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
@@ -710,6 +713,8 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnAppearingAnimationBegin()
         {
+            P42.Utils.BreadCrumbs.Add(GetType(), null);
+            Recursion.Enter(GetType().ToString(), _id.ToString());
             AppearingAnimationBegin?.Invoke(this, EventArgs.Empty);
             if (Device.RuntimePlatform == Device.UWP)
             {
@@ -717,6 +722,7 @@ namespace Forms9Patch
             }
             _isPushing = true;
             base.OnAppearingAnimationBegin();
+            Recursion.Exit(GetType().ToString(), _id.ToString());
         }
 
         /// <summary>
@@ -725,6 +731,8 @@ namespace Forms9Patch
         protected override async void OnAppearingAnimationEnd()
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            P42.Utils.BreadCrumbs.Add(GetType(), null);
+            Recursion.Enter(GetType().ToString(), _id.ToString());
             base.OnAppearingAnimationEnd();
             _isPushed = true;
             _isPushing = false;
@@ -741,6 +749,7 @@ namespace Forms9Patch
                 });
 
             AppearingAnimationEnd?.Invoke(this, EventArgs.Empty);
+            Recursion.Exit(GetType().ToString(), _id.ToString());
         }
 
         /// <summary>
@@ -748,11 +757,14 @@ namespace Forms9Patch
         /// </summary>
         protected override void OnDisappearingAnimationBegin()
         {
+            P42.Utils.BreadCrumbs.Add(GetType(), null);
+            Recursion.Enter(GetType().ToString(), _id.ToString());
             DisappearingAnimationBegin?.Invoke(this, EventArgs.Empty);
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             _isPopping = true;
             _isPushed = false;
             base.OnDisappearingAnimationBegin();
+            Recursion.Exit(GetType().ToString(), _id.ToString());
         }
 
         /// <summary>
@@ -762,6 +774,8 @@ namespace Forms9Patch
         {
 
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
+            P42.Utils.BreadCrumbs.Add(GetType(), null);
+            Recursion.Enter(GetType().ToString(), _id.ToString());
             base.OnDisappearingAnimationEnd();
             //IsVisible = false;
             _isPopping = false;
@@ -772,6 +786,7 @@ namespace Forms9Patch
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             DisappearingAnimationEnd?.Invoke(this, EventArgs.Empty);
+            Recursion.Exit(GetType().ToString(), _id.ToString());
         }
 
         readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
@@ -804,6 +819,8 @@ namespace Forms9Patch
                 //    return;
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
+                    P42.Utils.BreadCrumbs.Add(GetType(), null);
+                    Recursion.Enter(GetType().ToString(), _id.ToString());
                     //_isPushing = true;
                     //while (_isPoping) await Task.Delay(100);
                     //if (IsVisible)
@@ -819,6 +836,7 @@ namespace Forms9Patch
                     }
                     //_isPushing = false;
                     _lock.Release();
+                    Recursion.Exit(GetType().ToString(), _id.ToString());
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await PushAsync());
@@ -855,6 +873,8 @@ namespace Forms9Patch
                 //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
+                    P42.Utils.BreadCrumbs.Add(GetType(), null);
+                    Recursion.Enter(GetType().ToString(), _id.ToString());
                     _isPopping = true;
                     IsVisible = false;
                     await _lock.WaitAsync();
@@ -868,6 +888,7 @@ namespace Forms9Patch
                         Popped?.Invoke(this, PopupPoppedEventArgs);
                     }
                     _lock.Release();
+                    Recursion.Exit(GetType().ToString(), _id.ToString());
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
@@ -1012,21 +1033,20 @@ namespace Forms9Patch
         {
             if (IsVisible && Target != null)
             {
+                Recursion.Enter(GetType().ToString(), _id.ToString());
                 var targetBounds = Target is PopupBase popup
                     ? DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, popup.DecorativeContainerView)
                     : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(this, Target);
 
-                if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
-                    return;
-
-                //System.Diagnostics.Debug.WriteLine("Target.Bounds=[" + targetBounds + "]");
-
-                if (_lastTargetBounds != targetBounds) //&& DateTime.Now - _lastLayout > TimeSpan.FromMilliseconds(refreshPeriod))
+                if (!(targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0))
                 {
-                    _lastTargetBounds = targetBounds;
-                    //System.Diagnostics.Debug.WriteLine("B");
-                    HardForceLayout();
+                    if (_lastTargetBounds != targetBounds) //&& DateTime.Now - _lastLayout > TimeSpan.FromMilliseconds(refreshPeriod))
+                    {
+                        _lastTargetBounds = targetBounds;
+                        HardForceLayout();
+                    }
                 }
+                Recursion.Exit(GetType().ToString(), _id.ToString());
             }
         }
 

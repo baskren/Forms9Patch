@@ -320,6 +320,7 @@ namespace Forms9Patch
             if (_bubbleLayout?.Content == null)
                 return;
 
+            P42.Utils.Recursion.Enter(GetType().ToString(), _id.ToString());
             height -= KeyboardService.Height;
             var bounds = new Rectangle(x, y, width, height);
 
@@ -349,7 +350,10 @@ namespace Forms9Patch
                         : DependencyService.Get<IDescendentBounds>().PageDescendentBounds(targetPage, Target);
 
                     if (targetBounds.Width < 0 && targetBounds.Height < 0 && targetBounds.X < 0 && targetBounds.Y < 0)
+                    {
+                        P42.Utils.Recursion.Exit(GetType().ToString(), _id.ToString());
                         return;
+                    }
 
                     if (targetBounds.Right > 0 && targetBounds.Left < targetPage.Bounds.Width && targetBounds.Bottom > 0 && targetBounds.Top < targetPage.Bounds.Height)
                     {
@@ -618,6 +622,7 @@ namespace Forms9Patch
                 }
 
             }
+            P42.Utils.Recursion.Exit(GetType().ToString(), _id.ToString());
         }
 
 

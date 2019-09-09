@@ -152,6 +152,7 @@ namespace Forms9Patch
             if (_frame?.Content == null)
                 return;
 
+            P42.Utils.Recursion.Enter(GetType().ToString(), _id.ToString());
             height -= KeyboardService.Height;
 
             // layout the content
@@ -209,6 +210,7 @@ namespace Forms9Patch
                 Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_frame, bounds);
                 _lastLayout = DateTime.Now;
             }
+            P42.Utils.Recursion.Exit(GetType().ToString(), _id.ToString());
         }
         #endregion
     }

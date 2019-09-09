@@ -73,9 +73,9 @@ namespace Forms9Patch
         /// </summary>
         public static readonly BindableProperty HtmlTextProperty = BindableProperty.Create(nameof(HtmlText), typeof(string), typeof(Label), propertyChanging: (bindable, oldValue, newValue) =>
         {
-            if ( bindable is Label label && newValue is string value)
-            //if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
-                    label.UpdateHtmlText(value);
+            if (bindable is Label label && newValue is string value)
+                //if (Device.RuntimePlatform != Device.UWP && bindable is Label label && newValue is string value)
+                label.UpdateHtmlText(value);
         });
         /// <summary>
         /// Gets or sets the formatted text.
@@ -381,7 +381,9 @@ namespace Forms9Patch
         {
             if (width <= 0)
                 return Size.Zero;
+            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             var result = (RendererSizeForWidthAndFontSize?.Invoke(width, fontSize) ?? Size.Zero);
+            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return result;
         }
 
@@ -395,12 +397,14 @@ namespace Forms9Patch
         [Obsolete("Use OnMeasure")]
         public override SizeRequest GetSizeRequest(double widthConstraint, double heightConstraint)
         {
+            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             IsDynamicallySized = true;
             SizeRequest result;
             //if (!_sizeAllocated && Draw != null && Device.RuntimePlatform == Device.UWP)
             //    result = Draw.Invoke(widthConstraint, heightConstraint);
             //else
             result = base.GetSizeRequest(widthConstraint, heightConstraint);
+            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return result;
         }
 
@@ -413,7 +417,9 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
+            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             var result = base.OnMeasure(widthConstraint, heightConstraint);
+            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return result;
         }
 
@@ -427,9 +433,11 @@ namespace Forms9Patch
         /// <param name="height"></param>
         protected override void OnSizeAllocated(double width, double height)
         {
+            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             base.OnSizeAllocated(width, height);
             //_sizeAllocated = true;
             Draw?.Invoke(width, height);
+            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
         }
 
 
@@ -443,7 +451,9 @@ namespace Forms9Patch
         /// <returns></returns>
         protected override SizeRequest OnSizeRequest(double widthConstraint, double heightConstraint)
         {
+            P42.Utils.Recursion.Enter(GetType().ToString(), InstanceId.ToString());
             var result = base.OnSizeRequest(widthConstraint, heightConstraint);
+            P42.Utils.Recursion.Exit(GetType().ToString(), InstanceId.ToString());
             return result;
         }
 #pragma warning restore CS0618 // Type or member is obsolete
