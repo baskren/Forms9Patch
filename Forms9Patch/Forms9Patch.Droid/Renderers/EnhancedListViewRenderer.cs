@@ -25,6 +25,8 @@ namespace Forms9Patch.Droid
 
         public EnhancedListViewRenderer(Android.Content.Context context) : base(context) { }
 
+        public EnhancedListViewRenderer(Android.Content.Context context, object obj) : base(context) { }
+
         public EnhancedListViewRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner) { }
 
 

@@ -113,7 +113,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />

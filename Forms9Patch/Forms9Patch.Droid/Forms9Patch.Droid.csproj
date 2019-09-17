@@ -73,7 +73,6 @@
     <Compile Include="Renderers\EnhancedListViewRenderer.cs" />
     <Compile Include="Renderers\HardwareKeyPageRenderer.cs" />
     <Compile Include="Renderers\LabelRenderer.cs" />
-    <Compile Include="Renderers\PageRenderer.cs" />
     <Compile Include="Services\ApplicationInfoService.cs" />
     <Compile Include="Services\DescendentBounds.cs" />
     <Compile Include="Services\FontService.cs" />

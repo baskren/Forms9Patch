@@ -64,6 +64,9 @@ namespace Forms9Patch.Droid
         public LabelRenderer(Android.Content.Context context) : base(context)
             => InstanceInit();
 
+        public LabelRenderer(Android.Content.Context context, object obj) : base(context)
+            => InstanceInit();
+
         void InstanceInit()
         {
             _instance = _instances++;

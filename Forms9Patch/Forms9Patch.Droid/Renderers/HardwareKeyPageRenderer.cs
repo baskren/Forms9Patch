@@ -17,12 +17,14 @@ namespace Forms9Patch.Droid
 
 #pragma warning disable CS0618 // Type or member is obsolete
         public HardwareKeyPageRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner) { }
+#pragma warning restore CS0618
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelRenderer"/> class.
         /// </summary>
         public HardwareKeyPageRenderer(Context context) : base(context) { }
-#pragma warning restore CS0618
+
+        public HardwareKeyPageRenderer(Context context, object obj) : base(context) { }
 
         [Obsolete("This constructor is obsolete as of version 2.5. Please use PageRenderer(Context) instead.")]
         public HardwareKeyPageRenderer() { }
