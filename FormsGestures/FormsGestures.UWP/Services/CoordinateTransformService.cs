@@ -46,6 +46,10 @@ namespace FormsGestures.UWP
             return new Rectangle(-1, -1, -1, -1);
         }
 
+        public bool HasRenderer(VisualElement element)
+        {
+            return Platform.GetRenderer(element) != null;
+        }
         #endregion
 
     }

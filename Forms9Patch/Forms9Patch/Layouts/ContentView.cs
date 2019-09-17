@@ -357,7 +357,12 @@ namespace Forms9Patch
             else if (propertyName == ElementShapeProperty.PropertyName)
                 CurrentBackgroundImage.ElementShape = _fallbackBackgroundImage.ElementShape = ElementShape;
 
-            base.OnPropertyChanged(propertyName);
+            //this fixes a crash in ConnectionCalc.UWP when the [Calculated] button is updated
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
 
             if (propertyName == BackgroundColorProperty.PropertyName ||
                 propertyName == HasShadowProperty.PropertyName ||

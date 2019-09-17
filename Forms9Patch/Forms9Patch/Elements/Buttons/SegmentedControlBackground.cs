@@ -26,7 +26,12 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
+
             if (propertyName == nameof(Parent) && Parent is SegmentedControl segmentedControl)
             {
                 Control._segments.CollectionChanged += OnSegmentsCollectionChanged;

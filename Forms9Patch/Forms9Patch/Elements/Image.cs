@@ -756,7 +756,11 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
 
             if (propertyName == ElementShapeProperty.PropertyName)
                 ((IExtendedShape)this).ExtendedElementShape = ElementShape.ToExtendedElementShape();

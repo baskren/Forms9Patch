@@ -25,6 +25,8 @@ namespace FormsGestures
         /// <param name="toElement"></param>
         /// <returns></returns>
 		Rectangle CoordTransform (VisualElement fromElement, Rectangle r, VisualElement toElement);
+
+        bool HasRenderer(VisualElement element);
 	}
 }
 

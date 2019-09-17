@@ -38,6 +38,15 @@ namespace FormsGestures
         }
 
 
+        public static bool HasRenderer(this VisualElement element)
+        {
+            if (element!=null && Service!=null)
+            {
+                return Service.HasRenderer(element);
+            }
+            return false;
+        }
+
         // THIS MAY NOT WORK WITH UWP .NET NATIVE COMPILER CHAIN
         /// <summary>
         /// Is this element a descendent of an ancestor element?

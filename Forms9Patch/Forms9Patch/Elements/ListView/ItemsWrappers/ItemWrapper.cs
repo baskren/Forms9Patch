@@ -287,7 +287,12 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
+
             if (propertyName == IsSelectedProperty.PropertyName)
             {
                 if (Source is IIsSelectedAble isSelectedSource)

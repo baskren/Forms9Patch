@@ -130,7 +130,12 @@ namespace Forms9Patch
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
+
             // don't know why the below "&& UWP" was added.  A really bone headed move.
             if (propertyName == nameof(Height))// && Device.RuntimePlatform == Device.UWP)
             {

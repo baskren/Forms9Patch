@@ -840,7 +840,12 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
+
             if (propertyName == HtmlTextProperty.PropertyName && HtmlText != null)
                 Text = null;
             else if (propertyName == TextProperty.PropertyName && Text != null)

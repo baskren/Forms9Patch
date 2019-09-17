@@ -723,67 +723,68 @@ namespace Forms9Patch
                 PutAwaySwipeButtons(true);
             else
             {
-                var startMenu = ((ICellSwipeMenus)ContentView)?.StartSwipeMenu;
-                var endMenu = ((ICellSwipeMenus)ContentView)?.EndSwipeMenu;
 
-                var segments = new List<Segment>();
-
-                if (endMenu != null)
+                if (ContentView is ICellSwipeMenus contentView)
                 {
-                    foreach (var item in endMenu)
-                    {
-                        var segment = new Segment();
-                        if (item.IconText != null)
-                            segment.IconText = item.IconText;
-                        if (item.IconImage?.Source != null)
-                            segment.IconImage = item.IconImage;
-                        if (item.Text != null)
-                            segment.Text = item.Text;
-                        if (item.HtmlText != null)
-                            segment.HtmlText = item.HtmlText;
-                        segment.CommandParameter = item;
-                        segments.Add(segment);
-                    }
-                }
-                if (startMenu != null)
-                {
-                    foreach (var item in startMenu)
-                    {
-                        var segment = new Segment();
-                        if (item.IconText != null)
-                            segment.IconText = item.IconText;
-                        if (item.IconImage?.Source != null)
-                            segment.IconImage = item.IconImage;
-                        if (item.Text != null)
-                            segment.Text = item.Text;
-                        if (item.HtmlText != null)
-                            segment.HtmlText = item.HtmlText;
-                        segment.CommandParameter = item;
-                        segments.Add(segment);
-                    }
-                }
-                if (segments.Count > 0)
-                {
+                    var segments = new List<Segment>();
 
-                    var menu = new Forms9Patch.TargetedMenu(this, e.Center)
+                    if (contentView.EndSwipeMenu is List<SwipeMenuItem> endMenu)
                     {
-                        Segments = segments
-                    };
-
-                    menu.SegmentTapped += (s, a) =>
-                    {
-                        if (a.Segment.CommandParameter is SwipeMenuItem menuItem)
+                        foreach (var item in endMenu)
                         {
-                            var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
-                            ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
-                            ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                            var segment = new Segment();
+                            if (item.IconText != null)
+                                segment.IconText = item.IconText;
+                            if (item.IconImage?.Source != null)
+                                segment.IconImage = item.IconImage;
+                            if (item.Text != null)
+                                segment.Text = item.Text;
+                            if (item.HtmlText != null)
+                                segment.HtmlText = item.HtmlText;
+                            segment.CommandParameter = item;
+                            segments.Add(segment);
                         }
-                        menu.Dispose();
-                    };
-                    menu.Cancelled += (s, a) => menu.Dispose();
+                    }
+                    if (contentView.StartSwipeMenu is List<SwipeMenuItem> startMenu)
+                    {
+                        foreach (var item in startMenu)
+                        {
+                            var segment = new Segment();
+                            if (item.IconText != null)
+                                segment.IconText = item.IconText;
+                            if (item.IconImage?.Source != null)
+                                segment.IconImage = item.IconImage;
+                            if (item.Text != null)
+                                segment.Text = item.Text;
+                            if (item.HtmlText != null)
+                                segment.HtmlText = item.HtmlText;
+                            segment.CommandParameter = item;
+                            segments.Add(segment);
+                        }
+                    }
+                    if (segments.Count > 0)
+                    {
 
-                    menu.IsVisible = true;
+                        var menu = new Forms9Patch.TargetedMenu(this, e.Center)
+                        {
+                            Segments = segments
+                        };
 
+                        menu.SegmentTapped += (s, a) =>
+                        {
+                            if (a.Segment.CommandParameter is SwipeMenuItem menuItem)
+                            {
+                                var args = new SwipeMenuItemTappedArgs((ICellSwipeMenus)ContentView, (ItemWrapper)BindingContext, menuItem);
+                                ((ICellSwipeMenus)ContentView)?.OnSwipeMenuItemButtonTapped(this.BindingContext, args);
+                                ((ItemWrapper)BindingContext)?.OnSwipeMenuItemTapped(this, args);
+                            }
+                            menu.Dispose();
+                        };
+                        menu.Cancelled += (s, a) => menu.Dispose();
+
+                        menu.IsVisible = true;
+
+                    }
                 }
 
             }
@@ -865,7 +866,11 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
 
             if (propertyName == ContentViewProperty.PropertyName && ContentView != null)
             {

@@ -938,7 +938,11 @@ namespace Forms9Patch
                 return;
             }
 
-            base.OnPropertyChanged(propertyName);
+            try
+            {
+                base.OnPropertyChanged(propertyName);
+            }
+            catch (Exception) { }
 
             if (propertyName == PageOverlayColorProperty.PropertyName)
                 base.BackgroundColor = PageOverlayColor;
