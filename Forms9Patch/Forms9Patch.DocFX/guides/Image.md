@@ -80,7 +80,7 @@ var image2 = new Forms9Patch.Image ()
 |------------|-------------|
 | ![iPhone screen shot](images/Image/ribbonIOS.png) | ![Android scren shot](images/Image/ribbonAndroid.png) |
 
-### XAML Example for `CapsInset`
+### XAML Example
 
 To use `Forms9Patch.Image` in your XAML, you will have to add the `Forms9Patch` namespace (from the `Forms9Patch` assembly) and then use `Forms9Patch.Image` where desired.  Also note that, if you want to use Embedded Resource images, you will need to add an XAML markup extension to the assembly that contains those images (see [Using `Forms9Patch.ImageSource`](ImageSource.md)).  For example:
 

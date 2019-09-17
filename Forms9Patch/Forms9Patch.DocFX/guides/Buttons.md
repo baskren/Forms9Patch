@@ -91,8 +91,8 @@ The layout and decoration properties shared by all three Forms9Patch buttons are
   - **`HorizontalTextAlignment`**
   - **`VerticalTextAlignment`**
   - **`LineBreakMode`**: See [Xamarin.Forms.LineBreakMode](https://docs.microsoft.com/en-us/dotnet/api/xamarin.forms.linebreakmode?view=xamarin-forms)
-  - **`AutoFit`**: Autofitting algorithm to be applied to button's label's text.  See [Label.Autofitting](Label.md#Autofit-How-it-works).
-  - **`Lines`**: The number of lines used for the label's text fitting.  Again, see [Label.Autofitting](Label.md#Autofit-How-it-works).- Background
+  - **`AutoFit`**: Autofitting algorithm to be applied to button's label's text.  See [Label.Autofitting](Label.md#autofit-how-it-works).
+  - **`Lines`**: The number of lines used for the label's text fitting.  Again, see [Label.Autofitting](Label.md#autofit-how-it-works).- Background
   - **`BackgroundColor`**
   - **`BackgroundImage`**: A `Forms9Patch.Image` that will be used as the button's background.
 - Icon:

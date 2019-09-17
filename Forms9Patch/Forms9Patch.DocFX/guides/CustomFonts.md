@@ -35,13 +35,13 @@ Below is an example of how to use Forms9Patch's custom font management.  The exa
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.SetEmbeddedResource.png)
 
-6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#Embedded-Resource-Id-Naming-Convention) for details.
+6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#embedded-resource-id-naming-convention) for details.
 
 Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the `FontFamily` property.
 
-## Embedded Resource custom font with Forms9Patch.Label
+## Embedded Resource custom font with Forms9Patch Label
 
-This section assumes you've added your custom font to your Shared Code project, as described in [Adding your custom font as an Embedded Resource](#Adding-your-custom-font-as-an-embedded-Resource), above.
+This section assumes you've added your custom font to your Shared Code project, as described in [Adding your custom font as an Embedded Resource](#adding-your-custom-font-as-an-embedded-resource), above.
 
 1. Open your shared source (.NetStandard) application source file (**MyDemoApp.cs** in this example)
 
@@ -83,9 +83,9 @@ This section assumes you've added your custom font to your Shared Code project, 
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.UnicodeHTML.png)
 
-## Embedded Resource custom fonts with Xamarin.Forms text elements and EmbeddedResourceFontEffect
+## Embedded Resource custom fonts with Xamarin Forms text elements and EmbeddedResourceFontEffect
 
-This section assumes you've added your custom font to your Shared Code project, as described in [Adding your custom font as an Embedded Resource](#Adding-your-custom-font-as-an-embedded-Resource), above.
+This section assumes you've added your custom font to your Shared Code project, as described in [Adding your custom font as an Embedded Resource](#adding-your-custom-font-as-an-embedded-resource), above.
 
 1. Open your shared source (.NetStandard) application source file (**MyDemoApp.cs** in this example)
 

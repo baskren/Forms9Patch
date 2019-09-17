@@ -39,7 +39,7 @@ new Forms9Patch.ContentView
 
 ### XAML Example
 
-[As discussed earlier](ImageSource.md#XAML-Example), using Embedded Resource images in XAML requires the use of a [XAML markup extension](ImageSource.md#XAML-Example) in your view's namespace. Assuming such an extension has been setup, the following demonstrates how to use Forms9Patch.ContentView in XAML.
+[As discussed earlier](ImageSource.md#xaml-example), using Embedded Resource images in XAML requires the use of a [XAML markup extension](ImageSource.md#xaml-example) in your view's namespace. Assuming such an extension has been setup, the following demonstrates how to use Forms9Patch.ContentView in XAML.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

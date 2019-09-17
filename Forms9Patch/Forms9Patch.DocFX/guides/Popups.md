@@ -111,8 +111,8 @@ Sometimes you simply need to put a message up on the screen.  Given some HTML fo
 
 ### Forms9Patch.Toast Unique Properties
 
-- `Title`: The title for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
-- `Text`: The text for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
+- `Title`: The title for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
+- `Text`: The text for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
 - `ElementShape`: `ElementShape.Rectangle`, `ElementShape.Square`, `ElementShape.Circle`, `ElementShape.Ellipse`, and `ElementShape.Obround`.  Controls the shape of both the border and the background clipping region.
 
 ### Forms9Patch.Toast Unique Methods
@@ -125,8 +125,8 @@ Just as `Toast` is a convenience version of `ModalPopup`, `TargetedToast` is a c
 
 ### Forms9Patch.TargetedToast Unique Properties
 
-- `Title`: The title for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
-- `Text`: The text for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
+- `Title`: The title for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
+- `Text`: The text for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
 - `Target`: The `Xamarin.Forms.VisualElement` to which the bubble popup will point.
 - `OkButtonColor`: Background color for **[OK]** button.
 - `OkTextColor`: Text color for **[OK]** button.
@@ -142,8 +142,8 @@ Sometimes you simply need to ask a yes/no question.  Given some HTML formatted t
 
 ### Forms9Patch.PermissionPopup Unique Properties
 
-- `Title`: The title for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
-- `Text`: The text for the Toast.  See [HTML Markup](Label.md#How-does-Forms9Patch-HTML-Markup-work) for supported markup.
+- `Title`: The title for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
+- `Text`: The text for the Toast.  See [HTML Markup](Label.md#how-does-forms9patch-html-markup-work) for supported markup.
 - `OkButtonColor`: Background color for **[OK]** button.
 - `OkTextColor`: Text color for **[OK]** button.
 - `OKText`: Text for **[OK]** button.

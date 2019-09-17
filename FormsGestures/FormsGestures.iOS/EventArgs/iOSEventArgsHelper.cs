@@ -8,9 +8,12 @@ namespace FormsGestures.iOS
 {
 	public static class iOSEventArgsHelper
 	{
+        /* 
+        //Some how, someone reported that System.Drawing.RectangeF was not found during build/link.  Huh?
 		public static Xamarin.Forms.Rectangle GetViewPosition(RectangleF frame) {
 			return new Xamarin.Forms.Rectangle((double)frame.X, (double)frame.Y, (double)frame.Width, (double)frame.Height);
 		}
+        */
 
 		public static Xamarin.Forms.Rectangle GetViewPosition(CGRect frame) {
 			return new Xamarin.Forms.Rectangle(frame.X, frame.Y, frame.Width, frame.Height);

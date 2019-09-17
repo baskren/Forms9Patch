@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>Forms9Patch</id>
-        <version>1.8.0.4</version>
+        <version>1.8.1.0</version>
         <title>Forms9Patch</title>
         <authors>Ben Askren</authors>
         <owners>baskren</owners>
@@ -25,6 +25,8 @@ Android developers can use NinePatch bitmaps, the drawable directory naming conv
   </description>
   <summary>Simplify multi-device image, label and font management in your NetStandard, PCL, and Shared Library Xamarin.Forms mobile and UWP apps</summary>
 	<releaseNotes>
+    1.8.1.0: Build with Xamarin.Forms v4.2; New: Added PermissionPopup.AffirmedAsync() and IPopup.Parameter; Fixed: Binding for Segment.Command doesn't work; Fixed: Label is blank in weird Android ListView edge case; Added optional recursion detection and breadcrumbs; Reduced memory footprint of EmbeddedResourceExtensions;  Potentially Fixed: Issue#20 (not able to replicate issue but removed offending code);
+    1.8.0.5: Fixed: Android version of Label crashes on pre-M versions of Android;
     1.8.0.4: Android Fixes: Children of Forms9Patch layout elements are assigned Parent property twice; 1.8.0.3 solution to Android cell swipe issue doesn't work on hardware; Forms9Patch.ListView group header labels are not updating with correct text when BindingContext is changed; Inserted cells in Forms9Patch.ListView is not rendering content at first rendering; App crashes when compiled with Link SDK;
     1.8.0.3: Android Fixes: BubblePopup Content not positioned correctly after screen orientation change; Labels not rendered correctly upon re-rerendering (extreme edge case); ListViewRenderer and ScrollViewRenderer are intercepting FormsGestures touches causing all but tap gesture to fail; BubblePopup not positioned correctly after orientation change.  Change: Button.Lines default changed to 0. 
     1.8.0.2: Fixed: Label causes crash on older versions of iOS when default FontSize is used;
@@ -143,25 +145,25 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
         <dependencies>
             <group>
-                <dependency id="Xamarin.Forms" version="4.0.0.497661" />
+                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.0" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="UAP10.0">
-                <dependency id="Xamarin.Forms" version="4.0.0.497661" />
+                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
                 <dependency id="SharpDX.Direct2D1" version="4.2.0" />
                 <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.8" />
-                <dependency id="NETStandard.Library" version="2.0.1" />
+                <dependency id="NETStandard.Library" version="2.0.3" />
                 <dependency id="Win2D.uwp" version="1.20.0" />
             </group>
             <group targetFramework="MonoAndroid8.1">
-                <dependency id="Xamarin.Forms" version="4.0.0.497661" />
+                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
                 <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.0" />

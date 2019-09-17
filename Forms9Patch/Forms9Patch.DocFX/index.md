@@ -42,7 +42,7 @@ Forms9Patch's three button elements (`Forms9Patch.Button`, `Forms9Patch.StateBut
   - A button's icon or text can be arranged horizontally (default) or vertically (`Orientation` property set to `StackOrientation.Vertical`).
 - A label:
   - Specified either as plain text (`Text` property) or markup text (`HtmlText` property).
-  - Autofitting algorithms (see [Autofitting](guides/Label.md#Automatically-Resizing-Text-(Auto-fitting)) )
+  - Autofitting algorithms (see [Autofitting](guides/Label.md#autofitting---automatically-resizing-text) )
 - `LongPressing` and `LongPressed` touch events.
 
 The three Forms9Patch button elements are:

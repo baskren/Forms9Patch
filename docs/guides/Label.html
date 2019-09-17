@@ -8,7 +8,7 @@
     <title>Forms9Patch Label Element | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Label Element | Forms9Patch ">
-    <meta name="generator" content="docfx 2.43.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -87,14 +87,14 @@
 <p>Just to clarify, Forms9Patch text elements (<code>Label</code> and buttons) supports EmbeddedResource custom fonts without modification.  Xamarin.Forms text elements (<code>Label</code> and <code>Button</code>) can also use EmbeddedResource custom fonts by adding the <code>Forms9Patch.EmbeddedResourceFontEffect</code> effect.</p>
 <h4 id="detailed-examples">Detailed Examples</h4>
 <ul>
-<li><a href="CustomFonts.html#Adding-your-custom-font-as-an-Embedded-Resource">Adding your custom font as an Embedded Resource</a></li>
-<li><a href="CustomFonts.html#Embedded-Resource-custom-font-with-Forms9Patch.Label">Embedded Resource custom font with Forms9Patch.Label</a></li>
-<li><a href="CustomFonts.html#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-and-EmbeddedResourceFontEffect">Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect</a></li>
+<li><a href="CustomFonts.html#adding-your-custom-font-as-an-embedded-resource">Adding your custom font as an Embedded Resource</a></li>
+<li><a href="CustomFonts.html#embedded-resource-custom-font-with-forms9patch-label">Embedded Resource custom font with Forms9Patch.Label</a></li>
+<li><a href="CustomFonts.html#embedded-resource-custom-fonts-with-xamarin-forms-text-elements-and-embeddedresourcefonteffect">Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect</a></li>
 </ul>
 <h3 id="intra-label-text-formatting">Intra-Label Text Formatting</h3>
 <p>Text formating shouldn't be painful.  That's why HTML and MarkDown were invented.  Although Xamarin uses a fairly conventional approach (intermediate <code>Span</code> elements), it certainly isn't an easy approach.  Both iOS and Android have some HTML markup capability, natively.  However, the philosophy behind Forms9Patch is to avoid native if there is a NetStandard, PCL, or Shared Library approach that is easier and just as fast.</p>
 <p>Forms9Patch avoids the use of intermediate elements. Instead, you to pass HTML directly to the <code>Label</code> or button elements by way of the <code>HtmlText</code> property.  Also, the <code>HtmlText</code> property supports a larger range of formatting than Xamarin provides via the Span element. Additionally, <code>HtmlText</code> integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.</p>
-<h3 id="automatically-resizing-text-auto-fitting">Automatically Resizing Text (Auto-fitting)</h3>
+<h3 id="autofitting---automatically-resizing-text">Autofitting - Automatically Resizing Text</h3>
 <p>Something very important to me is the ability to resize a label's <code>FontSize</code> so the label can fit its container without truncation - or having more control over the layout before truncation happens.  At the time of this writing, Xamarin's recommendation for this is &quot;build a custom renderer&quot;.  Which is what I did.</p>
 <p>Before starting, I reviewed what I already knew: Apple and Android has some provisions for auto-fitting.  But neither addressed all the use cases I've faced.  So, Forms9Patch's Label's auto-fitting had to do more.  Oversimplifying things:</p>
 <ul>
@@ -257,7 +257,7 @@
 <li><p>Set the <strong>Build Action</strong> to <strong>EmbeddedResource</strong> for this custom font.</p>
 <p><img src="images/Label/MyDemoApp.SetEmbeddedResource.png" alt="MyDemoApp-NewFolder"></p>
 </li>
-<li><p>Make note of the Resource ID of this custom font.  See <a href="ImageSource.html#Embedded-Resource-Id-Naming-Convention">Embedded Resource Id Naming Convention</a> for details.</p>
+<li><p>Make note of the Resource ID of this custom font.  See <a href="ImageSource.html#embedded-resource-id-naming-convention">Embedded Resource Id Naming Convention</a> for details.</p>
 <p>Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the <code>FontFamily</code> property.</p>
 </li>
 <li><p>Add a &quot;Forms ContentPage Xaml&quot; file to your .NetStandard project:</p>
@@ -329,6 +329,9 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch.DocFX/guides/Label.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

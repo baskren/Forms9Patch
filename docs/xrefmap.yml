@@ -7498,6 +7498,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.IPopup.PageOverlayColor
   nameWithType: IPopup.PageOverlayColor
+- uid: Forms9Patch.IPopup.Parameter
+  name: Parameter
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Parameter
+  commentId: P:Forms9Patch.IPopup.Parameter
+  fullName: Forms9Patch.IPopup.Parameter
+  nameWithType: IPopup.Parameter
+- uid: Forms9Patch.IPopup.Parameter*
+  name: Parameter
+  href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_Parameter_
+  commentId: Overload:Forms9Patch.IPopup.Parameter
+  isSpec: "True"
+  fullName: Forms9Patch.IPopup.Parameter
+  nameWithType: IPopup.Parameter
 - uid: Forms9Patch.IPopup.PopAfter
   name: PopAfter
   href: api/Forms9Patch.IPopup.html#Forms9Patch_IPopup_PopAfter
@@ -10172,6 +10185,19 @@ references:
   isSpec: "True"
   fullName: Forms9Patch.PermissionPopup.PermissionPopup
   nameWithType: PermissionPopup.PermissionPopup
+- uid: Forms9Patch.PermissionPopup.AffirmedAsync
+  name: AffirmedAsync()
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_AffirmedAsync
+  commentId: M:Forms9Patch.PermissionPopup.AffirmedAsync
+  fullName: Forms9Patch.PermissionPopup.AffirmedAsync()
+  nameWithType: PermissionPopup.AffirmedAsync()
+- uid: Forms9Patch.PermissionPopup.AffirmedAsync*
+  name: AffirmedAsync
+  href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_AffirmedAsync_
+  commentId: Overload:Forms9Patch.PermissionPopup.AffirmedAsync
+  isSpec: "True"
+  fullName: Forms9Patch.PermissionPopup.AffirmedAsync
+  nameWithType: PermissionPopup.AffirmedAsync
 - uid: Forms9Patch.PermissionPopup.CancelButtonColor
   name: CancelButtonColor
   href: api/Forms9Patch.PermissionPopup.html#Forms9Patch_PermissionPopup_CancelButtonColor
@@ -11766,6 +11792,19 @@ references:
   commentId: F:Forms9Patch.SegmentedControl.MinFontSizeProperty
   fullName: Forms9Patch.SegmentedControl.MinFontSizeProperty
   nameWithType: SegmentedControl.MinFontSizeProperty
+- uid: Forms9Patch.SegmentedControl.OnBindingContextChanged
+  name: OnBindingContextChanged()
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_OnBindingContextChanged
+  commentId: M:Forms9Patch.SegmentedControl.OnBindingContextChanged
+  fullName: Forms9Patch.SegmentedControl.OnBindingContextChanged()
+  nameWithType: SegmentedControl.OnBindingContextChanged()
+- uid: Forms9Patch.SegmentedControl.OnBindingContextChanged*
+  name: OnBindingContextChanged
+  href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_OnBindingContextChanged_
+  commentId: Overload:Forms9Patch.SegmentedControl.OnBindingContextChanged
+  isSpec: "True"
+  fullName: Forms9Patch.SegmentedControl.OnBindingContextChanged
+  nameWithType: SegmentedControl.OnBindingContextChanged
 - uid: Forms9Patch.SegmentedControl.OnMeasure(System.Double,System.Double)
   name: OnMeasure(Double, Double)
   href: api/Forms9Patch.SegmentedControl.html#Forms9Patch_SegmentedControl_OnMeasure_System_Double_System_Double_
@@ -17153,6 +17192,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.ApplicationStorageExtensions.LoadText
   nameWithType: ApplicationStorageExtensions.LoadText
+- uid: P42.Utils.ApplicationStorageExtensions.LocalPath(System.String,System.String)
+  name: LocalPath(String, String)
+  href: api/P42.Utils.ApplicationStorageExtensions.html#P42_Utils_ApplicationStorageExtensions_LocalPath_System_String_System_String_
+  commentId: M:P42.Utils.ApplicationStorageExtensions.LocalPath(System.String,System.String)
+  fullName: P42.Utils.ApplicationStorageExtensions.LocalPath(System.String, System.String)
+  nameWithType: ApplicationStorageExtensions.LocalPath(String, String)
+- uid: P42.Utils.ApplicationStorageExtensions.LocalPath*
+  name: LocalPath
+  href: api/P42.Utils.ApplicationStorageExtensions.html#P42_Utils_ApplicationStorageExtensions_LocalPath_
+  commentId: Overload:P42.Utils.ApplicationStorageExtensions.LocalPath
+  isSpec: "True"
+  fullName: P42.Utils.ApplicationStorageExtensions.LocalPath
+  nameWithType: ApplicationStorageExtensions.LocalPath
 - uid: P42.Utils.ApplicationStorageExtensions.LocalResourceAvailable(System.String,System.String)
   name: LocalResourceAvailable(String, String)
   href: api/P42.Utils.ApplicationStorageExtensions.html#P42_Utils_ApplicationStorageExtensions_LocalResourceAvailable_System_String_System_String_
@@ -17355,6 +17407,88 @@ references:
   fullName.vb: P42.Utils.AsyncAwaitForSet(Of T).Set
   nameWithType: AsyncAwaitForSet<T>.Set
   nameWithType.vb: AsyncAwaitForSet(Of T).Set
+- uid: P42.Utils.BreadCrumbs
+  name: BreadCrumbs
+  href: api/P42.Utils.BreadCrumbs.html
+  commentId: T:P42.Utils.BreadCrumbs
+  fullName: P42.Utils.BreadCrumbs
+  nameWithType: BreadCrumbs
+- uid: P42.Utils.BreadCrumbs.Add(System.String,System.String,System.String,System.Int32,System.String)
+  name: Add(String, String, String, Int32, String)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Add_System_String_System_String_System_String_System_Int32_System_String_
+  commentId: M:P42.Utils.BreadCrumbs.Add(System.String,System.String,System.String,System.Int32,System.String)
+  fullName: P42.Utils.BreadCrumbs.Add(System.String, System.String, System.String, System.Int32, System.String)
+  nameWithType: BreadCrumbs.Add(String, String, String, Int32, String)
+- uid: P42.Utils.BreadCrumbs.Add(System.Type,System.Object,System.String,System.Int32,System.String)
+  name: Add(Type, Object, String, Int32, String)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Add_System_Type_System_Object_System_String_System_Int32_System_String_
+  commentId: M:P42.Utils.BreadCrumbs.Add(System.Type,System.Object,System.String,System.Int32,System.String)
+  fullName: P42.Utils.BreadCrumbs.Add(System.Type, System.Object, System.String, System.Int32, System.String)
+  nameWithType: BreadCrumbs.Add(Type, Object, String, Int32, String)
+- uid: P42.Utils.BreadCrumbs.Add*
+  name: Add
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Add_
+  commentId: Overload:P42.Utils.BreadCrumbs.Add
+  isSpec: "True"
+  fullName: P42.Utils.BreadCrumbs.Add
+  nameWithType: BreadCrumbs.Add
+- uid: P42.Utils.BreadCrumbs.Clear
+  name: Clear()
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Clear
+  commentId: M:P42.Utils.BreadCrumbs.Clear
+  fullName: P42.Utils.BreadCrumbs.Clear()
+  nameWithType: BreadCrumbs.Clear()
+- uid: P42.Utils.BreadCrumbs.Clear(System.DateTime)
+  name: Clear(DateTime)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Clear_System_DateTime_
+  commentId: M:P42.Utils.BreadCrumbs.Clear(System.DateTime)
+  fullName: P42.Utils.BreadCrumbs.Clear(System.DateTime)
+  nameWithType: BreadCrumbs.Clear(DateTime)
+- uid: P42.Utils.BreadCrumbs.Clear(System.TimeSpan)
+  name: Clear(TimeSpan)
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Clear_System_TimeSpan_
+  commentId: M:P42.Utils.BreadCrumbs.Clear(System.TimeSpan)
+  fullName: P42.Utils.BreadCrumbs.Clear(System.TimeSpan)
+  nameWithType: BreadCrumbs.Clear(TimeSpan)
+- uid: P42.Utils.BreadCrumbs.Clear*
+  name: Clear
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_Clear_
+  commentId: Overload:P42.Utils.BreadCrumbs.Clear
+  isSpec: "True"
+  fullName: P42.Utils.BreadCrumbs.Clear
+  nameWithType: BreadCrumbs.Clear
+- uid: P42.Utils.BreadCrumbs.DelegateAction
+  name: DelegateAction
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_DelegateAction
+  commentId: F:P42.Utils.BreadCrumbs.DelegateAction
+  fullName: P42.Utils.BreadCrumbs.DelegateAction
+  nameWithType: BreadCrumbs.DelegateAction
+- uid: P42.Utils.BreadCrumbs.IsEnabled
+  name: IsEnabled
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_IsEnabled
+  commentId: P:P42.Utils.BreadCrumbs.IsEnabled
+  fullName: P42.Utils.BreadCrumbs.IsEnabled
+  nameWithType: BreadCrumbs.IsEnabled
+- uid: P42.Utils.BreadCrumbs.IsEnabled*
+  name: IsEnabled
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_IsEnabled_
+  commentId: Overload:P42.Utils.BreadCrumbs.IsEnabled
+  isSpec: "True"
+  fullName: P42.Utils.BreadCrumbs.IsEnabled
+  nameWithType: BreadCrumbs.IsEnabled
+- uid: P42.Utils.BreadCrumbs.List
+  name: List()
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_List
+  commentId: M:P42.Utils.BreadCrumbs.List
+  fullName: P42.Utils.BreadCrumbs.List()
+  nameWithType: BreadCrumbs.List()
+- uid: P42.Utils.BreadCrumbs.List*
+  name: List
+  href: api/P42.Utils.BreadCrumbs.html#P42_Utils_BreadCrumbs_List_
+  commentId: Overload:P42.Utils.BreadCrumbs.List
+  isSpec: "True"
+  fullName: P42.Utils.BreadCrumbs.List
+  nameWithType: BreadCrumbs.List
 - uid: P42.Utils.CopyingExtensions
   name: CopyingExtensions
   href: api/P42.Utils.CopyingExtensions.html
@@ -17516,12 +17650,24 @@ references:
   commentId: T:P42.Utils.DownloadCache
   fullName: P42.Utils.DownloadCache
   nameWithType: DownloadCache
+- uid: P42.Utils.DownloadCache.Clear(System.DateTime,System.String,System.String)
+  name: Clear(DateTime, String, String)
+  href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_Clear_System_DateTime_System_String_System_String_
+  commentId: M:P42.Utils.DownloadCache.Clear(System.DateTime,System.String,System.String)
+  fullName: P42.Utils.DownloadCache.Clear(System.DateTime, System.String, System.String)
+  nameWithType: DownloadCache.Clear(DateTime, String, String)
 - uid: P42.Utils.DownloadCache.Clear(System.String,System.String)
   name: Clear(String, String)
   href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_Clear_System_String_System_String_
   commentId: M:P42.Utils.DownloadCache.Clear(System.String,System.String)
   fullName: P42.Utils.DownloadCache.Clear(System.String, System.String)
   nameWithType: DownloadCache.Clear(String, String)
+- uid: P42.Utils.DownloadCache.Clear(System.TimeSpan,System.String,System.String)
+  name: Clear(TimeSpan, String, String)
+  href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_Clear_System_TimeSpan_System_String_System_String_
+  commentId: M:P42.Utils.DownloadCache.Clear(System.TimeSpan,System.String,System.String)
+  fullName: P42.Utils.DownloadCache.Clear(System.TimeSpan, System.String, System.String)
+  nameWithType: DownloadCache.Clear(TimeSpan, String, String)
 - uid: P42.Utils.DownloadCache.Clear*
   name: Clear
   href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_Clear_
@@ -17568,6 +17714,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.DownloadCache.IsCached
   nameWithType: DownloadCache.IsCached
+- uid: P42.Utils.DownloadCache.List(System.String)
+  name: List(String)
+  href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_List_System_String_
+  commentId: M:P42.Utils.DownloadCache.List(System.String)
+  fullName: P42.Utils.DownloadCache.List(System.String)
+  nameWithType: DownloadCache.List(String)
+- uid: P42.Utils.DownloadCache.List*
+  name: List
+  href: api/P42.Utils.DownloadCache.html#P42_Utils_DownloadCache_List_
+  commentId: Overload:P42.Utils.DownloadCache.List
+  isSpec: "True"
+  fullName: P42.Utils.DownloadCache.List
+  nameWithType: DownloadCache.List
 - uid: P42.Utils.EmbeddedResourceCache
   name: EmbeddedResourceCache
   href: api/P42.Utils.EmbeddedResourceCache.html
@@ -17587,12 +17746,24 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.ApplicationUri
   nameWithType: EmbeddedResourceCache.ApplicationUri
+- uid: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.String)
+  name: Clear(DateTime, String, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_DateTime_System_String_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.DateTime,System.String,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.DateTime, System.String, System.String)
+  nameWithType: EmbeddedResourceCache.Clear(DateTime, String, String)
 - uid: P42.Utils.EmbeddedResourceCache.Clear(System.String,System.String)
   name: Clear(String, String)
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_String_System_String_
   commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.String,System.String)
   fullName: P42.Utils.EmbeddedResourceCache.Clear(System.String, System.String)
   nameWithType: EmbeddedResourceCache.Clear(String, String)
+- uid: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.String)
+  name: Clear(TimeSpan, String, String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_System_TimeSpan_System_String_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan,System.String,System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.Clear(System.TimeSpan, System.String, System.String)
+  nameWithType: EmbeddedResourceCache.Clear(TimeSpan, String, String)
 - uid: P42.Utils.EmbeddedResourceCache.Clear*
   name: Clear
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_Clear_
@@ -17639,6 +17810,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.EmbeddedResourceCache.GetStreamAsync
   nameWithType: EmbeddedResourceCache.GetStreamAsync
+- uid: P42.Utils.EmbeddedResourceCache.List(System.String)
+  name: List(String)
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_List_System_String_
+  commentId: M:P42.Utils.EmbeddedResourceCache.List(System.String)
+  fullName: P42.Utils.EmbeddedResourceCache.List(System.String)
+  nameWithType: EmbeddedResourceCache.List(String)
+- uid: P42.Utils.EmbeddedResourceCache.List*
+  name: List
+  href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_List_
+  commentId: Overload:P42.Utils.EmbeddedResourceCache.List
+  isSpec: "True"
+  fullName: P42.Utils.EmbeddedResourceCache.List
+  nameWithType: EmbeddedResourceCache.List
 - uid: P42.Utils.EmbeddedResourceCache.LocalStorageFullPathForEmbeddedResource(System.String,System.Reflection.Assembly,System.String)
   name: LocalStorageFullPathForEmbeddedResource(String, Assembly, String)
   href: api/P42.Utils.EmbeddedResourceCache.html#P42_Utils_EmbeddedResourceCache_LocalStorageFullPathForEmbeddedResource_System_String_System_Reflection_Assembly_System_String_
@@ -17900,6 +18084,44 @@ references:
   isSpec: "True"
   fullName: P42.Utils.FileCache.CacheAsync
   nameWithType: FileCache.CacheAsync
+- uid: P42.Utils.FileCache.Clear(System.DateTime,System.String,System.String)
+  name: Clear(DateTime, String, String)
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_Clear_System_DateTime_System_String_System_String_
+  commentId: M:P42.Utils.FileCache.Clear(System.DateTime,System.String,System.String)
+  fullName: P42.Utils.FileCache.Clear(System.DateTime, System.String, System.String)
+  nameWithType: FileCache.Clear(DateTime, String, String)
+- uid: P42.Utils.FileCache.Clear(System.String,System.String)
+  name: Clear(String, String)
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_Clear_System_String_System_String_
+  commentId: M:P42.Utils.FileCache.Clear(System.String,System.String)
+  fullName: P42.Utils.FileCache.Clear(System.String, System.String)
+  nameWithType: FileCache.Clear(String, String)
+- uid: P42.Utils.FileCache.Clear(System.TimeSpan,System.String,System.String)
+  name: Clear(TimeSpan, String, String)
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_Clear_System_TimeSpan_System_String_System_String_
+  commentId: M:P42.Utils.FileCache.Clear(System.TimeSpan,System.String,System.String)
+  fullName: P42.Utils.FileCache.Clear(System.TimeSpan, System.String, System.String)
+  nameWithType: FileCache.Clear(TimeSpan, String, String)
+- uid: P42.Utils.FileCache.Clear*
+  name: Clear
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_Clear_
+  commentId: Overload:P42.Utils.FileCache.Clear
+  isSpec: "True"
+  fullName: P42.Utils.FileCache.Clear
+  nameWithType: FileCache.Clear
+- uid: P42.Utils.FileCache.List(System.String)
+  name: List(String)
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_List_System_String_
+  commentId: M:P42.Utils.FileCache.List(System.String)
+  fullName: P42.Utils.FileCache.List(System.String)
+  nameWithType: FileCache.List(String)
+- uid: P42.Utils.FileCache.List*
+  name: List
+  href: api/P42.Utils.FileCache.html#P42_Utils_FileCache_List_
+  commentId: Overload:P42.Utils.FileCache.List
+  isSpec: "True"
+  fullName: P42.Utils.FileCache.List
+  nameWithType: FileCache.List
 - uid: P42.Utils.HttpClientExtensions
   name: HttpClientExtensions
   href: api/P42.Utils.HttpClientExtensions.html
@@ -19171,6 +19393,163 @@ references:
   fullName.vb: P42.Utils.KeyedStack(Of K, V).Push
   nameWithType: KeyedStack<K, V>.Push
   nameWithType.vb: KeyedStack(Of K, V).Push
+- uid: P42.Utils.Recursion
+  name: Recursion
+  href: api/P42.Utils.Recursion.html
+  commentId: T:P42.Utils.Recursion
+  fullName: P42.Utils.Recursion
+  nameWithType: Recursion
+- uid: P42.Utils.Recursion.Clear
+  name: Clear()
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Clear
+  commentId: M:P42.Utils.Recursion.Clear
+  fullName: P42.Utils.Recursion.Clear()
+  nameWithType: Recursion.Clear()
+- uid: P42.Utils.Recursion.Clear(System.DateTime)
+  name: Clear(DateTime)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Clear_System_DateTime_
+  commentId: M:P42.Utils.Recursion.Clear(System.DateTime)
+  fullName: P42.Utils.Recursion.Clear(System.DateTime)
+  nameWithType: Recursion.Clear(DateTime)
+- uid: P42.Utils.Recursion.Clear(System.TimeSpan)
+  name: Clear(TimeSpan)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Clear_System_TimeSpan_
+  commentId: M:P42.Utils.Recursion.Clear(System.TimeSpan)
+  fullName: P42.Utils.Recursion.Clear(System.TimeSpan)
+  nameWithType: Recursion.Clear(TimeSpan)
+- uid: P42.Utils.Recursion.Clear*
+  name: Clear
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Clear_
+  commentId: Overload:P42.Utils.Recursion.Clear
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.Clear
+  nameWithType: Recursion.Clear
+- uid: P42.Utils.Recursion.Enter(System.String,System.String,System.String,System.String)
+  name: Enter(String, String, String, String)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Enter_System_String_System_String_System_String_System_String_
+  commentId: M:P42.Utils.Recursion.Enter(System.String,System.String,System.String,System.String)
+  fullName: P42.Utils.Recursion.Enter(System.String, System.String, System.String, System.String)
+  nameWithType: Recursion.Enter(String, String, String, String)
+- uid: P42.Utils.Recursion.Enter(System.Type,System.Object,System.String,System.String)
+  name: Enter(Type, Object, String, String)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Enter_System_Type_System_Object_System_String_System_String_
+  commentId: M:P42.Utils.Recursion.Enter(System.Type,System.Object,System.String,System.String)
+  fullName: P42.Utils.Recursion.Enter(System.Type, System.Object, System.String, System.String)
+  nameWithType: Recursion.Enter(Type, Object, String, String)
+- uid: P42.Utils.Recursion.Enter*
+  name: Enter
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Enter_
+  commentId: Overload:P42.Utils.Recursion.Enter
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.Enter
+  nameWithType: Recursion.Enter
+- uid: P42.Utils.Recursion.Exit(System.String,System.String,System.String,System.String)
+  name: Exit(String, String, String, String)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Exit_System_String_System_String_System_String_System_String_
+  commentId: M:P42.Utils.Recursion.Exit(System.String,System.String,System.String,System.String)
+  fullName: P42.Utils.Recursion.Exit(System.String, System.String, System.String, System.String)
+  nameWithType: Recursion.Exit(String, String, String, String)
+- uid: P42.Utils.Recursion.Exit(System.Type,System.Object,System.String,System.String)
+  name: Exit(Type, Object, String, String)
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Exit_System_Type_System_Object_System_String_System_String_
+  commentId: M:P42.Utils.Recursion.Exit(System.Type,System.Object,System.String,System.String)
+  fullName: P42.Utils.Recursion.Exit(System.Type, System.Object, System.String, System.String)
+  nameWithType: Recursion.Exit(Type, Object, String, String)
+- uid: P42.Utils.Recursion.Exit*
+  name: Exit
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Exit_
+  commentId: Overload:P42.Utils.Recursion.Exit
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.Exit
+  nameWithType: Recursion.Exit
+- uid: P42.Utils.Recursion.IsEnabled
+  name: IsEnabled
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_IsEnabled
+  commentId: P:P42.Utils.Recursion.IsEnabled
+  fullName: P42.Utils.Recursion.IsEnabled
+  nameWithType: Recursion.IsEnabled
+- uid: P42.Utils.Recursion.IsEnabled*
+  name: IsEnabled
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_IsEnabled_
+  commentId: Overload:P42.Utils.Recursion.IsEnabled
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.IsEnabled
+  nameWithType: Recursion.IsEnabled
+- uid: P42.Utils.Recursion.IsMonitoringChanged
+  name: IsMonitoringChanged
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_IsMonitoringChanged
+  commentId: E:P42.Utils.Recursion.IsMonitoringChanged
+  fullName: P42.Utils.Recursion.IsMonitoringChanged
+  nameWithType: Recursion.IsMonitoringChanged
+- uid: P42.Utils.Recursion.List
+  name: List()
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_List
+  commentId: M:P42.Utils.Recursion.List
+  fullName: P42.Utils.Recursion.List()
+  nameWithType: Recursion.List()
+- uid: P42.Utils.Recursion.List*
+  name: List
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_List_
+  commentId: Overload:P42.Utils.Recursion.List
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.List
+  nameWithType: Recursion.List
+- uid: P42.Utils.Recursion.RecursionDetected
+  name: RecursionDetected
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_RecursionDetected
+  commentId: E:P42.Utils.Recursion.RecursionDetected
+  fullName: P42.Utils.Recursion.RecursionDetected
+  nameWithType: Recursion.RecursionDetected
+- uid: P42.Utils.Recursion.Test
+  name: Test()
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Test
+  commentId: M:P42.Utils.Recursion.Test
+  fullName: P42.Utils.Recursion.Test()
+  nameWithType: Recursion.Test()
+- uid: P42.Utils.Recursion.Test*
+  name: Test
+  href: api/P42.Utils.Recursion.html#P42_Utils_Recursion_Test_
+  commentId: Overload:P42.Utils.Recursion.Test
+  isSpec: "True"
+  fullName: P42.Utils.Recursion.Test
+  nameWithType: Recursion.Test
+- uid: P42.Utils.RecursionException
+  name: RecursionException
+  href: api/P42.Utils.RecursionException.html
+  commentId: T:P42.Utils.RecursionException
+  fullName: P42.Utils.RecursionException
+  nameWithType: RecursionException
+- uid: P42.Utils.RecursionException.#ctor
+  name: RecursionException()
+  href: api/P42.Utils.RecursionException.html#P42_Utils_RecursionException__ctor
+  commentId: M:P42.Utils.RecursionException.#ctor
+  fullName: P42.Utils.RecursionException.RecursionException()
+  nameWithType: RecursionException.RecursionException()
+- uid: P42.Utils.RecursionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: RecursionException(SerializationInfo, StreamingContext)
+  href: api/P42.Utils.RecursionException.html#P42_Utils_RecursionException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:P42.Utils.RecursionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: P42.Utils.RecursionException.RecursionException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: RecursionException.RecursionException(SerializationInfo, StreamingContext)
+- uid: P42.Utils.RecursionException.#ctor(System.String)
+  name: RecursionException(String)
+  href: api/P42.Utils.RecursionException.html#P42_Utils_RecursionException__ctor_System_String_
+  commentId: M:P42.Utils.RecursionException.#ctor(System.String)
+  fullName: P42.Utils.RecursionException.RecursionException(System.String)
+  nameWithType: RecursionException.RecursionException(String)
+- uid: P42.Utils.RecursionException.#ctor(System.String,System.Exception)
+  name: RecursionException(String, Exception)
+  href: api/P42.Utils.RecursionException.html#P42_Utils_RecursionException__ctor_System_String_System_Exception_
+  commentId: M:P42.Utils.RecursionException.#ctor(System.String,System.Exception)
+  fullName: P42.Utils.RecursionException.RecursionException(System.String, System.Exception)
+  nameWithType: RecursionException.RecursionException(String, Exception)
+- uid: P42.Utils.RecursionException.#ctor*
+  name: RecursionException
+  href: api/P42.Utils.RecursionException.html#P42_Utils_RecursionException__ctor_
+  commentId: Overload:P42.Utils.RecursionException.#ctor
+  isSpec: "True"
+  fullName: P42.Utils.RecursionException.RecursionException
+  nameWithType: RecursionException.RecursionException
 - uid: P42.Utils.ReflectionExtensions
   name: ReflectionExtensions
   href: api/P42.Utils.ReflectionExtensions.html
@@ -19617,12 +19996,24 @@ references:
   commentId: T:P42.Utils.TextCache
   fullName: P42.Utils.TextCache
   nameWithType: TextCache
+- uid: P42.Utils.TextCache.Clear(System.DateTime,System.String,System.String)
+  name: Clear(DateTime, String, String)
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_Clear_System_DateTime_System_String_System_String_
+  commentId: M:P42.Utils.TextCache.Clear(System.DateTime,System.String,System.String)
+  fullName: P42.Utils.TextCache.Clear(System.DateTime, System.String, System.String)
+  nameWithType: TextCache.Clear(DateTime, String, String)
 - uid: P42.Utils.TextCache.Clear(System.String,System.String)
   name: Clear(String, String)
   href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_Clear_System_String_System_String_
   commentId: M:P42.Utils.TextCache.Clear(System.String,System.String)
   fullName: P42.Utils.TextCache.Clear(System.String, System.String)
   nameWithType: TextCache.Clear(String, String)
+- uid: P42.Utils.TextCache.Clear(System.TimeSpan,System.String,System.String)
+  name: Clear(TimeSpan, String, String)
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_Clear_System_TimeSpan_System_String_System_String_
+  commentId: M:P42.Utils.TextCache.Clear(System.TimeSpan,System.String,System.String)
+  fullName: P42.Utils.TextCache.Clear(System.TimeSpan, System.String, System.String)
+  nameWithType: TextCache.Clear(TimeSpan, String, String)
 - uid: P42.Utils.TextCache.Clear*
   name: Clear
   href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_Clear_
@@ -19643,6 +20034,19 @@ references:
   isSpec: "True"
   fullName: P42.Utils.TextCache.IsCached
   nameWithType: TextCache.IsCached
+- uid: P42.Utils.TextCache.List(System.String)
+  name: List(String)
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_List_System_String_
+  commentId: M:P42.Utils.TextCache.List(System.String)
+  fullName: P42.Utils.TextCache.List(System.String)
+  nameWithType: TextCache.List(String)
+- uid: P42.Utils.TextCache.List*
+  name: List
+  href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_List_
+  commentId: Overload:P42.Utils.TextCache.List
+  isSpec: "True"
+  fullName: P42.Utils.TextCache.List
+  nameWithType: TextCache.List
 - uid: P42.Utils.TextCache.Recall(System.String,System.String)
   name: Recall(String, String)
   href: api/P42.Utils.TextCache.html#P42_Utils_TextCache_Recall_System_String_System_String_

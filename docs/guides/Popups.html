@@ -8,7 +8,7 @@
     <title>Forms9Patch Popups | Forms9Patch </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Forms9Patch Popups | Forms9Patch ">
-    <meta name="generator" content="docfx 2.43.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -186,8 +186,8 @@
 <p>Sometimes you simply need to put a message up on the screen.  Given some HTML formatted text and an HTML formatted title <code>Toast</code> will display them in a popup with an (optional but enabled by default) <strong>[OK]</strong> button.  <code>Toast</code> is inherited from the <code>ModalPopup</code> element so it does support background images.  Unlike <code>ModalPopup</code>, <code>Toast</code> has the <code>Create(string title, string text)</code> static method that will generate and present the toast.  You can still manually construct and present a <code>Toast</code> by using its constructor and setting its <code>IsVisible</code> property to true.</p>
 <h3 id="forms9patchtoast-unique-properties">Forms9Patch.Toast Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>ElementShape</code>: <code>ElementShape.Rectangle</code>, <code>ElementShape.Square</code>, <code>ElementShape.Circle</code>, <code>ElementShape.Ellipse</code>, and <code>ElementShape.Obround</code>.  Controls the shape of both the border and the background clipping region.</li>
 </ul>
 <h3 id="forms9patchtoast-unique-methods">Forms9Patch.Toast Unique Methods</h3>
@@ -198,8 +198,8 @@
 <p>Just as <code>Toast</code> is a convenience version of <code>ModalPopup</code>, <code>TargetedToast</code> is a convenience version of <code>BubblePopup</code>.  Given a <code>Target</code> as a <code>Xamarin.Forms.VisualElement</code>, a <code>Title</code>, some <code>Text</code> to display, and an allowed <code>PointerDirection</code>, <code>Forms9Patch.TargetedToast</code> will best fit a popup bubble pointing the the <code>Target</code>.  Like <code>BubblePopup</code> element, <code>BubblePopup</code> does not support background images.  If you do not specify the <code>Target</code>, it will present itself as a <code>Toast</code>.  As with <code>Toast</code>, you can use the <code>Create</code> static method to instantiate and present a <code>TargetedToast</code>.</p>
 <h3 id="forms9patchtargetedtoast-unique-properties">Forms9Patch.TargetedToast Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>Target</code>: The <code>Xamarin.Forms.VisualElement</code> to which the bubble popup will point.</li>
 <li><code>OkButtonColor</code>: Background color for <strong>[OK]</strong> button.</li>
 <li><code>OkTextColor</code>: Text color for <strong>[OK]</strong> button.</li>
@@ -213,8 +213,8 @@
 <p>Sometimes you simply need to ask a yes/no question.  Given some HTML formatted text and an HTML formatted title, <code>PermissionPopup</code> will display them in a popup with <strong>[OK]</strong> and <strong>[Cancel]</strong> buttons.  <code>PermissionPopup</code> is inherited from the <code>ModalPopup</code> element so it does support background images.  Unlike <code>ModalPopup</code>, <code>PermissionPopup</code> has the <code>Create(string title, string text)</code> static method that will generate and present the toast.  You can still manually construct and present a <code>PermissionPopup</code> by using its constructor and setting its <code>IsVisible</code> property to <code>true</code>.  Unlike <code>Toast</code>, the <strong>[OK]</strong> and <strong>[Cancel]</strong> buttons cannot be removed from the layout by setting their text to null.</p>
 <h3 id="forms9patchpermissionpopup-unique-properties">Forms9Patch.PermissionPopup Unique Properties</h3>
 <ul>
-<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
-<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#How-does-Forms9Patch-HTML-Markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Title</code>: The title for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
+<li><code>Text</code>: The text for the Toast.  See <a href="Label.html#how-does-forms9patch-html-markup-work">HTML Markup</a> for supported markup.</li>
 <li><code>OkButtonColor</code>: Background color for <strong>[OK]</strong> button.</li>
 <li><code>OkTextColor</code>: Text color for <strong>[OK]</strong> button.</li>
 <li><code>OKText</code>: Text for <strong>[OK]</strong> button.</li>
@@ -271,6 +271,9 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/baskren/Forms9Patch/blob/dev/Forms9Patch/Forms9Patch.DocFX/guides/Popups.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

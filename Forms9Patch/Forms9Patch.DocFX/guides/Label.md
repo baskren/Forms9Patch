@@ -14,9 +14,9 @@ Just to clarify, Forms9Patch text elements (`Label` and buttons) supports Embedd
 
 #### Detailed Examples
 
-- [Adding your custom font as an Embedded Resource](CustomFonts.md#Adding-your-custom-font-as-an-Embedded-Resource)
-- [Embedded Resource custom font with Forms9Patch.Label](CustomFonts.md#Embedded-Resource-custom-font-with-Forms9Patch.Label)
-- [Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect](CustomFonts.md#Embedded-Resource-custom-fonts-with-Xamarin.Forms-text-elements-and-EmbeddedResourceFontEffect)
+- [Adding your custom font as an Embedded Resource](CustomFonts.md#adding-your-custom-font-as-an-embedded-resource)
+- [Embedded Resource custom font with Forms9Patch.Label](CustomFonts.md#embedded-resource-custom-font-with-forms9patch-label)
+- [Embedded Resource custom fonts with Xamarin.Forms text elements + EmbeddedResourceFontEffect](CustomFonts.md#embedded-resource-custom-fonts-with-xamarin-forms-text-elements-and-embeddedresourcefonteffect)
 
 ### Intra-Label Text Formatting
 
@@ -24,7 +24,7 @@ Text formating shouldn't be painful.  That's why HTML and MarkDown were invented
 
 Forms9Patch avoids the use of intermediate elements. Instead, you to pass HTML directly to the `Label` or button elements by way of the `HtmlText` property.  Also, the `HtmlText` property supports a larger range of formatting than Xamarin provides via the Span element. Additionally, `HtmlText` integrates Forms9Patch's Embedded Resource Custom Font support into its HTML markup to give you the power to easily apply custom fonts on a granular level.
 
-### Automatically Resizing Text (Auto-fitting)
+### Autofitting - Automatically Resizing Text
 
 Something very important to me is the ability to resize a label's `FontSize` so the label can fit its container without truncation - or having more control over the layout before truncation happens.  At the time of this writing, Xamarin's recommendation for this is "build a custom renderer".  Which is what I did.
 
@@ -137,7 +137,7 @@ Only the style attribute is supported at this time.
 
     ![MyDemoApp-NewFolder](images/Label/MyDemoApp.SetEmbeddedResource.png)
 
-6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#Embedded-Resource-Id-Naming-Convention) for details.
+6. Make note of the Resource ID of this custom font.  See [Embedded Resource Id Naming Convention](ImageSource.md#embedded-resource-id-naming-convention) for details.
 
     Your Embedded Resource custom font is now ready for use by Forms9Patch label and button elements and for any Xamarin.Forms.VisualElement that supports the `FontFamily` property.
 
