@@ -272,6 +272,7 @@ namespace Forms9Patch
                 _thisListener.Panned -= OnPanned;
                 _thisListener.Panning -= OnPanning;
                 _thisListener.RightClicked -= OnRightClicked;
+                _thisListener.Dispose();
 
                 _swipeButton1.Tapped -= OnSwipeButtonTapped;
                 _swipeButton2.Tapped -= OnSwipeButtonTapped;

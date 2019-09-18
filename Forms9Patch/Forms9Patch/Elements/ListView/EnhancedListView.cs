@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using FormsGestures;
 using P42.NumericalMethods;
+using System.Linq;
 
 namespace Forms9Patch
 {
     /// <summary>
     /// Enable EmbeddedResource fonts to be used with Xamarin elements
     /// </summary>
-    internal class EnhancedListView : Xamarin.Forms.ListView, IScrollView
+    internal class EnhancedListView : Xamarin.Forms.ListView, IScrollView, IDisposable
     {
         #region Properties
 
@@ -83,7 +84,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Constructors
+        #region Constructors / Disposer
         /// <summary>
         /// Constructor for Forms9Patch.EnhancedListView
         /// </summary>
@@ -94,6 +95,35 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="cachingStrategy"></param>
         public EnhancedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy) { }
+
+        private bool _disposed;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    var items = TemplatedItems.ToArray();
+
+                    foreach (var item in items)
+                        if (item is IDisposable disposable)
+                        {
+                            item.BindingContext = null;
+                            disposable.Dispose();
+                        }
+                }
+                _disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
         #endregion
 
 
@@ -164,6 +194,9 @@ namespace Forms9Patch
             Scrolled?.Invoke(this, args);
             //System.Diagnostics.Debug.WriteLine("EnhancedListView.OnScrolled: offset=[" + ScrollOffset + "]");
         }
+
+
+
         #endregion
     }
 

@@ -12,7 +12,7 @@ namespace Forms9Patch
     /// <summary>
     /// FormsDragNDropListView List view.
     /// </summary>
-    public class ListView : Forms9Patch.Frame, IElement //  Forms9Patch.ManualLayout, IElement
+    public class ListView : Forms9Patch.Frame, IElement, IDisposable //  Forms9Patch.ManualLayout, IElement
     {
         #region Properties
 
@@ -545,7 +545,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Constructor
+        #region Constructor / Disposer
         static ListView()
         {
             Settings.ConfirmInitialization();
@@ -602,6 +602,28 @@ namespace Forms9Patch
             _listView = new EnhancedListView(cachingStrategy);
             Init();
         }
+
+
+        private bool _disposed;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _listView.Dispose();
+                }
+                _disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
 
         #endregion
 
@@ -1423,6 +1445,7 @@ namespace Forms9Patch
             var result = BaseItemsSource?.TwoDeepDataSetForOffset(offset);
             return result;
         }
+
 
         #endregion
 

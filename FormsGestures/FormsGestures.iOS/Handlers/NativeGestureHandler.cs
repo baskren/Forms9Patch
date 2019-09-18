@@ -274,10 +274,10 @@ namespace FormsGestures.iOS
                     }),
                     ShouldReceiveTouch = ((UIGestureRecognizer gr, UITouch touch) =>
                     {
-                    // these are handled BEFORE the touch call is passed to the listener.
-                    return !(touch.View is UIControl);
-                    //return touch.View == gr.View;
-                })
+                        // these are handled BEFORE the touch call is passed to the listener.
+                        return !(touch.View is UIControl);
+                        //return touch.View == gr.View;
+                    })
                 };
                 if (uILongPressGestureRecognizer != null)
                     uITapGestureRecognizer.RequireGestureRecognizerToFail(uILongPressGestureRecognizer);
