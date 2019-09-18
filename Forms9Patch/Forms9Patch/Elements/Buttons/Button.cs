@@ -1112,6 +1112,12 @@ namespace Forms9Patch
                 _gestureListener = null;
                 _label.PropertyChanged -= OnLabelPropertyChanged;
 
+                if (BackgroundImage is IDisposable backgroundImage)
+                    backgroundImage.Dispose();
+
+                if (IconImage is IDisposable iconImage)
+                    iconImage.Dispose();
+
                 if (Command != null)
                     Command.CanExecuteChanged -= CommandCanExecuteChanged;
 

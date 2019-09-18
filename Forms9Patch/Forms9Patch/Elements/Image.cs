@@ -18,7 +18,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch.Image element
     /// </summary>
-    public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape
+    public class Image : SkiaSharp.Views.Forms.SKCanvasView, IImage, IImageController, IExtendedShape, IBubbleShape, IDisposable
     {
         #region Static Implementation
 
@@ -645,6 +645,26 @@ namespace Forms9Patch
                 Source = image.Source;
             }
         }
+
+        private bool _disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                _f9pImageData?.Dispose();
+                _f9pImageData = null;
+                _sourceRangeLists = null;
+                Source = null;
+                _disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion
 
 
