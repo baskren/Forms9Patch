@@ -8,7 +8,7 @@ namespace Forms9Patch
     /// <summary>
     /// Forms9Patch ContentView.  
     /// </summary>
-    public class ContentView : Xamarin.Forms.ContentView, ILayout
+    public class ContentView : Xamarin.Forms.ContentView, ILayout, IDisposable
     {
         #region Properties
 
@@ -310,7 +310,7 @@ namespace Forms9Patch
         #endregion
 
 
-        #region Constructors
+        #region Constructors / Disposer
         static ContentView()
         {
             Settings.ConfirmInitialization();
@@ -323,6 +323,26 @@ namespace Forms9Patch
         {
             _f9pId = _instances++;
         }
+
+        private bool _disposed;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed && disposing)
+            {
+                if (BackgroundImage is IDisposable backgroundImage)
+                    backgroundImage.Dispose();
+                if (Content is IDisposable content)
+                    content.Dispose();
+                _disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion
 
 

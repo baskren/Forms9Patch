@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -209,42 +210,50 @@ namespace Forms9Patch
         protected Element()
         {
             //base.Content = _xfLayout;
+            _xfLayout.ChildAdded += (s, e) => _childAdded?.Invoke(s, e);
+            _xfLayout.ChildRemoved += (s, e) => _childRemoved?.Invoke(s, e);
+            _xfLayout.DescendantAdded += (s, e) => _descendantAdded?.Invoke(s, e);
+            _xfLayout.DescendantRemoved += (s, e) => _descendantRemoved?.Invoke(s, e);
         }
 
+        event EventHandler<ElementEventArgs> _childAdded;
         /// <summary>
         /// Triggered when child is added
         /// </summary>
         public new event EventHandler<ElementEventArgs> ChildAdded
         {
-            add => _xfLayout.ChildAdded += value;
-            remove => _xfLayout.ChildAdded -= value;
+            add => _childAdded += value;
+            remove => _childAdded -= value;
         }
 
+        event EventHandler<ElementEventArgs> _childRemoved;
         /// <summary>
         /// Triggered when Child is removed
         /// </summary>
         public new event EventHandler<ElementEventArgs> ChildRemoved
         {
-            add => _xfLayout.ChildRemoved += value;
-            remove => _xfLayout.ChildRemoved -= value;
+            add => _childRemoved += value;
+            remove => _childRemoved -= value;
         }
 
+        event EventHandler<ElementEventArgs> _descendantAdded;
         /// <summary>
         /// Triggered when Descendent is added
         /// </summary>
         public new event EventHandler<ElementEventArgs> DescendantAdded
         {
-            add => _xfLayout.DescendantAdded += value;
-            remove => _xfLayout.DescendantAdded -= value;
+            add => _descendantAdded += value;
+            remove => _descendantAdded -= value;
         }
 
+        event EventHandler<ElementEventArgs> _descendantRemoved;
         /// <summary>
         /// Triggered when Descendant is Removed
         /// </summary>
         public new event EventHandler<ElementEventArgs> DescendantRemoved
         {
-            add => _xfLayout.DescendantRemoved += value;
-            remove => _xfLayout.DescendantRemoved -= value;
+            add => _descendantRemoved += value;
+            remove => _descendantRemoved -= value;
         }
 
         /// <summary>
@@ -252,6 +261,31 @@ namespace Forms9Patch
         /// </summary>
         /// <returns></returns>
         public new IEnumerable<Element> Descendants() => _xfLayout.Descendants();
+
+        bool _disposed;
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (!_disposed && disposing)
+            {
+                _disposed = true;
+                _childAdded = null;
+                _childRemoved = null;
+                _descendantAdded = null;
+                _descendantRemoved = null;
+
+                if (_xfLayout is IDisposable disposableLayout)
+                    disposableLayout.Dispose();
+                else if (_xfLayout is Xamarin.Forms.Layout<View> layout)
+                {
+                    var children = layout.Children.ToArray();
+                    layout.Children.Clear();
+                    foreach (var child in children)
+                        if (child is IDisposable disposable)
+                            disposable.Dispose();
+                }
+            }
+        }
     }
 
     /// <summary>

@@ -635,6 +635,9 @@ namespace Forms9Patch
                 Parameter = null;
                 //_lock.Dispose();  // a potential leak?  Saw a crash on Android where _lock was disposed and then called.
                 Retain = false;
+
+                if (_decorativeContainerView is IDisposable disposable)
+                    disposable.Dispose();
             }
         }
 
