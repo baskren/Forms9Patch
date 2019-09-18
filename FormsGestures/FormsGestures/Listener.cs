@@ -1857,6 +1857,38 @@ namespace FormsGestures
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
+                HandlesDownChanged = null;
+                _down = null;
+                HandlesUpChanged = null;
+                _up = null;
+                HandlesTappingChanged = null;
+                _tapping = null;
+                HandlesTappedChanged = null;
+                _tapped = null;
+                HandlesDoubleTappedChanged = null;
+                _doubleTapped = null;
+                HandlesLongPressingChanged = null;
+                _longPressing = null;
+                HandlesLongPressedChanged = null;
+                _longPressed = null;
+                HandlesPinchingChanged = null;
+                _pinching = null;
+                HandlesPinchedChanged = null;
+                _pinched = null;
+                HandlesPanningChanged = null;
+                _panning = null;
+                HandlesPannedChanged = null;
+                _panned = null;
+                HandlesSwipedChanged = null;
+                _swiped = null;
+                HandlesRotatingChanged = null;
+                _rotating = null;
+                HandlesRotatedChanged = null;
+                _rotated = null;
+                HandlesRightClickedChanged = null;
+                _rightClicked = null;
+
                 Listeners.Remove(this);
                 Disposing?.Invoke(this, EventArgs.Empty);
             }

@@ -612,6 +612,15 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
+                    ItemSelected = null;
+                    ItemTapped = null;
+                    ItemsSourceSet = null;
+                    Appeared = null;
+                    ItemAppearing = null;
+                    ItemDisappearing = null;
+                    Scrolling = null;
+                    Scrolled = null;
+
                     _listView.Dispose();
                 }
                 _disposed = true;

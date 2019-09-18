@@ -297,13 +297,10 @@ namespace Forms9Patch
 
         #region Event Handlers
         bool _okTapped;
-        async void OnOkButtonTappedAsync(object sender, EventArgs e)
+        internal async void OnOkButtonTappedAsync(object sender, EventArgs e)
         {
             _okTapped = true;
-            await PopAsync(_okButton);
-            while (_isPushed)
-                await Task.Delay(50);
-            OkTapped?.Invoke(this, EventArgs.Empty);
+            await PopAsync(_okButton, lastAction: () => OkTapped?.Invoke(this, EventArgs.Empty));
         }
 
         async void OnCancelButtonTappedAsync(object sender, EventArgs e)

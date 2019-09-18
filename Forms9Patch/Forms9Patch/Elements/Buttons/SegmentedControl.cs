@@ -742,14 +742,6 @@ namespace Forms9Patch
             Orientation = StackOrientation.Horizontal;
             _segments = new ObservableCollection<Segment>();
             _segments.CollectionChanged += OnCollectionChanged;
-            SizeChanged += (sender, e) =>
-            {
-                // This should not be necessary because the segments will have already been layed out again, driving any IsClipped setting;
-                //System.Diagnostics.Debug.WriteLine("SegmentedControl.SizeChanged ENTER");
-                //IsClipped = CheckIsClipped();
-                //System.Diagnostics.Debug.WriteLine("SegmentedControl.SizeChanged EXIT");
-                // rather ...
-            };
             Children.Add(_background);
         }
 
@@ -768,6 +760,12 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
+                SegmentTapped = null;
+                SegmentSelected = null;
+                SegmentLongPressing = null;
+                SegmentLongPressed = null;
+
                 Children.Remove(_background);
                 foreach (var segment in _segments)
                 {

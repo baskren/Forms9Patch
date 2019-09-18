@@ -104,6 +104,9 @@ namespace Forms9Patch
             {
                 if (disposing)
                 {
+                    Scrolling = null;
+                    Scrolled = null;
+
                     var items = TemplatedItems.ToArray();
 
                     foreach (var item in items)

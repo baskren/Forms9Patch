@@ -593,15 +593,7 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName());
             if (P42.Utils.Environment.IsOnMainThread)
-            {
-                if (trigger == null)
-                    await PopAsync(PopupPoppedCause.MethodCalled, P42.Utils.ReflectionExtensions.CallerMemberName());
-                else
-                    await PopAsync(trigger);
-                while (_isPushed)
-                    await Task.Delay(50);
-                Cancelled?.Invoke(this, PopupPoppedEventArgs);
-            }
+                await PopAsync(trigger ?? PopupPoppedCause.MethodCalled, lastAction: () => Cancelled?.Invoke(this, PopupPoppedEventArgs));
             else
                 Device.BeginInvokeOnMainThread(async () => await CancelAsync(trigger));
         }
@@ -629,6 +621,14 @@ namespace Forms9Patch
             {
                 P42.Utils.BreadCrumbs.Add(GetType(), null);
                 _disposed = true;
+
+                Cancelled = null;
+                Popped = null;
+                AppearingAnimationBegin = null;
+                AppearingAnimationEnd = null;
+                DisappearingAnimationBegin = null;
+                DisappearingAnimationEnd = null;
+
                 if (_decorativeContainerView is VisualElement oldLayout)
                     oldLayout.PropertyChanged -= OnContentViewPropertyChanged;
                 KeyboardService.HeightChanged -= OnKeyboardHeightChanged;
@@ -738,12 +738,14 @@ namespace Forms9Patch
             _isPushing = false;
 
             if (!IsVisible && !_isPopping)
-                await PopAsync(PopupPoppedCause.IsVisiblePropertySet);
+                //await PopAsync(PopupPoppedCause.IsVisiblePropertySet);
+                await CancelAsync(PopupPoppedCause.IsVisiblePropertySet);
             else if (PopAfter > default(TimeSpan))
                 Device.StartTimer(PopAfter, () =>
                 {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    PopAsync(PopupPoppedCause.Timeout);
+                    //PopAsync(PopupPoppedCause.Timeout);
+                    CancelAsync(PopupPoppedCause.Timeout);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     return false;
                 });
@@ -865,7 +867,7 @@ namespace Forms9Patch
         /// <param name="trigger"></param>
         /// <param name="callerName"></param>
         /// <returns></returns>
-        public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "")
+        public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "", Action lastAction = null)
         {
             // do not use the following ... it will prevent popups from appearing when quickly showing and hiding
             //if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
@@ -874,7 +876,7 @@ namespace Forms9Patch
                 if (P42.Utils.Environment.IsOnMainThread)
                 {
                     P42.Utils.BreadCrumbs.Add(GetType(), null);
-                    Recursion.Enter(GetType().ToString(), _id.ToString());
+                    Recursion.Enter(GetType(), _id);
                     _isPopping = true;
                     IsVisible = false;
                     await _lock.WaitAsync();
@@ -885,10 +887,18 @@ namespace Forms9Patch
                         PopupLayerEffect.RemoveFrom(this);
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
+
+                        // the following lines might result in a deadlock?
+                        while (_isPushed)
+                            await Task.Delay(50);
                         Popped?.Invoke(this, PopupPoppedEventArgs);
+                        // end of deadlock concern
                     }
                     _lock.Release();
-                    Recursion.Exit(GetType().ToString(), _id.ToString());
+                    lastAction?.Invoke();
+                    if (!Retain)
+                        Dispose();
+                    Recursion.Exit(GetType(), _id);
                 }
                 else
                     Device.BeginInvokeOnMainThread(async () => await PopAsync(trigger, callerName));
@@ -968,7 +978,8 @@ namespace Forms9Patch
                 {
                     //System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + " !IsVisible");
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    PopAsync(PopupPoppedCause.IsVisiblePropertySet);
+                    //PopAsync(PopupPoppedCause.IsVisiblePropertySet);
+                    CancelAsync(PopupPoppedCause.IsVisiblePropertySet);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
                 //else

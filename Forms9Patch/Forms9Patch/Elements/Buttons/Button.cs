@@ -1094,6 +1094,15 @@ namespace Forms9Patch
             if (!_disposed && disposing)
             {
                 _disposed = true;
+
+                LayoutComplete = null;
+                _tapped = null;
+                _pressed = null;
+                _released = null;
+                _selected = null;
+                _longPressing = null;
+                _longPressed = null;
+
                 _gestureListener.Tapped -= OnTapped;
                 _gestureListener.Up -= OnUp;
                 _gestureListener.Down -= OnDown;
@@ -1102,12 +1111,10 @@ namespace Forms9Patch
                 _gestureListener.Dispose();
                 _gestureListener = null;
                 _label.PropertyChanged -= OnLabelPropertyChanged;
+
                 if (Command != null)
                     Command.CanExecuteChanged -= CommandCanExecuteChanged;
-                _tapped = null;
-                _selected = null;
-                _longPressed = null;
-                _longPressing = null;
+
             }
         }
 

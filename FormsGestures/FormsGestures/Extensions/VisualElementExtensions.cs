@@ -37,7 +37,7 @@ namespace FormsGestures
             }
         }
 
-
+        /*
         public static bool HasRenderer(this VisualElement element)
         {
             if (element!=null && Service!=null)
@@ -46,6 +46,7 @@ namespace FormsGestures
             }
             return false;
         }
+        */
 
         // THIS MAY NOT WORK WITH UWP .NET NATIVE COMPILER CHAIN
         /// <summary>
