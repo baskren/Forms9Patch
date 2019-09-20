@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\balloons.jpg" />
+    <None Remove="Resources\HW_US_20_%28IA%29.svg" />
+    <None Remove="Resources\kid1.jpeg" />
+    <None Remove="Resources\ltblueUp.png" />
+    <None Remove="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\balloons.jpg" />
+    <EmbeddedResource Include="Resources\HW_US_20_%28IA%29.svg" />
+    <EmbeddedResource Include="Resources\kid1.jpeg" />
+    <EmbeddedResource Include="Resources\ltblueUp.png" />
+    <EmbeddedResource Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Forms9Patch\Forms9Patch\Forms9Patch.csproj" />
+    <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
+    <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
+    <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
+  </ItemGroup>
+</Project>
