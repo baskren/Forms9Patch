@@ -606,7 +606,7 @@ namespace Forms9Patch
 
         private bool _disposed;
 
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (!_disposed)
             {
@@ -625,12 +625,7 @@ namespace Forms9Patch
                 }
                 _disposed = true;
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            base.Dispose();
         }
 
 

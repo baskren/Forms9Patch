@@ -1089,7 +1089,7 @@ namespace Forms9Patch
         /// Dispose the specified disposing.
         /// </summary>
         /// <param name="disposing">Disposing.</param>
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (!_disposed && disposing)
             {
@@ -1122,16 +1122,9 @@ namespace Forms9Patch
                     Command.CanExecuteChanged -= CommandCanExecuteChanged;
 
             }
+            base.Dispose(disposing);
         }
 
-        /// <summary>
-        /// Dispose of Forms9Patch.Button object.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
         #endregion
 
 
