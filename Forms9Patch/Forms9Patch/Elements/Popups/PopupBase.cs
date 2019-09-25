@@ -891,13 +891,15 @@ namespace Forms9Patch
                         base.IsAnimationEnabled = IsAnimationEnabled;
                         await Navigation.RemovePopupPageAsync(this);
 
+                        _lock.Release();
                         // the following lines might result in a deadlock?
-                        while (_isPushed)
-                            await Task.Delay(50);
+                        //while (_isPushed)
+                        //    await Task.Delay(50);
                         Popped?.Invoke(this, PopupPoppedEventArgs);
                         // end of deadlock concern
                     }
-                    _lock.Release();
+                    else
+                        _lock.Release();
                     lastAction?.Invoke();
                     if (!Retain)
                         Dispose();

@@ -18,16 +18,16 @@
     <!--DebugType>full</DebugType-->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj" />
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
+    <ProjectReference Include="..\..\Rg.Plugins.Popup\src\Rg.Plugins.Popup\Rg.Plugins.Popup.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Fonts\STIXGeneral.otf" />

@@ -10,3 +10,6 @@
 [submodule "Forms9PatchDemo.NuGet"]
 	path = Forms9PatchDemo.NuGet
 	url = https://github.com/baskren/Forms9PatchDemo
+[submodule "Rg.Plugins.Popup"]
+	path = Rg.Plugins.Popup
+	url = https://github.com/baskren/Rg.Plugins.Popup.git
