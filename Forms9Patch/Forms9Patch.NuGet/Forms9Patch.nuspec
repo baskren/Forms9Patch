@@ -145,16 +145,14 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
         <tags>NinePatch Xamarin Forms SVG Image Segmented button Tooltip Popup Bubble Pointer ImageButton longpress HTML text markup Label autofit autosize autoscale Data Sharing Multi-item clipboard</tags>
         <dependencies>
             <group>
-                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
+                <dependency id="Xamarin.Forms" version="4.2.0.815419" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
-                <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.0" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
             </group>
             <group targetFramework="UAP10.0">
-                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
+                <dependency id="Xamarin.Forms" version="4.2.0.815419" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
-                <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
                 <dependency id="SharpDX.Direct2D1" version="4.2.0" />
@@ -163,18 +161,17 @@ Fixed: iOS HtmlMarkup underlines don't match font color, Default Android image b
                 <dependency id="Win2D.uwp" version="1.20.0" />
             </group>
             <group targetFramework="MonoAndroid8.1">
-                <dependency id="Xamarin.Forms" version="4.2.0.778463" />
+                <dependency id="Xamarin.Forms" version="4.2.0.815419" />
                 <dependency id="Newtonsoft.Json" version="12.0.2" />
-                <dependency id="Rg.Plugins.Popup" version="1.1.5.188" />
                 <dependency id="SkiaSharp.Views.Forms" version="1.68.0" />
                 <dependency id="SkiaSharp.Svg" version="1.60" />
-                <dependency id="Xamarin.Android.Support.v4" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.Design" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.v7.CardView" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.1" />
-                <dependency id="Xamarin.Android.Support.Core.Utils" version="28.0.0.1" />
+                <dependency id="Xamarin.Android.Support.v4" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.Design" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.v7.CardView" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.v7.MediaRouter" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.3" />
+                <dependency id="Xamarin.Android.Support.Core.Utils" version="28.0.0.3" />
             </group>
         </dependencies>
     </metadata>

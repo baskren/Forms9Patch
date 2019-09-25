@@ -325,6 +325,10 @@ namespace Forms9Patch
         }
 
         private bool _disposed;
+        /// <summary>
+        /// Dispose the layout and its contents
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed && disposing)
@@ -337,6 +341,9 @@ namespace Forms9Patch
             }
         }
 
+        /// <summary>
+        /// Disposed the layout and its contents
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

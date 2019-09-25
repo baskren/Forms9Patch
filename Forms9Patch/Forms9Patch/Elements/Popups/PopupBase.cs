@@ -499,6 +499,9 @@ namespace Forms9Patch
         internal ILayout _decorativeContainerView;
         internal DateTime PresentedAt;
         static int _instances;
+        /// <summary>
+        /// Incremental identifier;
+        /// </summary>
         protected readonly int _id;
         /// <summary>
         /// Say, when was the last time I ...
@@ -869,6 +872,7 @@ namespace Forms9Patch
         /// </summary>
         /// <param name="trigger"></param>
         /// <param name="callerName"></param>
+        /// <param name="lastAction"></param>
         /// <returns></returns>
         public async Task PopAsync(object trigger = null, [CallerMemberName] string callerName = "", Action lastAction = null)
         {

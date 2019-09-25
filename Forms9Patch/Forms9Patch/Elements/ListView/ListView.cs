@@ -606,6 +606,10 @@ namespace Forms9Patch
 
         private bool _disposed;
 
+        /// <summary>
+        /// Dispose this ListView and its children
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (!_disposed)

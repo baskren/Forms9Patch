@@ -263,6 +263,10 @@ namespace Forms9Patch
         public new IEnumerable<Element> Descendants() => _xfLayout.Descendants();
 
         bool _disposed;
+        /// <summary>
+        /// Disposed the layout and its children
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
