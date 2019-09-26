@@ -7,4 +7,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("FormsGestures.Droid")]
 [assembly: InternalsVisibleTo("FormsGestures.iOS")]
 [assembly: InternalsVisibleTo("FormsGestures.UWP")]
+[assembly: Xamarin.Forms.Internals.Preserve]
 

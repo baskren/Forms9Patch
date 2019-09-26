@@ -96,6 +96,8 @@ namespace Forms9Patch.iOS
         readonly KeyValuePair<NSObject, NSObject> _kvp;
         readonly string _typeCodeString;
 
+        internal LazyMimeItem() { }
+
         private LazyMimeItem(KeyValuePair<NSObject, NSObject> kvp, string typeCodeString = null)
         {
             if (kvp.Key == null)

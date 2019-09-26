@@ -27,7 +27,6 @@
     <ProjectReference Include="..\..\P42.Utils\P42.Utils\P42.Utils.csproj" />
     <ProjectReference Include="..\..\P42.Utils\P42.NumericalMethods\P42.NumericalMethods.csproj" />
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj" />
-    <ProjectReference Include="..\..\Rg.Plugins.Popup\src\Rg.Plugins.Popup\Rg.Plugins.Popup.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Fonts\STIXGeneral.otf" />
@@ -42,6 +41,11 @@
     <EmbeddedResource Include="Resources\menu_right.svg" />
     <EmbeddedResource Include="Resources\menu_up.svg" />
     <EmbeddedResource Include="Resources\menu_down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Elements\Popups\Core\" />
+    <Folder Include="Elements\Popups\Core\Converters\" />
+    <Folder Include="Elements\Popups\Core\Animations\" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)'=='Release' And '$(OS)'=='Windows_NT' And '$(SolutionName)'=='Forms9Patch' ">
     <Message Text="SolutionDir = $(SolutionDir)" Importance="High" />  

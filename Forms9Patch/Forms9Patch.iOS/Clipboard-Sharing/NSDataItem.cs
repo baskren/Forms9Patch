@@ -15,6 +15,8 @@ namespace Forms9Patch.iOS
 
         public NSString NSUti { get; private set; }
 
+        internal NSDataItem() { }
+
         private NSDataItem(IMimeItem item)
         {
             var nsObject = item.Value.ToNSObject();

@@ -7,7 +7,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportRenderer(typeof(Forms9Patch.PopupBase), typeof(Forms9Patch.iOS.PopupBaseRenderer))]
 namespace Forms9Patch.iOS
 {
-    public class PopupBaseRenderer : Rg.Plugins.Popup.IOS.Renderers.PopupPageRenderer
+    public class PopupBaseRenderer : Forms9Patch.iOS.PopupPageRenderer
     {
         public override bool CanBecomeFirstResponder => true;
 

@@ -91,12 +91,15 @@ namespace Forms9Patch
             if (_confirmed)
                 return;
 
-            var platformSettings = DependencyService.Get<ISettings>();
-            if (platformSettings != null)
+            if (DependencyService.Get<ISettings>() is ISettings platformSettings)
             {
                 platformSettings.LazyInit();
                 _confirmed = true;
             }
+
+            if (!_confirmed)
+                throw new Exception("Unable to confirmed initialization.  Did you forget to add " +
+                    "Forms9Patch." + Device.RuntimePlatform + ".Settings.Initialize() after XamarinForms.Forms.Forms.Init()?");
         }
         #endregion
 

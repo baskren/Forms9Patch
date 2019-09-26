@@ -1,12 +1,12 @@
 using Xamarin.Forms;
 using System;
 using System.ComponentModel;
-using Rg.Plugins.Popup.Extensions;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Threading;
 using System.Runtime.CompilerServices;
 using P42.Utils;
+using Forms9Patch.Elements.Popups.Core;
 
 namespace Forms9Patch
 {
@@ -16,7 +16,7 @@ namespace Forms9Patch
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     [ContentProperty(nameof(ContentView))]
-    public abstract class PopupBase : Rg.Plugins.Popup.Pages.PopupPage, IPopup, IDisposable
+    public abstract class PopupBase : Forms9Patch.Elements.Popups.Core.PopupPage, IPopup, IDisposable
 
     {
         /// <summary>
@@ -834,7 +834,7 @@ namespace Forms9Patch
                     //if (IsVisible)
                     await _lock.WaitAsync();
 
-                    if (!Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this))
+                    if (!PopupNavigation.Instance.PopupStack.Contains(this))
                     {
                         PopupPoppedEventArgs = null;
                         _isPushing = true;
@@ -887,7 +887,7 @@ namespace Forms9Patch
                     _isPopping = true;
                     IsVisible = false;
                     await _lock.WaitAsync();
-                    if (Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
+                    if (PopupNavigation.Instance.PopupStack.Contains(this) && PopupPoppedEventArgs == null)
                     {
                         _isPopping = true;
                         SetPopupPoppedEventArgs(trigger, callerName);

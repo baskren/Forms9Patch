@@ -17,7 +17,7 @@ namespace Forms9Patch.iOS
         {
             if (Element.Effects.FirstOrDefault(e => e is Forms9Patch.PopupLayerEffect) is Forms9Patch.PopupLayerEffect effect && effect.PopupBase != null)
             {
-                var layer = Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopupStack.IndexOf(effect.PopupBase) + 1;
+                var layer = Forms9Patch.Elements.Popups.Core.PopupNavigation.Instance.PopupStack.IndexOf(effect.PopupBase) + 1;
                 if (Container?.Window != null)
                     Container.Window.WindowLevel = layer;// UIWindowLevel.Alert;
                 if (Control?.Window != null)

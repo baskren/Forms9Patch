@@ -131,14 +131,14 @@ namespace Forms9Patch
 
         void UpdateBaseLayoutProperties()
         {
-            var animation = new Rg.Plugins.Popup.Animations.MoveAnimation();
+            var animation = new Elements.Popups.Core.Animations.MoveAnimation();
             animation.PositionIn = animation.PositionOut = Orientation == StackOrientation.Horizontal
                 ? Alignment == FlyoutAlignment.Start
-                    ? Rg.Plugins.Popup.Enums.MoveAnimationOptions.Left
-                    : Rg.Plugins.Popup.Enums.MoveAnimationOptions.Right
+                    ? Elements.Popups.Core.MoveAnimationOptions.Left
+                    : Elements.Popups.Core.MoveAnimationOptions.Right
                 : Alignment == FlyoutAlignment.Start
-                    ? Rg.Plugins.Popup.Enums.MoveAnimationOptions.Top
-                    : Rg.Plugins.Popup.Enums.MoveAnimationOptions.Bottom;
+                    ? Elements.Popups.Core.MoveAnimationOptions.Top
+                    : Elements.Popups.Core.MoveAnimationOptions.Bottom;
             Animation = animation;
         }
         #endregion

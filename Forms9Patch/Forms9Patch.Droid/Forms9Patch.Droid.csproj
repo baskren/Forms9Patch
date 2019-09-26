@@ -86,6 +86,10 @@
     <Compile Include="Extensions\TextExtensions.cs" />
     <Compile Include="Models\TextControlState.cs" />
     <Compile Include="Extensions\TextPaintExtensions.cs" />
+    <Compile Include="Popup\PopupPageRenderer.cs" />
+    <Compile Include="Popup\PopupPlatformDroid.cs" />
+    <Compile Include="Popup\RgGestureDetectorListener.cs" />
+    <Compile Include="Popup\PlatformExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
@@ -140,6 +144,9 @@
     <Folder Include="ListView\" />
     <Folder Include="PlatformViews\" />
   </ItemGroup-->
+  <ItemGroup>
+    <Folder Include="Popup\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <PropertyGroup>
     <NugetOutputDir>C:\Users\ben\Development\Forms9Patch2\Forms9Patch\Forms9Patch.NuGet\lib\MonoAndroid10</NugetOutputDir>
