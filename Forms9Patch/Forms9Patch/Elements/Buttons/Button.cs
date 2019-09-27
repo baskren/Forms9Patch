@@ -1183,6 +1183,7 @@ namespace Forms9Patch
         protected virtual void OnDown(object sender, FormsGestures.DownUpEventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnDown");
+            e.Handled = IsEnabled && IsVisible;
         }
 
         /// <summary>
@@ -1220,7 +1221,10 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressed");
             if (IsEnabled && IsVisible && IsLongPressEnabled)
+            {
                 _longPressed?.Invoke(this, EventArgs.Empty);
+                e.Handled = true;
+            }
         }
 
         /// <summary>
@@ -1232,7 +1236,10 @@ namespace Forms9Patch
         {
             //System.Diagnostics.Debug.WriteLine(GetType() + "OnLongPressing");
             if (IsEnabled && IsVisible && IsLongPressEnabled)
+            {
                 _longPressing?.Invoke(this, EventArgs.Empty);
+                e.Handled = true;
+            }
         }
 
         #endregion

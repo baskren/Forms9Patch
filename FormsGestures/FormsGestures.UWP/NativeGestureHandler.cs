@@ -157,6 +157,7 @@ namespace FormsGestures.UWP
                     _xfElement.PropertyChanging -= OnElementPropertyChanging;
                     _xfElement.PropertyChanged -= OnElementPropertyChanged;
                 }
+                DisconnectFrameworkEvents();
                 /*
                 if (_gestureRecognizers != null)
                 {
@@ -214,86 +215,99 @@ namespace FormsGestures.UWP
 
 
         #region Setup FrameworkElement
+        void ConnectFrameworkEvents()
+        {
+            if (FrameworkElement != null)
+            {
+                if (_renderer!=null)
+                _renderer.ElementChanged += OnRendererElementChanged;
+
+                //FrameworkElement.ManipulationStarting += OnManipulationStarting;
+
+
+                FrameworkElement.ManipulationStarted += OnManipulationStarted;
+                FrameworkElement.ManipulationDelta += OnManipulationDelta;
+                FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
+                FrameworkElement.ManipulationCompleted += OnManipulationComplete;
+
+                FrameworkElement.ManipulationMode = CurrentManipulationModes;
+
+
+
+
+                //FrameworkElement.Tapped += _UwpElement_Tapped;
+                FrameworkElement.RightTapped += OnElementRightTapped;
+                //FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
+
+                FrameworkElement.PointerPressed += OnPointerPressed;
+                FrameworkElement.PointerReleased += OnPointerReleased;
+
+                FrameworkElement.Tapped += OnTapped;
+
+                //_UwpElement.PointerMoved += OnPointerMoved;
+                //FrameworkElement.PointerExited += _UwpElement_PointerExited;
+                //FrameworkElement.PointerEntered += _UwpElement_PointerEntered;
+                FrameworkElement.PointerCaptureLost += OnPointerCaptureLost;
+                FrameworkElement.PointerCanceled += OnPointerCancelled;
+
+                //FrameworkElement.Holding += OnHolding;  // holding event doesn't work with Mouse (https://stackoverflow.com/questions/34995594/holding-event-for-desktop-app-not-firing)
+
+                FrameworkElement.DoubleTapped += OnDoubleTapped;
+                FrameworkElement.IsDoubleTapEnabled = true;
+            }
+        }
+
+        void DisconnectFrameworkEvents()
+        {
+            if (FrameworkElement != null)
+            {
+                FrameworkElement.ManipulationMode = ManipulationModes.None;
+
+                if (_renderer!=null)
+                _renderer.ElementChanged -= OnRendererElementChanged;
+
+                //FrameworkElement.ManipulationMode = ManipulationModes.None;  // commented this out because line 112 was commented out
+                //FrameworkElement.ManipulationStarting -= OnManipulationStarting;
+
+                FrameworkElement.ManipulationStarted -= OnManipulationStarted;
+                FrameworkElement.ManipulationDelta -= OnManipulationDelta;
+                FrameworkElement.ManipulationInertiaStarting -= OnManipulationInertiaStarting;
+                FrameworkElement.ManipulationCompleted -= OnManipulationComplete;
+
+                //FrameworkElement.Tapped -= _UwpElement_Tapped;
+                FrameworkElement.RightTapped -= OnElementRightTapped;
+                //FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
+
+                FrameworkElement.PointerPressed -= OnPointerPressed;
+                FrameworkElement.PointerReleased -= OnPointerReleased;
+
+                FrameworkElement.Tapped -= OnTapped;
+
+                //_UwpElement.PointerMoved -= OnPointerMoved;
+                //FrameworkElement.PointerExited -= _UwpElement_PointerExited;
+                //FrameworkElement.PointerEntered -= _UwpElement_PointerEntered;
+                FrameworkElement.PointerCaptureLost -= OnPointerCaptureLost;
+                FrameworkElement.PointerCanceled -= OnPointerCancelled;
+
+                //FrameworkElement.Holding -= OnHolding;
+
+                FrameworkElement.DoubleTapped -= OnDoubleTapped;
+                FrameworkElement.IsDoubleTapEnabled = false;
+            }
+        }
+
+
         IVisualElementRenderer _renderer;
         void SetRenderer()
         {
             var value = Platform.GetRenderer(_xfElement);
             if (value != _renderer)
             {
-                if (FrameworkElement != null)
-                {
-                    FrameworkElement.ManipulationMode = ManipulationModes.None;
-
-                    _renderer.ElementChanged -= OnRendererElementChanged;
-
-                    //FrameworkElement.ManipulationMode = ManipulationModes.None;  // commented this out because line 112 was commented out
-                    //FrameworkElement.ManipulationStarting -= OnManipulationStarting;
-
-                    FrameworkElement.ManipulationStarted -= OnManipulationStarted;
-                    FrameworkElement.ManipulationDelta -= OnManipulationDelta;
-                    FrameworkElement.ManipulationInertiaStarting -= OnManipulationInertiaStarting;
-                    FrameworkElement.ManipulationCompleted -= OnManipulationComplete;
-
-                    //FrameworkElement.Tapped -= _UwpElement_Tapped;
-                    FrameworkElement.RightTapped -= OnElementRightTapped;
-                    //FrameworkElement.PointerWheelChanged -= _UwpElement_PointerWheelChanged;
-
-                    FrameworkElement.PointerPressed -= OnPointerPressed;
-                    //FrameworkElement.PointerReleased -= OnPointerReleased;
-
-                    FrameworkElement.Tapped -= OnTapped;
-
-                    //_UwpElement.PointerMoved -= OnPointerMoved;
-                    //FrameworkElement.PointerExited -= _UwpElement_PointerExited;
-                    //FrameworkElement.PointerEntered -= _UwpElement_PointerEntered;
-                    FrameworkElement.PointerCaptureLost -= OnPointerCaptureLost;
-                    FrameworkElement.PointerCanceled -= OnPointerCancelled;
-
-                    //FrameworkElement.Holding -= OnHolding;
-
-                    FrameworkElement.DoubleTapped -= OnDoubleTapped;
-                    FrameworkElement.IsDoubleTapEnabled = false;
-                }
+                DisconnectFrameworkEvents();
 
                 _renderer = value;
 
-                if (FrameworkElement != null)
-                {
-                    _renderer.ElementChanged += OnRendererElementChanged;
-
-                    //FrameworkElement.ManipulationStarting += OnManipulationStarting;
-
-
-                    FrameworkElement.ManipulationStarted += OnManipulationStarted;
-                    FrameworkElement.ManipulationDelta += OnManipulationDelta;
-                    FrameworkElement.ManipulationInertiaStarting += OnManipulationInertiaStarting;
-                    FrameworkElement.ManipulationCompleted += OnManipulationComplete;
-
-                    FrameworkElement.ManipulationMode = CurrentManipulationModes;
-
-
-
-
-                    //FrameworkElement.Tapped += _UwpElement_Tapped;
-                    FrameworkElement.RightTapped += OnElementRightTapped;
-                    //FrameworkElement.PointerWheelChanged += _UwpElement_PointerWheelChanged;
-
-                    FrameworkElement.PointerPressed += OnPointerPressed;
-                    //FrameworkElement.PointerReleased += OnPointerReleased;
-
-                    FrameworkElement.Tapped += OnTapped;
-
-                    //_UwpElement.PointerMoved += OnPointerMoved;
-                    //FrameworkElement.PointerExited += _UwpElement_PointerExited;
-                    //FrameworkElement.PointerEntered += _UwpElement_PointerEntered;
-                    FrameworkElement.PointerCaptureLost += OnPointerCaptureLost;
-                    FrameworkElement.PointerCanceled += OnPointerCancelled;
-
-                    //FrameworkElement.Holding += OnHolding;  // holding event doesn't work with Mouse (https://stackoverflow.com/questions/34995594/holding-event-for-desktop-app-not-firing)
-
-                    FrameworkElement.DoubleTapped += OnDoubleTapped;
-                    FrameworkElement.IsDoubleTapEnabled = true;
-                }
+                ConnectFrameworkEvents();
             }
         }
 
@@ -707,6 +721,9 @@ namespace FormsGestures.UWP
         #region UWP Pointer Event Responders
         private void OnPointerCancelled(object sender, PointerRoutedEventArgs e)
         {
+            if (!_pointerPressed)
+                return;
+            _pointerPressed = false;
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
             PointerRoutedDebugMessage(e, "POINTER CANCELLED");
@@ -726,6 +743,7 @@ namespace FormsGestures.UWP
             {
                 if (listener.HandlesTapped)
                 {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
                     var args = new UwpTapEventArgs(FrameworkElement, e, _numberOfTaps)
                     {
                         Listener = listener,
@@ -736,6 +754,7 @@ namespace FormsGestures.UWP
                 }
                 if (_longPressing && listener.HandlesLongPressed)
                 {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
                     var args = new UwpLongPressEventArgs(FrameworkElement, e, elapsed)
                     {
                         Listener = listener,
@@ -746,6 +765,7 @@ namespace FormsGestures.UWP
                 }
                 if (listener.HandlesDown)
                 {
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
                     var args = new UwpDownUpArgs(FrameworkElement, e)
                     {
                         Listener = listener,
@@ -760,8 +780,15 @@ namespace FormsGestures.UWP
             }
         }
 
+        bool _pointerPressed;
+
         private void OnPointerCaptureLost(object sender, PointerRoutedEventArgs e)
         {
+            if (!_pointerPressed)
+                return;
+            _pointerPressed = false;
+            foreach (var listener in _listeners)
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
             PointerRoutedDebugMessage(e, "POINTER CAPTURE LOST");
             //OnPointerCancelled
         }
@@ -856,17 +883,23 @@ namespace FormsGestures.UWP
 
             var currentPoint = e.GetPosition(null);
             DebugMethodName(2);
-            DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=[" + e.Handled + "] type=[" + e.PointerDeviceType + "]");
+            DebugMessage("CurrentPoint: pos=[" + currentPoint.X + "," + currentPoint.Y + "] Handled=[" + e.Handled + "] type=[" + e.PointerDeviceType + "] e.Handled[" + e.Handled + "]");
 
             foreach (var listener in _listeners)
                 if (listener.HandlesRightClicked && UwpRightClickEventArgs.Fire(FrameworkElement, e, listener))
-                    return;
+                {
+                    e.Handled = true;
+                    break;
+                }
         }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
+
+            _pointerPressed = true;
+
             DebugMethodName(2);
 
             if (_releaseTimer == null || _releaseTimer.Elapsed.TotalMilliseconds > 750)
@@ -887,9 +920,27 @@ namespace FormsGestures.UWP
             _longPressing = false;
 
             foreach (var listener in _listeners)
+            {
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled[" + e.Handled + "]");
                 if (listener.HandlesDown && UwpDownUpArgs.FireDown(FrameworkElement, e, listener))
+                {
+                    e.Handled = true;
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": fired[" + null + "]");
                     return;
+                }
+            }
         }
+
+        private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            foreach (var listener in _listeners)
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] e.Handled["+e.Handled+"]");
+            //if (!_pointerPressed)
+            //    return;
+            //_pointerPressed = false;
+            PointerRoutedDebugMessage(e, "POINTER RELEASED");
+        }
+
 
         bool _runningTapCounterResetter;
         private void OnTapped(object sender, TappedRoutedEventArgs e)
@@ -897,7 +948,13 @@ namespace FormsGestures.UWP
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
 
+            if (!_pointerPressed)
+                return;
+            _pointerPressed = false;
+
             DebugMethodName(2);
+
+            var senderRenderer = sender as Xamarin.Forms.Platform.UWP.LayoutRenderer;
 
             long elapsed = 0;
             if (_holdTimer != null)
@@ -928,17 +985,32 @@ namespace FormsGestures.UWP
             }
 
             foreach (var listener in _listeners)
+            {
+                System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": listener.Element[" + listener.Element + "] _numberOfTaps["+_numberOfTaps+"] sender=["+senderRenderer?.Name+"] ["+senderRenderer?.Element+"] e.Handled["+e.Handled+"]");
                 if (listener.HandlesTapped && UwpTapEventArgs.FireTapped(FrameworkElement, e, _numberOfTaps, listener))
+                {
+                    e.Handled = true;
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireTapped[" + null + "]");
                     break;
+                }
+            }
 
             foreach (var listener in _listeners)
                 if (_longPressing && listener.HandlesLongPressed && UwpLongPressEventArgs.FireLongPressed(FrameworkElement, e, elapsed, listener))
+                {
+                    e.Handled = true;
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireLongPressed[" + null + "]");
                     break;
+                }
 
 
             foreach (var listener in _listeners)
                 if (listener.HandlesDown && UwpDownUpArgs.FireUp(FrameworkElement, e, listener))
+                {
+                    e.Handled = true;
+                    System.Diagnostics.Debug.WriteLine(GetType() + "." + P42.Utils.ReflectionExtensions.CallerMemberName() + ": FireUp[" + null + "]");
                     break;
+                }
 
 
             _longPressing = false;
@@ -949,10 +1021,18 @@ namespace FormsGestures.UWP
         {
             if (!_xfElement.IsVisible || FrameworkElement == null)
                 return;
+
+
+            //if (!_pointerTracking)
+            //    return;
+
             DebugMethodName(2);
             foreach (var listener in _listeners)
                 if (listener.HandlesDoubleTapped && UwpTapEventArgs.FireDoubleTapped(FrameworkElement, e, _numberOfTaps, listener))
+                {
+                    e.Handled = true;
                     break;
+                }
             _longPressing = false;
         }
 

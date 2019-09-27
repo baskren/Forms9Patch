@@ -6,7 +6,10 @@ using Xamarin.Forms;
 #pragma warning disable CS0618 // Type or member is obsolete
 namespace Forms9Patch.Elements.Popups.Core
 {
-    public class PopupPage : Xamarin.Forms.ContentPage
+    /// <summary>
+    /// Foundation for Popups
+    /// </summary>
+    public  class PopupPage : Xamarin.Forms.ContentPage
     {
         #region Private
         /*
@@ -28,7 +31,9 @@ namespace Forms9Patch.Elements.Popups.Core
         #endregion
 
         #region Events
-
+        /// <summary>
+        /// Triggered when popup's background is clicked
+        /// </summary>
         public event EventHandler BackgroundClicked;
 
         #endregion
@@ -45,7 +50,9 @@ namespace Forms9Patch.Elements.Popups.Core
             set { SetValue(IsAnimatingProperty, value); }
         }
         */
-
+        /// <summary>
+        /// I
+        /// </summary>
         public static readonly BindableProperty IsAnimationEnabledProperty = BindableProperty.Create(nameof(IsAnimationEnabled), typeof(bool), typeof(PopupPage), true);
 
         public bool IsAnimationEnabled
