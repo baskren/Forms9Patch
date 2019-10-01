@@ -25,11 +25,11 @@ namespace Forms9Patch.Droid
         private Point _downPosition;
         private bool _disposed;
 
-        private PopupPage CurrentElement => (PopupPage) Element;
+        private PopupPage CurrentElement => (PopupPage)Element;
 
         #region Main Methods
 
-        public PopupPageRenderer(Context context):base(context)
+        public PopupPageRenderer(Context context) : base(context)
         {
             _gestureDetectorListener = new RgGestureDetectorListener();
 
@@ -70,26 +70,34 @@ namespace Forms9Patch.Droid
             var visibleRect = new Rect();
             decoreView.GetWindowVisibleDisplayFrame(visibleRect);
 
+
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
             {
                 var screenRealSize = new Android.Graphics.Point();
                 activity.WindowManager.DefaultDisplay.GetRealSize(screenRealSize);
 
                 var windowInsets = RootWindowInsets;
-                var bottomPadding = Math.Min(windowInsets.StableInsetBottom, windowInsets.SystemWindowInsetBottom);
 
-                if (screenRealSize.Y - visibleRect.Bottom > windowInsets.StableInsetBottom)
+                if (windowInsets != null)
                 {
-                    keyboardOffset = Context.FromPixels(screenRealSize.Y - visibleRect.Bottom);
+                    var bottomPadding = Math.Min(windowInsets.StableInsetBottom, windowInsets.SystemWindowInsetBottom);
+
+                    if (screenRealSize.Y - visibleRect.Bottom > windowInsets.StableInsetBottom)
+                        keyboardOffset = Context.FromPixels(screenRealSize.Y - visibleRect.Bottom);
+
+                    systemPadding = new Thickness
+                    {
+                        Left = Context.FromPixels(windowInsets.SystemWindowInsetLeft),
+                        Top = Context.FromPixels(windowInsets.SystemWindowInsetTop),
+                        Right = Context.FromPixels(windowInsets.SystemWindowInsetRight),
+                        Bottom = Context.FromPixels(bottomPadding)
+                    };
                 }
-                
-                systemPadding = new Thickness
+                else
                 {
-                    Left = Context.FromPixels(windowInsets.SystemWindowInsetLeft),
-                    Top = Context.FromPixels(windowInsets.SystemWindowInsetTop),
-                    Right = Context.FromPixels(windowInsets.SystemWindowInsetRight),
-                    Bottom = Context.FromPixels(bottomPadding)
-                };
+                    // the page is probably being popped so this doesn't matter...
+                    systemPadding = new Thickness();
+                }
             }
             else
             {
@@ -130,7 +138,7 @@ namespace Forms9Patch.Droid
 
         protected override void OnAttachedToWindow()
         {
-            Context.HideKeyboard(((Activity) Context).Window.DecorView);
+            Context.HideKeyboard(((Activity)Context).Window.DecorView);
             base.OnAttachedToWindow();
         }
 
@@ -138,7 +146,7 @@ namespace Forms9Patch.Droid
         {
             Device.StartTimer(TimeSpan.FromMilliseconds(0), () =>
             {
-                Settings.Context.HideKeyboard(((Activity) Settings.Context).Window.DecorView);
+                Settings.Context.HideKeyboard(((Activity)Settings.Context).Window.DecorView);
                 return false;
             });
             base.OnDetachedFromWindow();
@@ -206,7 +214,7 @@ namespace Forms9Patch.Droid
 
             _gestureDetector.OnTouchEvent(e);
 
-            if(CurrentElement != null && CurrentElement.BackgroundInputTransparent)
+            if (CurrentElement != null && CurrentElement.BackgroundInputTransparent)
             {
                 if (ChildCount > 0 && !IsInRegion(e.RawX, e.RawY, GetChildAt(0)) || ChildCount == 0)
                 {

@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using XApplication = Xamarin.Forms.Application;
 using Forms9Patch.Droid;
 using Forms9Patch.Elements.Popups.Core;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: Dependency(typeof(PopupPlatformDroid))]
 namespace Forms9Patch.Droid
@@ -45,15 +46,15 @@ namespace Forms9Patch.Droid
 
         public Task RemoveAsync(PopupPage page)
         {
-            var renderer = page.GetOrCreateRenderer();
-            if (renderer != null)
+            if (page.GetOrCreateRenderer() is IVisualElementRenderer renderer)
             {
                 var element = renderer.Element;
 
-                DecoreView.RemoveView(renderer.View);
+                if (renderer.View is Android.Views.View view)
+                    DecoreView?.RemoveView(view);
                 renderer.Dispose();
 
-                if(element != null)
+                if (element != null)
                     element.Parent = null;
 
                 return PostAsync(DecoreView);

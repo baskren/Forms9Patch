@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Forms9Patch.Elements.Popups.Core
 {
@@ -8,6 +10,22 @@ namespace Forms9Patch.Elements.Popups.Core
     /// </summary>
     public interface IPopupNavigation
     {
+        /// <summary>
+        /// Triggered when a popup is pushed
+        /// </summary>
+        event EventHandler<NavigationEventArgs> Pushed;
+
+        /// <summary>
+        /// Triggered when a popup is popped
+        /// </summary>
+        event EventHandler<NavigationEventArgs> Popped;
+
+        /// <summary>
+        /// Triggered when all popups are popped
+        /// </summary>
+        event EventHandler<AllPagesPoppedEventArgs> PoppedAll;
+
+
         /// <summary>
         /// The stack of popups
         /// </summary>
@@ -42,5 +60,7 @@ namespace Forms9Patch.Elements.Popups.Core
         /// <param name="animate"></param>
         /// <returns></returns>
         Task RemovePageAsync(PopupPage page, bool animate = true);
+
+
     }
 }

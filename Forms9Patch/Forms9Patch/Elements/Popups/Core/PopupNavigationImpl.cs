@@ -12,28 +12,20 @@ namespace Forms9Patch.Elements.Popups.Core
 
         private readonly List<PopupPage> _popupStack = new List<PopupPage>();
 
-        private IPopupPlatform PopupPlatform
-        {
-            get
-            {
-                var popupPlatform = DependencyService.Get<IPopupPlatform>();
-
-                if (popupPlatform == null)
-                    throw new InvalidOperationException("You MUST install Rg.Plugins.Popup to each project and call Rg.Plugins.Popup.Popup.Init(); prior to using it.\nSee more info: ");// + Config.InitializationDescriptionUrl);
-
-                if (!popupPlatform.IsInitialized)
-                    throw new InvalidOperationException("You MUST call Rg.Plugins.Popup.Popup.Init(); prior to using it.\nSee more info: ");// + Config.InitializationDescriptionUrl);
-
-                return popupPlatform;
-            }
-        }
+        IPopupPlatform _popupPlatform;
+        private IPopupPlatform PopupPlatform => _popupPlatform = _popupPlatform ?? DependencyService.Get<IPopupPlatform>();
 
         public IReadOnlyList<PopupPage> PopupStack => _popupStack;
 
+        public event EventHandler<NavigationEventArgs> Pushed;
+
+        public event EventHandler<NavigationEventArgs> Popped;
+
+        public event EventHandler<AllPagesPoppedEventArgs> PoppedAll;
+
         public PopupNavigationImpl()
-        {
-            PopupPlatform.OnInitialized += OnInitialized;
-        }
+            => PopupPlatform.OnInitialized += OnInitialized;
+
 
         private async void OnInitialized(object sender, EventArgs e)
         {
@@ -46,7 +38,7 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 if (_popupStack.Contains(page))
-                    throw new InvalidOperationException("The page has been pushed already. Pop or remove the page before to push it again");
+                    return null;
 
                 _popupStack.Add(page);
 
@@ -61,15 +53,12 @@ namespace Forms9Patch.Elements.Popups.Core
                         await page.AppearingAnimation();
                     }
                     else
-                    {
                         await AddAsync(page);
-                    }
 
                     page.AppearingTransactionTask = null;
                 });
-
                 page.AppearingTransactionTask = task;
-
+                Pushed?.Invoke(this, new NavigationEventArgs(page));
                 return task;
             }
         }
@@ -79,9 +68,8 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 animate = CanBeAnimated(animate);
-
                 if (!PopupStack.Any())
-                    throw new IndexOutOfRangeException("No Page in PopupStack");
+                    return null;
 
                 return RemovePageAsync(PopupStack.Last(), animate);
             }
@@ -92,14 +80,12 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 animate = CanBeAnimated(animate);
-
                 if (!PopupStack.Any())
-                    throw new IndexOutOfRangeException("No Page in PopupStack");
-
-                var popupTasks = PopupStack.ToList().Select(page => RemovePageAsync(page, animate));
-
-                return Task.WhenAll(popupTasks);
-            };
+                    return null;
+                var popupPages = PopupStack.ToList();
+                var popupTasks = popupPages.Select(page => RemovePageAsync(page, animate));
+                return Task.WhenAll(popupTasks).ContinueWith((Task continuationAction) => PoppedAll?.Invoke(this, new AllPagesPoppedEventArgs(popupPages)));
+            }
         }
 
         public Task RemovePageAsync(PopupPage page, bool animate = true)
@@ -107,10 +93,10 @@ namespace Forms9Patch.Elements.Popups.Core
             lock (_locker)
             {
                 if (page == null)
-                    throw new NullReferenceException("Page can not be null");
+                    return null;
 
                 if (!_popupStack.Contains(page))
-                    throw new InvalidOperationException("The page has not been pushed yet or has been removed already");
+                    return null;
 
                 if (page.DisappearingTransactionTask != null)
                     return page.DisappearingTransactionTask;
@@ -144,7 +130,7 @@ namespace Forms9Patch.Elements.Popups.Core
                 });
 
                 page.DisappearingTransactionTask = task;
-
+                Popped?.Invoke(this, new NavigationEventArgs(page));
                 return task;
             }
         }
@@ -152,14 +138,12 @@ namespace Forms9Patch.Elements.Popups.Core
         // Private
 
         private async Task AddAsync(PopupPage page)
-        {
-            await PopupPlatform.AddAsync(page);
-        }
+            => await PopupPlatform.AddAsync(page);
+
 
         private async Task RemoveAsync(PopupPage page)
-        {
-            await PopupPlatform.RemoveAsync(page);
-        }
+            => await PopupPlatform.RemoveAsync(page);
+
 
         // Internal 
 
@@ -172,9 +156,8 @@ namespace Forms9Patch.Elements.Popups.Core
         #region Animation
 
         private bool CanBeAnimated(bool animate)
-        {
-            return animate && PopupPlatform.IsSystemAnimationEnabled;
-        }
+            => animate && PopupPlatform.IsSystemAnimationEnabled;
+
 
         #endregion
 

@@ -1,61 +1,67 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Forms9Patch.Elements.Popups.Core
 {
+    /// <summary>
+    /// Popup navigation manager
+    /// </summary>
     public static class PopupNavigation
     {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static void SetInstance(IPopupNavigation instance) => _popupNavigation = instance;
 
-        private const string DepractedMethodsText =
-            "You should use "
-            + nameof(IPopupNavigation) +
-            " instance from "
-            + nameof(PopupNavigation) +
-            "."
-            + nameof(Instance) +
-            ".\nSee more info: ";
-            //+ Config.MigrationV1_0_xToV1_1_xUrl;
-            
         private static IPopupNavigation _popupNavigation;
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        public static IPopupNavigation Instance => _popupNavigation = _popupNavigation ?? new PopupNavigationImpl();
 
-        public static IPopupNavigation Instance
-        {
-            get
-            {
-                if (_popupNavigation == null)
-                    _popupNavigation = new PopupNavigationImpl();
 
-                return _popupNavigation;
-            }
-        }
-        
-        [Obsolete(DepractedMethodsText)]
+        /// <summary>
+        /// The stack
+        /// </summary>
         public static IReadOnlyList<PopupPage> PopupStack => Instance.PopupStack;
 
-        [Obsolete(DepractedMethodsText)]
+        /// <summary>
+        /// Display a popup 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="animate"></param>
+        /// <returns></returns>
         public static Task PushAsync(PopupPage page, bool animate = true)
-        {
-            return Instance.PushAsync(page, animate);
-        }
+            => Instance.PushAsync(page, animate);
 
-        [Obsolete(DepractedMethodsText)]
+
+        /// <summary>
+        /// Remove a popup
+        /// </summary>
+        /// <param name="animate"></param>
+        /// <returns></returns>
         public static Task PopAsync(bool animate = true)
-        {
-            return Instance.PopAsync(animate);
-        }
+            => Instance.PopAsync(animate);
 
-        [Obsolete(DepractedMethodsText)]
+
+        /// <summary>
+        /// Remove all popups
+        /// </summary>
+        /// <param name="animate"></param>
+        /// <returns></returns>
         public static Task PopAllAsync(bool animate = true)
-        {
-            return Instance.PopAllAsync(animate);
-        }
+            => Instance.PopAllAsync(animate);
 
-        [Obsolete(DepractedMethodsText)]
+
+        /// <summary>
+        /// Remove a particular popup
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="animate"></param>
+        /// <returns></returns>
         public static Task RemovePageAsync(PopupPage page, bool animate = true)
-        {
-            return Instance.RemovePageAsync(page, animate);
-        }
-        
+            => Instance.RemovePageAsync(page, animate);
+
+
     }
 }
