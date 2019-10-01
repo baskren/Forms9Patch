@@ -39,6 +39,17 @@ namespace FormsGestures.UWP
             NumberOfTaps = numberOfTaps;
         }
 
+        public static bool FireTapped(FrameworkElement element, PointerRoutedEventArgs e, int numberOfTaps, Listener listener)
+        {
+            var args = new UwpTapEventArgs(element, e, numberOfTaps)
+            {
+                Listener = listener
+            };
+            listener.OnTapped(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
+
         //DoubleTappedRoutedEventArgs
         public UwpTapEventArgs(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs args, int numberOfTaps)
         {

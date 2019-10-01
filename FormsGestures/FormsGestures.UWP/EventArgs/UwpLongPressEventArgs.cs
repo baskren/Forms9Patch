@@ -43,5 +43,15 @@ namespace FormsGestures.UWP
             Duration = elapsedMilliseconds;
         }
 
+        public static bool FireLongPressed(Windows.UI.Xaml.FrameworkElement element, Windows.UI.Xaml.Input.PointerRoutedEventArgs e, long elapsedMilliseconds, Listener listener)
+        {
+            var args = new UwpLongPressEventArgs(element, e, elapsedMilliseconds)
+            {
+                Listener = listener
+            };
+            listener?.OnLongPressed(args);
+            e.Handled = args.Handled;
+            return e.Handled;
+        }
     }
 }
