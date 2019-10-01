@@ -83,7 +83,9 @@ namespace Forms9Patch.Droid
             {
                 animationScale = Android.Provider.Settings.System.GetFloat(
                     context.ContentResolver,
+#pragma warning disable CS0618 // Type or member is obsolete
                     Android.Provider.Settings.System.AnimatorDurationScale,
+#pragma warning restore CS0618 // Type or member is obsolete
                     1);
             }
 

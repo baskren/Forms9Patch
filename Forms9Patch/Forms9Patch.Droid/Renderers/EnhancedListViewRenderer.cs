@@ -27,7 +27,9 @@ namespace Forms9Patch.Droid
 
         public EnhancedListViewRenderer(Android.Content.Context context, object obj) : base(context) { }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         public EnhancedListViewRenderer(System.IntPtr intPtr, Android.Runtime.JniHandleOwnership owner) { }
+#pragma warning restore CS0618 // Type or member is obsolete
 
 
         #region ElementChanged

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Forms9Patch.Elements.Popups.Core
 {
+    /// <summary>
+    /// Options for move animations
+    /// </summary>
     public enum MoveAnimationOptions
     {
         Center,
