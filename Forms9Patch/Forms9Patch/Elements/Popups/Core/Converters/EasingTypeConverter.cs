@@ -5,8 +5,16 @@ using Xamarin.Forms;
 
 namespace Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
 {
+    /// <summary>
+    /// Popup type converter
+    /// </summary>
     public class EasingTypeConverter : TypeConverter
     {
+        /// <summary>
+        /// String to Easing Type
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public override object ConvertFromInvariantString(string value)
         {
             if (value != null)

@@ -8,8 +8,16 @@ using Xamarin.Forms;
 
 namespace Forms9Patch.Elements.Popups.Core.Converters.TypeConverters
 {
+    /// <summary>
+    /// Popup unit type converter
+    /// </summary>
     public class UintTypeConverter : TypeConverter
     {
+        /// <summary>
+        /// String to unit type converter
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public override object ConvertFromInvariantString(string value)
         {
             try

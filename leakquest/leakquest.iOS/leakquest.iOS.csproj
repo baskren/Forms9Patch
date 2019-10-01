@@ -144,6 +144,8 @@
     <ProjectReference Include="..\..\Forms9Patch\Forms9Patch.iOS\Forms9Patch.iOS.csproj">
       <Project>{1D9DAC1B-92F4-4EFE-B915-5A998435B02F}</Project>
       <Name>Forms9Patch.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\FormsGestures\FormsGestures\FormsGestures.csproj">
       <Project>{0B50BF77-6D06-448F-8048-D52FC1D6C940}</Project>
@@ -152,6 +154,8 @@
     <ProjectReference Include="..\..\FormsGestures\FormsGestures.iOS\FormsGestures.iOS.csproj">
       <Project>{48ADFBE6-0CBA-4317-8371-250A7F0647AE}</Project>
       <Name>FormsGestures.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\..\MimeSharp\MimeSharp\MimeSharp.csproj">
       <Project>{49621984-BABA-4864-9065-D9C8B645828F}</Project>
@@ -168,6 +172,8 @@
     <ProjectReference Include="..\..\P42.Utils\P42.Utils.iOS\P42.Utils.iOS.csproj">
       <Project>{530E21BA-A725-4714-8678-74CCA5CDBB38}</Project>
       <Name>P42.Utils.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\leakquest\leakquest.csproj">
       <Project>{BA12E67E-1CDD-40BE-A278-E337A5AEA776}</Project>

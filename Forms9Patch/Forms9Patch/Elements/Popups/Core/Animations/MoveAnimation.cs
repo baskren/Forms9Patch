@@ -5,16 +5,33 @@ using Xamarin.Forms;
 
 namespace Forms9Patch.Elements.Popups.Core.Animations
 {
+    /// <summary>
+    /// Used for sweep animation of popups
+    /// </summary>
     public class MoveAnimation : FadeBackgroundAnimation
     {
         private double _defaultTranslationX;
         private double _defaultTranslationY;
 
+        /// <summary>
+        /// Start position for appearing
+        /// </summary>
         public MoveAnimationOptions PositionIn { get; set; }
+        /// <summary>
+        /// End position for disappearing
+        /// </summary>
         public MoveAnimationOptions PositionOut { get; set; }
 
+        /// <summary>
+        /// The move animation for popups
+        /// </summary>
         public MoveAnimation(): this(MoveAnimationOptions.Bottom, MoveAnimationOptions.Bottom) {}
 
+        /// <summary>
+        /// The move animation for popups
+        /// </summary>
+        /// <param name="positionIn"></param>
+        /// <param name="positionOut"></param>
         public MoveAnimation(MoveAnimationOptions positionIn, MoveAnimationOptions positionOut)
         {
             PositionIn = positionIn;
@@ -25,6 +42,11 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             EasingOut = Easing.SinIn;
         }
 
+        /// <summary>
+        /// Called before Popup appears 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
         public override void Preparing(View content, PopupPage page)
         {
             base.Preparing(content, page);
@@ -36,6 +58,11 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             UpdateDefaultTranslations(content);
         }
 
+        /// <summary>
+        /// Called after the Popup disappears
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
         public override void Disposing(View content, PopupPage page)
         {
             base.Disposing(content, page);
@@ -48,6 +75,12 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             content.TranslationY = _defaultTranslationY;
         }
 
+        /// <summary>
+        /// Called when animating the popup's appearance
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async override Task Appearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();
@@ -84,6 +117,12 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             await Task.WhenAll(taskList);
         }
 
+        /// <summary>
+        /// Called when animating the popup's disappearance
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async override Task Disappearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();

@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace Forms9Patch.Elements.Popups.Core.Animations
 {
+    /// <summary>
+    /// Popup scale animation
+    /// </summary>
     public class ScaleAnimation : FadeAnimation
     {
         private double _defaultScale;
@@ -11,14 +14,34 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
         private double _defaultTranslationX;
         private double _defaultTranslationY;
 
+        /// <summary>
+        /// Scale at beginning of appearing 
+        /// </summary>
         public double ScaleIn { get; set; } = 0.8;
+        /// <summary>
+        /// Scale at end of disappearing 
+        /// </summary>
         public double ScaleOut { get; set; } = 0.8;
 
+        /// <summary>
+        /// Position at beginning of appearing 
+        /// </summary>
         public MoveAnimationOptions PositionIn { get; set; }
+        /// <summary>
+        /// Position at end of disappearing
+        /// </summary>
         public MoveAnimationOptions PositionOut { get; set; }
 
+        /// <summary>
+        /// Popup scale animation
+        /// </summary>
         public ScaleAnimation():this(MoveAnimationOptions.Center, MoveAnimationOptions.Center) {}
 
+        /// <summary>
+        /// Popup scale animation
+        /// </summary>
+        /// <param name="positionIn"></param>
+        /// <param name="positionOut"></param>
         public ScaleAnimation(MoveAnimationOptions positionIn, MoveAnimationOptions positionOut)
         {
             PositionIn = positionIn;
@@ -30,6 +53,11 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             if (PositionOut != MoveAnimationOptions.Center) DurationOut = 500;
         }
 
+        /// <summary>
+        /// Called before Popup appears 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
         public override void Preparing(View content, PopupPage page)
         {
             if(HasBackgroundAnimation) base.Preparing(content, page);
@@ -43,6 +71,11 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             if(!HasBackgroundAnimation) content.Opacity = 0;
         }
 
+        /// <summary>
+        /// Called after the Popup disappears
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
         public override void Disposing(View content, PopupPage page)
         {
             if (HasBackgroundAnimation) base.Disposing(content, page);
@@ -57,6 +90,12 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             content.TranslationY = _defaultTranslationY;
         }
 
+        /// <summary>
+        /// Called when animating the popup's appearance
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async override Task Appearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();
@@ -97,6 +136,12 @@ namespace Forms9Patch.Elements.Popups.Core.Animations
             await Task.WhenAll(taskList);
         }
 
+        /// <summary>
+        /// Called when animating the popup's disappearance
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async override Task Disappearing(View content, PopupPage page)
         {
             var taskList = new List<Task>();
