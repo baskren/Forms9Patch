@@ -6,19 +6,21 @@
     <RootNamespace>Forms9Patch</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;</DefineConstants>
-    <LangVersion>7.1</LangVersion>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+    <LangVersion>7.3</LangVersion>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <!--DebugType>full</DebugType-->
     <DefineConstants>TRACE;RELEASE;</DefineConstants>
     <DocumentationFile>bin\Release\netstandard1.3\Forms9Patch.xml</DocumentationFile>
     <!--DebugType>full</DebugType-->
-    <LangVersion>7.1</LangVersion>
+    <LangVersion>7.3</LangVersion>
+    <!--DebugType>full</DebugType-->
     <!--DebugType>full</DebugType-->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
   </ItemGroup>

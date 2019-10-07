@@ -15,17 +15,21 @@ namespace Forms9Patch.iOS
         public IVisualElementRenderer Renderer => _renderer;
 
         public PopupPlatformRenderer(IVisualElementRenderer renderer)
-            =>_renderer = renderer;
-        
+            => _renderer = renderer;
+
         public PopupPlatformRenderer(IntPtr handle) : base(handle) { }
 
+        bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && !_disposed)
             {
+                _disposed = true;
+                var renderer = _renderer;
                 _renderer = null;
-                if (_renderer is IDisposable disposable)
+                if (renderer is IDisposable disposable)
                     disposable.Dispose();
+
             }
             base.Dispose(disposing);
         }

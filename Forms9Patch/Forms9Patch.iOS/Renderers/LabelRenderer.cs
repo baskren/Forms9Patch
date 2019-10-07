@@ -615,27 +615,25 @@ namespace Forms9Patch.iOS
                 var cgPoint = new CGPoint(point.X, point.Y - control.Frame.Y);
 
                 // init text storage
-                var textStorage = new NSTextStorage();
-                var attrText = new NSAttributedString(control.AttributedText);
-                textStorage.SetString(attrText);
-
-                // init layout manager
-                var layoutManager = new NSLayoutManager();
-                textStorage.AddLayoutManager(layoutManager);
-
-                // init text container
-                var textContainer = new NSTextContainer(new CGSize(control.Frame.Width, control.Frame.Height * 2))
+                using (var textStorage = new NSTextStorage())
+                using (var attrText = new NSAttributedString(control.AttributedText))
+                using (var layoutManager = new NSLayoutManager())
+                using (var textContainer = new NSTextContainer(new CGSize(control.Frame.Width, control.Frame.Height * 2))
                 {
                     LineFragmentPadding = 0,
                     MaximumNumberOfLines = (nuint)_currentDrawState.Lines,
                     LineBreakMode = UILineBreakMode.WordWrap,
                     Size = new CGSize(control.Frame.Width, control.Frame.Height * 2)
-                };
-                layoutManager.AddTextContainer(textContainer);
-                layoutManager.AllowsNonContiguousLayout = true;
+                })
+                {
+                    textStorage.SetString(attrText);
+                    textStorage.AddLayoutManager(layoutManager);
+                    layoutManager.AddTextContainer(textContainer);
+                    layoutManager.AllowsNonContiguousLayout = true;
 
-                var characterIndex = layoutManager.GetCharacterIndex(cgPoint, textContainer);
-                return (int)characterIndex;
+                    var characterIndex = layoutManager.GetCharacterIndex(cgPoint, textContainer);
+                    return (int)characterIndex;
+                }
             }
             return -1;
         }

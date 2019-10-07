@@ -269,6 +269,7 @@ namespace Forms9Patch
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
+            // calling base.Dispose now so that PropertyChanged is deactivated.
             base.Dispose(disposing);
             if (!_disposed && disposing)
             {

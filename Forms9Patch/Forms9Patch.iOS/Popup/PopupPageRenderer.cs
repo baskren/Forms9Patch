@@ -18,7 +18,6 @@ namespace Forms9Patch.iOS
         private NSObject _willChangeFrameNotificationObserver;
         private NSObject _willHideNotificationObserver;
         private CGRect _keyboardBounds;
-        private bool _isDisposed;
 
         private PopupPage CurrentElement => (PopupPage)Element;
 
@@ -32,16 +31,24 @@ namespace Forms9Patch.iOS
             };
         }
 
+        bool _disposed;
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && !_disposed)
             {
+                _disposed = true;
                 View?.RemoveGestureRecognizer(_tapGestureRecognizer);
+
+                if (_willChangeFrameNotificationObserver != null)
+                    NSNotificationCenter.DefaultCenter.RemoveObserver(_willChangeFrameNotificationObserver);
+
+                if (_willHideNotificationObserver != null)
+                    NSNotificationCenter.DefaultCenter.RemoveObserver(_willHideNotificationObserver);
+
+                _willChangeFrameNotificationObserver?.Dispose();
+                _willHideNotificationObserver?.Dispose();
             }
-
             base.Dispose(disposing);
-
-            _isDisposed = true;
         }
 
         #endregion
@@ -166,10 +173,11 @@ namespace Forms9Patch.iOS
             ViewDidLayoutSubviews();
         }
 
+#pragma warning disable RECS0165 // Asynchronous methods should return a Task instead of void
         private async void KeyBoardDownNotification(NSNotification notifi)
+#pragma warning restore RECS0165 // Asynchronous methods should return a Task instead of void
         {
-            NSObject duration;
-            var canAnimated = notifi.UserInfo.TryGetValue(UIKeyboard.AnimationDurationUserInfoKey, out duration);
+            var canAnimated = notifi.UserInfo.TryGetValue(UIKeyboard.AnimationDurationUserInfoKey, out NSObject duration);
 
             _keyboardBounds = CGRect.Empty;
 
@@ -178,7 +186,7 @@ namespace Forms9Patch.iOS
                 //It is needed that buttons are working when keyboard is opened. See #11
                 await Task.Delay(70);
 
-                if (!_isDisposed)
+                if (!_disposed)
                     await UIView.AnimateAsync((double)(NSNumber)duration, OnKeyboardAnimated);
             }
             else
@@ -193,7 +201,7 @@ namespace Forms9Patch.iOS
 
         private void OnKeyboardAnimated()
         {
-            if (_isDisposed)
+            if (_disposed)
                 return;
 
             ViewDidLayoutSubviews();

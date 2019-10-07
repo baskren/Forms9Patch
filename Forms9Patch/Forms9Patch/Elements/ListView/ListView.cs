@@ -629,7 +629,7 @@ namespace Forms9Patch
                 }
                 _disposed = true;
             }
-            base.Dispose();
+            base.Dispose(disposing);
         }
 
 

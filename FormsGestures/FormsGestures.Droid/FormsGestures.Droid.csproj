@@ -74,7 +74,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.2.0.815419</Version>
+      <Version>4.2.0.848062</Version>
     </PackageReference>
   </ItemGroup>
   <!-- FormsGestures References -->

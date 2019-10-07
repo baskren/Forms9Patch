@@ -147,7 +147,6 @@ namespace Forms9Patch.UWP
                 {
                     _assembliesToInclude = new List<Assembly>();
                     _assembliesToInclude.AddRange(Forms9PatchAssemblies);
-                    //_assembliesToInclude.AddRange(Rg.Plugins.Popup.Popup.GetExtraAssemblies());
                 }
                 return _assembliesToInclude;
             }
